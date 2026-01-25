@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Github, Sparkles } from 'lucide-react';
+import { Github, Sparkles, Download } from 'lucide-react';
 
 export function Header() {
   return (
@@ -39,13 +39,20 @@ export function Header() {
             Categories
           </Link>
           <Link
+            href="/install"
+            className="flex items-center gap-1.5 text-sm font-medium text-emerald-400 hover:text-emerald-300 transition-colors"
+          >
+            <Download className="h-3.5 w-3.5" />
+            Install
+          </Link>
+          <Link
             href="/about"
             className="text-sm font-medium text-slate-300 hover:text-white transition-colors"
           >
             About
           </Link>
           <a
-            href="https://github.com/encoreshao/awesome-skills"
+            href="https://github.com/ranbot-ai/awesome-skills"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors"
@@ -57,7 +64,7 @@ export function Header() {
 
         <div className="flex items-center gap-3">
           <a
-            href="https://github.com/encoreshao/awesome-skills"
+            href="https://github.com/ranbot-ai/awesome-skills"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white text-sm font-medium rounded-full transition-all shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40"

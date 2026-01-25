@@ -33,7 +33,7 @@
   "homepage": "https://ranbot.online",
   "repository": {
     "type": "git",
-    "url": "https://github.com/encoreshao/awesome-skills"
+    "url": "https://github.com/ranbot-ai/awesome-skills"
   },
   "license": "MIT",
   "workspaces": [

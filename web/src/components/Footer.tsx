@@ -97,6 +97,14 @@ export function Footer() {
             <ul className="space-y-2">
               <li>
                 <Link
+                  href="/install"
+                  className="text-emerald-400 hover:text-emerald-300 transition-colors"
+                >
+                  Install Locally
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/about"
                   className="text-slate-400 hover:text-white transition-colors"
                 >
@@ -115,7 +123,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/encoreshao/awesome-skills"
+                  href="https://github.com/ranbot-ai/awesome-skills"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-slate-400 hover:text-white transition-colors"
@@ -159,7 +167,7 @@ export function Footer() {
               <span className="text-sm">ranbot.online</span>
             </a>
             <a
-              href="https://github.com/encoreshao/awesome-skills"
+              href="https://github.com/ranbot-ai/awesome-skills"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"

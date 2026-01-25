@@ -23,7 +23,70 @@
 | [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | 67k+ | AI-driven development skills |
 | [Prat011/awesome-llm-skills](https://github.com/Prat011/awesome-llm-skills) | 700+ | LLM and AI Agent skills collection |
 
-## Quick Start
+## Install Skills Locally
+
+Install skills directly to `~/.claude/skills` for use with Claude Code or other AI agents.
+
+### One-liner Installation
+
+```bash
+# Install all skills
+curl -fsSL https://raw.githubusercontent.com/ranbot-ai/awesome-skills/main/scripts/install-skills.sh | bash
+
+# Install specific skills
+curl -fsSL https://raw.githubusercontent.com/ranbot-ai/awesome-skills/main/scripts/install-skills.sh | bash -s -- code-review docker kubernetes
+```
+
+### Using the Install Script
+
+```bash
+# Clone the repo first
+git clone https://github.com/ranbot-ai/awesome-skills.git
+cd awesome-skills
+
+# List available skills
+./scripts/install-skills.sh --list
+
+# Install all skills
+./scripts/install-skills.sh
+
+# Install specific skills
+./scripts/install-skills.sh code-review docker kubernetes
+
+# Install from local data (after scraping)
+./scripts/install-skills.sh --local ./data
+
+# Search for skills
+./scripts/install-skills.sh --search docker
+
+# Install all skills from a source (anthropic, composio, superpowers, openhands)
+./scripts/install-skills.sh --source anthropic
+
+# Install skills by category
+./scripts/install-skills.sh --category "Development"
+
+# Show skill info
+./scripts/install-skills.sh --info code-review
+
+# Update existing skills
+./scripts/install-skills.sh --update
+
+# Uninstall a skill
+./scripts/install-skills.sh --uninstall code-review
+
+# Remove all installed skills
+./scripts/install-skills.sh --clean
+```
+
+### Environment Variables
+
+| Variable | Description |
+|----------|-------------|
+| `CLAUDE_SKILLS_DIR` | Override skills directory (default: `~/.claude/skills`) |
+
+---
+
+## Quick Start (Development)
 
 ### 1. Install Dependencies
 
@@ -132,7 +195,9 @@ awesome-skills/
 │   │   └── types/          # TypeScript types
 │   └── package.json
 ├── scripts/                # Automation scripts
-│   └── scrape-and-deploy.sh
+│   ├── scrape-and-deploy.sh  # Scrape and deploy to repo
+│   ├── build-static.sh       # Build static site
+│   └── install-skills.sh     # Install skills locally
 ├── .github/
 │   └── workflows/
 │       └── scrape-skills.yml

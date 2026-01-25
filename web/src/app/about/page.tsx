@@ -324,7 +324,7 @@ Step-by-step guide...`}
                 </a>
 
                 <a
-                  href="https://github.com/encoreshao/awesome-skills"
+                  href="https://github.com/ranbot-ai/awesome-skills"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group bg-slate-900/50 border border-slate-800 rounded-2xl p-6 hover:border-rose-500/50 transition-colors"

@@ -9,11 +9,11 @@ import type { SkillsData, Skill } from '@/types/skill';
  *
  * Environment variables:
  * - USE_LOCAL_DATA=true   Force local data loading (useful for testing production build locally)
- * - GITHUB_DATA_REPO      Custom GitHub repo (default: encoreshao/awesome-skills)
+ * - GITHUB_DATA_REPO      Custom GitHub repo (default: ranbot-ai/awesome-skills)
  * - GITHUB_DATA_BRANCH    Custom branch (default: main)
  */
 
-const GITHUB_REPO = process.env.GITHUB_DATA_REPO || 'encoreshao/awesome-skills';
+const GITHUB_REPO = process.env.GITHUB_DATA_REPO || 'ranbot-ai/awesome-skills';
 const GITHUB_BRANCH = process.env.GITHUB_DATA_BRANCH || 'main';
 const GITHUB_RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_REPO}/${GITHUB_BRANCH}`;
 
