@@ -1,19 +1,8 @@
-import type { SkillsData, Skill } from '@/types/skill';
+import type { Skill } from '@/types/skill';
 
-let cachedData: SkillsData | null = null;
-
-export async function getSkillsData(): Promise<SkillsData> {
-  if (cachedData) return cachedData;
-
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || ''}/data/skills.json`);
-  cachedData = await response.json();
-  return cachedData!;
-}
-
-export async function getSkillBySlug(slug: string): Promise<Skill | null> {
-  const data = await getSkillsData();
-  return data.skills.find(s => s.slug === slug) || null;
-}
+// Note: Data loading functions (getSkillsData, getSkillBySlug) are in data-loader.ts
+// and should only be used in Server Components. Import directly from '@/lib/data-loader'
+// for server-side data fetching.
 
 export function searchSkills(skills: Skill[], query: string): Skill[] {
   const lowerQuery = query.toLowerCase().trim();

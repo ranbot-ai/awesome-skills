@@ -14,16 +14,9 @@ import {
   Lightbulb
 } from 'lucide-react';
 import { getSourceLabel, getSourceColor } from '@/lib/skills';
-import type { Skill, SkillsData } from '@/types/skill';
+import { getSkillsData } from '@/lib/data-loader';
+import type { Skill } from '@/types/skill';
 import clsx from 'clsx';
-
-async function getSkillsData(): Promise<SkillsData> {
-  const fs = await import('fs');
-  const path = await import('path');
-  const dataPath = path.join(process.cwd(), 'public', 'data', 'skills.json');
-  const data = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
-  return data;
-}
 
 interface PageProps {
   params: Promise<{ slug: string }>;
