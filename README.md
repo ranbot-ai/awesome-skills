@@ -1,6 +1,6 @@
-# Agent Skills Collection
+# Awesome AI Skills: The Curated Agent Skills Directory
 
-> A curated collection of AI agent skills scraped from GitHub repositories, displayed on a beautiful, modern website.
+> Discover, search, and install the best open AI agent skills from GitHub—organized, up-to-date, and ready to use.
 >
 > **Built by [RanBOT Labs](https://ranbot.online)**
 
@@ -25,7 +25,9 @@
 
 ## Install Skills Locally
 
-Install skills directly to `~/.claude/skills` for use with Claude Code or other AI agents.
+Install skills directly to `~/.claude/skills` for use with Claude Code, Cursor, or other AI agents.
+
+> **Web Interface**: Visit the [Install page](https://awesome-skills.ranbot.online/install) for an interactive installation guide.
 
 ### One-liner Installation
 
@@ -35,7 +37,30 @@ curl -fsSL https://raw.githubusercontent.com/ranbot-ai/awesome-skills/main/scrip
 
 # Install specific skills
 curl -fsSL https://raw.githubusercontent.com/ranbot-ai/awesome-skills/main/scripts/install-skills.sh | bash -s -- code-review docker kubernetes
+
+# Install all skills from a source
+curl -fsSL https://raw.githubusercontent.com/ranbot-ai/awesome-skills/main/scripts/install-skills.sh | bash -s -- --source anthropic
 ```
+
+### Installed Directory Structure
+
+Skills are installed following the [official Agent Skills specification](https://agentskills.io):
+
+```
+~/.claude/skills/
+├── code-review/
+│   └── SKILL.md          # Skill instructions with frontmatter
+├── docker/
+│   └── SKILL.md
+├── kubernetes/
+│   └── SKILL.md
+└── ...
+```
+
+Each skill folder can also contain optional subdirectories:
+- `scripts/` - Executable scripts for the skill
+- `references/` - Reference documentation
+- `assets/` - Images or other assets
 
 ### Using the Install Script
 
@@ -77,6 +102,21 @@ cd awesome-skills
 # Remove all installed skills
 ./scripts/install-skills.sh --clean
 ```
+
+### Install Script Options
+
+| Option | Description |
+|--------|-------------|
+| `--list`, `-l` | List all available skills |
+| `--all`, `-a` | Install all skills (default) |
+| `--local`, `-L PATH` | Use local data directory |
+| `--update`, `-u` | Update/overwrite existing skills |
+| `--source`, `-s NAME` | Install skills from a specific source |
+| `--category`, `-c NAME` | Install skills matching a category |
+| `--search`, `-S TERM` | Search skills by name/description |
+| `--info`, `-i SKILL` | Show detailed info about a skill |
+| `--uninstall SKILL` | Remove a specific skill |
+| `--clean` | Remove all installed skills |
 
 ### Environment Variables
 
@@ -189,6 +229,7 @@ awesome-skills/
 │   │   ├── app/            # Next.js app router
 │   │   │   ├── page.tsx    # Homepage
 │   │   │   ├── about/      # About page
+│   │   │   ├── install/    # Install guide page
 │   │   │   └── skill/      # Skill detail pages
 │   │   ├── components/     # React components
 │   │   ├── lib/            # Utility functions
@@ -217,6 +258,14 @@ awesome-skills/
 - Category cards for browsing by category
 - Skills grid with hover effects
 - Filter by category and source
+
+### Install Page
+- Interactive installation guide
+- One-click copy commands
+- Multiple installation methods (one-liner, selective, local clone)
+- Source-specific installation
+- Full command reference
+- Requirements and configuration
 
 ### About Page
 - Agent Skills specification overview

@@ -216,8 +216,18 @@ export default function InstallPage() {
                       </div>
                       <div className="flex-1">
                         <h3 className="text-lg font-semibold text-white mb-2">Done!</h3>
-                        <p className="text-slate-400 text-sm">
-                          Skills are now installed in <code className="text-emerald-400 bg-slate-800 px-2 py-0.5 rounded">~/.claude/skills/</code>.
+                        <p className="text-slate-400 text-sm mb-4">
+                          Skills are installed following the official directory structure:
+                        </p>
+                        <div className="bg-slate-950 rounded-xl p-4 text-sm font-mono">
+                          <div className="text-slate-400">~/.claude/skills/</div>
+                          <div className="text-slate-400 ml-4">├── code-review/</div>
+                          <div className="text-emerald-400 ml-8">│   └── SKILL.md</div>
+                          <div className="text-slate-400 ml-4">├── docker/</div>
+                          <div className="text-emerald-400 ml-8">│   └── SKILL.md</div>
+                          <div className="text-slate-400 ml-4">└── ...</div>
+                        </div>
+                        <p className="text-slate-400 text-sm mt-4">
                           Your AI agent will automatically discover and use them.
                         </p>
                       </div>

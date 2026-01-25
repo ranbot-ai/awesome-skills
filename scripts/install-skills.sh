@@ -329,10 +329,11 @@ install_skill() {
     local slug="$1"
     local force="${2:-false}"
 
-    local target_file="$SKILLS_DIR/$slug.md"
+    local target_dir="$SKILLS_DIR/$slug"
+    local target_file="$target_dir/SKILL.md"
 
     # Check if already installed
-    if [ -f "$target_file" ] && [ "$force" != "true" ]; then
+    if [ -d "$target_dir" ] && [ "$force" != "true" ]; then
         log_warning "Skill '$slug' already installed. Use --update to overwrite."
         return 0
     fi
@@ -345,8 +346,15 @@ install_skill() {
     local markdown
     markdown=$(skill_to_markdown "$skill_json")
 
-    # Write to file
+    # Create skill directory structure
+    mkdir -p "$target_dir"
+
+    # Write SKILL.md file
     echo "$markdown" > "$target_file"
+
+    # Create optional subdirectories (empty, for user to add files)
+    # mkdir -p "$target_dir/scripts"
+    # mkdir -p "$target_dir/references"
 
     log_success "Installed: $slug"
 }
@@ -454,11 +462,15 @@ install_by_category() {
 # Uninstall a skill
 uninstall_skill() {
     local slug="$1"
-    local target_file="$SKILLS_DIR/$slug.md"
+    local target_dir="$SKILLS_DIR/$slug"
 
-    if [ -f "$target_file" ]; then
-        rm "$target_file"
+    if [ -d "$target_dir" ]; then
+        rm -rf "$target_dir"
         log_success "Uninstalled: $slug"
+    elif [ -f "$SKILLS_DIR/$slug.md" ]; then
+        # Backward compatibility: remove old-style .md file
+        rm "$SKILLS_DIR/$slug.md"
+        log_success "Uninstalled: $slug (legacy format)"
     else
         log_warning "Skill not installed: $slug"
     fi
@@ -471,7 +483,10 @@ clean_skills() {
     read -r confirm
 
     if [ "$confirm" = "y" ] || [ "$confirm" = "Y" ]; then
-        rm -rf "$SKILLS_DIR"/*.md 2>/dev/null || true
+        # Remove skill directories (new format)
+        find "$SKILLS_DIR" -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} \; 2>/dev/null || true
+        # Remove legacy .md files (old format)
+        rm -f "$SKILLS_DIR"/*.md 2>/dev/null || true
         log_success "All skills removed"
     else
         log_info "Cancelled"
