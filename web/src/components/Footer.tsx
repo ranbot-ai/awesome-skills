@@ -115,12 +115,12 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://github.com/ComposioHQ/awesome-claude-skills/blob/master/CONTRIBUTING.md"
+                  href="https://github.com/encoreshao/awesome-skills"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-slate-400 hover:text-white transition-colors"
                 >
-                  Contributing Guide
+                  GitHub Repository
                 </a>
               </li>
               <li>
@@ -159,7 +159,7 @@ export function Footer() {
               <span className="text-sm">ranbot.online</span>
             </a>
             <a
-              href="https://github.com"
+              href="https://github.com/encoreshao/awesome-skills"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"

@@ -45,25 +45,25 @@ export function Header() {
             About
           </Link>
           <a
-            href="https://github.com/ComposioHQ/awesome-claude-skills"
+            href="https://github.com/encoreshao/awesome-skills"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm font-medium text-slate-300 hover:text-white transition-colors"
           >
             <Github className="h-4 w-4" />
-            Contribute
+            GitHub
           </a>
         </nav>
 
         <div className="flex items-center gap-3">
           <a
-            href="https://github.com/ComposioHQ/awesome-claude-skills"
+            href="https://github.com/encoreshao/awesome-skills"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white text-sm font-medium rounded-full transition-all shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40"
           >
             <Sparkles className="h-4 w-4" />
-            <span className="hidden sm:inline">Add Skill</span>
+            <span className="hidden sm:inline">Star on GitHub</span>
           </a>
         </div>
       </div>

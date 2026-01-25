@@ -324,17 +324,17 @@ Step-by-step guide...`}
                 </a>
 
                 <a
-                  href="https://github.com/agentskills/agentskills"
+                  href="https://github.com/encoreshao/awesome-skills"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group bg-slate-900/50 border border-slate-800 rounded-2xl p-6 hover:border-rose-500/50 transition-colors"
                 >
                   <Bot className="h-8 w-8 text-rose-400 mb-4" />
                   <h3 className="font-semibold text-white mb-2 group-hover:text-rose-400 transition-colors">
-                    Agent Skills Repo
+                    Our GitHub Repo
                   </h3>
                   <p className="text-slate-400 text-sm">
-                    The open standard repository and reference library.
+                    View source code, contribute, and star on GitHub.
                   </p>
                 </a>
 
