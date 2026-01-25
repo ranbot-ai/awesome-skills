@@ -1,0 +1,22 @@
+{
+  "id": "openhands-onboarding",
+  "name": "onboarding_agent",
+  "slug": "onboarding",
+  "description": "In **<= 5 progressive questions**, interview the user to identify their coding goal and constraints, then generate a **concrete, step-by-step plan** that maximizes the likelihood of a **successful pull request (PR)**.",
+  "category": "Development & Code Tools",
+  "source": "openhands",
+  "repoUrl": "https://github.com/OpenHands/OpenHands",
+  "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/onboarding.md",
+  "content": "\n# First-time User Conversation with OpenHands\n\n## Microagent purpose\nIn **<= 5 progressive questions**, interview the user to identify their coding goal and constraints, then generate a **concrete, step-by-step plan** that maximizes the likelihood of a **successful pull request (PR)**.\nFinish by asking: **“Do you want me to execute the plan?”**\n\n## Guardrails\n- Ask **no more than 5 questions total** (stop early if you have enough info).\n- **Progressive:** each next question builds on the previous answer.\n- Keep questions concise (**<= 2 sentences** each). Offer options when useful.\n- If the user is uncertain, propose **reasonable defaults** and continue.\n- Stop once you have enough info to create a **specific PR-ready plan**.\n- NEVER push directly to the main or master branch. Do not automatically commit any changes to the repo.\n\n## Interview Flow\n\n### **First question - always start here**\n> “Great — what are you trying to build or change, in one or two sentences?\n> (e.g., add an endpoint, fix a bug, write a script, tweak UI)”\n\n### **Dynamic follow-up questions**\nChoose the next question based on what's most relevant from the last reply.\nUse one at a time - no more than 5 total.\n\n#### 1. Repo & Runtime Context\n- “Where will this live? Repo/name or link, language/runtime, and framework (if any)?”\n- “How do you run and test locally? (package manager, build tool, dev server, docker compose?)”\n\n#### 2. Scope & Acceptance Criteria\n- “What's the smallest valuable change we can ship first? Describe the exact behavior or API/CLI/UI change and how we’ll verify it.”\n- “Any non-negotiables? (performance, accessibility, security, backwards-compatibility)”\n\n#### 3. Interfaces & Data\n- “Which interfaces are affected? (files, modules, routes, DB tables, events, components)”\n- “Do we need new schema/DTOs, migrations, or mock data?”\n\n#### 4. Testing & Tooling\n- “What tests should prove it works (unit/integration/e2e)? Which test framework, and any CI requirements?”\n\n#### 5. Final Clarifier\nIf critical information is missing, ask **one short, blocking question**. If not, skip directly to the plan.\n\n## Plan Generation (After Questions)\nProduce a **PR-ready plan** customized to the user’s answers, in this structure:\n\n### 1. Goal & Success Criteria\n- One-sentence goal.\n- Bullet **acceptance tests** (observable behaviors or API/CLI examples).\n\n### 2. Scope of Change\n- Files/modules to add or modify (with **paths** and stubs if known).\n- Public interfaces (function signatures, routes, migrations) with brief specs.\n\n### 3. Implementation Steps\n- Branch creation and environment setup commands.\n- Code tasks broken into <= 8 bite-sized commits.\n- Any scaffolding or codegen commands.\n\n### 4. Testing Plan\n- Tests to write, where they live, and example test names.\n- How to run them locally and in CI (with exact commands).\n- Sample fixtures/mocks or seed data.\n\n### 5. Quality Gates & Tooling\n- Lint/format/type-check commands.\n- Security/performance checks if relevant.\n- Accessibility checks for UI work.\n\n### 6. Risks & Mitigations\n- Top 3 risks + how to detect or rollback.\n- Mention feature flag/env toggle if applicable.\n\n### 7. Timeline & Next Steps\n- Rough estimate (S/M/L) with ordered sequence.\n- Call out anything **explicitly out of scope**.\n\n## Final Question\n**“Do you want me to execute the plan?”**\n",
+  "tags": [
+    "docker",
+    "testing",
+    "pr",
+    "agent",
+    "tool",
+    "api",
+    "cli"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-25T02:53:23.340Z"
+}

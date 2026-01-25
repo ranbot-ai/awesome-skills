@@ -1,0 +1,30 @@
+{
+  "name": "awesome-skills-scraper",
+  "version": "1.0.0",
+  "description": "Scraper for collecting agent skills from GitHub repositories",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "scrape": "tsx src/index.ts"
+  },
+  "keywords": [
+    "agent",
+    "skills",
+    "scraper",
+    "github"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "marked": "^15.0.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.7",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}

@@ -1,0 +1,116 @@
+name: Scrape Agent Skills
+
+on:
+  # Run on schedule (every day at 6 AM UTC)
+  schedule:
+    - cron: '0 6 * * *'
+
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      build_web:
+        description: 'Build web app after scraping'
+        required: false
+        default: 'false'
+        type: boolean
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  scrape:
+    name: Scrape Skills & Update Data
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: |
+            scraper/package-lock.json
+            web/package-lock.json
+
+      - name: Install scraper dependencies
+        working-directory: ./scraper
+        run: npm ci
+
+      - name: Build scraper
+        working-directory: ./scraper
+        run: npm run build
+
+      - name: Run scraper
+        working-directory: ./scraper
+        run: npm run scrape
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Copy data to web public directory
+        run: |
+          mkdir -p web/public/data/skills
+          cp data/skills.json web/public/data/skills.json
+          cp data/search-index.json web/public/data/search-index.json
+          cp -r data/skills/* web/public/data/skills/
+
+      - name: Get statistics
+        id: stats
+        run: |
+          TOTAL_SKILLS=$(cat data/skills.json | jq '.stats.totalSkills')
+          NEW_SKILLS=$(cat data/skills.json | jq '.stats.newSkills')
+          echo "total_skills=$TOTAL_SKILLS" >> $GITHUB_OUTPUT
+          echo "new_skills=$NEW_SKILLS" >> $GITHUB_OUTPUT
+
+      - name: Build web app
+        if: ${{ github.event.inputs.build_web == 'true' }}
+        working-directory: ./web
+        run: |
+          npm ci
+          npm run build
+
+      - name: Check for changes
+        id: changes
+        run: |
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        if: steps.changes.outputs.has_changes == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add data/
+          git add web/public/data/
+
+          TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+
+          git commit -m "chore: update skills data - $TIMESTAMP
+
+          Automated scrape via GitHub Actions:
+          - Total skills: ${{ steps.stats.outputs.total_skills }}
+          - New skills: ${{ steps.stats.outputs.new_skills }}
+          - Scraped at: $TIMESTAMP"
+
+          git push
+
+      - name: Summary
+        run: |
+          echo "## Scrape Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Total Skills | ${{ steps.stats.outputs.total_skills }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| New Skills | ${{ steps.stats.outputs.new_skills }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Changes Pushed | ${{ steps.changes.outputs.has_changes }} |" >> $GITHUB_STEP_SUMMARY

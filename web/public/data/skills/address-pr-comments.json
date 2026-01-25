@@ -1,0 +1,20 @@
+{
+  "id": "openhands-address-pr-comments",
+  "name": "address_pr_comments",
+  "slug": "address-pr-comments",
+  "description": "First, check the branch {{ BRANCH_NAME }} and read the diff against the main branch to understand the purpose.",
+  "category": "Development & Code Tools",
+  "source": "openhands",
+  "repoUrl": "https://github.com/OpenHands/OpenHands",
+  "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/address_pr_comments.md",
+  "content": "\nFirst, check the branch {{ BRANCH_NAME }} and read the diff against the main branch to understand the purpose.\n\nThis branch corresponds to this PR {{ PR_URL }}\n\nNext, you should use the GitHub API to read the reviews and comments on this PR and address them.\n",
+  "tags": [
+    "git",
+    "github",
+    "pr",
+    "agent",
+    "api"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-25T02:53:23.340Z"
+}

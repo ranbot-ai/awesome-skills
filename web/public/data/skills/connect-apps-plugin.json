@@ -1,0 +1,23 @@
+{
+  "id": "composio-connect-apps-plugin",
+  "name": "Connect Apps Plugin",
+  "slug": "connect-apps-plugin",
+  "description": "Let Claude perform real actions in 500+ apps. Handles auth and connections using Composio under the hood.",
+  "category": "Development & Code Tools",
+  "source": "composio",
+  "repoUrl": "https://github.com/ComposioHQ/awesome-claude-skills",
+  "skillUrl": "https://github.com/ComposioHQ/awesome-claude-skills/tree/master/connect-apps-plugin",
+  "content": "# Connect Apps Plugin\n\nLet Claude perform real actions in 500+ apps. Handles auth and connections using Composio under the hood.\n\n## Install\n\n```bash\nclaude --plugin-dir ./connect-apps-plugin\n```\n\nThen run the setup:\n```\n/connect-apps:setup\n```\n\n## What You Get\n\nOnce installed, Claude can:\n- **Send emails** via Gmail, Outlook\n- **Create issues** on GitHub, GitLab, Jira, Linear\n- **Post messages** to Slack, Discord, Teams\n- **Update docs** in Notion, Google Docs\n- **Manage data** in Sheets, Airtable, databases\n- **And 500+ more actions**\n\n## How It Works\n\n1. Get a free API key from [platform.composio.dev](https://platform.composio.dev/?utm_source=Github&utm_content=AwesomeSkills)\n2. Run `/connect-apps:setup` and paste your key\n3. Restart Claude Code\n4. First time using an app, you'll authorize via OAuth\n5. That's it - Claude can now take real actions\n\n## Try It\n\nAfter setup, ask Claude:\n```\nSend me a test email at myemail@example.com\n```\n\n---\n\n<p align=\"center\">\n  <a href=\"https://platform.composio.dev/?utm_source=Github&utm_content=AwesomeSkills\">\n    <img src=\"https://img.shields.io/badge/Get_API_Key-4F46E5?style=for-the-badge\" alt=\"Get API Key\"/>\n  </a>\n</p>\n",
+  "tags": [
+    "api",
+    "git",
+    "github",
+    "slack",
+    "notion",
+    "gmail",
+    "ai",
+    "claude"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-25T02:53:23.340Z"
+}

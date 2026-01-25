@@ -1,0 +1,24 @@
+{
+  "id": "composio-connect-apps",
+  "name": "connect-apps",
+  "slug": "connect-apps",
+  "description": "Connect Claude to external apps like Gmail, Slack, GitHub. Use this skill when the user wants to send emails, create issues, post messages, or take actions in external services.",
+  "category": "Development & Code Tools",
+  "source": "composio",
+  "repoUrl": "https://github.com/ComposioHQ/awesome-claude-skills",
+  "skillUrl": "https://github.com/ComposioHQ/awesome-claude-skills/tree/master/connect-apps",
+  "content": "\n# Connect Apps\n\nConnect Claude to 1000+ apps. Actually send emails, create issues, post messages - not just generate text about it.\n\n## Quick Start\n\n### Step 1: Install the Plugin\n\n```\n/plugin install composio-toolrouter\n```\n\n### Step 2: Run Setup\n\n```\n/composio-toolrouter:setup\n```\n\nThis will:\n- Ask for your free API key (get one at [platform.composio.dev](https://platform.composio.dev/?utm_source=Github&utm_content=AwesomeSkills))\n- Configure Claude's connection to 1000+ apps\n- Take about 60 seconds\n\n### Step 3: Try It!\n\nAfter setup, restart Claude Code and try:\n\n```\nSend me a test email at YOUR_EMAIL@example.com\n```\n\nIf it works, you're connected!\n\n## What You Can Do\n\n| Ask Claude to... | What happens |\n|------------------|--------------|\n| \"Send email to sarah@acme.com about the launch\" | Actually sends the email |\n| \"Create GitHub issue: fix login bug\" | Creates the issue |\n| \"Post to Slack #general: deploy complete\" | Posts the message |\n| \"Add meeting notes to Notion\" | Adds to Notion |\n\n## Supported Apps\n\n**Email:** Gmail, Outlook, SendGrid\n**Chat:** Slack, Discord, Teams, Telegram\n**Dev:** GitHub, GitLab, Jira, Linear\n**Docs:** Notion, Google Docs, Confluence\n**Data:** Sheets, Airtable, PostgreSQL\n**And 1000+ more...**\n\n## How It Works\n\n1. You ask Claude to do something\n2. Composio Tool Router finds the right tool\n3. First time? You'll authorize via OAuth (one-time)\n4. Action executes and returns result\n\n## Troubleshooting\n\n- **\"Plugin not found\"** → Make sure you ran `/plugin install composio-toolrouter`\n- **\"Need to authorize\"** → Click the OAuth link Claude provides, then say \"done\"\n- **Action failed** → Check you have permissions in the target app\n\n---\n\n<p align=\"center\">\n  <b>Join 20,000+ developers building agents that ship</b>\n</p>\n\n<p align=\"center\">\n  <a href=\"https://platform.composio.dev/?utm_source=Github&utm_content=AwesomeSkills\">\n    <img src=\"https://img.shields.io/badge/Get_Started_Free-4F46E5?style=for-the-badge\" alt=\"Get Started\"/>\n  </a>\n</p>\n",
+  "tags": [
+    "api",
+    "git",
+    "github",
+    "slack",
+    "notion",
+    "gmail",
+    "cli",
+    "ai",
+    "claude"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-25T02:53:23.340Z"
+}

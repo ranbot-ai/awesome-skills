@@ -1,0 +1,21 @@
+{
+  "id": "openhands-add-repo-inst",
+  "name": "add_repo_inst",
+  "slug": "add-repo-inst",
+  "description": "Please browse the current repository under /workspace/{{ REPO_FOLDER_NAME }}, look at the documentation and relevant code, and understand the purpose of this repository.",
+  "category": "Development & Code Tools",
+  "source": "openhands",
+  "repoUrl": "https://github.com/OpenHands/OpenHands",
+  "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/add_repo_inst.md",
+  "content": "\nPlease browse the current repository under /workspace/{{ REPO_FOLDER_NAME }}, look at the documentation and relevant code, and understand the purpose of this repository.\n\nSpecifically, I want you to create a `.openhands/microagents/repo.md`  file. This file should contain succinct information that summarizes (1) the purpose of this repository, (2) the general setup of this repo, and (3) a brief description of the structure of this repo.\n\nHere's an example:\n```markdown\n---\nname: repo\ntype: repo\nagent: CodeActAgent\n---\n\nThis repository contains the code for OpenHands, an automated AI software engineer. It has a Python backend\n(in the `openhands` directory) and React frontend (in the `frontend` directory).\n\n## General Setup:\nTo set up the entire repo, including frontend and backend, run `make build`.\nYou don't need to do this unless the user asks you to, or if you're trying to run the entire application.\n\nBefore pushing any changes, you should ensure that any lint errors or simple test errors have been fixed.\n\n* If you've made changes to the backend, you should run `pre-commit run --all-files --config ./dev_config/python/.pre-commit-config.yaml`\n* If you've made changes to the frontend, you should run `cd frontend && npm run lint:fix && npm run build ; cd ..`\n\nIf either command fails, it may have automatically fixed some issues. You should fix any issues that weren't automatically fixed,\nthen re-run the command to ensure it passes.\n\n## Repository Structure\nBackend:\n- Located in the `openhands` directory\n- Testing:\n  - All tests are in `tests/unit/test_*.py`\n  - To test new code, run `poetry run pytest tests/unit/test_xxx.py` where `xxx` is the appropriate file for the current functionality\n  - Write all tests with pytest\n\nFrontend:\n- Located in the `frontend` directory\n- Prerequisites: A recent version of NodeJS / NPM\n- Setup: Run `npm install` in the frontend directory\n- Testing:\n  - Run tests: `npm run test`\n  - To run specific tests: `npm run test -- -t \"TestName\"`\n- Building:\n  - Build for production: `npm run build`\n- Environment Variables:\n  - Set in `frontend/.env` or as environment variables\n  - Available variables: VITE_BACKEND_HOST, VITE_USE_TLS, VITE_INSECURE_SKIP_VERIFY, VITE_FRONTEND_PORT\n- Internationalization:\n  - Generate i18n declaration file: `npm run make-i18n`\n```\n\nNow, please write a similar markdown for the current repository.\nRead all the GitHub workflows under .github/ of the repository (if this folder exists) to understand the CI checks (e.g., linter, pre-commit), and include those in the repo.md file.\n",
+  "tags": [
+    "git",
+    "github",
+    "python",
+    "testing",
+    "pr",
+    "agent"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-25T02:53:23.340Z"
+}

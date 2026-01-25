@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#06b6d4"/>
+    </linearGradient>
+    <linearGradient id="eyeGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a78bfa"/>
+      <stop offset="100%" style="stop-color:#c4b5fd"/>
+    </linearGradient>
+    <linearGradient id="eyeGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#22d3ee"/>
+      <stop offset="100%" style="stop-color:#67e8f9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background rounded square -->
+  <rect x="32" y="32" width="448" height="448" rx="80" fill="url(#iconGrad)"/>
+
+  <!-- Robot head body -->
+  <rect x="96" y="144" width="320" height="240" rx="48" fill="#0f172a"/>
+
+  <!-- Left eye -->
+  <circle cx="176" cy="240" r="48" fill="url(#eyeGrad1)"/>
+  <circle cx="188" cy="228" r="16" fill="white" opacity="0.8"/>
+
+  <!-- Right eye -->
+  <circle cx="336" cy="240" r="48" fill="url(#eyeGrad2)"/>
+  <circle cx="348" cy="228" r="16" fill="white" opacity="0.8"/>
+
+  <!-- Mouth/status bar -->
+  <rect x="144" y="320" width="224" height="32" rx="16" fill="url(#eyeGrad1)"/>
+
+  <!-- Antenna base -->
+  <rect x="240" y="80" width="32" height="72" rx="16" fill="#0f172a"/>
+
+  <!-- Antenna ball -->
+  <circle cx="256" cy="80" r="32" fill="url(#eyeGrad2)"/>
+  <circle cx="264" cy="72" r="10" fill="white" opacity="0.6"/>
+
+  <!-- Skill nodes -->
+  <circle cx="64" cy="256" r="20" fill="url(#eyeGrad1)" opacity="0.8"/>
+  <circle cx="448" cy="256" r="20" fill="url(#eyeGrad2)" opacity="0.8"/>
+  <circle cx="256" cy="432" r="20" fill="url(#eyeGrad1)" opacity="0.8"/>
+</svg>

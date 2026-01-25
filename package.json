@@ -1,0 +1,39 @@
+{
+  "name": "awesome-skills",
+  "version": "1.0.0",
+  "description": "A curated collection of AI agent skills from GitHub repositories - by RanBOT Labs",
+  "private": true,
+  "scripts": {
+    "scrape": "cd scraper && npm run scrape",
+    "scrape:build": "cd scraper && npm run build && npm run scrape",
+    "dev": "cd web && npm run dev",
+    "build": "cd web && npm run build",
+    "start": "cd web && npm run start",
+    "setup": "cd scraper && npm install && cd ../web && npm install",
+    "update-skills": "npm run scrape && npm run copy-data",
+    "copy-data": "mkdir -p web/public/data/skills && cp data/skills.json web/public/data/skills.json && cp data/search-index.json web/public/data/search-index.json && cp -r data/skills/* web/public/data/skills/",
+    "deploy": "./scripts/scrape-and-deploy.sh --push",
+    "deploy:build": "./scripts/scrape-and-deploy.sh --push --build"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "skills",
+    "claude",
+    "openhands",
+    "superpowers",
+    "llm",
+    "ranbot"
+  ],
+  "author": "RanBOT Labs <hello@ranbot.online>",
+  "homepage": "https://ranbot.online",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RanBOT/awesome-skills"
+  },
+  "license": "MIT",
+  "workspaces": [
+    "scraper",
+    "web"
+  ]
+}

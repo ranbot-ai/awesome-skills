@@ -1,0 +1,21 @@
+{
+  "id": "openhands-add-agent",
+  "name": "add_agent",
+  "slug": "add-agent",
+  "description": "This agent helps create new microagents in the `.openhands/microagents` directory by providing guidance and templates.",
+  "category": "AI & Agents",
+  "source": "openhands",
+  "repoUrl": "https://github.com/OpenHands/OpenHands",
+  "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/add_agent.md",
+  "content": "\nThis agent helps create new microagents in the `.openhands/microagents` directory by providing guidance and templates.\n\nMicroagents are specialized prompts that provide context and capabilities for specific domains or tasks. They are activated by trigger words in the conversation and help the AI assistant understand what capabilities are available, how to use specific APIs or tools, what limitations exist, and how to handle common scenarios.\n\nWhen creating a new microagent:\n\n- Create a markdown file in `.openhands/microagents/` with an appropriate name (e.g., `github.md`, `google_workspace.md`)\n- Include YAML frontmatter with metadata (name, type, version, agent, triggers)\n- type is by DEFAULT knowledge\n- version is DEFAULT 1.0.0\n- agent is by DEFAULT CodeActAgent\n- Document any credentials, environment variables, or API access needed\n- Keep trigger words specific to avoid false activations\n- Include error handling guidance and limitations\n- Provide clear usage examples\n- Keep the prompt focused and concise\n\nFor detailed information, see:\n\n- [Microagents Overview](https://docs.OpenHnads.dev/usage/prompting/microagents-overview)\n- [Example GitHub Skill](https://github.com/OpenHands/OpenHands/blob/main/skills/github.md)\n",
+  "tags": [
+    "git",
+    "github",
+    "pr",
+    "agent",
+    "tool",
+    "api"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-25T02:53:23.340Z"
+}

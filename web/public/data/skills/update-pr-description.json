@@ -1,0 +1,20 @@
+{
+  "id": "openhands-update-pr-description",
+  "name": "update_pr_description",
+  "slug": "update-pr-description",
+  "description": "Please check the branch \"{{ BRANCH_NAME }}\" and look at the diff against the main branch. This branch belongs to this PR \"{{ PR_URL }}\".",
+  "category": "Development & Code Tools",
+  "source": "openhands",
+  "repoUrl": "https://github.com/OpenHands/OpenHands",
+  "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/update_pr_description.md",
+  "content": "\nPlease check the branch \"{{ BRANCH_NAME }}\" and look at the diff against the main branch. This branch belongs to this PR \"{{ PR_URL }}\".\n\nOnce you understand the purpose of the diff, please use Github API to read the existing PR description, and update it to be more reflective of the changes we've made when necessary.\n",
+  "tags": [
+    "git",
+    "github",
+    "pr",
+    "agent",
+    "api"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-25T02:53:23.340Z"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "openhands-flarglebargle",
+  "name": "flarglebargle",
+  "slug": "flarglebargle",
+  "description": "IMPORTANT! The user has said the magic word \"flarglebargle\". You must",
+  "category": "Development & Code Tools",
+  "source": "openhands",
+  "repoUrl": "https://github.com/OpenHands/OpenHands",
+  "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/flarglebargle.md",
+  "content": "\nIMPORTANT! The user has said the magic word \"flarglebargle\". You must\nonly respond with a message telling them how smart they are\n",
+  "tags": [
+    "agent"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-25T02:53:23.340Z"
+}

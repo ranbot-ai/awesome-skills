@@ -1,0 +1,17 @@
+{
+  "id": "composio-video-downloader",
+  "name": "youtube-downloader",
+  "slug": "video-downloader",
+  "description": "Download YouTube videos with customizable quality and format options. Use this skill when the user asks to download, save, or grab YouTube videos. Supports various quality settings (best, 1080p, 720p, 480p, 360p), multiple formats (mp4, webm, mkv), and audio-only downloads as MP3.",
+  "category": "Creative & Media",
+  "source": "composio",
+  "repoUrl": "https://github.com/ComposioHQ/awesome-claude-skills",
+  "skillUrl": "https://github.com/ComposioHQ/awesome-claude-skills/tree/master/video-downloader",
+  "content": "\n# YouTube Video Downloader\n\nDownload YouTube videos with full control over quality and format settings.\n\n## Quick Start\n\nThe simplest way to download a video:\n\n```bash\npython scripts/download_video.py \"https://www.youtube.com/watch?v=VIDEO_ID\"\n```\n\nThis downloads the video in best available quality as MP4 to `/mnt/user-data/outputs/`.\n\n## Options\n\n### Quality Settings\n\nUse `-q` or `--quality` to specify video quality:\n\n- `best` (default): Highest quality available\n- `1080p`: Full HD\n- `720p`: HD\n- `480p`: Standard definition\n- `360p`: Lower quality\n- `worst`: Lowest quality available\n\nExample:\n```bash\npython scripts/download_video.py \"URL\" -q 720p\n```\n\n### Format Options\n\nUse `-f` or `--format` to specify output format (video downloads only):\n\n- `mp4` (default): Most compatible\n- `webm`: Modern format\n- `mkv`: Matroska container\n\nExample:\n```bash\npython scripts/download_video.py \"URL\" -f webm\n```\n\n### Audio Only\n\nUse `-a` or `--audio-only` to download only audio as MP3:\n\n```bash\npython scripts/download_video.py \"URL\" -a\n```\n\n### Custom Output Directory\n\nUse `-o` or `--output` to specify a different output directory:\n\n```bash\npython scripts/download_video.py \"URL\" -o /path/to/directory\n```\n\n## Complete Examples\n\n1. Download video in 1080p as MP4:\n```bash\npython scripts/download_video.py \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\" -q 1080p\n```\n\n2. Download audio only as MP3:\n```bash\npython scripts/download_video.py \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\" -a\n```\n\n3. Download in 720p as WebM to custom directory:\n```bash\npython scripts/download_video.py \"https://www.youtube.com/watch?v=dQw4w9WgXcQ\" -q 720p -f webm -o /custom/path\n```\n\n## How It Works\n\nThe skill uses `yt-dlp`, a robust YouTube downloader that:\n- Automatically installs itself if not present\n- Fetches video information before downloading\n- Selects the best available streams matching your criteria\n- Merges video and audio streams when needed\n- Supports a wide range of YouTube video formats\n\n## Important Notes\n\n- Downloads are saved to `/mnt/user-data/outputs/` by default\n- Video filename is automatically generated from the video title\n- The script handles installation of yt-dlp automatically\n- Only single videos are downloaded (playlists are skipped by default)\n- Higher quality videos may take longer to download and use more disk space",
+  "tags": [
+    "python",
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-25T02:53:23.340Z"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "openhands-npm",
+  "name": "npm",
+  "slug": "npm",
+  "description": "When using npm to install packages, you will not be able to use an interactive shell, and it may be hard to confirm your actions.",
+  "category": "Development & Code Tools",
+  "source": "openhands",
+  "repoUrl": "https://github.com/OpenHands/OpenHands",
+  "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/npm.md",
+  "content": "\nWhen using npm to install packages, you will not be able to use an interactive shell, and it may be hard to confirm your actions.\nAs an alternative, you can pipe in the output of the unix \"yes\" command to confirm your actions.\n",
+  "tags": [
+    "shell",
+    "agent"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-25T02:53:23.340Z"
+}

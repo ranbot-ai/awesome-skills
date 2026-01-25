@@ -1,0 +1,17 @@
+{
+  "id": "openhands-fix-py-line-too-long",
+  "name": "fix-py-line-too-long",
+  "slug": "fix-py-line-too-long",
+  "description": "Break into multiple lines using parentheses or brackets:",
+  "category": "Development & Code Tools",
+  "source": "openhands",
+  "repoUrl": "https://github.com/OpenHands/OpenHands",
+  "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/fix-py-line-too-long.md",
+  "content": "\n# Instructions for fixing \"E501 Line too long\"\n\n## For code lines\nBreak into multiple lines using parentheses or brackets:\n```python\nresult = some_very_long_function_name(\n    parameter1, parameter2, parameter3\n)\n```\n\n## For single-line strings\nUse string concatenation: `\"ABC\"` → `(\"A\" \"B\" \"C\")`\n```python\nmessage = (\"This is a very long string \"\n           \"that needs to be broken up\")\n```\n\n## For long multi-line strings (docstrings)\nAdd `# noqa: E501` AFTER the ending `\"\"\"`. NEVER add it inside the docstring.\n```python\ndef example_function():\n    \"\"\"This is a very long docstring that exceeds the line length limit.\"\"\"  # noqa: E501\n    pass\n```\n\n## What NOT to do\n- Do not add `# noqa: E501` inside docstrings or multi-line strings\n- Do not break strings in the middle of words\n- Do not sacrifice code readability for line length compliance\n",
+  "tags": [
+    "python",
+    "agent"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-25T02:53:23.340Z"
+}

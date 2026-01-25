@@ -1,0 +1,18 @@
+{
+  "id": "openhands-default-tools",
+  "name": "default-tools",
+  "slug": "default-tools",
+  "description": "OpenHands skill for AI-driven development",
+  "category": "Productivity & Organization",
+  "source": "openhands",
+  "repoUrl": "https://github.com/OpenHands/OpenHands",
+  "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/default-tools.md",
+  "content": "",
+  "tags": [
+    "agent",
+    "tool",
+    "mcp"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-25T02:53:23.340Z"
+}
