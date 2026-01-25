@@ -8,12 +8,16 @@
     "scrape:build": "cd scraper && npm run build && npm run scrape",
     "dev": "cd web && npm run dev",
     "build": "cd web && npm run build",
+    "build:static": "cd web && NEXT_OUTPUT=export npm run build",
     "start": "cd web && npm run start",
     "setup": "cd scraper && npm install && cd ../web && npm install",
     "update-skills": "npm run scrape && npm run copy-data",
     "copy-data": "mkdir -p web/public/data/skills && cp data/skills.json web/public/data/skills.json && cp data/search-index.json web/public/data/search-index.json && cp -r data/skills/* web/public/data/skills/",
     "deploy": "./scripts/scrape-and-deploy.sh --push",
-    "deploy:build": "./scripts/scrape-and-deploy.sh --push --build"
+    "deploy:build": "./scripts/scrape-and-deploy.sh --push --build",
+    "static": "./scripts/build-static.sh",
+    "static:zip": "./scripts/build-static.sh --zip",
+    "static:upload": "./scripts/build-static.sh --rsync"
   },
   "keywords": [
     "ai",

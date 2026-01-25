@@ -6,6 +6,9 @@ dist/
 .next/
 out/
 
+# Temp files
+/tmp
+
 # Environment files
 .env
 .env.local
