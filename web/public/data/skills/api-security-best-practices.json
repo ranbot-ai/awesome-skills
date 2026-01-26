@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-api-security-best-practices",
+  "name": "api-security-best-practices",
+  "slug": "api-security-best-practices",
+  "description": "Implement secure API design patterns including authentication, authorization, input validation, rate limiting, and protection against common API vulnerabilities",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/api-security-best-practices",
+  "content": "\n# API Security Best Practices\n\n## Overview\n\nGuide developers in building secure APIs by implementing authentication, authorization, input validation, rate limiting, and protection against common vulnerabilities. This skill covers security patterns for REST, GraphQL, and WebSocket APIs.\n\n## When to Use This Skill\n\n- Use when designing new API endpoints\n- Use when securing existing APIs\n- Use when implementing authentication and authorization\n- Use when protecting against API attacks (injection, DDoS, etc.)\n- Use when conducting API security reviews\n- Use when preparing for security audits\n- Use when implementing rate limiting and throttling\n- Use when handling sensitive data in APIs\n\n## How It Works\n\n### Step 1: Authentication & Authorization\n\nI'll help you implement secure authentication:\n- Choose authentication method (JWT, OAuth 2.0, API keys)\n- Implement token-based authentication\n- Set up role-based access control (RBAC)\n- Secure session management\n- Implement multi-factor authentication (MFA)\n\n### Step 2: Input Validation & Sanitization\n\nProtect against injection attacks:\n- Validate all input data\n- Sanitize user inputs\n- Use parameterized queries\n- Implement request schema validation\n- Prevent SQL injection, XSS, and command injection\n\n### Step 3: Rate Limiting & Throttling\n\nPrevent abuse and DDoS attacks:\n- Implement rate limiting per user/IP\n- Set up API throttling\n- Configure request quotas\n- Handle rate limit errors gracefully\n- Monitor for suspicious activity\n\n### Step 4: Data Protection\n\nSecure sensitive data:\n- Encrypt data in transit (HTTPS/TLS)\n- Encrypt sensitive data at rest\n- Implement proper error handling (no data leaks)\n- Sanitize error messages\n- Use secure headers\n\n### Step 5: API Security Testing\n\nVerify security implementation:\n- Test authentication and authorization\n- Perform penetration testing\n- Check for common vulnerabilities (OWASP API Top 10)\n- Validate input handling\n- Test rate limiting\n\n\n## Examples\n\n### Example 1: Implementing JWT Authentication\n\n```markdown\n## Secure JWT Authentication Implementation\n\n### Authentication Flow\n\n1. User logs in with credentials\n2. Server validates credentials\n3. Server generates JWT token\n4. Client stores token securely\n5. Client sends token with each request\n6. Server validates token\n\n### Implementation\n\n#### 1. Generate Secure JWT Tokens\n\n\\`\\`\\`javascript\n// auth.js\nconst jwt = require('jsonwebtoken');\nconst bcrypt = require('bcrypt');\n\n// Login endpoint\napp.post('/api/auth/login', async (req, res) => {\n  try {\n    const { email, password } = req.body;\n    \n    // Validate input\n    if (!email || !password) {\n      return res.status(400).json({ \n        error: 'Email and password are required' \n      });\n    }\n    \n    // Find user\n    const user = await db.user.findUnique({ \n      where: { email } \n    });\n    \n    if (!user) {\n      // Don't reveal if user exists\n      return res.status(401).json({ \n        error: 'Invalid credentials' \n      });\n    }\n    \n    // Verify password\n    const validPassword = await bcrypt.compare(\n      password, \n      user.passwordHash\n    );\n    \n    if (!validPassword) {\n      return res.status(401).json({ \n        error: 'Invalid credentials' \n      });\n    }\n    \n    // Generate JWT token\n    const token = jwt.sign(\n      { \n        userId: user.id,\n        email: user.email,\n        role: user.role\n      },\n      process.env.JWT_SECRET,\n      { \n        expiresIn: '1h',\n        issuer: 'your-app',\n        audience: 'your-app-users'\n      }\n    );\n    \n    // Generate refresh token\n    const refreshToken = jwt.sign(\n      { userId: user.id },\n      process.env.JWT_REFRESH_SECRET,\n      { expiresIn: '7d' }\n    );\n    \n    // Store refresh token in database\n    await db.refreshToken.create({\n      data: {\n        token: refreshToken,\n        userId: user.id,\n        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)\n      }\n    });\n    \n    res.json({\n      token,\n      refreshToken,\n      expiresIn: 3600\n    });\n    \n  } catch (error) {\n    console.error('Login error:', error);\n    res.status(500).json({ \n      error: 'An error occurred during login' \n    });\n  }\n});\n\\`\\`\\`\n\n#### 2. Verify JWT Tokens (Middleware)\n\n\\`\\`\\`javascript\n// middleware/auth.js\nconst jwt = require('jsonwebtoken');\n\nfunction authenticateToken(req, res, next) {\n  // Get token from header\n  const authHeader = req.headers['authorization'];\n  const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN\n  \n  if (!token) {\n    return res.status(401).json({ \n      error: 'Access token required' \n    });\n  }\n  \n  // Verify token\n  jwt.verify(\n    token, \n    process.env.JWT_SECRET,\n    { \n      issuer: 'your-app',\n      audience: 'your-app-users'\n    },\n    (err, user) => {\n      if (err) {\n        if (err.name === 'TokenExpiredError') {\n          return res.status(401).json({ \n            error: 'Token expired' \n          });\n        }\n        return res.status(403).json({ \n          error: 'Invalid token' \n        });",
+  "tags": [
+    "javascript",
+    "node",
+    "markdown",
+    "api",
+    "ai",
+    "workflow",
+    "design",
+    "document",
+    "security",
+    "hacking"
+  ],
+  "useCases": [
+    "Use when designing new API endpoints",
+    "Use when securing existing APIs",
+    "Use when implementing authentication and authorization",
+    "Use when protecting against API attacks (injection, DDoS, etc.)",
+    "Use when conducting API security reviews"
+  ],
+  "scrapedAt": "2026-01-26T13:16:39.345Z"
+}

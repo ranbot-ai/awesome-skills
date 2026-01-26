@@ -6,8 +6,9 @@ import { scrapeOpenHandsSkills, OPENHANDS_REPO } from './scrapers/openhands.js';
 import { scrapeAnthropicSkills, ANTHROPIC_REPO } from './scrapers/anthropic.js';
 import { scrapeSuperPowersSkills, SUPERPOWERS_REPO } from './scrapers/superpowers.js';
 import { scrapeAwesomeLLMSkills, AWESOME_LLM_REPO } from './scrapers/awesome-llm.js';
+import { scrapeAntigravitySkills, ANTIGRAVITY_REPO } from './scrapers/antigravity.js';
 import { processSkills, generateSearchIndex, type RepoStars } from './processor.js';
-import { fetchRepoInfo } from './github.js';
+import { fetchRepoInfo, checkInitialRateLimit } from './github.js';
 import type { Skill, ScrapedData, GitHubRepo } from './types.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -41,6 +42,9 @@ async function main() {
   console.log('🚀 Starting Agent Skills Scraper\n');
   console.log('='.repeat(50));
 
+  // Check GitHub API rate limit status
+  await checkInitialRateLimit();
+
   // Load existing skills to preserve scrapedAt dates
   const existingSkills = loadExistingSkills();
   console.log('');
@@ -53,12 +57,14 @@ async function main() {
     composio: await fetchStars(COMPOSIO_REPO),
     openhands: await fetchStars(OPENHANDS_REPO),
     awesomeLlm: await fetchStars(AWESOME_LLM_REPO),
+    antigravity: await fetchStars(ANTIGRAVITY_REPO),
   };
   console.log(`  • Superpowers: ${stars.superpowers.toLocaleString()} stars`);
   console.log(`  • Anthropic: ${stars.anthropic.toLocaleString()} stars`);
   console.log(`  • ComposioHQ: ${stars.composio.toLocaleString()} stars`);
   console.log(`  • OpenHands: ${stars.openhands.toLocaleString()} stars`);
   console.log(`  • Awesome LLM: ${stars.awesomeLlm.toLocaleString()} stars`);
+  console.log(`  • Antigravity: ${stars.antigravity.toLocaleString()} stars`);
   console.log('');
 
   const allSkills: Skill[] = [];
@@ -105,6 +111,15 @@ async function main() {
     allSkills.push(...awesomeLlmSkills);
   } catch (err) {
     console.error('Error scraping Awesome LLM Skills:', err);
+  }
+
+  console.log('');
+
+  try {
+    const antigravitySkills = await scrapeAntigravitySkills();
+    allSkills.push(...antigravitySkills);
+  } catch (err) {
+    console.error('Error scraping Antigravity Skills:', err);
   }
 
   console.log('\n' + '='.repeat(50));

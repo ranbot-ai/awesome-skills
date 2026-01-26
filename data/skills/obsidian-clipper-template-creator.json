@@ -1,0 +1,20 @@
+{
+  "id": "antigravity-obsidian-clipper-template-creator",
+  "name": "obsidian-clipper-template-creator",
+  "slug": "obsidian-clipper-template-creator",
+  "description": "Guide for creating templates for the Obsidian Web Clipper. Use when you want to create a new clipping template, understand available variables, or format clipped content.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/obsidian-clipper-template-creator",
+  "content": "\n# Obsidian Web Clipper Template Creator\n\nThis skill helps you create importable JSON templates for the Obsidian Web Clipper.\n\n## Workflow\n\n1. **Identify User Intent:** specific site (YouTube), specific type (Recipe), or general clipping?\n2. **Check Existing Bases:** The user likely has a \"Base\" schema defined in `Templates/Bases/`.\n    - **Action:** Read `Templates/Bases/*.base` to find a matching category (e.g., `Recipes.base`).\n    - **Action:** Use the properties defined in the Base to structure the Clipper template properties.\n    - See [references/bases-workflow.md](references/bases-workflow.md) for details.\n3. **Fetch & Analyze Reference URL:** Validate variables against a real page.\n    - **Action:** Ask the user for a sample URL of the content they want to clip (if not provided).\n    - **Action (REQUIRED):** Use `WebFetch` or a browser DOM snapshot to retrieve page content before choosing any selector.\n    - **Action:** Analyze the HTML for Schema.org JSON, Meta tags, and CSS selectors.\n    - **Action (REQUIRED):** Verify each selector against the fetched content. Do not guess selectors.\n    - See [references/analysis-workflow.md](references/analysis-workflow.md) for analysis techniques.\n4. **Draft the JSON:** Create a valid JSON object following the schema.\n    - See [references/json-schema.md](references/json-schema.md).\n5. **Verify Variables:** Ensure the chosen variables (Preset, Schema, Selector) exist in your analysis.\n    - **Action (REQUIRED):** If a selector cannot be verified from the fetched content, state that explicitly and ask for another URL.\n    - See [references/variables.md](references/variables.md).\n\n## Selector Verification Rules\n\n- **Always verify selectors** against live page content before responding.\n- **Never guess selectors.** If the DOM cannot be accessed or the element is missing, ask for another URL or a screenshot.\n- **Prefer stable selectors** (data attributes, semantic roles, unique IDs) over fragile class chains.\n- **Document the target element** in your reasoning (e.g., \"About sidebar paragraph\") to reduce mismatch.\n\n## Output Format\n\n**ALWAYS** output the final result as a JSON code block that the user can copy and import.\n\n```json\n{\n  \"schemaVersion\": \"0.1.0\",\n  \"name\": \"My Template\",\n  ...\n}\n```\n\n## Resources\n\n- [references/variables.md](references/variables.md) - Available data variables.\n- [references/filters.md](references/filters.md) - Formatting filters.\n- [references/json-schema.md](references/json-schema.md) - JSON structure documentation.\n- [references/bases-workflow.md](references/bases-workflow.md) - How to map Bases to Templates.\n- [references/analysis-workflow.md](references/analysis-workflow.md) - How to validate page data.\n\n### Official Documentation\n\n- [Variables](https://help.obsidian.md/web-clipper/variables)\n- [Filters](https://help.obsidian.md/web-clipper/filters)\n- [Templates](https://help.obsidian.md/web-clipper/templates)\n\n## Examples\n\nSee [assets/](assets/) for JSON examples.\n",
+  "tags": [
+    "ai",
+    "workflow",
+    "template",
+    "document",
+    "rag"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-26T13:19:58.641Z"
+}

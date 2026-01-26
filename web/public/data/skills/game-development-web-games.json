@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-game-development-web-games",
+  "name": "web-games",
+  "slug": "game-development-web-games",
+  "description": "Web browser game development principles. Framework selection, WebGPU, optimization, PWA.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game-development/web-games",
+  "content": "\n# Web Browser Game Development\n\n> Framework selection and browser-specific principles.\n\n---\n\n## 1. Framework Selection\n\n### Decision Tree\n\n```\nWhat type of game?\n│\n├── 2D Game\n│   ├── Full game engine features? → Phaser\n│   └── Raw rendering power? → PixiJS\n│\n├── 3D Game\n│   ├── Full engine (physics, XR)? → Babylon.js\n│   └── Rendering focused? → Three.js\n│\n└── Hybrid / Canvas\n    └── Custom → Raw Canvas/WebGL\n```\n\n### Comparison (2025)\n\n| Framework | Type | Best For |\n|-----------|------|----------|\n| **Phaser 4** | 2D | Full game features |\n| **PixiJS 8** | 2D | Rendering, UI |\n| **Three.js** | 3D | Visualizations, lightweight |\n| **Babylon.js 7** | 3D | Full engine, XR |\n\n---\n\n## 2. WebGPU Adoption\n\n### Browser Support (2025)\n\n| Browser | Support |\n|---------|---------|\n| Chrome | ✅ Since v113 |\n| Edge | ✅ Since v113 |\n| Firefox | ✅ Since v131 |\n| Safari | ✅ Since 18.0 |\n| **Total** | **~73%** global |\n\n### Decision\n\n- **New projects**: Use WebGPU with WebGL fallback\n- **Legacy support**: Start with WebGL\n- **Feature detection**: Check `navigator.gpu`\n\n---\n\n## 3. Performance Principles\n\n### Browser Constraints\n\n| Constraint | Strategy |\n|------------|----------|\n| No local file access | Asset bundling, CDN |\n| Tab throttling | Pause when hidden |\n| Mobile data limits | Compress assets |\n| Audio autoplay | Require user interaction |\n\n### Optimization Priority\n\n1. **Asset compression** - KTX2, Draco, WebP\n2. **Lazy loading** - Load on demand\n3. **Object pooling** - Avoid GC\n4. **Draw call batching** - Reduce state changes\n5. **Web Workers** - Offload heavy computation\n\n---\n\n## 4. Asset Strategy\n\n### Compression Formats\n\n| Type | Format |\n|------|--------|\n| Textures | KTX2 + Basis Universal |\n| Audio | WebM/Opus (fallback: MP3) |\n| 3D Models | glTF + Draco/Meshopt |\n\n### Loading Strategy\n\n| Phase | Load |\n|-------|------|\n| Startup | Core assets, <2MB |\n| Gameplay | Stream on demand |\n| Background | Prefetch next level |\n\n---\n\n## 5. PWA for Games\n\n### Benefits\n\n- Offline play\n- Install to home screen\n- Full screen mode\n- Push notifications\n\n### Requirements\n\n- Service worker for caching\n- Web app manifest\n- HTTPS\n\n---\n\n## 6. Audio Handling\n\n### Browser Requirements\n\n- Audio context requires user interaction\n- Create AudioContext on first click/tap\n- Resume context if suspended\n\n### Best Practices\n\n- Use Web Audio API\n- Pool audio sources\n- Preload common sounds\n- Compress with WebM/Opus\n\n---\n\n## 7. Anti-Patterns\n\n| ❌ Don't | ✅ Do |\n|----------|-------|\n| Load all assets upfront | Progressive loading |\n| Ignore tab visibility | Pause when hidden |\n| Block on audio load | Lazy load audio |\n| Skip compression | Compress everything |\n| Assume fast connection | Handle slow networks |\n\n---\n\n> **Remember:** Browser is the most accessible platform. Respect its constraints.\n",
+  "tags": [
+    "api",
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-26T13:18:47.444Z"
+}

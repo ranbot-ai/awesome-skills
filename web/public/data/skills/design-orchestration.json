@@ -1,0 +1,20 @@
+{
+  "id": "antigravity-design-orchestration",
+  "name": "design-orchestration",
+  "slug": "design-orchestration",
+  "description": "Orchestrates design workflows by routing work through brainstorming, multi-agent review, and execution readiness in the correct order. Prevents premature implementation, skipped validation, and unreviewed high-risk designs.\n",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-orchestration",
+  "content": "\n# Design Orchestration (Meta-Skill)\n\n## Purpose\n\nEnsure that **ideas become designs**, **designs are reviewed**, and\n**only validated designs reach implementation**.\n\nThis skill does not generate designs.\nIt **controls the flow between other skills**.\n\n---\n\n## Operating Model\n\nThis is a **routing and enforcement skill**, not a creative one.\n\nIt decides:\n- which skill must run next\n- whether escalation is required\n- whether execution is permitted\n\n---\n\n## Controlled Skills\n\nThis meta-skill coordinates the following:\n\n- `brainstorming` — design generation\n- `multi-agent-brainstorming` — design validation\n- downstream implementation or planning skills\n\n---\n\n## Entry Conditions\n\nInvoke this skill when:\n- a user proposes a new feature, system, or change\n- a design decision carries meaningful risk\n- correctness matters more than speed\n\n---\n\n## Routing Logic\n\n### Step 1 — Brainstorming (Mandatory)\n\nIf no validated design exists:\n\n- Invoke `brainstorming`\n- Require:\n  - Understanding Lock\n  - Initial Design\n  - Decision Log started\n\nYou may NOT proceed without these artifacts.\n\n---\n\n### Step 2 — Risk Assessment\n\nAfter brainstorming completes, classify the design as:\n\n- **Low risk**\n- **Moderate risk**\n- **High risk**\n\nUse factors such as:\n- user impact\n- irreversibility\n- operational cost\n- complexity\n- uncertainty\n- novelty\n\n---\n\n### Step 3 — Conditional Escalation\n\n- **Low risk**  \n  → Proceed to implementation planning\n\n- **Moderate risk**  \n  → Recommend `multi-agent-brainstorming`\n\n- **High risk**  \n  → REQUIRE `multi-agent-brainstorming`\n\nSkipping escalation when required is prohibited.\n\n---\n\n### Step 4 — Multi-Agent Review (If Invoked)\n\nIf `multi-agent-brainstorming` is run:\n\nRequire:\n- completed Understanding Lock\n- current Design\n- Decision Log\n\nDo NOT allow:\n- new ideation\n- scope expansion\n- reopening problem definition\n\nOnly critique, revision, and decision resolution are allowed.\n\n---\n\n### Step 5 — Execution Readiness Check\n\nBefore allowing implementation:\n\nConfirm:\n- design is approved (single-agent or multi-agent)\n- Decision Log is complete\n- major assumptions are documented\n- known risks are acknowledged\n\nIf any condition fails:\n- block execution\n- return to the appropriate skill\n\n---\n\n## Enforcement Rules\n\n- Do NOT allow implementation without a validated design\n- Do NOT allow skipping required review\n- Do NOT allow silent escalation or de-escalation\n- Do NOT merge design and implementation phases\n\n---\n\n## Exit Conditions\n\nThis meta-skill exits ONLY when:\n- the next step is explicitly identified, AND\n- all required prior steps are complete\n\nPossible exits:\n- “Proceed to implementation planning”\n- “Run multi-agent-brainstorming”\n- “Return to brainstorming for clarification”\n- \"If a reviewed design reports a final disposition of APPROVED, REVISE, or REJECT, you MUST route the workflow accordingly and state the chosen next step explicitly.\"\n---\n\n## Design Philosophy\n\nThis skill exists to:\n- slow down the right decisions\n- speed up the right execution\n- prevent costly mistakes\n\nGood systems fail early.\nBad systems fail in production.\n\nThis meta-skill exists to enforce the former.\n",
+  "tags": [
+    "ai",
+    "agent",
+    "workflow",
+    "design",
+    "document"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-26T13:18:02.205Z"
+}

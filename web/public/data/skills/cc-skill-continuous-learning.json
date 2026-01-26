@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-cc-skill-continuous-learning",
+  "name": "cc-skill-continuous-learning",
+  "slug": "cc-skill-continuous-learning",
+  "description": "Development skill from everything-claude-code",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cc-skill-continuous-learning",
+  "content": "\n# cc-skill-continuous-learning\n\nDevelopment skill skill.\n",
+  "tags": [
+    "claude"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-26T13:17:23.030Z"
+}

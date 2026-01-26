@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-game-development-vr-ar",
+  "name": "vr-ar",
+  "slug": "game-development-vr-ar",
+  "description": "VR/AR development principles. Comfort, interaction, performance requirements.",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game-development/vr-ar",
+  "content": "\n# VR/AR Development\n\n> Immersive experience principles.\n\n---\n\n## 1. Platform Selection\n\n### VR Platforms\n\n| Platform | Use Case |\n|----------|----------|\n| **Quest** | Standalone, wireless |\n| **PCVR** | High fidelity |\n| **PSVR** | Console market |\n| **WebXR** | Browser-based |\n\n### AR Platforms\n\n| Platform | Use Case |\n|----------|----------|\n| **ARKit** | iOS devices |\n| **ARCore** | Android devices |\n| **WebXR** | Browser AR |\n| **HoloLens** | Enterprise |\n\n---\n\n## 2. Comfort Principles\n\n### Motion Sickness Prevention\n\n| Cause | Solution |\n|-------|----------|\n| **Locomotion** | Teleport, snap turn |\n| **Low FPS** | Maintain 90 FPS |\n| **Camera shake** | Avoid or minimize |\n| **Rapid acceleration** | Gradual movement |\n\n### Comfort Settings\n\n- Vignette during movement\n- Snap vs smooth turning\n- Seated vs standing modes\n- Height calibration\n\n---\n\n## 3. Performance Requirements\n\n### Target Metrics\n\n| Platform | FPS | Resolution |\n|----------|-----|------------|\n| Quest 2 | 72-90 | 1832x1920 |\n| Quest 3 | 90-120 | 2064x2208 |\n| PCVR | 90 | 2160x2160+ |\n| PSVR2 | 90-120 | 2000x2040 |\n\n### Frame Budget\n\n- VR requires consistent frame times\n- Single dropped frame = visible judder\n- 90 FPS = 11.11ms budget\n\n---\n\n## 4. Interaction Principles\n\n### Controller Interaction\n\n| Type | Use |\n|------|-----|\n| **Point + click** | UI, distant objects |\n| **Grab** | Manipulation |\n| **Gesture** | Magic, special actions |\n| **Physical** | Throwing, swinging |\n\n### Hand Tracking\n\n- More immersive but less precise\n- Good for: social, casual\n- Challenging for: action, precision\n\n---\n\n## 5. Spatial Design\n\n### World Scale\n\n- 1 unit = 1 meter (critical)\n- Objects must feel right size\n- Test with real measurements\n\n### Depth Cues\n\n| Cue | Importance |\n|-----|------------|\n| Stereo | Primary depth |\n| Motion parallax | Secondary |\n| Shadows | Grounding |\n| Occlusion | Layering |\n\n---\n\n## 6. Anti-Patterns\n\n| ❌ Don't | ✅ Do |\n|----------|-------|\n| Move camera without player | Player controls camera |\n| Drop below 90 FPS | Maintain frame rate |\n| Use tiny UI text | Large, readable text |\n| Ignore arm length | Scale to player reach |\n\n---\n\n> **Remember:** Comfort is not optional. Sick players don't play.\n",
+  "tags": [
+    "api",
+    "ai",
+    "design"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-26T13:18:46.263Z"
+}

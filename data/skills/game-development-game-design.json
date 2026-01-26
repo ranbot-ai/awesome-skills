@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-game-development-game-design",
+  "name": "game-design",
+  "slug": "game-development-game-design",
+  "description": "Game design principles. GDD structure, balancing, player psychology, progression.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game-development/game-design",
+  "content": "\n# Game Design Principles\n\n> Design thinking for engaging games.\n\n---\n\n## 1. Core Loop Design\n\n### The 30-Second Test\n\n```\nEvery game needs a fun 30-second loop:\n1. ACTION → Player does something\n2. FEEDBACK → Game responds\n3. REWARD → Player feels good\n4. REPEAT\n```\n\n### Loop Examples\n\n| Genre | Core Loop |\n|-------|-----------|\n| Platformer | Run → Jump → Land → Collect |\n| Shooter | Aim → Shoot → Kill → Loot |\n| Puzzle | Observe → Think → Solve → Advance |\n| RPG | Explore → Fight → Level → Gear |\n\n---\n\n## 2. Game Design Document (GDD)\n\n### Essential Sections\n\n| Section | Content |\n|---------|---------|\n| **Pitch** | One-sentence description |\n| **Core Loop** | 30-second gameplay |\n| **Mechanics** | How systems work |\n| **Progression** | How player advances |\n| **Art Style** | Visual direction |\n| **Audio** | Sound direction |\n\n### Principles\n\n- Keep it living (update regularly)\n- Visuals help communicate\n- Less is more (start small)\n\n---\n\n## 3. Player Psychology\n\n### Motivation Types\n\n| Type | Driven By |\n|------|-----------|\n| **Achiever** | Goals, completion |\n| **Explorer** | Discovery, secrets |\n| **Socializer** | Interaction, community |\n| **Killer** | Competition, dominance |\n\n### Reward Schedules\n\n| Schedule | Effect | Use |\n|----------|--------|-----|\n| **Fixed** | Predictable | Milestone rewards |\n| **Variable** | Addictive | Loot drops |\n| **Ratio** | Effort-based | Grind games |\n\n---\n\n## 4. Difficulty Balancing\n\n### Flow State\n\n```\nToo Hard → Frustration → Quit\nToo Easy → Boredom → Quit\nJust Right → Flow → Engagement\n```\n\n### Balancing Strategies\n\n| Strategy | How |\n|----------|-----|\n| **Dynamic** | Adjust to player skill |\n| **Selection** | Let player choose |\n| **Accessibility** | Options for all |\n\n---\n\n## 5. Progression Design\n\n### Progression Types\n\n| Type | Example |\n|------|---------|\n| **Skill** | Player gets better |\n| **Power** | Character gets stronger |\n| **Content** | New areas unlock |\n| **Story** | Narrative advances |\n\n### Pacing Principles\n\n- Early wins (hook quickly)\n- Gradually increase challenge\n- Rest beats between intensity\n- Meaningful choices\n\n---\n\n## 6. Anti-Patterns\n\n| ❌ Don't | ✅ Do |\n|----------|-------|\n| Design in isolation | Playtest constantly |\n| Polish before fun | Prototype first |\n| Force one way to play | Allow player expression |\n| Punish excessively | Reward progress |\n\n---\n\n> **Remember:** Fun is discovered through iteration, not designed on paper.\n",
+  "tags": [
+    "ai",
+    "design",
+    "document"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-26T13:18:41.048Z"
+}

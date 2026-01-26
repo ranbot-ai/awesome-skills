@@ -1,0 +1,25 @@
+{
+  "id": "antigravity-app-builder-templates",
+  "name": "templates",
+  "slug": "app-builder-templates",
+  "description": "Project scaffolding templates for new applications. Use when creating new projects from scratch. Contains 12 templates for various tech stacks.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/app-builder/templates",
+  "content": "\n# Project Templates\n\n> Quick-start templates for scaffolding new projects.\n\n---\n\n## 🎯 Selective Reading Rule\n\n**Read ONLY the template matching user's project type!**\n\n| Template | Tech Stack | When to Use |\n|----------|------------|-------------|\n| [nextjs-fullstack](nextjs-fullstack/TEMPLATE.md) | Next.js + Prisma | Full-stack web app |\n| [nextjs-saas](nextjs-saas/TEMPLATE.md) | Next.js + Stripe | SaaS product |\n| [nextjs-static](nextjs-static/TEMPLATE.md) | Next.js + Framer | Landing page |\n| [express-api](express-api/TEMPLATE.md) | Express + JWT | REST API |\n| [python-fastapi](python-fastapi/TEMPLATE.md) | FastAPI | Python API |\n| [react-native-app](react-native-app/TEMPLATE.md) | Expo + Zustand | Mobile app |\n| [flutter-app](flutter-app/TEMPLATE.md) | Flutter + Riverpod | Cross-platform |\n| [electron-desktop](electron-desktop/TEMPLATE.md) | Electron + React | Desktop app |\n| [chrome-extension](chrome-extension/TEMPLATE.md) | Chrome MV3 | Browser extension |\n| [cli-tool](cli-tool/TEMPLATE.md) | Node.js + Commander | CLI app |\n| [monorepo-turborepo](monorepo-turborepo/TEMPLATE.md) | Turborepo + pnpm | Monorepo |\n| [astro-static](astro-static/TEMPLATE.md) | Astro + MDX | Blog / Docs |\n\n---\n\n## Usage\n\n1. User says \"create [type] app\"\n2. Match to appropriate template\n3. Read ONLY that template's TEMPLATE.md\n4. Follow its tech stack and structure\n",
+  "tags": [
+    "python",
+    "react",
+    "node",
+    "nextjs",
+    "api",
+    "ai",
+    "template",
+    "prisma",
+    "stripe",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-26T13:16:41.969Z"
+}

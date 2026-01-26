@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-game-development-multiplayer",
+  "name": "multiplayer",
+  "slug": "game-development-multiplayer",
+  "description": "Multiplayer game development principles. Architecture, networking, synchronization.",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game-development/multiplayer",
+  "content": "\n# Multiplayer Game Development\n\n> Networking architecture and synchronization principles.\n\n---\n\n## 1. Architecture Selection\n\n### Decision Tree\n\n```\nWhat type of multiplayer?\n│\n├── Competitive / Real-time\n│   └── Dedicated Server (authoritative)\n│\n├── Cooperative / Casual\n│   └── Host-based (one player is server)\n│\n├── Turn-based\n│   └── Client-server (simple)\n│\n└── Massive (MMO)\n    └── Distributed servers\n```\n\n### Comparison\n\n| Architecture | Latency | Cost | Security |\n|--------------|---------|------|----------|\n| **Dedicated** | Low | High | Strong |\n| **P2P** | Variable | Low | Weak |\n| **Host-based** | Medium | Low | Medium |\n\n---\n\n## 2. Synchronization Principles\n\n### State vs Input\n\n| Approach | Sync What | Best For |\n|----------|-----------|----------|\n| **State Sync** | Game state | Simple, few objects |\n| **Input Sync** | Player inputs | Action games |\n| **Hybrid** | Both | Most games |\n\n### Lag Compensation\n\n| Technique | Purpose |\n|-----------|---------|\n| **Prediction** | Client predicts server |\n| **Interpolation** | Smooth remote players |\n| **Reconciliation** | Fix mispredictions |\n| **Lag compensation** | Rewind for hit detection |\n\n---\n\n## 3. Network Optimization\n\n### Bandwidth Reduction\n\n| Technique | Savings |\n|-----------|---------|\n| **Delta compression** | Send only changes |\n| **Quantization** | Reduce precision |\n| **Priority** | Important data first |\n| **Area of interest** | Only nearby entities |\n\n### Update Rates\n\n| Type | Rate |\n|------|------|\n| Position | 20-60 Hz |\n| Health | On change |\n| Inventory | On change |\n| Chat | On send |\n\n---\n\n## 4. Security Principles\n\n### Server Authority\n\n```\nClient: \"I hit the enemy\"\nServer: Validate → did projectile actually hit?\n         → was player in valid state?\n         → was timing possible?\n```\n\n### Anti-Cheat\n\n| Cheat | Prevention |\n|-------|------------|\n| Speed hack | Server validates movement |\n| Aimbot | Server validates sight line |\n| Item dupe | Server owns inventory |\n| Wall hack | Don't send hidden data |\n\n---\n\n## 5. Matchmaking\n\n### Considerations\n\n| Factor | Impact |\n|--------|--------|\n| **Skill** | Fair matches |\n| **Latency** | Playable connection |\n| **Wait time** | Player patience |\n| **Party size** | Group play |\n\n---\n\n## 6. Anti-Patterns\n\n| ❌ Don't | ✅ Do |\n|----------|-------|\n| Trust the client | Server is authority |\n| Send everything | Send only necessary |\n| Ignore latency | Design for 100-200ms |\n| Sync exact positions | Interpolate/predict |\n\n---\n\n> **Remember:** Never trust the client. The server is the source of truth.\n",
+  "tags": [
+    "ai",
+    "design",
+    "security"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-26T13:18:43.669Z"
+}

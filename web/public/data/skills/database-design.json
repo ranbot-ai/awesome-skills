@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-database-design",
+  "name": "database-design",
+  "slug": "database-design",
+  "description": "Database design principles and decision-making. Schema design, indexing strategy, ORM selection, serverless databases.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/database-design",
+  "content": "\n# Database Design\n\n> **Learn to THINK, not copy SQL patterns.**\n\n## 🎯 Selective Reading Rule\n\n**Read ONLY files relevant to the request!** Check the content map, find what you need.\n\n| File | Description | When to Read |\n|------|-------------|--------------|\n| `database-selection.md` | PostgreSQL vs Neon vs Turso vs SQLite | Choosing database |\n| `orm-selection.md` | Drizzle vs Prisma vs Kysely | Choosing ORM |\n| `schema-design.md` | Normalization, PKs, relationships | Designing schema |\n| `indexing.md` | Index types, composite indexes | Performance tuning |\n| `optimization.md` | N+1, EXPLAIN ANALYZE | Query optimization |\n| `migrations.md` | Safe migrations, serverless DBs | Schema changes |\n\n---\n\n## ⚠️ Core Principle\n\n- ASK user for database preferences when unclear\n- Choose database/ORM based on CONTEXT\n- Don't default to PostgreSQL for everything\n\n---\n\n## Decision Checklist\n\nBefore designing schema:\n\n- [ ] Asked user about database preference?\n- [ ] Chosen database for THIS context?\n- [ ] Considered deployment environment?\n- [ ] Planned index strategy?\n- [ ] Defined relationship types?\n\n---\n\n## Anti-Patterns\n\n❌ Default to PostgreSQL for simple apps (SQLite may suffice)\n❌ Skip indexing\n❌ Use SELECT * in production\n❌ Store JSON when structured data is better\n❌ Ignore N+1 queries\n",
+  "tags": [
+    "ai",
+    "design",
+    "prisma"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-26T13:17:58.513Z"
+}

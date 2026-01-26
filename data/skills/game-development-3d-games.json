@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-game-development-3d-games",
+  "name": "3d-games",
+  "slug": "game-development-3d-games",
+  "description": "3D game development principles. Rendering, shaders, physics, cameras.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game-development/3d-games",
+  "content": "\n# 3D Game Development\n\n> Principles for 3D game systems.\n\n---\n\n## 1. Rendering Pipeline\n\n### Stages\n\n```\n1. Vertex Processing → Transform geometry\n2. Rasterization → Convert to pixels\n3. Fragment Processing → Color pixels\n4. Output → To screen\n```\n\n### Optimization Principles\n\n| Technique | Purpose |\n|-----------|---------|\n| **Frustum culling** | Don't render off-screen |\n| **Occlusion culling** | Don't render hidden |\n| **LOD** | Less detail at distance |\n| **Batching** | Combine draw calls |\n\n---\n\n## 2. Shader Principles\n\n### Shader Types\n\n| Type | Purpose |\n|------|---------|\n| **Vertex** | Position, normals |\n| **Fragment/Pixel** | Color, lighting |\n| **Compute** | General computation |\n\n### When to Write Custom Shaders\n\n- Special effects (water, fire, portals)\n- Stylized rendering (toon, sketch)\n- Performance optimization\n- Unique visual identity\n\n---\n\n## 3. 3D Physics\n\n### Collision Shapes\n\n| Shape | Use Case |\n|-------|----------|\n| **Box** | Buildings, crates |\n| **Sphere** | Balls, quick checks |\n| **Capsule** | Characters |\n| **Mesh** | Terrain (expensive) |\n\n### Principles\n\n- Simple colliders, complex visuals\n- Layer-based filtering\n- Raycasting for line-of-sight\n\n---\n\n## 4. Camera Systems\n\n### Camera Types\n\n| Type | Use |\n|------|-----|\n| **Third-person** | Action, adventure |\n| **First-person** | Immersive, FPS |\n| **Isometric** | Strategy, RPG |\n| **Orbital** | Inspection, editors |\n\n### Camera Feel\n\n- Smooth following (lerp)\n- Collision avoidance\n- Look-ahead for movement\n- FOV changes for speed\n\n---\n\n## 5. Lighting\n\n### Light Types\n\n| Type | Use |\n|------|-----|\n| **Directional** | Sun, moon |\n| **Point** | Lamps, torches |\n| **Spot** | Flashlight, stage |\n| **Ambient** | Base illumination |\n\n### Performance Consideration\n\n- Real-time shadows are expensive\n- Bake when possible\n- Shadow cascades for large worlds\n\n---\n\n## 6. Level of Detail (LOD)\n\n### LOD Strategy\n\n| Distance | Model |\n|----------|-------|\n| Near | Full detail |\n| Medium | 50% triangles |\n| Far | 25% or billboard |\n\n---\n\n## 7. Anti-Patterns\n\n| ❌ Don't | ✅ Do |\n|----------|-------|\n| Mesh colliders everywhere | Simple shapes |\n| Real-time shadows on mobile | Baked or blob shadows |\n| One LOD for all distances | Distance-based LOD |\n| Unoptimized shaders | Profile and simplify |\n\n---\n\n> **Remember:** 3D is about illusion. Create the impression of detail, not the detail itself.\n",
+  "tags": [
+    "ai",
+    "rag"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-26T13:18:37.311Z"
+}

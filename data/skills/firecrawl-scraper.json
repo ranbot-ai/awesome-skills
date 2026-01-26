@@ -1,0 +1,24 @@
+{
+  "id": "antigravity-firecrawl-scraper",
+  "name": "firecrawl-scraper",
+  "slug": "firecrawl-scraper",
+  "description": "Deep web scraping, screenshots, PDF parsing, and website crawling using Firecrawl API",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/firecrawl-scraper",
+  "content": "\n# firecrawl-scraper\n\n## Overview\nDeep web scraping, screenshots, PDF parsing, and website crawling using Firecrawl API\n\n## When to Use\n- When you need deep content extraction from web pages\n- When page interaction is required (clicking, scrolling, etc.)\n- When you want screenshots or PDF parsing\n- When batch scraping multiple URLs\n\n## Installation\n```bash\nnpx skills add -g BenedictKing/firecrawl-scraper\n```\n\n## Step-by-Step Guide\n1. Install the skill using the command above\n2. Configure Firecrawl API key\n3. Use naturally in Claude Code conversations\n\n## Examples\nSee [GitHub Repository](https://github.com/BenedictKing/firecrawl-scraper) for examples.\n\n## Best Practices\n- Configure API keys via environment variables\n\n## Troubleshooting\nSee the GitHub repository for troubleshooting guides.\n\n## Related Skills\n- context7-auto-research, tavily-web, exa-search, codex-review\n",
+  "tags": [
+    "pdf",
+    "api",
+    "claude",
+    "cro"
+  ],
+  "useCases": [
+    "When you need deep content extraction from web pages",
+    "When page interaction is required (clicking, scrolling, etc.)",
+    "When you want screenshots or PDF parsing",
+    "When batch scraping multiple URLs"
+  ],
+  "scrapedAt": "2026-01-26T13:18:27.641Z"
+}

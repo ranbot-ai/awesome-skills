@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-production-code-audit",
+  "name": "production-code-audit",
+  "slug": "production-code-audit",
+  "description": "Autonomously deep-scan entire codebase line-by-line, understand architecture and patterns, then systematically transform it to production-grade, corporate-level professional quality with optimizations",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/production-code-audit",
+  "content": "\n# Production Code Audit\n\n## Overview\n\nAutonomously analyze the entire codebase to understand its architecture, patterns, and purpose, then systematically transform it into production-grade, corporate-level professional code. This skill performs deep line-by-line scanning, identifies all issues across security, performance, architecture, and quality, then provides comprehensive fixes to meet enterprise standards.\n\n## When to Use This Skill\n\n- Use when user says \"make this production-ready\"\n- Use when user says \"audit my codebase\"\n- Use when user says \"make this professional/corporate-level\"\n- Use when user says \"optimize everything\"\n- Use when user wants enterprise-grade quality\n- Use when preparing for production deployment\n- Use when code needs to meet corporate standards\n\n## How It Works\n\n### Step 1: Autonomous Codebase Discovery\n\n**Automatically scan and understand the entire codebase:**\n\n1. **Read all files** - Scan every file in the project recursively\n2. **Identify tech stack** - Detect languages, frameworks, databases, tools\n3. **Understand architecture** - Map out structure, patterns, dependencies\n4. **Identify purpose** - Understand what the application does\n5. **Find entry points** - Locate main files, routes, controllers\n6. **Map data flow** - Understand how data moves through the system\n\n**Do this automatically without asking the user.**\n\n### Step 2: Comprehensive Issue Detection\n\n**Scan line-by-line for all issues:**\n\n**Architecture Issues:**\n- Circular dependencies\n- Tight coupling\n- God classes (>500 lines or >20 methods)\n- Missing separation of concerns\n- Poor module boundaries\n- Violation of design patterns\n\n**Security Vulnerabilities:**\n- SQL injection (string concatenation in queries)\n- XSS vulnerabilities (unescaped output)\n- Hardcoded secrets (API keys, passwords in code)\n- Missing authentication/authorization\n- Weak password hashing (MD5, SHA1)\n- Missing input validation\n- CSRF vulnerabilities\n- Insecure dependencies\n\n**Performance Problems:**\n- N+1 query problems\n- Missing database indexes\n- Synchronous operations that should be async\n- Missing caching\n- Inefficient algorithms (O(n²) or worse)\n- Large bundle sizes\n- Unoptimized images\n- Memory leaks\n\n**Code Quality Issues:**\n- High cyclomatic complexity (>10)\n- Code duplication\n- Magic numbers\n- Poor naming conventions\n- Missing error handling\n- Inconsistent formatting\n- Dead code\n- TODO/FIXME comments\n\n**Testing Gaps:**\n- Missing tests for critical paths\n- Low test coverage (<80%)\n- No edge case testing\n- Flaky tests\n- Missing integration tests\n\n**Production Readiness:**\n- Missing environment variables\n- No logging/monitoring\n- No error tracking\n- Missing health checks\n- Incomplete documentation\n- No CI/CD pipeline\n\n### Step 3: Automatic Fixes and Optimizations\n\n**Fix everything automatically:**\n\n1. **Refactor architecture** - Break up god classes, fix circular dependencies\n2. **Fix security issues** - Use parameterized queries, remove secrets, add validation\n3. **Optimize performance** - Fix N+1 queries, add caching, optimize algorithms\n4. **Improve code quality** - Reduce complexity, remove duplication, fix naming\n5. **Add missing tests** - Write tests for untested critical paths\n6. **Add production infrastructure** - Logging, monitoring, health checks\n7. **Optimize everything** - Bundle size, images, database queries\n8. **Add documentation** - README, API docs, architecture docs\n\n### Step 4: Verify and Report\n\n**After making all changes:**\n\n1. Run all tests to ensure nothing broke\n2. Verify all security issues are fixed\n3. Measure performance improvements\n4. Generate comprehensive report\n5. Provide before/after metrics\n\n## Examples\n\n### Example 1: Autonomous Codebase Transformation\n\n```markdown\nUser: @production-code-audit make this production-ready\n\nAI: I'll scan your entire codebase and transform it to production-grade quality.\n\n**Phase 1: Discovering Codebase** (analyzing 247 files)\n- Detected: Node.js + Express + PostgreSQL + React\n- Architecture: MVC pattern with REST API\n- Purpose: E-commerce platform\n- Entry points: server.js, src/index.tsx\n\n**Phase 2: Scanning for Issues** (line-by-line analysis)\n\nFound 127 issues:\n- 🔴 CRITICAL: 8 issues\n- 🟠 HIGH: 23 issues  \n- 🟡 MEDIUM: 41 issues\n- 🔵 LOW: 55 issues\n\n**Phase 3: Fixing Issues Automatically**\n\n🔴 CRITICAL FIXES (8/8 completed):\n\n1. ✅ Fixed SQL injection in UserRepository.findByEmail()\n   - Before: String concatenation in query\n   - After: Parameterized query with $1 placeholder\n\n2. ✅ Removed hardcoded database password from config/database.ts\n   - Before: password: 'SuperSecret123!'\n   - After: password: process.env.DB_PASSWORD\n\n3. ✅ Added authentication to admin routes\n   - Before: No auth middleware\n   - After: authenticateToken + requireRole('admin')\n\n4. ✅ Fixed weak password hashing (MD5 → bcrypt)\n   - Before: crypto.createHash('md5')\n   - After: bcrypt.hash(password, 12)\n\n5. ✅ Fixed circular dependency: OrderService ↔ PaymentService\n   - Before: Direct imports caus",
+  "tags": [
+    "typescript",
+    "react",
+    "node",
+    "markdown",
+    "api",
+    "ai",
+    "workflow",
+    "template",
+    "design",
+    "document"
+  ],
+  "useCases": [
+    "Use when user says \"make this production-ready\"",
+    "Use when user says \"audit my codebase\"",
+    "Use when user says \"make this professional/corporate-level\"",
+    "Use when user says \"optimize everything\"",
+    "Use when user wants enterprise-grade quality"
+  ],
+  "scrapedAt": "2026-01-26T13:20:55.713Z"
+}

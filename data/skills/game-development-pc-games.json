@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-game-development-pc-games",
+  "name": "pc-games",
+  "slug": "game-development-pc-games",
+  "description": "PC and console game development principles. Engine selection, platform features, optimization strategies.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game-development/pc-games",
+  "content": "\n# PC/Console Game Development\n\n> Engine selection and platform-specific principles.\n\n---\n\n## 1. Engine Selection\n\n### Decision Tree\n\n```\nWhat are you building?\n│\n├── 2D Game\n│   ├── Open source important? → Godot\n│   └── Large team/assets? → Unity\n│\n├── 3D Game\n│   ├── AAA visual quality? → Unreal\n│   ├── Cross-platform priority? → Unity\n│   └── Indie/open source? → Godot 4\n│\n└── Specific Needs\n    ├── DOTS performance? → Unity\n    ├── Nanite/Lumen? → Unreal\n    └── Lightweight? → Godot\n```\n\n### Comparison\n\n| Factor | Unity 6 | Godot 4 | Unreal 5 |\n|--------|---------|---------|----------|\n| 2D | Good | Excellent | Limited |\n| 3D | Good | Good | Excellent |\n| Learning | Medium | Easy | Hard |\n| Cost | Revenue share | Free | 5% after $1M |\n| Team | Any | Solo-Medium | Medium-Large |\n\n---\n\n## 2. Platform Features\n\n### Steam Integration\n\n| Feature | Purpose |\n|---------|---------|\n| Achievements | Player goals |\n| Cloud Saves | Cross-device progress |\n| Leaderboards | Competition |\n| Workshop | User mods |\n| Rich Presence | Show in-game status |\n\n### Console Requirements\n\n| Platform | Certification |\n|----------|--------------|\n| PlayStation | TRC compliance |\n| Xbox | XR compliance |\n| Nintendo | Lotcheck |\n\n---\n\n## 3. Controller Support\n\n### Input Abstraction\n\n```\nMap ACTIONS, not buttons:\n- \"confirm\" → A (Xbox), Cross (PS), B (Nintendo)\n- \"cancel\" → B (Xbox), Circle (PS), A (Nintendo)\n```\n\n### Haptic Feedback\n\n| Intensity | Use |\n|-----------|-----|\n| Light | UI feedback |\n| Medium | Impacts |\n| Heavy | Major events |\n\n---\n\n## 4. Performance Optimization\n\n### Profiling First\n\n| Engine | Tool |\n|--------|------|\n| Unity | Profiler Window |\n| Godot | Debugger → Profiler |\n| Unreal | Unreal Insights |\n\n### Common Bottlenecks\n\n| Bottleneck | Solution |\n|------------|----------|\n| Draw calls | Batching, atlases |\n| GC spikes | Object pooling |\n| Physics | Simpler colliders |\n| Shaders | LOD shaders |\n\n---\n\n## 5. Engine-Specific Principles\n\n### Unity 6\n\n- DOTS for performance-critical systems\n- Burst compiler for hot paths\n- Addressables for asset streaming\n\n### Godot 4\n\n- GDScript for rapid iteration\n- C# for complex logic\n- Signals for decoupling\n\n### Unreal 5\n\n- Blueprint for designers\n- C++ for performance\n- Nanite for high-poly environments\n- Lumen for dynamic lighting\n\n---\n\n## 6. Anti-Patterns\n\n| ❌ Don't | ✅ Do |\n|----------|-------|\n| Choose engine by hype | Choose by project needs |\n| Ignore platform guidelines | Study certification requirements |\n| Hardcode input buttons | Abstract to actions |\n| Skip profiling | Profile early and often |\n\n---\n\n> **Remember:** Engine is a tool. Master the principles, then adapt to any engine.\n",
+  "tags": [
+    "api",
+    "design",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-26T13:18:45.010Z"
+}

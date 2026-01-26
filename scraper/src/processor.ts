@@ -6,6 +6,7 @@ export interface RepoStars {
   anthropic: number;
   superpowers: number;
   awesomeLlm: number;
+  antigravity: number;
 }
 
 const CATEGORY_ICONS: Record<string, string> = {
@@ -37,7 +38,7 @@ const CATEGORY_DESCRIPTIONS: Record<string, string> = {
 export function processSkills(
   skills: Skill[],
   existingSkills: Skill[] = [],
-  stars: RepoStars = { composio: 0, openhands: 0, anthropic: 0, superpowers: 0, awesomeLlm: 0 }
+  stars: RepoStars = { composio: 0, openhands: 0, anthropic: 0, superpowers: 0, awesomeLlm: 0, antigravity: 0 }
 ): ScrapedData {
   const scrapedAt = new Date().toISOString();
 
@@ -138,6 +139,13 @@ export function processSkills(
       skillCount: sourceCount.get('awesome-llm') || 0,
       newSkillCount: newSkillsBySource.get('awesome-llm') || 0,
       stars: stars.awesomeLlm,
+    },
+    {
+      name: 'Antigravity',
+      url: 'https://github.com/sickn33/antigravity-awesome-skills',
+      skillCount: sourceCount.get('antigravity') || 0,
+      newSkillCount: newSkillsBySource.get('antigravity') || 0,
+      stars: stars.antigravity,
     },
   ];
 

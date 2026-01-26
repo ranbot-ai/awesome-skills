@@ -6,9 +6,9 @@
 
 ## Features
 
-- **Multi-Source Scraper**: Collects agent skills from 5+ GitHub repositories
+- **Multi-Source Scraper**: Collects agent skills from 6+ GitHub repositories
 - **Modern Website**: Next.js 16 + Tailwind CSS frontend with search, filtering, and detailed skill pages
-- **70+ Skills**: Curated from top AI agent skill repositories
+- **300+ Skills**: Curated from top AI agent skill repositories
 - **Categories**: Skills organized by category (Development, AI & Agents, Business, Creative, etc.)
 - **Search & Filter**: Find skills by name, description, tags, or category
 - **Automated Updates**: GitHub Actions workflow for scheduled scraping
@@ -22,6 +22,7 @@
 | [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills) | 25k+ | Community Claude AI skills |
 | [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | 67k+ | AI-driven development skills |
 | [Prat011/awesome-llm-skills](https://github.com/Prat011/awesome-llm-skills) | 700+ | LLM and AI Agent skills collection |
+| [sickn33/antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) | 3.6k+ | 253+ agentic skills for Claude Code, Gemini CLI, Cursor & more |
 
 ## Install Skills Locally
 
@@ -84,7 +85,7 @@ cd awesome-skills
 # Search for skills
 ./scripts/install-skills.sh --search docker
 
-# Install all skills from a source (anthropic, composio, superpowers, openhands)
+# Install all skills from a source (anthropic, composio, superpowers, openhands, awesome-llm, antigravity)
 ./scripts/install-skills.sh --source anthropic
 
 # Install skills by category
@@ -219,10 +220,11 @@ awesome-skills/
 │   │   ├── processor.ts    # Data processing
 │   │   └── scrapers/       # Source-specific scrapers
 │   │       ├── anthropic.ts
+│   │       ├── antigravity.ts
+│   │       ├── awesome-llm.ts
 │   │       ├── composio.ts
 │   │       ├── openhands.ts
-│   │       ├── superpowers.ts
-│   │       └── awesome-llm.ts
+│   │       └── superpowers.ts
 │   └── package.json
 ├── web/                    # Next.js frontend
 │   ├── src/
