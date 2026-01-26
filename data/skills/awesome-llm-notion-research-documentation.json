@@ -1,0 +1,25 @@
+{
+  "id": "awesome-llm-notion-research-documentation",
+  "name": "notion-research-documentation",
+  "slug": "awesome-llm-notion-research-documentation",
+  "description": "Searches across your Notion workspace, synthesizes findings from multiple pages, and creates comprehensive research documentation saved as new Notion pages. Turns scattered information into structured reports with proper citations and actionable insights.",
+  "category": "Productivity & Organization",
+  "source": "awesome-llm",
+  "repoUrl": "https://github.com/Prat011/awesome-llm-skills",
+  "skillUrl": "https://github.com/Prat011/awesome-llm-skills/tree/master/notion-research-documentation",
+  "content": "\n# Research & Documentation\n\nEnables comprehensive research workflows: search for information across your Notion workspace, fetch and analyze relevant pages, synthesize findings, and create well-structured documentation.\n\n## Quick Start\n\nWhen asked to research and document a topic:\n\n1. **Search for relevant content**: Use `Notion:notion-search` to find pages\n2. **Fetch detailed information**: Use `Notion:notion-fetch` to read full page content\n3. **Synthesize findings**: Analyze and combine information from multiple sources\n4. **Create structured output**: Use `Notion:notion-create-pages` to write documentation\n\n## Research Workflow\n\n### Step 1: Search for relevant information\n\n```\nUse Notion:notion-search with the research topic\nFilter by teamspace if scope is known\nReview search results to identify most relevant pages\n```\n\n### Step 2: Fetch page content\n\n```\nUse Notion:notion-fetch for each relevant page URL\nCollect content from all relevant sources\nNote key findings, quotes, and data points\n```\n\n### Step 3: Synthesize findings\n\nAnalyze the collected information:\n- Identify key themes and patterns\n- Connect related concepts across sources\n- Note gaps or conflicting information\n- Organize findings logically\n\n### Step 4: Create structured documentation\n\nUse the appropriate documentation template (see [reference/format-selection-guide.md](reference/format-selection-guide.md)) to structure output:\n- Clear title and executive summary\n- Well-organized sections with headings\n- Citations linking back to source pages\n- Actionable conclusions or next steps\n\n## Output Formats\n\nChoose the appropriate format based on request:\n\n**Research Summary**: See [reference/research-summary-format.md](reference/research-summary-format.md)\n**Comprehensive Report**: See [reference/comprehensive-report-format.md](reference/comprehensive-report-format.md)\n**Quick Brief**: See [reference/quick-brief-format.md](reference/quick-brief-format.md)\n\n## Best Practices\n\n1. **Cast a wide net first**: Start with broad searches, then narrow down\n2. **Cite sources**: Always link back to source pages using mentions\n3. **Verify recency**: Check page last-edited dates for current information\n4. **Cross-reference**: Validate findings across multiple sources\n5. **Structure clearly**: Use headings, bullets, and formatting for readability\n\n## Page Placement\n\nBy default, create research documents as standalone pages. If the user specifies:\n- A parent page → use `page_id` parent\n- A database → fetch the database first, then use appropriate `data_source_id`\n- A teamspace → create in that context\n\n## Advanced Features\n\n**Search filtering**: See [reference/advanced-search.md](reference/advanced-search.md)\n**Citation styles**: See [reference/citations.md](reference/citations.md)\n\n## Common Issues\n\n**\"No results found\"**: Try broader search terms or different teamspaces\n**\"Too many results\"**: Add filters or search within specific pages\n**\"Can't access page\"**: User may lack permissions, ask them to verify access\n\n## Examples\n\nSee [examples/](examples/) for complete workflow demonstrations:\n- [examples/market-research.md](examples/market-research.md) - Researching market trends\n- [examples/technical-investigation.md](examples/technical-investigation.md) - Technical deep-dive\n- [examples/competitor-analysis.md](examples/competitor-analysis.md) - Multi-source synthesis\n\n",
+  "tags": [
+    "ai",
+    "workflow",
+    "template",
+    "notion",
+    "research",
+    "documentation"
+  ],
+  "useCases": [
+    "[examples/market-research.md](examples/market-research.md) - Researching market trends",
+    "[examples/technical-investigation.md](examples/technical-investigation.md) - Technical deep-dive",
+    "[examples/competitor-analysis.md](examples/competitor-analysis.md) - Multi-source synthesis"
+  ],
+  "scrapedAt": "2026-01-26T06:48:08.492Z"
+}
