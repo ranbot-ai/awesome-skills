@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-voice-ai-engine-development",
+  "name": "voice-ai-engine-development",
+  "slug": "voice-ai-engine-development",
+  "description": "Build real-time conversational AI voice engines using async worker pipelines, streaming transcription, LLM agents, and TTS synthesis with interrupt handling and multi-provider support",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/voice-ai-engine-development",
+  "content": "\n# Voice AI Engine Development\n\n## Overview\n\nThis skill guides you through building production-ready voice AI engines with real-time conversation capabilities. Voice AI engines enable natural, bidirectional conversations between users and AI agents through streaming audio processing, speech-to-text transcription, LLM-powered responses, and text-to-speech synthesis.\n\nThe core architecture uses an async queue-based worker pipeline where each component runs independently and communicates via `asyncio.Queue` objects, enabling concurrent processing, interrupt handling, and real-time streaming at every stage.\n\n## When to Use This Skill\n\nUse this skill when:\n- Building real-time voice conversation systems\n- Implementing voice assistants or chatbots\n- Creating voice-enabled customer service agents\n- Developing voice AI applications with interrupt capabilities\n- Integrating multiple transcription, LLM, or TTS providers\n- Working with streaming audio processing pipelines\n- The user mentions Vocode, voice engines, or conversational AI\n\n## Core Architecture Principles\n\n### The Worker Pipeline Pattern\n\nEvery voice AI engine follows this pipeline:\n\n```\nAudio In → Transcriber → Agent → Synthesizer → Audio Out\n           (Worker 1)   (Worker 2)  (Worker 3)\n```\n\n**Key Benefits:**\n- **Decoupling**: Workers only know about their input/output queues\n- **Concurrency**: All workers run simultaneously via asyncio\n- **Backpressure**: Queues automatically handle rate differences\n- **Interruptibility**: Everything can be stopped mid-stream\n\n### Base Worker Pattern\n\nEvery worker follows this pattern:\n\n```python\nclass BaseWorker:\n    def __init__(self, input_queue, output_queue):\n        self.input_queue = input_queue   # asyncio.Queue to consume from\n        self.output_queue = output_queue # asyncio.Queue to produce to\n        self.active = False\n    \n    def start(self):\n        \"\"\"Start the worker's processing loop\"\"\"\n        self.active = True\n        asyncio.create_task(self._run_loop())\n    \n    async def _run_loop(self):\n        \"\"\"Main processing loop - runs forever until terminated\"\"\"\n        while self.active:\n            item = await self.input_queue.get()  # Block until item arrives\n            await self.process(item)              # Process the item\n    \n    async def process(self, item):\n        \"\"\"Override this - does the actual work\"\"\"\n        raise NotImplementedError\n    \n    def terminate(self):\n        \"\"\"Stop the worker\"\"\"\n        self.active = False\n```\n\n## Component Implementation Guide\n\n### 1. Transcriber (Audio → Text)\n\n**Purpose**: Converts incoming audio chunks to text transcriptions\n\n**Interface Requirements**:\n```python\nclass BaseTranscriber:\n    def __init__(self, transcriber_config):\n        self.input_queue = asyncio.Queue()   # Audio chunks (bytes)\n        self.output_queue = asyncio.Queue()  # Transcriptions\n        self.is_muted = False\n    \n    def send_audio(self, chunk: bytes):\n        \"\"\"Client calls this to send audio\"\"\"\n        if not self.is_muted:\n            self.input_queue.put_nowait(chunk)\n        else:\n            # Send silence instead (prevents echo during bot speech)\n            self.input_queue.put_nowait(self.create_silent_chunk(len(chunk)))\n    \n    def mute(self):\n        \"\"\"Called when bot starts speaking (prevents echo)\"\"\"\n        self.is_muted = True\n    \n    def unmute(self):\n        \"\"\"Called when bot stops speaking\"\"\"\n        self.is_muted = False\n```\n\n**Output Format**:\n```python\nclass Transcription:\n    message: str          # \"Hello, how are you?\"\n    confidence: float     # 0.95\n    is_final: bool        # True = complete sentence, False = partial\n    is_interrupt: bool    # Set by TranscriptionsWorker\n```\n\n**Supported Providers**:\n- **Deepgram** - Fast, accurate, streaming\n- **AssemblyAI** - High accuracy, good for accents\n- **Azure Speech** - Enterprise-grade\n- **Google Cloud Speech** - Multi-language support\n\n**Critical Implementation Details**:\n- Use WebSocket for bidirectional streaming\n- Run sender and receiver tasks concurrently with `asyncio.gather()`\n- Mute transcriber when bot speaks to prevent echo/feedback loops\n- Handle both final and partial transcriptions\n\n### 2. Agent (Text → Response)\n\n**Purpose**: Processes user input and generates conversational responses\n\n**Interface Requirements**:\n```python\nclass BaseAgent:\n    def __init__(self, agent_config):\n        self.input_queue = asyncio.Queue()   # TranscriptionAgentInput\n        self.output_queue = asyncio.Queue()  # AgentResponse\n        self.transcript = None               # Conversation history\n    \n    async def generate_response(self, human_input, is_interrupt, conversation_id):\n        \"\"\"Override this - returns AsyncGenerator of responses\"\"\"\n        raise NotImplementedError\n```\n\n**Why Streaming Responses?**\n- **Lower latency**: Start speaking as soon as first sentence is ready\n- **Better interrupts**: Can stop mid-response\n- **Sentence-by-sentence**: More natural conversation flow\n\n**Supported Pro",
+  "tags": [
+    "python",
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "llm",
+    "gpt",
+    "workflow",
+    "design",
+    "aws"
+  ],
+  "useCases": [
+    "Building real-time voice conversation systems",
+    "Implementing voice assistants or chatbots",
+    "Creating voice-enabled customer service agents",
+    "Developing voice AI applications with interrupt capabilities",
+    "Integrating multiple transcription, LLM, or TTS providers"
+  ],
+  "scrapedAt": "2026-01-28T06:47:41.348Z"
+}
