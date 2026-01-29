@@ -1,0 +1,20 @@
+{
+  "id": "antigravity-code-review-excellence",
+  "name": "code-review-excellence",
+  "slug": "code-review-excellence",
+  "description": "Master effective code review practices to provide constructive feedback, catch bugs early, and foster knowledge sharing while maintaining team morale. Use when reviewing pull requests, establishing review standards, or mentoring developers.",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/code-review-excellence",
+  "content": "\n# Code Review Excellence\n\nTransform code reviews from gatekeeping to knowledge sharing through constructive feedback, systematic analysis, and collaborative improvement.\n\n## Use this skill when\n\n- Reviewing pull requests and code changes\n- Establishing code review standards\n- Mentoring developers through review feedback\n- Auditing for correctness, security, or performance\n\n## Do not use this skill when\n\n- There are no code changes to review\n- The task is a design-only discussion without code\n- You need to implement fixes instead of reviewing\n\n## Instructions\n\n- Read context, requirements, and test signals first.\n- Review for correctness, security, performance, and maintainability.\n- Provide actionable feedback with severity and rationale.\n- Ask clarifying questions when intent is unclear.\n- If detailed checklists are required, open `resources/implementation-playbook.md`.\n\n## Output Format\n\n- High-level summary of findings\n- Issues grouped by severity (blocking, important, minor)\n- Suggestions and questions\n- Test and coverage notes\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed review patterns and templates.\n",
+  "tags": [
+    "ai",
+    "template",
+    "design",
+    "security",
+    "rag"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:58:24.752Z"
+}

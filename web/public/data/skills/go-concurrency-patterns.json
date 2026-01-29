@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-go-concurrency-patterns",
+  "name": "go-concurrency-patterns",
+  "slug": "go-concurrency-patterns",
+  "description": "Master Go concurrency with goroutines, channels, sync primitives, and context. Use when building concurrent Go applications, implementing worker pools, or debugging race conditions.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/go-concurrency-patterns",
+  "content": "\n# Go Concurrency Patterns\n\nProduction patterns for Go concurrency including goroutines, channels, synchronization primitives, and context management.\n\n## Use this skill when\n\n- Building concurrent Go applications\n- Implementing worker pools and pipelines\n- Managing goroutine lifecycles\n- Using channels for communication\n- Debugging race conditions\n- Implementing graceful shutdown\n\n## Do not use this skill when\n\n- The task is unrelated to go concurrency patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:59:13.288Z"
+}

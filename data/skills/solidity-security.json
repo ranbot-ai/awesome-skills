@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-solidity-security",
+  "name": "solidity-security",
+  "slug": "solidity-security",
+  "description": "Master smart contract security best practices to prevent common vulnerabilities and implement secure Solidity patterns. Use when writing smart contracts, auditing existing contracts, or implementing security measures for blockchain applications.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/solidity-security",
+  "content": "\n# Solidity Security\n\nMaster smart contract security best practices, vulnerability prevention, and secure Solidity development patterns.\n\n## Use this skill when\n\n- Writing secure smart contracts\n- Auditing existing contracts for vulnerabilities\n- Implementing secure DeFi protocols\n- Preventing reentrancy, overflow, and access control issues\n- Optimizing gas usage while maintaining security\n- Preparing contracts for professional audits\n- Understanding common attack vectors\n\n## Do not use this skill when\n\n- The task is unrelated to solidity security\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai",
+    "security",
+    "vulnerability"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:35.505Z"
+}

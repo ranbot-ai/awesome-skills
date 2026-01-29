@@ -1,0 +1,20 @@
+{
+  "id": "antigravity-attack-tree-construction",
+  "name": "attack-tree-construction",
+  "slug": "attack-tree-construction",
+  "description": "Build comprehensive attack trees to visualize threat paths. Use when mapping attack scenarios, identifying defense gaps, or communicating security risks to stakeholders.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/attack-tree-construction",
+  "content": "\n# Attack Tree Construction\n\nSystematic attack path visualization and analysis.\n\n## Use this skill when\n\n- Visualizing complex attack scenarios\n- Identifying defense gaps and priorities\n- Communicating risks to stakeholders\n- Planning defensive investments or test scopes\n\n## Do not use this skill when\n\n- You lack authorization or a defined scope to model the system\n- The task is a general risk review without attack-path modeling\n- The request is unrelated to security assessment or design\n\n## Instructions\n\n- Confirm scope, assets, and the attacker goal for the root node.\n- Decompose into sub-goals with AND/OR structure.\n- Annotate leaves with cost, skill, time, and detectability.\n- Map mitigations per branch and prioritize high-impact paths.\n- If detailed templates are required, open `resources/implementation-playbook.md`.\n\n## Safety\n\n- Share attack trees only with authorized stakeholders.\n- Avoid including sensitive exploit details unless required.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns, templates, and examples.\n",
+  "tags": [
+    "node",
+    "ai",
+    "template",
+    "design",
+    "security"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:58:02.573Z"
+}

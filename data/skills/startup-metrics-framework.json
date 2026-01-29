@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-startup-metrics-framework",
+  "name": "startup-metrics-framework",
+  "slug": "startup-metrics-framework",
+  "description": "This skill should be used when the user asks about \"key startup metrics\", \"SaaS metrics\", \"CAC and LTV\", \"unit economics\", \"burn multiple\", \"rule of 40\", \"marketplace metrics\", or requests guidance on tracking and optimizing business performance metrics.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/startup-metrics-framework",
+  "content": "\n# Startup Metrics Framework\n\nComprehensive guide to tracking, calculating, and optimizing key performance metrics for different startup business models from seed through Series A.\n\n## Use this skill when\n\n- Working on startup metrics framework tasks or workflows\n- Needing guidance, best practices, or checklists for startup metrics framework\n\n## Do not use this skill when\n\n- The task is unrelated to startup metrics framework\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai",
+    "workflow"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:39.383Z"
+}

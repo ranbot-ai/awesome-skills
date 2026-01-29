@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-dbt-transformation-patterns",
+  "name": "dbt-transformation-patterns",
+  "slug": "dbt-transformation-patterns",
+  "description": "Master dbt (data build tool) for analytics engineering with model organization, testing, documentation, and incremental strategies. Use when building data transformations, creating data models, or implementing analytics engineering best practices.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dbt-transformation-patterns",
+  "content": "\n# dbt Transformation Patterns\n\nProduction-ready patterns for dbt (data build tool) including model organization, testing strategies, documentation, and incremental processing.\n\n## Use this skill when\n\n- Building data transformation pipelines with dbt\n- Organizing models into staging, intermediate, and marts layers\n- Implementing data quality tests and documentation\n- Creating incremental models for large datasets\n- Setting up dbt project structure and conventions\n\n## Do not use this skill when\n\n- The project is not using dbt or a warehouse-backed workflow\n- You only need ad-hoc SQL queries\n- There is no access to source data or schemas\n\n## Instructions\n\n- Define model layers, naming, and ownership.\n- Implement tests, documentation, and freshness checks.\n- Choose materializations and incremental strategies.\n- Optimize runs with selectors and CI workflows.\n- If detailed patterns are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed dbt patterns and examples.\n",
+  "tags": [
+    "ai",
+    "workflow",
+    "document"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:58:41.975Z"
+}

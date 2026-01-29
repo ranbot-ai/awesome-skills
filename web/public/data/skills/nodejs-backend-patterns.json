@@ -1,0 +1,20 @@
+{
+  "id": "antigravity-nodejs-backend-patterns",
+  "name": "nodejs-backend-patterns",
+  "slug": "nodejs-backend-patterns",
+  "description": "Build production-ready Node.js backend services with Express/Fastify, implementing middleware patterns, error handling, authentication, database integration, and API design best practices. Use when creating Node.js servers, REST APIs, GraphQL backends, or microservices architectures.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/nodejs-backend-patterns",
+  "content": "\n# Node.js Backend Patterns\n\nComprehensive guidance for building scalable, maintainable, and production-ready Node.js backend applications with modern frameworks, architectural patterns, and best practices.\n\n## Use this skill when\n\n- Building REST APIs or GraphQL servers\n- Creating microservices with Node.js\n- Implementing authentication and authorization\n- Designing scalable backend architectures\n- Setting up middleware and error handling\n- Integrating databases (SQL and NoSQL)\n- Building real-time applications with WebSockets\n- Implementing background job processing\n\n## Do not use this skill when\n\n- The task is unrelated to node.js backend patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "node",
+    "api",
+    "ai",
+    "design",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:59:47.253Z"
+}

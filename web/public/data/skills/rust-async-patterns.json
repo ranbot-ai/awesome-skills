@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-rust-async-patterns",
+  "name": "rust-async-patterns",
+  "slug": "rust-async-patterns",
+  "description": "Master Rust async programming with Tokio, async traits, error handling, and concurrent patterns. Use when building async Rust applications, implementing concurrent systems, or debugging async code.",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/rust-async-patterns",
+  "content": "\n# Rust Async Patterns\n\nProduction patterns for async Rust programming with Tokio runtime, including tasks, channels, streams, and error handling.\n\n## Use this skill when\n\n- Building async Rust applications\n- Implementing concurrent network services\n- Using Tokio for async I/O\n- Handling async errors properly\n- Debugging async code issues\n- Optimizing async performance\n\n## Do not use this skill when\n\n- The task is unrelated to rust async patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:17.361Z"
+}

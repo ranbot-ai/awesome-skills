@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-backtesting-frameworks",
+  "name": "backtesting-frameworks",
+  "slug": "backtesting-frameworks",
+  "description": "Build robust backtesting systems for trading strategies with proper handling of look-ahead bias, survivorship bias, and transaction costs. Use when developing trading algorithms, validating strategies, or building backtesting infrastructure.",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/backtesting-frameworks",
+  "content": "\n# Backtesting Frameworks\n\nBuild robust, production-grade backtesting systems that avoid common pitfalls and produce reliable strategy performance estimates.\n\n## Use this skill when\n\n- Developing trading strategy backtests\n- Building backtesting infrastructure\n- Validating strategy performance and robustness\n- Avoiding common backtesting biases\n- Implementing walk-forward analysis\n\n## Do not use this skill when\n\n- You need live trading execution or investment advice\n- Historical data quality is unknown or incomplete\n- The task is only a quick performance summary\n\n## Instructions\n\n- Define hypothesis, universe, timeframe, and evaluation criteria.\n- Build point-in-time data pipelines and realistic cost models.\n- Implement event-driven simulation and execution logic.\n- Use train/validation/test splits and walk-forward testing.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Safety\n\n- Do not present backtests as guarantees of future performance.\n- Avoid providing financial or investment advice.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:58:07.300Z"
+}

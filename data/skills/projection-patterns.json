@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-projection-patterns",
+  "name": "projection-patterns",
+  "slug": "projection-patterns",
+  "description": "Build read models and projections from event streams. Use when implementing CQRS read sides, building materialized views, or optimizing query performance in event-sourced systems.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/projection-patterns",
+  "content": "\n# Projection Patterns\n\nComprehensive guide to building projections and read models for event-sourced systems.\n\n## Use this skill when\n\n- Building CQRS read models\n- Creating materialized views from events\n- Optimizing query performance\n- Implementing real-time dashboards\n- Building search indexes from events\n- Aggregating data across streams\n\n## Do not use this skill when\n\n- The task is unrelated to projection patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:04.114Z"
+}

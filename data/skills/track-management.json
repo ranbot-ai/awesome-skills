@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-track-management",
+  "name": "track-management",
+  "slug": "track-management",
+  "description": "Use this skill when creating, managing, or working with Conductor tracks - the logical work units for features, bugs, and refactors. Applies to spec.md, plan.md, and track lifecycle operations.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/track-management",
+  "content": "\n# Track Management\n\nGuide for creating, managing, and completing Conductor tracks - the logical work units that organize features, bugs, and refactors through specification, planning, and implementation phases.\n\n## Use this skill when\n\n- Creating new feature, bug, or refactor tracks\n- Writing or reviewing spec.md files\n- Creating or updating plan.md files\n- Managing track lifecycle from creation to completion\n- Understanding track status markers and conventions\n- Working with the tracks.md registry\n- Interpreting or updating track metadata\n\n## Do not use this skill when\n\n- The task is unrelated to track management\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:50.792Z"
+}

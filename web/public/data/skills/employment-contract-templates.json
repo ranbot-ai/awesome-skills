@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-employment-contract-templates",
+  "name": "employment-contract-templates",
+  "slug": "employment-contract-templates",
+  "description": "Create employment contracts, offer letters, and HR policy documents following legal best practices. Use when drafting employment agreements, creating HR policies, or standardizing employment documentation.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/employment-contract-templates",
+  "content": "\n# Employment Contract Templates\n\nTemplates and patterns for creating legally sound employment documentation including contracts, offer letters, and HR policies.\n\n## Use this skill when\n\n- Drafting employment contracts\n- Creating offer letters\n- Writing employee handbooks\n- Developing HR policies\n- Standardizing employment documentation\n- Preparing onboarding documentation\n\n## Do not use this skill when\n\n- You need jurisdiction-specific legal advice\n- The task requires licensed counsel review\n- The request is unrelated to employment documentation\n\n## Instructions\n\n- Confirm jurisdiction, employment type, and required clauses.\n- Choose a document template and tailor role-specific terms.\n- Validate compensation, benefits, and compliance requirements.\n- Add signature, confidentiality, and IP assignment terms as needed.\n- If detailed templates are required, open `resources/implementation-playbook.md`.\n\n## Safety\n\n- These templates are not legal advice; consult qualified counsel before use.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed templates and checklists.\n",
+  "tags": [
+    "ai",
+    "template",
+    "document"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:58:53.181Z"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-vector-index-tuning",
+  "name": "vector-index-tuning",
+  "slug": "vector-index-tuning",
+  "description": "Optimize vector index performance for latency, recall, and memory. Use when tuning HNSW parameters, selecting quantization strategies, or scaling vector search infrastructure.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/vector-index-tuning",
+  "content": "\n# Vector Index Tuning\n\nGuide to optimizing vector indexes for production performance.\n\n## Use this skill when\n\n- Tuning HNSW parameters\n- Implementing quantization\n- Optimizing memory usage\n- Reducing search latency\n- Balancing recall vs speed\n- Scaling to billions of vectors\n\n## Do not use this skill when\n\n- You only need exact search on small datasets (use a flat index)\n- You lack workload metrics or ground truth to validate recall\n- You need end-to-end retrieval system design beyond index tuning\n\n## Instructions\n\n1. Gather workload targets (latency, recall, QPS), data size, and memory budget.\n2. Choose an index type and establish a baseline with default parameters.\n3. Benchmark parameter sweeps using real queries and track recall, latency, and memory.\n4. Validate changes on a staging dataset before rolling out to production.\n\nRefer to `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.\n\n## Safety\n\n- Avoid reindexing in production without a rollback plan.\n- Validate changes under realistic load before applying globally.\n- Track recall regressions and revert if quality drops.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.\n",
+  "tags": [
+    "ai",
+    "template",
+    "design"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:57.758Z"
+}

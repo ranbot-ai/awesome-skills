@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-stride-analysis-patterns",
+  "name": "stride-analysis-patterns",
+  "slug": "stride-analysis-patterns",
+  "description": "Apply STRIDE methodology to systematically identify threats. Use when analyzing system security, conducting threat modeling sessions, or creating security documentation.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/stride-analysis-patterns",
+  "content": "\n# STRIDE Analysis Patterns\n\nSystematic threat identification using the STRIDE methodology.\n\n## Use this skill when\n\n- Starting new threat modeling sessions\n- Analyzing existing system architecture\n- Reviewing security design decisions\n- Creating threat documentation\n- Training teams on threat identification\n- Compliance and audit preparation\n\n## Do not use this skill when\n\n- The task is unrelated to stride analysis patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai",
+    "design",
+    "document",
+    "security"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:39.880Z"
+}

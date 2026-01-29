@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-python-performance-optimization",
+  "name": "python-performance-optimization",
+  "slug": "python-performance-optimization",
+  "description": "Profile and optimize Python code using cProfile, memory profilers, and performance best practices. Use when debugging slow Python code, optimizing bottlenecks, or improving application performance.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/python-performance-optimization",
+  "content": "\n# Python Performance Optimization\n\nComprehensive guide to profiling, analyzing, and optimizing Python code for better performance, including CPU profiling, memory optimization, and implementation best practices.\n\n## Use this skill when\n\n- Identifying performance bottlenecks in Python applications\n- Reducing application latency and response times\n- Optimizing CPU-intensive operations\n- Reducing memory consumption and memory leaks\n- Improving database query performance\n- Optimizing I/O operations\n- Speeding up data processing pipelines\n- Implementing high-performance algorithms\n- Profiling production applications\n\n## Do not use this skill when\n\n- The task is unrelated to python performance optimization\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "python",
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:08.644Z"
+}

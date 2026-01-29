@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-sql-optimization-patterns",
+  "name": "sql-optimization-patterns",
+  "slug": "sql-optimization-patterns",
+  "description": "Master SQL query optimization, indexing strategies, and EXPLAIN analysis to dramatically improve database performance and eliminate slow queries. Use when debugging slow queries, designing database schemas, or optimizing application performance.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/sql-optimization-patterns",
+  "content": "\n# SQL Optimization Patterns\n\nTransform slow database queries into lightning-fast operations through systematic optimization, proper indexing, and query plan analysis.\n\n## Use this skill when\n\n- Debugging slow-running queries\n- Designing performant database schemas\n- Optimizing application response times\n- Reducing database load and costs\n- Improving scalability for growing datasets\n- Analyzing EXPLAIN query plans\n- Implementing efficient indexes\n- Resolving N+1 query problems\n\n## Do not use this skill when\n\n- The task is unrelated to sql optimization patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai",
+    "design"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:36.607Z"
+}

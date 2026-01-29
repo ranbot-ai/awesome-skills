@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-debugging-strategies",
+  "name": "debugging-strategies",
+  "slug": "debugging-strategies",
+  "description": "Master systematic debugging techniques, profiling tools, and root cause analysis to efficiently track down bugs across any codebase or technology stack. Use when investigating bugs, performance issues, or unexpected behavior.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/debugging-strategies",
+  "content": "\n# Debugging Strategies\n\nTransform debugging from frustrating guesswork into systematic problem-solving with proven strategies, powerful tools, and methodical approaches.\n\n## Use this skill when\n\n- Tracking down elusive bugs\n- Investigating performance issues\n- Debugging production incidents\n- Analyzing crash dumps or stack traces\n- Debugging distributed systems\n\n## Do not use this skill when\n\n- There is no reproducible issue or observable symptom\n- The task is purely feature development\n- You cannot access logs, traces, or runtime signals\n\n## Instructions\n\n- Reproduce the issue and capture logs, traces, and environment details.\n- Form hypotheses and design controlled experiments.\n- Narrow scope with binary search and targeted instrumentation.\n- Document findings and verify the fix.\n- If detailed playbooks are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed debugging patterns and checklists.\n",
+  "tags": [
+    "ai",
+    "design",
+    "document",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:58:42.720Z"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-memory-safety-patterns",
+  "name": "memory-safety-patterns",
+  "slug": "memory-safety-patterns",
+  "description": "Implement memory-safe programming with RAII, ownership, smart pointers, and resource management across Rust, C++, and C. Use when writing safe systems code, managing resources, or preventing memory bugs.",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/memory-safety-patterns",
+  "content": "\n# Memory Safety Patterns\n\nCross-language patterns for memory-safe programming including RAII, ownership, smart pointers, and resource management.\n\n## Use this skill when\n\n- Writing memory-safe systems code\n- Managing resources (files, sockets, memory)\n- Preventing use-after-free and leaks\n- Implementing RAII patterns\n- Choosing between languages for safety\n- Debugging memory issues\n\n## Do not use this skill when\n\n- The task is unrelated to memory safety patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:59:38.327Z"
+}

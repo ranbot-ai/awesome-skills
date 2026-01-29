@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-screen-reader-testing",
+  "name": "screen-reader-testing",
+  "slug": "screen-reader-testing",
+  "description": "Test web applications with screen readers including VoiceOver, NVDA, and JAWS. Use when validating screen reader compatibility, debugging accessibility issues, or ensuring assistive technology support.",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/screen-reader-testing",
+  "content": "\n# Screen Reader Testing\n\nPractical guide to testing web applications with screen readers for comprehensive accessibility validation.\n\n## Use this skill when\n\n- Validating screen reader compatibility\n- Testing ARIA implementations\n- Debugging assistive technology issues\n- Verifying form accessibility\n- Testing dynamic content announcements\n- Ensuring navigation accessibility\n\n## Do not use this skill when\n\n- The task is unrelated to screen reader testing\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai",
+    "aws"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:20.157Z"
+}

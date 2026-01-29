@@ -1,0 +1,20 @@
+{
+  "id": "antigravity-tdd-workflows-tdd-green",
+  "name": "tdd-workflows-tdd-green",
+  "slug": "tdd-workflows-tdd-green",
+  "description": "Implement the minimal code needed to make failing tests pass in the TDD green phase.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/tdd-workflows-tdd-green",
+  "content": "\n# Green Phase: Simple function\ndef product_list(request):\n    products = Product.objects.all()\n    return JsonResponse({'products': list(products.values())})\n\n# Refactor: Class-based view\nclass ProductListView(View):\n    def get(self, request):\n        products = Product.objects.all()\n        return JsonResponse({'products': list(products.values())})\n\n# Refactor: Generic view\nclass ProductListView(ListView):\n    model = Product\n    context_object_name = 'products'\n```\n\n### Express Patterns\n\n**Inline → Middleware → Service Layer:**\n```javascript\n// Green Phase: Inline logic\napp.post('/api/users', (req, res) => {\n  const user = { id: Date.now(), ...req.body };\n  users.push(user);\n  res.json(user);\n});\n\n// Refactor: Extract middleware\napp.post('/api/users', validateUser, (req, res) => {\n  const user = userService.create(req.body);\n  res.json(user);\n});\n\n// Refactor: Full layering\napp.post('/api/users',\n  validateUser,\n  asyncHandler(userController.create)\n);\n```\n\n## Use this skill when\n\n- Moving from red to green in a TDD cycle\n- Implementing minimal behavior to satisfy tests\n- You want to keep implementation intentionally simple\n\n## Do not use this skill when\n\n- You are refactoring for design or performance\n- Tests are already passing and you need new requirements\n- You need a full architectural redesign\n\n## Instructions\n\n1. Review failing tests and identify the smallest fix.\n2. Implement the minimal change to pass the next test.\n3. Run tests after each change to confirm progress.\n4. Record shortcuts or debt for the refactor phase.\n\n## Safety\n\n- Avoid bypassing tests to make them pass.\n- Keep changes scoped to the failing behavior only.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "javascript",
+    "api",
+    "ai",
+    "workflow",
+    "design"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:43.562Z"
+}

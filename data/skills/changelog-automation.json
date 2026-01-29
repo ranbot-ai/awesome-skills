@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-changelog-automation",
+  "name": "changelog-automation",
+  "slug": "changelog-automation",
+  "description": "Automate changelog generation from commits, PRs, and releases following Keep a Changelog format. Use when setting up release workflows, generating release notes, or standardizing commit conventions.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/changelog-automation",
+  "content": "\n# Changelog Automation\n\nPatterns and tools for automating changelog generation, release notes, and version management following industry standards.\n\n## Use this skill when\n\n- Setting up automated changelog generation\n- Implementing conventional commits\n- Creating release note workflows\n- Standardizing commit message formats\n- Managing semantic versioning\n\n## Do not use this skill when\n\n- The project has no release process or versioning\n- You only need a one-time manual release note\n- Commit history is unavailable or unreliable\n\n## Instructions\n\n- Select a changelog format and versioning strategy.\n- Enforce commit conventions or labeling rules.\n- Configure tooling to generate and publish notes.\n- Review output for accuracy, completeness, and wording.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Safety\n\n- Avoid exposing secrets or internal-only details in release notes.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns, templates, and examples.\n",
+  "tags": [
+    "ai",
+    "automation",
+    "workflow",
+    "template"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:58:18.865Z"
+}

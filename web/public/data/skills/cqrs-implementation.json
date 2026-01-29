@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-cqrs-implementation",
+  "name": "cqrs-implementation",
+  "slug": "cqrs-implementation",
+  "description": "Implement Command Query Responsibility Segregation for scalable architectures. Use when separating read and write models, optimizing query performance, or building event-sourced systems.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cqrs-implementation",
+  "content": "\n# CQRS Implementation\n\nComprehensive guide to implementing CQRS (Command Query Responsibility Segregation) patterns.\n\n## Use this skill when\n\n- Separating read and write concerns\n- Scaling reads independently from writes\n- Building event-sourced systems\n- Optimizing complex query scenarios\n- Different read/write data models are needed\n- High-performance reporting is required\n\n## Do not use this skill when\n\n- The domain is simple and CRUD is sufficient\n- You cannot operate separate read/write models\n- Strong immediate consistency is required everywhere\n\n## Instructions\n\n- Identify read/write workloads and consistency needs.\n- Define command and query models with clear boundaries.\n- Implement read model projections and synchronization.\n- Validate performance, recovery, and failure modes.\n- If detailed patterns are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed CQRS patterns and templates.\n",
+  "tags": [
+    "ai",
+    "template"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:58:35.665Z"
+}

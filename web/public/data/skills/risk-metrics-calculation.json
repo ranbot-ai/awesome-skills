@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-risk-metrics-calculation",
+  "name": "risk-metrics-calculation",
+  "slug": "risk-metrics-calculation",
+  "description": "Calculate portfolio risk metrics including VaR, CVaR, Sharpe, Sortino, and drawdown analysis. Use when measuring portfolio risk, implementing risk limits, or building risk monitoring systems.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/risk-metrics-calculation",
+  "content": "\n# Risk Metrics Calculation\n\nComprehensive risk measurement toolkit for portfolio management, including Value at Risk, Expected Shortfall, and drawdown analysis.\n\n## Use this skill when\n\n- Measuring portfolio risk\n- Implementing risk limits\n- Building risk dashboards\n- Calculating risk-adjusted returns\n- Setting position sizes\n- Regulatory reporting\n\n## Do not use this skill when\n\n- The task is unrelated to risk metrics calculation\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:16.560Z"
+}

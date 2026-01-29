@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-data-quality-frameworks",
+  "name": "data-quality-frameworks",
+  "slug": "data-quality-frameworks",
+  "description": "Implement data quality validation with Great Expectations, dbt tests, and data contracts. Use when building data quality pipelines, implementing validation rules, or establishing data contracts.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/data-quality-frameworks",
+  "content": "\n# Data Quality Frameworks\n\nProduction patterns for implementing data quality with Great Expectations, dbt tests, and data contracts to ensure reliable data pipelines.\n\n## Use this skill when\n\n- Implementing data quality checks in pipelines\n- Setting up Great Expectations validation\n- Building comprehensive dbt test suites\n- Establishing data contracts between teams\n- Monitoring data quality metrics\n- Automating data validation in CI/CD\n\n## Do not use this skill when\n\n- The data sources are undefined or unavailable\n- You cannot modify validation rules or schemas\n- The task is unrelated to data quality or contracts\n\n## Instructions\n\n- Identify critical datasets and quality dimensions.\n- Define expectations/tests and contract rules.\n- Automate validation in CI/CD and schedule checks.\n- Set alerting, ownership, and remediation steps.\n- If detailed patterns are required, open `resources/implementation-playbook.md`.\n\n## Safety\n\n- Avoid blocking critical pipelines without a fallback plan.\n- Handle sensitive data securely in validation outputs.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed frameworks, templates, and examples.\n",
+  "tags": [
+    "ai",
+    "template"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:58:38.101Z"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-threat-mitigation-mapping",
+  "name": "threat-mitigation-mapping",
+  "slug": "threat-mitigation-mapping",
+  "description": "Map identified threats to appropriate security controls and mitigations. Use when prioritizing security investments, creating remediation plans, or validating control effectiveness.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/threat-mitigation-mapping",
+  "content": "\n# Threat Mitigation Mapping\n\nConnect threats to controls for effective security planning.\n\n## Use this skill when\n\n- Prioritizing security investments\n- Creating remediation roadmaps\n- Validating control coverage\n- Designing defense-in-depth\n- Security architecture review\n- Risk treatment planning\n\n## Do not use this skill when\n\n- The task is unrelated to threat mitigation mapping\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai",
+    "design",
+    "security",
+    "rag"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:49.725Z"
+}

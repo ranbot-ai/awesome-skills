@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-observability-monitoring-monitor-setup",
+  "name": "observability-monitoring-monitor-setup",
+  "slug": "observability-monitoring-monitor-setup",
+  "description": "You are a monitoring and observability expert specializing in implementing comprehensive monitoring solutions. Set up metrics collection, distributed tracing, log aggregation, and create insightful da",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/observability-monitoring-monitor-setup",
+  "content": "\n# Monitoring and Observability Setup\n\nYou are a monitoring and observability expert specializing in implementing comprehensive monitoring solutions. Set up metrics collection, distributed tracing, log aggregation, and create insightful dashboards that provide full visibility into system health and performance.\n\n## Use this skill when\n\n- Working on monitoring and observability setup tasks or workflows\n- Needing guidance, best practices, or checklists for monitoring and observability setup\n\n## Do not use this skill when\n\n- The task is unrelated to monitoring and observability setup\n- You need a different domain or tool outside this scope\n\n## Context\nThe user needs to implement or improve monitoring and observability. Focus on the three pillars of observability (metrics, logs, traces), setting up monitoring infrastructure, creating actionable dashboards, and establishing effective alerting strategies.\n\n## Requirements\n$ARGUMENTS\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Output Format\n\n1. **Infrastructure Assessment**: Current monitoring capabilities analysis\n2. **Monitoring Architecture**: Complete monitoring stack design\n3. **Implementation Plan**: Step-by-step deployment guide\n4. **Metric Definitions**: Comprehensive metrics catalog\n5. **Dashboard Templates**: Ready-to-use Grafana dashboards\n6. **Alert Runbooks**: Detailed alert response procedures\n7. **SLO Definitions**: Service level objectives and error budgets\n8. **Integration Guide**: Service instrumentation instructions\n\nFocus on creating a monitoring system that provides actionable insights, reduces MTTR, and enables proactive issue detection.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai",
+    "workflow",
+    "template",
+    "design"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:59:50.065Z"
+}

@@ -1,0 +1,20 @@
+{
+  "id": "antigravity-wcag-audit-patterns",
+  "name": "wcag-audit-patterns",
+  "slug": "wcag-audit-patterns",
+  "description": "Conduct WCAG 2.2 accessibility audits with automated testing, manual verification, and remediation guidance. Use when auditing websites for accessibility, fixing WCAG violations, or implementing accessible design patterns.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/wcag-audit-patterns",
+  "content": "\n# WCAG Audit Patterns\n\nComprehensive guide to auditing web content against WCAG 2.2 guidelines with actionable remediation strategies.\n\n## Use this skill when\n\n- Conducting accessibility audits\n- Fixing WCAG violations\n- Implementing accessible components\n- Preparing for accessibility lawsuits\n- Meeting ADA/Section 508 requirements\n- Achieving VPAT compliance\n\n## Do not use this skill when\n\n- You need legal advice or formal certification\n- You only want a quick automated scan without manual verification\n- You cannot access the UI or source for remediation work\n\n## Instructions\n\n1. Run automated scans (axe, Lighthouse, WAVE) to collect initial findings.\n2. Perform manual checks (keyboard navigation, focus order, screen reader flows).\n3. Map each issue to a WCAG criterion, severity, and remediation guidance.\n4. Re-test after fixes and document residual risk and compliance status.\n\nRefer to `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.\n\n## Safety\n\n- Avoid claiming legal compliance without expert review.\n- Keep evidence of test steps and results for audit trails.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.\n",
+  "tags": [
+    "ai",
+    "template",
+    "design",
+    "document",
+    "aws"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:01:01.125Z"
+}

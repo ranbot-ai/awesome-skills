@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-protocol-reverse-engineering",
+  "name": "protocol-reverse-engineering",
+  "slug": "protocol-reverse-engineering",
+  "description": "Master network protocol reverse engineering including packet analysis, protocol dissection, and custom protocol documentation. Use when analyzing network traffic, understanding proprietary protocols, or debugging network communication.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/protocol-reverse-engineering",
+  "content": "\n# Protocol Reverse Engineering\n\nComprehensive techniques for capturing, analyzing, and documenting network protocols for security research, interoperability, and debugging.\n\n## Use this skill when\n\n- Working on protocol reverse engineering tasks or workflows\n- Needing guidance, best practices, or checklists for protocol reverse engineering\n\n## Do not use this skill when\n\n- The task is unrelated to protocol reverse engineering\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai",
+    "workflow",
+    "document",
+    "security"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:06.993Z"
+}

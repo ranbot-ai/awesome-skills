@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-uv-package-manager",
+  "name": "uv-package-manager",
+  "slug": "uv-package-manager",
+  "description": "Master the uv package manager for fast Python dependency management, virtual environments, and modern Python project workflows. Use when setting up Python projects, managing dependencies, or optimizing Python development workflows with uv.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/uv-package-manager",
+  "content": "\n# UV Package Manager\n\nComprehensive guide to using uv, an extremely fast Python package installer and resolver written in Rust, for modern Python project management and dependency workflows.\n\n## Use this skill when\n\n- Setting up new Python projects quickly\n- Managing Python dependencies faster than pip\n- Creating and managing virtual environments\n- Installing Python interpreters\n- Resolving dependency conflicts efficiently\n- Migrating from pip/pip-tools/poetry\n- Speeding up CI/CD pipelines\n- Managing monorepo Python projects\n- Working with lockfiles for reproducible builds\n- Optimizing Docker builds with Python dependencies\n\n## Do not use this skill when\n\n- The task is unrelated to uv package manager\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "python",
+    "ai",
+    "workflow",
+    "docker"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:56.988Z"
+}

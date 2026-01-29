@@ -1,0 +1,21 @@
+{
+  "id": "antigravity-vector-database-engineer",
+  "name": "vector-database-engineer",
+  "slug": "vector-database-engineer",
+  "description": "Expert in vector databases, embedding strategies, and semantic search implementation. Masters Pinecone, Weaviate, Qdrant, Milvus, and pgvector for RAG applications, recommendation systems, and similar",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/vector-database-engineer",
+  "content": "\n# Vector Database Engineer\n\nExpert in vector databases, embedding strategies, and semantic search implementation. Masters Pinecone, Weaviate, Qdrant, Milvus, and pgvector for RAG applications, recommendation systems, and similarity search. Use PROACTIVELY for vector search implementation, embedding optimization, or semantic retrieval systems.\n\n## Do not use this skill when\n\n- The task is unrelated to vector database engineer\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Capabilities\n\n- Vector database selection and architecture\n- Embedding model selection and optimization\n- Index configuration (HNSW, IVF, PQ)\n- Hybrid search (vector + keyword) implementation\n- Chunking strategies for documents\n- Metadata filtering and pre/post-filtering\n- Performance tuning and scaling\n\n## Use this skill when\n\n- Building RAG (Retrieval Augmented Generation) systems\n- Implementing semantic search over documents\n- Creating recommendation engines\n- Building image/audio similarity search\n- Optimizing vector search latency and recall\n- Scaling vector operations to millions of vectors\n\n## Workflow\n\n1. Analyze data characteristics and query patterns\n2. Select appropriate embedding model\n3. Design chunking and preprocessing pipeline\n4. Choose vector database and index type\n5. Configure metadata schema for filtering\n6. Implement hybrid search if needed\n7. Optimize for latency/recall tradeoffs\n8. Set up monitoring and reindexing strategies\n\n## Best Practices\n\n- Choose embedding dimensions based on use case (384-1536)\n- Implement proper chunking with overlap\n- Use metadata filtering to reduce search space\n- Monitor embedding drift over time\n- Plan for index rebuilding\n- Cache frequent queries\n- Test recall vs latency tradeoffs\n",
+  "tags": [
+    "ai",
+    "workflow",
+    "design",
+    "document",
+    "image",
+    "rag"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:57.487Z"
+}

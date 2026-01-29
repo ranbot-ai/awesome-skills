@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-modern-javascript-patterns",
+  "name": "modern-javascript-patterns",
+  "slug": "modern-javascript-patterns",
+  "description": "Master ES6+ features including async/await, destructuring, spread operators, arrow functions, promises, modules, iterators, generators, and functional programming patterns for writing clean, efficient JavaScript code. Use when refactoring legacy code, implementing modern patterns, or optimizing Java",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/modern-javascript-patterns",
+  "content": "\n# Modern JavaScript Patterns\n\nComprehensive guide for mastering modern JavaScript (ES6+) features, functional programming patterns, and best practices for writing clean, maintainable, and performant code.\n\n## Use this skill when\n\n- Refactoring legacy JavaScript to modern syntax\n- Implementing functional programming patterns\n- Optimizing JavaScript performance\n- Writing maintainable and readable code\n- Working with asynchronous operations\n- Building modern web applications\n- Migrating from callbacks to Promises/async-await\n- Implementing data transformation pipelines\n\n## Do not use this skill when\n\n- The task is unrelated to modern javascript patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "javascript",
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:59:42.248Z"
+}

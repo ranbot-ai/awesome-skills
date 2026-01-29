@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-godot-gdscript-patterns",
+  "name": "godot-gdscript-patterns",
+  "slug": "godot-gdscript-patterns",
+  "description": "Master Godot 4 GDScript patterns including signals, scenes, state machines, and optimization. Use when building Godot games, implementing game systems, or learning GDScript best practices.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/godot-gdscript-patterns",
+  "content": "\n# Godot GDScript Patterns\n\nProduction patterns for Godot 4.x game development with GDScript, covering architecture, signals, scenes, and optimization.\n\n## Use this skill when\n\n- Building games with Godot 4\n- Implementing game systems in GDScript\n- Designing scene architecture\n- Managing game state\n- Optimizing GDScript performance\n- Learning Godot best practices\n\n## Do not use this skill when\n\n- The task is unrelated to godot gdscript patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai",
+    "design"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:59:13.745Z"
+}

@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-helm-chart-scaffolding",
+  "name": "helm-chart-scaffolding",
+  "slug": "helm-chart-scaffolding",
+  "description": "Design, organize, and manage Helm charts for templating and packaging Kubernetes applications with reusable configurations. Use when creating Helm charts, packaging Kubernetes applications, or implementing templated deployments.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/helm-chart-scaffolding",
+  "content": "\n# Helm Chart Scaffolding\n\nComprehensive guidance for creating, organizing, and managing Helm charts for packaging and deploying Kubernetes applications.\n\n## Use this skill when\n\nUse this skill when you need to:\n- Create new Helm charts from scratch\n- Package Kubernetes applications for distribution\n- Manage multi-environment deployments with Helm\n- Implement templating for reusable Kubernetes manifests\n- Set up Helm chart repositories\n- Follow Helm best practices and conventions\n\n## Do not use this skill when\n\n- The task is unrelated to helm chart scaffolding\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai",
+    "template",
+    "design",
+    "kubernetes"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:59:15.566Z"
+}

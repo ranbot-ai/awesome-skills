@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-billing-automation",
+  "name": "billing-automation",
+  "slug": "billing-automation",
+  "description": "Build automated billing systems for recurring payments, invoicing, subscription lifecycle, and dunning management. Use when implementing subscription billing, automating invoicing, or managing recurring payment systems.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/billing-automation",
+  "content": "\n# Billing Automation\n\nMaster automated billing systems including recurring billing, invoice generation, dunning management, proration, and tax calculation.\n\n## Use this skill when\n\n- Implementing SaaS subscription billing\n- Automating invoice generation and delivery\n- Managing failed payment recovery (dunning)\n- Calculating prorated charges for plan changes\n- Handling sales tax, VAT, and GST\n- Processing usage-based billing\n- Managing billing cycles and renewals\n\n## Do not use this skill when\n\n- You only need a one-off invoice or manual billing\n- The task is unrelated to billing or subscriptions\n- You cannot change pricing, plans, or billing flows\n\n## Instructions\n\n- Define plans, pricing, billing intervals, and proration rules.\n- Map subscription lifecycle states and renewal/cancellation behavior.\n- Implement invoicing, payments, retries, and dunning workflows.\n- Model taxes and compliance requirements per region.\n- Validate with sandbox payments and reconcile ledger outputs.\n- If detailed templates are required, open `resources/implementation-playbook.md`.\n\n## Safety\n\n- Do not charge real customers in testing environments.\n- Verify tax handling and compliance obligations before production rollout.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns, checklists, and examples.\n",
+  "tags": [
+    "ai",
+    "automation",
+    "workflow",
+    "template"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:58:09.922Z"
+}

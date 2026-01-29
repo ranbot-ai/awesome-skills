@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-gdpr-data-handling",
+  "name": "gdpr-data-handling",
+  "slug": "gdpr-data-handling",
+  "description": "Implement GDPR-compliant data handling with consent management, data subject rights, and privacy by design. Use when building systems that process EU personal data, implementing privacy controls, or conducting GDPR compliance reviews.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gdpr-data-handling",
+  "content": "\n# GDPR Data Handling\n\nPractical implementation guide for GDPR-compliant data processing, consent management, and privacy controls.\n\n## Use this skill when\n\n- Building systems that process EU personal data\n- Implementing consent management\n- Handling data subject requests (DSRs)\n- Conducting GDPR compliance reviews\n- Designing privacy-first architectures\n- Creating data processing agreements\n\n## Do not use this skill when\n\n- The task is unrelated to gdpr data handling\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai",
+    "design"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:59:09.145Z"
+}

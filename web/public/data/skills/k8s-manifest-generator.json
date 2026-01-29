@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-k8s-manifest-generator",
+  "name": "k8s-manifest-generator",
+  "slug": "k8s-manifest-generator",
+  "description": "Create production-ready Kubernetes manifests for Deployments, Services, ConfigMaps, and Secrets following best practices and security standards. Use when generating Kubernetes YAML manifests, creating K8s resources, or implementing production-grade Kubernetes configurations.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/k8s-manifest-generator",
+  "content": "\n# Kubernetes Manifest Generator\n\nStep-by-step guidance for creating production-ready Kubernetes manifests including Deployments, Services, ConfigMaps, Secrets, and PersistentVolumeClaims.\n\n## Use this skill when\n\nUse this skill when you need to:\n- Create new Kubernetes Deployment manifests\n- Define Service resources for network connectivity\n- Generate ConfigMap and Secret resources for configuration management\n- Create PersistentVolumeClaim manifests for stateful workloads\n- Follow Kubernetes best practices and naming conventions\n- Implement resource limits, health checks, and security contexts\n- Design manifests for multi-environment deployments\n\n## Do not use this skill when\n\n- The task is unrelated to kubernetes manifest generator\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai",
+    "design",
+    "security",
+    "kubernetes"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:59:24.741Z"
+}

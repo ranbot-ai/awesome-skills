@@ -1,0 +1,20 @@
+{
+  "id": "antigravity-anti-reversing-techniques",
+  "name": "anti-reversing-techniques",
+  "slug": "anti-reversing-techniques",
+  "description": "Understand anti-reversing, obfuscation, and protection techniques encountered during software analysis. Use when analyzing protected binaries, bypassing anti-debugging for authorized analysis, or understanding software protection mechanisms.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/anti-reversing-techniques",
+  "content": "\n> **AUTHORIZED USE ONLY**: This skill contains dual-use security techniques. Before proceeding with any bypass or analysis:\n> 1. **Verify authorization**: Confirm you have explicit written permission from the software owner, or are operating within a legitimate security context (CTF, authorized pentest, malware analysis, security research)\n> 2. **Document scope**: Ensure your activities fall within the defined scope of your authorization\n> 3. **Legal compliance**: Understand that unauthorized bypassing of software protection may violate laws (CFAA, DMCA anti-circumvention, etc.)\n>\n> **Legitimate use cases**: Malware analysis, authorized penetration testing, CTF competitions, academic security research, analyzing software you own/have rights to\n\n## Use this skill when\n\n- Analyzing protected binaries with explicit authorization\n- Conducting malware analysis or security research in scope\n- Participating in CTFs or approved training exercises\n- Understanding anti-debugging or obfuscation techniques for defense\n\n## Do not use this skill when\n\n- You lack written authorization or a defined scope\n- The goal is to bypass protections for piracy or misuse\n- Legal or policy restrictions prohibit analysis\n\n## Instructions\n\n1. Confirm written authorization, scope, and legal constraints.\n2. Identify protection mechanisms and choose safe analysis methods.\n3. Document findings and avoid modifying artifacts unnecessarily.\n4. Provide defensive recommendations and mitigation guidance.\n\n## Safety\n\n- Do not share bypass steps outside the authorized context.\n- Preserve evidence and maintain chain-of-custody for malware cases.\n\nRefer to `resources/implementation-playbook.md` for detailed techniques and examples.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed techniques and examples.\n",
+  "tags": [
+    "ai",
+    "document",
+    "security",
+    "pentest",
+    "aws"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:57:55.912Z"
+}

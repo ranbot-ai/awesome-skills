@@ -1,0 +1,20 @@
+{
+  "id": "antigravity-fastapi-templates",
+  "name": "fastapi-templates",
+  "slug": "fastapi-templates",
+  "description": "Create production-ready FastAPI projects with async patterns, dependency injection, and comprehensive error handling. Use when building new FastAPI applications or setting up backend API projects.",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fastapi-templates",
+  "content": "\n# FastAPI Project Templates\n\nProduction-ready FastAPI project structures with async patterns, dependency injection, middleware, and best practices for building high-performance APIs.\n\n## Use this skill when\n\n- Starting new FastAPI projects from scratch\n- Implementing async REST APIs with Python\n- Building high-performance web services and microservices\n- Creating async applications with PostgreSQL, MongoDB\n- Setting up API projects with proper structure and testing\n\n## Do not use this skill when\n\n- The task is unrelated to fastapi project templates\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "python",
+    "api",
+    "ai",
+    "template",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:58:58.847Z"
+}

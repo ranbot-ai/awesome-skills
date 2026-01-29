@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-conductor-validator",
+  "name": "conductor-validator",
+  "slug": "conductor-validator",
+  "description": "Validates Conductor project artifacts for completeness, consistency, and correctness. Use after setup, when diagnosing issues, or before implementation to verify project context.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/conductor-validator",
+  "content": "\n# Check if conductor directory exists\nls -la conductor/\n\n# Find all track directories\nls -la conductor/tracks/\n\n# Check for required files\nls conductor/index.md conductor/product.md conductor/tech-stack.md conductor/workflow.md conductor/tracks.md\n```\n\n## Use this skill when\n\n- Working on check if conductor directory exists tasks or workflows\n- Needing guidance, best practices, or checklists for check if conductor directory exists\n\n## Do not use this skill when\n\n- The task is unrelated to check if conductor directory exists\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Pattern Matching\n\n**Status markers in tracks.md:**\n\n```\n- [ ] Track Name  # Not started\n- [~] Track Name  # In progress\n- [x] Track Name  # Complete\n```\n\n**Task markers in plan.md:**\n\n```\n- [ ] Task description  # Pending\n- [~] Task description  # In progress\n- [x] Task description  # Complete\n```\n\n**Track ID pattern:**\n\n```\n<type>_<name>_<YYYYMMDD>\nExample: feature_user_auth_20250115\n```\n",
+  "tags": [
+    "ai",
+    "workflow"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:58:30.968Z"
+}

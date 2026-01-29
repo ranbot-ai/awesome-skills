@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-react-modernization",
+  "name": "react-modernization",
+  "slug": "react-modernization",
+  "description": "Upgrade React applications to latest versions, migrate from class components to hooks, and adopt concurrent features. Use when modernizing React codebases, migrating to React Hooks, or upgrading to latest React versions.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/react-modernization",
+  "content": "\n# React Modernization\n\nMaster React version upgrades, class to hooks migration, concurrent features adoption, and codemods for automated transformation.\n\n## Use this skill when\n\n- Upgrading React applications to latest versions\n- Migrating class components to functional components with hooks\n- Adopting concurrent React features (Suspense, transitions)\n- Applying codemods for automated refactoring\n- Modernizing state management patterns\n- Updating to TypeScript\n- Improving performance with React 18+ features\n\n## Do not use this skill when\n\n- The task is unrelated to react modernization\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "typescript",
+    "react",
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:11.548Z"
+}

@@ -1,0 +1,21 @@
+{
+  "id": "antigravity-typescript-advanced-types",
+  "name": "typescript-advanced-types",
+  "slug": "typescript-advanced-types",
+  "description": "Master TypeScript's advanced type system including generics, conditional types, mapped types, template literals, and utility types for building type-safe applications. Use when implementing complex type logic, creating reusable type utilities, or ensuring compile-time type safety in TypeScript proje",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/typescript-advanced-types",
+  "content": "\n# TypeScript Advanced Types\n\nComprehensive guidance for mastering TypeScript's advanced type system including generics, conditional types, mapped types, template literal types, and utility types for building robust, type-safe applications.\n\n## Use this skill when\n\n- Building type-safe libraries or frameworks\n- Creating reusable generic components\n- Implementing complex type inference logic\n- Designing type-safe API clients\n- Building form validation systems\n- Creating strongly-typed configuration objects\n- Implementing type-safe state management\n- Migrating JavaScript codebases to TypeScript\n\n## Do not use this skill when\n\n- The task is unrelated to typescript advanced types\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "javascript",
+    "typescript",
+    "api",
+    "ai",
+    "template",
+    "design"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:52.418Z"
+}

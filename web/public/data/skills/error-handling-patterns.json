@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-error-handling-patterns",
+  "name": "error-handling-patterns",
+  "slug": "error-handling-patterns",
+  "description": "Master error handling patterns across languages including exceptions, Result types, error propagation, and graceful degradation to build resilient applications. Use when implementing error handling, designing APIs, or improving application reliability.",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/error-handling-patterns",
+  "content": "\n# Error Handling Patterns\n\nBuild resilient applications with robust error handling strategies that gracefully handle failures and provide excellent debugging experiences.\n\n## Use this skill when\n\n- Implementing error handling in new features\n- Designing error-resilient APIs\n- Debugging production issues\n- Improving application reliability\n- Creating better error messages for users and developers\n- Implementing retry and circuit breaker patterns\n- Handling async/concurrent errors\n- Building fault-tolerant distributed systems\n\n## Do not use this skill when\n\n- The task is unrelated to error handling patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "api",
+    "ai",
+    "design",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:58:56.678Z"
+}

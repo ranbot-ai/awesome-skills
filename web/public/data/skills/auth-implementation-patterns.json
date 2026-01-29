@@ -1,0 +1,20 @@
+{
+  "id": "antigravity-auth-implementation-patterns",
+  "name": "auth-implementation-patterns",
+  "slug": "auth-implementation-patterns",
+  "description": "Master authentication and authorization patterns including JWT, OAuth2, session management, and RBAC to build secure, scalable access control systems. Use when implementing auth systems, securing APIs, or debugging security issues.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/auth-implementation-patterns",
+  "content": "\n# Authentication & Authorization Implementation Patterns\n\nBuild secure, scalable authentication and authorization systems using industry-standard patterns and modern best practices.\n\n## Use this skill when\n\n- Implementing user authentication systems\n- Securing REST or GraphQL APIs\n- Adding OAuth2/social login or SSO\n- Designing session management or RBAC\n- Debugging authentication or authorization issues\n\n## Do not use this skill when\n\n- You only need UI copy or login page styling\n- The task is infrastructure-only without identity concerns\n- You cannot change auth policies or credential storage\n\n## Instructions\n\n- Define users, tenants, flows, and threat model constraints.\n- Choose auth strategy (session, JWT, OIDC) and token lifecycle.\n- Design authorization model and policy enforcement points.\n- Plan secrets storage, rotation, logging, and audit requirements.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Safety\n\n- Never log secrets, tokens, or credentials.\n- Enforce least privilege and secure storage for keys.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "api",
+    "ai",
+    "design",
+    "security",
+    "rag"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:58:03.076Z"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-unity-ecs-patterns",
+  "name": "unity-ecs-patterns",
+  "slug": "unity-ecs-patterns",
+  "description": "Master Unity ECS (Entity Component System) with DOTS, Jobs, and Burst for high-performance game development. Use when building data-oriented games, optimizing performance, or working with large entity counts.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/unity-ecs-patterns",
+  "content": "\n# Unity ECS Patterns\n\nProduction patterns for Unity's Data-Oriented Technology Stack (DOTS) including Entity Component System, Job System, and Burst Compiler.\n\n## Use this skill when\n\n- Building high-performance Unity games\n- Managing thousands of entities efficiently\n- Implementing data-oriented game systems\n- Optimizing CPU-bound game logic\n- Converting OOP game code to ECS\n- Using Jobs and Burst for parallelization\n\n## Do not use this skill when\n\n- The task is unrelated to unity ecs patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:55.672Z"
+}

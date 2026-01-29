@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-bash-defensive-patterns",
+  "name": "bash-defensive-patterns",
+  "slug": "bash-defensive-patterns",
+  "description": "Master defensive Bash programming techniques for production-grade scripts. Use when writing robust shell scripts, CI/CD pipelines, or system utilities requiring fault tolerance and safety.",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bash-defensive-patterns",
+  "content": "\n# Bash Defensive Patterns\n\nComprehensive guidance for writing production-ready Bash scripts using defensive programming techniques, error handling, and safety best practices to prevent common pitfalls and ensure reliability.\n\n## Use this skill when\n\n- Writing production automation scripts\n- Building CI/CD pipeline scripts\n- Creating system administration utilities\n- Developing error-resilient deployment automation\n- Writing scripts that must handle edge cases safely\n- Building maintainable shell script libraries\n- Implementing comprehensive logging and monitoring\n- Creating scripts that must work across different platforms\n\n## Do not use this skill when\n\n- You need a single ad-hoc shell command, not a script\n- The target environment requires strict POSIX sh only\n- The task is unrelated to shell scripting or automation\n\n## Instructions\n\n1. Confirm the target shell, OS, and execution environment.\n2. Enable strict mode and safe defaults from the start.\n3. Validate inputs, quote variables, and handle files safely.\n4. Add logging, error traps, and basic tests.\n\n## Safety\n\n- Avoid destructive commands without confirmation or dry-run flags.\n- Do not run scripts as root unless strictly required.\n\nRefer to `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.\n",
+  "tags": [
+    "ai",
+    "automation",
+    "template",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:58:07.817Z"
+}

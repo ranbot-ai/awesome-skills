@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-architecture-patterns",
+  "name": "architecture-patterns",
+  "slug": "architecture-patterns",
+  "description": "Implement proven backend architecture patterns including Clean Architecture, Hexagonal Architecture, and Domain-Driven Design. Use when architecting complex backend systems or refactoring existing applications for better maintainability.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/architecture-patterns",
+  "content": "\n# Architecture Patterns\n\nMaster proven backend architecture patterns including Clean Architecture, Hexagonal Architecture, and Domain-Driven Design to build maintainable, testable, and scalable systems.\n\n## Use this skill when\n\n- Designing new backend systems from scratch\n- Refactoring monolithic applications for better maintainability\n- Establishing architecture standards for your team\n- Migrating from tightly coupled to loosely coupled architectures\n- Implementing domain-driven design principles\n- Creating testable and mockable codebases\n- Planning microservices decomposition\n\n## Do not use this skill when\n\n- You only need small, localized refactors\n- The system is primarily frontend with no backend architecture changes\n- You need implementation details without architectural design\n\n## Instructions\n\n1. Clarify domain boundaries, constraints, and scalability targets.\n2. Select an architecture pattern that fits the domain complexity.\n3. Define module boundaries, interfaces, and dependency rules.\n4. Provide migration steps and validation checks.\n\nRefer to `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.\n",
+  "tags": [
+    "ai",
+    "template",
+    "design",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:58:01.072Z"
+}

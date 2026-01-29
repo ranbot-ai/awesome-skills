@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-openapi-spec-generation",
+  "name": "openapi-spec-generation",
+  "slug": "openapi-spec-generation",
+  "description": "Generate and maintain OpenAPI 3.1 specifications from code, design-first specs, and validation patterns. Use when creating API documentation, generating SDKs, or ensuring API contract compliance.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/openapi-spec-generation",
+  "content": "\n# OpenAPI Spec Generation\n\nComprehensive patterns for creating, maintaining, and validating OpenAPI 3.1 specifications for RESTful APIs.\n\n## Use this skill when\n\n- Creating API documentation from scratch\n- Generating OpenAPI specs from existing code\n- Designing API contracts (design-first approach)\n- Validating API implementations against specs\n- Generating client SDKs from specs\n- Setting up API documentation portals\n\n## Do not use this skill when\n\n- The task is unrelated to openapi spec generation\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "api",
+    "ai",
+    "design",
+    "document"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:59:52.243Z"
+}

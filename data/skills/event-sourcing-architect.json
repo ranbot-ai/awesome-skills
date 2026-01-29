@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-event-sourcing-architect",
+  "name": "event-sourcing-architect",
+  "slug": "event-sourcing-architect",
+  "description": "Expert in event sourcing, CQRS, and event-driven architecture patterns. Masters event store design, projection building, saga orchestration, and eventual consistency patterns. Use PROACTIVELY for event-sourced systems, audit trails, or temporal queries.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/event-sourcing-architect",
+  "content": "\n# Event Sourcing Architect\n\nExpert in event sourcing, CQRS, and event-driven architecture patterns. Masters event store design, projection building, saga orchestration, and eventual consistency patterns. Use PROACTIVELY for event-sourced systems, audit trail requirements, or complex domain modeling with temporal queries.\n\n## Capabilities\n\n- Event store design and implementation\n- CQRS (Command Query Responsibility Segregation) patterns\n- Projection building and read model optimization\n- Saga and process manager orchestration\n- Event versioning and schema evolution\n- Snapshotting strategies for performance\n- Eventual consistency handling\n\n## Use this skill when\n\n- Building systems requiring complete audit trails\n- Implementing complex business workflows with compensating actions\n- Designing systems needing temporal queries (\"what was state at time X\")\n- Separating read and write models for performance\n- Building event-driven microservices architectures\n- Implementing undo/redo or time-travel debugging\n\n## Do not use this skill when\n\n- The domain is simple and CRUD is sufficient\n- You cannot support event store operations or projections\n- Strong immediate consistency is required everywhere\n\n## Instructions\n\n1. Identify aggregate boundaries and event streams\n2. Design events as immutable facts\n3. Implement command handlers and event application\n4. Build projections for query requirements\n5. Design saga/process managers for cross-aggregate workflows\n6. Implement snapshotting for long-lived aggregates\n7. Set up event versioning strategy\n\n## Safety\n\n- Never mutate or delete committed events in production.\n- Rebuild projections in staging before running in production.\n\n## Best Practices\n\n- Events are facts - never delete or modify them\n- Keep events small and focused\n- Version events from day one\n- Design for eventual consistency\n- Use correlation IDs for tracing\n- Implement idempotent event handlers\n- Plan for projection rebuilding\n",
+  "tags": [
+    "ai",
+    "workflow",
+    "design",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T06:58:57.447Z"
+}

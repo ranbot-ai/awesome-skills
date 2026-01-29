@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-python-packaging",
+  "name": "python-packaging",
+  "slug": "python-packaging",
+  "description": "Create distributable Python packages with proper project structure, setup.py/pyproject.toml, and publishing to PyPI. Use when packaging Python libraries, creating CLI tools, or distributing Python code.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/python-packaging",
+  "content": "\n# Python Packaging\n\nComprehensive guide to creating, structuring, and distributing Python packages using modern packaging tools, pyproject.toml, and publishing to PyPI.\n\n## Use this skill when\n\n- Creating Python libraries for distribution\n- Building command-line tools with entry points\n- Publishing packages to PyPI or private repositories\n- Setting up Python project structure\n- Creating installable packages with dependencies\n- Building wheels and source distributions\n- Versioning and releasing Python packages\n- Creating namespace packages\n- Implementing package metadata and classifiers\n\n## Do not use this skill when\n\n- The task is unrelated to python packaging\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
+  "tags": [
+    "python",
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-29T07:00:07.819Z"
+}
