@@ -13773,6 +13773,29 @@
       "scrapedAt": "2026-01-29T07:00:55.672Z"
     },
     {
+      "id": "antigravity-unreal-engine-cpp-pro",
+      "name": "unreal-engine-cpp-pro",
+      "slug": "unreal-engine-cpp-pro",
+      "description": "Expert guide for Unreal Engine 5.x C++ development, covering UObject hygiene, performance patterns, and best practices.",
+      "category": "Creative & Media",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/unreal-engine-cpp-pro",
+      "content": "\n# Unreal Engine C++ Pro\n\nThis skill provides expert-level guidelines for developing with Unreal Engine 5 using C++. It focuses on writing robust, performant, and standard-compliant code.\n\n## When to Use\n\nUse this skill when:\n- Developing C++ code for Unreal Engine 5.x projects\n- Writing Actors, Components, or UObject-derived classes\n- Optimizing performance-critical code in Unreal Engine\n- Debugging memory leaks or garbage collection issues\n- Implementing Blueprint-exposed functionality\n- Following Epic Games' coding standards and conventions\n- Working with Unreal's reflection system (UCLASS, USTRUCT, UFUNCTION)\n- Managing asset loading and soft references\n\nDo not use this skill when:\n- Working with Blueprint-only projects (no C++ code)\n- Developing for Unreal Engine versions prior to 5.x\n- Working on non-Unreal game engines\n- The task is unrelated to Unreal Engine development\n\n## Core Principles\n\n1.  **UObject & Garbage Collection**:\n    *   Always use `UPROPERTY()` for `UObject*` member variables to ensure they are tracked by the Garbage Collector (GC).\n    *   Use `TStrongObjectPtr<>` if you need to keep a root reference outside of a UObject graph, but prefer `addToRoot()` generally.\n    *   Understand the `IsValid()` check vs `nullptr`. `IsValid()` handles pending kill state safely.\n\n2.  **Unreal Reflection System**:\n    *   Use `UCLASS()`, `USTRUCT()`, `UENUM()`, `UFUNCTION()` to expose types to the reflection system and Blueprints.\n    *   Minimize `BlueprintReadWrite` when possible; prefer `BlueprintReadOnly` for state that shouldn't be trampled by logic in UI/Level BPs.\n\n3.  **Performance First**:\n    *   **Tick**: Disable Ticking (`bCanEverTick = false`) by default. Only enable it if absolutely necessary. Prefer timers (`GetWorldTimerManager()`) or event-driven logic.\n    *   **Casting**: Avoid `Cast<T>()` in hot loops. Cache references in `BeginPlay`.\n    *   **Structs vs Classes**: Use `F` structs for data-heavy, non-UObject types to reduce overhead.\n\n## Naming Conventions (Strict)\n\nFollow Epic Games' coding standard:\n\n*   **Templates**: Prefix with `T` (e.g., `TArray`, `TMap`).\n*   **UObject**: Prefix with `U` (e.g., `UCharacterMovementComponent`).\n*   **AActor**: Prefix with `A` (e.g., `AMyGameMode`).\n*   **SWidget**: Prefix with `S` (Slate widgets).\n*   **Structs**: Prefix with `F` (e.g., `FVector`).\n*   **Enums**: Prefix with `E` (e.g., `EWeaponState`).\n*   **Interfaces**: Prefix with `I` (e.g., `IInteractable`).\n*   **Booleans**: Prefix with `b` (e.g., `bIsDead`).\n\n## Common Patterns\n\n### 1. Robust Component Lookup\nAvoid `GetComponentByClass` in `Tick`. Do it in `PostInitializeComponents` or `BeginPlay`.\n\n```cpp\nvoid AMyCharacter::PostInitializeComponents() {\n    Super::PostInitializeComponents();\n    HealthComp = FindComponentByClass<UHealthComponent>();\n    check(HealthComp); // Fail hard in dev if missing\n}\n```\n\n### 2. Interface Implementation\nUse interfaces to decouple systems (e.g., Interaction system).\n\n```cpp\n// Interface call check\nif (TargetActor->Implements<UInteractable>()) {\n    IInteractable::Execute_OnInteract(TargetActor, this);\n}\n```\n\n### 3. Async Loading (Soft References)\nAvoid hard references (`UPROPERTY(EditDefaultsOnly) TSubclassOf<AActor>`) for massive assets which force load orders. Use `TSoftClassPtr` or `TSoftObjectPtr`.\n\n```cpp\nUPROPERTY(EditAnywhere, BlueprintReadWrite)\nTSoftClassPtr<AWeapon> WeaponClassToLoad;\n\nvoid AMyCharacter::Equip() {\n    if (WeaponClassToLoad.IsPending()) {\n        WeaponClassToLoad.LoadSynchronous(); // Or use StreamableManager for async\n    }\n}\n```\n\n## Debugging\n\n*   **Logging**: Use `UE_LOG` with custom categories.\n    ```cpp\n    DEFINE_LOG_CATEGORY_STATIC(LogMyGame, Log, All);\n    UE_LOG(LogMyGame, Warning, TEXT(\"Health is low: %f\"), CurrentHealth);\n    ```\n*   **Screen Messages**:\n    ```cpp\n    if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT(\"Died!\"));\n    ```\n*   **Visual Logger**: extremely useful for AI debugging. Implement `IVisualLoggerDebugSnapshotInterface`.\n\n## Checklist before PR\n\n- [ ] Does this Actor need to Tick? Can it be a Timer?\n- [ ] Are all `UObject*` members wrapped in `UPROPERTY`?\n- [ ] Are hard references (TSubclassOf) causing load chains? Can they be Soft Ptrs?\n- [ ] Did you clean up verified delegates in `EndPlay`?\n",
+      "tags": [
+        "ai",
+        "template"
+      ],
+      "useCases": [
+        "Developing C++ code for Unreal Engine 5.x projects",
+        "Writing Actors, Components, or UObject-derived classes",
+        "Optimizing performance-critical code in Unreal Engine",
+        "Debugging memory leaks or garbage collection issues",
+        "Implementing Blueprint-exposed functionality"
+      ],
+      "scrapedAt": "2026-01-30T07:02:59.077Z"
+    },
+    {
       "id": "openhands-update-pr-description",
       "name": "update_pr_description",
       "slug": "update-pr-description",
@@ -14744,7 +14767,7 @@
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 60
+      "count": 61
     },
     {
       "id": "business-marketing",
@@ -14788,48 +14811,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 39298
+      "stars": 40099
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 1,
-      "stars": 57421
+      "stars": 58409
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 27581
+      "stars": 28038
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 67236
+      "stars": 67291
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 773
+      "stars": 779
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillCount": 549,
-      "newSkillCount": 313,
-      "stars": 5053
+      "skillCount": 550,
+      "newSkillCount": 11,
+      "stars": 5411
     }
   ],
-  "lastUpdated": "2026-01-29T07:01:06.490Z",
+  "lastUpdated": "2026-01-30T07:03:11.883Z",
   "stats": {
-    "totalSkills": 647,
-    "newSkills": 322,
-    "scrapedAt": "2026-01-29T07:01:06.490Z"
+    "totalSkills": 648,
+    "newSkills": 20,
+    "scrapedAt": "2026-01-30T07:03:11.883Z"
   }
 }
