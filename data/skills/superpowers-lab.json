@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-superpowers-lab",
+  "name": "superpowers-lab",
+  "slug": "superpowers-lab",
+  "description": "Lab environment for Claude superpowers",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/superpowers-lab",
+  "content": "\n# Superpowers Lab\n\n## Overview\n\nLab environment for Claude superpowers\n\n## When to Use This Skill\n\nUse this skill when you need to work with lab environment for claude superpowers.\n\n## Instructions\n\nThis skill provides guidance and patterns for lab environment for claude superpowers.\n\nFor more information, see the [source repository](https://github.com/obra/superpowers-lab).\n",
+  "tags": [
+    "claude"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:54:30.515Z"
+}

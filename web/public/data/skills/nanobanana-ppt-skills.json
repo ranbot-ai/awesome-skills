@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-nanobanana-ppt-skills",
+  "name": "nanobanana-ppt-skills",
+  "slug": "nanobanana-ppt-skills",
+  "description": "AI-powered PPT generation with document analysis and styled images",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/nanobanana-ppt-skills",
+  "content": "\n# Nanobanana Ppt Skills\n\n## Overview\n\nAI-powered PPT generation with document analysis and styled images\n\n## When to Use This Skill\n\nUse this skill when you need to work with ai-powered ppt generation with document analysis and styled images.\n\n## Instructions\n\nThis skill provides guidance and patterns for ai-powered ppt generation with document analysis and styled images.\n\nFor more information, see the [source repository](https://github.com/op7418/NanoBanana-PPT-Skills).\n",
+  "tags": [
+    "ai",
+    "document",
+    "image"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:53:15.006Z"
+}

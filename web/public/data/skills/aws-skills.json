@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-aws-skills",
+  "name": "aws-skills",
+  "slug": "aws-skills",
+  "description": "AWS development with infrastructure automation and cloud architecture patterns",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-skills",
+  "content": "\n# Aws Skills\n\n## Overview\n\nAWS development with infrastructure automation and cloud architecture patterns\n\n## When to Use This Skill\n\nUse this skill when you need to work with aws development with infrastructure automation and cloud architecture patterns.\n\n## Instructions\n\nThis skill provides guidance and patterns for aws development with infrastructure automation and cloud architecture patterns.\n\nFor more information, see the [source repository](https://github.com/zxkane/aws-skills).\n",
+  "tags": [
+    "automation",
+    "aws"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:50:46.780Z"
+}

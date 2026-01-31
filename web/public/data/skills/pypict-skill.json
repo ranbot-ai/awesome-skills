@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-pypict-skill",
+  "name": "pypict-skill",
+  "slug": "pypict-skill",
+  "description": "Pairwise test generation",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pypict-skill",
+  "content": "\n# Pypict Skill\n\n## Overview\n\nPairwise test generation\n\n## When to Use This Skill\n\nUse this skill when you need to work with pairwise test generation.\n\n## Instructions\n\nThis skill provides guidance and patterns for pairwise test generation.\n\nFor more information, see the [source repository](https://github.com/omkamal/pypict-claude-skill/blob/main/SKILL.md).\n",
+  "tags": [
+    "claude",
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:53:45.362Z"
+}

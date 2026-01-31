@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-claude-scientific-skills",
+  "name": "claude-scientific-skills",
+  "slug": "claude-scientific-skills",
+  "description": "Scientific research and analysis skills",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/claude-scientific-skills",
+  "content": "\n# Claude Scientific Skills\n\n## Overview\n\nScientific research and analysis skills\n\n## When to Use This Skill\n\nUse this skill when you need to work with scientific research and analysis skills.\n\n## Instructions\n\nThis skill provides guidance and patterns for scientific research and analysis skills.\n\nFor more information, see the [source repository](https://github.com/K-Dense-AI/claude-scientific-skills).\n",
+  "tags": [
+    "claude",
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:51:08.192Z"
+}

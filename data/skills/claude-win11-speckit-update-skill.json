@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-claude-win11-speckit-update-skill",
+  "name": "claude-win11-speckit-update-skill",
+  "slug": "claude-win11-speckit-update-skill",
+  "description": "Windows 11 system management",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/claude-win11-speckit-update-skill",
+  "content": "\n# Claude Win11 Speckit Update Skill\n\n## Overview\n\nWindows 11 system management\n\n## When to Use This Skill\n\nUse this skill when you need to work with windows 11 system management.\n\n## Instructions\n\nThis skill provides guidance and patterns for windows 11 system management.\n\nFor more information, see the [source repository](https://github.com/NotMyself/claude-win11-speckit-update-skill).\n",
+  "tags": [
+    "claude"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:51:08.962Z"
+}

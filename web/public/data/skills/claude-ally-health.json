@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-claude-ally-health",
+  "name": "claude-ally-health",
+  "slug": "claude-ally-health",
+  "description": "A health assistant skill for medical information analysis, symptom tracking, and wellness guidance.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/claude-ally-health",
+  "content": "\n# Claude Ally Health\n\n## Overview\n\nA health assistant skill for medical information analysis, symptom tracking, and wellness guidance.\n\n## When to Use This Skill\n\nUse this skill when you need to work with a health assistant skill for medical information analysis, symptom tracking, and wellness guidance..\n\n## Instructions\n\nThis skill provides guidance and patterns for a health assistant skill for medical information analysis, symptom tracking, and wellness guidance..\n\nFor more information, see the [source repository](https://github.com/huifer/Claude-Ally-Health).\n",
+  "tags": [
+    "claude"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:51:06.505Z"
+}

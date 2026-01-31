@@ -1,0 +1,14 @@
+{
+  "id": "antigravity-makepad-skills",
+  "name": "makepad-skills",
+  "slug": "makepad-skills",
+  "description": "Makepad UI development skills for Rust apps: setup, patterns, shaders, packaging, and troubleshooting.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/makepad-skills",
+  "content": "\n# Makepad Skills\n\n## Overview\n\nMakepad UI development skills for Rust apps: setup, patterns, shaders, packaging, and troubleshooting.\n\n## When to Use This Skill\n\nUse this skill when you need to work with makepad ui development skills for rust apps: setup, patterns, shaders, packaging, and troubleshooting..\n\n## Instructions\n\nThis skill provides guidance and patterns for makepad ui development skills for rust apps: setup, patterns, shaders, packaging, and troubleshooting..\n\nFor more information, see the [source repository](https://github.com/ZhangHanDong/makepad-skills).\n",
+  "tags": [],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:53:00.845Z"
+}

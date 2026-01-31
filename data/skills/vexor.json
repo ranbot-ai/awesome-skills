@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-vexor",
+  "name": "vexor",
+  "slug": "vexor",
+  "description": "Vector-powered CLI for semantic file search with a Claude/Codex skill",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/vexor",
+  "content": "\n# Vexor\n\n## Overview\n\nVector-powered CLI for semantic file search with a Claude/Codex skill\n\n## When to Use This Skill\n\nUse this skill when you need to work with vector-powered cli for semantic file search with a claude/codex skill.\n\n## Instructions\n\nThis skill provides guidance and patterns for vector-powered cli for semantic file search with a claude/codex skill.\n\nFor more information, see the [source repository](https://github.com/scarletkc/vexor).\n",
+  "tags": [
+    "claude"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:54:57.395Z"
+}

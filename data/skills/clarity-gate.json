@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-clarity-gate",
+  "name": "clarity-gate",
+  "slug": "clarity-gate",
+  "description": "Pre-ingestion verification for epistemic quality in RAG systems with 9-point verification and Two-Round HITL workflow",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/clarity-gate",
+  "content": "\n# Clarity Gate\n\n## Overview\n\nPre-ingestion verification for epistemic quality in RAG systems with 9-point verification and Two-Round HITL workflow\n\n## When to Use This Skill\n\nUse this skill when you need to work with pre-ingestion verification for epistemic quality in rag systems with 9-point verification and two-round hitl workflow.\n\n## Instructions\n\nThis skill provides guidance and patterns for pre-ingestion verification for epistemic quality in rag systems with 9-point verification and two-round hitl workflow.\n\nFor more information, see the [source repository](https://github.com/frmoretto/clarity-gate).\n",
+  "tags": [
+    "workflow",
+    "rag"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:51:06.124Z"
+}

@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-fal-workflow",
+  "name": "fal-workflow",
+  "slug": "fal-workflow",
+  "description": "Generate workflow JSON files for chaining AI models",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fal-workflow",
+  "content": "\n# Fal Workflow\n\n## Overview\n\nGenerate workflow JSON files for chaining AI models\n\n## When to Use This Skill\n\nUse this skill when you need to work with generate workflow json files for chaining ai models.\n\n## Instructions\n\nThis skill provides guidance and patterns for generate workflow json files for chaining ai models.\n\nFor more information, see the [source repository](https://github.com/fal-ai-community/skills/blob/main/skills/claude.ai/fal-workflow/SKILL.md).\n",
+  "tags": [
+    "claude",
+    "ai",
+    "workflow"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:52:06.560Z"
+}

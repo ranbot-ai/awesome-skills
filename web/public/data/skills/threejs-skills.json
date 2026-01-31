@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-threejs-skills",
+  "name": "threejs-skills",
+  "slug": "threejs-skills",
+  "description": "Three.js skills for creating 3D elements and interactive experiences",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/threejs-skills",
+  "content": "\n# Threejs Skills\n\n## Overview\n\nThree.js skills for creating 3D elements and interactive experiences\n\n## When to Use This Skill\n\nUse this skill when you need to work with three.js skills for creating 3d elements and interactive experiences.\n\n## Instructions\n\nThis skill provides guidance and patterns for three.js skills for creating 3d elements and interactive experiences.\n\nFor more information, see the [source repository](https://github.com/CloudAI-X/threejs-skills).\n",
+  "tags": [
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:54:43.518Z"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "antigravity-culture-index",
+  "name": "culture-index",
+  "slug": "culture-index",
+  "description": "Index and search culture documentation",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/culture-index",
+  "content": "\n# Culture Index\n\n## Overview\n\nIndex and search culture documentation to help teams understand organizational values, practices, and guidelines.\n\n## When to Use This Skill\n\nUse this skill when you need to index and search culture documentation.\n\nUse this skill when:\n- You need to search through organizational culture documentation\n- You want to index culture-related documents for easy retrieval\n- You need to understand team values, practices, or guidelines\n- You're building a knowledge base for culture documentation\n\n## Instructions\n\nThis skill provides capabilities for indexing and searching culture documentation. It helps teams:\n\n1. **Index Culture Documents**: Organize and index culture-related documentation\n2. **Search Functionality**: Quickly find relevant culture information\n3. **Knowledge Retrieval**: Access organizational values and practices efficiently\n\n## Usage\n\nWhen working with culture documentation:\n\n1. Identify the culture documents to index\n2. Use the indexing functionality to organize the content\n3. Search through indexed documents to find relevant information\n4. Retrieve specific culture guidelines or practices as needed\n\n## Resources\n\nFor more information, see the [source repository](https://github.com/trailofbits/skills/tree/main/plugins/culture-index).\n",
+  "tags": [
+    "ai",
+    "document"
+  ],
+  "useCases": [
+    "You need to search through organizational culture documentation",
+    "You want to index culture-related documents for easy retrieval",
+    "You need to understand team values, practices, or guidelines",
+    "You're building a knowledge base for culture documentation"
+  ],
+  "scrapedAt": "2026-01-31T06:51:32.949Z"
+}

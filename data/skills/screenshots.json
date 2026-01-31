@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-screenshots",
+  "name": "screenshots",
+  "slug": "screenshots",
+  "description": "Generate marketing screenshots of your app using Playwright. Use when the user wants to create screenshots for Product Hunt, social media, landing pages, or documentation.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/screenshots",
+  "content": "\n# Screenshots\n\nGenerate marketing-quality screenshots of your app using Playwright directly. Screenshots are captured at true HiDPI (2x retina) resolution using `deviceScaleFactor: 2`.\n\n## When to Use This Skill\n\nUse this skill when:\n- User wants to create screenshots for Product Hunt\n- Creating screenshots for social media\n- Generating images for landing pages\n- Creating documentation screenshots\n- User requests marketing-quality app screenshots\n\n## Prerequisites\n\nPlaywright must be available. Check for it:\n```bash\nnpx playwright --version 2>/dev/null || npm ls playwright 2>/dev/null | grep playwright\n```\n\nIf not found, inform the user:\n> Playwright is required. Install it with: `npm install -D playwright` or `npm install -D @playwright/test`\n\n## Step 1: Determine App URL\n\nIf `$1` is provided, use it as the app URL.\n\nIf no URL is provided:\n1. Check if a dev server is likely running by looking for `package.json` scripts\n2. Use `AskUserQuestion` to ask the user for the URL or offer to help start the dev server\n\nCommon default URLs to suggest:\n- `http://localhost:3000` (Next.js, Create React App, Rails)\n- `http://localhost:5173` (Vite)\n- `http://localhost:4000` (Phoenix)\n- `http://localhost:8080` (Vue CLI, generic)\n\n## Step 2: Gather Requirements\n\nUse `AskUserQuestion` with the following questions:\n\n**Question 1: Screenshot count**\n- Header: \"Count\"\n- Question: \"How many screenshots do you need?\"\n- Options:\n  - \"3-5\" - Quick set of key features\n  - \"5-10\" - Comprehensive feature coverage\n  - \"10+\" - Full marketing suite\n\n**Question 2: Purpose**\n- Header: \"Purpose\"\n- Question: \"What will these screenshots be used for?\"\n- Options:\n  - \"Product Hunt\" - Hero shots and feature highlights\n  - \"Social media\" - Eye-catching feature demos\n  - \"Landing page\" - Marketing sections and benefits\n  - \"Documentation\" - UI reference and tutorials\n\n**Question 3: Authentication**\n- Header: \"Auth\"\n- Question: \"Does the app require login to access the features you want to screenshot?\"\n- Options:\n  - \"No login needed\" - Public pages only\n  - \"Yes, I'll provide credentials\" - Need to log in first\n\nIf user selects \"Yes, I'll provide credentials\", ask follow-up questions:\n- \"What is the login page URL?\" (e.g., `/login`, `/sign-in`)\n- \"What is the email/username?\"\n- \"What is the password?\"\n\nThe script will automatically detect login form fields using Playwright's smart locators.\n\n## Step 3: Analyze Codebase for Features\n\nThoroughly explore the codebase to understand the app and identify screenshot opportunities.\n\n### 3.1: Read Documentation First\n\n**Always start by reading these files** to understand what the app does:\n\n1. **README.md** (and any README files in subdirectories) - Read the full README to understand:\n   - What the app is and what problem it solves\n   - Key features and capabilities\n   - Screenshots or feature descriptions already documented\n\n2. **CHANGELOG.md** or **HISTORY.md** - Recent features worth highlighting\n\n3. **docs/** directory - Any additional documentation about features\n\n### 3.2: Analyze Routes to Find Pages\n\nRead the routing configuration to discover all available pages:\n\n| Framework | File to Read | What to Look For |\n|-----------|--------------|------------------|\n| **Next.js App Router** | `app/` directory structure | Each folder with `page.tsx` is a route |\n| **Next.js Pages Router** | `pages/` directory | Each file is a route |\n| **Rails** | `config/routes.rb` | Read the entire file for all routes |\n| **React Router** | Search for `createBrowserRouter` or `<Route` | Route definitions with paths |\n| **Vue Router** | `src/router/index.js` or `router.js` | Routes array with path definitions |\n| **SvelteKit** | `src/routes/` directory | Each folder with `+page.svelte` is a route |\n| **Remix** | `app/routes/` directory | File-based routing |\n| **Laravel** | `routes/web.php` | Route definitions |\n| **Django** | `urls.py` files | URL patterns |\n| **Express** | Search for `app.get`, `router.get` | Route handlers |\n\n**Important**: Actually read these files, don't just check if they exist. The route definitions tell you what pages are available for screenshots.\n\n### 3.3: Identify Key Components\n\nLook for components that represent screenshottable features:\n\n- Dashboard components\n- Feature sections with distinct UI\n- Forms and interactive inputs\n- Data visualizations (charts, graphs, tables)\n- Modals and dialogs\n- Navigation and sidebars\n- Settings panels\n- User profile sections\n\n### 3.4: Check for Marketing Assets\n\nLook for existing marketing content that hints at key features:\n- Landing page components (often in `components/landing/` or `components/marketing/`)\n- Feature list components\n- Pricing tables\n- Testimonial sections\n\n### 3.5: Build Feature List\n\nCreate a comprehensive list of discovered features with:\n- Feature name (from README or component name)\n- URL path (from routes)\n- CSS selector to focus on (from component structure)\n- Required UI state (logged in, data populated, modal open, specific tab se",
+  "tags": [
+    "javascript",
+    "react",
+    "node",
+    "ai",
+    "template",
+    "document",
+    "image",
+    "rag",
+    "cro",
+    "marketing"
+  ],
+  "useCases": [
+    "User wants to create screenshots for Product Hunt",
+    "Creating screenshots for social media",
+    "Generating images for landing pages",
+    "Creating documentation screenshots",
+    "User requests marketing-quality app screenshots"
+  ],
+  "scrapedAt": "2026-01-31T06:54:02.704Z"
+}

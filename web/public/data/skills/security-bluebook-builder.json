@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-security-bluebook-builder",
+  "name": "security-bluebook-builder",
+  "slug": "security-bluebook-builder",
+  "description": "Build security Blue Books for sensitive apps",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/security-bluebook-builder",
+  "content": "\n# Security Bluebook Builder\n\n## Overview\n\nBuild security Blue Books for sensitive apps\n\n## When to Use This Skill\n\nUse this skill when you need to work with build security blue books for sensitive apps.\n\n## Instructions\n\nThis skill provides guidance and patterns for build security blue books for sensitive apps.\n\nFor more information, see the [source repository](https://github.com/SHADOWPR0/security-bluebook-builder).\n",
+  "tags": [
+    "security"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:54:04.585Z"
+}

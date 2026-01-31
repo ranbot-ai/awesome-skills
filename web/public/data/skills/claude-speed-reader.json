@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-claude-speed-reader",
+  "name": "claude-speed-reader",
+  "slug": "claude-speed-reader",
+  "description": "-Speed read Claude's responses at 600+ WPM using RSVP with Spritz-style ORP highlighting",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/claude-speed-reader",
+  "content": "\n# Claude Speed Reader\n\n## Overview\n\n-Speed read Claude's responses at 600+ WPM using RSVP with Spritz-style ORP highlighting\n\n## When to Use This Skill\n\nUse this skill when you need to work with -speed read claude's responses at 600+ wpm using rsvp with spritz-style orp highlighting.\n\n## Instructions\n\nThis skill provides guidance and patterns for -speed read claude's responses at 600+ wpm using rsvp with spritz-style orp highlighting.\n\nFor more information, see the [source repository](https://github.com/SeanZoR/claude-speed-reader).\n",
+  "tags": [
+    "claude"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:51:08.573Z"
+}

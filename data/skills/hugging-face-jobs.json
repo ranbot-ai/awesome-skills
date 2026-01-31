@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-hugging-face-jobs",
+  "name": "hugging-face-jobs",
+  "slug": "hugging-face-jobs",
+  "description": "This skill should be used when users want to run any workload on Hugging Face Jobs infrastructure. Covers UV scripts, Docker-based jobs, hardware selection, cost estimation, authentication with tokens, secrets management, timeout configuration, and result persistence. Designed for general-purpose co",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugging-face-jobs",
+  "content": "\n# Running Workloads on Hugging Face Jobs\n\n## Overview\n\nRun any workload on fully managed Hugging Face infrastructure. No local setup required—jobs run on cloud CPUs, GPUs, or TPUs and can persist results to the Hugging Face Hub.\n\n**Common use cases:**\n- **Data Processing** - Transform, filter, or analyze large datasets\n- **Batch Inference** - Run inference on thousands of samples\n- **Experiments & Benchmarks** - Reproducible ML experiments\n- **Model Training** - Fine-tune models (see `model-trainer` skill for TRL-specific training)\n- **Synthetic Data Generation** - Generate datasets using LLMs\n- **Development & Testing** - Test code without local GPU setup\n- **Scheduled Jobs** - Automate recurring tasks\n\n**For model training specifically:** See the `model-trainer` skill for TRL-based training workflows.\n\n## When to Use This Skill\n\nUse this skill when users want to:\n- Run Python workloads on cloud infrastructure\n- Execute jobs without local GPU/TPU setup\n- Process data at scale\n- Run batch inference or experiments\n- Schedule recurring tasks\n- Use GPUs/TPUs for any workload\n- Persist results to the Hugging Face Hub\n\n## Key Directives\n\nWhen assisting with jobs:\n\n1. **ALWAYS use `hf_jobs()` MCP tool** - Submit jobs using `hf_jobs(\"uv\", {...})` or `hf_jobs(\"run\", {...})`. The `script` parameter accepts Python code directly. Do NOT save to local files unless the user explicitly requests it. Pass the script content as a string to `hf_jobs()`.\n\n2. **Always handle authentication** - Jobs that interact with the Hub require `HF_TOKEN` via secrets. See Token Usage section below.\n\n3. **Provide job details after submission** - After submitting, provide job ID, monitoring URL, estimated time, and note that the user can request status checks later.\n\n4. **Set appropriate timeouts** - Default 30min may be insufficient for long-running tasks.\n\n## Prerequisites Checklist\n\nBefore starting any job, verify:\n\n### ✅ **Account & Authentication**\n- Hugging Face Account with [Pro](https://hf.co/pro), [Team](https://hf.co/enterprise), or [Enterprise](https://hf.co/enterprise) plan (Jobs require paid plan)\n- Authenticated login: Check with `hf_whoami()`\n- **HF_TOKEN for Hub Access** ⚠️ CRITICAL - Required for any Hub operations (push models/datasets, download private repos, etc.)\n- Token must have appropriate permissions (read for downloads, write for uploads)\n\n### ✅ **Token Usage** (See Token Usage section for details)\n\n**When tokens are required:**\n- Pushing models/datasets to Hub\n- Accessing private repositories\n- Using Hub APIs in scripts\n- Any authenticated Hub operations\n\n**How to provide tokens:**\n```python\n{\n    \"secrets\": {\"HF_TOKEN\": \"$HF_TOKEN\"}  # Recommended: automatic token\n}\n```\n\n**⚠️ CRITICAL:** The `$HF_TOKEN` placeholder is automatically replaced with your logged-in token. Never hardcode tokens in scripts.\n\n## Token Usage Guide\n\n### Understanding Tokens\n\n**What are HF Tokens?**\n- Authentication credentials for Hugging Face Hub\n- Required for authenticated operations (push, private repos, API access)\n- Stored securely on your machine after `hf auth login`\n\n**Token Types:**\n- **Read Token** - Can download models/datasets, read private repos\n- **Write Token** - Can push models/datasets, create repos, modify content\n- **Organization Token** - Can act on behalf of an organization\n\n### When Tokens Are Required\n\n**Always Required:**\n- Pushing models/datasets to Hub\n- Accessing private repositories\n- Creating new repositories\n- Modifying existing repositories\n- Using Hub APIs programmatically\n\n**Not Required:**\n- Downloading public models/datasets\n- Running jobs that don't interact with Hub\n- Reading public repository information\n\n### How to Provide Tokens to Jobs\n\n#### Method 1: Automatic Token (Recommended)\n\n```python\nhf_jobs(\"uv\", {\n    \"script\": \"your_script.py\",\n    \"secrets\": {\"HF_TOKEN\": \"$HF_TOKEN\"}  # ✅ Automatic replacement\n})\n```\n\n**How it works:**\n- `$HF_TOKEN` is a placeholder that gets replaced with your actual token\n- Uses the token from your logged-in session (`hf auth login`)\n- Most secure and convenient method\n- Token is encrypted server-side when passed as a secret\n\n**Benefits:**\n- No token exposure in code\n- Uses your current login session\n- Automatically updated if you re-login\n- Works seamlessly with MCP tools\n\n#### Method 2: Explicit Token (Not Recommended)\n\n```python\nhf_jobs(\"uv\", {\n    \"script\": \"your_script.py\",\n    \"secrets\": {\"HF_TOKEN\": \"hf_abc123...\"}  # ⚠️ Hardcoded token\n})\n```\n\n**When to use:**\n- Only if automatic token doesn't work\n- Testing with a specific token\n- Organization tokens (use with caution)\n\n**Security concerns:**\n- Token visible in code/logs\n- Must manually update if token rotates\n- Risk of token exposure\n\n#### Method 3: Environment Variable (Less Secure)\n\n```python\nhf_jobs(\"uv\", {\n    \"script\": \"your_script.py\",\n    \"env\": {\"HF_TOKEN\": \"hf_abc123...\"}  # ⚠️ Less secure than secrets\n})\n```\n\n**Difference from secrets:**\n- `env` variables are visible in job logs\n- `secrets` are en",
+  "tags": [
+    "python",
+    "pdf",
+    "api",
+    "mcp",
+    "ai",
+    "llm",
+    "workflow",
+    "template",
+    "design",
+    "document"
+  ],
+  "useCases": [
+    "Run Python workloads on cloud infrastructure",
+    "Execute jobs without local GPU/TPU setup",
+    "Process data at scale",
+    "Run batch inference or experiments",
+    "Schedule recurring tasks"
+  ],
+  "scrapedAt": "2026-01-31T06:52:35.499Z"
+}

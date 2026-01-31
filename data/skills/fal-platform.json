@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-fal-platform",
+  "name": "fal-platform",
+  "slug": "fal-platform",
+  "description": "Platform APIs for model management, pricing, and usage tracking",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fal-platform",
+  "content": "\n# Fal Platform\n\n## Overview\n\nPlatform APIs for model management, pricing, and usage tracking\n\n## When to Use This Skill\n\nUse this skill when you need to work with platform apis for model management, pricing, and usage tracking.\n\n## Instructions\n\nThis skill provides guidance and patterns for platform apis for model management, pricing, and usage tracking.\n\nFor more information, see the [source repository](https://github.com/fal-ai-community/skills/blob/main/skills/claude.ai/fal-platform/SKILL.md).\n",
+  "tags": [
+    "api",
+    "claude",
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:52:05.748Z"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-ui-skills",
+  "name": "ui-skills",
+  "slug": "ui-skills",
+  "description": "Opinionated, evolving constraints to guide agents when building interfaces",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ui-skills",
+  "content": "\n# Ui Skills\n\n## Overview\n\nOpinionated, evolving constraints to guide agents when building interfaces\n\n## When to Use This Skill\n\nUse this skill when you need to work with opinionated, evolving constraints to guide agents when building interfaces.\n\n## Instructions\n\nThis skill provides guidance and patterns for opinionated, evolving constraints to guide agents when building interfaces.\n\nFor more information, see the [source repository](https://github.com/ibelick/ui-skills).\n",
+  "tags": [
+    "ai",
+    "agent"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:54:48.445Z"
+}

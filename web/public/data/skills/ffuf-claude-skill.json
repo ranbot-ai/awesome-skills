@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-ffuf-claude-skill",
+  "name": "ffuf-claude-skill",
+  "slug": "ffuf-claude-skill",
+  "description": "Web fuzzing with ffuf",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ffuf-claude-skill",
+  "content": "\n# Ffuf Claude Skill\n\n## Overview\n\nWeb fuzzing with ffuf\n\n## When to Use This Skill\n\nUse this skill when you need to work with web fuzzing with ffuf.\n\n## Instructions\n\nThis skill provides guidance and patterns for web fuzzing with ffuf.\n\nFor more information, see the [source repository](https://github.com/jthack/ffuf_claude_skill).\n",
+  "tags": [
+    "claude"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:52:07.937Z"
+}

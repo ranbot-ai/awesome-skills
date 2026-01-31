@@ -1,0 +1,14 @@
+{
+  "id": "antigravity-x-article-publisher-skill",
+  "name": "x-article-publisher-skill",
+  "slug": "x-article-publisher-skill",
+  "description": "Publish articles to X/Twitter",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/x-article-publisher-skill",
+  "content": "\n# X Article Publisher Skill\n\n## Overview\n\nPublish articles to X/Twitter\n\n## When to Use This Skill\n\nUse this skill when you need to work with publish articles to x/twitter.\n\n## Instructions\n\nThis skill provides guidance and patterns for publish articles to x/twitter.\n\nFor more information, see the [source repository](https://github.com/wshuyi/x-article-publisher-skill).\n",
+  "tags": [],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:55:06.987Z"
+}

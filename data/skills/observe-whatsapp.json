@@ -1,0 +1,22 @@
+{
+  "id": "antigravity-observe-whatsapp",
+  "name": "observe-whatsapp",
+  "slug": "observe-whatsapp",
+  "description": "Observe and troubleshoot WhatsApp in Kapso: debug message delivery, inspect webhook deliveries/retries, triage API errors, and run health checks. Use when investigating production issues, message failures, or webhook delivery problems.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/observe-whatsapp",
+  "content": "\n# Observe WhatsApp\n\n## When to use\n\nUse this skill for operational diagnostics: message delivery investigation, webhook delivery debugging, error triage, and WhatsApp health checks.\n\n## Setup\n\nEnv vars:\n- `KAPSO_API_BASE_URL` (host only, no `/platform/v1`)\n- `KAPSO_API_KEY`\n\n## How to\n\n### Investigate message delivery\n\n1. List messages: `node scripts/messages.js --phone-number-id <id>`\n2. Inspect message: `node scripts/message-details.js --message-id <id>`\n3. Find conversation: `node scripts/lookup-conversation.js --phone-number <e164>`\n\n### Triage errors\n\n1. Message errors: `node scripts/errors.js`\n2. API logs: `node scripts/api-logs.js`\n3. Webhook deliveries: `node scripts/webhook-deliveries.js`\n\n### Run health checks\n\n1. Project overview: `node scripts/overview.js`\n2. Phone number health: `node scripts/whatsapp-health.js --phone-number-id <id>`\n\n## Scripts\n\n### Messages\n\n| Script | Purpose |\n|--------|---------|\n| `messages.js` | List messages |\n| `message-details.js` | Get message details |\n| `lookup-conversation.js` | Find conversation by phone or ID |\n\n### Errors and logs\n\n| Script | Purpose |\n|--------|---------|\n| `errors.js` | List message errors |\n| `api-logs.js` | List external API logs |\n| `webhook-deliveries.js` | List webhook delivery attempts |\n\n### Health\n\n| Script | Purpose |\n|--------|---------|\n| `overview.js` | Project overview |\n| `whatsapp-health.js` | Phone number health check |\n\n### OpenAPI\n\n| Script | Purpose |\n|--------|---------|\n| `openapi-explore.mjs` | Explore OpenAPI (search/op/schema/where) |\n\nInstall deps (once):\n```bash\nnpm i\n```\n\nExamples:\n```bash\nnode scripts/openapi-explore.mjs --spec platform search \"webhook deliveries\"\nnode scripts/openapi-explore.mjs --spec platform op listWebhookDeliveries\nnode scripts/openapi-explore.mjs --spec platform schema WebhookDelivery\n```\n\n## Notes\n\n- For webhook setup (create/update/delete, signature verification, event types), use `integrate-whatsapp`.\n\n## References\n\n- [references/message-debugging-reference.md](references/message-debugging-reference.md) - Message debugging guide\n- [references/triage-reference.md](references/triage-reference.md) - Error triage guide\n- [references/health-reference.md](references/health-reference.md) - Health check guide\n\n## Related skills\n\n- `integrate-whatsapp` - Onboarding, webhooks, messaging, templates, flows\n- `automate-whatsapp` - Workflows, agents, and automations\n\n<!-- FILEMAP:BEGIN -->\n```text\n[observe-whatsapp file map]|root: .\n|.:{package.json,SKILL.md}\n|assets:{health-example.json,message-debugging-example.json,triage-example.json}\n|references:{health-reference.md,message-debugging-reference.md,triage-reference.md}\n|scripts:{api-logs.js,errors.js,lookup-conversation.js,message-details.js,messages.js,openapi-explore.mjs,overview.js,webhook-deliveries.js,whatsapp-health.js}\n|scripts/lib/messages:{args.js,kapso-api.js}\n|scripts/lib/status:{args.js,kapso-api.js}\n|scripts/lib/triage:{args.js,kapso-api.js}\n```\n<!-- FILEMAP:END -->\n\n",
+  "tags": [
+    "node",
+    "api",
+    "ai",
+    "agent",
+    "automation",
+    "workflow",
+    "template"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:53:23.522Z"
+}

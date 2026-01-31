@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-fal-generate",
+  "name": "fal-generate",
+  "slug": "fal-generate",
+  "description": "Generate images and videos using fal.ai AI models",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fal-generate",
+  "content": "\n# Fal Generate\n\n## Overview\n\nGenerate images and videos using fal.ai AI models\n\n## When to Use This Skill\n\nUse this skill when you need to work with generate images and videos using fal.ai ai models.\n\n## Instructions\n\nThis skill provides guidance and patterns for generate images and videos using fal.ai ai models.\n\nFor more information, see the [source repository](https://github.com/fal-ai-community/skills/blob/main/skills/claude.ai/fal-generate/SKILL.md).\n",
+  "tags": [
+    "claude",
+    "ai",
+    "image"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:52:05.017Z"
+}

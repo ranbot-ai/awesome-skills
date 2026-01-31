@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-fal-image-edit",
+  "name": "fal-image-edit",
+  "slug": "fal-image-edit",
+  "description": "AI-powered image editing with style transfer and object removal",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fal-image-edit",
+  "content": "\n# Fal Image Edit\n\n## Overview\n\nAI-powered image editing with style transfer and object removal\n\n## When to Use This Skill\n\nUse this skill when you need to work with ai-powered image editing with style transfer and object removal.\n\n## Instructions\n\nThis skill provides guidance and patterns for ai-powered image editing with style transfer and object removal.\n\nFor more information, see the [source repository](https://github.com/fal-ai-community/skills/blob/main/skills/claude.ai/fal-image-edit/SKILL.md).\n",
+  "tags": [
+    "claude",
+    "ai",
+    "image"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:52:05.388Z"
+}

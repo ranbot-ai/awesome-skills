@@ -13,12 +13,12 @@
     "debug",
     "debugging",
     "git",
+    "worktree",
     "code-review",
     "subagent",
     "workflow",
     "agent",
-    "driven",
-    "development"
+    "driven"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-26T13:14:17.886Z"

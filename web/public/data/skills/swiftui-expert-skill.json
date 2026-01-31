@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-swiftui-expert-skill",
+  "name": "swiftui-expert-skill",
+  "slug": "swiftui-expert-skill",
+  "description": "Write, review, or improve SwiftUI code following best practices for state management, view composition, performance, modern APIs, Swift concurrency, and iOS 26+ Liquid Glass adoption. Use when building new SwiftUI features, refactoring existing views, reviewing code quality, or adopting modern Swift",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/swiftui-expert-skill",
+  "content": "\n# SwiftUI Expert Skill\n\n## Overview\nUse this skill to build, review, or improve SwiftUI features with correct state management, modern API usage, Swift concurrency best practices, optimal view composition, and iOS 26+ Liquid Glass styling. Prioritize native APIs, Apple design guidance, and performance-conscious patterns. This skill focuses on facts and best practices without enforcing specific architectural patterns.\n\n## When to Use This Skill\n\nUse this skill when:\n- Building new SwiftUI features\n- Refactoring existing SwiftUI views\n- Reviewing SwiftUI code quality\n- Adopting modern SwiftUI patterns\n- Working with SwiftUI state management\n- Implementing iOS 26+ Liquid Glass styling\n\n## Workflow Decision Tree\n\n### 1) Review existing SwiftUI code\n- Check property wrapper usage against the selection guide (see `references/state-management.md`)\n- Verify modern API usage (see `references/modern-apis.md`)\n- Verify view composition follows extraction rules (see `references/view-structure.md`)\n- Check performance patterns are applied (see `references/performance-patterns.md`)\n- Verify list patterns use stable identity (see `references/list-patterns.md`)\n- Inspect Liquid Glass usage for correctness and consistency (see `references/liquid-glass.md`)\n- Validate iOS 26+ availability handling with sensible fallbacks\n\n### 2) Improve existing SwiftUI code\n- Audit state management for correct wrapper selection (prefer `@Observable` over `ObservableObject`)\n- Replace deprecated APIs with modern equivalents (see `references/modern-apis.md`)\n- Extract complex views into separate subviews (see `references/view-structure.md`)\n- Refactor hot paths to minimize redundant state updates (see `references/performance-patterns.md`)\n- Ensure ForEach uses stable identity (see `references/list-patterns.md`)\n- Suggest image downsampling when `UIImage(data:)` is used (as optional optimization, see `references/image-optimization.md`)\n- Adopt Liquid Glass only when explicitly requested by the user\n\n### 3) Implement new SwiftUI feature\n- Design data flow first: identify owned vs injected state (see `references/state-management.md`)\n- Use modern APIs (no deprecated modifiers or patterns, see `references/modern-apis.md`)\n- Use `@Observable` for shared state (with `@MainActor` if not using default actor isolation)\n- Structure views for optimal diffing (extract subviews early, keep views small, see `references/view-structure.md`)\n- Separate business logic into testable models (see `references/layout-best-practices.md`)\n- Apply glass effects after layout/appearance modifiers (see `references/liquid-glass.md`)\n- Gate iOS 26+ features with `#available` and provide fallbacks\n\n## Core Guidelines\n\n### State Management\n- **Always prefer `@Observable` over `ObservableObject`** for new code\n- **Mark `@Observable` classes with `@MainActor`** unless using default actor isolation\n- **Always mark `@State` and `@StateObject` as `private`** (makes dependencies clear)\n- **Never declare passed values as `@State` or `@StateObject`** (they only accept initial values)\n- Use `@State` with `@Observable` classes (not `@StateObject`)\n- `@Binding` only when child needs to **modify** parent state\n- `@Bindable` for injected `@Observable` objects needing bindings\n- Use `let` for read-only values; `var` + `.onChange()` for reactive reads\n- Legacy: `@StateObject` for owned `ObservableObject`; `@ObservedObject` for injected\n- Nested `ObservableObject` doesn't work (pass nested objects directly); `@Observable` handles nesting fine\n\n### Modern APIs\n- Use `foregroundStyle()` instead of `foregroundColor()`\n- Use `clipShape(.rect(cornerRadius:))` instead of `cornerRadius()`\n- Use `Tab` API instead of `tabItem()`\n- Use `Button` instead of `onTapGesture()` (unless need location/count)\n- Use `NavigationStack` instead of `NavigationView`\n- Use `navigationDestination(for:)` for type-safe navigation\n- Use two-parameter or no-parameter `onChange()` variant\n- Use `ImageRenderer` for rendering SwiftUI views\n- Use `.sheet(item:)` instead of `.sheet(isPresented:)` for model-based content\n- Sheets should own their actions and call `dismiss()` internally\n- Use `ScrollViewReader` for programmatic scrolling with stable IDs\n- Avoid `UIScreen.main.bounds` for sizing\n- Avoid `GeometryReader` when alternatives exist (e.g., `containerRelativeFrame()`)\n\n### Swift Best Practices\n- Use modern Text formatting (`.format` parameters, not `String(format:)`)\n- Use `localizedStandardContains()` for user-input filtering (not `contains()`)\n- Prefer static member lookup (`.blue` vs `Color.blue`)\n- Use `.task` modifier for automatic cancellation of async work\n- Use `.task(id:)` for value-dependent tasks\n\n### View Composition\n- **Prefer modifiers over conditional views** for state changes (maintains view identity)\n- Extract complex views into separate subviews for better readability and performance\n- Keep views small for optimal performance\n- Keep view `body` simple and pure (no side effects or complex logic)\n- Use",
+  "tags": [
+    "react",
+    "api",
+    "ai",
+    "agent",
+    "workflow",
+    "design",
+    "presentation",
+    "image",
+    "rag",
+    "cro"
+  ],
+  "useCases": [
+    "Building new SwiftUI features",
+    "Refactoring existing SwiftUI views",
+    "Reviewing SwiftUI code quality",
+    "Adopting modern SwiftUI patterns",
+    "Working with SwiftUI state management"
+  ],
+  "scrapedAt": "2026-01-31T06:54:30.868Z"
+}

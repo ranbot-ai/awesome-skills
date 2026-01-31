@@ -1,0 +1,27 @@
+{
+  "id": "antigravity-sharp-edges",
+  "name": "sharp-edges",
+  "slug": "sharp-edges",
+  "description": "Identify error-prone APIs and dangerous configurations",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/sharp-edges",
+  "content": "\n# Sharp Edges\n\n## Overview\n\nIdentify error-prone APIs and dangerous configurations that could lead to bugs, security vulnerabilities, or system failures.\n\n## When to Use This Skill\n\nUse this skill when you need to identify error-prone APIs and dangerous configurations.\n\nUse this skill when:\n- Reviewing code for potentially dangerous API usage\n- Identifying configurations that could cause issues\n- Analyzing code for error-prone patterns\n- Assessing risk in API design or configuration choices\n- Performing security audits focused on API misuse\n\n## Instructions\n\nThis skill helps identify problematic APIs and configurations:\n\n1. **API Analysis**: Review API usage for error-prone patterns\n2. **Configuration Review**: Identify dangerous or risky configurations\n3. **Pattern Recognition**: Spot common mistakes and pitfalls\n4. **Risk Assessment**: Evaluate the potential impact of identified issues\n\n## Common Sharp Edges\n\n### Error-Prone APIs\n\n- APIs with complex parameter requirements\n- APIs with non-obvious failure modes\n- APIs that require careful resource management\n- APIs with timing or concurrency issues\n- APIs with unclear error handling\n\n### Dangerous Configurations\n\n- Default settings that are insecure\n- Configurations that bypass security controls\n- Settings that enable dangerous features\n- Options that reduce system reliability\n- Parameters that affect performance negatively\n\n## Detection Strategies\n\n1. **Code Review**: Look for known problematic patterns\n2. **Static Analysis**: Use tools to identify risky API usage\n3. **Configuration Audits**: Review configuration files for dangerous settings\n4. **Documentation Review**: Check for warnings about API usage\n5. **Experience-Based**: Leverage knowledge of common pitfalls\n\n## Best Practices\n\n- Document identified sharp edges\n- Provide clear guidance on safe usage\n- Create examples of correct vs incorrect usage\n- Recommend safer alternatives when available\n- Update documentation with findings\n\n## Resources\n\nFor more information, see the [source repository](https://github.com/trailofbits/skills/tree/main/plugins/sharp-edges).\n",
+  "tags": [
+    "api",
+    "ai",
+    "design",
+    "document",
+    "security",
+    "rag"
+  ],
+  "useCases": [
+    "Reviewing code for potentially dangerous API usage",
+    "Identifying configurations that could cause issues",
+    "Analyzing code for error-prone patterns",
+    "Assessing risk in API design or configuration choices",
+    "Performing security audits focused on API misuse"
+  ],
+  "scrapedAt": "2026-01-31T06:54:15.846Z"
+}

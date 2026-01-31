@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-beautiful-prose",
+  "name": "beautiful-prose",
+  "slug": "beautiful-prose",
+  "description": "Hard-edged writing style contract for timeless, forceful English prose without AI tics",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/beautiful-prose",
+  "content": "\n# Beautiful Prose\n\n## Overview\n\nHard-edged writing style contract for timeless, forceful English prose without AI tics\n\n## When to Use This Skill\n\nUse this skill when you need to work with hard-edged writing style contract for timeless, forceful english prose without ai tics.\n\n## Instructions\n\nThis skill provides guidance and patterns for hard-edged writing style contract for timeless, forceful english prose without ai tics.\n\nFor more information, see the [source repository](https://github.com/SHADOWPR0/beautiful_prose).\n",
+  "tags": [
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:50:52.191Z"
+}

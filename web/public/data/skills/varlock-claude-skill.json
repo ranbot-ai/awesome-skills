@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-varlock-claude-skill",
+  "name": "varlock-claude-skill",
+  "slug": "varlock-claude-skill",
+  "description": "Secure environment variable management ensuring secrets are never exposed in Claude sessions, terminals, logs, or git commits",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/varlock-claude-skill",
+  "content": "\n# Varlock Claude Skill\n\n## Overview\n\nSecure environment variable management ensuring secrets are never exposed in Claude sessions, terminals, logs, or git commits\n\n## When to Use This Skill\n\nUse this skill when you need to work with secure environment variable management ensuring secrets are never exposed in claude sessions, terminals, logs, or git commits.\n\n## Instructions\n\nThis skill provides guidance and patterns for secure environment variable management ensuring secrets are never exposed in claude sessions, terminals, logs, or git commits.\n\nFor more information, see the [source repository](https://github.com/wrsmith108/varlock-claude-skill).\n",
+  "tags": [
+    "claude"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:54:54.906Z"
+}

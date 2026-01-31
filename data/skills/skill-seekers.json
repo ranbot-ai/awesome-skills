@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-skill-seekers",
+  "name": "skill-seekers",
+  "slug": "skill-seekers",
+  "description": "-Automatically convert documentation websites, GitHub repositories, and PDFs into Claude AI skills in minutes.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/skill-seekers",
+  "content": "\n# Skill Seekers\n\n## Overview\n\n-Automatically convert documentation websites, GitHub repositories, and PDFs into Claude AI skills in minutes.\n\n## When to Use This Skill\n\nUse this skill when you need to work with -automatically convert documentation websites, github repositories, and pdfs into claude ai skills in minutes..\n\n## Instructions\n\nThis skill provides guidance and patterns for -automatically convert documentation websites, github repositories, and pdfs into claude ai skills in minutes..\n\nFor more information, see the [source repository](https://github.com/yusufkaraaslan/Skill_Seekers).\n",
+  "tags": [
+    "pdf",
+    "claude",
+    "ai",
+    "document"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-01-31T06:54:20.846Z"
+}
