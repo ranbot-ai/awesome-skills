@@ -1,5 +1,6 @@
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
+import { MarkdownContent } from '@/components/MarkdownContent';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import {
@@ -9,7 +10,6 @@ import {
   Tag,
   Folder,
   BookOpen,
-  Copy,
   CheckCircle,
   Lightbulb
 } from 'lucide-react';
@@ -135,11 +135,7 @@ export default async function SkillPage({ params }: PageProps) {
                       <BookOpen className="h-6 w-6 text-violet-400" />
                       <h2 className="text-2xl font-bold text-white">Documentation</h2>
                     </div>
-                    <div className="prose prose-invert prose-slate max-w-none">
-                      <pre className="bg-slate-800/50 rounded-xl p-6 overflow-x-auto text-sm text-slate-300 whitespace-pre-wrap">
-                        {skill.content}
-                      </pre>
-                    </div>
+                    <MarkdownContent content={skill.content} />
                   </div>
                 )}
 

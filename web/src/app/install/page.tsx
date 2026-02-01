@@ -67,29 +67,46 @@ function CodeBlock({ code, title }: CodeBlockProps) {
 
 const installMethods = [
   {
-    id: 'one-liner',
-    title: 'One-Liner Install',
-    description: 'Install all skills with a single command',
+    id: 'skills-sh',
+    title: 'skills.sh CLI',
+    description: 'Recommended: Works with 36+ AI agents',
     icon: Zap,
     color: 'violet'
+  },
+  {
+    id: 'one-liner',
+    title: 'One-Liner Script',
+    description: 'Install to ~/.claude/skills directly',
+    icon: Terminal,
+    color: 'cyan'
   },
   {
     id: 'selective',
     title: 'Selective Install',
     description: 'Choose specific skills to install',
     icon: Package,
-    color: 'cyan'
+    color: 'emerald'
   },
   {
     id: 'local',
     title: 'From Local Clone',
-    description: 'Clone repo and install from local data',
+    description: 'Clone repo and install locally',
     icon: Folder,
-    color: 'emerald'
+    color: 'amber'
   }
 ];
 
 const commands = {
+  // skills.sh CLI commands
+  'npx-install-all': 'npx skills add ranbot-ai/awesome-skills --all',
+  'npx-list': 'npx skills add ranbot-ai/awesome-skills --list',
+  'npx-specific': 'npx skills add ranbot-ai/awesome-skills --skill code-review --skill docker',
+  'npx-agent': 'npx skills add ranbot-ai/awesome-skills -a claude-code -a cursor',
+  'npx-global': 'npx skills add ranbot-ai/awesome-skills -g',
+  'npx-find': 'npx skills find',
+  'npx-update': 'npx skills update',
+  'npx-remove': 'npx skills remove',
+  // One-liner script commands
   'install-all': 'curl -fsSL https://raw.githubusercontent.com/ranbot-ai/awesome-skills/main/scripts/install-skills.sh | bash',
   'install-specific': 'curl -fsSL https://raw.githubusercontent.com/ranbot-ai/awesome-skills/main/scripts/install-skills.sh | bash -s -- code-review docker kubernetes',
   'clone': 'git clone https://github.com/ranbot-ai/awesome-skills.git && cd awesome-skills',
@@ -112,7 +129,7 @@ const sources = [
 ];
 
 export default function InstallPage() {
-  const [activeMethod, setActiveMethod] = useState('one-liner');
+  const [activeMethod, setActiveMethod] = useState('skills-sh');
 
   return (
     <div className="min-h-screen bg-slate-950">
@@ -195,6 +212,84 @@ export default function InstallPage() {
 
               {/* Method Content */}
               <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 md:p-8">
+                {activeMethod === 'skills-sh' && (
+                  <div className="space-y-6">
+                    <div className="bg-gradient-to-r from-violet-500/10 to-cyan-500/10 border border-violet-500/20 rounded-xl p-4 mb-6">
+                      <div className="flex items-center gap-3">
+                        <Zap className="h-5 w-5 text-violet-400" />
+                        <div>
+                          <p className="text-white font-medium">Recommended Method</p>
+                          <p className="text-slate-400 text-sm">Works with Claude Code, Cursor, Codex, Gemini CLI, and 36+ other AI agents</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 bg-violet-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <span className="text-violet-400 font-bold">1</span>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-lg font-semibold text-white mb-2">Install All Skills</h3>
+                        <p className="text-slate-400 text-sm mb-4">
+                          Use the skills.sh CLI to install all skills to all your AI agents:
+                        </p>
+                        <CodeBlock code={commands['npx-install-all']} />
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 bg-violet-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <span className="text-violet-400 font-bold">2</span>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-lg font-semibold text-white mb-2">Or Install Specific Skills</h3>
+                        <p className="text-slate-400 text-sm mb-4">
+                          Choose which skills to install:
+                        </p>
+                        <CodeBlock code={commands['npx-specific']} />
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 bg-violet-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <span className="text-violet-400 font-bold">3</span>
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-lg font-semibold text-white mb-2">Target Specific Agents</h3>
+                        <p className="text-slate-400 text-sm mb-4">
+                          Install only to specific AI agents:
+                        </p>
+                        <CodeBlock code={commands['npx-agent']} />
+                        <p className="text-slate-400 text-sm mt-3">
+                          Supported agents: <code className="text-cyan-400">claude-code</code>, <code className="text-cyan-400">cursor</code>, <code className="text-cyan-400">codex</code>, <code className="text-cyan-400">gemini-cli</code>, <code className="text-cyan-400">github-copilot</code>, <code className="text-cyan-400">cline</code>, <code className="text-cyan-400">opencode</code>, <code className="text-cyan-400">windsurf</code>, and more.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 p-4 bg-slate-800/50 rounded-xl">
+                      <h4 className="text-white font-medium mb-3">More Commands</h4>
+                      <div className="space-y-2 text-sm">
+                        <div className="flex items-center gap-2">
+                          <code className="text-emerald-400 bg-slate-900 px-2 py-1 rounded">npx skills list</code>
+                          <span className="text-slate-400">- List installed skills</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <code className="text-emerald-400 bg-slate-900 px-2 py-1 rounded">npx skills find</code>
+                          <span className="text-slate-400">- Search for skills</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <code className="text-emerald-400 bg-slate-900 px-2 py-1 rounded">npx skills update</code>
+                          <span className="text-slate-400">- Update installed skills</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <code className="text-emerald-400 bg-slate-900 px-2 py-1 rounded">npx skills remove</code>
+                          <span className="text-slate-400">- Remove skills</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
                 {activeMethod === 'one-liner' && (
                   <div className="space-y-6">
                     <div className="flex items-start gap-4">

@@ -24,13 +24,38 @@
 | [Prat011/awesome-llm-skills](https://github.com/Prat011/awesome-llm-skills) | 700+ | LLM and AI Agent skills collection |
 | [sickn33/antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) | 3.6k+ | 253+ agentic skills for Claude Code, Gemini CLI, Cursor & more |
 
-## Install Skills Locally
+## Install Skills
 
-Install skills directly to `~/.claude/skills` for use with Claude Code, Cursor, or other AI agents.
+Install skills for use with Claude Code, Cursor, Codex, Gemini CLI, and [36+ other AI agents](https://github.com/vercel-labs/skills#supported-agents).
 
 > **Web Interface**: Visit the [Install page](https://awesome-skills.ranbot.online/install) for an interactive installation guide.
 
-### One-liner Installation
+### Method 1: Using skills.sh CLI (Recommended)
+
+The easiest way to install skills using the [skills.sh](https://skills.sh) ecosystem:
+
+```bash
+# Install all skills to all your agents
+npx skills add ranbot-ai/awesome-skills --all
+
+# List available skills first
+npx skills add ranbot-ai/awesome-skills --list
+
+# Install specific skills
+npx skills add ranbot-ai/awesome-skills --skill code-review --skill docker
+
+# Install to specific agents only
+npx skills add ranbot-ai/awesome-skills -a claude-code -a cursor
+
+# Install globally (available across all projects)
+npx skills add ranbot-ai/awesome-skills -g
+```
+
+**Supported Agents**: Claude Code, Cursor, Codex, Gemini CLI, GitHub Copilot, Cline, OpenCode, Windsurf, Roo Code, and [36+ more](https://github.com/vercel-labs/skills#supported-agents).
+
+### Method 2: One-liner Script
+
+Install skills directly to `~/.claude/skills`:
 
 ```bash
 # Install all skills
@@ -42,6 +67,10 @@ curl -fsSL https://raw.githubusercontent.com/ranbot-ai/awesome-skills/main/scrip
 # Install all skills from a source
 curl -fsSL https://raw.githubusercontent.com/ranbot-ai/awesome-skills/main/scripts/install-skills.sh | bash -s -- --source anthropic
 ```
+
+### Method 3: From Local Clone
+
+See [Using the Install Script](#using-the-install-script) below for advanced options.
 
 ### Installed Directory Structure
 
@@ -118,6 +147,19 @@ cd awesome-skills
 | `--info`, `-i SKILL` | Show detailed info about a skill |
 | `--uninstall SKILL` | Remove a specific skill |
 | `--clean` | Remove all installed skills |
+
+### skills.sh CLI Options
+
+When using `npx skills add`, these options are available:
+
+| Option | Description |
+|--------|-------------|
+| `--list`, `-l` | List available skills without installing |
+| `--skill`, `-s NAME` | Install specific skills by name |
+| `--agent`, `-a NAME` | Target specific agents (claude-code, cursor, codex, etc.) |
+| `--global`, `-g` | Install to user directory instead of project |
+| `--yes`, `-y` | Skip confirmation prompts (CI/CD friendly) |
+| `--all` | Install all skills to all agents |
 
 ### Environment Variables
 

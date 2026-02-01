@@ -61,6 +61,10 @@ jobs:
           cp data/search-index.json web/public/data/search-index.json
           cp -r data/skills/* web/public/data/skills/
 
+      - name: Generate SKILL.md files for skills.sh compatibility
+        run: |
+          ./scripts/generate-skills.sh
+
       - name: Get statistics
         id: stats
         run: |
@@ -121,6 +125,7 @@ jobs:
 
           git add data/
           git add web/public/data/
+          git add skills/
 
           TIMESTAMP=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
           DATE_SHORT=$(date -u +"%Y-%m-%d")
