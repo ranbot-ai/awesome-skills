@@ -1,9 +1,9 @@
 ---
 name: docx
-description: Comprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. When Claude needs to work with professional documents (
+description: Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of "Word doc", "word document", ".docx", or requests to produce 
 category: Document Processing
 source: anthropic
-tags: [python, javascript, typescript, node, pdf, docx, markdown, api, claude, ai]
+tags: [python, javascript, pdf, docx, claude, ai, template, document, spreadsheet, image]
 url: https://github.com/anthropics/skills/tree/main/skills/docx
 ---
 
@@ -12,88 +12,156 @@ url: https://github.com/anthropics/skills/tree/main/skills/docx
 
 ## Overview
 
-A user may ask you to create, edit, or analyze the contents of a .docx file. A .docx file is essentially a ZIP archive containing XML files and other resources that you can read or edit. You have different tools and workflows available for different tasks.
+A .docx file is a ZIP archive containing XML files.
 
-## Workflow Decision Tree
+## Quick Reference
 
-### Reading/Analyzing Content
-Use "Text extraction" or "Raw XML access" sections below
+| Task | Approach |
+|------|----------|
+| Read/analyze content | `pandoc` or unpack for raw XML |
+| Create new document | Use `docx-js` - see Creating New Documents below |
+| Edit existing document | Unpack → edit XML → repack - see Editing Existing Documents below |
 
-### Creating New Document
-Use "Creating a new Word document" workflow
+### Converting .doc to .docx
 
-### Editing Existing Document
-- **Your own document + simple changes**
-  Use "Basic OOXML editing" workflow
-
-- **Someone else's document**
-  Use **"Redlining workflow"** (recommended default)
-
-- **Legal, academic, business, or government docs**
-  Use **"Redlining workflow"** (required)
-
-## Reading and analyzing content
-
-### Text extraction
-If you just need to read the text contents of a document, you should convert the document to markdown using pandoc. Pandoc provides excellent support for preserving document structure and can show tracked changes:
+Legacy `.doc` files must be converted before editing:
 
 ```bash
-# Convert document to markdown with tracked changes
-pandoc --track-changes=all path-to-file.docx -o output.md
-# Options: --track-changes=accept/reject/all
+python scripts/office/soffice.py --headless --convert-to docx document.doc
 ```
 
-### Raw XML access
-You need raw XML access for: comments, complex formatting, document structure, embedded media, and metadata. For any of these features, you'll need to unpack a document and read its raw XML contents.
+### Reading Content
 
-#### Unpacking a file
-`python ooxml/scripts/unpack.py <office_file> <output_directory>`
+```bash
+# Text extraction with tracked changes
+pandoc --track-changes=all document.docx -o output.md
 
-#### Key file structures
-* `word/document.xml` - Main document contents
-* `word/comments.xml` - Comments referenced in document.xml
-* `word/media/` - Embedded images and media files
-* Tracked changes use `<w:ins>` (insertions) and `<w:del>` (deletions) tags
-
-## Creating a new Word document
-
-When creating a new Word document from scratch, use **docx-js**, which allows you to create Word documents using JavaScript/TypeScript.
-
-### Workflow
-1. **MANDATORY - READ ENTIRE FILE**: Read [`docx-js.md`](docx-js.md) (~500 lines) completely from start to finish. **NEVER set any range limits when reading this file.** Read the full file content for detailed syntax, critical formatting rules, and best practices before proceeding with document creation.
-2. Create a JavaScript/TypeScript file using Document, Paragraph, TextRun components (You can assume all dependencies are installed, but if not, refer to the dependencies section below)
-3. Export as .docx using Packer.toBuffer()
-
-## Editing an existing Word document
-
-When editing an existing Word document, use the **Document library** (a Python library for OOXML manipulation). The library automatically handles infrastructure setup and provides methods for document manipulation. For complex scenarios, you can access the underlying DOM directly through the library.
-
-### Workflow
-1. **MANDATORY - READ ENTIRE FILE**: Read [`ooxml.md`](ooxml.md) (~600 lines) completely from start to finish. **NEVER set any range limits when reading this file.** Read the full file content for the Document library API and XML patterns for directly editing document files.
-2. Unpack the document: `python ooxml/scripts/unpack.py <office_file> <output_directory>`
-3. Create and run a Python script using the Document library (see "Document Library" section in ooxml.md)
-4. Pack the final document: `python ooxml/scripts/pack.py <input_directory> <office_file>`
-
-The Document library provides both high-level methods for common operations and direct DOM access for complex scenarios.
-
-## Redlining workflow for document review
-
-This workflow allows you to plan comprehensive tracked changes using markdown before implementing them in OOXML. **CRITICAL**: For complete tracked changes, you must implement ALL changes systematically.
-
-**Batching Strategy**: Group related changes into batches of 3-10 changes. This makes debugging manageable while maintaining efficiency. Test each batch before moving to the next.
-
-**Principle: Minimal, Precise Edits**
-When implementing tracked changes, only mark text that actually changes. Repeating unchanged text makes edits harder to review and appears unprofessional. Break replacements into: [unchanged text] + [deletion] + [insertion] + [unchanged text]. Preserve the original run's RSID for unchanged text by extracting the `<w:r>` element from the original and reusing it.
-
-Example - Changing "30 days" to "60 days" in a sentence:
-```python
-# BAD - Replaces entire sentence
-'<w:del><w:r><w:delText>The term is 30 days.</w:delText></w:r></w:del><w:ins><w:r><w:t>The term is 60 days.</w:t></w:r></w:ins>'
-
-# GOOD - Only marks what changed, preserves original <w:r> for unchanged text
-'<w:r w:rsidR="00AB12CD"><w:t>The term is </w:t></w:r><w:del><w:r><w:delText>30</w:delText></w:r></w:del><w:ins><w:r><w:t>60</w:t></w:r></w:ins><w:r w:rsidR="00AB12CD"><w:t> days.</w:t></w:r>'
+# Raw XML access
+python scripts/office/unpack.py document.docx unpacked/
 ```
 
-### Tracked changes workflow
+### Converting to Images
 
-1. **Get markdown representation**: Convert document to markdown with tracked chan
+```bash
+python scripts/office/soffice.py --headless --convert-to pdf document.docx
+pdftoppm -jpeg -r 150 document.pdf page
+```
+
+### Accepting Tracked Changes
+
+To produce a clean document with all tracked changes accepted (requires LibreOffice):
+
+```bash
+python scripts/accept_changes.py input.docx output.docx
+```
+
+---
+
+## Creating New Documents
+
+Generate .docx files with JavaScript, then validate. Install: `npm install -g docx`
+
+### Setup
+```javascript
+const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, ImageRun,
+        Header, Footer, AlignmentType, PageOrientation, LevelFormat, ExternalHyperlink,
+        TableOfContents, HeadingLevel, BorderStyle, WidthType, ShadingType,
+        VerticalAlign, PageNumber, PageBreak } = require('docx');
+
+const doc = new Document({ sections: [{ children: [/* content */] }] });
+Packer.toBuffer(doc).then(buffer => fs.writeFileSync("doc.docx", buffer));
+```
+
+### Validation
+After creating the file, validate it. If validation fails, unpack, fix the XML, and repack.
+```bash
+python scripts/office/validate.py doc.docx
+```
+
+### Page Size
+
+```javascript
+// CRITICAL: docx-js defaults to A4, not US Letter
+// Always set page size explicitly for consistent results
+sections: [{
+  properties: {
+    page: {
+      size: {
+        width: 12240,   // 8.5 inches in DXA
+        height: 15840   // 11 inches in DXA
+      },
+      margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } // 1 inch margins
+    }
+  },
+  children: [/* content */]
+}]
+```
+
+**Common page sizes (DXA units, 1440 DXA = 1 inch):**
+
+| Paper | Width | Height | Content Width (1" margins) |
+|-------|-------|--------|---------------------------|
+| US Letter | 12,240 | 15,840 | 9,360 |
+| A4 (default) | 11,906 | 16,838 | 9,026 |
+
+**Landscape orientation:** docx-js swaps width/height internally, so pass portrait dimensions and let it handle the swap:
+```javascript
+size: {
+  width: 12240,   // Pass SHORT edge as width
+  height: 15840,  // Pass LONG edge as height
+  orientation: PageOrientation.LANDSCAPE  // docx-js swaps them in the XML
+},
+// Content width = 15840 - left margin - right margin (uses the long edge)
+```
+
+### Styles (Override Built-in Headings)
+
+Use Arial as the default font (universally supported). Keep titles black for readability.
+
+```javascript
+const doc = new Document({
+  styles: {
+    default: { document: { run: { font: "Arial", size: 24 } } }, // 12pt default
+    paragraphStyles: [
+      // IMPORTANT: Use exact IDs to override built-in styles
+      { id: "Heading1", name: "Heading 1", basedOn: "Normal", next: "Normal", quickFormat: true,
+        run: { size: 32, bold: true, font: "Arial" },
+        paragraph: { spacing: { before: 240, after: 240 }, outlineLevel: 0 } }, // outlineLevel required for TOC
+      { id: "Heading2", name: "Heading 2", basedOn: "Normal", next: "Normal", quickFormat: true,
+        run: { size: 28, bold: true, font: "Arial" },
+        paragraph: { spacing: { before: 180, after: 180 }, outlineLevel: 1 } },
+    ]
+  },
+  sections: [{
+    children: [
+      new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun("Title")] }),
+    ]
+  }]
+});
+```
+
+### Lists (NEVER use unicode bullets)
+
+```javascript
+// ❌ WRONG - never manually insert bullet characters
+new Paragraph({ children: [new TextRun("• Item")] })  // BAD
+new Paragraph({ children: [new TextRun("\u2022 Item")] })  // BAD
+
+// ✅ CORRECT - use numbering config with LevelFormat.BULLET
+const doc = new Document({
+  numbering: {
+    config: [
+      { reference: "bullets",
+        levels: [{ level: 0, format: LevelFormat.BULLET, text: "•", alignment: AlignmentType.LEFT,
+          style: { paragraph: { indent: { left: 720, hanging: 360 } } } }] },
+      { reference: "numbers",
+        levels: [{ level: 0, format: LevelFormat.DECIMAL, text: "%1.", alignment: AlignmentType.LEFT,
+          style: { paragraph: { indent: { left: 720, hanging: 360 } } } }] },
+    ]
+  },
+  sections: [{
+    children: [
+      new Paragraph({ numbering: { reference: "bullets", level: 0 },
+        children: [new TextRun("Bullet item")] }),
+      new Paragraph({ numbering: { reference: "numbers", level: 0 },
+        children: [new TextRun("Numbered item")] }),

@@ -1,92 +1,140 @@
 ---
 name: pptx
-description: Presentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts
+description: Use this skill any time a .pptx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from
 category: Document Processing
 source: anthropic
-tags: [python, javascript, react, pdf, pptx, markdown, api, claude, ai, workflow]
+tags: [python, pdf, pptx, ai, agent, workflow, template, design, presentation, image]
 url: https://github.com/anthropics/skills/tree/main/skills/pptx
 ---
 
 
-# PPTX creation, editing, and analysis
+# PPTX Skill
 
-## Overview
+## Quick Reference
 
-A user may ask you to create, edit, or analyze the contents of a .pptx file. A .pptx file is essentially a ZIP archive containing XML files and other resources that you can read or edit. You have different tools and workflows available for different tasks.
+| Task | Guide |
+|------|-------|
+| Read/analyze content | `python -m markitdown presentation.pptx` |
+| Edit or create from template | Read [editing.md](editing.md) |
+| Create from scratch | Read [pptxgenjs.md](pptxgenjs.md) |
 
-## Reading and analyzing content
+---
 
-### Text extraction
-If you just need to read the text contents of a presentation, you should convert the document to markdown:
+## Reading Content
 
 ```bash
-# Convert document to markdown
-python -m markitdown path-to-file.pptx
+# Text extraction
+python -m markitdown presentation.pptx
+
+# Visual overview
+python scripts/thumbnail.py presentation.pptx
+
+# Raw XML
+python scripts/office/unpack.py presentation.pptx unpacked/
 ```
 
-### Raw XML access
-You need raw XML access for: comments, speaker notes, slide layouts, animations, design elements, and complex formatting. For any of these features, you'll need to unpack a presentation and read its raw XML contents.
+---
 
-#### Unpacking a file
-`python ooxml/scripts/unpack.py <office_file> <output_dir>`
+## Editing Workflow
 
-**Note**: The unpack.py script is located at `skills/pptx/ooxml/scripts/unpack.py` relative to the project root. If the script doesn't exist at this path, use `find . -name "unpack.py"` to locate it.
+**Read [editing.md](editing.md) for full details.**
 
-#### Key file structures
-* `ppt/presentation.xml` - Main presentation metadata and slide references
-* `ppt/slides/slide{N}.xml` - Individual slide contents (slide1.xml, slide2.xml, etc.)
-* `ppt/notesSlides/notesSlide{N}.xml` - Speaker notes for each slide
-* `ppt/comments/modernComment_*.xml` - Comments for specific slides
-* `ppt/slideLayouts/` - Layout templates for slides
-* `ppt/slideMasters/` - Master slide templates
-* `ppt/theme/` - Theme and styling information
-* `ppt/media/` - Images and other media files
+1. Analyze template with `thumbnail.py`
+2. Unpack → manipulate slides → edit content → clean → pack
 
-#### Typography and color extraction
-**When given an example design to emulate**: Always analyze the presentation's typography and colors first using the methods below:
-1. **Read theme file**: Check `ppt/theme/theme1.xml` for colors (`<a:clrScheme>`) and fonts (`<a:fontScheme>`)
-2. **Sample slide content**: Examine `ppt/slides/slide1.xml` for actual font usage (`<a:rPr>`) and colors
-3. **Search for patterns**: Use grep to find color (`<a:solidFill>`, `<a:srgbClr>`) and font references across all XML files
+---
 
-## Creating a new PowerPoint presentation **without a template**
+## Creating from Scratch
 
-When creating a new PowerPoint presentation from scratch, use the **html2pptx** workflow to convert HTML slides to PowerPoint with accurate positioning.
+**Read [pptxgenjs.md](pptxgenjs.md) for full details.**
 
-### Design Principles
+Use when no template or reference presentation is available.
 
-**CRITICAL**: Before creating any presentation, analyze the content and choose appropriate design elements:
-1. **Consider the subject matter**: What is this presentation about? What tone, industry, or mood does it suggest?
-2. **Check for branding**: If the user mentions a company/organization, consider their brand colors and identity
-3. **Match palette to content**: Select colors that reflect the subject
-4. **State your approach**: Explain your design choices before writing code
+---
 
-**Requirements**:
-- ✅ State your content-informed design approach BEFORE writing code
-- ✅ Use web-safe fonts only: Arial, Helvetica, Times New Roman, Georgia, Courier New, Verdana, Tahoma, Trebuchet MS, Impact
-- ✅ Create clear visual hierarchy through size, weight, and color
-- ✅ Ensure readability: strong contrast, appropriately sized text, clean alignment
-- ✅ Be consistent: repeat patterns, spacing, and visual language across slides
+## Design Ideas
 
-#### Color Palette Selection
+**Don't create boring slides.** Plain bullets on a white background won't impress anyone. Consider ideas from this list for each slide.
 
-**Choosing colors creatively**:
-- **Think beyond defaults**: What colors genuinely match this specific topic? Avoid autopilot choices.
-- **Consider multiple angles**: Topic, industry, mood, energy level, target audience, brand identity (if mentioned)
-- **Be adventurous**: Try unexpected combinations - a healthcare presentation doesn't have to be green, finance doesn't have to be navy
-- **Build your palette**: Pick 3-5 colors that work together (dominant colors + supporting tones + accent)
-- **Ensure contrast**: Text must be clearly readable on backgrounds
+### Before Starting
 
-**Example color palettes** (use these to spark creativity - choose one, adapt it, or create your own):
+- **Pick a bold, content-informed color palette**: The palette should feel designed for THIS topic. If swapping your colors into a completely different presentation would still "work," you haven't made specific enough choices.
+- **Dominance over equality**: One color should dominate (60-70% visual weight), with 1-2 supporting tones and one sharp accent. Never give all colors equal weight.
+- **Dark/light contrast**: Dark backgrounds for title + conclusion slides, light for content ("sandwich" structure). Or commit to dark throughout for a premium feel.
+- **Commit to a visual motif**: Pick ONE distinctive element and repeat it — rounded image frames, icons in colored circles, thick single-side borders. Carry it across every slide.
 
-1. **Classic Blue**: Deep navy (#1C2833), slate gray (#2E4053), silver (#AAB7B8), off-white (#F4F6F6)
-2. **Teal & Coral**: Teal (#5EA8A7), deep teal (#277884), coral (#FE4447), white (#FFFFFF)
-3. **Bold Red**: Red (#C0392B), bright red (#E74C3C), orange (#F39C12), yellow (#F1C40F), green (#2ECC71)
-4. **Warm Blush**: Mauve (#A49393), blush (#EED6D3), rose (#E8B4B8), cream (#FAF7F2)
-5. **Burgundy Luxury**: Burgundy (#5D1D2E), crimson (#951233), rust (#C15937), gold (#997929)
-6. **Deep Purple & Emerald**: Purple (#B165FB), dark blue (#181B24), emerald (#40695B), white (#FFFFFF)
-7. **Cream & Forest Green**: Cream (#FFE1C7), forest green (#40695B), white (#FCFCFC)
-8. **Pink & Purple**: Pink (#F8275B), coral (#FF574A), rose (#FF737D), purple (#3D2F68)
-9. **Lime & Plum**: Lime (#C5DE82), plum (#7C3A5F), coral (#FD8C6E), blue-gray (#98ACB5)
-10. **Black & Gold**: Gold (#BF9A4A), black (#000000), cream (#F4F6F6)
-11. **Sage & Terracotta**: Sage (#87A96B), terracotta (#E07A5F), cream (#F4F1DE), charcoal (#2C2C2C)
-12. **Charco
+### Color Palettes
+
+Choose colors that match your topic — don't default to generic blue. Use these palettes as inspiration:
+
+| Theme | Primary | Secondary | Accent |
+|-------|---------|-----------|--------|
+| **Midnight Executive** | `1E2761` (navy) | `CADCFC` (ice blue) | `FFFFFF` (white) |
+| **Forest & Moss** | `2C5F2D` (forest) | `97BC62` (moss) | `F5F5F5` (cream) |
+| **Coral Energy** | `F96167` (coral) | `F9E795` (gold) | `2F3C7E` (navy) |
+| **Warm Terracotta** | `B85042` (terracotta) | `E7E8D1` (sand) | `A7BEAE` (sage) |
+| **Ocean Gradient** | `065A82` (deep blue) | `1C7293` (teal) | `21295C` (midnight) |
+| **Charcoal Minimal** | `36454F` (charcoal) | `F2F2F2` (off-white) | `212121` (black) |
+| **Teal Trust** | `028090` (teal) | `00A896` (seafoam) | `02C39A` (mint) |
+| **Berry & Cream** | `6D2E46` (berry) | `A26769` (dusty rose) | `ECE2D0` (cream) |
+| **Sage Calm** | `84B59F` (sage) | `69A297` (eucalyptus) | `50808E` (slate) |
+| **Cherry Bold** | `990011` (cherry) | `FCF6F5` (off-white) | `2F3C7E` (navy) |
+
+### For Each Slide
+
+**Every slide needs a visual element** — image, chart, icon, or shape. Text-only slides are forgettable.
+
+**Layout options:**
+- Two-column (text left, illustration on right)
+- Icon + text rows (icon in colored circle, bold header, description below)
+- 2x2 or 2x3 grid (image on one side, grid of content blocks on other)
+- Half-bleed image (full left or right side) with content overlay
+
+**Data display:**
+- Large stat callouts (big numbers 60-72pt with small labels below)
+- Comparison columns (before/after, pros/cons, side-by-side options)
+- Timeline or process flow (numbered steps, arrows)
+
+**Visual polish:**
+- Icons in small colored circles next to section headers
+- Italic accent text for key stats or taglines
+
+### Typography
+
+**Choose an interesting font pairing** — don't default to Arial. Pick a header font with personality and pair it with a clean body font.
+
+| Header Font | Body Font |
+|-------------|-----------|
+| Georgia | Calibri |
+| Arial Black | Arial |
+| Calibri | Calibri Light |
+| Cambria | Calibri |
+| Trebuchet MS | Calibri |
+| Impact | Arial |
+| Palatino | Garamond |
+| Consolas | Calibri |
+
+| Element | Size |
+|---------|------|
+| Slide title | 36-44pt bold |
+| Section header | 20-24pt bold |
+| Body text | 14-16pt |
+| Captions | 10-12pt muted |
+
+### Spacing
+
+- 0.5" minimum margins
+- 0.3-0.5" between content blocks
+- Leave breathing room—don't fill every inch
+
+### Avoid (Common Mistakes)
+
+- **Don't repeat the same layout** — vary columns, cards, and callouts across slides
+- **Don't center body text** — left-align paragraphs and lists; center only titles
+- **Don't skimp on size contrast** — titles need 36pt+ to stand out from 14-16pt body
+- **Don't default to blue** — pick colors that reflect the specific topic
+- **Don't mix spacing randomly** — choose 0.3" or 0.5" gaps and use consistently
+- **Don't style one slide and leave the rest plain** — commit fully or keep it simple throughout
+- **Don't create text-only slides** — add images, icons, charts, or visual elements; avoid plain title + bullets
+- **Don't forget text box padding** — when aligning lines or shapes with text edges, set `margin: 0` on the text box or offset the shape to account for padding
+- **Don

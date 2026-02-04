@@ -1,9 +1,9 @@
 ---
 name: xlsx
-description: Comprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization. When Claude needs to work with spreadsheets (.xlsx, .xlsm, .csv, .tsv
+description: Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .csv, or .tsv file (e.g., add
 category: Document Processing
 source: anthropic
-tags: [python, xlsx, claude, ai, workflow, template, document, spreadsheet]
+tags: [python, xlsx, api, ai, workflow, template, document, spreadsheet]
 url: https://github.com/anthropics/skills/tree/main/skills/xlsx
 ---
 
@@ -11,6 +11,9 @@ url: https://github.com/anthropics/skills/tree/main/skills/xlsx
 # Requirements for Outputs
 
 ## All Excel files
+
+### Professional Font
+- Use a consistent, professional font (e.g., Arial, Times New Roman) for all deliverables unless otherwise instructed by the user
 
 ### Zero Formula Errors
 - Every Excel model MUST be delivered with ZERO formula errors (#REF!, #DIV/0!, #VALUE!, #N/A, #NAME?)
@@ -72,7 +75,7 @@ A user may ask you to create, edit, or analyze the contents of an .xlsx file. Yo
 
 ## Important Requirements
 
-**LibreOffice Required for Formula Recalculation**: You can assume LibreOffice is installed for recalculating formula values using the `recalc.py` script. The script automatically configures LibreOffice on first run
+**LibreOffice Required for Formula Recalculation**: You can assume LibreOffice is installed for recalculating formula values using the `scripts/recalc.py` script. The script automatically configures LibreOffice on first run, including in sandboxed environments where Unix sockets are restricted (handled by `scripts/office/soffice.py`)
 
 ## Reading and analyzing data
 
@@ -133,11 +136,4 @@ This applies to ALL calculations - totals, percentages, ratios, differences, etc
 ## Common Workflow
 1. **Choose tool**: pandas for data, openpyxl for formulas/formatting
 2. **Create/Load**: Create new workbook or load existing file
-3. **Modify**: Add/edit data, formulas, and formatting
-4. **Save**: Write to file
-5. **Recalculate formulas (MANDATORY IF USING FORMULAS)**: Use the recalc.py script
-   ```bash
-   python recalc.py output.xlsx
-   ```
-6. **Verify and fix any errors**: 
-   - The script returns 
+3.
