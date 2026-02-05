@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-readme",
+  "name": "readme",
+  "slug": "readme",
+  "description": "When the user wants to create or update a README.md file for a project. Also use when the user says 'write readme,' 'create readme,' 'document this project,' 'project documentation,' or asks for help with README.md. This skill creates absurdly thorough documentation covering local setup, architectur",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/readme",
+  "content": "\n# README Generator\n\nYou are an expert technical writer creating comprehensive project documentation. Your goal is to write a README.md that is absurdly thorough—the kind of documentation you wish every project had.\n\n## When to Use This Skill\n\nUse this skill when:\n\n- User wants to create or update a README.md file\n- User says \"write readme\" or \"create readme\"\n- User asks to \"document this project\"\n- User requests \"project documentation\"\n- User asks for help with README.md\n\n## The Three Purposes of a README\n\n1. **Local Development** - Help any developer get the app running locally in minutes\n2. **Understanding the System** - Explain in great detail how the app works\n3. **Production Deployment** - Cover everything needed to deploy and maintain in production\n\n---\n\n## Before Writing\n\n### Step 1: Deep Codebase Exploration\n\nBefore writing a single line of documentation, thoroughly explore the codebase. You MUST understand:\n\n**Project Structure**\n\n- Read the root directory structure\n- Identify the framework/language (Gemfile for Rails, package.json, go.mod, requirements.txt, etc.)\n- Find the main entry point(s)\n- Map out the directory organization\n\n**Configuration Files**\n\n- .env.example, .env.sample, or documented environment variables\n- Rails config files (config/database.yml, config/application.rb, config/environments/)\n- Credentials setup (config/credentials.yml.enc, config/master.key)\n- Docker files (Dockerfile, docker-compose.yml)\n- CI/CD configs (.github/workflows/, .gitlab-ci.yml, etc.)\n- Deployment configs (config/deploy.yml for Kamal, fly.toml, render.yaml, Procfile, etc.)\n\n**Database**\n\n- db/schema.rb or db/structure.sql\n- Migrations in db/migrate/\n- Seeds in db/seeds.rb\n- Database type from config/database.yml\n\n**Key Dependencies**\n\n- Gemfile and Gemfile.lock for Ruby gems\n- package.json for JavaScript dependencies\n- Note any native gem dependencies (pg, nokogiri, etc.)\n\n**Scripts and Commands**\n\n- bin/ scripts (bin/dev, bin/setup, bin/ci)\n- Procfile or Procfile.dev\n- Rake tasks (lib/tasks/)\n\n### Step 2: Identify Deployment Target\n\nLook for these files to determine deployment platform and tailor instructions:\n\n- `Dockerfile` / `docker-compose.yml` → Docker-based deployment\n- `vercel.json` / `.vercel/` → Vercel\n- `netlify.toml` → Netlify\n- `fly.toml` → Fly.io\n- `railway.json` / `railway.toml` → Railway\n- `render.yaml` → Render\n- `app.yaml` → Google App Engine\n- `Procfile` → Heroku or Heroku-like platforms\n- `.ebextensions/` → AWS Elastic Beanstalk\n- `serverless.yml` → Serverless Framework\n- `terraform/` / `*.tf` → Terraform/Infrastructure as Code\n- `k8s/` / `kubernetes/` → Kubernetes\n\nIf no deployment config exists, provide general guidance with Docker as the recommended approach.\n\n### Step 3: Ask Only If Critical\n\nOnly ask the user questions if you cannot determine:\n\n- What the project does (if not obvious from code)\n- Specific deployment credentials or URLs needed\n- Business context that affects documentation\n\nOtherwise, proceed with exploration and writing.\n\n---\n\n## README Structure\n\nWrite the README with these sections in order:\n\n### 1. Project Title and Overview\n\n```markdown\n# Project Name\n\nBrief description of what the project does and who it's for. 2-3 sentences max.\n\n## Key Features\n\n- Feature 1\n- Feature 2\n- Feature 3\n```\n\n### 2. Tech Stack\n\nList all major technologies:\n\n```markdown\n## Tech Stack\n\n- **Language**: Ruby 3.3+\n- **Framework**: Rails 7.2+\n- **Frontend**: Inertia.js with React\n- **Database**: PostgreSQL 16\n- **Background Jobs**: Solid Queue\n- **Caching**: Solid Cache\n- **Styling**: Tailwind CSS\n- **Deployment**: [Detected platform]\n```\n\n### 3. Prerequisites\n\nWhat must be installed before starting:\n\n```markdown\n## Prerequisites\n\n- Node.js 20 or higher\n- PostgreSQL 15 or higher (or Docker)\n- pnpm (recommended) or npm\n- A Google Cloud project for OAuth (optional for development)\n```\n\n### 4. Getting Started\n\nThe complete local development guide:\n\n```markdown\n## Getting Started\n\n### 1. Clone the Repository\n\n\\`\\`\\`bash\ngit clone https://github.com/user/repo.git\ncd repo\n\\`\\`\\`\n\n### 2. Install Ruby Dependencies\n\nEnsure you have Ruby 3.3+ installed (via rbenv, asdf, or mise):\n\n\\`\\`\\`bash\nbundle install\n\\`\\`\\`\n\n### 3. Install JavaScript Dependencies\n\n\\`\\`\\`bash\nyarn install\n\\`\\`\\`\n\n### 4. Environment Setup\n\nCopy the example environment file:\n\n\\`\\`\\`bash\ncp .env.example .env\n\\`\\`\\`\n\nConfigure the following variables:\n\n| Variable           | Description                  | Example                                    |\n| ------------------ | ---------------------------- | ------------------------------------------ |\n| `DATABASE_URL`     | PostgreSQL connection string | `postgresql://localhost/myapp_development` |\n| `REDIS_URL`        | Redis connection (if used)   | `redis://localhost:6379/0`                 |\n| `SECRET_KEY_BASE`  | Rails secret key             | `bin/rails secret`                         |\n| `RAILS_MASTER_KEY` | For credentials encryption   | Check `config/master.key`             ",
+  "tags": [
+    "javascript",
+    "typescript",
+    "react",
+    "node",
+    "markdown",
+    "api",
+    "ai",
+    "workflow",
+    "template",
+    "document"
+  ],
+  "useCases": [
+    "User wants to create or update a README.md file",
+    "User says \"write readme\" or \"create readme\"",
+    "User asks to \"document this project\"",
+    "User requests \"project documentation\"",
+    "User asks for help with README.md"
+  ],
+  "scrapedAt": "2026-02-05T07:10:36.221Z"
+}
