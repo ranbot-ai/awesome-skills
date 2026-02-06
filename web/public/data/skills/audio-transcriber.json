@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-audio-transcriber",
+  "name": "audio-transcriber",
+  "slug": "audio-transcriber",
+  "description": "Transform audio recordings into professional Markdown documentation with intelligent summaries using LLM integration",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/audio-transcriber",
+  "content": "\n## Purpose\n\nThis skill automates audio-to-text transcription with professional Markdown output, extracting rich technical metadata (speakers, timestamps, language, file size, duration) and generating structured meeting minutes and executive summaries. It uses Faster-Whisper or Whisper with zero configuration, working universally across projects without hardcoded paths or API keys.\n\nInspired by tools like Plaud, this skill transforms raw audio recordings into actionable documentation, making it ideal for meetings, interviews, lectures, and content analysis.\n\n## When to Use\n\nInvoke this skill when:\n\n- User needs to transcribe audio/video files to text\n- User wants meeting minutes automatically generated from recordings\n- User requires speaker identification (diarization) in conversations\n- User needs subtitles/captions (SRT, VTT formats)\n- User wants executive summaries of long audio content\n- User asks variations of \"transcribe this audio\", \"convert audio to text\", \"generate meeting notes from recording\"\n- User has audio files in common formats (MP3, WAV, M4A, OGG, FLAC, WEBM)\n\n## Workflow\n\n### Step 0: Discovery (Auto-detect Transcription Tools)\n\n**Objective:** Identify available transcription engines without user configuration.\n\n**Actions:**\n\nRun detection commands to find installed tools:\n\n```bash\n# Check for Faster-Whisper (preferred - 4-5x faster)\nif python3 -c \"import faster_whisper\" 2>/dev/null; then\n    TRANSCRIBER=\"faster-whisper\"\n    echo \"✅ Faster-Whisper detected (optimized)\"\n# Fallback to original Whisper\nelif python3 -c \"import whisper\" 2>/dev/null; then\n    TRANSCRIBER=\"whisper\"\n    echo \"✅ OpenAI Whisper detected\"\nelse\n    TRANSCRIBER=\"none\"\n    echo \"⚠️  No transcription tool found\"\nfi\n\n# Check for ffmpeg (audio format conversion)\nif command -v ffmpeg &>/dev/null; then\n    echo \"✅ ffmpeg available (format conversion enabled)\"\nelse\n    echo \"ℹ️  ffmpeg not found (limited format support)\"\nfi\n```\n\n**If no transcriber found:**\n\nOffer automatic installation using the provided script:\n\n```bash\necho \"⚠️  No transcription tool found\"\necho \"\"\necho \"🔧 Auto-install dependencies? (Recommended)\"\nread -p \"Run installation script? [Y/n]: \" AUTO_INSTALL\n\nif [[ ! \"$AUTO_INSTALL\" =~ ^[Nn] ]]; then\n    # Get skill directory (works for both repo and symlinked installations)\n    SKILL_DIR=\"$(cd \"$(dirname \"${BASH_SOURCE[0]}\")\" && pwd)\"\n    \n    # Run installation script\n    if [[ -f \"$SKILL_DIR/scripts/install-requirements.sh\" ]]; then\n        bash \"$SKILL_DIR/scripts/install-requirements.sh\"\n    else\n        echo \"❌ Installation script not found\"\n        echo \"\"\n        echo \"📦 Manual installation:\"\n        echo \"  pip install faster-whisper  # Recommended\"\n        echo \"  pip install openai-whisper  # Alternative\"\n        echo \"  brew install ffmpeg         # Optional (macOS)\"\n        exit 1\n    fi\n    \n    # Verify installation succeeded\n    if python3 -c \"import faster_whisper\" 2>/dev/null || python3 -c \"import whisper\" 2>/dev/null; then\n        echo \"✅ Installation successful! Proceeding with transcription...\"\n    else\n        echo \"❌ Installation failed. Please install manually.\"\n        exit 1\n    fi\nelse\n    echo \"\"\n    echo \"📦 Manual installation required:\"\n    echo \"\"\n    echo \"Recommended (fastest):\"\n    echo \"  pip install faster-whisper\"\n    echo \"\"\n    echo \"Alternative (original):\"\n    echo \"  pip install openai-whisper\"\n    echo \"\"\n    echo \"Optional (format conversion):\"\n    echo \"  brew install ffmpeg  # macOS\"\n    echo \"  apt install ffmpeg   # Linux\"\n    echo \"\"\n    exit 1\nfi\n```\n\nThis ensures users can install dependencies with one confirmation, or opt for manual installation if preferred.\n\n**If transcriber found:**\n\nProceed to Step 0b (CLI Detection).\n\n\n### Step 1: Validate Audio File\n\n**Objective:** Verify file exists, check format, and extract metadata.\n\n**Actions:**\n\n1. **Accept file path or URL** from user:\n   - Local file: `meeting.mp3`\n   - URL: `https://example.com/audio.mp3` (download to temp directory)\n\n2. **Verify file exists:**\n\n```bash\nif [[ ! -f \"$AUDIO_FILE\" ]]; then\n    echo \"❌ File not found: $AUDIO_FILE\"\n    exit 1\nfi\n```\n\n3. **Extract metadata** using ffprobe or file utilities:\n\n```bash\n# Get file size\nFILE_SIZE=$(du -h \"$AUDIO_FILE\" | cut -f1)\n\n# Get duration and format using ffprobe\nDURATION=$(ffprobe -v error -show_entries format=duration \\\n    -of default=noprint_wrappers=1:nokey=1 \"$AUDIO_FILE\" 2>/dev/null)\nFORMAT=$(ffprobe -v error -select_streams a:0 -show_entries \\\n    stream=codec_name -of default=noprint_wrappers=1:nokey=1 \"$AUDIO_FILE\" 2>/dev/null)\n\n# Convert duration to HH:MM:SS\nDURATION_HMS=$(date -u -r \"$DURATION\" +%H:%M:%S 2>/dev/null || echo \"Unknown\")\n```\n\n4. **Check file size** (warn if large for cloud APIs):\n\n```bash\nSIZE_MB=$(du -m \"$AUDIO_FILE\" | cut -f1)\nif [[ $SIZE_MB -gt 25 ]]; then\n    echo \"⚠️  Large file ($FILE_SIZE) - processing may take several minutes\"\nfi\n```\n\n5. **Validate format** (supported: MP3, WAV, M4A, OGG, FLAC, WEBM):\n\n```bash\nEXTE",
+  "tags": [
+    "python",
+    "markdown",
+    "api",
+    "claude",
+    "ai",
+    "llm",
+    "gpt",
+    "workflow",
+    "template",
+    "document"
+  ],
+  "useCases": [
+    "User needs to transcribe audio/video files to text",
+    "User wants meeting minutes automatically generated from recordings",
+    "User requires speaker identification (diarization) in conversations",
+    "User needs subtitles/captions (SRT, VTT formats)",
+    "User wants executive summaries of long audio content"
+  ],
+  "scrapedAt": "2026-02-06T07:04:18.180Z"
+}

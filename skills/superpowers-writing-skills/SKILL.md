@@ -14,7 +14,7 @@ url: https://github.com/obra/superpowers/tree/main/skills/writing-skills
 
 **Writing skills IS Test-Driven Development applied to process documentation.**
 
-**Personal skills live in agent-specific directories (`~/.claude/skills` for Claude Code, `~/.codex/skills` for Codex)** 
+**Personal skills live in agent-specific directories (`~/.claude/skills` for Claude Code, `~/.agents/skills/` for Codex)** 
 
 You write test cases (pressure scenarios with subagents), watch them fail (baseline behavior), write the skill (documentation), watch tests pass (agents comply), and refactor (close loopholes).
 
@@ -154,4 +154,4 @@ Concrete results
 
 **CRITICAL: Description = When to Use, NOT What the Skill Does**
 
-The description should ONLY describe triggering conditions. Do NOT summarize the skill's process or workflow in 
+The description should ONLY describe triggering conditions. Do NOT summarize the skill's process or workflow i
