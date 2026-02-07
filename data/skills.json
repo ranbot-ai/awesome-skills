@@ -5892,6 +5892,37 @@
       "scrapedAt": "2026-01-29T06:58:50.106Z"
     },
     {
+      "id": "antigravity-dotnet-backend",
+      "name": "dotnet-backend",
+      "slug": "dotnet-backend",
+      "description": "Build ASP.NET Core 8+ backend services with EF Core, auth, background jobs, and production API patterns.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dotnet-backend",
+      "content": "\n# .NET Backend Agent - ASP.NET Core & Enterprise API Expert\n\nYou are an expert .NET/C# backend developer with 8+ years of experience building enterprise-grade APIs and services.\n\n## When to Use\n\nUse this skill when the user asks to:\n\n- Build or refactor ASP.NET Core APIs (controller-based or Minimal APIs)\n- Implement authentication/authorization in a .NET backend\n- Design or optimize EF Core data access patterns\n- Add background workers, scheduled jobs, or integration services in C#\n- Improve reliability/performance of a .NET backend service\n\n## Your Expertise\n\n- **Frameworks**: ASP.NET Core 8+, Minimal APIs, Web API\n- **ORM**: Entity Framework Core 8+, Dapper\n- **Databases**: SQL Server, PostgreSQL, MySQL\n- **Authentication**: ASP.NET Core Identity, JWT, OAuth 2.0, Azure AD\n- **Authorization**: Policy-based, role-based, claims-based\n- **API Patterns**: RESTful, gRPC, GraphQL (HotChocolate)\n- **Background**: IHostedService, BackgroundService, Hangfire\n- **Real-time**: SignalR\n- **Testing**: xUnit, NUnit, Moq, FluentAssertions\n- **Dependency Injection**: Built-in DI container\n- **Validation**: FluentValidation, Data Annotations\n\n## Your Responsibilities\n\n1. **Build ASP.NET Core APIs**\n   - RESTful controllers or Minimal APIs\n   - Model validation\n   - Exception handling middleware\n   - CORS configuration\n   - Response compression\n\n2. **Entity Framework Core**\n   - DbContext configuration\n   - Code-first migrations\n   - Query optimization\n   - Include/ThenInclude for eager loading\n   - AsNoTracking for read-only queries\n\n3. **Authentication & Authorization**\n   - JWT token generation/validation\n   - ASP.NET Core Identity integration\n   - Policy-based authorization\n   - Custom authorization handlers\n\n4. **Background Services**\n   - IHostedService for long-running tasks\n   - Scoped services in background workers\n   - Scheduled jobs with Hangfire/Quartz.NET\n\n5. **Performance**\n   - Async/await throughout\n   - Connection pooling\n   - Response caching\n   - Output caching (.NET 8+)\n\n## Code Patterns You Follow\n\n### Minimal API with EF Core\n```csharp\nusing Microsoft.EntityFrameworkCore;\n\nvar builder = WebApplication.CreateBuilder(args);\n\n// Services\nbuilder.Services.AddDbContext<AppDbContext>(options =>\n    options.UseNpgsql(builder.Configuration.GetConnectionString(\"DefaultConnection\")));\n\nbuilder.Services.AddAuthentication().AddJwtBearer();\nbuilder.Services.AddAuthorization();\n\nvar app = builder.Build();\n\n// Create user endpoint\napp.MapPost(\"/api/users\", async (CreateUserRequest request, AppDbContext db) =>\n{\n    // Validate\n    if (string.IsNullOrEmpty(request.Email))\n        return Results.BadRequest(\"Email is required\");\n\n    // Hash password\n    var hashedPassword = BCrypt.Net.BCrypt.HashPassword(request.Password);\n\n    // Create user\n    var user = new User\n    {\n        Email = request.Email,\n        PasswordHash = hashedPassword,\n        Name = request.Name\n    };\n\n    db.Users.Add(user);\n    await db.SaveChangesAsync();\n\n    return Results.Created($\"/api/users/{user.Id}\", new UserResponse(user));\n})\n.WithName(\"CreateUser\")\n.WithOpenApi();\n\napp.Run();\n\nrecord CreateUserRequest(string Email, string Password, string Name);\nrecord UserResponse(int Id, string Email, string Name);\n```\n\n### Controller-based API\n```csharp\n[ApiController]\n[Route(\"api/[controller]\")]\npublic class UsersController : ControllerBase\n{\n    private readonly AppDbContext _db;\n    private readonly ILogger<UsersController> _logger;\n\n    public UsersController(AppDbContext db, ILogger<UsersController> logger)\n    {\n        _db = db;\n        _logger = logger;\n    }\n\n    [HttpGet]\n    public async Task<ActionResult<List<UserDto>>> GetUsers()\n    {\n        var users = await _db.Users\n            .AsNoTracking()\n            .Select(u => new UserDto(u.Id, u.Email, u.Name))\n            .ToListAsync();\n\n        return Ok(users);\n    }\n\n    [HttpPost]\n    public async Task<ActionResult<UserDto>> CreateUser(CreateUserDto dto)\n    {\n        var user = new User\n        {\n            Email = dto.Email,\n            PasswordHash = BCrypt.Net.BCrypt.HashPassword(dto.Password),\n            Name = dto.Name\n        };\n\n        _db.Users.Add(user);\n        await _db.SaveChangesAsync();\n\n        return CreatedAtAction(nameof(GetUser), new { id = user.Id }, new UserDto(user));\n    }\n}\n```\n\n### JWT Authentication\n```csharp\nusing Microsoft.IdentityModel.Tokens;\nusing System.IdentityModel.Tokens.Jwt;\nusing System.Security.Claims;\nusing System.Text;\n\npublic class TokenService\n{\n    private readonly IConfiguration _config;\n\n    public TokenService(IConfiguration config) => _config = config;\n\n    public string GenerateToken(User user)\n    {\n        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config[\"Jwt:Key\"]!));\n        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);\n\n        var claims = new[]\n        {\n            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),\n            new Claim(ClaimTypes.Email, user.Email",
+      "tags": [
+        "api",
+        "ai",
+        "agent",
+        "design",
+        "document",
+        "security",
+        "aws",
+        "gcp",
+        "azure",
+        "cro"
+      ],
+      "useCases": [
+        "Build or refactor ASP.NET Core APIs (controller-based or Minimal APIs)",
+        "Implement authentication/authorization in a .NET backend",
+        "Design or optimize EF Core data access patterns",
+        "Add background workers, scheduled jobs, or integration services in C#",
+        "Improve reliability/performance of a .NET backend service"
+      ],
+      "scrapedAt": "2026-02-07T06:54:37.945Z"
+    },
+    {
       "id": "antigravity-dotnet-backend-patterns",
       "name": "dotnet-backend-patterns",
       "slug": "dotnet-backend-patterns",
@@ -14638,7 +14669,7 @@
       "source": "anthropic",
       "repoUrl": "https://github.com/anthropics/skills",
       "skillUrl": "https://github.com/anthropics/skills/tree/main/skills/skill-creator",
-      "content": "\n# Skill Creator\n\nThis skill provides guidance for creating effective skills.\n\n## About Skills\n\nSkills are modular, self-contained packages that extend Claude's capabilities by providing\nspecialized knowledge, workflows, and tools. Think of them as \"onboarding guides\" for specific\ndomains or tasks—they transform Claude from a general-purpose agent into a specialized agent\nequipped with procedural knowledge that no model can fully possess.\n\n### What Skills Provide\n\n1. Specialized workflows - Multi-step procedures for specific domains\n2. Tool integrations - Instructions for working with specific file formats or APIs\n3. Domain expertise - Company-specific knowledge, schemas, business logic\n4. Bundled resources - Scripts, references, and assets for complex and repetitive tasks\n\n## Core Principles\n\n### Concise is Key\n\nThe context window is a public good. Skills share the context window with everything else Claude needs: system prompt, conversation history, other Skills' metadata, and the actual user request.\n\n**Default assumption: Claude is already very smart.** Only add context Claude doesn't already have. Challenge each piece of information: \"Does Claude really need this explanation?\" and \"Does this paragraph justify its token cost?\"\n\nPrefer concise examples over verbose explanations.\n\n### Set Appropriate Degrees of Freedom\n\nMatch the level of specificity to the task's fragility and variability:\n\n**High freedom (text-based instructions)**: Use when multiple approaches are valid, decisions depend on context, or heuristics guide the approach.\n\n**Medium freedom (pseudocode or scripts with parameters)**: Use when a preferred pattern exists, some variation is acceptable, or configuration affects behavior.\n\n**Low freedom (specific scripts, few parameters)**: Use when operations are fragile and error-prone, consistency is critical, or a specific sequence must be followed.\n\nThink of Claude as exploring a path: a narrow bridge with cliffs needs specific guardrails (low freedom), while an open field allows many routes (high freedom).\n\n### Anatomy of a Skill\n\nEvery skill consists of a required SKILL.md file and optional bundled resources:\n\n```\nskill-name/\n├── SKILL.md (required)\n│   ├── YAML frontmatter metadata (required)\n│   │   ├── name: (required)\n│   │   └── description: (required)\n│   └── Markdown instructions (required)\n└── Bundled Resources (optional)\n    ├── scripts/          - Executable code (Python/Bash/etc.)\n    ├── references/       - Documentation intended to be loaded into context as needed\n    └── assets/           - Files used in output (templates, icons, fonts, etc.)\n```\n\n#### SKILL.md (required)\n\nEvery SKILL.md consists of:\n\n- **Frontmatter** (YAML): Contains `name` and `description` fields. These are the only fields that Claude reads to determine when the skill gets used, thus it is very important to be clear and comprehensive in describing what the skill is, and when it should be used.\n- **Body** (Markdown): Instructions and guidance for using the skill. Only loaded AFTER the skill triggers (if at all).\n\n#### Bundled Resources (optional)\n\n##### Scripts (`scripts/`)\n\nExecutable code (Python/Bash/etc.) for tasks that require deterministic reliability or are repeatedly rewritten.\n\n- **When to include**: When the same code is being rewritten repeatedly or deterministic reliability is needed\n- **Example**: `scripts/rotate_pdf.py` for PDF rotation tasks\n- **Benefits**: Token efficient, deterministic, may be executed without loading into context\n- **Note**: Scripts may still need to be read by Claude for patching or environment-specific adjustments\n\n##### References (`references/`)\n\nDocumentation and reference material intended to be loaded as needed into context to inform Claude's process and thinking.\n\n- **When to include**: For documentation that Claude should reference while working\n- **Examples**: `references/finance.md` for financial schemas, `references/mnda.md` for company NDA template, `references/policies.md` for company policies, `references/api_docs.md` for API specifications\n- **Use cases**: Database schemas, API documentation, domain knowledge, company policies, detailed workflow guides\n- **Benefits**: Keeps SKILL.md lean, loaded only when Claude determines it's needed\n- **Best practice**: If files are large (>10k words), include grep search patterns in SKILL.md\n- **Avoid duplication**: Information should live in either SKILL.md or references files, not both. Prefer references files for detailed information unless it's truly core to the skill—this keeps SKILL.md lean while making information discoverable without hogging the context window. Keep only essential procedural instructions and workflow guidance in SKILL.md; move detailed reference material, schemas, and examples to references files.\n\n##### Assets (`assets/`)\n\nFiles not intended to be loaded into context, but rather used within the output Claude produces.\n\n- **When to include**: When the skill needs files that will be used in the fin",
+      "content": "\n# Skill Creator\n\nThis skill provides guidance for creating effective skills.\n\n## About Skills\n\nSkills are modular, self-contained packages that extend Claude's capabilities by providing\nspecialized knowledge, workflows, and tools. Think of them as \"onboarding guides\" for specific\ndomains or tasks—they transform Claude from a general-purpose agent into a specialized agent\nequipped with procedural knowledge that no model can fully possess.\n\n### What Skills Provide\n\n1. Specialized workflows - Multi-step procedures for specific domains\n2. Tool integrations - Instructions for working with specific file formats or APIs\n3. Domain expertise - Company-specific knowledge, schemas, business logic\n4. Bundled resources - Scripts, references, and assets for complex and repetitive tasks\n\n## Core Principles\n\n### Concise is Key\n\nThe context window is a public good. Skills share the context window with everything else Claude needs: system prompt, conversation history, other Skills' metadata, and the actual user request.\n\n**Default assumption: Claude is already very smart.** Only add context Claude doesn't already have. Challenge each piece of information: \"Does Claude really need this explanation?\" and \"Does this paragraph justify its token cost?\"\n\nPrefer concise examples over verbose explanations.\n\n### Set Appropriate Degrees of Freedom\n\nMatch the level of specificity to the task's fragility and variability:\n\n**High freedom (text-based instructions)**: Use when multiple approaches are valid, decisions depend on context, or heuristics guide the approach.\n\n**Medium freedom (pseudocode or scripts with parameters)**: Use when a preferred pattern exists, some variation is acceptable, or configuration affects behavior.\n\n**Low freedom (specific scripts, few parameters)**: Use when operations are fragile and error-prone, consistency is critical, or a specific sequence must be followed.\n\nThink of Claude as exploring a path: a narrow bridge with cliffs needs specific guardrails (low freedom), while an open field allows many routes (high freedom).\n\n### Anatomy of a Skill\n\nEvery skill consists of a required SKILL.md file and optional bundled resources:\n\n```\nskill-name/\n├── SKILL.md (required)\n│   ├── YAML frontmatter metadata (required)\n│   │   ├── name: (required)\n│   │   ├── description: (required)\n│   │   └── compatibility: (optional, rarely needed)\n│   └── Markdown instructions (required)\n└── Bundled Resources (optional)\n    ├── scripts/          - Executable code (Python/Bash/etc.)\n    ├── references/       - Documentation intended to be loaded into context as needed\n    └── assets/           - Files used in output (templates, icons, fonts, etc.)\n```\n\n#### SKILL.md (required)\n\nEvery SKILL.md consists of:\n\n- **Frontmatter** (YAML): Contains `name` and `description` fields (required), plus optional fields like `license`, `metadata`, and `compatibility`. Only `name` and `description` are read by Claude to determine when the skill triggers, so be clear and comprehensive about what the skill is and when it should be used. The `compatibility` field is for noting environment requirements (target product, system packages, etc.) but most skills don't need it.\n- **Body** (Markdown): Instructions and guidance for using the skill. Only loaded AFTER the skill triggers (if at all).\n\n#### Bundled Resources (optional)\n\n##### Scripts (`scripts/`)\n\nExecutable code (Python/Bash/etc.) for tasks that require deterministic reliability or are repeatedly rewritten.\n\n- **When to include**: When the same code is being rewritten repeatedly or deterministic reliability is needed\n- **Example**: `scripts/rotate_pdf.py` for PDF rotation tasks\n- **Benefits**: Token efficient, deterministic, may be executed without loading into context\n- **Note**: Scripts may still need to be read by Claude for patching or environment-specific adjustments\n\n##### References (`references/`)\n\nDocumentation and reference material intended to be loaded as needed into context to inform Claude's process and thinking.\n\n- **When to include**: For documentation that Claude should reference while working\n- **Examples**: `references/finance.md` for financial schemas, `references/mnda.md` for company NDA template, `references/policies.md` for company policies, `references/api_docs.md` for API specifications\n- **Use cases**: Database schemas, API documentation, domain knowledge, company policies, detailed workflow guides\n- **Benefits**: Keeps SKILL.md lean, loaded only when Claude determines it's needed\n- **Best practice**: If files are large (>10k words), include grep search patterns in SKILL.md\n- **Avoid duplication**: Information should live in either SKILL.md or references files, not both. Prefer references files for detailed information unless it's truly core to the skill—this keeps SKILL.md lean while making information discoverable without hogging the context window. Keep only essential procedural instructions and workflow guidance in SKILL.md; move detailed reference material, schemas",
       "tags": [
         "python",
         "react",
@@ -18105,7 +18136,7 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 217
+      "count": 218
     },
     {
       "id": "ai-agents",
@@ -18177,48 +18208,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 45654
+      "stars": 46361
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 1,
-      "stars": 64273
+      "stars": 64906
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 98,
-      "newSkillCount": 87,
-      "stars": 30957
+      "newSkillCount": 8,
+      "stars": 31434
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 67545
+      "stars": 67568
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 808
+      "stars": 821
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillCount": 624,
-      "newSkillCount": 13,
-      "stars": 7462
+      "skillCount": 625,
+      "newSkillCount": 89,
+      "stars": 7660
     }
   ],
-  "lastUpdated": "2026-02-06T07:09:30.323Z",
+  "lastUpdated": "2026-02-07T06:57:45.318Z",
   "stats": {
-    "totalSkills": 801,
-    "newSkills": 101,
-    "scrapedAt": "2026-02-06T07:09:30.323Z"
+    "totalSkills": 802,
+    "newSkills": 98,
+    "scrapedAt": "2026-02-07T06:57:45.318Z"
   }
 }
