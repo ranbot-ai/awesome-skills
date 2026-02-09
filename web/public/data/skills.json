@@ -2937,25 +2937,25 @@
       "id": "antigravity-clean-code",
       "name": "clean-code",
       "slug": "clean-code",
-      "description": "Pragmatic coding standards - concise, direct, no over-engineering, no unnecessary comments",
-      "category": "Security & Systems",
+      "description": "Applies principles from Robert C. Martin's 'Clean Code'. Use this skill when writing, reviewing, or refactoring code to ensure high quality, readability, and maintainability. Covers naming, functions, comments, error handling, and class design.",
+      "category": "Development & Code Tools",
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/clean-code",
-      "content": "\n# Clean Code - Pragmatic AI Coding Standards\n\n> **CRITICAL SKILL** - Be **concise, direct, and solution-focused**.\n\n---\n\n## Core Principles\n\n| Principle | Rule |\n|-----------|------|\n| **SRP** | Single Responsibility - each function/class does ONE thing |\n| **DRY** | Don't Repeat Yourself - extract duplicates, reuse |\n| **KISS** | Keep It Simple - simplest solution that works |\n| **YAGNI** | You Aren't Gonna Need It - don't build unused features |\n| **Boy Scout** | Leave code cleaner than you found it |\n\n---\n\n## Naming Rules\n\n| Element | Convention |\n|---------|------------|\n| **Variables** | Reveal intent: `userCount` not `n` |\n| **Functions** | Verb + noun: `getUserById()` not `user()` |\n| **Booleans** | Question form: `isActive`, `hasPermission`, `canEdit` |\n| **Constants** | SCREAMING_SNAKE: `MAX_RETRY_COUNT` |\n\n> **Rule:** If you need a comment to explain a name, rename it.\n\n---\n\n## Function Rules\n\n| Rule | Description |\n|------|-------------|\n| **Small** | Max 20 lines, ideally 5-10 |\n| **One Thing** | Does one thing, does it well |\n| **One Level** | One level of abstraction per function |\n| **Few Args** | Max 3 arguments, prefer 0-2 |\n| **No Side Effects** | Don't mutate inputs unexpectedly |\n\n---\n\n## Code Structure\n\n| Pattern | Apply |\n|---------|-------|\n| **Guard Clauses** | Early returns for edge cases |\n| **Flat > Nested** | Avoid deep nesting (max 2 levels) |\n| **Composition** | Small functions composed together |\n| **Colocation** | Keep related code close |\n\n---\n\n## AI Coding Style\n\n| Situation | Action |\n|-----------|--------|\n| User asks for feature | Write it directly |\n| User reports bug | Fix it, don't explain |\n| No clear requirement | Ask, don't assume |\n\n---\n\n## Anti-Patterns (DON'T)\n\n| ❌ Pattern | ✅ Fix |\n|-----------|-------|\n| Comment every line | Delete obvious comments |\n| Helper for one-liner | Inline the code |\n| Factory for 2 objects | Direct instantiation |\n| utils.ts with 1 function | Put code where used |\n| \"First we import...\" | Just write code |\n| Deep nesting | Guard clauses |\n| Magic numbers | Named constants |\n| God functions | Split by responsibility |\n\n---\n\n## 🔴 Before Editing ANY File (THINK FIRST!)\n\n**Before changing a file, ask yourself:**\n\n| Question | Why |\n|----------|-----|\n| **What imports this file?** | They might break |\n| **What does this file import?** | Interface changes |\n| **What tests cover this?** | Tests might fail |\n| **Is this a shared component?** | Multiple places affected |\n\n**Quick Check:**\n```\nFile to edit: UserService.ts\n└── Who imports this? → UserController.ts, AuthController.ts\n└── Do they need changes too? → Check function signatures\n```\n\n> 🔴 **Rule:** Edit the file + all dependent files in the SAME task.\n> 🔴 **Never leave broken imports or missing updates.**\n\n---\n\n## Summary\n\n| Do | Don't |\n|----|-------|\n| Write code directly | Write tutorials |\n| Let code self-document | Add obvious comments |\n| Fix bugs immediately | Explain the fix first |\n| Inline small things | Create unnecessary files |\n| Name things clearly | Use abbreviations |\n| Keep functions small | Write 100+ line functions |\n\n> **Remember: The user wants working code, not a programming lesson.**\n\n---\n\n## 🔴 Self-Check Before Completing (MANDATORY)\n\n**Before saying \"task complete\", verify:**\n\n| Check | Question |\n|-------|----------|\n| ✅ **Goal met?** | Did I do exactly what user asked? |\n| ✅ **Files edited?** | Did I modify all necessary files? |\n| ✅ **Code works?** | Did I test/verify the change? |\n| ✅ **No errors?** | Lint and TypeScript pass? |\n| ✅ **Nothing forgotten?** | Any edge cases missed? |\n\n> 🔴 **Rule:** If ANY check fails, fix it before completing.\n\n---\n\n## Verification Scripts (MANDATORY)\n\n> 🔴 **CRITICAL:** Each agent runs ONLY their own skill's scripts after completing work.\n\n### Agent → Script Mapping\n\n| Agent | Script | Command |\n|-------|--------|---------|\n| **frontend-specialist** | UX Audit | `python ~/.claude/skills/frontend-design/scripts/ux_audit.py .` |\n| **frontend-specialist** | A11y Check | `python ~/.claude/skills/frontend-design/scripts/accessibility_checker.py .` |\n| **backend-specialist** | API Validator | `python ~/.claude/skills/api-patterns/scripts/api_validator.py .` |\n| **mobile-developer** | Mobile Audit | `python ~/.claude/skills/mobile-design/scripts/mobile_audit.py .` |\n| **database-architect** | Schema Validate | `python ~/.claude/skills/database-design/scripts/schema_validator.py .` |\n| **security-auditor** | Security Scan | `python ~/.claude/skills/vulnerability-scanner/scripts/security_scan.py .` |\n| **seo-specialist** | SEO Check | `python ~/.claude/skills/seo-fundamentals/scripts/seo_checker.py .` |\n| **seo-specialist** | GEO Check | `python ~/.claude/skills/geo-fundamentals/scripts/geo_checker.py .` |\n| **performance-optimizer** | Lighthouse | `python ~/.claude/skills/performance-profiling/scripts/lighthouse_audit.py <url>` |\n| **test-engineer** | Test Runner | `python ~/.claude/skills/testing-patterns/scripts/test_runner",
+      "content": "\n# Clean Code Skill\n\nThis skill embodies the principles of \"Clean Code\" by Robert C. Martin (Uncle Bob). Use it to transform \"code that works\" into \"code that is clean.\"\n\n## 🧠 Core Philosophy\n> \"Code is clean if it can be read, and enhanced by a developer other than its original author.\" — Grady Booch\n\n## When to Use\nUse this skill when:\n- **Writing new code**: To ensure high quality from the start.\n- **Reviewing Pull Requests**: To provide constructive, principle-based feedback.\n- **Refactoring legacy code**: To identify and remove code smells.\n- **Improving team standards**: To align on industry-standard best practices.\n\n## 1. Meaningful Names\n- **Use Intention-Revealing Names**: `elapsedTimeInDays` instead of `d`.\n- **Avoid Disinformation**: Don't use `accountList` if it's actually a `Map`.\n- **Make Meaningful Distinctions**: Avoid `ProductData` vs `ProductInfo`.\n- **Use Pronounceable/Searchable Names**: Avoid `genymdhms`.\n- **Class Names**: Use nouns (`Customer`, `WikiPage`). Avoid `Manager`, `Data`.\n- **Method Names**: Use verbs (`postPayment`, `deletePage`).\n\n## 2. Functions\n- **Small!**: Functions should be shorter than you think.\n- **Do One Thing**: A function should do only one thing, and do it well.\n- **One Level of Abstraction**: Don't mix high-level business logic with low-level details (like regex).\n- **Descriptive Names**: `isPasswordValid` is better than `check`.\n- **Arguments**: 0 is ideal, 1-2 is okay, 3+ requires a very strong justification.\n- **No Side Effects**: Functions shouldn't secretly change global state.\n\n## 3. Comments\n- **Don't Comment Bad Code—Rewrite It**: Most comments are a sign of failure to express ourselves in code.\n- **Explain Yourself in Code**: \n  ```python\n  # Check if employee is eligible for full benefits\n  if employee.flags & HOURLY and employee.age > 65:\n  ```\n  vs\n  ```python\n  if employee.isEligibleForFullBenefits():\n  ```\n- **Good Comments**: Legal, Informative (regex intent), Clarification (external libraries), TODOs.\n- **Bad Comments**: Mumbling, Redundant, Misleading, Mandated, Noise, Position Markers.\n\n## 4. Formatting\n- **The Newspaper Metaphor**: High-level concepts at the top, details at the bottom.\n- **Vertical Density**: Related lines should be close to each other.\n- **Distance**: Variables should be declared near their usage.\n- **Indentation**: Essential for structural readability.\n\n## 5. Objects and Data Structures\n- **Data Abstraction**: Hide the implementation behind interfaces.\n- **The Law of Demeter**: A module should not know about the innards of the objects it manipulates. Avoid `a.getB().getC().doSomething()`.\n- **Data Transfer Objects (DTO)**: Classes with public variables and no functions.\n\n## 6. Error Handling\n- **Use Exceptions instead of Return Codes**: Keeps logic clean.\n- **Write Try-Catch-Finally First**: Defines the scope of the operation.\n- **Don't Return Null**: It forces the caller to check for null every time.\n- **Don't Pass Null**: Leads to `NullPointerException`.\n\n## 7. Unit Tests\n- **The Three Laws of TDD**:\n  1. Don't write production code until you have a failing unit test.\n  2. Don't write more of a unit test than is sufficient to fail.\n  3. Don't write more production code than is sufficient to pass the failing test.\n- **F.I.R.S.T. Principles**: Fast, Independent, Repeatable, Self-Validating, Timely.\n\n## 8. Classes\n- **Small!**: Classes should have a single responsibility (SRP).\n- **The Stepdown Rule**: We want the code to read like a top-down narrative.\n\n## 9. Smells and Heuristics\n- **Rigidity**: Hard to change.\n- **Fragility**: Breaks in many places.\n- **Immobility**: Hard to reuse.\n- **Viscosity**: Hard to do the right thing.\n- **Needless Complexity/Repetition**.\n\n## 🛠️ Implementation Checklist\n- [ ] Is this function smaller than 20 lines?\n- [ ] Does this function do exactly one thing?\n- [ ] Are all names searchable and intention-revealing?\n- [ ] Have I avoided comments by making the code clearer?\n- [ ] Am I passing too many arguments?\n- [ ] Is there a failing test for this change?\n",
       "tags": [
         "python",
-        "typescript",
-        "markdown",
-        "api",
-        "claude",
         "ai",
-        "agent",
         "design",
-        "document",
-        "security"
+        "aws",
+        "rag"
       ],
-      "useCases": [],
+      "useCases": [
+        "**Writing new code**: To ensure high quality from the start.",
+        "**Reviewing Pull Requests**: To provide constructive, principle-based feedback.",
+        "**Refactoring legacy code**: To identify and remove code smells.",
+        "**Improving team standards**: To align on industry-standard best practices."
+      ],
       "scrapedAt": "2026-01-26T13:17:33.937Z"
     },
     {
@@ -18150,14 +18150,14 @@
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 178
+      "count": 179
     },
     {
       "id": "security-systems",
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 84
+      "count": 83
     },
     {
       "id": "creative-media",
@@ -18208,48 +18208,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 47176
+      "stars": 48043
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 1,
-      "stars": 65464
+      "stars": 66111
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 98,
       "newSkillCount": 8,
-      "stars": 32196
+      "stars": 32874
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 67608
+      "stars": 67653
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 820
+      "stars": 823
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 625,
       "newSkillCount": 88,
-      "stars": 7818
+      "stars": 7987
     }
   ],
-  "lastUpdated": "2026-02-08T07:05:33.798Z",
+  "lastUpdated": "2026-02-09T07:18:42.520Z",
   "stats": {
     "totalSkills": 802,
     "newSkills": 97,
-    "scrapedAt": "2026-02-08T07:05:33.798Z"
+    "scrapedAt": "2026-02-09T07:18:42.520Z"
   }
 }
