@@ -802,6 +802,33 @@
       "scrapedAt": "2026-01-29T06:57:55.912Z"
     },
     {
+      "id": "antigravity-antigravity-workflows",
+      "name": "antigravity-workflows",
+      "slug": "antigravity-workflows",
+      "description": "Orchestrate multiple Antigravity skills through guided workflows for SaaS MVP delivery, security audits, AI agent builds, and browser QA.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/antigravity-workflows",
+      "content": "\n# Antigravity Workflows\n\nUse this skill to turn a complex objective into a guided sequence of skill invocations.\n\n## When to Use This Skill\n\nUse this skill when:\n- The user wants to combine several skills without manually selecting each one.\n- The goal is multi-phase (for example: plan, build, test, ship).\n- The user asks for best-practice execution for common scenarios like:\n  - Shipping a SaaS MVP\n  - Running a web security audit\n  - Building an AI agent system\n  - Implementing browser automation and E2E QA\n\n## Workflow Source of Truth\n\nRead workflows in this order:\n1. `docs/WORKFLOWS.md` for human-readable playbooks.\n2. `data/workflows.json` for machine-readable workflow metadata.\n\n## How to Run This Skill\n\n1. Identify the user's concrete outcome.\n2. Propose the 1-2 best matching workflows.\n3. Ask the user to choose one.\n4. Execute step-by-step:\n   - Announce current step and expected artifact.\n   - Invoke recommended skills for that step.\n   - Verify completion criteria before moving to next step.\n5. At the end, provide:\n   - Completed artifacts\n   - Validation evidence\n   - Remaining risks and next actions\n\n## Default Workflow Routing\n\n- Product delivery request -> `ship-saas-mvp`\n- Security review request -> `security-audit-web-app`\n- Agent/LLM product request -> `build-ai-agent-system`\n- E2E/browser testing request -> `qa-browser-automation`\n\n## Copy-Paste Prompts\n\n```text\nUse @antigravity-workflows to run the \"Ship a SaaS MVP\" workflow for my project idea.\n```\n\n```text\nUse @antigravity-workflows and execute a full \"Security Audit for a Web App\" workflow.\n```\n\n```text\nUse @antigravity-workflows to guide me through \"Build an AI Agent System\" with checkpoints.\n```\n\n```text\nUse @antigravity-workflows to execute the \"QA and Browser Automation\" workflow and stabilize flaky tests.\n```\n\n## Limitations\n\n- This skill orchestrates; it does not replace specialized skills.\n- It depends on the local availability of referenced skills.\n- It does not guarantee success without environment access, credentials, or required infrastructure.\n- For stack-specific browser automation in Go, `go-playwright` may require the corresponding skill to be present in your local skills repository.\n\n## Related Skills\n\n- `concise-planning`\n- `brainstorming`\n- `workflow-automation`\n- `verification-before-completion`\n",
+      "tags": [
+        "ai",
+        "agent",
+        "llm",
+        "automation",
+        "workflow",
+        "security"
+      ],
+      "useCases": [
+        "The user wants to combine several skills without manually selecting each one.",
+        "The goal is multi-phase (for example: plan, build, test, ship).",
+        "The user asks for best-practice execution for common scenarios like:",
+        "Shipping a SaaS MVP",
+        "Running a web security audit"
+      ],
+      "scrapedAt": "2026-02-11T07:11:41.442Z"
+    },
+    {
       "id": "antigravity-api-fuzzing-bug-bounty",
       "name": "API Fuzzing for Bug Bounty",
       "slug": "api-fuzzing-bug-bounty",
@@ -7945,6 +7972,35 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-29T06:59:13.288Z"
+    },
+    {
+      "id": "antigravity-go-playwright",
+      "name": "go-playwright",
+      "slug": "go-playwright",
+      "description": "Expert capability for robust, stealthy, and efficient browser automation using Playwright Go.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/go-playwright",
+      "content": "\n# Playwright Go Automation Expert\n\n## Overview\nThis skill provides a comprehensive framework for writing high-performance, production-grade browser automation scripts using `github.com/playwright-community/playwright-go`. It enforces architectural best practices (contexts over instances), robust error handling, structured logging (Zap), and advanced human-emulation techniques to bypass anti-bot systems.\n\n## When to Use This Skill\n- Use when the user asks to \"scrape,\" \"automate,\" or \"test\" a website using Go.\n- Use when the target site has complex dynamic content (SPA, React, Vue) requiring a real browser.\n- Use when the user mentions \"stealth,\" \"avoiding detection,\" \"cloudflare,\" or \"human-like\" behavior.\n- Use when debugging existing Playwright scripts.\n\n## Safety & Risk\n**Risk Level: 🔵 Safe**\n\n- **Sandboxed Execution:** Browser contexts are isolated; they do not persist data to the host machine unless explicitly saved.\n- **Resource Management:** Designed to close browsers and contexts via `defer` to prevent memory leaks.\n- **No External State-Change:** Default behavior is read-only (scraping/testing) unless the script is explicitly designed to submit forms or modify data.\n\n## Limitations\n- **Environment Dependencies:** Requires Playwright drivers and browsers to be installed (`go run github.com/playwright-community/playwright-go/cmd/playwright@latest install --with-deps`).\n- **Resource Intensity:** Launching full browser instances (even headless) consumes significant RAM/CPU. Use single-browser/multi-context architecture.\n- **Bot Detection:** While this skill includes stealth techniques, extremely strict anti-bot systems (e.g., rigorous Cloudflare settings) may still detect automation.\n- **CAPTCHAs:** Does not include built-in CAPTCHA solving capabilities.\n\n## Strategic Implementation Guidelines\n\n### 1. Architecture: Contexts vs. Browsers\n**CRITICAL:** Never launch a new `Browser` instance for every task.\n- **Pattern:** Launch the `Browser` *once* (singleton). Create a new `BrowserContext` for each distinct session or task.\n- **Why:** Contexts are lightweight and created in milliseconds. Browsers take seconds to launch.\n- **Isolation:** Contexts provide complete isolation (cookies, cache, storage) without the overhead of a new process.\n\n### 2. Logging & Observability\n- **Library:** Use `go.uber.org/zap` exclusively.\n- **Rule:** Do not use `fmt.Println`.\n- **Modes:**\n  - **Dev:** `zap.NewDevelopment()` (Console friendly)\n  - **Prod:** `zap.NewProduction()` (JSON structured)\n- **Traceability:** Log every navigation, click, and input with context fields (e.g., `logger.Info(\"clicking button\", zap.String(\"selector\", sel))`).\n\n### 3. Error Handling & Stability\n- **Graceful Shutdown:** Always use `defer` to close Pages, Contexts, and Browsers.\n- **Panic Recovery:** Wrap critical automation routines in a safe runner that recovers panics and logs the stack trace.\n- **Timeouts:** Never rely on default timeouts. Set explicit timeouts (e.g., `playwright.PageClickOptions{Timeout: playwright.Float(5000)}`).\n\n### 4. Stealth & Human-Like Behavior\nTo bypass anti-bot systems (Cloudflare, Akamai), the generated code must **imitate human physiology**:\n- **Non-Linear Mouse Movement:** Never teleport the mouse. Implement a helper that moves the mouse along a Bezier curve with random jitter.\n- **Input Latency:** never use `Fill()`. Use `Type()` with random delays between keystrokes (50ms–200ms).\n- **Viewport Randomization:** Randomize the viewport size slightly (e.g., 1920x1080 ± 15px) to avoid fingerprinting.\n- **Behavioral Noise:** Randomly scroll, focus/unfocus the window, or hover over irrelevant elements (\"idling\") during long waits.\n- **User-Agent:** Rotate User-Agents for every new Context.\n\n### 5. Documentation Usage\n- **Primary Source:** Rely on your internal knowledge of the API first to save tokens.\n- **Fallback:** Refer to the official docs [playwright-go documentation](https://pkg.go.dev/github.com/playwright-community/playwright-go#section-documentation) ONLY if:\n  - You encounter an unknown error.\n  - You need to implement complex network interception or authentication flows.\n  - The API has changed significantly.\n\n## Resources\n- `resources/implementation-playbook.md` for detailed code examples and implementation patterns.\n\n\n### Summary Checklist for Agent\n - Is Debug Mode on? -> `Headless=false`, `SlowMo=100+`.\n - Is it a new user identity? -> `NewContext`, apply new Proxy, rotate `User-Agent`.\n - Is the action critical? -> Wrap in `SafeAction` with Zap logging.\n - Is the target guarded (Cloudflare/Akamai)? -> Enable `HumanType`, `BezierMouse`, and Stealth Scripts.\n",
+      "tags": [
+        "react",
+        "api",
+        "ai",
+        "agent",
+        "automation",
+        "design",
+        "document",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Use when the user asks to \"scrape,\" \"automate,\" or \"test\" a website using Go.",
+        "Use when the target site has complex dynamic content (SPA, React, Vue) requiring a real browser.",
+        "Use when the user mentions \"stealth,\" \"avoiding detection,\" \"cloudflare,\" or \"human-like\" behavior.",
+        "Use when debugging existing Playwright scripts."
+      ],
+      "scrapedAt": "2026-02-11T07:13:16.247Z"
     },
     {
       "id": "antigravity-godot-gdscript-patterns",
@@ -18136,14 +18192,14 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 218
+      "count": 219
     },
     {
       "id": "ai-agents",
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 195
+      "count": 196
     },
     {
       "id": "development-code-tools",
@@ -18208,48 +18264,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 48769
+      "stars": 49423
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 1,
-      "stars": 66874
+      "stars": 67684
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 98,
       "newSkillCount": 8,
-      "stars": 33342
+      "stars": 33733
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 67694
+      "stars": 67740
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 856
+      "stars": 872
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillCount": 625,
-      "newSkillCount": 88,
-      "stars": 8154
+      "skillCount": 627,
+      "newSkillCount": 90,
+      "stars": 8356
     }
   ],
-  "lastUpdated": "2026-02-10T07:21:24.999Z",
+  "lastUpdated": "2026-02-11T07:15:38.095Z",
   "stats": {
-    "totalSkills": 802,
-    "newSkills": 97,
-    "scrapedAt": "2026-02-10T07:21:24.999Z"
+    "totalSkills": 804,
+    "newSkills": 99,
+    "scrapedAt": "2026-02-11T07:15:38.095Z"
   }
 }

@@ -1,0 +1,27 @@
+{
+  "id": "antigravity-antigravity-workflows",
+  "name": "antigravity-workflows",
+  "slug": "antigravity-workflows",
+  "description": "Orchestrate multiple Antigravity skills through guided workflows for SaaS MVP delivery, security audits, AI agent builds, and browser QA.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/antigravity-workflows",
+  "content": "\n# Antigravity Workflows\n\nUse this skill to turn a complex objective into a guided sequence of skill invocations.\n\n## When to Use This Skill\n\nUse this skill when:\n- The user wants to combine several skills without manually selecting each one.\n- The goal is multi-phase (for example: plan, build, test, ship).\n- The user asks for best-practice execution for common scenarios like:\n  - Shipping a SaaS MVP\n  - Running a web security audit\n  - Building an AI agent system\n  - Implementing browser automation and E2E QA\n\n## Workflow Source of Truth\n\nRead workflows in this order:\n1. `docs/WORKFLOWS.md` for human-readable playbooks.\n2. `data/workflows.json` for machine-readable workflow metadata.\n\n## How to Run This Skill\n\n1. Identify the user's concrete outcome.\n2. Propose the 1-2 best matching workflows.\n3. Ask the user to choose one.\n4. Execute step-by-step:\n   - Announce current step and expected artifact.\n   - Invoke recommended skills for that step.\n   - Verify completion criteria before moving to next step.\n5. At the end, provide:\n   - Completed artifacts\n   - Validation evidence\n   - Remaining risks and next actions\n\n## Default Workflow Routing\n\n- Product delivery request -> `ship-saas-mvp`\n- Security review request -> `security-audit-web-app`\n- Agent/LLM product request -> `build-ai-agent-system`\n- E2E/browser testing request -> `qa-browser-automation`\n\n## Copy-Paste Prompts\n\n```text\nUse @antigravity-workflows to run the \"Ship a SaaS MVP\" workflow for my project idea.\n```\n\n```text\nUse @antigravity-workflows and execute a full \"Security Audit for a Web App\" workflow.\n```\n\n```text\nUse @antigravity-workflows to guide me through \"Build an AI Agent System\" with checkpoints.\n```\n\n```text\nUse @antigravity-workflows to execute the \"QA and Browser Automation\" workflow and stabilize flaky tests.\n```\n\n## Limitations\n\n- This skill orchestrates; it does not replace specialized skills.\n- It depends on the local availability of referenced skills.\n- It does not guarantee success without environment access, credentials, or required infrastructure.\n- For stack-specific browser automation in Go, `go-playwright` may require the corresponding skill to be present in your local skills repository.\n\n## Related Skills\n\n- `concise-planning`\n- `brainstorming`\n- `workflow-automation`\n- `verification-before-completion`\n",
+  "tags": [
+    "ai",
+    "agent",
+    "llm",
+    "automation",
+    "workflow",
+    "security"
+  ],
+  "useCases": [
+    "The user wants to combine several skills without manually selecting each one.",
+    "The goal is multi-phase (for example: plan, build, test, ship).",
+    "The user asks for best-practice execution for common scenarios like:",
+    "Shipping a SaaS MVP",
+    "Running a web security audit"
+  ],
+  "scrapedAt": "2026-02-11T07:11:41.442Z"
+}
