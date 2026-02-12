@@ -1,0 +1,14 @@
+{
+  "id": "antigravity-wiki-qa",
+  "name": "wiki-qa",
+  "slug": "wiki-qa",
+  "description": "Answers questions about a code repository using source file analysis. Use when the user asks a question about how something works, wants to understand a component, or needs help navigating the codebase.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/wiki-qa",
+  "content": "\n# Wiki Q&A\n\nAnswer repository questions grounded entirely in source code evidence.\n\n## When to Activate\n\n- User asks a question about the codebase\n- User wants to understand a specific file, function, or component\n- User asks \"how does X work\" or \"where is Y defined\"\n\n## Procedure\n\n1. Detect the language of the question; respond in the same language\n2. Search the codebase for relevant files\n3. Read those files to gather evidence\n4. Synthesize an answer with inline citations\n\n## Response Format\n\n- Use `##` headings, code blocks with language tags, tables, bullet lists\n- Cite sources inline: `(src/path/file.ts:42)`\n- Include a \"Key Files\" table mapping files to their roles\n- If information is insufficient, say so and suggest files to examine\n\n## Rules\n\n- ONLY use information from actual source files\n- NEVER invent, guess, or use external knowledge\n- Think step by step before answering\n",
+  "tags": [],
+  "useCases": [],
+  "scrapedAt": "2026-02-12T07:19:50.572Z"
+}

@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/klaviyo-aut
 
 Automate Klaviyo email and SMS marketing operations through Composio's Klaviyo toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/klaviyo](https://composio.dev/toolkits/klaviyo)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -130,9 +132,4 @@ Automate Klaviyo email and SMS marketing operations through Composio's Klaviyo t
 1. Call KLAVIYO_GET_CAMPAIGNS with channel='email'
 2. Paginate through all results via page_cursor
 3. Filter by status client-side for accuracy
-4. Extract campaign IDs for detailed inspection
-```
-
-### Sparse Fieldset Pattern
-
-Klaviyo s
+4

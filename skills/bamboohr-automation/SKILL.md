@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/bamboohr-au
 
 Automate BambooHR human resources operations through Composio's BambooHR toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/bamboohr](https://composio.dev/toolkits/bamboohr)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -126,5 +128,4 @@ Automate BambooHR human resources operations through Composio's BambooHR toolkit
 2. `BAMBOOHR_BENEFIT_GET_COVERAGES` - Get benefit coverage details [Optional]
 
 **Key parameters**:
-- For dependents: Optional `employeeId` filter
-- For benefits: Depends on schema; check RUBE_SEARCH_TOOLS for current parameter
+- For dependents: Optional `employe

@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/notion-auto
 
 Automate Notion operations through Composio's Notion toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/notion](https://composio.dev/toolkits/notion)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -123,5 +125,4 @@ Automate Notion operations through Composio's Notion toolkit via Rube MCP.
 **When to use**: User wants to list workspace users or manage comments on pages
 
 **Tool sequence**:
-1. `NOTION_LIST_USERS` - List all workspace users [Optional]
-2. `NOTION_GET_ABOUT_ME` - Get
+1. 

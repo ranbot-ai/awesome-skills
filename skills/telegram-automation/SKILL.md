@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/telegram-au
 
 Automate Telegram operations through Composio's Telegram toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/telegram](https://composio.dev/toolkits/telegram)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -142,5 +144,4 @@ Automate Telegram operations through Composio's Telegram toolkit via Rube MCP.
 2. `TELEGRAM_ANSWER_CALLBACK_QUERY` - Respond to inline button presses [Optional]
 
 **Key parameters**:
-- `commands`: Array of command objects with `command` and `description`
-- `callback_query_id`: ID
+- `co

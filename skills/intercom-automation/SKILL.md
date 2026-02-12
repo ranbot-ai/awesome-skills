@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/intercom-au
 
 Automate Intercom operations through Composio's Intercom toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/intercom](https://composio.dev/toolkits/intercom)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -123,7 +125,4 @@ Automate Intercom operations through Composio's Intercom toolkit via Rube MCP.
 
 ### 5. View Segments and Counts
 
-**When to use**: User wants to view segments or get aggregate counts
-
-**Tool sequence**:
-1. `INTERCOM_LIST_SEGMENTS` - List all segments [Opt
+**When to use**: User wants to view segments or g

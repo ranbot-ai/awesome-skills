@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/figma-autom
 
 Automate Figma operations through Composio's Figma toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/figma](https://composio.dev/toolkits/figma)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -138,5 +140,4 @@ Automate Figma operations through Composio's Figma toolkit via Rube MCP.
 Extract IDs from Figma URLs:
 ```
 1. Call FIGMA_DISCOVER_FIGMA_RESOURCES with figma_url
-2. Extract file_key, node_id, team_id from response
-3. Convert dash-format node IDs (1-541) to colon form
+2. Extract file_key

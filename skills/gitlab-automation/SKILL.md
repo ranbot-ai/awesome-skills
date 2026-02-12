@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/gitlab-auto
 
 Automate GitLab operations including project management, issue tracking, merge request workflows, CI/CD pipeline monitoring, branch management, and user administration through Composio's GitLab toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/gitlab](https://composio.dev/toolkits/gitlab)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -104,5 +106,4 @@ Automate GitLab operations including project management, issue tracking, merge r
 2. `GITLAB_GET_PROJECT` - Get detailed info for a specific project [Optional]
 3. `GITLAB_LIST_USER_PROJECTS` - List projects owned by a specific user [Optional]
 4. `GITLAB_CREATE_PROJECT` - Create a new project [Required for create]
-5. `GITLAB_GET_REPOSITORY_BRANCHES` - List branches in a project [Required for branch ops]
-6. `GITLAB_CREATE_REPOSITORY_BRANCH` - Create a new branch [Optional]
+5. `GITLAB_GET_REPOSITORY_BRANCHES` - List branches in a project [Require

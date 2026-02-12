@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/jira-automa
 
 Automate Jira operations through Composio's Jira toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/jira](https://composio.dev/toolkits/jira)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -149,6 +151,4 @@ Automate Jira operations through Composio's Jira toolkit via Rube MCP.
 
 ### Pagination
 
-- Use `startAt` and `maxResults` parameters
-- Check `total` in response to determine remaining pages
-- Continue u
+- Use `startAt` and `maxResul

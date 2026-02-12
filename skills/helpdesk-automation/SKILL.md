@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/helpdesk-au
 
 Automate HelpDesk ticketing operations through Composio's HelpDesk toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/helpdesk](https://composio.dev/toolkits/helpdesk)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -146,8 +148,4 @@ Backward pagination:
 
 **Read-Only Operations**:
 - Current Composio toolkit provides list/read operations
-- Ticket creation, update, and reply operations may require additional tools
-- Check RUBE_SEARCH_TOOLS for any newly available tools
-
-**Rate Limits**:
-- HelpDesk AP
+- Ticket creation, update, and reply operations may require additional t

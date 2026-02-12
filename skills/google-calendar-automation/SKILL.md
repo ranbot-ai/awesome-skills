@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/google-cale
 
 Automate Google Calendar workflows including event creation, scheduling, availability checks, attendee management, and calendar browsing through Composio's Google Calendar toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/googlecalendar](https://composio.dev/toolkits/googlecalendar)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -105,8 +107,4 @@ Automate Google Calendar workflows including event creation, scheduling, availab
 - `event_id` is a technical identifier, NOT the event title; always search first to get the ID
 - `PATCH_EVENT` attendees field replaces the entire list; include existing attendees to avoid removing them
 - Attendee names cannot be resolved; always use email addresses
-- Use `GMAIL_SEARCH_PEOPLE` to resolve names to emails before managing attendees
-
-### 4. Check Availability and Free/Busy Status
-
-*
+- Use `GMAIL_SEARCH_PEOPLE`

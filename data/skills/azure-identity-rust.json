@@ -1,0 +1,21 @@
+{
+  "id": "antigravity-azure-identity-rust",
+  "name": "azure-identity-rust",
+  "slug": "azure-identity-rust",
+  "description": "Azure Identity SDK for Rust authentication. Use for DeveloperToolsCredential, ManagedIdentityCredential, ClientSecretCredential, and token-based authentication.\nTriggers: \"azure-identity\", \"DeveloperToolsCredential\", \"authentication rust\", \"managed identity rust\", \"credential rust\".\n",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-identity-rust",
+  "content": "\n# Azure Identity SDK for Rust\n\nAuthentication library for Azure SDK clients using Microsoft Entra ID (formerly Azure AD).\n\n## Installation\n\n```sh\ncargo add azure_identity\n```\n\n## Environment Variables\n\n```bash\n# Service Principal (for production/CI)\nAZURE_TENANT_ID=<your-tenant-id>\nAZURE_CLIENT_ID=<your-client-id>\nAZURE_CLIENT_SECRET=<your-client-secret>\n\n# User-assigned Managed Identity (optional)\nAZURE_CLIENT_ID=<managed-identity-client-id>\n```\n\n## DeveloperToolsCredential\n\nThe recommended credential for local development. Tries developer tools in order (Azure CLI, Azure Developer CLI):\n\n```rust\nuse azure_identity::DeveloperToolsCredential;\nuse azure_security_keyvault_secrets::SecretClient;\n\nlet credential = DeveloperToolsCredential::new(None)?;\nlet client = SecretClient::new(\n    \"https://my-vault.vault.azure.net/\",\n    credential.clone(),\n    None,\n)?;\n```\n\n### Credential Chain Order\n\n| Order | Credential | Environment |\n|-------|-----------|-------------|\n| 1 | AzureCliCredential | `az login` |\n| 2 | AzureDeveloperCliCredential | `azd auth login` |\n\n## Credential Types\n\n| Credential | Usage |\n|------------|-------|\n| `DeveloperToolsCredential` | Local development - tries CLI tools |\n| `ManagedIdentityCredential` | Azure VMs, App Service, Functions, AKS |\n| `WorkloadIdentityCredential` | Kubernetes workload identity |\n| `ClientSecretCredential` | Service principal with secret |\n| `ClientCertificateCredential` | Service principal with certificate |\n| `AzureCliCredential` | Direct Azure CLI auth |\n| `AzureDeveloperCliCredential` | Direct azd CLI auth |\n| `AzurePipelinesCredential` | Azure Pipelines service connection |\n| `ClientAssertionCredential` | Custom assertions (federated identity) |\n\n## ManagedIdentityCredential\n\nFor Azure-hosted resources:\n\n```rust\nuse azure_identity::ManagedIdentityCredential;\n\n// System-assigned managed identity\nlet credential = ManagedIdentityCredential::new(None)?;\n\n// User-assigned managed identity\nlet options = ManagedIdentityCredentialOptions {\n    client_id: Some(\"<user-assigned-mi-client-id>\".into()),\n    ..Default::default()\n};\nlet credential = ManagedIdentityCredential::new(Some(options))?;\n```\n\n## ClientSecretCredential\n\nFor service principal with secret:\n\n```rust\nuse azure_identity::ClientSecretCredential;\n\nlet credential = ClientSecretCredential::new(\n    \"<tenant-id>\".into(),\n    \"<client-id>\".into(),\n    \"<client-secret>\".into(),\n    None,\n)?;\n```\n\n## Best Practices\n\n1. **Use `DeveloperToolsCredential` for local dev** — automatically picks up Azure CLI\n2. **Use `ManagedIdentityCredential` in production** — no secrets to manage\n3. **Clone credentials** — credentials are `Arc`-wrapped and cheap to clone\n4. **Reuse credential instances** — same credential can be used with multiple clients\n5. **Use `tokio` feature** — `cargo add azure_identity --features tokio`\n\n## Reference Links\n\n| Resource | Link |\n|----------|------|\n| API Reference | https://docs.rs/azure_identity |\n| Source Code | https://github.com/Azure/azure-sdk-for-rust/tree/main/sdk/identity/azure_identity |\n| crates.io | https://crates.io/crates/azure_identity |\n",
+  "tags": [
+    "api",
+    "ai",
+    "security",
+    "kubernetes",
+    "azure",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-02-12T07:15:45.785Z"
+}

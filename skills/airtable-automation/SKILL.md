@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/airtable-au
 
 Automate Airtable operations through Composio's Airtable toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/airtable](https://composio.dev/toolkits/airtable)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -139,9 +141,4 @@ Automate Airtable operations through Composio's Airtable toolkit via Rube MCP.
 - Set `pageSize` (max 100)
 - Check response for `offset` string
 - Pass `offset` to next request unchanged
-- Keep filters/sorts/view stable between pages
-
-## Known Pitfalls
-
-**ID Formats**:
-- Base IDs: `ap
+- Keep

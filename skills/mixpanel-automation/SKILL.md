@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/mixpanel-au
 
 Automate Mixpanel product analytics through Composio's Mixpanel toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/mixpanel](https://composio.dev/toolkits/mixpanel)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -130,6 +132,4 @@ Automate Mixpanel product analytics through Composio's Mixpanel toolkit via Rube
 
 **Pitfalls**:
 - Cohorts are created and managed in Mixpanel UI; API provides read access
-- Cohort IDs are numeric; use exact ID from list results
-- Cohort counts may be approximate for very large cohorts
-- Cohorts can 
+- Cohort IDs are numeric; use exact I

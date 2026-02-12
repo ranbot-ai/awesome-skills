@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/outlook-aut
 
 Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/outlook](https://composio.dev/toolkits/outlook)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -129,7 +131,4 @@ Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rub
 **Key parameters**:
 - `parent_folder_id`: Well-known name or folder ID
 - `displayName`: New folder name
-- `include_hidden_folders`: Show hidden folders
-
-**Pitfalls**:
-- Well-known folder names: 'inbox', 'sentit
+- `include_hidde

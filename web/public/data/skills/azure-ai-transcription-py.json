@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-azure-ai-transcription-py",
+  "name": "azure-ai-transcription-py",
+  "slug": "azure-ai-transcription-py",
+  "description": "Azure AI Transcription SDK for Python. Use for real-time and batch speech-to-text transcription with timestamps and diarization.\nTriggers: \"transcription\", \"speech to text\", \"Azure AI Transcription\", \"TranscriptionClient\".\n",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-transcription-py",
+  "content": "\n# Azure AI Transcription SDK for Python\n\nClient library for Azure AI Transcription (speech-to-text) with real-time and batch transcription.\n\n## Installation\n\n```bash\npip install azure-ai-transcription\n```\n\n## Environment Variables\n\n```bash\nTRANSCRIPTION_ENDPOINT=https://<resource>.cognitiveservices.azure.com\nTRANSCRIPTION_KEY=<your-key>\n```\n\n## Authentication\n\nUse subscription key authentication (DefaultAzureCredential is not supported for this client):\n\n```python\nimport os\nfrom azure.ai.transcription import TranscriptionClient\n\nclient = TranscriptionClient(\n    endpoint=os.environ[\"TRANSCRIPTION_ENDPOINT\"],\n    credential=os.environ[\"TRANSCRIPTION_KEY\"]\n)\n```\n\n## Transcription (Batch)\n\n```python\njob = client.begin_transcription(\n    name=\"meeting-transcription\",\n    locale=\"en-US\",\n    content_urls=[\"https://<storage>/audio.wav\"],\n    diarization_enabled=True\n)\nresult = job.result()\nprint(result.status)\n```\n\n## Transcription (Real-time)\n\n```python\nstream = client.begin_stream_transcription(locale=\"en-US\")\nstream.send_audio_file(\"audio.wav\")\nfor event in stream:\n    print(event.text)\n```\n\n## Best Practices\n\n1. **Enable diarization** when multiple speakers are present\n2. **Use batch transcription** for long files stored in blob storage\n3. **Capture timestamps** for subtitle generation\n4. **Specify language** to improve recognition accuracy\n5. **Handle streaming backpressure** for real-time transcription\n6. **Close transcription sessions** when complete\n",
+  "tags": [
+    "python",
+    "ai",
+    "azure",
+    "rag"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-02-12T07:15:34.171Z"
+}

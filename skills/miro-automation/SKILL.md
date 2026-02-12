@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/miro-automa
 
 Automate Miro whiteboard operations through Composio's Miro toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/miro](https://composio.dev/toolkits/miro)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -131,5 +133,4 @@ Automate Miro whiteboard operations through Composio's Miro toolkit via Rube MCP
 - `style`: Connector style (line type, color, arrows)
 
 **Pitfalls**:
-- Both start and end items must exist on the same board
-- Item IDs are required for connections; resolve via GET_BOARD_ITEMS firs
+- Both start and end items must exist on the 

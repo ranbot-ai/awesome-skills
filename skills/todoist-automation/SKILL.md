@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/todoist-aut
 
 Automate Todoist operations including task creation and management, project organization, section management, filtering, and bulk task workflows through Composio's Todoist toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/todoist](https://composio.dev/toolkits/todoist)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -103,8 +105,4 @@ Automate Todoist operations including task creation and management, project orga
 **Key parameters**:
 - `project_id`: Required -- the project to create the section in
 - `name`: Section name (required for creation)
-- `order`: Integer position within the project (lower values appear first)
-- `section_id`: Required for update and delete operations
-
-**Pitfalls**:
-- `CREATE_SECT
+- `order`: Integer position within the project (lower values appear firs

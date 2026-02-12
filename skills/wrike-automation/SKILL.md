@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/wrike-autom
 
 Automate Wrike project management operations through Composio's Wrike toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/wrike](https://composio.dev/toolkits/wrike)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -128,5 +130,4 @@ Automate Wrike project management operations through Composio's Wrike toolkit vi
 **Pitfalls**:
 - Either parent_id or super_task_id is required, not both
 - Blueprint launch is asynchronous; tasks may take time to appear
-- reschedule_date requires reschedule_mode to be set
-- entry_limit caps at 250 tasks/folde
+- re

@@ -1,0 +1,20 @@
+{
+  "id": "composio-appdrag-automation",
+  "name": "appdrag-automation",
+  "slug": "appdrag-automation",
+  "description": "Automate Appdrag tasks via Rube MCP (Composio). Always search tools first for current schemas.",
+  "category": "Development & Code Tools",
+  "source": "composio",
+  "repoUrl": "https://github.com/ComposioHQ/awesome-claude-skills",
+  "skillUrl": "https://github.com/ComposioHQ/awesome-claude-skills/tree/master/appdrag-automation",
+  "content": "\n# Appdrag Automation via Rube MCP\n\nAutomate Appdrag operations through Composio's Appdrag toolkit via Rube MCP.\n\n**Toolkit docs**: [composio.dev/toolkits/appdrag](https://composio.dev/toolkits/appdrag)\n\n## Prerequisites\n\n- Rube MCP must be connected (RUBE_SEARCH_TOOLS available)\n- Active Appdrag connection via `RUBE_MANAGE_CONNECTIONS` with toolkit `appdrag`\n- Always call `RUBE_SEARCH_TOOLS` first to get current tool schemas\n\n## Setup\n\n**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.\n\n1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds\n2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `appdrag`\n3. If connection is not ACTIVE, follow the returned auth link to complete setup\n4. Confirm connection status shows ACTIVE before running any workflows\n\n## Tool Discovery\n\nAlways discover available tools before executing workflows:\n\n```\nRUBE_SEARCH_TOOLS\nqueries: [{use_case: \"Appdrag operations\", known_fields: \"\"}]\nsession: {generate_id: true}\n```\n\nThis returns available tool slugs, input schemas, recommended execution plans, and known pitfalls.\n\n## Core Workflow Pattern\n\n### Step 1: Discover Available Tools\n\n```\nRUBE_SEARCH_TOOLS\nqueries: [{use_case: \"your specific Appdrag task\"}]\nsession: {id: \"existing_session_id\"}\n```\n\n### Step 2: Check Connection\n\n```\nRUBE_MANAGE_CONNECTIONS\ntoolkits: [\"appdrag\"]\nsession_id: \"your_session_id\"\n```\n\n### Step 3: Execute Tools\n\n```\nRUBE_MULTI_EXECUTE_TOOL\ntools: [{\n  tool_slug: \"TOOL_SLUG_FROM_SEARCH\",\n  arguments: {/* schema-compliant args from search results */}\n}]\nmemory: {}\nsession_id: \"your_session_id\"\n```\n\n## Known Pitfalls\n\n- **Always search first**: Tool schemas change. Never hardcode tool slugs or arguments without calling `RUBE_SEARCH_TOOLS`\n- **Check connection**: Verify `RUBE_MANAGE_CONNECTIONS` shows ACTIVE status before executing tools\n- **Schema compliance**: Use exact field names and types from the search results\n- **Memory parameter**: Always include `memory` in `RUBE_MULTI_EXECUTE_TOOL` calls, even if empty (`{}`)\n- **Session reuse**: Reuse session IDs within a workflow. Generate new ones for new workflows\n- **Pagination**: Check responses for pagination tokens and continue fetching until complete\n\n## Quick Reference\n\n| Operation | Approach |\n|-----------|----------|\n| Find tools | `RUBE_SEARCH_TOOLS` with Appdrag-specific use case |\n| Connect | `RUBE_MANAGE_CONNECTIONS` with toolkit `appdrag` |\n| Execute | `RUBE_MULTI_EXECUTE_TOOL` with discovered tool slugs |\n| Bulk ops | `RUBE_REMOTE_WORKBENCH` with `run_composio_tool()` |\n| Full schema | `RUBE_GET_TOOL_SCHEMAS` for tools with `schemaRef` |\n\n---\n*Powered by [Composio](https://composio.dev)*\n",
+  "tags": [
+    "api",
+    "cli",
+    "mcp",
+    "automation",
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-02-12T07:10:33.857Z"
+}

@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/asana-autom
 
 Automate Asana operations through Composio's Asana toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/asana](https://composio.dev/toolkits/asana)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -157,6 +159,4 @@ Automate Asana operations through Composio's Asana toolkit via Rube MCP.
 | Create task | ASANA_CREATE_A_TASK | workspace, name, projects |
 | Get task | ASANA_GET_A_TASK | task_gid |
 | Create subtask | ASANA_CREATE_SUBTASK | parent, name |
-| List subtasks | ASANA_GET_TASK_SUBTASKS | task_gid |
-| Project tasks | ASANA_GET_TASKS_FROM_A_PROJECT | project_gid |
-| 
+| List subtasks | ASANA_GET_TASK_SUB

@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/reddit-auto
 
 Automate Reddit operations through Composio's Reddit toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/reddit](https://composio.dev/toolkits/reddit)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -133,12 +135,4 @@ Automate Reddit operations through Composio's Reddit toolkit via Rube MCP.
 - Only text posts can have their body edited; link posts cannot be modified
 - Post titles cannot be edited after submission
 - Deletion is permanent; deleted posts show as '[deleted]'
-- User flair is per-subreddit and may be restricted
-
-## Common Patterns
-
-### Reddit Fullname Format
-
-**Prefixes**:
-```
-t1
+- User flair is per-subreddit and

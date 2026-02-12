@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/webflow-aut
 
 Automate Webflow operations including CMS collection management, site publishing, page inspection, asset uploads, and ecommerce order retrieval through Composio's Webflow toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/webflow](https://composio.dev/toolkits/webflow)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -105,5 +107,4 @@ Automate Webflow operations including CMS collection management, site publishing
 **Tool sequence**:
 1. `WEBFLOW_LIST_WEBFLOW_SITES` - Find the target site_id [Prerequisite]
 2. `WEBFLOW_LIST_PAGES` - List all pages for a site with pagination [Required]
-3. `WEBFLOW_GET_PAGE` - Get detailed metadata for a specific page [Optional]
-4. `WEBFLOW_GET_PAGE_DOM` - Get the DOM/cont
+3. `WEBFLOW_GET_PAGE` - Get det

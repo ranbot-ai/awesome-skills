@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/amplitude-a
 
 Automate Amplitude product analytics through Composio's Amplitude toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/amplitude](https://composio.dev/toolkits/amplitude)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -128,7 +130,4 @@ Automate Amplitude product analytics through Composio's Amplitude toolkit via Ru
 1. `AMPLITUDE_GET_EVENT_CATEGORIES` - List all event categories [Required]
 
 **Key parameters**:
-- No required parameters; returns all configured event categories
-
-**Pitfalls**:
-- Categories are configured in A
+- No required param

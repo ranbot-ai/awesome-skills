@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/vercel-auto
 
 Automate Vercel platform operations through Composio's Vercel toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/vercel](https://composio.dev/toolkits/vercel)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -120,7 +122,4 @@ Automate Vercel platform operations through Composio's Vercel toolkit via Rube M
 **Pitfalls**:
 - Domain must be added to the Vercel account before DNS management
 - SSL certificates are auto-provisioned but may take time for new domains
-- CNAME records at the apex domain are not supported; use A records instead
-- MX records require priority values
-
-### 5. 
+- CNAME records at the apex domai

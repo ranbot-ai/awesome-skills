@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/hubspot-aut
 
 Automate HubSpot CRM workflows including contact/company management, deal pipeline tracking, ticket search, and custom property creation through Composio's HubSpot toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/hubspot](https://composio.dev/toolkits/hubspot)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -108,6 +110,4 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 - `HUBSPOT_SEARCH_TICKETS`: `filterGroups`, `properties` (only listed fields are returned), `sorts`, `limit`, `after`
 
 **Pitfalls**:
-- Incorrect `propertyName`/`operator` returns zero results without errors
-- Date filtering may require epoch-ms bounds; mixing formats causes mismatches
-- O
+- Incorrect `propertyName`/`operator` returns zero results without

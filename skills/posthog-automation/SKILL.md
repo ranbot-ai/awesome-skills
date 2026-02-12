@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/posthog-aut
 
 Automate PostHog product analytics and feature flag management through Composio's PostHog toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/posthog](https://composio.dev/toolkits/posthog)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -135,9 +137,3 @@ Automate PostHog product analytics and feature flag management through Composio'
 - These endpoints confirm the API key's access level and scope
 
 ## Common Patterns
-
-### ID Resolution
-
-**Organization -> Project ID**:
-```
-1. Call POSTHOG_LIST_PROJECTS_IN_

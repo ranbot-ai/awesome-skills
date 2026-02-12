@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/pagerduty-a
 
 Automate PagerDuty incident management and operations through Composio's PagerDuty toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/pagerduty](https://composio.dev/toolkits/pagerduty)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -112,5 +114,4 @@ Automate PagerDuty incident management and operations through Composio's PagerDu
 4. `PAGERDUTY_UPDATE_SCHEDULE_BY_ID` - Update an existing schedule [Optional]
 5. `PAGERDUTY_RETRIEVE_ONCALL_LIST` - View who is currently on-call [Optional]
 6. `PAGERDUTY_CREATE_SCHEDULE_OVERRIDES_CONFIGURATION` - Create temporary overrides [Optional]
-7. `PAGERDUTY_DELETE_SCHEDULE_OVERRIDE_BY_ID` - Remove an override [Optional]
-8. `PAGERDUTY_RETRIEVE_USERS_BY_SCHEDULE_ID` - List
+7. `PAGERDUTY_DELETE_SCHEDULE_OVERR

@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-wiki-changelog",
+  "name": "wiki-changelog",
+  "slug": "wiki-changelog",
+  "description": "Analyzes git commit history and generates structured changelogs categorized by change type. Use when the user asks about recent changes, wants a changelog, or needs to understand what changed in the repository.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/wiki-changelog",
+  "content": "\n# Wiki Changelog\n\nGenerate structured changelogs from git history.\n\n## When to Activate\n\n- User asks \"what changed recently\", \"generate a changelog\", \"summarize commits\"\n- User wants to understand recent development activity\n\n## Procedure\n\n1. Examine git log (commits, dates, authors, messages)\n2. Group by time period: daily (last 7 days), weekly (older)\n3. Classify each commit: Features (🆕), Fixes (🐛), Refactoring (🔄), Docs (📝), Config (🔧), Dependencies (📦), Breaking (⚠️)\n4. Generate concise user-facing descriptions using project terminology\n\n## Constraints\n\n- Focus on user-facing changes\n- Merge related commits into coherent descriptions\n- Use project terminology from README\n- Highlight breaking changes prominently with migration notes\n",
+  "tags": [
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-02-12T07:19:49.682Z"
+}

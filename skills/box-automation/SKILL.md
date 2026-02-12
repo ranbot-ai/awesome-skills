@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/box-automat
 
 Automate Box operations including file upload/download, content search, folder management, collaboration, metadata queries, and sign requests through Composio's Box toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/box](https://composio.dev/toolkits/box)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -100,6 +102,4 @@ Automate Box operations including file upload/download, content search, folder m
 
 **Key parameters**:
 - `name`: Folder name (no `/`, `\`, trailing spaces, or `.`/`..`)
-- `parent__id`: Parent folder ID (use `"0"` for root)
-- `folder_id`: Target folder ID for operations
-- `parent.id`: Destination fol
+- `parent__id`: Parent folder ID (use `"0"` for r

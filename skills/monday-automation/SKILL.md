@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/monday-auto
 
 Automate Monday.com work management workflows including board creation, item management, column value updates, group organization, subitems, and update/comment threads through Composio's Monday toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/monday](https://composio.dev/toolkits/monday)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -105,5 +107,4 @@ Automate Monday.com work management workflows including board creation, item man
 - `create_labels_if_missing`: false by default; set true for status/dropdown
 
 **Pitfalls**:
-- Use `MONDAY_CHANGE_SIMPLE_COLUMN_VALUE` for simple text/status/dropdown updates (string value)
-- Use `MONDAY_UPDATE_ITEM` for complex types like timeline, people, date (JSO
+- Use `MONDAY_CHANGE_SIMPLE_COLUMN_VALUE` for simple text/status/dropdown updates (str

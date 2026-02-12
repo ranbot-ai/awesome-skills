@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/gmail-autom
 
 Automate Gmail operations through Composio's Gmail toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/gmail](https://composio.dev/toolkits/gmail)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -127,7 +129,4 @@ Automate Gmail operations through Composio's Gmail toolkit via Rube MCP.
 1. `GMAIL_LIST_LABELS` - Get label IDs for custom labels [Prerequisite]
 2. `GMAIL_FETCH_EMAILS` - Find target messages [Prerequisite]
 3. `GMAIL_BATCH_MODIFY_MESSAGES` - Bulk add/remove labels (up to 1000 messages) [Required]
-4. `GMAIL_ADD_LABEL_TO_EMAIL` - Single-message label changes [Fallback]
-
-**Key parameters**:
-- `messageIds`:
+4. `GMAIL_ADD_LABEL_TO

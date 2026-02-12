@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/dropbox-aut
 
 Automate Dropbox operations including file upload/download, search, folder management, sharing links, batch operations, and metadata retrieval through Composio's Dropbox toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/dropbox](https://composio.dev/toolkits/dropbox)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -98,7 +100,4 @@ Automate Dropbox operations including file upload/download, search, folder manag
 - `settings.expires`: ISO 8601 expiration date (e.g., `"2026-12-31T23:59:59Z"`)
 - `settings.require_password` / `settings.link_password`: Password protection
 - `settings.allow_download`: Boolean for download permission
-- `direct_only`: For `LIST_SHARED_LINKS`, set `true` to only return direct links (not parent folder links)
-
-**Pitfalls**:
-- `D
+- `direct_only`: For `LIST_SHARED_LI

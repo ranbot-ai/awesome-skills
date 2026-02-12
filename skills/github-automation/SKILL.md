@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/github-auto
 
 Automate GitHub repository management, issue tracking, pull request workflows, branch operations, and CI/CD through Composio's GitHub toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/github](https://composio.dev/toolkits/github)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -114,5 +116,4 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 **Tool sequence**:
 1. `GITHUB_SEARCH_CODE` - Search file contents and paths [Required]
 2. `GITHUB_SEARCH_CODE_ALL_PAGES` - Multi-page code search [Alternative]
-3. `GITHUB_SEARCH_COMMITS_BY_AUTHOR` - Search commits by author/date/org [Required]
-4. `GI
+3.

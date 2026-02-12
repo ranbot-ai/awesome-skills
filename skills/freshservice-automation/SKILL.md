@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/freshservic
 
 Automate Freshservice IT Service Management operations through Composio's Freshservice toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/freshservice](https://composio.dev/toolkits/freshservice)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -120,7 +122,4 @@ Automate Freshservice IT Service Management operations through Composio's Freshs
 - `priority`: Ticket priority (1=Low, 2=Medium, 3=High, 4=Urgent)
 - `cc_emails`: Array of CC email addresses
 - `email_config_id`: Email configuration ID for the sender address
-- `name`: Requester name
-
-**Pitfalls**:
-- This creates a standard ticket via the /api/v2/tickets endpoint wh
+- `name`

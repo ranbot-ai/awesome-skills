@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/render-auto
 
 Automate Render cloud platform operations through Composio's Render toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/render](https://composio.dev/toolkits/render)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -143,9 +145,4 @@ Automate Render cloud platform operations through Composio's Render toolkit via 
 
 - Use `cursor` from response for next page
 - Continue until `cursor` is absent or results are empty
-- Both LIST_SERVICES and LIST_PROJECTS use cursor-based pagination
-- Set `limit` to max (100) for fewer pagination rounds
-
-## Known Pitfalls
-
-**Service
+- Both LIST_SERVICES and LIST_PROJECTS use cursor-based paginat

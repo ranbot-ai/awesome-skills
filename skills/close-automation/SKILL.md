@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/close-autom
 
 Automate Close CRM operations through Composio's Close toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/close](https://composio.dev/toolkits/close)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -172,6 +174,4 @@ Close data model:
 ### Activity Logging Pattern
 
 ```
-1. Identify the lead_id and optionally contact_id
-2. Create the activity (call, SMS, note) with lead_id
-3. Include
+1. Identify the lead_id and 

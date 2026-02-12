@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/google-driv
 
 Automate Google Drive workflows including file upload/download, search, folder management, sharing/permissions, and organization through Composio's Google Drive toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/googledrive](https://composio.dev/toolkits/googledrive)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -106,6 +108,4 @@ Automate Google Drive workflows including file upload/download, search, folder m
 **Pitfalls**:
 - Invalid type/email combinations trigger 4xx errors
 - Using `type='anyone'` or powerful roles is risky; get explicit user confirmation
-- Org policies may block certain sharing types, causing 403
-- Permission changes may take time to propagate
-- Use `GMAIL_SEARCH_PEOPLE` to 
+- Org policies may block certain sharing 

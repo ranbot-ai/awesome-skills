@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/slack-autom
 
 Automate Slack workspace operations including messaging, search, channel management, and reaction workflows through Composio's Slack toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/slack](https://composio.dev/toolkits/slack)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -104,7 +106,4 @@ Automate Slack workspace operations including messaging, search, channel managem
 
 ### 4. React to and Thread Messages
 
-**When to use**: User wants to add reactions or manage threaded conversations
-
-**Tool sequence**:
-1. `SLACK_SEARCH_MESSAGES` or 
+**When to use**: User wants to add reactio

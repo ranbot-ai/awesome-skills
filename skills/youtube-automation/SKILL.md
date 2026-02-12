@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/youtube-aut
 
 Automate YouTube operations through Composio's YouTube toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/youtube](https://composio.dev/toolkits/youtube)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -122,7 +124,4 @@ Automate YouTube operations through Composio's YouTube toolkit via Rube MCP.
 
 ### 5. Manage Subscriptions and Comments
 
-**When to use**: User wants to subscribe to channels or view video comments
-
-**Tool sequence**:
-1. `YOUTUBE_SUBSCRIBE_CHANNEL` - Subscribe to a channel [O
+**When to use**: User wants to subscribe to channels or view vid

@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/freshdesk-a
 
 Automate Freshdesk customer support workflows including ticket management, contact and company operations, notes, replies, and ticket search through Composio's Freshdesk toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/freshdesk](https://composio.dev/toolkits/freshdesk)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -106,6 +108,4 @@ Automate Freshdesk customer support workflows including ticket management, conta
 5. `FRESHDESK_UPDATE_CONVERSATIONS` - Edit an existing note [Optional]
 
 **Key parameters for FRESHDESK_REPLY_TO_TICKET**:
-- `ticket_id`: Ticket ID (integer, required)
-- `body`: Reply content, supports HTML (required)
-- `cc_emails` / `bcc_emails`:
+- `ticket_id`: Ticket ID (inte

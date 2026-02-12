@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/bitbucket-a
 
 Automate Bitbucket operations including repository management, pull request workflows, branch operations, issue tracking, and workspace administration through Composio's Bitbucket toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/bitbucket](https://composio.dev/toolkits/bitbucket)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -96,7 +98,4 @@ Automate Bitbucket operations including repository management, pull request work
 2. `BITBUCKET_CREATE_ISSUE` - Create a new issue with title, content, priority, and kind [Required]
 3. `BITBUCKET_UPDATE_ISSUE` - Modify issue attributes (state, priority, assignee, etc.) [Optional]
 4. `BITBUCKET_CREATE_ISSUE_COMMENT` - Add a markdown comment to an existing issue [Optional]
-5. `BITBUCKET_DELETE_ISSUE` - Permanently delete an issue [Optional]
-
-**Key parameters**:
-- `issue_id`: String identifier for th
+5. `BITBUCKET_DELETE_ISSUE` - Perm

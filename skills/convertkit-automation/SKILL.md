@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/convertkit-
 
 Automate ConvertKit (now known as Kit) email marketing operations through Composio's Kit toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/kit](https://composio.dev/toolkits/kit)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -137,6 +139,4 @@ Automate ConvertKit (now known as Kit) email marketing operations through Compos
 ### Subscriber Lookup by Email
 
 ```
-1. Call KIT_LIST_SUBSCRIBERS with email_address='user@example.com'
-2. Extract subscriber ID from the response
-3. Use I
+1. Call KIT_LIST_SUBSCRIBERS with em

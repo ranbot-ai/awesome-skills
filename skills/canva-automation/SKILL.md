@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/canva-autom
 
 Automate Canva design operations through Composio's Canva toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/canva](https://composio.dev/toolkits/canva)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -134,5 +136,4 @@ Automate Canva design operations through Composio's Canva toolkit via Rube MCP.
 **When to use**: User wants to generate designs by filling brand template placeholders with data
 
 **Tool sequence**:
-1. `CANVA_ACCESS_USER_SPECIFIC_BRAND_TEMPLATES_LIST` - List available brand templates [Required]
-2. `CANVA_INITIATE_CANVA_DESIGN_AUTOFILL_JOB` - Start autofill with data [Re
+1. `CANVA_ACCESS_USER_SPECIFIC_BRAND_TEMPLATES_LIST` - List available brand templates [

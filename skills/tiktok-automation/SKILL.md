@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/tiktok-auto
 
 Automate TikTok content creation and profile operations through Composio's TikTok toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/tiktok](https://composio.dev/toolkits/tiktok)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -140,5 +142,4 @@ Automate TikTok content creation and profile operations through Composio's TikTo
 
 ### Pagination
 
-- Use `cursor` from previous response for next page
-- Check `has_more` boolean to determine if 
+- Use `

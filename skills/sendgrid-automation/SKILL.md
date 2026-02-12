@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/sendgrid-au
 
 Automate SendGrid email delivery workflows including marketing campaigns (Single Sends), contact and list management, sender identity setup, and email analytics through Composio's SendGrid toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/sendgrid](https://composio.dev/toolkits/sendgrid)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -95,5 +97,4 @@ Automate SendGrid email delivery workflows including marketing campaigns (Single
 **Tool sequence**:
 1. `SENDGRID_GET_ALL_SENDER_IDENTITIES` - List all existing sender identities [Required]
 2. `SENDGRID_CREATE_A_SENDER_IDENTITY` - Create a new sender identity [Optional]
-3. `SENDGRID_VIEW_A_SENDER_IDENTITY` - View details for a specific sender [Optional]
-4. `SENDGRID_UPDATE_A_SENDER_IDENTI
+3. `SENDGRID_VIEW_A_SENDER_I

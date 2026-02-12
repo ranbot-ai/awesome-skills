@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/whatsapp-au
 
 Automate WhatsApp Business operations through Composio's WhatsApp toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/whatsapp](https://composio.dev/toolkits/whatsapp)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -131,8 +133,4 @@ Automate WhatsApp Business operations through Composio's WhatsApp toolkit via Ru
 - New templates require Meta review before they can be used
 - Template names must be lowercase with underscores (no spaces)
 - Category affects pricing and approval criteria
-- Templates have specific formatting requirements for headers, body, and buttons
-
-### 6. Share Contacts
-
-**When to use**: User wants to send contact i
+- Templates have specific formatting requirements for head

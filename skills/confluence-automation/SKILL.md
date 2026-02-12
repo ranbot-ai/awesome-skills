@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/confluence-
 
 Automate Confluence operations including page creation and updates, content search with CQL, space management, label tagging, and page hierarchy navigation through Composio's Confluence toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/confluence](https://composio.dev/toolkits/confluence)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -100,5 +102,4 @@ Automate Confluence operations including page creation and updates, content sear
 **Tool sequence**:
 1. `CONFLUENCE_GET_SPACES` - List all spaces with optional filtering [Required]
 2. `CONFLUENCE_GET_SPACE_BY_ID` - Get detailed metadata for a specific space [Optional]
-3. `CONFLUENCE_CREATE_SPACE` - Create a new space with key and name [Optional]
-4. `CONFLUENCE_GET_SPACE_PRO
+3. `CONFLUE

@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/salesforce-
 
 Automate Salesforce CRM operations through Composio's Salesforce toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/salesforce](https://composio.dev/toolkits/salesforce)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -155,8 +157,4 @@ SELECT Id, Name FROM Opportunity WHERE CloseDate = NEXT_MONTH
 - Use `SALESFORCE_QUERY` with nextRecordsUrl for pagination
 - Check `done` field in response; if false, continue paging
 
-## Known Pitfalls
-
-**Field API Names**:
-- Always use API names, not display labels
-- Custom fields e
+## K

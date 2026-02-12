@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/shopify-aut
 
 Automate Shopify operations through Composio's Shopify toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/shopify](https://composio.dev/toolkits/shopify)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -155,6 +157,4 @@ For advanced operations:
 | List products | SHOPIFY_GET_PRODUCTS | (filters) |
 | Get product | SHOPIFY_GET_PRODUCT | product_id |
 | Products paginated | SHOPIFY_GET_PRODUCTS_PAGINATED | limit, page_info |
-| Bulk create | SHOPIFY_BULK_CREATE_PRODUCTS | products |
-| Product count | SHOPIFY_GET_PRODUCTS_COUNT | (none) |
-| List orders | SHOPIFY_GE
+| Bulk create | SHOPIFY_BULK_CREATE_PRODUCTS | pro

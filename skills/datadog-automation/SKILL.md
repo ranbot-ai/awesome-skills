@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/datadog-aut
 
 Automate Datadog monitoring and observability operations through Composio's Datadog toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/datadog](https://composio.dev/toolkits/datadog)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -125,8 +127,4 @@ Automate Datadog monitoring and observability operations through Composio's Data
 
 ### 5. Create Events and Manage Downtimes
 
-**When to use**: User wants to post events or schedule maintenance downtimes
-
-**Tool sequence**:
-1. `DATADOG_LIST_EVENTS` - List existing events [Optional]
-2. `DATA
+**When to use**: User wants to post events or schedule maintenance downtim

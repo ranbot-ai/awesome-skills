@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/trello-auto
 
 Automate Trello board management, card creation, and team workflows through Composio's Rube MCP integration.
 
+**Toolkit docs**: [composio.dev/toolkits/trello](https://composio.dev/toolkits/trello)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -131,7 +133,4 @@ Automate Trello board management, card creation, and team workflows through Comp
 
 **Tool sequence**:
 1. `TRELLO_ADD_CARDS_ACTIONS_COMMENTS_BY_ID_CARD` - Post a comment on the card [Required]
-2. `TRELLO_ADD_CARDS_ATTACHMENTS_BY_ID_CARD` - Attach a file or URL [Optional]
-
-**Key parameters**:
-- `text`: Comment text (1-16384 chars, supports Markdown 
+2. `TRELLO_ADD_CARDS_ATTACHMENTS_BY_ID_CARD` - Attach a file or URL [

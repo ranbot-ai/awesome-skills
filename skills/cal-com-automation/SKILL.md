@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/cal-com-aut
 
 Automate Cal.com scheduling operations through Composio's Cal toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/cal](https://composio.dev/toolkits/cal)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -135,5 +137,4 @@ Automate Cal.com scheduling operations through Composio's Cal toolkit via Rube M
 **Key parameters**: (none required)
 
 **Pitfalls**:
-- Organization ID is needed for team creation and org-level operations
-- Not all Cal.com accounts have organizations; perso
+- Organization ID is needed for team crea

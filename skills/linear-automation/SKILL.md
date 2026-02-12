@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/linear-auto
 
 Automate Linear operations through Composio's Linear toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/linear](https://composio.dev/toolkits/linear)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -165,6 +167,4 @@ Automate Linear operations through Composio's Linear toolkit via Rube MCP.
 | Create issue | LINEAR_CREATE_LINEAR_ISSUE | team_id, title, description |
 | Search issues | LINEAR_SEARCH_ISSUES | query |
 | List issues | LINEAR_LIST_LINEAR_ISSUES | team_id, filters |
-| Get issue | LINEAR_GET_LINEAR_ISSUE | issue_id |
-| Update issue | LINEAR_UPDATE_ISSUE | issue_id, fields |
-| List states |
+| Get issue | LINEAR_GET_LINEAR_ISSU

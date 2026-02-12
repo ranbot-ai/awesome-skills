@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/microsoft-t
 
 Automate Microsoft Teams operations through Composio's Microsoft Teams toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/microsoft_teams](https://composio.dev/toolkits/microsoft_teams)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -126,7 +128,4 @@ Automate Microsoft Teams operations through Composio's Microsoft Teams toolkit v
 
 **When to use**: User wants to find messages across Teams chats and channels
 
-**Tool sequence**:
-1. `MICROSOFT_TEAMS_SEARCH_MESSAGES` - Search with KQL syntax [Required]
-
-**Key parameters*
+**To

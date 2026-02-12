@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/circleci-au
 
 Automate CircleCI CI/CD operations through Composio's CircleCI toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/circleci](https://composio.dev/toolkits/circleci)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -138,6 +140,4 @@ Format: {vcs_type}/{org_name}/{repo_name}
 
 ```
 1. Call CIRCLECI_LIST_PIPELINES_FOR_PROJECT to get pipeline IDs
-2. Call CIRCLECI_LIST_WORKFLOWS_BY_PIPELINE_ID with pipeline_id
-3. Extract job numbers from workflow details
-4. Call CIRCLECI_GET_JOB_DETAILS with job
+2. Call CIRCLECI_LIST_WORKFLOWS_BY_PIPELINE_ID with pipeli

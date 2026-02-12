@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/twitter-aut
 
 Automate Twitter/X operations through Composio's Twitter toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/twitter](https://composio.dev/toolkits/twitter)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -129,6 +131,4 @@ Automate Twitter/X operations through Composio's Twitter toolkit via Rube MCP.
 **Tool sequence**:
 1. `TWITTER_USER_LOOKUP_ME` - Get authenticated user ID [Prerequisite]
 2. `TWITTER_GET_A_USER_S_OWNED_LISTS` - List owned lists [Optional]
-3. `TWITTER_GET_A_USER_S_LIST_MEMBERSHIPS` - List memberships [Optional]
-4. `TWITTER_GET_A_USER_S_PINNED_LISTS` - Get pinned lists [Optional]
-5. `
+3. `TWITTER_GET_A_USER_S_LIST_MEMBERSHIPS` - List member

@@ -1,0 +1,20 @@
+{
+  "id": "antigravity-azure-cosmos-rust",
+  "name": "azure-cosmos-rust",
+  "slug": "azure-cosmos-rust",
+  "description": "Azure Cosmos DB SDK for Rust (NoSQL API). Use for document CRUD, queries, containers, and globally distributed data.\nTriggers: \"cosmos db rust\", \"CosmosClient rust\", \"container\", \"document rust\", \"NoSQL rust\", \"partition key\".\n",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-cosmos-rust",
+  "content": "\n# Azure Cosmos DB SDK for Rust\n\nClient library for Azure Cosmos DB NoSQL API — globally distributed, multi-model database.\n\n## Installation\n\n```sh\ncargo add azure_data_cosmos azure_identity\n```\n\n## Environment Variables\n\n```bash\nCOSMOS_ENDPOINT=https://<account>.documents.azure.com:443/\nCOSMOS_DATABASE=mydb\nCOSMOS_CONTAINER=mycontainer\n```\n\n## Authentication\n\n```rust\nuse azure_identity::DeveloperToolsCredential;\nuse azure_data_cosmos::CosmosClient;\n\nlet credential = DeveloperToolsCredential::new(None)?;\nlet client = CosmosClient::new(\n    \"https://<account>.documents.azure.com:443/\",\n    credential.clone(),\n    None,\n)?;\n```\n\n## Client Hierarchy\n\n| Client | Purpose | Get From |\n|--------|---------|----------|\n| `CosmosClient` | Account-level operations | Direct instantiation |\n| `DatabaseClient` | Database operations | `client.database_client()` |\n| `ContainerClient` | Container/item operations | `database.container_client()` |\n\n## Core Workflow\n\n### Get Database and Container Clients\n\n```rust\nlet database = client.database_client(\"myDatabase\");\nlet container = database.container_client(\"myContainer\");\n```\n\n### Create Item\n\n```rust\nuse serde::{Serialize, Deserialize};\n\n#[derive(Serialize, Deserialize)]\nstruct Item {\n    pub id: String,\n    pub partition_key: String,\n    pub value: String,\n}\n\nlet item = Item {\n    id: \"1\".into(),\n    partition_key: \"partition1\".into(),\n    value: \"hello\".into(),\n};\n\ncontainer.create_item(\"partition1\", item, None).await?;\n```\n\n### Read Item\n\n```rust\nlet response = container.read_item(\"partition1\", \"1\", None).await?;\nlet item: Item = response.into_model()?;\n```\n\n### Replace Item\n\n```rust\nlet mut item: Item = container.read_item(\"partition1\", \"1\", None).await?.into_model()?;\nitem.value = \"updated\".into();\n\ncontainer.replace_item(\"partition1\", \"1\", item, None).await?;\n```\n\n### Patch Item\n\n```rust\nuse azure_data_cosmos::models::PatchDocument;\n\nlet patch = PatchDocument::default()\n    .with_add(\"/newField\", \"newValue\")?\n    .with_remove(\"/oldField\")?;\n\ncontainer.patch_item(\"partition1\", \"1\", patch, None).await?;\n```\n\n### Delete Item\n\n```rust\ncontainer.delete_item(\"partition1\", \"1\", None).await?;\n```\n\n## Key Auth (Optional)\n\nEnable key-based authentication with feature flag:\n\n```sh\ncargo add azure_data_cosmos --features key_auth\n```\n\n## Best Practices\n\n1. **Always specify partition key** — required for point reads and writes\n2. **Use `into_model()?`** — to deserialize responses into your types\n3. **Derive `Serialize` and `Deserialize`** — for all document types\n4. **Use Entra ID auth** — prefer `DeveloperToolsCredential` over key auth\n5. **Reuse client instances** — clients are thread-safe and reusable\n\n## Reference Links\n\n| Resource | Link |\n|----------|------|\n| API Reference | https://docs.rs/azure_data_cosmos |\n| Source Code | https://github.com/Azure/azure-sdk-for-rust/tree/main/sdk/cosmos/azure_data_cosmos |\n| crates.io | https://crates.io/crates/azure_data_cosmos |\n",
+  "tags": [
+    "api",
+    "ai",
+    "workflow",
+    "document",
+    "azure"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-02-12T07:15:40.900Z"
+}

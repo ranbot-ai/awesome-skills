@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/mailchimp-a
 
 Automate Mailchimp email marketing workflows including campaign creation and sending, audience/list management, subscriber operations, segmentation, and performance analytics through Composio's Mailchimp toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/mailchimp](https://composio.dev/toolkits/mailchimp)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -101,6 +103,4 @@ Automate Mailchimp email marketing workflows including campaign creation and sen
 4. `MAILCHIMP_ADD_MEMBER_TO_LIST` - Add new subscriber (create only) [Optional]
 5. `MAILCHIMP_BATCH_ADD_OR_REMOVE_MEMBERS` - Bulk manage segment membership [Optional]
 
-**Key parameters for MAILCHIMP_ADD_OR_UPDATE_LIST_MEMBER**:
-- `list_id`: Audience ID (required)
-- `subscriber_hash`: MD5 hash of lo
+**Key parameters for MAILCHIMP_ADD_OR

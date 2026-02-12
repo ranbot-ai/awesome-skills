@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/brevo-autom
 
 Automate Brevo (formerly Sendinblue) email marketing operations through Composio's Brevo toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/brevo](https://composio.dev/toolkits/brevo)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -126,5 +128,4 @@ Automate Brevo (formerly Sendinblue) email marketing operations through Composio
 - `abTesting`: Set to `true` to enable A/B testing
 - `subjectA`: Subject line for variant A
 - `subjectB`: Subject line for variant B
-- `splitRule`: Percentage split for the test (1-99)
-- `winnerCriteria`: 'open' or 'click
+- 

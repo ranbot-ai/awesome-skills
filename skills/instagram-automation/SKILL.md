@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/instagram-a
 
 Automate Instagram operations through Composio's Instagram toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/instagram](https://composio.dev/toolkits/instagram)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -125,5 +127,4 @@ Automate Instagram operations through Composio's Instagram toolkit via Rube MCP.
 
 **Pitfalls**:
 - Comments may be paginated; follow pagination cursors for complete results
-- Carousel children are returned as individual media objects
-- Comment moderation settings on the account affect wha
+- Carousel children ar

@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/stripe-auto
 
 Automate Stripe payment operations through Composio's Stripe toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/stripe](https://composio.dev/toolkits/stripe)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -144,5 +146,3 @@ Automate Stripe payment operations through Composio's Stripe toolkit via Rube MC
 - `reason`: Refund reason ('duplicate', 'fraudulent', 'requested_by_customer')
 
 **Pitfalls**:
-- Refunds can take 5-10 business days to appear on customer statements
-- Amount is in s

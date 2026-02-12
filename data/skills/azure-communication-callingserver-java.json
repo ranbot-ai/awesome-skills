@@ -1,0 +1,21 @@
+{
+  "id": "antigravity-azure-communication-callingserver-java",
+  "name": "azure-communication-callingserver-java",
+  "slug": "azure-communication-callingserver-java",
+  "description": "Azure Communication Services CallingServer (legacy) Java SDK. Note - This SDK is deprecated. Use azure-communication-callautomation instead for new projects. Only use this skill when maintaining legacy code.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-communication-callingserver-java",
+  "content": "\n# Azure Communication CallingServer (Java) - DEPRECATED\n\n> **⚠️ DEPRECATED**: This SDK has been renamed to **Call Automation**. For new projects, use `azure-communication-callautomation` instead. This skill is for maintaining legacy code only.\n\n## Migration to Call Automation\n\n```xml\n<!-- OLD (deprecated) -->\n<dependency>\n    <groupId>com.azure</groupId>\n    <artifactId>azure-communication-callingserver</artifactId>\n    <version>1.0.0-beta.5</version>\n</dependency>\n\n<!-- NEW (use this instead) -->\n<dependency>\n    <groupId>com.azure</groupId>\n    <artifactId>azure-communication-callautomation</artifactId>\n    <version>1.6.0</version>\n</dependency>\n```\n\n## Class Name Changes\n\n| CallingServer (Old) | Call Automation (New) |\n|---------------------|----------------------|\n| `CallingServerClient` | `CallAutomationClient` |\n| `CallingServerClientBuilder` | `CallAutomationClientBuilder` |\n| `CallConnection` | `CallConnection` (same) |\n| `ServerCall` | Removed - use `CallConnection` |\n\n## Legacy Client Creation\n\n```java\n// OLD WAY (deprecated)\nimport com.azure.communication.callingserver.CallingServerClient;\nimport com.azure.communication.callingserver.CallingServerClientBuilder;\n\nCallingServerClient client = new CallingServerClientBuilder()\n    .connectionString(\"<connection-string>\")\n    .buildClient();\n\n// NEW WAY\nimport com.azure.communication.callautomation.CallAutomationClient;\nimport com.azure.communication.callautomation.CallAutomationClientBuilder;\n\nCallAutomationClient client = new CallAutomationClientBuilder()\n    .connectionString(\"<connection-string>\")\n    .buildClient();\n```\n\n## Legacy Recording\n\n```java\n// OLD WAY\nStartRecordingOptions options = new StartRecordingOptions(serverCallId)\n    .setRecordingStateCallbackUri(callbackUri);\n\nStartCallRecordingResult result = client.startRecording(options);\nString recordingId = result.getRecordingId();\n\nclient.pauseRecording(recordingId);\nclient.resumeRecording(recordingId);\nclient.stopRecording(recordingId);\n\n// NEW WAY - see azure-communication-callautomation skill\n```\n\n## For New Development\n\n**Do not use this SDK for new projects.** \n\nSee the `azure-communication-callautomation-java` skill for:\n- Making outbound calls\n- Answering incoming calls\n- Call recording\n- DTMF recognition\n- Text-to-speech / speech-to-text\n- Adding/removing participants\n- Call transfer\n\n## Trigger Phrases\n\n- \"callingserver legacy\", \"deprecated calling SDK\"\n- \"migrate callingserver to callautomation\"\n",
+  "tags": [
+    "ai",
+    "automation",
+    "azure"
+  ],
+  "useCases": [
+    "\"callingserver legacy\", \"deprecated calling SDK\"",
+    "\"migrate callingserver to callautomation\""
+  ],
+  "scrapedAt": "2026-02-12T07:15:38.301Z"
+}

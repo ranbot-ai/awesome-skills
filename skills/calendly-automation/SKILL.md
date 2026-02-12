@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/calendly-au
 
 Automate Calendly operations including event listing, invitee management, scheduling link creation, availability queries, and organization administration through Composio's Calendly toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/calendly](https://composio.dev/toolkits/calendly)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -109,5 +111,4 @@ Automate Calendly operations including event listing, invitee management, schedu
 **When to use**: User wants to cancel a scheduled Calendly event
 
 **Tool sequence**:
-1. `CALENDLY_LIST_EVENTS` - Find the event to cancel [Prerequisite]
-2. `CALENDLY_GET_EVENT` - Confirm event details be
+1. `CALENDLY_LIST_EVENTS` 

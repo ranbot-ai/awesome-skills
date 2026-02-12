@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/zoho-crm-au
 
 Automate Zoho CRM operations through Composio's Zoho toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/zoho](https://composio.dev/toolkits/zoho)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -132,11 +134,4 @@ Automate Zoho CRM operations through Composio's Zoho toolkit via Rube MCP.
 - Tags are module-specific; a tag created for Leads is not available in Contacts
 - Related records require both the parent record ID and the related module
 - Tag names must be unique within a module
-- Bulk tag operations may hit rate limits
-
-## Common Patterns
-
-### Module and Field Discovery
-
-```
-1. Call ZOHO_L
+- Bulk tag operations may hit

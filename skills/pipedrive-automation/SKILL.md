@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/pipedrive-a
 
 Automate Pipedrive CRM workflows including deal management, contact and organization operations, activity scheduling, notes, and pipeline/stage queries through Composio's Pipedrive toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/pipedrive](https://composio.dev/toolkits/pipedrive)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -97,7 +99,4 @@ Automate Pipedrive CRM workflows including deal management, contact and organiza
 2. `PIPEDRIVE_ADD_AN_ACTIVITY` - Create the activity with subject, type, due date [Required]
 3. `PIPEDRIVE_UPDATE_AN_ACTIVITY` - Modify activity details or mark as done [Optional]
 4. `PIPEDRIVE_GET_DETAILS_OF_AN_ACTIVITY` - Retrieve activity record [Optional]
-5. `PIPEDRIVE_GET_ALL_ACTIVITIES_ASSIGNED_TO_A_PARTICULAR_USER` - List user's activities [Optional]
-
-**Key parameters**:
-- `subject`: Act
+5. `PIPEDRIVE_GET_ALL_ACTIVITIES_ASSIGNED_T

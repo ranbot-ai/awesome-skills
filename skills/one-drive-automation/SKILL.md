@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/one-drive-a
 
 Automate OneDrive operations including file upload/download, search, folder management, sharing links, permissions management, and drive browsing through Composio's OneDrive toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/one_drive](https://composio.dev/toolkits/one_drive)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -101,5 +103,4 @@ Automate OneDrive operations including file upload/download, search, folder mana
 - `item_id`: The file or folder to share
 - `recipients`: Array of objects with `email` or `object_id`
 - `roles`: Array with `"read"` or `"write"`
-- `send_invitation`: `true` to send notification email, `false` for silent permission grant
-- `require_sign_in`: `true` to require a
+- `send_invitation`: `true` to send no

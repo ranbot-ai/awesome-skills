@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/linkedin-au
 
 Automate LinkedIn operations through Composio's LinkedIn toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/linkedin](https://composio.dev/toolkits/linkedin)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -148,7 +150,4 @@ Automate LinkedIn operations through Composio's LinkedIn toolkit via Rube MCP.
 
 **Authentication**:
 - LinkedIn OAuth tokens have limited scopes; ensure required permissions are granted
-- Tokens expire; re-authenticate if API calls return 401 errors
-
-**URN Formats**:
-- LinkedIn 
+-

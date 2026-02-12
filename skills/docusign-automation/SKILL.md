@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/docusign-au
 
 Automate DocuSign e-signature workflows through Composio's DocuSign toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/docusign](https://composio.dev/toolkits/docusign)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -128,5 +130,4 @@ Automate DocuSign e-signature workflows through Composio's DocuSign toolkit via 
 **Pitfalls**:
 - Only 'created' (draft) envelopes can be sent
 - Sent envelopes cannot be unsent; they can only be voided
-- Voiding an envelope notifies all recipients
-- All required recipients must have valid email address
+- Voiding

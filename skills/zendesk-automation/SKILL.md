@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/zendesk-aut
 
 Automate Zendesk operations through Composio's Zendesk toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/zendesk](https://composio.dev/toolkits/zendesk)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -129,7 +131,4 @@ Automate Zendesk operations through Composio's Zendesk toolkit via Rube MCP.
 2. `ZENDESK_GET_ZENDESK_ORGANIZATION` - Get specific organization [Optional]
 3. `ZENDESK_CREATE_ZENDESK_ORGANIZATION` - Create organization [Optional]
 4. `ZENDESK_UPDATE_ZENDESK_ORGANIZATION` - Update organization [Optional]
-5. `ZENDESK_COUNT_ZENDESK_ORGANIZATIONS` - Get total count [Optional]
-
-**Key parameters**:
-- `name`: Organization name (unique, req
+5. `ZENDESK_COUNT_ZENDESK_ORGANIZATIONS` 

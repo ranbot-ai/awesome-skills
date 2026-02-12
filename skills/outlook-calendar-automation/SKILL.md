@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/outlook-cal
 
 Automate Outlook Calendar operations through Composio's Outlook toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/outlook](https://composio.dev/toolkits/outlook)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -121,7 +123,4 @@ Automate Outlook Calendar operations through Composio's Outlook toolkit via Rube
 - `event_id`: Event to delete or decline
 - `send_notifications`: Send cancellation notices to attendees (default true)
 - `comment`: Reason for declining (for DECLINE_EVENT)
-- `proposedNewTime`: Suggest alternative time when declining
-
-**Pitfalls**:
-- Deletion with send_notifications=true sends can
+- `proposedNewTime`: Suggest altern

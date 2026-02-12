@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/postmark-au
 
 Automate Postmark transactional email operations through Composio's Postmark toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/postmark](https://composio.dev/toolkits/postmark)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -122,8 +124,4 @@ Automate Postmark transactional email operations through Composio's Postmark too
 
 **Tool sequence**:
 1. `POSTMARK_GET_SERVER` - Retrieve current server settings [Required]
-2. `POSTMARK_EDIT_SERVER` - Update server configuration [Optional]
-
-**Key parameters**:
-- `Name`: Server display name
-- `SmtpApiActivated`:
+2. `POSTMARK_EDIT_SERVER` - Update server confi

@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/coda-automa
 
 Automate Coda document and data operations through Composio's Coda toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/coda](https://composio.dev/toolkits/coda)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -131,5 +133,4 @@ Automate Coda document and data operations through Composio's Coda toolkit via R
 
 **Key parameters**:
 - `docId`: Document ID
-- `access`: Permission level ('readonly', 'write', 'comment')
-- `principal`: Object with email or u
+- `access`: Per

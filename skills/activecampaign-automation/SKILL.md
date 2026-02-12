@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/activecampa
 
 Automate ActiveCampaign CRM and marketing automation operations through Composio's ActiveCampaign toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/active_campaign](https://composio.dev/toolkits/active_campaign)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -125,8 +127,4 @@ Automate ActiveCampaign CRM and marketing automation operations through Composio
 **When to use**: User wants to create follow-up tasks associated with contacts
 
 **Tool sequence**:
-1. `ACTIVE_CAMPAIGN_FIND_CONTACT` - Find the contact to associate the task with [Prerequisite]
-2. `ACTIVE_CAMPAIGN_CREATE_CONTACT_TASK` - Create the task [Required]
-
-**Key parameters**:
-- `re
+1. `ACTIVE_CAMPAIGN_FIND_CONTACT` - Find the contact to associate the task with [Prer

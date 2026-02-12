@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/googlesheet
 
 Automate Google Sheets workflows including reading/writing data, managing spreadsheets and tabs, formatting cells, filtering rows, and upserting records through Composio's Google Sheets toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/googlesheets](https://composio.dev/toolkits/googlesheets)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -109,8 +111,3 @@ Automate Google Sheets workflows including reading/writing data, managing spread
 
 **Tool sequence**:
 1. `GOOGLESHEETS_UPSERT_ROWS` - Update matching rows or append new ones [Required]
-
-**Key parameters**:
-- `spreadsheetId`: Target spreadsheet ID
-- `sheetName`: Tab name
-- `keyColumn`

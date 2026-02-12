@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/segment-aut
 
 Automate Segment customer data platform operations through Composio's Segment toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/segment](https://composio.dev/toolkits/segment)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -131,8 +133,4 @@ Automate Segment customer data platform operations through Composio's Segment to
 - At least one of `userId` or `anonymousId` is required
 - `name` and `category` are optional but recommended for proper analytics
 - Standard properties include `url`, `title`, `referrer`, `path`, `search`
-- Page calls are often automated; manual use is for server-side page tracking
-
-### 6. Alias Users and Manage Sources
-
-**When to use**: User wants to mer
+- Page calls are often automated; manual use is for server-sid

@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/zoom-automa
 
 Automate Zoom operations including meeting scheduling, webinar management, cloud recording retrieval, participant tracking, and usage reporting through Composio's Zoom toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/zoom](https://composio.dev/toolkits/zoom)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -106,5 +108,4 @@ Automate Zoom operations including meeting scheduling, webinar management, cloud
 **Pitfalls**:
 - Date range maximum is 1 month; API auto-adjusts `from` if range exceeds this
 - Cloud Recording must be enabled on the account
-- UUIDs starting with `/` or containing `//` must be double URL-encoded
-- `ZOOM_DELETE_MEETING_RECORDINGS` 
+- UUIDs starting with `

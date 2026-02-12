@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/sentry-auto
 
 Automate Sentry error tracking and monitoring operations through Composio's Sentry toolkit via Rube MCP.
 
+**Toolkit docs**: [composio.dev/toolkits/sentry](https://composio.dev/toolkits/sentry)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -114,6 +116,4 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 
 **Key parameters**:
 - `version`: Release version string (e.g., '1.0.0', commit SHA)
-- `projects`: Array of project slugs this release belongs to
-- `dateReleased`: Release timestamp (ISO 8601)
-- `envi
+- `projects`: Array of proj

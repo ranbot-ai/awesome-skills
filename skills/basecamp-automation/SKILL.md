@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/basecamp-au
 
 Automate Basecamp operations including project management, to-do list creation, task management, message board posting, people management, and to-do group organization through Composio's Basecamp toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/basecamp](https://composio.dev/toolkits/basecamp)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -102,5 +104,4 @@ Automate Basecamp operations including project management, to-do list creation, 
 **When to use**: User wants to list people, manage project access, or add new users
 
 **Tool sequence**:
-1. `BASECAMP_GET_PEOPLE` - List all people visible to the current user [Required]
-2. `BASECAMP_GET_PROJECTS` - Find the targ
+1. `BASECAMP_GET_PEOPLE` - List 

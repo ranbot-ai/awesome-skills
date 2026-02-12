@@ -12,6 +12,8 @@ url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/supabase-au
 
 Automate Supabase operations including database queries, table schema inspection, SQL execution, project and organization management, storage buckets, edge functions, and service health monitoring through Composio's Supabase toolkit.
 
+**Toolkit docs**: [composio.dev/toolkits/supabase](https://composio.dev/toolkits/supabase)
+
 ## Prerequisites
 
 - Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
@@ -95,5 +97,4 @@ Automate Supabase operations including database queries, table schema inspection
 **Pitfalls**:
 - `LIST_ALL_ORGANIZATIONS` returns both `id` and `slug`; `LIST_MEMBERS_OF_AN_ORGANIZATION` expects `slug`, not `id`
 - `GET_PROJECT_API_KEYS` returns live secrets -- NEVER log, display, or persist full key values
-- `GETS_PROJECT_S_SERVICE_HEALTH_STATUS` requires a non-empty `services` array; empty array causes invalid_request error
-- Config tools may return 401/403 if token lacks required 
+- `GETS_PROJECT_S_SERVICE_HEALTH_STATUS` requires a non-empty `services` array; empty a
