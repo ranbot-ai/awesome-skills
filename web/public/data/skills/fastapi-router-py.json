@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-fastapi-router-py",
+  "name": "fastapi-router-py",
+  "slug": "fastapi-router-py",
+  "description": "Create FastAPI routers with CRUD operations, authentication dependencies, and proper response models. Use when building REST API endpoints, creating new routes, implementing CRUD operations, or adding authenticated endpoints in FastAPI applications.",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fastapi-router-py",
+  "content": "\n# FastAPI Router\n\nCreate FastAPI routers following established patterns with proper authentication, response models, and HTTP status codes.\n\n## Quick Start\n\nCopy the template from [assets/template.py](assets/template.py) and replace placeholders:\n- `{{ResourceName}}` → PascalCase name (e.g., `Project`)\n- `{{resource_name}}` → snake_case name (e.g., `project`)\n- `{{resource_plural}}` → plural form (e.g., `projects`)\n\n## Authentication Patterns\n\n```python\n# Optional auth - returns None if not authenticated\ncurrent_user: Optional[User] = Depends(get_current_user)\n\n# Required auth - raises 401 if not authenticated\ncurrent_user: User = Depends(get_current_user_required)\n```\n\n## Response Models\n\n```python\n@router.get(\"/items/{item_id}\", response_model=Item)\nasync def get_item(item_id: str) -> Item:\n    ...\n\n@router.get(\"/items\", response_model=list[Item])\nasync def list_items() -> list[Item]:\n    ...\n```\n\n## HTTP Status Codes\n\n```python\n@router.post(\"/items\", status_code=status.HTTP_201_CREATED)\n@router.delete(\"/items/{id}\", status_code=status.HTTP_204_NO_CONTENT)\n```\n\n## Integration Steps\n\n1. Create router in `src/backend/app/routers/`\n2. Mount in `src/backend/app/main.py`\n3. Create corresponding Pydantic models\n4. Create service layer if needed\n5. Add frontend API functions\n",
+  "tags": [
+    "python",
+    "api",
+    "ai",
+    "template"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-02-14T07:05:06.159Z"
+}

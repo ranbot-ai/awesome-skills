@@ -1,0 +1,23 @@
+{
+  "id": "antigravity-github-issue-creator",
+  "name": "github-issue-creator",
+  "slug": "github-issue-creator",
+  "description": "Convert raw notes, error logs, voice dictation, or screenshots into crisp GitHub-flavored markdown issue reports. Use when the user pastes bug info, error messages, or informal descriptions and wants a structured GitHub issue. Supports images/GIFs for visual evidence.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/github-issue-creator",
+  "content": "\n# GitHub Issue Creator\n\nTransform messy input (error logs, voice notes, screenshots) into clean, actionable GitHub issues.\n\n## Output Template\n\n```markdown\n## Summary\n[One-line description of the issue]\n\n## Environment\n- **Product/Service**: \n- **Region/Version**: \n- **Browser/OS**: (if relevant)\n\n## Reproduction Steps\n1. [Step]\n2. [Step]\n3. [Step]\n\n## Expected Behavior\n[What should happen]\n\n## Actual Behavior\n[What actually happens]\n\n## Error Details\n```\n[Error message/code if applicable]\n```\n\n## Visual Evidence\n[Reference to attached screenshots/GIFs]\n\n## Impact\n[Severity: Critical/High/Medium/Low + brief explanation]\n\n## Additional Context\n[Any other relevant details]\n```\n\n## Output Location\n\n**Create issues as markdown files** in `/issues/` directory at the repo root. Use naming convention: `YYYY-MM-DD-short-description.md`\n\n## Guidelines\n\n**Be crisp**: No fluff. Every word should add value.\n\n**Extract structure from chaos**: Voice dictation and raw notes often contain the facts buried in casual language. Pull them out.\n\n**Infer missing context**: If user mentions \"same project\" or \"the dashboard\", use context from conversation or memory to fill in specifics.\n\n**Placeholder sensitive data**: Use `[PROJECT_NAME]`, `[USER_ID]`, etc. for anything that might be sensitive.\n\n**Match severity to impact**:\n- Critical: Service down, data loss, security issue\n- High: Major feature broken, no workaround\n- Medium: Feature impaired, workaround exists\n- Low: Minor inconvenience, cosmetic\n\n**Image/GIF handling**: Reference attachments inline. Format: `![Description](attachment-name.png)`\n\n## Examples\n\n**Input (voice dictation)**:\n> so I was trying to deploy the agent and it just failed silently no error nothing the workflow ran but then poof gone from the list had to refresh and try again three times\n\n**Output**:\n```markdown\n## Summary\nAgent deployment fails silently - no error displayed, agent disappears from list\n\n## Environment\n- **Product/Service**: Azure AI Foundry\n- **Region/Version**: westus2\n\n## Reproduction Steps\n1. Navigate to agent deployment\n2. Configure and deploy agent\n3. Observe workflow completes\n4. Check agent list\n\n## Expected Behavior\nAgent appears in list with deployment status, errors shown if deployment fails\n\n## Actual Behavior\nAgent disappears from list. No error message. Requires page refresh and retry.\n\n## Impact\n**High** - Blocks agent deployment workflow, no feedback on failure cause\n\n## Additional Context\nRequired 3 retry attempts before successful deployment\n```\n\n---\n\n**Input (error paste)**:\n> Error: PERMISSION_DENIED when publishing to Teams channel. Code: 403. Was working yesterday.\n\n**Output**:\n```markdown\n## Summary\n403 PERMISSION_DENIED error when publishing to Teams channel\n\n## Environment\n- **Product/Service**: Copilot Studio → Teams integration\n- **Region/Version**: [REGION]\n\n## Reproduction Steps\n1. Configure agent for Teams channel\n2. Attempt to publish\n\n## Expected Behavior\nAgent publishes successfully to Teams channel\n\n## Actual Behavior\nReturns `PERMISSION_DENIED` with code 403\n\n## Error Details\n```\nError: PERMISSION_DENIED\nCode: 403\n```\n\n## Impact\n**High** - Blocks Teams integration, regression from previous working state\n\n## Additional Context\nWas working yesterday - possible permission/config change or service regression\n```",
+  "tags": [
+    "markdown",
+    "ai",
+    "agent",
+    "workflow",
+    "template",
+    "image",
+    "security",
+    "azure"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-02-14T07:05:31.224Z"
+}

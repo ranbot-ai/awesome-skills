@@ -1,0 +1,21 @@
+{
+  "id": "antigravity-pydantic-models-py",
+  "name": "pydantic-models-py",
+  "slug": "pydantic-models-py",
+  "description": "Create Pydantic models following the multi-model pattern with Base, Create, Update, Response, and InDB variants. Use when defining API request/response schemas, database models, or data validation in Python applications using Pydantic v2.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pydantic-models-py",
+  "content": "\n# Pydantic Models\n\nCreate Pydantic models following the multi-model pattern for clean API contracts.\n\n## Quick Start\n\nCopy the template from [assets/template.py](assets/template.py) and replace placeholders:\n- `{{ResourceName}}` → PascalCase name (e.g., `Project`)\n- `{{resource_name}}` → snake_case name (e.g., `project`)\n\n## Multi-Model Pattern\n\n| Model | Purpose |\n|-------|---------|\n| `Base` | Common fields shared across models |\n| `Create` | Request body for creation (required fields) |\n| `Update` | Request body for updates (all optional) |\n| `Response` | API response with all fields |\n| `InDB` | Database document with `doc_type` |\n\n## camelCase Aliases\n\n```python\nclass MyModel(BaseModel):\n    workspace_id: str = Field(..., alias=\"workspaceId\")\n    created_at: datetime = Field(..., alias=\"createdAt\")\n    \n    class Config:\n        populate_by_name = True  # Accept both snake_case and camelCase\n```\n\n## Optional Update Fields\n\n```python\nclass MyUpdate(BaseModel):\n    \"\"\"All fields optional for PATCH requests.\"\"\"\n    name: Optional[str] = Field(None, min_length=1)\n    description: Optional[str] = None\n```\n\n## Database Document\n\n```python\nclass MyInDB(MyResponse):\n    \"\"\"Adds doc_type for Cosmos DB queries.\"\"\"\n    doc_type: str = \"my_resource\"\n```\n\n## Integration Steps\n\n1. Create models in `src/backend/app/models/`\n2. Export from `src/backend/app/models/__init__.py`\n3. Add corresponding TypeScript types\n",
+  "tags": [
+    "python",
+    "typescript",
+    "api",
+    "template",
+    "document",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-02-14T07:07:13.823Z"
+}

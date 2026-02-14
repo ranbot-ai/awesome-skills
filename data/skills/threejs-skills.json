@@ -2,15 +2,30 @@
   "id": "antigravity-threejs-skills",
   "name": "threejs-skills",
   "slug": "threejs-skills",
-  "description": "Three.js skills for creating 3D elements and interactive experiences",
-  "category": "AI & Agents",
+  "description": "Create 3D scenes, interactive experiences, and visual effects using Three.js. Use when user requests 3D graphics, WebGL experiences, 3D visualizations, animations, or interactive 3D elements.",
+  "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/threejs-skills",
-  "content": "\n# Threejs Skills\n\n## Overview\n\nThree.js skills for creating 3D elements and interactive experiences\n\n## When to Use This Skill\n\nUse this skill when you need to work with three.js skills for creating 3d elements and interactive experiences.\n\n## Instructions\n\nThis skill provides guidance and patterns for three.js skills for creating 3d elements and interactive experiences.\n\nFor more information, see the [source repository](https://github.com/CloudAI-X/threejs-skills).\n",
+  "content": "\n# Three.js Skills\n\nSystematically create high-quality 3D scenes and interactive experiences using Three.js best practices.\n\n## When to Use\n\n- Requests 3D visualizations or graphics (\"create a 3D model\", \"show in 3D\")\n- Wants interactive 3D experiences (\"rotating cube\", \"explorable scene\")\n- Needs WebGL or canvas-based rendering\n- Asks for animations, particles, or visual effects\n- Mentions Three.js, WebGL, or 3D rendering\n- Wants to visualize data in 3D space\n\n## Core Setup Pattern\n\n### 1. Essential Three.js Imports\n\nAlways use the correct CDN version (r128):\n\n```javascript\nimport * as THREE from \"https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js\";\n```\n\n**CRITICAL**: Do NOT use example imports like `THREE.OrbitControls` - they won't work on the CDN.\n\n### 2. Scene Initialization\n\nEvery Three.js artifact needs these core components:\n\n```javascript\n// Scene - contains all 3D objects\nconst scene = new THREE.Scene();\n\n// Camera - defines viewing perspective\nconst camera = new THREE.PerspectiveCamera(\n  75, // Field of view\n  window.innerWidth / window.innerHeight, // Aspect ratio\n  0.1, // Near clipping plane\n  1000, // Far clipping plane\n);\ncamera.position.z = 5;\n\n// Renderer - draws the scene\nconst renderer = new THREE.WebGLRenderer({ antialias: true });\nrenderer.setSize(window.innerWidth, window.innerHeight);\ndocument.body.appendChild(renderer.domElement);\n```\n\n### 3. Animation Loop\n\nUse requestAnimationFrame for smooth rendering:\n\n```javascript\nfunction animate() {\n  requestAnimationFrame(animate);\n\n  // Update object transformations here\n  mesh.rotation.x += 0.01;\n  mesh.rotation.y += 0.01;\n\n  renderer.render(scene, camera);\n}\nanimate();\n```\n\n## Systematic Development Process\n\n### 1. Define the Scene\n\nStart by identifying:\n\n- **What objects** need to be rendered\n- **Camera position** and field of view\n- **Lighting setup** required\n- **Interaction model** (static, rotating, user-controlled)\n\n### 2. Build Geometry\n\nChoose appropriate geometry types:\n\n**Basic Shapes:**\n\n- `BoxGeometry` - cubes, rectangular prisms\n- `SphereGeometry` - spheres, planets\n- `CylinderGeometry` - cylinders, tubes\n- `PlaneGeometry` - flat surfaces, ground planes\n- `TorusGeometry` - donuts, rings\n\n**IMPORTANT**: Do NOT use `CapsuleGeometry` (introduced in r142, not available in r128)\n\n**Alternatives for capsules:**\n\n- Combine `CylinderGeometry` + 2 `SphereGeometry`\n- Use `SphereGeometry` with adjusted parameters\n- Create custom geometry with vertices\n\n### 3. Apply Materials\n\nChoose materials based on visual needs:\n\n**Common Materials:**\n\n- `MeshBasicMaterial` - unlit, flat colors (no lighting needed)\n- `MeshStandardMaterial` - physically-based, realistic (needs lighting)\n- `MeshPhongMaterial` - shiny surfaces with specular highlights\n- `MeshLambertMaterial` - matte surfaces, diffuse reflection\n\n```javascript\nconst material = new THREE.MeshStandardMaterial({\n  color: 0x00ff00,\n  metalness: 0.5,\n  roughness: 0.5,\n});\n```\n\n### 4. Add Lighting\n\n**If using lit materials** (Standard, Phong, Lambert), add lights:\n\n```javascript\n// Ambient light - general illumination\nconst ambientLight = new THREE.AmbientLight(0xffffff, 0.5);\nscene.add(ambientLight);\n\n// Directional light - like sunlight\nconst directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);\ndirectionalLight.position.set(5, 5, 5);\nscene.add(directionalLight);\n```\n\n**Skip lighting** if using `MeshBasicMaterial` - it's unlit by design.\n\n### 5. Handle Responsiveness\n\nAlways add window resize handling:\n\n```javascript\nwindow.addEventListener(\"resize\", () => {\n  camera.aspect = window.innerWidth / window.innerHeight;\n  camera.updateProjectionMatrix();\n  renderer.setSize(window.innerWidth, window.innerHeight);\n});\n```\n\n## Common Patterns\n\n### Rotating Object\n\n```javascript\nfunction animate() {\n  requestAnimationFrame(animate);\n  mesh.rotation.x += 0.01;\n  mesh.rotation.y += 0.01;\n  renderer.render(scene, camera);\n}\n```\n\n### Custom Camera Controls (OrbitControls Alternative)\n\nSince `THREE.OrbitControls` isn't available on CDN, implement custom controls:\n\n```javascript\nlet isDragging = false;\nlet previousMousePosition = { x: 0, y: 0 };\n\nrenderer.domElement.addEventListener(\"mousedown\", () => {\n  isDragging = true;\n});\n\nrenderer.domElement.addEventListener(\"mouseup\", () => {\n  isDragging = false;\n});\n\nrenderer.domElement.addEventListener(\"mousemove\", (event) => {\n  if (isDragging) {\n    const deltaX = event.clientX - previousMousePosition.x;\n    const deltaY = event.clientY - previousMousePosition.y;\n\n    // Rotate camera around scene\n    const rotationSpeed = 0.005;\n    camera.position.x += deltaX * rotationSpeed;\n    camera.position.y -= deltaY * rotationSpeed;\n    camera.lookAt(scene.position);\n  }\n\n  previousMousePosition = { x: event.clientX, y: event.clientY };\n});\n\n// Zoom with mouse wheel\nrenderer.domElement.addEventListener(\"wheel\", (event) => {\n  event.preventDefault();\n  camera.position.z += event.deltaY * 0.01;\n  camera.position.z = Math.max(2, Math.min(20, cam",
   "tags": [
-    "ai"
+    "javascript",
+    "typescript",
+    "react",
+    "ai",
+    "workflow",
+    "design",
+    "document",
+    "aws",
+    "rag",
+    "cro"
   ],
-  "useCases": [],
+  "useCases": [
+    "Requests 3D visualizations or graphics (\"create a 3D model\", \"show in 3D\")",
+    "Wants interactive 3D experiences (\"rotating cube\", \"explorable scene\")",
+    "Needs WebGL or canvas-based rendering",
+    "Asks for animations, particles, or visual effects",
+    "Mentions Three.js, WebGL, or 3D rendering"
+  ],
   "scrapedAt": "2026-01-31T06:54:43.518Z"
 }

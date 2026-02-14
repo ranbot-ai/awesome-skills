@@ -1,0 +1,25 @@
+{
+  "id": "antigravity-podcast-generation",
+  "name": "podcast-generation",
+  "slug": "podcast-generation",
+  "description": "Generate AI-powered podcast-style audio narratives using Azure OpenAI's GPT Realtime Mini model via WebSocket. Use when building text-to-speech features, audio narrative generation, podcast creation from content, or integrating with Azure OpenAI Realtime API for real audio output. Covers full-stack ",
+  "category": "Business & Marketing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/podcast-generation",
+  "content": "\n# Podcast Generation with GPT Realtime Mini\n\nGenerate real audio narratives from text content using Azure OpenAI's Realtime API.\n\n## Quick Start\n\n1. Configure environment variables for Realtime API\n2. Connect via WebSocket to Azure OpenAI Realtime endpoint\n3. Send text prompt, collect PCM audio chunks + transcript\n4. Convert PCM to WAV format\n5. Return base64-encoded audio to frontend for playback\n\n## Environment Configuration\n\n```env\nAZURE_OPENAI_AUDIO_API_KEY=your_realtime_api_key\nAZURE_OPENAI_AUDIO_ENDPOINT=https://your-resource.cognitiveservices.azure.com\nAZURE_OPENAI_AUDIO_DEPLOYMENT=gpt-realtime-mini\n```\n\n**Note**: Endpoint should NOT include `/openai/v1/` - just the base URL.\n\n## Core Workflow\n\n### Backend Audio Generation\n\n```python\nfrom openai import AsyncOpenAI\nimport base64\n\n# Convert HTTPS endpoint to WebSocket URL\nws_url = endpoint.replace(\"https://\", \"wss://\") + \"/openai/v1\"\n\nclient = AsyncOpenAI(\n    websocket_base_url=ws_url,\n    api_key=api_key\n)\n\naudio_chunks = []\ntranscript_parts = []\n\nasync with client.realtime.connect(model=\"gpt-realtime-mini\") as conn:\n    # Configure for audio-only output\n    await conn.session.update(session={\n        \"output_modalities\": [\"audio\"],\n        \"instructions\": \"You are a narrator. Speak naturally.\"\n    })\n    \n    # Send text to narrate\n    await conn.conversation.item.create(item={\n        \"type\": \"message\",\n        \"role\": \"user\",\n        \"content\": [{\"type\": \"input_text\", \"text\": prompt}]\n    })\n    \n    await conn.response.create()\n    \n    # Collect streaming events\n    async for event in conn:\n        if event.type == \"response.output_audio.delta\":\n            audio_chunks.append(base64.b64decode(event.delta))\n        elif event.type == \"response.output_audio_transcript.delta\":\n            transcript_parts.append(event.delta)\n        elif event.type == \"response.done\":\n            break\n\n# Convert PCM to WAV (see scripts/pcm_to_wav.py)\npcm_audio = b''.join(audio_chunks)\nwav_audio = pcm_to_wav(pcm_audio, sample_rate=24000)\n```\n\n### Frontend Audio Playback\n\n```javascript\n// Convert base64 WAV to playable blob\nconst base64ToBlob = (base64, mimeType) => {\n  const bytes = atob(base64);\n  const arr = new Uint8Array(bytes.length);\n  for (let i = 0; i < bytes.length; i++) arr[i] = bytes.charCodeAt(i);\n  return new Blob([arr], { type: mimeType });\n};\n\nconst audioBlob = base64ToBlob(response.audio_data, 'audio/wav');\nconst audioUrl = URL.createObjectURL(audioBlob);\nnew Audio(audioUrl).play();\n```\n\n## Voice Options\n\n| Voice | Character |\n|-------|-----------|\n| alloy | Neutral |\n| echo | Warm |\n| fable | Expressive |\n| onyx | Deep |\n| nova | Friendly |\n| shimmer | Clear |\n\n## Realtime API Events\n\n- `response.output_audio.delta` - Base64 audio chunk\n- `response.output_audio_transcript.delta` - Transcript text\n- `response.done` - Generation complete\n- `error` - Handle with `event.error.message`\n\n## Audio Format\n\n- **Input**: Text prompt\n- **Output**: PCM audio (24kHz, 16-bit, mono)\n- **Storage**: Base64-encoded WAV\n\n## References\n\n- **Full architecture**: See [references/architecture.md](references/architecture.md) for complete stack design\n- **Code examples**: See [references/code-examples.md](references/code-examples.md) for production patterns\n- **PCM conversion**: Use [scripts/pcm_to_wav.py](scripts/pcm_to_wav.py) for audio format conversion\n",
+  "tags": [
+    "python",
+    "javascript",
+    "react",
+    "api",
+    "ai",
+    "gpt",
+    "workflow",
+    "design",
+    "azure",
+    "rag"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-02-14T07:07:01.118Z"
+}

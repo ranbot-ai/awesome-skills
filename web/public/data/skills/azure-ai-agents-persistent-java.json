@@ -1,0 +1,22 @@
+{
+  "id": "antigravity-azure-ai-agents-persistent-java",
+  "name": "azure-ai-agents-persistent-java",
+  "slug": "azure-ai-agents-persistent-java",
+  "description": "Azure AI Agents Persistent SDK for Java. Low-level SDK for creating and managing AI agents with threads, messages, runs, and tools.\nTriggers: \"PersistentAgentsClient\", \"persistent agents java\", \"agent threads java\", \"agent runs java\", \"streaming agents java\".\n",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-agents-persistent-java",
+  "content": "\n# Azure AI Agents Persistent SDK for Java\n\nLow-level SDK for creating and managing persistent AI agents with threads, messages, runs, and tools.\n\n## Installation\n\n```xml\n<dependency>\n    <groupId>com.azure</groupId>\n    <artifactId>azure-ai-agents-persistent</artifactId>\n    <version>1.0.0-beta.1</version>\n</dependency>\n```\n\n## Environment Variables\n\n```bash\nPROJECT_ENDPOINT=https://<resource>.services.ai.azure.com/api/projects/<project>\nMODEL_DEPLOYMENT_NAME=gpt-4o-mini\n```\n\n## Authentication\n\n```java\nimport com.azure.ai.agents.persistent.PersistentAgentsClient;\nimport com.azure.ai.agents.persistent.PersistentAgentsClientBuilder;\nimport com.azure.identity.DefaultAzureCredentialBuilder;\n\nString endpoint = System.getenv(\"PROJECT_ENDPOINT\");\nPersistentAgentsClient client = new PersistentAgentsClientBuilder()\n    .endpoint(endpoint)\n    .credential(new DefaultAzureCredentialBuilder().build())\n    .buildClient();\n```\n\n## Key Concepts\n\nThe Azure AI Agents Persistent SDK provides a low-level API for managing persistent agents that can be reused across sessions.\n\n### Client Hierarchy\n\n| Client | Purpose |\n|--------|---------|\n| `PersistentAgentsClient` | Sync client for agent operations |\n| `PersistentAgentsAsyncClient` | Async client for agent operations |\n\n## Core Workflow\n\n### 1. Create Agent\n\n```java\n// Create agent with tools\nPersistentAgent agent = client.createAgent(\n    modelDeploymentName,\n    \"Math Tutor\",\n    \"You are a personal math tutor.\"\n);\n```\n\n### 2. Create Thread\n\n```java\nPersistentAgentThread thread = client.createThread();\n```\n\n### 3. Add Message\n\n```java\nclient.createMessage(\n    thread.getId(),\n    MessageRole.USER,\n    \"I need help with equations.\"\n);\n```\n\n### 4. Run Agent\n\n```java\nThreadRun run = client.createRun(thread.getId(), agent.getId());\n\n// Poll for completion\nwhile (run.getStatus() == RunStatus.QUEUED || run.getStatus() == RunStatus.IN_PROGRESS) {\n    Thread.sleep(500);\n    run = client.getRun(thread.getId(), run.getId());\n}\n```\n\n### 5. Get Response\n\n```java\nPagedIterable<PersistentThreadMessage> messages = client.listMessages(thread.getId());\nfor (PersistentThreadMessage message : messages) {\n    System.out.println(message.getRole() + \": \" + message.getContent());\n}\n```\n\n### 6. Cleanup\n\n```java\nclient.deleteThread(thread.getId());\nclient.deleteAgent(agent.getId());\n```\n\n## Best Practices\n\n1. **Use DefaultAzureCredential** for production authentication\n2. **Poll with appropriate delays** — 500ms recommended between status checks\n3. **Clean up resources** — Delete threads and agents when done\n4. **Handle all run statuses** — Check for RequiresAction, Failed, Cancelled\n5. **Use async client** for better throughput in high-concurrency scenarios\n\n## Error Handling\n\n```java\nimport com.azure.core.exception.HttpResponseException;\n\ntry {\n    PersistentAgent agent = client.createAgent(modelName, name, instructions);\n} catch (HttpResponseException e) {\n    System.err.println(\"Error: \" + e.getResponse().getStatusCode() + \" - \" + e.getMessage());\n}\n```\n\n## Reference Links\n\n| Resource | URL |\n|----------|-----|\n| Maven Package | https://central.sonatype.com/artifact/com.azure/azure-ai-agents-persistent |\n| GitHub Source | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/ai/azure-ai-agents-persistent |\n",
+  "tags": [
+    "api",
+    "ai",
+    "agent",
+    "gpt",
+    "workflow",
+    "azure",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-02-14T07:02:42.660Z"
+}
