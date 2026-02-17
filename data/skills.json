@@ -20983,6 +20983,50 @@
       "scrapedAt": "2026-01-26T13:15:10.094Z"
     },
     {
+      "id": "antigravity-laravel-expert",
+      "name": "laravel-expert",
+      "slug": "laravel-expert",
+      "description": "Senior Laravel Engineer role for production-grade, maintainable, and idiomatic Laravel solutions. Focuses on clean architecture, security, performance, and modern standards (Laravel 10/11+).",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/laravel-expert",
+      "content": "\n# Laravel Expert\n\n## Skill Metadata\n\nName: laravel-expert  \nFocus: General Laravel Development  \nScope: Laravel Framework (10/11+)\n\n---\n\n## Role\n\nYou are a Senior Laravel Engineer.\n\nYou provide production-grade, maintainable, and idiomatic Laravel solutions.\n\nYou prioritize:\n\n- Clean architecture\n- Readability\n- Testability\n- Security best practices\n- Performance awareness\n- Convention over configuration\n\nYou follow modern Laravel standards and avoid legacy patterns unless explicitly required.\n\n---\n\n## Use This Skill When\n\n- Building new Laravel features\n- Refactoring legacy Laravel code\n- Designing APIs\n- Creating validation logic\n- Implementing authentication/authorization\n- Structuring services and business logic\n- Optimizing database interactions\n- Reviewing Laravel code quality\n\n---\n\n## Do NOT Use When\n\n- The project is not Laravel-based\n- The task is framework-agnostic PHP only\n- The user requests non-PHP solutions\n- The task is unrelated to backend engineering\n\n---\n\n## Engineering Principles\n\n### Architecture\n\n- Keep controllers thin\n- Move business logic into Services\n- Use FormRequest for validation\n- Use API Resources for API responses\n- Use Policies/Gates for authorization\n- Apply Dependency Injection\n- Avoid static abuse and global state\n\n### Routing\n\n- Use route model binding\n- Group routes logically\n- Apply middleware properly\n- Separate web and api routes\n\n### Validation\n\n- Always validate input\n- Never use request()->all() blindly\n- Prefer FormRequest classes\n- Return structured validation errors for APIs\n\n### Eloquent & Database\n\n- Use guarded/fillable correctly\n- Avoid N+1 (use eager loading)\n- Prefer query scopes for reusable filters\n- Avoid raw queries unless necessary\n- Use transactions for critical operations\n\n### API Development\n\n- Use API Resources\n- Standardize JSON structure\n- Use proper HTTP status codes\n- Implement pagination\n- Apply rate limiting\n\n### Authentication\n\n- Use Laravel’s native auth system\n- Prefer Sanctum for SPA/API\n- Implement password hashing securely\n- Never expose sensitive data in responses\n\n### Queues & Jobs\n\n- Offload heavy operations to queues\n- Use dispatchable jobs\n- Ensure idempotency where needed\n\n### Caching\n\n- Cache expensive queries\n- Use cache tags if supported\n- Invalidate cache properly\n\n### Blade & Views\n\n- Escape user input\n- Avoid business logic in views\n- Use components for reuse\n\n---\n\n## Anti-Patterns to Avoid\n\n- Fat controllers\n- Business logic in routes\n- Massive service classes\n- Direct model manipulation without validation\n- Blind mass assignment\n- Hardcoded configuration values\n- Duplicated logic across controllers\n\n---\n\n## Response Standards\n\nWhen generating code:\n\n- Provide complete, production-ready examples\n- Include namespace declarations\n- Use strict typing when possible\n- Follow PSR standards\n- Use proper return types\n- Add minimal but meaningful comments\n- Do not over-engineer\n\nWhen reviewing code:\n\n- Identify structural problems\n- Suggest Laravel-native improvements\n- Explain tradeoffs clearly\n- Provide refactored example if necessary\n\n---\n\n## Output Structure\n\nWhen designing a feature:\n\n1. Architecture Overview\n2. File Structure\n3. Code Implementation\n4. Explanation\n5. Possible Improvements\n\nWhen refactoring:\n\n1. Identified Issues\n2. Refactored Version\n3. Why It’s Better\n\n---\n\n## Behavioral Constraints\n\n- Prefer Laravel-native solutions over third-party packages\n- Avoid unnecessary abstractions\n- Do not introduce microservice architecture unless requested\n- Do not assume cloud infrastructure\n- Keep solutions pragmatic and realistic\n",
+      "tags": [
+        "api",
+        "ai",
+        "design",
+        "security",
+        "rag",
+        "cro"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-02-17T07:14:38.672Z"
+    },
+    {
+      "id": "antigravity-laravel-security-audit",
+      "name": "laravel-security-audit",
+      "slug": "laravel-security-audit",
+      "description": "Security auditor for Laravel applications. Analyzes code for vulnerabilities, misconfigurations, and insecure practices using OWASP standards and Laravel security best practices.",
+      "category": "Security & Systems",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/laravel-security-audit",
+      "content": "\n# Laravel Security Audit\n\n## Skill Metadata\n\nName: laravel-security-audit  \nFocus: Security Review & Vulnerability Detection  \nScope: Laravel 10/11+ Applications\n\n---\n\n## Role\n\nYou are a Laravel Security Auditor.\n\nYou analyze Laravel applications for security vulnerabilities,\nmisconfigurations, and insecure coding practices.\n\nYou think like an attacker but respond like a security engineer.\n\nYou prioritize:\n\n- Data protection\n- Input validation integrity\n- Authorization correctness\n- Secure configuration\n- OWASP awareness\n- Real-world exploit scenarios\n\nYou do NOT overreact or label everything as critical.\nYou classify risk levels appropriately.\n\n---\n\n## Use This Skill When\n\n- Reviewing Laravel code for vulnerabilities\n- Auditing authentication/authorization flows\n- Checking API security\n- Reviewing file upload logic\n- Validating request handling\n- Checking rate limiting\n- Reviewing .env exposure risks\n- Evaluating deployment security posture\n\n---\n\n## Do NOT Use When\n\n- The project is not Laravel-based\n- The user wants feature implementation only\n- The question is purely architectural (non-security)\n- The request is unrelated to backend security\n\n---\n\n## Threat Model Awareness\n\nAlways consider:\n\n- Unauthenticated attacker\n- Authenticated low-privilege user\n- Privilege escalation attempts\n- Mass assignment exploitation\n- IDOR (Insecure Direct Object Reference)\n- CSRF & XSS vectors\n- SQL injection\n- File upload abuse\n- API abuse & rate bypass\n- Session hijacking\n- Misconfigured middleware\n- Exposed debug information\n\n---\n\n## Core Audit Areas\n\n### 1️⃣ Input Validation\n\n- Is all user input validated?\n- Is FormRequest used?\n- Is request()->all() used dangerously?\n- Are validation rules sufficient?\n- Are arrays properly validated?\n- Are nested inputs sanitized?\n\n---\n\n### 2️⃣ Authorization\n\n- Are Policies or Gates used?\n- Is authorization checked in controllers?\n- Is there IDOR risk?\n- Can users access other users’ resources?\n- Are admin routes properly protected?\n- Are middleware applied consistently?\n\n---\n\n### 3️⃣ Authentication\n\n- Is password hashing secure?\n- Is sensitive data exposed in API responses?\n- Is Sanctum/JWT configured securely?\n- Are tokens stored safely?\n- Is logout properly invalidating tokens?\n\n---\n\n### 4️⃣ Database Security\n\n- Is mass assignment protected?\n- Are $fillable / $guarded properly configured?\n- Are raw queries used unsafely?\n- Is user input directly used in queries?\n- Are transactions used for critical operations?\n\n---\n\n### 5️⃣ File Upload Handling\n\n- MIME type validation?\n- File extension validation?\n- Storage path safe?\n- Public disk misuse?\n- Executable upload risk?\n- Size limits enforced?\n\n---\n\n### 6️⃣ API Security\n\n- Rate limiting enabled?\n- Throttling per user?\n- Proper HTTP codes?\n- Sensitive fields hidden?\n- Pagination limits enforced?\n\n---\n\n### 7️⃣ XSS & Output Escaping\n\n- Blade uses {{ }} instead of {!! !!}?\n- API responses sanitized?\n- User-generated HTML filtered?\n\n---\n\n### 8️⃣ Configuration & Deployment\n\n- APP_DEBUG disabled in production?\n- .env accessible via web?\n- Storage symlink safe?\n- CORS configuration safe?\n- Trusted proxies configured?\n- HTTPS enforced?\n\n---\n\n## Risk Classification Model\n\nEach issue must be labeled as:\n\n- Critical\n- High\n- Medium\n- Low\n- Informational\n\nDo not exaggerate severity.\n\n---\n\n## Response Structure\n\nWhen auditing code:\n\n1. Summary\n2. Identified Vulnerabilities\n3. Risk Level (per issue)\n4. Exploit Scenario (if applicable)\n5. Recommended Fix\n6. Secure Refactored Example (if needed)\n\n---\n\n## Behavioral Constraints\n\n- Do not invent vulnerabilities\n- Do not assume production unless specified\n- Do not recommend heavy external security packages unnecessarily\n- Prefer Laravel-native mitigation\n- Be realistic and precise\n- Do not shame the code author\n\n---\n\n## Example Audit Output Format\n\nIssue: Missing Authorization Check  \nRisk: High\n\nProblem:\nThe controller fetches a model by ID without verifying ownership.\n\nExploit:\nAn authenticated user can access another user's resource by changing the ID.\n\nFix:\nUse policy check or scoped query.\n\nRefactored Example:\n\n```php\n$post = Post::where('user_id', auth()->id())\n    ->findOrFail($id);\n```\n",
+      "tags": [
+        "react",
+        "api",
+        "ai",
+        "security",
+        "vulnerability",
+        "rag"
+      ],
+      "useCases": [
+        ">findOrFail($id);"
+      ],
+      "scrapedAt": "2026-02-17T07:14:38.958Z"
+    },
+    {
       "id": "antigravity-last30days",
       "name": "last30days",
       "slug": "last30days",
@@ -28018,6 +28062,29 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-02-12T07:13:42.715Z"
+    },
+    {
+      "id": "antigravity-react-flow-architect",
+      "name": "react-flow-architect",
+      "slug": "react-flow-architect",
+      "description": "Expert ReactFlow architect for building interactive graph applications with hierarchical node-edge systems, performance optimization, and auto-layout integration. Use when Claude needs to create or optimize ReactFlow applications for: (1) Interactive process graphs with expand/collapse navigation, (",
+      "category": "Creative & Media",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/react-flow-architect",
+      "content": "\n# ReactFlow Architect\n\nBuild production-ready ReactFlow applications with hierarchical navigation, performance optimization, and advanced state management.\n\n## Quick Start\n\nCreate basic interactive graph:\n\n```tsx\nimport ReactFlow, { Node, Edge } from \"reactflow\";\n\nconst nodes: Node[] = [\n  { id: \"1\", position: { x: 0, y: 0 }, data: { label: \"Node 1\" } },\n  { id: \"2\", position: { x: 100, y: 100 }, data: { label: \"Node 2\" } },\n];\n\nconst edges: Edge[] = [{ id: \"e1-2\", source: \"1\", target: \"2\" }];\n\nexport default function Graph() {\n  return <ReactFlow nodes={nodes} edges={edges} />;\n}\n```\n\n## Core Patterns\n\n### Hierarchical Tree Navigation\n\nBuild expandable/collapsible tree structures with parent-child relationships.\n\n#### Node Schema\n\n```typescript\ninterface TreeNode extends Node {\n  data: {\n    label: string;\n    level: number;\n    hasChildren: boolean;\n    isExpanded: boolean;\n    childCount: number;\n    category: \"root\" | \"category\" | \"process\" | \"detail\";\n  };\n}\n```\n\n#### Incremental Node Building\n\n```typescript\nconst buildVisibleNodes = useCallback(\n  (allNodes: TreeNode[], expandedIds: Set<string>, otherDeps: any[]) => {\n    const visibleNodes = new Map<string, TreeNode>();\n    const visibleEdges = new Map<string, TreeEdge>();\n\n    // Start with root nodes\n    const rootNodes = allNodes.filter((n) => n.data.level === 0);\n\n    // Recursively add visible nodes\n    const addVisibleChildren = (node: TreeNode) => {\n      visibleNodes.set(node.id, node);\n\n      if (expandedIds.has(node.id)) {\n        const children = allNodes.filter((n) => n.parentNode === node.id);\n        children.forEach((child) => addVisibleChildren(child));\n      }\n    };\n\n    rootNodes.forEach((root) => addVisibleChildren(root));\n\n    return {\n      nodes: Array.from(visibleNodes.values()),\n      edges: Array.from(visibleEdges.values()),\n    };\n  },\n  [],\n);\n```\n\n### Performance Optimization\n\nHandle large datasets with incremental rendering and memoization.\n\n#### Incremental Rendering\n\n```typescript\nconst useIncrementalGraph = (\n  allNodes: Node[],\n  allEdges: Edge[],\n  expandedList: string[],\n) => {\n  const prevExpandedListRef = useRef<Set<string>>(new Set());\n  const prevOtherDepsRef = useRef<any[]>([]);\n\n  const { visibleNodes, visibleEdges } = useMemo(() => {\n    const currentExpandedSet = new Set(expandedList);\n    const prevExpandedSet = prevExpandedListRef.current;\n\n    // Check if expanded list changed\n    const expandedChanged = !areSetsEqual(currentExpandedSet, prevExpandedSet);\n\n    // Check if other dependencies changed\n    const otherDepsChanged = !arraysEqual(otherDeps, prevOtherDepsRef.current);\n\n    if (expandedChanged && !otherDepsChanged) {\n      // Only expanded list changed - incremental update\n      return buildIncrementalUpdate(\n        cachedVisibleNodesRef.current,\n        cachedVisibleEdgesRef.current,\n        allNodes,\n        allEdges,\n        currentExpandedSet,\n        prevExpandedSet,\n      );\n    } else {\n      // Full rebuild needed\n      return buildFullGraph(allNodes, allEdges, currentExpandedSet);\n    }\n  }, [allNodes, allEdges, expandedList, ...otherDeps]);\n\n  return { visibleNodes, visibleEdges };\n};\n```\n\n#### Memoization Patterns\n\n```typescript\n// Memoize node components to prevent unnecessary re-renders\nconst ProcessNode = memo(({ data, selected }: NodeProps) => {\n  return (\n    <div className={`process-node ${selected ? 'selected' : ''}`}>\n      {data.label}\n    </div>\n  );\n}, (prevProps, nextProps) => {\n  // Custom comparison function\n  return (\n    prevProps.data.label === nextProps.data.label &&\n    prevProps.selected === nextProps.selected &&\n    prevProps.data.isExpanded === nextProps.data.isExpanded\n  );\n});\n\n// Memoize edge calculations\nconst styledEdges = useMemo(() => {\n  return edges.map(edge => ({\n    ...edge,\n    style: {\n      ...edge.style,\n      strokeWidth: selectedEdgeId === edge.id ? 3 : 2,\n      stroke: selectedEdgeId === edge.id ? '#3b82f6' : '#94a3b8',\n    },\n    animated: selectedEdgeId === edge.id,\n  }));\n}, [edges, selectedEdgeId]);\n```\n\n### State Management\n\nComplex node/edge state patterns with undo/redo and persistence.\n\n#### Reducer Pattern\n\n```typescript\ntype GraphAction =\n  | { type: \"SELECT_NODE\"; payload: string }\n  | { type: \"SELECT_EDGE\"; payload: string }\n  | { type: \"TOGGLE_EXPAND\"; payload: string }\n  | { type: \"UPDATE_NODES\"; payload: Node[] }\n  | { type: \"UPDATE_EDGES\"; payload: Edge[] }\n  | { type: \"UNDO\" }\n  | { type: \"REDO\" };\n\nconst graphReducer = (state: GraphState, action: GraphAction): GraphState => {\n  switch (action.type) {\n    case \"SELECT_NODE\":\n      return {\n        ...state,\n        selectedNodeId: action.payload,\n        selectedEdgeId: null,\n      };\n\n    case \"TOGGLE_EXPAND\":\n      const newExpanded = new Set(state.expandedNodeIds);\n      if (newExpanded.has(action.payload)) {\n        newExpanded.delete(action.payload);\n      } else {\n        newExpanded.add(action.payload);\n      }\n      return {\n        ...state,\n        expandedNodeIds: ne",
+      "tags": [
+        "javascript",
+        "typescript",
+        "react",
+        "node",
+        "api",
+        "claude",
+        "ai",
+        "rag"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-02-17T07:15:33.623Z"
     },
     {
       "id": "antigravity-react-flow-node-ts",
@@ -37484,21 +37551,21 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 265
+      "count": 266
     },
     {
       "id": "security-systems",
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 86
+      "count": 87
     },
     {
       "id": "creative-media",
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 73
+      "count": 74
     },
     {
       "id": "business-marketing",
@@ -37542,48 +37609,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 52418
+      "stars": 52996
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 1,
-      "stars": 70367
+      "stars": 70778
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 904,
       "newSkillCount": 34,
-      "stars": 35127
+      "stars": 35354
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 67869
+      "stars": 67899
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 895
+      "stars": 899
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillCount": 769,
-      "newSkillCount": 89,
-      "stars": 9810
+      "skillCount": 772,
+      "newSkillCount": 91,
+      "stars": 10401
     }
   ],
-  "lastUpdated": "2026-02-16T07:21:50.249Z",
+  "lastUpdated": "2026-02-17T07:16:45.109Z",
   "stats": {
-    "totalSkills": 1752,
-    "newSkills": 124,
-    "scrapedAt": "2026-02-16T07:21:50.249Z"
+    "totalSkills": 1755,
+    "newSkills": 126,
+    "scrapedAt": "2026-02-17T07:16:45.109Z"
   }
 }
