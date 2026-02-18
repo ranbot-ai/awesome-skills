@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-crypto-bd-agent",
+  "name": "crypto-bd-agent",
+  "slug": "crypto-bd-agent",
+  "description": "Autonomous crypto business development patterns — multi-chain token discovery, 100-point scoring with wallet forensics, x402 micropayments, ERC-8004 on-chain identity, LLM cascade routing, and pipeline automation for CEX/DEX listing acquisition. Use when building AI agents for crypto BD, token evalu",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/crypto-bd-agent",
+  "content": "\n# Crypto BD Agent — Autonomous Business Development for Exchanges\n\n> Production-tested patterns for building AI agents that autonomously discover,\n> evaluate, and acquire token listings for cryptocurrency exchanges.\n\n## Overview\n\nThis skill teaches AI agents systematic crypto business development: discover\npromising tokens across chains, score them with a 100-point weighted system,\nverify safety through wallet forensics, and manage outreach pipelines with\nhuman-in-the-loop oversight.\n\nBuilt from production experience running Buzz BD Agent by SolCex Exchange —\nan autonomous agent on decentralized infrastructure with 13 intelligence\nsources, x402 micropayments, and dual-chain ERC-8004 registration.\n\nReference implementation: https://github.com/buzzbysolcex/buzz-bd-agent\n\n## When to Use This Skill\n\n- Building an AI agent for crypto/DeFi business development\n- Creating token evaluation and scoring systems\n- Implementing multi-chain scanning pipelines\n- Setting up autonomous payment workflows (x402)\n- Designing wallet forensics for deployer analysis\n- Managing BD pipelines with human-in-the-loop\n- Registering agents on-chain via ERC-8004\n- Implementing cost-efficient LLM cascades\n\n## Do Not Use When\n\n- Building trading bots (this is BD, not trading)\n- Creating DeFi protocols or smart contracts\n- Non-crypto business development\n\n---\n\n## Architecture\n```text\nIntelligence Sources (Free + Paid via x402)\n        |\n        v\n  Scoring Engine (100-point weighted)\n        |\n        v\n  Wallet Forensics (deployer verification)\n        |\n        v\n  Pipeline Manager (10-stage tracked)\n        |\n        v\n  Outreach Drafts → Human Approval → Send\n```\n\n### LLM Cascade Pattern\n\nRoute tasks to the cheapest model that handles them correctly:\n```text\nFast/cheap model (routine: tweets, forum posts, pipeline updates)\n    ↓ fallback on quality issues\nFree API models (scanning, initial scoring, system tasks)\n    ↓ fallback\nMid-tier model (outreach drafts, deeper analysis)\n    ↓ fallback\nPremium model (strategy, wallet forensics, final outreach)\n```\n\nRun a quality gate (10+ test cases) before promoting any new model.\n\n---\n\n## 1. Intelligence Gathering\n\n### Free-First Principle\nAlways exhaust free data before paying. Target: $0/day for 90% of intelligence.\n\n### Recommended Source Categories\n\n| Category | What to Track | Example Sources |\n|----------|--------------|-----------------|\n| DEX Data | Prices, liquidity, pairs, chain coverage | DexScreener, GeckoTerminal |\n| AI Momentum | Trending tokens, catalysts | AIXBT or similar trackers |\n| Smart Money | VC follows, KOL accumulation | leak.me, Nansen free, Arkham |\n| Contract Safety | Rug scores, LP lock, authorities | RugCheck |\n| Wallet Forensics | Deployer analysis, fund flow | Helius (Solana), Allium (multi-chain) |\n| Web Scraping | Project verification, team info | Firecrawl or similar |\n| On-Chain Identity | Agent registration, trust signals | ATV Web3 Identity, ERC-8004 |\n| Community | Forum signals, ecosystem intel | Protocol forums |\n\n### Paid Sources (via x402 micropayments)\n- Whale alert services (~$0.10/call, 1-2x daily)\n- Breaking news aggregators (~$0.10/call, 2x daily)\n- Budget: ~$0.30/day = ~$9/month\n\n### Rules\n1. Cross-reference: every prospect needs 2+ independent source confirmations\n2. Multi-source cross-match gets +5 score bonus\n3. Track ROI per paid source — did this call produce a qualified prospect?\n4. Store insights in experience memory for continuous calibration\n\n---\n\n## 2. Token Scoring (100 Points)\n\n### Base Criteria\n\n| Factor | Weight | Scoring |\n|--------|--------|---------|\n| Liquidity | 25% | >$500K excellent, $200-500K good, $100K minimum |\n| Market Cap | 20% | >$10M excellent, $1-10M good, $500K-1M acceptable |\n| 24h Volume | 20% | >$1M excellent, $500K-1M good, $100-500K acceptable |\n| Social Metrics | 15% | Multi-platform active, 2+ platforms, 1 platform |\n| Token Age | 10% | Established >6mo, moderate 1-6mo, new <1mo |\n| Team Transparency | 10% | Doxxed + active, partial, anonymous |\n\n### Catalyst Adjustments\n\nPositive: Hackathon win +10, mainnet launch +10, major partnership +10,\nCEX listing +8, audit +8, multi-source match +5, whale signal +5,\nwallet verified +3-5, cross-chain deployer +3, net positive wallet +2.\n\nNegative: Rugpull association -15, exploit history -15, mixer funded AUTO REJECT,\ncontract vulnerability -10, serial creator -5, already on major CEXs -5,\nteam controversy -10, deployer dump >50% in 7 days -10 to -15.\n\n### Score Actions\n\n| Range | Action |\n|-------|--------|\n| 85-100 HOT | Immediate outreach + wallet forensics |\n| 70-84 Qualified | Priority queue + wallet forensics |\n| 50-69 Watch | Monitor 48 hours |\n| 0-49 Skip | Log only, no action |\n\n---\n\n## 3. Wallet Forensics\n\nRun on every token scoring 70+. This differentiates serious BD agents from\nsimple scanners.\n\n### 5-Step Deployer Analysis\n\n1. **Funded-By** — Where did deployer get funds? (exchange, mixer, other wallet)\n2. **Balances** — Current holdings across chains\n3. *",
+  "tags": [
+    "api",
+    "ai",
+    "agent",
+    "llm",
+    "automation",
+    "workflow",
+    "design",
+    "security",
+    "vulnerability",
+    "rag"
+  ],
+  "useCases": [
+    "Building an AI agent for crypto/DeFi business development",
+    "Creating token evaluation and scoring systems",
+    "Implementing multi-chain scanning pipelines",
+    "Setting up autonomous payment workflows (x402)",
+    "Designing wallet forensics for deployer analysis"
+  ],
+  "scrapedAt": "2026-02-18T07:18:10.747Z"
+}

@@ -11209,6 +11209,37 @@
       "scrapedAt": "2026-02-12T07:11:24.382Z"
     },
     {
+      "id": "antigravity-crypto-bd-agent",
+      "name": "crypto-bd-agent",
+      "slug": "crypto-bd-agent",
+      "description": "Autonomous crypto business development patterns — multi-chain token discovery, 100-point scoring with wallet forensics, x402 micropayments, ERC-8004 on-chain identity, LLM cascade routing, and pipeline automation for CEX/DEX listing acquisition. Use when building AI agents for crypto BD, token evalu",
+      "category": "Security & Systems",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/crypto-bd-agent",
+      "content": "\n# Crypto BD Agent — Autonomous Business Development for Exchanges\n\n> Production-tested patterns for building AI agents that autonomously discover,\n> evaluate, and acquire token listings for cryptocurrency exchanges.\n\n## Overview\n\nThis skill teaches AI agents systematic crypto business development: discover\npromising tokens across chains, score them with a 100-point weighted system,\nverify safety through wallet forensics, and manage outreach pipelines with\nhuman-in-the-loop oversight.\n\nBuilt from production experience running Buzz BD Agent by SolCex Exchange —\nan autonomous agent on decentralized infrastructure with 13 intelligence\nsources, x402 micropayments, and dual-chain ERC-8004 registration.\n\nReference implementation: https://github.com/buzzbysolcex/buzz-bd-agent\n\n## When to Use This Skill\n\n- Building an AI agent for crypto/DeFi business development\n- Creating token evaluation and scoring systems\n- Implementing multi-chain scanning pipelines\n- Setting up autonomous payment workflows (x402)\n- Designing wallet forensics for deployer analysis\n- Managing BD pipelines with human-in-the-loop\n- Registering agents on-chain via ERC-8004\n- Implementing cost-efficient LLM cascades\n\n## Do Not Use When\n\n- Building trading bots (this is BD, not trading)\n- Creating DeFi protocols or smart contracts\n- Non-crypto business development\n\n---\n\n## Architecture\n```text\nIntelligence Sources (Free + Paid via x402)\n        |\n        v\n  Scoring Engine (100-point weighted)\n        |\n        v\n  Wallet Forensics (deployer verification)\n        |\n        v\n  Pipeline Manager (10-stage tracked)\n        |\n        v\n  Outreach Drafts → Human Approval → Send\n```\n\n### LLM Cascade Pattern\n\nRoute tasks to the cheapest model that handles them correctly:\n```text\nFast/cheap model (routine: tweets, forum posts, pipeline updates)\n    ↓ fallback on quality issues\nFree API models (scanning, initial scoring, system tasks)\n    ↓ fallback\nMid-tier model (outreach drafts, deeper analysis)\n    ↓ fallback\nPremium model (strategy, wallet forensics, final outreach)\n```\n\nRun a quality gate (10+ test cases) before promoting any new model.\n\n---\n\n## 1. Intelligence Gathering\n\n### Free-First Principle\nAlways exhaust free data before paying. Target: $0/day for 90% of intelligence.\n\n### Recommended Source Categories\n\n| Category | What to Track | Example Sources |\n|----------|--------------|-----------------|\n| DEX Data | Prices, liquidity, pairs, chain coverage | DexScreener, GeckoTerminal |\n| AI Momentum | Trending tokens, catalysts | AIXBT or similar trackers |\n| Smart Money | VC follows, KOL accumulation | leak.me, Nansen free, Arkham |\n| Contract Safety | Rug scores, LP lock, authorities | RugCheck |\n| Wallet Forensics | Deployer analysis, fund flow | Helius (Solana), Allium (multi-chain) |\n| Web Scraping | Project verification, team info | Firecrawl or similar |\n| On-Chain Identity | Agent registration, trust signals | ATV Web3 Identity, ERC-8004 |\n| Community | Forum signals, ecosystem intel | Protocol forums |\n\n### Paid Sources (via x402 micropayments)\n- Whale alert services (~$0.10/call, 1-2x daily)\n- Breaking news aggregators (~$0.10/call, 2x daily)\n- Budget: ~$0.30/day = ~$9/month\n\n### Rules\n1. Cross-reference: every prospect needs 2+ independent source confirmations\n2. Multi-source cross-match gets +5 score bonus\n3. Track ROI per paid source — did this call produce a qualified prospect?\n4. Store insights in experience memory for continuous calibration\n\n---\n\n## 2. Token Scoring (100 Points)\n\n### Base Criteria\n\n| Factor | Weight | Scoring |\n|--------|--------|---------|\n| Liquidity | 25% | >$500K excellent, $200-500K good, $100K minimum |\n| Market Cap | 20% | >$10M excellent, $1-10M good, $500K-1M acceptable |\n| 24h Volume | 20% | >$1M excellent, $500K-1M good, $100-500K acceptable |\n| Social Metrics | 15% | Multi-platform active, 2+ platforms, 1 platform |\n| Token Age | 10% | Established >6mo, moderate 1-6mo, new <1mo |\n| Team Transparency | 10% | Doxxed + active, partial, anonymous |\n\n### Catalyst Adjustments\n\nPositive: Hackathon win +10, mainnet launch +10, major partnership +10,\nCEX listing +8, audit +8, multi-source match +5, whale signal +5,\nwallet verified +3-5, cross-chain deployer +3, net positive wallet +2.\n\nNegative: Rugpull association -15, exploit history -15, mixer funded AUTO REJECT,\ncontract vulnerability -10, serial creator -5, already on major CEXs -5,\nteam controversy -10, deployer dump >50% in 7 days -10 to -15.\n\n### Score Actions\n\n| Range | Action |\n|-------|--------|\n| 85-100 HOT | Immediate outreach + wallet forensics |\n| 70-84 Qualified | Priority queue + wallet forensics |\n| 50-69 Watch | Monitor 48 hours |\n| 0-49 Skip | Log only, no action |\n\n---\n\n## 3. Wallet Forensics\n\nRun on every token scoring 70+. This differentiates serious BD agents from\nsimple scanners.\n\n### 5-Step Deployer Analysis\n\n1. **Funded-By** — Where did deployer get funds? (exchange, mixer, other wallet)\n2. **Balances** — Current holdings across chains\n3. *",
+      "tags": [
+        "api",
+        "ai",
+        "agent",
+        "llm",
+        "automation",
+        "workflow",
+        "design",
+        "security",
+        "vulnerability",
+        "rag"
+      ],
+      "useCases": [
+        "Building an AI agent for crypto/DeFi business development",
+        "Creating token evaluation and scoring systems",
+        "Implementing multi-chain scanning pipelines",
+        "Setting up autonomous payment workflows (x402)",
+        "Designing wallet forensics for deployer analysis"
+      ],
+      "scrapedAt": "2026-02-18T07:18:10.747Z"
+    },
+    {
       "id": "antigravity-csharp-pro",
       "name": "csharp-pro",
       "slug": "csharp-pro",
@@ -11954,6 +11985,80 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-02-12T07:11:28.632Z"
+    },
+    {
+      "id": "antigravity-dbos-golang",
+      "name": "dbos-golang",
+      "slug": "dbos-golang",
+      "description": "DBOS Go SDK for building reliable, fault-tolerant applications with durable workflows. Use this skill when writing Go code with DBOS, creating workflows and steps, using queues, using the DBOS Client from external applications, or building Go applications that need to be resilient to failures.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dbos-golang",
+      "content": "\n# DBOS Go Best Practices\n\nGuide for building reliable, fault-tolerant Go applications with DBOS durable workflows.\n\n## When to Use\n\nReference these guidelines when:\n- Adding DBOS to existing Go code\n- Creating workflows and steps\n- Using queues for concurrency control\n- Implementing workflow communication (events, messages, streams)\n- Configuring and launching DBOS applications\n- Using the DBOS Client from external applications\n- Testing DBOS applications\n\n## Rule Categories by Priority\n\n| Priority | Category | Impact | Prefix |\n|----------|----------|--------|--------|\n| 1 | Lifecycle | CRITICAL | `lifecycle-` |\n| 2 | Workflow | CRITICAL | `workflow-` |\n| 3 | Step | HIGH | `step-` |\n| 4 | Queue | HIGH | `queue-` |\n| 5 | Communication | MEDIUM | `comm-` |\n| 6 | Pattern | MEDIUM | `pattern-` |\n| 7 | Testing | LOW-MEDIUM | `test-` |\n| 8 | Client | MEDIUM | `client-` |\n| 9 | Advanced | LOW | `advanced-` |\n\n## Critical Rules\n\n### Installation\n\nInstall the DBOS Go module:\n\n```bash\ngo get github.com/dbos-inc/dbos-transact-golang/dbos@latest\n```\n\n### DBOS Configuration and Launch\n\nA DBOS application MUST create a context, register workflows, and launch before running any workflows:\n\n```go\npackage main\n\nimport (\n\t\"context\"\n\t\"log\"\n\t\"os\"\n\t\"time\"\n\n\t\"github.com/dbos-inc/dbos-transact-golang/dbos\"\n)\n\nfunc main() {\n\tctx, err := dbos.NewDBOSContext(context.Background(), dbos.Config{\n\t\tAppName:     \"my-app\",\n\t\tDatabaseURL: os.Getenv(\"DBOS_SYSTEM_DATABASE_URL\"),\n\t})\n\tif err != nil {\n\t\tlog.Fatal(err)\n\t}\n\tdefer dbos.Shutdown(ctx, 30*time.Second)\n\n\tdbos.RegisterWorkflow(ctx, myWorkflow)\n\n\tif err := dbos.Launch(ctx); err != nil {\n\t\tlog.Fatal(err)\n\t}\n}\n```\n\n### Workflow and Step Structure\n\nWorkflows are comprised of steps. Any function performing complex operations or accessing external services must be run as a step using `dbos.RunAsStep`:\n\n```go\nfunc fetchData(ctx context.Context) (string, error) {\n\tresp, err := http.Get(\"https://api.example.com/data\")\n\tif err != nil {\n\t\treturn \"\", err\n\t}\n\tdefer resp.Body.Close()\n\tbody, _ := io.ReadAll(resp.Body)\n\treturn string(body), nil\n}\n\nfunc myWorkflow(ctx dbos.DBOSContext, input string) (string, error) {\n\tresult, err := dbos.RunAsStep(ctx, fetchData, dbos.WithStepName(\"fetchData\"))\n\tif err != nil {\n\t\treturn \"\", err\n\t}\n\treturn result, nil\n}\n```\n\n### Key Constraints\n\n- Do NOT start or enqueue workflows from within steps\n- Do NOT use uncontrolled goroutines to start workflows - use `dbos.RunWorkflow` with queues or `dbos.Go`/`dbos.Select` for concurrent steps\n- Workflows MUST be deterministic - non-deterministic operations go in steps\n- Do NOT modify global variables from workflows or steps\n- All workflows and queues MUST be registered before calling `Launch()`\n\n## How to Use\n\nRead individual rule files for detailed explanations and examples:\n\n```\nreferences/lifecycle-config.md\nreferences/workflow-determinism.md\nreferences/queue-concurrency.md\n```\n\n## References\n\n- https://docs.dbos.dev/\n- https://github.com/dbos-inc/dbos-transact-golang\n",
+      "tags": [
+        "api",
+        "ai",
+        "workflow"
+      ],
+      "useCases": [
+        "Adding DBOS to existing Go code",
+        "Creating workflows and steps",
+        "Using queues for concurrency control",
+        "Implementing workflow communication (events, messages, streams)",
+        "Configuring and launching DBOS applications"
+      ],
+      "scrapedAt": "2026-02-18T07:18:20.027Z"
+    },
+    {
+      "id": "antigravity-dbos-python",
+      "name": "dbos-python",
+      "slug": "dbos-python",
+      "description": "DBOS Python SDK for building reliable, fault-tolerant applications with durable workflows. Use this skill when writing Python code with DBOS, creating workflows and steps, using queues, using DBOSClient from external applications, or building applications that need to be resilient to failures.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dbos-python",
+      "content": "\n# DBOS Python Best Practices\n\nGuide for building reliable, fault-tolerant Python applications with DBOS durable workflows.\n\n## When to Use\n\nReference these guidelines when:\n- Adding DBOS to existing Python code\n- Creating workflows and steps\n- Using queues for concurrency control\n- Implementing workflow communication (events, messages, streams)\n- Configuring and launching DBOS applications\n- Using DBOSClient from external applications\n- Testing DBOS applications\n\n## Rule Categories by Priority\n\n| Priority | Category | Impact | Prefix |\n|----------|----------|--------|--------|\n| 1 | Lifecycle | CRITICAL | `lifecycle-` |\n| 2 | Workflow | CRITICAL | `workflow-` |\n| 3 | Step | HIGH | `step-` |\n| 4 | Queue | HIGH | `queue-` |\n| 5 | Communication | MEDIUM | `comm-` |\n| 6 | Pattern | MEDIUM | `pattern-` |\n| 7 | Testing | LOW-MEDIUM | `test-` |\n| 8 | Client | MEDIUM | `client-` |\n| 9 | Advanced | LOW | `advanced-` |\n\n## Critical Rules\n\n### DBOS Configuration and Launch\n\nA DBOS application MUST configure and launch DBOS inside its main function:\n\n```python\nimport os\nfrom dbos import DBOS, DBOSConfig\n\n@DBOS.workflow()\ndef my_workflow():\n    pass\n\nif __name__ == \"__main__\":\n    config: DBOSConfig = {\n        \"name\": \"my-app\",\n        \"system_database_url\": os.environ.get(\"DBOS_SYSTEM_DATABASE_URL\"),\n    }\n    DBOS(config=config)\n    DBOS.launch()\n```\n\n### Workflow and Step Structure\n\nWorkflows are comprised of steps. Any function performing complex operations or accessing external services must be a step:\n\n```python\n@DBOS.step()\ndef call_external_api():\n    return requests.get(\"https://api.example.com\").json()\n\n@DBOS.workflow()\ndef my_workflow():\n    result = call_external_api()\n    return result\n```\n\n### Key Constraints\n\n- Do NOT call `DBOS.start_workflow` or `DBOS.recv` from a step\n- Do NOT use threads to start workflows - use `DBOS.start_workflow` or queues\n- Workflows MUST be deterministic - non-deterministic operations go in steps\n- Do NOT create/update global variables from workflows or steps\n\n## How to Use\n\nRead individual rule files for detailed explanations and examples:\n\n```\nreferences/lifecycle-config.md\nreferences/workflow-determinism.md\nreferences/queue-concurrency.md\n```\n\n## References\n\n- https://docs.dbos.dev/\n- https://github.com/dbos-inc/dbos-transact-py\n",
+      "tags": [
+        "python",
+        "api",
+        "ai",
+        "workflow"
+      ],
+      "useCases": [
+        "Adding DBOS to existing Python code",
+        "Creating workflows and steps",
+        "Using queues for concurrency control",
+        "Implementing workflow communication (events, messages, streams)",
+        "Configuring and launching DBOS applications"
+      ],
+      "scrapedAt": "2026-02-18T07:18:20.706Z"
+    },
+    {
+      "id": "antigravity-dbos-typescript",
+      "name": "dbos-typescript",
+      "slug": "dbos-typescript",
+      "description": "DBOS TypeScript SDK for building reliable, fault-tolerant applications with durable workflows. Use this skill when writing TypeScript code with DBOS, creating workflows and steps, using queues, using DBOSClient from external applications, or building applications that need to be resilient to failure",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dbos-typescript",
+      "content": "\n# DBOS TypeScript Best Practices\n\nGuide for building reliable, fault-tolerant TypeScript applications with DBOS durable workflows.\n\n## When to Use\n\nReference these guidelines when:\n- Adding DBOS to existing TypeScript code\n- Creating workflows and steps\n- Using queues for concurrency control\n- Implementing workflow communication (events, messages, streams)\n- Configuring and launching DBOS applications\n- Using DBOSClient from external applications\n- Testing DBOS applications\n\n## Rule Categories by Priority\n\n| Priority | Category | Impact | Prefix |\n|----------|----------|--------|--------|\n| 1 | Lifecycle | CRITICAL | `lifecycle-` |\n| 2 | Workflow | CRITICAL | `workflow-` |\n| 3 | Step | HIGH | `step-` |\n| 4 | Queue | HIGH | `queue-` |\n| 5 | Communication | MEDIUM | `comm-` |\n| 6 | Pattern | MEDIUM | `pattern-` |\n| 7 | Testing | LOW-MEDIUM | `test-` |\n| 8 | Client | MEDIUM | `client-` |\n| 9 | Advanced | LOW | `advanced-` |\n\n## Critical Rules\n\n### Installation\n\nAlways install the latest version of DBOS:\n\n```bash\nnpm install @dbos-inc/dbos-sdk@latest\n```\n\n### DBOS Configuration and Launch\n\nA DBOS application MUST configure and launch DBOS before running any workflows:\n\n```typescript\nimport { DBOS } from \"@dbos-inc/dbos-sdk\";\n\nasync function main() {\n  DBOS.setConfig({\n    name: \"my-app\",\n    systemDatabaseUrl: process.env.DBOS_SYSTEM_DATABASE_URL,\n  });\n  await DBOS.launch();\n  await myWorkflow();\n}\n\nmain().catch(console.log);\n```\n\n### Workflow and Step Structure\n\nWorkflows are comprised of steps. Any function performing complex operations or accessing external services must be run as a step using `DBOS.runStep`:\n\n```typescript\nimport { DBOS } from \"@dbos-inc/dbos-sdk\";\n\nasync function fetchData() {\n  return await fetch(\"https://api.example.com\").then(r => r.json());\n}\n\nasync function myWorkflowFn() {\n  const result = await DBOS.runStep(fetchData, { name: \"fetchData\" });\n  return result;\n}\nconst myWorkflow = DBOS.registerWorkflow(myWorkflowFn);\n```\n\n### Key Constraints\n\n- Do NOT call, start, or enqueue workflows from within steps\n- Do NOT use threads or uncontrolled concurrency to start workflows - use `DBOS.startWorkflow` or queues\n- Workflows MUST be deterministic - non-deterministic operations go in steps\n- Do NOT modify global variables from workflows or steps\n\n## How to Use\n\nRead individual rule files for detailed explanations and examples:\n\n```\nreferences/lifecycle-config.md\nreferences/workflow-determinism.md\nreferences/queue-concurrency.md\n```\n\n## References\n\n- https://docs.dbos.dev/\n- https://github.com/dbos-inc/dbos-transact-ts\n",
+      "tags": [
+        "typescript",
+        "api",
+        "ai",
+        "workflow"
+      ],
+      "useCases": [
+        "Adding DBOS to existing TypeScript code",
+        "Creating workflows and steps",
+        "Using queues for concurrency control",
+        "Implementing workflow communication (events, messages, streams)",
+        "Configuring and launching DBOS applications"
+      ],
+      "scrapedAt": "2026-02-18T07:18:21.537Z"
     },
     {
       "id": "antigravity-dbt-transformation-patterns",
@@ -37537,7 +37642,14 @@
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 998
+      "count": 999
+    },
+    {
+      "id": "ai-agents",
+      "name": "AI & Agents",
+      "description": "AI agent development, memory systems, and autonomous workflows.",
+      "icon": "bot",
+      "count": 268
     },
     {
       "id": "document-processing",
@@ -37547,18 +37659,11 @@
       "count": 266
     },
     {
-      "id": "ai-agents",
-      "name": "AI & Agents",
-      "description": "AI agent development, memory systems, and autonomous workflows.",
-      "icon": "bot",
-      "count": 266
-    },
-    {
       "id": "security-systems",
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 87
+      "count": 88
     },
     {
       "id": "creative-media",
@@ -37609,48 +37714,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 52996
+      "stars": 53799
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 1,
-      "stars": 70778
+      "stars": 71187
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 904,
       "newSkillCount": 34,
-      "stars": 35354
+      "stars": 35556
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 67899
+      "stars": 67914
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 899
+      "stars": 901
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillCount": 772,
-      "newSkillCount": 91,
-      "stars": 10401
+      "skillCount": 776,
+      "newSkillCount": 92,
+      "stars": 11687
     }
   ],
-  "lastUpdated": "2026-02-17T07:16:45.109Z",
+  "lastUpdated": "2026-02-18T07:22:31.815Z",
   "stats": {
-    "totalSkills": 1755,
-    "newSkills": 126,
-    "scrapedAt": "2026-02-17T07:16:45.109Z"
+    "totalSkills": 1759,
+    "newSkills": 127,
+    "scrapedAt": "2026-02-18T07:22:31.815Z"
   }
 }
