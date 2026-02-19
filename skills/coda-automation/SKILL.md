@@ -1,18 +1,16 @@
 ---
 name: coda-automation
 description: Automate Coda tasks via Rube MCP (Composio): manage docs, pages, tables, rows, formulas, permissions, and publishing. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, api, markdown, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/coda-automation
+category: Document Processing
+source: antigravity
+tags: [markdown, api, mcp, ai, automation, workflow, document]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/coda-automation
 ---
 
 
 # Coda Automation via Rube MCP
 
 Automate Coda document and data operations through Composio's Coda toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/coda](https://composio.dev/toolkits/coda)
 
 ## Prerequisites
 
@@ -133,4 +131,5 @@ Automate Coda document and data operations through Composio's Coda toolkit via R
 
 **Key parameters**:
 - `docId`: Document ID
-- `access`: Per
+- `access`: Permission level ('readonly', 'write', 'comment')
+- `principal`: Object with email or u

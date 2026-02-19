@@ -1,18 +1,16 @@
 ---
 name: pagerduty-automation
 description: Automate PagerDuty tasks via Rube MCP (Composio): manage incidents, services, schedules, escalation policies, and on-call rotations. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/pagerduty-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pagerduty-automation
 ---
 
 
 # PagerDuty Automation via Rube MCP
 
 Automate PagerDuty incident management and operations through Composio's PagerDuty toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/pagerduty](https://composio.dev/toolkits/pagerduty)
 
 ## Prerequisites
 
@@ -114,4 +112,5 @@ Automate PagerDuty incident management and operations through Composio's PagerDu
 4. `PAGERDUTY_UPDATE_SCHEDULE_BY_ID` - Update an existing schedule [Optional]
 5. `PAGERDUTY_RETRIEVE_ONCALL_LIST` - View who is currently on-call [Optional]
 6. `PAGERDUTY_CREATE_SCHEDULE_OVERRIDES_CONFIGURATION` - Create temporary overrides [Optional]
-7. `PAGERDUTY_DELETE_SCHEDULE_OVERR
+7. `PAGERDUTY_DELETE_SCHEDULE_OVERRIDE_BY_ID` - Remove an override [Optional]
+8. `PAGERDUTY_RETRIEVE_USERS_BY_SCHEDULE_ID` - List

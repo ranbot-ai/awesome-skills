@@ -1,18 +1,16 @@
 ---
 name: posthog-automation
 description: Automate PostHog tasks via Rube MCP (Composio): events, feature flags, projects, user profiles, annotations. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, json, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/posthog-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/posthog-automation
 ---
 
 
 # PostHog Automation via Rube MCP
 
 Automate PostHog product analytics and feature flag management through Composio's PostHog toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/posthog](https://composio.dev/toolkits/posthog)
 
 ## Prerequisites
 
@@ -137,3 +135,9 @@ Automate PostHog product analytics and feature flag management through Composio'
 - These endpoints confirm the API key's access level and scope
 
 ## Common Patterns
+
+### ID Resolution
+
+**Organization -> Project ID**:
+```
+1. Call POSTHOG_LIST_PROJECTS_IN_

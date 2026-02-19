@@ -1,18 +1,16 @@
 ---
 name: square-automation
 description: Automate Square tasks via Rube MCP (Composio): payments, orders, invoices, locations. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai, llm]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/square-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, llm, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/square-automation
 ---
 
 
 # Square Automation via Rube MCP
 
 Automate Square payment processing, order management, and invoicing through Composio's Square toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/square](https://composio.dev/toolkits/square)
 
 ## Prerequisites
 
@@ -142,4 +140,9 @@ Automate Square payment processing, order management, and invoicing through Comp
 - Use RFC 3339 format: `2024-01-01T00:00:00Z`
 - For payments: `begin_time` and `end_time` parameters
 - For orders: Use query filter with date_time_filter
-- All timestamps 
+- All timestamps are in UTC
+
+## Known Pitfalls
+
+**ID Formats**:
+- Location IDs are alphanumeric strings (

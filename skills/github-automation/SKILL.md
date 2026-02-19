@@ -1,18 +1,16 @@
 ---
 name: github-automation
 description: Automate GitHub repositories, issues, pull requests, branches, CI/CD, and permissions via Rube MCP (Composio). Manage code workflows, review PRs, search code, and handle deployments programmatically. 
-category: Development & Code Tools
-source: composio
-tags: [python, api, git, github, markdown, json, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/github-automation
+category: AI & Agents
+source: antigravity
+tags: [python, markdown, api, mcp, ai, automation, workflow, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/github-automation
 ---
 
 
 # GitHub Automation via Rube MCP
 
 Automate GitHub repository management, issue tracking, pull request workflows, branch operations, and CI/CD through Composio's GitHub toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/github](https://composio.dev/toolkits/github)
 
 ## Prerequisites
 
@@ -116,4 +114,5 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 **Tool sequence**:
 1. `GITHUB_SEARCH_CODE` - Search file contents and paths [Required]
 2. `GITHUB_SEARCH_CODE_ALL_PAGES` - Multi-page code search [Alternative]
-3.
+3. `GITHUB_SEARCH_COMMITS_BY_AUTHOR` - Search commits by author/date/org [Required]
+4. `GI

@@ -1,18 +1,16 @@
 ---
 name: google-analytics-automation
 description: Automate Google Analytics tasks via Rube MCP (Composio): run reports, list accounts/properties, funnels, pivots, key events. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/google-analytics-automation
+category: Business & Marketing
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, rag, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/google-analytics-automation
 ---
 
 
 # Google Analytics Automation via Rube MCP
 
 Automate Google Analytics 4 (GA4) reporting and property management through Composio's Google Analytics toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/google_analytics](https://composio.dev/toolkits/google_analytics)
 
 ## Prerequisites
 
@@ -129,4 +127,5 @@ Automate Google Analytics 4 (GA4) reporting and property management through Comp
 **Key parameters**:
 - `property`: Property ID (required)
 - `dateRanges`: Date range objects
-- `
+- `funnel`: Funnel definition with `steps` array
+- `funnelBreakdown`: Optional dimension to break down funnel b

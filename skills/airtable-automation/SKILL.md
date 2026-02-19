@@ -1,18 +1,16 @@
 ---
 name: airtable-automation
 description: Automate Airtable tasks via Rube MCP (Composio): records, bases, tables, fields, views. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/airtable-automation
+category: Business & Marketing
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/airtable-automation
 ---
 
 
 # Airtable Automation via Rube MCP
 
 Automate Airtable operations through Composio's Airtable toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/airtable](https://composio.dev/toolkits/airtable)
 
 ## Prerequisites
 
@@ -141,4 +139,9 @@ Automate Airtable operations through Composio's Airtable toolkit via Rube MCP.
 - Set `pageSize` (max 100)
 - Check response for `offset` string
 - Pass `offset` to next request unchanged
-- Keep
+- Keep filters/sorts/view stable between pages
+
+## Known Pitfalls
+
+**ID Formats**:
+- Base IDs: `ap

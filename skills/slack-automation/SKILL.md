@@ -1,18 +1,16 @@
 ---
 name: slack-automation
 description: Automate Slack messaging, channel management, search, reactions, and threads via Rube MCP (Composio). Send messages, search conversations, manage channels/users, and react to messages programmatically
-category: Development & Code Tools
-source: composio
-tags: [react, api, slack, markdown, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/slack-automation
+category: AI & Agents
+source: antigravity
+tags: [react, markdown, api, mcp, ai, automation, workflow, rag, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/slack-automation
 ---
 
 
 # Slack Automation via Rube MCP
 
 Automate Slack workspace operations including messaging, search, channel management, and reaction workflows through Composio's Slack toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/slack](https://composio.dev/toolkits/slack)
 
 ## Prerequisites
 
@@ -106,4 +104,7 @@ Automate Slack workspace operations including messaging, search, channel managem
 
 ### 4. React to and Thread Messages
 
-**When to use**: User wants to add reactio
+**When to use**: User wants to add reactions or manage threaded conversations
+
+**Tool sequence**:
+1. `SLACK_SEARCH_MESSAGES` or 

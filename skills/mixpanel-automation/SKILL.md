@@ -1,18 +1,16 @@
 ---
 name: mixpanel-automation
 description: Automate Mixpanel tasks via Rube MCP (Composio): events, segmentation, funnels, cohorts, user profiles, JQL queries. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [javascript, api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/mixpanel-automation
+category: Document Processing
+source: antigravity
+tags: [javascript, api, mcp, ai, automation, workflow, document, rag]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mixpanel-automation
 ---
 
 
 # Mixpanel Automation via Rube MCP
 
 Automate Mixpanel product analytics through Composio's Mixpanel toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/mixpanel](https://composio.dev/toolkits/mixpanel)
 
 ## Prerequisites
 
@@ -132,4 +130,6 @@ Automate Mixpanel product analytics through Composio's Mixpanel toolkit via Rube
 
 **Pitfalls**:
 - Cohorts are created and managed in Mixpanel UI; API provides read access
-- Cohort IDs are numeric; use exact I
+- Cohort IDs are numeric; use exact ID from list results
+- Cohort counts may be approximate for very large cohorts
+- Cohorts can 

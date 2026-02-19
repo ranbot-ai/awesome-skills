@@ -1,18 +1,16 @@
 ---
 name: canva-automation
 description: Automate Canva tasks via Rube MCP (Composio): designs, exports, folders, brand templates, autofill. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, pdf, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/canva-automation
+category: Document Processing
+source: antigravity
+tags: [pdf, pptx, api, mcp, ai, automation, workflow, template, design, document]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/canva-automation
 ---
 
 
 # Canva Automation via Rube MCP
 
 Automate Canva design operations through Composio's Canva toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/canva](https://composio.dev/toolkits/canva)
 
 ## Prerequisites
 
@@ -136,4 +134,5 @@ Automate Canva design operations through Composio's Canva toolkit via Rube MCP.
 **When to use**: User wants to generate designs by filling brand template placeholders with data
 
 **Tool sequence**:
-1. `CANVA_ACCESS_USER_SPECIFIC_BRAND_TEMPLATES_LIST` - List available brand templates [
+1. `CANVA_ACCESS_USER_SPECIFIC_BRAND_TEMPLATES_LIST` - List available brand templates [Required]
+2. `CANVA_INITIATE_CANVA_DESIGN_AUTOFILL_JOB` - Start autofill with data [Re

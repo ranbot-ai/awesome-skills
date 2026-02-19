@@ -1,18 +1,16 @@
 ---
 name: wrike-automation
 description: Automate Wrike project management via Rube MCP (Composio): create tasks/folders, manage projects, assign work, and track progress. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/wrike-automation
+category: Document Processing
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, template, document]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/wrike-automation
 ---
 
 
 # Wrike Automation via Rube MCP
 
 Automate Wrike project management operations through Composio's Wrike toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/wrike](https://composio.dev/toolkits/wrike)
 
 ## Prerequisites
 
@@ -130,4 +128,5 @@ Automate Wrike project management operations through Composio's Wrike toolkit vi
 **Pitfalls**:
 - Either parent_id or super_task_id is required, not both
 - Blueprint launch is asynchronous; tasks may take time to appear
-- re
+- reschedule_date requires reschedule_mode to be set
+- entry_limit caps at 250 tasks/folde

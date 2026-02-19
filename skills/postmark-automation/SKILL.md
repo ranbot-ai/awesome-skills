@@ -1,18 +1,16 @@
 ---
 name: postmark-automation
 description: Automate Postmark email delivery tasks via Rube MCP (Composio): send templated emails, manage templates, monitor delivery stats and bounces. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/postmark-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, template]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/postmark-automation
 ---
 
 
 # Postmark Automation via Rube MCP
 
 Automate Postmark transactional email operations through Composio's Postmark toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/postmark](https://composio.dev/toolkits/postmark)
 
 ## Prerequisites
 
@@ -124,4 +122,8 @@ Automate Postmark transactional email operations through Composio's Postmark too
 
 **Tool sequence**:
 1. `POSTMARK_GET_SERVER` - Retrieve current server settings [Required]
-2. `POSTMARK_EDIT_SERVER` - Update server confi
+2. `POSTMARK_EDIT_SERVER` - Update server configuration [Optional]
+
+**Key parameters**:
+- `Name`: Server display name
+- `SmtpApiActivated`:

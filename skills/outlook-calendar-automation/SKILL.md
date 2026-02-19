@@ -1,18 +1,16 @@
 ---
 name: outlook-calendar-automation
 description: Automate Outlook Calendar tasks via Rube MCP (Composio): create events, manage attendees, find meeting times, and handle invitations. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/outlook-calendar-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/outlook-calendar-automation
 ---
 
 
 # Outlook Calendar Automation via Rube MCP
 
 Automate Outlook Calendar operations through Composio's Outlook toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/outlook](https://composio.dev/toolkits/outlook)
 
 ## Prerequisites
 
@@ -123,4 +121,7 @@ Automate Outlook Calendar operations through Composio's Outlook toolkit via Rube
 - `event_id`: Event to delete or decline
 - `send_notifications`: Send cancellation notices to attendees (default true)
 - `comment`: Reason for declining (for DECLINE_EVENT)
-- `proposedNewTime`: Suggest altern
+- `proposedNewTime`: Suggest alternative time when declining
+
+**Pitfalls**:
+- Deletion with send_notifications=true sends can

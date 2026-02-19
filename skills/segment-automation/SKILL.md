@@ -1,18 +1,16 @@
 ---
 name: segment-automation
 description: Automate Segment tasks via Rube MCP (Composio): track events, identify users, manage groups, page views, aliases, batch operations. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/segment-automation
+category: Document Processing
+source: antigravity
+tags: [api, mcp, ai, agent, automation, workflow, document, cro, marketing]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/segment-automation
 ---
 
 
 # Segment Automation via Rube MCP
 
 Automate Segment customer data platform operations through Composio's Segment toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/segment](https://composio.dev/toolkits/segment)
 
 ## Prerequisites
 
@@ -133,4 +131,8 @@ Automate Segment customer data platform operations through Composio's Segment to
 - At least one of `userId` or `anonymousId` is required
 - `name` and `category` are optional but recommended for proper analytics
 - Standard properties include `url`, `title`, `referrer`, `path`, `search`
-- Page calls are often automated; manual use is for server-sid
+- Page calls are often automated; manual use is for server-side page tracking
+
+### 6. Alias Users and Manage Sources
+
+**When to use**: User wants to mer

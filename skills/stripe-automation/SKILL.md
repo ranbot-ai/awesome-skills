@@ -1,18 +1,16 @@
 ---
 name: stripe-automation
 description: Automate Stripe tasks via Rube MCP (Composio): customers, charges, subscriptions, invoices, products, refunds. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/stripe-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, stripe]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/stripe-automation
 ---
 
 
 # Stripe Automation via Rube MCP
 
 Automate Stripe payment operations through Composio's Stripe toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/stripe](https://composio.dev/toolkits/stripe)
 
 ## Prerequisites
 
@@ -146,3 +144,5 @@ Automate Stripe payment operations through Composio's Stripe toolkit via Rube MC
 - `reason`: Refund reason ('duplicate', 'fraudulent', 'requested_by_customer')
 
 **Pitfalls**:
+- Refunds can take 5-10 business days to appear on customer statements
+- Amount is in s

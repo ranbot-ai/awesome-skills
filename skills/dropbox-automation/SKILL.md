@@ -1,18 +1,16 @@
 ---
 name: dropbox-automation
 description: Automate Dropbox file management, sharing, search, uploads, downloads, and folder operations via Rube MCP (Composio). Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, api, pdf, markdown, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/dropbox-automation
+category: Document Processing
+source: antigravity
+tags: [pdf, markdown, api, mcp, ai, automation, workflow, document, image, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dropbox-automation
 ---
 
 
 # Dropbox Automation via Rube MCP
 
 Automate Dropbox operations including file upload/download, search, folder management, sharing links, batch operations, and metadata retrieval through Composio's Dropbox toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/dropbox](https://composio.dev/toolkits/dropbox)
 
 ## Prerequisites
 
@@ -100,4 +98,7 @@ Automate Dropbox operations including file upload/download, search, folder manag
 - `settings.expires`: ISO 8601 expiration date (e.g., `"2026-12-31T23:59:59Z"`)
 - `settings.require_password` / `settings.link_password`: Password protection
 - `settings.allow_download`: Boolean for download permission
-- `direct_only`: For `LIST_SHARED_LI
+- `direct_only`: For `LIST_SHARED_LINKS`, set `true` to only return direct links (not parent folder links)
+
+**Pitfalls**:
+- `D

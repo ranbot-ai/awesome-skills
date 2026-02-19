@@ -1,18 +1,16 @@
 ---
 name: klaviyo-automation
 description: Automate Klaviyo tasks via Rube MCP (Composio): manage email/SMS campaigns, inspect campaign messages, track tags, and monitor send jobs. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/klaviyo-automation
+category: Business & Marketing
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, template, rag, marketing]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/klaviyo-automation
 ---
 
 
 # Klaviyo Automation via Rube MCP
 
 Automate Klaviyo email and SMS marketing operations through Composio's Klaviyo toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/klaviyo](https://composio.dev/toolkits/klaviyo)
 
 ## Prerequisites
 
@@ -132,4 +130,9 @@ Automate Klaviyo email and SMS marketing operations through Composio's Klaviyo t
 1. Call KLAVIYO_GET_CAMPAIGNS with channel='email'
 2. Paginate through all results via page_cursor
 3. Filter by status client-side for accuracy
-4
+4. Extract campaign IDs for detailed inspection
+```
+
+### Sparse Fieldset Pattern
+
+Klaviyo s

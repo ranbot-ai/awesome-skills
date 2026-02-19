@@ -1,18 +1,16 @@
 ---
 name: calendly-automation
 description: Automate Calendly scheduling, event management, invitee tracking, availability checks, and organization administration via Rube MCP (Composio). Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/calendly-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/calendly-automation
 ---
 
 
 # Calendly Automation via Rube MCP
 
 Automate Calendly operations including event listing, invitee management, scheduling link creation, availability queries, and organization administration through Composio's Calendly toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/calendly](https://composio.dev/toolkits/calendly)
 
 ## Prerequisites
 
@@ -111,4 +109,5 @@ Automate Calendly operations including event listing, invitee management, schedu
 **When to use**: User wants to cancel a scheduled Calendly event
 
 **Tool sequence**:
-1. `CALENDLY_LIST_EVENTS` 
+1. `CALENDLY_LIST_EVENTS` - Find the event to cancel [Prerequisite]
+2. `CALENDLY_GET_EVENT` - Confirm event details be

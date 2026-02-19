@@ -1,18 +1,16 @@
 ---
 name: amplitude-automation
 description: Automate Amplitude tasks via Rube MCP (Composio): events, user activity, cohorts, user identification. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, git, json, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/amplitude-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/amplitude-automation
 ---
 
 
 # Amplitude Automation via Rube MCP
 
 Automate Amplitude product analytics through Composio's Amplitude toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/amplitude](https://composio.dev/toolkits/amplitude)
 
 ## Prerequisites
 
@@ -130,4 +128,7 @@ Automate Amplitude product analytics through Composio's Amplitude toolkit via Ru
 1. `AMPLITUDE_GET_EVENT_CATEGORIES` - List all event categories [Required]
 
 **Key parameters**:
-- No required param
+- No required parameters; returns all configured event categories
+
+**Pitfalls**:
+- Categories are configured in A

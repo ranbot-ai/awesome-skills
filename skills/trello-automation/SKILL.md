@@ -1,18 +1,16 @@
 ---
 name: trello-automation
 description: Automate Trello boards, cards, and workflows via Rube MCP (Composio). Create cards, manage lists, assign members, and search across boards programmatically. 
-category: Development & Code Tools
-source: composio
-tags: [api, markdown, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/trello-automation
+category: AI & Agents
+source: antigravity
+tags: [markdown, api, mcp, ai, automation, workflow, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/trello-automation
 ---
 
 
 # Trello Automation via Rube MCP
 
 Automate Trello board management, card creation, and team workflows through Composio's Rube MCP integration.
-
-**Toolkit docs**: [composio.dev/toolkits/trello](https://composio.dev/toolkits/trello)
 
 ## Prerequisites
 
@@ -133,4 +131,7 @@ Automate Trello board management, card creation, and team workflows through Comp
 
 **Tool sequence**:
 1. `TRELLO_ADD_CARDS_ACTIONS_COMMENTS_BY_ID_CARD` - Post a comment on the card [Required]
-2. `TRELLO_ADD_CARDS_ATTACHMENTS_BY_ID_CARD` - Attach a file or URL [
+2. `TRELLO_ADD_CARDS_ATTACHMENTS_BY_ID_CARD` - Attach a file or URL [Optional]
+
+**Key parameters**:
+- `text`: Comment text (1-16384 chars, supports Markdown 

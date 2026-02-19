@@ -1,18 +1,16 @@
 ---
 name: discord-automation
 description: Automate Discord tasks via Rube MCP (Composio): messages, channels, roles, webhooks, reactions. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [react, api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/discord-automation
+category: AI & Agents
+source: antigravity
+tags: [react, api, mcp, ai, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/discord-automation
 ---
 
 
 # Discord Automation via Rube MCP
 
 Automate Discord operations through Composio's Discord/Discordbot toolkits via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/discord](https://composio.dev/toolkits/discord)
 
 ## Prerequisites
 
@@ -146,4 +144,9 @@ Discord uses snowflake IDs (64-bit integers as strings) for all entities:
 ### Permission Bitfields
 
 Permissions are combined using bitwise OR:
-- SEND_MESSAGES =
+- SEND_MESSAGES = 0x800
+- MANAGE_ROLES = 0x10000000
+- MANAGE_MESSAGES = 0x2000
+- ADMINISTRATOR = 0x8
+
+### P

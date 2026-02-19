@@ -1,18 +1,16 @@
 ---
 name: box-automation
 description: Automate Box cloud storage operations including file upload/download, search, folder management, sharing, collaborations, and metadata queries via Rube MCP (Composio). Always search tools first for cu
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/box-automation
+category: Document Processing
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, template, document, presentation, rag, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/box-automation
 ---
 
 
 # Box Automation via Rube MCP
 
 Automate Box operations including file upload/download, content search, folder management, collaboration, metadata queries, and sign requests through Composio's Box toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/box](https://composio.dev/toolkits/box)
 
 ## Prerequisites
 
@@ -102,4 +100,6 @@ Automate Box operations including file upload/download, content search, folder m
 
 **Key parameters**:
 - `name`: Folder name (no `/`, `\`, trailing spaces, or `.`/`..`)
-- `parent__id`: Parent folder ID (use `"0"` for r
+- `parent__id`: Parent folder ID (use `"0"` for root)
+- `folder_id`: Target folder ID for operations
+- `parent.id`: Destination fol

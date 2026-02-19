@@ -1,18 +1,16 @@
 ---
 name: close-automation
 description: Automate Close CRM tasks via Rube MCP (Composio): create leads, manage calls/SMS, handle tasks, and track notes. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/close-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/close-automation
 ---
 
 
 # Close CRM Automation via Rube MCP
 
 Automate Close CRM operations through Composio's Close toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/close](https://composio.dev/toolkits/close)
 
 ## Prerequisites
 
@@ -174,4 +172,6 @@ Close data model:
 ### Activity Logging Pattern
 
 ```
-1. Identify the lead_id and 
+1. Identify the lead_id and optionally contact_id
+2. Create the activity (call, SMS, note) with lead_id
+3. Include

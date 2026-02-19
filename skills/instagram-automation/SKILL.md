@@ -1,18 +1,16 @@
 ---
 name: instagram-automation
 description: Automate Instagram tasks via Rube MCP (Composio): create posts, carousels, manage media, get insights, and publishing limits. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/instagram-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, image]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/instagram-automation
 ---
 
 
 # Instagram Automation via Rube MCP
 
 Automate Instagram operations through Composio's Instagram toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/instagram](https://composio.dev/toolkits/instagram)
 
 ## Prerequisites
 
@@ -127,4 +125,5 @@ Automate Instagram operations through Composio's Instagram toolkit via Rube MCP.
 
 **Pitfalls**:
 - Comments may be paginated; follow pagination cursors for complete results
-- Carousel children ar
+- Carousel children are returned as individual media objects
+- Comment moderation settings on the account affect wha

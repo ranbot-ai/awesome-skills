@@ -1,18 +1,16 @@
 ---
 name: confluence-automation
 description: Automate Confluence page creation, content search, space management, labels, and hierarchy navigation via Rube MCP (Composio). Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, api, markdown, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/confluence-automation
+category: Document Processing
+source: antigravity
+tags: [markdown, api, mcp, ai, automation, workflow, document, presentation, rag, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/confluence-automation
 ---
 
 
 # Confluence Automation via Rube MCP
 
 Automate Confluence operations including page creation and updates, content search with CQL, space management, label tagging, and page hierarchy navigation through Composio's Confluence toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/confluence](https://composio.dev/toolkits/confluence)
 
 ## Prerequisites
 
@@ -102,4 +100,5 @@ Automate Confluence operations including page creation and updates, content sear
 **Tool sequence**:
 1. `CONFLUENCE_GET_SPACES` - List all spaces with optional filtering [Required]
 2. `CONFLUENCE_GET_SPACE_BY_ID` - Get detailed metadata for a specific space [Optional]
-3. `CONFLUE
+3. `CONFLUENCE_CREATE_SPACE` - Create a new space with key and name [Optional]
+4. `CONFLUENCE_GET_SPACE_PRO

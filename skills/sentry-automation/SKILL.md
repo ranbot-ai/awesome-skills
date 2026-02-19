@@ -1,18 +1,16 @@
 ---
 name: sentry-automation
 description: Automate Sentry tasks via Rube MCP (Composio): manage issues/events, configure alerts, track releases, monitor projects and teams. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, json, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/sentry-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/sentry-automation
 ---
 
 
 # Sentry Automation via Rube MCP
 
 Automate Sentry error tracking and monitoring operations through Composio's Sentry toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/sentry](https://composio.dev/toolkits/sentry)
 
 ## Prerequisites
 
@@ -116,4 +114,6 @@ Automate Sentry error tracking and monitoring operations through Composio's Sent
 
 **Key parameters**:
 - `version`: Release version string (e.g., '1.0.0', commit SHA)
-- `projects`: Array of proj
+- `projects`: Array of project slugs this release belongs to
+- `dateReleased`: Release timestamp (ISO 8601)
+- `envi

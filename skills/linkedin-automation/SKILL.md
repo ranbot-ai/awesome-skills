@@ -1,18 +1,16 @@
 ---
 name: linkedin-automation
 description: Automate LinkedIn tasks via Rube MCP (Composio): create posts, manage profile, company info, comments, and image uploads. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/linkedin-automation
+category: Document Processing
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, document, image]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/linkedin-automation
 ---
 
 
 # LinkedIn Automation via Rube MCP
 
 Automate LinkedIn operations through Composio's LinkedIn toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/linkedin](https://composio.dev/toolkits/linkedin)
 
 ## Prerequisites
 
@@ -150,4 +148,7 @@ Automate LinkedIn operations through Composio's LinkedIn toolkit via Rube MCP.
 
 **Authentication**:
 - LinkedIn OAuth tokens have limited scopes; ensure required permissions are granted
--
+- Tokens expire; re-authenticate if API calls return 401 errors
+
+**URN Formats**:
+- LinkedIn 

@@ -1,18 +1,16 @@
 ---
 name: make-automation
 description: Automate Make (Integromat) tasks via Rube MCP (Composio): operations, enums, language and timezone lookups. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/make-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/make-automation
 ---
 
 
 # Make Automation via Rube MCP
 
 Automate Make (formerly Integromat) operations through Composio's Make toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/make](https://composio.dev/toolkits/make)
 
 ## Prerequisites
 
@@ -153,4 +151,5 @@ Make workflows often connect to other apps. Compose multi-tool workflows:
 **Operations Data**:
 - Operation records may have significant volume for active accounts
 - Always filter by date range to avoid fetching excessive data
-- Operation counts relate to Make's pricing tiers and q
+- Operation counts relate to Make's pricing tiers and quota usage
+- Failed operations should be investigated; they may indicate scenario co

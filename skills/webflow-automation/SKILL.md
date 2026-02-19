@@ -1,18 +1,16 @@
 ---
 name: webflow-automation
 description: Automate Webflow CMS collections, site publishing, page management, asset uploads, and ecommerce orders via Rube MCP (Composio). Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, node, api, pdf, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/webflow-automation
+category: AI & Agents
+source: antigravity
+tags: [node, pdf, api, mcp, ai, automation, workflow, image]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/webflow-automation
 ---
 
 
 # Webflow Automation via Rube MCP
 
 Automate Webflow operations including CMS collection management, site publishing, page inspection, asset uploads, and ecommerce order retrieval through Composio's Webflow toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/webflow](https://composio.dev/toolkits/webflow)
 
 ## Prerequisites
 
@@ -107,4 +105,5 @@ Automate Webflow operations including CMS collection management, site publishing
 **Tool sequence**:
 1. `WEBFLOW_LIST_WEBFLOW_SITES` - Find the target site_id [Prerequisite]
 2. `WEBFLOW_LIST_PAGES` - List all pages for a site with pagination [Required]
-3. `WEBFLOW_GET_PAGE` - Get det
+3. `WEBFLOW_GET_PAGE` - Get detailed metadata for a specific page [Optional]
+4. `WEBFLOW_GET_PAGE_DOM` - Get the DOM/cont

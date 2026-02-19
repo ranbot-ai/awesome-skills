@@ -1,18 +1,16 @@
 ---
 name: hubspot-automation
 description: Automate HubSpot CRM operations (contacts, companies, deals, tickets, properties) via Rube MCP using Composio integration. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/hubspot-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hubspot-automation
 ---
 
 
 # HubSpot CRM Automation via Rube MCP
 
 Automate HubSpot CRM workflows including contact/company management, deal pipeline tracking, ticket search, and custom property creation through Composio's HubSpot toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/hubspot](https://composio.dev/toolkits/hubspot)
 
 ## Prerequisites
 
@@ -110,4 +108,6 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 - `HUBSPOT_SEARCH_TICKETS`: `filterGroups`, `properties` (only listed fields are returned), `sorts`, `limit`, `after`
 
 **Pitfalls**:
-- Incorrect `propertyName`/`operator` returns zero results without
+- Incorrect `propertyName`/`operator` returns zero results without errors
+- Date filtering may require epoch-ms bounds; mixing formats causes mismatches
+- O

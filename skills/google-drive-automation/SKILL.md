@@ -1,18 +1,16 @@
 ---
 name: google-drive-automation
 description: Automate Google Drive file operations (upload, download, search, share, organize) via Rube MCP (Composio). Upload/download files, manage folders, share with permissions, and search across drives progr
-category: Development & Code Tools
-source: composio
-tags: [html, api, gmail, pdf, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/google-drive-automation
+category: Document Processing
+source: antigravity
+tags: [pdf, api, mcp, ai, automation, workflow, document, spreadsheet, presentation, rag]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/google-drive-automation
 ---
 
 
 # Google Drive Automation via Rube MCP
 
 Automate Google Drive workflows including file upload/download, search, folder management, sharing/permissions, and organization through Composio's Google Drive toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/googledrive](https://composio.dev/toolkits/googledrive)
 
 ## Prerequisites
 
@@ -108,4 +106,6 @@ Automate Google Drive workflows including file upload/download, search, folder m
 **Pitfalls**:
 - Invalid type/email combinations trigger 4xx errors
 - Using `type='anyone'` or powerful roles is risky; get explicit user confirmation
-- Org policies may block certain sharing 
+- Org policies may block certain sharing types, causing 403
+- Permission changes may take time to propagate
+- Use `GMAIL_SEARCH_PEOPLE` to 

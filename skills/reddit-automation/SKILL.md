@@ -1,18 +1,16 @@
 ---
 name: reddit-automation
 description: Automate Reddit tasks via Rube MCP (Composio): search subreddits, create posts, manage comments, and browse top content. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, markdown, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/reddit-automation
+category: AI & Agents
+source: antigravity
+tags: [markdown, api, mcp, ai, automation, workflow, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/reddit-automation
 ---
 
 
 # Reddit Automation via Rube MCP
 
 Automate Reddit operations through Composio's Reddit toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/reddit](https://composio.dev/toolkits/reddit)
 
 ## Prerequisites
 
@@ -135,4 +133,12 @@ Automate Reddit operations through Composio's Reddit toolkit via Rube MCP.
 - Only text posts can have their body edited; link posts cannot be modified
 - Post titles cannot be edited after submission
 - Deletion is permanent; deleted posts show as '[deleted]'
-- User flair is per-subreddit and
+- User flair is per-subreddit and may be restricted
+
+## Common Patterns
+
+### Reddit Fullname Format
+
+**Prefixes**:
+```
+t1

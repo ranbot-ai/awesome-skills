@@ -1,18 +1,16 @@
 ---
 name: bitbucket-automation
 description: Automate Bitbucket repositories, pull requests, branches, issues, and workspace management via Rube MCP (Composio). Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, markdown, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/bitbucket-automation
+category: AI & Agents
+source: antigravity
+tags: [markdown, api, mcp, ai, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bitbucket-automation
 ---
 
 
 # Bitbucket Automation via Rube MCP
 
 Automate Bitbucket operations including repository management, pull request workflows, branch operations, issue tracking, and workspace administration through Composio's Bitbucket toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/bitbucket](https://composio.dev/toolkits/bitbucket)
 
 ## Prerequisites
 
@@ -98,4 +96,7 @@ Automate Bitbucket operations including repository management, pull request work
 2. `BITBUCKET_CREATE_ISSUE` - Create a new issue with title, content, priority, and kind [Required]
 3. `BITBUCKET_UPDATE_ISSUE` - Modify issue attributes (state, priority, assignee, etc.) [Optional]
 4. `BITBUCKET_CREATE_ISSUE_COMMENT` - Add a markdown comment to an existing issue [Optional]
-5. `BITBUCKET_DELETE_ISSUE` - Perm
+5. `BITBUCKET_DELETE_ISSUE` - Permanently delete an issue [Optional]
+
+**Key parameters**:
+- `issue_id`: String identifier for th

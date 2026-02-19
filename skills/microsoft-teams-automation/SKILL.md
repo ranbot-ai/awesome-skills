@@ -1,18 +1,16 @@
 ---
 name: microsoft-teams-automation
 description: Automate Microsoft Teams tasks via Rube MCP (Composio): send messages, manage channels, create meetings, handle chats, and search messages. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/microsoft-teams-automation
+category: Business & Marketing
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, azure, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/microsoft-teams-automation
 ---
 
 
 # Microsoft Teams Automation via Rube MCP
 
 Automate Microsoft Teams operations through Composio's Microsoft Teams toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/microsoft_teams](https://composio.dev/toolkits/microsoft_teams)
 
 ## Prerequisites
 
@@ -128,4 +126,7 @@ Automate Microsoft Teams operations through Composio's Microsoft Teams toolkit v
 
 **When to use**: User wants to find messages across Teams chats and channels
 
-**To
+**Tool sequence**:
+1. `MICROSOFT_TEAMS_SEARCH_MESSAGES` - Search with KQL syntax [Required]
+
+**Key parameters*

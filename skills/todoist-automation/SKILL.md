@@ -1,18 +1,16 @@
 ---
 name: todoist-automation
 description: Automate Todoist task management, projects, sections, filtering, and bulk operations via Rube MCP (Composio). Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, markdown, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/todoist-automation
+category: AI & Agents
+source: antigravity
+tags: [markdown, api, mcp, ai, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/todoist-automation
 ---
 
 
 # Todoist Automation via Rube MCP
 
 Automate Todoist operations including task creation and management, project organization, section management, filtering, and bulk task workflows through Composio's Todoist toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/todoist](https://composio.dev/toolkits/todoist)
 
 ## Prerequisites
 
@@ -105,4 +103,8 @@ Automate Todoist operations including task creation and management, project orga
 **Key parameters**:
 - `project_id`: Required -- the project to create the section in
 - `name`: Section name (required for creation)
-- `order`: Integer position within the project (lower values appear firs
+- `order`: Integer position within the project (lower values appear first)
+- `section_id`: Required for update and delete operations
+
+**Pitfalls**:
+- `CREATE_SECT

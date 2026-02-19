@@ -1,18 +1,16 @@
 ---
 name: helpdesk-automation
 description: Automate HelpDesk tasks via Rube MCP (Composio): list tickets, manage views, use canned responses, and configure custom fields. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/helpdesk-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, agent, automation, workflow, template, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/helpdesk-automation
 ---
 
 
 # HelpDesk Automation via Rube MCP
 
 Automate HelpDesk ticketing operations through Composio's HelpDesk toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/helpdesk](https://composio.dev/toolkits/helpdesk)
 
 ## Prerequisites
 
@@ -148,4 +146,8 @@ Backward pagination:
 
 **Read-Only Operations**:
 - Current Composio toolkit provides list/read operations
-- Ticket creation, update, and reply operations may require additional t
+- Ticket creation, update, and reply operations may require additional tools
+- Check RUBE_SEARCH_TOOLS for any newly available tools
+
+**Rate Limits**:
+- HelpDesk AP

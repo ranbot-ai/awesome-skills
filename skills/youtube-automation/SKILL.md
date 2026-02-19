@@ -1,18 +1,16 @@
 ---
 name: youtube-automation
 description: Automate YouTube tasks via Rube MCP (Composio): upload videos, manage playlists, search content, get analytics, and handle comments. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/youtube-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/youtube-automation
 ---
 
 
 # YouTube Automation via Rube MCP
 
 Automate YouTube operations through Composio's YouTube toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/youtube](https://composio.dev/toolkits/youtube)
 
 ## Prerequisites
 
@@ -124,4 +122,7 @@ Automate YouTube operations through Composio's YouTube toolkit via Rube MCP.
 
 ### 5. Manage Subscriptions and Comments
 
-**When to use**: User wants to subscribe to channels or view vid
+**When to use**: User wants to subscribe to channels or view video comments
+
+**Tool sequence**:
+1. `YOUTUBE_SUBSCRIBE_CHANNEL` - Subscribe to a channel [O

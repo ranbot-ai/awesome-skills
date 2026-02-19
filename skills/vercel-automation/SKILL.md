@@ -2,17 +2,15 @@
 name: vercel-automation
 description: Automate Vercel tasks via Rube MCP (Composio): manage deployments, domains, DNS, env vars, projects, and teams. Always search tools first for current schemas. 
 category: Development & Code Tools
-source: composio
-tags: [api, git, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/vercel-automation
+source: antigravity
+tags: [nextjs, api, mcp, ai, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/vercel-automation
 ---
 
 
 # Vercel Automation via Rube MCP
 
 Automate Vercel platform operations through Composio's Vercel toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/vercel](https://composio.dev/toolkits/vercel)
 
 ## Prerequisites
 
@@ -122,4 +120,7 @@ Automate Vercel platform operations through Composio's Vercel toolkit via Rube M
 **Pitfalls**:
 - Domain must be added to the Vercel account before DNS management
 - SSL certificates are auto-provisioned but may take time for new domains
-- CNAME records at the apex domai
+- CNAME records at the apex domain are not supported; use A records instead
+- MX records require priority values
+
+### 5. 

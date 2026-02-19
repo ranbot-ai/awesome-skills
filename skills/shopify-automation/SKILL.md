@@ -1,18 +1,16 @@
 ---
 name: shopify-automation
 description: Automate Shopify tasks via Rube MCP (Composio): products, orders, customers, inventory, collections. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai, llm]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/shopify-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, llm, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/shopify-automation
 ---
 
 
 # Shopify Automation via Rube MCP
 
 Automate Shopify operations through Composio's Shopify toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/shopify](https://composio.dev/toolkits/shopify)
 
 ## Prerequisites
 
@@ -157,4 +155,6 @@ For advanced operations:
 | List products | SHOPIFY_GET_PRODUCTS | (filters) |
 | Get product | SHOPIFY_GET_PRODUCT | product_id |
 | Products paginated | SHOPIFY_GET_PRODUCTS_PAGINATED | limit, page_info |
-| Bulk create | SHOPIFY_BULK_CREATE_PRODUCTS | pro
+| Bulk create | SHOPIFY_BULK_CREATE_PRODUCTS | products |
+| Product count | SHOPIFY_GET_PRODUCTS_COUNT | (none) |
+| List orders | SHOPIFY_GE

@@ -1,18 +1,16 @@
 ---
 name: freshdesk-automation
 description: Automate Freshdesk helpdesk operations including tickets, contacts, companies, notes, and replies via Rube MCP (Composio). Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/freshdesk-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, agent, automation, workflow, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/freshdesk-automation
 ---
 
 
 # Freshdesk Automation via Rube MCP
 
 Automate Freshdesk customer support workflows including ticket management, contact and company operations, notes, replies, and ticket search through Composio's Freshdesk toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/freshdesk](https://composio.dev/toolkits/freshdesk)
 
 ## Prerequisites
 
@@ -108,4 +106,6 @@ Automate Freshdesk customer support workflows including ticket management, conta
 5. `FRESHDESK_UPDATE_CONVERSATIONS` - Edit an existing note [Optional]
 
 **Key parameters for FRESHDESK_REPLY_TO_TICKET**:
-- `ticket_id`: Ticket ID (inte
+- `ticket_id`: Ticket ID (integer, required)
+- `body`: Reply content, supports HTML (required)
+- `cc_emails` / `bcc_emails`:

@@ -1,18 +1,16 @@
 ---
 name: twitter-automation
 description: Automate Twitter/X tasks via Rube MCP (Composio): posts, search, users, bookmarks, lists, media. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/twitter-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, image]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/twitter-automation
 ---
 
 
 # Twitter/X Automation via Rube MCP
 
 Automate Twitter/X operations through Composio's Twitter toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/twitter](https://composio.dev/toolkits/twitter)
 
 ## Prerequisites
 
@@ -131,4 +129,6 @@ Automate Twitter/X operations through Composio's Twitter toolkit via Rube MCP.
 **Tool sequence**:
 1. `TWITTER_USER_LOOKUP_ME` - Get authenticated user ID [Prerequisite]
 2. `TWITTER_GET_A_USER_S_OWNED_LISTS` - List owned lists [Optional]
-3. `TWITTER_GET_A_USER_S_LIST_MEMBERSHIPS` - List member
+3. `TWITTER_GET_A_USER_S_LIST_MEMBERSHIPS` - List memberships [Optional]
+4. `TWITTER_GET_A_USER_S_PINNED_LISTS` - Get pinned lists [Optional]
+5. `

@@ -1,18 +1,16 @@
 ---
 name: google-calendar-automation
 description: Automate Google Calendar events, scheduling, availability checks, and attendee management via Rube MCP (Composio). Create events, find free slots, manage attendees, and list calendars programmatically
-category: Development & Code Tools
-source: composio
-tags: [api, gmail, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/google-calendar-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/google-calendar-automation
 ---
 
 
 # Google Calendar Automation via Rube MCP
 
 Automate Google Calendar workflows including event creation, scheduling, availability checks, attendee management, and calendar browsing through Composio's Google Calendar toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/googlecalendar](https://composio.dev/toolkits/googlecalendar)
 
 ## Prerequisites
 
@@ -107,4 +105,8 @@ Automate Google Calendar workflows including event creation, scheduling, availab
 - `event_id` is a technical identifier, NOT the event title; always search first to get the ID
 - `PATCH_EVENT` attendees field replaces the entire list; include existing attendees to avoid removing them
 - Attendee names cannot be resolved; always use email addresses
-- Use `GMAIL_SEARCH_PEOPLE`
+- Use `GMAIL_SEARCH_PEOPLE` to resolve names to emails before managing attendees
+
+### 4. Check Availability and Free/Busy Status
+
+*

@@ -1,18 +1,16 @@
 ---
 name: gmail-automation
 description: Automate Gmail tasks via Rube MCP (Composio): send/reply, search, labels, drafts, attachments. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, api, gmail, pdf, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/gmail-automation
+category: AI & Agents
+source: antigravity
+tags: [pdf, api, mcp, ai, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gmail-automation
 ---
 
 
 # Gmail Automation via Rube MCP
 
 Automate Gmail operations through Composio's Gmail toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/gmail](https://composio.dev/toolkits/gmail)
 
 ## Prerequisites
 
@@ -129,4 +127,7 @@ Automate Gmail operations through Composio's Gmail toolkit via Rube MCP.
 1. `GMAIL_LIST_LABELS` - Get label IDs for custom labels [Prerequisite]
 2. `GMAIL_FETCH_EMAILS` - Find target messages [Prerequisite]
 3. `GMAIL_BATCH_MODIFY_MESSAGES` - Bulk add/remove labels (up to 1000 messages) [Required]
-4. `GMAIL_ADD_LABEL_TO
+4. `GMAIL_ADD_LABEL_TO_EMAIL` - Single-message label changes [Fallback]
+
+**Key parameters**:
+- `messageIds`:

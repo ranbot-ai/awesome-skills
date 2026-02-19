@@ -1,18 +1,16 @@
 ---
 name: supabase-automation
 description: Automate Supabase database queries, table management, project administration, storage, edge functions, and SQL execution via Rube MCP (Composio). Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [typescript, api, json, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/supabase-automation
+category: AI & Agents
+source: antigravity
+tags: [typescript, api, mcp, ai, automation, workflow, supabase, rag]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/supabase-automation
 ---
 
 
 # Supabase Automation via Rube MCP
 
 Automate Supabase operations including database queries, table schema inspection, SQL execution, project and organization management, storage buckets, edge functions, and service health monitoring through Composio's Supabase toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/supabase](https://composio.dev/toolkits/supabase)
 
 ## Prerequisites
 
@@ -97,4 +95,5 @@ Automate Supabase operations including database queries, table schema inspection
 **Pitfalls**:
 - `LIST_ALL_ORGANIZATIONS` returns both `id` and `slug`; `LIST_MEMBERS_OF_AN_ORGANIZATION` expects `slug`, not `id`
 - `GET_PROJECT_API_KEYS` returns live secrets -- NEVER log, display, or persist full key values
-- `GETS_PROJECT_S_SERVICE_HEALTH_STATUS` requires a non-empty `services` array; empty a
+- `GETS_PROJECT_S_SERVICE_HEALTH_STATUS` requires a non-empty `services` array; empty array causes invalid_request error
+- Config tools may return 401/403 if token lacks required 

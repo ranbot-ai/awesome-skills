@@ -1,18 +1,16 @@
 ---
 name: notion-automation
 description: Automate Notion tasks via Rube MCP (Composio): pages, databases, blocks, comments, users. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, notion, json, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/notion-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/notion-automation
 ---
 
 
 # Notion Automation via Rube MCP
 
 Automate Notion operations through Composio's Notion toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/notion](https://composio.dev/toolkits/notion)
 
 ## Prerequisites
 
@@ -125,4 +123,5 @@ Automate Notion operations through Composio's Notion toolkit via Rube MCP.
 **When to use**: User wants to list workspace users or manage comments on pages
 
 **Tool sequence**:
-1. 
+1. `NOTION_LIST_USERS` - List all workspace users [Optional]
+2. `NOTION_GET_ABOUT_ME` - Get

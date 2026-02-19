@@ -1,18 +1,16 @@
 ---
 name: convertkit-automation
 description: Automate ConvertKit (Kit) tasks via Rube MCP (Composio): manage subscribers, tags, broadcasts, and broadcast stats. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/convertkit-automation
+category: Business & Marketing
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, marketing]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/convertkit-automation
 ---
 
 
 # ConvertKit (Kit) Automation via Rube MCP
 
 Automate ConvertKit (now known as Kit) email marketing operations through Composio's Kit toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/kit](https://composio.dev/toolkits/kit)
 
 ## Prerequisites
 
@@ -139,4 +137,6 @@ Automate ConvertKit (now known as Kit) email marketing operations through Compos
 ### Subscriber Lookup by Email
 
 ```
-1. Call KIT_LIST_SUBSCRIBERS with em
+1. Call KIT_LIST_SUBSCRIBERS with email_address='user@example.com'
+2. Extract subscriber ID from the response
+3. Use I

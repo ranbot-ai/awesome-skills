@@ -1,18 +1,16 @@
 ---
 name: figma-automation
 description: Automate Figma tasks via Rube MCP (Composio): files, components, design tokens, comments, exports. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [react, tailwind, node, api, pdf, markdown, json, cli, mcp, automation]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/figma-automation
+category: Business & Marketing
+source: antigravity
+tags: [react, node, pdf, markdown, api, mcp, ai, automation, workflow, design]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/figma-automation
 ---
 
 
 # Figma Automation via Rube MCP
 
 Automate Figma operations through Composio's Figma toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/figma](https://composio.dev/toolkits/figma)
 
 ## Prerequisites
 
@@ -140,4 +138,5 @@ Automate Figma operations through Composio's Figma toolkit via Rube MCP.
 Extract IDs from Figma URLs:
 ```
 1. Call FIGMA_DISCOVER_FIGMA_RESOURCES with figma_url
-2. Extract file_key
+2. Extract file_key, node_id, team_id from response
+3. Convert dash-format node IDs (1-541) to colon form

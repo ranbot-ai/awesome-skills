@@ -1,18 +1,16 @@
 ---
 name: asana-automation
 description: Automate Asana tasks via Rube MCP (Composio): tasks, projects, sections, teams, workspaces. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/asana-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/asana-automation
 ---
 
 
 # Asana Automation via Rube MCP
 
 Automate Asana operations through Composio's Asana toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/asana](https://composio.dev/toolkits/asana)
 
 ## Prerequisites
 
@@ -159,4 +157,6 @@ Automate Asana operations through Composio's Asana toolkit via Rube MCP.
 | Create task | ASANA_CREATE_A_TASK | workspace, name, projects |
 | Get task | ASANA_GET_A_TASK | task_gid |
 | Create subtask | ASANA_CREATE_SUBTASK | parent, name |
-| List subtasks | ASANA_GET_TASK_SUB
+| List subtasks | ASANA_GET_TASK_SUBTASKS | task_gid |
+| Project tasks | ASANA_GET_TASKS_FROM_A_PROJECT | project_gid |
+| 

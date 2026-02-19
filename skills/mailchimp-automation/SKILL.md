@@ -1,18 +1,16 @@
 ---
 name: mailchimp-automation
 description: Automate Mailchimp email marketing including campaigns, audiences, subscribers, segments, and analytics via Rube MCP (Composio). Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/mailchimp-automation
+category: Business & Marketing
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, template, cro, marketing]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mailchimp-automation
 ---
 
 
 # Mailchimp Automation via Rube MCP
 
 Automate Mailchimp email marketing workflows including campaign creation and sending, audience/list management, subscriber operations, segmentation, and performance analytics through Composio's Mailchimp toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/mailchimp](https://composio.dev/toolkits/mailchimp)
 
 ## Prerequisites
 
@@ -103,4 +101,6 @@ Automate Mailchimp email marketing workflows including campaign creation and sen
 4. `MAILCHIMP_ADD_MEMBER_TO_LIST` - Add new subscriber (create only) [Optional]
 5. `MAILCHIMP_BATCH_ADD_OR_REMOVE_MEMBERS` - Bulk manage segment membership [Optional]
 
-**Key parameters for MAILCHIMP_ADD_OR
+**Key parameters for MAILCHIMP_ADD_OR_UPDATE_LIST_MEMBER**:
+- `list_id`: Audience ID (required)
+- `subscriber_hash`: MD5 hash of lo

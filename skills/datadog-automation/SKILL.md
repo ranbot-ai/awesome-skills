@@ -1,18 +1,16 @@
 ---
 name: datadog-automation
 description: Automate Datadog tasks via Rube MCP (Composio): query metrics, search logs, manage monitors/dashboards, create events and downtimes. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, slack, markdown, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/datadog-automation
+category: Document Processing
+source: antigravity
+tags: [markdown, api, mcp, ai, automation, workflow, document]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/datadog-automation
 ---
 
 
 # Datadog Automation via Rube MCP
 
 Automate Datadog monitoring and observability operations through Composio's Datadog toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/datadog](https://composio.dev/toolkits/datadog)
 
 ## Prerequisites
 
@@ -127,4 +125,8 @@ Automate Datadog monitoring and observability operations through Composio's Data
 
 ### 5. Create Events and Manage Downtimes
 
-**When to use**: User wants to post events or schedule maintenance downtim
+**When to use**: User wants to post events or schedule maintenance downtimes
+
+**Tool sequence**:
+1. `DATADOG_LIST_EVENTS` - List existing events [Optional]
+2. `DATA

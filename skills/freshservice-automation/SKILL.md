@@ -1,18 +1,16 @@
 ---
 name: freshservice-automation
 description: Automate Freshservice ITSM tasks via Rube MCP (Composio): create/update tickets, bulk operations, service requests, and outbound emails. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/freshservice-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/freshservice-automation
 ---
 
 
 # Freshservice Automation via Rube MCP
 
 Automate Freshservice IT Service Management operations through Composio's Freshservice toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/freshservice](https://composio.dev/toolkits/freshservice)
 
 ## Prerequisites
 
@@ -122,4 +120,7 @@ Automate Freshservice IT Service Management operations through Composio's Freshs
 - `priority`: Ticket priority (1=Low, 2=Medium, 3=High, 4=Urgent)
 - `cc_emails`: Array of CC email addresses
 - `email_config_id`: Email configuration ID for the sender address
-- `name`
+- `name`: Requester name
+
+**Pitfalls**:
+- This creates a standard ticket via the /api/v2/tickets endpoint wh

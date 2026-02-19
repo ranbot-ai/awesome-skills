@@ -1,18 +1,16 @@
 ---
 name: docusign-automation
 description: Automate DocuSign tasks via Rube MCP (Composio): templates, envelopes, signatures, document management. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/docusign-automation
+category: Document Processing
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, template, document]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/docusign-automation
 ---
 
 
 # DocuSign Automation via Rube MCP
 
 Automate DocuSign e-signature workflows through Composio's DocuSign toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/docusign](https://composio.dev/toolkits/docusign)
 
 ## Prerequisites
 
@@ -130,4 +128,5 @@ Automate DocuSign e-signature workflows through Composio's DocuSign toolkit via 
 **Pitfalls**:
 - Only 'created' (draft) envelopes can be sent
 - Sent envelopes cannot be unsent; they can only be voided
-- Voiding
+- Voiding an envelope notifies all recipients
+- All required recipients must have valid email address

@@ -1,18 +1,16 @@
 ---
 name: telegram-automation
 description: Automate Telegram tasks via Rube MCP (Composio): send messages, manage chats, share photos/documents, and handle bot commands. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, api, markdown, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/telegram-automation
+category: Document Processing
+source: antigravity
+tags: [markdown, api, mcp, ai, automation, workflow, document, image]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/telegram-automation
 ---
 
 
 # Telegram Automation via Rube MCP
 
 Automate Telegram operations through Composio's Telegram toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/telegram](https://composio.dev/toolkits/telegram)
 
 ## Prerequisites
 
@@ -144,4 +142,5 @@ Automate Telegram operations through Composio's Telegram toolkit via Rube MCP.
 2. `TELEGRAM_ANSWER_CALLBACK_QUERY` - Respond to inline button presses [Optional]
 
 **Key parameters**:
-- `co
+- `commands`: Array of command objects with `command` and `description`
+- `callback_query_id`: ID

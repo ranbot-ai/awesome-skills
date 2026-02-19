@@ -1,18 +1,16 @@
 ---
 name: zoom-automation
 description: Automate Zoom meeting creation, management, recordings, webinars, and participant tracking via Rube MCP (Composio). Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, git, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/zoom-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/zoom-automation
 ---
 
 
 # Zoom Automation via Rube MCP
 
 Automate Zoom operations including meeting scheduling, webinar management, cloud recording retrieval, participant tracking, and usage reporting through Composio's Zoom toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/zoom](https://composio.dev/toolkits/zoom)
 
 ## Prerequisites
 
@@ -108,4 +106,5 @@ Automate Zoom operations including meeting scheduling, webinar management, cloud
 **Pitfalls**:
 - Date range maximum is 1 month; API auto-adjusts `from` if range exceeds this
 - Cloud Recording must be enabled on the account
-- UUIDs starting with `
+- UUIDs starting with `/` or containing `//` must be double URL-encoded
+- `ZOOM_DELETE_MEETING_RECORDINGS` 

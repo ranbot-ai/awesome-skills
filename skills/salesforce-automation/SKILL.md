@@ -1,18 +1,16 @@
 ---
 name: salesforce-automation
 description: Automate Salesforce tasks via Rube MCP (Composio): leads, contacts, accounts, opportunities, SOQL queries. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/salesforce-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/salesforce-automation
 ---
 
 
 # Salesforce Automation via Rube MCP
 
 Automate Salesforce CRM operations through Composio's Salesforce toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/salesforce](https://composio.dev/toolkits/salesforce)
 
 ## Prerequisites
 
@@ -157,4 +155,8 @@ SELECT Id, Name FROM Opportunity WHERE CloseDate = NEXT_MONTH
 - Use `SALESFORCE_QUERY` with nextRecordsUrl for pagination
 - Check `done` field in response; if false, continue paging
 
-## K
+## Known Pitfalls
+
+**Field API Names**:
+- Always use API names, not display labels
+- Custom fields e

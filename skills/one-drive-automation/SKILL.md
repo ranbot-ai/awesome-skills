@@ -1,18 +1,16 @@
 ---
 name: one-drive-automation
 description: Automate OneDrive file management, search, uploads, downloads, sharing, permissions, and folder operations via Rube MCP (Composio). Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, pdf, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/one-drive-automation
+category: Document Processing
+source: antigravity
+tags: [pdf, api, mcp, ai, automation, workflow, document, rag, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/one-drive-automation
 ---
 
 
 # OneDrive Automation via Rube MCP
 
 Automate OneDrive operations including file upload/download, search, folder management, sharing links, permissions management, and drive browsing through Composio's OneDrive toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/one_drive](https://composio.dev/toolkits/one_drive)
 
 ## Prerequisites
 
@@ -103,4 +101,5 @@ Automate OneDrive operations including file upload/download, search, folder mana
 - `item_id`: The file or folder to share
 - `recipients`: Array of objects with `email` or `object_id`
 - `roles`: Array with `"read"` or `"write"`
-- `send_invitation`: `true` to send no
+- `send_invitation`: `true` to send notification email, `false` for silent permission grant
+- `require_sign_in`: `true` to require a

@@ -1,18 +1,16 @@
 ---
 name: jira-automation
 description: Automate Jira tasks via Rube MCP (Composio): issues, projects, sprints, boards, comments, users. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/jira-automation
+category: Document Processing
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, document]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/jira-automation
 ---
 
 
 # Jira Automation via Rube MCP
 
 Automate Jira operations through Composio's Jira toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/jira](https://composio.dev/toolkits/jira)
 
 ## Prerequisites
 
@@ -151,4 +149,6 @@ Automate Jira operations through Composio's Jira toolkit via Rube MCP.
 
 ### Pagination
 
-- Use `startAt` and `maxResul
+- Use `startAt` and `maxResults` parameters
+- Check `total` in response to determine remaining pages
+- Continue u

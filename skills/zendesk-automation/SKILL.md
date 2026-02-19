@@ -1,18 +1,16 @@
 ---
 name: zendesk-automation
 description: Automate Zendesk tasks via Rube MCP (Composio): tickets, users, organizations, replies. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/zendesk-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, agent, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/zendesk-automation
 ---
 
 
 # Zendesk Automation via Rube MCP
 
 Automate Zendesk operations through Composio's Zendesk toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/zendesk](https://composio.dev/toolkits/zendesk)
 
 ## Prerequisites
 
@@ -131,4 +129,7 @@ Automate Zendesk operations through Composio's Zendesk toolkit via Rube MCP.
 2. `ZENDESK_GET_ZENDESK_ORGANIZATION` - Get specific organization [Optional]
 3. `ZENDESK_CREATE_ZENDESK_ORGANIZATION` - Create organization [Optional]
 4. `ZENDESK_UPDATE_ZENDESK_ORGANIZATION` - Update organization [Optional]
-5. `ZENDESK_COUNT_ZENDESK_ORGANIZATIONS` 
+5. `ZENDESK_COUNT_ZENDESK_ORGANIZATIONS` - Get total count [Optional]
+
+**Key parameters**:
+- `name`: Organization name (unique, req

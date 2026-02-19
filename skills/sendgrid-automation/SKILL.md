@@ -1,18 +1,16 @@
 ---
 name: sendgrid-automation
 description: Automate SendGrid email operations including sending emails, managing contacts/lists, sender identities, templates, and analytics via Rube MCP (Composio). Always search tools first for current schemas
-category: Development & Code Tools
-source: composio
-tags: [html, api, gmail, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/sendgrid-automation
+category: Business & Marketing
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, template, design, marketing]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/sendgrid-automation
 ---
 
 
 # SendGrid Automation via Rube MCP
 
 Automate SendGrid email delivery workflows including marketing campaigns (Single Sends), contact and list management, sender identity setup, and email analytics through Composio's SendGrid toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/sendgrid](https://composio.dev/toolkits/sendgrid)
 
 ## Prerequisites
 
@@ -97,4 +95,5 @@ Automate SendGrid email delivery workflows including marketing campaigns (Single
 **Tool sequence**:
 1. `SENDGRID_GET_ALL_SENDER_IDENTITIES` - List all existing sender identities [Required]
 2. `SENDGRID_CREATE_A_SENDER_IDENTITY` - Create a new sender identity [Optional]
-3. `SENDGRID_VIEW_A_SENDER_I
+3. `SENDGRID_VIEW_A_SENDER_IDENTITY` - View details for a specific sender [Optional]
+4. `SENDGRID_UPDATE_A_SENDER_IDENTI

@@ -1,18 +1,16 @@
 ---
 name: render-automation
 description: Automate Render tasks via Rube MCP (Composio): services, deployments, projects. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/render-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/render-automation
 ---
 
 
 # Render Automation via Rube MCP
 
 Automate Render cloud platform operations through Composio's Render toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/render](https://composio.dev/toolkits/render)
 
 ## Prerequisites
 
@@ -145,4 +143,9 @@ Automate Render cloud platform operations through Composio's Render toolkit via 
 
 - Use `cursor` from response for next page
 - Continue until `cursor` is absent or results are empty
-- Both LIST_SERVICES and LIST_PROJECTS use cursor-based paginat
+- Both LIST_SERVICES and LIST_PROJECTS use cursor-based pagination
+- Set `limit` to max (100) for fewer pagination rounds
+
+## Known Pitfalls
+
+**Service

@@ -1,18 +1,16 @@
 ---
 name: bamboohr-automation
 description: Automate BambooHR tasks via Rube MCP (Composio): employees, time-off, benefits, dependents, employee updates. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/bamboohr-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, security, rag]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bamboohr-automation
 ---
 
 
 # BambooHR Automation via Rube MCP
 
 Automate BambooHR human resources operations through Composio's BambooHR toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/bamboohr](https://composio.dev/toolkits/bamboohr)
 
 ## Prerequisites
 
@@ -128,4 +126,5 @@ Automate BambooHR human resources operations through Composio's BambooHR toolkit
 2. `BAMBOOHR_BENEFIT_GET_COVERAGES` - Get benefit coverage details [Optional]
 
 **Key parameters**:
-- For dependents: Optional `employe
+- For dependents: Optional `employeeId` filter
+- For benefits: Depends on schema; check RUBE_SEARCH_TOOLS for current parameter

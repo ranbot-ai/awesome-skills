@@ -1,18 +1,16 @@
 ---
 name: clickup-automation
 description: Automate ClickUp project management including tasks, spaces, folders, lists, comments, and team operations via Rube MCP (Composio). Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, json, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/clickup-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/clickup-automation
 ---
 
 
 # ClickUp Automation via Rube MCP
 
 Automate ClickUp project management workflows including task creation and updates, workspace hierarchy navigation, comments, and team member management through Composio's ClickUp toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/clickup](https://composio.dev/toolkits/clickup)
 
 ## Prerequisites
 
@@ -104,4 +102,7 @@ Automate ClickUp project management workflows including task creation and update
 1. `CLICKUP_GET_TASK` - Verify task exists and get task_id [Prerequisite]
 2. `CLICKUP_CREATE_TASK_COMMENT` - Add a new comment to the task [Required]
 3. `CLICKUP_GET_TASK_COMMENTS` - List existing comments on the task [Optional]
-4. `CLICKUP_UPDATE_COMMENT` - Edit comment text, assignee, or resolution
+4. `CLICKUP_UPDATE_COMMENT` - Edit comment text, assignee, or resolution status [Optional]
+
+**Key parameters for CLICKUP_CREATE_TASK_COMMENT**:
+- `task_id`: Task 

@@ -1,18 +1,16 @@
 ---
 name: outlook-automation
 description: Automate Outlook tasks via Rube MCP (Composio): emails, calendar, contacts, folders, attachments. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/outlook-automation
+category: Document Processing
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, document, image, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/outlook-automation
 ---
 
 
 # Outlook Automation via Rube MCP
 
 Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/outlook](https://composio.dev/toolkits/outlook)
 
 ## Prerequisites
 
@@ -131,4 +129,7 @@ Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rub
 **Key parameters**:
 - `parent_folder_id`: Well-known name or folder ID
 - `displayName`: New folder name
-- `include_hidde
+- `include_hidden_folders`: Show hidden folders
+
+**Pitfalls**:
+- Well-known folder names: 'inbox', 'sentit

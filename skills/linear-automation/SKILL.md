@@ -1,18 +1,16 @@
 ---
 name: linear-automation
 description: Automate Linear tasks via Rube MCP (Composio): issues, projects, cycles, teams, labels. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, markdown, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/linear-automation
+category: AI & Agents
+source: antigravity
+tags: [markdown, api, mcp, ai, automation, workflow]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/linear-automation
 ---
 
 
 # Linear Automation via Rube MCP
 
 Automate Linear operations through Composio's Linear toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/linear](https://composio.dev/toolkits/linear)
 
 ## Prerequisites
 
@@ -167,4 +165,6 @@ Automate Linear operations through Composio's Linear toolkit via Rube MCP.
 | Create issue | LINEAR_CREATE_LINEAR_ISSUE | team_id, title, description |
 | Search issues | LINEAR_SEARCH_ISSUES | query |
 | List issues | LINEAR_LIST_LINEAR_ISSUES | team_id, filters |
-| Get issue | LINEAR_GET_LINEAR_ISSU
+| Get issue | LINEAR_GET_LINEAR_ISSUE | issue_id |
+| Update issue | LINEAR_UPDATE_ISSUE | issue_id, fields |
+| List states |

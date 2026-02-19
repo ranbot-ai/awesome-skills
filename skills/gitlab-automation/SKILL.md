@@ -1,18 +1,16 @@
 ---
 name: gitlab-automation
 description: Automate GitLab project management, issues, merge requests, pipelines, branches, and user operations via Rube MCP (Composio). Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, git, yaml, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/gitlab-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, rag, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gitlab-automation
 ---
 
 
 # GitLab Automation via Rube MCP
 
 Automate GitLab operations including project management, issue tracking, merge request workflows, CI/CD pipeline monitoring, branch management, and user administration through Composio's GitLab toolkit.
-
-**Toolkit docs**: [composio.dev/toolkits/gitlab](https://composio.dev/toolkits/gitlab)
 
 ## Prerequisites
 
@@ -106,4 +104,5 @@ Automate GitLab operations including project management, issue tracking, merge r
 2. `GITLAB_GET_PROJECT` - Get detailed info for a specific project [Optional]
 3. `GITLAB_LIST_USER_PROJECTS` - List projects owned by a specific user [Optional]
 4. `GITLAB_CREATE_PROJECT` - Create a new project [Required for create]
-5. `GITLAB_GET_REPOSITORY_BRANCHES` - List branches in a project [Require
+5. `GITLAB_GET_REPOSITORY_BRANCHES` - List branches in a project [Required for branch ops]
+6. `GITLAB_CREATE_REPOSITORY_BRANCH` - Create a new branch [Optional]

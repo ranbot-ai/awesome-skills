@@ -1,18 +1,16 @@
 ---
 name: intercom-automation
 description: Automate Intercom tasks via Rube MCP (Composio): conversations, contacts, companies, segments, admins. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [html, api, json, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/intercom-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, rag]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/intercom-automation
 ---
 
 
 # Intercom Automation via Rube MCP
 
 Automate Intercom operations through Composio's Intercom toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/intercom](https://composio.dev/toolkits/intercom)
 
 ## Prerequisites
 
@@ -125,4 +123,7 @@ Automate Intercom operations through Composio's Intercom toolkit via Rube MCP.
 
 ### 5. View Segments and Counts
 
-**When to use**: User wants to view segments or g
+**When to use**: User wants to view segments or get aggregate counts
+
+**Tool sequence**:
+1. `INTERCOM_LIST_SEGMENTS` - List all segments [Opt

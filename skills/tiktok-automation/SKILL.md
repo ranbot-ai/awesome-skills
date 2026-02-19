@@ -1,18 +1,16 @@
 ---
 name: tiktok-automation
 description: Automate TikTok tasks via Rube MCP (Composio): upload/publish videos, post photos, manage content, and view user profiles/stats. Always search tools first for current schemas. 
-category: Development & Code Tools
-source: composio
-tags: [api, cli, mcp, automation, ai]
-url: https://github.com/ComposioHQ/awesome-claude-skills/tree/master/tiktok-automation
+category: AI & Agents
+source: antigravity
+tags: [api, mcp, ai, automation, workflow, image]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/tiktok-automation
 ---
 
 
 # TikTok Automation via Rube MCP
 
 Automate TikTok content creation and profile operations through Composio's TikTok toolkit via Rube MCP.
-
-**Toolkit docs**: [composio.dev/toolkits/tiktok](https://composio.dev/toolkits/tiktok)
 
 ## Prerequisites
 
@@ -142,4 +140,5 @@ Automate TikTok content creation and profile operations through Composio's TikTo
 
 ### Pagination
 
-- Use `
+- Use `cursor` from previous response for next page
+- Check `has_more` boolean to determine if 
