@@ -6423,6 +6423,24 @@
       "scrapedAt": "2026-01-29T06:58:30.412Z"
     },
     {
+      "id": "antigravity-conductor-status",
+      "name": "conductor-status",
+      "slug": "conductor-status",
+      "description": "Display project status, active tracks, and next actions",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/conductor-status",
+      "content": "\n# Conductor Status\n\nDisplay the current status of the Conductor project, including overall progress, active tracks, and next actions.\n\n## Use this skill when\n\n- Working on conductor status tasks or workflows\n- Needing guidance, best practices, or checklists for conductor status\n\n## Do not use this skill when\n\n- The task is unrelated to conductor status\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Pre-flight Checks\n\n1. Verify Conductor is initialized:\n   - Check `conductor/product.md` exists\n   - Check `conductor/tracks.md` exists\n   - If missing: Display error and suggest running `/conductor:setup` first\n\n2. Check for any tracks:\n   - Read `conductor/tracks.md`\n   - If no tracks registered: Display setup complete message with suggestion to create first track\n\n## Data Collection\n\n### 1. Project Information\n\nRead `conductor/product.md` and extract:\n\n- Project name\n- Project description\n\n### 2. Tracks Overview\n\nRead `conductor/tracks.md` and parse:\n\n- Total tracks count\n- Completed tracks (marked `[x]`)\n- In-progress tracks (marked `[~]`)\n- Pending tracks (marked `[ ]`)\n\n### 3. Detailed Track Analysis\n\nFor each track in `conductor/tracks/`:\n\nRead `conductor/tracks/{trackId}/plan.md`:\n\n- Count total tasks (lines matching `- [x]`, `- [~]`, `- [ ]` with Task prefix)\n- Count completed tasks (`[x]`)\n- Count in-progress tasks (`[~]`)\n- Count pending tasks (`[ ]`)\n- Identify current phase (first phase with incomplete tasks)\n- Identify next pending task\n\nRead `conductor/tracks/{trackId}/metadata.json`:\n\n- Track type (feature, bug, chore, refactor)\n- Created date\n- Last updated date\n- Status\n\nRead `conductor/tracks/{trackId}/spec.md`:\n\n- Check for any noted blockers or dependencies\n\n### 4. Blocker Detection\n\nScan for potential blockers:\n\n- Tasks marked with `BLOCKED:` prefix\n- Dependencies on incomplete tracks\n- Failed verification tasks\n\n## Output Format\n\n### Full Project Status (no argument)\n\n```\n================================================================================\n                        PROJECT STATUS: {Project Name}\n================================================================================\nLast Updated: {current timestamp}\n\n--------------------------------------------------------------------------------\n                              OVERALL PROGRESS\n--------------------------------------------------------------------------------\n\nTracks:     {completed}/{total} completed ({percentage}%)\nTasks:      {completed}/{total} completed ({percentage}%)\n\nProgress:   [##########..........] {percentage}%\n\n--------------------------------------------------------------------------------\n                              TRACK SUMMARY\n--------------------------------------------------------------------------------\n\n| Status | Track ID          | Type    | Tasks      | Last Updated |\n|--------|-------------------|---------|------------|--------------|\n| [x]    | auth_20250110     | feature | 12/12 (100%)| 2025-01-12  |\n| [~]    | dashboard_20250112| feature | 7/15 (47%) | 2025-01-15  |\n| [ ]    | nav-fix_20250114  | bug     | 0/4 (0%)   | 2025-01-14  |\n\n--------------------------------------------------------------------------------\n                              CURRENT FOCUS\n--------------------------------------------------------------------------------\n\nActive Track:  dashboard_20250112 - Dashboard Feature\nCurrent Phase: Phase 2: Core Components\nCurrent Task:  [~] Task 2.3: Implement chart rendering\n\nProgress in Phase:\n  - [x] Task 2.1: Create dashboard layout\n  - [x] Task 2.2: Add data fetching hooks\n  - [~] Task 2.3: Implement chart rendering\n  - [ ] Task 2.4: Add filter controls\n\n--------------------------------------------------------------------------------\n                              NEXT ACTIONS\n--------------------------------------------------------------------------------\n\n1. Complete: Task 2.3 - Implement chart rendering (dashboard_20250112)\n2. Then: Task 2.4 - Add filter controls (dashboard_20250112)\n3. After Phase 2: Phase verification checkpoint\n\n--------------------------------------------------------------------------------\n                               BLOCKERS\n--------------------------------------------------------------------------------\n\n{If blockers found:}\n! BLOCKED: Task 3.1 in dashboard_20250112 depends on api_20250111 (incomplete)\n\n{If no blockers:}\nNo blockers identified.\n\n================================================================================\nCommands: /conductor:implement {trackId} | /conductor:new-track | /conductor:revert\n================================================================================\n```\n\n### Single Track Status (with track-id argument)\n\n```\n==================================================",
+      "tags": [
+        "api",
+        "ai",
+        "workflow"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-02-20T07:06:44.970Z"
+    },
+    {
       "id": "antigravity-conductor-validator",
       "name": "conductor-validator",
       "slug": "conductor-validator",
@@ -7763,6 +7781,64 @@
       "scrapedAt": "2026-01-29T06:58:41.975Z"
     },
     {
+      "id": "antigravity-ddd-context-mapping",
+      "name": "ddd-context-mapping",
+      "slug": "ddd-context-mapping",
+      "description": "Map relationships between bounded contexts and define integration contracts using DDD context mapping patterns.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ddd-context-mapping",
+      "content": "\n# DDD Context Mapping\n\n## Use this skill when\n\n- Defining integration patterns between bounded contexts.\n- Preventing domain leakage across service boundaries.\n- Planning anti-corruption layers during migration.\n- Clarifying upstream and downstream ownership for contracts.\n\n## Do not use this skill when\n\n- You have a single-context system with no integrations.\n- You only need internal class design.\n- You are selecting cloud infrastructure tooling.\n\n## Instructions\n\n1. List all context pairs and dependency direction.\n2. Choose relationship patterns per pair.\n3. Define translation rules and ownership boundaries.\n4. Add failure modes, fallback behavior, and versioning policy.\n\nIf detailed mapping structures are needed, open `references/context-map-patterns.md`.\n\n## Output requirements\n\n- Relationship map for all context pairs\n- Contract ownership matrix\n- Translation and anti-corruption decisions\n- Known coupling risks and mitigation plan\n\n## Examples\n\n```text\nUse @ddd-context-mapping to define how Checkout integrates with Billing,\nInventory, and Fraud contexts, including ACL and contract ownership.\n```\n\n## Limitations\n\n- This skill does not replace API-level schema design.\n- It does not guarantee organizational alignment by itself.\n- It should be revisited when team ownership changes.\n",
+      "tags": [
+        "api",
+        "ai",
+        "design",
+        "cro"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-02-20T07:07:04.374Z"
+    },
+    {
+      "id": "antigravity-ddd-strategic-design",
+      "name": "ddd-strategic-design",
+      "slug": "ddd-strategic-design",
+      "description": "Design DDD strategic artifacts including subdomains, bounded contexts, and ubiquitous language for complex business domains.",
+      "category": "Creative & Media",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ddd-strategic-design",
+      "content": "\n# DDD Strategic Design\n\n## Use this skill when\n\n- Defining core, supporting, and generic subdomains.\n- Splitting a monolith or service landscape by domain boundaries.\n- Aligning teams and ownership with bounded contexts.\n- Building a shared ubiquitous language with domain experts.\n\n## Do not use this skill when\n\n- The domain model is stable and already well bounded.\n- You need tactical code patterns only.\n- The task is purely infrastructure or UI oriented.\n\n## Instructions\n\n1. Extract domain capabilities and classify subdomains.\n2. Define bounded contexts around consistency and ownership.\n3. Establish a ubiquitous language glossary and anti-terms.\n4. Capture context boundaries in ADRs before implementation.\n\nIf detailed templates are needed, open `references/strategic-design-template.md`.\n\n## Required artifacts\n\n- Subdomain classification table\n- Bounded context catalog\n- Glossary with canonical terms\n- Boundary decisions with rationale\n\n## Examples\n\n```text\nUse @ddd-strategic-design to map our commerce domain into bounded contexts,\nclassify subdomains, and propose team ownership.\n```\n\n## Limitations\n\n- This skill does not produce executable code.\n- It cannot infer business truth without stakeholder input.\n- It should be followed by tactical design before implementation.\n",
+      "tags": [
+        "ai",
+        "template",
+        "design"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-02-20T07:07:04.901Z"
+    },
+    {
+      "id": "antigravity-ddd-tactical-patterns",
+      "name": "ddd-tactical-patterns",
+      "slug": "ddd-tactical-patterns",
+      "description": "Apply DDD tactical patterns in code using entities, value objects, aggregates, repositories, and domain events with explicit invariants.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ddd-tactical-patterns",
+      "content": "\n# DDD Tactical Patterns\n\n## Use this skill when\n\n- Translating domain rules into code structures.\n- Designing aggregate boundaries and invariants.\n- Refactoring an anemic model into behavior-rich domain objects.\n- Defining repository contracts and domain event boundaries.\n\n## Do not use this skill when\n\n- You are still defining strategic boundaries.\n- The task is only API documentation or UI layout.\n- Full DDD complexity is not justified.\n\n## Instructions\n\n1. Identify invariants first and design aggregates around them.\n2. Model immutable value objects for validated concepts.\n3. Keep domain behavior in domain objects, not controllers.\n4. Emit domain events for meaningful state transitions.\n5. Keep repositories at aggregate root boundaries.\n\nIf detailed checklists are needed, open `references/tactical-checklist.md`.\n\n## Example\n\n```typescript\nclass Order {\n  private status: \"draft\" | \"submitted\" = \"draft\";\n\n  submit(itemsCount: number): void {\n    if (itemsCount === 0) throw new Error(\"Order cannot be submitted empty\");\n    if (this.status !== \"draft\") throw new Error(\"Order already submitted\");\n    this.status = \"submitted\";\n  }\n}\n```\n\n## Limitations\n\n- This skill does not define deployment architecture.\n- It does not choose databases or transport protocols.\n- It should be paired with testing patterns for invariant coverage.\n",
+      "tags": [
+        "typescript",
+        "api",
+        "ai",
+        "design",
+        "document",
+        "rag"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-02-20T07:07:05.505Z"
+    },
+    {
       "id": "antigravity-debugger",
       "name": "debugger",
       "slug": "debugger",
@@ -8519,6 +8595,26 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-26T13:18:09.954Z"
+    },
+    {
+      "id": "antigravity-domain-driven-design",
+      "name": "domain-driven-design",
+      "slug": "domain-driven-design",
+      "description": "Plan and route Domain-Driven Design work from strategic modeling to tactical implementation and evented architecture patterns.",
+      "category": "Creative & Media",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/domain-driven-design",
+      "content": "\n# Domain-Driven Design\n\n## Use this skill when\n\n- You need to model a complex business domain with explicit boundaries.\n- You want to decide whether full DDD is worth the added complexity.\n- You need to connect strategic design decisions to implementation patterns.\n- You are planning CQRS, event sourcing, sagas, or projections from domain needs.\n\n## Do not use this skill when\n\n- The problem is simple CRUD with low business complexity.\n- You only need localized bug fixes.\n- There is no access to domain knowledge and no proxy product expert.\n\n## Instructions\n\n1. Run a viability check before committing to full DDD.\n2. Produce strategic artifacts first: subdomains, bounded contexts, language glossary.\n3. Route to specialized skills based on current task.\n4. Define success criteria and evidence for each stage.\n\n### Viability check\n\nUse full DDD only when at least two of these are true:\n\n- Business rules are complex or fast-changing.\n- Multiple teams are causing model collisions.\n- Integration contracts are unstable.\n- Auditability and explicit invariants are critical.\n\n### Routing map\n\n- Strategic model and boundaries: `@ddd-strategic-design`\n- Cross-context integrations and translation: `@ddd-context-mapping`\n- Tactical code modeling: `@ddd-tactical-patterns`\n- Read/write separation: `@cqrs-implementation`\n- Event history as source of truth: `@event-sourcing-architect` and `@event-store-design`\n- Long-running workflows: `@saga-orchestration`\n- Read models: `@projection-patterns`\n- Decision log: `@architecture-decision-records`\n\nIf templates are needed, open `references/ddd-deliverables.md`.\n\n## Output requirements\n\nAlways return:\n\n- Scope and assumptions\n- Current stage (strategic, tactical, or evented)\n- Explicit artifacts produced\n- Open risks and next step recommendation\n\n## Examples\n\n```text\nUse @domain-driven-design to assess if this billing platform should adopt full DDD.\nThen route to the right next skill and list artifacts we must produce this week.\n```\n\n## Limitations\n\n- This skill does not replace direct workshops with domain experts.\n- It does not provide framework-specific code generation.\n- It should not be used as a justification to over-engineer simple systems.\n",
+      "tags": [
+        "ai",
+        "workflow",
+        "template",
+        "design",
+        "cro"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-02-20T07:07:16.282Z"
     },
     {
       "id": "composio-domain-name-brainstormer",
@@ -21509,14 +21605,14 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 313
+      "count": 315
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 284
+      "count": 285
     },
     {
       "id": "development-code-tools",
@@ -21537,7 +21633,7 @@
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 76
+      "count": 78
     },
     {
       "id": "business-marketing",
@@ -21581,48 +21677,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 54668
+      "stars": 55606
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 1,
-      "stars": 71599
+      "stars": 72101
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 35791
+      "stars": 36054
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 67942
+      "stars": 67984
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 903
+      "stars": 908
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillCount": 853,
-      "newSkillCount": 88,
-      "stars": 12645
+      "skillCount": 858,
+      "newSkillCount": 15,
+      "stars": 13164
     }
   ],
-  "lastUpdated": "2026-02-19T07:14:27.566Z",
+  "lastUpdated": "2026-02-20T07:10:40.467Z",
   "stats": {
-    "totalSkills": 951,
-    "newSkills": 97,
-    "scrapedAt": "2026-02-19T07:14:27.566Z"
+    "totalSkills": 956,
+    "newSkills": 24,
+    "scrapedAt": "2026-02-20T07:10:40.467Z"
   }
 }
