@@ -3,7 +3,7 @@ name: conversation-memory
 description: Persistent memory systems for LLM conversations including short-term, long-term, and entity-based memory Use when: conversation memory, remember, memory persistence, long-term memory, chat history. 
 category: AI & Agents
 source: antigravity
-tags: [ai, llm, rag, cro]
+tags: [ai, llm, workflow, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/conversation-memory
 ---
 
@@ -63,3 +63,6 @@ Include relevant memories in prompts
 ## Related Skills
 
 Works well with: `context-window-management`, `rag-implementation`, `prompt-caching`, `llm-npc-dialogue`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

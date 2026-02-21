@@ -1,6 +1,6 @@
 ---
 name: monorepo-management
-description: Master monorepo management with Turborepo, Nx, and pnpm workspaces to build efficient, scalable multi-package repositories with optimized builds and dependency management. Use when setting up monorepo
+description: Master monorepo management with Turborepo, Nx, and pnpm workspaces to build efficient, scalable multi-package repositories with optimized builds and dependency management. Use when setting up monor...
 category: AI & Agents
 source: antigravity
 tags: [ai, cro]

@@ -1,9 +1,9 @@
 ---
 name: azure-ai-projects-ts
-description: Build AI applications using Azure AI Projects SDK for JavaScript (@azure/ai-projects). Use when working with Foundry project clients, agents, connections, deployments, datasets, indexes, evaluations, 
+description: Build AI applications using Azure AI Projects SDK for JavaScript (@azure/ai-projects). Use when working with Foundry project clients, agents, connections, deployments, datasets, indexes, evaluation...
 category: Document Processing
 source: antigravity
-tags: [javascript, typescript, api, mcp, ai, agent, gpt, document, azure]
+tags: [javascript, typescript, api, mcp, ai, agent, gpt, workflow, document, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-projects-ts
 ---
 

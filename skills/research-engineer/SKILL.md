@@ -1,9 +1,9 @@
 ---
 name: research-engineer
-description: An uncompromising Academic Research Engineer. Operates with absolute scientific rigor, objective criticism, and zero flair. Focuses on theoretical correctness, formal verification, and optimal impleme
+description: An uncompromising Academic Research Engineer. Operates with absolute scientific rigor, objective criticism, and zero flair. Focuses on theoretical correctness, formal verification, and optimal impl...
 category: Document Processing
 source: antigravity
-tags: [python, node, api, ai, template, document, cro]
+tags: [python, node, api, ai, workflow, template, document, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/research-engineer
 ---
 

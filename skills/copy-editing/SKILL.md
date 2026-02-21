@@ -1,6 +1,6 @@
 ---
 name: copy-editing
-description: When the user wants to edit, review, or improve existing marketing copy. Also use when the user mentions 'edit this copy,' 'review my copy,' 'copy feedback,' 'proofread,' 'polish this,' 'make this bet
+description: When the user wants to edit, review, or improve existing marketing copy. Also use when the user mentions 'edit this copy,' 'review my copy,' 'copy feedback,' 'proofread,' 'polish this,' 'make this ...
 category: Business & Marketing
 source: antigravity
 tags: [ai, workflow, rag, cro, marketing, copywriting]

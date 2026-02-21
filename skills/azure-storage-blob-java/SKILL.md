@@ -1,9 +1,9 @@
 ---
 name: azure-storage-blob-java
-description: Build blob storage applications with Azure Storage Blob SDK for Java. Use when uploading, downloading, or managing files in Azure Blob Storage, working with containers, or implementing streaming data 
+description: Build blob storage applications with Azure Storage Blob SDK for Java. Use when uploading, downloading, or managing files in Azure Blob Storage, working with containers, or implementing streaming da...
 category: AI & Agents
 source: antigravity
-tags: [ai, azure, rag, cro]
+tags: [ai, workflow, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-storage-blob-java
 ---
 

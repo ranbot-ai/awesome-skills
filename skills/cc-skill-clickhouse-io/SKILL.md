@@ -1,9 +1,9 @@
 ---
-name: clickhouse-io
+name: cc-skill-clickhouse-io
 description: ClickHouse database patterns, query optimization, analytics, and data engineering best practices for high-performance analytical workloads. 
 category: Business & Marketing
 source: antigravity
-tags: [typescript, ai, design, rag]
+tags: [typescript, ai, workflow, design, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cc-skill-clickhouse-io
 ---
 

@@ -3,7 +3,7 @@ name: api-patterns
 description: API design principles and decision-making. REST vs GraphQL vs tRPC selection, response formats, versioning, pagination. 
 category: Document Processing
 source: antigravity
-tags: [python, typescript, api, ai, design, document, security]
+tags: [python, typescript, api, ai, workflow, design, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/api-patterns
 ---
 
@@ -82,3 +82,7 @@ Before designing an API:
 | Script | Purpose | Command |
 |--------|---------|---------|
 | `scripts/api_validator.py` | API endpoint validation | `python scripts/api_validator.py <project_path>` |
+
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

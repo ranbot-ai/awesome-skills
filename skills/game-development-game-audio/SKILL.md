@@ -3,7 +3,7 @@ name: game-audio
 description: Game audio principles. Sound design, music integration, adaptive audio systems. 
 category: Development & Code Tools
 source: antigravity
-tags: [ai, design, cro]
+tags: [ai, workflow, design, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game-development/game-audio
 ---
 

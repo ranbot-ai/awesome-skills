@@ -1,6 +1,6 @@
 ---
 name: microservices-patterns
-description: Design microservices architectures with service boundaries, event-driven communication, and resilience patterns. Use when building distributed systems, decomposing monoliths, or implementing microserv
+description: Design microservices architectures with service boundaries, event-driven communication, and resilience patterns. Use when building distributed systems, decomposing monoliths, or implementing micros...
 category: Business & Marketing
 source: antigravity
 tags: [ai, design, cro]

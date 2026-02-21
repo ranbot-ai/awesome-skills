@@ -1,9 +1,9 @@
 ---
-name: security-review
-description: Use this skill when adding authentication, handling user input, working with secrets, creating API endpoints, or implementing payment/sensitive features. Provides comprehensive security checklist and 
+name: cc-skill-security-review
+description: Use this skill when adding authentication, handling user input, working with secrets, creating API endpoints, or implementing payment/sensitive features. Provides comprehensive security checklist a...
 category: Security & Systems
 source: antigravity
-tags: [typescript, react, nextjs, api, ai, image, security, vulnerability, supabase, rag]
+tags: [typescript, react, nextjs, api, ai, workflow, image, security, vulnerability, supabase]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cc-skill-security-review
 ---
 

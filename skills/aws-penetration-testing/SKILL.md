@@ -1,6 +1,6 @@
 ---
-name: AWS Penetration Testing
-description: This skill should be used when the user asks to "pentest AWS", "test AWS security", "enumerate IAM", "exploit cloud infrastructure", "AWS privilege escalation", "S3 bucket testing", "metadata SSRF", "
+name: aws-penetration-testing
+description: This skill should be used when the user asks to "pentest AWS", "test AWS security", "enumerate IAM", "exploit cloud infrastructure", "AWS privilege escalation", "S3 bucket testing... 
 category: Security & Systems
 source: antigravity
 tags: [python, api, ai, agent, workflow, document, security, pentest, vulnerability, aws]

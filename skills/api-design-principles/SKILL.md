@@ -1,6 +1,6 @@
 ---
 name: api-design-principles
-description: Master REST and GraphQL API design principles to build intuitive, scalable, and maintainable APIs that delight developers. Use when designing new APIs, reviewing API specifications, or establishing AP
+description: Master REST and GraphQL API design principles to build intuitive, scalable, and maintainable APIs that delight developers. Use when designing new APIs, reviewing API specifications, or establishing...
 category: Document Processing
 source: antigravity
 tags: [api, ai, template, design, document]

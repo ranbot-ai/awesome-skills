@@ -1,6 +1,6 @@
 ---
 name: istio-traffic-management
-description: Configure Istio traffic management including routing, load balancing, circuit breakers, and canary deployments. Use when implementing service mesh traffic policies, progressive delivery, or resilience
+description: Configure Istio traffic management including routing, load balancing, circuit breakers, and canary deployments. Use when implementing service mesh traffic policies, progressive delivery, or resilie...
 category: AI & Agents
 source: antigravity
 tags: [api, ai, template]

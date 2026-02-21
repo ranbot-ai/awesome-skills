@@ -3,7 +3,7 @@ name: 3d-games
 description: 3D game development principles. Rendering, shaders, physics, cameras. 
 category: Creative & Media
 source: antigravity
-tags: [ai, rag]
+tags: [ai, workflow, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game-development/3d-games
 ---
 
@@ -137,3 +137,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game
 ---
 
 > **Remember:** 3D is about illusion. Create the impression of detail, not the detail itself.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

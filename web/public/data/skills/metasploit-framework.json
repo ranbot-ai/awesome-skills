@@ -1,8 +1,8 @@
 {
   "id": "antigravity-metasploit-framework",
-  "name": "Metasploit Framework",
+  "name": "metasploit-framework",
   "slug": "metasploit-framework",
-  "description": "This skill should be used when the user asks to \"use Metasploit for penetration testing\", \"exploit vulnerabilities with msfconsole\", \"create payloads with msfvenom\", \"perform post-exploitation\", \"use auxiliary modules for scanning\", or \"develop custom exploits\". It provides comprehensive guidance fo",
+  "description": "This skill should be used when the user asks to \"use Metasploit for penetration testing\", \"exploit vulnerabilities with msfconsole\", \"create payloads with msfvenom\", \"perform post-exp...",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

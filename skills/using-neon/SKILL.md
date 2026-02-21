@@ -1,6 +1,6 @@
 ---
 name: using-neon
-description: Guides and best practices for working with Neon Serverless Postgres. Covers getting started, local development with Neon, choosing a connection method, Neon features, authentication (@neondatabase/aut
+description: Guides and best practices for working with Neon Serverless Postgres. Covers getting started, local development with Neon, choosing a connection method, Neon features, authentication (@neondatabase/...
 category: Document Processing
 source: antigravity
 tags: [python, typescript, markdown, api, mcp, ai, agent, llm, workflow, document]

@@ -1,6 +1,6 @@
 ---
-name: mcp-builder
-description: Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate externa
+name: mcp-builder-ms
+description: Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate exte...
 category: Document Processing
 source: antigravity
 tags: [python, typescript, node, markdown, api, mcp, ai, agent, llm, automation]
@@ -9,6 +9,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mcp-
 
 
 # MCP Server Development Guide
+
+## When to Use
+
+Use this skill when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).
 
 ## Overview
 
@@ -39,7 +43,7 @@ Before building a custom server, check if Microsoft already provides one:
 | **Playwright MCP** | Local | Browser automation and testing |
 | **GitHub MCP** | Remote | `https://api.githubcopilot.com/mcp` |
 
-**Full ecosystem:** See [🔷 Microsoft MCP Patterns](./reference/microsoft_mcp_patterns.md) for complete server catalog and patterns.
+**Full ecosystem:** See 🔷 Microsoft MCP Patterns for complete server catalog and patterns.
 
 ### When to Use Microsoft vs Custom
 
@@ -49,7 +53,7 @@ Before building a custom server, check if Microsoft already provides one:
 | AI Foundry agents/evals | Use **Foundry MCP** remote server |
 | Custom internal APIs | Build **custom server** (this guide) |
 | Third-party SaaS integration | Build **custom server** (this guide) |
-| Extending Azure MCP | Follow [Microsoft MCP Patterns](./reference/microsoft_mcp_patterns.md)
+| Extending Azure MCP | Follow Microsoft MCP Patterns
 
 ---
 
@@ -107,14 +111,15 @@ Key pages to review:
 
 **Load framework documentation:**
 
-- **MCP Best Practices**: [📋 View Best Practices](./reference/mcp_best_practices.md) - Core guidelines
+- **MCP Best Practices**: 📋 View Best Practices - Core guidelines
 
 **For TypeScript (recommended):**
 - **TypeScript SDK**: Use WebFetch to load `https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/README.md`
-- [⚡ TypeScript Guide](./reference/node_mcp_server.md) - TypeScript patterns and examples
+- ⚡ TypeScript Guide - TypeScript patterns and examples
 
 **For Python:**
 - **Python SDK**: Use WebFetch to load `https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/README.md`
-- [🐍 Python Guide](./reference/python_mcp_server.md) - Python patterns and examples
+- 🐍 Python Guide - Python patterns and examples
 
-**For C#/.NET (Microsoft ecosy
+**For C#/.NET (Microsoft ecosystem):**
+- 🔷 Microsoft MCP Patte

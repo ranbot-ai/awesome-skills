@@ -1,9 +1,9 @@
 ---
 name: agent-evaluation
-description: Testing and benchmarking LLM agents including behavioral testing, capability assessment, reliability metrics, and production monitoring—where even top agents achieve less than 50% on real-world benc
+description: Testing and benchmarking LLM agents including behavioral testing, capability assessment, reliability metrics, and production monitoring—where even top agents achieve less than 50% on re... 
 category: AI & Agents
 source: antigravity
-tags: [ai, agent, llm, design]
+tags: [ai, agent, llm, workflow, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-evaluation
 ---
 
@@ -66,3 +66,6 @@ Actively try to break agent behavior
 ## Related Skills
 
 Works well with: `multi-agent-orchestration`, `agent-communication`, `autonomous-agents`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

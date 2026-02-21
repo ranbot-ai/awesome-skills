@@ -1,6 +1,6 @@
 {
   "id": "antigravity-cc-skill-coding-standards",
-  "name": "coding-standards",
+  "name": "cc-skill-coding-standards",
   "slug": "cc-skill-coding-standards",
   "description": "Universal coding standards, best practices, and patterns for TypeScript, JavaScript, React, and Node.js development.",
   "category": "Document Processing",
@@ -15,10 +15,10 @@
     "node",
     "api",
     "ai",
+    "workflow",
     "design",
     "document",
-    "supabase",
-    "cro"
+    "supabase"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-26T13:17:21.842Z"

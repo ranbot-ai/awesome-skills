@@ -1,6 +1,6 @@
 ---
 name: free-tool-strategy
-description: When the user wants to plan, evaluate, or build a free tool for marketing purposes — lead generation, SEO value, or brand awareness. Also use when the user mentions "engineering as marketing," "free
+description: When the user wants to plan, evaluate, or build a free tool for marketing purposes — lead generation, SEO value, or brand awareness. Also use when the user mentions "engineering as mar... 
 category: Document Processing
 source: antigravity
 tags: [ai, workflow, template, design, document, spreadsheet, security, rag, seo, cro]

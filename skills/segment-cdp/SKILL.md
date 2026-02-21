@@ -1,9 +1,9 @@
 ---
 name: segment-cdp
-description: Expert patterns for Segment Customer Data Platform including Analytics.js, server-side tracking, tracking plans with Protocols, identity resolution, destinations configuration, and data governance bes
+description: Expert patterns for Segment Customer Data Platform including Analytics.js, server-side tracking, tracking plans with Protocols, identity resolution, destinations configuration, and data governance ...
 category: AI & Agents
 source: antigravity
-tags: [node, design]
+tags: [node, workflow, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/segment-cdp
 ---
 
@@ -52,3 +52,6 @@ Connect to Protocols for enforcement.
 | Issue | medium | See docs |
 | Issue | medium | See docs |
 | Issue | high | See docs |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

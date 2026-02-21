@@ -1,6 +1,6 @@
 ---
 name: cost-optimization
-description: Optimize cloud costs through resource rightsizing, tagging strategies, reserved instances, and spending analysis. Use when reducing cloud expenses, analyzing infrastructure costs, or implementing cost
+description: Optimize cloud costs through resource rightsizing, tagging strategies, reserved instances, and spending analysis. Use when reducing cloud expenses, analyzing infrastructure costs, or implementing c...
 category: Document Processing
 source: antigravity
 tags: [xlsx, ai, template, spreadsheet, aws, gcp, azure, rag, cro]

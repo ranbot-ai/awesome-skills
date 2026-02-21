@@ -2,7 +2,7 @@
   "id": "antigravity-voice-ai-development",
   "name": "voice-ai-development",
   "slug": "voice-ai-development",
-  "description": "Expert in building voice AI applications - from real-time voice agents to voice-enabled apps. Covers OpenAI Realtime API, Vapi for voice agents, Deepgram for transcription, ElevenLabs for synthesis, LiveKit for real-time infrastructure, and WebRTC fundamentals. Knows how to build low-latency, produc",
+  "description": "Expert in building voice AI applications - from real-time voice agents to voice-enabled apps. Covers OpenAI Realtime API, Vapi for voice agents, Deepgram for transcription, ElevenLabs for synthesis...",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -16,6 +16,7 @@
     "agent",
     "llm",
     "gpt",
+    "workflow",
     "design",
     "langgraph"
   ],

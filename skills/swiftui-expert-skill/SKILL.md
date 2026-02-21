@@ -1,6 +1,6 @@
 ---
 name: swiftui-expert-skill
-description: Write, review, or improve SwiftUI code following best practices for state management, view composition, performance, modern APIs, Swift concurrency, and iOS 26+ Liquid Glass adoption. Use when buildin
+description: Write, review, or improve SwiftUI code following best practices for state management, view composition, performance, modern APIs, Swift concurrency, and iOS 26+ Liquid Glass adoption. Use when buil...
 category: Creative & Media
 source: antigravity
 tags: [react, api, ai, agent, workflow, design, presentation, image, rag, cro]

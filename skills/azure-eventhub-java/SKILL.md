@@ -3,7 +3,7 @@ name: azure-eventhub-java
 description: Build real-time streaming applications with Azure Event Hubs SDK for Java. Use when implementing event streaming, high-throughput data ingestion, or building event-driven architectures. 
 category: AI & Agents
 source: antigravity
-tags: [ai, azure, rag]
+tags: [ai, workflow, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-eventhub-java
 ---
 

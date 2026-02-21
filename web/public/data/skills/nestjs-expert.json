@@ -2,7 +2,7 @@
   "id": "antigravity-nestjs-expert",
   "name": "nestjs-expert",
   "slug": "nestjs-expert",
-  "description": "Nest.js framework expert specializing in module architecture, dependency injection, middleware, guards, interceptors, testing with Jest/Supertest, TypeORM/Mongoose integration, and Passport.js authentication. Use PROACTIVELY for any Nest.js application issues including architecture decisions, testin",
+  "description": "Nest.js framework expert specializing in module architecture, dependency injection, middleware, guards, interceptors, testing with Jest/Supertest, TypeORM/Mongoose integration, and Passport.js auth...",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -16,9 +16,9 @@
     "api",
     "ai",
     "agent",
+    "workflow",
     "design",
-    "document",
-    "security"
+    "document"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-26T13:19:46.519Z"

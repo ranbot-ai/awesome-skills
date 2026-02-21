@@ -1,6 +1,6 @@
 ---
 name: nft-standards
-description: Implement NFT standards (ERC-721, ERC-1155) with proper metadata handling, minting strategies, and marketplace integration. Use when creating NFT contracts, building NFT marketplaces, or implementing 
+description: Implement NFT standards (ERC-721, ERC-1155) with proper metadata handling, minting strategies, and marketplace integration. Use when creating NFT contracts, building NFT marketplaces, or implementi...
 category: AI & Agents
 source: antigravity
 tags: [ai, template, image, rag]

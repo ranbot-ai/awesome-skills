@@ -1,9 +1,9 @@
 ---
 name: signup-flow-cro
-description: When the user wants to optimize signup, registration, account creation, or trial activation flows. Also use when the user mentions "signup conversions," "registration friction," "signup form optimizat
+description: When the user wants to optimize signup, registration, account creation, or trial activation flows. Also use when the user mentions "signup conversions," "registration friction," "signup... 
 category: Creative & Media
 source: antigravity
-tags: [ai, design, security, cro]
+tags: [ai, workflow, design, security, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/signup-flow-cro
 ---
 

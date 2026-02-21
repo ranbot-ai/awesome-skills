@@ -1,6 +1,6 @@
 ---
 name: inngest
-description: Inngest expert for serverless-first background jobs, event-driven workflows, and durable execution without managing queues or workers. Use when: inngest, serverless background job, event-driven workfl
+description: Inngest expert for serverless-first background jobs, event-driven workflows, and durable execution without managing queues or workers. Use when: inngest, serverless background job, event-driven wor...
 category: AI & Agents
 source: antigravity
 tags: [nextjs, ai, agent, workflow, supabase, stripe, cro]
@@ -57,3 +57,6 @@ Functions that run on a schedule
 ## Related Skills
 
 Works well with: `nextjs-app-router`, `vercel-deployment`, `supabase-backend`, `email-systems`, `ai-agents-architect`, `stripe-integration`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

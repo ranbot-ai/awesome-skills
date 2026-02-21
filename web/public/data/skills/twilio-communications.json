@@ -2,7 +2,7 @@
   "id": "antigravity-twilio-communications",
   "name": "twilio-communications",
   "slug": "twilio-communications",
-  "description": "Build communication features with Twilio: SMS messaging, voice calls, WhatsApp Business API, and user verification (2FA). Covers the full spectrum from simple notifications to complex IVR systems and multi-channel authentication. Critical focus on compliance, rate limits, and error handling. Use whe",
+  "description": "Build communication features with Twilio: SMS messaging, voice calls, WhatsApp Business API, and user verification (2FA). Covers the full spectrum from simple notifications to complex IVR systems a...",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -11,7 +11,8 @@
   "tags": [
     "python",
     "api",
-    "ai"
+    "ai",
+    "workflow"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-26T13:22:19.568Z"

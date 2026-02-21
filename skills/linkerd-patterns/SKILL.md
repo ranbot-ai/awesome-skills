@@ -1,6 +1,6 @@
 ---
 name: linkerd-patterns
-description: Implement Linkerd service mesh patterns for lightweight, security-focused service mesh deployments. Use when setting up Linkerd, configuring traffic policies, or implementing zero-trust networking wit
+description: Implement Linkerd service mesh patterns for lightweight, security-focused service mesh deployments. Use when setting up Linkerd, configuring traffic policies, or implementing zero-trust networking ...
 category: Document Processing
 source: antigravity
 tags: [api, ai, template, document, security, kubernetes, cro]

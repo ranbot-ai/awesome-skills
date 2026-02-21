@@ -3,7 +3,7 @@ name: multiplayer
 description: Multiplayer game development principles. Architecture, networking, synchronization. 
 category: Development & Code Tools
 source: antigravity
-tags: [ai, design, security]
+tags: [ai, workflow, design, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game-development/multiplayer
 ---
 
@@ -134,3 +134,6 @@ Server: Validate → did projectile actually hit?
 ---
 
 > **Remember:** Never trust the client. The server is the source of truth.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

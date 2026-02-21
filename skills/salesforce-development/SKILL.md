@@ -1,9 +1,9 @@
 ---
 name: salesforce-development
-description: Expert patterns for Salesforce platform development including Lightning Web Components (LWC), Apex triggers and classes, REST/Bulk APIs, Connected Apps, and Salesforce DX with scratch orgs and 2nd gen
+description: Expert patterns for Salesforce platform development including Lightning Web Components (LWC), Apex triggers and classes, REST/Bulk APIs, Connected Apps, and Salesforce DX with scratch orgs and 2nd ...
 category: Development & Code Tools
 source: antigravity
-tags: [react, api, ai]
+tags: [react, api, ai, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/salesforce-development
 ---
 
@@ -53,3 +53,6 @@ per transaction, 1 child job when chaining.
 | Issue | high | See docs |
 | Issue | high | See docs |
 | Issue | critical | See docs |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

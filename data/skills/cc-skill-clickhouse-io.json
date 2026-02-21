@@ -1,6 +1,6 @@
 {
   "id": "antigravity-cc-skill-clickhouse-io",
-  "name": "clickhouse-io",
+  "name": "cc-skill-clickhouse-io",
   "slug": "cc-skill-clickhouse-io",
   "description": "ClickHouse database patterns, query optimization, analytics, and data engineering best practices for high-performance analytical workloads.",
   "category": "Business & Marketing",
@@ -11,6 +11,7 @@
   "tags": [
     "typescript",
     "ai",
+    "workflow",
     "design",
     "rag"
   ],

@@ -1,9 +1,9 @@
 ---
 name: azure-data-tables-java
-description: Build table storage applications with Azure Tables SDK for Java. Use when working with Azure Table Storage or Cosmos DB Table API for NoSQL key-value data, schemaless storage, or structured data at sc
+description: Build table storage applications with Azure Tables SDK for Java. Use when working with Azure Table Storage or Cosmos DB Table API for NoSQL key-value data, schemaless storage, or structured data at...
 category: AI & Agents
 source: antigravity
-tags: [api, ai, design, azure, rag]
+tags: [api, ai, workflow, design, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-data-tables-java
 ---
 

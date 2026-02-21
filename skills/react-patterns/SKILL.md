@@ -3,7 +3,7 @@ name: react-patterns
 description: Modern React patterns and principles. Hooks, composition, performance, TypeScript best practices. 
 category: Development & Code Tools
 source: antigravity
-tags: [typescript, react, node, ai, design, presentation, rag, seo, cro]
+tags: [typescript, react, node, ai, workflow, design, presentation, rag, seo, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/react-patterns
 ---
 
@@ -200,3 +200,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/reac
 ---
 
 > **Remember:** React is about composition. Build small, combine thoughtfully.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

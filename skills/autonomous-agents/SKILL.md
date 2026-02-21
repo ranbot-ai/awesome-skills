@@ -1,9 +1,9 @@
 ---
 name: autonomous-agents
-description: Autonomous agents are AI systems that can independently decompose goals, plan actions, execute tools, and self-correct without constant human guidance. The challenge isn't making them capable - it's m
+description: Autonomous agents are AI systems that can independently decompose goals, plan actions, execute tools, and self-correct without constant human guidance. The challenge isn't making them capable - it'...
 category: AI & Agents
 source: antigravity
-tags: [react, api, ai, agent]
+tags: [react, api, ai, agent, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/autonomous-agents
 ---
 
@@ -70,3 +70,6 @@ Self-evaluation and iterative improvement
 ## Related Skills
 
 Works well with: `agent-tool-builder`, `agent-memory-systems`, `multi-agent-orchestration`, `agent-evaluation`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

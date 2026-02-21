@@ -1,6 +1,6 @@
 ---
 name: prometheus-configuration
-description: Set up Prometheus for comprehensive metric collection, storage, and monitoring of infrastructure and applications. Use when implementing metrics collection, setting up monitoring infrastructure, or co
+description: Set up Prometheus for comprehensive metric collection, storage, and monitoring of infrastructure and applications. Use when implementing metrics collection, setting up monitoring infrastructure, or...
 category: Document Processing
 source: antigravity
 tags: [node, api, ai, template, design, document, image, docker, kubernetes, rag]

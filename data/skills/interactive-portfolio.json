@@ -2,7 +2,7 @@
   "id": "antigravity-interactive-portfolio",
   "name": "interactive-portfolio",
   "slug": "interactive-portfolio",
-  "description": "Expert in building portfolios that actually land jobs and clients - not just showing work, but creating memorable experiences. Covers developer portfolios, designer portfolios, creative portfolios, and portfolios that convert visitors into opportunities. Use when: portfolio, personal website, showca",
+  "description": "Expert in building portfolios that actually land jobs and clients - not just showing work, but creating memorable experiences. Covers developer portfolios, designer portfolios, creative portfolios,...",
   "category": "Creative & Media",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -11,6 +11,7 @@
   "tags": [
     "javascript",
     "ai",
+    "workflow",
     "template",
     "design",
     "presentation",

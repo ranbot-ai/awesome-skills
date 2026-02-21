@@ -1,6 +1,6 @@
 ---
-name: Security Scanning Tools
-description: This skill should be used when the user asks to "perform vulnerability scanning", "scan networks for open ports", "assess web application security", "scan wireless networks", "detect malware", "check 
+name: scanning-tools
+description: This skill should be used when the user asks to "perform vulnerability scanning", "scan networks for open ports", "assess web application security", "scan wireless networks", "detec... 
 category: Security & Systems
 source: antigravity
 tags: [pdf, api, ai, automation, workflow, template, document, security, vulnerability, docker]

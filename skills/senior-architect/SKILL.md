@@ -1,6 +1,6 @@
 ---
 name: senior-architect
-description: Comprehensive software architecture skill for designing scalable, maintainable systems using ReactJS, NextJS, NodeJS, Express, React Native, Swift, Kotlin, Flutter, Postgres, GraphQL, Go, Python. Incl
+description: Comprehensive software architecture skill for designing scalable, maintainable systems using ReactJS, NextJS, NodeJS, Express, React Native, Swift, Kotlin, Flutter, Postgres, GraphQL, Go, Python. I...
 category: Document Processing
 source: antigravity
 tags: [python, javascript, typescript, react, node, nextjs, api, ai, automation, workflow]
@@ -212,3 +212,6 @@ Check the comprehensive troubleshooting section in `references/tech_decision_gui
 - Workflow Guide: `references/system_design_workflows.md`
 - Technical Guide: `references/tech_decision_guide.md`
 - Tool Scripts: `scripts/` directory
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

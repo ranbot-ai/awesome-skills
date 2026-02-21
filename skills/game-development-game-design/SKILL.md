@@ -3,7 +3,7 @@ name: game-design
 description: Game design principles. GDD structure, balancing, player psychology, progression. 
 category: Document Processing
 source: antigravity
-tags: [ai, design, document]
+tags: [ai, workflow, design, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game-development/game-design
 ---
 
@@ -131,3 +131,6 @@ Just Right → Flow → Engagement
 ---
 
 > **Remember:** Fun is discovered through iteration, not designed on paper.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

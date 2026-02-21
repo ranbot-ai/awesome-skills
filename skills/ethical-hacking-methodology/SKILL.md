@@ -1,6 +1,6 @@
 ---
-name: Ethical Hacking Methodology
-description: This skill should be used when the user asks to "learn ethical hacking", "understand penetration testing lifecycle", "perform reconnaissance", "conduct security scanning", "exploit vulnerabilities", o
+name: ethical-hacking-methodology
+description: This skill should be used when the user asks to "learn ethical hacking", "understand penetration testing lifecycle", "perform reconnaissance", "conduct security scanning", "exploit ... 
 category: Security & Systems
 source: antigravity
 tags: [pdf, api, ai, workflow, template, document, security, hacking, vulnerability, rag]

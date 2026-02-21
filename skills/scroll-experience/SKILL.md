@@ -1,9 +1,9 @@
 ---
 name: scroll-experience
-description: Expert in building immersive scroll-driven experiences - parallax storytelling, scroll animations, interactive narratives, and cinematic web experiences. Like NY Times interactives, Apple product page
+description: Expert in building immersive scroll-driven experiences - parallax storytelling, scroll animations, interactive narratives, and cinematic web experiences. Like NY Times interactives, Apple product p...
 category: Document Processing
 source: antigravity
-tags: [python, javascript, react, ai, design, document, image, cro]
+tags: [python, javascript, react, ai, workflow, design, document, image, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/scroll-experience
 ---
 

@@ -2,7 +2,7 @@
   "id": "antigravity-azure-ai-projects-ts",
   "name": "azure-ai-projects-ts",
   "slug": "azure-ai-projects-ts",
-  "description": "Build AI applications using Azure AI Projects SDK for JavaScript (@azure/ai-projects). Use when working with Foundry project clients, agents, connections, deployments, datasets, indexes, evaluations, or getting OpenAI clients.",
+  "description": "Build AI applications using Azure AI Projects SDK for JavaScript (@azure/ai-projects). Use when working with Foundry project clients, agents, connections, deployments, datasets, indexes, evaluation...",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -16,6 +16,7 @@
     "ai",
     "agent",
     "gpt",
+    "workflow",
     "document",
     "azure"
   ],

@@ -1,6 +1,6 @@
 ---
 name: senior-fullstack
-description: Comprehensive fullstack development skill for building complete web applications with React, Next.js, Node.js, GraphQL, and PostgreSQL. Includes project scaffolding, code quality analysis, architectur
+description: Comprehensive fullstack development skill for building complete web applications with React, Next.js, Node.js, GraphQL, and PostgreSQL. Includes project scaffolding, code quality analysis, architec...
 category: Development & Code Tools
 source: antigravity
 tags: [python, javascript, typescript, react, node, api, ai, automation, workflow, template]
@@ -212,3 +212,6 @@ Check the comprehensive troubleshooting section in `references/development_workf
 - Workflow Guide: `references/architecture_patterns.md`
 - Technical Guide: `references/development_workflows.md`
 - Tool Scripts: `scripts/` directory
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

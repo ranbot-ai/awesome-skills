@@ -1,6 +1,6 @@
 ---
 name: rag-implementation
-description: Build Retrieval-Augmented Generation (RAG) systems for LLM applications with vector databases and semantic search. Use when implementing knowledge-grounded AI, building document Q&A systems, or integr
+description: Build Retrieval-Augmented Generation (RAG) systems for LLM applications with vector databases and semantic search. Use when implementing knowledge-grounded AI, building document Q&A systems, or int...
 category: Document Processing
 source: antigravity
 tags: [python, markdown, api, ai, llm, template, document, gcp, langchain, rag]

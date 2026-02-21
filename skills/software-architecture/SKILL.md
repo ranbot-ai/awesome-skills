@@ -3,7 +3,7 @@ name: software-architecture
 description: Guide for quality focused software architecture. This skill should be used when users want to write code, design architecture, analyze code, in any case that relates to software development. 
 category: Development & Code Tools
 source: antigravity
-tags: [api, ai, design, document, security, supabase]
+tags: [api, ai, workflow, design, document, security, supabase]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/software-architecture
 ---
 
@@ -78,3 +78,6 @@ This skill provides guidance for quality focused software development and archit
 - Avoid deep nesting (max 3 levels)
 - Keep functions focused and under 50 lines when possible
 - Keep files focused and under 200 lines of code when possible
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

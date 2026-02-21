@@ -1,9 +1,9 @@
 ---
 name: paywall-upgrade-cro
-description: When the user wants to create or optimize in-app paywalls, upgrade screens, upsell modals, or feature gates. Also use when the user mentions "paywall," "upgrade screen," "upgrade modal," "upsell," "fe
+description: When the user wants to create or optimize in-app paywalls, upgrade screens, upsell modals, or feature gates. Also use when the user mentions "paywall," "upgrade screen," "upgrade modal,... 
 category: Creative & Media
 source: antigravity
-tags: [ai, design, presentation, image, security, rag, cro]
+tags: [ai, workflow, design, presentation, image, security, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/paywall-upgrade-cro
 ---
 

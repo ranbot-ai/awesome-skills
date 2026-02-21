@@ -1,6 +1,6 @@
 ---
 name: stripe-integration
-description: Implement Stripe payment processing for robust, PCI-compliant payment flows including checkout, subscriptions, and webhooks. Use when integrating Stripe payments, building subscription systems, or imp
+description: Implement Stripe payment processing for robust, PCI-compliant payment flows including checkout, subscriptions, and webhooks. Use when integrating Stripe payments, building subscription systems, or ...
 category: Development & Code Tools
 source: antigravity
 tags: [python, javascript, api, ai, template, document, image, security, stripe]

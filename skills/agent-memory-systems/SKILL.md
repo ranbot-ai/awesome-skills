@@ -1,9 +1,9 @@
 ---
 name: agent-memory-systems
-description: Memory is the cornerstone of intelligent agents. Without it, every interaction starts from zero. This skill covers the architecture of agent memory: short-term (context window), long-term (vector stor
+description: Memory is the cornerstone of intelligent agents. Without it, every interaction starts from zero. This skill covers the architecture of agent memory: short-term (context window), long-term (vector s...
 category: AI & Agents
 source: antigravity
-tags: [ai, agent, llm, document, rag]
+tags: [ai, agent, llm, workflow, document, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-memory-systems
 ---
 
@@ -69,3 +69,6 @@ Breaking documents into retrievable chunks
 ## Related Skills
 
 Works well with: `autonomous-agents`, `multi-agent-orchestration`, `llm-architect`, `agent-tool-builder`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

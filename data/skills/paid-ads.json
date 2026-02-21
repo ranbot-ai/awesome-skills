@@ -2,7 +2,7 @@
   "id": "antigravity-paid-ads",
   "name": "paid-ads",
   "slug": "paid-ads",
-  "description": "When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X, or other ad platforms. Also use when the user mentions 'PPC,' 'paid media,' 'ad copy,' 'ad creative,' 'ROAS,' 'CPA,' 'ad campaign,' 'retargeting,' or 'audience targeting.' This ski",
+  "description": "When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X, or other ad platforms. Also use when the user mentions 'PPC,' 'paid media,' '...",
   "category": "Business & Marketing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -12,13 +12,13 @@
     "api",
     "ai",
     "automation",
+    "workflow",
     "template",
     "document",
     "spreadsheet",
     "image",
     "rag",
-    "cro",
-    "marketing"
+    "cro"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-26T13:20:04.544Z"

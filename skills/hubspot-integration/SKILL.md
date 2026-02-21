@@ -1,9 +1,9 @@
 ---
 name: hubspot-integration
-description: Expert patterns for HubSpot CRM integration including OAuth authentication, CRM objects, associations, batch operations, webhooks, and custom objects. Covers Node.js and Python SDKs. Use when: hubspot
+description: Expert patterns for HubSpot CRM integration including OAuth authentication, CRM objects, associations, batch operations, webhooks, and custom objects. Covers Node.js and Python SDKs. Use when: hubs...
 category: AI & Agents
 source: antigravity
-tags: [python, node, api]
+tags: [python, node, api, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hubspot-integration
 ---
 
@@ -44,3 +44,6 @@ Create, read, update, delete CRM records
 | Issue | medium | See docs |
 | Issue | high | See docs |
 | Issue | medium | See docs |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

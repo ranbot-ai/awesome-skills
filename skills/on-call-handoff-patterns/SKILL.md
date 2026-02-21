@@ -1,6 +1,6 @@
 ---
 name: on-call-handoff-patterns
-description: Master on-call shift handoffs with context transfer, escalation procedures, and documentation. Use when transitioning on-call responsibilities, documenting shift summaries, or improving on-call proces
+description: Master on-call shift handoffs with context transfer, escalation procedures, and documentation. Use when transitioning on-call responsibilities, documenting shift summaries, or improving on-call pro...
 category: Document Processing
 source: antigravity
 tags: [node, markdown, api, ai, template, document, security, kubernetes, cro, marketing]

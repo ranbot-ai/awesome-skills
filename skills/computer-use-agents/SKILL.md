@@ -1,9 +1,9 @@
 ---
 name: computer-use-agents
-description: Build AI agents that interact with computers like humans do - viewing screens, moving cursors, clicking buttons, and typing text. Covers Anthropic's Computer Use, OpenAI's Operator/CUA, and open-sourc
+description: Build AI agents that interact with computers like humans do - viewing screens, moving cursors, clicking buttons, and typing text. Covers Anthropic's Computer Use, OpenAI's Operator/CUA, and open-so...
 category: AI & Agents
 source: antigravity
-tags: [python, api, claude, ai, agent, automation, image, security, docker, rag]
+tags: [python, api, claude, ai, agent, automation, workflow, image, security, docker]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/computer-use-agents
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: docker-expert
-description: Docker containerization expert with deep knowledge of multi-stage builds, image optimization, container security, Docker Compose orchestration, and production deployment patterns. Use PROACTIVELY for 
+description: Docker containerization expert with deep knowledge of multi-stage builds, image optimization, container security, Docker Compose orchestration, and production deployment patterns. Use PROACTIVELY f...
 category: Document Processing
 source: antigravity
 tags: [node, nextjs, api, ai, agent, automation, workflow, image, security, docker]

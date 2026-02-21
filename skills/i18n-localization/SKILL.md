@@ -3,7 +3,7 @@ name: i18n-localization
 description: Internationalization and localization patterns. Detecting hardcoded strings, managing translations, locale files, RTL support. 
 category: AI & Agents
 source: antigravity
-tags: [python, react, api, ai]
+tags: [python, react, api, ai, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/i18n-localization
 ---
 
@@ -156,3 +156,6 @@ Before shipping:
 | Script | Purpose | Command |
 |--------|---------|---------|
 | `scripts/i18n_checker.py` | Detect hardcoded strings & missing translations | `python scripts/i18n_checker.py <project_path>` |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -3,7 +3,7 @@ name: nodejs-best-practices
 description: Node.js development principles and decision-making. Framework selection, async patterns, security, and architecture. Teaches thinking, not copying. 
 category: AI & Agents
 source: antigravity
-tags: [typescript, react, node, api, ai, image, security, rag]
+tags: [typescript, react, node, api, ai, design, image, security, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/nodejs-best-practices
 ---
 
@@ -12,6 +12,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/node
 
 > Principles and decision-making for Node.js development in 2025.
 > **Learn to THINK, not memorize code patterns.**
+
+## When to Use
+
+Use this skill when making Node.js architecture decisions, choosing frameworks, designing async patterns, or applying security and deployment best practices.
 
 ---
 
@@ -228,9 +232,4 @@ Where to validate:
 
 ### Validation Library Selection
 
-| Library | Best For |
-|---------|----------|
-| **Zod** | TypeScript first, inference |
-| **Valibot** | Smaller bundle (tree-shakeable) |
-| **ArkType** | Performance critical |
-| **Yup** | Exist
+| Library | Best Fo

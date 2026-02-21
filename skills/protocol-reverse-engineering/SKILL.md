@@ -1,6 +1,6 @@
 ---
 name: protocol-reverse-engineering
-description: Master network protocol reverse engineering including packet analysis, protocol dissection, and custom protocol documentation. Use when analyzing network traffic, understanding proprietary protocols, 
+description: Master network protocol reverse engineering including packet analysis, protocol dissection, and custom protocol documentation. Use when analyzing network traffic, understanding proprietary protocol...
 category: Document Processing
 source: antigravity
 tags: [ai, workflow, document, security]

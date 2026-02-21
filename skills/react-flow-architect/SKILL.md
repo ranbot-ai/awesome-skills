@@ -1,9 +1,9 @@
 ---
 name: react-flow-architect
-description: Expert ReactFlow architect for building interactive graph applications with hierarchical node-edge systems, performance optimization, and auto-layout integration. Use when Claude needs to create or op
-category: Creative & Media
+description: Expert ReactFlow architect for building interactive graph applications with hierarchical node-edge systems, performance optimization, and auto-layout integration. Use when Claude needs to create or...
+category: AI & Agents
 source: antigravity
-tags: [javascript, typescript, react, node, api, claude, ai, rag]
+tags: [javascript, typescript, react, node, api, claude, ai, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/react-flow-architect
 ---
 

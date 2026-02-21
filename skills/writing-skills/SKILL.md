@@ -104,7 +104,7 @@ Before deploying any skill:
 
 ## 🔗 Related Skills
 
-- **[opencode-expert](skill://opencode-expert)**: For OpenCode environment configuration
+- **opencode-expert**: For OpenCode environment configuration
 - Use `/write-skill` command for guided skill creation
 
 ## Examples

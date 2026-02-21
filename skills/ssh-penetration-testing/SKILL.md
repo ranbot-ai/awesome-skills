@@ -1,6 +1,6 @@
 ---
-name: SSH Penetration Testing
-description: This skill should be used when the user asks to "pentest SSH services", "enumerate SSH configurations", "brute force SSH credentials", "exploit SSH vulnerabilities", "perform SSH tunneling", or "audit
+name: ssh-penetration-testing
+description: This skill should be used when the user asks to "pentest SSH services", "enumerate SSH configurations", "brute force SSH credentials", "exploit SSH vulnerabilities", "perform SSH tu... 
 category: Security & Systems
 source: antigravity
 tags: [python, ai, agent, llm, automation, workflow, document, security, pentest, vulnerability]

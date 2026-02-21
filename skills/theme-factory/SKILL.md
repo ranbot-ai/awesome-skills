@@ -1,10 +1,10 @@
 ---
 name: theme-factory
-description: Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact t
+description: Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifac...
 category: Creative & Media
-source: anthropic
-tags: [pdf, ai, presentation]
-url: https://github.com/anthropics/skills/tree/main/skills/theme-factory
+source: antigravity
+tags: [pdf, ai, workflow, presentation, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/theme-factory
 ---
 
 
@@ -61,3 +61,6 @@ After a preferred theme is selected:
 
 ## Create your Own Theme
 To handle cases where none of the existing themes work for an artifact, create a custom theme. Based on provided inputs, generate a new theme similar to the ones above. Give the theme a similar name describing what the font/color combinations represent. Use any basic description provided to choose appropriate colors/fonts. After generating the theme, show it for review and verification. Following that, apply the theme as described above.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

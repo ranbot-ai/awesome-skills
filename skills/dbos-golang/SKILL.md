@@ -1,6 +1,6 @@
 ---
 name: dbos-golang
-description: DBOS Go SDK for building reliable, fault-tolerant applications with durable workflows. Use this skill when writing Go code with DBOS, creating workflows and steps, using queues, using the DBOS Client 
+description: DBOS Go SDK for building reliable, fault-tolerant applications with durable workflows. Use this skill when writing Go code with DBOS, creating workflows and steps, using queues, using the DBOS Clie...
 category: AI & Agents
 source: antigravity
 tags: [api, ai, workflow]

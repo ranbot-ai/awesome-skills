@@ -1,8 +1,8 @@
 {
   "id": "antigravity-linux-shell-scripting",
-  "name": "Linux Production Shell Scripts",
+  "name": "linux-shell-scripting",
   "slug": "linux-shell-scripting",
-  "description": "This skill should be used when the user asks to \"create bash scripts\", \"automate Linux tasks\", \"monitor system resources\", \"backup files\", \"manage users\", or \"write production shell scripts\". It provides ready-to-use shell script templates for system administration.",
+  "description": "This skill should be used when the user asks to \"create bash scripts\", \"automate Linux tasks\", \"monitor system resources\", \"backup files\", \"manage users\", or \"write production she...",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

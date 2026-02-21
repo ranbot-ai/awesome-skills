@@ -3,7 +3,7 @@ name: pc-games
 description: PC and console game development principles. Engine selection, platform features, optimization strategies. 
 category: Creative & Media
 source: antigravity
-tags: [api, design, cro]
+tags: [api, workflow, design, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game-development/pc-games
 ---
 
@@ -146,3 +146,6 @@ Map ACTIONS, not buttons:
 ---
 
 > **Remember:** Engine is a tool. Master the principles, then adapt to any engine.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

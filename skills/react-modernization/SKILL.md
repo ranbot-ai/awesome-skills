@@ -1,6 +1,6 @@
 ---
 name: react-modernization
-description: Upgrade React applications to latest versions, migrate from class components to hooks, and adopt concurrent features. Use when modernizing React codebases, migrating to React Hooks, or upgrading to la
+description: Upgrade React applications to latest versions, migrate from class components to hooks, and adopt concurrent features. Use when modernizing React codebases, migrating to React Hooks, or upgrading to...
 category: AI & Agents
 source: antigravity
 tags: [typescript, react, ai]

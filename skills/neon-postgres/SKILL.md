@@ -1,9 +1,9 @@
 ---
 name: neon-postgres
-description: Expert patterns for Neon serverless Postgres, branching, connection pooling, and Prisma/Drizzle integration Use when: neon database, serverless postgres, database branching, neon postgres, postgres se
+description: Expert patterns for Neon serverless Postgres, branching, connection pooling, and Prisma/Drizzle integration Use when: neon database, serverless postgres, database branching, neon postgres, postgres...
 category: AI & Agents
 source: antigravity
-tags: [prisma]
+tags: [workflow, prisma]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/neon-postgres
 ---
 
@@ -58,3 +58,6 @@ Use pooled endpoint for application, direct for migrations.
 | Issue | low | See docs |
 | Issue | medium | See docs |
 | Issue | high | See docs |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

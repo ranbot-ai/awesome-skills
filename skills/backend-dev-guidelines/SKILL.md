@@ -1,9 +1,9 @@
 ---
 name: backend-dev-guidelines
-description: Opinionated backend development standards for Node.js + Express + TypeScript microservices. Covers layered architecture, BaseController pattern, dependency injection, Prisma repositories, Zod validati
+description: Opinionated backend development standards for Node.js + Express + TypeScript microservices. Covers layered architecture, BaseController pattern, dependency injection, Prisma repositories, Zod valid...
 category: Development & Code Tools
 source: antigravity
-tags: [typescript, node, api, ai, design, prisma, cro]
+tags: [typescript, node, api, ai, workflow, design, prisma, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/backend-dev-guidelines
 ---
 

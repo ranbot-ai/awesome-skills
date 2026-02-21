@@ -1,9 +1,9 @@
 ---
 name: clean-code
-description: Applies principles from Robert C. Martin's 'Clean Code'. Use this skill when writing, reviewing, or refactoring code to ensure high quality, readability, and maintainability. Covers naming, functions,
+description: Applies principles from Robert C. Martin's 'Clean Code'. Use this skill when writing, reviewing, or refactoring code to ensure high quality, readability, and maintainability. Covers naming, functio...
 category: Development & Code Tools
 source: antigravity
-tags: [python, ai, design, aws, rag]
+tags: [python, ai, aws, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/clean-code
 ---
 

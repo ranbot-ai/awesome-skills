@@ -7,9 +7,10 @@
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cc-skill-strategic-compact",
-  "content": "\n# cc-skill-strategic-compact\n\nDevelopment skill skill.\n",
+  "content": "\n# cc-skill-strategic-compact\n\nDevelopment skill skill.\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n",
   "tags": [
-    "claude"
+    "claude",
+    "workflow"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-26T13:17:28.108Z"

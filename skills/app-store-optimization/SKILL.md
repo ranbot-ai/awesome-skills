@@ -3,7 +3,7 @@ name: app-store-optimization
 description: Complete App Store Optimization (ASO) toolkit for researching, optimizing, and tracking mobile app performance on Apple App Store and Google Play Store 
 category: Creative & Media
 source: antigravity
-tags: [claude, ai, template, design, firebase, rag, seo, cro, marketing]
+tags: [claude, ai, workflow, template, design, firebase, rag, seo, cro, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/app-store-optimization
 ---
 

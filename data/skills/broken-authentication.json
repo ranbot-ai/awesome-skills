@@ -1,8 +1,8 @@
 {
   "id": "antigravity-broken-authentication",
-  "name": "Broken Authentication Testing",
+  "name": "broken-authentication",
   "slug": "broken-authentication",
-  "description": "This skill should be used when the user asks to \"test for broken authentication vulnerabilities\", \"assess session management security\", \"perform credential stuffing tests\", \"evaluate password policies\", \"test for session fixation\", or \"identify authentication bypass flaws\". It provides comprehensive",
+  "description": "This skill should be used when the user asks to \"test for broken authentication vulnerabilities\", \"assess session management security\", \"perform credential stuffing tests\", \"evaluate ...",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -18,7 +18,7 @@
     "document",
     "security",
     "vulnerability",
-    "aws"
+    "cro"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-26T13:17:06.932Z"

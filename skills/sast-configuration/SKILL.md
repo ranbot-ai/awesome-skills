@@ -1,6 +1,6 @@
 ---
 name: sast-configuration
-description: Configure Static Application Security Testing (SAST) tools for automated vulnerability detection in application code. Use when setting up security scanning, implementing DevSecOps practices, or automa
+description: Configure Static Application Security Testing (SAST) tools for automated vulnerability detection in application code. Use when setting up security scanning, implementing DevSecOps practices, or aut...
 category: Security & Systems
 source: antigravity
 tags: [python, javascript, api, ai, workflow, template, document, security, vulnerability, docker]
@@ -90,15 +90,15 @@ codeql database create mydb --language=python
 
 ## Reference Documentation
 
-- [Semgrep Rule Creation](references/semgrep-rules.md) - Pattern-based security rule development
-- [SonarQube Configuration](references/sonarqube-config.md) - Quality gates and profiles
-- [CodeQL Setup Guide](references/codeql-setup.md) - Query development and workflows
+- Semgrep Rule Creation - Pattern-based security rule development
+- SonarQube Configuration - Quality gates and profiles
+- CodeQL Setup Guide - Query development and workflows
 
 ## Templates & Assets
 
-- [semgrep-config.yml](assets/semgrep-config.yml) - Production-ready Semgrep configuration
-- [sonarqube-settings.xml](assets/sonarqube-settings.xml) - SonarQube quality profile template
-- [run-sast.sh](scripts/run-sast.sh) - Automated SAST execution script
+- semgrep-config.yml - Production-ready Semgrep configuration
+- sonarqube-settings.xml - SonarQube quality profile template
+- run-sast.sh - Automated SAST execution script
 
 ## Integration Patterns
 
@@ -179,4 +179,10 @@ semgrep --config p/pci-dss --json -o pci-scan-results.json
 - Review and tune rule sensitivity
 - Add path filters to exclude test files
 - Use nostmt metadata for noisy patterns
-- Create or
+- Create organization-specific rule exceptions
+
+### Performance Issues
+- Enable incremental scanning
+- Parallelize scans across modules
+- Optimize rule patterns for efficiency
+- Cache depende

@@ -1,9 +1,9 @@
 ---
 name: voice-ai-development
-description: Expert in building voice AI applications - from real-time voice agents to voice-enabled apps. Covers OpenAI Realtime API, Vapi for voice agents, Deepgram for transcription, ElevenLabs for synthesis, L
+description: Expert in building voice AI applications - from real-time voice agents to voice-enabled apps. Covers OpenAI Realtime API, Vapi for voice agents, Deepgram for transcription, ElevenLabs for synthesis...
 category: Development & Code Tools
 source: antigravity
-tags: [python, node, api, ai, agent, llm, gpt, design, langgraph]
+tags: [python, node, api, ai, agent, llm, gpt, workflow, design, langgraph]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/voice-ai-development
 ---
 

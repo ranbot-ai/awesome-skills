@@ -1,9 +1,9 @@
 ---
 name: azure-cosmos-db-py
-description: Build Azure Cosmos DB NoSQL services with Python/FastAPI following production-grade patterns. Use when implementing database client setup with dual auth (DefaultAzureCredential + emulator), service la
+description: Build Azure Cosmos DB NoSQL services with Python/FastAPI following production-grade patterns. Use when implementing database client setup with dual auth (DefaultAzureCredential + emulator), service...
 category: Document Processing
 source: antigravity
-tags: [python, api, ai, template, document, security, azure, rag, cro]
+tags: [python, api, ai, workflow, template, document, security, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-cosmos-db-py
 ---
 
@@ -112,7 +112,7 @@ async def get_container():
     return _cosmos_container
 ```
 
-**Full implementation**: See [references/client-setup.md](references/client-setup.md)
+**Full implementation**: See references/client-setup.md
 
 ### 2. Pydantic Model Hierarchy
 
@@ -152,7 +152,7 @@ class ProjectService:
         return self._doc_to_model(doc)
 ```
 
-**Full patterns**: See [references/service-layer.md](references/service-layer.md)
+**Full patterns**: See references/service-layer.md
 
 ## Core Principles
 
@@ -161,4 +161,8 @@ class ProjectService:
 1. **RBAC Authentication**: Use `DefaultAzureCredential` in Azure — never store keys in code
 2. **Emulator-Only Keys**: Hardcode the well-known emulator key only for local development
 3. **Parameterized Queries**: Always use `@parameter` syntax — never string concatenation
-4. **Partition Key Validation**: Validate partition key access matches user authorizatio
+4. **Partition Key Validation**: Validate partition key access matches user authorization
+
+### Clean Code Conventions
+
+1. **Single Responsibility**: 

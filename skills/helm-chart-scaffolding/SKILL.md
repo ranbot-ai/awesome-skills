@@ -1,9 +1,9 @@
 ---
 name: helm-chart-scaffolding
-description: Design, organize, and manage Helm charts for templating and packaging Kubernetes applications with reusable configurations. Use when creating Helm charts, packaging Kubernetes applications, or impleme
+description: Design, organize, and manage Helm charts for templating and packaging Kubernetes applications with reusable configurations. Use when creating Helm charts, packaging Kubernetes applications, or impl...
 category: Creative & Media
 source: antigravity
-tags: [ai, template, design, kubernetes]
+tags: [ai, design, kubernetes]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/helm-chart-scaffolding
 ---
 

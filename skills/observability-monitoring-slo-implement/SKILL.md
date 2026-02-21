@@ -1,6 +1,6 @@
 ---
 name: observability-monitoring-slo-implement
-description: You are an SLO (Service Level Objective) expert specializing in implementing reliability standards and error budget-based practices. Design SLO frameworks, define SLIs, and build monitoring that balan
+description: You are an SLO (Service Level Objective) expert specializing in implementing reliability standards and error budget-based practices. Design SLO frameworks, define SLIs, and build monitoring that ba...
 category: AI & Agents
 source: antigravity
 tags: [ai, workflow, design, cro]

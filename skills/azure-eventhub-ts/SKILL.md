@@ -1,6 +1,6 @@
 ---
 name: azure-eventhub-ts
-description: Build event streaming applications using Azure Event Hubs SDK for JavaScript (@azure/event-hubs). Use when implementing high-throughput event ingestion, real-time analytics, IoT telemetry, or event-dr
+description: Build event streaming applications using Azure Event Hubs SDK for JavaScript (@azure/event-hubs). Use when implementing high-throughput event ingestion, real-time analytics, IoT telemetry, or event...
 category: AI & Agents
 source: antigravity
 tags: [javascript, typescript, ai, workflow, azure, rag]

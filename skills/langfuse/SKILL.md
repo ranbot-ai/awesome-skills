@@ -1,9 +1,9 @@
 ---
 name: langfuse
-description: Expert in Langfuse - the open-source LLM observability platform. Covers tracing, prompt management, evaluation, datasets, and integration with LangChain, LlamaIndex, and OpenAI. Essential for debuggin
+description: Expert in Langfuse - the open-source LLM observability platform. Covers tracing, prompt management, evaluation, datasets, and integration with LangChain, LlamaIndex, and OpenAI. Essential for debug...
 category: AI & Agents
 source: antigravity
-tags: [python, javascript, typescript, api, ai, agent, llm, gpt, template, langgraph]
+tags: [python, javascript, typescript, api, ai, agent, llm, gpt, workflow, template]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/langfuse
 ---
 

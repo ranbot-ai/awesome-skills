@@ -1,9 +1,9 @@
 ---
 name: receiving-code-review
-description: Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performative
+description: Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performat...
 category: Development & Code Tools
 source: antigravity
-tags: [react, api, claude, ai, security]
+tags: [react, api, claude, ai, workflow, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/receiving-code-review
 ---
 

@@ -3,7 +3,7 @@ name: mobile-games
 description: Mobile game development principles. Touch input, battery, performance, app stores. 
 category: Creative & Media
 source: antigravity
-tags: [api, ai, design]
+tags: [api, ai, workflow, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game-development/mobile-games
 ---
 
@@ -110,3 +110,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game
 ---
 
 > **Remember:** Mobile is the most constrained platform. Respect battery and attention.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

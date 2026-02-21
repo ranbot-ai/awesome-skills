@@ -1,9 +1,9 @@
 ---
 name: azure-identity-java
-description: Azure Identity Java SDK for authentication with Azure services. Use when implementing DefaultAzureCredential, managed identity, service principal, or any Azure authentication pattern in Java applicati
+description: Azure Identity Java SDK for authentication with Azure services. Use when implementing DefaultAzureCredential, managed identity, service principal, or any Azure authentication pattern in Java applic...
 category: Development & Code Tools
 source: antigravity
-tags: [ai, kubernetes, azure, rag, cro]
+tags: [ai, workflow, kubernetes, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-identity-java
 ---
 

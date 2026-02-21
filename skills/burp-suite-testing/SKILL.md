@@ -1,6 +1,6 @@
 ---
-name: Burp Suite Web Application Testing
-description: This skill should be used when the user asks to "intercept HTTP traffic", "modify web requests", "use Burp Suite for testing", "perform web vulnerability scanning", "test with Burp Repeater", "analyze
+name: burp-suite-testing
+description: This skill should be used when the user asks to "intercept HTTP traffic", "modify web requests", "use Burp Suite for testing", "perform web vulnerability scanning", "test with Burp ... 
 category: Security & Systems
 source: antigravity
 tags: [javascript, ai, workflow, document, security, vulnerability, aws]

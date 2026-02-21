@@ -3,7 +3,7 @@ name: behavioral-modes
 description: AI operational modes (brainstorm, implement, debug, review, teach, ship, orchestrate). Use to adapt behavior based on task type. 
 category: AI & Agents
 source: antigravity
-tags: [typescript, ai, agent, document, security]
+tags: [typescript, ai, agent, workflow, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/behavioral-modes
 ---
 

@@ -1,6 +1,6 @@
 ---
-name: Top 100 Web Vulnerabilities Reference
-description: This skill should be used when the user asks to "identify web application vulnerabilities", "explain common security flaws", "understand vulnerability categories", "learn about injection attacks", "re
+name: top-web-vulnerabilities
+description: This skill should be used when the user asks to "identify web application vulnerabilities", "explain common security flaws", "understand vulnerability categories", "learn about inject... 
 category: Security & Systems
 source: antigravity
 tags: [javascript, api, ai, workflow, template, design, document, security, vulnerability, aws]

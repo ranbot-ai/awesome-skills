@@ -1,6 +1,6 @@
 ---
 name: codebase-cleanup-refactor-clean
-description: You are a code refactoring expert specializing in clean code principles, SOLID design patterns, and modern software engineering best practices. Analyze and refactor the provided code to improve its qu
+description: You are a code refactoring expert specializing in clean code principles, SOLID design patterns, and modern software engineering best practices. Analyze and refactor the provided code to improve its...
 category: Document Processing
 source: antigravity
 tags: [ai, design, document]

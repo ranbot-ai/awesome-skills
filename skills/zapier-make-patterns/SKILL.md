@@ -1,6 +1,6 @@
 ---
 name: zapier-make-patterns
-description: No-code automation democratizes workflow building. Zapier and Make (formerly Integromat) let non-developers automate business processes without writing code. But no-code doesn't mean no-complexity - t
+description: No-code automation democratizes workflow building. Zapier and Make (formerly Integromat) let non-developers automate business processes without writing code. But no-code doesn't mean no-complexity ...
 category: Development & Code Tools
 source: antigravity
 tags: [api, ai, agent, automation, workflow, design]
@@ -69,3 +69,6 @@ Different actions based on conditions
 ## Related Skills
 
 Works well with: `workflow-automation`, `agent-tool-builder`, `backend`, `api-designer`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

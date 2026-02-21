@@ -1,8 +1,8 @@
 {
   "id": "antigravity-claude-d3js-skill",
-  "name": "d3-viz",
+  "name": "claude-d3js-skill",
   "slug": "claude-d3js-skill",
-  "description": "Creating interactive data visualisations using d3.js. This skill should be used when creating custom charts, graphs, network diagrams, geographic visualisations, or any complex SVG-based data visualisation that requires fine-grained control over visual elements, transitions, or interactions. Use thi",
+  "description": "Creating interactive data visualisations using d3.js. This skill should be used when creating custom charts, graphs, network diagrams, geographic visualisations, or any complex SVG-based data visua...",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -12,13 +12,13 @@
     "javascript",
     "react",
     "node",
+    "claude",
     "ai",
     "workflow",
     "template",
     "document",
     "rag",
-    "seo",
-    "cro"
+    "seo"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-26T13:17:30.622Z"

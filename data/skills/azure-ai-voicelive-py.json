@@ -2,7 +2,7 @@
   "id": "antigravity-azure-ai-voicelive-py",
   "name": "azure-ai-voicelive-py",
   "slug": "azure-ai-voicelive-py",
-  "description": "Build real-time voice AI applications using Azure AI Voice Live SDK (azure-ai-voicelive). Use this skill when creating Python applications that need real-time bidirectional audio communication with Azure AI, including voice assistants, voice-enabled chatbots, real-time speech-to-speech translation, ",
+  "description": "Build real-time voice AI applications using Azure AI Voice Live SDK (azure-ai-voicelive). Use this skill when creating Python applications that need real-time bidirectional audio communication with...",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -11,9 +11,9 @@
   "tags": [
     "python",
     "api",
-    "mcp",
     "ai",
     "gpt",
+    "workflow",
     "azure",
     "cro"
   ],

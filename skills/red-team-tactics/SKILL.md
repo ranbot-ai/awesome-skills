@@ -3,7 +3,7 @@ name: red-team-tactics
 description: Red team tactics principles based on MITRE ATT&CK. Attack phases, detection evasion, reporting. 
 category: Security & Systems
 source: antigravity
-tags: [ai, document, security, cro]
+tags: [ai, workflow, document, security, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/red-team-tactics
 ---
 
@@ -201,3 +201,6 @@ For each successful technique:
 ---
 
 > **Remember:** Red team simulates attackers to improve defenses, not to cause harm.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

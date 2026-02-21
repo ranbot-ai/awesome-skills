@@ -3,7 +3,7 @@ name: nextjs-best-practices
 description: Next.js App Router principles. Server Components, data fetching, routing patterns. 
 category: Business & Marketing
 source: antigravity
-tags: [nextjs, api, image, marketing]
+tags: [nextjs, api, workflow, image, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/nextjs-best-practices
 ---
 
@@ -205,3 +205,6 @@ app/
 ---
 
 > **Remember:** Server Components are the default for a reason. Start there, add client only when needed.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

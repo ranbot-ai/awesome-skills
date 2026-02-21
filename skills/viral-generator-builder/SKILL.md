@@ -1,9 +1,9 @@
 ---
 name: viral-generator-builder
-description: Expert in building shareable generator tools that go viral - name generators, quiz makers, avatar creators, personality tests, and calculator tools. Covers the psychology of sharing, viral mechanics, 
+description: Expert in building shareable generator tools that go viral - name generators, quiz makers, avatar creators, personality tests, and calculator tools. Covers the psychology of sharing, viral mechanic...
 category: Creative & Media
 source: antigravity
-tags: [javascript, ai, llm, design, presentation, image, seo, cro]
+tags: [javascript, ai, llm, workflow, design, presentation, image, seo, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/viral-generator-builder
 ---
 
@@ -201,3 +201,6 @@ Your branding subtle but present.
 ## Related Skills
 
 Works well with: `viral-hooks`, `landing-page-design`, `seo`, `frontend`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

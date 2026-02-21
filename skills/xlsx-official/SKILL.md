@@ -1,6 +1,6 @@
 ---
-name: xlsx
-description: Comprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization. When Claude needs to work with spreadsheets (.xlsx, .xlsm, .csv, .tsv
+name: xlsx-official
+description: Comprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization. When Claude needs to work with spreadsheets (.xlsx, .xlsm, .csv, ....
 category: Document Processing
 source: antigravity
 tags: [python, xlsx, claude, ai, workflow, template, document, spreadsheet, rag, cro]

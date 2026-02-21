@@ -3,7 +3,7 @@ name: azure-ai-vision-imageanalysis-java
 description: Build image analysis applications with Azure AI Vision SDK for Java. Use when implementing image captioning, OCR text extraction, object detection, tagging, or smart cropping. 
 category: Document Processing
 source: antigravity
-tags: [api, ai, document, image, azure, cro]
+tags: [api, ai, workflow, document, image, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-vision-imageanalysis-java
 ---
 

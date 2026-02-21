@@ -1,9 +1,9 @@
 ---
-name: frontend-patterns
+name: cc-skill-frontend-patterns
 description: Frontend development patterns for React, Next.js, state management, performance optimization, and UI best practices. 
 category: Document Processing
 source: antigravity
-tags: [typescript, react, node, api, ai, document, cro]
+tags: [typescript, react, node, api, ai, workflow, document, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cc-skill-frontend-patterns
 ---
 

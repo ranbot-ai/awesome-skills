@@ -1,8 +1,8 @@
 {
   "id": "antigravity-linux-privilege-escalation",
-  "name": "Linux Privilege Escalation",
+  "name": "linux-privilege-escalation",
   "slug": "linux-privilege-escalation",
-  "description": "This skill should be used when the user asks to \"escalate privileges on Linux\", \"find privesc vectors on Linux systems\", \"exploit sudo misconfigurations\", \"abuse SUID binaries\", \"exploit cron jobs for root access\", \"enumerate Linux systems for privilege escalation\", or \"gain root access from low-pri",
+  "description": "This skill should be used when the user asks to \"escalate privileges on Linux\", \"find privesc vectors on Linux systems\", \"exploit sudo misconfigurations\", \"abuse SUID binaries\", \"ex...",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

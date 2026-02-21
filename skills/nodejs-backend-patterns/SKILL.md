@@ -1,6 +1,6 @@
 ---
 name: nodejs-backend-patterns
-description: Build production-ready Node.js backend services with Express/Fastify, implementing middleware patterns, error handling, authentication, database integration, and API design best practices. Use when cr
+description: Build production-ready Node.js backend services with Express/Fastify, implementing middleware patterns, error handling, authentication, database integration, and API design best practices. Use when...
 category: AI & Agents
 source: antigravity
 tags: [node, api, ai, design, cro]

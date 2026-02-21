@@ -1,9 +1,9 @@
 ---
 name: wiki-architect
-description: Analyzes code repositories and generates hierarchical documentation structures with onboarding guides. Use when the user wants to create a wiki, generate documentation, map a codebase structure, or un
+description: Analyzes code repositories and generates hierarchical documentation structures with onboarding guides. Use when the user wants to create a wiki, generate documentation, map a codebase structure, or...
 category: Document Processing
 source: antigravity
-tags: [python, javascript, typescript, node, ai, design, document, presentation, cro]
+tags: [python, javascript, typescript, node, ai, workflow, design, document, presentation, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/wiki-architect
 ---
 
@@ -63,3 +63,6 @@ Detect primary language from file extensions and build files, then select a comp
 ## Output
 
 JSON code block following the catalogue schema with `items[].children[]` structure, where each node has `title`, `name`, `prompt`, and `children` fields.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

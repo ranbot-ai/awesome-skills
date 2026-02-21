@@ -1,6 +1,6 @@
 ---
-name: pptx
-description: Presentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts
+name: pptx-official
+description: Presentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layo...
 category: Document Processing
 source: antigravity
 tags: [python, javascript, react, pdf, pptx, markdown, api, claude, ai, workflow]

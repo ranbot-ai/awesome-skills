@@ -3,7 +3,7 @@ name: angular-best-practices
 description: Angular performance optimization and best practices guide. Use when writing, reviewing, or refactoring Angular code for optimal performance, bundle size, and rendering efficiency. 
 category: AI & Agents
 source: antigravity
-tags: [typescript, api, ai, template, cro]
+tags: [typescript, api, ai, workflow, template, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/angular-best-practices
 ---
 

@@ -1,6 +1,6 @@
 ---
-name: Active Directory Attacks
-description: This skill should be used when the user asks to "attack Active Directory", "exploit AD", "Kerberoasting", "DCSync", "pass-the-hash", "BloodHound enumeration", "Golden Ticket", "Silver Ticket", "AS-REP
+name: active-directory-attacks
+description: This skill should be used when the user asks to "attack Active Directory", "exploit AD", "Kerberoasting", "DCSync", "pass-the-hash", "BloodHound enumeration", "Golden Ticket", ... 
 category: Security & Systems
 source: antigravity
 tags: [python, ai, llm, workflow, template, document, vulnerability, cro]

@@ -1,9 +1,9 @@
 ---
 name: zustand-store-ts
-description: Create Zustand stores with TypeScript, subscribeWithSelector middleware, and proper state/action separation. Use when building React state management, creating global stores, or implementing reactive 
+description: Create Zustand stores with TypeScript, subscribeWithSelector middleware, and proper state/action separation. Use when building React state management, creating global stores, or implementing reacti...
 category: AI & Agents
 source: antigravity
-tags: [typescript, react, template]
+tags: [typescript, react, workflow, template]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/zustand-store-ts
 ---
 
@@ -14,7 +14,7 @@ Create Zustand stores following established patterns with proper TypeScript type
 
 ## Quick Start
 
-Copy the template from [assets/template.ts](assets/template.ts) and replace placeholders:
+Copy the template from assets/template.ts and replace placeholders:
 - `{{StoreName}}` → PascalCase store name (e.g., `Project`)
 - `{{description}}` → Brief description for JSDoc
 
@@ -71,3 +71,6 @@ useMyStore.subscribe(
 1. Create store in `src/frontend/src/store/`
 2. Export from `src/frontend/src/store/index.ts`
 3. Add tests in `src/frontend/src/store/*.test.ts`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

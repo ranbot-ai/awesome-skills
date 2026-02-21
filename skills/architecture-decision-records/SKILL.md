@@ -1,6 +1,6 @@
 ---
 name: architecture-decision-records
-description: Write and maintain Architecture Decision Records (ADRs) following best practices for technical decision documentation. Use when documenting significant technical decisions, reviewing past architectura
+description: Write and maintain Architecture Decision Records (ADRs) following best practices for technical decision documentation. Use when documenting significant technical decisions, reviewing past architect...
 category: Document Processing
 source: antigravity
 tags: [typescript, react, markdown, api, ai, automation, template, design, document, security]

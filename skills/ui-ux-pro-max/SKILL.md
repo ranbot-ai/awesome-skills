@@ -1,9 +1,9 @@
 ---
 name: ui-ux-pro-max
-description: UI/UX design intelligence. 50 styles, 21 palettes, 50 font pairings, 20 charts, 9 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Actions: plan, build, creat
+description: UI/UX design intelligence. 50 styles, 21 palettes, 50 font pairings, 20 charts, 9 stacks (React, Next.js, Vue, Svelte, SwiftUI, React Native, Flutter, Tailwind, shadcn/ui). Actions: plan, build, cr...
 category: Creative & Media
 source: antigravity
-tags: [python, react, nextjs, markdown, api, mcp, claude, ai, workflow, design]
+tags: [python, react, nextjs, markdown, api, claude, ai, workflow, design, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ui-ux-pro-max
 ---
 
@@ -162,4 +162,9 @@ After getting the design system, use domain searches to get additional details:
 python3 .claude/skills/ui-ux-pro-max/scripts/search.py "<keyword>" --domain <domain> [-n <max_results>]
 ```
 
-**When to use detailed searche
+**When to use detailed searches:**
+
+| Need | Domain | Example |
+|------|--------|---------|
+| More style options | `style` | `--domain style "glassmorphism dark"` |
+| Chart recommendati

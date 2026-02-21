@@ -1,9 +1,9 @@
 ---
-name: Privilege Escalation Methods
-description: This skill should be used when the user asks to "escalate privileges", "get root access", "become administrator", "privesc techniques", "abuse sudo", "exploit SUID binaries", "Kerberoasting", "pass-th
+name: privilege-escalation-methods
+description: This skill should be used when the user asks to "escalate privileges", "get root access", "become administrator", "privesc techniques", "abuse sudo", "exploit SUID binaries", "K... 
 category: Security & Systems
 source: antigravity
-tags: [python, ai, llm, document, cro]
+tags: [python, ai, llm, workflow, document, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/privilege-escalation-methods
 ---
 

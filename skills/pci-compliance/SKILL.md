@@ -1,6 +1,6 @@
 ---
 name: pci-compliance
-description: Implement PCI DSS compliance requirements for secure handling of payment card data and payment systems. Use when securing payment processing, achieving PCI compliance, or implementing payment card sec
+description: Implement PCI DSS compliance requirements for secure handling of payment card data and payment systems. Use when securing payment processing, achieving PCI compliance, or implementing payment card ...
 category: Security & Systems
 source: antigravity
 tags: [python, javascript, api, ai, document, security, vulnerability, stripe, rag, cro]

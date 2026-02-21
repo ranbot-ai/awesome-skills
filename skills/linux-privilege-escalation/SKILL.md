@@ -1,6 +1,6 @@
 ---
-name: Linux Privilege Escalation
-description: This skill should be used when the user asks to "escalate privileges on Linux", "find privesc vectors on Linux systems", "exploit sudo misconfigurations", "abuse SUID binaries", "exploit cron jobs for
+name: linux-privilege-escalation
+description: This skill should be used when the user asks to "escalate privileges on Linux", "find privesc vectors on Linux systems", "exploit sudo misconfigurations", "abuse SUID binaries", "ex... 
 category: Security & Systems
 source: antigravity
 tags: [python, ai, workflow, document, security, vulnerability, cro]

@@ -1,9 +1,9 @@
 ---
 name: lint-and-validate
-description: Automatic quality control, linting, and static analysis procedures. Use after every code modification to ensure syntax correctness and project standards. Triggers onKeywords: lint, format, check, vali
+description: Automatic quality control, linting, and static analysis procedures. Use after every code modification to ensure syntax correctness and project standards. Triggers onKeywords: lint, format, check, v...
 category: AI & Agents
 source: antigravity
-tags: [python, typescript, node, ai, security, rag]
+tags: [python, typescript, node, ai, workflow, security, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/lint-and-validate
 ---
 
@@ -46,3 +46,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/lint
 |--------|---------|---------|
 | `scripts/lint_runner.py` | Unified lint check | `python scripts/lint_runner.py <project_path>` |
 | `scripts/type_coverage.py` | Type coverage analysis | `python scripts/type_coverage.py <project_path>` |
+
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -1,9 +1,9 @@
 ---
-name: supabase-postgres-best-practices
+name: postgres-best-practices
 description: Postgres performance optimization and best practices from Supabase. Use this skill when writing, reviewing, or optimizing Postgres queries, schema designs, or database configurations. 
 category: Document Processing
 source: antigravity
-tags: [ai, agent, design, document, security, supabase, cro]
+tags: [ai, agent, workflow, design, document, security, supabase, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/postgres-best-practices
 ---
 
@@ -56,3 +56,6 @@ Each rule file contains:
 ## Full Compiled Document
 
 For the complete guide with all rules expanded: `AGENTS.md`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

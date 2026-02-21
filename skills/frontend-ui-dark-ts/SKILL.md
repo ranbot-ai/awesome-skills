@@ -1,9 +1,9 @@
 ---
 name: frontend-ui-dark-ts
-description: Build dark-themed React applications using Tailwind CSS with custom theming, glassmorphism effects, and Framer Motion animations. Use when creating dashboards, admin panels, or data-rich interfaces wi
+description: Build dark-themed React applications using Tailwind CSS with custom theming, glassmorphism effects, and Framer Motion animations. Use when creating dashboards, admin panels, or data-rich interfaces...
 category: Document Processing
 source: antigravity
-tags: [typescript, react, node, ai, template, design, document, image, tailwind, seo]
+tags: [typescript, react, node, ai, workflow, template, design, document, image, tailwind]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/frontend-ui-dark-ts
 ---
 

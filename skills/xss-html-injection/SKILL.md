@@ -1,6 +1,6 @@
 ---
-name: Cross-Site Scripting and HTML Injection Testing
-description: This skill should be used when the user asks to "test for XSS vulnerabilities", "perform cross-site scripting attacks", "identify HTML injection flaws", "exploit client-side injection vulnerabilities"
+name: xss-html-injection
+description: This skill should be used when the user asks to "test for XSS vulnerabilities", "perform cross-site scripting attacks", "identify HTML injection flaws", "exploit client-side injection... 
 category: Security & Systems
 source: antigravity
 tags: [javascript, api, ai, agent, workflow, template, document, image, security, vulnerability]

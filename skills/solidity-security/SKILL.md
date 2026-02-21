@@ -1,6 +1,6 @@
 ---
 name: solidity-security
-description: Master smart contract security best practices to prevent common vulnerabilities and implement secure Solidity patterns. Use when writing smart contracts, auditing existing contracts, or implementing s
+description: Master smart contract security best practices to prevent common vulnerabilities and implement secure Solidity patterns. Use when writing smart contracts, auditing existing contracts, or implementin...
 category: Security & Systems
 source: antigravity
 tags: [ai, security, vulnerability]

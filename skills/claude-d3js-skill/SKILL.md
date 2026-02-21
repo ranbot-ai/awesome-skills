@@ -1,9 +1,9 @@
 ---
-name: d3-viz
-description: Creating interactive data visualisations using d3.js. This skill should be used when creating custom charts, graphs, network diagrams, geographic visualisations, or any complex SVG-based data visualis
+name: claude-d3js-skill
+description: Creating interactive data visualisations using d3.js. This skill should be used when creating custom charts, graphs, network diagrams, geographic visualisations, or any complex SVG-based data visua...
 category: Document Processing
 source: antigravity
-tags: [javascript, react, node, ai, workflow, template, document, rag, seo, cro]
+tags: [javascript, react, node, claude, ai, workflow, template, document, rag, seo]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/claude-d3js-skill
 ---
 

@@ -187,3 +187,6 @@ assets/
 ---
 
 > **Remember:** Art serves gameplay. If it doesn't help the player, it's decoration.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -1,6 +1,6 @@
 ---
 name: prompt-engineering-patterns
-description: Master advanced prompt engineering techniques to maximize LLM performance, reliability, and controllability in production. Use when optimizing prompts, improving LLM outputs, or designing production p
+description: Master advanced prompt engineering techniques to maximize LLM performance, reliability, and controllability in production. Use when optimizing prompts, improving LLM outputs, or designing productio...
 category: Document Processing
 source: antigravity
 tags: [python, api, ai, llm, workflow, template, design, document, rag, cro]

@@ -1,6 +1,6 @@
 ---
 name: slack-automation
-description: Automate Slack messaging, channel management, search, reactions, and threads via Rube MCP (Composio). Send messages, search conversations, manage channels/users, and react to messages programmatically
+description: Automate Slack messaging, channel management, search, reactions, and threads via Rube MCP (Composio). Send messages, search conversations, manage channels/users, and react to messages programmatica...
 category: AI & Agents
 source: antigravity
 tags: [react, markdown, api, mcp, ai, automation, workflow, rag, cro]

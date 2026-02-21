@@ -1,9 +1,9 @@
 ---
 name: plaid-fintech
-description: Expert patterns for Plaid API integration including Link token flows, transactions sync, identity verification, Auth for ACH, balance checks, webhook handling, and fintech compliance best practices. U
+description: Expert patterns for Plaid API integration including Link token flows, transactions sync, identity verification, Auth for ACH, balance checks, webhook handling, and fintech compliance best practices...
 category: AI & Agents
 source: antigravity
-tags: [api, ai]
+tags: [api, ai, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/plaid-fintech
 ---
 
@@ -52,3 +52,6 @@ Listen for PENDING_DISCONNECT webhook to proactively prompt users.
 | Issue | medium | See docs |
 | Issue | medium | See docs |
 | Issue | medium | See docs |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

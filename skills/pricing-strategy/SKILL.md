@@ -3,7 +3,7 @@ name: pricing-strategy
 description: Design pricing, packaging, and monetization strategies based on value, customer willingness to pay, and growth objectives. 
 category: Business & Marketing
 source: antigravity
-tags: [api, ai, design, document, security, cro, marketing, copywriting]
+tags: [api, ai, workflow, design, document, security, cro, marketing, copywriting]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pricing-strategy
 ---
 

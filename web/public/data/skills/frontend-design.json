@@ -2,7 +2,7 @@
   "id": "antigravity-frontend-design",
   "name": "frontend-design",
   "slug": "frontend-design",
-  "description": "Create distinctive, production-grade frontend interfaces with intentional aesthetics, high craft, and non-generic visual identity. Use when building or styling web UIs, components, pages, dashboards, or frontend applications.",
+  "description": "Create distinctive, production-grade frontend interfaces with intentional aesthetics, high craft, and non-generic visual identity. Use when building or styling web UIs, components, pages, dashboard...",
   "category": "Creative & Media",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -11,6 +11,7 @@
   "tags": [
     "react",
     "ai",
+    "workflow",
     "template",
     "design",
     "tailwind",

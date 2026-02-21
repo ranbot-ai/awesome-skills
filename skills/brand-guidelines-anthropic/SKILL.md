@@ -1,9 +1,9 @@
 ---
-name: brand-guidelines
-description: Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting
+name: brand-guidelines-anthropic
+description: Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatt...
 category: Creative & Media
 source: antigravity
-tags: [python, pptx, ai, design, cro]
+tags: [python, pptx, ai, workflow, design, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/brand-guidelines-anthropic
 ---
 
@@ -75,3 +75,6 @@ To access Anthropic's official brand identity and style resources, use this skil
 - Uses RGB color values for precise brand matching
 - Applied via python-pptx's RGBColor class
 - Maintains color fidelity across different systems
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

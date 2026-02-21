@@ -1,9 +1,9 @@
 ---
-name: pdf
-description: Comprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms. When Claude needs to fill in a PDF form or programmatically p
+name: pdf-official
+description: Comprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms. When Claude needs to fill in a PDF form or programmaticall...
 category: Document Processing
 source: antigravity
-tags: [python, javascript, pdf, xlsx, claude, ai, template, document, image, aws]
+tags: [python, javascript, pdf, xlsx, claude, ai, workflow, template, document, image]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pdf-official
 ---
 

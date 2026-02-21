@@ -3,7 +3,7 @@ name: azure-security-keyvault-secrets-java
 description: Azure Key Vault Secrets Java SDK for secret management. Use when storing, retrieving, or managing passwords, API keys, connection strings, or other sensitive configuration data. 
 category: Security & Systems
 source: antigravity
-tags: [api, ai, security, stripe, azure]
+tags: [api, ai, workflow, security, stripe, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-security-keyvault-secrets-java
 ---
 

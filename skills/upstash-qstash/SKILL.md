@@ -1,9 +1,9 @@
 ---
 name: upstash-qstash
-description: Upstash QStash expert for serverless message queues, scheduled jobs, and reliable HTTP-based task delivery without managing infrastructure. Use when: qstash, upstash queue, serverless cron, scheduled 
+description: Upstash QStash expert for serverless message queues, scheduled jobs, and reliable HTTP-based task delivery without managing infrastructure. Use when: qstash, upstash queue, serverless cron, schedul...
 category: AI & Agents
 source: antigravity
-tags: [nextjs, ai, design, supabase, cro]
+tags: [nextjs, ai, workflow, design, supabase, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/upstash-qstash
 ---
 
@@ -70,3 +70,6 @@ Verifying QStash message signatures in your endpoint
 ## Related Skills
 
 Works well with: `vercel-deployment`, `nextjs-app-router`, `redis-specialist`, `email-systems`, `supabase-backend`, `cloudflare-workers`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -3,7 +3,7 @@ name: 2d-games
 description: 2D game development principles. Sprites, tilemaps, physics, camera. 
 category: Development & Code Tools
 source: antigravity
-tags: [ai, design]
+tags: [ai, workflow, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game-development/2d-games
 ---
 
@@ -121,3 +121,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game
 ---
 
 > **Remember:** 2D is about clarity. Every pixel should communicate.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

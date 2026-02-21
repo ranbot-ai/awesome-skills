@@ -1,6 +1,6 @@
 ---
 name: copilot-sdk
-description: Build applications powered by GitHub Copilot using the Copilot SDK. Use when creating programmatic integrations with Copilot across Node.js/TypeScript, Python, Go, or .NET. Covers session management, 
+description: Build applications powered by GitHub Copilot using the Copilot SDK. Use when creating programmatic integrations with Copilot across Node.js/TypeScript, Python, Go, or .NET. Covers session managemen...
 category: Document Processing
 source: antigravity
 tags: [python, typescript, node, api, mcp, claude, ai, agent, gpt, workflow]

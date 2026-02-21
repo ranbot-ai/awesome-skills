@@ -1,6 +1,6 @@
 {
   "id": "antigravity-cc-skill-frontend-patterns",
-  "name": "frontend-patterns",
+  "name": "cc-skill-frontend-patterns",
   "slug": "cc-skill-frontend-patterns",
   "description": "Frontend development patterns for React, Next.js, state management, performance optimization, and UI best practices.",
   "category": "Document Processing",
@@ -14,6 +14,7 @@
     "node",
     "api",
     "ai",
+    "workflow",
     "document",
     "cro"
   ],

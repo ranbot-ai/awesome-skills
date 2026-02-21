@@ -264,7 +264,7 @@ After spec approval, generate `conductor/tracks/{trackId}/plan.md`:
 # Implementation Plan: {Track Title}
 
 **Track ID:** {trackId}
-**Spec:** [spec.md](./spec.md)
+**Spec:** spec.md
 **Created:** {YYYY-MM-DD}
 **Status:** [ ] Not Started
 
@@ -276,4 +276,6 @@ After spec approval, generate `conductor/tracks/{trackId}/plan.md`:
 
 {Phase description}
 
-### Ta
+### Tasks
+
+- [ ] Ta

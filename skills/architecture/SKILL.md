@@ -3,7 +3,7 @@ name: architecture
 description: Architectural decision-making framework. Requirements analysis, trade-off evaluation, ADR documentation. Use when making architecture decisions or analyzing system design. 
 category: Document Processing
 source: antigravity
-tags: [api, ai, template, design, document]
+tags: [api, ai, workflow, template, design, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/architecture
 ---
 
@@ -57,3 +57,6 @@ Before finalizing architecture:
 - [ ] Simpler alternatives considered
 - [ ] ADRs written for significant decisions
 - [ ] Team expertise matches chosen patterns
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

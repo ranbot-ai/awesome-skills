@@ -1,6 +1,6 @@
 ---
 name: skill-developer
-description: Create and manage Claude Code skills following Anthropic best practices. Use when creating new skills, modifying skill-rules.json, understanding trigger patterns, working with hooks, debugging skill a
+description: Create and manage Claude Code skills following Anthropic best practices. Use when creating new skills, modifying skill-rules.json, understanding trigger patterns, working with hooks, debugging skil...
 category: AI & Agents
 source: antigravity
 tags: [typescript, react, node, pdf, markdown, claude, ai, workflow, template, document]

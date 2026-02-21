@@ -3,7 +3,7 @@ name: server-management
 description: Server management principles and decision-making. Process management, monitoring strategy, and scaling decisions. Teaches thinking, not commands. 
 category: AI & Agents
 source: antigravity
-tags: [node, api, ai, security, docker, kubernetes]
+tags: [node, api, ai, workflow, security, docker, kubernetes]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/server-management
 ---
 
@@ -163,3 +163,6 @@ When something's wrong:
 ---
 
 > **Remember:** A well-managed server is boring. That's the goal.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

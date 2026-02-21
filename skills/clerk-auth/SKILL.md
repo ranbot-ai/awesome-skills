@@ -3,7 +3,7 @@ name: clerk-auth
 description: Expert patterns for Clerk auth implementation, middleware, organizations, webhooks, and user sync Use when: adding authentication, clerk auth, user authentication, sign in, sign up. 
 category: Development & Code Tools
 source: antigravity
-tags: [ai]
+tags: [ai, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/clerk-auth
 ---
 
@@ -58,3 +58,6 @@ Key functions:
 | Issue | medium | See docs |
 | Issue | medium | See docs |
 | Issue | medium | See docs |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

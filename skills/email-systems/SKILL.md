@@ -1,9 +1,9 @@
 ---
 name: email-systems
-description: Email has the highest ROI of any marketing channel. $36 for every $1 spent. Yet most startups treat it as an afterthought - bulk blasts, no personalization, landing in spam folders.  This skill covers
+description: Email has the highest ROI of any marketing channel. $36 for every $1 spent. Yet most startups treat it as an afterthought - bulk blasts, no personalization, landing in spam folders.  This skill cov...
 category: Business & Marketing
 source: antigravity
-tags: [ai, automation, template, image, cro, marketing]
+tags: [ai, workflow, template, image, cro, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/email-systems
 ---
 
@@ -56,3 +56,6 @@ Version email templates for rollback and A/B testing
 | Sending high volume from new IP immediately | high | # IP warm-up schedule: |
 | Emailing people who did not opt in | critical | # Permission requirements: |
 | Emails that are mostly or entirely images | medium | # Balance images and text: |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

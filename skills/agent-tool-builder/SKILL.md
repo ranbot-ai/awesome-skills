@@ -1,9 +1,9 @@
 ---
 name: agent-tool-builder
-description: Tools are how AI agents interact with the world. A well-designed tool is the difference between an agent that works and one that hallucinates, fails silently, or costs 10x more tokens than necessary. 
+description: Tools are how AI agents interact with the world. A well-designed tool is the difference between an agent that works and one that hallucinates, fails silently, or costs 10x more tokens than necessar...
 category: AI & Agents
 source: antigravity
-tags: [api, mcp, ai, agent, llm, design, document]
+tags: [api, mcp, ai, agent, llm, workflow, design, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-tool-builder
 ---
 
@@ -55,3 +55,6 @@ Returning errors that help the LLM recover
 ## Related Skills
 
 Works well with: `multi-agent-orchestration`, `api-designer`, `llm-architect`, `backend`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

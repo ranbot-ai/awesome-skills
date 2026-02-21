@@ -1,9 +1,9 @@
 ---
 name: azure-functions
-description: Expert patterns for Azure Functions development including isolated worker model, Durable Functions orchestration, cold start optimization, and production patterns. Covers .NET, Python, and Node.js pro
+description: Expert patterns for Azure Functions development including isolated worker model, Durable Functions orchestration, cold start optimization, and production patterns. Covers .NET, Python, and Node.js ...
 category: Development & Code Tools
 source: antigravity
-tags: [python, javascript, typescript, node, ai, azure]
+tags: [python, javascript, typescript, node, ai, workflow, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-functions
 ---
 
@@ -44,3 +44,6 @@ Decorator-based approach for Python functions
 | Issue | medium | ## Configure Application Insights properly |
 | Issue | medium | ## Check extension bundle (most common) |
 | Issue | medium | ## Add warmup trigger to initialize your code |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

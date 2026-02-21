@@ -3,7 +3,7 @@ name: web-games
 description: Web browser game development principles. Framework selection, WebGPU, optimization, PWA. 
 category: Creative & Media
 source: antigravity
-tags: [api, ai]
+tags: [api, ai, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game-development/web-games
 ---
 
@@ -152,3 +152,6 @@ What type of game?
 ---
 
 > **Remember:** Browser is the most accessible platform. Respect its constraints.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

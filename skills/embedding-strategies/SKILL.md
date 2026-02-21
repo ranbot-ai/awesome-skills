@@ -1,6 +1,6 @@
 ---
 name: embedding-strategies
-description: Select and optimize embedding models for semantic search and RAG applications. Use when choosing embedding models, implementing chunking strategies, or optimizing embedding quality for specific domain
+description: Select and optimize embedding models for semantic search and RAG applications. Use when choosing embedding models, implementing chunking strategies, or optimizing embedding quality for specific dom...
 category: Document Processing
 source: antigravity
 tags: [python, markdown, api, ai, template, document, langchain, rag]

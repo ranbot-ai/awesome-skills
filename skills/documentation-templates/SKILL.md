@@ -3,7 +3,7 @@ name: documentation-templates
 description: Documentation templates and structure guidelines. README, API docs, code comments, and AI-friendly documentation. 
 category: Document Processing
 source: antigravity
-tags: [typescript, markdown, api, mcp, ai, agent, llm, template, document, rag]
+tags: [typescript, markdown, api, mcp, ai, agent, llm, workflow, template, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/documentation-templates
 ---
 
@@ -52,8 +52,8 @@ Brief one-line description.
 
 ## Documentation
 
-- [API Reference](./docs/api.md)
-- [Architecture](./docs/architecture.md)
+- API Reference
+- Architecture
 
 ## License
 
@@ -196,3 +196,6 @@ For RAG indexing:
 ---
 
 > **Remember:** Templates are starting points. Adapt to your project's needs.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -3,7 +3,7 @@ name: azure-keyvault-keys-ts
 description: Manage cryptographic keys using Azure Key Vault Keys SDK for JavaScript (@azure/keyvault-keys). Use when creating, encrypting/decrypting, signing, or rotating keys. 
 category: AI & Agents
 source: antigravity
-tags: [javascript, typescript, node, ai, azure, rag, cro]
+tags: [javascript, typescript, node, ai, workflow, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-keyvault-keys-ts
 ---
 

@@ -1,9 +1,9 @@
 ---
 name: hugging-face-jobs
-description: This skill should be used when users want to run any workload on Hugging Face Jobs infrastructure. Covers UV scripts, Docker-based jobs, hardware selection, cost estimation, authentication with tokens
+description: This skill should be used when users want to run any workload on Hugging Face Jobs infrastructure. Covers UV scripts, Docker-based jobs, hardware selection, cost estimation, authentication with tok...
 category: Document Processing
 source: antigravity
-tags: [python, pdf, api, mcp, ai, llm, workflow, template, design, document]
+tags: [python, pdf, api, mcp, ai, llm, workflow, template, document, image]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugging-face-jobs
 ---
 

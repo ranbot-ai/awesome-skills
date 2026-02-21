@@ -90,3 +90,6 @@ The skill itself tells you which.
 ## User Instructions
 
 Instructions say WHAT, not HOW. "Add X" or "Fix Y" doesn't mean skip workflows.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

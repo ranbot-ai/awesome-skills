@@ -1,9 +1,9 @@
 ---
 name: aws-serverless
-description: Specialized skill for building production-ready serverless applications on AWS. Covers Lambda functions, API Gateway, DynamoDB, SQS/SNS event-driven patterns, SAM/CDK deployment, and cold start optimi
+description: Specialized skill for building production-ready serverless applications on AWS. Covers Lambda functions, API Gateway, DynamoDB, SQS/SNS event-driven patterns, SAM/CDK deployment, and cold start opt...
 category: Document Processing
 source: antigravity
-tags: [python, javascript, node, api, ai, template, document, aws, cro]
+tags: [python, javascript, node, api, ai, workflow, template, document, aws, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-serverless
 ---
 

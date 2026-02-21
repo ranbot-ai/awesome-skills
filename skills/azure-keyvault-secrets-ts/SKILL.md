@@ -3,7 +3,7 @@ name: azure-keyvault-secrets-ts
 description: Manage secrets using Azure Key Vault Secrets SDK for JavaScript (@azure/keyvault-secrets). Use when storing and retrieving application secrets or configuration values. 
 category: AI & Agents
 source: antigravity
-tags: [javascript, typescript, node, ai, azure, rag, cro]
+tags: [javascript, typescript, node, ai, workflow, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-keyvault-secrets-ts
 ---
 

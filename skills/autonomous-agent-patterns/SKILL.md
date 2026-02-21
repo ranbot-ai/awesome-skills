@@ -1,6 +1,6 @@
 ---
 name: autonomous-agent-patterns
-description: Design patterns for building autonomous coding agents. Covers tool integration, permission systems, browser automation, and human-in-the-loop workflows. Use when building AI agents, designing tool API
+description: Design patterns for building autonomous coding agents. Covers tool integration, permission systems, browser automation, and human-in-the-loop workflows. Use when building AI agents, designing tool ...
 category: AI & Agents
 source: antigravity
 tags: [python, node, markdown, api, mcp, claude, ai, agent, llm, gpt]

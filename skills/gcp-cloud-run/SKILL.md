@@ -1,9 +1,9 @@
 ---
 name: gcp-cloud-run
-description: Specialized skill for building production-ready serverless applications on GCP. Covers Cloud Run services (containerized), Cloud Run Functions (event-driven), cold start optimization, and event-driven
+description: Specialized skill for building production-ready serverless applications on GCP. Covers Cloud Run services (containerized), Cloud Run Functions (event-driven), cold start optimization, and event-dri...
 category: AI & Agents
 source: antigravity
-tags: [javascript, node, api, ai, image, docker, gcp, rag, cro]
+tags: [javascript, node, api, ai, workflow, image, docker, gcp, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gcp-cloud-run
 ---
 

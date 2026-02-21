@@ -1,6 +1,6 @@
 ---
 name: dotnet-backend-patterns
-description: Master C#/.NET backend development patterns for building robust APIs, MCP servers, and enterprise applications. Covers async/await, dependency injection, Entity Framework Core, Dapper, configuration, 
+description: Master C#/.NET backend development patterns for building robust APIs, MCP servers, and enterprise applications. Covers async/await, dependency injection, Entity Framework Core, Dapper, configuratio...
 category: AI & Agents
 source: antigravity
 tags: [api, mcp, ai, design]

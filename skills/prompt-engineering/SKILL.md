@@ -3,7 +3,7 @@ name: prompt-engineering
 description: Expert guide on prompt engineering patterns, best practices, and optimization techniques. Use when user wants to improve prompts, learn prompting strategies, or debug agent behavior. 
 category: Document Processing
 source: antigravity
-tags: [python, markdown, api, ai, agent, llm, template, design, document, security]
+tags: [python, markdown, api, ai, agent, llm, workflow, template, design, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/prompt-engineering
 ---
 

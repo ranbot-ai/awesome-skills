@@ -3,7 +3,7 @@ name: nextjs-supabase-auth
 description: Expert integration of Supabase Auth with Next.js App Router Use when: supabase auth next, authentication next.js, login supabase, auth middleware, protected route. 
 category: AI & Agents
 source: antigravity
-tags: [nextjs, supabase]
+tags: [nextjs, workflow, supabase]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/nextjs-supabase-auth
 ---
 
@@ -58,3 +58,6 @@ Handle OAuth callback and exchange code for session
 ## Related Skills
 
 Works well with: `nextjs-app-router`, `supabase-backend`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

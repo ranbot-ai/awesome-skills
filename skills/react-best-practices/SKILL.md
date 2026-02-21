@@ -1,9 +1,9 @@
 ---
-name: vercel-react-best-practices
-description: React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance patter
+name: react-best-practices
+description: React and Next.js performance optimization guidelines from Vercel Engineering. This skill should be used when writing, reviewing, or refactoring React/Next.js code to ensure optimal performance pat...
 category: Document Processing
 source: antigravity
-tags: [javascript, react, api, ai, agent, document, rag, cro]
+tags: [javascript, react, api, ai, agent, workflow, document, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/react-best-practices
 ---
 
@@ -124,3 +124,6 @@ Each rule file contains:
 ## Full Compiled Document
 
 For the complete guide with all rules expanded: `AGENTS.md`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

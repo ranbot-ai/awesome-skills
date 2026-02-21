@@ -1,6 +1,6 @@
 ---
 name: angular-migration
-description: Migrate from AngularJS to Angular using hybrid mode, incremental component rewriting, and dependency injection updates. Use when upgrading AngularJS applications, planning framework migrations, or mod
+description: Migrate from AngularJS to Angular using hybrid mode, incremental component rewriting, and dependency injection updates. Use when upgrading AngularJS applications, planning framework migrations, or ...
 category: Document Processing
 source: antigravity
 tags: [javascript, typescript, react, api, ai, template, document]

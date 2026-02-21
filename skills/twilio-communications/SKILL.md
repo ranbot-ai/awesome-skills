@@ -1,9 +1,9 @@
 ---
 name: twilio-communications
-description: Build communication features with Twilio: SMS messaging, voice calls, WhatsApp Business API, and user verification (2FA). Covers the full spectrum from simple notifications to complex IVR systems and 
+description: Build communication features with Twilio: SMS messaging, voice calls, WhatsApp Business API, and user verification (2FA). Covers the full spectrum from simple notifications to complex IVR systems a...
 category: AI & Agents
 source: antigravity
-tags: [python, api, ai]
+tags: [python, api, ai, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/twilio-communications
 ---
 

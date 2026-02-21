@@ -1,6 +1,6 @@
 ---
-name: SQL Injection Testing
-description: This skill should be used when the user asks to "test for SQL injection vulnerabilities", "perform SQLi attacks", "bypass authentication using SQL injection", "extract database information through inj
+name: sql-injection-testing
+description: This skill should be used when the user asks to "test for SQL injection vulnerabilities", "perform SQLi attacks", "bypass authentication using SQL injection", "extract database inform... 
 category: Security & Systems
 source: antigravity
 tags: [ai, agent, workflow, document, security, vulnerability, aws, rag, cro]

@@ -1,6 +1,6 @@
 ---
 name: box-automation
-description: Automate Box cloud storage operations including file upload/download, search, folder management, sharing, collaborations, and metadata queries via Rube MCP (Composio). Always search tools first for cu
+description: Automate Box cloud storage operations including file upload/download, search, folder management, sharing, collaborations, and metadata queries via Rube MCP (Composio). Always search tools first for...
 category: Document Processing
 source: antigravity
 tags: [api, mcp, ai, automation, workflow, template, document, presentation, rag, cro]

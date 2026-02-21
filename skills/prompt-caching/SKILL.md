@@ -1,9 +1,9 @@
 ---
 name: prompt-caching
-description: Caching strategies for LLM prompts including Anthropic prompt caching, response caching, and CAG (Cache Augmented Generation) Use when: prompt caching, cache prompt, response cache, cag, cache augment
+description: Caching strategies for LLM prompts including Anthropic prompt caching, response caching, and CAG (Cache Augmented Generation) Use when: prompt caching, cache prompt, response cache, cag, cache augm...
 category: Document Processing
 source: antigravity
-tags: [claude, llm, document, rag]
+tags: [claude, llm, workflow, document, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/prompt-caching
 ---
 
@@ -63,3 +63,6 @@ Pre-cache documents in prompt instead of RAG retrieval
 ## Related Skills
 
 Works well with: `context-window-management`, `rag-implementation`, `conversation-memory`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -1,6 +1,6 @@
 ---
 name: workflow-automation
-description: Workflow automation is the infrastructure that makes AI agents reliable. Without durable execution, a network hiccup during a 10-step payment flow means lost money and angry customers. With it, workfl
+description: Workflow automation is the infrastructure that makes AI agents reliable. Without durable execution, a network hiccup during a 10-step payment flow means lost money and angry customers. With it, wor...
 category: AI & Agents
 source: antigravity
 tags: [ai, agent, automation, workflow, cro]
@@ -70,3 +70,6 @@ Central coordinator dispatches work to specialized workers
 ## Related Skills
 
 Works well with: `multi-agent-orchestration`, `agent-tool-builder`, `backend`, `devops`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

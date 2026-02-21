@@ -1,9 +1,9 @@
 ---
 name: referral-program
-description: When the user wants to create, optimize, or analyze a referral program, affiliate program, or word-of-mouth strategy. Also use when the user mentions 'referral,' 'affiliate,' 'ambassador,' 'word of mo
+description: When the user wants to create, optimize, or analyze a referral program, affiliate program, or word-of-mouth strategy. Also use when the user mentions 'referral,' 'affiliate,' 'ambassador,' 'word of...
 category: Creative & Media
 source: antigravity
-tags: [ai, template, design, image, stripe, rag, marketing]
+tags: [ai, workflow, template, design, image, stripe, rag, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/referral-program
 ---
 

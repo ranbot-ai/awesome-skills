@@ -203,3 +203,6 @@ git worktree remove <worktree-path>
 
 **Pairs with:**
 - **using-git-worktrees** - Cleans up worktree created by that skill
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -1,6 +1,6 @@
 ---
 name: react-native-architecture
-description: Build production React Native apps with Expo, navigation, native modules, offline sync, and cross-platform patterns. Use when developing mobile apps, implementing native integrations, or architecting 
+description: Build production React Native apps with Expo, navigation, native modules, offline sync, and cross-platform patterns. Use when developing mobile apps, implementing native integrations, or architecti...
 category: AI & Agents
 source: antigravity
 tags: [react, api, ai, cro]

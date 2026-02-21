@@ -151,3 +151,6 @@ Every test follows:
 ---
 
 > **Remember:** The test is the specification. If you can't write a test, you don't understand the requirement.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

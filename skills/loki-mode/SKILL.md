@@ -1,6 +1,6 @@
 ---
 name: loki-mode
-description: Multi-agent autonomous startup system for Claude Code. Triggers on "Loki Mode". Orchestrates 100+ specialized agents across engineering, QA, DevOps, security, data/ML, business operations, marketing, 
+description: Multi-agent autonomous startup system for Claude Code. Triggers on "Loki Mode". Orchestrates 100+ specialized agents across engineering, QA, DevOps, security, data/ML, business operations,... 
 category: AI & Agents
 source: antigravity
 tags: [python, markdown, api, mcp, claude, ai, agent, llm, automation, workflow]

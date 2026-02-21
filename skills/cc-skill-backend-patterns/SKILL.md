@@ -1,9 +1,9 @@
 ---
-name: backend-patterns
+name: cc-skill-backend-patterns
 description: Backend architecture patterns, API design, database optimization, and server-side best practices for Node.js, Express, and Next.js API routes. 
 category: AI & Agents
 source: antigravity
-tags: [typescript, node, api, ai, design, supabase]
+tags: [typescript, node, api, ai, workflow, design, supabase]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cc-skill-backend-patterns
 ---
 

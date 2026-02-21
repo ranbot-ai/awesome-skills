@@ -1,10 +1,10 @@
 ---
 name: webapp-testing
-description: Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser l
+description: Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browse...
 category: Development & Code Tools
-source: anthropic
+source: antigravity
 tags: [python, api, ai, automation, workflow]
-url: https://github.com/anthropics/skills/tree/main/skills/webapp-testing
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/webapp-testing
 ---
 
 
@@ -98,3 +98,6 @@ with sync_playwright() as p:
   - `element_discovery.py` - Discovering buttons, links, and inputs on a page
   - `static_html_automation.py` - Using file:// URLs for local HTML
   - `console_logging.py` - Capturing console logs during automation
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

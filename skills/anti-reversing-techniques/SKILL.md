@@ -1,6 +1,6 @@
 ---
 name: anti-reversing-techniques
-description: Understand anti-reversing, obfuscation, and protection techniques encountered during software analysis. Use when analyzing protected binaries, bypassing anti-debugging for authorized analysis, or unde
+description: Understand anti-reversing, obfuscation, and protection techniques encountered during software analysis. Use when analyzing protected binaries, bypassing anti-debugging for authorized analysis, or u...
 category: Security & Systems
 source: antigravity
 tags: [ai, document, security, pentest, aws]

@@ -1,6 +1,6 @@
 ---
-name: Network 101
-description: This skill should be used when the user asks to "set up a web server", "configure HTTP or HTTPS", "perform SNMP enumeration", "configure SMB shares", "test network services", or needs guidance on conf
+name: network-101
+description: This skill should be used when the user asks to "set up a web server", "configure HTTP or HTTPS", "perform SNMP enumeration", "configure SMB shares", "test network services", or ne... 
 category: Security & Systems
 source: antigravity
 tags: [node, ai, agent, workflow, document, security, vulnerability]

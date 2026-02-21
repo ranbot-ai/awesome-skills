@@ -2,7 +2,7 @@
   "id": "antigravity-clean-code",
   "name": "clean-code",
   "slug": "clean-code",
-  "description": "Applies principles from Robert C. Martin's 'Clean Code'. Use this skill when writing, reviewing, or refactoring code to ensure high quality, readability, and maintainability. Covers naming, functions, comments, error handling, and class design.",
+  "description": "Applies principles from Robert C. Martin's 'Clean Code'. Use this skill when writing, reviewing, or refactoring code to ensure high quality, readability, and maintainability. Covers naming, functio...",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -11,7 +11,6 @@
   "tags": [
     "python",
     "ai",
-    "design",
     "aws",
     "rag"
   ],

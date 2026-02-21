@@ -1,9 +1,9 @@
 ---
 name: ai-product
-description: Every product will be AI-powered. The question is whether you'll build it right or ship a demo that falls apart in production.  This skill covers LLM integration patterns, RAG architecture, prompt eng
+description: Every product will be AI-powered. The question is whether you'll build it right or ship a demo that falls apart in production.  This skill covers LLM integration patterns, RAG architecture, prompt ...
 category: AI & Agents
 source: antigravity
-tags: [api, ai, llm, rag]
+tags: [api, ai, llm, workflow, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-product
 ---
 
@@ -56,3 +56,6 @@ Version prompts in code and test with regression suite
 | App breaks when LLM API fails | high | # Defense in depth: |
 | Not validating facts from LLM responses | critical | # For factual claims: |
 | Making LLM calls in synchronous request handlers | high | # Async patterns: |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

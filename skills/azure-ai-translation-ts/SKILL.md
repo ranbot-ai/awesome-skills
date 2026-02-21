@@ -1,9 +1,9 @@
 ---
 name: azure-ai-translation-ts
-description: Build translation applications using Azure Translation SDKs for JavaScript (@azure-rest/ai-translation-text, @azure-rest/ai-translation-document). Use when implementing text translation, transliterati
+description: Build translation applications using Azure Translation SDKs for JavaScript (@azure-rest/ai-translation-text, @azure-rest/ai-translation-document). Use when implementing text translation, transliter...
 category: Document Processing
 source: antigravity
-tags: [javascript, typescript, node, api, ai, llm, document, azure, rag, cro]
+tags: [javascript, typescript, node, api, ai, llm, workflow, document, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-translation-ts
 ---
 

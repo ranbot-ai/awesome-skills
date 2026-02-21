@@ -1,6 +1,6 @@
 ---
 name: data-storytelling
-description: Transform data into compelling narratives using visualization, context, and persuasive structure. Use when presenting analytics to stakeholders, creating data reports, or building executive presentati
+description: Transform data into compelling narratives using visualization, context, and persuasive structure. Use when presenting analytics to stakeholders, creating data reports, or building executive present...
 category: Creative & Media
 source: antigravity
 tags: [python, markdown, ai, automation, template, presentation, rag, marketing]

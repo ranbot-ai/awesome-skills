@@ -1,6 +1,6 @@
 ---
 name: brevo-automation
-description: Automate Brevo (Sendinblue) tasks via Rube MCP (Composio): manage email campaigns, create/edit templates, track senders, and monitor campaign performance. Always search tools first for current schemas
+description: Automate Brevo (Sendinblue) tasks via Rube MCP (Composio): manage email campaigns, create/edit templates, track senders, and monitor campaign performance. Always search tools first for current sche...
 category: Business & Marketing
 source: antigravity
 tags: [api, mcp, ai, automation, workflow, template, marketing]

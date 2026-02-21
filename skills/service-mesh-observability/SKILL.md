@@ -1,6 +1,6 @@
 ---
 name: service-mesh-observability
-description: Implement comprehensive observability for service meshes including distributed tracing, metrics, and visualization. Use when setting up mesh monitoring, debugging latency issues, or implementing SLOs 
+description: Implement comprehensive observability for service meshes including distributed tracing, metrics, and visualization. Use when setting up mesh monitoring, debugging latency issues, or implementing SL...
 category: Creative & Media
 source: antigravity
 tags: [node, api, ai, template, image, kubernetes, rag, cro]

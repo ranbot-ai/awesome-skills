@@ -2,7 +2,7 @@
   "id": "antigravity-azure-ai-formrecognizer-java",
   "name": "azure-ai-formrecognizer-java",
   "slug": "azure-ai-formrecognizer-java",
-  "description": "Build document analysis applications with Azure Document Intelligence (Form Recognizer) SDK for Java. Use when extracting text, tables, key-value pairs from documents, receipts, invoices, or building custom document models.",
+  "description": "Build document analysis applications with Azure Document Intelligence (Form Recognizer) SDK for Java. Use when extracting text, tables, key-value pairs from documents, receipts, invoices, or buildi...",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -12,6 +12,7 @@
     "pdf",
     "api",
     "ai",
+    "workflow",
     "template",
     "document",
     "azure"

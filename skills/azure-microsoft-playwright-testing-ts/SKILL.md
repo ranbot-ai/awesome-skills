@@ -1,6 +1,6 @@
 ---
 name: azure-microsoft-playwright-testing-ts
-description: Run Playwright tests at scale using Azure Playwright Workspaces (formerly Microsoft Playwright Testing). Use when scaling browser tests across cloud-hosted browsers, integrating with CI/CD pipelines, 
+description: Run Playwright tests at scale using Azure Playwright Workspaces (formerly Microsoft Playwright Testing). Use when scaling browser tests across cloud-hosted browsers, integrating with CI/CD pipeline...
 category: Development & Code Tools
 source: antigravity
 tags: [typescript, api, ai, workflow, azure, cro]

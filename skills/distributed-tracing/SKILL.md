@@ -1,6 +1,6 @@
 ---
 name: distributed-tracing
-description: Implement distributed tracing with Jaeger and Tempo to track requests across microservices and identify performance bottlenecks. Use when debugging microservices, analyzing request flows, or implement
+description: Implement distributed tracing with Jaeger and Tempo to track requests across microservices and identify performance bottlenecks. Use when debugging microservices, analyzing request flows, or implem...
 category: Document Processing
 source: antigravity
 tags: [python, javascript, node, api, ai, agent, template, document, image, docker]

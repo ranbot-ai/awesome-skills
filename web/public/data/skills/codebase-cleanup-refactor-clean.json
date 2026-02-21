@@ -2,7 +2,7 @@
   "id": "antigravity-codebase-cleanup-refactor-clean",
   "name": "codebase-cleanup-refactor-clean",
   "slug": "codebase-cleanup-refactor-clean",
-  "description": "You are a code refactoring expert specializing in clean code principles, SOLID design patterns, and modern software engineering best practices. Analyze and refactor the provided code to improve its quality, maintainability, and performance.",
+  "description": "You are a code refactoring expert specializing in clean code principles, SOLID design patterns, and modern software engineering best practices. Analyze and refactor the provided code to improve its...",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

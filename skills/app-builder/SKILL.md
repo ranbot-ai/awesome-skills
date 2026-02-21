@@ -3,7 +3,7 @@ name: app-builder
 description: Main application building orchestrator. Creates full-stack applications from natural language requests. Determines project type, selects tech stack, coordinates agents. 
 category: AI & Agents
 source: antigravity
-tags: [python, react, node, nextjs, api, ai, agent, template, prisma, stripe]
+tags: [python, react, node, nextjs, api, ai, agent, workflow, template, prisma]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/app-builder
 ---
 
@@ -77,3 +77,6 @@ App Builder Process:
 5. Report progress
 6. Start preview
 ```
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

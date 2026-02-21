@@ -1,6 +1,6 @@
 ---
-name: Linux Production Shell Scripts
-description: This skill should be used when the user asks to "create bash scripts", "automate Linux tasks", "monitor system resources", "backup files", "manage users", or "write production shell scripts". It provi
+name: linux-shell-scripting
+description: This skill should be used when the user asks to "create bash scripts", "automate Linux tasks", "monitor system resources", "backup files", "manage users", or "write production she... 
 category: Security & Systems
 source: antigravity
 tags: [ai, automation, workflow, template, security, rag, cro]

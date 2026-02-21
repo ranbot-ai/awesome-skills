@@ -3,7 +3,7 @@ name: vr-ar
 description: VR/AR development principles. Comfort, interaction, performance requirements. 
 category: Development & Code Tools
 source: antigravity
-tags: [api, ai, design]
+tags: [api, ai, workflow, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game-development/vr-ar
 ---
 
@@ -125,3 +125,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/game
 ---
 
 > **Remember:** Comfort is not optional. Sick players don't play.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -1,9 +1,9 @@
 ---
-name: coding-standards
+name: cc-skill-coding-standards
 description: Universal coding standards, best practices, and patterns for TypeScript, JavaScript, React, and Node.js development. 
 category: Document Processing
 source: antigravity
-tags: [javascript, typescript, react, node, api, ai, design, document, supabase, cro]
+tags: [javascript, typescript, react, node, api, ai, workflow, design, document, supabase]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cc-skill-coding-standards
 ---
 

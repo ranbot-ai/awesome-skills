@@ -1,6 +1,6 @@
 ---
 name: distributed-debugging-debug-trace
-description: You are a debugging expert specializing in setting up comprehensive debugging environments, distributed tracing, and diagnostic tools. Configure debugging workflows, implement tracing solutions, and e
+description: You are a debugging expert specializing in setting up comprehensive debugging environments, distributed tracing, and diagnostic tools. Configure debugging workflows, implement tracing solutions, an...
 category: Development & Code Tools
 source: antigravity
 tags: [ai, workflow, rag]

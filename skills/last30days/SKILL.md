@@ -3,7 +3,7 @@ name: last30days
 description: Research a topic from the last 30 days on Reddit + X + Web, become an expert, and write copy-paste-ready prompts for the user's target tool. 
 category: Business & Marketing
 source: antigravity
-tags: [python, api, claude, ai, agent, gpt, design, image, cro, marketing]
+tags: [python, api, claude, ai, agent, gpt, workflow, design, image, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/last30days
 ---
 

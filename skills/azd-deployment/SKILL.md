@@ -1,9 +1,9 @@
 ---
 name: azd-deployment
-description: Deploy containerized applications to Azure Container Apps using Azure Developer CLI (azd). Use when setting up azd projects, writing azure.yaml configuration, creating Bicep infrastructure for Contain
+description: Deploy containerized applications to Azure Container Apps using Azure Developer CLI (azd). Use when setting up azd projects, writing azure.yaml configuration, creating Bicep infrastructure for Cont...
 category: Development & Code Tools
 source: antigravity
-tags: [python, api, ai, template, image, docker, azure, cro]
+tags: [python, api, ai, workflow, template, image, docker, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azd-deployment
 ---
 

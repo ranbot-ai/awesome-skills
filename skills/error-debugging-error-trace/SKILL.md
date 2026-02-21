@@ -1,6 +1,6 @@
 ---
 name: error-debugging-error-trace
-description: You are an error tracking and observability expert specializing in implementing comprehensive error monitoring solutions. Set up error tracking systems, configure alerts, implement structured logging,
+description: You are an error tracking and observability expert specializing in implementing comprehensive error monitoring solutions. Set up error tracking systems, configure alerts, implement structured loggi...
 category: AI & Agents
 source: antigravity
 tags: [ai, workflow]

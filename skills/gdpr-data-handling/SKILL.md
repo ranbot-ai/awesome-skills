@@ -1,6 +1,6 @@
 ---
 name: gdpr-data-handling
-description: Implement GDPR-compliant data handling with consent management, data subject rights, and privacy by design. Use when building systems that process EU personal data, implementing privacy controls, or c
+description: Implement GDPR-compliant data handling with consent management, data subject rights, and privacy by design. Use when building systems that process EU personal data, implementing privacy controls, o...
 category: AI & Agents
 source: antigravity
 tags: [ai, design]

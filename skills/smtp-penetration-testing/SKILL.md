@@ -1,6 +1,6 @@
 ---
-name: SMTP Penetration Testing
-description: This skill should be used when the user asks to "perform SMTP penetration testing", "enumerate email users", "test for open mail relays", "grab SMTP banners", "brute force email credentials", or "asse
+name: smtp-penetration-testing
+description: This skill should be used when the user asks to "perform SMTP penetration testing", "enumerate email users", "test for open mail relays", "grab SMTP banners", "brute force email cre... 
 category: Security & Systems
 source: antigravity
 tags: [ai, workflow, document, security, vulnerability]

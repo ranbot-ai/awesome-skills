@@ -1,6 +1,6 @@
 ---
-name: Cloud Penetration Testing
-description: This skill should be used when the user asks to "perform cloud penetration testing", "assess Azure or AWS or GCP security", "enumerate cloud resources", "exploit cloud misconfigurations", "test O365 s
+name: cloud-penetration-testing
+description: This skill should be used when the user asks to "perform cloud penetration testing", "assess Azure or AWS or GCP security", "enumerate cloud resources", "exploit cloud misconfiguratio... 
 category: Security & Systems
 source: antigravity
 tags: [python, api, ai, automation, workflow, document, security, kubernetes, aws, gcp]

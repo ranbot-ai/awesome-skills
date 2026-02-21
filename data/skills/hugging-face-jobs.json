@@ -2,7 +2,7 @@
   "id": "antigravity-hugging-face-jobs",
   "name": "hugging-face-jobs",
   "slug": "hugging-face-jobs",
-  "description": "This skill should be used when users want to run any workload on Hugging Face Jobs infrastructure. Covers UV scripts, Docker-based jobs, hardware selection, cost estimation, authentication with tokens, secrets management, timeout configuration, and result persistence. Designed for general-purpose co",
+  "description": "This skill should be used when users want to run any workload on Hugging Face Jobs infrastructure. Covers UV scripts, Docker-based jobs, hardware selection, cost estimation, authentication with tok...",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -17,8 +17,8 @@
     "llm",
     "workflow",
     "template",
-    "design",
-    "document"
+    "document",
+    "image"
   ],
   "useCases": [
     "Run Python workloads on cloud infrastructure",

@@ -1,9 +1,9 @@
 ---
 name: email-sequence
-description: When the user wants to create or optimize an email sequence, drip campaign, automated email flow, or lifecycle email program. Also use when the user mentions "email sequence," "drip campaign," "nurtur
+description: When the user wants to create or optimize an email sequence, drip campaign, automated email flow, or lifecycle email program. Also use when the user mentions "email sequence," "drip campa... 
 category: Business & Marketing
 source: antigravity
-tags: [ai, automation, template, design, document, rag, cro, marketing, copywriting]
+tags: [ai, automation, workflow, template, design, document, rag, cro, marketing, copywriting]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/email-sequence
 ---
 

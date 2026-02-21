@@ -1,6 +1,6 @@
 ---
 name: commit
-description: Create commit messages following Sentry conventions. Use when committing code changes, writing commit messages, or formatting git history. Follows conventional commits with Sentry-specific issue refer
+description: Create commit messages following Sentry conventions. Use when committing code changes, writing commit messages, or formatting git history. Follows conventional commits with Sentry-specific issue re...
 category: Document Processing
 source: antigravity
 tags: [api, claude, ai, agent, document]

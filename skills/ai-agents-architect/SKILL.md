@@ -1,9 +1,9 @@
 ---
 name: ai-agents-architect
-description: Expert in designing and building autonomous AI agents. Masters tool use, memory systems, planning strategies, and multi-agent orchestration. Use when: build agent, AI agent, autonomous agent, tool use
+description: Expert in designing and building autonomous AI agents. Masters tool use, memory systems, planning strategies, and multi-agent orchestration. Use when: build agent, AI agent, autonomous agent, tool ...
 category: AI & Agents
 source: antigravity
-tags: [javascript, react, api, mcp, ai, agent, llm, design, rag]
+tags: [javascript, react, api, mcp, ai, agent, llm, workflow, design, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-agents-architect
 ---
 
@@ -92,3 +92,6 @@ Dynamic tool discovery and management
 ## Related Skills
 
 Works well with: `rag-engineer`, `prompt-engineer`, `backend`, `mcp-builder`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -3,7 +3,7 @@ name: avalonia-zafiro-development
 description: Mandatory skills, conventions, and behavioral rules for Avalonia UI development using the Zafiro toolkit. 
 category: Development & Code Tools
 source: antigravity
-tags: [react, ai, rag, cro]
+tags: [react, ai, workflow, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/avalonia-zafiro-development
 ---
 
@@ -32,3 +32,6 @@ This skill defines the mandatory conventions and behavioral rules for developing
 1.  **Search First**: Search the codebase for similar implementations or existing Zafiro helpers.
 2.  **Reusable Extensions**: If a helper is missing, propose a new reusable extension method instead of inlining complex logic.
 3.  **Reactive Pipelines**: Ensure DynamicData operators are used instead of plain Rx where applicable.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

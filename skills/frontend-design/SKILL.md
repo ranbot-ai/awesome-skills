@@ -1,9 +1,9 @@
 ---
 name: frontend-design
-description: Create distinctive, production-grade frontend interfaces with intentional aesthetics, high craft, and non-generic visual identity. Use when building or styling web UIs, components, pages, dashboards, 
+description: Create distinctive, production-grade frontend interfaces with intentional aesthetics, high craft, and non-generic visual identity. Use when building or styling web UIs, components, pages, dashboard...
 category: Creative & Media
 source: antigravity
-tags: [react, ai, template, design, tailwind, cro, marketing, copywriting]
+tags: [react, ai, workflow, template, design, tailwind, cro, marketing, copywriting]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/frontend-design
 ---
 

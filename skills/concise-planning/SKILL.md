@@ -65,3 +65,6 @@ Use the following structure:
 - **Atomic**: Each step should be a single logical unit of work.
 - **Verb-first**: "Add...", "Refactor...", "Verify...".
 - **Concrete**: Name specific files or modules when possible.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

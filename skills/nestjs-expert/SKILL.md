@@ -1,9 +1,9 @@
 ---
 name: nestjs-expert
-description: Nest.js framework expert specializing in module architecture, dependency injection, middleware, guards, interceptors, testing with Jest/Supertest, TypeORM/Mongoose integration, and Passport.js authent
+description: Nest.js framework expert specializing in module architecture, dependency injection, middleware, guards, interceptors, testing with Jest/Supertest, TypeORM/Mongoose integration, and Passport.js auth...
 category: Document Processing
 source: antigravity
-tags: [javascript, typescript, react, node, api, ai, agent, design, document, security]
+tags: [javascript, typescript, react, node, api, ai, agent, workflow, design, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/nestjs-expert
 ---
 

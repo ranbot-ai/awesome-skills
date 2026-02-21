@@ -1,6 +1,6 @@
 ---
 name: database-cloud-optimization-cost-optimize
-description: You are a cloud cost optimization expert specializing in reducing infrastructure expenses while maintaining performance and reliability. Analyze cloud spending, identify savings opportunities, and imp
+description: You are a cloud cost optimization expert specializing in reducing infrastructure expenses while maintaining performance and reliability. Analyze cloud spending, identify savings opportunities, and ...
 category: AI & Agents
 source: antigravity
 tags: [ai, workflow, aws, gcp, azure, rag, cro]

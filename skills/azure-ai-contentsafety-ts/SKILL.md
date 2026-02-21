@@ -1,9 +1,9 @@
 ---
 name: azure-ai-contentsafety-ts
-description: Analyze text and images for harmful content using Azure AI Content Safety (@azure-rest/ai-content-safety). Use when moderating user-generated content, detecting hate speech, violence, sexual content, 
+description: Analyze text and images for harmful content using Azure AI Content Safety (@azure-rest/ai-content-safety). Use when moderating user-generated content, detecting hate speech, violence, sexual conten...
 category: AI & Agents
 source: antigravity
-tags: [typescript, node, api, ai, image, azure, rag]
+tags: [typescript, node, api, ai, workflow, image, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-contentsafety-ts
 ---
 

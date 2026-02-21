@@ -13,6 +13,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pyth
 > Python development principles and decision-making for 2025.
 > **Learn to THINK, not memorize patterns.**
 
+## When to Use
+
+Use this skill when making Python architecture decisions, choosing frameworks, designing async patterns, or structuring Python projects.
+
 ---
 
 ## ⚠️ How to Use This Skill
@@ -269,11 +273,4 @@ Queries:
 ```
 Use async def when:
 ├── Using async database drivers
-├── Making async HTTP calls
-├── I/O-bound operations
-└── Want to handle concurrency
-
-Use def when:
-├── Blocking operations
-├── Sync database drivers
-├── CPU-bound wor
+├── Making a

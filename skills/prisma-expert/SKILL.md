@@ -1,6 +1,6 @@
 ---
 name: prisma-expert
-description: Prisma ORM expert for schema design, migrations, query optimization, relations modeling, and database operations. Use PROACTIVELY for Prisma schema issues, migration problems, query performance, relat
+description: Prisma ORM expert for schema design, migrations, query optimization, relations modeling, and database operations. Use PROACTIVELY for Prisma schema issues, migration problems, query performance, re...
 category: Document Processing
 source: antigravity
 tags: [typescript, node, ai, workflow, design, document, prisma, aws, cro]

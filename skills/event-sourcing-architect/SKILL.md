@@ -1,6 +1,6 @@
 ---
 name: event-sourcing-architect
-description: Expert in event sourcing, CQRS, and event-driven architecture patterns. Masters event store design, projection building, saga orchestration, and eventual consistency patterns. Use PROACTIVELY for even
+description: Expert in event sourcing, CQRS, and event-driven architecture patterns. Masters event store design, projection building, saga orchestration, and eventual consistency patterns. Use PROACTIVELY for e...
 category: AI & Agents
 source: antigravity
 tags: [ai, workflow, design, cro]

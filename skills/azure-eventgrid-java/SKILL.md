@@ -3,7 +3,7 @@ name: azure-eventgrid-java
 description: Build event-driven applications with Azure Event Grid SDK for Java. Use when publishing events, implementing pub/sub patterns, or integrating with Azure services via events. 
 category: AI & Agents
 source: antigravity
-tags: [api, ai, azure, rag, seo, cro]
+tags: [api, ai, workflow, azure, rag, seo, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-eventgrid-java
 ---
 

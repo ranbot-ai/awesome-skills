@@ -1,9 +1,9 @@
 ---
 name: wcag-audit-patterns
-description: Conduct WCAG 2.2 accessibility audits with automated testing, manual verification, and remediation guidance. Use when auditing websites for accessibility, fixing WCAG violations, or implementing acces
+description: Conduct WCAG 2.2 accessibility audits with automated testing, manual verification, and remediation guidance. Use when auditing websites for accessibility, fixing WCAG violations, or implementing ac...
 category: Document Processing
 source: antigravity
-tags: [ai, template, design, document, aws]
+tags: [ai, template, document, aws]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/wcag-audit-patterns
 ---
 

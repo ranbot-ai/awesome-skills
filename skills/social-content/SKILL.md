@@ -1,6 +1,6 @@
 ---
 name: social-content
-description: When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms. Also use when the user mentions 'LinkedIn po
+description: When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms. Also use when the user mentions 'LinkedIn...
 category: Security & Systems
 source: antigravity
 tags: [react, api, ai, automation, workflow, template, document, spreadsheet, image, vulnerability]

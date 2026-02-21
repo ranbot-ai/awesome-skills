@@ -3,7 +3,7 @@ name: marketing-psychology
 description: Apply behavioral science and mental models to marketing decisions, prioritized using a psychological leverage and feasibility scoring system. 
 category: Creative & Media
 source: antigravity
-tags: [ai, design, presentation, rag, cro, marketing, copywriting]
+tags: [ai, workflow, design, presentation, rag, cro, marketing, copywriting]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/marketing-psychology
 ---
 

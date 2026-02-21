@@ -2,8 +2,8 @@
   "id": "antigravity-react-flow-architect",
   "name": "react-flow-architect",
   "slug": "react-flow-architect",
-  "description": "Expert ReactFlow architect for building interactive graph applications with hierarchical node-edge systems, performance optimization, and auto-layout integration. Use when Claude needs to create or optimize ReactFlow applications for: (1) Interactive process graphs with expand/collapse navigation, (",
-  "category": "Creative & Media",
+  "description": "Expert ReactFlow architect for building interactive graph applications with hierarchical node-edge systems, performance optimization, and auto-layout integration. Use when Claude needs to create or...",
+  "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/react-flow-architect",
@@ -16,7 +16,7 @@
     "api",
     "claude",
     "ai",
-    "rag"
+    "workflow"
   ],
   "useCases": [],
   "scrapedAt": "2026-02-17T07:15:33.623Z"

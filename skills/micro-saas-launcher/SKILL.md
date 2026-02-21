@@ -1,9 +1,9 @@
 ---
 name: micro-saas-launcher
-description: Expert in launching small, focused SaaS products fast - the indie hacker approach to building profitable software. Covers idea validation, MVP development, pricing, launch strategies, and growing to s
+description: Expert in launching small, focused SaaS products fast - the indie hacker approach to building profitable software. Covers idea validation, MVP development, pricing, launch strategies, and growing t...
 category: Business & Marketing
 source: antigravity
-tags: [javascript, api, ai, design, supabase, stripe, seo, cro, marketing]
+tags: [javascript, api, ai, workflow, design, supabase, stripe, seo, cro, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/micro-saas-launcher
 ---
 
@@ -214,3 +214,6 @@ Your time has value.
 ## Related Skills
 
 Works well with: `landing-page-design`, `backend`, `stripe`, `seo`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

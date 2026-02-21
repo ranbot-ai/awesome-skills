@@ -3,7 +3,7 @@ name: marketing-ideas
 description: Provide proven marketing strategies and growth ideas for SaaS and software products, prioritized using a marketing feasibility scoring system. 
 category: Business & Marketing
 source: antigravity
-tags: [ai, template, rag, seo, cro, marketing]
+tags: [ai, workflow, template, rag, seo, cro, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/marketing-ideas
 ---
 
@@ -223,3 +223,7 @@ Use these biases when scoring:
 * **pricing-strategy** – Monetize demand
 * **programmatic-seo** – Scale SEO ideas
 * **ab-test-setup** – Test ideas rigorously
+
+
+## When to Use
+Thi

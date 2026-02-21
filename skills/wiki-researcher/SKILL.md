@@ -1,9 +1,9 @@
 ---
 name: wiki-researcher
-description: Conducts multi-turn iterative deep research on specific topics within a codebase with zero tolerance for shallow analysis. Use when the user wants an in-depth investigation, needs to understand how so
+description: Conducts multi-turn iterative deep research on specific topics within a codebase with zero tolerance for shallow analysis. Use when the user wants an in-depth investigation, needs to understand how...
 category: AI & Agents
 source: antigravity
-tags: [api, ai, design, cro]
+tags: [api, ai, workflow, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/wiki-researcher
 ---
 
@@ -68,3 +68,6 @@ Each iteration takes a different lens and builds on all prior findings:
 - Include Mermaid diagrams (dark-mode colors) when they clarify architecture or flow
 - Stay focused on the specific topic
 - Flag what you HAVEN'T explored — boundaries of your knowledge at all times
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

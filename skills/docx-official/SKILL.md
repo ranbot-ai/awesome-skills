@@ -1,6 +1,6 @@
 ---
-name: docx
-description: Comprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. When Claude needs to work with professional documents (
+name: docx-official
+description: Comprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. When Claude needs to work with professional document...
 category: Document Processing
 source: antigravity
 tags: [python, javascript, typescript, node, pdf, docx, markdown, api, claude, ai]

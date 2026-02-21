@@ -1,9 +1,9 @@
 ---
 name: context-window-management
-description: Strategies for managing LLM context windows including summarization, trimming, routing, and avoiding context rot Use when: context window, token limit, context management, context engineering, long co
+description: Strategies for managing LLM context windows including summarization, trimming, routing, and avoiding context rot Use when: context window, token limit, context management, context engineering, long...
 category: AI & Agents
 source: antigravity
-tags: [ai, llm, rag]
+tags: [ai, llm, workflow, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/context-window-management
 ---
 
@@ -55,3 +55,6 @@ Summarize by importance, not just recency
 ## Related Skills
 
 Works well with: `rag-implementation`, `conversation-memory`, `prompt-caching`, `llm-npc-dialogue`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

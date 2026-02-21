@@ -2,7 +2,7 @@
   "id": "antigravity-frontend-ui-dark-ts",
   "name": "frontend-ui-dark-ts",
   "slug": "frontend-ui-dark-ts",
-  "description": "Build dark-themed React applications using Tailwind CSS with custom theming, glassmorphism effects, and Framer Motion animations. Use when creating dashboards, admin panels, or data-rich interfaces with a refined dark aesthetic.",
+  "description": "Build dark-themed React applications using Tailwind CSS with custom theming, glassmorphism effects, and Framer Motion animations. Use when creating dashboards, admin panels, or data-rich interfaces...",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -13,12 +13,12 @@
     "react",
     "node",
     "ai",
+    "workflow",
     "template",
     "design",
     "document",
     "image",
-    "tailwind",
-    "seo"
+    "tailwind"
   ],
   "useCases": [],
   "scrapedAt": "2026-02-12T07:17:20.036Z"

@@ -1,6 +1,6 @@
 ---
 name: dbos-typescript
-description: DBOS TypeScript SDK for building reliable, fault-tolerant applications with durable workflows. Use this skill when writing TypeScript code with DBOS, creating workflows and steps, using queues, using 
+description: DBOS TypeScript SDK for building reliable, fault-tolerant applications with durable workflows. Use this skill when writing TypeScript code with DBOS, creating workflows and steps, using queues, usi...
 category: Development & Code Tools
 source: antigravity
 tags: [typescript, api, ai, workflow]

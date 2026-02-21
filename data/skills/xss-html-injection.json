@@ -1,8 +1,8 @@
 {
   "id": "antigravity-xss-html-injection",
-  "name": "Cross-Site Scripting and HTML Injection Testing",
+  "name": "xss-html-injection",
   "slug": "xss-html-injection",
-  "description": "This skill should be used when the user asks to \"test for XSS vulnerabilities\", \"perform cross-site scripting attacks\", \"identify HTML injection flaws\", \"exploit client-side injection vulnerabilities\", \"steal cookies via XSS\", or \"bypass content security policies\". It provides comprehensive techniqu",
+  "description": "This skill should be used when the user asks to \"test for XSS vulnerabilities\", \"perform cross-site scripting attacks\", \"identify HTML injection flaws\", \"exploit client-side injection...",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

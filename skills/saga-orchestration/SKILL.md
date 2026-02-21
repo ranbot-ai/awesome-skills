@@ -1,6 +1,6 @@
 ---
 name: saga-orchestration
-description: Implement saga patterns for distributed transactions and cross-aggregate workflows. Use when coordinating multi-step business processes, handling compensating transactions, or managing long-running wo
+description: Implement saga patterns for distributed transactions and cross-aggregate workflows. Use when coordinating multi-step business processes, handling compensating transactions, or managing long-running...
 category: AI & Agents
 source: antigravity
 tags: [python, ai, llm, workflow, template, design, cro]

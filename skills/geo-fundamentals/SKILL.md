@@ -3,7 +3,7 @@ name: geo-fundamentals
 description: Generative Engine Optimization for AI search engines (ChatGPT, Claude, Perplexity). 
 category: AI & Agents
 source: antigravity
-tags: [python, claude, ai, agent, gpt, rag, seo, cro]
+tags: [python, claude, ai, agent, gpt, workflow, rag, seo, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/geo-fundamentals
 ---
 
@@ -157,3 +157,7 @@ How AI engines select content to cite:
 | Script | Purpose | Command |
 |--------|---------|---------|
 | `scripts/geo_checker.py` | GEO audit (AI citation readiness) | `python scripts/geo_checker.py <project_path>` |
+
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

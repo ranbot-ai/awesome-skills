@@ -3,7 +3,7 @@ name: azure-communication-common-java
 description: Azure Communication Services common utilities for Java. Use when working with CommunicationTokenCredential, user identifiers, token refresh, or shared authentication across ACS services. 
 category: AI & Agents
 source: antigravity
-tags: [ai, security, azure, cro]
+tags: [ai, workflow, security, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-communication-common-java
 ---
 

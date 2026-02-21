@@ -3,7 +3,7 @@ name: algolia-search
 description: Expert patterns for Algolia search implementation, indexing strategies, React InstantSearch, and relevance tuning Use when: adding search to, algolia, instantsearch, search api, search functionality. 
 category: AI & Agents
 source: antigravity
-tags: [react, nextjs, api, ai]
+tags: [react, nextjs, api, ai, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/algolia-search
 ---
 
@@ -68,3 +68,6 @@ Best practices:
 | Issue | medium | See docs |
 | Issue | medium | See docs |
 | Issue | medium | See docs |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

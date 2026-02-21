@@ -1,9 +1,9 @@
 ---
 name: azure-ai-voicelive-py
-description: Build real-time voice AI applications using Azure AI Voice Live SDK (azure-ai-voicelive). Use this skill when creating Python applications that need real-time bidirectional audio communication with Az
+description: Build real-time voice AI applications using Azure AI Voice Live SDK (azure-ai-voicelive). Use this skill when creating Python applications that need real-time bidirectional audio communication with...
 category: AI & Agents
 source: antigravity
-tags: [python, api, mcp, ai, gpt, azure, cro]
+tags: [python, api, ai, gpt, workflow, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-voicelive-py
 ---
 

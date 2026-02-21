@@ -1,9 +1,9 @@
 ---
 name: azure-communication-chat-java
-description: Build real-time chat applications with Azure Communication Services Chat Java SDK. Use when implementing chat threads, messaging, participants, read receipts, typing notifications, or real-time chat f
+description: Build real-time chat applications with Azure Communication Services Chat Java SDK. Use when implementing chat threads, messaging, participants, read receipts, typing notifications, or real-time cha...
 category: AI & Agents
 source: antigravity
-tags: [azure]
+tags: [workflow, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-communication-chat-java
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: stitch-ui-design
-description: Expert guide for creating effective prompts for Google Stitch AI UI design tool. Use when user wants to design UI/UX in Stitch, create app interfaces, generate mobile/web designs, or needs help crafti
+description: Expert guide for creating effective prompts for Google Stitch AI UI design tool. Use when user wants to design UI/UX in Stitch, create app interfaces, generate mobile/web designs, or needs help cra...
 category: Creative & Media
 source: antigravity
 tags: [react, api, ai, workflow, template, design, image, rag, cro]

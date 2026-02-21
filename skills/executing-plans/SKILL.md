@@ -3,7 +3,7 @@ name: executing-plans
 description: Use when you have a written implementation plan to execute in a separate session with review checkpoints 
 category: AI & Agents
 source: antigravity
-tags: [ai]
+tags: [ai, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/executing-plans
 ---
 
@@ -79,3 +79,6 @@ After all tasks complete and verified:
 - Reference skills when plan says to
 - Between batches: just report and wait
 - Stop when blocked, don't guess
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -1,6 +1,6 @@
 ---
-name: IDOR Vulnerability Testing
-description: This skill should be used when the user asks to "test for insecure direct object references," "find IDOR vulnerabilities," "exploit broken access control," "enumerate user IDs or object references," o
+name: idor-testing
+description: This skill should be used when the user asks to "test for insecure direct object references," "find IDOR vulnerabilities," "exploit broken access control," "enumerate user IDs or obje... 
 category: Security & Systems
 source: antigravity
 tags: [python, javascript, pdf, xlsx, api, ai, workflow, template, document, security]

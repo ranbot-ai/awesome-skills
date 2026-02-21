@@ -1,9 +1,9 @@
 ---
 name: telegram-mini-app
-description: Expert in building Telegram Mini Apps (TWA) - web apps that run inside Telegram with native-like experience. Covers the TON ecosystem, Telegram Web App API, payments, user authentication, and building
+description: Expert in building Telegram Mini Apps (TWA) - web apps that run inside Telegram with native-like experience. Covers the TON ecosystem, Telegram Web App API, payments, user authentication, and build...
 category: AI & Agents
 source: antigravity
-tags: [python, javascript, react, api, ai, design, cro]
+tags: [python, javascript, react, api, ai, workflow, design, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/telegram-mini-app
 ---
 

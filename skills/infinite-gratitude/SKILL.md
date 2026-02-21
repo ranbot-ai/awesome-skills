@@ -1,5 +1,5 @@
 ---
-name: Infinite Gratitude
+name: infinite-gratitude
 description: Multi-agent research skill for parallel research execution (10 agents, battle-tested with real case studies). 
 category: AI & Agents
 source: antigravity

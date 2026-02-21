@@ -3,7 +3,7 @@ name: daily-news-report
 description: Scrapes content based on a preset URL list, filters high-quality technical information, and generates daily Markdown reports. 
 category: Business & Marketing
 source: antigravity
-tags: [markdown, api, mcp, ai, agent, template, cro, marketing]
+tags: [markdown, api, mcp, ai, agent, workflow, template, cro, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/daily-news-report
 ---
 

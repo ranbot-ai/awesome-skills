@@ -2,7 +2,7 @@
   "id": "antigravity-azure-ai-contentsafety-ts",
   "name": "azure-ai-contentsafety-ts",
   "slug": "azure-ai-contentsafety-ts",
-  "description": "Analyze text and images for harmful content using Azure AI Content Safety (@azure-rest/ai-content-safety). Use when moderating user-generated content, detecting hate speech, violence, sexual content, or self-harm, or managing custom blocklists.",
+  "description": "Analyze text and images for harmful content using Azure AI Content Safety (@azure-rest/ai-content-safety). Use when moderating user-generated content, detecting hate speech, violence, sexual conten...",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -13,6 +13,7 @@
     "node",
     "api",
     "ai",
+    "workflow",
     "image",
     "azure",
     "rag"

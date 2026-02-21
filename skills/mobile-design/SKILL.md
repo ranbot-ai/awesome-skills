@@ -1,9 +1,9 @@
 ---
 name: mobile-design
-description: Mobile-first design and engineering doctrine for iOS and Android apps. Covers touch interaction, performance, platform conventions, offline behavior, and mobile-specific decision-making. Teaches princ
+description: Mobile-first design and engineering doctrine for iOS and Android apps. Covers touch interaction, performance, platform conventions, offline behavior, and mobile-specific decision-making. Teaches pr...
 category: Creative & Media
 source: antigravity
-tags: [react, api, ai, design, security, rag, cro]
+tags: [react, api, ai, workflow, design, security, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mobile-design
 ---
 

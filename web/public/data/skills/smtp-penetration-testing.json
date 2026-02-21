@@ -1,8 +1,8 @@
 {
   "id": "antigravity-smtp-penetration-testing",
-  "name": "SMTP Penetration Testing",
+  "name": "smtp-penetration-testing",
   "slug": "smtp-penetration-testing",
-  "description": "This skill should be used when the user asks to \"perform SMTP penetration testing\", \"enumerate email users\", \"test for open mail relays\", \"grab SMTP banners\", \"brute force email credentials\", or \"assess mail server security\". It provides comprehensive techniques for testing SMTP server security.",
+  "description": "This skill should be used when the user asks to \"perform SMTP penetration testing\", \"enumerate email users\", \"test for open mail relays\", \"grab SMTP banners\", \"brute force email cre...",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

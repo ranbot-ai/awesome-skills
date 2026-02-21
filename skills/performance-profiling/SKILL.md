@@ -145,3 +145,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/perf
 ---
 
 > **Remember:** The fastest code is code that doesn't run. Remove before optimizing.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

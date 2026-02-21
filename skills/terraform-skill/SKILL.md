@@ -63,7 +63,7 @@ examples/           # Module usage examples (also serve as tests)
 - Use **examples/** as both documentation and integration test fixtures
 - Keep modules small and focused (single responsibility)
 
-**For detailed module architecture, see:** [Code Patterns: Module Types & Hierarchy](references/code-patterns.md)
+**For detailed module architecture, see:** Code Patterns: Module Types & Hierarchy
 
 ### 2. Naming Conventions
 
@@ -157,4 +157,5 @@ var.database_instance_class # Not just "instance_class"
    - `command = apply` - Required for computed values and set-type blocks
 
 3. **Handle set-type blocks correctly:**
- 
+   - Cannot index with `[0]`
+   

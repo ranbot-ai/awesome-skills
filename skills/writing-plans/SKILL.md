@@ -3,7 +3,7 @@ name: writing-plans
 description: Use when you have a spec or requirements for a multi-step task, before touching code 
 category: Document Processing
 source: antigravity
-tags: [python, markdown, claude, ai, agent, design, document]
+tags: [python, markdown, claude, ai, agent, workflow, design, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/writing-plans
 ---
 
@@ -119,3 +119,6 @@ After saving the plan, offer execution choice:
 **If Parallel Session chosen:**
 - Guide them to open new session in worktree
 - **REQUIRED SUB-SKILL:** New session uses superpowers:executing-plans
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

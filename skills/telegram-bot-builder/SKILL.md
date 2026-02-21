@@ -1,6 +1,6 @@
 ---
 name: telegram-bot-builder
-description: Expert in building Telegram bots that solve real problems - from simple automation to complex AI-powered bots. Covers bot architecture, the Telegram Bot API, user experience, monetization strategies, 
+description: Expert in building Telegram bots that solve real problems - from simple automation to complex AI-powered bots. Covers bot architecture, the Telegram Bot API, user experience, monetization strategie...
 category: Creative & Media
 source: antigravity
 tags: [python, javascript, typescript, node, api, ai, automation, workflow, design]

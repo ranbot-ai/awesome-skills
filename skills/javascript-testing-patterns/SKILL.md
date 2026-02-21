@@ -1,9 +1,9 @@
 ---
 name: javascript-testing-patterns
-description: Implement comprehensive testing strategies using Jest, Vitest, and Testing Library for unit tests, integration tests, and end-to-end testing with mocking, fixtures, and test-driven development. Use wh
+description: Implement comprehensive testing strategies using Jest, Vitest, and Testing Library for unit tests, integration tests, and end-to-end testing with mocking, fixtures, and test-driven development. Use...
 category: Development & Code Tools
 source: antigravity
-tags: [javascript, typescript, react, api, ai, workflow]
+tags: [javascript, typescript, react, api, ai]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/javascript-testing-patterns
 ---
 

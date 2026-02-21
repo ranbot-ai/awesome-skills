@@ -1,9 +1,9 @@
 ---
 name: paid-ads
-description: When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X, or other ad platforms. Also use when the user mentions 'PPC,' 'paid media,' 'ad 
+description: When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X, or other ad platforms. Also use when the user mentions 'PPC,' 'paid media,' '...
 category: Business & Marketing
 source: antigravity
-tags: [api, ai, automation, template, document, spreadsheet, image, rag, cro, marketing]
+tags: [api, ai, automation, workflow, template, document, spreadsheet, image, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/paid-ads
 ---
 

@@ -67,3 +67,6 @@ This skill helps you create importable JSON templates for the Obsidian Web Clipp
 ## Examples
 
 See [assets/](assets/) for JSON examples.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

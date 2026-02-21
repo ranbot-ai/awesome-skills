@@ -1,9 +1,9 @@
 ---
 name: azure-ai-projects-py
-description: Build AI applications using the Azure AI Projects Python SDK (azure-ai-projects). Use when working with Foundry project clients, creating versioned agents with PromptAgentDefinition, running evaluatio
+description: Build AI applications using the Azure AI Projects Python SDK (azure-ai-projects). Use when working with Foundry project clients, creating versioned agents with PromptAgentDefinition, running evalua...
 category: Document Processing
 source: antigravity
-tags: [python, api, mcp, ai, agent, gpt, document, azure, rag, cro]
+tags: [python, api, mcp, ai, agent, gpt, workflow, document, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-projects-py
 ---
 
@@ -126,7 +126,7 @@ agent_version = client.agents.create_version(
 )
 ```
 
-See [references/agents.md](references/agents.md) for detailed agent patterns.
+See references/agents.md for detailed agent patterns.
 
 ## Tools Overview
 
@@ -142,7 +142,7 @@ See [references/agents.md](references/agents.md) for detailed agent patterns.
 | Memory Search | `MemorySearchTool` | Search agent memory stores |
 | SharePoint | `SharepointGroundingTool` | Search SharePoint content |
 
-See [references/tools.md](references/tools.md) for all tool patterns.
+See references/tools.md for all tool patterns.
 
 ## Thread and Message Flow
 
@@ -183,7 +183,7 @@ for conn in connections:
 connection = client.connections.get(connection_name="my-search-connection")
 ```
 
-See [references/connections.md](references/connections.md) for connection patterns.
+See references/connections.md for connection patterns.
 
 ## Deployments
 
@@ -194,4 +194,10 @@ for deployment in deployments:
     print(f"{deployment.name}: {deployment.model}")
 ```
 
-See [references/deployments.md](references/dep
+See references/deployments.md for deployment patterns.
+
+## Datasets and Indexes
+
+```python
+# List datasets
+datasets = clie

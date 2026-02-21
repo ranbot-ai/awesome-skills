@@ -1,9 +1,9 @@
 ---
 name: browser-extension-builder
-description: Expert in building browser extensions that solve real problems - Chrome, Firefox, and cross-browser extensions. Covers extension architecture, manifest v3, content scripts, popup UIs, monetization str
+description: Expert in building browser extensions that solve real problems - Chrome, Firefox, and cross-browser extensions. Covers extension architecture, manifest v3, content scripts, popup UIs, monetization ...
 category: Document Processing
 source: antigravity
-tags: [javascript, api, ai, template, document, security, rag, cro]
+tags: [javascript, api, ai, workflow, template, document, security, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/browser-extension-builder
 ---
 

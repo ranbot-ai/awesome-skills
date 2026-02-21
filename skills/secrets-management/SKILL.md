@@ -1,6 +1,6 @@
 ---
 name: secrets-management
-description: Implement secure secrets management for CI/CD pipelines using Vault, AWS Secrets Manager, or native platform solutions. Use when handling sensitive credentials, rotating secrets, or securing CI/CD env
+description: Implement secure secrets management for CI/CD pipelines using Vault, AWS Secrets Manager, or native platform solutions. Use when handling sensitive credentials, rotating secrets, or securing CI/CD ...
 category: Document Processing
 source: antigravity
 tags: [python, api, ai, template, design, document, image, security, docker, kubernetes]

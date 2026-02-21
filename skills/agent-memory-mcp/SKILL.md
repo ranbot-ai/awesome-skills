@@ -3,7 +3,7 @@ name: agent-memory-mcp
 description: A hybrid memory system that provides persistent, searchable knowledge management for AI agents (Architecture, Patterns, Decisions). 
 category: AI & Agents
 source: antigravity
-tags: [node, mcp, ai, agent, design, document]
+tags: [node, mcp, ai, agent, workflow, design, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-memory-mcp
 ---
 
@@ -84,3 +84,6 @@ npm run start-dashboard <absolute_path_to_target_workspace>
 ```
 
 Access at: `http://localhost:3333`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

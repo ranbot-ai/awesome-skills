@@ -1,9 +1,9 @@
 ---
 name: frontend-slides
-description: Create stunning, animation-rich HTML presentations from scratch or by converting PowerPoint files. Use when the user wants to build a presentation, convert a PPT/PPTX to web, or create slides for a ta
+description: Create stunning, animation-rich HTML presentations from scratch or by converting PowerPoint files. Use when the user wants to build a presentation, convert a PPT/PPTX to web, or create slides for a...
 category: Document Processing
 source: antigravity
-tags: [python, javascript, react, pptx, api, claude, ai, agent, design, document]
+tags: [python, javascript, react, pptx, api, claude, ai, agent, workflow, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/frontend-slides
 ---
 

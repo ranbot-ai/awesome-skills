@@ -2,7 +2,7 @@
   "id": "antigravity-hosted-agents-v2-py",
   "name": "hosted-agents-v2-py",
   "slug": "hosted-agents-v2-py",
-  "description": "Build hosted agents using Azure AI Projects SDK with ImageBasedHostedAgentDefinition.\nUse when creating container-based agents that run custom code in Azure AI Foundry.\nTriggers: \"ImageBasedHostedAgentDefinition\", \"hosted agent\", \"container agent\", \n\"create_version\", \"ProtocolVersionRecord\", \"AgentP",
+  "description": "Build hosted agents using Azure AI Projects SDK with ImageBasedHostedAgentDefinition. Use when creating container-based agents in Azure AI Foundry.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

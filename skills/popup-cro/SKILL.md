@@ -3,7 +3,7 @@ name: popup-cro
 description: Create and optimize popups, modals, overlays, slide-ins, and banners to increase conversions without harming user experience or brand trust. 
 category: Creative & Media
 source: antigravity
-tags: [ai, design, rag, seo, cro]
+tags: [ai, workflow, design, rag, seo, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/popup-cro
 ---
 

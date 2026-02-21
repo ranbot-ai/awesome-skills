@@ -3,7 +3,7 @@ name: powershell-windows
 description: PowerShell Windows patterns. Critical pitfalls, operator syntax, error handling. 
 category: AI & Agents
 source: antigravity
-tags: [ai, template, cro]
+tags: [ai, workflow, template, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/powershell-windows
 ---
 
@@ -169,3 +169,6 @@ catch {
 ---
 
 > **Remember:** PowerShell has unique syntax rules. Parentheses, ASCII-only, and null checks are non-negotiable.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -1,8 +1,8 @@
 {
   "id": "antigravity-idor-testing",
-  "name": "IDOR Vulnerability Testing",
+  "name": "idor-testing",
   "slug": "idor-testing",
-  "description": "This skill should be used when the user asks to \"test for insecure direct object references,\" \"find IDOR vulnerabilities,\" \"exploit broken access control,\" \"enumerate user IDs or object references,\" or \"bypass authorization to access other users' data.\" It provides comprehensive guidance for detecti",
+  "description": "This skill should be used when the user asks to \"test for insecure direct object references,\" \"find IDOR vulnerabilities,\" \"exploit broken access control,\" \"enumerate user IDs or obje...",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

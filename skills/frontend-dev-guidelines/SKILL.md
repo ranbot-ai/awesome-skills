@@ -1,9 +1,9 @@
 ---
 name: frontend-dev-guidelines
-description: Opinionated frontend development standards for modern React + TypeScript applications. Covers Suspense-first data fetching, lazy loading, feature-based architecture, MUI v7 styling, TanStack Router, p
+description: Opinionated frontend development standards for modern React + TypeScript applications. Covers Suspense-first data fetching, lazy loading, feature-based architecture, MUI v7 styling, TanStack Router...
 category: Development & Code Tools
 source: antigravity
-tags: [typescript, react, api, ai, template, design, rag, cro]
+tags: [typescript, react, api, ai, workflow, template, design, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/frontend-dev-guidelines
 ---
 

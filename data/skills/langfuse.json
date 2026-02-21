@@ -2,7 +2,7 @@
   "id": "antigravity-langfuse",
   "name": "langfuse",
   "slug": "langfuse",
-  "description": "Expert in Langfuse - the open-source LLM observability platform. Covers tracing, prompt management, evaluation, datasets, and integration with LangChain, LlamaIndex, and OpenAI. Essential for debugging, monitoring, and improving LLM applications in production. Use when: langfuse, llm observability, ",
+  "description": "Expert in Langfuse - the open-source LLM observability platform. Covers tracing, prompt management, evaluation, datasets, and integration with LangChain, LlamaIndex, and OpenAI. Essential for debug...",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -17,8 +17,8 @@
     "agent",
     "llm",
     "gpt",
-    "template",
-    "langgraph"
+    "workflow",
+    "template"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-26T13:19:11.428Z"

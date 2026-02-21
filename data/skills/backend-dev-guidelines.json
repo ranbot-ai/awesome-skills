@@ -2,7 +2,7 @@
   "id": "antigravity-backend-dev-guidelines",
   "name": "backend-dev-guidelines",
   "slug": "backend-dev-guidelines",
-  "description": "Opinionated backend development standards for Node.js + Express + TypeScript microservices. Covers layered architecture, BaseController pattern, dependency injection, Prisma repositories, Zod validation, unifiedConfig, Sentry error tracking, async safety, and testing discipline.",
+  "description": "Opinionated backend development standards for Node.js + Express + TypeScript microservices. Covers layered architecture, BaseController pattern, dependency injection, Prisma repositories, Zod valid...",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -13,6 +13,7 @@
     "node",
     "api",
     "ai",
+    "workflow",
     "design",
     "prisma",
     "cro"

@@ -1,8 +1,8 @@
 {
   "id": "antigravity-cc-skill-security-review",
-  "name": "security-review",
+  "name": "cc-skill-security-review",
   "slug": "cc-skill-security-review",
-  "description": "Use this skill when adding authentication, handling user input, working with secrets, creating API endpoints, or implementing payment/sensitive features. Provides comprehensive security checklist and patterns.",
+  "description": "Use this skill when adding authentication, handling user input, working with secrets, creating API endpoints, or implementing payment/sensitive features. Provides comprehensive security checklist a...",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -14,11 +14,11 @@
     "nextjs",
     "api",
     "ai",
+    "workflow",
     "image",
     "security",
     "vulnerability",
-    "supabase",
-    "rag"
+    "supabase"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-26T13:17:26.835Z"

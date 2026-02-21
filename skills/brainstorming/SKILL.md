@@ -1,6 +1,6 @@
 ---
 name: brainstorming
-description: Use this skill before any creative or constructive work (features, components, architecture, behavior changes, or functionality). This skill transforms vague ideas into validated designs through disci
+description: Use before creative or constructive work (features, architecture, behavior). Transforms vague ideas into validated designs through disciplined reasoning and collaboration. 
 category: AI & Agents
 source: antigravity
 tags: [markdown, ai, agent, workflow, design, document, security, rag]
@@ -229,3 +229,6 @@ If any criterion is unmet:
 
 ---
 If the design is high-impact, high-risk, or requires elevated confidence, you MUST hand off the finalized design and Decision Log to the `multi-agent-brainstorming` skill before implementation.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

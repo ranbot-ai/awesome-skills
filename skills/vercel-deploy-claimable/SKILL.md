@@ -1,6 +1,6 @@
 ---
 name: vercel-deploy-claimable
-description: Deploy applications and websites to Vercel. Use this skill when the user requests deployment actions such as 'Deploy my app', 'Deploy this to production', 'Create a preview deployment', 'Deploy and gi
+description: Deploy applications and websites to Vercel. Use this skill when the user requests deployment actions such as 'Deploy my app', 'Deploy this to production', 'Create a preview deployment', 'Deploy and...
 category: AI & Agents
 source: antigravity
 tags: [react, node, nextjs, claude, ai, agent]

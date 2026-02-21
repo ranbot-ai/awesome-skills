@@ -1,8 +1,8 @@
 {
   "id": "antigravity-ethical-hacking-methodology",
-  "name": "Ethical Hacking Methodology",
+  "name": "ethical-hacking-methodology",
   "slug": "ethical-hacking-methodology",
-  "description": "This skill should be used when the user asks to \"learn ethical hacking\", \"understand penetration testing lifecycle\", \"perform reconnaissance\", \"conduct security scanning\", \"exploit vulnerabilities\", or \"write penetration test reports\". It provides comprehensive ethical hacking methodology and techni",
+  "description": "This skill should be used when the user asks to \"learn ethical hacking\", \"understand penetration testing lifecycle\", \"perform reconnaissance\", \"conduct security scanning\", \"exploit ...",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

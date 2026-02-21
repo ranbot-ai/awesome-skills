@@ -1,9 +1,9 @@
 ---
-name: Broken Authentication Testing
-description: This skill should be used when the user asks to "test for broken authentication vulnerabilities", "assess session management security", "perform credential stuffing tests", "evaluate password policies
+name: broken-authentication
+description: This skill should be used when the user asks to "test for broken authentication vulnerabilities", "assess session management security", "perform credential stuffing tests", "evaluate ... 
 category: Security & Systems
 source: antigravity
-tags: [python, api, ai, agent, llm, workflow, document, security, vulnerability, aws]
+tags: [python, api, ai, agent, llm, workflow, document, security, vulnerability, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/broken-authentication
 ---
 

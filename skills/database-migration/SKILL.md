@@ -1,6 +1,6 @@
 ---
 name: database-migration
-description: Execute database migrations across ORMs and platforms with zero-downtime strategies, data transformation, and rollback procedures. Use when migrating databases, changing schemas, performing data trans
+description: Execute database migrations across ORMs and platforms with zero-downtime strategies, data transformation, and rollback procedures. Use when migrating databases, changing schemas, performing data tr...
 category: Document Processing
 source: antigravity
 tags: [javascript, typescript, ai, template, document, prisma, cro]

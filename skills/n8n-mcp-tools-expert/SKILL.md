@@ -1,6 +1,6 @@
 ---
 name: n8n-mcp-tools-expert
-description: Expert guide for using n8n-mcp MCP tools effectively. Use when searching for nodes, validating configurations, accessing templates, managing workflows, or using any n8n-mcp tool. Provides tool selecti
+description: Expert guide for using n8n-mcp MCP tools effectively. Use when searching for nodes, validating configurations, accessing templates, managing workflows, or using any n8n-mcp tool. Provides tool sele...
 category: Document Processing
 source: antigravity
 tags: [python, javascript, node, markdown, api, mcp, ai, agent, workflow, template]
@@ -28,9 +28,9 @@ Use this skill when:
 
 n8n-mcp provides tools organized into categories:
 
-1. **Node Discovery** → [SEARCH_GUIDE.md](SEARCH_GUIDE.md)
-2. **Configuration Validation** → [VALIDATION_GUIDE.md](VALIDATION_GUIDE.md)
-3. **Workflow Management** → [WORKFLOW_GUIDE.md](WORKFLOW_GUIDE.md)
+1. **Node Discovery** → SEARCH_GUIDE.md
+2. **Configuration Validation** → VALIDATION_GUIDE.md
+3. **Workflow Management** → WORKFLOW_GUIDE.md
 4. **Template Library** - Search and deploy 2,700+ real workflows
 5. **Documentation & Guides** - Tool docs, AI agent guide, Code node guides
 
@@ -198,4 +198,6 @@ get_node({nodeType: "nodes-base.slack", detail: "standard"})
 - `ai-friendly` - Reduce false positives (for AI configuration)
 - `strict` - Maximum validation (for production)
 
-```javas
+```javascript
+// WRONG - Uses default profile
+validate_node({nodeType, 

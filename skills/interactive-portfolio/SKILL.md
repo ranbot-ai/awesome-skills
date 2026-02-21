@@ -1,9 +1,9 @@
 ---
 name: interactive-portfolio
-description: Expert in building portfolios that actually land jobs and clients - not just showing work, but creating memorable experiences. Covers developer portfolios, designer portfolios, creative portfolios, an
+description: Expert in building portfolios that actually land jobs and clients - not just showing work, but creating memorable experiences. Covers developer portfolios, designer portfolios, creative portfolios,...
 category: Creative & Media
 source: antigravity
-tags: [javascript, ai, template, design, presentation, image, seo, cro]
+tags: [javascript, ai, workflow, template, design, presentation, image, seo, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/interactive-portfolio
 ---
 

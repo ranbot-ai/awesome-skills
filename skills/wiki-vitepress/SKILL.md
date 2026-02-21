@@ -1,9 +1,9 @@
 ---
 name: wiki-vitepress
-description: Packages generated wiki Markdown into a VitePress static site with dark theme, dark-mode Mermaid diagrams with click-to-zoom, and production build output. Use when the user wants to create a browsable
+description: Packages generated wiki Markdown into a VitePress static site with dark theme, dark-mode Mermaid diagrams with click-to-zoom, and production build output. Use when the user wants to create a browsa...
 category: Document Processing
 source: antigravity
-tags: [typescript, node, markdown, ai, template, document]
+tags: [typescript, node, markdown, ai, workflow, template, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/wiki-vitepress
 ---
 
@@ -151,3 +151,6 @@ Output goes to `wiki-site/.vitepress/dist/`.
 - `isCustomElement` compiler option for bare `<T>` causes worse crashes — do NOT use it
 - Node text in Mermaid uses inline `style` with highest specificity — CSS alone won't fix it
 - `enhanceApp()` runs during SSR where `document` doesn't exist — use `setup()` only
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

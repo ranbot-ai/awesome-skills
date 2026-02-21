@@ -1,9 +1,9 @@
 ---
 name: auth-implementation-patterns
-description: Master authentication and authorization patterns including JWT, OAuth2, session management, and RBAC to build secure, scalable access control systems. Use when implementing auth systems, securing APIs
+description: Master authentication and authorization patterns including JWT, OAuth2, session management, and RBAC to build secure, scalable access control systems. Use when implementing auth systems, securing A...
 category: AI & Agents
 source: antigravity
-tags: [api, ai, design, security, rag]
+tags: [api, ai, design, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/auth-implementation-patterns
 ---
 

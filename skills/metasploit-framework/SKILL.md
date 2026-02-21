@@ -1,6 +1,6 @@
 ---
-name: Metasploit Framework
-description: This skill should be used when the user asks to "use Metasploit for penetration testing", "exploit vulnerabilities with msfconsole", "create payloads with msfvenom", "perform post-exploitation", "use 
+name: metasploit-framework
+description: This skill should be used when the user asks to "use Metasploit for penetration testing", "exploit vulnerabilities with msfconsole", "create payloads with msfvenom", "perform post-exp... 
 category: Security & Systems
 source: antigravity
 tags: [python, api, ai, workflow, template, document, security, vulnerability, rag]

@@ -2,7 +2,7 @@
   "id": "antigravity-azure-appconfiguration-ts",
   "name": "azure-appconfiguration-ts",
   "slug": "azure-appconfiguration-ts",
-  "description": "Build applications using Azure App Configuration SDK for JavaScript (@azure/app-configuration). Use when working with configuration settings, feature flags, Key Vault references, dynamic refresh, or centralized configuration management.",
+  "description": "Build applications using Azure App Configuration SDK for JavaScript (@azure/app-configuration). Use when working with configuration settings, feature flags, Key Vault references, dynamic refresh, o...",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -12,6 +12,7 @@
     "javascript",
     "typescript",
     "ai",
+    "workflow",
     "azure",
     "cro"
   ],
