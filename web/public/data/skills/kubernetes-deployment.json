@@ -1,0 +1,28 @@
+{
+  "id": "antigravity-kubernetes-deployment",
+  "name": "kubernetes-deployment",
+  "slug": "kubernetes-deployment",
+  "description": "Kubernetes deployment workflow for container orchestration, Helm charts, service mesh, and production-ready K8s configurations.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/kubernetes-deployment",
+  "content": "\n# Kubernetes Deployment Workflow\n\n## Overview\n\nSpecialized workflow for deploying applications to Kubernetes including container orchestration, Helm charts, service mesh configuration, and production-ready K8s patterns.\n\n## When to Use This Workflow\n\nUse this workflow when:\n- Deploying to Kubernetes\n- Creating Helm charts\n- Configuring service mesh\n- Setting up K8s networking\n- Implementing K8s security\n\n## Workflow Phases\n\n### Phase 1: Container Preparation\n\n#### Skills to Invoke\n- `docker-expert` - Docker containerization\n- `k8s-manifest-generator` - K8s manifests\n\n#### Actions\n1. Create Dockerfile\n2. Build container image\n3. Optimize image size\n4. Push to registry\n5. Test container\n\n#### Copy-Paste Prompts\n```\nUse @docker-expert to containerize application for K8s\n```\n\n### Phase 2: K8s Manifests\n\n#### Skills to Invoke\n- `k8s-manifest-generator` - Manifest generation\n- `kubernetes-architect` - K8s architecture\n\n#### Actions\n1. Create Deployment\n2. Configure Service\n3. Set up ConfigMap\n4. Create Secrets\n5. Add Ingress\n\n#### Copy-Paste Prompts\n```\nUse @k8s-manifest-generator to create K8s manifests\n```\n\n### Phase 3: Helm Chart\n\n#### Skills to Invoke\n- `helm-chart-scaffolding` - Helm charts\n\n#### Actions\n1. Create chart structure\n2. Define values.yaml\n3. Add templates\n4. Configure dependencies\n5. Test chart\n\n#### Copy-Paste Prompts\n```\nUse @helm-chart-scaffolding to create Helm chart\n```\n\n### Phase 4: Service Mesh\n\n#### Skills to Invoke\n- `istio-traffic-management` - Istio\n- `linkerd-patterns` - Linkerd\n- `service-mesh-expert` - Service mesh\n\n#### Actions\n1. Choose service mesh\n2. Install mesh\n3. Configure traffic management\n4. Set up mTLS\n5. Add observability\n\n#### Copy-Paste Prompts\n```\nUse @istio-traffic-management to configure Istio\n```\n\n### Phase 5: Security\n\n#### Skills to Invoke\n- `k8s-security-policies` - K8s security\n- `mtls-configuration` - mTLS\n\n#### Actions\n1. Configure RBAC\n2. Set up NetworkPolicy\n3. Enable PodSecurity\n4. Configure secrets\n5. Implement mTLS\n\n#### Copy-Paste Prompts\n```\nUse @k8s-security-policies to secure Kubernetes cluster\n```\n\n### Phase 6: Observability\n\n#### Skills to Invoke\n- `grafana-dashboards` - Grafana\n- `prometheus-configuration` - Prometheus\n\n#### Actions\n1. Install monitoring stack\n2. Configure Prometheus\n3. Create Grafana dashboards\n4. Set up alerts\n5. Add distributed tracing\n\n#### Copy-Paste Prompts\n```\nUse @prometheus-configuration to set up K8s monitoring\n```\n\n### Phase 7: Deployment\n\n#### Skills to Invoke\n- `deployment-engineer` - Deployment\n- `gitops-workflow` - GitOps\n\n#### Actions\n1. Configure CI/CD\n2. Set up GitOps\n3. Deploy to cluster\n4. Verify deployment\n5. Monitor rollout\n\n#### Copy-Paste Prompts\n```\nUse @gitops-workflow to implement GitOps deployment\n```\n\n## Quality Gates\n\n- [ ] Containers working\n- [ ] Manifests valid\n- [ ] Helm chart installs\n- [ ] Security configured\n- [ ] Monitoring active\n- [ ] Deployment successful\n\n## Related Workflow Bundles\n\n- `cloud-devops` - Cloud/DevOps\n- `terraform-infrastructure` - Infrastructure\n- `docker-containerization` - Containers\n",
+  "tags": [
+    "ai",
+    "workflow",
+    "template",
+    "image",
+    "security",
+    "docker",
+    "kubernetes"
+  ],
+  "useCases": [
+    "Deploying to Kubernetes",
+    "Creating Helm charts",
+    "Configuring service mesh",
+    "Setting up K8s networking",
+    "Implementing K8s security"
+  ],
+  "scrapedAt": "2026-02-23T07:17:00.173Z"
+}

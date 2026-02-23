@@ -1,0 +1,28 @@
+{
+  "id": "antigravity-wordpress-plugin-development",
+  "name": "wordpress-plugin-development",
+  "slug": "wordpress-plugin-development",
+  "description": "WordPress plugin development workflow covering plugin architecture, hooks, admin interfaces, REST API, and security best practices.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/wordpress-plugin-development",
+  "content": "\n# WordPress Plugin Development Workflow\n\n## Overview\n\nSpecialized workflow for creating WordPress plugins with proper architecture, hooks system, admin interfaces, REST API endpoints, and security practices.\n\n## When to Use This Workflow\n\nUse this workflow when:\n- Creating custom WordPress plugins\n- Extending WordPress functionality\n- Building admin interfaces\n- Adding REST API endpoints\n- Integrating third-party services\n\n## Workflow Phases\n\n### Phase 1: Plugin Setup\n\n#### Skills to Invoke\n- `app-builder` - Project scaffolding\n- `backend-dev-guidelines` - Backend patterns\n\n#### Actions\n1. Create plugin directory structure\n2. Set up main plugin file with header\n3. Implement activation/deactivation hooks\n4. Set up autoloading\n5. Configure text domain\n\n#### Copy-Paste Prompts\n```\nUse @app-builder to scaffold a new WordPress plugin\n```\n\n### Phase 2: Plugin Architecture\n\n#### Skills to Invoke\n- `backend-dev-guidelines` - Architecture patterns\n\n#### Actions\n1. Design plugin class structure\n2. Implement singleton pattern\n3. Create loader class\n4. Set up dependency injection\n5. Configure plugin lifecycle\n\n#### Copy-Paste Prompts\n```\nUse @backend-dev-guidelines to design plugin architecture\n```\n\n### Phase 3: Hooks Implementation\n\n#### Skills to Invoke\n- `wordpress-penetration-testing` - WordPress patterns\n\n#### Actions\n1. Register action hooks\n2. Create filter hooks\n3. Implement callback functions\n4. Set up hook priorities\n5. Add conditional hooks\n\n#### Copy-Paste Prompts\n```\nUse @wordpress-penetration-testing to understand WordPress hooks\n```\n\n### Phase 4: Admin Interface\n\n#### Skills to Invoke\n- `frontend-developer` - Admin UI\n\n#### Actions\n1. Create admin menu\n2. Build settings pages\n3. Implement options registration\n4. Add settings sections/fields\n5. Create admin notices\n\n#### Copy-Paste Prompts\n```\nUse @frontend-developer to create WordPress admin interface\n```\n\n### Phase 5: Database Operations\n\n#### Skills to Invoke\n- `database-design` - Database design\n- `postgresql` - Database patterns\n\n#### Actions\n1. Create custom tables\n2. Implement CRUD operations\n3. Add data validation\n4. Set up data sanitization\n5. Create data upgrade routines\n\n#### Copy-Paste Prompts\n```\nUse @database-design to design plugin database schema\n```\n\n### Phase 6: REST API\n\n#### Skills to Invoke\n- `api-design-principles` - API design\n- `api-patterns` - API patterns\n\n#### Actions\n1. Register REST routes\n2. Create endpoint callbacks\n3. Implement permission callbacks\n4. Add request validation\n5. Document API endpoints\n\n#### Copy-Paste Prompts\n```\nUse @api-design-principles to create WordPress REST API endpoints\n```\n\n### Phase 7: Security\n\n#### Skills to Invoke\n- `wordpress-penetration-testing` - WordPress security\n- `security-scanning-security-sast` - Security scanning\n\n#### Actions\n1. Implement nonce verification\n2. Add capability checks\n3. Sanitize all inputs\n4. Escape all outputs\n5. Secure database queries\n\n#### Copy-Paste Prompts\n```\nUse @wordpress-penetration-testing to audit plugin security\n```\n\n### Phase 8: Testing\n\n#### Skills to Invoke\n- `test-automator` - Test automation\n- `php-pro` - PHP testing\n\n#### Actions\n1. Set up PHPUnit\n2. Create unit tests\n3. Write integration tests\n4. Test with WordPress test suite\n5. Configure CI\n\n#### Copy-Paste Prompts\n```\nUse @test-automator to set up plugin testing\n```\n\n## Plugin Structure\n\n```\nplugin-name/\n├── plugin-name.php\n├── includes/\n│   ├── class-plugin.php\n│   ├── class-loader.php\n│   ├── class-activator.php\n│   └── class-deactivator.php\n├── admin/\n│   ├── class-plugin-admin.php\n│   ├── css/\n│   └── js/\n├── public/\n│   ├── class-plugin-public.php\n│   ├── css/\n│   └── js/\n├── languages/\n└── vendor/\n```\n\n## Quality Gates\n\n- [ ] Plugin activates without errors\n- [ ] All hooks working\n- [ ] Admin interface functional\n- [ ] Security measures implemented\n- [ ] Tests passing\n- [ ] Documentation complete\n\n## Related Workflow Bundles\n\n- `wordpress` - WordPress development\n- `wordpress-theme-development` - Theme development\n- `wordpress-woocommerce` - WooCommerce\n",
+  "tags": [
+    "api",
+    "ai",
+    "automation",
+    "workflow",
+    "design",
+    "document",
+    "security"
+  ],
+  "useCases": [
+    "Creating custom WordPress plugins",
+    "Extending WordPress functionality",
+    "Building admin interfaces",
+    "Adding REST API endpoints",
+    "Integrating third-party services"
+  ],
+  "scrapedAt": "2026-02-23T07:19:08.860Z"
+}

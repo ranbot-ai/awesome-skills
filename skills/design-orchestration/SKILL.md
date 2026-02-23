@@ -166,3 +166,6 @@ Good systems fail early.
 Bad systems fail in production.
 
 This meta-skill exists to enforce the former.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

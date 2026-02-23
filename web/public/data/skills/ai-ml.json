@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-ai-ml",
+  "name": "ai-ml",
+  "slug": "ai-ml",
+  "description": "AI and machine learning workflow covering LLM application development, RAG implementation, agent architecture, ML pipelines, and AI-powered features.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-ml",
+  "content": "\n# AI/ML Workflow Bundle\n\n## Overview\n\nComprehensive AI/ML workflow for building LLM applications, implementing RAG systems, creating AI agents, and developing machine learning pipelines. This bundle orchestrates skills for production AI development.\n\n## When to Use This Workflow\n\nUse this workflow when:\n- Building LLM-powered applications\n- Implementing RAG (Retrieval-Augmented Generation)\n- Creating AI agents\n- Developing ML pipelines\n- Adding AI features to applications\n- Setting up AI observability\n\n## Workflow Phases\n\n### Phase 1: AI Application Design\n\n#### Skills to Invoke\n- `ai-product` - AI product development\n- `ai-engineer` - AI engineering\n- `ai-agents-architect` - Agent architecture\n- `llm-app-patterns` - LLM patterns\n\n#### Actions\n1. Define AI use cases\n2. Choose appropriate models\n3. Design system architecture\n4. Plan data flows\n5. Define success metrics\n\n#### Copy-Paste Prompts\n```\nUse @ai-product to design AI-powered features\n```\n\n```\nUse @ai-agents-architect to design multi-agent system\n```\n\n### Phase 2: LLM Integration\n\n#### Skills to Invoke\n- `llm-application-dev-ai-assistant` - AI assistant development\n- `llm-application-dev-langchain-agent` - LangChain agents\n- `llm-application-dev-prompt-optimize` - Prompt engineering\n- `gemini-api-dev` - Gemini API\n\n#### Actions\n1. Select LLM provider\n2. Set up API access\n3. Implement prompt templates\n4. Configure model parameters\n5. Add streaming support\n6. Implement error handling\n\n#### Copy-Paste Prompts\n```\nUse @llm-application-dev-ai-assistant to build conversational AI\n```\n\n```\nUse @llm-application-dev-langchain-agent to create LangChain agents\n```\n\n```\nUse @llm-application-dev-prompt-optimize to optimize prompts\n```\n\n### Phase 3: RAG Implementation\n\n#### Skills to Invoke\n- `rag-engineer` - RAG engineering\n- `rag-implementation` - RAG implementation\n- `embedding-strategies` - Embedding selection\n- `vector-database-engineer` - Vector databases\n- `similarity-search-patterns` - Similarity search\n- `hybrid-search-implementation` - Hybrid search\n\n#### Actions\n1. Design data pipeline\n2. Choose embedding model\n3. Set up vector database\n4. Implement chunking strategy\n5. Configure retrieval\n6. Add reranking\n7. Implement caching\n\n#### Copy-Paste Prompts\n```\nUse @rag-engineer to design RAG pipeline\n```\n\n```\nUse @vector-database-engineer to set up vector search\n```\n\n```\nUse @embedding-strategies to select optimal embeddings\n```\n\n### Phase 4: AI Agent Development\n\n#### Skills to Invoke\n- `autonomous-agents` - Autonomous agent patterns\n- `autonomous-agent-patterns` - Agent patterns\n- `crewai` - CrewAI framework\n- `langgraph` - LangGraph\n- `multi-agent-patterns` - Multi-agent systems\n- `computer-use-agents` - Computer use agents\n\n#### Actions\n1. Design agent architecture\n2. Define agent roles\n3. Implement tool integration\n4. Set up memory systems\n5. Configure orchestration\n6. Add human-in-the-loop\n\n#### Copy-Paste Prompts\n```\nUse @crewai to build role-based multi-agent system\n```\n\n```\nUse @langgraph to create stateful AI workflows\n```\n\n```\nUse @autonomous-agents to design autonomous agent\n```\n\n### Phase 5: ML Pipeline Development\n\n#### Skills to Invoke\n- `ml-engineer` - ML engineering\n- `mlops-engineer` - MLOps\n- `machine-learning-ops-ml-pipeline` - ML pipelines\n- `ml-pipeline-workflow` - ML workflows\n- `data-engineer` - Data engineering\n\n#### Actions\n1. Design ML pipeline\n2. Set up data processing\n3. Implement model training\n4. Configure evaluation\n5. Set up model registry\n6. Deploy models\n\n#### Copy-Paste Prompts\n```\nUse @ml-engineer to build machine learning pipeline\n```\n\n```\nUse @mlops-engineer to set up MLOps infrastructure\n```\n\n### Phase 6: AI Observability\n\n#### Skills to Invoke\n- `langfuse` - Langfuse observability\n- `manifest` - Manifest telemetry\n- `evaluation` - AI evaluation\n- `llm-evaluation` - LLM evaluation\n\n#### Actions\n1. Set up tracing\n2. Configure logging\n3. Implement evaluation\n4. Monitor performance\n5. Track costs\n6. Set up alerts\n\n#### Copy-Paste Prompts\n```\nUse @langfuse to set up LLM observability\n```\n\n```\nUse @evaluation to create evaluation framework\n```\n\n### Phase 7: AI Security\n\n#### Skills to Invoke\n- `prompt-engineering` - Prompt security\n- `security-scanning-security-sast` - Security scanning\n\n#### Actions\n1. Implement input validation\n2. Add output filtering\n3. Configure rate limiting\n4. Set up access controls\n5. Monitor for abuse\n6. Implement audit logging\n\n## AI Development Checklist\n\n### LLM Integration\n- [ ] API keys secured\n- [ ] Rate limiting configured\n- [ ] Error handling implemented\n- [ ] Streaming enabled\n- [ ] Token usage tracked\n\n### RAG System\n- [ ] Data pipeline working\n- [ ] Embeddings generated\n- [ ] Vector search optimized\n- [ ] Retrieval accuracy tested\n- [ ] Caching implemented\n\n### AI Agents\n- [ ] Agent roles defined\n- [ ] Tools integrated\n- [ ] Memory working\n- [ ] Orchestration tested\n- [ ] Error handling robust\n\n### Observability\n- [ ] Tracing enabled\n- [ ] Metrics collected\n- [ ] Evaluation running\n- [ ]",
+  "tags": [
+    "api",
+    "ai",
+    "agent",
+    "llm",
+    "workflow",
+    "template",
+    "design",
+    "document",
+    "security",
+    "langgraph"
+  ],
+  "useCases": [
+    "Building LLM-powered applications",
+    "Implementing RAG (Retrieval-Augmented Generation)",
+    "Creating AI agents",
+    "Developing ML pipelines",
+    "Adding AI features to applications"
+  ],
+  "scrapedAt": "2026-02-23T07:14:05.045Z"
+}

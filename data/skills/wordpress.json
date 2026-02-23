@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-wordpress",
+  "name": "wordpress",
+  "slug": "wordpress",
+  "description": "Complete WordPress development workflow covering theme development, plugin creation, WooCommerce integration, performance optimization, and security hardening.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/wordpress",
+  "content": "\n# WordPress Development Workflow Bundle\n\n## Overview\n\nComprehensive WordPress development workflow covering theme development, plugin creation, WooCommerce integration, performance optimization, and security. This bundle orchestrates skills for building production-ready WordPress sites and applications.\n\n## When to Use This Workflow\n\nUse this workflow when:\n- Building new WordPress websites\n- Creating custom themes\n- Developing WordPress plugins\n- Setting up WooCommerce stores\n- Optimizing WordPress performance\n- Hardening WordPress security\n\n## Workflow Phases\n\n### Phase 1: WordPress Setup\n\n#### Skills to Invoke\n- `app-builder` - Project scaffolding\n- `environment-setup-guide` - Development environment\n\n#### Actions\n1. Set up local development environment (LocalWP, Docker, or Valet)\n2. Install WordPress\n3. Configure development database\n4. Set up version control\n5. Configure wp-config.php for development\n\n#### Copy-Paste Prompts\n```\nUse @app-builder to scaffold a new WordPress project with modern tooling\n```\n\n### Phase 2: Theme Development\n\n#### Skills to Invoke\n- `frontend-developer` - Component development\n- `frontend-design` - UI implementation\n- `tailwind-patterns` - Styling\n- `web-performance-optimization` - Performance\n\n#### Actions\n1. Design theme architecture\n2. Create theme files (style.css, functions.php, index.php)\n3. Implement template hierarchy\n4. Create custom page templates\n5. Add custom post types and taxonomies\n6. Implement theme customization options\n7. Add responsive design\n\n#### Theme Structure\n```\ntheme-name/\n├── style.css\n├── functions.php\n├── index.php\n├── header.php\n├── footer.php\n├── sidebar.php\n├── single.php\n├── page.php\n├── archive.php\n├── search.php\n├── 404.php\n├── template-parts/\n├── inc/\n├── assets/\n│   ├── css/\n│   ├── js/\n│   └── images/\n└── languages/\n```\n\n#### Copy-Paste Prompts\n```\nUse @frontend-developer to create a custom WordPress theme with React components\n```\n\n```\nUse @tailwind-patterns to style WordPress theme with modern CSS\n```\n\n### Phase 3: Plugin Development\n\n#### Skills to Invoke\n- `backend-dev-guidelines` - Backend standards\n- `api-design-principles` - API design\n- `auth-implementation-patterns` - Authentication\n\n#### Actions\n1. Design plugin architecture\n2. Create plugin boilerplate\n3. Implement hooks (actions and filters)\n4. Create admin interfaces\n5. Add custom database tables\n6. Implement REST API endpoints\n7. Add settings and options pages\n\n#### Plugin Structure\n```\nplugin-name/\n├── plugin-name.php\n├── includes/\n│   ├── class-plugin-activator.php\n│   ├── class-plugin-deactivator.php\n│   ├── class-plugin-loader.php\n│   └── class-plugin.php\n├── admin/\n│   ├── class-plugin-admin.php\n│   ├── css/\n│   └── js/\n├── public/\n│   ├── class-plugin-public.php\n│   ├── css/\n│   └── js/\n└── languages/\n```\n\n#### Copy-Paste Prompts\n```\nUse @backend-dev-guidelines to create a WordPress plugin with proper architecture\n```\n\n### Phase 4: WooCommerce Integration\n\n#### Skills to Invoke\n- `payment-integration` - Payment processing\n- `stripe-integration` - Stripe payments\n- `billing-automation` - Billing workflows\n\n#### Actions\n1. Install and configure WooCommerce\n2. Create custom product types\n3. Customize checkout flow\n4. Integrate payment gateways\n5. Set up shipping methods\n6. Create custom order statuses\n7. Implement subscription products\n8. Add custom email templates\n\n#### Copy-Paste Prompts\n```\nUse @payment-integration to set up WooCommerce with Stripe\n```\n\n```\nUse @billing-automation to create subscription products in WooCommerce\n```\n\n### Phase 5: Performance Optimization\n\n#### Skills to Invoke\n- `web-performance-optimization` - Performance optimization\n- `database-optimizer` - Database optimization\n\n#### Actions\n1. Implement caching (object, page, browser)\n2. Optimize images (lazy loading, WebP)\n3. Minify and combine assets\n4. Enable CDN\n5. Optimize database queries\n6. Implement lazy loading\n7. Configure OPcache\n8. Set up Redis/Memcached\n\n#### Performance Checklist\n- [ ] Page load time < 3 seconds\n- [ ] Time to First Byte < 200ms\n- [ ] Largest Contentful Paint < 2.5s\n- [ ] Cumulative Layout Shift < 0.1\n- [ ] First Input Delay < 100ms\n\n#### Copy-Paste Prompts\n```\nUse @web-performance-optimization to audit and improve WordPress performance\n```\n\n### Phase 6: Security Hardening\n\n#### Skills to Invoke\n- `security-auditor` - Security audit\n- `wordpress-penetration-testing` - WordPress security testing\n- `sast-configuration` - Static analysis\n\n#### Actions\n1. Update WordPress core, themes, plugins\n2. Implement security headers\n3. Configure file permissions\n4. Set up firewall rules\n5. Enable two-factor authentication\n6. Implement rate limiting\n7. Configure security logging\n8. Set up malware scanning\n\n#### Security Checklist\n- [ ] WordPress core updated\n- [ ] All plugins/themes updated\n- [ ] Strong passwords enforced\n- [ ] Two-factor authentication enabled\n- [ ] Security headers configured\n- [ ] XML-RPC disabled or protected\n- [ ] File editing disabled\n- [ ] Database prefix cha",
+  "tags": [
+    "react",
+    "api",
+    "ai",
+    "automation",
+    "workflow",
+    "template",
+    "design",
+    "image",
+    "security",
+    "tailwind"
+  ],
+  "useCases": [
+    "Building new WordPress websites",
+    "Creating custom themes",
+    "Developing WordPress plugins",
+    "Setting up WooCommerce stores",
+    "Optimizing WordPress performance"
+  ],
+  "scrapedAt": "2026-02-23T07:19:09.692Z"
+}

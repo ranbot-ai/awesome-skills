@@ -1,0 +1,28 @@
+{
+  "id": "antigravity-wordpress-woocommerce-development",
+  "name": "wordpress-woocommerce-development",
+  "slug": "wordpress-woocommerce-development",
+  "description": "WooCommerce store development workflow covering store setup, payment integration, shipping configuration, and customization.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/wordpress-woocommerce-development",
+  "content": "\n# WordPress WooCommerce Development Workflow\n\n## Overview\n\nSpecialized workflow for building WooCommerce stores including setup, payment gateway integration, shipping configuration, custom product types, and store optimization.\n\n## When to Use This Workflow\n\nUse this workflow when:\n- Setting up WooCommerce stores\n- Integrating payment gateways\n- Configuring shipping methods\n- Creating custom product types\n- Building subscription products\n\n## Workflow Phases\n\n### Phase 1: Store Setup\n\n#### Skills to Invoke\n- `app-builder` - Project scaffolding\n- `wordpress-penetration-testing` - WordPress patterns\n\n#### Actions\n1. Install WooCommerce\n2. Run setup wizard\n3. Configure store settings\n4. Set up tax rules\n5. Configure currency\n\n#### Copy-Paste Prompts\n```\nUse @app-builder to set up WooCommerce store\n```\n\n### Phase 2: Product Configuration\n\n#### Skills to Invoke\n- `wordpress-penetration-testing` - WooCommerce patterns\n\n#### Actions\n1. Create product categories\n2. Add product attributes\n3. Configure product types\n4. Set up variable products\n5. Add product images\n\n#### Copy-Paste Prompts\n```\nUse @wordpress-penetration-testing to configure WooCommerce products\n```\n\n### Phase 3: Payment Integration\n\n#### Skills to Invoke\n- `payment-integration` - Payment processing\n- `stripe-integration` - Stripe\n- `paypal-integration` - PayPal\n\n#### Actions\n1. Choose payment gateways\n2. Configure Stripe\n3. Set up PayPal\n4. Add offline payments\n5. Test payment flows\n\n#### Copy-Paste Prompts\n```\nUse @stripe-integration to integrate Stripe payments\n```\n\n```\nUse @paypal-integration to integrate PayPal\n```\n\n### Phase 4: Shipping Configuration\n\n#### Skills to Invoke\n- `wordpress-penetration-testing` - WooCommerce shipping\n\n#### Actions\n1. Set up shipping zones\n2. Configure shipping methods\n3. Add flat rate shipping\n4. Set up free shipping\n5. Integrate carriers\n\n#### Copy-Paste Prompts\n```\nUse @wordpress-penetration-testing to configure shipping\n```\n\n### Phase 5: Store Customization\n\n#### Skills to Invoke\n- `frontend-developer` - Store customization\n- `frontend-design` - Store design\n\n#### Actions\n1. Customize product pages\n2. Modify cart page\n3. Style checkout flow\n4. Create custom templates\n5. Add custom fields\n\n#### Copy-Paste Prompts\n```\nUse @frontend-developer to customize WooCommerce templates\n```\n\n### Phase 6: Extensions\n\n#### Skills to Invoke\n- `wordpress-penetration-testing` - WooCommerce extensions\n\n#### Actions\n1. Install required extensions\n2. Configure subscriptions\n3. Set up bookings\n4. Add memberships\n5. Integrate marketplace\n\n#### Copy-Paste Prompts\n```\nUse @wordpress-penetration-testing to configure WooCommerce extensions\n```\n\n### Phase 7: Optimization\n\n#### Skills to Invoke\n- `web-performance-optimization` - Performance\n- `database-optimizer` - Database optimization\n\n#### Actions\n1. Optimize product images\n2. Enable caching\n3. Optimize database\n4. Configure CDN\n5. Set up lazy loading\n\n#### Copy-Paste Prompts\n```\nUse @web-performance-optimization to optimize WooCommerce store\n```\n\n### Phase 8: Testing\n\n#### Skills to Invoke\n- `playwright-skill` - E2E testing\n- `test-automator` - Test automation\n\n#### Actions\n1. Test checkout flow\n2. Verify payment processing\n3. Test email notifications\n4. Check mobile experience\n5. Performance testing\n\n#### Copy-Paste Prompts\n```\nUse @playwright-skill to test WooCommerce checkout flow\n```\n\n## Quality Gates\n\n- [ ] Products displaying correctly\n- [ ] Checkout flow working\n- [ ] Payments processing\n- [ ] Shipping calculating\n- [ ] Emails sending\n- [ ] Mobile responsive\n\n## Related Workflow Bundles\n\n- `wordpress` - WordPress development\n- `wordpress-theme-development` - Theme development\n- `wordpress-plugin-development` - Plugin development\n- `payment-integration` - Payment processing\n",
+  "tags": [
+    "ai",
+    "automation",
+    "workflow",
+    "template",
+    "design",
+    "image",
+    "stripe"
+  ],
+  "useCases": [
+    "Setting up WooCommerce stores",
+    "Integrating payment gateways",
+    "Configuring shipping methods",
+    "Creating custom product types",
+    "Building subscription products"
+  ],
+  "scrapedAt": "2026-02-23T07:19:09.405Z"
+}

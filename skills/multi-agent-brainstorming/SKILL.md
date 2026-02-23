@@ -3,7 +3,7 @@ name: multi-agent-brainstorming
 description: Use this skill when a design or idea requires higher confidence, risk reduction, or formal review. This skill orchestrates a structured, sequential multi-agent design review where each agent has a str
 category: AI & Agents
 source: antigravity
-tags: [ai, agent, design, security]
+tags: [ai, agent, workflow, design, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/multi-agent-brainstorming
 ---
 
@@ -253,3 +253,6 @@ This skill exists to answer one question with confidence:
 > “If this design fails, did we do everything reasonable to catch it early?”
 
 If the answer is unclear, **do not exit this skill**.
+
+
+## When 

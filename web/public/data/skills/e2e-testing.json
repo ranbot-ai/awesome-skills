@@ -1,0 +1,29 @@
+{
+  "id": "antigravity-e2e-testing",
+  "name": "e2e-testing",
+  "slug": "e2e-testing",
+  "description": "End-to-end testing workflow with Playwright for browser automation, visual regression, cross-browser testing, and CI/CD integration.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/e2e-testing",
+  "content": "\n# E2E Testing Workflow\n\n## Overview\n\nSpecialized workflow for end-to-end testing using Playwright including browser automation, visual regression testing, cross-browser testing, and CI/CD integration.\n\n## When to Use This Workflow\n\nUse this workflow when:\n- Setting up E2E testing\n- Automating browser tests\n- Implementing visual regression\n- Testing across browsers\n- Integrating tests with CI/CD\n\n## Workflow Phases\n\n### Phase 1: Test Setup\n\n#### Skills to Invoke\n- `playwright-skill` - Playwright setup\n- `e2e-testing-patterns` - E2E patterns\n\n#### Actions\n1. Install Playwright\n2. Configure test framework\n3. Set up test directory\n4. Configure browsers\n5. Create base test setup\n\n#### Copy-Paste Prompts\n```\nUse @playwright-skill to set up Playwright testing\n```\n\n### Phase 2: Test Design\n\n#### Skills to Invoke\n- `e2e-testing-patterns` - Test patterns\n- `test-automator` - Test automation\n\n#### Actions\n1. Identify critical flows\n2. Design test scenarios\n3. Plan test data\n4. Create page objects\n5. Set up fixtures\n\n#### Copy-Paste Prompts\n```\nUse @e2e-testing-patterns to design E2E test strategy\n```\n\n### Phase 3: Test Implementation\n\n#### Skills to Invoke\n- `playwright-skill` - Playwright tests\n- `webapp-testing` - Web app testing\n\n#### Actions\n1. Write test scripts\n2. Add assertions\n3. Implement waits\n4. Handle dynamic content\n5. Add error handling\n\n#### Copy-Paste Prompts\n```\nUse @playwright-skill to write E2E test scripts\n```\n\n### Phase 4: Browser Automation\n\n#### Skills to Invoke\n- `browser-automation` - Browser automation\n- `playwright-skill` - Playwright features\n\n#### Actions\n1. Configure headless mode\n2. Set up screenshots\n3. Implement video recording\n4. Add trace collection\n5. Configure mobile emulation\n\n#### Copy-Paste Prompts\n```\nUse @browser-automation to automate browser interactions\n```\n\n### Phase 5: Visual Regression\n\n#### Skills to Invoke\n- `playwright-skill` - Visual testing\n- `ui-visual-validator` - Visual validation\n\n#### Actions\n1. Set up visual testing\n2. Create baseline images\n3. Add visual assertions\n4. Configure thresholds\n5. Review differences\n\n#### Copy-Paste Prompts\n```\nUse @playwright-skill to implement visual regression testing\n```\n\n### Phase 6: Cross-Browser Testing\n\n#### Skills to Invoke\n- `playwright-skill` - Multi-browser\n- `webapp-testing` - Browser testing\n\n#### Actions\n1. Configure Chromium\n2. Add Firefox tests\n3. Add WebKit tests\n4. Test mobile browsers\n5. Compare results\n\n#### Copy-Paste Prompts\n```\nUse @playwright-skill to run cross-browser tests\n```\n\n### Phase 7: CI/CD Integration\n\n#### Skills to Invoke\n- `github-actions-templates` - GitHub Actions\n- `cicd-automation-workflow-automate` - CI/CD\n\n#### Actions\n1. Create CI workflow\n2. Configure parallel execution\n3. Set up artifacts\n4. Add reporting\n5. Configure notifications\n\n#### Copy-Paste Prompts\n```\nUse @github-actions-templates to integrate E2E tests with CI\n```\n\n## Quality Gates\n\n- [ ] Tests passing\n- [ ] Coverage adequate\n- [ ] Visual tests stable\n- [ ] Cross-browser verified\n- [ ] CI integration working\n\n## Related Workflow Bundles\n\n- `testing-qa` - Testing workflow\n- `development` - Development\n- `web-performance-optimization` - Performance\n",
+  "tags": [
+    "ai",
+    "automation",
+    "workflow",
+    "template",
+    "design",
+    "image",
+    "rag",
+    "cro"
+  ],
+  "useCases": [
+    "Setting up E2E testing",
+    "Automating browser tests",
+    "Implementing visual regression",
+    "Testing across browsers",
+    "Integrating tests with CI/CD"
+  ],
+  "scrapedAt": "2026-02-23T07:16:00.510Z"
+}

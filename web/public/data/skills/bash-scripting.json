@@ -1,0 +1,27 @@
+{
+  "id": "antigravity-bash-scripting",
+  "name": "bash-scripting",
+  "slug": "bash-scripting",
+  "description": "Bash scripting workflow for creating production-ready shell scripts with defensive patterns, error handling, and testing.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bash-scripting",
+  "content": "\n# Bash Scripting Workflow\n\n## Overview\n\nSpecialized workflow for creating robust, production-ready bash scripts with defensive programming patterns, comprehensive error handling, and automated testing.\n\n## When to Use This Workflow\n\nUse this workflow when:\n- Creating automation scripts\n- Writing system administration tools\n- Building deployment scripts\n- Developing backup solutions\n- Creating CI/CD scripts\n\n## Workflow Phases\n\n### Phase 1: Script Design\n\n#### Skills to Invoke\n- `bash-pro` - Professional scripting\n- `bash-defensive-patterns` - Defensive patterns\n\n#### Actions\n1. Define script purpose\n2. Identify inputs/outputs\n3. Plan error handling\n4. Design logging strategy\n5. Document requirements\n\n#### Copy-Paste Prompts\n```\nUse @bash-pro to design production-ready bash script\n```\n\n### Phase 2: Script Structure\n\n#### Skills to Invoke\n- `bash-pro` - Script structure\n- `bash-defensive-patterns` - Safety patterns\n\n#### Actions\n1. Add shebang and strict mode\n2. Create usage function\n3. Implement argument parsing\n4. Set up logging\n5. Add cleanup handlers\n\n#### Copy-Paste Prompts\n```\nUse @bash-defensive-patterns to implement strict mode and error handling\n```\n\n### Phase 3: Core Implementation\n\n#### Skills to Invoke\n- `bash-linux` - Linux commands\n- `linux-shell-scripting` - Shell scripting\n\n#### Actions\n1. Implement main functions\n2. Add input validation\n3. Create helper functions\n4. Handle edge cases\n5. Add progress indicators\n\n#### Copy-Paste Prompts\n```\nUse @bash-linux to implement system commands\n```\n\n### Phase 4: Error Handling\n\n#### Skills to Invoke\n- `bash-defensive-patterns` - Error handling\n- `error-handling-patterns` - Error patterns\n\n#### Actions\n1. Add trap handlers\n2. Implement retry logic\n3. Create error messages\n4. Set up exit codes\n5. Add rollback capability\n\n#### Copy-Paste Prompts\n```\nUse @bash-defensive-patterns to add comprehensive error handling\n```\n\n### Phase 5: Logging\n\n#### Skills to Invoke\n- `bash-pro` - Logging patterns\n\n#### Actions\n1. Create logging function\n2. Add log levels\n3. Implement timestamps\n4. Configure log rotation\n5. Add debug mode\n\n#### Copy-Paste Prompts\n```\nUse @bash-pro to implement structured logging\n```\n\n### Phase 6: Testing\n\n#### Skills to Invoke\n- `bats-testing-patterns` - Bats testing\n- `shellcheck-configuration` - ShellCheck\n\n#### Actions\n1. Write Bats tests\n2. Run ShellCheck\n3. Test edge cases\n4. Verify error handling\n5. Test with different inputs\n\n#### Copy-Paste Prompts\n```\nUse @bats-testing-patterns to write script tests\n```\n\n```\nUse @shellcheck-configuration to lint bash script\n```\n\n### Phase 7: Documentation\n\n#### Skills to Invoke\n- `documentation-templates` - Documentation\n\n#### Actions\n1. Add script header\n2. Document functions\n3. Create usage examples\n4. List dependencies\n5. Add troubleshooting section\n\n#### Copy-Paste Prompts\n```\nUse @documentation-templates to document bash script\n```\n\n## Script Template\n\n```bash\n#!/usr/bin/env bash\nset -euo pipefail\n\nreadonly SCRIPT_NAME=$(basename \"$0\")\nreadonly SCRIPT_DIR=$(cd \"$(dirname \"$0\")\" && pwd)\n\nlog() { echo \"[$(date '+%Y-%m-%d %H:%M:%S')] $*\"; }\nerror() { log \"ERROR: $*\" >&2; exit 1; }\n\nusage() { cat <<EOF\nUsage: $SCRIPT_NAME [OPTIONS]\nOptions:\n    -h, --help      Show help\n    -v, --verbose   Verbose output\nEOF\n}\n\nmain() {\n    log \"Script started\"\n    # Implementation\n    log \"Script completed\"\n}\n\nmain \"$@\"\n```\n\n## Quality Gates\n\n- [ ] ShellCheck passes\n- [ ] Bats tests pass\n- [ ] Error handling works\n- [ ] Logging functional\n- [ ] Documentation complete\n\n## Related Workflow Bundles\n\n- `os-scripting` - OS scripting\n- `linux-troubleshooting` - Linux troubleshooting\n- `cloud-devops` - DevOps automation\n",
+  "tags": [
+    "ai",
+    "automation",
+    "workflow",
+    "template",
+    "design",
+    "document"
+  ],
+  "useCases": [
+    "Creating automation scripts",
+    "Writing system administration tools",
+    "Building deployment scripts",
+    "Developing backup solutions",
+    "Creating CI/CD scripts"
+  ],
+  "scrapedAt": "2026-02-23T07:15:00.407Z"
+}

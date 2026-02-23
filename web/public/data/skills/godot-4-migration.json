@@ -1,0 +1,23 @@
+{
+  "id": "antigravity-godot-4-migration",
+  "name": "godot-4-migration",
+  "slug": "godot-4-migration",
+  "description": "Specialized guide for migrating Godot 3.x projects to Godot 4 (GDScript 2.0), covering syntax changes, Tweens, and exports.",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/godot-4-migration",
+  "content": "\n# Godot 4 Migration Guide\n\n## Overview\n\nA critical guide for developers transitioning from Godot 3.x to Godot 4. This skill focuses on the major syntax changes in GDScript 2.0, the new `Tween` system, and `export` annotation updates.\n\n## When to Use This Skill\n\n- Use when porting a Godot 3 project to Godot 4.\n- Use when encountering syntax errors after upgrading.\n- Use when replacing deprecated nodes (like `Tween` node vs `create_tween`).\n- Use when updating `export` variables to `@export` annotations.\n\n## Key Changes\n\n### 1. Annotations (`@`)\n\nGodot 4 uses `@` for keywords that modify behavior.\n- `export var x` -> `@export var x`\n- `onready var y` -> `@onready var y`\n- `tool` -> `@tool` (at top of file)\n\n### 2. Setters and Getters\n\nProperties now define setters/getters inline.\n\n**Godot 3:**\n```gdscript\nvar health setget set_health, get_health\n\nfunc set_health(value):\n    health = value\n```\n\n**Godot 4:**\n```gdscript\nvar health: int:\n    set(value):\n        health = value\n        emit_signal(\"health_changed\", health)\n    get:\n        return health\n```\n\n### 3. Tween System\n\nThe `Tween` node is deprecated. Use `create_tween()` in code.\n\n**Godot 3:**\n```gdscript\n$Tween.interpolate_property(...)\n$Tween.start()\n```\n\n**Godot 4:**\n```gdscript\nvar tween = create_tween()\ntween.tween_property($Sprite, \"position\", Vector2(100, 100), 1.0)\ntween.parallel().tween_property($Sprite, \"modulate:a\", 0.0, 1.0)\n```\n\n### 4. Signal Connections\n\nString-based connections are discouraged. Use callables.\n\n**Godot 3:**\n```gdscript\nconnect(\"pressed\", self, \"_on_pressed\")\n```\n\n**Godot 4:**\n```gdscript\npressed.connect(_on_pressed)\n```\n\n## Examples\n\n### Example 1: Typed Arrays\n\nGDScript 2.0 supports typed arrays for better performance and type safety.\n\n```gdscript\n# Godot 3\nvar enemies = []\n\n# Godot 4\nvar enemies: Array[Node] = []\n\nfunc _ready():\n    for child in get_children():\n        if child is Enemy:\n            enemies.append(child)\n```\n\n### Example 2: Awaiting Signals (Coroutines)\n\n`yield` is replaced by `await`.\n\n**Godot 3:**\n```gdscript\nyield(get_tree().create_timer(1.0), \"timeout\")\n```\n\n**Godot 4:**\n```gdscript\nawait get_tree().create_timer(1.0).timeout\n```\n\n## Best Practices\n\n- ✅ **Do:** Use `@export_range`, `@export_file`, etc., for better inspector UI.\n- ✅ **Do:** Type all variables (`var x: int`) for performance gains in GDScript 2.0.\n- ✅ **Do:** Use `super()` to call parent methods instead of `.function_name()`.\n- ❌ **Don't:** Use string names for signals (`emit_signal(\"name\")`) if you can use the signal object (`name.emit()`).\n\n## Troubleshooting\n\n**Problem:** \"Identifier 'Tween' is not a valid type.\"\n**Solution:** `Tween` is now `SceneTreeTween` or just an object returned by `create_tween()`. You rarely type it explicitly, just use `var tween = create_tween()`.\n",
+  "tags": [
+    "node",
+    "ai",
+    "rag"
+  ],
+  "useCases": [
+    "Use when porting a Godot 3 project to Godot 4.",
+    "Use when encountering syntax errors after upgrading.",
+    "Use when replacing deprecated nodes (like `Tween` node vs `create_tween`).",
+    "Use when updating `export` variables to `@export` annotations."
+  ],
+  "scrapedAt": "2026-02-23T07:16:36.707Z"
+}

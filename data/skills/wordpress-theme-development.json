@@ -1,0 +1,28 @@
+{
+  "id": "antigravity-wordpress-theme-development",
+  "name": "wordpress-theme-development",
+  "slug": "wordpress-theme-development",
+  "description": "WordPress theme development workflow covering theme architecture, template hierarchy, custom post types, block editor support, and responsive design.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/wordpress-theme-development",
+  "content": "\n# WordPress Theme Development Workflow\n\n## Overview\n\nSpecialized workflow for creating custom WordPress themes from scratch, including modern block editor (Gutenberg) support, template hierarchy, and responsive design.\n\n## When to Use This Workflow\n\nUse this workflow when:\n- Creating custom WordPress themes\n- Converting designs to WordPress themes\n- Adding block editor support\n- Implementing custom post types\n- Building child themes\n\n## Workflow Phases\n\n### Phase 1: Theme Setup\n\n#### Skills to Invoke\n- `app-builder` - Project scaffolding\n- `frontend-developer` - Frontend development\n\n#### Actions\n1. Create theme directory structure\n2. Set up style.css with theme header\n3. Create functions.php\n4. Configure theme support\n5. Set up enqueue scripts/styles\n\n#### Copy-Paste Prompts\n```\nUse @app-builder to scaffold a new WordPress theme project\n```\n\n### Phase 2: Template Hierarchy\n\n#### Skills to Invoke\n- `frontend-developer` - Template development\n\n#### Actions\n1. Create index.php (fallback template)\n2. Implement header.php and footer.php\n3. Create single.php for posts\n4. Create page.php for pages\n5. Add archive.php for archives\n6. Implement search.php and 404.php\n\n#### Copy-Paste Prompts\n```\nUse @frontend-developer to create WordPress template files\n```\n\n### Phase 3: Theme Functions\n\n#### Skills to Invoke\n- `backend-dev-guidelines` - Backend patterns\n\n#### Actions\n1. Register navigation menus\n2. Add theme support (thumbnails, RSS, etc.)\n3. Register widget areas\n4. Create custom template tags\n5. Implement helper functions\n\n#### Copy-Paste Prompts\n```\nUse @backend-dev-guidelines to create theme functions\n```\n\n### Phase 4: Custom Post Types\n\n#### Skills to Invoke\n- `wordpress-penetration-testing` - WordPress patterns\n\n#### Actions\n1. Register custom post types\n2. Create custom taxonomies\n3. Add custom meta boxes\n4. Implement custom fields\n5. Create archive templates\n\n#### Copy-Paste Prompts\n```\nUse @wordpress-penetration-testing to understand WordPress CPT patterns\n```\n\n### Phase 5: Block Editor Support\n\n#### Skills to Invoke\n- `frontend-developer` - Block development\n\n#### Actions\n1. Enable block editor support\n2. Register custom blocks\n3. Create block styles\n4. Add block patterns\n5. Configure block templates\n\n#### Copy-Paste Prompts\n```\nUse @frontend-developer to create custom Gutenberg blocks\n```\n\n### Phase 6: Styling and Design\n\n#### Skills to Invoke\n- `frontend-design` - UI design\n- `tailwind-patterns` - Tailwind CSS\n\n#### Actions\n1. Implement responsive design\n2. Add CSS framework or custom styles\n3. Create design system\n4. Implement theme customizer\n5. Add accessibility features\n\n#### Copy-Paste Prompts\n```\nUse @frontend-design to create responsive theme design\n```\n\n### Phase 7: Testing\n\n#### Skills to Invoke\n- `playwright-skill` - Browser testing\n- `webapp-testing` - Web app testing\n\n#### Actions\n1. Test across browsers\n2. Verify responsive breakpoints\n3. Test block editor\n4. Check accessibility\n5. Performance testing\n\n#### Copy-Paste Prompts\n```\nUse @playwright-skill to test WordPress theme\n```\n\n## Theme Structure\n\n```\ntheme-name/\n├── style.css\n├── functions.php\n├── index.php\n├── header.php\n├── footer.php\n├── sidebar.php\n├── single.php\n├── page.php\n├── archive.php\n├── search.php\n├── 404.php\n├── comments.php\n├── template-parts/\n├── inc/\n├── assets/\n│   ├── css/\n│   ├── js/\n│   └── images/\n└── languages/\n```\n\n## Quality Gates\n\n- [ ] All templates working\n- [ ] Block editor supported\n- [ ] Responsive design verified\n- [ ] Accessibility checked\n- [ ] Performance optimized\n- [ ] Cross-browser tested\n\n## Related Workflow Bundles\n\n- `wordpress` - WordPress development\n- `wordpress-plugin-development` - Plugin development\n- `wordpress-woocommerce` - WooCommerce\n",
+  "tags": [
+    "ai",
+    "workflow",
+    "template",
+    "design",
+    "image",
+    "tailwind",
+    "cro"
+  ],
+  "useCases": [
+    "Creating custom WordPress themes",
+    "Converting designs to WordPress themes",
+    "Adding block editor support",
+    "Implementing custom post types",
+    "Building child themes"
+  ],
+  "scrapedAt": "2026-02-23T07:19:09.091Z"
+}

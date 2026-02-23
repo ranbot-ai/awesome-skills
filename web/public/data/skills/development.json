@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-development",
+  "name": "development",
+  "slug": "development",
+  "description": "Comprehensive web, mobile, and backend development workflow bundling frontend, backend, full-stack, and mobile development skills for end-to-end application delivery.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/development",
+  "content": "\n# Development Workflow Bundle\n\n## Overview\n\nConsolidated workflow for end-to-end software development covering web, mobile, and backend development. This bundle orchestrates skills for building production-ready applications from scaffolding to deployment.\n\n## When to Use This Workflow\n\nUse this workflow when:\n- Building new web or mobile applications\n- Adding features to existing applications\n- Refactoring or modernizing legacy code\n- Setting up new projects with best practices\n- Full-stack feature development\n- Cross-platform application development\n\n## Workflow Phases\n\n### Phase 1: Project Setup and Scaffolding\n\n#### Skills to Invoke\n- `app-builder` - Main application building orchestrator\n- `senior-fullstack` - Full-stack development guidance\n- `environment-setup-guide` - Development environment setup\n- `concise-planning` - Task planning and breakdown\n\n#### Actions\n1. Determine project type (web, mobile, full-stack)\n2. Select technology stack\n3. Scaffold project structure\n4. Configure development environment\n5. Set up version control and CI/CD\n\n#### Copy-Paste Prompts\n```\nUse @app-builder to scaffold a new React + Node.js full-stack application\n```\n\n```\nUse @senior-fullstack to set up a Next.js 14 project with App Router\n```\n\n```\nUse @environment-setup-guide to configure my development environment\n```\n\n### Phase 2: Frontend Development\n\n#### Skills to Invoke\n- `frontend-developer` - React/Next.js component development\n- `frontend-design` - UI/UX design implementation\n- `react-patterns` - Modern React patterns\n- `typescript-pro` - TypeScript best practices\n- `tailwind-patterns` - Tailwind CSS styling\n- `nextjs-app-router-patterns` - Next.js 14+ patterns\n\n#### Actions\n1. Design component architecture\n2. Implement UI components\n3. Set up state management\n4. Configure routing\n5. Apply styling and theming\n6. Implement responsive design\n\n#### Copy-Paste Prompts\n```\nUse @frontend-developer to create a dashboard component with React and TypeScript\n```\n\n```\nUse @react-patterns to implement proper state management with Zustand\n```\n\n```\nUse @tailwind-patterns to style components with a consistent design system\n```\n\n### Phase 3: Backend Development\n\n#### Skills to Invoke\n- `backend-architect` - Backend architecture design\n- `backend-dev-guidelines` - Backend development standards\n- `nodejs-backend-patterns` - Node.js/Express patterns\n- `fastapi-pro` - FastAPI development\n- `api-design-principles` - REST/GraphQL API design\n- `auth-implementation-patterns` - Authentication implementation\n\n#### Actions\n1. Design API architecture\n2. Implement REST/GraphQL endpoints\n3. Set up database connections\n4. Implement authentication/authorization\n5. Configure middleware\n6. Set up error handling\n\n#### Copy-Paste Prompts\n```\nUse @backend-architect to design a microservices architecture for my application\n```\n\n```\nUse @nodejs-backend-patterns to create Express.js API endpoints\n```\n\n```\nUse @auth-implementation-patterns to implement JWT authentication\n```\n\n### Phase 4: Database Development\n\n#### Skills to Invoke\n- `database-architect` - Database design\n- `database-design` - Schema design principles\n- `prisma-expert` - Prisma ORM\n- `postgresql` - PostgreSQL optimization\n- `neon-postgres` - Serverless Postgres\n\n#### Actions\n1. Design database schema\n2. Create migrations\n3. Set up ORM\n4. Optimize queries\n5. Configure connection pooling\n\n#### Copy-Paste Prompts\n```\nUse @database-architect to design a normalized schema for an e-commerce platform\n```\n\n```\nUse @prisma-expert to set up Prisma ORM with TypeScript\n```\n\n### Phase 5: Testing\n\n#### Skills to Invoke\n- `test-driven-development` - TDD workflow\n- `javascript-testing-patterns` - Jest/Vitest testing\n- `python-testing-patterns` - pytest testing\n- `e2e-testing-patterns` - Playwright/Cypress E2E\n- `playwright-skill` - Browser automation testing\n\n#### Actions\n1. Write unit tests\n2. Create integration tests\n3. Set up E2E tests\n4. Configure CI test runners\n5. Achieve coverage targets\n\n#### Copy-Paste Prompts\n```\nUse @test-driven-development to implement features with TDD\n```\n\n```\nUse @playwright-skill to create E2E tests for critical user flows\n```\n\n### Phase 6: Code Quality and Review\n\n#### Skills to Invoke\n- `code-reviewer` - AI-powered code review\n- `clean-code` - Clean code principles\n- `lint-and-validate` - Linting and validation\n- `security-scanning-security-sast` - Static security analysis\n\n#### Actions\n1. Run linters and formatters\n2. Perform code review\n3. Fix code quality issues\n4. Run security scans\n5. Address vulnerabilities\n\n#### Copy-Paste Prompts\n```\nUse @code-reviewer to review my pull request\n```\n\n```\nUse @lint-and-validate to check code quality\n```\n\n### Phase 7: Build and Deployment\n\n#### Skills to Invoke\n- `deployment-engineer` - Deployment orchestration\n- `docker-expert` - Containerization\n- `vercel-deployment` - Vercel deployment\n- `github-actions-templates` - CI/CD workflows\n- `cicd-automation-workflow-automate` - CI/CD automation\n\n#### Actions\n1. Create Dockerfiles\n2.",
+  "tags": [
+    "python",
+    "javascript",
+    "typescript",
+    "react",
+    "node",
+    "nextjs",
+    "api",
+    "ai",
+    "automation",
+    "workflow"
+  ],
+  "useCases": [
+    "Building new web or mobile applications",
+    "Adding features to existing applications",
+    "Refactoring or modernizing legacy code",
+    "Setting up new projects with best practices",
+    "Full-stack feature development"
+  ],
+  "scrapedAt": "2026-02-23T07:15:51.889Z"
+}
