@@ -3,7 +3,7 @@ name: shopify-development
 description: Build Shopify apps, extensions, themes using GraphQL Admin API, Shopify CLI, Polaris UI, and Liquid. TRIGGER: "shopify", "shopify app", "checkout extension", "admin extension", "POS extension", "shopi
 category: Document Processing
 source: antigravity
-tags: [python, react, node, api, ai, llm, template, design, document, image]
+tags: [python, react, node, api, ai, llm, workflow, template, design, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/shopify-development
 ---
 
