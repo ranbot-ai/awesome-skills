@@ -2,7 +2,7 @@
   "id": "antigravity-typescript-pro",
   "name": "typescript-pro",
   "slug": "typescript-pro",
-  "description": "Master TypeScript with advanced types, generics, and strict type safety. Handles complex type systems, decorators, and enterprise-grade patterns. Use PROACTIVELY for TypeScript architecture, type inference optimization, or advanced typing patterns.",
+  "description": "Master TypeScript with advanced types, generics, and strict type\nsafety. Handles complex type systems, decorators, and enterprise-grade\npatterns. Use PROACTIVELY for TypeScript architecture, type inference\noptimization, or advanced typing patterns.\n",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -18,5 +18,5 @@
     "rag"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:53.566Z"
+  "scrapedAt": "2026-02-26T07:14:28.183Z"
 }

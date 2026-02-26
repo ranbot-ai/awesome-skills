@@ -2,7 +2,7 @@
   "id": "antigravity-startup-business-analyst-market-opportunity",
   "name": "startup-business-analyst-market-opportunity",
   "slug": "startup-business-analyst-market-opportunity",
-  "description": "Generate comprehensive market opportunity analysis with TAM/SAM/SOM calculations",
+  "description": "Generate comprehensive market opportunity analysis with TAM/SAM/SOM\ncalculations\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -19,5 +19,5 @@
     "marketing"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:38.807Z"
+  "scrapedAt": "2026-02-26T07:14:04.496Z"
 }

@@ -3,7 +3,7 @@ name: programmatic-seo
 description: Design and evaluate programmatic SEO strategies for creating SEO-driven pages at scale using templates and structured data. Use when the user mentions programmatic SEO, pages at scale, template pages,
 category: Business & Marketing
 source: antigravity
-tags: [ai, template, design, seo, cro, copywriting]
+tags: [ai, workflow, template, design, seo, cro, copywriting]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/programmatic-seo
 ---
 

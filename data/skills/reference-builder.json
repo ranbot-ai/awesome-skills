@@ -2,7 +2,7 @@
   "id": "antigravity-reference-builder",
   "name": "reference-builder",
   "slug": "reference-builder",
-  "description": "Creates exhaustive technical references and API documentation. Generates comprehensive parameter listings, configuration guides, and searchable reference materials. Use PROACTIVELY for API docs, configuration references, or complete technical specifications.",
+  "description": "Creates exhaustive technical references and API documentation.\nGenerates comprehensive parameter listings, configuration guides, and\nsearchable reference materials. Use PROACTIVELY for API docs, configuration\nreferences, or complete technical specifications.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -19,5 +19,5 @@
     "cro"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:14.296Z"
+  "scrapedAt": "2026-02-26T07:13:28.260Z"
 }

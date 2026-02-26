@@ -3,7 +3,7 @@ name: azure-ai-contentsafety-py
 description: Azure AI Content Safety SDK for Python. Use for detecting harmful content in text and images with multi-severity classification. Triggers: "azure-ai-contentsafety", "ContentSafetyClient", "content mod
 category: AI & Agents
 source: antigravity
-tags: [python, api, ai, image, azure]
+tags: [python, api, ai, workflow, image, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-contentsafety-py
 ---
 

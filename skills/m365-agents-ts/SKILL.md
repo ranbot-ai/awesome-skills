@@ -171,4 +171,4 @@ window.WebChat.renderWebChat({
 
 | File | Contents |
 | --- | --- |
-| [references/acceptance-criteria.md](references/acceptance-c
+| references/acceptance-criteria.md | Import paths, hosting p

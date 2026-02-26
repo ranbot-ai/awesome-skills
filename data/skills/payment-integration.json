@@ -2,7 +2,7 @@
   "id": "antigravity-payment-integration",
   "name": "payment-integration",
   "slug": "payment-integration",
-  "description": "Integrate Stripe, PayPal, and payment processors. Handles checkout flows, subscriptions, webhooks, and PCI compliance. Use PROACTIVELY when implementing payments, billing, or subscription features.",
+  "description": "Integrate Stripe, PayPal, and payment processors. Handles checkout\nflows, subscriptions, webhooks, and PCI compliance. Use PROACTIVELY when\nimplementing payments, billing, or subscription features.\n",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -16,5 +16,5 @@
     "stripe"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:59:53.548Z"
+  "scrapedAt": "2026-02-26T07:12:57.911Z"
 }

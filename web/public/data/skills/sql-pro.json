@@ -2,7 +2,7 @@
   "id": "antigravity-sql-pro",
   "name": "sql-pro",
   "slug": "sql-pro",
-  "description": "Master modern SQL with cloud-native databases, OLTP/OLAP optimization, and advanced query techniques. Expert in performance tuning, data modeling, and hybrid analytical systems. Use PROACTIVELY for database optimization or complex analysis.",
+  "description": "Master modern SQL with cloud-native databases, OLTP/OLAP\noptimization, and advanced query techniques. Expert in performance tuning,\ndata modeling, and hybrid analytical systems. Use PROACTIVELY for database\noptimization or complex analysis.\n",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Implement a data migration strategy from Oracle to cloud-native PostgreSQL\"",
     "\"Build a cohort analysis query to track customer retention over time\""
   ],
-  "scrapedAt": "2026-01-29T07:00:37.098Z"
+  "scrapedAt": "2026-02-26T07:14:02.076Z"
 }

@@ -2,7 +2,7 @@
   "id": "antigravity-cloud-architect",
   "name": "cloud-architect",
   "slug": "cloud-architect",
-  "description": "Expert cloud architect specializing in AWS/Azure/GCP multi-cloud infrastructure design, advanced IaC (Terraform/OpenTofu/CDK), FinOps cost optimization, and modern architectural patterns. Masters serverless, microservices, security, compliance, and disaster recovery. Use PROACTIVELY for cloud archit",
+  "description": "Expert cloud architect specializing in AWS/Azure/GCP multi-cloud\ninfrastructure design, advanced IaC (Terraform/OpenTofu/CDK), FinOps cost\noptimization, and modern architectural patterns. Masters serverless,\nmicroservices, security, compliance, and disaster recovery. Use PROACTIVELY\nfor cloud archit",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Design a serverless event-driven architecture for real-time data processing\"",
     "\"Plan a migration from monolithic application to microservices on Kubernetes\""
   ],
-  "scrapedAt": "2026-01-29T06:58:21.358Z"
+  "scrapedAt": "2026-02-26T07:10:14.257Z"
 }

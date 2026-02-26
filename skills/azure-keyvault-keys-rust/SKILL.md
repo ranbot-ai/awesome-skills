@@ -3,7 +3,7 @@ name: azure-keyvault-keys-rust
 description: Azure Key Vault Keys SDK for Rust. Use for creating, managing, and using cryptographic keys. Triggers: "keyvault keys rust", "KeyClient rust", "create key rust", "encrypt rust", "sign rust". 
 category: Development & Code Tools
 source: antigravity
-tags: [api, ai, security, azure, rag]
+tags: [api, ai, workflow, security, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-keyvault-keys-rust
 ---
 
@@ -167,3 +167,6 @@ Assign these Key Vault roles:
 | API Reference | https://docs.rs/azure_security_keyvault_keys |
 | Source Code | https://github.com/Azure/azure-sdk-for-rust/tree/main/sdk/keyvault/azure_security_keyvault_keys |
 | crates.io | https://crates.io/crates/azure_security_keyvault_keys |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

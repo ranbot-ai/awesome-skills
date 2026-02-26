@@ -2,7 +2,7 @@
   "id": "antigravity-javascript-pro",
   "name": "javascript-pro",
   "slug": "javascript-pro",
-  "description": "Master modern JavaScript with ES6+, async patterns, and Node.js APIs. Handles promises, event loops, and browser/Node compatibility. Use PROACTIVELY for JavaScript optimization, async debugging, or complex JS patterns.",
+  "description": "Master modern JavaScript with ES6+, async patterns, and Node.js\nAPIs. Handles promises, event loops, and browser/Node compatibility. Use\nPROACTIVELY for JavaScript optimization, async debugging, or complex JS\npatterns.\n",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -17,5 +17,5 @@
     "cro"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:59:23.432Z"
+  "scrapedAt": "2026-02-26T07:12:05.131Z"
 }

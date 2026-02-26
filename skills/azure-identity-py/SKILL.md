@@ -3,7 +3,7 @@ name: azure-identity-py
 description: Azure Identity SDK for Python authentication. Use for DefaultAzureCredential, managed identity, service principals, and token caching. Triggers: "azure-identity", "DefaultAzureCredential", "authentica
 category: Creative & Media
 source: antigravity
-tags: [python, ai, kubernetes, azure, rag, cro]
+tags: [python, ai, workflow, kubernetes, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-identity-py
 ---
 

@@ -2,7 +2,7 @@
   "id": "antigravity-php-pro",
   "name": "php-pro",
   "slug": "php-pro",
-  "description": "Write idiomatic PHP code with generators, iterators, SPL data structures, and modern OOP features. Use PROACTIVELY for high-performance PHP applications.",
+  "description": "Write idiomatic PHP code with generators, iterators, SPL data\nstructures, and modern OOP features. Use PROACTIVELY for high-performance PHP\napplications.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -15,5 +15,5 @@
     "rag"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:59:57.243Z"
+  "scrapedAt": "2026-02-26T07:13:02.744Z"
 }

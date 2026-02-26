@@ -3,7 +3,7 @@ name: azure-storage-blob-rust
 description: Azure Blob Storage SDK for Rust. Use for uploading, downloading, and managing blobs and containers. Triggers: "blob storage rust", "BlobClient rust", "upload blob rust", "download blob rust", "contain
 category: Development & Code Tools
 source: antigravity
-tags: [api, ai, azure, rag, cro]
+tags: [api, ai, workflow, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-storage-blob-rust
 ---
 
@@ -132,3 +132,6 @@ For Entra ID auth, assign one of these roles:
 | API Reference | https://docs.rs/azure_storage_blob |
 | Source Code | https://github.com/Azure/azure-sdk-for-rust/tree/main/sdk/storage/azure_storage_blob |
 | crates.io | https://crates.io/crates/azure_storage_blob |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

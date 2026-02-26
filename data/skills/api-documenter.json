@@ -2,7 +2,7 @@
   "id": "antigravity-api-documenter",
   "name": "api-documenter",
   "slug": "api-documenter",
-  "description": "Master API documentation with OpenAPI 3.1, AI-powered tools, and modern developer experience practices. Create interactive docs, generate SDKs, and build comprehensive developer portals. Use PROACTIVELY for API documentation or developer portal creation.",
+  "description": "Master API documentation with OpenAPI 3.1, AI-powered tools, and\nmodern developer experience practices. Create interactive docs, generate SDKs,\nand build comprehensive developer portals. Use PROACTIVELY for API\ndocumentation or developer portal creation.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Design a migration guide for developers upgrading from API v1 to v2\"",
     "\"Create webhook documentation with security best practices and payload examples\""
   ],
-  "scrapedAt": "2026-01-29T06:57:57.621Z"
+  "scrapedAt": "2026-02-26T07:08:55.582Z"
 }

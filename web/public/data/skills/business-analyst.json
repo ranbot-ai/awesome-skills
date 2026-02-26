@@ -2,7 +2,7 @@
   "id": "antigravity-business-analyst",
   "name": "business-analyst",
   "slug": "business-analyst",
-  "description": "Master modern business analysis with AI-powered analytics, real-time dashboards, and data-driven insights. Build comprehensive KPI frameworks, predictive models, and strategic recommendations. Use PROACTIVELY for business intelligence or strategic analysis.",
+  "description": "Master modern business analysis with AI-powered analytics,\nreal-time dashboards, and data-driven insights. Build comprehensive KPI\nframeworks, predictive models, and strategic recommendations. Use PROACTIVELY\nfor business intelligence or strategic analysis.\n",
   "category": "Creative & Media",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -26,5 +26,5 @@
     "\"Create a market sizing analysis for our new product line with TAM/SAM/SOM breakdown\"",
     "\"Develop a cohort-based LTV model and optimize our customer acquisition strategy\""
   ],
-  "scrapedAt": "2026-01-29T06:58:13.893Z"
+  "scrapedAt": "2026-02-26T07:09:59.668Z"
 }

@@ -3,7 +3,7 @@ name: azure-mgmt-fabric-py
 description: Azure Fabric Management SDK for Python. Use for managing Microsoft Fabric capacities and resources. Triggers: "azure-mgmt-fabric", "FabricMgmtClient", "Fabric capacity", "Microsoft Fabric", "Power BI 
 category: AI & Agents
 source: antigravity
-tags: [python, ai, azure, cro]
+tags: [python, ai, workflow, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-mgmt-fabric-py
 ---
 

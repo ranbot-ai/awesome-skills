@@ -2,7 +2,7 @@
   "id": "antigravity-ruby-pro",
   "name": "ruby-pro",
   "slug": "ruby-pro",
-  "description": "Write idiomatic Ruby code with metaprogramming, Rails patterns, and performance optimization. Specializes in Ruby on Rails, gem development, and testing frameworks. Use PROACTIVELY for Ruby refactoring, optimization, or complex Ruby features.",
+  "description": "Write idiomatic Ruby code with metaprogramming, Rails patterns, and\nperformance optimization. Specializes in Ruby on Rails, gem development, and\ntesting frameworks. Use PROACTIVELY for Ruby refactoring, optimization, or\ncomplex Ruby features.\n",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -13,5 +13,5 @@
     "workflow"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:17.085Z"
+  "scrapedAt": "2026-02-26T07:13:32.625Z"
 }

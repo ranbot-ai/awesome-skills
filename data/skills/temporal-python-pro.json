@@ -2,7 +2,7 @@
   "id": "antigravity-temporal-python-pro",
   "name": "temporal-python-pro",
   "slug": "temporal-python-pro",
-  "description": "Master Temporal workflow orchestration with Python SDK. Implements durable workflows, saga patterns, and distributed transactions. Covers async/await, testing strategies, and production deployment. Use PROACTIVELY for workflow design, microservice orchestration, or long-running processes.",
+  "description": "Master Temporal workflow orchestration with Python SDK. Implements\ndurable workflows, saga patterns, and distributed transactions. Covers\nasync/await, testing strategies, and production deployment. Use PROACTIVELY\nfor workflow design, microservice orchestration, or long-running processes.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -21,5 +21,5 @@
     "kubernetes"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:46.533Z"
+  "scrapedAt": "2026-02-26T07:14:16.491Z"
 }

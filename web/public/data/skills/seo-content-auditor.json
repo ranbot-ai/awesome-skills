@@ -2,7 +2,7 @@
   "id": "antigravity-seo-content-auditor",
   "name": "seo-content-auditor",
   "slug": "seo-content-auditor",
-  "description": "Analyzes provided content for quality, E-E-A-T signals, and SEO best practices. Scores content and provides improvement recommendations based on established guidelines. Use PROACTIVELY for content review.",
+  "description": "Analyzes provided content for quality, E-E-A-T signals, and SEO\nbest practices. Scores content and provides improvement recommendations based\non established guidelines. Use PROACTIVELY for content review.\n",
   "category": "Business & Marketing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -15,5 +15,5 @@
     "seo"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:26.532Z"
+  "scrapedAt": "2026-02-26T07:13:47.594Z"
 }

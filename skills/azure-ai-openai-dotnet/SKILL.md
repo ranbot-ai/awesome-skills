@@ -3,7 +3,7 @@ name: azure-ai-openai-dotnet
 description: Azure OpenAI SDK for .NET. Client library for Azure OpenAI and OpenAI services. Use for chat completions, embeddings, image generation, audio transcription, and assistants. Triggers: "Azure OpenAI", "
 category: Document Processing
 source: antigravity
-tags: [api, ai, gpt, document, image, azure, rag, cro]
+tags: [api, ai, gpt, workflow, document, image, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-openai-dotnet
 ---
 

@@ -3,7 +3,7 @@ name: azure-keyvault-py
 description: Azure Key Vault SDK for Python. Use for secrets, keys, and certificates management with secure storage. Triggers: "key vault", "SecretClient", "KeyClient", "CertificateClient", "secrets", "encryption 
 category: AI & Agents
 source: antigravity
-tags: [python, api, ai, azure, rag]
+tags: [python, api, ai, workflow, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-keyvault-py
 ---
 

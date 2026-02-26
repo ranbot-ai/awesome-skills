@@ -2,7 +2,7 @@
   "id": "antigravity-python-pro",
   "name": "python-pro",
   "slug": "python-pro",
-  "description": "Master Python 3.12+ with modern features, async programming, performance optimization, and production-ready practices. Expert in the latest Python ecosystem including uv, ruff, pydantic, and FastAPI. Use PROACTIVELY for Python development, optimization, or advanced Python patterns.",
+  "description": "Master Python 3.12+ with modern features, async programming,\nperformance optimization, and production-ready practices. Expert in the latest\nPython ecosystem including uv, ruff, pydantic, and FastAPI. Use PROACTIVELY\nfor Python development, optimization, or advanced Python patterns.\n",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Set up a modern Python project with ruff, mypy, and pytest\"",
     "\"Implement a high-performance data processing pipeline\""
   ],
-  "scrapedAt": "2026-01-29T07:00:09.166Z"
+  "scrapedAt": "2026-02-26T07:13:19.717Z"
 }

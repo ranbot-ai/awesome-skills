@@ -2,7 +2,7 @@
   "id": "antigravity-team-composition-analysis",
   "name": "team-composition-analysis",
   "slug": "team-composition-analysis",
-  "description": "This skill should be used when the user asks to \"plan team structure\", \"determine hiring needs\", \"design org chart\", \"calculate compensation\", \"plan equity allocation\", or requests organizational design and headcount planning for a startup.",
+  "description": "This skill should be used when the user asks to \\\\\\\"plan team\nstructure\", \"determine hiring needs\", \"design org chart\", \"calculate\ncompensation\", \"plan equity allocation\", or requests organizational design and\nheadcount planning for a startup.\n",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -19,5 +19,5 @@
     "**`examples/seed-stage-hiring-plan.md`** - Complete hiring plan for seed-stage SaaS company",
     "**`examples/org-chart-evolution.md`** - Organizational design from 5 to 50 people"
   ],
-  "scrapedAt": "2026-01-29T07:00:45.665Z"
+  "scrapedAt": "2026-02-26T07:14:15.131Z"
 }

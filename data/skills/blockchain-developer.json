@@ -2,7 +2,7 @@
   "id": "antigravity-blockchain-developer",
   "name": "blockchain-developer",
   "slug": "blockchain-developer",
-  "description": "Build production-ready Web3 applications, smart contracts, and decentralized systems. Implements DeFi protocols, NFT platforms, DAOs, and enterprise blockchain integrations. Use PROACTIVELY for smart contracts, Web3 apps, DeFi protocols, or blockchain infrastructure.",
+  "description": "Build production-ready Web3 applications, smart contracts, and\ndecentralized systems. Implements DeFi protocols, NFT platforms, DAOs, and\nenterprise blockchain integrations. Use PROACTIVELY for smart contracts, Web3\napps, DeFi protocols, or blockchain infrastructure.\n",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Create a decentralized identity system with verifiable credentials\"",
     "\"Build a yield farming protocol with auto-compounding and risk management\""
   ],
-  "scrapedAt": "2026-01-29T06:58:10.781Z"
+  "scrapedAt": "2026-02-26T07:09:55.467Z"
 }

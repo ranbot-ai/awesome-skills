@@ -2,7 +2,7 @@
   "id": "antigravity-context-driven-development",
   "name": "context-driven-development",
   "slug": "context-driven-development",
-  "description": "Use this skill when working with Conductor's context-driven development methodology, managing project context artifacts, or understanding the relationship between product.md, tech-stack.md, and workflow.md files.",
+  "description": "Use this skill when working with Conductor's context-driven\ndevelopment methodology, managing project context artifacts, or understanding\nthe relationship between product.md, tech-stack.md, and workflow.md files.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -18,5 +18,5 @@
     "cro"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:58:32.359Z"
+  "scrapedAt": "2026-02-26T07:10:30.416Z"
 }

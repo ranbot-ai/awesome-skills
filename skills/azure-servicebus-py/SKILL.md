@@ -3,7 +3,7 @@ name: azure-servicebus-py
 description: Azure Service Bus SDK for Python messaging. Use for queues, topics, subscriptions, and enterprise messaging patterns. Triggers: "service bus", "ServiceBusClient", "queue", "topic", "subscription", "me
 category: AI & Agents
 source: antigravity
-tags: [python, ai, azure]
+tags: [python, ai, workflow, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-servicebus-py
 ---
 

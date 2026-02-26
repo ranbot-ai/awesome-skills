@@ -2,7 +2,7 @@
   "id": "antigravity-ml-engineer",
   "name": "ml-engineer",
   "slug": "ml-engineer",
-  "description": "Build production ML systems with PyTorch 2.x, TensorFlow, and modern ML frameworks. Implements model serving, feature engineering, A/B testing, and monitoring. Use PROACTIVELY for ML model deployment, inference optimization, or production ML infrastructure.",
+  "description": "Build production ML systems with PyTorch 2.x, TensorFlow, and\nmodern ML frameworks. Implements model serving, feature engineering, A/B\ntesting, and monitoring. Use PROACTIVELY for ML model deployment, inference\noptimization, or production ML infrastructure.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Create a distributed training pipeline for large-scale computer vision models\"",
     "\"Design model monitoring system that detects data drift and performance degradation\""
   ],
-  "scrapedAt": "2026-01-29T06:59:40.397Z"
+  "scrapedAt": "2026-02-26T07:12:35.939Z"
 }

@@ -2,7 +2,7 @@
   "id": "antigravity-quant-analyst",
   "name": "quant-analyst",
   "slug": "quant-analyst",
-  "description": "Build financial models, backtest trading strategies, and analyze market data. Implements risk metrics, portfolio optimization, and statistical arbitrage. Use PROACTIVELY for quantitative finance, trading algorithms, or risk analysis.",
+  "description": "Build financial models, backtest trading strategies, and analyze\nmarket data. Implements risk metrics, portfolio optimization, and statistical\narbitrage. Use PROACTIVELY for quantitative finance, trading algorithms, or\nrisk analysis.\n",
   "category": "Creative & Media",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -15,5 +15,5 @@
     "cro"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:10.026Z"
+  "scrapedAt": "2026-02-26T07:13:21.185Z"
 }

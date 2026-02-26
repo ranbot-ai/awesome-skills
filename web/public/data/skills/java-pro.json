@@ -2,7 +2,7 @@
   "id": "antigravity-java-pro",
   "name": "java-pro",
   "slug": "java-pro",
-  "description": "Master Java 21+ with modern features like virtual threads, pattern matching, and Spring Boot 3.x. Expert in the latest Java ecosystem including GraalVM, Project Loom, and cloud-native patterns. Use PROACTIVELY for Java development, microservices architecture, or performance optimization.",
+  "description": "Master Java 21+ with modern features like virtual threads, pattern\nmatching, and Spring Boot 3.x. Expert in the latest Java ecosystem including\nGraalVM, Project Loom, and cloud-native patterns. Use PROACTIVELY for Java\ndevelopment, microservices architecture, or performance optimization.\n",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Implement OAuth2 authentication with Spring Security 6\"",
     "\"Create a GraalVM native image build for faster container startup\""
   ],
-  "scrapedAt": "2026-01-29T06:59:22.872Z"
+  "scrapedAt": "2026-02-26T07:12:04.441Z"
 }

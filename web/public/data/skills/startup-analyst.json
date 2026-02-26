@@ -2,7 +2,7 @@
   "id": "antigravity-startup-analyst",
   "name": "startup-analyst",
   "slug": "startup-analyst",
-  "description": "Expert startup business analyst specializing in market sizing, financial modeling, competitive analysis, and strategic planning for early-stage companies. Use PROACTIVELY when the user asks about market opportunity, TAM/SAM/SOM, financial projections, unit economics, competitive landscape, team plan",
+  "description": "Expert startup business analyst specializing in market sizing,\nfinancial modeling, competitive analysis, and strategic planning for\nearly-stage companies. Use PROACTIVELY when the user asks about market\nopportunity, TAM/SAM/SOM, financial projections, unit economics, competitive\nlandscape, team plan",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -21,5 +21,5 @@
     "cro"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:37.935Z"
+  "scrapedAt": "2026-02-26T07:14:03.503Z"
 }

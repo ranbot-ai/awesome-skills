@@ -2,7 +2,7 @@
   "id": "antigravity-csharp-pro",
   "name": "csharp-pro",
   "slug": "csharp-pro",
-  "description": "Write modern C# code with advanced features like records, pattern matching, and async/await. Optimizes .NET applications, implements enterprise patterns, and ensures comprehensive testing. Use PROACTIVELY for C# refactoring, performance optimization, or complex .NET solutions.",
+  "description": "Write modern C# code with advanced features like records, pattern\nmatching, and async/await. Optimizes .NET applications, implements enterprise\npatterns, and ensures comprehensive testing. Use PROACTIVELY for C#\nrefactoring, performance optimization, or complex .NET solutions.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -17,5 +17,5 @@
     "cro"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:58:36.470Z"
+  "scrapedAt": "2026-02-26T07:10:37.312Z"
 }

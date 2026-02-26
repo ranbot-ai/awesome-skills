@@ -2,7 +2,7 @@
   "id": "antigravity-dotnet-architect",
   "name": "dotnet-architect",
   "slug": "dotnet-architect",
-  "description": "Expert .NET backend architect specializing in C#, ASP.NET Core, Entity Framework, Dapper, and enterprise application patterns. Masters async/await, dependency injection, caching strategies, and performance optimization. Use PROACTIVELY for .NET API development, code review, or architecture decisions",
+  "description": "Expert .NET backend architect specializing in C#, ASP.NET Core,\nEntity Framework, Dapper, and enterprise application patterns. Masters\nasync/await, dependency injection, caching strategies, and performance\noptimization. Use PROACTIVELY for .NET API development, code review, or\narchitecture decisions",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Optimize this LINQ query that's causing N+1 problems\"",
     "\"Create a background service for processing order queue\""
   ],
-  "scrapedAt": "2026-01-29T06:58:50.106Z"
+  "scrapedAt": "2026-02-26T07:11:01.263Z"
 }

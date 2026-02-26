@@ -2,7 +2,7 @@
   "id": "antigravity-market-sizing-analysis",
   "name": "market-sizing-analysis",
   "slug": "market-sizing-analysis",
-  "description": "This skill should be used when the user asks to \"calculate TAM\", \"determine SAM\", \"estimate SOM\", \"size the market\", \"calculate market opportunity\", \"what's the total addressable market\", or requests market sizing analysis for a startup or business opportunity.",
+  "description": "This skill should be used when the user asks to \\\\\\\"calculate TAM\\\\\\\",\n\"determine SAM\", \"estimate SOM\", \"size the market\", \"calculate market\nopportunity\", \"what's the total addressable market\", or requests market sizing\nanalysis for a startup or business opportunity.\n",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -19,5 +19,5 @@
     "marketing"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:59:36.124Z"
+  "scrapedAt": "2026-02-26T07:12:28.999Z"
 }

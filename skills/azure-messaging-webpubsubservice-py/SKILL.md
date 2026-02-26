@@ -3,7 +3,7 @@ name: azure-messaging-webpubsubservice-py
 description: Azure Web PubSub Service SDK for Python. Use for real-time messaging, WebSocket connections, and pub/sub patterns. Triggers: "azure-messaging-webpubsubservice", "WebPubSubServiceClient", "real-time", 
 category: AI & Agents
 source: antigravity
-tags: [python, ai, security, azure, cro]
+tags: [python, ai, workflow, security, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-messaging-webpubsubservice-py
 ---
 

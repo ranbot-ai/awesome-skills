@@ -2,7 +2,7 @@
   "id": "antigravity-startup-metrics-framework",
   "name": "startup-metrics-framework",
   "slug": "startup-metrics-framework",
-  "description": "This skill should be used when the user asks about \"key startup metrics\", \"SaaS metrics\", \"CAC and LTV\", \"unit economics\", \"burn multiple\", \"rule of 40\", \"marketplace metrics\", or requests guidance on tracking and optimizing business performance metrics.",
+  "description": "This skill should be used when the user asks about \\\\\\\"key startup\nmetrics\", \"SaaS metrics\", \"CAC and LTV\", \"unit economics\", \"burn multiple\",\n\"rule of 40\", \"marketplace metrics\", or requests guidance on tracking and\noptimizing business performance metrics.\n",
   "category": "Creative & Media",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -13,5 +13,5 @@
     "workflow"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:39.383Z"
+  "scrapedAt": "2026-02-26T07:14:05.191Z"
 }

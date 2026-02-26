@@ -2,7 +2,7 @@
   "id": "antigravity-legal-advisor",
   "name": "legal-advisor",
   "slug": "legal-advisor",
-  "description": "Draft privacy policies, terms of service, disclaimers, and legal notices. Creates GDPR-compliant texts, cookie policies, and data processing agreements. Use PROACTIVELY for legal documentation, compliance texts, or regulatory requirements.",
+  "description": "Draft privacy policies, terms of service, disclaimers, and legal\nnotices. Creates GDPR-compliant texts, cookie policies, and data processing\nagreements. Use PROACTIVELY for legal documentation, compliance texts, or\nregulatory requirements.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -16,5 +16,5 @@
     "marketing"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:59:30.047Z"
+  "scrapedAt": "2026-02-26T07:12:14.898Z"
 }

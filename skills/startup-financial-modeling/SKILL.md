@@ -1,6 +1,6 @@
 ---
 name: startup-financial-modeling
-description: This skill should be used when the user asks to "create financial projections", "build a financial model", "forecast revenue", "calculate burn rate", "estimate runway", "model cash flow", or requests 
+description: This skill should be used when the user asks to \\\"create financial projections", "build a financial model", "forecast revenue", "calculate burn rate", "estimate runway", "model cash flow", or reques
 category: Creative & Media
 source: antigravity
 tags: [api, ai, workflow, template, design, presentation, rag, cro, marketing]

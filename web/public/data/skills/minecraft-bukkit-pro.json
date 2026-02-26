@@ -2,7 +2,7 @@
   "id": "antigravity-minecraft-bukkit-pro",
   "name": "minecraft-bukkit-pro",
   "slug": "minecraft-bukkit-pro",
-  "description": "Master Minecraft server plugin development with Bukkit, Spigot, and Paper APIs. Specializes in event-driven architecture, command systems, world manipulation, player management, and performance optimization. Use PROACTIVELY for plugin architecture, gameplay mechanics, server-side features, or cross-",
+  "description": "Master Minecraft server plugin development with Bukkit, Spigot, and\nPaper APIs. Specializes in event-driven architecture, command systems, world\nmanipulation, player management, and performance optimization. Use PROACTIVELY\nfor plugin architecture, gameplay mechanics, server-side features, or\ncross-",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -21,5 +21,5 @@
     "cro"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:59:40.122Z"
+  "scrapedAt": "2026-02-26T07:12:34.965Z"
 }

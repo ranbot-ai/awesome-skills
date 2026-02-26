@@ -2,7 +2,7 @@
   "id": "antigravity-bash-pro",
   "name": "bash-pro",
   "slug": "bash-pro",
-  "description": "Master of defensive Bash scripting for production automation, CI/CD pipelines, and system utilities. Expert in safe, portable, and testable shell scripts.",
+  "description": "Master of defensive Bash scripting for production automation, CI/CD\npipelines, and system utilities. Expert in safe, portable, and testable shell\nscripts.\n",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -21,5 +21,5 @@
     "vulnerability"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:58:08.609Z"
+  "scrapedAt": "2026-02-26T07:09:51.810Z"
 }

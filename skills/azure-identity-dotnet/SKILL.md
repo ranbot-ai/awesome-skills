@@ -3,7 +3,7 @@ name: azure-identity-dotnet
 description: Azure Identity SDK for .NET. Authentication library for Azure SDK clients using Microsoft Entra ID. Use for DefaultAzureCredential, managed identity, service principals, and developer credentials. Tri
 category: Creative & Media
 source: antigravity
-tags: [api, ai, security, kubernetes, azure, rag, cro]
+tags: [api, ai, workflow, security, kubernetes, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-identity-dotnet
 ---
 

@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-appdeploy",
+  "name": "appdeploy",
+  "slug": "appdeploy",
+  "description": "Deploy web apps with backend APIs, database, and file storage. Use when the user asks to deploy or publish a website or web app and wants a public URL. Uses HTTP API via curl.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/appdeploy",
+  "content": "\n# AppDeploy Skill\n\nDeploy web apps to AppDeploy via HTTP API.\n\n## When to Use This Skill\n\n- Use when planning or building apps and web apps\n- Use when deploying an app to a public URL\n- Use when publishing a website or web app\n- Use when the user says \"deploy this\", \"make this live\", or \"give me a URL\"\n- Use when updating an already-deployed app\n\n## Setup (First Time Only)\n\n1. **Check for existing API key:**\n   - Look for a `.appdeploy` file in the project root\n   - If it exists and contains a valid `api_key`, skip to Usage\n\n2. **If no API key exists, register and get one:**\n   ```bash\n   curl -X POST https://api-v2.appdeploy.ai/mcp/api-key \\\n     -H \"Content-Type: application/json\" \\\n     -d '{\"client_name\": \"claude-code\"}'\n   ```\n\n   Response:\n   ```json\n   {\n     \"api_key\": \"ak_...\",\n     \"user_id\": \"agent-claude-code-a1b2c3d4\",\n     \"created_at\": 1234567890,\n     \"message\": \"Save this key securely - it cannot be retrieved later\"\n   }\n   ```\n\n3. **Save credentials to `.appdeploy`:**\n   ```json\n   {\n     \"api_key\": \"ak_...\",\n     \"endpoint\": \"https://api-v2.appdeploy.ai/mcp\"\n   }\n   ```\n\n   Add `.appdeploy` to `.gitignore` if not already present.\n\n## Usage\n\nMake JSON-RPC calls to the MCP endpoint:\n\n```bash\ncurl -X POST {endpoint} \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: application/json, text/event-stream\" \\\n  -H \"Authorization: Bearer {api_key}\" \\\n  -d '{\n    \"jsonrpc\": \"2.0\",\n    \"id\": 1,\n    \"method\": \"tools/call\",\n    \"params\": {\n      \"name\": \"{tool_name}\",\n      \"arguments\": { ... }\n    }\n  }'\n```\n\n## Workflow\n\n1. **First, get deployment instructions:**\n   Call `get_deploy_instructions` to understand constraints and requirements.\n\n2. **Get the app template:**\n   Call `get_app_template` with your chosen `app_type` and `frontend_template`.\n\n3. **Deploy the app:**\n   Call `deploy_app` with your app files. For new apps, set `app_id` to `null`.\n\n4. **Check deployment status:**\n   Call `get_app_status` to check if the build succeeded.\n\n5. **View/manage your apps:**\n   Use `get_apps` to list your deployed apps.\n\n## Available Tools\n\n### get_deploy_instructions\n\nUse this when you are about to call deploy_app in order to get the deployment constraints and hard rules. You must call this tool before starting to generate any code. This tool returns instructions only and does not deploy anything.\n\n**Parameters:**\n\n\n### deploy_app\n\nUse this when the user asks to deploy or publish a website or web app and wants a public URL.\nBefore generating files or calling this tool, you must call get_deploy_instructions and follow its constraints.\n\n**Parameters:**\n  - `app_id`: any (required) - existing app id to update, or null for new app\n  - `app_type`: string (required) - app architecture: frontend-only or frontend+backend\n  - `app_name`: string (required) - short display name\n  - `description`: string (optional) - short description of what the app does\n  - `frontend_template`: any (optional) - REQUIRED when app_id is null. One of: 'html-static' (simple sites), 'react-vite' (SPAs, games), 'nextjs-static' (multi-page). Template files auto-included.\n  - `files`: array (optional) - Files to write. NEW APPS: only custom files + diffs to template files. UPDATES: only changed files using diffs[]. At least one of files[] or deletePaths[] required.\n  - `deletePaths`: array (optional) - Paths to delete. ONLY for updates (app_id required). Cannot delete package.json or framework entry points.\n  - `model`: string (required) - The coding agent model used for this deployment, to the best of your knowledge. Examples: 'codex-5.3', 'chatgpt', 'opus 4.6', 'claude-sonnet-4-5', 'gemini-2.5-pro'\n  - `intent`: string (required) - The intent of this deployment. User-initiated examples: 'initial app deploy', 'bugfix - ui is too noisy'. Agent-initiated examples: 'agent fixing deployment error', 'agent retry after lint failure'\n\n### get_app_template\n\nCall get_deploy_instructions first. Then call this once you've decided app_type and frontend_template. Returns base app template and SDK types.  Template files auto-included in deploy_app.\n\n**Parameters:**\n  - `app_type`: string (required)\n  - `frontend_template`: string (required) - Frontend framework: 'html-static' - Simple sites, minimal framework; 'react-vite' - React SPAs, dashboards, games; 'nextjs-static' - Multi-page apps, SSG\n\n### get_app_status\n\nUse this when deploy_app tool call returns or when the user asks to check the deployment status of an app, or reports that the app has errors or is not working as expected. Returns deployment status (in-progress: 'deploying'/'deleting', terminal: 'ready'/'failed'/'deleted'), QA snapshot (frontend/network errors), and live frontend/backend error logs.\n\n**Parameters:**\n  - `app_id`: string (required) - Target app id\n  - `since`: integer (optional) - Optional timestamp in epoch milliseconds to filter errors. When provided, returns only errors since that timestamp.\n\n### delete_app\n\nUse this when you want to permanently delete an app. Use o",
+  "tags": [
+    "react",
+    "nextjs",
+    "api",
+    "mcp",
+    "claude",
+    "ai",
+    "agent",
+    "gpt",
+    "workflow",
+    "template"
+  ],
+  "useCases": [
+    "Use when planning or building apps and web apps",
+    "Use when deploying an app to a public URL",
+    "Use when publishing a website or web app",
+    "Use when the user says \"deploy this\", \"make this live\", or \"give me a URL\"",
+    "Use when updating an already-deployed app"
+  ],
+  "scrapedAt": "2026-02-26T07:08:59.046Z"
+}

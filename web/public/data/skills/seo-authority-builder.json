@@ -2,7 +2,7 @@
   "id": "antigravity-seo-authority-builder",
   "name": "seo-authority-builder",
   "slug": "seo-authority-builder",
-  "description": "Analyzes content for E-E-A-T signals and suggests improvements to build authority and trust. Identifies missing credibility elements. Use PROACTIVELY for YMYL topics.",
+  "description": "Analyzes content for E-E-A-T signals and suggests improvements to\nbuild authority and trust. Identifies missing credibility elements. Use\nPROACTIVELY for YMYL topics.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -18,5 +18,5 @@
     "seo"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:25.942Z"
+  "scrapedAt": "2026-02-26T07:13:46.876Z"
 }

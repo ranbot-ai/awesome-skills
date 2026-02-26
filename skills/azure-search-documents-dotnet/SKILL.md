@@ -3,7 +3,7 @@ name: azure-search-documents-dotnet
 description: Azure AI Search SDK for .NET (Azure.Search.Documents). Use for building search applications with full-text, vector, semantic, and hybrid search. Covers SearchClient (queries, document CRUD), SearchInd
 category: Document Processing
 source: antigravity
-tags: [api, ai, document, azure]
+tags: [api, ai, workflow, document, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-search-documents-dotnet
 ---
 

@@ -2,7 +2,7 @@
   "id": "antigravity-workflow-patterns",
   "name": "workflow-patterns",
   "slug": "workflow-patterns",
-  "description": "Use this skill when implementing tasks according to Conductor's TDD workflow, handling phase checkpoints, managing git commits for tasks, or understanding the verification protocol.",
+  "description": "Use this skill when implementing tasks according to Conductor's TDD\nworkflow, handling phase checkpoints, managing git commits for tasks, or\nunderstanding the verification protocol.\n",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -13,5 +13,5 @@
     "workflow"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:01:04.886Z"
+  "scrapedAt": "2026-02-26T07:14:49.875Z"
 }

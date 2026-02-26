@@ -3,7 +3,7 @@ name: azure-monitor-opentelemetry-py
 description: Azure Monitor OpenTelemetry Distro for Python. Use for one-line Application Insights setup with auto-instrumentation. Triggers: "azure-monitor-opentelemetry", "configure_azure_monitor", "Application I
 category: AI & Agents
 source: antigravity
-tags: [python, api, ai, azure]
+tags: [python, api, ai, workflow, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-monitor-opentelemetry-py
 ---
 
@@ -224,3 +224,6 @@ configure_azure_monitor(
 5. **Use structured logging** for better log analytics queries
 6. **Add custom attributes** to spans for better debugging
 7. **Use AAD authentication** for production workloads
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

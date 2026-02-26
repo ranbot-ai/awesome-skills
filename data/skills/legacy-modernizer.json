@@ -2,7 +2,7 @@
   "id": "antigravity-legacy-modernizer",
   "name": "legacy-modernizer",
   "slug": "legacy-modernizer",
-  "description": "Refactor legacy codebases, migrate outdated frameworks, and implement gradual modernization. Handles technical debt, dependency updates, and backward compatibility. Use PROACTIVELY for legacy system updates, framework migrations, or technical debt reduction.",
+  "description": "Refactor legacy codebases, migrate outdated frameworks, and\nimplement gradual modernization. Handles technical debt, dependency updates,\nand backward compatibility. Use PROACTIVELY for legacy system updates,\nframework migrations, or technical debt reduction.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -20,5 +20,5 @@
     "cro"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:59:29.700Z"
+  "scrapedAt": "2026-02-26T07:12:14.556Z"
 }

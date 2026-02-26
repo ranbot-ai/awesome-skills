@@ -46,7 +46,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/c4-c
 This container deploys the following components:
 
 - [Component Name]: [Description]
-  - Documentation: [c4-component-name.md](./c4-component-name.md)
+  - Documentation: c4-component-name.md
 
 ## Interfaces
 
@@ -164,4 +164,5 @@ When synthesizing containers, provide:
 - Descriptive container names and deployment characteristics
 - Complete API documentation with OpenAPI/Swagger specifications
 - Links to all contained components
-- Mermaid container diagrams showing deployment architect
+- Mermaid container diagrams showing deployment architecture
+- Links to deployment 

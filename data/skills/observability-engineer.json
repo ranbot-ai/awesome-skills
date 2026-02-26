@@ -2,7 +2,7 @@
   "id": "antigravity-observability-engineer",
   "name": "observability-engineer",
   "slug": "observability-engineer",
-  "description": "Build production-ready monitoring, logging, and tracing systems. Implements comprehensive observability strategies, SLI/SLO management, and incident response workflows. Use PROACTIVELY for monitoring infrastructure, performance optimization, or production reliability.",
+  "description": "Build production-ready monitoring, logging, and tracing systems.\nImplements comprehensive observability strategies, SLI/SLO management, and\nincident response workflows. Use PROACTIVELY for monitoring infrastructure,\nperformance optimization, or production reliability.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Create SLI/SLO framework with error budget tracking for API services with 99.9% availability target\"",
     "\"Build real-time alerting system with intelligent noise reduction for 24/7 operations team\""
   ],
-  "scrapedAt": "2026-01-29T06:59:49.774Z"
+  "scrapedAt": "2026-02-26T07:12:50.236Z"
 }

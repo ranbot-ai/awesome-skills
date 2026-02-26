@@ -2,7 +2,7 @@
   "id": "antigravity-incident-responder",
   "name": "incident-responder",
   "slug": "incident-responder",
-  "description": "Expert SRE incident responder specializing in rapid problem resolution, modern observability, and comprehensive incident management. Masters incident command, blameless post-mortems, error budget management, and system reliability patterns. Handles critical outages, communication strategies, and con",
+  "description": "Expert SRE incident responder specializing in rapid problem\nresolution, modern observability, and comprehensive incident management.\nMasters incident command, blameless post-mortems, error budget management, and\nsystem reliability patterns. Handles critical outages, communication\nstrategies, and con",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -19,5 +19,5 @@
     "cro"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:59:19.411Z"
+  "scrapedAt": "2026-02-26T07:11:58.799Z"
 }

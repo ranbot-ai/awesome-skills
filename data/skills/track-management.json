@@ -2,7 +2,7 @@
   "id": "antigravity-track-management",
   "name": "track-management",
   "slug": "track-management",
-  "description": "Use this skill when creating, managing, or working with Conductor tracks - the logical work units for features, bugs, and refactors. Applies to spec.md, plan.md, and track lifecycle operations.",
+  "description": "Use this skill when creating, managing, or working with Conductor\ntracks - the logical work units for features, bugs, and refactors. Applies to\nspec.md, plan.md, and track lifecycle operations.\n",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -12,5 +12,5 @@
     "ai"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:50.792Z"
+  "scrapedAt": "2026-02-26T07:14:24.319Z"
 }

@@ -3,7 +3,7 @@ name: page-cro
 description: Analyze and optimize individual pages for conversion performance. Use when the user wants to improve conversion rates, diagnose why a page is underperforming, or increase the effectiveness of marketin
 category: Business & Marketing
 source: antigravity
-tags: [ai, design, cro, marketing, copywriting]
+tags: [ai, workflow, design, cro, marketing, copywriting]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/page-cro
 ---
 

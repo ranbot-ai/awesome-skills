@@ -2,7 +2,7 @@
   "id": "antigravity-seo-content-refresher",
   "name": "seo-content-refresher",
   "slug": "seo-content-refresher",
-  "description": "Identifies outdated elements in provided content and suggests updates to maintain freshness. Finds statistics, dates, and examples that need updating. Use PROACTIVELY for older content.",
+  "description": "Identifies outdated elements in provided content and suggests\nupdates to maintain freshness. Finds statistics, dates, and examples that need\nupdating. Use PROACTIVELY for older content.\n",
   "category": "Business & Marketing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -16,5 +16,5 @@
     "seo"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:27.069Z"
+  "scrapedAt": "2026-02-26T07:13:48.255Z"
 }

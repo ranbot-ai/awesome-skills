@@ -3,7 +3,7 @@ name: copywriting
 description: Use this skill when writing, rewriting, or improving marketing copy for any page (homepage, landing page, pricing, feature, product, or about page). This skill produces clear, compelling, and testable
 category: Business & Marketing
 source: antigravity
-tags: [ai, document, marketing, copywriting]
+tags: [ai, workflow, document, marketing, copywriting]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/copywriting
 ---
 
@@ -224,3 +224,6 @@ It persuades **the right person** to take **the right action**.
 
 If the copy feels clever but unclear,  
 rewrite it until it feels obvious.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

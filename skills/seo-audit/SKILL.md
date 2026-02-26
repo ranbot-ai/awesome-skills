@@ -3,7 +3,7 @@ name: seo-audit
 description: Diagnose and audit SEO issues affecting crawlability, indexation, rankings, and organic performance. Use when the user asks for an SEO audit, technical SEO review, ranking diagnosis, on-page SEO revie
 category: Business & Marketing
 source: antigravity
-tags: [javascript, ai, template, design, image, security, rag, seo, cro]
+tags: [javascript, ai, workflow, template, design, image, security, rag, seo, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/seo-audit
 ---
 

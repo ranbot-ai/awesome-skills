@@ -2,7 +2,7 @@
   "id": "antigravity-seo-keyword-strategist",
   "name": "seo-keyword-strategist",
   "slug": "seo-keyword-strategist",
-  "description": "Analyzes keyword usage in provided content, calculates density, suggests semantic variations and LSI keywords based on the topic. Prevents over-optimization. Use PROACTIVELY for content optimization.",
+  "description": "Analyzes keyword usage in provided content, calculates density,\nsuggests semantic variations and LSI keywords based on the topic. Prevents\nover-optimization. Use PROACTIVELY for content optimization.\n",
   "category": "Business & Marketing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -14,5 +14,5 @@
     "seo"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:28.139Z"
+  "scrapedAt": "2026-02-26T07:13:49.498Z"
 }

@@ -2,7 +2,7 @@
   "id": "antigravity-firmware-analyst",
   "name": "firmware-analyst",
   "slug": "firmware-analyst",
-  "description": "Expert firmware analyst specializing in embedded systems, IoT security, and hardware reverse engineering. Masters firmware extraction, analysis, and vulnerability research for routers, IoT devices, automotive systems, and industrial controllers. Use PROACTIVELY for firmware security audits, IoT pene",
+  "description": "Expert firmware analyst specializing in embedded systems, IoT\nsecurity, and hardware reverse engineering. Masters firmware extraction,\nanalysis, and vulnerability research for routers, IoT devices, automotive\nsystems, and industrial controllers. Use PROACTIVELY for firmware security\naudits, IoT pene",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -21,5 +21,5 @@
     "aws"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:59:01.047Z"
+  "scrapedAt": "2026-02-26T07:11:19.984Z"
 }

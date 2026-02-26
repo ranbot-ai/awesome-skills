@@ -2,7 +2,7 @@
   "id": "antigravity-database-architect",
   "name": "database-architect",
   "slug": "database-architect",
-  "description": "Expert database architect specializing in data layer design from scratch, technology selection, schema modeling, and scalable database architectures. Masters SQL/NoSQL/TimeSeries database selection, normalization strategies, migration planning, and performance-first design. Handles both greenfield a",
+  "description": "Expert database architect specializing in data layer design from\nscratch, technology selection, schema modeling, and scalable database\narchitectures. Masters SQL/NoSQL/TimeSeries database selection, normalization\nstrategies, migration planning, and performance-first design. Handles both\ngreenfield a",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Design a time-series database architecture for IoT sensor data at 1M events/second\"",
     "\"Re-architect our monolithic database into a microservices data architecture\""
   ],
-  "scrapedAt": "2026-01-29T06:58:39.429Z"
+  "scrapedAt": "2026-02-26T07:10:42.247Z"
 }

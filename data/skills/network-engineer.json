@@ -2,7 +2,7 @@
   "id": "antigravity-network-engineer",
   "name": "network-engineer",
   "slug": "network-engineer",
-  "description": "Expert network engineer specializing in modern cloud networking, security architectures, and performance optimization. Masters multi-cloud connectivity, service mesh, zero-trust networking, SSL/TLS, global load balancing, and advanced troubleshooting. Handles CDN optimization, network automation, an",
+  "description": "Expert network engineer specializing in modern cloud networking,\nsecurity architectures, and performance optimization. Masters multi-cloud\nconnectivity, service mesh, zero-trust networking, SSL/TLS, global load\nbalancing, and advanced troubleshooting. Handles CDN optimization, network\nautomation, an",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Configure SSL/TLS termination with automated certificate management\"",
     "\"Design network security architecture for compliance with HIPAA requirements\""
   ],
-  "scrapedAt": "2026-01-29T06:59:45.706Z"
+  "scrapedAt": "2026-02-26T07:12:45.092Z"
 }

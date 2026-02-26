@@ -2,7 +2,7 @@
   "id": "antigravity-data-scientist",
   "name": "data-scientist",
   "slug": "data-scientist",
-  "description": "Expert data scientist for advanced analytics, machine learning, and statistical modeling. Handles complex data analysis, predictive modeling, and business intelligence. Use PROACTIVELY for data analysis tasks, ML modeling, statistical analysis, and data-driven insights.",
+  "description": "Expert data scientist for advanced analytics, machine learning, and\nstatistical modeling. Handles complex data analysis, predictive modeling, and\nbusiness intelligence. Use PROACTIVELY for data analysis tasks, ML modeling,\nstatistical analysis, and data-driven insights.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Build a demand forecasting model using time series analysis for inventory planning\"",
     "\"Analyze the causal impact of marketing campaigns on customer acquisition\""
   ],
-  "scrapedAt": "2026-01-29T06:58:38.584Z"
+  "scrapedAt": "2026-02-26T07:10:40.818Z"
 }

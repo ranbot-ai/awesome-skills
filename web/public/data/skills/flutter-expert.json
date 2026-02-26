@@ -2,7 +2,7 @@
   "id": "antigravity-flutter-expert",
   "name": "flutter-expert",
   "slug": "flutter-expert",
-  "description": "Master Flutter development with Dart 3, advanced widgets, and multi-platform deployment. Handles state management, animations, testing, and performance optimization for mobile, web, desktop, and embedded platforms. Use PROACTIVELY for Flutter architecture, UI implementation, or cross-platform featur",
+  "description": "Master Flutter development with Dart 3, advanced widgets, and\nmulti-platform deployment. Handles state management, animations, testing, and\nperformance optimization for mobile, web, desktop, and embedded platforms. Use\nPROACTIVELY for Flutter architecture, UI implementation, or cross-platform\nfeatur",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Optimize Flutter web performance for production deployment\"",
     "\"Integrate native iOS/Android features with platform channels\""
   ],
-  "scrapedAt": "2026-01-29T06:59:01.359Z"
+  "scrapedAt": "2026-02-26T07:11:20.625Z"
 }

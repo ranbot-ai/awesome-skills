@@ -2,7 +2,7 @@
   "id": "antigravity-seo-meta-optimizer",
   "name": "seo-meta-optimizer",
   "slug": "seo-meta-optimizer",
-  "description": "Creates optimized meta titles, descriptions, and URL suggestions based on character limits and best practices. Generates compelling, keyword-rich metadata. Use PROACTIVELY for new content.",
+  "description": "Creates optimized meta titles, descriptions, and URL suggestions\nbased on character limits and best practices. Generates compelling,\nkeyword-rich metadata. Use PROACTIVELY for new content.\n",
   "category": "Business & Marketing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -14,5 +14,5 @@
     "seo"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:28.416Z"
+  "scrapedAt": "2026-02-26T07:13:49.827Z"
 }

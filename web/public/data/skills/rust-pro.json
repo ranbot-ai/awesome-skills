@@ -2,7 +2,7 @@
   "id": "antigravity-rust-pro",
   "name": "rust-pro",
   "slug": "rust-pro",
-  "description": "Master Rust 1.75+ with modern async patterns, advanced type system features, and production-ready systems programming. Expert in the latest Rust ecosystem including Tokio, axum, and cutting-edge crates. Use PROACTIVELY for Rust development, performance optimization, or systems programming.",
+  "description": "Master Rust 1.75+ with modern async patterns, advanced type system\nfeatures, and production-ready systems programming. Expert in the latest Rust\necosystem including Tokio, axum, and cutting-edge crates. Use PROACTIVELY for\nRust development, performance optimization, or systems programming.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -24,5 +24,5 @@
     "\"Create a safe wrapper around a C library using FFI\"",
     "\"Build a streaming data processor with backpressure handling\""
   ],
-  "scrapedAt": "2026-01-29T07:00:17.855Z"
+  "scrapedAt": "2026-02-26T07:13:33.507Z"
 }

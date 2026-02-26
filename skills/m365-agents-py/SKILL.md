@@ -93,9 +93,7 @@ ADAPTER = CloudAdapter(connection_manager=CONNECTION_MANAGER)
 AUTHORIZATION = Authorization(STORAGE, CONNECTION_MANAGER, **agents_sdk_config)
 
 # Create AgentApplication
-AGENT_APP = AgentApplication[TurnState](
-    storage=STORAGE, adapter=ADAPTER, authorization=AUTHORIZATION, **agents_sdk_config
-)
+AGENT_APP = AgentApplicationTurnState
 
 
 @AGENT_APP.conversation_update("membersAdded")
@@ -139,9 +137,7 @@ from microsoft_agents.hosting.core import (
 )
 from microsoft_agents.activity import ActivityTypes
 
-AGENT_APP = AgentApplication[TurnState](
-    storage=STORAGE, adapter=ADAPTER, authorization=AUTHORIZATION, **agents_sdk_config
-)
+AGENT_APP = AgentApplicationTurnState
 
 # Welcome handler
 @AGENT_APP.conversation_update("membersAdded")
@@ -158,4 +154,7 @@ async def on_hello(context: TurnContext, _state: TurnState):
 async def on_status(context: TurnContext, _state: TurnState):
     await context.send_activity("Status: OK")
 
-# Auth-protected message ha
+# Auth-protected message handler
+@AGENT_APP.message("/me", auth_handlers=["GRAPH"])
+async def on_profile(context: TurnContext, state: TurnState):
+    token_response = await AGENT_APP.auth.get_token(context, "GRA

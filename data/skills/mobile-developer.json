@@ -2,7 +2,7 @@
   "id": "antigravity-mobile-developer",
   "name": "mobile-developer",
   "slug": "mobile-developer",
-  "description": "Develop React Native, Flutter, or native mobile apps with modern architecture patterns. Masters cross-platform development, native integrations, offline sync, and app store optimization. Use PROACTIVELY for mobile features, cross-platform code, or app optimization.",
+  "description": "Develop React Native, Flutter, or native mobile apps with modern\narchitecture patterns. Masters cross-platform development, native\nintegrations, offline sync, and app store optimization. Use PROACTIVELY for\nmobile features, cross-platform code, or app optimization.\n",
   "category": "Creative & Media",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Optimize Flutter app performance for 60fps animations\"",
     "\"Set up CI/CD pipeline for automated app store deployments\""
   ],
-  "scrapedAt": "2026-01-29T06:59:41.693Z"
+  "scrapedAt": "2026-02-26T07:12:37.485Z"
 }

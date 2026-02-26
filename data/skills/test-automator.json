@@ -2,7 +2,7 @@
   "id": "antigravity-test-automator",
   "name": "test-automator",
   "slug": "test-automator",
-  "description": "Master AI-powered test automation with modern frameworks, self-healing tests, and comprehensive quality engineering. Build scalable testing strategies with advanced CI/CD integration. Use PROACTIVELY for testing automation or quality assurance.",
+  "description": "Master AI-powered test automation with modern frameworks,\nself-healing tests, and comprehensive quality engineering. Build scalable\ntesting strategies with advanced CI/CD integration. Use PROACTIVELY for\ntesting automation or quality assurance.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Build self-healing UI tests that adapt to application changes\"",
     "\"Set up performance testing pipeline with automated threshold validation\""
   ],
-  "scrapedAt": "2026-01-29T07:00:48.062Z"
+  "scrapedAt": "2026-02-26T07:14:19.250Z"
 }

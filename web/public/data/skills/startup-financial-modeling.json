@@ -2,7 +2,7 @@
   "id": "antigravity-startup-financial-modeling",
   "name": "startup-financial-modeling",
   "slug": "startup-financial-modeling",
-  "description": "This skill should be used when the user asks to \"create financial projections\", \"build a financial model\", \"forecast revenue\", \"calculate burn rate\", \"estimate runway\", \"model cash flow\", or requests 3-5 year financial planning for a startup.",
+  "description": "This skill should be used when the user asks to \\\\\\\"create financial\nprojections\", \"build a financial model\", \"forecast revenue\", \"calculate burn\nrate\", \"estimate runway\", \"model cash flow\", or requests 3-5 year financial\nplanning for a startup.\n",
   "category": "Creative & Media",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -24,5 +24,5 @@
     "**`examples/marketplace-model.md`** - Marketplace GMV and take rate projections",
     "**`examples/scenario-analysis.md`** - Three-scenario framework with sensitivities"
   ],
-  "scrapedAt": "2026-01-29T07:00:39.106Z"
+  "scrapedAt": "2026-02-26T07:14:04.845Z"
 }

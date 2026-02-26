@@ -3,7 +3,7 @@ name: azure-storage-file-share-py
 description: Azure Storage File Share SDK for Python. Use for SMB file shares, directories, and file operations in the cloud. Triggers: "azure-storage-file-share", "ShareServiceClient", "ShareClient", "file share"
 category: AI & Agents
 source: antigravity
-tags: [python, ai, azure, rag]
+tags: [python, ai, workflow, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-storage-file-share-py
 ---
 
@@ -239,3 +239,6 @@ async def upload_file():
 5. **Set quotas** to prevent unexpected storage costs
 6. **Use ranges** for partial file updates
 7. **Close async clients** explicitly
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

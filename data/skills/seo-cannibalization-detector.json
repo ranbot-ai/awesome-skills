@@ -2,7 +2,7 @@
   "id": "antigravity-seo-cannibalization-detector",
   "name": "seo-cannibalization-detector",
   "slug": "seo-cannibalization-detector",
-  "description": "Analyzes multiple provided pages to identify keyword overlap and potential cannibalization issues. Suggests differentiation strategies. Use PROACTIVELY when reviewing similar content.",
+  "description": "Analyzes multiple provided pages to identify keyword overlap and\npotential cannibalization issues. Suggests differentiation strategies. Use\nPROACTIVELY when reviewing similar content.\n",
   "category": "Business & Marketing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -15,5 +15,5 @@
     "seo"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:26.229Z"
+  "scrapedAt": "2026-02-26T07:13:47.251Z"
 }

@@ -1,6 +1,6 @@
 ---
 name: team-composition-analysis
-description: This skill should be used when the user asks to "plan team structure", "determine hiring needs", "design org chart", "calculate compensation", "plan equity allocation", or requests organizational desi
+description: This skill should be used when the user asks to \\\"plan team structure", "determine hiring needs", "design org chart", "calculate compensation", "plan equity allocation", or requests organizational d
 category: Development & Code Tools
 source: antigravity
 tags: [ai, workflow, template, design, marketing]

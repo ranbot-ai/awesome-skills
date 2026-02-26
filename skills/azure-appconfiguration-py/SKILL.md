@@ -3,7 +3,7 @@ name: azure-appconfiguration-py
 description: Azure App Configuration SDK for Python. Use for centralized configuration management, feature flags, and dynamic settings. Triggers: "azure-appconfiguration", "AzureAppConfigurationClient", "feature f
 category: AI & Agents
 source: antigravity
-tags: [python, ai, azure, cro]
+tags: [python, ai, workflow, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-appconfiguration-py
 ---
 

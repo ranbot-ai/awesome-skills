@@ -3,7 +3,7 @@ name: azure-monitor-query-py
 description: Azure Monitor Query SDK for Python. Use for querying Log Analytics workspaces and Azure Monitor metrics. Triggers: "azure-monitor-query", "LogsQueryClient", "MetricsQueryClient", "Log Analytics", "Kus
 category: AI & Agents
 source: antigravity
-tags: [python, api, ai, azure, rag]
+tags: [python, api, ai, workflow, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-monitor-query-py
 ---
 

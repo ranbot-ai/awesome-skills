@@ -2,7 +2,7 @@
   "id": "antigravity-security-auditor",
   "name": "security-auditor",
   "slug": "security-auditor",
-  "description": "Expert security auditor specializing in DevSecOps, comprehensive cybersecurity, and compliance frameworks. Masters vulnerability assessment, threat modeling, secure authentication (OAuth2/OIDC), OWASP standards, cloud security, and security automation. Handles DevSecOps integration, compliance (GDPR",
+  "description": "Expert security auditor specializing in DevSecOps, comprehensive\ncybersecurity, and compliance frameworks. Masters vulnerability assessment,\nthreat modeling, secure authentication (OAuth2/OIDC), OWASP standards, cloud\nsecurity, and security automation. Handles DevSecOps integration, compliance\n(GDPR",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Create GDPR-compliant data processing system with privacy by design principles\"",
     "\"Perform threat modeling for cloud-native application with Kubernetes deployment\""
   ],
-  "scrapedAt": "2026-01-29T07:00:21.662Z"
+  "scrapedAt": "2026-02-26T07:13:39.116Z"
 }

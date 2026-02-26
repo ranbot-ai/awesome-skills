@@ -12,6 +12,7 @@
     "api",
     "ai",
     "gpt",
+    "workflow",
     "document",
     "image",
     "azure",
@@ -19,5 +20,5 @@
     "cro"
   ],
   "useCases": [],
-  "scrapedAt": "2026-02-12T07:15:32.383Z"
+  "scrapedAt": "2026-02-26T07:09:12.486Z"
 }

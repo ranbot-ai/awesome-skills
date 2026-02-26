@@ -2,7 +2,7 @@
   "id": "antigravity-mobile-security-coder",
   "name": "mobile-security-coder",
   "slug": "mobile-security-coder",
-  "description": "Expert in secure mobile coding practices specializing in input validation, WebView security, and mobile-specific security patterns. Use PROACTIVELY for mobile security implementations or mobile security code reviews.",
+  "description": "Expert in secure mobile coding practices specializing in input\nvalidation, WebView security, and mobile-specific security patterns. Use\nPROACTIVELY for mobile security implementations or mobile security code\nreviews.\n",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -24,5 +24,5 @@
     "**Use security-auditor for**: High-level security audits, compliance assessments, DevSecOps pipeline design, threat modeling, security architecture reviews, penetration testing planning",
     "**Key difference**: This agent focuses on writing secure mobile code, while security-auditor focuses on auditing and assessing security posture"
   ],
-  "scrapedAt": "2026-01-29T06:59:41.979Z"
+  "scrapedAt": "2026-02-26T07:12:37.816Z"
 }

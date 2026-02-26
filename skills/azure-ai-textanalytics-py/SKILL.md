@@ -3,7 +3,7 @@ name: azure-ai-textanalytics-py
 description: Azure AI Text Analytics SDK for sentiment analysis, entity recognition, key phrases, language detection, PII, and healthcare NLP. Use for natural language processing on text. Triggers: "text analytics
 category: Document Processing
 source: antigravity
-tags: [python, api, ai, document, azure, cro]
+tags: [python, api, ai, workflow, document, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-textanalytics-py
 ---
 

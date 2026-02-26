@@ -3,7 +3,7 @@ name: azure-ai-projects-java
 description: Azure AI Projects SDK for Java. High-level SDK for Azure AI Foundry project management including connections, datasets, indexes, and evaluations. Triggers: "AIProjectClient java", "azure ai projects j
 category: Document Processing
 source: antigravity
-tags: [api, ai, document, azure, cro]
+tags: [api, ai, workflow, document, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-projects-java
 ---
 
@@ -152,3 +152,6 @@ try {
 | API Reference | https://learn.microsoft.com/rest/api/aifoundry/aiprojects/ |
 | GitHub Source | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/ai/azure-ai-projects |
 | Samples | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/ai/azure-ai-projects/src/samples |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

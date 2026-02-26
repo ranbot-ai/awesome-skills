@@ -3,7 +3,7 @@ name: azure-eventgrid-py
 description: Azure Event Grid SDK for Python. Use for publishing events, handling CloudEvents, and event-driven architectures. Triggers: "event grid", "EventGridPublisherClient", "CloudEvent", "EventGridEvent", "p
 category: AI & Agents
 source: antigravity
-tags: [python, api, ai, azure]
+tags: [python, api, ai, workflow, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-eventgrid-py
 ---
 
@@ -168,3 +168,6 @@ async with EventGridPublisherClient(
 4. **Use async client** for high-throughput scenarios
 5. **Handle retries** — Event Grid has built-in retry
 6. **Set appropriate event types** for routing and filtering
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

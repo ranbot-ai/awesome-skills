@@ -2,7 +2,7 @@
   "id": "antigravity-julia-pro",
   "name": "julia-pro",
   "slug": "julia-pro",
-  "description": "Master Julia 1.10+ with modern features, performance optimization, multiple dispatch, and production-ready practices. Expert in the Julia ecosystem including package management, scientific computing, and high-performance numerical code. Use PROACTIVELY for Julia development, optimization, or advance",
+  "description": "Master Julia 1.10+ with modern features, performance optimization,\nmultiple dispatch, and production-ready practices. Expert in the Julia\necosystem including package management, scientific computing, and\nhigh-performance numerical code. Use PROACTIVELY for Julia development,\noptimization, or advance",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Set up a Julia project with proper testing and CI/CD\"",
     "\"Implement a custom array type with broadcasting support\""
   ],
-  "scrapedAt": "2026-01-29T06:59:24.455Z"
+  "scrapedAt": "2026-02-26T07:12:06.685Z"
 }

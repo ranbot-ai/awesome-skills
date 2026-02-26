@@ -2,7 +2,7 @@
   "id": "antigravity-seo-snippet-hunter",
   "name": "seo-snippet-hunter",
   "slug": "seo-snippet-hunter",
-  "description": "Formats content to be eligible for featured snippets and SERP features. Creates snippet-optimized content blocks based on best practices. Use PROACTIVELY for question-based content.",
+  "description": "Formats content to be eligible for featured snippets and SERP\nfeatures. Creates snippet-optimized content blocks based on best practices.\nUse PROACTIVELY for question-based content.\n",
   "category": "Business & Marketing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -18,5 +18,5 @@
     "seo"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:28.701Z"
+  "scrapedAt": "2026-02-26T07:13:50.149Z"
 }

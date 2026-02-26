@@ -2,7 +2,7 @@
   "id": "antigravity-graphql-architect",
   "name": "graphql-architect",
   "slug": "graphql-architect",
-  "description": "Master modern GraphQL with federation, performance optimization, and enterprise security. Build scalable schemas, implement advanced caching, and design real-time systems. Use PROACTIVELY for GraphQL architecture or performance optimization.",
+  "description": "Master modern GraphQL with federation, performance optimization,\nand enterprise security. Build scalable schemas, implement advanced caching,\nand design real-time systems. Use PROACTIVELY for GraphQL architecture or\nperformance optimization.\n",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Create a migration strategy from REST to GraphQL with backward compatibility\"",
     "\"Build a GraphQL gateway that aggregates data from multiple microservices\""
   ],
-  "scrapedAt": "2026-01-29T06:59:14.791Z"
+  "scrapedAt": "2026-02-26T07:11:43.199Z"
 }

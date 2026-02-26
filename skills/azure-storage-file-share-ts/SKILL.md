@@ -3,7 +3,7 @@ name: azure-storage-file-share-ts
 description: Azure File Share JavaScript/TypeScript SDK (@azure/storage-file-share) for SMB file share operations. Use for creating shares, managing directories, uploading/downloading files, and handling file meta
 category: Document Processing
 source: antigravity
-tags: [javascript, typescript, node, ai, document, azure, rag]
+tags: [javascript, typescript, node, ai, workflow, document, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-storage-file-share-ts
 ---
 

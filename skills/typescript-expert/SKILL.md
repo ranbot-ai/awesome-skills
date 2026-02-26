@@ -3,7 +3,7 @@ name: typescript-expert
 description: TypeScript and JavaScript expert with deep knowledge of type-level programming, performance optimization, monorepo management, migration strategies, and modern tooling. Use PROACTIVELY for any TypeScr
 category: Document Processing
 source: antigravity
-tags: [javascript, typescript, node, api, ai, agent, template, document, rag, cro]
+tags: [javascript, typescript, node, api, ai, agent, workflow, template, document, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/typescript-expert
 ---
 

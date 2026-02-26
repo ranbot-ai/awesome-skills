@@ -2,7 +2,7 @@
   "id": "antigravity-deployment-engineer",
   "name": "deployment-engineer",
   "slug": "deployment-engineer",
-  "description": "Expert deployment engineer specializing in modern CI/CD pipelines, GitOps workflows, and advanced deployment automation. Masters GitHub Actions, ArgoCD/Flux, progressive delivery, container security, and platform engineering. Handles zero-downtime deployments, security scanning, and developer experi",
+  "description": "Expert deployment engineer specializing in modern CI/CD pipelines,\nGitOps workflows, and advanced deployment automation. Masters GitHub Actions,\nArgoCD/Flux, progressive delivery, container security, and platform\nengineering. Handles zero-downtime deployments, security scanning, and\ndeveloper experi",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Set up multi-environment deployment pipeline with proper promotion and approval workflows\"",
     "\"Design zero-downtime deployment strategy for database-backed application\""
   ],
-  "scrapedAt": "2026-01-29T06:58:44.541Z"
+  "scrapedAt": "2026-02-26T07:10:52.482Z"
 }

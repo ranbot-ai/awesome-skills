@@ -3,7 +3,7 @@ name: azure-storage-file-datalake-py
 description: Azure Data Lake Storage Gen2 SDK for Python. Use for hierarchical file systems, big data analytics, and file/directory operations. Triggers: "data lake", "DataLakeServiceClient", "FileSystemClient", "
 category: AI & Agents
 source: antigravity
-tags: [python, api, ai, azure, rag]
+tags: [python, api, ai, workflow, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-storage-file-datalake-py
 ---
 

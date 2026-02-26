@@ -3,7 +3,7 @@ name: azure-search-documents-py
 description: Azure AI Search SDK for Python. Use for vector search, hybrid search, semantic ranking, indexing, and skillsets. Triggers: "azure-search-documents", "SearchClient", "SearchIndexClient", "vector search
 category: Document Processing
 source: antigravity
-tags: [python, api, ai, agent, llm, document, azure]
+tags: [python, api, ai, agent, llm, workflow, document, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-search-documents-py
 ---
 

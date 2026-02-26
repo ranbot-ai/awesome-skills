@@ -2,7 +2,7 @@
   "id": "antigravity-database-admin",
   "name": "database-admin",
   "slug": "database-admin",
-  "description": "Expert database administrator specializing in modern cloud databases, automation, and reliability engineering. Masters AWS/Azure/GCP database services, Infrastructure as Code, high availability, disaster recovery, performance optimization, and compliance. Handles multi-cloud strategies, container da",
+  "description": "Expert database administrator specializing in modern cloud\ndatabases, automation, and reliability engineering. Masters AWS/Azure/GCP\ndatabase services, Infrastructure as Code, high availability, disaster\nrecovery, performance optimization, and compliance. Handles multi-cloud\nstrategies, container da",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Set up database CI/CD pipeline with automated schema migrations and testing\"",
     "\"Design database security architecture meeting HIPAA compliance requirements\""
   ],
-  "scrapedAt": "2026-01-29T06:58:39.142Z"
+  "scrapedAt": "2026-02-26T07:10:41.912Z"
 }

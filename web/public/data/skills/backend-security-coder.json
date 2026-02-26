@@ -2,7 +2,7 @@
   "id": "antigravity-backend-security-coder",
   "name": "backend-security-coder",
   "slug": "backend-security-coder",
-  "description": "Expert in secure backend coding practices specializing in input validation, authentication, and API security. Use PROACTIVELY for backend security implementations or security code reviews.",
+  "description": "Expert in secure backend coding practices specializing in input\nvalidation, authentication, and API security. Use PROACTIVELY for backend\nsecurity implementations or security code reviews.\n",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -25,5 +25,5 @@
     "**Use security-auditor for**: High-level security audits, compliance assessments, DevSecOps pipeline design, threat modeling, security architecture reviews, penetration testing planning",
     "**Key difference**: This agent focuses on writing secure backend code, while security-auditor focuses on auditing and assessing security posture"
   ],
-  "scrapedAt": "2026-01-29T06:58:07.025Z"
+  "scrapedAt": "2026-02-26T07:09:49.390Z"
 }

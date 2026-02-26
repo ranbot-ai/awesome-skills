@@ -2,7 +2,7 @@
   "id": "antigravity-posix-shell-pro",
   "name": "posix-shell-pro",
   "slug": "posix-shell-pro",
-  "description": "Expert in strict POSIX sh scripting for maximum portability across Unix-like systems. Specializes in shell scripts that run on any POSIX-compliant shell (dash, ash, sh, bash --posix).",
+  "description": "Expert in strict POSIX sh scripting for maximum portability across\nUnix-like systems. Specializes in shell scripts that run on any\nPOSIX-compliant shell (dash, ash, sh, bash --posix).\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -18,5 +18,5 @@
     "cro"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:59:59.537Z"
+  "scrapedAt": "2026-02-26T07:13:06.119Z"
 }

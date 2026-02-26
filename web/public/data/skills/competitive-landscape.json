@@ -2,7 +2,7 @@
   "id": "antigravity-competitive-landscape",
   "name": "competitive-landscape",
   "slug": "competitive-landscape",
-  "description": "This skill should be used when the user asks to \"analyze competitors\", \"assess competitive landscape\", \"identify differentiation\", \"evaluate market positioning\", \"apply Porter's Five Forces\", or requests competitive strategy analysis.",
+  "description": "This skill should be used when the user asks to \\\\\\\"analyze\ncompetitors\", \"assess competitive landscape\", \"identify differentiation\",\n\"evaluate market positioning\", \"apply Porter's Five Forces\", or requests\ncompetitive strategy analysis.\n",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -13,5 +13,5 @@
     "workflow"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:58:27.037Z"
+  "scrapedAt": "2026-02-26T07:10:22.649Z"
 }

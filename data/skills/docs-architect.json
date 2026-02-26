@@ -2,7 +2,7 @@
   "id": "antigravity-docs-architect",
   "name": "docs-architect",
   "slug": "docs-architect",
-  "description": "Creates comprehensive technical documentation from existing codebases. Analyzes architecture, design patterns, and implementation details to produce long-form technical manuals and ebooks. Use PROACTIVELY for system documentation, architecture guides, or technical deep-dives.",
+  "description": "Creates comprehensive technical documentation from existing\ncodebases. Analyzes architecture, design patterns, and implementation details\nto produce long-form technical manuals and ebooks. Use PROACTIVELY for system\ndocumentation, architecture guides, or technical deep-dives.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -19,5 +19,5 @@
     "cro"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:58:48.376Z"
+  "scrapedAt": "2026-02-26T07:10:58.023Z"
 }

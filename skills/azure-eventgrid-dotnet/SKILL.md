@@ -3,7 +3,7 @@ name: azure-eventgrid-dotnet
 description: Azure Event Grid SDK for .NET. Client library for publishing and consuming events with Azure Event Grid. Use for event-driven architectures, pub/sub messaging, CloudEvents, and EventGridEvents. Trigge
 category: AI & Agents
 source: antigravity
-tags: [api, ai, image, azure, rag, cro]
+tags: [api, ai, workflow, image, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-eventgrid-dotnet
 ---
 

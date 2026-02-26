@@ -1,6 +1,6 @@
 ---
 name: startup-metrics-framework
-description: This skill should be used when the user asks about "key startup metrics", "SaaS metrics", "CAC and LTV", "unit economics", "burn multiple", "rule of 40", "marketplace metrics", or requests guidance on
+description: This skill should be used when the user asks about \\\"key startup metrics", "SaaS metrics", "CAC and LTV", "unit economics", "burn multiple", "rule of 40", "marketplace metrics", or requests guidance
 category: Creative & Media
 source: antigravity
 tags: [ai, workflow]

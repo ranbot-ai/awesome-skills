@@ -3,7 +3,7 @@ name: azure-monitor-opentelemetry-exporter-java
 description: Azure Monitor OpenTelemetry Exporter for Java. Export OpenTelemetry traces, metrics, and logs to Azure Monitor/Application Insights. Triggers: "AzureMonitorExporter java", "opentelemetry azure java", 
 category: AI & Agents
 source: antigravity
-tags: [api, ai, azure, cro]
+tags: [api, ai, workflow, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-monitor-opentelemetry-exporter-java
 ---
 

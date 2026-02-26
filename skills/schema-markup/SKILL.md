@@ -3,7 +3,7 @@ name: schema-markup
 description: Design, validate, and optimize schema.org structured data for eligibility, correctness, and measurable SEO impact. Use when the user wants to add, fix, audit, or scale schema markup (JSON-LD) for rich
 category: Document Processing
 source: antigravity
-tags: [react, ai, template, design, document, seo, marketing]
+tags: [react, ai, workflow, template, design, document, seo, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/schema-markup
 ---
 

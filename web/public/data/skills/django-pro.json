@@ -2,7 +2,7 @@
   "id": "antigravity-django-pro",
   "name": "django-pro",
   "slug": "django-pro",
-  "description": "Master Django 5.x with async views, DRF, Celery, and Django Channels. Build scalable web applications with proper architecture, testing, and deployment. Use PROACTIVELY for Django development, ORM optimization, or complex Django patterns.",
+  "description": "Master Django 5.x with async views, DRF, Celery, and Django\nChannels. Build scalable web applications with proper architecture, testing,\nand deployment. Use PROACTIVELY for Django development, ORM optimization, or\ncomplex Django patterns.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Create a custom Django admin interface with inline formsets\"",
     "\"Set up Django Channels for real-time notifications\""
   ],
-  "scrapedAt": "2026-01-29T06:58:47.578Z"
+  "scrapedAt": "2026-02-26T07:10:57.013Z"
 }

@@ -137,3 +137,6 @@ try {
 |----------|-----|
 | Maven Package | https://central.sonatype.com/artifact/com.azure/azure-ai-agents-persistent |
 | GitHub Source | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/ai/azure-ai-agents-persistent |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

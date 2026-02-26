@@ -3,7 +3,7 @@ name: azure-ai-translation-document-py
 description: Azure AI Document Translation SDK for batch translation of documents with format preservation. Use for translating Word, PDF, Excel, PowerPoint, and other document formats at scale. Triggers: "documen
 category: Document Processing
 source: antigravity
-tags: [python, pdf, docx, xlsx, pptx, api, ai, document, azure, rag]
+tags: [python, pdf, docx, xlsx, pptx, api, ai, workflow, document, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-translation-document-py
 ---
 

@@ -2,7 +2,7 @@
   "id": "antigravity-context-manager",
   "name": "context-manager",
   "slug": "context-manager",
-  "description": "Elite AI context engineering specialist mastering dynamic context management, vector databases, knowledge graphs, and intelligent memory systems. Orchestrates context across multi-agent workflows, enterprise AI systems, and long-running projects with 2024/2025 best practices. Use PROACTIVELY for com",
+  "description": "Elite AI context engineering specialist mastering dynamic context\nmanagement, vector databases, knowledge graphs, and intelligent memory\nsystems. Orchestrates context across multi-agent workflows, enterprise AI\nsystems, and long-running projects with 2024/2025 best practices. Use\nPROACTIVELY for com",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Build a context orchestration system for complex AI workflow automation\"",
     "\"Implement intelligent memory management for long-running AI conversations\""
   ],
-  "scrapedAt": "2026-01-29T06:58:33.188Z"
+  "scrapedAt": "2026-02-26T07:10:31.799Z"
 }

@@ -2,7 +2,7 @@
   "id": "antigravity-ios-developer",
   "name": "ios-developer",
   "slug": "ios-developer",
-  "description": "Develop native iOS applications with Swift/SwiftUI. Masters iOS 18, SwiftUI, UIKit integration, Core Data, networking, and App Store optimization. Use PROACTIVELY for iOS-specific features, App Store optimization, or native iOS development.",
+  "description": "Develop native iOS applications with Swift/SwiftUI. Masters iOS 18,\nSwiftUI, UIKit integration, Core Data, networking, and App Store optimization.\nUse PROACTIVELY for iOS-specific features, App Store optimization, or native\niOS development.\n",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Design an accessible data visualization with VoiceOver support\"",
     "\"Set up CI/CD pipeline with Xcode Cloud and TestFlight distribution\""
   ],
-  "scrapedAt": "2026-01-29T06:59:22.312Z"
+  "scrapedAt": "2026-02-26T07:12:03.434Z"
 }

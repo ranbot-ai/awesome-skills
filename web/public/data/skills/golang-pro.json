@@ -2,7 +2,7 @@
   "id": "antigravity-golang-pro",
   "name": "golang-pro",
   "slug": "golang-pro",
-  "description": "Master Go 1.21+ with modern patterns, advanced concurrency, performance optimization, and production-ready microservices. Expert in the latest Go ecosystem including generics, workspaces, and cutting-edge frameworks. Use PROACTIVELY for Go development, architecture design, or performance optimizatio",
+  "description": "Master Go 1.21+ with modern patterns, advanced concurrency,\nperformance optimization, and production-ready microservices. Expert in the\nlatest Go ecosystem including generics, workspaces, and cutting-edge\nframeworks. Use PROACTIVELY for Go development, architecture design, or\nperformance optimizatio",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Create a microservice with observability and health check endpoints\"",
     "\"Design a concurrent data processing pipeline with backpressure handling\""
   ],
-  "scrapedAt": "2026-01-29T06:59:14.218Z"
+  "scrapedAt": "2026-02-26T07:11:41.214Z"
 }

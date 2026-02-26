@@ -2,7 +2,7 @@
   "id": "antigravity-elixir-pro",
   "name": "elixir-pro",
   "slug": "elixir-pro",
-  "description": "Write idiomatic Elixir code with OTP patterns, supervision trees, and Phoenix LiveView. Masters concurrency, fault tolerance, and distributed systems. Use PROACTIVELY for Elixir refactoring, OTP design, or complex BEAM optimizations.",
+  "description": "Write idiomatic Elixir code with OTP patterns, supervision trees,\nand Phoenix LiveView. Masters concurrency, fault tolerance, and distributed\nsystems. Use PROACTIVELY for Elixir refactoring, OTP design, or complex BEAM\noptimizations.\n",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -16,5 +16,5 @@
     "rag"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:58:52.094Z"
+  "scrapedAt": "2026-02-26T07:11:04.491Z"
 }

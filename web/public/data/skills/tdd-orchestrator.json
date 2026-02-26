@@ -2,7 +2,7 @@
   "id": "antigravity-tdd-orchestrator",
   "name": "tdd-orchestrator",
   "slug": "tdd-orchestrator",
-  "description": "Master TDD orchestrator specializing in red-green-refactor discipline, multi-agent workflow coordination, and comprehensive test-driven development practices. Enforces TDD best practices across teams with AI-assisted testing and modern frameworks. Use PROACTIVELY for TDD implementation and governanc",
+  "description": "Master TDD orchestrator specializing in red-green-refactor\ndiscipline, multi-agent workflow coordination, and comprehensive test-driven\ndevelopment practices. Enforces TDD best practices across teams with\nAI-assisted testing and modern frameworks. Use PROACTIVELY for TDD\nimplementation and governanc",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Implement property-based testing strategy for complex business logic validation\"",
     "\"Coordinate legacy code refactoring with comprehensive test safety net creation\""
   ],
-  "scrapedAt": "2026-01-29T07:00:42.692Z"
+  "scrapedAt": "2026-02-26T07:14:11.656Z"
 }

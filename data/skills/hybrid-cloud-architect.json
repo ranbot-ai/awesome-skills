@@ -2,7 +2,7 @@
   "id": "antigravity-hybrid-cloud-architect",
   "name": "hybrid-cloud-architect",
   "slug": "hybrid-cloud-architect",
-  "description": "Expert hybrid cloud architect specializing in complex multi-cloud solutions across AWS/Azure/GCP and private clouds (OpenStack/VMware). Masters hybrid connectivity, workload placement optimization, edge computing, and cross-cloud automation. Handles compliance, cost optimization, disaster recovery, ",
+  "description": "Expert hybrid cloud architect specializing in complex multi-cloud\nsolutions across AWS/Azure/GCP and private clouds (OpenStack/VMware). Masters\nhybrid connectivity, workload placement optimization, edge computing, and\ncross-cloud automation. Handles compliance, cost optimization, disaster\nrecovery, ",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -27,5 +27,5 @@
     "\"Optimize costs for hybrid workloads while maintaining performance SLAs\"",
     "\"Design secure hybrid connectivity with zero-trust networking principles\""
   ],
-  "scrapedAt": "2026-01-29T06:59:17.585Z"
+  "scrapedAt": "2026-02-26T07:11:56.370Z"
 }

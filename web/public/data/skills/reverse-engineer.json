@@ -2,7 +2,7 @@
   "id": "antigravity-reverse-engineer",
   "name": "reverse-engineer",
   "slug": "reverse-engineer",
-  "description": "Expert reverse engineer specializing in binary analysis, disassembly, decompilation, and software analysis. Masters IDA Pro, Ghidra, radare2, x64dbg, and modern RE toolchains. Handles executable analysis, library inspection, protocol extraction, and vulnerability research. Use PROACTIVELY for binary",
+  "description": "Expert reverse engineer specializing in binary analysis,\ndisassembly, decompilation, and software analysis. Masters IDA Pro, Ghidra,\nradare2, x64dbg, and modern RE toolchains. Handles executable analysis,\nlibrary inspection, protocol extraction, and vulnerability research. Use\nPROACTIVELY for binary",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -19,5 +19,5 @@
     "cro"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:15.999Z"
+  "scrapedAt": "2026-02-26T07:13:31.009Z"
 }

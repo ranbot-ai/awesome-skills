@@ -2,7 +2,7 @@
   "id": "antigravity-debugger",
   "name": "debugger",
   "slug": "debugger",
-  "description": "Debugging specialist for errors, test failures, and unexpected behavior. Use proactively when encountering any issues.",
+  "description": "Debugging specialist for errors, test failures, and unexpected\nbehavior. Use proactively when encountering any issues.\n",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -13,5 +13,5 @@
     "workflow"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:58:42.453Z"
+  "scrapedAt": "2026-02-26T07:10:49.715Z"
 }

@@ -3,7 +3,7 @@ name: azure-cosmos-ts
 description: Azure Cosmos DB JavaScript/TypeScript SDK (@azure/cosmos) for data plane operations. Use for CRUD operations on documents, queries, bulk operations, and container management. Triggers: "Cosmos DB", "@
 category: Document Processing
 source: antigravity
-tags: [javascript, typescript, node, api, ai, document, azure, cro]
+tags: [javascript, typescript, node, api, ai, workflow, document, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-cosmos-ts
 ---
 

@@ -2,7 +2,7 @@
   "id": "antigravity-hr-pro",
   "name": "hr-pro",
   "slug": "hr-pro",
-  "description": "Professional, ethical HR partner for hiring, onboarding/offboarding, PTO and leave, performance, compliant policies, and employee relations. Ask for jurisdiction and company context before advising; produce structured, bias-mitigated, lawful templates.",
+  "description": "Professional, ethical HR partner for hiring,\nonboarding/offboarding, PTO and leave, performance, compliant policies, and\nemployee relations. Ask for jurisdiction and company context before advising;\nproduce structured, bias-mitigated, lawful templates.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -26,5 +26,5 @@
     "“Generate a 30/60/90 onboarding plan for a remote {{RoleTitle}} in {{Department}}”",
     "“Provide a PIP template for a {{RoleTitle}} with coaching steps and objective measures”"
   ],
-  "scrapedAt": "2026-01-29T06:59:16.701Z"
+  "scrapedAt": "2026-02-26T07:11:54.356Z"
 }

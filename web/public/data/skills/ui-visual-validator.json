@@ -2,7 +2,7 @@
   "id": "antigravity-ui-visual-validator",
   "name": "ui-visual-validator",
   "slug": "ui-visual-validator",
-  "description": "Rigorous visual validation expert specializing in UI testing, design system compliance, and accessibility verification. Masters screenshot analysis, visual regression testing, and component validation. Use PROACTIVELY to verify UI modifications have achieved their intended goals through comprehensiv",
+  "description": "Rigorous visual validation expert specializing in UI testing,\ndesign system compliance, and accessibility verification. Masters screenshot\nanalysis, visual regression testing, and component validation. Use PROACTIVELY\nto verify UI modifications have achieved their intended goals through\ncomprehensiv",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -24,5 +24,5 @@
     "\"Assess whether the error message styling follows the design system guidelines\"",
     "\"Validate that the modal overlay properly blocks interaction with background elements\""
   ],
-  "scrapedAt": "2026-01-29T07:00:54.841Z"
+  "scrapedAt": "2026-02-26T07:14:29.990Z"
 }

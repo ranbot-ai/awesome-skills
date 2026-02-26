@@ -2,7 +2,7 @@
   "id": "antigravity-sales-automator",
   "name": "sales-automator",
   "slug": "sales-automator",
-  "description": "Draft cold emails, follow-ups, and proposal templates. Creates pricing pages, case studies, and sales scripts. Use PROACTIVELY for sales outreach or lead nurturing.",
+  "description": "Draft cold emails, follow-ups, and proposal templates. Creates\npricing pages, case studies, and sales scripts. Use PROACTIVELY for sales\noutreach or lead nurturing.\n",
   "category": "Business & Marketing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -15,5 +15,5 @@
     "template"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T07:00:18.418Z"
+  "scrapedAt": "2026-02-26T07:13:34.494Z"
 }

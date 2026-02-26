@@ -2,7 +2,7 @@
   "id": "antigravity-conductor-validator",
   "name": "conductor-validator",
   "slug": "conductor-validator",
-  "description": "Validates Conductor project artifacts for completeness, consistency, and correctness. Use after setup, when diagnosing issues, or before implementation to verify project context.",
+  "description": "Validates Conductor project artifacts for completeness,\nconsistency, and correctness. Use after setup, when diagnosing issues, or\nbefore implementation to verify project context.\n",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -13,5 +13,5 @@
     "workflow"
   ],
   "useCases": [],
-  "scrapedAt": "2026-01-29T06:58:30.968Z"
+  "scrapedAt": "2026-02-26T07:10:27.692Z"
 }
