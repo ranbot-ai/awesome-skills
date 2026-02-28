@@ -1,6 +1,6 @@
 ---
 name: data-engineer
-description: Build scalable data pipelines, modern data warehouses, and real-time streaming architectures. Implements Apache Spark, dbt, Airflow, and cloud-native data platforms. Use PROACTIVELY for data pipeline 
+description: You are a data engineer specializing in scalable data pipelines, modern data architecture, and analytics infrastructure. 
 category: Document Processing
 source: antigravity
 tags: [python, api, ai, automation, workflow, design, document, security, docker, kubernetes]

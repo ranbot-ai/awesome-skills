@@ -2,7 +2,7 @@
   "id": "antigravity-fastapi-pro",
   "name": "fastapi-pro",
   "slug": "fastapi-pro",
-  "description": "Build high-performance async APIs with FastAPI, SQLAlchemy 2.0, and\nPydantic V2. Master microservices, WebSockets, and modern Python async\npatterns. Use PROACTIVELY for FastAPI development, async optimization, or API\narchitecture.\n",
+  "description": "You are a FastAPI expert specializing in high-performance, async-first API development with modern Python patterns.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

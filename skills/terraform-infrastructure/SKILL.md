@@ -3,7 +3,7 @@ name: terraform-infrastructure
 description: Terraform infrastructure as code workflow for provisioning cloud resources, creating reusable modules, and managing infrastructure at scale. 
 category: Document Processing
 source: antigravity
-tags: [ai, automation, workflow, template, design, document, security, kubernetes, aws, rag]
+tags: [automation, workflow, template, design, document, security, kubernetes, aws, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/terraform-infrastructure
 ---
 

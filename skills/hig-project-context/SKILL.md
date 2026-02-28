@@ -1,6 +1,6 @@
 ---
 name: hig-project-context
-description: Create or update a shared Apple design context document that other HIG skills use to tailor guidance. Use when the user says "set up my project context," "what platforms am I targeting," "configure HI
+description: Create and maintain `.claude/apple-design-context.md` so other HIG skills can skip redundant questions. 
 category: Document Processing
 source: antigravity
 tags: [markdown, claude, ai, workflow, template, design, document, rag]

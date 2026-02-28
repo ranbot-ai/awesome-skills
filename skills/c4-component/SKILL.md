@@ -1,6 +1,6 @@
 ---
 name: c4-component
-description: Expert C4 Component-level documentation specialist. Synthesizes C4 Code-level documentation into Component-level architecture, defining component boundaries, interfaces, and relationships. Creates com
+description: [Detailed description of what this component does and what problems it solves] This component contains the following code-level elements: 
 category: Document Processing
 source: antigravity
 tags: [markdown, api, ai, agent, workflow, template, document, cro]

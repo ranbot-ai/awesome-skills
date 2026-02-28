@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-convex",
+  "name": "convex",
+  "slug": "convex",
+  "description": "Convex reactive backend expert: schema design, TypeScript functions, real-time subscriptions, auth, file storage, scheduling, and deployment.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/convex",
+  "content": "\n# Convex\n\nYou are an expert in Convex — the open-source, reactive backend platform where queries are TypeScript code. You have deep knowledge of schema design, function authoring (queries, mutations, actions), real-time data subscriptions, authentication, file storage, scheduling, and deployment workflows across React, Next.js, Angular, Vue, Svelte, React Native, and server-side environments.\n\n## When to Use\n\n- Use when building a new project with Convex as the backend\n- Use when adding Convex to an existing React, Next.js, Angular, Vue, Svelte, or React Native app\n- Use when designing schemas for a Convex document-relational database\n- Use when writing or debugging Convex functions (queries, mutations, actions)\n- Use when implementing real-time/reactive data patterns\n- Use when setting up authentication with Convex Auth or third-party providers (Clerk, Auth0, etc.)\n- Use when working with Convex file storage, scheduled functions, or cron jobs\n- Use when deploying or managing Convex projects\n\n## Core Concepts\n\nConvex is a **document-relational** database with a fully managed backend. Key differentiators:\n\n- **Reactive by default**: Queries automatically re-run and push updates to all connected clients when underlying data changes\n- **TypeScript-first**: All backend logic — queries, mutations, actions, schemas — is written in TypeScript\n- **ACID transactions**: Serializable isolation with optimistic concurrency control\n- **No infrastructure to manage**: Serverless, scales automatically, zero config\n- **End-to-end type safety**: Types flow from schema → backend functions → client hooks\n\n### Function Types\n\n| Type            | Purpose                   | Can Read DB    | Can Write DB      | Can Call External APIs | Cached/Reactive |\n| :-------------- | :------------------------ | :------------- | :---------------- | :--------------------- | :-------------- |\n| **Query**       | Read data                 | ✅             | ❌                | ❌                     | ✅              |\n| **Mutation**    | Write data                | ✅             | ✅                | ❌                     | ❌              |\n| **Action**      | Side effects              | via `runQuery` | via `runMutation` | ✅                     | ❌              |\n| **HTTP Action** | Webhooks/custom endpoints | via `runQuery` | via `runMutation` | ✅                     | ❌              |\n\n## Project Setup\n\n### New Project (Next.js)\n\n```bash\nnpx create-next-app@latest my-app\ncd my-app && npm install convex\nnpx convex dev\n```\n\n### Add to Existing Project\n\n```bash\nnpm install convex\nnpx convex dev\n```\n\nThe `npx convex dev` command:\n\n1. Prompts you to log in (GitHub)\n2. Creates a project and deployment\n3. Generates `convex/` folder for backend functions\n4. Syncs functions to your dev deployment in real-time\n5. Creates `.env.local` with `CONVEX_DEPLOYMENT` and `NEXT_PUBLIC_CONVEX_URL`\n\n### Folder Structure\n\n```\nmy-app/\n├── convex/\n│   ├── _generated/        ← Auto-generated (DO NOT EDIT)\n│   │   ├── api.d.ts\n│   │   ├── dataModel.d.ts\n│   │   └── server.d.ts\n│   ├── schema.ts          ← Database schema definition\n│   ├── tasks.ts           ← Query/mutation functions\n│   └── http.ts            ← HTTP actions (optional)\n├── .env.local             ← CONVEX_DEPLOYMENT, NEXT_PUBLIC_CONVEX_URL\n└── convex.json            ← Project config (optional)\n```\n\n## Schema Design\n\nDefine your schema in `convex/schema.ts` using the validator library:\n\n```typescript\nimport { defineSchema, defineTable } from \"convex/server\";\nimport { v } from \"convex/values\";\n\nexport default defineSchema({\n  users: defineTable({\n    name: v.string(),\n    email: v.string(),\n    avatarUrl: v.optional(v.string()),\n    tokenIdentifier: v.string(),\n  })\n    .index(\"by_token\", [\"tokenIdentifier\"])\n    .index(\"by_email\", [\"email\"]),\n\n  messages: defineTable({\n    authorId: v.id(\"users\"),\n    channelId: v.id(\"channels\"),\n    body: v.string(),\n    attachmentId: v.optional(v.id(\"_storage\")),\n  })\n    .index(\"by_channel\", [\"channelId\"])\n    .searchIndex(\"search_body\", { searchField: \"body\" }),\n\n  channels: defineTable({\n    name: v.string(),\n    description: v.optional(v.string()),\n    isPrivate: v.boolean(),\n  }),\n});\n```\n\n### Validator Types\n\n| Validator                         | TypeScript Type       | Notes                                          |\n| :-------------------------------- | :-------------------- | :--------------------------------------------- |\n| `v.string()`                      | `string`              |                                                |\n| `v.number()`                      | `number`              | IEEE 754 float                                 |\n| `v.bigint()`                      | `bigint`              |                                                |\n| `v.boolean()`                     | `boolean`             |                                                |\n| `v.null()`                        | `null`                |                                           ",
+  "tags": [
+    "typescript",
+    "react",
+    "node",
+    "nextjs",
+    "api",
+    "ai",
+    "automation",
+    "workflow",
+    "template",
+    "design"
+  ],
+  "useCases": [
+    "Use when building a new project with Convex as the backend",
+    "Use when adding Convex to an existing React, Next.js, Angular, Vue, Svelte, or React Native app",
+    "Use when designing schemas for a Convex document-relational database",
+    "Use when writing or debugging Convex functions (queries, mutations, actions)",
+    "Use when implementing real-time/reactive data patterns"
+  ],
+  "scrapedAt": "2026-02-28T06:51:47.459Z"
+}

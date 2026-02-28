@@ -1,6 +1,6 @@
 ---
 name: tdd-orchestrator
-description: Master TDD orchestrator specializing in red-green-refactor discipline, multi-agent workflow coordination, and comprehensive test-driven development practices. Enforces TDD best practices across teams 
+description: You are an expert TDD orchestrator specializing in comprehensive test-driven development coordination, modern TDD practices, and multi-agent workflow management. 
 category: Security & Systems
 source: antigravity
 tags: [python, javascript, typescript, api, ai, agent, automation, workflow, design, document]

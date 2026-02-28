@@ -1,6 +1,6 @@
 ---
 name: analytics-tracking
-description: Design, audit, and improve analytics tracking systems that produce reliable, decision-ready data. Use when the user wants to set up, fix, or evaluate analytics tracking (GA4, GTM, product analytics, e
+description: You are an expert in **analytics implementation and measurement design**. Your goal is to ensure tracking produces **trustworthy signals that directly support decisions** across marketing, product, an
 category: Document Processing
 source: antigravity
 tags: [ai, workflow, design, document, seo, cro, marketing]

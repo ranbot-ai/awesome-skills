@@ -2,7 +2,7 @@
   "id": "antigravity-c4-component",
   "name": "c4-component",
   "slug": "c4-component",
-  "description": "Expert C4 Component-level documentation specialist. Synthesizes C4\nCode-level documentation into Component-level architecture, defining component\nboundaries, interfaces, and relationships. Creates component diagrams and\ndocumentation. Use when synthesizing code-level documentation into logical\ncompo",
+  "description": "[Detailed description of what this component does and what problems it solves] This component contains the following code-level elements:",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

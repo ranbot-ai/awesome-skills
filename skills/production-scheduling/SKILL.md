@@ -1,6 +1,6 @@
 ---
 name: production-scheduling
-description: Codified expertise for production scheduling, job sequencing, line balancing, changeover optimisation, and bottleneck resolution in discrete and batch manufacturing. Informed by production schedulers 
+description: Use this skill when planning manufacturing operations, sequencing jobs to minimize changeover times, balancing production lines, resolving factory bottlenecks, or responding to unexpected equipment do
 category: Security & Systems
 source: antigravity
 tags: [react, api, ai, agent, template, design, document, rag, cro]

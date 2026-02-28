@@ -1,6 +1,6 @@
 ---
 name: hig-platforms
-description: Apple Human Interface Guidelines for platform-specific design. Use this skill when the user asks about "designing for iOS", "iPad app design", "macOS design", "tvOS", "visionOS", "watchOS", "Apple pla
+description: Check for `.claude/apple-design-context.md` before asking questions. Use existing context and only ask for information not already covered. 
 category: Creative & Media
 source: antigravity
 tags: [api, claude, ai, workflow, design, rag, cro]

@@ -2,7 +2,7 @@
   "id": "antigravity-azure-mgmt-fabric-dotnet",
   "name": "azure-mgmt-fabric-dotnet",
   "slug": "azure-mgmt-fabric-dotnet",
-  "description": "Azure Resource Manager SDK for Fabric in .NET. Use for MANAGEMENT PLANE operations: provisioning, scaling, suspending/resuming Microsoft Fabric capacities, checking name availability, and listing SKUs via Azure Resource Manager. Triggers: \"Fabric capacity\", \"create capacity\", \"suspend capacity\", \"re",
+  "description": "Management plane SDK for provisioning and managing Microsoft Fabric capacity resources via Azure Resource Manager.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

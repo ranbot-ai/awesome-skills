@@ -2,7 +2,7 @@
   "id": "antigravity-payment-integration",
   "name": "payment-integration",
   "slug": "payment-integration",
-  "description": "Integrate Stripe, PayPal, and payment processors. Handles checkout\nflows, subscriptions, webhooks, and PCI compliance. Use PROACTIVELY when\nimplementing payments, billing, or subscription features.\n",
+  "description": "You are a payment integration specialist focused on secure, reliable payment processing. 1. Security first - never log sensitive card data",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

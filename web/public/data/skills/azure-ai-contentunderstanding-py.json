@@ -2,7 +2,7 @@
   "id": "antigravity-azure-ai-contentunderstanding-py",
   "name": "azure-ai-contentunderstanding-py",
   "slug": "azure-ai-contentunderstanding-py",
-  "description": "Azure AI Content Understanding SDK for Python. Use for multimodal content extraction from documents, images, audio, and video.\nTriggers: \"azure-ai-contentunderstanding\", \"ContentUnderstandingClient\", \"multimodal analysis\", \"document extraction\", \"video analysis\", \"audio transcription\".\n",
+  "description": "Multimodal AI service that extracts semantic content from documents, video, audio, and image files for RAG and automated workflows.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

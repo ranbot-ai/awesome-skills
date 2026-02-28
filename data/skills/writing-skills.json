@@ -3,7 +3,7 @@
   "name": "writing-skills",
   "slug": "writing-skills",
   "description": "Use when creating, updating, or improving agent skills.",
-  "category": "Document Processing",
+  "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/writing-skills",
@@ -15,7 +15,6 @@
     "workflow",
     "template",
     "design",
-    "document",
     "aws",
     "seo",
     "cro"

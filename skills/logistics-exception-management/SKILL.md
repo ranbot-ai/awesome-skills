@@ -1,6 +1,6 @@
 ---
 name: logistics-exception-management
-description: Codified expertise for handling freight exceptions, shipment delays, damages, losses, and carrier disputes. Informed by logistics professionals with 15+ years operational experience. Includes escalati
+description: Use this skill when dealing with deviations from planned logistics operations, such as transit delays, damaged shipments, lost cargo, or when initiating and managing claims and disputes with freight c
 category: Document Processing
 source: antigravity
 tags: [ai, agent, automation, workflow, template, design, document, security, rag, cro]

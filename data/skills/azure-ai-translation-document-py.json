@@ -2,7 +2,7 @@
   "id": "antigravity-azure-ai-translation-document-py",
   "name": "azure-ai-translation-document-py",
   "slug": "azure-ai-translation-document-py",
-  "description": "Azure AI Document Translation SDK for batch translation of documents with format preservation. Use for translating Word, PDF, Excel, PowerPoint, and other document formats at scale.\nTriggers: \"document translation\", \"batch translation\", \"translate documents\", \"DocumentTranslationClient\".\n",
+  "description": "Client library for Azure AI Translator document translation service for batch document translation with format preservation.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

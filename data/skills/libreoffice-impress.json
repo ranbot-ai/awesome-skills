@@ -13,12 +13,12 @@
     "pdf",
     "pptx",
     "api",
-    "ai",
     "automation",
     "workflow",
     "template",
     "document",
-    "presentation"
+    "presentation",
+    "image"
   ],
   "useCases": [
     "Creating new presentations in ODP format",

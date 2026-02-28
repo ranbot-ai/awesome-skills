@@ -2,7 +2,7 @@
   "id": "antigravity-microsoft-azure-webjobs-extensions-authentication-events-dotnet",
   "name": "microsoft-azure-webjobs-extensions-authentication-events-dotnet",
   "slug": "microsoft-azure-webjobs-extensions-authentication-events-dotnet",
-  "description": "Microsoft Entra Authentication Events SDK for .NET. Azure Functions triggers for custom authentication extensions. Use for token enrichment, custom claims, attribute collection, and OTP customization in Entra ID. Triggers: \"Authentication Events\", \"WebJobsAuthenticationEventsTrigger\", \"OnTokenIssuan",
+  "description": "Azure Functions extension for handling Microsoft Entra ID custom authentication events. dotnet add package Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents",
   "category": "Business & Marketing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

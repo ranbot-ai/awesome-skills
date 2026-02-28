@@ -2,7 +2,7 @@
   "id": "antigravity-shopify-development",
   "name": "shopify-development",
   "slug": "shopify-development",
-  "description": "Build Shopify apps, extensions, themes using GraphQL Admin API, Shopify CLI, Polaris UI, and Liquid.\nTRIGGER: \"shopify\", \"shopify app\", \"checkout extension\", \"admin extension\", \"POS extension\",\n\"shopify theme\", \"liquid template\", \"polaris\", \"shopify graphql\", \"shopify webhook\",\n\"shopify billing\", \"a",
+  "description": "Use this skill when the user asks about: → Build an **App** (see `references/app-development.md`) → Build an **Extension** (see `references/extensions.md`)",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

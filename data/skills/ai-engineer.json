@@ -2,7 +2,7 @@
   "id": "antigravity-ai-engineer",
   "name": "ai-engineer",
   "slug": "ai-engineer",
-  "description": "Build production-ready LLM applications, advanced RAG systems, and\nintelligent agents. Implements vector search, multimodal AI, agent\norchestration, and enterprise AI integrations. Use PROACTIVELY for LLM\nfeatures, chatbots, AI agents, or AI-powered applications.\n",
+  "description": "You are an AI engineer specializing in production-grade LLM applications, generative AI systems, and intelligent agent architectures.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

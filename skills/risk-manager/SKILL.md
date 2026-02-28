@@ -1,6 +1,6 @@
 ---
 name: risk-manager
-description: Monitor portfolio risk, R-multiples, and position limits. Creates hedging strategies, calculates expectancy, and implements stop-losses. Use PROACTIVELY for risk assessment, trade tracking, or portfol
+description: You are a risk manager specializing in portfolio protection and risk measurement. 1. Define risk per trade in R terms (1R = max loss) 
 category: Document Processing
 source: antigravity
 tags: [ai, workflow, template, document, spreadsheet]

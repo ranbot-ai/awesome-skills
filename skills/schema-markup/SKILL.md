@@ -1,6 +1,6 @@
 ---
 name: schema-markup
-description: Design, validate, and optimize schema.org structured data for eligibility, correctness, and measurable SEO impact. Use when the user wants to add, fix, audit, or scale schema markup (JSON-LD) for rich
+description: You are an expert in **structured data and schema markup** with a focus on Your responsibility is to: 
 category: Document Processing
 source: antigravity
 tags: [react, ai, workflow, template, design, document, seo, marketing]

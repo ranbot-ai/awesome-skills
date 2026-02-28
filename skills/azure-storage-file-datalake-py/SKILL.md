@@ -1,6 +1,6 @@
 ---
 name: azure-storage-file-datalake-py
-description: Azure Data Lake Storage Gen2 SDK for Python. Use for hierarchical file systems, big data analytics, and file/directory operations. Triggers: "data lake", "DataLakeServiceClient", "FileSystemClient", "
+description: Hierarchical file system for big data analytics workloads. pip install azure-storage-file-datalake azure-identity 
 category: AI & Agents
 source: antigravity
 tags: [python, api, ai, workflow, azure, rag]

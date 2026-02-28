@@ -2,7 +2,7 @@
   "id": "antigravity-azure-cosmos-rust",
   "name": "azure-cosmos-rust",
   "slug": "azure-cosmos-rust",
-  "description": "Azure Cosmos DB SDK for Rust (NoSQL API). Use for document CRUD, queries, containers, and globally distributed data.\nTriggers: \"cosmos db rust\", \"CosmosClient rust\", \"container\", \"document rust\", \"NoSQL rust\", \"partition key\".\n",
+  "description": "Client library for Azure Cosmos DB NoSQL API — globally distributed, multi-model database. cargo add azure_data_cosmos azure_identity",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

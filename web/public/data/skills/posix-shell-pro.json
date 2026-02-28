@@ -2,7 +2,7 @@
   "id": "antigravity-posix-shell-pro",
   "name": "posix-shell-pro",
   "slug": "posix-shell-pro",
-  "description": "Expert in strict POSIX sh scripting for maximum portability across\nUnix-like systems. Specializes in shell scripts that run on any\nPOSIX-compliant shell (dash, ash, sh, bash --posix).\n",
+  "description": "Since POSIX sh lacks arrays, use these patterns: Use `[ ]` test command with POSIX operators:",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

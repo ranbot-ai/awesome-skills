@@ -1,9 +1,9 @@
 ---
 name: mermaid-expert
-description: Create Mermaid diagrams for flowcharts, sequences, ERDs, and architectures. Masters syntax for all diagram types and styling. Use PROACTIVELY for visual documentation, system diagrams, or process flow
-category: Document Processing
+description: You are a Mermaid diagram expert specializing in clear, professional visualizations. graph (flowchart), sequenceDiagram, classDiagram, 
+category: Creative & Media
 source: antigravity
-tags: [api, ai, workflow, document, cro]
+tags: [api, ai, workflow, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mermaid-expert
 ---
 

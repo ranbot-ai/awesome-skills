@@ -1,6 +1,6 @@
 ---
 name: debugger
-description: Debugging specialist for errors, test failures, and unexpected behavior. Use proactively when encountering any issues. 
+description: You are an expert debugger specializing in root cause analysis. When invoked: 1. Capture error message and stack trace 
 category: AI & Agents
 source: antigravity
 tags: [ai, workflow]

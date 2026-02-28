@@ -2,7 +2,7 @@
   "id": "antigravity-azure-appconfiguration-py",
   "name": "azure-appconfiguration-py",
   "slug": "azure-appconfiguration-py",
-  "description": "Azure App Configuration SDK for Python. Use for centralized configuration management, feature flags, and dynamic settings.\nTriggers: \"azure-appconfiguration\", \"AzureAppConfigurationClient\", \"feature flags\", \"configuration\", \"key-value settings\".\n",
+  "description": "Centralized configuration management with feature flags and dynamic settings. pip install azure-appconfiguration",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

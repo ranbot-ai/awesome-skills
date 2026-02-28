@@ -2,7 +2,7 @@
   "id": "antigravity-azure-storage-queue-ts",
   "name": "azure-storage-queue-ts",
   "slug": "azure-storage-queue-ts",
-  "description": "Azure Queue Storage JavaScript/TypeScript SDK (@azure/storage-queue) for message queue operations. Use for sending, receiving, peeking, and deleting messages in queues. Supports visibility timeout, message encoding, and batch operations. Triggers: \"queue storage\", \"@azure/storage-queue\", \"QueueServi",
+  "description": "SDK for Azure Queue Storage operations — send, receive, peek, and manage messages in queues. npm install @azure/storage-queue @azure/identity",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

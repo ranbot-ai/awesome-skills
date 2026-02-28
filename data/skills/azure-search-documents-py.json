@@ -2,7 +2,7 @@
   "id": "antigravity-azure-search-documents-py",
   "name": "azure-search-documents-py",
   "slug": "azure-search-documents-py",
-  "description": "Azure AI Search SDK for Python. Use for vector search, hybrid search, semantic ranking, indexing, and skillsets.\nTriggers: \"azure-search-documents\", \"SearchClient\", \"SearchIndexClient\", \"vector search\", \"hybrid search\", \"semantic search\".\n",
+  "description": "Full-text, vector, and hybrid search with AI enrichment capabilities. pip install azure-search-documents",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

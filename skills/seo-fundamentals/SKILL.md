@@ -1,6 +1,6 @@
 ---
 name: seo-fundamentals
-description: Core principles of SEO including E-E-A-T, Core Web Vitals, technical foundations, content quality, and how modern search engines evaluate pages. This skill explains *why* SEO works, not how to execute
+description: > **Foundational principles for sustainable search visibility.** > This skill explains _how search engines evaluate quality_, not tactical shortcuts. 
 category: Creative & Media
 source: antigravity
 tags: [ai, workflow, design, security, rag, seo]

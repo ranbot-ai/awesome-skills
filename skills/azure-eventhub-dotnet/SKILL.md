@@ -1,6 +1,6 @@
 ---
 name: azure-eventhub-dotnet
-description: Azure Event Hubs SDK for .NET. Use for high-throughput event streaming: sending events (EventHubProducerClient, EventHubBufferedProducerClient), receiving events (EventProcessorClient with checkpointi
+description: High-throughput event streaming SDK for sending and receiving events via Azure Event Hubs. dotnet add package Azure.Messaging.EventHubs 
 category: AI & Agents
 source: antigravity
 tags: [ai, workflow, azure, rag, cro]

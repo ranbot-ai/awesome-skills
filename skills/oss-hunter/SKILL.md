@@ -1,7 +1,7 @@
 ---
 name: oss-hunter
 description: Automatically hunt for high-impact OSS contribution opportunities in trending repositories. 
-category: Development & Code Tools
+category: AI & Agents
 source: antigravity
 tags: [api, ai, agent, workflow, langchain]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/oss-hunter

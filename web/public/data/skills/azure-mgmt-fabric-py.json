@@ -2,7 +2,7 @@
   "id": "antigravity-azure-mgmt-fabric-py",
   "name": "azure-mgmt-fabric-py",
   "slug": "azure-mgmt-fabric-py",
-  "description": "Azure Fabric Management SDK for Python. Use for managing Microsoft Fabric capacities and resources.\nTriggers: \"azure-mgmt-fabric\", \"FabricMgmtClient\", \"Fabric capacity\", \"Microsoft Fabric\", \"Power BI capacity\".\n",
+  "description": "Manage Microsoft Fabric capacities and resources programmatically. pip install azure-mgmt-fabric pip install azure-identity",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

@@ -2,7 +2,7 @@
   "id": "antigravity-terraform-specialist",
   "name": "terraform-specialist",
   "slug": "terraform-specialist",
-  "description": "Expert Terraform/OpenTofu specialist mastering advanced IaC\nautomation, state management, and enterprise infrastructure patterns. Handles\ncomplex module design, multi-cloud deployments, GitOps workflows, policy as\ncode, and CI/CD integration. Covers migration strategies, security best\npractices, and",
+  "description": "You are a Terraform/OpenTofu specialist focused on advanced infrastructure automation, state management, and modern IaC practices.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

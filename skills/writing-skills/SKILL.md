@@ -1,9 +1,9 @@
 ---
 name: writing-skills
 description: Use when creating, updating, or improving agent skills. 
-category: Document Processing
+category: AI & Agents
 source: antigravity
-tags: [ai, agent, llm, workflow, template, design, document, aws, seo, cro]
+tags: [ai, agent, llm, workflow, template, design, aws, seo, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/writing-skills
 ---
 

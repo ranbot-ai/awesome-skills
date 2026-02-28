@@ -1,6 +1,6 @@
 ---
 name: hig-components-layout
-description: Apple Human Interface Guidelines for layout and navigation components. Use this skill when the user asks about "sidebar", "split view", "tab bar", "tab view", "scroll view", "window design", "panel", 
+description: Check for `.claude/apple-design-context.md` before asking questions. Use existing context and only ask for information not already covered. 
 category: Document Processing
 source: antigravity
 tags: [api, claude, ai, workflow, design, document, cro]

@@ -1,6 +1,6 @@
 ---
 name: c-pro
-description: Write efficient C code with proper memory management, pointer arithmetic, and system calls. Handles embedded systems, kernel modules, and performance-critical code. Use PROACTIVELY for C optimization,
+description: Write efficient C code with proper memory management, pointer 
 category: Development & Code Tools
 source: antigravity
 tags: [ai, workflow]

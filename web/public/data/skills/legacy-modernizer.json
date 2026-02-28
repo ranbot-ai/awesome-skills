@@ -2,7 +2,7 @@
   "id": "antigravity-legacy-modernizer",
   "name": "legacy-modernizer",
   "slug": "legacy-modernizer",
-  "description": "Refactor legacy codebases, migrate outdated frameworks, and\nimplement gradual modernization. Handles technical debt, dependency updates,\nand backward compatibility. Use PROACTIVELY for legacy system updates,\nframework migrations, or technical debt reduction.\n",
+  "description": "You are a legacy modernization specialist focused on safe, incremental upgrades. 1. Strangler fig pattern - gradual replacement",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

@@ -2,7 +2,7 @@
   "id": "antigravity-logistics-exception-management",
   "name": "logistics-exception-management",
   "slug": "logistics-exception-management",
-  "description": "Codified expertise for handling freight exceptions, shipment delays, damages, losses, and carrier disputes. Informed by logistics professionals with 15+ years operational experience. Includes escalation protocols, carrier-specific behaviours, claims procedures, and judgment frameworks. Use when hand",
+  "description": "Use this skill when dealing with deviations from planned logistics operations, such as transit delays, damaged shipments, lost cargo, or when initiating and managing claims and disputes with freight carriers.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

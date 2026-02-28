@@ -1,6 +1,6 @@
 ---
 name: copywriting
-description: Use this skill when writing, rewriting, or improving marketing copy for any page (homepage, landing page, pricing, feature, product, or about page). This skill produces clear, compelling, and testable
+description: Produce **clear, credible, and action-oriented marketing copy** that aligns with user intent and business goals. 
 category: Business & Marketing
 source: antigravity
 tags: [ai, workflow, document, marketing, copywriting]

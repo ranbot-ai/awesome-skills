@@ -1,6 +1,6 @@
 ---
 name: posix-shell-pro
-description: Expert in strict POSIX sh scripting for maximum portability across Unix-like systems. Specializes in shell scripts that run on any POSIX-compliant shell (dash, ash, sh, bash --posix). 
+description: Since POSIX sh lacks arrays, use these patterns: Use `[ ]` test command with POSIX operators: 
 category: Document Processing
 source: antigravity
 tags: [ai, workflow, design, document, security, rag, cro]

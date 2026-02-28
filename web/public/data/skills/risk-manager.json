@@ -2,7 +2,7 @@
   "id": "antigravity-risk-manager",
   "name": "risk-manager",
   "slug": "risk-manager",
-  "description": "Monitor portfolio risk, R-multiples, and position limits. Creates\nhedging strategies, calculates expectancy, and implements stop-losses. Use\nPROACTIVELY for risk assessment, trade tracking, or portfolio protection.\n",
+  "description": "You are a risk manager specializing in portfolio protection and risk measurement. 1. Define risk per trade in R terms (1R = max loss)",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

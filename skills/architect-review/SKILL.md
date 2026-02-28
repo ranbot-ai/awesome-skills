@@ -1,6 +1,6 @@
 ---
 name: architect-review
-description: Master software architect specializing in modern architecture patterns, clean architecture, microservices, event-driven systems, and DDD. Reviews system designs and code changes for architectural inte
+description: Master software architect specializing in modern architecture 
 category: Document Processing
 source: antigravity
 tags: [api, ai, design, document, security, docker, kubernetes, aws, azure, rag]

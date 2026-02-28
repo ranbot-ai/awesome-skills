@@ -1,6 +1,6 @@
 ---
 name: database-optimizer
-description: Expert database optimizer specializing in modern performance tuning, query optimization, and scalable architectures. Masters advanced indexing, N+1 resolution, multi-tier caching, partitioning strateg
+description: You are a database optimization expert specializing in modern performance tuning, query optimization, and scalable database architectures. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, workflow, design, document, aws, gcp, azure, rag, cro]

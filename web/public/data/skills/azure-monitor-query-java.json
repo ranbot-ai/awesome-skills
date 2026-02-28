@@ -2,7 +2,7 @@
   "id": "antigravity-azure-monitor-query-java",
   "name": "azure-monitor-query-java",
   "slug": "azure-monitor-query-java",
-  "description": "Azure Monitor Query SDK for Java. Execute Kusto queries against Log Analytics workspaces and query metrics from Azure resources.\nTriggers: \"LogsQueryClient java\", \"MetricsQueryClient java\", \"kusto query java\", \"log analytics java\", \"azure monitor query java\".\nNote: This package is deprecated. Migrat",
+  "description": "> **DEPRECATION NOTICE**: This package is deprecated in favor of: > - `azure-monitor-query-logs` — For Log Analytics queries",
   "category": "Creative & Media",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

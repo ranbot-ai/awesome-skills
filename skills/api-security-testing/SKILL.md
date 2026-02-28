@@ -3,7 +3,7 @@ name: api-security-testing
 description: API security testing workflow for REST and GraphQL APIs covering authentication, authorization, rate limiting, input validation, and security best practices. 
 category: Security & Systems
 source: antigravity
-tags: [api, ai, workflow, document, security]
+tags: [api, workflow, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/api-security-testing
 ---
 

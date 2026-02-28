@@ -1,6 +1,6 @@
 ---
 name: legacy-modernizer
-description: Refactor legacy codebases, migrate outdated frameworks, and implement gradual modernization. Handles technical debt, dependency updates, and backward compatibility. Use PROACTIVELY for legacy system u
+description: You are a legacy modernization specialist focused on safe, incremental upgrades. 1. Strangler fig pattern - gradual replacement 
 category: Document Processing
 source: antigravity
 tags: [python, react, api, ai, workflow, document, security, rag, cro]

@@ -1,6 +1,6 @@
 ---
 name: azure-resource-manager-cosmosdb-dotnet
-description: Azure Resource Manager SDK for Cosmos DB in .NET. Use for MANAGEMENT PLANE operations: creating/managing Cosmos DB accounts, databases, containers, throughput settings, and RBAC via Azure Resource Man
+description: Management plane SDK for provisioning and managing Azure Cosmos DB resources via Azure Resource Manager. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, workflow, document, azure, cro]

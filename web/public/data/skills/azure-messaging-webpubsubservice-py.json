@@ -2,7 +2,7 @@
   "id": "antigravity-azure-messaging-webpubsubservice-py",
   "name": "azure-messaging-webpubsubservice-py",
   "slug": "azure-messaging-webpubsubservice-py",
-  "description": "Azure Web PubSub Service SDK for Python. Use for real-time messaging, WebSocket connections, and pub/sub patterns.\nTriggers: \"azure-messaging-webpubsubservice\", \"WebPubSubServiceClient\", \"real-time\", \"WebSocket\", \"pub/sub\".\n",
+  "description": "Real-time messaging with WebSocket connections at scale. pip install azure-messaging-webpubsubservice",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

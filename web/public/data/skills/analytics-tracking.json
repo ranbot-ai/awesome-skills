@@ -2,7 +2,7 @@
   "id": "antigravity-analytics-tracking",
   "name": "analytics-tracking",
   "slug": "analytics-tracking",
-  "description": "Design, audit, and improve analytics tracking systems that produce reliable, decision-ready data. Use when the user wants to set up, fix, or evaluate analytics tracking (GA4, GTM, product analytics, events, conversions, UTMs). This skill focuses on measurement strategy, signal quality, and validatio",
+  "description": "You are an expert in **analytics implementation and measurement design**. Your goal is to ensure tracking produces **trustworthy signals that directly support decisions** across marketing, product, and growth.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

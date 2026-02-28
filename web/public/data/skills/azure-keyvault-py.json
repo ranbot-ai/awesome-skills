@@ -2,7 +2,7 @@
   "id": "antigravity-azure-keyvault-py",
   "name": "azure-keyvault-py",
   "slug": "azure-keyvault-py",
-  "description": "Azure Key Vault SDK for Python. Use for secrets, keys, and certificates management with secure storage.\nTriggers: \"key vault\", \"SecretClient\", \"KeyClient\", \"CertificateClient\", \"secrets\", \"encryption keys\".\n",
+  "description": "Secure storage and management for secrets, cryptographic keys, and certificates. pip install azure-keyvault-secrets azure-identity",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

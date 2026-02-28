@@ -2,7 +2,7 @@
   "id": "antigravity-hig-components-search",
   "name": "hig-components-search",
   "slug": "hig-components-search",
-  "description": "Apple HIG guidance for navigation-related components including search fields, page controls, and path controls. Use this skill when the user says \"how should search work in my app,\" \"I need a breadcrumb,\" \"how do I paginate content,\" or asks about search field, search bar, page control, path control",
+  "description": "Check for `.claude/apple-design-context.md` before asking questions. Use existing context and only ask for information not already covered.",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

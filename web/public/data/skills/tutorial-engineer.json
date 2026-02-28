@@ -2,7 +2,7 @@
   "id": "antigravity-tutorial-engineer",
   "name": "tutorial-engineer",
   "slug": "tutorial-engineer",
-  "description": "Creates step-by-step tutorials and educational content from code.\nTransforms complex concepts into progressive learning experiences with\nhands-on examples. Use PROACTIVELY for onboarding guides, feature tutorials,\nor concept explanations.\n",
+  "description": "You are a tutorial engineering specialist who transforms complex technical concepts into engaging, hands-on learning experiences. Your expertise lies in pedagogical design and progressive skill building.",
   "category": "Creative & Media",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

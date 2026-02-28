@@ -3,7 +3,7 @@ name: base
 description: Database management, forms, reports, and data operations with LibreOffice Base. 
 category: Document Processing
 source: antigravity
-tags: [python, api, ai, automation, workflow, template, design, document, spreadsheet]
+tags: [python, api, automation, workflow, template, design, document, spreadsheet]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/libreoffice/base
 ---
 

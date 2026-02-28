@@ -1,6 +1,6 @@
 ---
 name: azure-eventhub-rust
-description: Azure Event Hubs SDK for Rust. Use for sending and receiving events, streaming data ingestion. Triggers: "event hubs rust", "ProducerClient rust", "ConsumerClient rust", "send event rust", "streaming 
+description: Client library for Azure Event Hubs — big data streaming platform and event ingestion service. cargo add azure_messaging_eventhubs azure_identity 
 category: Development & Code Tools
 source: antigravity
 tags: [api, ai, workflow, azure]

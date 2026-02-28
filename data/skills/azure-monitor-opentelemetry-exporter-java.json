@@ -2,7 +2,7 @@
   "id": "antigravity-azure-monitor-opentelemetry-exporter-java",
   "name": "azure-monitor-opentelemetry-exporter-java",
   "slug": "azure-monitor-opentelemetry-exporter-java",
-  "description": "Azure Monitor OpenTelemetry Exporter for Java. Export OpenTelemetry traces, metrics, and logs to Azure Monitor/Application Insights.\nTriggers: \"AzureMonitorExporter java\", \"opentelemetry azure java\", \"application insights java otel\", \"azure monitor tracing java\".\nNote: This package is DEPRECATED. Mi",
+  "description": "> **⚠️ DEPRECATION NOTICE**: This package is deprecated. Migrate to `azure-monitor-opentelemetry-autoconfigure`.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

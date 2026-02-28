@@ -2,7 +2,7 @@
   "id": "antigravity-azure-monitor-ingestion-java",
   "name": "azure-monitor-ingestion-java",
   "slug": "azure-monitor-ingestion-java",
-  "description": "Azure Monitor Ingestion SDK for Java. Send custom logs to Azure Monitor via Data Collection Rules (DCR) and Data Collection Endpoints (DCE).\nTriggers: \"LogsIngestionClient java\", \"azure monitor ingestion java\", \"custom logs java\", \"DCR java\", \"data collection rule java\".\n",
+  "description": "Client library for sending custom logs to Azure Monitor using the Logs Ingestion API via Data Collection Rules.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

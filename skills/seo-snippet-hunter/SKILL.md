@@ -1,6 +1,6 @@
 ---
 name: seo-snippet-hunter
-description: Formats content to be eligible for featured snippets and SERP features. Creates snippet-optimized content blocks based on best practices. Use PROACTIVELY for question-based content. 
+description: You are a featured snippet optimization specialist formatting content for position zero potential. 1. Format content for snippet eligibility 
 category: Business & Marketing
 source: antigravity
 tags: [markdown, ai, workflow, template, image, rag, seo]

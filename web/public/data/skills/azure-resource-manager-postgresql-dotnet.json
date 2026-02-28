@@ -2,7 +2,7 @@
   "id": "antigravity-azure-resource-manager-postgresql-dotnet",
   "name": "azure-resource-manager-postgresql-dotnet",
   "slug": "azure-resource-manager-postgresql-dotnet",
-  "description": "Azure PostgreSQL Flexible Server SDK for .NET. Database management for PostgreSQL Flexible Server deployments. Use for creating servers, databases, firewall rules, configurations, backups, and high availability. Triggers: \"PostgreSQL\", \"PostgreSqlFlexibleServer\", \"PostgreSQL Flexible Server\", \"Azure",
+  "description": "Azure Resource Manager SDK for managing PostgreSQL Flexible Server deployments. dotnet add package Azure.ResourceManager.PostgreSql",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

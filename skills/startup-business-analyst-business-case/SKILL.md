@@ -1,6 +1,6 @@
 ---
 name: startup-business-analyst-business-case
-description: Generate comprehensive investor-ready business case document with market, solution, financials, and strategy 
+description: Generate a comprehensive, investor-ready business case document covering market opportunity, solution, competitive landscape, financial projections, team, risks, and funding ask for startup fundraisin
 category: Document Processing
 source: antigravity
 tags: [pdf, markdown, api, claude, ai, workflow, template, document, presentation, marketing]

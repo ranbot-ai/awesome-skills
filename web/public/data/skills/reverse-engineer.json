@@ -2,7 +2,7 @@
   "id": "antigravity-reverse-engineer",
   "name": "reverse-engineer",
   "slug": "reverse-engineer",
-  "description": "Expert reverse engineer specializing in binary analysis,\ndisassembly, decompilation, and software analysis. Masters IDA Pro, Ghidra,\nradare2, x64dbg, and modern RE toolchains. Handles executable analysis,\nlibrary inspection, protocol extraction, and vulnerability research. Use\nPROACTIVELY for binary",
+  "description": "1. **File identification**: Determine file type, architecture, compiler 2. **Metadata extraction**: Strings, imports, exports, resources",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

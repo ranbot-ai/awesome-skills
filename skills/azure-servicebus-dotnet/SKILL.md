@@ -1,6 +1,6 @@
 ---
 name: azure-servicebus-dotnet
-description: Azure Service Bus SDK for .NET. Enterprise messaging with queues, topics, subscriptions, and sessions. Use for reliable message delivery, pub/sub patterns, dead letter handling, and background process
+description: Enterprise messaging SDK for reliable message delivery with queues, topics, subscriptions, and sessions. 
 category: AI & Agents
 source: antigravity
 tags: [api, ai, workflow, azure, cro]

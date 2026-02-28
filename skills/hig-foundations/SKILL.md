@@ -1,6 +1,6 @@
 ---
 name: hig-foundations
-description: Apple Human Interface Guidelines design foundations. Use this skill when the user asks about "HIG color", "Apple typography", "SF Symbols", "dark mode guidelines", "accessible design", "Apple design f
+description: Check for `.claude/apple-design-context.md` before asking questions. Use existing context and only ask for information not already covered. 
 category: Creative & Media
 source: antigravity
 tags: [api, claude, ai, workflow, design, presentation, image, cro]

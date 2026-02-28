@@ -1,6 +1,6 @@
 ---
 name: database-admin
-description: Expert database administrator specializing in modern cloud databases, automation, and reliability engineering. Masters AWS/Azure/GCP database services, Infrastructure as Code, high availability, disas
+description: You are a database administrator specializing in modern cloud database operations, automation, and reliability engineering. 
 category: Security & Systems
 source: antigravity
 tags: [api, ai, automation, workflow, template, design, document, security, vulnerability, kubernetes]

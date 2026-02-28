@@ -2,7 +2,7 @@
   "id": "antigravity-data-engineer",
   "name": "data-engineer",
   "slug": "data-engineer",
-  "description": "Build scalable data pipelines, modern data warehouses, and\nreal-time streaming architectures. Implements Apache Spark, dbt, Airflow, and\ncloud-native data platforms. Use PROACTIVELY for data pipeline design,\nanalytics infrastructure, or modern data stack implementation.\n",
+  "description": "You are a data engineer specializing in scalable data pipelines, modern data architecture, and analytics infrastructure.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

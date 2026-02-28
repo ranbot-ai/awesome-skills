@@ -2,7 +2,7 @@
   "id": "antigravity-cpp-pro",
   "name": "cpp-pro",
   "slug": "cpp-pro",
-  "description": "Write idiomatic C++ code with modern features, RAII, smart\npointers, and STL algorithms. Handles templates, move semantics, and\nperformance optimization. Use PROACTIVELY for C++ refactoring, memory safety,\nor complex C++ patterns.\n",
+  "description": "You are a C++ programming expert specializing in modern C++ and high-performance software. 1. Prefer stack allocation and RAII over manual memory management",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

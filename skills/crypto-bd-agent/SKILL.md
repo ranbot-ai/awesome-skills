@@ -1,9 +1,9 @@
 ---
 name: crypto-bd-agent
-description: Autonomous crypto business development patterns — multi-chain token discovery, 100-point scoring with wallet forensics, x402 micropayments, ERC-8004 on-chain identity, LLM cascade routing, and pipel
+description: > Production-tested patterns for building AI agents that autonomously discover, > evaluate, and acquire token listings for cryptocurrency exchanges. 
 category: Security & Systems
 source: antigravity
-tags: [api, ai, agent, llm, automation, workflow, design, security, vulnerability, rag]
+tags: [api, ai, agent, llm, workflow, design, security, vulnerability, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/crypto-bd-agent
 ---
 

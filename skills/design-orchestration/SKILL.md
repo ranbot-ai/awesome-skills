@@ -1,6 +1,6 @@
 ---
 name: design-orchestration
-description: Orchestrates design workflows by routing work through brainstorming, multi-agent review, and execution readiness in the correct order. Prevents premature implementation, skipped validation, and unrevi
+description: Ensure that **ideas become designs**, **designs are reviewed**, and This skill does not generate designs. 
 category: AI & Agents
 source: antigravity
 tags: [ai, agent, workflow, design, document]

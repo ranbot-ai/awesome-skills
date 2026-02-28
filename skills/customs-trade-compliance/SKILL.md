@@ -1,6 +1,6 @@
 ---
 name: customs-trade-compliance
-description: Codified expertise for customs documentation, tariff classification, duty optimisation, restricted party screening, and regulatory compliance across multiple jurisdictions. Informed by trade complianc
+description: Use this skill when navigating international trade regulations, classifying goods under HS codes, determining appropriate Incoterms, managing import/export documentation, or optimizing customs duty pa
 category: Document Processing
 source: antigravity
 tags: [ai, agent, template, design, document, security, rag, cro]

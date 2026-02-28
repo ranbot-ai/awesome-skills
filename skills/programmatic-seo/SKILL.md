@@ -1,6 +1,6 @@
 ---
 name: programmatic-seo
-description: Design and evaluate programmatic SEO strategies for creating SEO-driven pages at scale using templates and structured data. Use when the user mentions programmatic SEO, pages at scale, template pages,
+description: You are an expert in **programmatic SEO strategy**—designing systems that generate Your responsibility is to: 
 category: Business & Marketing
 source: antigravity
 tags: [ai, workflow, template, design, seo, cro, copywriting]

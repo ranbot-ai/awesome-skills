@@ -1,6 +1,6 @@
 ---
 name: azure-data-tables-py
-description: Azure Tables SDK for Python (Storage and Cosmos DB). Use for NoSQL key-value storage, entity CRUD, and batch operations. Triggers: "table storage", "TableServiceClient", "TableClient", "entities", "Pa
+description: NoSQL key-value store for structured data (Azure Storage Tables or Cosmos DB Table API). pip install azure-data-tables azure-identity 
 category: AI & Agents
 source: antigravity
 tags: [python, api, ai, workflow, design, azure, rag, cro]

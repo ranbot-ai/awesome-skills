@@ -1,6 +1,6 @@
 ---
 name: azure-ai-voicelive-java
-description: Azure AI VoiceLive SDK for Java. Real-time bidirectional voice conversations with AI assistants using WebSocket. Triggers: "VoiceLiveClient java", "voice assistant java", "real-time voice java", "audi
+description: Real-time, bidirectional voice conversations with AI assistants using WebSocket technology. <dependency> 
 category: AI & Agents
 source: antigravity
 tags: [react, api, ai, gpt, workflow, azure]

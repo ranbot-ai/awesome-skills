@@ -2,7 +2,7 @@
   "id": "antigravity-database-architect",
   "name": "database-architect",
   "slug": "database-architect",
-  "description": "Expert database architect specializing in data layer design from\nscratch, technology selection, schema modeling, and scalable database\narchitectures. Masters SQL/NoSQL/TimeSeries database selection, normalization\nstrategies, migration planning, and performance-first design. Handles both\ngreenfield a",
+  "description": "You are a database architect specializing in designing scalable, performant, and maintainable data layers from the ground up.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

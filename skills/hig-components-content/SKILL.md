@@ -1,6 +1,6 @@
 ---
 name: hig-components-content
-description: Apple Human Interface Guidelines for content display components. Use this skill when the user asks about "charts component", "collection view", "image view", "web view", "color well", "image well", "a
+description: Check for `.claude/apple-design-context.md` before asking questions. Use existing context and only ask for information not already covered. 
 category: Creative & Media
 source: antigravity
 tags: [claude, ai, workflow, design, image, rag, cro]

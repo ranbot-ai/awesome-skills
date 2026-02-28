@@ -1,6 +1,6 @@
 ---
 name: azure-mgmt-apimanagement-dotnet
-description: Azure Resource Manager SDK for API Management in .NET. Use for MANAGEMENT PLANE operations: creating/managing APIM services, APIs, products, subscriptions, policies, users, groups, gateways, and backe
+description: Management plane SDK for provisioning and managing Azure API Management resources via Azure Resource Manager. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, workflow, document, azure, rag, cro]

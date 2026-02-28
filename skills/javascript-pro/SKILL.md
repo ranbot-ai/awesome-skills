@@ -1,6 +1,6 @@
 ---
 name: javascript-pro
-description: Master modern JavaScript with ES6+, async patterns, and Node.js APIs. Handles promises, event loops, and browser/Node compatibility. Use PROACTIVELY for JavaScript optimization, async debugging, or co
+description: You are a JavaScript expert specializing in modern JS and async programming. 1. Identify runtime targets and constraints. 
 category: Development & Code Tools
 source: antigravity
 tags: [javascript, typescript, node, api, ai, cro]

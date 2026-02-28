@@ -2,7 +2,7 @@
   "id": "antigravity-azure-storage-blob-rust",
   "name": "azure-storage-blob-rust",
   "slug": "azure-storage-blob-rust",
-  "description": "Azure Blob Storage SDK for Rust. Use for uploading, downloading, and managing blobs and containers.\nTriggers: \"blob storage rust\", \"BlobClient rust\", \"upload blob rust\", \"download blob rust\", \"container rust\".\n",
+  "description": "Client library for Azure Blob Storage — Microsoft's object storage solution for the cloud. cargo add azure_storage_blob azure_identity",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

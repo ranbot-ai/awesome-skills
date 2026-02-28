@@ -1,6 +1,6 @@
 ---
 name: azure-cosmos-py
-description: Azure Cosmos DB SDK for Python (NoSQL API). Use for document CRUD, queries, containers, and globally distributed data. Triggers: "cosmos db", "CosmosClient", "container", "document", "NoSQL", "partiti
+description: Client library for Azure Cosmos DB NoSQL API — globally distributed, multi-model database. pip install azure-cosmos azure-identity 
 category: Document Processing
 source: antigravity
 tags: [python, api, ai, workflow, design, document, azure, cro]

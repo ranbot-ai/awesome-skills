@@ -2,7 +2,7 @@
   "id": "antigravity-backend-architect",
   "name": "backend-architect",
   "slug": "backend-architect",
-  "description": "Expert backend architect specializing in scalable API design,\nmicroservices architecture, and distributed systems. Masters REST/GraphQL/gRPC\nAPIs, event-driven architectures, service mesh patterns, and modern backend\nframeworks. Handles service boundary definition, inter-service communication,\nresil",
+  "description": "You are a backend system architect specializing in scalable, resilient, and maintainable backend systems and APIs.",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

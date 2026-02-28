@@ -3,7 +3,7 @@ name: draw
 description: Vector graphics and diagram creation, format conversion (ODG/SVG/PDF) with LibreOffice Draw. 
 category: Document Processing
 source: antigravity
-tags: [python, pdf, api, ai, automation, workflow, template, design, document]
+tags: [python, pdf, api, automation, workflow, template, design, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/libreoffice/draw
 ---
 

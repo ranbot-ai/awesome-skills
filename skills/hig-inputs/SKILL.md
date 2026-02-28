@@ -1,6 +1,6 @@
 ---
 name: hig-inputs
-description: Apple HIG guidance for input methods and interaction patterns: gestures, Apple Pencil, keyboards, game controllers, pointers, Digital Crown, eye tracking, focus system, remotes, spatial interactions, 
+description: Check for `.claude/apple-design-context.md` before asking questions. Use existing context and only ask for information not already covered. 
 category: Creative & Media
 source: antigravity
 tags: [api, claude, ai, workflow, design, aws, rag, cro]

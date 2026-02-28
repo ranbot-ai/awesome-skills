@@ -1,6 +1,6 @@
 ---
 name: azure-monitor-ingestion-java
-description: Azure Monitor Ingestion SDK for Java. Send custom logs to Azure Monitor via Data Collection Rules (DCR) and Data Collection Endpoints (DCE). Triggers: "LogsIngestionClient java", "azure monitor ingest
+description: Client library for sending custom logs to Azure Monitor using the Logs Ingestion API via Data Collection Rules. 
 category: AI & Agents
 source: antigravity
 tags: [react, api, ai, workflow, security, azure, cro]

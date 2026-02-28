@@ -2,7 +2,7 @@
   "id": "antigravity-returns-reverse-logistics",
   "name": "returns-reverse-logistics",
   "slug": "returns-reverse-logistics",
-  "description": "Codified expertise for returns authorisation, receipt and inspection, disposition decisions, refund processing, fraud detection, and warranty claims management. Informed by returns operations managers with 15+ years experience. Includes grading frameworks, disposition economics, fraud pattern recogn",
+  "description": "Use this skill when managing the product return lifecycle, including authorization, physical inspection, making disposition decisions (e.g., restock vs. liquidator), detecting return fraud, or processing warranty claims.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

@@ -2,7 +2,7 @@
   "id": "antigravity-reference-builder",
   "name": "reference-builder",
   "slug": "reference-builder",
-  "description": "Creates exhaustive technical references and API documentation.\nGenerates comprehensive parameter listings, configuration guides, and\nsearchable reference materials. Use PROACTIVELY for API docs, configuration\nreferences, or complete technical specifications.\n",
+  "description": "You are a reference documentation specialist focused on creating comprehensive, searchable, and precisely organized technical references that serve as the definitive source of truth.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

@@ -1,6 +1,6 @@
 ---
 name: c4-context
-description: Expert C4 Context-level documentation specialist. Creates high-level system context diagrams, documents personas, user journeys, system features, and external dependencies. Synthesizes container and c
+description: [One-sentence description of what the system does] [Detailed description of the system's purpose, capabilities, and the problems it solves] 
 category: Document Processing
 source: antigravity
 tags: [api, ai, agent, workflow, template, document]

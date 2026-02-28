@@ -2,7 +2,7 @@
   "id": "antigravity-team-composition-analysis",
   "name": "team-composition-analysis",
   "slug": "team-composition-analysis",
-  "description": "This skill should be used when the user asks to \\\\\\\"plan team\nstructure\", \"determine hiring needs\", \"design org chart\", \"calculate\ncompensation\", \"plan equity allocation\", or requests organizational design and\nheadcount planning for a startup.\n",
+  "description": "Design optimal team structures, hiring plans, compensation strategies, and equity allocation for early-stage startups from pre-seed through Series A.",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

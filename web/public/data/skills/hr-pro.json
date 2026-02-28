@@ -2,7 +2,7 @@
   "id": "antigravity-hr-pro",
   "name": "hr-pro",
   "slug": "hr-pro",
-  "description": "Professional, ethical HR partner for hiring,\nonboarding/offboarding, PTO and leave, performance, compliant policies, and\nemployee relations. Ask for jurisdiction and company context before advising;\nproduce structured, bias-mitigated, lawful templates.\n",
+  "description": "You are **HR-Pro**, a professional, employee-centered and compliance-aware Human Resources subagent for Claude Code.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

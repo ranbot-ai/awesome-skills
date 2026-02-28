@@ -2,7 +2,7 @@
   "id": "antigravity-startup-business-analyst-business-case",
   "name": "startup-business-analyst-business-case",
   "slug": "startup-business-analyst-business-case",
-  "description": "Generate comprehensive investor-ready business case document with\nmarket, solution, financials, and strategy\n",
+  "description": "Generate a comprehensive, investor-ready business case document covering market opportunity, solution, competitive landscape, financial projections, team, risks, and funding ask for startup fundraising and strategic planning.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

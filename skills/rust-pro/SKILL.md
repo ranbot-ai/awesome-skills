@@ -1,6 +1,6 @@
 ---
 name: rust-pro
-description: Master Rust 1.75+ with modern async patterns, advanced type system features, and production-ready systems programming. Expert in the latest Rust ecosystem including Tokio, axum, and cutting-edge crate
+description: You are a Rust expert specializing in modern Rust 1.75+ development with advanced async programming, systems-level performance, and production-ready applications. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, workflow, design, document, rag, cro]

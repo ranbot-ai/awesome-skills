@@ -1,6 +1,6 @@
 ---
 name: seo-authority-builder
-description: Analyzes content for E-E-A-T signals and suggests improvements to build authority and trust. Identifies missing credibility elements. Use PROACTIVELY for YMYL topics. 
+description: You are an E-E-A-T specialist analyzing content for authority and trust signals. 1. Analyze content for existing E-E-A-T signals 
 category: Document Processing
 source: antigravity
 tags: [ai, workflow, template, document, security, rag, seo]

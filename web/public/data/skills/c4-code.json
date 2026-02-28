@@ -2,7 +2,7 @@
   "id": "antigravity-c4-code",
   "name": "c4-code",
   "slug": "c4-code",
-  "description": "Expert C4 Code-level documentation specialist. Analyzes code\ndirectories to create comprehensive C4 code-level documentation including\nfunction signatures, arguments, dependencies, and code structure. Use when\ndocumenting code at the lowest C4 level for individual directories and code\nmodules.\n",
+  "description": "Optional Mermaid diagrams for complex code structures. Choose the diagram type based on the programming paradigm. Code diagrams show the **internal structure of a single component**.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

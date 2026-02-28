@@ -2,7 +2,7 @@
   "id": "antigravity-azure-eventhub-py",
   "name": "azure-eventhub-py",
   "slug": "azure-eventhub-py",
-  "description": "Azure Event Hubs SDK for Python streaming. Use for high-throughput event ingestion, producers, consumers, and checkpointing.\nTriggers: \"event hubs\", \"EventHubProducerClient\", \"EventHubConsumerClient\", \"streaming\", \"partitions\".\n",
+  "description": "Big data streaming platform for high-throughput event ingestion. pip install azure-eventhub azure-identity",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

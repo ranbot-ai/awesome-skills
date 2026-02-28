@@ -1,6 +1,6 @@
 ---
 name: azure-cosmos-rust
-description: Azure Cosmos DB SDK for Rust (NoSQL API). Use for document CRUD, queries, containers, and globally distributed data. Triggers: "cosmos db rust", "CosmosClient rust", "container", "document rust", "NoS
+description: Client library for Azure Cosmos DB NoSQL API — globally distributed, multi-model database. cargo add azure_data_cosmos azure_identity 
 category: Document Processing
 source: antigravity
 tags: [api, ai, workflow, document, azure]

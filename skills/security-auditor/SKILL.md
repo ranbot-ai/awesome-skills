@@ -1,6 +1,6 @@
 ---
 name: security-auditor
-description: Expert security auditor specializing in DevSecOps, comprehensive cybersecurity, and compliance frameworks. Masters vulnerability assessment, threat modeling, secure authentication (OAuth2/OIDC), OWASP
+description: You are a security auditor specializing in DevSecOps, application security, and comprehensive cybersecurity practices. 
 category: Security & Systems
 source: antigravity
 tags: [api, ai, automation, workflow, design, document, image, security, vulnerability, kubernetes]

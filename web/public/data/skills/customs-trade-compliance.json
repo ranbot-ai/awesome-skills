@@ -2,7 +2,7 @@
   "id": "antigravity-customs-trade-compliance",
   "name": "customs-trade-compliance",
   "slug": "customs-trade-compliance",
-  "description": "Codified expertise for customs documentation, tariff classification, duty optimisation, restricted party screening, and regulatory compliance across multiple jurisdictions. Informed by trade compliance specialists with 15+ years experience. Includes HS classification logic, Incoterms application, FT",
+  "description": "Use this skill when navigating international trade regulations, classifying goods under HS codes, determining appropriate Incoterms, managing import/export documentation, or optimizing customs duty payments through Free Trade Agreements.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

@@ -2,7 +2,7 @@
   "id": "antigravity-azure-ai-document-intelligence-dotnet",
   "name": "azure-ai-document-intelligence-dotnet",
   "slug": "azure-ai-document-intelligence-dotnet",
-  "description": "Azure AI Document Intelligence SDK for .NET. Extract text, tables, and structured data from documents using prebuilt and custom models. Use for invoice processing, receipt extraction, ID document analysis, and custom document models. Triggers: \"Document Intelligence\", \"DocumentIntelligenceClient\", \"",
+  "description": "Extract text, tables, and structured data from documents using prebuilt and custom models. dotnet add package Azure.AI.DocumentIntelligence",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

@@ -1,9 +1,9 @@
 ---
 name: hig-patterns
-description: Apple Human Interface Guidelines interaction and UX patterns. Use this skill when the user asks about "onboarding flow", "user onboarding", "app launch", "loading state", "drag and drop", "search patt
+description: Check for `.claude/apple-design-context.md` before asking questions. Use existing context and only ask for information not already covered. 
 category: Document Processing
 source: antigravity
-tags: [claude, ai, workflow, design, document, rag, cro, marketing]
+tags: [claude, ai, workflow, design, document, rag, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hig-patterns
 ---
 

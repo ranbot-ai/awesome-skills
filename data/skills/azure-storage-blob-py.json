@@ -2,7 +2,7 @@
   "id": "antigravity-azure-storage-blob-py",
   "name": "azure-storage-blob-py",
   "slug": "azure-storage-blob-py",
-  "description": "Azure Blob Storage SDK for Python. Use for uploading, downloading, listing blobs, managing containers, and blob lifecycle.\nTriggers: \"blob storage\", \"BlobServiceClient\", \"ContainerClient\", \"BlobClient\", \"upload blob\", \"download blob\".\n",
+  "description": "Client library for Azure Blob Storage — object storage for unstructured data. pip install azure-storage-blob azure-identity",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

@@ -2,7 +2,7 @@
   "id": "antigravity-hig-patterns",
   "name": "hig-patterns",
   "slug": "hig-patterns",
-  "description": "Apple Human Interface Guidelines interaction and UX patterns. Use this skill when the user asks about \"onboarding flow\", \"user onboarding\", \"app launch\", \"loading state\", \"drag and drop\", \"search pattern\", \"settings design\", \"notifications\", \"modality\", \"multitasking\", \"feedback pattern\", \"haptics\",",
+  "description": "Check for `.claude/apple-design-context.md` before asking questions. Use existing context and only ask for information not already covered.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -15,7 +15,6 @@
     "design",
     "document",
     "rag",
-    "cro",
     "marketing"
   ],
   "useCases": [],

@@ -1,6 +1,6 @@
 ---
 name: shopify-development
-description: Build Shopify apps, extensions, themes using GraphQL Admin API, Shopify CLI, Polaris UI, and Liquid. TRIGGER: "shopify", "shopify app", "checkout extension", "admin extension", "POS extension", "shopi
+description: Use this skill when the user asks about: → Build an **App** (see `references/app-development.md`) → Build an **Extension** (see `references/extensions.md`) 
 category: Document Processing
 source: antigravity
 tags: [python, react, node, api, ai, llm, workflow, template, design, document]

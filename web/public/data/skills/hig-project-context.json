@@ -2,7 +2,7 @@
   "id": "antigravity-hig-project-context",
   "name": "hig-project-context",
   "slug": "hig-project-context",
-  "description": "Create or update a shared Apple design context document that other HIG skills use to tailor guidance. Use when the user says \"set up my project context,\" \"what platforms am I targeting,\" \"configure HIG settings,\" or when starting a new Apple platform project. Also activates when other HIG skills nee",
+  "description": "Create and maintain `.claude/apple-design-context.md` so other HIG skills can skip redundant questions.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

@@ -1,6 +1,6 @@
 ---
 name: hig-components-search
-description: Apple HIG guidance for navigation-related components including search fields, page controls, and path controls. Use this skill when the user says "how should search work in my app," "I need a breadcru
+description: Check for `.claude/apple-design-context.md` before asking questions. Use existing context and only ask for information not already covered. 
 category: Development & Code Tools
 source: antigravity
 tags: [claude, ai, workflow, design, cro]

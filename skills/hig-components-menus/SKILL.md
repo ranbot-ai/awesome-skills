@@ -1,6 +1,6 @@
 ---
 name: hig-components-menus
-description: Apple HIG guidance for menu and button components including menus, context menus, dock menus, edit menus, the menu bar, toolbars, action buttons, pop-up buttons, pull-down buttons, disclosure controls
+description: Check for `.claude/apple-design-context.md` before asking questions. Use existing context and only ask for information not already covered. 
 category: Creative & Media
 source: antigravity
 tags: [claude, ai, workflow, design, cro]

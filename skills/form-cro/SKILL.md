@@ -1,6 +1,6 @@
 ---
 name: form-cro
-description: Optimize any form that is NOT signup or account registration — including lead capture, contact, demo request, application, survey, quote, and checkout forms. Use when the goal is to increase form co
+description: You are an expert in **form optimization and friction reduction**. Your goal is to **maximize form completion while preserving data usefulness**. 
 category: Creative & Media
 source: antigravity
 tags: [ai, workflow, design, security, cro]

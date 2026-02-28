@@ -3,7 +3,7 @@ name: impress
 description: Presentation creation, format conversion (ODP/PPTX/PDF), slide automation with LibreOffice Impress. 
 category: Document Processing
 source: antigravity
-tags: [python, pdf, pptx, api, ai, automation, workflow, template, document, presentation]
+tags: [python, pdf, pptx, api, automation, workflow, template, document, presentation, image]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/libreoffice/impress
 ---
 

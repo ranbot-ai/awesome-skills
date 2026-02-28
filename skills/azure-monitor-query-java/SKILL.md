@@ -1,6 +1,6 @@
 ---
 name: azure-monitor-query-java
-description: Azure Monitor Query SDK for Java. Execute Kusto queries against Log Analytics workspaces and query metrics from Azure resources. Triggers: "LogsQueryClient java", "MetricsQueryClient java", "kusto que
+description: > **DEPRECATION NOTICE**: This package is deprecated in favor of: > - `azure-monitor-query-logs` — For Log Analytics queries 
 category: Creative & Media
 source: antigravity
 tags: [react, api, ai, workflow, azure, rag, cro]

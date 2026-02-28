@@ -2,7 +2,7 @@
   "id": "antigravity-azure-ai-agents-persistent-java",
   "name": "azure-ai-agents-persistent-java",
   "slug": "azure-ai-agents-persistent-java",
-  "description": "Azure AI Agents Persistent SDK for Java. Low-level SDK for creating and managing AI agents with threads, messages, runs, and tools.\nTriggers: \"PersistentAgentsClient\", \"persistent agents java\", \"agent threads java\", \"agent runs java\", \"streaming agents java\".\n",
+  "description": "Low-level SDK for creating and managing persistent AI agents with threads, messages, runs, and tools.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

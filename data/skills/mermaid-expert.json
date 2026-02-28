@@ -2,8 +2,8 @@
   "id": "antigravity-mermaid-expert",
   "name": "mermaid-expert",
   "slug": "mermaid-expert",
-  "description": "Create Mermaid diagrams for flowcharts, sequences, ERDs, and\narchitectures. Masters syntax for all diagram types and styling. Use\nPROACTIVELY for visual documentation, system diagrams, or process flows.\n",
-  "category": "Document Processing",
+  "description": "You are a Mermaid diagram expert specializing in clear, professional visualizations. graph (flowchart), sequenceDiagram, classDiagram,",
+  "category": "Creative & Media",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mermaid-expert",
@@ -12,7 +12,6 @@
     "api",
     "ai",
     "workflow",
-    "document",
     "cro"
   ],
   "useCases": [],

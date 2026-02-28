@@ -1,9 +1,9 @@
 ---
 name: hig-components-dialogs
-description: Apple HIG guidance for presentation components including alerts, action sheets, popovers, sheets, and digit entry views. Use this skill when the user says "should I use an alert or a sheet," "how do I
+description: Check for `.claude/apple-design-context.md` before asking questions. Use existing context and only ask for information not already covered. 
 category: Development & Code Tools
 source: antigravity
-tags: [claude, ai, workflow, design, presentation, cro]
+tags: [claude, ai, workflow, design, presentation]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hig-components-dialogs
 ---
 

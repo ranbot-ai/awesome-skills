@@ -2,7 +2,7 @@
   "id": "antigravity-c4-container",
   "name": "c4-container",
   "slug": "c4-container",
-  "description": "Expert C4 Container-level documentation specialist. Synthesizes\nComponent-level documentation into Container-level architecture, mapping\ncomponents to deployment units, documenting container interfaces as APIs, and\ncreating container diagrams. Use when synthesizing components into deployment\ncontain",
+  "description": "[Detailed description of what this container does and how it's deployed] This container deploys the following components:",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

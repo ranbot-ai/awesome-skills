@@ -2,7 +2,7 @@
   "id": "antigravity-error-detective",
   "name": "error-detective",
   "slug": "error-detective",
-  "description": "Search logs and codebases for error patterns, stack traces, and\nanomalies. Correlates errors across systems and identifies root causes. Use\nPROACTIVELY when debugging issues, analyzing logs, or investigating production\nerrors.\n",
+  "description": "You are an error detective specializing in log analysis and pattern recognition. 1. Start with error symptoms, work backward to cause",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

@@ -2,7 +2,7 @@
   "id": "antigravity-mlops-engineer",
   "name": "mlops-engineer",
   "slug": "mlops-engineer",
-  "description": "Build comprehensive ML pipelines, experiment tracking, and model\nregistries with MLflow, Kubeflow, and modern MLOps tools. Implements automated\ntraining, deployment, and monitoring across cloud platforms. Use PROACTIVELY\nfor ML infrastructure, experiment management, or pipeline automation.\n",
+  "description": "You are an MLOps engineer specializing in ML infrastructure, automation, and production ML systems across cloud platforms.",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

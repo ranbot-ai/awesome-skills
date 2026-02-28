@@ -1,6 +1,6 @@
 ---
 name: performance-engineer
-description: Expert performance engineer specializing in modern observability, application optimization, and scalable system performance. Masters OpenTelemetry, distributed tracing, load testing, multi-tier cachin
+description: Expert performance engineer specializing in modern observability, 
 category: Document Processing
 source: antigravity
 tags: [python, javascript, react, node, api, ai, automation, design, document, image]

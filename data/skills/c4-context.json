@@ -2,7 +2,7 @@
   "id": "antigravity-c4-context",
   "name": "c4-context",
   "slug": "c4-context",
-  "description": "Expert C4 Context-level documentation specialist. Creates\nhigh-level system context diagrams, documents personas, user journeys, system\nfeatures, and external dependencies. Synthesizes container and component\ndocumentation with system documentation to create comprehensive context-level\narchitecture.",
+  "description": "[One-sentence description of what the system does] [Detailed description of the system's purpose, capabilities, and the problems it solves]",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

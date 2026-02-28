@@ -1,6 +1,6 @@
 ---
 name: azure-resource-manager-playwright-dotnet
-description: Azure Resource Manager SDK for Microsoft Playwright Testing in .NET. Use for MANAGEMENT PLANE operations: creating/managing Playwright Testing workspaces, checking name availability, and managing work
+description: Management plane SDK for provisioning and managing Microsoft Playwright Testing workspaces via Azure Resource Manager. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, workflow, document, azure, cro]

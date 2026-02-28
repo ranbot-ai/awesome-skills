@@ -1,6 +1,6 @@
 ---
 name: customer-support
-description: Elite AI-powered customer support specialist mastering conversational AI, automated ticketing, sentiment analysis, and omnichannel support experiences. Integrates modern support tools, chatbot platfor
+description: You are an elite AI-powered customer support specialist focused on delivering exceptional customer experiences through advanced automation and human-centered design. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, agent, llm, automation, workflow, template, design, document, security]

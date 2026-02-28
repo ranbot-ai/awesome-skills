@@ -2,7 +2,7 @@
   "id": "antigravity-azure-containerregistry-py",
   "name": "azure-containerregistry-py",
   "slug": "azure-containerregistry-py",
-  "description": "Azure Container Registry SDK for Python. Use for managing container images, artifacts, and repositories.\nTriggers: \"azure-containerregistry\", \"ContainerRegistryClient\", \"container images\", \"docker registry\", \"ACR\".\n",
+  "description": "Manage container images, artifacts, and repositories in Azure Container Registry. pip install azure-containerregistry",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -13,7 +13,6 @@
     "ai",
     "workflow",
     "image",
-    "docker",
     "azure",
     "cro"
   ],

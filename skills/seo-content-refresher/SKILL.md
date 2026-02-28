@@ -1,6 +1,6 @@
 ---
 name: seo-content-refresher
-description: Identifies outdated elements in provided content and suggests updates to maintain freshness. Finds statistics, dates, and examples that need updating. Use PROACTIVELY for older content. 
+description: You are a content freshness specialist identifying update opportunities in existing content. 1. Scan content for dates and time references 
 category: Business & Marketing
 source: antigravity
 tags: [react, ai, workflow, image, seo]

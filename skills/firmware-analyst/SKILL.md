@@ -1,6 +1,6 @@
 ---
 name: firmware-analyst
-description: Expert firmware analyst specializing in embedded systems, IoT security, and hardware reverse engineering. Masters firmware extraction, analysis, and vulnerability research for routers, IoT devices, au
+description: wget http://vendor.com/firmware/update.bin screen /dev/ttyUSB0 115200 dd if=/dev/mtd0 of=/tmp/firmware.bin 
 category: Security & Systems
 source: antigravity
 tags: [markdown, api, ai, workflow, template, document, image, security, vulnerability, aws]

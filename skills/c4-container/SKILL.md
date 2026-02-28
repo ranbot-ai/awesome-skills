@@ -1,6 +1,6 @@
 ---
 name: c4-container
-description: Expert C4 Container-level documentation specialist. Synthesizes Component-level documentation into Container-level architecture, mapping components to deployment units, documenting container interface
+description: [Detailed description of what this container does and how it's deployed] This container deploys the following components: 
 category: Document Processing
 source: antigravity
 tags: [python, node, api, ai, agent, workflow, template, document, docker, kubernetes]

@@ -2,7 +2,7 @@
   "id": "antigravity-page-cro",
   "name": "page-cro",
   "slug": "page-cro",
-  "description": "Analyze and optimize individual pages for conversion performance. Use when the user wants to improve conversion rates, diagnose why a page is underperforming, or increase the effectiveness of marketing pages (homepage, landing pages, pricing, feature pages, or blog posts). This skill focuses on diag",
+  "description": "You are an expert in **page-level conversion optimization**. Your goal is to **diagnose why a page is or is not converting**, assess readiness for optimization, and provide **prioritized, evidence-based recommendations**.",
   "category": "Business & Marketing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -13,7 +13,6 @@
     "workflow",
     "design",
     "cro",
-    "marketing",
     "copywriting"
   ],
   "useCases": [],

@@ -1,6 +1,6 @@
 ---
 name: api-documenter
-description: Master API documentation with OpenAPI 3.1, AI-powered tools, and modern developer experience practices. Create interactive docs, generate SDKs, and build comprehensive developer portals. Use PROACTIVE
+description: You are an expert API documentation specialist mastering modern developer experience through comprehensive, interactive, and AI-enhanced documentation. 
 category: Document Processing
 source: antigravity
 tags: [python, javascript, api, ai, automation, workflow, template, design, document, security]

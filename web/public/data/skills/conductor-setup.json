@@ -2,7 +2,7 @@
   "id": "antigravity-conductor-setup",
   "name": "conductor-setup",
   "slug": "conductor-setup",
-  "description": "Initialize project with Conductor artifacts (product definition,\ntech stack, workflow, style guides)\n",
+  "description": "Initialize or resume Conductor project setup. This command creates foundational project documentation through interactive Q&A.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

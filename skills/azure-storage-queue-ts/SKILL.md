@@ -1,6 +1,6 @@
 ---
 name: azure-storage-queue-ts
-description: Azure Queue Storage JavaScript/TypeScript SDK (@azure/storage-queue) for message queue operations. Use for sending, receiving, peeking, and deleting messages in queues. Supports visibility timeout, me
+description: SDK for Azure Queue Storage operations — send, receive, peek, and manage messages in queues. npm install @azure/storage-queue @azure/identity 
 category: AI & Agents
 source: antigravity
 tags: [javascript, typescript, node, ai, workflow, azure, rag]

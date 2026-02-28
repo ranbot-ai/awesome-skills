@@ -2,7 +2,7 @@
   "id": "antigravity-startup-financial-modeling",
   "name": "startup-financial-modeling",
   "slug": "startup-financial-modeling",
-  "description": "This skill should be used when the user asks to \\\\\\\"create financial\nprojections\", \"build a financial model\", \"forecast revenue\", \"calculate burn\nrate\", \"estimate runway\", \"model cash flow\", or requests 3-5 year financial\nplanning for a startup.\n",
+  "description": "Build comprehensive 3-5 year financial models with revenue projections, cost structures, cash flow analysis, and scenario planning for early-stage startups.",
   "category": "Creative & Media",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

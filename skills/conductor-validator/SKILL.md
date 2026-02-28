@@ -1,6 +1,6 @@
 ---
 name: conductor-validator
-description: Validates Conductor project artifacts for completeness, consistency, and correctness. Use after setup, when diagnosing issues, or before implementation to verify project context. 
+description: ls -la conductor/ ls -la conductor/tracks/ ls conductor/index.md conductor/product.md conductor/tech-stack.md conductor/workflow.md conductor/tracks.md 
 category: AI & Agents
 source: antigravity
 tags: [ai, workflow]

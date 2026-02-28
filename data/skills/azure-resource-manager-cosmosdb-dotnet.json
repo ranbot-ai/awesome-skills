@@ -2,7 +2,7 @@
   "id": "antigravity-azure-resource-manager-cosmosdb-dotnet",
   "name": "azure-resource-manager-cosmosdb-dotnet",
   "slug": "azure-resource-manager-cosmosdb-dotnet",
-  "description": "Azure Resource Manager SDK for Cosmos DB in .NET. Use for MANAGEMENT PLANE operations: creating/managing Cosmos DB accounts, databases, containers, throughput settings, and RBAC via Azure Resource Manager. NOT for data plane operations (CRUD on documents) - use Microsoft.Azure.Cosmos for that. Trigg",
+  "description": "Management plane SDK for provisioning and managing Azure Cosmos DB resources via Azure Resource Manager.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
