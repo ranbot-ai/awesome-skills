@@ -1,0 +1,28 @@
+{
+  "id": "antigravity-videodb-skills",
+  "name": "videodb-skills",
+  "slug": "videodb-skills",
+  "description": "Upload, stream, search, edit, transcribe, and generate AI video and audio using the VideoDB SDK.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/videodb-skills",
+  "content": "\n# VideoDB Skills\n\n## Purpose\n\nThe only video skill your agent needs. Upload any video, connect real-time streams, search inside by what was said or shown, build complex editing workflows with overlays, generate AI media, add subtitles, and get instant streaming links — all via the VideoDB Python SDK.\n\n## When to Use This Skill\n\n- User wants to upload and process videos from YouTube, URLs, or local files\n- User needs to search for moments by speech or visual scenes\n- User asks for transcription, subtitles, or subtitle styling\n- User wants to edit clips — trim, combine, add text/image/audio overlays\n- User needs AI-generated media (images, video, music, sound effects, voiceovers)\n- User wants to transcode, change resolution, or reframe for social platforms\n- User needs real-time screen or audio capture with AI transcription\n- User asks for playable streaming links for any video output\n\n## Setup\n\n### Step 1: Install the skill\n\n```bash\nnpx skills add video-db/skills\n```\n\n### Step 2: Run setup\n\n```\n/videodb setup\n```\n\nThe agent guides API key setup ($20 free credits, no credit card), installs the SDK, and verifies the connection.\n\nAlternatively, set the API key manually:\n\n```bash\nexport VIDEO_DB_API_KEY=sk-xxx\n```\n\n### Step 3: Install the SDK\n\n```bash\npip install \"videodb[capture]\" python-dotenv\n```\n\n## Capabilities\n\n| Capability  | Description                                                               |\n| ----------- | ------------------------------------------------------------------------- |\n| Upload      | Ingest videos from YouTube, URLs, or local files                          |\n| Search      | Find moments by speech (semantic/keyword) or visual scenes                |\n| Transcripts | Generate timestamped transcripts from any video                           |\n| Edit        | Combine clips, trim, add text/image/audio overlays                        |\n| Subtitles   | Auto-generate and style subtitles                                         |\n| AI Generate | Create images, video, music, sound effects, and voiceovers from text      |\n| Capture     | Real-time screen and audio capture with AI transcription                  |\n| Transcode   | Change resolution, quality, aspect ratio, or reframe for social platforms |\n| Stream      | Get playable HLS links for anything you build                             |\n\n## Examples\n\n**Upload and transcribe:**\n\n```\n\"Upload https://www.youtube.com/watch?v=FgrO9ADPZSA and give me a transcript\"\n```\n\n**Search across videos:**\n\n```\n\"Search for 'product demo' in my latest video\"\n```\n\n**Add subtitles:**\n\n```\n\"Add subtitles with white text on black background\"\n```\n\n**Multi-clip editing:**\n\n```\n\"Take clips from 10s-30s and 45s-60s, add a title card, and combine them\"\n```\n\n**AI media generation:**\n\n```\n\"Generate background music and overlay it on my video\"\n```\n\n**Real-time capture:**\n\n```\n\"Capture my screen and transcribe it in real-time\"\n```\n\n**Reframe for social:**\n\n```\n\"Convert this to vertical for Instagram Reels\"\n```\n\n## Repository\n\nhttps://github.com/video-db/skills\n\n**Version:** 1.1.0\n**Maintained By:** [VideoDB](https://github.com/video-db)\n",
+  "tags": [
+    "python",
+    "api",
+    "ai",
+    "agent",
+    "workflow",
+    "image",
+    "cro"
+  ],
+  "useCases": [
+    "User wants to upload and process videos from YouTube, URLs, or local files",
+    "User needs to search for moments by speech or visual scenes",
+    "User asks for transcription, subtitles, or subtitle styling",
+    "User wants to edit clips — trim, combine, add text/image/audio overlays",
+    "User needs AI-generated media (images, video, music, sound effects, voiceovers)"
+  ],
+  "scrapedAt": "2026-03-01T06:59:55.805Z"
+}

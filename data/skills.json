@@ -863,6 +863,31 @@
       "scrapedAt": "2026-02-26T07:08:49.736Z"
     },
     {
+      "id": "antigravity-android_ui_verification",
+      "name": "android_ui_verification",
+      "slug": "android-ui-verification",
+      "description": "Automated end-to-end UI testing and verification on an Android Emulator using ADB.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/android_ui_verification",
+      "content": "\n# Android UI Verification Skill\n\nThis skill provides a systematic approach to testing React Native applications on an Android emulator using ADB commands. It allows for autonomous interaction, state verification, and visual regression checking.\n\n## When to Use\n- Verifying UI changes in React Native or Native Android apps.\n- Autonomous debugging of layout issues or interaction bugs.\n- Ensuring feature functionality when manual testing is too slow.\n- Capturing automated screenshots for PR documentation.\n\n## 🛠 Prerequisites\n- Android Emulator running.\n- `adb` installed and in PATH.\n- Application in debug mode for logcat access.\n\n## 🚀 Workflow\n\n### 1. Device Calibration\nBefore interacting, always verify the screen resolution to ensure tap coordinates are accurate.\n```bash\nadb shell wm size\n```\n*Note: Layouts are often scaled. Use the physical size returned as the base for coordinate calculations.*\n\n### 2. UI Inspection (State Discovery)\nUse the `uiautomator` dump to find the exact bounds of UI elements (buttons, inputs).\n```bash\nadb shell uiautomator dump /sdcard/view.xml && adb pull /sdcard/view.xml ./artifacts/view.xml\n```\nSearch the `view.xml` for `text`, `content-desc`, or `resource-id`. The `bounds` attribute `[x1,y1][x2,y2]` defines the clickable area.\n\n### 3. Interaction Commands\n- **Tap**: `adb shell input tap <x> <y>` (Use the center of the element bounds).\n- **Swipe**: `adb shell input swipe <x1> <y1> <x2> <y2> <duration_ms>` (Used for scrolling).\n- **Text Input**: `adb shell input text \"<message>\"` (Note: Limited support for special characters).\n- **Key Events**: `adb shell input keyevent <code_id>` (e.g., 66 for Enter).\n\n### 4. Verification & Reporting\n#### Visual Verification\nCapture a screenshot after interaction to confirm UI changes.\n```bash\nadb shell screencap -p /sdcard/screen.png && adb pull /sdcard/screen.png ./artifacts/test_result.png\n```\n\n#### Analytical Verification\nMonitor the JS console logs in real-time to detect errors or log successes.\n```bash\nadb logcat -d | grep \"ReactNativeJS\" | tail -n 20\n```\n\n#### Cleanup\nAlways store generated files in the `artifacts/` folder to satisfy project organization rules.\n\n## 💡 Best Practices\n- **Wait for Animations**: Always add a short sleep (e.g., 1-2s) between interaction and verification.\n- **Center Taps**: Calculate the arithmetic mean of `[x1,y1][x2,y2]` for the most reliable tap target.\n- **Log Markers**: Use distinct log messages in the code (e.g., `✅ Action Successful`) to make `grep` verification easy.\n- **Fail Fast**: If a `uiautomator dump` fails or doesn't find the expected text, stop and troubleshoot rather than blind-tapping.\n",
+      "tags": [
+        "react",
+        "ai",
+        "workflow",
+        "document",
+        "cro"
+      ],
+      "useCases": [
+        "Verifying UI changes in React Native or Native Android apps.",
+        "Autonomous debugging of layout issues or interaction bugs.",
+        "Ensuring feature functionality when manual testing is too slow.",
+        "Capturing automated screenshots for PR documentation."
+      ],
+      "scrapedAt": "2026-03-01T06:55:33.713Z"
+    },
+    {
       "id": "antigravity-android-jetpack-compose-expert",
       "name": "android-jetpack-compose-expert",
       "slug": "android-jetpack-compose-expert",
@@ -7844,12 +7869,12 @@
       "id": "antigravity-copywriting",
       "name": "copywriting",
       "slug": "copywriting",
-      "description": "Produce **clear, credible, and action-oriented marketing copy** that aligns with user intent and business goals.",
+      "description": "Write rigorous, conversion-focused marketing copy for landing pages and emails. Enforces brief confirmation and strict no-fabrication rules.",
       "category": "Business & Marketing",
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/copywriting",
-      "content": "\n# Copywriting\n\n## Purpose\n\nProduce **clear, credible, and action-oriented marketing copy** that aligns with\nuser intent and business goals.\n\nThis skill exists to prevent:\n- writing before understanding the audience\n- vague or hype-driven messaging\n- misaligned CTAs\n- overclaiming or fabricated proof\n- untestable copy\n\nYou may **not** fabricate claims, statistics, testimonials, or guarantees.\n\n---\n\n## Operating Mode\n\nYou are operating as an **expert conversion copywriter**, not a brand poet.\n\n- Clarity beats cleverness\n- Outcomes beat features\n- Specificity beats buzzwords\n- Honesty beats hype\n\nYour job is to **help the right reader take the right action**.\n\n---\n\n## Phase 1 — Context Gathering (Mandatory)\n\nBefore writing any copy, gather or confirm the following.\nIf information is missing, ask for it **before proceeding**.\n\n### 1️⃣ Page Purpose\n- Page type (homepage, landing page, pricing, feature, about)\n- ONE primary action (CTA)\n- Secondary action (if any)\n\n### 2️⃣ Audience\n- Target customer or role\n- Primary problem they are trying to solve\n- What they have already tried\n- Main objections or hesitations\n- Language they use to describe the problem\n\n### 3️⃣ Product / Offer\n- What is being offered\n- Key differentiator vs alternatives\n- Primary outcome or transformation\n- Available proof (numbers, testimonials, case studies)\n\n### 4️⃣ Context\n- Traffic source (ads, organic, email, referrals)\n- Awareness level (unaware, problem-aware, solution-aware, product-aware)\n- What visitors already know or expect\n\n---\n\n## Phase 2 — Copy Brief Lock (Hard Gate)\n\nBefore writing any copy, you MUST present a **Copy Brief Summary** and pause.\n\n### Copy Brief Summary\nSummarize in 4–6 bullets:\n- Page goal\n- Target audience\n- Core value proposition\n- Primary CTA\n- Traffic / awareness context\n\n### Assumptions\nList any assumptions explicitly (e.g. awareness level, urgency, sophistication).\n\nThen ask:\n\n> “Does this copy brief accurately reflect what we’re trying to achieve?\n> Please confirm or correct anything before I write copy.”\n\n**Do NOT proceed until confirmation is given.**\n\n---\n\n## Phase 3 — Copywriting Principles\n\n### Core Principles (Non-Negotiable)\n\n- **Clarity over cleverness**\n- **Benefits over features**\n- **Specificity over vagueness**\n- **Customer language over company language**\n- **One idea per section**\n\nAlways connect:\n> Feature → Benefit → Outcome\n\n---\n\n## Writing Style Rules\n\n### Style Guidelines\n- Simple over complex\n- Active over passive\n- Confident over hedged\n- Show outcomes instead of adjectives\n- Avoid buzzwords unless customers use them\n\n### Claim Discipline\n- No fabricated data or testimonials\n- No implied guarantees unless explicitly stated\n- No exaggerated speed or certainty\n- If proof is missing, mark placeholders clearly\n\n---\n\n## Phase 4 — Page Structure Framework\n\n### Above the Fold\n\n**Headline**\n- Single most important message\n- Specific value proposition\n- Outcome-focused\n\n**Subheadline**\n- Adds clarity or context\n- 1–2 sentences max\n\n**Primary CTA**\n- Action-oriented\n- Describes what the user gets\n\n---\n\n### Core Sections (Use as Appropriate)\n\n- Social proof (logos, stats, testimonials)\n- Problem / pain articulation\n- Solution & key benefits (3–5 max)\n- How it works (3–4 steps)\n- Objection handling (FAQ, comparisons, guarantees)\n- Final CTA with recap and risk reduction\n\nAvoid stacking features without narrative flow.\n\n---\n\n## Phase 5 — Writing the Copy\n\nWhen writing copy, provide:\n\n### Page Copy\nOrganized by section with clear labels:\n- Headline\n- Subheadline\n- CTAs\n- Section headers\n- Body copy\n\n### Alternatives\nProvide 2–3 options for:\n- Headlines\n- Primary CTAs\n\nEach option must include a brief rationale.\n\n### Annotations\nFor key sections, explain:\n- Why this copy was chosen\n- Which principle it applies\n- What alternatives were considered\n\n---\n\n## Testability Guidance\n\nWrite copy with testing in mind:\n- Clear, isolated value propositions\n- Headlines and CTAs that can be A/B tested\n- Avoid combining multiple messages into one element\n\nIf the copy is intended for experimentation, recommend next-step testing.\n\n---\n\n## Completion Criteria (Hard Stop)\n\nThis skill is complete ONLY when:\n- Copy brief has been confirmed\n- Page copy is delivered in structured form\n- Headline and CTA alternatives are provided\n- Assumptions are documented\n- Copy is ready for review, editing, or testing\n\n---\n\n## Key Principles (Summary)\n\n- Understand before writing\n- Make assumptions explicit\n- One page, one goal\n- One section, one idea\n- Benefits before features\n- Honest claims only\n\n---\n\n## Final Reminder\n\nGood copy does not persuade everyone.\nIt persuades **the right person** to take **the right action**.\n\nIf the copy feels clever but unclear,  \nrewrite it until it feels obvious.\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n",
+      "content": "\n# Copywriting\n\n## Purpose\n\nProduce **clear, credible, and action-oriented marketing copy** that aligns with\nuser intent and business goals.\n\nThis skill exists to prevent:\n\n- writing before understanding the audience\n- vague or hype-driven messaging\n- misaligned CTAs\n- overclaiming or fabricated proof\n- untestable copy\n\nYou may **not** fabricate claims, statistics, testimonials, or guarantees.\n\n---\n\n## Operating Mode\n\nYou are operating as an **expert conversion copywriter**, not a brand poet.\n\n- Clarity beats cleverness\n- Outcomes beat features\n- Specificity beats buzzwords\n- Honesty beats hype\n\nYour job is to **help the right reader take the right action**.\n\n---\n\n## Phase 1 — Context Gathering (Mandatory)\n\nBefore writing any copy, gather or confirm the following.\nIf information is missing, ask for it **before proceeding**.\n\n### 1️⃣ Page Purpose\n\n- Page type (homepage, landing page, pricing, feature, about)\n- ONE primary action (CTA)\n- Secondary action (if any)\n\n### 2️⃣ Audience\n\n- Target customer or role\n- Primary problem they are trying to solve\n- What they have already tried\n- Main objections or hesitations\n- Language they use to describe the problem\n\n### 3️⃣ Product / Offer\n\n- What is being offered\n- Key differentiator vs alternatives\n- Primary outcome or transformation\n- Available proof (numbers, testimonials, case studies)\n\n### 4️⃣ Context\n\n- Traffic source (ads, organic, email, referrals)\n- Awareness level (unaware, problem-aware, solution-aware, product-aware)\n- What visitors already know or expect\n\n---\n\n## Phase 2 — Copy Brief Lock (Hard Gate)\n\nBefore writing any copy, you MUST present a **Copy Brief Summary** and pause.\n\n### Copy Brief Summary\n\nSummarize in 4–6 bullets:\n\n- Page goal\n- Target audience\n- Core value proposition\n- Primary CTA\n- Traffic / awareness context\n\n### Assumptions\n\nList any assumptions explicitly (e.g. awareness level, urgency, sophistication).\n\nThen ask:\n\n> “Does this copy brief accurately reflect what we’re trying to achieve?\n> Please confirm or correct anything before I write copy.”\n\n**Do NOT proceed until confirmation is given.**\n\n---\n\n## Phase 3 — Copywriting Principles\n\n### Core Principles (Non-Negotiable)\n\n- **Clarity over cleverness**\n- **Benefits over features**\n- **Specificity over vagueness**\n- **Customer language over company language**\n- **One idea per section**\n\nAlways connect:\n\n> Feature → Benefit → Outcome\n\n---\n\n## Writing Style Rules\n\n### Style Guidelines\n\n- Simple over complex\n- Active over passive\n- Confident over hedged\n- Show outcomes instead of adjectives\n- Avoid buzzwords unless customers use them\n\n### Claim Discipline\n\n- No fabricated data or testimonials\n- No implied guarantees unless explicitly stated\n- No exaggerated speed or certainty\n- If proof is missing, mark placeholders clearly\n\n---\n\n## Phase 4 — Page Structure Framework\n\n### Above the Fold\n\n**Headline**\n\n- Single most important message\n- Specific value proposition\n- Outcome-focused\n\n**Subheadline**\n\n- Adds clarity or context\n- 1–2 sentences max\n\n**Primary CTA**\n\n- Action-oriented\n- Describes what the user gets\n\n---\n\n### Core Sections (Use as Appropriate)\n\n- Social proof (logos, stats, testimonials)\n- Problem / pain articulation\n- Solution & key benefits (3–5 max)\n- How it works (3–4 steps)\n- Objection handling (FAQ, comparisons, guarantees)\n- Final CTA with recap and risk reduction\n\nAvoid stacking features without narrative flow.\n\n---\n\n## Phase 5 — Writing the Copy\n\nWhen writing copy, provide:\n\n### Page Copy\n\nOrganized by section with clear labels:\n\n- Headline\n- Subheadline\n- CTAs\n- Section headers\n- Body copy\n\n### Alternatives\n\nProvide 2–3 options for:\n\n- Headlines\n- Primary CTAs\n\nEach option must include a brief rationale.\n\n### Annotations\n\nFor key sections, explain:\n\n- Why this copy was chosen\n- Which principle it applies\n- What alternatives were considered\n\n---\n\n## Testability Guidance\n\nWrite copy with testing in mind:\n\n- Clear, isolated value propositions\n- Headlines and CTAs that can be A/B tested\n- Avoid combining multiple messages into one element\n\nIf the copy is intended for experimentation, recommend next-step testing.\n\n---\n\n## Completion Criteria (Hard Stop)\n\nThis skill is complete ONLY when:\n\n- Copy brief has been confirmed\n- Page copy is delivered in structured form\n- Headline and CTA alternatives are provided\n- Assumptions are documented\n- Copy is ready for review, editing, or testing\n\n---\n\n## Key Principles (Summary)\n\n- Understand before writing\n- Make assumptions explicit\n- One page, one goal\n- One section, one idea\n- Benefits before features\n- Honest claims only\n\n---\n\n## Final Reminder\n\nGood copy does not persuade everyone.\nIt persuades **the right person** to take **the right action**.\n\nIf the copy feels clever but unclear,  \nrewrite it until it feels obvious.\n\n## When to Use\n\nThis skill is applicable to execute the workflow or actions described in the overview.\n",
       "tags": [
         "ai",
         "workflow",
@@ -12231,6 +12256,36 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-02-19T07:11:49.563Z"
+    },
+    {
+      "id": "antigravity-hierarchical-agent-memory",
+      "name": "hierarchical-agent-memory",
+      "slug": "hierarchical-agent-memory",
+      "description": "Scoped CLAUDE.md memory system that reduces context token spend. Creates directory-level context files, tracks savings via dashboard, and routes agents to the right sub-context.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hierarchical-agent-memory",
+      "content": "\n# Hierarchical Agent Memory (HAM)\n\nScoped memory system that gives AI coding agents a cheat sheet for each directory instead of re-reading your entire project every prompt. Root CLAUDE.md holds global context (~200 tokens), subdirectory CLAUDE.md files hold scoped context (~250 tokens each), and a `.memory/` layer stores decisions, patterns, and an inbox for unconfirmed inferences.\n\n## When to Use This Skill\n\n- Use when you want to reduce input token costs across Claude Code sessions\n- Use when your project has 3+ directories and the agent keeps re-reading the same files\n- Use when you want directory-scoped context instead of one monolithic CLAUDE.md\n- Use when you want a dashboard to visualize token savings, session history, and context health\n- Use when setting up a new project and want structured agent memory from day one\n\n## How It Works\n\n### Step 1: Setup (\"go ham\")\n\nAuto-detects your project platform and maturity, then generates the memory structure:\n\n```\nproject/\n├── CLAUDE.md              # Root context (~200 tokens)\n├── .memory/\n│   ├── decisions.md       # Architecture Decision Records\n│   ├── patterns.md        # Reusable patterns\n│   ├── inbox.md           # Inferred items awaiting confirmation\n│   └── audit-log.md       # Audit history\n└── src/\n    ├── api/CLAUDE.md      # Scoped context for api/\n    ├── components/CLAUDE.md\n    └── lib/CLAUDE.md\n```\n\n### Step 2: Context Routing\n\nThe root CLAUDE.md includes a routing section that tells the agent exactly which sub-context to load:\n\n```markdown\n## Context Routing\n\n→ api: src/api/CLAUDE.md\n→ components: src/components/CLAUDE.md\n→ lib: src/lib/CLAUDE.md\n```\n\nThe agent reads root, then immediately loads the relevant subdirectory context — no guessing.\n\n### Step 3: Dashboard (\"ham dashboard\")\n\nLaunches a web dashboard at localhost:7777 that visualizes:\n- Token savings (HAM-on vs HAM-off sessions)\n- Daily token and cost trends\n- Per-directory session breakdown\n- Context file health (missing/stale/inherited CLAUDE.md coverage)\n- Routing compliance (how often the agent follows the routing map)\n- Carbon/energy estimates\n\n## Commands\n\n| Trigger | What it does |\n|---|---|\n| `go ham` | Set up HAM — auto-detect platform, generate CLAUDE.md files |\n| `ham savings` | Show token and cost savings report |\n| `ham dashboard` | Launch the interactive web dashboard |\n| `ham audit` | Health check on memory files |\n| `ham insights` | Generate actionable insights from session data |\n| `ham route` | Add/update Context Routing section in root CLAUDE.md |\n| `ham carbon` | Show energy and carbon efficiency data |\n\n## Examples\n\n### Example 1: First-time setup\n\n```\nUser: go ham\n\nAgent: HAM setup complete. Created 8 files.\n  - CLAUDE.md (root)\n  - .memory/decisions.md\n  - .memory/patterns.md\n  - .memory/inbox.md\n  - src/api/CLAUDE.md\n  - src/components/CLAUDE.md\n  - src/lib/CLAUDE.md\n  - src/utils/CLAUDE.md\n\nBaseline captured in .memory/baseline.json\nRun \"HAM savings\" to see your token and cost savings.\n```\n\n### Example 2: Checking savings\n\n```\nUser: ham savings\n\nAgent:\n  Before HAM: ~7,500 tokens/prompt\n  After HAM:    ~450 tokens/prompt\n  Savings:    7,050 tokens (94%)\n\n  Monthly projection (1,500 prompts):\n    Sonnet: ~$31.73 saved\n    Opus:   ~$158.63 saved\n```\n\n## Best Practices\n\n- Keep root CLAUDE.md under 60 lines / 250 tokens\n- Keep subdirectory CLAUDE.md files under 75 lines each\n- Run `ham audit` every 2 weeks to catch stale or missing context files\n- Use `ham route` after adding new directories to keep routing current\n- Review `.memory/inbox.md` periodically — confirm or reject inferred items\n\n## Limitations\n\n- Token estimates use ~4 chars = 1 token approximation, not a real tokenizer\n- Baseline savings comparisons are estimates based on typical agent behavior\n- Dashboard requires Node.js 18+ and reads session data from `~/.claude/projects/`\n- Context routing detection relies on CLAUDE.md read order in session JSONL files\n- Does not auto-update subdirectory CLAUDE.md content — you maintain those manually or via `ham audit`\n- Carbon estimates use regional grid averages, not real-time energy data\n\n## Related Skills\n\n- `agent-memory-systems` — general agent memory architecture patterns\n- `agent-memory-mcp` — MCP-based memory integration\n",
+      "tags": [
+        "node",
+        "markdown",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Use when you want to reduce input token costs across Claude Code sessions",
+        "Use when your project has 3+ directories and the agent keeps re-reading the same files",
+        "Use when you want directory-scoped context instead of one monolithic CLAUDE.md",
+        "Use when you want a dashboard to visualize token savings, session history, and context health",
+        "Use when setting up a new project and want structured agent memory from day one"
+      ],
+      "scrapedAt": "2026-03-01T06:57:46.486Z"
     },
     {
       "id": "antigravity-hig-components-content",
@@ -22654,6 +22709,35 @@
       "scrapedAt": "2026-01-31T06:54:57.395Z"
     },
     {
+      "id": "antigravity-vibe-code-auditor",
+      "name": "vibe-code-auditor",
+      "slug": "vibe-code-auditor",
+      "description": "Audit rapidly generated or AI-produced code for structural flaws, fragility, and production risks.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/vibe-code-auditor",
+      "content": "\n# Vibe Code Auditor\n\n## Identity\n\nYou are a senior software architect specializing in evaluating prototype-quality and AI-generated code. Your role is to determine whether code that \"works\" is actually robust, maintainable, and production-ready.\n\nYou do not rewrite code to demonstrate skill. You do not raise alarms over cosmetic issues. You identify real risks, explain why they matter, and recommend the minimum changes required to address them.\n\n## Purpose\n\nThis skill analyzes code produced through rapid iteration, vibe coding, or AI assistance and surfaces hidden technical risks, architectural weaknesses, and maintainability problems that are invisible during casual review.\n\n## When to Use\n\n- Code was generated or heavily assisted by AI tools\n- The system evolved without a deliberate architecture\n- A prototype needs to be productionized\n- Code works but feels fragile or inconsistent\n- You suspect hidden technical debt\n- Preparing a project for long-term maintenance or team handoff\n\n---\n\n## Pre-Audit Checklist\n\nBefore beginning the audit, confirm the following. If any item is missing, state what is absent and proceed with the available information — do not halt.\n\n- **Input received**: Source code or files are present in the conversation.\n- **Scope defined**: Identify whether the input is a snippet, single file, or multi-file system.\n- **Context noted**: If no context was provided, state the assumptions made (e.g., \"Assuming a web API backend with no specified scale requirements\").\n\n---\n\n## Audit Dimensions\n\nEvaluate the code across all seven dimensions below. For each finding, record: the dimension, a short title, the exact location (file and line number if available), the severity, a clear explanation, and a concrete recommendation.\n\n**Do not invent findings. Do not report issues you cannot substantiate from the code provided.**\n\n### 1. Architecture & Design\n\n- Separation of concerns violations (e.g., business logic inside route handlers or UI components)\n- God objects or monolithic modules with more than one clear responsibility\n- Tight coupling between components with no abstraction boundary\n- Missing or blurred system boundaries (e.g., database queries scattered across layers)\n\n### 2. Consistency & Maintainability\n\n- Naming inconsistencies (e.g., `get_user` vs `fetchUser` vs `retrieveUserData` for the same operation)\n- Mixed paradigms without justification (e.g., OOP and procedural code interleaved arbitrarily)\n- Copy-paste logic that should be extracted into a shared function\n- Abstractions that obscure rather than clarify intent\n\n### 3. Robustness & Error Handling\n\n- Missing input validation on entry points (HTTP handlers, CLI args, file reads)\n- Bare `except` or catch-all error handlers that swallow failures silently\n- Unhandled edge cases (empty collections, null/None returns, zero values)\n- Code that assumes external services always succeed without fallback logic\n\n### 4. Production Risks\n\n- Hardcoded configuration values (URLs, credentials, timeouts, thresholds)\n- Missing structured logging or observability hooks\n- Unbounded loops, missing pagination, or N+1 query patterns\n- Blocking I/O in async contexts or thread-unsafe shared state\n- No graceful shutdown or cleanup on process exit\n\n### 5. Security & Safety\n\n- Unsanitized user input passed to databases, shells, file paths, or `eval`\n- Credentials, API keys, or tokens present in source code or logs\n- Insecure defaults (e.g., `DEBUG=True`, permissive CORS, no rate limiting)\n- Trust boundary violations (e.g., treating external data as internal without validation)\n\n### 6. Dead or Hallucinated Code\n\n- Functions, classes, or modules that are defined but never called\n- Imports that do not exist in the declared dependencies\n- References to APIs, methods, or fields that do not exist in the used library version\n- Type annotations that contradict actual usage\n- Comments that describe behavior inconsistent with the code\n\n### 7. Technical Debt Hotspots\n\n- Logic that is correct today but will break under realistic load or scale\n- Deep nesting (more than 3-4 levels) that obscures control flow\n- Boolean parameter flags that change function behavior (use separate functions instead)\n- Functions with more than 5-6 parameters without a configuration object\n- Areas where a future requirement change would require modifying many unrelated files\n\n---\n\n## Output Format\n\nProduce the audit report using exactly this structure. Do not omit sections. If a section has no findings, write \"None identified.\"\n\n---\n\n### Audit Report\n\n**Input:** [file name(s) or \"code snippet\"]\n**Assumptions:** [list any assumptions made about context or environment]\n\n#### Critical Issues (Must Fix Before Production)\n\nProblems that will or are very likely to cause failures, data loss, security incidents, or severe maintenance breakdown.\n\nFor each issue:\n\n```\n[CRITICAL] Short descriptive title\nLocation: filename.py, line 42 (or \"multiple locations\" with examples)\nDimension: Architecture / Security /",
+      "tags": [
+        "api",
+        "ai",
+        "design",
+        "security",
+        "aws",
+        "rag",
+        "seo",
+        "cro"
+      ],
+      "useCases": [
+        "Code was generated or heavily assisted by AI tools",
+        "The system evolved without a deliberate architecture",
+        "A prototype needs to be productionized",
+        "Code works but feels fragile or inconsistent",
+        "You suspect hidden technical debt"
+      ],
+      "scrapedAt": "2026-03-01T06:59:55.547Z"
+    },
+    {
       "id": "awesome-llm-video-downloader",
       "name": "video-downloader",
       "slug": "awesome-llm-video-downloader",
@@ -22678,6 +22762,34 @@
         "Downloading your own content from platforms"
       ],
       "scrapedAt": "2026-01-26T13:16:07.643Z"
+    },
+    {
+      "id": "antigravity-videodb-skills",
+      "name": "videodb-skills",
+      "slug": "videodb-skills",
+      "description": "Upload, stream, search, edit, transcribe, and generate AI video and audio using the VideoDB SDK.",
+      "category": "Creative & Media",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/videodb-skills",
+      "content": "\n# VideoDB Skills\n\n## Purpose\n\nThe only video skill your agent needs. Upload any video, connect real-time streams, search inside by what was said or shown, build complex editing workflows with overlays, generate AI media, add subtitles, and get instant streaming links — all via the VideoDB Python SDK.\n\n## When to Use This Skill\n\n- User wants to upload and process videos from YouTube, URLs, or local files\n- User needs to search for moments by speech or visual scenes\n- User asks for transcription, subtitles, or subtitle styling\n- User wants to edit clips — trim, combine, add text/image/audio overlays\n- User needs AI-generated media (images, video, music, sound effects, voiceovers)\n- User wants to transcode, change resolution, or reframe for social platforms\n- User needs real-time screen or audio capture with AI transcription\n- User asks for playable streaming links for any video output\n\n## Setup\n\n### Step 1: Install the skill\n\n```bash\nnpx skills add video-db/skills\n```\n\n### Step 2: Run setup\n\n```\n/videodb setup\n```\n\nThe agent guides API key setup ($20 free credits, no credit card), installs the SDK, and verifies the connection.\n\nAlternatively, set the API key manually:\n\n```bash\nexport VIDEO_DB_API_KEY=sk-xxx\n```\n\n### Step 3: Install the SDK\n\n```bash\npip install \"videodb[capture]\" python-dotenv\n```\n\n## Capabilities\n\n| Capability  | Description                                                               |\n| ----------- | ------------------------------------------------------------------------- |\n| Upload      | Ingest videos from YouTube, URLs, or local files                          |\n| Search      | Find moments by speech (semantic/keyword) or visual scenes                |\n| Transcripts | Generate timestamped transcripts from any video                           |\n| Edit        | Combine clips, trim, add text/image/audio overlays                        |\n| Subtitles   | Auto-generate and style subtitles                                         |\n| AI Generate | Create images, video, music, sound effects, and voiceovers from text      |\n| Capture     | Real-time screen and audio capture with AI transcription                  |\n| Transcode   | Change resolution, quality, aspect ratio, or reframe for social platforms |\n| Stream      | Get playable HLS links for anything you build                             |\n\n## Examples\n\n**Upload and transcribe:**\n\n```\n\"Upload https://www.youtube.com/watch?v=FgrO9ADPZSA and give me a transcript\"\n```\n\n**Search across videos:**\n\n```\n\"Search for 'product demo' in my latest video\"\n```\n\n**Add subtitles:**\n\n```\n\"Add subtitles with white text on black background\"\n```\n\n**Multi-clip editing:**\n\n```\n\"Take clips from 10s-30s and 45s-60s, add a title card, and combine them\"\n```\n\n**AI media generation:**\n\n```\n\"Generate background music and overlay it on my video\"\n```\n\n**Real-time capture:**\n\n```\n\"Capture my screen and transcribe it in real-time\"\n```\n\n**Reframe for social:**\n\n```\n\"Convert this to vertical for Instagram Reels\"\n```\n\n## Repository\n\nhttps://github.com/video-db/skills\n\n**Version:** 1.1.0\n**Maintained By:** [VideoDB](https://github.com/video-db)\n",
+      "tags": [
+        "python",
+        "api",
+        "ai",
+        "agent",
+        "workflow",
+        "image",
+        "cro"
+      ],
+      "useCases": [
+        "User wants to upload and process videos from YouTube, URLs, or local files",
+        "User needs to search for moments by speech or visual scenes",
+        "User asks for transcription, subtitles, or subtitle styling",
+        "User wants to edit clips — trim, combine, add text/image/audio overlays",
+        "User needs AI-generated media (images, video, music, sound effects, voiceovers)"
+      ],
+      "scrapedAt": "2026-03-01T06:59:55.805Z"
     },
     {
       "id": "antigravity-viral-generator-builder",
@@ -23884,7 +23996,7 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 332
+      "count": 334
     },
     {
       "id": "document-processing",
@@ -23898,7 +24010,7 @@
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 123
+      "count": 124
     },
     {
       "id": "security-systems",
@@ -23912,7 +24024,7 @@
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 91
+      "count": 92
     },
     {
       "id": "business-marketing",
@@ -23956,48 +24068,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 65149
+      "stars": 66202
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 12,
       "newSkillCount": 4,
-      "stars": 78869
+      "stars": 79677
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 38579
+      "stars": 38862
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 68293
+      "stars": 68340
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 946
+      "stars": 950
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillCount": 944,
+      "skillCount": 948,
       "newSkillCount": 11,
-      "stars": 16783
+      "stars": 17368
     }
   ],
-  "lastUpdated": "2026-02-28T06:56:46.685Z",
+  "lastUpdated": "2026-03-01T07:00:08.563Z",
   "stats": {
-    "totalSkills": 1039,
+    "totalSkills": 1043,
     "newSkills": 23,
-    "scrapedAt": "2026-02-28T06:56:46.685Z"
+    "scrapedAt": "2026-03-01T07:00:08.563Z"
   }
 }
