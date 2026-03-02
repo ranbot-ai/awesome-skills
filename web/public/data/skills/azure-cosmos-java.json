@@ -2,7 +2,7 @@
   "id": "antigravity-azure-cosmos-java",
   "name": "azure-cosmos-java",
   "slug": "azure-cosmos-java",
-  "description": "Client library for Azure Cosmos DB NoSQL API with global distribution and reactive patterns. <dependency>",
+  "description": "Azure Cosmos DB SDK for Java. NoSQL database operations with global distribution, multi-model support, and reactive patterns.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

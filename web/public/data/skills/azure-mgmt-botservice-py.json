@@ -2,7 +2,7 @@
   "id": "antigravity-azure-mgmt-botservice-py",
   "name": "azure-mgmt-botservice-py",
   "slug": "azure-mgmt-botservice-py",
-  "description": "Manage Azure Bot Service resources including bots, channels, and connections. pip install azure-mgmt-botservice",
+  "description": "Azure Bot Service Management SDK for Python. Use for creating, managing, and configuring Azure Bot Service resources.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

@@ -1,6 +1,6 @@
 ---
 name: error-detective
-description: You are an error detective specializing in log analysis and pattern recognition. 1. Start with error symptoms, work backward to cause 
+description: Search logs and codebases for error patterns, stack traces, and anomalies. Correlates errors across systems and identifies root causes. 
 category: AI & Agents
 source: antigravity
 tags: [ai, workflow, cro]

@@ -1,6 +1,6 @@
 ---
 name: azure-appconfiguration-java
-description: Client library for Azure App Configuration, a managed service for centralizing application configurations. 
+description: Azure App Configuration SDK for Java. Centralized application configuration management with key-value settings, feature flags, and snapshots. 
 category: Document Processing
 source: antigravity
 tags: [react, api, ai, workflow, document, azure, cro]

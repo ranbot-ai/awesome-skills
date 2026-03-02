@@ -1,6 +1,6 @@
 ---
 name: azure-mgmt-weightsandbiases-dotnet
-description: Azure Resource Manager SDK for deploying and managing Weights & Biases ML experiment tracking instances via Azure Marketplace. 
+description: Azure Weights & Biases SDK for .NET. ML experiment tracking and model management via Azure Marketplace. Use for creating W&B instances, managing SSO, marketplace integration, and ML observability. 
 category: Document Processing
 source: antigravity
 tags: [python, api, ai, workflow, document, security, azure, cro]

@@ -2,7 +2,7 @@
   "id": "antigravity-azure-storage-blob-ts",
   "name": "azure-storage-blob-ts",
   "slug": "azure-storage-blob-ts",
-  "description": "SDK for Azure Blob Storage operations — upload, download, list, and manage blobs and containers. npm install @azure/storage-blob @azure/identity",
+  "description": "Azure Blob Storage JavaScript/TypeScript SDK (@azure/storage-blob) for blob operations. Use for uploading, downloading, listing, and managing blobs and containers.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

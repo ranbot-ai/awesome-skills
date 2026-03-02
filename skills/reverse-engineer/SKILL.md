@@ -1,6 +1,6 @@
 ---
 name: reverse-engineer
-description: 1. **File identification**: Determine file type, architecture, compiler 2. **Metadata extraction**: Strings, imports, exports, resources 
+description: Expert reverse engineer specializing in binary analysis, disassembly, decompilation, and software analysis. Masters IDA Pro, Ghidra, radare2, x64dbg, and modern RE toolchains. 
 category: Security & Systems
 source: antigravity
 tags: [python, api, ai, workflow, document, security, vulnerability, cro]

@@ -1,6 +1,6 @@
 ---
 name: terraform-specialist
-description: You are a Terraform/OpenTofu specialist focused on advanced infrastructure automation, state management, and modern IaC practices. 
+description: Expert Terraform/OpenTofu specialist mastering advanced IaC automation, state management, and enterprise infrastructure patterns. 
 category: Document Processing
 source: antigravity
 tags: [ai, agent, automation, workflow, template, design, document, presentation, security, aws]

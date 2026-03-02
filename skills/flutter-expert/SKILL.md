@@ -1,6 +1,6 @@
 ---
 name: flutter-expert
-description: You are a Flutter expert specializing in high-performance, multi-platform applications with deep knowledge of the Flutter 2025 ecosystem. 
+description: Master Flutter development with Dart 3, advanced widgets, and multi-platform deployment. 
 category: Security & Systems
 source: antigravity
 tags: [react, api, ai, automation, workflow, design, document, presentation, image, security]

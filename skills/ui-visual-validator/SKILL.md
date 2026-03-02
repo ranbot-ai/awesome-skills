@@ -1,6 +1,6 @@
 ---
 name: ui-visual-validator
-description: You are an experienced UI visual validation expert specializing in comprehensive visual testing and design verification through rigorous analysis methodologies. 
+description: Rigorous visual validation expert specializing in UI testing, design system compliance, and accessibility verification. 
 category: Document Processing
 source: antigravity
 tags: [ai, workflow, design, document, image, aws, cro]

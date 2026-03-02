@@ -1,6 +1,6 @@
 ---
 name: inventory-demand-planning
-description: Use this skill when forecasting product demand, calculating optimal safety stock levels, planning inventory replenishment cycles, estimating the impact of retail promotions, or conducting ABC/XYZ inve
+description: Codified expertise for demand forecasting, safety stock optimisation, replenishment planning, and promotional lift estimation at multi-location retailers. 
 category: Document Processing
 source: antigravity
 tags: [markdown, api, ai, agent, template, design, document, rag, cro]

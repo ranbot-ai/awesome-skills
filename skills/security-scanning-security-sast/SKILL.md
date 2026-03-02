@@ -1,6 +1,6 @@
 ---
 name: security-scanning-security-sast
-description: Static Application Security Testing (SAST) for comprehensive code vulnerability detection across multiple languages, frameworks, and security patterns. 
+description: Static Application Security Testing (SAST) for code vulnerability analysis across multiple languages and frameworks 
 category: Security & Systems
 source: antigravity
 tags: [python, javascript, typescript, react, api, ai, document, image, security, vulnerability]

@@ -1,6 +1,6 @@
 ---
 name: docs-architect
-description: You are a technical documentation architect specializing in creating comprehensive, long-form documentation that captures both the what and the why of complex systems. 
+description: Creates comprehensive technical documentation from existing codebases. Analyzes architecture, design patterns, and implementation details to produce long-form technical manuals and ebooks. 
 category: Document Processing
 source: antigravity
 tags: [markdown, api, ai, workflow, design, document, security, cro]

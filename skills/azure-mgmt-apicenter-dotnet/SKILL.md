@@ -1,6 +1,6 @@
 ---
 name: azure-mgmt-apicenter-dotnet
-description: Centralized API inventory and governance SDK for managing APIs across your organization. dotnet add package Azure.ResourceManager.ApiCenter 
+description: Azure API Center SDK for .NET. Centralized API inventory management with governance, versioning, and discovery. 
 category: Document Processing
 source: antigravity
 tags: [api, mcp, ai, workflow, design, document, azure, cro]

@@ -1,6 +1,6 @@
 ---
 name: seo-keyword-strategist
-description: You are a keyword strategist analyzing content for semantic optimization opportunities. 1. Identify primary entity relationships 
+description: Analyzes keyword usage in provided content, calculates density, suggests semantic variations and LSI keywords based on the topic. Prevents over-optimization. Use PROACTIVELY for content optimization. 
 category: Business & Marketing
 source: antigravity
 tags: [ai, workflow, seo]

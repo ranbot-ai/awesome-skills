@@ -1,6 +1,6 @@
 ---
 name: azure-eventhub-rust
-description: Client library for Azure Event Hubs — big data streaming platform and event ingestion service. cargo add azure_messaging_eventhubs azure_identity 
+description: Azure Event Hubs SDK for Rust. Use for sending and receiving events, streaming data ingestion. 
 category: Development & Code Tools
 source: antigravity
 tags: [api, ai, workflow, azure]

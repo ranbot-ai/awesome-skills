@@ -1,6 +1,6 @@
 ---
 name: ui-ux-designer
-description: You are a UI/UX design expert specializing in user-centered design, modern design systems, and accessible interface creation. 
+description: Create interface designs, wireframes, and design systems. Masters user research, accessibility standards, and modern design tools. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, automation, workflow, design, document, presentation, seo, cro]

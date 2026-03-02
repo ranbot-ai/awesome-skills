@@ -2,7 +2,7 @@
   "id": "antigravity-inventory-demand-planning",
   "name": "inventory-demand-planning",
   "slug": "inventory-demand-planning",
-  "description": "Use this skill when forecasting product demand, calculating optimal safety stock levels, planning inventory replenishment cycles, estimating the impact of retail promotions, or conducting ABC/XYZ inventory segmentation.",
+  "description": "Codified expertise for demand forecasting, safety stock optimisation, replenishment planning, and promotional lift estimation at multi-location retailers.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

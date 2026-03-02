@@ -1,6 +1,6 @@
 ---
 name: reference-builder
-description: You are a reference documentation specialist focused on creating comprehensive, searchable, and precisely organized technical references that serve as the definitive source of truth. 
+description: Creates exhaustive technical references and API documentation. Generates comprehensive parameter listings, configuration guides, and searchable reference materials. 
 category: Document Processing
 source: antigravity
 tags: [markdown, api, ai, workflow, document, security, rag, cro]

@@ -1,6 +1,6 @@
 ---
 name: azure-ai-transcription-py
-description: Client library for Azure AI Transcription (speech-to-text) with real-time and batch transcription. pip install azure-ai-transcription 
+description: Azure AI Transcription SDK for Python. Use for real-time and batch speech-to-text transcription with timestamps and diarization. 
 category: AI & Agents
 source: antigravity
 tags: [python, ai, workflow, azure, rag]

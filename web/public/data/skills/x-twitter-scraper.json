@@ -1,0 +1,27 @@
+{
+  "id": "antigravity-x-twitter-scraper",
+  "name": "x-twitter-scraper",
+  "slug": "x-twitter-scraper",
+  "description": "X (Twitter) data platform skill — tweet search, user lookup, follower extraction, engagement metrics, giveaway draws, monitoring, webhooks, 19 extraction tools, MCP server.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/x-twitter-scraper",
+  "content": "\n# X (Twitter) Scraper — Xquik\n\n## Overview\n\nGives your AI agent full access to X (Twitter) data through the Xquik platform. Covers tweet search, user profiles, follower extraction, engagement metrics, giveaway draws, account monitoring, webhooks, and 19 bulk extraction tools — all via REST API or MCP server.\n\n## When to Use This Skill\n\n- User needs to search X/Twitter for tweets by keyword, hashtag, or user\n- User wants to look up a user profile (bio, follower counts, etc.)\n- User needs engagement metrics for a specific tweet (likes, retweets, views)\n- User wants to check if one account follows another\n- User needs to extract followers, replies, retweets, quotes, or community members in bulk\n- User wants to run a giveaway draw from tweet replies\n- User needs real-time monitoring of an X account (new tweets, follower changes)\n- User wants webhook delivery of monitored events\n- User asks about trending topics on X\n\n## Setup\n\n### Install the Skill\n\n```bash\nnpx skills add Xquik-dev/x-twitter-scraper\n```\n\nOr clone manually into your agent's skills directory:\n\n```bash\n# Claude Code\ngit clone https://github.com/Xquik-dev/x-twitter-scraper.git .claude/skills/x-twitter-scraper\n\n# Cursor / Codex / Gemini CLI / Copilot\ngit clone https://github.com/Xquik-dev/x-twitter-scraper.git .agents/skills/x-twitter-scraper\n```\n\n### Get an API Key\n\n1. Sign up at [xquik.com](https://xquik.com)\n2. Generate an API key from the dashboard\n3. Set it as an environment variable or pass it directly\n\n```bash\nexport XQUIK_API_KEY=\"xq_YOUR_KEY_HERE\"\n```\n\n## Capabilities\n\n| Capability | Description |\n|---|---|\n| Tweet Search | Find tweets by keyword, hashtag, from:user, \"exact phrase\" |\n| User Lookup | Profile info, bio, follower/following counts |\n| Tweet Lookup | Full metrics — likes, retweets, replies, quotes, views, bookmarks |\n| Follow Check | Check if A follows B (both directions) |\n| Trending Topics | Top trends by region (free, no quota) |\n| Account Monitoring | Track new tweets, replies, retweets, quotes, follower changes |\n| Webhooks | HMAC-signed real-time event delivery to your endpoint |\n| Giveaway Draws | Random winner selection from tweet replies with filters |\n| 19 Extraction Tools | Followers, following, verified followers, mentions, posts, replies, reposts, quotes, threads, articles, communities, lists, Spaces, people search |\n| MCP Server | StreamableHTTP endpoint for AI-native integrations |\n\n## Examples\n\n**Search tweets:**\n```\n\"Search X for tweets about 'claude code' from the last week\"\n```\n\n**Look up a user:**\n```\n\"Who is @elonmusk? Show me their profile and follower count\"\n```\n\n**Check engagement:**\n```\n\"How many likes and retweets does this tweet have? https://x.com/...\"\n```\n\n**Run a giveaway:**\n```\n\"Pick 3 random winners from the replies to this tweet\"\n```\n\n**Monitor an account:**\n```\n\"Monitor @openai for new tweets and notify me via webhook\"\n```\n\n**Bulk extraction:**\n```\n\"Extract all followers of @anthropic\"\n```\n\n## API Reference\n\n| Endpoint | Method | Purpose |\n|----------|--------|---------|\n| `/x/tweets/{id}` | GET | Single tweet with full metrics |\n| `/x/tweets/search` | GET | Search tweets |\n| `/x/users/{username}` | GET | User profile |\n| `/x/followers/check` | GET | Follow relationship |\n| `/trends` | GET | Trending topics |\n| `/monitors` | POST | Create monitor |\n| `/events` | GET | Poll monitored events |\n| `/webhooks` | POST | Register webhook |\n| `/draws` | POST | Run giveaway draw |\n| `/extractions` | POST | Start bulk extraction |\n| `/extractions/estimate` | POST | Estimate extraction cost |\n| `/account` | GET | Account & usage info |\n\n**Base URL:** `https://xquik.com/api/v1`\n**Auth:** `x-api-key: xq_...` header\n**MCP:** `https://xquik.com/mcp` (StreamableHTTP, same API key)\n\n## Repository\n\nhttps://github.com/Xquik-dev/x-twitter-scraper\n\n**Maintained By:** [Xquik](https://xquik.com)\n",
+  "tags": [
+    "api",
+    "mcp",
+    "claude",
+    "ai",
+    "agent",
+    "aws"
+  ],
+  "useCases": [
+    "User needs to search X/Twitter for tweets by keyword, hashtag, or user",
+    "User wants to look up a user profile (bio, follower counts, etc.)",
+    "User needs engagement metrics for a specific tweet (likes, retweets, views)",
+    "User wants to check if one account follows another",
+    "User needs to extract followers, replies, retweets, quotes, or community members in bulk"
+  ],
+  "scrapedAt": "2026-03-02T07:12:56.631Z"
+}

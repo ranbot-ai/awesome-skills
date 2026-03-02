@@ -1,6 +1,6 @@
 ---
 name: conductor-setup
-description: Initialize or resume Conductor project setup. This command creates foundational project documentation through interactive Q&A. 
+description: Initialize project with Conductor artifacts (product definition, tech stack, workflow, style guides) 
 category: Document Processing
 source: antigravity
 tags: [python, javascript, typescript, react, markdown, api, claude, ai, workflow, template]

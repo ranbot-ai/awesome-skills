@@ -1,6 +1,6 @@
 ---
 name: cpp-pro
-description: You are a C++ programming expert specializing in modern C++ and high-performance software. 1. Prefer stack allocation and RAII over manual memory management 
+description: Write idiomatic C++ code with modern features, RAII, smart pointers, and STL algorithms. Handles templates, move semantics, and performance optimization. 
 category: Document Processing
 source: antigravity
 tags: [ai, workflow, template, document, rag]

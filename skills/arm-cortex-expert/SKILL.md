@@ -1,6 +1,6 @@
 ---
 name: arm-cortex-expert
-description: 1. **DTCM/SRAM** (Non-cacheable, fastest CPU access) 2. **MPU-configured Non-cacheable regions** - Configure OCRAM/SRAM regions as non-cacheable via MPU 
+description: Senior embedded software engineer specializing in firmware and driver development for ARM Cortex-M microcontrollers (Teensy, STM32, nRF52, SAMD). 
 category: Document Processing
 source: antigravity
 tags: [api, ai, workflow, template, design, document, cro]

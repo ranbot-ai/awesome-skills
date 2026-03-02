@@ -1,6 +1,6 @@
 ---
 name: context-driven-development
-description: Guide for implementing and maintaining context as a managed artifact alongside code, enabling consistent AI interactions and team alignment through structured project documentation. 
+description: Use this skill when working with Conductor's context-driven development methodology, managing project context artifacts, or understanding the relationship between product.md, tech-stack.md, and... 
 category: Document Processing
 source: antigravity
 tags: [python, typescript, ai, workflow, document, rag, cro]

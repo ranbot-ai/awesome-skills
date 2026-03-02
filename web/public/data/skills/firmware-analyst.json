@@ -2,7 +2,7 @@
   "id": "antigravity-firmware-analyst",
   "name": "firmware-analyst",
   "slug": "firmware-analyst",
-  "description": "wget http://vendor.com/firmware/update.bin screen /dev/ttyUSB0 115200 dd if=/dev/mtd0 of=/tmp/firmware.bin",
+  "description": "Expert firmware analyst specializing in embedded systems, IoT security, and hardware reverse engineering.",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

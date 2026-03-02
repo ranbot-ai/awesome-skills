@@ -1,6 +1,6 @@
 ---
 name: azure-storage-blob-ts
-description: SDK for Azure Blob Storage operations — upload, download, list, and manage blobs and containers. npm install @azure/storage-blob @azure/identity 
+description: Azure Blob Storage JavaScript/TypeScript SDK (@azure/storage-blob) for blob operations. Use for uploading, downloading, listing, and managing blobs and containers. 
 category: Document Processing
 source: antigravity
 tags: [javascript, typescript, node, pdf, ai, workflow, document, azure, rag]

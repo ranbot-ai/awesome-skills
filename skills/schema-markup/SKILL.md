@@ -1,6 +1,6 @@
 ---
 name: schema-markup
-description: You are an expert in **structured data and schema markup** with a focus on Your responsibility is to: 
+description: Design, validate, and optimize schema.org structured data for eligibility, correctness, and measurable SEO impact. 
 category: Document Processing
 source: antigravity
 tags: [react, ai, workflow, template, design, document, seo, marketing]

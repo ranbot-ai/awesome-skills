@@ -2,7 +2,7 @@
   "id": "antigravity-kubernetes-architect",
   "name": "kubernetes-architect",
   "slug": "kubernetes-architect",
-  "description": "You are a Kubernetes architect specializing in cloud-native infrastructure, modern GitOps workflows, and enterprise container orchestration at scale.",
+  "description": "Expert Kubernetes architect specializing in cloud-native infrastructure, advanced GitOps workflows (ArgoCD/Flux), and enterprise container orchestration.",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

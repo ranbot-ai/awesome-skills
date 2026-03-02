@@ -1,6 +1,6 @@
 ---
 name: seo-meta-optimizer
-description: You are a meta tag optimization specialist creating compelling metadata within best practice guidelines. 
+description: Creates optimized meta titles, descriptions, and URL suggestions based on character limits and best practices. Generates compelling, keyword-rich metadata. Use PROACTIVELY for new content. 
 category: Business & Marketing
 source: antigravity
 tags: [ai, workflow, seo]

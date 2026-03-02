@@ -1,6 +1,6 @@
 ---
 name: startup-analyst
-description: You are an expert startup business analyst specializing in helping early-stage companies (pre-seed through Series A) with market sizing, financial modeling, competitive strategy, and business planning
+description: Expert startup business analyst specializing in market sizing, financial modeling, competitive analysis, and strategic planning for early-stage companies. 
 category: Document Processing
 source: antigravity
 tags: [ai, agent, automation, workflow, template, design, document, presentation, rag, cro]

@@ -1,6 +1,6 @@
 ---
 name: angular
-description: Master modern Angular development with Signals, Standalone Components, Zoneless applications, SSR/Hydration, and the latest reactive patterns. 
+description: Modern Angular (v20+) expert with deep knowledge of Signals, Standalone Components, Zoneless applications, SSR/Hydration, and reactive patterns. 
 category: Document Processing
 source: antigravity
 tags: [typescript, react, api, ai, template, document, image, cro]

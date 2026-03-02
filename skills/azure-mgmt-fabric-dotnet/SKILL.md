@@ -1,6 +1,6 @@
 ---
 name: azure-mgmt-fabric-dotnet
-description: Management plane SDK for provisioning and managing Microsoft Fabric capacity resources via Azure Resource Manager. 
+description: Azure Resource Manager SDK for Fabric in .NET. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, workflow, document, azure, cro]

@@ -1,6 +1,6 @@
 ---
 name: hig-components-layout
-description: Check for `.claude/apple-design-context.md` before asking questions. Use existing context and only ask for information not already covered. 
+description: Apple Human Interface Guidelines for layout and navigation components. 
 category: Document Processing
 source: antigravity
 tags: [api, claude, ai, workflow, design, document, cro]

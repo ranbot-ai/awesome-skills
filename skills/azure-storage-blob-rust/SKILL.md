@@ -1,6 +1,6 @@
 ---
 name: azure-storage-blob-rust
-description: Client library for Azure Blob Storage — Microsoft's object storage solution for the cloud. cargo add azure_storage_blob azure_identity 
+description: Azure Blob Storage SDK for Rust. Use for uploading, downloading, and managing blobs and containers. 
 category: Development & Code Tools
 source: antigravity
 tags: [api, ai, workflow, azure, rag, cro]

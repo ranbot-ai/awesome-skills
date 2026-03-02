@@ -2,7 +2,7 @@
   "id": "antigravity-azure-cosmos-py",
   "name": "azure-cosmos-py",
   "slug": "azure-cosmos-py",
-  "description": "Client library for Azure Cosmos DB NoSQL API — globally distributed, multi-model database. pip install azure-cosmos azure-identity",
+  "description": "Azure Cosmos DB SDK for Python (NoSQL API). Use for document CRUD, queries, containers, and globally distributed data.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

@@ -1,6 +1,6 @@
 ---
 name: azure-identity-py
-description: Authentication library for Azure SDK clients using Microsoft Entra ID (formerly Azure AD). pip install azure-identity 
+description: Azure Identity SDK for Python authentication. Use for DefaultAzureCredential, managed identity, service principals, and token caching. 
 category: Creative & Media
 source: antigravity
 tags: [python, ai, workflow, kubernetes, azure, rag, cro]

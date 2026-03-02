@@ -1,6 +1,6 @@
 ---
 name: azure-storage-file-share-ts
-description: SDK for Azure File Share operations — SMB file shares, directories, and file operations. npm install @azure/storage-file-share @azure/identity 
+description: Azure File Share JavaScript/TypeScript SDK (@azure/storage-file-share) for SMB file share operations. 
 category: Document Processing
 source: antigravity
 tags: [javascript, typescript, node, ai, workflow, document, azure, rag]

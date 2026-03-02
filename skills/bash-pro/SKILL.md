@@ -1,6 +1,6 @@
 ---
 name: bash-pro
-description: 1. Define script inputs, outputs, and failure modes. 2. Apply strict mode and safe argument parsing. 3. Implement core logic with defensive patterns. 
+description: Master of defensive Bash scripting for production automation, CI/CD pipelines, and system utilities. Expert in safe, portable, and testable shell scripts. 
 category: Security & Systems
 source: antigravity
 tags: [markdown, ai, llm, automation, workflow, design, document, image, security, vulnerability]

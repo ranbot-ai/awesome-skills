@@ -1,6 +1,6 @@
 ---
 name: carrier-relationship-management
-description: Use this skill when building and managing a carrier network, conducting freight RFPs, negotiating linehaul and accessorial rates, tracking carrier KPIs via scorecards, or ensuring regulatory complianc
+description: Codified expertise for managing carrier portfolios, negotiating freight rates, tracking carrier performance, allocating freight, and maintaining strategic carrier relationships. 
 category: Document Processing
 source: antigravity
 tags: [ai, agent, template, design, document, security, rag, cro]

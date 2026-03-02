@@ -1,6 +1,6 @@
 ---
 name: returns-reverse-logistics
-description: Use this skill when managing the product return lifecycle, including authorization, physical inspection, making disposition decisions (e.g., restock vs. liquidator), detecting return fraud, or process
+description: Codified expertise for returns authorisation, receipt and inspection, disposition decisions, refund processing, fraud detection, and warranty claims management. 
 category: Document Processing
 source: antigravity
 tags: [ai, agent, automation, workflow, template, design, document, security, rag, cro]

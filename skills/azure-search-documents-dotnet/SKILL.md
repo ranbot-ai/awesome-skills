@@ -1,6 +1,6 @@
 ---
 name: azure-search-documents-dotnet
-description: Build search applications with full-text, vector, semantic, and hybrid search capabilities. dotnet add package Azure.Search.Documents 
+description: Azure AI Search SDK for .NET (Azure.Search.Documents). Use for building search applications with full-text, vector, semantic, and hybrid search. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, workflow, document, azure]

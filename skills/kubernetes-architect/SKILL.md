@@ -1,6 +1,6 @@
 ---
 name: kubernetes-architect
-description: You are a Kubernetes architect specializing in cloud-native infrastructure, modern GitOps workflows, and enterprise container orchestration at scale. 
+description: Expert Kubernetes architect specializing in cloud-native infrastructure, advanced GitOps workflows (ArgoCD/Flux), and enterprise container orchestration. 
 category: Security & Systems
 source: antigravity
 tags: [node, api, ai, agent, automation, workflow, design, document, image, security]

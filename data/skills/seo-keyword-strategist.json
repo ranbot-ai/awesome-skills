@@ -2,7 +2,7 @@
   "id": "antigravity-seo-keyword-strategist",
   "name": "seo-keyword-strategist",
   "slug": "seo-keyword-strategist",
-  "description": "You are a keyword strategist analyzing content for semantic optimization opportunities. 1. Identify primary entity relationships",
+  "description": "Analyzes keyword usage in provided content, calculates density, suggests semantic variations and LSI keywords based on the topic. Prevents over-optimization. Use PROACTIVELY for content optimization.",
   "category": "Business & Marketing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

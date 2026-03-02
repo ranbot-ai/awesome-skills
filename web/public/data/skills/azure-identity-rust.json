@@ -2,7 +2,7 @@
   "id": "antigravity-azure-identity-rust",
   "name": "azure-identity-rust",
   "slug": "azure-identity-rust",
-  "description": "Authentication library for Azure SDK clients using Microsoft Entra ID (formerly Azure AD). cargo add azure_identity",
+  "description": "Azure Identity SDK for Rust authentication. Use for DeveloperToolsCredential, ManagedIdentityCredential, ClientSecretCredential, and token-based authentication.",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

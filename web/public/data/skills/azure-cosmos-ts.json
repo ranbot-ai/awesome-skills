@@ -2,7 +2,7 @@
   "id": "antigravity-azure-cosmos-ts",
   "name": "azure-cosmos-ts",
   "slug": "azure-cosmos-ts",
-  "description": "Data plane SDK for Azure Cosmos DB NoSQL API operations — CRUD on documents, queries, bulk operations.",
+  "description": "Azure Cosmos DB JavaScript/TypeScript SDK (@azure/cosmos) for data plane operations. Use for CRUD operations on documents, queries, bulk operations, and container management.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

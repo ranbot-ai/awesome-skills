@@ -1,6 +1,6 @@
 ---
 name: sales-automator
-description: You are a sales automation specialist focused on conversions and relationships. 1. Lead with value, not features 
+description: Draft cold emails, follow-ups, and proposal templates. Creates pricing pages, case studies, and sales scripts. Use PROACTIVELY for sales outreach or lead nurturing. 
 category: Business & Marketing
 source: antigravity
 tags: [ai, automation, workflow, template]

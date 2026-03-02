@@ -1,6 +1,6 @@
 ---
 name: azure-mgmt-fabric-py
-description: Manage Microsoft Fabric capacities and resources programmatically. pip install azure-mgmt-fabric pip install azure-identity 
+description: Azure Fabric Management SDK for Python. Use for managing Microsoft Fabric capacities and resources. 
 category: AI & Agents
 source: antigravity
 tags: [python, ai, workflow, azure, cro]

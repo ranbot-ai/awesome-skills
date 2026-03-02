@@ -1,6 +1,6 @@
 ---
 name: c4-code
-description: Optional Mermaid diagrams for complex code structures. Choose the diagram type based on the programming paradigm. Code diagrams show the **internal structure of a single component**. 
+description: Expert C4 Code-level documentation specialist. Analyzes code directories to create comprehensive C4 code-level documentation including function signatures, arguments, dependencies, and code structure.
 category: Document Processing
 source: antigravity
 tags: [typescript, api, ai, agent, workflow, template, document, cro]

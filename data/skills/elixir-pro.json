@@ -2,7 +2,7 @@
   "id": "antigravity-elixir-pro",
   "name": "elixir-pro",
   "slug": "elixir-pro",
-  "description": "You are an Elixir expert specializing in concurrent, fault-tolerant, and distributed systems. 1. Embrace \"let it crash\" philosophy with proper supervision",
+  "description": "Write idiomatic Elixir code with OTP patterns, supervision trees, and Phoenix LiveView. Masters concurrency, fault tolerance, and distributed systems.",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

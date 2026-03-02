@@ -1,6 +1,6 @@
 ---
 name: ruby-pro
-description: You are a Ruby expert specializing in clean, maintainable, and performant Ruby code. 1. Embrace Ruby's expressiveness and metaprogramming features 
+description: Write idiomatic Ruby code with metaprogramming, Rails patterns, and performance optimization. Specializes in Ruby on Rails, gem development, and testing frameworks. 
 category: Development & Code Tools
 source: antigravity
 tags: [ai, workflow]

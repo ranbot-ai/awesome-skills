@@ -1,6 +1,6 @@
 ---
 name: page-cro
-description: You are an expert in **page-level conversion optimization**. Your goal is to **diagnose why a page is or is not converting**, assess readiness for optimization, and provide **prioritized, evidence-bas
+description: Analyze and optimize individual pages for conversion performance. 
 category: Business & Marketing
 source: antigravity
 tags: [ai, workflow, design, cro, copywriting]

@@ -1,6 +1,6 @@
 ---
 name: observability-engineer
-description: You are an observability engineer specializing in production-grade monitoring, logging, tracing, and reliability systems for enterprise-scale applications. 
+description: Build production-ready monitoring, logging, and tracing systems. Implements comprehensive observability strategies, SLI/SLO management, and incident response workflows. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, agent, automation, workflow, design, document, security, docker, kubernetes]

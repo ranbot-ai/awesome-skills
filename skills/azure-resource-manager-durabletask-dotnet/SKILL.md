@@ -1,6 +1,6 @@
 ---
 name: azure-resource-manager-durabletask-dotnet
-description: Management plane SDK for provisioning and managing Azure Durable Task Scheduler resources via Azure Resource Manager. 
+description: Azure Resource Manager SDK for Durable Task Scheduler in .NET. 
 category: AI & Agents
 source: antigravity
 tags: [api, ai, workflow, security, azure, cro]

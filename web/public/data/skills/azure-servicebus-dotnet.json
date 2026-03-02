@@ -2,7 +2,7 @@
   "id": "antigravity-azure-servicebus-dotnet",
   "name": "azure-servicebus-dotnet",
   "slug": "azure-servicebus-dotnet",
-  "description": "Enterprise messaging SDK for reliable message delivery with queues, topics, subscriptions, and sessions.",
+  "description": "Azure Service Bus SDK for .NET. Enterprise messaging with queues, topics, subscriptions, and sessions.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

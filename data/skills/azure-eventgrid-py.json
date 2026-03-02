@@ -2,7 +2,7 @@
   "id": "antigravity-azure-eventgrid-py",
   "name": "azure-eventgrid-py",
   "slug": "azure-eventgrid-py",
-  "description": "Event routing service for building event-driven applications with pub/sub semantics. pip install azure-eventgrid azure-identity",
+  "description": "Azure Event Grid SDK for Python. Use for publishing events, handling CloudEvents, and event-driven architectures.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

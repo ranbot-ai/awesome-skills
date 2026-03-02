@@ -1,6 +1,6 @@
 ---
 name: multi-agent-brainstorming
-description: Transform a single-agent design into a **robust, review-validated design** by simulating a formal peer-review process using multiple constrained agents. 
+description: Simulate a structured peer-review process using multiple specialized agents to validate designs, surface hidden assumptions, and identify failure modes before implementation. 
 category: AI & Agents
 source: antigravity
 tags: [ai, agent, workflow, design, security]

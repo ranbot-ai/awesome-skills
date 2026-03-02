@@ -1,6 +1,6 @@
 ---
 name: azure-monitor-opentelemetry-exporter-py
-description: Low-level exporter for sending OpenTelemetry traces, metrics, and logs to Application Insights. pip install azure-monitor-opentelemetry-exporter 
+description: Azure Monitor OpenTelemetry Exporter for Python. Use for low-level OpenTelemetry export to Application Insights. 
 category: AI & Agents
 source: antigravity
 tags: [python, api, ai, azure, rag, cro]

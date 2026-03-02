@@ -2,7 +2,7 @@
   "id": "antigravity-azure-mgmt-fabric-dotnet",
   "name": "azure-mgmt-fabric-dotnet",
   "slug": "azure-mgmt-fabric-dotnet",
-  "description": "Management plane SDK for provisioning and managing Microsoft Fabric capacity resources via Azure Resource Manager.",
+  "description": "Azure Resource Manager SDK for Fabric in .NET.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

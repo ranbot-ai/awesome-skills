@@ -2,7 +2,7 @@
   "id": "antigravity-azure-eventhub-dotnet",
   "name": "azure-eventhub-dotnet",
   "slug": "azure-eventhub-dotnet",
-  "description": "High-throughput event streaming SDK for sending and receiving events via Azure Event Hubs. dotnet add package Azure.Messaging.EventHubs",
+  "description": "Azure Event Hubs SDK for .NET.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

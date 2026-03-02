@@ -1,6 +1,6 @@
 ---
 name: seo-content-auditor
-description: You are an SEO content auditor analyzing provided content for optimization opportunities. 1. Evaluate content completeness for topic 
+description: Analyzes provided content for quality, E-E-A-T signals, and SEO best practices. Scores content and provides improvement recommendations based on established guidelines. 
 category: Business & Marketing
 source: antigravity
 tags: [ai, workflow, rag, seo]

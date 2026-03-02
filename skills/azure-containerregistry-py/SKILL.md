@@ -1,6 +1,6 @@
 ---
 name: azure-containerregistry-py
-description: Manage container images, artifacts, and repositories in Azure Container Registry. pip install azure-containerregistry 
+description: Azure Container Registry SDK for Python. Use for managing container images, artifacts, and repositories. 
 category: AI & Agents
 source: antigravity
 tags: [python, ai, workflow, image, azure, cro]

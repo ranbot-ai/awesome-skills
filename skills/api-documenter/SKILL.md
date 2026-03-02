@@ -1,6 +1,6 @@
 ---
 name: api-documenter
-description: You are an expert API documentation specialist mastering modern developer experience through comprehensive, interactive, and AI-enhanced documentation. 
+description: Master API documentation with OpenAPI 3.1, AI-powered tools, and modern developer experience practices. Create interactive docs, generate SDKs, and build comprehensive developer portals. 
 category: Document Processing
 source: antigravity
 tags: [python, javascript, api, ai, automation, workflow, template, design, document, security]

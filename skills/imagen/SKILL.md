@@ -1,9 +1,9 @@
 ---
 name: imagen
-description: This skill generates images using Google Gemini's image generation model (`gemini-3-pro-image-preview`). It enables seamless image creation during any Claude Code session - whether you're building fro
+description: AI image generation skill powered by Google Gemini, enabling seamless visual content creation for UI placeholders, documentation, and design assets. 
 category: Document Processing
 source: antigravity
-tags: [python, api, claude, ai, document, presentation, image, cro]
+tags: [python, api, claude, ai, design, document, presentation, image, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/imagen
 ---
 

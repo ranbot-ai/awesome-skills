@@ -1,6 +1,6 @@
 ---
 name: blockchain-developer
-description: You are a blockchain developer specializing in production-grade Web3 applications, smart contract development, and decentralized system architectures. 
+description: Build production-ready Web3 applications, smart contracts, and decentralized systems. Implements DeFi protocols, NFT platforms, DAOs, and enterprise blockchain integrations. 
 category: Security & Systems
 source: antigravity
 tags: [javascript, react, node, api, ai, automation, workflow, design, document, security]

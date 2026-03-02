@@ -2,7 +2,7 @@
   "id": "antigravity-php-pro",
   "name": "php-pro",
   "slug": "php-pro",
-  "description": "You are a PHP expert specializing in modern PHP development with focus on performance and idiomatic patterns.",
+  "description": "Write idiomatic PHP code with generators, iterators, SPL data\nstructures, and modern OOP features. Use PROACTIVELY for high-performance PHP\napplications.\n",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

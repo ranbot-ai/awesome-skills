@@ -1,6 +1,6 @@
 ---
 name: azure-cosmos-java
-description: Client library for Azure Cosmos DB NoSQL API with global distribution and reactive patterns. <dependency> 
+description: Azure Cosmos DB SDK for Java. NoSQL database operations with global distribution, multi-model support, and reactive patterns. 
 category: Document Processing
 source: antigravity
 tags: [react, api, ai, agent, workflow, document, azure, rag, seo, cro]

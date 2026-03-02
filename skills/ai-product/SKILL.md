@@ -1,6 +1,6 @@
 ---
 name: ai-product
-description: Every product will be AI-powered. The question is whether you'll build it right or ship a demo that falls apart in production.  This skill covers LLM integration patterns, RAG architecture, prompt ...
+description: Every product will be AI-powered. The question is whether you'll build it right or ship a demo that falls apart in production. This skill covers LLM integration patterns, RAG architecture, prompt ... 
 category: AI & Agents
 source: antigravity
 tags: [api, ai, llm, workflow, rag]

@@ -1,6 +1,6 @@
 ---
 name: sql-pro
-description: You are an expert SQL specialist mastering modern database systems, performance optimization, and advanced analytical techniques across cloud-native and hybrid OLTP/OLAP environments. 
+description: Master modern SQL with cloud-native databases, OLTP/OLAP optimization, and advanced query techniques. Expert in performance tuning, data modeling, and hybrid analytical systems. 
 category: Security & Systems
 source: antigravity
 tags: [api, ai, automation, design, document, security, vulnerability, azure, rag, cro]

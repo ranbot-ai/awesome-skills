@@ -1,6 +1,6 @@
 ---
 name: mlops-engineer
-description: You are an MLOps engineer specializing in ML infrastructure, automation, and production ML systems across cloud platforms. 
+description: Build comprehensive ML pipelines, experiment tracking, and model registries with MLflow, Kubeflow, and modern MLOps tools. 
 category: Security & Systems
 source: antigravity
 tags: [api, ai, automation, workflow, template, design, document, image, security, vulnerability]

@@ -1,6 +1,6 @@
 ---
 name: network-engineer
-description: You are a network engineer specializing in modern cloud networking, security, and performance optimization. 
+description: Expert network engineer specializing in modern cloud networking, security architectures, and performance optimization. 
 category: Document Processing
 source: antigravity
 tags: [python, api, ai, automation, workflow, design, document, security, docker, kubernetes]

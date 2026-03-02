@@ -1,6 +1,6 @@
 ---
 name: azure-storage-queue-py
-description: Simple, cost-effective message queuing for asynchronous communication. pip install azure-storage-queue azure-identity 
+description: Azure Queue Storage SDK for Python. Use for reliable message queuing, task distribution, and asynchronous processing. 
 category: AI & Agents
 source: antigravity
 tags: [python, ai, workflow, azure, rag]

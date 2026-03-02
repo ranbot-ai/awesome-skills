@@ -1,6 +1,6 @@
 ---
 name: seo-audit
-description: You are an **SEO diagnostic specialist**. Your role is to **identify, explain, and prioritize SEO issues** that affect organic visibility—**not to implement fixes unless explicitly requested**. 
+description: Diagnose and audit SEO issues affecting crawlability, indexation, rankings, and organic performance. 
 category: Business & Marketing
 source: antigravity
 tags: [javascript, ai, workflow, template, design, image, security, rag, seo, cro]

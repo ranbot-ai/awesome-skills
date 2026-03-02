@@ -1,6 +1,6 @@
 ---
 name: backend-architect
-description: You are a backend system architect specializing in scalable, resilient, and maintainable backend systems and APIs. 
+description: Expert backend architect specializing in scalable API design, microservices architecture, and distributed systems. 
 category: Security & Systems
 source: antigravity
 tags: [python, react, node, api, ai, automation, workflow, design, document, image]

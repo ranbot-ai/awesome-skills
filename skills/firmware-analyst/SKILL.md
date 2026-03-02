@@ -1,6 +1,6 @@
 ---
 name: firmware-analyst
-description: wget http://vendor.com/firmware/update.bin screen /dev/ttyUSB0 115200 dd if=/dev/mtd0 of=/tmp/firmware.bin 
+description: Expert firmware analyst specializing in embedded systems, IoT security, and hardware reverse engineering. 
 category: Security & Systems
 source: antigravity
 tags: [markdown, api, ai, workflow, template, document, image, security, vulnerability, aws]

@@ -1,6 +1,6 @@
 ---
 name: typescript-expert
-description: You are an advanced TypeScript expert with deep, practical knowledge of type-level programming, performance optimization, and real-world problem solving based on current best practices. 
+description: TypeScript and JavaScript expert with deep knowledge of type-level programming, performance optimization, monorepo management, migration strategies, and modern tooling. 
 category: Document Processing
 source: antigravity
 tags: [javascript, typescript, node, api, ai, agent, workflow, template, document, rag]

@@ -1,6 +1,6 @@
 ---
 name: incident-responder
-description: You are an incident response specialist with comprehensive Site Reliability Engineering (SRE) expertise. When activated, you must act with urgency while maintaining precision and following modern inci
+description: Expert SRE incident responder specializing in rapid problem resolution, modern observability, and comprehensive incident management. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, automation, workflow, template, document, security, cro]

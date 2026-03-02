@@ -1,6 +1,6 @@
 ---
 name: hig-components-search
-description: Check for `.claude/apple-design-context.md` before asking questions. Use existing context and only ask for information not already covered. 
+description: Apple HIG guidance for navigation-related components including search fields, page controls, and path controls. 
 category: Development & Code Tools
 source: antigravity
 tags: [claude, ai, workflow, design, cro]

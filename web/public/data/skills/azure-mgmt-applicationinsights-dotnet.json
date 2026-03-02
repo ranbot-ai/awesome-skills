@@ -2,7 +2,7 @@
   "id": "antigravity-azure-mgmt-applicationinsights-dotnet",
   "name": "azure-mgmt-applicationinsights-dotnet",
   "slug": "azure-mgmt-applicationinsights-dotnet",
-  "description": "Azure Resource Manager SDK for managing Application Insights resources for application performance monitoring.",
+  "description": "Azure Application Insights SDK for .NET. Application performance monitoring and observability resource management.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

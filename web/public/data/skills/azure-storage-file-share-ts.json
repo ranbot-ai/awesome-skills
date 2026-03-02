@@ -2,7 +2,7 @@
   "id": "antigravity-azure-storage-file-share-ts",
   "name": "azure-storage-file-share-ts",
   "slug": "azure-storage-file-share-ts",
-  "description": "SDK for Azure File Share operations — SMB file shares, directories, and file operations. npm install @azure/storage-file-share @azure/identity",
+  "description": "Azure File Share JavaScript/TypeScript SDK (@azure/storage-file-share) for SMB file share operations.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

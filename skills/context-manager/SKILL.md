@@ -1,6 +1,6 @@
 ---
 name: context-manager
-description: You are an elite AI context engineering specialist focused on dynamic context management, intelligent memory systems, and multi-agent workflow orchestration. 
+description: Elite AI context engineering specialist mastering dynamic context management, vector databases, knowledge graphs, and intelligent memory systems. 
 category: AI & Agents
 source: antigravity
 tags: [api, ai, agent, automation, workflow, template, design, document, security, rag]

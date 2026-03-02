@@ -1,6 +1,6 @@
 ---
 name: azure-ai-document-intelligence-dotnet
-description: Extract text, tables, and structured data from documents using prebuilt and custom models. dotnet add package Azure.AI.DocumentIntelligence 
+description: Azure AI Document Intelligence SDK for .NET. Extract text, tables, and structured data from documents using prebuilt and custom models. 
 category: Document Processing
 source: antigravity
 tags: [pdf, api, ai, workflow, template, document, azure, rag, cro]

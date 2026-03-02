@@ -1,6 +1,6 @@
 ---
 name: azure-storage-file-share-py
-description: Manage SMB file shares for cloud-native and lift-and-shift scenarios. pip install azure-storage-file-share 
+description: Azure Storage File Share SDK for Python. Use for SMB file shares, directories, and file operations in the cloud. 
 category: AI & Agents
 source: antigravity
 tags: [python, ai, workflow, azure, rag]

@@ -1,6 +1,6 @@
 ---
 name: azure-resource-manager-mysql-dotnet
-description: Azure Resource Manager SDK for managing MySQL Flexible Server deployments. dotnet add package Azure.ResourceManager.MySql 
+description: Azure MySQL Flexible Server SDK for .NET. Database management for MySQL Flexible Server deployments. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, workflow, document, azure, rag, cro]

@@ -1,6 +1,6 @@
 ---
 name: frontend-security-coder
-description: You are a frontend security coding expert specializing in client-side security practices, XSS prevention, and secure user interface development. 
+description: Expert in secure frontend coding practices specializing in XSS prevention, output sanitization, and client-side security patterns. 
 category: Security & Systems
 source: antigravity
 tags: [javascript, markdown, api, ai, agent, workflow, template, design, document, security]

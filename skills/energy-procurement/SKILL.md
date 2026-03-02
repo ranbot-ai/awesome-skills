@@ -1,6 +1,6 @@
 ---
 name: energy-procurement
-description: Use this skill when managing energy procurement tasks, such as optimizing electricity or gas tariffs, evaluating Power Purchase Agreements (PPAs), or developing long-term energy cost management strate
+description: Codified expertise for electricity and gas procurement, tariff optimisation, demand charge management, renewable PPA evaluation, and multi-facility energy cost management. 
 category: Document Processing
 source: antigravity
 tags: [node, api, ai, agent, template, design, document, rag, cro]

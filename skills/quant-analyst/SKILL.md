@@ -1,6 +1,6 @@
 ---
 name: quant-analyst
-description: You are a quantitative analyst specializing in algorithmic trading and financial modeling. 1. Data quality first - clean and validate all inputs 
+description: Build financial models, backtest trading strategies, and analyze market data. Implements risk metrics, portfolio optimization, and statistical arbitrage. 
 category: Creative & Media
 source: antigravity
 tags: [ai, workflow, rag, cro]

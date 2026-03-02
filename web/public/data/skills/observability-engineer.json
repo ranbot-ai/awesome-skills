@@ -2,7 +2,7 @@
   "id": "antigravity-observability-engineer",
   "name": "observability-engineer",
   "slug": "observability-engineer",
-  "description": "You are an observability engineer specializing in production-grade monitoring, logging, tracing, and reliability systems for enterprise-scale applications.",
+  "description": "Build production-ready monitoring, logging, and tracing systems. Implements comprehensive observability strategies, SLI/SLO management, and incident response workflows.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

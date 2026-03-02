@@ -1,6 +1,6 @@
 ---
 name: azure-eventgrid-py
-description: Event routing service for building event-driven applications with pub/sub semantics. pip install azure-eventgrid azure-identity 
+description: Azure Event Grid SDK for Python. Use for publishing events, handling CloudEvents, and event-driven architectures. 
 category: AI & Agents
 source: antigravity
 tags: [python, api, ai, workflow, azure]

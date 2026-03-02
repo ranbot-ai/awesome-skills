@@ -1,6 +1,6 @@
 ---
 name: test-automator
-description: You are an expert test automation engineer specializing in AI-powered testing, modern frameworks, and comprehensive quality engineering strategies. 
+description: Master AI-powered test automation with modern frameworks, self-healing tests, and comprehensive quality engineering. Build scalable testing strategies with advanced CI/CD integration. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, automation, workflow, design, document, security, docker, kubernetes, rag]

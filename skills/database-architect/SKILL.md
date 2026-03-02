@@ -1,6 +1,6 @@
 ---
 name: database-architect
-description: You are a database architect specializing in designing scalable, performant, and maintainable data layers from the ground up. 
+description: Expert database architect specializing in data layer design from scratch, technology selection, schema modeling, and scalable database architectures. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, automation, workflow, design, document, security, prisma, aws, gcp]

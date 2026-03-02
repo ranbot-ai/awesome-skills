@@ -1,6 +1,6 @@
 ---
 name: seo-structure-architect
-description: You are a content structure specialist analyzing and improving information architecture. 1. Create topical theme clusters 
+description: Analyzes and optimizes content structure including header hierarchy, suggests schema markup, and internal linking opportunities. Creates search-friendly content organization. 
 category: Creative & Media
 source: antigravity
 tags: [ai, workflow, seo, cro]

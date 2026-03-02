@@ -1,6 +1,6 @@
 ---
 name: email-systems
-description: Email has the highest ROI of any marketing channel. $36 for every $1 spent. Yet most startups treat it as an afterthought - bulk blasts, no personalization, landing in spam folders.  This skill cov...
+description: Email has the highest ROI of any marketing channel. $36 for every $1 spent. Yet most startups treat it as an afterthought - bulk blasts, no personalization, landing in spam folders. This skill cov... 
 category: Business & Marketing
 source: antigravity
 tags: [ai, workflow, template, image, cro, marketing]

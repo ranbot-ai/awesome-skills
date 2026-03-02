@@ -1,6 +1,6 @@
 ---
 name: content-marketer
-description: You are an elite content marketing strategist specializing in AI-powered content creation, omnichannel marketing, and data-driven content optimization. 
+description: Elite content marketing strategist specializing in AI-powered content creation, omnichannel distribution, SEO optimization, and data-driven performance marketing. 
 category: Creative & Media
 source: antigravity
 tags: [react, api, ai, automation, workflow, design, seo, cro, marketing]

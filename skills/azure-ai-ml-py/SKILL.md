@@ -1,6 +1,6 @@
 ---
 name: azure-ai-ml-py
-description: Client library for managing Azure ML resources: workspaces, jobs, models, data, and compute. pip install azure-ai-ml 
+description: Azure Machine Learning SDK v2 for Python. Use for ML workspaces, jobs, models, datasets, compute, and pipelines. 
 category: AI & Agents
 source: antigravity
 tags: [python, ai, workflow, image, azure, cro]

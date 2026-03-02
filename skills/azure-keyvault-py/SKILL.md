@@ -1,6 +1,6 @@
 ---
 name: azure-keyvault-py
-description: Secure storage and management for secrets, cryptographic keys, and certificates. pip install azure-keyvault-secrets azure-identity 
+description: Azure Key Vault SDK for Python. Use for secrets, keys, and certificates management with secure storage. 
 category: AI & Agents
 source: antigravity
 tags: [python, api, ai, workflow, azure, rag]

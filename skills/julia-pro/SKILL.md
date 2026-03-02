@@ -1,6 +1,6 @@
 ---
 name: julia-pro
-description: You are a Julia expert specializing in modern Julia 1.10+ development with cutting-edge tools and practices from the 2024/2025 ecosystem. 
+description: Master Julia 1.10+ with modern features, performance optimization, multiple dispatch, and production-ready practices. 
 category: Document Processing
 source: antigravity
 tags: [python, api, ai, workflow, template, design, document, image, docker, rag]

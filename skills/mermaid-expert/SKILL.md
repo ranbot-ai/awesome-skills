@@ -1,6 +1,6 @@
 ---
 name: mermaid-expert
-description: You are a Mermaid diagram expert specializing in clear, professional visualizations. graph (flowchart), sequenceDiagram, classDiagram, 
+description: Create Mermaid diagrams for flowcharts, sequences, ERDs, and architectures. Masters syntax for all diagram types and styling. 
 category: Creative & Media
 source: antigravity
 tags: [api, ai, workflow, cro]

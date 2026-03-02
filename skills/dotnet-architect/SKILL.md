@@ -1,6 +1,6 @@
 ---
 name: dotnet-architect
-description: You are an expert .NET backend architect with deep knowledge of C#, ASP.NET Core, and enterprise application patterns. 
+description: Expert .NET backend architect specializing in C#, ASP.NET Core, Entity Framework, Dapper, and enterprise application patterns. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, workflow, design, document, security, docker, kubernetes, azure, rag]

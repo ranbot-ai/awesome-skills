@@ -1,6 +1,6 @@
 ---
 name: azure-identity-rust
-description: Authentication library for Azure SDK clients using Microsoft Entra ID (formerly Azure AD). cargo add azure_identity 
+description: Azure Identity SDK for Rust authentication. Use for DeveloperToolsCredential, ManagedIdentityCredential, ClientSecretCredential, and token-based authentication. 
 category: Development & Code Tools
 source: antigravity
 tags: [api, ai, workflow, security, kubernetes, azure, cro]

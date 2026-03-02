@@ -2,7 +2,7 @@
   "id": "antigravity-multi-agent-brainstorming",
   "name": "multi-agent-brainstorming",
   "slug": "multi-agent-brainstorming",
-  "description": "Transform a single-agent design into a **robust, review-validated design** by simulating a formal peer-review process using multiple constrained agents.",
+  "description": "Simulate a structured peer-review process using multiple specialized agents to validate designs, surface hidden assumptions, and identify failure modes before implementation.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

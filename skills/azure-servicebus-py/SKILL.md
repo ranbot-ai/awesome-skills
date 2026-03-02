@@ -1,6 +1,6 @@
 ---
 name: azure-servicebus-py
-description: Enterprise messaging for reliable cloud communication with queues and pub/sub topics. pip install azure-servicebus azure-identity 
+description: Azure Service Bus SDK for Python messaging. Use for queues, topics, subscriptions, and enterprise messaging patterns. 
 category: AI & Agents
 source: antigravity
 tags: [python, ai, workflow, azure]

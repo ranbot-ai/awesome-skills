@@ -1,6 +1,6 @@
 ---
 name: azure-resource-manager-sql-dotnet
-description: Management plane SDK for provisioning and managing Azure SQL resources via Azure Resource Manager. > **⚠️ Management vs Data Plane** 
+description: Azure Resource Manager SDK for Azure SQL in .NET. 
 category: AI & Agents
 source: antigravity
 tags: [api, ai, workflow, security, azure, rag, cro]

@@ -1,6 +1,6 @@
 ---
 name: azure-monitor-opentelemetry-exporter-java
-description: > **⚠️ DEPRECATION NOTICE**: This package is deprecated. Migrate to `azure-monitor-opentelemetry-autoconfigure`. 
+description: Azure Monitor OpenTelemetry Exporter for Java. Export OpenTelemetry traces, metrics, and logs to Azure Monitor/Application Insights. 
 category: AI & Agents
 source: antigravity
 tags: [api, ai, workflow, azure, cro]

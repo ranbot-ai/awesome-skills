@@ -2,7 +2,7 @@
   "id": "antigravity-azure-resource-manager-durabletask-dotnet",
   "name": "azure-resource-manager-durabletask-dotnet",
   "slug": "azure-resource-manager-durabletask-dotnet",
-  "description": "Management plane SDK for provisioning and managing Azure Durable Task Scheduler resources via Azure Resource Manager.",
+  "description": "Azure Resource Manager SDK for Durable Task Scheduler in .NET.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

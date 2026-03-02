@@ -1,6 +1,6 @@
 ---
 name: hig-components-status
-description: Check for `.claude/apple-design-context.md` before asking questions. Use existing context and only ask for information not already covered. 
+description: Apple HIG guidance for status and progress UI components including progress indicators, status bars, and activity rings. 
 category: Development & Code Tools
 source: antigravity
 tags: [api, claude, ai, workflow, design, presentation, cro]

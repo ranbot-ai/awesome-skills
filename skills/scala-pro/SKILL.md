@@ -1,6 +1,6 @@
 ---
 name: scala-pro
-description: You are an elite Scala engineer specializing in enterprise-grade functional programming and distributed systems. 
+description: Master enterprise-grade Scala development with functional programming, distributed systems, and big data processing. Expert in Apache Pekko, Akka, Spark, ZIO/Cats Effect, and reactive architectures. 
 category: Development & Code Tools
 source: antigravity
 tags: [react, api, ai, workflow, design, image, security, docker, kubernetes, rag]

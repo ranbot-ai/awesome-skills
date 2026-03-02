@@ -1,6 +1,6 @@
 ---
 name: seo-cannibalization-detector
-description: You are a keyword cannibalization specialist analyzing content overlap between provided pages. 1. **Clear keyword mapping** - One primary keyword per page 
+description: Analyzes multiple provided pages to identify keyword overlap and potential cannibalization issues. Suggests differentiation strategies. Use PROACTIVELY when reviewing similar content. 
 category: Business & Marketing
 source: antigravity
 tags: [ai, workflow, rag, seo]

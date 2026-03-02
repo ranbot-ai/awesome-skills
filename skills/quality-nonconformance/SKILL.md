@@ -1,6 +1,6 @@
 ---
 name: quality-nonconformance
-description: Use this skill when investigating product defects or process deviations, performing root cause analysis (RCA), managing Corrective and Preventive Actions (CAPA), interpreting Statistical Process Contr
+description: Codified expertise for quality control, non-conformance investigation, root cause analysis, corrective action, and supplier quality management in regulated manufacturing. 
 category: Document Processing
 source: antigravity
 tags: [react, ai, agent, template, design, document, rag, cro]

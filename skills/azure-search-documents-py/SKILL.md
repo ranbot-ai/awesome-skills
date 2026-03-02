@@ -1,6 +1,6 @@
 ---
 name: azure-search-documents-py
-description: Full-text, vector, and hybrid search with AI enrichment capabilities. pip install azure-search-documents 
+description: Azure AI Search SDK for Python. Use for vector search, hybrid search, semantic ranking, indexing, and skillsets. 
 category: Document Processing
 source: antigravity
 tags: [python, api, ai, agent, llm, workflow, document, azure]

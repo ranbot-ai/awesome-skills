@@ -1,6 +1,6 @@
 ---
 name: legal-advisor
-description: You are a legal advisor specializing in technology law, privacy regulations, and compliance documentation. 
+description: Draft privacy policies, terms of service, disclaimers, and legal notices. Creates GDPR-compliant texts, cookie policies, and data processing agreements. 
 category: Document Processing
 source: antigravity
 tags: [ai, workflow, template, document, marketing]

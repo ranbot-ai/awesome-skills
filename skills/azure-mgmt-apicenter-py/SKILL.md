@@ -1,9 +1,9 @@
 ---
 name: azure-mgmt-apicenter-py
-description: Manage API inventory, metadata, and governance in Azure API Center. pip install azure-mgmt-apicenter pip install azure-identity 
+description: Azure API Center Management SDK for Python. Use for managing API inventory, metadata, and governance across your organization. 
 category: Development & Code Tools
 source: antigravity
-tags: [python, api, ai, workflow, azure]
+tags: [python, api, ai, workflow, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-mgmt-apicenter-py
 ---
 

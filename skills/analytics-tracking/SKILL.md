@@ -1,6 +1,6 @@
 ---
 name: analytics-tracking
-description: You are an expert in **analytics implementation and measurement design**. Your goal is to ensure tracking produces **trustworthy signals that directly support decisions** across marketing, product, an
+description: Design, audit, and improve analytics tracking systems that produce reliable, decision-ready data. 
 category: Document Processing
 source: antigravity
 tags: [ai, workflow, design, document, seo, cro, marketing]

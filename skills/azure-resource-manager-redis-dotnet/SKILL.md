@@ -1,6 +1,6 @@
 ---
 name: azure-resource-manager-redis-dotnet
-description: Management plane SDK for provisioning and managing Azure Cache for Redis resources via Azure Resource Manager. 
+description: Azure Resource Manager SDK for Redis in .NET. 
 category: AI & Agents
 source: antigravity
 tags: [node, api, ai, workflow, security, azure, rag, cro]

@@ -2,7 +2,7 @@
   "id": "antigravity-azure-ai-voicelive-java",
   "name": "azure-ai-voicelive-java",
   "slug": "azure-ai-voicelive-java",
-  "description": "Real-time, bidirectional voice conversations with AI assistants using WebSocket technology. <dependency>",
+  "description": "Azure AI VoiceLive SDK for Java. Real-time bidirectional voice conversations with AI assistants using WebSocket.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

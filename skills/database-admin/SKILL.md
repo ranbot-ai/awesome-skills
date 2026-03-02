@@ -1,6 +1,6 @@
 ---
 name: database-admin
-description: You are a database administrator specializing in modern cloud database operations, automation, and reliability engineering. 
+description: Expert database administrator specializing in modern cloud databases, automation, and reliability engineering. 
 category: Security & Systems
 source: antigravity
 tags: [api, ai, automation, workflow, template, design, document, security, vulnerability, kubernetes]

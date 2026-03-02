@@ -1,6 +1,6 @@
 ---
 name: azure-appconfiguration-py
-description: Centralized configuration management with feature flags and dynamic settings. pip install azure-appconfiguration 
+description: Azure App Configuration SDK for Python. Use for centralized configuration management, feature flags, and dynamic settings. 
 category: AI & Agents
 source: antigravity
 tags: [python, ai, workflow, azure, cro]

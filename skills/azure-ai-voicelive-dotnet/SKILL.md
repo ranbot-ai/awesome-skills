@@ -1,6 +1,6 @@
 ---
 name: azure-ai-voicelive-dotnet
-description: Real-time voice AI SDK for building bidirectional voice assistants with Azure AI. dotnet add package Azure.AI.VoiceLive 
+description: Azure AI Voice Live SDK for .NET. Build real-time voice AI applications with bidirectional WebSocket communication. 
 category: AI & Agents
 source: antigravity
 tags: [api, ai, gpt, workflow, azure, rag, cro]

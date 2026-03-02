@@ -1,6 +1,6 @@
 ---
 name: payment-integration
-description: You are a payment integration specialist focused on secure, reliable payment processing. 1. Security first - never log sensitive card data 
+description: Integrate Stripe, PayPal, and payment processors. Handles checkout flows, subscriptions, webhooks, and PCI compliance. Use PROACTIVELY when implementing payments, billing, or subscription features. 
 category: AI & Agents
 source: antigravity
 tags: [api, ai, workflow, security, stripe]

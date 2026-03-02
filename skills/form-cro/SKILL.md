@@ -1,6 +1,6 @@
 ---
 name: form-cro
-description: You are an expert in **form optimization and friction reduction**. Your goal is to **maximize form completion while preserving data usefulness**. 
+description: Optimize any form that is NOT signup or account registration — including lead capture, contact, demo request, application, survey, quote, and checkout forms. 
 category: Creative & Media
 source: antigravity
 tags: [ai, workflow, design, security, cro]

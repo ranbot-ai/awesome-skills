@@ -1,6 +1,6 @@
 ---
 name: startup-business-analyst-financial-projections
-description: Create a comprehensive 3-5 year financial model with revenue projections, cost structure, headcount planning, cash flow analysis, and three-scenario modeling (conservative, base, optimistic) for start
+description: Create detailed 3-5 year financial model with revenue, costs, cash flow, and scenarios 
 category: Document Processing
 source: antigravity
 tags: [markdown, claude, ai, workflow, template, design, document, rag, cro, marketing]

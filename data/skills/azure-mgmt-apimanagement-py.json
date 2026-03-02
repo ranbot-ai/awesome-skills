@@ -2,7 +2,7 @@
   "id": "antigravity-azure-mgmt-apimanagement-py",
   "name": "azure-mgmt-apimanagement-py",
   "slug": "azure-mgmt-apimanagement-py",
-  "description": "Manage Azure API Management services, APIs, products, and policies. pip install azure-mgmt-apimanagement",
+  "description": "Azure API Management SDK for Python. Use for managing APIM services, APIs, products, subscriptions, and policies.",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

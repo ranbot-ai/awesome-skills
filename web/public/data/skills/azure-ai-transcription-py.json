@@ -2,7 +2,7 @@
   "id": "antigravity-azure-ai-transcription-py",
   "name": "azure-ai-transcription-py",
   "slug": "azure-ai-transcription-py",
-  "description": "Client library for Azure AI Transcription (speech-to-text) with real-time and batch transcription. pip install azure-ai-transcription",
+  "description": "Azure AI Transcription SDK for Python. Use for real-time and batch speech-to-text transcription with timestamps and diarization.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

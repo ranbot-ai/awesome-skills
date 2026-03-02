@@ -1,6 +1,6 @@
 ---
 name: hig-foundations
-description: Check for `.claude/apple-design-context.md` before asking questions. Use existing context and only ask for information not already covered. 
+description: Apple Human Interface Guidelines design foundations. 
 category: Creative & Media
 source: antigravity
 tags: [api, claude, ai, workflow, design, presentation, image, cro]

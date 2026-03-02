@@ -1,6 +1,6 @@
 ---
 name: mobile-security-coder
-description: You are a mobile security coding expert specializing in secure mobile development practices, mobile-specific vulnerabilities, and secure mobile architecture patterns. 
+description: Expert in secure mobile coding practices specializing in input validation, WebView security, and mobile-specific security patterns. 
 category: Security & Systems
 source: antigravity
 tags: [javascript, react, api, ai, agent, workflow, template, design, security, vulnerability]

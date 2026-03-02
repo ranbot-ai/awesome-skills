@@ -2,7 +2,7 @@
   "id": "antigravity-azure-security-keyvault-keys-dotnet",
   "name": "azure-security-keyvault-keys-dotnet",
   "slug": "azure-security-keyvault-keys-dotnet",
-  "description": "Client library for managing cryptographic keys in Azure Key Vault and Managed HSM. dotnet add package Azure.Security.KeyVault.Keys",
+  "description": "Azure Key Vault Keys SDK for .NET. Client library for managing cryptographic keys in Azure Key Vault and Managed HSM. Use for key creation, rotation, encryption, decryption, signing, and verification.",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
