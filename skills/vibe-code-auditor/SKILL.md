@@ -1,9 +1,9 @@
 ---
 name: vibe-code-auditor
 description: Audit rapidly generated or AI-produced code for structural flaws, fragility, and production risks. 
-category: Development & Code Tools
+category: Document Processing
 source: antigravity
-tags: [api, ai, design, security, aws, rag, seo, cro]
+tags: [python, api, ai, design, document, security, aws, rag, seo, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/vibe-code-auditor
 ---
 
@@ -39,6 +39,12 @@ Before beginning the audit, confirm the following. If any item is missing, state
 - **Scope defined**: Identify whether the input is a snippet, single file, or multi-file system.
 - **Context noted**: If no context was provided, state the assumptions made (e.g., "Assuming a web API backend with no specified scale requirements").
 
+**Quick Scan (first 60 seconds):**
+- Count files and lines of code
+- Identify language(s) and framework(s)
+- Spot obvious red flags: hardcoded secrets, bare excepts, TODOs, commented-out code
+- Note the entry point(s) and data flow direction
+
 ---
 
 ## Audit Dimensions
@@ -47,78 +53,59 @@ Evaluate the code across all seven dimensions below. For each finding, record: t
 
 **Do not invent findings. Do not report issues you cannot substantiate from the code provided.**
 
+**Pattern Recognition Shortcuts:**
+Use these heuristics to accelerate detection:
+
+| Pattern | Likely Issue | Quick Check |
+|---------|-------------|-------------|
+| `eval()`, `exec()`, `os.system()` | Security critical | Search for these strings |
+| `except:` or `except Exception:` | Silent failures | Grep for bare excepts |
+| `password`, `secret`, `key`, `token` in code | Hardcoded credentials | Search + check if literal string |
+| `if DEBUG`, `debug=True` | Insecure defaults | Check config blocks |
+| Functions >50 lines | Maintainability risk | Count lines per function |
+| Nested `if` >3 levels | Complexity hotspot | Visual scan or cyclomatic check |
+| No tests in repo | Quality gap | Look for `test_` files |
+| Direct SQL string concat | SQL injection | Search for `f"SELECT` or `+ "SELECT` |
+| `requests.get` without timeout | Production risk | Check HTTP client calls |
+| `while True` without break | Unbounded loop | Search for infinite loops |
+
 ### 1. Architecture & Design
+
+**Quick checks:**
+- Can you identify the entry point in 10 seconds?
+- Are there clear boundaries between layers (API, business logic, data)?
+- Does any single file exceed 300 lines?
 
 - Separation of concerns violations (e.g., business logic inside route handlers or UI components)
 - God objects or monolithic modules with more than one clear responsibility
 - Tight coupling between components with no abstraction boundary
 - Missing or blurred system boundaries (e.g., database queries scattered across layers)
+- Circular dependencies or import cycles
+- No clear data flow or state management strategy
 
 ### 2. Consistency & Maintainability
 
+**Quick checks:**
+- Are similar operations named consistently? (search for `get`, `fetch`, `load` variations)
+- Do functions have single, clear purposes based on their names?
+- Is duplicated logic visible? (search for repeated code blocks)
+
 - Naming inconsistencies (e.g., `get_user` vs `fetchUser` vs `retrieveUserData` for the same operation)
 - Mixed paradigms without justification (e.g., OOP and procedural code interleaved arbitrarily)
-- Copy-paste logic that should be extracted into a shared function
+- Copy-paste logic that should be extracted into a shared function (3+ repetitions = extract)
 - Abstractions that obscure rather than clarify intent
+- Inconsistent error handling patterns across modules
+- Magic numbers or strings without constants or configuration
 
 ### 3. Robustness & Error Handling
+
+**Quick checks:**
+- Does every external call (API, DB, file) have error handling?
+- Are there any bare `except:` blocks?
+- What happens if inputs are empty, null, or malformed?
 
 - Missing input validation on entry points (HTTP handlers, CLI args, file reads)
 - Bare `except` or catch-all error handlers that swallow failures silently
 - Unhandled edge cases (empty collections, null/None returns, zero values)
 - Code that assumes external services always succeed without fallback logic
-
-### 4. Production Risks
-
-- Hardcoded configuration values (URLs, credentials, timeouts, thresholds)
-- Missing structured logging or observability hooks
-- Unbounded loops, missing pagination, or N+1 query patterns
-- Blocking I/O in async contexts or thread-unsafe shared state
-- No graceful shutdown or cleanup on process exit
-
-### 5. Security & Safety
-
-- Unsanitized user input passed to databases, shells, file paths, or `eval`
-- Credentials, API keys, or tokens present in source code or logs
-- Insecure defaults (e.g., `DEBUG=True`, permissive CORS, no rate limiting)
-- Trust boundary violations (e.g., treating external data as internal without validation)
-
-### 6. Dead or Hallucinated Code
-
-- Functions, classes, or modules that are defined but never called
-- Imports that do not exist in the declared dependencies
-- References to APIs, methods, or fields that do not exist in the used library version
-- Type annotations that contradict actual usage
-- Comments that describe behavior inconsistent with the code
-
-### 7. Technical Debt Hotspots
-
-- Logic that is correct today but will break under realistic load or scale
-- Deep nesting (more than 3-4 levels) that obscures control flow
-- Boolean parameter flags that change function behavior (use separate functions instead)
-- Functions with more than 5-6 parameters without a configuration object
-- Areas where a future requirement change would require modifying many unrelated files
-
----
-
-## Output Format
-
-Produce the audit report using exactly this structure. Do not omit sections. If a section has no findings, write "None identified."
-
----
-
-### Audit Report
-
-**Input:** [file name(s) or "code snippet"]
-**Assumptions:** [list any assumptions made about context or environment]
-
-#### Critical Issues (Must Fix Before Production)
-
-Problems that will or are very likely to cause failures, data loss, security incidents, or severe maintenance breakdown.
-
-For each issue:
-
-```
-[CRITICAL] Short descriptive title
-Location: filename.py, line 42 (or "multiple locations" with examples)
-Dimension: Architecture / Security /
+- No retry logic for transient fai

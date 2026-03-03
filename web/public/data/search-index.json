@@ -26188,12 +26188,16 @@
     "hands-on",
     "examples.",
     "markdown",
+    "api",
     "ai",
     "workflow",
+    "template",
     "design",
-    "creative",
-    "&",
-    "media"
+    "document",
+    "image",
+    "security",
+    "rag",
+    "processing"
   ],
   "antigravity-twilio-communications": [
     "twilio-communications",
@@ -27081,17 +27085,17 @@
     "fragility,",
     "production",
     "risks.",
+    "python",
     "api",
     "ai",
     "design",
+    "document",
     "security",
     "aws",
     "rag",
     "seo",
     "cro",
-    "development",
-    "&",
-    "tools"
+    "processing"
   ],
   "awesome-llm-video-downloader": [
     "video-downloader",

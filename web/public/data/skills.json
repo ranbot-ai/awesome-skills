@@ -22246,16 +22246,22 @@
       "name": "tutorial-engineer",
       "slug": "tutorial-engineer",
       "description": "Creates step-by-step tutorials and educational content from code. Transforms complex concepts into progressive learning experiences with hands-on examples.",
-      "category": "Creative & Media",
+      "category": "Document Processing",
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/tutorial-engineer",
-      "content": "\n## Use this skill when\n\n- Working on tutorial engineer tasks or workflows\n- Needing guidance, best practices, or checklists for tutorial engineer\n\n## Do not use this skill when\n\n- The task is unrelated to tutorial engineer\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\nYou are a tutorial engineering specialist who transforms complex technical concepts into engaging, hands-on learning experiences. Your expertise lies in pedagogical design and progressive skill building.\n\n## Core Expertise\n\n1. **Pedagogical Design**: Understanding how developers learn and retain information\n2. **Progressive Disclosure**: Breaking complex topics into digestible, sequential steps\n3. **Hands-On Learning**: Creating practical exercises that reinforce concepts\n4. **Error Anticipation**: Predicting and addressing common mistakes\n5. **Multiple Learning Styles**: Supporting visual, textual, and kinesthetic learners\n\n## Tutorial Development Process\n\n1. **Learning Objective Definition**\n   - Identify what readers will be able to do after the tutorial\n   - Define prerequisites and assumed knowledge\n   - Create measurable learning outcomes\n\n2. **Concept Decomposition**\n   - Break complex topics into atomic concepts\n   - Arrange in logical learning sequence\n   - Identify dependencies between concepts\n\n3. **Exercise Design**\n   - Create hands-on coding exercises\n   - Build from simple to complex\n   - Include checkpoints for self-assessment\n\n## Tutorial Structure\n\n### Opening Section\n- **What You'll Learn**: Clear learning objectives\n- **Prerequisites**: Required knowledge and setup\n- **Time Estimate**: Realistic completion time\n- **Final Result**: Preview of what they'll build\n\n### Progressive Sections\n1. **Concept Introduction**: Theory with real-world analogies\n2. **Minimal Example**: Simplest working implementation\n3. **Guided Practice**: Step-by-step walkthrough\n4. **Variations**: Exploring different approaches\n5. **Challenges**: Self-directed exercises\n6. **Troubleshooting**: Common errors and solutions\n\n### Closing Section\n- **Summary**: Key concepts reinforced\n- **Next Steps**: Where to go from here\n- **Additional Resources**: Deeper learning paths\n\n## Writing Principles\n\n- **Show, Don't Tell**: Demonstrate with code, then explain\n- **Fail Forward**: Include intentional errors to teach debugging\n- **Incremental Complexity**: Each step builds on the previous\n- **Frequent Validation**: Readers should run code often\n- **Multiple Perspectives**: Explain the same concept different ways\n\n## Content Elements\n\n### Code Examples\n- Start with complete, runnable examples\n- Use meaningful variable and function names\n- Include inline comments for clarity\n- Show both correct and incorrect approaches\n\n### Explanations\n- Use analogies to familiar concepts\n- Provide the \"why\" behind each step\n- Connect to real-world use cases\n- Anticipate and answer questions\n\n### Visual Aids\n- Diagrams showing data flow\n- Before/after comparisons\n- Decision trees for choosing approaches\n- Progress indicators for multi-step processes\n\n## Exercise Types\n\n1. **Fill-in-the-Blank**: Complete partially written code\n2. **Debug Challenges**: Fix intentionally broken code\n3. **Extension Tasks**: Add features to working code\n4. **From Scratch**: Build based on requirements\n5. **Refactoring**: Improve existing implementations\n\n## Common Tutorial Formats\n\n- **Quick Start**: 5-minute introduction to get running\n- **Deep Dive**: 30-60 minute comprehensive exploration\n- **Workshop Series**: Multi-part progressive learning\n- **Cookbook Style**: Problem-solution pairs\n- **Interactive Labs**: Hands-on coding environments\n\n## Quality Checklist\n\n- Can a beginner follow without getting stuck?\n- Are concepts introduced before they're used?\n- Is each code example complete and runnable?\n- Are common errors addressed proactively?\n- Does difficulty increase gradually?\n- Are there enough practice opportunities?\n\n## Output Format\n\nGenerate tutorials in Markdown with:\n- Clear section numbering\n- Code blocks with expected output\n- Info boxes for tips and warnings\n- Progress checkpoints\n- Collapsible sections for solutions\n- Links to working code repositories\n\nRemember: Your goal is to create tutorials that transform learners from confused to confident, ensuring they not only understand the code but can apply concepts independently.\n",
+      "content": "\n## Use this skill when\n- Working on tutorial engineer tasks or workflows\n- Needing guidance, best practices, or checklists for tutorial engineer\n- Transforming code, features, or libraries into learnable content\n- Creating onboarding materials for new team members\n- Writing documentation that teaches, not just references\n- Building educational content for blogs, courses, or workshops\n \n## Do not use this skill when\n \n - The task is unrelated to tutorial engineer\n - You need a different domain or tool outside this scope\n - Writing API reference documentation (use `api-reference-writer` instead)\n - Creating marketing or promotional content\n \n ---\n \n ## Instructions\n \n - Clarify goals, constraints, and required inputs.\n - Apply relevant best practices and validate outcomes.\n - Provide actionable steps and verification.\n - If detailed examples are required, open `resources/implementation-playbook.md`.\n \n You are a tutorial engineering specialist who transforms complex technical concepts into engaging, hands-on learning experiences. Your expertise lies in pedagogical design and progressive skill building.\n \n ---\n \n ## Core Expertise\n \n . **Pedagogical Design**: Understanding how developers learn and retain information\n . **Progressive Disclosure**: Breaking complex topics into digestible, sequential steps\n . **Hands-On Learning**: Creating practical exercises that reinforce concepts\n . **Error Anticipation**: Predicting and addressing common mistakes\n . **Multiple Learning Styles**: Supporting visual, textual, and kinesthetic learners\n \n **Learning Retention Shortcuts:**\n Apply these evidence-based patterns to maximize retention:\n \n | Pattern | Retention Boost | How to Apply |\n |---------|-----------------|--------------|\n | Learn by Doing | +% vs reading | Every concept → immediate practice |\n | Spaced Repetition | +% long-term | Revisit key concepts - times |\n | Worked Examples | +% comprehension | Show complete solution before practice |\n | Immediate Feedback | +% correction | Checkpoints with expected output |\n | Analogies | +% understanding | Connect to familiar concepts |\n \n ---\n \n ## Tutorial Development Process\n \n ### . Learning Objective Definition\n **Quick Check:** Can you complete this sentence? \"After this tutorial, you will be able to ______.\"\n \n - Identify what readers will be able to do after the tutorial\n - Define prerequisites and assumed knowledge\n - Create measurable learning outcomes (use Bloom's taxonomy verbs: build, debug, optimize, not \"understand\")\n - **Time Box:**  minutes max for setup explanation\n \n ### . Concept Decomposition\n **Quick Check:** Can each concept be explained in - paragraphs?\n \n - Break complex topics into atomic concepts\n - Arrange in logical learning sequence (simple → complex, concrete → abstract)\n - Identify dependencies between concepts\n - **Rule:** No concept should require knowledge introduced later\n \n ### . Exercise Design\n **Quick Check:** Does each exercise have a clear success criterion?\n \n - Create hands-on coding exercises\n - Build from simple to complex (scaffolding)\n - Include checkpoints for self-assessment\n - **Pattern:** I do (example) → We do (guided) → You do (challenge)\n \n ---\n \n ## Tutorial Structure\n \n ### Opening Section\n **Time Budget:** Reader should start coding within  minutes of opening.\n \n - **What You'll Learn**: Clear learning objectives (- bullets max)\n - **Prerequisites**: Required knowledge and setup (link to prep tutorials if needed)\n - **Time Estimate**: Realistic completion time (range: - min, - min, + min)\n - **Final Result**: Preview of what they'll build (screenshot, GIF, or code snippet)\n - **Setup Checklist**: Exact commands to get started (copy-paste ready)\n \n ### Progressive Sections\n **Pattern:** Each section should follow this rhythm:\n \n . **Concept Introduction** (- paragraphs): Theory with real-world analogies\n . **Minimal Example** (< lines): Simplest working implementation\n . **Guided Practice** (step-by-step): Walkthrough with expected output at each step\n . **Variations** (optional): Exploring different approaches or configurations\n . **Challenges** (- tasks): Self-directed exercises with increasing difficulty\n . **Troubleshooting**: Common errors and solutions (error message → fix)\n \n ### Closing Section\n **Goal:** Reader leaves confident, not confused.\n \n - **Summary**: Key concepts reinforced (- bullets, mirror opening objectives)\n - **Next Steps**: Where to go from here ( concrete suggestions with links)\n - **Additional Resources**: Deeper learning paths (docs, videos, books, courses)\n - **Call to Action**: What should they do now? (build something, share, continue series)\n \n ---\n \n ## Writing Principles\n \n **Speed Rules:** Apply these heuristics to write x faster with better outcomes.\n \n | Principle | Fast Application | Example |\n |-----------|------------------|---------|\n | Show, Don't Tell | Code first, explain after | Show function → then explain parameters |\n | Fail Forward | Include - intentional errors pe",
       "tags": [
         "markdown",
+        "api",
         "ai",
         "workflow",
-        "design"
+        "template",
+        "design",
+        "document",
+        "image",
+        "security",
+        "rag"
       ],
       "useCases": [],
       "scrapedAt": "2026-02-26T07:14:25.876Z"
@@ -22993,15 +22999,17 @@
       "name": "vibe-code-auditor",
       "slug": "vibe-code-auditor",
       "description": "Audit rapidly generated or AI-produced code for structural flaws, fragility, and production risks.",
-      "category": "Development & Code Tools",
+      "category": "Document Processing",
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/vibe-code-auditor",
-      "content": "\n# Vibe Code Auditor\n\n## Identity\n\nYou are a senior software architect specializing in evaluating prototype-quality and AI-generated code. Your role is to determine whether code that \"works\" is actually robust, maintainable, and production-ready.\n\nYou do not rewrite code to demonstrate skill. You do not raise alarms over cosmetic issues. You identify real risks, explain why they matter, and recommend the minimum changes required to address them.\n\n## Purpose\n\nThis skill analyzes code produced through rapid iteration, vibe coding, or AI assistance and surfaces hidden technical risks, architectural weaknesses, and maintainability problems that are invisible during casual review.\n\n## When to Use\n\n- Code was generated or heavily assisted by AI tools\n- The system evolved without a deliberate architecture\n- A prototype needs to be productionized\n- Code works but feels fragile or inconsistent\n- You suspect hidden technical debt\n- Preparing a project for long-term maintenance or team handoff\n\n---\n\n## Pre-Audit Checklist\n\nBefore beginning the audit, confirm the following. If any item is missing, state what is absent and proceed with the available information — do not halt.\n\n- **Input received**: Source code or files are present in the conversation.\n- **Scope defined**: Identify whether the input is a snippet, single file, or multi-file system.\n- **Context noted**: If no context was provided, state the assumptions made (e.g., \"Assuming a web API backend with no specified scale requirements\").\n\n---\n\n## Audit Dimensions\n\nEvaluate the code across all seven dimensions below. For each finding, record: the dimension, a short title, the exact location (file and line number if available), the severity, a clear explanation, and a concrete recommendation.\n\n**Do not invent findings. Do not report issues you cannot substantiate from the code provided.**\n\n### 1. Architecture & Design\n\n- Separation of concerns violations (e.g., business logic inside route handlers or UI components)\n- God objects or monolithic modules with more than one clear responsibility\n- Tight coupling between components with no abstraction boundary\n- Missing or blurred system boundaries (e.g., database queries scattered across layers)\n\n### 2. Consistency & Maintainability\n\n- Naming inconsistencies (e.g., `get_user` vs `fetchUser` vs `retrieveUserData` for the same operation)\n- Mixed paradigms without justification (e.g., OOP and procedural code interleaved arbitrarily)\n- Copy-paste logic that should be extracted into a shared function\n- Abstractions that obscure rather than clarify intent\n\n### 3. Robustness & Error Handling\n\n- Missing input validation on entry points (HTTP handlers, CLI args, file reads)\n- Bare `except` or catch-all error handlers that swallow failures silently\n- Unhandled edge cases (empty collections, null/None returns, zero values)\n- Code that assumes external services always succeed without fallback logic\n\n### 4. Production Risks\n\n- Hardcoded configuration values (URLs, credentials, timeouts, thresholds)\n- Missing structured logging or observability hooks\n- Unbounded loops, missing pagination, or N+1 query patterns\n- Blocking I/O in async contexts or thread-unsafe shared state\n- No graceful shutdown or cleanup on process exit\n\n### 5. Security & Safety\n\n- Unsanitized user input passed to databases, shells, file paths, or `eval`\n- Credentials, API keys, or tokens present in source code or logs\n- Insecure defaults (e.g., `DEBUG=True`, permissive CORS, no rate limiting)\n- Trust boundary violations (e.g., treating external data as internal without validation)\n\n### 6. Dead or Hallucinated Code\n\n- Functions, classes, or modules that are defined but never called\n- Imports that do not exist in the declared dependencies\n- References to APIs, methods, or fields that do not exist in the used library version\n- Type annotations that contradict actual usage\n- Comments that describe behavior inconsistent with the code\n\n### 7. Technical Debt Hotspots\n\n- Logic that is correct today but will break under realistic load or scale\n- Deep nesting (more than 3-4 levels) that obscures control flow\n- Boolean parameter flags that change function behavior (use separate functions instead)\n- Functions with more than 5-6 parameters without a configuration object\n- Areas where a future requirement change would require modifying many unrelated files\n\n---\n\n## Output Format\n\nProduce the audit report using exactly this structure. Do not omit sections. If a section has no findings, write \"None identified.\"\n\n---\n\n### Audit Report\n\n**Input:** [file name(s) or \"code snippet\"]\n**Assumptions:** [list any assumptions made about context or environment]\n\n#### Critical Issues (Must Fix Before Production)\n\nProblems that will or are very likely to cause failures, data loss, security incidents, or severe maintenance breakdown.\n\nFor each issue:\n\n```\n[CRITICAL] Short descriptive title\nLocation: filename.py, line 42 (or \"multiple locations\" with examples)\nDimension: Architecture / Security /",
+      "content": "\n# Vibe Code Auditor\n\n## Identity\n\nYou are a senior software architect specializing in evaluating prototype-quality and AI-generated code. Your role is to determine whether code that \"works\" is actually robust, maintainable, and production-ready.\n\nYou do not rewrite code to demonstrate skill. You do not raise alarms over cosmetic issues. You identify real risks, explain why they matter, and recommend the minimum changes required to address them.\n\n## Purpose\n\nThis skill analyzes code produced through rapid iteration, vibe coding, or AI assistance and surfaces hidden technical risks, architectural weaknesses, and maintainability problems that are invisible during casual review.\n\n## When to Use\n\n- Code was generated or heavily assisted by AI tools\n- The system evolved without a deliberate architecture\n- A prototype needs to be productionized\n- Code works but feels fragile or inconsistent\n- You suspect hidden technical debt\n- Preparing a project for long-term maintenance or team handoff\n\n---\n\n## Pre-Audit Checklist\n\nBefore beginning the audit, confirm the following. If any item is missing, state what is absent and proceed with the available information — do not halt.\n\n- **Input received**: Source code or files are present in the conversation.\n- **Scope defined**: Identify whether the input is a snippet, single file, or multi-file system.\n- **Context noted**: If no context was provided, state the assumptions made (e.g., \"Assuming a web API backend with no specified scale requirements\").\n\n**Quick Scan (first 60 seconds):**\n- Count files and lines of code\n- Identify language(s) and framework(s)\n- Spot obvious red flags: hardcoded secrets, bare excepts, TODOs, commented-out code\n- Note the entry point(s) and data flow direction\n\n---\n\n## Audit Dimensions\n\nEvaluate the code across all seven dimensions below. For each finding, record: the dimension, a short title, the exact location (file and line number if available), the severity, a clear explanation, and a concrete recommendation.\n\n**Do not invent findings. Do not report issues you cannot substantiate from the code provided.**\n\n**Pattern Recognition Shortcuts:**\nUse these heuristics to accelerate detection:\n\n| Pattern | Likely Issue | Quick Check |\n|---------|-------------|-------------|\n| `eval()`, `exec()`, `os.system()` | Security critical | Search for these strings |\n| `except:` or `except Exception:` | Silent failures | Grep for bare excepts |\n| `password`, `secret`, `key`, `token` in code | Hardcoded credentials | Search + check if literal string |\n| `if DEBUG`, `debug=True` | Insecure defaults | Check config blocks |\n| Functions >50 lines | Maintainability risk | Count lines per function |\n| Nested `if` >3 levels | Complexity hotspot | Visual scan or cyclomatic check |\n| No tests in repo | Quality gap | Look for `test_` files |\n| Direct SQL string concat | SQL injection | Search for `f\"SELECT` or `+ \"SELECT` |\n| `requests.get` without timeout | Production risk | Check HTTP client calls |\n| `while True` without break | Unbounded loop | Search for infinite loops |\n\n### 1. Architecture & Design\n\n**Quick checks:**\n- Can you identify the entry point in 10 seconds?\n- Are there clear boundaries between layers (API, business logic, data)?\n- Does any single file exceed 300 lines?\n\n- Separation of concerns violations (e.g., business logic inside route handlers or UI components)\n- God objects or monolithic modules with more than one clear responsibility\n- Tight coupling between components with no abstraction boundary\n- Missing or blurred system boundaries (e.g., database queries scattered across layers)\n- Circular dependencies or import cycles\n- No clear data flow or state management strategy\n\n### 2. Consistency & Maintainability\n\n**Quick checks:**\n- Are similar operations named consistently? (search for `get`, `fetch`, `load` variations)\n- Do functions have single, clear purposes based on their names?\n- Is duplicated logic visible? (search for repeated code blocks)\n\n- Naming inconsistencies (e.g., `get_user` vs `fetchUser` vs `retrieveUserData` for the same operation)\n- Mixed paradigms without justification (e.g., OOP and procedural code interleaved arbitrarily)\n- Copy-paste logic that should be extracted into a shared function (3+ repetitions = extract)\n- Abstractions that obscure rather than clarify intent\n- Inconsistent error handling patterns across modules\n- Magic numbers or strings without constants or configuration\n\n### 3. Robustness & Error Handling\n\n**Quick checks:**\n- Does every external call (API, DB, file) have error handling?\n- Are there any bare `except:` blocks?\n- What happens if inputs are empty, null, or malformed?\n\n- Missing input validation on entry points (HTTP handlers, CLI args, file reads)\n- Bare `except` or catch-all error handlers that swallow failures silently\n- Unhandled edge cases (empty collections, null/None returns, zero values)\n- Code that assumes external services always succeed without fallback logic\n- No retry logic for transient fai",
       "tags": [
+        "python",
         "api",
         "ai",
         "design",
+        "document",
         "security",
         "aws",
         "rag",
@@ -24310,14 +24318,14 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 318
+      "count": 320
     },
     {
       "id": "development-code-tools",
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 130
+      "count": 129
     },
     {
       "id": "security-systems",
@@ -24331,7 +24339,7 @@
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 96
+      "count": 95
     },
     {
       "id": "business-marketing",
@@ -24375,48 +24383,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 67326
+      "stars": 68477
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 12,
       "newSkillCount": 4,
-      "stars": 80655
+      "stars": 81808
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 39375
+      "stars": 39812
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 68392
+      "stars": 68440
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 955
+      "stars": 960
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 961,
-      "newSkillCount": 20,
-      "stars": 17844
+      "newSkillCount": 7,
+      "stars": 18288
     }
   ],
-  "lastUpdated": "2026-03-02T07:12:59.680Z",
+  "lastUpdated": "2026-03-03T07:06:29.697Z",
   "stats": {
     "totalSkills": 1056,
-    "newSkills": 32,
-    "scrapedAt": "2026-03-02T07:12:59.680Z"
+    "newSkills": 19,
+    "scrapedAt": "2026-03-03T07:06:29.697Z"
   }
 }
