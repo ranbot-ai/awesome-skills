@@ -522,6 +522,28 @@
       "scrapedAt": "2026-02-26T07:08:45.069Z"
     },
     {
+      "id": "antigravity-agentmail",
+      "name": "agentmail",
+      "slug": "agentmail",
+      "description": "Email infrastructure for AI agents. Create accounts, send/receive emails, manage webhooks, and check karma balance via the AgentMail API.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agentmail",
+      "content": "\n# AgentMail — Email for AI Agents\n\nAgentMail gives AI agents real email addresses (`@theagentmail.net`) with a REST API. Agents can send and receive email, sign up for services (GitHub, AWS, Slack, etc.), and get verification codes. A karma system prevents spam and keeps the shared domain's reputation high.\n\nBase URL: `https://api.theagentmail.net`\n\n## Quick start\n\nAll requests require `Authorization: Bearer am_...` header (API key from dashboard).\n\n### Create an email account (-10 karma)\n\n```bash\ncurl -X POST https://api.theagentmail.net/v1/accounts \\\n  -H \"Authorization: Bearer am_...\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"address\": \"my-agent@theagentmail.net\"}'\n```\n\nResponse: `{\"data\": {\"id\": \"...\", \"address\": \"my-agent@theagentmail.net\", \"displayName\": null, \"createdAt\": 123}}`\n\n### Send email (-1 karma)\n\n```bash\ncurl -X POST https://api.theagentmail.net/v1/accounts/{accountId}/messages \\\n  -H \"Authorization: Bearer am_...\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"to\": [\"recipient@example.com\"],\n    \"subject\": \"Hello from my agent\",\n    \"text\": \"Plain text body\",\n    \"html\": \"<p>Optional HTML body</p>\"\n  }'\n```\n\nOptional fields: `cc`, `bcc` (string arrays), `inReplyTo`, `references` (strings for threading), `attachments` (array of `{filename, contentType, content}` where content is base64).\n\n### Read inbox\n\n```bash\n# List messages\ncurl https://api.theagentmail.net/v1/accounts/{accountId}/messages \\\n  -H \"Authorization: Bearer am_...\"\n\n# Get full message (with body and attachments)\ncurl https://api.theagentmail.net/v1/accounts/{accountId}/messages/{messageId} \\\n  -H \"Authorization: Bearer am_...\"\n```\n\n### Check karma\n\n```bash\ncurl https://api.theagentmail.net/v1/karma \\\n  -H \"Authorization: Bearer am_...\"\n```\n\nResponse: `{\"data\": {\"balance\": 90, \"events\": [...]}}`\n\n### Register webhook (real-time inbound)\n\n```bash\ncurl -X POST https://api.theagentmail.net/v1/accounts/{accountId}/webhooks \\\n  -H \"Authorization: Bearer am_...\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"url\": \"https://my-agent.example.com/inbox\"}'\n```\n\nWebhook deliveries include two security headers:\n- `X-AgentMail-Signature` -- HMAC-SHA256 hex digest of the request body, signed with the webhook secret\n- `X-AgentMail-Timestamp` -- millisecond timestamp of when the delivery was sent\n\nVerify the signature and reject requests with timestamps older than 5 minutes to prevent replay attacks:\n\n```typescript\nimport { createHmac } from \"crypto\";\n\nconst verifyWebhook = (body: string, signature: string, timestamp: string, secret: string) => {\n  if (Date.now() - Number(timestamp) > 5 * 60 * 1000) return false;\n  return createHmac(\"sha256\", secret).update(body).digest(\"hex\") === signature;\n};\n```\n\n### Download attachment\n\n```bash\ncurl https://api.theagentmail.net/v1/accounts/{accountId}/messages/{messageId}/attachments/{attachmentId} \\\n  -H \"Authorization: Bearer am_...\"\n```\n\nReturns `{\"data\": {\"url\": \"https://signed-download-url...\"}}`.\n\n## Full API reference\n\n| Method | Path | Description | Karma |\n|--------|------|-------------|-------|\n| POST | `/v1/accounts` | Create email account | -10 |\n| GET | `/v1/accounts` | List all accounts | |\n| GET | `/v1/accounts/:id` | Get account details | |\n| DELETE | `/v1/accounts/:id` | Delete account | +10 |\n| POST | `/v1/accounts/:id/messages` | Send email | -1 |\n| GET | `/v1/accounts/:id/messages` | List messages | |\n| GET | `/v1/accounts/:id/messages/:msgId` | Get full message | |\n| GET | `/v1/accounts/:id/messages/:msgId/attachments/:attId` | Get attachment URL | |\n| POST | `/v1/accounts/:id/webhooks` | Register webhook | |\n| GET | `/v1/accounts/:id/webhooks` | List webhooks | |\n| DELETE | `/v1/accounts/:id/webhooks/:whId` | Delete webhook | |\n| GET | `/v1/karma` | Get balance + events | |\n\n## Karma system\n\nEvery action has a karma cost or reward:\n\n| Event | Karma | Why |\n|---|---|---|\n| `money_paid` | +100 | Purchase credits |\n| `email_received` | +2 | Someone replied from a trusted domain |\n| `account_deleted` | +10 | Karma refunded when you delete an address |\n| `email_sent` | -1 | Sending costs karma |\n| `account_created` | -10 | Creating addresses costs karma |\n\n**Important rules:**\n- Karma is only awarded for inbound emails from trusted providers (Gmail, Outlook, Yahoo, iCloud, ProtonMail, Fastmail, Hey, etc.). Emails from unknown/throwaway domains don't earn karma.\n- You only earn karma once per sender until the agent replies. If sender X emails you 5 times without a reply, only the first earns karma. Reply to X, and the next email from X earns karma again.\n- Deleting an account refunds the 10 karma it cost to create.\n\nWhen karma reaches 0, sends and account creation return HTTP 402. Always check balance before operations that cost karma.\n\n## TypeScript SDK\n\n```typescript\nimport { createClient } from \"@agentmail/sdk\";\n\nconst mail = createClient({ apiKey: \"am_...\" });\n\n// Create account\nconst account = await mail.accounts.create({\n  address: \"my-agent@theagentmail.net\",\n})",
+      "tags": [
+        "typescript",
+        "api",
+        "ai",
+        "agent",
+        "automation",
+        "security",
+        "aws"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-03-04T06:57:54.380Z"
+    },
+    {
       "id": "antigravity-agents-v2-py",
       "name": "agents-v2-py",
       "slug": "agents-v2-py",
@@ -5411,6 +5433,28 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-26T13:15:27.844Z"
+    },
+    {
+      "id": "openhands-bitbucket-data-center",
+      "name": "bitbucket_data_center",
+      "slug": "bitbucket-data-center",
+      "description": "You have access to an environment variable, `BITBUCKET_DATA_CENTER_TOKEN`, which contains",
+      "category": "Development & Code Tools",
+      "source": "openhands",
+      "repoUrl": "https://github.com/OpenHands/OpenHands",
+      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/bitbucket_data_center.md",
+      "content": "\nYou have access to an environment variable, `BITBUCKET_DATA_CENTER_TOKEN`, which contains\na basic auth token in the format `username:your-token` that allows you to interact with the git repository.\n\nYou can also use this token to interact with Bitbucket Data Center's REST API:\n```bash\ncurl -u \"${BITBUCKET_DATA_CENTER_TOKEN}\" https://{domain}/rest/api/1.0/...\n```\n\n<IMPORTANT>\nALWAYS use the Bitbucket Data Center API for operations instead of a web browser.\nALWAYS use the `create_bitbucket_data_center_pr` tool to open a pull request\n</IMPORTANT>\n\nIf you encounter authentication issues when pushing to Bitbucket Data Center (such as password prompts or permission errors), the old token may have expired. In such case, update the remote URL to include the current token: `git remote set-url origin https://${BITBUCKET_DATA_CENTER_TOKEN}@{domain}/scm/{project_lower}/{repo}.git`\n\nThe repository format for Bitbucket Data Center is `PROJECT/repo_slug` (project key, slash, repo slug).\n\nHere are some instructions for pushing, but ONLY do this if the user asks you to:\n* NEVER push directly to the `main` or `master` branch\n* Git config (username and email) is pre-set. Do not modify.\n* You may already be on a branch starting with `openhands-workspace`. Create a new branch with a better name before pushing.\n* Use the `create_bitbucket_data_center_pr` tool to create a pull request, if you haven't already\n* Once you've created your own branch or a pull request, continue to update it. Do NOT create a new one unless you are explicitly asked to. Update the PR title and description as necessary, but don't change the branch name.\n* Use the main branch as the base branch, unless the user requests otherwise\n* After opening or updating a pull request, send the user a short message with a link to the pull request.\n* Do NOT mark a pull request as ready to review unless the user explicitly says so\n* Do all of the above in as few steps as possible. E.g. you could push changes with one step by running the following bash commands:\n```bash\ngit remote -v && git branch # to find the current org, repo and branch\ngit checkout -b create-widget && git add . && git commit -m \"Create widget\" && git push -u origin create-widget\n```\n",
+      "tags": [
+        "git",
+        "bitbucket",
+        "bash",
+        "pr",
+        "agent",
+        "tool",
+        "api"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-03-04T06:57:37.927Z"
     },
     {
       "id": "antigravity-bitbucket-automation",
@@ -23052,6 +23096,29 @@
       "scrapedAt": "2026-01-26T13:16:07.643Z"
     },
     {
+      "id": "antigravity-videodb",
+      "name": "videodb",
+      "slug": "videodb",
+      "description": "Video and audio perception, indexing, and editing. Ingest files/URLs/live streams, build visual/spoken indexes, search with timestamps, edit timelines, add overlays/subtitles, generate media, and create real-time alerts.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/videodb",
+      "content": "\n# VideoDB Skill\n\n**Perception + memory + actions for video, live streams, and desktop sessions.**\n\nUse this skill when you need to:\n\n## 1) Desktop Perception\n- Start/stop a **desktop session** capturing **screen, mic, and system audio**\n- Stream **live context** and store **episodic session memory**\n- Run **real-time alerts/triggers** on what's spoken and what's happening on screen\n- Produce **session summaries**, a searchable timeline, and **playable evidence links**\n\n## 2) Video ingest + stream\n- Ingest a **file or URL** and return a **playable web stream link**\n- Transcode/normalize: **codec, bitrate, fps, resolution, aspect ratio**\n\n## 3) Index + search (timestamps + evidence)\n- Build **visual**, **spoken**, and **keyword** indexes\n- Search and return exact moments with **timestamps** and **playable evidence**\n- Auto-create **clips** from search results\n\n## 4) Timeline editing + generation\n- Subtitles: **generate**, **translate**, **burn-in**\n- Overlays: **text/image/branding**, motion captions\n- Audio: **background music**, **voiceover**, **dubbing**\n- Programmatic composition and exports via **timeline operations**\n\n## 5) Live streams (RTSP) + monitoring\n- Connect **RTSP/live feeds**\n- Run **real-time visual and spoken understanding** and emit **events/alerts** for monitoring workflows\n\n---\n\n## Common inputs\n- Local **file path**, public **URL**, or **RTSP URL**\n- Desktop capture request: **start / stop / summarize session**\n- Desired operations: get context for understanding, transcode spec, index spec, search query, clip ranges, timeline edits, alert rules\n\n## Common outputs\n- **Stream URL**\n- Search results with **timestamps** and **evidence links**\n- Generated assets: subtitles, audio, images, clips\n- **Event/alert payloads** for live streams\n- Desktop **session summaries** and memory entries\n\n---\n\n## Canonical prompts (examples)\n- \"Start desktop capture and alert when a password field appears.\"\n- \"Record my session and produce an actionable summary when it ends.\"\n- \"Ingest this file and return a playable stream link.\"\n- \"Index this folder and find every scene with people, return timestamps.\"\n- \"Generate subtitles, burn them in, and add light background music.\"\n- \"Connect this RTSP URL and alert when a person enters the zone.\"\n\n\n## Running Python code\n\nBefore running any VideoDB code, change to the project directory and load environment variables:\n\n```python\nfrom dotenv import load_dotenv\nload_dotenv(\".env\")\n\nimport videodb\nconn = videodb.connect()\n```\n\nThis reads `VIDEO_DB_API_KEY` from:\n1. Environment (if already exported)\n2. Project's `.env` file in current directory\n\nIf the key is missing, `videodb.connect()` raises `AuthenticationError` automatically.\n\nDo NOT write a script file when a short inline command works.\n\nWhen writing inline Python (`python -c \"...\"`), always use properly formatted code — use semicolons to separate statements and keep it readable. For anything longer than ~3 statements, use a heredoc instead:\n\n```bash\npython << 'EOF'\nfrom dotenv import load_dotenv\nload_dotenv(\".env\")\n\nimport videodb\nconn = videodb.connect()\ncoll = conn.get_collection()\nprint(f\"Videos: {len(coll.get_videos())}\")\nEOF\n```\n\n## Setup\n\nWhen the user asks to \"setup videodb\" or similar:\n\n### 1. Install SDK\n\n```bash\npip install \"videodb[capture]\" python-dotenv\n```\n\nIf `videodb[capture]` fails on Linux, install without the capture extra:\n\n```bash\npip install videodb python-dotenv\n```\n\n### 2. Configure API key\n\nThe user must set `VIDEO_DB_API_KEY` using **either** method:\n\n- **Export in terminal** (before starting Claude): `export VIDEO_DB_API_KEY=your-key`\n- **Project `.env` file**: Save `VIDEO_DB_API_KEY=your-key` in the project's `.env` file\n\nGet a free API key at https://console.videodb.io (50 free uploads, no credit card).\n\n**Do NOT** read, write, or handle the API key yourself. Always let the user set it.\n\n## Quick Reference\n\n### Upload media\n\n```python\n# URL\nvideo = coll.upload(url=\"https://example.com/video.mp4\")\n\n# YouTube\nvideo = coll.upload(url=\"https://www.youtube.com/watch?v=VIDEO_ID\")\n\n# Local file\nvideo = coll.upload(file_path=\"/path/to/video.mp4\")\n```\n\n### Transcript + subtitle\n\n```python\n# force=True skips the error if the video is already indexed\nvideo.index_spoken_words(force=True)\ntext = video.get_transcript_text()\nstream_url = video.add_subtitle()\n```\n\n### Search inside videos\n\n```python\nfrom videodb.exceptions import InvalidRequestError\n\nvideo.index_spoken_words(force=True)\n\n# search() raises InvalidRequestError when no results are found.\n# Always wrap in try/except and treat \"No results found\" as empty.\ntry:\n    results = video.search(\"product demo\")\n    shots = results.get_shots()\n    stream_url = results.compile()\nexcept InvalidRequestError as e:\n    if \"No results found\" in str(e):\n        shots = []\n    else:\n        raise\n```\n\n### Scene search\n\n```python\nimport re\nfrom videodb import SearchType, IndexType, SceneExtractionType\nfrom videodb.exceptions import InvalidRequestError\n\n# ind",
+      "tags": [
+        "python",
+        "api",
+        "claude",
+        "ai",
+        "workflow",
+        "document",
+        "image",
+        "cro"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-03-04T07:03:31.595Z"
+    },
+    {
       "id": "antigravity-videodb-skills",
       "name": "videodb-skills",
       "slug": "videodb-skills",
@@ -24311,21 +24378,21 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 335
+      "count": 336
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 320
+      "count": 321
     },
     {
       "id": "development-code-tools",
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 129
+      "count": 130
     },
     {
       "id": "security-systems",
@@ -24383,48 +24450,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 68477
+      "stars": 69795
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 12,
       "newSkillCount": 4,
-      "stars": 81808
+      "stars": 82940
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 39812
+      "stars": 40352
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
-      "skillCount": 25,
-      "newSkillCount": 0,
-      "stars": 68440
+      "skillCount": 26,
+      "newSkillCount": 1,
+      "stars": 68501
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 960
+      "stars": 963
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillCount": 961,
-      "newSkillCount": 7,
-      "stars": 18288
+      "skillCount": 963,
+      "newSkillCount": 9,
+      "stars": 18835
     }
   ],
-  "lastUpdated": "2026-03-03T07:06:29.697Z",
+  "lastUpdated": "2026-03-04T07:03:47.615Z",
   "stats": {
-    "totalSkills": 1056,
-    "newSkills": 19,
-    "scrapedAt": "2026-03-03T07:06:29.697Z"
+    "totalSkills": 1059,
+    "newSkills": 22,
+    "scrapedAt": "2026-03-04T07:03:47.615Z"
   }
 }
