@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-saas-mvp-launcher",
+  "name": "saas-mvp-launcher",
+  "slug": "saas-mvp-launcher",
+  "description": "Use when planning or building a SaaS MVP from scratch. Provides a structured roadmap covering tech stack, architecture, auth, payments, and launch checklist.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/saas-mvp-launcher",
+  "content": "\n# SaaS MVP Launcher\n\n## Overview\n\nThis skill guides you through building a production-ready SaaS MVP in the shortest time possible. It covers everything from idea validation and tech stack selection to authentication, payments, database design, deployment, and launch — using modern, battle-tested tools.\n\n## When to Use This Skill\n\n- Use when starting a new SaaS product from scratch\n- Use when you need to choose a tech stack for a web application\n- Use when setting up authentication, billing, or database for a SaaS\n- Use when you want a structured launch checklist before going live\n- Use when designing the architecture of a multi-tenant application\n- Use when doing a technical review of an existing early-stage SaaS\n\n## Step-by-Step Guide\n\n### 1. Validate Before You Build\n\nBefore writing any code, validate the idea:\n\n```\nValidation checklist:\n- [ ] Can you describe the problem in one sentence?\n- [ ] Who is the exact customer? (not \"everyone\")\n- [ ] What do they pay for today to solve this?\n- [ ] Have you talked to 5+ potential customers?\n- [ ] Will they pay $X/month for your solution?\n```\n\n**Rule:** If you can't get 3 people to pre-pay or sign a letter of intent, don't build yet.\n\n### 2. Choose Your Tech Stack\n\nRecommended modern SaaS stack (2026):\n\n| Layer | Choice | Why |\n|-------|--------|-----|\n| Frontend | Next.js 15 + TypeScript | Full-stack, great DX, Vercel deploy |\n| Styling | Tailwind CSS + shadcn/ui | Fast, accessible, customizable |\n| Backend | Next.js API Routes or tRPC | Type-safe, co-located |\n| Database | PostgreSQL via Supabase | Reliable, scalable, free tier |\n| ORM | Prisma or Drizzle | Type-safe queries, migrations |\n| Auth | Clerk or NextAuth.js | Social login, session management |\n| Payments | Stripe | Industry standard, great docs |\n| Email | Resend + React Email | Modern, developer-friendly |\n| Deployment | Vercel (frontend) + Railway (backend) | Zero-config, fast CI/CD |\n| Monitoring | Sentry + PostHog | Error tracking + analytics |\n\n### 3. Project Structure\n\n```\nmy-saas/\n├── app/                    # Next.js App Router\n│   ├── (auth)/             # Auth routes (login, signup)\n│   ├── (dashboard)/        # Protected app routes\n│   ├── (marketing)/        # Public landing pages\n│   └── api/                # API routes\n├── components/\n│   ├── ui/                 # shadcn/ui components\n│   └── [feature]/          # Feature-specific components\n├── lib/\n│   ├── db.ts               # Database client (Prisma/Drizzle)\n│   ├── stripe.ts           # Stripe client\n│   └── email.ts            # Email client (Resend)\n├── prisma/\n│   └── schema.prisma       # Database schema\n├── .env.local              # Environment variables\n└── middleware.ts           # Auth middleware\n```\n\n### 4. Core Database Schema (Multi-tenant SaaS)\n\n```prisma\nmodel User {\n  id            String    @id @default(cuid())\n  email         String    @unique\n  name          String?\n  createdAt     DateTime  @default(now())\n  subscription  Subscription?\n  workspaces    WorkspaceMember[]\n}\n\nmodel Workspace {\n  id        String    @id @default(cuid())\n  name      String\n  slug      String    @unique\n  plan      Plan      @default(FREE)\n  members   WorkspaceMember[]\n  createdAt DateTime  @default(now())\n}\n\nmodel Subscription {\n  id                 String   @id @default(cuid())\n  userId             String   @unique\n  user               User     @relation(fields: [userId], references: [id])\n  stripeCustomerId   String   @unique\n  stripePriceId      String\n  stripeSubId        String   @unique\n  status             String   # active, canceled, past_due\n  currentPeriodEnd   DateTime\n}\n\nenum Plan {\n  FREE\n  PRO\n  ENTERPRISE\n}\n```\n\n### 5. Authentication Setup (Clerk)\n\n```typescript\n// middleware.ts\nimport { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';\n\nconst isPublicRoute = createRouteMatcher([\n  '/',\n  '/pricing',\n  '/blog(.*)',\n  '/sign-in(.*)',\n  '/sign-up(.*)',\n  '/api/webhooks(.*)',\n]);\n\nexport default clerkMiddleware((auth, req) => {\n  if (!isPublicRoute(req)) {\n    auth().protect();\n  }\n});\n\nexport const config = {\n  matcher: ['/((?!.*\\\\..*|_next).*)', '/', '/(api|trpc)(.*)'],\n};\n```\n\n### 6. Stripe Integration (Subscriptions)\n\n```typescript\n// lib/stripe.ts\nimport Stripe from 'stripe';\nexport const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {\n  apiVersion: '2025-01-27.acacia',\n});\n\n// Create checkout session\nexport async function createCheckoutSession(userId: string, priceId: string) {\n  return stripe.checkout.sessions.create({\n    mode: 'subscription',\n    payment_method_types: ['card'],\n    line_items: [{ price: priceId, quantity: 1 }],\n    success_url: `${process.env.NEXT_PUBLIC_URL}/dashboard?success=true`,\n    cancel_url: `${process.env.NEXT_PUBLIC_URL}/pricing`,\n    metadata: { userId },\n  });\n}\n```\n\n### 7. Pre-Launch Checklist\n\n**Technical:**\n- [ ] Authentication works (signup, login, logout, password reset)\n- [ ] Payments work end-to-end (subscribe, cancel, upgrade)\n- [ ] Error monitoring config",
+  "tags": [
+    "typescript",
+    "react",
+    "nextjs",
+    "api",
+    "ai",
+    "design",
+    "document",
+    "security",
+    "tailwind",
+    "prisma"
+  ],
+  "useCases": [
+    "Use when starting a new SaaS product from scratch",
+    "Use when you need to choose a tech stack for a web application",
+    "Use when setting up authentication, billing, or database for a SaaS",
+    "Use when you want a structured launch checklist before going live",
+    "Use when designing the architecture of a multi-tenant application"
+  ],
+  "scrapedAt": "2026-03-05T07:06:35.969Z"
+}

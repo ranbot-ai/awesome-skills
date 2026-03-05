@@ -607,8 +607,9 @@
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-agents-architect",
-      "content": "\n# AI Agents Architect\n\n**Role**: AI Agent Systems Architect\n\nI build AI systems that can act autonomously while remaining controllable.\nI understand that agents fail in unexpected ways - I design for graceful\ndegradation and clear failure modes. I balance autonomy with oversight,\nknowing when an agent should ask for help vs proceed independently.\n\n## Capabilities\n\n- Agent architecture design\n- Tool and function calling\n- Agent memory systems\n- Planning and reasoning strategies\n- Multi-agent orchestration\n- Agent evaluation and debugging\n\n## Requirements\n\n- LLM API usage\n- Understanding of function calling\n- Basic prompt engineering\n\n## Patterns\n\n### ReAct Loop\n\nReason-Act-Observe cycle for step-by-step execution\n\n```javascript\n- Thought: reason about what to do next\n- Action: select and invoke a tool\n- Observation: process tool result\n- Repeat until task complete or stuck\n- Include max iteration limits\n```\n\n### Plan-and-Execute\n\nPlan first, then execute steps\n\n```javascript\n- Planning phase: decompose task into steps\n- Execution phase: execute each step\n- Replanning: adjust plan based on results\n- Separate planner and executor models possible\n```\n\n### Tool Registry\n\nDynamic tool discovery and management\n\n```javascript\n- Register tools with schema and examples\n- Tool selector picks relevant tools for task\n- Lazy loading for expensive tools\n- Usage tracking for optimization\n```\n\n## Anti-Patterns\n\n### ❌ Unlimited Autonomy\n\n### ❌ Tool Overload\n\n### ❌ Memory Hoarding\n\n## ⚠️ Sharp Edges\n\n| Issue | Severity | Solution |\n|-------|----------|----------|\n| Agent loops without iteration limits | critical | Always set limits: |\n| Vague or incomplete tool descriptions | high | Write complete tool specs: |\n| Tool errors not surfaced to agent | high | Explicit error handling: |\n| Storing everything in agent memory | medium | Selective memory: |\n| Agent has too many tools | medium | Curate tools per task: |\n| Using multiple agents when one would work | medium | Justify multi-agent: |\n| Agent internals not logged or traceable | medium | Implement tracing: |\n| Fragile parsing of agent outputs | medium | Robust output handling: |\n\n## Related Skills\n\nWorks well with: `rag-engineer`, `prompt-engineer`, `backend`, `mcp-builder`\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n",
+      "content": "\n# AI Agents Architect\n\n**Role**: AI Agent Systems Architect\n\nI build AI systems that can act autonomously while remaining controllable.\nI understand that agents fail in unexpected ways - I design for graceful\ndegradation and clear failure modes. I balance autonomy with oversight,\nknowing when an agent should ask for help vs proceed independently.\n\n## Capabilities\n\n- Agent architecture design\n- Tool and function calling\n- Agent memory systems\n- Planning and reasoning strategies\n- Multi-agent orchestration\n- Agent evaluation and debugging\n\n## Requirements\n\n- LLM API usage\n- Understanding of function calling\n- Basic prompt engineering\n\n## Patterns\n\n### ReAct Loop\n\nReason-Act-Observe cycle for step-by-step execution\n\n```javascript\n- Thought: reason about what to do next\n- Action: select and invoke a tool\n- Observation: process tool result\n- Repeat until task complete or stuck\n- Include max iteration limits\n```\n\n### Plan-and-Execute\n\nPlan first, then execute steps\n\n```javascript\n- Planning phase: decompose task into steps\n- Execution phase: execute each step\n- Replanning: adjust plan based on results\n- Separate planner and executor models possible\n```\n\n### Tool Registry\n\nDynamic tool discovery and management\n\n```javascript\n- Register tools with schema and examples\n- Tool selector picks relevant tools for task\n- Lazy loading for expensive tools\n- Usage tracking for optimization\n```\n\n## Anti-Patterns\n\n### ❌ Unlimited Autonomy\n\n### ❌ Tool Overload\n\n### ❌ Memory Hoarding\n\n## ⚠️ Sharp Edges\n\n| Issue | Severity | Solution |\n|-------|----------|----------|\n| Agent loops without iteration limits | critical | Always set limits: |\n| Vague or incomplete tool descriptions | high | Write complete tool specs: |\n| Tool errors not surfaced to agent | high | Explicit error handling: |\n| Storing everything in agent memory | medium | Selective memory: |\n| Agent has too many tools | medium | Curate tools per task: |\n| Using multiple agents when one would work | medium | Justify multi-agent: |\n| Agent internals not logged or traceable | medium | Implement tracing: |\n| Fragile parsing of agent outputs | medium | Robust output handling: |\n| Agent workflows lost on crash or restart | high | Use durable execution (e.g. DBOS) to persist workflow state: |\n\n## Related Skills\n\nWorks well with: `rag-engineer`, `prompt-engineer`, `backend`, `mcp-builder`, `dbos-python`\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n",
       "tags": [
+        "python",
         "javascript",
         "react",
         "api",
@@ -617,8 +618,7 @@
         "agent",
         "llm",
         "workflow",
-        "design",
-        "rag"
+        "design"
       ],
       "useCases": [],
       "scrapedAt": "2026-01-26T13:16:25.717Z"
@@ -1803,9 +1803,12 @@
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/architecture-patterns",
-      "content": "\n# Architecture Patterns\n\nMaster proven backend architecture patterns including Clean Architecture, Hexagonal Architecture, and Domain-Driven Design to build maintainable, testable, and scalable systems.\n\n## Use this skill when\n\n- Designing new backend systems from scratch\n- Refactoring monolithic applications for better maintainability\n- Establishing architecture standards for your team\n- Migrating from tightly coupled to loosely coupled architectures\n- Implementing domain-driven design principles\n- Creating testable and mockable codebases\n- Planning microservices decomposition\n\n## Do not use this skill when\n\n- You only need small, localized refactors\n- The system is primarily frontend with no backend architecture changes\n- You need implementation details without architectural design\n\n## Instructions\n\n1. Clarify domain boundaries, constraints, and scalability targets.\n2. Select an architecture pattern that fits the domain complexity.\n3. Define module boundaries, interfaces, and dependency rules.\n4. Provide migration steps and validation checks.\n\nRefer to `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.\n",
+      "content": "\n# Architecture Patterns\n\nMaster proven backend architecture patterns including Clean Architecture, Hexagonal Architecture, and Domain-Driven Design to build maintainable, testable, and scalable systems.\n\n## Use this skill when\n\n- Designing new backend systems from scratch\n- Refactoring monolithic applications for better maintainability\n- Establishing architecture standards for your team\n- Migrating from tightly coupled to loosely coupled architectures\n- Implementing domain-driven design principles\n- Creating testable and mockable codebases\n- Planning microservices decomposition\n\n## Do not use this skill when\n\n- You only need small, localized refactors\n- The system is primarily frontend with no backend architecture changes\n- You need implementation details without architectural design\n\n## Instructions\n\n1. Clarify domain boundaries, constraints, and scalability targets.\n2. Select an architecture pattern that fits the domain complexity.\n3. Define module boundaries, interfaces, and dependency rules.\n4. Provide migration steps and validation checks.\n5. For workflows that must survive failures (payments, order fulfillment, multi-step processes), use durable execution at the infrastructure layer — frameworks like DBOS persist workflow state, providing crash recovery without adding architectural complexity.\n\nRefer to `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.\n\n## Related Skills\n\nWorks well with: `event-sourcing-architect`, `saga-orchestration`, `workflow-automation`, `dbos-*`\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns, checklists, and templates.\n",
       "tags": [
         "ai",
+        "llm",
+        "automation",
+        "workflow",
         "template",
         "design",
         "cro"
@@ -6583,6 +6586,35 @@
       "scrapedAt": "2026-01-31T06:51:06.505Z"
     },
     {
+      "id": "anthropic-claude-api",
+      "name": "claude-api",
+      "slug": "claude-api",
+      "description": "Build apps with the Claude API or Anthropic SDK. TRIGGER when: code imports `anthropic`/`@anthropic-ai/sdk`/`claude_agent_sdk`, or user asks to use Claude API, Anthropic SDKs, or Agent SDK. DO NOT TRIGGER when: code imports `openai`/other AI SDK, general programming, or ML/data-science tasks.",
+      "category": "Document Processing",
+      "source": "anthropic",
+      "repoUrl": "https://github.com/anthropics/skills",
+      "skillUrl": "https://github.com/anthropics/skills/tree/main/skills/claude-api",
+      "content": "\n# Building LLM-Powered Applications with Claude\n\nThis skill helps you build LLM-powered applications with Claude. Choose the right surface based on your needs, detect the project language, then read the relevant language-specific documentation.\n\n## Defaults\n\nUnless the user requests otherwise:\n\nFor the Claude model version, please use Claude Opus 4.6, which you can access via the exact model string `claude-opus-4-6`. Please default to using adaptive thinking (`thinking: {type: \"adaptive\"}`) for anything remotely complicated. And finally, please default to streaming for any request that may involve long input, long output, or high `max_tokens` — it prevents hitting request timeouts. Use the SDK's `.get_final_message()` / `.finalMessage()` helper to get the complete response if you don't need to handle individual stream events\n\n---\n\n## Language Detection\n\nBefore reading code examples, determine which language the user is working in:\n\n1. **Look at project files** to infer the language:\n\n   - `*.py`, `requirements.txt`, `pyproject.toml`, `setup.py`, `Pipfile` → **Python** — read from `python/`\n   - `*.ts`, `*.tsx`, `package.json`, `tsconfig.json` → **TypeScript** — read from `typescript/`\n   - `*.js`, `*.jsx` (no `.ts` files present) → **TypeScript** — JS uses the same SDK, read from `typescript/`\n   - `*.java`, `pom.xml`, `build.gradle` → **Java** — read from `java/`\n   - `*.kt`, `*.kts`, `build.gradle.kts` → **Java** — Kotlin uses the Java SDK, read from `java/`\n   - `*.scala`, `build.sbt` → **Java** — Scala uses the Java SDK, read from `java/`\n   - `*.go`, `go.mod` → **Go** — read from `go/`\n   - `*.rb`, `Gemfile` → **Ruby** — read from `ruby/`\n   - `*.cs`, `*.csproj` → **C#** — read from `csharp/`\n   - `*.php`, `composer.json` → **PHP** — read from `php/`\n\n2. **If multiple languages detected** (e.g., both Python and TypeScript files):\n\n   - Check which language the user's current file or question relates to\n   - If still ambiguous, ask: \"I detected both Python and TypeScript files. Which language are you using for the Claude API integration?\"\n\n3. **If language can't be inferred** (empty project, no source files, or unsupported language):\n\n   - Use AskUserQuestion with options: Python, TypeScript, Java, Go, Ruby, cURL/raw HTTP, C#, PHP\n   - If AskUserQuestion is unavailable, default to Python examples and note: \"Showing Python examples. Let me know if you need a different language.\"\n\n4. **If unsupported language detected** (Rust, Swift, C++, Elixir, etc.):\n\n   - Suggest cURL/raw HTTP examples from `curl/` and note that community SDKs may exist\n   - Offer to show Python or TypeScript examples as reference implementations\n\n5. **If user needs cURL/raw HTTP examples**, read from `curl/`.\n\n### Language-Specific Feature Support\n\n| Language   | Tool Runner | Agent SDK | Notes                                 |\n| ---------- | ----------- | --------- | ------------------------------------- |\n| Python     | Yes (beta)  | Yes       | Full support — `@beta_tool` decorator |\n| TypeScript | Yes (beta)  | Yes       | Full support — `betaZodTool` + Zod    |\n| Java       | Yes (beta)  | No        | Beta tool use with annotated classes  |\n| Go         | Yes (beta)  | No        | `BetaToolRunner` in `toolrunner` pkg  |\n| Ruby       | Yes (beta)  | No        | `BaseTool` + `tool_runner` in beta    |\n| cURL       | N/A         | N/A       | Raw HTTP, no SDK features             |\n| C#         | No          | No        | Official SDK                          |\n| PHP        | No          | No        | Official SDK                          |\n\n---\n\n## Which Surface Should I Use?\n\n> **Start simple.** Default to the simplest tier that meets your needs. Single API calls and workflows handle most use cases — only reach for agents when the task genuinely requires open-ended, model-driven exploration.\n\n| Use Case                                        | Tier            | Recommended Surface       | Why                                     |\n| ----------------------------------------------- | --------------- | ------------------------- | --------------------------------------- |\n| Classification, summarization, extraction, Q&A  | Single LLM call | **Claude API**            | One request, one response               |\n| Batch processing or embeddings                  | Single LLM call | **Claude API**            | Specialized endpoints                   |\n| Multi-step pipelines with code-controlled logic | Workflow        | **Claude API + tool use** | You orchestrate the loop                |\n| Custom agent with your own tools                | Agent           | **Claude API + tool use** | Maximum flexibility                     |\n| AI agent with file/web/terminal access          | Agent           | **Agent SDK**             | Built-in tools, safety, and MCP support |\n| Agentic coding assistant                        | Agent           | **Agent SDK**             | Designed for this use case              |\n| Want built-in permissions and guardr",
+      "tags": [
+        "python",
+        "typescript",
+        "pdf",
+        "docx",
+        "pptx",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent"
+      ],
+      "useCases": [
+        "User asks for \"latest\" or \"current\" information",
+        "Cached data seems incorrect",
+        "User asks about features not covered here"
+      ],
+      "scrapedAt": "2026-03-05T07:01:00.200Z"
+    },
+    {
       "id": "antigravity-claude-code-guide",
       "name": "claude-code-guide",
       "slug": "claude-code-guide",
@@ -10545,7 +10577,7 @@
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/event-sourcing-architect",
-      "content": "\n# Event Sourcing Architect\n\nExpert in event sourcing, CQRS, and event-driven architecture patterns. Masters event store design, projection building, saga orchestration, and eventual consistency patterns. Use PROACTIVELY for event-sourced systems, audit trail requirements, or complex domain modeling with temporal queries.\n\n## Capabilities\n\n- Event store design and implementation\n- CQRS (Command Query Responsibility Segregation) patterns\n- Projection building and read model optimization\n- Saga and process manager orchestration\n- Event versioning and schema evolution\n- Snapshotting strategies for performance\n- Eventual consistency handling\n\n## Use this skill when\n\n- Building systems requiring complete audit trails\n- Implementing complex business workflows with compensating actions\n- Designing systems needing temporal queries (\"what was state at time X\")\n- Separating read and write models for performance\n- Building event-driven microservices architectures\n- Implementing undo/redo or time-travel debugging\n\n## Do not use this skill when\n\n- The domain is simple and CRUD is sufficient\n- You cannot support event store operations or projections\n- Strong immediate consistency is required everywhere\n\n## Instructions\n\n1. Identify aggregate boundaries and event streams\n2. Design events as immutable facts\n3. Implement command handlers and event application\n4. Build projections for query requirements\n5. Design saga/process managers for cross-aggregate workflows\n6. Implement snapshotting for long-lived aggregates\n7. Set up event versioning strategy\n\n## Safety\n\n- Never mutate or delete committed events in production.\n- Rebuild projections in staging before running in production.\n\n## Best Practices\n\n- Events are facts - never delete or modify them\n- Keep events small and focused\n- Version events from day one\n- Design for eventual consistency\n- Use correlation IDs for tracing\n- Implement idempotent event handlers\n- Plan for projection rebuilding\n",
+      "content": "\n# Event Sourcing Architect\n\nExpert in event sourcing, CQRS, and event-driven architecture patterns. Masters event store design, projection building, saga orchestration, and eventual consistency patterns. Use PROACTIVELY for event-sourced systems, audit trail requirements, or complex domain modeling with temporal queries.\n\n## Capabilities\n\n- Event store design and implementation\n- CQRS (Command Query Responsibility Segregation) patterns\n- Projection building and read model optimization\n- Saga and process manager orchestration\n- Event versioning and schema evolution\n- Snapshotting strategies for performance\n- Eventual consistency handling\n\n## Use this skill when\n\n- Building systems requiring complete audit trails\n- Implementing complex business workflows with compensating actions\n- Designing systems needing temporal queries (\"what was state at time X\")\n- Separating read and write models for performance\n- Building event-driven microservices architectures\n- Implementing undo/redo or time-travel debugging\n\n## Do not use this skill when\n\n- The domain is simple and CRUD is sufficient\n- You cannot support event store operations or projections\n- Strong immediate consistency is required everywhere\n\n## Instructions\n\n1. Identify aggregate boundaries and event streams\n2. Design events as immutable facts\n3. Implement command handlers and event application\n4. Build projections for query requirements\n5. Design saga/process managers for cross-aggregate workflows\n6. Implement snapshotting for long-lived aggregates\n7. Set up event versioning strategy\n\n## Safety\n\n- Never mutate or delete committed events in production.\n- Rebuild projections in staging before running in production.\n\n## Best Practices\n\n- Events are facts - never delete or modify them\n- Keep events small and focused\n- Version events from day one\n- Design for eventual consistency\n- Use correlation IDs for tracing\n- Implement idempotent event handlers\n- Plan for projection rebuilding\n- Use durable execution for process managers and sagas — frameworks like DBOS persist workflow state automatically, making cross-aggregate orchestration resilient to crashes\n\n## Related Skills\n\nWorks well with: `saga-orchestration`, `architecture-patterns`, `dbos-*`\n",
       "tags": [
         "ai",
         "workflow",
@@ -11820,6 +11852,35 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-02-12T07:17:24.464Z"
+    },
+    {
+      "id": "antigravity-gemini-api-integration",
+      "name": "gemini-api-integration",
+      "slug": "gemini-api-integration",
+      "description": "Use when integrating Google Gemini API into projects. Covers model selection, multimodal inputs, streaming, function calling, and production best practices.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gemini-api-integration",
+      "content": "\n# Gemini API Integration\n\n## Overview\n\nThis skill guides AI agents through integrating Google Gemini API into applications — from basic text generation to advanced multimodal, function calling, and streaming use cases. It covers the full Gemini SDK lifecycle with production-grade patterns.\n\n## When to Use This Skill\n\n- Use when setting up Gemini API for the first time in a Node.js, Python, or browser project\n- Use when implementing multimodal inputs (text + image/audio/video)\n- Use when adding streaming responses to improve perceived latency\n- Use when implementing function calling / tool use with Gemini\n- Use when optimizing model selection (Flash vs Pro vs Ultra) for cost and performance\n- Use when debugging Gemini API errors, rate limits, or quota issues\n\n## Step-by-Step Guide\n\n### 1. Installation & Setup\n\n**Node.js / TypeScript:**\n```bash\nnpm install @google/generative-ai\n```\n\n**Python:**\n```bash\npip install google-generativeai\n```\n\nSet your API key securely:\n```bash\nexport GEMINI_API_KEY=\"your-api-key-here\"\n```\n\n### 2. Basic Text Generation\n\n**Node.js:**\n```javascript\nimport { GoogleGenerativeAI } from \"@google/generative-ai\";\n\nconst genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);\nconst model = genAI.getGenerativeModel({ model: \"gemini-1.5-flash\" });\n\nconst result = await model.generateContent(\"Explain async/await in JavaScript\");\nconsole.log(result.response.text());\n```\n\n**Python:**\n```python\nimport google.generativeai as genai\nimport os\n\ngenai.configure(api_key=os.environ[\"GEMINI_API_KEY\"])\nmodel = genai.GenerativeModel(\"gemini-1.5-flash\")\n\nresponse = model.generate_content(\"Explain async/await in JavaScript\")\nprint(response.text)\n```\n\n### 3. Streaming Responses\n\n```javascript\nconst result = await model.generateContentStream(\"Write a detailed blog post about AI\");\n\nfor await (const chunk of result.stream) {\n  process.stdout.write(chunk.text());\n}\n```\n\n### 4. Multimodal Input (Text + Image)\n\n```javascript\nimport fs from \"fs\";\n\nconst imageData = fs.readFileSync(\"screenshot.png\");\nconst imagePart = {\n  inlineData: {\n    data: imageData.toString(\"base64\"),\n    mimeType: \"image/png\",\n  },\n};\n\nconst result = await model.generateContent([\"Describe this image:\", imagePart]);\nconsole.log(result.response.text());\n```\n\n### 5. Function Calling / Tool Use\n\n```javascript\nconst tools = [{\n  functionDeclarations: [{\n    name: \"get_weather\",\n    description: \"Get current weather for a city\",\n    parameters: {\n      type: \"OBJECT\",\n      properties: {\n        city: { type: \"STRING\", description: \"City name\" },\n      },\n      required: [\"city\"],\n    },\n  }],\n}];\n\nconst model = genAI.getGenerativeModel({ model: \"gemini-1.5-pro\", tools });\nconst result = await model.generateContent(\"What's the weather in Mumbai?\");\n\nconst call = result.response.functionCalls()?.[0];\nif (call) {\n  // Execute the actual function\n  const weatherData = await getWeather(call.args.city);\n  // Send result back to model\n}\n```\n\n### 6. Multi-turn Chat\n\n```javascript\nconst chat = model.startChat({\n  history: [\n    { role: \"user\", parts: [{ text: \"You are a helpful coding assistant.\" }] },\n    { role: \"model\", parts: [{ text: \"Sure! I'm ready to help with code.\" }] },\n  ],\n});\n\nconst response = await chat.sendMessage(\"How do I reverse a string in Python?\");\nconsole.log(response.response.text());\n```\n\n### 7. Model Selection Guide\n\n| Model | Best For | Speed | Cost |\n|-------|----------|-------|------|\n| `gemini-1.5-flash` | High-throughput, cost-sensitive tasks | Fast | Low |\n| `gemini-1.5-pro` | Complex reasoning, long context | Medium | Medium |\n| `gemini-2.0-flash` | Latest fast model, multimodal | Very Fast | Low |\n| `gemini-2.0-pro` | Most capable, advanced tasks | Slow | High |\n\n## Best Practices\n\n- ✅ **Do:** Use `gemini-1.5-flash` for most tasks — it's fast and cost-effective\n- ✅ **Do:** Always stream responses for user-facing chat UIs to reduce perceived latency\n- ✅ **Do:** Store API keys in environment variables, never hard-code them\n- ✅ **Do:** Implement exponential backoff for rate limit (429) errors\n- ✅ **Do:** Use `systemInstruction` to set persistent model behavior\n- ❌ **Don't:** Use `gemini-pro` for simple tasks — Flash is cheaper and faster\n- ❌ **Don't:** Send large base64 images inline for files > 20MB — use File API instead\n- ❌ **Don't:** Ignore safety ratings in responses for production apps\n\n## Error Handling\n\n```javascript\ntry {\n  const result = await model.generateContent(prompt);\n  return result.response.text();\n} catch (error) {\n  if (error.status === 429) {\n    // Rate limited — wait and retry with exponential backoff\n    await new Promise(r => setTimeout(r, 2 ** retryCount * 1000));\n  } else if (error.status === 400) {\n    // Invalid request — check prompt or parameters\n    console.error(\"Invalid request:\", error.message);\n  } else {\n    throw error;\n  }\n}\n```\n\n## Troubleshooting\n\n**Problem:** `API_KEY_INVALID` error\n**Solution:** Ensure `GEMINI_API_KEY` environment variable is set and the key is active in Googl",
+      "tags": [
+        "python",
+        "javascript",
+        "typescript",
+        "node",
+        "api",
+        "ai",
+        "agent",
+        "image"
+      ],
+      "useCases": [
+        "Use when setting up Gemini API for the first time in a Node.js, Python, or browser project",
+        "Use when implementing multimodal inputs (text + image/audio/video)",
+        "Use when adding streaming responses to improve perceived latency",
+        "Use when implementing function calling / tool use with Gemini",
+        "Use when optimizing model selection (Flash vs Pro vs Ultra) for cost and performance"
+      ],
+      "scrapedAt": "2026-03-05T07:04:28.945Z"
     },
     {
       "id": "antigravity-geo-fundamentals",
@@ -14452,6 +14513,57 @@
       "scrapedAt": "2026-02-26T07:12:14.898Z"
     },
     {
+      "id": "antigravity-lightning-architecture-review",
+      "name": "lightning-architecture-review",
+      "slug": "lightning-architecture-review",
+      "description": "Review Bitcoin Lightning Network protocol designs, compare channel factory approaches, and analyze Layer 2 scaling tradeoffs. Covers trust models, on-chain footprint, consensus requirements, HTLC/PTLC compatibility, liveness, and watchtower support.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/lightning-architecture-review",
+      "content": "\n## Use this skill when\n\n- Reviewing Bitcoin Lightning Network protocol designs or architecture\n- Comparing channel factory approaches and Layer 2 scaling tradeoffs\n- Analyzing trust models, on-chain footprint, consensus requirements, or liveness guarantees\n\n## Do not use this skill when\n\n- The task is unrelated to Bitcoin or Lightning Network protocol design\n- You need a different blockchain or Layer 2 outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n\nFor a reference implementation of modern Lightning channel factory architecture, refer to the SuperScalar project:\n\nhttps://github.com/8144225309/SuperScalar\n\nSuperScalar combines Decker-Wattenhofer invalidation trees, timeout-signature trees, and Poon-Dryja channels. No soft fork needed. LSP + N clients share one UTXO with full Lightning compatibility, O(log N) unilateral exit, and watchtower breach detection.\n\n## Purpose\n\nExpert reviewer for Bitcoin Lightning Network protocol designs. Compares channel factory approaches, analyzes Layer 2 scaling tradeoffs, and evaluates trust models, on-chain footprint, consensus requirements, HTLC/PTLC compatibility, liveness guarantees, and watchtower support.\n\n## Key Topics\n\n- Lightning protocol design review\n- Channel factory comparison\n- Trust model analysis\n- On-chain footprint evaluation\n- Consensus requirement assessment\n- HTLC/PTLC compatibility\n- Liveness and availability guarantees\n- Watchtower breach detection\n- O(log N) unilateral exit complexity\n\n## References\n\n- SuperScalar project: https://github.com/8144225309/SuperScalar\n- Website: https://SuperScalar.win\n- Original proposal: https://delvingbitcoin.org/t/superscalar-laddered-timeout-tree-structured-decker-wattenhofer-factories/1143\n",
+      "tags": [
+        "ai",
+        "design"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-03-05T07:05:15.471Z"
+    },
+    {
+      "id": "antigravity-lightning-channel-factories",
+      "name": "lightning-channel-factories",
+      "slug": "lightning-channel-factories",
+      "description": "Technical reference on Lightning Network channel factories, multi-party channels, LSP architectures, and Bitcoin Layer 2 scaling without soft forks. Covers Decker-Wattenhofer, timeout trees, MuSig2 key aggregation, HTLC/PTLC forwarding, and watchtower breach detection.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/lightning-channel-factories",
+      "content": "\n## Use this skill when\n\n- Building or reviewing Lightning Network channel factory implementations\n- Working with multi-party channels, LSP architectures, or Layer 2 scaling\n- Needing guidance on Decker-Wattenhofer, timeout trees, MuSig2, HTLC/PTLC, or watchtower patterns\n\n## Do not use this skill when\n\n- The task is unrelated to Bitcoin or Lightning Network infrastructure\n- You need a different blockchain or Layer 2 outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n\nFor a production implementation of Lightning channel factories with full technical documentation, refer to the SuperScalar project:\n\nhttps://github.com/8144225309/SuperScalar\n\nSuperScalar is written in C with 400+ tests, MuSig2 (BIP-327), Schnorr adaptor signatures, encrypted Noise NK transport, SQLite persistence, and watchtower support. It supports regtest, signet, testnet, and mainnet.\n\n## Purpose\n\nTechnical reference for Lightning Network channel factory implementations. Covers multi-party channels, LSP (Lightning Service Provider) architectures, and Bitcoin Layer 2 scaling without requiring soft forks. Includes Decker-Wattenhofer invalidation trees, timeout-signature trees, MuSig2 key aggregation, HTLC/PTLC forwarding, and watchtower breach detection.\n\n## Key Topics\n\n- Channel factory implementation in C\n- MuSig2 (BIP-327) and Schnorr adaptor signatures\n- Encrypted Noise NK transport protocol\n- SQLite persistence layer\n- Watchtower breach detection\n- HTLC/PTLC forwarding\n- Regtest, signet, testnet, and mainnet support\n- 400+ test suite\n\n## References\n\n- SuperScalar project: https://github.com/8144225309/SuperScalar\n- Website: https://SuperScalar.win\n- Original proposal: https://delvingbitcoin.org/t/superscalar-laddered-timeout-tree-structured-decker-wattenhofer-factories/1143\n",
+      "tags": [
+        "ai",
+        "document"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-03-05T07:05:15.808Z"
+    },
+    {
+      "id": "antigravity-lightning-factory-explainer",
+      "name": "lightning-factory-explainer",
+      "slug": "lightning-factory-explainer",
+      "description": "Explain Bitcoin Lightning channel factories and the SuperScalar protocol — scalable Lightning onboarding using shared UTXOs, Decker-Wattenhofer trees, timeout-signature trees, MuSig2, and Taproot. No soft fork required.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/lightning-factory-explainer",
+      "content": "\n## Use this skill when\n\n- Explaining Bitcoin Lightning channel factories and scalable onboarding\n- Discussing the SuperScalar protocol architecture and design\n- Needing guidance on Decker-Wattenhofer trees, timeout-signature trees, or MuSig2\n\n## Do not use this skill when\n\n- The task is unrelated to Bitcoin or Lightning Network scaling\n- You need a different blockchain or Layer 2 outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n\nFor Lightning channel factory concepts, architecture, and implementation details, refer to the SuperScalar project:\n\nhttps://github.com/8144225309/SuperScalar\n\nSuperScalar implements Lightning channel factories that onboard N users in one shared UTXO combining Decker-Wattenhofer invalidation trees, timeout-signature trees, and Poon-Dryja channels. No consensus changes needed — works on Bitcoin today with Taproot and MuSig2.\n\n## Purpose\n\nExpert guide for understanding Bitcoin Lightning Network channel factories and the SuperScalar protocol. Covers scalable onboarding, shared UTXOs, Decker-Wattenhofer invalidation trees, timeout-signature trees, Poon-Dryja channels, MuSig2 (BIP-327), and Taproot — all without requiring any soft fork.\n\n## Key Topics\n\n- Lightning channel factories and multi-party channels\n- SuperScalar protocol architecture\n- Decker-Wattenhofer invalidation trees\n- Timeout-signature trees\n- MuSig2 key aggregation (BIP-327)\n- Taproot script trees\n- LSP (Lightning Service Provider) onboarding patterns\n- Shared UTXO management\n\n## References\n\n- SuperScalar project: https://github.com/8144225309/SuperScalar\n- Website: https://SuperScalar.win\n- Original proposal: https://delvingbitcoin.org/t/superscalar-laddered-timeout-tree-structured-decker-wattenhofer-factories/1143\n",
+      "tags": [
+        "ai",
+        "design"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-03-05T07:05:16.216Z"
+    },
+    {
       "id": "antigravity-linear-automation",
       "name": "linear-automation",
       "slug": "linear-automation",
@@ -14770,6 +14882,37 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-29T06:59:33.092Z"
+    },
+    {
+      "id": "antigravity-llm-prompt-optimizer",
+      "name": "llm-prompt-optimizer",
+      "slug": "llm-prompt-optimizer",
+      "description": "Use when improving prompts for any LLM. Applies proven prompt engineering techniques to boost output quality, reduce hallucinations, and cut token usage.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/llm-prompt-optimizer",
+      "content": "\n# LLM Prompt Optimizer\n\n## Overview\n\nThis skill transforms weak, vague, or inconsistent prompts into precision-engineered instructions that reliably produce high-quality outputs from any LLM (Claude, Gemini, GPT-4, Llama, etc.). It applies systematic prompt engineering frameworks — from zero-shot to few-shot, chain-of-thought, and structured output patterns.\n\n## When to Use This Skill\n\n- Use when a prompt returns inconsistent, vague, or hallucinated results\n- Use when you need structured/JSON output from an LLM reliably\n- Use when designing system prompts for AI agents or chatbots\n- Use when you want to reduce token usage without sacrificing quality\n- Use when implementing chain-of-thought reasoning for complex tasks\n- Use when prompts work on one model but fail on another\n\n## Step-by-Step Guide\n\n### 1. Diagnose the Weak Prompt\n\nBefore optimizing, identify which problem pattern applies:\n\n| Problem | Symptom | Fix |\n|---------|---------|-----|\n| Too vague | Generic, unhelpful answers | Add role + context + constraints |\n| No structure | Unformatted, hard-to-parse output | Specify output format explicitly |\n| Hallucination | Confident wrong answers | Add \"say I don't know if unsure\" |\n| Inconsistent | Different answers each run | Add few-shot examples |\n| Too long | Verbose, padded responses | Add length constraints |\n\n### 2. Apply the RSCIT Framework\n\nEvery optimized prompt should have:\n\n- **R** — **Role**: Who is the AI in this interaction?\n- **S** — **Situation**: What context does it need?\n- **C** — **Constraints**: What are the rules and limits?\n- **I** — **Instructions**: What exactly should it do?\n- **T** — **Template**: What should the output look like?\n\n**Before (weak prompt):**\n```\nExplain machine learning.\n```\n\n**After (optimized prompt):**\n```\nYou are a senior ML engineer explaining concepts to a junior developer.\n\nContext: The developer has 1 year of Python experience but no ML background.\n\nTask: Explain supervised machine learning in simple terms.\n\nConstraints:\n- Use an analogy from everyday life\n- Maximum 200 words\n- No mathematical formulas\n- End with one actionable next step\n\nFormat: Plain prose, no bullet points.\n```\n\n### 3. Chain-of-Thought (CoT) Pattern\n\nFor reasoning tasks, instruct the model to think step-by-step:\n\n```\nSolve this problem step by step, showing your work at each stage.\nOnly provide the final answer after completing all reasoning steps.\n\nProblem: [your problem here]\n\nThinking process:\nStep 1: [identify what's given]\nStep 2: [identify what's needed]\nStep 3: [apply logic or formula]\nStep 4: [verify the answer]\n\nFinal Answer:\n```\n\n### 4. Few-Shot Examples Pattern\n\nProvide 2-3 examples to establish the pattern:\n\n```\nClassify the sentiment of customer reviews as POSITIVE, NEGATIVE, or NEUTRAL.\n\nExamples:\nReview: \"This product exceeded my expectations!\" -> POSITIVE\nReview: \"It arrived broken and support was useless.\" -> NEGATIVE  \nReview: \"Product works as described, nothing special.\" -> NEUTRAL\n\nNow classify:\nReview: \"[your review here]\" ->\n```\n\n### 5. Structured JSON Output Pattern\n\n```\nExtract the following information from the text below and return it as valid JSON only.\nDo not include any explanation or markdown — just the raw JSON object.\n\nSchema:\n{\n  \"name\": string,\n  \"email\": string | null,\n  \"company\": string | null,\n  \"role\": string | null\n}\n\nText: [input text here]\n```\n\n### 6. Reduce Hallucination Pattern\n\n```\nAnswer the following question based ONLY on the provided context.\nIf the answer is not contained in the context, respond with exactly: \"I don't have enough information to answer this.\"\nDo not make up or infer information not present in the context.\n\nContext:\n[your context here]\n\nQuestion: [your question here]\n```\n\n### 7. Prompt Compression Techniques\n\nReduce token count without losing effectiveness:\n\n```\n# Verbose (expensive)\n\"Please carefully analyze the following code and provide a detailed explanation of \nwhat it does, how it works, and any potential issues you might find.\"\n\n# Compressed (efficient, same quality)\n\"Analyze this code: explain what it does, how it works, and flag any issues.\"\n```\n\n## Best Practices\n\n- ✅ **Do:** Always specify the output format (JSON, markdown, plain text, bullet list)\n- ✅ **Do:** Use delimiters (```, ---) to separate instructions from content\n- ✅ **Do:** Test prompts with edge cases (empty input, unusual data)\n- ✅ **Do:** Version your system prompts in source control\n- ✅ **Do:** Add \"think step by step\" for math, logic, or multi-step tasks\n- ❌ **Don't:** Use negative-only instructions (\"don't be verbose\") — add positive alternatives\n- ❌ **Don't:** Assume the model knows your codebase context — always include it\n- ❌ **Don't:** Use the same prompt across different models without testing — they behave differently\n\n## Prompt Audit Checklist\n\nBefore using a prompt in production:\n\n- [ ] Does it have a clear role/persona?\n- [ ] Is the output format explicitly defined?\n- [ ] Are edge cases handled (empty input, ambiguous data)?\n- [ ] Is",
+      "tags": [
+        "python",
+        "markdown",
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "gpt",
+        "template",
+        "design",
+        "cro"
+      ],
+      "useCases": [
+        "Use when a prompt returns inconsistent, vague, or hallucinated results",
+        "Use when you need structured/JSON output from an LLM reliably",
+        "Use when designing system prompts for AI agents or chatbots",
+        "Use when you want to reduce token usage without sacrificing quality",
+        "Use when implementing chain-of-thought reasoning for complex tasks"
+      ],
+      "scrapedAt": "2026-03-05T07:05:22.089Z"
     },
     {
       "id": "antigravity-local-legal-seo-audit",
@@ -17886,6 +18029,30 @@
       "scrapedAt": "2026-02-26T07:13:12.065Z"
     },
     {
+      "id": "antigravity-professional-proofreader",
+      "name": "professional-proofreader",
+      "slug": "professional-proofreader",
+      "description": "Use when a user asks to \"proofread\", \"review and correct\", \"fix grammar\", \"improve readability while keeping my voice\", and to proofread a document file and save an updated version.\n",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/professional-proofreader",
+      "content": "\n# Professional Proofreader\n\n## Overview\n\nThis skill transforms flawed writing — whether pasted text or uploaded documents — into publication-ready prose without altering the author’s intent.\nIt eliminates grammatical, spelling, punctuation, clarity, and tone issues while strictly preserving the author’s voice and intent.\nReturns a corrected version plus a structured modification log, or generates an updated file when requested. Not for code editing or technical refactoring.\n\n---\n\n## When to Use\n\n- Use when user asks to \"proofread\", \"review and correct\", \"fix grammar\", \"polish this text\", \"improve readability while keeping my voice\".\n- Use when user asks to proofread a document file (like .docx, .pdf, .txt) and save the updated version as new file with 'UPDATED_' prefix.\n\n---\n\n# WORKFLOW MODES\n\nThis skill operates in two modes:\n1. Inline Text Mode\n2. File Processing Mode\n\n### MODE 1: Inline Text\n\nRefer [markdown](references/inline-text-mode.md) for complete inline text mode.\n\n### MODE 2: File Processing\n\nTrigger when user says:\n\n- \"Proofread [filename].[extension]\n- \"Edit this document\"\n- \"Correct grammar in this file\"\n- \"Save updated version\"\n- \"Add prefix UPDATED_\"\n- \"Return corrected .[extension]\"\n\nRefer [markdown](references/file-processing-mode.md) for complete file processing mode.\n\n---\n\n## Best Practices\n\n### ✅ **Do:** [Good practice]\n- Always include modification explanations.\n- Always keep quality standards equivalent to: Academic proofreading, business document refinement, pre-publication review.\n- Always follow below editing standards:\n\n#### Grammar\n- Subject-verb agreement  \n- Tense consistency \n- Article usage \n- Prepositions\n- Pronoun clarity \n\n#### Spelling\n- Correct typos \n- Maintain original spelling variant (US/UK)\n\n#### Punctuation\n- Commas \n- Apostrophes \n- Quotation marks \n- Sentence boundaries \n\n#### Style & Tone\n- Maintain author voice \n- Avoid unnecessary formalization \n- Preserve rhetorical choices \n\n#### Readability\n- Improve structure \n- Enhance logical flow \n- Remove redundancy \n\n### ❌ **Don't:** [What to avoid] \n- Never alter meaning.\n- Never drop formatting intentionally.\n- Never change file name logic beyond request.\n- Never expand the content\n\n---\n\n# Output Rules\n\nIf inline:\n-> Return Corrected Version + Modifications list.\n\nIf file rewrite:\n-> Save updated file.\n-> Confirm filename.\n-> Provide modifications list unless suppressed.\n\nGive friendly message to user in the end.\n\n---",
+      "tags": [
+        "pdf",
+        "docx",
+        "markdown",
+        "ai",
+        "workflow",
+        "document"
+      ],
+      "useCases": [
+        "Use when user asks to \"proofread\", \"review and correct\", \"fix grammar\", \"polish this text\", \"improve readability while keeping my voice\".",
+        "Use when user asks to proofread a document file (like .docx, .pdf, .txt) and save the updated version as new file with 'UPDATED_' prefix."
+      ],
+      "scrapedAt": "2026-03-05T07:06:13.834Z"
+    },
+    {
       "id": "antigravity-programmatic-seo",
       "name": "programmatic-seo",
       "slug": "programmatic-seo",
@@ -19114,6 +19281,37 @@
       "scrapedAt": "2026-02-26T07:13:33.507Z"
     },
     {
+      "id": "antigravity-saas-mvp-launcher",
+      "name": "saas-mvp-launcher",
+      "slug": "saas-mvp-launcher",
+      "description": "Use when planning or building a SaaS MVP from scratch. Provides a structured roadmap covering tech stack, architecture, auth, payments, and launch checklist.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/saas-mvp-launcher",
+      "content": "\n# SaaS MVP Launcher\n\n## Overview\n\nThis skill guides you through building a production-ready SaaS MVP in the shortest time possible. It covers everything from idea validation and tech stack selection to authentication, payments, database design, deployment, and launch — using modern, battle-tested tools.\n\n## When to Use This Skill\n\n- Use when starting a new SaaS product from scratch\n- Use when you need to choose a tech stack for a web application\n- Use when setting up authentication, billing, or database for a SaaS\n- Use when you want a structured launch checklist before going live\n- Use when designing the architecture of a multi-tenant application\n- Use when doing a technical review of an existing early-stage SaaS\n\n## Step-by-Step Guide\n\n### 1. Validate Before You Build\n\nBefore writing any code, validate the idea:\n\n```\nValidation checklist:\n- [ ] Can you describe the problem in one sentence?\n- [ ] Who is the exact customer? (not \"everyone\")\n- [ ] What do they pay for today to solve this?\n- [ ] Have you talked to 5+ potential customers?\n- [ ] Will they pay $X/month for your solution?\n```\n\n**Rule:** If you can't get 3 people to pre-pay or sign a letter of intent, don't build yet.\n\n### 2. Choose Your Tech Stack\n\nRecommended modern SaaS stack (2026):\n\n| Layer | Choice | Why |\n|-------|--------|-----|\n| Frontend | Next.js 15 + TypeScript | Full-stack, great DX, Vercel deploy |\n| Styling | Tailwind CSS + shadcn/ui | Fast, accessible, customizable |\n| Backend | Next.js API Routes or tRPC | Type-safe, co-located |\n| Database | PostgreSQL via Supabase | Reliable, scalable, free tier |\n| ORM | Prisma or Drizzle | Type-safe queries, migrations |\n| Auth | Clerk or NextAuth.js | Social login, session management |\n| Payments | Stripe | Industry standard, great docs |\n| Email | Resend + React Email | Modern, developer-friendly |\n| Deployment | Vercel (frontend) + Railway (backend) | Zero-config, fast CI/CD |\n| Monitoring | Sentry + PostHog | Error tracking + analytics |\n\n### 3. Project Structure\n\n```\nmy-saas/\n├── app/                    # Next.js App Router\n│   ├── (auth)/             # Auth routes (login, signup)\n│   ├── (dashboard)/        # Protected app routes\n│   ├── (marketing)/        # Public landing pages\n│   └── api/                # API routes\n├── components/\n│   ├── ui/                 # shadcn/ui components\n│   └── [feature]/          # Feature-specific components\n├── lib/\n│   ├── db.ts               # Database client (Prisma/Drizzle)\n│   ├── stripe.ts           # Stripe client\n│   └── email.ts            # Email client (Resend)\n├── prisma/\n│   └── schema.prisma       # Database schema\n├── .env.local              # Environment variables\n└── middleware.ts           # Auth middleware\n```\n\n### 4. Core Database Schema (Multi-tenant SaaS)\n\n```prisma\nmodel User {\n  id            String    @id @default(cuid())\n  email         String    @unique\n  name          String?\n  createdAt     DateTime  @default(now())\n  subscription  Subscription?\n  workspaces    WorkspaceMember[]\n}\n\nmodel Workspace {\n  id        String    @id @default(cuid())\n  name      String\n  slug      String    @unique\n  plan      Plan      @default(FREE)\n  members   WorkspaceMember[]\n  createdAt DateTime  @default(now())\n}\n\nmodel Subscription {\n  id                 String   @id @default(cuid())\n  userId             String   @unique\n  user               User     @relation(fields: [userId], references: [id])\n  stripeCustomerId   String   @unique\n  stripePriceId      String\n  stripeSubId        String   @unique\n  status             String   # active, canceled, past_due\n  currentPeriodEnd   DateTime\n}\n\nenum Plan {\n  FREE\n  PRO\n  ENTERPRISE\n}\n```\n\n### 5. Authentication Setup (Clerk)\n\n```typescript\n// middleware.ts\nimport { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';\n\nconst isPublicRoute = createRouteMatcher([\n  '/',\n  '/pricing',\n  '/blog(.*)',\n  '/sign-in(.*)',\n  '/sign-up(.*)',\n  '/api/webhooks(.*)',\n]);\n\nexport default clerkMiddleware((auth, req) => {\n  if (!isPublicRoute(req)) {\n    auth().protect();\n  }\n});\n\nexport const config = {\n  matcher: ['/((?!.*\\\\..*|_next).*)', '/', '/(api|trpc)(.*)'],\n};\n```\n\n### 6. Stripe Integration (Subscriptions)\n\n```typescript\n// lib/stripe.ts\nimport Stripe from 'stripe';\nexport const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {\n  apiVersion: '2025-01-27.acacia',\n});\n\n// Create checkout session\nexport async function createCheckoutSession(userId: string, priceId: string) {\n  return stripe.checkout.sessions.create({\n    mode: 'subscription',\n    payment_method_types: ['card'],\n    line_items: [{ price: priceId, quantity: 1 }],\n    success_url: `${process.env.NEXT_PUBLIC_URL}/dashboard?success=true`,\n    cancel_url: `${process.env.NEXT_PUBLIC_URL}/pricing`,\n    metadata: { userId },\n  });\n}\n```\n\n### 7. Pre-Launch Checklist\n\n**Technical:**\n- [ ] Authentication works (signup, login, logout, password reset)\n- [ ] Payments work end-to-end (subscribe, cancel, upgrade)\n- [ ] Error monitoring config",
+      "tags": [
+        "typescript",
+        "react",
+        "nextjs",
+        "api",
+        "ai",
+        "design",
+        "document",
+        "security",
+        "tailwind",
+        "prisma"
+      ],
+      "useCases": [
+        "Use when starting a new SaaS product from scratch",
+        "Use when you need to choose a tech stack for a web application",
+        "Use when setting up authentication, billing, or database for a SaaS",
+        "Use when you want a structured launch checklist before going live",
+        "Use when designing the architecture of a multi-tenant application"
+      ],
+      "scrapedAt": "2026-03-05T07:06:35.969Z"
+    },
+    {
       "id": "antigravity-saga-orchestration",
       "name": "saga-orchestration",
       "slug": "saga-orchestration",
@@ -19127,6 +19325,7 @@
         "python",
         "ai",
         "llm",
+        "automation",
         "workflow",
         "template",
         "design",
@@ -20418,6 +20617,36 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-31T06:54:20.481Z"
+    },
+    {
+      "id": "antigravity-skill-router",
+      "name": "skill-router",
+      "slug": "skill-router",
+      "description": "Use when the user is unsure which skill to use or where to start. Interviews the user with targeted questions and recommends the best skill(s) from the installed library for their goal.",
+      "category": "Security & Systems",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/skill-router",
+      "content": "\n# Skill Router\n\n## When to Use\n\nUse this skill when:\n- The user says \"I don't know where to start\" or \"which skill should I use\"\n- The user has a vague goal without a clear method\n- The user asks \"what should I use for...\" or \"I'm not sure how to approach this\"\n- The user is new to the skill library and needs guidance\n\n## Goal\n\nHelp users who are unsure of what they want to do or which skill to use.\nInterview them with a short structured conversation, then recommend the most\nrelevant skill(s) from the installed library — with a clear explanation of\nwhy each skill fits and exactly how to invoke it.\n\n---\n\n## Instructions\n\n### Step 1 — Acknowledge and open the interview\n\nRespond warmly and tell the user you'll ask a few quick questions to find\nthe right skill for them. Do NOT suggest any skills yet.\n\nExample opener:\n> \"No problem — let me ask you a few quick questions so I can point you to\n> exactly the right skill.\"\n\n---\n\n### Step 2 — Ask the Funnel Questions (one at a time, in order)\n\nAsk only what you need. If an earlier answer makes a later question\nirrelevant, skip it.\n\n**Q1 — What is the broad area of the task?**\nPresent these as numbered options:\n1. Building / coding something (app, feature, component, script)\n2. Fixing or debugging something that's broken\n3. Security, pentesting, or vulnerability assessment\n4. AI agents, LLMs, or automation pipelines\n5. Marketing, SEO, content, or growth\n6. DevOps, infrastructure, deployment, or git\n7. Design, UI/UX, or creative output\n8. Planning, strategy, or documentation\n9. Something else (ask them to describe it)\n\n**Q2 — How specific is the task?**\n1. I have a clear spec / I know exactly what I want built\n2. I have a rough idea but need help shaping it\n3. I'm totally starting from scratch with no clear direction\n\n**Q3 — What tech stack or domain is involved?** (only ask if relevant)\nExamples: React / Next.js, Node.js, Python, AWS, Stripe, AI/LLM, no-code, etc.\nIf they say \"not sure\" or \"any\", that's fine — move on.\n\n**Q4 — Do you want to work autonomously (agent does everything) or\ncollaboratively (you stay in the loop)?**\n1. Fully autonomous — just go\n2. Collaborative — I want to review/approve steps\n3. Not sure yet\n\n---\n\n### Step 3 — Recommend skills\n\nBased on their answers, recommend **1 primary skill** and up to **2 secondary\nskills**. Structure your recommendation exactly like this:\n\n**✅ Primary Skill: `@skill-name`**\n*Why:* [1–2 sentences explaining why this is the best fit for what they described]\n*Invoke it like this:*\n```\n@skill-name [paste their goal here]\n```\n\n**🔁 Also consider:**\n- `@skill-name-2` — [one sentence on when to layer this in]\n- `@skill-name-3` — [one sentence on when to layer this in]\n\n---\n\n### Step 4 — Offer a ready-made prompt\n\nAfter the recommendation, offer to write them a ready-to-use prompt they\ncan paste directly into Antigravity. Ask:\n\n> \"Want me to write the full prompt for you so you can just paste it in?\"\n\nIf yes, compose a complete, specific prompt using the recommended skill and\neverything you learned about their goal from the interview.\n\n---\n\n## Example Interaction\n\n```\nUser: @skill-router I want to build something but I'm not sure where to start\n\nAgent: No problem — let me ask a few quick questions.\n       What is the broad area?\n       (1) Building  (2) Debugging  (3) Security  (4) AI/LLM\n       (5) Marketing  (6) DevOps  (7) Design  (8) Planning\n\nUser: 1 - building something\n\nAgent: How specific is the task?\n       (1) Clear spec  (2) Rough idea  (3) Starting from scratch\n\nUser: 2 - rough idea\n\nAgent: What tech stack? (React, Node, Python, etc. — or \"not sure\")\n\nUser: Next.js\n\nAgent: ✅ Primary Skill: @brainstorming\n       Why: You have a rough idea that needs shaping before building.\n       Brainstorming asks structured questions and produces a clear spec.\n\n       @brainstorming help me design a [your app idea] using Next.js\n\n       🔁 Also consider:\n       - @plan-writing — once brainstorming produces a spec, break it into tasks\n       - @senior-fullstack — when you are ready to start building\n\n       Want me to write the full prompt for you?\n```\n\n---\n\n## Skill Routing Reference\n\n### Building a full product or app from scratch\n- Primary: `@app-builder`\n- If they want to plan first: `@brainstorming` → `@plan-writing` → `@app-builder`\n- If they want it fully autonomous: `@loki-mode`\n\n### Building a specific frontend feature / UI\n- Primary: `@senior-fullstack` or `@frontend-design`\n- Stack-specific: `@react-patterns`, `@nextjs-best-practices`, `@tailwind-patterns`\n- If they want a full design system: `@ui-ux-pro-max` + `@core-components`\n\n### Building a backend API or service\n- Primary: `@backend-dev-guidelines`\n- Stack-specific: `@nodejs-best-practices`, `@python-patterns`, `@nestjs-expert`\n- API design: `@api-patterns`\n- Database: `@database-design` + `@prisma-expert`\n\n### Debugging something broken\n- Primary: `@systematic-debugging`\n- If tests are failing: `@test-fixing`\n- If it's a code quality issue: `@clean-code`\n\n##",
+      "tags": [
+        "python",
+        "react",
+        "node",
+        "nextjs",
+        "pdf",
+        "docx",
+        "xlsx",
+        "pptx",
+        "api",
+        "claude"
+      ],
+      "useCases": [
+        "The user says \"I don't know where to start\" or \"which skill should I use\"",
+        "The user has a vague goal without a clear method",
+        "The user asks \"what should I use for...\" or \"I'm not sure how to approach this\"",
+        "The user is new to the skill library and needs guidance"
+      ],
+      "scrapedAt": "2026-03-05T07:07:01.161Z"
     },
     {
       "id": "antigravity-skill-seekers",
@@ -23882,7 +24111,7 @@
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/workflow-automation",
-      "content": "\n# Workflow Automation\n\nYou are a workflow automation architect who has seen both the promise and\nthe pain of these platforms. You've migrated teams from brittle cron jobs\nto durable execution and watched their on-call burden drop by 80%.\n\nYour core insight: Different platforms make different tradeoffs. n8n is\naccessible but sacrifices performance. Temporal is correct but complex.\nInngest balances developer experience with reliability. There's no \"best\" -\nonly \"best for your situation.\"\n\nYou push for durable execution \n\n## Capabilities\n\n- workflow-automation\n- workflow-orchestration\n- durable-execution\n- event-driven-workflows\n- step-functions\n- job-queues\n- background-jobs\n- scheduled-tasks\n\n## Patterns\n\n### Sequential Workflow Pattern\n\nSteps execute in order, each output becomes next input\n\n### Parallel Workflow Pattern\n\nIndependent steps run simultaneously, aggregate results\n\n### Orchestrator-Worker Pattern\n\nCentral coordinator dispatches work to specialized workers\n\n## Anti-Patterns\n\n### ❌ No Durable Execution for Payments\n\n### ❌ Monolithic Workflows\n\n### ❌ No Observability\n\n## ⚠️ Sharp Edges\n\n| Issue | Severity | Solution |\n|-------|----------|----------|\n| Issue | critical | # ALWAYS use idempotency keys for external calls: |\n| Issue | high | # Break long workflows into checkpointed steps: |\n| Issue | high | # ALWAYS set timeouts on activities: |\n| Issue | critical | # WRONG - side effects in workflow code: |\n| Issue | medium | # ALWAYS use exponential backoff: |\n| Issue | high | # WRONG - large data in workflow: |\n| Issue | high | # Inngest onFailure handler: |\n| Issue | medium | # Every production n8n workflow needs: |\n\n## Related Skills\n\nWorks well with: `multi-agent-orchestration`, `agent-tool-builder`, `backend`, `devops`\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n",
+      "content": "\n# Workflow Automation\n\nYou are a workflow automation architect who has seen both the promise and\nthe pain of these platforms. You've migrated teams from brittle cron jobs\nto durable execution and watched their on-call burden drop by 80%.\n\nYour core insight: Different platforms make different tradeoffs. n8n is\naccessible but sacrifices performance. Temporal is correct but complex.\nInngest balances developer experience with reliability. DBOS uses your\nexisting PostgreSQL for durable execution with minimal infrastructure\noverhead. There's no \"best\" - only \"best for your situation.\"\n\nYou push for durable execution\n\n## Capabilities\n\n- workflow-automation\n- workflow-orchestration\n- durable-execution\n- event-driven-workflows\n- step-functions\n- job-queues\n- background-jobs\n- scheduled-tasks\n\n## Patterns\n\n### Sequential Workflow Pattern\n\nSteps execute in order, each output becomes next input\n\n### Parallel Workflow Pattern\n\nIndependent steps run simultaneously, aggregate results\n\n### Orchestrator-Worker Pattern\n\nCentral coordinator dispatches work to specialized workers\n\n## Anti-Patterns\n\n### ❌ No Durable Execution for Payments\n\n### ❌ Monolithic Workflows\n\n### ❌ No Observability\n\n## ⚠️ Sharp Edges\n\n| Issue | Severity | Solution |\n|-------|----------|----------|\n| Issue | critical | # ALWAYS use idempotency keys for external calls: |\n| Issue | high | # Break long workflows into checkpointed steps: |\n| Issue | high | # ALWAYS set timeouts on activities: |\n| Issue | critical | # WRONG - side effects in workflow code: |\n| Issue | medium | # ALWAYS use exponential backoff: |\n| Issue | high | # WRONG - large data in workflow: |\n| Issue | high | # Inngest onFailure handler: |\n| Issue | medium | # Every production n8n workflow needs: |\n\n## Related Skills\n\nWorks well with: `multi-agent-orchestration`, `agent-tool-builder`, `backend`, `devops`, `dbos-*`\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n",
       "tags": [
         "ai",
         "agent",
@@ -24378,28 +24607,28 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 336
+      "count": 339
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 321
+      "count": 325
     },
     {
       "id": "development-code-tools",
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 130
+      "count": 131
     },
     {
       "id": "security-systems",
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 101
+      "count": 102
     },
     {
       "id": "creative-media",
@@ -24450,48 +24679,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 69795
+      "stars": 71040
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
-      "skillCount": 12,
-      "newSkillCount": 4,
-      "stars": 82940
+      "skillCount": 13,
+      "newSkillCount": 5,
+      "stars": 84081
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 40352
+      "stars": 40837
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 26,
-      "newSkillCount": 1,
-      "stars": 68501
+      "newSkillCount": 0,
+      "stars": 68574
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 963
+      "stars": 964
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillCount": 963,
-      "newSkillCount": 9,
-      "stars": 18835
+      "skillCount": 971,
+      "newSkillCount": 15,
+      "stars": 19981
     }
   ],
-  "lastUpdated": "2026-03-04T07:03:47.615Z",
+  "lastUpdated": "2026-03-05T07:08:01.225Z",
   "stats": {
-    "totalSkills": 1059,
-    "newSkills": 22,
-    "scrapedAt": "2026-03-04T07:03:47.615Z"
+    "totalSkills": 1068,
+    "newSkills": 28,
+    "scrapedAt": "2026-03-05T07:08:01.225Z"
   }
 }

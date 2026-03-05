@@ -1,0 +1,24 @@
+{
+  "id": "antigravity-professional-proofreader",
+  "name": "professional-proofreader",
+  "slug": "professional-proofreader",
+  "description": "Use when a user asks to \"proofread\", \"review and correct\", \"fix grammar\", \"improve readability while keeping my voice\", and to proofread a document file and save an updated version.\n",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/professional-proofreader",
+  "content": "\n# Professional Proofreader\n\n## Overview\n\nThis skill transforms flawed writing — whether pasted text or uploaded documents — into publication-ready prose without altering the author’s intent.\nIt eliminates grammatical, spelling, punctuation, clarity, and tone issues while strictly preserving the author’s voice and intent.\nReturns a corrected version plus a structured modification log, or generates an updated file when requested. Not for code editing or technical refactoring.\n\n---\n\n## When to Use\n\n- Use when user asks to \"proofread\", \"review and correct\", \"fix grammar\", \"polish this text\", \"improve readability while keeping my voice\".\n- Use when user asks to proofread a document file (like .docx, .pdf, .txt) and save the updated version as new file with 'UPDATED_' prefix.\n\n---\n\n# WORKFLOW MODES\n\nThis skill operates in two modes:\n1. Inline Text Mode\n2. File Processing Mode\n\n### MODE 1: Inline Text\n\nRefer [markdown](references/inline-text-mode.md) for complete inline text mode.\n\n### MODE 2: File Processing\n\nTrigger when user says:\n\n- \"Proofread [filename].[extension]\n- \"Edit this document\"\n- \"Correct grammar in this file\"\n- \"Save updated version\"\n- \"Add prefix UPDATED_\"\n- \"Return corrected .[extension]\"\n\nRefer [markdown](references/file-processing-mode.md) for complete file processing mode.\n\n---\n\n## Best Practices\n\n### ✅ **Do:** [Good practice]\n- Always include modification explanations.\n- Always keep quality standards equivalent to: Academic proofreading, business document refinement, pre-publication review.\n- Always follow below editing standards:\n\n#### Grammar\n- Subject-verb agreement  \n- Tense consistency \n- Article usage \n- Prepositions\n- Pronoun clarity \n\n#### Spelling\n- Correct typos \n- Maintain original spelling variant (US/UK)\n\n#### Punctuation\n- Commas \n- Apostrophes \n- Quotation marks \n- Sentence boundaries \n\n#### Style & Tone\n- Maintain author voice \n- Avoid unnecessary formalization \n- Preserve rhetorical choices \n\n#### Readability\n- Improve structure \n- Enhance logical flow \n- Remove redundancy \n\n### ❌ **Don't:** [What to avoid] \n- Never alter meaning.\n- Never drop formatting intentionally.\n- Never change file name logic beyond request.\n- Never expand the content\n\n---\n\n# Output Rules\n\nIf inline:\n-> Return Corrected Version + Modifications list.\n\nIf file rewrite:\n-> Save updated file.\n-> Confirm filename.\n-> Provide modifications list unless suppressed.\n\nGive friendly message to user in the end.\n\n---",
+  "tags": [
+    "pdf",
+    "docx",
+    "markdown",
+    "ai",
+    "workflow",
+    "document"
+  ],
+  "useCases": [
+    "Use when user asks to \"proofread\", \"review and correct\", \"fix grammar\", \"polish this text\", \"improve readability while keeping my voice\".",
+    "Use when user asks to proofread a document file (like .docx, .pdf, .txt) and save the updated version as new file with 'UPDATED_' prefix."
+  ],
+  "scrapedAt": "2026-03-05T07:06:13.834Z"
+}

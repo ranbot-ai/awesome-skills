@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-lightning-factory-explainer",
+  "name": "lightning-factory-explainer",
+  "slug": "lightning-factory-explainer",
+  "description": "Explain Bitcoin Lightning channel factories and the SuperScalar protocol — scalable Lightning onboarding using shared UTXOs, Decker-Wattenhofer trees, timeout-signature trees, MuSig2, and Taproot. No soft fork required.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/lightning-factory-explainer",
+  "content": "\n## Use this skill when\n\n- Explaining Bitcoin Lightning channel factories and scalable onboarding\n- Discussing the SuperScalar protocol architecture and design\n- Needing guidance on Decker-Wattenhofer trees, timeout-signature trees, or MuSig2\n\n## Do not use this skill when\n\n- The task is unrelated to Bitcoin or Lightning Network scaling\n- You need a different blockchain or Layer 2 outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n\nFor Lightning channel factory concepts, architecture, and implementation details, refer to the SuperScalar project:\n\nhttps://github.com/8144225309/SuperScalar\n\nSuperScalar implements Lightning channel factories that onboard N users in one shared UTXO combining Decker-Wattenhofer invalidation trees, timeout-signature trees, and Poon-Dryja channels. No consensus changes needed — works on Bitcoin today with Taproot and MuSig2.\n\n## Purpose\n\nExpert guide for understanding Bitcoin Lightning Network channel factories and the SuperScalar protocol. Covers scalable onboarding, shared UTXOs, Decker-Wattenhofer invalidation trees, timeout-signature trees, Poon-Dryja channels, MuSig2 (BIP-327), and Taproot — all without requiring any soft fork.\n\n## Key Topics\n\n- Lightning channel factories and multi-party channels\n- SuperScalar protocol architecture\n- Decker-Wattenhofer invalidation trees\n- Timeout-signature trees\n- MuSig2 key aggregation (BIP-327)\n- Taproot script trees\n- LSP (Lightning Service Provider) onboarding patterns\n- Shared UTXO management\n\n## References\n\n- SuperScalar project: https://github.com/8144225309/SuperScalar\n- Website: https://SuperScalar.win\n- Original proposal: https://delvingbitcoin.org/t/superscalar-laddered-timeout-tree-structured-decker-wattenhofer-factories/1143\n",
+  "tags": [
+    "ai",
+    "design"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-03-05T07:05:16.216Z"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-llm-prompt-optimizer",
+  "name": "llm-prompt-optimizer",
+  "slug": "llm-prompt-optimizer",
+  "description": "Use when improving prompts for any LLM. Applies proven prompt engineering techniques to boost output quality, reduce hallucinations, and cut token usage.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/llm-prompt-optimizer",
+  "content": "\n# LLM Prompt Optimizer\n\n## Overview\n\nThis skill transforms weak, vague, or inconsistent prompts into precision-engineered instructions that reliably produce high-quality outputs from any LLM (Claude, Gemini, GPT-4, Llama, etc.). It applies systematic prompt engineering frameworks — from zero-shot to few-shot, chain-of-thought, and structured output patterns.\n\n## When to Use This Skill\n\n- Use when a prompt returns inconsistent, vague, or hallucinated results\n- Use when you need structured/JSON output from an LLM reliably\n- Use when designing system prompts for AI agents or chatbots\n- Use when you want to reduce token usage without sacrificing quality\n- Use when implementing chain-of-thought reasoning for complex tasks\n- Use when prompts work on one model but fail on another\n\n## Step-by-Step Guide\n\n### 1. Diagnose the Weak Prompt\n\nBefore optimizing, identify which problem pattern applies:\n\n| Problem | Symptom | Fix |\n|---------|---------|-----|\n| Too vague | Generic, unhelpful answers | Add role + context + constraints |\n| No structure | Unformatted, hard-to-parse output | Specify output format explicitly |\n| Hallucination | Confident wrong answers | Add \"say I don't know if unsure\" |\n| Inconsistent | Different answers each run | Add few-shot examples |\n| Too long | Verbose, padded responses | Add length constraints |\n\n### 2. Apply the RSCIT Framework\n\nEvery optimized prompt should have:\n\n- **R** — **Role**: Who is the AI in this interaction?\n- **S** — **Situation**: What context does it need?\n- **C** — **Constraints**: What are the rules and limits?\n- **I** — **Instructions**: What exactly should it do?\n- **T** — **Template**: What should the output look like?\n\n**Before (weak prompt):**\n```\nExplain machine learning.\n```\n\n**After (optimized prompt):**\n```\nYou are a senior ML engineer explaining concepts to a junior developer.\n\nContext: The developer has 1 year of Python experience but no ML background.\n\nTask: Explain supervised machine learning in simple terms.\n\nConstraints:\n- Use an analogy from everyday life\n- Maximum 200 words\n- No mathematical formulas\n- End with one actionable next step\n\nFormat: Plain prose, no bullet points.\n```\n\n### 3. Chain-of-Thought (CoT) Pattern\n\nFor reasoning tasks, instruct the model to think step-by-step:\n\n```\nSolve this problem step by step, showing your work at each stage.\nOnly provide the final answer after completing all reasoning steps.\n\nProblem: [your problem here]\n\nThinking process:\nStep 1: [identify what's given]\nStep 2: [identify what's needed]\nStep 3: [apply logic or formula]\nStep 4: [verify the answer]\n\nFinal Answer:\n```\n\n### 4. Few-Shot Examples Pattern\n\nProvide 2-3 examples to establish the pattern:\n\n```\nClassify the sentiment of customer reviews as POSITIVE, NEGATIVE, or NEUTRAL.\n\nExamples:\nReview: \"This product exceeded my expectations!\" -> POSITIVE\nReview: \"It arrived broken and support was useless.\" -> NEGATIVE  \nReview: \"Product works as described, nothing special.\" -> NEUTRAL\n\nNow classify:\nReview: \"[your review here]\" ->\n```\n\n### 5. Structured JSON Output Pattern\n\n```\nExtract the following information from the text below and return it as valid JSON only.\nDo not include any explanation or markdown — just the raw JSON object.\n\nSchema:\n{\n  \"name\": string,\n  \"email\": string | null,\n  \"company\": string | null,\n  \"role\": string | null\n}\n\nText: [input text here]\n```\n\n### 6. Reduce Hallucination Pattern\n\n```\nAnswer the following question based ONLY on the provided context.\nIf the answer is not contained in the context, respond with exactly: \"I don't have enough information to answer this.\"\nDo not make up or infer information not present in the context.\n\nContext:\n[your context here]\n\nQuestion: [your question here]\n```\n\n### 7. Prompt Compression Techniques\n\nReduce token count without losing effectiveness:\n\n```\n# Verbose (expensive)\n\"Please carefully analyze the following code and provide a detailed explanation of \nwhat it does, how it works, and any potential issues you might find.\"\n\n# Compressed (efficient, same quality)\n\"Analyze this code: explain what it does, how it works, and flag any issues.\"\n```\n\n## Best Practices\n\n- ✅ **Do:** Always specify the output format (JSON, markdown, plain text, bullet list)\n- ✅ **Do:** Use delimiters (```, ---) to separate instructions from content\n- ✅ **Do:** Test prompts with edge cases (empty input, unusual data)\n- ✅ **Do:** Version your system prompts in source control\n- ✅ **Do:** Add \"think step by step\" for math, logic, or multi-step tasks\n- ❌ **Don't:** Use negative-only instructions (\"don't be verbose\") — add positive alternatives\n- ❌ **Don't:** Assume the model knows your codebase context — always include it\n- ❌ **Don't:** Use the same prompt across different models without testing — they behave differently\n\n## Prompt Audit Checklist\n\nBefore using a prompt in production:\n\n- [ ] Does it have a clear role/persona?\n- [ ] Is the output format explicitly defined?\n- [ ] Are edge cases handled (empty input, ambiguous data)?\n- [ ] Is",
+  "tags": [
+    "python",
+    "markdown",
+    "claude",
+    "ai",
+    "agent",
+    "llm",
+    "gpt",
+    "template",
+    "design",
+    "cro"
+  ],
+  "useCases": [
+    "Use when a prompt returns inconsistent, vague, or hallucinated results",
+    "Use when you need structured/JSON output from an LLM reliably",
+    "Use when designing system prompts for AI agents or chatbots",
+    "Use when you want to reduce token usage without sacrificing quality",
+    "Use when implementing chain-of-thought reasoning for complex tasks"
+  ],
+  "scrapedAt": "2026-03-05T07:05:22.089Z"
+}
