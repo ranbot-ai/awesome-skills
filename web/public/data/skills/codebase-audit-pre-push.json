@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-codebase-audit-pre-push",
+  "name": "codebase-audit-pre-push",
+  "slug": "codebase-audit-pre-push",
+  "description": "Deep audit before GitHub push: removes junk files, dead code, security holes, and optimization issues. Checks every file line-by-line for production readiness.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/codebase-audit-pre-push",
+  "content": "\n# Pre-Push Codebase Audit\n\nAs a senior engineer, you're doing the final review before pushing this code to GitHub. Check everything carefully and fix problems as you find them.  \n\n## When to Use This Skill  \n\n- User requests \"audit the codebase\" or \"review before push\"  \n- Before making the first push to GitHub  \n- Before making a repository public  \n- Pre-production deployment review  \n- User asks to \"clean up the code\" or \"optimize everything\"  \n\n## Your Job  \n\nReview the entire codebase file by file. Read the code carefully. Fix issues right away. Don't just note problems—make the necessary changes.  \n\n## Audit Process  \n\n### 1. Clean Up Junk Files  \n\nStart by looking for files that shouldn't be on GitHub:  \n\n**Delete these immediately:**  \n- OS files: `.DS_Store`, `Thumbs.db`, `desktop.ini`  \n- Logs: `*.log`, `npm-debug.log*`, `yarn-error.log*`  \n- Temp files: `*.tmp`, `*.temp`, `*.cache`, `*.swp`  \n- Build output: `dist/`, `build/`, `.next/`, `out/`, `.cache/`  \n- Dependencies: `node_modules/`, `vendor/`, `__pycache__/`, `*.pyc`  \n- IDE files: `.idea/`, `.vscode/` (ask user first), `*.iml`, `.project`  \n- Backup files: `*.bak`, `*_old.*`, `*_backup.*`, `*_copy.*`  \n- Test artifacts: `coverage/`, `.nyc_output/`, `test-results/`  \n- Personal junk: `TODO.txt`, `NOTES.txt`, `scratch.*`, `test123.*`  \n\n**Critical - Check for secrets:**  \n- `.env` files (should never be committed)  \n- Files containing: `password`, `api_key`, `token`, `secret`, `private_key`  \n- `*.pem`, `*.key`, `*.cert`, `credentials.json`, `serviceAccountKey.json`  \n\nIf you find secrets in the code, mark it as a CRITICAL BLOCKER.  \n\n### 2. Fix .gitignore  \n\nCheck if the `.gitignore` file exists and is thorough. If it’s missing or not complete, update it to include all junk file patterns above. Ensure that `.env.example` exists with keys but no values.  \n\n### 3. Audit Every Source File  \n\nLook through each code file and check:  \n\n**Dead Code (remove immediately):**  \n- Commented-out code blocks  \n- Unused imports/requires  \n- Unused variables (declared but never used)  \n- Unused functions (defined but never called)  \n- Unreachable code (after `return`, inside `if (false)`)  \n- Duplicate logic (same code in multiple places—combine)  \n\n**Code Quality (fix issues as you go):**  \n- Vague names: `data`, `info`, `temp`, `thing` → rename to be descriptive  \n- Magic numbers: `if (status === 3)` → extract to named constant  \n- Debug statements: remove `console.log`, `print()`, `debugger`  \n- TODO/FIXME comments: either resolve them or delete them  \n- TypeScript `any`: add proper types or explain why `any` is used  \n- Use `===` instead of `==` in JavaScript  \n- Functions longer than 50 lines: consider splitting  \n- Nested code greater than 3 levels: refactor with early returns  \n\n**Logic Issues (critical):**  \n- Missing null/undefined checks  \n- Array operations on potentially empty arrays  \n- Async functions that are not awaited  \n- Promises without `.catch()` or try/catch  \n- Possibilities for infinite loops  \n- Missing `default` in switch statements  \n\n### 4. Security Check (Zero Tolerance)  \n\n**Secrets:** Search for hardcoded passwords, API keys, and tokens. They must be in environment variables.  \n\n**Injection vulnerabilities:**  \n- SQL: No string concatenation in queries—use parameterized queries only  \n- Command injection: No `exec()` with user-provided input  \n- Path traversal: No file paths from user input without validation  \n- XSS: No `innerHTML` or `dangerouslySetInnerHTML` with user data  \n\n**Auth/Authorization:**  \n- Passwords hashed with bcrypt/argon2 (never MD5 or plain text)  \n- Protected routes check for authentication  \n- Authorization checks on the server side, not just in the UI  \n- No IDOR: verify users own the resources they are accessing  \n\n**Data exposure:**  \n- API responses do not leak unnecessary information  \n- Error messages do not expose stack traces or database details  \n- Pagination is present on list endpoints  \n\n**Dependencies:**  \n- Run `npm audit` or an equivalent tool  \n- Flag critically outdated or vulnerable packages  \n\n### 5. Scalability Check  \n\n**Database:**  \n- N+1 queries: loops with database calls inside → use JOINs or batch queries  \n- Missing indexes on WHERE/ORDER BY columns  \n- Unbounded queries: add LIMIT or pagination  \n- Avoid `SELECT *`: specify columns  \n\n**API Design:**  \n- Heavy operations (like email, reports, file processing) → move to a background queue  \n- Rate limiting on public endpoints  \n- Caching for data that is read frequently  \n- Timeouts on external calls  \n\n**Code:**  \n- No global mutable state  \n- Clean up event listeners (to avoid memory leaks)  \n- Stream large files instead of loading them into memory  \n\n### 6. Architecture Check  \n\n**Organization:**  \n- Clear folder structure  \n- Files are in logical locations  \n- No \"misc\" or \"stuff\" folders  \n\n**Separation of concerns:**  \n- UI layer: only responsible for rendering  \n- Business logic: pure functions  \n- Data layer: isolated",
+  "tags": [
+    "javascript",
+    "typescript",
+    "node",
+    "api",
+    "ai",
+    "design",
+    "document",
+    "image",
+    "security",
+    "rag"
+  ],
+  "useCases": [
+    "User requests \"audit the codebase\" or \"review before push\"",
+    "Before making the first push to GitHub",
+    "Before making a repository public",
+    "Pre-production deployment review",
+    "User asks to \"clean up the code\" or \"optimize everything\""
+  ],
+  "scrapedAt": "2026-03-06T07:01:25.618Z"
+}

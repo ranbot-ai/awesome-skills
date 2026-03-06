@@ -1,0 +1,24 @@
+{
+  "id": "antigravity-odoo-orm-expert",
+  "name": "odoo-orm-expert",
+  "slug": "odoo-orm-expert",
+  "description": "Master Odoo ORM patterns: search, browse, create, write, domain filters, computed fields, and performance-safe query techniques.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-orm-expert",
+  "content": "\n# Odoo ORM Expert\n\n## Overview\n\nThis skill teaches you Odoo's Object Relational Mapper (ORM) in depth. It covers reading/writing records, building domain filters, working with relational fields, and avoiding common performance pitfalls like N+1 queries.\n\n## When to Use This Skill\n\n- Writing `search()`, `browse()`, `create()`, `write()`, or `unlink()` calls.\n- Building complex domain filters for views or server actions.\n- Implementing computed, stored, and related fields.\n- Debugging slow queries or optimizing bulk operations.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-orm-expert` and describe what data operation you need.\n2. **Get Code**: Receive correct, idiomatic Odoo ORM code with explanations.\n3. **Optimize**: Ask for performance review on existing ORM code.\n\n## Examples\n\n### Example 1: Search with Domain Filters\n\n```python\n# Find all confirmed sale orders for a specific customer, created this year\nimport datetime\n\nstart_of_year = datetime.date.today().replace(month=1, day=1).strftime('%Y-%m-%d')\n\norders = self.env['sale.order'].search([\n    ('partner_id', '=', partner_id),\n    ('state', '=', 'sale'),\n    ('date_order', '>=', start_of_year),\n], order='date_order desc', limit=50)\n\n# Note: pass dates as 'YYYY-MM-DD' strings in domains,\n# NOT as fields.Date objects — the ORM serializes them correctly.\n```\n\n### Example 2: Computed Field\n\n```python\ntotal_order_count = fields.Integer(\n    string='Total Orders',\n    compute='_compute_total_order_count',\n    store=True\n)\n\n@api.depends('sale_order_ids')\ndef _compute_total_order_count(self):\n    for record in self:\n        record.total_order_count = len(record.sale_order_ids)\n```\n\n### Example 3: Safe Bulk Write (avoid N+1)\n\n```python\n# ✅ GOOD: One query for all records\npartners = self.env['res.partner'].search([('country_id', '=', False)])\npartners.write({'country_id': self.env.ref('base.us').id})\n\n# ❌ BAD: Triggers a separate query per record\nfor partner in partners:\n    partner.country_id = self.env.ref('base.us').id\n```\n\n## Best Practices\n\n- ✅ **Do:** Use `mapped()`, `filtered()`, and `sorted()` on recordsets instead of Python loops.\n- ✅ **Do:** Use `sudo()` sparingly and only when you understand the security implications.\n- ✅ **Do:** Prefer `search_count()` over `len(search(...))` when you only need a count.\n- ✅ **Do:** Use `with_context(...)` to pass context values cleanly rather than modifying `self.env.context` directly.\n- ❌ **Don't:** Call `search()` inside a loop — this is the #1 Odoo performance killer.\n- ❌ **Don't:** Use raw SQL unless absolutely necessary; use ORM for all standard operations.\n- ❌ **Don't:** Pass Python `datetime`/`date` objects directly into domain tuples — always stringify them as `'YYYY-MM-DD'`.\n\n## Limitations\n\n- Does not cover **`cr.execute()` raw SQL** patterns in depth — use the Odoo performance tuner skill for SQL-level optimization.\n- **Stored computed fields** can cause significant write overhead at scale; this skill does not cover partitioning strategies.\n- Does not cover **transient models** (`models.TransientModel`) or wizard patterns.\n- ORM behavior can differ slightly between Odoo SaaS and On-Premise due to config overrides.\n",
+  "tags": [
+    "python",
+    "api",
+    "ai",
+    "security"
+  ],
+  "useCases": [
+    "Writing `search()`, `browse()`, `create()`, `write()`, or `unlink()` calls.",
+    "Building complex domain filters for views or server actions.",
+    "Implementing computed, stored, and related fields.",
+    "Debugging slow queries or optimizing bulk operations."
+  ],
+  "scrapedAt": "2026-03-06T07:03:55.129Z"
+}

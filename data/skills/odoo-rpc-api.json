@@ -1,0 +1,26 @@
+{
+  "id": "antigravity-odoo-rpc-api",
+  "name": "odoo-rpc-api",
+  "slug": "odoo-rpc-api",
+  "description": "Expert on Odoo's external JSON-RPC and XML-RPC APIs. Covers authentication, model calls, record CRUD, and real-world integration examples in Python, JavaScript, and curl.",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-rpc-api",
+  "content": "\n# Odoo RPC API\n\n## Overview\n\nOdoo exposes a powerful external API via JSON-RPC and XML-RPC, allowing any external application to read, create, update, and delete records. This skill guides you through authenticating, calling models, and building robust integrations.\n\n## When to Use This Skill\n\n- Connecting an external app (e.g., Django, Node.js, a mobile app) to Odoo.\n- Running automated scripts to import/export data from Odoo.\n- Building a middleware layer between Odoo and a third-party platform.\n- Debugging API authentication or permission errors.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-rpc-api` and describe the integration you need.\n2. **Generate**: Get copy-paste ready RPC call code in Python, JavaScript, or curl.\n3. **Debug**: Paste an error and get a diagnosis with a corrected call.\n\n## Examples\n\n### Example 1: Authenticate and Read Records (Python)\n\n```python\nimport xmlrpc.client\n\nurl = 'https://myodoo.example.com'\ndb = 'my_database'\nusername = 'admin'\npassword = 'my_api_key'  # Use API keys, not passwords, in production\n\n# Step 1: Authenticate\ncommon = xmlrpc.client.ServerProxy(f'{url}/xmlrpc/2/common')\nuid = common.authenticate(db, username, password, {})\nprint(f\"Authenticated as UID: {uid}\")\n\n# Step 2: Call models\nmodels = xmlrpc.client.ServerProxy(f'{url}/xmlrpc/2/object')\n\n# Search confirmed sale orders\norders = models.execute_kw(db, uid, password,\n    'sale.order', 'search_read',\n    [[['state', '=', 'sale']]],\n    {'fields': ['name', 'partner_id', 'amount_total'], 'limit': 10}\n)\nfor order in orders:\n    print(order)\n```\n\n### Example 2: Create a Record (Python)\n\n```python\nnew_partner_id = models.execute_kw(db, uid, password,\n    'res.partner', 'create',\n    [{'name': 'Acme Corp', 'email': 'info@acme.com', 'is_company': True}]\n)\nprint(f\"Created partner ID: {new_partner_id}\")\n```\n\n### Example 3: JSON-RPC via curl\n\n```bash\ncurl -X POST https://myodoo.example.com/web/dataset/call_kw \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"call\",\n    \"id\": 1,\n    \"params\": {\n      \"model\": \"res.partner\",\n      \"method\": \"search_read\",\n      \"args\": [[[\"is_company\", \"=\", true]]],\n      \"kwargs\": {\"fields\": [\"name\", \"email\"], \"limit\": 5}\n    }\n  }'\n# Note: \"id\" is required by the JSON-RPC 2.0 spec to correlate responses.\n# Odoo 16+ also supports the /web/dataset/call_kw endpoint but\n# prefer /web/dataset/call_kw for model method calls.\n```\n\n## Best Practices\n\n- ✅ **Do:** Use **API Keys** (Settings → Technical → API Keys) instead of passwords — available from Odoo 14+.\n- ✅ **Do:** Use `search_read` instead of `search` + `read` to reduce network round trips.\n- ✅ **Do:** Always handle connection errors and implement retry logic with exponential backoff in production.\n- ✅ **Do:** Store credentials in environment variables or a secrets manager (e.g., AWS Secrets Manager, `.env` file).\n- ❌ **Don't:** Hardcode passwords or API keys directly in scripts — rotate them and use env vars.\n- ❌ **Don't:** Call the API in a tight loop without batching — bulk operations reduce server load significantly.\n- ❌ **Don't:** Use the master admin password for API integrations — create a dedicated integration user with minimum required permissions.\n\n## Limitations\n\n- Does not cover **OAuth2 or session-cookie-based authentication** — the examples use API key (token) auth only.\n- **Rate limiting** is not built into the Odoo XMLRPC layer; you must implement throttling client-side.\n- The XML-RPC endpoint (`/xmlrpc/2/`) does not support file uploads — use the REST-based `ir.attachment` model via JSON-RPC for binary data.\n- Odoo.sh (SaaS) may block some API calls depending on plan; verify your subscription supports external API access.\n",
+  "tags": [
+    "python",
+    "javascript",
+    "node",
+    "api",
+    "ai",
+    "aws"
+  ],
+  "useCases": [
+    "Connecting an external app (e.g., Django, Node.js, a mobile app) to Odoo.",
+    "Running automated scripts to import/export data from Odoo.",
+    "Building a middleware layer between Odoo and a third-party platform.",
+    "Debugging API authentication or permission errors."
+  ],
+  "scrapedAt": "2026-03-06T07:03:56.686Z"
+}

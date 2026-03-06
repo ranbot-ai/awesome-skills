@@ -1,0 +1,27 @@
+{
+  "id": "antigravity-odoo-qweb-templates",
+  "name": "odoo-qweb-templates",
+  "slug": "odoo-qweb-templates",
+  "description": "Expert in Odoo QWeb templating for PDF reports, email templates, and website pages. Covers t-if, t-foreach, t-field, and report actions.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-qweb-templates",
+  "content": "\n# Odoo QWeb Templates\n\n## Overview\n\nQWeb is Odoo's primary templating engine, used for PDF reports, website pages, and email templates. This skill generates correct, well-structured QWeb XML with proper directives, translation support, and report action bindings.\n\n## When to Use This Skill\n\n- Creating a custom PDF report (invoice, delivery slip, certificate).\n- Building a QWeb email template triggered by workflow actions.\n- Designing Odoo website pages with dynamic content.\n- Debugging QWeb rendering errors (`t-if`, `t-foreach` issues).\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-qweb-templates` and describe the report or template needed.\n2. **Generate**: Receive a complete `ir.actions.report` record and QWeb template.\n3. **Debug**: Paste a broken template to identify and fix rendering issues.\n\n## Examples\n\n### Example 1: Custom PDF Report\n\n```xml\n<!-- Report Action -->\n<record id=\"action_report_patient_card\" model=\"ir.actions.report\">\n    <field name=\"name\">Patient Card</field>\n    <field name=\"model\">hospital.patient</field>\n    <field name=\"report_type\">qweb-pdf</field>\n    <field name=\"report_name\">hospital_management.report_patient_card</field>\n    <field name=\"binding_model_id\" ref=\"model_hospital_patient\"/>\n</record>\n\n<!-- QWeb Template -->\n<template id=\"report_patient_card\">\n    <t t-call=\"web.html_container\">\n        <t t-foreach=\"docs\" t-as=\"doc\">\n            <t t-call=\"web.external_layout\">\n                <div class=\"page\">\n                    <h2>Patient Card</h2>\n                    <table class=\"table table-bordered\">\n                        <tr>\n                            <td><strong>Name:</strong></td>\n                            <td><t t-field=\"doc.name\"/></td>\n                        </tr>\n                        <tr>\n                            <td><strong>Doctor:</strong></td>\n                            <td><t t-field=\"doc.doctor_id.name\"/></td>\n                        </tr>\n                        <tr>\n                            <td><strong>Status:</strong></td>\n                            <td><t t-field=\"doc.state\"/></td>\n                        </tr>\n                    </table>\n                </div>\n            </t>\n        </t>\n    </t>\n</template>\n```\n\n### Example 2: Conditional Rendering\n\n```xml\n<!-- Show a warning block only if the patient is not confirmed -->\n<t t-if=\"doc.state == 'draft'\">\n    <div class=\"alert alert-warning\">\n        <strong>Warning:</strong> This patient has not been confirmed yet.\n    </div>\n</t>\n```\n\n## Best Practices\n\n- ✅ **Do:** Use `t-field` for model fields — Odoo auto-formats dates, monetary values, and booleans correctly.\n- ✅ **Do:** Use `t-out` (Odoo 15+) for safe HTML output of non-field strings. Use `t-esc` only on Odoo 14 and below (it HTML-escapes output).\n- ✅ **Do:** Call `web.external_layout` for PDF reports to automatically include the company header, footer, and logo.\n- ✅ **Do:** Use `_lt()` (lazy translation) for translatable string literals inside Python report helpers, not inline `t-esc`.\n- ❌ **Don't:** Use raw Python expressions inside QWeb — compute values in the model or a report `_get_report_values()` helper.\n- ❌ **Don't:** Forget `t-as` when using `t-foreach`; without it, you can't access the current record in the loop body.\n- ❌ **Don't:** Use `t-esc` where you intend to render HTML content — it will escape the tags and print them as raw text.\n\n## Limitations\n\n- Does not cover **website controller routing** for dynamic QWeb pages — that requires Python `http.route` knowledge.\n- **Email template** QWeb has different variable scope than report QWeb (`object` vs `docs`) — this skill primarily focuses on PDF reports.\n- QWeb JavaScript (used in Kanban/Form widgets) is a different engine; this skill covers **server-side QWeb only**.\n- Does not cover **wkhtmltopdf configuration** for PDF rendering issues (page size, margins, header/footer overlap).\n",
+  "tags": [
+    "python",
+    "javascript",
+    "pdf",
+    "ai",
+    "workflow",
+    "template",
+    "design"
+  ],
+  "useCases": [
+    "Creating a custom PDF report (invoice, delivery slip, certificate).",
+    "Building a QWeb email template triggered by workflow actions.",
+    "Designing Odoo website pages with dynamic content.",
+    "Debugging QWeb rendering errors (`t-if`, `t-foreach` issues)."
+  ],
+  "scrapedAt": "2026-03-06T07:03:56.395Z"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "antigravity-odoo-docker-deployment",
+  "name": "odoo-docker-deployment",
+  "slug": "odoo-docker-deployment",
+  "description": "Production-ready Docker and docker-compose setup for Odoo with PostgreSQL, persistent volumes, environment-based configuration, and Nginx reverse proxy.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-docker-deployment",
+  "content": "\n# Odoo Docker Deployment\n\n## Overview\n\nThis skill provides a complete, production-ready Docker setup for Odoo, including PostgreSQL, persistent file storage, environment variable configuration, and an optional Nginx reverse proxy with SSL. It covers both development and production configurations.\n\n## When to Use This Skill\n\n- Spinning up a local Odoo development environment with Docker.\n- Deploying Odoo to a VPS or cloud server (AWS, DigitalOcean, etc.).\n- Troubleshooting Odoo container startup failures or database connection errors.\n- Adding a reverse proxy with SSL to an existing Odoo Docker setup.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-docker-deployment` and describe your deployment scenario.\n2. **Generate**: Receive a complete `docker-compose.yml` and `odoo.conf` ready to run.\n3. **Debug**: Describe your container error and get a diagnosis with a fix.\n\n## Examples\n\n### Example 1: Production docker-compose.yml\n\n```yaml\n# Note: The top-level 'version' key is deprecated in Docker Compose v2+\n# and can be safely omitted. Remove it to avoid warnings.\n\nservices:\n  db:\n    image: postgres:15\n    restart: always\n    environment:\n      POSTGRES_DB: odoo\n      POSTGRES_USER: odoo\n      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}\n    volumes:\n      - postgres-data:/var/lib/postgresql/data\n    networks:\n      - odoo-net\n\n  odoo:\n    image: odoo:17.0\n    restart: always\n    depends_on:\n      db:\n        condition: service_healthy\n    ports:\n      - \"8069:8069\"\n      - \"8072:8072\"   # Longpolling for live chat / bus\n    environment:\n      HOST: db\n      USER: odoo\n      PASSWORD: ${POSTGRES_PASSWORD}\n    volumes:\n      - odoo-web-data:/var/lib/odoo\n      - ./addons:/mnt/extra-addons   # Custom modules\n      - ./odoo.conf:/etc/odoo/odoo.conf\n    networks:\n      - odoo-net\n\nvolumes:\n  postgres-data:\n  odoo-web-data:\n\nnetworks:\n  odoo-net:\n```\n\n### Example 2: odoo.conf\n\n```ini\n[options]\nadmin_passwd = ${ODOO_MASTER_PASSWORD}    ; set via env or .env file\ndb_host = db\ndb_port = 5432\ndb_user = odoo\ndb_password = ${POSTGRES_PASSWORD}        ; set via env or .env file\n\n; addons_path inside the official Odoo Docker image (Debian-based)\naddons_path = /mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons\n\nlogfile = /var/log/odoo/odoo.log\nlog_level = warn\n\n; Worker tuning for a 4-core / 8GB server:\nworkers = 9                ; (CPU cores × 2) + 1\nmax_cron_threads = 2\nlimit_memory_soft = 1610612736   ; 1.5 GB — soft kill threshold\nlimit_memory_hard = 2147483648   ; 2.0 GB — hard kill threshold\nlimit_time_cpu = 600\nlimit_time_real = 1200\nlimit_request = 8192\n```\n\n### Example 3: Common Commands\n\n```bash\n# Start all services in background\ndocker compose up -d\n\n# Stream Odoo logs in real time\ndocker compose logs -f odoo\n\n# Restart Odoo only (not DB — avoids data risk)\ndocker compose restart odoo\n\n# Stop all services\ndocker compose down\n\n# Backup the database to a local SQL dump\ndocker compose exec db pg_dump -U odoo odoo > backup_$(date +%Y%m%d).sql\n\n# Update a custom module without restarting the server\ndocker compose exec odoo odoo -d odoo --update my_module --stop-after-init\n```\n\n## Best Practices\n\n- ✅ **Do:** Store all secrets in a `.env` file and reference them with `${VAR}` — never hardcode passwords in `docker-compose.yml`.\n- ✅ **Do:** Use `depends_on: condition: service_healthy` with a PostgreSQL healthcheck to prevent Odoo starting before the DB is ready.\n- ✅ **Do:** Put Nginx in front of Odoo for SSL termination (Let's Encrypt / Certbot) — never expose Odoo directly on port 80/443.\n- ✅ **Do:** Set `workers = (CPU cores × 2) + 1` in `odoo.conf` — `workers = 0` uses single-threaded mode and blocks all users.\n- ❌ **Don't:** Expose port 5432 (PostgreSQL) to the public internet — keep it on the internal Docker network only.\n- ❌ **Don't:** Use the `latest` or `17` Docker image tags in production — always pin to a specific patch-level tag (e.g., `odoo:17.0`).\n- ❌ **Don't:** Mount `odoo.conf` and rely on it for secrets in CI/CD — use Docker secrets or environment variables instead.\n\n## Limitations\n\n- This skill covers **self-hosted Docker deployments** — Odoo.sh (cloud-managed hosting) has a completely different deployment model.\n- **Horizontal scaling** (multiple Odoo containers behind a load balancer) requires shared filestore (NFS or S3-compatible storage) not covered here.\n- Does not include an Nginx configuration template — consult the [official Odoo Nginx docs](https://www.odoo.com/documentation/17.0/administration/install/deploy.html) for the full reverse proxy config.\n- The `addons_path` inside the Docker image may change with new base image versions — always verify after upgrading the Odoo image.\n",
+  "tags": [
+    "python",
+    "ai",
+    "template",
+    "document",
+    "image",
+    "docker",
+    "aws",
+    "rag",
+    "cro"
+  ],
+  "useCases": [
+    "Spinning up a local Odoo development environment with Docker.",
+    "Deploying Odoo to a VPS or cloud server (AWS, DigitalOcean, etc.).",
+    "Troubleshooting Odoo container startup failures or database connection errors.",
+    "Adding a reverse proxy with SSL to an existing Odoo Docker setup."
+  ],
+  "scrapedAt": "2026-03-06T07:03:52.233Z"
+}

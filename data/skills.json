@@ -7178,6 +7178,37 @@
       "scrapedAt": "2026-02-23T07:15:22.758Z"
     },
     {
+      "id": "antigravity-codebase-audit-pre-push",
+      "name": "codebase-audit-pre-push",
+      "slug": "codebase-audit-pre-push",
+      "description": "Deep audit before GitHub push: removes junk files, dead code, security holes, and optimization issues. Checks every file line-by-line for production readiness.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/codebase-audit-pre-push",
+      "content": "\n# Pre-Push Codebase Audit\n\nAs a senior engineer, you're doing the final review before pushing this code to GitHub. Check everything carefully and fix problems as you find them.  \n\n## When to Use This Skill  \n\n- User requests \"audit the codebase\" or \"review before push\"  \n- Before making the first push to GitHub  \n- Before making a repository public  \n- Pre-production deployment review  \n- User asks to \"clean up the code\" or \"optimize everything\"  \n\n## Your Job  \n\nReview the entire codebase file by file. Read the code carefully. Fix issues right away. Don't just note problems—make the necessary changes.  \n\n## Audit Process  \n\n### 1. Clean Up Junk Files  \n\nStart by looking for files that shouldn't be on GitHub:  \n\n**Delete these immediately:**  \n- OS files: `.DS_Store`, `Thumbs.db`, `desktop.ini`  \n- Logs: `*.log`, `npm-debug.log*`, `yarn-error.log*`  \n- Temp files: `*.tmp`, `*.temp`, `*.cache`, `*.swp`  \n- Build output: `dist/`, `build/`, `.next/`, `out/`, `.cache/`  \n- Dependencies: `node_modules/`, `vendor/`, `__pycache__/`, `*.pyc`  \n- IDE files: `.idea/`, `.vscode/` (ask user first), `*.iml`, `.project`  \n- Backup files: `*.bak`, `*_old.*`, `*_backup.*`, `*_copy.*`  \n- Test artifacts: `coverage/`, `.nyc_output/`, `test-results/`  \n- Personal junk: `TODO.txt`, `NOTES.txt`, `scratch.*`, `test123.*`  \n\n**Critical - Check for secrets:**  \n- `.env` files (should never be committed)  \n- Files containing: `password`, `api_key`, `token`, `secret`, `private_key`  \n- `*.pem`, `*.key`, `*.cert`, `credentials.json`, `serviceAccountKey.json`  \n\nIf you find secrets in the code, mark it as a CRITICAL BLOCKER.  \n\n### 2. Fix .gitignore  \n\nCheck if the `.gitignore` file exists and is thorough. If it’s missing or not complete, update it to include all junk file patterns above. Ensure that `.env.example` exists with keys but no values.  \n\n### 3. Audit Every Source File  \n\nLook through each code file and check:  \n\n**Dead Code (remove immediately):**  \n- Commented-out code blocks  \n- Unused imports/requires  \n- Unused variables (declared but never used)  \n- Unused functions (defined but never called)  \n- Unreachable code (after `return`, inside `if (false)`)  \n- Duplicate logic (same code in multiple places—combine)  \n\n**Code Quality (fix issues as you go):**  \n- Vague names: `data`, `info`, `temp`, `thing` → rename to be descriptive  \n- Magic numbers: `if (status === 3)` → extract to named constant  \n- Debug statements: remove `console.log`, `print()`, `debugger`  \n- TODO/FIXME comments: either resolve them or delete them  \n- TypeScript `any`: add proper types or explain why `any` is used  \n- Use `===` instead of `==` in JavaScript  \n- Functions longer than 50 lines: consider splitting  \n- Nested code greater than 3 levels: refactor with early returns  \n\n**Logic Issues (critical):**  \n- Missing null/undefined checks  \n- Array operations on potentially empty arrays  \n- Async functions that are not awaited  \n- Promises without `.catch()` or try/catch  \n- Possibilities for infinite loops  \n- Missing `default` in switch statements  \n\n### 4. Security Check (Zero Tolerance)  \n\n**Secrets:** Search for hardcoded passwords, API keys, and tokens. They must be in environment variables.  \n\n**Injection vulnerabilities:**  \n- SQL: No string concatenation in queries—use parameterized queries only  \n- Command injection: No `exec()` with user-provided input  \n- Path traversal: No file paths from user input without validation  \n- XSS: No `innerHTML` or `dangerouslySetInnerHTML` with user data  \n\n**Auth/Authorization:**  \n- Passwords hashed with bcrypt/argon2 (never MD5 or plain text)  \n- Protected routes check for authentication  \n- Authorization checks on the server side, not just in the UI  \n- No IDOR: verify users own the resources they are accessing  \n\n**Data exposure:**  \n- API responses do not leak unnecessary information  \n- Error messages do not expose stack traces or database details  \n- Pagination is present on list endpoints  \n\n**Dependencies:**  \n- Run `npm audit` or an equivalent tool  \n- Flag critically outdated or vulnerable packages  \n\n### 5. Scalability Check  \n\n**Database:**  \n- N+1 queries: loops with database calls inside → use JOINs or batch queries  \n- Missing indexes on WHERE/ORDER BY columns  \n- Unbounded queries: add LIMIT or pagination  \n- Avoid `SELECT *`: specify columns  \n\n**API Design:**  \n- Heavy operations (like email, reports, file processing) → move to a background queue  \n- Rate limiting on public endpoints  \n- Caching for data that is read frequently  \n- Timeouts on external calls  \n\n**Code:**  \n- No global mutable state  \n- Clean up event listeners (to avoid memory leaks)  \n- Stream large files instead of loading them into memory  \n\n### 6. Architecture Check  \n\n**Organization:**  \n- Clear folder structure  \n- Files are in logical locations  \n- No \"misc\" or \"stuff\" folders  \n\n**Separation of concerns:**  \n- UI layer: only responsible for rendering  \n- Business logic: pure functions  \n- Data layer: isolated",
+      "tags": [
+        "javascript",
+        "typescript",
+        "node",
+        "api",
+        "ai",
+        "design",
+        "document",
+        "image",
+        "security",
+        "rag"
+      ],
+      "useCases": [
+        "User requests \"audit the codebase\" or \"review before push\"",
+        "Before making the first push to GitHub",
+        "Before making a repository public",
+        "Pre-production deployment review",
+        "User asks to \"clean up the code\" or \"optimize everything\""
+      ],
+      "scrapedAt": "2026-03-06T07:01:25.618Z"
+    },
+    {
       "id": "antigravity-codebase-cleanup-deps-audit",
       "name": "codebase-cleanup-deps-audit",
       "slug": "codebase-cleanup-deps-audit",
@@ -10104,6 +10135,35 @@
       "scrapedAt": "2026-02-23T07:17:04.872Z"
     },
     {
+      "id": "antigravity-drizzle-orm-expert",
+      "name": "drizzle-orm-expert",
+      "slug": "drizzle-orm-expert",
+      "description": "Expert in Drizzle ORM for TypeScript — schema design, relational queries, migrations, and serverless database integration. Use when building type-safe database layers with Drizzle.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/drizzle-orm-expert",
+      "content": "\n# Drizzle ORM Expert\n\nYou are a production-grade Drizzle ORM expert. You help developers build type-safe, performant database layers using Drizzle ORM with TypeScript. You know schema design, the relational query API, Drizzle Kit migrations, and integrations with Next.js, tRPC, and serverless databases (Neon, PlanetScale, Turso, Supabase).\n\n## When to Use This Skill\n\n- Use when the user asks to set up Drizzle ORM in a new or existing project\n- Use when designing database schemas with Drizzle's TypeScript-first approach\n- Use when writing complex relational queries (joins, subqueries, aggregations)\n- Use when setting up or troubleshooting Drizzle Kit migrations\n- Use when integrating Drizzle with Next.js App Router, tRPC, or Hono\n- Use when optimizing database performance (prepared statements, batching, connection pooling)\n- Use when migrating from Prisma, TypeORM, or Knex to Drizzle\n\n## Core Concepts\n\n### Why Drizzle\n\nDrizzle ORM is a TypeScript-first ORM that generates zero runtime overhead. Unlike Prisma (which uses a query engine binary), Drizzle compiles to raw SQL — making it ideal for edge runtimes and serverless. Key advantages:\n\n- **SQL-like API**: If you know SQL, you know Drizzle\n- **Zero dependencies**: Tiny bundle, works in Cloudflare Workers, Vercel Edge, Deno\n- **Full type inference**: Schema → types → queries are all connected at compile time\n- **Relational Query API**: Prisma-like nested includes without N+1 problems\n\n## Schema Design Patterns\n\n### Table Definitions\n\n```typescript\n// db/schema.ts\nimport { pgTable, text, integer, timestamp, boolean, uuid, pgEnum } from \"drizzle-orm/pg-core\";\nimport { relations } from \"drizzle-orm\";\n\n// Enums\nexport const roleEnum = pgEnum(\"role\", [\"admin\", \"user\", \"moderator\"]);\n\n// Users table\nexport const users = pgTable(\"users\", {\n  id: uuid(\"id\").defaultRandom().primaryKey(),\n  email: text(\"email\").notNull().unique(),\n  name: text(\"name\").notNull(),\n  role: roleEnum(\"role\").default(\"user\").notNull(),\n  createdAt: timestamp(\"created_at\").defaultNow().notNull(),\n  updatedAt: timestamp(\"updated_at\").defaultNow().notNull(),\n});\n\n// Posts table with foreign key\nexport const posts = pgTable(\"posts\", {\n  id: uuid(\"id\").defaultRandom().primaryKey(),\n  title: text(\"title\").notNull(),\n  content: text(\"content\"),\n  published: boolean(\"published\").default(false).notNull(),\n  authorId: uuid(\"author_id\").references(() => users.id, { onDelete: \"cascade\" }).notNull(),\n  createdAt: timestamp(\"created_at\").defaultNow().notNull(),\n});\n```\n\n### Relations\n\n```typescript\n// db/relations.ts\nexport const usersRelations = relations(users, ({ many }) => ({\n  posts: many(posts),\n}));\n\nexport const postsRelations = relations(posts, ({ one }) => ({\n  author: one(users, {\n    fields: [posts.authorId],\n    references: [users.id],\n  }),\n}));\n```\n\n### Type Inference\n\n```typescript\n// Infer types directly from your schema — no separate type files needed\nimport type { InferSelectModel, InferInsertModel } from \"drizzle-orm\";\n\nexport type User = InferSelectModel<typeof users>;\nexport type NewUser = InferInsertModel<typeof users>;\nexport type Post = InferSelectModel<typeof posts>;\nexport type NewPost = InferInsertModel<typeof posts>;\n```\n\n## Query Patterns\n\n### Select Queries (SQL-like API)\n\n```typescript\nimport { eq, and, like, desc, count, sql } from \"drizzle-orm\";\n\n// Basic select\nconst allUsers = await db.select().from(users);\n\n// Filtered with conditions\nconst admins = await db.select().from(users).where(eq(users.role, \"admin\"));\n\n// Partial select (only specific columns)\nconst emails = await db.select({ email: users.email }).from(users);\n\n// Join query\nconst postsWithAuthors = await db\n  .select({\n    title: posts.title,\n    authorName: users.name,\n  })\n  .from(posts)\n  .innerJoin(users, eq(posts.authorId, users.id))\n  .where(eq(posts.published, true))\n  .orderBy(desc(posts.createdAt))\n  .limit(10);\n\n// Aggregation\nconst postCounts = await db\n  .select({\n    authorId: posts.authorId,\n    postCount: count(posts.id),\n  })\n  .from(posts)\n  .groupBy(posts.authorId);\n```\n\n### Relational Queries (Prisma-like API)\n\n```typescript\n// Nested includes — Drizzle resolves in a single query\nconst usersWithPosts = await db.query.users.findMany({\n  with: {\n    posts: {\n      where: eq(posts.published, true),\n      orderBy: [desc(posts.createdAt)],\n      limit: 5,\n    },\n  },\n});\n\n// Find one with nested data\nconst user = await db.query.users.findFirst({\n  where: eq(users.id, userId),\n  with: { posts: true },\n});\n```\n\n### Insert, Update, Delete\n\n```typescript\n// Insert with returning\nconst [newUser] = await db\n  .insert(users)\n  .values({ email: \"dev@example.com\", name: \"Dev\" })\n  .returning();\n\n// Batch insert\nawait db.insert(posts).values([\n  { title: \"Post 1\", authorId: newUser.id },\n  { title: \"Post 2\", authorId: newUser.id },\n]);\n\n// Update\nawait db.update(users).set({ name: \"Updated\" }).where(eq(users.id, userId));\n\n// Delete\nawait db.delete(posts).where(eq(posts.authorId, userId));\n```\n\n### Tran",
+      "tags": [
+        "typescript",
+        "react",
+        "api",
+        "ai",
+        "workflow",
+        "design",
+        "prisma",
+        "supabase"
+      ],
+      "useCases": [
+        "Use when the user asks to set up Drizzle ORM in a new or existing project",
+        "Use when designing database schemas with Drizzle's TypeScript-first approach",
+        "Use when writing complex relational queries (joins, subqueries, aggregations)",
+        "Use when setting up or troubleshooting Drizzle Kit migrations",
+        "Use when integrating Drizzle with Next.js App Router, tRPC, or Hono"
+      ],
+      "scrapedAt": "2026-03-06T07:02:05.713Z"
+    },
+    {
       "id": "antigravity-dropbox-automation",
       "name": "dropbox-automation",
       "slug": "dropbox-automation",
@@ -10869,6 +10929,52 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-29T06:58:58.847Z"
+    },
+    {
+      "id": "antigravity-fda-food-safety-auditor",
+      "name": "fda-food-safety-auditor",
+      "slug": "fda-food-safety-auditor",
+      "description": "Expert AI auditor for FDA Food Safety (FSMA), HACCP, and PCQI compliance. Reviews food facility records and preventive controls.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fda-food-safety-auditor",
+      "content": "\n# FDA Food Safety Auditor\n\n## Overview\n\nThis skill transforms your AI assistant into a specialized FDA Food Safety Auditor. It is designed to review Food Safety Plans, HARPC (Hazard Analysis and Risk-Based Preventive Controls) documentation, and HACCP plans against the Food Safety Modernization Act (FSMA) standards.\n\n## When to Use This Skill\n\n- Use when auditing a Food Safety Plan for a manufacturing or processing facility.\n- Use when reviewing Supply Chain Program documentation for FSMA compliance.\n- Use when preparing for a routine FDA food facility inspection.\n- Use when evaluating corrective actions for a CCP (Critical Control Point) deviation.\n\n## How It Works\n\n1. **Activate the Skill**: Mention `@fda-food-safety-auditor` and provide the document or record you wish to review.\n2. **Review**: Provide your HACCP, Preventive Control, or Supplier Verification records.\n3. **Analyze**: The AI identifies gaps — missing Critical Control Points (CCPs), inadequate monitoring parameters, or incomplete corrective action records.\n4. **Correction Guidance**: Get specific, actionable fixes to close compliance gaps before an actual inspection.\n\n## Examples\n\n### Example 1: CCP Deviation Review\n\n**Scenario:** A pasteurizer temperature dropped below the critical limit of 161°F for 30 seconds. The operator brought it back up and logged “fixed temperature.” No product was quarantined.\n\n**Finding:**\n\n```text\nFDA AUDIT FINDING\nSeverity: Major / Critical\nCitation: 21 CFR 117.150 — Corrective Actions and Corrections\n\nAnalysis:\nThe deviation log is inadequate. Dropping below a critical limit means\nthe product may be unsafe. The operator failed to quarantine the affected\nproduct and no formal root cause evaluation was documented.\n\nRequired Actions:\n1. Place all product produced during the deviation window on hold.\n2. Conduct a risk assessment to determine product disposition.\n3. Document a formal Corrective Action identifying the root cause\n   (e.g., valve failure, calibration drift).\n4. Verify the corrective action is effective before resuming production.\n```\n\n## Best Practices\n\n- ✅ **Do:** Provide exact monitoring logs with temperatures, pH values, or times.\n- ✅ **Do:** Use this skill to practice mock FDA inspections before the real thing.\n- ❌ **Don't:** Assume SSOPs (Sanitation Standard Operating Procedures) satisfy the same requirements as process preventive controls.\n- ❌ **Don't:** Close a CCP deviation without completing a full product disposition.\n",
+      "tags": [
+        "ai",
+        "design",
+        "document"
+      ],
+      "useCases": [
+        "Use when auditing a Food Safety Plan for a manufacturing or processing facility.",
+        "Use when reviewing Supply Chain Program documentation for FSMA compliance.",
+        "Use when preparing for a routine FDA food facility inspection.",
+        "Use when evaluating corrective actions for a CCP (Critical Control Point) deviation."
+      ],
+      "scrapedAt": "2026-03-06T07:02:19.436Z"
+    },
+    {
+      "id": "antigravity-fda-medtech-compliance-auditor",
+      "name": "fda-medtech-compliance-auditor",
+      "slug": "fda-medtech-compliance-auditor",
+      "description": "Expert AI auditor for Medical Device (SaMD) compliance, IEC 62304, and 21 CFR Part 820. Reviews DHFs, technical files, and software validation.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fda-medtech-compliance-auditor",
+      "content": "\n# FDA MedTech Compliance Auditor\n\n## Overview\n\nThis skill transforms your AI assistant into a specialized MedTech Compliance Auditor. It focuses on Software as a Medical Device (SaMD) and traditional medical equipment regulations, including 21 CFR Part 820 (Quality System Regulation), IEC 62304 (Software Lifecycle), ISO 13485, and ISO 14971 (Risk Management).\n\n## When to Use This Skill\n\n- Use when reviewing Software Validation Protocols for Medical Devices.\n- Use when auditing a Design History File (DHF) for a software-based diagnostic tool.\n- Use when ensuring IT infrastructure meets 21 CFR Part 11 requirements for electronic records.\n- Use when preparing a CAPA (Corrective and Preventive Action) for a software defect.\n\n## How It Works\n\n1. **Activate the Skill**: Mention `@fda-medtech-compliance-auditor` and provide the document you wish to review.\n2. **Specify the Standard**: State whether the focus is on Part 820, Part 11, ISO 13485, ISO 14971, or IEC 62304.\n3. **Receive Findings**: The AI outputs specific audit findings categorized by severity (Major, Minor, Opportunity for Improvement) with regulatory citations.\n4. **Correction Guidance**: Get actionable steps to resolve each finding and strengthen your audit readiness.\n\n## Examples\n\n### Example 1: CAPA Root Cause Review\n\n**Scenario:** A CAPA was opened for a software defect in a Class II device. The documented root cause is “developer error — unclear requirements.” The corrective action is developer retraining.\n\n**Finding:**\n\n```text\nFDA AUDIT FINDING\nSeverity: Major\nCitation: 21 CFR 820.100(a)(2) / IEC 62304 Section 5.1\n\nAnalysis:\n\"Developer error\" is a symptom, not a root cause. Retraining alone is\na known red flag for FDA inspectors and will not withstand scrutiny.\nThe true root cause lies in the software requirements engineering\nprocess itself — not an individual.\n\nRequired Actions:\n1. Perform a 5-Whys or Fishbone analysis targeting the requirements\n   gathering and review process.\n2. Update the SRS (Software Requirements Specification) and the\n   corresponding process SOP.\n3. Document an effectiveness check with a measurable criterion\n   (e.g., zero requirements-related defects in next 3 releases).\n4. Do not close the CAPA on retraining alone.\n```\n\n## Best Practices\n\n- ✅ **Do:** Provide exact wording from SOPs, risk tables, or validation plans for the most accurate review.\n- ✅ **Do:** Expect strict interpretations — the goal is to find weaknesses before a real inspector does.\n- ❌ **Don't:** Forget to link every software defect to a clinical risk item in your ISO 14971 risk file.\n- ❌ **Don't:** Assume \"we tested it and it works\" satisfies IEC 62304 software verification requirements.\n",
+      "tags": [
+        "ai",
+        "design",
+        "document"
+      ],
+      "useCases": [
+        "Use when reviewing Software Validation Protocols for Medical Devices.",
+        "Use when auditing a Design History File (DHF) for a software-based diagnostic tool.",
+        "Use when ensuring IT infrastructure meets 21 CFR Part 11 requirements for electronic records.",
+        "Use when preparing a CAPA (Corrective and Preventive Action) for a software defect."
+      ],
+      "scrapedAt": "2026-03-06T07:02:19.744Z"
     },
     {
       "id": "antigravity-ffuf-claude-skill",
@@ -16791,6 +16897,611 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-26T13:19:58.641Z"
+    },
+    {
+      "id": "antigravity-odoo-accounting-setup",
+      "name": "odoo-accounting-setup",
+      "slug": "odoo-accounting-setup",
+      "description": "Expert guide for configuring Odoo Accounting: chart of accounts, journals, fiscal positions, taxes, payment terms, and bank reconciliation.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-accounting-setup",
+      "content": "\n# Odoo Accounting Setup\n\n## Overview\n\nThis skill guides functional consultants and business owners through setting up Odoo Accounting correctly from scratch. It covers chart of accounts configuration, journal setup, tax rules, fiscal positions, payment terms, and the bank statement reconciliation workflow.\n\n## When to Use This Skill\n\n- Setting up a new Odoo instance for a company for the first time.\n- Configuring multi-currency or multi-company accounting.\n- Troubleshooting tax calculation or fiscal position mapping errors.\n- Creating payment terms for installment billing (e.g., Net 30, 50% upfront).\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-accounting-setup` and describe your accounting scenario.\n2. **Configure**: Receive step-by-step Odoo menu navigation with exact field values.\n3. **Validate**: Get a checklist to verify your setup is complete and correct.\n\n## Examples\n\n### Example 1: Create a Payment Term (Net 30 with 2% Early Pay Discount)\n\n```text\nMenu: Accounting → Configuration → Payment Terms → New\n\nName: Net 30 / 2% Early Pay Discount\nCompany: [Your Company]\n\nLines:\n  Line 1:\n    - Due Type: Percent\n    - Value: 100%\n    - Due: 30 days (full balance due in 30 days)\n\nEarly Payment Discount (Odoo 16+):\n  Discount %: 2\n  Discount Days: 10\n  Balance Sheet Accounts:\n    - Gain: 4900 Early Payment Discounts Granted\n    - Loss: 5900 Early Payment Discounts Received\n```\n\n> **Note (v16+):** Use the built-in **Early Payment Discount** field instead of the old split-line workaround. Odoo now posts the discount automatically when the customer pays within the discount window and generates correct accounting entries.\n\n### Example 2: Fiscal Position for EU VAT (B2B Intra-Community)\n\n```text\nMenu: Accounting → Configuration → Fiscal Positions → New\n\nName: EU Intra-Community B2B\nAuto-detection: ON\n  - Country Group: Europe\n  - VAT Required: YES (customer must have EU VAT number)\n\nTax Mapping:\n  Tax on Sales (21% VAT) → 0% Intra-Community VAT\n  Tax on Purchases      → 0% Reverse Charge\n\nAccount Mapping:\n  (Leave empty unless your localization requires account remapping)\n```\n\n### Example 3: Reconciliation Model for Bank Fees\n\n```text\nMenu: Accounting → Configuration → Reconciliation Models → New\n\nName: Bank Fee Auto-Match\nType: Write-off\nMatching Order: 1\n\nConditions:\n  - Label Contains: \"BANK FEE\" OR \"SERVICE CHARGE\"\n  - Amount Type: Amount is lower than: $50.00\n\nAction:\n  - Account: 6200 Bank Charges\n  - Tax: None\n  - Analytic: Administrative\n```\n\n## Best Practices\n\n- ✅ **Do:** Install your country's **localization module** first (`l10n_us`, `l10n_mx`, etc.) before manually creating accounts — it sets up the correct chart of accounts.\n- ✅ **Do:** Use **Fiscal Positions** to automate B2B vs B2C tax switching — never change taxes manually on individual invoices.\n- ✅ **Do:** Lock accounting periods (Accounting → Actions → Lock Dates) after month-end closing to prevent retroactive edits.\n- ✅ **Do:** Use the **Early Payment Discount** feature (v16+) instead of splitting payment term lines for discount modelling.\n- ❌ **Don't:** Delete journal entries — always reverse them with a credit note or the built-in reversal function.\n- ❌ **Don't:** Mix personal and business transactions in the same journal.\n- ❌ **Don't:** Create manual journal entries to fix bank reconciliation mismatches — use the reconciliation model workflow instead.\n\n## Limitations\n\n- Does not cover **multi-currency revaluation** or foreign exchange gain/loss accounting in depth.\n- **Country-specific e-invoicing** (CFDI, FatturaPA, SAF-T) requires additional localization modules — use `@odoo-l10n-compliance` for those.\n- Payroll accounting integration (salary journals, deduction accounts) is not covered here — use `@odoo-hr-payroll-setup`.\n- Odoo Community Edition does not include the full **lock dates** feature; some controls are Enterprise-only.\n",
+      "tags": [
+        "ai",
+        "llm",
+        "workflow"
+      ],
+      "useCases": [
+        "Setting up a new Odoo instance for a company for the first time.",
+        "Configuring multi-currency or multi-company accounting.",
+        "Troubleshooting tax calculation or fiscal position mapping errors.",
+        "Creating payment terms for installment billing (e.g., Net 30, 50% upfront)."
+      ],
+      "scrapedAt": "2026-03-06T07:03:51.306Z"
+    },
+    {
+      "id": "antigravity-odoo-automated-tests",
+      "name": "odoo-automated-tests",
+      "slug": "odoo-automated-tests",
+      "description": "Write and run Odoo automated tests using TransactionCase, HttpCase, and browser tour tests. Covers test data setup, mocking, and CI integration.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-automated-tests",
+      "content": "\n# Odoo Automated Tests\n\n## Overview\n\nOdoo has a built-in testing framework based on Python's `unittest`. This skill helps you write `TransactionCase` unit tests, `HttpCase` integration tests, and JavaScript tour tests. It also covers running tests in CI pipelines.\n\n## When to Use This Skill\n\n- Writing unit tests for a custom model's business logic.\n- Creating an HTTP test to verify a controller endpoint.\n- Debugging test failures in a CI pipeline.\n- Setting up automated test execution with `--test-enable`.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-automated-tests` and describe the feature to test.\n2. **Generate**: Get complete test class code with setup, teardown, and assertions.\n3. **Run**: Get the exact `odoo` CLI command to execute your tests.\n\n## Examples\n\n### Example 1: TransactionCase Unit Test (Odoo 15+ pattern)\n\n```python\n# tests/test_hospital_patient.py\nfrom odoo.tests.common import TransactionCase\nfrom odoo.tests import tagged\nfrom odoo.exceptions import ValidationError\n\n@tagged('post_install', '-at_install')\nclass TestHospitalPatient(TransactionCase):\n\n    @classmethod\n    def setUpClass(cls):\n        # Use setUpClass for performance — runs once per class, not per test\n        super().setUpClass()\n        cls.Patient = cls.env['hospital.patient']\n        cls.doctor = cls.env['res.users'].browse(cls.env.uid)\n\n    def test_create_patient(self):\n        patient = self.Patient.create({\n            'name': 'John Doe',\n            'doctor_id': self.doctor.id,\n        })\n        self.assertEqual(patient.state, 'draft')\n        self.assertEqual(patient.name, 'John Doe')\n\n    def test_confirm_patient(self):\n        patient = self.Patient.create({'name': 'Jane Smith'})\n        patient.action_confirm()\n        self.assertEqual(patient.state, 'confirmed')\n\n    def test_empty_name_raises_error(self):\n        with self.assertRaises(ValidationError):\n            self.Patient.create({'name': ''})\n\n    def test_access_denied_for_other_user(self):\n        # Test security rules by running as a different user\n        other_user = self.env.ref('base.user_demo')\n        with self.assertRaises(Exception):\n            self.Patient.with_user(other_user).create({'name': 'Test'})\n```\n\n> **`setUpClass` vs `setUp`:** Use `setUpClass` (Odoo 15+) for shared test data. It runs once per class and is significantly faster than `setUp` which re-initializes for every single test method.\n\n### Example 2: Run Tests via CLI\n\n```bash\n# Run all tests for a specific module\n./odoo-bin --test-enable --stop-after-init -d my_database -u hospital_management\n\n# Run only tests tagged with a specific tag\n./odoo-bin --test-enable --stop-after-init -d my_database \\\n  --test-tags hospital_management\n\n# Run a specific test class\n./odoo-bin --test-enable --stop-after-init -d my_database \\\n  --test-tags /hospital_management:TestHospitalPatient\n```\n\n### Example 3: HttpCase for Controller Testing\n\n```python\nfrom odoo.tests.common import HttpCase\nfrom odoo.tests import tagged\n\n@tagged('post_install', '-at_install')\nclass TestPatientController(HttpCase):\n\n    def test_patient_page_authenticated(self):\n        # Authenticate as a user, not with hardcoded password\n        self.authenticate(self.env.user.login, self.env.user.login)\n        resp = self.url_open('/hospital/patients')\n        self.assertEqual(resp.status_code, 200)\n\n    def test_patient_page_redirects_unauthenticated(self):\n        # No authenticate() call = public/anonymous user\n        resp = self.url_open('/hospital/patients', allow_redirects=False)\n        self.assertIn(resp.status_code, [301, 302, 403])\n```\n\n## Best Practices\n\n- ✅ **Do:** Use `setUpClass()` with `cls.env` instead of `setUp()` — it is dramatically faster for large test suites.\n- ✅ **Do:** Use `@tagged('post_install', '-at_install')` to run tests after all modules are installed.\n- ✅ **Do:** Test both the happy path and error conditions (`ValidationError`, `AccessError`, `UserError`).\n- ✅ **Do:** Use `self.with_user(user)` to test access control without calling `sudo()`.\n- ❌ **Don't:** Use a production database for tests — always use a dedicated test database.\n- ❌ **Don't:** Rely on test execution order — each `TransactionCase` test is rolled back in isolation.\n- ❌ **Don't:** Hardcode passwords in `HttpCase.authenticate()` — use `self.env.user.login` or a fixture user.\n\n## Limitations\n\n- **JavaScript tour tests** require a running browser (via `phantomjs` or `Chrome headless`) and a live Odoo server — not covered in depth here.\n- `HttpCase` tests are significantly slower than `TransactionCase` — use them only for controller/route verification.\n- Does not cover **mocking external services** (e.g., mocking an SMTP server or payment gateway in tests).\n- Test isolation is at the **transaction level**, not database level — tests that commit data (e.g., via `cr.commit()`) can leak state between tests.\n",
+      "tags": [
+        "python",
+        "javascript",
+        "ai",
+        "security"
+      ],
+      "useCases": [
+        "Writing unit tests for a custom model's business logic.",
+        "Creating an HTTP test to verify a controller endpoint.",
+        "Debugging test failures in a CI pipeline.",
+        "Setting up automated test execution with `--test-enable`."
+      ],
+      "scrapedAt": "2026-03-06T07:03:51.633Z"
+    },
+    {
+      "id": "antigravity-odoo-backup-strategy",
+      "name": "odoo-backup-strategy",
+      "slug": "odoo-backup-strategy",
+      "description": "Complete Odoo backup and restore strategy: database dumps, filestore backup, automated scheduling, cloud storage upload, and tested restore procedures.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-backup-strategy",
+      "content": "\n# Odoo Backup Strategy\n\n## Overview\n\nA complete Odoo backup must include both the **PostgreSQL database** and the **filestore** (attachments, images). This skill covers manual and automated backup procedures, offsite storage, and the correct restore sequence to bring a down Odoo instance back online.\n\n## When to Use This Skill\n\n- Setting up a backup strategy for a production Odoo instance.\n- Automating daily backups with shell scripts and cron.\n- Restoring Odoo after a server failure or data corruption event.\n- Diagnosing a failed backup or corrupt restore.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-backup-strategy` and describe your server environment.\n2. **Generate**: Receive a complete backup script tailored to your setup.\n3. **Restore**: Get step-by-step restore instructions for any failure scenario.\n\n## Examples\n\n### Example 1: Manual Database + Filestore Backup\n\n```bash\n#!/bin/bash\n# backup_odoo.sh\n\nDATE=$(date +%Y%m%d_%H%M%S)\nDB_NAME=\"odoo\"\nDB_USER=\"odoo\"\nFILESTORE_PATH=\"/var/lib/odoo/.local/share/Odoo/filestore/$DB_NAME\"\nBACKUP_DIR=\"/backups/odoo\"\n\nmkdir -p \"$BACKUP_DIR\"\n\n# Step 1: Dump the database\npg_dump -U $DB_USER -Fc $DB_NAME > \"$BACKUP_DIR/db_$DATE.dump\"\n\n# Step 2: Archive the filestore\ntar -czf \"$BACKUP_DIR/filestore_$DATE.tar.gz\" -C \"$FILESTORE_PATH\" .\n\necho \"✅ Backup complete: db_$DATE.dump + filestore_$DATE.tar.gz\"\n```\n\n### Example 2: Automate with Cron (daily at 2 AM)\n\n```bash\n# Run: crontab -e\n# Add this line:\n0 2 * * * /opt/scripts/backup_odoo.sh >> /var/log/odoo_backup.log 2>&1\n```\n\n### Example 3: Upload to S3 (after backup)\n\n```bash\n# Add to backup script after tar command:\naws s3 cp \"$BACKUP_DIR/db_$DATE.dump\"        s3://my-odoo-backups/db/\naws s3 cp \"$BACKUP_DIR/filestore_$DATE.tar.gz\" s3://my-odoo-backups/filestore/\n\n# Optional: Delete local backups older than 7 days\nfind \"$BACKUP_DIR\" -type f -mtime +7 -delete\n```\n\n### Example 4: Full Restore Procedure\n\n```bash\n# Step 1: Stop Odoo\ndocker compose stop odoo  # or: systemctl stop odoo\n\n# Step 2: Recreate and restore the database\n# (--clean alone fails if the DB doesn't exist; drop and recreate first)\ndropdb -U odoo odoo 2>/dev/null || true\ncreatedb -U odoo odoo\npg_restore -U odoo -d odoo db_YYYYMMDD_HHMMSS.dump\n\n# Step 3: Restore the filestore\nFILESTORE=/var/lib/odoo/.local/share/Odoo/filestore/odoo\nrm -rf \"$FILESTORE\"/*\ntar -xzf filestore_YYYYMMDD_HHMMSS.tar.gz -C \"$FILESTORE\"/\n\n# Step 4: Restart Odoo\ndocker compose start odoo\n\n# Step 5: Verify — open Odoo in the browser and check:\n#   - Can you log in?\n#   - Are recent records visible?\n#   - Are file attachments loading?\n```\n\n## Best Practices\n\n- ✅ **Do:** Test restores monthly in a staging environment — a backup you've never restored is not a backup.\n- ✅ **Do:** Follow the **3-2-1 rule**: 3 copies, 2 different media types, 1 offsite copy (e.g., S3 or a remote server).\n- ✅ **Do:** Back up **immediately before every Odoo upgrade** — this is your rollback point.\n- ✅ **Do:** Verify backup integrity: `pg_restore --list backup.dump` should complete without errors.\n- ❌ **Don't:** Back up only the database without the filestore — all attachments and images will be missing after a restore.\n- ❌ **Don't:** Store backups on the same disk or same server as Odoo — a disk or server failure destroys both.\n- ❌ **Don't:** Run `pg_restore --clean` against a non-existent database — always create the database first.\n\n## Limitations\n\n- Does not cover **Odoo.sh built-in backups** — Odoo.sh has its own backup system accessible from the dashboard.\n- This script assumes a **single-database** Odoo setup. Multi-database instances require looping over all databases.\n- Filestore path may differ between installations (Docker volume vs. bare-metal). Always verify the path with `odoo-bin shell` before running a restore.\n- Large filestores (100GB+) may require incremental backup tools like `rsync` or `restic` rather than full `tar.gz` archives.\n",
+      "tags": [
+        "ai",
+        "image",
+        "docker",
+        "aws",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Setting up a backup strategy for a production Odoo instance.",
+        "Automating daily backups with shell scripts and cron.",
+        "Restoring Odoo after a server failure or data corruption event.",
+        "Diagnosing a failed backup or corrupt restore."
+      ],
+      "scrapedAt": "2026-03-06T07:03:51.939Z"
+    },
+    {
+      "id": "antigravity-odoo-docker-deployment",
+      "name": "odoo-docker-deployment",
+      "slug": "odoo-docker-deployment",
+      "description": "Production-ready Docker and docker-compose setup for Odoo with PostgreSQL, persistent volumes, environment-based configuration, and Nginx reverse proxy.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-docker-deployment",
+      "content": "\n# Odoo Docker Deployment\n\n## Overview\n\nThis skill provides a complete, production-ready Docker setup for Odoo, including PostgreSQL, persistent file storage, environment variable configuration, and an optional Nginx reverse proxy with SSL. It covers both development and production configurations.\n\n## When to Use This Skill\n\n- Spinning up a local Odoo development environment with Docker.\n- Deploying Odoo to a VPS or cloud server (AWS, DigitalOcean, etc.).\n- Troubleshooting Odoo container startup failures or database connection errors.\n- Adding a reverse proxy with SSL to an existing Odoo Docker setup.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-docker-deployment` and describe your deployment scenario.\n2. **Generate**: Receive a complete `docker-compose.yml` and `odoo.conf` ready to run.\n3. **Debug**: Describe your container error and get a diagnosis with a fix.\n\n## Examples\n\n### Example 1: Production docker-compose.yml\n\n```yaml\n# Note: The top-level 'version' key is deprecated in Docker Compose v2+\n# and can be safely omitted. Remove it to avoid warnings.\n\nservices:\n  db:\n    image: postgres:15\n    restart: always\n    environment:\n      POSTGRES_DB: odoo\n      POSTGRES_USER: odoo\n      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}\n    volumes:\n      - postgres-data:/var/lib/postgresql/data\n    networks:\n      - odoo-net\n\n  odoo:\n    image: odoo:17.0\n    restart: always\n    depends_on:\n      db:\n        condition: service_healthy\n    ports:\n      - \"8069:8069\"\n      - \"8072:8072\"   # Longpolling for live chat / bus\n    environment:\n      HOST: db\n      USER: odoo\n      PASSWORD: ${POSTGRES_PASSWORD}\n    volumes:\n      - odoo-web-data:/var/lib/odoo\n      - ./addons:/mnt/extra-addons   # Custom modules\n      - ./odoo.conf:/etc/odoo/odoo.conf\n    networks:\n      - odoo-net\n\nvolumes:\n  postgres-data:\n  odoo-web-data:\n\nnetworks:\n  odoo-net:\n```\n\n### Example 2: odoo.conf\n\n```ini\n[options]\nadmin_passwd = ${ODOO_MASTER_PASSWORD}    ; set via env or .env file\ndb_host = db\ndb_port = 5432\ndb_user = odoo\ndb_password = ${POSTGRES_PASSWORD}        ; set via env or .env file\n\n; addons_path inside the official Odoo Docker image (Debian-based)\naddons_path = /mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons\n\nlogfile = /var/log/odoo/odoo.log\nlog_level = warn\n\n; Worker tuning for a 4-core / 8GB server:\nworkers = 9                ; (CPU cores × 2) + 1\nmax_cron_threads = 2\nlimit_memory_soft = 1610612736   ; 1.5 GB — soft kill threshold\nlimit_memory_hard = 2147483648   ; 2.0 GB — hard kill threshold\nlimit_time_cpu = 600\nlimit_time_real = 1200\nlimit_request = 8192\n```\n\n### Example 3: Common Commands\n\n```bash\n# Start all services in background\ndocker compose up -d\n\n# Stream Odoo logs in real time\ndocker compose logs -f odoo\n\n# Restart Odoo only (not DB — avoids data risk)\ndocker compose restart odoo\n\n# Stop all services\ndocker compose down\n\n# Backup the database to a local SQL dump\ndocker compose exec db pg_dump -U odoo odoo > backup_$(date +%Y%m%d).sql\n\n# Update a custom module without restarting the server\ndocker compose exec odoo odoo -d odoo --update my_module --stop-after-init\n```\n\n## Best Practices\n\n- ✅ **Do:** Store all secrets in a `.env` file and reference them with `${VAR}` — never hardcode passwords in `docker-compose.yml`.\n- ✅ **Do:** Use `depends_on: condition: service_healthy` with a PostgreSQL healthcheck to prevent Odoo starting before the DB is ready.\n- ✅ **Do:** Put Nginx in front of Odoo for SSL termination (Let's Encrypt / Certbot) — never expose Odoo directly on port 80/443.\n- ✅ **Do:** Set `workers = (CPU cores × 2) + 1` in `odoo.conf` — `workers = 0` uses single-threaded mode and blocks all users.\n- ❌ **Don't:** Expose port 5432 (PostgreSQL) to the public internet — keep it on the internal Docker network only.\n- ❌ **Don't:** Use the `latest` or `17` Docker image tags in production — always pin to a specific patch-level tag (e.g., `odoo:17.0`).\n- ❌ **Don't:** Mount `odoo.conf` and rely on it for secrets in CI/CD — use Docker secrets or environment variables instead.\n\n## Limitations\n\n- This skill covers **self-hosted Docker deployments** — Odoo.sh (cloud-managed hosting) has a completely different deployment model.\n- **Horizontal scaling** (multiple Odoo containers behind a load balancer) requires shared filestore (NFS or S3-compatible storage) not covered here.\n- Does not include an Nginx configuration template — consult the [official Odoo Nginx docs](https://www.odoo.com/documentation/17.0/administration/install/deploy.html) for the full reverse proxy config.\n- The `addons_path` inside the Docker image may change with new base image versions — always verify after upgrading the Odoo image.\n",
+      "tags": [
+        "python",
+        "ai",
+        "template",
+        "document",
+        "image",
+        "docker",
+        "aws",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Spinning up a local Odoo development environment with Docker.",
+        "Deploying Odoo to a VPS or cloud server (AWS, DigitalOcean, etc.).",
+        "Troubleshooting Odoo container startup failures or database connection errors.",
+        "Adding a reverse proxy with SSL to an existing Odoo Docker setup."
+      ],
+      "scrapedAt": "2026-03-06T07:03:52.233Z"
+    },
+    {
+      "id": "antigravity-odoo-ecommerce-configurator",
+      "name": "odoo-ecommerce-configurator",
+      "slug": "odoo-ecommerce-configurator",
+      "description": "Expert guide for Odoo eCommerce and Website: product catalog, payment providers, shipping methods, SEO, and order-to-fulfillment workflow.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-ecommerce-configurator",
+      "content": "\n# Odoo eCommerce Configurator\n\n## Overview\n\nThis skill helps you set up and optimize an Odoo-powered online store. It covers product publishing, payment gateway integration, shipping carrier configuration, cart and checkout customization, and the workflow from online order to warehouse fulfillment.\n\n## When to Use This Skill\n\n- Launching an Odoo eCommerce store for the first time.\n- Integrating a payment provider (Stripe, PayPal, Adyen).\n- Configuring shipping rates with carrier integration (UPS, FedEx, DHL).\n- Optimizing product pages for SEO with Odoo Website tools.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-ecommerce-configurator` and describe your store scenario.\n2. **Configure**: Receive step-by-step Odoo eCommerce setup with menu paths.\n3. **Optimize**: Get SEO, conversion, and catalog best practices.\n\n## Examples\n\n### Example 1: Publish a Product to the Website\n\n```text\nMenu: Website → eCommerce → Products → Select Product\n\nFields to complete for a great product listing:\n  Name:               Ergonomic Mesh Office Chair  (keyword-rich)\n  Internal Reference: CHAIR-MESH-001               (required for inventory)\n  Sales Price:        $299.00\n  Website Description (website tab): 150–300 words of unique content\n\nPublishing:\n  Toggle \"Published\" in the top-right corner of the product form\n  or via: Website → Go to Website → Toggle \"Published\" button\n\nSEO (website tab → SEO section):\n  Page Title:       Ergonomic Mesh Chair | Office Chairs | YourStore\n  Meta Description: Discover the most comfortable ergonomic mesh office\n                    chair, designed for all-day support...  (≤160 chars)\n\nWebsite tab:\n  Can be Sold: YES\n  Website:     yourstore.com  (if running multiple websites)\n```\n\n### Example 2: Configure Stripe Payment Provider\n\n```text\nMenu: Website → Configuration → Payment Providers → Stripe → Configure\n(or: Accounting → Configuration → Payment Providers → Stripe)\n\nState: Test  (use Test mode until fully validated, then switch to Enabled)\n\nCredentials (from your Stripe Dashboard → Developers → API Keys):\n  Publishable Key: pk_live_XXXXXXXX\n  Secret Key:      sk_live_XXXXXXXX  (store securely; never expose client-side)\n\nPayment Journal: Bank (USD)\nCapture Mode:    Automatic  (charge card immediately on order confirmation)\n                 or Manual  (authorize only; charge later on fulfillment)\n\nWebhook:\n  Add Odoo's webhook URL in Stripe Dashboard → Webhooks\n  URL: https://yourstore.com/payment/stripe/webhook\n  Events: payment_intent.succeeded, payment_intent.payment_failed\n```\n\n### Example 3: Set Up Flat Rate Shipping with Free Threshold\n\n```text\nMenu: Inventory → Configuration → Delivery Methods → New\n\nName: Standard Shipping (3–5 business days)\nProvider: Fixed Price\nDelivery Product: [Shipping] Standard  (used for invoicing)\n\nPricing:\n  Price: $9.99\n  ☑ Free if order amount is above: $75.00\n\nAvailability:\n  Countries: United States\n  States: All states\n\nPublish to website:\n  ☑ Published  (visible to customers at checkout)\n```\n\n### Example 4: Set Up Abandoned Cart Recovery\n\n```text\nMenu: Email Marketing → Mailing Lists → (create a list if needed)\n\nFor automated abandoned cart emails in Odoo 16/17:\nMenu: Marketing → Marketing Automation → New Campaign\n\nTrigger: Odoo record updated\nModel: eCommerce Cart (sale.order with state = 'draft')\nFilter: Cart not updated in 1 hour AND not confirmed\n\nActions:\n  1. Wait 1 hour\n  2. Send Email: \"You left something behind!\"  (use a recovery email template)\n  3. Wait 24 hours\n  4. Send Email: \"Last chance — items selling fast\"\n\nNote: Some Odoo hosting plans may require \"Email Marketing\" app enabled.\n```\n\n## Best Practices\n\n- ✅ **Do:** Use **Product Variants** (color, size) instead of duplicate products — cleaner catalog and shared inventory tracking.\n- ✅ **Do:** Enable **HTTPS** (SSL certificate) via your hosting provider and set HSTS in Website → Settings → Security.\n- ✅ **Do:** Set up **Abandoned Cart Recovery** using Marketing Automation or a scheduled email sequence.\n- ✅ **Do:** Add a **Stripe webhook** so Odoo is notified of payment events in real time — without it, failed payments may not update correctly.\n- ❌ **Don't:** Leave the payment provider in **Test mode** in production — no real charges will be processed.\n- ❌ **Don't:** Publish products without an **Internal Reference (SKU)** — it breaks inventory tracking and order fulfillment.\n- ❌ **Don't:** Use the same Stripe key for Test and Production environments — always rotate to live keys before going live.\n\n## Limitations\n\n- **Carrier integration** (live UPS/FedEx rate calculation) requires the specific carrier connector module (e.g., `delivery_ups`) and a carrier account API key.\n- Does not cover **multi-website** configuration — running separate storefronts with different pricelists and languages requires Enterprise.\n- **B2B eCommerce** (customer login required, custom catalog and prices per customer) has additional configuration steps not fully covered here.\n- Odoo eCommerce does not sup",
+      "tags": [
+        "api",
+        "ai",
+        "llm",
+        "automation",
+        "workflow",
+        "template",
+        "design",
+        "security",
+        "stripe",
+        "seo"
+      ],
+      "useCases": [
+        "Launching an Odoo eCommerce store for the first time.",
+        "Integrating a payment provider (Stripe, PayPal, Adyen).",
+        "Configuring shipping rates with carrier integration (UPS, FedEx, DHL).",
+        "Optimizing product pages for SEO with Odoo Website tools."
+      ],
+      "scrapedAt": "2026-03-06T07:03:52.558Z"
+    },
+    {
+      "id": "antigravity-odoo-edi-connector",
+      "name": "odoo-edi-connector",
+      "slug": "odoo-edi-connector",
+      "description": "Guide for implementing EDI (Electronic Data Interchange) with Odoo: X12, EDIFACT document mapping, partner onboarding, and automated order processing.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-edi-connector",
+      "content": "\n# Odoo EDI Connector\n\n## Overview\n\nElectronic Data Interchange (EDI) is the standard for automated B2B document exchange — purchase orders, invoices, ASNs (Advance Shipping Notices). This skill guides you through mapping EDI transactions (ANSI X12 or EDIFACT) to Odoo business objects, setting up trading partner configurations, and automating inbound/outbound document flows.\n\n## When to Use This Skill\n\n- A retail partner requires EDI 850 (Purchase Orders) to do business with you.\n- You need to send EDI 856 (ASN) when goods are shipped.\n- Automating EDI 810 (Invoice) generation from Odoo confirmed deliveries.\n- Mapping EDI fields to Odoo fields for a new trading partner.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-edi-connector` and specify the EDI transaction set and trading partner.\n2. **Map**: Receive a complete field mapping table between EDI segments and Odoo fields.\n3. **Automate**: Get Python code to parse incoming EDI files and create Odoo records.\n\n## EDI ↔ Odoo Object Mapping\n\n| EDI Transaction | Odoo Object |\n|---|---|\n| 850 Purchase Order | `sale.order` (inbound customer PO) |\n| 855 PO Acknowledgment | Confirmation email / SO confirmation |\n| 856 ASN (Advance Ship Notice) | `stock.picking` (delivery order) |\n| 810 Invoice | `account.move` (customer invoice) |\n| 846 Inventory Inquiry | `product.product` stock levels |\n| 997 Functional Acknowledgment | Automated receipt confirmation |\n\n## Examples\n\n### Example 1: Parse EDI 850 and Create Odoo Sale Order (Python)\n\n```python\nfrom pyx12 import x12file  # pip install pyx12\n\nimport xmlrpc.client\n\nodoo_url = \"https://myodoo.example.com\"\ndb, uid, pwd = \"my_db\", 2, \"api_key\"\nmodels = xmlrpc.client.ServerProxy(f\"{odoo_url}/xmlrpc/2/object\")\n\ndef process_850(edi_file_path):\n    \"\"\"Parse X12 850 Purchase Order and create Odoo Sale Order\"\"\"\n    with x12file.X12File(edi_file_path) as f:\n        for transaction in f.get_transaction_sets():\n            # Extract header info (BEG segment)\n            po_number = transaction['BEG'][3]    # Purchase Order Number\n            po_date   = transaction['BEG'][5]    # Purchase Order Date\n\n            # Extract partner (N1 segment — Buyer)\n            partner_name = transaction['N1'][2]\n\n            # Find partner in Odoo\n            partner = models.execute_kw(db, uid, pwd, 'res.partner', 'search',\n                [[['name', 'ilike', partner_name]]])\n            partner_id = partner[0] if partner else False\n\n            # Extract line items (PO1 segments)\n            order_lines = []\n            for po1 in transaction.get_segments('PO1'):\n                sku     = po1[7]    # Product ID\n                qty     = float(po1[2])\n                price   = float(po1[4])\n\n                product = models.execute_kw(db, uid, pwd, 'product.product', 'search',\n                    [[['default_code', '=', sku]]])\n                if product:\n                    order_lines.append((0, 0, {\n                        'product_id': product[0],\n                        'product_uom_qty': qty,\n                        'price_unit': price,\n                    }))\n\n            # Create Sale Order\n            if partner_id and order_lines:\n                models.execute_kw(db, uid, pwd, 'sale.order', 'create', [{\n                    'partner_id': partner_id,\n                    'client_order_ref': po_number,\n                    'order_line': order_lines,\n                }])\n```\n\n### Example 2: Send EDI 997 Acknowledgment\n\n```python\ndef generate_997(isa_control, gs_control, transaction_control):\n    \"\"\"Generate a functional acknowledgment for received EDI\"\"\"\n    return f\"\"\"ISA*00*          *00*          *ZZ*YOURISAID      *ZZ*PARTNERISAID   *{today}*1200*^*00501*{isa_control}*0*P*>~\nGS*FA*YOURGID*PARTNERGID*{today}*1200*{gs_control}*X*005010X231A1~\nST*997*0001~\nAK1*PO*{gs_control}~\nAK9*A*1*1*1~\nSE*4*0001~\nGE*1*{gs_control}~\nIEA*1*{isa_control}~\"\"\"\n```\n\n## Best Practices\n\n- ✅ **Do:** Store every raw EDI transaction in an audit log table before processing.\n- ✅ **Do:** Always send a **997 Functional Acknowledgment** within 24 hours of receiving a transaction.\n- ✅ **Do:** Negotiate a test cycle with trading partners before going live — use test ISA qualifier `T`.\n- ❌ **Don't:** Process EDI files synchronously in web requests — queue them for async processing.\n- ❌ **Don't:** Hardcode trading partner qualifiers — store them in a configuration table per partner.\n",
+      "tags": [
+        "python",
+        "api",
+        "ai",
+        "document"
+      ],
+      "useCases": [
+        "A retail partner requires EDI 850 (Purchase Orders) to do business with you.",
+        "You need to send EDI 856 (ASN) when goods are shipped.",
+        "Automating EDI 810 (Invoice) generation from Odoo confirmed deliveries.",
+        "Mapping EDI fields to Odoo fields for a new trading partner."
+      ],
+      "scrapedAt": "2026-03-06T07:03:52.927Z"
+    },
+    {
+      "id": "antigravity-odoo-hr-payroll-setup",
+      "name": "odoo-hr-payroll-setup",
+      "slug": "odoo-hr-payroll-setup",
+      "description": "Expert guide for Odoo HR and Payroll: salary structures, payslip rules, leave policies, employee contracts, and payroll journal entries.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-hr-payroll-setup",
+      "content": "\n# Odoo HR & Payroll Setup\n\n## Overview\n\nThis skill guides HR managers and payroll accountants through setting up Odoo HR and Payroll correctly. It covers salary structure creation with Python-computed rules, time-off policies, employee contract types, and the payroll → accounting journal posting flow.\n\n## When to Use This Skill\n\n- Creating a salary structure with gross pay, deductions, and net pay.\n- Configuring annual leave, sick leave, and public holiday policies.\n- Troubleshooting incorrect payslip amounts or missing rule contributions.\n- Setting up the payroll journal to correctly post to accounting.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-hr-payroll-setup` and describe your payroll scenario.\n2. **Configure**: Receive step-by-step setup for salary rules and leave allocation.\n3. **Debug**: Paste a salary rule or payslip issue and receive a root cause analysis.\n\n## Examples\n\n### Example 1: Salary Structure with Deductions\n\n```text\nMenu: Payroll → Configuration → Salary Structures → New\n\nName: US Employee Monthly\nPayslip Code: MONTHLY\n\nRules (executed top-to-bottom — order matters):\n  Code  | Name                   | Formula                        | Category\n  ----- | ---------------------- | ------------------------------ | ---------\n  BASIC | Basic Wage             | contract.wage                  | Basic\n  GROSS | Gross                  | BASIC                          | Gross\n  SS    | Social Security (6.2%) | -GROSS * 0.062                 | Deduction\n  MED   | Medicare (1.45%)       | -GROSS * 0.0145                | Deduction\n  FIT   | Federal Income Tax     | -GROSS * inputs.FIT_RATE.amount| Deduction\n  NET   | Net Salary             | GROSS + SS + MED + FIT         | Net\n```\n\n> **Federal Income Tax:** The standard Odoo US localization does not expose a single `l10n_us_w4_rate` field. Use an **input** (salary input type) to pass the withholding rate per employee, or install a community US payroll module (OCA `l10n_us_hr_payroll`) which handles W4 filing status properly.\n\n### Example 2: Configure a Time Off Type\n\n```text\nMenu: Time Off → Configuration → Time Off Types → New\n\nName: Annual Leave / PTO\nApproval: Time Off Officer\nLeave Validation: Time Off Officer  (single approver)\n  or: \"Both\" for HR + Manager double approval\n\nAllocation:\n  ☑ Employees can allocate time off themselves\n  Requires approval: No\n\nNegative Balance: Not allowed (employees cannot go negative)\n\nThen create initial allocations:\nMenu: Time Off → Managers → Allocations → New\n  Employee: [Each employee]\n  Time Off Type: Annual Leave / PTO\n  Allocation: 15 days\n  Validity: Jan 1 – Dec 31 [current year]\n```\n\n### Example 3: Payroll Journal Entry Result\n\n```text\nAfter validating a payroll batch, Odoo generates:\n\nDebit   Salary Expense Account     $5,000.00\n  Credit  Social Security Payable     $310.00\n  Credit  Medicare Payable             $72.50\n  Credit  Federal Tax Payable         (varies)\n  Credit  Salary Payable           $4,617.50+\n\nWhen net salary is paid:\nDebit   Salary Payable            $4,617.50\n  Credit  Bank Account              $4,617.50\n\nEmployer taxes (e.g., FUTA, SUTA) post as separate journal entries.\n```\n\n## Best Practices\n\n- ✅ **Do:** Install your country's **payroll localization** (`l10n_us_hr_payroll`, `l10n_mx_hr_payroll`, etc.) before building custom rules — it provides pre-configured tax structures.\n- ✅ **Do:** Use **salary rule inputs** (`inputs.ALLOWANCE.amount`) to pass variable values (bonuses, allowances, withholding rates) rather than hardcoding them in the rule formula.\n- ✅ **Do:** Archive old salary structures rather than deleting them — active payslips reference their structure and will break if the structure is deleted.\n- ✅ **Do:** Always set an active **Employee Contract** with correct dates and salary before generating payslips.\n- ❌ **Don't:** Manually edit posted payslips — cancel and regenerate the payslip batch if corrections are needed.\n- ❌ **Don't:** Use `contract.wage` in deduction rules without verifying whether the structure is monthly or annual — always check the contract wage period.\n\n## Limitations\n\n- **Odoo Payroll is Enterprise-only** — the Community Edition does not include the Payroll module (`hr_payroll`).\n- US-specific compliance (W2, 941, state SUI/SDI filing) requires additional modules beyond the base localization; Odoo does not generate tax filings directly.\n- Does not cover **multi-country payroll** (employees in different countries require separate structures and localizations).\n- **Expense reimbursements** via payslip (e.g., mileage, home office) require a custom salary rule input and are not covered in standard HR Payroll documentation.\n",
+      "tags": [
+        "python",
+        "ai",
+        "document",
+        "security"
+      ],
+      "useCases": [
+        "Creating a salary structure with gross pay, deductions, and net pay.",
+        "Configuring annual leave, sick leave, and public holiday policies.",
+        "Troubleshooting incorrect payslip amounts or missing rule contributions.",
+        "Setting up the payroll journal to correctly post to accounting."
+      ],
+      "scrapedAt": "2026-03-06T07:03:53.229Z"
+    },
+    {
+      "id": "antigravity-odoo-inventory-optimizer",
+      "name": "odoo-inventory-optimizer",
+      "slug": "odoo-inventory-optimizer",
+      "description": "Expert guide for Odoo Inventory: stock valuation (FIFO/AVCO), reordering rules, putaway strategies, routes, and multi-warehouse configuration.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-inventory-optimizer",
+      "content": "\n# Odoo Inventory Optimizer\n\n## Overview\n\nThis skill helps you configure and optimize Odoo Inventory for accuracy, efficiency, and traceability. It covers stock valuation methods, reordering rules, putaway strategies, warehouse routes, and multi-step flows (receive → quality → store).\n\n## When to Use This Skill\n\n- Choosing and configuring FIFO vs AVCO stock valuation.\n- Setting up minimum stock reordering rules to avoid stockouts.\n- Designing a multi-step warehouse flow (2-step receipt, 3-step delivery).\n- Configuring putaway rules to direct products to specific storage locations.\n- Troubleshooting negative stock, incorrect valuation, or missing moves.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-inventory-optimizer` and describe your warehouse scenario.\n2. **Configure**: Receive step-by-step configuration instructions with exact Odoo menu paths.\n3. **Optimize**: Get recommendations for reordering rules and stock accuracy improvements.\n\n## Examples\n\n### Example 1: Enable FIFO Stock Valuation\n\n```text\nMenu: Inventory → Configuration → Settings\n\nEnable: Storage Locations\nEnable: Multi-Step Routes\nCosting Method: (set per Product Category, not globally)\n\nMenu: Inventory → Configuration → Product Categories → Edit\n\n  Category: All / Physical Goods\n  Costing Method: First In First Out (FIFO)\n  Inventory Valuation: Automated\n  Account Stock Valuation: [Balance Sheet inventory account]\n  Account Stock Input:   [Stock Received Not Billed]\n  Account Stock Output:  [Stock Delivered Not Invoiced]\n```\n\n### Example 2: Set Up a Min/Max Reordering Rule\n\n```text\nMenu: Inventory → Operations → Replenishment → New\n\nProduct: Office Paper A4\nLocation: WH/Stock\nMin Qty: 100   (trigger reorder when stock falls below this)\nMax Qty: 500   (purchase up to this quantity)\nMultiple Qty: 50  (always order in multiples of 50)\nRoute: Buy    (triggers a Purchase Order automatically)\n       or Manufacture (triggers a Manufacturing Order)\n```\n\n### Example 3: Configure Putaway Rules\n\n```text\nMenu: Inventory → Configuration → Putaway Rules → New\n\nPurpose: Direct products from WH/Input to specific bin locations\n\nRules:\n  Product Category: Refrigerated Goods\n    → Location: WH/Stock/Cold Storage\n\n  Product: Laptop Model X\n    → Location: WH/Stock/Electronics/Shelf A\n\n  (leave Product blank to apply the rule to an entire category)\n\nResult: When a receipt is validated, Odoo automatically suggests\nthe correct destination location per product or category.\n```\n\n### Example 4: Configure 3-Step Warehouse Delivery\n\n```text\nMenu: Inventory → Configuration → Warehouses → [Your Warehouse]\n\nOutgoing Shipments: Pick + Pack + Ship (3 steps)\n\nOperations created automatically:\n  PICK  — Move goods from storage shelf to packing area\n  PACK  — Package items and print shipping label\n  OUT   — Hand off to carrier / mark as shipped\n```\n\n## Best Practices\n\n- ✅ **Do:** Use **Lots/Serial Numbers** for high-value or regulated items (medical devices, electronics).\n- ✅ **Do:** Run a **physical inventory adjustment** at least quarterly (Inventory → Operations → Physical Inventory) to correct drift.\n- ✅ **Do:** Set reordering rules on fast-moving items so purchase orders are generated automatically.\n- ✅ **Do:** Enable **Putaway Rules** on warehouses with multiple storage zones — it eliminates manual location selection errors.\n- ❌ **Don't:** Switch stock valuation method (FIFO ↔ AVCO) after recording transactions — it produces incorrect historical cost data.\n- ❌ **Don't:** Use \"Update Quantity\" to fix stock errors — always use Inventory Adjustments to maintain a proper audit trail.\n- ❌ **Don't:** Mix product categories with different costing methods in the same storage location without understanding the valuation impact.\n\n## Limitations\n\n- **Serial number tracking** at the individual unit level (SN per line) adds significant UI overhead; test performance with large volumes before enabling.\n- Does not cover **landed costs** (import duties, freight allocation to product cost) — that requires the `stock_landed_costs` module.\n- **Cross-warehouse stock transfers** have routing complexities (transit locations, intercompany invoicing) not fully covered here.\n- Automated inventory valuation requires the **Accounting** module; Community Edition installations without it cannot post stock journal entries.\n",
+      "tags": [
+        "ai",
+        "design",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Choosing and configuring FIFO vs AVCO stock valuation.",
+        "Setting up minimum stock reordering rules to avoid stockouts.",
+        "Designing a multi-step warehouse flow (2-step receipt, 3-step delivery).",
+        "Configuring putaway rules to direct products to specific storage locations.",
+        "Troubleshooting negative stock, incorrect valuation, or missing moves."
+      ],
+      "scrapedAt": "2026-03-06T07:03:53.593Z"
+    },
+    {
+      "id": "antigravity-odoo-l10n-compliance",
+      "name": "odoo-l10n-compliance",
+      "slug": "odoo-l10n-compliance",
+      "description": "Country-specific Odoo localization: tax configuration, e-invoicing (CFDI, FatturaPA, SAF-T), fiscal reporting, and country chart of accounts setup.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-l10n-compliance",
+      "content": "\n# Odoo Localization & Compliance (l10n)\n\n## Overview\n\nOdoo provides localization modules (`l10n_*`) for 80+ countries that configure the correct chart of accounts, tax types, and fiscal reporting. This skill helps you install and configure the right localization, set up country-specific e-invoicing (Mexico CFDI, Italy FatturaPA, Poland SAF-T), and ensure fiscal compliance.\n\n## When to Use This Skill\n\n- Setting up Odoo for a company in a specific country (Mexico, Italy, Spain, US, etc.).\n- Configuring country-required e-invoicing (electronic invoice submission to tax authorities).\n- Setting up VAT/GST/IVA tax rules with correct fiscal positions.\n- Generating required fiscal reports (VAT return, SAF-T, DIAN report).\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-l10n-compliance` and specify your country and Odoo version.\n2. **Install**: Get the exact localization module and configuration steps.\n3. **Configure**: Receive tax code setup, fiscal position rules, and reporting guidance.\n\n## Country Localization Modules\n\n| Country | Module | Key Features |\n|---|---|---|\n| 🇺🇸 USA | `l10n_us` | GAAP CoA, Payroll (ADP bridge), 1099 reporting |\n| 🇲🇽 Mexico | `l10n_mx_edi` | CFDI 4.0 e-invoicing, SAT integration, IEPS tax |\n| 🇪🇸 Spain | `l10n_es` | SII real-time VAT, Modelo 303/390, AEAT |\n| 🇮🇹 Italy | `l10n_it_edi` | FatturaPA XML, SDI submission, reverse charge |\n| 🇵🇱 Poland | `l10n_pl` | SAF-T JPK_FA, VAT-7 return |\n| 🇧🇷 Brazil | `l10n_br` | NF-e, NFS-e, SPED, ICMS/PIS/COFINS |\n| 🇩🇪 Germany | `l10n_de` | SKR03/SKR04 CoA, DATEV export, UStVA |\n| 🇨🇴 Colombia | `l10n_co_edi` | DIAN e-invoicing, UBL 2.1 |\n\n## Examples\n\n### Example 1: Configure Mexico CFDI 4.0\n\n```\nStep 1: Install module\n  Apps → Search \"Mexico\" → Install \"Mexico - Accounting\"\n  Also install: \"Mexico - Electronic Invoicing\" (l10n_mx_edi)\n\nStep 2: Configure Company\n  Settings → Company → [Your Company]\n  Country: Mexico\n  RFC: Your RFC number (tax ID)\n  Company Type: Moral Person or Physical Person\n\nStep 3: Upload SAT Certificates\n  Accounting → Configuration → Certificates → New\n  CSD Certificate (.cer file from SAT)\n  Private Key (.key file from SAT)\n  Password: Your FIEL password\n\nStep 4: Issue a CFDI Invoice\n  Create invoice → Confirm → CFDI XML generated automatically\n  Sent to SAT → Receive UUID (folio fiscal)\n  PDF includes QR code + UUID for buyer verification\n```\n\n### Example 2: EU Intra-Community VAT Setup (Any EU Country)\n\n```\nMenu: Accounting → Configuration → Taxes → New\n\nTax Name: EU Intra-Community Sales (0%)\nTax Type: Sales\nTax Scope: Services or Goods\nTax Computation: Fixed\nAmount: 0%\nTax Group: Intra-Community\n\nLabel on Invoice: \"Intra-Community Supply - VAT Exempt per Art. 138 VAT Directive\"\n\nFiscal Position (created separately):\n  Name: EU B2B Intra-Community\n  Auto-detect: Country Group = Europe + VAT Required = YES\n  Tax Mapping: Standard VAT Rate → 0% Intra-Community\n```\n\n### Example 3: Install and Validate a Localization\n\n```bash\n# Install via CLI (if module not in Apps)\n./odoo-bin -d mydb --stop-after-init -i l10n_mx_edi\n\n# Verify in Odoo:\n# Apps → Installed → Search \"l10n_mx\" → Should show as Installed\n```\n\n## Best Practices\n\n- ✅ **Do:** Install the localization module **before** creating any accounting entries — it sets up the correct accounts.\n- ✅ **Do:** Use **Fiscal Positions** to automate tax switching for international customers (B2B vs B2C, domestic vs export).\n- ✅ **Do:** Test e-invoicing in the **SAT/tax authority test environment** before going live.\n- ❌ **Don't:** Manually create a chart of accounts if a localization module exists for your country.\n- ❌ **Don't:** Mix localization tax accounts with custom accounts — it breaks fiscal reports.\n",
+      "tags": [
+        "pdf",
+        "ai"
+      ],
+      "useCases": [
+        "Setting up Odoo for a company in a specific country (Mexico, Italy, Spain, US, etc.).",
+        "Configuring country-required e-invoicing (electronic invoice submission to tax authorities).",
+        "Setting up VAT/GST/IVA tax rules with correct fiscal positions.",
+        "Generating required fiscal reports (VAT return, SAF-T, DIAN report)."
+      ],
+      "scrapedAt": "2026-03-06T07:03:53.914Z"
+    },
+    {
+      "id": "antigravity-odoo-manufacturing-advisor",
+      "name": "odoo-manufacturing-advisor",
+      "slug": "odoo-manufacturing-advisor",
+      "description": "Expert guide for Odoo Manufacturing: Bills of Materials (BoM), Work Centers, routings, MRP planning, and production order workflows.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-manufacturing-advisor",
+      "content": "\n# Odoo Manufacturing Advisor\n\n## Overview\n\nThis skill helps you configure and optimize Odoo Manufacturing (MRP). It covers Bills of Materials (BoM), Work Centers, routing operations, production order lifecycle, and Material Requirements Planning (MRP) runs to ensure you never run short of materials.\n\n## When to Use This Skill\n\n- Creating or structuring Bills of Materials for finished goods.\n- Setting up Work Centers with capacity and efficiency settings.\n- Running an MRP to automatically generate purchase and production orders from demand.\n- Troubleshooting production order discrepancies or component availability issues.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-manufacturing-advisor` and describe your manufacturing scenario.\n2. **Configure**: Receive step-by-step instructions for BoM setup, routing, and MRP configuration.\n3. **Plan**: Get guidance on running MRP and interpreting procurement messages.\n\n## Examples\n\n### Example 1: Create a Bill of Materials\n\n```text\nMenu: Manufacturing → Products → Bills of Materials → New\n\nProduct: Finished Widget v2\nBoM Type: Manufacture This Product\nQuantity: 1 (produce 1 unit per BoM)\n\nComponents Tab:\n  - Raw Plastic Sheet  | Qty: 0.5  | Unit: kg\n  - Steel Bolt M6      | Qty: 4    | Unit: Units\n  - Rubber Gasket      | Qty: 1    | Unit: Units\n\nOperations Tab (requires \"Work Orders\" enabled in MFG Settings):\n  - Operation: Injection Molding | Work Center: Press A   | Duration: 30 min\n  - Operation: Assembly          | Work Center: Line 1    | Duration: 15 min\n```\n\n> **BoM Types explained:**\n>\n> - **Manufacture This Product** — standard production BoM, creates a Manufacturing Order\n> - **Kit** — sold as a bundle; components are delivered separately (no MO created)\n> - **Subcontracting** — components are sent to a subcontractor who returns the finished product\n\n### Example 2: Configure a Work Center\n\n```text\nMenu: Manufacturing → Configuration → Work Centers → New\n\nWork Center: CNC Machine 1\nWorking Hours: Standard 40h/week\nTime Efficiency: 85%      (machine downtime factored in; 85% = 34 effective hrs/week)\nCapacity: 2               (can run 2 production operations simultaneously)\nOEE Target: 90%           (Overall Equipment Effectiveness KPI target)\nCosts per Hour: $75.00    (used for manufacturing cost reporting)\n```\n\n### Example 3: Run the MRP Scheduler\n\n```text\nThe MRP scheduler runs automatically via a daily cron job.\nTo trigger it manually:\n\nMenu: Inventory → Operations → Replenishment → Run Scheduler\n(or Manufacturing → Planning → Replenishment in some versions)\n\nAfter running, review procurement exceptions:\nMenu: Inventory → Operations → Replenishment\n\nMessage Types:\n  \"Replenish\"   — Stock is below minimum; needs a PO or MO\n  \"Reschedule\"  — An order's scheduled date conflicts with demand\n  \"Cancel\"      — Demand no longer exists; the order can be cancelled\n```\n\n## Best Practices\n\n- ✅ **Do:** Enable **Work Orders** in Manufacturing Settings to use routing and time-tracking per operation.\n- ✅ **Do:** Use **BoM with variants** (via product attributes) for products that come in multiple configurations (color, size, voltage) — avoids duplicate BoMs.\n- ✅ **Do:** Set **Lead Times** on components (vendor lead time + security lead time) so MRP schedules purchase orders in advance.\n- ✅ **Do:** Use **Scrap Orders** when discarding defective components during production — never adjust stock manually.\n- ❌ **Don't:** Manually create purchase orders for MRP-managed items — override MRP suggestions only when justified.\n- ❌ **Don't:** Confuse **Kit** BoM with **Manufacture This Product** — a Kit never creates a Manufacturing Order.\n\n## Limitations\n\n- This skill targets **Odoo Manufacturing (mrp)** module. **Maintenance**, **PLM** (Product Lifecycle Management), and **Quality** modules are separate Enterprise modules not covered here.\n- **Subcontracting** workflows (sending components to a third-party manufacturer) have additional receipt and valuation steps not fully detailed here.\n- **Lot/serial number traceability** in production (tracking which lot was consumed per MO) adds complexity; test with small batches before full rollout.\n- MRP calculations assume demand comes from **Sale Orders** and **Reordering Rules** — forecasts from external systems require custom integration.\n",
+      "tags": [
+        "ai",
+        "workflow",
+        "security",
+        "cro"
+      ],
+      "useCases": [
+        "Creating or structuring Bills of Materials for finished goods.",
+        "Setting up Work Centers with capacity and efficiency settings.",
+        "Running an MRP to automatically generate purchase and production orders from demand.",
+        "Troubleshooting production order discrepancies or component availability issues."
+      ],
+      "scrapedAt": "2026-03-06T07:03:54.203Z"
+    },
+    {
+      "id": "antigravity-odoo-migration-helper",
+      "name": "odoo-migration-helper",
+      "slug": "odoo-migration-helper",
+      "description": "Step-by-step guide for migrating Odoo custom modules between versions (v14→v15→v16→v17). Covers API changes, deprecated methods, and view migration.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-migration-helper",
+      "content": "\n# Odoo Migration Helper\n\n## Overview\n\nMigrating Odoo modules between major versions requires careful handling of API changes, deprecated methods, renamed fields, and new view syntax. This skill guides you through the migration process systematically, covering the most common breaking changes between versions.\n\n## When to Use This Skill\n\n- Upgrading a custom module from Odoo 14/15/16 to a newer version.\n- Getting a checklist of things to check before running `odoo-upgrade`.\n- Fixing deprecation warnings after a version upgrade.\n- Understanding what changed between two specific Odoo versions.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-migration-helper`, specify your source and target versions, and paste your module code.\n2. **Analyze**: Receive a list of breaking changes with before/after code fixes.\n3. **Validate**: Get a migration checklist specific to your module's features.\n\n## Key Migration Changes by Version\n\n### Odoo 16 → 17\n\n| Topic | Old (v16) | New (v17) |\n|---|---|---|\n| View visibility | `attrs=\"{'invisible': [...]}\"` | `invisible=\"condition\"` |\n| Chatter | `<div class=\"oe_chatter\">` | `<chatter/>` |\n| Required/Readonly | `attrs=\"{'required': [...]}\"` | `required=\"condition\"` |\n| Python minimum | 3.10 | 3.10+ |\n| JS modules | Legacy `define(['web.core'])` | ES module `import` syntax |\n\n### Odoo 15 → 16\n\n| Topic | Old (v15) | New (v16) |\n|---|---|---|\n| Website published flag | `website_published = True` | `is_published = True` |\n| Mail aliases | `alias_domain` on company | Moved to `mail.alias.domain` model |\n| Report render | `_render_qweb_pdf()` | `_render_qweb_pdf()` (same, but signature changed) |\n| Accounting move | `account.move.line` grouping | Line aggregation rules updated |\n| Email threading | `mail_thread_id` | Deprecated; use `message_ids` |\n\n## Examples\n\n### Example 1: Migrate `attrs` visibility to Odoo 17\n\n```xml\n<!-- v16 — domain-based attrs -->\n<field name=\"discount\" attrs=\"{'invisible': [('product_type', '!=', 'service')]}\"/>\n<field name=\"discount\" attrs=\"{'required': [('state', '=', 'sale')]}\"/>\n\n<!-- v17 — inline Python expressions -->\n<field name=\"discount\" invisible=\"product_type != 'service'\"/>\n<field name=\"discount\" required=\"state == 'sale'\"/>\n```\n\n### Example 2: Migrate Chatter block\n\n```xml\n<!-- v16 -->\n<div class=\"oe_chatter\">\n    <field name=\"message_follower_ids\"/>\n    <field name=\"activity_ids\"/>\n    <field name=\"message_ids\"/>\n</div>\n\n<!-- v17 -->\n<chatter/>\n```\n\n### Example 3: Migrate website_published flag (v15 → v16)\n\n```python\n# v15\nrecord.website_published = True\n\n# v16+\nrecord.is_published = True\n```\n\n## Best Practices\n\n- ✅ **Do:** Test with `--update=your_module` on each version before pushing to production.\n- ✅ **Do:** Use the official [Odoo Upgrade Guide](https://upgrade.odoo.com/) to get an automated pre-upgrade analysis report.\n- ✅ **Do:** Check OCA migration notes and the module's `HISTORY.rst` for community modules.\n- ✅ **Do:** Run `npm run validate` after migration to catch manifest or frontmatter issues early.\n- ❌ **Don't:** Skip intermediate versions — go v14→v15→v16→v17 sequentially; never jump.\n- ❌ **Don't:** Forget to update `version` in `__manifest__.py` (e.g., `17.0.1.0.0`).\n- ❌ **Don't:** Assume OCA modules are migration-ready; check their GitHub branch for the target version.\n\n## Limitations\n\n- Covers **v14 through v17** only — does not address v13 or older (pre-manifest era has fundamentally different module structure).\n- The **Odoo.sh automated upgrade** path has additional steps not covered here; refer to Odoo.sh documentation.\n- **Enterprise-specific modules** (e.g., `account_accountant`, `sign`) may have undocumented breaking changes; test on a staging environment with Enterprise license.\n- JavaScript OWL component migration (v15 Legacy → v16 OWL) is a complex topic not fully covered by this skill.\n",
+      "tags": [
+        "python",
+        "javascript",
+        "pdf",
+        "api",
+        "ai",
+        "document"
+      ],
+      "useCases": [
+        "Upgrading a custom module from Odoo 14/15/16 to a newer version.",
+        "Getting a checklist of things to check before running `odoo-upgrade`.",
+        "Fixing deprecation warnings after a version upgrade.",
+        "Understanding what changed between two specific Odoo versions."
+      ],
+      "scrapedAt": "2026-03-06T07:03:54.511Z"
+    },
+    {
+      "id": "antigravity-odoo-module-developer",
+      "name": "odoo-module-developer",
+      "slug": "odoo-module-developer",
+      "description": "Expert guide for creating custom Odoo modules. Covers __manifest__.py, model inheritance, ORM patterns, and module structure best practices.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-module-developer",
+      "content": "\n# Odoo Module Developer\n\n## Overview\n\nThis skill transforms your AI into an expert Odoo custom module developer. It guides you through scaffolding new modules, defining models, setting up security, and following Odoo's coding conventions for both Community and Enterprise editions.\n\n## When to Use This Skill\n\n- Starting a new custom Odoo module from scratch.\n- Extending an existing Odoo model (e.g., adding fields to `sale.order`).\n- Troubleshooting module loading errors or manifest issues.\n- Implementing `onchange`, `compute`, and `constraint` methods correctly.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-module-developer` and describe the module you want to build.\n2. **Scaffold**: Get the full folder structure with `__manifest__.py`, `__init__.py`, models, views, and security files.\n3. **Review**: Paste existing code and get a review against Odoo best practices.\n\n## Examples\n\n### Example 1: Scaffold a New Module\n\n**Prompt:** `Create a module called \"hospital_management\" with a model for patients`\n\n**Generated structure:**\n\n```text\nhospital_management/\n├── __manifest__.py\n├── __init__.py\n├── models/\n│   ├── __init__.py\n│   └── hospital_patient.py\n├── views/\n│   └── hospital_patient_views.xml\n├── security/\n│   ├── ir.model.access.csv\n│   └── security.xml\n└── data/\n```\n\n**`__manifest__.py`:**\n\n```python\n{\n    'name': 'Hospital Management',\n    'version': '17.0.1.0.0',\n    'category': 'Healthcare',\n    'depends': ['base', 'mail'],\n    'data': [\n        'security/ir.model.access.csv',\n        'views/hospital_patient_views.xml',\n    ],\n    'installable': True,\n    'license': 'LGPL-3',\n}\n```\n\n**`models/hospital_patient.py`:**\n\n```python\nfrom odoo import models, fields, api\n\nclass HospitalPatient(models.Model):\n    _name = 'hospital.patient'\n    _description = 'Hospital Patient'\n    _inherit = ['mail.thread', 'mail.activity.mixin']\n\n    name = fields.Char(string='Patient Name', required=True, tracking=True)\n    birth_date = fields.Date(string='Birth Date')\n    doctor_id = fields.Many2one('res.users', string='Assigned Doctor')\n    state = fields.Selection([\n        ('draft', 'New'),\n        ('confirmed', 'Confirmed'),\n        ('done', 'Done'),\n    ], default='draft', tracking=True)\n```\n\n## Best Practices\n\n- ✅ **Do:** Always prefix your model `_name` with a namespace (e.g., `hospital.patient`).\n- ✅ **Do:** Use `_inherit = ['mail.thread']` to add chatter/logging automatically.\n- ✅ **Do:** Specify `version` in manifest as `{odoo_version}.{major}.{minor}.{patch}`.\n- ✅ **Do:** Set `'author'` and `'website'` in `__manifest__.py` so your module is identifiable in the Apps list.\n- ❌ **Don't:** Modify core Odoo model files directly — always use `_inherit`.\n- ❌ **Don't:** Forget to add new models to `ir.model.access.csv` or users will get access errors.\n- ❌ **Don't:** Use spaces or uppercase in folder names — Odoo requires snake_case module names.\n\n## Limitations\n\n- Does not cover **OWL JavaScript components** or frontend widget development — use `@odoo-xml-views-builder` for view XML.\n- **Odoo 13 and below** have a different module structure (no `__manifest__.py` auto-loading) — this skill targets v14+.\n- Does not cover **multi-company** or **multi-website** configuration; those require additional model fields (`company_id`, `website_id`).\n- Does not generate automated test files — use `@odoo-automated-tests` for that.\n",
+      "tags": [
+        "python",
+        "javascript",
+        "api",
+        "ai",
+        "security"
+      ],
+      "useCases": [
+        "Starting a new custom Odoo module from scratch.",
+        "Extending an existing Odoo model (e.g., adding fields to `sale.order`).",
+        "Troubleshooting module loading errors or manifest issues.",
+        "Implementing `onchange`, `compute`, and `constraint` methods correctly."
+      ],
+      "scrapedAt": "2026-03-06T07:03:54.812Z"
+    },
+    {
+      "id": "antigravity-odoo-orm-expert",
+      "name": "odoo-orm-expert",
+      "slug": "odoo-orm-expert",
+      "description": "Master Odoo ORM patterns: search, browse, create, write, domain filters, computed fields, and performance-safe query techniques.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-orm-expert",
+      "content": "\n# Odoo ORM Expert\n\n## Overview\n\nThis skill teaches you Odoo's Object Relational Mapper (ORM) in depth. It covers reading/writing records, building domain filters, working with relational fields, and avoiding common performance pitfalls like N+1 queries.\n\n## When to Use This Skill\n\n- Writing `search()`, `browse()`, `create()`, `write()`, or `unlink()` calls.\n- Building complex domain filters for views or server actions.\n- Implementing computed, stored, and related fields.\n- Debugging slow queries or optimizing bulk operations.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-orm-expert` and describe what data operation you need.\n2. **Get Code**: Receive correct, idiomatic Odoo ORM code with explanations.\n3. **Optimize**: Ask for performance review on existing ORM code.\n\n## Examples\n\n### Example 1: Search with Domain Filters\n\n```python\n# Find all confirmed sale orders for a specific customer, created this year\nimport datetime\n\nstart_of_year = datetime.date.today().replace(month=1, day=1).strftime('%Y-%m-%d')\n\norders = self.env['sale.order'].search([\n    ('partner_id', '=', partner_id),\n    ('state', '=', 'sale'),\n    ('date_order', '>=', start_of_year),\n], order='date_order desc', limit=50)\n\n# Note: pass dates as 'YYYY-MM-DD' strings in domains,\n# NOT as fields.Date objects — the ORM serializes them correctly.\n```\n\n### Example 2: Computed Field\n\n```python\ntotal_order_count = fields.Integer(\n    string='Total Orders',\n    compute='_compute_total_order_count',\n    store=True\n)\n\n@api.depends('sale_order_ids')\ndef _compute_total_order_count(self):\n    for record in self:\n        record.total_order_count = len(record.sale_order_ids)\n```\n\n### Example 3: Safe Bulk Write (avoid N+1)\n\n```python\n# ✅ GOOD: One query for all records\npartners = self.env['res.partner'].search([('country_id', '=', False)])\npartners.write({'country_id': self.env.ref('base.us').id})\n\n# ❌ BAD: Triggers a separate query per record\nfor partner in partners:\n    partner.country_id = self.env.ref('base.us').id\n```\n\n## Best Practices\n\n- ✅ **Do:** Use `mapped()`, `filtered()`, and `sorted()` on recordsets instead of Python loops.\n- ✅ **Do:** Use `sudo()` sparingly and only when you understand the security implications.\n- ✅ **Do:** Prefer `search_count()` over `len(search(...))` when you only need a count.\n- ✅ **Do:** Use `with_context(...)` to pass context values cleanly rather than modifying `self.env.context` directly.\n- ❌ **Don't:** Call `search()` inside a loop — this is the #1 Odoo performance killer.\n- ❌ **Don't:** Use raw SQL unless absolutely necessary; use ORM for all standard operations.\n- ❌ **Don't:** Pass Python `datetime`/`date` objects directly into domain tuples — always stringify them as `'YYYY-MM-DD'`.\n\n## Limitations\n\n- Does not cover **`cr.execute()` raw SQL** patterns in depth — use the Odoo performance tuner skill for SQL-level optimization.\n- **Stored computed fields** can cause significant write overhead at scale; this skill does not cover partitioning strategies.\n- Does not cover **transient models** (`models.TransientModel`) or wizard patterns.\n- ORM behavior can differ slightly between Odoo SaaS and On-Premise due to config overrides.\n",
+      "tags": [
+        "python",
+        "api",
+        "ai",
+        "security"
+      ],
+      "useCases": [
+        "Writing `search()`, `browse()`, `create()`, `write()`, or `unlink()` calls.",
+        "Building complex domain filters for views or server actions.",
+        "Implementing computed, stored, and related fields.",
+        "Debugging slow queries or optimizing bulk operations."
+      ],
+      "scrapedAt": "2026-03-06T07:03:55.129Z"
+    },
+    {
+      "id": "antigravity-odoo-performance-tuner",
+      "name": "odoo-performance-tuner",
+      "slug": "odoo-performance-tuner",
+      "description": "Expert guide for diagnosing and fixing Odoo performance issues: slow queries, worker configuration, memory limits, PostgreSQL tuning, and profiling tools.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-performance-tuner",
+      "content": "\n# Odoo Performance Tuner\n\n## Overview\n\nThis skill helps diagnose and resolve Odoo performance problems — from slow page loads and database bottlenecks to worker misconfiguration and memory bloat. It covers PostgreSQL query tuning, Odoo worker settings, and built-in profiling tools.\n\n## When to Use This Skill\n\n- Odoo is slow in production (slow page loads, timeouts).\n- Getting `MemoryError` or `Worker timeout` errors in logs.\n- Diagnosing a slow database query using Odoo's profiler.\n- Tuning `odoo.conf` for a specific server spec.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-performance-tuner` and describe your performance issue.\n2. **Diagnose**: Share relevant log lines or config and receive a root cause analysis.\n3. **Fix**: Get exact configuration changes with explanations.\n\n## Examples\n\n### Example 1: Recommended Worker Configuration\n\n```ini\n# odoo.conf — tuned for a 4-core, 8GB RAM server\n\nworkers = 9                   # (CPU_cores × 2) + 1 — never set to 0 in production\nmax_cron_threads = 2          # background cron jobs; keep ≤ 2 to preserve user-facing capacity\nlimit_memory_soft = 1610612736  # 1.5 GB — worker is recycled gracefully after this\nlimit_memory_hard = 2147483648  # 2.0 GB — worker is killed immediately; prevents OOM crashes\nlimit_time_cpu = 600          # max CPU seconds per request\nlimit_time_real = 1200        # max wall-clock seconds per request\nlimit_request = 8192          # max requests before worker recycles (prevents memory leaks)\n```\n\n### Example 2: Find Slow Queries with PostgreSQL\n\n```sql\n-- Step 1: Enable pg_stat_statements extension (run once as postgres superuser)\nCREATE EXTENSION IF NOT EXISTS pg_stat_statements;\n\n-- Step 2: Also add to postgresql.conf and reload:\n-- shared_preload_libraries = 'pg_stat_statements'\n-- log_min_duration_statement = 1000   -- log queries taking > 1 second\n\n-- Step 3: Find the top 10 slowest average queries\nSELECT\n    LEFT(query, 100) AS query_snippet,\n    round(mean_exec_time::numeric, 2) AS avg_ms,\n    calls,\n    round(total_exec_time::numeric, 2) AS total_ms\nFROM pg_stat_statements\nORDER BY mean_exec_time DESC\nLIMIT 10;\n\n-- Step 4: Check for missing indexes causing full table scans\nSELECT schemaname, tablename, attname, n_distinct, correlation\nFROM pg_stats\nWHERE tablename = 'sale_order_line'\n  AND correlation < 0.5   -- low correlation = poor index efficiency\nORDER BY n_distinct DESC;\n```\n\n### Example 3: Use Odoo's Built-In Profiler\n\n```text\nPrerequisites: Run Odoo with ?debug=1 in the URL to enable debug mode.\n\nMenu: Settings → Technical → Profiling\n\nSteps:\n  1. Click \"Enable Profiling\" — set a duration (e.g., 60 seconds)\n  2. Navigate to and reproduce the slow action\n  3. Return to Settings → Technical → Profiling → View Results\n\nWhat to look for:\n  - Total SQL queries > 100 on a single page  → N+1 query problem\n  - Single queries taking > 100ms             → missing DB index\n  - Same query repeated many times            → missing cache, use @ormcache\n  - Python time high but SQL low             → compute field inefficiency\n```\n\n## Best Practices\n\n- ✅ **Do:** Use `mapped()`, `filtered()`, and `sorted()` on in-memory recordsets — they don't trigger additional SQL.\n- ✅ **Do:** Add PostgreSQL B-tree indexes on columns frequently used in domain filters (`partner_id`, `state`, `date_order`).\n- ✅ **Do:** Enable Odoo's HTTP caching for static assets and put a CDN (Cloudflare, AWS CloudFront) in front of the website.\n- ✅ **Do:** Use `@tools.ormcache` decorator on methods pulled repeatedly with the same arguments.\n- ❌ **Don't:** Set `workers = 0` in production — single-threaded mode serializes all requests and blocks all users on any slow operation.\n- ❌ **Don't:** Ignore `limit_memory_soft` — workers exceeding it are recycled between requests; without the limit they grow unbounded and crash.\n- ❌ **Don't:** Directly manipulate `prefetch_ids` on recordsets — rely on Odoo's automatic batch prefetching, which activates by default.\n\n## Limitations\n\n- PostgreSQL tuning (`shared_buffers`, `work_mem`, `effective_cache_size`) is highly server-specific and not covered in depth here — use [PGTune](https://pgtune.leopard.in.ua/) as a starting baseline.\n- The built-in Odoo profiler only captures **Python + SQL** traces; JavaScript rendering performance requires browser DevTools.\n- **Odoo.sh** managed hosting restricts direct PostgreSQL and `odoo.conf` access — some tuning options are unavailable.\n- Does not cover **Redis-based session store** or **Celery task queue** optimizations, which are advanced patterns for very high-traffic instances.\n",
+      "tags": [
+        "python",
+        "javascript",
+        "ai",
+        "aws",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Odoo is slow in production (slow page loads, timeouts).",
+        "Getting `MemoryError` or `Worker timeout` errors in logs.",
+        "Diagnosing a slow database query using Odoo's profiler.",
+        "Tuning `odoo.conf` for a specific server spec."
+      ],
+      "scrapedAt": "2026-03-06T07:03:55.451Z"
+    },
+    {
+      "id": "antigravity-odoo-project-timesheet",
+      "name": "odoo-project-timesheet",
+      "slug": "odoo-project-timesheet",
+      "description": "Expert guide for Odoo Project and Timesheets: task stages, billable time tracking, timesheet approval, budget alerts, and invoicing from timesheets.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-project-timesheet",
+      "content": "\n# Odoo Project & Timesheet\n\n## Overview\n\nThis skill helps you configure Odoo Project and Timesheets for service businesses, agencies, and consulting firms. It covers project setup with budgets, task stage management, employee timesheet logging, approval workflows, and converting approved timesheet hours to customer invoices.\n\n## When to Use This Skill\n\n- Setting up a new project with tasks, deadlines, and team assignments.\n- Configuring billable vs. non-billable time tracking per project.\n- Creating a timesheet approval workflow for managers.\n- Invoicing customers based on logged hours (Time & Materials billing).\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-project-timesheet` and describe your project or billing scenario.\n2. **Configure**: Receive step-by-step setup instructions.\n3. **Automate**: Get guidance on automatically generating invoices from approved timesheets.\n\n## Examples\n\n### Example 1: Create a Billable Project\n\n```text\nMenu: Project → New Project (or the \"+\" button in Project view)\n\nName:     Website Redesign — Acme Corp\nCustomer: Acme Corporation\nBillable: YES  (toggle ON)\n\nSettings tab:\n  Billing Type: Based on Timesheets (Time & Materials)\n  Service Product: Consulting Hours ($150/hr)\n  ☑ Timesheets\n  ☑ Task Dependencies\n  ☑ Subtasks\n\nBudget:\n  Planned Hours: 120 hours\n  Budget Alert: at 80% (96 hrs) → notify project manager\n```\n\n### Example 2: Log Time on a Task\n\n```text\nMethod A — Directly inside the Task (recommended for accuracy):\n  Open Task → Timesheets tab → Add a Line\n  Employee:    John Doe\n  Date:        Today\n  Description: \"Initial wireframes and site map\" (required for clear invoices)\n  Duration:    3:30  (3 hours 30 minutes)\n\nMethod B — Timesheets app (for end-of-day bulk entry):\n  Menu: Timesheets → My Timesheets → New\n  Project:  Website Redesign\n  Task:     Wireframe Design\n  Duration: 3:30\n```\n\n### Example 3: Enable Timesheet Approval Before Invoicing\n\n```text\nMenu: Timesheets → Configuration → Settings\n  ☑ Timesheet Approval  (employees submit; managers approve)\n\nApproval flow:\n  1. Employee submits timesheet at week/month end\n  2. Manager reviews: Timesheets → Managers → Timesheets to Approve\n  3. Manager clicks \"Approve\" → entries are locked and billable\n  4. Only approved entries flow into the invoice\n\nIf Approval is disabled, all logged hours are immediately billable.\n```\n\n### Example 4: Invoice from Timesheets\n\n```text\nStep 1: Verify approved hours\n  Menu: Timesheets → Managers → All Timesheets\n  Filter: Billable = YES, Timesheet Invoice State = \"To Invoice\"\n\nStep 2: Generate Invoice\n  Menu: Sales → Orders → To Invoice → Timesheets  (v15/v16)\n  or:   Accounting → Customers → Invoiceable Time  (v17)\n  Filter by Customer: Acme Corporation\n  Select entries → Create Invoices\n\nStep 3: Invoice pre-populates with:\n  Product: Consulting Hours\n  Quantity: Sum of approved hours\n  Unit Price: $150.00\n  Total: Calculated automatically\n```\n\n## Best Practices\n\n- ✅ **Do:** Enable **Timesheet Approval** so only manager-approved hours appear on customer invoices.\n- ✅ **Do:** Set a **budget alert** at 80% of planned hours so PMs can intervene before overruns.\n- ✅ **Do:** Require **timesheet descriptions** — vague entries like \"Work done\" on invoices destroy client trust.\n- ✅ **Do:** Use **Subtasks** to break work into granular pieces while keeping the parent task on the Kanban board.\n- ❌ **Don't:** Mix billable and internal projects without tagging — it corrupts profitability and utilization reports.\n- ❌ **Don't:** Log time on the Project itself (without a Task) — it cannot be reported at the task level.\n\n## Limitations\n\n- **Timesheet Approval** is an Enterprise-only feature in some Odoo versions — verify your plan includes it.\n- Does not cover **Project Forecast** (resource capacity planning) — that requires the Enterprise Forecast app.\n- **Time & Materials** invoicing works well for hourly billing but is not suited for **fixed-price projects** — use milestones or manual invoice lines for those.\n- Timesheet entries logged outside an active project-task pair (e.g., on internal projects) are not assignable to customer invoices without custom configuration.\n",
+      "tags": [
+        "ai",
+        "workflow",
+        "design"
+      ],
+      "useCases": [
+        "Setting up a new project with tasks, deadlines, and team assignments.",
+        "Configuring billable vs. non-billable time tracking per project.",
+        "Creating a timesheet approval workflow for managers.",
+        "Invoicing customers based on logged hours (Time & Materials billing)."
+      ],
+      "scrapedAt": "2026-03-06T07:03:55.766Z"
+    },
+    {
+      "id": "antigravity-odoo-purchase-workflow",
+      "name": "odoo-purchase-workflow",
+      "slug": "odoo-purchase-workflow",
+      "description": "Expert guide for Odoo Purchase: RFQ → PO → Receipt → Vendor Bill workflow, purchase agreements, vendor price lists, and 3-way matching.",
+      "category": "Business & Marketing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-purchase-workflow",
+      "content": "\n# Odoo Purchase Workflow\n\n## Overview\n\nThis skill guides you through the complete Odoo Purchase workflow — from sending a Request for Quotation (RFQ) to receiving goods and matching the vendor bill. It also covers purchase agreements, vendor price lists on products, automated reordering, and 3-way matching controls.\n\n## When to Use This Skill\n\n- Setting up the purchase flow for a new Odoo instance.\n- Implementing purchase order approval workflows (2-level approval).\n- Configuring vendor price lists with quantity-based discounts.\n- Troubleshooting billing/receipt mismatches in 3-way matching.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-purchase-workflow` and describe your purchasing scenario.\n2. **Configure**: Receive exact Odoo menu paths and field-by-field configuration.\n3. **Troubleshoot**: Describe a billing or receiving issue and get a root cause diagnosis.\n\n## Examples\n\n### Example 1: Standard RFQ → PO → Receipt → Bill Flow\n\n```text\nStep 1: Create RFQ\n  Menu: Purchase → Orders → Requests for Quotation → New\n  Vendor: Acme Supplies\n  Add product lines with quantity and unit price\n\nStep 2: Send RFQ to Vendor\n  Click \"Send by Email\" → Vendor receives PDF with RFQ details\n\nStep 3: Confirm as Purchase Order\n  Click \"Confirm Order\" → Status changes to \"Purchase Order\"\n\nStep 4: Receive Goods\n  Click \"Receive Products\" → Validate received quantities\n  (partial receipts are supported; PO stays open for remaining qty)\n\nStep 5: Match Vendor Bill (3-Way Match)\n  Click \"Create Bill\" → Bill pre-filled from PO quantities\n  Verify: PO qty = Received qty = Billed qty\n  Post Bill → Register Payment\n```\n\n### Example 2: Enable 2-Level Purchase Approval\n\n```text\nMenu: Purchase → Configuration → Settings\n\nPurchase Order Approval:\n  ☑ Purchase Order Approval\n  Minimum Order Amount: $5,000\n\nResult:\n  Orders ≤ $5,000  → Confirm directly to PO\n  Orders > $5,000  → Status: \"Waiting for Approval\"\n                     A purchase manager must click \"Approve\"\n```\n\n### Example 3: Vendor Price List (Quantity Breaks on a Product)\n\n```text\nVendor price lists are configured per product, not as a global menu.\n\nMenu: Inventory → Products → [Select Product] → Purchase Tab\n  → Vendor Pricelist section → Add a line\n\nVendor: Acme Supplies\nCurrency: USD\nPrice:    $12.00\nMin. Qty: 1\n\nAdd another line for quantity discount:\nMin. Qty: 100 → Price: $10.50   (12.5% discount)\nMin. Qty: 500 → Price:  $9.00   (25% discount)\n\nResult: Odoo automatically selects the right price on a PO\nbased on the ordered quantity for this vendor.\n```\n\n## Best Practices\n\n- ✅ **Do:** Enable **Purchase Order Approval** for orders above your company's approval threshold.\n- ✅ **Do:** Use **Purchase Agreements (Blanket Orders)** for recurring vendors with pre-negotiated annual contracts.\n- ✅ **Do:** Set a **vendor lead time** on products (Purchase tab) so Odoo can schedule arrival dates accurately.\n- ✅ **Do:** Set the **Bill Control** policy to \"Based on received quantities\" (not ordered qty) for accurate 3-way matching.\n- ❌ **Don't:** Confirm a PO before prices are agreed — use Draft/RFQ status to negotiate first.\n- ❌ **Don't:** Post a vendor bill without linking it to a receipt — bypassing 3-way matching creates accounting discrepancies.\n- ❌ **Don't:** Delete a PO that has received quantities — archive it instead to preserve the stock and accounting trail.\n\n## Limitations\n\n- Does not cover **subcontracting purchase flows** — those require the Manufacturing module and subcontracting BoM type.\n- **EDI-based order exchange** (automated PO import/export) requires custom integration — use `@odoo-edi-connector` for that.\n- Vendor pricelist currency conversion depends on the active **currency rate** in Odoo; rates must be kept current for accuracy.\n- The **2-level approval** is a binary threshold; more complex approval matrices (department-based, multi-tier) require custom development or the Approvals app.\n",
+      "tags": [
+        "pdf",
+        "ai",
+        "workflow"
+      ],
+      "useCases": [
+        "Setting up the purchase flow for a new Odoo instance.",
+        "Implementing purchase order approval workflows (2-level approval).",
+        "Configuring vendor price lists with quantity-based discounts.",
+        "Troubleshooting billing/receipt mismatches in 3-way matching."
+      ],
+      "scrapedAt": "2026-03-06T07:03:56.092Z"
+    },
+    {
+      "id": "antigravity-odoo-qweb-templates",
+      "name": "odoo-qweb-templates",
+      "slug": "odoo-qweb-templates",
+      "description": "Expert in Odoo QWeb templating for PDF reports, email templates, and website pages. Covers t-if, t-foreach, t-field, and report actions.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-qweb-templates",
+      "content": "\n# Odoo QWeb Templates\n\n## Overview\n\nQWeb is Odoo's primary templating engine, used for PDF reports, website pages, and email templates. This skill generates correct, well-structured QWeb XML with proper directives, translation support, and report action bindings.\n\n## When to Use This Skill\n\n- Creating a custom PDF report (invoice, delivery slip, certificate).\n- Building a QWeb email template triggered by workflow actions.\n- Designing Odoo website pages with dynamic content.\n- Debugging QWeb rendering errors (`t-if`, `t-foreach` issues).\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-qweb-templates` and describe the report or template needed.\n2. **Generate**: Receive a complete `ir.actions.report` record and QWeb template.\n3. **Debug**: Paste a broken template to identify and fix rendering issues.\n\n## Examples\n\n### Example 1: Custom PDF Report\n\n```xml\n<!-- Report Action -->\n<record id=\"action_report_patient_card\" model=\"ir.actions.report\">\n    <field name=\"name\">Patient Card</field>\n    <field name=\"model\">hospital.patient</field>\n    <field name=\"report_type\">qweb-pdf</field>\n    <field name=\"report_name\">hospital_management.report_patient_card</field>\n    <field name=\"binding_model_id\" ref=\"model_hospital_patient\"/>\n</record>\n\n<!-- QWeb Template -->\n<template id=\"report_patient_card\">\n    <t t-call=\"web.html_container\">\n        <t t-foreach=\"docs\" t-as=\"doc\">\n            <t t-call=\"web.external_layout\">\n                <div class=\"page\">\n                    <h2>Patient Card</h2>\n                    <table class=\"table table-bordered\">\n                        <tr>\n                            <td><strong>Name:</strong></td>\n                            <td><t t-field=\"doc.name\"/></td>\n                        </tr>\n                        <tr>\n                            <td><strong>Doctor:</strong></td>\n                            <td><t t-field=\"doc.doctor_id.name\"/></td>\n                        </tr>\n                        <tr>\n                            <td><strong>Status:</strong></td>\n                            <td><t t-field=\"doc.state\"/></td>\n                        </tr>\n                    </table>\n                </div>\n            </t>\n        </t>\n    </t>\n</template>\n```\n\n### Example 2: Conditional Rendering\n\n```xml\n<!-- Show a warning block only if the patient is not confirmed -->\n<t t-if=\"doc.state == 'draft'\">\n    <div class=\"alert alert-warning\">\n        <strong>Warning:</strong> This patient has not been confirmed yet.\n    </div>\n</t>\n```\n\n## Best Practices\n\n- ✅ **Do:** Use `t-field` for model fields — Odoo auto-formats dates, monetary values, and booleans correctly.\n- ✅ **Do:** Use `t-out` (Odoo 15+) for safe HTML output of non-field strings. Use `t-esc` only on Odoo 14 and below (it HTML-escapes output).\n- ✅ **Do:** Call `web.external_layout` for PDF reports to automatically include the company header, footer, and logo.\n- ✅ **Do:** Use `_lt()` (lazy translation) for translatable string literals inside Python report helpers, not inline `t-esc`.\n- ❌ **Don't:** Use raw Python expressions inside QWeb — compute values in the model or a report `_get_report_values()` helper.\n- ❌ **Don't:** Forget `t-as` when using `t-foreach`; without it, you can't access the current record in the loop body.\n- ❌ **Don't:** Use `t-esc` where you intend to render HTML content — it will escape the tags and print them as raw text.\n\n## Limitations\n\n- Does not cover **website controller routing** for dynamic QWeb pages — that requires Python `http.route` knowledge.\n- **Email template** QWeb has different variable scope than report QWeb (`object` vs `docs`) — this skill primarily focuses on PDF reports.\n- QWeb JavaScript (used in Kanban/Form widgets) is a different engine; this skill covers **server-side QWeb only**.\n- Does not cover **wkhtmltopdf configuration** for PDF rendering issues (page size, margins, header/footer overlap).\n",
+      "tags": [
+        "python",
+        "javascript",
+        "pdf",
+        "ai",
+        "workflow",
+        "template",
+        "design"
+      ],
+      "useCases": [
+        "Creating a custom PDF report (invoice, delivery slip, certificate).",
+        "Building a QWeb email template triggered by workflow actions.",
+        "Designing Odoo website pages with dynamic content.",
+        "Debugging QWeb rendering errors (`t-if`, `t-foreach` issues)."
+      ],
+      "scrapedAt": "2026-03-06T07:03:56.395Z"
+    },
+    {
+      "id": "antigravity-odoo-rpc-api",
+      "name": "odoo-rpc-api",
+      "slug": "odoo-rpc-api",
+      "description": "Expert on Odoo's external JSON-RPC and XML-RPC APIs. Covers authentication, model calls, record CRUD, and real-world integration examples in Python, JavaScript, and curl.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-rpc-api",
+      "content": "\n# Odoo RPC API\n\n## Overview\n\nOdoo exposes a powerful external API via JSON-RPC and XML-RPC, allowing any external application to read, create, update, and delete records. This skill guides you through authenticating, calling models, and building robust integrations.\n\n## When to Use This Skill\n\n- Connecting an external app (e.g., Django, Node.js, a mobile app) to Odoo.\n- Running automated scripts to import/export data from Odoo.\n- Building a middleware layer between Odoo and a third-party platform.\n- Debugging API authentication or permission errors.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-rpc-api` and describe the integration you need.\n2. **Generate**: Get copy-paste ready RPC call code in Python, JavaScript, or curl.\n3. **Debug**: Paste an error and get a diagnosis with a corrected call.\n\n## Examples\n\n### Example 1: Authenticate and Read Records (Python)\n\n```python\nimport xmlrpc.client\n\nurl = 'https://myodoo.example.com'\ndb = 'my_database'\nusername = 'admin'\npassword = 'my_api_key'  # Use API keys, not passwords, in production\n\n# Step 1: Authenticate\ncommon = xmlrpc.client.ServerProxy(f'{url}/xmlrpc/2/common')\nuid = common.authenticate(db, username, password, {})\nprint(f\"Authenticated as UID: {uid}\")\n\n# Step 2: Call models\nmodels = xmlrpc.client.ServerProxy(f'{url}/xmlrpc/2/object')\n\n# Search confirmed sale orders\norders = models.execute_kw(db, uid, password,\n    'sale.order', 'search_read',\n    [[['state', '=', 'sale']]],\n    {'fields': ['name', 'partner_id', 'amount_total'], 'limit': 10}\n)\nfor order in orders:\n    print(order)\n```\n\n### Example 2: Create a Record (Python)\n\n```python\nnew_partner_id = models.execute_kw(db, uid, password,\n    'res.partner', 'create',\n    [{'name': 'Acme Corp', 'email': 'info@acme.com', 'is_company': True}]\n)\nprint(f\"Created partner ID: {new_partner_id}\")\n```\n\n### Example 3: JSON-RPC via curl\n\n```bash\ncurl -X POST https://myodoo.example.com/web/dataset/call_kw \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"jsonrpc\": \"2.0\",\n    \"method\": \"call\",\n    \"id\": 1,\n    \"params\": {\n      \"model\": \"res.partner\",\n      \"method\": \"search_read\",\n      \"args\": [[[\"is_company\", \"=\", true]]],\n      \"kwargs\": {\"fields\": [\"name\", \"email\"], \"limit\": 5}\n    }\n  }'\n# Note: \"id\" is required by the JSON-RPC 2.0 spec to correlate responses.\n# Odoo 16+ also supports the /web/dataset/call_kw endpoint but\n# prefer /web/dataset/call_kw for model method calls.\n```\n\n## Best Practices\n\n- ✅ **Do:** Use **API Keys** (Settings → Technical → API Keys) instead of passwords — available from Odoo 14+.\n- ✅ **Do:** Use `search_read` instead of `search` + `read` to reduce network round trips.\n- ✅ **Do:** Always handle connection errors and implement retry logic with exponential backoff in production.\n- ✅ **Do:** Store credentials in environment variables or a secrets manager (e.g., AWS Secrets Manager, `.env` file).\n- ❌ **Don't:** Hardcode passwords or API keys directly in scripts — rotate them and use env vars.\n- ❌ **Don't:** Call the API in a tight loop without batching — bulk operations reduce server load significantly.\n- ❌ **Don't:** Use the master admin password for API integrations — create a dedicated integration user with minimum required permissions.\n\n## Limitations\n\n- Does not cover **OAuth2 or session-cookie-based authentication** — the examples use API key (token) auth only.\n- **Rate limiting** is not built into the Odoo XMLRPC layer; you must implement throttling client-side.\n- The XML-RPC endpoint (`/xmlrpc/2/`) does not support file uploads — use the REST-based `ir.attachment` model via JSON-RPC for binary data.\n- Odoo.sh (SaaS) may block some API calls depending on plan; verify your subscription supports external API access.\n",
+      "tags": [
+        "python",
+        "javascript",
+        "node",
+        "api",
+        "ai",
+        "aws"
+      ],
+      "useCases": [
+        "Connecting an external app (e.g., Django, Node.js, a mobile app) to Odoo.",
+        "Running automated scripts to import/export data from Odoo.",
+        "Building a middleware layer between Odoo and a third-party platform.",
+        "Debugging API authentication or permission errors."
+      ],
+      "scrapedAt": "2026-03-06T07:03:56.686Z"
+    },
+    {
+      "id": "antigravity-odoo-sales-crm-expert",
+      "name": "odoo-sales-crm-expert",
+      "slug": "odoo-sales-crm-expert",
+      "description": "Expert guide for Odoo Sales and CRM: pipeline stages, quotation templates, pricelists, sales teams, lead scoring, and forecasting.",
+      "category": "Business & Marketing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-sales-crm-expert",
+      "content": "\n# Odoo Sales & CRM Expert\n\n## Overview\n\nThis skill helps you configure and optimize Odoo Sales and CRM. It covers opportunity pipeline setup, automated lead assignment, quotation templates, pricelist strategies, sales team management, and the sales-to-invoice workflow.\n\n## When to Use This Skill\n\n- Designing CRM pipeline stages for your sales process.\n- Creating a quotation template with optional products and bundles.\n- Setting up pricelists with customer-tier pricing.\n- Configuring automated lead assignment by territory or salesperson.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-sales-crm-expert` and describe your sales scenario.\n2. **Configure**: Receive step-by-step Odoo setup instructions.\n3. **Optimize**: Get recommendations for improving pipeline velocity and deal closure rate.\n\n## Examples\n\n### Example 1: Configure CRM Pipeline Stages\n\n```text\nMenu: CRM → Configuration → Stages → New\n\nTypical B2B Pipeline:\n  Stage 1: New Lead          (probability: 10%)\n  Stage 2: Qualified         (probability: 25%)\n  Stage 3: Proposal Sent     (probability: 50%)\n  Stage 4: Negotiation       (probability: 75%)\n  Stage 5: Won               (is_won: YES — marks opportunity as closed-won)\n  Stage 6: Lost              (mark as lost via the \"Mark as Lost\" button)\n\nTips:\n  - Enable \"Rotting Days\" in CRM Settings to flag stale deals in red\n  - In Odoo 16+, Predictive Lead Scoring (AI) auto-updates probability\n    based on historical data. Disable it in Settings if you prefer manual\n    stage-based probability.\n```\n\n### Example 2: Create a Quotation Template\n\n```text\nMenu: Sales → Configuration → Quotation Templates → New\n(Requires the \"Sales Management\" module — enabled in Sales Settings)\n\nTemplate Name: SaaS Annual Subscription\nValid for: 30 days\n\nLines:\n  1. Platform License   | Qty: 1 | Price: $1,200/yr | (required)\n  2. Onboarding Package | Qty: 1 | Price: $500       | Optional\n  3. Premium Support    | Qty: 1 | Price: $300/yr    | Optional\n  4. Extra User License | Qty: 0 | Price: $120/user  | Optional\n\nSignature & Payment:\n  ☑ Online Signature required before order confirmation\n  ☑ Online Payment (deposit) — 50% upfront\n\nNotes section:\n  \"Prices valid until expiration date. Subject to Schedule A terms.\"\n```\n\n### Example 3: Customer Tier Pricelist (VIP Discount)\n\n```text\nMenu: Sales → Configuration → Settings\n  ☑ Enable Pricelists\n\nMenu: Sales → Configuration → Pricelists → New\n\nName: VIP Customer — 15% Off\nCurrency: USD\nDiscount Policy: Show public price & discount on quotation\n\nRules:\n  Apply To: All Products\n  Compute Price: Discount\n  Discount: 15%\n  Min. Quantity: 1\n\nAssign to a customer:\n  Customer record → Sales & Purchase tab → Pricelist → VIP Customer\n```\n\n## Best Practices\n\n- ✅ **Do:** Use **Lost Reasons** (CRM → Configuration → Lost Reasons) to build a dataset of why deals are lost — invaluable for sales coaching.\n- ✅ **Do:** Enable **Sales Teams** with revenue targets so pipeline forecasting is meaningful per team.\n- ✅ **Do:** Set **Expected Revenue** and **Closing Date** on every opportunity — these feed the revenue forecast dashboard.\n- ✅ **Do:** Use **Quotation Templates** to standardize offers and reduce quoting time across the team.\n- ❌ **Don't:** Skip the CRM opportunity when selling — going directly from lead to invoice breaks pipeline analytics.\n- ❌ **Don't:** Manually edit prices on quotation lines as a workaround — set up proper pricelists instead.\n- ❌ **Don't:** Ignore the **Predictive Lead Scoring** feature in v16+ — configure it with historical data for accurate forecasting.\n\n## Limitations\n\n- **Commission rules** are not built into Odoo CRM out of the box — they require custom development or third-party modules.\n- The **Quotation Template** optional product feature requires the **Sale Management** module; it is not available in the base `sale` module.\n- **Territory-based lead assignment** (geographic routing) requires custom rules or the Enterprise Leads module.\n- Odoo CRM does not have native **email sequence / cadence** automation — use the **Email Marketing** or **Marketing Automation** modules for drip campaigns.\n",
+      "tags": [
+        "ai",
+        "automation",
+        "workflow",
+        "template",
+        "design",
+        "cro",
+        "marketing"
+      ],
+      "useCases": [
+        "Designing CRM pipeline stages for your sales process.",
+        "Creating a quotation template with optional products and bundles.",
+        "Setting up pricelists with customer-tier pricing.",
+        "Configuring automated lead assignment by territory or salesperson."
+      ],
+      "scrapedAt": "2026-03-06T07:03:56.974Z"
+    },
+    {
+      "id": "antigravity-odoo-security-rules",
+      "name": "odoo-security-rules",
+      "slug": "odoo-security-rules",
+      "description": "Expert in Odoo access control: ir.model.access.csv, record rules (ir.rule), groups, and multi-company security patterns.",
+      "category": "Security & Systems",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-security-rules",
+      "content": "\n# Odoo Security Rules\n\n## Overview\n\nSecurity in Odoo is managed at two levels: **model-level access** (who can read/write which models) and **record-level rules** (which records a user can see). This skill helps you write correct `ir.model.access.csv` entries and `ir.rule` domain-based record rules.\n\n## When to Use This Skill\n\n- Setting up access rights for a new custom module.\n- Restricting records so users only see their own data or their company's data.\n- Debugging \"Access Denied\" or \"You are not allowed to access\" errors.\n- Implementing multi-company record visibility rules.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-security-rules` and describe the access scenario.\n2. **Generate**: Get correct CSV access lines and XML record rules.\n3. **Debug**: Paste an access error and get a diagnosis with the fix.\n\n## Examples\n\n### Example 1: ir.model.access.csv\n\n```csv\nid,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink\naccess_hospital_patient_user,hospital.patient.user,model_hospital_patient,base.group_user,1,0,0,0\naccess_hospital_patient_manager,hospital.patient.manager,model_hospital_patient,base.group_erp_manager,1,1,1,1\n```\n\n> **Note:** Use `base.group_erp_manager` for ERP managers, not `base.group_system` — that group is reserved for Odoo's technical superusers. Always create a custom group for module-specific manager roles:\n>\n> ```xml\n> <record id=\"group_hospital_manager\" model=\"res.groups\">\n>     <field name=\"name\">Hospital Manager</field>\n>     <field name=\"category_id\" ref=\"base.module_category_hidden\"/>\n> </record>\n> ```\n\n### Example 2: Record Rule — Users See Only Their Own Records\n\n```xml\n<record id=\"rule_hospital_patient_own\" model=\"ir.rule\">\n    <field name=\"name\">Hospital Patient: Own Records Only</field>\n    <field name=\"model_id\" ref=\"model_hospital_patient\"/>\n    <field name=\"domain_force\">[('create_uid', '=', user.id)]</field>\n    <field name=\"groups\" eval=\"[(4, ref('base.group_user'))]\"/>\n    <field name=\"perm_read\" eval=\"True\"/>\n    <field name=\"perm_write\" eval=\"True\"/>\n    <field name=\"perm_create\" eval=\"True\"/>\n    <field name=\"perm_unlink\" eval=\"False\"/>\n</record>\n```\n\n> **Important:** If you omit `<field name=\"groups\">`, the rule becomes **global** and applies to ALL users, including admins. Always assign a group unless you explicitly intend a global restriction.\n\n### Example 3: Multi-Company Record Rule\n\n```xml\n<record id=\"rule_hospital_patient_company\" model=\"ir.rule\">\n    <field name=\"name\">Hospital Patient: Multi-Company</field>\n    <field name=\"model_id\" ref=\"model_hospital_patient\"/>\n    <field name=\"domain_force\">\n        ['|', ('company_id', '=', False),\n               ('company_id', 'in', company_ids)]\n    </field>\n    <field name=\"groups\" eval=\"[(4, ref('base.group_user'))]\"/>\n</record>\n```\n\n## Best Practices\n\n- ✅ **Do:** Start with the most restrictive access and open up as needed.\n- ✅ **Do:** Use `company_ids` (plural) in multi-company rules — it includes all companies the user belongs to.\n- ✅ **Do:** Test rules using a non-admin user in debug mode — `sudo()` bypasses all record rules entirely.\n- ✅ **Do:** Create dedicated security groups per module rather than reusing core Odoo groups.\n- ❌ **Don't:** Give `perm_unlink = 1` to regular users unless deletion is explicitly required by the business process.\n- ❌ **Don't:** Leave `group_id` blank in `ir.model.access.csv` unless you intend to grant public (unauthenticated) access.\n- ❌ **Don't:** Use `base.group_system` for module managers — that grants full technical access including server configurations.\n\n## Limitations\n\n- Does not cover **field-level access control** (`ir.model.fields` read/write restrictions) — those require custom OWL or Python overrides.\n- **Portal and public user** access rules have additional nuances not fully covered here; test carefully with `base.group_portal`.\n- Record rules are **bypassed by `sudo()`** — any code running in superuser context ignores all `ir.rule` entries.\n- Does not cover **row-level security via PostgreSQL** (RLS) — Odoo manages all security at the ORM layer.\n",
+      "tags": [
+        "python",
+        "ai",
+        "security"
+      ],
+      "useCases": [
+        "Setting up access rights for a new custom module.",
+        "Restricting records so users only see their own data or their company's data.",
+        "Debugging \"Access Denied\" or \"You are not allowed to access\" errors.",
+        "Implementing multi-company record visibility rules."
+      ],
+      "scrapedAt": "2026-03-06T07:03:57.272Z"
+    },
+    {
+      "id": "antigravity-odoo-shopify-integration",
+      "name": "odoo-shopify-integration",
+      "slug": "odoo-shopify-integration",
+      "description": "Connect Odoo with Shopify: sync products, inventory, orders, and customers using the Shopify API and Odoo's external API or connector modules.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-shopify-integration",
+      "content": "\n# Odoo ↔ Shopify Integration\n\n## Overview\n\nThis skill guides you through integrating Odoo with Shopify — syncing your product catalog, real-time inventory levels, incoming orders, and customer data. It covers both using the official Odoo Shopify connector (Enterprise) and building a custom integration via Shopify REST + Odoo XMLRPC APIs.\n\n## When to Use This Skill\n\n- Selling on Shopify while managing inventory in Odoo.\n- Automatically creating Odoo sales orders from Shopify purchases.\n- Keeping Odoo stock levels in sync with Shopify product availability.\n- Mapping Shopify product variants to Odoo product templates.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-shopify-integration` and describe your sync scenario.\n2. **Design**: Receive the data flow architecture and field mapping.\n3. **Build**: Get code snippets for the Shopify webhook receiver and Odoo API caller.\n\n## Data Flow Architecture\n\n```\nSHOPIFY                          ODOO\n--------                         ----\nProduct Catalog <──────sync──────  Product Templates + Variants\nInventory Level <──────sync──────  Stock Quants (real-time)\nNew Order       ───────push──────> Sale Order (auto-confirmed)\nCustomer        ───────push──────> res.partner (created if new)\nFulfillment     <──────push──────  Delivery Order validated\n```\n\n## Examples\n\n### Example 1: Push an Odoo Sale Order for a Shopify Order (Python)\n\n```python\nimport xmlrpc.client, requests\n\n# Odoo connection\nodoo_url = \"https://myodoo.example.com\"\ndb, uid, pwd = \"my_db\", 2, \"api_key\"\nmodels = xmlrpc.client.ServerProxy(f\"{odoo_url}/xmlrpc/2/object\")\n\ndef create_odoo_order_from_shopify(shopify_order):\n    # Find or create customer\n    partner = models.execute_kw(db, uid, pwd, 'res.partner', 'search_read',\n        [[['email', '=', shopify_order['customer']['email']]]],\n        {'fields': ['id'], 'limit': 1}\n    )\n    partner_id = partner[0]['id'] if partner else models.execute_kw(\n        db, uid, pwd, 'res.partner', 'create', [{\n            'name': shopify_order['customer']['first_name'] + ' ' + shopify_order['customer']['last_name'],\n            'email': shopify_order['customer']['email'],\n        }]\n    )\n\n    # Create Sale Order\n    order_id = models.execute_kw(db, uid, pwd, 'sale.order', 'create', [{\n        'partner_id': partner_id,\n        'client_order_ref': f\"Shopify #{shopify_order['order_number']}\",\n        'order_line': [(0, 0, {\n            'product_id': get_odoo_product_id(line['sku']),\n            'product_uom_qty': line['quantity'],\n            'price_unit': float(line['price']),\n        }) for line in shopify_order['line_items']],\n    }])\n    return order_id\n\ndef get_odoo_product_id(sku):\n    result = models.execute_kw(db, uid, pwd, 'product.product', 'search_read',\n        [[['default_code', '=', sku]]], {'fields': ['id'], 'limit': 1})\n    return result[0]['id'] if result else False\n```\n\n### Example 2: Shopify Webhook for Real-Time Orders\n\n```python\nfrom flask import Flask, request\napp = Flask(__name__)\n\n@app.route('/webhook/shopify/orders', methods=['POST'])\ndef shopify_order_webhook():\n    shopify_order = request.json\n    order_id = create_odoo_order_from_shopify(shopify_order)\n    return {\"odoo_order_id\": order_id}, 200\n```\n\n## Best Practices\n\n- ✅ **Do:** Use Shopify's **webhook system** for real-time order sync instead of polling.\n- ✅ **Do:** Match products using **SKU / Internal Reference** as the unique key between both systems.\n- ✅ **Do:** Validate Shopify webhook HMAC signatures before processing any payload.\n- ❌ **Don't:** Sync inventory from both systems simultaneously without a \"master system\" — pick one as the source of truth.\n- ❌ **Don't:** Use Shopify product IDs as the key — use SKUs which are stable across platforms.\n",
+      "tags": [
+        "python",
+        "api",
+        "ai",
+        "llm",
+        "template",
+        "design",
+        "cro"
+      ],
+      "useCases": [
+        "Selling on Shopify while managing inventory in Odoo.",
+        "Automatically creating Odoo sales orders from Shopify purchases.",
+        "Keeping Odoo stock levels in sync with Shopify product availability.",
+        "Mapping Shopify product variants to Odoo product templates."
+      ],
+      "scrapedAt": "2026-03-06T07:03:57.583Z"
+    },
+    {
+      "id": "antigravity-odoo-upgrade-advisor",
+      "name": "odoo-upgrade-advisor",
+      "slug": "odoo-upgrade-advisor",
+      "description": "Step-by-step Odoo version upgrade advisor: pre-upgrade checklist, community vs enterprise upgrade path, OCA module compatibility, and post-upgrade validation.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-upgrade-advisor",
+      "content": "\n# Odoo Upgrade Advisor\n\n## Overview\n\nUpgrading Odoo between major versions (e.g., v15 → v16 → v17) requires careful preparation, testing, and validation. This skill provides a structured pre-upgrade checklist, guides you through the upgrade tools (Odoo Upgrade Service and OpenUpgrade), and gives you a post-upgrade validation protocol.\n\n## When to Use This Skill\n\n- Planning a major Odoo version upgrade.\n- Identifying which custom modules need to be migrated.\n- Running the upgrade on a staging environment before production.\n- Validating the system after an upgrade.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-upgrade-advisor`, state your current and target version.\n2. **Plan**: Receive the full upgrade roadmap and risk assessment.\n3. **Execute**: Get a step-by-step upgrade command sequence.\n\n## Upgrade Paths\n\n| From | To | Supported? | Tool |\n|---|---|---|---|\n| v16 | v17 | ✅ Direct | Odoo Upgrade Service / OpenUpgrade |\n| v15 | v16 | ✅ Direct | Odoo Upgrade Service / OpenUpgrade |\n| v14 | v15 | ✅ Direct | Odoo Upgrade Service / OpenUpgrade |\n| v14 | v17 | ⚠️ Multi-hop | v14→v15→v16→v17 (cannot skip) |\n| v13 or older | any | ❌ Not supported | Manual migration required |\n\n## Examples\n\n### Example 1: Pre-Upgrade Checklist\n\n```text\nBEFORE YOU START:\n  ☑ 1. List all installed modules (Settings → Technical → Modules)\n        Export to CSV and review for custom/OCA modules\n  ☑ 2. Check OCA compatibility matrix for each community module\n        https://github.com/OCA/maintainer-tools/wiki/Migration-Status\n  ☑ 3. Take a full backup (database + filestore) — your restore point\n  ☑ 4. Clone production to a staging environment\n  ☑ 5. Run the Odoo Upgrade pre-analysis:\n        https://upgrade.odoo.com/ → Upload DB → Review breaking changes report\n  ☑ 6. Review custom modules against migration notes\n        (use @odoo-migration-helper for per-module analysis)\n  ☑ 7. Upgrade and test in staging → Fix all errors → Re-test\n  ☑ 8. Schedule a production maintenance window\n  ☑ 9. Notify users of scheduled downtime\n  ☑ 10. Perform production upgrade → Validate → Go/No-Go decision\n```\n\n### Example 2: Community Upgrade with OpenUpgrade\n\n```bash\n# Clone OpenUpgrade for the TARGET version (e.g., upgrading to v17)\ngit clone https://github.com/OCA/OpenUpgrade.git \\\n  --branch 17.0 \\\n  --single-branch \\\n  /opt/openupgrade\n\n# Run the migration against your staging database\npython3 /opt/openupgrade/odoo-bin \\\n  --update all \\\n  --database odoo_staging \\\n  --config /etc/odoo/odoo.conf \\\n  --stop-after-init \\\n  --load openupgrade_framework\n\n# Review the log for errors before touching production\ntail -200 /var/log/odoo/odoo.log | grep -E \"ERROR|WARNING|Traceback\"\n```\n\n### Example 3: Post-Upgrade Validation Checklist\n\n```text\nAfter upgrading, validate these critical areas before going live:\n\nAccounting:\n  ☑ Trial Balance totals match the pre-upgrade snapshot\n  ☑ Open invoices, bills, and payments are accessible\n  ☑ Bank reconciliation can be performed on a test statement\n\nInventory:\n  ☑ Stock valuation report matches pre-upgrade (run Inventory Valuation)\n  ☑ Open Purchase Orders and Sale Orders are visible\n\nHR / Payroll:\n  ☑ All employee records are intact\n  ☑ Payslips from the last 3 months are accessible and correct\n\nCustom Modules:\n  ☑ Every custom module loaded without ImportError or XML error\n  ☑ Run the critical business workflows end-to-end:\n      Create sale order → confirm → deliver → invoice → payment\n\nUsers & Security:\n  ☑ User logins work correctly\n  ☑ Access rights are preserved (spot-check 3-5 users)\n```\n\n## Best Practices\n\n- ✅ **Do:** Always upgrade on a **copy of production** (staging) first — never the live instance.\n- ✅ **Do:** Keep the old version running until the new version is **fully validated and signed off**.\n- ✅ **Do:** Check OCA's migration status page: [OCA Migration Status](https://github.com/OCA/maintainer-tools/wiki/Migration-Status)\n- ✅ **Do:** Use the [Odoo Upgrade Service](https://upgrade.odoo.com/) pre-analysis report to get a list of breaking changes **before writing any code**.\n- ❌ **Don't:** Skip intermediate versions — Odoo requires sequential upgrades (v14→v15→v16→v17).\n- ❌ **Don't:** Upgrade custom modules and Odoo core simultaneously — adapt Odoo core first, then fix custom modules.\n- ❌ **Don't:** Run OpenUpgrade against production directly — always test on a staging copy first.\n\n## Limitations\n\n- Covers **v14–v17** only. Versions v13 and older have a fundamentally different module structure and require manual migration.\n- **Enterprise-exclusive module changes** (e.g., `sign`, `account_accountant`) may have undocumented breaking changes not included in OpenUpgrade.\n- The **Odoo.sh** automated upgrade path has a separate workflow (managed from the Odoo.sh dashboard) not covered here.\n- OWL JavaScript component migration (legacy widget → OWL v16+) is a complex front-end topic beyond the scope of this skill.\n",
+      "tags": [
+        "python",
+        "javascript",
+        "ai",
+        "workflow",
+        "document",
+        "security"
+      ],
+      "useCases": [
+        "Planning a major Odoo version upgrade.",
+        "Identifying which custom modules need to be migrated.",
+        "Running the upgrade on a staging environment before production.",
+        "Validating the system after an upgrade."
+      ],
+      "scrapedAt": "2026-03-06T07:03:57.916Z"
+    },
+    {
+      "id": "antigravity-odoo-woocommerce-bridge",
+      "name": "odoo-woocommerce-bridge",
+      "slug": "odoo-woocommerce-bridge",
+      "description": "Sync Odoo with WooCommerce: products, inventory, orders, and customers via WooCommerce REST API and Odoo external API.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-woocommerce-bridge",
+      "content": "\n# Odoo ↔ WooCommerce Bridge\n\n## Overview\n\nThis skill guides you through building a reliable sync bridge between Odoo (the back-office ERP) and WooCommerce (the WordPress online store). It covers product catalog sync, real-time inventory updates, order import, and customer record management.\n\n## When to Use This Skill\n\n- Running a WooCommerce store with Odoo for inventory and fulfillment.\n- Automatically pulling WooCommerce orders into Odoo as sale orders.\n- Keeping WooCommerce product stock in sync with Odoo's warehouse.\n- Mapping WooCommerce order statuses to Odoo delivery states.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-woocommerce-bridge` and describe your sync requirements.\n2. **Design**: Get the field mapping table between WooCommerce and Odoo objects.\n3. **Build**: Receive Python integration scripts using the WooCommerce REST API.\n\n## Field Mapping: WooCommerce → Odoo\n\n| WooCommerce | Odoo |\n|---|---|\n| `products` | `product.template` + `product.product` |\n| `orders` | `sale.order` + `sale.order.line` |\n| `customers` | `res.partner` |\n| `stock_quantity` | `stock.quant` |\n| `sku` | `product.product.default_code` |\n| `order status: processing` | Sale Order: `sale` (confirmed) |\n| `order status: completed` | Delivery: `done` |\n\n## Examples\n\n### Example 1: Pull WooCommerce Orders into Odoo (Python)\n\n```python\nfrom woocommerce import API\nimport xmlrpc.client\n\n# WooCommerce client\nwcapi = API(\n    url=\"https://mystore.com\",\n    consumer_key=\"ck_xxxxxxxxxxxxx\",\n    consumer_secret=\"cs_xxxxxxxxxxxxx\",\n    version=\"wc/v3\"\n)\n\n# Odoo client\nodoo_url = \"https://myodoo.example.com\"\ndb, uid, pwd = \"my_db\", 2, \"api_key\"\nmodels = xmlrpc.client.ServerProxy(f\"{odoo_url}/xmlrpc/2/object\")\n\ndef sync_orders():\n    # Get unprocessed WooCommerce orders\n    orders = wcapi.get(\"orders\", params={\"status\": \"processing\", \"per_page\": 50}).json()\n\n    for wc_order in orders:\n        # Find or create Odoo partner\n        email = wc_order['billing']['email']\n        partner = models.execute_kw(db, uid, pwd, 'res.partner', 'search',\n            [[['email', '=', email]]])\n        if not partner:\n            partner_id = models.execute_kw(db, uid, pwd, 'res.partner', 'create', [{\n                'name': f\"{wc_order['billing']['first_name']} {wc_order['billing']['last_name']}\",\n                'email': email,\n                'phone': wc_order['billing']['phone'],\n                'street': wc_order['billing']['address_1'],\n                'city': wc_order['billing']['city'],\n            }])\n        else:\n            partner_id = partner[0]\n\n        # Create Sale Order in Odoo\n        order_lines = []\n        for item in wc_order['line_items']:\n            product = models.execute_kw(db, uid, pwd, 'product.product', 'search',\n                [[['default_code', '=', item['sku']]]])\n            if product:\n                order_lines.append((0, 0, {\n                    'product_id': product[0],\n                    'product_uom_qty': item['quantity'],\n                    'price_unit': float(item['price']),\n                }))\n\n        models.execute_kw(db, uid, pwd, 'sale.order', 'create', [{\n            'partner_id': partner_id,\n            'client_order_ref': f\"WC-{wc_order['number']}\",\n            'order_line': order_lines,\n        }])\n\n        # Mark WooCommerce order as on-hold (processed by Odoo)\n        wcapi.put(f\"orders/{wc_order['id']}\", {\"status\": \"on-hold\"})\n```\n\n### Example 2: Push Odoo Stock to WooCommerce\n\n```python\ndef sync_inventory_to_woocommerce():\n    # Get all products with a SKU from Odoo\n    products = models.execute_kw(db, uid, pwd, 'product.product', 'search_read',\n        [[['default_code', '!=', False], ['type', '=', 'product']]],\n        {'fields': ['default_code', 'qty_available']}\n    )\n\n    for product in products:\n        sku = product['default_code']\n        qty = int(product['qty_available'])\n\n        # Update WooCommerce by SKU\n        wc_products = wcapi.get(\"products\", params={\"sku\": sku}).json()\n        if wc_products:\n            wcapi.put(f\"products/{wc_products[0]['id']}\", {\n                \"stock_quantity\": qty,\n                \"manage_stock\": True,\n            })\n```\n\n## Best Practices\n\n- ✅ **Do:** Use **SKU** as the unique identifier linking WooCommerce products to Odoo products.\n- ✅ **Do:** Run inventory sync on a **schedule** (every 15-30 min) rather than real-time to avoid rate limits.\n- ✅ **Do:** Log all API calls and errors to a database table for debugging.\n- ❌ **Don't:** Process the same WooCommerce order twice — flag it as processed immediately after import.\n- ❌ **Don't:** Sync draft or cancelled WooCommerce orders to Odoo — filter by `status = processing` or `completed`.\n",
+      "tags": [
+        "python",
+        "api",
+        "ai",
+        "llm",
+        "template",
+        "design"
+      ],
+      "useCases": [
+        "Running a WooCommerce store with Odoo for inventory and fulfillment.",
+        "Automatically pulling WooCommerce orders into Odoo as sale orders.",
+        "Keeping WooCommerce product stock in sync with Odoo's warehouse.",
+        "Mapping WooCommerce order statuses to Odoo delivery states."
+      ],
+      "scrapedAt": "2026-03-06T07:03:58.234Z"
+    },
+    {
+      "id": "antigravity-odoo-xml-views-builder",
+      "name": "odoo-xml-views-builder",
+      "slug": "odoo-xml-views-builder",
+      "description": "Expert at building Odoo XML views: Form, List, Kanban, Search, Calendar, and Graph. Generates correct XML for Odoo 14-17 with proper visibility syntax.",
+      "category": "Creative & Media",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/odoo-xml-views-builder",
+      "content": "\n# Odoo XML Views Builder\n\n## Overview\n\nThis skill generates and reviews Odoo XML view definitions for Kanban, Form, List, Search, Calendar, and Graph views. It understands visibility modifiers, `groups`, `domain`, `context`, and widget usage across Odoo versions 14–17, including the migration from `attrs` (v14–16) to inline expressions (v17+).\n\n## When to Use This Skill\n\n- Creating a new form or list view for a custom model.\n- Adding fields, tabs, or smart buttons to an existing view.\n- Building a Kanban view with color coding or progress bars.\n- Creating a search view with filters and group-by options.\n\n## How It Works\n\n1. **Activate**: Mention `@odoo-xml-views-builder` and describe the view you want.\n2. **Generate**: Get complete, ready-to-paste XML view definitions.\n3. **Review**: Paste existing XML and get fixes for common mistakes.\n\n## Examples\n\n### Example 1: Form View with Tabs\n\n```xml\n<record id=\"view_hospital_patient_form\" model=\"ir.ui.view\">\n    <field name=\"name\">hospital.patient.form</field>\n    <field name=\"model\">hospital.patient</field>\n    <field name=\"arch\" type=\"xml\">\n        <form string=\"Patient\">\n            <header>\n                <button name=\"action_confirm\" string=\"Confirm\"\n                    type=\"object\" class=\"btn-primary\"\n                    invisible=\"state != 'draft'\"/>\n                <field name=\"state\" widget=\"statusbar\"\n                    statusbar_visible=\"draft,confirmed,done\"/>\n            </header>\n            <sheet>\n                <div class=\"oe_title\">\n                    <h1><field name=\"name\" placeholder=\"Patient Name\"/></h1>\n                </div>\n                <notebook>\n                    <page string=\"General Info\">\n                        <group>\n                            <field name=\"birth_date\"/>\n                            <field name=\"doctor_id\"/>\n                        </group>\n                    </page>\n                </notebook>\n            </sheet>\n            <chatter/>\n        </form>\n    </field>\n</record>\n```\n\n### Example 2: Kanban View\n\n```xml\n<record id=\"view_hospital_patient_kanban\" model=\"ir.ui.view\">\n    <field name=\"name\">hospital.patient.kanban</field>\n    <field name=\"model\">hospital.patient</field>\n    <field name=\"arch\" type=\"xml\">\n        <kanban default_group_by=\"state\" class=\"o_kanban_small_column\">\n            <field name=\"name\"/>\n            <field name=\"state\"/>\n            <field name=\"doctor_id\"/>\n            <templates>\n                <t t-name=\"kanban-card\">\n                    <div class=\"oe_kanban_content\">\n                        <strong><field name=\"name\"/></strong>\n                        <div>Doctor: <field name=\"doctor_id\"/></div>\n                    </div>\n                </t>\n            </templates>\n        </kanban>\n    </field>\n</record>\n```\n\n## Best Practices\n\n- ✅ **Do:** Use inline `invisible=\"condition\"` (Odoo 17+) instead of `attrs` for show/hide logic.\n- ✅ **Do:** Use `attrs=\"{'invisible': [...]}\"` only if you are targeting Odoo 14–16 — it is deprecated in v17.\n- ✅ **Do:** Always set a `string` attribute on your view record for debugging clarity.\n- ✅ **Do:** Use `<chatter/>` (v17) or `<div class=\"oe_chatter\">` + field tags (v16 and below) for activity tracking.\n- ❌ **Don't:** Use `attrs` in Odoo 17 — it is fully deprecated and raises warnings in logs.\n- ❌ **Don't:** Put business logic in view XML — keep it in Python model methods.\n- ❌ **Don't:** Use hardcoded `domain` strings in views when a `domain` field on the model can be used dynamically.\n\n## Limitations\n\n- Does not cover **OWL JavaScript widgets** or client-side component development.\n- **Search panel views** (`<searchpanel>`) are not fully covered — those require frontend knowledge.\n- Does not address **website QWeb views** — use `@odoo-qweb-templates` for those.\n- **Cohort and Map views** (Enterprise-only) are not covered by this skill.\n",
+      "tags": [
+        "python",
+        "javascript",
+        "ai",
+        "template",
+        "cro"
+      ],
+      "useCases": [
+        "Creating a new form or list view for a custom model.",
+        "Adding fields, tabs, or smart buttons to an existing view.",
+        "Building a Kanban view with color coding or progress bars.",
+        "Creating a search view with filters and group-by options."
+      ],
+      "scrapedAt": "2026-03-06T07:03:58.556Z"
     },
     {
       "id": "antigravity-office-productivity",
@@ -24607,42 +25318,42 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 339
+      "count": 350
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 325
+      "count": 333
     },
     {
       "id": "development-code-tools",
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 131
+      "count": 136
     },
     {
       "id": "security-systems",
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 102
+      "count": 103
     },
     {
       "id": "creative-media",
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 95
+      "count": 96
     },
     {
       "id": "business-marketing",
       "name": "Business & Marketing",
       "description": "Skills for marketing, branding, lead generation, and business operations.",
       "icon": "briefcase",
-      "count": 52
+      "count": 54
     },
     {
       "id": "productivity-organization",
@@ -24679,48 +25390,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 71040
+      "stars": 72102
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 13,
-      "newSkillCount": 5,
-      "stars": 84081
+      "newSkillCount": 4,
+      "stars": 85312
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 40837
+      "stars": 41226
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 68574
+      "stars": 68638
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 964
+      "stars": 968
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillCount": 971,
-      "newSkillCount": 15,
-      "stars": 19981
+      "skillCount": 999,
+      "newSkillCount": 35,
+      "stars": 20642
     }
   ],
-  "lastUpdated": "2026-03-05T07:08:01.225Z",
+  "lastUpdated": "2026-03-06T07:05:51.819Z",
   "stats": {
-    "totalSkills": 1068,
-    "newSkills": 28,
-    "scrapedAt": "2026-03-05T07:08:01.225Z"
+    "totalSkills": 1096,
+    "newSkills": 47,
+    "scrapedAt": "2026-03-06T07:05:51.819Z"
   }
 }
