@@ -3,7 +3,7 @@ name: find-bugs
 description: Find bugs, security vulnerabilities, and code quality issues in local branch changes. Use when asked to review changes, find bugs, security review, or audit code on the current branch. 
 category: AI & Agents
 source: antigravity
-tags: [ai, template, security]
+tags: [template, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/find-bugs
 ---
 
@@ -11,15 +11,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/find
 # Find Bugs
 
 Review changes on this branch for bugs, security vulnerabilities, and code quality issues.
-
-## When to Use This Skill
-
-Use this skill when:
-- Asked to review changes
-- Finding bugs in code
-- Performing security reviews
-- Auditing code on the current branch
-- Reviewing pull request changes
 
 ## Phase 1: Complete Input Gathering
 

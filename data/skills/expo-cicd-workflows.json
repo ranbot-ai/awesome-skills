@@ -1,0 +1,22 @@
+{
+  "id": "antigravity-expo-cicd-workflows",
+  "name": "expo-cicd-workflows",
+  "slug": "expo-cicd-workflows",
+  "description": "Helps understand and write EAS workflow YAML files for Expo projects. Use this skill when the user asks about CI/CD or workflows in an Expo or EAS context, mentions .eas/workflows/, or wants help with EAS build pipelines or deployment automation.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/expo-cicd-workflows",
+  "content": "\n# EAS Workflows Skill\n\nHelp developers write and edit EAS CI/CD workflow YAML files.\n\n## Reference Documentation\n\nFetch these resources before generating or validating workflow files. Use the fetch script (implemented using Node.js) in this skill's `scripts/` directory; it caches responses using ETags for efficiency:\n\n```bash\n# Fetch resources\nnode {baseDir}/scripts/fetch.js <url>\n```\n\n1. **JSON Schema** — https://api.expo.dev/v2/workflows/schema\n   - It is NECESSARY to fetch this schema\n   - Source of truth for validation\n   - All job types and their required/optional parameters\n   - Trigger types and configurations\n   - Runner types, VM images, and all enums\n\n2. **Syntax Documentation** — https://raw.githubusercontent.com/expo/expo/refs/heads/main/docs/pages/eas/workflows/syntax.mdx\n   - Overview of workflow YAML syntax\n   - Examples and English explanations\n   - Expression syntax and contexts\n\n3. **Pre-packaged Jobs** — https://raw.githubusercontent.com/expo/expo/refs/heads/main/docs/pages/eas/workflows/pre-packaged-jobs.mdx\n   - Documentation for supported pre-packaged job types\n   - Job-specific parameters and outputs\n\nDo not rely on memorized values; these resources evolve as new features are added.\n\n## Workflow File Location\n\nWorkflows live in `.eas/workflows/*.yml` (or `.yaml`).\n\n## Top-Level Structure\n\nA workflow file has these top-level keys:\n\n- `name` — Display name for the workflow\n- `on` — Triggers that start the workflow (at least one required)\n- `jobs` — Job definitions (required)\n- `defaults` — Shared defaults for all jobs\n- `concurrency` — Control parallel workflow runs\n\nConsult the schema for the full specification of each section.\n\n## Expressions\n\nUse `${{ }}` syntax for dynamic values. The schema defines available contexts:\n\n- `github.*` — GitHub repository and event information\n- `inputs.*` — Values from `workflow_dispatch` inputs\n- `needs.*` — Outputs and status from dependent jobs\n- `jobs.*` — Job outputs (alternative syntax)\n- `steps.*` — Step outputs within custom jobs\n- `workflow.*` — Workflow metadata\n\n## Generating Workflows\n\nWhen generating or editing workflows:\n\n1. Fetch the schema to get current job types, parameters, and allowed values\n2. Validate that required fields are present for each job type\n3. Verify job references in `needs` and `after` exist in the workflow\n4. Check that expressions reference valid contexts and outputs\n5. Ensure `if` conditions respect the schema's length constraints\n\n## Validation\n\nAfter generating or editing a workflow file, validate it against the schema:\n\n```sh\n# Install dependencies if missing\n[ -d \"{baseDir}/scripts/node_modules\" ] || npm install --prefix {baseDir}/scripts\n\nnode {baseDir}/scripts/validate.js <workflow.yml> [workflow2.yml ...]\n```\n\nThe validator fetches the latest schema and checks the YAML structure. Fix any reported errors before considering the workflow complete.\n\n## Answering Questions\n\nWhen users ask about available options (job types, triggers, runner types, etc.), fetch the schema and derive the answer from it rather than relying on potentially outdated information.\n",
+  "tags": [
+    "node",
+    "api",
+    "ai",
+    "automation",
+    "workflow",
+    "document",
+    "image"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-03-07T06:54:31.659Z"
+}

@@ -1,0 +1,30 @@
+{
+  "id": "antigravity-scikit-learn",
+  "name": "scikit-learn",
+  "slug": "scikit-learn",
+  "description": "Machine learning in Python with scikit-learn. Use for classification, regression, clustering, model evaluation, and ML pipelines.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/scikit-learn",
+  "content": "\n# Scikit-learn\n\n## Overview\n\nThis skill provides comprehensive guidance for machine learning tasks using scikit-learn, the industry-standard Python library for classical machine learning. Use this skill for classification, regression, clustering, dimensionality reduction, preprocessing, model evaluation, and building production-ready ML pipelines.\n\n## Installation\n\n```bash\n# Install scikit-learn using uv\nuv uv pip install scikit-learn\n\n# Optional: Install visualization dependencies\nuv uv pip install matplotlib seaborn\n\n# Commonly used with\nuv uv pip install pandas numpy\n```\n\n## When to Use This Skill\n\nUse the scikit-learn skill when:\n\n- Building classification or regression models\n- Performing clustering or dimensionality reduction\n- Preprocessing and transforming data for machine learning\n- Evaluating model performance with cross-validation\n- Tuning hyperparameters with grid or random search\n- Creating ML pipelines for production workflows\n- Comparing different algorithms for a task\n- Working with both structured (tabular) and text data\n- Need interpretable, classical machine learning approaches\n\n## Quick Start\n\n### Classification Example\n\n```python\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.preprocessing import StandardScaler\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.metrics import classification_report\n\n# Split data\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y, test_size=0.2, stratify=y, random_state=42\n)\n\n# Preprocess\nscaler = StandardScaler()\nX_train_scaled = scaler.fit_transform(X_train)\nX_test_scaled = scaler.transform(X_test)\n\n# Train model\nmodel = RandomForestClassifier(n_estimators=100, random_state=42)\nmodel.fit(X_train_scaled, y_train)\n\n# Evaluate\ny_pred = model.predict(X_test_scaled)\nprint(classification_report(y_test, y_pred))\n```\n\n### Complete Pipeline with Mixed Data\n\n```python\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.compose import ColumnTransformer\nfrom sklearn.preprocessing import StandardScaler, OneHotEncoder\nfrom sklearn.impute import SimpleImputer\nfrom sklearn.ensemble import GradientBoostingClassifier\n\n# Define feature types\nnumeric_features = ['age', 'income']\ncategorical_features = ['gender', 'occupation']\n\n# Create preprocessing pipelines\nnumeric_transformer = Pipeline([\n    ('imputer', SimpleImputer(strategy='median')),\n    ('scaler', StandardScaler())\n])\n\ncategorical_transformer = Pipeline([\n    ('imputer', SimpleImputer(strategy='most_frequent')),\n    ('onehot', OneHotEncoder(handle_unknown='ignore'))\n])\n\n# Combine transformers\npreprocessor = ColumnTransformer([\n    ('num', numeric_transformer, numeric_features),\n    ('cat', categorical_transformer, categorical_features)\n])\n\n# Full pipeline\nmodel = Pipeline([\n    ('preprocessor', preprocessor),\n    ('classifier', GradientBoostingClassifier(random_state=42))\n])\n\n# Fit and predict\nmodel.fit(X_train, y_train)\ny_pred = model.predict(X_test)\n```\n\n## Core Capabilities\n\n### 1. Supervised Learning\n\nComprehensive algorithms for classification and regression tasks.\n\n**Key algorithms:**\n- **Linear models**: Logistic Regression, Linear Regression, Ridge, Lasso, ElasticNet\n- **Tree-based**: Decision Trees, Random Forest, Gradient Boosting\n- **Support Vector Machines**: SVC, SVR with various kernels\n- **Ensemble methods**: AdaBoost, Voting, Stacking\n- **Neural Networks**: MLPClassifier, MLPRegressor\n- **Others**: Naive Bayes, K-Nearest Neighbors\n\n**When to use:**\n- Classification: Predicting discrete categories (spam detection, image classification, fraud detection)\n- Regression: Predicting continuous values (price prediction, demand forecasting)\n\n**See:** `references/supervised_learning.md` for detailed algorithm documentation, parameters, and usage examples.\n\n### 2. Unsupervised Learning\n\nDiscover patterns in unlabeled data through clustering and dimensionality reduction.\n\n**Clustering algorithms:**\n- **Partition-based**: K-Means, MiniBatchKMeans\n- **Density-based**: DBSCAN, HDBSCAN, OPTICS\n- **Hierarchical**: AgglomerativeClustering\n- **Probabilistic**: Gaussian Mixture Models\n- **Others**: MeanShift, SpectralClustering, BIRCH\n\n**Dimensionality reduction:**\n- **Linear**: PCA, TruncatedSVD, NMF\n- **Manifold learning**: t-SNE, UMAP, Isomap, LLE\n- **Feature extraction**: FastICA, LatentDirichletAllocation\n\n**When to use:**\n- Customer segmentation, anomaly detection, data visualization\n- Reducing feature dimensions, exploratory data analysis\n- Topic modeling, image compression\n\n**See:** `references/unsupervised_learning.md` for detailed documentation.\n\n### 3. Model Evaluation and Selection\n\nTools for robust model evaluation, cross-validation, and hyperparameter tuning.\n\n**Cross-validation strategies:**\n- KFold, StratifiedKFold (classification)\n- TimeSeriesSplit (temporal data)\n- GroupKFold (grouped samples)\n\n**Hyperparameter tuning:**\n- GridSearchCV (exhaustive search)\n- RandomizedSearchCV (random sampling)\n- HalvingGridSearchCV (successive halving)\n\n**Metrics:**\n- **Cla",
+  "tags": [
+    "python",
+    "api",
+    "ai",
+    "workflow",
+    "template",
+    "design",
+    "document",
+    "image",
+    "cro"
+  ],
+  "useCases": [
+    "Building classification or regression models",
+    "Performing clustering or dimensionality reduction",
+    "Preprocessing and transforming data for machine learning",
+    "Evaluating model performance with cross-validation",
+    "Tuning hyperparameters with grid or random search"
+  ],
+  "scrapedAt": "2026-03-07T06:57:21.075Z"
+}

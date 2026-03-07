@@ -1,250 +1,113 @@
 ---
 name: conductor-setup
-description: Initialize project with Conductor artifacts (product definition, tech stack, workflow, style guides) 
-category: Document Processing
+description: Configure a Rails project to work with Conductor (parallel coding agents) 
+category: AI & Agents
 source: antigravity
-tags: [python, javascript, typescript, react, markdown, api, claude, ai, workflow, template]
+tags: [ai, agent]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/conductor-setup
 ---
 
 
-# Conductor Setup
+Set up this Rails project for Conductor, the Mac app for parallel coding agents.
 
-Initialize or resume Conductor project setup. This command creates foundational project documentation through interactive Q&A.
+# What to Create
 
-## Use this skill when
+## 1. conductor.json (project root)
 
-- Working on conductor setup tasks or workflows
-- Needing guidance, best practices, or checklists for conductor setup
+Create `conductor.json` in the project root if it doesn't already exist:
 
-## Do not use this skill when
-
-- The task is unrelated to conductor setup
-- You need a different domain or tool outside this scope
-
-## Instructions
-
-- Clarify goals, constraints, and required inputs.
-- Apply relevant best practices and validate outcomes.
-- Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
-
-## Pre-flight Checks
-
-1. Check if `conductor/` directory already exists in the project root:
-   - If `conductor/product.md` exists: Ask user whether to resume setup or reinitialize
-   - If `conductor/setup_state.json` exists with incomplete status: Offer to resume from last step
-
-2. Detect project type by checking for existing indicators:
-   - **Greenfield (new project)**: No .git, no package.json, no requirements.txt, no go.mod, no src/ directory
-   - **Brownfield (existing project)**: Any of the above exist
-
-3. Load or create `conductor/setup_state.json`:
-   ```json
-   {
-     "status": "in_progress",
-     "project_type": "greenfield|brownfield",
-     "current_section": "product|guidelines|tech_stack|workflow|styleguides",
-     "current_question": 1,
-     "completed_sections": [],
-     "answers": {},
-     "files_created": [],
-     "started_at": "ISO_TIMESTAMP",
-     "last_updated": "ISO_TIMESTAMP"
-   }
-   ```
-
-## Interactive Q&A Protocol
-
-**CRITICAL RULES:**
-
-- Ask ONE question per turn
-- Wait for user response before proceeding
-- Offer 2-3 suggested answers plus "Type your own" option
-- Maximum 5 questions per section
-- Update `setup_state.json` after each successful step
-- Validate file writes succeeded before continuing
-
-### Section 1: Product Definition (max 5 questions)
-
-**Q1: Project Name**
-
-```
-What is your project name?
-
-Suggested:
-1. [Infer from directory name]
-2. [Infer from package.json/go.mod if brownfield]
-3. Type your own
+```json
+{
+  "scripts": {
+    "setup": "bin/conductor-setup",
+    "run": "script/server"
+  }
+}
 ```
 
-**Q2: Project Description**
+## 2. bin/conductor-setup (executable)
 
-```
-Describe your project in one sentence.
+Create `bin/conductor-setup` if it doesn't already exist:
 
-Suggested:
-1. A web application that [does X]
-2. A CLI tool for [doing Y]
-3. Type your own
-```
+```bash
+#!/bin/bash
+set -e
 
-**Q3: Problem Statement**
+# Symlink .env from repo root (where secrets live, outside worktrees)
+[ -f "$CONDUCTOR_ROOT_PATH/.env" ] && ln -sf "$CONDUCTOR_ROOT_PATH/.env" .env
 
-```
-What problem does this project solve?
+# Symlink Rails master key
+[ -f "$CONDUCTOR_ROOT_PATH/config/master.key" ] && ln -sf "$CONDUCTOR_ROOT_PATH/config/master.key" config/master.key
 
-Suggested:
-1. Users struggle to [pain point]
-2. There's no good way to [need]
-3. Type your own
+# Install dependencies
+bundle install
+npm install
 ```
 
-**Q4: Target Users**
+Make it executable with `chmod +x bin/conductor-setup`.
 
-```
-Who are the primary users?
+## 3. script/server (executable)
 
-Suggested:
-1. Developers building [X]
-2. End users who need [Y]
-3. Internal teams managing [Z]
-4. Type your own
-```
+Create the `script` directory if needed, then create `script/server` if it doesn't already exist:
 
-**Q5: Key Goals (optional)**
+```bash
+#!/bin/bash
 
-```
-What are 2-3 key goals for this project? (Press enter to skip)
-```
+# === Port Configuration ===
+export PORT=${CONDUCTOR_PORT:-3000}
+export VITE_RUBY_PORT=$((PORT + 1000))
 
-### Section 2: Product Guidelines (max 3 questions)
+# === Redis Isolation ===
+if [ -n "$CONDUCTOR_WORKSPACE_NAME" ]; then
+  HASH=$(printf '%s' "$CONDUCTOR_WORKSPACE_NAME" | cksum | cut -d' ' -f1)
+  REDIS_DB=$((HASH % 16))
+  export REDIS_URL="redis://localhost:6379/${REDIS_DB}"
+fi
 
-**Q1: Voice and Tone**
-
-```
-What voice/tone should documentation and UI text use?
-
-Suggested:
-1. Professional and technical
-2. Friendly and approachable
-3. Concise and direct
-4. Type your own
+exec bin/dev
 ```
 
-**Q2: Design Principles**
+Make it executable with `chmod +x script/server`.
 
-```
-What design principles guide this project?
+## 4. Update Rails Config Files
 
-Suggested:
-1. Simplicity over features
-2. Performance first
-3. Developer experience focused
-4. User safety and reliability
-5. Type your own (comma-separated)
-```
+For each of the following files, if they exist and contain Redis configuration, update them to use `ENV.fetch('REDIS_URL', ...)` or `ENV['REDIS_URL']` with a fallback:
 
-### Section 3: Tech Stack (max 5 questions)
-
-For **brownfield projects**, first analyze existing code:
-
-- Run `Glob` to find package.json, requirements.txt, go.mod, Cargo.toml, etc.
-- Parse detected files to pre-populate tech stack
-- Present findings and ask for confirmation/additions
-
-**Q1: Primary Language(s)**
-
-```
-What primary language(s) does this project use?
-
-[For brownfield: "I detected: Python 3.11, JavaScript. Is this correct?"]
-
-Suggested:
-1. TypeScript
-2. Python
-3. Go
-4. Rust
-5. Type your own (comma-separated)
+### config/initializers/sidekiq.rb
+If this file exists and configures Redis, update it to use:
+```ruby
+redis_url = ENV.fetch('REDIS_URL', 'redis://localhost:6379/0')
 ```
 
-**Q2: Frontend Framework (if applicable)**
-
-```
-What frontend framework (if any)?
-
-Suggested:
-1. React
-2. Vue
-3. Next.js
-4. None / CLI only
-5. Type your own
+### config/cable.yml
+If this file exists, update the development adapter to use:
+```yaml
+development:
+  adapter: redis
+  url: <%= ENV.fetch('REDIS_URL', 'redis://localhost:6379/1') %>
 ```
 
-**Q3: Backend Framework (if applicable)**
-
-```
-What backend framework (if any)?
-
-Suggested:
-1. Express / Fastify
-2. Django / FastAPI
-3. Go standard library
-4. None / Frontend only
-5. Type your own
+### config/environments/development.rb
+If this file configures Redis for caching, update to use:
+```ruby
+config.cache_store = :redis_cache_store, { url: ENV.fetch('REDIS_URL', 'redis://localhost:6379/0') }
 ```
 
-**Q4: Database (if applicable)**
-
-```
-What database (if any)?
-
-Suggested:
-1. PostgreSQL
-2. MongoDB
-3. SQLite
-4. None / Stateless
-5. Type your own
+### config/initializers/rack_attack.rb
+If this file exists and configures a Redis cache store, update to use:
+```ruby
+Rack::Attack.cache.store = ActiveSupport::Cache::RedisCacheStore.new(url: ENV.fetch('REDIS_URL', 'redis://localhost:6379/0'))
 ```
 
-**Q5: Infrastructure**
+# Implementation Notes
 
-```
-Where will this be deployed?
+- **Don't overwrite existing files**: Check if conductor.json, bin/conductor-setup, and script/server exist before creating them. If they exist, skip creation and inform the user.
+- **Rails config updates**: Only modify Redis-related configuration. If a file doesn't exist or doesn't use Redis, skip it gracefully.
+- **Create directories as needed**: Create `script/` directory if it doesn't exist.
 
-Suggested:
-1. AWS (Lambda, ECS, etc.)
-2. Vercel / Netlify
-3. Self-hosted / Docker
-4. Not decided yet
-5. Type your own
-```
+# Verification
 
-### Section 4: Workflow Preferences (max 4 questions)
-
-**Q1: TDD Strictness**
-
-```
-How strictly should TDD be enforced?
-
-Suggested:
-1. Strict - tests required before implementation
-2. Moderate - tests encouraged, not blocked
-3. Flexible - tests recommended for complex logic
-```
-
-**Q2: Commit Strategy**
-
-```
-What commit strategy should be followed?
-
-Suggested:
-1. Conventional Commits (feat:, fix:, etc.)
-2. Descriptive messages, no format required
-3. Squash commits per task
-```
-
-**Q3: Code Review Requirements**
-
-```
-What code r
+After creating the files:
+1. Confirm all Conductor files exist and scripts are executable
+2. Run `script/server` to verify it starts without errors
+3. Check that Rails configs properly reference `ENV['REDIS_URL']` or `ENV.fetch('REDIS_URL', ...)`

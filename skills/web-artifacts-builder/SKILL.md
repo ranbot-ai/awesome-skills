@@ -1,10 +1,10 @@
 ---
 name: web-artifacts-builder
-description: Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state ma...
+description: Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state manag
 category: Creative & Media
-source: antigravity
-tags: [javascript, typescript, react, node, claude, ai, workflow, design, tailwind]
-url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/web-artifacts-builder
+source: anthropic
+tags: [javascript, typescript, react, node, claude, ai, design]
+url: https://github.com/anthropics/skills/tree/main/skills/web-artifacts-builder
 ---
 
 
@@ -76,6 +76,3 @@ To test/visualize the artifact, use available tools (including other Skills or b
 ## Reference
 
 - **shadcn/ui components**: https://ui.shadcn.com/docs/components
-
-## When to Use
-This skill is applicable to execute the workflow or actions described in the overview.

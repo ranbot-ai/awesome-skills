@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-fp-taskeither-ref",
+  "name": "fp-taskeither-ref",
+  "slug": "fp-taskeither-ref",
+  "description": "Quick reference for TaskEither. Use when user needs async error handling, API calls, or Promise-based operations that can fail.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-taskeither-ref",
+  "content": "\n# TaskEither Quick Reference\n\nTaskEither = async operation that can fail. Like `Promise<Either<E, A>>`.\n\n## Create\n\n```typescript\nimport * as TE from 'fp-ts/TaskEither'\n\nTE.right(value)          // Async success\nTE.left(error)           // Async failure\nTE.tryCatch(asyncFn, toError)  // Promise → TaskEither\nTE.fromEither(either)    // Either → TaskEither\n```\n\n## Transform\n\n```typescript\nTE.map(fn)               // Transform success value\nTE.mapLeft(fn)           // Transform error\nTE.flatMap(fn)           // Chain (fn returns TaskEither)\nTE.orElse(fn)            // Recover from error\n```\n\n## Execute\n\n```typescript\n// TaskEither is lazy - must call () to run\nconst result = await myTaskEither()  // Either<E, A>\n\n// Or pattern match\nawait pipe(\n  myTaskEither,\n  TE.match(\n    (err) => console.error(err),\n    (val) => console.log(val)\n  )\n)()\n```\n\n## Common Patterns\n\n```typescript\nimport { pipe } from 'fp-ts/function'\nimport * as TE from 'fp-ts/TaskEither'\n\n// Wrap fetch\nconst fetchUser = (id: string) => TE.tryCatch(\n  () => fetch(`/api/users/${id}`).then(r => r.json()),\n  (e) => ({ type: 'NETWORK_ERROR', message: String(e) })\n)\n\n// Chain async calls\npipe(\n  fetchUser('123'),\n  TE.flatMap(user => fetchPosts(user.id)),\n  TE.map(posts => posts.length)\n)\n\n// Parallel calls\nimport { sequenceT } from 'fp-ts/Apply'\nsequenceT(TE.ApplyPar)(\n  fetchUser('1'),\n  fetchPosts('1'),\n  fetchComments('1')\n)\n\n// With recovery\npipe(\n  fetchUser('123'),\n  TE.orElse(() => TE.right(defaultUser)),\n  TE.getOrElse(() => defaultUser)\n)\n```\n\n## vs async/await\n\n```typescript\n// ❌ async/await - errors hidden\nasync function getUser(id: string) {\n  try {\n    const res = await fetch(`/api/users/${id}`)\n    return await res.json()\n  } catch (e) {\n    return null  // Error info lost\n  }\n}\n\n// ✅ TaskEither - errors typed and composable\nconst getUser = (id: string) => pipe(\n  TE.tryCatch(() => fetch(`/api/users/${id}`), toNetworkError),\n  TE.flatMap(res => TE.tryCatch(() => res.json(), toParseError))\n)\n```\n\nUse TaskEither when you need **typed errors** for async operations.\n",
+  "tags": [
+    "typescript",
+    "api",
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-03-07T06:54:46.155Z"
+}

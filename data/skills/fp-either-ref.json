@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-fp-either-ref",
+  "name": "fp-either-ref",
+  "slug": "fp-either-ref",
+  "description": "Quick reference for Either type. Use when user needs error handling, validation, or operations that can fail with typed errors.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-either-ref",
+  "content": "\n# Either Quick Reference\n\nEither = success or failure. `Right(value)` or `Left(error)`.\n\n## Create\n\n```typescript\nimport * as E from 'fp-ts/Either'\n\nE.right(value)           // Success\nE.left(error)            // Failure\nE.fromNullable(err)(x)   // null → Left(err), else Right(x)\nE.tryCatch(fn, toError)  // try/catch → Either\n```\n\n## Transform\n\n```typescript\nE.map(fn)                // Transform Right value\nE.mapLeft(fn)            // Transform Left error\nE.flatMap(fn)            // Chain (fn returns Either)\nE.filterOrElse(pred, toErr) // Right → Left if pred fails\n```\n\n## Extract\n\n```typescript\nE.getOrElse(err => default)  // Get Right or default\nE.match(onLeft, onRight)     // Pattern match\nE.toUnion(either)            // E | A (loses type info)\n```\n\n## Common Patterns\n\n```typescript\nimport { pipe } from 'fp-ts/function'\nimport * as E from 'fp-ts/Either'\n\n// Validation\nconst validateEmail = (s: string): E.Either<string, string> =>\n  s.includes('@') ? E.right(s) : E.left('Invalid email')\n\n// Chain validations (stops at first error)\npipe(\n  E.right({ email: 'test@example.com', age: 25 }),\n  E.flatMap(d => pipe(validateEmail(d.email), E.map(() => d))),\n  E.flatMap(d => d.age >= 18 ? E.right(d) : E.left('Must be 18+'))\n)\n\n// Convert throwing code\nconst parseJson = (s: string) => E.tryCatch(\n  () => JSON.parse(s),\n  (e) => `Parse error: ${e}`\n)\n```\n\n## vs try/catch\n\n```typescript\n// ❌ try/catch - errors not in types\ntry {\n  const data = JSON.parse(input)\n  process(data)\n} catch (e) {\n  handleError(e)\n}\n\n// ✅ Either - errors explicit in types\npipe(\n  E.tryCatch(() => JSON.parse(input), String),\n  E.map(process),\n  E.match(handleError, identity)\n)\n```\n\nUse Either when **error type matters** and you want to chain operations.\n",
+  "tags": [
+    "typescript",
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-03-07T06:54:44.135Z"
+}

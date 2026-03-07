@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-rails-upgrade",
+  "name": "rails-upgrade",
+  "slug": "rails-upgrade",
+  "description": "404: Not Found",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/rails-upgrade",
+  "content": "\n404: Not Found",
+  "tags": [
+    "ai"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-03-07T06:57:05.035Z"
+}

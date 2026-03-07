@@ -1,6 +1,6 @@
 ---
 name: context-degradation
-description: Recognize patterns of context failure: lost-in-middle, poisoning, distraction, and clash 
+description: This skill should be used when the user asks to "diagnose context problems", "fix lost-in-middle issues", "debug agent failures", "understand context poisoning", or mentions context degradation, atten
 category: AI & Agents
 source: antigravity
 tags: [markdown, api, claude, ai, agent, gpt, design, document, image, rag]
@@ -8,11 +8,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cont
 ---
 
 
-## When to Use This Skill
-
-Recognize patterns of context failure: lost-in-middle, poisoning, distraction, and clash
-
-Use this skill when working with recognize patterns of context failure: lost-in-middle, poisoning, distraction, and clash.
 # Context Degradation Patterns
 
 Language models exhibit predictable degradation patterns as context length increases. Understanding these patterns is essential for diagnosing failures and designing resilient systems. Context degradation is not a binary state but a continuum of performance degradation that manifests in several distinct ways.
@@ -68,4 +63,4 @@ Recovery requires removing or replacing poisoned content. This may involve trunc
 Context distraction emerges when context grows so long that models over-focus on provided information at the expense of their training knowledge. The model attends to everything in context regardless of relevance, and this creates pressure to use provided information even when internal knowledge is more accurate.
 
 **The Distractor Effect**
-Research shows that even a single irrelevant doc
+Research shows that even a single irrelevant document in context reduces performance on tasks involving relevant documents. Multiple distractors compound degradation. The effect is not about noise in absolute terms but about attention allocation—irrelevant information competes with relev

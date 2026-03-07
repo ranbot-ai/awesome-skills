@@ -1,0 +1,27 @@
+{
+  "id": "antigravity-avoid-ai-writing",
+  "name": "avoid-ai-writing",
+  "slug": "avoid-ai-writing",
+  "description": "Audit and rewrite content to remove 21 categories of AI writing patterns with a 43-entry replacement table",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/avoid-ai-writing",
+  "content": "\n# Avoid AI Writing — Audit & Rewrite\n\nDetects and fixes AI writing patterns (\"AI-isms\") that make text sound machine-generated. Covers 21 pattern categories with a 43-entry word/phrase replacement table that maps each flagged term to a specific, plainer alternative.\n\n## When to Use This Skill\n\n- When asked to \"remove AI-isms,\" \"clean up AI writing,\" or \"make this sound less like AI\"\n- After drafting content with AI and before publishing\n- When editing any text that sounds like it was generated rather than written\n- When auditing documentation, blog posts, marketing copy, or internal communications for AI tells\n\n## What It Detects\n\n**21 pattern categories:** formatting issues (em dashes, bold overuse, emoji headers, bullet-heavy sections), sentence structure problems (hedging, hollow intensifiers, rule of three), word/phrase replacements (43 entries like leverage→use, utilize→use, robust→reliable), template phrases, transition phrases, structural issues, significance inflation, copula avoidance, synonym cycling, vague attributions, filler phrases, generic conclusions, chatbot artifacts, notability name-dropping, superficial -ing analyses, promotional language, formulaic challenges, false ranges, inline-header lists, title case headings, and cutoff disclaimers.\n\n## Example\n\n**Prompt:**\n```\nAudit this for AI writing patterns:\n\n\"In today's rapidly evolving AI landscape, developers are embarking on a pivotal journey to leverage cutting-edge tools that streamline their workflows. Moreover, these robust solutions serve as a testament to the industry's commitment to fostering seamless experiences.\"\n```\n\n**Output:** The skill returns four sections:\n1. **Issues found** — every AI-ism quoted (landscape, embarking, pivotal, leverage, cutting-edge, streamline, robust, serves as, testament to, fostering, seamless, Moreover, In today's rapidly evolving...)\n2. **Rewritten version** — \"Developers are starting to use newer AI tools to simplify their work. These tools are reliable, and they're making development less painful.\"\n3. **What changed** — summary of edits\n4. **Second-pass audit** — re-reads the rewrite to catch any surviving tells\n\n## Limitations\n\n- Does not detect AI-generated code, only prose\n- Pattern matching is guideline-based, not absolute — some flagged words are fine in context\n- The replacement table suggests alternatives but the best choice depends on context\n- Cannot verify factual claims or find real citations to replace vague attributions\n",
+  "tags": [
+    "api",
+    "ai",
+    "workflow",
+    "template",
+    "document",
+    "rag",
+    "marketing"
+  ],
+  "useCases": [
+    "When asked to \"remove AI-isms,\" \"clean up AI writing,\" or \"make this sound less like AI\"",
+    "After drafting content with AI and before publishing",
+    "When editing any text that sounds like it was generated rather than written",
+    "When auditing documentation, blog posts, marketing copy, or internal communications for AI tells"
+  ],
+  "scrapedAt": "2026-03-07T06:52:27.540Z"
+}

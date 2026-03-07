@@ -1,0 +1,166 @@
+---
+name: evolution
+description: CRITICAL: Use for makepad-skills self-evolution and contribution. Triggers on: evolve, evolution, contribute, contribution, self-improve, self-improvement, add pattern, new pattern, capture learning, 
+category: Document Processing
+source: antigravity
+tags: [markdown, api, claude, ai, template, design, document]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/evolution
+---
+
+
+# Makepad Skills Evolution
+
+This skill enables makepad-skills to self-improve continuously during development.
+
+## Quick Navigation
+
+| Topic | Description |
+|-------|-------------|
+| Collaboration Guidelines | **Contributing to makepad-skills** |
+| [Hooks Setup](#hooks-based-auto-triggering) | Auto-trigger evolution with hooks |
+| [When to Evolve](#when-to-evolve) | Triggers and classification |
+| [Evolution Process](#evolution-process) | Step-by-step guide |
+| [Self-Correction](#self-correction) | Auto-fix skill errors |
+| [Self-Validation](#self-validation) | Verify skill accuracy |
+| [Version Adaptation](#version-adaptation) | Multi-branch support |
+
+---
+
+## Hooks-Based Auto-Triggering
+
+For reliable automatic triggering, use Claude Code hooks. Install with `--with-hooks`:
+
+```bash
+# Install makepad-skills with hooks enabled
+curl -fsSL https://raw.githubusercontent.com/ZhangHanDong/makepad-skills/main/install.sh | bash -s -- --with-hooks
+```
+
+This will install hooks to `.claude/hooks/` and configure `.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/makepad-skill-router.sh"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/pre-tool.sh"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/post-bash.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+### What Hooks Do
+
+| Hook | Trigger Event | Action |
+|------|---------------|--------|
+| `makepad-skill-router.sh` | UserPromptSubmit | Auto-route to relevant skills |
+| `pre-tool.sh` | Before Bash/Write/Edit | Detect Makepad version from Cargo.toml |
+| `post-bash.sh` | After Bash command fails | Detect Makepad errors, suggest fixes |
+| `session-end.sh` | Session ends | Prompt to capture learnings |
+
+---
+
+## Skill Routing and Bundling
+
+The `makepad-skill-router.sh` hook automatically loads relevant skills based on user queries.
+
+### Context Detection
+
+| Context | Trigger Keywords | Skills Loaded |
+|---------|------------------|---------------|
+| **Full App** | "build app", "从零", "完整应用" | basics, dsl, layout, widgets, event-action, app-architecture |
+| **UI Design** | "ui design", "界面设计" | dsl, layout, widgets, animation, shaders |
+| **Widget Creation** | "create widget", "创建组件", "自定义组件" | widgets, dsl, layout, animation, shaders, font, event-action |
+| **Production** | "best practice", "robrix pattern", "实际项目" | app-architecture, widget-patterns, state-management, event-action |
+
+### Skill Dependencies
+
+When loading certain skills, related skills are auto-loaded:
+
+| Primary Skill | Auto-loads |
+|---------------|------------|
+| robius-app-architecture | makepad-basics, makepad-event-action |
+| robius-widget-patterns | makepad-widgets, makepad-layout |
+| makepad-widgets | makepad-layout, makepad-dsl |
+| makepad-animation | makepad-shaders |
+| makepad-shaders | makepad-widgets |
+| makepad-font | makepad-widgets |
+| robius-event-action | makepad-event-action |
+
+### Example
+
+```
+User: "我想从零开发一个 Makepad 应用"
+
+[makepad-skills] Detected Makepad/Robius query
+[makepad-skills] App development context detected - loading skill bundle
+[makepad-skills] Routing to: makepad-basics makepad-dsl makepad-event-action
+                            makepad-layout makepad-widgets robius-app-architecture
+```
+
+---
+
+## When to Evolve
+
+Trigger skill evolution when any of these occur during development:
+
+| Trigger | Target Skill | Priority |
+|---------|--------------|----------|
+| New widget pattern discovered | robius-widget-patterns/_base | High |
+| Shader technique learned | makepad-shaders | High |
+| Compilation error solved | makepad-reference/troubleshooting | High |
+| Layout solution found | makepad-reference/adaptive-layout | Medium |
+| Build/packaging issue resolved | makepad-deployment | Medium |
+| New project structure insight | makepad-basics | Low |
+| Core concept clarified | makepad-dsl/makepad-widgets | Low |
+
+---
+
+## Evolution Process
+
+### Step 1: Identify Knowledge Worth Capturing
+
+Ask yourself:
+- Is this a reusable pattern? (not project-specific)
+- Did it take significant effort to figure out?
+- Would it help other Makepad developers?
+- Is it not already documented in makepad-skills?
+
+### Step 2: Classify the Knowledge
+
+```
+Widget/Component Pattern     → robius-widget-patterns/_base/
+Shader/Visual Effect         → makepad-shaders/
+Error/Debug Solution         → makepad-reference/troubleshooting.md
+Layout/Responsive Design     → makepad-reference/adaptive-layout.md
+Build/Deploy Issue           → makepad-deployment/SKILL.md
+Project Structure            → makepad-basics/
+Core Concept/API             → makepad-dsl/ or makepa

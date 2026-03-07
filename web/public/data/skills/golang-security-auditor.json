@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-golang-security-auditor",
+  "name": "golang-security-auditor",
+  "slug": "golang-security-auditor",
+  "description": "Golang Security Auditor",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/golang-security-auditor",
+  "content": "\n404: Not Found",
+  "tags": [
+    "security"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-03-07T06:55:06.295Z"
+}

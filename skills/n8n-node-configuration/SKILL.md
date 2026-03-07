@@ -1,6 +1,6 @@
 ---
 name: n8n-node-configuration
-description: Operation-aware node configuration guidance. Use when configuring nodes, understanding property dependencies, determining required fields, choosing between get_node detail levels, or learning commo...
+description: Operation-aware node configuration guidance. Use when configuring nodes, understanding property dependencies, determining required fields, choosing between get_node detail levels, or learning common c
 category: AI & Agents
 source: antigravity
 tags: [javascript, node, api, mcp, ai, workflow, rag]
@@ -11,15 +11,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/n8n-
 # n8n Node Configuration
 
 Expert guidance for operation-aware node configuration with property dependencies.
-
-## When to Use This Skill
-
-Use this skill when:
-- Configuring n8n nodes
-- Understanding property dependencies
-- Determining required fields
-- Choosing between get_node detail levels
-- Learning common configuration patterns by node type
 
 ---
 
@@ -258,4 +249,13 @@ get_node({
 
 **Use**: Find authentication, headers, body fields, etc.
 
-### Decision 
+### Decision Tree
+
+```
+┌─────────────────────────────────┐
+│ Starting new node config?       │
+├─────────────────────────────────┤
+│ YES → get_node (standard)       │
+└─────────────────────────────────┘
+         ↓
+┌─────────────────────────────────┐

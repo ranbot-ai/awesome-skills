@@ -1,6 +1,6 @@
 ---
 name: multi-agent-patterns
-description: Master orchestrator, peer-to-peer, and hierarchical multi-agent architectures 
+description: This skill should be used when the user asks to "design multi-agent system", "implement supervisor pattern", "create swarm architecture", "coordinate multiple agents", or mentions multi-agent patterns
 category: AI & Agents
 source: antigravity
 tags: [python, node, claude, ai, agent, gpt, workflow, design, document, langgraph]
@@ -8,11 +8,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mult
 ---
 
 
-## When to Use This Skill
-
-Master orchestrator, peer-to-peer, and hierarchical multi-agent architectures
-
-Use this skill when working with master orchestrator, peer-to-peer, and hierarchical multi-agent architectures.
 # Multi-Agent Architecture Patterns
 
 Multi-agent architectures distribute work across multiple language model instances, each with its own context window. When designed well, this distribution enables capabilities beyond single-agent limits. When designed poorly, it introduces coordination overhead that negates benefits. The critical insight is that sub-agents exist primarily to isolate context, not to anthropomorphize role division.
@@ -74,4 +69,6 @@ The supervisor pattern places a central agent in control, delegating to speciali
 User Query -> Supervisor -> [Specialist, Specialist, Specialist] -> Aggregation -> Final Output
 ```
 
-When
+When to use: Complex tasks with clear decomposition, tasks requiring coordination across domains, tasks where human oversight is important.
+
+Advantages: Strict control over workflow, easier to implement human-in-the-loop i

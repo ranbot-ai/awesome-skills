@@ -1,133 +1,185 @@
 ---
 name: gmail-automation
-description: Automate Gmail tasks via Rube MCP (Composio): send/reply, search, labels, drafts, attachments. Always search tools first for current schemas. 
+description: Interact with Gmail - search emails, read messages, send emails, create drafts, and manage labels. Use when user asks to: search email, read email, send email, create email draft, mark as read, archiv
 category: AI & Agents
 source: antigravity
-tags: [pdf, api, mcp, ai, automation, workflow]
+tags: [python, api, mcp, ai, automation]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gmail-automation
 ---
 
+ Apache-2.0
+metadata:
+  author: sanjay3290
+  version: "1.0"
+---
 
-# Gmail Automation via Rube MCP
+# Gmail
 
-Automate Gmail operations through Composio's Gmail toolkit via Rube MCP.
+Lightweight Gmail integration with standalone OAuth authentication. No MCP server required.
 
-## Prerequisites
+> **⚠️ Requires Google Workspace account.** Personal Gmail accounts are not supported.
 
-- Rube MCP must be connected (RUBE_SEARCH_TOOLS available)
-- Active Gmail connection via `RUBE_MANAGE_CONNECTIONS` with toolkit `gmail`
-- Always call `RUBE_SEARCH_TOOLS` first to get current tool schemas
+## First-Time Setup
 
-## Setup
+Authenticate with Google (opens browser):
+```bash
+python scripts/auth.py login
+```
 
-**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
+Check authentication status:
+```bash
+python scripts/auth.py status
+```
 
+Logout when needed:
+```bash
+python scripts/auth.py logout
+```
 
-1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
-2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `gmail`
-3. If connection is not ACTIVE, follow the returned auth link to complete Google OAuth
-4. Confirm connection status shows ACTIVE before running any workflows
+## Commands
 
-## Core Workflows
+All operations via `scripts/gmail.py`. Auto-authenticates on first use if not logged in.
 
-### 1. Send an Email
+### Search Emails
 
-**When to use**: User wants to compose and send a new email
+```bash
+# Search with Gmail query syntax
+python scripts/gmail.py search "from:someone@example.com is:unread"
 
-**Tool sequence**:
-1. `GMAIL_SEARCH_PEOPLE` - Resolve contact name to email address [Optional]
-2. `GMAIL_SEND_EMAIL` - Send the email [Required]
+# Search recent emails (no query returns all)
+python scripts/gmail.py search --limit 20
 
-**Key parameters**:
-- `recipient_email`: Email address or 'me' for self
-- `subject`: Email subject line
-- `body`: Email content (plain text or HTML)
-- `is_html`: Must be `true` if body contains HTML markup
-- `cc`/`bcc`: Arrays of email addresses
-- `attachment`: Object with `{s3key, mimetype, name}` from prior download
+# Filter by label
+python scripts/gmail.py search --label INBOX --limit 10
 
-**Pitfalls**:
-- At least one of `recipient_email`, `cc`, or `bcc` required
-- At least one of `subject` or `body` required
-- Attachment `mimetype` MUST contain '/' (e.g., 'application/pdf', not 'pdf')
-- Total message size limit ~25MB after base64 encoding
-- Use `from_email` only for verified aliases in Gmail 'Send mail as' settings
+# Include spam and trash
+python scripts/gmail.py search "subject:important" --include-spam-trash
+```
 
-### 2. Reply to a Thread
+### Read Email Content
 
-**When to use**: User wants to reply to an existing email conversation
+```bash
+# Get full message content
+python scripts/gmail.py get MESSAGE_ID
 
-**Tool sequence**:
-1. `GMAIL_FETCH_EMAILS` - Find the email/thread to reply to [Prerequisite]
-2. `GMAIL_REPLY_TO_THREAD` - Send reply within the thread [Required]
+# Get just metadata (headers)
+python scripts/gmail.py get MESSAGE_ID --format metadata
 
-**Key parameters**:
-- `thread_id`: Hex string from FETCH_EMAILS (e.g., '169eefc8138e68ca')
-- `message_body`: Reply content
-- `recipient_email`: Reply recipient
-- `is_html`: Set `true` for HTML content
+# Get minimal response (IDs only)
+python scripts/gmail.py get MESSAGE_ID --format minimal
+```
 
-**Pitfalls**:
-- `thread_id` must be hex string; prefixes like 'msg-f:' are auto-stripped
-- Legacy Gmail web UI IDs (e.g., 'FMfcgz...') are NOT supported
-- Subject is inherited from original thread; setting it creates a new thread instead
-- Do NOT include subject parameter to stay within thread
+### Send Emails
 
-### 3. Search and Filter Emails
+```bash
+# Send a simple email
+python scripts/gmail.py send --to "user@example.com" --subject "Hello" --body "Message body"
 
-**When to use**: User wants to find specific emails by sender, subject, date, label, etc.
+# Send with CC and BCC
+python scripts/gmail.py send --to "user@example.com" --cc "cc@example.com" --bcc "bcc@example.com" \
+  --subject "Team Update" --body "Update message"
 
-**Tool sequence**:
-1. `GMAIL_FETCH_EMAILS` - Search with Gmail query syntax [Required]
-2. `GMAIL_FETCH_MESSAGE_BY_MESSAGE_ID` - Get full message details for selected results [Optional]
+# Send from an alias (must be configured in Gmail settings)
+python scripts/gmail.py send --to "user@example.com" --subject "Hello" --body "Message" \
+  --from "Mile9 Accounts <accounts@mile9.io>"
 
-**Key parameters**:
-- `query`: Gmail search syntax (from:, to:, subject:, is:unread, has:attachment, after:YYYY/MM/DD, before:YYYY/MM/DD)
-- `max_results`: 1-500 messages per page
-- `label_ids`: System IDs like 'INBOX', 'UNREAD'
-- `include_payload`: Set `true` to get full message content
-- `ids_only`: Set `true` for just message IDs
-- `page_token`: For pagination (from `nextPageToken`)
+# Send HTML email
+python scripts/gmail.py send --to "user@example.com" --subject "HTML Email" \
+  --body "<h1>Hello</h1><p>HTML content</p>" --html
+```
 
-**Pitfalls**:
-- Returns max ~500 per page; follow `nextPageToken` via `page_token` until absent
-- `resultSizeEstimate` is approximate, not exact count
-- Use 'is:' for states (is:unread, is:snoozed, is:starred)
-- Use 'label:' ONLY for user-created labels
-- Common mistake: 'label:snoozed' is WRONG — use 'is:snoozed'
-- `include_payload=true` on broad searches creates huge responses; default to metadata
-- Custom labels require label ID (e.g., 'Label_123'), NOT label name
+### Draft Management
 
-### 4. Manage Labels
+```bash
+# Create a draft
+python scripts/gmail.py create-draft --to "user@example.com" --subject "Draft Subject" \
+  --body "Draft content"
 
-**When to use**: User wants to create, modify, or organize labels
+# Send an existing draft
+python scripts/gmail.py send-draft DRAFT_ID
+```
 
-**Tool sequence**:
-1. `GMAIL_LIST_LABELS` - List all labels to find IDs and detect conflicts [Required]
-2. `GMAIL_CREATE_LABEL` - Create a new label [Optional]
-3. `GMAIL_PATCH_LABEL` - Rename or change label colors/visibility [Optional]
-4. `GMAIL_DELETE_LABEL` - Delete a user-created label (irreversible) [Optional]
+### Modify Messages (Labels)
 
-**Key parameters**:
-- `label_name`: Max 225 chars, no commas, '/' for nesting (e.g., 'Work/Projects')
-- `background_color`/`text_color`: Hex values from Gmail's predefined palette
-- `id`: Label ID for PATCH/DELETE operations
+```bash
+# Mark as read (remove UNREAD label)
+python scripts/gmail.py modify MESSAGE_ID --remove-label UNREAD
 
-**Pitfalls**:
-- 400/409 error if name is blank, duplicate, or reserved (INBOX, SPAM, CATEGORY_*)
-- Color specs must use Gmail's predefined palette of 102 hex values
-- DELETE is permanent and removes label from all messages
-- Cannot delete system labels (INBOX, SENT, DRAFT, etc.)
+# Mark as unread
+python scripts/gmail.py modify MESSAGE_ID --add-label UNREAD
 
-### 5. Apply/Remove Labels on Messages
+# Archive (remove from INBOX)
+python scripts/gmail.py modify MESSAGE_ID --remove-label INBOX
 
-**When to use**: User wants to label, archive, or mark emails as read/unread
+# Star a message
+python scripts/gmail.py modify MESSAGE_ID --add-label STARRED
 
-**Tool sequence**:
-1. `GMAIL_LIST_LABELS` - Get label IDs for custom labels [Prerequisite]
-2. `GMAIL_FETCH_EMAILS` - Find target messages [Prerequisite]
-3. `GMAIL_BATCH_MODIFY_MESSAGES` - Bulk add/remove labels (up to 1000 messages) [Required]
-4. `GMAIL_ADD_LABEL_TO_EMAIL` - Single-message label changes [Fallback]
+# Unstar a message
+python scripts/gmail.py modify MESSAGE_ID --remove-label STARRED
 
-**Key parameters**:
-- `messageIds`:
+# Mark as important
+python scripts/gmail.py modify MESSAGE_ID --add-label IMPORTANT
+
+# Multiple label changes at once
+python scripts/gmail.py modify MESSAGE_ID --remove-label UNREAD --add-label STARRED
+```
+
+### List Labels
+
+```bash
+# List all Gmail labels (system and user-created)
+python scripts/gmail.py list-labels
+```
+
+## Gmail Query Syntax
+
+Gmail supports powerful search operators:
+
+| Query | Description |
+|-------|-------------|
+| `from:user@example.com` | Emails from a specific sender |
+| `to:user@example.com` | Emails to a specific recipient |
+| `subject:meeting` | Emails with "meeting" in subject |
+| `is:unread` | Unread emails |
+| `is:starred` | Starred emails |
+| `is:important` | Important emails |
+| `has:attachment` | Emails with attachments |
+| `after:2024/01/01` | Emails after a date |
+| `before:2024/12/31` | Emails before a date |
+| `newer_than:7d` | Emails from last 7 days |
+| `older_than:1m` | Emails older than 1 month |
+| `label:work` | Emails with a specific label |
+| `in:inbox` | Emails in inbox |
+| `in:sent` | Sent emails |
+| `in:trash` | Trashed emails |
+
+Combine with AND (space), OR, or - (NOT):
+```bash
+python scripts/gmail.py search "from:boss@company.com is:unread newer_than:1d"
+python scripts/gmail.py search "subject:urgent OR subject:important"
+python scripts/gmail.py search "from:newsletter@example.com -is:starred"
+```
+
+## Common Label IDs
+
+| Label | ID |
+|-------|-----|
+| Inbox | `INBOX` |
+| Sent | `SENT` |
+| Drafts | `DRAFT` |
+| Spam | `SPAM` |
+| Trash | `TRASH` |
+| Starred | `STARRED` |
+| Important | `IMPORTANT` |
+| Unread | `UNREAD` |
+
+## Token Management
+
+Tokens stored securely using the system keyring:
+- **macOS**: Keychain
+- **Windows**: Windows Credential Locker
+- **Linux**: Secret Service API (GNOME Keyring, KDE Wallet, etc.)
+
+Service name: `gmail-skill-oauth`
+
+Tokens automatically refresh when expired using Google's cloud function.

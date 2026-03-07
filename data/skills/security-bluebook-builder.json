@@ -2,14 +2,19 @@
   "id": "antigravity-security-bluebook-builder",
   "name": "security-bluebook-builder",
   "slug": "security-bluebook-builder",
-  "description": "Build security Blue Books for sensitive apps",
+  "description": "Create or refine a concise, normative security policy (\"Blue Book\") for sensitive applications. Use when users need a threat model, data classification rules, auth/session policy, logging and audit requirements, retention/deletion expectations, incident response, or security...",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/security-bluebook-builder",
-  "content": "\n# Security Bluebook Builder\n\n## Overview\n\nBuild security Blue Books for sensitive apps\n\n## When to Use This Skill\n\nUse this skill when you need to work with build security blue books for sensitive apps.\n\n## Instructions\n\nThis skill provides guidance and patterns for build security blue books for sensitive apps.\n\nFor more information, see the [source repository](https://github.com/SHADOWPR0/security-bluebook-builder).\n",
+  "content": "\n# Security Bluebook Builder\n\n## Overview\nBuild a minimal but real security policy for sensitive apps. The output is a single, coherent Blue Book document using MUST/SHOULD/CAN language, with explicit assumptions, scope, and security gates.\n\n## Workflow\n\n### 1) Gather inputs (ask only if missing)\nCollect just enough context to fill the template. If the user has not provided details, ask up to 6 short questions:\n- What data classes are handled (PII, PHI, financial, tokens, content)?\n- What are the trust boundaries (client/server/third parties)?\n- How do users authenticate (OAuth, email/password, SSO, device sessions)?\n- What storage is used (DB, object storage, logs, analytics)?\n- What connectors or third parties are used?\n- Retention and deletion expectations (default + user-initiated)?\n\nIf the user cannot answer, proceed with safe defaults and mark TODOs.\n\n### 2) Draft the Blue Book\nLoad `references/bluebook_template.md` and fill it with the provided details. Keep it concise, deterministic, and enforceable.\n\n### 3) Enforce guardrails\n- Do not include secrets, tokens, or internal credentials.\n- If something is unknown, write \"TODO\" plus a clear assumption.\n- Fail closed: if a capability is required but unavailable, call it out explicitly.\n- Keep scope minimal; do not add features or tools beyond what the user asked for.\n\n### 4) Quality checks\nConfirm the Blue Book includes:\n- Threat model (assumptions + out-of-scope)\n- Data classification + handling rules\n- Trust boundaries + controls\n- Auth/session policy\n- Token handling policy\n- Logging/audit policy\n- Retention/deletion\n- Incident response mini-runbook\n- Security gates + go/no-go checklist\n\n## Resources\n- `references/bluebook_template.md`\n",
   "tags": [
-    "security"
+    "ai",
+    "workflow",
+    "template",
+    "document",
+    "security",
+    "rag"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-31T06:54:04.585Z"

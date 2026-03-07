@@ -1,0 +1,23 @@
+{
+  "id": "antigravity-baseline-ui",
+  "name": "baseline-ui",
+  "slug": "baseline-ui",
+  "description": "Validates animation durations, enforces typography scale, checks component accessibility, and prevents layout anti-patterns in Tailwind CSS projects. Use when building UI components, reviewing CSS utilities, styling React views, or enforcing design consistency.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/baseline-ui",
+  "content": "\n# Baseline UI\n\nEnforces an opinionated UI baseline to prevent AI-generated interface slop.\n\n## How to use\n\n- `/baseline-ui`\n  Apply these constraints to any UI work in this conversation.\n\n- `/baseline-ui <file>`\n  Review the file against all constraints below and output:\n  - violations (quote the exact line/snippet)\n  - why it matters (1 short sentence)\n  - a concrete fix (code-level suggestion)\n\n## Stack\n\n- MUST use Tailwind CSS defaults unless custom values already exist or are explicitly requested\n- MUST use `motion/react` (formerly `framer-motion`) when JavaScript animation is required\n- SHOULD use `tw-animate-css` for entrance and micro-animations in Tailwind CSS\n- MUST use `cn` utility (`clsx` + `tailwind-merge`) for class logic\n\n## Components\n\n- MUST use accessible component primitives for anything with keyboard or focus behavior (`Base UI`, `React Aria`, `Radix`)\n- MUST use the project’s existing component primitives first\n- NEVER mix primitive systems within the same interaction surface\n- SHOULD prefer [`Base UI`](https://base-ui.com/react/components) for new primitives if compatible with the stack\n- MUST add an `aria-label` to icon-only buttons\n- NEVER rebuild keyboard or focus behavior by hand unless explicitly requested\n\n## Interaction\n\n- MUST use an `AlertDialog` for destructive or irreversible actions\n- SHOULD use structural skeletons for loading states\n- NEVER use `h-screen`, use `h-dvh`\n- MUST respect `safe-area-inset` for fixed elements\n- MUST show errors next to where the action happens\n- NEVER block paste in `input` or `textarea` elements\n\n## Animation\n\n- NEVER add animation unless it is explicitly requested\n- MUST animate only compositor props (`transform`, `opacity`)\n- NEVER animate layout properties (`width`, `height`, `top`, `left`, `margin`, `padding`)\n- SHOULD avoid animating paint properties (`background`, `color`) except for small, local UI (text, icons)\n- SHOULD use `ease-out` on entrance\n- NEVER exceed `200ms` for interaction feedback\n- MUST pause looping animations when off-screen\n- SHOULD respect `prefers-reduced-motion`\n- NEVER introduce custom easing curves unless explicitly requested\n- SHOULD avoid animating large images or full-screen surfaces\n\n## Typography\n\n- MUST use `text-balance` for headings and `text-pretty` for body/paragraphs\n- MUST use `tabular-nums` for data\n- SHOULD use `truncate` or `line-clamp` for dense UI\n- NEVER modify `letter-spacing` (`tracking-*`) unless explicitly requested\n\n## Layout\n\n- MUST use a fixed `z-index` scale (no arbitrary `z-*`)\n- SHOULD use `size-*` for square elements instead of `w-*` + `h-*`\n\n## Performance\n\n- NEVER animate large `blur()` or `backdrop-filter` surfaces\n- NEVER apply `will-change` outside an active animation\n- NEVER use `useEffect` for anything that can be expressed as render logic\n\n## Design\n\n- NEVER use gradients unless explicitly requested\n- NEVER use purple or multicolor gradients\n- NEVER use glow effects as primary affordances\n- SHOULD use Tailwind CSS default shadow scale unless explicitly requested\n- MUST give empty states one clear next action\n- SHOULD limit accent color usage to one per view\n- SHOULD use existing theme or Tailwind CSS color tokens before introducing new ones\n",
+  "tags": [
+    "javascript",
+    "react",
+    "ai",
+    "design",
+    "image",
+    "tailwind",
+    "rag",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-03-07T06:53:08.254Z"
+}

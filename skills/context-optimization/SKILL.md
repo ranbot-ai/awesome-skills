@@ -1,6 +1,6 @@
 ---
 name: context-optimization
-description: Apply compaction, masking, and caching strategies 
+description: This skill should be used when the user asks to "optimize context", "reduce token costs", "improve context efficiency", "implement KV-cache optimization", "partition context", or mentions context limi
 category: AI & Agents
 source: antigravity
 tags: [python, ai, agent, template, design, document, cro]
@@ -8,11 +8,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cont
 ---
 
 
-## When to Use This Skill
-
-Apply compaction, masking, and caching strategies
-
-Use this skill when working with apply compaction, masking, and caching strategies.
 # Context Optimization Techniques
 
 Context optimization extends the effective capacity of limited context windows through strategic compression, masking, caching, and partitioning. The goal is not to magically increase context windows but to make better use of available capacity. Effective optimization can double or triple effective context capacity without requiring larger models or longer contexts.
@@ -89,4 +84,7 @@ The most aggressive form of context optimization is partitioning work across sub
 
 This approach achieves separation of concerns—the detailed search context remains isolated within sub-agents while the coordinator focuses on synthesis and analysis.
 
-**Result Aggregation
+**Result Aggregation**
+Aggregate results from partitioned subtasks by validating all partitions completed, merging compatible results, and summarizing if still too large.
+
+### Budget

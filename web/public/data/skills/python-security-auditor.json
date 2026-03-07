@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-python-security-auditor",
+  "name": "python-security-auditor",
+  "slug": "python-security-auditor",
+  "description": "Python Security Auditor",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/python-security-auditor",
+  "content": "\n404: Not Found",
+  "tags": [
+    "python",
+    "security"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-03-07T06:57:01.476Z"
+}

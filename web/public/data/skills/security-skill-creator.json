@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-security-skill-creator",
+  "name": "security-skill-creator",
+  "slug": "security-skill-creator",
+  "description": "Security Skill Creator",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/security-skill-creator",
+  "content": "\n404: Not Found",
+  "tags": [
+    "security"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-03-07T06:57:26.678Z"
+}

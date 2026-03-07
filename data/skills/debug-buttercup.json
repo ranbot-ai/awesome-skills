@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-debug-buttercup",
+  "name": "debug-buttercup",
+  "slug": "debug-buttercup",
+  "description": "Debugs the Buttercup CRS (Cyber Reasoning System) running on Kubernetes. Use when diagnosing pod crashes, restart loops, Redis failures, resource pressure, disk saturation, DinD issues, or any service misbehavior in the crs namespace. Covers triage, log analysis,...\n",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/debug-buttercup",
+  "content": "\n# Debug Buttercup\n\n## When to Use\n\n- Pods in the `crs` namespace are in CrashLoopBackOff, OOMKilled, or restarting\n- Multiple services restart simultaneously (cascade failure)\n- Redis is unresponsive or showing AOF warnings\n- Queues are growing but tasks are not progressing\n- Nodes show DiskPressure, MemoryPressure, or PID pressure\n- Build-bot cannot reach the Docker daemon (DinD failures)\n- Scheduler is stuck and not advancing task state\n- Health check probes are failing unexpectedly\n- Deployed Helm values don't match actual pod configuration\n\n## When NOT to Use\n\n- Deploying or upgrading Buttercup (use Helm and deployment guides)\n- Debugging issues outside the `crs` Kubernetes namespace\n- Performance tuning that doesn't involve a failure symptom\n\n## Namespace and Services\n\nAll pods run in namespace `crs`. Key services:\n\n| Layer | Services |\n|-------|----------|\n| Infra | redis, dind, litellm, registry-cache |\n| Orchestration | scheduler, task-server, task-downloader, scratch-cleaner |\n| Fuzzing | build-bot, fuzzer-bot, coverage-bot, tracer-bot, merger-bot |\n| Analysis | patcher, seed-gen, program-model, pov-reproducer |\n| Interface | competition-api, ui |\n\n## Triage Workflow\n\nAlways start with triage. Run these three commands first:\n\n```bash\n# 1. Pod status - look for restarts, CrashLoopBackOff, OOMKilled\nkubectl get pods -n crs -o wide\n\n# 2. Events - the timeline of what went wrong\nkubectl get events -n crs --sort-by='.lastTimestamp'\n\n# 3. Warnings only - filter the noise\nkubectl get events -n crs --field-selector type=Warning --sort-by='.lastTimestamp'\n```\n\nThen narrow down:\n\n```bash\n# Why did a specific pod restart? Check Last State Reason (OOMKilled, Error, Completed)\nkubectl describe pod -n crs <pod-name> | grep -A8 'Last State:'\n\n# Check actual resource limits vs intended\nkubectl get pod -n crs <pod-name> -o jsonpath='{.spec.containers[0].resources}'\n\n# Crashed container's logs (--previous = the container that died)\nkubectl logs -n crs <pod-name> --previous --tail=200\n\n# Current logs\nkubectl logs -n crs <pod-name> --tail=200\n```\n\n### Historical vs Ongoing Issues\n\nHigh restart counts don't necessarily mean an issue is ongoing -- restarts accumulate over a pod's lifetime. Always distinguish:\n- `--tail` shows the end of the log buffer, which may contain old messages. Use `--since=300s` to confirm issues are actively happening now.\n- `--timestamps` on log output helps correlate events across services.\n- Check `Last State` timestamps in `describe pod` to see when the most recent crash actually occurred.\n\n### Cascade Detection\n\nWhen many pods restart around the same time, check for a shared-dependency failure before investigating individual pods. The most common cascade: Redis goes down -> every service gets `ConnectionError`/`ConnectionRefusedError` -> mass restarts. Look for the same error across multiple `--previous` logs -- if they all say `redis.exceptions.ConnectionError`, debug Redis, not the individual services.\n\n## Log Analysis\n\n```bash\n# All replicas of a service at once\nkubectl logs -n crs -l app=fuzzer-bot --tail=100 --prefix\n\n# Stream live\nkubectl logs -n crs -l app.kubernetes.io/name=redis -f\n\n# Collect all logs to disk (existing script)\nbash deployment/collect-logs.sh\n```\n\n## Resource Pressure\n\n```bash\n# Per-pod CPU/memory\nkubectl top pods -n crs\n\n# Node-level\nkubectl top nodes\n\n# Node conditions (disk pressure, memory pressure, PID pressure)\nkubectl describe node <node> | grep -A5 Conditions\n\n# Disk usage inside a pod\nkubectl exec -n crs <pod> -- df -h\n\n# What's eating disk\nkubectl exec -n crs <pod> -- sh -c 'du -sh /corpus/* 2>/dev/null'\nkubectl exec -n crs <pod> -- sh -c 'du -sh /scratch/* 2>/dev/null'\n```\n\n## Redis Debugging\n\nRedis is the backbone. When it goes down, everything cascades.\n\n```bash\n# Redis pod status\nkubectl get pods -n crs -l app.kubernetes.io/name=redis\n\n# Redis logs (AOF warnings, OOM, connection issues)\nkubectl logs -n crs -l app.kubernetes.io/name=redis --tail=200\n\n# Connect to Redis CLI\nkubectl exec -n crs <redis-pod> -- redis-cli\n\n# Inside redis-cli: key diagnostics\nINFO memory          # used_memory_human, maxmemory\nINFO persistence     # aof_enabled, aof_last_bgrewrite_status, aof_delayed_fsync\nINFO clients         # connected_clients, blocked_clients\nINFO stats           # total_connections_received, rejected_connections\nCLIENT LIST          # see who's connected\nDBSIZE               # total keys\n\n# AOF configuration\nCONFIG GET appendonly     # is AOF enabled?\nCONFIG GET appendfsync   # fsync policy: everysec, always, or no\n\n# What is /data mounted on? (disk vs tmpfs matters for AOF performance)\n```\n\n```bash\nkubectl exec -n crs <redis-pod> -- mount | grep /data\nkubectl exec -n crs <redis-pod> -- du -sh /data/\n```\n\n### Queue Inspection\n\nButtercup uses Redis streams with consumer groups. Queue names:\n\n| Queue | Stream Key |\n|-------|-----------|\n| Build | fuzzer_build_queue |\n| Build Output | fuzzer_build_output_queue |\n| Crash | fuzzer_crash_queue |\n| Confirmed V",
+  "tags": [
+    "node",
+    "api",
+    "ai",
+    "llm",
+    "workflow",
+    "template",
+    "docker",
+    "kubernetes",
+    "rag",
+    "cro"
+  ],
+  "useCases": [
+    "Pods in the `crs` namespace are in CrashLoopBackOff, OOMKilled, or restarting",
+    "Multiple services restart simultaneously (cascade failure)",
+    "Redis is unresponsive or showing AOF warnings",
+    "Queues are growing but tasks are not progressing",
+    "Nodes show DiskPressure, MemoryPressure, or PID pressure"
+  ],
+  "scrapedAt": "2026-03-07T06:54:06.639Z"
+}

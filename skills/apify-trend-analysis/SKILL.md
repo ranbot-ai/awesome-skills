@@ -125,3 +125,8 @@ After completion, report:
 `Actor not found` - Check Actor ID spelling
 `Run FAILED` - Ask user to check Apify console link in error output
 `Timeout` - Reduce input size or increase `--timeout`
+
+
+## When to Use
+
+Use this skill when tackling tasks related to its primary domain or functionality as described above.
