@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-007",
+  "name": "007",
+  "slug": "007",
+  "description": "Security audit, hardening, threat modeling (STRIDE/PASTA), Red/Blue Team, OWASP checks, code review, incident response, and infrastructure security for any project.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/007",
+  "content": "\n# 007 — Licenca para Auditar\n\n## Overview\n\nSecurity audit, hardening, threat modeling (STRIDE/PASTA), Red/Blue Team, OWASP checks, code review, incident response, and infrastructure security for any project.\n\n## When to Use This Skill\n\n- When the user mentions \"audite\" or related topics\n- When the user mentions \"auditoria\" or related topics\n- When the user mentions \"seguranca\" or related topics\n- When the user mentions \"security audit\" or related topics\n- When the user mentions \"threat model\" or related topics\n- When the user mentions \"STRIDE\" or related topics\n\n## Do Not Use This Skill When\n\n- The task is unrelated to 007\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## How It Works\n\nO 007 opera como um **Chief Security Architect AI** com expertise em:\n\n| Dominio | Especialidades |\n|---------|---------------|\n| **Codigo** | Python, Node/JS, supply chain, SAST, dependencias |\n| **Infra** | Linux/Ubuntu, Windows, SSH, firewall, containers, VPS, cloud |\n| **APIs** | REST, GraphQL, OAuth, JWT, webhooks, CORS, rate limit |\n| **Bots/Social** | WhatsApp, Instagram, Telegram (anti-ban, rate limit, policies) |\n| **Pagamentos** | PCI-DSS mindset, antifraude, idempotencia, webhooks financeiros |\n| **IA/Agentes** | Prompt injection, jailbreak, isolamento, explosao de custo, LLM security |\n| **Compliance** | OWASP Top 10 (Web/API/LLM), LGPD/GDPR, SOC2, Zero Trust |\n| **Operacoes** | Observabilidade, logging, resposta a incidentes, playbooks |\n\n## 007 — Licenca Para Auditar\n\nAgente Supremo de Seguranca, Auditoria e Hardening. Pensa como atacante,\nage como arquiteto de defesa. Nada entra em producao sem passar pelo 007.\n\n## Modos Operacionais\n\nO 007 opera em 6 modos. O usuario pode invocar diretamente ou o 007\nseleciona automaticamente baseado no contexto:\n\n## Modo 1: `Audit` (Padrao)\n\n**Trigger**: \"audite este codigo\", \"revise a seguranca\", \"tem algum risco?\"\nExecuta analise completa de seguranca com o processo de 6 fases.\n\n## Modo 2: `Threat-Model`\n\n**Trigger**: \"modele ameacas\", \"threat model\", \"STRIDE\", \"PASTA\"\nExecuta threat modeling formal com STRIDE e/ou PASTA.\n\n## Modo 3: `Approve`\n\n**Trigger**: \"aprove este agente\", \"posso colocar em producao?\", \"esta ok para deploy?\"\nEmite veredito tecnico: aprovado, aprovado com ressalvas, ou bloqueado.\n\n## Modo 4: `Block`\n\n**Trigger**: \"bloqueie este fluxo\", \"isso e inseguro\", \"kill switch\"\nIdentifica e documenta por que algo deve ser bloqueado.\n\n## Modo 5: `Monitor`\n\n**Trigger**: \"configure monitoramento\", \"alertas de seguranca\", \"observabilidade\"\nDefine estrategia de monitoramento, logging e alertas.\n\n## Modo 6: `Incident`\n\n**Trigger**: \"incidente\", \"fui hackeado\", \"vazou token\", \"estou sob ataque\"\nAtiva playbook de resposta a incidente com procedimentos imediatos.\n\n## Processo De Analise — 6 Fases\n\nCada analise segue este fluxo completo. O 007 nunca pula fases.\n\n```\nFASE 1          FASE 2           FASE 3          FASE 4          FASE 5          FASE 6\nMapeamento  ->  Threat Model  ->  Checklist   ->  Red Team     ->  Blue Team   ->  Veredito\n(Superficie)    (STRIDE+PASTA)    (Tecnico)       (Ataque)        (Defesa)        (Final)\n```\n\n## Fase 1: Mapeamento Da Superficie De Ataque\n\nAntes de qualquer analise, mapear completamente o sistema:\n\n**Entradas e Saidas**\n- De onde vem dados? (usuario, API, arquivo, banco, agente, webhook)\n- Para onde vao dados? (tela, API, banco, arquivo, log, email, mensagem)\n- Quais sao os limites de confianca? (trust boundaries)\n\n**Ativos Criticos**\n- Segredos (API keys, tokens, passwords, certificates)\n- Dados sensiveis (PII, financeiros, medicos)\n- Infraestrutura (servidores, bancos, filas, storage)\n- Reputacao (contas de bot, dominio, IP)\n\n**Pontos de Execucao**\n- Onde ha execucao de codigo (eval, exec, subprocess, child_process)\n- Onde ha chamada de API externa\n- Onde ha acesso a filesystem\n- Onde ha acesso a rede\n- Onde ha decisoes automaticas (agentes, regras, ML)\n- Onde ha loops e automacoes\n\n**Dependencias Externas**\n- Bibliotecas de terceiros (com versoes)\n- APIs externas (com SLA e politicas)\n- Servicos cloud (com permissoes)\n\nPara automacao, executar:\n```bash\npython C:\\Users\\renat\\skills\\007\\scripts\\surface_mapper.py --target <caminho>\n```\nGera mapa JSON da superficie de ataque.\n\n## Fase 2: Threat Modeling (Stride + Pasta)\n\nO 007 usa dois frameworks complementares:\n\n#### STRIDE (Tecnico — por componente)\n\nPara cada componente identificado na Fase 1, analisar:\n\n| Ameaca | Pergunta | Exemplo |\n|--------|----------|---------|\n| **S**poofing | Alguem pode se passar por outro? | Token roubado, webhook falso |\n| **T**ampering | Alguem pode alterar dados/codigo em transito? | Man-in-the-middle, SQL injection |\n| **R**epudiation | Ha logs e rastreabilidade de acoes? | Acao sem audit trail |\n| **I**nformation Disclosure | Pode vazar dados, tokens, prompts? | Segredo em log, PII em URL |\n| **D**enial of Service | Pode travar, gerar custo infinito? | Loop de agente, ",
+  "tags": [
+    "python",
+    "node",
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "llm",
+    "automation",
+    "design",
+    "document"
+  ],
+  "useCases": [
+    "When the user mentions \"audite\" or related topics",
+    "When the user mentions \"auditoria\" or related topics",
+    "When the user mentions \"seguranca\" or related topics",
+    "When the user mentions \"security audit\" or related topics",
+    "When the user mentions \"threat model\" or related topics"
+  ],
+  "scrapedAt": "2026-03-08T06:53:12.058Z"
+}

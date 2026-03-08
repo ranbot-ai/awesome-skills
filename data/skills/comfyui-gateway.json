@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-comfyui-gateway",
+  "name": "comfyui-gateway",
+  "slug": "comfyui-gateway",
+  "description": "REST API gateway for ComfyUI servers. Workflow management, job queuing, webhooks, caching, auth, rate limiting, and image delivery (URL + base64).",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/comfyui-gateway",
+  "content": "\n# ComfyUI Gateway\n\n## Overview\n\nREST API gateway for ComfyUI servers. Workflow management, job queuing, webhooks, caching, auth, rate limiting, and image delivery (URL + base64).\n\n## When to Use This Skill\n\n- When the user mentions \"comfyui\" or related topics\n- When the user mentions \"comfy ui\" or related topics\n- When the user mentions \"stable diffusion api gateway\" or related topics\n- When the user mentions \"gateway comfyui\" or related topics\n- When the user mentions \"api gateway imagens\" or related topics\n- When the user mentions \"queue imagens\" or related topics\n\n## Do Not Use This Skill When\n\n- The task is unrelated to comfyui gateway\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## How It Works\n\nA production-grade REST API gateway that transforms any ComfyUI server into a universal,\nsecure, and scalable service. Supports workflow templates with placeholders, job queuing\nwith priorities, webhook callbacks, result caching, and multiple storage backends.\n\n## Architecture Overview\n\n```\n┌─────────────┐     ┌──────────────────────────────────┐     ┌──────────┐\n│   Clients    │────▶│        ComfyUI Gateway           │────▶│ ComfyUI  │\n│ (curl, n8n,  │     │                                  │     │ Server   │\n│  Claude,     │     │  ┌─────────┐  ┌──────────────┐  │     │ (local/  │\n│  Lovable,    │     │  │ Fastify │  │ BullMQ Queue │  │     │  remote) │\n│  Supabase)   │     │  │ API     │──│ (or in-mem)  │  │     └──────────┘\n│              │◀────│  └─────────┘  └──────────────┘  │\n│              │     │  ┌─────────┐  ┌──────────────┐  │     ┌──────────┐\n│              │     │  │ Auth +  │  │ Storage      │  │────▶│ S3/MinIO │\n│              │     │  │ RateL.  │  │ (local/S3)   │  │     │(optional)│\n│              │     │  └─────────┘  └──────────────┘  │     └──────────┘\n└─────────────┘     └──────────────────────────────────┘\n```\n\n## Components\n\n| Component | Purpose | File(s) |\n|-----------|---------|---------|\n| **API Gateway** | REST endpoints, validation, CORS | `src/api/` |\n| **Worker** | Processes jobs, talks to ComfyUI | `src/worker/` |\n| **ComfyUI Client** | HTTP + WebSocket to ComfyUI | `src/comfyui/` |\n| **Workflow Manager** | Template storage, placeholder rendering | `src/workflows/` |\n| **Storage Provider** | Local disk + S3-compatible | `src/storage/` |\n| **Cache** | Hash-based deduplication | `src/cache/` |\n| **Notifier** | Webhook with HMAC signing | `src/notifications/` |\n| **Auth** | API key + JWT + rate limiting | `src/auth/` |\n| **DB** | SQLite (better-sqlite3) or Postgres | `src/db/` |\n| **CLI** | Init, add-workflow, run, worker | `src/cli/` |\n\n## Quick Start\n\n```bash\n\n## 1. Install\n\ncd comfyui-gateway\nnpm install\n\n## 2. Configure\n\ncp .env.example .env\n\n## 3. Initialize\n\nnpx tsx src/cli/index.ts init\n\n## 4. Add A Workflow\n\nnpx tsx src/cli/index.ts add-workflow ./workflows/sdxl_realism_v1.json \\\n  --id sdxl_realism_v1 --schema ./workflows/sdxl_realism_v1.schema.json\n\n## 5. Start (Api + Worker In One Process)\n\nnpm run dev\n\n## Or Separately:\n\nnpm run start:api   # API only\nnpm run start:worker # Worker only\n```\n\n## Environment Variables\n\nAll configuration is via `.env` — nothing is hardcoded:\n\n| Variable | Default | Description |\n|----------|---------|-------------|\n| `PORT` | `3000` | API server port |\n| `HOST` | `0.0.0.0` | API bind address |\n| `COMFYUI_URL` | `http://127.0.0.1:8188` | ComfyUI server URL |\n| `COMFYUI_TIMEOUT_MS` | `300000` | Max wait for ComfyUI (5min) |\n| `API_KEYS` | `\"\"` | Comma-separated API keys (`key:role`) |\n| `JWT_SECRET` | `\"\"` | JWT signing secret (empty = JWT disabled) |\n| `REDIS_URL` | `\"\"` | Redis URL (empty = in-memory queue) |\n| `DATABASE_URL` | `./data/gateway.db` | SQLite path or Postgres URL |\n| `STORAGE_PROVIDER` | `local` | `local` or `s3` |\n| `STORAGE_LOCAL_PATH` | `./data/outputs` | Local output directory |\n| `S3_ENDPOINT` | `\"\"` | S3/MinIO endpoint |\n| `S3_BUCKET` | `\"\"` | S3 bucket name |\n| `S3_ACCESS_KEY` | `\"\"` | S3 access key |\n| `S3_SECRET_KEY` | `\"\"` | S3 secret key |\n| `S3_REGION` | `us-east-1` | S3 region |\n| `WEBHOOK_SECRET` | `\"\"` | HMAC signing secret for webhooks |\n| `WEBHOOK_ALLOWED_DOMAINS` | `*` | Comma-separated allowed callback domains |\n| `MAX_CONCURRENCY` | `1` | Parallel jobs per GPU |\n| `MAX_IMAGE_SIZE` | `2048` | Maximum dimension (width or height) |\n| `MAX_BATCH_SIZE` | `4` | Maximum batch size |\n| `CACHE_ENABLED` | `true` | Enable result caching |\n| `CACHE_TTL_SECONDS` | `86400` | Cache TTL (24h) |\n| `RATE_LIMIT_MAX` | `100` | Requests per window |\n| `RATE_LIMIT_WINDOW_MS` | `60000` | Rate limit window (1min) |\n| `LOG_LEVEL` | `info` | Pino log level |\n| `PRIVACY_MODE` | `false` | Redact prompts from logs |\n| `CORS_ORIGINS` | `*` | Allowed CORS origins |\n| `NODE_ENV` | `development` | Environment |\n\n## Health & Capabilities\n\n```\nGET /health\n→ { ok: true, version, comfyui: { reachable, url, models? }, uptime }\n\nGET /capabilities\n→ { workflows: [..",
+  "tags": [
+    "python",
+    "javascript",
+    "typescript",
+    "node",
+    "api",
+    "claude",
+    "ai",
+    "llm",
+    "workflow",
+    "template"
+  ],
+  "useCases": [
+    "When the user mentions \"comfyui\" or related topics",
+    "When the user mentions \"comfy ui\" or related topics",
+    "When the user mentions \"stable diffusion api gateway\" or related topics",
+    "When the user mentions \"gateway comfyui\" or related topics",
+    "When the user mentions \"api gateway imagens\" or related topics"
+  ],
+  "scrapedAt": "2026-03-08T06:54:55.874Z"
+}

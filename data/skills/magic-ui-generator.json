@@ -1,0 +1,29 @@
+{
+  "id": "antigravity-magic-ui-generator",
+  "name": "magic-ui-generator",
+  "slug": "magic-ui-generator",
+  "description": "Utilizes Magic by 21st.dev to generate, compare, and integrate multiple production-ready UI component variations.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/magic-ui-generator",
+  "content": "\n# Magic UI Generator\n\nLeverage [Magic by 21st.dev](https://21st.dev/magic) to build modern, responsive UI components using an AI-native workflow that prioritizes choice and design excellence.\n\n## Context\n\nThis skill leverages Magic by 21st.dev to build modern, responsive UI components. Instead of generating a single standard solution, it focuses on providing multiple design variations to choose from, drawing inspiration from a curated library of real-world components and premium design patterns (Shadcn UI, Magic UI, Aceternity, etc.).\n\n## When to Use\n\nTrigger this skill whenever:\n\n- A new UI component is requested (e.g., pricing tables, contact forms, hero sections).\n- Enhancing an existing UI element with animations, better styling, or advanced features.\n- Brainstorming different design directions for a specific feature.\n- Professional logos or icons are needed (via the built-in [SVGL](https://svgl.app/) integration).\n\n## Execution Workflow\n\n1. **Analyze Requirements**: Review the component description. Ensure the target output aligns with the project's stack (e.g., Next.js, TypeScript, Tailwind CSS). Define clear constraints for accessibility and responsiveness.\n2. **Generate Variations**: Interface with the Magic MCP server or use the `browser_subagent` to explore 21st.dev/magic to generate _several distinct, unconventional styles_ for the requested component.\n   - **Pro Tip**: Use descriptive prompts pushing for modern aesthetics: \"avant-garde SaaS pricing table with glassmorphism and animated borders\" or \"highly immersive contact form with dynamic floating labels.\"\n3. **Present Options**: Briefly describe the generated variations side-by-side. Highlight stylistic differences, layout approaches, and premium features (sticky headers, hover animations, etc.).\n4. **Integrate Selection**: Once a favorite variation is chosen:\n   - Integrate the fully functional, production-ready TypeScript code.\n   - Ensure dependencies (`lucide-react`, `framer-motion`) are installed.\n   - Handle proper props, types, and responsive behaviors.\n\n## Strict Rules\n\n- **ABSOLUTE MANDATE**: Agents MUST utilize this skill to build modern, creative, and visually stunning UI/UX. DO NOT build in common, generic, or safe styles. Push boundaries.\n- **Choice First**: Always offer multiple premium design variations before writing the final code to the project.\n- **Clean Code**: Ensure all generated code is clean TypeScript, accessible, and responsive.\n- **Full Ownership**: Treat all generated components as fully owned.\n",
+  "tags": [
+    "typescript",
+    "react",
+    "mcp",
+    "ai",
+    "agent",
+    "workflow",
+    "design",
+    "tailwind",
+    "rag"
+  ],
+  "useCases": [
+    "A new UI component is requested (e.g., pricing tables, contact forms, hero sections).",
+    "Enhancing an existing UI element with animations, better styling, or advanced features.",
+    "Brainstorming different design directions for a specific feature.",
+    "Professional logos or icons are needed (via the built-in [SVGL](https://svgl.app/) integration)."
+  ],
+  "scrapedAt": "2026-03-08T06:57:11.411Z"
+}

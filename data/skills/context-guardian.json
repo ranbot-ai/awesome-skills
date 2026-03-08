@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-context-guardian",
+  "name": "context-guardian",
+  "slug": "context-guardian",
+  "description": "Guardiao de contexto que preserva dados criticos antes da compactacao automatica. Snapshots, verificacao de integridade e zero perda de informacao.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/context-guardian",
+  "content": "\n# Context Guardian\n\n## Overview\n\nGuardiao de contexto que preserva dados criticos antes da compactacao automatica. Snapshots, verificacao de integridade e zero perda de informacao.\n\n## When to Use This Skill\n\n- When the user mentions \"compactacao contexto\" or related topics\n- When the user mentions \"perda de contexto\" or related topics\n- When the user mentions \"snapshot contexto\" or related topics\n- When the user mentions \"preservar contexto\" or related topics\n- When the user mentions \"contexto critico\" or related topics\n- When the user mentions \"antes de compactar\" or related topics\n\n## Do Not Use This Skill When\n\n- The task is unrelated to context guardian\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## How It Works\n\nSistema de integridade de contexto que protege projetos tecnicoss complexos contra\nperda de informacao durante compactacao automatica do Claude Code. Enquanto o\n`context-agent` atua APOS as sessoes (save/load), o context-guardian atua DURANTE\na sessao, detectando quando a compactacao esta proxima e executando protocolos de\npreservacao com verificacao redundante.\n\n## Por Que Isto Existe\n\nO Claude Code compacta automaticamente mensagens antigas quando o contexto se\naproxima do limite da janela. Essa compactacao e heuristica — ela resume mensagens\npara liberar espaco, mas inevitavelmente perde detalhes. Para projetos simples,\nisso funciona bem. Mas para projetos tecnicos pesados (como ecossistemas com 21+\nskills, auditorias de seguranca, refatoracoes de arquitetura), a perda de um unico\ndetalhe pode causar regressoes, re-trabalho ou inconsistencias graves.\n\nO context-guardian resolve isso criando uma camada de protecao PRE-compactacao:\nextrai, classifica, verifica e persiste todas as informacoes criticas ANTES que a\ncompactacao automatica as destrua.\n\n## Localizacao\n\n```\nC:\\Users\\renat\\skills\\context-guardian\\\n├── SKILL.md                          # Este arquivo\n├── references/\n│   ├── extraction-protocol.md        # Protocolo detalhado de extracao\n│   └── verification-checklist.md     # Checklist de verificacao e redundancia\n└── scripts/\n    └── context_snapshot.py           # Script de snapshot automatico\n```\n\n## Integracao Com O Ecossistema\n\n```\ncontext-guardian (PRE-compactacao)    context-agent (POS-sessao)\n         │                                    │\n         ├── Detecta contexto grande          ├── Salva resumo ao final\n         ├── Extrai dados criticos            ├── Atualiza ACTIVE_CONTEXT.md\n         ├── Verifica integridade             ├── Sincroniza MEMORY.md\n         ├── Salva snapshot verificado        ├── Indexa busca FTS5\n         └── Gera briefing de transicao       └── Arquiva sessoes antigas\n```\n\nO context-guardian e o context-agent sao complementares:\n- **context-guardian**: protecao em tempo real, DURANTE a sessao\n- **context-agent**: persistencia entre sessoes, APOS a sessao\n\n## Ativacao Automatica (O Claude Deve Iniciar Sozinho)\n\n1. **Limite de contexto**: quando perceber que ja consumiu ~60-70% da janela de\n   contexto (indicadores: mensagens comecando a ser resumidas, aviso de compactacao)\n2. **Projetos pesados**: sessoes com muitos arquivos editados, muitas tool calls,\n   ou projetos com dependencias complexas entre componentes\n3. **Antes de tarefas longas**: quando uma proxima tarefa pode gerar output extenso\n   que empurraria o contexto para alem do limite\n\n## Ativacao Manual (Usuario Solicita)\n\n- \"salva o estado antes de comprimir\"\n- \"faz um checkpoint\"\n- \"snapshot do contexto\"\n- \"nao quero perder nada dessa sessao\"\n- \"prepara pra compactacao\"\n- \"o contexto ta grande, protege\"\n\n## Fase 1: Extracao Estruturada\n\nPercorrer toda a conversa ate o momento e extrair categorias criticas.\nPara cada categoria, classificar por prioridade (P0 = perda fatal, P1 = perda grave,\nP2 = perda toleravel).\n\n**P0 — Perda Fatal (preservar com redundancia tripla)**\n\n| Categoria | O que extrair | Exemplo |\n|-----------|--------------|---------|\n| Decisoes tecnicas | Escolhas de arquitetura, padrao, tecnologia E motivo | \"Usamos parameterized queries porque f-strings causam SQL injection\" |\n| Estado de tarefas | O que foi feito, o que falta, dependencias | \"18/18 match OK, falta ZIP\" |\n| Correcoes aplicadas | Bug, causa raiz, solucao exata, arquivos afetados | \"instagram/db.py: SQL injection via f-string → ? placeholders\" |\n| Codigo gerado/modificado | Caminho exato, linhas alteradas, natureza da mudanca | \"match_skills.py:40-119: adicionou 5 categorias\" |\n| Erros encontrados | Mensagem exata, stack trace relevante, como resolveu | \"TypeError at line 45 → cast para int\" |\n| Comandos que funcionaram | Comando completo que produziu resultado correto | \"python verify_zips.py → 22/22 OK\" |\n\n**P1 — Perda Grave (preservar com verificacao)**\n\n| Categoria | O que extrair |\n|-----------|--------------|\n| Padroes descobertos | Convencoes, patterns de codigo observados |\n| Dependencias entre componentes | \"scan_registry",
+  "tags": [
+    "python",
+    "markdown",
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "workflow",
+    "document",
+    "image",
+    "security"
+  ],
+  "useCases": [
+    "When the user mentions \"compactacao contexto\" or related topics",
+    "When the user mentions \"perda de contexto\" or related topics",
+    "When the user mentions \"snapshot contexto\" or related topics",
+    "When the user mentions \"preservar contexto\" or related topics",
+    "When the user mentions \"contexto critico\" or related topics"
+  ],
+  "scrapedAt": "2026-03-08T06:55:04.652Z"
+}
