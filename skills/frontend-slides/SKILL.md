@@ -1,6 +1,6 @@
 ---
 name: frontend-slides
-description: Create stunning, animation-rich HTML presentations from scratch or by converting PowerPoint files. Use when the user wants to build a presentation, convert a PPT/PPTX to web, or create slides for a ta
+description: Create stunning, animation-rich HTML presentations from scratch or by converting PowerPoint files. 
 category: Creative & Media
 source: antigravity
 tags: [python, react, pptx, claude, ai, template, design, presentation, image, rag]
@@ -11,6 +11,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fron
 # Frontend Slides
 
 Create zero-dependency, animation-rich HTML presentations that run entirely in the browser.
+
+## When to Use This Skill
+
+- Use when the user asks to create a presentation, slide deck, or pitch from scratch.
+- Use when the user wants to convert an existing PPT or PPTX file into a web-based presentation.
+- Use when designing visually rich, animated HTML content that needs to fit exactly within the viewport.
 
 ## Core Principles
 
@@ -24,12 +30,14 @@ Create zero-dependency, animation-rich HTML presentations that run entirely in t
 You tend to converge toward generic, "on distribution" outputs. In frontend design, this creates what users call the "AI slop" aesthetic. Avoid this: make creative, distinctive frontends that surprise and delight.
 
 Focus on:
+
 - Typography: Choose fonts that are beautiful, unique, and interesting. Avoid generic fonts like Arial and Inter; opt instead for distinctive choices that elevate the frontend's aesthetics.
 - Color & Theme: Commit to a cohesive aesthetic. Use CSS variables for consistency. Dominant colors with sharp accents outperform timid, evenly-distributed palettes. Draw from IDE themes and cultural aesthetics for inspiration.
 - Motion: Use animations for effects and micro-interactions. Prioritize CSS-only solutions for HTML. Use Motion library for React when available. Focus on high-impact moments: one well-orchestrated page load with staggered reveals (animation-delay) creates more delight than scattered micro-interactions.
 - Backgrounds: Create atmosphere and depth rather than defaulting to solid colors. Layer CSS gradients, use geometric patterns, or add contextual effects that match the overall aesthetic.
 
 Avoid generic AI-generated aesthetics:
+
 - Overused font families (Inter, Roboto, Arial, system fonts)
 - Cliched color schemes (particularly purple gradients on white backgrounds)
 - Predictable layouts and component patterns
@@ -53,14 +61,14 @@ These invariants apply to EVERY slide in EVERY presentation:
 
 ### Content Density Limits Per Slide
 
-| Slide Type | Maximum Content |
-|------------|-----------------|
-| Title slide | 1 heading + 1 subtitle + optional tagline |
+| Slide Type    | Maximum Content                                           |
+| ------------- | --------------------------------------------------------- |
+| Title slide   | 1 heading + 1 subtitle + optional tagline                 |
 | Content slide | 1 heading + 4-6 bullet points OR 1 heading + 2 paragraphs |
-| Feature grid | 1 heading + 6 cards maximum (2x3 or 3x2) |
-| Code slide | 1 heading + 8-10 lines of code |
-| Quote slide | 1 quote (max 3 lines) + attribution |
-| Image slide | 1 heading + 1 image (max 60vh height) |
+| Feature grid  | 1 heading + 6 cards maximum (2x3 or 3x2)                  |
+| Code slide    | 1 heading + 8-10 lines of code                            |
+| Quote slide   | 1 quote (max 3 lines) + attribution                       |
+| Image slide   | 1 heading + 1 image (max 60vh height)                     |
 
 **Content exceeds limits? Split into multiple slides. Never cram, never scroll.**
 
@@ -81,15 +89,4 @@ When enhancing existing presentations, viewport fitting is the biggest risk:
 1. **Before adding content:** Count existing elements, check against density limits
 2. **Adding images:** Must have `max-height: min(50vh, 400px)`. If slide already has max content, split into two slides
 3. **Adding text:** Max 4-6 bullets per slide. Exceeds limits? Split into continuation slides
-4. **After ANY modification, verify:** `.slide` has `overflow: hidden`, new elements use `clamp()`, images have viewport-relative max-height, content fits at 1280x720
-5. **Proactively reorganize:** If modifications will cause overflow, automatically split content and inform the user. Don't wait to be asked
-
-**When adding images to existing slides:** Move image to new slide or reduce other content first. Never add images without checking if existing content already fills the viewport.
-
----
-
-## Phase 1: Content Discovery (New Presentations)
-
-**Ask ALL questions in a single AskUserQuestion call** so the user fills everything out at once:
-
-**Question 
+4. **After ANY modification, verify:** `.slide` has `overflow: hidden`, new elements use `clamp()`, images have viewport-relative max-h
