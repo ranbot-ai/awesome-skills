@@ -87,13 +87,8 @@ digraph process {
 }
 ```
 
-## Prompt Templates
+## Model Selection
 
-- `./implementer-prompt.md` - Dispatch implementer subagent
-- `./spec-reviewer-prompt.md` - Dispatch spec compliance reviewer subagent
-- `./code-quality-reviewer-prompt.md` - Dispatch code quality reviewer subagent
+Use the least powerful model that can handle each role to conserve cost and increase speed.
 
-## Example Workflow
-
-```
-Yo
+**Mechanical implementation tasks** (isolated functions, clear specs, 1-2 files): use a fast, cheap model. Most implementation tasks are mechanical whe
