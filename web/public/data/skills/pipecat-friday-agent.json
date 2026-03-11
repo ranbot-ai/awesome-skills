@@ -1,0 +1,26 @@
+{
+  "id": "antigravity-pipecat-friday-agent",
+  "name": "pipecat-friday-agent",
+  "slug": "pipecat-friday-agent",
+  "description": "Build a low-latency, Iron Man-inspired tactical voice assistant (F.R.I.D.A.Y.) using Pipecat, Gemini, and OpenAI.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pipecat-friday-agent",
+  "content": "\n# Pipecat Friday Agent\n\n## Overview\n\nThis skill provides a blueprint for building **F.R.I.D.A.Y.** (Replacement Integrated Digital Assistant Youth), a local voice assistant inspired by the tactical AI from the Iron Man films. It uses the **Pipecat** framework to orchestrate a low-latency pipeline:\n- **STT**: OpenAI Whisper (`whisper-1`) or `gpt-4o-transcribe`\n- **LLM**: Google Gemini 2.5 Flash (via a compatibility shim)\n- **TTS**: OpenAI TTS (`nova` voice)\n- **Transport**: Local Audio (Hardware Mic/Speakers)\n\n## When to Use This Skill\n\n- Use when you want to build a real-time, conversational voice agent.\n- Use when working with the Pipecat framework for pipeline-based AI.\n- Use when you need to integrate multiple providers (Google and OpenAI) into a single voice loop.\n- Use when building Iron Man-themed or tactical-themed voice applications.\n\n## How It Works\n\n### Step 1: Install Dependencies\n\nYou will need the Pipecat framework and its service providers installed:\n```bash\npip install pipecat-ai[openai,google,silero] python-dotenv\n```\n\n### Step 2: Configure Environment\n\nCreate a `.env` file with your API keys:\n```env\nOPENAI_API_KEY=your_openai_key\nGOOGLE_API_KEY=your_google_key\n```\n\n### Step 3: Run the Agent\n\nExecute the provided Python script to start the interface:\n```bash\npython scripts/friday_agent.py\n```\n\n## Core Concepts\n\n### Pipeline Architecture\nThe agent follows a linear pipeline: `Mic -> VAD -> STT -> LLM -> TTS -> Speaker`. This allows for granular control over each stage, unlike end-to-end speech-to-speech models.\n\n### Google Compatibility Shim\nSince Google's Gemini API has a different message format than OpenAI's standard (which Pipecat aggregators expect), the script includes a `GoogleSafeContext` and `GoogleSafeMessage` class to bridge the gap.\n\n## Best Practices\n\n- ✅ **Use Silero VAD**: It is robust for local hardware and prevents background noise from triggering the LLM.\n- ✅ **Concise Prompts**: Tactical agents should give short, data-dense responses to minimize latency.\n- ✅ **Sample Rate Match**: OpenAI TTS outputs at 24kHz; ensure your `audio_out_sample_rate` matches to avoid high-pitched or slowed audio.\n- ❌ **No Polite Fillers**: Avoid \"Hello, how can I help you today?\" Instead, use \"Systems nominal. Ready for commands.\"\n\n## Troubleshooting\n\n- **Problem:** Audio is choppy or delayed.\n  - **Solution:** Check your `OUTPUT_DEVICE` index. Run a script like `test_audio_output.py` to find the correct hardware index for your OS.\n- **Problem:** \"Validation error\" for message format.\n  - **Solution:** Ensure the `GoogleSafeContext` shim is correctly translating OpenAI-style dicts to Gemini-style schema.\n\n## Related Skills\n\n- `@voice-agents` - General principles of voice AI.\n- `@agent-tool-builder` - Add tools (Search, Lights, etc.) to your Friday agent.\n- `@llm-architect` - Optimizing the LLM layer.\n",
+  "tags": [
+    "python",
+    "api",
+    "ai",
+    "agent",
+    "llm",
+    "gpt"
+  ],
+  "useCases": [
+    "Use when you want to build a real-time, conversational voice agent.",
+    "Use when working with the Pipecat framework for pipeline-based AI.",
+    "Use when you need to integrate multiple providers (Google and OpenAI) into a single voice loop.",
+    "Use when building Iron Man-themed or tactical-themed voice applications."
+  ],
+  "scrapedAt": "2026-03-11T07:08:00.455Z"
+}

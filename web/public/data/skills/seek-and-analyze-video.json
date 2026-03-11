@@ -1,0 +1,22 @@
+{
+  "id": "antigravity-seek-and-analyze-video",
+  "name": "seek-and-analyze-video",
+  "slug": "seek-and-analyze-video",
+  "description": "Seek and analyze video content using Memories.ai Large Visual Memory Model for persistent video intelligence",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/seek-and-analyze-video",
+  "content": "\n## When to Use\n\nUse this skill when the user wants to search for, import, or analyze video content from TikTok, YouTube, or Instagram, summarize meetings or lectures from recordings, build a searchable knowledge base from video content, or research social media trends and creators.\n\n# Seek and Analyze Video\n\n## Description\n\nThis skill enables AI agents to search, import, and analyze video content using Memories.ai's Large Visual Memory Model (LVMM). Unlike one-shot video analysis tools, it provides persistent video intelligence -- videos are indexed once and can be queried repeatedly across sessions. Supports social media import (TikTok, YouTube, Instagram), meeting summarization, knowledge base building, and cross-video Q&A via Memory Augmented Generation (MAG).\n\n## Overview\n\nThe skill wraps 21 API commands into workflow-oriented reference guides that agents load on demand. A routing table in SKILL.md maps user intent to the right workflow automatically.\n\n## When to Use This Skill\n\n- Use when analyzing or asking questions about a video from a URL\n- Use when searching for videos on TikTok, YouTube, or Instagram by topic, hashtag, or creator\n- Use when summarizing meetings, lectures, or webinars from recordings\n- Use when building a searchable knowledge base from video content and text memories\n- Use when researching social media content trends, influencers, or viral patterns\n- Use when analyzing or describing images with AI vision\n\n## How It Works\n\n### Step 1: Intent Detection\n\nThe agent reads the SKILL.md workflow router and matches the user's request to one of 6 intent categories.\n\n### Step 2: Reference Loading\n\nThe agent loads the appropriate reference file (e.g., video_qa.md for video questions, social_research.md for social media research).\n\n### Step 3: Workflow Execution\n\nThe agent follows the step-by-step workflow: upload/import -> wait for processing -> analyze/chat -> present results.\n\n## Examples\n\n### Example 1: Video Q&A\n\n```\nUser: \"What are the key arguments in this video? https://youtube.com/watch?v=abc123\"\nAgent: uploads video -> waits for processing -> uses chat_video to ask questions -> presents structured summary\n```\n\n### Example 2: Social Media Research\n\n```\nUser: \"What's trending on TikTok about sustainable fashion?\"\nAgent: uses search_public to find trending videos -> imports top results -> analyzes content patterns\n```\n\n### Example 3: Meeting Notes\n\n```\nUser: \"Summarize this meeting recording and extract action items\"\nAgent: uploads recording -> waits -> gets transcript -> uses chat_video for structured summary with action items\n```\n\n## Best Practices\n\n- Always wait for video processing to complete before querying\n- Use caption_video for quick analysis (no upload needed)\n- Use chat_video for deep, multi-turn analysis (requires upload)\n- Use search_audio to find specific moments or quotes in a video\n- Use memory_add to store important findings for later retrieval\n\n## Common Pitfalls\n\n- **Problem:** Querying a video before processing completes\n  **Solution:** Always use the `wait` command after upload before any analysis\n\n- **Problem:** Uploading a video when only a quick caption is needed\n  **Solution:** Use `caption_video` for one-off analysis; only upload for repeated queries\n\n## Limitations\n\n- Video processing takes 1-5 minutes depending on length\n- Free tier limited to 100 credits\n- Social media import requires public content\n- Audio search only works on processed videos\n\n## Related Skills\n\n- Video analysis tools for one-shot analysis\n- Web search skills for non-video content research\n",
+  "tags": [
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "workflow",
+    "image",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-03-11T07:08:43.421Z"
+}

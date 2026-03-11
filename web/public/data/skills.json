@@ -1470,13 +1470,14 @@
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/antigravity-workflows",
-      "content": "\n# Antigravity Workflows\n\nUse this skill to turn a complex objective into a guided sequence of skill invocations.\n\n## When to Use This Skill\n\nUse this skill when:\n- The user wants to combine several skills without manually selecting each one.\n- The goal is multi-phase (for example: plan, build, test, ship).\n- The user asks for best-practice execution for common scenarios like:\n  - Shipping a SaaS MVP\n  - Running a web security audit\n  - Building an AI agent system\n  - Implementing browser automation and E2E QA\n\n## Workflow Source of Truth\n\nRead workflows in this order:\n1. `docs/WORKFLOWS.md` for human-readable playbooks.\n2. `data/workflows.json` for machine-readable workflow metadata.\n\n## How to Run This Skill\n\n1. Identify the user's concrete outcome.\n2. Propose the 1-2 best matching workflows.\n3. Ask the user to choose one.\n4. Execute step-by-step:\n   - Announce current step and expected artifact.\n   - Invoke recommended skills for that step.\n   - Verify completion criteria before moving to next step.\n5. At the end, provide:\n   - Completed artifacts\n   - Validation evidence\n   - Remaining risks and next actions\n\n## Default Workflow Routing\n\n- Product delivery request -> `ship-saas-mvp`\n- Security review request -> `security-audit-web-app`\n- Agent/LLM product request -> `build-ai-agent-system`\n- E2E/browser testing request -> `qa-browser-automation`\n\n## Copy-Paste Prompts\n\n```text\nUse @antigravity-workflows to run the \"Ship a SaaS MVP\" workflow for my project idea.\n```\n\n```text\nUse @antigravity-workflows and execute a full \"Security Audit for a Web App\" workflow.\n```\n\n```text\nUse @antigravity-workflows to guide me through \"Build an AI Agent System\" with checkpoints.\n```\n\n```text\nUse @antigravity-workflows to execute the \"QA and Browser Automation\" workflow and stabilize flaky tests.\n```\n\n## Limitations\n\n- This skill orchestrates; it does not replace specialized skills.\n- It depends on the local availability of referenced skills.\n- It does not guarantee success without environment access, credentials, or required infrastructure.\n- For stack-specific browser automation in Go, `go-playwright` may require the corresponding skill to be present in your local skills repository.\n\n## Related Skills\n\n- `concise-planning`\n- `brainstorming`\n- `workflow-automation`\n- `verification-before-completion`\n",
+      "content": "\n# Antigravity Workflows\n\nUse this skill to turn a complex objective into a guided sequence of skill invocations.\n\n## When to Use This Skill\n\nUse this skill when:\n- The user wants to combine several skills without manually selecting each one.\n- The goal is multi-phase (for example: plan, build, test, ship).\n- The user asks for best-practice execution for common scenarios like:\n  - Shipping a SaaS MVP\n  - Running a web security audit\n  - Building an AI agent system\n  - Implementing browser automation and E2E QA\n\n## Workflow Source of Truth\n\nRead workflows in this order:\n1. `docs/WORKFLOWS.md` for human-readable playbooks.\n2. `data/workflows.json` for machine-readable workflow metadata.\n\n## How to Run This Skill\n\n1. Identify the user's concrete outcome.\n2. Propose the 1-2 best matching workflows.\n3. Ask the user to choose one.\n4. Execute step-by-step:\n   - Announce current step and expected artifact.\n   - Invoke recommended skills for that step.\n   - Verify completion criteria before moving to next step.\n5. At the end, provide:\n   - Completed artifacts\n   - Validation evidence\n   - Remaining risks and next actions\n\n## Default Workflow Routing\n\n- Product delivery request -> `ship-saas-mvp`\n- Security review request -> `security-audit-web-app`\n- Agent/LLM product request -> `build-ai-agent-system`\n- E2E/browser testing request -> `qa-browser-automation`\n- Domain-driven design request -> `design-ddd-core-domain`\n\n## Copy-Paste Prompts\n\n```text\nUse @antigravity-workflows to run the \"Ship a SaaS MVP\" workflow for my project idea.\n```\n\n```text\nUse @antigravity-workflows and execute a full \"Security Audit for a Web App\" workflow.\n```\n\n```text\nUse @antigravity-workflows to guide me through \"Build an AI Agent System\" with checkpoints.\n```\n\n```text\nUse @antigravity-workflows to execute the \"QA and Browser Automation\" workflow and stabilize flaky tests.\n```\n\n```text\nUse @antigravity-workflows to execute the \"Design a DDD Core Domain\" workflow for my new service.\n```\n\n## Limitations\n\n- This skill orchestrates; it does not replace specialized skills.\n- It depends on the local availability of referenced skills.\n- It does not guarantee success without environment access, credentials, or required infrastructure.\n- For stack-specific browser automation in Go, `go-playwright` may require the corresponding skill to be present in your local skills repository.\n\n## Related Skills\n\n- `concise-planning`\n- `brainstorming`\n- `workflow-automation`\n- `verification-before-completion`\n",
       "tags": [
         "ai",
         "agent",
         "llm",
         "automation",
         "workflow",
+        "design",
         "security"
       ],
       "useCases": [
@@ -6213,6 +6214,33 @@
       "scrapedAt": "2026-03-07T06:53:13.927Z"
     },
     {
+      "id": "antigravity-blueprint",
+      "name": "blueprint",
+      "slug": "blueprint",
+      "description": "Turn a one-line objective into a step-by-step construction plan any coding agent can execute cold. Each step has a self-contained context brief — a fresh agent in a new session can pick up any step without reading prior steps.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/blueprint",
+      "content": "\n# Blueprint — Construction Plan Generator\n\nTurn a one-line objective into a step-by-step plan any coding agent can execute cold.\n\n## Overview\n\nBlueprint is for multi-session, multi-agent engineering projects where each step must be independently executable by a fresh agent that has never seen the conversation history. Install it once, invoke it with `/blueprint <project> <objective>`.\n\n## When to Use This Skill\n\n- Use when the task requires multiple PRs or sessions\n- Use when multiple agents or team members need to share execution\n- Use when you want adversarial review of the plan before execution\n- Use when parallel step detection and dependency graphs matter\n\n## How It Works\n\n1. **Research** — Scans the codebase, reads project memory, runs pre-flight checks\n2. **Design** — Breaks the objective into one-PR-sized steps, identifies parallelism, assigns model tiers\n3. **Draft** — Generates the plan from a structured template with branch workflow rules, CI policy, and rollback strategies inline\n4. **Review** — Delegates adversarial review to a strongest-model sub-agent (falls back to default model if unavailable)\n5. **Register** — Saves the plan and updates project memory\n\n## Examples\n\n### Example 1: Database migration\n```\n/blueprint myapp \"migrate database to PostgreSQL\"\n```\n\n### Example 2: Plugin extraction\n```\n/blueprint antbot \"extract providers into plugins\"\n```\n\n## Best Practices\n\n- ✅ Use for tasks requiring 3+ PRs or multiple sessions\n- ✅ Let Blueprint auto-detect git/gh availability — it degrades gracefully\n- ❌ Don't invoke for tasks completable in a single PR\n- ❌ Don't invoke when the user says \"just do it\"\n\n## Key Differentiators\n\n- **Cold-start execution**: Every step has a self-contained context brief\n- **Adversarial review gate**: Strongest-model review before execution\n- **Zero runtime risk**: Pure markdown — no hooks, no scripts, no executable code\n- **Plan mutation protocol**: Steps can be split, inserted, skipped with audit trail\n\n## Installation\n\n```bash\nmkdir -p ~/.claude/skills\ngit clone https://github.com/antbotlab/blueprint.git ~/.claude/skills/blueprint\n```\n\n## Additional Resources\n\n- [GitHub Repository](https://github.com/antbotlab/blueprint)\n- [Examples: small plan](https://github.com/antbotlab/blueprint/blob/main/examples/small-plan.md)\n- [Examples: large plan](https://github.com/antbotlab/blueprint/blob/main/examples/large-plan.md)\n",
+      "tags": [
+        "markdown",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "template",
+        "design"
+      ],
+      "useCases": [
+        "Use when the task requires multiple PRs or sessions",
+        "Use when multiple agents or team members need to share execution",
+        "Use when you want adversarial review of the plan before execution",
+        "Use when parallel step detection and dependency graphs matter"
+      ],
+      "scrapedAt": "2026-03-11T07:04:30.269Z"
+    },
+    {
       "id": "antigravity-box-automation",
       "name": "box-automation",
       "slug": "box-automation",
@@ -6246,7 +6274,7 @@
       "source": "superpowers",
       "repoUrl": "https://github.com/obra/superpowers",
       "skillUrl": "https://github.com/obra/superpowers/tree/main/skills/brainstorming",
-      "content": "\n# Brainstorming Ideas Into Designs\n\nHelp turn ideas into fully formed designs and specs through natural collaborative dialogue.\n\nStart by understanding the current project context, then ask questions one at a time to refine the idea. Once you understand what you're building, present the design and get user approval.\n\n<HARD-GATE>\nDo NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and the user has approved it. This applies to EVERY project regardless of perceived simplicity.\n</HARD-GATE>\n\n## Anti-Pattern: \"This Is Too Simple To Need A Design\"\n\nEvery project goes through this process. A todo list, a single-function utility, a config change — all of them. \"Simple\" projects are where unexamined assumptions cause the most wasted work. The design can be short (a few sentences for truly simple projects), but you MUST present it and get approval.\n\n## Checklist\n\nYou MUST create a task for each of these items and complete them in order:\n\n1. **Explore project context** — check files, docs, recent commits\n2. **Offer visual companion** (if topic will involve visual questions) — this is its own message, not combined with a clarifying question. See the Visual Companion section below.\n3. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria\n4. **Propose 2-3 approaches** — with trade-offs and your recommendation\n5. **Present design** — in sections scaled to their complexity, get user approval after each section\n6. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit\n7. **Transition to implementation** — invoke writing-plans skill to create implementation plan\n\n## Process Flow\n\n```dot\ndigraph brainstorming {\n    \"Explore project context\" [shape=box];\n    \"Visual questions ahead?\" [shape=diamond];\n    \"Offer Visual Companion\\n(own message, no other content)\" [shape=box];\n    \"Ask clarifying questions\" [shape=box];\n    \"Propose 2-3 approaches\" [shape=box];\n    \"Present design sections\" [shape=box];\n    \"User approves design?\" [shape=diamond];\n    \"Write design doc\" [shape=box];\n    \"Invoke writing-plans skill\" [shape=doublecircle];\n\n    \"Explore project context\" -> \"Visual questions ahead?\";\n    \"Visual questions ahead?\" -> \"Offer Visual Companion\\n(own message, no other content)\" [label=\"yes\"];\n    \"Visual questions ahead?\" -> \"Ask clarifying questions\" [label=\"no\"];\n    \"Offer Visual Companion\\n(own message, no other content)\" -> \"Ask clarifying questions\";\n    \"Ask clarifying questions\" -> \"Propose 2-3 approaches\";\n    \"Propose 2-3 approaches\" -> \"Present design sections\";\n    \"Present design sections\" -> \"User approves design?\";\n    \"User approves design?\" -> \"Present design sections\" [label=\"no, revise\"];\n    \"User approves design?\" -> \"Write design doc\" [label=\"yes\"];\n    \"Write design doc\" -> \"Invoke writing-plans skill\";\n}\n```\n\n**The terminal state is invoking writing-plans.** Do NOT invoke frontend-design, mcp-builder, or any other implementation skill. The ONLY skill you invoke after brainstorming is writing-plans.\n\n## The Process\n\n**Understanding the idea:**\n\n- Check out the current project state first (files, docs, recent commits)\n- Before asking detailed questions, assess scope: if the request describes multiple independent subsystems (e.g., \"build a platform with chat, file storage, billing, and analytics\"), flag this immediately. Don't spend questions refining details of a project that needs to be decomposed first.\n- If the project is too large for a single spec, help the user decompose into sub-projects: what are the independent pieces, how do they relate, what order should they be built? Then brainstorm the first sub-project through the normal design flow. Each sub-project gets its own spec → plan → implementation cycle.\n- For appropriately-scoped projects, ask questions one at a time to refine the idea\n- Prefer multiple choice questions when possible, but open-ended is fine too\n- Only one question per message - if a topic needs more exploration, break it into multiple questions\n- Focus on understanding: purpose, constraints, success criteria\n\n**Exploring approaches:**\n\n- Propose 2-3 different approaches with trade-offs\n- Present options conversationally with your recommendation and reasoning\n- Lead with your recommended option and explain why\n\n**Presenting the design:**\n\n- Once you believe you understand what you're building, present the design\n- Scale each section to its complexity: a few sentences if straightforward, up to 200-300 words if nuanced\n- Ask after each section whether it looks right so far\n- Cover: architecture, components, data flow, error handling, testing\n- Be ready to go back and clarify if something doesn't make sense\n\n**Design for isolation and clarity:**\n\n- Break the system into smaller units that each have one clear purpose, communicate through well-defined interfaces, and can be understood and tested independent",
+      "content": "\n# Brainstorming Ideas Into Designs\n\nHelp turn ideas into fully formed designs and specs through natural collaborative dialogue.\n\nStart by understanding the current project context, then ask questions one at a time to refine the idea. Once you understand what you're building, present the design and get user approval.\n\n<HARD-GATE>\nDo NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and the user has approved it. This applies to EVERY project regardless of perceived simplicity.\n</HARD-GATE>\n\n## Anti-Pattern: \"This Is Too Simple To Need A Design\"\n\nEvery project goes through this process. A todo list, a single-function utility, a config change — all of them. \"Simple\" projects are where unexamined assumptions cause the most wasted work. The design can be short (a few sentences for truly simple projects), but you MUST present it and get approval.\n\n## Checklist\n\nYou MUST create a task for each of these items and complete them in order:\n\n1. **Explore project context** — check files, docs, recent commits\n2. **Offer visual companion** (if topic will involve visual questions) — this is its own message, not combined with a clarifying question. See the Visual Companion section below.\n3. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria\n4. **Propose 2-3 approaches** — with trade-offs and your recommendation\n5. **Present design** — in sections scaled to their complexity, get user approval after each section\n6. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit\n7. **Spec review loop** — dispatch spec-document-reviewer subagent; fix issues and re-dispatch until approved (max 5 iterations, then surface to human)\n8. **User reviews written spec** — ask user to review the spec file before proceeding\n9. **Transition to implementation** — invoke writing-plans skill to create implementation plan\n\n## Process Flow\n\n```dot\ndigraph brainstorming {\n    \"Explore project context\" [shape=box];\n    \"Visual questions ahead?\" [shape=diamond];\n    \"Offer Visual Companion\\n(own message, no other content)\" [shape=box];\n    \"Ask clarifying questions\" [shape=box];\n    \"Propose 2-3 approaches\" [shape=box];\n    \"Present design sections\" [shape=box];\n    \"User approves design?\" [shape=diamond];\n    \"Write design doc\" [shape=box];\n    \"Spec review loop\" [shape=box];\n    \"Spec review passed?\" [shape=diamond];\n    \"User reviews spec?\" [shape=diamond];\n    \"Invoke writing-plans skill\" [shape=doublecircle];\n\n    \"Explore project context\" -> \"Visual questions ahead?\";\n    \"Visual questions ahead?\" -> \"Offer Visual Companion\\n(own message, no other content)\" [label=\"yes\"];\n    \"Visual questions ahead?\" -> \"Ask clarifying questions\" [label=\"no\"];\n    \"Offer Visual Companion\\n(own message, no other content)\" -> \"Ask clarifying questions\";\n    \"Ask clarifying questions\" -> \"Propose 2-3 approaches\";\n    \"Propose 2-3 approaches\" -> \"Present design sections\";\n    \"Present design sections\" -> \"User approves design?\";\n    \"User approves design?\" -> \"Present design sections\" [label=\"no, revise\"];\n    \"User approves design?\" -> \"Write design doc\" [label=\"yes\"];\n    \"Write design doc\" -> \"Spec review loop\";\n    \"Spec review loop\" -> \"Spec review passed?\";\n    \"Spec review passed?\" -> \"Spec review loop\" [label=\"issues found,\\nfix and re-dispatch\"];\n    \"Spec review passed?\" -> \"User reviews spec?\" [label=\"approved\"];\n    \"User reviews spec?\" -> \"Write design doc\" [label=\"changes requested\"];\n    \"User reviews spec?\" -> \"Invoke writing-plans skill\" [label=\"approved\"];\n}\n```\n\n**The terminal state is invoking writing-plans.** Do NOT invoke frontend-design, mcp-builder, or any other implementation skill. The ONLY skill you invoke after brainstorming is writing-plans.\n\n## The Process\n\n**Understanding the idea:**\n\n- Check out the current project state first (files, docs, recent commits)\n- Before asking detailed questions, assess scope: if the request describes multiple independent subsystems (e.g., \"build a platform with chat, file storage, billing, and analytics\"), flag this immediately. Don't spend questions refining details of a project that needs to be decomposed first.\n- If the project is too large for a single spec, help the user decompose into sub-projects: what are the independent pieces, how do they relate, what order should they be built? Then brainstorm the first sub-project through the normal design flow. Each sub-project gets its own spec → plan → implementation cycle.\n- For appropriately-scoped projects, ask questions one at a time to refine the idea\n- Prefer multiple choice questions when possible, but open-ended is fine too\n- Only one question per message - if a topic needs more exploration, break it into multiple questions\n- Focus on understanding: purpose, constraints, success criteria\n\n**Exploring approaches:**\n\n- Propose 2-3 different approaches with trade-offs\n- Present opti",
       "tags": [
         "testing",
         "git",
@@ -21737,6 +21765,32 @@
       "scrapedAt": "2026-02-26T07:13:02.744Z"
     },
     {
+      "id": "antigravity-pipecat-friday-agent",
+      "name": "pipecat-friday-agent",
+      "slug": "pipecat-friday-agent",
+      "description": "Build a low-latency, Iron Man-inspired tactical voice assistant (F.R.I.D.A.Y.) using Pipecat, Gemini, and OpenAI.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pipecat-friday-agent",
+      "content": "\n# Pipecat Friday Agent\n\n## Overview\n\nThis skill provides a blueprint for building **F.R.I.D.A.Y.** (Replacement Integrated Digital Assistant Youth), a local voice assistant inspired by the tactical AI from the Iron Man films. It uses the **Pipecat** framework to orchestrate a low-latency pipeline:\n- **STT**: OpenAI Whisper (`whisper-1`) or `gpt-4o-transcribe`\n- **LLM**: Google Gemini 2.5 Flash (via a compatibility shim)\n- **TTS**: OpenAI TTS (`nova` voice)\n- **Transport**: Local Audio (Hardware Mic/Speakers)\n\n## When to Use This Skill\n\n- Use when you want to build a real-time, conversational voice agent.\n- Use when working with the Pipecat framework for pipeline-based AI.\n- Use when you need to integrate multiple providers (Google and OpenAI) into a single voice loop.\n- Use when building Iron Man-themed or tactical-themed voice applications.\n\n## How It Works\n\n### Step 1: Install Dependencies\n\nYou will need the Pipecat framework and its service providers installed:\n```bash\npip install pipecat-ai[openai,google,silero] python-dotenv\n```\n\n### Step 2: Configure Environment\n\nCreate a `.env` file with your API keys:\n```env\nOPENAI_API_KEY=your_openai_key\nGOOGLE_API_KEY=your_google_key\n```\n\n### Step 3: Run the Agent\n\nExecute the provided Python script to start the interface:\n```bash\npython scripts/friday_agent.py\n```\n\n## Core Concepts\n\n### Pipeline Architecture\nThe agent follows a linear pipeline: `Mic -> VAD -> STT -> LLM -> TTS -> Speaker`. This allows for granular control over each stage, unlike end-to-end speech-to-speech models.\n\n### Google Compatibility Shim\nSince Google's Gemini API has a different message format than OpenAI's standard (which Pipecat aggregators expect), the script includes a `GoogleSafeContext` and `GoogleSafeMessage` class to bridge the gap.\n\n## Best Practices\n\n- ✅ **Use Silero VAD**: It is robust for local hardware and prevents background noise from triggering the LLM.\n- ✅ **Concise Prompts**: Tactical agents should give short, data-dense responses to minimize latency.\n- ✅ **Sample Rate Match**: OpenAI TTS outputs at 24kHz; ensure your `audio_out_sample_rate` matches to avoid high-pitched or slowed audio.\n- ❌ **No Polite Fillers**: Avoid \"Hello, how can I help you today?\" Instead, use \"Systems nominal. Ready for commands.\"\n\n## Troubleshooting\n\n- **Problem:** Audio is choppy or delayed.\n  - **Solution:** Check your `OUTPUT_DEVICE` index. Run a script like `test_audio_output.py` to find the correct hardware index for your OS.\n- **Problem:** \"Validation error\" for message format.\n  - **Solution:** Ensure the `GoogleSafeContext` shim is correctly translating OpenAI-style dicts to Gemini-style schema.\n\n## Related Skills\n\n- `@voice-agents` - General principles of voice AI.\n- `@agent-tool-builder` - Add tools (Search, Lights, etc.) to your Friday agent.\n- `@llm-architect` - Optimizing the LLM layer.\n",
+      "tags": [
+        "python",
+        "api",
+        "ai",
+        "agent",
+        "llm",
+        "gpt"
+      ],
+      "useCases": [
+        "Use when you want to build a real-time, conversational voice agent.",
+        "Use when working with the Pipecat framework for pipeline-based AI.",
+        "Use when you need to integrate multiple providers (Google and OpenAI) into a single voice loop.",
+        "Use when building Iron Man-themed or tactical-themed voice applications."
+      ],
+      "scrapedAt": "2026-03-11T07:08:00.455Z"
+    },
+    {
       "id": "antigravity-pipedrive-automation",
       "name": "pipedrive-automation",
       "slug": "pipedrive-automation",
@@ -22484,6 +22538,32 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-02-26T07:13:12.609Z"
+    },
+    {
+      "id": "antigravity-progressive-estimation",
+      "name": "progressive-estimation",
+      "slug": "progressive-estimation",
+      "description": "Estimate AI-assisted and hybrid human+agent development work with research-backed PERT statistics and calibration feedback loops",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/progressive-estimation",
+      "content": "\n# Progressive Estimation\n\nEstimate AI-assisted and hybrid human+agent development work using research-backed formulas with PERT statistics, confidence bands, and calibration feedback loops.\n\n## Overview\n\nProgressive Estimation adapts to your team's working mode — human-only, hybrid, or agent-first — applying the right velocity model and multipliers for each. It produces statistical estimates rather than gut feelings.\n\n## When to Use This Skill\n\n- Estimating development tasks where AI agents handle part of the work\n- Sprint planning with hybrid human+agent teams\n- Batch sizing a backlog (handles 5 or 500 issues)\n- Staffing and capacity planning with agent multipliers\n- Release date forecasting with confidence intervals\n\n## How It Works\n\n1. **Mode Detection** — Determines if the team works human-only, hybrid, or agent-first\n2. **Task Classification** — Categorizes by size (XS–XL), complexity, and risk\n3. **Formula Application** — Applies research-backed multipliers grounded in empirical studies\n4. **PERT Calculation** — Produces expected values using three-point estimation\n5. **Confidence Bands** — Generates P50, P75, P90 intervals\n6. **Output Formatting** — Formats for Linear, JIRA, ClickUp, GitHub Issues, Monday, or GitLab\n7. **Calibration** — Feeds back actuals to improve future estimates\n\n## Examples\n\n**Single task:**\n> \"Estimate building a REST API with authentication using Claude Code\"\n\n**Batch mode:**\n> \"Estimate these 12 JIRA tickets for our next sprint\"\n\n**With context:**\n> \"We have 3 developers using AI agents for ~60% of implementation. Estimate this feature.\"\n\n## Best Practices\n\n- Start with a single task to calibrate before moving to batch mode\n- Feed back actual completion times to improve the calibration system\n- Use \"instant mode\" for quick T-shirt sizing without full PERT analysis\n- Be explicit about team composition and agent usage percentage\n\n## Common Pitfalls\n\n- **Problem:** Overconfident estimates\n  **Solution:** Use P75 or P90 for commitments, not P50\n\n- **Problem:** Missing context\n  **Solution:** The skill asks clarifying questions — provide team size and agent usage\n\n- **Problem:** Stale calibration\n  **Solution:** Re-calibrate when team composition or tooling changes significantly\n\n## Related Skills\n\n- `@sprint-planning` - Sprint planning and backlog management\n- `@project-management` - General project management workflows\n- `@capacity-planning` - Team velocity and capacity planning\n\n## Additional Resources\n\n- [Source Repository](https://github.com/Enreign/progressive-estimation)\n- [Installation Guide](https://github.com/Enreign/progressive-estimation/blob/main/INSTALLATION.md)\n- [Research References](https://github.com/Enreign/progressive-estimation/tree/main/references)\n",
+      "tags": [
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "workflow"
+      ],
+      "useCases": [
+        "Estimating development tasks where AI agents handle part of the work",
+        "Sprint planning with hybrid human+agent teams",
+        "Batch sizing a backlog (handles 5 or 500 issues)",
+        "Staffing and capacity planning with agent multipliers",
+        "Release date forecasting with confidence intervals"
+      ],
+      "scrapedAt": "2026-03-11T07:08:11.946Z"
     },
     {
       "id": "antigravity-project-development",
@@ -24058,6 +24138,35 @@
       "scrapedAt": "2026-03-08T06:58:31.891Z"
     },
     {
+      "id": "antigravity-sankhya-dashboard-html-jsp-custom-best-pratices",
+      "name": "sankhya-dashboard-html-jsp-custom-best-pratices",
+      "slug": "sankhya-dashboard-html-jsp-custom-best-pratices",
+      "description": "This skill should be used when the user asks for patterns, best practices, creation, or fixing of Sankhya dashboards using HTML, JSP, Java, and SQL.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/sankhya-dashboard-html-jsp-custom-best-pratices",
+      "content": "\n# sankhya-dashboard-html-jsp-custom-best-pratices\n\n## Purpose\n\nTo provide a consolidated guide of patterns and best practices for creating and maintaining dashboards, SQL queries, BI parameterization, and UI/UX within the Sankhya ecosystem (JSP/HTML/Java).\n\n## When to Use This Skill\n\nThis skill should be used when:\n- The user asks about \"boas praticas do sankhya\" or \"Sankhya best practices\".\n- The user mentions \"dashboard sankhya\" or is working on a Sankhya BI dashboard.\n- The user asks for anything related to the word \"Sankhya\".\n- The user wants to create or modify code files for Sankhya dashboards.\n\n## Core Capabilities\n\n1. **Code Generation & Review**: Apply JSP/JSTL patterns and server-side organization to reduce compilation errors and rendering failures.\n2. **Visual Consistency**: Standardize visual identity in BI components using predefined CSS tokens.\n3. **Database Exploration**: Structure data exploration queries for performance and correct mapping of Sankhya entities.\n4. **BI Construction Guide**: Use the HTML5 component flow in BI to ensure correct rendering, reactivity, and navigation.\n\n## Patterns\n\n### Melhores Práticas de Código\nAplicar padrões de JSP/JSTL e organização server-side para reduzir erros de compilação, falhas de renderização e regressões em dashboards/telas.\n\n**Diretrizes de implementação**\n- Declarar diretivas JSP e taglibs obrigatórias no topo do arquivo.\n- Forçar `isELIgnored=\"false\"` para habilitar `${...}` em tempo de renderização.\n- Preferir `core_rt` para JSTL core no ecossistema Sankhya.\n- Evitar scriptlets Java em JSP; usar JSTL (`c:if`, `c:choose`, `c:forEach`).\n- Modularizar lógica de negócio (camadas/serviços), evitando acoplamento em arquivo único.\n- Evitar hardcode de credenciais, URLs sensíveis e tokens.\n- Modelar estado global da UI (dados, filtros, ordenação, aba ativa) e resetar estado antes de novo carregamento.\n- Persistir preferências de visualização no `localStorage` (ordem de colunas e ordenação).\n- Implementar carregamento sob demanda para abas/modais pesados (lazy-load) para reduzir tempo inicial.\n- **Blindagem de Parâmetros**: Sempre definir um valor padrão (fallback) para parâmetros de URL via `c:set` para evitar Erro 500 no servidor Java do Sankhya.\n- **Separação de Camadas (JSP vs JS)**: Evitar injetar tags JSP diretamente dentro de blocos `<script>`. Utilizar containers HTML ocultos para passar dados ao JavaScript, mantendo a saúde do editor de código (IDE Linting).\n\n> Os nomes de tabelas e campos abaixo são representativos e podem variar conforme a implementação da instância.\n\n```jsp\n<%@ page language=\"java\" contentType=\"text/html; charset=UTF-8\" pageEncoding=\"UTF-8\" isELIgnored=\"false\" %>\n<%@ taglib prefix=\"snk\" uri=\"/WEB-INF/tld/sankhyaUtil.tld\" %>\n<%@ taglib uri=\"http://java.sun.com/jstl/core_rt\" prefix=\"c\" %>\n<%@ taglib uri=\"http://java.sun.com/jsp/jstl/functions\" prefix=\"fn\" %>\n<snk:load />\n```\n\n**Carregamento de assets em dashboard/gadget**\n- Referenciar arquivos com `contextPath` + `BASE_FOLDER`.\n- Em níveis secundários (`openLevel`), manter caminho absoluto para evitar quebra de resolução.\n\n```html\n<script src=\"${pageContext.request.contextPath}/${BASE_FOLDER}/js/app.js\"></script>\n<link rel=\"stylesheet\" href=\"${pageContext.request.contextPath}/${BASE_FOLDER}/css/style.css\" />\n```\n\n**Consumo seguro de `snk:query`**\n- Iterar em `query.rows` (não no objeto raiz).\n- Testar vazio com `empty query.rows`.\n\n```jsp\n<snk:query var=\"qDados\">\n    SELECT CAB.NUNOTA, CAB.CODPARC\n      FROM TGFCAB CAB\n</snk:query>\n\n<c:choose>\n    <c:when test=\"${empty qDados.rows}\">\n        <span>Sem resultados</span>\n    </c:when>\n    <c:otherwise>\n        <c:forEach var=\"linha\" items=\"${qDados.rows}\">\n            ${linha.NUNOTA}\n        </c:forEach>\n    </c:otherwise>\n</c:choose>\n```\n\n**Sanitização de parâmetros antes da SQL**\n- Normalizar valor de entrada.\n- Remover aspas (`\"` e `&quot;`) antes de injetar em query.\n- Definir fallback seguro para evitar SQL inválida.\n\n```jsp\n<c:set var=\"raw_codusu\" value=\"${empty param.P_CODUSU ? '0' : param.P_CODUSU}\" />\n<c:set var=\"codusu_limpo\" value=\"${fn:replace(raw_codusu, '\\\"', '')}\" />\n<c:set var=\"codusu_limpo\" value=\"${fn:replace(codusu_limpo, '&quot;', '')}\" />\n<c:set var=\"codusu_seguro\" value=\"${empty codusu_limpo ? '0' : codusu_limpo}\" />\n\n<snk:query var=\"qAcessos\">\n    SELECT CODUSU, NOMEUSU\n      FROM TSIUSU\n     WHERE CODUSU = :codusu_seguro\n</snk:query>\n```\n\n**Estado de tela e lazy-load em dashboard único**\n- Definir listas globais para reutilização em KPI, gráfico, tabela e modais.\n- Guardar flag de carregamento por aba para evitar reconsultas desnecessárias.\n- Recarregar dados e reabrir o contexto (produto/aba) após atualização transacional.\n\n```js\nvar dadosGlobais = [];\nvar produtoAtual = null;\nvar abaCarregada = {};\n\nfunction abrirDetalhe(dado) {\n  produtoAtual = dado;\n  abaCarregada = {};\n  trocarAba(\"estoque\");\n}\n\nfunction trocarAba(aba) {\n  if (aba === \"estoque\" && !abaCarregada.estoque) carregarAbaEstoque(produtoAt",
+      "tags": [
+        "javascript",
+        "react",
+        "ai",
+        "agent",
+        "design",
+        "document",
+        "image",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "The user asks about \"boas praticas do sankhya\" or \"Sankhya best practices\".",
+        "The user mentions \"dashboard sankhya\" or is working on a Sankhya BI dashboard.",
+        "The user asks for anything related to the word \"Sankhya\".",
+        "The user wants to create or modify code files for Sankhya dashboards."
+      ],
+      "scrapedAt": "2026-03-11T07:08:35.095Z"
+    },
+    {
       "id": "antigravity-sast-configuration",
       "name": "sast-configuration",
       "slug": "sast-configuration",
@@ -24598,6 +24707,28 @@
       "scrapedAt": "2026-03-09T07:15:59.217Z"
     },
     {
+      "id": "antigravity-seek-and-analyze-video",
+      "name": "seek-and-analyze-video",
+      "slug": "seek-and-analyze-video",
+      "description": "Seek and analyze video content using Memories.ai Large Visual Memory Model for persistent video intelligence",
+      "category": "Creative & Media",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/seek-and-analyze-video",
+      "content": "\n## When to Use\n\nUse this skill when the user wants to search for, import, or analyze video content from TikTok, YouTube, or Instagram, summarize meetings or lectures from recordings, build a searchable knowledge base from video content, or research social media trends and creators.\n\n# Seek and Analyze Video\n\n## Description\n\nThis skill enables AI agents to search, import, and analyze video content using Memories.ai's Large Visual Memory Model (LVMM). Unlike one-shot video analysis tools, it provides persistent video intelligence -- videos are indexed once and can be queried repeatedly across sessions. Supports social media import (TikTok, YouTube, Instagram), meeting summarization, knowledge base building, and cross-video Q&A via Memory Augmented Generation (MAG).\n\n## Overview\n\nThe skill wraps 21 API commands into workflow-oriented reference guides that agents load on demand. A routing table in SKILL.md maps user intent to the right workflow automatically.\n\n## When to Use This Skill\n\n- Use when analyzing or asking questions about a video from a URL\n- Use when searching for videos on TikTok, YouTube, or Instagram by topic, hashtag, or creator\n- Use when summarizing meetings, lectures, or webinars from recordings\n- Use when building a searchable knowledge base from video content and text memories\n- Use when researching social media content trends, influencers, or viral patterns\n- Use when analyzing or describing images with AI vision\n\n## How It Works\n\n### Step 1: Intent Detection\n\nThe agent reads the SKILL.md workflow router and matches the user's request to one of 6 intent categories.\n\n### Step 2: Reference Loading\n\nThe agent loads the appropriate reference file (e.g., video_qa.md for video questions, social_research.md for social media research).\n\n### Step 3: Workflow Execution\n\nThe agent follows the step-by-step workflow: upload/import -> wait for processing -> analyze/chat -> present results.\n\n## Examples\n\n### Example 1: Video Q&A\n\n```\nUser: \"What are the key arguments in this video? https://youtube.com/watch?v=abc123\"\nAgent: uploads video -> waits for processing -> uses chat_video to ask questions -> presents structured summary\n```\n\n### Example 2: Social Media Research\n\n```\nUser: \"What's trending on TikTok about sustainable fashion?\"\nAgent: uses search_public to find trending videos -> imports top results -> analyzes content patterns\n```\n\n### Example 3: Meeting Notes\n\n```\nUser: \"Summarize this meeting recording and extract action items\"\nAgent: uploads recording -> waits -> gets transcript -> uses chat_video for structured summary with action items\n```\n\n## Best Practices\n\n- Always wait for video processing to complete before querying\n- Use caption_video for quick analysis (no upload needed)\n- Use chat_video for deep, multi-turn analysis (requires upload)\n- Use search_audio to find specific moments or quotes in a video\n- Use memory_add to store important findings for later retrieval\n\n## Common Pitfalls\n\n- **Problem:** Querying a video before processing completes\n  **Solution:** Always use the `wait` command after upload before any analysis\n\n- **Problem:** Uploading a video when only a quick caption is needed\n  **Solution:** Use `caption_video` for one-off analysis; only upload for repeated queries\n\n## Limitations\n\n- Video processing takes 1-5 minutes depending on length\n- Free tier limited to 100 credits\n- Social media import requires public content\n- Audio search only works on processed videos\n\n## Related Skills\n\n- Video analysis tools for one-shot analysis\n- Web search skills for non-video content research\n",
+      "tags": [
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "image",
+        "cro"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-03-11T07:08:43.421Z"
+    },
+    {
       "id": "antigravity-segment-automation",
       "name": "segment-automation",
       "slug": "segment-automation",
@@ -24913,111 +25044,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-03-09T07:16:05.606Z"
-    },
-    {
-      "id": "antigravity-seo-content-refresher",
-      "name": "seo-content-refresher",
-      "slug": "seo-content-refresher",
-      "description": "Identifies outdated elements in provided content and suggests updates to maintain freshness. Finds statistics, dates, and examples that need updating. Use PROACTIVELY for older content.",
-      "category": "Business & Marketing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/seo-content-refresher",
-      "content": "\n## Use this skill when\n\n- Working on seo content refresher tasks or workflows\n- Needing guidance, best practices, or checklists for seo content refresher\n\n## Do not use this skill when\n\n- The task is unrelated to seo content refresher\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\nYou are a content freshness specialist identifying update opportunities in existing content.\n\n## Focus Areas\n\n- Outdated dates and statistics\n- Old examples and case studies\n- Missing recent developments\n- Seasonal content updates\n- Expired links or references\n- Dated terminology or trends\n- Content expansion opportunities\n- Freshness signal optimization\n\n## Content Freshness Guidelines\n\n**Update Priorities:**\n- Statistics older than 2 years\n- Dates in titles and content\n- Examples from 3+ years ago\n- Missing recent industry changes\n- Expired or changed information\n\n## Refresh Priority Matrix\n\n**High Priority (Immediate):**\n- Pages losing rankings (>3 positions)\n- Content with outdated information\n- High-traffic pages declining\n- Seasonal content approaching\n\n**Medium Priority (This Month):**\n- Stagnant rankings (6+ months)\n- Competitor content updates\n- Missing current trends\n- Low engagement metrics\n\n## Approach\n\n1. Scan content for dates and time references\n2. Identify statistics and data points\n3. Find examples and case studies\n4. Check for dated terminology\n5. Assess topic completeness\n6. Suggest update priorities\n7. Recommend new sections\n\n## Output\n\n**Content Refresh Plan:**\n```\nPage: [URL]\nLast Updated: [Date]\nPriority: High/Medium/Low\nRefresh Actions:\n- Update statistics from 2023 to 2025\n- Add section on [new trend]\n- Refresh examples with current ones\n- Update meta title with \"2025\"\n```\n\n**Deliverables:**\n- Content decay analysis\n- Refresh priority queue\n- Update checklist per page\n- New section recommendations\n- Trend integration opportunities\n- Competitor freshness tracking\n- Publishing calendar\n\n**Refresh Tactics:**\n- Statistical updates (quarterly)\n- New case studies/examples\n- Additional FAQ questions\n- Expert quotes (fresh E-E-A-T)\n- Video/multimedia additions\n- Related posts internal links\n- Schema markup updates\n\n**Freshness Signals:**\n- Modified date in schema\n- Updated publish date\n- New internal links to content\n- Fresh images with current dates\n- Social media resharing\n- Comment engagement reactivation\n\n**Platform Implementation:**\n- WordPress: Modified date display\n- Static sites: Frontmatter date updates\n- Sitemap priority adjustments\n\nFocus on meaningful updates that add value. Identify specific elements that need refreshing.\n",
-      "tags": [
-        "react",
-        "ai",
-        "workflow",
-        "image",
-        "seo"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:16:05.874Z"
-    },
-    {
-      "id": "antigravity-seo-content-writer",
-      "name": "seo-content-writer",
-      "slug": "seo-content-writer",
-      "description": "Writes SEO-optimized content based on provided keywords and topic briefs. Creates engaging, comprehensive content following best practices. Use PROACTIVELY for content creation tasks.",
-      "category": "Business & Marketing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/seo-content-writer",
-      "content": "\n## Use this skill when\n\n- Working on seo content writer tasks or workflows\n- Needing guidance, best practices, or checklists for seo content writer\n\n## Do not use this skill when\n\n- The task is unrelated to seo content writer\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\nYou are an SEO content writer creating comprehensive, engaging content optimized for search and users.\n\n## Focus Areas\n\n- Comprehensive topic coverage\n- Natural keyword integration\n- Engaging introduction hooks\n- Clear, scannable formatting\n- E-E-A-T signal inclusion\n- User-focused value delivery\n- Semantic keyword usage\n- Call-to-action integration\n\n## Content Creation Framework\n\n**Introduction (50-100 words):**\n- Hook the reader immediately\n- State the value proposition\n- Include primary keyword naturally\n- Set clear expectations\n\n**Body Content:**\n- Comprehensive topic coverage\n- Logical flow and progression\n- Supporting data and examples\n- Natural keyword placement\n- Semantic variations throughout\n- Clear subheadings (H2/H3)\n\n**Conclusion:**\n- Summarize key points\n- Clear call-to-action\n- Reinforce value delivered\n\n## Approach\n\n1. Analyze topic and target keywords\n2. Create comprehensive outline\n3. Write engaging introduction\n4. Develop detailed body sections\n5. Include supporting examples\n6. Add trust and expertise signals\n7. Craft compelling conclusion\n\n## Output\n\n**Content Package:**\n- Full article (target word count)\n- Suggested title variations (3-5)\n- Meta description (150-160 chars)\n- Key takeaways/summary points\n- Internal linking suggestions\n- FAQ section if applicable\n\n**Quality Standards:**\n- Original, valuable content\n- 0.5-1.5% keyword density\n- Grade 8-10 reading level\n- Short paragraphs (2-3 sentences)\n- Bullet points for scannability\n- Examples and data support\n\n**E-E-A-T Elements:**\n- First-hand experience mentions\n- Specific examples and cases\n- Data and statistics citations\n- Expert perspective inclusion\n- Practical, actionable advice\n\nFocus on value-first content. Write for humans while optimizing for search engines.\n",
-      "tags": [
-        "ai",
-        "workflow",
-        "rag",
-        "seo"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:16:06.128Z"
-    },
-    {
-      "id": "antigravity-seo-forensic-incident-response",
-      "name": "seo-forensic-incident-response",
-      "slug": "seo-forensic-incident-response",
-      "description": "Investigate sudden drops in organic traffic or rankings and run a structured forensic SEO incident response with triage, root-cause analysis and recovery plan.",
-      "category": "Business & Marketing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/seo-forensic-incident-response",
-      "content": "\n# SEO Forensic Incident Response\n\nYou are an expert in forensic SEO incident response. Your goal is to investigate **sudden drops in organic traffic or rankings**, identify the most likely causes, and provide a prioritized remediation plan.\n\nThis skill is not a generic SEO audit. It is designed for **incident scenarios**: traffic crashes, suspected penalties, core update impacts, or major technical failures.\n\n## When to Use\n\nUse this skill when:\n- You need to understand and resolve a sudden, significant drop in organic traffic or rankings.\n- There are signs of a possible penalty, core update impact, major technical regression or other SEO incident.\n\nDo **not** use this skill when:\n- You need a routine SEO health check or prioritization of opportunities (use `seo-audit`).\n- You are focused on long-term local visibility for legal/professional services (use `local-legal-seo-audit`).\n\n## Initial Incident Triage\n\nBefore deep analysis, clarify the incident context:\n\n1. **Incident Description**\n   - When did you first notice the drop?\n   - Was it sudden (1–3 days) or gradual (weeks)?\n   - Which metrics are affected? (sessions, clicks, impressions, conversions)\n   - Is the impact site-wide, specific sections, or specific pages?\n\n2. **Data Access**\n   - Do you have access to:\n     - Google Search Console (GSC)?\n     - Web analytics (GA4, Matomo, etc.)?\n     - Server logs or CDN logs?\n     - Deployment/change logs (Git, CI/CD, CMS release notes)?\n\n3. **Recent Changes Checklist**\n   Ask explicitly about the 30–60 days before the drop:\n   - Site redesign or theme change\n   - URL structure changes or migrations\n   - CMS/plugin updates\n   - Changes to hosting, CDN, or security tools (WAF, firewalls)\n   - Changes to robots.txt, sitemap, canonical tags, or redirects\n   - Bulk content edits or content pruning\n\n4. **Business Context**\n   - Is this a seasonal niche?\n   - Any external events affecting demand?\n   - Any previous manual actions or penalties?\n\n---\n\n## Incident Classification Framework\n\nClassify the incident into one or more buckets to guide the investigation:\n\n1. **Algorithm / Core Update Impact**\n   - Drop coincides with known Google core update dates\n   - Impact skewed toward certain types of queries or content\n   - No major technical changes around the same time\n\n2. **Technical / Infrastructure Failure**\n   - Indexing/crawlability suddenly impaired\n   - Widespread 5xx/4xx errors\n   - Robots.txt or meta noindex changes\n   - Broken redirects or canonicalization errors\n\n3. **Manual Action / Policy Violation**\n   - Manual action message in GSC\n   - Sudden, severe drop in branded and non-branded queries\n   - History of aggressive link building or spammy tactics\n\n4. **Content / Quality Reassessment**\n   - Specific sections or topics hit harder\n   - Content thin, outdated, or heavily AI-generated\n   - Competitors significantly improved content around the same topics\n\n5. **Demand / Seasonality / External Factors**\n   - Search demand drop in the niche (check industry trends)\n   - Macro events, regulation changes, or market shifts\n\n---\n\n## Data-Driven Investigation Steps\n\nWhen you have GSC and analytics access, structure the analysis like a forensic investigation:\n\n### 1. Timeline Reconstruction\n\n- Plot clicks, impressions, CTR, and average position over the last 6–12 months.\n- Identify:\n  - Exact start of the drop\n  - Whether the drop is step-like (sudden) or gradual\n  - Whether it affects all countries/devices or specific segments\n\nUse this to narrow likely causes:\n- **Step-like drop** → technical issue, manual action, deployment.\n- **Gradual slide** → quality issues, competitor improvements, algorithmic re-evaluation.\n\n### 2. Segment Analysis\n\nSegment the impact by:\n\n- **Device**: desktop vs. mobile\n- **Country / region**\n- **Query type**: branded vs. non-branded\n- **Page type**: home, category, product, blog, docs, etc.\n\nLook for patterns:\n- Only mobile affected → potential mobile UX, CWV, or mobile-only indexing issue.\n- Specific country affected → geo-targeting, hreflang, local factors.\n- Non-branded hit harder than branded → often algorithm/quality-related.\n\n### 3. Page-Level Impact\n\nIdentify:\n\n- Top pages with largest drop in clicks and impressions.\n- New 404s or heavily redirected URLs among previously high-traffic pages.\n- Any pages that disappeared from the index or lost most of their ranking queries.\n\nCheck for:\n\n- URL changes without proper redirects\n- Canonical changes\n- Noindex additions\n- Template or content changes on those pages\n\n### 4. Technical Integrity Checks\n\nFocus on incident-related technical regressions:\n\n- **Robots.txt**\n  - Any recent changes?\n  - Are key sections blocked unintentionally?\n\n- **Indexation & Noindex**\n  - Sudden spike in “Excluded” or “Noindexed” pages in GSC\n  - Important pages with meta noindex or X-Robots-Tag set incorrectly\n\n- **Redirects**\n  - New redirect chains or loops\n  - HTTP → HTTPS consistency\n  - www vs. non-www consistency\n  - Migrations without full redirect mapp",
-      "tags": [
-        "ai",
-        "template",
-        "design",
-        "security",
-        "rag",
-        "seo",
-        "cro"
-      ],
-      "useCases": [
-        "You need to understand and resolve a sudden, significant drop in organic traffic or rankings.",
-        "There are signs of a possible penalty, core update impact, major technical regression or other SEO incident.",
-        "You need a routine SEO health check or prioritization of opportunities (use `seo-audit`).",
-        "You are focused on long-term local visibility for legal/professional services (use `local-legal-seo-audit`)."
-      ],
-      "scrapedAt": "2026-03-09T07:16:06.395Z"
-    },
-    {
-      "id": "antigravity-seo-fundamentals",
-      "name": "seo-fundamentals",
-      "slug": "seo-fundamentals",
-      "description": "Core principles of SEO including E-E-A-T, Core Web Vitals, technical foundations, content quality, and how modern search engines evaluate pages.",
-      "category": "Creative & Media",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/seo-fundamentals",
-      "content": "\n---\n\n# SEO Fundamentals\n\n> **Foundational principles for sustainable search visibility.**\n> This skill explains _how search engines evaluate quality_, not tactical shortcuts.\n\n---\n\n## 1. E-E-A-T (Quality Evaluation Framework)\n\nE-E-A-T is **not a direct ranking factor**.\nIt is a framework used by search engines to **evaluate content quality**, especially for sensitive or high-impact topics.\n\n| Dimension             | What It Represents                 | Common Signals                                      |\n| --------------------- | ---------------------------------- | --------------------------------------------------- |\n| **Experience**        | First-hand, real-world involvement | Original examples, lived experience, demonstrations |\n| **Expertise**         | Subject-matter competence          | Credentials, depth, accuracy                        |\n| **Authoritativeness** | Recognition by others              | Mentions, citations, links                          |\n| **Trustworthiness**   | Reliability and safety             | HTTPS, transparency, accuracy                       |\n\n> Pages competing in the same space are often differentiated by **trust and experience**, not keywords.\n\n---\n\n## 2. Core Web Vitals (Page Experience Signals)\n\nCore Web Vitals measure **how users experience a page**, not whether it deserves to rank.\n\n| Metric  | Target  | What It Reflects    |\n| ------- | ------- | ------------------- |\n| **LCP** | < 2.5s  | Loading performance |\n| **INP** | < 200ms | Interactivity       |\n| **CLS** | < 0.1   | Visual stability    |\n\n**Important context:**\n\n- CWV rarely override poor content\n- They matter most when content quality is comparable\n- Failing CWV can _hold back_ otherwise good pages\n\n---\n\n## 3. Technical SEO Principles\n\nTechnical SEO ensures pages are **accessible, understandable, and stable**.\n\n### Crawl & Index Control\n\n| Element           | Purpose                |\n| ----------------- | ---------------------- |\n| XML sitemaps      | Help discovery         |\n| robots.txt        | Control crawl access   |\n| Canonical tags    | Consolidate duplicates |\n| HTTP status codes | Communicate page state |\n| HTTPS             | Security and trust     |\n\n### Performance & Accessibility\n\n| Factor                 | Why It Matters                |\n| ---------------------- | ----------------------------- |\n| Page speed             | User satisfaction             |\n| Mobile-friendly design | Mobile-first indexing         |\n| Clean URLs             | Crawl clarity                 |\n| Semantic HTML          | Accessibility & understanding |\n\n---\n\n## 4. Content SEO Principles\n\n### Page-Level Elements\n\n| Element          | Principle                    |\n| ---------------- | ---------------------------- |\n| Title tag        | Clear topic + intent         |\n| Meta description | Click relevance, not ranking |\n| H1               | Page’s primary subject       |\n| Headings         | Logical structure            |\n| Alt text         | Accessibility and context    |\n\n### Content Quality Signals\n\n| Dimension   | What Search Engines Look For |\n| ----------- | ---------------------------- |\n| Depth       | Fully answers the query      |\n| Originality | Adds unique value            |\n| Accuracy    | Factually correct            |\n| Clarity     | Easy to understand           |\n| Usefulness  | Satisfies intent             |\n\n---\n\n## 5. Structured Data (Schema)\n\nStructured data helps search engines **understand meaning**, not boost rankings directly.\n\n| Type           | Purpose                |\n| -------------- | ---------------------- |\n| Article        | Content classification |\n| Organization   | Entity identity        |\n| Person         | Author information     |\n| FAQPage        | Q&A clarity            |\n| Product        | Commerce details       |\n| Review         | Ratings context        |\n| BreadcrumbList | Site structure         |\n\n> Schema enables eligibility for rich results but does not guarantee them.\n\n---\n\n## 6. AI-Assisted Content Principles\n\nSearch engines evaluate **output quality**, not authorship method.\n\n### Effective Use\n\n- AI as a drafting or research assistant\n- Human review for accuracy and clarity\n- Original insights and synthesis\n- Clear accountability\n\n### Risky Use\n\n- Publishing unedited AI output\n- Factual errors or hallucinations\n- Thin or duplicated content\n- Keyword-driven text with no value\n\n---\n\n## 7. Relative Importance of SEO Factors\n\nThere is **no fixed ranking factor order**.\nHowever, when competing pages are similar, importance tends to follow this pattern:\n\n| Relative Weight | Factor                      |\n| --------------- | --------------------------- |\n| Highest         | Content relevance & quality |\n| High            | Authority & trust signals   |\n| Medium          | Page experience (CWV, UX)   |\n| Medium          | Mobile optimization         |\n| Baseline        | Technical accessibility     |\n\n> Technical SEO enables ranking; content quality earns it.\n\n---\n\n## 8. Measure",
-      "tags": [
-        "ai",
-        "workflow",
-        "design",
-        "security",
-        "rag",
-        "seo"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:16:06.644Z"
-    },
-    {
-      "id": "antigravity-seo-keyword-strategist",
-      "name": "seo-keyword-strategist",
-      "slug": "seo-keyword-strategist",
-      "description": "Analyzes keyword usage in provided content, calculates density, suggests semantic variations and LSI keywords based on the topic. Prevents over-optimization. Use PROACTIVELY for content optimization.",
-      "category": "Business & Marketing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/seo-keyword-strategist",
-      "content": "\n## Use this skill when\n\n- Working on seo keyword strategist tasks or workflows\n- Needing guidance, best practices, or checklists for seo keyword strategist\n\n## Do not use this skill when\n\n- The task is unrelated to seo keyword strategist\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\nYou are a keyword strategist analyzing content for semantic optimization opportunities.\n\n## Focus Areas\n\n- Primary/secondary keyword identification\n- Keyword density calculation and optimization\n- Entity and topical relevance analysis\n- LSI keyword generation from content\n- Semantic variation suggestions\n- Natural language patterns\n- Over-optimization detection\n\n## Keyword Density Guidelines\n\n**Best Practice Recommendations:**\n- Primary keyword: 0.5-1.5% density\n- Avoid keyword stuffing\n- Natural placement throughout content\n- Entity co-occurrence patterns\n- Semantic variations for diversity\n\n## Entity Analysis Framework\n\n1. Identify primary entity relationships\n2. Map related entities and concepts\n3. Analyze competitor entity usage\n4. Build topical authority signals\n5. Create entity-rich content sections\n\n## Approach\n\n1. Extract current keyword usage from provided content\n2. Calculate keyword density percentages\n3. Identify entities and related concepts in text\n4. Determine likely search intent from content type\n5. Generate LSI keywords based on topic\n6. Suggest optimal keyword distribution\n7. Flag over-optimization issues\n\n## Output\n\n**Keyword Strategy Package:**\n```\nPrimary: [keyword] (0.8% density, 12 uses)\nSecondary: [keywords] (3-5 targets)\nLSI Keywords: [20-30 semantic variations]\nEntities: [related concepts to include]\n```\n\n**Deliverables:**\n- Keyword density analysis\n- Entity and concept mapping\n- LSI keyword suggestions (20-30)\n- Search intent assessment\n- Content optimization checklist\n- Keyword placement recommendations\n- Over-optimization warnings\n\n**Advanced Recommendations:**\n- Question-based keywords for PAA\n- Voice search optimization terms\n- Featured snippet opportunities\n- Keyword clustering for topic hubs\n\n**Platform Integration:**\n- WordPress: Integration with SEO plugins\n- Static sites: Frontmatter keyword schema\n\nFocus on natural keyword integration and semantic relevance. Build topical depth through related concepts.\n",
-      "tags": [
-        "ai",
-        "workflow",
-        "seo"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:16:07.124Z"
     },
     {
       "id": "anthropic-skill-creator",
@@ -25421,7 +25447,7 @@
       "source": "superpowers",
       "repoUrl": "https://github.com/obra/superpowers",
       "skillUrl": "https://github.com/obra/superpowers/tree/main/skills/using-superpowers",
-      "content": "\n<SUBAGENT-STOP>\nIf you were dispatched as a subagent to execute a specific task, skip this skill.\n</SUBAGENT-STOP>\n\n<EXTREMELY-IMPORTANT>\nIf you think there is even a 1% chance a skill might apply to what you are doing, you ABSOLUTELY MUST invoke the skill.\n\nIF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE. YOU MUST USE IT.\n\nThis is not negotiable. This is not optional. You cannot rationalize your way out of this.\n</EXTREMELY-IMPORTANT>\n\n## Instruction Priority\n\nSuperpowers skills override default system prompt behavior, but **user instructions always take precedence**:\n\n1. **User's explicit instructions** (CLAUDE.md, AGENTS.md, direct requests) — highest priority\n2. **Superpowers skills** — override default system behavior where they conflict\n3. **Default system prompt** — lowest priority\n\nIf CLAUDE.md or AGENTS.md says \"don't use TDD\" and a skill says \"always use TDD,\" follow the user's instructions. The user is in control.\n\n## How to Access Skills\n\n**In Claude Code:** Use the `Skill` tool. When you invoke a skill, its content is loaded and presented to you—follow it directly. Never use the Read tool on skill files.\n\n**In other environments:** Check your platform's documentation for how skills are loaded.\n\n## Platform Adaptation\n\nSkills use Claude Code tool names. Non-CC platforms: see `references/codex-tools.md` for tool equivalents.\n\n# Using Skills\n\n## The Rule\n\n**Invoke relevant or requested skills BEFORE any response or action.** Even a 1% chance a skill might apply means that you should invoke the skill to check. If an invoked skill turns out to be wrong for the situation, you don't need to use it.\n\n```dot\ndigraph skill_flow {\n    \"User message received\" [shape=doublecircle];\n    \"About to EnterPlanMode?\" [shape=doublecircle];\n    \"Already brainstormed?\" [shape=diamond];\n    \"Invoke brainstorming skill\" [shape=box];\n    \"Might any skill apply?\" [shape=diamond];\n    \"Invoke Skill tool\" [shape=box];\n    \"Announce: 'Using [skill] to [purpose]'\" [shape=box];\n    \"Has checklist?\" [shape=diamond];\n    \"Create TodoWrite todo per item\" [shape=box];\n    \"Follow skill exactly\" [shape=box];\n    \"Respond (including clarifications)\" [shape=doublecircle];\n\n    \"About to EnterPlanMode?\" -> \"Already brainstormed?\";\n    \"Already brainstormed?\" -> \"Invoke brainstorming skill\" [label=\"no\"];\n    \"Already brainstormed?\" -> \"Might any skill apply?\" [label=\"yes\"];\n    \"Invoke brainstorming skill\" -> \"Might any skill apply?\";\n\n    \"User message received\" -> \"Might any skill apply?\";\n    \"Might any skill apply?\" -> \"Invoke Skill tool\" [label=\"yes, even 1%\"];\n    \"Might any skill apply?\" -> \"Respond (including clarifications)\" [label=\"definitely not\"];\n    \"Invoke Skill tool\" -> \"Announce: 'Using [skill] to [purpose]'\";\n    \"Announce: 'Using [skill] to [purpose]'\" -> \"Has checklist?\";\n    \"Has checklist?\" -> \"Create TodoWrite todo per item\" [label=\"yes\"];\n    \"Has checklist?\" -> \"Follow skill exactly\" [label=\"no\"];\n    \"Create TodoWrite todo per item\" -> \"Follow skill exactly\";\n}\n```\n\n## Red Flags\n\nThese thoughts mean STOP—you're rationalizing:\n\n| Thought | Reality |\n|---------|---------|\n| \"This is just a simple question\" | Questions are tasks. Check for skills. |\n| \"I need more context first\" | Skill check comes BEFORE clarifying questions. |\n| \"Let me explore the codebase first\" | Skills tell you HOW to explore. Check first. |\n| \"I can check git/files quickly\" | Files lack conversation context. Check for skills. |\n| \"Let me gather information first\" | Skills tell you HOW to gather information. |\n| \"This doesn't need a formal skill\" | If a skill exists, use it. |\n| \"I remember this skill\" | Skills evolve. Read current version. |\n| \"This doesn't count as a task\" | Action = task. Check for skills. |\n| \"The skill is overkill\" | Simple things become complex. Use it. |\n| \"I'll just do this one thing first\" | Check BEFORE doing anything. |\n| \"This feels productive\" | Undisciplined action wastes time. Skills prevent this. |\n| \"I know what that means\" | Knowing the concept ≠ using the skill. Invoke it. |\n\n## Skill Priority\n\nWhen multiple skills could apply, use this order:\n\n1. **Process skills first** (brainstorming, debugging) - these determine HOW to approach the task\n2. **Implementation skills second** (frontend-design, mcp-builder) - these guide execution\n\n\"Let's build X\" → brainstorming first, then implementation skills.\n\"Fix this bug\" → debugging first, then domain-specific skills.\n\n## Skill Types\n\n**Rigid** (TDD, debugging): Follow exactly. Don't adapt away discipline.\n\n**Flexible** (patterns): Adapt principles to context.\n\nThe skill itself tells you which.\n\n## User Instructions\n\nInstructions say WHAT, not HOW. \"Add X\" or \"Fix Y\" doesn't mean skip workflows.\n",
+      "content": "\n<SUBAGENT-STOP>\nIf you were dispatched as a subagent to execute a specific task, skip this skill.\n</SUBAGENT-STOP>\n\n<EXTREMELY-IMPORTANT>\nIf you think there is even a 1% chance a skill might apply to what you are doing, you ABSOLUTELY MUST invoke the skill.\n\nIF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE. YOU MUST USE IT.\n\nThis is not negotiable. This is not optional. You cannot rationalize your way out of this.\n</EXTREMELY-IMPORTANT>\n\n## Instruction Priority\n\nSuperpowers skills override default system prompt behavior, but **user instructions always take precedence**:\n\n1. **User's explicit instructions** (CLAUDE.md, GEMINI.md, AGENTS.md, direct requests) — highest priority\n2. **Superpowers skills** — override default system behavior where they conflict\n3. **Default system prompt** — lowest priority\n\nIf CLAUDE.md, GEMINI.md, or AGENTS.md says \"don't use TDD\" and a skill says \"always use TDD,\" follow the user's instructions. The user is in control.\n\n## How to Access Skills\n\n**In Claude Code:** Use the `Skill` tool. When you invoke a skill, its content is loaded and presented to you—follow it directly. Never use the Read tool on skill files.\n\n**In Gemini CLI:** Skills activate via the `activate_skill` tool. Gemini loads skill metadata at session start and activates the full content on demand.\n\n**In other environments:** Check your platform's documentation for how skills are loaded.\n\n## Platform Adaptation\n\nSkills use Claude Code tool names. Non-CC platforms: see `references/codex-tools.md` (Codex) for tool equivalents. Gemini CLI users get the tool mapping loaded automatically via GEMINI.md.\n\n# Using Skills\n\n## The Rule\n\n**Invoke relevant or requested skills BEFORE any response or action.** Even a 1% chance a skill might apply means that you should invoke the skill to check. If an invoked skill turns out to be wrong for the situation, you don't need to use it.\n\n```dot\ndigraph skill_flow {\n    \"User message received\" [shape=doublecircle];\n    \"About to EnterPlanMode?\" [shape=doublecircle];\n    \"Already brainstormed?\" [shape=diamond];\n    \"Invoke brainstorming skill\" [shape=box];\n    \"Might any skill apply?\" [shape=diamond];\n    \"Invoke Skill tool\" [shape=box];\n    \"Announce: 'Using [skill] to [purpose]'\" [shape=box];\n    \"Has checklist?\" [shape=diamond];\n    \"Create TodoWrite todo per item\" [shape=box];\n    \"Follow skill exactly\" [shape=box];\n    \"Respond (including clarifications)\" [shape=doublecircle];\n\n    \"About to EnterPlanMode?\" -> \"Already brainstormed?\";\n    \"Already brainstormed?\" -> \"Invoke brainstorming skill\" [label=\"no\"];\n    \"Already brainstormed?\" -> \"Might any skill apply?\" [label=\"yes\"];\n    \"Invoke brainstorming skill\" -> \"Might any skill apply?\";\n\n    \"User message received\" -> \"Might any skill apply?\";\n    \"Might any skill apply?\" -> \"Invoke Skill tool\" [label=\"yes, even 1%\"];\n    \"Might any skill apply?\" -> \"Respond (including clarifications)\" [label=\"definitely not\"];\n    \"Invoke Skill tool\" -> \"Announce: 'Using [skill] to [purpose]'\";\n    \"Announce: 'Using [skill] to [purpose]'\" -> \"Has checklist?\";\n    \"Has checklist?\" -> \"Create TodoWrite todo per item\" [label=\"yes\"];\n    \"Has checklist?\" -> \"Follow skill exactly\" [label=\"no\"];\n    \"Create TodoWrite todo per item\" -> \"Follow skill exactly\";\n}\n```\n\n## Red Flags\n\nThese thoughts mean STOP—you're rationalizing:\n\n| Thought | Reality |\n|---------|---------|\n| \"This is just a simple question\" | Questions are tasks. Check for skills. |\n| \"I need more context first\" | Skill check comes BEFORE clarifying questions. |\n| \"Let me explore the codebase first\" | Skills tell you HOW to explore. Check first. |\n| \"I can check git/files quickly\" | Files lack conversation context. Check for skills. |\n| \"Let me gather information first\" | Skills tell you HOW to gather information. |\n| \"This doesn't need a formal skill\" | If a skill exists, use it. |\n| \"I remember this skill\" | Skills evolve. Read current version. |\n| \"This doesn't count as a task\" | Action = task. Check for skills. |\n| \"The skill is overkill\" | Simple things become complex. Use it. |\n| \"I'll just do this one thing first\" | Check BEFORE doing anything. |\n| \"This feels productive\" | Undisciplined action wastes time. Skills prevent this. |\n| \"I know what that means\" | Knowing the concept ≠ using the skill. Invoke it. |\n\n## Skill Priority\n\nWhen multiple skills could apply, use this order:\n\n1. **Process skills first** (brainstorming, debugging) - these determine HOW to approach the task\n2. **Implementation skills second** (frontend-design, mcp-builder) - these guide execution\n\n\"Let's build X\" → brainstorming first, then implementation skills.\n\"Fix this bug\" → debugging first, then domain-specific skills.\n\n## Skill Types\n\n**Rigid** (TDD, debugging): Follow exactly. Don't adapt away discipline.\n\n**Flexible** (patterns): Adapt principles to context.\n\nThe skill itself tells you which.\n\n## User Instructions\n\nInstructions say WHAT, not HOW. \"Add X\" or \"Fix Y\" doesn't mean skip workflows.\n",
       "tags": [
         "tdd",
         "debug",
@@ -25711,21 +25737,21 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 358
+      "count": 360
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 350
+      "count": 351
     },
     {
       "id": "development-code-tools",
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 129
+      "count": 130
     },
     {
       "id": "creative-media",
@@ -25746,7 +25772,7 @@
       "name": "Business & Marketing",
       "description": "Skills for marketing, branding, lead generation, and business operations.",
       "icon": "briefcase",
-      "count": 56
+      "count": 52
     },
     {
       "id": "productivity-organization",
@@ -25783,48 +25809,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 75569
+      "stars": 77030
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 88588
+      "stars": 89846
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 42428
+      "stars": 42870
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 68854
+      "stars": 68906
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 979
+      "stars": 983
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1006,
-      "newSkillCount": 7,
-      "stars": 22584
+      "newSkillCount": 10,
+      "stars": 23058
     }
   ],
-  "lastUpdated": "2026-03-10T07:05:55.075Z",
+  "lastUpdated": "2026-03-11T07:08:48.671Z",
   "stats": {
     "totalSkills": 1105,
-    "newSkills": 17,
-    "scrapedAt": "2026-03-10T07:05:55.075Z"
+    "newSkills": 20,
+    "scrapedAt": "2026-03-11T07:08:48.671Z"
   }
 }
