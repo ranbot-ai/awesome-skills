@@ -119,7 +119,7 @@ git commit -m "feat: add specific feature"
 
 After completing each chunk of the plan:
 
-1. Dispatch plan-document-reviewer subagent (see plan-document-reviewer-prompt.md) for the current chunk
+1. Dispatch plan-document-reviewer subagent (see plan-document-reviewer-prompt.md) with precisely crafted review context — never your session history. This keeps the reviewer focused on the plan, not your thought process.
    - Provide: chunk content, path to spec document
 2. If ❌ Issues Found:
    - Fix the issues in the chunk
@@ -143,5 +143,4 @@ After saving the plan:
 **Execution path depends on harness capabilities:**
 
 **If harness has subagents (Claude Code, etc.):**
-- **REQUIRED:** Use superpowers:subagent-driven-development
-- Do NOT offer a choice - subagent-driven is the standard app
+- **

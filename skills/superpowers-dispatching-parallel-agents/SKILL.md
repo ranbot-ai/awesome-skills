@@ -12,6 +12,8 @@ url: https://github.com/obra/superpowers/tree/main/skills/dispatching-parallel-a
 
 ## Overview
 
+You delegate tasks to specialized agents with isolated context. By precisely crafting their instructions and context, you ensure they stay focused and succeed at their task. They should never inherit your session's context or history — you construct exactly what they need. This also preserves your own context for coordination work.
+
 When you have multiple unrelated failures (different test files, different subsystems, different bugs), investigating them sequentially wastes time. Each investigation is independent and can happen in parallel.
 
 **Core principle:** Dispatch one agent per independent problem domain. Let them work concurrently.
@@ -142,16 +144,4 @@ Return: Summary of what you found and what you fixed.
 - batch-completion-behavior.test.ts: 2 failures (tools not executing)
 - tool-approval-race-conditions.test.ts: 1 failure (execution count = 0)
 
-**Decision:** Independent domains - abort logic separate from batch completion separate from race conditions
-
-**Dispatch:**
-```
-Agent 1 → Fix agent-tool-abort.test.ts
-Agent 2 → Fix batch-completion-behavior.test.ts
-Agent 3 → Fix tool-approval-race-conditions.test.ts
-```
-
-**Results:**
-- Agent 1: Replaced timeouts with event-based waiting
-- Agent 2: Fixed event structure bug (threadId in wrong place)
-- Agent 3: Added wait for async to
+**Decision:** Independent domains - abort logic separate from batch completion separate from race con

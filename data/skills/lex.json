@@ -1,0 +1,29 @@
+{
+  "id": "antigravity-lex",
+  "name": "lex",
+  "slug": "lex",
+  "description": "Centralized 'Truth Engine' for cross-jurisdictional legal context (US, EU, CA) and contract scaffolding.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/lex",
+  "content": "\n# LEX: Legal-Entity-X-ref\n\n## Overview\n\nLEX is a structured truth engine designed to eliminate legal hallucinations by grounding agents in verified government references and legislation across 29+ jurisdictions. It provides deterministic context for business formation, employment, and contract drafting.\n\n## When to Use This Skill\n\n- Use when you need to cross-reference or compare legal requirements between different territories, such as verifying the compliance gap between an **EU SARL** and a **US LLC**.\n- Use when working with foundational business or employment documents that require specific, jurisdiction-compliant clauses to be inserted into a professional scaffold.\n- Use when the user asks about the specific regulatory nuances, formation steps, or \"truth-based\" definitions of legal entities within the **29 supported jurisdictions** (USA, Canada, and the EU).\n\n## How It Works\n\n### Step 1: Identify Jurisdiction\nBefore drafting, determine if the user's entity or contract target is in the **USA, Canada, or the EU**.\n\n### Step 2: Search & Fetch Context\nUse the CLI shortcuts to find the relevant legal patterns and templates.\n- Run `lex search <query>` to find matching templates.\n- Run `lex get <path>` to read the granular metadata and requirements.\n\n### Step 3: Scaffold Drafting\nGenerate foundation-level documents using `lex draft <description>`. This ensures that all drafts include the mandatory AI-generated content disclaimer.\n\n### Step 4: Verify Authority\nAlways include a \"Verified Sources\" section in your output by running `lex verify`, which fetches official government links for the retrieved context.\n\n## Examples\n\n### Example 1: Comparing Employment Laws\n```bash\n# Get the workforce template to compare US vs EU notice periods\nlex get templates/02_employment_workforce.md\n```\n\n### Example 2: Drafting a Czech Contract\n```bash\n# Create a house sale contract scaffold in Czech language\nlex draft \"Czech house sale contract\"\n```\n\n## Best Practices\n\n- ✅ **Trust but Verify**: Always include the links provided by `lex verify` in your output.\n- ✅ **Table Formatting**: Use tables when comparing results across multiple jurisdictions.\n- ❌ **No Guessing**: If a jurisdiction is outside the US/EU/CA scope, state that it is outside the LEX \"Truth Engine\" coverage.\n- ❌ **No Anecdotal Advice**: Stick strictly to the findings in the templates or verified government domains.\n\n## Common Pitfalls\n\n- **Problem:** Legal hallucination regarding specific EU notice periods.\n  **Solution:** Run `lex get templates/02_employment_workforce.md` to see the restrictive covenant comparison table.\n\n## Related Skills\n\n- `@employment-contract-templates` - For more specific HR policy phrasing.\n- `@legal-advisor` - For general legal framework architecture.\n- `@security-auditor` - For reviewing the final repository security.\n",
+  "tags": [
+    "claude",
+    "ai",
+    "agent",
+    "template",
+    "design",
+    "document",
+    "security",
+    "aws",
+    "rag",
+    "cro"
+  ],
+  "useCases": [
+    "Use when you need to cross-reference or compare legal requirements between different territories, such as verifying the compliance gap between an **EU SARL** and a **US LLC**.",
+    "Use when working with foundational business or employment documents that require specific, jurisdiction-compliant clauses to be inserted into a professional scaffold.",
+    "Use when the user asks about the specific regulatory nuances, formation steps, or \"truth-based\" definitions of legal entities within the **29 supported jurisdictions** (USA, Canada, and the EU)."
+  ],
+  "scrapedAt": "2026-03-12T07:11:20.775Z"
+}
