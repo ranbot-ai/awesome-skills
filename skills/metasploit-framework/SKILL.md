@@ -10,6 +10,11 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/meta
 
 # Metasploit Framework
 
+> **⚠️ AUTHORIZED USE ONLY**
+> This skill is for educational purposes or authorized security assessments only.
+> You must have explicit, written permission from the system owner before using this tool.
+> Misuse of this tool is illegal and strictly prohibited.
+
 ## Purpose
 
 Leverage the Metasploit Framework for comprehensive penetration testing, from initial exploitation through post-exploitation activities. Metasploit provides a unified platform for vulnerability exploitation, payload generation, auxiliary scanning, and maintaining access to compromised systems during authorized security assessments.
@@ -18,16 +23,14 @@ Leverage the Metasploit Framework for comprehensive penetration testing, from in
 
 ### Required Tools
 ```bash
-# Metasploit comes pre-installed on Kali Linux
-# For other systems:
-curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall
-chmod 755 msfinstall
-./msfinstall
-
-# Start PostgreSQL for database support
-sudo systemctl start postgresql
-sudo msfdb init
+# Metasploit must already be installed before using this skill.
+# Kali Linux usually ships with it preinstalled.
+msfconsole --version
 ```
+
+Installation varies by operating system and package source. Follow your platform's documented package-manager or vendor installation process before using this skill. Do not rely on an unpinned remote installer script from inside this skill.
+
+If you want database-backed features such as workspace tracking, initialize `msfdb` using the instructions for your local installation. This skill assumes Metasploit is already available and does not require `sudo`, `systemctl`, or other privileged host-level setup steps.
 
 ### Required Knowledge
 - Network and system fundamentals
@@ -39,6 +42,8 @@ sudo msfdb init
 - Written authorization for testing
 - Network access to target systems
 - Understanding of scope and rules of engagement
+
+Before running exploit modules, ask the user to confirm the exact target host, scope, and authorization state.
 
 ## Outputs and Deliverables
 
@@ -167,33 +172,4 @@ msf6 exploit(...) > check
 # Execute exploit
 msf6 exploit(...) > exploit
 # or
-msf6 exploit(...) > run
-```
-
-### Phase 5: Payload Types
-
-Select appropriate payload for the situation:
-
-```bash
-# Singles - Self-contained, no staging
-windows/shell_reverse_tcp
-linux/x86/shell_bind_tcp
-
-# Stagers - Small payload that downloads larger stage
-windows/meterpreter/reverse_tcp
-linux/x86/meterpreter/bind_tcp
-
-# Stages - Downloaded by stager, provides full functionality
-# Meterpreter, VNC, shell
-
-# Payload naming convention:
-# [platform]/[architecture]/[payload_type]/[connection_type]
-# Examples:
-windows/x64/meterpreter/reverse_tcp
-linux/x86/shell/bind_tcp
-php/meterpreter/reverse_tcp
-java/meterpreter/reverse_https
-android/meterpreter/reverse_tcp
-```
-
-### Phase 6: Meterpreter S
+msf6 exp

