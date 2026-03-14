@@ -1510,6 +1510,36 @@
       "scrapedAt": "2026-03-08T06:53:29.310Z"
     },
     {
+      "id": "antigravity-antigravity-skill-orchestrator",
+      "name": "antigravity-skill-orchestrator",
+      "slug": "antigravity-skill-orchestrator",
+      "description": "A meta-skill that understands task requirements, dynamically selects appropriate skills, tracks successful skill combinations using agent-memory-mcp, and prevents skill overuse for simple tasks.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/antigravity-skill-orchestrator",
+      "content": "\n# antigravity-skill-orchestrator\n\n## Overview\n\nThe `skill-orchestrator` is a meta-skill designed to enhance the AI agent's ability to tackle complex problems. It acts as an intelligent coordinator that first evaluates the complexity of a user's request. Based on that evaluation, it determines if specialized skills are needed. If they are, it selects the right combination of skills, explicitly tracks these combinations using `@agent-memory-mcp` for future reference, and guides the agent through the execution process. Crucially, it includes strict guardrails to prevent the unnecessary use of specialized skills for simple tasks that can be solved with baseline capabilities.\n\n## When to Use This Skill\n\n- Use when tackling a complex, multi-step problem that likely requires multiple domains of expertise.\n- Use when you are unsure which specific skills are best suited for a given user request, and need to discover them from the broader ecosystem.\n- Use when the user explicitly asks to \"orchestrate\", \"combine skills\", or \"use the best tools for the job\" on a significant task.\n- Use when you want to look up previously successful combinations of skills for a specific type of problem.\n\n## Core Concepts\n\n### Task Evaluation Guardrails\nNot every task requires a specialized skill. For straightforward issues (e.g., small CSS fixes, simple script writing, renaming a variable), **DO NOT USE** specialized skills. Over-engineering simple tasks wastes tokens and time. \n\nAdditionally, the orchestrator is strictly forbidden from creating new skills. Its sole purpose is to combine and use existing skills provided by the community or present in the current environment.\n\nBefore invoking any skills, evaluate the task:\n1. **Is the task simple/contained?** Solve it directly using the agent's ordinary file editing, search, and terminal capabilities available in the current environment.\n2. **Is the task complex/multi-domain?** Only then should you proceed to orchestrate skills.\n\n### Skill Selection & Combinations\nWhen a task is deemed complex, identify the necessary domains (e.g., frontend, database, deployment). Search available skills in the current environment to find the most relevant ones. If the required skills are not found locally, consult the master skill catalog.\n\n### Master Skill Catalog\nThe Antigravity ecosystem maintains a master catalog of highly curated skills at `https://raw.githubusercontent.com/sickn33/antigravity-awesome-skills/main/CATALOG.md`. When local skills are insufficient, fetch this catalog to discover appropriate skills across the 9 primary categories:\n- `architecture`\n- `business`\n- `data-ai`\n- `development`\n- `general`\n- `infrastructure`\n- `security`\n- `testing`\n- `workflow`\n\n### Memory Integration (`@agent-memory-mcp`)\nTo build institutional knowledge, the orchestrator relies on the `agent-memory-mcp` skill to record and retrieve successful skill combinations.\n\n## Step-by-Step Guide\n\n### 1. Task Evaluation & Guardrail Check\n[Triggered when facing a new user request that might need skills]\n1. Read the user's request.\n2. Ask yourself: \"Can I solve this efficiently with just basic file editing and terminal commands?\"\n3. If YES: Proceed without invoking specialized skills. Stop the orchestration here.\n4. If NO: Proceed to step 2.\n\n### 2. Retrieve Past Knowledge\n[Triggered if the task is complex]\n1. Use the `memory_search` tool provided by `agent-memory-mcp` to search for similar past tasks.\n   - Example query: `memory_search({ query: \"skill combination for react native and firebase\", type: \"skill_combination\" })`\n2. If a working combination exists, read the details using `memory_read`.\n3. If no relevant memory exists, proceed to Step 3.\n\n### 3. Discover and Select Skills\n[Triggered if no past knowledge covers this task]\n1. Analyze the core requirements (e.g., \"needs a React UI, a Node.js backend, and a PostgreSQL database\").\n2. Query the locally available skills using the current environment's skill list or equivalent discovery mechanism to find the best match for each requirement.\n3. **If local skills are insufficient**, fetch the master catalog with the web or command-line retrieval tools available in the current environment: `https://raw.githubusercontent.com/sickn33/antigravity-awesome-skills/main/CATALOG.md`.\n4. Scan the catalog's 9 main categories to identify the appropriate skills to bring into the current context.\n5. Select the minimal set of skills needed. **Do not over-select.**\n\n### 4. Apply Skills and Track the Combination\n[Triggered after executing the task using the selected skills]\n1. Assume the task was completed successfully using a new combination of skills (e.g., `@react-patterns` + `@nodejs-backend-patterns` + `@postgresql`).\n2. Record this combination for future use using `memory_write` from `agent-memory-mcp`.\n   - Ensure the type is `skill_combination`.\n   - Provide a descriptive key and content detailing why these skills worked well together.\n\n## Examples\n\n### Example 1: Handling a Si",
+      "tags": [
+        "javascript",
+        "react",
+        "node",
+        "mcp",
+        "ai",
+        "agent",
+        "workflow",
+        "design",
+        "security",
+        "firebase"
+      ],
+      "useCases": [
+        "Use when tackling a complex, multi-step problem that likely requires multiple domains of expertise.",
+        "Use when you are unsure which specific skills are best suited for a given user request, and need to discover them from the broader ecosystem.",
+        "Use when the user explicitly asks to \"orchestrate\", \"combine skills\", or \"use the best tools for the job\" on a significant task.",
+        "Use when you want to look up previously successful combinations of skills for a specific type of problem."
+      ],
+      "scrapedAt": "2026-03-14T06:57:59.681Z"
+    },
+    {
       "id": "antigravity-antigravity-workflows",
       "name": "antigravity-workflows",
       "slug": "antigravity-workflows",
@@ -11799,6 +11829,31 @@
       "scrapedAt": "2026-03-08T06:55:36.987Z"
     },
     {
+      "id": "antigravity-electron-development",
+      "name": "electron-development",
+      "slug": "electron-development",
+      "description": "Master Electron desktop app development with secure IPC, contextIsolation, preload scripts, multi-process architecture, electron-builder packaging, code signing, and auto-update.",
+      "category": "Security & Systems",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/electron-development",
+      "content": "\n# Electron Development\n\nYou are a senior Electron engineer specializing in secure, production-grade desktop application architecture. You have deep expertise in Electron's multi-process model, IPC security patterns, native OS integration, application packaging, code signing, and auto-update strategies.\n\n## Use this skill when\n\n- Building new Electron desktop applications from scratch\n- Securing an Electron app (contextIsolation, sandbox, CSP, nodeIntegration)\n- Setting up IPC communication between main, renderer, and preload processes\n- Packaging and distributing Electron apps with electron-builder or electron-forge\n- Implementing auto-update with electron-updater\n- Debugging main process issues or renderer crashes\n- Managing multiple windows and application lifecycle\n- Integrating native OS features (menus, tray, notifications, file system dialogs)\n- Optimizing Electron app performance and bundle size\n\n## Do not use this skill when\n\n- Building web-only applications without desktop distribution → use `react-patterns`, `nextjs-best-practices`\n- Building Tauri apps (Rust-based desktop alternative) → use `tauri-development` if available\n- Building Chrome extensions → use `chrome-extension-developer`\n- Implementing deep backend/server logic → use `nodejs-backend-patterns`\n- Building mobile apps → use `react-native-architecture` or `flutter-expert`\n\n## Instructions\n\n1. Analyze the project structure and identify process boundaries.\n2. Enforce security defaults: `contextIsolation: true`, `nodeIntegration: false`, `sandbox: true`.\n3. Design IPC channels with explicit whitelisting in the preload script.\n4. Implement, test, and build with appropriate tooling.\n5. Validate against the Production Security Checklist before shipping.\n\n---\n\n## Core Expertise Areas\n\n### 1. Project Structure & Architecture\n\n**Recommended project layout:**\n```\nmy-electron-app/\n├── package.json\n├── electron-builder.yml        # or forge.config.ts\n├── src/\n│   ├── main/\n│   │   ├── main.ts             # Main process entry\n│   │   ├── ipc-handlers.ts     # IPC channel handlers\n│   │   ├── menu.ts             # Application menu\n│   │   ├── tray.ts             # System tray\n│   │   └── updater.ts          # Auto-update logic\n│   ├── preload/\n│   │   └── preload.ts          # Bridge between main ↔ renderer\n│   ├── renderer/\n│   │   ├── index.html          # Entry HTML\n│   │   ├── App.tsx             # UI root (React/Vue/Svelte/vanilla)\n│   │   ├── components/\n│   │   └── styles/\n│   └── shared/\n│       ├── constants.ts        # IPC channel names, shared enums\n│       └── types.ts            # Shared TypeScript interfaces\n├── resources/\n│   ├── icon.png                # App icon (1024x1024)\n│   └── entitlements.mac.plist  # macOS entitlements\n├── tests/\n│   ├── unit/\n│   └── e2e/\n└── tsconfig.json\n```\n\n**Key architectural principles:**\n- **Separate entry points**: Main, preload, and renderer each have their own build configuration.\n- **Shared types, not shared modules**: The `shared/` directory contains only types, constants, and enums — never executable code imported across process boundaries.\n- **Keep main process lean**: Main should orchestrate windows, handle IPC, and manage app lifecycle. Business logic belongs in the renderer or dedicated worker processes.\n\n---\n\n### 2. Process Model (Main / Renderer / Preload / Utility)\n\nElectron runs **multiple processes** that are isolated by design:\n\n| Process | Role | Node.js Access | DOM Access |\n|---------|------|----------------|------------|\n| **Main** | App lifecycle, windows, native APIs, IPC hub | ✅ Full | ❌ None |\n| **Renderer** | UI rendering, user interaction | ❌ None (by default) | ✅ Full |\n| **Preload** | Secure bridge between main and renderer | ✅ Limited (via contextBridge) | ✅ Before page loads |\n| **Utility** | CPU-intensive tasks, background work | ✅ Full | ❌ None |\n\n**BrowserWindow with security defaults (MANDATORY):**\n```typescript\nimport { BrowserWindow } from 'electron';\nimport path from 'node:path';\n\nfunction createMainWindow(): BrowserWindow {\n  const win = new BrowserWindow({\n    width: 1200,\n    height: 800,\n    webPreferences: {\n      // ── SECURITY DEFAULTS (NEVER CHANGE THESE) ──\n      contextIsolation: true,     // Isolates preload from renderer context\n      nodeIntegration: false,     // Prevents require() in renderer\n      sandbox: true,              // OS-level process sandboxing\n      \n      // ── PRELOAD SCRIPT ──\n      preload: path.join(__dirname, '../preload/preload.js'),\n      \n      // ── ADDITIONAL HARDENING ──\n      webSecurity: true,          // Enforce same-origin policy\n      allowRunningInsecureContent: false,\n      experimentalFeatures: false,\n    },\n  });\n\n  // Content Security Policy\n  win.webContents.session.webRequest.onHeadersReceived((details, callback) => {\n    callback({\n      responseHeaders: {\n        ...details.responseHeaders,\n        'Content-Security-Policy': [\n          \"default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; i",
+      "tags": [
+        "typescript",
+        "react",
+        "node",
+        "nextjs",
+        "api",
+        "ai",
+        "template",
+        "design",
+        "image",
+        "security"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-03-14T07:01:15.096Z"
+    },
+    {
       "id": "antigravity-elixir-pro",
       "name": "elixir-pro",
       "slug": "elixir-pro",
@@ -18056,6 +18111,37 @@
       "scrapedAt": "2026-03-05T07:05:22.089Z"
     },
     {
+      "id": "antigravity-llm-structured-output",
+      "name": "llm-structured-output",
+      "slug": "llm-structured-output",
+      "description": "Get reliable JSON, enums, and typed objects from LLMs using response_format, tool_use, and schema-constrained decoding across OpenAI, Anthropic, and Google APIs.\n",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/llm-structured-output",
+      "content": "\n# LLM Structured Output\n\n## What This Skill Does\n\nExtract typed, validated data from LLM API responses instead of parsing free-text. This skill covers the three main approaches: OpenAI's `response_format` with JSON Schema, Anthropic's `tool_use` block for structured extraction, and Google's `responseSchema` in Gemini. You will learn when each approach works, when it breaks, and how to build retry logic around schema validation failures that every production system encounters.\n\n## When to Use This Skill\n\n- The user needs to extract structured data (JSON objects, arrays, enums) from an LLM response\n- The user is building a pipeline where LLM output feeds directly into code (database writes, API calls, UI rendering)\n- The user asks about `response_format`, `json_mode`, `json_object`, or `json_schema` in OpenAI\n- The user asks about using Anthropic's `tool_use` or `tool_result` blocks for data extraction (not for actual tool execution)\n- The user asks about Zod schemas with `zodResponseFormat()` from the `openai` npm package\n- The user needs to parse LLM output into Pydantic models using `instructor`, `marvin`, or manual validation\n- The user is getting malformed JSON, missing fields, or wrong types from LLM responses and needs a fix\n- The user asks about `controlled generation`, `constrained decoding`, or `grammar-based sampling` in local models\n\nDo NOT use this skill when:\n- The user wants free-form text generation (summaries, essays, chat)\n- The user is asking about Zod for form validation or API input validation (use `zod-validation-expert` instead)\n- The user needs prompt engineering for better text quality (not structure)\n- The user wants to call real external tools/APIs (this skill covers using tool_use as a structured output hack, not actual tool orchestration)\n\n## Core Workflow\n\n1. Identify the target schema. Ask the user what fields they need extracted. Define every field with its type, whether it's required or optional, and valid enum values if applicable. Do not proceed without a concrete schema.\n\n2. Choose the provider-appropriate method:\n   - **OpenAI (gpt-4o, gpt-4o-mini):** Use `response_format: { type: \"json_schema\", json_schema: { ... } }`. This enables Structured Outputs with guaranteed schema conformance via constrained decoding.\n   - **Anthropic (Claude):** Define a single tool with the target schema as `input_schema` and set `tool_choice: { type: \"tool\", name: \"extract_data\" }`. Claude returns the structured data in the `tool_use` content block.\n   - **Google (Gemini):** Use `generationConfig.responseSchema` with a JSON Schema object and set `responseMimeType: \"application/json\"`.\n   - **Local models (llama.cpp, vLLM):** Use GBNF grammars or `--json-schema` flag for constrained decoding at the token level.\n\n3. Write the schema definition in the user's language. For Python, define a Pydantic `BaseModel`. For TypeScript, define a Zod schema and convert it with `zodResponseFormat()`. For raw API calls, write JSON Schema directly.\n\n4. Include field-level descriptions in the schema. Every field should have a `description` string that tells the model what to put there. Models use these descriptions as implicit prompt instructions — a field described as `\"The user's sentiment as positive, negative, or neutral\"` produces better results than a bare `sentiment: str` with no context.\n\n5. Set the system prompt to reinforce structure. Tell the model its job is data extraction, not conversation. Example: `\"You are a data extraction system. Analyze the input and return the requested fields. Do not include explanations outside the JSON structure.\"`\n\n6. If using OpenAI's `json_schema` mode, set `\"strict\": true` in the schema definition. This activates constrained decoding where the model can only output tokens that conform to the schema. Without `strict: true`, the model may still produce invalid JSON.\n\n7. If using Anthropic's tool_use approach, extract the structured data from `response.content` by finding the block where `type == \"tool_use\"` and reading its `input` field. Do not parse the text blocks — the structured data lives exclusively in the tool_use block.\n\n8. Validate the response against the schema in your application code. Even with constrained decoding, validate with Pydantic's `model_validate()` or Zod's `.parse()` before passing data downstream. This catches semantic issues (empty strings, out-of-range numbers) that schema conformance alone cannot prevent.\n\n9. Build a retry loop for validation failures. When validation fails, send the original input plus the failed output and the validation error back to the model with an instruction like `\"Your previous output failed validation: {error}. Fix the output.\"` Cap retries at 3 attempts.\n\n10. Log every structured output call with: the input, the raw response, the parsed result, and any validation errors. When structured output breaks in production, you need these logs to determine whether the failure was a schema design issue, a prompt issue, or ",
+      "tags": [
+        "python",
+        "typescript",
+        "api",
+        "claude",
+        "ai",
+        "llm",
+        "gpt",
+        "workflow",
+        "design",
+        "document"
+      ],
+      "useCases": [
+        "The user needs to extract structured data (JSON objects, arrays, enums) from an LLM response",
+        "The user is building a pipeline where LLM output feeds directly into code (database writes, API calls, UI rendering)",
+        "The user asks about `response_format`, `json_mode`, `json_object`, or `json_schema` in OpenAI",
+        "The user asks about using Anthropic's `tool_use` or `tool_result` blocks for data extraction (not for actual tool execution)",
+        "The user asks about Zod schemas with `zodResponseFormat()` from the `openai` npm package"
+      ],
+      "scrapedAt": "2026-03-14T07:03:27.253Z"
+    },
+    {
       "id": "antigravity-local-legal-seo-audit",
       "name": "local-legal-seo-audit",
       "slug": "local-legal-seo-audit",
@@ -22550,6 +22636,36 @@
       "scrapedAt": "2026-01-26T13:20:34.422Z"
     },
     {
+      "id": "antigravity-privacy-by-design",
+      "name": "privacy-by-design",
+      "slug": "privacy-by-design",
+      "description": "Use when building apps that collect user data. Ensures privacy protections are built in from the start—data minimization, consent, encryption.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/privacy-by-design",
+      "content": "\n# Privacy by Design\n\n## Overview\n\nIntegrate privacy protections into software architecture from the beginning, not as an afterthought. This skill applies Privacy by Design principles (GDPR Article 25, Cavoukian's framework) when designing databases, APIs, and user flows. Protects real users' data and builds trust.\n\n## When to Use This Skill\n\n- Use when building apps that collect personal data (names, emails, locations, preferences)\n- Use when designing database schemas, APIs, or authentication flows\n- Use when the user mentions forms, user accounts, analytics, or third-party integrations\n- Use when deploying to production—verify privacy controls before launch\n\n## Legal Frameworks\n\n**GDPR (EU)** — Primary reference. Article 25 mandates \"data protection by design and by default.\" Applies to EU users and often adopted globally.\n\n**CCPA (California)** — Right to know, delete, opt-out of sale. Similar principles: minimize, disclose, allow control.\n\n**LGPD (Brazil)** — Aligned with GDPR. Purpose limitation, necessity, transparency. Applies to Brazil users.\n\nDesign for the strictest framework you target; it often satisfies others.\n\n---\n\n## Core Principles\n\n### 1. Data Minimization\nCollect only what is strictly necessary. Every field needs a documented justification. Avoid \"we might need it later.\"\n\n### 2. Purpose Limitation\nStore the purpose of each data point. Do not reuse data for purposes the user did not consent to.\n\n### 3. Storage Limitation\nDefine retention periods. Implement automated deletion or anonymization when retention expires. Never keep data \"forever\" by default.\n\n### 4. Privacy as Default\nOpt-in for optional collection, not opt-out. Sensitive settings (analytics, marketing) off by default. No pre-checked consent boxes.\n\n### 5. End-to-End Security\nEncrypt at rest and in transit. Use RBAC. Log access to sensitive data for audit.\n\n### 6. Transparency\nDocument what is collected and why. Clear privacy policies. Easy access and deletion for users.\n\n---\n\n## User Rights (GDPR)\n\nEnsure these are implementable from day one:\n\n| Right | What to build |\n|-------|---------------|\n| **Access** | Endpoint or flow to return all user data |\n| **Rectification** | Ability to update/correct data |\n| **Erasure** | Account deletion + data purge (including backups) |\n| **Portability** | Export data in machine-readable format (JSON, CSV) |\n\n---\n\n## Deep Dive: Why It Matters\n\n**Data minimization** — Less data = less breach impact, lower storage cost, simpler compliance. Each field is a liability.\n\n**Purpose limitation** — Reusing data without consent is illegal under GDPR. Document purpose in schema or metadata.\n\n**Retention** — Indefinite storage increases risk and violates GDPR. Define `retention_days` per data type; automate cleanup.\n\n**Logging** — Logs often leak PII. Redact emails, IDs, tokens. Use structured logging with allowlists.\n\n**Third parties** — Every SDK (analytics, crash reporting, ads) may send data elsewhere. Audit dependencies; require consent before loading.\n\n---\n\n## Code Examples\n\n### JavaScript/Node — Minimal User Model\n\n```javascript\n// BAD: Collecting everything \"just in case\"\nconst user = { email, name, phone, address, birthdate, ipAddress, userAgent, ... };\n\n// GOOD: Minimal, documented purpose\nconst user = {\n  email,        // purpose: authentication\n  displayName,  // purpose: UI display\n  createdAt,    // purpose: account age\n};\n```\n\n### JavaScript — Consent Before Tracking\n\n```javascript\n// BAD: Track first, ask later\nanalytics.track(userId, event);\n\n// GOOD: Check consent first\nif (userConsent.analytics) {\n  analytics.track(userId, event);\n}\n```\n\n### Python — Safe Logging\n\n```python\n# BAD: Logging PII in plain text\nlogger.info(f\"User {user.email} logged in from {request.remote_addr}\")\n\n# GOOD: Redact or hash identifiers\nlogger.info(f\"User {hash_user_id(user.id)} logged in\")\n# Or: logger.info(\"User login\", extra={\"user_id_hash\": hash_id(user.id)})\n```\n\n### SQL — Schema with Purpose and Retention\n\n```sql\n-- GOOD: Document purpose and retention in schema\nCREATE TABLE users (\n  id UUID PRIMARY KEY,\n  email VARCHAR(255) NOT NULL,  -- purpose: auth, retention: account lifetime\n  display_name VARCHAR(100),   -- purpose: UI, retention: account lifetime\n  created_at TIMESTAMPTZ,      -- purpose: audit, retention: 7 years\n  last_login_at TIMESTAMPTZ    -- purpose: security, retention: 90 days\n);\n\n-- Add retention policy (PostgreSQL example)\n-- Schedule job to anonymize/delete last_login_at after 90 days\n```\n\n### API — Return Only Needed Fields\n\n```python\n# BAD: Returning full user object\nreturn jsonify(user)  # May include internal fields, hashed passwords\n\n# GOOD: Explicit allowlist\nreturn jsonify({\n    \"id\": user.id,\n    \"email\": user.email,\n    \"displayName\": user.display_name,\n})\n```\n\n---\n\n## Common Pitfalls\n\n| Pitfall | Solution |\n|---------|----------|\n| Logs contain emails, IPs, tokens | Redact PII; use hashed IDs or structured logs |\n| Error messages expose data | Return generic errors to clien",
+      "tags": [
+        "python",
+        "javascript",
+        "node",
+        "api",
+        "ai",
+        "agent",
+        "design",
+        "document",
+        "security",
+        "rag"
+      ],
+      "useCases": [
+        "Use when building apps that collect personal data (names, emails, locations, preferences)",
+        "Use when designing database schemas, APIs, or authentication flows",
+        "Use when the user mentions forms, user accounts, analytics, or third-party integrations",
+        "Use when deploying to production—verify privacy controls before launch"
+      ],
+      "scrapedAt": "2026-03-14T07:04:52.036Z"
+    },
+    {
       "id": "antigravity-privilege-escalation-methods",
       "name": "privilege-escalation-methods",
       "slug": "privilege-escalation-methods",
@@ -24979,89 +25095,6 @@
       "scrapedAt": "2026-03-09T07:16:00.764Z"
     },
     {
-      "id": "antigravity-segment-cdp",
-      "name": "segment-cdp",
-      "slug": "segment-cdp",
-      "description": "Expert patterns for Segment Customer Data Platform including Analytics.js, server-side tracking, tracking plans with Protocols, identity resolution, destinations configuration, and data governance ...",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/segment-cdp",
-      "content": "\n# Segment CDP\n\n## Patterns\n\n### Analytics.js Browser Integration\n\nClient-side tracking with Analytics.js. Include track, identify, page,\nand group calls. Anonymous ID persists until identify merges with user.\n\n\n### Server-Side Tracking with Node.js\n\nHigh-performance server-side tracking using @segment/analytics-node.\nNon-blocking with internal batching. Essential for backend events,\nwebhooks, and sensitive data.\n\n\n### Tracking Plan Design\n\nDesign event schemas using Object + Action naming convention.\nDefine required properties, types, and validation rules.\nConnect to Protocols for enforcement.\n\n\n## Anti-Patterns\n\n### ❌ Dynamic Event Names\n\n### ❌ Tracking Properties as Events\n\n### ❌ Missing Identify Before Track\n\n## ⚠️ Sharp Edges\n\n| Issue | Severity | Solution |\n|-------|----------|----------|\n| Issue | medium | See docs |\n| Issue | high | See docs |\n| Issue | medium | See docs |\n| Issue | high | See docs |\n| Issue | low | See docs |\n| Issue | medium | See docs |\n| Issue | medium | See docs |\n| Issue | high | See docs |\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n",
-      "tags": [
-        "node",
-        "workflow",
-        "design"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:16:01.049Z"
-    },
-    {
-      "id": "antigravity-semgrep-rule-creator",
-      "name": "semgrep-rule-creator",
-      "slug": "semgrep-rule-creator",
-      "description": "Creates custom Semgrep rules for detecting security vulnerabilities, bug patterns, and code patterns. Use when writing Semgrep rules or building custom static analysis detections.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/semgrep-rule-creator",
-      "content": "\n# Semgrep Rule Creator\n\nCreate production-quality Semgrep rules with proper testing and validation.\n\n## When to Use\n\n**Ideal scenarios:**\n- Writing Semgrep rules for specific bug patterns\n- Writing rules to detect security vulnerabilities in your codebase\n- Writing taint mode rules for data flow vulnerabilities\n- Writing rules to enforce coding standards\n\n## When NOT to Use\n\nDo NOT use this skill for:\n- Running existing Semgrep rulesets\n- General static analysis without custom rules (use `static-analysis` skill)\n\n## Rationalizations to Reject\n\nWhen writing Semgrep rules, reject these common shortcuts:\n\n- **\"The pattern looks complete\"** → Still run `semgrep --test --config <rule-id>.yaml <rule-id>.<ext>` to verify. Untested rules have hidden false positives/negatives.\n- **\"It matches the vulnerable case\"** → Matching vulnerabilities is half the job. Verify safe cases don't match (false positives break trust).\n- **\"Taint mode is overkill for this\"** → If data flows from user input to a dangerous sink, taint mode gives better precision than pattern matching.\n- **\"One test is enough\"** → Include edge cases: different coding styles, sanitized inputs, safe alternatives, and boundary conditions.\n- **\"I'll optimize the patterns first\"** → Write correct patterns first, optimize after all tests pass. Premature optimization causes regressions.\n- **\"The AST dump is too complex\"** → The AST reveals exactly how Semgrep sees code. Skipping it leads to patterns that miss syntactic variations.\n\n## Anti-Patterns\n\n**Too broad** - matches everything, useless for detection:\n```yaml\n# BAD: Matches any function call\npattern: $FUNC(...)\n\n# GOOD: Specific dangerous function\npattern: eval(...)\n```\n\n**Missing safe cases in tests** - leads to undetected false positives:\n```python\n# BAD: Only tests vulnerable case\n# ruleid: my-rule\ndangerous(user_input)\n\n# GOOD: Include safe cases to verify no false positives\n# ruleid: my-rule\ndangerous(user_input)\n\n# ok: my-rule\ndangerous(sanitize(user_input))\n\n# ok: my-rule\ndangerous(\"hardcoded_safe_value\")\n```\n\n**Overly specific patterns** - misses variations:\n```yaml\n# BAD: Only matches exact format\npattern: os.system(\"rm \" + $VAR)\n\n# GOOD: Matches all os.system calls with taint tracking\nmode: taint\npattern-sinks:\n  - pattern: os.system(...)\n```\n\n## Strictness Level\n\nThis workflow is **strict** - do not skip steps:\n- **Read documentation first**: See [Documentation](#documentation) before writing Semgrep rules\n- **Test-first is mandatory**: Never write a rule without tests\n- **100% test pass is required**: \"Most tests pass\" is not acceptable\n- **Optimization comes last**: Only simplify patterns after all tests pass\n- **Avoid generic patterns**: Rules must be specific, not match broad patterns\n- **Prioritize taint mode**: For data flow vulnerabilities\n- **One YAML file - one Semgrep rule**: Each YAML file must contain only one Semgrep rule; don't combine multiple rules in a single file\n- **No generic rules**: When targeting a specific language for Semgrep rules - avoid generic pattern matching (`languages: generic`)\n- **Forbidden `todook` and `todoruleid` test annotations**: `todoruleid: <rule-id>` and `todook: <rule-id>` annotations in tests files for future rule improvements are forbidden\n\n## Overview\n\nThis skill guides creation of Semgrep rules that detect security vulnerabilities and code patterns. Rules are created iteratively: analyze the problem, write tests first, analyze AST structure, write the rule, iterate until all tests pass, optimize the rule.\n\n**Approach selection:**\n- **Taint mode** (prioritize): Data flow issues where untrusted input reaches dangerous sinks\n- **Pattern matching**: Simple syntactic patterns without data flow requirements\n\n**Why prioritize taint mode?** Pattern matching finds syntax but misses context. A pattern `eval($X)` matches both `eval(user_input)` (vulnerable) and `eval(\"safe_literal\")` (safe). Taint mode tracks data flow, so it only alerts when untrusted data actually reaches the sink—dramatically reducing false positives for injection vulnerabilities.\n\n**Iterating between approaches:** It's okay to experiment. If you start with taint mode and it's not working well (e.g., taint doesn't propagate as expected, too many false positives/negatives), switch to pattern matching. Conversely, if pattern matching produces too many false positives on safe cases, try taint mode instead. The goal is a working rule—not rigid adherence to one approach.\n\n**Output structure** - exactly 2 files in a directory named after the rule-id:\n```\n<rule-id>/\n├── <rule-id>.yaml     # Semgrep rule\n└── <rule-id>.<ext>    # Test file with ruleid/ok annotations\n```\n\n## Quick Start\n\n```yaml\nrules:\n  - id: insecure-eval\n    languages: [python]\n    severity: HIGH\n    message: User input passed to eval() allows code execution\n    mode: taint\n    pattern-sources:\n      - pattern: request.args.get(...)\n    pattern-sinks:\n      - pattern: eval(...)\n```\n\nTest file (`insecure-eval.py`):\n```python\n#",
-      "tags": [
-        "python",
-        "ai",
-        "workflow",
-        "document",
-        "security"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:16:01.296Z"
-    },
-    {
-      "id": "antigravity-semgrep-rule-variant-creator",
-      "name": "semgrep-rule-variant-creator",
-      "slug": "semgrep-rule-variant-creator",
-      "description": "Creates language variants of existing Semgrep rules. Use when porting a Semgrep rule to specified target languages. Takes an existing rule and target languages as input, produces independent rule+test directories for each language.",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/semgrep-rule-variant-creator",
-      "content": "\n# Semgrep Rule Variant Creator\n\nPort existing Semgrep rules to new target languages with proper applicability analysis and test-driven validation.\n\n## When to Use\n\n**Ideal scenarios:**\n- Porting an existing Semgrep rule to one or more target languages\n- Creating language-specific variants of a universal vulnerability pattern\n- Expanding rule coverage across a polyglot codebase\n- Translating rules between languages with equivalent constructs\n\n## When NOT to Use\n\nDo NOT use this skill for:\n- Creating a new Semgrep rule from scratch (use `semgrep-rule-creator` instead)\n- Running existing rules against code\n- Languages where the vulnerability pattern fundamentally doesn't apply\n- Minor syntax variations within the same language\n\n## Input Specification\n\nThis skill requires:\n1. **Existing Semgrep rule** - YAML file path or YAML rule content\n2. **Target languages** - One or more languages to port to (e.g., \"Golang and Java\")\n\n## Output Specification\n\nFor each applicable target language, produces:\n```\n<original-rule-id>-<language>/\n├── <original-rule-id>-<language>.yaml     # Ported Semgrep rule\n└── <original-rule-id>-<language>.<ext>    # Test file with annotations\n```\n\nExample output for porting `sql-injection` to Go and Java:\n```\nsql-injection-golang/\n├── sql-injection-golang.yaml\n└── sql-injection-golang.go\n\nsql-injection-java/\n├── sql-injection-java.yaml\n└── sql-injection-java.java\n```\n\n## Rationalizations to Reject\n\nWhen porting Semgrep rules, reject these common shortcuts:\n\n| Rationalization | Why It Fails | Correct Approach |\n|-----------------|--------------|------------------|\n| \"Pattern structure is identical\" | Different ASTs across languages | Always dump AST for target language |\n| \"Same vulnerability, same detection\" | Data flow differs between languages | Analyze target language idioms |\n| \"Rule doesn't need tests since original worked\" | Language edge cases differ | Write NEW test cases for target |\n| \"Skip applicability - it obviously applies\" | Some patterns are language-specific | Complete applicability analysis first |\n| \"I'll create all variants then test\" | Errors compound, hard to debug | Complete full cycle per language |\n| \"Library equivalent is close enough\" | Surface similarity hides differences | Verify API semantics match |\n| \"Just translate the syntax 1:1\" | Languages have different idioms | Research target language patterns |\n\n## Strictness Level\n\nThis workflow is **strict** - do not skip steps:\n- **Applicability analysis is mandatory**: Don't assume patterns translate\n- **Each language is independent**: Complete full cycle before moving to next\n- **Test-first for each variant**: Never write a rule without test cases\n- **100% test pass required**: \"Most tests pass\" is not acceptable\n\n## Overview\n\nThis skill guides the creation of language-specific variants of existing Semgrep rules. Each target language goes through an independent 4-phase cycle:\n\n```\nFOR EACH target language:\n  Phase 1: Applicability Analysis → Verdict\n  Phase 2: Test Creation (Test-First)\n  Phase 3: Rule Creation\n  Phase 4: Validation\n  (Complete full cycle before moving to next language)\n```\n\n## Foundational Knowledge\n\n**The `semgrep-rule-creator` skill is the authoritative reference for Semgrep rule creation fundamentals.** While this skill focuses on porting existing rules to new languages, the core principles of writing quality rules remain the same.\n\nConsult `semgrep-rule-creator` for guidance on:\n- **When to use taint mode vs pattern matching** - Choosing the right approach for the vulnerability type\n- **Test-first methodology** - Why tests come before rules and how to write effective test cases\n- **Anti-patterns to avoid** - Common mistakes like overly broad or overly specific patterns\n- **Iterating until tests pass** - The validation loop and debugging techniques\n- **Rule optimization** - Removing redundant patterns after tests pass\n\nWhen porting a rule, you're applying these same principles in a new language context. If uncertain about rule structure or approach, refer to `semgrep-rule-creator` first.\n\n## Four-Phase Workflow\n\n### Phase 1: Applicability Analysis\n\nBefore porting, determine if the pattern applies to the target language.\n\n**Analysis criteria:**\n1. Does the vulnerability class exist in the target language?\n2. Does an equivalent construct exist (function, pattern, library)?\n3. Are the semantics similar enough for meaningful detection?\n\n**Verdict options:**\n- `APPLICABLE` → Proceed with variant creation\n- `APPLICABLE_WITH_ADAPTATION` → Proceed but significant changes needed\n- `NOT_APPLICABLE` → Skip this language, document why\n\nSee applicability-analysis.md for detailed guidance.\n\n### Phase 2: Test Creation (Test-First)\n\n**Always write tests before the rule.**\n\nCreate test file with target language idioms:\n- Minimum 2 vulnerable cases (`ruleid:`)\n- Minimum 2 safe cases (`ok:`)\n- Include language-specific edge cases\n\n```go\n// ruleid: sql-injection-golang\ndb.Query(\"SELECT * FROM users WHERE id = \" ",
-      "tags": [
-        "api",
-        "ai",
-        "workflow",
-        "document",
-        "vulnerability",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:16:01.570Z"
-    },
-    {
-      "id": "antigravity-sendgrid-automation",
-      "name": "sendgrid-automation",
-      "slug": "sendgrid-automation",
-      "description": "Automate SendGrid email operations including sending emails, managing contacts/lists, sender identities, templates, and analytics via Rube MCP (Composio). Always search tools first for current sche...",
-      "category": "Business & Marketing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/sendgrid-automation",
-      "content": "\n# SendGrid Automation via Rube MCP\n\nAutomate SendGrid email delivery workflows including marketing campaigns (Single Sends), contact and list management, sender identity setup, and email analytics through Composio's SendGrid toolkit.\n\n## Prerequisites\n\n- Rube MCP must be connected (RUBE_SEARCH_TOOLS available)\n- Active SendGrid connection via `RUBE_MANAGE_CONNECTIONS` with toolkit `sendgrid`\n- Always call `RUBE_SEARCH_TOOLS` first to get current tool schemas\n\n## Setup\n\n**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.\n\n\n1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds\n2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `sendgrid`\n3. If connection is not ACTIVE, follow the returned auth link to complete SendGrid API key authentication\n4. Confirm connection status shows ACTIVE before running any workflows\n\n## Core Workflows\n\n### 1. Create and Send Marketing Campaigns (Single Sends)\n\n**When to use**: User wants to create and send a marketing email campaign to a contact list or segment.\n\n**Tool sequence**:\n1. `SENDGRID_RETRIEVE_ALL_LISTS` - List available marketing lists to target [Prerequisite]\n2. `SENDGRID_CREATE_A_LIST` - Create a new list if needed [Optional]\n3. `SENDGRID_ADD_OR_UPDATE_A_CONTACT` - Add contacts to the list [Optional]\n4. `SENDGRID_GET_ALL_SENDER_IDENTITIES` - Get verified sender ID [Prerequisite]\n5. `SENDGRID_CREATE_SINGLE_SEND` - Create the campaign with content, sender, and recipients [Required]\n\n**Key parameters for SENDGRID_CREATE_SINGLE_SEND**:\n- `name`: Campaign name (required)\n- `email__config__subject`: Email subject line\n- `email__config__html__content`: HTML body content\n- `email__config__plain__content`: Plain text version\n- `email__config__sender__id`: Verified sender identity ID\n- `email__config__design__id`: Use instead of html_content for pre-built designs\n- `send__to__list__ids`: Array of list UUIDs to send to\n- `send__to__segment__ids`: Array of segment UUIDs\n- `send__to__all`: true to send to all contacts\n- `email__config__suppression__group__id` or `email__config__custom__unsubscribe__url`: One required for compliance\n\n**Pitfalls**:\n- Setting `send_at` on CREATE does NOT schedule the send; it only prepopulates the UI date; use the Schedule endpoint separately\n- `send_at: \"now\"` is only valid with the Schedule endpoint, not CREATE\n- Must provide either `suppression_group_id` or `custom_unsubscribe_url` for unsubscribe compliance\n- Sender must be verified before use; check with `SENDGRID_GET_ALL_SENDER_IDENTITIES`\n- Nested params use double-underscore notation (e.g., `email__config__subject`)\n\n### 2. Manage Contacts and Lists\n\n**When to use**: User wants to create contact lists, add/update contacts, search for contacts, or remove contacts from lists.\n\n**Tool sequence**:\n1. `SENDGRID_RETRIEVE_ALL_LISTS` - List all marketing lists [Required]\n2. `SENDGRID_CREATE_A_LIST` - Create a new contact list [Optional]\n3. `SENDGRID_GET_A_LIST_BY_ID` - Get list details and sample contacts [Optional]\n4. `SENDGRID_ADD_OR_UPDATE_A_CONTACT` - Upsert contacts with list association [Required]\n5. `SENDGRID_GET_CONTACTS_BY_EMAILS` - Look up contacts by email [Optional]\n6. `SENDGRID_GET_CONTACTS_BY_IDENTIFIERS` - Look up contacts by email, phone, or external ID [Optional]\n7. `SENDGRID_GET_LIST_CONTACT_COUNT` - Verify contact count after operations [Optional]\n8. `SENDGRID_REMOVE_CONTACTS_FROM_A_LIST` - Remove contacts from a list without deleting [Optional]\n9. `SENDGRID_REMOVE_LIST_AND_OPTIONAL_CONTACTS` - Delete an entire list [Optional]\n10. `SENDGRID_IMPORT_CONTACTS` - Bulk import from CSV [Optional]\n\n**Key parameters for SENDGRID_ADD_OR_UPDATE_A_CONTACT**:\n- `contacts`: Array of contact objects (max 30,000 or 6MB), each with at least one identifier: `email`, `phone_number_id`, `external_id`, or `anonymous_id` (required)\n- `list_ids`: Array of list UUID strings to associate contacts with\n\n**Pitfalls**:\n- `SENDGRID_ADD_OR_UPDATE_A_CONTACT` is asynchronous; returns 202 with `job_id`; contacts may take 10-30 seconds to appear\n- List IDs are UUIDs (e.g., \"ca7a3796-e8a8-4029-9ccb-df8937940562\"), not integers\n- List names must be unique; duplicate names cause 400 errors\n- `SENDGRID_ADD_A_SINGLE_RECIPIENT_TO_A_LIST` uses the legacy API; prefer `SENDGRID_ADD_OR_UPDATE_A_CONTACT` with `list_ids`\n- `SENDGRID_REMOVE_LIST_AND_OPTIONAL_CONTACTS` is irreversible; require explicit user confirmation\n- Email addresses are automatically lowercased by SendGrid\n\n### 3. Manage Sender Identities\n\n**When to use**: User wants to set up or view sender identities (From addresses) for sending emails.\n\n**Tool sequence**:\n1. `SENDGRID_GET_ALL_SENDER_IDENTITIES` - List all existing sender identities [Required]\n2. `SENDGRID_CREATE_A_SENDER_IDENTITY` - Create a new sender identity [Optional]\n3. `SENDGRID_VIEW_A_SENDER_IDENTITY` - View details for a specific sender [Optional]\n4. `SENDGRID_UPDATE_A_SENDER_IDENTI",
-      "tags": [
-        "api",
-        "mcp",
-        "ai",
-        "automation",
-        "workflow",
-        "template",
-        "design",
-        "marketing"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:16:01.874Z"
-    },
-    {
       "id": "anthropic-skill-creator",
       "name": "skill-creator",
       "slug": "skill-creator",
@@ -25753,7 +25786,7 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 365
+      "count": 366
     },
     {
       "id": "document-processing",
@@ -25788,7 +25821,7 @@
       "name": "Business & Marketing",
       "description": "Skills for marketing, branding, lead generation, and business operations.",
       "icon": "briefcase",
-      "count": 48
+      "count": 47
     },
     {
       "id": "productivity-organization",
@@ -25825,48 +25858,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 80559
+      "stars": 82196
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 92218
+      "stars": 93004
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 43559
+      "stars": 43842
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 69018
+      "stars": 69086
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 989
+      "stars": 997
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1006,
       "newSkillCount": 9,
-      "stars": 23827
+      "stars": 24138
     }
   ],
-  "lastUpdated": "2026-03-13T07:10:14.120Z",
+  "lastUpdated": "2026-03-14T07:05:42.853Z",
   "stats": {
     "totalSkills": 1105,
     "newSkills": 19,
-    "scrapedAt": "2026-03-13T07:10:14.120Z"
+    "scrapedAt": "2026-03-14T07:05:42.853Z"
   }
 }
