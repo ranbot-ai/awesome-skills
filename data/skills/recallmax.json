@@ -1,0 +1,30 @@
+{
+  "id": "antigravity-recallmax",
+  "name": "recallmax",
+  "slug": "recallmax",
+  "description": "FREE — God-tier long-context memory for AI agents. Injects 500K-1M clean tokens, auto-summarizes with tone/intent preservation, compresses 14-turn history into 800 tokens.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/recallmax",
+  "content": "\n# RecallMax — God-Tier Long-Context Memory\n\n## Overview\n\nRecallMax enhances AI agent memory capabilities dramatically. Inject 500K to 1M clean tokens of external context without hallucination drift. Auto-summarize conversations while preserving tone, sarcasm, and intent. Compress multi-turn histories into high-density token sequences.\n\nFree forever. Built by the Genesis Agent Marketplace.\n\n## Install\n\n```bash\nnpx skills add christopherlhammer11-ai/recallmax\n```\n\n## When to Use This Skill\n\n- Use when your agent loses context in long conversations (50+ turns)\n- Use when injecting large RAG/external documents into agent context\n- Use when you need to compress conversation history without losing meaning\n- Use when fact-checking claims across a long thread\n- Use for any agent that needs to remember everything\n\n## How It Works\n\n### Step 1: Context Injection\n\nRecallMax cleanly injects external context (documents, RAG results, prior conversations) into the agent's working memory. Unlike naive concatenation, it:\n- Deduplicates overlapping content\n- Preserves source attribution\n- Prevents hallucination drift from context pollution\n\n### Step 2: Adaptive Summarization\n\nAs conversations grow, RecallMax automatically summarizes older turns while preserving:\n- **Tone** — sarcasm, formality, urgency\n- **Intent** — what the user actually wants vs. what they said\n- **Key facts** — numbers, names, decisions, commitments\n- **Emotional register** — frustration, excitement, confusion\n\n### Step 3: History Compression\n\nCompress a 14-turn conversation history into ~800 high-density tokens that retain full semantic meaning. The compressed output can be re-expanded if needed.\n\n### Step 4: Fact Verification\n\nBuilt-in cross-reference checks for controversial or ambiguous claims within the conversation context. Flags contradictions and unsupported assertions.\n\n## Best Practices\n\n- ✅ Use RecallMax at the start of long-running agent sessions\n- ✅ Enable auto-summarization for conversations beyond 20 turns\n- ✅ Use compression before hitting context window limits\n- ✅ Let the fact verifier run on high-stakes outputs\n- ❌ Don't inject unvetted external content without dedup\n- ❌ Don't skip summarization and rely on raw truncation\n\n## Related Skills\n\n- `@tool-use-guardian` - Tool-call reliability wrapper (also free from Genesis Marketplace)\n\n## Links\n\n- **Repo:** https://github.com/christopherlhammer11-ai/recallmax\n- **Marketplace:** https://genesis-node-api.vercel.app\n- **Browse skills:** https://genesis-marketplace.vercel.app\n",
+  "tags": [
+    "node",
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "llm",
+    "document",
+    "rag",
+    "cro"
+  ],
+  "useCases": [
+    "Use when your agent loses context in long conversations (50+ turns)",
+    "Use when injecting large RAG/external documents into agent context",
+    "Use when you need to compress conversation history without losing meaning",
+    "Use when fact-checking claims across a long thread",
+    "Use for any agent that needs to remember everything"
+  ],
+  "scrapedAt": "2026-03-15T07:15:31.639Z"
+}

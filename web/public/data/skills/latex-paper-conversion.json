@@ -1,0 +1,26 @@
+{
+  "id": "antigravity-latex-paper-conversion",
+  "name": "latex-paper-conversion",
+  "slug": "latex-paper-conversion",
+  "description": "This skill should be used when the user asks to convert an academic paper in LaTeX from one format (e.g., Springer, IPOL) to another format (e.g., MDPI, IEEE, Nature). It automates extraction, injection, fixing formatting, and compiling.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/latex-paper-conversion",
+  "content": "\n# LaTeX Paper Conversion\n\n## Overview\n\nThis skill automates the tedious and recurring process of converting an academic paper written in LaTeX from one publisher's template to another. Different journals (e.g., Springer, MDPI, IEEE) have vastly different structural requirements, document classes, margin settings, and bibliography styles. This skill streamlines these conversions by executing a structured multi-stage workflow, extracting content, mapping it to a new template, and resolving common compilation errors.\n\n## When to Use This Skill\n\n- Use when the user requests to port an existing LaTeX paper to a new journal's format.\n- Use when the user provides an existing `.tex` file and a new template directory.\n- Use when the user mentions converting from format A (e.g., IPOL/Neural Processing) to format B (e.g., MDPI).\n\n## How It Works\n\n### Step 1: Pre-requisites & Assessment\nIdentify the **Source LaTeX file** and asking the user for the **Target Template Directory**. Understand the core layout mapping (single-column vs. double-column, bibliography style).\n\n### Step 2: Extraction & Injection Script Generation\nCreate a Python script (e.g., `convert_format.py`) to parse the source LaTeX file. Use Regular Expressions to extract core text blocks. Merge the new template's `preamble`, the extracted `body`, and the `backmatter`. Write this to a new file in an output directory.\n\n### Step 3: Systematic Fixing\nPerform generic fixes on the extracted body text before writing the final file, or in subsequent calls:\n- Convert math environment cases (e.g., `\\begin{theorem}` to `\\begin{Theorem}`).\n- Adjust aggressive float placements (e.g., `[!t]` or `[h!]`) to template-supported options. Avoid forcing `[H]` unless the `float` package is explicitly loaded.\n- Ensure `\\includegraphics` paths are relative to the new `.tex` file location.\n- Convert `\\begin{tabular}` to `\\begin{tabularx}{\\textwidth}` or use `\\resizebox` if moving to a double-column layout.\n\n### Step 4: Compilation & Debugging\nRun a build cycle (`pdflatex` -> `bibtex` -> `pdflatex`). Check the `.log` file using `grep` or `rg` to systematically fix any packages conflicts, undefined commands, or compilation halts.\n\n## Examples\n\n### Example 1: Converting IPOL to MDPI\n\\```\nUSER: \"I need to convert my paper 'SAHQR_Paper.tex' to the MDPI format located in the 'MDPI_template_ACS' folder.\"\nAGENT: *Triggers latex-paper-conversion skill*\n1. Analyzes source `.tex` and target `template.tex`.\n2. Creates Python script to extract Introduction through Conclusion.\n3. Injects content into MDPI template.\n4. Updates image paths and table float parameters `[h!]` to `[H]`.\n5. Compiles via pdflatex and bibtex to confirm zero errors.\n\\```\n\n## Best Practices\n\n- ✅ Always write a Python extraction script; DO NOT manually copy-paste thousands of lines of LaTeX.\n- ✅ Always run `pdflatex` and verify the `.log` to ensure the final output compiles.\n- ✅ Explicitly ask the user for the structural mapping if the source and target differ drastically (e.g., merging abstract and keywords).\n- ❌ Don't assume all math packages automatically exist in the new template (e.g., add `\\usepackage{amsmath}` if missing).\n\n## Common Pitfalls\n\n- **Problem:** Overfull hboxes in tables when moving from single to double column.\n  **Solution:** Detect `\\begin{tabular}` and automatically wrap in `\\resizebox{\\columnwidth}{!}{...}` or suggest a format change.\n- **Problem:** Undefined control sequence errors during compilation.\n  **Solution:** Search the `Paper.log` and include the missing `\\usepackage{}` in the converted template.\n\n## Additional Resources\n\n- [Overleaf LaTeX Documentation](https://www.overleaf.com/learn)\n",
+  "tags": [
+    "python",
+    "pdf",
+    "agent",
+    "workflow",
+    "template",
+    "document",
+    "image"
+  ],
+  "useCases": [
+    "Use when the user requests to port an existing LaTeX paper to a new journal's format.",
+    "Use when the user provides an existing `.tex` file and a new template directory.",
+    "Use when the user mentions converting from format A (e.g., IPOL/Neural Processing) to format B (e.g., MDPI)."
+  ],
+  "scrapedAt": "2026-03-15T07:13:12.977Z"
+}

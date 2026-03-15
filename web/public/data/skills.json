@@ -1246,6 +1246,32 @@
       "scrapedAt": "2026-02-26T07:08:49.736Z"
     },
     {
+      "id": "antigravity-analyze-project",
+      "name": "analyze-project",
+      "slug": "analyze-project",
+      "description": "Forensic root cause analyzer for Antigravity sessions. Classifies scope deltas, rework patterns, root causes, hotspots, and auto-improves prompts/health.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/analyze-project",
+      "content": "\n# /analyze-project — Root Cause Analyst Workflow\n\nAnalyze AI-assisted coding sessions in `brain/` and produce a diagnostic report that explains not just **what happened**, but **why it happened**, **who/what caused it**, and **what should change next time**.\n\nThis workflow is not a simple metrics dashboard.\nIt is a forensic analysis workflow for AI coding sessions.\n\n---\n\n## Primary Objective\n\nFor each session, determine:\n\n1. What changed from the initial ask to the final executed work\n2. Whether the change was caused primarily by:\n   - the user/spec\n   - the agent\n   - the codebase/repo\n   - testing/verification\n   - legitimate task complexity\n3. Whether the original prompt was sufficient for the actual job\n4. Which subsystems or files repeatedly correlate with struggle\n5. What concrete changes would most improve future sessions\n\n---\n\n## Core Principles\n\n- Treat `.resolved.N` counts as **signals of iteration intensity**, not proof of failure\n- Do not label struggle based on counts alone; classify the **shape** of rework\n- Separate **human-added scope** from **necessary discovered scope**\n- Separate **agent error** from **repo friction**\n- Every diagnosis must include **evidence**\n- Every recommendation must map to a specific observed pattern\n- Use confidence levels:\n  - **High** = directly supported by artifact contents or timestamps\n  - **Medium** = supported by multiple indirect signals\n  - **Low** = plausible inference, not directly proven\n\n---\n\n## Step 1: Discovery — Find Relevant Conversations\n\n1. Read the conversation summaries available in the system context.\n2. List all subdirectories in:\n   `~/.gemini/antigravity/brain/\n3. Build a **Conversation Index** by cross-referencing summaries with UUID folders.\n4. Record for each conversation:\n   - `conversation_id`\n   - `title`\n   - `objective`\n   - `created`\n   - `last_modified`\n5. If the user supplied a keyword/path, filter on that. Otherwise analyze all workspace conversations.\n\n> Output: indexed list of conversations to analyze.\n\n---\n\n## Step 2: Artifact Extraction — Build Session Evidence\n\nFor each conversation, read all structured artifacts that exist.\n\n### 2a. Core Artifacts\n- `task.md`\n- `implementation_plan.md`\n- `walkthrough.md`\n\n### 2b. Metadata\n- `*.metadata.json`\n\n### 2c. Version Snapshots\n- `task.md.resolved.0 ... N`\n- `implementation_plan.md.resolved.0 ... N`\n- `walkthrough.md.resolved.0 ... N`\n\n### 2d. Additional Signals\n- other `.md` artifacts\n- report/evaluation files\n- timestamps across artifact updates\n- file/folder names mentioned in plans and walkthroughs\n- repeated subsystem references\n- explicit testing/validation language\n- explicit non-goals or constraints, if present\n\n### 2e. Record Per Conversation\n\n#### Presence / Lifecycle\n- `has_task`\n- `has_plan`\n- `has_walkthrough`\n- `is_completed`\n- `is_abandoned_candidate` = has task but no walkthrough\n\n#### Revision / Change Volume\n- `task_versions`\n- `plan_versions`\n- `walkthrough_versions`\n- `extra_artifacts`\n\n#### Scope\n- `task_items_initial`\n- `task_items_final`\n- `task_completed_pct`\n- `scope_delta_raw`\n- `scope_creep_pct_raw`\n\n#### Timing\n- `created_at`\n- `completed_at`\n- `duration_minutes`\n\n#### Content / Quality Signals\n- `objective_text`\n- `initial_plan_summary`\n- `final_plan_summary`\n- `initial_task_excerpt`\n- `final_task_excerpt`\n- `walkthrough_summary`\n- `mentioned_files_or_subsystems`\n- `validation_requirements_present`\n- `acceptance_criteria_present`\n- `non_goals_present`\n- `scope_boundaries_present`\n- `file_targets_present`\n- `constraints_present`\n\n---\n\n## Step 3: Prompt Sufficiency Analysis\n\nFor each conversation, score the opening objective/request on a 0–2 scale for each dimension:\n\n- **Clarity** — is the ask understandable?\n- **Boundedness** — are scope limits defined?\n- **Testability** — are success conditions or acceptance criteria defined?\n- **Architectural specificity** — are files/modules/systems identified?\n- **Constraint awareness** — are non-goals, constraints, or environment details included?\n- **Dependency awareness** — does the prompt acknowledge affected systems or hidden coupling?\n\nCreate:\n- `prompt_sufficiency_score`\n- `prompt_sufficiency_band` = High / Medium / Low\n\nThen note which missing ingredients likely contributed to later friction.\n\nImportant:\nDo not assume a low-detail prompt is bad by default.\nShort prompts can still be good if the task is narrow and the repo context is obvious.\n\n---\n\n## Step 4: Scope Change Classification\n\nDo not treat all scope growth as the same.\n\nFor each conversation, classify scope delta into:\n\n### 4a. Human-Added Scope\nNew items clearly introduced beyond the initial ask.\nExamples:\n- optional enhancements\n- follow-on refactors\n- “while we are here” additions\n- cosmetic or adjacent work added later\n\n### 4b. Necessary Discovered Scope\nWork that was not in the opening ask but appears required to complete it correctly.\nExamples:\n- dependency fixes\n- required validation work\n- hidden integration tasks\n- migration fallout\n- cou",
+      "tags": [
+        "ai",
+        "agent",
+        "workflow",
+        "template",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "session analysis metrics",
+        "recurring fragile files/subsystems",
+        "recurring failure modes",
+        "last updated timestamp"
+      ],
+      "scrapedAt": "2026-03-15T07:07:36.516Z"
+    },
+    {
       "id": "antigravity-andrej-karpathy",
       "name": "andrej-karpathy",
       "slug": "andrej-karpathy",
@@ -2760,28 +2786,6 @@
       "scrapedAt": "2026-03-07T06:52:27.540Z"
     },
     {
-      "id": "antigravity-security-aws-compliance-checker",
-      "name": "aws-compliance-checker",
-      "slug": "security-aws-compliance-checker",
-      "description": "Automated compliance checking against CIS, PCI-DSS, HIPAA, and SOC 2 benchmarks",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/security/aws-compliance-checker",
-      "content": "\n# AWS Compliance Checker\n\nAutomated compliance validation against industry standards including CIS AWS Foundations, PCI-DSS, HIPAA, and SOC 2.\n\n## When to Use\n\nUse this skill when you need to validate AWS compliance against industry standards, prepare for audits, or maintain continuous compliance monitoring.\n\n## Supported Frameworks\n\n**CIS AWS Foundations Benchmark**\n- Identity and Access Management\n- Logging and Monitoring\n- Networking\n- Data Protection\n\n**PCI-DSS (Payment Card Industry)**\n- Network security\n- Access controls\n- Encryption\n- Monitoring and logging\n\n**HIPAA (Healthcare)**\n- Access controls\n- Audit controls\n- Data encryption\n- Transmission security\n\n**SOC 2**\n- Security\n- Availability\n- Confidentiality\n- Privacy\n\n## CIS AWS Foundations Checks\n\n### Identity & Access Management (1.x)\n\n```bash\n#!/bin/bash\n# cis-iam-checks.sh\n\necho \"=== CIS IAM Compliance Checks ===\"\n\n# 1.1: Root account usage\necho \"1.1: Checking root account usage...\"\nroot_usage=$(aws iam get-credential-report --output text | \\\n  awk -F, 'NR==2 {print $5,$11}')\necho \"  Root password last used: $root_usage\"\n\n# 1.2: MFA on root account\necho \"1.2: Checking root MFA...\"\nroot_mfa=$(aws iam get-account-summary \\\n  --query 'SummaryMap.AccountMFAEnabled' --output text)\necho \"  Root MFA enabled: $root_mfa\"\n\n# 1.3: Unused credentials\necho \"1.3: Checking for unused credentials (>90 days)...\"\naws iam get-credential-report --output text | \\\n  awk -F, 'NR>1 {\n    if ($5 != \"N/A\" && $5 != \"no_information\") {\n      cmd = \"date -d \\\"\" $5 \"\\\" +%s\"\n      cmd | getline last_used\n      close(cmd)\n      now = systime()\n      days = (now - last_used) / 86400\n      if (days > 90) print \"  ⚠️  \" $1 \": \" int(days) \" days inactive\"\n    }\n  }'\n\n# 1.4: Access keys rotated\necho \"1.4: Checking access key age...\"\naws iam list-users --query 'Users[*].UserName' --output text | \\\nwhile read user; do\n  aws iam list-access-keys --user-name \"$user\" \\\n    --query 'AccessKeyMetadata[*].[AccessKeyId,CreateDate]' \\\n    --output text | \\\n  while read key_id create_date; do\n    age_days=$(( ($(date +%s) - $(date -d \"$create_date\" +%s)) / 86400 ))\n    if [ $age_days -gt 90 ]; then\n      echo \"  ⚠️  $user: Key $key_id is $age_days days old\"\n    fi\n  done\ndone\n\n# 1.5-1.11: Password policy\necho \"1.5-1.11: Checking password policy...\"\npolicy=$(aws iam get-account-password-policy 2>&1)\nif echo \"$policy\" | grep -q \"NoSuchEntity\"; then\n  echo \"  ❌ No password policy configured\"\nelse\n  echo \"  ✓ Password policy exists\"\n  echo \"$policy\" | jq '.PasswordPolicy | {\n    MinimumPasswordLength,\n    RequireSymbols,\n    RequireNumbers,\n    RequireUppercaseCharacters,\n    RequireLowercaseCharacters,\n    MaxPasswordAge,\n    PasswordReusePrevention\n  }'\nfi\n\n# 1.12-1.14: MFA for IAM users\necho \"1.12-1.14: Checking IAM user MFA...\"\naws iam get-credential-report --output text | \\\n  awk -F, 'NR>1 && $4==\"false\" {print \"  ⚠️  \" $1 \": No MFA\"}'\n```\n\n### Logging (2.x)\n\n```bash\n#!/bin/bash\n# cis-logging-checks.sh\n\necho \"=== CIS Logging Compliance Checks ===\"\n\n# 2.1: CloudTrail enabled\necho \"2.1: Checking CloudTrail...\"\ntrails=$(aws cloudtrail describe-trails \\\n  --query 'trailList[*].[Name,IsMultiRegionTrail,LogFileValidationEnabled]' \\\n  --output text)\n\nif [ -z \"$trails\" ]; then\n  echo \"  ❌ No CloudTrail configured\"\nelse\n  echo \"$trails\" | while read name multi_region validation; do\n    echo \"  Trail: $name\"\n    echo \"    Multi-region: $multi_region\"\n    echo \"    Log validation: $validation\"\n    \n    # Check if logging\n    status=$(aws cloudtrail get-trail-status --name \"$name\" \\\n      --query 'IsLogging' --output text)\n    echo \"    Is logging: $status\"\n  done\nfi\n\n# 2.2: CloudTrail log file validation\necho \"2.2: Checking log file validation...\"\naws cloudtrail describe-trails \\\n  --query 'trailList[?LogFileValidationEnabled==`false`].Name' \\\n  --output text | \\\nwhile read trail; do\n  echo \"  ⚠️  $trail: Log validation disabled\"\ndone\n\n# 2.3: S3 bucket for CloudTrail\necho \"2.3: Checking CloudTrail S3 bucket access...\"\naws cloudtrail describe-trails \\\n  --query 'trailList[*].S3BucketName' --output text | \\\nwhile read bucket; do\n  public=$(aws s3api get-bucket-acl --bucket \"$bucket\" 2>&1 | \\\n    grep -c \"AllUsers\")\n  if [ \"$public\" -gt 0 ]; then\n    echo \"  ❌ $bucket: Publicly accessible\"\n  else\n    echo \"  ✓ $bucket: Not public\"\n  fi\ndone\n\n# 2.4: CloudTrail integrated with CloudWatch Logs\necho \"2.4: Checking CloudWatch Logs integration...\"\naws cloudtrail describe-trails \\\n  --query 'trailList[*].[Name,CloudWatchLogsLogGroupArn]' \\\n  --output text | \\\nwhile read name log_group; do\n  if [ \"$log_group\" = \"None\" ]; then\n    echo \"  ⚠️  $name: Not integrated with CloudWatch Logs\"\n  else\n    echo \"  ✓ $name: Integrated with CloudWatch\"\n  fi\ndone\n\n# 2.5: AWS Config enabled\necho \"2.5: Checking AWS Config...\"\nrecorders=$(aws configservice describe-configuration-recorders \\\n  --query 'ConfigurationRecorders[*].name' --output text)\n\nif [ -z \"$recorders\" ]; then\n  echo \"  ❌ AWS Config not enabled\"\nelse\n  echo \" ",
-      "tags": [
-        "python",
-        "api",
-        "ai",
-        "document",
-        "security",
-        "aws",
-        "rag"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:15:59.654Z"
-    },
-    {
       "id": "antigravity-aws-cost-cleanup",
       "name": "aws-cost-cleanup",
       "slug": "aws-cost-cleanup",
@@ -2827,29 +2831,6 @@
       "scrapedAt": "2026-02-23T07:14:22.766Z"
     },
     {
-      "id": "antigravity-security-aws-iam-best-practices",
-      "name": "aws-iam-best-practices",
-      "slug": "security-aws-iam-best-practices",
-      "description": "IAM policy review, hardening, and least privilege implementation",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/security/aws-iam-best-practices",
-      "content": "\n# AWS IAM Best Practices\n\nReview and harden IAM policies following AWS security best practices and least privilege principles.\n\n## When to Use\n\nUse this skill when you need to review IAM policies, implement least privilege access, or harden IAM security.\n\n## Core Principles\n\n**Least Privilege**\n- Grant minimum permissions needed\n- Use managed policies when possible\n- Avoid wildcard (*) permissions\n- Regular access reviews\n\n**Defense in Depth**\n- Enable MFA for all users\n- Use IAM roles instead of access keys\n- Implement service control policies (SCPs)\n- Enable CloudTrail for audit\n\n**Separation of Duties**\n- Separate admin and user roles\n- Use different roles for different environments\n- Implement approval workflows\n- Regular permission audits\n\n## IAM Security Checks\n\n### Find Overly Permissive Policies\n\n```bash\n# List policies with full admin access\naws iam list-policies --scope Local \\\n  --query 'Policies[*].[PolicyName,Arn]' --output table | \\\n  grep -i admin\n\n# Find policies with wildcard actions\naws iam list-policies --scope Local --query 'Policies[*].Arn' --output text | \\\nwhile read arn; do\n  version=$(aws iam get-policy --policy-arn \"$arn\" \\\n    --query 'Policy.DefaultVersionId' --output text)\n  doc=$(aws iam get-policy-version --policy-arn \"$arn\" \\\n    --version-id \"$version\" --query 'PolicyVersion.Document')\n  if echo \"$doc\" | grep -q '\"Action\": \"\\*\"'; then\n    echo \"Wildcard action in: $arn\"\n  fi\ndone\n\n# Find inline policies (should use managed policies)\naws iam list-users --query 'Users[*].UserName' --output text | \\\nwhile read user; do\n  policies=$(aws iam list-user-policies --user-name \"$user\" \\\n    --query 'PolicyNames' --output text)\n  if [ -n \"$policies\" ]; then\n    echo \"Inline policies on user $user: $policies\"\n  fi\ndone\n```\n\n### MFA Enforcement\n\n```bash\n# List users without MFA\naws iam get-credential-report --output text | \\\n  awk -F, 'NR>1 && $4==\"false\" {print $1}'\n\n# Check if MFA is required in policies\naws iam list-policies --scope Local --query 'Policies[*].Arn' --output text | \\\nwhile read arn; do\n  version=$(aws iam get-policy --policy-arn \"$arn\" \\\n    --query 'Policy.DefaultVersionId' --output text)\n  doc=$(aws iam get-policy-version --policy-arn \"$arn\" \\\n    --version-id \"$version\" --query 'PolicyVersion.Document')\n  if echo \"$doc\" | grep -q \"aws:MultiFactorAuthPresent\"; then\n    echo \"MFA enforced in: $arn\"\n  fi\ndone\n\n# Enable MFA for a user (returns QR code)\naws iam create-virtual-mfa-device \\\n  --virtual-mfa-device-name user-mfa \\\n  --outfile /tmp/qr.png \\\n  --bootstrap-method QRCodePNG\n```\n\n### Access Key Management\n\n```bash\n# Find old access keys (>90 days)\naws iam list-users --query 'Users[*].UserName' --output text | \\\nwhile read user; do\n  aws iam list-access-keys --user-name \"$user\" \\\n    --query 'AccessKeyMetadata[*].[AccessKeyId,CreateDate,Status]' \\\n    --output text | \\\n  while read key_id create_date status; do\n    age_days=$(( ($(date +%s) - $(date -d \"$create_date\" +%s)) / 86400 ))\n    if [ $age_days -gt 90 ]; then\n      echo \"$user: Key $key_id is $age_days days old\"\n    fi\n  done\ndone\n\n# Rotate access key\nOLD_KEY=\"AKIAIOSFODNN7EXAMPLE\"\nUSER=\"myuser\"\n\n# Create new key\nNEW_KEY=$(aws iam create-access-key --user-name \"$USER\")\necho \"New key created. Update applications, then run:\"\necho \"aws iam delete-access-key --user-name $USER --access-key-id $OLD_KEY\"\n\n# Deactivate old key (test first)\naws iam update-access-key \\\n  --user-name \"$USER\" \\\n  --access-key-id \"$OLD_KEY\" \\\n  --status Inactive\n```\n\n### Role and Policy Analysis\n\n```bash\n# List unused roles (no activity in 90 days)\naws iam list-roles --query 'Roles[*].[RoleName,RoleLastUsed.LastUsedDate]' \\\n  --output text | \\\nwhile read role last_used; do\n  if [ \"$last_used\" = \"None\" ]; then\n    echo \"Never used: $role\"\n  fi\ndone\n\n# Find roles with trust relationships to external accounts\naws iam list-roles --query 'Roles[*].RoleName' --output text | \\\nwhile read role; do\n  trust=$(aws iam get-role --role-name \"$role\" \\\n    --query 'Role.AssumeRolePolicyDocument')\n  if echo \"$trust\" | grep -q '\"AWS\":'; then\n    echo \"External trust: $role\"\n  fi\ndone\n\n# Analyze policy permissions\naws iam simulate-principal-policy \\\n  --policy-source-arn arn:aws:iam::123456789012:user/myuser \\\n  --action-names s3:GetObject s3:PutObject \\\n  --resource-arns arn:aws:s3:::mybucket/*\n```\n\n## IAM Policy Templates\n\n### Least Privilege S3 Access\n\n```json\n{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Action\": [\n        \"s3:GetObject\",\n        \"s3:PutObject\"\n      ],\n      \"Resource\": \"arn:aws:s3:::my-bucket/user-data/${aws:username}/*\"\n    },\n    {\n      \"Effect\": \"Allow\",\n      \"Action\": \"s3:ListBucket\",\n      \"Resource\": \"arn:aws:s3:::my-bucket\",\n      \"Condition\": {\n        \"StringLike\": {\n          \"s3:prefix\": \"user-data/${aws:username}/*\"\n        }\n      }\n    }\n  ]\n}\n```\n\n### MFA-Required Policy\n\n```json\n{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Deny\",\n      \"Action\": \"*\",\n ",
-      "tags": [
-        "python",
-        "ai",
-        "workflow",
-        "template",
-        "document",
-        "security",
-        "aws",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:15:59.957Z"
-    },
-    {
       "id": "antigravity-aws-penetration-testing",
       "name": "aws-penetration-testing",
       "slug": "aws-penetration-testing",
@@ -2873,53 +2854,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-26T13:16:52.251Z"
-    },
-    {
-      "id": "antigravity-security-aws-secrets-rotation",
-      "name": "aws-secrets-rotation",
-      "slug": "security-aws-secrets-rotation",
-      "description": "Automate AWS secrets rotation for RDS, API keys, and credentials",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/security/aws-secrets-rotation",
-      "content": "\n# AWS Secrets Rotation\n\nAutomate rotation of secrets, credentials, and API keys using AWS Secrets Manager and Lambda.\n\n## When to Use\n\nUse this skill when you need to implement automated secrets rotation, manage credentials securely, or comply with security policies requiring regular key rotation.\n\n## Supported Secret Types\n\n**AWS Services**\n- RDS database credentials\n- DocumentDB credentials\n- Redshift credentials\n- ElastiCache credentials\n\n**Third-Party Services**\n- API keys\n- OAuth tokens\n- SSH keys\n- Custom credentials\n\n## Secrets Manager Setup\n\n### Create a Secret\n\n```bash\n# Create RDS secret\naws secretsmanager create-secret \\\n  --name prod/db/mysql \\\n  --description \"Production MySQL credentials\" \\\n  --secret-string '{\n    \"username\": \"admin\",\n    \"password\": \"CHANGE_ME\",\n    \"engine\": \"mysql\",\n    \"host\": \"mydb.cluster-abc.us-east-1.rds.amazonaws.com\",\n    \"port\": 3306,\n    \"dbname\": \"myapp\"\n  }'\n\n# Create API key secret\naws secretsmanager create-secret \\\n  --name prod/api/stripe \\\n  --secret-string '{\n    \"api_key\": \"sk_live_xxxxx\",\n    \"webhook_secret\": \"whsec_xxxxx\"\n  }'\n\n# Create secret from file\naws secretsmanager create-secret \\\n  --name prod/ssh/private-key \\\n  --secret-binary fileb://~/.ssh/id_rsa\n```\n\n### Retrieve Secrets\n\n```bash\n# Get secret value\naws secretsmanager get-secret-value \\\n  --secret-id prod/db/mysql \\\n  --query 'SecretString' --output text\n\n# Get specific field\naws secretsmanager get-secret-value \\\n  --secret-id prod/db/mysql \\\n  --query 'SecretString' --output text | \\\n  jq -r '.password'\n\n# Get binary secret\naws secretsmanager get-secret-value \\\n  --secret-id prod/ssh/private-key \\\n  --query 'SecretBinary' --output text | \\\n  base64 -d > private-key.pem\n```\n\n## Automatic Rotation Setup\n\n### Enable RDS Rotation\n\n```bash\n# Enable automatic rotation (30 days)\naws secretsmanager rotate-secret \\\n  --secret-id prod/db/mysql \\\n  --rotation-lambda-arn arn:aws:lambda:us-east-1:123456789012:function:SecretsManagerRDSMySQLRotation \\\n  --rotation-rules AutomaticallyAfterDays=30\n\n# Rotate immediately\naws secretsmanager rotate-secret \\\n  --secret-id prod/db/mysql\n\n# Check rotation status\naws secretsmanager describe-secret \\\n  --secret-id prod/db/mysql \\\n  --query 'RotationEnabled'\n```\n\n### Lambda Rotation Function\n\n```python\n# lambda_rotation.py\nimport boto3\nimport json\nimport os\n\nsecrets_client = boto3.client('secretsmanager')\nrds_client = boto3.client('rds')\n\ndef lambda_handler(event, context):\n    \"\"\"Rotate RDS MySQL password\"\"\"\n    \n    secret_arn = event['SecretId']\n    token = event['ClientRequestToken']\n    step = event['Step']\n    \n    # Get current secret\n    current = secrets_client.get_secret_value(SecretId=secret_arn)\n    secret = json.loads(current['SecretString'])\n    \n    if step == \"createSecret\":\n        # Generate new password\n        new_password = generate_password()\n        secret['password'] = new_password\n        \n        # Store as pending\n        secrets_client.put_secret_value(\n            SecretId=secret_arn,\n            ClientRequestToken=token,\n            SecretString=json.dumps(secret),\n            VersionStages=['AWSPENDING']\n        )\n    \n    elif step == \"setSecret\":\n        # Update RDS password\n        rds_client.modify_db_instance(\n            DBInstanceIdentifier=secret['dbInstanceIdentifier'],\n            MasterUserPassword=secret['password'],\n            ApplyImmediately=True\n        )\n    \n    elif step == \"testSecret\":\n        # Test new credentials\n        import pymysql\n        conn = pymysql.connect(\n            host=secret['host'],\n            user=secret['username'],\n            password=secret['password'],\n            database=secret['dbname']\n        )\n        conn.close()\n    \n    elif step == \"finishSecret\":\n        # Mark as current\n        secrets_client.update_secret_version_stage(\n            SecretId=secret_arn,\n            VersionStage='AWSCURRENT',\n            MoveToVersionId=token,\n            RemoveFromVersionId=current['VersionId']\n        )\n    \n    return {'statusCode': 200}\n\ndef generate_password(length=32):\n    import secrets\n    import string\n    alphabet = string.ascii_letters + string.digits + \"!@#$%^&*()\"\n    return ''.join(secrets.choice(alphabet) for _ in range(length))\n```\n\n### Custom Rotation for API Keys\n\n```python\n# api_key_rotation.py\nimport boto3\nimport requests\nimport json\n\nsecrets_client = boto3.client('secretsmanager')\n\ndef rotate_stripe_key(secret_arn, token, step):\n    \"\"\"Rotate Stripe API key\"\"\"\n    \n    current = secrets_client.get_secret_value(SecretId=secret_arn)\n    secret = json.loads(current['SecretString'])\n    \n    if step == \"createSecret\":\n        # Create new Stripe key via API\n        response = requests.post(\n            'https://api.stripe.com/v1/api_keys',\n            auth=(secret['api_key'], ''),\n            data={'name': f'rotated-{token[:8]}'}\n        )\n        new_key = response.json()['secret']\n        \n        secret['api_key'] = new_key\n        secrets_client.put_secret_value(\n      ",
-      "tags": [
-        "python",
-        "javascript",
-        "node",
-        "api",
-        "ai",
-        "automation",
-        "template",
-        "document",
-        "security",
-        "stripe"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:16:00.222Z"
-    },
-    {
-      "id": "antigravity-security-aws-security-audit",
-      "name": "aws-security-audit",
-      "slug": "security-aws-security-audit",
-      "description": "Comprehensive AWS security posture assessment using AWS CLI and security best practices",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/security/aws-security-audit",
-      "content": "\n# AWS Security Audit\n\nPerform comprehensive security assessments of AWS environments to identify vulnerabilities and misconfigurations.\n\n## When to Use\n\nUse this skill when you need to audit AWS security posture, identify vulnerabilities, or prepare for compliance assessments.\n\n## Audit Categories\n\n**Identity & Access Management**\n- Overly permissive IAM policies\n- Unused IAM users and roles\n- MFA enforcement gaps\n- Root account usage\n- Access key rotation\n\n**Network Security**\n- Open security groups (0.0.0.0/0)\n- Public S3 buckets\n- Unencrypted data in transit\n- VPC flow logs disabled\n- Network ACL misconfigurations\n\n**Data Protection**\n- Unencrypted EBS volumes\n- Unencrypted RDS instances\n- S3 bucket encryption disabled\n- Backup policies missing\n- KMS key rotation disabled\n\n**Logging & Monitoring**\n- CloudTrail disabled\n- CloudWatch alarms missing\n- VPC Flow Logs disabled\n- S3 access logging disabled\n- Config recording disabled\n\n## Security Audit Commands\n\n### IAM Security Checks\n\n```bash\n# List users without MFA\naws iam get-credential-report --output text | \\\n  awk -F, '$4==\"false\" && $1!=\"<root_account>\" {print $1}'\n\n# Find unused IAM users (no activity in 90 days)\naws iam list-users --query 'Users[*].[UserName]' --output text | \\\nwhile read user; do\n  last_used=$(aws iam get-user --user-name \"$user\" \\\n    --query 'User.PasswordLastUsed' --output text)\n  echo \"$user: $last_used\"\ndone\n\n# List overly permissive policies (AdministratorAccess)\naws iam list-policies --scope Local \\\n  --query 'Policies[?PolicyName==`AdministratorAccess`]'\n\n# Find access keys older than 90 days\naws iam list-users --query 'Users[*].UserName' --output text | \\\nwhile read user; do\n  aws iam list-access-keys --user-name \"$user\" \\\n    --query 'AccessKeyMetadata[*].[AccessKeyId,CreateDate]' \\\n    --output text\ndone\n\n# Check root account access keys\naws iam get-account-summary \\\n  --query 'SummaryMap.AccountAccessKeysPresent'\n```\n\n### Network Security Checks\n\n```bash\n# Find security groups open to the world\naws ec2 describe-security-groups \\\n  --query 'SecurityGroups[?IpPermissions[?IpRanges[?CidrIp==`0.0.0.0/0`]]].[GroupId,GroupName]' \\\n  --output table\n\n# List public S3 buckets\naws s3api list-buckets --query 'Buckets[*].Name' --output text | \\\nwhile read bucket; do\n  acl=$(aws s3api get-bucket-acl --bucket \"$bucket\" 2>/dev/null)\n  if echo \"$acl\" | grep -q \"AllUsers\"; then\n    echo \"PUBLIC: $bucket\"\n  fi\ndone\n\n# Check VPC Flow Logs status\naws ec2 describe-vpcs --query 'Vpcs[*].VpcId' --output text | \\\nwhile read vpc; do\n  flow_logs=$(aws ec2 describe-flow-logs \\\n    --filter \"Name=resource-id,Values=$vpc\" \\\n    --query 'FlowLogs[*].FlowLogId' --output text)\n  if [ -z \"$flow_logs\" ]; then\n    echo \"No flow logs: $vpc\"\n  fi\ndone\n\n# Find RDS instances without encryption\naws rds describe-db-instances \\\n  --query 'DBInstances[?StorageEncrypted==`false`].[DBInstanceIdentifier]' \\\n  --output table\n```\n\n### Data Protection Checks\n\n```bash\n# Find unencrypted EBS volumes\naws ec2 describe-volumes \\\n  --query 'Volumes[?Encrypted==`false`].[VolumeId,Size,State]' \\\n  --output table\n\n# Check S3 bucket encryption\naws s3api list-buckets --query 'Buckets[*].Name' --output text | \\\nwhile read bucket; do\n  encryption=$(aws s3api get-bucket-encryption \\\n    --bucket \"$bucket\" 2>&1)\n  if echo \"$encryption\" | grep -q \"ServerSideEncryptionConfigurationNotFoundError\"; then\n    echo \"No encryption: $bucket\"\n  fi\ndone\n\n# Find RDS snapshots that are public\naws rds describe-db-snapshots \\\n  --query 'DBSnapshots[*].[DBSnapshotIdentifier]' --output text | \\\nwhile read snapshot; do\n  attrs=$(aws rds describe-db-snapshot-attributes \\\n    --db-snapshot-identifier \"$snapshot\" \\\n    --query 'DBSnapshotAttributesResult.DBSnapshotAttributes[?AttributeName==`restore`].AttributeValues' \\\n    --output text)\n  if echo \"$attrs\" | grep -q \"all\"; then\n    echo \"PUBLIC SNAPSHOT: $snapshot\"\n  fi\ndone\n\n# Check KMS key rotation\naws kms list-keys --query 'Keys[*].KeyId' --output text | \\\nwhile read key; do\n  rotation=$(aws kms get-key-rotation-status --key-id \"$key\" \\\n    --query 'KeyRotationEnabled' --output text 2>/dev/null)\n  if [ \"$rotation\" = \"False\" ]; then\n    echo \"Rotation disabled: $key\"\n  fi\ndone\n```\n\n### Logging & Monitoring Checks\n\n```bash\n# Check CloudTrail status\naws cloudtrail describe-trails \\\n  --query 'trailList[*].[Name,IsMultiRegionTrail,LogFileValidationEnabled]' \\\n  --output table\n\n# Verify CloudTrail is logging\naws cloudtrail get-trail-status --name my-trail \\\n  --query 'IsLogging'\n\n# Check if AWS Config is enabled\naws configservice describe-configuration-recorders \\\n  --query 'ConfigurationRecorders[*].[name,roleARN]' \\\n  --output table\n\n# List S3 buckets without access logging\naws s3api list-buckets --query 'Buckets[*].Name' --output text | \\\nwhile read bucket; do\n  logging=$(aws s3api get-bucket-logging --bucket \"$bucket\" 2>&1)\n  if ! echo \"$logging\" | grep -q \"LoggingEnabled\"; then\n    echo \"No access logging: $bucket\"\n  fi\ndone\n```\n\n## Automated Securi",
-      "tags": [
-        "python",
-        "api",
-        "ai",
-        "document",
-        "security",
-        "aws",
-        "rag"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:16:00.495Z"
     },
     {
       "id": "antigravity-aws-serverless",
@@ -16953,6 +16887,36 @@
       "scrapedAt": "2026-03-08T06:56:47.642Z"
     },
     {
+      "id": "antigravity-k6-load-testing",
+      "name": "k6-load-testing",
+      "slug": "k6-load-testing",
+      "description": "Comprehensive k6 load testing skill for API, browser, and scalability testing. Write realistic load scenarios, analyze results, and integrate with CI/CD.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/k6-load-testing",
+      "content": "\n# k6 Load Testing\n\n## Overview\n\nk6 is a modern, developer-centric load testing tool that helps you write and execute performance tests for HTTP APIs, WebSocket endpoints, and browser scenarios. This skill provides comprehensive guidance on writing realistic load tests, configuring test scenarios (smoke, load, stress, spike, soak), analyzing results, and integrating with CI/CD pipelines.\n\nUse this skill when you need to validate system performance, identify bottlenecks, ensure SLA compliance, or catch performance regressions before deployment.\n\n---\n\n## When to Use This Skill\n\n- Use when you need to load test HTTP APIs, WebSocket endpoints, or browser scenarios\n- Use when setting up performance regression tests in CI/CD\n- Use when analyzing system behavior under various load conditions\n- Use when comparing performance between code changes\n- Use when validating SLA requirements and performance budgets\n\n---\n\n## k6 Basics\n\n### Installation\n\n```bash\n# macOS\nbrew install k6\n\n# Windows\nchoco install k6\n\n# Linux\nsudo gpg -k\nsudo gpg --no-default-keyring --keyring /usr/share/keyrings/k6-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys C5AD17C747E3415A3642D57D77C6C491D6AC1D69\necho \"deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main\" | sudo tee /etc/apt/sources.list.d/k6.list\nsudo apt-get update\nsudo apt-get install k6\n```\n\n### Quick Start\n\n```javascript\n// simple-test.js\nimport http from 'k6/http';\nimport { check, sleep } from 'k6';\n\nexport const options = {\n  vus: 10,\n  duration: '30s',\n};\n\nexport default function () {\n  const res = http.get('https://httpbin.test.k6.io/get');\n  \n  check(res, {\n    'status is 200': (r) => r.status === 200,\n    'response time < 500ms': (r) => r.timings.duration < 500,\n  });\n  \n  sleep(1);\n}\n```\n\nRun with: `k6 run simple-test.js`\n\n---\n\n## Test Configuration\n\n### Common Options\n\n```javascript\nexport const options = {\n  // Virtual Users (concurrent users)\n  vus: 100,\n  \n  // Test duration\n  duration: '5m',\n  \n  // Or use stages for ramp-up/ramp-down\n  stages: [\n    { duration: '30s', target: 20 },   // Ramp up\n    { duration: '1m', target: 100 },  // Stay at 100\n    { duration: '30s', target: 0 },    // Ramp down\n  ],\n  \n  // Thresholds (SLA)\n  thresholds: {\n    http_req_duration: ['p(95)<500'],  // 95% requests < 500ms\n    http_req_failed: ['rate<0.01'],     // Error rate < 1%\n  },\n  \n  // Load zones (distributed testing)\n  ext: {\n    loadimpact: {\n      name: 'My Load Test',\n      distribution: {\n        'amazon:us:ashburn': { weight: 50 },\n        'amazon:eu: Dublin': { weight: 50 },\n      },\n    },\n  },\n};\n```\n\n### Test Types\n\n| Type | Use Case | Configuration |\n|------|----------|---------------|\n| Smoke Test | Verify basic functionality | Low VUs (1-5), short duration |\n| Load Test | Normal expected load | Target VUs based on traffic |\n| Stress Test | Find breaking point | Ramp beyond capacity |\n| Spike Test | Sudden traffic spikes | Rapid increase/decrease |\n| Soak Test | Long-term stability | Extended duration |\n\n---\n\n## HTTP Testing\n\n### Basic Requests\n\n```javascript\nimport http from 'k6/http';\nimport { check, sleep } from 'k6';\n\nexport default function () {\n  // GET request\n  const getRes = http.get('https://api.example.com/users');\n  \n  check(getRes, {\n    'GET succeeded': (r) => r.status === 200,\n    'has users': (r) => r.json('data.length') > 0,\n  });\n\n  // POST request with JSON body\n  const postRes = http.post('https://api.example.com/users', \n    JSON.stringify({ name: 'Test User', email: 'test@example.com' }),\n    {\n      headers: {\n        'Content-Type': 'application/json',\n        'Authorization': 'Bearer ' + __ENV.API_TOKEN,\n      },\n    }\n  );\n  \n  check(postRes, {\n    'POST succeeded': (r) => r.status === 201,\n    'user created': (r) => r.json('id') !== undefined,\n  });\n\n  sleep(1);\n}\n```\n\n### Request Chaining\n\n```javascript\nimport http from 'k6/http';\nimport { check } from 'k6';\n\nexport default function () {\n  // Login and extract token\n  const loginRes = http.post('https://api.example.com/login', \n    JSON.stringify({ email: 'test@example.com', password: 'password123' })\n  );\n  \n  const token = loginRes.json('access_token');\n  \n  // Use token in subsequent requests\n  const headers = {\n    'Authorization': `Bearer ${token}`,\n    'Content-Type': 'application/json',\n  };\n  \n  const profileRes = http.get('https://api.example.com/profile', {\n    headers: headers,\n  });\n  \n  check(profileRes, {\n    'profile loaded': (r) => r.status === 200,\n  });\n}\n```\n\n### Parameterized Testing\n\n```javascript\nimport http from 'k6/http';\nimport { check } from 'k6';\n\nconst usernames = ['user1', 'user2', 'user3', 'user4', 'user5'];\n\nexport default function () {\n  // Use shared array with VU-specific index\n  const username = usernames[__VU % usernames.length];\n  \n  const res = http.get(`https://api.example.com/users/${username}`);\n  \n  check(res, {\n    'user found': (r) => r.status === 200,\n  });\n}\n```\n\n---\n\n## Browser Test",
+      "tags": [
+        "javascript",
+        "api",
+        "claude",
+        "ai",
+        "workflow",
+        "document",
+        "image",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Use when you need to load test HTTP APIs, WebSocket endpoints, or browser scenarios",
+        "Use when setting up performance regression tests in CI/CD",
+        "Use when analyzing system behavior under various load conditions",
+        "Use when comparing performance between code changes",
+        "Use when validating SLA requirements and performance budgets"
+      ],
+      "scrapedAt": "2026-03-15T07:13:03.132Z"
+    },
+    {
       "id": "antigravity-k8s-manifest-generator",
       "name": "k8s-manifest-generator",
       "slug": "k8s-manifest-generator",
@@ -17369,6 +17333,32 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-27T06:46:10.606Z"
+    },
+    {
+      "id": "antigravity-latex-paper-conversion",
+      "name": "latex-paper-conversion",
+      "slug": "latex-paper-conversion",
+      "description": "This skill should be used when the user asks to convert an academic paper in LaTeX from one format (e.g., Springer, IPOL) to another format (e.g., MDPI, IEEE, Nature). It automates extraction, injection, fixing formatting, and compiling.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/latex-paper-conversion",
+      "content": "\n# LaTeX Paper Conversion\n\n## Overview\n\nThis skill automates the tedious and recurring process of converting an academic paper written in LaTeX from one publisher's template to another. Different journals (e.g., Springer, MDPI, IEEE) have vastly different structural requirements, document classes, margin settings, and bibliography styles. This skill streamlines these conversions by executing a structured multi-stage workflow, extracting content, mapping it to a new template, and resolving common compilation errors.\n\n## When to Use This Skill\n\n- Use when the user requests to port an existing LaTeX paper to a new journal's format.\n- Use when the user provides an existing `.tex` file and a new template directory.\n- Use when the user mentions converting from format A (e.g., IPOL/Neural Processing) to format B (e.g., MDPI).\n\n## How It Works\n\n### Step 1: Pre-requisites & Assessment\nIdentify the **Source LaTeX file** and asking the user for the **Target Template Directory**. Understand the core layout mapping (single-column vs. double-column, bibliography style).\n\n### Step 2: Extraction & Injection Script Generation\nCreate a Python script (e.g., `convert_format.py`) to parse the source LaTeX file. Use Regular Expressions to extract core text blocks. Merge the new template's `preamble`, the extracted `body`, and the `backmatter`. Write this to a new file in an output directory.\n\n### Step 3: Systematic Fixing\nPerform generic fixes on the extracted body text before writing the final file, or in subsequent calls:\n- Convert math environment cases (e.g., `\\begin{theorem}` to `\\begin{Theorem}`).\n- Adjust aggressive float placements (e.g., `[!t]` or `[h!]`) to template-supported options. Avoid forcing `[H]` unless the `float` package is explicitly loaded.\n- Ensure `\\includegraphics` paths are relative to the new `.tex` file location.\n- Convert `\\begin{tabular}` to `\\begin{tabularx}{\\textwidth}` or use `\\resizebox` if moving to a double-column layout.\n\n### Step 4: Compilation & Debugging\nRun a build cycle (`pdflatex` -> `bibtex` -> `pdflatex`). Check the `.log` file using `grep` or `rg` to systematically fix any packages conflicts, undefined commands, or compilation halts.\n\n## Examples\n\n### Example 1: Converting IPOL to MDPI\n\\```\nUSER: \"I need to convert my paper 'SAHQR_Paper.tex' to the MDPI format located in the 'MDPI_template_ACS' folder.\"\nAGENT: *Triggers latex-paper-conversion skill*\n1. Analyzes source `.tex` and target `template.tex`.\n2. Creates Python script to extract Introduction through Conclusion.\n3. Injects content into MDPI template.\n4. Updates image paths and table float parameters `[h!]` to `[H]`.\n5. Compiles via pdflatex and bibtex to confirm zero errors.\n\\```\n\n## Best Practices\n\n- ✅ Always write a Python extraction script; DO NOT manually copy-paste thousands of lines of LaTeX.\n- ✅ Always run `pdflatex` and verify the `.log` to ensure the final output compiles.\n- ✅ Explicitly ask the user for the structural mapping if the source and target differ drastically (e.g., merging abstract and keywords).\n- ❌ Don't assume all math packages automatically exist in the new template (e.g., add `\\usepackage{amsmath}` if missing).\n\n## Common Pitfalls\n\n- **Problem:** Overfull hboxes in tables when moving from single to double column.\n  **Solution:** Detect `\\begin{tabular}` and automatically wrap in `\\resizebox{\\columnwidth}{!}{...}` or suggest a format change.\n- **Problem:** Undefined control sequence errors during compilation.\n  **Solution:** Search the `Paper.log` and include the missing `\\usepackage{}` in the converted template.\n\n## Additional Resources\n\n- [Overleaf LaTeX Documentation](https://www.overleaf.com/learn)\n",
+      "tags": [
+        "python",
+        "pdf",
+        "agent",
+        "workflow",
+        "template",
+        "document",
+        "image"
+      ],
+      "useCases": [
+        "Use when the user requests to port an existing LaTeX paper to a new journal's format.",
+        "Use when the user provides an existing `.tex` file and a new template directory.",
+        "Use when the user mentions converting from format A (e.g., IPOL/Neural Processing) to format B (e.g., MDPI)."
+      ],
+      "scrapedAt": "2026-03-15T07:13:12.977Z"
     },
     {
       "id": "antigravity-launch-strategy",
@@ -23781,6 +23771,36 @@
       "scrapedAt": "2026-02-05T07:10:36.221Z"
     },
     {
+      "id": "antigravity-recallmax",
+      "name": "recallmax",
+      "slug": "recallmax",
+      "description": "FREE — God-tier long-context memory for AI agents. Injects 500K-1M clean tokens, auto-summarizes with tone/intent preservation, compresses 14-turn history into 800 tokens.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/recallmax",
+      "content": "\n# RecallMax — God-Tier Long-Context Memory\n\n## Overview\n\nRecallMax enhances AI agent memory capabilities dramatically. Inject 500K to 1M clean tokens of external context without hallucination drift. Auto-summarize conversations while preserving tone, sarcasm, and intent. Compress multi-turn histories into high-density token sequences.\n\nFree forever. Built by the Genesis Agent Marketplace.\n\n## Install\n\n```bash\nnpx skills add christopherlhammer11-ai/recallmax\n```\n\n## When to Use This Skill\n\n- Use when your agent loses context in long conversations (50+ turns)\n- Use when injecting large RAG/external documents into agent context\n- Use when you need to compress conversation history without losing meaning\n- Use when fact-checking claims across a long thread\n- Use for any agent that needs to remember everything\n\n## How It Works\n\n### Step 1: Context Injection\n\nRecallMax cleanly injects external context (documents, RAG results, prior conversations) into the agent's working memory. Unlike naive concatenation, it:\n- Deduplicates overlapping content\n- Preserves source attribution\n- Prevents hallucination drift from context pollution\n\n### Step 2: Adaptive Summarization\n\nAs conversations grow, RecallMax automatically summarizes older turns while preserving:\n- **Tone** — sarcasm, formality, urgency\n- **Intent** — what the user actually wants vs. what they said\n- **Key facts** — numbers, names, decisions, commitments\n- **Emotional register** — frustration, excitement, confusion\n\n### Step 3: History Compression\n\nCompress a 14-turn conversation history into ~800 high-density tokens that retain full semantic meaning. The compressed output can be re-expanded if needed.\n\n### Step 4: Fact Verification\n\nBuilt-in cross-reference checks for controversial or ambiguous claims within the conversation context. Flags contradictions and unsupported assertions.\n\n## Best Practices\n\n- ✅ Use RecallMax at the start of long-running agent sessions\n- ✅ Enable auto-summarization for conversations beyond 20 turns\n- ✅ Use compression before hitting context window limits\n- ✅ Let the fact verifier run on high-stakes outputs\n- ❌ Don't inject unvetted external content without dedup\n- ❌ Don't skip summarization and rely on raw truncation\n\n## Related Skills\n\n- `@tool-use-guardian` - Tool-call reliability wrapper (also free from Genesis Marketplace)\n\n## Links\n\n- **Repo:** https://github.com/christopherlhammer11-ai/recallmax\n- **Marketplace:** https://genesis-node-api.vercel.app\n- **Browse skills:** https://genesis-marketplace.vercel.app\n",
+      "tags": [
+        "node",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "document",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Use when your agent loses context in long conversations (50+ turns)",
+        "Use when injecting large RAG/external documents into agent context",
+        "Use when you need to compress conversation history without losing meaning",
+        "Use when fact-checking claims across a long thread",
+        "Use for any agent that needs to remember everything"
+      ],
+      "scrapedAt": "2026-03-15T07:15:31.639Z"
+    },
+    {
       "id": "superpowers-receiving-code-review",
       "name": "receiving-code-review",
       "slug": "superpowers-receiving-code-review",
@@ -25024,77 +25044,6 @@
       "scrapedAt": "2026-03-09T07:15:58.941Z"
     },
     {
-      "id": "antigravity-security-scanning-security-sast",
-      "name": "security-scanning-security-sast",
-      "slug": "security-scanning-security-sast",
-      "description": "Static Application Security Testing (SAST) for code vulnerability\nanalysis across multiple languages and frameworks\n",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/security-scanning-security-sast",
-      "content": "# SAST Security Plugin\n\nStatic Application Security Testing (SAST) for comprehensive code vulnerability detection across multiple languages, frameworks, and security patterns.\n\n## Capabilities\n\n- **Multi-language SAST**: Python, JavaScript/TypeScript, Java, Ruby, PHP, Go, Rust\n- **Tool integration**: Bandit, Semgrep, ESLint Security, SonarQube, CodeQL, PMD, SpotBugs, Brakeman, gosec, cargo-clippy\n- **Vulnerability patterns**: SQL injection, XSS, hardcoded secrets, path traversal, IDOR, CSRF, insecure deserialization\n- **Framework analysis**: Django, Flask, React, Express, Spring Boot, Rails, Laravel\n- **Custom rule authoring**: Semgrep pattern development for organization-specific security policies\n\n## Use this skill when\n\nUse for code review security analysis, injection vulnerabilities, hardcoded secrets, framework-specific patterns, custom security policy enforcement, pre-deployment validation, legacy code assessment, and compliance (OWASP, PCI-DSS, SOC2).\n\n**Specialized tools**: Use `security-secrets.md` for advanced credential scanning, `security-owasp.md` for Top 10 mapping, `security-api.md` for REST/GraphQL endpoints.\n\n## Do not use this skill when\n\n- You only need runtime testing or penetration testing\n- You cannot access the source code or build outputs\n- The environment forbids third-party scanning tools\n\n## Instructions\n\n1. Identify the languages, frameworks, and scope to scan.\n2. Select SAST tools and configure rules for the codebase.\n3. Run scans in CI or locally with reproducible settings.\n4. Triage findings, prioritize by severity, and propose fixes.\n\n## Safety\n\n- Avoid uploading proprietary code to external services without approval.\n- Require review before enabling auto-fix or blocking releases.\n\n## SAST Tool Selection\n\n### Python: Bandit\n\n```bash\n# Installation & scan\npip install bandit\nbandit -r . -f json -o bandit-report.json\nbandit -r . -ll -ii -f json  # High/Critical only\n```\n\n**Configuration**: `.bandit`\n```yaml\nexclude_dirs: ['/tests/', '/venv/', '/.tox/', '/build/']\ntests: [B201, B301, B302, B303, B304, B305, B307, B308, B312, B323, B324, B501, B502, B506, B602, B608]\nskips: [B101]\n```\n\n### JavaScript/TypeScript: ESLint Security\n\n```bash\nnpm install --save-dev eslint @eslint/plugin-security eslint-plugin-no-secrets\neslint . --ext .js,.jsx,.ts,.tsx --format json > eslint-security.json\n```\n\n**Configuration**: `.eslintrc-security.json`\n```json\n{\n  \"plugins\": [\"@eslint/plugin-security\", \"eslint-plugin-no-secrets\"],\n  \"extends\": [\"plugin:security/recommended\"],\n  \"rules\": {\n    \"security/detect-object-injection\": \"error\",\n    \"security/detect-non-literal-fs-filename\": \"error\",\n    \"security/detect-eval-with-expression\": \"error\",\n    \"security/detect-pseudo-random-prng\": \"error\",\n    \"no-secrets/no-secrets\": \"error\"\n  }\n}\n```\n\n### Multi-Language: Semgrep\n\n```bash\npip install semgrep\nsemgrep --config=auto --json --output=semgrep-report.json\nsemgrep --config=p/security-audit --json\nsemgrep --config=p/owasp-top-ten --json\nsemgrep ci --config=auto  # CI mode\n```\n\n**Custom Rules**: `.semgrep.yml`\n```yaml\nrules:\n  - id: sql-injection-format-string\n    pattern: cursor.execute(\"... %s ...\" % $VAR)\n    message: SQL injection via string formatting\n    severity: ERROR\n    languages: [python]\n    metadata:\n      cwe: \"CWE-89\"\n      owasp: \"A03:2021-Injection\"\n\n  - id: dangerous-innerHTML\n    pattern: $ELEM.innerHTML = $VAR\n    message: XSS via innerHTML assignment\n    severity: ERROR\n    languages: [javascript, typescript]\n    metadata:\n      cwe: \"CWE-79\"\n\n  - id: hardcoded-aws-credentials\n    patterns:\n      - pattern: $KEY = \"AKIA...\"\n      - metavariable-regex:\n          metavariable: $KEY\n          regex: \"(aws_access_key_id|AWS_ACCESS_KEY_ID)\"\n    message: Hardcoded AWS credentials detected\n    severity: ERROR\n    languages: [python, javascript, java]\n\n  - id: path-traversal-open\n    patterns:\n      - pattern: open($PATH, ...)\n      - pattern-not: open(os.path.join(SAFE_DIR, ...), ...)\n      - metavariable-pattern:\n          metavariable: $PATH\n          patterns:\n            - pattern: $REQ.get(...)\n    message: Path traversal via user input\n    severity: ERROR\n    languages: [python]\n\n  - id: command-injection\n    patterns:\n      - pattern-either:\n          - pattern: os.system($CMD)\n          - pattern: subprocess.call($CMD, shell=True)\n      - metavariable-pattern:\n          metavariable: $CMD\n          patterns:\n            - pattern-either:\n                - pattern: $X + $Y\n                - pattern: f\"...{$VAR}...\"\n    message: Command injection via shell=True\n    severity: ERROR\n    languages: [python]\n```\n\n### Other Language Tools\n\n**Java**: `mvn spotbugs:check`\n**Ruby**: `brakeman -o report.json -f json`\n**Go**: `gosec -fmt=json -out=gosec.json ./...`\n**Rust**: `cargo clippy -- -W clippy::unwrap_used`\n\n## Vulnerability Patterns\n\n### SQL Injection\n\n**VULNERABLE**: String formatting/concatenation with user input in SQL queries\n\n**SECURE**:\n```python\n# Parameterized queries\ncursor.exec",
-      "tags": [
-        "python",
-        "javascript",
-        "typescript",
-        "react",
-        "api",
-        "ai",
-        "document",
-        "image",
-        "security",
-        "vulnerability"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:15:59.217Z"
-    },
-    {
-      "id": "antigravity-seek-and-analyze-video",
-      "name": "seek-and-analyze-video",
-      "slug": "seek-and-analyze-video",
-      "description": "Seek and analyze video content using Memories.ai Large Visual Memory Model for persistent video intelligence",
-      "category": "Creative & Media",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/seek-and-analyze-video",
-      "content": "\n## When to Use\n\nUse this skill when the user wants to search for, import, or analyze video content from TikTok, YouTube, or Instagram, summarize meetings or lectures from recordings, build a searchable knowledge base from video content, or research social media trends and creators.\n\n# Seek and Analyze Video\n\n## Description\n\nThis skill enables AI agents to search, import, and analyze video content using Memories.ai's Large Visual Memory Model (LVMM). Unlike one-shot video analysis tools, it provides persistent video intelligence -- videos are indexed once and can be queried repeatedly across sessions. Supports social media import (TikTok, YouTube, Instagram), meeting summarization, knowledge base building, and cross-video Q&A via Memory Augmented Generation (MAG).\n\n## Overview\n\nThe skill wraps 21 API commands into workflow-oriented reference guides that agents load on demand. A routing table in SKILL.md maps user intent to the right workflow automatically.\n\n## When to Use This Skill\n\n- Use when analyzing or asking questions about a video from a URL\n- Use when searching for videos on TikTok, YouTube, or Instagram by topic, hashtag, or creator\n- Use when summarizing meetings, lectures, or webinars from recordings\n- Use when building a searchable knowledge base from video content and text memories\n- Use when researching social media content trends, influencers, or viral patterns\n- Use when analyzing or describing images with AI vision\n\n## How It Works\n\n### Step 1: Intent Detection\n\nThe agent reads the SKILL.md workflow router and matches the user's request to one of 6 intent categories.\n\n### Step 2: Reference Loading\n\nThe agent loads the appropriate reference file (e.g., video_qa.md for video questions, social_research.md for social media research).\n\n### Step 3: Workflow Execution\n\nThe agent follows the step-by-step workflow: upload/import -> wait for processing -> analyze/chat -> present results.\n\n## Examples\n\n### Example 1: Video Q&A\n\n```\nUser: \"What are the key arguments in this video? https://youtube.com/watch?v=abc123\"\nAgent: uploads video -> waits for processing -> uses chat_video to ask questions -> presents structured summary\n```\n\n### Example 2: Social Media Research\n\n```\nUser: \"What's trending on TikTok about sustainable fashion?\"\nAgent: uses search_public to find trending videos -> imports top results -> analyzes content patterns\n```\n\n### Example 3: Meeting Notes\n\n```\nUser: \"Summarize this meeting recording and extract action items\"\nAgent: uploads recording -> waits -> gets transcript -> uses chat_video for structured summary with action items\n```\n\n## Best Practices\n\n- Always wait for video processing to complete before querying\n- Use caption_video for quick analysis (no upload needed)\n- Use chat_video for deep, multi-turn analysis (requires upload)\n- Use search_audio to find specific moments or quotes in a video\n- Use memory_add to store important findings for later retrieval\n\n## Common Pitfalls\n\n- **Problem:** Querying a video before processing completes\n  **Solution:** Always use the `wait` command after upload before any analysis\n\n- **Problem:** Uploading a video when only a quick caption is needed\n  **Solution:** Use `caption_video` for one-off analysis; only upload for repeated queries\n\n## Limitations\n\n- Video processing takes 1-5 minutes depending on length\n- Free tier limited to 100 credits\n- Social media import requires public content\n- Audio search only works on processed videos\n\n## Related Skills\n\n- Video analysis tools for one-shot analysis\n- Web search skills for non-video content research\n",
-      "tags": [
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "workflow",
-        "image",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-11T07:08:43.421Z"
-    },
-    {
-      "id": "antigravity-segment-automation",
-      "name": "segment-automation",
-      "slug": "segment-automation",
-      "description": "Automate Segment tasks via Rube MCP (Composio): track events, identify users, manage groups, page views, aliases, batch operations. Always search tools first for current schemas.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/segment-automation",
-      "content": "\n# Segment Automation via Rube MCP\n\nAutomate Segment customer data platform operations through Composio's Segment toolkit via Rube MCP.\n\n## Prerequisites\n\n- Rube MCP must be connected (RUBE_SEARCH_TOOLS available)\n- Active Segment connection via `RUBE_MANAGE_CONNECTIONS` with toolkit `segment`\n- Always call `RUBE_SEARCH_TOOLS` first to get current tool schemas\n\n## Setup\n\n**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.\n\n\n1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds\n2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `segment`\n3. If connection is not ACTIVE, follow the returned auth link to complete Segment authentication\n4. Confirm connection status shows ACTIVE before running any workflows\n\n## Core Workflows\n\n### 1. Track Events\n\n**When to use**: User wants to send event data to Segment for downstream destinations\n\n**Tool sequence**:\n1. `SEGMENT_TRACK` - Send a single track event [Required]\n\n**Key parameters**:\n- `userId`: User identifier (required if no `anonymousId`)\n- `anonymousId`: Anonymous identifier (required if no `userId`)\n- `event`: Event name (e.g., 'Order Completed', 'Button Clicked')\n- `properties`: Object with event-specific properties\n- `timestamp`: ISO 8601 timestamp (optional; defaults to server time)\n- `context`: Object with contextual metadata (IP, user agent, etc.)\n\n**Pitfalls**:\n- At least one of `userId` or `anonymousId` is required\n- `event` name is required and should follow consistent naming conventions\n- Properties are freeform objects; ensure consistent schema across events\n- Timestamp must be ISO 8601 format (e.g., '2024-01-15T10:30:00Z')\n- Events are processed asynchronously; successful API response means accepted, not delivered\n\n### 2. Identify Users\n\n**When to use**: User wants to associate traits with a user profile in Segment\n\n**Tool sequence**:\n1. `SEGMENT_IDENTIFY` - Set user traits and identity [Required]\n\n**Key parameters**:\n- `userId`: User identifier (required if no `anonymousId`)\n- `anonymousId`: Anonymous identifier\n- `traits`: Object with user properties (email, name, plan, etc.)\n- `timestamp`: ISO 8601 timestamp\n- `context`: Contextual metadata\n\n**Pitfalls**:\n- At least one of `userId` or `anonymousId` is required\n- Traits are merged with existing traits, not replaced\n- To remove a trait, set it to `null`\n- Identify calls should be made before track calls for new users\n- Avoid sending PII in traits unless destinations are configured for it\n\n### 3. Batch Operations\n\n**When to use**: User wants to send multiple events, identifies, or other calls in a single request\n\n**Tool sequence**:\n1. `SEGMENT_BATCH` - Send multiple Segment calls in one request [Required]\n\n**Key parameters**:\n- `batch`: Array of message objects, each with:\n  - `type`: Message type ('track', 'identify', 'group', 'page', 'alias')\n  - `userId` / `anonymousId`: User identifier\n  - Additional fields based on type (event, properties, traits, etc.)\n\n**Pitfalls**:\n- Each message in the batch must have a valid `type` field\n- Maximum batch size limit applies; check schema for current limit\n- All messages in a batch are processed independently; one failure does not affect others\n- Each message must independently satisfy its type's requirements (e.g., track needs event name)\n- Batch is the most efficient way to send multiple calls; prefer over individual calls\n\n### 4. Group Users\n\n**When to use**: User wants to associate a user with a company, team, or organization\n\n**Tool sequence**:\n1. `SEGMENT_GROUP` - Associate user with a group [Required]\n\n**Key parameters**:\n- `userId`: User identifier (required if no `anonymousId`)\n- `anonymousId`: Anonymous identifier\n- `groupId`: Group/organization identifier (required)\n- `traits`: Object with group properties (name, industry, size, plan)\n- `timestamp`: ISO 8601 timestamp\n\n**Pitfalls**:\n- `groupId` is required; it identifies the company or organization\n- Group traits are merged with existing traits for that group\n- A user can belong to multiple groups\n- Group traits update the group profile, not the user profile\n\n### 5. Track Page Views\n\n**When to use**: User wants to record page view events in Segment\n\n**Tool sequence**:\n1. `SEGMENT_PAGE` - Send a page view event [Required]\n\n**Key parameters**:\n- `userId`: User identifier (required if no `anonymousId`)\n- `anonymousId`: Anonymous identifier\n- `name`: Page name (e.g., 'Home', 'Pricing', 'Dashboard')\n- `category`: Page category (e.g., 'Docs', 'Marketing')\n- `properties`: Object with page-specific properties (url, title, referrer)\n\n**Pitfalls**:\n- At least one of `userId` or `anonymousId` is required\n- `name` and `category` are optional but recommended for proper analytics\n- Standard properties include `url`, `title`, `referrer`, `path`, `search`\n- Page calls are often automated; manual use is for server-side page tracking\n\n### 6. Alias Users and Manage Sources\n\n**When to use**: User wants to mer",
-      "tags": [
-        "api",
-        "mcp",
-        "ai",
-        "agent",
-        "automation",
-        "workflow",
-        "document",
-        "cro",
-        "marketing"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:16:00.764Z"
-    },
-    {
       "id": "anthropic-skill-creator",
       "name": "skill-creator",
       "slug": "skill-creator",
@@ -25786,14 +25735,14 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 366
+      "count": 368
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 351
+      "count": 352
     },
     {
       "id": "development-code-tools",
@@ -25807,14 +25756,14 @@
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 98
+      "count": 97
     },
     {
       "id": "security-systems",
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 90
+      "count": 85
     },
     {
       "id": "business-marketing",
@@ -25858,48 +25807,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 82196
+      "stars": 83933
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 93004
+      "stars": 93674
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 43842
+      "stars": 44159
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 69086
+      "stars": 69133
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 997
+      "stars": 999
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillCount": 1006,
+      "skillCount": 1003,
       "newSkillCount": 9,
-      "stars": 24138
+      "stars": 24400
     }
   ],
-  "lastUpdated": "2026-03-14T07:05:42.853Z",
+  "lastUpdated": "2026-03-15T07:15:56.337Z",
   "stats": {
-    "totalSkills": 1105,
+    "totalSkills": 1102,
     "newSkills": 19,
-    "scrapedAt": "2026-03-14T07:05:42.853Z"
+    "scrapedAt": "2026-03-15T07:15:56.337Z"
   }
 }
