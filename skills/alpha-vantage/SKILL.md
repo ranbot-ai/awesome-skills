@@ -7,10 +7,6 @@ tags: [python, api, claude, ai, workflow, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/alpha-vantage
 ---
 
- Unknown
-metadata:
-    skill-author: K-Dense Inc.
----
 
 # Alpha Vantage — Financial Market Data
 

@@ -8,6 +8,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/clou
 ---
 
 
+<!-- security-allowlist: curl-pipe-bash -->
+
 # Cloud Penetration Testing
 
 ## Purpose
@@ -193,7 +195,4 @@ $cred = Get-Credential  # AppID as username, secret as password
 Connect-AzAccount -Credential $cred -Tenant "tenant-id" -ServicePrincipal
 
 # Create new admin user via CLI
-az ad user create --display-name <name> --password <pass> --user-principal-name <upn>
-```
-
-###
+az ad user create --display-name <name> --passwor

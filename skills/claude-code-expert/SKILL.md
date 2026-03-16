@@ -8,6 +8,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/clau
 ---
 
 
+<!-- security-allowlist: curl-pipe-bash -->
+
 # CLAUDE CODE EXPERT - Potencia Maxima
 
 ## Overview
@@ -178,6 +180,4 @@ Hooks executam comandos automaticamente em eventos do Claude Code.
         "hooks": [
           {
             "type": "command",
-            "command": "powershell -c \\"[Console]::Beep(800,300)\\""
-          }
-        ]
+            "command": "powershell -c \\"[Cons

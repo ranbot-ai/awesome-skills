@@ -7585,8 +7585,8 @@
     "ai",
     "template",
     "document",
+    "security",
     "rag",
-    "cro",
     "processing"
   ],
   "antigravity-burp-suite-testing": [
@@ -14272,6 +14272,7 @@
     "ai",
     "template",
     "design",
+    "security",
     "processing"
   ],
   "antigravity-exa-search": [

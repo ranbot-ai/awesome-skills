@@ -3,10 +3,12 @@ name: bun-development
 description: Modern JavaScript/TypeScript development with Bun runtime. Covers package management, bundling, testing, and migration from Node.js. Use when working with Bun, optimizing JS/TS development speed, o...
 category: Document Processing
 source: antigravity
-tags: [javascript, typescript, react, node, api, ai, template, document, rag, cro]
+tags: [javascript, typescript, react, node, api, ai, template, document, security, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bun-development
 ---
 
+
+<!-- security-allowlist: curl-pipe-bash, irm-pipe-iex -->
 
 # ⚡ Bun Development
 
@@ -264,6 +266,4 @@ bun --env-file=.env.production run index.ts
 ```typescript
 // Read file
 const file = Bun.file("./data.json");
-const text = await file.text();
-const json = await file.json();
-const buffer = awa
+const text = await file

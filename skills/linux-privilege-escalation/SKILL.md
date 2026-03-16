@@ -8,6 +8,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/linu
 ---
 
 
+<!-- security-allowlist: curl-pipe-bash -->
+
 # Linux Privilege Escalation
 
 ## Purpose
@@ -267,7 +269,4 @@ sudo LD_PRELOAD=/tmp/shell.so find
 
 ```bash
 find / -type f -perm -04000 -ls 2>/dev/null
-find / -perm -u=s -type f 2>/dev/null
-```
-
-#### Exp
+find /

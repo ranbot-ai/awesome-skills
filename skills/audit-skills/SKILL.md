@@ -8,6 +8,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/audi
 ---
 
 
+<!-- security-allowlist: curl-pipe-bash -->
+
 # Audit Skills (Premium Universal Security)
 
 ## Overview
@@ -113,6 +115,4 @@ Generates a security report with a score (0-10), platform target identification,
 ## Common Pitfalls
 
 - **Problem:** Executing code during audit
-  **Solution:** Stick to static analysis methods only
-
-- **Problem:** Missing
+  **Solution:** Stick to static 

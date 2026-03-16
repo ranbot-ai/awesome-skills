@@ -3,10 +3,12 @@ name: evolution
 description: CRITICAL: Use for makepad-skills self-evolution and contribution. Triggers on: evolve, evolution, contribute, contribution, self-improve, self-improvement, add pattern, new pattern, capture learning, 
 category: Document Processing
 source: antigravity
-tags: [markdown, api, claude, ai, template, design, document]
+tags: [markdown, api, claude, ai, template, design, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/evolution
 ---
 
+
+<!-- security-allowlist: curl-pipe-bash -->
 
 # Makepad Skills Evolution
 
@@ -163,4 +165,4 @@ Error/Debug Solution         → makepad-reference/troubleshooting.md
 Layout/Responsive Design     → makepad-reference/adaptive-layout.md
 Build/Deploy Issue           → makepad-deployment/SKILL.md
 Project Structure            → makepad-basics/
-Core Concept/API             → makepad-dsl/ or makepa
+Core Con

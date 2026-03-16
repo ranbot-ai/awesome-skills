@@ -8,6 +8,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/link
 ---
 
 
+<!-- security-allowlist: curl-pipe-bash -->
+
 # Linkerd Patterns
 
 Production patterns for Linkerd service mesh - the lightweight, security-first service mesh for Kubernetes.
@@ -224,6 +226,4 @@ apiVersion: policy.linkerd.io/v1beta2
 kind: HTTPRoute
 metadata:
   name: my-route
-  namespace: my-namespace
-spec:
-  parentRefs:
+ 
