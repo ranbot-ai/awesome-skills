@@ -886,6 +886,37 @@
       "scrapedAt": "2026-02-26T07:08:46.347Z"
     },
     {
+      "id": "antigravity-ai-engineering-toolkit",
+      "name": "ai-engineering-toolkit",
+      "slug": "ai-engineering-toolkit",
+      "description": "6 production-ready AI engineering workflows: prompt evaluation (8-dimension scoring), context budget planning, RAG pipeline design, agent security audit (65-point checklist), eval harness building, and product sense coaching.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-engineering-toolkit",
+      "content": "\n# AI Engineering Toolkit\n\n## Overview\n\nA collection of 6 structured, expert-level workflows that turn your AI coding assistant into a senior AI engineering partner. Each skill encodes a repeatable methodology — not just \"ask AI to help,\" but a step-by-step decision framework with quantitative scoring, checklists, and decision trees.\n\nThe key difference from ad-hoc AI assistance: **every workflow produces consistent, reproducible results** regardless of who runs it or when. You can use the scoring systems as team baselines and write them into CI/CD pipelines.\n\n## When to Use This Skill\n\n- Use when evaluating or optimizing LLM system prompts before production deployment\n- Use when designing a RAG pipeline and need structured architecture decisions (not just boilerplate code)\n- Use when planning token budget allocation across context window zones\n- Use when running pre-launch security audits on AI agents\n- Use when building evaluation frameworks for LLM applications\n- Use when thinking through product strategy before writing code\n\n## How It Works\n\n### Skill 1: Prompt Evaluator\n\nScores prompts across 8 dimensions (Clarity, Specificity, Completeness, Conciseness, Structure, Grounding, Safety, Robustness) on a 1-10 scale with weighted aggregation to a 0-100 score. Identifies the 3 weakest dimensions, generates targeted rewrites, and re-evaluates. Supports single prompt, A/B comparison, and batch evaluation modes.\n\n### Skill 2: Context Budget Planner\n\nAnalyzes token distribution across 5 context zones (System, Few-shot, User input, Retrieval, Output) and produces an optimized allocation plan. Includes a compression strategy decision tree for each zone. Common finding: output zone squeezed to under 6% — this skill catches that before truncation happens.\n\n### Skill 3: RAG Pipeline Architect\n\nWalks through a complete architecture decision tree: document format → parsing strategy → chunking approach (fixed/semantic/recursive) → embedding model selection → retrieval method (vector/keyword/hybrid) → evaluation metrics (Faithfulness, Relevancy, Context Precision). Covers Naive RAG, Advanced RAG, and Modular RAG patterns.\n\n### Skill 4: Agent Safety Guard\n\n> **⚠️ AUTHORIZED USE ONLY**\n> This skill is for educational purposes or authorized security assessments only.\n> You must have explicit, written permission from the system owner before using this tool.\n> Misuse of this tool is illegal and strictly prohibited.\n\nExecutes a 65-point red-team audit across 5 attack categories: direct prompt injection, indirect prompt injection (via RAG documents), information extraction (system prompt / API key leakage), tool abuse (SQL injection, path traversal, command injection), and goal hijacking. The AI constructs adversarial test prompts for evaluation purposes, asks the user for confirmation before each test phase, judges pass/fail, and generates fix recommendations. All tests are contained within the evaluation context and do not interact with external systems. It is recommended to run audits in a sandboxed environment (Docker/VM).\n\n### Skill 5: Eval Harness Builder\n\nDesigns evaluation metric systems for LLM applications. Includes LLM-as-Judge scoring framework with bias mitigation strategies (position bias, verbosity bias, self-enhancement bias). Outputs CI/CD-ready evaluation pipeline templates.\n\n### Skill 6: Product Sense Coach\n\nA 5-phase guided conversation framework: dig into motivation → assess market opportunity → find the path → design scenarios → analyze competition. Useful for thinking through \"should we build this?\" before writing any code.\n\n## Examples\n\n### Example 1: Prompt Evaluation\n\nAsk: \"Evaluate this system prompt\"\n\n```\nYou are a customer support agent. Help users with their questions. Be nice and helpful.\n```\n\nResult: Overall score **28/100**. Weakest dimensions: Safety (1/10, zero injection protection), Specificity (2/10, no output format), Structure (2/10, no sections). Auto-rewrite scores **82/100** with added scope boundaries, response format, escalation rules, and safety guardrails.\n\n### Example 2: Security Audit\n\nAsk: \"Run a security audit on my customer support agent\"\n\nResult: 65 tests executed. 3 critical failures found: Base64-encoded instruction bypass, path traversal via tool calls, system prompt extraction via role-play. Fix recommendations provided for each.\n\n## Best Practices\n\n- ✅ Run prompt-evaluator before any production deployment — set a team baseline (e.g., ≥70/100)\n- ✅ Use context-budget-planner early in development, not after hitting truncation issues\n- ✅ Run agent-safety-guard as a pre-launch gate, not post-incident\n- ✅ Combine skills in sequence: RAG design → context optimization → prompt polish → security audit → eval setup\n- ❌ Don't rely on a single dimension score — look at the full profile\n- ❌ Don't skip the security audit because \"it's just an internal tool\"\n\n## Security & Safety Notes\n\n- All skills are read-only analysis and advisory workflows. No skills modify files or make network re",
+      "tags": [
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "workflow",
+        "template",
+        "design",
+        "document",
+        "security"
+      ],
+      "useCases": [
+        "Use when evaluating or optimizing LLM system prompts before production deployment",
+        "Use when designing a RAG pipeline and need structured architecture decisions (not just boilerplate code)",
+        "Use when planning token budget allocation across context window zones",
+        "Use when running pre-launch security audits on AI agents",
+        "Use when building evaluation frameworks for LLM applications"
+      ],
+      "scrapedAt": "2026-03-17T07:14:06.121Z"
+    },
+    {
       "id": "antigravity-ai-md",
       "name": "ai-md",
       "slug": "ai-md",
@@ -944,6 +975,35 @@
         "Adding AI features to applications"
       ],
       "scrapedAt": "2026-02-23T07:14:05.045Z"
+    },
+    {
+      "id": "antigravity-ai-native-cli",
+      "name": "ai-native-cli",
+      "slug": "ai-native-cli",
+      "description": "Design spec with 98 rules for building CLI tools that AI agents can safely use. Covers structured JSON output, error handling, input contracts, safety guardrails, exit codes, and agent self-description.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-native-cli",
+      "content": "\n# Agent-Friendly CLI Spec v0.1\n\nWhen building or modifying CLI tools, follow these rules to make them safe and\nreliable for AI agents to use.\n\n## Overview\n\nA comprehensive design specification for building AI-native CLI tools. It defines\n98 rules across three certification levels (Agent-Friendly, Agent-Ready, Agent-Native)\nwith prioritized requirements (P0/P1/P2). The spec covers structured JSON output,\nerror handling, input contracts, safety guardrails, exit codes, self-description,\nand a feedback loop via a built-in issue system.\n\n## When to Use This Skill\n\n- Use when building a new CLI tool that AI agents will invoke\n- Use when retrofitting an existing CLI to be agent-friendly\n- Use when designing command-line interfaces for automation pipelines\n- Use when auditing a CLI tool's compliance with agent-safety standards\n\n## Core Philosophy\n\n1. **Agent-first** -- default output is JSON; human-friendly is opt-in via `--human`\n2. **Agent is untrusted** -- validate all input at the same level as a public API\n3. **Fail-Closed** -- when validation logic itself errors, deny by default\n4. **Verifiable** -- every rule is written so it can be automatically checked\n\n## Layer Model\n\nThis spec uses two orthogonal axes:\n\n- **Layer** answers rollout scope: `core`, `recommended`, `ecosystem`\n- **Priority** answers severity: `P0`, `P1`, `P2`\n\nUse layers for migration and certification:\n\n- **core** -- execution contract: JSON, errors, exit codes, stdout/stderr, safety\n- **recommended** -- better machine UX: self-description, explicit modes, richer schemas\n- **ecosystem** -- agent-native integration: `agent/`, `skills`, `issue`, inline context\n\nCertification maps to layers:\n\n- **Agent-Friendly** -- all `core` rules pass\n- **Agent-Ready** -- all `core` + `recommended` rules pass\n- **Agent-Native** -- all layers pass\n\n## How It Works\n\n### Step 1: Output Mode\n\nDefault is agent mode (JSON). Explicit flags to switch:\n\n```bash\n$ mycli list              # default = JSON output (agent mode)\n$ mycli list --human      # human-friendly: colored, tables, formatted\n$ mycli list --agent      # explicit agent mode (override config if needed)\n```\n\n- **Default (no flag)** -- JSON to stdout. Agent never needs to add a flag.\n- **--human** -- human-friendly format (colors, tables, progress bars)\n- **--agent** -- explicit JSON mode (useful when env/config overrides default)\n\n### Step 2: agent/ Directory Convention\n\nEvery CLI tool MUST have an `agent/` directory at its project root. This is the\ntool's identity and behavior contract for AI agents.\n\n```\nagent/\n  brief.md          # One paragraph: who am I, what can I do\n  rules/            # Behavior constraints (auto-registered)\n    trigger.md      # When should an agent use this tool\n    workflow.md     # Step-by-step usage flow\n    writeback.md    # How to write feedback back\n  skills/           # Extended capabilities (auto-registered)\n    getting-started.md\n```\n\n### Step 3: Four Levels of Self-Description\n\n1. **--brief** (business card, injected into agent config)\n2. **Every Command Response** (always-on context: data + rules + skills + issue)\n3. **--help** (full self-description: brief + commands + rules + skills + issue)\n4. **skills \\<name\\>** (on-demand deep dive into a specific skill)\n\n## Certification Requirements\n\nEach level includes all rules from the previous level.\nPriority tag `[P0]`=agent breaks without it, `[P1]`=agent works but poorly, `[P2]`=nice to have.\n\n### Level 1: Agent-Friendly (core -- 20 rules)\n\nGoal: CLI is a stable, callable API. Agent can invoke, parse, and handle errors.\n\n**Output** -- default is JSON, stable schema\n- `[P0]` O1: Default output is JSON. No `--json` flag needed\n- `[P0]` O2: JSON MUST pass `jq .` validation\n- `[P0]` O3: JSON schema MUST NOT change within same version\n\n**Error** -- structured, to stderr, never interactive\n- `[P0]` E1: Errors -> `{\"error\":true, \"code\":\"...\", \"message\":\"...\", \"suggestion\":\"...\"}` to stderr\n- `[P0]` E4: Error has machine-readable `code` (e.g. `MISSING_REQUIRED`)\n- `[P0]` E5: Error has human-readable `message`\n- `[P0]` E7: On error, NEVER enter interactive mode -- exit immediately\n- `[P0]` E8: Error codes are API contracts -- MUST NOT rename across versions\n\n**Exit Code** -- predictable failure signals\n- `[P0]` X3: Parameter/usage errors MUST exit 2\n- `[P0]` X9: Failures MUST exit non-zero -- never exit 0 then report error in stdout\n\n**Composability** -- clean pipe semantics\n- `[P0]` C1: stdout is for data ONLY\n- `[P0]` C2: logs, progress, warnings go to stderr ONLY\n\n**Input** -- fail fast on bad input\n- `[P1]` I4: Missing required param -> structured error, never interactive prompt\n- `[P1]` I5: Type mismatch -> exit 2 + structured error\n\n**Safety** -- protect against agent mistakes\n- `[P1]` S1: Destructive ops require `--yes` confirmation\n- `[P1]` S4: Reject `../../` path traversal, control chars\n\n**Guardrails** -- runtime input protection\n- `[P1]` G1: Unknown flags rejected with exit 2\n- `[P1]` G2: Detect API key / token pat",
+      "tags": [
+        "api",
+        "mcp",
+        "ai",
+        "agent",
+        "automation",
+        "workflow",
+        "design",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Use when building a new CLI tool that AI agents will invoke",
+        "Use when retrofitting an existing CLI to be agent-friendly",
+        "Use when designing command-line interfaces for automation pipelines",
+        "Use when auditing a CLI tool's compliance with agent-safety standards"
+      ],
+      "scrapedAt": "2026-03-17T07:14:07.465Z"
     },
     {
       "id": "antigravity-ai-product",
@@ -1254,21 +1314,16 @@
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/analyze-project",
-      "content": "\n# /analyze-project — Root Cause Analyst Workflow\n\nAnalyze AI-assisted coding sessions in `brain/` and produce a diagnostic report that explains not just **what happened**, but **why it happened**, **who/what caused it**, and **what should change next time**.\n\nThis workflow is not a simple metrics dashboard.\nIt is a forensic analysis workflow for AI coding sessions.\n\n---\n\n## Primary Objective\n\nFor each session, determine:\n\n1. What changed from the initial ask to the final executed work\n2. Whether the change was caused primarily by:\n   - the user/spec\n   - the agent\n   - the codebase/repo\n   - testing/verification\n   - legitimate task complexity\n3. Whether the original prompt was sufficient for the actual job\n4. Which subsystems or files repeatedly correlate with struggle\n5. What concrete changes would most improve future sessions\n\n---\n\n## Core Principles\n\n- Treat `.resolved.N` counts as **signals of iteration intensity**, not proof of failure\n- Do not label struggle based on counts alone; classify the **shape** of rework\n- Separate **human-added scope** from **necessary discovered scope**\n- Separate **agent error** from **repo friction**\n- Every diagnosis must include **evidence**\n- Every recommendation must map to a specific observed pattern\n- Use confidence levels:\n  - **High** = directly supported by artifact contents or timestamps\n  - **Medium** = supported by multiple indirect signals\n  - **Low** = plausible inference, not directly proven\n\n---\n\n## Step 1: Discovery — Find Relevant Conversations\n\n1. Read the conversation summaries available in the system context.\n2. List all subdirectories in:\n   `~/.gemini/antigravity/brain/\n3. Build a **Conversation Index** by cross-referencing summaries with UUID folders.\n4. Record for each conversation:\n   - `conversation_id`\n   - `title`\n   - `objective`\n   - `created`\n   - `last_modified`\n5. If the user supplied a keyword/path, filter on that. Otherwise analyze all workspace conversations.\n\n> Output: indexed list of conversations to analyze.\n\n---\n\n## Step 2: Artifact Extraction — Build Session Evidence\n\nFor each conversation, read all structured artifacts that exist.\n\n### 2a. Core Artifacts\n- `task.md`\n- `implementation_plan.md`\n- `walkthrough.md`\n\n### 2b. Metadata\n- `*.metadata.json`\n\n### 2c. Version Snapshots\n- `task.md.resolved.0 ... N`\n- `implementation_plan.md.resolved.0 ... N`\n- `walkthrough.md.resolved.0 ... N`\n\n### 2d. Additional Signals\n- other `.md` artifacts\n- report/evaluation files\n- timestamps across artifact updates\n- file/folder names mentioned in plans and walkthroughs\n- repeated subsystem references\n- explicit testing/validation language\n- explicit non-goals or constraints, if present\n\n### 2e. Record Per Conversation\n\n#### Presence / Lifecycle\n- `has_task`\n- `has_plan`\n- `has_walkthrough`\n- `is_completed`\n- `is_abandoned_candidate` = has task but no walkthrough\n\n#### Revision / Change Volume\n- `task_versions`\n- `plan_versions`\n- `walkthrough_versions`\n- `extra_artifacts`\n\n#### Scope\n- `task_items_initial`\n- `task_items_final`\n- `task_completed_pct`\n- `scope_delta_raw`\n- `scope_creep_pct_raw`\n\n#### Timing\n- `created_at`\n- `completed_at`\n- `duration_minutes`\n\n#### Content / Quality Signals\n- `objective_text`\n- `initial_plan_summary`\n- `final_plan_summary`\n- `initial_task_excerpt`\n- `final_task_excerpt`\n- `walkthrough_summary`\n- `mentioned_files_or_subsystems`\n- `validation_requirements_present`\n- `acceptance_criteria_present`\n- `non_goals_present`\n- `scope_boundaries_present`\n- `file_targets_present`\n- `constraints_present`\n\n---\n\n## Step 3: Prompt Sufficiency Analysis\n\nFor each conversation, score the opening objective/request on a 0–2 scale for each dimension:\n\n- **Clarity** — is the ask understandable?\n- **Boundedness** — are scope limits defined?\n- **Testability** — are success conditions or acceptance criteria defined?\n- **Architectural specificity** — are files/modules/systems identified?\n- **Constraint awareness** — are non-goals, constraints, or environment details included?\n- **Dependency awareness** — does the prompt acknowledge affected systems or hidden coupling?\n\nCreate:\n- `prompt_sufficiency_score`\n- `prompt_sufficiency_band` = High / Medium / Low\n\nThen note which missing ingredients likely contributed to later friction.\n\nImportant:\nDo not assume a low-detail prompt is bad by default.\nShort prompts can still be good if the task is narrow and the repo context is obvious.\n\n---\n\n## Step 4: Scope Change Classification\n\nDo not treat all scope growth as the same.\n\nFor each conversation, classify scope delta into:\n\n### 4a. Human-Added Scope\nNew items clearly introduced beyond the initial ask.\nExamples:\n- optional enhancements\n- follow-on refactors\n- “while we are here” additions\n- cosmetic or adjacent work added later\n\n### 4b. Necessary Discovered Scope\nWork that was not in the opening ask but appears required to complete it correctly.\nExamples:\n- dependency fixes\n- required validation work\n- hidden integration tasks\n- migration fallout\n- cou",
+      "content": "\n# /analyze-project — Root Cause Analyst Workflow\n\nAnalyze AI-assisted coding sessions in `~/.gemini/antigravity/brain/` and produce a report that explains not just **what happened**, but **why it happened**, **who/what caused it**, and **what should change next time**.\n\n## Goal\n\nFor each session, determine:\n\n1. What changed from the initial ask to the final executed work\n2. Whether the main cause was:\n   - user/spec\n   - agent\n   - repo/codebase\n   - validation/testing\n   - legitimate task complexity\n3. Whether the opening prompt was sufficient\n4. Which files/subsystems repeatedly correlate with struggle\n5. What changes would most improve future sessions\n\n## Global Rules\n\n- Treat `.resolved.N` counts as **iteration signals**, not proof of failure\n- Separate **human-added scope**, **necessary discovered scope**, and **agent-introduced scope**\n- Separate **agent error** from **repo friction**\n- Every diagnosis must include **evidence** and **confidence**\n- Confidence levels:\n  - **High** = direct artifact/timestamp evidence\n  - **Medium** = multiple supporting signals\n  - **Low** = plausible inference, not directly proven\n- Evidence precedence:\n  - artifact contents > timestamps > metadata summaries > inference\n- If evidence is weak, say so\n\n---\n\n## Step 0.5: Session Intent Classification\n\nClassify the primary session intent from objective + artifacts:\n\n- `DELIVERY`\n- `DEBUGGING`\n- `REFACTOR`\n- `RESEARCH`\n- `EXPLORATION`\n- `AUDIT_ANALYSIS`\n\nRecord:\n- `session_intent`\n- `session_intent_confidence`\n\nUse intent to contextualize severity and rework shape.\nDo not judge exploratory or research sessions by the same standards as narrow delivery sessions.\n\n---\n\n## Step 1: Discover Conversations\n\n1. Read available conversation summaries from system context\n2. List conversation folders in the user’s Antigravity `brain/` directory\n3. Build a conversation index with:\n   - `conversation_id`\n   - `title`\n   - `objective`\n   - `created`\n   - `last_modified`\n4. If the user supplied a keyword/path, filter to matching conversations; otherwise analyze all\n\nOutput: indexed list of conversations to analyze.\n\n---\n\n## Step 2: Extract Session Evidence\n\nFor each conversation, read if present:\n\n### Core artifacts\n- `task.md`\n- `implementation_plan.md`\n- `walkthrough.md`\n\n### Metadata\n- `*.metadata.json`\n\n### Version snapshots\n- `task.md.resolved.0 ... N`\n- `implementation_plan.md.resolved.0 ... N`\n- `walkthrough.md.resolved.0 ... N`\n\n### Additional signals\n- other `.md` artifacts\n- timestamps across artifact updates\n- file/folder/subsystem names mentioned in plans/walkthroughs\n- validation/testing language\n- explicit acceptance criteria, constraints, non-goals, and file targets\n\nRecord per conversation:\n\n#### Lifecycle\n- `has_task`\n- `has_plan`\n- `has_walkthrough`\n- `is_completed`\n- `is_abandoned_candidate` = task exists but no walkthrough\n\n#### Revision / change volume\n- `task_versions`\n- `plan_versions`\n- `walkthrough_versions`\n- `extra_artifacts`\n\n#### Scope\n- `task_items_initial`\n- `task_items_final`\n- `task_completed_pct`\n- `scope_delta_raw`\n- `scope_creep_pct_raw`\n\n#### Timing\n- `created_at`\n- `completed_at`\n- `duration_minutes`\n\n#### Content / quality\n- `objective_text`\n- `initial_plan_summary`\n- `final_plan_summary`\n- `initial_task_excerpt`\n- `final_task_excerpt`\n- `walkthrough_summary`\n- `mentioned_files_or_subsystems`\n- `validation_requirements_present`\n- `acceptance_criteria_present`\n- `non_goals_present`\n- `scope_boundaries_present`\n- `file_targets_present`\n- `constraints_present`\n\n---\n\n## Step 3: Prompt Sufficiency\n\nScore the opening request on a 0–2 scale for:\n\n- **Clarity**\n- **Boundedness**\n- **Testability**\n- **Architectural specificity**\n- **Constraint awareness**\n- **Dependency awareness**\n\nCreate:\n- `prompt_sufficiency_score`\n- `prompt_sufficiency_band` = High / Medium / Low\n\nThen note which missing prompt ingredients likely contributed to later friction.\n\nDo not punish short prompts by default; a narrow, obvious task can still have high sufficiency.\n\n---\n\n## Step 4: Scope Change Classification\n\nClassify scope change into:\n\n- **Human-added scope** — new asks beyond the original task\n- **Necessary discovered scope** — work required to complete the original task correctly\n- **Agent-introduced scope** — likely unnecessary work introduced by the agent\n\nRecord:\n- `scope_change_type_primary`\n- `scope_change_type_secondary` (optional)\n- `scope_change_confidence`\n- evidence\n\nKeep one short example in mind for calibration:\n- Human-added: “also refactor nearby code while you’re here”\n- Necessary discovered: hidden dependency must be fixed for original task to work\n- Agent-introduced: extra cleanup or redesign not requested and not required\n\n---\n\n## Step 5: Rework Shape\n\nClassify each session into one primary pattern:\n\n- **Clean execution**\n- **Early replan then stable finish**\n- **Progressive scope expansion**\n- **Reopen/reclose churn**\n- **Late-stage verification churn**\n- **Abandoned mid-flight**\n- **Exploratory / research",
       "tags": [
         "ai",
         "agent",
         "workflow",
-        "template",
+        "design",
         "rag",
         "cro"
       ],
-      "useCases": [
-        "session analysis metrics",
-        "recurring fragile files/subsystems",
-        "recurring failure modes",
-        "last updated timestamp"
-      ],
+      "useCases": [],
       "scrapedAt": "2026-03-15T07:07:36.516Z"
     },
     {
@@ -2896,6 +2951,27 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-31T06:50:46.780Z"
+    },
+    {
+      "id": "antigravity-awt-e2e-testing",
+      "name": "awt-e2e-testing",
+      "slug": "awt-e2e-testing",
+      "description": "AI-powered E2E web testing — eyes and hands for AI coding tools. Declarative YAML scenarios, Playwright execution, visual matching (OpenCV + OCR), platform auto-detection (Flutter/React/Vue), learning DB. Install: npx skills add ksgisang/awt-skill --skill awt -g",
+      "category": "Creative & Media",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/awt-e2e-testing",
+      "content": "\n# AWT — AI-Powered E2E Testing (Beta)\n\n> `npx skills add ksgisang/awt-skill --skill awt -g`\n\nAWT gives AI coding tools the ability to see and interact with web applications through a real browser. Your AI designs YAML test scenarios; AWT executes them with Playwright.\n\n## What works now\n- YAML scenarios → Playwright with human-like interaction\n- Visual matching: OpenCV template + OCR (no CSS selectors needed)\n- Platform auto-detection: Flutter, React, Next.js, Vue, Angular, Svelte\n- Structured failure diagnosis with investigation checklists\n- Learning DB: failure→fix patterns in SQLite\n- 5 AI providers: Claude, OpenAI, Gemini, DeepSeek, Ollama\n- Skill Mode: no extra AI API key needed\n\n## Links\n- Main repo: https://github.com/ksgisang/AI-Watch-Tester\n- Skill repo: https://github.com/ksgisang/awt-skill\n- Cloud demo: https://ai-watch-tester.vercel.app\n\nBuilt with the help of AI coding tools — and designed to help AI coding tools test better.\n\nActively developed by a solo developer at AILoopLab. Feedback welcome!\n",
+      "tags": [
+        "react",
+        "api",
+        "claude",
+        "ai",
+        "template",
+        "design"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-03-17T07:14:54.180Z"
     },
     {
       "id": "antigravity-azd-deployment",
@@ -6286,7 +6362,7 @@
       "source": "superpowers",
       "repoUrl": "https://github.com/obra/superpowers",
       "skillUrl": "https://github.com/obra/superpowers/tree/main/skills/brainstorming",
-      "content": "\n# Brainstorming Ideas Into Designs\n\nHelp turn ideas into fully formed designs and specs through natural collaborative dialogue.\n\nStart by understanding the current project context, then ask questions one at a time to refine the idea. Once you understand what you're building, present the design and get user approval.\n\n<HARD-GATE>\nDo NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and the user has approved it. This applies to EVERY project regardless of perceived simplicity.\n</HARD-GATE>\n\n## Anti-Pattern: \"This Is Too Simple To Need A Design\"\n\nEvery project goes through this process. A todo list, a single-function utility, a config change — all of them. \"Simple\" projects are where unexamined assumptions cause the most wasted work. The design can be short (a few sentences for truly simple projects), but you MUST present it and get approval.\n\n## Checklist\n\nYou MUST create a task for each of these items and complete them in order:\n\n1. **Explore project context** — check files, docs, recent commits\n2. **Offer visual companion** (if topic will involve visual questions) — this is its own message, not combined with a clarifying question. See the Visual Companion section below.\n3. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria\n4. **Propose 2-3 approaches** — with trade-offs and your recommendation\n5. **Present design** — in sections scaled to their complexity, get user approval after each section\n6. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit\n7. **Spec review loop** — dispatch spec-document-reviewer subagent with precisely crafted review context (never your session history); fix issues and re-dispatch until approved (max 5 iterations, then surface to human)\n8. **User reviews written spec** — ask user to review the spec file before proceeding\n9. **Transition to implementation** — invoke writing-plans skill to create implementation plan\n\n## Process Flow\n\n```dot\ndigraph brainstorming {\n    \"Explore project context\" [shape=box];\n    \"Visual questions ahead?\" [shape=diamond];\n    \"Offer Visual Companion\\n(own message, no other content)\" [shape=box];\n    \"Ask clarifying questions\" [shape=box];\n    \"Propose 2-3 approaches\" [shape=box];\n    \"Present design sections\" [shape=box];\n    \"User approves design?\" [shape=diamond];\n    \"Write design doc\" [shape=box];\n    \"Spec review loop\" [shape=box];\n    \"Spec review passed?\" [shape=diamond];\n    \"User reviews spec?\" [shape=diamond];\n    \"Invoke writing-plans skill\" [shape=doublecircle];\n\n    \"Explore project context\" -> \"Visual questions ahead?\";\n    \"Visual questions ahead?\" -> \"Offer Visual Companion\\n(own message, no other content)\" [label=\"yes\"];\n    \"Visual questions ahead?\" -> \"Ask clarifying questions\" [label=\"no\"];\n    \"Offer Visual Companion\\n(own message, no other content)\" -> \"Ask clarifying questions\";\n    \"Ask clarifying questions\" -> \"Propose 2-3 approaches\";\n    \"Propose 2-3 approaches\" -> \"Present design sections\";\n    \"Present design sections\" -> \"User approves design?\";\n    \"User approves design?\" -> \"Present design sections\" [label=\"no, revise\"];\n    \"User approves design?\" -> \"Write design doc\" [label=\"yes\"];\n    \"Write design doc\" -> \"Spec review loop\";\n    \"Spec review loop\" -> \"Spec review passed?\";\n    \"Spec review passed?\" -> \"Spec review loop\" [label=\"issues found,\\nfix and re-dispatch\"];\n    \"Spec review passed?\" -> \"User reviews spec?\" [label=\"approved\"];\n    \"User reviews spec?\" -> \"Write design doc\" [label=\"changes requested\"];\n    \"User reviews spec?\" -> \"Invoke writing-plans skill\" [label=\"approved\"];\n}\n```\n\n**The terminal state is invoking writing-plans.** Do NOT invoke frontend-design, mcp-builder, or any other implementation skill. The ONLY skill you invoke after brainstorming is writing-plans.\n\n## The Process\n\n**Understanding the idea:**\n\n- Check out the current project state first (files, docs, recent commits)\n- Before asking detailed questions, assess scope: if the request describes multiple independent subsystems (e.g., \"build a platform with chat, file storage, billing, and analytics\"), flag this immediately. Don't spend questions refining details of a project that needs to be decomposed first.\n- If the project is too large for a single spec, help the user decompose into sub-projects: what are the independent pieces, how do they relate, what order should they be built? Then brainstorm the first sub-project through the normal design flow. Each sub-project gets its own spec → plan → implementation cycle.\n- For appropriately-scoped projects, ask questions one at a time to refine the idea\n- Prefer multiple choice questions when possible, but open-ended is fine too\n- Only one question per message - if a topic needs more exploration, break it into multiple questions\n- Focus on understanding: purpose, constraints, success criteria\n\n**Exploring approaches:**",
+      "content": "\n# Brainstorming Ideas Into Designs\n\nHelp turn ideas into fully formed designs and specs through natural collaborative dialogue.\n\nStart by understanding the current project context, then ask questions one at a time to refine the idea. Once you understand what you're building, present the design and get user approval.\n\n<HARD-GATE>\nDo NOT invoke any implementation skill, write any code, scaffold any project, or take any implementation action until you have presented a design and the user has approved it. This applies to EVERY project regardless of perceived simplicity.\n</HARD-GATE>\n\n## Anti-Pattern: \"This Is Too Simple To Need A Design\"\n\nEvery project goes through this process. A todo list, a single-function utility, a config change — all of them. \"Simple\" projects are where unexamined assumptions cause the most wasted work. The design can be short (a few sentences for truly simple projects), but you MUST present it and get approval.\n\n## Checklist\n\nYou MUST create a task for each of these items and complete them in order:\n\n1. **Explore project context** — check files, docs, recent commits\n2. **Offer visual companion** (if topic will involve visual questions) — this is its own message, not combined with a clarifying question. See the Visual Companion section below.\n3. **Ask clarifying questions** — one at a time, understand purpose/constraints/success criteria\n4. **Propose 2-3 approaches** — with trade-offs and your recommendation\n5. **Present design** — in sections scaled to their complexity, get user approval after each section\n6. **Write design doc** — save to `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md` and commit\n7. **Spec review loop** — dispatch spec-document-reviewer subagent with precisely crafted review context (never your session history); fix issues and re-dispatch until approved (max 3 iterations, then surface to human)\n8. **User reviews written spec** — ask user to review the spec file before proceeding\n9. **Transition to implementation** — invoke writing-plans skill to create implementation plan\n\n## Process Flow\n\n```dot\ndigraph brainstorming {\n    \"Explore project context\" [shape=box];\n    \"Visual questions ahead?\" [shape=diamond];\n    \"Offer Visual Companion\\n(own message, no other content)\" [shape=box];\n    \"Ask clarifying questions\" [shape=box];\n    \"Propose 2-3 approaches\" [shape=box];\n    \"Present design sections\" [shape=box];\n    \"User approves design?\" [shape=diamond];\n    \"Write design doc\" [shape=box];\n    \"Spec review loop\" [shape=box];\n    \"Spec review passed?\" [shape=diamond];\n    \"User reviews spec?\" [shape=diamond];\n    \"Invoke writing-plans skill\" [shape=doublecircle];\n\n    \"Explore project context\" -> \"Visual questions ahead?\";\n    \"Visual questions ahead?\" -> \"Offer Visual Companion\\n(own message, no other content)\" [label=\"yes\"];\n    \"Visual questions ahead?\" -> \"Ask clarifying questions\" [label=\"no\"];\n    \"Offer Visual Companion\\n(own message, no other content)\" -> \"Ask clarifying questions\";\n    \"Ask clarifying questions\" -> \"Propose 2-3 approaches\";\n    \"Propose 2-3 approaches\" -> \"Present design sections\";\n    \"Present design sections\" -> \"User approves design?\";\n    \"User approves design?\" -> \"Present design sections\" [label=\"no, revise\"];\n    \"User approves design?\" -> \"Write design doc\" [label=\"yes\"];\n    \"Write design doc\" -> \"Spec review loop\";\n    \"Spec review loop\" -> \"Spec review passed?\";\n    \"Spec review passed?\" -> \"Spec review loop\" [label=\"issues found,\\nfix and re-dispatch\"];\n    \"Spec review passed?\" -> \"User reviews spec?\" [label=\"approved\"];\n    \"User reviews spec?\" -> \"Write design doc\" [label=\"changes requested\"];\n    \"User reviews spec?\" -> \"Invoke writing-plans skill\" [label=\"approved\"];\n}\n```\n\n**The terminal state is invoking writing-plans.** Do NOT invoke frontend-design, mcp-builder, or any other implementation skill. The ONLY skill you invoke after brainstorming is writing-plans.\n\n## The Process\n\n**Understanding the idea:**\n\n- Check out the current project state first (files, docs, recent commits)\n- Before asking detailed questions, assess scope: if the request describes multiple independent subsystems (e.g., \"build a platform with chat, file storage, billing, and analytics\"), flag this immediately. Don't spend questions refining details of a project that needs to be decomposed first.\n- If the project is too large for a single spec, help the user decompose into sub-projects: what are the independent pieces, how do they relate, what order should they be built? Then brainstorm the first sub-project through the normal design flow. Each sub-project gets its own spec → plan → implementation cycle.\n- For appropriately-scoped projects, ask questions one at a time to refine the idea\n- Prefer multiple choice questions when possible, but open-ended is fine too\n- Only one question per message - if a topic needs more exploration, break it into multiple questions\n- Focus on understanding: purpose, constraints, success criteria\n\n**Exploring approaches:**",
       "tags": [
         "testing",
         "git",
@@ -8579,16 +8655,19 @@
       "id": "antigravity-comprehensive-review-pr-enhance",
       "name": "comprehensive-review-pr-enhance",
       "slug": "comprehensive-review-pr-enhance",
-      "description": "You are a PR optimization expert specializing in creating high-quality pull requests that facilitate efficient code reviews. Generate comprehensive PR descriptions, automate review processes, and e...",
+      "description": "Generate structured PR descriptions from diffs, add review checklists, risk assessments, and test coverage summaries. Use when the user says \"write a PR description\", \"improve this PR\", \"summarize my changes\", \"PR review\", \"pull request\", or asks to document a diff for reviewers.\n",
       "category": "Document Processing",
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/comprehensive-review-pr-enhance",
-      "content": "\n# Pull Request Enhancement\n\nYou are a PR optimization expert specializing in creating high-quality pull requests that facilitate efficient code reviews. Generate comprehensive PR descriptions, automate review processes, and ensure PRs follow best practices for clarity, size, and reviewability.\n\n## Use this skill when\n\n- Writing or improving PR descriptions\n- Summarizing changes for faster reviews\n- Organizing tests, risks, and rollout notes\n- Reducing PR size or improving reviewability\n\n## Do not use this skill when\n\n- There is no PR or change list to summarize\n- You need a full code review instead of PR polishing\n- The task is unrelated to software delivery\n\n## Context\nThe user needs to create or improve pull requests with detailed descriptions, proper documentation, test coverage analysis, and review facilitation. Focus on making PRs that are easy to review, well-documented, and include all necessary context.\n\n## Requirements\n$ARGUMENTS\n\n## Instructions\n\n- Analyze the diff and identify intent and scope.\n- Summarize changes, tests, and risks clearly.\n- Highlight breaking changes and rollout notes.\n- Add checklists and reviewer guidance.\n- If detailed templates are required, open `resources/implementation-playbook.md`.\n\n## Output Format\n\n- PR summary and scope\n- What changed and why\n- Tests performed and results\n- Risks, rollbacks, and reviewer notes\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed templates and examples.\n",
+      "content": "\n# Pull Request Enhancement\n\n## Workflow\n\n1. Run `git diff <base>...HEAD --stat` to identify changed files and scope\n2. Categorise changes: source, test, config, docs, build, styles\n3. Generate the PR description using the template below\n4. Add a review checklist based on which file categories changed\n5. Flag breaking changes, security-sensitive files, or large diffs (>500 lines)\n\n## PR Description Template\n\n```markdown\n## Summary\n<!-- one-paragraph executive summary: what changed and why -->\n\n## Changes\n| Category | Files | Key change |\n|----------|-------|------------|\n| source   | `src/auth.ts` | added OAuth2 PKCE flow |\n| test     | `tests/auth.test.ts` | covers token refresh edge case |\n| config   | `.env.example` | new `OAUTH_CLIENT_ID` var |\n\n## Why\n<!-- link to issue/ticket + one sentence on motivation -->\n\n## Testing\n- [ ] unit tests pass (`npm test`)\n- [ ] manual smoke test on staging\n- [ ] no coverage regression\n\n## Risks & Rollback\n- **Breaking?** yes / no\n- **Rollback**: revert this commit; no migration needed\n- **Risk level**: low / medium / high — because ___\n```\n\n## Review Checklist Rules\n\nAdd checklist sections only when the matching file category appears in the diff:\n\n| File category | Checklist items |\n|---------------|----------------|\n| source | no debug statements, functions <50 lines, descriptive names, error handling |\n| test | meaningful assertions, edge cases, no flaky tests, AAA pattern |\n| config | no hardcoded secrets, env vars documented, backwards compatible |\n| docs | accurate, examples included, changelog updated |\n| security-sensitive (`auth`, `crypto`, `token`, `password` in path) | input validation, no secrets in logs, authz correct |\n\n## Splitting Large PRs\n\nWhen diff exceeds 20 files or 1000 lines, suggest splitting by feature area:\n\n```\ngit checkout -b feature/part-1\ngit cherry-pick <commits-for-part-1>\n```\n\n## Resources\n\n- `resources/implementation-playbook.md` — Python helpers for automated PR analysis, coverage reports, and risk scoring\n",
       "tags": [
-        "ai",
+        "python",
+        "markdown",
+        "workflow",
         "template",
         "document",
+        "security",
         "rag"
       ],
       "useCases": [],
@@ -24983,68 +25062,6 @@
       "scrapedAt": "2026-03-09T07:15:57.556Z"
     },
     {
-      "id": "antigravity-security-requirement-extraction",
-      "name": "security-requirement-extraction",
-      "slug": "security-requirement-extraction",
-      "description": "Derive security requirements from threat models and business context. Use when translating threats into actionable requirements, creating security user stories, or building security test cases.",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/security-requirement-extraction",
-      "content": "\n# Security Requirement Extraction\n\nTransform threat analysis into actionable security requirements.\n\n## Use this skill when\n\n- Converting threat models to requirements\n- Writing security user stories\n- Creating security test cases\n- Building security acceptance criteria\n- Compliance requirement mapping\n- Security architecture documentation\n\n## Do not use this skill when\n\n- The task is unrelated to security requirement extraction\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
-      "tags": [
-        "ai",
-        "document",
-        "security"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:15:58.009Z"
-    },
-    {
-      "id": "antigravity-security-scanning-security-dependencies",
-      "name": "security-scanning-security-dependencies",
-      "slug": "security-scanning-security-dependencies",
-      "description": "You are a security expert specializing in dependency vulnerability analysis, SBOM generation, and supply chain security. Scan project dependencies across ecosystems to identify vulnerabilities, ass...",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/security-scanning-security-dependencies",
-      "content": "\n# Dependency Vulnerability Scanning\n\nYou are a security expert specializing in dependency vulnerability analysis, SBOM generation, and supply chain security. Scan project dependencies across multiple ecosystems to identify vulnerabilities, assess risks, and provide automated remediation strategies.\n\n## Use this skill when\n\n- Auditing dependencies for vulnerabilities or license risks\n- Generating SBOMs for compliance or supply chain visibility\n- Planning remediation for outdated or vulnerable packages\n- Standardizing dependency scanning across ecosystems\n\n## Do not use this skill when\n\n- You only need runtime security testing\n- There is no dependency manifest or lockfile\n- The environment blocks running security scanners\n\n## Context\nThe user needs comprehensive dependency security analysis to identify vulnerable packages, outdated dependencies, and license compliance issues. Focus on multi-ecosystem support, vulnerability database integration, SBOM generation, and automated remediation using modern 2024/2025 tools.\n\n## Requirements\n$ARGUMENTS\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Safety\n\n- Avoid running auto-fix or upgrade steps without approval.\n- Treat dependency changes as release-impacting and test accordingly.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
-      "tags": [
-        "ai",
-        "security",
-        "vulnerability",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:15:58.467Z"
-    },
-    {
-      "id": "antigravity-security-scanning-security-hardening",
-      "name": "security-scanning-security-hardening",
-      "slug": "security-scanning-security-hardening",
-      "description": "Coordinate multi-layer security scanning and hardening across application, infrastructure, and compliance controls.",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/security-scanning-security-hardening",
-      "content": "\nImplement comprehensive security hardening with defense-in-depth strategy through coordinated multi-agent orchestration:\n\n[Extended thinking: This workflow implements a defense-in-depth security strategy across all application layers. It coordinates specialized security agents to perform comprehensive assessments, implement layered security controls, and establish continuous security monitoring. The approach follows modern DevSecOps principles with shift-left security, automated scanning, and compliance validation. Each phase builds upon previous findings to create a resilient security posture that addresses both current vulnerabilities and future threats.]\n\n## Use this skill when\n\n- Running a coordinated security hardening program\n- Establishing defense-in-depth controls across app, infra, and CI/CD\n- Prioritizing remediation from scans and threat modeling\n\n## Do not use this skill when\n\n- You only need a quick scan without remediation work\n- You lack authorization for security testing or changes\n- The environment cannot tolerate invasive security controls\n\n## Instructions\n\n1. Execute Phase 1 to establish a security baseline.\n2. Apply Phase 2 remediations for high-risk issues.\n3. Implement Phase 3 controls and validate defenses.\n4. Complete Phase 4 validation and compliance checks.\n\n## Safety\n\n- Avoid intrusive testing in production without approval.\n- Ensure rollback plans exist before hardening changes.\n\n## Phase 1: Comprehensive Security Assessment\n\n### 1. Initial Vulnerability Scanning\n- Use Task tool with subagent_type=\"security-auditor\"\n- Prompt: \"Perform comprehensive security assessment on: $ARGUMENTS. Execute SAST analysis with Semgrep/SonarQube, DAST scanning with OWASP ZAP, dependency audit with Snyk/Trivy, secrets detection with GitLeaks/TruffleHog. Generate SBOM for supply chain analysis. Identify OWASP Top 10 vulnerabilities, CWE weaknesses, and CVE exposures.\"\n- Output: Detailed vulnerability report with CVSS scores, exploitability analysis, attack surface mapping, secrets exposure report, SBOM inventory\n- Context: Initial baseline for all remediation efforts\n\n### 2. Threat Modeling and Risk Analysis\n- Use Task tool with subagent_type=\"security-auditor\"\n- Prompt: \"Conduct threat modeling using STRIDE methodology for: $ARGUMENTS. Analyze attack vectors, create attack trees, assess business impact of identified vulnerabilities. Map threats to MITRE ATT&CK framework. Prioritize risks based on likelihood and impact.\"\n- Output: Threat model diagrams, risk matrix with prioritized vulnerabilities, attack scenario documentation, business impact analysis\n- Context: Uses vulnerability scan results to inform threat priorities\n\n### 3. Architecture Security Review\n- Use Task tool with subagent_type=\"backend-api-security::backend-architect\"\n- Prompt: \"Review architecture for security weaknesses in: $ARGUMENTS. Evaluate service boundaries, data flow security, authentication/authorization architecture, encryption implementation, network segmentation. Design zero-trust architecture patterns. Reference threat model and vulnerability findings.\"\n- Output: Security architecture assessment, zero-trust design recommendations, service mesh security requirements, data classification matrix\n- Context: Incorporates threat model to address architectural vulnerabilities\n\n## Phase 2: Vulnerability Remediation\n\n### 4. Critical Vulnerability Fixes\n- Use Task tool with subagent_type=\"security-auditor\"\n- Prompt: \"Coordinate immediate remediation of critical vulnerabilities (CVSS 7+) in: $ARGUMENTS. Fix SQL injections with parameterized queries, XSS with output encoding, authentication bypasses with secure session management, insecure deserialization with input validation. Apply security patches for CVEs.\"\n- Output: Patched code with vulnerability fixes, security patch documentation, regression test requirements\n- Context: Addresses high-priority items from vulnerability assessment\n\n### 5. Backend Security Hardening\n- Use Task tool with subagent_type=\"backend-api-security::backend-security-coder\"\n- Prompt: \"Implement comprehensive backend security controls for: $ARGUMENTS. Add input validation with OWASP ESAPI, implement rate limiting and DDoS protection, secure API endpoints with OAuth2/JWT validation, add encryption for data at rest/transit using AES-256/TLS 1.3. Implement secure logging without PII exposure.\"\n- Output: Hardened API endpoints, validation middleware, encryption implementation, secure configuration templates\n- Context: Builds upon vulnerability fixes with preventive controls\n\n### 6. Frontend Security Implementation\n- Use Task tool with subagent_type=\"frontend-mobile-security::frontend-security-coder\"\n- Prompt: \"Implement frontend security measures for: $ARGUMENTS. Configure CSP headers with nonce-based policies, implement XSS prevention with DOMPurify, secure authentication flows with PKCE OAuth2, add SRI for external resources, implement secure cookie handling with SameSite/HttpOnly/Secure flags.\"\n- Output:",
-      "tags": [
-        "api",
-        "ai",
-        "agent",
-        "workflow",
-        "template",
-        "design",
-        "document",
-        "security",
-        "vulnerability",
-        "aws"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:15:58.941Z"
-    },
-    {
       "id": "anthropic-skill-creator",
       "name": "skill-creator",
       "slug": "skill-creator",
@@ -25649,7 +25666,7 @@
       "source": "superpowers",
       "repoUrl": "https://github.com/obra/superpowers",
       "skillUrl": "https://github.com/obra/superpowers/tree/main/skills/writing-plans",
-      "content": "\n# Writing Plans\n\n## Overview\n\nWrite comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.\n\nAssume they are a skilled developer, but know almost nothing about our toolset or problem domain. Assume they don't know good test design very well.\n\n**Announce at start:** \"I'm using the writing-plans skill to create the implementation plan.\"\n\n**Context:** This should be run in a dedicated worktree (created by brainstorming skill).\n\n**Save plans to:** `docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md`\n- (User preferences for plan location override this default)\n\n## Scope Check\n\nIf the spec covers multiple independent subsystems, it should have been broken into sub-project specs during brainstorming. If it wasn't, suggest breaking this into separate plans — one per subsystem. Each plan should produce working, testable software on its own.\n\n## File Structure\n\nBefore defining tasks, map out which files will be created or modified and what each one is responsible for. This is where decomposition decisions get locked in.\n\n- Design units with clear boundaries and well-defined interfaces. Each file should have one clear responsibility.\n- You reason best about code you can hold in context at once, and your edits are more reliable when files are focused. Prefer smaller, focused files over large ones that do too much.\n- Files that change together should live together. Split by responsibility, not by technical layer.\n- In existing codebases, follow established patterns. If the codebase uses large files, don't unilaterally restructure - but if a file you're modifying has grown unwieldy, including a split in the plan is reasonable.\n\nThis structure informs the task decomposition. Each task should produce self-contained changes that make sense independently.\n\n## Bite-Sized Task Granularity\n\n**Each step is one action (2-5 minutes):**\n- \"Write the failing test\" - step\n- \"Run it to make sure it fails\" - step\n- \"Implement the minimal code to make the test pass\" - step\n- \"Run the tests and make sure they pass\" - step\n- \"Commit\" - step\n\n## Plan Document Header\n\n**Every plan MUST start with this header:**\n\n```markdown\n# [Feature Name] Implementation Plan\n\n> **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.\n\n**Goal:** [One sentence describing what this builds]\n\n**Architecture:** [2-3 sentences about approach]\n\n**Tech Stack:** [Key technologies/libraries]\n\n---\n```\n\n## Task Structure\n\n````markdown\n### Task N: [Component Name]\n\n**Files:**\n- Create: `exact/path/to/file.py`\n- Modify: `exact/path/to/existing.py:123-145`\n- Test: `tests/exact/path/to/test.py`\n\n- [ ] **Step 1: Write the failing test**\n\n```python\ndef test_specific_behavior():\n    result = function(input)\n    assert result == expected\n```\n\n- [ ] **Step 2: Run test to verify it fails**\n\nRun: `pytest tests/path/test.py::test_name -v`\nExpected: FAIL with \"function not defined\"\n\n- [ ] **Step 3: Write minimal implementation**\n\n```python\ndef function(input):\n    return expected\n```\n\n- [ ] **Step 4: Run test to verify it passes**\n\nRun: `pytest tests/path/test.py::test_name -v`\nExpected: PASS\n\n- [ ] **Step 5: Commit**\n\n```bash\ngit add tests/path/test.py src/path/file.py\ngit commit -m \"feat: add specific feature\"\n```\n````\n\n## Remember\n- Exact file paths always\n- Complete code in plan (not \"add validation\")\n- Exact commands with expected output\n- Reference relevant skills with @ syntax\n- DRY, YAGNI, TDD, frequent commits\n\n## Plan Review Loop\n\nAfter completing each chunk of the plan:\n\n1. Dispatch plan-document-reviewer subagent (see plan-document-reviewer-prompt.md) with precisely crafted review context — never your session history. This keeps the reviewer focused on the plan, not your thought process.\n   - Provide: chunk content, path to spec document\n2. If ❌ Issues Found:\n   - Fix the issues in the chunk\n   - Re-dispatch reviewer for that chunk\n   - Repeat until ✅ Approved\n3. If ✅ Approved: proceed to next chunk (or execution handoff if last chunk)\n\n**Chunk boundaries:** Use `## Chunk N: <name>` headings to delimit chunks. Each chunk should be ≤1000 lines and logically self-contained.\n\n**Review loop guidance:**\n- Same agent that wrote the plan fixes it (preserves context)\n- If loop exceeds 5 iterations, surface to human for guidance\n- Reviewers are advisory - explain disagreements if you believe feedback is incorrect\n\n## Execution Handoff\n\nAfter saving the plan:\n\n**\"Plan complete and saved to `docs/superpowers/plans/<filename>.md`. Ready to execute?\"**\n\n**Execution path depends on harness capabilities:**\n\n**If harness has subagents (Claude Code, etc.):**\n- **",
+      "content": "\n# Writing Plans\n\n## Overview\n\nWrite comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.\n\nAssume they are a skilled developer, but know almost nothing about our toolset or problem domain. Assume they don't know good test design very well.\n\n**Announce at start:** \"I'm using the writing-plans skill to create the implementation plan.\"\n\n**Context:** This should be run in a dedicated worktree (created by brainstorming skill).\n\n**Save plans to:** `docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md`\n- (User preferences for plan location override this default)\n\n## Scope Check\n\nIf the spec covers multiple independent subsystems, it should have been broken into sub-project specs during brainstorming. If it wasn't, suggest breaking this into separate plans — one per subsystem. Each plan should produce working, testable software on its own.\n\n## File Structure\n\nBefore defining tasks, map out which files will be created or modified and what each one is responsible for. This is where decomposition decisions get locked in.\n\n- Design units with clear boundaries and well-defined interfaces. Each file should have one clear responsibility.\n- You reason best about code you can hold in context at once, and your edits are more reliable when files are focused. Prefer smaller, focused files over large ones that do too much.\n- Files that change together should live together. Split by responsibility, not by technical layer.\n- In existing codebases, follow established patterns. If the codebase uses large files, don't unilaterally restructure - but if a file you're modifying has grown unwieldy, including a split in the plan is reasonable.\n\nThis structure informs the task decomposition. Each task should produce self-contained changes that make sense independently.\n\n## Bite-Sized Task Granularity\n\n**Each step is one action (2-5 minutes):**\n- \"Write the failing test\" - step\n- \"Run it to make sure it fails\" - step\n- \"Implement the minimal code to make the test pass\" - step\n- \"Run the tests and make sure they pass\" - step\n- \"Commit\" - step\n\n## Plan Document Header\n\n**Every plan MUST start with this header:**\n\n```markdown\n# [Feature Name] Implementation Plan\n\n> **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.\n\n**Goal:** [One sentence describing what this builds]\n\n**Architecture:** [2-3 sentences about approach]\n\n**Tech Stack:** [Key technologies/libraries]\n\n---\n```\n\n## Task Structure\n\n````markdown\n### Task N: [Component Name]\n\n**Files:**\n- Create: `exact/path/to/file.py`\n- Modify: `exact/path/to/existing.py:123-145`\n- Test: `tests/exact/path/to/test.py`\n\n- [ ] **Step 1: Write the failing test**\n\n```python\ndef test_specific_behavior():\n    result = function(input)\n    assert result == expected\n```\n\n- [ ] **Step 2: Run test to verify it fails**\n\nRun: `pytest tests/path/test.py::test_name -v`\nExpected: FAIL with \"function not defined\"\n\n- [ ] **Step 3: Write minimal implementation**\n\n```python\ndef function(input):\n    return expected\n```\n\n- [ ] **Step 4: Run test to verify it passes**\n\nRun: `pytest tests/path/test.py::test_name -v`\nExpected: PASS\n\n- [ ] **Step 5: Commit**\n\n```bash\ngit add tests/path/test.py src/path/file.py\ngit commit -m \"feat: add specific feature\"\n```\n````\n\n## Remember\n- Exact file paths always\n- Complete code in plan (not \"add validation\")\n- Exact commands with expected output\n- Reference relevant skills with @ syntax\n- DRY, YAGNI, TDD, frequent commits\n\n## Plan Review Loop\n\nAfter writing the complete plan:\n\n1. Dispatch a single plan-document-reviewer subagent (see plan-document-reviewer-prompt.md) with precisely crafted review context — never your session history. This keeps the reviewer focused on the plan, not your thought process.\n   - Provide: path to the plan document, path to spec document\n2. If ❌ Issues Found: fix the issues, re-dispatch reviewer for the whole plan\n3. If ✅ Approved: proceed to execution handoff\n\n**Review loop guidance:**\n- Same agent that wrote the plan fixes it (preserves context)\n- If loop exceeds 3 iterations, surface to human for guidance\n- Reviewers are advisory — explain disagreements if you believe feedback is incorrect\n\n## Execution Handoff\n\nAfter saving the plan:\n\n**\"Plan complete and saved to `docs/superpowers/plans/<filename>.md`. Ready to execute?\"**\n\n**Execution path depends on harness capabilities:**\n\n**If harness has subagents (Claude Code, etc.):**\n- **REQUIRED:** Use superpowers:subagent-driven-development\n- Do NOT offer a choice - subagent-driven is the standard approach\n- Fresh subagent per task + two-stage review\n\n**If harness does NOT have subagen",
       "tags": [
         "tdd",
         "testing",
@@ -25736,14 +25753,14 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 368
+      "count": 369
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 352
+      "count": 353
     },
     {
       "id": "development-code-tools",
@@ -25757,14 +25774,14 @@
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 97
+      "count": 98
     },
     {
       "id": "security-systems",
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 85
+      "count": 82
     },
     {
       "id": "business-marketing",
@@ -25808,48 +25825,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 86870
+      "stars": 89662
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 94478
+      "stars": 95355
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 44520
+      "stars": 44880
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 69187
+      "stars": 69255
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 999
+      "stars": 1001
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1003,
-      "newSkillCount": 5,
-      "stars": 24703
+      "newSkillCount": 8,
+      "stars": 25032
     }
   ],
-  "lastUpdated": "2026-03-16T07:32:53.783Z",
+  "lastUpdated": "2026-03-17T07:22:54.274Z",
   "stats": {
     "totalSkills": 1102,
-    "newSkills": 15,
-    "scrapedAt": "2026-03-16T07:32:53.783Z"
+    "newSkills": 18,
+    "scrapedAt": "2026-03-17T07:22:54.274Z"
   }
 }

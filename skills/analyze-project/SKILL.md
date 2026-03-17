@@ -3,106 +3,116 @@ name: analyze-project
 description: Forensic root cause analyzer for Antigravity sessions. Classifies scope deltas, rework patterns, root causes, hotspots, and auto-improves prompts/health. 
 category: AI & Agents
 source: antigravity
-tags: [ai, agent, workflow, template, rag, cro]
+tags: [ai, agent, workflow, design, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/analyze-project
 ---
 
 
 # /analyze-project — Root Cause Analyst Workflow
 
-Analyze AI-assisted coding sessions in `brain/` and produce a diagnostic report that explains not just **what happened**, but **why it happened**, **who/what caused it**, and **what should change next time**.
+Analyze AI-assisted coding sessions in `~/.gemini/antigravity/brain/` and produce a report that explains not just **what happened**, but **why it happened**, **who/what caused it**, and **what should change next time**.
 
-This workflow is not a simple metrics dashboard.
-It is a forensic analysis workflow for AI coding sessions.
-
----
-
-## Primary Objective
+## Goal
 
 For each session, determine:
 
 1. What changed from the initial ask to the final executed work
-2. Whether the change was caused primarily by:
-   - the user/spec
-   - the agent
-   - the codebase/repo
-   - testing/verification
+2. Whether the main cause was:
+   - user/spec
+   - agent
+   - repo/codebase
+   - validation/testing
    - legitimate task complexity
-3. Whether the original prompt was sufficient for the actual job
-4. Which subsystems or files repeatedly correlate with struggle
-5. What concrete changes would most improve future sessions
+3. Whether the opening prompt was sufficient
+4. Which files/subsystems repeatedly correlate with struggle
+5. What changes would most improve future sessions
 
----
+## Global Rules
 
-## Core Principles
-
-- Treat `.resolved.N` counts as **signals of iteration intensity**, not proof of failure
-- Do not label struggle based on counts alone; classify the **shape** of rework
-- Separate **human-added scope** from **necessary discovered scope**
+- Treat `.resolved.N` counts as **iteration signals**, not proof of failure
+- Separate **human-added scope**, **necessary discovered scope**, and **agent-introduced scope**
 - Separate **agent error** from **repo friction**
-- Every diagnosis must include **evidence**
-- Every recommendation must map to a specific observed pattern
-- Use confidence levels:
-  - **High** = directly supported by artifact contents or timestamps
-  - **Medium** = supported by multiple indirect signals
+- Every diagnosis must include **evidence** and **confidence**
+- Confidence levels:
+  - **High** = direct artifact/timestamp evidence
+  - **Medium** = multiple supporting signals
   - **Low** = plausible inference, not directly proven
+- Evidence precedence:
+  - artifact contents > timestamps > metadata summaries > inference
+- If evidence is weak, say so
 
 ---
 
-## Step 1: Discovery — Find Relevant Conversations
+## Step 0.5: Session Intent Classification
 
-1. Read the conversation summaries available in the system context.
-2. List all subdirectories in:
-   `~/.gemini/antigravity/brain/
-3. Build a **Conversation Index** by cross-referencing summaries with UUID folders.
-4. Record for each conversation:
+Classify the primary session intent from objective + artifacts:
+
+- `DELIVERY`
+- `DEBUGGING`
+- `REFACTOR`
+- `RESEARCH`
+- `EXPLORATION`
+- `AUDIT_ANALYSIS`
+
+Record:
+- `session_intent`
+- `session_intent_confidence`
+
+Use intent to contextualize severity and rework shape.
+Do not judge exploratory or research sessions by the same standards as narrow delivery sessions.
+
+---
+
+## Step 1: Discover Conversations
+
+1. Read available conversation summaries from system context
+2. List conversation folders in the user’s Antigravity `brain/` directory
+3. Build a conversation index with:
    - `conversation_id`
    - `title`
    - `objective`
    - `created`
    - `last_modified`
-5. If the user supplied a keyword/path, filter on that. Otherwise analyze all workspace conversations.
+4. If the user supplied a keyword/path, filter to matching conversations; otherwise analyze all
 
-> Output: indexed list of conversations to analyze.
+Output: indexed list of conversations to analyze.
 
 ---
 
-## Step 2: Artifact Extraction — Build Session Evidence
+## Step 2: Extract Session Evidence
 
-For each conversation, read all structured artifacts that exist.
+For each conversation, read if present:
 
-### 2a. Core Artifacts
+### Core artifacts
 - `task.md`
 - `implementation_plan.md`
 - `walkthrough.md`
 
-### 2b. Metadata
+### Metadata
 - `*.metadata.json`
 
-### 2c. Version Snapshots
+### Version snapshots
 - `task.md.resolved.0 ... N`
 - `implementation_plan.md.resolved.0 ... N`
 - `walkthrough.md.resolved.0 ... N`
 
-### 2d. Additional Signals
+### Additional signals
 - other `.md` artifacts
-- report/evaluation files
 - timestamps across artifact updates
-- file/folder names mentioned in plans and walkthroughs
-- repeated subsystem references
-- explicit testing/validation language
-- explicit non-goals or constraints, if present
+- file/folder/subsystem names mentioned in plans/walkthroughs
+- validation/testing language
+- explicit acceptance criteria, constraints, non-goals, and file targets
 
-### 2e. Record Per Conversation
+Record per conversation:
 
-#### Presence / Lifecycle
+#### Lifecycle
 - `has_task`
 - `has_plan`
 - `has_walkthrough`
 - `is_completed`
-- `is_abandoned_candidate` = has task but no walkthrough
+- `is_abandoned_candidate` = task exists but no walkthrough
 
-#### Revision / Change Volume
+#### Revision / change volume
 - `task_versions`
 - `plan_versions`
 - `walkthrough_versions`
@@ -120,7 +130,7 @@ For each conversation, read all structured artifacts that exist.
 - `completed_at`
 - `duration_minutes`
 
-#### Content / Quality Signals
+#### Content / quality
 - `objective_text`
 - `initial_plan_summary`
 - `final_plan_summary`
@@ -137,48 +147,56 @@ For each conversation, read all structured artifacts that exist.
 
 ---
 
-## Step 3: Prompt Sufficiency Analysis
+## Step 3: Prompt Sufficiency
 
-For each conversation, score the opening objective/request on a 0–2 scale for each dimension:
+Score the opening request on a 0–2 scale for:
 
-- **Clarity** — is the ask understandable?
-- **Boundedness** — are scope limits defined?
-- **Testability** — are success conditions or acceptance criteria defined?
-- **Architectural specificity** — are files/modules/systems identified?
-- **Constraint awareness** — are non-goals, constraints, or environment details included?
-- **Dependency awareness** — does the prompt acknowledge affected systems or hidden coupling?
+- **Clarity**
+- **Boundedness**
+- **Testability**
+- **Architectural specificity**
+- **Constraint awareness**
+- **Dependency awareness**
 
 Create:
 - `prompt_sufficiency_score`
 - `prompt_sufficiency_band` = High / Medium / Low
 
-Then note which missing ingredients likely contributed to later friction.
+Then note which missing prompt ingredients likely contributed to later friction.
 
-Important:
-Do not assume a low-detail prompt is bad by default.
-Short prompts can still be good if the task is narrow and the repo context is obvious.
+Do not punish short prompts by default; a narrow, obvious task can still have high sufficiency.
 
 ---
 
 ## Step 4: Scope Change Classification
 
-Do not treat all scope growth as the same.
+Classify scope change into:
 
-For each conversation, classify scope delta into:
+- **Human-added scope** — new asks beyond the original task
+- **Necessary discovered scope** — work required to complete the original task correctly
+- **Agent-introduced scope** — likely unnecessary work introduced by the agent
 
-### 4a. Human-Added Scope
-New items clearly introduced beyond the initial ask.
-Examples:
-- optional enhancements
-- follow-on refactors
-- “while we are here” additions
-- cosmetic or adjacent work added later
+Record:
+- `scope_change_type_primary`
+- `scope_change_type_secondary` (optional)
+- `scope_change_confidence`
+- evidence
 
-### 4b. Necessary Discovered Scope
-Work that was not in the opening ask but appears required to complete it correctly.
-Examples:
-- dependency fixes
-- required validation work
-- hidden integration tasks
-- migration fallout
-- cou
+Keep one short example in mind for calibration:
+- Human-added: “also refactor nearby code while you’re here”
+- Necessary discovered: hidden dependency must be fixed for original task to work
+- Agent-introduced: extra cleanup or redesign not requested and not required
+
+---
+
+## Step 5: Rework Shape
+
+Classify each session into one primary pattern:
+
+- **Clean execution**
+- **Early replan then stable finish**
+- **Progressive scope expansion**
+- **Reopen/reclose churn**
+- **Late-stage verification churn**
+- **Abandoned mid-flight**
+- **Exploratory / research

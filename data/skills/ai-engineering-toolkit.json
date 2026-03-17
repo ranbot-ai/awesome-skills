@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-ai-engineering-toolkit",
+  "name": "ai-engineering-toolkit",
+  "slug": "ai-engineering-toolkit",
+  "description": "6 production-ready AI engineering workflows: prompt evaluation (8-dimension scoring), context budget planning, RAG pipeline design, agent security audit (65-point checklist), eval harness building, and product sense coaching.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-engineering-toolkit",
+  "content": "\n# AI Engineering Toolkit\n\n## Overview\n\nA collection of 6 structured, expert-level workflows that turn your AI coding assistant into a senior AI engineering partner. Each skill encodes a repeatable methodology — not just \"ask AI to help,\" but a step-by-step decision framework with quantitative scoring, checklists, and decision trees.\n\nThe key difference from ad-hoc AI assistance: **every workflow produces consistent, reproducible results** regardless of who runs it or when. You can use the scoring systems as team baselines and write them into CI/CD pipelines.\n\n## When to Use This Skill\n\n- Use when evaluating or optimizing LLM system prompts before production deployment\n- Use when designing a RAG pipeline and need structured architecture decisions (not just boilerplate code)\n- Use when planning token budget allocation across context window zones\n- Use when running pre-launch security audits on AI agents\n- Use when building evaluation frameworks for LLM applications\n- Use when thinking through product strategy before writing code\n\n## How It Works\n\n### Skill 1: Prompt Evaluator\n\nScores prompts across 8 dimensions (Clarity, Specificity, Completeness, Conciseness, Structure, Grounding, Safety, Robustness) on a 1-10 scale with weighted aggregation to a 0-100 score. Identifies the 3 weakest dimensions, generates targeted rewrites, and re-evaluates. Supports single prompt, A/B comparison, and batch evaluation modes.\n\n### Skill 2: Context Budget Planner\n\nAnalyzes token distribution across 5 context zones (System, Few-shot, User input, Retrieval, Output) and produces an optimized allocation plan. Includes a compression strategy decision tree for each zone. Common finding: output zone squeezed to under 6% — this skill catches that before truncation happens.\n\n### Skill 3: RAG Pipeline Architect\n\nWalks through a complete architecture decision tree: document format → parsing strategy → chunking approach (fixed/semantic/recursive) → embedding model selection → retrieval method (vector/keyword/hybrid) → evaluation metrics (Faithfulness, Relevancy, Context Precision). Covers Naive RAG, Advanced RAG, and Modular RAG patterns.\n\n### Skill 4: Agent Safety Guard\n\n> **⚠️ AUTHORIZED USE ONLY**\n> This skill is for educational purposes or authorized security assessments only.\n> You must have explicit, written permission from the system owner before using this tool.\n> Misuse of this tool is illegal and strictly prohibited.\n\nExecutes a 65-point red-team audit across 5 attack categories: direct prompt injection, indirect prompt injection (via RAG documents), information extraction (system prompt / API key leakage), tool abuse (SQL injection, path traversal, command injection), and goal hijacking. The AI constructs adversarial test prompts for evaluation purposes, asks the user for confirmation before each test phase, judges pass/fail, and generates fix recommendations. All tests are contained within the evaluation context and do not interact with external systems. It is recommended to run audits in a sandboxed environment (Docker/VM).\n\n### Skill 5: Eval Harness Builder\n\nDesigns evaluation metric systems for LLM applications. Includes LLM-as-Judge scoring framework with bias mitigation strategies (position bias, verbosity bias, self-enhancement bias). Outputs CI/CD-ready evaluation pipeline templates.\n\n### Skill 6: Product Sense Coach\n\nA 5-phase guided conversation framework: dig into motivation → assess market opportunity → find the path → design scenarios → analyze competition. Useful for thinking through \"should we build this?\" before writing any code.\n\n## Examples\n\n### Example 1: Prompt Evaluation\n\nAsk: \"Evaluate this system prompt\"\n\n```\nYou are a customer support agent. Help users with their questions. Be nice and helpful.\n```\n\nResult: Overall score **28/100**. Weakest dimensions: Safety (1/10, zero injection protection), Specificity (2/10, no output format), Structure (2/10, no sections). Auto-rewrite scores **82/100** with added scope boundaries, response format, escalation rules, and safety guardrails.\n\n### Example 2: Security Audit\n\nAsk: \"Run a security audit on my customer support agent\"\n\nResult: 65 tests executed. 3 critical failures found: Base64-encoded instruction bypass, path traversal via tool calls, system prompt extraction via role-play. Fix recommendations provided for each.\n\n## Best Practices\n\n- ✅ Run prompt-evaluator before any production deployment — set a team baseline (e.g., ≥70/100)\n- ✅ Use context-budget-planner early in development, not after hitting truncation issues\n- ✅ Run agent-safety-guard as a pre-launch gate, not post-incident\n- ✅ Combine skills in sequence: RAG design → context optimization → prompt polish → security audit → eval setup\n- ❌ Don't rely on a single dimension score — look at the full profile\n- ❌ Don't skip the security audit because \"it's just an internal tool\"\n\n## Security & Safety Notes\n\n- All skills are read-only analysis and advisory workflows. No skills modify files or make network re",
+  "tags": [
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "llm",
+    "workflow",
+    "template",
+    "design",
+    "document",
+    "security"
+  ],
+  "useCases": [
+    "Use when evaluating or optimizing LLM system prompts before production deployment",
+    "Use when designing a RAG pipeline and need structured architecture decisions (not just boilerplate code)",
+    "Use when planning token budget allocation across context window zones",
+    "Use when running pre-launch security audits on AI agents",
+    "Use when building evaluation frameworks for LLM applications"
+  ],
+  "scrapedAt": "2026-03-17T07:14:06.121Z"
+}
