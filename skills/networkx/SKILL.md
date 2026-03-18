@@ -7,10 +7,6 @@ tags: [python, node, pdf, ai, workflow, document, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/networkx
 ---
 
- 3-clause BSD license
-metadata:
-    skill-author: K-Dense Inc.
----
 
 # NetworkX
 
@@ -186,4 +182,8 @@ A = nx.to_numpy_array(G)
 G = nx.from_numpy_array(A)
 
 # Sparse matrix
-A = nx.to_scipy_sparse_
+A = nx.to_scipy_sparse_array(G)
+G = nx.from_scipy_sparse_array(A)
+```
+
+**Reference**: See 

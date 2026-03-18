@@ -7,10 +7,6 @@ tags: [python, api, ai, automation, workflow, document, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/biopython
 ---
 
- Unknown
-metadata:
-    skill-author: K-Dense Inc.
----
 
 # Biopython: Computational Molecular Biology in Python
 
@@ -164,4 +160,7 @@ for alignment in blast_record.alignments[:5]:
 
 ### 5. Structural Bioinformatics (Bio.PDB)
 
-**Reference:** `re
+**Reference:** `references/structure.md`
+
+Use for:
+- Parsing PDB and mmC

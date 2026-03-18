@@ -7,11 +7,6 @@ tags: [python, pdf, api, mcp, ai, automation, document, image]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/google-drive-automation
 ---
 
- Apache-2.0
-metadata:
-  author: sanjay3290
-  version: "1.0"
----
 
 # Google Drive
 

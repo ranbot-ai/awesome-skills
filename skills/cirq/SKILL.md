@@ -7,10 +7,6 @@ tags: [python, api, ai, template, design, document, presentation, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cirq
 ---
 
- Apache-2.0 license
-metadata:
-    skill-author: K-Dense Inc.
----
 
 # Cirq - Quantum Computing with Python
 
@@ -183,4 +179,7 @@ Common topics:
 import scipy.optimize
 
 def variational_algorithm(ansatz, cost_function, initial_params):
-    """Template for variational quantum algorit
+    """Template for variational quantum algorithms."""
+
+    def objective(params):
+        circuit = ansatz(para

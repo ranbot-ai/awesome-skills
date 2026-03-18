@@ -7,10 +7,6 @@ tags: [python, ai, workflow, document, presentation, image, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/astropy
 ---
 
- BSD-3-Clause license
-metadata:
-    skill-author: K-Dense Inc.
----
 
 # Astropy
 
@@ -138,4 +134,8 @@ Work with tabular data with support for units, metadata, and various file format
 - Work with unit-aware columns (QTable)
 - Handle missing data with masking
 
-**See:** `references/tables.md` for table creation, I/O operations, data manipulation, sorting, filtering, joins, grouping, and performance ti
+**See:** `references/tables.md` for table creation, I/O operations, data manipulation, sorting, filtering, joins, grouping, and performance tips.
+
+### 6. Time Handling (`astropy.time`)
+
+Precise time representa

@@ -7,10 +7,6 @@ tags: [python, pdf, api, ai, design, presentation, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/seaborn
 ---
 
- BSD-3-Clause license
-metadata:
-    skill-author: K-Dense Inc.
----
 
 # Seaborn Statistical Visualization
 
@@ -151,4 +147,6 @@ sns.pairplot(data=df, hue='species', corner=True)
 - `stripplot()` - Points with jitter to show all observations
 - `swarmplot()` - Non-overlapping points (beeswarm algorithm)
 
-**Distributi
+**Distribution comparisons:**
+- `boxplot()` - Quartiles and outliers
+- `violinp

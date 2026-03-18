@@ -7,11 +7,6 @@ tags: [python, api, mcp, ai, automation, presentation, image, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/google-slides-automation
 ---
 
- Apache-2.0
-metadata:
-  author: sanjay3290
-  version: "1.0"
----
 
 # Google Slides
 

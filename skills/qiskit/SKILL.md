@@ -7,10 +7,6 @@ tags: [python, api, ai, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/qiskit
 ---
 
- Apache-2.0 license
-metadata:
-    skill-author: K-Dense Inc.
----
 
 # Qiskit
 
@@ -167,4 +163,5 @@ Topics covered:
 - Install Qiskit or set up IBM Quantum account → `references/setup.md`
 - Build a new quantum circuit → `references/circuits.md`
 - Understand gates and circuit operations → `references/circuits.md`
-- Run circuits and get measurements → `refer
+- Run circuits and get measurements → `references/primitives.md`
+- Compute expectation values → `references/p

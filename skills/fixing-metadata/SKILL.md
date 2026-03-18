@@ -7,9 +7,6 @@ tags: [react, markdown, api, ai, workflow, image, seo, cro, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fixing-metadata
 ---
 
- 1.0.1
-license: MIT
----
 
 ## Workflow
 

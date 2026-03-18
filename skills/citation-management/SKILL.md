@@ -7,10 +7,6 @@ tags: [python, api, ai, automation, workflow, template, document, image, rag, cr
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/citation-management
 ---
 
- MIT License
-metadata:
-    skill-author: K-Dense Inc.
----
 
 # Citation Management
 
@@ -145,4 +141,6 @@ python scripts/search_pubmed.py \
 - Retrieve PMIDs for easy metadata extraction
 - Export to JSON or directly to BibTeX
 
-### Phase 
+### Phase 2: Metadata Extraction
+
+**Goal**: Convert paper identifier
