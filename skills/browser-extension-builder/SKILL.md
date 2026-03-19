@@ -36,9 +36,6 @@ Structure for modern browser extensions
 
 **When to use**: When starting a new extension
 
-```javascript
-## Extension Architecture
-
 ### Project Structure
 ```
 extension/
@@ -93,16 +90,12 @@ Popup ←→ Background (Service Worker) ←→ Content Script
               ↓
         chrome.storage
 ```
-```
 
 ### Content Scripts
 
 Code that runs on web pages
 
 **When to use**: When modifying or reading page content
-
-```javascript
-## Content Scripts
 
 ### Basic Content Script
 ```javascript
@@ -161,16 +154,12 @@ injectUI();
   }]
 }
 ```
-```
 
 ### Storage and State
 
 Persisting extension data
 
 **When to use**: When saving user settings or data
-
-```javascript
-## Storage and State
 
 ### Chrome Storage API
 ```javascript
@@ -220,7 +209,6 @@ async function setStorage(data) {
 const { settings } = await getStorage(['settings']);
 await setStorage({ settings: { ...settings, theme: 'dark' } });
 ```
-```
 
 ## Anti-Patterns
 
@@ -241,4 +229,9 @@ Request at time of use.
 **Why bad**: MV3 terminates idle workers.
 Battery drain.
 Browser slows down.
-Users uninst
+Users uninstall.
+
+**Instead**: Keep background minimal.
+Use alarms for periodic tasks.
+Offload to content scripts.
+Cache aggressively.

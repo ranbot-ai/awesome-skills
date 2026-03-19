@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-pydantic-ai",
+  "name": "pydantic-ai",
+  "slug": "pydantic-ai",
+  "description": "Build production-ready AI agents with PydanticAI — type-safe tool use, structured outputs, dependency injection, and multi-model support.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pydantic-ai",
+  "content": "\n# PydanticAI — Typed AI Agents in Python\n\n## Overview\n\nPydanticAI is a Python agent framework from the Pydantic team that brings the same type-safety and validation guarantees as Pydantic to LLM-based applications. It supports structured outputs (validated with Pydantic models), dependency injection for testability, streamed responses, multi-turn conversations, and tool use — across OpenAI, Anthropic, Google Gemini, Groq, Mistral, and Ollama. Use this skill when building production AI agents, chatbots, or LLM pipelines where correctness and testability matter.\n\n## When to Use This Skill\n\n- Use when building Python AI agents that call tools and return structured data\n- Use when you need validated, typed LLM outputs (not raw strings)\n- Use when you want to write unit tests for agent logic without hitting a real LLM\n- Use when switching between LLM providers without rewriting agent code\n- Use when the user asks about `Agent`, `@agent.tool`, `RunContext`, `ModelRetry`, or `result_type`\n\n## How It Works\n\n### Step 1: Installation\n\n```bash\npip install pydantic-ai\n\n# Install extras for specific providers\npip install 'pydantic-ai[openai]'       # OpenAI / Azure OpenAI\npip install 'pydantic-ai[anthropic]'    # Anthropic Claude\npip install 'pydantic-ai[gemini]'       # Google Gemini\npip install 'pydantic-ai[groq]'         # Groq\npip install 'pydantic-ai[vertexai]'     # Google Vertex AI\n```\n\n### Step 2: A Minimal Agent\n\n```python\nfrom pydantic_ai import Agent\n\n# Simple agent — returns a plain string\nagent = Agent(\n    'anthropic:claude-sonnet-4-6',\n    system_prompt='You are a helpful assistant. Be concise.',\n)\n\nresult = agent.run_sync('What is the capital of Japan?')\nprint(result.data)  # \"Tokyo\"\nprint(result.usage())  # Usage(requests=1, request_tokens=..., response_tokens=...)\n```\n\n### Step 3: Structured Output with Pydantic Models\n\n```python\nfrom pydantic import BaseModel\nfrom pydantic_ai import Agent\n\nclass MovieReview(BaseModel):\n    title: str\n    year: int\n    rating: float  # 0.0 to 10.0\n    summary: str\n    recommended: bool\n\nagent = Agent(\n    'openai:gpt-4o',\n    result_type=MovieReview,\n    system_prompt='You are a film critic. Return structured reviews.',\n)\n\nresult = agent.run_sync('Review Inception (2010)')\nreview = result.data  # Fully typed MovieReview instance\nprint(f\"{review.title} ({review.year}): {review.rating}/10\")\nprint(f\"Recommended: {review.recommended}\")\n```\n\n### Step 4: Tool Use\n\nRegister tools with `@agent.tool` — the LLM can call them during a run:\n\n```python\nfrom pydantic_ai import Agent, RunContext\nfrom pydantic import BaseModel\nimport httpx\n\nclass WeatherReport(BaseModel):\n    city: str\n    temperature_c: float\n    condition: str\n\nweather_agent = Agent(\n    'anthropic:claude-sonnet-4-6',\n    result_type=WeatherReport,\n    system_prompt='Get current weather for the requested city.',\n)\n\n@weather_agent.tool\nasync def get_temperature(ctx: RunContext, city: str) -> dict:\n    \"\"\"Fetch the current temperature for a city from the weather API.\"\"\"\n    async with httpx.AsyncClient() as client:\n        r = await client.get(f'https://wttr.in/{city}?format=j1')\n        data = r.json()\n        return {\n            'temp_c': float(data['current_condition'][0]['temp_C']),\n            'description': data['current_condition'][0]['weatherDesc'][0]['value'],\n        }\n\nimport asyncio\nresult = asyncio.run(weather_agent.run('What is the weather in Tokyo?'))\nprint(result.data)\n```\n\n### Step 5: Dependency Injection\n\nInject services (database, HTTP clients, config) into agents for testability:\n\n```python\nfrom dataclasses import dataclass\nfrom pydantic_ai import Agent, RunContext\nfrom pydantic import BaseModel\n\n@dataclass\nclass Deps:\n    db: Database\n    user_id: str\n\nclass SupportResponse(BaseModel):\n    message: str\n    escalate: bool\n\nsupport_agent = Agent(\n    'openai:gpt-4o-mini',\n    deps_type=Deps,\n    result_type=SupportResponse,\n    system_prompt='You are a support agent. Use the tools to help customers.',\n)\n\n@support_agent.tool\nasync def get_order_history(ctx: RunContext[Deps]) -> list[dict]:\n    \"\"\"Fetch recent orders for the current user.\"\"\"\n    return await ctx.deps.db.get_orders(ctx.deps.user_id, limit=5)\n\n@support_agent.tool\nasync def create_refund(ctx: RunContext[Deps], order_id: str, reason: str) -> dict:\n    \"\"\"Initiate a refund for a specific order.\"\"\"\n    return await ctx.deps.db.create_refund(order_id, reason, ctx.deps.user_id)\n\n# Usage\nasync def handle_support(user_id: str, message: str):\n    deps = Deps(db=get_db(), user_id=user_id)\n    result = await support_agent.run(message, deps=deps)\n    return result.data\n```\n\n### Step 6: Testing with TestModel\n\nWrite unit tests without real LLM calls:\n\n```python\nfrom pydantic_ai.models.test import TestModel\n\ndef test_support_agent_escalates():\n    with support_agent.override(model=TestModel()):\n        # TestModel returns a minimal valid response matching result_type\n        result = support_agent.run_sync(\n            'I want to cancel my account'",
+  "tags": [
+    "python",
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "llm",
+    "gpt",
+    "template",
+    "security",
+    "azure"
+  ],
+  "useCases": [
+    "Use when building Python AI agents that call tools and return structured data",
+    "Use when you need validated, typed LLM outputs (not raw strings)",
+    "Use when you want to write unit tests for agent logic without hitting a real LLM",
+    "Use when switching between LLM providers without rewriting agent code",
+    "Use when the user asks about `Agent`, `@agent.tool`, `RunContext`, `ModelRetry`, or `result_type`"
+  ],
+  "scrapedAt": "2026-03-19T07:11:02.941Z"
+}

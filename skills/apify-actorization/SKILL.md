@@ -50,10 +50,9 @@ Verify CLI is logged in:
 apify info  # Should return your username
 ```
 
-If not logged in, check if `APIFY_TOKEN` environment variable is defined. If not, ask the user to generate one at https://console.apify.com/settings/integrations, then:
+If not logged in, check if `APIFY_TOKEN` environment variable is defined. If not, ask the user to generate one at https://console.apify.com/settings/integrations, add it to their shell or secret manager without putting the literal token in command history, then run:
 
 ```bash
-export APIFY_TOKEN="your_token_here"
 apify login
 ```
 
@@ -162,5 +161,4 @@ Other options: **Rental** (monthly subscription) or **Free** (open source).
 - [ ] `.actor/input_schema.json` defines all required inputs
 - [ ] `.actor/input_schema.json` validates against `@apify/json_schemas` (`input.schema.json`)
 - [ ] `.actor/output_schema.json` defines output structure (if applicable)
-- [ ] `.actor/output_schema.json` validates against `@apify/json_schemas` (`output.schema.json`)
-- [ ] `Doc
+- [ ] `.actor/output_schema.json` validates ag

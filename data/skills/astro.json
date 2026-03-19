@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-astro",
+  "name": "astro",
+  "slug": "astro",
+  "description": "Build content-focused websites with Astro — zero JS by default, islands architecture, multi-framework components, and Markdown/MDX support.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/astro",
+  "content": "\n# Astro Web Framework\n\n## Overview\n\nAstro is a web framework designed for content-rich websites — blogs, docs, portfolios, marketing sites, and e-commerce. Its core innovation is the **Islands Architecture**: by default, Astro ships zero JavaScript to the browser. Interactive components are selectively hydrated as isolated \"islands.\" Astro supports React, Vue, Svelte, Solid, and other UI frameworks simultaneously in the same project, letting you pick the right tool per component.\n\n## When to Use This Skill\n\n- Use when building a blog, documentation site, marketing page, or portfolio\n- Use when performance and Core Web Vitals are the top priority\n- Use when the project is content-heavy with Markdown or MDX files\n- Use when you want SSG (static) output with optional SSR for dynamic routes\n- Use when the user asks about `.astro` files, `Astro.props`, content collections, or `client:` directives\n\n## How It Works\n\n### Step 1: Project Setup\n\n```bash\nnpm create astro@latest my-site\ncd my-site\nnpm install\nnpm run dev\n```\n\nAdd integrations as needed:\n\n```bash\nnpx astro add tailwind        # Tailwind CSS\nnpx astro add react           # React component support\nnpx astro add mdx             # MDX support\nnpx astro add sitemap         # Auto sitemap.xml\nnpx astro add vercel          # Vercel SSR adapter\n```\n\nProject structure:\n\n```\nsrc/\n  pages/          ← File-based routing (.astro, .md, .mdx)\n  layouts/        ← Reusable page shells\n  components/     ← UI components (.astro, .tsx, .vue, etc.)\n  content/        ← Type-safe content collections (Markdown/MDX)\n  styles/         ← Global CSS\npublic/           ← Static assets (copied as-is)\nastro.config.mjs  ← Framework config\n```\n\n### Step 2: Astro Component Syntax\n\n`.astro` files have a code fence at the top (server-only) and a template below:\n\n```astro\n---\n// src/components/Card.astro\n// This block runs on the server ONLY — never in the browser\ninterface Props {\n  title: string;\n  href: string;\n  description: string;\n}\n\nconst { title, href, description } = Astro.props;\n---\n\n<article class=\"card\">\n  <h2><a href={href}>{title}</a></h2>\n  <p>{description}</p>\n</article>\n\n<style>\n  /* Scoped to this component automatically */\n  .card { border: 1px solid #eee; padding: 1rem; }\n</style>\n```\n\n### Step 3: File-Based Pages and Routing\n\n```\nsrc/pages/index.astro          → /\nsrc/pages/about.astro          → /about\nsrc/pages/blog/[slug].astro    → /blog/:slug (dynamic)\nsrc/pages/blog/[...path].astro → /blog/* (catch-all)\n```\n\nDynamic route with `getStaticPaths`:\n\n```astro\n---\n// src/pages/blog/[slug].astro\nexport async function getStaticPaths() {\n  const posts = await getCollection('blog');\n  return posts.map(post => ({\n    params: { slug: post.slug },\n    props: { post },\n  }));\n}\n\nconst { post } = Astro.props;\nconst { Content } = await post.render();\n---\n\n<h1>{post.data.title}</h1>\n<Content />\n```\n\n### Step 4: Content Collections\n\nContent collections give you type-safe access to Markdown and MDX files:\n\n```typescript\n// src/content/config.ts\nimport { z, defineCollection } from 'astro:content';\n\nconst blog = defineCollection({\n  type: 'content',\n  schema: z.object({\n    title: z.string(),\n    date: z.coerce.date(),\n    tags: z.array(z.string()).default([]),\n    draft: z.boolean().default(false),\n  }),\n});\n\nexport const collections = { blog };\n```\n\n```astro\n---\n// src/pages/blog/index.astro\nimport { getCollection } from 'astro:content';\n\nconst posts = (await getCollection('blog'))\n  .filter(p => !p.data.draft)\n  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());\n---\n\n<ul>\n  {posts.map(post => (\n    <li>\n      <a href={`/blog/${post.slug}`}>{post.data.title}</a>\n      <time>{post.data.date.toLocaleDateString()}</time>\n    </li>\n  ))}\n</ul>\n```\n\n### Step 5: Islands — Selective Hydration\n\nBy default, UI framework components render to static HTML with no JS. Use `client:` directives to hydrate:\n\n```astro\n---\nimport Counter from '../components/Counter.tsx';  // React component\nimport VideoPlayer from '../components/VideoPlayer.svelte';\n---\n\n<!-- Static HTML — no JavaScript sent to browser -->\n<Counter initialCount={0} />\n\n<!-- Hydrate immediately on page load -->\n<Counter initialCount={0} client:load />\n\n<!-- Hydrate when the component scrolls into view -->\n<VideoPlayer src=\"/demo.mp4\" client:visible />\n\n<!-- Hydrate only when browser is idle -->\n<Analytics client:idle />\n\n<!-- Hydrate only on a specific media query -->\n<MobileMenu client:media=\"(max-width: 768px)\" />\n```\n\n### Step 6: Layouts\n\n```astro\n---\n// src/layouts/BaseLayout.astro\ninterface Props {\n  title: string;\n  description?: string;\n}\nconst { title, description = 'My Astro Site' } = Astro.props;\n---\n\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <title>{title}</title>\n    <meta name=\"description\" content={description} />\n  </head>\n  <body>\n    <nav>...</nav>\n    <main>\n      <slot />  <!-- page content renders here -->\n    </main>\n    <footer>...</footer>\n  </body>\n</html>\n```\n\n```astro\n---\n// src",
+  "tags": [
+    "javascript",
+    "typescript",
+    "react",
+    "nextjs",
+    "markdown",
+    "api",
+    "claude",
+    "ai",
+    "template",
+    "design"
+  ],
+  "useCases": [
+    "Use when building a blog, documentation site, marketing page, or portfolio",
+    "Use when performance and Core Web Vitals are the top priority",
+    "Use when the project is content-heavy with Markdown or MDX files",
+    "Use when you want SSG (static) output with optional SSR for dynamic routes",
+    "Use when the user asks about `.astro` files, `Astro.props`, content collections, or `client:` directives"
+  ],
+  "scrapedAt": "2026-03-19T07:06:15.308Z"
+}

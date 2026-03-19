@@ -1946,7 +1946,7 @@
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apify-actorization",
-      "content": "\n# Apify Actorization\n\nActorization converts existing software into reusable serverless applications compatible with the Apify platform. Actors are programs packaged as Docker images that accept well-defined JSON input, perform an action, and optionally produce structured JSON output.\n\n## Quick Start\n\n1. Run `apify init` in project root\n2. Wrap code with SDK lifecycle (see language-specific section below)\n3. Configure `.actor/input_schema.json`\n4. Test with `apify run --input '{\"key\": \"value\"}'`\n5. Deploy with `apify push`\n\n## When to Use This Skill\n\n- Converting an existing project to run on Apify platform\n- Adding Apify SDK integration to a project\n- Wrapping a CLI tool or script as an Actor\n- Migrating a Crawlee project to Apify\n\n## Prerequisites\n\nVerify `apify` CLI is installed:\n\n```bash\napify --help\n```\n\nIf not installed:\n\n```bash\nbrew install apify-cli\n\n# Or: npm install -g apify-cli\n# Or install from an official release package that your OS package manager verifies\n```\n\nVerify CLI is logged in:\n\n```bash\napify info  # Should return your username\n```\n\nIf not logged in, check if `APIFY_TOKEN` environment variable is defined. If not, ask the user to generate one at https://console.apify.com/settings/integrations, then:\n\n```bash\nexport APIFY_TOKEN=\"your_token_here\"\napify login\n```\n\n## Actorization Checklist\n\nCopy this checklist to track progress:\n\n- [ ] Step 1: Analyze project (language, entry point, inputs, outputs)\n- [ ] Step 2: Run `apify init` to create Actor structure\n- [ ] Step 3: Apply language-specific SDK integration\n- [ ] Step 4: Configure `.actor/input_schema.json`\n- [ ] Step 5: Configure `.actor/output_schema.json` (if applicable)\n- [ ] Step 6: Update `.actor/actor.json` metadata\n- [ ] Step 7: Test locally with `apify run`\n- [ ] Step 8: Deploy with `apify push`\n\n## Step 1: Analyze the Project\n\nBefore making changes, understand the project:\n\n1. **Identify the language** - JavaScript/TypeScript, Python, or other\n2. **Find the entry point** - The main file that starts execution\n3. **Identify inputs** - Command-line arguments, environment variables, config files\n4. **Identify outputs** - Files, console output, API responses\n5. **Check for state** - Does it need to persist data between runs?\n\n## Step 2: Initialize Actor Structure\n\nRun in the project root:\n\n```bash\napify init\n```\n\nThis creates:\n- `.actor/actor.json` - Actor configuration and metadata\n- `.actor/input_schema.json` - Input definition for the Apify Console\n- `Dockerfile` (if not present) - Container image definition\n\n## Step 3: Apply Language-Specific Changes\n\nChoose based on your project's language:\n\n- **JavaScript/TypeScript**: See [js-ts-actorization.md](references/js-ts-actorization.md)\n- **Python**: See [python-actorization.md](references/python-actorization.md)\n- **Other Languages (CLI-based)**: See [cli-actorization.md](references/cli-actorization.md)\n\n### Quick Reference\n\n| Language | Install | Wrap Code |\n|----------|---------|-----------|\n| JS/TS | `npm install apify` | `await Actor.init()` ... `await Actor.exit()` |\n| Python | `pip install apify` | `async with Actor:` |\n| Other | Use CLI in wrapper script | `apify actor:get-input` / `apify actor:push-data` |\n\n## Steps 4-6: Configure Schemas\n\nSee [schemas-and-output.md](references/schemas-and-output.md) for detailed configuration of:\n- Input schema (`.actor/input_schema.json`)\n- Output schema (`.actor/output_schema.json`)\n- Actor configuration (`.actor/actor.json`)\n- State management (request queues, key-value stores)\n\nValidate schemas against `@apify/json_schemas` npm package.\n\n## Step 7: Test Locally\n\nRun the actor with inline input (for JS/TS and Python actors):\n\n```bash\napify run --input '{\"startUrl\": \"https://example.com\", \"maxItems\": 10}'\n```\n\nOr use an input file:\n\n```bash\napify run --input-file ./test-input.json\n```\n\n**Important:** Always use `apify run`, not `npm start` or `python main.py`. The CLI sets up the proper environment and storage.\n\n## Step 8: Deploy\n\n```bash\napify push\n```\n\nThis uploads and builds your actor on the Apify platform.\n\n## Monetization (Optional)\n\nAfter deploying, you can monetize your actor in the Apify Store. The recommended model is **Pay Per Event (PPE)**:\n\n- Per result/item scraped\n- Per page processed\n- Per API call made\n\nConfigure PPE in the Apify Console under Actor > Monetization. Charge for events in your code with `await Actor.charge('result')`.\n\nOther options: **Rental** (monthly subscription) or **Free** (open source).\n\n## Pre-Deployment Checklist\n\n- [ ] `.actor/actor.json` exists with correct name and description\n- [ ] `.actor/actor.json` validates against `@apify/json_schemas` (`actor.schema.json`)\n- [ ] `.actor/input_schema.json` defines all required inputs\n- [ ] `.actor/input_schema.json` validates against `@apify/json_schemas` (`input.schema.json`)\n- [ ] `.actor/output_schema.json` defines output structure (if applicable)\n- [ ] `.actor/output_schema.json` validates against `@apify/json_schemas` (`output.schema.json`)\n- [ ] `Doc",
+      "content": "\n# Apify Actorization\n\nActorization converts existing software into reusable serverless applications compatible with the Apify platform. Actors are programs packaged as Docker images that accept well-defined JSON input, perform an action, and optionally produce structured JSON output.\n\n## Quick Start\n\n1. Run `apify init` in project root\n2. Wrap code with SDK lifecycle (see language-specific section below)\n3. Configure `.actor/input_schema.json`\n4. Test with `apify run --input '{\"key\": \"value\"}'`\n5. Deploy with `apify push`\n\n## When to Use This Skill\n\n- Converting an existing project to run on Apify platform\n- Adding Apify SDK integration to a project\n- Wrapping a CLI tool or script as an Actor\n- Migrating a Crawlee project to Apify\n\n## Prerequisites\n\nVerify `apify` CLI is installed:\n\n```bash\napify --help\n```\n\nIf not installed:\n\n```bash\nbrew install apify-cli\n\n# Or: npm install -g apify-cli\n# Or install from an official release package that your OS package manager verifies\n```\n\nVerify CLI is logged in:\n\n```bash\napify info  # Should return your username\n```\n\nIf not logged in, check if `APIFY_TOKEN` environment variable is defined. If not, ask the user to generate one at https://console.apify.com/settings/integrations, add it to their shell or secret manager without putting the literal token in command history, then run:\n\n```bash\napify login\n```\n\n## Actorization Checklist\n\nCopy this checklist to track progress:\n\n- [ ] Step 1: Analyze project (language, entry point, inputs, outputs)\n- [ ] Step 2: Run `apify init` to create Actor structure\n- [ ] Step 3: Apply language-specific SDK integration\n- [ ] Step 4: Configure `.actor/input_schema.json`\n- [ ] Step 5: Configure `.actor/output_schema.json` (if applicable)\n- [ ] Step 6: Update `.actor/actor.json` metadata\n- [ ] Step 7: Test locally with `apify run`\n- [ ] Step 8: Deploy with `apify push`\n\n## Step 1: Analyze the Project\n\nBefore making changes, understand the project:\n\n1. **Identify the language** - JavaScript/TypeScript, Python, or other\n2. **Find the entry point** - The main file that starts execution\n3. **Identify inputs** - Command-line arguments, environment variables, config files\n4. **Identify outputs** - Files, console output, API responses\n5. **Check for state** - Does it need to persist data between runs?\n\n## Step 2: Initialize Actor Structure\n\nRun in the project root:\n\n```bash\napify init\n```\n\nThis creates:\n- `.actor/actor.json` - Actor configuration and metadata\n- `.actor/input_schema.json` - Input definition for the Apify Console\n- `Dockerfile` (if not present) - Container image definition\n\n## Step 3: Apply Language-Specific Changes\n\nChoose based on your project's language:\n\n- **JavaScript/TypeScript**: See [js-ts-actorization.md](references/js-ts-actorization.md)\n- **Python**: See [python-actorization.md](references/python-actorization.md)\n- **Other Languages (CLI-based)**: See [cli-actorization.md](references/cli-actorization.md)\n\n### Quick Reference\n\n| Language | Install | Wrap Code |\n|----------|---------|-----------|\n| JS/TS | `npm install apify` | `await Actor.init()` ... `await Actor.exit()` |\n| Python | `pip install apify` | `async with Actor:` |\n| Other | Use CLI in wrapper script | `apify actor:get-input` / `apify actor:push-data` |\n\n## Steps 4-6: Configure Schemas\n\nSee [schemas-and-output.md](references/schemas-and-output.md) for detailed configuration of:\n- Input schema (`.actor/input_schema.json`)\n- Output schema (`.actor/output_schema.json`)\n- Actor configuration (`.actor/actor.json`)\n- State management (request queues, key-value stores)\n\nValidate schemas against `@apify/json_schemas` npm package.\n\n## Step 7: Test Locally\n\nRun the actor with inline input (for JS/TS and Python actors):\n\n```bash\napify run --input '{\"startUrl\": \"https://example.com\", \"maxItems\": 10}'\n```\n\nOr use an input file:\n\n```bash\napify run --input-file ./test-input.json\n```\n\n**Important:** Always use `apify run`, not `npm start` or `python main.py`. The CLI sets up the proper environment and storage.\n\n## Step 8: Deploy\n\n```bash\napify push\n```\n\nThis uploads and builds your actor on the Apify platform.\n\n## Monetization (Optional)\n\nAfter deploying, you can monetize your actor in the Apify Store. The recommended model is **Pay Per Event (PPE)**:\n\n- Per result/item scraped\n- Per page processed\n- Per API call made\n\nConfigure PPE in the Apify Console under Actor > Monetization. Charge for events in your code with `await Actor.charge('result')`.\n\nOther options: **Rental** (monthly subscription) or **Free** (open source).\n\n## Pre-Deployment Checklist\n\n- [ ] `.actor/actor.json` exists with correct name and description\n- [ ] `.actor/actor.json` validates against `@apify/json_schemas` (`actor.schema.json`)\n- [ ] `.actor/input_schema.json` defines all required inputs\n- [ ] `.actor/input_schema.json` validates against `@apify/json_schemas` (`input.schema.json`)\n- [ ] `.actor/output_schema.json` defines output structure (if applicable)\n- [ ] `.actor/output_schema.json` validates ag",
       "tags": [
         "python",
         "javascript",
@@ -2504,6 +2504,37 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-03-07T06:52:22.265Z"
+    },
+    {
+      "id": "antigravity-astro",
+      "name": "astro",
+      "slug": "astro",
+      "description": "Build content-focused websites with Astro — zero JS by default, islands architecture, multi-framework components, and Markdown/MDX support.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/astro",
+      "content": "\n# Astro Web Framework\n\n## Overview\n\nAstro is a web framework designed for content-rich websites — blogs, docs, portfolios, marketing sites, and e-commerce. Its core innovation is the **Islands Architecture**: by default, Astro ships zero JavaScript to the browser. Interactive components are selectively hydrated as isolated \"islands.\" Astro supports React, Vue, Svelte, Solid, and other UI frameworks simultaneously in the same project, letting you pick the right tool per component.\n\n## When to Use This Skill\n\n- Use when building a blog, documentation site, marketing page, or portfolio\n- Use when performance and Core Web Vitals are the top priority\n- Use when the project is content-heavy with Markdown or MDX files\n- Use when you want SSG (static) output with optional SSR for dynamic routes\n- Use when the user asks about `.astro` files, `Astro.props`, content collections, or `client:` directives\n\n## How It Works\n\n### Step 1: Project Setup\n\n```bash\nnpm create astro@latest my-site\ncd my-site\nnpm install\nnpm run dev\n```\n\nAdd integrations as needed:\n\n```bash\nnpx astro add tailwind        # Tailwind CSS\nnpx astro add react           # React component support\nnpx astro add mdx             # MDX support\nnpx astro add sitemap         # Auto sitemap.xml\nnpx astro add vercel          # Vercel SSR adapter\n```\n\nProject structure:\n\n```\nsrc/\n  pages/          ← File-based routing (.astro, .md, .mdx)\n  layouts/        ← Reusable page shells\n  components/     ← UI components (.astro, .tsx, .vue, etc.)\n  content/        ← Type-safe content collections (Markdown/MDX)\n  styles/         ← Global CSS\npublic/           ← Static assets (copied as-is)\nastro.config.mjs  ← Framework config\n```\n\n### Step 2: Astro Component Syntax\n\n`.astro` files have a code fence at the top (server-only) and a template below:\n\n```astro\n---\n// src/components/Card.astro\n// This block runs on the server ONLY — never in the browser\ninterface Props {\n  title: string;\n  href: string;\n  description: string;\n}\n\nconst { title, href, description } = Astro.props;\n---\n\n<article class=\"card\">\n  <h2><a href={href}>{title}</a></h2>\n  <p>{description}</p>\n</article>\n\n<style>\n  /* Scoped to this component automatically */\n  .card { border: 1px solid #eee; padding: 1rem; }\n</style>\n```\n\n### Step 3: File-Based Pages and Routing\n\n```\nsrc/pages/index.astro          → /\nsrc/pages/about.astro          → /about\nsrc/pages/blog/[slug].astro    → /blog/:slug (dynamic)\nsrc/pages/blog/[...path].astro → /blog/* (catch-all)\n```\n\nDynamic route with `getStaticPaths`:\n\n```astro\n---\n// src/pages/blog/[slug].astro\nexport async function getStaticPaths() {\n  const posts = await getCollection('blog');\n  return posts.map(post => ({\n    params: { slug: post.slug },\n    props: { post },\n  }));\n}\n\nconst { post } = Astro.props;\nconst { Content } = await post.render();\n---\n\n<h1>{post.data.title}</h1>\n<Content />\n```\n\n### Step 4: Content Collections\n\nContent collections give you type-safe access to Markdown and MDX files:\n\n```typescript\n// src/content/config.ts\nimport { z, defineCollection } from 'astro:content';\n\nconst blog = defineCollection({\n  type: 'content',\n  schema: z.object({\n    title: z.string(),\n    date: z.coerce.date(),\n    tags: z.array(z.string()).default([]),\n    draft: z.boolean().default(false),\n  }),\n});\n\nexport const collections = { blog };\n```\n\n```astro\n---\n// src/pages/blog/index.astro\nimport { getCollection } from 'astro:content';\n\nconst posts = (await getCollection('blog'))\n  .filter(p => !p.data.draft)\n  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());\n---\n\n<ul>\n  {posts.map(post => (\n    <li>\n      <a href={`/blog/${post.slug}`}>{post.data.title}</a>\n      <time>{post.data.date.toLocaleDateString()}</time>\n    </li>\n  ))}\n</ul>\n```\n\n### Step 5: Islands — Selective Hydration\n\nBy default, UI framework components render to static HTML with no JS. Use `client:` directives to hydrate:\n\n```astro\n---\nimport Counter from '../components/Counter.tsx';  // React component\nimport VideoPlayer from '../components/VideoPlayer.svelte';\n---\n\n<!-- Static HTML — no JavaScript sent to browser -->\n<Counter initialCount={0} />\n\n<!-- Hydrate immediately on page load -->\n<Counter initialCount={0} client:load />\n\n<!-- Hydrate when the component scrolls into view -->\n<VideoPlayer src=\"/demo.mp4\" client:visible />\n\n<!-- Hydrate only when browser is idle -->\n<Analytics client:idle />\n\n<!-- Hydrate only on a specific media query -->\n<MobileMenu client:media=\"(max-width: 768px)\" />\n```\n\n### Step 6: Layouts\n\n```astro\n---\n// src/layouts/BaseLayout.astro\ninterface Props {\n  title: string;\n  description?: string;\n}\nconst { title, description = 'My Astro Site' } = Astro.props;\n---\n\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <title>{title}</title>\n    <meta name=\"description\" content={description} />\n  </head>\n  <body>\n    <nav>...</nav>\n    <main>\n      <slot />  <!-- page content renders here -->\n    </main>\n    <footer>...</footer>\n  </body>\n</html>\n```\n\n```astro\n---\n// src",
+      "tags": [
+        "javascript",
+        "typescript",
+        "react",
+        "nextjs",
+        "markdown",
+        "api",
+        "claude",
+        "ai",
+        "template",
+        "design"
+      ],
+      "useCases": [
+        "Use when building a blog, documentation site, marketing page, or portfolio",
+        "Use when performance and Core Web Vitals are the top priority",
+        "Use when the project is content-heavy with Markdown or MDX files",
+        "Use when you want SSG (static) output with optional SSR for dynamic routes",
+        "Use when the user asks about `.astro` files, `Astro.props`, content collections, or `client:` directives"
+      ],
+      "scrapedAt": "2026-03-19T07:06:15.308Z"
     },
     {
       "id": "antigravity-astropy",
@@ -6556,7 +6587,7 @@
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/browser-extension-builder",
-      "content": "\n# Browser Extension Builder\n\n**Role**: Browser Extension Architect\n\nYou extend the browser to give users superpowers. You understand the\nunique constraints of extension development - permissions, security,\nstore policies. You build extensions that people install and actually\nuse daily. You know the difference between a toy and a tool.\n\n## Capabilities\n\n- Extension architecture\n- Manifest v3 (MV3)\n- Content scripts\n- Background workers\n- Popup interfaces\n- Extension monetization\n- Chrome Web Store publishing\n- Cross-browser support\n\n## Patterns\n\n### Extension Architecture\n\nStructure for modern browser extensions\n\n**When to use**: When starting a new extension\n\n```javascript\n## Extension Architecture\n\n### Project Structure\n```\nextension/\n├── manifest.json      # Extension config\n├── popup/\n│   ├── popup.html     # Popup UI\n│   ├── popup.css\n│   └── popup.js\n├── content/\n│   └── content.js     # Runs on web pages\n├── background/\n│   └── service-worker.js  # Background logic\n├── options/\n│   ├── options.html   # Settings page\n│   └── options.js\n└── icons/\n    ├── icon16.png\n    ├── icon48.png\n    └── icon128.png\n```\n\n### Manifest V3 Template\n```json\n{\n  \"manifest_version\": 3,\n  \"name\": \"My Extension\",\n  \"version\": \"1.0.0\",\n  \"description\": \"What it does\",\n  \"permissions\": [\"storage\", \"activeTab\"],\n  \"action\": {\n    \"default_popup\": \"popup/popup.html\",\n    \"default_icon\": {\n      \"16\": \"icons/icon16.png\",\n      \"48\": \"icons/icon48.png\",\n      \"128\": \"icons/icon128.png\"\n    }\n  },\n  \"content_scripts\": [{\n    \"matches\": [\"<all_urls>\"],\n    \"js\": [\"content/content.js\"]\n  }],\n  \"background\": {\n    \"service_worker\": \"background/service-worker.js\"\n  },\n  \"options_page\": \"options/options.html\"\n}\n```\n\n### Communication Pattern\n```\nPopup ←→ Background (Service Worker) ←→ Content Script\n              ↓\n        chrome.storage\n```\n```\n\n### Content Scripts\n\nCode that runs on web pages\n\n**When to use**: When modifying or reading page content\n\n```javascript\n## Content Scripts\n\n### Basic Content Script\n```javascript\n// content.js - Runs on every matched page\n\n// Wait for page to load\ndocument.addEventListener('DOMContentLoaded', () => {\n  // Modify the page\n  const element = document.querySelector('.target');\n  if (element) {\n    element.style.backgroundColor = 'yellow';\n  }\n});\n\n// Listen for messages from popup/background\nchrome.runtime.onMessage.addListener((message, sender, sendResponse) => {\n  if (message.action === 'getData') {\n    const data = document.querySelector('.data')?.textContent;\n    sendResponse({ data });\n  }\n  return true; // Keep channel open for async\n});\n```\n\n### Injecting UI\n```javascript\n// Create floating UI on page\nfunction injectUI() {\n  const container = document.createElement('div');\n  container.id = 'my-extension-ui';\n  container.innerHTML = `\n    <div style=\"position: fixed; bottom: 20px; right: 20px;\n                background: white; padding: 16px; border-radius: 8px;\n                box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10000;\">\n      <h3>My Extension</h3>\n      <button id=\"my-extension-btn\">Click me</button>\n    </div>\n  `;\n  document.body.appendChild(container);\n\n  document.getElementById('my-extension-btn').addEventListener('click', () => {\n    // Handle click\n  });\n}\n\ninjectUI();\n```\n\n### Permissions for Content Scripts\n```json\n{\n  \"content_scripts\": [{\n    \"matches\": [\"https://specific-site.com/*\"],\n    \"js\": [\"content.js\"],\n    \"run_at\": \"document_end\"\n  }]\n}\n```\n```\n\n### Storage and State\n\nPersisting extension data\n\n**When to use**: When saving user settings or data\n\n```javascript\n## Storage and State\n\n### Chrome Storage API\n```javascript\n// Save data\nchrome.storage.local.set({ key: 'value' }, () => {\n  console.log('Saved');\n});\n\n// Get data\nchrome.storage.local.get(['key'], (result) => {\n  console.log(result.key);\n});\n\n// Sync storage (syncs across devices)\nchrome.storage.sync.set({ setting: true });\n\n// Watch for changes\nchrome.storage.onChanged.addListener((changes, area) => {\n  if (changes.key) {\n    console.log('key changed:', changes.key.newValue);\n  }\n});\n```\n\n### Storage Limits\n| Type | Limit |\n|------|-------|\n| local | 5MB |\n| sync | 100KB total, 8KB per item |\n\n### Async/Await Pattern\n```javascript\n// Modern async wrapper\nasync function getStorage(keys) {\n  return new Promise((resolve) => {\n    chrome.storage.local.get(keys, resolve);\n  });\n}\n\nasync function setStorage(data) {\n  return new Promise((resolve) => {\n    chrome.storage.local.set(data, resolve);\n  });\n}\n\n// Usage\nconst { settings } = await getStorage(['settings']);\nawait setStorage({ settings: { ...settings, theme: 'dark' } });\n```\n```\n\n## Anti-Patterns\n\n### ❌ Requesting All Permissions\n\n**Why bad**: Users won't install.\nStore may reject.\nSecurity risk.\nBad reviews.\n\n**Instead**: Request minimum needed.\nUse optional permissions.\nExplain why in description.\nRequest at time of use.\n\n### ❌ Heavy Background Processing\n\n**Why bad**: MV3 terminates idle workers.\nBattery drain.\nBrowser slows down.\nUsers uninst",
+      "content": "\n# Browser Extension Builder\n\n**Role**: Browser Extension Architect\n\nYou extend the browser to give users superpowers. You understand the\nunique constraints of extension development - permissions, security,\nstore policies. You build extensions that people install and actually\nuse daily. You know the difference between a toy and a tool.\n\n## Capabilities\n\n- Extension architecture\n- Manifest v3 (MV3)\n- Content scripts\n- Background workers\n- Popup interfaces\n- Extension monetization\n- Chrome Web Store publishing\n- Cross-browser support\n\n## Patterns\n\n### Extension Architecture\n\nStructure for modern browser extensions\n\n**When to use**: When starting a new extension\n\n### Project Structure\n```\nextension/\n├── manifest.json      # Extension config\n├── popup/\n│   ├── popup.html     # Popup UI\n│   ├── popup.css\n│   └── popup.js\n├── content/\n│   └── content.js     # Runs on web pages\n├── background/\n│   └── service-worker.js  # Background logic\n├── options/\n│   ├── options.html   # Settings page\n│   └── options.js\n└── icons/\n    ├── icon16.png\n    ├── icon48.png\n    └── icon128.png\n```\n\n### Manifest V3 Template\n```json\n{\n  \"manifest_version\": 3,\n  \"name\": \"My Extension\",\n  \"version\": \"1.0.0\",\n  \"description\": \"What it does\",\n  \"permissions\": [\"storage\", \"activeTab\"],\n  \"action\": {\n    \"default_popup\": \"popup/popup.html\",\n    \"default_icon\": {\n      \"16\": \"icons/icon16.png\",\n      \"48\": \"icons/icon48.png\",\n      \"128\": \"icons/icon128.png\"\n    }\n  },\n  \"content_scripts\": [{\n    \"matches\": [\"<all_urls>\"],\n    \"js\": [\"content/content.js\"]\n  }],\n  \"background\": {\n    \"service_worker\": \"background/service-worker.js\"\n  },\n  \"options_page\": \"options/options.html\"\n}\n```\n\n### Communication Pattern\n```\nPopup ←→ Background (Service Worker) ←→ Content Script\n              ↓\n        chrome.storage\n```\n\n### Content Scripts\n\nCode that runs on web pages\n\n**When to use**: When modifying or reading page content\n\n### Basic Content Script\n```javascript\n// content.js - Runs on every matched page\n\n// Wait for page to load\ndocument.addEventListener('DOMContentLoaded', () => {\n  // Modify the page\n  const element = document.querySelector('.target');\n  if (element) {\n    element.style.backgroundColor = 'yellow';\n  }\n});\n\n// Listen for messages from popup/background\nchrome.runtime.onMessage.addListener((message, sender, sendResponse) => {\n  if (message.action === 'getData') {\n    const data = document.querySelector('.data')?.textContent;\n    sendResponse({ data });\n  }\n  return true; // Keep channel open for async\n});\n```\n\n### Injecting UI\n```javascript\n// Create floating UI on page\nfunction injectUI() {\n  const container = document.createElement('div');\n  container.id = 'my-extension-ui';\n  container.innerHTML = `\n    <div style=\"position: fixed; bottom: 20px; right: 20px;\n                background: white; padding: 16px; border-radius: 8px;\n                box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10000;\">\n      <h3>My Extension</h3>\n      <button id=\"my-extension-btn\">Click me</button>\n    </div>\n  `;\n  document.body.appendChild(container);\n\n  document.getElementById('my-extension-btn').addEventListener('click', () => {\n    // Handle click\n  });\n}\n\ninjectUI();\n```\n\n### Permissions for Content Scripts\n```json\n{\n  \"content_scripts\": [{\n    \"matches\": [\"https://specific-site.com/*\"],\n    \"js\": [\"content.js\"],\n    \"run_at\": \"document_end\"\n  }]\n}\n```\n\n### Storage and State\n\nPersisting extension data\n\n**When to use**: When saving user settings or data\n\n### Chrome Storage API\n```javascript\n// Save data\nchrome.storage.local.set({ key: 'value' }, () => {\n  console.log('Saved');\n});\n\n// Get data\nchrome.storage.local.get(['key'], (result) => {\n  console.log(result.key);\n});\n\n// Sync storage (syncs across devices)\nchrome.storage.sync.set({ setting: true });\n\n// Watch for changes\nchrome.storage.onChanged.addListener((changes, area) => {\n  if (changes.key) {\n    console.log('key changed:', changes.key.newValue);\n  }\n});\n```\n\n### Storage Limits\n| Type | Limit |\n|------|-------|\n| local | 5MB |\n| sync | 100KB total, 8KB per item |\n\n### Async/Await Pattern\n```javascript\n// Modern async wrapper\nasync function getStorage(keys) {\n  return new Promise((resolve) => {\n    chrome.storage.local.get(keys, resolve);\n  });\n}\n\nasync function setStorage(data) {\n  return new Promise((resolve) => {\n    chrome.storage.local.set(data, resolve);\n  });\n}\n\n// Usage\nconst { settings } = await getStorage(['settings']);\nawait setStorage({ settings: { ...settings, theme: 'dark' } });\n```\n\n## Anti-Patterns\n\n### ❌ Requesting All Permissions\n\n**Why bad**: Users won't install.\nStore may reject.\nSecurity risk.\nBad reviews.\n\n**Instead**: Request minimum needed.\nUse optional permissions.\nExplain why in description.\nRequest at time of use.\n\n### ❌ Heavy Background Processing\n\n**Why bad**: MV3 terminates idle workers.\nBattery drain.\nBrowser slows down.\nUsers uninstall.\n\n**Instead**: Keep background minimal.\nUse alarms for periodic tasks.\nOffload to content scripts.\nCache aggressively.\n",
       "tags": [
         "javascript",
         "api",
@@ -14920,6 +14951,34 @@
       "scrapedAt": "2026-02-26T07:11:41.214Z"
     },
     {
+      "id": "antigravity-goldrush-api",
+      "name": "goldrush-api",
+      "slug": "goldrush-api",
+      "description": "Query blockchain data across 100+ chains: wallet balances, token prices, transactions, DEX pairs, and real-time OHLCV streams via the GoldRush API by Covalent.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/goldrush-api",
+      "content": "\n# GoldRush API\n\n## Overview\nGoldRush by Covalent provides blockchain data across 100+ chains through a unified REST API, real-time WebSocket streams, a CLI, and an x402 pay-per-request proxy. This skill enables AI agents to query wallet balances, token prices, transaction history, NFT holdings, and DEX pair data without building chain-specific integrations.\n\n## When to Use This Skill\n- Retrieving wallet token balances or total portfolio value across any chain\n- Fetching transaction history or decoded event logs for an address\n- Getting current or historical token prices (USD or native)\n- Monitoring DEX pairs, liquidity events, and real-time OHLCV candles via WebSocket\n- Building block explorers, portfolio dashboards, tax tools, or DeFi analytics\n- Accessing on-chain data with no signup via x402 pay-per-request\n\n## How It Works\n\n### Step 1: Get credentials\nSign up at https://goldrush.dev for a free API key. For agent-native no-signup access, use the x402 proxy instead.\n\n### Step 2: Set your API key\n```bash\nexport GOLDRUSH_API_KEY=\"your_api_key_here\"\n```\n\n### Step 3: Query data\n\n**REST API (most endpoints):**\n```bash\n# Wallet token balances on Ethereum\ncurl -H \"Authorization: Bearer $GOLDRUSH_API_KEY\"   \"https://api.covalenthq.com/v1/eth-mainnet/address/0xADDRESS/balances_v2/\"\n```\n\n**CLI (quick terminal queries):**\n```bash\nnpx @covalenthq/goldrush-cli balances --chain eth-mainnet --address 0xADDRESS\n```\n\n**SDK (in code):**\n```javascript\nimport GoldRushClient from \"@covalenthq/client-sdk\";\nconst client = new GoldRushClient(process.env.GOLDRUSH_API_KEY);\nconst resp = await client.BalanceService.getTokenBalancesForWalletAddress(\n  \"eth-mainnet\", \"0xADDRESS\"\n);\n```\n\n## Examples\n\n### Example 1: Token Balances\n```bash\ncurl -H \"Authorization: Bearer $GOLDRUSH_API_KEY\"   \"https://api.covalenthq.com/v1/eth-mainnet/address/0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045/balances_v2/\"\n```\n\n### Example 2: Token Price History\n```bash\ncurl -H \"Authorization: Bearer $GOLDRUSH_API_KEY\"   \"https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/eth-mainnet/USD/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/\"\n```\n\n### Example 3: Transaction History\n```bash\ncurl -H \"Authorization: Bearer $GOLDRUSH_API_KEY\"   \"https://api.covalenthq.com/v1/eth-mainnet/address/0xADDRESS/transactions_v3/\"\n```\n\n### Example 4: Real-time OHLCV via WebSocket\n```javascript\n// Stream live price candles for a token pair\nconst ws = new WebSocket(\"wss://streaming.covalenthq.com/v1/eth-mainnet/ohlcv\");\nws.on(\"message\", (data) => console.log(JSON.parse(data)));\n```\n\n## Best Practices\n✅ Use chain slugs: `eth-mainnet`, `matic-mainnet`, `base-mainnet`, `bsc-mainnet` — full list at https://goldrush.dev/docs/networks\n✅ Store API key in `GOLDRUSH_API_KEY` env var — never hardcode\n✅ Use WebSocket streams for real-time data rather than polling REST\n✅ Use SDK cursor pagination for large result sets\n❌ Don't use x402 for high-volume use cases — get a standard API key instead\n❌ Don't use chain IDs (e.g., `1`) — use chain slugs (e.g., `eth-mainnet`)\n\n## Security & Safety Notes\n- API key in `GOLDRUSH_API_KEY` environment variable only\n- x402 payments use USDC on Base — set spending limits before autonomous agent use\n- Read-only data API — no write operations, no transaction signing\n\n## Common Pitfalls\n\n**Problem:** 401 Unauthorized  \n**Solution:** Ensure API key is in `Authorization: Bearer` header, not query string\n\n**Problem:** `chain_name not found`  \n**Solution:** Use chain slug format — see https://goldrush.dev/docs/networks\n\n**Problem:** Empty results for new wallet  \n**Solution:** Some endpoints require on-chain activity; new wallets with no transactions return empty arrays, not errors\n\n## Related Skills\n- @goldrush-streaming-api — real-time WebSocket DEX pair and OHLCV streams\n- @goldrush-x402 — pay-per-request blockchain data without API key\n- @goldrush-cli — terminal-first blockchain data queries\n",
+      "tags": [
+        "javascript",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "security",
+        "cro"
+      ],
+      "useCases": [
+        "Retrieving wallet token balances or total portfolio value across any chain",
+        "Fetching transaction history or decoded event logs for an address",
+        "Getting current or historical token prices (USD or native)",
+        "Monitoring DEX pairs, liquidity events, and real-time OHLCV candles via WebSocket",
+        "Building block explorers, portfolio dashboards, tax tools, or DeFi analytics"
+      ],
+      "scrapedAt": "2026-03-19T07:09:01.612Z"
+    },
+    {
       "id": "antigravity-google-analytics-automation",
       "name": "google-analytics-automation",
       "slug": "google-analytics-automation",
@@ -15597,6 +15656,34 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-02-26T07:11:53.465Z"
+    },
+    {
+      "id": "antigravity-hono",
+      "name": "hono",
+      "slug": "hono",
+      "description": "Build ultra-fast web APIs and full-stack apps with Hono — runs on Cloudflare Workers, Deno, Bun, Node.js, and any WinterCG-compatible runtime.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hono",
+      "content": "\n# Hono Web Framework\n\n## Overview\n\nHono (炎, \"flame\" in Japanese) is a small, ultrafast web framework built on Web Standards (`Request`/`Response`/`fetch`). It runs anywhere: Cloudflare Workers, Deno Deploy, Bun, Node.js, AWS Lambda, and any WinterCG-compatible runtime — with the same code. Hono's router is one of the fastest available, and its middleware system, built-in JSX support, and RPC client make it a strong choice for edge APIs, BFFs, and lightweight full-stack apps.\n\n## When to Use This Skill\n\n- Use when building a REST or RPC API for edge deployment (Cloudflare Workers, Deno Deploy)\n- Use when you need a minimal but type-safe server framework for Bun or Node.js\n- Use when building a Backend for Frontend (BFF) layer with low latency requirements\n- Use when migrating from Express but wanting better TypeScript support and edge compatibility\n- Use when the user asks about Hono routing, middleware, `c.req`, `c.json`, or `hc()` RPC client\n\n## How It Works\n\n### Step 1: Project Setup\n\n**Cloudflare Workers (recommended for edge):**\n```bash\nnpm create hono@latest my-api\n# Select: cloudflare-workers\ncd my-api\nnpm install\nnpm run dev    # Wrangler local dev\nnpm run deploy # Deploy to Cloudflare\n```\n\n**Bun / Node.js:**\n```bash\nmkdir my-api && cd my-api\nbun init\nbun add hono\n```\n\n```typescript\n// src/index.ts (Bun)\nimport { Hono } from 'hono';\n\nconst app = new Hono();\n\napp.get('/', c => c.text('Hello Hono!'));\n\nexport default {\n  port: 3000,\n  fetch: app.fetch,\n};\n```\n\n### Step 2: Routing\n\n```typescript\nimport { Hono } from 'hono';\n\nconst app = new Hono();\n\n// Basic methods\napp.get('/posts', c => c.json({ posts: [] }));\napp.post('/posts', c => c.json({ created: true }, 201));\napp.put('/posts/:id', c => c.json({ updated: true }));\napp.delete('/posts/:id', c => c.json({ deleted: true }));\n\n// Route params and query strings\napp.get('/posts/:id', async c => {\n  const id = c.req.param('id');\n  const format = c.req.query('format') ?? 'json';\n  return c.json({ id, format });\n});\n\n// Wildcard\napp.get('/static/*', c => c.text('static file'));\n\nexport default app;\n```\n\n**Chained routing:**\n```typescript\napp\n  .get('/users', listUsers)\n  .post('/users', createUser)\n  .get('/users/:id', getUser)\n  .patch('/users/:id', updateUser)\n  .delete('/users/:id', deleteUser);\n```\n\n### Step 3: Middleware\n\nHono middleware works exactly like `fetch` interceptors — before and after handlers:\n\n```typescript\nimport { Hono } from 'hono';\nimport { logger } from 'hono/logger';\nimport { cors } from 'hono/cors';\nimport { bearerAuth } from 'hono/bearer-auth';\n\nconst app = new Hono();\n\n// Built-in middleware\napp.use('*', logger());\napp.use('/api/*', cors({ origin: 'https://myapp.com' }));\napp.use('/api/admin/*', bearerAuth({ token: process.env.API_TOKEN! }));\n\n// Custom middleware\napp.use('*', async (c, next) => {\n  c.set('requestId', crypto.randomUUID());\n  await next();\n  c.header('X-Request-Id', c.get('requestId'));\n});\n```\n\n**Available built-in middleware:** `logger`, `cors`, `csrf`, `etag`, `cache`, `basicAuth`, `bearerAuth`, `jwt`, `compress`, `bodyLimit`, `timeout`, `prettyJSON`, `secureHeaders`.\n\n### Step 4: Request and Response Helpers\n\n```typescript\napp.post('/submit', async c => {\n  // Parse body\n  const body = await c.req.json<{ name: string; email: string }>();\n  const form = await c.req.formData();\n  const text = await c.req.text();\n\n  // Headers and cookies\n  const auth = c.req.header('authorization');\n  const token = getCookie(c, 'session');\n\n  // Responses\n  return c.json({ ok: true });                        // JSON\n  return c.text('hello');                             // plain text\n  return c.html('<h1>Hello</h1>');                    // HTML\n  return c.redirect('/dashboard', 302);              // redirect\n  return new Response(stream, { status: 200 });       // raw Response\n});\n```\n\n### Step 5: Zod Validator Middleware\n\n```typescript\nimport { zValidator } from '@hono/zod-validator';\nimport { z } from 'zod';\n\nconst createPostSchema = z.object({\n  title: z.string().min(1).max(200),\n  body: z.string().min(1),\n  tags: z.array(z.string()).default([]),\n});\n\napp.post(\n  '/posts',\n  zValidator('json', createPostSchema),\n  async c => {\n    const data = c.req.valid('json'); // fully typed\n    const post = await db.post.create({ data });\n    return c.json(post, 201);\n  }\n);\n```\n\n### Step 6: Route Groups and App Composition\n\n```typescript\n// src/routes/posts.ts\nimport { Hono } from 'hono';\n\nconst posts = new Hono();\n\nposts.get('/', async c => { /* list posts */ });\nposts.post('/', async c => { /* create post */ });\nposts.get('/:id', async c => { /* get post */ });\n\nexport default posts;\n```\n\n```typescript\n// src/index.ts\nimport { Hono } from 'hono';\nimport posts from './routes/posts';\nimport users from './routes/users';\n\nconst app = new Hono().basePath('/api');\n\napp.route('/posts', posts);\napp.route('/users', users);\n\nexport default app;\n```\n\n### Step 7: RPC Client (End-to-End Type Safety)\n\nHono's RPC mode exports route types that the `",
+      "tags": [
+        "typescript",
+        "node",
+        "api",
+        "claude",
+        "ai",
+        "security",
+        "aws"
+      ],
+      "useCases": [
+        "Use when building a REST or RPC API for edge deployment (Cloudflare Workers, Deno Deploy)",
+        "Use when you need a minimal but type-safe server framework for Bun or Node.js",
+        "Use when building a Backend for Frontend (BFF) layer with low latency requirements",
+        "Use when migrating from Express but wanting better TypeScript support and edge compatibility",
+        "Use when the user asks about Hono routing, middleware, `c.req`, `c.json`, or `hc()` RPC client"
+      ],
+      "scrapedAt": "2026-03-19T07:09:15.549Z"
     },
     {
       "id": "antigravity-hosted-agents",
@@ -17239,6 +17326,31 @@
         "Implementing K8s security"
       ],
       "scrapedAt": "2026-02-23T07:17:00.173Z"
+    },
+    {
+      "id": "antigravity-landing-page-generator",
+      "name": "landing-page-generator",
+      "slug": "landing-page-generator",
+      "description": "Generates high-converting Next.js/React landing pages with Tailwind CSS. Uses PAS, AIDA, and BAB frameworks for optimized copy/components (Heroes, Features, Pricing). Focuses on Core Web Vitals/SEO.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/landing-page-generator",
+      "content": "\n# Landing Page Generator\n\nGenerate high-converting landing pages from a product description. Output complete Next.js/React components with multiple section variants, proven copy frameworks, SEO optimization, and performance-first patterns. Not lorem ipsum — actual copy that converts.\n\n**Target:** LCP < 1s · CLS < 0.1 · FID < 100ms  \n**Output:** TSX components + Tailwind styles + SEO meta + copy variants\n\n## Core Capabilities\n\n- 5 hero section variants (centered, split, gradient, video-bg, minimal)\n- Feature sections (grid, alternating, cards with icons)\n- Pricing tables (2–4 tiers with feature lists and toggle)\n- FAQ accordion with schema markup\n- Testimonials (grid, carousel, single-quote)\n- CTA sections (banner, full-page, inline)\n- Footer (simple, mega, minimal)\n- 4 design styles with Tailwind class sets\n\n---\n\n## Generation Workflow\n\nFollow these steps in order for every landing page request:\n\n1. **Gather inputs** — collect product name, tagline, audience, pain point, key benefit, pricing tiers, design style, and copy framework using the trigger format below. Ask only for missing fields.\n2. **Analyze brand voice** (recommended) — if the user has existing brand content (website copy, blog posts, marketing materials), run it through `marketing-skill/content-production/scripts/brand_voice_analyzer.py` to get a voice profile (formality, tone, perspective). Use the profile to inform design style and copy framework selection:\n   - formal + professional → **enterprise** style, **AIDA** framework\n   - casual + friendly → **bold-startup** style, **BAB** framework\n   - professional + authoritative → **dark-saas** style, **PAS** framework\n   - casual + conversational → **clean-minimal** style, **BAB** framework\n3. **Select design style** — map the user's choice (or infer from brand voice analysis) to one of the four Tailwind class sets in the Design Style Reference.\n4. **Apply copy framework** — write all headline and body copy using the chosen framework (PAS / AIDA / BAB) before generating components. Match the voice profile's formality and tone throughout.\n5. **Generate sections in order** — Hero → Features → Pricing → FAQ → Testimonials → CTA → Footer. Skip sections not relevant to the product.\n6. **Validate against SEO checklist** — run through every item in the SEO Checklist before outputting final code. Fix any gaps inline.\n7. **Output final components** — deliver complete, copy-paste-ready TSX files with all Tailwind classes, SEO meta, and structured data included.\n\n---\n\n## Triggering This Skill\n\n```\nProduct: [name]\nTagline: [one sentence value prop]\nTarget audience: [who they are]\nKey pain point: [what problem you solve]\nKey benefit: [primary outcome]\nPricing tiers: [free/pro/enterprise or describe]\nDesign style: dark-saas | clean-minimal | bold-startup | enterprise\nCopy framework: PAS | AIDA | BAB\n```\n\n---\n\n## Design Style Reference\n\n| Style | Background | Accent | Cards | CTA Button |\n|---|---|---|---|---|\n| **Dark SaaS** | `bg-gray-950 text-white` | `violet-500/400` | `bg-gray-900 border border-gray-800` | `bg-violet-600 hover:bg-violet-500` |\n| **Clean Minimal** | `bg-white text-gray-900` | `blue-600` | `bg-gray-50 border border-gray-200 rounded-2xl` | `bg-blue-600 hover:bg-blue-700` |\n| **Bold Startup** | `bg-white text-gray-900` | `orange-500` | `shadow-xl rounded-3xl` | `bg-orange-500 hover:bg-orange-600 text-white` |\n| **Enterprise** | `bg-slate-50 text-slate-900` | `slate-700` | `bg-white border border-slate-200 shadow-sm` | `bg-slate-900 hover:bg-slate-800 text-white` |\n\n> **Bold Startup** headings: add `font-black tracking-tight` to all `<h1>`/`<h2>` elements.\n\n---\n\n## Copy Frameworks\n\n**PAS (Problem → Agitate → Solution)**\n- H1: Painful state they're in\n- Sub: What happens if they don't fix it\n- CTA: What you offer\n- *Example — H1:* \"Your team wastes 3 hours a day on manual reporting\" / *Sub:* \"Every hour spent on spreadsheets is an hour not closing deals. Your competitors are already automated.\" / *CTA:* \"Automate your reports in 10 minutes →\"\n\n**AIDA (Attention → Interest → Desire → Action)**\n- H1: Bold attention-grabbing statement → Sub: Interesting fact or benefit → Features: Desire-building proof points → CTA: Clear action\n\n**BAB (Before → After → Bridge)**\n- H1: \"[Before state] → [After state]\" → Sub: \"Here's how [product] bridges the gap\" → Features: How it works (the bridge)\n\n---\n\n## Representative Component: Hero (Centered Gradient — Dark SaaS)\n\nUse this as the structural template for all hero variants. Swap layout classes, gradient direction, and image placement for split, video-bg, and minimal variants.\n\n```tsx\nexport function HeroCentered() {\n  return (\n    <section className=\"relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-gray-950 px-4 text-center\">\n      <div className=\"absolute inset-0 bg-gradient-to-b from-violet-900/20 to-transparent\" />\n      <div className=\"pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 r",
+      "tags": [
+        "react",
+        "nextjs",
+        "claude",
+        "ai",
+        "workflow",
+        "template",
+        "design",
+        "spreadsheet",
+        "image",
+        "tailwind"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-03-19T07:09:36.198Z"
     },
     {
       "id": "antigravity-langchain-architecture",
@@ -21512,6 +21624,35 @@
       "scrapedAt": "2026-01-29T06:59:52.243Z"
     },
     {
+      "id": "antigravity-openclaw-github-repo-commander",
+      "name": "openclaw-github-repo-commander",
+      "slug": "openclaw-github-repo-commander",
+      "description": "7-stage super workflow for GitHub repo audit, cleanup, PR review, and competitor analysis",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/openclaw-github-repo-commander",
+      "content": "# OpenClaw GitHub Repo Commander\n\n## Overview\n\nA structured 7-stage super workflow for comprehensive GitHub repository management. This skill automates repository auditing, cleanup, competitor benchmarking, and optimization — turning a messy repo into a clean, well-documented, production-ready project.\n\n## When to Use This Skill\n\n- Use when you need to audit a repository for secrets, junk files, or low-quality content\n- Use when the user says \"clean up my repo\", \"optimize my GitHub project\", or \"audit this library\"\n- Use when reviewing or creating pull requests with structured analysis\n- Use when comparing your project against competitors on GitHub\n- Use when running `/super-workflow` or `/openclaw-github-repo-commander` on a repo URL\n\n## How It Works\n\n### Stage 1: Intake\nClone the target repository, define success criteria, and establish baseline metrics.\n\n### Stage 2: Execution\nRun `scripts/repo-audit.sh` — automated checks for:\n- Hardcoded secrets (`ghp_`, `sk-`, `AKIA`, etc.)\n- Tracked `node_modules/` or build artifacts\n- Empty directories\n- Large files (>1MB)\n- Missing `.gitignore` coverage\n- Broken internal README links\n\n### Stage 3: Reflection\nDeep manual review beyond automation: content quality, documentation consistency, structural issues, version mismatches.\n\n### Stage 4: Competitor Analysis\nSearch GitHub for similar repositories. Compare documentation standards, feature coverage, star counts, and community adoption.\n\n### Stage 5: Synthesis\nConsolidate all findings into a prioritized action plan (P0 critical / P1 important / P2 nice-to-have).\n\n### Stage 6: Iteration\nExecute the plan: delete low-value files, fix security issues, upgrade documentation, add CI workflows, update changelogs.\n\n### Stage 7: Validation\nRe-run the audit script (target: 7/7 PASS), verify all changes, push to GitHub, and deliver a full report.\n\n## Examples\n\n### Example 1: Full Repo Audit\n\n```\n/openclaw-github-repo-commander https://github.com/owner/my-repo\n```\n\nRuns all 7 stages and produces a detailed before/after report.\n\n### Example 2: Quick Cleanup\n\n```\nClean up my GitHub repo — remove junk files, fix secrets, add .gitignore\n```\n\n### Example 3: Competitor Benchmarking\n\n```\nCompare my skill repo with the top 5 similar repos on GitHub\n```\n\n## Best Practices\n\n- ✅ Always run Stage 7 validation before pushing\n- ✅ Use semantic commit messages: `chore:`, `fix:`, `docs:`\n- ✅ Check the `pr_todo.json` file for pending reviewer requests\n- ❌ Don't skip Stage 4 — competitor analysis reveals blind spots\n- ❌ Don't commit `node_modules/` or `.env` files\n\n## Security & Safety Notes\n\n- The audit script scans for common secret patterns but excludes `.github/workflows/` to avoid false positives\n- All `gh` CLI operations use the user's existing authentication — no credentials are stored by this skill\n- The skill never modifies files without explicit user confirmation in Stage 6\n\n## Source Repository\n\n[github.com/wd041216-bit/openclaw-github-repo-commander](https://github.com/wd041216-bit/openclaw-github-repo-commander)\n\n**License**: MIT | **Version**: 4.0.0\n",
+      "tags": [
+        "node",
+        "claude",
+        "ai",
+        "automation",
+        "workflow",
+        "document",
+        "security",
+        "rag"
+      ],
+      "useCases": [
+        "Use when you need to audit a repository for secrets, junk files, or low-quality content",
+        "Use when the user says \"clean up my repo\", \"optimize my GitHub project\", or \"audit this library\"",
+        "Use when reviewing or creating pull requests with structured analysis",
+        "Use when comparing your project against competitors on GitHub",
+        "Use when running `/super-workflow` or `/openclaw-github-repo-commander` on a repo URL"
+      ],
+      "scrapedAt": "2026-03-19T07:10:38.828Z"
+    },
+    {
       "id": "antigravity-oral-health-analyzer",
       "name": "oral-health-analyzer",
       "slug": "oral-health-analyzer",
@@ -23256,6 +23397,37 @@
       "scrapedAt": "2026-03-07T06:56:58.024Z"
     },
     {
+      "id": "antigravity-pydantic-ai",
+      "name": "pydantic-ai",
+      "slug": "pydantic-ai",
+      "description": "Build production-ready AI agents with PydanticAI — type-safe tool use, structured outputs, dependency injection, and multi-model support.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pydantic-ai",
+      "content": "\n# PydanticAI — Typed AI Agents in Python\n\n## Overview\n\nPydanticAI is a Python agent framework from the Pydantic team that brings the same type-safety and validation guarantees as Pydantic to LLM-based applications. It supports structured outputs (validated with Pydantic models), dependency injection for testability, streamed responses, multi-turn conversations, and tool use — across OpenAI, Anthropic, Google Gemini, Groq, Mistral, and Ollama. Use this skill when building production AI agents, chatbots, or LLM pipelines where correctness and testability matter.\n\n## When to Use This Skill\n\n- Use when building Python AI agents that call tools and return structured data\n- Use when you need validated, typed LLM outputs (not raw strings)\n- Use when you want to write unit tests for agent logic without hitting a real LLM\n- Use when switching between LLM providers without rewriting agent code\n- Use when the user asks about `Agent`, `@agent.tool`, `RunContext`, `ModelRetry`, or `result_type`\n\n## How It Works\n\n### Step 1: Installation\n\n```bash\npip install pydantic-ai\n\n# Install extras for specific providers\npip install 'pydantic-ai[openai]'       # OpenAI / Azure OpenAI\npip install 'pydantic-ai[anthropic]'    # Anthropic Claude\npip install 'pydantic-ai[gemini]'       # Google Gemini\npip install 'pydantic-ai[groq]'         # Groq\npip install 'pydantic-ai[vertexai]'     # Google Vertex AI\n```\n\n### Step 2: A Minimal Agent\n\n```python\nfrom pydantic_ai import Agent\n\n# Simple agent — returns a plain string\nagent = Agent(\n    'anthropic:claude-sonnet-4-6',\n    system_prompt='You are a helpful assistant. Be concise.',\n)\n\nresult = agent.run_sync('What is the capital of Japan?')\nprint(result.data)  # \"Tokyo\"\nprint(result.usage())  # Usage(requests=1, request_tokens=..., response_tokens=...)\n```\n\n### Step 3: Structured Output with Pydantic Models\n\n```python\nfrom pydantic import BaseModel\nfrom pydantic_ai import Agent\n\nclass MovieReview(BaseModel):\n    title: str\n    year: int\n    rating: float  # 0.0 to 10.0\n    summary: str\n    recommended: bool\n\nagent = Agent(\n    'openai:gpt-4o',\n    result_type=MovieReview,\n    system_prompt='You are a film critic. Return structured reviews.',\n)\n\nresult = agent.run_sync('Review Inception (2010)')\nreview = result.data  # Fully typed MovieReview instance\nprint(f\"{review.title} ({review.year}): {review.rating}/10\")\nprint(f\"Recommended: {review.recommended}\")\n```\n\n### Step 4: Tool Use\n\nRegister tools with `@agent.tool` — the LLM can call them during a run:\n\n```python\nfrom pydantic_ai import Agent, RunContext\nfrom pydantic import BaseModel\nimport httpx\n\nclass WeatherReport(BaseModel):\n    city: str\n    temperature_c: float\n    condition: str\n\nweather_agent = Agent(\n    'anthropic:claude-sonnet-4-6',\n    result_type=WeatherReport,\n    system_prompt='Get current weather for the requested city.',\n)\n\n@weather_agent.tool\nasync def get_temperature(ctx: RunContext, city: str) -> dict:\n    \"\"\"Fetch the current temperature for a city from the weather API.\"\"\"\n    async with httpx.AsyncClient() as client:\n        r = await client.get(f'https://wttr.in/{city}?format=j1')\n        data = r.json()\n        return {\n            'temp_c': float(data['current_condition'][0]['temp_C']),\n            'description': data['current_condition'][0]['weatherDesc'][0]['value'],\n        }\n\nimport asyncio\nresult = asyncio.run(weather_agent.run('What is the weather in Tokyo?'))\nprint(result.data)\n```\n\n### Step 5: Dependency Injection\n\nInject services (database, HTTP clients, config) into agents for testability:\n\n```python\nfrom dataclasses import dataclass\nfrom pydantic_ai import Agent, RunContext\nfrom pydantic import BaseModel\n\n@dataclass\nclass Deps:\n    db: Database\n    user_id: str\n\nclass SupportResponse(BaseModel):\n    message: str\n    escalate: bool\n\nsupport_agent = Agent(\n    'openai:gpt-4o-mini',\n    deps_type=Deps,\n    result_type=SupportResponse,\n    system_prompt='You are a support agent. Use the tools to help customers.',\n)\n\n@support_agent.tool\nasync def get_order_history(ctx: RunContext[Deps]) -> list[dict]:\n    \"\"\"Fetch recent orders for the current user.\"\"\"\n    return await ctx.deps.db.get_orders(ctx.deps.user_id, limit=5)\n\n@support_agent.tool\nasync def create_refund(ctx: RunContext[Deps], order_id: str, reason: str) -> dict:\n    \"\"\"Initiate a refund for a specific order.\"\"\"\n    return await ctx.deps.db.create_refund(order_id, reason, ctx.deps.user_id)\n\n# Usage\nasync def handle_support(user_id: str, message: str):\n    deps = Deps(db=get_db(), user_id=user_id)\n    result = await support_agent.run(message, deps=deps)\n    return result.data\n```\n\n### Step 6: Testing with TestModel\n\nWrite unit tests without real LLM calls:\n\n```python\nfrom pydantic_ai.models.test import TestModel\n\ndef test_support_agent_escalates():\n    with support_agent.override(model=TestModel()):\n        # TestModel returns a minimal valid response matching result_type\n        result = support_agent.run_sync(\n            'I want to cancel my account'",
+      "tags": [
+        "python",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "gpt",
+        "template",
+        "security",
+        "azure"
+      ],
+      "useCases": [
+        "Use when building Python AI agents that call tools and return structured data",
+        "Use when you need validated, typed LLM outputs (not raw strings)",
+        "Use when you want to write unit tests for agent logic without hitting a real LLM",
+        "Use when switching between LLM providers without rewriting agent code",
+        "Use when the user asks about `Agent`, `@agent.tool`, `RunContext`, `ModelRetry`, or `result_type`"
+      ],
+      "scrapedAt": "2026-03-19T07:11:02.941Z"
+    },
+    {
       "id": "antigravity-pydantic-models-py",
       "name": "pydantic-models-py",
       "slug": "pydantic-models-py",
@@ -24902,73 +25074,6 @@
       "scrapedAt": "2026-03-09T07:15:55.628Z"
     },
     {
-      "id": "antigravity-seaborn",
-      "name": "seaborn",
-      "slug": "seaborn",
-      "description": "Statistical visualization with pandas integration. Use for quick exploration of distributions, relationships, and categorical comparisons with attractive defaults. Best for box plots, violin plots, pair plots, heatmaps. Built on matplotlib. For interactive plots use plotly;...",
-      "category": "Creative & Media",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/seaborn",
-      "content": "\n# Seaborn Statistical Visualization\n\n## Overview\n\nSeaborn is a Python visualization library for creating publication-quality statistical graphics. Use this skill for dataset-oriented plotting, multivariate analysis, automatic statistical estimation, and complex multi-panel figures with minimal code.\n\n## Design Philosophy\n\nSeaborn follows these core principles:\n\n1. **Dataset-oriented**: Work directly with DataFrames and named variables rather than abstract coordinates\n2. **Semantic mapping**: Automatically translate data values into visual properties (colors, sizes, styles)\n3. **Statistical awareness**: Built-in aggregation, error estimation, and confidence intervals\n4. **Aesthetic defaults**: Publication-ready themes and color palettes out of the box\n5. **Matplotlib integration**: Full compatibility with matplotlib customization when needed\n\n## Quick Start\n\n```python\nimport seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Load example dataset\ndf = sns.load_dataset('tips')\n\n# Create a simple visualization\nsns.scatterplot(data=df, x='total_bill', y='tip', hue='day')\nplt.show()\n```\n\n## Core Plotting Interfaces\n\n### Function Interface (Traditional)\n\nThe function interface provides specialized plotting functions organized by visualization type. Each category has **axes-level** functions (plot to single axes) and **figure-level** functions (manage entire figure with faceting).\n\n**When to use:**\n- Quick exploratory analysis\n- Single-purpose visualizations\n- When you need a specific plot type\n\n### Objects Interface (Modern)\n\nThe `seaborn.objects` interface provides a declarative, composable API similar to ggplot2. Build visualizations by chaining methods to specify data mappings, marks, transformations, and scales.\n\n**When to use:**\n- Complex layered visualizations\n- When you need fine-grained control over transformations\n- Building custom plot types\n- Programmatic plot generation\n\n```python\nfrom seaborn import objects as so\n\n# Declarative syntax\n(\n    so.Plot(data=df, x='total_bill', y='tip')\n    .add(so.Dot(), color='day')\n    .add(so.Line(), so.PolyFit())\n)\n```\n\n## Plotting Functions by Category\n\n### Relational Plots (Relationships Between Variables)\n\n**Use for:** Exploring how two or more variables relate to each other\n\n- `scatterplot()` - Display individual observations as points\n- `lineplot()` - Show trends and changes (automatically aggregates and computes CI)\n- `relplot()` - Figure-level interface with automatic faceting\n\n**Key parameters:**\n- `x`, `y` - Primary variables\n- `hue` - Color encoding for additional categorical/continuous variable\n- `size` - Point/line size encoding\n- `style` - Marker/line style encoding\n- `col`, `row` - Facet into multiple subplots (figure-level only)\n\n```python\n# Scatter with multiple semantic mappings\nsns.scatterplot(data=df, x='total_bill', y='tip',\n                hue='time', size='size', style='sex')\n\n# Line plot with confidence intervals\nsns.lineplot(data=timeseries, x='date', y='value', hue='category')\n\n# Faceted relational plot\nsns.relplot(data=df, x='total_bill', y='tip',\n            col='time', row='sex', hue='smoker', kind='scatter')\n```\n\n### Distribution Plots (Single and Bivariate Distributions)\n\n**Use for:** Understanding data spread, shape, and probability density\n\n- `histplot()` - Bar-based frequency distributions with flexible binning\n- `kdeplot()` - Smooth density estimates using Gaussian kernels\n- `ecdfplot()` - Empirical cumulative distribution (no parameters to tune)\n- `rugplot()` - Individual observation tick marks\n- `displot()` - Figure-level interface for univariate and bivariate distributions\n- `jointplot()` - Bivariate plot with marginal distributions\n- `pairplot()` - Matrix of pairwise relationships across dataset\n\n**Key parameters:**\n- `x`, `y` - Variables (y optional for univariate)\n- `hue` - Separate distributions by category\n- `stat` - Normalization: \"count\", \"frequency\", \"probability\", \"density\"\n- `bins` / `binwidth` - Histogram binning control\n- `bw_adjust` - KDE bandwidth multiplier (higher = smoother)\n- `fill` - Fill area under curve\n- `multiple` - How to handle hue: \"layer\", \"stack\", \"dodge\", \"fill\"\n\n```python\n# Histogram with density normalization\nsns.histplot(data=df, x='total_bill', hue='time',\n             stat='density', multiple='stack')\n\n# Bivariate KDE with contours\nsns.kdeplot(data=df, x='total_bill', y='tip',\n            fill=True, levels=5, thresh=0.1)\n\n# Joint plot with marginals\nsns.jointplot(data=df, x='total_bill', y='tip',\n              kind='scatter', hue='time')\n\n# Pairwise relationships\nsns.pairplot(data=df, hue='species', corner=True)\n```\n\n### Categorical Plots (Comparisons Across Categories)\n\n**Use for:** Comparing distributions or statistics across discrete categories\n\n**Categorical scatterplots:**\n- `stripplot()` - Points with jitter to show all observations\n- `swarmplot()` - Non-overlapping points (beeswarm algorithm)\n\n**Distribution comparisons:**\n- `boxplot()` - Quartiles and outliers\n- `violinp",
-      "tags": [
-        "python",
-        "pdf",
-        "api",
-        "ai",
-        "design",
-        "presentation",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:15:55.893Z"
-    },
-    {
-      "id": "antigravity-search-specialist",
-      "name": "search-specialist",
-      "slug": "search-specialist",
-      "description": "Expert web researcher using advanced search techniques and",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/search-specialist",
-      "content": "\n## Use this skill when\n\n- Working on search specialist tasks or workflows\n- Needing guidance, best practices, or checklists for search specialist\n\n## Do not use this skill when\n\n- The task is unrelated to search specialist\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\nYou are a search specialist expert at finding and synthesizing information from the web.\n\n## Focus Areas\n\n- Advanced search query formulation\n- Domain-specific searching and filtering\n- Result quality evaluation and ranking\n- Information synthesis across sources\n- Fact verification and cross-referencing\n- Historical and trend analysis\n\n## Search Strategies\n\n### Query Optimization\n\n- Use specific phrases in quotes for exact matches\n- Exclude irrelevant terms with negative keywords\n- Target specific timeframes for recent/historical data\n- Formulate multiple query variations\n\n### Domain Filtering\n\n- allowed_domains for trusted sources\n- blocked_domains to exclude unreliable sites\n- Target specific sites for authoritative content\n- Academic sources for research topics\n\n### WebFetch Deep Dive\n\n- Extract full content from promising results\n- Parse structured data from pages\n- Follow citation trails and references\n- Capture data before it changes\n\n## Approach\n\n1. Understand the research objective clearly\n2. Create 3-5 query variations for coverage\n3. Search broadly first, then refine\n4. Verify key facts across multiple sources\n5. Track contradictions and consensus\n\n## Output\n\n- Research methodology and queries used\n- Curated findings with source URLs\n- Credibility assessment of sources\n- Synthesis highlighting key insights\n- Contradictions or gaps identified\n- Data tables or structured summaries\n- Recommendations for further research\n\nFocus on actionable insights. Always provide direct quotes for important claims.\n",
-      "tags": [
-        "ai",
-        "workflow",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:15:56.222Z"
-    },
-    {
-      "id": "antigravity-secrets-management",
-      "name": "secrets-management",
-      "slug": "secrets-management",
-      "description": "Implement secure secrets management for CI/CD pipelines using Vault, AWS Secrets Manager, or native platform solutions. Use when handling sensitive credentials, rotating secrets, or securing CI/CD ...",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/secrets-management",
-      "content": "\n# Secrets Management\n\nSecure secrets management practices for CI/CD pipelines using Vault, AWS Secrets Manager, and other tools.\n\n## Purpose\n\nImplement secure secrets management in CI/CD pipelines without hardcoding sensitive information.\n\n## Use this skill when\n\n- Store API keys and credentials\n- Manage database passwords\n- Handle TLS certificates\n- Rotate secrets automatically\n- Implement least-privilege access\n\n## Do not use this skill when\n\n- You plan to hardcode secrets in source control\n- You cannot secure access to the secrets backend\n- You only need local development values without sharing\n\n## Instructions\n\n1. Identify secret types, owners, and rotation requirements.\n2. Choose a secrets backend and access model.\n3. Integrate CI/CD or runtime retrieval with least privilege.\n4. Validate rotation and audit logging.\n\n## Safety\n\n- Never commit secrets to source control.\n- Limit access and log secret usage for auditing.\n\n## Secrets Management Tools\n\n### HashiCorp Vault\n- Centralized secrets management\n- Dynamic secrets generation\n- Secret rotation\n- Audit logging\n- Fine-grained access control\n\n### AWS Secrets Manager\n- AWS-native solution\n- Automatic rotation\n- Integration with RDS\n- CloudFormation support\n\n### Azure Key Vault\n- Azure-native solution\n- HSM-backed keys\n- Certificate management\n- RBAC integration\n\n### Google Secret Manager\n- GCP-native solution\n- Versioning\n- IAM integration\n\n## HashiCorp Vault Integration\n\n### Setup Vault\n\n```bash\n# Start Vault dev server\nvault server -dev\n\n# Set environment\nexport VAULT_ADDR='http://127.0.0.1:8200'\nexport VAULT_TOKEN='root'\n\n# Enable secrets engine\nvault secrets enable -path=secret kv-v2\n\n# Store secret\nvault kv put secret/database/config username=admin password=secret\n```\n\n### GitHub Actions with Vault\n\n```yaml\nname: Deploy with Vault Secrets\n\non: [push]\n\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    steps:\n    - uses: actions/checkout@v4\n\n    - name: Import Secrets from Vault\n      uses: hashicorp/vault-action@v2\n      with:\n        url: https://vault.example.com:8200\n        token: ${{ secrets.VAULT_TOKEN }}\n        secrets: |\n          secret/data/database username | DB_USERNAME ;\n          secret/data/database password | DB_PASSWORD ;\n          secret/data/api key | API_KEY\n\n    - name: Use secrets\n      run: |\n        echo \"Connecting to database as $DB_USERNAME\"\n        # Use $DB_PASSWORD, $API_KEY\n```\n\n### GitLab CI with Vault\n\n```yaml\ndeploy:\n  image: vault:latest\n  before_script:\n    - export VAULT_ADDR=https://vault.example.com:8200\n    - export VAULT_TOKEN=$VAULT_TOKEN\n    - apk add curl jq\n  script:\n    - |\n      DB_PASSWORD=$(vault kv get -field=password secret/database/config)\n      API_KEY=$(vault kv get -field=key secret/api/credentials)\n      echo \"Deploying with secrets...\"\n      # Use $DB_PASSWORD, $API_KEY\n```\n\n**Reference:** See `references/vault-setup.md`\n\n## AWS Secrets Manager\n\n### Store Secret\n\n```bash\naws secretsmanager create-secret \\\n  --name production/database/password \\\n  --secret-string \"super-secret-password\"\n```\n\n### Retrieve in GitHub Actions\n\n```yaml\n- name: Configure AWS credentials\n  uses: aws-actions/configure-aws-credentials@v4\n  with:\n    aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}\n    aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}\n    aws-region: us-west-2\n\n- name: Get secret from AWS\n  run: |\n    SECRET=$(aws secretsmanager get-secret-value \\\n      --secret-id production/database/password \\\n      --query SecretString \\\n      --output text)\n    echo \"::add-mask::$SECRET\"\n    echo \"DB_PASSWORD=$SECRET\" >> $GITHUB_ENV\n\n- name: Use secret\n  run: |\n    # Use $DB_PASSWORD\n    ./deploy.sh\n```\n\n### Terraform with AWS Secrets Manager\n\n```hcl\ndata \"aws_secretsmanager_secret_version\" \"db_password\" {\n  secret_id = \"production/database/password\"\n}\n\nresource \"aws_db_instance\" \"main\" {\n  allocated_storage    = 100\n  engine              = \"postgres\"\n  instance_class      = \"db.t3.large\"\n  username            = \"admin\"\n  password            = jsondecode(data.aws_secretsmanager_secret_version.db_password.secret_string)[\"password\"]\n}\n```\n\n## GitHub Secrets\n\n### Organization/Repository Secrets\n\n```yaml\n- name: Use GitHub secret\n  run: |\n    echo \"API Key: ${{ secrets.API_KEY }}\"\n    echo \"Database URL: ${{ secrets.DATABASE_URL }}\"\n```\n\n### Environment Secrets\n\n```yaml\ndeploy:\n  runs-on: ubuntu-latest\n  environment: production\n  steps:\n  - name: Deploy\n    run: |\n      echo \"Deploying with ${{ secrets.PROD_API_KEY }}\"\n```\n\n**Reference:** See `references/github-secrets.md`\n\n## GitLab CI/CD Variables\n\n### Project Variables\n\n```yaml\ndeploy:\n  script:\n    - echo \"Deploying with $API_KEY\"\n    - echo \"Database: $DATABASE_URL\"\n```\n\n### Protected and Masked Variables\n- Protected: Only available in protected branches\n- Masked: Hidden in job logs\n- File type: Stored as file\n\n## Best Practices\n\n1. **Never commit secrets** to Git\n2. **Use different secrets** per environment\n3. **Rotate secrets regularly**\n4. **Implement l",
-      "tags": [
-        "python",
-        "api",
-        "ai",
-        "template",
-        "design",
-        "document",
-        "image",
-        "security",
-        "docker",
-        "kubernetes"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:15:56.494Z"
-    },
-    {
       "id": "openhands-security",
       "name": "security",
       "slug": "security",
@@ -24985,89 +25090,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-26T13:15:32.057Z"
-    },
-    {
-      "id": "antigravity-security-audit",
-      "name": "security-audit",
-      "slug": "security-audit",
-      "description": "Comprehensive security auditing workflow covering web application testing, API security, penetration testing, vulnerability scanning, and security hardening.",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/security-audit",
-      "content": "\n# Security Auditing Workflow Bundle\n\n## Overview\n\nComprehensive security auditing workflow for web applications, APIs, and infrastructure. This bundle orchestrates skills for penetration testing, vulnerability assessment, security scanning, and remediation.\n\n## When to Use This Workflow\n\nUse this workflow when:\n- Performing security audits on web applications\n- Testing API security\n- Conducting penetration tests\n- Scanning for vulnerabilities\n- Hardening application security\n- Compliance security assessments\n\n## Workflow Phases\n\n### Phase 1: Reconnaissance\n\n#### Skills to Invoke\n- `scanning-tools` - Security scanning\n- `shodan-reconnaissance` - Shodan searches\n- `top-web-vulnerabilities` - OWASP Top 10\n\n#### Actions\n1. Identify target scope\n2. Gather intelligence\n3. Map attack surface\n4. Identify technologies\n5. Document findings\n\n#### Copy-Paste Prompts\n```\nUse @scanning-tools to perform initial reconnaissance\n```\n\n```\nUse @shodan-reconnaissance to find exposed services\n```\n\n### Phase 2: Vulnerability Scanning\n\n#### Skills to Invoke\n- `vulnerability-scanner` - Vulnerability analysis\n- `security-scanning-security-sast` - Static analysis\n- `security-scanning-security-dependencies` - Dependency scanning\n\n#### Actions\n1. Run automated scanners\n2. Perform static analysis\n3. Scan dependencies\n4. Identify misconfigurations\n5. Document vulnerabilities\n\n#### Copy-Paste Prompts\n```\nUse @vulnerability-scanner to scan for OWASP Top 10 vulnerabilities\n```\n\n```\nUse @security-scanning-security-dependencies to audit dependencies\n```\n\n### Phase 3: Web Application Testing\n\n#### Skills to Invoke\n- `top-web-vulnerabilities` - OWASP vulnerabilities\n- `sql-injection-testing` - SQL injection\n- `xss-html-injection` - XSS testing\n- `broken-authentication` - Authentication testing\n- `idor-testing` - IDOR testing\n- `file-path-traversal` - Path traversal\n- `burp-suite-testing` - Burp Suite testing\n\n#### Actions\n1. Test for injection flaws\n2. Test authentication mechanisms\n3. Test session management\n4. Test access controls\n5. Test input validation\n6. Test security headers\n\n#### Copy-Paste Prompts\n```\nUse @sql-injection-testing to test for SQL injection vulnerabilities\n```\n\n```\nUse @xss-html-injection to test for cross-site scripting\n```\n\n```\nUse @broken-authentication to test authentication security\n```\n\n### Phase 4: API Security Testing\n\n#### Skills to Invoke\n- `api-fuzzing-bug-bounty` - API fuzzing\n- `api-security-best-practices` - API security\n\n#### Actions\n1. Enumerate API endpoints\n2. Test authentication/authorization\n3. Test rate limiting\n4. Test input validation\n5. Test error handling\n6. Document API vulnerabilities\n\n#### Copy-Paste Prompts\n```\nUse @api-fuzzing-bug-bounty to fuzz API endpoints\n```\n\n### Phase 5: Penetration Testing\n\n#### Skills to Invoke\n- `pentest-commands` - Penetration testing commands\n- `pentest-checklist` - Pentest planning\n- `ethical-hacking-methodology` - Ethical hacking\n- `metasploit-framework` - Metasploit\n\n#### Actions\n1. Plan penetration test\n2. Execute attack scenarios\n3. Exploit vulnerabilities\n4. Document proof of concept\n5. Assess impact\n\n#### Copy-Paste Prompts\n```\nUse @pentest-checklist to plan penetration test\n```\n\n```\nUse @pentest-commands to execute penetration testing\n```\n\n### Phase 6: Security Hardening\n\n#### Skills to Invoke\n- `security-scanning-security-hardening` - Security hardening\n- `auth-implementation-patterns` - Authentication\n- `api-security-best-practices` - API security\n\n#### Actions\n1. Implement security controls\n2. Configure security headers\n3. Set up authentication\n4. Implement authorization\n5. Configure logging\n6. Apply patches\n\n#### Copy-Paste Prompts\n```\nUse @security-scanning-security-hardening to harden application security\n```\n\n### Phase 7: Reporting\n\n#### Skills to Invoke\n- `reporting-standards` - Security reporting\n\n#### Actions\n1. Document findings\n2. Assess risk levels\n3. Provide remediation steps\n4. Create executive summary\n5. Generate technical report\n\n## Security Testing Checklist\n\n### OWASP Top 10\n- [ ] Injection (SQL, NoSQL, OS, LDAP)\n- [ ] Broken Authentication\n- [ ] Sensitive Data Exposure\n- [ ] XML External Entities (XXE)\n- [ ] Broken Access Control\n- [ ] Security Misconfiguration\n- [ ] Cross-Site Scripting (XSS)\n- [ ] Insecure Deserialization\n- [ ] Using Components with Known Vulnerabilities\n- [ ] Insufficient Logging & Monitoring\n\n### API Security\n- [ ] Authentication mechanisms\n- [ ] Authorization checks\n- [ ] Rate limiting\n- [ ] Input validation\n- [ ] Error handling\n- [ ] Security headers\n\n## Quality Gates\n\n- [ ] All planned tests executed\n- [ ] Vulnerabilities documented\n- [ ] Proof of concepts captured\n- [ ] Risk assessments completed\n- [ ] Remediation steps provided\n- [ ] Report generated\n\n## Related Workflow Bundles\n\n- `development` - Secure development practices\n- `wordpress` - WordPress security\n- `cloud-devops` - Cloud security\n- `testing-qa` - Security testing\n",
-      "tags": [
-        "api",
-        "ai",
-        "workflow",
-        "document",
-        "security",
-        "pentest",
-        "hacking",
-        "vulnerability",
-        "aws",
-        "cro"
-      ],
-      "useCases": [
-        "Performing security audits on web applications",
-        "Testing API security",
-        "Conducting penetration tests",
-        "Scanning for vulnerabilities",
-        "Hardening application security"
-      ],
-      "scrapedAt": "2026-03-09T07:15:56.747Z"
-    },
-    {
-      "id": "antigravity-security-auditor",
-      "name": "security-auditor",
-      "slug": "security-auditor",
-      "description": "Expert security auditor specializing in DevSecOps, comprehensive cybersecurity, and compliance frameworks.",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/security-auditor",
-      "content": "You are a security auditor specializing in DevSecOps, application security, and comprehensive cybersecurity practices.\n\n## Use this skill when\n\n- Running security audits or risk assessments\n- Reviewing SDLC security controls, CI/CD, or compliance readiness\n- Investigating vulnerabilities or designing mitigation plans\n- Validating authentication, authorization, and data protection controls\n\n## Do not use this skill when\n\n- You lack authorization or scope approval for security testing\n- You need legal counsel or formal compliance certification\n- You only need a quick automated scan without manual review\n\n## Instructions\n\n1. Confirm scope, assets, and compliance requirements.\n2. Review architecture, threat model, and existing controls.\n3. Run targeted scans and manual verification for high-risk areas.\n4. Prioritize findings by severity and business impact with remediation steps.\n5. Validate fixes and document residual risk.\n\n## Safety\n\n- Do not run intrusive tests in production without written approval.\n- Protect sensitive data and avoid exposing secrets in reports.\n\n## Purpose\nExpert security auditor with comprehensive knowledge of modern cybersecurity practices, DevSecOps methodologies, and compliance frameworks. Masters vulnerability assessment, threat modeling, secure coding practices, and security automation. Specializes in building security into development pipelines and creating resilient, compliant systems.\n\n## Capabilities\n\n### DevSecOps & Security Automation\n- **Security pipeline integration**: SAST, DAST, IAST, dependency scanning in CI/CD\n- **Shift-left security**: Early vulnerability detection, secure coding practices, developer training\n- **Security as Code**: Policy as Code with OPA, security infrastructure automation\n- **Container security**: Image scanning, runtime security, Kubernetes security policies\n- **Supply chain security**: SLSA framework, software bill of materials (SBOM), dependency management\n- **Secrets management**: HashiCorp Vault, cloud secret managers, secret rotation automation\n\n### Modern Authentication & Authorization\n- **Identity protocols**: OAuth 2.0/2.1, OpenID Connect, SAML 2.0, WebAuthn, FIDO2\n- **JWT security**: Proper implementation, key management, token validation, security best practices\n- **Zero-trust architecture**: Identity-based access, continuous verification, principle of least privilege\n- **Multi-factor authentication**: TOTP, hardware tokens, biometric authentication, risk-based auth\n- **Authorization patterns**: RBAC, ABAC, ReBAC, policy engines, fine-grained permissions\n- **API security**: OAuth scopes, API keys, rate limiting, threat protection\n\n### OWASP & Vulnerability Management\n- **OWASP Top 10 (2021)**: Broken access control, cryptographic failures, injection, insecure design\n- **OWASP ASVS**: Application Security Verification Standard, security requirements\n- **OWASP SAMM**: Software Assurance Maturity Model, security maturity assessment\n- **Vulnerability assessment**: Automated scanning, manual testing, penetration testing\n- **Threat modeling**: STRIDE, PASTA, attack trees, threat intelligence integration\n- **Risk assessment**: CVSS scoring, business impact analysis, risk prioritization\n\n### Application Security Testing\n- **Static analysis (SAST)**: SonarQube, Checkmarx, Veracode, Semgrep, CodeQL\n- **Dynamic analysis (DAST)**: OWASP ZAP, Burp Suite, Nessus, web application scanning\n- **Interactive testing (IAST)**: Runtime security testing, hybrid analysis approaches\n- **Dependency scanning**: Snyk, WhiteSource, OWASP Dependency-Check, GitHub Security\n- **Container scanning**: Twistlock, Aqua Security, Anchore, cloud-native scanning\n- **Infrastructure scanning**: Nessus, OpenVAS, cloud security posture management\n\n### Cloud Security\n- **Cloud security posture**: AWS Security Hub, Azure Security Center, GCP Security Command Center\n- **Infrastructure security**: Cloud security groups, network ACLs, IAM policies\n- **Data protection**: Encryption at rest/in transit, key management, data classification\n- **Serverless security**: Function security, event-driven security, serverless SAST/DAST\n- **Container security**: Kubernetes Pod Security Standards, network policies, service mesh security\n- **Multi-cloud security**: Consistent security policies, cross-cloud identity management\n\n### Compliance & Governance\n- **Regulatory frameworks**: GDPR, HIPAA, PCI-DSS, SOC 2, ISO 27001, NIST Cybersecurity Framework\n- **Compliance automation**: Policy as Code, continuous compliance monitoring, audit trails\n- **Data governance**: Data classification, privacy by design, data residency requirements\n- **Security metrics**: KPIs, security scorecards, executive reporting, trend analysis\n- **Incident response**: NIST incident response framework, forensics, breach notification\n\n### Secure Coding & Development\n- **Secure coding standards**: Language-specific security guidelines, secure libraries\n- **Input validation**: Parameterized queries, input sanitization, output encod",
-      "tags": [
-        "api",
-        "ai",
-        "automation",
-        "workflow",
-        "design",
-        "document",
-        "image",
-        "security",
-        "vulnerability",
-        "kubernetes"
-      ],
-      "useCases": [
-        "\"Conduct comprehensive security audit of microservices architecture with DevSecOps integration\"",
-        "\"Implement zero-trust authentication system with multi-factor authentication and risk-based access\"",
-        "\"Design security pipeline with SAST, DAST, and container scanning for CI/CD workflow\"",
-        "\"Create GDPR-compliant data processing system with privacy by design principles\"",
-        "\"Perform threat modeling for cloud-native application with Kubernetes deployment\""
-      ],
-      "scrapedAt": "2026-03-09T07:15:57.044Z"
-    },
-    {
-      "id": "antigravity-security-bluebook-builder",
-      "name": "security-bluebook-builder",
-      "slug": "security-bluebook-builder",
-      "description": "Create or refine a concise, normative security policy (\"Blue Book\") for sensitive applications. Use when users need a threat model, data classification rules, auth/session policy, logging and audit requirements, retention/deletion expectations, incident response, or security...",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/security-bluebook-builder",
-      "content": "\n# Security Bluebook Builder\n\n## Overview\nBuild a minimal but real security policy for sensitive apps. The output is a single, coherent Blue Book document using MUST/SHOULD/CAN language, with explicit assumptions, scope, and security gates.\n\n## Workflow\n\n### 1) Gather inputs (ask only if missing)\nCollect just enough context to fill the template. If the user has not provided details, ask up to 6 short questions:\n- What data classes are handled (PII, PHI, financial, tokens, content)?\n- What are the trust boundaries (client/server/third parties)?\n- How do users authenticate (OAuth, email/password, SSO, device sessions)?\n- What storage is used (DB, object storage, logs, analytics)?\n- What connectors or third parties are used?\n- Retention and deletion expectations (default + user-initiated)?\n\nIf the user cannot answer, proceed with safe defaults and mark TODOs.\n\n### 2) Draft the Blue Book\nLoad `references/bluebook_template.md` and fill it with the provided details. Keep it concise, deterministic, and enforceable.\n\n### 3) Enforce guardrails\n- Do not include secrets, tokens, or internal credentials.\n- If something is unknown, write \"TODO\" plus a clear assumption.\n- Fail closed: if a capability is required but unavailable, call it out explicitly.\n- Keep scope minimal; do not add features or tools beyond what the user asked for.\n\n### 4) Quality checks\nConfirm the Blue Book includes:\n- Threat model (assumptions + out-of-scope)\n- Data classification + handling rules\n- Trust boundaries + controls\n- Auth/session policy\n- Token handling policy\n- Logging/audit policy\n- Retention/deletion\n- Incident response mini-runbook\n- Security gates + go/no-go checklist\n\n## Resources\n- `references/bluebook_template.md`\n",
-      "tags": [
-        "ai",
-        "workflow",
-        "template",
-        "document",
-        "security",
-        "rag"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-09T07:15:57.304Z"
     },
     {
       "id": "anthropic-skill-creator",
@@ -25761,14 +25783,14 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 369
+      "count": 371
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 354
+      "count": 356
     },
     {
       "id": "development-code-tools",
@@ -25782,14 +25804,14 @@
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 98
+      "count": 97
     },
     {
       "id": "security-systems",
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 81
+      "count": 78
     },
     {
       "id": "business-marketing",
@@ -25833,48 +25855,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 93638
+      "stars": 97121
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 96280
+      "stars": 97226
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 45426
+      "stars": 45867
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 69318
+      "stars": 69375
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 1003
+      "stars": 1013
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1003,
-      "newSkillCount": 6,
-      "stars": 25429
+      "newSkillCount": 11,
+      "stars": 25752
     }
   ],
-  "lastUpdated": "2026-03-18T07:17:08.573Z",
+  "lastUpdated": "2026-03-19T07:11:25.169Z",
   "stats": {
     "totalSkills": 1102,
-    "newSkills": 16,
-    "scrapedAt": "2026-03-18T07:17:08.573Z"
+    "newSkills": 21,
+    "scrapedAt": "2026-03-19T07:11:25.169Z"
   }
 }
