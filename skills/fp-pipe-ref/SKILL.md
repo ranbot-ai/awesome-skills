@@ -44,7 +44,6 @@ process('  foo bar  ')     // ['FOO', 'BAR']
 ```
 
 ## When to Use
-
 | Use | When |
 |-----|------|
 | `pipe` | Transform a specific value now |

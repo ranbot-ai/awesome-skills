@@ -25,7 +25,6 @@ APPLICATIONINSIGHTS_CONNECTION_STRING=InstrumentationKey=xxx;IngestionEndpoint=h
 ```
 
 ## When to Use
-
 | Scenario | Use |
 |----------|-----|
 | Quick setup, auto-instrumentation | `azure-monitor-opentelemetry` (distro) |
@@ -186,4 +185,4 @@ exporter = AzureMonitorTraceExporter(
 
 | Exporter | Telemetry Type | Application Insights Table |
 |----------|---------------|---------------------------|
-| `AzureMonitorTraceExporter` | Traces/Spans | requests, dependen
+| `AzureMonitorTraceExporter` | Traces/Spans | requests, dependenc

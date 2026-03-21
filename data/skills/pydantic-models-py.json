@@ -2,7 +2,7 @@
   "id": "antigravity-pydantic-models-py",
   "name": "pydantic-models-py",
   "slug": "pydantic-models-py",
-  "description": "Create Pydantic models following the multi-model pattern with Base, Create, Update, Response, and InDB variants. Use when defining API request/response schemas, database models, or data validation ...",
+  "description": "Create Pydantic models following the multi-model pattern for clean API contracts.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

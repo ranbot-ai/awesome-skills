@@ -1,9 +1,9 @@
 ---
 name: hubspot-integration
-description: Expert patterns for HubSpot CRM integration including OAuth authentication, CRM objects, associations, batch operations, webhooks, and custom objects. Covers Node.js and Python SDKs. Use when: hubs...
+description: Authentication for single-account integrations 
 category: AI & Agents
 source: antigravity
-tags: [python, node, api, workflow]
+tags: [api, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hubspot-integration
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: javascript-mastery
-description: Comprehensive JavaScript reference covering 33+ essential concepts every developer should know. From fundamentals like primitives and closures to advanced patterns like async/await and functional p...
+description: 33+ essential JavaScript concepts every developer should know, inspired by [33-js-concepts](https://github.com/leonardomso/33-js-concepts). 
 category: Development & Code Tools
 source: antigravity
 tags: [javascript, node, api, ai, cro]

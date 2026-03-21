@@ -9,7 +9,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/retu
 
 
 ## When to Use
-
 Use this skill when managing the product return lifecycle, including authorization, physical inspection, making disposition decisions (e.g., restock vs. liquidator), detecting return fraud, or processing warranty claims.
 
 # Returns & Reverse Logistics
@@ -41,4 +40,4 @@ Returned products require consistent grading that drives disposition decisions. 
 - **Grade C (Fair):** Visible wear, scratches, or minor damage. Missing accessories that cost <10% of unit value. Functional but cosmetically impaired. Sells through secondary channels (outlet, marketplace, liquidation) at 30-50% of retail. Refurbishment possible if cost < 20% of recovered value.
 - **Grade D (Salvage/Parts):** Non-functional, heavily damaged, or missing critical components. Salvageable for parts or materials recovery at 5-15% of retail. If parts recovery isn't viable, route to recycling or destruction.
 
-Grading standards vary by category. Consumer electronics r
+Grading standards vary by category. Consumer electronics re

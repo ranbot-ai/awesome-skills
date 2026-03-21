@@ -1,6 +1,6 @@
 ---
 name: azure-communication-callautomation-java
-description: Build call automation workflows with Azure Communication Services Call Automation Java SDK. Use when implementing IVR systems, call routing, call recording, DTMF recognition, text-to-speech, or AI-...
+description: Build server-side call automation workflows including IVR systems, call routing, recording, and AI-powered interactions. 
 category: AI & Agents
 source: antigravity
 tags: [api, ai, llm, automation, workflow, azure, rag]

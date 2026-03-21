@@ -1,6 +1,6 @@
 ---
 name: cc-skill-security-review
-description: Use this skill when adding authentication, handling user input, working with secrets, creating API endpoints, or implementing payment/sensitive features. Provides comprehensive security checklist a...
+description: This skill ensures all code follows security best practices and identifies potential vulnerabilities. Use when implementing authentication or authorization, handling user input or file uploads, or cre
 category: Security & Systems
 source: antigravity
 tags: [typescript, react, nextjs, api, ai, workflow, image, security, vulnerability, supabase]
@@ -12,8 +12,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cc-s
 
 This skill ensures all code follows security best practices and identifies potential vulnerabilities.
 
-## When to Activate
-
+## When to Use
 - Implementing authentication or authorization
 - Handling user input or file uploads
 - Creating new API endpoints
@@ -207,4 +206,4 @@ function renderUserContent(html: string) {
     ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'p'],
     ALLOWED_ATTR: []
   })
-  return <div dangerouslySetInnerHTML={{
+  return <div dangerouslySetInnerHTML={{ __htm

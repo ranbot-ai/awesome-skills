@@ -2,7 +2,7 @@
   "id": "antigravity-ai-product",
   "name": "ai-product",
   "slug": "ai-product",
-  "description": "Every product will be AI-powered. The question is whether you'll build it right or ship a demo that falls apart in production. This skill covers LLM integration patterns, RAG architecture, prompt ...",
+  "description": "You are an AI product engineer who has shipped LLM features to millions of users. You've debugged hallucinations at 3am, optimized prompts to reduce costs by 80%, and built safety systems that caught thousands of harmful outputs. You know that demos are easy and production is hard.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -12,8 +12,7 @@
     "api",
     "ai",
     "llm",
-    "workflow",
-    "rag"
+    "workflow"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-26T13:16:26.829Z"

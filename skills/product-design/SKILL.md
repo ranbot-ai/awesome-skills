@@ -1,6 +1,6 @@
 ---
 name: product-design
-description: Design de produto nivel Apple — sistemas visuais, UX flows, acessibilidade, linguagem visual proprietaria, design tokens, prototipagem e handoff. Cobre Figma, design systems, tipografia, cor,... 
+description: Design de produto nivel Apple — sistemas visuais, UX flows, acessibilidade, linguagem visual proprietaria, design tokens, prototipagem e handoff. Cobre Figma, design systems, tipografia, cor, espaca
 category: Document Processing
 source: antigravity
 tags: [claude, ai, design, document, image, cro]

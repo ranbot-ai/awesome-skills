@@ -10,8 +10,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agen
 
 # Agent Manager Skill
 
-## When to use
-
+## When to Use
 Use this skill when you need to:
 
 - run multiple local CLI agents in parallel (separate tmux sessions)

@@ -1,6 +1,6 @@
 ---
 name: mcp-builder-ms
-description: Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate exte...
+description: Use this skill when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK). 
 category: Document Processing
 source: antigravity
 tags: [python, typescript, node, markdown, api, mcp, ai, agent, llm, automation]
@@ -11,7 +11,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mcp-
 # MCP Server Development Guide
 
 ## When to Use
-
 Use this skill when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).
 
 ## Overview
@@ -122,4 +121,4 @@ Key pages to review:
 - 🐍 Python Guide - Python patterns and examples
 
 **For C#/.NET (Microsoft ecosystem):**
-- 🔷 Microsoft MCP Patte
+- 🔷 Microsoft MCP Patter

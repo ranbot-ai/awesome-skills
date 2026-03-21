@@ -2,7 +2,7 @@
   "id": "antigravity-distributed-debugging-debug-trace",
   "name": "distributed-debugging-debug-trace",
   "slug": "distributed-debugging-debug-trace",
-  "description": "You are a debugging expert specializing in setting up comprehensive debugging environments, distributed tracing, and diagnostic tools. Configure debugging workflows, implement tracing solutions, an...",
+  "description": "You are a debugging expert specializing in setting up comprehensive debugging environments, distributed tracing, and diagnostic tools. Configure debugging workflows, implement tracing solutions, and establish troubleshooting practices for development and production environments.",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

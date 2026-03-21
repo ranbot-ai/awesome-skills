@@ -1,6 +1,6 @@
 ---
 name: citation-management
-description: Comprehensive citation management for academic research. Search Google Scholar and PubMed for papers, extract accurate metadata, validate citations, and generate properly formatted BibTeX entries. Thi
+description: Manage citations systematically throughout the research and writing process. 
 category: Document Processing
 source: antigravity
 tags: [python, api, ai, automation, workflow, template, document, image, rag, cro]

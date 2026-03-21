@@ -1,6 +1,6 @@
 ---
 name: github-issue-creator
-description: Convert raw notes, error logs, voice dictation, or screenshots into crisp GitHub-flavored markdown issue reports. Use when the user pastes bug info, error messages, or informal descriptions and wan...
+description: Transform messy input (error logs, voice notes, screenshots) into clean, actionable GitHub issues. 
 category: Creative & Media
 source: antigravity
 tags: [markdown, ai, agent, workflow, template, image, security, azure]

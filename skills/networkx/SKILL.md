@@ -1,6 +1,6 @@
 ---
 name: networkx
-description: Comprehensive toolkit for creating, analyzing, and visualizing complex networks and graphs in Python. Use when working with network/graph data structures, analyzing relationships between entities, com
+description: NetworkX is a Python package for creating, manipulating, and analyzing complex networks and graphs. 
 category: Document Processing
 source: antigravity
 tags: [python, node, pdf, ai, workflow, document, rag]

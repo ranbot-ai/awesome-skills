@@ -2,7 +2,7 @@
   "id": "antigravity-evolution",
   "name": "evolution",
   "slug": "evolution",
-  "description": "CRITICAL: Use for makepad-skills self-evolution and contribution. Triggers on:\nevolve, evolution, contribute, contribution, self-improve, self-improvement,\nadd pattern, new pattern, capture learning, document solution,\nhooks, hook system, auto-trigger, skill...\n",
+  "description": "This skill enables makepad-skills to self-improve continuously during development.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

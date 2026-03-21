@@ -1,6 +1,6 @@
 ---
 name: devops-deploy
-description: DevOps e deploy de aplicacoes — Docker, CI/CD com GitHub Actions, AWS Lambda, SAM, Terraform, infraestrutura como codigo e monitoramento. Ativar para: dockerizar aplicacao, configurar pipeline... 
+description: DevOps e deploy de aplicacoes — Docker, CI/CD com GitHub Actions, AWS Lambda, SAM, Terraform, infraestrutura como codigo e monitoramento. 
 category: Document Processing
 source: antigravity
 tags: [python, api, claude, ai, workflow, template, document, image, security, docker]

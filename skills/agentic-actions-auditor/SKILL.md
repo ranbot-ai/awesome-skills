@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agen
 Static security analysis guidance for GitHub Actions workflows that invoke AI coding agents. This skill teaches you how to discover workflow files locally or from remote GitHub repositories, identify AI action steps, follow cross-file references to composite actions and reusable workflows that may contain hidden AI agents, capture security-relevant configuration, and detect attack vectors where attacker-controlled input reaches an AI agent running in a CI/CD pipeline.
 
 ## When to Use
-
 - Auditing a repository's GitHub Actions workflows for AI agent security
 - Reviewing CI/CD configurations that invoke Claude Code Action, Gemini CLI, or OpenAI Codex
 - Checking whether attacker-controlled input can reach AI agent prompts
@@ -92,4 +91,4 @@ Use a two-step approach with `gh api`:
 
 Do NOT pre-check `gh auth status` before API calls. Attempt the API call and handle failures:
 
-- **401/
+- **401/a

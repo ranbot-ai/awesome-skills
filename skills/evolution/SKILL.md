@@ -1,6 +1,6 @@
 ---
 name: evolution
-description: CRITICAL: Use for makepad-skills self-evolution and contribution. Triggers on: evolve, evolution, contribute, contribution, self-improve, self-improvement, add pattern, new pattern, capture learning, 
+description: This skill enables makepad-skills to self-improve continuously during development. 
 category: Document Processing
 source: antigravity
 tags: [markdown, api, claude, ai, template, design, document, security]

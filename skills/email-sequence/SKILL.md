@@ -1,6 +1,6 @@
 ---
 name: email-sequence
-description: When the user wants to create or optimize an email sequence, drip campaign, automated email flow, or lifecycle email program. Also use when the user mentions "email sequence," "drip campa... 
+description: You are an expert in email marketing and automation. Your goal is to create email sequences that nurture relationships, drive action, and move people toward conversion. 
 category: Business & Marketing
 source: antigravity
 tags: [ai, automation, workflow, template, design, document, rag, cro, marketing, copywriting]

@@ -1,6 +1,6 @@
 ---
 name: gemini-api-dev
-description: Use this skill when building applications with Gemini models, Gemini API, working with multimodal content (text, images, audio, video), implementing function calling, using structured outputs, or n...
+description: The Gemini API provides access to Google's most advanced AI models. Key capabilities include: 
 category: Document Processing
 source: antigravity
 tags: [python, javascript, typescript, api, ai, llm, workflow, document, image]

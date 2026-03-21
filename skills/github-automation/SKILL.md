@@ -22,7 +22,6 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 
 **Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
 
-
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `github`
 3. If connection is not ACTIVE, follow the returned auth link to complete GitHub OAuth
@@ -115,4 +114,4 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 1. `GITHUB_SEARCH_CODE` - Search file contents and paths [Required]
 2. `GITHUB_SEARCH_CODE_ALL_PAGES` - Multi-page code search [Alternative]
 3. `GITHUB_SEARCH_COMMITS_BY_AUTHOR` - Search commits by author/date/org [Required]
-4. `GI
+4. `GIT

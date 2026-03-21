@@ -22,7 +22,6 @@ Automate GitLab operations including project management, issue tracking, merge r
 
 **Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
 
-
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `gitlab`
 3. If connection is not ACTIVE, follow the returned auth link to complete GitLab OAuth
@@ -106,3 +105,4 @@ Automate GitLab operations including project management, issue tracking, merge r
 4. `GITLAB_CREATE_PROJECT` - Create a new project [Required for create]
 5. `GITLAB_GET_REPOSITORY_BRANCHES` - List branches in a project [Required for branch ops]
 6. `GITLAB_CREATE_REPOSITORY_BRANCH` - Create a new branch [Optional]
+7

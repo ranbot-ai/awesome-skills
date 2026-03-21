@@ -116,7 +116,6 @@ After completion, report:
 - Key demographic insights
 - Suggested next steps (deeper analysis, segmentation)
 
-
 ## Error Handling
 
 `APIFY_TOKEN not found` - Ask user to create `.env` with `APIFY_TOKEN=your_token`

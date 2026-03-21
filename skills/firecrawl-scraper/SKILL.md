@@ -1,6 +1,6 @@
 ---
 name: firecrawl-scraper
-description: Deep web scraping, screenshots, PDF parsing, and website crawling using Firecrawl API 
+description: Deep web scraping, screenshots, PDF parsing, and website crawling using Firecrawl API. Use when you need deep content extraction from web pages, page interaction is required (clicking, scrolling, etc.
 category: AI & Agents
 source: antigravity
 tags: [pdf, api, claude, cro]

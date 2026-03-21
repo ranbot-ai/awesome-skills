@@ -1,6 +1,6 @@
 ---
 name: gha-security-review
-description: GitHub Actions security review for workflow exploitation vulnerabilities. Use when asked to "review GitHub Actions", "audit workflows", "check CI security", "GHA security", "workflow security review",
+description: Find exploitable vulnerabilities in GitHub Actions workflows. Every finding MUST include a concrete exploitation scenario — if you can't build the attack, don't report it. 
 category: Security & Systems
 source: antigravity
 tags: [markdown, claude, ai, agent, workflow, security, vulnerability]

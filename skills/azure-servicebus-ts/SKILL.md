@@ -1,9 +1,9 @@
 ---
 name: azure-servicebus-ts
-description: Build messaging applications using Azure Service Bus SDK for JavaScript (@azure/service-bus). Use when implementing queues, topics/subscriptions, message sessions, dead-letter handling, or enterpri...
+description: Enterprise messaging with queues, topics, and subscriptions. 
 category: Document Processing
 source: antigravity
-tags: [javascript, typescript, ai, workflow, document, azure, cro]
+tags: [typescript, ai, workflow, document, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-servicebus-ts
 ---
 

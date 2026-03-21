@@ -1,6 +1,6 @@
 ---
 name: architecture-patterns
-description: Implement proven backend architecture patterns including Clean Architecture, Hexagonal Architecture, and Domain-Driven Design. Use when architecting complex backend systems or refactoring existing ...
+description: Master proven backend architecture patterns including Clean Architecture, Hexagonal Architecture, and Domain-Driven Design to build maintainable, testable, and scalable systems. 
 category: AI & Agents
 source: antigravity
 tags: [ai, llm, automation, workflow, template, design, cro]

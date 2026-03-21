@@ -1,6 +1,6 @@
 ---
 name: memory-safety-patterns
-description: Implement memory-safe programming with RAII, ownership, smart pointers, and resource management across Rust, C++, and C. Use when writing safe systems code, managing resources, or preventing memory...
+description: Cross-language patterns for memory-safe programming including RAII, ownership, smart pointers, and resource management. 
 category: Development & Code Tools
 source: antigravity
 tags: [ai, cro]

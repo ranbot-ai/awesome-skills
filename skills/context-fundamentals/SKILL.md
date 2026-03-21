@@ -1,6 +1,6 @@
 ---
 name: context-fundamentals
-description: This skill should be used when the user asks to "understand context", "explain context windows", "design agent architecture", "debug context issues", "optimize context usage", or discusses context com
+description: Context is the complete state available to a language model at inference time. It includes everything the model can attend to when generating responses: system instructions, tool definitions, retrieve
 category: AI & Agents
 source: antigravity
 tags: [python, markdown, api, claude, ai, agent, design, document, rag, cro]
@@ -12,8 +12,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cont
 
 Context is the complete state available to a language model at inference time. It includes everything the model can attend to when generating responses: system instructions, tool definitions, retrieved documents, message history, and tool outputs. Understanding context fundamentals is prerequisite to effective context engineering.
 
-## When to Activate
-
+## When to Use
 Activate this skill when:
 - Designing new agent systems or modifying existing architectures
 - Debugging unexpected agent behavior that may relate to context
@@ -61,4 +60,4 @@ Tool outputs consume context whether they are relevant to current decisions or n
 **The Attention Budget Constraint**
 Language models process tokens through attention mechanisms that create pairwise relationships between all tokens in context. For n tokens, this creates n² relationships that must be computed and stored. As context length increases, the model's ability to capture these relationships gets stretched thin.
 
-Models develop attention patterns from training data distributions where shorter sequences predominate. This means models have less experience with and fewer specialized parameters for context-wide dependencies. T
+Models develop attention patterns from training data distributions where shorter sequences predominate. This means models have less experience with and fewer specialized parameters for context-wide dependencies. The res

@@ -1,6 +1,6 @@
 ---
 name: linux-shell-scripting
-description: This skill should be used when the user asks to "create bash scripts", "automate Linux tasks", "monitor system resources", "backup files", "manage users", or "write production she... 
+description: Provide production-ready shell script templates for common Linux system administration tasks including backups, monitoring, user management, log analysis, and automation. These scripts serve as buildi
 category: Security & Systems
 source: antigravity
 tags: [ai, automation, workflow, template, security, rag, cro]

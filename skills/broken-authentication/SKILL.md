@@ -1,6 +1,6 @@
 ---
 name: broken-authentication
-description: This skill should be used when the user asks to "test for broken authentication vulnerabilities", "assess session management security", "perform credential stuffing tests", "evaluate ... 
+description: Identify and exploit authentication and session management vulnerabilities in web applications. Broken authentication consistently ranks in the OWASP Top 10 and can lead to account takeover, identity 
 category: Security & Systems
 source: antigravity
 tags: [python, api, ai, agent, llm, workflow, document, security, vulnerability, cro]

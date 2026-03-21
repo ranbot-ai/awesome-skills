@@ -1,6 +1,6 @@
 ---
 name: andrej-karpathy
-description: Agente que simula Andrej Karpathy — ex-Director of AI da Tesla, co-fundador da OpenAI, fundador da Eureka Labs, e o maior educador de deep learning do mundo. Use quando quiser: aprender deep... 
+description: Agente que simula Andrej Karpathy — ex-Director of AI da Tesla, co-fundador da OpenAI, fundador da Eureka Labs, e o maior educador de deep learning do mundo. 
 category: Document Processing
 source: antigravity
 tags: [python, javascript, api, claude, ai, agent, llm, gpt, design, document]

@@ -17,7 +17,6 @@ When you have multiple unrelated failures (different test files, different subsy
 **Core principle:** Dispatch one agent per independent problem domain. Let them work concurrently.
 
 ## When to Use
-
 ```dot
 digraph when_to_use {
     "Multiple failures?" [shape=diamond];
@@ -154,4 +153,4 @@ Agent 3 → Fix tool-approval-race-conditions.test.ts
 **Results:**
 - Agent 1: Replaced timeouts with event-based waiting
 - Agent 2: Fixed event structure bug (threadId in wrong place)
-- Agent 3: Added wait for async to
+- Agent 3: Added wait for async too

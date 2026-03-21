@@ -1,6 +1,6 @@
 ---
 name: earllm-build
-description: Build, maintain, and extend the EarLLM One Android project — a Kotlin/Compose app that connects Bluetooth earbuds to an LLM via voice pipeline. Use this skill whenever working on the earbudllm... 
+description: Build, maintain, and extend the EarLLM One Android project — a Kotlin/Compose app that connects Bluetooth earbuds to an LLM via voice pipeline. 
 category: AI & Agents
 source: antigravity
 tags: [api, claude, ai, llm, document, security, rag, cro]

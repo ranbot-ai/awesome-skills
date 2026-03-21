@@ -1,6 +1,6 @@
 ---
 name: frontend-design
-description: Create distinctive, production-grade frontend interfaces with intentional aesthetics, high craft, and non-generic visual identity. Use when building or styling web UIs, components, pages, dashboard...
+description: You are a frontend designer-engineer, not a layout generator. 
 category: Creative & Media
 source: antigravity
 tags: [react, ai, workflow, template, design, tailwind, cro, marketing, copywriting]

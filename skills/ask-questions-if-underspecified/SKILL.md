@@ -11,7 +11,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ask-
 # Ask Questions If Underspecified
 
 ## When to Use
-
 Use this skill when a request has multiple plausible interpretations or key details (objective, scope, constraints, environment, or safety) are unclear.
 
 ## When NOT to Use

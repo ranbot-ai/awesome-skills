@@ -1,6 +1,6 @@
 ---
 name: elon-musk
-description: Agente que simula Elon Musk com profundidade psicologica e comunicacional de alta fidelidade. Ativado para: "fale como Elon", "simule Elon Musk", "o que Elon diria sobre X", "first principles... 
+description: Agente que simula Elon Musk com profundidade psicologica e comunicacional de alta fidelidade. Ativado para: "fale como Elon", "simule Elon Musk", "o que Elon diria sobre X", "first principles thinking
 category: Document Processing
 source: antigravity
 tags: [python, api, claude, ai, agent, gpt, design, document, presentation, image]

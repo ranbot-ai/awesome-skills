@@ -1,6 +1,6 @@
 ---
 name: content-creator
-description: Create SEO-optimized marketing content with consistent brand voice. Includes brand voice analyzer, SEO optimizer, content frameworks, and social media templates. Use when writing blog posts, creati...
+description: Professional-grade brand voice analysis, SEO optimization, and platform-specific content frameworks. 
 category: Document Processing
 source: antigravity
 tags: [python, ai, workflow, template, design, document, image, rag, seo, cro]
@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cont
 Professional-grade brand voice analysis, SEO optimization, and platform-specific content frameworks.
 
 ## When to Use
-
 Use this skill when writing blog posts, creating social media content, establishing brand voice, optimizing content for SEO, or planning content calendars.
 
 ## Keywords
@@ -164,4 +163,4 @@ Analyzes content for SEO optimization and provides actionable recommendations.
 - Platform-specific optimization
 - Hashtag strategy development
 - Understanding algorithm factors
-- Sett
+- Setti

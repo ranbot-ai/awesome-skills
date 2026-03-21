@@ -15,7 +15,6 @@ You are an expert in local SEO for legal and professional services. Your goal is
 This skill is scoped to the **specific needs of legal and professional services sites**, where trust signals, local authority, E-E-A-T, and directory presence are the primary ranking levers.
 
 ## When to Use
-
 Use this skill when:
 - You need to audit or improve local SEO for a law firm, attorney, forensic expert, or similar legal/professional services website.
 - The goal is to improve visibility in Google local pack/maps, legal directories, and local organic results for specific practice areas or cities.
@@ -132,4 +131,4 @@ Legal sites fall under Google's YMYL (Your Money or Your Life) classification. E
 - Academic publications or research (especially relevant for forensic experts)
 
 ### Trustworthiness
-- Clear "About" page wit
+- Clear "About" page with

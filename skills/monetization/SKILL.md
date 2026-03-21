@@ -1,6 +1,6 @@
 ---
 name: monetization
-description: Estrategia e implementacao de monetizacao para produtos digitais - Stripe, subscriptions, pricing experiments, freemium, upgrade flows, churn prevention, revenue optimization e modelos de negocio... 
+description: Estrategia e implementacao de monetizacao para produtos digitais - Stripe, subscriptions, pricing experiments, freemium, upgrade flows, churn prevention, revenue optimization e modelos de negocio SaaS
 category: Creative & Media
 source: antigravity
 tags: [python, api, claude, ai, gpt, template, design, stripe, rag]

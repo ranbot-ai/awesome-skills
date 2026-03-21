@@ -2,7 +2,7 @@
   "id": "antigravity-azure-functions",
   "name": "azure-functions",
   "slug": "azure-functions",
-  "description": "Expert patterns for Azure Functions development including isolated worker model, Durable Functions orchestration, cold start optimization, and production patterns. Covers .NET, Python, and Node.js ...",
+  "description": "Modern .NET execution model with process isolation",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

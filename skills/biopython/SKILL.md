@@ -1,9 +1,9 @@
 ---
 name: biopython
-description: Comprehensive molecular biology toolkit. Use for sequence manipulation, file parsing (FASTA/GenBank/PDB), phylogenetics, and programmatic NCBI/PubMed access (Bio.Entrez). Best for batch processing, cu
+description: Biopython is a comprehensive set of freely available Python tools for biological computation. It provides functionality for sequence manipulation, file I/O, database access, structural bioinformatics,
 category: Document Processing
 source: antigravity
-tags: [python, api, ai, automation, workflow, document, cro]
+tags: [python, api, ai, workflow, document, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/biopython
 ---
 

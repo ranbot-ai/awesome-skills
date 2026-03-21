@@ -2,7 +2,7 @@
   "id": "antigravity-codebase-cleanup-deps-audit",
   "name": "codebase-cleanup-deps-audit",
   "slug": "codebase-cleanup-deps-audit",
-  "description": "You are a dependency security expert specializing in vulnerability scanning, license compliance, and supply chain security. Analyze project dependencies for known vulnerabilities, licensing issues,...",
+  "description": "You are a dependency security expert specializing in vulnerability scanning, license compliance, and supply chain security. Analyze project dependencies for known vulnerabilities, licensing issues, outdated packages, and provide actionable remediation strategies.",
   "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

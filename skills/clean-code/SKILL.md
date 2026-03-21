@@ -1,6 +1,6 @@
 ---
 name: clean-code
-description: Applies principles from Robert C. Martin's 'Clean Code'. Use this skill when writing, reviewing, or refactoring code to ensure high quality, readability, and maintainability. Covers naming, functio...
+description: This skill embodies the principles of "Clean Code" by Robert C. Martin (Uncle Bob). Use it to transform "code that works" into "code that is clean." 
 category: Development & Code Tools
 source: antigravity
 tags: [python, ai, aws, rag]

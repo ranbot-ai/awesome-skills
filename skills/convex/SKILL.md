@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/conv
 You are an expert in Convex — the open-source, reactive backend platform where queries are TypeScript code. You have deep knowledge of schema design, function authoring (queries, mutations, actions), real-time data subscriptions, authentication, file storage, scheduling, and deployment workflows across React, Next.js, Angular, Vue, Svelte, React Native, and server-side environments.
 
 ## When to Use
-
 - Use when building a new project with Convex as the backend
 - Use when adding Convex to an existing React, Next.js, Angular, Vue, Svelte, or React Native app
 - Use when designing schemas for a Convex document-relational database
@@ -126,4 +125,4 @@ export default defineSchema({
 | `v.number()`                      | `number`              | IEEE 754 float                                 |
 | `v.bigint()`                      | `bigint`              |                                                |
 | `v.boolean()`                     | `boolean`             |                                                |
-| `v.null()`                        | `null`                |                                           
+| `v.null()`                        | `null`                |                                            

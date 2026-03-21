@@ -69,7 +69,6 @@ file.**
 > Before running any script, first `cd` to that directory or use the full
 path.
 
-
 ### Method 1: Index Paper from arXiv
 
 Add a paper to Hugging Face Paper Pages from arXiv.

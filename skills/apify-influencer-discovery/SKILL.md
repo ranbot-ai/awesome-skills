@@ -113,7 +113,6 @@ After completion, report:
 - Key metrics available (followers, engagement rate, etc.)
 - Suggested next steps (filtering, outreach, deeper analysis)
 
-
 ## Error Handling
 
 `APIFY_TOKEN not found` - Ask user to create `.env` with `APIFY_TOKEN=your_token`

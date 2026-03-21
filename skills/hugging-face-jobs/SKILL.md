@@ -1,6 +1,6 @@
 ---
 name: hugging-face-jobs
-description: This skill should be used when users want to run any workload on Hugging Face Jobs infrastructure. Covers UV scripts, Docker-based jobs, hardware selection, cost estimation, authentication with tok...
+description: Run any workload on fully managed Hugging Face infrastructure. No local setup required—jobs run on cloud CPUs, GPUs, or TPUs and can persist results to the Hugging Face Hub. 
 category: Document Processing
 source: antigravity
 tags: [python, pdf, api, mcp, ai, llm, workflow, template, document, image]

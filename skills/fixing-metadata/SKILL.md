@@ -1,6 +1,6 @@
 ---
 name: fixing-metadata
-description: Audit and fix HTML metadata including page titles, meta descriptions, canonical URLs, Open Graph tags, Twitter cards, favicons, JSON-LD structured data, and robots directives. Use when adding SEO meta
+description: Audit and fix HTML metadata including page titles, meta descriptions, canonical URLs, Open Graph tags, Twitter cards, favicons, JSON-LD structured data, and robots directives. Use when adding or revie
 category: Business & Marketing
 source: antigravity
 tags: [react, markdown, api, ai, workflow, image, seo, cro, marketing]
@@ -15,8 +15,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fixi
 3. Ensure title, description, canonical, and og:url all agree with each other
 4. Verify social cards render correctly on a real URL, not localhost
 5. Keep diffs minimal and scoped to metadata only — do not refactor unrelated code
-## when to apply
-
+## When to Use
 Reference these guidelines when:
 - adding or changing page titles, descriptions, canonical, robots
 - implementing Open Graph or Twitter card metadata

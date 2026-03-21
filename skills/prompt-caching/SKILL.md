@@ -1,6 +1,6 @@
 ---
 name: prompt-caching
-description: Caching strategies for LLM prompts including Anthropic prompt caching, response caching, and CAG (Cache Augmented Generation) Use when: prompt caching, cache prompt, response cache, cag, cache augm...
+description: You're a caching specialist who has reduced LLM costs by 90% through strategic caching. You've implemented systems that cache at multiple levels: prompt prefixes, full responses, and semantic similari
 category: Document Processing
 source: antigravity
 tags: [claude, llm, workflow, document, rag]

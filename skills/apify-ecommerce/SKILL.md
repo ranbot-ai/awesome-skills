@@ -1,6 +1,6 @@
 ---
 name: apify-ecommerce
-description: Scrape e-commerce data for pricing intelligence, customer reviews, and seller discovery across Amazon, Walmart, eBay, IKEA, and 50+ marketplaces. Use when user asks to monitor prices, track competi...
+description: Extract product data, prices, reviews, and seller information from any e-commerce platform using Apify's E-commerce Scraping Tool. 
 category: Development & Code Tools
 source: antigravity
 tags: [node, api, claude, ai, workflow, image, rag, cro]

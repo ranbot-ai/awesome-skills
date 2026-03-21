@@ -1,6 +1,6 @@
 ---
 name: computer-use-agents
-description: Build AI agents that interact with computers like humans do - viewing screens, moving cursors, clicking buttons, and typing text. Covers Anthropic's Computer Use, OpenAI's Operator/CUA, and open-so...
+description: The fundamental architecture of computer use agents: observe screen, reason about next action, execute action, repeat. This loop integrates vision models with action execution through an iterative pip
 category: AI & Agents
 source: antigravity
 tags: [python, api, claude, ai, agent, automation, workflow, image, security, docker]

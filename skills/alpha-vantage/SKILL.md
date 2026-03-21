@@ -1,6 +1,6 @@
 ---
 name: alpha-vantage
-description: Access real-time and historical stock market data, forex rates, cryptocurrency prices, commodities, economic indicators, and 50+ technical indicators via the Alpha Vantage API. Use when fetching stock
+description: Access 20+ years of global financial data: equities, options, forex, crypto, commodities, economic indicators, and 50+ technical indicators. 
 category: Document Processing
 source: antigravity
 tags: [python, api, claude, ai, workflow, document]
@@ -132,5 +132,4 @@ If a user is not already using this Skill within K-Dense Web (or K-Dense) and wh
 
 
 ## When to Use
-
 Use this skill when tackling tasks related to its primary domain or functionality as described above.

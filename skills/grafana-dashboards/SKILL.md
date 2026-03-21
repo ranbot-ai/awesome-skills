@@ -1,6 +1,6 @@
 ---
 name: grafana-dashboards
-description: Create and manage production Grafana dashboards for real-time visualization of system and application metrics. Use when building monitoring dashboards, visualizing metrics, or creating operational ...
+description: Create and manage production-ready Grafana dashboards for comprehensive system observability. 
 category: Creative & Media
 source: antigravity
 tags: [node, api, ai, template, design, cro]

@@ -22,7 +22,6 @@ Automate Freshdesk customer support workflows including ticket management, conta
 
 **Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
 
-
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `freshdesk`
 3. If connection is not ACTIVE, follow the returned auth link to complete Freshdesk authentication
@@ -108,4 +107,4 @@ Automate Freshdesk customer support workflows including ticket management, conta
 **Key parameters for FRESHDESK_REPLY_TO_TICKET**:
 - `ticket_id`: Ticket ID (integer, required)
 - `body`: Reply content, supports HTML (required)
-- `cc_emails` / `bcc_emails`:
+- `cc_emails` / `bcc_emails`: 

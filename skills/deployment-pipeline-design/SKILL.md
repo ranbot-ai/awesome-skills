@@ -1,6 +1,6 @@
 ---
 name: deployment-pipeline-design
-description: Design multi-stage CI/CD pipelines with approval gates, security checks, and deployment orchestration. Use when architecting deployment workflows, setting up continuous delivery, or implementing Gi...
+description: Architecture patterns for multi-stage CI/CD pipelines with approval gates and deployment strategies. 
 category: Document Processing
 source: antigravity
 tags: [python, api, ai, automation, workflow, template, design, document, image, security]

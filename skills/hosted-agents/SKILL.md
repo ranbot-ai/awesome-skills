@@ -12,8 +12,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/host
 
 Hosted agents run in remote sandboxed environments rather than on local machines. When designed well, they provide unlimited concurrency, consistent execution environments, and multiplayer collaboration. The critical insight is that session speed should be limited only by model provider time-to-first-token, with all infrastructure setup completed before the user starts their session.
 
-## When to Activate
-
+## When to Use
 Activate this skill when:
 - Building background coding agents that run independently of user devices
 - Designing sandboxed execution environments for agent workloads
@@ -106,4 +105,5 @@ Move everything possible to the image build step:
 ### Self-Spawning Agents
 
 **Agent-Spawned Sessions**
-Create tools that allow agents to spawn new sessi
+Create tools that allow agents to spawn new sessions:
+-

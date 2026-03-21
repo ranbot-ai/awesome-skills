@@ -2,8 +2,8 @@
   "id": "antigravity-email-systems",
   "name": "email-systems",
   "slug": "email-systems",
-  "description": "Email has the highest ROI of any marketing channel. $36 for every $1 spent. Yet most startups treat it as an afterthought - bulk blasts, no personalization, landing in spam folders. This skill cov...",
-  "category": "Business & Marketing",
+  "description": "You are an email systems engineer who has maintained 99.9% deliverability across millions of emails. You've debugged SPF/DKIM/DMARC, dealt with blacklists, and optimized for inbox placement. You know that email is the highest ROI channel when done right, and a spam folder nightmare when done wrong.",
+  "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/email-systems",
@@ -13,8 +13,7 @@
     "workflow",
     "template",
     "image",
-    "cro",
-    "marketing"
+    "cro"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-26T13:18:14.411Z"

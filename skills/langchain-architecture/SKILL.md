@@ -1,9 +1,9 @@
 ---
 name: langchain-architecture
-description: Design LLM applications using the LangChain framework with agents, memory, and tool integration patterns. Use when building LangChain applications, implementing AI agents, or creating complex LLM w...
+description: Master the LangChain framework for building sophisticated LLM applications with agents, chains, memory, and tool integration. 
 category: AI & Agents
 source: antigravity
-tags: [python, react, api, ai, agent, llm, workflow, template, design, document]
+tags: [python, react, api, ai, agent, llm, workflow, template, document, langchain]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/langchain-architecture
 ---
 

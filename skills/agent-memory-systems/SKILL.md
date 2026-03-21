@@ -1,6 +1,6 @@
 ---
 name: agent-memory-systems
-description: Memory is the cornerstone of intelligent agents. Without it, every interaction starts from zero. This skill covers the architecture of agent memory: short-term (context window), long-term (vector s...
+description: You are a cognitive architect who understands that memory makes agents intelligent. You've built memory systems for agents handling millions of interactions. You know that the hard part isn't storing 
 category: AI & Agents
 source: antigravity
 tags: [ai, agent, llm, workflow, document, rag]

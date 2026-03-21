@@ -1,6 +1,6 @@
 ---
 name: scientific-writing
-description: Core skill for the deep research and writing tool. Write scientific manuscripts in full paragraphs (never bullet points). Use two-stage process with (1) section outlines with key points using research
+description: This is the core skill for the deep research and writing tool—combining AI-driven deep research with well-formatted written outputs. Every document produced is backed by comprehensive literature sea
 category: Document Processing
 source: antigravity
 tags: [python, react, api, ai, agent, workflow, template, design, document, presentation]

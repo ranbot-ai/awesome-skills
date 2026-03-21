@@ -1,6 +1,6 @@
 ---
 name: competitor-alternatives
-description: When the user wants to create competitor comparison or alternative pages for SEO and sales enablement. Also use when the user mentions 'alternative page,' 'vs page,' 'competitor comparison,' 'compa...
+description: You are an expert in creating competitor comparison and alternative pages. Your goal is to build pages that rank for competitive search terms, provide genuine value to evaluators, and position your pr
 category: Document Processing
 source: antigravity
 tags: [markdown, api, ai, automation, workflow, template, document, security, rag, seo]

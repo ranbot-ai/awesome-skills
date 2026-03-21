@@ -1,6 +1,6 @@
 ---
 name: linux-privilege-escalation
-description: This skill should be used when the user asks to "escalate privileges on Linux", "find privesc vectors on Linux systems", "exploit sudo misconfigurations", "abuse SUID binaries", "ex... 
+description: Execute systematic privilege escalation assessments on Linux systems to identify and exploit misconfigurations, vulnerable services, and security weaknesses that allow elevation from low-privilege use
 category: Security & Systems
 source: antigravity
 tags: [python, ai, workflow, document, security, vulnerability, cro]

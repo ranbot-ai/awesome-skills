@@ -1,6 +1,6 @@
 ---
 name: google-calendar-automation
-description: Interact with Google Calendar - list calendars, view events, create/update/delete events, and find free time. Use when user asks to: check calendar, schedule a meeting, create an event, find available
+description: Lightweight Google Calendar integration with standalone OAuth authentication. No MCP server required. 
 category: AI & Agents
 source: antigravity
 tags: [python, api, mcp, ai, automation]

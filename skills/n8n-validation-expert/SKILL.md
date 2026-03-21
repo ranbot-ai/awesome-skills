@@ -1,6 +1,6 @@
 ---
 name: n8n-validation-expert
-description: Interpret validation errors and guide fixing them. Use when encountering validation errors, validation warnings, false positives, operator structure issues, or need help understanding validation resul
+description: Expert guide for interpreting and fixing n8n validation errors. 
 category: Document Processing
 source: antigravity
 tags: [javascript, node, api, mcp, ai, automation, workflow, document, security, rag]

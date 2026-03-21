@@ -1,6 +1,6 @@
 ---
 name: receiving-code-review
-description: Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performat...
+description: Code review requires technical evaluation, not emotional performance. 
 category: Development & Code Tools
 source: antigravity
 tags: [react, api, claude, ai, workflow, security]

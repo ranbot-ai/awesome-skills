@@ -17,7 +17,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/icon
 Use this skill to maintain visual consistency across an application with highest-tier professional icons. The library is optimized for both designers and developers to create a distinctly premium feel.
 
 ## When to Use
-
 Trigger this skill when:
 
 - Designing or building highly crafted navigation menus, toolbars, and action buttons.

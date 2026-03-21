@@ -1,6 +1,6 @@
 ---
 name: google-slides-automation
-description: Read and write Google Slides presentations - get text, find presentations, create presentations, add slides, replace text, and manage slide content. Use when user asks to: read a presentation, create 
+description: Lightweight Google Slides integration with standalone OAuth authentication. No MCP server required. Full read/write access. 
 category: AI & Agents
 source: antigravity
 tags: [python, api, mcp, ai, automation, presentation, image, cro]

@@ -1,6 +1,6 @@
 ---
 name: hugging-face-cli
-description: Execute Hugging Face Hub operations using the `hf` CLI. Use when the user needs to download models/datasets/spaces, upload files to Hub repositories, create repos, manage local cache, or run comput...
+description: The hf CLI provides direct terminal access to the Hugging Face Hub for downloading, uploading, and managing repositories, cache, and compute resources. 
 category: AI & Agents
 source: antigravity
 tags: [python, pdf, ai, llm, gpt, workflow, image, aws]

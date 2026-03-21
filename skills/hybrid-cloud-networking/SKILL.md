@@ -1,6 +1,6 @@
 ---
 name: hybrid-cloud-networking
-description: Configure secure, high-performance connectivity between on-premises infrastructure and cloud platforms using VPN and dedicated connections. Use when building hybrid cloud architectures, connecting ...
+description: Configure secure, high-performance connectivity between on-premises and cloud environments using VPN, Direct Connect, and ExpressRoute. 
 category: AI & Agents
 source: antigravity
 tags: [ai, security, aws, gcp, azure, cro]

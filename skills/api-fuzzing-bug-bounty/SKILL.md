@@ -1,6 +1,6 @@
 ---
 name: api-fuzzing-bug-bounty
-description: This skill should be used when the user asks to "test API security", "fuzz APIs", "find IDOR vulnerabilities", "test REST API", "test GraphQL", "API penetration testing", "bug b... 
+description: Provide comprehensive techniques for testing REST, SOAP, and GraphQL APIs during bug bounty hunting and penetration testing engagements. Covers vulnerability discovery, authentication bypass, IDOR exp
 category: Security & Systems
 source: antigravity
 tags: [python, pdf, api, ai, workflow, document, security, vulnerability, cro]

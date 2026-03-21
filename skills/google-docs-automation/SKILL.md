@@ -1,6 +1,6 @@
 ---
 name: google-docs-automation
-description: Interact with Google Docs - create documents, search by title, read content, and edit text. Use when user asks to: create a Google Doc, find a document, read doc content, add text to a doc, or replace
+description: Lightweight Google Docs integration with standalone OAuth authentication. No MCP server required. 
 category: Document Processing
 source: antigravity
 tags: [python, api, mcp, ai, automation, document, rag]

@@ -1,6 +1,6 @@
 ---
 name: memory-systems
-description: Design short-term, long-term, and graph-based memory architectures 
+description: Design short-term, long-term, and graph-based memory architectures. Use when building agents that must persist across sessions, needing to maintain entity consistency across conversations, or implemen
 category: AI & Agents
 source: antigravity
 tags: [python, ai, agent, gpt, design, document, rag, cro]
@@ -17,8 +17,7 @@ Use this skill when working with design short-term, long-term, and graph-based m
 
 Memory provides the persistence layer that allows agents to maintain continuity across sessions and reason over accumulated knowledge. Simple agents rely entirely on context for memory, losing all state when sessions end. Sophisticated agents implement layered memory architectures that balance immediate context needs with long-term knowledge retention. The evolution from vector stores to knowledge graphs to temporal knowledge graphs represents increasing investment in structured memory for improved retrieval and reasoning.
 
-## When to Activate
-
+## When to Use
 Activate this skill when:
 - Building agents that must persist across sessions
 - Needing to maintain entity consistency across conversations
@@ -72,4 +71,4 @@ GraphRAG achieves approximately 20-35% accuracy gains over baseline RAG in compl
 ### Memory Layer Architecture
 
 **Layer 1: Working Memory**
-Working memory is the context window itself. It provides immediate access to information currently being processed but has limited capacit
+Working memory is the context window itself. It provides immediate access to information currently being processed but has limited capacity and 

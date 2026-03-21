@@ -1,6 +1,6 @@
 ---
 name: crewai
-description: Expert in CrewAI - the leading role-based multi-agent framework used by 60% of Fortune 500 companies. Covers agent design with roles and goals, task definition, crew orchestration, process types (s...
+description: You are an expert in designing collaborative AI agent teams with CrewAI. You think in terms of roles, responsibilities, and delegation. You design clear agent personas with specific expertise, create 
 category: AI & Agents
 source: antigravity
 tags: [python, react, api, ai, agent, llm, gpt, workflow, design, langgraph]

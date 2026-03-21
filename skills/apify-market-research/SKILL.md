@@ -114,7 +114,6 @@ After completion, report:
 - Key market insights
 - Suggested next steps (deeper analysis, validation)
 
-
 ## Error Handling
 
 `APIFY_TOKEN not found` - Ask user to create `.env` with `APIFY_TOKEN=your_token`

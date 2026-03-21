@@ -2,7 +2,7 @@
   "id": "antigravity-saga-orchestration",
   "name": "saga-orchestration",
   "slug": "saga-orchestration",
-  "description": "Implement saga patterns for distributed transactions and cross-aggregate workflows. Use when coordinating multi-step business processes, handling compensating transactions, or managing long-running...",
+  "description": "Patterns for managing distributed transactions and long-running business processes.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

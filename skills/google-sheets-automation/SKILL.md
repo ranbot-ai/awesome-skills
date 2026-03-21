@@ -1,6 +1,6 @@
 ---
 name: google-sheets-automation
-description: Read and write Google Sheets spreadsheets - get content, update cells, append rows, fetch specific ranges, search for spreadsheets, and view metadata. Use when user asks to: read a spreadsheet, update
+description: Lightweight Google Sheets integration with standalone OAuth authentication. No MCP server required. Full read/write access. 
 category: Document Processing
 source: antigravity
 tags: [python, api, mcp, ai, automation, spreadsheet]
@@ -140,5 +140,4 @@ Tokens automatically refresh when expired using Google's cloud function.
 
 
 ## When to Use
-
 Use this skill when tackling tasks related to its primary domain or functionality as described above.

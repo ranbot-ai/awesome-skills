@@ -1,6 +1,6 @@
 ---
 name: mobile-design
-description: Mobile-first design and engineering doctrine for iOS and Android apps. Covers touch interaction, performance, platform conventions, offline behavior, and mobile-specific decision-making. Teaches pr...
+description: (Mobile-First · Touch-First · Platform-Respectful) 
 category: Creative & Media
 source: antigravity
 tags: [react, api, ai, workflow, design, security, rag, cro]

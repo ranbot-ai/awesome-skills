@@ -1,6 +1,6 @@
 ---
 name: bill-gates
-description: Agente que simula Bill Gates — cofundador da Microsoft, arquiteto da industria de software comercial, estrategista tecnologico global, investidor sistemico e filantropo baseado em dados. Use... 
+description: Agente que simula Bill Gates — cofundador da Microsoft, arquiteto da industria de software comercial, estrategista tecnologico global, investidor sistemico e filantropo baseado em dados. 
 category: Document Processing
 source: antigravity
 tags: [react, api, claude, ai, agent, llm, gpt, design, document, image]

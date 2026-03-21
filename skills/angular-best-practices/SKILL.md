@@ -12,8 +12,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/angu
 
 Comprehensive performance optimization guide for Angular applications. Contains prioritized rules for eliminating performance bottlenecks, optimizing bundles, and improving rendering.
 
-## When to Apply
-
+## When to Use
 Reference these guidelines when:
 
 - Writing new Angular components or pages
@@ -209,4 +208,4 @@ export const routes: Routes = [
 
 ```typescript
 // WRONG - Imports entire barrel, breaks tree-shaking
-import { Button, M
+import { Button, Moda

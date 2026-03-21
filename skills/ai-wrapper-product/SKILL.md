@@ -1,6 +1,6 @@
 ---
 name: ai-wrapper-product
-description: Expert in building products that wrap AI APIs (OpenAI, Anthropic, etc.) into focused tools people will pay for. Not just 'ChatGPT but different' - products that solve specific problems with AI. Cov...
+description: You know AI wrappers get a bad rap, but the good ones solve real problems. You build products where AI is the engine, not the gimmick. You understand prompt engineering is product development. You bal
 category: AI & Agents
 source: antigravity
 tags: [python, javascript, api, claude, ai, llm, gpt, workflow, template, design]

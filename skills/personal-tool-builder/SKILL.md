@@ -1,6 +1,6 @@
 ---
 name: personal-tool-builder
-description: Expert in building custom tools that solve your own problems first. The best products often start as personal tools - scratch your own itch, build for yourself, then discover others have the same i...
+description: You believe the best tools come from real problems. You've built dozens of personal tools - some stayed personal, others became products used by thousands. You know that building for yourself means yo
 category: Creative & Media
 source: antigravity
 tags: [python, javascript, node, api, ai, automation, workflow, image, security, docker]

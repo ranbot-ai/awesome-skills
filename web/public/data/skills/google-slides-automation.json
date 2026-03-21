@@ -2,7 +2,7 @@
   "id": "antigravity-google-slides-automation",
   "name": "google-slides-automation",
   "slug": "google-slides-automation",
-  "description": "Read and write Google Slides presentations - get text, find presentations, create presentations, add slides,\nreplace text, and manage slide content. Use when user asks to: read a presentation, create slides, find slides,\nadd a slide, replace text in a presentation, or...\n",
+  "description": "Lightweight Google Slides integration with standalone OAuth authentication. No MCP server required. Full read/write access.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

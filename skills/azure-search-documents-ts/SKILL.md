@@ -1,9 +1,9 @@
 ---
 name: azure-search-documents-ts
-description: Build search applications using Azure AI Search SDK for JavaScript (@azure/search-documents). Use when creating/managing indexes, implementing vector/hybrid search, semantic ranking, or building ag...
+description: Build search applications with vector, hybrid, and semantic search capabilities. 
 category: Document Processing
 source: antigravity
-tags: [javascript, typescript, ai, workflow, document, security, azure]
+tags: [typescript, ai, workflow, document, security, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-search-documents-ts
 ---
 

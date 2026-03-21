@@ -1,6 +1,6 @@
 ---
 name: ml-pipeline-workflow
-description: Build end-to-end MLOps pipelines from data preparation through model training, validation, and production deployment. Use when creating ML pipelines, implementing MLOps practices, or automating mod...
+description: Complete end-to-end MLOps pipeline orchestration from data preparation through model deployment. 
 category: Document Processing
 source: antigravity
 tags: [python, ai, automation, workflow, template, design, document, kubernetes, aws, gcp]

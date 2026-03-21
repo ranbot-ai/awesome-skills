@@ -1,9 +1,9 @@
 ---
 name: azure-monitor-opentelemetry-ts
-description: Instrument applications with Azure Monitor and OpenTelemetry for JavaScript (@azure/monitor-opentelemetry). Use when adding distributed tracing, metrics, and logs to Node.js applications with Appli...
+description: Auto-instrument Node.js applications with distributed tracing, metrics, and logs. 
 category: AI & Agents
 source: antigravity
-tags: [javascript, typescript, node, api, ai, workflow, azure, rag]
+tags: [typescript, node, api, ai, workflow, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-monitor-opentelemetry-ts
 ---
 

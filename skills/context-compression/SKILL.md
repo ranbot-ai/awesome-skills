@@ -1,6 +1,6 @@
 ---
 name: context-compression
-description: This skill should be used when the user asks to "compress context", "summarize conversation history", "implement compaction", "reduce token usage", or mentions context compression, structured summariz
+description: When agent sessions generate millions of tokens of conversation history, compression becomes mandatory. The naive approach is aggressive compression to minimize tokens per request. 
 category: Document Processing
 source: antigravity
 tags: [markdown, api, ai, agent, llm, workflow, template, design, document, presentation]
@@ -12,8 +12,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cont
 
 When agent sessions generate millions of tokens of conversation history, compression becomes mandatory. The naive approach is aggressive compression to minimize tokens per request. The correct optimization target is tokens per task: total tokens consumed to complete a task, including re-fetching costs when compression loses critical information.
 
-## When to Activate
-
+## When to Use
 Activate this skill when:
 - Agent sessions exceed context window limits
 - Codebases exceed context windows (5M+ token systems)
@@ -105,4 +104,4 @@ Probe-based evaluation directly measures functional quality by asking questions 
 |------------|---------------|------------------|
 | Recall | Factual retention | "What was the original error message?" |
 | Artifact | File tracking | "Which files have we modified?" |
-| Continuation | Task plann
+| Continuation | Task planning | 

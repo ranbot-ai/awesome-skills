@@ -9,7 +9,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ener
 
 
 ## When to Use
-
 Use this skill when managing energy procurement tasks, such as optimizing electricity or gas tariffs, evaluating Power Purchase Agreements (PPAs), or developing long-term energy cost management strategies for commercial or industrial facilities.
 
 # Energy Procurement
@@ -36,4 +35,4 @@ The core decision in deregulated markets is how much price risk to retain versus
 
 - **Fixed-price (full requirements):** Supplier provides all electricity at a locked $/kWh for the contract term (12–36 months). Provides budget certainty. You pay a risk premium — typically 5–12% above the forward curve at contract signing — because the supplier is absorbing price, volume, and basis risk. Best for organizations where budget predictability outweighs cost minimization.
 - **Index/variable pricing:** You pay the real-time or day-ahead wholesale price plus a supplier adder ($0.002–$0.006/kWh). Lowest long-run average cost, but full exposure to price spikes. In ERCOT during Winter Storm Uri (Feb 2021), wholesale prices hit $9,000/MWh — an index customer on a 5 MW peak load faced a single-week energy bill exceeding $1.5M. Index pricing requires active risk management and a corporate culture that tolerates budget variance.
-- **Block-and-index (hybrid):** You purchase fixed-price blocks to cover your baseload (6
+- **Block-and-index (hybrid):** You purchase fixed-price blocks to cover your baseload (60

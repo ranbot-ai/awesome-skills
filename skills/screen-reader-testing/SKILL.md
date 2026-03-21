@@ -1,9 +1,9 @@
 ---
 name: screen-reader-testing
-description: Test web applications with screen readers including VoiceOver, NVDA, and JAWS. Use when validating screen reader compatibility, debugging accessibility issues, or ensuring assistive technology supp...
+description: Practical guide to testing web applications with screen readers for comprehensive accessibility validation. 
 category: Development & Code Tools
 source: antigravity
-tags: [ai, aws]
+tags: [ai]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/screen-reader-testing
 ---
 

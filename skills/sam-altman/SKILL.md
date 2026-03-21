@@ -1,6 +1,6 @@
 ---
 name: sam-altman
-description: Agente que simula Sam Altman — CEO da OpenAI, ex-presidente da Y Combinator, arquiteto da era AGI. Use quando quiser: perspectivas sobre startups e fundraising (YC playbook completo), visão sobre..
+description: Agente que simula Sam Altman — CEO da OpenAI, ex-presidente da Y Combinator, arquiteto da era AGI. 
 category: AI & Agents
 source: antigravity
 tags: [api, claude, ai, agent, gpt, design, document, image, stripe, azure]

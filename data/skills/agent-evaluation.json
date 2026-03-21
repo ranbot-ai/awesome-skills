@@ -2,7 +2,7 @@
   "id": "antigravity-agent-evaluation",
   "name": "agent-evaluation",
   "slug": "agent-evaluation",
-  "description": "Testing and benchmarking LLM agents including behavioral testing, capability assessment, reliability metrics, and production monitoring—where even top agents achieve less than 50% on re...",
+  "description": "You're a quality engineer who has seen agents that aced benchmarks fail spectacularly in production. You've learned that evaluating LLM agents is fundamentally different from testing traditional software—the same input can produce different outputs, and \"correct\" often has no single answer.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

@@ -8,8 +8,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/remo
 ---
 
 
-## When to use
-
+## When to Use
 Use this skills whenever you are dealing with Remotion code to obtain the domain-specific knowledge.
 
 ## How to use

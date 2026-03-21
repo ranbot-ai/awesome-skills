@@ -1,6 +1,6 @@
 ---
 name: prompt-library
-description: Curated collection of high-quality prompts for various use cases. Includes role-based prompts, task-specific templates, and prompt refinement techniques. Use when user needs prompt templates, role-...
+description: A comprehensive collection of battle-tested prompts inspired by [awesome-chatgpt-prompts](https://github.com/f/awesome-chatgpt-prompts) and community best practices. 
 category: Document Processing
 source: antigravity
 tags: [markdown, api, ai, gpt, template, design, document, security, rag, cro]

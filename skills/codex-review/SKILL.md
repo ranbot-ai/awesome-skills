@@ -1,6 +1,6 @@
 ---
 name: codex-review
-description: Professional code review with auto CHANGELOG generation, integrated with Codex AI 
+description: Professional code review with auto CHANGELOG generation, integrated with Codex AI. Use when you want professional code review before commits, you need automatic CHANGELOG generation, or reviewing larg
 category: Development & Code Tools
 source: antigravity
 tags: [ai]

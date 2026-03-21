@@ -75,7 +75,6 @@ file.**
 > Before running any script, first `cd` to that directory or use the full
 path.
 
-
 **Use `--help` for the latest workflow guidance.** Works with plain Python or `uv run`:
 ```bash
 uv run scripts/evaluation_manager.py --help
@@ -122,4 +121,4 @@ Key workflow (matches CLI help):
 ## 5. Run Custom Model Evaluations with vLLM (NEW)
 
 ⚠️ **Important:** This approach is only possible on devices with `uv` installed and sufficient GPU memory.
-**Benefits:** No need to use `hf_jobs()` MCP tool, can run s
+**Benefits:** No need to use `hf_jobs()` MCP tool, can run sc

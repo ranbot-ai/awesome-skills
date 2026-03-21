@@ -1,6 +1,6 @@
 ---
 name: planning-with-files
-description: Implements Manus-style file-based planning for complex tasks. Creates task_plan.md, findings.md, and progress.md. Use when starting complex multi-step tasks, research projects, or any task requirin...
+description: Work like Manus: Use persistent markdown files as your "working memory on disk." 
 category: AI & Agents
 source: antigravity
 tags: [pdf, markdown, api, claude, ai, automation, template, image, rag]

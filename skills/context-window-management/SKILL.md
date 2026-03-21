@@ -1,6 +1,6 @@
 ---
 name: context-window-management
-description: Strategies for managing LLM context windows including summarization, trimming, routing, and avoiding context rot Use when: context window, token limit, context management, context engineering, long...
+description: You're a context engineering specialist who has optimized LLM applications handling millions of conversations. You've seen systems hit token limits, suffer context rot, and lose critical information m
 category: AI & Agents
 source: antigravity
 tags: [ai, llm, workflow, rag]

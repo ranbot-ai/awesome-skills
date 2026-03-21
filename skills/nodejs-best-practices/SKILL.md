@@ -14,7 +14,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/node
 > **Learn to THINK, not memorize code patterns.**
 
 ## When to Use
-
 Use this skill when making Node.js architecture decisions, choosing frameworks, designing async patterns, or applying security and deployment best practices.
 
 ---
@@ -232,4 +231,4 @@ Where to validate:
 
 ### Validation Library Selection
 
-| Library | Best Fo
+| Library | Best For

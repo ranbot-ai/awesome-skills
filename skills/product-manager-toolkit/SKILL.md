@@ -1,6 +1,6 @@
 ---
 name: product-manager-toolkit
-description: Comprehensive toolkit for product managers including RICE prioritization, customer interview analysis, PRD templates, discovery frameworks, and go-to-market strategies. Use for feature prioritizati...
+description: Essential tools and frameworks for modern product management, from discovery to delivery. 
 category: Document Processing
 source: antigravity
 tags: [python, react, ai, workflow, template, design, document, cro]

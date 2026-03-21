@@ -1,6 +1,6 @@
 ---
 name: blockrun
-description: Use when user needs capabilities Claude lacks (image generation, real-time X/Twitter data) or explicitly requests external models (\"blockrun\", \"use grok\", \"use gpt\", \"da... 
+description: BlockRun works with Claude Code and Google Antigravity. 
 category: AI & Agents
 source: antigravity
 tags: [python, api, claude, ai, agent, llm, gpt, document, image, cro]
@@ -51,7 +51,6 @@ print(f"💰 Total spent: ${spending['total_usd']:.4f} across {spending['calls']
 ```
 
 ## When to Use
-
 | Trigger | Your Action |
 |---------|-------------|
 | User explicitly requests ("blockrun second opinion with GPT on...", "use grok to check...", "generate image with dall-e") | Execute via BlockRun |
@@ -172,4 +171,4 @@ print(result.data[0].url)
 
 Live Search is xAI's real-time data API. Cost: **$0.025 per source** (default 10 sources = ~$0.26).
 
-To reduce costs, set `max_search_results` to a lower va
+To reduce costs, set `max_search_results` to a lower val

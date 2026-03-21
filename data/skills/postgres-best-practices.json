@@ -7,7 +7,7 @@
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/postgres-best-practices",
-  "content": "\n# Supabase Postgres Best Practices\n\nComprehensive performance optimization guide for Postgres, maintained by Supabase. Contains rules across 8 categories, prioritized by impact to guide automated query optimization and schema design.\n\n## When to Apply\n\nReference these guidelines when:\n- Writing SQL queries or designing schemas\n- Implementing indexes or query optimization\n- Reviewing database performance issues\n- Configuring connection pooling or scaling\n- Optimizing for Postgres-specific features\n- Working with Row-Level Security (RLS)\n\n## Rule Categories by Priority\n\n| Priority | Category | Impact | Prefix |\n|----------|----------|--------|--------|\n| 1 | Query Performance | CRITICAL | `query-` |\n| 2 | Connection Management | CRITICAL | `conn-` |\n| 3 | Security & RLS | CRITICAL | `security-` |\n| 4 | Schema Design | HIGH | `schema-` |\n| 5 | Concurrency & Locking | MEDIUM-HIGH | `lock-` |\n| 6 | Data Access Patterns | MEDIUM | `data-` |\n| 7 | Monitoring & Diagnostics | LOW-MEDIUM | `monitor-` |\n| 8 | Advanced Features | LOW | `advanced-` |\n\n## How to Use\n\nRead individual rule files for detailed explanations and SQL examples:\n\n```\nrules/query-missing-indexes.md\nrules/schema-partial-indexes.md\nrules/_sections.md\n```\n\nEach rule file contains:\n- Brief explanation of why it matters\n- Incorrect SQL example with explanation\n- Correct SQL example with explanation\n- Optional EXPLAIN output or metrics\n- Additional context and references\n- Supabase-specific notes (when applicable)\n\n## Full Compiled Document\n\nFor the complete guide with all rules expanded: `AGENTS.md`\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n",
+  "content": "\n# Supabase Postgres Best Practices\n\nComprehensive performance optimization guide for Postgres, maintained by Supabase. Contains rules across 8 categories, prioritized by impact to guide automated query optimization and schema design.\n\n## When to Use\nReference these guidelines when:\n- Writing SQL queries or designing schemas\n- Implementing indexes or query optimization\n- Reviewing database performance issues\n- Configuring connection pooling or scaling\n- Optimizing for Postgres-specific features\n- Working with Row-Level Security (RLS)\n\n## Rule Categories by Priority\n\n| Priority | Category | Impact | Prefix |\n|----------|----------|--------|--------|\n| 1 | Query Performance | CRITICAL | `query-` |\n| 2 | Connection Management | CRITICAL | `conn-` |\n| 3 | Security & RLS | CRITICAL | `security-` |\n| 4 | Schema Design | HIGH | `schema-` |\n| 5 | Concurrency & Locking | MEDIUM-HIGH | `lock-` |\n| 6 | Data Access Patterns | MEDIUM | `data-` |\n| 7 | Monitoring & Diagnostics | LOW-MEDIUM | `monitor-` |\n| 8 | Advanced Features | LOW | `advanced-` |\n\n## How to Use\n\nRead individual rule files for detailed explanations and SQL examples:\n\n```\nrules/query-missing-indexes.md\nrules/schema-partial-indexes.md\nrules/_sections.md\n```\n\nEach rule file contains:\n- Brief explanation of why it matters\n- Incorrect SQL example with explanation\n- Correct SQL example with explanation\n- Optional EXPLAIN output or metrics\n- Additional context and references\n- Supabase-specific notes (when applicable)\n\n## Full Compiled Document\n\nFor the complete guide with all rules expanded: `AGENTS.md`\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n",
   "tags": [
     "ai",
     "agent",
@@ -18,6 +18,12 @@
     "supabase",
     "cro"
   ],
-  "useCases": [],
+  "useCases": [
+    "Writing SQL queries or designing schemas",
+    "Implementing indexes or query optimization",
+    "Reviewing database performance issues",
+    "Configuring connection pooling or scaling",
+    "Optimizing for Postgres-specific features"
+  ],
   "scrapedAt": "2026-01-26T13:20:26.365Z"
 }

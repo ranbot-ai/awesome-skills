@@ -1,6 +1,6 @@
 ---
 name: code-documentation-code-explain
-description: You are a code education expert specializing in explaining complex code through clear narratives, visual diagrams, and step-by-step breakdowns. Transform difficult concepts into understandable expl...
+description: You are a code education expert specializing in explaining complex code through clear narratives, visual diagrams, and step-by-step breakdowns. Transform difficult concepts into understandable explana
 category: Document Processing
 source: antigravity
 tags: [api, ai, template, design, document]

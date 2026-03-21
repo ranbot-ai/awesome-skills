@@ -14,8 +14,7 @@ This skill covers production-grade techniques for evaluating LLM outputs using L
 
 **Key insight**: LLM-as-a-Judge is not a single technique but a family of approaches, each suited to different evaluation contexts. Choosing the right approach and mitigating known biases is the core competency this skill develops.
 
-## When to Activate
-
+## When to Use
 Activate this skill when:
 
 - Building automated evaluation pipelines for LLM outputs
@@ -120,4 +119,4 @@ Respond with structured JSON containing scores, justifications, and summary.
 
 ### Pairwise Comparison Implementation
 
-Pairwise comparison is inherently more reliable for prefe
+Pairwise comparison is inherently more reliable for preference-

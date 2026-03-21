@@ -17,7 +17,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/infi
 A multi-agent research skill designed for parallel research execution. It orchestrates 10 agents to conduct deep research, battle-tested with real case studies.
 
 ## When to Use
-
 Use this skill when you need to perform extensive, parallelized research on a topic, leveraging multiple agents to gather and synthesize information more efficiently than a single linear process.
 
 ## How to Use

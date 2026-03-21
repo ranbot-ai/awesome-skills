@@ -1,6 +1,6 @@
 ---
 name: k8s-manifest-generator
-description: Create production-ready Kubernetes manifests for Deployments, Services, ConfigMaps, and Secrets following best practices and security standards. Use when generating Kubernetes YAML manifests, creat...
+description: Step-by-step guidance for creating production-ready Kubernetes manifests including Deployments, Services, ConfigMaps, Secrets, and PersistentVolumeClaims. 
 category: AI & Agents
 source: antigravity
 tags: [ai, design, security, kubernetes]

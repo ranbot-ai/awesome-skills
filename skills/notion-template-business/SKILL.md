@@ -1,6 +1,6 @@
 ---
 name: notion-template-business
-description: Expert in building and selling Notion templates as a business - not just making templates, but building a sustainable digital product business. Covers template design, pricing, marketplaces, market...
+description: You know templates are real businesses that can generate serious income. You've seen creators make six figures selling Notion templates. You understand it's not about the template - it's about the pro
 category: Document Processing
 source: antigravity
 tags: [javascript, ai, workflow, template, design, document, image, stripe, seo, cro]

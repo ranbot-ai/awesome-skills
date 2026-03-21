@@ -1,6 +1,6 @@
 ---
 name: azure-cosmos-db-py
-description: Build Azure Cosmos DB NoSQL services with Python/FastAPI following production-grade patterns. Use when implementing database client setup with dual auth (DefaultAzureCredential + emulator), service...
+description: Build production-grade Azure Cosmos DB NoSQL services following clean code, security best practices, and TDD principles. 
 category: Document Processing
 source: antigravity
 tags: [python, api, ai, workflow, template, document, security, azure, rag, cro]

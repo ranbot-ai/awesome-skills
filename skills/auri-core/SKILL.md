@@ -1,6 +1,6 @@
 ---
 name: auri-core
-description: Auri: assistente de voz inteligente (Alexa + Claude claude-opus-4-20250805). Visao do produto, persona Vitoria Neural, stack AWS, modelo Free/Pro/Business/Enterprise, roadmap 4 fases, GTM, north... 
+description: Auri: assistente de voz inteligente (Alexa + Claude claude-opus-4-20250805). Visao do produto, persona Vitoria Neural, stack AWS, modelo Free/Pro/Business/Enterprise, roadmap 4 fases, GTM, north star 
 category: Development & Code Tools
 source: antigravity
 tags: [python, api, claude, ai, llm, gpt, template, design, aws, seo]
@@ -147,3 +147,7 @@ BillingMode: PAY_PER_REQUEST | TimeToLive: habilitado (auto-expira)
 
 invocationName: auri
 ConversationIntent: slot query (AMAZON.SearchQuery)
+Samples: {query}, me fala sobre {query}, o que e {query}, explica {query}
+StopIntent: tchau, ate mais, encerrar
+
+## 3.6 Configuracao Lambd

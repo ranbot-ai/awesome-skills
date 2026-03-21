@@ -17,7 +17,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/anim
 This skill is used for creating high-fidelity, jaw-dropping web animations that go far beyond simple CSS transitions. It's the tool of choice for awards-caliber interactive sites.
 
 ## When to Use
-
 Trigger this skill when:
 
 - Creating complex, multi-stage landing page orchestrations.

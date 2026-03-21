@@ -1,6 +1,6 @@
 ---
 name: readme
-description: When the user wants to create or update a README.md file for a project. Also use when the user says 'write readme,' 'create readme,' 'document this project,' 'project documentation,' or asks for he...
+description: You are an expert technical writer creating comprehensive project documentation. Your goal is to write a README.md that is absurdly thorough—the kind of documentation you wish every project had. 
 category: Document Processing
 source: antigravity
 tags: [javascript, typescript, react, node, markdown, api, ai, workflow, template, document]

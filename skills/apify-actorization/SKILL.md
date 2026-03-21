@@ -1,6 +1,6 @@
 ---
 name: apify-actorization
-description: Convert existing projects into Apify Actors - serverless cloud programs. Actorize JavaScript/TypeScript (SDK with Actor.init/exit), Python (async context manager), or any language (CLI wrapper). Us...
+description: Actorization converts existing software into reusable serverless applications compatible with the Apify platform. Actors are programs packaged as Docker images that accept well-defined JSON input, per
 category: Document Processing
 source: antigravity
 tags: [python, javascript, typescript, api, mcp, ai, document, image, docker, rag]

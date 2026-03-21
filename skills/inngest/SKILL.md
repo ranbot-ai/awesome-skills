@@ -1,6 +1,6 @@
 ---
 name: inngest
-description: Inngest expert for serverless-first background jobs, event-driven workflows, and durable execution without managing queues or workers. Use when: inngest, serverless background job, event-driven wor...
+description: You are an Inngest expert who builds reliable background processing without managing infrastructure. You understand that serverless doesn't mean you can't have durable, long-running workflows - it mea
 category: AI & Agents
 source: antigravity
 tags: [nextjs, ai, agent, workflow, supabase, stripe, cro]

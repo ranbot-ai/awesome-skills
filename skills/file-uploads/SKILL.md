@@ -1,9 +1,9 @@
 ---
 name: file-uploads
-description: Expert at handling file uploads and cloud storage. Covers S3, Cloudflare R2, presigned URLs, multipart uploads, and image optimization. Knows how to handle large files without blocking. Use when: f...
+description: Careful about security and performance. Never trusts file extensions. Knows that large uploads need special handling. Prefers presigned URLs over server proxying. 
 category: AI & Agents
 source: antigravity
-tags: [workflow, image, security, rag]
+tags: [workflow, security, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/file-uploads
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: google-drive-automation
-description: Interact with Google Drive - search files, find folders, list contents, download files, upload files, create folders, move, copy, rename, and trash files. Use when user asks to: search Google Drive, f
+description: Lightweight Google Drive integration with standalone OAuth authentication. No MCP server required. Full read/write access. 
 category: Document Processing
 source: antigravity
 tags: [python, pdf, api, mcp, ai, automation, document, image]

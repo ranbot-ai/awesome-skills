@@ -2,7 +2,7 @@
   "id": "antigravity-ml-pipeline-workflow",
   "name": "ml-pipeline-workflow",
   "slug": "ml-pipeline-workflow",
-  "description": "Build end-to-end MLOps pipelines from data preparation through model training, validation, and production deployment. Use when creating ML pipelines, implementing MLOps practices, or automating mod...",
+  "description": "Complete end-to-end MLOps pipeline orchestration from data preparation through model deployment.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

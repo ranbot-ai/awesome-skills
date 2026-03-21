@@ -1,7 +1,7 @@
 ---
 name: react-flow-node-ts
-description: Create React Flow node components with TypeScript types, handles, and Zustand integration. Use when building custom nodes for React Flow canvas, creating visual workflow editors, or implementing no...
-category: Creative & Media
+description: Create React Flow node components following established patterns with proper TypeScript types and store integration. 
+category: AI & Agents
 source: antigravity
 tags: [typescript, react, node, ai, workflow, template]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/react-flow-node-ts

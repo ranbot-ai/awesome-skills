@@ -1,6 +1,6 @@
 ---
 name: file-path-traversal
-description: This skill should be used when the user asks to "test for directory traversal", "exploit path traversal vulnerabilities", "read arbitrary files through web applications", "find LFI vu... 
+description: Identify and exploit file path traversal (directory traversal) vulnerabilities that allow attackers to read arbitrary files on the server, potentially including sensitive configuration files, credenti
 category: Security & Systems
 source: antigravity
 tags: [python, pdf, api, ai, agent, automation, workflow, template, document, image]

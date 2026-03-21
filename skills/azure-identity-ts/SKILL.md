@@ -1,9 +1,9 @@
 ---
 name: azure-identity-ts
-description: Authenticate to Azure services using Azure Identity SDK for JavaScript (@azure/identity). Use when configuring authentication with DefaultAzureCredential, managed identity, service principals, or i...
+description: Authenticate to Azure services with various credential types. 
 category: Creative & Media
 source: antigravity
-tags: [javascript, typescript, api, ai, workflow, kubernetes, azure, rag, cro]
+tags: [typescript, api, ai, workflow, kubernetes, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-identity-ts
 ---
 

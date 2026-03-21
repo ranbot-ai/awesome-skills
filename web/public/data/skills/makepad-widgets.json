@@ -2,7 +2,7 @@
   "id": "antigravity-makepad-widgets",
   "name": "makepad-widgets",
   "slug": "makepad-widgets",
-  "description": "CRITICAL: Use for Makepad widgets and UI components. Triggers on:\nmakepad widget, makepad View, makepad Button, makepad Label, makepad Image,\nmakepad TextInput, RoundedView, SolidView, ScrollView, \"makepad component\",\nmakepad Markdown, makepad Html, TextFlow, rich...\n",
+  "description": "Version: makepad-widgets (dev branch) | Last Updated: 2026-01-19 > > Check for updates: https://crates.io/crates/makepad-widgets",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

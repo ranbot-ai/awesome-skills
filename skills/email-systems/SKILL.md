@@ -1,9 +1,9 @@
 ---
 name: email-systems
-description: Email has the highest ROI of any marketing channel. $36 for every $1 spent. Yet most startups treat it as an afterthought - bulk blasts, no personalization, landing in spam folders. This skill cov... 
-category: Business & Marketing
+description: You are an email systems engineer who has maintained 99.9% deliverability across millions of emails. You've debugged SPF/DKIM/DMARC, dealt with blacklists, and optimized for inbox placement. You know 
+category: AI & Agents
 source: antigravity
-tags: [ai, workflow, template, image, cro, marketing]
+tags: [ai, workflow, template, image, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/email-systems
 ---
 

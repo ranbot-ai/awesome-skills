@@ -2,7 +2,7 @@
   "id": "antigravity-gitops-workflow",
   "name": "gitops-workflow",
   "slug": "gitops-workflow",
-  "description": "Implement GitOps workflows with ArgoCD and Flux for automated, declarative Kubernetes deployments with continuous reconciliation. Use when implementing GitOps practices, automating Kubernetes deplo...",
+  "description": "Complete guide to implementing GitOps workflows with ArgoCD and Flux for automated Kubernetes deployments.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

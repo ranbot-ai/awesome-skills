@@ -1,9 +1,9 @@
 ---
 name: apify-brand-reputation-monitoring
-description: Track reviews, ratings, sentiment, and brand mentions across Google Maps, Booking.com, TripAdvisor, Facebook, Instagram, YouTube, and TikTok. Use when user asks to monitor brand reputation, analyze...
+description: Scrape reviews, ratings, and brand mentions from multiple platforms using Apify Actors. 
 category: Development & Code Tools
 source: antigravity
-tags: [react, node, api, mcp, claude, ai, workflow, cro]
+tags: [react, node, api, mcp, claude, ai, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apify-brand-reputation-monitoring
 ---
 
@@ -115,7 +115,6 @@ After completion, report:
 - File location and name
 - Key fields available
 - Suggested next steps (sentiment analysis, filtering)
-
 
 ## Error Handling
 

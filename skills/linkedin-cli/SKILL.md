@@ -9,7 +9,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/link
 
 
 ## When to Use
-
 Use this skill when you need to automate LinkedIn tasks such as profile fetching, connection management, or post creation via CLI, especially when integrated into automated workflows.
 
 # LinkedIn Skill
@@ -39,7 +38,6 @@ linkedin setup --linked-api-token=TOKEN --identification-token=TOKEN
 ```
 
 ## When to Use
-
 Use this skill when you need to **orchestrate LinkedIn actions from scripts or an AI agent** instead of clicking through the web UI:
 
 - Building outreach, research, or recruiting workflows that rely on LinkedIn data and messaging.
@@ -132,4 +130,4 @@ linkedin person fetch https://www.linkedin.com/in/username --posts --posts-limit
 linkedin person search [flags] --json -q
 ```
 
-| Flag                   | Description           
+| Flag                   | Description             

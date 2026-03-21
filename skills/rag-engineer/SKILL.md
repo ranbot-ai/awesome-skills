@@ -1,6 +1,6 @@
 ---
 name: rag-engineer
-description: Expert in building Retrieval-Augmented Generation systems. Masters embedding models, vector databases, chunking strategies, and retrieval optimization for LLM applications. Use when: building RAG, ...
+description: I bridge the gap between raw documents and LLM understanding. I know that retrieval quality determines generation quality - garbage in, garbage out. I obsess over chunking boundaries, embedding dimens
 category: Document Processing
 source: antigravity
 tags: [javascript, ai, agent, llm, workflow, design, document, rag]

@@ -1,9 +1,9 @@
 ---
 name: docx-official
-description: Comprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. When Claude needs to work with professional document...
+description: A user may ask you to create, edit, or analyze the contents of a .docx file. A .docx file is essentially a ZIP archive containing XML files and other resources that you can read or edit. You have diff
 category: Document Processing
 source: antigravity
-tags: [python, javascript, typescript, node, pdf, docx, markdown, api, claude, ai]
+tags: [python, javascript, typescript, node, pdf, docx, markdown, api, ai, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/docx-official
 ---
 

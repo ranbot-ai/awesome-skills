@@ -2,7 +2,7 @@
   "id": "antigravity-makepad-reference",
   "name": "makepad-reference",
   "slug": "makepad-reference",
-  "description": "CRITICAL: Use for Makepad troubleshooting and reference. Triggers on:\ntroubleshoot, error, debug, fix, problem, issue,\nno matching field, parse error, widget not found, UI not updating,\ncode quality, refactor, responsive layout, adaptive,\napi docs, reference,...\n",
+  "description": "This category provides reference materials for debugging, code quality, and advanced layout patterns.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

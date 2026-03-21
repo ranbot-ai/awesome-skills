@@ -17,7 +17,6 @@ This skill provides professional mental models and design patterns for **distrib
 Unlike SQL (where you model data entities), or document stores (like MongoDB), these distributed systems require you to **model your queries first**.
 
 ## When to Use
-
 - **Designing for Scale**: Moving beyond simple single-node databases to distributed clusters.
 - **Technology Selection**: Evaluating or using **Cassandra**, **ScyllaDB**, or **DynamoDB**.
 - **Performance Tuning**: Troubleshooting "hot partitions" or high latency in existing NoSQL systems.
@@ -105,4 +104,4 @@ Don't be afraid to store the same data in multiple tables to serve different que
 Before finalizing your NoSQL schema:
 
 -   [ ] **Access Pattern Coverage:** Does every query pattern map to a specific table or index?
--   [ ] **Cardinality Check:** Does the Partition Key have enough unique values to spread t
+-   [ ] **Cardinality Check:** Does the Partition Key have enough unique values to spread tr

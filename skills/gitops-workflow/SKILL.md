@@ -1,6 +1,6 @@
 ---
 name: gitops-workflow
-description: Implement GitOps workflows with ArgoCD and Flux for automated, declarative Kubernetes deployments with continuous reconciliation. Use when implementing GitOps practices, automating Kubernetes deplo...
+description: Complete guide to implementing GitOps workflows with ArgoCD and Flux for automated Kubernetes deployments. 
 category: AI & Agents
 source: antigravity
 tags: [api, ai, agent, workflow, kubernetes, aws]

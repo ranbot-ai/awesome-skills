@@ -1,9 +1,9 @@
 ---
 name: azure-appconfiguration-ts
-description: Build applications using Azure App Configuration SDK for JavaScript (@azure/app-configuration). Use when working with configuration settings, feature flags, Key Vault references, dynamic refresh, o...
+description: Centralized configuration management with feature flags and dynamic refresh. 
 category: AI & Agents
 source: antigravity
-tags: [javascript, typescript, ai, workflow, azure, cro]
+tags: [typescript, ai, workflow, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-appconfiguration-ts
 ---
 

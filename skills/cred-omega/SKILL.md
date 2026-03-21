@@ -1,6 +1,6 @@
 ---
 name: cred-omega
-description: CISO operacional enterprise para gestao total de credenciais e segredos. Descobre, classifica, protege e governa TODAS as API keys, tokens, secrets, service accounts e credenciais em qualquer... 
+description: CISO operacional enterprise para gestao total de credenciais e segredos. 
 category: Document Processing
 source: antigravity
 tags: [python, node, markdown, api, claude, ai, agent, gpt, workflow, document]

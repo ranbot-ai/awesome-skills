@@ -1,6 +1,6 @@
 ---
 name: matplotlib
-description: Low-level plotting library for full customization. Use when you need fine-grained control over every plot element, creating novel plot types, or integrating with specific scientific workflows. Export 
+description: Matplotlib is Python's foundational visualization library for creating static, animated, and interactive plots. 
 category: Document Processing
 source: antigravity
 tags: [python, pdf, api, ai, workflow, template, document, presentation]

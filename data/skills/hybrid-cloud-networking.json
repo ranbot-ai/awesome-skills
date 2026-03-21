@@ -2,7 +2,7 @@
   "id": "antigravity-hybrid-cloud-networking",
   "name": "hybrid-cloud-networking",
   "slug": "hybrid-cloud-networking",
-  "description": "Configure secure, high-performance connectivity between on-premises infrastructure and cloud platforms using VPN and dedicated connections. Use when building hybrid cloud architectures, connecting ...",
+  "description": "Configure secure, high-performance connectivity between on-premises and cloud environments using VPN, Direct Connect, and ExpressRoute.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

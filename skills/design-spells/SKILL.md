@@ -17,7 +17,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/desi
 Use this skill specifically to elevate a UI from merely "functional" or "common" into something genuinely "magical." It focuses on the minute details that surprise and delight users, establishing a strong, premium brand personality.
 
 ## When to Use
-
 Trigger this skill when:
 
 - Polishing a finished feature to actively add a "wow" factor.

@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/clau
 Use this skill when Claude in Chrome MCP tools fail to connect or work unreliably.
 
 ## When to Use
-
 - `mcp__claude-in-chrome__*` tools fail with "Browser extension is not connected"
 - Browser automation works erratically or times out
 - After updating Claude Code or Claude.app
@@ -123,4 +122,4 @@ ls -la /tmp/claude-mcp-browser-bridge-$USER/ 2>&1
 lsof -U 2>&1 | grep claude-mcp-browser-bridge
 
 # 4. Which configs are active?
-ls ~/Library/Application\ Support/Google/C
+ls ~/Library/Application\ Support/Google/Ch

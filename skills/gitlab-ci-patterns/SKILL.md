@@ -1,9 +1,9 @@
 ---
 name: gitlab-ci-patterns
-description: Build GitLab CI/CD pipelines with multi-stage workflows, caching, and distributed runners for scalable automation. Use when implementing GitLab CI/CD, optimizing pipeline performance, or setting up...
+description: Comprehensive GitLab CI/CD pipeline patterns for automated testing, building, and deployment. 
 category: AI & Agents
 source: antigravity
-tags: [python, node, ai, automation, workflow, template, design, image, security, docker]
+tags: [python, node, ai, workflow, template, design, image, security, docker, kubernetes]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gitlab-ci-patterns
 ---
 

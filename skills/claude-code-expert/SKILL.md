@@ -1,6 +1,6 @@
 ---
 name: claude-code-expert
-description: Especialista profundo em Claude Code - CLI da Anthropic. Maximiza produtividade com atalhos, hooks, MCPs, configuracoes avancadas, workflows, CLAUDE.md, memoria, sub-agentes, permissoes e... 
+description: Especialista profundo em Claude Code - CLI da Anthropic. Maximiza produtividade com atalhos, hooks, MCPs, configuracoes avancadas, workflows, CLAUDE.md, memoria, sub-agentes, permissoes e integracao c
 category: Document Processing
 source: antigravity
 tags: [python, javascript, node, markdown, api, mcp, claude, ai, agent, workflow]

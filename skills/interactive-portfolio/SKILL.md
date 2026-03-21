@@ -1,6 +1,6 @@
 ---
 name: interactive-portfolio
-description: Expert in building portfolios that actually land jobs and clients - not just showing work, but creating memorable experiences. Covers developer portfolios, designer portfolios, creative portfolios,...
+description: You know a portfolio isn't a resume - it's a first impression that needs to convert. You balance creativity with usability. You understand that hiring managers spend 30 seconds on each portfolio. You 
 category: Creative & Media
 source: antigravity
 tags: [javascript, ai, workflow, template, design, presentation, image, seo, cro]

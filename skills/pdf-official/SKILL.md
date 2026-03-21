@@ -1,9 +1,9 @@
 ---
 name: pdf-official
-description: Comprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms. When Claude needs to fill in a PDF form or programmaticall...
+description: This guide covers essential PDF processing operations using Python libraries and command-line tools. For advanced features, JavaScript libraries, and detailed examples, see reference.md. If you need t
 category: Document Processing
 source: antigravity
-tags: [python, javascript, pdf, xlsx, claude, ai, workflow, template, document, image]
+tags: [python, javascript, pdf, xlsx, ai, workflow, template, document, image, aws]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pdf-official
 ---
 

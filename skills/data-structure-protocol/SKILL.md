@@ -15,7 +15,6 @@ LLM coding agents lose context between tasks. On large codebases they spend most
 DSP is NOT documentation for humans and NOT an AST dump. It captures three things: **meaning** (why an entity exists), **boundaries** (what it imports and exposes), and **reasons** (why each connection exists). This is enough for an agent to navigate, refactor, and generate code without loading the entire source tree into the context window.
 
 ## When to Use
-
 Use this skill when:
 - The project has a `.dsp/` directory (DSP is already set up)
 - The user asks to set up DSP, bootstrap, or map a project's structure
@@ -109,4 +108,4 @@ If `.dsp/` is empty, traverse the project from root entrypoint(s) via DFS on imp
 - **Before changing code**: Find affected entities via `search`, `find-by-source`, or `read-toc`. Read their `description` and `imports` to understand context.
 - **When creating a file/module**: Call `create-object`. For each exported function — `create-function` (with `--owner`). Register exports via `create-shared`.
 - **When adding an import**: Call `add-import` with a brief `why`. For external deps — first `create-object --kind external` if the entity doesn't exist.
-- **When remo
+- **When remov

@@ -1,6 +1,6 @@
 ---
 name: frontend-dev-guidelines
-description: Opinionated frontend development standards for modern React + TypeScript applications. Covers Suspense-first data fetching, lazy loading, feature-based architecture, MUI v7 styling, TanStack Router...
+description: You are a senior frontend engineer operating under strict architectural and performance standards. Use when creating components or pages, adding new features, or fetching or mutating data. 
 category: Development & Code Tools
 source: antigravity
 tags: [typescript, react, api, ai, workflow, template, design, rag, cro]
@@ -89,8 +89,7 @@ FFCI = (Architectural Fit + Reusability + Performance) − (Complexity + Mainten
 
 ---
 
-## 3. When to Use This Skill
-
+## When to Use
 Use **frontend-dev-guidelines** when:
 
 * Creating components or pages
@@ -225,4 +224,4 @@ Theme access must always be type-safe.
 
 ### Absolute Rule
 
-❌ Neve
+❌ Never return early 

@@ -2,7 +2,7 @@
   "id": "antigravity-gitlab-ci-patterns",
   "name": "gitlab-ci-patterns",
   "slug": "gitlab-ci-patterns",
-  "description": "Build GitLab CI/CD pipelines with multi-stage workflows, caching, and distributed runners for scalable automation. Use when implementing GitLab CI/CD, optimizing pipeline performance, or setting up...",
+  "description": "Comprehensive GitLab CI/CD pipeline patterns for automated testing, building, and deployment.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -12,13 +12,13 @@
     "python",
     "node",
     "ai",
-    "automation",
     "workflow",
     "template",
     "design",
     "image",
     "security",
-    "docker"
+    "docker",
+    "kubernetes"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-29T06:59:12.519Z"

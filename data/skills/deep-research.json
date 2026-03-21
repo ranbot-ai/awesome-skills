@@ -2,7 +2,7 @@
   "id": "antigravity-deep-research",
   "name": "deep-research",
   "slug": "deep-research",
-  "description": "Execute autonomous multi-step research using Google Gemini Deep Research Agent. Use for: market analysis, competitive landscaping, literature reviews, technical research, due diligence. Takes 2-10 ...",
+  "description": "Run autonomous research tasks that plan, search, read, and synthesize information into comprehensive reports.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -13,7 +13,6 @@
     "markdown",
     "api",
     "ai",
-    "agent",
     "workflow",
     "kubernetes"
   ],

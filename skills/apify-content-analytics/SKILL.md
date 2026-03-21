@@ -115,7 +115,6 @@ After completion, report:
 - Key performance insights
 - Suggested next steps (deeper analysis, content optimization)
 
-
 ## Error Handling
 
 `APIFY_TOKEN not found` - Ask user to create `.env` with `APIFY_TOKEN=your_token`

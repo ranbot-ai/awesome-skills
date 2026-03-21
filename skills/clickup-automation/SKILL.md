@@ -22,7 +22,6 @@ Automate ClickUp project management workflows including task creation and update
 
 **Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
 
-
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `clickup`
 3. If connection is not ACTIVE, follow the returned auth link to complete ClickUp OAuth
@@ -105,4 +104,4 @@ Automate ClickUp project management workflows including task creation and update
 4. `CLICKUP_UPDATE_COMMENT` - Edit comment text, assignee, or resolution status [Optional]
 
 **Key parameters for CLICKUP_CREATE_TASK_COMMENT**:
-- `task_id`: Task 
+- `task_id`: Task I

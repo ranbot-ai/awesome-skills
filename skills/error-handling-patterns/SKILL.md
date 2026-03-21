@@ -1,9 +1,9 @@
 ---
 name: error-handling-patterns
-description: Master error handling patterns across languages including exceptions, Result types, error propagation, and graceful degradation to build resilient applications. Use when implementing error handling...
+description: Build resilient applications with robust error handling strategies that gracefully handle failures and provide excellent debugging experiences. 
 category: Development & Code Tools
 source: antigravity
-tags: [api, ai, design, cro]
+tags: [api, ai, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/error-handling-patterns
 ---
 

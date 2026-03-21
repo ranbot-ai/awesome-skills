@@ -1,6 +1,6 @@
 ---
 name: evaluation
-description: Build evaluation frameworks for agent systems 
+description: Build evaluation frameworks for agent systems. Use when testing agent performance systematically, validating context engineering choices, or measuring improvements over time. 
 category: AI & Agents
 source: antigravity
 tags: [python, api, claude, ai, agent, llm, gpt, automation, design, rag]
@@ -17,8 +17,7 @@ Use this skill when working with build evaluation frameworks for agent systems.
 
 Evaluation of agent systems requires different approaches than traditional software or even standard language model applications. Agents make dynamic decisions, are non-deterministic between runs, and often lack single correct answers. Effective evaluation must account for these characteristics while providing actionable feedback. A robust evaluation framework enables continuous improvement, catches regressions, and validates that context engineering choices achieve intended effects.
 
-## When to Activate
-
+## When to Use
 Activate this skill when:
 - Testing agent performance systematically
 - Validating context engineering choices
@@ -95,4 +94,4 @@ Provide clear task description, agent output, ground truth (if available), evalu
 **Human Evaluation**
 Human evaluation catches what automation misses. Humans notice hallucinated answers on unusual queries, system failures, and subtle biases that automated evaluation misses.
 
-Effective human 
+Effective human evalua

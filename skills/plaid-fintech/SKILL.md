@@ -1,9 +1,9 @@
 ---
 name: plaid-fintech
-description: Expert patterns for Plaid API integration including Link token flows, transactions sync, identity verification, Auth for ACH, balance checks, webhook handling, and fintech compliance best practices...
+description: Create a linktoken for Plaid Link, exchange publictoken for accesstoken. Link tokens are short-lived, one-time use. Access tokens don't expire but may need updating when users change passwords. 
 category: AI & Agents
 source: antigravity
-tags: [api, ai, workflow]
+tags: [ai, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/plaid-fintech
 ---
 
@@ -18,19 +18,16 @@ Create a link_token for Plaid Link, exchange public_token for access_token.
 Link tokens are short-lived, one-time use. Access tokens don't expire but
 may need updating when users change passwords.
 
-
 ### Transactions Sync
 
 Use /transactions/sync for incremental transaction updates. More efficient
 than /transactions/get. Handle webhooks for real-time updates instead of
 polling.
 
-
 ### Item Error Handling and Update Mode
 
 Handle ITEM_LOGIN_REQUIRED errors by putting users through Link update mode.
 Listen for PENDING_DISCONNECT webhook to proactively prompt users.
-
 
 ## Anti-Patterns
 

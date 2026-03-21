@@ -2,7 +2,7 @@
   "id": "antigravity-aws-serverless",
   "name": "aws-serverless",
   "slug": "aws-serverless",
-  "description": "Specialized skill for building production-ready serverless applications on AWS. Covers Lambda functions, API Gateway, DynamoDB, SQS/SNS event-driven patterns, SAM/CDK deployment, and cold start opt...",
+  "description": "Proper Lambda function structure with error handling",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

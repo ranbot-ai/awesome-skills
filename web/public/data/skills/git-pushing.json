@@ -2,12 +2,12 @@
   "id": "antigravity-git-pushing",
   "name": "git-pushing",
   "slug": "git-pushing",
-  "description": "Stage, commit, and push git changes with conventional commit messages. Use when user wants to commit and push changes, mentions pushing to remote, or asks to save and push their work. Also activate...",
+  "description": "Stage all changes, create a conventional commit, and push to the remote branch. Use when explicitly asks to push changes (\"push this\", \"commit and push\"), mentions saving work to remote (\"save to github\", \"push to remote\"), or completes a feature and wants to share it.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/git-pushing",
-  "content": "\n# Git Push Workflow\n\nStage all changes, create a conventional commit, and push to the remote branch.\n\n## When to Use\n\nAutomatically activate when the user:\n\n- Explicitly asks to push changes (\"push this\", \"commit and push\")\n- Mentions saving work to remote (\"save to github\", \"push to remote\")\n- Completes a feature and wants to share it\n- Says phrases like \"let's push this up\" or \"commit these changes\"\n\n## Workflow\n\n**ALWAYS use the script** - do NOT use manual git commands:\n\n```bash\nbash skills/git-pushing/scripts/smart_commit.sh\n```\n\nWith custom message:\n\n```bash\nbash skills/git-pushing/scripts/smart_commit.sh \"feat: add feature\"\n```\n\nScript handles: staging, conventional commit message, Claude footer, push with -u flag.\n",
+  "content": "\n# Git Push Workflow\n\nStage all changes, create a conventional commit, and push to the remote branch.\n\n## When to Use\nAutomatically activate when the user:\n\n- Explicitly asks to push changes (\"push this\", \"commit and push\")\n- Mentions saving work to remote (\"save to github\", \"push to remote\")\n- Completes a feature and wants to share it\n- Says phrases like \"let's push this up\" or \"commit these changes\"\n\n## Workflow\n\n**ALWAYS use the script** - do NOT use manual git commands:\n\n```bash\nbash skills/git-pushing/scripts/smart_commit.sh\n```\n\nWith custom message:\n\n```bash\nbash skills/git-pushing/scripts/smart_commit.sh \"feat: add feature\"\n```\n\nScript handles: staging, conventional commit message, Claude footer, push with -u flag.\n",
   "tags": [
     "claude",
     "workflow"

@@ -12,8 +12,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mult
 
 Multi-agent architectures distribute work across multiple language model instances, each with its own context window. When designed well, this distribution enables capabilities beyond single-agent limits. When designed poorly, it introduces coordination overhead that negates benefits. The critical insight is that sub-agents exist primarily to isolate context, not to anthropomorphize role division.
 
-## When to Activate
-
+## When to Use
 Activate this skill when:
 - Single-agent context limits constrain task complexity
 - Tasks decompose naturally into parallel subtasks
@@ -71,4 +70,4 @@ User Query -> Supervisor -> [Specialist, Specialist, Specialist] -> Aggregation 
 
 When to use: Complex tasks with clear decomposition, tasks requiring coordination across domains, tasks where human oversight is important.
 
-Advantages: Strict control over workflow, easier to implement human-in-the-loop i
+Advantages: Strict control over workflow, easier to implement human-in-the-loop interve

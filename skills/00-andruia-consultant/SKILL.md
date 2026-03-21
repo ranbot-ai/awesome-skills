@@ -9,7 +9,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/00-a
 
 
 ## When to Use
-
 Use this skill at the very beginning of a project to diagnose the workspace, determine whether it's a "Pure Engine" (new) or "Evolution" (existing) project, and to set the initial technical roadmap and expert squad.
 
 # 🤖 Andru.ia Solutions Architect - Hybrid Engine (v2.0)

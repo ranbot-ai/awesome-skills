@@ -1,6 +1,6 @@
 ---
 name: qiskit
-description: IBM quantum computing framework. Use when targeting IBM Quantum hardware, working with Qiskit Runtime for production workloads, or needing IBM optimization tools. Best for IBM hardware execution, quan
+description: Qiskit is the world's most popular open-source quantum computing framework with 13M+ downloads. Build quantum circuits, optimize for hardware, execute on simulators or real quantum computers, and anal
 category: Creative & Media
 source: antigravity
 tags: [python, api, ai, workflow]

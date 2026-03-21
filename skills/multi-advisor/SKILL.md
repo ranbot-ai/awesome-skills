@@ -1,6 +1,6 @@
 ---
 name: multi-advisor
-description: Conselho de especialistas — consulta multiplos agentes do ecossistema em paralelo para analise multi-perspectiva de qualquer topico. Ativa personas, especialistas e agentes tecnicos... 
+description: Conselho de especialistas — consulta multiplos agentes do ecossistema em paralelo para analise multi-perspectiva de qualquer topico. Ativa personas, especialistas e agentes tecnicos simultaneamente,
 category: AI & Agents
 source: antigravity
 tags: [react, markdown, api, claude, ai, agent, llm, design, security, aws]

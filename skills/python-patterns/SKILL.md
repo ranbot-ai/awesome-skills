@@ -14,7 +14,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pyth
 > **Learn to THINK, not memorize patterns.**
 
 ## When to Use
-
 Use this skill when making Python architecture decisions, choosing frameworks, designing async patterns, or structuring Python projects.
 
 ---
@@ -273,4 +272,4 @@ Queries:
 ```
 Use async def when:
 ├── Using async database drivers
-├── Making a
+├── Making as

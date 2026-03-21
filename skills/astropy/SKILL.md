@@ -1,6 +1,6 @@
 ---
 name: astropy
-description: Comprehensive Python library for astronomy and astrophysics. This skill should be used when working with astronomical data including celestial coordinates, physical units, FITS files, cosmological cal
+description: Astropy is the core Python package for astronomy, providing essential functionality for astronomical research and data analysis. 
 category: Document Processing
 source: antigravity
 tags: [python, ai, workflow, document, presentation, image, cro]

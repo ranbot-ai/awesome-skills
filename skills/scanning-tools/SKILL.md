@@ -1,6 +1,6 @@
 ---
 name: scanning-tools
-description: This skill should be used when the user asks to "perform vulnerability scanning", "scan networks for open ports", "assess web application security", "scan wireless networks", "detec... 
+description: Master essential security scanning tools for network discovery, vulnerability assessment, web application testing, wireless security, and compliance validation. This skill covers tool selection, confi
 category: Security & Systems
 source: antigravity
 tags: [pdf, api, ai, automation, workflow, template, document, security, vulnerability, docker]

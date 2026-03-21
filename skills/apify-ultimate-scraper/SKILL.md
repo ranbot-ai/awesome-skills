@@ -1,6 +1,6 @@
 ---
 name: apify-ultimate-scraper
-description: Universal AI-powered web scraper for any platform. Scrape data from Instagram, Facebook, TikTok, YouTube, Google Maps, Google Search, Google Trends, Booking.com, and TripAdvisor. Use for lead gener...
+description: AI-driven data extraction from 55+ Actors across all major platforms. This skill automatically selects the best Actor for your task. 
 category: Creative & Media
 source: antigravity
 tags: [react, node, api, mcp, claude, ai, workflow, cro]

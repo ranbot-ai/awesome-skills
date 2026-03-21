@@ -1,6 +1,6 @@
 ---
 name: project-development
-description: This skill should be used when the user asks to "start an LLM project", "design batch pipeline", "evaluate task-model fit", "structure agent project", or mentions pipeline architecture, agent-assisted
+description: This skill covers the principles for identifying tasks suited to LLM processing, designing effective project architectures, and iterating rapidly using agent-assisted development. 
 category: AI & Agents
 source: antigravity
 tags: [api, claude, ai, agent, llm, automation, workflow, template, design, document]
@@ -12,8 +12,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/proj
 
 This skill covers the principles for identifying tasks suited to LLM processing, designing effective project architectures, and iterating rapidly using agent-assisted development. The methodology applies whether building a batch processing pipeline, a multi-agent research system, or an interactive agent application.
 
-## When to Activate
-
+## When to Use
 Activate this skill when:
 - Starting a new project that might benefit from LLM processing
 - Evaluating whether a task is well-suited for agents versus traditional code
@@ -108,4 +107,4 @@ This pattern provides:
 
 ### Structured Output Design
 
-When LLM outputs must be parsed programmatically, prompt design directly determines parsing reliability. The prompt must speci
+When LLM outputs must be parsed programmatically, prompt design directly determines parsing reliability. The prompt must specify exa

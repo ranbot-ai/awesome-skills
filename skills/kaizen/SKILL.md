@@ -17,7 +17,6 @@ Small improvements, continuously. Error-proof by design. Follow what works. Buil
 **Core principle:** Many small improvements beat one big change. Prevent errors at design time, not with fixes.
 
 ## When to Use
-
 **Always applied for:**
 
 - Code implementation and refactoring
@@ -206,4 +205,4 @@ if (items.length > 0) {
 }
 ````
 
-Functi
+Functio

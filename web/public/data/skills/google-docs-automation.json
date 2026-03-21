@@ -2,7 +2,7 @@
   "id": "antigravity-google-docs-automation",
   "name": "google-docs-automation",
   "slug": "google-docs-automation",
-  "description": "Interact with Google Docs - create documents, search by title, read content, and edit text.\nUse when user asks to: create a Google Doc, find a document, read doc content, add text to a doc,\nor replace text in a document. Lightweight alternative to full Google...\n",
+  "description": "Lightweight Google Docs integration with standalone OAuth authentication. No MCP server required.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

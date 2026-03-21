@@ -1,9 +1,9 @@
 ---
 name: pptx-official
-description: Presentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layo...
+description: A user may ask you to create, edit, or analyze the contents of a .pptx file. A .pptx file is essentially a ZIP archive containing XML files and other resources that you can read or edit. You have diff
 category: Document Processing
 source: antigravity
-tags: [python, javascript, react, pdf, pptx, markdown, api, claude, ai, workflow]
+tags: [python, javascript, react, pdf, pptx, markdown, api, ai, workflow, template]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pptx-official
 ---
 

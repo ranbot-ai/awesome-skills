@@ -25,8 +25,7 @@ Fix animation performance issues.
 
 Do not migrate animation libraries unless explicitly requested. Apply rules within the existing stack.
 
-## when to apply
-
+## When to Use
 Reference these guidelines when:
 - adding or changing UI animations (CSS, WAAPI, Motion, rAF, GSAP)
 - refactoring janky interactions or transitions
@@ -150,4 +149,4 @@ requestAnimationFrame(() => { el.style.transition = 'transform 0.3s'; el.style.t
 
 ## review guidance
 
-- enforce critical rules first (never patterns, too
+- enforce critical rules first (never patterns, tool b

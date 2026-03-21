@@ -1,6 +1,6 @@
 ---
 name: notebooklm
-description: Use this skill to query your Google NotebookLM notebooks directly from Claude Code for source-grounded, citation-backed answers from Gemini. Browser automation, library management, persistent auth....
+description: Interact with Google NotebookLM to query documentation with Gemini's source-grounded answers. Each question opens a fresh browser session, retrieves the answer exclusively from your uploaded documents
 category: Document Processing
 source: antigravity
 tags: [python, api, claude, ai, automation, workflow, document, security, rag]

@@ -1,9 +1,9 @@
 ---
 name: debugging-strategies
-description: Master systematic debugging techniques, profiling tools, and root cause analysis to efficiently track down bugs across any codebase or technology stack. Use when investigating bugs, performance iss...
+description: Transform debugging from frustrating guesswork into systematic problem-solving with proven strategies, powerful tools, and methodical approaches. 
 category: Document Processing
 source: antigravity
-tags: [ai, design, document, cro]
+tags: [ai, design, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/debugging-strategies
 ---
 

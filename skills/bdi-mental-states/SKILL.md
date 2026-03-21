@@ -12,8 +12,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bdi-
 
 Transform external RDF context into agent mental states (beliefs, desires, intentions) using formal BDI ontology patterns. This skill enables agents to reason about context through cognitive architecture, supporting deliberative reasoning, explainability, and semantic interoperability within multi-agent systems.
 
-## When to Activate
-
+## When to Use
 Activate this skill when:
 - Processing external RDF context into agent beliefs about world states
 - Modeling rational agency with perception, deliberation, and action cycles
@@ -169,4 +168,4 @@ SELECT ?mentalState WHERE {
 
 ## Compositional Mental Entities
 
-Complex mental entities decompose into constituent parts for selective 
+Complex mental entities decompose into constituent parts for selective update

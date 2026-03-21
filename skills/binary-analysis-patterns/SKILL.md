@@ -1,6 +1,6 @@
 ---
 name: binary-analysis-patterns
-description: Master binary analysis patterns including disassembly, decompilation, control flow analysis, and code pattern recognition. Use when analyzing executables, understanding compiled code, or performing...
+description: Comprehensive patterns and techniques for analyzing compiled binaries, understanding assembly code, and reconstructing program logic. 
 category: Document Processing
 source: antigravity
 tags: [python, node, api, mcp, ai, workflow, document, cro]

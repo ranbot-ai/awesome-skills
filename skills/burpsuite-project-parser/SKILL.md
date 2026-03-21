@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/burp
 Search and extract data from Burp Suite project files using the burpsuite-project-file-parser extension.
 
 ## When to Use
-
 - Searching response headers or bodies with regex patterns
 - Extracting security audit findings from Burp projects
 - Dumping proxy history or site map data
@@ -151,4 +150,4 @@ Before any search, check BOTH record count AND byte size:
 ```bash
 # Check record count AND total bytes - never skip this step
 {baseDir}/scripts/burp-search.sh project.burp proxyHistory | wc -cl
-{baseDir}/scripts/burp-search.sh project.burp "re
+{baseDir}/scripts/burp-search.sh project.burp "res

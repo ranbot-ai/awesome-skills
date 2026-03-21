@@ -22,7 +22,6 @@ Automate Confluence operations including page creation and updates, content sear
 
 **Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
 
-
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `confluence`
 3. If connection is not ACTIVE, follow the returned auth link to complete Confluence OAuth
@@ -101,4 +100,4 @@ Automate Confluence operations including page creation and updates, content sear
 1. `CONFLUENCE_GET_SPACES` - List all spaces with optional filtering [Required]
 2. `CONFLUENCE_GET_SPACE_BY_ID` - Get detailed metadata for a specific space [Optional]
 3. `CONFLUENCE_CREATE_SPACE` - Create a new space with key and name [Optional]
-4. `CONFLUENCE_GET_SPACE_PRO
+4. `CONFLUENCE_GET_SPACE_PROP

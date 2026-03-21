@@ -9,7 +9,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/logi
 
 
 ## When to Use
-
 Use this skill when dealing with deviations from planned logistics operations, such as transit delays, damaged shipments, lost cargo, or when initiating and managing claims and disputes with freight carriers.
 
 # Logistics Exception Management
@@ -50,4 +49,4 @@ Understanding how different carrier types operate changes your resolution strate
 ### Claims Process Fundamentals
 
 - **Carmack Amendment (US domestic surface):** Carrier is liable for actual loss or damage with limited exceptions (act of God, act of public enemy, act of shipper, public authority, inherent vice). Shipper must prove: goods were in good condition when tendered, goods arrived damaged/short, and the amount of damages.
-- **Filing deadlin
+- **Filing deadline

@@ -22,7 +22,6 @@ references/
 ```
 
 ## When to Use
-
 Use this skill when:
 
 - Implementing API requests
@@ -247,4 +246,4 @@ const getValidToken = async (): Promise<string> => {
   const token = await auth.getToken();
 
   if (!token || isTokenExpired(token)) {
-    if (!isRefr
+    if (!isRefre

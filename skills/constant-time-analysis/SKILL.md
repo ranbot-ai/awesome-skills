@@ -1,6 +1,6 @@
 ---
 name: constant-time-analysis
-description: Detects timing side-channel vulnerabilities in cryptographic code. Use when implementing or reviewing crypto code, encountering division on secrets, secret-dependent branches, or constant-time program
+description: Analyze cryptographic code to detect operations that leak secret data through execution timing variations. 
 category: Security & Systems
 source: antigravity
 tags: [python, javascript, typescript, node, api, ai, document, vulnerability, cro]
@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cons
 Analyze cryptographic code to detect operations that leak secret data through execution timing variations.
 
 ## When to Use
-
 ```text
 User writing crypto code? ──yes──> Use this skill
          │
@@ -134,4 +133,4 @@ Note: Swift compiles to native code like C/C++/Go/Rust, so it uses assembly-leve
 | Kotlin                 | Kotlin compiler (`kotlinc`) + JDK (`javap`) in PATH       |
 | C#                     | .NET SDK + `ilspycmd` (`dotnet tool install -g ilspycmd`) |
 | PHP                    | PHP with VLD extension or OPcache                         |
-| JavaScript
+| JavaScript/

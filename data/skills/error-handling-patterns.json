@@ -2,7 +2,7 @@
   "id": "antigravity-error-handling-patterns",
   "name": "error-handling-patterns",
   "slug": "error-handling-patterns",
-  "description": "Master error handling patterns across languages including exceptions, Result types, error propagation, and graceful degradation to build resilient applications. Use when implementing error handling...",
+  "description": "Build resilient applications with robust error handling strategies that gracefully handle failures and provide excellent debugging experiences.",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -11,8 +11,7 @@
   "tags": [
     "api",
     "ai",
-    "design",
-    "cro"
+    "design"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-29T06:58:56.678Z"

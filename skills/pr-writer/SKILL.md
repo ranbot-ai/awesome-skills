@@ -1,6 +1,6 @@
 ---
 name: pr-writer
-description: ALWAYS use this skill when creating or updating pull requests — never create or edit a PR directly without it. Follows Sentry conventions for PR titles, descriptions, and issue references. Trigger o
+description: Create pull requests following Sentry's engineering practices. 
 category: AI & Agents
 source: antigravity
 tags: [markdown, api, ai, template, cro]

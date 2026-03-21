@@ -2,7 +2,7 @@
   "id": "antigravity-gmail-automation",
   "name": "gmail-automation",
   "slug": "gmail-automation",
-  "description": "Interact with Gmail - search emails, read messages, send emails, create drafts, and manage labels.\nUse when user asks to: search email, read email, send email, create email draft, mark as read,\narchive email, star email, or manage Gmail labels. Lightweight alternative...\n",
+  "description": "Lightweight Gmail integration with standalone OAuth authentication. No MCP server required.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

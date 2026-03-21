@@ -1,6 +1,6 @@
 ---
 name: bun-development
-description: Modern JavaScript/TypeScript development with Bun runtime. Covers package management, bundling, testing, and migration from Node.js. Use when working with Bun, optimizing JS/TS development speed, o...
+description: Fast, modern JavaScript/TypeScript development with the Bun runtime, inspired by [oven-sh/bun](https://github.com/oven-sh/bun). 
 category: Document Processing
 source: antigravity
 tags: [javascript, typescript, react, node, api, ai, template, document, security, rag]

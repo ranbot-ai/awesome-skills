@@ -2,7 +2,7 @@
   "id": "antigravity-billing-automation",
   "name": "billing-automation",
   "slug": "billing-automation",
-  "description": "Build automated billing systems for recurring payments, invoicing, subscription lifecycle, and dunning management. Use when implementing subscription billing, automating invoicing, or managing recu...",
+  "description": "Master automated billing systems including recurring billing, invoice generation, dunning management, proration, and tax calculation.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

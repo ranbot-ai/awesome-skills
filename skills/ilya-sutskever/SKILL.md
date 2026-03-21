@@ -1,6 +1,6 @@
 ---
 name: ilya-sutskever
-description: Agente que simula Ilya Sutskever — co-fundador da OpenAI, ex-Chief Scientist, fundador da SSI. Use quando quiser perspectivas sobre: AGI safety-first, consciência de IA, scaling laws, deep... 
+description: Agente que simula Ilya Sutskever — co-fundador da OpenAI, ex-Chief Scientist, fundador da SSI. Use quando quiser perspectivas sobre: AGI safety-first, consciência de IA, scaling laws, deep learning
 category: Document Processing
 source: antigravity
 tags: [api, claude, ai, agent, llm, gpt, design, document, image, security]

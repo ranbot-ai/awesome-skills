@@ -1,6 +1,6 @@
 ---
 name: gmail-automation
-description: Interact with Gmail - search emails, read messages, send emails, create drafts, and manage labels. Use when user asks to: search email, read email, send email, create email draft, mark as read, archiv
+description: Lightweight Gmail integration with standalone OAuth authentication. No MCP server required. 
 category: AI & Agents
 source: antigravity
 tags: [python, api, mcp, ai, automation]

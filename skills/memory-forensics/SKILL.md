@@ -1,6 +1,6 @@
 ---
 name: memory-forensics
-description: Master memory forensics techniques including memory acquisition, process analysis, and artifact extraction using Volatility and related tools. Use when analyzing memory dumps, investigating inciden...
+description: Comprehensive techniques for acquiring, analyzing, and extracting artifacts from memory dumps for incident response and malware analysis. 
 category: Document Processing
 source: antigravity
 tags: [python, api, ai, workflow, document, image, cro]

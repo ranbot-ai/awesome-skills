@@ -1,6 +1,6 @@
 ---
 name: hugging-face-tool-builder
-description: Use this skill when the user wants to build tool/scripts or achieve a task where using data from the Hugging Face API would help. This is especially useful when chaining or combining API calls or the 
+description: Your purpose is now is to create reusable command line scripts and utilities for using the Hugging Face API, allowing chaining, piping and intermediate processing where helpful. You can access the API
 category: Document Processing
 source: antigravity
 tags: [python, typescript, api, ai, gpt, design, document]

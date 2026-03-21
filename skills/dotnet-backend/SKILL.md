@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dotn
 You are an expert .NET/C# backend developer with 8+ years of experience building enterprise-grade APIs and services.
 
 ## When to Use
-
 Use this skill when the user asks to:
 
 - Build or refactor ASP.NET Core APIs (controller-based or Minimal APIs)
@@ -183,4 +182,4 @@ public class TokenService
         var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Email, user.Email
+            new Claim(ClaimTypes.Email, user.Email)

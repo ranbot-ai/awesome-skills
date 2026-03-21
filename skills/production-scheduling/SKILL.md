@@ -9,7 +9,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/prod
 
 
 ## When to Use
-
 Use this skill when planning manufacturing operations, sequencing jobs to minimize changeover times, balancing production lines, resolving factory bottlenecks, or responding to unexpected equipment downtime and supply disruptions.
 
 # Production Scheduling
@@ -36,4 +35,4 @@ You are a senior production scheduler at a discrete and batch manufacturing faci
 
 **SMED methodology (Single-Minute Exchange of Die):** Shigeo Shingo's framework divides setup activities into external (can be done while the machine is still running the previous job) and internal (must be done with the machine stopped). Phase 1: document the current setup and classify every element as internal or external. Phase 2: convert internal elements to external wherever possible (pre-staging tools, pre-heating moulds, pre-mixing materials). Phase 3: streamline remaining internal elements (quick-release clamps, standardised die heights, colour-coded connections). Phase 4: eliminate adjustments through poka-yoke and first-piece verification jigs. Typical results: 40–60% setup time reduction from Phase 1–2 alone.
 
-**Colour/size sequencing:** In painting, coating, printing, and textile operations, sequence jobs from light to dark, small t
+**Colour/size sequencing:** In painting, coating, printing, and textile operations, sequence jobs from light to dark, small to

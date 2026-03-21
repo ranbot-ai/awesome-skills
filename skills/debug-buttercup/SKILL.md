@@ -1,6 +1,6 @@
 ---
 name: debug-buttercup
-description: Debugs the Buttercup CRS (Cyber Reasoning System) running on Kubernetes. Use when diagnosing pod crashes, restart loops, Redis failures, resource pressure, disk saturation, DinD issues, or any service
+description: All pods run in namespace crs. Use when pods in the crs namespace are in CrashLoopBackOff, OOMKilled, or restarting, multiple services restart simultaneously (cascade failure), or redis is unresponsiv
 category: AI & Agents
 source: antigravity
 tags: [node, api, ai, llm, workflow, template, docker, kubernetes, rag, cro]
@@ -11,7 +11,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/debu
 # Debug Buttercup
 
 ## When to Use
-
 - Pods in the `crs` namespace are in CrashLoopBackOff, OOMKilled, or restarting
 - Multiple services restart simultaneously (cascade failure)
 - Redis is unresponsive or showing AOF warnings
@@ -158,4 +157,4 @@ Buttercup uses Redis streams with consumer groups. Queue names:
 | Build | fuzzer_build_queue |
 | Build Output | fuzzer_build_output_queue |
 | Crash | fuzzer_crash_queue |
-| Confirmed V
+| Confirmed Vu

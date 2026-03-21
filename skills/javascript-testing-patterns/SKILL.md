@@ -1,6 +1,6 @@
 ---
 name: javascript-testing-patterns
-description: Implement comprehensive testing strategies using Jest, Vitest, and Testing Library for unit tests, integration tests, and end-to-end testing with mocking, fixtures, and test-driven development. Use...
+description: Comprehensive guide for implementing robust testing strategies in JavaScript/TypeScript applications using modern testing frameworks and best practices. 
 category: Development & Code Tools
 source: antigravity
 tags: [javascript, typescript, react, api, ai]

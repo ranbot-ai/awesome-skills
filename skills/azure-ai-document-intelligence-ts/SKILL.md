@@ -1,6 +1,6 @@
 ---
 name: azure-ai-document-intelligence-ts
-description: Extract text, tables, and structured data from documents using Azure Document Intelligence (@azure-rest/ai-document-intelligence). Use when processing invoices, receipts, IDs, forms, or building cu...
+description: Extract text, tables, and structured data from documents using prebuilt and custom models. 
 category: Document Processing
 source: antigravity
 tags: [typescript, node, pdf, api, ai, workflow, template, document, azure]
