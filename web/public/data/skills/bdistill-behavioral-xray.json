@@ -1,0 +1,29 @@
+{
+  "id": "antigravity-bdistill-behavioral-xray",
+  "name": "bdistill-behavioral-xray",
+  "slug": "bdistill-behavioral-xray",
+  "description": "X-ray any AI model's behavioral patterns — refusal boundaries, hallucination tendencies, reasoning style, formatting defaults. No API key needed.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bdistill-behavioral-xray",
+  "content": "\n# Behavioral X-Ray\n\nSystematically probe an AI model's behavioral patterns and generate a visual report. The AI agent probes *itself* — no API key or external setup needed.\n\n## Overview\n\nbdistill's Behavioral X-Ray runs 30 carefully designed probe questions across 6 dimensions, auto-tags each response with behavioral metadata, and compiles results into a styled HTML report with radar charts and actionable insights.\n\nUse it to understand your model before building with it, compare models for task selection, or track behavioral drift over time.\n\n## When to Use This Skill\n\n- Use when you want to understand how your AI model actually behaves (not how it claims to)\n- Use when choosing between models for a specific task\n- Use when debugging unexpected refusals, hallucinations, or formatting issues\n- Use for compliance auditing — documenting model behavior at deployment boundaries\n- Use for red team assessments — systematic boundary mapping across safety dimensions\n\n## How It Works\n\n### Step 1: Install\n\n```bash\npip install bdistill\nclaude mcp add bdistill -- bdistill-mcp   # Claude Code\n```\n\nFor other tools, add bdistill-mcp as an MCP server in your project config.\n\n### Step 2: Run the probe\n\nIn Claude Code:\n```\n/xray                          # Full behavioral probe (30 questions)\n/xray --dimensions refusal     # Probe just one dimension\n/xray-report                   # Generate report from completed probe\n```\n\nIn any tool with MCP:\n```\n\"X-ray your behavioral patterns\"\n\"Test your refusal boundaries\"\n\"Generate a behavioral report\"\n```\n\n## Probe Dimensions\n\n| Dimension | What it measures |\n|-----------|-----------------|\n| **tool_use** | When does it call tools vs. answer from knowledge? |\n| **refusal** | Where does it draw safety boundaries? Does it over-refuse? |\n| **formatting** | Lists vs. prose? Code blocks? Length calibration? |\n| **reasoning** | Does it show chain-of-thought? Handle trick questions? |\n| **persona** | Identity, tone matching, composure under hostility |\n| **grounding** | Hallucination resistance, fabrication traps, knowledge limits |\n\n## Output\n\nA styled HTML report showing:\n- Refusal rate, hedge rate, chain-of-thought usage\n- Per-dimension breakdown with bar charts\n- Notable response examples with behavioral tags\n- Actionable insights (e.g., \"you already show CoT 85% of the time, no need to prompt for it\")\n\n## Best Practices\n\n- Answer probe questions honestly — the value is in authentic behavioral data\n- Run probes on the same model periodically to track behavioral drift\n- Compare reports across models to make informed selection decisions\n- Use adversarial knowledge extraction (`/distill --adversarial`) alongside behavioral probes for complete model profiling\n\n## Related Skills\n\n- `@bdistill-knowledge-extraction` - Extract structured domain knowledge from any AI model\n",
+  "tags": [
+    "api",
+    "mcp",
+    "claude",
+    "ai",
+    "agent",
+    "design",
+    "document",
+    "cro"
+  ],
+  "useCases": [
+    "Use when you want to understand how your AI model actually behaves (not how it claims to)",
+    "Use when choosing between models for a specific task",
+    "Use when debugging unexpected refusals, hallucinations, or formatting issues",
+    "Use for compliance auditing — documenting model behavior at deployment boundaries",
+    "Use for red team assessments — systematic boundary mapping across safety dimensions"
+  ],
+  "scrapedAt": "2026-03-22T07:01:46.874Z"
+}

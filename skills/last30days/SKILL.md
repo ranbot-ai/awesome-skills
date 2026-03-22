@@ -95,7 +95,12 @@ echo "Edit to add your API keys for enhanced research."
 **Step 1: Run the research script**
 
 ```bash
-python3 ~/.claude/skills/last30days/scripts/last30days.py "$ARGUMENTS" --emit=compact 2>&1
+TOPIC_FILE="$(mktemp)"
+trap 'rm -f "$TOPIC_FILE"' EXIT
+cat <<'LAST30DAYS_TOPIC' > "$TOPIC_FILE"
+$ARGUMENTS
+LAST30DAYS_TOPIC
+python3 ~/.claude/skills/last30days/scripts/last30days.py "$(cat "$TOPIC_FILE")" --emit=compact 2>&1
 ```
 
 The script will automatically:
@@ -137,10 +142,4 @@ Choose search queries based on QUERY_TYPE:
 - Search for: `{TOPIC} techniques tips`
 - Goal: Find prompting techniques and examples to create copy-paste prompts
 
-**If GENERAL** (default):
-
-- Search for: `{TOPIC} 2026`
-- Search for: `{TOPIC} discussion`
-- Goal: Find what people are actually saying
-
-For ALL query types:
+**If GENERAL** (default
