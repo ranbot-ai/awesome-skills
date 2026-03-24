@@ -17296,6 +17296,35 @@
       "scrapedAt": "2026-02-19T07:12:00.839Z"
     },
     {
+      "id": "antigravity-jobgpt",
+      "name": "jobgpt",
+      "slug": "jobgpt",
+      "description": "Job search automation, auto apply, resume generation, application tracking, salary intelligence, and recruiter outreach using the JobGPT MCP server.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/jobgpt",
+      "content": "\n# JobGPT - Job Search Automation\n\n## Overview\n\nJobGPT connects your AI assistant to a complete job search automation platform via the JobGPT MCP server. It provides 34 tools covering job search, auto-apply, resume generation, application tracking, salary intelligence, and recruiter outreach so you can manage your entire job hunt from your AI coding assistant.\n\nBuilt by [6figr.com](https://6figr.com/jobgpt-ai), the platform supports 150+ countries with salary data, job matching, and automated applications.\n\n## When to Use This Skill\n\n- You want to **search for jobs** with filters like titles, locations, salary, remote, and H1B sponsorship\n- You want to **auto-apply** to jobs automatically\n- You want to **generate a tailored resume** for a specific job application\n- You want to **track your job applications** across multiple job hunts\n- You want to **find recruiters or referrers** at target companies and send outreach emails\n- You want to **import a job** from LinkedIn, Greenhouse, Lever, Workday, or any job board URL\n- You want to **check your salary** and compare compensation across roles\n\n## Setup\n\nThis skill requires the JobGPT MCP server:\n\n1. **Create an account** - Sign up at [6figr.com/jobgpt-ai](https://6figr.com/jobgpt-ai)\n2. **Get an API key** - Go to [6figr.com/account](https://6figr.com/account), scroll to MCP Integrations, and click Generate API Key. The key starts with `mcp_`.\n3. **Add the MCP server:**\n   - Claude Code: `claude mcp add jobgpt -t http -u https://mcp.6figr.com/mcp --header \"Authorization: <api-key>\"`\n   - Other tools: Add `jobgpt-mcp-server` as an MCP server with env var `JOBGPT_API_KEY` set. Install via `npx jobgpt-mcp-server`.\n\nSet the `JOBGPT_API_KEY` environment variable when you are running the local `npx jobgpt-mcp-server` path.\n\n## Examples\n\n### Find Remote Jobs\n\n> \"Find remote senior React jobs paying over $150k\"\n\nThe skill uses `search_jobs` with title, remote, and salary filters to find matching positions, then presents results with company, title, location, salary range, and key skills.\n\n### Auto-Apply to Jobs\n\n> \"Auto-apply to the top 5 matches from my job hunt\"\n\nThe skill checks that your resume is uploaded, uses `match_jobs` to find new matches, saves the selected matches with `add_job_to_applications`, then triggers `apply_to_job` for each resulting application. It monitors progress with `get_application_stats`.\n\n### Generate a Tailored Resume\n\n> \"Generate a tailored resume for this Google application\"\n\nThe skill calls `generate_resume_for_job` to create an AI-optimized resume targeting the specific job's requirements, then provides the download link via `get_generated_resume`.\n\n### Import and Apply from a URL\n\n> \"Apply to this job for me - https://boards.greenhouse.io/company/jobs/12345\"\n\nThe skill uses `import_job_by_url` to import the job from any supported platform (LinkedIn, Greenhouse, Lever, Workday), adds it to applications, and optionally triggers auto-apply.\n\n### Recruiter Outreach\n\n> \"Find recruiters for this job and draft an outreach email\"\n\nThe skill finds recruiters with `get_job_recruiters` and helps craft a personalized message. The draft is presented to the user for review; `send_outreach` is only called after explicit user confirmation.\n\n### Check Application Stats\n\n> \"Show my application stats for the last 7 days\"\n\nThe skill uses `get_application_stats` for an aggregated overview - total counts by status, auto-apply metrics, and pipeline progress.\n\n## Best Practices\n\n- **Check credits first** - Auto-apply and resume generation consume credits. Use `get_credits` before batch operations.\n- **Complete your profile** - Run `get_profile` first and fill in missing fields with `update_profile` for better job matches.\n- **Upload a resume before applying** - Use `list_resumes` to check, and `upload_resume` if needed.\n- **Use job hunts for ongoing searches** - Create a job hunt with `create_job_hunt` to save filters and get continuous matches.\n- **Use `get_application` for saved jobs** - If a user asks about a job they've already saved, use `get_application` instead of `get_job`.\n\n## Troubleshooting\n\n| Problem | Solution |\n|---------|----------|\n| \"Missing Authorization header\" | For Claude Code and other remote HTTP MCP setups, confirm the `Authorization` header is configured on the MCP server entry |\n| \"Missing API key\" | For the local `npx jobgpt-mcp-server` setup, ensure `JOBGPT_API_KEY` is set to your API key |\n| \"Insufficient credits\" | Check balance with `get_credits`. Purchase more at 6figr.com/account |\n| Auto-apply not working | Ensure a resume is uploaded and the job hunt has auto-apply enabled |\n| No job matches found | Broaden your search filters (fewer titles, more locations, wider salary range) |\n\n## Additional Resources\n\n- [JobGPT Platform](https://6figr.com/jobgpt-ai) - Sign up and manage your account\n- [MCP Server Repo](https://github.com/6figr-com/jobgpt-mcp-server) - Source code and setup guides\n- [Skills Repo](https://github.com/6figr",
+      "tags": [
+        "react",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "gpt",
+        "automation",
+        "cro"
+      ],
+      "useCases": [
+        "You want to **search for jobs** with filters like titles, locations, salary, remote, and H1B sponsorship",
+        "You want to **auto-apply** to jobs automatically",
+        "You want to **generate a tailored resume** for a specific job application",
+        "You want to **track your job applications** across multiple job hunts",
+        "You want to **find recruiters or referrers** at target companies and send outreach emails"
+      ],
+      "scrapedAt": "2026-03-24T07:16:24.245Z"
+    },
+    {
       "id": "antigravity-json-canvas",
       "name": "json-canvas",
       "slug": "json-canvas",
@@ -20196,6 +20225,27 @@
         "Developing mobile app backends using Moodle"
       ],
       "scrapedAt": "2026-01-26T13:19:42.849Z"
+    },
+    {
+      "id": "antigravity-moyu",
+      "name": "moyu",
+      "slug": "moyu",
+      "description": "Anti-over-engineering guardrail that activates when an AI coding agent expands scope, adds abstractions, or changes files the user did not request.\n",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/moyu",
+      "content": "\n# Moyu\n\n> The best code is code you didn't write. The best PR is the smallest PR.\n\n## When to Use\n\nUse this skill when you want an AI coding agent to stay tightly scoped, prefer the\nsimplest viable change, and avoid unrequested abstractions, refactors, or adjacent edits.\n\n## Your Identity\n\nYou are a Staff engineer who deeply understands that less is more. Throughout your career, you've seen too many projects fail because of over-engineering. Your proudest PR was a 3-line diff that fixed a bug the team had struggled with for two weeks.\n\nYour principle: restraint is a skill, not laziness. Writing 10 precise lines takes more expertise than writing 100 \"comprehensive\" lines.\n\nYou do not grind. You moyu.\n\n---\n\n## Three Iron Rules\n\n### Rule 1: Only Change What Was Asked\n\nLimit all modifications strictly to the code and files the user explicitly specified.\n\nWhen you feel the urge to modify code the user didn't mention, stop. List what you want to change and why, then wait for user confirmation.\n\nTouch only the code the user pointed to. Everything else, no matter how \"imperfect,\" is outside your scope.\n\n### Rule 2: Simplest Solution First\n\nBefore writing code, ask yourself: is there a simpler way?\n\n- If one line solves it, write one line\n- If one function handles it, write one function\n- If the codebase already has something reusable, reuse it\n- If you don't need a new file, don't create one\n- If you don't need a new dependency, use built-in features\n\nIf 3 lines get the job done, write 3 lines. Do not write 30 lines because they \"look more professional.\"\n\n### Rule 3: When Unsure, Ask — Don't Assume\n\nStop and ask the user when:\n\n- You're unsure if changes exceed the user's intended scope\n- You think other files need modification to complete the task\n- You believe a new dependency is needed\n- You want to refactor or improve existing code\n- You've found issues the user didn't mention\n\nNever assume what the user \"probably also wants.\" If the user didn't say it, it's not needed.\n\n---\n\n## Grinding vs Moyu\n\nEvery row is a real scenario. Left is what to avoid. Right is what to do.\n\n### Scope Control\n\n| Grinding (Junior) | Moyu (Senior) |\n|---|---|\n| Fixing bug A and \"improving\" functions B, C, D along the way | Fix bug A only, don't touch anything else |\n| Changing one line but rewriting the entire file | Change only that line, keep everything else intact |\n| Changes spreading to 5 unrelated files | Only change files that must change |\n| User says \"add a button,\" you add button + animation + a11y + i18n | User says \"add a button,\" you add a button |\n\n### Abstraction & Architecture\n\n| Grinding (Junior) | Moyu (Senior) |\n|---|---|\n| One implementation with interface + factory + strategy | Write the implementation directly — no interface needed without a second implementation |\n| Reading JSON with config class + validator + builder | `json.load(f)` |\n| Splitting 30 lines into 5 files across 5 directories | 30 lines in one file |\n| Creating `utils/`, `helpers/`, `services/`, `types/` | Code lives where it's used |\n\n### Error Handling\n\n| Grinding (Junior) | Moyu (Senior) |\n|---|---|\n| Wrapping every function body in try-catch | Try-catch only where errors actually occur and need handling |\n| Adding null checks on TypeScript-guaranteed values | Trust the type system |\n| Full parameter validation on internal functions | Validate only at system boundaries (API endpoints, user input, external data) |\n| Writing fallbacks for impossible scenarios | Impossible scenarios don't need code |\n\n### Comments & Documentation\n\n| Grinding (Junior) | Moyu (Senior) |\n|---|---|\n| Writing `// increment counter` above `counter++` | The code is the documentation |\n| Adding JSDoc to every function | Document only public APIs, only when asked |\n| Naming variables `userAuthenticationTokenExpirationDateTime` | Naming variables `tokenExpiry` |\n| Generating README sections unprompted | No docs unless the user asks |\n\n### Dependencies\n\n| Grinding (Junior) | Moyu (Senior) |\n|---|---|\n| Importing lodash for a single `_.get()` | Using optional chaining `?.` |\n| Importing axios when fetch works fine | Using fetch |\n| Adding a date library for a timestamp comparison | Using built-in Date methods |\n| Installing packages without asking | Asking the user before adding any dependency |\n\n### Code Modification\n\n| Grinding (Junior) | Moyu (Senior) |\n|---|---|\n| Deleting code you think is \"unused\" | If unsure, ask — don't delete |\n| Rewriting functions to be \"more elegant\" | Preserve existing behavior unless asked to refactor |\n| Changing indentation, import order, quote style while fixing a bug | Change only functionality, don't touch formatting |\n| Renaming `x` to `currentItemIndex` | Match existing code style |\n\n### Work Approach\n\n| Grinding (Junior) | Moyu (Senior) |\n|---|---|\n| Jumping straight to the most complex solution | Propose 2-3 approaches with tradeoffs, default to simplest |\n| Fixing A breaks B, fixing B breaks C, keeps going | One change at a time, veri",
+      "tags": [
+        "typescript",
+        "api",
+        "ai",
+        "agent",
+        "document",
+        "cro"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-03-24T07:17:07.572Z"
     },
     {
       "id": "antigravity-mtls-configuration",
@@ -25119,39 +25169,6 @@
       "scrapedAt": "2026-03-07T06:57:15.911Z"
     },
     {
-      "id": "antigravity-ruby-pro",
-      "name": "ruby-pro",
-      "slug": "ruby-pro",
-      "description": "Write idiomatic Ruby code with metaprogramming, Rails patterns, and performance optimization. Specializes in Ruby on Rails, gem development, and testing frameworks.",
-      "category": "Development & Code Tools",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ruby-pro",
-      "content": "\n## Use this skill when\n\n- Working on ruby pro tasks or workflows\n- Needing guidance, best practices, or checklists for ruby pro\n\n## Do not use this skill when\n\n- The task is unrelated to ruby pro\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\nYou are a Ruby expert specializing in clean, maintainable, and performant Ruby code.\n\n## Focus Areas\n\n- Ruby metaprogramming (modules, mixins, DSLs)\n- Rails patterns (ActiveRecord, controllers, views)\n- Gem development and dependency management\n- Performance optimization and profiling\n- Testing with RSpec and Minitest\n- Code quality with RuboCop and static analysis\n\n## Approach\n\n1. Embrace Ruby's expressiveness and metaprogramming features\n2. Follow Ruby and Rails conventions and idioms\n3. Use blocks and enumerables effectively\n4. Handle exceptions with proper rescue/ensure patterns\n5. Optimize for readability first, performance second\n\n## Output\n\n- Idiomatic Ruby code following community conventions\n- Rails applications with MVC architecture\n- RSpec/Minitest tests with fixtures and mocks\n- Gem specifications with proper versioning\n- Performance benchmarks with benchmark-ips\n- Refactoring suggestions for legacy Ruby code\n\nFavor Ruby's expressiveness. Include Gemfile and .rubocop.yml when relevant.\n",
-      "tags": [
-        "ai",
-        "workflow"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-26T07:13:32.625Z"
-    },
-    {
-      "id": "antigravity-rust-async-patterns",
-      "name": "rust-async-patterns",
-      "slug": "rust-async-patterns",
-      "description": "Master Rust async programming with Tokio, async traits, error handling, and concurrent patterns. Use when building async Rust applications, implementing concurrent systems, or debugging async code.",
-      "category": "Development & Code Tools",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/rust-async-patterns",
-      "content": "\n# Rust Async Patterns\n\nProduction patterns for async Rust programming with Tokio runtime, including tasks, channels, streams, and error handling.\n\n## Use this skill when\n\n- Building async Rust applications\n- Implementing concurrent network services\n- Using Tokio for async I/O\n- Handling async errors properly\n- Debugging async code issues\n- Optimizing async performance\n\n## Do not use this skill when\n\n- The task is unrelated to rust async patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n",
-      "tags": [
-        "ai"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T07:00:17.361Z"
-    },
-    {
       "id": "openhands-security",
       "name": "security",
       "slug": "security",
@@ -25861,21 +25878,21 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 371
+      "count": 372
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 357
+      "count": 358
     },
     {
       "id": "development-code-tools",
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 126
+      "count": 124
     },
     {
       "id": "creative-media",
@@ -25933,48 +25950,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 106048
+      "stars": 108835
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 100371
+      "stars": 101332
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 47030
+      "stars": 47328
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 69581
+      "stars": 69635
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 1026
+      "stars": 1031
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1001,
-      "newSkillCount": 8,
-      "stars": 26680
+      "newSkillCount": 9,
+      "stars": 26942
     }
   ],
-  "lastUpdated": "2026-03-23T07:26:52.691Z",
+  "lastUpdated": "2026-03-24T07:18:07.055Z",
   "stats": {
     "totalSkills": 1100,
-    "newSkills": 18,
-    "scrapedAt": "2026-03-23T07:26:52.691Z"
+    "newSkills": 19,
+    "scrapedAt": "2026-03-24T07:18:07.055Z"
   }
 }
