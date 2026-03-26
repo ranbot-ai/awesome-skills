@@ -1,0 +1,23 @@
+{
+  "id": "antigravity-ios-debugger-agent",
+  "name": "ios-debugger-agent",
+  "slug": "ios-debugger-agent",
+  "description": "Debug the current iOS project on a booted simulator with XcodeBuildMCP.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ios-debugger-agent",
+  "content": "\n# iOS Debugger Agent\n\n## Overview\nUse XcodeBuildMCP to build and run the current project scheme on a booted iOS simulator, interact with the UI, and capture logs. Prefer the MCP tools for simulator control, logs, and view inspection.\n\n## When to Use\n\n- When the user asks to run, debug, or inspect an iOS app on a simulator.\n- When you need simulator UI interaction, screenshots, or runtime logs via XcodeBuildMCP.\n\n## Core Workflow\nFollow this sequence unless the user asks for a narrower action.\n\n### 1) Discover the booted simulator\n- Call `mcp__XcodeBuildMCP__list_sims` and select the simulator with state `Booted`.\n- If none are booted, ask the user to boot one (do not boot automatically unless asked).\n\n### 2) Set session defaults\n- Call `mcp__XcodeBuildMCP__session-set-defaults` with:\n  - `projectPath` or `workspacePath` (whichever the repo uses)\n  - `scheme` for the current app\n  - `simulatorId` from the booted device\n  - Optional: `configuration: \"Debug\"`, `useLatestOS: true`\n\n### 3) Build + run (when requested)\n- Call `mcp__XcodeBuildMCP__build_run_sim`.\n- **If the build fails**, check the error output and retry (optionally with `preferXcodebuild: true`) or escalate to the user before attempting any UI interaction.\n- **After a successful build**, verify the app launched by calling `mcp__XcodeBuildMCP__describe_ui` or `mcp__XcodeBuildMCP__screenshot` before proceeding to UI interaction.\n- If the app is already built and only launch is requested, use `mcp__XcodeBuildMCP__launch_app_sim`.\n- If bundle id is unknown:\n  1) `mcp__XcodeBuildMCP__get_sim_app_path`\n  2) `mcp__XcodeBuildMCP__get_app_bundle_id`\n\n## UI Interaction & Debugging\nUse these when asked to inspect or interact with the running app.\n\n- **Describe UI**: `mcp__XcodeBuildMCP__describe_ui` before tapping or swiping.\n- **Tap**: `mcp__XcodeBuildMCP__tap` (prefer `id` or `label`; use coordinates only if needed).\n- **Type**: `mcp__XcodeBuildMCP__type_text` after focusing a field.\n- **Gestures**: `mcp__XcodeBuildMCP__gesture` for common scrolls and edge swipes.\n- **Screenshot**: `mcp__XcodeBuildMCP__screenshot` for visual confirmation.\n\n## Logs & Console Output\n- Start logs: `mcp__XcodeBuildMCP__start_sim_log_cap` with the app bundle id.\n- Stop logs: `mcp__XcodeBuildMCP__stop_sim_log_cap` and summarize important lines.\n- For console output, set `captureConsole: true` and relaunch if required.\n\n## Troubleshooting\n- If build fails, ask whether to retry with `preferXcodebuild: true`.\n- If the wrong app launches, confirm the scheme and bundle id.\n- If UI elements are not hittable, re-run `describe_ui` after layout changes.\n",
+  "tags": [
+    "mcp",
+    "ai",
+    "agent",
+    "workflow",
+    "cro"
+  ],
+  "useCases": [
+    "When the user asks to run, debug, or inspect an iOS app on a simulator.",
+    "When you need simulator UI interaction, screenshots, or runtime logs via XcodeBuildMCP."
+  ],
+  "scrapedAt": "2026-03-26T07:24:40.425Z"
+}

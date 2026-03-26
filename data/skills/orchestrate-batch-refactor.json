@@ -1,0 +1,24 @@
+{
+  "id": "antigravity-orchestrate-batch-refactor",
+  "name": "orchestrate-batch-refactor",
+  "slug": "orchestrate-batch-refactor",
+  "description": "Plan and execute large refactors with dependency-aware work packets and parallel analysis.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/orchestrate-batch-refactor",
+  "content": "\n# Orchestrate Batch Refactor\n\n## Overview\n\nUse this skill to run high-throughput refactors safely.\nAnalyze scope in parallel, synthesize a single plan, then execute independent work packets with sub-agents.\n\n## When to Use\n\n- When a refactor spans many files or subsystems and needs clear work partitioning.\n- When you need dependency-aware planning before parallel implementation.\n\n## Inputs\n\n- Repo path and target scope (paths, modules, or feature area)\n- Goal type: refactor, rewrite, or hybrid\n- Constraints: behavior parity, API stability, deadlines, test requirements\n\n## When to Use Parallelization\n\n- Use this skill for medium/large scope touching many files or subsystems.\n- Skip multi-agent execution for tiny edits or highly coupled single-file work.\n\n## Core Workflow\n\n1. Define scope and success criteria.\n   - List target paths/modules and non-goals.\n   - State behavior constraints (for example: preserve external behavior).\n2. Run parallel analysis first.\n   - Split target scope into analysis lanes.\n   - Spawn `explorer` sub-agents in parallel to analyze each lane.\n   - Ask each agent for: intent map, coupling risks, candidate work packets, required validations.\n3. Build one dependency-aware plan.\n   - Merge explorer output into a single work graph.\n   - Create work packets with clear file ownership and validation commands.\n   - Sequence packets by dependency level; run only independent packets in parallel.\n4. Execute with worker agents.\n   - Spawn one `worker` per independent packet.\n   - Assign explicit ownership (files/responsibility).\n   - Instruct every worker that they are not alone in the codebase and must ignore unrelated edits.\n5. Integrate and verify.\n   - Review packet outputs, resolve overlaps, and run validation gates.\n   - Run targeted tests per packet, then broader suite for integrated scope.\n6. Report and close.\n   - Summarize packet outcomes, key refactors, conflicts resolved, and residual risks.\n\n## Work Packet Rules\n\n- One owner per file per execution wave.\n- No parallel edits on overlapping file sets.\n- Keep packet goals narrow and measurable.\n- Include explicit done criteria and required checks.\n- Prefer behavior-preserving refactors unless user explicitly requests behavior change.\n\n## Planning Contract\n\nEvery packet must include:\n\n1. Packet ID and objective.\n2. Owned files.\n3. Dependencies (none or packet IDs).\n4. Risks and invariants to preserve.\n5. Required checks.\n6. Integration notes for main thread.\n\nUse [`references/work-packet-template.md`](references/work-packet-template.md) for the exact shape.\n\n## Agent Prompting Contract\n\n- Use the prompt templates in [`references/agent-prompt-templates.md`](references/agent-prompt-templates.md).\n- Explorer prompts focus on analysis and decomposition.\n- Worker prompts focus on implementation and validation with strict ownership boundaries.\n\n## Safety Guardrails\n\n- Do not start worker execution before plan synthesis is complete.\n- Do not parallelize across unresolved dependencies.\n- Do not claim completion if any required packet check fails.\n- Stop and re-plan when packet boundaries cause repeated merge conflicts.\n\n## Validation Strategy\n\nRun in this order:\n\n1. Packet-level checks (fast and scoped).\n2. Cross-packet integration checks.\n3. Full project safety checks when scope is broad.\n\nPrefer fast feedback loops, but never skip required behavior checks.\n",
+  "tags": [
+    "api",
+    "ai",
+    "agent",
+    "workflow",
+    "template",
+    "cro"
+  ],
+  "useCases": [
+    "When a refactor spans many files or subsystems and needs clear work partitioning.",
+    "When you need dependency-aware planning before parallel implementation."
+  ],
+  "scrapedAt": "2026-03-26T07:26:28.891Z"
+}

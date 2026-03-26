@@ -65,7 +65,7 @@ Before reading code examples, determine which language the user is working in:
 | Ruby       | Yes (beta)  | No        | `BaseTool` + `tool_runner` in beta    |
 | cURL       | N/A         | N/A       | Raw HTTP, no SDK features             |
 | C#         | No          | No        | Official SDK                          |
-| PHP        | No          | No        | Official SDK                          |
+| PHP        | Yes (beta)  | No        | `BetaRunnableTool` + `toolRunner()`   |
 
 ---
 
