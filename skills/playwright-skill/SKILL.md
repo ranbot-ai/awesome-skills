@@ -3,7 +3,7 @@ name: playwright-skill
 description: IMPORTANT - Path Resolution: This skill can be installed in different locations (plugin system, manual installation, global, or project-specific). Before executing any commands, determine the skill di
 category: Document Processing
 source: antigravity
-tags: [javascript, node, api, claude, ai, llm, automation, workflow, design, document]
+tags: [javascript, node, api, claude, ai, agent, llm, automation, workflow, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/playwright-skill
 ---
 
@@ -13,9 +13,9 @@ This skill can be installed in different locations (plugin system, manual instal
 
 Common installation paths:
 
-- Plugin system: `~/.claude/plugins/marketplaces/playwright-skill/skills/playwright-skill`
-- Manual global: `~/.claude/skills/playwright-skill`
-- Project-specific: `<project>/.claude/skills/playwright-skill`
+- Plugin system: `<plugin-root>/skills/playwright-skill`
+- Manual global: `<agent-home>/skills/playwright-skill`
+- Project-specific: `<project>/.agent/skills/playwright-skill`
 
 # Playwright Browser Automation
 
@@ -163,4 +163,4 @@ const TARGET_URL = 'http://localhost:3001'; // Auto-detected
   await page.goto(`${TARGET_URL}/contact`);
 
   await page.fill('input[name="name"]', 'John Doe');
-  awa
+  await page.fill('input[name="email"
