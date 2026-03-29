@@ -1,0 +1,23 @@
+{
+  "id": "antigravity-phase-gated-debugging",
+  "name": "phase-gated-debugging",
+  "slug": "phase-gated-debugging",
+  "description": "Use when debugging any bug. Enforces a 5-phase protocol where code edits are blocked until root cause is confirmed. Prevents premature fix attempts.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/phase-gated-debugging",
+  "content": "\n# Phase-Gated Debugging\n\n## Overview\n\nAI coding agents see an error and immediately edit code. They guess at fixes, get it wrong, and spiral. This skill enforces a strict 5-phase protocol where you CANNOT edit source code until the root cause is identified and confirmed.\n\nBased on [claude-debug](https://github.com/krabat-l/claude-debug) (full plugin with PreToolUse hook enforcement).\n\n## When to Use\n\nUse this skill when:\n\n- a bug keeps getting \"fixed\" without resolving the underlying issue\n- you need to slow an agent down and force disciplined debugging before code edits\n- the failure is intermittent, a regression, performance-related, or otherwise hard to isolate\n- you want an explicit user confirmation checkpoint before any fix is applied\n\n## The Protocol\n\n### Phase 1: REPRODUCE\nRun the failing command/test. Capture the exact error. Run 2-3 times for consistency.\n- Do NOT read source code\n- Do NOT hypothesize\n- Do NOT edit any files\n\n### Phase 2: ISOLATE\nRead code. Add diagnostic logging marked `// DEBUG`. Re-run with diagnostics. Binary search to narrow down.\n- Only `// DEBUG` marked logging is allowed\n- Do NOT fix the bug even if you see it\n\n### Phase 3: ROOT CAUSE\nAnalyze WHY at the isolated location. Use \"5 Whys\" technique. Remove debug logging.\n\nState: \"This is my root cause analysis: [explanation]. Do you agree, or should I investigate further?\"\n\n**WAIT for user confirmation. Do NOT proceed without it.**\n\n### Phase 4: FIX\nRemove all `// DEBUG` lines. Apply minimal change addressing confirmed root cause.\n- Only edit files related to root cause\n- Do NOT refactor unrelated code\n\n### Phase 5: VERIFY\nRun original failing test — must pass. Run related tests. For intermittent bugs, run 5+ times.\nIf verification fails: root cause was wrong, go back to Phase 2.\n\n## Bug-Type Strategies\n\n| Type | Technique |\n|------|-----------|\n| Crash/Panic | Stack trace backward — trace the bad value to its source |\n| Wrong Output | Binary search — log midpoint, halve search space each iteration |\n| Intermittent | Compare passing vs failing run logs — find ordering divergence |\n| Regression | `git bisect` — find the offending commit |\n| Performance | Timing at stage boundaries — find the bottleneck |\n\n## Key Rules\n\n1. NEVER edit source code in phases 1-3 (except `// DEBUG` in phase 2)\n2. NEVER proceed past phase 3 without user confirmation\n3. ALWAYS reproduce before investigating\n4. ALWAYS verify after fixing\n",
+  "tags": [
+    "claude",
+    "ai",
+    "agent"
+  ],
+  "useCases": [
+    "a bug keeps getting \"fixed\" without resolving the underlying issue",
+    "you need to slow an agent down and force disciplined debugging before code edits",
+    "the failure is intermittent, a regression, performance-related, or otherwise hard to isolate",
+    "you want an explicit user confirmation checkpoint before any fix is applied"
+  ],
+  "scrapedAt": "2026-03-29T07:16:50.674Z"
+}
