@@ -1,6 +1,6 @@
 ---
 name: hugging-face-jobs
-description: Run any workload on fully managed Hugging Face infrastructure. No local setup required—jobs run on cloud CPUs, GPUs, or TPUs and can persist results to the Hugging Face Hub. 
+description: Run workloads on Hugging Face Jobs with managed CPUs, GPUs, TPUs, secrets, and Hub persistence. 
 category: Document Processing
 source: antigravity
 tags: [python, pdf, api, mcp, ai, llm, workflow, template, document, image]
@@ -68,12 +68,15 @@ Before starting any job, verify:
 
 **How to provide tokens:**
 ```python
-{
-    "secrets": {"HF_TOKEN": "$HF_TOKEN"}  # Recommended: automatic token
-}
+# hf_jobs MCP tool — $HF_TOKEN is auto-replaced with real token:
+{"secrets": {"HF_TOKEN": "$HF_TOKEN"}}
+
+# HfApi().run_uv_job() — MUST pass actual token:
+from huggingface_hub import get_token
+secrets={"HF_TOKEN": get_token()}
 ```
 
-**⚠️ CRITICAL:** The `$HF_TOKEN` placeholder is automatically replaced with your logged-in token. Never hardcode tokens in scripts.
+**⚠️ CRITICAL:** The `$HF_TOKEN` placeholder is ONLY auto-replaced by the `hf_jobs` MCP tool. When using `HfApi().run_uv_job()`, you MUST pass the real token via `get_token()`. Passing the literal string `"$HF_TOKEN"` results in a 9-character invalid token and 401 errors.
 
 ## Token Usage Guide
 
@@ -143,17 +146,4 @@ hf_jobs("uv", {
 **Security concerns:**
 - Token visible in code/logs
 - Must manually update if token rotates
-- Risk of token exposure
-
-#### Method 3: Environment Variable (Less Secure)
-
-```python
-hf_jobs("uv", {
-    "script": "your_script.py",
-    "env": {"HF_TOKEN": "hf_abc123..."}  # ⚠️ Less secure than secrets
-})
-```
-
-**Difference from secrets:**
-- `env` variables are visible in job logs
-- `secrets` are en
+- Risk of tok

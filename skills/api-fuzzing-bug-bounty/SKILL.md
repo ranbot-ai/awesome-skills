@@ -8,6 +8,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/api-
 ---
 
 
+> AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
+
 # API Fuzzing for Bug Bounty
 
 ## Purpose
@@ -252,13 +254,4 @@ query {
 http://target.com/graphql?query={user(name:"<script>alert(1)</script>"){id}}
 
 # URL-encoded XSS
-http://target.com/example?id=%C/script%E%Cscript%Ealert('XSS')%C/script%E
-```
-
-### GraphQL Tools
-
-| Tool | Purpose |
-|------|---------|
-| GraphCrawler | Schema discovery |
-| graphw00f | Fingerprinting |
-| cl
+http://target.com/example?id=%C/script%E%Cscript%Ealert('XSS')%C

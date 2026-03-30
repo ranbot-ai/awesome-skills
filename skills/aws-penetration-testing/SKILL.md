@@ -8,6 +8,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-
 ---
 
 
+> AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
+
 # AWS Penetration Testing
 
 ## Purpose
@@ -204,11 +206,4 @@ aws lambda update-function-code --function-name target_function \
 ```bash
 # Using bucket_finder
 ./bucket_finder.rb wordlist.txt
-./bucket_finder.rb --download --region us-east-1 wordlist.txt
-
-# Common bucket URL patterns
-https://{bucket-name}.s3.amazonaws.com
-https://s3.amazonaws.com/{bucket-name}
-```
-
-### Bucket Enumeration
+./bucket_finder.rb --download --region us-east-1 wordlis

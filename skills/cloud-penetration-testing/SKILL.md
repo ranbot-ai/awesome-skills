@@ -8,6 +8,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/clou
 ---
 
 
+> AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
+
 <!-- security-allowlist: curl-pipe-bash -->
 
 # Cloud Penetration Testing
@@ -192,7 +194,4 @@ Add-MsolRoleMember -RoleObjectId $role.ObjectId -RoleMemberType ServicePrincipal
 
 # Login as service principal
 $cred = Get-Credential  # AppID as username, secret as password
-Connect-AzAccount -Credential $cred -Tenant "tenant-id" -ServicePrincipal
-
-# Create new admin user via CLI
-az ad user create --display-name <name> --passwor
+Connect-AzAcc

@@ -1,6 +1,6 @@
 ---
 name: hugging-face-model-trainer
-description: Train language models using TRL (Transformer Reinforcement Learning) on fully managed Hugging Face infrastructure. No local GPU setup required—models train on cloud GPUs and results are automaticall
+description: Train or fine-tune TRL language models on Hugging Face Jobs, including SFT, DPO, GRPO, and GGUF export. 
 category: Document Processing
 source: antigravity
 tags: [python, mcp, claude, ai, llm, gpt, workflow, template, document, image]
@@ -62,11 +62,12 @@ When assisting with training jobs:
 
 4. **Use example scripts as templates** - Reference `scripts/train_sft_example.py`, `scripts/train_dpo_example.py`, etc. as starting points.
 
-## Local Script Dependencies
+## Local Script Execution
 
-To run scripts locally (like `estimate_cost.py`), install dependencies:
+Repository scripts use PEP 723 inline dependencies. Run them with `uv run`:
 ```bash
-pip install -r requirements.txt
+uv run scripts/estimate_cost.py --help
+uv run scripts/dataset_inspector.py --help
 ```
 
 ## Prerequisites Checklist
@@ -104,4 +105,4 @@ Before starting any training job, verify:
 4. **Wait for user** to request status checks - don't poll automatically
 
 ### Ground Rules
-- **Jobs run in background** - Submission returns immedi
+- **J

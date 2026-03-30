@@ -1,6 +1,6 @@
 ---
 name: hugging-face-dataset-viewer
-description: Use this skill for Hugging Face Dataset Viewer API workflows that fetch subset/split metadata, paginate rows, search text, apply filters, download parquet URLs, and read size or statistics. 
+description: Query Hugging Face datasets through the Dataset Viewer API for splits, rows, search, filters, and parquet links. 
 category: AI & Agents
 source: antigravity
 tags: [api, ai, workflow, cro]
@@ -9,6 +9,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugg
 
 
 # Hugging Face Dataset Viewer
+
+## When to Use
+
+Use this skill when you need read-only exploration of a Hugging Face dataset through the Dataset Viewer API.
 
 Use this skill to execute read-only Dataset Viewer API calls for dataset exploration and extraction.
 
@@ -124,7 +128,3 @@ npx -y @huggingface/hub upload datasets/<namespace>/<repo> ./local/parquet-folde
 ```
 
 After upload, call `/parquet` to discover `<config>/<split>/<shard>` values for querying with `@~parquet`.
-
-
-## When to Use
-Use this skill when tackling tasks related to its primary domain or functionality as described above.

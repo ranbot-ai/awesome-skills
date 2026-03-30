@@ -9,6 +9,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugg
 
 
 # Overview
+
+## When to Use
+
+Use this skill when a user wants to publish, link, index, or manage research papers on the Hugging Face Hub.
 This skill provides comprehensive tools for AI engineers and researchers to publish, manage, and link research papers on the Hugging Face Hub. It streamlines the workflow from paper creation to publication, including integration with arXiv, model/dataset linking, and authorship management.
 
 ## Integration with HF Ecosystem
@@ -22,6 +26,9 @@ This skill provides comprehensive tools for AI engineers and researchers to publ
 1.0.0
 
 # Dependencies
+The included script uses PEP 723 inline dependencies. Prefer `uv run` over
+manual environment setup.
+
 - huggingface_hub>=0.26.0
 - pyyaml>=6.0.3
 - requests>=2.32.5
@@ -60,14 +67,14 @@ This skill provides comprehensive tools for AI engineers and researchers to publ
 The skill includes Python scripts in `scripts/` for paper publishing operations.
 
 ### Prerequisites
-- Install dependencies: `uv add huggingface_hub pyyaml requests markdown python-dotenv`
+- Run scripts with `uv run` (dependencies are resolved from the script header)
 - Set `HF_TOKEN` environment variable with Write-access token
-- Activate virtual environment: `source .venv/bin/activate`
 
 > **All paths are relative to the directory containing this SKILL.md
 file.**
 > Before running any script, first `cd` to that directory or use the full
 path.
+
 
 ### Method 1: Index Paper from arXiv
 
@@ -161,11 +168,4 @@ uv run scripts/paper_manager.py check-authorship \
 
 Control which verified papers appear on your public profile.
 
-**List Your Papers:**
-```bash
-uv run scripts/paper_manager.py list-my-papers
-```
-
-**Toggle Visibility:**
-```bash
-uv run scripts/paper_manager.py toggle-visibility \
+**Lis

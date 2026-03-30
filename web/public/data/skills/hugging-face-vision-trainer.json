@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-hugging-face-vision-trainer",
+  "name": "hugging-face-vision-trainer",
+  "slug": "hugging-face-vision-trainer",
+  "description": "Train or fine-tune vision models on Hugging Face Jobs for detection, classification, and SAM or SAM2 segmentation.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugging-face-vision-trainer",
+  "content": "\n# Vision Model Training on Hugging Face Jobs\n\nTrain object detection, image classification, and SAM/SAM2 segmentation models on managed cloud GPUs. No local GPU setup required—results are automatically saved to the Hugging Face Hub.\n\n## When to Use This Skill\n\nUse this skill when users want to:\n- Fine-tune object detection models (D-FINE, RT-DETR v2, DETR, YOLOS) on cloud GPUs or local\n- Fine-tune image classification models (timm: MobileNetV3, MobileViT, ResNet, ViT/DINOv3, or any Transformers classifier) on cloud GPUs or local\n- Fine-tune SAM or SAM2 models for segmentation / image matting using bbox or point prompts\n- Train bounding-box detectors on custom datasets\n- Train image classifiers on custom datasets\n- Train segmentation models on custom mask datasets with prompts\n- Run vision training jobs on Hugging Face Jobs infrastructure\n- Ensure trained vision models are permanently saved to the Hub\n\n## Related Skills\n\n- **`hugging-face-jobs`** — General HF Jobs infrastructure: token authentication, hardware flavors, timeout management, cost estimation, secrets, environment variables, scheduled jobs, and result persistence. **Refer to the Jobs skill for any non-training-specific Jobs questions** (e.g., \"how do secrets work?\", \"what hardware is available?\", \"how do I pass tokens?\").\n- **`hugging-face-model-trainer`** — TRL-based language model training (SFT, DPO, GRPO). Use that skill for text/language model fine-tuning.\n\n## Local Script Execution\n\nHelper scripts use PEP 723 inline dependencies. Run them with `uv run`:\n```bash\nuv run scripts/dataset_inspector.py --dataset username/dataset-name --split train\nuv run scripts/estimate_cost.py --help\n```\n\n## Prerequisites Checklist\n\nBefore starting any training job, verify:\n\n### Account & Authentication\n- Hugging Face Account with [Pro](https://hf.co/pro), [Team](https://hf.co/enterprise), or [Enterprise](https://hf.co/enterprise) plan (Jobs require paid plan)\n- Authenticated login: Check with `hf_whoami()` (tool) or `hf auth whoami` (terminal)\n- Token has **write** permissions\n- **MUST pass token in job secrets** — see directive #3 below for syntax (MCP tool vs Python API)\n\n### Dataset Requirements — Object Detection\n- Dataset must exist on Hub\n- Annotations must use the `objects` column with `bbox`, `category` (and optionally `area`) sub-fields\n- Bboxes can be in **xywh (COCO)** or **xyxy (Pascal VOC)** format — auto-detected and converted\n- Categories can be **integers or strings** — strings are auto-remapped to integer IDs\n- `image_id` column is **optional** — generated automatically if missing\n- **ALWAYS validate unknown datasets** before GPU training (see Dataset Validation section)\n\n### Dataset Requirements — Image Classification\n- Dataset must exist on Hub\n- Must have an **`image` column** (PIL images) and a **`label` column** (integer class IDs or strings)\n- The label column can be `ClassLabel` type (with names) or plain integers/strings — strings are auto-remapped\n- Common column names auto-detected: `label`, `labels`, `class`, `fine_label`\n- **ALWAYS validate unknown datasets** before GPU training (see Dataset Validation section)\n\n### Dataset Requirements — SAM/SAM2 Segmentation\n- Dataset must exist on Hub\n- Must have an **`image` column** (PIL images) and a **`mask` column** (binary ground-truth segmentation mask)\n- Must have a **prompt** — either:\n  - A **`prompt` column** with JSON containing `{\"bbox\": [x0,y0,x1,y1]}` or `{\"point\": [x,y]}`\n  - OR a dedicated **`bbox`** column with `[x0,y0,x1,y1]` values\n  - OR a dedicated **`point`** column with `[x,y]` or `[[x,y],...]` values\n- Bboxes should be in **xyxy** format (absolute pixel coordinates)\n- Example dataset: `merve/MicroMat-mini` (image matting with bbox prompts)\n- **ALWAYS validate unknown datasets** before GPU training (see Dataset Validation section)\n\n### Critical Settings\n- **Timeout must exceed expected training time** — Default 30min is TOO SHORT. See directive #6 for recommended values.\n- **Hub push must be enabled** — `push_to_hub=True`, `hub_model_id=\"username/model-name\"`, token in `secrets`\n\n## Dataset Validation\n\n**Validate dataset format BEFORE launching GPU training to prevent the #1 cause of training failures: format mismatches.**\n\n**ALWAYS validate for** unknown/custom datasets or any dataset you haven't trained with before. **Skip for** `cppe-5` (the default in the training script).\n\n### Running the Inspector\n\n**Option 1: Via HF Jobs (recommended — avoids local SSL/dependency issues):**\n```python\nhf_jobs(\"uv\", {\n    \"script\": \"path/to/dataset_inspector.py\",\n    \"script_args\": [\"--dataset\", \"username/dataset-name\", \"--split\", \"train\"]\n})\n```\n\n**Option 2: Locally:**\n```bash\nuv run scripts/dataset_inspector.py --dataset username/dataset-name --split train\n```\n\n**Option 3: Via `HfApi().run_uv_job()` (if hf_jobs MCP unavailable):**\n```python\nfrom huggingface_hub import HfApi\napi = HfApi()\napi.run_uv_job(\n    script=\"scripts/dataset_inspector.py\",\n    script_args=[\"--dataset\", \"usern",
+  "tags": [
+    "python",
+    "api",
+    "mcp",
+    "ai",
+    "workflow",
+    "template",
+    "document",
+    "image",
+    "rag",
+    "cro"
+  ],
+  "useCases": [
+    "Fine-tune object detection models (D-FINE, RT-DETR v2, DETR, YOLOS) on cloud GPUs or local",
+    "Fine-tune image classification models (timm: MobileNetV3, MobileViT, ResNet, ViT/DINOv3, or any Transformers classifier) on cloud GPUs or local",
+    "Fine-tune SAM or SAM2 models for segmentation / image matting using bbox or point prompts",
+    "Train bounding-box detectors on custom datasets",
+    "Train image classifiers on custom datasets"
+  ],
+  "scrapedAt": "2026-03-30T07:58:58.750Z"
+}

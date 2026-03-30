@@ -8,6 +8,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/idor
 ---
 
 
+> AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
+
 # IDOR Vulnerability Testing
 
 ## Purpose
@@ -186,12 +188,4 @@ Payload: Numbers 1-1000
 ?orderId=456
 ?documentId=789
 ?file=report_123.pdf
-?account=user@email.com
-```
-
-## Quick Reference
-
-### IDOR Testing Checklist
-
-| Test | Method | Indicator of Vulnerability |
-|------|--------|-------------
+?account=us

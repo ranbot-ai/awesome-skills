@@ -8,6 +8,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/file
 ---
 
 
+> AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
+
 # File Path Traversal Testing
 
 ## Purpose
@@ -221,11 +223,4 @@ High-value files to target:
 /etc/nginx/nginx.conf
 /etc/apache2/sites-enabled/000-default.conf
 /var/log/apache2/access.log
-/var/log/apache2/error.log
-/var/log/nginx/access.log
-
-# Application files
-/var/www/html/config.php
-/var/www/html/wp-config.php
-/var/www/html/.htaccess
-/var
+/var/log/apa

@@ -8,6 +8,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/burp
 ---
 
 
+> AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
+
 # Burp Suite Web Application Testing
 
 ## Purpose
@@ -173,9 +175,3 @@ Test 2: productId=999  → Not Found response
 Test 3: productId='    → Error/exception response
 Test 4: productId=1 OR 1=1 → SQL injection test
 ```
-
-#### Analyze Responses
-Look for indicators of vulnerabilities:
-
-- Error messages revealing stack traces
-- Framework/version information discl

