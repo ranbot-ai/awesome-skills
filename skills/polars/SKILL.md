@@ -3,12 +3,18 @@ name: polars
 description: Fast in-memory DataFrame library for datasets that fit in RAM. Use when pandas is too slow but data still fits in memory. Lazy evaluation, parallel execution, Apache Arrow backend. Best for 1-100GB da
 category: Document Processing
 source: antigravity
-tags: [python, api, ai, document, azure, rag, cro]
+tags: [python, api, ai, workflow, document, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/polars
 ---
 
 
 # Polars
+
+## When to Use
+
+- You need a faster in-memory DataFrame workflow than pandas for data that still fits in RAM.
+- You are building ETL, analytics, or transformation pipelines that benefit from lazy evaluation and parallel execution.
+- You want expression-based tabular operations on top of Apache Arrow semantics.
 
 ## Overview
 
@@ -215,19 +221,4 @@ Polars supports reading and writing:
 ```python
 # Eager
 df = pl.read_csv("file.csv")
-df.write_csv("output.csv")
-
-# Lazy (preferred for large files)
-lf = pl.scan_csv("file.csv")
-result = lf.filter(...).select(...).collect()
-```
-
-**Parquet (recommended for performance):**
-```python
-df = pl.read_parquet("file.parquet")
-df.write_parquet("output.parquet")
-```
-
-**JSON:**
-```python
-df = pl.read_json("file
+df.

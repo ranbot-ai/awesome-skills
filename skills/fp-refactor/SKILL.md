@@ -12,6 +12,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-r
 
 This skill provides comprehensive patterns and strategies for migrating existing imperative TypeScript code to fp-ts functional programming patterns.
 
+## When to Use
+
+- You are refactoring an existing imperative TypeScript codebase toward fp-ts patterns.
+- The task involves converting `try/catch`, null checks, callbacks, DI, or loops into functional equivalents.
+- You need migration guidance and tradeoffs, not just isolated fp-ts examples.
+
 ## Table of Contents
 
 1. [Converting try-catch to Either/TaskEither](#1-converting-try-catch-to-eithertaskeither)
@@ -162,13 +168,4 @@ async function fetchUserPosts(userId: string): Promise<Post[]> {
   try {
     const response = await fetch(`/api/users/${userId}/posts`);
     if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`);
-    }
-    return await response.json();
-  } catch (error) {
-    throw new Error(`Failed to fetch posts: ${error}`);
-  }
-}
-
-// Complex orchestration with try-catch
-async function getUserWithPosts(id: string): Promise<{ user: User; posts: Pos
+   

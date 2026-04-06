@@ -16,6 +16,12 @@ This skill enforces Sentry's blog writing standards across every post — whethe
 
 What follows are the core principles to internalize and apply to every piece of content.
 
+## When to Use
+
+- You need to draft or edit a Sentry blog post.
+- The task involves technical storytelling, product announcements, or engineering deep-dives in Sentry's blog voice.
+- You want blog content that is opinionated, specific, and technically credible rather than generic marketing copy.
+
 ## The Sentry Voice
 
 **We sound like:** A senior developer at a conference afterparty explaining something they're genuinely excited about — smart, specific, a little irreverent, deeply knowledgeable.
@@ -95,12 +101,4 @@ The title is the highest-leverage sentence in the post. It must stop a developer
 
 ## The Closing
 
-End with something useful — a link to docs, a way to try it, a call to give feedback. Never end with generic hype ("We can't wait to see what you build!") or recaps of what you just said.
-
-## Post Types
-
-Here's the quick map by post type:
-
-| Type | Goal | Byline |
-|------|------|--------|
-| Engineering Deep Dive | Explain a technical system/decisi
+End with something useful — a link to docs, a way t

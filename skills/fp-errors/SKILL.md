@@ -3,7 +3,7 @@ name: fp-errors
 description: Stop throwing everywhere - handle errors as values using Either and TaskEither for cleaner, more predictable code 
 category: Business & Marketing
 source: antigravity
-tags: [typescript, api, ai, prisma]
+tags: [typescript, api, ai, prisma, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-errors
 ---
 
@@ -13,6 +13,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-e
 This skill teaches you how to handle errors without try/catch spaghetti. No academic jargon - just practical patterns for real problems.
 
 The core idea: **Errors are just data**. Instead of throwing them into the void and hoping someone catches them, return them as values that TypeScript can track.
+
+## When to Use
+
+- You need to replace exception-heavy code with `Either` or `TaskEither`.
+- The task involves validation, domain errors, or clearer error contracts in TypeScript.
+- You want pragmatic fp-ts error-handling guidance for real application code.
 
 ---
 
@@ -224,10 +230,4 @@ function processUserOrder(userId: string, productId: string): Result | null {
 ### After: Clean Chain with Either
 
 ```typescript
-import * as E from 'fp-ts/Either'
-import { pipe } from 'fp-ts/function'
-
-// Each function returns Either<Error, T>
-const getUser = (id: string): E.Either<string, User> => { ... }
-const getProduct = (id: string): E.Either<string, Product> => { ... }
-const createOrder = (user: User, product
+import * as E from 'fp-ts/Eithe

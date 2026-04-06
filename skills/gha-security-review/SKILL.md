@@ -19,6 +19,12 @@ Find exploitable vulnerabilities in GitHub Actions workflows. Every finding MUST
 
 This skill encodes attack patterns from real GitHub Actions exploits — not generic CI/CD theory.
 
+## When to Use
+
+- You are reviewing GitHub Actions workflows for exploitable security issues.
+- The task requires tracing a concrete attack path from an external attacker to workflow execution or secret exposure.
+- You need a security review of workflow files, composite actions, or workflow-related scripts with evidence-based findings only.
+
 ## Scope
 
 Review the workflows provided (file, diff, or repo). Research the codebase as needed to trace complete attack paths before reporting.
@@ -106,15 +112,4 @@ Are `${{ }}` expressions used inside `run:` blocks in externally-triggerable wor
 Does an `issue_comment`-triggered workflow execute commands without authorization?
 - Is there an `author_association` check?
 - Can any GitHub user trigger the command?
-- Does the command handler also use injectable expressions?
-
-### Check 4: Credential Escalation
-
-Are elevated credentials (PATs, deploy keys) accessible to untrusted code?
-- What's the blast radius of each secret?
-- Could a compromised workflow steal long-lived tokens?
-
-### Check 5: Config File Poisoning
-
-Does the workflow load configuration from PR-supplied files?
-- AI agent instructions: `CLA
+- Does the command handler also use injectable expres

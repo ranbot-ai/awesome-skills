@@ -3,7 +3,7 @@ name: gmail-automation
 description: Lightweight Gmail integration with standalone OAuth authentication. No MCP server required. 
 category: AI & Agents
 source: antigravity
-tags: [python, api, mcp, ai, automation]
+tags: [python, api, mcp, ai, automation, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gmail-automation
 ---
 
@@ -13,6 +13,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gmai
 Lightweight Gmail integration with standalone OAuth authentication. No MCP server required.
 
 > **⚠️ Requires Google Workspace account.** Personal Gmail accounts are not supported.
+
+## When to Use
+
+- You need to search, read, or send Gmail messages from the command line without an MCP server.
+- You are automating inbox workflows for a Google Workspace account.
+- You want a lightweight Gmail integration backed by standalone OAuth scripts.
 
 ## First-Time Setup
 

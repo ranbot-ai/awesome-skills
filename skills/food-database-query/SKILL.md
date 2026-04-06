@@ -17,6 +17,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/food
 
 ---
 
+## When to Use
+
+- 需要查询食物营养成分、比较食物差异或做营养计算时使用。
+- 任务涉及食物数据库检索、食物推荐、份量换算或分类筛选。
+- 需要基于结构化食物数据生成分析结果而不是自由文本建议时使用。
+
 ## 技能概述
 
 本技能提供全面的营养食物数据库查询功能,支持食物营养信息查询、比较、推荐和自动营养计算。
@@ -332,15 +338,4 @@ def parse_food_input(text):
       "description": "1个大号鸡蛋"
     },
     {
-      "amount": 1,
-      "unit": "杯",
-      "weight_g": 240,
-      "description": "1杯牛奶"
-    }
-  ]
-}
-```
-
-#### 4.3 营养计算
-
-**计算
+      "amount":

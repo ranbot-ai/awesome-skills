@@ -14,6 +14,12 @@ Stop writing nested try/catch blocks. Stop losing error context. Start building 
 
 **TaskEither is simply an async operation that tracks success or failure.** That's it. No fancy terminology needed.
 
+## When to Use
+
+- You need async error handling in TypeScript with `TaskEither`.
+- The task involves wrapping Promises, composing API calls, or replacing nested `try/catch` flows.
+- You want practical fp-ts async patterns instead of academic explanations.
+
 ```typescript
 // TaskEither<Error, User> means:
 // "An async operation that either fails with Error or succeeds with User"
@@ -187,17 +193,4 @@ Use `map` when your transformation is synchronous and can't fail:
 ```typescript
 pipe(
   fetchUser(userId),
-  TE.map(user => user.name.toUpperCase())  // Just transforms the value
-)
-```
-
-Use `chain` (or `flatMap`) when your transformation is async or can fail:
-
-```typescript
-pipe(
-  fetchUser(userId),
-  TE.chain(user => fetchOrders(user.id))  // Returns another TaskEither
-)
-```
-
-### Building Context with Do Notation
+  TE.map(user => user.name.toUpperCase())  // Just tra

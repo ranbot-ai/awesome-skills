@@ -12,6 +12,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/n8n-
 
 Master guide for using n8n-mcp MCP server tools to build workflows.
 
+## When to Use
+
+- You are using the `n8n-mcp` toolset to discover nodes, validate configs, or manage workflows.
+- The task involves choosing the right MCP tool or understanding its expected parameters and usage pattern.
+- You need guidance on workflow creation or editing through n8n MCP rather than through the n8n UI alone.
+
 ---
 
 ## Tool Categories
@@ -186,19 +192,4 @@ get_node({nodeType: "nodes-base.slack", detail: "standard"})
 - `minimal` - Only required fields (fast, permissive)
 - `runtime` - Values + types (recommended for pre-deployment)
 - `ai-friendly` - Reduce false positives (for AI configuration)
-- `strict` - Maximum validation (for production)
-
-```javascript
-// WRONG - Uses default profile
-validate_node({nodeType, config})
-
-// CORRECT - Explicit profile
-validate_node({nodeType, config, profile: "runtime"})
-```
-
-### Mistake 4: Ignoring Auto-Sanitization
-
-**What happens**: ALL nodes sanitized on ANY workflow update
-
-**Auto-fixes**:
-- Binary operators
+- `strict` - Maximum validation 

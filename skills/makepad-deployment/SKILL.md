@@ -12,6 +12,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/make
 
 This skill covers packaging Makepad applications for all supported platforms.
 
+## When to Use
+
+- You need to package, distribute, or automate deployment of a Makepad application.
+- The task involves desktop installers, APK/IPA builds, WebAssembly output, or CI-based release artifacts.
+- You need guidance on `cargo-packager`, `cargo-makepad`, or GitHub Actions packaging flows for Makepad.
+
 ## Quick Navigation
 
 | Platform | Tool | Output |
@@ -177,22 +183,3 @@ appdata_paths = [
     "$LOCALAPPDATA/$PRODUCTNAME",
 ]
 ```
-
----
-
-## Mobile Packaging
-
-Mobile platforms use `cargo-makepad` for building and packaging.
-
-### Install cargo-makepad
-
-```bash
-cargo install --force --git https://github.com/makepad/makepad.git \
-    --branch dev cargo-makepad
-```
-
-### Android
-
-```bash
-# Install Android toolchain
-cargo makepad android install-

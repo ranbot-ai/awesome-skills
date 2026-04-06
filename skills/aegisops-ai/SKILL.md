@@ -1,6 +1,6 @@
 ---
 name: aegisops-ai
-description: Autonomous DevSecOps & FinOps Guardrails.  Orchestrates Gemini 3 Flash to audit Linux Kernel patches, Terraform cost drifts, and K8s compliance. 
+description: Autonomous DevSecOps & FinOps Guardrails. Orchestrates Gemini 3 Flash to audit Linux Kernel patches, Terraform cost drifts, and K8s compliance. 
 category: AI & Agents
 source: antigravity
 tags: [python, api, ai, agent, document, security, kubernetes, rag, cro]

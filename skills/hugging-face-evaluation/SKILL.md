@@ -14,6 +14,12 @@ This skill provides tools to add structured evaluation results to Hugging Face m
 - Importing benchmark scores from Artificial Analysis
 - Running custom model evaluations with vLLM or accelerate backends (lighteval/inspect-ai)
 
+## When to Use
+
+- You need to add structured evaluation results to a Hugging Face model card.
+- You want to import benchmark data or run custom evaluations with vLLM, lighteval, or inspect-ai.
+- You are preparing leaderboard-compatible `model-index` metadata for a model release.
+
 ## Integration with HF Ecosystem
 - **Model Cards**: Updates model-index metadata for leaderboard integration
 - **Artificial Analysis**: Direct API integration for benchmark imports
@@ -116,9 +122,4 @@ Key workflow (matches CLI help):
 - **UV Integration**: Seamlessly run Python scripts with ephemeral dependencies on HF infrastructure
 - **Zero-Config**: No Dockerfiles or Space management required
 - **Hardware Selection**: Configure CPU or GPU hardware for the evaluation job
-- **Secure Execution**: Handles API tokens safely via secrets passed through the CLI
-
-## 5. Run Custom Model Evaluations with vLLM (NEW)
-
-⚠️ **Important:** This approach is only possible on devices with `uv` installed and sufficient GPU memory.
-**Benefits:** No need to use `hf_jobs()` MCP tool, can run sc
+- **Secure Execution**: H

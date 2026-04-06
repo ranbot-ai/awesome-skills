@@ -10,6 +10,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/qisk
 
 # Qiskit
 
+## When to Use
+
+- You are building or optimizing quantum circuits with Qiskit for simulators or real hardware.
+- You need IBM Quantum-style tooling for transpilation, execution, visualization, or algorithm libraries.
+- You want guidance on moving from a simple circuit prototype to backend-aware execution.
+
 ## Overview
 
 Qiskit is the world's most popular open-source quantum computing framework with 13M+ downloads. Build quantum circuits, optimize for hardware, execute on simulators or real quantum computers, and analyze results. Supports IBM Quantum (100+ qubit systems), IonQ, Amazon Braket, and other providers.
@@ -159,9 +165,3 @@ Topics covered:
 ## Workflow Decision Guide
 
 **If you need to:**
-
-- Install Qiskit or set up IBM Quantum account → `references/setup.md`
-- Build a new quantum circuit → `references/circuits.md`
-- Understand gates and circuit operations → `references/circuits.md`
-- Run circuits and get measurements → `references/primitives.md`
-- Compute expectation values → `references/p

@@ -3,7 +3,7 @@ name: makepad-event-action
 description: CRITICAL: Use for Makepad event and action handling. Triggers on: makepad event, makepad action, Event enum, ActionTrait, handle_event, MouseDown, KeyDown, TouchUpdate, Hit, FingerDown, post_action, m
 category: Document Processing
 source: antigravity
-tags: [claude, ai, document, cro]
+tags: [claude, ai, design, document, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/makepad-event-action
 ---
 
@@ -18,6 +18,12 @@ You are an expert at Makepad event and action handling. Help users by:
 - **Handling events**: Mouse, keyboard, touch, lifecycle events
 - **Creating actions**: Widget-to-parent communication
 - **Event flow**: Understanding event propagation
+
+## When to Use
+
+- You need to handle input, lifecycle, or UI interaction events in Makepad.
+- The task involves `handle_event`, `Event` variants, `Hit` processing, or widget action propagation.
+- You need to design or debug Makepad event/action flow between widgets and parents.
 
 ## Documentation
 
@@ -205,15 +211,4 @@ impl ButtonRef {
 
 impl TextInputRef {
     fn changed(&self, actions: &ActionsBuf) -> Option<String>;
-    fn returned(&self, actions: &ActionsBuf) -> Option<String>;
-}
-```
-
-## Event Flow
-
-1. **Event arrives** from platform layer
-2. **Root widget** receives event first
-3. **Propagates down** to children via `handle_event`
-4. **Widgets emit actions** via `cx.action()`
-5. **Parent captures actions** via `cx.capture_actions()`
-6. **App handles*
+    fn returned(&self, actions: &ActionsBuf) -> Option<String>

@@ -3,7 +3,7 @@ name: acceptance-orchestrator
 description: Use when a coding task should be driven end-to-end from issue intake through implementation, review, deployment, and acceptance verification with minimal human re-intervention. 
 category: AI & Agents
 source: antigravity
-tags: [api, ai, workflow, security]
+tags: [api, ai, workflow, security, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/acceptance-orchestrator
 ---
 
@@ -15,6 +15,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/acce
 Orchestrate coding work as a state machine that ends only when acceptance criteria are verified with evidence or the task is explicitly escalated.
 
 Core rule: **do not optimize for "code changed"; optimize for "DoD proven".**
+
+## When to Use
+
+- The task already has an issue or clear acceptance criteria and should run end-to-end with minimal human re-intervention.
+- You need structured handoff across implementation, review, deployment, and final verification.
+- You want explicit stop conditions and escalation instead of silent partial completion.
 
 ## Required Sub-Skills
 

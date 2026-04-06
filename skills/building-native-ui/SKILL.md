@@ -10,6 +10,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/buil
 
 # Expo UI Guidelines
 
+## When to Use
+
+- You are building a native-feeling Expo Router application and need guidance on navigation, controls, effects, or platform-specific UI.
+- You need to decide whether Expo Go is sufficient or a custom native build is actually required.
+- The task involves modern Expo UI patterns across animations, tabs, headers, storage, media, or visual effects.
+
 ## References
 
 Consult these resources as needed:
@@ -105,8 +111,4 @@ See `./references/route-structure.md` for detailed route conventions.
 - Use expo-haptics conditionally on iOS to make more delightful experiences
 - Use views with built-in haptics like `<Switch />` from React Native and `@react-native-community/datetimepicker`
 - When a route belongs to a Stack, its first child should almost always be a ScrollView with `contentInsetAdjustmentBehavior="automatic"` set
-- When adding a `ScrollView` to the page it should almost always be the first component inside the route component
-- Prefer `headerSearchBarOptions` in Stack.Screen options to add a search bar
-- Use the `<Text selectable />` prop on text containing data that could be copied
-- Consider formatting large numbers like 1.4M or 38k
-- Never use intrinsic elements like 'img' or 'd
+- When add

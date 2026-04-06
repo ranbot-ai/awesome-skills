@@ -12,6 +12,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/heal
 
 分析一段时间内健康数据的趋势和模式，识别变化、相关性，并提供数据驱动的健康洞察。
 
+## When to Use
+
+- 需要分析一段时间内健康数据的趋势、相关性或显著变化时使用。
+- 任务涉及体重、症状、用药、化验、情绪或睡眠等多维度随时间变化。
+- 用户询问“最近健康状况有什么变化”或需要趋势报告时使用。
+
 ## 核心功能
 
 ### 1. 多维度趋势分析
@@ -328,6 +334,3 @@ function earlyWarnings(trends) {
 |--------|---------|---------|
 | 个人档案 | `data/profile.json` | 体重、身高、BMI历史 |
 | 症状记录 | `data/symptoms/**/*.json` | 症状名称、严重程度、持续时间 |
-| 情绪记录 | `data/mood/**/*.json` | 情绪评分、睡眠质量、压力水平 |
-| 饮食记录 | `data/diet/**/*.json` | 餐次、食物、卡路里、营养素 |
-| 用药日志 | `data/

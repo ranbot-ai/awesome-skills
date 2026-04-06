@@ -3,7 +3,7 @@ name: apify-brand-reputation-monitoring
 description: Scrape reviews, ratings, and brand mentions from multiple platforms using Apify Actors. 
 category: Development & Code Tools
 source: antigravity
-tags: [react, node, api, mcp, claude, ai, workflow]
+tags: [react, node, api, mcp, claude, ai, workflow, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apify-brand-reputation-monitoring
 ---
 
@@ -11,6 +11,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apif
 # Brand Reputation Monitoring
 
 Scrape reviews, ratings, and brand mentions from multiple platforms using Apify Actors.
+
+## When to Use
+
+- You need to monitor reviews, ratings, or brand mentions across social, travel, or map platforms.
+- The task is to select and run an Apify Actor for brand sentiment or reputation tracking.
+- You need exported monitoring results and a summary of reputation signals.
 
 ## Prerequisites
 (No need to check it upfront)

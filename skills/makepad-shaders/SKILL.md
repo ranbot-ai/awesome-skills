@@ -18,6 +18,12 @@ You are an expert at Makepad shaders. Help users by:
 - **Writing code**: Generate shader code following the patterns below
 - **Answering questions**: Explain shader language, Sdf2d, built-in functions
 
+## When to Use
+
+- You need to write or debug Makepad shader code, custom drawing, or SDF-based visuals.
+- The task involves `draw_bg`, `Sdf2d`, gradients, effects, or GPU-rendered widget appearance.
+- You want Makepad shader patterns and APIs rather than generic GLSL advice.
+
 ## Documentation
 
 Refer to the local files for detailed documentation:
@@ -179,11 +185,4 @@ Community contributions: `./community/`
 1. Always use `show_bg: true` to enable background shader
 2. Use `Sdf2d::viewport()` to create SDF context
 3. Return `vec4` (RGBA) from `fn pixel()`
-4. Uniforms must be declared before shader functions
-5. Use `self.` prefix to access uniforms and built-ins
-
-## When Answering Questions
-
-1. Makepad shaders use Rust-like syntax, compiled to GPU code
-2. Every widget can have custom shaders (draw_bg, draw_text, etc.)
-3. Shaders are live-reloaded - edi
+4. Uniforms must be decl

@@ -12,6 +12,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/plot
 
 Python graphing library for creating interactive, publication-quality visualizations with 40+ chart types.
 
+## When to Use
+
+- You need interactive charts with hover, zoom, pan, or web embedding.
+- You are building dashboards, exploratory analysis notebooks, or presentations that benefit from rich interaction.
+- You want to choose between Plotly Express and Graph Objects for the same visualization task.
+
 ## Quick Start
 
 Install Plotly:
@@ -191,18 +197,4 @@ fig = px.violin(df, x='group', y='measurement', box=True)
 
 ```python
 # Time series with rangeslider
-fig = px.line(df, x='date', y='price')
-fig.update_xaxes(rangeslider_visible=True)
-
-# Candlestick chart
-import plotly.graph_objects as go
-fig = go.Figure(data=[go.Candlestick(
-    x=df['date'],
-    open=df['open'],
-    high=df['high'],
-    low=df['low'],
-    close=df['close']
-)])
-```
-
-### Multi-Plot Dashboa
+fig = px

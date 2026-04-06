@@ -3,12 +3,18 @@ name: antigravity-design-expert
 description: Core UI/UX engineering skill for building highly interactive, spatial, weightless, and glassmorphism-based web interfaces using GSAP and 3D CSS. 
 category: Creative & Media
 source: antigravity
-tags: [react, ai, design, tailwind, cro]
+tags: [react, ai, design, presentation, tailwind, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/antigravity-design-expert
 ---
 
 
 # Antigravity UI & Motion Design Expert
+
+## When to Use
+
+- You are building a highly interactive web interface with spatial depth, glassmorphism, and motion-heavy UI.
+- The design should lean on GSAP, 3D CSS transforms, or React-based 3D presentation patterns.
+- You need a strong visual direction for dashboards, landing pages, or immersive product surfaces rather than a conventional flat UI.
 
 ## 🎯 Role Overview
 

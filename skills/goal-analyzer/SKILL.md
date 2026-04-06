@@ -12,6 +12,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/goal
 
 分析健康目标数据,识别目标模式和进度,评估目标达成情况,并提供个性化目标管理建议。
 
+## When to Use
+
+- 你需要评估健康目标是否符合 SMART 原则，并识别目标设定中的薄弱点。
+- 你想跟踪目标进度，并结合营养、运动、睡眠等健康数据做关联分析。
+- 你需要面向个人健康管理的目标优化建议、风险提示和阶段性调整方案。
+
 ## 功能
 
 ### 1. SMART目标验证
@@ -403,9 +409,4 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/goal
 // 进度趋势折线图
 {
   type: 'line',
-  xAxis: { type: 'category', data: ['1月', '2月', '3月', ...] },
-  yAxis: { type: 'value', name: '完成%' },
-  series: [{
-    name: '目标进度',
-    type: 'line',
-    data: [0, 15,
+  xAxis: { type: 'category', data: ['1月', '2

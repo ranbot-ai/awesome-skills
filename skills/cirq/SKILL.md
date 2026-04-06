@@ -3,7 +3,7 @@ name: cirq
 description: Cirq is Google Quantum AI's open-source framework for designing, simulating, and running quantum circuits on quantum computers and simulators. 
 category: Document Processing
 source: antigravity
-tags: [python, api, ai, template, design, document, presentation, azure, rag]
+tags: [python, api, ai, workflow, template, design, document, presentation, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cirq
 ---
 
@@ -11,6 +11,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cirq
 # Cirq - Quantum Computing with Python
 
 Cirq is Google Quantum AI's open-source framework for designing, simulating, and running quantum circuits on quantum computers and simulators.
+
+## When to Use
+
+- You are designing, simulating, or executing quantum circuits with the Cirq ecosystem.
+- You need Google Quantum AI-style primitives, parameterized circuits, or integrations like `cirq-google` and `cirq-ionq`.
+- You are prototyping or teaching quantum workflows in Python and want concrete circuit examples.
 
 ## Installation
 
@@ -168,18 +174,4 @@ Common topics:
 - ReCirq framework structure
 - Common algorithms (VQE, QAOA, QPE)
 - Data analysis and visualization
-- Statistical analysis and fidelity estimation
-- Parallel data collection
-
-## Common Patterns
-
-### Variational Algorithm Template
-
-```python
-import scipy.optimize
-
-def variational_algorithm(ansatz, cost_function, initial_params):
-    """Template for variational quantum algorithms."""
-
-    def objective(params):
-        circuit = ansatz(para
+- Statistical an

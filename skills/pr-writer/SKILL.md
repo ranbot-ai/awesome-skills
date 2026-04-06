@@ -3,7 +3,7 @@ name: pr-writer
 description: Create pull requests following Sentry's engineering practices. 
 category: AI & Agents
 source: antigravity
-tags: [markdown, api, ai, template, cro]
+tags: [markdown, api, ai, workflow, template, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pr-writer
 ---
 
@@ -13,6 +13,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pr-w
 Create pull requests following Sentry's engineering practices.
 
 **Requires**: GitHub CLI (`gh`) authenticated and available.
+
+## When to Use
+
+- You are ready to open a pull request and need a structured description based on the committed branch diff.
+- You want the PR body to capture what changed, why it changed, and any reviewer context.
+- You are using GitHub CLI and need a repeatable PR-writing workflow rather than writing the description ad hoc.
 
 ## Prerequisites
 
@@ -185,4 +191,4 @@ Note: `gh pr edit` is currently broken due to GitHub's Projects (classic) deprec
 ## References
 
 - [Sentry Code Review Guidelines](https://develop.sentry.dev/engineering-practices/code-review/)
-- [Sentry Commit Messages](https://develop.sentry.dev/engineering-practices/commit-messages/)
+- [Sentry Commit Messages](https://develop.sentry.dev/engineering-practices/commit-mess

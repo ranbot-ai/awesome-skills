@@ -12,6 +12,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-b
 
 Functional programming patterns for building type-safe, testable backend services using fp-ts.
 
+## When to Use
+
+- You are building or refactoring a Node.js or Deno backend with fp-ts.
+- The task involves dependency injection, service composition, or typed backend errors with `ReaderTaskEither`.
+- You need functional backend architecture patterns rather than isolated utility snippets.
+
 ## Core Concepts
 
 ### ReaderTaskEither (RTE)
@@ -197,15 +203,4 @@ export const createOrder = (
       )
     ),
     // Validate and get products
-    RTE.bind('products', () =>
-      pipe(
-        items,
-        A.traverse(RTE.ApplicativePar)(item =>
-          ProductService.findById(item.productId)
-        ),
-        RTE.mapLeft(toOrderError)
-      )
-    ),
-    // Calculate total
-    RTE.bind('total', ({ products }) =>
-      RTE.right(calculateTotal(prod
+    RTE.bind('product

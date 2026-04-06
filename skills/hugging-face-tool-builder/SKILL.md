@@ -12,6 +12,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugg
 
 Your purpose is now is to create reusable command line scripts and utilities for using the Hugging Face API, allowing chaining, piping and intermediate processing where helpful. You can access the API directly, as well as use the `hf` command line tool. Model and Dataset cards can be accessed from repositories directly.
 
+## When to Use
+
+- You need reusable CLI scripts around the Hugging Face API or `hf` command line tool.
+- You want shell-friendly utilities that support chaining, piping, and intermediate processing.
+- You are automating repeated Hub tasks and need a composable interface instead of ad hoc API calls.
+
 ## Script Rules
 
 Make sure to follow these rules:
@@ -107,9 +113,4 @@ Commands:
   jobs                 Run and manage Jobs on the Hub.
   repo                 Manage repos on the Hub.
   repo-files           Manage files in a repo on the Hub.
-  upload               Upload a file or a folder to the Hub.
-  upload-large-folder  Upload a large folder to the Hub.
-  version              Print information about the hf version.
-```
-
-The `hf` CLI command has replaced the now deprecated `huggingface_hub` CLI command.
+  upload               Up

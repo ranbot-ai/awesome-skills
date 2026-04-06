@@ -11,6 +11,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugg
 # Overview
 This skill provides tools to manage datasets on the Hugging Face Hub with a focus on creation, configuration, content management, and SQL-based data manipulation. It is designed to complement the existing Hugging Face MCP server by providing dataset editing and querying capabilities.
 
+## When to Use
+
+- You need to create, configure, or update datasets on the Hugging Face Hub.
+- You want SQL-style querying, transformation, or export flows over Hub datasets.
+- You are managing dataset content and metadata directly rather than only searching existing datasets.
+
 ## Integration with HF MCP Server
 - **Use HF MCP Server for**: Dataset discovery, search, and metadata retrieval
 - **Use This Skill for**: Dataset creation, content editing, SQL queries, data transformation, and structured data formatting
@@ -137,16 +143,4 @@ uv run scripts/sql_manager.py histogram --dataset "cais/mmlu" --column "subject"
 # Complex filtering with SQL
 uv run scripts/sql_manager.py query \
   --dataset "cais/mmlu" \
-  --sql "SELECT subject, COUNT(*) as cnt FROM data GROUP BY subject HAVING cnt > 100"
-
-# Using transform command
-uv run scripts/sql_manager.py transform \
-  --dataset "cais/mmlu" \
-  --select "subject, COUNT(*) as cnt" \
-  --group-by "subject" \
-  --order-by "cnt DESC" \
-  --limit 10
-```
-
-### 3. Create Subsets and Push to Hub
-`
+  --sql "SELECT subject, COUNT(*) as cnt FROM data

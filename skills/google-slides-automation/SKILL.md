@@ -1,9 +1,9 @@
 ---
 name: google-slides-automation
 description: Lightweight Google Slides integration with standalone OAuth authentication. No MCP server required. Full read/write access. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [python, api, mcp, ai, automation, presentation, image, cro]
+tags: [python, api, mcp, ai, automation, document, presentation, image, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/google-slides-automation
 ---
 
@@ -13,6 +13,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/goog
 Lightweight Google Slides integration with standalone OAuth authentication. No MCP server required. Full read/write access.
 
 > **Requires Google Workspace account.** Personal Gmail accounts are not supported.
+
+## When to Use
+
+- You need to create, inspect, or modify Google Slides presentations from local automation.
+- The task involves reading slide text, adding/removing slides, or batch updating presentation content.
+- You want Slides automation for Workspace documents without using an MCP server.
 
 ## First-Time Setup
 

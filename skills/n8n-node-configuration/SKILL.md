@@ -12,6 +12,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/n8n-
 
 Expert guidance for operation-aware node configuration with property dependencies.
 
+## When to Use
+
+- You need to configure an n8n node correctly for a specific resource and operation.
+- The task involves required fields, property dependencies, or choosing the right `get_node` detail level.
+- You are troubleshooting node setup rather than overall workflow architecture.
+
 ---
 
 ## Configuration Philosophy
@@ -247,15 +253,4 @@ get_node({
 });
 ```
 
-**Use**: Find authentication, headers, body fields, etc.
-
-### Decision Tree
-
-```
-┌─────────────────────────────────┐
-│ Starting new node config?       │
-├─────────────────────────────────┤
-│ YES → get_node (standard)       │
-└─────────────────────────────────┘
-         ↓
-┌─────────────────────────────────┐
+**Use**: Find authe

@@ -12,6 +12,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-p
 
 **Read this first.** This guide cuts through the academic jargon and shows you what actually matters. No category theory. No abstract nonsense. Just patterns that make your code better.
 
+## When to Use
+
+- You want a pragmatic starting point for fp-ts or functional programming in TypeScript.
+- The task is exploratory or educational and needs an 80/20 view of what is actually worth adopting.
+- You need guidance on when FP helps and when it is better to keep code simple.
+
 ## The Golden Rule
 
 > **If functional programming makes your code harder to read, don't use it.**
@@ -179,16 +185,4 @@ const extractEmail = (data: unknown): E.Either<string, string> => {
 const validateEmail = (email: string): E.Either<string, string> =>
   email.includes('@') ? E.right(email) : E.left('Invalid email format')
 
-// Chain all steps - if any fails, the whole thing fails
-const getValidEmail = (input: string): E.Either<string, string> =>
-  pipe(
-    parseJSON(input),
-    E.flatMap(extractEmail),
-    E.flatMap(validateEmail)
-  )
-
-// Success path: Right('user@example.com')
-// Any failure: Left('specific error message')
-```
-
-**Plain langua
+// Chain all steps - if any fails, the 

@@ -12,6 +12,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/n8n-
 
 Proven architectural patterns for building n8n workflows.
 
+## When to Use
+
+- You need to choose an architectural pattern for an n8n workflow before building it.
+- The task involves webhook processing, API integration, scheduled jobs, database sync, or AI-agent workflow design.
+- You want a high-level workflow structure rather than node-by-node troubleshooting.
+
 ---
 
 ## The 5 Core Patterns
@@ -184,17 +190,4 @@ Main Flow → [Success Path]
 ## Common Gotchas
 
 ### 1. Webhook Data Structure
-**Problem**: Can't access webhook payload data
-
-**Solution**: Data is nested under `$json.body`
-```javascript
-❌ {{$json.email}}
-✅ {{$json.body.email}}
-```
-See: n8n Expression Syntax skill
-
-### 2. Multiple Input Items
-**Problem**: Node processes all input items, but I only want one
-
-**Solution**: Use "Execute Once" mode or process first item only
-``
+**Problem**: Can't access webhook payload dat

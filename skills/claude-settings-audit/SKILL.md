@@ -12,6 +12,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/clau
 
 Analyze this repository and generate recommended Claude Code `settings.json` permissions for read-only commands.
 
+## When to Use
+
+- You are setting up or auditing Claude Code `settings.json` permissions for a repository.
+- You need to infer a safe read-only allow list from the repo's tech stack, tooling, and monorepo structure.
+- You want to review or replace an existing Claude permissions baseline with something evidence-based.
+
 ## Phase 1: Detect Tech Stack
 
 Run these commands to detect the repository structure:
@@ -125,7 +131,4 @@ Only include commands for tools actually detected in the project.
 #### Other Languages
 
 | If Detected    | Add These Commands                                                   |
-| -------------- | -------------------------------------------------------------------- |
-| `go.mod`       | `go version`, `go list`, `go mod graph`, `go env`                    |
-| `Cargo.toml`   | `rustc --version`, `cargo --version`, `cargo tree`, `cargo metadata` |
-| `Gemfile`      | `ruby --version`, `bundle list`, `bundle show`                      
+| -------------- | ------------------

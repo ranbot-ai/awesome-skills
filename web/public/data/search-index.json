@@ -218,6 +218,7 @@
     "ai",
     "workflow",
     "security",
+    "cro",
     "&",
     "agents"
   ],
@@ -1207,6 +1208,7 @@
     "api",
     "ai",
     "tailwind",
+    "cro",
     "&",
     "agents"
   ],
@@ -2145,6 +2147,7 @@
     "react",
     "ai",
     "design",
+    "presentation",
     "tailwind",
     "cro",
     "creative",
@@ -2610,6 +2613,7 @@
     "claude",
     "ai",
     "workflow",
+    "cro",
     "development",
     "&",
     "code",
@@ -3775,6 +3779,7 @@
     "api",
     "claude",
     "ai",
+    "workflow",
     "template",
     "design",
     "creative",
@@ -7629,6 +7634,7 @@
     "design",
     "document",
     "rag",
+    "cro",
     "processing"
   ],
   "antigravity-building-native-ui": [
@@ -8691,6 +8697,7 @@
     "python",
     "api",
     "ai",
+    "workflow",
     "template",
     "design",
     "document",
@@ -14486,6 +14493,7 @@
     "api",
     "claude",
     "ai",
+    "workflow",
     "template",
     "design",
     "document",
@@ -14694,6 +14702,7 @@
     "expo-ui-jetpack-compose",
     "react",
     "api",
+    "ai",
     "llm",
     "design",
     "cro",
@@ -14905,6 +14914,7 @@
     "typescript",
     "react",
     "ai",
+    "workflow",
     "&",
     "agents"
   ],
@@ -15219,8 +15229,8 @@
     "audit",
     "current",
     "branch.",
-    "template",
     "ai",
+    "template",
     "&",
     "agents"
   ],
@@ -15724,6 +15734,7 @@
     "api",
     "ai",
     "prisma",
+    "rag",
     "business",
     "&",
     "marketing"
@@ -17151,6 +17162,7 @@
     "mcp",
     "ai",
     "automation",
+    "workflow",
     "&",
     "agents"
   ],
@@ -17454,11 +17466,11 @@
     "mcp",
     "ai",
     "automation",
+    "document",
     "presentation",
     "image",
     "cro",
-    "&",
-    "agents"
+    "processing"
   ],
   "antigravity-googlesheets-automation": [
     "googlesheets-automation",
@@ -19535,6 +19547,7 @@
     "view",
     "issues.",
     "ai",
+    "workflow",
     "document",
     "rag",
     "processing"
@@ -21898,6 +21911,7 @@
     "事件处理",
     "claude",
     "ai",
+    "design",
     "document",
     "cro",
     "processing"
@@ -26583,6 +26597,7 @@
     "python",
     "api",
     "ai",
+    "workflow",
     "document",
     "azure",
     "rag",
@@ -26947,6 +26962,7 @@
     "markdown",
     "api",
     "ai",
+    "workflow",
     "template",
     "cro",
     "&",

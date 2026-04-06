@@ -15,6 +15,12 @@ Generate high-converting landing pages from a product description. Output comple
 **Target:** LCP < 1s · CLS < 0.1 · FID < 100ms  
 **Output:** TSX components + Tailwind styles + SEO meta + copy variants
 
+## When to Use
+
+- You need to generate a marketing landing page in Next.js or React.
+- The task involves conversion-focused page structure, section variants, Tailwind styling, or SEO-aware copy.
+- You want complete landing-page output from a product description rather than isolated UI fragments.
+
 ## Core Capabilities
 
 - 5 hero section variants (centered, split, gradient, video-bg, minimal)
@@ -97,6 +103,4 @@ Use this as the structural template for all hero variants. Swap layout classes, 
 ```tsx
 export function HeroCentered() {
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-gray-950 px-4 text-center">
-      <div className="absolute inset-0 bg-gradient-to-b from-violet-900/20 to-transparent" />
-      <div className="pointer-events-none absolute -top-40 left-1/2 h-[600px] w-[600px] -translate-x-1/2 r
+    <section className="relative flex

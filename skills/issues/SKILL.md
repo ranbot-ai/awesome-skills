@@ -3,12 +3,18 @@ name: issues
 description: Interact with GitHub issues - create, list, and view issues. 
 category: Document Processing
 source: antigravity
-tags: [ai, document, rag]
+tags: [ai, workflow, document, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/issues
 ---
 
 
 Interact with GitHub issues - create, list, and view issues.
+
+## When to Use
+
+- The user wants to create, list, inspect, or otherwise work with GitHub issues.
+- The task involves issue intake or repository issue management through the GitHub CLI workflow.
+- You need a guided issue flow that gathers titles, descriptions, and action selection before running commands.
 
 ## Instructions
 
@@ -176,14 +182,4 @@ Report the issue URL back to the user.
 
 Use AskUserQuestion to determine filtering:
 
-- question: "How would you like to filter issues?"
-- header: "Filter"
-- multiSelect: false
-- options:
-  - label: "All open issues"
-    description: "Show all open issues"
-  - label: "Assigned to me"
-    description: "Issues assigned to the current user"
-  - label: "Created by me"
-    description: "Issues I created"
-  
+- question: 

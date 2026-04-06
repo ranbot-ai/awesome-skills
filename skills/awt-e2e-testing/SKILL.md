@@ -3,7 +3,7 @@ name: awt-e2e-testing
 description: AI-powered E2E web testing — eyes and hands for AI coding tools. Declarative YAML scenarios, Playwright execution, visual matching (OpenCV + OCR), platform auto-detection (Flutter/React/Vue), learni
 category: Creative & Media
 source: antigravity
-tags: [react, api, claude, ai, template, design]
+tags: [react, api, claude, ai, workflow, template, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/awt-e2e-testing
 ---
 
@@ -13,6 +13,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/awt-
 > `npx skills add ksgisang/awt-skill --skill awt -g`
 
 AWT gives AI coding tools the ability to see and interact with web applications through a real browser. Your AI designs YAML test scenarios; AWT executes them with Playwright.
+
+## When to Use
+
+- You need AI-assisted end-to-end testing through a real browser with declarative YAML scenarios.
+- The test flow depends on visual matching, OCR, or platform auto-detection instead of stable DOM selectors.
+- You want an E2E toolchain that can both execute tests and explain failures for AI coding workflows.
 
 ## What works now
 - YAML scenarios → Playwright with human-like interaction

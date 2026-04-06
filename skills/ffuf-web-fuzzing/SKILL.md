@@ -10,6 +10,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ffuf
 
 # FFUF (Fuzz Faster U Fool) Skill
 
+## When to Use
+
+- You are fuzzing web targets with `ffuf` during authorized security testing or penetration testing.
+- The task involves content discovery, subdomain enumeration, parameter fuzzing, or authenticated request fuzzing.
+- You need guidance on wordlists, filtering, calibration, and interpreting ffuf results efficiently.
+
 ## Overview
 FFUF is a fast web fuzzer written in Go, designed for discovering hidden content, directories, files, subdomains, and testing for vulnerabilities during penetration testing. It's significantly faster than traditional tools like dirb or dirbuster.
 
@@ -137,15 +143,3 @@ ffuf -w /path/to/wordlist.txt -u https://target.com/FUZZ -acc "404NotFound"
 - Adapts to the target's specific behavior
 
 **When Claude analyzes your ffuf results, `-ac` is MANDATORY** - without it, Claude will waste time sifting through thousands of false positives instead of finding the interesting anomalies.
-
-## Rate Limiting and Timing
-
-### Rate Control
-```bash
-# Limit to 2 requests per second (stealth mode)
-ffuf -w /path/to/wordlist.txt -u https://target.com/FUZZ -rate 2
-
-# Add delay between requests (0.1 to 2 seconds random)
-ffuf -w /path/to/wordlist.txt -u https://target.com/FUZZ -p 0.1-2.0
-
-# Set number of concurrent threads (defa

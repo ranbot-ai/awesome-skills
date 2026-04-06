@@ -12,6 +12,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apif
 
 AI-driven data extraction from 55+ Actors across all major platforms. This skill automatically selects the best Actor for your task.
 
+## When to Use
+
+- The user needs web data extraction but has not yet chosen a specific Apify Actor.
+- You need a general-purpose Apify entry point that maps a broad scraping goal to the most suitable Actor.
+- The task spans multiple platforms and benefits from one unified workflow for actor selection, execution, and summarization.
+
 ## Prerequisites
 (No need to check it upfront)
 
@@ -118,14 +124,4 @@ First, understand what the user wants to achieve. Then select the best Actor fro
 | `apify/google-trends-scraper` | Google Trends data |
 | `voyager/booking-scraper` | Booking.com hotel data |
 | `voyager/booking-reviews-scraper` | Booking.com reviews |
-| `maxcopell/tripadvisor-reviews` | TripAdvisor reviews |
-| `vdrmota/contact-info-scraper` | Contact enrichment from URLs |
-
----
-
-#### Actor Selection by Use Case
-
-| Use Case | Primary Actors |
-|----------|---------------|
-| **Lead Generation** | `compass/crawler-google-places`, `poidata/google-maps-email-extractor`, `vdrmota/contact-info-scraper` |
-| **Influencer Discovery** | `api
+| `maxcopell/tripadvisor-reviews` | TripAdvisor rev

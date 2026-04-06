@@ -12,6 +12,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apif
 
 Analyze competitors using Apify Actors to extract data from multiple platforms.
 
+## When to Use
+
+- You need competitor benchmarks for content, reviews, pricing, ads, audience, or channel performance.
+- The task involves selecting Apify Actors to compare competitors across maps, booking, social, or video platforms.
+- You need structured competitor data plus synthesized takeaways for strategy or positioning.
+
 ## Prerequisites
 (No need to check it upfront)
 
@@ -123,12 +129,4 @@ node --env-file=.env ${CLAUDE_PLUGIN_ROOT}/reference/scripts/run_actor.js \
 After completion, report:
 - Number of competitors analyzed
 - File location and name
-- Key competitive insights
-- Suggested next steps (deeper analysis, benchmarking)
-
-## Error Handling
-
-`APIFY_TOKEN not found` - Ask user to create `.env` with `APIFY_TOKEN=your_token`
-`mcpc not found` - Ask user to install `npm install -g @apify/mcpc`
-`Actor not found` - Check Actor ID spelling
-`Run FAILED` - Ask user to check Apify conso
+- Key comp

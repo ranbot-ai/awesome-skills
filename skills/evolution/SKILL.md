@@ -3,7 +3,7 @@ name: evolution
 description: This skill enables makepad-skills to self-improve continuously during development. 
 category: Document Processing
 source: antigravity
-tags: [markdown, api, claude, ai, template, design, document, security]
+tags: [markdown, api, claude, ai, workflow, template, design, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/evolution
 ---
 
@@ -13,6 +13,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/evol
 # Makepad Skills Evolution
 
 This skill enables makepad-skills to self-improve continuously during development.
+
+## When to Use
+
+- You are maintaining `makepad-skills` and want the skill library to improve itself during development.
+- You need the workflow for deciding when a new pattern should become a skill update or hook-driven evolution.
+- You are working on self-correction, self-validation, or version adaptation for the skill set.
 
 ## Quick Navigation
 
@@ -159,10 +165,4 @@ Ask yourself:
 ### Step 2: Classify the Knowledge
 
 ```
-Widget/Component Pattern     → robius-widget-patterns/_base/
-Shader/Visual Effect         → makepad-shaders/
-Error/Debug Solution         → makepad-reference/troubleshooting.md
-Layout/Responsive Design     → makepad-reference/adaptive-layout.md
-Build/Deploy Issue           → makepad-deployment/SKILL.md
-Project Structure            → makepad-basics/
-Core Con
+Widget/Component Pattern     → 

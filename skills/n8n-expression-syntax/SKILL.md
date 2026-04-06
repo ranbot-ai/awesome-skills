@@ -12,6 +12,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/n8n-
 
 Expert guide for writing correct n8n expressions in workflows.
 
+## When to Use
+
+- You need to write or debug n8n expressions using `{{ ... }}` syntax.
+- The task involves `$json`, `$node`, webhook payloads, or expression-related workflow errors.
+- You want syntax-correct dynamic values inside n8n nodes and parameters.
+
 ---
 
 ## Expression Format
@@ -280,21 +286,4 @@ For real workflow examples, see EXAMPLES.md
 {
   "body": {
     "name": "John Doe",
-    "email": "john@example.com",
-    "message": "Hello!"
-  }
-}
-```
-
-**In Slack node text field**:
-```
-New form submission!
-
-Name: {{$json.body.name}}
-Email: {{$json.body.email}}
-Message: {{$json.body.message}}
-```
-
-### Example 2: HTTP Request to Email
-
-**HTTP Request r
+    "email":

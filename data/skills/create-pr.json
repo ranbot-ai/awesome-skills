@@ -7,11 +7,15 @@
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/create-pr",
-  "content": "\n# Alias: create-pr\n\nThis skill name is kept for compatibility.\n\nUse `sentry-skills:pr-writer` as the canonical skill for creating and editing pull requests.\n\nIf invoked via `create-pr`, run the same workflow and conventions documented in `sentry-skills:pr-writer`.\n",
+  "content": "\n# Alias: create-pr\n\nThis skill name is kept for compatibility.\n\n## When to Use\n\n- The user explicitly asks for `create-pr` or refers to the legacy skill name.\n- You need to redirect pull request creation work to the canonical `sentry-skills:pr-writer` workflow.\n- The task is specifically about writing or updating a pull request rather than general git operations.\n\nUse `sentry-skills:pr-writer` as the canonical skill for creating and editing pull requests.\n\nIf invoked via `create-pr`, run the same workflow and conventions documented in `sentry-skills:pr-writer`.\n",
   "tags": [
     "workflow",
     "document"
   ],
-  "useCases": [],
+  "useCases": [
+    "The user explicitly asks for `create-pr` or refers to the legacy skill name.",
+    "You need to redirect pull request creation work to the canonical `sentry-skills:pr-writer` workflow.",
+    "The task is specifically about writing or updating a pull request rather than general git operations."
+  ],
   "scrapedAt": "2026-01-31T06:51:31.785Z"
 }

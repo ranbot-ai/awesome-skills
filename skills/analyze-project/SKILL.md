@@ -27,6 +27,12 @@ For each session, determine:
 4. Which files/subsystems repeatedly correlate with struggle
 5. What changes would most improve future sessions
 
+## When to Use
+
+- You need a postmortem on AI-assisted coding sessions, especially when scope drift or repeated rework occurred.
+- You want root-cause analysis that separates user/spec issues from agent mistakes, repo friction, or validation gaps.
+- You need evidence-backed recommendations for improving future prompts, repo health, or delivery workflows.
+
 ## Global Rules
 
 - Treat `.resolved.N` counts as **iteration signals**, not proof of failure
@@ -185,18 +191,4 @@ Record:
 Keep one short example in mind for calibration:
 - Human-added: “also refactor nearby code while you’re here”
 - Necessary discovered: hidden dependency must be fixed for original task to work
-- Agent-introduced: extra cleanup or redesign not requested and not required
-
----
-
-## Step 5: Rework Shape
-
-Classify each session into one primary pattern:
-
-- **Clean execution**
-- **Early replan then stable finish**
-- **Progressive scope expansion**
-- **Reopen/reclose churn**
-- **Late-stage verification churn**
-- **Abandoned mid-flight**
-- **Exploratory / research
+- Agent-i

@@ -14,6 +14,12 @@ AgentMail gives AI agents real email addresses (`@theagentmail.net`) with a REST
 
 Base URL: `https://api.theagentmail.net`
 
+## When to Use
+
+- An AI agent needs a real inbox/outbox for signups, verification flows, or transactional communication.
+- You need to provision AgentMail accounts, send messages, read inbox contents, or register inbound webhooks.
+- You need to monitor karma usage or wire email events into agent automation.
+
 ## Quick start
 
 All requests require `Authorization: Bearer am_...` header (API key from dashboard).
@@ -133,16 +139,4 @@ Every action has a karma cost or reward:
 - You only earn karma once per sender until the agent replies. If sender X emails you 5 times without a reply, only the first earns karma. Reply to X, and the next email from X earns karma again.
 - Deleting an account refunds the 10 karma it cost to create.
 
-When karma reaches 0, sends and account creation return HTTP 402. Always check balance before operations that cost karma.
-
-## TypeScript SDK
-
-```typescript
-import { createClient } from "@agentmail/sdk";
-
-const mail = createClient({ apiKey: "am_..." });
-
-// Create account
-const account = await mail.accounts.create({
-  address: "my-agent@theagentmail.net",
-})
+When karma reaches 0, sends and account creation 

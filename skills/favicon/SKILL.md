@@ -3,12 +3,18 @@ name: favicon
 description: Generate favicons from a source image 
 category: AI & Agents
 source: antigravity
-tags: [typescript, react, ai, image]
+tags: [typescript, react, ai, workflow, image]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/favicon
 ---
 
 
 Generate a complete set of favicons from the source image at `$1` and update the project's HTML with the appropriate link tags.
+
+## When to Use
+
+- You need to generate a complete favicon set from a single source image.
+- The task includes placing the assets in the correct framework-specific static directory and updating HTML link tags.
+- You want one workflow that validates the source image, detects the project type, and writes the right favicon outputs.
 
 ## Prerequisites
 
@@ -123,21 +129,4 @@ Create or update `[STATIC_DIR]/site.webmanifest` with this content (substitute t
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "/web-app-manifest-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
-    }
-  ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone"
-}
-```
-
-If `site.webmanifest` alrea
+      "sizes": "192x19
