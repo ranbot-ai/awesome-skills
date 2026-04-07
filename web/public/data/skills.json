@@ -15643,6 +15643,36 @@
       "scrapedAt": "2026-01-29T06:59:12.795Z"
     },
     {
+      "id": "antigravity-global-chat-agent-discovery",
+      "name": "global-chat-agent-discovery",
+      "slug": "global-chat-agent-discovery",
+      "description": "Discover and search 18K+ MCP servers and AI agents across 6+ registries using Global Chat's cross-protocol directory and MCP server.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/global-chat-agent-discovery",
+      "content": "\n# Global Chat Agent Discovery\n\n## Overview\n\nGlobal Chat is a cross-protocol AI agent discovery platform that aggregates MCP servers and AI agents from 6+ registries into a single searchable directory. This skill helps you find the right MCP server, A2A agent, or agents.txt endpoint for any task by searching across 18,000+ indexed entries. It also provides an MCP server (`@global-chat/mcp-server`) for programmatic access to the directory from any MCP-compatible client.\n\n## When to Use This Skill\n\n- Use when you need to find an MCP server for a specific capability (e.g., database access, file conversion, API integration)\n- Use when evaluating which agent registries carry tools for your use case\n- Use when you want to search across multiple protocols (MCP, A2A, agents.txt) simultaneously\n- Use when setting up agent-to-agent communication and need to discover available endpoints\n\n## How It Works\n\n### Option 1: Use the MCP Server (Recommended for Agents)\n\nInstall the Global Chat MCP server to search the directory programmatically from Claude Code, Cursor, or any MCP client.\n\n```bash\nnpm install -g @global-chat/mcp-server\n```\n\nAdd to your MCP client configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"global-chat\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@global-chat/mcp-server\"]\n    }\n  }\n}\n```\n\nThen ask your agent to search for tools:\n\n```\nSearch Global Chat for MCP servers that handle PostgreSQL database queries.\n```\n\n### Option 2: Use the Web Directory\n\nBrowse the full directory at [https://global-chat.io](https://global-chat.io):\n\n1. Visit the search page and enter your query\n2. Filter by protocol (MCP, A2A, agents.txt)\n3. Filter by registry source\n4. View server details, capabilities, and installation instructions\n\n### Option 3: Validate Your agents.txt\n\nIf you maintain an `agents.txt` file, use the free validator:\n\n1. Go to [https://global-chat.io/validate](https://global-chat.io/validate)\n2. Enter your domain or paste your agents.txt content\n3. Get instant feedback on format compliance and discoverability\n\n## Examples\n\n### Example 1: Find MCP Servers for a Task\n\n```\nYou: \"Find MCP servers that can convert PDF files to text\"\nAgent (via Global Chat MCP): Searching across 6 registries...\n  - @anthropic/pdf-tools (mcpservers.org) — PDF parsing and text extraction\n  - pdf-converter-mcp (mcp.so) — Convert PDF to text, markdown, or HTML\n  - ...\n```\n\n### Example 2: Discover A2A Agents\n\n```\nYou: \"What A2A agents are available for code review?\"\nAgent (via Global Chat MCP): Found 12 A2A agents for code review across 3 registries...\n```\n\n### Example 3: Check Agent Protocol Coverage\n\n```\nYou: \"How many registries list tools for Kubernetes management?\"\nAgent (via Global Chat MCP): 4 registries carry Kubernetes-related agents (23 total entries)...\n```\n\n## Best Practices\n\n- Use the MCP server for automated workflows and agent-to-agent discovery\n- Use the web directory for manual exploration and comparison\n- Validate your agents.txt before publishing to ensure maximum discoverability\n- Check multiple registries — coverage varies significantly by domain\n\n## Common Pitfalls\n\n- **Problem:** Search returns too many results\n  **Solution:** Add protocol or registry filters to narrow the scope\n\n- **Problem:** MCP server not connecting\n  **Solution:** Ensure `npx` is available and run `npx -y @global-chat/mcp-server` manually first to verify\n\n## Related Skills\n\n- `@mcp-client` - For general MCP client setup and configuration\n- `@agent-orchestration-multi-agent-optimize` - For orchestrating multiple discovered agents\n- `@agent-memory-mcp` - For persisting discovered agent information across sessions\n",
+      "tags": [
+        "pdf",
+        "markdown",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "kubernetes",
+        "rag"
+      ],
+      "useCases": [
+        "Use when you need to find an MCP server for a specific capability (e.g., database access, file conversion, API integration)",
+        "Use when evaluating which agent registries carry tools for your use case",
+        "Use when you want to search across multiple protocols (MCP, A2A, agents.txt) simultaneously",
+        "Use when setting up agent-to-agent communication and need to discover available endpoints"
+      ],
+      "scrapedAt": "2026-04-07T07:31:54.346Z"
+    },
+    {
       "id": "antigravity-gmail-automation",
       "name": "gmail-automation",
       "slug": "gmail-automation",
@@ -21338,6 +21368,36 @@
       "scrapedAt": "2026-01-31T06:53:12.795Z"
     },
     {
+      "id": "antigravity-multi-agent-task-orchestrator",
+      "name": "multi-agent-task-orchestrator",
+      "slug": "multi-agent-task-orchestrator",
+      "description": "Route tasks to specialized AI agents with anti-duplication, quality gates, and 30-minute heartbeat monitoring",
+      "category": "Security & Systems",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/multi-agent-task-orchestrator",
+      "content": "\n# Multi-Agent Task Orchestrator\n\n## Overview\n\nA production-tested pattern for coordinating multiple AI agents through a single orchestrator. Instead of letting agents work independently (and conflict), one orchestrator decomposes tasks, routes them to specialists, prevents duplicate work, and verifies results before marking anything done. Battle-tested across 10,000+ tasks over 6 months.\n\n## When to Use This Skill\n\n- Use when you have 3+ specialized agents that need to coordinate on complex tasks\n- Use when agents are doing duplicate or conflicting work\n- Use when you need audit trails showing who did what and when\n- Use when agent output quality is inconsistent and needs verification gates\n\n## How It Works\n\n### Step 1: Define the Orchestrator Identity\n\nThe orchestrator must know what it IS and what it IS NOT. This prevents it from doing work instead of delegating:\n\n```\nYou are the Task Orchestrator. You NEVER do specialized work yourself.\nYou decompose tasks, delegate to the right agent, prevent conflicts,\nand verify quality before marking anything done.\n\nWHAT YOU ARE NOT:\n- NOT a code writer — delegate to code agents\n- NOT a researcher — delegate to research agents\n- NOT a tester — delegate to test agents\n```\n\nThis \"NOT-block\" pattern reduces task drift by ~35% in production.\n\n### Step 2: Build a Task Registry\n\nBefore assigning work, check if anyone is already doing this task:\n\n```python\nimport sqlite3\nfrom difflib import SequenceMatcher\n\ndef check_duplicate(description, threshold=0.55):\n    conn = sqlite3.connect(\"task_registry.db\")\n    c = conn.cursor()\n    c.execute(\"SELECT id, description, agent, status FROM tasks WHERE status IN ('pending', 'in_progress')\")\n    for row in c.fetchall():\n        ratio = SequenceMatcher(None, description.lower(), row[1].lower()).ratio()\n        if ratio >= threshold:\n            return {\"id\": row[0], \"description\": row[1], \"agent\": row[2]}\n    return None\n```\n\n### Step 3: Route Tasks to Specialists\n\nUse keyword scoring to match tasks to the best agent:\n\n```python\nAGENTS = {\n    \"code-architect\": [\"code\", \"implement\", \"function\", \"bug\", \"fix\", \"refactor\", \"api\"],\n    \"security-reviewer\": [\"security\", \"vulnerability\", \"audit\", \"cve\", \"injection\"],\n    \"researcher\": [\"research\", \"compare\", \"analyze\", \"benchmark\", \"evaluate\"],\n    \"doc-writer\": [\"document\", \"readme\", \"explain\", \"tutorial\", \"guide\"],\n    \"test-engineer\": [\"test\", \"coverage\", \"unittest\", \"pytest\", \"spec\"],\n}\n\ndef route_task(description):\n    scores = {}\n    for agent, keywords in AGENTS.items():\n        scores[agent] = sum(1 for kw in keywords if kw in description.lower())\n    return max(scores, key=scores.get) if max(scores.values()) > 0 else \"code-architect\"\n```\n\n### Step 4: Enforce Quality Gates\n\nAgent output is a CLAIM. Test output is EVIDENCE.\n\n```\nAfter agent reports completion:\n1. Were files actually modified? (git diff --stat)\n2. Do tests pass? (npm test / pytest)\n3. Were secrets introduced? (grep for API keys, tokens)\n4. Did the build succeed? (npm run build)\n5. Were only intended files touched? (scope check)\n\nMark done ONLY after ALL checks pass.\n```\n\n### Step 5: Run 30-Minute Heartbeats\n\n```\nEvery 30 minutes, ask:\n1. \"What have I DELEGATED in the last 30 minutes?\"\n2. If nothing → open the task backlog and assign the next task\n3. Check for idle agents (no message in >30min on assigned task)\n4. Relance idle agents or reassign their tasks\n```\n\n## Examples\n\n### Example 1: Delegating a Code Task\n\n```\n[ORCHESTRATOR -> code-architect] TASK: Add rate limiting to /api/users\nSCOPE: src/middleware/rate-limit.ts only\nVERIFICATION: npm test -- --grep \"rate-limit\"\nDEADLINE: 30 minutes\n```\n\n### Example 2: Handling a Duplicate\n\n```\nUser asks: \"Fix the login bug\"\nRegistry check: Task #47 \"Fix authentication bug\" is IN_PROGRESS by security-reviewer\nDecision: SKIP — similar task already assigned (78% match)\nAction: Notify user of existing task, wait for completion\n```\n\n## Best Practices\n\n- Always define NOT-blocks for every agent (what they must refuse to do)\n- Use SQLite for the task registry (lightweight, no server needed)\n- Set similarity threshold at 55% for anti-duplication (lower = too many false positives)\n- Require evidence-based quality gates (not just agent claims)\n- Log every delegation with: task ID, agent, scope, deadline, verification command\n\n## Common Pitfalls\n\n- **Problem:** Orchestrator starts doing work instead of delegating\n  **Solution:** Add explicit NOT-blocks and role boundaries\n\n- **Problem:** Two agents modify the same file simultaneously\n  **Solution:** Task registry with file-level locking and queue system\n\n- **Problem:** Agent claims \"done\" without actual changes\n  **Solution:** Quality gate checks git diff before accepting completion\n\n- **Problem:** Tasks pile up without progress\n  **Solution:** 30-minute heartbeat catches stale assignments and reassigns\n\n## Related Skills\n\n- `@code-review` - For reviewing code changes after delegation\n- `@test-driven-development` - For ensuring quality",
+      "tags": [
+        "python",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "document",
+        "security",
+        "vulnerability",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Use when you have 3+ specialized agents that need to coordinate on complex tasks",
+        "Use when agents are doing duplicate or conflicting work",
+        "Use when you need audit trails showing who did what and when",
+        "Use when agent output quality is inconsistent and needs verification gates"
+      ],
+      "scrapedAt": "2026-04-07T07:33:29.630Z"
+    },
+    {
       "id": "antigravity-multi-cloud-architecture",
       "name": "multi-cloud-architecture",
       "slug": "multi-cloud-architecture",
@@ -25116,6 +25176,36 @@
       "scrapedAt": "2026-01-26T13:21:01.585Z"
     },
     {
+      "id": "antigravity-protect-mcp-governance",
+      "name": "protect-mcp-governance",
+      "slug": "protect-mcp-governance",
+      "description": "Agent governance skill for MCP tool calls — Cedar policy authoring, shadow-to-enforce rollout, and Ed25519 receipt verification.",
+      "category": "Security & Systems",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/protect-mcp-governance",
+      "content": "\n# MCP Agent Governance with protect-mcp\n\n## Overview\n\nGuidance for governing AI agent tool calls using Cedar policies and Ed25519 signed receipts. This skill teaches how to write access-control policies for MCP servers, run them in shadow mode for observation, and verify the cryptographic audit trail.\n\n## When to Use This Skill\n\n- Use when you need to control which MCP tools an agent can call and under what conditions\n- Use when you want a tamper-evident audit trail for agent tool executions\n- Use when rolling out governance policies gradually (shadow mode first, then enforce)\n- Use when authoring Cedar policies for MCP tool access control\n- Use when verifying that a receipt or audit bundle has not been tampered with\n\n## Do Not Use This Skill\n\n- When you need general application security auditing (use `@security-auditor`)\n- When you need to scan code for vulnerabilities (use `@security-audit`)\n- When you need compliance framework guidance without agent-specific governance\n\n## How It Works\n\nprotect-mcp intercepts MCP tool calls, evaluates them against Cedar policies (the same policy engine used by AWS Verified Permissions), and signs every decision as an Ed25519 receipt. The receipt is a cryptographic proof that a specific policy was evaluated against a specific tool call at a specific time.\n\n```\nAgent → protect-mcp → Cedar policy evaluation → MCP Server\n                ↓\n        Ed25519 signed receipt\n```\n\nThree modes of operation:\n\n1. **Shadow mode** (default) — logs decisions without blocking. Use this to observe what your policies would do before enforcing them.\n2. **Enforce mode** — blocks tool calls that violate policy. Use after shadow-mode validation.\n3. **Hooks mode** — integrates with Claude Code hooks for pre/post tool-call governance.\n\n## Core Concepts\n\n### Cedar Policies\n\nCedar is a policy language designed for authorization. Policies are evaluated locally via WASM — no network calls required.\n\n```cedar\n// Allow read-only file operations\npermit(\n  principal,\n  action == Action::\"call_tool\",\n  resource\n) when {\n  resource.tool_name in [\"read_file\", \"list_directory\", \"search_files\"]\n};\n\n// Deny destructive operations\nforbid(\n  principal,\n  action == Action::\"call_tool\",\n  resource\n) when {\n  resource.tool_name in [\"execute_command\", \"delete_file\", \"write_file\"]\n  && resource has args\n  && resource.args.contains(\"rm -rf\")\n};\n```\n\n### Signed Receipts\n\nEvery policy decision produces a signed receipt:\n\n```json\n{\n  \"payload\": {\n    \"type\": \"protectmcp:decision\",\n    \"tool_name\": \"read_file\",\n    \"decision\": \"allow\",\n    \"policy_digest\": \"sha256:9d0fd4c9e72c1d5d\",\n    \"issued_at\": \"2026-04-05T14:32:04.102Z\",\n    \"issuer_id\": \"sb:issuer:de073ae64e43\"\n  },\n  \"signature\": {\n    \"alg\": \"EdDSA\",\n    \"kid\": \"sb:issuer:de073ae64e43\",\n    \"sig\": \"2a3b5022...\"\n  }\n}\n```\n\nThe receipt format follows [IETF Internet-Draft draft-farley-acta-signed-receipts](https://datatracker.ietf.org/doc/draft-farley-acta-signed-receipts/).\n\n## Step-by-Step Guide\n\n### 1. Initialize Governance for a Project\n\n```bash\n# Install and initialize hooks (Claude Code integration)\nnpx protect-mcp init-hooks\n\n# Or run as a standalone MCP gateway\nnpx protect-mcp serve\n```\n\nThis creates a `protect-mcp.config.json` and a starter Cedar policy in your project root.\n\n### 2. Write Your First Policy\n\nCreate `policy.cedar` in your project:\n\n```cedar\n// Start permissive — allow everything in shadow mode\npermit(\n  principal,\n  action == Action::\"call_tool\",\n  resource\n);\n```\n\n### 3. Run in Shadow Mode (Observe First)\n\n```bash\n# Shadow mode is the default — logs decisions without blocking\nnpx protect-mcp --policy policy.cedar -- node your-mcp-server.js\n```\n\nReview the shadow log to understand what your agent is doing before writing restrictive policies.\n\n### 4. Tighten and Enforce\n\nOnce you understand the tool-call patterns, write specific policies:\n\n```cedar\n// Allow file reads, deny writes outside src/\npermit(\n  principal,\n  action == Action::\"call_tool\",\n  resource\n) when {\n  resource.tool_name == \"read_file\"\n};\n\npermit(\n  principal,\n  action == Action::\"call_tool\",\n  resource\n) when {\n  resource.tool_name == \"write_file\"\n  && resource has args\n  && resource.args.path like \"src/*\"\n};\n\n// Deny everything else\nforbid(\n  principal,\n  action == Action::\"call_tool\",\n  resource\n);\n```\n\nSwitch to enforce mode:\n\n```bash\nnpx protect-mcp --policy policy.cedar --enforce -- node your-mcp-server.js\n```\n\n### 5. Verify Receipts\n\n```bash\n# Verify a single receipt\nnpx @veritasacta/verify receipt.json --key <public-key-hex>\n\n# Verify an audit bundle (multiple receipts + keys)\nnpx @veritasacta/verify bundle.json --bundle\n\n# Self-test the verifier (proves it works offline)\nnpx @veritasacta/verify --self-test\n```\n\nExit codes: `0` = signature valid (proven authentic), `1` = signature invalid (proven tampered), `2` = verifier error (malformed input).\n\n## Examples\n\n### Example 1: Governance for a Claude Code Session\n\n```bash\n# Initialize hooks\nnpx protect-mcp init-hooks\n\n# ",
+      "tags": [
+        "node",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "design",
+        "security",
+        "vulnerability",
+        "aws"
+      ],
+      "useCases": [
+        "Use when you need to control which MCP tools an agent can call and under what conditions",
+        "Use when you want a tamper-evident audit trail for agent tool executions",
+        "Use when rolling out governance policies gradually (shadow mode first, then enforce)",
+        "Use when authoring Cedar policies for MCP tool access control",
+        "Use when verifying that a receipt or audit bundle has not been tampered with"
+      ],
+      "scrapedAt": "2026-04-07T07:34:22.573Z"
+    },
+    {
       "id": "antigravity-protocol-reverse-engineering",
       "name": "protocol-reverse-engineering",
       "slug": "protocol-reverse-engineering",
@@ -25346,6 +25436,34 @@
       "scrapedAt": "2026-01-29T07:00:08.644Z"
     },
     {
+      "id": "antigravity-python-pptx-generator",
+      "name": "python-pptx-generator",
+      "slug": "python-pptx-generator",
+      "description": "Generate complete Python scripts that build polished PowerPoint decks with python-pptx and real slide content.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/python-pptx-generator",
+      "content": "\n# Python PPTX Generator\n\n## Overview\n\nUse this skill when the user wants a ready-to-run Python script that creates a PowerPoint presentation with `python-pptx`.\nIt focuses on turning a topic brief into a complete slide deck script with real slide content, sensible structure, and a working save step.\n\n## When to Use This Skill\n\n- Use when the user wants a Python script that generates a `.pptx` file automatically\n- Use when the user needs slide content drafted and encoded directly into `python-pptx`\n- Use when the user wants a quick presentation generator for demos, classes, or internal briefings\n\n## How It Works\n\n### Step 1: Collect the Deck Brief\n\nAsk for the topic, audience, tone, and target number of slides if the request does not already include them.\nIf constraints are missing, pick conservative defaults and state them in the generated script comments.\n\n### Step 2: Plan the Narrative Arc\n\nOutline the deck before writing code:\n\n1. Title slide\n2. Agenda or context\n3. Core teaching or business points\n4. Summary or next steps\n\nKeep the slide count realistic for the requested audience and avoid filler slides.\n\n### Step 3: Generate the Python Script\n\nWrite a complete script that:\n\n- imports `Presentation` from `python-pptx`\n- creates the deck\n- selects appropriate built-in layouts\n- writes real titles and bullet points\n- saves the file with a clear filename\n- prints a success message after saving\n\n### Step 4: Keep the Output Runnable\n\nThe final answer should be a Python code block that can run after installing `python-pptx`.\nAvoid pseudocode, placeholders, or missing imports.\n\n## Examples\n\n### Example 1: Educational Deck\n\n```text\nUser: Create a 5-slide presentation on the basics of machine learning for a high school class.\nOutput: A complete Python script that creates a title slide, overview, core concepts, examples, and recap.\n```\n\n### Example 2: Business Briefing\n\n```text\nUser: Generate a 7-slide deck for sales leadership on Q2 pipeline risks and mitigation options.\nOutput: A python-pptx script with executive-friendly slide titles, concise bullets, and a final recommendations slide.\n```\n\n## Best Practices\n\n- ✅ Use standard `python-pptx` layouts unless the user asks for custom positioning\n- ✅ Write audience-appropriate bullet points instead of placeholders\n- ✅ Save the output file explicitly in the script, for example `output.pptx`\n- ✅ Keep slide titles short and the bullet hierarchy readable\n- ❌ Do not return partial snippets that require the user to assemble the rest\n- ❌ Do not invent unsupported styling APIs without checking `python-pptx` capabilities\n\n## Security & Safety Notes\n\n- Install `python-pptx` only in an environment you control, for example a local virtual environment\n- If the user will run the script on a shared machine, choose a safe output path and avoid overwriting existing presentations without confirmation\n- If the request includes proprietary or sensitive presentation content, keep it out of public examples and sample filenames\n\n## Common Pitfalls\n\n- **Problem:** The generated script uses placeholder text instead of real content  \n  **Solution:** Draft the narrative first, then turn each slide into specific titles and bullets\n\n- **Problem:** The deck uses too many slides for the requested audience  \n  **Solution:** Compress the outline to the most important 4 to 8 slides unless the user explicitly wants a longer deck\n\n- **Problem:** The script forgets to save or print a completion message  \n  **Solution:** Always end with `prs.save(...)` and a short success print\n\n## Related Skills\n\n- `@pptx-official` - Use when the task is about inspecting or editing existing PowerPoint files\n- `@docx-official` - Use when the requested output should be a document instead of a slide deck\n",
+      "tags": [
+        "python",
+        "docx",
+        "pptx",
+        "api",
+        "claude",
+        "ai",
+        "document",
+        "presentation",
+        "security"
+      ],
+      "useCases": [
+        "Use when the user wants a Python script that generates a `.pptx` file automatically",
+        "Use when the user needs slide content drafted and encoded directly into `python-pptx`",
+        "Use when the user wants a quick presentation generator for demos, classes, or internal briefings"
+      ],
+      "scrapedAt": "2026-04-07T07:34:26.566Z"
+    },
+    {
       "id": "antigravity-python-pro",
       "name": "python-pro",
       "slug": "python-pro",
@@ -25393,99 +25511,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-29T07:00:09.456Z"
-    },
-    {
-      "id": "antigravity-qiskit",
-      "name": "qiskit",
-      "slug": "qiskit",
-      "description": "Qiskit is the world's most popular open-source quantum computing framework with 13M+ downloads. Build quantum circuits, optimize for hardware, execute on simulators or real quantum computers, and analyze results. Supports IBM Quantum (100+ qubit systems), IonQ, Amazon Braket, and other providers.",
-      "category": "Creative & Media",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/qiskit",
-      "content": "\n# Qiskit\n\n## When to Use\n\n- You are building or optimizing quantum circuits with Qiskit for simulators or real hardware.\n- You need IBM Quantum-style tooling for transpilation, execution, visualization, or algorithm libraries.\n- You want guidance on moving from a simple circuit prototype to backend-aware execution.\n\n## Overview\n\nQiskit is the world's most popular open-source quantum computing framework with 13M+ downloads. Build quantum circuits, optimize for hardware, execute on simulators or real quantum computers, and analyze results. Supports IBM Quantum (100+ qubit systems), IonQ, Amazon Braket, and other providers.\n\n**Key Features:**\n- 83x faster transpilation than competitors\n- 29% fewer two-qubit gates in optimized circuits\n- Backend-agnostic execution (local simulators or cloud hardware)\n- Comprehensive algorithm libraries for optimization, chemistry, and ML\n\n## Quick Start\n\n### Installation\n\n```bash\nuv pip install qiskit\nuv pip install \"qiskit[visualization]\" matplotlib\n```\n\n### First Circuit\n\n```python\nfrom qiskit import QuantumCircuit\nfrom qiskit.primitives import StatevectorSampler\n\n# Create Bell state (entangled qubits)\nqc = QuantumCircuit(2)\nqc.h(0)           # Hadamard on qubit 0\nqc.cx(0, 1)       # CNOT from qubit 0 to 1\nqc.measure_all()  # Measure both qubits\n\n# Run locally\nsampler = StatevectorSampler()\nresult = sampler.run([qc], shots=1024).result()\ncounts = result[0].data.meas.get_counts()\nprint(counts)  # {'00': ~512, '11': ~512}\n```\n\n### Visualization\n\n```python\nfrom qiskit.visualization import plot_histogram\n\nqc.draw('mpl')           # Circuit diagram\nplot_histogram(counts)   # Results histogram\n```\n\n## Core Capabilities\n\n### 1. Setup and Installation\nFor detailed installation, authentication, and IBM Quantum account setup:\n- **See `references/setup.md`**\n\nTopics covered:\n- Installation with uv\n- Python environment setup\n- IBM Quantum account and API token configuration\n- Local vs. cloud execution\n\n### 2. Building Quantum Circuits\nFor constructing quantum circuits with gates, measurements, and composition:\n- **See `references/circuits.md`**\n\nTopics covered:\n- Creating circuits with QuantumCircuit\n- Single-qubit gates (H, X, Y, Z, rotations, phase gates)\n- Multi-qubit gates (CNOT, SWAP, Toffoli)\n- Measurements and barriers\n- Circuit composition and properties\n- Parameterized circuits for variational algorithms\n\n### 3. Primitives (Sampler and Estimator)\nFor executing quantum circuits and computing results:\n- **See `references/primitives.md`**\n\nTopics covered:\n- **Sampler**: Get bitstring measurements and probability distributions\n- **Estimator**: Compute expectation values of observables\n- V2 interface (StatevectorSampler, StatevectorEstimator)\n- IBM Quantum Runtime primitives for hardware\n- Sessions and Batch modes\n- Parameter binding\n\n### 4. Transpilation and Optimization\nFor optimizing circuits and preparing for hardware execution:\n- **See `references/transpilation.md`**\n\nTopics covered:\n- Why transpilation is necessary\n- Optimization levels (0-3)\n- Six transpilation stages (init, layout, routing, translation, optimization, scheduling)\n- Advanced features (virtual permutation elision, gate cancellation)\n- Common parameters (initial_layout, approximation_degree, seed)\n- Best practices for efficient circuits\n\n### 5. Visualization\nFor displaying circuits, results, and quantum states:\n- **See `references/visualization.md`**\n\nTopics covered:\n- Circuit drawings (text, matplotlib, LaTeX)\n- Result histograms\n- Quantum state visualization (Bloch sphere, state city, QSphere)\n- Backend topology and error maps\n- Customization and styling\n- Saving publication-quality figures\n\n### 6. Hardware Backends\nFor running on simulators and real quantum computers:\n- **See `references/backends.md`**\n\nTopics covered:\n- IBM Quantum backends and authentication\n- Backend properties and status\n- Running on real hardware with Runtime primitives\n- Job management and queuing\n- Session mode (iterative algorithms)\n- Batch mode (parallel jobs)\n- Local simulators (StatevectorSampler, Aer)\n- Third-party providers (IonQ, Amazon Braket)\n- Error mitigation strategies\n\n### 7. Qiskit Patterns Workflow\nFor implementing the four-step quantum computing workflow:\n- **See `references/patterns.md`**\n\nTopics covered:\n- **Map**: Translate problems to quantum circuits\n- **Optimize**: Transpile for hardware\n- **Execute**: Run with primitives\n- **Post-process**: Extract and analyze results\n- Complete VQE example\n- Session vs. Batch execution\n- Common workflow patterns\n\n### 8. Quantum Algorithms and Applications\nFor implementing specific quantum algorithms:\n- **See `references/algorithms.md`**\n\nTopics covered:\n- **Optimization**: VQE, QAOA, Grover's algorithm\n- **Chemistry**: Molecular ground states, excited states, Hamiltonians\n- **Machine Learning**: Quantum kernels, VQC, QNN\n- **Algorithm libraries**: Qiskit Nature, Qiskit ML, Qiskit Optimization\n- Physics simulations and benchmarking\n\n## Workflow Decision Guide\n\n**If you need to:**",
-      "tags": [
-        "python",
-        "api",
-        "ai",
-        "workflow"
-      ],
-      "useCases": [
-        "You are building or optimizing quantum circuits with Qiskit for simulators or real hardware.",
-        "You need IBM Quantum-style tooling for transpilation, execution, visualization, or algorithm libraries.",
-        "You want guidance on moving from a simple circuit prototype to backend-aware execution."
-      ],
-      "scrapedAt": "2026-03-07T06:57:02.261Z"
-    },
-    {
-      "id": "antigravity-quality-nonconformance",
-      "name": "quality-nonconformance",
-      "slug": "quality-nonconformance",
-      "description": "Codified expertise for quality control, non-conformance investigation, root cause analysis, corrective action, and supplier quality management in regulated manufacturing.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/quality-nonconformance",
-      "content": "\n## When to Use\nUse this skill when investigating product defects or process deviations, performing root cause analysis (RCA), managing Corrective and Preventive Actions (CAPA), interpreting Statistical Process Control (SPC) data, or auditing supplier quality.\n\n# Quality & Non-Conformance Management\n\n## Role and Context\n\nYou are a senior quality engineer with 15+ years in regulated manufacturing environments — FDA 21 CFR 820 (medical devices), IATF 16949 (automotive), AS9100 (aerospace), and ISO 13485 (medical devices). You manage the full non-conformance lifecycle from incoming inspection through final disposition. Your systems include QMS (eQMS platforms like MasterControl, ETQ, Veeva), SPC software (Minitab, InfinityQS), ERP (SAP QM, Oracle Quality), CMM and metrology equipment, and supplier portals. You sit at the intersection of manufacturing, engineering, procurement, regulatory, and customer quality. Your judgment calls directly affect product safety, regulatory standing, production throughput, and supplier relationships.\n\n## Core Knowledge\n\n### NCR Lifecycle\n\nEvery non-conformance follows a controlled lifecycle. Skipping steps creates audit findings and regulatory risk:\n\n- **Identification:** Anyone can initiate. Record: who found it, where (incoming, in-process, final, field), what standard/spec was violated, quantity affected, lot/batch traceability. Tag or quarantine nonconforming material immediately — no exceptions. Physical segregation with red-tag or hold-tag in a designated MRB area. Electronic hold in ERP to prevent inadvertent shipment.\n- **Documentation:** NCR number assigned per your QMS numbering scheme. Link to part number, revision, PO/work order, specification clause violated, measurement data (actuals vs. tolerances), photographs, and inspector ID. For FDA-regulated products, records must satisfy 21 CFR 820.90; for automotive, IATF 16949 §8.7.\n- **Investigation:** Determine scope — is this an isolated piece or a systemic lot issue? Check upstream and downstream: other lots from the same supplier shipment, other units from the same production run, WIP and finished goods inventory from the same period. Containment actions must happen before root cause analysis begins.\n- **Disposition via MRB (Material Review Board):** The MRB typically includes quality, engineering, and manufacturing representatives. For aerospace (AS9100), the customer may need to participate. Disposition options:\n  - **Use-as-is:** Part does not meet drawing but is functionally acceptable. Requires engineering justification (concession/deviation). In aerospace, requires customer approval per AS9100 §8.7.1. In automotive, customer notification is typically required. Document the rationale — \"because we need the parts\" is not a justification.\n  - **Rework:** Bring the part into conformance using an approved rework procedure. The rework instruction must be documented, and the reworked part must be re-inspected to the original specification. Track rework costs.\n  - **Repair:** Part will not fully meet the original specification but will be made functional. Requires engineering disposition and often customer concession. Different from rework — repair accepts a permanent deviation.\n  - **Return to Vendor (RTV):** Issue a Supplier Corrective Action Request (SCAR) or CAR. Debit memo or replacement PO. Track supplier response within agreed timelines. Update supplier scorecard.\n  - **Scrap:** Document scrap with quantity, cost, lot traceability, and authorized scrap approval (often requires management sign-off above a dollar threshold). For serialized or safety-critical parts, witness destruction.\n\n### Root Cause Analysis\n\nStopping at symptoms is the most common failure mode in quality investigations:\n\n- **5 Whys:** Simple, effective for straightforward process failures. Limitation: assumes a single linear causal chain. Fails on complex, multi-factor problems. Each \"why\" must be verified with data, not opinion — \"Why did the dimension drift?\" → \"Because the tool wore\" is only valid if you measured tool wear.\n- **Ishikawa (Fishbone) Diagram:** Use the 6M framework (Man, Machine, Material, Method, Measurement, Mother Nature/Environment). Forces consideration of all potential cause categories. Most useful as a brainstorming framework to prevent premature convergence on a single cause. Not a root cause tool by itself — it generates hypotheses that need verification.\n- **Fault Tree Analysis (FTA):** Top-down, deductive. Start with the failure event and decompose into contributing causes using AND/OR logic gates. Quantitative when failure rate data is available. Required or expected in aerospace (AS9100) and medical device (ISO 14971 risk analysis) contexts. Most rigorous method but resource-intensive.\n- **8D Methodology:** Team-based, structured problem-solving. D0: Symptom recognition and emergency response. D1: Team formation. D2: Problem definition (IS/IS-NOT). D3: Interim containment. D4: Root cause identification (use fishbon",
-      "tags": [
-        "react",
-        "ai",
-        "agent",
-        "template",
-        "design",
-        "document",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-26T07:13:20.636Z"
-    },
-    {
-      "id": "antigravity-quant-analyst",
-      "name": "quant-analyst",
-      "slug": "quant-analyst",
-      "description": "Build financial models, backtest trading strategies, and analyze market data. Implements risk metrics, portfolio optimization, and statistical arbitrage.",
-      "category": "Creative & Media",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/quant-analyst",
-      "content": "\n## Use this skill when\n\n- Working on quant analyst tasks or workflows\n- Needing guidance, best practices, or checklists for quant analyst\n\n## Do not use this skill when\n\n- The task is unrelated to quant analyst\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\nYou are a quantitative analyst specializing in algorithmic trading and financial modeling.\n\n## Focus Areas\n- Trading strategy development and backtesting\n- Risk metrics (VaR, Sharpe ratio, max drawdown)\n- Portfolio optimization (Markowitz, Black-Litterman)\n- Time series analysis and forecasting\n- Options pricing and Greeks calculation\n- Statistical arbitrage and pairs trading\n\n## Approach\n1. Data quality first - clean and validate all inputs\n2. Robust backtesting with transaction costs and slippage\n3. Risk-adjusted returns over absolute returns\n4. Out-of-sample testing to avoid overfitting\n5. Clear separation of research and production code\n\n## Output\n- Strategy implementation with vectorized operations\n- Backtest results with performance metrics\n- Risk analysis and exposure reports\n- Data pipeline for market data ingestion\n- Visualization of returns and key metrics\n- Parameter sensitivity analysis\n\nUse pandas, numpy, and scipy. Include realistic assumptions about market microstructure.\n",
-      "tags": [
-        "ai",
-        "workflow",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-26T07:13:21.185Z"
-    },
-    {
-      "id": "antigravity-radix-ui-design-system",
-      "name": "radix-ui-design-system",
-      "slug": "radix-ui-design-system",
-      "description": "Build accessible design systems with Radix UI primitives. Headless component customization, theming strategies, and compound component patterns for production-grade UI libraries.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/radix-ui-design-system",
-      "content": "\n# Radix UI Design System\n\nBuild production-ready, accessible design systems using Radix UI primitives with full customization control and zero style opinions.\n\n## Overview\n\nRadix UI provides unstyled, accessible components (primitives) that you can customize to match any design system. This skill guides you through building scalable component libraries with Radix UI, focusing on accessibility-first design, theming architecture, and composable patterns.\n\n**Key Strengths:**\n- **Headless by design**: Full styling control without fighting defaults\n- **Accessibility built-in**: WAI-ARIA compliant, keyboard navigation, screen reader support\n- **Composable primitives**: Build complex components from simple building blocks\n- **Framework agnostic**: Works with React, but styles work anywhere\n\n## When to Use This Skill\n\n- Creating a custom design system from scratch\n- Building accessible UI component libraries\n- Implementing complex interactive components (Dialog, Dropdown, Tabs, etc.)\n- Migrating from styled component libraries to unstyled primitives\n- Setting up theming systems with CSS variables or Tailwind\n- Need full control over component behavior and styling\n- Building applications requiring WCAG 2.1 AA/AAA compliance\n\n## Do not use this skill when\n\n- You need pre-styled components out of the box (use shadcn/ui, Mantine, etc.)\n- Building simple static pages without interactivity\n- The project doesn't use React 16.8+ (Radix requires hooks)\n- You need components for frameworks other than React\n\n---\n\n## Core Principles\n\n### 1. Accessibility First\n\nEvery Radix primitive is built with accessibility as the foundation:\n\n- **Keyboard Navigation**: Full keyboard support (Tab, Arrow keys, Enter, Escape)\n- **Screen Readers**: Proper ARIA attributes and live regions\n- **Focus Management**: Automatic focus trapping and restoration\n- **Disabled States**: Proper handling of disabled and aria-disabled\n\n**Rule**: Never override accessibility features. Enhance, don't replace.\n\n### 2. Headless Architecture\n\nRadix provides **behavior**, you provide **appearance**:\n\n```tsx\n// ❌ Don't fight pre-styled components\n<Button className=\"override-everything\" />\n\n// ✅ Radix gives you behavior, you add styling\n<Dialog.Root>\n  <Dialog.Trigger className=\"your-button-styles\" />\n  <Dialog.Content className=\"your-modal-styles\" />\n</Dialog.Root>\n```\n\n### 3. Composition Over Configuration\n\nBuild complex components from simple primitives:\n\n```tsx\n// Primitive components compose naturally\n<Tabs.Root>\n  <Tabs.List>\n    <Tabs.Trigger value=\"tab1\">Tab 1</Tabs.Trigger>\n    <Tabs.Trigger value=\"tab2\">Tab 2</Tabs.Trigger>\n  </Tabs.List>\n  <Tabs.Content value=\"tab1\">Content 1</Tabs.Content>\n  <Tabs.Content value=\"tab2\">Content 2</Tabs.Content>\n</Tabs.Root>\n```\n\n---\n\n## Getting Started\n\n### Installation\n\n```bash\n# Install individual primitives (recommended)\nnpm install @radix-ui/react-dialog @radix-ui/react-dropdown-menu\n\n# Or install multiple at once\nnpm install @radix-ui/react-{dialog,dropdown-menu,tabs,tooltip}\n\n# For styling (optional but common)\nnpm install clsx tailwind-merge class-variance-authority\n```\n\n### Basic Component Pattern\n\nEvery Radix component follows this pattern:\n\n```tsx\nimport * as Dialog from '@radix-ui/react-dialog';\n\nexport function MyDialog() {\n  return (\n    <Dialog.Root>\n      {/* Trigger the dialog */}\n      <Dialog.Trigger asChild>\n        <button className=\"trigger-styles\">Open</button>\n      </Dialog.Trigger>\n\n      {/* Portal renders outside DOM hierarchy */}\n      <Dialog.Portal>\n        {/* Overlay (backdrop) */}\n        <Dialog.Overlay className=\"overlay-styles\" />\n        \n        {/* Content (modal) */}\n        <Dialog.Content className=\"content-styles\">\n          <Dialog.Title>Title</Dialog.Title>\n          <Dialog.Description>Description</Dialog.Description>\n          \n          {/* Your content here */}\n          \n          <Dialog.Close asChild>\n            <button>Close</button>\n          </Dialog.Close>\n        </Dialog.Content>\n      </Dialog.Portal>\n    </Dialog.Root>\n  );\n}\n```\n\n---\n\n## Theming Strategies\n\n### Strategy 1: CSS Variables (Framework-Agnostic)\n\n**Best for**: Maximum portability, SSR-friendly\n\n```css\n/* globals.css */\n:root {\n  --color-primary: 220 90% 56%;\n  --color-surface: 0 0% 100%;\n  --radius-base: 0.5rem;\n  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);\n}\n\n[data-theme=\"dark\"] {\n  --color-primary: 220 90% 66%;\n  --color-surface: 222 47% 11%;\n}\n```\n\n```tsx\n// Component.tsx\n<Dialog.Content \n  className=\"\n    bg-[hsl(var(--color-surface))]\n    rounded-[var(--radius-base)]\n    shadow-[var(--shadow-lg)]\n  \"\n/>\n```\n\n### Strategy 2: Tailwind + CVA (Class Variance Authority)\n\n**Best for**: Tailwind projects, variant-heavy components\n\n```tsx\n// button.tsx\nimport { cva, type VariantProps } from 'class-variance-authority';\nimport { cn } from '@/lib/utils';\n\nconst buttonVariants = cva(\n  // Base styles\n  \"inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outlin",
-      "tags": [
-        "typescript",
-        "react",
-        "node",
-        "ai",
-        "design",
-        "document",
-        "tailwind"
-      ],
-      "useCases": [
-        "Creating a custom design system from scratch",
-        "Building accessible UI component libraries",
-        "Implementing complex interactive components (Dialog, Dropdown, Tabs, etc.)",
-        "Migrating from styled component libraries to unstyled primitives",
-        "Setting up theming systems with CSS variables or Tailwind"
-      ],
-      "scrapedAt": "2026-02-02T07:13:35.280Z"
     },
     {
       "id": "composio-raffle-winner-picker",
@@ -26295,14 +26320,14 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 379
+      "count": 380
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 350
+      "count": 349
     },
     {
       "id": "development-code-tools",
@@ -26316,14 +26341,14 @@
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 100
+      "count": 98
     },
     {
       "id": "security-systems",
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 74
+      "count": 76
     },
     {
       "id": "business-marketing",
@@ -26367,48 +26392,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 136575
+      "stars": 138095
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 111200
+      "stars": 111876
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 51439
+      "stars": 51705
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 70651
+      "stars": 70714
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 25,
       "newSkillCount": 0,
-      "stars": 1077
+      "stars": 1081
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1000,
-      "newSkillCount": 8,
-      "stars": 30929
+      "newSkillCount": 12,
+      "stars": 31198
     }
   ],
-  "lastUpdated": "2026-04-06T08:00:03.492Z",
+  "lastUpdated": "2026-04-07T07:34:27.417Z",
   "stats": {
     "totalSkills": 1099,
-    "newSkills": 18,
-    "scrapedAt": "2026-04-06T08:00:03.492Z"
+    "newSkills": 22,
+    "scrapedAt": "2026-04-07T07:34:27.417Z"
   }
 }
