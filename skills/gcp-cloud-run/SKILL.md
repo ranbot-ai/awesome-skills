@@ -1,14 +1,28 @@
 ---
 name: gcp-cloud-run
-description: When to use: ['Web applications and APIs', 'Need any runtime or library', 'Complex services with multiple endpoints', 'Stateless containerized workloads'] 
+description: Specialized skill for building production-ready serverless applications on GCP. Covers Cloud Run services (containerized), Cloud Run Functions (event-driven), cold start optimization, and event-driven
 category: AI & Agents
 source: antigravity
-tags: [javascript, node, api, ai, workflow, image, docker, gcp, rag, cro]
+tags: [python, javascript, node, api, ai, llm, automation, workflow, design, image]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gcp-cloud-run
 ---
 
 
 # GCP Cloud Run
+
+Specialized skill for building production-ready serverless applications on GCP.
+Covers Cloud Run services (containerized), Cloud Run Functions (event-driven),
+cold start optimization, and event-driven architecture with Pub/Sub.
+
+## Principles
+
+- Cloud Run for containers, Functions for simple event handlers
+- Optimize for cold starts with startup CPU boost and min instances
+- Set concurrency based on workload (start with 8, adjust)
+- Memory includes /tmp filesystem - plan accordingly
+- Use VPC Connector only when needed (adds latency)
+- Containers should start fast and be stateless
+- Handle signals gracefully for clean shutdown
 
 ## Patterns
 
@@ -16,9 +30,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gcp-
 
 Containerized web service on Cloud Run
 
-**When to use**: ['Web applications and APIs', 'Need any runtime or library', 'Complex services with multiple endpoints', 'Stateless containerized workloads']
+**When to use**: Web applications and APIs,Need any runtime or library,Complex services with multiple endpoints,Stateless containerized workloads
 
-```javascript
 ```dockerfile
 # Dockerfile - Multi-stage build for smaller image
 FROM node:20-slim AS builder
@@ -108,16 +121,44 @@ steps:
       - '--cpu=1'
       - '--min-instances=1'
       - '--max-instances=100'
-     
+      - '--concurrency=80'
+      - '--cpu-boost'
+
+images:
+  - 'gcr.io/$PROJECT_ID/my-service:$COMMIT_SHA'
 ```
+
+### Structure
+
+project/
+├── Dockerfile
+├── .dockerignore
+├── src/
+│   ├── index.js
+│   └── routes/
+├── package.json
+└── cloudbuild.yaml
+
+### Gcloud_deploy
+
+# Direct gcloud deployment
+gcloud run deploy my-service \
+  --source . \
+  --region us-central1 \
+  --allow-unauthenticated \
+  --memory 512Mi \
+  --cpu 1 \
+  --min-instances 1 \
+  --max-instances 100 \
+  --concurrency 80 \
+  --cpu-boost
 
 ### Cloud Run Functions Pattern
 
 Event-driven functions (formerly Cloud Functions)
 
-**When to use**: ['Simple event handlers', 'Pub/Sub message processing', 'Cloud Storage triggers', 'HTTP webhooks']
+**When to use**: Simple event handlers,Pub/Sub message processing,Cloud Storage triggers,HTTP webhooks
 
-```javascript
 ```javascript
 // HTTP Function
 // index.js
@@ -177,56 +218,4 @@ gcloud functions deploy hello-http \
 gcloud functions deploy process-messages \
   --gen2 \
   --runtime nodejs20 \
-  --trigger-topic my-topic \
-  --region us-central1
-
-# Deploy Cloud Storage function
-gcloud functions deploy process-uploads \
-  --gen2 \
-  --runtime nodejs20 \
-  --trigger-event-filters="type=google.cloud.storage.object.v1.finalized" \
-  --trigger-event-filters="bucket=my-bucket" \
-  --region us-central1
-```
-```
-
-### Cold Start Optimization Pattern
-
-Minimize cold start latency for Cloud Run
-
-**When to use**: ['Latency-sensitive applications', 'User-facing APIs', 'High-traffic services']
-
-```javascript
-## 1. Enable Startup CPU Boost
-
-```bash
-gcloud run deploy my-service \
-  --cpu-boost \
-  --region us-central1
-```
-
-## 2. Set Minimum Instances
-
-```bash
-gcloud run deploy my-service \
-  --min-instances 1 \
-  --region us-central1
-```
-
-## 3. Optimize Container Image
-
-```dockerfile
-# Use distroless for minimal image
-FROM node:20-slim AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-
-FROM gcr.io/distroless/nodejs20-debian12
-WORKDIR /app
-COPY --from=builder /app/node_modules ./node_modules
-COPY src ./src
-CMD ["src/index.js"]
-```
-
-## 4. Lazy Initi
+  -

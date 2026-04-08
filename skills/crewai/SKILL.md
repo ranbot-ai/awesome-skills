@@ -1,14 +1,19 @@
 ---
 name: crewai
-description: You are an expert in designing collaborative AI agent teams with CrewAI. You think in terms of roles, responsibilities, and delegation. You design clear agent personas with specific expertise, create 
+description: Expert in CrewAI - the leading role-based multi-agent framework used by 60% of Fortune 500 companies. 
 category: AI & Agents
 source: antigravity
-tags: [python, react, api, ai, agent, llm, gpt, workflow, design, langgraph]
+tags: [python, api, ai, agent, llm, gpt, workflow, design, langgraph, crewai]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/crewai
 ---
 
 
 # CrewAI
+
+Expert in CrewAI - the leading role-based multi-agent framework used by 60% of Fortune 500
+companies. Covers agent design with roles and goals, task definition, crew orchestration,
+process types (sequential, hierarchical, parallel), memory systems, and flows for complex
+workflows. Essential for building collaborative AI agent teams.
 
 **Role**: CrewAI Multi-Agent Architect
 
@@ -17,6 +22,15 @@ in terms of roles, responsibilities, and delegation. You design clear agent pers
 with specific expertise, create well-defined tasks with expected outputs, and
 orchestrate crews for optimal collaboration. You know when to use sequential vs
 hierarchical processes.
+
+### Expertise
+
+- Agent persona design
+- Task decomposition
+- Crew orchestration
+- Process selection
+- Memory configuration
+- Flow design
 
 ## Capabilities
 
@@ -28,11 +42,39 @@ hierarchical processes.
 - Tool integration
 - Flows for complex workflows
 
-## Requirements
+## Prerequisites
 
-- Python 3.10+
-- crewai package
-- LLM API access
+- 0: Python proficiency
+- 1: Multi-agent concepts
+- 2: Understanding of delegation
+- Required skills: Python 3.10+, crewai package, LLM API access
+
+## Scope
+
+- 0: Python-only
+- 1: Best for structured workflows
+- 2: Can be verbose for simple cases
+- 3: Flows are newer feature
+
+## Ecosystem
+
+### Primary
+
+- CrewAI framework
+- CrewAI Tools
+
+### Common_integrations
+
+- OpenAI / Anthropic / Ollama
+- SerperDev (search)
+- FileReadTool, DirectoryReadTool
+- Custom tools
+
+### Platforms
+
+- Python applications
+- FastAPI backends
+- Enterprise deployments
 
 ## Patterns
 
@@ -42,7 +84,6 @@ Define agents and tasks in YAML (recommended)
 
 **When to use**: Any CrewAI project
 
-```python
 # config/agents.yaml
 researcher:
   role: "Senior Research Analyst"
@@ -121,8 +162,20 @@ class ContentCrew:
 
     @task
     def writing_task(self) -> Task:
-        return Task(config
-```
+        return Task(config=self.tasks_config['writing_task'])
+
+    @crew
+    def crew(self) -> Crew:
+        return Crew(
+            agents=self.agents,
+            tasks=self.tasks,
+            process=Process.sequential,
+            verbose=True
+        )
+
+# main.py
+crew = ContentCrew()
+result = crew.crew().kickoff(inputs={"topic": "AI Agents in 2025"})
 
 ### Hierarchical Process
 
@@ -130,7 +183,6 @@ Manager agent delegates to workers
 
 **When to use**: Complex tasks needing coordination
 
-```python
 from crewai import Crew, Process
 
 # Define specialized agents
@@ -163,63 +215,4 @@ crew = Crew(
 
 # Manager decides:
 # - Which agent handles which task
-# - When to delegate
-# - How to combine results
-
-result = crew.kickoff()
-```
-
-### Planning Feature
-
-Generate execution plan before running
-
-**When to use**: Complex workflows needing structure
-
-```python
-from crewai import Crew, Process
-
-# Enable planning
-crew = Crew(
-    agents=[researcher, writer, reviewer],
-    tasks=[research, write, review],
-    process=Process.sequential,
-    planning=True,  # Enable planning
-    planning_llm=ChatOpenAI(model="gpt-4o")  # Planner model
-)
-
-# With planning enabled:
-# 1. CrewAI generates step-by-step plan
-# 2. Plan is injected into each task
-# 3. Agents see overall structure
-# 4. More consistent results
-
-result = crew.kickoff()
-
-# Access the plan
-print(crew.plan)
-```
-
-## Anti-Patterns
-
-### ❌ Vague Agent Roles
-
-**Why bad**: Agent doesn't know its specialty.
-Overlapping responsibilities.
-Poor task delegation.
-
-**Instead**: Be specific:
-- "Senior React Developer" not "Developer"
-- "Financial Analyst specializing in crypto" not "Analyst"
-Include specific skills in backstory.
-
-### ❌ Missing Expected Outputs
-
-**Why bad**: Agent doesn't know done criteria.
-Inconsistent outputs.
-Hard to chain tasks.
-
-**Instead**: Always specify expected_output:
-expected_output: |
-  A JSON object with:
-  - summary: string (100 words max)
-  - key_points:
+# - 

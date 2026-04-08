@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-faf-wizard",
+  "name": "faf-wizard",
+  "slug": "faf-wizard",
+  "description": "Done-for-you .faf generator. One-click AI context for any project - new, legacy, or famous. Auto-detects stack, scores readiness, works everywhere.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/faf-wizard",
+  "content": "\n# FAF Wizard - One-Click AI Intelligence\n\n**The pit crew for your projects.** Point it at any codebase and get scored, AI-ready context in 60 seconds.\n\nTransform any project - new, legacy, famous OSS, or forgotten side projects - into an AI-intelligent workspace with persistent context that works across all AI tools.\n\n## The Problem It Solves\n\n**Even React.js scores 0% AI-readiness.** Famous repositories have no AI context.\n\n| What Exists | What It Tells AI |\n|-------------|------------------|\n| README.md | \"What this does\" (for humans) |\n| docs/ | \"How to use it\" (for humans) |\n| **project.faf** | \"How to help build this\" (for AI) |\n\nDocumentation tells humans how to use your code. AI context tells AI how to help you build it. **They're completely different things.**\n\n## Works on ANY Project\n\n| Project Type | What FAF Wizard Does |\n|-------------|----------------------|\n| **Brand new** | Perfect AI context from line one |\n| **Legacy nightmare** | AI finally understands the archaeology |\n| **Famous OSS** | Even React doesn't have this |\n| **Side projects** | Stop re-explaining every session |\n| **Client handoffs** | Portable context for any AI tool |\n| **Team projects** | Shared context that everyone can use |\n\n## Real Success Stories\n\n### Before/After: Legacy E-commerce Platform\n```\nBefore: \"This 50k-line PHP codebase from 2015...\"\nAI: \"I don't understand this architecture\"\n\nAfter: 60 seconds with FAF Wizard\nAI: \"I see this is a Laravel-based e-commerce system with \npayment processing, inventory management, and multi-tenant \narchitecture. Here's how I can help...\"\n```\n\n### Before/After: Modern React App\n```\nBefore: Every AI session starts with context explanation\nTime lost: 5-10 minutes per session\n\nAfter: project.faf exists\nAI: Instant understanding, productive from message one\nTime saved: 2+ hours per day\n```\n\n## The 60-Second Workflow\n\n### Step 1: Detection (10 seconds)\n```bash\nfaf auto\n# Scans manifest files, directory structure, dependencies\n# Detects: React + TypeScript + Tailwind + Vercel\n```\n\n### Step 2: Generation (30 seconds)  \n```yaml\n# Auto-generated project.faf\nproject:\n  name: my-saas-dashboard  \n  goal: Customer analytics platform\n\nstack:\n  frontend: react-18\n  css: tailwind\n  deployment: vercel\n  \nhuman_context:\n  who: Solo founder\n  what: SaaS analytics dashboard\n  why: Customer insights for small businesses\n```\n\n### Step 3: Scoring & Report (20 seconds)\n```\n✅ Generated: project.faf\n🏆 AI-Readiness: 87% Bronze - Production ready\n\nFilled: 9/11 active slots\nIgnored: 22 slots (not applicable)\n\nTo reach Silver (95%):\n  + Add API documentation (+5%)  \n  + Define deployment details (+3%)\n```\n\n## Performance Data (Real Numbers)\n\n**Analyzed 8,400+ Projects:**\n- ✅ **99.2% detection accuracy** across 153+ formats\n- ✅ **Average generation time**: 12.3 seconds\n- ✅ **Bronze tier or higher**: 94% of projects\n- ✅ **Zero manual configuration**: Works out of the box\n\n### Format Support\nAutomatically detects and configures:\n- **JavaScript**: React, Vue, Angular, Svelte, Next.js, Nuxt\n- **Python**: Django, Flask, FastAPI, Jupyter, Poetry\n- **TypeScript**: All JS frameworks + native TS projects  \n- **Rust**: Cargo projects, CLI tools, web servers\n- **Go**: Modules, Docker, microservices\n- **Java**: Maven, Gradle, Spring Boot\n- **+147 more formats**\n\n## Universal Compatibility\n\n### Works With Every AI Tool\n- ✅ **Claude Code** - Reads .faf natively\n- ✅ **Cursor** - Auto-syncs to .cursorrules  \n- ✅ **Gemini CLI** - Converts to GEMINI.md\n- ✅ **Windsurf** - Syncs to .windsurfrules\n- ✅ **ChatGPT** - Readable YAML format\n- ✅ **Any AI** - Universal format support\n\n### Migration Support\nAlready have AI context files?\n```bash\n# Migrates existing context\nfaf migrate --from .cursorrules\nfaf migrate --from CLAUDE.md  \nfaf migrate --from README.md\n\n# One format, works everywhere\nfaf sync --target all\n```\n\n## Installation Options\n\n### Option 1: CLI (Recommended)\n```bash\nnpm install -g faf-cli\ncd your-project\nfaf auto\n```\n\n### Option 2: MCP Server (Claude Code)\n```json\n{\n  \"mcpServers\": {\n    \"faf\": {\n      \"command\": \"npx\", \n      \"args\": [\"-y\", \"claude-faf-mcp@latest\"]\n    }\n  }\n}\n```\n\n### Option 3: Browser Extension\nInstall from Chrome Web Store - works on any Git repository.\n\n## Three-Phase Intelligence\n\n### Phase 1: Stack Detection\n- Scans `package.json`, `Cargo.toml`, `pyproject.toml`, etc.\n- Analyzes directory structure and file patterns\n- Identifies frameworks, deployment targets, testing setup\n\n### Phase 2: Context Mining  \n- Extracts project description from README\n- Identifies architecture patterns from code structure\n- Pulls dependency information for AI context\n\n### Phase 3: Optimization\n- Generates focused 33-slot IANA format\n- Validates against format specification\n- Scores AI-readiness with improvement suggestions\n\n## Success Metrics by Project Type\n\n| Project Type | Avg Score | Time to Bronze | Detection Rate |\n|-------------|-----------|----------------|----------------|\n| **React/Vue** | 89% | Instant | 9",
+  "tags": [
+    "python",
+    "javascript",
+    "typescript",
+    "react",
+    "api",
+    "mcp",
+    "claude",
+    "ai",
+    "gpt",
+    "automation"
+  ],
+  "useCases": [
+    "✅ Quick project onboarding",
+    "✅ Automatic everything",
+    "✅ \"Just make it work\"",
+    "✅ Time-constrained scenarios",
+    "🎯 Fine-tuned championship scoring (95%+)"
+  ],
+  "scrapedAt": "2026-04-08T07:47:54.288Z"
+}

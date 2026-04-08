@@ -1,14 +1,19 @@
 ---
 name: computer-use-agents
-description: The fundamental architecture of computer use agents: observe screen, reason about next action, execute action, repeat. This loop integrates vision models with action execution through an iterative pip
+description: Build AI agents that interact with computers like humans do - viewing screens, moving cursors, clicking buttons, and typing text. Covers Anthropic's Computer Use, OpenAI's Operator/CUA, and open-sourc
 category: AI & Agents
 source: antigravity
-tags: [python, api, claude, ai, agent, automation, workflow, image, security, docker]
+tags: [python, react, api, mcp, claude, ai, agent, llm, gpt, automation]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/computer-use-agents
 ---
 
 
 # Computer Use Agents
+
+Build AI agents that interact with computers like humans do - viewing screens,
+moving cursors, clicking buttons, and typing text. Covers Anthropic's Computer
+Use, OpenAI's Operator/CUA, and open-source alternatives. Critical focus on
+sandboxing, security, and handling the unique challenges of vision-based control.
 
 ## Patterns
 
@@ -27,10 +32,8 @@ Key components:
 Critical insight: Vision agents are completely still during "thinking"
 phase (1-5 seconds), creating a detectable pause pattern.
 
+**When to use**: Building any computer use agent from scratch,Integrating vision models with desktop control,Understanding agent behavior patterns
 
-**When to use**: ['Building any computer use agent from scratch', 'Integrating vision models with desktop control', 'Understanding agent behavior patterns']
-
-```python
 from anthropic import Anthropic
 from PIL import Image
 import base64
@@ -85,95 +88,59 @@ class ComputerUseAgent:
             amount = action.get("amount", 3)
             scroll = -amount if direction == "down" else amount
             pyautogui.scroll(scroll)
-            return {"success": True, "action": f"scrolled {dir
-```
+            return {"success": True, "action": f"scrolled {direction}"}
 
-### Sandboxed Environment Pattern
+        elif action_type == "move":
+            x, y = action["x"], action["y"]
+            pyautogui.moveTo(x, y)
+            return {"success": True, "action": f"moved to ({x}, {y})"}
 
-Computer use agents MUST run in isolated, sandboxed environments.
-Never give agents direct access to your main system - the security
-risks are too high. Use Docker containers with virtual desktops.
+        else:
+            return {"success": False, "error": f"Unknown action: {action_type}"}
 
-Key isolation requirements:
-1. NETWORK: Restrict to necessary endpoints only
-2. FILESYSTEM: Read-only or scoped to temp directories
-3. CREDENTIALS: No access to host credentials
-4. SYSCALLS: Filter dangerous system calls
-5. RESOURCES: Limit CPU, memory, time
+    def run(self, task: str) -> dict:
+        """
+        Run perception-reasoning-action loop until task complete.
 
-The goal is "blast radius minimization" - if the agent goes wrong,
-damage is contained to the sandbox.
+        The loop:
+        1. Screenshot current state
+        2. Send to vision model with task context
+        3. Parse action from response
+        4. Execute action
+        5. Repeat until done or max steps
+        """
+        messages = []
+        step_count = 0
 
+        system_prompt = """You are a computer use agent. You can see the screen
+        and control mouse/keyboard.
 
-**When to use**: ['Deploying any computer use agent', 'Testing agent behavior safely', 'Running untrusted automation tasks']
+        Available actions (respond with JSON):
+        - {"type": "click", "x": 100, "y": 200, "button": "left"}
+        - {"type": "type", "text": "hello world"}
+        - {"type": "key", "key": "enter"}
+        - {"type": "scroll", "direction": "down", "amount": 3}
+        - {"type": "done", "result": "task completed successfully"}
 
-```python
-# Dockerfile for sandboxed computer use environment
-# Based on Anthropic's reference implementation pattern
+        Always respond with ONLY a JSON action object.
+        Be precise with coordinates - click exactly where needed.
+        If you see an error, try to recover.
+        """
 
-FROM ubuntu:22.04
+        while step_count < self.max_steps:
+            step_count += 1
 
-# Install desktop environment
-RUN apt-get update && apt-get install -y \
-    xvfb \
-    x11vnc \
-    fluxbox \
-    xterm \
-    firefox \
-    python3 \
-    python3-pip \
-    supervisor
+            # 1. PERCEPTION: Capture current screen
+            screenshot_b64 = self.capture_screenshot()
 
-# Security: Create non-root user
-RUN useradd -m -s /bin/bash agent && \
-    mkdir -p /home/agent/.vnc
+            # 2. REASONING: Send to vision model
+            user_content = [
+                {"type": "text", "text": f"Task: {task}\n\nStep {step_count}. What action should I take?"},
+                {"type": "image", "source": {
+                    "type": "base64",
+                    "media_type": "image/png",
+                    "data": screenshot_b64
+                }}
+            ]
 
-# Install Python dependencies
-COPY requirements.txt /tmp/
-RUN pip3 install -r /tmp/requirements.txt
-
-# Security: Drop capabilities
-RUN apt-get install -y --no-install-recommends libcap2-bin && \
-    setcap -r /usr/bin/python3 || true
-
-# Copy agent code
-COPY --chown=agent:agent . /app
-WORKDIR /app
-
-# Supervisor config for virtual display + VNC
-COPY supervisord.conf /etc/supervisor/conf.d/
-
-# Expose VNC port only (not desktop directly)
-EXPOSE 5900
-
-# Run as non-root
-USER agent
-
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
-
----
-
-# docker-compose.yml with security constraints
-version: '3.8'
-
-services:
-  computer-use-agent:
-    build: .
-    ports:
-      - "5900:5900"  # VNC for observation
-      - "8080:8080"  # API for control
-
-    # Security constraints
-    security_opt:
-      - no-new-privileges:true
-      - seccomp:seccomp-profile.json
-
-    # Resource limits
-    deploy:
-      resources:
-        limits:
-          cpus: '2'
-          memory: 4G
-        reservations:
-          cpus: '0.5'
-      
+            me

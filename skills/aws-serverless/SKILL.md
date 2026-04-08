@@ -1,14 +1,29 @@
 ---
 name: aws-serverless
-description: Proper Lambda function structure with error handling 
+description: Specialized skill for building production-ready serverless applications on AWS. Covers Lambda functions, API Gateway, DynamoDB, SQS/SNS event-driven patterns, SAM/CDK deployment, and cold start optimi
 category: Document Processing
 source: antigravity
-tags: [python, javascript, node, api, ai, workflow, template, document, aws, cro]
+tags: [python, javascript, typescript, react, node, api, ai, llm, automation, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-serverless
 ---
 
 
 # AWS Serverless
+
+Specialized skill for building production-ready serverless applications on AWS.
+Covers Lambda functions, API Gateway, DynamoDB, SQS/SNS event-driven patterns,
+SAM/CDK deployment, and cold start optimization.
+
+## Principles
+
+- Right-size memory and timeout (measure before optimizing)
+- Minimize cold starts for latency-sensitive workloads
+- Use SnapStart for Java/.NET functions
+- Prefer HTTP API over REST API for simple use cases
+- Design for failure with DLQs and retries
+- Keep deployment packages small
+- Use environment variables for configuration
+- Implement structured logging with correlation IDs
 
 ## Patterns
 
@@ -16,9 +31,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-
 
 Proper Lambda function structure with error handling
 
-**When to use**: ['Any Lambda function implementation', 'API handlers, event processors, scheduled tasks']
+**When to use**: Any Lambda function implementation,API handlers, event processors, scheduled tasks
 
-```python
 ```javascript
 // Node.js Lambda Handler
 // handler.js
@@ -99,16 +113,57 @@ table = dynamodb.Table(os.environ['TABLE_NAME'])
 
 def handler(event, context):
     try:
-        # Parse i
+        # Parse input
+        body = json.loads(event.get('body', '{}')) if isinstance(event.get('body'), str) else event.get('body', {})
+
+        # Business logic
+        result = process_request(body)
+
+        return {
+            'statusCode': 200,
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            'body': json.dumps(result)
+        }
+
+    except ClientError as e:
+        logger.error(f"DynamoDB error: {e.response['Error']['Message']}")
+        return error_response(500, 'Database error')
+
+    except json.JSONDecodeError:
+        return error_response(400, 'Invalid JSON')
+
+    except Exception as e:
+        logger.error(f"Unexpected error: {str(e)}", exc_info=True)
+        return error_response(500, 'Internal server error')
+
+def process_request(data):
+    response = table.get_item(Key={'id': data['id']})
+    return response.get('Item')
+
+def error_response(status_code, message):
+    return {
+        'statusCode': status_code,
+        'headers': {'Content-Type': 'application/json'},
+        'body': json.dumps({'error': message})
+    }
 ```
+
+### Best_practices
+
+- Initialize clients outside handler (reused across warm invocations)
+- Always return proper API Gateway response format
+- Log with structured JSON for CloudWatch Insights
+- Include request ID in error logs for tracing
 
 ### API Gateway Integration Pattern
 
 REST API and HTTP API integration with Lambda
 
-**When to use**: ['Building REST APIs backed by Lambda', 'Need HTTP endpoints for functions']
+**When to use**: Building REST APIs backed by Lambda,Need HTTP endpoints for functions
 
-```javascript
 ```yaml
 # template.yaml (SAM)
 AWSTemplateFormatVersion: '2010-09-09'
@@ -141,88 +196,4 @@ Resources:
 
   # Lambda Functions
   GetItemFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: src/handlers/get.handler
-      Events:
-        GetItem:
-          Type: HttpApi
-          Properties:
-            ApiId: !Ref HttpApi
-            Path: /items/{id}
-            Method: GET
-      Policies:
-        - DynamoDBReadPolicy:
-            TableName: !Ref ItemsTable
-
-  CreateItemFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: src/handlers/create.handler
-      Events:
-        CreateItem:
-          Type: HttpApi
-          Properties:
-            ApiId: !Ref HttpApi
-            Path: /items
-            Method: POST
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref ItemsTable
-
-  # DynamoDB Table
-  ItemsTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: id
-          AttributeType: S
-      KeySchema:
-        - AttributeName: id
-          KeyType: HASH
-      BillingMode: PAY_PER_REQUEST
-
-Outputs:
-  ApiUrl:
-    Value: !Sub "https://${HttpApi}.execute-api.${AWS::Region}.amazonaws.com/prod"
-```
-
-```javascript
-// src/handlers/get.js
-const { getItem } = require('../lib/dynamodb');
-
-exports.handler = async (event) => {
-  const id = event.pathParameters?.id;
-
-  if (!id) {
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ error: 'Missing id parameter' })
-    };
-  }
-
-  const item =
-```
-
-### Event-Driven SQS Pattern
-
-Lambda triggered by SQS for reliable async processing
-
-**When to use**: ['Decoupled, asynchronous processing', 'Need retry logic and DLQ', 'Processing messages in batches']
-
-```python
-```yaml
-# template.yaml
-Resources:
-  ProcessorFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: src/handlers/processor.handler
-      Events:
-        SQSEvent:
-          Type: SQS
-          Properties:
-            Queue: !GetAtt ProcessingQueue.Arn
-            BatchSize: 10
-            FunctionResponseTypes:
-             
+   

@@ -1,14 +1,18 @@
 ---
 name: browser-extension-builder
-description: You extend the browser to give users superpowers. You understand the unique constraints of extension development - permissions, security, store policies. You build extensions that people install and a
+description: Expert in building browser extensions that solve real problems - Chrome, Firefox, and cross-browser extensions. Covers extension architecture, manifest v3, content scripts, popup UIs, monetization str
 category: Document Processing
 source: antigravity
-tags: [javascript, api, ai, workflow, template, document, security, rag, cro]
+tags: [javascript, react, api, ai, llm, gpt, workflow, template, design, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/browser-extension-builder
 ---
 
 
 # Browser Extension Builder
+
+Expert in building browser extensions that solve real problems - Chrome, Firefox,
+and cross-browser extensions. Covers extension architecture, manifest v3, content
+scripts, popup UIs, monetization strategies, and Chrome Web Store publishing.
 
 **Role**: Browser Extension Architect
 
@@ -16,6 +20,15 @@ You extend the browser to give users superpowers. You understand the
 unique constraints of extension development - permissions, security,
 store policies. You build extensions that people install and actually
 use daily. You know the difference between a toy and a tool.
+
+### Expertise
+
+- Chrome extension APIs
+- Manifest v3
+- Content scripts
+- Service workers
+- Extension UX
+- Store publishing
 
 ## Capabilities
 
@@ -35,6 +48,8 @@ use daily. You know the difference between a toy and a tool.
 Structure for modern browser extensions
 
 **When to use**: When starting a new extension
+
+## Extension Architecture
 
 ### Project Structure
 ```
@@ -96,6 +111,8 @@ Popup ←→ Background (Service Worker) ←→ Content Script
 Code that runs on web pages
 
 **When to use**: When modifying or reading page content
+
+## Content Scripts
 
 ### Basic Content Script
 ```javascript
@@ -161,6 +178,8 @@ Persisting extension data
 
 **When to use**: When saving user settings or data
 
+## Storage and State
+
 ### Chrome Storage API
 ```javascript
 // Save data
@@ -210,28 +229,8 @@ const { settings } = await getStorage(['settings']);
 await setStorage({ settings: { ...settings, theme: 'dark' } });
 ```
 
-## Anti-Patterns
+### Extension Monetization
 
-### ❌ Requesting All Permissions
+Making money from extensions
 
-**Why bad**: Users won't install.
-Store may reject.
-Security risk.
-Bad reviews.
-
-**Instead**: Request minimum needed.
-Use optional permissions.
-Explain why in description.
-Request at time of use.
-
-### ❌ Heavy Background Processing
-
-**Why bad**: MV3 terminates idle workers.
-Battery drain.
-Browser slows down.
-Users uninstall.
-
-**Instead**: Keep background minimal.
-Use alarms for periodic tasks.
-Offload to content scripts.
-Cache aggressively.
+**

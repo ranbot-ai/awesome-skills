@@ -1,14 +1,19 @@
 ---
 name: ai-wrapper-product
-description: You know AI wrappers get a bad rap, but the good ones solve real problems. You build products where AI is the engine, not the gimmick. You understand prompt engineering is product development. You bal
+description: Expert in building products that wrap AI APIs (OpenAI, Anthropic, etc. ) into focused tools people will pay for. Not just "ChatGPT but different" - products that solve specific problems with AI. 
 category: AI & Agents
 source: antigravity
-tags: [python, javascript, api, claude, ai, llm, gpt, workflow, template, design]
+tags: [javascript, react, api, claude, ai, llm, gpt, workflow, template, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-wrapper-product
 ---
 
 
 # AI Wrapper Product
+
+Expert in building products that wrap AI APIs (OpenAI, Anthropic, etc.) into
+focused tools people will pay for. Not just "ChatGPT but different" - products
+that solve specific problems with AI. Covers prompt engineering for products,
+cost management, rate limiting, and building defensible AI businesses.
 
 **Role**: AI Product Architect
 
@@ -16,6 +21,15 @@ You know AI wrappers get a bad rap, but the good ones solve real problems.
 You build products where AI is the engine, not the gimmick. You understand
 prompt engineering is product development. You balance costs with user
 experience. You create AI products people actually pay for and use daily.
+
+### Expertise
+
+- AI product strategy
+- Prompt engineering
+- Cost optimization
+- Model selection
+- AI UX
+- Usage metering
 
 ## Capabilities
 
@@ -36,7 +50,6 @@ Building products around AI APIs
 
 **When to use**: When designing an AI-powered product
 
-```python
 ## AI Product Architecture
 
 ### The Wrapper Stack
@@ -95,7 +108,6 @@ async function generateContent(userInput, context) {
 | GPT-4o-mini | $ | Fastest | Good | Most tasks |
 | Claude 3.5 Sonnet | $$ | Fast | Excellent | Balanced |
 | Claude 3 Haiku | $ | Fastest | Good | High volume |
-```
 
 ### Prompt Engineering for Products
 
@@ -103,7 +115,6 @@ Production-grade prompt design
 
 **When to use**: When building AI product prompts
 
-```javascript
 ## Prompt Engineering for Products
 
 ### Prompt Template Pattern
@@ -158,7 +169,6 @@ function parseAIOutput(text) {
 | Validation | Catch malformed responses |
 | Retry logic | Handle failures |
 | Fallback models | Reliability |
-```
 
 ### Cost Management
 
@@ -166,7 +176,6 @@ Controlling AI API costs
 
 **When to use**: When building profitable AI products
 
-```javascript
 ## AI Cost Management
 
 ### Token Economics
@@ -208,25 +217,4 @@ function calculateCost(usage) {
 
 ### Usage Limits
 ```javascript
-async function checkUsageLimits(userId) {
-  const usage = await db.usage.sum({
-    where: {
-      userId,
-      createdAt: { gte: startOfMonth() }
-    }
-  });
-
-  const limits = await getUserLimits(userId);
-  if (usage.cost >= limits.monthlyCost) {
-    throw new Error('Monthly limit reached');
-  }
-  return true;
-}
-```
-```
-
-## Anti-Patterns
-
-### ❌ Thin Wrapper Syndrome
-
-**Why bad**: No diffe
+async func

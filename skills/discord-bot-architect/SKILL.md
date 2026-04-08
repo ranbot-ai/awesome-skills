@@ -3,12 +3,26 @@ name: discord-bot-architect
 description: Specialized skill for building production-ready Discord bots. Covers Discord.js (JavaScript) and Pycord (Python), gateway intents, slash commands, interactive components, rate limiting, and sharding. 
 category: Development & Code Tools
 source: antigravity
-tags: [python, javascript, typescript, node, api, ai, workflow, design, document]
+tags: [python, javascript, typescript, react, node, api, ai, agent, llm, automation]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/discord-bot-architect
 ---
 
 
 # Discord Bot Architect
+
+Specialized skill for building production-ready Discord bots.
+Covers Discord.js (JavaScript) and Pycord (Python), gateway intents,
+slash commands, interactive components, rate limiting, and sharding.
+
+## Principles
+
+- Slash commands over message parsing (Message Content Intent deprecated)
+- Acknowledge interactions within 3 seconds, always
+- Request only required intents (minimize privileged intents)
+- Handle rate limits gracefully with exponential backoff
+- Plan for sharding from the start (required at 2500+ guilds)
+- Use components (buttons, selects, modals) for rich UX
+- Test with guild commands first, deploy global when ready
 
 ## Patterns
 
@@ -16,9 +30,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/disc
 
 Modern Discord bot setup with Discord.js v14 and slash commands
 
-**When to use**: ['Building Discord bots with JavaScript/TypeScript', 'Need full gateway connection with events', 'Building bots with complex interactions']
+**When to use**: Building Discord bots with JavaScript/TypeScript,Need full gateway connection with events,Building bots with complex interactions
 
-```javascript
 ```javascript
 // src/index.js
 const { Client, Collection, GatewayIntentBits, Events } = require('discord.js');
@@ -92,103 +105,83 @@ module.exports = {
 const { Events } = require('discord.js');
 
 module.exports = {
-  name: Event
+  name: Events.InteractionCreate,
+  async execute(interaction) {
+    if (!interaction.isChatInputCommand()) return;
+
+    const command = interaction.client.commands.get(interaction.commandName);
+    if (!command) {
+      console.error(`No command matching ${interaction.commandName}`);
+      return;
+    }
+
+    try {
+      await command.execute(interaction);
+    } catch (error) {
+      console.error(error);
+      const reply = {
+        content: 'There was an error executing this command!',
+        ephemeral: true
+      };
+
+      if (interaction.replied || interaction.deferred) {
+        await interaction.followUp(reply);
+      } else {
+        await interaction.reply(reply);
+      }
+    }
+  }
+};
 ```
 
-### Pycord Bot Foundation
-
-Discord bot with Pycord (Python) and application commands
-
-**When to use**: ['Building Discord bots with Python', 'Prefer async/await patterns', 'Need good slash command support']
-
-```python
-```python
-# main.py
-import os
-import discord
-from discord.ext import commands
-from dotenv import load_dotenv
-
-load_dotenv()
-
-# Configure intents - only enable what you need
-intents = discord.Intents.default()
-# intents.message_content = True  # PRIVILEGED - avoid if possible
-# intents.members = True          # PRIVILEGED
-
-bot = commands.Bot(
-    command_prefix="!",  # Legacy, prefer slash commands
-    intents=intents
-)
-
-@bot.event
-async def on_ready():
-    print(f"Logged in as {bot.user}")
-    # Sync commands (do this carefully - see sharp edges)
-    # await bot.sync_commands()
-
-# Slash command
-@bot.slash_command(name="ping", description="Check bot latency")
-async def ping(ctx: discord.ApplicationContext):
-    latency = round(bot.latency * 1000)
-    await ctx.respond(f"Pong! Latency: {latency}ms")
-
-# Slash command with options
-@bot.slash_command(name="greet", description="Greet a user")
-async def greet(
-    ctx: discord.ApplicationContext,
-    user: discord.Option(discord.Member, "User to greet"),
-    message: discord.Option(str, "Custom message", required=False)
-):
-    msg = message or "Hello!"
-    await ctx.respond(f"{user.mention}, {msg}")
-
-# Load cogs
-for filename in os.listdir("./cogs"):
-    if filename.endswith(".py"):
-        bot.load_extension(f"cogs.{filename[:-3]}")
-
-bot.run(os.environ["DISCORD_TOKEN"])
-```
-
-```python
-# cogs/general.py
-import discord
-from discord.ext import commands
-
-class General(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-
-    @commands.slash_command(name="info", description="Bot information")
-    async def info(self, ctx: discord.ApplicationContext):
-        embed = discord.Embed(
-            title="Bot Info",
-            description="A helpful Discord bot",
-            color=discord.Color.blue()
-        )
-        embed.add_field(name="Servers", value=len(self.bot.guilds))
-        embed.add_field(name="Latency", value=f"{round(self.bot.latency * 1000)}ms")
-        await ctx.respond(embed=embed)
-
-    @commands.Cog.
-```
-
-### Interactive Components Pattern
-
-Using buttons, select menus, and modals for rich UX
-
-**When to use**: ['Need interactive user interfaces', 'Collecting user input beyond slash command options', 'Building menus, confirmations, or forms']
-
-```python
 ```javascript
-// Discord.js - Buttons and Select Menus
-const {
-  SlashCommandBuilder,
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-  StringSelectMenuBuilder,
-  ModalBuilder,
-  TextInputBuilder,
-  TextInput
+// src/deploy-commands.js
+const { REST, Routes } = require('discord.js');
+const fs = require('node:fs');
+const path = require('node:path');
+require('dotenv').config();
+
+const commands = [];
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(f => f.endsWith('.js'));
+
+for (const file of commandFiles) {
+  const command = require(path.join(commandsPath, file));
+  commands.push(command.data.toJSON());
+}
+
+const rest = new REST().setToken(process.env.DISCORD_TOKEN);
+
+(async () => {
+  try {
+    console.log(`Refreshing ${commands.length} commands...`);
+
+    // Guild commands (instant, for testing)
+    // const data = await rest.put(
+    //   Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID),
+    //   { body: commands }
+    // );
+
+    // Global commands (can take up to 1 hour to propagate)
+    const data = await rest.put(
+      Routes.applicationCommands(process.env.CLIENT_ID),
+      { body: commands }
+    );
+
+    console.log(`Successfully registered ${data.length} commands`);
+  } catch (error) {
+    console.error(error);
+  }
+})();
+```
+
+### Structure
+
+discord-bot/
+├── src/
+│   ├── index.js           # Main entry point
+│   ├── deploy-commands.js # Command registration script
+│   ├── commands/          # Slash command handlers
+│   │   └── ping.js
+│   └── events/            # Event handlers
+│    

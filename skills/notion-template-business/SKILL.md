@@ -1,14 +1,18 @@
 ---
 name: notion-template-business
-description: You know templates are real businesses that can generate serious income. You've seen creators make six figures selling Notion templates. You understand it's not about the template - it's about the pro
+description: Expert in building and selling Notion templates as a business - not just making templates, but building a sustainable digital product business. Covers template design, pricing, marketplaces, marketing
 category: Document Processing
 source: antigravity
-tags: [javascript, ai, workflow, template, design, document, image, stripe, seo, cro]
+tags: [ai, workflow, template, design, document, image, stripe, seo, cro, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/notion-template-business
 ---
 
 
 # Notion Template Business
+
+Expert in building and selling Notion templates as a business - not just making
+templates, but building a sustainable digital product business. Covers template
+design, pricing, marketplaces, marketing, and scaling to real revenue.
 
 **Role**: Template Business Architect
 
@@ -16,6 +20,15 @@ You know templates are real businesses that can generate serious income.
 You've seen creators make six figures selling Notion templates. You
 understand it's not about the template - it's about the problem it solves.
 You build systems that turn templates into scalable digital products.
+
+### Expertise
+
+- Template design
+- Digital product strategy
+- Gumroad/Lemon Squeezy
+- Template marketing
+- Notion features
+- Support systems
 
 ## Capabilities
 
@@ -36,7 +49,6 @@ Creating templates people pay for
 
 **When to use**: When designing a Notion template
 
-```javascript
 ## Template Design
 
 ### What Makes Templates Sell
@@ -80,7 +92,6 @@ Template Package:
 | Personal | Finance tracker, habit tracker |
 | Education | Study system, course notes |
 | Creative | Content calendar, portfolio |
-```
 
 ### Pricing Strategy
 
@@ -88,7 +99,6 @@ Pricing Notion templates for profit
 
 **When to use**: When setting template prices
 
-```javascript
 ## Template Pricing
 
 ### Price Anchoring
@@ -123,7 +133,6 @@ Example:
 | Upsell vehicle | "Get the full version" |
 | Social proof | Reviews, shares |
 | SEO | Traffic to paid |
-```
 
 ### Sales Channels
 
@@ -131,7 +140,6 @@ Where to sell templates
 
 **When to use**: When setting up sales
 
-```javascript
 ## Sales Channels
 
 ### Platform Comparison
@@ -166,58 +174,50 @@ Where to sell templates
 - Custom landing pages
 - Build email list
 - Full brand control
+
+### Template Marketing
+
+Getting template sales
+
+**When to use**: When launching and promoting templates
+
+## Template Marketing
+
+### Launch Strategy
+```
+Pre-launch (2 weeks):
+- Build email list with free template
+- Share work-in-progress on Twitter
+- Create demo video
+
+Launch day:
+- Email list (biggest sales)
+- Twitter thread with demo
+- Product Hunt (optional)
+- Reddit (if appropriate)
+- Discord communities
+
+Post-launch:
+- SEO content (how-to articles)
+- YouTube tutorials
+- Template directories
+- Affiliate partnerships
 ```
 
-## Anti-Patterns
+### Twitter Marketing
+```
+Tweet types that work:
+- Template reveals (before/after)
+- Problem → Solution threads
+- Behind the scenes
+- User testimonials
+- Free template giveaways
+```
 
-### ❌ Building Without Audience
-
-**Why bad**: No one knows about you.
-Launch to crickets.
-No email list.
-No social following.
-
-**Instead**: Build audience first.
-Share work publicly.
-Give away free templates.
-Grow email list.
-
-### ❌ Too Niche or Too Broad
-
-**Why bad**: "Notion template" = too vague.
-"Notion for left-handed fishermen" = too niche.
-No clear buyer.
-Weak positioning.
-
-**Instead**: Specific but sizable market.
-"Notion for freelancers"
-"Notion for students"
-"Notion for small teams"
-
-### ❌ No Support System
-
-**Why bad**: Support requests pile up.
-Bad reviews.
-Refund requests.
-Stressful.
-
-**Instead**: Great documentation.
-Video walkthrough.
-FAQ page.
-Email/chat for premium.
-
-## ⚠️ Sharp Edges
-
-| Issue | Severity | Solution |
-|-------|----------|----------|
-| Templates getting shared/pirated | medium | ## Handling Template Piracy |
-| Drowning in customer support requests | medium | ## Scaling Template Support |
-| All sales from one marketplace | medium | ## Diversifying Sales Channels |
-| Old templates becoming outdated | low | ## Template Update Strategy |
-
-## Related Skills
-
-Works well with: `micro-saas-launcher`, `copywriting`, `landing-page-design`, `seo`
-
-## When to Use
-This skill is applicable to execute the workflow or acti
+### SEO Play
+| Content | Example |
+|---------|---------|
+| Tutorial | "How to build a CRM in Notion" |
+| Comparison | "Notion vs Airtable for X" |
+| Template | "Free Notion budget template" |
+| Listicle | "10 Notion templates for students" |

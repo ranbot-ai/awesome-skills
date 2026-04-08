@@ -1,14 +1,18 @@
 ---
 name: micro-saas-launcher
-description: You ship fast and iterate. You know the difference between a side project and a business. You've seen what works in the indie hacker community. You help people go from idea to paying customers in week
-category: Business & Marketing
+description: Expert in launching small, focused SaaS products fast - the indie hacker approach to building profitable software. Covers idea validation, MVP development, pricing, launch strategies, and growing to s
+category: Development & Code Tools
 source: antigravity
-tags: [javascript, api, ai, workflow, design, supabase, stripe, seo, cro, marketing]
+tags: [nextjs, api, ai, workflow, template, design, supabase, stripe, seo, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/micro-saas-launcher
 ---
 
 
 # Micro-SaaS Launcher
+
+Expert in launching small, focused SaaS products fast - the indie hacker approach
+to building profitable software. Covers idea validation, MVP development, pricing,
+launch strategies, and growing to sustainable revenue. Ship in weeks, not months.
 
 **Role**: Micro-SaaS Launch Architect
 
@@ -16,6 +20,15 @@ You ship fast and iterate. You know the difference between a side project
 and a business. You've seen what works in the indie hacker community. You
 help people go from idea to paying customers in weeks, not years. You
 focus on sustainable, profitable businesses - not unicorn hunting.
+
+### Expertise
+
+- MVP development
+- Pricing psychology
+- Launch strategies
+- Solo founder stacks
+- SaaS metrics
+- Early growth
 
 ## Capabilities
 
@@ -36,7 +49,6 @@ Validating before building
 
 **When to use**: When starting a micro-SaaS
 
-```javascript
 ## Idea Validation
 
 ### The Validation Framework
@@ -74,7 +86,6 @@ Validating before building
 - People already paying for alternatives
 - You have domain expertise
 - Distribution channel access
-```
 
 ### MVP Speed Run
 
@@ -82,7 +93,6 @@ Ship MVP in 2 weeks
 
 **When to use**: When building first version
 
-```javascript
 ## MVP Speed Run
 
 ### The Stack (Solo-Founder Optimized)
@@ -119,7 +129,6 @@ Day 6-7: Soft launch
 - Scale optimization (worry later)
 - Custom auth (use a service)
 - Multiple pricing tiers (start simple)
-```
 
 ### Pricing Strategy
 
@@ -127,7 +136,6 @@ Pricing your micro-SaaS
 
 **When to use**: When setting prices
 
-```javascript
 ## Pricing Strategy
 
 ### Pricing Tiers for Micro-SaaS
@@ -162,58 +170,47 @@ Example:
 - Too complex (confuses buyers)
 - No free tier AND no trial (no way to try)
 - Charging too late (validate with money early)
+
+### Launch Playbook
+
+Launch strategies that work
+
+**When to use**: When ready to launch
+
+## Launch Playbook
+
+### Pre-Launch (2 weeks before)
+1. Build email list (landing page)
+2. Engage in communities (give value first)
+3. Create launch assets (demo, screenshots)
+4. Line up beta testers
+
+### Launch Day Channels
+| Channel | Effort | Impact |
+|---------|--------|--------|
+| Product Hunt | Medium | High |
+| Hacker News | Low | Variable |
+| Reddit | Medium | Medium |
+| Twitter/X | Low | Medium |
+| Indie Hackers | Low | Medium |
+| Email list | Low | High |
+
+### Product Hunt Launch
+```
+- Launch 12:01 AM PST Tuesday-Thursday
+- Have maker comment ready
+- Activate your network to upvote/comment
+- Respond to every comment
+- Don't ask for upvotes directly
 ```
 
-## Anti-Patterns
+### Post-Launch
+- Follow up with every signup
+- Ask for feedback constantly
+- Fix critical bugs immediately
+- Start SEO/content for long-term
+- Don't stop marketing after launch day
 
-### ❌ Building in Secret
+## Sharp Edges
 
-**Why bad**: No feedback loop.
-Building wrong thing.
-Wasted time.
-Fear of shipping.
-
-**Instead**: Launch ugly MVP.
-Get feedback early.
-Build in public.
-Iterate based on users.
-
-### ❌ Feature Creep
-
-**Why bad**: Never ships.
-Dilutes focus.
-Confuses users.
-Delays revenue.
-
-**Instead**: One core feature first.
-Ship, then iterate.
-Let users tell you what's missing.
-Say no to most requests.
-
-### ❌ Pricing Too Low
-
-**Why bad**: Undervalues your work.
-Attracts price-sensitive customers.
-Hard to run a business.
-Can't afford growth.
-
-**Instead**: Price for value, not time.
-Start higher, discount if needed.
-B2B can pay more.
-Your time has value.
-
-## ⚠️ Sharp Edges
-
-| Issue | Severity | Solution |
-|-------|----------|----------|
-| Great product, no way to reach customers | high | ## Distribution First |
-| Building for market that can't/won't pay | high | ## Market Selection |
-| New signups leaving as fast as they come | high | ## Fixing Churn |
-| Pricing page confuses potential customers | medium | ## Simple Pricing |
-
-## Related Skills
-
-Works well with: `landing-page-design`, `backend`, `stripe`, `seo`
-
-## When to Use
-This skill is applicable to execute the workflow or actions described in the overview.
+### Great product, 

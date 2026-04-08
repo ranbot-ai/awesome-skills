@@ -1,20 +1,36 @@
 ---
 name: email-systems
-description: You are an email systems engineer who has maintained 99.9% deliverability across millions of emails. You've debugged SPF/DKIM/DMARC, dealt with blacklists, and optimized for inbox placement. You know 
-category: AI & Agents
+description: Email has the highest ROI of any marketing channel. $36 for every $1 spent. Yet most startups treat it as an afterthought - bulk blasts, no personalization, landing in spam folders. 
+category: Creative & Media
 source: antigravity
-tags: [ai, workflow, template, image, cro]
+tags: [typescript, react, api, ai, automation, workflow, template, design, image, aws]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/email-systems
 ---
 
 
 # Email Systems
 
-You are an email systems engineer who has maintained 99.9% deliverability
-across millions of emails. You've debugged SPF/DKIM/DMARC, dealt with
-blacklists, and optimized for inbox placement. You know that email is the
-highest ROI channel when done right, and a spam folder nightmare when done
-wrong. You treat deliverability as infrastructure, not an afterthought.
+Email has the highest ROI of any marketing channel. $36 for every $1 spent.
+Yet most startups treat it as an afterthought - bulk blasts, no personalization,
+landing in spam folders.
+
+This skill covers transactional email that works, marketing automation that
+converts, deliverability that reaches inboxes, and the infrastructure decisions
+that scale.
+
+## Principles
+
+- Transactional vs Marketing separation | Description: Transactional emails (password reset, receipts) need 100% delivery.
+Marketing emails (newsletters, promos) have lower priority. Use separate
+IP addresses and providers to protect transactional deliverability. | Examples: Good: Password resets via Postmark, marketing via ConvertKit | Bad: All emails through one SendGrid account
+- Permission is everything | Description: Only email people who asked to hear from you. Double opt-in for marketing.
+Easy unsubscribe. Clean your list ruthlessly. Bad lists destroy deliverability. | Examples: Good: Confirmed subscription + one-click unsubscribe | Bad: Scraped email list, hidden unsubscribe, bought contacts
+- Deliverability is infrastructure | Description: SPF, DKIM, DMARC are not optional. Warm up new IPs. Monitor bounce rates.
+Deliverability is earned through technical setup and good behavior. | Examples: Good: All DNS records configured, dedicated IP warmed for 4 weeks | Bad: Using free tier shared IP, no authentication records
+- One email, one goal | Description: Each email should have exactly one purpose and one CTA. Multiple asks
+means nothing gets clicked. Clear single action. | Examples: Good: "Click here to verify your email" (one button) | Bad: "Verify email, check out our blog, follow us on Twitter, refer a friend..."
+- Timing and frequency matter | Description: Wrong time = low open rates. Too frequent = unsubscribes. Let users
+set preferences. Test send times. Respect inbox fatigue. | Examples: Good: Weekly digest on Tuesday 10am user's timezone, preference center | Bad: Daily emails at random times, no way to reduce frequency
 
 ## Patterns
 
@@ -22,40 +38,127 @@ wrong. You treat deliverability as infrastructure, not an afterthought.
 
 Queue all transactional emails with retry logic and monitoring
 
+**When to use**: Sending any critical email (password reset, receipts, confirmations)
+
+// Don't block request on email send
+await queue.add('email', {
+  template: 'password-reset',
+  to: user.email,
+  data: { resetToken, expiresAt }
+}, {
+  attempts: 3,
+  backoff: { type: 'exponential', delay: 2000 }
+});
+
 ### Email Event Tracking
 
 Track delivery, opens, clicks, bounces, and complaints
+
+**When to use**: Any email campaign or transactional flow
+
+# Track lifecycle:
+- Queued: Email entered system
+- Sent: Handed to provider
+- Delivered: Reached inbox
+- Opened: Recipient viewed
+- Clicked: Recipient engaged
+- Bounced: Permanent failure
+- Complained: Marked as spam
 
 ### Template Versioning
 
 Version email templates for rollback and A/B testing
 
-## Anti-Patterns
+**When to use**: Changing production email templates
 
-### ❌ HTML email soup
+templates/
+  password-reset/
+    v1.tsx (current)
+    v2.tsx (testing 10%)
+    v1-deprecated.tsx (archived)
 
-**Why bad**: Email clients render differently. Outlook breaks everything.
+# Deploy new version gradually
+# Monitor metrics before full rollout
 
-### ❌ No plain text fallback
+### Bounce Handling State Machine
 
-**Why bad**: Some clients strip HTML. Accessibility issues. Spam signal.
+Automatically handle bounces to protect sender reputation
 
-### ❌ Huge image emails
+**When to use**: Processing bounce and complaint webhooks
 
-**Why bad**: Images blocked by default. Spam trigger. Slow loading.
+switch (bounceType) {
+  case 'hard':
+    await markEmailInvalid(email);
+    break;
+  case 'soft':
+    await incrementBounceCount(email);
+    if (count >= 3) await markEmailInvalid(email);
+    break;
+  case 'complaint':
+    await unsubscribeImmediately(email);
+    break;
+}
 
-## ⚠️ Sharp Edges
+### React Email Components
 
-| Issue | Severity | Solution |
-|-------|----------|----------|
-| Missing SPF, DKIM, or DMARC records | critical | # Required DNS records: |
-| Using shared IP for transactional email | high | # Transactional email strategy: |
-| Not processing bounce notifications | high | # Bounce handling requirements: |
-| Missing or hidden unsubscribe link | critical | # Unsubscribe requirements: |
-| Sending HTML without plain text alternative | medium | # Always send multipart: |
-| Sending high volume from new IP immediately | high | # IP warm-up schedule: |
-| Emailing people who did not opt in | critical | # Permission requirements: |
-| Emails that are mostly or entirely images | medium | # Balance images and text: |
+Build emails with reusable React components
 
-## When to Use
-This skill is applicable to execute the workflow or actions described in the overview.
+**When to use**: Creating email templates
+
+import { Button, Html } from '@react-email/components';
+
+export default function WelcomeEmail({ userName }) {
+  return (
+    <Html>
+      <h1>Welcome {userName}!</h1>
+      <Button href="https://app.com/start">
+        Get Started
+      </Button>
+    </Html>
+  );
+}
+
+### Preference Center
+
+Let users control email frequency and topics
+
+**When to use**: Building marketing or notification systems
+
+Preferences:
+☑ Product updates (weekly)
+☑ New features (monthly)
+☐ Marketing promotions
+☑ Account notifications (always)
+
+# Respect preferences in all sends
+# Required for GDPR compliance
+
+## Sharp Edges
+
+### Missing SPF, DKIM, or DMARC records
+
+Severity: CRITICAL
+
+Situation: Sending emails without authentication. Emails going to spam folder.
+Low open rates. No idea why. Turns out DNS records were never set up.
+
+Symptoms:
+- Emails going to spam
+- Low deliverability rates
+- mail-tester.com score below 8
+- No DMARC reports received
+
+Why this breaks:
+Email authentication (SPF, DKIM, DMARC) tells receiving servers you're
+legit. Without them, you look like a spammer. Modern email providers
+increasingly require all three.
+
+Recommended fix:
+
+# Required DNS records:
+
+## SPF (Sender Policy Framework)
+TXT record: v=spf1 include:_spf.google.com include:sendgrid.net ~all
+
+## DKIM (DomainKeys Identified Mail)
+TXT record provide

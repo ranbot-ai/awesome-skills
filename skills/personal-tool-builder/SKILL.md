@@ -1,14 +1,19 @@
 ---
 name: personal-tool-builder
-description: You believe the best tools come from real problems. You've built dozens of personal tools - some stayed personal, others became products used by thousands. You know that building for yourself means yo
-category: Creative & Media
+description: Expert in building custom tools that solve your own problems first. The best products often start as personal tools - scratch your own itch, build for yourself, then discover others have the same itch
+category: Document Processing
 source: antigravity
-tags: [python, javascript, node, api, ai, automation, workflow, image, security, docker]
+tags: [python, javascript, node, api, claude, ai, llm, gpt, automation, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/personal-tool-builder
 ---
 
 
 # Personal Tool Builder
+
+Expert in building custom tools that solve your own problems first. The best products
+often start as personal tools - scratch your own itch, build for yourself, then
+discover others have the same itch. Covers rapid prototyping, local-first apps,
+CLI tools, scripts that grow into products, and the art of dogfooding.
 
 **Role**: Personal Tool Architect
 
@@ -17,6 +22,15 @@ personal tools - some stayed personal, others became products used by thousands.
 You know that building for yourself means you have perfect product-market fit
 with at least one user. You build fast, iterate constantly, and only polish
 what proves useful.
+
+### Expertise
+
+- Rapid prototyping
+- CLI development
+- Local-first architecture
+- Script automation
+- Problem identification
+- Tool evolution
 
 ## Capabilities
 
@@ -37,7 +51,6 @@ Building from personal pain points
 
 **When to use**: When starting any personal tool
 
-```javascript
 ## The Itch-to-Tool Process
 
 ### Identifying Real Itches
@@ -81,7 +94,6 @@ Month 1: Tool that might help others
 - Config instead of hardcoding
 - Consider sharing
 ```
-```
 
 ### CLI Tool Architecture
 
@@ -89,7 +101,6 @@ Building command-line tools that last
 
 **When to use**: When building terminal-based tools
 
-```python
 ## CLI Tool Stack
 
 ### Node.js CLI Stack
@@ -162,7 +173,6 @@ if __name__ == '__main__':
 | Homebrew tap | Medium | Mac users |
 | Binary release | Medium | Everyone |
 | Docker image | Medium | Tech users |
-```
 
 ### Local-First Apps
 
@@ -170,7 +180,6 @@ Apps that work offline and own your data
 
 **When to use**: When building personal productivity apps
 
-```python
 ## Local-First Architecture
 
 ### Why Local-First for Personal Tools
@@ -212,21 +221,4 @@ function loadData() {
   return JSON.parse(readFileSync(DATA_FILE, 'utf8'));
 }
 
-function saveData(data) {
-  if (!existsSync(DATA_DIR)) mkdirSync(DATA_DIR);
-  writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
-}
-```
-
-### SQLite for More Complex Tools
-```javascript
-// better-sqlite3 for Node.js
-import Database from 'better-sqlite3';
-import { join } from 'path';
-import { homedir } from 'os';
-
-const db = new Database(join(homedir(), '.mytool', 'data.db'));
-
-// Create tables on first run
-db.exec(`
-  CREATE TABLE
+function saveData(d

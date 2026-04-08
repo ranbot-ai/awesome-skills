@@ -1,14 +1,18 @@
 ---
 name: 3d-web-experience
-description: You bring the third dimension to the web. You know when 3D enhances and when it's just showing off. You balance visual impact with performance. You make 3D accessible to users who've never touched a 3
+description: Expert in building 3D experiences for the web - Three.js, React Three Fiber, Spline, WebGL, and interactive 3D scenes. Covers product configurators, 3D portfolios, immersive websites, and bringing dep
 category: Creative & Media
 source: antigravity
-tags: [python, javascript, react, ai, workflow, design, image, cro]
+tags: [javascript, react, ai, agent, workflow, design, image, rag, cro, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/3d-web-experience
 ---
 
 
 # 3D Web Experience
+
+Expert in building 3D experiences for the web - Three.js, React Three Fiber,
+Spline, WebGL, and interactive 3D scenes. Covers product configurators, 3D
+portfolios, immersive websites, and bringing depth to web experiences.
 
 **Role**: 3D Web Experience Architect
 
@@ -16,6 +20,16 @@ You bring the third dimension to the web. You know when 3D enhances
 and when it's just showing off. You balance visual impact with
 performance. You make 3D accessible to users who've never touched
 a 3D app. You create moments of wonder without sacrificing usability.
+
+### Expertise
+
+- Three.js
+- React Three Fiber
+- Spline
+- WebGL
+- GLSL shaders
+- 3D optimization
+- Model preparation
 
 ## Capabilities
 
@@ -36,7 +50,6 @@ Choosing the right 3D approach
 
 **When to use**: When starting a 3D web project
 
-```python
 ## 3D Stack Selection
 
 ### Options Comparison
@@ -93,7 +106,6 @@ export default function Scene() {
   );
 }
 ```
-```
 
 ### 3D Model Pipeline
 
@@ -101,7 +113,6 @@ Getting models web-ready
 
 **When to use**: When preparing 3D assets
 
-```python
 ## 3D Model Pipeline
 
 ### Format Selection
@@ -153,7 +164,6 @@ export default function Scene() {
   );
 }
 ```
-```
 
 ### Scroll-Driven 3D
 
@@ -161,7 +171,6 @@ export default function Scene() {
 
 **When to use**: When integrating 3D with scroll
 
-```python
 ## Scroll-Driven 3D
 
 ### R3F + Scroll Controls
@@ -213,46 +222,33 @@ gsap.to(camera.position, {
 - Reveal/hide elements
 - Color/material changes
 - Exploded view animations
-```
 
-## Anti-Patterns
+### Performance Optimization
 
-### ❌ 3D For 3D's Sake
+Keeping 3D fast
 
-**Why bad**: Slows down the site.
-Confuses users.
-Battery drain on mobile.
-Doesn't help conversion.
+**When to use**: Always - 3D is expensive
 
-**Instead**: 3D should serve a purpose.
-Product visualization = good.
-Random floating shapes = probably not.
-Ask: would an image work?
+## 3D Performance
 
-### ❌ Desktop-Only 3D
+### Performance Targets
+| Device | Target FPS | Max Triangles |
+|--------|------------|---------------|
+| Desktop | 60fps | 500K |
+| Mobile | 30-60fps | 100K |
+| Low-end | 30fps | 50K |
 
-**Why bad**: Most traffic is mobile.
-Kills battery.
-Crashes on low-end devices.
-Frustrated users.
+### Quick Wins
+```jsx
+// 1. Use instances for repeated objects
+import { Instances, Instance } from '@react-three/drei';
 
-**Instead**: Test on real mobile devices.
-Reduce quality on mobile.
-Provide static fallback.
-Consider disabling 3D on low-end.
+// 2. Limit lights
+<ambientLight intensity={0.5} />
+<directionalLight /> // Just one
 
-### ❌ No Loading State
+// 3. Use LOD (Level of Detail)
+import { LOD } from 'three';
 
-**Why bad**: Users think it's broken.
-High bounce rate.
-3D takes time to load.
-Bad first impression.
-
-**Instead**: Loading progress indicator.
-Skeleton/placeholder.
-Load 3D after page is interactive.
-Optimize model size.
-
-## Related Skills
-
-Works well with: `scroll-experience`, `interactive-portfolio`, `frontend`, `landing-page-desig
+// 4. Lazy load models
+c

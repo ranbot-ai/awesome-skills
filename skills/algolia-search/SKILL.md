@@ -1,14 +1,16 @@
 ---
 name: algolia-search
-description: Expert patterns for Algolia search implementation, indexing strategies, React InstantSearch, and relevance tuning Use when: adding search to, algolia, instantsearch, search api, search functionality. 
-category: AI & Agents
+description: Expert patterns for Algolia search implementation, indexing strategies, React InstantSearch, and relevance tuning 
+category: Document Processing
 source: antigravity
-tags: [react, nextjs, api, ai, workflow]
+tags: [javascript, react, nextjs, api, ai, template, document, image, security, stripe]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/algolia-search
 ---
 
 
 # Algolia Search Integration
+
+Expert patterns for Algolia search implementation, indexing strategies, React InstantSearch, and relevance tuning
 
 ## Patterns
 
@@ -26,6 +28,84 @@ Key hooks:
 - usePagination: Result pagination
 - useInstantSearch: Full state access
 
+### Code_example
+
+// lib/algolia.ts
+import algoliasearch from 'algoliasearch/lite';
+
+export const searchClient = algoliasearch(
+  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID!,
+  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY!  // Search-only key!
+);
+
+export const INDEX_NAME = 'products';
+
+// components/Search.tsx
+'use client';
+import { InstantSearch, SearchBox, Hits, Configure } from 'react-instantsearch';
+import { searchClient, INDEX_NAME } from '@/lib/algolia';
+
+function Hit({ hit }: { hit: ProductHit }) {
+  return (
+    <article>
+      <h3>{hit.name}</h3>
+      <p>{hit.description}</p>
+      <span>${hit.price}</span>
+    </article>
+  );
+}
+
+export function ProductSearch() {
+  return (
+    <InstantSearch searchClient={searchClient} indexName={INDEX_NAME}>
+      <Configure hitsPerPage={20} />
+      <SearchBox
+        placeholder="Search products..."
+        classNames={{
+          root: 'relative',
+          input: 'w-full px-4 py-2 border rounded',
+        }}
+      />
+      <Hits hitComponent={Hit} />
+    </InstantSearch>
+  );
+}
+
+// Custom hook usage
+import { useSearchBox, useHits, useInstantSearch } from 'react-instantsearch';
+
+function CustomSearch() {
+  const { query, refine } = useSearchBox();
+  const { hits } = useHits<ProductHit>();
+  const { status } = useInstantSearch();
+
+  return (
+    <div>
+      <input
+        value={query}
+        onChange={(e) => refine(e.target.value)}
+        placeholder="Search..."
+      />
+      {status === 'loading' && <p>Loading...</p>}
+      <ul>
+        {hits.map((hit) => (
+          <li key={hit.objectID}>{hit.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+### Anti_patterns
+
+- Pattern: Using Admin API key in frontend code | Why: Admin key exposes full index control including deletion | Fix: Use search-only API key with restrictions
+- Pattern: Not using /lite client for frontend | Why: Full client includes unnecessary code for search | Fix: Import from algoliasearch/lite for smaller bundle
+
+### References
+
+- https://www.algolia.com/doc/api-reference/widgets/react
+- https://www.algolia.com/doc/libraries/javascript/v5/methods/search/
+
 ### Next.js Server-Side Rendering
 
 SSR integration for Next.js with react-instantsearch-nextjs package.
@@ -38,33 +118,69 @@ Key considerations:
 - Handle URL synchronization with routing prop
 - Use getServerState for initial state
 
-### Data Synchronization and Indexing
+### Code_example
 
-Indexing strategies for keeping Algolia in sync with your data.
+// app/search/page.tsx
+import { InstantSearchNext } from 'react-instantsearch-nextjs';
+import { searchClient, INDEX_NAME } from '@/lib/algolia';
+import { SearchBox, Hits, RefinementList } from 'react-instantsearch';
 
-Three main approaches:
-1. Full Reindexing - Replace entire index (expensive)
-2. Full Record Updates - Replace individual records
-3. Partial Updates - Update specific attributes only
+// Force dynamic rendering for fresh search results
+export const dynamic = 'force-dynamic';
 
-Best practices:
-- Batch records (ideal: 10MB, 1K-10K records per batch)
-- Use incremental updates when possible
-- partialUpdateObjects for attribute-only changes
-- Avoid deleteBy (computationally expensive)
+export default function SearchPage() {
+  return (
+    <InstantSearchNext
+      searchClient={searchClient}
+      indexName={INDEX_NAME}
+      routing={{
+        router: {
+          cleanUrlOnDispose: false,
+        },
+      }}
+    >
+      <div className="flex gap-8">
+        <aside className="w-64">
+          <h3>Categories</h3>
+          <RefinementList attribute="category" />
+          <h3>Brand</h3>
+          <RefinementList attribute="brand" />
+        </aside>
+        <main className="flex-1">
+          <SearchBox placeholder="Search products..." />
+          <Hits hitComponent={ProductHit} />
+        </main>
+      </div>
+    </InstantSearchNext>
+  );
+}
 
-## ⚠️ Sharp Edges
+// For custom routing (URL synchronization)
+import { history } from 'instantsearch.js/es/lib/routers';
+import { simple } from 'instantsearch.js/es/lib/stateMappings';
 
-| Issue | Severity | Solution |
-|-------|----------|----------|
-| Issue | critical | See docs |
-| Issue | high | See docs |
-| Issue | medium | See docs |
-| Issue | medium | See docs |
-| Issue | medium | See docs |
-| Issue | medium | See docs |
-| Issue | medium | See docs |
-| Issue | medium | See docs |
+<InstantSearchNext
+  searchClient={searchClient}
+  indexName={INDEX_NAME}
+  routing={{
+    router: history({
+      getLocation: () =>
+        typeof window === 'undefined'
+          ? new URL(url) as unknown as Location
+          : window.location,
+    }),
+    stateMapping: simple(),
+  }}
+>
+  {/* widgets */}
+</InstantSearchNext>
 
-## When to Use
-This skill is applicable to execute the workflow or actions described in the overview.
+### Anti_patterns
+
+- Pattern: Using InstantSearch component for Next.js SSR | Why: Regular component doesn't support server-side rendering | Fix: Use InstantSearchNext from react-instantsearch-nextjs
+- Pattern: Static rendering for search pages | Why: Search results must be fresh for each request | Fix: Set export const dynamic = 'force-dynamic'
+
+### References
+
+- https://www.npmjs.com/package/react-instantsearch-nextjs
+- 

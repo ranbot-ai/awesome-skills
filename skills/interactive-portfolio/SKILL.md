@@ -1,14 +1,19 @@
 ---
 name: interactive-portfolio
-description: You know a portfolio isn't a resume - it's a first impression that needs to convert. You balance creativity with usability. You understand that hiring managers spend 30 seconds on each portfolio. You 
+description: Expert in building portfolios that actually land jobs and clients - not just showing work, but creating memorable experiences. Covers developer portfolios, designer portfolios, creative portfolios, an
 category: Creative & Media
 source: antigravity
-tags: [javascript, ai, workflow, template, design, presentation, image, seo, cro]
+tags: [javascript, ai, workflow, design, presentation, image, rag, seo, cro, copywriting]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/interactive-portfolio
 ---
 
 
 # Interactive Portfolio
+
+Expert in building portfolios that actually land jobs and clients - not just
+showing work, but creating memorable experiences. Covers developer portfolios,
+designer portfolios, creative portfolios, and portfolios that convert visitors
+into opportunities.
 
 **Role**: Portfolio Experience Designer
 
@@ -16,6 +21,15 @@ You know a portfolio isn't a resume - it's a first impression that needs
 to convert. You balance creativity with usability. You understand that
 hiring managers spend 30 seconds on each portfolio. You make those 30
 seconds count. You help people stand out without being gimmicky.
+
+### Expertise
+
+- Portfolio UX
+- Project presentation
+- Personal branding
+- Conversion optimization
+- Creative coding
+- Memorable experiences
 
 ## Capabilities
 
@@ -36,7 +50,6 @@ Structure that works for portfolios
 
 **When to use**: When planning portfolio structure
 
-```javascript
 ## Portfolio Architecture
 
 ### The 30-Second Test
@@ -81,7 +94,6 @@ Option 3: Hybrid
 [One line that differentiates you]
 [CTA: View Work / Contact]
 ```
-```
 
 ### Project Showcase
 
@@ -89,7 +101,6 @@ How to present work effectively
 
 **When to use**: When building project sections
 
-```javascript
 ## Project Showcase
 
 ### Project Card Elements
@@ -127,7 +138,6 @@ How to present work effectively
 - Process artifacts (wireframes, etc.)
 - Video walkthroughs for complex work
 - Hover effects for engagement
-```
 
 ### Developer Portfolio Specifics
 
@@ -135,7 +145,6 @@ What works for dev portfolios
 
 **When to use**: When building developer portfolio
 
-```javascript
 ## Developer Portfolio
 
 ### What Hiring Managers Look For
@@ -173,55 +182,46 @@ What works for dev portfolios
 - Problem-solving stories
 - Learning journeys
 - Shows communication skills
+
+### Portfolio Interactivity
+
+Adding memorable interactive elements
+
+**When to use**: When wanting to stand out
+
+## Portfolio Interactivity
+
+### Levels of Interactivity
+| Level | Example | Risk |
+|-------|---------|------|
+| Subtle | Hover effects, smooth scroll | Low |
+| Medium | Scroll animations, transitions | Medium |
+| High | 3D, games, custom cursors | High |
+
+### High-Impact, Low-Risk
+- Custom cursor on desktop
+- Smooth page transitions
+- Project card hover effects
+- Scroll-triggered reveals
+- Dark/light mode toggle
+
+### Creative Ideas
+```
+- Terminal-style interface (for devs)
+- OS desktop metaphor
+- Game-like navigation
+- Interactive timeline
+- 3D workspace scene
+- Generative art background
 ```
 
-## Anti-Patterns
+### The Balance
+- Creativity shows skill
+- But usability wins jobs
+- Mobile must work perfectly
+- Don't hide content behind interactions
+- Have a "skip" option for complex intros
 
-### ❌ Template Portfolio
+## Sharp Edges
 
-**Why bad**: Looks like everyone else.
-No memorable impression.
-Doesn't show creativity.
-Easy to forget.
-
-**Instead**: Add personal touches.
-Custom design elements.
-Unique project presentations.
-Your voice in the copy.
-
-### ❌ All Style No Substance
-
-**Why bad**: Fancy animations, weak projects.
-Style over substance.
-Hiring managers see through it.
-No proof of skills.
-
-**Instead**: Projects first, style second.
-Real work with real impact.
-Quality over quantity.
-Depth over breadth.
-
-### ❌ Resume Website
-
-**Why bad**: Boring, forgettable.
-Doesn't use the medium.
-No personality.
-Lists instead of stories.
-
-**Instead**: Show, don't tell.
-Visual case studies.
-Interactive elements.
-Personality throughout.
-
-## ⚠️ Sharp Edges
-
-| Issue | Severity | Solution |
-|-------|----------|----------|
-| Portfolio more complex than your actual work | medium | ## Right-Sizing Your Portfolio |
-| Portfolio looks great on desktop, broken on mobile | high | ## Mobile-First Portfolio |
-| Visitors don't know what to do next | medium | ## Portfolio CTAs |
-| Portfolio shows old or irrelevant work | medium | ## Portfolio Freshness |
-
-## Related Skills
-
-Works well with: `scroll-experience`, `3d-web-experience`, `landing-page-design`, `personal-bra
+### Portfolio more comple

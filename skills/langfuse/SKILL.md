@@ -1,6 +1,6 @@
 ---
 name: langfuse
-description: You are an expert in LLM observability and evaluation. You think in terms of traces, spans, and metrics. You know that LLM applications need monitoring just like traditional software - but with differ
+description: Expert in Langfuse - the open-source LLM observability platform. Covers tracing, prompt management, evaluation, datasets, and integration with LangChain, LlamaIndex, and OpenAI. Essential for debuggin
 category: AI & Agents
 source: antigravity
 tags: [python, javascript, typescript, api, ai, agent, llm, gpt, workflow, template]
@@ -10,12 +10,25 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/lang
 
 # Langfuse
 
+Expert in Langfuse - the open-source LLM observability platform. Covers tracing,
+prompt management, evaluation, datasets, and integration with LangChain, LlamaIndex,
+and OpenAI. Essential for debugging, monitoring, and improving LLM applications
+in production.
+
 **Role**: LLM Observability Architect
 
 You are an expert in LLM observability and evaluation. You think in terms of
 traces, spans, and metrics. You know that LLM applications need monitoring
 just like traditional software - but with different dimensions (cost, quality,
 latency). You use data to drive prompt improvements and catch regressions.
+
+### Expertise
+
+- Tracing architecture
+- Prompt versioning
+- Evaluation strategies
+- Cost optimization
+- Quality monitoring
 
 ## Capabilities
 
@@ -27,11 +40,42 @@ latency). You use data to drive prompt improvements and catch regressions.
 - Performance monitoring
 - A/B testing prompts
 
-## Requirements
+## Prerequisites
 
-- Python or TypeScript/JavaScript
-- Langfuse account (cloud or self-hosted)
-- LLM API keys
+- 0: LLM application basics
+- 1: API integration experience
+- 2: Understanding of tracing concepts
+- Required skills: Python or TypeScript/JavaScript, Langfuse account (cloud or self-hosted), LLM API keys
+
+## Scope
+
+- 0: Self-hosted requires infrastructure
+- 1: High-volume may need optimization
+- 2: Real-time dashboard has latency
+- 3: Evaluation requires setup
+
+## Ecosystem
+
+### Primary
+
+- Langfuse Cloud
+- Langfuse Self-hosted
+- Python SDK
+- JS/TS SDK
+
+### Common_integrations
+
+- LangChain
+- LlamaIndex
+- OpenAI SDK
+- Anthropic SDK
+- Vercel AI SDK
+
+### Platforms
+
+- Any Python/JS backend
+- Serverless functions
+- Jupyter notebooks
 
 ## Patterns
 
@@ -41,7 +85,6 @@ Instrument LLM calls with Langfuse
 
 **When to use**: Any LLM application
 
-```python
 from langfuse import Langfuse
 
 # Initialize client
@@ -93,7 +136,6 @@ trace.score(
 
 # Flush before exit (important in serverless)
 langfuse.flush()
-```
 
 ### OpenAI Integration
 
@@ -101,7 +143,6 @@ Automatic tracing with OpenAI SDK
 
 **When to use**: OpenAI-based applications
 
-```python
 from langfuse.openai import openai
 
 # Drop-in replacement for OpenAI client
@@ -141,7 +182,6 @@ async def main():
         messages=[{"role": "user", "content": "Hello"}],
         name="async-greeting"
     )
-```
 
 ### LangChain Integration
 
@@ -149,7 +189,6 @@ Trace LangChain applications
 
 **When to use**: LangChain-based applications
 
-```python
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langfuse.callback import CallbackHandler
@@ -186,42 +225,4 @@ langchain.callbacks.manager.set_handler(langfuse_handler)
 # Then all calls are traced
 response = chain.invoke({"input": "Hello"})
 
-# Works with agents, retrievers, etc.
-from langchain.agents import create_openai_tools_agent
-
-agent = create_openai_tools_agent(llm, tools, prompt)
-agent_executor = AgentExecutor(agent=agent, tools=tools)
-
-result = agent_executor.invoke(
-    {"input": "What's the weather?"},
-    config={"callbacks": [langfuse_handler]}
-)
-```
-
-## Anti-Patterns
-
-### ❌ Not Flushing in Serverless
-
-**Why bad**: Traces are batched.
-Serverless may exit before flush.
-Data is lost.
-
-**Instead**: Always call langfuse.flush() at end.
-Use context managers where available.
-Consider sync mode for critical traces.
-
-### ❌ Tracing Everything
-
-**Why bad**: Noisy traces.
-Performance overhead.
-Hard to find important info.
-
-**Instead**: Focus on: LLM calls, key logic, user actions.
-Group related operations.
-Use meaningful span names.
-
-### ❌ No User/Session IDs
-
-**Why bad**: Can't debug specific users.
-Can't track sessions.
-Analytics
+# Works with a
