@@ -27995,6 +27995,24 @@
     "rag",
     "processing"
   ],
+  "antigravity-puzzle-activity-planner": [
+    "puzzle-activity-planner",
+    "plan",
+    "puzzle-based",
+    "activities",
+    "classrooms,",
+    "parties,",
+    "events",
+    "with",
+    "pre-configured",
+    "generator",
+    "links",
+    "claude",
+    "ai",
+    "cro",
+    "&",
+    "agents"
+  ],
   "antigravity-pydantic-ai": [
     "pydantic-ai",
     "build",
@@ -28041,16 +28059,6 @@
     "document",
     "cro",
     "processing"
-  ],
-  "antigravity-pypict-skill": [
-    "pypict-skill",
-    "pairwise",
-    "test",
-    "generation",
-    "claude",
-    "ai",
-    "&",
-    "agents"
   ],
   "composio-raffle-winner-picker": [
     "raffle-winner-picker",
