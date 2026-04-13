@@ -1,0 +1,29 @@
+{
+  "id": "antigravity-codebase-to-wordpress-converter",
+  "name": "codebase-to-wordpress-converter",
+  "slug": "codebase-to-wordpress-converter",
+  "description": "Expert skill for converting any codebase (React/HTML/Next.js) into a pixel-perfect, SEO-optimized, and dynamic WordPress theme.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/codebase-to-wordpress-converter",
+  "content": "\n# Codebase to WordPress Converter\n\n## Overview\n\nThis skill is designed for the high-fidelity conversion of static or React-based frontends into fully functional, CMS-driven WordPress themes. It acts as a **Senior WordPress Architect**, **React Expert**, and **QA Engineer** to ensure a 100% pixel-perfect match while integrating deep WordPress functionality like ACF, dynamic menus, and technical SEO preservation.\n\n## When to Use This Skill\n\n- Use when converting a React (CRA/Vite/Next.js) or HTML project into a WordPress theme.\n- Use when the client demands a 100% pixel-perfect match with the original source.\n- Use when auditing an existing WordPress conversion for structural or SEO flaws.\n- Use when you need to ensure technical SEO (Schema, Meta tags, Heading hierarchy) is preserved exactly.\n\n## Core Capabilities\n\n### Phased Conversion & Audit\nThe skill follows a strict 4-phase forensic process:\n1.  **Phase 1: Forensic UI Comparison**: Side-by-side table audit of React components vs. WordPress templates to find discrepancies.\n2.  **Phase 2: Full Audit**: Deep dive into UI, SEO, CMS Editability, Navigation, Functionality, and Performance.\n3.  **Phase 3: Action Plan**: Tasks classified as **SAFE**, **RISKY**, or **BLOCKED** to prevent breaking the UI.\n4.  **Phase 4: Iterative Fixing**: Executing one safe task at a time with validation after each step.\n\n### Absolute UI Lock\nStrict enforcement of non-negotiable rules:\n- No alterations to layout, spacing, typography, or colors.\n- Exact preservation of Tailwind or CSS class names.\n- Zero changes to DOM structure or HTML nesting.\n\n## Step-by-Step Guide\n\n### 1. Discovery & Forensic Audit\nStart by identifying all components in the source code. Create a UI Comparison table comparing the original source output against the target WordPress output.\n- *Rule: No fixes are allowed during this phase; only detection.*\n\n### 2. Strategic Field Mapping\nMap static React/HTML content to dynamic WordPress functions:\n- Replace static text with `the_title()`, `get_field()`, or `the_content()`.\n- Replace static paths with `get_template_directory_uri()`.\n\n### 3. Implementation of Core Hooks\nEnsure every theme includes the foundational WordPress hooks correctly:\n- **Layout Files (`header.php` / `footer.php`)**: Must include `wp_head()` before `</head>` and `wp_footer()` before `</body>`.\n- **Page Templates**: Must call `get_header()` and `get_footer()`.\n- `register_nav_menus()` for dynamic navigation without breaking original HTML structure.\n\n### 4. Validation & Live Tracker\nMaintain a live tracker of Total Issues, Fixed, and Remaining. Every fix must be followed by a confirmation:\n- ✅ No UI change\n- ✅ No DOM change\n- ✅ No class change\n\n## Examples\n\n### Example 1: Navigation Conversion\n```php\n// WRONG: Static replacement that adds wrappers\nwp_nav_menu(['theme_location' => 'primary']);\n\n// CORRECT: Preserving original Tailwind classes and structure\nwp_nav_menu([\n    'theme_location' => 'primary',\n    'container' => false,\n    'items_wrap' => '<ul class=\"flex space-x-8\">%3$s</ul>',\n    'walker' => new Custom_Tailwind_Walker()\n]);\n```\n\n### Example 2: Asset Pathing\n```php\n// Source: <img src=\"/images/logo.png\" />\n// WP Conversion:\n<img src=\"<?php echo get_template_directory_uri(); ?>/assets/images/logo.png\" alt=\"Logo\" />\n```\n\n## Best Practices\n\n- ✅ **Do:** Use `get_page_by_path()` for robust internal linking.\n- ✅ **Do:** Implement ACF (Advanced Custom Fields) fallbacks in `functions.php`.\n- ✅ **Do:** Keep the Tailwind configuration in the `header.php` to ensure global styles are active.\n- ❌ **Don't:** Add \"div\" wrappers or rename classes to \"clean up\" the code.\n- ❌ **Don't:** Use standard WordPress default styles if they conflict with the original design.\n\n## Additional Resources\n\n- [ACF Documentation](https://www.advancedcustomfields.com/resources/)\n- [Tailwind CSS in WordPress](https://tailwindcss.com/docs/installation)\n- [WordPress Theme Handbook](https://developer.wordpress.org/themes/)\n",
+  "tags": [
+    "react",
+    "ai",
+    "template",
+    "design",
+    "document",
+    "image",
+    "tailwind",
+    "aws",
+    "seo"
+  ],
+  "useCases": [
+    "Use when converting a React (CRA/Vite/Next.js) or HTML project into a WordPress theme.",
+    "Use when the client demands a 100% pixel-perfect match with the original source.",
+    "Use when auditing an existing WordPress conversion for structural or SEO flaws.",
+    "Use when you need to ensure technical SEO (Schema, Meta tags, Heading hierarchy) is preserved exactly."
+  ],
+  "scrapedAt": "2026-04-13T08:16:14.718Z"
+}
