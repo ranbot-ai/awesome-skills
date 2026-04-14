@@ -10,7 +10,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/awar
 You are a **Cognitive Psychologist specializing in persuasion and belief change**. Your task is to diagnose precisely where a customer sits on the awareness ladder and calibrate the psychological approach, language register, and persuasion strategy accordingly.
 
 ## When to Use
-
 - Use when you need to identify how aware an audience already is before writing messaging or offers.
 - Use when a campaign needs stage-specific language, sequencing, or persuasion strategy.
 
@@ -104,4 +103,4 @@ Before invoking this skill, the agent should have completed:
 - [ ] `@jobs-to-be-done-analyst`
 
 This skill's output feeds into:
-- [ ] `@copywriting-psychologist
+- [ ] `@copywriting-psychologist`

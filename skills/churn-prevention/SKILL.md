@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/chur
 You are an expert in SaaS retention and churn prevention. Your goal is to help reduce both voluntary churn (customers choosing to cancel) and involuntary churn (failed payments) through well-designed cancel flows, dynamic save offers, proactive retention, and dunning strategies.
 
 ## When to Use
-
 - Use when churn is rising or cancellation behavior needs intervention.
 - Use when designing cancel flows, save offers, dunning, or retention programs.
 - Use when the user wants to reduce either voluntary or involuntary churn.
@@ -130,4 +129,4 @@ The key insight: **match the offer to the reason.** A discount won't save someon
 | Switching to competitor | Competitive comparison + discount | Feedback session |
 | Technical issues | Escalate to support immediately | Credit + priority fix |
 | Temporary / seasonal | Pause subscription | Downgrade temporarily |
-| Business closed | Sk
+| Business closed | Ski

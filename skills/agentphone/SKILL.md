@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agen
 AgentPhone is an API-first telephony platform for AI agents. Give your agents phone numbers, voice calls, and SMS — all managed through a simple API.
 
 ## When to Use
-
 - Use when the user wants to create or manage AI phone agents, voice agents, or telephony automations
 - Use when the user needs to buy, assign, release, or inspect phone numbers tied to an agent workflow
 - Use when the user wants to place outbound calls, inspect transcripts, or send and receive SMS through AgentPhone
@@ -175,4 +174,4 @@ curl https://api.agentphone.to/v1/calls/call_def456/transcript \
     },
     {
       "id": "tx_002",
-      "transcript": "Sure, what day works fo
+      "transcript": "Sure, what day works for

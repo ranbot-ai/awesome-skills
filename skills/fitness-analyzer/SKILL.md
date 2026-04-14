@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fitn
 分析运动数据，识别运动模式，评估健身进展，并提供个性化训练建议。
 
 ## When to Use
-
 - 需要分析运动记录、训练强度、运动习惯或健身进展时使用。
 - 任务涉及跑步、力量训练、耐力或柔韧性等维度的趋势与改进建议。
 - 需要把运动数据与其他健康模块做关联分析时使用。
@@ -413,4 +412,4 @@ r = Σ[(xi - x̄)(yi - ȳ)] / √[Σ(xi - x̄)² × Σ(yi - ȳ)²]
 ### 示例2：追踪跑步进步
 
 ```bash
-/fitness analys
+/fitness analysi

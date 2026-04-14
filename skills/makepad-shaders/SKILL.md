@@ -19,7 +19,6 @@ You are an expert at Makepad shaders. Help users by:
 - **Answering questions**: Explain shader language, Sdf2d, built-in functions
 
 ## When to Use
-
 - You need to write or debug Makepad shader code, custom drawing, or SDF-based visuals.
 - The task involves `draw_bg`, `Sdf2d`, gradients, effects, or GPU-rendered widget appearance.
 - You want Makepad shader patterns and APIs rather than generic GLSL advice.
@@ -185,4 +184,4 @@ Community contributions: `./community/`
 1. Always use `show_bg: true` to enable background shader
 2. Use `Sdf2d::viewport()` to create SDF context
 3. Return `vec4` (RGBA) from `fn pixel()`
-4. Uniforms must be decl
+4. Uniforms must be decla

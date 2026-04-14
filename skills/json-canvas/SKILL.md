@@ -11,7 +11,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/json
 # JSON Canvas Skill
 
 ## When to Use
-
 - Use when creating or editing `.canvas` files for Obsidian.
 - Use for mind maps, flowcharts, visual note structures, or connected canvases.
 - Use when the user explicitly mentions JSON Canvas or Obsidian Canvas files.
@@ -172,4 +171,4 @@ Edges connect nodes via `fromNode` and `toNode` IDs.
 | `id` | Yes | string | - | Unique identifier |
 | `fromNode` | Yes | string | - | Source node ID |
 | `fromSide` | No | string | - | `top`, `right`, `bottom`, or `left` |
-| `fromEnd` | No |
+| `fromEnd` | No | 

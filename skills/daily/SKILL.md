@@ -9,7 +9,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dail
 
 
 ## When to Use
-
 - You are building a real-time voice or multimodal AI application that uses Daily or Pipecat-style transports.
 - You need guidance on low-latency audio, video, text, and AI service orchestration in one pipeline.
 - You want a capability reference before choosing services, transports, or workflow patterns for an interactive agent.
@@ -114,4 +113,4 @@ Agents can manage conversation context automatically or manually:
 
 ### Voice Activity Detection & Turn Management
 
-Agents can configure sophisticated turn-taking strategie
+Agents can configure sophisticated turn-taking strategies

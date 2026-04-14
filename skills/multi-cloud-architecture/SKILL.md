@@ -192,3 +192,6 @@ AWS / Azure / GCP
 - `terraform-module-library` - For IaC implementation
 - `cost-optimization` - For cost management
 - `hybrid-cloud-networking` - For connectivity
+
+## Limitations
+- Use this skill only when the task clearly 

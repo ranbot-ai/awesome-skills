@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-e
 Either = success or failure. `Right(value)` or `Left(error)`.
 
 ## When to Use
-
 - You need a quick fp-ts reference for typed synchronous error handling.
 - The task involves validation, fallible operations, or converting throwing code to `Either`.
 - You want a compact cheat sheet rather than a long tutorial.
@@ -90,3 +89,8 @@ pipe(
 ```
 
 Use Either when **error type matters** and you want to chain operations.
+
+## Limitations
+- Use this skill only when the task clearly matches the scope described above.
+- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
+- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.

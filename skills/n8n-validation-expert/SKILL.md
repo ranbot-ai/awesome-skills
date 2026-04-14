@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/n8n-
 Expert guide for interpreting and fixing n8n validation errors.
 
 ## When to Use
-
 - You need to interpret or fix validation errors in an n8n workflow.
 - The task involves `missing_required`, `invalid_value`, expression failures, or iterative validate-fix loops.
 - You want concrete remediation guidance for workflow validation output.
@@ -254,4 +253,4 @@ config.operation = "post";  // Use valid operation
 ```javascript
 // Error
 {
-  "type": "typ
+  "type": "type

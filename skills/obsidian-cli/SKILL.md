@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/obsi
 Use the `obsidian` CLI to interact with a running Obsidian instance. Requires Obsidian to be open.
 
 ## When to Use
-
 - Use when managing vault content through the Obsidian CLI.
 - Use when developing or debugging Obsidian plugins and themes from the command line.
 - Use when the user wants shell-driven interaction with a running Obsidian app.
@@ -115,3 +114,8 @@ obsidian dev:mobile on
 ```
 
 Run `obsidian help` to see additional developer commands including CDP and debugger controls.
+
+## Limitations
+- Use this skill only when the task clearly matches the scope described above.
+- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
+- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.

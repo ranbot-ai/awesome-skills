@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-d
 This skill covers the data transformations you do every day: working with arrays, reshaping objects, normalizing API responses, grouping data, and safely accessing nested values. Each section shows the imperative approach first, then the functional equivalent, with honest assessments of when each approach shines.
 
 ## When to Use
-
 - You need to transform arrays, objects, grouped data, or nested values in TypeScript.
 - The task involves reshaping API responses, null-safe access, aggregation, or normalization.
 - You want practical functional patterns for everyday data work instead of low-level loops.
@@ -187,4 +186,4 @@ const getActivePremiumNames = (users: User[]): string[] =>
 const isActive = (user: User): boolean => user.isActive;
 const isPremium = (user: User): boolean => user.tier === 'premium';
 const getName = (user: User): string => user.name;
-const alphabetically = (a: string, b: string): number => a.localeCompare(b)
+const alphabetically = (a: string, b: string): number => a.localeCompare(b);

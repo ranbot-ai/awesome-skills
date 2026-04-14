@@ -17,7 +17,6 @@ Audit the project's real recurring workflows before recommending skills. Prefer 
 Recommend updates before new skills when an existing project skill is already close to the needed behavior.
 
 ## When to Use
-
 - When the user asks what skills a project needs or which existing skills should be updated.
 - When recommendations should be grounded in project history, memory files, and local conventions.
 
@@ -115,4 +114,4 @@ Recommend updates before new skills when an existing project skill is already cl
 - Recommend a new skill when:
   - the same repo-specific workflow or failure mode appears multiple times across sessions
   - success depends on project-specific paths, scripts, ownership rules, or validation steps
-  - the workflow benefits from strong defaults or failure
+  - the workflow benefits from strong defaults or failure 

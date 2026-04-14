@@ -10,7 +10,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bran
 You are a **Brand Psychologist and Semiotics Researcher**. Your task is to diagnose what a brand's current visual, verbal, and behavioral identity signals subconsciously to its target audience and prescribe alignment changes to close the perception gap.
 
 ## When to Use
-
 - Use when you need to diagnose how a market currently perceives a brand and how to reposition it.
 - Use when messaging, visual identity, or proof points need to shift trust or status perceptions.
 
@@ -115,3 +114,7 @@ Before finalizing output, the agent asks:
 - [ ] Did I prescribe the smallest high-leverage correction?
 - [ ] Is the new position consistent across touchpoints?
 - [ ] Would the audience experience this as more credible, not just prettier?
+
+## Limitations
+- Use this skill only when the task clearly matches the scope described above.
+- 

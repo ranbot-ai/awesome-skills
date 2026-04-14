@@ -15,7 +15,6 @@ Best practices for building AI chat interfaces with Makepad using MolyKit - a to
 **Source codebase**: `/Users/zhangalex/Work/Projects/FW/robius/moly/moly-kit`
 
 ## When to Use
-
 Use this skill when:
 - Building AI chat interfaces with Makepad
 - Integrating OpenAI or other LLM APIs
@@ -192,4 +191,4 @@ pub struct BotId(Arc<str>);
 impl BotId {
     pub fn new(id: &str, provider: &str) -> Self;
     pub fn id(&self) -> &str;       // provider-local id
-    pub fn provide
+    pub fn provider

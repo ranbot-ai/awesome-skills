@@ -11,7 +11,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/obsi
 # Obsidian Bases Skill
 
 ## When to Use
-
 - Use when creating or editing `.base` files in Obsidian.
 - Use for database-like note views with filters, formulas, summaries, or cards/tables.
 - Use when the user asks about Obsidian Bases specifically.
@@ -180,4 +179,4 @@ formulas:
   days_old: '(now() - file.ctime).days'
 
   # Calculate days until due date
-  days_un
+  days_unt

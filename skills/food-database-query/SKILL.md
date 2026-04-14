@@ -18,7 +18,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/food
 ---
 
 ## When to Use
-
 - 需要查询食物营养成分、比较食物差异或做营养计算时使用。
 - 任务涉及食物数据库检索、食物推荐、份量换算或分类筛选。
 - 需要基于结构化食物数据生成分析结果而不是自由文本建议时使用。
@@ -338,4 +337,4 @@ def parse_food_input(text):
       "description": "1个大号鸡蛋"
     },
     {
-      "amount":
+      "amount": 

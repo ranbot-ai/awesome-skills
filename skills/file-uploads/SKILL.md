@@ -218,9 +218,8 @@ Fix action: Use path.basename() and generate safe name
 - storing file metadata -> postgres-wizard (Database schema)
 
 ## When to Use
-
 - User mentions or implies: file upload
 - User mentions or implies: S3
 - User mentions or implies: R2
 - User mentions or implies: presigned URL
-- User men
+- User ment

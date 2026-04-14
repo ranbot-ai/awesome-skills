@@ -1,22 +1,21 @@
 {
-  "id": "openhands-github",
+  "id": "antigravity-github",
   "name": "github",
   "slug": "github",
-  "description": "You have access to an environment variable, `GITHUB_TOKEN`, which allows you to interact with",
-  "category": "Development & Code Tools",
-  "source": "openhands",
-  "repoUrl": "https://github.com/OpenHands/OpenHands",
-  "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/github.md",
-  "content": "\nYou have access to an environment variable, `GITHUB_TOKEN`, which allows you to interact with\nthe GitHub API.\n\n<IMPORTANT>\nYou can use `curl` with the `GITHUB_TOKEN` to interact with GitHub's API.\nALWAYS use the GitHub API for operations instead of a web browser.\nALWAYS use the `create_pr` tool to open a pull request\n</IMPORTANT>\n\nIf you encounter authentication issues when pushing to GitHub (such as password prompts or permission errors), the old token may have expired. In such case, update the remote URL to include the current token: `git remote set-url origin https://${GITHUB_TOKEN}@github.com/username/repo.git`\n\nHere are some instructions for pushing, but ONLY do this if the user asks you to:\n* NEVER push directly to the `main` or `master` branch\n* Git config (username and email) is pre-set. Do not modify.\n* You may already be on a branch starting with `openhands-workspace`. Create a new branch with a better name before pushing.\n* Use the `create_pr` tool to create a pull request, if you haven't already\n* Once you've created your own branch or a pull request, continue to update it. Do NOT create a new one unless you are explicitly asked to. Update the PR title and description as necessary, but don't change the branch name.\n* Use the main branch as the base branch, unless the user requests otherwise\n* After opening or updating a pull request, send the user a short message with a link to the pull request.\n* Do NOT mark a pull request as ready to review unless the user explicitly says so\n* Do all of the above in as few steps as possible. E.g. you could push changes with one step by running the following bash commands:\n```bash\ngit remote -v && git branch # to find the current org, repo and branch\ngit checkout -b create-widget && git add . && git commit -m \"Create widget\" && git push -u origin create-widget\n```\n",
+  "description": "Use the `gh` CLI for issues, pull requests, Actions runs, and GitHub API queries.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/github",
+  "content": "\n# GitHub Skill\n\nUse the `gh` CLI to interact with GitHub. Always specify `--repo owner/repo` when not in a git directory, or use URLs directly.\n\n## When to Use\n- When the user asks about GitHub issues, pull requests, workflow runs, or CI failures.\n- When you need `gh issue`, `gh pr`, `gh run`, or `gh api` from the command line.\n\n## Pull Requests\n\nCheck CI status on a PR:\n```bash\ngh pr checks 55 --repo owner/repo\n```\n\nList recent workflow runs:\n```bash\ngh run list --repo owner/repo --limit 10\n```\n\nView a run and see which steps failed:\n```bash\ngh run view <run-id> --repo owner/repo\n```\n\nView logs for failed steps only:\n```bash\ngh run view <run-id> --repo owner/repo --log-failed\n```\n\n### Debugging a CI Failure\n\nFollow this sequence to investigate a failing CI run:\n\n1. **Check PR status** — identify which checks are failing:\n   ```bash\n   gh pr checks 55 --repo owner/repo\n   ```\n2. **List recent runs** — find the relevant run ID:\n   ```bash\n   gh run list --repo owner/repo --limit 10\n   ```\n3. **View the failed run** — see which jobs and steps failed:\n   ```bash\n   gh run view <run-id> --repo owner/repo\n   ```\n4. **Fetch failure logs** — get the detailed output for failed steps:\n   ```bash\n   gh run view <run-id> --repo owner/repo --log-failed\n   ```\n\n## API for Advanced Queries\n\nThe `gh api` command is useful for accessing data not available through other subcommands.\n\nGet PR with specific fields:\n```bash\ngh api repos/owner/repo/pulls/55 --jq '.title, .state, .user.login'\n```\n\n## JSON Output\n\nMost commands support `--json` for structured output.  You can use `--jq` to filter:\n\n```bash\ngh issue list --repo owner/repo --json number,title --jq '.[] | \"\\(.number): \\(.title)\"'\n```\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
   "tags": [
-    "git",
-    "github",
-    "bash",
-    "pr",
-    "agent",
-    "tool",
-    "api"
+    "api",
+    "ai",
+    "workflow"
   ],
-  "useCases": [],
-  "scrapedAt": "2026-01-26T13:15:30.219Z"
+  "useCases": [
+    "When the user asks about GitHub issues, pull requests, workflow runs, or CI failures.",
+    "When you need `gh issue`, `gh pr`, `gh run`, or `gh api` from the command line."
+  ],
+  "scrapedAt": "2026-04-14T08:00:13.892Z"
 }

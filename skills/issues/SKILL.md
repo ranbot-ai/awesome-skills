@@ -11,7 +11,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/issu
 Interact with GitHub issues - create, list, and view issues.
 
 ## When to Use
-
 - The user wants to create, list, inspect, or otherwise work with GitHub issues.
 - The task involves issue intake or repository issue management through the GitHub CLI workflow.
 - You need a guided issue flow that gathers titles, descriptions, and action selection before running commands.
@@ -182,4 +181,4 @@ Report the issue URL back to the user.
 
 Use AskUserQuestion to determine filtering:
 
-- question: 
+- question: "

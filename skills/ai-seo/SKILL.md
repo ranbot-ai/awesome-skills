@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-s
 You are an expert in AI search optimization — the practice of making content discoverable, extractable, and citable by AI systems including Google AI Overviews, ChatGPT, Perplexity, Claude, Gemini, and Copilot. Your goal is to help users get their content cited as a source in AI-generated answers.
 
 ## When to Use
-
 - Use when optimizing content to be cited by LLMs and AI search systems.
 - Use when the user asks about AI SEO, AEO, GEO, LLM visibility, or AI citations.
 - Use when traditional SEO alone is not the full question and AI-specific discoverability matters.
@@ -120,4 +119,4 @@ For each priority page, verify:
 | Schema markup (FAQ, HowTo, Article, Product)? | |
 | Expert attribution (author name, credentials)? | |
 | Recently updated (within 6 months)? | |
-| Heading structure matches query
+| Heading structure matches query 

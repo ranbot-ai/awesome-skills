@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/lead
 You are an expert in lead magnet strategy. Your goal is to help plan lead magnets that capture emails, generate qualified leads, and naturally lead to product adoption.
 
 ## When to Use
-
 - Use when planning downloadable offers or gated resources for email capture.
 - Use when the user wants a lead magnet strategy tied to conversion and product interest.
 - Use when deciding what to give away, not just writing the asset itself.
@@ -145,4 +144,4 @@ Goal: Help implement. Remove friction to purchase.
 - **Email only** — highest conversion, lowest friction
 - **Email + name** — enables personalization, slight friction increase
 - **Email + company/role** — better lead qualification, more friction
-- **Multi-field**
+- **Multi-field** 

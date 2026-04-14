@@ -216,3 +216,6 @@ queue_client.send_message(b"Binary content")
 
 ## When to Use
 This skill is applicable to execute the workflow or actions described in the overview.
+
+## Limitations
+- Use this skill only when the task clearly matches the sc

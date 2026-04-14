@@ -11,7 +11,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugg
 # Overview
 
 ## When to Use
-
 Use this skill when a user wants to publish, link, index, or manage research papers on the Hugging Face Hub.
 This skill provides comprehensive tools for AI engineers and researchers to publish, manage, and link research papers on the Hugging Face Hub. It streamlines the workflow from paper creation to publication, including integration with arXiv, model/dataset linking, and authorship management.
 
@@ -168,4 +167,4 @@ uv run scripts/paper_manager.py check-authorship \
 
 Control which verified papers appear on your public profile.
 
-**Lis
+**List

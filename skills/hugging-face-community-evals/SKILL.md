@@ -11,7 +11,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugg
 # Overview
 
 ## When to Use
-
 Use this skill for local model evaluation, backend selection, and GPU smoke tests outside the Hugging Face Jobs workflow.
 
 This skill is for **running evaluations against models on the Hugging Face Hub on local hardware**.
@@ -176,4 +175,4 @@ Multiple `lighteval` tasks can be comma-separated in `--tasks`.
 
 # Backend Selection
 
-- Prefer `inspect_vllm_uv.py --backend vllm` for fast GP
+- Prefer `inspect_vllm_uv.py --backend vllm` for fast GPU

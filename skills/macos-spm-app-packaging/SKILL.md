@@ -14,7 +14,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/maco
 Bootstrap a complete SwiftPM macOS app folder, then build, package, and run it without Xcode. Use `assets/templates/bootstrap/` for the starter layout and `references/packaging.md` + `references/release.md` for packaging and release details.
 
 ## When to Use
-
 - When the user needs a SwiftPM-based macOS app without relying on an Xcode project.
 - When you need packaging, signing, notarization, or appcast guidance for a SwiftPM app.
 
@@ -105,3 +104,8 @@ spctl --assess --type execute --verbose build/HelloApp.app
 - Remove Sparkle steps if you do not use Sparkle for updates.
 - Sparkle relies on the bundle build number (`CFBundleVersion`), so `BUILD_NUMBER` in `version.env` must increase for each update.
 - For menu bar apps, set `MENU_BAR_APP=1` when packaging to emit `LSUIElement` in Info.plist.
+
+## Limitations
+- Use this skill only when the task clearly matches the scope described above.
+- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
+- Stop and ask for clarification if required inputs, permiss

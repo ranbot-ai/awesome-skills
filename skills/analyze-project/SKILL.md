@@ -28,7 +28,6 @@ For each session, determine:
 5. What changes would most improve future sessions
 
 ## When to Use
-
 - You need a postmortem on AI-assisted coding sessions, especially when scope drift or repeated rework occurred.
 - You want root-cause analysis that separates user/spec issues from agent mistakes, repo friction, or validation gaps.
 - You need evidence-backed recommendations for improving future prompts, repo health, or delivery workflows.
@@ -191,4 +190,4 @@ Record:
 Keep one short example in mind for calibration:
 - Human-added: “also refactor nearby code while you’re here”
 - Necessary discovered: hidden dependency must be fixed for original task to work
-- Agent-i
+- Agent-in

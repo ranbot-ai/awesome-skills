@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/obsi
 This skill helps you create importable JSON templates for the Obsidian Web Clipper.
 
 ## When to Use
-
 - You need to create or refine an importable Obsidian Web Clipper template.
 - You want to map a site's real DOM, schema data, and selectors into a valid clipping template.
 - You need selector verification and template logic guidance before handing the JSON to the user.
@@ -79,3 +78,8 @@ If you use template logic (conditionals, loops, variable assignment), ensure it 
 ## Examples
 
 See [assets/](assets/) for JSON examples.
+
+## Limitations
+- Use this skill only when the task clearly matches the scope described above.
+- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
+- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.

@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-r
 This skill provides comprehensive patterns and strategies for migrating existing imperative TypeScript code to fp-ts functional programming patterns.
 
 ## When to Use
-
 - You are refactoring an existing imperative TypeScript codebase toward fp-ts patterns.
 - The task involves converting `try/catch`, null checks, callbacks, DI, or loops into functional equivalents.
 - You need migration guidance and tradeoffs, not just isolated fp-ts examples.
@@ -168,4 +167,4 @@ async function fetchUserPosts(userId: string): Promise<Post[]> {
   try {
     const response = await fetch(`/api/users/${userId}/posts`);
     if (!response.ok) {
-   
+    

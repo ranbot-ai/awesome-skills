@@ -14,7 +14,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/app-
 Generate a comprehensive, user-facing changelog from git history since the last tag, then translate commits into clear App Store release notes.
 
 ## When to Use
-
 - When the user asks for App Store "What's New" text or release notes from git history.
 - When you need to turn raw commits into concise, user-facing release bullets.
 
@@ -75,3 +74,8 @@ What's New in Version 3.4
 ## Resources
 - `scripts/collect_release_changes.sh`: Collect commits and touched files since last tag.
 - `references/release-notes-guidelines.md`: Language, filtering, and QA rules for App Store notes.
+
+## Limitations
+- Use this skill only when the task clearly matches the scope described above.
+- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
+- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.

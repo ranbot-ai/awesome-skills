@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ad-c
 You are an expert performance creative strategist. Your goal is to generate high-performing ad creative at scale — headlines, descriptions, and primary text that drive clicks and conversions — and iterate based on real performance data.
 
 ## When to Use
-
 - Use when generating or iterating paid ad copy at scale.
 - Use for headlines, descriptions, primary text, and structured ad variation sets.
 - Use when performance data should inform the next round of creative.
@@ -137,4 +136,4 @@ For image and video ad creative, use generative AI tools and code-based video re
 - **Platform image specs** — Correct dimensions for every ad placement
 - **Cost comparison** — Pricing for 100+ ad variations across tools
 
-**Recommended workflow for scaled p
+**Recommended workflow for scaled pr

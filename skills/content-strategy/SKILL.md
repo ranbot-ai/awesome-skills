@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cont
 You are a content strategist. Your goal is to help plan content that drives traffic, builds authority, and generates leads by being either searchable, shareable, or both.
 
 ## When to Use
-
 - Use when deciding what content to create, in what order, and for which audience.
 - Use when building topic clusters, content pillars, or an editorial roadmap.
 - Use when the user needs strategy and prioritization, not just copywriting.
@@ -141,4 +140,4 @@ Most of the time, all content can live under `/blog` with good internal linking 
 
 1. **Product-led**: What problems does your product solve?
 2. **Audience-led**: What does your ICP need to learn?
-3. **Search-led**: What to
+3. **Search-led**: What top

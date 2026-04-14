@@ -1,28 +1,46 @@
 ---
 name: claude-api
-description: Build apps with the Claude API or Anthropic SDK. TRIGGER when: code imports `anthropic`/`@anthropic-ai/sdk`/`claude_agent_sdk`, or user asks to use Claude API, Anthropic SDKs, or Agent SDK. DO NOT TRI
+description: Build, debug, and optimize Claude API / Anthropic SDK apps. Apps built with this skill should include prompt caching. TRIGGER when: code imports anthropic/@anthropic-ai/sdk; user asks to use the Claud
 category: Document Processing
-source: antigravity
+source: anthropic
 tags: [python, typescript, pdf, docx, pptx, api, mcp, claude, ai, agent]
-url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/claude-api
+url: https://github.com/anthropics/skills/tree/main/skills/claude-api
 ---
+
 
 
 # Building LLM-Powered Applications with Claude
 
 This skill helps you build LLM-powered applications with Claude. Choose the right surface based on your needs, detect the project language, then read the relevant language-specific documentation.
 
-## When to Use
+## Before You Start
 
-- Use when building with the Claude API, Anthropic SDKs, or the Agent SDK.
-- Use when code imports `anthropic`, `@anthropic-ai/sdk`, or related Claude SDK packages.
-- Do not use for general coding work unrelated to Claude integrations.
+Scan the target file (or, if no target file, the prompt and project) for non-Anthropic provider markers — `import openai`, `from openai`, `langchain_openai`, `OpenAI(`, `gpt-4`, `gpt-5`, file names like `agent-openai.py` or `*-generic.py`, or any explicit instruction to keep the code provider-neutral. If you find any, stop and tell the user that this skill produces Claude/Anthropic SDK code; ask whether they want to switch the file to Claude or want a non-Claude implementation. Do not edit a non-Anthropic file with Anthropic SDK calls.
+
+## Output Requirement
+
+When the user asks you to add, modify, or implement a Claude feature, your code must call Claude through one of:
+
+1. **The official Anthropic SDK** for the project's language (`anthropic`, `@anthropic-ai/sdk`, `com.anthropic.*`, etc.). This is the default whenever a supported SDK exists for the project.
+2. **Raw HTTP** (`curl`, `requests`, `fetch`, `httpx`, etc.) — only when the user explicitly asks for cURL/REST/raw HTTP, the project is a shell/cURL project, or the language has no official SDK.
+
+Never mix the two — don't reach for `requests`/`fetch` in a Python or TypeScript project just because it feels lighter. Never fall back to OpenAI-compatible shims.
+
+**Never guess SDK usage.** Function names, class names, namespaces, method signatures, and import paths must come from explicit documentation — either the `{lang}/` files in this skill or the official SDK repositories or documentation links listed in `shared/live-sources.md`. If the binding you need is not explicitly documented in the skill files, WebFetch the relevant SDK repo from `shared/live-sources.md` before writing code. Do not infer Ruby/Java/Go/PHP/C# APIs from cURL shapes or from another language's SDK.
 
 ## Defaults
 
 Unless the user requests otherwise:
 
 For the Claude model version, please use Claude Opus 4.6, which you can access via the exact model string `claude-opus-4-6`. Please default to using adaptive thinking (`thinking: {type: "adaptive"}`) for anything remotely complicated. And finally, please default to streaming for any request that may involve long input, long output, or high `max_tokens` — it prevents hitting request timeouts. Use the SDK's `.get_final_message()` / `.finalMessage()` helper to get the complete response if you don't need to handle individual stream events
+
+---
+
+## Subcommands
+
+If the User Request at the bottom of this prompt is a bare subcommand string (no prose), search every **Subcommands** table in this document — including any in sections appended below — and follow the matching Action column directly. This lets users invoke specific flows via `/claude-api <subcommand>`. If no table in the document matches, treat the request as normal prose.
+
+<!-- Subcommand tables are defined per-section below; this header block contains only the dispatch rule so that feature-gated sections can add their own tables without leaking strings into ungated builds. -->
 
 ---
 
@@ -56,33 +74,4 @@ Before reading code examples, determine which language the user is working in:
 4. **If unsupported language detected** (Rust, Swift, C++, Elixir, etc.):
 
    - Suggest cURL/raw HTTP examples from `curl/` and note that community SDKs may exist
-   - Offer to show Python or TypeScript examples as reference implementations
-
-5. **If user needs cURL/raw HTTP examples**, read from `curl/`.
-
-### Language-Specific Feature Support
-
-| Language   | Tool Runner | Agent SDK | Notes                                 |
-| ---------- | ----------- | --------- | ------------------------------------- |
-| Python     | Yes (beta)  | Yes       | Full support — `@beta_tool` decorator |
-| TypeScript | Yes (beta)  | Yes       | Full support — `betaZodTool` + Zod    |
-| Java       | Yes (beta)  | No        | Beta tool use with annotated classes  |
-| Go         | Yes (beta)  | No        | `BetaToolRunner` in `toolrunner` pkg  |
-| Ruby       | Yes (beta)  | No        | `BaseTool` + `tool_runner` in beta    |
-| cURL       | N/A         | N/A       | Raw HTTP, no SDK features             |
-| C#         | No          | No        | Official SDK                          |
-| PHP        | No          | No        | Official SDK                          |
-
----
-
-## Which Surface Should I Use?
-
-> **Start simple.** Default to the simplest tier that meets your needs. Single API calls and workflows handle most use cases — only reach for agents when the task genuinely requires open-ended, model-driven exploration.
-
-| Use Case                                        | Tier            | Recommended Surface       | Why                                     |
-| ----------------------------------------------- | --------------- | ------------------------- | --------------------------------------- |
-| Classification, summarization, extraction, Q&A  | Single LLM call | **Claude API**            | One request, one response               |
-| Batch processing or embeddings                  | Single LLM call | **Claude API**            | Specialized endpoints                   |
-| Multi-step pipelines with code-controlled logic | Workflow        | **Claude API + tool use** | You orchestrate the loop                |
-| Custom agent with your own tools                | Agent           | **Claude API + tool use** | Maximum flexibility                     |
-| AI agent with file/web/terminal access          | Agent        
+   - Offer to show Python o

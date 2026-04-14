@@ -11,7 +11,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ffuf
 # FFUF (Fuzz Faster U Fool) Skill
 
 ## When to Use
-
 - You are fuzzing web targets with `ffuf` during authorized security testing or penetration testing.
 - The task involves content discovery, subdomain enumeration, parameter fuzzing, or authenticated request fuzzing.
 - You need guidance on wordlists, filtering, calibration, and interpreting ffuf results efficiently.

@@ -15,7 +15,6 @@ AgentMail gives AI agents real email addresses (`@theagentmail.net`) with a REST
 Base URL: `https://api.theagentmail.net`
 
 ## When to Use
-
 - An AI agent needs a real inbox/outbox for signups, verification flows, or transactional communication.
 - You need to provision AgentMail accounts, send messages, read inbox contents, or register inbound webhooks.
 - You need to monitor karma usage or wire email events into agent automation.
@@ -139,4 +138,4 @@ Every action has a karma cost or reward:
 - You only earn karma once per sender until the agent replies. If sender X emails you 5 times without a reply, only the first earns karma. Reply to X, and the next email from X earns karma again.
 - Deleting an account refunds the 10 karma it cost to create.
 
-When karma reaches 0, sends and account creation 
+When karma reaches 0, sends and account creation r

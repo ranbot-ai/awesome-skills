@@ -11,7 +11,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ment
 # 心理健康分析技能
 
 ## When to Use
-
 - 需要分析情绪、焦虑、抑郁评分、治疗进展或危机风险时使用。
 - 任务涉及心理健康趋势、情绪模式识别或与睡眠/运动/营养的关联分析。
 - 用户请求心理健康报告、风险预警或治疗进展追踪时使用。
@@ -388,3 +387,4 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ment
 [整体评价：优秀/良好/一般/需改进/危机]
 - PHQ-9评分：X分（严重程度）
 - GAD-7评分：X分（严重程度）
+-

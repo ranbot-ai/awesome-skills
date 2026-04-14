@@ -232,3 +232,7 @@ If the design is high-impact, high-risk, or requires elevated confidence, you MU
 
 ## When to Use
 This skill is applicable to execute the workflow or actions described in the overview.
+
+## Limitations
+- Use this skill only when the task clearly matches the scope described above.
+- Do not treat the output as a substitute 

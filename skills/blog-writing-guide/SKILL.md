@@ -17,7 +17,6 @@ This skill enforces Sentry's blog writing standards across every post — whethe
 What follows are the core principles to internalize and apply to every piece of content.
 
 ## When to Use
-
 - You need to draft or edit a Sentry blog post.
 - The task involves technical storytelling, product announcements, or engineering deep-dives in Sentry's blog voice.
 - You want blog content that is opinionated, specific, and technically credible rather than generic marketing copy.
@@ -101,4 +100,4 @@ The title is the highest-leverage sentence in the post. It must stop a developer
 
 ## The Closing
 
-End with something useful — a link to docs, a way t
+End with something useful — a link to docs, a way to

@@ -15,7 +15,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/evol
 This skill enables makepad-skills to self-improve continuously during development.
 
 ## When to Use
-
 - You are maintaining `makepad-skills` and want the skill library to improve itself during development.
 - You need the workflow for deciding when a new pattern should become a skill update or hook-driven evolution.
 - You are working on self-correction, self-validation, or version adaptation for the skill set.
@@ -165,4 +164,4 @@ Ask yourself:
 ### Step 2: Classify the Knowledge
 
 ```
-Widget/Component Pattern     → 
+Widget/Component Pattern     → r

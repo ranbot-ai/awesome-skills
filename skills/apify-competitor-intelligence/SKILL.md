@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apif
 Analyze competitors using Apify Actors to extract data from multiple platforms.
 
 ## When to Use
-
 - You need competitor benchmarks for content, reviews, pricing, ads, audience, or channel performance.
 - The task involves selecting Apify Actors to compare competitors across maps, booking, social, or video platforms.
 - You need structured competitor data plus synthesized takeaways for strategy or positioning.
@@ -129,4 +128,4 @@ node --env-file=.env ${CLAUDE_PLUGIN_ROOT}/reference/scripts/run_actor.js \
 After completion, report:
 - Number of competitors analyzed
 - File location and name
-- Key comp
+- Key compe

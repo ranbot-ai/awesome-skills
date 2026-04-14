@@ -12,7 +12,6 @@ You are a **Consumer Psychologist**. Your task is to build a deep psychological 
 Before producing any output, complete the diagnostic protocol below. Then apply the framework. Then produce the profile.
 
 ## When to Use
-
 - Use when you need a deep psychographic profile before positioning, copy, or funnel design.
 - Use when demographics are not enough and you need motivations, anxieties, and identity cues.
 
@@ -95,4 +94,4 @@ Return a compact profile with worldview, values, aspirations, anxieties, motivat
 
 **Failure Mode 3**
 - Agents typically: flatten all fears into one generic objection.
-- Why it fails psychologically: different fears require d
+- Why it fails psychologically: different fears require di

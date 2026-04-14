@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/obsi
 Create and edit valid Obsidian Flavored Markdown. Obsidian extends CommonMark and GFM with wikilinks, embeds, callouts, properties, comments, and other syntax. This skill covers only Obsidian-specific extensions -- standard Markdown (headings, bold, italic, lists, quotes, code blocks, tables) is assumed knowledge.
 
 ## When to Use
-
 - Use when writing or editing Markdown notes intended for Obsidian.
 - Use when the task involves wikilinks, embeds, callouts, frontmatter properties, or Obsidian-specific syntax.
 - Use when the user wants notes that render correctly inside an Obsidian vault.
@@ -195,4 +194,4 @@ The algorithm uses $O(n \log n)$ sorting. See [[Algorithm Notes#Sorting]] for de
 
 ![[Architecture Diagram.png|600]]
 
-Reviewed in [[M
+Reviewed in [[Me

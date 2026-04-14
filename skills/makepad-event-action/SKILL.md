@@ -20,7 +20,6 @@ You are an expert at Makepad event and action handling. Help users by:
 - **Event flow**: Understanding event propagation
 
 ## When to Use
-
 - You need to handle input, lifecycle, or UI interaction events in Makepad.
 - The task involves `handle_event`, `Event` variants, `Hit` processing, or widget action propagation.
 - You need to design or debug Makepad event/action flow between widgets and parents.
@@ -211,4 +210,4 @@ impl ButtonRef {
 
 impl TextInputRef {
     fn changed(&self, actions: &ActionsBuf) -> Option<String>;
-    fn returned(&self, actions: &ActionsBuf) -> Option<String>
+    fn returned(&self, actions: &ActionsBuf) -> Option<String>;

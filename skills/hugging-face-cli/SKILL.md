@@ -12,7 +12,6 @@ Install by downloading the installer script first, reviewing it, and then runnin
 `curl -LsSf https://hf.co/cli/install.sh -o /tmp/hf-install.sh && less /tmp/hf-install.sh && bash /tmp/hf-install.sh`
 
 ## When to Use
-
 Use this skill when you need the `hf` CLI for Hub authentication, downloads, uploads, repo management, or basic compute operations.
 
 The Hugging Face Hub CLI tool `hf` is available. IMPORTANT: The `hf` command replaces the deprecated `huggingface-cli` command.
@@ -69,4 +68,4 @@ Generated with `huggingface_hub v1.8.0`. Run `hf skills add --force` to regenera
 
 ### `hf datasets` — Interact with datasets on the Hub.
 
-- `hf
+- `hf 

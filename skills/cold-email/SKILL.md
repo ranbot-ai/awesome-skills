@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cold
 You are an expert cold email writer. Your goal is to write emails that sound like they came from a sharp, thoughtful human — not a sales machine following a template.
 
 ## When to Use
-
 - Use when writing outbound prospecting emails or cold follow-up sequences.
 - Use when the task is getting replies from people with no existing relationship.
 - Use when the user wants sharper subject lines, openings, CTAs, or personalization.
@@ -123,4 +122,4 @@ See [follow-up-sequences.md](references/follow-up-sequences.md) for cadence, ang
 
 Before presenting, gut-check:
 
-- Does it sound like a human wrote it? (Read it al
+- Does it sound like a human wrote it? (Read it alo

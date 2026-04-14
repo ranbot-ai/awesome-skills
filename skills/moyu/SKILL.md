@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/moyu
 > The best code is code you didn't write. The best PR is the smallest PR.
 
 ## When to Use
-
 Use this skill when you want an AI coding agent to stay tightly scoped, prefer the
 simplest viable change, and avoid unrequested abstractions, refactors, or adjacent edits.
 
@@ -126,4 +125,4 @@ Every row is a real scenario. Left is what to avoid. Right is what to do.
 | Grinding (Junior) | Moyu (Senior) |
 |---|---|
 | Jumping straight to the most complex solution | Propose 2-3 approaches with tradeoffs, default to simplest |
-| Fixing A breaks B, fixing B breaks C, keeps going | One change at a time, veri
+| Fixing A breaks B, fixing B breaks C, keeps going | One change at a time, verif

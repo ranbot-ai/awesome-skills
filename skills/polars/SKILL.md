@@ -11,7 +11,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pola
 # Polars
 
 ## When to Use
-
 - You need a faster in-memory DataFrame workflow than pandas for data that still fits in RAM.
 - You are building ETL, analytics, or transformation pipelines that benefit from lazy evaluation and parallel execution.
 - You want expression-based tabular operations on top of Apache Arrow semantics.
@@ -221,4 +220,4 @@ Polars supports reading and writing:
 ```python
 # Eager
 df = pl.read_csv("file.csv")
-df.
+df.w

@@ -7,7 +7,7 @@
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cc-skill-continuous-learning",
-  "content": "\n# cc-skill-continuous-learning\n\nDevelopment skill skill.\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n",
+  "content": "\n# cc-skill-continuous-learning\n\nDevelopment skill skill.\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
   "tags": [
     "claude",
     "workflow"

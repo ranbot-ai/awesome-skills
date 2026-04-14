@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/diff
 Security-focused code review for PRs, commits, and diffs.
 
 ## When to Use
-
 - You need a security-focused review of a PR, commit range, or diff rather than a general code review.
 - The changes touch auth, crypto, external calls, value transfer, permissions, or other high-risk logic.
 - You need findings backed by code evidence, attack scenarios, and an explicit report artifact.
@@ -177,4 +176,4 @@ For these cases, use standard code review instead.
 ## Red Flags (Stop and Investigate)
 
 **Immediate escalation triggers:**
-- Removed code from "security",
+- Removed code from "security", 

@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/crea
 Create a git branch with the correct type prefix and a descriptive name following Sentry conventions.
 
 ## When to Use
-
 - You need to create a new git branch that follows the repository's naming convention.
 - You are starting a new piece of work from the default branch and need help classifying it as `feat`, `fix`, `docs`, or another branch type.
 - You want the branch name proposed from either the task description or the current local diff.
@@ -110,4 +109,4 @@ Create the branch:
 git checkout -b <branch-name>
 ```
 
-Restore any stashed chang
+Restore any stashed change

@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/prod
 You help users create and maintain a product marketing context document. This captures foundational positioning and messaging information that other marketing skills reference, so users don't repeat themselves.
 
 ## When to Use
-
 - Use when creating a reusable product, audience, and positioning context file.
 - Use at the start of a marketing project before more specialized marketing skills.
 - Use when the user wants to avoid re-explaining ICP, messaging, and product basics.
@@ -144,4 +143,4 @@ After gathering information, create `.agents/product-marketing-context.md` with 
 
 *Last updated: [date]*
 
-## Product Ov
+## Product Ove

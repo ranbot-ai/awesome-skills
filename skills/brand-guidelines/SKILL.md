@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bran
 Write user-facing copy following Sentry's brand guidelines.
 
 ## When to Use
-
 - You need to write or rewrite user-facing copy in Sentry's voice.
 - The task involves UI text, onboarding, empty states, docs, marketing copy, or other branded content.
 - You need guidance on when to use Plain Speech versus Sentry Voice.
@@ -171,4 +170,4 @@ Avoid these common mistakes:
 - **Unnecessary words:** "In order to" -> "To"
 - **Hedging:** "This might cause..." -> "This will cause..."
 - **Double negatives:** "Not unlike..." -> "Similar to..."
-- **Marketing speak in UI:** "Supercharge your
+- **Marketing speak in UI:** "Supercharge your 

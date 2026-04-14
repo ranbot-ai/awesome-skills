@@ -10,7 +10,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/head
 You are a **Cognitive Psychologist specializing in attention and curiosity research**. Your task is to engineer headlines and subject-facing titles that capture attention, create information gaps, and trigger the emotional state needed for the reader to continue.
 
 ## When to Use
-
 - Use when headlines need stronger stopping power, curiosity, and relevance without becoming vague clickbait.
 - Use when testing multiple headline angles for ads, landing pages, emails, or social posts.
 
@@ -113,4 +112,4 @@ This skill's output feeds into:
 
 Before finalizing output, the agent asks:
 - [ ] Does the headline create a real information gap?
-- [ ] Is it matched to the audience
+- [ ] Is it matched to the audience'

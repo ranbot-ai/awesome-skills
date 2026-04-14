@@ -249,3 +249,7 @@ rewrite it until it feels obvious.
 
 ## When to Use
 This skill is applicable to execute the workflow or actions described in the overview.
+
+## Limitations
+- Use this skill only when the task clearly matches the scope described above.
+- Do not treat the ou

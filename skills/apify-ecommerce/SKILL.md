@@ -13,7 +13,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apif
 Extract product data, prices, reviews, and seller information from any e-commerce platform using Apify's E-commerce Scraping Tool.
 
 ## When to Use
-
 - You need product, pricing, review, stock, or seller data from e-commerce sites.
 - The task involves price monitoring, competitor product comparison, MAP enforcement, or review analysis.
 - You need a guided workflow for extracting marketplace data and summarizing findings.
@@ -162,4 +161,4 @@ Add these fields to get AI-generated insights:
 - Set high `maxReviewResults` for statistical significance
 - Look for recurring keywords: "broke", "defect", "quality", "returned"
 - Filter results by rating if sorting doesn't work as expected
-- Cross-reference with competitor products for bench
+- Cross-reference with competitor products for benchm
