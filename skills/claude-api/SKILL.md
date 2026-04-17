@@ -1,12 +1,11 @@
 ---
 name: claude-api
-description: Build, debug, and optimize Claude API / Anthropic SDK apps. Apps built with this skill should include prompt caching. TRIGGER when: code imports anthropic/@anthropic-ai/sdk; user asks to use the Claud
+description: Build, debug, and optimize Claude API / Anthropic SDK apps. Apps built with this skill should include prompt caching. Also handles migrating existing Claude API code between Claude model versions (4.5
 category: Document Processing
 source: anthropic
 tags: [python, typescript, pdf, docx, pptx, api, mcp, claude, ai, agent]
 url: https://github.com/anthropics/skills/tree/main/skills/claude-api
 ---
-
 
 
 # Building LLM-Powered Applications with Claude
@@ -32,7 +31,7 @@ Never mix the two — don't reach for `requests`/`fetch` in a Python or TypeScri
 
 Unless the user requests otherwise:
 
-For the Claude model version, please use Claude Opus 4.6, which you can access via the exact model string `claude-opus-4-6`. Please default to using adaptive thinking (`thinking: {type: "adaptive"}`) for anything remotely complicated. And finally, please default to streaming for any request that may involve long input, long output, or high `max_tokens` — it prevents hitting request timeouts. Use the SDK's `.get_final_message()` / `.finalMessage()` helper to get the complete response if you don't need to handle individual stream events
+For the Claude model version, please use Claude Opus 4.7, which you can access via the exact model string `claude-opus-4-7`. Please default to using adaptive thinking (`thinking: {type: "adaptive"}`) for anything remotely complicated. And finally, please default to streaming for any request that may involve long input, long output, or high `max_tokens` — it prevents hitting request timeouts. Use the SDK's `.get_final_message()` / `.finalMessage()` helper to get the complete response if you don't need to handle individual stream events
 
 ---
 
@@ -40,7 +39,6 @@ For the Claude model version, please use Claude Opus 4.6, which you can access v
 
 If the User Request at the bottom of this prompt is a bare subcommand string (no prose), search every **Subcommands** table in this document — including any in sections appended below — and follow the matching Action column directly. This lets users invoke specific flows via `/claude-api <subcommand>`. If no table in the document matches, treat the request as normal prose.
 
-<!-- Subcommand tables are defined per-section below; this header block contains only the dispatch rule so that feature-gated sections can add their own tables without leaking strings into ungated builds. -->
 
 ---
 
@@ -74,4 +72,10 @@ Before reading code examples, determine which language the user is working in:
 4. **If unsupported language detected** (Rust, Swift, C++, Elixir, etc.):
 
    - Suggest cURL/raw HTTP examples from `curl/` and note that community SDKs may exist
-   - Offer to show Python o
+   - Offer to show Python or TypeScript examples as reference implementations
+
+5. **If user needs cURL/raw HTTP examples**, read from `curl/`.
+
+### Language-Specific Feature Support
+
+| Language   | Tool Runner | Managed Agents | Notes   

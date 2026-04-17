@@ -8263,12 +8263,12 @@
       "id": "anthropic-claude-api",
       "name": "claude-api",
       "slug": "claude-api",
-      "description": "Build, debug, and optimize Claude API / Anthropic SDK apps. Apps built with this skill should include prompt caching. TRIGGER when: code imports anthropic/@anthropic-ai/sdk; user asks to use the Claude API, Anthropic SDKs, or Managed Agents (/v1/agents, /v1/sessions, /v1/environments). DO NOT TRIGGER when: code imports `openai`/other AI SDK, general programming, or ML/data-science tasks.",
+      "description": "Build, debug, and optimize Claude API / Anthropic SDK apps. Apps built with this skill should include prompt caching. Also handles migrating existing Claude API code between Claude model versions (4.5 → 4.6, 4.6 → 4.7, retired-model replacements). TRIGGER when: code imports `anthropic`/`@anthropic-ai/sdk`; user asks for the Claude API, Anthropic SDK, or Managed Agents; user adds/modifies/tunes a Claude feature (caching, thinking, compaction, tool use, batch, files, citations, memory) or model (Opus/Sonnet/Haiku) in a file; questions about prompt caching / cache hit rate in an Anthropic SDK project. SKIP: file imports `openai`/other-provider SDK, filename like `*-openai.py`/`*-generic.py`, provider-neutral code, general programming/ML.",
       "category": "Document Processing",
       "source": "anthropic",
       "repoUrl": "https://github.com/anthropics/skills",
       "skillUrl": "https://github.com/anthropics/skills/tree/main/skills/claude-api",
-      "content": "\n\n# Building LLM-Powered Applications with Claude\n\nThis skill helps you build LLM-powered applications with Claude. Choose the right surface based on your needs, detect the project language, then read the relevant language-specific documentation.\n\n## Before You Start\n\nScan the target file (or, if no target file, the prompt and project) for non-Anthropic provider markers — `import openai`, `from openai`, `langchain_openai`, `OpenAI(`, `gpt-4`, `gpt-5`, file names like `agent-openai.py` or `*-generic.py`, or any explicit instruction to keep the code provider-neutral. If you find any, stop and tell the user that this skill produces Claude/Anthropic SDK code; ask whether they want to switch the file to Claude or want a non-Claude implementation. Do not edit a non-Anthropic file with Anthropic SDK calls.\n\n## Output Requirement\n\nWhen the user asks you to add, modify, or implement a Claude feature, your code must call Claude through one of:\n\n1. **The official Anthropic SDK** for the project's language (`anthropic`, `@anthropic-ai/sdk`, `com.anthropic.*`, etc.). This is the default whenever a supported SDK exists for the project.\n2. **Raw HTTP** (`curl`, `requests`, `fetch`, `httpx`, etc.) — only when the user explicitly asks for cURL/REST/raw HTTP, the project is a shell/cURL project, or the language has no official SDK.\n\nNever mix the two — don't reach for `requests`/`fetch` in a Python or TypeScript project just because it feels lighter. Never fall back to OpenAI-compatible shims.\n\n**Never guess SDK usage.** Function names, class names, namespaces, method signatures, and import paths must come from explicit documentation — either the `{lang}/` files in this skill or the official SDK repositories or documentation links listed in `shared/live-sources.md`. If the binding you need is not explicitly documented in the skill files, WebFetch the relevant SDK repo from `shared/live-sources.md` before writing code. Do not infer Ruby/Java/Go/PHP/C# APIs from cURL shapes or from another language's SDK.\n\n## Defaults\n\nUnless the user requests otherwise:\n\nFor the Claude model version, please use Claude Opus 4.6, which you can access via the exact model string `claude-opus-4-6`. Please default to using adaptive thinking (`thinking: {type: \"adaptive\"}`) for anything remotely complicated. And finally, please default to streaming for any request that may involve long input, long output, or high `max_tokens` — it prevents hitting request timeouts. Use the SDK's `.get_final_message()` / `.finalMessage()` helper to get the complete response if you don't need to handle individual stream events\n\n---\n\n## Subcommands\n\nIf the User Request at the bottom of this prompt is a bare subcommand string (no prose), search every **Subcommands** table in this document — including any in sections appended below — and follow the matching Action column directly. This lets users invoke specific flows via `/claude-api <subcommand>`. If no table in the document matches, treat the request as normal prose.\n\n<!-- Subcommand tables are defined per-section below; this header block contains only the dispatch rule so that feature-gated sections can add their own tables without leaking strings into ungated builds. -->\n\n---\n\n## Language Detection\n\nBefore reading code examples, determine which language the user is working in:\n\n1. **Look at project files** to infer the language:\n\n   - `*.py`, `requirements.txt`, `pyproject.toml`, `setup.py`, `Pipfile` → **Python** — read from `python/`\n   - `*.ts`, `*.tsx`, `package.json`, `tsconfig.json` → **TypeScript** — read from `typescript/`\n   - `*.js`, `*.jsx` (no `.ts` files present) → **TypeScript** — JS uses the same SDK, read from `typescript/`\n   - `*.java`, `pom.xml`, `build.gradle` → **Java** — read from `java/`\n   - `*.kt`, `*.kts`, `build.gradle.kts` → **Java** — Kotlin uses the Java SDK, read from `java/`\n   - `*.scala`, `build.sbt` → **Java** — Scala uses the Java SDK, read from `java/`\n   - `*.go`, `go.mod` → **Go** — read from `go/`\n   - `*.rb`, `Gemfile` → **Ruby** — read from `ruby/`\n   - `*.cs`, `*.csproj` → **C#** — read from `csharp/`\n   - `*.php`, `composer.json` → **PHP** — read from `php/`\n\n2. **If multiple languages detected** (e.g., both Python and TypeScript files):\n\n   - Check which language the user's current file or question relates to\n   - If still ambiguous, ask: \"I detected both Python and TypeScript files. Which language are you using for the Claude API integration?\"\n\n3. **If language can't be inferred** (empty project, no source files, or unsupported language):\n\n   - Use AskUserQuestion with options: Python, TypeScript, Java, Go, Ruby, cURL/raw HTTP, C#, PHP\n   - If AskUserQuestion is unavailable, default to Python examples and note: \"Showing Python examples. Let me know if you need a different language.\"\n\n4. **If unsupported language detected** (Rust, Swift, C++, Elixir, etc.):\n\n   - Suggest cURL/raw HTTP examples from `curl/` and note that community SDKs may exist\n   - Offer to show Python o",
+      "content": "\n# Building LLM-Powered Applications with Claude\n\nThis skill helps you build LLM-powered applications with Claude. Choose the right surface based on your needs, detect the project language, then read the relevant language-specific documentation.\n\n## Before You Start\n\nScan the target file (or, if no target file, the prompt and project) for non-Anthropic provider markers — `import openai`, `from openai`, `langchain_openai`, `OpenAI(`, `gpt-4`, `gpt-5`, file names like `agent-openai.py` or `*-generic.py`, or any explicit instruction to keep the code provider-neutral. If you find any, stop and tell the user that this skill produces Claude/Anthropic SDK code; ask whether they want to switch the file to Claude or want a non-Claude implementation. Do not edit a non-Anthropic file with Anthropic SDK calls.\n\n## Output Requirement\n\nWhen the user asks you to add, modify, or implement a Claude feature, your code must call Claude through one of:\n\n1. **The official Anthropic SDK** for the project's language (`anthropic`, `@anthropic-ai/sdk`, `com.anthropic.*`, etc.). This is the default whenever a supported SDK exists for the project.\n2. **Raw HTTP** (`curl`, `requests`, `fetch`, `httpx`, etc.) — only when the user explicitly asks for cURL/REST/raw HTTP, the project is a shell/cURL project, or the language has no official SDK.\n\nNever mix the two — don't reach for `requests`/`fetch` in a Python or TypeScript project just because it feels lighter. Never fall back to OpenAI-compatible shims.\n\n**Never guess SDK usage.** Function names, class names, namespaces, method signatures, and import paths must come from explicit documentation — either the `{lang}/` files in this skill or the official SDK repositories or documentation links listed in `shared/live-sources.md`. If the binding you need is not explicitly documented in the skill files, WebFetch the relevant SDK repo from `shared/live-sources.md` before writing code. Do not infer Ruby/Java/Go/PHP/C# APIs from cURL shapes or from another language's SDK.\n\n## Defaults\n\nUnless the user requests otherwise:\n\nFor the Claude model version, please use Claude Opus 4.7, which you can access via the exact model string `claude-opus-4-7`. Please default to using adaptive thinking (`thinking: {type: \"adaptive\"}`) for anything remotely complicated. And finally, please default to streaming for any request that may involve long input, long output, or high `max_tokens` — it prevents hitting request timeouts. Use the SDK's `.get_final_message()` / `.finalMessage()` helper to get the complete response if you don't need to handle individual stream events\n\n---\n\n## Subcommands\n\nIf the User Request at the bottom of this prompt is a bare subcommand string (no prose), search every **Subcommands** table in this document — including any in sections appended below — and follow the matching Action column directly. This lets users invoke specific flows via `/claude-api <subcommand>`. If no table in the document matches, treat the request as normal prose.\n\n\n---\n\n## Language Detection\n\nBefore reading code examples, determine which language the user is working in:\n\n1. **Look at project files** to infer the language:\n\n   - `*.py`, `requirements.txt`, `pyproject.toml`, `setup.py`, `Pipfile` → **Python** — read from `python/`\n   - `*.ts`, `*.tsx`, `package.json`, `tsconfig.json` → **TypeScript** — read from `typescript/`\n   - `*.js`, `*.jsx` (no `.ts` files present) → **TypeScript** — JS uses the same SDK, read from `typescript/`\n   - `*.java`, `pom.xml`, `build.gradle` → **Java** — read from `java/`\n   - `*.kt`, `*.kts`, `build.gradle.kts` → **Java** — Kotlin uses the Java SDK, read from `java/`\n   - `*.scala`, `build.sbt` → **Java** — Scala uses the Java SDK, read from `java/`\n   - `*.go`, `go.mod` → **Go** — read from `go/`\n   - `*.rb`, `Gemfile` → **Ruby** — read from `ruby/`\n   - `*.cs`, `*.csproj` → **C#** — read from `csharp/`\n   - `*.php`, `composer.json` → **PHP** — read from `php/`\n\n2. **If multiple languages detected** (e.g., both Python and TypeScript files):\n\n   - Check which language the user's current file or question relates to\n   - If still ambiguous, ask: \"I detected both Python and TypeScript files. Which language are you using for the Claude API integration?\"\n\n3. **If language can't be inferred** (empty project, no source files, or unsupported language):\n\n   - Use AskUserQuestion with options: Python, TypeScript, Java, Go, Ruby, cURL/raw HTTP, C#, PHP\n   - If AskUserQuestion is unavailable, default to Python examples and note: \"Showing Python examples. Let me know if you need a different language.\"\n\n4. **If unsupported language detected** (Rust, Swift, C++, Elixir, etc.):\n\n   - Suggest cURL/raw HTTP examples from `curl/` and note that community SDKs may exist\n   - Offer to show Python or TypeScript examples as reference implementations\n\n5. **If user needs cURL/raw HTTP examples**, read from `curl/`.\n\n### Language-Specific Feature Support\n\n| Language   | Tool Runner | Managed Agents | Notes   ",
       "tags": [
         "python",
         "typescript",
@@ -10757,6 +10757,34 @@
       "scrapedAt": "2026-03-08T06:55:12.776Z"
     },
     {
+      "id": "antigravity-daily-gift",
+      "name": "daily-gift",
+      "slug": "daily-gift",
+      "description": "Relationship-aware daily gift engine with five-stage creative pipeline — editorial judgment, synthesis, concept generation, visual strategy, and rendering in H5, image, or video",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/daily-gift",
+      "content": "\n# Daily Gift\n\n## Overview\n\nA relationship-aware gift engine that decides *whether* a gift should exist before deciding *what* it should be. Uses a five-stage creative pipeline to generate personalized daily gifts in H5 (interactive web pages), AI-generated images, or AI-generated videos. The core design principle is \"idea before medium\" — the creative concept is locked before the output format is chosen.\n\nPublished on ClawHub: https://clawhub.ai/jiawei248/daily-gift\n\n## When to Use This Skill\n\n- Use when the agent should autonomously decide whether today deserves a personalized gift\n- Use when a milestone, anniversary, or emotionally meaningful moment should be marked with a creative artifact\n- Use when the user manually requests a visual gift from a quote, poem, or creative brief\n- Use when you want a daily cron-triggered creative output that avoids repetition and template fatigue\n\n## How It Works\n\n### Stage 1: Editorial Judgment\n\nDecide whether a gift should exist today, how heavy it should be (skip / nudge / light / standard / heavy), and what content direction to take (reflect, extension, compass, mirror, play, curation, utility, etc.). Format is NOT chosen here.\n\n### Stage 2: Synthesis + Gift Thesis\n\nExtract six content slots from conversation context (today_theme, emotion_peaks, historical_echo, open_loop, lobster_judgment, preference_hint). Form a gift thesis = anchor (which moment deserves the center) + return (what new perspective the agent gives back). If the thesis has no return, it's not a gift — it's a decorated log entry.\n\n### Stage 2.5: Creative Concept\n\nGenerate 5+ concept candidates using seven thinking angles (metaphor flip, format mashup, impossible action, scale shift, role reversal, time distortion, cultural remix). Cross-pollinate with a library of 73 creative seeds across 8 categories. Run three quality checks: concept quality, concept diversity (8 families), and visual/theme collision detection.\n\n### Format Selection\n\nOnly after the concept is locked does the system choose the output format (H5, image, or video) based on what best serves the concept.\n\n### Stage 3: Visual Strategy\n\nChoose visual approach, plan assets (pure code, generated background, hybrid), select visual style, and run pre-visualization checks against recent gifts for anti-repetition.\n\n### Stage 4: Rendering\n\nProduce the final artifact. H5 gifts use p5.js/canvas with a quality floor set by built-in templates (300-400 lines of tuned code). Image and video gifts use AI generation APIs. All formats have fallback chains.\n\n## Key Features\n\n- **Five-stage creative pipeline** with explicit quality gates between stages\n- **Multi-layer anti-repetition**: concept family, visual elements, theme, style, content direction — each tracked across sliding windows of recent gifts\n- **Three-layer user taste profile**: Layer 1 (identity — stable), Layer 2 (context — updates every 5-7 gifts), Layer 3 (signals — auto-appended after every gift)\n- **Three runtime modes**: onboarding setup, daily cron, and manual trigger\n- **11 content directions**: reflect, extension, compass, mirror, gift-from-elsewhere, play, real-world-nudge, curation, delayed-payoff, openclaw-inner-life, utility\n- **8 concept families**: borrowed-media, interactive-object, transformation, narrative, data-viz, game-puzzle, real-world, poetic-literary\n\n## Best Practices\n\n- ✅ Let the editorial judgment decide — not every day needs a gift\n- ✅ Generate 5+ concept candidates before selecting one\n- ✅ Check recent gifts for visual and thematic collision before rendering\n- ✅ Use the taste profile to personalize over time\n- ❌ Don't skip straight from thesis to rendering without a real creative concept\n- ❌ Don't default to \"reflect on today\" every time — vary content direction\n- ❌ Don't choose the format before locking the concept\n\n## Limitations\n\n- Requires API keys for image/video generation (optional — H5 works without them)\n- Cron mode runs in the agent's main session for full conversation context access\n- Shell scripts make external API calls for rendering and asset fetching\n- The skill creates and manages local workspace files for state, history, and taste profiling\n\n## Security & Safety Notes\n\n- The skill creates a recurring cron job for daily gift delivery. Review and approve the cron setup step.\n- Shell scripts in `scripts/` call external APIs (image generation, video generation, asset hosting). Supply API keys only after reviewing which scripts use them.\n- User taste data and gift history are stored locally in `workspace/daily-gift/`. No data is sent to external services beyond the configured rendering APIs.\n- The skill reads conversation context and memory files to inform editorial judgment — this is core to personalization but means it has broad read access within the agent's workspace.\n\n## Related Skills\n\n- Image generation skills — for standalone image creation without the gift pipeline\n- Cron/scheduling skills — for understanding the daily trigger mechanism\n",
+      "tags": [
+        "api",
+        "ai",
+        "agent",
+        "template",
+        "design",
+        "image",
+        "security",
+        "cro"
+      ],
+      "useCases": [
+        "Use when the agent should autonomously decide whether today deserves a personalized gift",
+        "Use when a milestone, anniversary, or emotionally meaningful moment should be marked with a creative artifact",
+        "Use when the user manually requests a visual gift from a quote, poem, or creative brief",
+        "Use when you want a daily cron-triggered creative output that avoids repetition and template fatigue"
+      ],
+      "scrapedAt": "2026-04-17T08:00:21.277Z"
+    },
+    {
       "id": "antigravity-daily-news-report",
       "name": "daily-news-report",
       "slug": "daily-news-report",
@@ -11424,6 +11452,29 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-29T06:58:42.720Z"
+    },
+    {
+      "id": "antigravity-debugging-toolkit-smart-debug",
+      "name": "debugging-toolkit-smart-debug",
+      "slug": "debugging-toolkit-smart-debug",
+      "description": "Use when working with debugging toolkit smart debug",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/debugging-toolkit-smart-debug",
+      "content": "\n## Use this skill when\n\n- Working on debugging toolkit smart debug tasks or workflows\n- Needing guidance, best practices, or checklists for debugging toolkit smart debug\n\n## Do not use this skill when\n\n- The task is unrelated to debugging toolkit smart debug\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\nYou are an expert AI-assisted debugging specialist with deep knowledge of modern debugging tools, observability platforms, and automated root cause analysis.\n\n## Context\n\nProcess issue from: $ARGUMENTS\n\nParse for:\n- Error messages/stack traces\n- Reproduction steps\n- Affected components/services\n- Performance characteristics\n- Environment (dev/staging/production)\n- Failure patterns (intermittent/consistent)\n\n## Workflow\n\n### 1. Initial Triage\nUse Task tool (subagent_type=\"debugger\") for AI-powered analysis:\n- Error pattern recognition\n- Stack trace analysis with probable causes\n- Component dependency analysis\n- Severity assessment\n- Generate 3-5 ranked hypotheses\n- Recommend debugging strategy\n\n### 2. Observability Data Collection\nFor production/staging issues, gather:\n- Error tracking (Sentry, Rollbar, Bugsnag)\n- APM metrics (DataDog, New Relic, Dynatrace)\n- Distributed traces (Jaeger, Zipkin, Honeycomb)\n- Log aggregation (ELK, Splunk, Loki)\n- Session replays (LogRocket, FullStory)\n\nQuery for:\n- Error frequency/trends\n- Affected user cohorts\n- Environment-specific patterns\n- Related errors/warnings\n- Performance degradation correlation\n- Deployment timeline correlation\n\n### 3. Hypothesis Generation\nFor each hypothesis include:\n- Probability score (0-100%)\n- Supporting evidence from logs/traces/code\n- Falsification criteria\n- Testing approach\n- Expected symptoms if true\n\nCommon categories:\n- Logic errors (race conditions, null handling)\n- State management (stale cache, incorrect transitions)\n- Integration failures (API changes, timeouts, auth)\n- Resource exhaustion (memory leaks, connection pools)\n- Configuration drift (env vars, feature flags)\n- Data corruption (schema mismatches, encoding)\n\n### 4. Strategy Selection\nSelect based on issue characteristics:\n\n**Interactive Debugging**: Reproducible locally → VS Code/Chrome DevTools, step-through\n**Observability-Driven**: Production issues → Sentry/DataDog/Honeycomb, trace analysis\n**Time-Travel**: Complex state issues → rr/Redux DevTools, record & replay\n**Chaos Engineering**: Intermittent under load → Chaos Monkey/Gremlin, inject failures\n**Statistical**: Small % of cases → Delta debugging, compare success vs failure\n\n### 5. Intelligent Instrumentation\nAI suggests optimal breakpoint/logpoint locations:\n- Entry points to affected functionality\n- Decision nodes where behavior diverges\n- State mutation points\n- External integration boundaries\n- Error handling paths\n\nUse conditional breakpoints and logpoints for production-like environments.\n\n### 6. Production-Safe Techniques\n**Dynamic Instrumentation**: OpenTelemetry spans, non-invasive attributes\n**Feature-Flagged Debug Logging**: Conditional logging for specific users\n**Sampling-Based Profiling**: Continuous profiling with minimal overhead (Pyroscope)\n**Read-Only Debug Endpoints**: Protected by auth, rate-limited state inspection\n**Gradual Traffic Shifting**: Canary deploy debug version to 10% traffic\n\n### 7. Root Cause Analysis\nAI-powered code flow analysis:\n- Full execution path reconstruction\n- Variable state tracking at decision points\n- External dependency interaction analysis\n- Timing/sequence diagram generation\n- Code smell detection\n- Similar bug pattern identification\n- Fix complexity estimation\n\n### 8. Fix Implementation\nAI generates fix with:\n- Code changes required\n- Impact assessment\n- Risk level\n- Test coverage needs\n- Rollback strategy\n\n### 9. Validation\nPost-fix verification:\n- Run test suite\n- Performance comparison (baseline vs fix)\n- Canary deployment (monitor error rate)\n- AI code review of fix\n\nSuccess criteria:\n- Tests pass\n- No performance regression\n- Error rate unchanged or decreased\n- No new edge cases introduced\n\n### 10. Prevention\n- Generate regression tests using AI\n- Update knowledge base with root cause\n- Add monitoring/alerts for similar issues\n- Document troubleshooting steps in runbook\n\n## Example: Minimal Debug Session\n\n```typescript\n// Issue: \"Checkout timeout errors (intermittent)\"\n\n// 1. Initial analysis\nconst analysis = await aiAnalyze({\n  error: \"Payment processing timeout\",\n  frequency: \"5% of checkouts\",\n  environment: \"production\"\n});\n// AI suggests: \"Likely N+1 query or external API timeout\"\n\n// 2. Gather observability data\nconst sentryData = await getSentryIssue(\"CHECKOUT_TIMEOUT\");\nconst ddTraces = await getDataDogTraces({\n  service: \"checkout\",\n  operation: \"process_payment\",\n  duration: \">5000ms\"\n});\n\n// ",
+      "tags": [
+        "typescript",
+        "node",
+        "api",
+        "ai",
+        "agent",
+        "workflow",
+        "document",
+        "rag"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-04-17T08:00:32.133Z"
     },
     {
       "id": "antigravity-deep-research",
@@ -18954,6 +19005,37 @@
       "scrapedAt": "2026-02-23T07:17:00.173Z"
     },
     {
+      "id": "antigravity-lambdatest-agent-skills",
+      "name": "lambdatest-agent-skills",
+      "slug": "lambdatest-agent-skills",
+      "description": "Production-grade test automation skills for 46 frameworks across E2E, unit, mobile, BDD, visual, and cloud testing in 15+ languages.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/lambdatest-agent-skills",
+      "content": "\n# LambdaTest Agent Skills — Test Automation Registry (46 Skills)\n\n## Overview\n\nThis skill is a curated index of 46 production-grade test automation skills sourced from the [LambdaTest/agent-skills](https://github.com/LambdaTest/agent-skills) repository. It teaches AI coding assistants how to write, structure, and execute test automation code across every major framework and 15+ programming languages. Instead of generating generic test code, the AI becomes a senior QA automation architect that understands correct project structure, dependency versions, cloud execution, CI/CD integration, and common debugging patterns for each framework.\n\nThis skill adapts material from an external GitHub repository:\n- `source_repo: LambdaTest/agent-skills`\n- `source_type: community`\n\n## When to Use This Skill\n\n- Use when you need to write, scaffold, or review test automation code for any major framework\n- Use when working with Selenium, Playwright, Cypress, Jest, pytest, Appium, or any of the 46 supported frameworks\n- Use when setting up a new test project and need the correct project structure, config files, and dependencies\n- Use when integrating tests into a CI/CD pipeline (GitHub Actions, Jenkins, GitLab CI)\n- Use when migrating tests between frameworks (e.g. Selenium → Playwright, Puppeteer → Cypress)\n- Use when running tests on cloud infrastructure such as LambdaTest / TestMu AI\n- Use when the user asks how to write, debug, or scale automated tests\n\n## How It Works\n\n### Step 1: Identify the Framework and Language\n\nDetermine which testing framework and programming language the user is working with. Match it to one of the 46 supported skills below. Each skill covers a specific framework with language-appropriate code patterns.\n\n### Step 2: Apply the Correct Skill Context\n\nLoad the relevant framework skill from the registry below. Each skill includes: project setup and dependencies, core code patterns, page objects or test utilities, cloud execution configuration, CI/CD integration, a debugging table for common problems, and a best practices checklist.\n\n### Step 3: Generate Production-Ready Test Code\n\nUse the loaded skill context to generate test code that follows real-world conventions — not generic boilerplate. Apply correct import paths, configuration formats, assertion libraries, and runner commands specific to the framework and language.\n\n### Step 4: Configure for Local or Cloud Execution\n\nIf the user wants to run tests locally, apply local runner configuration. If running on LambdaTest / TestMu AI cloud, configure RemoteWebDriver capabilities or the appropriate cloud SDK, and set `LT_USERNAME` and `LT_ACCESS_KEY` from environment variables — never hardcode credentials.\n\n### Step 5: Add CI/CD Integration\n\nWhen requested, generate a GitHub Actions (or Jenkins / GitLab CI) workflow that runs the tests in parallel, uploads reports, and captures artifacts on failure.\n\n## Skill Registry\n\n### 🌐 E2E / Browser Testing (15 skills)\n\n| Skill | Languages | Description |\n|---|---|---|\n| `selenium-skill` | Java, Python, JS, C#, Ruby | Selenium WebDriver with cross-browser and cloud support |\n| `playwright-skill` | JS, TS, Python, Java, C# | Playwright browser automation with API mocking |\n| `cypress-skill` | JS, TS | Cypress E2E and component testing |\n| `webdriverio-skill` | JS, TS | WebdriverIO with page objects and cloud integration |\n| `puppeteer-skill` | JS, TS | Puppeteer Chrome automation |\n| `testcafe-skill` | JS, TS | TestCafe cross-browser testing |\n| `nightwatchjs-skill` | JS, TS | Nightwatch.js browser automation |\n| `capybara-skill` | Ruby | Capybara acceptance testing |\n| `geb-skill` | Groovy | Geb Groovy browser automation |\n| `selenide-skill` | Java | Selenide fluent Selenium wrapper |\n| `nemojs-skill` | JS | Nemo.js PayPal browser automation |\n| `protractor-skill` | JS, TS | Protractor Angular E2E testing |\n| `codeception-skill` | PHP | Codeception full-stack PHP testing |\n| `laravel-dusk-skill` | PHP | Laravel Dusk browser testing |\n| `robot-framework-skill` | Python, Robot | Robot Framework keyword-driven testing |\n\n### 🧪 Unit Testing (15 skills)\n\n| Skill | Languages | Description |\n|---|---|---|\n| `jest-skill` | JS, TS | Jest unit and integration tests with mocking |\n| `junit-5-skill` | Java | JUnit 5 with parameterized tests and extensions |\n| `pytest-skill` | Python | pytest with fixtures, parametrize, and plugins |\n| `testng-skill` | Java | TestNG with data providers and parallel execution |\n| `vitest-skill` | JS, TS | Vitest for Vite projects |\n| `mocha-skill` | JS, TS | Mocha with Chai assertions |\n| `jasmine-skill` | JS, TS | Jasmine BDD-style unit testing |\n| `karma-skill` | JS, TS | Karma test runner |\n| `xunit-skill` | C# | xUnit.net for .NET |\n| `nunit-skill` | C# | NUnit for .NET |\n| `mstest-skill` | C# | MSTest for .NET |\n| `rspec-skill` | Ruby | RSpec with shared examples |\n| `phpunit-skill` | PHP | PHPUnit with data providers |\n| `testunit-skill` | Ruby | Test::Unit Ruby testing |\n| `unittest-s",
+      "tags": [
+        "python",
+        "typescript",
+        "react",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "automation",
+        "workflow",
+        "design"
+      ],
+      "useCases": [
+        "Use when you need to write, scaffold, or review test automation code for any major framework",
+        "Use when working with Selenium, Playwright, Cypress, Jest, pytest, Appium, or any of the 46 supported frameworks",
+        "Use when setting up a new test project and need the correct project structure, config files, and dependencies",
+        "Use when integrating tests into a CI/CD pipeline (GitHub Actions, Jenkins, GitLab CI)",
+        "Use when migrating tests between frameworks (e.g. Selenium → Playwright, Puppeteer → Cypress)"
+      ],
+      "scrapedAt": "2026-04-17T08:01:59.684Z"
+    },
+    {
       "id": "antigravity-landing-page-generator",
       "name": "landing-page-generator",
       "slug": "landing-page-generator",
@@ -25701,31 +25783,6 @@
       "scrapedAt": "2026-01-26T13:20:59.110Z"
     },
     {
-      "id": "antigravity-prompt-engineering",
-      "name": "prompt-engineering",
-      "slug": "prompt-engineering",
-      "description": "Expert guide on prompt engineering patterns, best practices, and optimization techniques. Use when user wants to improve prompts, learn prompting strategies, or debug agent behavior.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/prompt-engineering",
-      "content": "\n# Prompt Engineering Patterns\n\nAdvanced prompt engineering techniques to maximize LLM performance, reliability, and controllability.\n\n## Core Capabilities\n\n### 1. Few-Shot Learning\n\nTeach the model by showing examples instead of explaining rules. Include 2-5 input-output pairs that demonstrate the desired behavior. Use when you need consistent formatting, specific reasoning patterns, or handling of edge cases. More examples improve accuracy but consume tokens—balance based on task complexity.\n\n**Example:**\n\n```markdown\nExtract key information from support tickets:\n\nInput: \"My login doesn't work and I keep getting error 403\"\nOutput: {\"issue\": \"authentication\", \"error_code\": \"403\", \"priority\": \"high\"}\n\nInput: \"Feature request: add dark mode to settings\"\nOutput: {\"issue\": \"feature_request\", \"error_code\": null, \"priority\": \"low\"}\n\nNow process: \"Can't upload files larger than 10MB, getting timeout\"\n```\n\n### 2. Chain-of-Thought Prompting\n\nRequest step-by-step reasoning before the final answer. Add \"Let's think step by step\" (zero-shot) or include example reasoning traces (few-shot). Use for complex problems requiring multi-step logic, mathematical reasoning, or when you need to verify the model's thought process. Improves accuracy on analytical tasks by 30-50%.\n\n**Example:**\n\n```markdown\nAnalyze this bug report and determine root cause.\n\nThink step by step:\n\n1. What is the expected behavior?\n2. What is the actual behavior?\n3. What changed recently that could cause this?\n4. What components are involved?\n5. What is the most likely root cause?\n\nBug: \"Users can't save drafts after the cache update deployed yesterday\"\n```\n\n### 3. Prompt Optimization\n\nSystematically improve prompts through testing and refinement. Start simple, measure performance (accuracy, consistency, token usage), then iterate. Test on diverse inputs including edge cases. Use A/B testing to compare variations. Critical for production prompts where consistency and cost matter.\n\n**Example:**\n\n```markdown\nVersion 1 (Simple): \"Summarize this article\"\n→ Result: Inconsistent length, misses key points\n\nVersion 2 (Add constraints): \"Summarize in 3 bullet points\"\n→ Result: Better structure, but still misses nuance\n\nVersion 3 (Add reasoning): \"Identify the 3 main findings, then summarize each\"\n→ Result: Consistent, accurate, captures key information\n```\n\n### 4. Template Systems\n\nBuild reusable prompt structures with variables, conditional sections, and modular components. Use for multi-turn conversations, role-based interactions, or when the same pattern applies to different inputs. Reduces duplication and ensures consistency across similar tasks.\n\n**Example:**\n\n```python\n# Reusable code review template\ntemplate = \"\"\"\nReview this {language} code for {focus_area}.\n\nCode:\n{code_block}\n\nProvide feedback on:\n{checklist}\n\"\"\"\n\n# Usage\nprompt = template.format(\n    language=\"Python\",\n    focus_area=\"security vulnerabilities\",\n    code_block=user_code,\n    checklist=\"1. SQL injection\\n2. XSS risks\\n3. Authentication\"\n)\n```\n\n### 5. System Prompt Design\n\nSet global behavior and constraints that persist across the conversation. Define the model's role, expertise level, output format, and safety guidelines. Use system prompts for stable instructions that shouldn't change turn-to-turn, freeing up user message tokens for variable content.\n\n**Example:**\n\n```markdown\nSystem: You are a senior backend engineer specializing in API design.\n\nRules:\n\n- Always consider scalability and performance\n- Suggest RESTful patterns by default\n- Flag security concerns immediately\n- Provide code examples in Python\n- Use early return pattern\n\nFormat responses as:\n\n1. Analysis\n2. Recommendation\n3. Code example\n4. Trade-offs\n```\n\n## Key Patterns\n\n### Progressive Disclosure\n\nStart with simple prompts, add complexity only when needed:\n\n1. **Level 1**: Direct instruction\n\n   - \"Summarize this article\"\n\n2. **Level 2**: Add constraints\n\n   - \"Summarize this article in 3 bullet points, focusing on key findings\"\n\n3. **Level 3**: Add reasoning\n\n   - \"Read this article, identify the main findings, then summarize in 3 bullet points\"\n\n4. **Level 4**: Add examples\n   - Include 2-3 example summaries with input-output pairs\n\n### Instruction Hierarchy\n\n```\n[System Context] → [Task Instruction] → [Examples] → [Input Data] → [Output Format]\n```\n\n### Error Recovery\n\nBuild prompts that gracefully handle failures:\n\n- Include fallback instructions\n- Request confidence scores\n- Ask for alternative interpretations when uncertain\n- Specify how to indicate missing information\n\n## Best Practices\n\n1. **Be Specific**: Vague prompts produce inconsistent results\n2. **Show, Don't Tell**: Examples are more effective than descriptions\n3. **Test Extensively**: Evaluate on diverse, representative inputs\n4. **Iterate Rapidly**: Small changes can have large impacts\n5. **Monitor Performance**: Track metrics in production\n6. **Version Control**: Treat prompts as code with proper versioning\n7. **Document Intent**: Explain why prompts",
-      "tags": [
-        "python",
-        "markdown",
-        "api",
-        "ai",
-        "agent",
-        "llm",
-        "workflow",
-        "template",
-        "design",
-        "document"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:21:00.420Z"
-    },
-    {
       "id": "antigravity-prompt-engineering-patterns",
       "name": "prompt-engineering-patterns",
       "slug": "prompt-engineering-patterns",
@@ -25749,37 +25806,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-29T07:00:05.501Z"
-    },
-    {
-      "id": "antigravity-prompt-library",
-      "name": "prompt-library",
-      "slug": "prompt-library",
-      "description": "A comprehensive collection of battle-tested prompts inspired by [awesome-chatgpt-prompts](https://github.com/f/awesome-chatgpt-prompts) and community best practices.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/prompt-library",
-      "content": "\n# 📝 Prompt Library\n\n> A comprehensive collection of battle-tested prompts inspired by [awesome-chatgpt-prompts](https://github.com/f/awesome-chatgpt-prompts) and community best practices.\n\n## When to Use This Skill\n\nUse this skill when the user:\n\n- Needs ready-to-use prompt templates\n- Wants role-based prompts (act as X)\n- Asks for prompt examples or inspiration\n- Needs task-specific prompt patterns\n- Wants to improve their prompting\n\n## Prompt Categories\n\n### 🎭 Role-Based Prompts\n\n#### Expert Developer\n\n```\nAct as an expert software developer with 15+ years of experience. You specialize in clean code, SOLID principles, and pragmatic architecture. When reviewing code:\n1. Identify bugs and potential issues\n2. Suggest performance improvements\n3. Recommend better patterns\n4. Explain your reasoning clearly\nAlways prioritize readability and maintainability over cleverness.\n```\n\n#### Code Reviewer\n\n```\nAct as a senior code reviewer. Your role is to:\n1. Check for bugs, edge cases, and error handling\n2. Evaluate code structure and organization\n3. Assess naming conventions and readability\n4. Identify potential security issues\n5. Suggest improvements with specific examples\n\nFormat your review as:\n🔴 Critical Issues (must fix)\n🟡 Suggestions (should consider)\n🟢 Praise (what's done well)\n```\n\n#### Technical Writer\n\n```\nAct as a technical documentation expert. Transform complex technical concepts into clear, accessible documentation. Follow these principles:\n- Use simple language, avoid jargon\n- Include practical examples\n- Structure with clear headings\n- Add code snippets where helpful\n- Consider the reader's experience level\n```\n\n#### System Architect\n\n```\nAct as a senior system architect designing for scale. Consider:\n- Scalability (horizontal and vertical)\n- Reliability (fault tolerance, redundancy)\n- Maintainability (modularity, clear boundaries)\n- Performance (latency, throughput)\n- Cost efficiency\n\nProvide architecture decisions with trade-off analysis.\n```\n\n### 🛠️ Task-Specific Prompts\n\n#### Debug This Code\n\n```\nDebug the following code. Your analysis should include:\n\n1. **Problem Identification**: What exactly is failing?\n2. **Root Cause**: Why is it failing?\n3. **Fix**: Provide corrected code\n4. **Prevention**: How to prevent similar bugs\n\nShow your debugging thought process step by step.\n```\n\n#### Explain Like I'm 5 (ELI5)\n\n```\nExplain [CONCEPT] as if I'm 5 years old. Use:\n- Simple everyday analogies\n- No technical jargon\n- Short sentences\n- Relatable examples from daily life\n- A fun, engaging tone\n```\n\n#### Code Refactoring\n\n```\nRefactor this code following these priorities:\n1. Readability first\n2. Remove duplication (DRY)\n3. Single responsibility per function\n4. Meaningful names\n5. Add comments only where necessary\n\nShow before/after with explanation of changes.\n```\n\n#### Write Tests\n\n```\nWrite comprehensive tests for this code:\n1. Happy path scenarios\n2. Edge cases\n3. Error conditions\n4. Boundary values\n\nUse [FRAMEWORK] testing conventions. Include:\n- Descriptive test names\n- Arrange-Act-Assert pattern\n- Mocking where appropriate\n```\n\n#### API Documentation\n\n```\nGenerate API documentation for this endpoint including:\n- Endpoint URL and method\n- Request parameters (path, query, body)\n- Request/response examples\n- Error codes and meanings\n- Authentication requirements\n- Rate limits if applicable\n\nFormat as OpenAPI/Swagger or Markdown.\n```\n\n### 📊 Analysis Prompts\n\n#### Code Complexity Analysis\n\n```\nAnalyze the complexity of this codebase:\n\n1. **Cyclomatic Complexity**: Identify complex functions\n2. **Coupling**: Find tightly coupled components\n3. **Cohesion**: Assess module cohesion\n4. **Dependencies**: Map critical dependencies\n5. **Technical Debt**: Highlight areas needing refactoring\n\nRate each area and provide actionable recommendations.\n```\n\n#### Performance Analysis\n\n```\nAnalyze this code for performance issues:\n\n1. **Time Complexity**: Big O analysis\n2. **Space Complexity**: Memory usage patterns\n3. **I/O Bottlenecks**: Database, network, disk\n4. **Algorithmic Issues**: Inefficient patterns\n5. **Quick Wins**: Easy optimizations\n\nPrioritize findings by impact.\n```\n\n#### Security Review\n\n```\nPerform a security review of this code:\n\n1. **Input Validation**: Check all inputs\n2. **Authentication/Authorization**: Access control\n3. **Data Protection**: Sensitive data handling\n4. **Injection Vulnerabilities**: SQL, XSS, etc.\n5. **Dependencies**: Known vulnerabilities\n\nClassify issues by severity (Critical/High/Medium/Low).\n```\n\n### 🎨 Creative Prompts\n\n#### Brainstorm Features\n\n```\nBrainstorm features for [PRODUCT]:\n\nFor each feature, provide:\n- Name and one-line description\n- User value proposition\n- Implementation complexity (Low/Med/High)\n- Dependencies on other features\n\nGenerate 10 ideas, then rank top 3 by impact/effort ratio.\n```\n\n#### Name Generator\n\n```\nGenerate names for [PROJECT/FEATURE]:\n\nProvide 10 options in these categories:\n- Descriptive (what it does)\n- Evocative (how it feels)\n- Acronym",
-      "tags": [
-        "markdown",
-        "api",
-        "ai",
-        "gpt",
-        "template",
-        "design",
-        "document",
-        "security",
-        "rag",
-        "cro"
-      ],
-      "useCases": [
-        "Needs ready-to-use prompt templates",
-        "Wants role-based prompts (act as X)",
-        "Asks for prompt examples or inspiration",
-        "Needs task-specific prompt patterns",
-        "Wants to improve their prompting"
-      ],
-      "scrapedAt": "2026-01-26T13:21:01.585Z"
     },
     {
       "id": "composio-raffle-winner-picker",
@@ -26618,14 +26644,14 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 375
+      "count": 377
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 353
+      "count": 352
     },
     {
       "id": "development-code-tools",
@@ -26690,48 +26716,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 155004
+      "stars": 156753
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 14,
       "newSkillCount": 3,
-      "stars": 118422
+      "stars": 119214
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 54162
+      "stars": 54415
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 1,
-      "stars": 71298
+      "stars": 71368
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1124
+      "stars": 1125
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillCount": 1001,
-      "newSkillCount": 6,
-      "stars": 33339
+      "skillCount": 1002,
+      "newSkillCount": 9,
+      "stars": 33548
     }
   ],
-  "lastUpdated": "2026-04-16T08:04:18.075Z",
+  "lastUpdated": "2026-04-17T08:03:18.498Z",
   "stats": {
-    "totalSkills": 1099,
-    "newSkills": 18,
-    "scrapedAt": "2026-04-16T08:04:18.075Z"
+    "totalSkills": 1100,
+    "newSkills": 21,
+    "scrapedAt": "2026-04-17T08:03:18.498Z"
   }
 }
