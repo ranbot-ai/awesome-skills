@@ -1,0 +1,23 @@
+{
+  "id": "antigravity-full-output-enforcement",
+  "name": "full-output-enforcement",
+  "slug": "full-output-enforcement",
+  "description": "Use when a task requires exhaustive unabridged output, complete files, or strict prevention of placeholders and skipped code.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/full-output-enforcement",
+  "content": "# Full-Output Enforcement\n\n## When to Use\n\n- Use when the user explicitly asks for full files, complete implementations, exhaustive lists, or unabridged deliverables.\n- Use when placeholder code, skipped sections, TODO stubs, or descriptions in place of implementation would break the request.\n- Use when a long answer may need clean continuation chunks without losing completeness or structural integrity.\n\n## Limitations\n\n- This skill enforces completeness, but it does not override token limits, safety constraints, missing source context, or user-provided scope boundaries.\n- Split long outputs into clearly labeled continuation chunks when necessary, and verify that each chunk connects cleanly to the previous one.\n- Do not invent unavailable code, credentials, private APIs, or project files to satisfy a request for complete output.\n\n\n## Baseline\n\nTreat every task as production-critical. A partial output is a broken output. Do not optimize for brevity — optimize for completeness. If the user asks for a full file, deliver the full file. If the user asks for 5 components, deliver 5 components. No exceptions.\n\n## Banned Output Patterns\n\nThe following patterns are hard failures. Never produce them:\n\n**In code blocks:** `// ...`, `// rest of code`, `// implement here`, `// TODO`, `/* ... */`, `// similar to above`, `// continue pattern`, `// add more as needed`, bare `...` standing in for omitted code\n\n**In prose:** \"Let me know if you want me to continue\", \"I can provide more details if needed\", \"for brevity\", \"the rest follows the same pattern\", \"similarly for the remaining\", \"and so on\" (when replacing actual content), \"I'll leave that as an exercise\"\n\n**Structural shortcuts:** Outputting a skeleton when the request was for a full implementation. Showing the first and last section while skipping the middle. Replacing repeated logic with one example and a description. Describing what code should do instead of writing it.\n\n## Execution Process\n\n1. **Scope** — Read the full request. Count how many distinct deliverables are expected (files, functions, sections, answers). Lock that number.\n2. **Build** — Generate every deliverable completely. No partial drafts, no \"you can extend this later.\"\n3. **Cross-check** — Before output, re-read the original request. Compare your deliverable count against the scope count. If anything is missing, add it before responding.\n\n## Handling Long Outputs\n\nWhen a response approaches the token limit:\n\n- Do not compress remaining sections to squeeze them in.\n- Do not skip ahead to a conclusion.\n- Write at full quality up to a clean breakpoint (end of a function, end of a file, end of a section).\n- End with:\n\n```\n[PAUSED — X of Y complete. Send \"continue\" to resume from: next section name]\n```\n\nOn \"continue\", pick up exactly where you stopped. No recap, no repetition.\n\n## Quick Check\n\nBefore finalizing any response, verify:\n- No banned patterns from the list above appear anywhere in the output\n- Every item the user requested is present and finished\n- Code blocks contain actual runnable code, not descriptions of what code would do\n- Nothing was shortened to save space\n",
+  "tags": [
+    "api",
+    "claude",
+    "ai",
+    "cro"
+  ],
+  "useCases": [
+    "Use when the user explicitly asks for full files, complete implementations, exhaustive lists, or unabridged deliverables.",
+    "Use when placeholder code, skipped sections, TODO stubs, or descriptions in place of implementation would break the request.",
+    "Use when a long answer may need clean continuation chunks without losing completeness or structural integrity."
+  ],
+  "scrapedAt": "2026-04-18T07:20:47.896Z"
+}

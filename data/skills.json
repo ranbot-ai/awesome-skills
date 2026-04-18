@@ -1054,6 +1054,36 @@
       "scrapedAt": "2026-03-07T06:52:01.286Z"
     },
     {
+      "id": "antigravity-ai-dev-jobs-mcp",
+      "name": "ai-dev-jobs-mcp",
+      "slug": "ai-dev-jobs-mcp",
+      "description": "Search 8,400+ AI and ML jobs across 489 companies, inspect listings and employers, match roles, and view salary and market stats via AI Dev Jobs MCP",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-dev-jobs-mcp",
+      "content": "\n# AI Dev Jobs MCP\n\n## Overview\n\nAI Dev Jobs is a remote MCP server that gives AI agents access to a live index of AI and ML job listings. As of April 17, 2026, the live MCP stats report 8,405 active roles across 489 companies, a $213,500 median salary, and 600 new jobs this week. Agents can search jobs by role, location, or company, retrieve full job details, list hiring companies, match roles to a profile, and get salary or aggregate market statistics. It is designed for AI agents that assist with job searching, recruiting, or labor market analysis.\n\n## When to Use This Skill\n\n- Use when helping a user search for AI or ML engineering jobs\n- Use when an agent needs to look up which companies are hiring for specific AI roles\n- Use when building recruiting or talent-matching workflows\n- Use when analyzing the AI job market (open positions, top companies, role distribution)\n\n## MCP Configuration\n\nAdd the AI Dev Jobs MCP server to your client configuration. The endpoint uses streamable HTTP and requires no authentication.\n\n### Claude Desktop / Cursor / Windsurf\n\n```json\n{\n  \"mcpServers\": {\n    \"ai-dev-jobs\": {\n      \"url\": \"https://aidevboard.com/mcp\"\n    }\n  }\n}\n```\n\nNo API key or authentication is required.\n\n## Available Tools\n\n### `search_jobs`\n\nSearch the job index by keyword, location, company, or work arrangement. Returns matching listings with title, company, location, and salary information.\n\n```\nsearch_jobs({ query: \"machine learning engineer\", location: \"remote\" })\n```\n\n### `get_job`\n\nRetrieve full details for a specific job listing by ID, including description, requirements, salary range, and application link.\n\n```\nget_job({ id: \"abc123\" })\n```\n\n### `list_companies`\n\nList all companies in the index with their open position counts. Useful for discovering which companies are actively hiring.\n\n```\nlist_companies({})\n```\n\n### `get_company`\n\nRetrieve details for a specific company, including available AI roles when exposed by the endpoint.\n\n```\nget_company({ id: \"openai\" })\n```\n\n### `get_stats`\n\nGet aggregate statistics about the job market: total listings, top companies by open roles, role distribution, and location breakdown.\n\n```\nget_stats({})\n```\n\n### `match_jobs`\n\nMatch jobs against a candidate profile, skills list, or preferences.\n\n```\nmatch_jobs({ skills: [\"python\", \"llm\", \"pytorch\"], workplace: \"remote\" })\n```\n\n### `get_salary_data`\n\nRetrieve salary statistics for roles, tags, levels, or locations when available.\n\n```\nget_salary_data({ tag: \"llm\", level: \"senior\" })\n```\n\n### `list_tags`\n\nList indexed tags that can be used to filter searches or salary analysis.\n\n```\nlist_tags({})\n```\n\n## Examples\n\n### Example 1: Find Remote ML Jobs\n\n```text\nUse @ai-dev-jobs-mcp to find remote machine learning engineer positions.\n```\n\nThe agent will call `search_jobs({ query: \"machine learning engineer\", location: \"remote\" })` and return matching listings.\n\n### Example 2: Check Which Companies Are Hiring\n\n```text\nUse @ai-dev-jobs-mcp to list all companies currently hiring for AI roles.\n```\n\nThe agent will call `list_companies({})` and return companies sorted by number of open positions.\n\n### Example 3: Get Job Market Overview\n\n```text\nUse @ai-dev-jobs-mcp to show current AI job market statistics.\n```\n\nThe agent will call `get_stats({})` and return aggregate data on listings, top employers, and role distribution.\n\n### Example 4: Get Full Job Details\n\n```text\nUse @ai-dev-jobs-mcp to get the full details for job ID abc123.\n```\n\nThe agent will call `get_job({ id: \"abc123\" })` and return the complete listing with requirements and application link.\n\n### Example 5: Match Jobs to a Candidate Profile\n\n```text\nUse @ai-dev-jobs-mcp to match remote LLM roles to a senior Python and PyTorch profile.\n```\n\nThe agent will call `match_jobs({ skills: [\"python\", \"llm\", \"pytorch\"], workplace: \"remote\" })` and return suitable listings.\n\n### Example 6: Compare Salary Data\n\n```text\nUse @ai-dev-jobs-mcp to compare senior LLM salary data.\n```\n\nThe agent will call `get_salary_data({ tag: \"llm\", level: \"senior\" })` and summarize available compensation ranges.\n\n## Best Practices\n\n- Use `search_jobs` with specific keywords for targeted results rather than broad queries\n- Use `list_companies` to discover companies, then `search_jobs` filtered by company name for focused searches\n- Use `get_stats` to provide users with market context before diving into specific listings\n- Use `match_jobs` when the user gives skills, seniority, location, or work arrangement preferences\n- Use `get_salary_data` only as market context; remind users that listings and compensation change quickly\n- Combine with resume or cover letter skills to create end-to-end job application workflows\n\n## Limitations\n\n- The index covers AI and ML roles specifically; general software engineering jobs outside the AI space may not be included.\n- Job listings are refreshed regularly but may have a short delay before new postings appear.\n- Salary data is available when companies provide it",
+      "tags": [
+        "python",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "workflow",
+        "design",
+        "cro"
+      ],
+      "useCases": [
+        "Use when helping a user search for AI or ML engineering jobs",
+        "Use when an agent needs to look up which companies are hiring for specific AI roles",
+        "Use when building recruiting or talent-matching workflows",
+        "Use when analyzing the AI job market (open positions, top companies, role distribution)"
+      ],
+      "scrapedAt": "2026-04-18T07:18:22.951Z"
+    },
+    {
       "id": "antigravity-ai-engineer",
       "name": "ai-engineer",
       "slug": "ai-engineer",
@@ -11788,6 +11818,35 @@
       "scrapedAt": "2026-03-08T06:55:26.451Z"
     },
     {
+      "id": "antigravity-design-taste-frontend",
+      "name": "design-taste-frontend",
+      "slug": "design-taste-frontend",
+      "description": "Use when building high-agency frontend interfaces with strict design taste, calibrated color, responsive layout, and motion rules.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-taste-frontend",
+      "content": "# High-Agency Frontend Skill\n\n## When to Use\n\n- Use when the user asks to create, improve, or review frontend UI with strong design taste and anti-generic constraints.\n- Use when React, Next.js, Tailwind, motion, component states, typography, spacing, color, or responsive behavior need senior-level design judgment.\n- Use when the output must override common LLM UI biases such as centered heroes, purple gradients, card overuse, poor states, and fragile layouts.\n\n## Limitations\n\n- This skill provides frontend design and implementation guidance; it does not replace project-specific product requirements, accessibility review, or user testing.\n- Verify framework versions, installed dependencies, responsive behavior, and build output in the target repository before treating generated UI as production-ready.\n- Do not force these design rules when the existing product, brand system, or platform conventions require a different visual direction.\n\n\n## 1. ACTIVE BASELINE CONFIGURATION\n* DESIGN_VARIANCE: 8 (1=Perfect Symmetry, 10=Artsy Chaos)\n* MOTION_INTENSITY: 6 (1=Static/No movement, 10=Cinematic/Magic Physics)\n* VISUAL_DENSITY: 4 (1=Art Gallery/Airy, 10=Pilot Cockpit/Packed Data)\n\n**AI Instruction:** The standard baseline for all generations is strictly set to these values (8, 6, 4). Do not ask the user to edit this file. Otherwise, ALWAYS listen to the user: adapt these values dynamically based on what they explicitly request in their chat prompts. Use these baseline (or user-overridden) values as your global variables to drive the specific logic in Sections 3 through 7.\n\n## 2. DEFAULT ARCHITECTURE & CONVENTIONS\nUnless the user explicitly specifies a different stack, adhere to these structural constraints to maintain consistency:\n\n* **DEPENDENCY VERIFICATION [MANDATORY]:** Before importing ANY 3rd party library (e.g. `framer-motion`, `lucide-react`, `zustand`), you MUST check `package.json`. If the package is missing, you MUST output the installation command (e.g. `npm install package-name`) before providing the code. **Never** assume a library exists.\n* **Framework & Interactivity:** React or Next.js. Default to Server Components (`RSC`).\n    * **RSC SAFETY:** Global state works ONLY in Client Components. In Next.js, wrap providers in a `\"use client\"` component.\n    * **INTERACTIVITY ISOLATION:** If Sections 4 or 7 (Motion/Liquid Glass) are active, the specific interactive UI component MUST be extracted as an isolated leaf component with `'use client'` at the very top. Server Components must exclusively render static layouts.\n* **State Management:** Use local `useState`/`useReducer` for isolated UI. Use global state strictly for deep prop-drilling avoidance.\n* **Styling Policy:** Use Tailwind CSS (v3/v4) for 90% of styling.\n    * **TAILWIND VERSION LOCK:** Check `package.json` first. Do not use v4 syntax in v3 projects.\n    * **T4 CONFIG GUARD:** For v4, do NOT use `tailwindcss` plugin in `postcss.config.js`. Use `@tailwindcss/postcss` or the Vite plugin.\n* **ANTI-EMOJI POLICY [CRITICAL]:** NEVER use emojis in code, markup, text content, or alt text. Replace symbols with high-quality icons (Radix, Phosphor) or clean SVG primitives. Emojis are BANNED.\n* **Responsiveness & Spacing:**\n  * Standardize breakpoints (`sm`, `md`, `lg`, `xl`).\n  * Contain page layouts using `max-w-[1400px] mx-auto` or `max-w-7xl`.\n  * **Viewport Stability [CRITICAL]:** NEVER use `h-screen` for full-height Hero sections. ALWAYS use `min-h-[100dvh]` to prevent catastrophic layout jumping on mobile browsers (iOS Safari).\n  * **Grid over Flex-Math:** NEVER use complex flexbox percentage math (`w-[calc(33%-1rem)]`). ALWAYS use CSS Grid (`grid grid-cols-1 md:grid-cols-3 gap-6`) for reliable structures.\n* **Icons:** You MUST use exactly `@phosphor-icons/react` or `@radix-ui/react-icons` as the import paths (check installed version). Standardize `strokeWidth` globally (e.g., exclusively use `1.5` or `2.0`).\n\n\n## 3. DESIGN ENGINEERING DIRECTIVES (Bias Correction)\nLLMs have statistical biases toward specific UI cliché patterns. Proactively construct premium interfaces using these engineered rules:\n\n**Rule 1: Deterministic Typography**\n* **Display/Headlines:** Default to `text-4xl md:text-6xl tracking-tighter leading-none`.\n    * **ANTI-SLOP:** Discourage `Inter` for \"Premium\" or \"Creative\" vibes. Force unique character using `Geist`, `Outfit`, `Cabinet Grotesk`, or `Satoshi`.\n    * **TECHNICAL UI RULE:** Serif fonts are strictly BANNED for Dashboard/Software UIs. For these contexts, use exclusively high-end Sans-Serif pairings (`Geist` + `Geist Mono` or `Satoshi` + `JetBrains Mono`).\n* **Body/Paragraphs:** Default to `text-base text-gray-600 leading-relaxed max-w-[65ch]`.\n\n**Rule 2: Color Calibration**\n* **Constraint:** Max 1 Accent Color. Saturation < 80%.\n* **THE LILA BAN:** The \"AI Purple/Blue\" aesthetic is strictly BANNED. No purple button glows, no neon gradients. Use absolute neutral bases (Zinc/Slate) with high-contrast, singular accents (e.g",
+      "tags": [
+        "react",
+        "claude",
+        "ai",
+        "llm",
+        "template",
+        "design",
+        "document",
+        "presentation",
+        "image",
+        "tailwind"
+      ],
+      "useCases": [
+        "Use when the user asks to create, improve, or review frontend UI with strong design taste and anti-generic constraints.",
+        "Use when React, Next.js, Tailwind, motion, component states, typography, spacing, color, or responsive behavior need senior-level design judgment.",
+        "Use when the output must override common LLM UI biases such as centered heroes, purple gradients, card overuse, poor states, and fragile layouts."
+      ],
+      "scrapedAt": "2026-04-18T07:20:13.995Z"
+    },
+    {
       "id": "antigravity-devcontainer-setup",
       "name": "devcontainer-setup",
       "slug": "devcontainer-setup",
@@ -15261,6 +15320,29 @@
       "scrapedAt": "2026-02-12T07:17:20.036Z"
     },
     {
+      "id": "antigravity-full-output-enforcement",
+      "name": "full-output-enforcement",
+      "slug": "full-output-enforcement",
+      "description": "Use when a task requires exhaustive unabridged output, complete files, or strict prevention of placeholders and skipped code.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/full-output-enforcement",
+      "content": "# Full-Output Enforcement\n\n## When to Use\n\n- Use when the user explicitly asks for full files, complete implementations, exhaustive lists, or unabridged deliverables.\n- Use when placeholder code, skipped sections, TODO stubs, or descriptions in place of implementation would break the request.\n- Use when a long answer may need clean continuation chunks without losing completeness or structural integrity.\n\n## Limitations\n\n- This skill enforces completeness, but it does not override token limits, safety constraints, missing source context, or user-provided scope boundaries.\n- Split long outputs into clearly labeled continuation chunks when necessary, and verify that each chunk connects cleanly to the previous one.\n- Do not invent unavailable code, credentials, private APIs, or project files to satisfy a request for complete output.\n\n\n## Baseline\n\nTreat every task as production-critical. A partial output is a broken output. Do not optimize for brevity — optimize for completeness. If the user asks for a full file, deliver the full file. If the user asks for 5 components, deliver 5 components. No exceptions.\n\n## Banned Output Patterns\n\nThe following patterns are hard failures. Never produce them:\n\n**In code blocks:** `// ...`, `// rest of code`, `// implement here`, `// TODO`, `/* ... */`, `// similar to above`, `// continue pattern`, `// add more as needed`, bare `...` standing in for omitted code\n\n**In prose:** \"Let me know if you want me to continue\", \"I can provide more details if needed\", \"for brevity\", \"the rest follows the same pattern\", \"similarly for the remaining\", \"and so on\" (when replacing actual content), \"I'll leave that as an exercise\"\n\n**Structural shortcuts:** Outputting a skeleton when the request was for a full implementation. Showing the first and last section while skipping the middle. Replacing repeated logic with one example and a description. Describing what code should do instead of writing it.\n\n## Execution Process\n\n1. **Scope** — Read the full request. Count how many distinct deliverables are expected (files, functions, sections, answers). Lock that number.\n2. **Build** — Generate every deliverable completely. No partial drafts, no \"you can extend this later.\"\n3. **Cross-check** — Before output, re-read the original request. Compare your deliverable count against the scope count. If anything is missing, add it before responding.\n\n## Handling Long Outputs\n\nWhen a response approaches the token limit:\n\n- Do not compress remaining sections to squeeze them in.\n- Do not skip ahead to a conclusion.\n- Write at full quality up to a clean breakpoint (end of a function, end of a file, end of a section).\n- End with:\n\n```\n[PAUSED — X of Y complete. Send \"continue\" to resume from: next section name]\n```\n\nOn \"continue\", pick up exactly where you stopped. No recap, no repetition.\n\n## Quick Check\n\nBefore finalizing any response, verify:\n- No banned patterns from the list above appear anywhere in the output\n- Every item the user requested is present and finished\n- Code blocks contain actual runnable code, not descriptions of what code would do\n- Nothing was shortened to save space\n",
+      "tags": [
+        "api",
+        "claude",
+        "ai",
+        "cro"
+      ],
+      "useCases": [
+        "Use when the user explicitly asks for full files, complete implementations, exhaustive lists, or unabridged deliverables.",
+        "Use when placeholder code, skipped sections, TODO stubs, or descriptions in place of implementation would break the request.",
+        "Use when a long answer may need clean continuation chunks without losing completeness or structural integrity."
+      ],
+      "scrapedAt": "2026-04-18T07:20:47.896Z"
+    },
+    {
       "id": "antigravity-full-stack-orchestration-full-stack-feature",
       "name": "full-stack-orchestration-full-stack-feature",
       "slug": "full-stack-orchestration-full-stack-feature",
@@ -16339,6 +16421,35 @@
       "scrapedAt": "2026-02-19T07:11:46.753Z"
     },
     {
+      "id": "antigravity-gpt-taste",
+      "name": "gpt-taste",
+      "slug": "gpt-taste",
+      "description": "Use when generating elite GSAP-heavy frontend pages with strict AIDA structure, wide hero typography, and gapless bento grids.",
+      "category": "Creative & Media",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gpt-taste",
+      "content": "# CORE DIRECTIVE: AWWWARDS-LEVEL DESIGN ENGINEERING\n\n## When to Use\n\n- Use when the user asks for an award-level landing page, marketing page, or creative frontend with cinematic motion.\n- Use when GSAP, pinned scroll, scrubbing, card stacking, horizontal motion, or other advanced animation is appropriate.\n- Use when the output must avoid narrow six-line hero headings, cheap meta labels, empty bento cells, and generic left-right sections.\n\n## Limitations\n\n- This skill assumes a frontend project can support GSAP or equivalent animation libraries; check dependencies and performance budgets before implementation.\n- Heavy scroll animation, pinning, and media effects require browser testing across desktop and mobile viewports before release.\n- Do not apply cinematic motion when the user asks for a restrained interface, low-motion accessibility mode, or simple maintenance change.\n\n\nYou are an elite, award-winning frontend design engineer. Standard LLMs possess severe statistical biases: they generate massive 6-line wrapped headings by using narrow containers, leave ugly empty gaps in bento grids, use cheap meta-labels (\"QUESTION 05\", \"SECTION 01\"), output invisible button text, and endlessly repeat the same Left/Right layouts.\n\nYour goal is to aggressively break these defaults. Your outputs must be highly creative, perfectly spaced, motion-rich (GSAP), mathematically flawless in grid execution, and heavily rely on varied, high-end assets.\n\nDO NOT USE EMOJIS IN YOUR CODE, COMMENTS, OR OUTPUT. Maintain strictly professional formatting.\n\n## 1. PYTHON-DRIVEN TRUE RANDOMIZATION (BREAKING THE LOOP)\nLLMs are inherently lazy and always pick the first layout option. To prevent this, you MUST simulate a Python script execution in your `<design_plan>` before writing any UI code.\nUse a deterministic seed (e.g., character count of the user prompt modulo math) to simulate `random.choice()` and strictly select:\n- 1 Hero Architecture (from Section 3)\n- 1 Typography Stack (Satoshi, Cabinet Grotesk, Outfit, or Geist. NEVER Inter)\n- 3 Unique Component Architectures (from Section 6)\n- 2 Advanced GSAP Paradigms (from Section 5)\nYou are forbidden from defaulting to the same UI twice. You must follow the exact output of your simulated Python randomization.\n\n## 2. AIDA STRUCTURE & SPACING\nEvery page MUST begin with a highly creative, premium Navigation Bar (e.g., floating glass pill, or minimal split nav).\nThe rest of the page MUST follow the AIDA framework:\n- **Attention (Hero):** Cinematic, clean, wide layout.\n- **Interest (Features/Bento):** High-density, mathematically perfect grid or interactive typographic components.\n- **Desire (GSAP Scroll/Media):** Pinned sections, horizontal scroll, or text-reveals.\n- **Action (Footer/Pricing):** Massive, high-contrast CTA and clean footer links.\n**SPACING RULE:** Add huge vertical padding between all major sections (e.g., `py-32 md:py-48`). Sections must feel like distinct, cinematic chapters. Do not cramp elements together.\n\n## 3. HERO ARCHITECTURE & THE 2-LINE IRON RULE\nThe Hero must breathe. It must NOT be a narrow, 6-line text wall.\n- **The Container Width Fix:** You MUST use ultra-wide containers for the H1 (e.g., `max-w-5xl`, `max-w-6xl`, `w-full`). Allow the words to flow horizontally.\n- **The Line Limit:** The H1 MUST NEVER exceed 2 to 3 lines. 4, 5, or 6 lines is a catastrophic failure. Make the font size smaller (`clamp(3rem, 5vw, 5.5rem)`) and the container wider to ensure this.\n- **Hero Layout Options (Randomly Assigned via Python):**\n  1. *Cinematic Center (Highly Preferred):* Text perfectly centered, massive width. Below the text, exactly two high-contrast CTAs. Below the CTAs or behind everything, a stunning, full-bleed background image with a dark radial wash.\n  2. *Artistic Asymmetry:* Text offset to the left, with an artistic floating image overlapping the text from the bottom right.\n  3. *Editorial Split:* Text left, image right, but with massive negative space.\n- **Button Contrast:** Buttons must be perfectly legible. Dark background = white text. Light background = dark text. Invisible text is a failure.\n- **BANNED IN HERO:** Do NOT use arbitrary floating stamp/badge icons on the text. Do NOT use pill-tags under the hero. Do NOT place raw data/stats in the hero.\n\n## 4. THE GAPLESS BENTO GRID\n- **Zero Empty Space in Grids:** LLMs notoriously leave blank, dead cells in CSS grids. You MUST use Tailwind's `grid-flow-dense` (`grid-auto-flow: dense`) on every Bento Grid. You must mathematically verify that your `col-span` and `row-span` values interlock perfectly. No grid shall have a missing corner or empty void.\n- **Card Restraint:** Do not use too many cards. 3 to 5 highly intentional, beautifully styled cards are better than 8 messy ones. Fill them with a mix of large imagery, dense typography, or CSS effects.\n\n## 5. ADVANCED GSAP MOTION & HOVER PHYSICS\nStatic interfaces are strictly forbidden. You must write real GSAP (`@gsap/react`, `ScrollTrigger`).\n- **Hover Physics:** ",
+      "tags": [
+        "python",
+        "react",
+        "claude",
+        "ai",
+        "llm",
+        "gpt",
+        "design",
+        "image",
+        "tailwind",
+        "rag"
+      ],
+      "useCases": [
+        "Use when the user asks for an award-level landing page, marketing page, or creative frontend with cinematic motion.",
+        "Use when GSAP, pinned scroll, scrubbing, card stacking, horizontal motion, or other advanced animation is appropriate.",
+        "Use when the output must avoid narrow six-line hero headings, cheap meta labels, empty bento cells, and generic left-right sections."
+      ],
+      "scrapedAt": "2026-04-18T07:21:01.136Z"
+    },
+    {
       "id": "antigravity-grafana-dashboards",
       "name": "grafana-dashboards",
       "slug": "grafana-dashboards",
@@ -16927,6 +17038,35 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-02-26T07:11:53.465Z"
+    },
+    {
+      "id": "antigravity-high-end-visual-design",
+      "name": "high-end-visual-design",
+      "slug": "high-end-visual-design",
+      "description": "Use when designing expensive agency-grade interfaces with premium fonts, spatial rhythm, soft depth, and fluid microinteractions.",
+      "category": "Creative & Media",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/high-end-visual-design",
+      "content": "# Agent Skill: Principal UI/UX Architect & Motion Choreographer (Awwwards-Tier)\n\n## When to Use\n\n- Use when the user wants a high-end agency, Awwwards-tier, Apple-like, Linear-like, luxury, or polished visual design.\n- Use when building a landing page, portfolio, SaaS UI, consumer product page, or app surface that needs premium depth and motion.\n- Use when the design must avoid generic fonts, harsh shadows, static layouts, default navbars, and ordinary Bootstrap-style grids.\n\n## Limitations\n\n- This skill is visual-design focused; it does not replace brand strategy, conversion research, accessibility validation, or production QA.\n- Premium fonts, icon sets, images, and motion libraries must exist in the target project or be added intentionally before generated code is used.\n- Avoid applying luxury motion and heavy visual treatments to constrained dashboards, regulated products, or low-performance environments.\n\n\n## 1. Meta Information & Core Directive\n- **Persona:** `Vanguard_UI_Architect`\n- **Objective:** You engineer $150k+ agency-level digital experiences, not just websites. Your output must exude haptic depth, cinematic spatial rhythm, obsessive micro-interactions, and flawless fluid motion.\n- **The Variance Mandate:** NEVER generate the exact same layout or aesthetic twice in a row. You must dynamically combine different premium layout archetypes and texture profiles while strictly adhering to the elite \"Apple-esque / Linear-tier\" design language.\n\n## 2. THE \"ABSOLUTE ZERO\" DIRECTIVE (STRICT ANTI-PATTERNS)\nIf your generated code includes ANY of the following, the design instantly fails:\n- **Banned Fonts:** Inter, Roboto, Arial, Open Sans, Helvetica. (Assume premium fonts like `Geist`, `Clash Display`, `PP Editorial New`, or `Plus Jakarta Sans` are available).\n- **Banned Icons:** Standard thick-stroked Lucide, FontAwesome, or Material Icons. Use only ultra-light, precise lines (e.g., Phosphor Light, Remix Line).\n- **Banned Borders & Shadows:** Generic 1px solid gray borders. Harsh, dark drop shadows (`shadow-md`, `rgba(0,0,0,0.3)`).\n- **Banned Layouts:** Edge-to-edge sticky navbars glued to the top. Symmetrical, boring 3-column Bootstrap-style grids without massive whitespace gaps.\n- **Banned Motion:** Standard `linear` or `ease-in-out` transitions. Instant state changes without interpolation.\n\n## 3. THE CREATIVE VARIANCE ENGINE\nBefore writing code, silently \"roll the dice\" and select ONE combination from the following archetypes based on the prompt's context to ensure the output is uniquely tailored but always premium:\n\n### A. Vibe & Texture Archetypes (Pick 1)\n1. **Ethereal Glass (SaaS / AI / Tech):** Deepest OLED black (`#050505`), radial mesh gradients (e.g., subtle glowing purple/emerald orbs) in the background. Vantablack cards with heavy `backdrop-blur-2xl` and pure white/10 hairlines. Wide geometric Grotesk typography.\n2. **Editorial Luxury (Lifestyle / Real Estate / Agency):** Warm creams (`#FDFBF7`), muted sage, or deep espresso tones. High-contrast Variable Serif fonts for massive headings. Subtle CSS noise/film-grain overlay (`opacity-[0.03]`) for a physical paper feel.\n3. **Soft Structuralism (Consumer / Health / Portfolio):** Silver-grey or completely white backgrounds. Massive bold Grotesk typography. Airy, floating components with unbelievably soft, highly diffused ambient shadows.\n\n### B. Layout Archetypes (Pick 1)\n1. **The Asymmetrical Bento:** A masonry-like CSS Grid of varying card sizes (e.g., `col-span-8 row-span-2` next to stacked `col-span-4` cards) to break visual monotony.\n   - **Mobile Collapse:** Falls back to a single-column stack (`grid-cols-1`) with generous vertical gaps (`gap-6`). All `col-span` overrides reset to `col-span-1`.\n2. **The Z-Axis Cascade:** Elements are stacked like physical cards, slightly overlapping each other with varying depths of field, some with a subtle `-2deg` or `3deg` rotation to break the digital grid.\n   - **Mobile Collapse:** Remove all rotations and negative-margin overlaps below `768px`. Stack vertically with standard spacing. Overlapping elements cause touch-target conflicts on mobile.\n3. **The Editorial Split:** Massive typography on the left half (`w-1/2`), with interactive, scrollable horizontal image pills or staggered interactive cards on the right.\n   - **Mobile Collapse:** Converts to a full-width vertical stack (`w-full`). Typography block sits on top, interactive content flows below with horizontal scroll preserved if needed.\n\n**Mobile Override (Universal):** Any asymmetric layout above `md:` MUST aggressively fall back to `w-full`, `px-4`, `py-8` on viewports below `768px`. Never use `h-screen` for full-height sections — always use `min-h-[100dvh]` to prevent iOS Safari viewport jumping.\n\n## 4. HAPTIC MICRO-AESTHETICS (COMPONENT MASTERY)\n\n### A. The \"Double-Bezel\" (Doppelrand / Nested Architecture)\nNever place a premium card, image, or container flatly on the background. They must look like physical, machined hardware (like a glass",
+      "tags": [
+        "javascript",
+        "react",
+        "claude",
+        "ai",
+        "agent",
+        "template",
+        "design",
+        "image",
+        "tailwind",
+        "cro"
+      ],
+      "useCases": [
+        "Use when the user wants a high-end agency, Awwwards-tier, Apple-like, Linear-like, luxury, or polished visual design.",
+        "Use when building a landing page, portfolio, SaaS UI, consumer product page, or app surface that needs premium depth and motion.",
+        "Use when the design must avoid generic fonts, harsh shadows, static layouts, default navbars, and ordinary Bootstrap-style grids."
+      ],
+      "scrapedAt": "2026-04-18T07:21:09.901Z"
     },
     {
       "id": "antigravity-hono",
@@ -17955,6 +18095,33 @@
         "Use to perform a **Site Reliability Audit** specifically focused on SEO stability and redirect integrity."
       ],
       "scrapedAt": "2026-04-14T08:00:47.285Z"
+    },
+    {
+      "id": "antigravity-industrial-brutalist-ui",
+      "name": "industrial-brutalist-ui",
+      "slug": "industrial-brutalist-ui",
+      "description": "Use when creating raw industrial or tactical telemetry UIs with rigid grids, stark typography, CRT effects, and high-density data.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/industrial-brutalist-ui",
+      "content": "# SKILL: Industrial Brutalism & Tactical Telemetry UI\n\n## When to Use\n\n- Use when the user wants a brutalist, industrial, Swiss-print, CRT terminal, or tactical telemetry interface.\n- Use when building data-heavy dashboards, portfolios, editorial pages, or command-center UIs that should feel raw and mechanical.\n- Use when a design must reject soft gradients, rounded consumer UI, glassmorphism, and generic SaaS card layouts.\n\n## Limitations\n\n- This style is intentionally severe and may not fit consumer products, accessibility-sensitive flows, or brands that require warmth and softness.\n- CRT, halftone, dithering, and degradation effects must be tested for readability, contrast, and motion sensitivity.\n- Do not mix the light industrial and dark telemetry palettes in the same interface unless the user explicitly asks for a controlled hybrid.\n\n\n## 1. Skill Meta\n**Name:** Industrial Brutalism & Tactical Telemetry Interface Engineering\n**Description:** Advanced proficiency in architecting web interfaces that synthesize mid-century Swiss Typographic design, industrial manufacturing manuals, and retro-futuristic aerospace/military terminal interfaces. This discipline requires absolute mastery over rigid modular grids, extreme typographic scale contrast, purely utilitarian color palettes, and the programmatic simulation of analog degradation (halftones, CRT scanlines, bitmap dithering). The objective is to construct digital environments that project raw functionality, mechanical precision, and high data density, deliberately discarding conventional consumer UI patterns.\n\n## 2. Visual Archetypes\nThe design system operates by merging two distinct but highly compatible visual paradigms. **Pick ONE per project and commit to it. Do not alternate or mix both modes within the same interface.**\n\n### 2.1 Swiss Industrial Print\nDerived from 1960s corporate identity systems and heavy machinery blueprints.\n*   **Characteristics:** High-contrast light modes (newsprint/off-white substrates). Reliance on monolithic, heavy sans-serif typography. Unforgiving structural grids outlined by visible dividing lines. Aggressive, asymmetric use of negative space punctuated by oversized, viewport-bleeding numerals or letterforms. Heavy use of primary red as an alert/accent color.\n\n### 2.2 Tactical Telemetry & CRT Terminal\nDerived from classified military databases, legacy mainframes, and aerospace Heads-Up Displays (HUDs).\n*   **Characteristics:** Dark mode exclusivity. High-density tabular data presentation. Absolute dominance of monospaced typography. Integration of technical framing devices (ASCII brackets, crosshairs). Application of simulated hardware limitations (phosphor glow, scanlines, low bit-depth rendering).\n\n## 3. Typographic Architecture\nTypography is the primary structural and decorative infrastructure. Imagery is secondary. The system demands extreme variance in scale, weight, and spacing.\n\n### 3.1 Macro-Typography (Structural Headers)\n*   **Classification:** Neo-Grotesque / Heavy Sans-Serif.\n*   **Optimal Web Fonts:** Neue Haas Grotesk (Black), Inter (Extra Bold/Black), Archivo Black, Roboto Flex (Heavy), Monument Extended.\n*   **Implementation Parameters:**\n    *   **Scale:** Deployed at massive scales using fluid typography (e.g., `clamp(4rem, 10vw, 15rem)`).\n    *   **Tracking (Letter-spacing):** Extremely tight, often negative (`-0.03em` to `-0.06em`), forcing glyphs to form solid architectural blocks.\n    *   **Leading (Line-height):** Highly compressed (`0.85` to `0.95`).\n    *   **Casing:** Exclusively uppercase for structural impact.\n\n### 3.2 Micro-Typography (Data & Telemetry)\n*   **Classification:** Monospace / Technical Sans.\n*   **Optimal Web Fonts:** JetBrains Mono, IBM Plex Mono, Space Mono, VT323, Courier Prime.\n*   **Implementation Parameters:**\n    *   **Scale:** Fixed and small (`10px` to `14px` / `0.7rem` to `0.875rem`).\n    *   **Tracking:** Generous (`0.05em` to `0.1em`) to simulate mechanical typewriter spacing or terminal matrices.\n    *   **Leading:** Standard to tight (`1.2` to `1.4`).\n    *   **Casing:** Exclusively uppercase. Used for all metadata, navigation, unit IDs, and coordinates.\n\n### 3.3 Textural Contrast (Artistic Disruption)\n*   **Classification:** High-Contrast Serif.\n*   **Optimal Web Fonts:** Playfair Display, EB Garamond, Times New Roman.\n*   **Implementation Parameters:** Used exceedingly sparingly. Must be subjected to heavy post-processing (halftone filters, 1-bit dithering) to degrade vector perfection and create textural juxtaposition against the clean sans-serifs.\n\n## 4. Color System\nThe color architecture is uncompromising. Gradients, soft drop shadows, and modern translucency are strictly prohibited. Colors simulate physical media or primitive emissive displays.\n\n**CRITICAL: Choose ONE substrate palette per project and use it consistently. Never mix light and dark substrates within the same interface.**\n\n### If Swiss Industrial Print (Light):\n*   **Background:** `#F4F4F0` or `",
+      "tags": [
+        "claude",
+        "ai",
+        "design",
+        "document",
+        "presentation",
+        "image",
+        "stripe",
+        "cro"
+      ],
+      "useCases": [
+        "Use when the user wants a brutalist, industrial, Swiss-print, CRT terminal, or tactical telemetry interface.",
+        "Use when building data-heavy dashboards, portfolios, editorial pages, or command-center UIs that should feel raw and mechanical.",
+        "Use when a design must reject soft gradients, rounded consumer UI, glassmorphism, and generic SaaS card layouts."
+      ],
+      "scrapedAt": "2026-04-18T07:21:21.133Z"
     },
     {
       "id": "antigravity-infinite-gratitude",
@@ -21375,6 +21542,34 @@
       "scrapedAt": "2026-02-26T07:12:34.965Z"
     },
     {
+      "id": "antigravity-minimalist-ui",
+      "name": "minimalist-ui",
+      "slug": "minimalist-ui",
+      "description": "Use when creating clean editorial interfaces with warm monochrome palettes, crisp borders, restrained motion, and flat bento layouts.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/minimalist-ui",
+      "content": "# Protocol: Premium Utilitarian Minimalism UI Architect\n\n## When to Use\n\n- Use when the user wants a refined minimalist UI inspired by tools like Notion, Linear, or editorial workspace products.\n- Use when designing warm monochrome interfaces with crisp borders, generous whitespace, muted pastel accents, and quiet motion.\n- Use when the task should avoid gradients, heavy shadows, saturated colors, pill-heavy components, and generic SaaS visuals.\n\n## Limitations\n\n- Minimalism can hide hierarchy when content is dense; validate scannability, contrast, and navigation clarity with real content.\n- This skill assumes the product can support restrained palettes and typography-led layouts; do not override an established brand system without cause.\n- Subtle motion and flat surfaces still need responsive, keyboard, and screen-reader verification in the target project.\n\n\n## 1. Protocol Overview\nName: Premium Utilitarian Minimalism & Editorial UI\nDescription: An advanced frontend engineering directive for generating highly refined, ultra-minimalist, \"document-style\" web interfaces analogous to top-tier workspace platforms. This protocol strictly enforces a high-contrast warm monochrome palette, bespoke typographic hierarchies, meticulous structural macro-whitespace, bento-grid layouts, and an ultra-flat component architecture with deliberate muted pastel accents. It actively rejects standard generic SaaS design trends.\n\n## 2. Absolute Negative Constraints (Banned Elements)\nThe AI must strictly avoid the following generic web development defaults:\n- DO NOT use the \"Inter\", \"Roboto\", or \"Open Sans\" typefaces.\n- DO NOT use generic, thin-line icon libraries like \"Lucide\", \"Feather\", or standard \"Heroicons\".\n- DO NOT use Tailwind's default heavy drop shadows (e.g., `shadow-md`, `shadow-lg`, `shadow-xl`). Shadows must be practically non-existent or heavily customized to be ultra-diffuse and low opacity (< 0.05).\n- DO NOT use primary colored backgrounds for large elements or sections (e.g., no bright blue, green, or red hero sections).\n- DO NOT use gradients, neon colors, or 3D glassmorphism (beyond subtle navbar blurs).\n- DO NOT use `rounded-full` (pill shapes) for large containers, cards, or primary buttons.\n- DO NOT use emojis anywhere in code, markup, text content, headings, or alt text. Replace with proper icons or clean SVG primitives.\n- DO NOT use generic placeholder names like \"John Doe\", \"Acme Corp\", or \"Lorem Ipsum\". Use realistic, contextual content.\n- DO NOT use AI copywriting clichés: \"Elevate\", \"Seamless\", \"Unleash\", \"Next-Gen\", \"Game-changer\", \"Delve\". Write plain, specific language.\n\n## 3. Typographic Architecture\nThe interface must rely on extreme typographic contrast and premium font selection to establish an editorial feel.\n- Primary Sans-Serif (Body, UI, Buttons): Use clean, geometric, or system-native fonts with character. Target: `font-family: 'SF Pro Display', 'Geist Sans', 'Helvetica Neue', 'Switzer', sans-serif`.\n- Editorial Serif (Hero Headings & Quotes): Target: `font-family: 'Lyon Text', 'Newsreader', 'Playfair Display', 'Instrument Serif', serif`. Apply tight tracking (`letter-spacing: -0.02em` to `-0.04em`) and tight line-height (`1.1`).\n- Monospace (Code, Keystrokes, Meta-data): Target: `font-family: 'Geist Mono', 'SF Mono', 'JetBrains Mono', monospace`.\n- Text Colors: Body text must never be absolute black (`#000000`). Use off-black/charcoal (`#111111` or `#2F3437`) with a generous `line-height` of `1.6` for legibility. Secondary text should be muted gray (`#787774`).\n\n## 4. Color Palette (Warm Monochrome + Spot Pastels)\nColor is a scarce resource, utilized only for semantic meaning or subtle accents.\n- Canvas / Background: Pure White `#FFFFFF` or Warm Bone/Off-White `#F7F6F3` / `#FBFBFA`.\n- Primary Surface (Cards): `#FFFFFF` or `#F9F9F8`.\n- Structural Borders / Dividers: Ultra-light gray `#EAEAEA` or `rgba(0,0,0,0.06)`.\n- Accent Colors: Exclusively use highly desaturated, washed-out pastels for tags, inline code backgrounds, or subtle icon backgrounds.\n  - Pale Red: `#FDEBEC` (Text: `#9F2F2D`)\n  - Pale Blue: `#E1F3FE` (Text: `#1F6C9F`)\n  - Pale Green: `#EDF3EC` (Text: `#346538`)\n  - Pale Yellow: `#FBF3DB` (Text: `#956400`)\n\n## 5. Component Specifications\n- Bento Box Feature Grids:\n  - Utilize asymmetrical CSS Grid layouts.\n  - Cards must have exactly `border: 1px solid #EAEAEA`.\n  - Border-radius must be crisp: `8px` or `12px` maximum.\n  - Internal padding must be generous (e.g., `24px` to `40px`).\n- Primary Call-To-Action (Buttons):\n  - Solid background `#111111`, text `#FFFFFF`.\n  - Slight border-radius (`4px` to `6px`). No box-shadow.\n  - Hover state should be a subtle color shift to `#333333` or a micro-scale `transform: scale(0.98)`.\n- Tags & Status Badges:\n  - Pill-shaped (`border-radius: 9999px`), very small typography (`text-xs`), uppercase with wide tracking (`letter-spacing: 0.05em`).\n  - Background must use the defined Muted Pastels.\n- Accordions (FAQ):\n  - Strip all container boxes.",
+      "tags": [
+        "react",
+        "claude",
+        "ai",
+        "design",
+        "document",
+        "image",
+        "tailwind",
+        "cro",
+        "copywriting"
+      ],
+      "useCases": [
+        "Use when the user wants a refined minimalist UI inspired by tools like Notion, Linear, or editorial workspace products.",
+        "Use when designing warm monochrome interfaces with crisp borders, generous whitespace, muted pastel accents, and quiet motion.",
+        "Use when the task should avoid gradients, heavy shadows, saturated colors, pill-heavy components, and generic SaaS visuals."
+      ],
+      "scrapedAt": "2026-04-18T07:22:01.298Z"
+    },
+    {
       "id": "antigravity-miro-automation",
       "name": "miro-automation",
       "slug": "miro-automation",
@@ -21394,6 +21589,37 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-02-19T07:12:25.535Z"
+    },
+    {
+      "id": "antigravity-mise-configurator",
+      "name": "mise-configurator",
+      "slug": "mise-configurator",
+      "description": "Generate production-ready mise.toml setups for local development, CI/CD pipelines, and toolchain standardization.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mise-configurator",
+      "content": "# Mise Configurator\n\n## Overview\n\nThis skill generates clean, production-ready `mise.toml` configurations for local development environments and CI/CD pipelines.\n\nIt helps standardize runtime versions, simplify onboarding, replace legacy version managers like `asdf`, `nvm`, and `pyenv`, and create reproducible multi-language environments with minimal setup effort.\n\n## When to Use This Skill\n\n- Use when you need to create or update a `mise.toml`\n- Use when working with Node.js, Python, Go, Rust, Java, Bun, Terraform, or mixed stacks\n- Use when the user asks about CI/CD runtime setup using mise\n- Use when migrating from `.tool-versions`, `asdf`, `nvm`, or `pyenv`\n- Use when standardizing tool versions across teams or monorepos\n\n## How It Works\n\n### Step 1: Detect Project Context\n\nInspect available repository files such as:\n\n- `package.json`\n- `pnpm-lock.yaml`\n- `pyproject.toml`\n- `requirements.txt`\n- `go.mod`\n- `Cargo.toml`\n- `.tool-versions`\n- `Dockerfile`\n- GitHub Actions or CI files\n\nInfer languages, package managers, and pinned versions.\n\n### Step 2: Generate `mise.toml`\n\nCreate a minimal, valid, copy-paste-ready configuration using:\n\n- existing pinned versions when found\n- explicit user-provided target versions when absent\n- practical defaults for developer productivity\n- concrete pinned versions in shared production configs\n\n### Step 3: Add Bootstrap Commands\n\nProvide setup commands such as:\n\n```bash\nmise trust\nmise install\n```\n\n### Step 4: Generate CI/CD Integration\n\nIf requested, generate pipeline examples using mise with caching and runtime installation.\n\n## Examples\n\n### Example 1: Node.js + pnpm Project\n\n```toml\n[tools]\nnode = \"22.11.0\"\npnpm = \"9.15.0\"\n```\n\n### Example 2: Python + GitHub Actions\n\n```toml\n[tools]\npython = \"3.12.7\"\npoetry = \"1.8.4\"\n```\n\n```yaml\nsteps:\n  - uses: actions/checkout@v4\n  - uses: jdx/mise-action@v2\n  - run: poetry install\n  - run: pytest\n```\n\n## Best Practices\n\n- ✅ Respect versions already pinned in the repository\n    \n- ✅ Keep configs minimal and readable\n    \n- ✅ Prefer stable runtime releases\n    \n- ✅ Generate CI examples with caching\n\n- ✅ Ask for target versions before pinning when the repository does not already declare them\n\n- ❌ Do not use floating `latest` or `lts` aliases in shared production configs unless explicitly requested\n    \n- ❌ Do not over-engineer unnecessary tool entries\n    \n- ❌ Do not ignore existing lockfiles or version files\n    \n\n## Limitations\n\n- This skill does not replace environment-specific validation, testing, or expert review.\n    \n- Stop and ask for clarification if required inputs, permissions, or safety boundaries are missing.\n    \n- Runtime availability may vary by OS, shell, or CI platform.\n    \n- Some plugins or niche tools may require manual adjustment.\n    \n\n## Security & Safety Notes\n\n- Review generated shell commands before execution.\n    \n- Confirm CI/CD permissions before modifying pipelines.\n    \n- Validate runtime versions against production requirements.\n    \n- Use only in authorized repositories and environments.\n    \n\n## Common Pitfalls\n\n- **Problem:** Wrong runtime version selected  \n    **Solution:** Check repository lockfiles and pinned versions first.\n    \n- **Problem:** CI installs are slow  \n    **Solution:** Enable cache layers and reuse mise cache directories.\n    \n- **Problem:** Tool missing from registry  \n    **Solution:** Verify plugin support or install manually.\n    \n\n## Related Skills\n\n- `@docker-expert` - Use when building containerized development environments\n    \n- `@github-actions-templates` - Use for advanced workflow automation\n    \n- `@monorepo-architect` - Use for large multi-package repositories\n",
+      "tags": [
+        "python",
+        "node",
+        "claude",
+        "ai",
+        "automation",
+        "workflow",
+        "template",
+        "security",
+        "docker",
+        "cro"
+      ],
+      "useCases": [
+        "Use when you need to create or update a `mise.toml`",
+        "Use when working with Node.js, Python, Go, Rust, Java, Bun, Terraform, or mixed stacks",
+        "Use when the user asks about CI/CD runtime setup using mise",
+        "Use when migrating from `.tool-versions`, `asdf`, `nvm`, or `pyenv`",
+        "Use when standardizing tool versions across teams or monorepos"
+      ],
+      "scrapedAt": "2026-04-18T07:22:01.728Z"
     },
     {
       "id": "antigravity-mixpanel-automation",
@@ -22702,6 +22928,35 @@
         "**Microservices**: Implementing \"database-per-service\" patterns where highly optimized reads are required."
       ],
       "scrapedAt": "2026-01-26T13:19:52.279Z"
+    },
+    {
+      "id": "antigravity-not-human-search-mcp",
+      "name": "not-human-search-mcp",
+      "slug": "not-human-search-mcp",
+      "description": "Search AI-ready websites, inspect indexed site details, verify MCP endpoints, and discover tools and APIs using the Not Human Search MCP server",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/not-human-search-mcp",
+      "content": "\n# Not Human Search MCP\n\n## Overview\n\nNot Human Search is a remote MCP server that lets AI agents search a curated index of 1,750+ AI-ready websites, inspect indexed site details, submit new sites for analysis, and verify live MCP endpoints via JSON-RPC probe. It is designed for AI agents that need to discover tools, APIs, and services at runtime without relying on hardcoded lists.\n\n## When to Use This Skill\n\n- Use when an AI agent needs to discover tools, APIs, or MCP servers for a specific task\n- Use when you want to check whether a website exposes machine-readable endpoints (llms.txt, OpenAPI, MCP)\n- Use when verifying that an MCP endpoint is actually responding to JSON-RPC\n- Use when building agent workflows that need to find and connect to external services dynamically\n\n## MCP Configuration\n\nAdd the Not Human Search MCP server to your client configuration. The endpoint uses streamable HTTP and requires no authentication.\n\n### Claude Desktop / Cursor / Windsurf\n\n```json\n{\n  \"mcpServers\": {\n    \"not-human-search\": {\n      \"url\": \"https://nothumansearch.ai/mcp\"\n    }\n  }\n}\n```\n\nNo API key or authentication is required.\n\n## Available Tools\n\n### `search_agents`\n\nSearch the index of 1,750+ AI-ready websites by keyword. Returns ranked results with scores, categories, and available endpoints.\n\n```\nsearch_agents({ query: \"code review tools\", limit: 10 })\n```\n\n### `get_site_details`\n\nCheck a specific domain's AI-readiness score and available machine-readable endpoints.\n\n```\nget_site_details({ domain: \"linear.app\" })\n```\n\n### `get_stats`\n\nGet aggregate index statistics, including total indexed sites, categories, and endpoint coverage.\n\n```\nget_stats({})\n```\n\n### `submit_site`\n\nSubmit a URL for crawling and AI-readiness analysis.\n\n```\nsubmit_site({ url: \"https://example.com\" })\n```\n\n### `verify_mcp`\n\nVerify whether a URL is a live MCP endpoint by sending a JSON-RPC probe and checking for a valid response.\n\n```\nverify_mcp({ url: \"https://example.com/mcp\" })\n```\n\n### `list_categories`\n\nList available discovery categories for narrowing searches.\n\n```\nlist_categories({})\n```\n\n### `get_top_sites`\n\nRetrieve top-ranked indexed sites.\n\n```\nget_top_sites({ limit: 10 })\n```\n\n### `register_monitor`\n\nRegister a domain monitor using a user-provided email address.\n\n```\nregister_monitor({ domain: \"example.com\", email: \"user@example.com\" })\n```\n\n## Examples\n\n### Example 1: Discover Code Review Tools\n\n```text\nUse @not-human-search-mcp to find code review tools that expose MCP or API endpoints.\n```\n\nThe agent will call `search_agents({ query: \"code review\", limit: 10 })` and return ranked results with scores and endpoint details.\n\n### Example 2: Check if a Site is AI-Ready\n\n```text\nUse @not-human-search-mcp to check the AI-readiness of linear.app.\n```\n\nThe agent will call `get_site_details({ domain: \"linear.app\" })` and return the site's score breakdown.\n\n### Example 3: Verify an MCP Endpoint\n\n```text\nUse @not-human-search-mcp to verify that https://heliumtrades.com/mcp is a working MCP server.\n```\n\nThe agent will call `verify_mcp({ url: \"https://heliumtrades.com/mcp\" })` and confirm whether it responds to JSON-RPC.\n\n## Best Practices\n\n- Use `search_agents` for broad discovery, then `get_site_details` for detailed analysis of specific indexed results\n- Use `verify_mcp` to confirm an MCP endpoint is live before wiring it into an agent workflow\n- Use `submit_site` when a relevant site is absent from the index and the user wants it analyzed\n- Use `register_monitor` only with an email address the user explicitly provides for monitoring\n- Combine with other MCP skills to build dynamic tool-discovery pipelines\n\n## Limitations\n\n- The search index covers 1,750+ sites and is updated regularly, but may not include every site on the internet.\n- Scoring reflects machine-readable signals (llms.txt, OpenAPI, MCP, structured data) rather than content quality.\n- `verify_mcp` sends a JSON-RPC probe to the target URL; only use it on URLs you expect to be MCP endpoints.\n- `register_monitor` requires a user-provided email address and consent to receive monitoring notifications.\n\n## Related Skills\n\n- `@mcp-builder` - For building your own MCP servers\n- `@ai-dev-jobs-mcp` - Search AI/ML job listings via MCP\n",
+      "tags": [
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "workflow",
+        "design",
+        "rag"
+      ],
+      "useCases": [
+        "Use when an AI agent needs to discover tools, APIs, or MCP servers for a specific task",
+        "Use when you want to check whether a website exposes machine-readable endpoints (llms.txt, OpenAPI, MCP)",
+        "Use when verifying that an MCP endpoint is actually responding to JSON-RPC",
+        "Use when building agent workflows that need to find and connect to external services dynamically"
+      ],
+      "scrapedAt": "2026-04-18T07:22:14.924Z"
     },
     {
       "id": "antigravity-notebooklm",
@@ -25574,240 +25829,6 @@
       "scrapedAt": "2026-02-26T07:13:12.609Z"
     },
     {
-      "id": "antigravity-progressive-estimation",
-      "name": "progressive-estimation",
-      "slug": "progressive-estimation",
-      "description": "Estimate AI-assisted and hybrid human+agent development work with research-backed PERT statistics and calibration feedback loops",
-      "category": "Development & Code Tools",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/progressive-estimation",
-      "content": "\n# Progressive Estimation\n\nEstimate AI-assisted and hybrid human+agent development work using research-backed formulas with PERT statistics, confidence bands, and calibration feedback loops.\n\n## Overview\n\nProgressive Estimation adapts to your team's working mode — human-only, hybrid, or agent-first — applying the right velocity model and multipliers for each. It produces statistical estimates rather than gut feelings.\n\n## When to Use This Skill\n\n- Estimating development tasks where AI agents handle part of the work\n- Sprint planning with hybrid human+agent teams\n- Batch sizing a backlog (handles 5 or 500 issues)\n- Staffing and capacity planning with agent multipliers\n- Release date forecasting with confidence intervals\n\n## How It Works\n\n1. **Mode Detection** — Determines if the team works human-only, hybrid, or agent-first\n2. **Task Classification** — Categorizes by size (XS–XL), complexity, and risk\n3. **Formula Application** — Applies research-backed multipliers grounded in empirical studies\n4. **PERT Calculation** — Produces expected values using three-point estimation\n5. **Confidence Bands** — Generates P50, P75, P90 intervals\n6. **Output Formatting** — Formats for Linear, JIRA, ClickUp, GitHub Issues, Monday, or GitLab\n7. **Calibration** — Feeds back actuals to improve future estimates\n\n## Examples\n\n**Single task:**\n> \"Estimate building a REST API with authentication using Claude Code\"\n\n**Batch mode:**\n> \"Estimate these 12 JIRA tickets for our next sprint\"\n\n**With context:**\n> \"We have 3 developers using AI agents for ~60% of implementation. Estimate this feature.\"\n\n## Best Practices\n\n- Start with a single task to calibrate before moving to batch mode\n- Feed back actual completion times to improve the calibration system\n- Use \"instant mode\" for quick T-shirt sizing without full PERT analysis\n- Be explicit about team composition and agent usage percentage\n\n## Common Pitfalls\n\n- **Problem:** Overconfident estimates\n  **Solution:** Use P75 or P90 for commitments, not P50\n\n- **Problem:** Missing context\n  **Solution:** The skill asks clarifying questions — provide team size and agent usage\n\n- **Problem:** Stale calibration\n  **Solution:** Re-calibrate when team composition or tooling changes significantly\n\n## Related Skills\n\n- `@sprint-planning` - Sprint planning and backlog management\n- `@project-management` - General project management workflows\n- `@capacity-planning` - Team velocity and capacity planning\n\n## Additional Resources\n\n- [Source Repository](https://github.com/Enreign/progressive-estimation)\n- [Installation Guide](https://github.com/Enreign/progressive-estimation/blob/main/INSTALLATION.md)\n- [Research References](https://github.com/Enreign/progressive-estimation/tree/main/references)\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "workflow"
-      ],
-      "useCases": [
-        "Estimating development tasks where AI agents handle part of the work",
-        "Sprint planning with hybrid human+agent teams",
-        "Batch sizing a backlog (handles 5 or 500 issues)",
-        "Staffing and capacity planning with agent multipliers",
-        "Release date forecasting with confidence intervals"
-      ],
-      "scrapedAt": "2026-03-11T07:08:11.946Z"
-    },
-    {
-      "id": "antigravity-progressive-web-app",
-      "name": "progressive-web-app",
-      "slug": "progressive-web-app",
-      "description": "Build Progressive Web Apps (PWAs) with offline support, installability, and caching strategies. Trigger whenever the user mentions PWA, service workers, web app manifests, Workbox, 'add to home screen', or wants their web app to work offline, feel native, or be installable.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/progressive-web-app",
-      "content": "\n# Progressive Web Apps (PWAs)\n\n## Overview\n\nA Progressive Web App is a web application that uses modern browser capabilities to deliver a fast, reliable, and installable experience — even on unreliable networks. The three required pillars are:\n\n1. **HTTPS** — Required in production for service workers to register (localhost is exempt for development).\n2. **Web App Manifest** (`manifest.json`) — Makes the app installable and defines its appearance on device home screens.\n3. **Service Worker** (`sw.js`) — A background script that intercepts network requests, manages caches, and enables offline functionality.\n\n## When to Use This Skill\n\n- Use when the user wants their web app to work offline or on unreliable networks.\n- Use when building a mobile-first web project where users should be able to install the app to their home screen.\n- Use when the user asks about caching strategies, service workers, or improving web app performance and resilience.\n- Use when the user mentions Workbox, web app manifests, background sync, or push notifications for the web.\n- Use when the user asks \"can my website be installed like an app?\" or \"how do I make my site work offline?\" — even if they don't use the word PWA.\n\n## Deliverables Checklist\n\nEvery PWA implementation must include these files at minimum:\n\n- [ ] `index.html` — Links manifest, registers service worker\n- [ ] `manifest.json` — Full app metadata and icon set\n- [ ] `sw.js` — Service worker with install, activate, and fetch handlers\n- [ ] `app.js` — Main app logic with SW registration and install prompt handling\n- [ ] `offline.html` — Fallback page shown when navigation fails offline (required — missing file will cause install to fail)\n\n---\n\n## Step 1: Web App Manifest (`manifest.json`)\n\nDefines how the app appears when installed. Must be linked from `<head>` via `<link rel=\"manifest\">`.\n\n```json\n{\n  \"name\": \"My Awesome PWA\",\n  \"short_name\": \"MyPWA\",\n  \"description\": \"A fast, offline-capable Progressive Web App.\",\n  \"start_url\": \"/\",\n  \"scope\": \"/\",\n  \"display\": \"standalone\",\n  \"orientation\": \"portrait-primary\",\n  \"background_color\": \"#ffffff\",\n  \"theme_color\": \"#0055ff\",\n  \"icons\": [\n    {\n      \"src\": \"/assets/icons/icon-192x192.png\",\n      \"sizes\": \"192x192\",\n      \"type\": \"image/png\",\n      \"purpose\": \"any maskable\"\n    },\n    {\n      \"src\": \"/assets/icons/icon-512x512.png\",\n      \"sizes\": \"512x512\",\n      \"type\": \"image/png\",\n      \"purpose\": \"any maskable\"\n    }\n  ],\n  \"screenshots\": [\n    {\n      \"src\": \"/assets/screenshots/desktop.png\",\n      \"sizes\": \"1280x720\",\n      \"type\": \"image/png\",\n      \"form_factor\": \"wide\"\n    }\n  ]\n}\n```\n\n**Key fields:**\n- `display`: `standalone` hides browser UI; `minimal-ui` shows minimal controls; `browser` is standard tab.\n- `purpose: \"maskable\"` on icons enables adaptive icons on Android (safe zone matters — keep content in center 80%).\n- `screenshots` is optional but required for Chrome's enhanced install dialog on desktop.\n\n---\n\n## Step 2: HTML Shell (`index.html`)\n\n```html\n<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>My Awesome PWA</title>\n\n  <!-- PWA manifest -->\n  <link rel=\"manifest\" href=\"/manifest.json\">\n\n  <!-- Theme color for browser chrome -->\n  <meta name=\"theme-color\" content=\"#0055ff\">\n\n  <!-- iOS-specific (Safari doesn't fully use manifest) -->\n  <meta name=\"apple-mobile-web-app-capable\" content=\"yes\">\n  <meta name=\"apple-mobile-web-app-status-bar-style\" content=\"default\">\n  <meta name=\"apple-mobile-web-app-title\" content=\"MyPWA\">\n  <link rel=\"apple-touch-icon\" href=\"/assets/icons/icon-192x192.png\">\n\n  <link rel=\"stylesheet\" href=\"/styles.css\">\n</head>\n<body>\n  <div id=\"app\">\n    <header><h1>My PWA</h1></header>\n    <main id=\"content\">Loading...</main>\n    <!-- Optional: install button, hidden by default -->\n    <button id=\"install-btn\" hidden>Install App</button>\n  </div>\n  <script src=\"/app.js\"></script>\n</body>\n</html>\n```\n\n---\n\n## Step 3: Service Worker Registration & Install Prompt (`app.js`)\n\n```javascript\n// ─── Service Worker Registration ───────────────────────────────────────────\nif ('serviceWorker' in navigator) {\n  window.addEventListener('load', async () => {\n    try {\n      const registration = await navigator.serviceWorker.register('/sw.js');\n      console.log('[App] SW registered, scope:', registration.scope);\n    } catch (err) {\n      console.error('[App] SW registration failed:', err);\n    }\n  });\n}\n\n// ─── Install Prompt (Add to Home Screen) ───────────────────────────────────\nlet deferredPrompt;\nconst installBtn = document.getElementById('install-btn'); // may be null if omitted\n\n// Capture the browser's install prompt — it fires before the browser's own UI\nwindow.addEventListener('beforeinstallprompt', (e) => {\n  e.preventDefault(); // Stop automatic mini-infobar on mobile\n  deferredPrompt = e;\n  if (installBtn) installBtn.hidden = false; // Show your custom install button\n});\n\nif (installBt",
-      "tags": [
-        "javascript",
-        "api",
-        "claude",
-        "ai",
-        "document",
-        "image",
-        "rag",
-        "cro"
-      ],
-      "useCases": [
-        "Use when the user wants their web app to work offline or on unreliable networks.",
-        "Use when building a mobile-first web project where users should be able to install the app to their home screen.",
-        "Use when the user asks about caching strategies, service workers, or improving web app performance and resilience.",
-        "Use when the user mentions Workbox, web app manifests, background sync, or push notifications for the web.",
-        "Use when the user asks \"can my website be installed like an app?\" or \"how do I make my site work offline?\" — even if they don't use the word PWA."
-      ],
-      "scrapedAt": "2026-03-18T07:16:37.938Z"
-    },
-    {
-      "id": "antigravity-project-development",
-      "name": "project-development",
-      "slug": "project-development",
-      "description": "This skill covers the principles for identifying tasks suited to LLM processing, designing effective project architectures, and iterating rapidly using agent-assisted development.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/project-development",
-      "content": "\n# Project Development Methodology\n\nThis skill covers the principles for identifying tasks suited to LLM processing, designing effective project architectures, and iterating rapidly using agent-assisted development. The methodology applies whether building a batch processing pipeline, a multi-agent research system, or an interactive agent application.\n\n## When to Use\nActivate this skill when:\n- Starting a new project that might benefit from LLM processing\n- Evaluating whether a task is well-suited for agents versus traditional code\n- Designing the architecture for an LLM-powered application\n- Planning a batch processing pipeline with structured outputs\n- Choosing between single-agent and multi-agent approaches\n- Estimating costs and timelines for LLM-heavy projects\n\n## Core Concepts\n\n### Task-Model Fit Recognition\n\nNot every problem benefits from LLM processing. The first step in any project is evaluating whether the task characteristics align with LLM strengths. This evaluation should happen before writing any code.\n\n**LLM-suited tasks share these characteristics:**\n\n| Characteristic | Why It Fits |\n|----------------|-------------|\n| Synthesis across sources | LLMs excel at combining information from multiple inputs |\n| Subjective judgment with rubrics | LLMs handle grading, evaluation, and classification with criteria |\n| Natural language output | When the goal is human-readable text, not structured data |\n| Error tolerance | Individual failures do not break the overall system |\n| Batch processing | No conversational state required between items |\n| Domain knowledge in training | The model already has relevant context |\n\n**LLM-unsuited tasks share these characteristics:**\n\n| Characteristic | Why It Fails |\n|----------------|--------------|\n| Precise computation | Math, counting, and exact algorithms are unreliable |\n| Real-time requirements | LLM latency is too high for sub-second responses |\n| Perfect accuracy requirements | Hallucination risk makes 100% accuracy impossible |\n| Proprietary data dependence | The model lacks necessary context |\n| Sequential dependencies | Each step depends heavily on the previous result |\n| Deterministic output requirements | Same input must produce identical output |\n\nThe evaluation should happen through manual prototyping: take one representative example and test it directly with the target model before building any automation.\n\n### The Manual Prototype Step\n\nBefore investing in automation, validate task-model fit with a manual test. Copy one representative input into the model interface. Evaluate the output quality. This takes minutes and prevents hours of wasted development.\n\nThis validation answers critical questions:\n- Does the model have the knowledge required for this task?\n- Can the model produce output in the format you need?\n- What level of quality should you expect at scale?\n- Are there obvious failure modes to address?\n\nIf the manual prototype fails, the automated system will fail. If it succeeds, you have a baseline for comparison and a template for prompt design.\n\n### Pipeline Architecture\n\nLLM projects benefit from staged pipeline architectures where each stage is:\n- **Discrete**: Clear boundaries between stages\n- **Idempotent**: Re-running produces the same result\n- **Cacheable**: Intermediate results persist to disk\n- **Independent**: Each stage can run separately\n\n**The canonical pipeline structure:**\n\n```\nacquire → prepare → process → parse → render\n```\n\n1. **Acquire**: Fetch raw data from sources (APIs, files, databases)\n2. **Prepare**: Transform data into prompt format\n3. **Process**: Execute LLM calls (the expensive, non-deterministic step)\n4. **Parse**: Extract structured data from LLM outputs\n5. **Render**: Generate final outputs (reports, files, visualizations)\n\nStages 1, 2, 4, and 5 are deterministic. Stage 3 is non-deterministic and expensive. This separation allows re-running the expensive LLM stage only when necessary, while iterating quickly on parsing and rendering.\n\n### File System as State Machine\n\nUse the file system to track pipeline state rather than databases or in-memory structures. Each processing unit gets a directory. Each stage completion is marked by file existence.\n\n```\ndata/{id}/\n├── raw.json         # acquire stage complete\n├── prompt.md        # prepare stage complete\n├── response.md      # process stage complete\n├── parsed.json      # parse stage complete\n```\n\nTo check if an item needs processing: check if the output file exists. To re-run a stage: delete its output file and downstream files. To debug: read the intermediate files directly.\n\nThis pattern provides:\n- Natural idempotency (file existence gates execution)\n- Easy debugging (all state is human-readable)\n- Simple parallelization (each directory is independent)\n- Trivial caching (files persist across runs)\n\n### Structured Output Design\n\nWhen LLM outputs must be parsed programmatically, prompt design directly determines parsing reliability. The prompt must specify exa",
-      "tags": [
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "llm",
-        "automation",
-        "workflow",
-        "template",
-        "design",
-        "document"
-      ],
-      "useCases": [
-        "Starting a new project that might benefit from LLM processing",
-        "Evaluating whether a task is well-suited for agents versus traditional code",
-        "Designing the architecture for an LLM-powered application",
-        "Planning a batch processing pipeline with structured outputs",
-        "Choosing between single-agent and multi-agent approaches"
-      ],
-      "scrapedAt": "2026-03-07T06:56:53.548Z"
-    },
-    {
-      "id": "antigravity-project-skill-audit",
-      "name": "project-skill-audit",
-      "slug": "project-skill-audit",
-      "description": "Audit a project and recommend the highest-value skills to add or update.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/project-skill-audit",
-      "content": "\n# Project Skill Audit\n\n## Overview\n\nAudit the project's real recurring workflows before recommending skills. Prefer evidence from memory, rollout summaries, existing skill folders, and current repo conventions over generic brainstorming.\n\nRecommend updates before new skills when an existing project skill is already close to the needed behavior.\n\n## When to Use\n- When the user asks what skills a project needs or which existing skills should be updated.\n- When recommendations should be grounded in project history, memory files, and local conventions.\n\n## Workflow\n\n1. Map the current project surface.\n   Identify the repo root and read the most relevant project guidance first, such as `AGENTS.md`, `README.md`, roadmap/ledger files, and local docs that define workflows or validation expectations.\n\n2. Build the memory/session path first.\n   Resolve the memory base as `$CODEX_HOME` when set, otherwise default to `~/.codex`.\n   Use these locations:\n   - memory index: `$CODEX_HOME/memories/MEMORY.md` or `~/.codex/memories/MEMORY.md`\n   - rollout summaries: `$CODEX_HOME/memories/rollout_summaries/`\n   - raw sessions: `$CODEX_HOME/sessions/` or `~/.codex/sessions/`\n\n3. Read project past sessions in this order.\n   If the runtime prompt already includes a memory summary, start there.\n   Then search `MEMORY.md` for:\n   - repo name\n   - repo basename\n   - current `cwd`\n   - important module or file names\n   Open only the 1-3 most relevant rollout summaries first.\n   Fall back to raw session JSONL only when the summaries are missing the exact evidence you need.\n\n4. Scan existing project-local skills before suggesting anything new.\n   Check these locations relative to the current repo root:\n   - `.agents/skills`\n   - `.codex/skills`\n   - `skills`\n   Read both `SKILL.md` and `agents/openai.yaml` when present.\n\n5. Compare project-local skills against recurring work.\n   Look for repeated patterns in past sessions:\n   - repeated validation sequences\n   - repeated failure shields\n   - recurring ownership boundaries\n   - repeated root-cause categories\n   - workflows that repeatedly require the same repo-specific context\n   If the pattern appears repeatedly and is not already well captured, it is a candidate skill.\n\n6. Separate `new skill` from `update existing skill`.\n   Recommend an update when an existing skill is already the right bucket but has stale triggers, missing guardrails, outdated paths, weak validation instructions, or incomplete scope.\n   Recommend a new skill only when the workflow is distinct enough that stretching an existing skill would make it vague or confusing.\n\n7. Check for overlap with global skills only after reviewing project-local skills.\n   Use `$CODEX_HOME/skills` and `$CODEX_HOME/skills/public` to avoid proposing project-local skills for workflows already solved well by a generic shared skill.\n   Do not reject a project-local skill just because a global skill exists; project-specific guardrails can still justify a local specialization.\n\n## Session Analysis\n\n### 1. Search memory index first\n\n- Search `MEMORY.md` with `rg` using the repo name, basename, and `cwd`.\n- Prefer entries that already cite rollout summaries with the same repo path.\n- Capture:\n  - repeated workflows\n  - validation commands\n  - failure shields\n  - ownership boundaries\n  - milestone or roadmap coupling\n\n### 2. Open targeted rollout summaries\n\n- Open the most relevant summary files under `memories/rollout_summaries/`.\n- Prefer summaries whose filenames, `cwd`, or `keywords` match the current project.\n- Extract:\n  - what the user asked for repeatedly\n  - what steps kept recurring\n  - what broke repeatedly\n  - what commands proved correctness\n  - what project-specific context had to be rediscovered\n\n### 3. Use raw sessions only as a fallback\n\n- Only search `sessions/` JSONL files if rollout summaries are missing a concrete detail.\n- Search by:\n  - exact `cwd`\n  - repo basename\n  - thread ID from a rollout summary\n  - specific file paths or commands\n- Use raw sessions to recover exact prompts, command sequences, diffs, or failure text, not to replace the summary pass.\n\n### 4. Turn session evidence into skill candidates\n\n- A candidate `new skill` should correspond to a repeated workflow, not just a repeated topic.\n- A candidate `skill update` should correspond to a workflow already covered by a local skill whose triggers, guardrails, or validation instructions no longer match the recorded sessions.\n- Prefer concrete evidence such as:\n  - \"this validation sequence appeared in 4 sessions\"\n  - \"this ownership confusion repeated across extractor and runtime fixes\"\n  - \"the same local script and telemetry probes had to be rediscovered repeatedly\"\n\n## Recommendation Rules\n\n- Recommend a new skill when:\n  - the same repo-specific workflow or failure mode appears multiple times across sessions\n  - success depends on project-specific paths, scripts, ownership rules, or validation steps\n  - the workflow benefits from strong defaults or failure ",
-      "tags": [
-        "ai",
-        "agent",
-        "workflow",
-        "cro"
-      ],
-      "useCases": [
-        "When the user asks what skills a project needs or which existing skills should be updated.",
-        "When recommendations should be grounded in project history, memory files, and local conventions."
-      ],
-      "scrapedAt": "2026-03-26T07:26:59.315Z"
-    },
-    {
-      "id": "antigravity-projection-patterns",
-      "name": "projection-patterns",
-      "slug": "projection-patterns",
-      "description": "Build read models and projections from event streams. Use when implementing CQRS read sides, building materialized views, or optimizing query performance in event-sourced systems.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/projection-patterns",
-      "content": "\n# Projection Patterns\n\nComprehensive guide to building projections and read models for event-sourced systems.\n\n## Use this skill when\n\n- Building CQRS read models\n- Creating materialized views from events\n- Optimizing query performance\n- Implementing real-time dashboards\n- Building search indexes from events\n- Aggregating data across streams\n\n## Do not use this skill when\n\n- The task is unrelated to projection patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "ai",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T07:00:04.114Z"
-    },
-    {
-      "id": "antigravity-prometheus-configuration",
-      "name": "prometheus-configuration",
-      "slug": "prometheus-configuration",
-      "description": "Complete guide to Prometheus setup, metric collection, scrape configuration, and recording rules.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/prometheus-configuration",
-      "content": "\n# Prometheus Configuration\n\nComplete guide to Prometheus setup, metric collection, scrape configuration, and recording rules.\n\n## Do not use this skill when\n\n- The task is unrelated to prometheus configuration\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Purpose\n\nConfigure Prometheus for comprehensive metric collection, alerting, and monitoring of infrastructure and applications.\n\n## Use this skill when\n\n- Set up Prometheus monitoring\n- Configure metric scraping\n- Create recording rules\n- Design alert rules\n- Implement service discovery\n\n## Prometheus Architecture\n\n```\n┌──────────────┐\n│ Applications │ ← Instrumented with client libraries\n└──────┬───────┘\n       │ /metrics endpoint\n       ↓\n┌──────────────┐\n│  Prometheus  │ ← Scrapes metrics periodically\n│    Server    │\n└──────┬───────┘\n       │\n       ├─→ AlertManager (alerts)\n       ├─→ Grafana (visualization)\n       └─→ Long-term storage (Thanos/Cortex)\n```\n\n## Installation\n\n### Kubernetes with Helm\n\n```bash\nhelm repo add prometheus-community https://prometheus-community.github.io/helm-charts\nhelm repo update\n\nhelm install prometheus prometheus-community/kube-prometheus-stack \\\n  --namespace monitoring \\\n  --create-namespace \\\n  --set prometheus.prometheusSpec.retention=30d \\\n  --set prometheus.prometheusSpec.storageVolumeSize=50Gi\n```\n\n### Docker Compose\n\n```yaml\nversion: '3.8'\nservices:\n  prometheus:\n    image: prom/prometheus:latest\n    ports:\n      - \"9090:9090\"\n    volumes:\n      - ./prometheus.yml:/etc/prometheus/prometheus.yml\n      - prometheus-data:/prometheus\n    command:\n      - '--config.file=/etc/prometheus/prometheus.yml'\n      - '--storage.tsdb.path=/prometheus'\n      - '--storage.tsdb.retention.time=30d'\n\nvolumes:\n  prometheus-data:\n```\n\n## Configuration File\n\n**prometheus.yml:**\n```yaml\nglobal:\n  scrape_interval: 15s\n  evaluation_interval: 15s\n  external_labels:\n    cluster: 'production'\n    region: 'us-west-2'\n\n# Alertmanager configuration\nalerting:\n  alertmanagers:\n    - static_configs:\n        - targets:\n          - alertmanager:9093\n\n# Load rules files\nrule_files:\n  - /etc/prometheus/rules/*.yml\n\n# Scrape configurations\nscrape_configs:\n  # Prometheus itself\n  - job_name: 'prometheus'\n    static_configs:\n      - targets: ['localhost:9090']\n\n  # Node exporters\n  - job_name: 'node-exporter'\n    static_configs:\n      - targets:\n        - 'node1:9100'\n        - 'node2:9100'\n        - 'node3:9100'\n    relabel_configs:\n      - source_labels: [__address__]\n        target_label: instance\n        regex: '([^:]+)(:[0-9]+)?'\n        replacement: '${1}'\n\n  # Kubernetes pods with annotations\n  - job_name: 'kubernetes-pods'\n    kubernetes_sd_configs:\n      - role: pod\n    relabel_configs:\n      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]\n        action: keep\n        regex: true\n      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]\n        action: replace\n        target_label: __metrics_path__\n        regex: (.+)\n      - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]\n        action: replace\n        regex: ([^:]+)(?::\\d+)?;(\\d+)\n        replacement: $1:$2\n        target_label: __address__\n      - source_labels: [__meta_kubernetes_namespace]\n        action: replace\n        target_label: namespace\n      - source_labels: [__meta_kubernetes_pod_name]\n        action: replace\n        target_label: pod\n\n  # Application metrics\n  - job_name: 'my-app'\n    static_configs:\n      - targets:\n        - 'app1.example.com:9090'\n        - 'app2.example.com:9090'\n    metrics_path: '/metrics'\n    scheme: 'https'\n    tls_config:\n      ca_file: /etc/prometheus/ca.crt\n      cert_file: /etc/prometheus/client.crt\n      key_file: /etc/prometheus/client.key\n```\n\n**Reference:** See `assets/prometheus.yml.template`\n\n## Scrape Configurations\n\n### Static Targets\n\n```yaml\nscrape_configs:\n  - job_name: 'static-targets'\n    static_configs:\n      - targets: ['host1:9100', 'host2:9100']\n        labels:\n          env: 'production'\n          region: 'us-west-2'\n```\n\n### File-based Service Discovery\n\n```yaml\nscrape_configs:\n  - job_name: 'file-sd'\n    file_sd_configs:\n      - files:\n        - /etc/prometheus/targets/*.json\n        - /etc/prometheus/targets/*.yml\n        refresh_interval: 5m\n```\n\n**targets/production.json:**\n```json\n[\n  {\n    \"targets\": [\"app1:9090\", \"app2:9090\"],\n    \"labels\": {\n      \"env\": \"production\",\n      \"service\": \"api\"\n    }\n  }\n]\n```\n\n### Kubernetes Service Discovery\n\n```yaml\nscrape_configs:\n  - job_name: 'kubernetes-services'\n    kubernetes_sd_configs:\n      - role: service\n    relabel_configs:\n      - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scrape]\n        action: keep\n        regex:",
-      "tags": [
-        "node",
-        "api",
-        "ai",
-        "template",
-        "design",
-        "document",
-        "image",
-        "docker",
-        "kubernetes",
-        "rag"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T07:00:04.653Z"
-    },
-    {
-      "id": "antigravity-prompt-caching",
-      "name": "prompt-caching",
-      "slug": "prompt-caching",
-      "description": "Caching strategies for LLM prompts including Anthropic prompt caching, response caching, and CAG (Cache Augmented Generation)",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/prompt-caching",
-      "content": "\n# Prompt Caching\n\nCaching strategies for LLM prompts including Anthropic prompt caching, response caching, and CAG (Cache Augmented Generation)\n\n## Capabilities\n\n- prompt-cache\n- response-cache\n- kv-cache\n- cag-patterns\n- cache-invalidation\n\n## Prerequisites\n\n- Knowledge: Caching fundamentals, LLM API usage, Hash functions\n- Skills_recommended: context-window-management\n\n## Scope\n\n- Does_not_cover: CDN caching, Database query caching, Static asset caching\n- Boundaries: Focus is LLM-specific caching, Covers prompt and response caching\n\n## Ecosystem\n\n### Primary_tools\n\n- Anthropic Prompt Caching - Native prompt caching in Claude API\n- Redis - In-memory cache for responses\n- OpenAI Caching - Automatic caching in OpenAI API\n\n## Patterns\n\n### Anthropic Prompt Caching\n\nUse Claude's native prompt caching for repeated prefixes\n\n**When to use**: Using Claude API with stable system prompts or context\n\nimport Anthropic from '@anthropic-ai/sdk';\n\nconst client = new Anthropic();\n\n// Cache the stable parts of your prompt\nasync function queryWithCaching(userQuery: string) {\n    const response = await client.messages.create({\n        model: \"claude-sonnet-4-20250514\",\n        max_tokens: 1024,\n        system: [\n            {\n                type: \"text\",\n                text: LONG_SYSTEM_PROMPT,  // Your detailed instructions\n                cache_control: { type: \"ephemeral\" }  // Cache this!\n            },\n            {\n                type: \"text\",\n                text: KNOWLEDGE_BASE,  // Large static context\n                cache_control: { type: \"ephemeral\" }\n            }\n        ],\n        messages: [\n            { role: \"user\", content: userQuery }  // Dynamic part\n        ]\n    });\n\n    // Check cache usage\n    console.log(`Cache read: ${response.usage.cache_read_input_tokens}`);\n    console.log(`Cache write: ${response.usage.cache_creation_input_tokens}`);\n\n    return response;\n}\n\n// Cost savings: 90% reduction on cached tokens\n// Latency savings: Up to 2x faster\n\n### Response Caching\n\nCache full LLM responses for identical or similar queries\n\n**When to use**: Same queries asked repeatedly\n\nimport { createHash } from 'crypto';\nimport Redis from 'ioredis';\n\nconst redis = new Redis(process.env.REDIS_URL);\n\nclass ResponseCache {\n    private ttl = 3600;  // 1 hour default\n\n    // Exact match caching\n    async getCached(prompt: string): Promise<string | null> {\n        const key = this.hashPrompt(prompt);\n        return await redis.get(`response:${key}`);\n    }\n\n    async setCached(prompt: string, response: string): Promise<void> {\n        const key = this.hashPrompt(prompt);\n        await redis.set(`response:${key}`, response, 'EX', this.ttl);\n    }\n\n    private hashPrompt(prompt: string): string {\n        return createHash('sha256').update(prompt).digest('hex');\n    }\n\n    // Semantic similarity caching\n    async getSemanticallySimilar(\n        prompt: string,\n        threshold: number = 0.95\n    ): Promise<string | null> {\n        const embedding = await embed(prompt);\n        const similar = await this.vectorCache.search(embedding, 1);\n\n        if (similar.length && similar[0].similarity > threshold) {\n            return await redis.get(`response:${similar[0].id}`);\n        }\n        return null;\n    }\n\n    // Temperature-aware caching\n    async getCachedWithParams(\n        prompt: string,\n        params: { temperature: number; model: string }\n    ): Promise<string | null> {\n        // Only cache low-temperature responses\n        if (params.temperature > 0.5) return null;\n\n        const key = this.hashPrompt(\n            `${prompt}|${params.model}|${params.temperature}`\n        );\n        return await redis.get(`response:${key}`);\n    }\n}\n\n### Cache Augmented Generation (CAG)\n\nPre-cache documents in prompt instead of RAG retrieval\n\n**When to use**: Document corpus is stable and fits in context\n\n// CAG: Pre-compute document context, cache in prompt\n// Better than RAG when:\n// - Documents are stable\n// - Total fits in context window\n// - Latency is critical\n\nclass CAGSystem {\n    private cachedContext: string | null = null;\n    private lastUpdate: number = 0;\n\n    async buildCachedContext(documents: Document[]): Promise<void> {\n        // Pre-process and format documents\n        const formatted = documents.map(d =>\n            `## ${d.title}\\n${d.content}`\n        ).join('\\n\\n');\n\n        // Store with timestamp\n        this.cachedContext = formatted;\n        this.lastUpdate = Date.now();\n    }\n\n    async query(userQuery: string): Promise<string> {\n        // Use cached context directly in prompt\n        const response = await client.messages.create({\n            model: \"claude-sonnet-4-20250514\",\n            max_tokens: 1024,\n            system: [\n                {\n                    type: \"text\",\n                    text: \"You are a helpful assistant with access to the following documentation.\",\n                    cache_control: { type: \"ephemeral\" }\n                },\n                {\n                    typ",
-      "tags": [
-        "api",
-        "claude",
-        "ai",
-        "llm",
-        "workflow",
-        "document",
-        "rag"
-      ],
-      "useCases": [
-        "User mentions or implies: prompt caching",
-        "User mentions or implies: cache prompt",
-        "User mentions or implies: response cache",
-        "User mentions or implies: cag",
-        "User mentions or implies: cache augmented"
-      ],
-      "scrapedAt": "2026-01-26T13:20:57.969Z"
-    },
-    {
-      "id": "antigravity-prompt-engineer",
-      "name": "prompt-engineer",
-      "slug": "prompt-engineer",
-      "description": "Transforms user prompts into optimized prompts using frameworks (RTF, RISEN, Chain of Thought, RODES, Chain of Density, RACE, RISE, STAR, SOAP, CLEAR, GROW)",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/prompt-engineer",
-      "content": "\n## Purpose\n\nThis skill transforms raw, unstructured user prompts into highly optimized prompts using established prompting frameworks. It analyzes user intent, identifies task complexity, and intelligently selects the most appropriate framework(s) to maximize Claude/ChatGPT output quality.\n\nThe skill operates in \"magic mode\" - it works silently behind the scenes, only interacting with users when clarification is critically needed. Users receive polished, ready-to-use prompts without technical explanations or framework jargon.\n\nThis is a **universal skill** that works in any terminal context, not limited to Obsidian vaults or specific project structures.\n\n## When to Use\nInvoke this skill when:\n\n- User provides a vague or generic prompt (e.g., \"help me code Python\")\n- User has a complex idea but struggles to articulate it clearly\n- User's prompt lacks structure, context, or specific requirements\n- Task requires step-by-step reasoning (debugging, analysis, design)\n- User needs a prompt for a specific AI task but doesn't know prompting frameworks\n- User wants to improve an existing prompt's effectiveness\n- User asks variations of \"how do I ask AI to...\" or \"create a prompt for...\"\n\n## Workflow\n\n### Step 1: Analyze Intent\n\n**Objective:** Understand what the user truly wants to accomplish.\n\n**Actions:**\n1. Read the raw prompt provided by the user\n2. Detect task characteristics:\n   - **Type:** coding, writing, analysis, design, learning, planning, decision-making, creative, etc.\n   - **Complexity:** simple (one-step), moderate (multi-step), complex (requires reasoning/design)\n   - **Clarity:** clear intention vs. ambiguous/vague\n   - **Domain:** technical, business, creative, academic, personal, etc.\n3. Identify implicit requirements:\n   - Does user need examples?\n   - Is output format specified?\n   - Are there constraints (time, resources, scope)?\n   - Is this exploratory or execution-focused?\n\n**Detection Patterns:**\n- **Simple tasks:** Short prompts (<50 chars), single verb, no context\n- **Complex tasks:** Long prompts (>200 chars), multiple requirements, conditional logic\n- **Ambiguous tasks:** Generic verbs (\"help\", \"improve\"), missing object/context\n- **Structured tasks:** Mentions steps, phases, deliverables, stakeholders\n\n\n### Step 3: Select Framework(s)\n\n**Objective:** Map task characteristics to optimal prompting framework(s).\n\n**Framework Mapping Logic:**\n\n| Task Type | Recommended Framework(s) | Rationale |\n|-----------|-------------------------|-----------|\n| **Role-based tasks** (act as expert, consultant) | **RTF** (Role-Task-Format) | Clear role definition + task + output format |\n| **Step-by-step reasoning** (debugging, proof, logic) | **Chain of Thought** | Encourages explicit reasoning steps |\n| **Structured projects** (multi-phase, deliverables) | **RISEN** (Role, Instructions, Steps, End goal, Narrowing) | Comprehensive structure for complex work |\n| **Complex design/analysis** (systems, architecture) | **RODES** (Role, Objective, Details, Examples, Sense check) | Balances detail with validation |\n| **Summarization** (compress, synthesize) | **Chain of Density** | Iterative refinement to essential info |\n| **Communication** (reports, presentations, storytelling) | **RACE** (Role, Audience, Context, Expectation) | Audience-aware messaging |\n| **Investigation/analysis** (research, diagnosis) | **RISE** (Research, Investigate, Synthesize, Evaluate) | Systematic analytical approach |\n| **Contextual situations** (problem-solving with background) | **STAR** (Situation, Task, Action, Result) | Context-rich problem framing |\n| **Documentation** (medical, technical, records) | **SOAP** (Subjective, Objective, Assessment, Plan) | Structured information capture |\n| **Goal-setting** (OKRs, objectives, targets) | **CLEAR** (Collaborative, Limited, Emotional, Appreciable, Refinable) | Goal clarity and actionability |\n| **Coaching/development** (mentoring, growth) | **GROW** (Goal, Reality, Options, Will) | Developmental conversation structure |\n\n**Blending Strategy:**\n- **Combine 2-3 frameworks** when task spans multiple types\n- Example: Complex technical project → **RODES + Chain of Thought** (structure + reasoning)\n- Example: Leadership decision → **CLEAR + GROW** (goal clarity + development)\n\n**Selection Criteria:**\n- Primary framework = best match to core task type\n- Secondary framework(s) = address additional complexity dimensions\n- Avoid over-engineering: simple tasks get simple frameworks\n\n**Critical Rule:** This selection happens **silently** - do not explain framework choice to user.\n\nRole: You are a senior software architect. [RTF - Role]\n\nObjective: Design a microservices architecture for [system]. [RODES - Objective]\n\nApproach this step-by-step: [Chain of Thought]\n1. Analyze current monolithic constraints\n2. Identify service boundaries\n3. Design inter-service communication\n4. Plan data consistency strategy\n\nDetails: [RODES - Details]\n- Expected traffic: [X]\n- Data volume: [Y]\n- Team size: [Z]\n\n",
-      "tags": [
-        "python",
-        "markdown",
-        "api",
-        "claude",
-        "ai",
-        "gpt",
-        "automation",
-        "workflow",
-        "template",
-        "design"
-      ],
-      "useCases": [
-        "User provides a vague or generic prompt (e.g., \"help me code Python\")",
-        "User has a complex idea but struggles to articulate it clearly",
-        "User's prompt lacks structure, context, or specific requirements",
-        "Task requires step-by-step reasoning (debugging, analysis, design)",
-        "User needs a prompt for a specific AI task but doesn't know prompting frameworks"
-      ],
-      "scrapedAt": "2026-01-26T13:20:59.110Z"
-    },
-    {
-      "id": "antigravity-prompt-engineering-patterns",
-      "name": "prompt-engineering-patterns",
-      "slug": "prompt-engineering-patterns",
-      "description": "Master advanced prompt engineering techniques to maximize LLM performance, reliability, and controllability.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/prompt-engineering-patterns",
-      "content": "\n# Prompt Engineering Patterns\n\nMaster advanced prompt engineering techniques to maximize LLM performance, reliability, and controllability.\n\n## Do not use this skill when\n\n- The task is unrelated to prompt engineering patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Use this skill when\n\n- Designing complex prompts for production LLM applications\n- Optimizing prompt performance and consistency\n- Implementing structured reasoning patterns (chain-of-thought, tree-of-thought)\n- Building few-shot learning systems with dynamic example selection\n- Creating reusable prompt templates with variable interpolation\n- Debugging and refining prompts that produce inconsistent outputs\n- Implementing system prompts for specialized AI assistants\n\n## Core Capabilities\n\n### 1. Few-Shot Learning\n- Example selection strategies (semantic similarity, diversity sampling)\n- Balancing example count with context window constraints\n- Constructing effective demonstrations with input-output pairs\n- Dynamic example retrieval from knowledge bases\n- Handling edge cases through strategic example selection\n\n### 2. Chain-of-Thought Prompting\n- Step-by-step reasoning elicitation\n- Zero-shot CoT with \"Let's think step by step\"\n- Few-shot CoT with reasoning traces\n- Self-consistency techniques (sampling multiple reasoning paths)\n- Verification and validation steps\n\n### 3. Prompt Optimization\n- Iterative refinement workflows\n- A/B testing prompt variations\n- Measuring prompt performance metrics (accuracy, consistency, latency)\n- Reducing token usage while maintaining quality\n- Handling edge cases and failure modes\n\n### 4. Template Systems\n- Variable interpolation and formatting\n- Conditional prompt sections\n- Multi-turn conversation templates\n- Role-based prompt composition\n- Modular prompt components\n\n### 5. System Prompt Design\n- Setting model behavior and constraints\n- Defining output formats and structure\n- Establishing role and expertise\n- Safety guidelines and content policies\n- Context setting and background information\n\n## Quick Start\n\n```python\nfrom prompt_optimizer import PromptTemplate, FewShotSelector\n\n# Define a structured prompt template\ntemplate = PromptTemplate(\n    system=\"You are an expert SQL developer. Generate efficient, secure SQL queries.\",\n    instruction=\"Convert the following natural language query to SQL:\\n{query}\",\n    few_shot_examples=True,\n    output_format=\"SQL code block with explanatory comments\"\n)\n\n# Configure few-shot learning\nselector = FewShotSelector(\n    examples_db=\"sql_examples.jsonl\",\n    selection_strategy=\"semantic_similarity\",\n    max_examples=3\n)\n\n# Generate optimized prompt\nprompt = template.render(\n    query=\"Find all users who registered in the last 30 days\",\n    examples=selector.select(query=\"user registration date filter\")\n)\n```\n\n## Key Patterns\n\n### Progressive Disclosure\nStart with simple prompts, add complexity only when needed:\n\n1. **Level 1**: Direct instruction\n   - \"Summarize this article\"\n\n2. **Level 2**: Add constraints\n   - \"Summarize this article in 3 bullet points, focusing on key findings\"\n\n3. **Level 3**: Add reasoning\n   - \"Read this article, identify the main findings, then summarize in 3 bullet points\"\n\n4. **Level 4**: Add examples\n   - Include 2-3 example summaries with input-output pairs\n\n### Instruction Hierarchy\n```\n[System Context] → [Task Instruction] → [Examples] → [Input Data] → [Output Format]\n```\n\n### Error Recovery\nBuild prompts that gracefully handle failures:\n- Include fallback instructions\n- Request confidence scores\n- Ask for alternative interpretations when uncertain\n- Specify how to indicate missing information\n\n## Best Practices\n\n1. **Be Specific**: Vague prompts produce inconsistent results\n2. **Show, Don't Tell**: Examples are more effective than descriptions\n3. **Test Extensively**: Evaluate on diverse, representative inputs\n4. **Iterate Rapidly**: Small changes can have large impacts\n5. **Monitor Performance**: Track metrics in production\n6. **Version Control**: Treat prompts as code with proper versioning\n7. **Document Intent**: Explain why prompts are structured as they are\n\n## Common Pitfalls\n\n- **Over-engineering**: Starting with complex prompts before trying simple ones\n- **Example pollution**: Using examples that don't match the target task\n- **Context overflow**: Exceeding token limits with excessive examples\n- **Ambiguous instructions**: Leaving room for multiple interpretations\n- **Ignoring edge cases**: Not testing on unusual or boundary inputs\n\n## Integration Patterns\n\n### With RAG Systems\n```python\n# Combine retrieved context with prompt engineering\nprompt = f\"\"\"Given the following context:\n{retrieved_context}\n\n{few_shot_examples}\n\nQuestion: {user_question}\n\nProvide a detailed a",
-      "tags": [
-        "python",
-        "api",
-        "ai",
-        "llm",
-        "workflow",
-        "template",
-        "design",
-        "document",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T07:00:05.501Z"
-    },
-    {
       "id": "composio-raffle-winner-picker",
       "name": "raffle-winner-picker",
       "slug": "raffle-winner-picker",
@@ -26644,28 +26665,28 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 377
+      "count": 375
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 352
+      "count": 350
     },
     {
       "id": "development-code-tools",
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 121
+      "count": 123
     },
     {
       "id": "creative-media",
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 99
+      "count": 101
     },
     {
       "id": "security-systems",
@@ -26716,48 +26737,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 156753
+      "stars": 158095
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 14,
       "newSkillCount": 3,
-      "stars": 119214
+      "stars": 119737
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 54415
+      "stars": 54615
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 1,
-      "stars": 71368
+      "stars": 71426
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1125
+      "stars": 1128
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1002,
-      "newSkillCount": 9,
-      "stars": 33548
+      "newSkillCount": 15,
+      "stars": 33720
     }
   ],
-  "lastUpdated": "2026-04-17T08:03:18.498Z",
+  "lastUpdated": "2026-04-18T07:22:42.981Z",
   "stats": {
     "totalSkills": 1100,
-    "newSkills": 21,
-    "scrapedAt": "2026-04-17T08:03:18.498Z"
+    "newSkills": 27,
+    "scrapedAt": "2026-04-18T07:22:42.981Z"
   }
 }

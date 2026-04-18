@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-mise-configurator",
+  "name": "mise-configurator",
+  "slug": "mise-configurator",
+  "description": "Generate production-ready mise.toml setups for local development, CI/CD pipelines, and toolchain standardization.",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mise-configurator",
+  "content": "# Mise Configurator\n\n## Overview\n\nThis skill generates clean, production-ready `mise.toml` configurations for local development environments and CI/CD pipelines.\n\nIt helps standardize runtime versions, simplify onboarding, replace legacy version managers like `asdf`, `nvm`, and `pyenv`, and create reproducible multi-language environments with minimal setup effort.\n\n## When to Use This Skill\n\n- Use when you need to create or update a `mise.toml`\n- Use when working with Node.js, Python, Go, Rust, Java, Bun, Terraform, or mixed stacks\n- Use when the user asks about CI/CD runtime setup using mise\n- Use when migrating from `.tool-versions`, `asdf`, `nvm`, or `pyenv`\n- Use when standardizing tool versions across teams or monorepos\n\n## How It Works\n\n### Step 1: Detect Project Context\n\nInspect available repository files such as:\n\n- `package.json`\n- `pnpm-lock.yaml`\n- `pyproject.toml`\n- `requirements.txt`\n- `go.mod`\n- `Cargo.toml`\n- `.tool-versions`\n- `Dockerfile`\n- GitHub Actions or CI files\n\nInfer languages, package managers, and pinned versions.\n\n### Step 2: Generate `mise.toml`\n\nCreate a minimal, valid, copy-paste-ready configuration using:\n\n- existing pinned versions when found\n- explicit user-provided target versions when absent\n- practical defaults for developer productivity\n- concrete pinned versions in shared production configs\n\n### Step 3: Add Bootstrap Commands\n\nProvide setup commands such as:\n\n```bash\nmise trust\nmise install\n```\n\n### Step 4: Generate CI/CD Integration\n\nIf requested, generate pipeline examples using mise with caching and runtime installation.\n\n## Examples\n\n### Example 1: Node.js + pnpm Project\n\n```toml\n[tools]\nnode = \"22.11.0\"\npnpm = \"9.15.0\"\n```\n\n### Example 2: Python + GitHub Actions\n\n```toml\n[tools]\npython = \"3.12.7\"\npoetry = \"1.8.4\"\n```\n\n```yaml\nsteps:\n  - uses: actions/checkout@v4\n  - uses: jdx/mise-action@v2\n  - run: poetry install\n  - run: pytest\n```\n\n## Best Practices\n\n- ✅ Respect versions already pinned in the repository\n    \n- ✅ Keep configs minimal and readable\n    \n- ✅ Prefer stable runtime releases\n    \n- ✅ Generate CI examples with caching\n\n- ✅ Ask for target versions before pinning when the repository does not already declare them\n\n- ❌ Do not use floating `latest` or `lts` aliases in shared production configs unless explicitly requested\n    \n- ❌ Do not over-engineer unnecessary tool entries\n    \n- ❌ Do not ignore existing lockfiles or version files\n    \n\n## Limitations\n\n- This skill does not replace environment-specific validation, testing, or expert review.\n    \n- Stop and ask for clarification if required inputs, permissions, or safety boundaries are missing.\n    \n- Runtime availability may vary by OS, shell, or CI platform.\n    \n- Some plugins or niche tools may require manual adjustment.\n    \n\n## Security & Safety Notes\n\n- Review generated shell commands before execution.\n    \n- Confirm CI/CD permissions before modifying pipelines.\n    \n- Validate runtime versions against production requirements.\n    \n- Use only in authorized repositories and environments.\n    \n\n## Common Pitfalls\n\n- **Problem:** Wrong runtime version selected  \n    **Solution:** Check repository lockfiles and pinned versions first.\n    \n- **Problem:** CI installs are slow  \n    **Solution:** Enable cache layers and reuse mise cache directories.\n    \n- **Problem:** Tool missing from registry  \n    **Solution:** Verify plugin support or install manually.\n    \n\n## Related Skills\n\n- `@docker-expert` - Use when building containerized development environments\n    \n- `@github-actions-templates` - Use for advanced workflow automation\n    \n- `@monorepo-architect` - Use for large multi-package repositories\n",
+  "tags": [
+    "python",
+    "node",
+    "claude",
+    "ai",
+    "automation",
+    "workflow",
+    "template",
+    "security",
+    "docker",
+    "cro"
+  ],
+  "useCases": [
+    "Use when you need to create or update a `mise.toml`",
+    "Use when working with Node.js, Python, Go, Rust, Java, Bun, Terraform, or mixed stacks",
+    "Use when the user asks about CI/CD runtime setup using mise",
+    "Use when migrating from `.tool-versions`, `asdf`, `nvm`, or `pyenv`",
+    "Use when standardizing tool versions across teams or monorepos"
+  ],
+  "scrapedAt": "2026-04-18T07:22:01.728Z"
+}

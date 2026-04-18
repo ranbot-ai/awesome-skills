@@ -1,0 +1,29 @@
+{
+  "id": "antigravity-not-human-search-mcp",
+  "name": "not-human-search-mcp",
+  "slug": "not-human-search-mcp",
+  "description": "Search AI-ready websites, inspect indexed site details, verify MCP endpoints, and discover tools and APIs using the Not Human Search MCP server",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/not-human-search-mcp",
+  "content": "\n# Not Human Search MCP\n\n## Overview\n\nNot Human Search is a remote MCP server that lets AI agents search a curated index of 1,750+ AI-ready websites, inspect indexed site details, submit new sites for analysis, and verify live MCP endpoints via JSON-RPC probe. It is designed for AI agents that need to discover tools, APIs, and services at runtime without relying on hardcoded lists.\n\n## When to Use This Skill\n\n- Use when an AI agent needs to discover tools, APIs, or MCP servers for a specific task\n- Use when you want to check whether a website exposes machine-readable endpoints (llms.txt, OpenAPI, MCP)\n- Use when verifying that an MCP endpoint is actually responding to JSON-RPC\n- Use when building agent workflows that need to find and connect to external services dynamically\n\n## MCP Configuration\n\nAdd the Not Human Search MCP server to your client configuration. The endpoint uses streamable HTTP and requires no authentication.\n\n### Claude Desktop / Cursor / Windsurf\n\n```json\n{\n  \"mcpServers\": {\n    \"not-human-search\": {\n      \"url\": \"https://nothumansearch.ai/mcp\"\n    }\n  }\n}\n```\n\nNo API key or authentication is required.\n\n## Available Tools\n\n### `search_agents`\n\nSearch the index of 1,750+ AI-ready websites by keyword. Returns ranked results with scores, categories, and available endpoints.\n\n```\nsearch_agents({ query: \"code review tools\", limit: 10 })\n```\n\n### `get_site_details`\n\nCheck a specific domain's AI-readiness score and available machine-readable endpoints.\n\n```\nget_site_details({ domain: \"linear.app\" })\n```\n\n### `get_stats`\n\nGet aggregate index statistics, including total indexed sites, categories, and endpoint coverage.\n\n```\nget_stats({})\n```\n\n### `submit_site`\n\nSubmit a URL for crawling and AI-readiness analysis.\n\n```\nsubmit_site({ url: \"https://example.com\" })\n```\n\n### `verify_mcp`\n\nVerify whether a URL is a live MCP endpoint by sending a JSON-RPC probe and checking for a valid response.\n\n```\nverify_mcp({ url: \"https://example.com/mcp\" })\n```\n\n### `list_categories`\n\nList available discovery categories for narrowing searches.\n\n```\nlist_categories({})\n```\n\n### `get_top_sites`\n\nRetrieve top-ranked indexed sites.\n\n```\nget_top_sites({ limit: 10 })\n```\n\n### `register_monitor`\n\nRegister a domain monitor using a user-provided email address.\n\n```\nregister_monitor({ domain: \"example.com\", email: \"user@example.com\" })\n```\n\n## Examples\n\n### Example 1: Discover Code Review Tools\n\n```text\nUse @not-human-search-mcp to find code review tools that expose MCP or API endpoints.\n```\n\nThe agent will call `search_agents({ query: \"code review\", limit: 10 })` and return ranked results with scores and endpoint details.\n\n### Example 2: Check if a Site is AI-Ready\n\n```text\nUse @not-human-search-mcp to check the AI-readiness of linear.app.\n```\n\nThe agent will call `get_site_details({ domain: \"linear.app\" })` and return the site's score breakdown.\n\n### Example 3: Verify an MCP Endpoint\n\n```text\nUse @not-human-search-mcp to verify that https://heliumtrades.com/mcp is a working MCP server.\n```\n\nThe agent will call `verify_mcp({ url: \"https://heliumtrades.com/mcp\" })` and confirm whether it responds to JSON-RPC.\n\n## Best Practices\n\n- Use `search_agents` for broad discovery, then `get_site_details` for detailed analysis of specific indexed results\n- Use `verify_mcp` to confirm an MCP endpoint is live before wiring it into an agent workflow\n- Use `submit_site` when a relevant site is absent from the index and the user wants it analyzed\n- Use `register_monitor` only with an email address the user explicitly provides for monitoring\n- Combine with other MCP skills to build dynamic tool-discovery pipelines\n\n## Limitations\n\n- The search index covers 1,750+ sites and is updated regularly, but may not include every site on the internet.\n- Scoring reflects machine-readable signals (llms.txt, OpenAPI, MCP, structured data) rather than content quality.\n- `verify_mcp` sends a JSON-RPC probe to the target URL; only use it on URLs you expect to be MCP endpoints.\n- `register_monitor` requires a user-provided email address and consent to receive monitoring notifications.\n\n## Related Skills\n\n- `@mcp-builder` - For building your own MCP servers\n- `@ai-dev-jobs-mcp` - Search AI/ML job listings via MCP\n",
+  "tags": [
+    "api",
+    "mcp",
+    "claude",
+    "ai",
+    "agent",
+    "llm",
+    "workflow",
+    "design",
+    "rag"
+  ],
+  "useCases": [
+    "Use when an AI agent needs to discover tools, APIs, or MCP servers for a specific task",
+    "Use when you want to check whether a website exposes machine-readable endpoints (llms.txt, OpenAPI, MCP)",
+    "Use when verifying that an MCP endpoint is actually responding to JSON-RPC",
+    "Use when building agent workflows that need to find and connect to external services dynamically"
+  ],
+  "scrapedAt": "2026-04-18T07:22:14.924Z"
+}
