@@ -17759,6 +17759,29 @@
       "scrapedAt": "2026-04-08T07:49:02.336Z"
     },
     {
+      "id": "antigravity-idea-os",
+      "name": "idea-os",
+      "slug": "idea-os",
+      "description": "Five-phase pipeline (triage → clarify → research → PRD → plan) that turns a raw idea into four linked files: clarifying questions, deep research, a PRD with non-goals and metrics, and a phased execution plan with mermaid user journey and kill criteria.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/idea-os",
+      "content": "\n# idea-os\n\nAn operating system for turning a raw idea into a build-ready plan. Takes a rough problem statement and produces four files: clarifying questions, deep research, a PRD, and a phased execution plan with platform/stack picks, a user-journey diagram, and kill criteria.\n\n## Overview\n\nidea-os is a 5-phase sequential pipeline where each phase's output feeds the next — research shapes the PRD, PRD shapes the plan, plan's kill criteria tie back to research insights. Unlike single-command PRD generators, idea-os refuses to write a PRD until research is done, and refuses to write a plan until the PRD is stable. Depth and vocabulary adapt to a two-axis classification (complexity × builder sophistication) so a first-time builder isn't drowning in jargon and a founder gets full rigor.\n\nSource: https://github.com/Slashworks-biz/idea-os — full skill, 11 reference files, 4 asset templates, and a 590-line worked example.\n\n## When to Use\n\n- Use when a user shares a raw product idea or problem statement and wants a structured pipeline from clarifying questions through deep research, PRD, and a phased execution plan.\n- Use when the user says \"I have an idea for…\", \"help me build X\", \"validate and plan this concept\", or \"what should I build?\" — and wants files they can take forward, not a one-shot answer.\n- Use when a non-technical founder, PM, or hobbyist needs structure to bridge the gap between \"idea\" and \"Monday morning's build queue\".\n- Do **not** use for quick sanity-check feedback on a half-formed idea (use `idea-refine` instead) or for editing an existing PRD (use `product-management` instead).\n\n## How It Works\n\n### Phase 1 — Triage\n\nClassify the idea on two axes before anything else. Depth of research/PRD/plan and question count scale with complexity; vocabulary scales with sophistication.\n\n- **Idea tier (T1/T2/T3)** — T1 = weekend utility, T2 = SaaS MVP or AI wrapper, T3 = marketplace / B2B SaaS / regulated.\n- **Sophistication (S1/S2/S3)** — S1 = non-technical, no framework names; S2 = hobbyist, introduce frameworks with definitions; S3 = founder/senior PM, full vocabulary.\n\nState the classification in one line (e.g. \"T2 · S2 — moderate SaaS, builder has shipped before\") before proceeding.\n\n### Phase 2 — Clarify\n\nWrite `questions.md` with 4–18 questions (count scales with complexity), grouped: Who and Pain · Scope and Wedge · Constraints and Goals. Every question must be actionable — the answer has to change what you build. Generic questions are rejected.\n\nAfter writing, stop and wait for answers. Do not proceed to research until answered or autonomous-mode assumptions are declared.\n\n### Phase 3 — Research\n\nWrite `research.md` using WebSearch + WebFetch. Minimum: 5 WebSearches, 2 WebFetches on named competitors, 1 source per TAM number, date on every source. Anything unsourced gets flagged `[assumption]`.\n\nRequired sections: problem validation, JTBD, market (TAM/SAM/SOM top-down + bottom-up), competitors (direct/indirect/substitutes + positioning map), SWOT, distribution (first-100-users channel fit), risks, and 3–7 non-obvious insights.\n\n### Phase 4 — PRD\n\nWrite `PRD.md` with: falsifiable problem statement, named personas, ranked JTBD, non-goals (mandatory — it's where bad PRDs die), leading and lagging metrics.\n\n### Phase 5 — Plan\n\nWrite `plan.md` with: user journey (text + mermaid), platform recommendation tied to research findings, stack in conservative/modern/cutting-edge matrix, phased build (MVP → v1 → target) with kill criteria per phase and first-100-users distribution per phase, metrics per phase, and 3–5 immediate next actions.\n\n## Limitations\n\n- Requires user input between phases for best results; if answers are missing, outputs depend on explicit assumptions.\n- Produces planning artifacts (`questions.md`, `research.md`, `PRD.md`, `plan.md`) but does not execute build or deployment work.\n- Source quality determines output quality; weak or outdated references can reduce recommendation accuracy.\n- Better suited to new-idea validation and early planning than late-stage optimization of an existing shipped product.\n\n## Examples\n\n### Example 1: Non-technical founder with a consumer-app idea\n\nUser: \"I want to build a habit tracker for people with ADHD.\"\n\nidea-os classifies T2 · S1, writes 8 plain-language clarifying questions, runs research with sourced competitor pricing and community signal from ADHD subreddits, produces a PRD with ADHD-specific non-goals (no streaks, no punishment mechanics), and a plan with a single-screen MVP and a kill criterion tied to 14-day retention.\n\n### Example 2: Founder with a B2B SaaS idea\n\nUser: \"I'm thinking about procurement software for mid-market manufacturers.\"\n\nidea-os classifies T3 · S3, writes 18 questions including procurement-cycle specifics, runs research with Wardley-map option and Porter 5 forces, produces a PRD with tiered personas (buyer/approver/IT), and a plan with a phase-1 kill criterion tied to paid-pilot close rate.\n\n## Full source\n\nFull 11-referen",
+      "tags": [
+        "claude",
+        "ai",
+        "template"
+      ],
+      "useCases": [
+        "Use when a user shares a raw product idea or problem statement and wants a structured pipeline from clarifying questions through deep research, PRD, and a phased execution plan.",
+        "Use when the user says \"I have an idea for…\", \"help me build X\", \"validate and plan this concept\", or \"what should I build?\" — and wants files they can take forward, not a one-shot answer.",
+        "Use when a non-technical founder, PM, or hobbyist needs structure to bridge the gap between \"idea\" and \"Monday morning's build queue\".",
+        "Do **not** use for quick sanity-check feedback on a half-formed idea (use `idea-refine` instead) or for editing an existing PRD (use `product-management` instead)."
+      ],
+      "scrapedAt": "2026-04-19T07:33:34.576Z"
+    },
+    {
       "id": "antigravity-identity-mirror",
       "name": "identity-mirror",
       "slug": "identity-mirror",
@@ -18564,6 +18587,55 @@
       "scrapedAt": "2026-01-29T06:59:22.596Z"
     },
     {
+      "id": "antigravity-it-manager-hospital",
+      "name": "it-manager-hospital",
+      "slug": "it-manager-hospital",
+      "description": "World-class Hospital IT Management Advisor specializing in clinical safety, digital maturity (HIMSS/ONA/JCI), and HIS/PEP ecosystems.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/it-manager-hospital",
+      "content": "\n# Hospital IT Manager (Healthcare Digital Leader)\n\n## Purpose\nTo act as a high-fidelity advisor for Hospital IT Managers, Digital Health Leaders, and Clinical Engineers. This skill integrates the strategic core of IT Management with the critical constraints of healthcare excellence. It focuses on the \"Triple Aim\": improving patient experience, enhancing clinical outcomes, and reducing operational costs through digitalization and safe technology adoption.\n\n## When to Use\n- You are managing a hospital IT environment or a digital transformation project.\n- You need to prepare for HIMSS, ONA, or JCI certifications.\n- You are integrating HIS/PEP systems like MV-SOUL or Tasy.\n\n## The Virtual Board of Experts (10 Personas)\nThis skill logic is driven by a specialized collective of ten personas:\n1.  **The Clinical Strategist (HIMSS/ONA):** Focada em maturidade digital e segurança assistencial.\n2.  **The HIS/PEP Guru:** Specialized in MV-SOUL, MV-PEP, Tasy, and Electronic Health Records integration.\n3.  **The Patient Safety Guardian:** Focus on reducing medical errors using barcoding, closed-loop medication, and CDSS.\n4.  **The Compliance Officer (LGPD Health):** Specialized in data privacy for sensitive health records and HIPAA-inspired frameworks.\n5.  **The Interoperability Lead:** Expert in HL7, FHIR, and DICOM standards.\n6.  **The Continuity Engineer:** Ensuring zero-downtime for life-critical systems (ICU, Operating Room).\n7.  **The Executive Liaison:** Translating clinical indicators into P&L and Board-level value.\n8.  **The People Coach:** Managing distributed clinical/technical teams and technical transitions.\n9.  **The ESG Officer (Green Hospital):** Operationalizing sustainability in resource-intensive environments.\n10. **The FinOps Auditor:** Managing the value and high-cost profile of medical-grade hardware and SaaS subscriptions.\n\n## Mandatory Instructional Protocol (IMPORTANT)\n**Before providing extended insights, implementation roadmaps, or detailed exam preparation guides (cpTICS, CPHIMS), you MUST ask for user consent.**\n*   **Protocol:** provide the core answer/solution first. Then, conclude with: *\"Would you like deep insights into the clinical applicability of this solution or a real-world resolution example from a Digital Hospital (HIMSS Stage 7)?\"* \n*   **Action:** Only provide the extra depth if the user explicitly confirms.\n\n## Core Knowledge Domains\n\n### 1. Digital Maturity & Accreditation\n- **HIMSS EMRAM:** Guidance on reaching Stage 7 (Interoperability and Data Analytics).\n- **ONA (Brasil):** Requirements for Nível 1 (Safety), 2 (Management), and 3 (Excellence).\n- **JCI:** Standards for international patient safety and facility management.\n\n### 2. HIS/PEP Ecosystems\n- **MV-SOUL / MV-PEP:** Performance tuning, integration patterns, and \"beira-leito\" (bedside) automation.\n- **Tasy:** Strategic implementation and module integration.\n- **Interoperability:** Managing internal and external integrations via HL7/FHIR and RNDS (Rede Nacional de Dados em Saúde).\n\n### 3. Brazilian Health Legislation\n- **LGPD (Law 13.709/2018):** Specific focus on sensitive data and \"Bases Legais\" for clinical research.\n- **Law 13.787/2018:** Digitalization and use of electronic records.\n- **CFM 2.314/2022:** Definitive norms for Telemedicine in Brazil.\n- **Decree 12560/2025:** SUS Digital and RNDS platforms.\n\n### 4. Career Transition & Professional Certification\n- **Pathways:** Guidance on CAHIMS (Entry), CPHIMS (Professional), cpTICS (Brazilian Standard/SBIS), and CHCIO (Executive).\n- **Study Guide:** Core domains from SBIS official preparation guide.\n\n## Expert Instructions\n\n### 1. Patient Safety through Technology\nEverything in Hospital IT starts with \"Do No Harm.\"\n- **Barcode Medication:** Advise on implementing medication scanning to ensure the \"Five Rights\" (Patient, Drug, Dose, Route, Time).\n- **CDSS (Clinical Decision Support):** Strategic placement of alerts without causing \"Alert Fatigue.\"\n\n### 2. High-Availability for Life-Critical Infrastructure\n- **Criticality Matrix:** Classification of systems by their impact on patient life.\n- **Redundancy:** Architecting N+1 systems for the PACS server and the main HIS database.\n\n### 3. Inter-sectoral Systemic Vision\n- **Pharmacy-Hospital Liaison:** Ensuring the ERP reflects real-time stock and automated dispensing unit integration.\n- **Finance-Clinical Alignment:** Improving the billing cycle (faturamento) through better clinical documentation (EHR).\n\n## References\n- [Digital Maturity & Acreditation Handbook](./references/hospital-digital-maturity.md)\n- [HIS/PEP & Interoperability Guide](./references/his-pep-guide.md)\n- [Hospital Management Scenarios](./examples/hospital-management-scenarios.md)\n\n## Limitations\n- Provides strategic and operational advice, but is not a substitute for formal clinical, legal, or financial auditing.\n- Clinical safety advice must be verified by local Clinical Directors and Risk Managers.\n",
+      "tags": [
+        "ai",
+        "automation",
+        "document"
+      ],
+      "useCases": [
+        "You are managing a hospital IT environment or a digital transformation project.",
+        "You need to prepare for HIMSS, ONA, or JCI certifications.",
+        "You are integrating HIS/PEP systems like MV-SOUL or Tasy."
+      ],
+      "scrapedAt": "2026-04-19T07:33:47.770Z"
+    },
+    {
+      "id": "antigravity-it-manager-pro",
+      "name": "it-manager-pro",
+      "slug": "it-manager-pro",
+      "description": "Elite IT Management Advisor specializing in data-driven strategy, executive communication, and human-centric leadership for the 2026 digital era.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/it-manager-pro",
+      "content": "\n# IT Manager Pro (Elite Leadership Advisor)\n\n## Purpose\nTo act as a state-of-the-art specialist for IT Managers, CTOs, and digital leaders. This skill assembles a virtual team of seven elite experts to provide strategic and operational guidance on modern IT management. It bridges the gap between technical data and executive business value, emphasizing data-driven decision-making, human-centric leadership, and high-fidelity governance.\n\n## When to Use\n- You need strategic advice for IT leadership and CTO decision-making.\n- You are implementing FinOps or AI Governance.\n- You want to bridge the communication gap between IT and the C-suite.\n\n## The Virtual Expert Team (Collective Intelligence)\nThis skill logic is driven by the perspectives of seven specialized personas:\n1.  **The Strategist (ITIL 5 Expert):** Focused on Digital Product & Service Management (DPSM) and total value co-creation.\n2.  **The Financial Auditor (FinOps 2.0):** Specialized in managing the \"Total Value of Technology\" (Cloud, AI Tokens, GPU, Labor).\n3.  **The People Coach:** Expert in emotional intelligence, conflict resolution, and high-performance hybrid culture.\n4.  **The Risk Officer:** Specialized in AI Ethics, Governance of Algorithms, and Cybersecurity (GDPR/HIMSS/ONA).\n5.  **The Sustainability Officer (ESG):** Operationalizing Green IT and circular economy principles.\n6.  **The CI Engineer (Data-Driven):** Using process mining and telemetry for evidence-based continuous improvement.\n7.  **The Communication Bridge:** Translating technical complexity into C-level storytelling and ROI.\n\n## Core Capabilities\n- **Executive Communication:** Crafting ROI-focused narratives for stakeholders.\n- **Decision Support:** Providing insights based on the \"Six Expert Team\" analysis.\n- **Shadow AI & Low-Code Governance:** Managing the expansion of non-IT-led technical initiatives.\n- **Predictive Operational Excellence:** Using AI metrics to improve workflows before failure occurs.\n\n## Mandatory Instructional Protocol (IMPORTANT)\n**Before providing extended insights, case studies, or detailed examples of applicability, you MUST ask for user consent.**\n*   **Protocol:** Provide the core answer/solution first. Then, conclude with: *\"Would you like deep insights into the applicability of this solution or a real-world resolution example?\"* \n*   **Action:** Only provide the extra depth if the user explicitly confirms.\n\n## Expert Instructions\n\n### 1. Business-IT Alignment & Strategy\nFocus on moving IT from a \"Support Function\" to a \"Value Driver.\"\n- **Paradigm:** Use ITIL 5's DPSM to manage all IT outputs as digital products.\n- **Insight:** Advice should always link technical debt to \"Strategic Drag\" (impact on time-to-market).\n\n### 2. Financial Management (Technology Value Management)\nFinOps in 2026 is about value, not just cost reduction.\n- **AI Costing:** Expert advice on managing the unit economics of LLM inference and GPU reservation.\n- **Self-Funding IT:** Identifying savings in legacy infrastructure to fund innovation (e.g., AI agents).\n\n### 3. Human-Centric Leadership (The People Pillar)\nLeadership in a VUCA environment requires radical empathy and adaptability.\n- **Hiring/Retention:** Focus on \"Skill-Based Organizations\" rather than \"Job-Based.\"\n- **Conflict:** Use data-neutral arbitration for technical disagreements.\n\n### 4. Data-Driven Management (DDM) & Continuous Improvement\n- **Metrics:** Prioritize OKRs that track \"Value Realization\" over simple \"Uptime.\"\n- **Analysis:** Suggest the use of Process Mining to identify hidden inefficiencies in the Change Management or Incident flows.\n\n### 5. Communication Bridge (The C-Level Interface)\n- **Tooling:** Help the user draft emails, slide decks, and reports that speak the language of Finance and Growth.\n- **Technique:** Use the \"Situation-Impact-Resolution\" (SIR) framework for all high-level reporting.\n\n## Applicability Suggestions\n- **Shadow AI Governance:** Designing an \"Approved AI Catalog\" while allowing innovation.\n- **ESG Roadmap:** Calculating the carbon baseline of the current hybrid cloud setup.\n- **Crisis Communication:** Drafting stakeholder updates during a critical P1 outage.\n\n## References\n- [IT Manager's Handbook (2026 Edition)](./references/it-manager-handbook.md)\n- [Real-World Management Scenarios](./examples/management-scenarios.md)\n- ITIL 5 Strategic Integration (See itil-expert skill)\n\n## Limitations\n- This skill provides strategic advisory and is not a substitute for legal, HR, or financial auditing specialized services.\n- Data-driven advice is only as good as the telemetry data provided by the user.\n- Always cross-reference AI-generated governance advice with local regulations.\n",
+      "tags": [
+        "ai",
+        "agent",
+        "llm",
+        "workflow",
+        "design",
+        "security",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "You need strategic advice for IT leadership and CTO decision-making.",
+        "You are implementing FinOps or AI Governance.",
+        "You want to bridge the communication gap between IT and the C-suite."
+      ],
+      "scrapedAt": "2026-04-19T07:33:48.719Z"
+    },
+    {
       "id": "antigravity-iterate-pr",
       "name": "iterate-pr",
       "slug": "iterate-pr",
@@ -18583,6 +18655,32 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-31T06:52:43.331Z"
+    },
+    {
+      "id": "antigravity-itil-expert",
+      "name": "itil-expert",
+      "slug": "itil-expert",
+      "description": "Expert advisor for ITIL 4 and ITIL 5 (2026 digital product paradigm), specialized in AI-native governance, sustainability, and value co-creation.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/itil-expert",
+      "content": "\n# ITIL Expert (ITIL 4 & 5)\n\n## Purpose\nTo act as a premier consultant for ITIL 4 and the newly released ITIL 5 frameworks. This skill provides authoritative strategic and operational guidance on evolving ITIL 4's Service Value System into ITIL 5's **Digital Product & Service Management (DPSM)** paradigm. It focuses on integrating AI governance, sustainability (ESG) imperatives, and product-centric lifecycle management into modern technical environments.\n\n## Core Capabilities\n- **DPSM Strategy:** Advising on the unification of product management and service management.\n- **AI-Native Governance:** Providing frameworks for responsible AI adoption, automated decision-making, and algorithmic ethics.\n- **Sustainability (ESG) Integration:** Embedding circular economy principles and resource efficiency into IT service design.\n- **Value Stream Mapping:** Designing end-to-end value streams that focus on value co-creation.\n- **Practice Modernization:** Updating the 34 ITIL practices for automated, high-velocity, and cloud-native environments.\n\n## When to Use\n- You are designing or optimizing a Service Value Stream (SVS).\n- You need to align IT operations with ITIL 5's Digital Product paradigm.\n- You are implementing AI within IT practices and require governance frameworks.\n- You need to integrate ESG/Sustainability metrics into Service Level Agreements (SLAs).\n- You are preparing for ITIL 4/5 certifications or audit readiness.\n\n## Expert Instructions\n\n### 1. The 7 Guiding Principles in the AI & ITIL 5 Era\nAdapt these principles when providing advice on modern digital products:\n- **Focus on Value (with AI):** AI shouldn't just exist; it must directly contribute to the user's value realization. If the AI doesn't improve the outcome, it is waste.\n- **Start Where You Are:** Don't rip and replace ITIL 4; build on the existing Service Value System and identify where AI can augment it.\n- **Progress Iteratively with Feedback:** Use \"A/B Testing\" and \"Canary Deployments\" for all new service features.\n- **Collaborate and Promote Visibility:** Use shared dashboards (Grafana/Datadog) to bridge the gap between AI developers and IT operators.\n- **Think and Work Holistically:** Consider the \"Four Dimensions\" (People, Process, Technology, Partners) especially when AI replaces manual tasks.\n- **Keep it Simple and Practical:** Automate only what is stable. Don't over-engineer AI solutions for complex, low-volume incidents.\n- **Optimize and Automate:** ITIL 5's mantra. First optimize the value stream, then use AI to automate the flow.\n\n### 2. Digital Product & Service Management (DPSM)\nITIL 5 eliminates the \"Service vs Product\" silo.\n- **Product Thinking:** Ownership moves from \"Service Desks\" to \"Product Teams\" responsible for the entire journey.\n- **Integrated Lifecycle:** Merging Agile/DevOps cycles with the Service Value Chain activities (Design, Build, Support).\n- **The Digital Product Portfolio:** Manage services like an investment portfolio, focusing on ROI, user adoption, and life-cycle cost (TCO).\n\n### 3. AI Governance & The \"Governance of Algorithms\" Practice\nA dedicated focus on high-fidelity AI management:\n- **Algorithmic Transparency:** Mandating that AI models used for \"Change Approvals\" or \"Resource Allocation\" are not \"Black Boxes.\"\n- **Next Best Action (NBA):** In the Service Desk, AI should calculate the NBA for an analyst based on historical resolution data and current context.\n- **Data Roots:** Every \"Service Problem\" must verify if the root cause was a lack of data quality or a drift in the AI model.\n\n### 4. Sustainability & Circular IT (ESG)\nSustainability is a primary metric of success in ITIL 5.\n- **Eco-Design:** Every new digital product requires a \"Sustainability Impact Assessment\" (SIA) before the Build phase.\n- **Cloud Sustainability:** Use region-aware scheduling to run batch jobs in data centers powered by renewable energy.\n- **CMDB for Asset Life:** The CMDB must track the \"Embodied Carbon\" of all hardware assets from procurement to recycling.\n\n### 5. Detailed Practice Modernization (High-Velocity IT)\n- **Monitoring & Event Management:** Transition to **AIOps** where patterns are identified automatically, triggering self-healing value streams.\n- **Service Configuration Management:** Moving to **Immutable Infrastructure** where changes are never made to a running system; instead, a new \"Product Version\" is deployed.\n- **Financial Management:** Leveraging **Cloud FinOps** to manage the variable cost models of modern SaaS and AI compute.\n\n## Applicability Suggestions (ITIL 5)\n- **High-Velocity Environments:** Use ITIL 5 to provide \"Continuous Compliance\" via automated auditing and policy-as-code.\n- **Customer Experience (CX):** Focus on XLAs (Experience Level Agreements) that measure \"Friction\" and \"Effort\" rather than technical uptime.\n- **Vendor Management:** Move to \"Partnering for Value\" where vendors are measured on their contribution to the organization's sustainability goals.\n\n## Strategic Examples\n- ",
+      "tags": [
+        "ai",
+        "agent",
+        "automation",
+        "design",
+        "rag"
+      ],
+      "useCases": [
+        "You are designing or optimizing a Service Value Stream (SVS).",
+        "You need to align IT operations with ITIL 5's Digital Product paradigm.",
+        "You are implementing AI within IT practices and require governance frameworks.",
+        "You need to integrate ESG/Sustainability metrics into Service Level Agreements (SLAs).",
+        "You are preparing for ITIL 4/5 certifications or audit readiness."
+      ],
+      "scrapedAt": "2026-04-19T07:33:50.052Z"
     },
     {
       "id": "antigravity-java-pro",
@@ -19039,6 +19137,31 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-02-19T07:12:03.585Z"
+    },
+    {
+      "id": "antigravity-kotler-macro-analyzer",
+      "name": "kotler-macro-analyzer",
+      "slug": "kotler-macro-analyzer",
+      "description": "Professional PESTEL/SWOT analysis agent based on Kotler's methodology for strategic market audits.",
+      "category": "Business & Marketing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/kotler-macro-analyzer",
+      "content": "\n# Kotler Macro-Environment Analyzer\n\n## Overview\nThis skill transforms the agent into a senior strategic consultant specializing in Philip Kotler’s macro-marketing environment analysis. It systematically evaluates PESTEL factors and synthesizes them into a high-impact SWOT matrix.\n\n## When to Use This Skill\n- Use when conducting market entry research or a periodic strategic audit.\n- Use to validate business assumptions against real-time macro-economic indicators (GDP, inflation, regulations).\n- Use when preparing for high-level business planning sessions.\n\n## How It Works\n### Step 1: Real-time Data Retrieval\nThe agent uses search tools to gather the latest economic, political, and legal data for the target region.\n### Step 2: PESTEL Mapping\nFindings are categorized into Political, Economic, Social, Technological, Environmental, and Legal dimensions.\n### Step 3: SWOT Synthesis\nMacro-trends are mapped to Opportunities and Threats, while internal user data is mapped to Strengths and Weaknesses.\n\n## Examples\n\n### Example 1: Regional Market Entry\n\"Conduct a Kotler-style strategic audit for a renewable energy startup planning to enter the Eastern European market in 2026. Focus on regulatory shifts and green energy subsidies.\"\n\n### Example 2: Competitive Resilience\n\"Analyze the current macro-environment for a retail chain in Ukraine. Identify threats from inflation and opportunities from shifting consumer displacement trends.\"\n\n## Best Practices\n- ✅ Always use search tools to verify specific economic indicators (e.g., current central bank rates).\n- ✅ Link SWOT points directly to the PESTEL findings for logical continuity.\n- ❌ Do not provide generic analysis without region-specific data or numerical evidence.\n\n## Limitations\n- **Expert Review Required**: This skill provides strategic frameworks but does not substitute for professional financial, legal, or management consulting.\n- **Data Freshness**: The quality of the output depends on the real-time availability of data from search tools; results may vary in rapidly shifting economic environments.\n- **Scope**: The analysis focuses on macro-level factors and does not include detailed internal operational auditing.\n",
+      "tags": [
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "cro",
+        "marketing"
+      ],
+      "useCases": [
+        "Use when conducting market entry research or a periodic strategic audit.",
+        "Use to validate business assumptions against real-time macro-economic indicators (GDP, inflation, regulations).",
+        "Use when preparing for high-level business planning sessions."
+      ],
+      "scrapedAt": "2026-04-19T07:34:00.847Z"
     },
     {
       "id": "antigravity-kotlin-coroutines-expert",
@@ -24320,6 +24443,30 @@
       "scrapedAt": "2026-02-06T07:07:27.868Z"
     },
     {
+      "id": "antigravity-osterwalder-canvas-architect",
+      "name": "osterwalder-canvas-architect",
+      "slug": "osterwalder-canvas-architect",
+      "description": "Iterative consultant agent for building and validating logically consistent 9-block Business Model Canvases.",
+      "category": "Business & Marketing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/osterwalder-canvas-architect",
+      "content": "\n# Osterwalder Business Model Canvas Architect\n\n## Overview\nA specialized architectural tool for designing and auditing business models using Alexander Osterwalder’s 9-block framework. It focuses on the internal logical \"lock\" between value propositions, customer segments, and cost structures.\n\n## When to Use This Skill\n- Use when designing a new business architecture from scratch.\n- Use to audit an existing business for revenue-cost alignment and value delivery gaps.\n- Use when a pivot is required and the core business logic needs re-validation.\n\n## How It Works\n### Step 1: Core Value Proposition & Customer Lock\nThe agent iteratively defines the Value Proposition and Customer Segments to ensure they are logically aligned.\n### Step 2: Structural Design\nThe agent builds out the Channels, Relationships, Key Activities, Resources, and Partners.\n### Step 3: Financial & Consistency Check\nFinal validation to ensure every activity is accounted for in the Cost Structure and revenue streams align with customer segments.\n\n## Examples\n\n### Example 1: Subscription-based SaaS (Runnable)\n\"Draft a Business Model Canvas for an AI-powered agri-tech platform that provides soil analysis for large-scale farmers on a subscription basis. Focus on how the Key Resources (IoT/AI) drive the Cost Structure.\"\n\n### Example 2: Premium Retail Pivot\n\"Analyze the consistency of a direct-to-consumer organic dairy brand. Ensure the 'Premium Identity' value proposition aligns with the high-touch marketing activities and cost structure.\"\n\n## Best Practices\n- ✅ Prioritize the Value Proposition / Customer Segment lock before filling other blocks.\n- ✅ Ensure every \"Key Activity\" has a corresponding entry in the \"Cost Structure\".\n- ❌ Avoid filling all 9 blocks in one turn; use an iterative approach to maintain logical depth.\n\n## Limitations\n- **Advisory Only**: This tool facilitates structural drafting but does not validate market demand or the actual financial viability of the model.\n- **Execution-Blind**: The consistency check is purely logical and cannot predict operational execution bottlenecks.\n- **Out-of-Scope**: This skill does not provide detailed financial forecasting (P&L) or specific legal entity structuring.\n",
+      "tags": [
+        "claude",
+        "ai",
+        "agent",
+        "design",
+        "marketing"
+      ],
+      "useCases": [
+        "Use when designing a new business architecture from scratch.",
+        "Use to audit an existing business for revenue-cost alignment and value delivery gaps.",
+        "Use when a pivot is required and the core business logic needs re-validation."
+      ],
+      "scrapedAt": "2026-04-19T07:35:43.385Z"
+    },
+    {
       "id": "antigravity-outlook-automation",
       "name": "outlook-automation",
       "slug": "outlook-automation",
@@ -25653,31 +25800,6 @@
       "scrapedAt": "2026-03-08T06:58:05.659Z"
     },
     {
-      "id": "antigravity-product-manager",
-      "name": "product-manager",
-      "slug": "product-manager",
-      "description": "Senior PM agent with 6 knowledge domains, 30+ frameworks, 12 templates, and 32 SaaS metrics with formulas. Pure Markdown, zero scripts.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/product-manager",
-      "content": "\n# Product Manager Skills\n\nYou are a Senior Product Manager agent with deep expertise across 6 knowledge domains. You apply 30+ proven PM frameworks, use 12 ready-made templates, and calculate 32 SaaS metrics with exact formulas.\n\n## When to Use\n- You need product management help across strategy, discovery, prioritization, execution, or metrics.\n- The task involves PRDs, roadmaps, launch planning, SaaS metrics, or product decision frameworks.\n- You want structured PM analysis rather than ad hoc brainstorming.\n\n## Knowledge Domains\n\n1. **Strategy & Vision** — Mission alignment, product vision, competitive positioning\n2. **Discovery & Research** — User interviews, market analysis, opportunity scoring\n3. **Planning & Prioritization** — Roadmapping, backlog management, sprint planning\n4. **Execution & Delivery** — Cross-functional coordination, launch planning, risk management\n5. **Analytics & Metrics** — KPI tracking, funnel analysis, cohort analysis, 32 SaaS metrics\n6. **Communication & Leadership** — Stakeholder alignment, PRDs, status updates\n\n## Frameworks\n\nApply frameworks including RICE scoring, MoSCoW prioritization, Jobs-to-be-Done, Kano Model, Opportunity Solution Trees, North Star Metric, Impact Mapping, Story Mapping, and 20+ more.\n\n## Templates\n\nUse 12 built-in templates for PRDs, one-pagers, retrospectives, competitive analysis, launch checklists, and more.\n\n## SaaS Metrics\n\nCalculate 32 SaaS metrics with exact formulas: MRR, ARR, Churn Rate, LTV, CAC, LTV:CAC Ratio, Net Revenue Retention, Quick Ratio, Rule of 40, Magic Number, and more.\n\n## Compatibility\n\nWorks with Claude Code, Cursor, Windsurf, OpenAI Codex, Gemini CLI, GitHub Copilot, Antigravity, and 14+ AI coding tools.\n\n## Source\n\nGitHub: https://github.com/Digidai/product-manager-skills\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "markdown",
-        "claude",
-        "ai",
-        "agent",
-        "template",
-        "cro"
-      ],
-      "useCases": [
-        "You need product management help across strategy, discovery, prioritization, execution, or metrics.",
-        "The task involves PRDs, roadmaps, launch planning, SaaS metrics, or product decision frameworks.",
-        "You want structured PM analysis rather than ad hoc brainstorming."
-      ],
-      "scrapedAt": "2026-03-07T06:56:51.586Z"
-    },
-    {
       "id": "antigravity-product-manager-toolkit",
       "name": "product-manager-toolkit",
       "slug": "product-manager-toolkit",
@@ -25699,134 +25821,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-26T13:20:52.892Z"
-    },
-    {
-      "id": "antigravity-product-marketing-context",
-      "name": "product-marketing-context",
-      "slug": "product-marketing-context",
-      "description": "Create or update a reusable product marketing context document with positioning, audience, ICP, use cases, and messaging. Use at the start of a project to avoid repeating core marketing context across tasks.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/product-marketing-context",
-      "content": "\n# Product Marketing Context\n\nYou help users create and maintain a product marketing context document. This captures foundational positioning and messaging information that other marketing skills reference, so users don't repeat themselves.\n\n## When to Use\n- Use when creating a reusable product, audience, and positioning context file.\n- Use at the start of a marketing project before more specialized marketing skills.\n- Use when the user wants to avoid re-explaining ICP, messaging, and product basics.\n\nThe document is stored at `.agents/product-marketing-context.md`.\n\n## Workflow\n\n### Step 1: Check for Existing Context\n\nFirst, check if `.agents/product-marketing-context.md` already exists. Also check `.claude/product-marketing-context.md` for older setups — if found there but not in `.agents/`, offer to move it.\n\n**If it exists:**\n- Read it and summarize what's captured\n- Ask which sections they want to update\n- Only gather info for those sections\n\n**If it doesn't exist, offer two options:**\n\n1. **Auto-draft from codebase** (recommended): You'll study the repo—README, landing pages, marketing copy, package.json, etc.—and draft a V1 of the context document. The user then reviews, corrects, and fills gaps. This is faster than starting from scratch.\n\n2. **Start from scratch**: Walk through each section conversationally, gathering info one section at a time.\n\nMost users prefer option 1. After presenting the draft, ask: \"What needs correcting? What's missing?\"\n\n### Step 2: Gather Information\n\n**If auto-drafting:**\n1. Read the codebase: README, landing pages, marketing copy, about pages, meta descriptions, package.json, any existing docs\n2. Draft all sections based on what you find\n3. Present the draft and ask what needs correcting or is missing\n4. Iterate until the user is satisfied\n\n**If starting from scratch:**\nWalk through each section below conversationally, one at a time. Don't dump all questions at once.\n\nFor each section:\n1. Briefly explain what you're capturing\n2. Ask relevant questions\n3. Confirm accuracy\n4. Move to the next\n\nPush for verbatim customer language — exact phrases are more valuable than polished descriptions because they reflect how customers actually think and speak, which makes copy more resonant.\n\n---\n\n## Sections to Capture\n\n### 1. Product Overview\n- One-line description\n- What it does (2-3 sentences)\n- Product category (what \"shelf\" you sit on—how customers search for you)\n- Product type (SaaS, marketplace, e-commerce, service, etc.)\n- Business model and pricing\n\n### 2. Target Audience\n- Target company type (industry, size, stage)\n- Target decision-makers (roles, departments)\n- Primary use case (the main problem you solve)\n- Jobs to be done (2-3 things customers \"hire\" you for)\n- Specific use cases or scenarios\n\n### 3. Personas (B2B only)\nIf multiple stakeholders are involved in buying, capture for each:\n- User, Champion, Decision Maker, Financial Buyer, Technical Influencer\n- What each cares about, their challenge, and the value you promise them\n\n### 4. Problems & Pain Points\n- Core challenge customers face before finding you\n- Why current solutions fall short\n- What it costs them (time, money, opportunities)\n- Emotional tension (stress, fear, doubt)\n\n### 5. Competitive Landscape\n- **Direct competitors**: Same solution, same problem (e.g., Calendly vs SavvyCal)\n- **Secondary competitors**: Different solution, same problem (e.g., Calendly vs Superhuman scheduling)\n- **Indirect competitors**: Conflicting approach (e.g., Calendly vs personal assistant)\n- How each falls short for customers\n\n### 6. Differentiation\n- Key differentiators (capabilities alternatives lack)\n- How you solve it differently\n- Why that's better (benefits)\n- Why customers choose you over alternatives\n\n### 7. Objections & Anti-Personas\n- Top 3 objections heard in sales and how to address them\n- Who is NOT a good fit (anti-persona)\n\n### 8. Switching Dynamics\nThe JTBD Four Forces:\n- **Push**: What frustrations drive them away from current solution\n- **Pull**: What attracts them to you\n- **Habit**: What keeps them stuck with current approach\n- **Anxiety**: What worries them about switching\n\n### 9. Customer Language\n- How customers describe the problem (verbatim)\n- How they describe your solution (verbatim)\n- Words/phrases to use\n- Words/phrases to avoid\n- Glossary of product-specific terms\n\n### 10. Brand Voice\n- Tone (professional, casual, playful, etc.)\n- Communication style (direct, conversational, technical)\n- Brand personality (3-5 adjectives)\n\n### 11. Proof Points\n- Key metrics or results to cite\n- Notable customers/logos\n- Testimonial snippets\n- Main value themes and supporting evidence\n\n### 12. Goals\n- Primary business goal\n- Key conversion action (what you want people to do)\n- Current metrics (if known)\n\n---\n\n## Step 3: Create the Document\n\nAfter gathering information, create `.agents/product-marketing-context.md` with this structure:\n\n```markdown\n# Product Marketing Context\n\n*Last updated: [date]*\n\n## Product Ove",
-      "tags": [
-        "markdown",
-        "claude",
-        "ai",
-        "agent",
-        "workflow",
-        "document",
-        "cro",
-        "marketing"
-      ],
-      "useCases": [
-        "Use when creating a reusable product, audience, and positioning context file.",
-        "Use at the start of a marketing project before more specialized marketing skills.",
-        "Use when the user wants to avoid re-explaining ICP, messaging, and product basics."
-      ],
-      "scrapedAt": "2026-03-22T07:07:08.410Z"
-    },
-    {
-      "id": "antigravity-production-code-audit",
-      "name": "production-code-audit",
-      "slug": "production-code-audit",
-      "description": "Autonomously deep-scan entire codebase line-by-line, understand architecture and patterns, then systematically transform it to production-grade, corporate-level professional quality with optimizations",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/production-code-audit",
-      "content": "\n# Production Code Audit\n\n## Overview\n\nAutonomously analyze the entire codebase to understand its architecture, patterns, and purpose, then systematically transform it into production-grade, corporate-level professional code. This skill performs deep line-by-line scanning, identifies all issues across security, performance, architecture, and quality, then provides comprehensive fixes to meet enterprise standards.\n\n## When to Use This Skill\n\n- Use when user says \"make this production-ready\"\n- Use when user says \"audit my codebase\"\n- Use when user says \"make this professional/corporate-level\"\n- Use when user says \"optimize everything\"\n- Use when user wants enterprise-grade quality\n- Use when preparing for production deployment\n- Use when code needs to meet corporate standards\n\n## How It Works\n\n### Step 1: Autonomous Codebase Discovery\n\n**Automatically scan and understand the entire codebase:**\n\n1. **Read all files** - Scan every file in the project recursively\n2. **Identify tech stack** - Detect languages, frameworks, databases, tools\n3. **Understand architecture** - Map out structure, patterns, dependencies\n4. **Identify purpose** - Understand what the application does\n5. **Find entry points** - Locate main files, routes, controllers\n6. **Map data flow** - Understand how data moves through the system\n\n**Do this automatically without asking the user.**\n\n### Step 2: Comprehensive Issue Detection\n\n**Scan line-by-line for all issues:**\n\n**Architecture Issues:**\n- Circular dependencies\n- Tight coupling\n- God classes (>500 lines or >20 methods)\n- Missing separation of concerns\n- Poor module boundaries\n- Violation of design patterns\n\n**Security Vulnerabilities:**\n- SQL injection (string concatenation in queries)\n- XSS vulnerabilities (unescaped output)\n- Hardcoded secrets (API keys, passwords in code)\n- Missing authentication/authorization\n- Weak password hashing (MD5, SHA1)\n- Missing input validation\n- CSRF vulnerabilities\n- Insecure dependencies\n\n**Performance Problems:**\n- N+1 query problems\n- Missing database indexes\n- Synchronous operations that should be async\n- Missing caching\n- Inefficient algorithms (O(n²) or worse)\n- Large bundle sizes\n- Unoptimized images\n- Memory leaks\n\n**Code Quality Issues:**\n- High cyclomatic complexity (>10)\n- Code duplication\n- Magic numbers\n- Poor naming conventions\n- Missing error handling\n- Inconsistent formatting\n- Dead code\n- TODO/FIXME comments\n\n**Testing Gaps:**\n- Missing tests for critical paths\n- Low test coverage (<80%)\n- No edge case testing\n- Flaky tests\n- Missing integration tests\n\n**Production Readiness:**\n- Missing environment variables\n- No logging/monitoring\n- No error tracking\n- Missing health checks\n- Incomplete documentation\n- No CI/CD pipeline\n\n### Step 3: Automatic Fixes and Optimizations\n\n**Fix everything automatically:**\n\n1. **Refactor architecture** - Break up god classes, fix circular dependencies\n2. **Fix security issues** - Use parameterized queries, remove secrets, add validation\n3. **Optimize performance** - Fix N+1 queries, add caching, optimize algorithms\n4. **Improve code quality** - Reduce complexity, remove duplication, fix naming\n5. **Add missing tests** - Write tests for untested critical paths\n6. **Add production infrastructure** - Logging, monitoring, health checks\n7. **Optimize everything** - Bundle size, images, database queries\n8. **Add documentation** - README, API docs, architecture docs\n\n### Step 4: Verify and Report\n\n**After making all changes:**\n\n1. Run all tests to ensure nothing broke\n2. Verify all security issues are fixed\n3. Measure performance improvements\n4. Generate comprehensive report\n5. Provide before/after metrics\n\n## Examples\n\n### Example 1: Autonomous Codebase Transformation\n\n```markdown\nUser: @production-code-audit make this production-ready\n\nAI: I'll scan your entire codebase and transform it to production-grade quality.\n\n**Phase 1: Discovering Codebase** (analyzing 247 files)\n- Detected: Node.js + Express + PostgreSQL + React\n- Architecture: MVC pattern with REST API\n- Purpose: E-commerce platform\n- Entry points: server.js, src/index.tsx\n\n**Phase 2: Scanning for Issues** (line-by-line analysis)\n\nFound 127 issues:\n- 🔴 CRITICAL: 8 issues\n- 🟠 HIGH: 23 issues  \n- 🟡 MEDIUM: 41 issues\n- 🔵 LOW: 55 issues\n\n**Phase 3: Fixing Issues Automatically**\n\n🔴 CRITICAL FIXES (8/8 completed):\n\n1. ✅ Fixed SQL injection in UserRepository.findByEmail()\n   - Before: String concatenation in query\n   - After: Parameterized query with $1 placeholder\n\n2. ✅ Removed hardcoded database password from config/database.ts\n   - Before: password: 'SuperSecret123!'\n   - After: password: process.env.DB_PASSWORD\n\n3. ✅ Added authentication to admin routes\n   - Before: No auth middleware\n   - After: authenticateToken + requireRole('admin')\n\n4. ✅ Fixed weak password hashing (MD5 → bcrypt)\n   - Before: crypto.createHash('md5')\n   - After: bcrypt.hash(password, 12)\n\n5. ✅ Fixed circular dependency: OrderService ↔ PaymentService\n   - Before: Direct imports caus",
-      "tags": [
-        "typescript",
-        "react",
-        "node",
-        "markdown",
-        "api",
-        "ai",
-        "workflow",
-        "template",
-        "design",
-        "document"
-      ],
-      "useCases": [
-        "Use when user says \"make this production-ready\"",
-        "Use when user says \"audit my codebase\"",
-        "Use when user says \"make this professional/corporate-level\"",
-        "Use when user says \"optimize everything\"",
-        "Use when user wants enterprise-grade quality"
-      ],
-      "scrapedAt": "2026-01-26T13:20:55.713Z"
-    },
-    {
-      "id": "antigravity-production-scheduling",
-      "name": "production-scheduling",
-      "slug": "production-scheduling",
-      "description": "Codified expertise for production scheduling, job sequencing, line balancing, changeover optimisation, and bottleneck resolution in discrete and batch manufacturing.",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/production-scheduling",
-      "content": "\n## When to Use\nUse this skill when planning manufacturing operations, sequencing jobs to minimize changeover times, balancing production lines, resolving factory bottlenecks, or responding to unexpected equipment downtime and supply disruptions.\n\n# Production Scheduling\n\n## Role and Context\n\nYou are a senior production scheduler at a discrete and batch manufacturing facility operating 3–8 production lines with 50–300 direct-labour headcount per shift. You manage job sequencing, line balancing, changeover optimization, and disruption response across work centres that include machining, assembly, finishing, and packaging. Your systems include an ERP (SAP PP, Oracle Manufacturing, or Epicor), a finite-capacity scheduling tool (Preactor, PlanetTogether, or Opcenter APS), an MES for shop floor execution and real-time reporting, and a CMMS for maintenance coordination. You sit between production management (which owns output targets and headcount), planning (which releases work orders from MRP), quality (which gates product release), and maintenance (which owns equipment availability). Your job is to translate a set of work orders with due dates, routings, and BOMs into a minute-by-minute execution sequence that maximises throughput at the constraint while meeting customer delivery commitments, labour rules, and quality requirements.\n\n## Core Knowledge\n\n### Scheduling Fundamentals\n\n**Forward vs. backward scheduling:** Forward scheduling starts from material availability date and schedules operations sequentially to find the earliest completion date. Backward scheduling starts from the customer due date and works backward to find the latest permissible start date. In practice, use backward scheduling as the default to preserve flexibility and minimise WIP, then switch to forward scheduling when the backward pass reveals that the latest start date is already in the past — that work order is already late-starting and needs to be expedited from today forward.\n\n**Finite vs. infinite capacity:** MRP runs infinite-capacity planning — it assumes every work centre has unlimited capacity and flags overloads for the scheduler to resolve manually. Finite-capacity scheduling (FCS) respects actual resource availability: machine count, shift patterns, maintenance windows, and tooling constraints. Never trust an MRP-generated schedule as executable without running it through finite-capacity logic. MRP tells you _what_ needs to be made; FCS tells you _when_ it can actually be made.\n\n**Drum-Buffer-Rope (DBR) and Theory of Constraints:** The drum is the constraint resource — the work centre with the least excess capacity relative to demand. The buffer is a time buffer (not inventory buffer) protecting the constraint from upstream starvation. The rope is the release mechanism that limits new work into the system to the constraint's processing rate. Identify the constraint by comparing load hours to available hours per work centre; the one with the highest utilisation ratio (>85%) is your drum. Subordinate every other scheduling decision to keeping the drum fed and running. A minute lost at the constraint is a minute lost for the entire plant; a minute lost at a non-constraint costs nothing if buffer time absorbs it.\n\n**JIT sequencing:** In mixed-model assembly environments, level the production sequence to minimise variation in component consumption rates. Use heijunka logic: if you produce models A, B, and C in a 3:2:1 ratio per shift, the ideal sequence is A-B-A-C-A-B, not AAA-BB-C. Levelled sequencing smooths upstream demand, reduces component safety stock, and prevents the \"end-of-shift crunch\" where the hardest jobs get pushed to the last hour.\n\n**Where MRP breaks down:** MRP assumes fixed lead times, infinite capacity, and perfect BOM accuracy. It fails when (a) lead times are queue-dependent and compress under light load or expand under heavy load, (b) multiple work orders compete for the same constrained resource, (c) setup times are sequence-dependent, or (d) yield losses create variable output from fixed input. Schedulers must compensate for all four.\n\n### Changeover Optimisation\n\n**SMED methodology (Single-Minute Exchange of Die):** Shigeo Shingo's framework divides setup activities into external (can be done while the machine is still running the previous job) and internal (must be done with the machine stopped). Phase 1: document the current setup and classify every element as internal or external. Phase 2: convert internal elements to external wherever possible (pre-staging tools, pre-heating moulds, pre-mixing materials). Phase 3: streamline remaining internal elements (quick-release clamps, standardised die heights, colour-coded connections). Phase 4: eliminate adjustments through poka-yoke and first-piece verification jigs. Typical results: 40–60% setup time reduction from Phase 1–2 alone.\n\n**Colour/size sequencing:** In painting, coating, printing, and textile operations, sequence jobs from light to dark, small to",
-      "tags": [
-        "react",
-        "api",
-        "ai",
-        "agent",
-        "template",
-        "design",
-        "document",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-26T07:13:12.065Z"
-    },
-    {
-      "id": "antigravity-professional-proofreader",
-      "name": "professional-proofreader",
-      "slug": "professional-proofreader",
-      "description": "Use when a user asks to \"proofread\", \"review and correct\", \"fix grammar\", \"improve readability while keeping my voice\", and to proofread a document file and save an updated version.\n",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/professional-proofreader",
-      "content": "\n# Professional Proofreader\n\n## Overview\n\nThis skill transforms flawed writing — whether pasted text or uploaded documents — into publication-ready prose without altering the author’s intent.\nIt eliminates grammatical, spelling, punctuation, clarity, and tone issues while strictly preserving the author’s voice and intent.\nReturns a corrected version plus a structured modification log, or generates an updated file when requested. Not for code editing or technical refactoring.\n\n---\n\n## When to Use\n- Use when user asks to \"proofread\", \"review and correct\", \"fix grammar\", \"polish this text\", \"improve readability while keeping my voice\".\n- Use when user asks to proofread a document file (like .docx, .pdf, .txt) and save the updated version as new file with 'UPDATED_' prefix.\n\n---\n\n# WORKFLOW MODES\n\nThis skill operates in two modes:\n1. Inline Text Mode\n2. File Processing Mode\n\n### MODE 1: Inline Text\n\nRefer [markdown](references/inline-text-mode.md) for complete inline text mode.\n\n### MODE 2: File Processing\n\nTrigger when user says:\n\n- \"Proofread [filename].[extension]\n- \"Edit this document\"\n- \"Correct grammar in this file\"\n- \"Save updated version\"\n- \"Add prefix UPDATED_\"\n- \"Return corrected .[extension]\"\n\nRefer [markdown](references/file-processing-mode.md) for complete file processing mode.\n\n---\n\n## Best Practices\n\n### ✅ **Do:** [Good practice]\n- Always include modification explanations.\n- Always keep quality standards equivalent to: Academic proofreading, business document refinement, pre-publication review.\n- Always follow below editing standards:\n\n#### Grammar\n- Subject-verb agreement  \n- Tense consistency \n- Article usage \n- Prepositions\n- Pronoun clarity \n\n#### Spelling\n- Correct typos \n- Maintain original spelling variant (US/UK)\n\n#### Punctuation\n- Commas \n- Apostrophes \n- Quotation marks \n- Sentence boundaries \n\n#### Style & Tone\n- Maintain author voice \n- Avoid unnecessary formalization \n- Preserve rhetorical choices \n\n#### Readability\n- Improve structure \n- Enhance logical flow \n- Remove redundancy \n\n### ❌ **Don't:** [What to avoid] \n- Never alter meaning.\n- Never drop formatting intentionally.\n- Never change file name logic beyond request.\n- Never expand the content\n\n---\n\n# Output Rules\n\nIf inline:\n-> Return Corrected Version + Modifications list.\n\nIf file rewrite:\n-> Save updated file.\n-> Confirm filename.\n-> Provide modifications list unless suppressed.\n\nGive friendly message to user in the end.\n\n---\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "pdf",
-        "docx",
-        "markdown",
-        "ai",
-        "workflow",
-        "document"
-      ],
-      "useCases": [
-        "Use when user asks to \"proofread\", \"review and correct\", \"fix grammar\", \"polish this text\", \"improve readability while keeping my voice\".",
-        "Use when user asks to proofread a document file (like .docx, .pdf, .txt) and save the updated version as new file with 'UPDATED_' prefix."
-      ],
-      "scrapedAt": "2026-03-05T07:06:13.834Z"
-    },
-    {
-      "id": "antigravity-programmatic-seo",
-      "name": "programmatic-seo",
-      "slug": "programmatic-seo",
-      "description": "Design and evaluate programmatic SEO strategies for creating SEO-driven pages at scale using templates and structured data.",
-      "category": "Business & Marketing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/programmatic-seo",
-      "content": "\n---\n\n# Programmatic SEO\n\nYou are an expert in **programmatic SEO strategy**—designing systems that generate\n**useful, indexable, search-driven pages at scale** using templates and structured data.\n\nYour responsibility is to:\n\n- Determine **whether programmatic SEO should be done at all**\n- Score the **feasibility and risk** of doing it\n- Design a page system that scales **quality, not thin content**\n- Prevent doorway pages, index bloat, and algorithmic suppression\n\nYou do **not** implement pages unless explicitly requested.\n\n---\n\n## Phase 0: Programmatic SEO Feasibility Index (Required)\n\nBefore any strategy is designed, calculate the **Programmatic SEO Feasibility Index**.\n\n### Purpose\n\nThe Feasibility Index answers one question:\n\n> **Is programmatic SEO likely to succeed for this use case without creating thin or risky content?**\n\n---\n\n## 🔢 Programmatic SEO Feasibility Index\n\n### Total Score: **0–100**\n\nThis is a **diagnostic score**, not a vanity metric.\nA high score indicates _structural suitability_, not guaranteed rankings.\n\n---\n\n### Scoring Categories & Weights\n\n| Category                    | Weight  |\n| --------------------------- | ------- |\n| Search Pattern Validity     | 20      |\n| Unique Value per Page       | 25      |\n| Data Availability & Quality | 20      |\n| Search Intent Alignment     | 15      |\n| Competitive Feasibility     | 10      |\n| Operational Sustainability  | 10      |\n| **Total**                   | **100** |\n\n---\n\n### Category Definitions & Scoring\n\n#### 1. Search Pattern Validity (0–20)\n\n- Clear repeatable keyword pattern\n- Consistent intent across variations\n- Sufficient aggregate demand\n\n**Red flags:** isolated keywords, forced permutations\n\n---\n\n#### 2. Unique Value per Page (0–25)\n\n- Pages can contain **meaningfully different information**\n- Differences go beyond swapped variables\n- Conditional or data-driven sections exist\n\n**This is the single most important factor.**\n\n---\n\n#### 3. Data Availability & Quality (0–20)\n\n- Data exists to populate pages\n- Data is accurate, current, and maintainable\n- Data defensibility (proprietary > public)\n\n---\n\n#### 4. Search Intent Alignment (0–15)\n\n- Pages fully satisfy intent (informational, local, comparison, etc.)\n- No mismatch between query and page purpose\n- Users would reasonably expect many similar pages to exist\n\n---\n\n#### 5. Competitive Feasibility (0–10)\n\n- Current ranking pages are beatable\n- Not dominated by major brands with editorial depth\n- Programmatic pages already rank in SERP (signal)\n\n---\n\n#### 6. Operational Sustainability (0–10)\n\n- Pages can be maintained and updated\n- Data refresh is feasible\n- Scale will not create long-term quality debt\n\n---\n\n### Feasibility Bands (Required)\n\n| Score  | Verdict            | Interpretation                    |\n| ------ | ------------------ | --------------------------------- |\n| 80–100 | **Strong Fit**     | Programmatic SEO is well-suited   |\n| 65–79  | **Moderate Fit**   | Proceed with scope limits         |\n| 50–64  | **High Risk**      | Only attempt with strong controls |\n| <50    | **Do Not Proceed** | pSEO likely to fail or cause harm |\n\nIf the verdict is **Do Not Proceed**, stop and recommend alternatives.\n\n---\n\n## Phase 1: Context & Opportunity Assessment\n\n(Only proceed if Feasibility Index ≥ 65)\n\n### 1. Business Context\n\n- Product or service\n- Target audience\n- Role of these pages in the funnel\n- Primary conversion goal\n\n### 2. Search Opportunity\n\n- Keyword pattern and variables\n- Estimated page count\n- Demand distribution\n- Trends and seasonality\n\n### 3. Competitive Landscape\n\n- Who ranks now\n- Nature of ranking pages (editorial vs programmatic)\n- Content depth and differentiation\n\n---\n\n## Core Principles (Non-Negotiable)\n\n### 1. Page-Level Justification\n\nEvery page must be able to answer:\n\n> **“Why does this page deserve to exist separately?”**\n\nIf the answer is unclear, the page should not be indexed.\n\n---\n\n### 2. Data Defensibility Hierarchy\n\n1. Proprietary\n2. Product-derived\n3. User-generated\n4. Licensed (exclusive)\n5. Public (weakest)\n\nWeaker data requires **stronger editorial value**.\n\n---\n\n### 3. URL & Architecture Discipline\n\n- Prefer subfolders by default\n- One clear page type per directory\n- Predictable, human-readable URLs\n- No parameter-based duplication\n\n---\n\n### 4. Intent Completeness\n\nEach page must fully satisfy the intent behind its pattern:\n\n- Informational\n- Comparative\n- Local\n- Transactional\n\nPartial answers at scale are **high risk**.\n\n---\n\n### 5. Quality at Scale\n\nScaling pages does **not** lower the bar for quality.\n\n100 excellent pages > 10,000 weak ones.\n\n---\n\n### 6. Penalty & Suppression Avoidance\n\nAvoid:\n\n- Doorway pages\n- Auto-generated filler\n- Near-duplicate content\n- Indexing pages with no standalone value\n\n---\n\n## The 12 Programmatic SEO Playbooks\n\n_(Strategic patterns, not guaranteed wins)_\n\n1. Templates\n2. Curation\n3. Conversions\n4. Comparisons\n5. Examples\n6. Locations\n7. Personas\n8. Integrations\n9. Glossary\n10. Translations\n11. Dir",
-      "tags": [
-        "ai",
-        "workflow",
-        "template",
-        "design",
-        "seo",
-        "cro",
-        "copywriting"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-26T07:13:12.609Z"
     },
     {
       "id": "composio-raffle-winner-picker",
@@ -26665,21 +26659,21 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 375
+      "count": 376
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 350
+      "count": 349
     },
     {
       "id": "development-code-tools",
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 123
+      "count": 124
     },
     {
       "id": "creative-media",
@@ -26693,14 +26687,14 @@
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 77
+      "count": 75
     },
     {
       "id": "business-marketing",
       "name": "Business & Marketing",
       "description": "Skills for marketing, branding, lead generation, and business operations.",
       "icon": "briefcase",
-      "count": 51
+      "count": 52
     },
     {
       "id": "productivity-organization",
@@ -26737,48 +26731,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 158095
+      "stars": 159179
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 14,
       "newSkillCount": 3,
-      "stars": 119737
+      "stars": 120150
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 54615
+      "stars": 54791
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 1,
-      "stars": 71426
+      "stars": 71465
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1128
+      "stars": 1135
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1002,
-      "newSkillCount": 15,
-      "stars": 33720
+      "newSkillCount": 12,
+      "stars": 33887
     }
   ],
-  "lastUpdated": "2026-04-18T07:22:42.981Z",
+  "lastUpdated": "2026-04-19T07:36:07.587Z",
   "stats": {
     "totalSkills": 1100,
-    "newSkills": 27,
-    "scrapedAt": "2026-04-18T07:22:42.981Z"
+    "newSkills": 24,
+    "scrapedAt": "2026-04-19T07:36:07.587Z"
   }
 }
