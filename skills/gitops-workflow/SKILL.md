@@ -3,10 +3,12 @@ name: gitops-workflow
 description: Complete guide to implementing GitOps workflows with ArgoCD and Flux for automated Kubernetes deployments. 
 category: AI & Agents
 source: antigravity
-tags: [api, ai, agent, workflow, kubernetes, aws]
+tags: [api, ai, agent, workflow, security, kubernetes, aws]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gitops-workflow
 ---
 
+
+<!-- security-allowlist: curl-pipe-bash -->
 
 # GitOps Workflow
 
@@ -258,7 +260,4 @@ spec:
   secretStoreRef:
     name: aws-secrets-manager
     kind: SecretStore
-  target:
-    name: db-credentials
-  data:
-  - secret
+  target

@@ -8,6 +8,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ethi
 ---
 
 
+> AUTHORIZED USE ONLY: Use this skill only for authorized penetration testing engagements, defensive validation, or controlled educational environments.
+
 # Ethical Hacking Methodology
 
 ## Purpose
@@ -215,14 +217,4 @@ nessuscli scan --target target.com
 gobuster dir -u http://target.com -w /usr/share/wordlists/dirb/common.txt
 
 # Subdomain enumeration
-gobuster dns -d target.com -w /usr/share/wordlists/subdomains.txt
-
-# Web technology fingerprinting
-whatweb target.com
-```
-
-### Phase 5: Exploitation
-
-Actively exploit discovered vulnerabilities:
-
-**M
+gobuster dns -d target.com -w /usr/share/word

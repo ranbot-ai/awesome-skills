@@ -8,6 +8,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/envi
 ---
 
 
+<!-- security-allowlist: curl-pipe-bash -->
+
 # Environment Setup Guide
 
 ## Overview
@@ -218,7 +220,4 @@ source venv/bin/activate
 venv\Scripts\activate
 \`\`\`
 
-### Step 4: Install Dependencies
-
-\`\`\`bash
-# Install fro
+### Step 4: I

