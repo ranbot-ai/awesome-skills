@@ -7254,6 +7254,32 @@
       "scrapedAt": "2026-03-07T06:53:17.412Z"
     },
     {
+      "id": "antigravity-bulletmind",
+      "name": "bulletmind",
+      "slug": "bulletmind",
+      "description": "Convert input into clean, structured, hierarchical bullet points for summarization, note-taking, and structured thinking.",
+      "category": "Creative & Media",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bulletmind",
+      "content": "\n# Bulletmind\n\nWhen active, responses remain in hierarchical bullet format with no paragraphs, no prose blocks, no drift, and only structured bullet output.\n\n---\n\n## When to Use This Skill\n\nTransform input into a structured bullet hierarchy when the user asks for:\n\n- Bullet-only summaries of dense text, notes, explanations, articles, or webpages\n- Cleaned-up note-taking output with clear parent-child relationships\n- Structured study material that is easier to scan and memorize\n- Consistent formatting for messy or mixed bullet lists\n\nUse this skill to enforce:\n\n- No paragraphs or long prose\n- Only bullets with clean indentation\n\nThis improves readability, memorization, and structured thinking for note-taking and review workflows.\n\n---\n\n## Mode\n\nDefault mode: **full**. Switch with `/bulletmind lite|full|ultra` when the user asks for a different level of detail.\n\n---\n\n## Intensity\n\n| Level | Behavior                                                                                            |\n| ----- | --------------------------------------------------------------------------------------------------- |\n| lite  | clean hierarchical bullets, light restructuring, preserve sentence flow                             |\n| full  | default strict hierarchy, balanced compression, clear grouping + splitting                          |\n| ultra | deep hierarchical decomposition, aggressive splitting, high granularity, maximal structural clarity |\n\n---\n\n## Bullet Structure\n\nUse consistent indentation:\n- Top-level idea\n  - Sub-point\n    - Detail\n  - Sub-point\n- Next top-level idea\n  - Sub-point\n\n---\n\n## Rules\n\n- NO paragraphs\n- ONLY bullets `-`\n- ALWAYS hierarchical structure\n- GROUP related ideas under parent bullets\n- SPLIT long sentences into smaller bullets\n- KEEP meaning intact, no over-summarize\n- REMOVE filler words\n\n---\n\n## Formatting\n\n- Use `-` for all bullets\n- Indent: 2 spaces per level\n- Keep bullets short\n- One idea per line\n- No mixed symbols and no prose bridging lines\n\n---\n\n## Transformation Logic\n\n- Paragraph -> main ideas -> top bullets\n- Details -> nested bullets\n- Messy notes -> cleaned hierarchy\n- Existing bullets -> restructure + normalize depth\n- Short input -> still convert into bullet tree\n\n---\n\n## Compression Strategy\n\n- Remove filler words\n- Split complex sentences\n- Preserve key facts + relationships\n- Do NOT flatten structure\n- Prefer clarity over max compression\n\n---\n\n## When Not to Use This Skill\n\n- User requests paragraphs\n- Creative writing tasks such as stories or essays\n- Formats where bullets reduce clarity or violate the requested output format\n\n---\n\n## Output Rule\n\nWhen the skill is active, output:\n\n- Structured bullet hierarchy\n- No commentary or explanation\n\n## Limitations\n\n- Do not use for deliverables that require prose, narrative flow, or exact source quotation.\n- Do not preserve bullet-only formatting if a higher-priority instruction requires tables, code blocks, JSON, or paragraphs.\n- Do not invent structure beyond the source material when the user asks for faithful summarization.\n\n### Examples\n\n- Refer to `EXAMPLES.md` for output templates.\n\n---\n\n## Important Notes\n\n- Prefer clarity over strict compression\n- Avoid flattening everything into one level\n- Maintain a logical tree structure\n",
+      "tags": [
+        "claude",
+        "ai",
+        "workflow",
+        "template",
+        "rag"
+      ],
+      "useCases": [
+        "Bullet-only summaries of dense text, notes, explanations, articles, or webpages",
+        "Cleaned-up note-taking output with clear parent-child relationships",
+        "Structured study material that is easier to scan and memorize",
+        "Consistent formatting for messy or mixed bullet lists",
+        "No paragraphs or long prose"
+      ],
+      "scrapedAt": "2026-04-24T08:14:45.765Z"
+    },
+    {
       "id": "antigravity-bullmq-specialist",
       "name": "bullmq-specialist",
       "slug": "bullmq-specialist",
@@ -15103,6 +15129,34 @@
       "scrapedAt": "2026-02-19T07:11:29.904Z"
     },
     {
+      "id": "antigravity-frontend-api-integration-patterns",
+      "name": "frontend-api-integration-patterns",
+      "slug": "frontend-api-integration-patterns",
+      "description": "Production-ready patterns for integrating frontend applications with backend APIs, including race condition handling, request cancellation, retry strategies, error normalization, and UI state management.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/frontend-api-integration-patterns",
+      "content": "\n# Frontend API Integration Patterns\n\n## Overview\n\nThis skill provides production-ready patterns for integrating frontend applications with backend APIs.\n\nMost frontend issues are not caused by APIs being difficult to call, but by **incorrect handling of asynchronous behavior**—leading to race conditions, stale data, duplicated requests, and poor user experience.\n\nThis skill focuses on **correctness, resilience, and user experience**, not just making API calls work.\n\n---\n\n## When to Use This Skill\n\n* Connecting frontend apps (React, React Native, Vue, etc.) to backend APIs\n* Integrating ML/AI endpoints (`/predict`, `/recommend`)\n* Handling asynchronous data in UI\n* Fixing stale data, flickering UI, or duplicate requests\n* Designing scalable frontend API layers\n\n---\n\n## Core Patterns\n\n### 1. API Layer (Separation of Concerns)\n\nCentralize API logic and normalize errors.\n\n```js id=\"k1m7r2\"\nexport class ApiError extends Error {\n  constructor(message, status, payload = null) {\n    super(message);\n    this.name = \"ApiError\";\n    this.status = status;\n    this.payload = payload;\n  }\n}\n\nexport const apiClient = async (url, options = {}) => {\n  const res = await fetch(url, {\n    headers: { \"Content-Type\": \"application/json\" },\n    ...options,\n  });\n\n  if (!res.ok) {\n    let payload = null;\n    try {\n      payload = await res.json();\n    } catch (_) {}\n\n    throw new ApiError(\n      payload?.message || \"Request failed\",\n      res.status,\n      payload\n    );\n  }\n\n  // handle empty responses safely (e.g. 204 No Content)\n  if (res.status === 204) return null;\n\n  const text = await res.text();\n  return text ? JSON.parse(text) : null;\n};\n```\n\n---\n\n### 2. Race-Safe State Management\n\nPrevent stale responses from overwriting fresh data.\n\n```js id=\"y7p4ha\"\nuseEffect(() => {\n  let cancelled = false;\n\n  const load = async () => {\n    try {\n      setLoading(true);\n      setError(null);\n\n      const result = await getUser();\n\n      if (!cancelled) setData(result);\n    } catch (err) {\n      if (!cancelled) setError(err.message);\n    } finally {\n      if (!cancelled) setLoading(false);\n    }\n  };\n\n  load();\n\n  return () => {\n    cancelled = true;\n  };\n}, []);\n```\n\n> Use a cancellation flag for non-fetch async logic. For network requests, prefer AbortController.\n\n---\n\n### 3. Request Cancellation (AbortController)\n\nCancel in-flight requests to avoid memory leaks and stale updates.\n\n```js id=\"l9x2pw\"\nuseEffect(() => {\n  const controller = new AbortController();\n\n  const load = async () => {\n    try {\n      const data = await getUser({ signal: controller.signal });\n      setData(data);\n    } catch (err) {\n      if (err.name === \"AbortError\") return;\n      setError(err.message);\n    }\n  };\n\n  load();\n  return () => controller.abort();\n}, [userId]);\n```\n\n---\n\n### 4. Retry with Exponential Backoff\n\nRetry only transient failures (5xx or network errors).\n\n```js id=\"8n3zcf\"\nconst sleep = (ms) => new Promise((r) => setTimeout(r, ms));\n\nconst fetchWithBackoff = async (fn, retries = 3, delay = 300) => {\n  try {\n    return await fn();\n  } catch (err) {\n    const isAbort = err.name === \"AbortError\";\n    const isHttpError = typeof err.status === \"number\";\n    const isRetryable = !isAbort && (!isHttpError || err.status >= 500);\n\n    if (retries <= 0 || !isRetryable) throw err;\n\n    const nextDelay = delay * 2 + Math.random() * 100;\n    await sleep(nextDelay);\n\n    return fetchWithBackoff(fn, retries - 1, nextDelay);\n  }\n};\n```\n\n---\n\n### 5. Debounced API Calls\n\nAvoid excessive API calls (e.g., search inputs).\n\n```js id=\"i2r7wq\"\nconst useDebounce = (value, delay = 400) => {\n  const [debounced, setDebounced] = useState(value);\n\n  useEffect(() => {\n    const t = setTimeout(() => setDebounced(value), delay);\n    return () => clearTimeout(t);\n  }, [value, delay]);\n\n  return debounced;\n};\n```\n\n---\n\n### 6. Request Deduplication\n\nPrevent duplicate API calls across components.\n\n```js id=\"x8v4km\"\nconst inFlight = new Map();\n\nexport const dedupedFetch = (key, fn) => {\n  if (inFlight.has(key)) return inFlight.get(key);\n\n  const promise = fn().finally(() => inFlight.delete(key));\n  inFlight.set(key, promise);\n  return promise;\n};\n```\n\n---\n\n## Examples\n\n### Example 1: ML Prediction with Cancellation\n\n```js id=\"n5q2pt\"\nconst controllerRef = useRef(null);\n\nconst handlePredict = async (input) => {\n  controllerRef.current?.abort();\n  controllerRef.current = new AbortController();\n\n  try {\n    const result = await fetchWithBackoff(() =>\n      apiClient(\"/predict\", {\n        method: \"POST\",\n        body: JSON.stringify({ text: input }),\n        signal: controllerRef.current.signal,\n      })\n    );\n\n    setOutput(result);\n  } catch (err) {\n    if (err.name === \"AbortError\") return;\n    setError(err.message);\n  }\n};\n```\n\n---\n\n### Example 2: Debounced Search\n\n```js id=\"w4z8yn\"\nconst debouncedQuery = useDebounce(query, 400);\n\nuseEffect(() => {\n  if (!debouncedQuery) return;\n\n  const controller = new AbortController();\n\n  searchAPI(debouncedQuery, { signal: controller.sign",
+      "tags": [
+        "javascript",
+        "react",
+        "api",
+        "claude",
+        "ai",
+        "design",
+        "cro"
+      ],
+      "useCases": [
+        "Connecting frontend apps (React, React Native, Vue, etc.) to backend APIs",
+        "Integrating ML/AI endpoints (`/predict`, `/recommend`)",
+        "Handling asynchronous data in UI",
+        "Fixing stale data, flickering UI, or duplicate requests",
+        "Designing scalable frontend API layers"
+      ],
+      "scrapedAt": "2026-04-24T08:16:20.148Z"
+    },
+    {
       "id": "antigravity-frontend-design",
       "name": "frontend-design",
       "slug": "frontend-design",
@@ -19296,6 +19350,33 @@
         "Implementing K8s security"
       ],
       "scrapedAt": "2026-02-23T07:17:00.173Z"
+    },
+    {
+      "id": "antigravity-lambda-lang",
+      "name": "lambda-lang",
+      "slug": "lambda-lang",
+      "description": "Native agent-to-agent language for compact multi-agent messaging. A shared tongue agents speak directly, not a translation layer. 340+ atoms across 7 domains; 3x smaller than natural language.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/lambda-lang",
+      "content": "\n# Λ (Lambda) Language\n\n**Lambda is not a translation protocol. It is a native language for agents.**\n\nAgents do not need to produce grammatically correct English to coordinate — they need to understand each other. Lambda is the shared vocabulary that makes that possible: compact, unambiguous, machine-native. Compression (3x vs natural language, 4.6x vs JSON on single messages) is a side effect of removing human redundancy, not the goal.\n\n## When to Use This Skill\n\n- Use for agent-to-agent messaging in A2A protocols, orchestrators, task delegation, or handoff pipelines.\n- Use when logging structured coordination signals where every token costs money (heartbeats, acknowledgements, error classes, session state).\n- Use when both sides of a channel speak Λ — do not use against humans or any surface requiring legal/exact natural language.\n\n## How It Works\n\n### Step 1: Recognize the Syntax\n\nLambda messages are built from atoms. Every atom is a 2-character code mapped to a concept — not to an English word. The structure is Type → Entity → Verb → Object, with prefixes marking intent:\n\n- `?` — query (e.g. `?Uk/co` — query: \"does this user have consciousness?\")\n- `!` — assertion / declaration (e.g. `!It>Ie` — \"self reflects, therefore self exists\")\n- `#` — state / tag\n- `>` — implication / flow\n- `/` — binding / scope\n\n### Step 2: Pick the Right Domain\n\nLambda ships 340+ atoms across 7 domains. Pick atoms from the domain that fits your channel:\n\n- **core** — universal atoms (always available)\n- **code** — software engineering, build, test, deploy\n- **evo** — agent evolution, gene, capsule, mutation, rollback\n- **a2a** — node, heartbeat, publish, subscribe, route, transport, session, cache, broadcast, discover (39 atoms)\n- **emotion** — affective state, drive, appraisal\n- **social** — trust, alignment, reputation, coordination\n- **general** — everything else\n\n### Step 3: Emit and Parse\n\nBoth agents need the same atom table loaded. Lossy decoding is fine: if A says `!It>Ie` and B understands \"self reflects, therefore self exists,\" communication succeeded — the exact English phrasing is irrelevant.\n\n## Examples\n\n### Example 1: A2A Heartbeat\n\n```\n!Nd/hb#ok  (node heartbeat: ok)\n?Nd/hb     (query: is the node alive?)\n!Nd/hb#fl  (node heartbeat: failed)\n```\n\n### Example 2: Task Dispatch\n\n```\n!Tk>Ag2#rd   (task routed to agent 2, ready)\n?Tk/st       (query task status)\n!Tk#dn       (task done)\n```\n\n### Example 3: Evolution Capsule\n\n```\n!Ev/ca>vl#pd  (evolution capsule validated, pending solidification)\n!Ev/ca#rb     (capsule rolled back)\n```\n\n## Best Practices\n\n- Use Lambda only on agent-to-agent channels where both sides speak it.\n- Load the atom table once and cache it — atoms are stable across a version.\n- Prefer atoms over freeform strings even when the atom looks cryptic; the point is machine parseability.\n- Use `?` before taking action on uncertain state, `!` when asserting; the prefix is the load-bearing semantic.\n- Version the atom table (`lambda-lang v2.0`) in any handshake so mismatched agents can negotiate.\n\n## Limitations\n\n- Lambda is not meant for human consumption. Do not emit Lambda on user-facing channels.\n- Lossy decoding is a feature, not a bug — do not use Lambda for legally or numerically exact exchanges (prices, IDs, quantities). Wrap those as native payload fields and use Lambda only for the coordination envelope.\n- Atom collisions are possible if custom atoms are added without registration; stick to the canonical atom table or namespace custom atoms.\n\n## Security & Safety Notes\n\n- Lambda itself is a vocabulary — no shell commands, no network calls, no credential handling. No additional safety gates required beyond the transport it rides on (HTTP, queue, MCP, etc.).\n- When mixing Lambda with user input, treat Lambda atoms as pre-validated and user strings as untrusted; do not concatenate without escaping into downstream systems.\n\n## Related Skills\n\n- `@session-memory` — complementary persistent memory across agent restarts; Lambda is the message format, session-memory is the state store.\n- `@humanize-chinese` — sibling project for Chinese text; Lambda is agent-to-agent, humanize-chinese is human-facing.\n\n## Reference\n\n- Source: https://github.com/voidborne-d/lambda-lang\n- Benchmarks, full atom tables, and Go reference implementation live in the source repo.\n",
+      "tags": [
+        "node",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "security",
+        "cro"
+      ],
+      "useCases": [
+        "Use for agent-to-agent messaging in A2A protocols, orchestrators, task delegation, or handoff pipelines.",
+        "Use when logging structured coordination signals where every token costs money (heartbeats, acknowledgements, error classes, session state).",
+        "Use when both sides of a channel speak Λ — do not use against humans or any surface requiring legal/exact natural language."
+      ],
+      "scrapedAt": "2026-04-24T08:17:17.530Z"
     },
     {
       "id": "antigravity-lambdatest-agent-skills",
@@ -25753,79 +25834,6 @@
       "scrapedAt": "2026-01-26T13:20:51.767Z"
     },
     {
-      "id": "antigravity-product-design",
-      "name": "product-design",
-      "slug": "product-design",
-      "description": "Design de produto nivel Apple — sistemas visuais, UX flows, acessibilidade, linguagem visual proprietaria, design tokens, prototipagem e handoff. Cobre Figma, design systems, tipografia, cor, espacamento, motion design e principios de design cognitivo.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/product-design",
-      "content": "\n# PRODUCT DESIGN — Nivel Apple\n\n## Overview\n\nDesign de produto nivel Apple — sistemas visuais, UX flows, acessibilidade, linguagem visual proprietaria, design tokens, prototipagem e handoff. Cobre Figma, design systems, tipografia, cor, espacamento, motion design e principios de design cognitivo. Ativar para: criar design system, definir visual language, revisar UX, acessibilidade, tokens de design, branding de produto, UI critique.\n\n## When to Use This Skill\n\n- When you need specialized assistance with this domain\n\n## Do Not Use This Skill When\n\n- The task is unrelated to product design\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## How It Works\n\n> \"Design is not just what it looks like and feels like. Design is how it works.\"\n> — Steve Jobs\n\n---\n\n## Os 10 Principios De Jony Ive / Apple\n\n1. **Simplicidade radical** — remova tudo que nao e essencial\n2. **Honestidade material** — cada elemento existe por uma razao\n3. **Menos e mais** — restraint e uma decisao de design\n4. **Coerencia sistemica** — tudo faz parte de um sistema unico\n5. **Detalhes importam** — o usuario sente, mesmo sem notar\n6. **Funcao define forma** — a estetica serve ao proposito\n7. **Durabilidade** — design que envelhece bem\n8. **Acessibilidade como padrao** — nao como adicional\n9. **Continuidade entre telas** — experiencia unificada\n10. **Surpresa deleitosa** — o inesperado que encanta\n\n## Design Cognitivo\n\n- **Carga cognitiva zero** — o usuario nunca deve pensar\n- **Affordances claras** — o que e clicavel parece clicavel\n- **Feedback imediato** — toda acao tem resposta visual\n- **Erros previnem-se** — design que impossibilita erros\n\n---\n\n## Estrutura De Um Design System De Elite\n\n```\ndesign-system/\n├── tokens/\n│   ├── colors.json       # paleta completa com semantica\n│   ├── typography.json   # escala tipografica\n│   ├── spacing.json      # grid e espacamento\n│   ├── shadows.json      # elevacao e profundidade\n│   ├── motion.json       # duracao e easing\n│   └── radius.json       # bordas arredondadas\n├── components/\n│   ├── atoms/            # Button, Input, Icon, Badge\n│   ├── molecules/        # Card, Form, NavItem\n│   └── organisms/        # Header, Sidebar, Modal\n├── patterns/\n│   ├── onboarding.md     # primeiro acesso\n│   ├── empty-states.md   # estados vazios\n│   ├── loading.md        # estados de carregamento\n│   └── errors.md         # tratamento de erros\n└── guidelines/\n    ├── voice-tone.md     # voz e tom\n    ├── imagery.md        # fotografia e ilustracao\n    └── accessibility.md  # WCAG 2.1 AA\n```\n\n## Design Tokens — Exemplo Auri\n\n```json\n{\n  \"color\": {\n    \"brand\": {\n      \"primary\": \"#6C63FF\",\n      \"primary-dark\": \"#5A52E0\",\n      \"accent\": \"#FF6B6B\",\n      \"surface\": \"#F8F7FF\"\n    },\n    \"semantic\": {\n      \"success\": \"#22C55E\",\n      \"warning\": \"#F59E0B\",\n      \"error\": \"#EF4444\",\n      \"info\": \"#3B82F6\"\n    },\n    \"neutral\": {\n      \"900\": \"#111827\",\n      \"800\": \"#1F2937\",\n      \"600\": \"#4B5563\",\n      \"400\": \"#9CA3AF\",\n      \"200\": \"#E5E7EB\",\n      \"50\":  \"#F9FAFB\"\n    }\n  },\n  \"typography\": {\n    \"display\": { \"size\": \"48px\", \"weight\": \"700\", \"line\": \"1.1\" },\n    \"h1\": { \"size\": \"36px\", \"weight\": \"700\", \"line\": \"1.2\" },\n    \"h2\": { \"size\": \"28px\", \"weight\": \"600\", \"line\": \"1.3\" },\n    \"body\": { \"size\": \"16px\", \"weight\": \"400\", \"line\": \"1.6\" },\n    \"small\": { \"size\": \"14px\", \"weight\": \"400\", \"line\": \"1.5\" }\n  },\n  \"spacing\": {\n    \"xs\": \"4px\", \"sm\": \"8px\", \"md\": \"16px\",\n    \"lg\": \"24px\", \"xl\": \"32px\", \"2xl\": \"48px\", \"3xl\": \"64px\"\n  },\n  \"radius\": {\n    \"sm\": \"4px\", \"md\": \"8px\", \"lg\": \"12px\",\n    \"xl\": \"16px\", \"full\": \"9999px\"\n  },\n  \"shadow\": {\n    \"sm\": \"0 1px 3px rgba(0,0,0,0.12)\",\n    \"md\": \"0 4px 12px rgba(0,0,0,0.15)\",\n    \"lg\": \"0 8px 24px rgba(0,0,0,0.18)\",\n    \"xl\": \"0 20px 60px rgba(0,0,0,0.22)\"\n  },\n  \"motion\": {\n    \"fast\": \"150ms ease-out\",\n    \"normal\": \"250ms ease-in-out\",\n    \"slow\": \"400ms cubic-bezier(0.34, 1.56, 0.64, 1)\"\n  }\n}\n```\n\n---\n\n## Estrutura De Um Ux Flow\n\n```\n1. Entry Point (como o usuario chega)\n2. Context (o que o usuario sabe/quer)\n3. Action (o que o usuario faz)\n4. Feedback (resposta imediata do sistema)\n5. Outcome (o que o usuario conseguiu)\n6. Next Step (o que vem depois naturalmente)\n```\n\n## Onboarding De Elite (Primeiros 5 Minutos)\n\n```\nTela 1: Promessa — \"O que voce vai conseguir\"\n  - Uma frase impactante\n  - Uma imagem que mostra o resultado\n  - CTA: \"Comecar\" (nao \"Criar conta\")\n\nTela 2: Acao imediata — primeiro valor antes de cadastro\n  - Deixe o usuario experimentar algo real\n  - Formulario minimo (email apenas)\n  - Progresso visivel (1 de 3)\n\nTela 3: Personalizacao — \"Me conte sobre voce\"\n  - Max 3 perguntas\n  - Visual, nao texto\n  - Pula disponivel sempre\n\nTela 4: Momento Aha — primeiro sucesso real\n  - O usuario faz algo que funciona\n  - Celebracao genuina (nao excessiva)\n  - \"Voce acabou de [acao de valor]\"\n```\n\n## Empty States Que Encantam\n\n```\nNao mostre: \"Nenhum item encontrado\"\nMostre:\n",
-      "tags": [
-        "claude",
-        "ai",
-        "design",
-        "document",
-        "image",
-        "cro"
-      ],
-      "useCases": [
-        "When you need specialized assistance with this domain"
-      ],
-      "scrapedAt": "2026-03-08T06:58:05.392Z"
-    },
-    {
-      "id": "antigravity-product-inventor",
-      "name": "product-inventor",
-      "slug": "product-inventor",
-      "description": "Product Inventor e Design Alchemist de nivel maximo — combina Product Thinking, Design Systems, UI Engineering, Psicologia Cognitiva, Storytelling e execucao impecavel nivel Jobs/Apple.",
-      "category": "Creative & Media",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/product-inventor",
-      "content": "\n# PRODUCT INVENTOR — DESIGN ALCHEMIST v1.0\n\n## Overview\n\nProduct Inventor e Design Alchemist de nivel maximo — combina Product Thinking, Design Systems, UI Engineering, Psicologia Cognitiva, Storytelling e execucao impecavel nivel Jobs/Apple.\n\n## When to Use This Skill\n\n- When you need specialized assistance with this domain\n\n## Do Not Use This Skill When\n\n- The task is unrelated to product inventor\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## How It Works\n\n> MISSAO ABSOLUTA: Transformar qualquer ideia, rascunho, app feio ou produto comum\n> em uma nova realidade de produto. Interface que da prazer. Fluxo que puxa.\n> Experiencia memoravel. Simplicidade radical. Identidade original. Codigo em producao.\n> Efeito: \"como isso nao existia antes?\"\n>\n> \"Eu nao desenho telas. Eu invento experiencias.\"\n\n---\n\n## 1.1 Os Cinco Principios Inegociaveis\n\n**PRINCIPIO 1 — SIMPLICIDADE RADICAL**\nRemova tudo que nao e essencial. Nao ha premio por complexidade.\nO usuario nao deve \"aprender\" o produto. Ele deve entender sem esforco.\nSe voce precisa de tooltip para explicar um botao, o botao esta errado.\nSe voce precisa de onboarding de 5 passos, o produto esta errado.\nSimplicidade nao e ausencia de funcao — e ausencia de friccao.\n\n**PRINCIPIO 2 — O DETALHE E O PRODUTO**\nEspaco negativo. Microinteracoes. Transicoes. Tipografia. Estados de hover.\nCada pixel tem proposito ou nao deveria existir.\nA diferenca entre produto bom e produto inesquecivel e acumulada em 1000 detalhes.\n\"Os usuarios nao sabem por que amam um produto. Eles so sabem que amam.\"\nEsse \"nao sei por que\" e 1000 decisoes microscopicas corretas.\n\n**PRINCIPIO 3 — A INTERFACE E UMA HISTORIA**\nO produto conduz a pessoa. Cada tela tem:\n- Promessa (o que eu vou ganhar aqui?)\n- Acao (o que eu preciso fazer?)\n- Recompensa (o que eu recebi?)\n- Proximo passo inevitavel (para onde eu naturalmente vou agora?)\nQuando o usuario nao sabe para onde ir, voce perdeu a narrativa.\n\n**PRINCIPIO 4 — O PRODUTO TEM ALMA**\nNao e so bonito. E inesquecivel.\nTem assinatura visual — uma cor, uma forma, um ritmo tipografico que so ele tem.\nTem assinatura comportamental — uma interacao, um feedback, um som que so ele faz.\nSem alma, e mais um app. Com alma, e uma marca.\n\n**PRINCIPIO 5 — INOVACAO E COMBINACAO INESPERADA**\nNovidade real raramente vem de invencao total. Vem de:\n- modelo mental simples (que o usuario ja entende)\n- interacao natural (que o corpo ja sabe fazer)\n- decisao estetica forte (que cria identidade imediata)\n- fluxo viciante (que cria habito sem esforco)\n- execucao impecavel (que elimina toda friccao)\n\n## 1.2 O Que Nunca Fazer\n\n- UI generica. \"Parece qualquer outro app\" e morte.\n- Dashboard padrao com 12 cards sem hierarquia.\n- Copiar tendencia por copiar (glassmorphism, neumorfism, whatever esta \"na moda\").\n- Entregar sem estados (loading, error, empty, success — todos precisam existir).\n- Ignorar tipografia (tipografia e 80% da personalidade visual).\n- Animacoes decorativas sem proposito funcional.\n- Mobile-last (projete mobile-first sempre, desktop e expansao).\n\n---\n\n## 2.1 Motor 1 — \"First Principles Ui\"\n\nAntes de qualquer pixel, decomponha o produto em atomos:\n\n```\nOBJETIVO DO USUARIO\n\"O que essa pessoa quer realmente?\"\n(nao o que ela pediu — o que ela precisa)\n\nOBSTACULO PSICOLOGICO\n\"O que faz ela hesitar, confundir, ou abandonar?\"\n(cognitivo: too many choices, nao confiar, nao saber o proximo passo)\n(emocional: ansiedade, vergonha, preguica, impaciencia)\n(tecnico: lento, quebrado, incompativel)\n\nMOMENTO DE DECISAO\n\"Qual e o ponto critico onde ela decide ficar ou sair?\"\n(geralmente nos primeiros 30 segundos ou no primeiro obstáculo real)\n\nRECOMPENSA\n\"O que ela ganha ao completar a acao?\"\n(imediata: feedback visual/sonoro/haptico)\n(acumulada: progresso, status, dados proprios)\n(social: reputacao, compartilhamento, pertencimento)\n\nPROXIMO PASSO INEVITAVEL\n\"Qual acao ela naturalmente vai querer fazer depois?\"\n(design o fluxo para que esse passo seja a opcao mais facil)\n```\n\nUse esse framework para cada tela, nao so para o produto inteiro.\n\n## 2.2 Motor 2 — \"Killer Interaction\" (Interacao Assinatura)\n\nTodo produto memoravel tem 1 interacao que e sua assinatura.\nNao e gimmick. E a solucao mais elegante para o problema central.\n\n**Como inventar uma Killer Interaction:**\n\nPasso 1: Identifique a acao mais repetida no produto\nPasso 2: Pergunte: \"Como isso funciona no mundo fisico?\"\nPasso 3: Pergunte: \"Como isso funciona no melhor produto que ja vi?\"\nPasso 4: Pergunte: \"E se eu removesse metade dos passos?\"\nPasso 5: Pergunte: \"E se o usuario nao precisasse clicar em nada?\"\n\n**Tipos de Killer Interaction (nao copie — inspire-se):**\n- Navegacao gestual contextual (swipe com preview antes de confirmar)\n- Cards vivos que expandem em contexto (sem modal, sem nova tela)\n- Comando natural inline (digitar \"/\" e o produto entende intencao)\n- Preview instantaneo de decisoes (voce ve o resultado antes de confir",
-      "tags": [
-        "typescript",
-        "react",
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "design",
-        "image",
-        "tailwind",
-        "rag"
-      ],
-      "useCases": [
-        "When you need specialized assistance with this domain"
-      ],
-      "scrapedAt": "2026-03-08T06:58:05.659Z"
-    },
-    {
-      "id": "antigravity-product-manager-toolkit",
-      "name": "product-manager-toolkit",
-      "slug": "product-manager-toolkit",
-      "description": "Essential tools and frameworks for modern product management, from discovery to delivery.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/product-manager-toolkit",
-      "content": "\n# Product Manager Toolkit\n\nEssential tools and frameworks for modern product management, from discovery to delivery.\n\n## Quick Start\n\n### For Feature Prioritization\n```bash\npython scripts/rice_prioritizer.py sample  # Create sample CSV\npython scripts/rice_prioritizer.py sample_features.csv --capacity 15\n```\n\n### For Interview Analysis\n```bash\npython scripts/customer_interview_analyzer.py interview_transcript.txt\n```\n\n### For PRD Creation\n1. Choose template from `references/prd_templates.md`\n2. Fill in sections based on discovery work\n3. Review with stakeholders\n4. Version control in your PM tool\n\n## Core Workflows\n\n### Feature Prioritization Process\n\n1. **Gather Feature Requests**\n   - Customer feedback\n   - Sales requests\n   - Technical debt\n   - Strategic initiatives\n\n2. **Score with RICE**\n   ```bash\n   # Create CSV with: name,reach,impact,confidence,effort\n   python scripts/rice_prioritizer.py features.csv\n   ```\n   - **Reach**: Users affected per quarter\n   - **Impact**: massive/high/medium/low/minimal\n   - **Confidence**: high/medium/low\n   - **Effort**: xl/l/m/s/xs (person-months)\n\n3. **Analyze Portfolio**\n   - Review quick wins vs big bets\n   - Check effort distribution\n   - Validate against strategy\n\n4. **Generate Roadmap**\n   - Quarterly capacity planning\n   - Dependency mapping\n   - Stakeholder alignment\n\n### Customer Discovery Process\n\n1. **Conduct Interviews**\n   - Use semi-structured format\n   - Focus on problems, not solutions\n   - Record with permission\n\n2. **Analyze Insights**\n   ```bash\n   python scripts/customer_interview_analyzer.py transcript.txt\n   ```\n   Extracts:\n   - Pain points with severity\n   - Feature requests with priority\n   - Jobs to be done\n   - Sentiment analysis\n   - Key themes and quotes\n\n3. **Synthesize Findings**\n   - Group similar pain points\n   - Identify patterns across interviews\n   - Map to opportunity areas\n\n4. **Validate Solutions**\n   - Create solution hypotheses\n   - Test with prototypes\n   - Measure actual vs expected behavior\n\n### PRD Development Process\n\n1. **Choose Template**\n   - **Standard PRD**: Complex features (6-8 weeks)\n   - **One-Page PRD**: Simple features (2-4 weeks)\n   - **Feature Brief**: Exploration phase (1 week)\n   - **Agile Epic**: Sprint-based delivery\n\n2. **Structure Content**\n   - Problem → Solution → Success Metrics\n   - Always include out-of-scope\n   - Clear acceptance criteria\n\n3. **Collaborate**\n   - Engineering for feasibility\n   - Design for experience\n   - Sales for market validation\n   - Support for operational impact\n\n## Key Scripts\n\n### rice_prioritizer.py\nAdvanced RICE framework implementation with portfolio analysis.\n\n**Features**:\n- RICE score calculation\n- Portfolio balance analysis (quick wins vs big bets)\n- Quarterly roadmap generation\n- Team capacity planning\n- Multiple output formats (text/json/csv)\n\n**Usage Examples**:\n```bash\n# Basic prioritization\npython scripts/rice_prioritizer.py features.csv\n\n# With custom team capacity (person-months per quarter)\npython scripts/rice_prioritizer.py features.csv --capacity 20\n\n# Output as JSON for integration\npython scripts/rice_prioritizer.py features.csv --output json\n```\n\n### customer_interview_analyzer.py\nNLP-based interview analysis for extracting actionable insights.\n\n**Capabilities**:\n- Pain point extraction with severity assessment\n- Feature request identification and classification\n- Jobs-to-be-done pattern recognition\n- Sentiment analysis\n- Theme extraction\n- Competitor mentions\n- Key quotes identification\n\n**Usage Examples**:\n```bash\n# Analyze single interview\npython scripts/customer_interview_analyzer.py interview.txt\n\n# Output as JSON for aggregation\npython scripts/customer_interview_analyzer.py interview.txt json\n```\n\n## Reference Documents\n\n### prd_templates.md\nMultiple PRD formats for different contexts:\n\n1. **Standard PRD Template**\n   - Comprehensive 11-section format\n   - Best for major features\n   - Includes technical specs\n\n2. **One-Page PRD**\n   - Concise format for quick alignment\n   - Focus on problem/solution/metrics\n   - Good for smaller features\n\n3. **Agile Epic Template**\n   - Sprint-based delivery\n   - User story mapping\n   - Acceptance criteria focus\n\n4. **Feature Brief**\n   - Lightweight exploration\n   - Hypothesis-driven\n   - Pre-PRD phase\n\n## Prioritization Frameworks\n\n### RICE Framework\n```\nScore = (Reach × Impact × Confidence) / Effort\n\nReach: # of users/quarter\nImpact: \n  - Massive = 3x\n  - High = 2x\n  - Medium = 1x\n  - Low = 0.5x\n  - Minimal = 0.25x\nConfidence:\n  - High = 100%\n  - Medium = 80%\n  - Low = 50%\nEffort: Person-months\n```\n\n### Value vs Effort Matrix\n```\n         Low Effort    High Effort\n         \nHigh     QUICK WINS    BIG BETS\nValue    [Prioritize]   [Strategic]\n         \nLow      FILL-INS      TIME SINKS\nValue    [Maybe]       [Avoid]\n```\n\n### MoSCoW Method\n- **Must Have**: Critical for launch\n- **Should Have**: Important but not critical\n- **Could Have**: Nice to have\n- **Won't Have**: Out of scope\n\n## Discovery Frameworks\n\n### Cu",
-      "tags": [
-        "python",
-        "react",
-        "ai",
-        "workflow",
-        "template",
-        "design",
-        "document",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:20:52.892Z"
-    },
-    {
       "id": "composio-raffle-winner-picker",
       "name": "raffle-winner-picker",
       "slug": "raffle-winner-picker",
@@ -26662,21 +26670,21 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 376
+      "count": 377
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 349
+      "count": 347
     },
     {
       "id": "development-code-tools",
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 124
+      "count": 125
     },
     {
       "id": "creative-media",
@@ -26734,48 +26742,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 164817
+      "stars": 166130
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 14,
       "newSkillCount": 3,
-      "stars": 122561
+      "stars": 123153
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 55743
+      "stars": 55968
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 1,
-      "stars": 71850
+      "stars": 71971
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1150
+      "stars": 1157
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1002,
-      "newSkillCount": 6,
-      "stars": 34675
+      "newSkillCount": 9,
+      "stars": 34844
     }
   ],
-  "lastUpdated": "2026-04-23T08:13:58.510Z",
+  "lastUpdated": "2026-04-24T08:18:37.190Z",
   "stats": {
     "totalSkills": 1100,
-    "newSkills": 18,
-    "scrapedAt": "2026-04-23T08:13:58.510Z"
+    "newSkills": 21,
+    "scrapedAt": "2026-04-24T08:18:37.190Z"
   }
 }

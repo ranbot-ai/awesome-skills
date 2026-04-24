@@ -1,0 +1,26 @@
+{
+  "id": "antigravity-bulletmind",
+  "name": "bulletmind",
+  "slug": "bulletmind",
+  "description": "Convert input into clean, structured, hierarchical bullet points for summarization, note-taking, and structured thinking.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bulletmind",
+  "content": "\n# Bulletmind\n\nWhen active, responses remain in hierarchical bullet format with no paragraphs, no prose blocks, no drift, and only structured bullet output.\n\n---\n\n## When to Use This Skill\n\nTransform input into a structured bullet hierarchy when the user asks for:\n\n- Bullet-only summaries of dense text, notes, explanations, articles, or webpages\n- Cleaned-up note-taking output with clear parent-child relationships\n- Structured study material that is easier to scan and memorize\n- Consistent formatting for messy or mixed bullet lists\n\nUse this skill to enforce:\n\n- No paragraphs or long prose\n- Only bullets with clean indentation\n\nThis improves readability, memorization, and structured thinking for note-taking and review workflows.\n\n---\n\n## Mode\n\nDefault mode: **full**. Switch with `/bulletmind lite|full|ultra` when the user asks for a different level of detail.\n\n---\n\n## Intensity\n\n| Level | Behavior                                                                                            |\n| ----- | --------------------------------------------------------------------------------------------------- |\n| lite  | clean hierarchical bullets, light restructuring, preserve sentence flow                             |\n| full  | default strict hierarchy, balanced compression, clear grouping + splitting                          |\n| ultra | deep hierarchical decomposition, aggressive splitting, high granularity, maximal structural clarity |\n\n---\n\n## Bullet Structure\n\nUse consistent indentation:\n- Top-level idea\n  - Sub-point\n    - Detail\n  - Sub-point\n- Next top-level idea\n  - Sub-point\n\n---\n\n## Rules\n\n- NO paragraphs\n- ONLY bullets `-`\n- ALWAYS hierarchical structure\n- GROUP related ideas under parent bullets\n- SPLIT long sentences into smaller bullets\n- KEEP meaning intact, no over-summarize\n- REMOVE filler words\n\n---\n\n## Formatting\n\n- Use `-` for all bullets\n- Indent: 2 spaces per level\n- Keep bullets short\n- One idea per line\n- No mixed symbols and no prose bridging lines\n\n---\n\n## Transformation Logic\n\n- Paragraph -> main ideas -> top bullets\n- Details -> nested bullets\n- Messy notes -> cleaned hierarchy\n- Existing bullets -> restructure + normalize depth\n- Short input -> still convert into bullet tree\n\n---\n\n## Compression Strategy\n\n- Remove filler words\n- Split complex sentences\n- Preserve key facts + relationships\n- Do NOT flatten structure\n- Prefer clarity over max compression\n\n---\n\n## When Not to Use This Skill\n\n- User requests paragraphs\n- Creative writing tasks such as stories or essays\n- Formats where bullets reduce clarity or violate the requested output format\n\n---\n\n## Output Rule\n\nWhen the skill is active, output:\n\n- Structured bullet hierarchy\n- No commentary or explanation\n\n## Limitations\n\n- Do not use for deliverables that require prose, narrative flow, or exact source quotation.\n- Do not preserve bullet-only formatting if a higher-priority instruction requires tables, code blocks, JSON, or paragraphs.\n- Do not invent structure beyond the source material when the user asks for faithful summarization.\n\n### Examples\n\n- Refer to `EXAMPLES.md` for output templates.\n\n---\n\n## Important Notes\n\n- Prefer clarity over strict compression\n- Avoid flattening everything into one level\n- Maintain a logical tree structure\n",
+  "tags": [
+    "claude",
+    "ai",
+    "workflow",
+    "template",
+    "rag"
+  ],
+  "useCases": [
+    "Bullet-only summaries of dense text, notes, explanations, articles, or webpages",
+    "Cleaned-up note-taking output with clear parent-child relationships",
+    "Structured study material that is easier to scan and memorize",
+    "Consistent formatting for messy or mixed bullet lists",
+    "No paragraphs or long prose"
+  ],
+  "scrapedAt": "2026-04-24T08:14:45.765Z"
+}
