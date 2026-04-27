@@ -12,6 +12,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mmx-
 
 Use `mmx` to generate text, images, video, speech, music, and perform web search via the MiniMax AI platform.
 
+## When to Use
+
+Use this skill when the user wants to generate or inspect text, images, video, speech, music, web-search results, or MiniMax API resources through the `mmx` terminal CLI.
+
 ## Prerequisites
 
 ```bash

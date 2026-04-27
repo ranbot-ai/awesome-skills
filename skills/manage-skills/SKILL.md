@@ -12,6 +12,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mana
 
 You can manage skills and rules for all major AI coding tools directly from the terminal. This skill teaches you the directory layout, file format, and operations for each tool.
 
+## When to Use
+
+Use this skill when the user wants to inspect, create, edit, enable, disable, copy, move, or delete local AI-agent skills or rule files across supported coding tools.
+
 ## Supported Tools & Paths
 
 ### Directory-based tools (multiple skills)
@@ -170,7 +174,4 @@ cp -r ~/.cursor/skills/my-skill .cursor/skills/my-skill
 
 ```bash
 # Search by name
-find ~/.agents/skills ~/.cursor/skills ~/.claude/skills ~/.windsurf/rules ~/.cline/rules ~/.continue/rules ~/.roo/rules -maxdepth 1 -type d 2>/dev/null | sort
-
-# Search by content
-grep -rl "search term" ~/.agents/skills/ ~/.cursor/skills/ ~/.claude/skills/ 2
+find ~/.agents/skills ~/.cursor/skills ~/.claude/skills ~/.windsurf/rules 

@@ -22,6 +22,10 @@ model cannot always cover — integrations that don't expose query history, cust
 between non-warehouse assets, or customers who already have this data and want to send it
 directly.
 
+## When to Use
+
+Use this skill when the user needs to collect metadata, lineage, freshness, volume, or query-log data from a warehouse or adjacent system and push it into Monte Carlo through the push-ingestion API.
+
 Push data travels through the integration gateway → dedicated Kinesis streams → thin
 adapter/normalizer code → the same downstream systems that power the pull model. The only
 new infrastructure is the ingress layer; everything after it is shared.
@@ -118,9 +122,4 @@ All generated scripts MUST use these exact variable names. Do NOT invent alterna
 | Variable | Purpose | Used by |
 |---|---|---|
 | `MCD_INGEST_ID` | Ingestion key ID (scope=Ingestion) | push scripts |
-| `MCD_INGEST_TOKEN` | Ingestion key secret | push scripts |
-| `MCD_ID` | GraphQL API key ID | verification scripts |
-| `MCD_TOKEN` | GraphQL API key secret | verification scripts |
-| `MCD_RESOURCE_UUID` | Warehouse resource UUID | all scripts |
-
-## What 
+| `MCD_INGEST_TOKEN` | Ingestion key se

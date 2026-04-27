@@ -14,6 +14,10 @@ Generate a SQL Notebook with validation queries for dbt changes.
 
 **Arguments:** $ARGUMENTS
 
+## When to Use
+
+Use this skill when the user wants to validate dbt model or snapshot changes with Monte Carlo SQL Notebook queries, either from a GitHub PR or a local dbt repository.
+
 Parse the arguments:
 - **Target** (required): first argument — a GitHub PR URL or local dbt repo path
 - **MC Base URL** (optional): `--mc-base-url <URL>` — defaults to `https://getmontecarlo.com`
@@ -132,7 +136,4 @@ gh pr diff <PR#> --repo <owner>/<repo>
 
 6. For each changed model file, fetch the full file content at the head SHA:
 ```bash
-gh api repos/<owner>/<repo>/contents/<file_path>?ref=<head_sha> --jq '.content' | python3 -c "import sys,base64; sys.stdout.write(base64.b64decode(sys.stdin.read()).decode())"
-```
-
-7. **Fetch dbt_project.yml** for schema resolution. Detect the dbt project root by looking at the changed file paths — find the common parent directory that contains `dbt_projec
+gh api repos/<owner>/<repo>/contents/<file_path>?ref=<head_sha> --jq '.content' | python3 -c "import sys,base64; sys.stdout.write(base64.b64decode(sys.stdin.read()).decode())
