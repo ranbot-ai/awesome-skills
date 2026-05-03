@@ -61,7 +61,7 @@ Integracao completa com Amazon Alexa para criar skills de voz inteligentes, tran
 
 ---
 
-## 2.1 Pre-Requisitos
+### 2.1 Pre-Requisitos
 
 ```bash
 
@@ -191,4 +191,4 @@ from ask_sdk_dynamodb_persistence_adapter import DynamoDbPersistenceAdapter
 
 @sb.request_handler(can_handle_func=is_request_type("LaunchRequest"))
 def launch_handler(handler_input: HandlerInput) -> Response:
-    attrs = handle
+    attrs = handl

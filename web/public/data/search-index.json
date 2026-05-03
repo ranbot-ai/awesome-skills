@@ -1999,7 +1999,6 @@
     "typescript",
     "api",
     "ai",
-    "workflow",
     "template",
     "cro",
     "&",
@@ -17154,6 +17153,24 @@
     "&",
     "tools"
   ],
+  "antigravity-git-pr-review": [
+    "git-pr-review",
+    "generate",
+    "concise",
+    "structured",
+    "description",
+    "from",
+    "commit",
+    "history",
+    "with",
+    "minimal",
+    "token",
+    "usage",
+    "ai",
+    "security",
+    "&",
+    "agents"
+  ],
   "antigravity-git-pr-workflows-git-workflow": [
     "git-pr-workflows-git-workflow",
     "orchestrate",
@@ -28089,25 +28106,6 @@
     "cro",
     "&",
     "agents"
-  ],
-  "antigravity-price-psychology-strategist": [
-    "price-psychology-strategist",
-    "sentence",
-    "what",
-    "this",
-    "skill",
-    "does",
-    "when",
-    "invoke",
-    "ai",
-    "agent",
-    "design",
-    "presentation",
-    "cro",
-    "copywriting",
-    "business",
-    "&",
-    "marketing"
   ],
   "composio-raffle-winner-picker": [
     "raffle-winner-picker",

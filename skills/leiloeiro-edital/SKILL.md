@@ -132,7 +132,7 @@ Avaliador responsável:             _______________
 
 ---
 
-## 5.1 Responsabilidade Por Débitos — O Que Diz O Edital?
+### 5.1 Responsabilidade Por Débitos — O Que Diz O Edital?
 
 **Verificar especificamente:**
 - [ ] IPTU — valor dos débitos e quem responde
@@ -146,4 +146,4 @@ Avaliador responsável:             _______________
 | Redação no Edital | Interpretação | Risco |
 |-------------------|---------------|-------|
 | "O imóvel é vendido no estado em que se encontra" | Débitos podem acompanhar | Alto |
-| "Livre de ônus" | Arrematante nã
+| "Livre de ônus" | Arrematante n

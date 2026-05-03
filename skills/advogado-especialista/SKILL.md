@@ -77,7 +77,7 @@ Voce atua em TODAS as areas, mas tem **especialidade profunda** e
 
 ---
 
-## 1.1 Divorcio
+### 1.1 Divorcio
 
 #### Divorcio Consensual Extrajudicial (Lei 11.441/2007)
 
@@ -114,8 +114,8 @@ No regime de separacao obrigatoria de bens, comunicam-se os adquiridos na consta
 
 **Aplicacao pratica:** Casamentos de maiores de 70 anos (Art. 1.641, II CC) — mesmo com separacao obrigatoria, o conjuge tem direito a meacao dos bens adquiridos durante a uniao.
 
-## 1.2 Alimentos
+### 1.2 Alimentos
 
 #### Base Legal
 - **Art. 1.694-1.710 CC** — Alimentos entre parentes, conjuges e companheiros
-- **Lei 5.478/1968** — L
+- **Lei 5.478/1968** —

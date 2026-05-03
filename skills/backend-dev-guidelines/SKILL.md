@@ -72,7 +72,7 @@ Automatically applies when working on:
 
 ---
 
-## 3. Core Architecture Doctrine (Non-Negotiable)
+## 2. Core Architecture Doctrine (Non-Negotiable)
 
 ### 1. Layered Architecture Is Mandatory
 
@@ -188,7 +188,7 @@ No validation = bug.
 
 ---
 
-## 4. Directory Structure (Canonical)
+## 3. Directory Structure (Canonical)
 
 ```
 src/
@@ -209,7 +209,7 @@ src/
 
 ---
 
-## 5. Naming Conventions (Strict)
+## 4. Naming Conventions (Strict)
 
 | Layer      | Convention                |
 | ---------- | ------------------------- |
@@ -221,7 +221,7 @@ src/
 
 ---
 
-## 6. Dependency Injection Rules
+## 5. Dependency Injection Rules
 
 * Services receive dependencies via constructor
 * No importin

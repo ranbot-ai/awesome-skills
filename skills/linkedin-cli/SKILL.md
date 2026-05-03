@@ -37,7 +37,7 @@ Once the user provides the tokens, run:
 linkedin setup --linked-api-token=TOKEN --identification-token=TOKEN
 ```
 
-## When to Use
+### When to Use
 Use this skill when you need to **orchestrate LinkedIn actions from scripts or an AI agent** instead of clicking through the web UI:
 
 - Building outreach, research, or recruiting workflows that rely on LinkedIn data and messaging.
@@ -130,4 +130,4 @@ linkedin person fetch https://www.linkedin.com/in/username --posts --posts-limit
 linkedin person search [flags] --json -q
 ```
 
-| Flag                   | Description             
+| Flag                   | Description            

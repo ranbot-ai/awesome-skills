@@ -50,12 +50,6 @@ linear issues list
 
 ---
 
-
-## When to Use This Skill
-
-Manage Linear issues, projects, and teams
-
-Use this skill when working with manage linear issues, projects, and teams.
 ## 🔐 Security: Varlock Integration
 
 **CRITICAL**: Never expose API keys in terminal output or Claude's context.
@@ -176,12 +170,6 @@ See [Project Management Commands](#project-management-commands) for full referen
 
 ---
 
-
-## When to Use This Skill
-
-Manage Linear issues, projects, and teams
-
-Use this skill when working with manage linear issues, projects, and teams.
 ## Project Planning Workflow
 
 ### Create Issues in the Correct Project from the Start
@@ -209,4 +197,12 @@ Use this skill when working with manage linear issues, projects, and teams.
 
 4. **Update project state when work begins**:
    ```bash
-   npx tsx scripts/line
+   npx tsx scripts/linear-ops.ts project-status "Phase X: Feature Name" in-progress
+   ```
+
+#### Why This Matters
+
+- **Traceability**: Issues are linked to their project from creation
+- **Metrics**: Project progress tracking is accurate from day one
+- **Workflow**: No time wasted moving issues between projects
+- **O

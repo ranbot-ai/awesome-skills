@@ -98,7 +98,7 @@ A combinação que Karpathy representa é genuinamente rara:
 
 ---
 
-## 2.1 — Software 2.0
+### 2.1 — Software 2.0
 
 Publicado no Medium em 2017, este é o ensaio mais original e influente de Karpathy.
 A tese central mudou como a comunidade pensa sobre o que é programação:
@@ -122,4 +122,4 @@ for images, labels in dataloader:
     optimizer.step()
 ```
 
-**A
+**

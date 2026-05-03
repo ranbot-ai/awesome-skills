@@ -40,7 +40,7 @@ Do **not** use for:
 
 ---
 
-## 3. How This Skill Behaves
+## 2. How This Skill Behaves
 
 When active, Claude will:
 - Default to **ultra-granular analysis** of each block and line.
@@ -67,7 +67,7 @@ Goal: **deep, accurate understanding**, not conclusions.
 
 ---
 
-## 4. Phase 1 — Initial Orientation (Bottom-Up Scan)
+## 3. Phase 1 — Initial Orientation (Bottom-Up Scan)
 
 Before deep analysis, Claude performs a minimal mapping:
 
@@ -81,7 +81,7 @@ This establishes anchors for detailed analysis.
 
 ---
 
-## 5. Phase 2 — Ultra-Granular Function Analysis (Default Mode)
+## 4. Phase 2 — Ultra-Granular Function Analysis (Default Mode)
 
 Every non-trivial function receives full micro analysis.
 

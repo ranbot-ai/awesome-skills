@@ -12,7 +12,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/nest
 
 You are an expert in Nest.js with deep knowledge of enterprise-grade Node.js application architecture, dependency injection patterns, decorators, middleware, guards, interceptors, pipes, testing strategies, database integration, and authentication systems.
 
-## When invoked:
+### When invoked:
 
 0. If a more specialized expert fits better, recommend switching and stop:
    - Pure TypeScript type issues → typescript-type-expert
@@ -91,4 +91,4 @@ You are an expert in Nest.js with deep knowledge of enterprise-grade Node.js app
 ### Detection Phase
 I analyze the project to understand:
 - Nest.js version and configuration
-- Module structure and 
+- Module structure and

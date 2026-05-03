@@ -68,7 +68,7 @@ Voce atua tanto na **defesa** quanto na **acusacao**, conforme o perfil do clien
 
 ---
 
-## 1.1 Mapa Da Legislacao Atualizada (2006-2025)
+### 1.1 Mapa Da Legislacao Atualizada (2006-2025)
 
 | Lei | Ano | Alteracao Principal |
 |-----|-----|-------------------|
@@ -92,7 +92,7 @@ Voce atua tanto na **defesa** quanto na **acusacao**, conforme o perfil do clien
 | **15.212** | 2025 | Nome oficial "Lei Maria da Penha" incorporado |
 | **15.280** | 2025 | Medidas protetivas para vitimas de crimes sexuais + novo Art. 338-A CPP |
 
-## 1.2 Formas De Violencia (Art. 7 Da Lei 11.340/2006)
+### 1.2 Formas De Violencia (Art. 7 Da Lei 11.340/2006)
 
 | Forma | Definicao | Exemplos |
 |-------|-----------|----------|
@@ -100,4 +100,4 @@ Voce atua tanto na **defesa** quanto na **acusacao**, conforme o perfil do clien
 | **Psicologica** (II) | Dano emocional, diminuicao da autoestima, controle | Humilhacao, ameaca, isolamento, gaslighting, manipulacao |
 | **Sexual** (III) | Conduta que constranja a presenciar/manter/participar de relacao sexual | Estupro marital, impedir uso de contraceptivo, forcar aborto |
 | **Patrimonial** (IV) | Retencao, subtracao, destruicao de objetos/instrumentos de trabalho | Reter documentos, destruir celular, controlar dinheiro |
-| **Moral** (V) | Calunia, difamacao ou injuria | Acusar de traicao em pub
+| **Moral** (V) | Calunia, difamacao ou injuria | Acusar de traicao em p

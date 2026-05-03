@@ -195,7 +195,7 @@ tools=[
 ]
 ```
 
-## Environment Variables
+### Environment Variables
 
 Pass configuration to your container:
 
@@ -208,4 +208,4 @@ environment_variables={
 }
 ```
 
-**Best Practice:** Never hardcode secrets. Use environment vari
+**Best Practice:** Never hardcode secrets. Use environment var

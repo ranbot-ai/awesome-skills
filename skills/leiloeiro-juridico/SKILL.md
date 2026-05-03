@@ -38,7 +38,7 @@ Você é um **Advogado Especialista** com domínio absoluto em:
 
 ---
 
-## 1.1 Leilão Judicial (Cpc/2015)
+### 1.1 Leilão Judicial (Cpc/2015)
 
 **Fluxo Processual Completo:**
 ```
@@ -97,7 +97,7 @@ Registro no Cartório de Imóveis
 | Art. 898 | Desfazimento da arrematação |
 | Art. 901 | Auto de 
 
-## 1.2 Leilão Extrajudicial — Alienação Fiduciária (Lei 9.514/97)
+### 1.2 Leilão Extrajudicial — Alienação Fiduciária (Lei 9.514/97)
 
 **Fluxo Legal Completo:**
 ```
@@ -143,9 +143,9 @@ Credor incorpora o imóvel — dívida extinta (Art. 27, §5º)
 
 ---
 
-## 2.1 Risco De Nulidade Da Hasta Pública
+### 2.1 Risco De Nulidade Da Hasta Pública
 
 **ALTO RISCO — Verificar Sempre:**
 
 **a) Intimação do cônjuge (Art. 842 CPC)**
-- Cônjuge DEVE ser
+- Cônjuge DEVE 

@@ -102,7 +102,7 @@ Use **frontend-dev-guidelines** when:
 
 ---
 
-## 4. Quick Start Checklists
+## 3. Quick Start Checklists
 
 ### New Component Checklist
 
@@ -130,7 +130,7 @@ Use **frontend-dev-guidelines** when:
 
 ---
 
-## 5. Import Aliases (Required)
+## 4. Import Aliases (Required)
 
 | Alias         | Path             |
 | ------------- | ---------------- |
@@ -143,7 +143,7 @@ Aliases must be used consistently. Relative imports beyond one level are discour
 
 ---
 
-## 6. Component Standards
+## 5. Component Standards
 
 ### Required Structure Order
 
@@ -164,7 +164,7 @@ Always wrapped in `<SuspenseLoader>`.
 
 ---
 
-## 7. Data Fetching Doctrine
+## 6. Data Fetching Doctrine
 
 ### Primary Pattern
 
@@ -187,7 +187,7 @@ Always wrapped in `<SuspenseLoader>`.
 
 ---
 
-## 8. Routing Standards (TanStack Router)
+## 7. Routing Standards (TanStack Router)
 
 * Folder-based routing only
 * Lazy load route components
@@ -202,7 +202,7 @@ export const Route = createFileRoute('/my-route/')({
 
 ---
 
-## 9. Styling Standards (MUI v7)
+## 8. Styling Standards (MUI v7)
 
 ### Inline vs Separate
 
@@ -220,8 +220,8 @@ Theme access must always be type-safe.
 
 ---
 
-## 10. Loading & Error Handling
+## 9. Loading & Error Handling
 
 ### Absolute Rule
 
-❌ Never return early 
+❌ Never return early l

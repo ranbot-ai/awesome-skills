@@ -47,7 +47,7 @@ A sintese dessas perspectivas e o que separa decisoes mediocres de decisoes imor
 
 ---
 
-## 2.1 Personas Disponiveis
+### 2.1 Personas Disponiveis
 
 | Agente | Especialidade Core | Quando Chamar |
 |--------|-------------------|---------------|
@@ -65,7 +65,7 @@ A sintese dessas perspectivas e o que separa decisoes mediocres de decisoes imor
 | `007` | Security, threat modeling, infraestrutura | Riscos de seguranca, vulnerabilidades |
 | `product-inventor` | Design systems, UX/UI, React/Next.js | Execucao de produto, UI engineering |
 
-## 2.2 Boards Pre-Configurados
+### 2.2 Boards Pre-Configurados
 
 | Board | Composicao | Uso |
 |-------|-----------|-----|
@@ -79,7 +79,7 @@ A sintese dessas perspectivas e o que separa decisoes mediocres de decisoes imor
 
 ---
 
-## 3.1 Fluxo Standard
+### 3.1 Fluxo Standard
 
 ```
 1. RECEBER: Questao do usuario
@@ -90,7 +90,7 @@ A sintese dessas perspectivas e o que separa decisoes mediocres de decisoes imor
 6. SINTETIZAR: Visao consolidada + recomendacao final
 ```
 
-## 3.2 Como Invocar Cada Persona
+### 3.2 Como Invocar Cada Persona
 
 Para cada membro do board, adote completamente a perspectiva daquela persona:
 
@@ -121,10 +121,10 @@ Para cada membro do board, adote completamente a perspectiva daquela persona:
 
 ---
 
-## 4.1 Estrutura Do Conselho
+### 4.1 Estrutura Do Conselho
 
 ```markdown
 
 ## Multi-Advisor: [Topico]
 
-**Board Ativo:** [p
+**Board Ativo:

@@ -105,7 +105,7 @@ concept-art, comic, minimalist, fantasy, sci-fi, sketch, pop-art, noir
 
 ---
 
-## 3.1 Geracao Simples
+### 3.1 Geracao Simples
 
 ```
 Usuario: "crie uma imagem de X"
@@ -118,7 +118,7 @@ Usuario: "crie uma imagem de X"
 6. Oferecer: variacoes, ajustes, versao alternativa
 ```
 
-## 3.2 Geracao Com Ai-Studio-Image
+### 3.2 Geracao Com Ai-Studio-Image
 
 Usar sistema de templates e prompt engine:
 
@@ -137,7 +137,7 @@ python generate.py --prompt "mulher jovem em home office, luz natural, laptop"
 python generate.py --prompt "..." --humanization maximum
 ```
 
-## 3.3 Geracao Com Stability-Ai
+### 3.3 Geracao Com Stability-Ai
 
 Mapear para modo correto:
 
@@ -173,4 +173,4 @@ python generate.py upscale --image small.jpg --scale 4
 [Sujeito principal] + [Acao/pose] + [Ambiente] + [Iluminacao] + [Detalhe humano]
 
 Exemplo:
-"jovem mulher brasileir
+"jovem mulher brasil

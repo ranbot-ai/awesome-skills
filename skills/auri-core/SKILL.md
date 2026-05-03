@@ -113,11 +113,11 @@ Exemplo de marcacao SSML para Amazon Polly Vitoria Neural:
 Fluxo de dados: Echo -> ASK SDK (Python v2) -> Lambda Python 3.12 -> Claude claude-opus-4-20250805
 Componentes AWS: DynamoDB (memoria), Polly Vitoria Neural (voz), CloudWatch (logs), Secrets Manager (keys)
 
-## 3.1 Dependencias
+### 3.1 Dependencias
 
 ask-sdk-core==1.19.0 | ask-sdk-model==1.85.0 | boto3==1.34.0 | anthropic==0.25.0 | python-dotenv==1.0.0
 
-## 3.2 Lambda Handler Principal
+### 3.2 Lambda Handler Principal
 
 Codigo Python - lambda_function.py:
   sb = CustomSkillBuilder()
@@ -126,7 +126,7 @@ Codigo Python - lambda_function.py:
   sb.add_global_response_interceptor(MemorySaveInterceptor())
   lambda_handler = sb.lambda_handler()
 
-## 3.3 Handler De Conversa Com Claude
+### 3.3 Handler De Conversa Com Claude
 
 Codigo Python - handlers/conversation.py:
   class ConversationIntentHandler(AbstractRequestHandler):
@@ -137,17 +137,17 @@ Codigo Python - handlers/conversation.py:
           system=system_prompt, messages=history+[user_speech])
       Salva resposta no historico, retorna SSML com voz Vitoria
 
-## 3.4 Dynamodb Schema
+### 3.4 Dynamodb Schema
 
 Tabela: auri-user-memory | PK: user_id | SK: session_date | TTL: 90 dias
 Campos: profile (name, plan, preferences), long_term_memory[], usage_stats{}
 BillingMode: PAY_PER_REQUEST | TimeToLive: habilitado (auto-expira)
 
-## 3.5 Interaction Model
+### 3.5 Interaction Model
 
 invocationName: auri
 ConversationIntent: slot query (AMAZON.SearchQuery)
 Samples: {query}, me fala sobre {query}, o que e {query}, explica {query}
 StopIntent: tchau, ate mais, encerrar
 
-## 3.6 Configuracao Lambd
+### 3.6 Configuracao
