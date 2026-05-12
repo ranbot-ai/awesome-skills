@@ -3,7 +3,7 @@ name: mock-hunter
 description: Audit a live web page in five phases (catalog, click, trace, classify, report) to identify mock data, hardcoded values, LLM-generated metrics, and broken endpoints. Outputs a markdown report with REAL
 category: Business & Marketing
 source: antigravity
-tags: [markdown, api, mcp, claude, ai, llm, image, security, supabase, cro]
+tags: [markdown, api, mcp, claude, ai, llm, workflow, image, security, supabase]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mock-hunter
 ---
 
@@ -15,6 +15,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mock
 MockHunter is a Claude Code skill that audits a live web page and tells you, for every visible value, whether it is real, mocked, LLM-generated, hardcoded, broken, or unknown. It is built for vibe-coded apps (Lovable, Bolt, v0, Replit, AI Studio, Cursor Composer) where the UI may look complete but the data layer often is not. It uses Playwright MCP to drive a real browser, then traces each visible value through the network and DOM to its source.
 
 This skill adapts the upstream `CodeShuX/mockhunter` project (community source).
+
+Because this workflow drives a real browser against live pages, treat it as an interactive audit tool, not a plugin-safe read-only helper. Default to observation-only until the user confirms the target is theirs, identifies a safe test account or environment, and explicitly approves any click, submit, or authenticated action that can mutate state.
 
 ## When to Use This Skill
 
@@ -30,7 +32,7 @@ This skill adapts the upstream `CodeShuX/mockhunter` project (community source).
 1. Greet the user, ask for the target URL
 2. Auto-detect the stack from the URL (`*.lovable.app`, `*.bolt.new`, `*.v0.app`, `*.replit.app`, `aistudio.google.com`, otherwise Custom)
 3. Ask 3-5 targeted questions: auth mode (public / localhost / form / skip), DB access (optional), suspicions, page goal
-4. Confirm the audit plan before proceeding
+4. Confirm the audit plan, ownership/permission, target environment, and allowed action classes before proceeding
 
 ### Phase 2: Navigate & Catalog
 
@@ -43,9 +45,9 @@ This skill adapts the upstream `CodeShuX/mockhunter` project (community source).
 
 ### Phase 3: Test Interactivity
 
-1. For every tab: click, snapshot, scroll to bottom, re-catalog
-2. For every button (excluding destructive matches `/delete|remove|cancel|deactivate|terminate|destroy|drop|wipe|clear|reset|logout|sign out|transfer|pay|purchase|charge|send (email|message|invoice)|publish|deploy/i`): click, observe, classify outcome (modal, toast, navigation, network call, NO-OP)
-3. For every form: identify required fields, attempt empty submit (validate), submit valid throwaway data only if non-destructive
+1. For every tab: click only after the user has approved navigation-style interactions, then snapshot, scroll to bottom, re-catalog
+2. For every button: click only user-approved, allowlisted controls that are clearly non-destructive by role, accessible name, nearby text, icon, URL/action target, and expected network side effect; skip destructive or ambiguous controls rather than relying on a label regex alone
+3. For every form: identify required fields and prefer empty-submit validation; submit throwaway data only when the user explicitly approved the exact form, target environment, and test account
 4. Record per-element behavior
 
 ### Phase 4: Trace Provenance
@@ -107,15 +109,4 @@ Skill: [Phase 1] Stack detected: Lovable. Auth: skip. DB: no.
 User: /mockhunter audit https://example-saas.com
 Skill: ...
        [Phase 5] Verdict: 8 REAL, 18 HARDCODED (intentional marketing copy),
-                 0 MOCK, 0 BROKEN, 2 UNKNOWN.
-                 No console errors, no broken endpoints.
-```
-
-## Best Practices
-
-- ✅ Provide DB access when available — lifts UNKNOWN verdicts to REAL or MOCK
-- ✅ Use a dedicated test account for form-login auth
-- ✅ Run cold-start tests (zero data) — many vibe-coded apps fail there
-- ✅ Tell the skill if specific sections are intentionally AI-generated, so it doesn't false-flag them
-- ❌ Don't run on apps you don't own without permission — it clicks every button
-- ❌ Don't skip the destructive
+       
