@@ -1,0 +1,25 @@
+{
+  "id": "antigravity-options-flow-analyzer",
+  "name": "options-flow-analyzer",
+  "slug": "options-flow-analyzer",
+  "description": "Real vs lottery call separation for options P/C ratio analysis — prevents signal inversion from deep OTM noise",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/options-flow-analyzer",
+  "content": "# Options Flow Analyzer\n\nAnalyze options chain data with real vs lottery call separation — the key insight that prevents P/C ratio misinterpretation. Uses Polygon.io API.\n\n## When to Use\n\n- Use when raw put/call ratios appear bullish or bearish but may be distorted by cheap deep OTM contracts.\n- Use when comparing options flow across watchlists, holdings, sectors, or event-driven names.\n- Use when you need to separate institutional hedging from speculative lottery-ticket activity.\n- Use when tracking options anomalies against a recent baseline.\n\n## What it does\n\nStandard P/C ratio analysis is misleading. A P/C of 0.35 looks \"extremely bullish\" but may be 84% lottery calls ($0.01-$0.09 OTM options).\n\nThis skill separates:\n- **Real calls**: Strike price within 5% of stock price, meaningful premium\n- **Lottery calls**: Deep OTM, cheap premium, speculative bets\n- **Real puts**: Actual hedging activity\n- **Lottery puts**: Cheap downside bets\n\n## Analysis Output\n\nFor each ticker:\n- Real P/C ratio (excludes lottery noise)\n- Lottery percentage (what % of volume is speculation)\n- Per-expiry breakdown (weekly vs monthly vs LEAPS)\n- Anomaly detection: P/C shifts >0.3, Call OI surges >30%, IV spikes >20%\n- Sentiment classification: Bullish/Bearish/Neutral with confidence\n\n## Example Output\n\n```\nOptions Flow Summary — 2026-05-13\n\nHOLDINGS:\nCEG  $299.69 | Raw P/C: 1.06 | Lottery: 61% | Adj P/C: 2.72  BEARISH (was neutral raw)\nIREN $55.15  | Raw P/C: 0.83 | Lottery: 34% | Adj P/C: 0.55  BULLISH\nKTOS $56.99  | Raw P/C: 0.53 | Lottery: 28% | Adj P/C: 0.38  EXTREME BULLISH\nRXRX $3.26   | Raw P/C: 0.38 | Lottery: 84% | Adj P/C: 2.37  BEARISH (was extreme bullish raw)\n\nSECTORS:\nXLI  | Raw P/C: 5.32 | Lottery:  8% | Adj P/C: 4.89  INSTITUTIONAL HEDGE\n\nANOMALIES:\nXLI: P/C 5.32 vs 30-day baseline 0.87 — 4.5 std deviations above normal\nRXRX: 84% lottery calls — raw P/C signal completely inverted after filtering\n```\n\n## Configuration\n\n```\nAnalyze options flow for my watchlist:\nHoldings: CEG, IREN, KTOS, RXRX, TEM\nSectors: SPY, QQQ, XLI, XLK\nSeparate real vs lottery calls (threshold: premium < $0.10, delta < 0.05).\nFlag anomalies vs 30-day baseline.\n```\n\n## Requirements\n\n- Polygon.io API key (free tier covers basic data; paid tier for full chain)\n- WebSearch for cross-verification\n\n## Limitations\n\n- Options data can be delayed, incomplete, or unavailable depending on the Polygon.io plan.\n- Heuristics such as premium and delta thresholds need adjustment for ticker price, volatility, and expiry.\n- Sentiment classifications are analytical signals, not financial advice or trade recommendations.\n- Always cross-check unusual flow against price action, news catalysts, liquidity, and risk controls.\n\n## Key Discovery\n\nThis real/lottery separation was discovered during live portfolio management when RXRX showed P/C 0.35 (looks extremely bullish) but was actually 84% lottery calls at $0.01-$0.09. The \"bullish signal\" was noise. This skill prevents that mistake.\n\n## Pricing\n\nFree: Basic P/C ratio for 3 tickers\n**Full bundle — $29 one-time**: Real/lottery separation + anomaly detection + per-expiry + unlimited tickers\n→ https://jaehyunpark.gumroad.com/l/tcyahy\n\n## Author\n\nBuilt from a real trading mistake that cost money. The real/lottery discovery is documented and battle-tested across 17 tickers over 2+ months.\n",
+  "tags": [
+    "api",
+    "ai",
+    "llm",
+    "document",
+    "cro"
+  ],
+  "useCases": [
+    "Use when raw put/call ratios appear bullish or bearish but may be distorted by cheap deep OTM contracts.",
+    "Use when comparing options flow across watchlists, holdings, sectors, or event-driven names.",
+    "Use when you need to separate institutional hedging from speculative lottery-ticket activity.",
+    "Use when tracking options anomalies against a recent baseline."
+  ],
+  "scrapedAt": "2026-05-14T08:51:46.144Z"
+}

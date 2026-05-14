@@ -21695,6 +21695,37 @@
       "scrapedAt": "2026-02-14T07:06:20.610Z"
     },
     {
+      "id": "antigravity-mcp-tool-developer",
+      "name": "mcp-tool-developer",
+      "slug": "mcp-tool-developer",
+      "description": "Build Model Context Protocol (MCP) servers and tools from scratch. Full-stack MCP development with TypeScript/Python, testing, deployment, and registry publishing.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mcp-tool-developer",
+      "content": "\n# MCP Tool Developer\n\n## Overview\n\nExpert at building Model Context Protocol (MCP) servers that give AI agents new capabilities. Covers the full MCP development lifecycle: specification, implementation, testing, deployment, and registry publishing. Supports both TypeScript and Python with production-ready patterns.\n\nThis skill understands MCP specification primitives (tools, resources, prompts, sampling), transport options (stdio, SSE, Streamable HTTP), and the tool design patterns that make MCP servers reliable and composable.\n\n## When to Use This Skill\n\n- Use when building a new MCP server from scratch\n- Use when wrapping an existing API as an MCP tool\n- Use when debugging MCP server issues\n- Use when designing the tool schema for an MCP server\n- Use when publishing an MCP server to a registry\n\n## How It Works\n\n### Step 1: Define the MCP Server Scope\n\nIdentify what capabilities the server should expose:\n- **Tools** - Functions the LLM can call (primary use case)\n- **Resources** - Data the LLM can read (files, APIs, databases)\n- **Prompts** - Reusable prompt templates\n\nChoose the transport:\n- **stdio** - For local CLI tools (Claude Code, Cursor)\n- **SSE (Server-Sent Events)** - For remote/hosted tools\n- **Streamable HTTP** - New in MCP spec for modern deployments\n\n### Step 2: Design the Tool Schema\n\nDefine input/output schemas before writing implementation:\n\n```typescript\n{\n  name: \"tool_name\",\n  description: \"What this tool does (visible to the LLM)\",\n  inputSchema: {\n    type: \"object\",\n    properties: { ... },\n    required: [ ... ]\n  }\n}\n```\n\n### Step 3: Implement the Server\n\nCreate the server with proper error handling, validation, and logging. Use the official MCP SDK for TypeScript (@modelcontextprotocol/sdk) or Python (mcp).\n\n### Step 4: Test and Deploy\n\nTest with the MCP Inspector, validate tool schemas, handle edge cases, then deploy locally or remotely.\n\n## Examples\n\n### Example 1: TypeScript MCP Server\n\n```typescript\nimport { McpServer } from \"@modelcontextprotocol/sdk/server/mcp.js\";\nimport { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\";\nimport { z } from \"zod\";\n\nconst server = new McpServer({ name: \"my-tools\", version: \"1.0.0\" });\n\nserver.tool(\"greet\", \"Greet someone by name\",\n  { name: z.string().describe(\"Person's name\") },\n  async ({ name }) => ({ content: [{ type: \"text\", text: `Hello, ${name}!` }] })\n);\n\nconst transport = new StdioServerTransport();\nawait server.connect(transport);\n```\n\n### Example 2: API Wrapper Pattern\n\nWrap an external API as an MCP tool with auth, rate limiting, and error handling:\n- Map API endpoints to tools\n- Handle auth via environment variables\n- Transform API responses to LLM-friendly format\n- Add retry logic with exponential backoff\n\n## Best Practices\n\n- Build small, focused tools that can be chained rather than monolithic tools\n- Return structured errors, not crashes - tools should fail gracefully\n- Define schemas before implementation\n- Include descriptions that help the LLM understand when and how to use each tool\n- Validate all inputs against the schema\n- Add rate limiting for external API calls\n- Use environment variables for secrets, never hardcode credentials\n\n## Limitations\n\n- This skill provides guidance and code generation; actual runtime testing requires a development environment\n- MCP specification is evolving; always check the latest spec version\n- Security review is essential before deploying tools that handle sensitive data\n\n## Security and Safety Notes\n\n- Never hardcode API keys or credentials in tool implementations\n- Use environment variables or secret managers for all authentication\n- Validate and sanitize all inputs to prevent injection attacks\n- Rate limit external API calls to prevent abuse\n- Review tool permissions carefully - tools can access files, networks, and execute code\n\n## Common Pitfalls\n\n- **Problem:** LLM calls tools with wrong parameters\n  **Solution:** Improve tool descriptions and add examples in the description field. The LLM reads descriptions to decide how to call tools.\n\n- **Problem:** Tool times out on large inputs\n  **Solution:** Add input size validation and pagination. Stream large responses instead of buffering.\n\n## Related Skills\n\n- `api-integration-architect` - For API design patterns used in MCP tools\n- `security-audit-code-reviewer` - For reviewing MCP server code security\n",
+      "tags": [
+        "python",
+        "typescript",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "template",
+        "design"
+      ],
+      "useCases": [
+        "Use when building a new MCP server from scratch",
+        "Use when wrapping an existing API as an MCP tool",
+        "Use when debugging MCP server issues",
+        "Use when designing the tool schema for an MCP server",
+        "Use when publishing an MCP server to a registry"
+      ],
+      "scrapedAt": "2026-05-14T08:51:01.921Z"
+    },
+    {
       "id": "composio-meeting-insights-analyzer",
       "name": "meeting-insights-analyzer",
       "slug": "meeting-insights-analyzer",
@@ -23282,6 +23313,33 @@
       "scrapedAt": "2026-03-07T06:56:17.416Z"
     },
     {
+      "id": "antigravity-news-sentiment-engine",
+      "name": "news-sentiment-engine",
+      "slug": "news-sentiment-engine",
+      "description": "Multi-source RSS news aggregation with Claude-powered sentiment analysis and structured briefing output",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/news-sentiment-engine",
+      "content": "# News Sentiment Engine (Free)\n\nCollect and analyze AI/tech news from multiple sources with Claude-powered sentiment analysis. Open source lite version.\n\n## When to Use\n\n- Use when preparing a concise AI or technology news briefing from multiple RSS sources.\n- Use when you need ranked article summaries with sentiment, tags, and impact scoring.\n- Use when monitoring industry changes across product launches, policy moves, and infrastructure shifts.\n- Use when deduplicating overlapping coverage before writing a daily or weekly briefing.\n\n## What it does\n\n- Collects news from 4+ RSS feeds (TechCrunch, The Verge, Ars Technica, Hacker News)\n- Deduplicates articles across sources\n- Ranks by importance (industry impact, technology trends, policy changes)\n- Generates structured briefing with sentiment tags\n- Outputs formatted briefing card\n\n## Usage\n\n```\nCollect latest AI/tech news from RSS feeds.\nRank top 5 by importance to the tech industry.\nFor each: summary (2-3 sentences), sentiment (positive/negative/neutral),\nimpact score (1-5), industry tags, one-sentence commentary.\nOutput as a structured briefing card.\n```\n\n## Example Output\n\n```\nAI/Tech News Briefing — 2026-05-13\n\n1. OpenAI announces GPT-5 with 2M context window\n   Source: TechCrunch | Impact: 5/5\n   Tags: #AI #LLM #OpenAI\n   Sentiment: Positive\n\n   Summary: OpenAI unveiled GPT-5 with a 2M token context window and\n   improved reasoning. Enterprise pricing starts at $0.03/1k tokens.\n\n   Commentary: Direct competitive pressure on Anthropic Claude 3.5.\n   Enterprise deals may shift in H2 2026.\n\n2. EU AI Act enforcement begins for high-risk systems\n   Source: The Verge | Impact: 4/5\n   Tags: #Regulation #EU #Compliance\n   Sentiment: Neutral\n```\n\n## Output Format\n\nFor each article:\n- Title + source + publish date\n- Summary (2-3 sentences)\n- Industry tags: [AI, Semiconductor, Cloud, etc.]\n- Sentiment: Positive/Negative/Neutral\n- Impact score: 1-5\n- Commentary: 1-sentence industry perspective\n\n## Setup\n\n```bash\ngit clone https://github.com/tellmefrankie/news-engine\ncd news-engine\npnpm install\ncp .env.example .env\n# Requires: ANTHROPIC_API_KEY\npnpm dev -- --collect-only\n```\n\nNo paid APIs required for free tier. Anthropic API key only.\n\n## Limitations\n\n- RSS feeds can lag, disappear, throttle, or duplicate syndicated coverage.\n- Sentiment and impact scores are briefing aids, not authoritative market or policy analysis.\n- The example setup runs third-party code; review the repository and environment variables before use.\n- Outputs should be cross-checked against original article sources before publication or investment use.\n\n## Pro Version\n\nFree tier covers news collection and basic analysis.\n\n**Full bundle — $29 one-time**: Investment-grade analysis (portfolio impact scoring, options flow correlation, earnings catalyst detection), Telegram auto-delivery.\n→ https://jaehyunpark.gumroad.com/l/tcyahy\n\n## Author\n\nCore module from a production news analysis engine processing 50+ articles daily since 2026.\n",
+      "tags": [
+        "api",
+        "claude",
+        "ai",
+        "llm",
+        "gpt",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Use when preparing a concise AI or technology news briefing from multiple RSS sources.",
+        "Use when you need ranked article summaries with sentiment, tags, and impact scoring.",
+        "Use when monitoring industry changes across product launches, policy moves, and infrastructure shifts.",
+        "Use when deduplicating overlapping coverage before writing a daily or weekly briefing."
+      ],
+      "scrapedAt": "2026-05-14T08:51:25.757Z"
+    },
+    {
       "id": "antigravity-nextjs-app-router-patterns",
       "name": "nextjs-app-router-patterns",
       "slug": "nextjs-app-router-patterns",
@@ -24736,6 +24794,31 @@
       "scrapedAt": "2026-03-19T07:10:38.828Z"
     },
     {
+      "id": "antigravity-options-flow-analyzer",
+      "name": "options-flow-analyzer",
+      "slug": "options-flow-analyzer",
+      "description": "Real vs lottery call separation for options P/C ratio analysis — prevents signal inversion from deep OTM noise",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/options-flow-analyzer",
+      "content": "# Options Flow Analyzer\n\nAnalyze options chain data with real vs lottery call separation — the key insight that prevents P/C ratio misinterpretation. Uses Polygon.io API.\n\n## When to Use\n\n- Use when raw put/call ratios appear bullish or bearish but may be distorted by cheap deep OTM contracts.\n- Use when comparing options flow across watchlists, holdings, sectors, or event-driven names.\n- Use when you need to separate institutional hedging from speculative lottery-ticket activity.\n- Use when tracking options anomalies against a recent baseline.\n\n## What it does\n\nStandard P/C ratio analysis is misleading. A P/C of 0.35 looks \"extremely bullish\" but may be 84% lottery calls ($0.01-$0.09 OTM options).\n\nThis skill separates:\n- **Real calls**: Strike price within 5% of stock price, meaningful premium\n- **Lottery calls**: Deep OTM, cheap premium, speculative bets\n- **Real puts**: Actual hedging activity\n- **Lottery puts**: Cheap downside bets\n\n## Analysis Output\n\nFor each ticker:\n- Real P/C ratio (excludes lottery noise)\n- Lottery percentage (what % of volume is speculation)\n- Per-expiry breakdown (weekly vs monthly vs LEAPS)\n- Anomaly detection: P/C shifts >0.3, Call OI surges >30%, IV spikes >20%\n- Sentiment classification: Bullish/Bearish/Neutral with confidence\n\n## Example Output\n\n```\nOptions Flow Summary — 2026-05-13\n\nHOLDINGS:\nCEG  $299.69 | Raw P/C: 1.06 | Lottery: 61% | Adj P/C: 2.72  BEARISH (was neutral raw)\nIREN $55.15  | Raw P/C: 0.83 | Lottery: 34% | Adj P/C: 0.55  BULLISH\nKTOS $56.99  | Raw P/C: 0.53 | Lottery: 28% | Adj P/C: 0.38  EXTREME BULLISH\nRXRX $3.26   | Raw P/C: 0.38 | Lottery: 84% | Adj P/C: 2.37  BEARISH (was extreme bullish raw)\n\nSECTORS:\nXLI  | Raw P/C: 5.32 | Lottery:  8% | Adj P/C: 4.89  INSTITUTIONAL HEDGE\n\nANOMALIES:\nXLI: P/C 5.32 vs 30-day baseline 0.87 — 4.5 std deviations above normal\nRXRX: 84% lottery calls — raw P/C signal completely inverted after filtering\n```\n\n## Configuration\n\n```\nAnalyze options flow for my watchlist:\nHoldings: CEG, IREN, KTOS, RXRX, TEM\nSectors: SPY, QQQ, XLI, XLK\nSeparate real vs lottery calls (threshold: premium < $0.10, delta < 0.05).\nFlag anomalies vs 30-day baseline.\n```\n\n## Requirements\n\n- Polygon.io API key (free tier covers basic data; paid tier for full chain)\n- WebSearch for cross-verification\n\n## Limitations\n\n- Options data can be delayed, incomplete, or unavailable depending on the Polygon.io plan.\n- Heuristics such as premium and delta thresholds need adjustment for ticker price, volatility, and expiry.\n- Sentiment classifications are analytical signals, not financial advice or trade recommendations.\n- Always cross-check unusual flow against price action, news catalysts, liquidity, and risk controls.\n\n## Key Discovery\n\nThis real/lottery separation was discovered during live portfolio management when RXRX showed P/C 0.35 (looks extremely bullish) but was actually 84% lottery calls at $0.01-$0.09. The \"bullish signal\" was noise. This skill prevents that mistake.\n\n## Pricing\n\nFree: Basic P/C ratio for 3 tickers\n**Full bundle — $29 one-time**: Real/lottery separation + anomaly detection + per-expiry + unlimited tickers\n→ https://jaehyunpark.gumroad.com/l/tcyahy\n\n## Author\n\nBuilt from a real trading mistake that cost money. The real/lottery discovery is documented and battle-tested across 17 tickers over 2+ months.\n",
+      "tags": [
+        "api",
+        "ai",
+        "llm",
+        "document",
+        "cro"
+      ],
+      "useCases": [
+        "Use when raw put/call ratios appear bullish or bearish but may be distorted by cheap deep OTM contracts.",
+        "Use when comparing options flow across watchlists, holdings, sectors, or event-driven names.",
+        "Use when you need to separate institutional hedging from speculative lottery-ticket activity.",
+        "Use when tracking options anomalies against a recent baseline."
+      ],
+      "scrapedAt": "2026-05-14T08:51:46.144Z"
+    },
+    {
       "id": "antigravity-oral-health-analyzer",
       "name": "oral-health-analyzer",
       "slug": "oral-health-analyzer",
@@ -25812,72 +25895,6 @@
       "scrapedAt": "2026-01-26T13:20:26.365Z"
     },
     {
-      "id": "antigravity-postgresql",
-      "name": "postgresql",
-      "slug": "postgresql",
-      "description": "Design a PostgreSQL-specific schema. Covers best-practices, data types, indexing, constraints, performance patterns, and advanced features",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/postgresql",
-      "content": "\n# PostgreSQL Table Design \n\n## Use this skill when\n\n- Designing a schema for PostgreSQL\n- Selecting data types and constraints\n- Planning indexes, partitions, or RLS policies\n- Reviewing tables for scale and maintainability\n\n## Do not use this skill when\n\n- You are targeting a non-PostgreSQL database\n- You only need query tuning without schema changes\n- You require a DB-agnostic modeling guide\n\n## Instructions\n\n1. Capture entities, access patterns, and scale targets (rows, QPS, retention).\n2. Choose data types and constraints that enforce invariants.\n3. Add indexes for real query paths and validate with `EXPLAIN`.\n4. Plan partitioning or RLS where required by scale or access control.\n5. Review migration impact and apply changes safely.\n\n## Safety\n\n- Avoid destructive DDL on production without backups and a rollback plan.\n- Use migrations and staging validation before applying schema changes.\n\n## Core Rules\n\n- Define a **PRIMARY KEY** for reference tables (users, orders, etc.). Not always needed for time-series/event/log data. When used, prefer `BIGINT GENERATED ALWAYS AS IDENTITY`; use `UUID` only when global uniqueness/opacity is needed.\n- **Normalize first (to 3NF)** to eliminate data redundancy and update anomalies; denormalize **only** for measured, high-ROI reads where join performance is proven problematic. Premature denormalization creates maintenance burden.\n- Add **NOT NULL** everywhere it’s semantically required; use **DEFAULT**s for common values.\n- Create **indexes for access paths you actually query**: PK/unique (auto), **FK columns (manual!)**, frequent filters/sorts, and join keys.\n- Prefer **TIMESTAMPTZ** for event time; **NUMERIC** for money; **TEXT** for strings; **BIGINT** for integer values, **DOUBLE PRECISION** for floats (or `NUMERIC` for exact decimal arithmetic).\n\n## PostgreSQL “Gotchas”\n\n- **Identifiers**: unquoted → lowercased. Avoid quoted/mixed-case names. Convention: use `snake_case` for table/column names.\n- **Unique + NULLs**: UNIQUE allows multiple NULLs. Use `UNIQUE (...) NULLS NOT DISTINCT` (PG15+) to restrict to one NULL.\n- **FK indexes**: PostgreSQL **does not** auto-index FK columns. Add them.\n- **No silent coercions**: length/precision overflows error out (no truncation). Example: inserting 999 into `NUMERIC(2,0)` fails with error, unlike some databases that silently truncate or round.\n- **Sequences/identity have gaps** (normal; don't \"fix\"). Rollbacks, crashes, and concurrent transactions create gaps in ID sequences (1, 2, 5, 6...). This is expected behavior—don't try to make IDs consecutive.\n- **Heap storage**: no clustered PK by default (unlike SQL Server/MySQL InnoDB); `CLUSTER` is one-off reorganization, not maintained on subsequent inserts. Row order on disk is insertion order unless explicitly clustered.\n- **MVCC**: updates/deletes leave dead tuples; vacuum handles them—design to avoid hot wide-row churn.\n\n## Data Types\n\n- **IDs**: `BIGINT GENERATED ALWAYS AS IDENTITY` preferred (`GENERATED BY DEFAULT` also fine); `UUID` when merging/federating/used in a distributed system or for opaque IDs. Generate with `uuidv7()` (preferred if using PG18+) or `gen_random_uuid()` (if using an older PG version).\n- **Integers**: prefer `BIGINT` unless storage space is critical; `INTEGER` for smaller ranges; avoid `SMALLINT` unless constrained.\n- **Floats**: prefer `DOUBLE PRECISION` over `REAL` unless storage space is critical. Use `NUMERIC` for exact decimal arithmetic.\n- **Strings**: prefer `TEXT`; if length limits needed, use `CHECK (LENGTH(col) <= n)` instead of `VARCHAR(n)`; avoid `CHAR(n)`. Use `BYTEA` for binary data. Large strings/binary (>2KB default threshold) automatically stored in TOAST with compression. TOAST storage: `PLAIN` (no TOAST), `EXTENDED` (compress + out-of-line), `EXTERNAL` (out-of-line, no compress), `MAIN` (compress, keep in-line if possible). Default `EXTENDED` usually optimal. Control with `ALTER TABLE tbl ALTER COLUMN col SET STORAGE strategy` and `ALTER TABLE tbl SET (toast_tuple_target = 4096)` for threshold. Case-insensitive: for locale/accent handling use non-deterministic collations; for plain ASCII use expression indexes on `LOWER(col)` (preferred unless column needs case-insensitive PK/FK/UNIQUE) or `CITEXT`.\n- **Money**: `NUMERIC(p,s)` (never float).\n- **Time**: `TIMESTAMPTZ` for timestamps; `DATE` for date-only; `INTERVAL` for durations. Avoid `TIMESTAMP` (without timezone). Use `now()` for transaction start time, `clock_timestamp()` for current wall-clock time.\n- **Booleans**: `BOOLEAN` with `NOT NULL` constraint unless tri-state values are required.\n- **Enums**: `CREATE TYPE ... AS ENUM` for small, stable sets (e.g. US states, days of week). For business-logic-driven and evolving values (e.g. order statuses) → use TEXT (or INT) + CHECK or lookup table.\n- **Arrays**: `TEXT[]`, `INTEGER[]`, etc. Use for ordered lists where you query elements. Index with **GIN** for containment (`@>`, `<@`) and overlap (`&&`) queries. Access: `arr[1]` (1-ind",
-      "tags": [
-        "ai",
-        "design",
-        "document",
-        "security",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T07:00:00.296Z"
-    },
-    {
-      "id": "antigravity-postgresql-optimization",
-      "name": "postgresql-optimization",
-      "slug": "postgresql-optimization",
-      "description": "PostgreSQL database optimization workflow for query tuning, indexing strategies, performance analysis, and production database management.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/postgresql-optimization",
-      "content": "\n# PostgreSQL Optimization Workflow\n\n## Overview\n\nSpecialized workflow for PostgreSQL database optimization including query tuning, indexing strategies, performance analysis, vacuum management, and production database administration.\n\n## When to Use This Workflow\n\nUse this workflow when:\n- Optimizing slow PostgreSQL queries\n- Designing indexing strategies\n- Analyzing database performance\n- Tuning PostgreSQL configuration\n- Managing production databases\n\n## Workflow Phases\n\n### Phase 1: Performance Assessment\n\n#### Skills to Invoke\n- `database-optimizer` - Database optimization\n- `postgres-best-practices` - PostgreSQL best practices\n\n#### Actions\n1. Check database version\n2. Review configuration\n3. Analyze slow queries\n4. Check resource usage\n5. Identify bottlenecks\n\n#### Copy-Paste Prompts\n```\nUse @database-optimizer to assess PostgreSQL performance\n```\n\n### Phase 2: Query Analysis\n\n#### Skills to Invoke\n- `sql-optimization-patterns` - SQL optimization\n- `postgres-best-practices` - PostgreSQL patterns\n\n#### Actions\n1. Run EXPLAIN ANALYZE\n2. Identify scan types\n3. Check join strategies\n4. Analyze execution time\n5. Find optimization opportunities\n\n#### Copy-Paste Prompts\n```\nUse @sql-optimization-patterns to analyze and optimize queries\n```\n\n### Phase 3: Indexing Strategy\n\n#### Skills to Invoke\n- `database-design` - Index design\n- `postgresql` - PostgreSQL indexing\n\n#### Actions\n1. Identify missing indexes\n2. Create B-tree indexes\n3. Add composite indexes\n4. Consider partial indexes\n5. Review index usage\n\n#### Copy-Paste Prompts\n```\nUse @database-design to design PostgreSQL indexing strategy\n```\n\n### Phase 4: Query Optimization\n\n#### Skills to Invoke\n- `sql-optimization-patterns` - Query tuning\n- `sql-pro` - SQL expertise\n\n#### Actions\n1. Rewrite inefficient queries\n2. Optimize joins\n3. Add CTEs where helpful\n4. Implement pagination\n5. Test improvements\n\n#### Copy-Paste Prompts\n```\nUse @sql-optimization-patterns to optimize SQL queries\n```\n\n### Phase 5: Configuration Tuning\n\n#### Skills to Invoke\n- `postgres-best-practices` - Configuration\n- `database-admin` - Database administration\n\n#### Actions\n1. Tune shared_buffers\n2. Configure work_mem\n3. Set effective_cache_size\n4. Adjust checkpoint settings\n5. Configure autovacuum\n\n#### Copy-Paste Prompts\n```\nUse @postgres-best-practices to tune PostgreSQL configuration\n```\n\n### Phase 6: Maintenance\n\n#### Skills to Invoke\n- `database-admin` - Database maintenance\n- `postgresql` - PostgreSQL maintenance\n\n#### Actions\n1. Schedule VACUUM\n2. Run ANALYZE\n3. Check table bloat\n4. Monitor autovacuum\n5. Review statistics\n\n#### Copy-Paste Prompts\n```\nUse @database-admin to schedule PostgreSQL maintenance\n```\n\n### Phase 7: Monitoring\n\n#### Skills to Invoke\n- `grafana-dashboards` - Monitoring dashboards\n- `prometheus-configuration` - Metrics collection\n\n#### Actions\n1. Set up monitoring\n2. Create dashboards\n3. Configure alerts\n4. Track key metrics\n5. Review trends\n\n#### Copy-Paste Prompts\n```\nUse @grafana-dashboards to create PostgreSQL monitoring\n```\n\n## Optimization Checklist\n\n- [ ] Slow queries identified\n- [ ] Indexes optimized\n- [ ] Configuration tuned\n- [ ] Maintenance scheduled\n- [ ] Monitoring active\n- [ ] Performance improved\n\n## Quality Gates\n\n- [ ] Query performance improved\n- [ ] Indexes effective\n- [ ] Configuration optimized\n- [ ] Maintenance automated\n- [ ] Monitoring in place\n\n## Related Workflow Bundles\n\n- `database` - Database operations\n- `cloud-devops` - Infrastructure\n- `performance-optimization` - Performance\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "ai",
-        "workflow",
-        "design"
-      ],
-      "useCases": [
-        "Optimizing slow PostgreSQL queries",
-        "Designing indexing strategies",
-        "Analyzing database performance",
-        "Tuning PostgreSQL configuration",
-        "Managing production databases"
-      ],
-      "scrapedAt": "2026-02-23T07:17:46.954Z"
-    },
-    {
-      "id": "antigravity-posthog-automation",
-      "name": "posthog-automation",
-      "slug": "posthog-automation",
-      "description": "Automate PostHog tasks via Rube MCP (Composio): events, feature flags, projects, user profiles, annotations. Always search tools first for current schemas.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/posthog-automation",
-      "content": "\n# PostHog Automation via Rube MCP\n\nAutomate PostHog product analytics and feature flag management through Composio's PostHog toolkit via Rube MCP.\n\n## Prerequisites\n\n- Rube MCP must be connected (RUBE_SEARCH_TOOLS available)\n- Active PostHog connection via `RUBE_MANAGE_CONNECTIONS` with toolkit `posthog`\n- Always call `RUBE_SEARCH_TOOLS` first to get current tool schemas\n\n## Setup\n\n**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.\n\n\n1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds\n2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `posthog`\n3. If connection is not ACTIVE, follow the returned auth link to complete PostHog authentication\n4. Confirm connection status shows ACTIVE before running any workflows\n\n## Core Workflows\n\n### 1. Capture Events\n\n**When to use**: User wants to send event data to PostHog for analytics tracking\n\n**Tool sequence**:\n1. `POSTHOG_CAPTURE_EVENT` - Send one or more events to PostHog [Required]\n\n**Key parameters**:\n- `event`: Event name (e.g., '$pageview', 'user_signed_up', 'purchase_completed')\n- `distinct_id`: Unique user identifier (required)\n- `properties`: Object with event-specific properties\n- `timestamp`: ISO 8601 timestamp (optional; defaults to server time)\n\n**Pitfalls**:\n- `distinct_id` is required for every event; identifies the user/device\n- PostHog system events use `$` prefix (e.g., '$pageview', '$identify')\n- Custom events should NOT use the `$` prefix\n- Properties are freeform; maintain consistent schemas across events\n- Events are processed asynchronously; ingestion delay is typically seconds\n\n### 2. List and Filter Events\n\n**When to use**: User wants to browse or search through captured events\n\n**Tool sequence**:\n1. `POSTHOG_LIST_AND_FILTER_PROJECT_EVENTS` - Query events with filters [Required]\n\n**Key parameters**:\n- `project_id`: PostHog project ID (required)\n- `event`: Filter by event name\n- `person_id`: Filter by person ID\n- `after`: Events after this ISO 8601 timestamp\n- `before`: Events before this ISO 8601 timestamp\n- `limit`: Maximum events to return\n- `offset`: Pagination offset\n\n**Pitfalls**:\n- `project_id` is required; resolve via LIST_PROJECTS first\n- Date filters use ISO 8601 format (e.g., '2024-01-15T00:00:00Z')\n- Large event volumes require pagination; use `offset` and `limit`\n- Results are returned in reverse chronological order by default\n- Event properties are nested; parse carefully\n\n### 3. Manage Feature Flags\n\n**When to use**: User wants to create, view, or manage feature flags\n\n**Tool sequence**:\n1. `POSTHOG_LIST_AND_MANAGE_PROJECT_FEATURE_FLAGS` - List existing feature flags [Required]\n2. `POSTHOG_RETRIEVE_FEATURE_FLAG_DETAILS` - Get detailed flag configuration [Optional]\n3. `POSTHOG_CREATE_FEATURE_FLAGS_FOR_PROJECT` - Create a new feature flag [Optional]\n\n**Key parameters**:\n- For listing: `project_id` (required)\n- For details: `project_id`, `id` (feature flag ID)\n- For creation:\n  - `project_id`: Target project\n  - `key`: Flag key (e.g., 'new-dashboard-beta')\n  - `name`: Human-readable name\n  - `filters`: Targeting rules and rollout percentage\n  - `active`: Whether the flag is enabled\n\n**Pitfalls**:\n- Feature flag `key` must be unique within a project\n- Flag keys should use kebab-case (e.g., 'my-feature-flag')\n- `filters` define targeting groups with properties and rollout percentages\n- Creating a flag with `active: true` immediately enables it for matching users\n- Flag changes take effect within seconds due to PostHog's polling mechanism\n\n### 4. Manage Projects\n\n**When to use**: User wants to list or inspect PostHog projects and organizations\n\n**Tool sequence**:\n1. `POSTHOG_LIST_PROJECTS_IN_ORGANIZATION_WITH_PAGINATION` - List all projects [Required]\n\n**Key parameters**:\n- `organization_id`: Organization identifier (may be optional depending on auth)\n- `limit`: Number of results per page\n- `offset`: Pagination offset\n\n**Pitfalls**:\n- Project IDs are numeric; used as parameters in most other endpoints\n- Organization ID may be required; check your PostHog setup\n- Pagination is offset-based; iterate until results are empty\n- Project settings include API keys and configuration details\n\n### 5. User Profile and Authentication\n\n**When to use**: User wants to check current user details or verify API access\n\n**Tool sequence**:\n1. `POSTHOG_WHOAMI` - Get current API user information [Optional]\n2. `POSTHOG_RETRIEVE_CURRENT_USER_PROFILE` - Get detailed user profile [Optional]\n\n**Key parameters**:\n- No required parameters for either call\n- Returns current authenticated user's details, permissions, and organization info\n\n**Pitfalls**:\n- WHOAMI is a lightweight check; use for verifying API connectivity\n- User profile includes organization membership and permissions\n- These endpoints confirm the API key's access level and scope\n\n## Common Patterns\n\n### ID Resolution\n\n**Organization -> Project ID**:\n```\n1. Call POSTHOG_LIST_PROJECTS_IN_",
-      "tags": [
-        "api",
-        "mcp",
-        "ai",
-        "automation",
-        "workflow",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-19T07:12:53.693Z"
-    },
-    {
       "id": "anthropic-pptx",
       "name": "pptx",
       "slug": "pptx",
@@ -26734,7 +26751,7 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 380
+      "count": 379
     },
     {
       "id": "document-processing",
@@ -26748,7 +26765,7 @@
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 126
+      "count": 127
     },
     {
       "id": "creative-media",
@@ -26806,48 +26823,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 188581
+      "stars": 190246
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 14,
       "newSkillCount": 3,
-      "stars": 133289
+      "stars": 133891
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 59533
+      "stars": 59728
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 1,
-      "stars": 73343
+      "stars": 73460
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1228
+      "stars": 1232
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1003,
-      "newSkillCount": 6,
-      "stars": 37378
+      "newSkillCount": 9,
+      "stars": 37477
     }
   ],
-  "lastUpdated": "2026-05-13T08:57:40.796Z",
+  "lastUpdated": "2026-05-14T08:52:01.909Z",
   "stats": {
     "totalSkills": 1101,
-    "newSkills": 18,
-    "scrapedAt": "2026-05-13T08:57:40.796Z"
+    "newSkills": 21,
+    "scrapedAt": "2026-05-14T08:52:01.909Z"
   }
 }
