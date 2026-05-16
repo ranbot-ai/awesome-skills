@@ -23,6 +23,7 @@
 | [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | 67k+ | AI-driven development skills |
 | [Prat011/awesome-llm-skills](https://github.com/Prat011/awesome-llm-skills) | 700+ | LLM and AI Agent skills collection |
 | [sickn33/antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) | 3.6k+ | 253+ agentic skills for Claude Code, Gemini CLI, Cursor & more |
+| [Sequenzy/skills](https://github.com/Sequenzy/skills) | 0+ | Agent skills for Sequenzy email marketing and transactional/product email workflows |
 
 ## Install Skills
 
