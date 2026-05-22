@@ -31,7 +31,7 @@ Do NOT use for:
 
 1. Parse the input as one YouTube video URL.
 2. Verify `yt-dlp` is installed. If not, the script exits with install instructions: `brew install yt-dlp` (macOS) or `pip3 install --user yt-dlp`.
-3. Call `yt-dlp --list-subs <url>` to enumerate available subtitles.
+3. Validate the URL as a single http(s) YouTube video and call `yt-dlp --ignore-config --list-subs -- <url>` to enumerate available subtitles.
 4. Subtitle priority: manual subs > auto-generated captions. Manual subs preserve creator-provided punctuation and speaker labels; auto-gen is uppercase + no punctuation.
 5. Download the highest-priority subtitle as VTT via `yt-dlp --write-sub --sub-lang <lang> --skip-download`. Default language preference: `en,es` (English first, Spanish second).
 6. Strip VTT timing markers and merge into clean prose paragraphs. Deduplicate repeated lines (auto-generated VTTs are line-doubled). Preserve speaker labels if the source had them.
@@ -102,4 +102,4 @@ python3 ingest.py "https://www.youtube.com/watch?v=jNQXAC9IVRw" --vault /tmp/tes
 
 Expected output:
 ```
-Wrote 39 words to /tmp/test/External Inputs/YouTube/jawed/2005-04-24-me-at-the-zoo.md. Language: en. Subtitle sou
+Wrote 39 words to /tmp/test/External In

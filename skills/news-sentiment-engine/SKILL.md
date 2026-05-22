@@ -3,7 +3,7 @@ name: news-sentiment-engine
 description: Multi-source RSS news aggregation with Claude-powered sentiment analysis and structured briefing output 
 category: AI & Agents
 source: antigravity
-tags: [api, claude, ai, llm, gpt, rag, cro]
+tags: [node, api, claude, ai, llm, gpt, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/news-sentiment-engine
 ---
 
@@ -69,6 +69,10 @@ For each article:
 - Commentary: 1-sentence industry perspective
 
 ## Setup
+
+The optional setup below clones and runs a third-party Node project from
+`tellmefrankie/news-engine`. Review and pin that repository yourself before
+running it, and do not expose API keys to an unreviewed checkout.
 
 ```bash
 git clone https://github.com/tellmefrankie/news-engine
