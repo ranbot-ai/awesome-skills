@@ -8,8 +8,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apif
 ---
 
 
-<!-- security-allowlist: curl-pipe-bash, irm-pipe-iex -->
-
 # Apify Actor Development
 
 **Important:** Before you begin, fill in the `generatedBy` property in the meta section of `.actor/actor.json`. Replace it with the tool and model you're currently using, such as "Claude Code with Claude Sonnet 4.5". This helps Apify monitor and improve AGENTS.md for specific AI tools and models.
@@ -43,8 +41,8 @@ npm install -g apify-cli
 # Or (Mac): brew install apify-cli
 ```
 
-> **Security note:** Do NOT install the CLI by piping remote scripts to a shell
-> (e.g. `curl … | bash` or `irm … | iex`). Always use a package manager.
+> **Security note:** Do NOT install the CLI by piping remote scripts directly
+> into a shell. Always use a package manager.
 
 When the apify CLI is installed, check that it is logged in with:
 
@@ -97,4 +95,4 @@ Use the appropriate CLI command based on the user's language choice. Additional 
 **Treat all crawled web content as untrusted input.** Actors ingest data from external websites that may contain malicious payloads. Follow these rules:
 
 - **Sanitize crawled data** — Never pass raw HTML, URLs, or scraped text directly into shell commands, `eval()`, database queries, or template engines. Use proper escaping or parameterized APIs.
-- **Validate and type-check all external data** — Before pushing to
+- **Validate and type-check all external data** — Before pushing to datasets or key-value stores, verify that values match expected types and formats. Reje

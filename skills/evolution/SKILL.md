@@ -3,12 +3,10 @@ name: evolution
 description: This skill enables makepad-skills to self-improve continuously during development. 
 category: Document Processing
 source: antigravity
-tags: [markdown, api, claude, ai, workflow, template, design, document, security]
+tags: [markdown, api, claude, ai, workflow, template, design, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/evolution
 ---
 
-
-<!-- security-allowlist: curl-pipe-bash -->
 
 # Makepad Skills Evolution
 
@@ -39,7 +37,9 @@ For reliable automatic triggering, use Claude Code hooks. Install with `--with-h
 
 ```bash
 # Install makepad-skills with hooks enabled
-curl -fsSL https://raw.githubusercontent.com/ZhangHanDong/makepad-skills/main/install.sh | bash -s -- --with-hooks
+curl -fsSLo /tmp/makepad-skills-install.sh https://raw.githubusercontent.com/ZhangHanDong/makepad-skills/main/install.sh
+sed -n '1,160p' /tmp/makepad-skills-install.sh
+bash /tmp/makepad-skills-install.sh --with-hooks
 ```
 
 This will install hooks to `.claude/hooks/` and configure `.claude/settings.json`:
@@ -161,7 +161,4 @@ Ask yourself:
 - Would it help other Makepad developers?
 - Is it not already documented in makepad-skills?
 
-### Step 2: Classify the Knowledge
-
-```
-Widget/Component Pattern     → r
+### Step 2: Cla

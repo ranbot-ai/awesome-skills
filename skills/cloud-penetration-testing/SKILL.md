@@ -10,8 +10,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/clou
 
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 
-<!-- security-allowlist: curl-pipe-bash -->
-
 # Cloud Penetration Testing
 
 ## Purpose
@@ -32,7 +30,9 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 unzip awscliv2.zip && sudo ./aws/install
 
 # GCP CLI
-curl https://sdk.cloud.google.com | bash
+curl -fsSLo /tmp/google-cloud-sdk-install.sh https://sdk.cloud.google.com
+sed -n '1,160p' /tmp/google-cloud-sdk-install.sh
+bash /tmp/google-cloud-sdk-install.sh
 gcloud init
 
 # Additional tools
@@ -193,5 +193,4 @@ $role = Get-MsolRole -RoleName "Company Administrator"
 Add-MsolRoleMember -RoleObjectId $role.ObjectId -RoleMemberType ServicePrincipal -RoleMemberObjectId $sp.ObjectId
 
 # Login as service principal
-$cred = Get-Credential  # AppID as username, secret as password
-Connect-AzAcc
+$c

@@ -3,12 +3,10 @@ name: gitops-workflow
 description: Complete guide to implementing GitOps workflows with ArgoCD and Flux for automated Kubernetes deployments. 
 category: AI & Agents
 source: antigravity
-tags: [api, ai, agent, workflow, security, kubernetes, aws]
+tags: [api, ai, agent, workflow, kubernetes, aws]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gitops-workflow
 ---
 
-
-<!-- security-allowlist: curl-pipe-bash -->
 
 # GitOps Workflow
 
@@ -142,7 +140,12 @@ spec:
 
 ```bash
 # Install Flux CLI
-curl -s https://fluxcd.io/install.sh | sudo bash
+brew install fluxcd/tap/flux
+
+# Alternative: download the official installer, inspect it, then execute it
+curl -fsSLo /tmp/flux-install.sh https://fluxcd.io/install.sh
+sed -n '1,160p' /tmp/flux-install.sh
+sudo bash /tmp/flux-install.sh
 
 # Bootstrap Flux
 flux bootstrap github \
@@ -252,12 +255,4 @@ strategy:
 
 ```yaml
 apiVersion: external-secrets.io/v1beta1
-kind: ExternalSecret
-metadata:
-  name: db-credentials
-spec:
-  refreshInterval: 1h
-  secretStoreRef:
-    name: aws-secrets-manager
-    kind: SecretStore
-  target
+kind: ExternalSecr

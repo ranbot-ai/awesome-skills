@@ -8,8 +8,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/link
 ---
 
 
-<!-- security-allowlist: curl-pipe-bash -->
-
 # Linkerd Patterns
 
 Production patterns for Linkerd service mesh - the lightweight, security-first service mesh for Kubernetes.
@@ -74,7 +72,12 @@ Production patterns for Linkerd service mesh - the lightweight, security-first s
 
 ```bash
 # Install CLI
-curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
+brew install linkerd
+
+# Alternative: download the official installer, inspect it, then execute it
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install -o /tmp/linkerd-install.sh
+sed -n '1,160p' /tmp/linkerd-install.sh
+sh /tmp/linkerd-install.sh
 
 # Validate cluster
 linkerd check --pre
@@ -217,13 +220,4 @@ spec:
     unauthenticated: true
     networks:
       - cidr: 10.0.0.0/8
-```
-
-### Template 6: HTTPRoute for Advanced Routing
-
-```yaml
-apiVersion: policy.linkerd.io/v1beta2
-kind: HTTPRoute
-metadata:
-  name: my-route
- 
+`

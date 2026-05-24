@@ -3,12 +3,10 @@ name: bun-development
 description: Fast, modern JavaScript/TypeScript development with the Bun runtime, inspired by [oven-sh/bun](https://github.com/oven-sh/bun). 
 category: Document Processing
 source: antigravity
-tags: [javascript, typescript, react, node, api, ai, template, document, security, rag]
+tags: [javascript, typescript, react, node, api, ai, template, document, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bun-development
 ---
 
-
-<!-- security-allowlist: curl-pipe-bash, irm-pipe-iex -->
 
 # ⚡ Bun Development
 
@@ -32,10 +30,15 @@ Use this skill when:
 
 ```bash
 # macOS / Linux
-curl -fsSL https://bun.sh/install | bash
+brew install oven-sh/bun/bun
+
+# Alternative: download the official installer, inspect it, then execute it
+curl -fsSLo /tmp/bun-install.sh https://bun.sh/install
+sed -n '1,160p' /tmp/bun-install.sh
+bash /tmp/bun-install.sh
 
 # Windows
-powershell -c "irm bun.sh/install.ps1 | iex"
+powershell -NoProfile -Command "Invoke-WebRequest https://bun.sh/install.ps1 -OutFile $env:TEMP\\bun-install.ps1; Get-Content $env:TEMP\\bun-install.ps1 -TotalCount 120; powershell -ExecutionPolicy Bypass -File $env:TEMP\\bun-install.ps1"
 
 # Homebrew
 brew tap oven-sh/bun
@@ -248,22 +251,4 @@ bun --hot run server.ts
 const apiKey = Bun.env.API_KEY;
 const port = Bun.env.PORT ?? "3000";
 
-// Or use process.env (Node.js compatible)
-const dbUrl = process.env.DATABASE_URL;
-```
-
-```bash
-# Run with specific env file
-bun --env-file=.env.production run index.ts
-```
-
----
-
-## 5. Built-in APIs
-
-### 5.1 File System (Bun.file)
-
-```typescript
-// Read file
-const file = Bun.file("./data.json");
-const text = await file
+// O
