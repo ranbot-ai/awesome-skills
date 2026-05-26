@@ -14745,6 +14745,35 @@
       "scrapedAt": "2026-01-26T13:15:29.953Z"
     },
     {
+      "id": "antigravity-flowhunt-skill",
+      "name": "flowhunt-skill",
+      "slug": "flowhunt-skill",
+      "description": "Automation discovery audit skill. Walks through a 5-question workflow intake, then audits Gmail/Calendar/Slack/task trackers to identify automation opportunities. Use when a user wants to discover what processes in their business can be automated.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/flowhunt-skill",
+      "content": "\n# FlowHunt Skill — Automation Discovery Audit\n\n## Overview\n\nFlowHunt is an automation discovery audit skill. It guides agents through a structured 5-question intake to understand the user's business context, then systematically audits connected tools (Gmail, Google Calendar, Slack, task trackers, and more) to surface concrete automation opportunities ranked by impact and effort.\n\nThe skill is cross-agent: it works with Claude Code, Codex CLI, Gemini CLI, OpenCode, and any agent that accepts markdown skill files.\n\nInstall: `npx skills add heyneuron/flowhunt-skill`\n\n## When to Use This Skill\n\n- Use when the user asks \"what can I automate in my business?\"\n- Use when the user wants a workflow audit across Gmail, Calendar, Slack, or task tools\n- Use when starting an automation engagement and need structured discovery before recommending solutions\n- Use when the user says \"show me automation opportunities\" or \"FlowHunt\"\n\n## How It Works\n\n### Step 1: Intake — 5-Question Workflow Questionnaire\n\nAsk the user exactly these five questions, one at a time:\n\n1. **Role & team size** — What is your role, and how many people are on your team?\n2. **Top 3 repetitive tasks** — What are the three most repetitive tasks you or your team do every week?\n3. **Connected tools** — Which tools do you actively use? (Gmail, Google Calendar, Slack, Notion, Jira, Asana, HubSpot, etc.)\n4. **Pain point** — Which of those repetitive tasks costs you the most time or causes the most errors?\n5. **Automation goal** — Are you looking to save time, reduce errors, or hand off tasks entirely?\n\nWait for answers before moving to the audit.\n\n### Step 2: Audit — Scan Connected Tools\n\nFor each tool the user mentioned, surface automation patterns:\n\n**Gmail**\n- Auto-labeling and routing rules\n- Draft generation for recurring email types\n- Invoice / attachment extraction to Drive or Notion\n- Follow-up reminders when no reply received\n\n**Google Calendar**\n- Meeting prep summaries (agenda + attendee context) sent automatically\n- Booking link workflows with intake forms\n- Post-meeting action item extraction\n\n**Slack**\n- Daily standup collection → summary to channel or doc\n- Keyword alerts routed to the right person\n- Approval workflows with emoji reactions\n\n**Task trackers (Asana, Jira, Notion, Linear)**\n- Auto-create tasks from emails or Slack messages\n- Status update reminders\n- Weekly digest of overdue or blocked items\n\n**CRMs (HubSpot, Salesforce, Pipedrive)**\n- Lead scoring and routing rules\n- Follow-up sequences triggered by deal stage change\n- Contact enrichment on new lead creation\n\n### Step 3: Prioritization Matrix\n\nRank each identified opportunity on a 2x2:\n\n| | Low effort | High effort |\n|---|---|---|\n| **High impact** | Do first (quick wins) | Plan carefully |\n| **Low impact** | Nice to have | Skip for now |\n\nPresent the top 3 quick-win automations with:\n- What it does\n- Which tools it connects\n- Estimated time saved per week\n- Suggested implementation path (Zapier / Make / n8n / custom code)\n\n### Step 4: Output\n\nDeliver a structured Automation Opportunity Report in markdown:\n\n```\n# Automation Opportunity Report\n\n## Business Context\n[Summary from intake]\n\n## Top 3 Quick Wins\n1. [Name] — [What it does] — [Tools] — [~X hrs/week saved]\n2. ...\n3. ...\n\n## Full Opportunity List\n[All identified automations, ranked]\n\n## Recommended Next Step\n[Single clearest action the user can take today]\n```\n\n## Common Rationalizations to Reject\n\n| Excuse | Why it's wrong |\n|--------|----------------|\n| \"I'll skip the intake and guess their stack\" | Intake prevents wasted recommendations on tools they don't use |\n| \"I'll list every possible automation\" | Overwhelming output kills adoption — prioritize ruthlessly |\n| \"I'll recommend complex custom code first\" | Start with no-code/low-code quick wins; earn the right to build |\n\n## Red Flags\n\n- User has no clear repetitive task → dig deeper, they always exist\n- Recommending automations for tools the user didn't mention → stay scoped\n- Skipping the prioritization matrix → every opportunity looks equal without it\n\n## Limitations\n\n- This skill identifies and prioritizes automation opportunities; it does not implement the automations for the user.\n- Tool audits depend on the user's stated stack and any explicitly connected data sources; do not assume access to Gmail, Calendar, Slack, CRMs, or task trackers.\n- Time-saved estimates are directional planning aids, not guaranteed outcomes.\n\n## Verification\n\nThe skill is complete when the user has:\n- [ ] Answered all 5 intake questions\n- [ ] Received a ranked list of automation opportunities\n- [ ] Identified at least one quick-win automation they can start this week\n- [ ] A clear recommended next step\n",
+      "tags": [
+        "react",
+        "markdown",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "automation",
+        "workflow",
+        "cro"
+      ],
+      "useCases": [
+        "Use when the user asks \"what can I automate in my business?\"",
+        "Use when the user wants a workflow audit across Gmail, Calendar, Slack, or task tools",
+        "Use when starting an automation engagement and need structured discovery before recommending solutions",
+        "Use when the user says \"show me automation opportunities\" or \"FlowHunt\""
+      ],
+      "scrapedAt": "2026-05-26T10:11:02.257Z"
+    },
+    {
       "id": "antigravity-flutter-expert",
       "name": "flutter-expert",
       "slug": "flutter-expert",
@@ -15779,6 +15808,34 @@
         "Use when optimizing model selection (Flash vs Pro vs Ultra) for cost and performance"
       ],
       "scrapedAt": "2026-03-05T07:04:28.945Z"
+    },
+    {
+      "id": "antigravity-geminiignore-finops",
+      "name": "geminiignore-finops",
+      "slug": "geminiignore-finops",
+      "description": "Configure and optimize .geminiignore files for AI context window efficiency and token cost reduction (FinOps).",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/geminiignore-finops",
+      "content": "\n# GeminiIgnore FinOps Setup & Optimization\n\n## Overview\n\nA skill to construct, refine, and maintain high-performance `.geminiignore` files across diverse tech stacks. By filtering out machine-generated code, heavy logs, package locks, and binary assets, this skill optimizes the AI agent's context window, accelerates processing speed, and reduces token consumption costs (FinOps).\n\n## When to Use This Skill\n\n- Use when initializing a new repository or workspace for pair-programming with AI agents.\n- Use when the AI context window is reaching its limits or when billing optimization (FinOps) is a priority.\n- Use when the AI agent is accidentally reading build outputs, lock files, databases, or binary media.\n\n## How It Works\n\n### Step 1: Analyze the Workspace Tech Stack\nDetect the languages, frameworks, and dependency managers present in the project (e.g., Node.js, Python, PHP, Dart/Flutter, Rust).\n\n### Step 2: Initialize or Update the `.geminiignore` File\nCreate a `.geminiignore` file at the root of the active workspace. If one already exists, review it to add missing categories.\n\n### Step 3: Implement the 7 Core Rules\nAdd rules divided into the following categories to filter out unnecessary machine noise while keeping human-written code visible:\n\n1. **System & Editor Noise**: Block OS temp files (`.DS_Store`, `Thumbs.db`) and user-specific IDE caches (`.idea/`, `.vscode/*`, Xcode user data).\n2. **Dependency Folders & Lock Files**: Ignore third-party package directories (`node_modules/`, `vendor/`) and giant machine-generated lock files (`package-lock.json`, `yarn.lock`, `Cargo.lock`, `composer.lock`).\n3. **Build & Target Output**: Block compiled folders (`dist/`, `build/`, `.next/`, `.nuxt/`).\n4. **Caches & Tool Metadata**: Block compiler caches (`.tsbuildinfo`, `.vite/`, `.pytest_cache/`, `.eslintcache`).\n5. **Binary & Rich Assets**: Block media types (`*.png`, `*.pdf`, `*.mp4`, `*.woff2`) to prevent triggering expensive vision/multimodal tokens.\n6. **Local Databases & Logs**: Block log files (`*.log`) and SQL dumps or local SQLite DBs (`*.sqlite`, `*.db`).\n7. **Compiled Binaries & Mobile Builds**: Block mobile package files (`*.apk`, `*.ipa`) and compiled binaries (`*.class`, `*.pyc`, `*.dll`).\n\n### Step 4: Validate Exclusions\nVerify that the AI can still see critical configuration blueprints (like `.env.example`, `package.json`, `composer.json`, `pyproject.toml`) but ignores the actual `.env` files and compilation artifacts.\n\n## Examples\n\n### Example 1: Standard Universal `.geminiignore` Template\n\nHere is a recommended baseline configuration for a multi-language project:\n\n```ini\n# ==============================================================================\n# .geminiignore - BASELINE DE FINOPS E ARQUITETURA\n# ==============================================================================\n\n# 1. SISTEMA OPERACIONAL E IDEs\n.DS_Store\nThumbs.db\nDesktop.ini\n$RECYCLE.BIN/\n.vscode/*\n!.vscode/settings.json\n!.vscode/tasks.json\n!.vscode/launch.json\n.idea/\n*.iml\n.gradle/\nlocal.properties\n.history/\n\n# 2. DEPENDÊNCIAS (ECONOMIA DE TOKENS EM LOCK FILES)\nnode_modules/\npackage-lock.json\nyarn.lock\npnpm-lock.yaml\nvendor/\ncomposer.lock\nvenv/\n.venv/\nenv/\n.env\n.env.*\n!.env.example\npoetry.lock\nCargo.lock\npubspec.lock\n\n# 3. BUILDS E EXPORTAÇÕES\ndist/\nbuild/\nout/\ntarget/\n.next/\n.nuxt/\n.output/\nbin/\nobj/\n\n# 4. CACHES DE FRAMEWORKS\n.vite/\n.parcel-cache/\n.eslintcache\n.babel-cache/\n.tsbuildinfo\n.turbo/\n.pytest_cache/\n.ruff_cache/\nstorage/framework/\nstorage/logs/\n\n# 5. ASSETS BINÁRIOS E MULTIMÍDIA EXTREMOS\n*.png\n*.jpg\n*.jpeg\n*.gif\n*.webp\n*.svg\n*.ico\n*.psd\n*.fig\n*.pdf\n*.zip\n*.tar.gz\n*.woff\n*.woff2\n*.ttf\n\n# 6. BANCOS DE DADOS E LOGS\n*.log\n*.db\n*.sqlite\n*.sqlite3\n*.sql\n*.sql.gz\n\n# 7. ARQUIVOS COMPILADOS\n*.apk\n*.aab\n*.ipa\n*.jar\n*.class\n*.pyc\n__pycache__/\n*.so\n*.dylib\n*.dll\n*.exe\n*.js.map\n*.css.map\n```\n\n## Best Practices\n\n- ✅ **Ignore dependency lock files**: Standard lock files (e.g., `package-lock.json`, `yarn.lock`) contain thousands of lines of redundant package resolution trees. Ignoring them is the single largest FinOps win.\n- ✅ **Keep configurations visible**: Ensure manifests like `package.json`, `composer.json`, `Cargo.toml`, and `pyproject.toml` are NEVER ignored, as the AI needs them to understand dependencies.\n- ✅ **Whitelist config examples**: Use rules like `!.env.example` alongside `.env` ignores so the AI understands configuration structure without exposing credentials.\n- ❌ **Do not ignore source code**: Avoid overly broad folder patterns like `lib/` or `app/` if they contain primary source code. Be specific (e.g., block `vendor/bundle/` but not your actual code).\n\n## Limitations\n\n- A `.geminiignore` file only affects AI tools parsing the workspace; it does not replace `.gitignore` for Git repository hosting.\n- Patterns must be formatted correctly according to gitignore-style globbing to avoid accidentally ignoring source files.\n\n## Related Skills\n\n- `@context-optimization` - Broad tactics for context window management.\n- `@",
+      "tags": [
+        "python",
+        "node",
+        "pdf",
+        "claude",
+        "ai",
+        "agent",
+        "template",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Use when initializing a new repository or workspace for pair-programming with AI agents.",
+        "Use when the AI context window is reaching its limits or when billing optimization (FinOps) is a priority.",
+        "Use when the AI agent is accidentally reading build outputs, lock files, databases, or binary media."
+      ],
+      "scrapedAt": "2026-05-26T10:11:19.402Z"
     },
     {
       "id": "antigravity-geo-fundamentals",
@@ -18058,6 +18115,36 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-26T13:19:01.550Z"
+    },
+    {
+      "id": "antigravity-ii-commons",
+      "name": "ii-commons",
+      "slug": "ii-commons",
+      "description": "Deterministic search across arXiv, PubMed/PMC, and US policy corpora with daily freshness cutoffs.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ii-commons",
+      "content": "\n# II-Commons\n\n## Overview\n\nII-Commons provides deterministic retrieval for research agents across arXiv, PubMed/PMC, and supported US policy corpora. Use it when a task needs reproducible search, metadata lookup, full-document Markdown retrieval, or a freshness check before answering with recent evidence.\n\nThe upstream project publishes a Node.js CLI as `@intelligentinternet/ii-commons` and a full agent skill at `skills/ii-commons/`.\n\n## When to Use This Skill\n\n- Use when searching arXiv, PubMed/PMC, or supported US policy corpora for evidence.\n- Use when the user asks for latest or recent research and corpus freshness matters.\n- Use when you need stable identifiers, metadata, or full-document Markdown for downstream analysis.\n- Use when comparing evidence across scientific literature and policy documents.\n\n## How It Works\n\n### Step 1: Check Corpus Freshness\n\nRun `cutoff` before freshness-sensitive searches:\n\n```bash\nnpx @intelligentinternet/ii-commons cutoff\n```\n\nReport the relevant cutoff date before interpreting recent results.\n\n### Step 2: Search the Right Corpus\n\nUse exactly this command shape:\n\n```bash\nnpx @intelligentinternet/ii-commons search arxiv \"large language model inference\" --max-results 10\nnpx @intelligentinternet/ii-commons search pubmed \"type 2 diabetes review\" --start 20240000 --max-results 10\nnpx @intelligentinternet/ii-commons search policy \"state overtime rule for agricultural workers\" --jurisdictions US-CA --max-results 10\n```\n\nChoose `arxiv` for preprints and technical research, `pubmed` for biomedical and clinical literature, and `policy` for supported US policy corpora.\n\n### Step 3: Retrieve Metadata or Markdown\n\nUse stable identifiers from search results:\n\n```bash\nnpx @intelligentinternet/ii-commons meta \"arXiv:2402.03578\"\nnpx @intelligentinternet/ii-commons markdown \"PMCID:PMC11152602\"\n```\n\nBuild summaries from search results first, then request Markdown when detailed inspection or full-document grounding is needed.\n\n## Installation\n\nRun the CLI with `npx`:\n\n```bash\nnpx @intelligentinternet/ii-commons --help\n```\n\nOr install globally:\n\n```bash\nnpm install -g @intelligentinternet/ii-commons\nii-commons cutoff\n```\n\nTo install the full upstream agent skill, install the `skills/ii-commons/` folder from:\n\n```text\nhttps://github.com/Intelligent-Internet/II-Commons-Skills\n```\n\n## Best Practices\n\n- Prefer server-side date filters such as `--start` and `--end` for time-bounded arXiv and PubMed searches.\n- Preserve canonical identifiers such as `arXiv:<id>`, `PMID:<id>`, `PMCID:PMC<id>`, and `policy:<jurisdiction>:<id>`.\n- Use `cutoff` as the authoritative freshness boundary for each corpus.\n- Keep non-time filters conservative until initial search results show the right scope.\n\n## Limitations\n\n- Requires Node.js 18 or newer and outbound network access to `commons.ii.inc`.\n- Basic usage works without authentication; higher usage limits may require an API token from `https://commons.ii.inc/`.\n- Supported policy coverage is limited to the policy corpora exposed by II-Commons.\n\n## Security & Safety Notes\n\n- Do not print or expose `II_COMMONS_API_KEY` values.\n- Treat outputs as retrieval evidence, not expert review. For medical, legal, or policy-sensitive work, cite sources and preserve uncertainty.\n- Commands call an external API service; confirm network access is allowed in the user's environment before running them.\n\n## Related Skills\n\n- Use broader web-search or deep-research skills when evidence is outside arXiv, PubMed/PMC, or supported policy corpora.\n- Use citation-management skills after II-Commons has identified stable source records.\n",
+      "tags": [
+        "node",
+        "markdown",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "document",
+        "security",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Use when searching arXiv, PubMed/PMC, or supported US policy corpora for evidence.",
+        "Use when the user asks for latest or recent research and corpus freshness matters.",
+        "Use when you need stable identifiers, metadata, or full-document Markdown for downstream analysis.",
+        "Use when comparing evidence across scientific literature and policy documents."
+      ],
+      "scrapedAt": "2026-05-26T10:11:56.768Z"
     },
     {
       "id": "antigravity-ilya-sutskever",
@@ -21931,6 +22018,37 @@
       "scrapedAt": "2026-02-26T07:12:32.769Z"
     },
     {
+      "id": "antigravity-mesh-memory",
+      "name": "mesh-memory",
+      "slug": "mesh-memory",
+      "description": "Self-hosted semantic memory for AI agents via MCP. Save worklogs, decisions, and notes, then recall them across sessions by meaning, not keyword. Postgres + pgvector with auto-tagging.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mesh-memory",
+      "content": "\n# Mesh Memory\n\nMesh Memory is a self-hosted semantic memory service with a built-in MCP server. It stores documents (worklogs, decisions, notes, research) in PostgreSQL with pgvector and retrieves them by meaning, so a query like \"what database did we pick?\" surfaces a saved note that says \"chose Redis for caching\" even with zero keyword overlap. Embeddings are generated locally with `multilingual-e5-base` (768 dimensions); the core flow requires no external API keys.\n\nUse this skill when an agent needs persistent memory across sessions: saving its own work, recalling prior decisions, or building a project knowledge base shared between multiple agents.\n\n## When to Use This Skill\n\n- Saving a session worklog, decision, or research note so a later session can find it.\n- Recalling past work by topic when you do not remember the exact words you used.\n- Sharing a long-lived knowledge base across multiple agents, terminals, or teammates.\n- Organizing context by role or project through workspaces (one workspace per role/project).\n- Looking up structured tags (e.g. all `type:decision` entries from one project).\n\n## Prerequisites\n\n- A running Mesh Memory instance reachable from the MCP server. Local Docker is the common path -- `docker compose up -d` in the upstream repo brings it up; see https://github.com/dklymentiev/mesh-memory for the full Quick Start.\n- The MCP server (`mcp_server.py`) registered with your client (Claude Code, Cursor, Claude Desktop, or any other MCP-aware agent).\n- `MESH_API_URL` pointing at the running instance (default: `http://localhost:8000`).\n\n## Setup\n\nRegister the MCP server in your client configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"mesh\": {\n      \"command\": \"python3\",\n      \"args\": [\"/path/to/mesh-memory/mcp_server.py\"],\n      \"env\": {\n        \"MESH_API_URL\": \"http://localhost:8000\"\n      }\n    }\n  }\n}\n```\n\nWhen the server is reachable, the 13 tools listed below become available.\n\n## MCP Tools\n\n| Tool | Purpose |\n|------|---------|\n| `mesh_focus` | Switch the active workspace (optionally prefetch recent docs). |\n| `mesh_add` | Save a document with optional tags. Auto-adds `date:YYYY-MM-DD` and `source:`. |\n| `mesh_update` | Update content, tags, or pinned status of an existing document. |\n| `mesh_delete` | Delete a document by GUID. |\n| `mesh_get` | Fetch a single document by GUID. |\n| `mesh_search` | Semantic search by query, optionally across multiple workspaces with weights. |\n| `mesh_bytag` | List documents that match one or more tags (AND logic). |\n| `mesh_recent` | List most recently created documents, optionally filtered by `type:` tag. |\n| `mesh_projects` | List per-project document counts (uses `guid:` tag as project marker). |\n| `mesh_tags` | List existing tags with counts; optional prefix filter. |\n| `mesh_versions` | Show the version chain of a document (similarity-linked revisions). |\n| `mesh_stats` | Memory statistics for the active workspace. |\n| `mesh_schema` | Show the tag schema (recognized prefixes and types). |\n\n## Workflows\n\n### Save a session worklog\n\nAfter completing work, persist it for future sessions:\n\n```\nmesh_add(\n  content=\"Investigated 502s on the checkout flow. Root cause: missing CORS header on the cart API. Fix shipped in commit abc123.\",\n  tags=\"type:worklog,topic:checkout,date:2026-05-23\",\n  workspace=\"developer\"\n)\n```\n\n`date:` and `source:` are added automatically when omitted. Type and topic tags are inferred from nearest neighbors after the embedding completes (5-10 seed documents required before inference kicks in).\n\n### Recall past work by meaning\n\nSearch across sessions for related context, even with different vocabulary:\n\n```\nmesh_search(query=\"checkout was failing for some users\", limit=5, workspace=\"developer\")\n```\n\nThe query shares no keywords with the original note (\"502s\", \"CORS\"), but the embedding-based search surfaces it.\n\n### Switch role / context\n\nFor a multi-role agent, switch the active workspace at the start of a session:\n\n```\nmesh_focus(workspace=\"sysadmin\", prefetch=true, limit=5)\n```\n\nSubsequent calls default to that workspace. Pin a role-prompt document at the top of each workspace so the agent re-orients on every prefetch.\n\n### Cross-workspace search with weights\n\nTo pull context from related domains without diluting the primary signal:\n\n```\nmesh_search(\n  query=\"nginx rate limit recipe\",\n  workspaces={\"sysadmin\": 0.7, \"security\": 0.2, \"developer\": 0.1},\n  limit=10\n)\n```\n\nResults are merged across workspaces and re-scored by workspace weight.\n\n### Structured lookups by tag\n\nWhen you need an exact filter rather than semantic similarity:\n\n```\nmesh_bytag(tags=\"type:decision,status:active,guid:my-project\", limit=20)\n```\n\n## Tag Conventions\n\nMesh accepts arbitrary tags. The recommended prefixes (used by auto-inference and surfaced by `mesh_schema`):\n\n| Prefix | Meaning |\n|--------|---------|\n| `type:worklog` | Completed work; the most common type. |\n| `type:note` | Quick notes, observations. |\n| `type:decision` | Architecture ",
+      "tags": [
+        "python",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "workflow",
+        "document",
+        "security"
+      ],
+      "useCases": [
+        "Saving a session worklog, decision, or research note so a later session can find it.",
+        "Recalling past work by topic when you do not remember the exact words you used.",
+        "Sharing a long-lived knowledge base across multiple agents, terminals, or teammates.",
+        "Organizing context by role or project through workspaces (one workspace per role/project).",
+        "Looking up structured tags (e.g. all `type:decision` entries from one project)."
+      ],
+      "scrapedAt": "2026-05-26T10:12:55.301Z"
+    },
+    {
       "id": "antigravity-metasploit-framework",
       "name": "metasploit-framework",
       "slug": "metasploit-framework",
@@ -25797,116 +25915,6 @@
       "scrapedAt": "2026-01-26T13:20:19.383Z"
     },
     {
-      "id": "antigravity-playwright-java",
-      "name": "playwright-java",
-      "slug": "playwright-java",
-      "description": "Scaffold, write, debug, and enhance enterprise-grade Playwright E2E tests in Java using Page Object Model, JUnit 5, Allure reporting, and parallel execution.",
-      "category": "Creative & Media",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/playwright-java",
-      "content": "\n# Playwright Java – Advanced Test Automation\n\n## Overview\n\nThis skill produces production-quality, enterprise-grade Playwright Java test code.\nIt enforces the Page Object Model (POM), strict locator strategies, thread-safe parallel\nexecution, and full Allure reporting integration. Targets Java 17+ and Playwright 1.44+.\n\nSupporting reference files are available for deeper topics:\n\n| Topic | File |\n|-------|------|\n| Maven POM, ConfigReader, Docker/CI setup | `references/config.md` |\n| Component pattern, dropdowns, uploads, waits | `references/page-objects.md` |\n| Full assertion API, soft assertions, visual testing | `references/assertions.md` |\n| Fixtures, test data factory, auth state, retry | `references/fixtures.md` |\n| Drop-in base class templates | `templates/BaseTest.java`, `templates/BasePage.java` |\n\n---\n\n## When to Use This Skill\n\n- Use when scaffolding a new Playwright Java project from scratch\n- Use when writing Page Object classes or JUnit 5 test classes\n- Use when the user asks about cross-browser testing, parallel execution, or Allure reports\n- Use when fixing flaky tests or replacing `Thread.sleep()` with proper waits\n- Use when setting up Playwright in CI/CD pipelines (GitHub Actions, Jenkins, Docker)\n- Use when combining API calls and UI assertions in a single test (hybrid testing)\n- Use when the user mentions \"POM pattern\", \"BrowserContext\", \"Playwright fixtures\", or \"traces\"\n\n---\n\n## How It Works\n\n### Step 1: Decide the Approach\n\nUse this matrix to pick the right pattern before writing any code:\n\n| User Request | Approach |\n|---|---|\n| New project from scratch | Full scaffold — see `references/config.md` |\n| Single feature test | POM page class + JUnit5 test class |\n| API + UI hybrid | `APIRequestContext` alongside `Page` |\n| Cross-browser | `@MethodSource` parameterized over browser names |\n| Flaky test fix | Replace `sleep` with `waitFor` / `waitForResponse` |\n| CI integration | `playwright install --with-deps` in pipeline |\n| Parallel execution | `junit-platform.properties` + `ThreadLocal` |\n| Rich reporting | Allure + Playwright trace + video recording |\n\n---\n\n### Step 2: Scaffold the Project Structure\n\nAlways use this layout when creating a new project:\n\n```\nsrc/\n├── test/\n│   ├── java/com/company/tests/\n│   │   ├── base/\n│   │   │   ├── BaseTest.java        ← templates/BaseTest.java\n│   │   │   └── BasePage.java        ← templates/BasePage.java\n│   │   ├── pages/\n│   │   │   └── LoginPage.java\n│   │   ├── tests/\n│   │   │   └── LoginTest.java\n│   │   ├── utils/\n│   │   │   ├── TestDataFactory.java\n│   │   │   └── WaitUtils.java\n│   │   └── config/\n│   │       └── ConfigReader.java\n│   └── resources/\n│       ├── test.properties\n│       ├── junit-platform.properties\n│       └── testdata/users.json\npom.xml\n```\n\n---\n\n### Step 3: Set Up Thread-Safe BaseTest\n\n```java\npublic class BaseTest {\n    protected static ThreadLocal<Playwright>     playwrightTL = new ThreadLocal<>();\n    protected static ThreadLocal<Browser>        browserTL    = new ThreadLocal<>();\n    protected static ThreadLocal<BrowserContext> contextTL    = new ThreadLocal<>();\n    protected static ThreadLocal<Page>           pageTL       = new ThreadLocal<>();\n\n    protected Page page() { return pageTL.get(); }\n\n    @BeforeEach\n    void setUp() {\n        Playwright playwright = Playwright.create();\n        playwrightTL.set(playwright);\n\n        Browser browser = resolveBrowser(playwright).launch(\n            new BrowserType.LaunchOptions()\n                .setHeadless(ConfigReader.isHeadless()));\n        browserTL.set(browser);\n\n        BrowserContext context = browser.newContext(new Browser.NewContextOptions()\n            .setViewportSize(1920, 1080)\n            .setRecordVideoDir(Paths.get(\"target/videos/\"))\n            .setLocale(\"en-US\"));\n        context.tracing().start(new Tracing.StartOptions()\n            .setScreenshots(true).setSnapshots(true));\n        contextTL.set(context);\n        pageTL.set(context.newPage());\n    }\n\n    @AfterEach\n    void tearDown(TestInfo testInfo) {\n        String name = testInfo.getDisplayName().replaceAll(\"[^a-zA-Z0-9]\", \"_\");\n        contextTL.get().tracing().stop(new Tracing.StopOptions()\n            .setPath(Paths.get(\"target/traces/\" + name + \".zip\")));\n        pageTL.get().close();\n        contextTL.get().close();\n        browserTL.get().close();\n        playwrightTL.get().close();\n    }\n\n    private BrowserType resolveBrowser(Playwright pw) {\n        return switch (System.getProperty(\"browser\", \"chromium\").toLowerCase()) {\n            case \"firefox\" -> pw.firefox();\n            case \"webkit\"  -> pw.webkit();\n            default        -> pw.chromium();\n        };\n    }\n}\n```\n\n---\n\n### Step 4: Build Page Object Classes\n\n```java\npublic class LoginPage extends BasePage {\n\n    // Declare ALL locators as fields — never inline in action methods\n    private final Locator emailInput;\n    private final Locator passwordInput;\n    private final Locator loginButton;\n    private final Locator e",
-      "tags": [
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "automation",
-        "template",
-        "docker",
-        "rag",
-        "cro"
-      ],
-      "useCases": [
-        "Use when scaffolding a new Playwright Java project from scratch",
-        "Use when writing Page Object classes or JUnit 5 test classes",
-        "Use when the user asks about cross-browser testing, parallel execution, or Allure reports",
-        "Use when fixing flaky tests or replacing `Thread.sleep()` with proper waits",
-        "Use when setting up Playwright in CI/CD pipelines (GitHub Actions, Jenkins, Docker)"
-      ],
-      "scrapedAt": "2026-03-10T07:05:03.933Z"
-    },
-    {
-      "id": "antigravity-playwright-skill",
-      "name": "playwright-skill",
-      "slug": "playwright-skill",
-      "description": "IMPORTANT - Path Resolution: This skill can be installed in different locations (plugin system, manual installation, global, or project-specific). Before executing any commands, determine the skill directory based on where you loaded this SKILL.md file, and use that path in all commands below.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/playwright-skill",
-      "content": "\n**IMPORTANT - Path Resolution:**\nThis skill can be installed in different locations (plugin system, manual installation, global, or project-specific). Before executing any commands, determine the skill directory based on where you loaded this SKILL.md file, and use that path in all commands below. Replace `$SKILL_DIR` with the actual discovered path.\n\nCommon installation paths:\n\n- Plugin system: `<plugin-root>/skills/playwright-skill`\n- Manual global: `<agent-home>/skills/playwright-skill`\n- Project-specific: `<project>/.agent/skills/playwright-skill`\n\n# Playwright Browser Automation\n\nGeneral-purpose browser automation skill. I'll write custom Playwright code for any automation task you request and execute it via the universal executor.\n\n**CRITICAL WORKFLOW - Follow these steps in order:**\n\n1. **Auto-detect dev servers** - For localhost testing, ALWAYS run server detection FIRST:\n\n   ```bash\n   cd $SKILL_DIR && node -e \"require('./lib/helpers').detectDevServers().then(servers => console.log(JSON.stringify(servers)))\"\n   ```\n\n   - If **1 server found**: Use it automatically, inform user\n   - If **multiple servers found**: Ask user which one to test\n   - If **no servers found**: Ask for URL or offer to help start dev server\n\n2. **Write scripts to /tmp** - NEVER write test files to skill directory; always use `/tmp/playwright-test-*.js`\n\n3. **Use visible browser by default** - Always use `headless: false` unless user specifically requests headless mode\n\n4. **Parameterize URLs** - Always make URLs configurable via environment variable or constant at top of script\n\n## How It Works\n\n1. You describe what you want to test/automate\n2. I auto-detect running dev servers (or ask for URL if testing external site)\n3. I write custom Playwright code in `/tmp/playwright-test-*.js` (won't clutter your project)\n4. I execute it via: `cd $SKILL_DIR && node run.js /tmp/playwright-test-*.js`\n5. Results displayed in real-time, browser window visible for debugging\n6. Test files auto-cleaned from /tmp by your OS\n\n## Setup (First Time)\n\n```bash\ncd $SKILL_DIR\nnpm run setup\n```\n\nThis installs Playwright and Chromium browser. Only needed once.\n\n## Execution Pattern\n\n**Step 1: Detect dev servers (for localhost testing)**\n\n```bash\ncd $SKILL_DIR && node -e \"require('./lib/helpers').detectDevServers().then(s => console.log(JSON.stringify(s)))\"\n```\n\n**Step 2: Write test script to /tmp with URL parameter**\n\n```javascript\n// /tmp/playwright-test-page.js\nconst { chromium } = require('playwright');\n\n// Parameterized URL (detected or user-provided)\nconst TARGET_URL = 'http://localhost:3001'; // <-- Auto-detected or from user\n\n(async () => {\n  const browser = await chromium.launch({ headless: false });\n  const page = await browser.newPage();\n\n  await page.goto(TARGET_URL);\n  console.log('Page loaded:', await page.title());\n\n  await page.screenshot({ path: '/tmp/screenshot.png', fullPage: true });\n  console.log('📸 Screenshot saved to /tmp/screenshot.png');\n\n  await browser.close();\n})();\n```\n\n**Step 3: Execute from skill directory**\n\n```bash\ncd $SKILL_DIR && node run.js /tmp/playwright-test-page.js\n```\n\n## Common Patterns\n\n### Test a Page (Multiple Viewports)\n\n```javascript\n// /tmp/playwright-test-responsive.js\nconst { chromium } = require('playwright');\n\nconst TARGET_URL = 'http://localhost:3001'; // Auto-detected\n\n(async () => {\n  const browser = await chromium.launch({ headless: false, slowMo: 100 });\n  const page = await browser.newPage();\n\n  // Desktop test\n  await page.setViewportSize({ width: 1920, height: 1080 });\n  await page.goto(TARGET_URL);\n  console.log('Desktop - Title:', await page.title());\n  await page.screenshot({ path: '/tmp/desktop.png', fullPage: true });\n\n  // Mobile test\n  await page.setViewportSize({ width: 375, height: 667 });\n  await page.screenshot({ path: '/tmp/mobile.png', fullPage: true });\n\n  await browser.close();\n})();\n```\n\n### Test Login Flow\n\n```javascript\n// /tmp/playwright-test-login.js\nconst { chromium } = require('playwright');\n\nconst TARGET_URL = 'http://localhost:3001'; // Auto-detected\n\n(async () => {\n  const browser = await chromium.launch({ headless: false });\n  const page = await browser.newPage();\n\n  await page.goto(`${TARGET_URL}/login`);\n\n  await page.fill('input[name=\"email\"]', 'test@example.com');\n  await page.fill('input[name=\"password\"]', 'password123');\n  await page.click('button[type=\"submit\"]');\n\n  // Wait for redirect\n  await page.waitForURL('**/dashboard');\n  console.log('✅ Login successful, redirected to dashboard');\n\n  await browser.close();\n})();\n```\n\n### Fill and Submit Form\n\n```javascript\n// /tmp/playwright-test-form.js\nconst { chromium } = require('playwright');\n\nconst TARGET_URL = 'http://localhost:3001'; // Auto-detected\n\n(async () => {\n  const browser = await chromium.launch({ headless: false, slowMo: 50 });\n  const page = await browser.newPage();\n\n  await page.goto(`${TARGET_URL}/contact`);\n\n  await page.fill('input[name=\"name\"]', 'John Doe');\n  await page.fill('input[name=\"email\"",
-      "tags": [
-        "javascript",
-        "node",
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "llm",
-        "automation",
-        "workflow",
-        "design"
-      ],
-      "useCases": [
-        "http://localhost:3000",
-        "http://localhost:3001"
-      ],
-      "scrapedAt": "2026-01-26T13:20:22.780Z"
-    },
-    {
-      "id": "antigravity-plotly",
-      "name": "plotly",
-      "slug": "plotly",
-      "description": "Interactive visualization library. Use when you need hover info, zoom, pan, or web-embeddable charts. Best for dashboards, exploratory analysis, and presentations. For static publication figures use matplotlib or scientific-visualization.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/plotly",
-      "content": "\n# Plotly\n\nPython graphing library for creating interactive, publication-quality visualizations with 40+ chart types.\n\n## When to Use\n- You need interactive charts with hover, zoom, pan, or web embedding.\n- You are building dashboards, exploratory analysis notebooks, or presentations that benefit from rich interaction.\n- You want to choose between Plotly Express and Graph Objects for the same visualization task.\n\n## Quick Start\n\nInstall Plotly:\n```bash\nuv pip install plotly\n```\n\nBasic usage with Plotly Express (high-level API):\n```python\nimport plotly.express as px\nimport pandas as pd\n\ndf = pd.DataFrame({\n    'x': [1, 2, 3, 4],\n    'y': [10, 11, 12, 13]\n})\n\nfig = px.scatter(df, x='x', y='y', title='My First Plot')\nfig.show()\n```\n\n## Choosing Between APIs\n\n### Use Plotly Express (px)\nFor quick, standard visualizations with sensible defaults:\n- Working with pandas DataFrames\n- Creating common chart types (scatter, line, bar, histogram, etc.)\n- Need automatic color encoding and legends\n- Want minimal code (1-5 lines)\n\nSee reference/plotly-express.md for complete guide.\n\n### Use Graph Objects (go)\nFor fine-grained control and custom visualizations:\n- Chart types not in Plotly Express (3D mesh, isosurface, complex financial charts)\n- Building complex multi-trace figures from scratch\n- Need precise control over individual components\n- Creating specialized visualizations with custom shapes and annotations\n\nSee reference/graph-objects.md for complete guide.\n\n**Note:** Plotly Express returns graph objects Figure, so you can combine approaches:\n```python\nfig = px.scatter(df, x='x', y='y')\nfig.update_layout(title='Custom Title')  # Use go methods on px figure\nfig.add_hline(y=10)                     # Add shapes\n```\n\n## Core Capabilities\n\n### 1. Chart Types\n\nPlotly supports 40+ chart types organized into categories:\n\n**Basic Charts:** scatter, line, bar, pie, area, bubble\n\n**Statistical Charts:** histogram, box plot, violin, distribution, error bars\n\n**Scientific Charts:** heatmap, contour, ternary, image display\n\n**Financial Charts:** candlestick, OHLC, waterfall, funnel, time series\n\n**Maps:** scatter maps, choropleth, density maps (geographic visualization)\n\n**3D Charts:** scatter3d, surface, mesh, cone, volume\n\n**Specialized:** sunburst, treemap, sankey, parallel coordinates, gauge\n\nFor detailed examples and usage of all chart types, see reference/chart-types.md.\n\n### 2. Layouts and Styling\n\n**Subplots:** Create multi-plot figures with shared axes:\n```python\nfrom plotly.subplots import make_subplots\nimport plotly.graph_objects as go\n\nfig = make_subplots(rows=2, cols=2, subplot_titles=('A', 'B', 'C', 'D'))\nfig.add_trace(go.Scatter(x=[1, 2], y=[3, 4]), row=1, col=1)\n```\n\n**Templates:** Apply coordinated styling:\n```python\nfig = px.scatter(df, x='x', y='y', template='plotly_dark')\n# Built-in: plotly_white, plotly_dark, ggplot2, seaborn, simple_white\n```\n\n**Customization:** Control every aspect of appearance:\n- Colors (discrete sequences, continuous scales)\n- Fonts and text\n- Axes (ranges, ticks, grids)\n- Legends\n- Margins and sizing\n- Annotations and shapes\n\nFor complete layout and styling options, see reference/layouts-styling.md.\n\n### 3. Interactivity\n\nBuilt-in interactive features:\n- Hover tooltips with customizable data\n- Pan and zoom\n- Legend toggling\n- Box/lasso selection\n- Rangesliders for time series\n- Buttons and dropdowns\n- Animations\n\n```python\n# Custom hover template\nfig.update_traces(\n    hovertemplate='<b>%{x}</b><br>Value: %{y:.2f}<extra></extra>'\n)\n\n# Add rangeslider\nfig.update_xaxes(rangeslider_visible=True)\n\n# Animations\nfig = px.scatter(df, x='x', y='y', animation_frame='year')\n```\n\nFor complete interactivity guide, see reference/export-interactivity.md.\n\n### 4. Export Options\n\n**Interactive HTML:**\n```python\nfig.write_html('chart.html')                       # Full standalone\nfig.write_html('chart.html', include_plotlyjs='cdn')  # Smaller file\n```\n\n**Static Images (requires kaleido):**\n```bash\nuv pip install kaleido\n```\n\n```python\nfig.write_image('chart.png')   # PNG\nfig.write_image('chart.pdf')   # PDF\nfig.write_image('chart.svg')   # SVG\n```\n\nFor complete export options, see reference/export-interactivity.md.\n\n## Common Workflows\n\n### Scientific Data Visualization\n\n```python\nimport plotly.express as px\n\n# Scatter plot with trendline\nfig = px.scatter(df, x='temperature', y='yield', trendline='ols')\n\n# Heatmap from matrix\nfig = px.imshow(correlation_matrix, text_auto=True, color_continuous_scale='RdBu')\n\n# 3D surface plot\nimport plotly.graph_objects as go\nfig = go.Figure(data=[go.Surface(z=z_data, x=x_data, y=y_data)])\n```\n\n### Statistical Analysis\n\n```python\n# Distribution comparison\nfig = px.histogram(df, x='values', color='group', marginal='box', nbins=30)\n\n# Box plot with all points\nfig = px.box(df, x='category', y='value', points='all')\n\n# Violin plot\nfig = px.violin(df, x='group', y='measurement', box=True)\n```\n\n### Time Series and Financial\n\n```python\n# Time series with rangeslider\nfig = px.",
-      "tags": [
-        "python",
-        "pdf",
-        "api",
-        "ai",
-        "workflow",
-        "template",
-        "document",
-        "presentation",
-        "image"
-      ],
-      "useCases": [
-        "You need interactive charts with hover, zoom, pan, or web embedding.",
-        "You are building dashboards, exploratory analysis notebooks, or presentations that benefit from rich interaction.",
-        "You want to choose between Plotly Express and Graph Objects for the same visualization task."
-      ],
-      "scrapedAt": "2026-03-07T06:56:44.907Z"
-    },
-    {
-      "id": "antigravity-podcast-generation",
-      "name": "podcast-generation",
-      "slug": "podcast-generation",
-      "description": "Generate real audio narratives from text content using Azure OpenAI's Realtime API.",
-      "category": "Business & Marketing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/podcast-generation",
-      "content": "\n# Podcast Generation with GPT Realtime Mini\n\nGenerate real audio narratives from text content using Azure OpenAI's Realtime API.\n\n## Quick Start\n\n1. Configure environment variables for Realtime API\n2. Connect via WebSocket to Azure OpenAI Realtime endpoint\n3. Send text prompt, collect PCM audio chunks + transcript\n4. Convert PCM to WAV format\n5. Return base64-encoded audio to frontend for playback\n\n## Environment Configuration\n\n```env\nAZURE_OPENAI_AUDIO_API_KEY=your_realtime_api_key\nAZURE_OPENAI_AUDIO_ENDPOINT=https://your-resource.cognitiveservices.azure.com\nAZURE_OPENAI_AUDIO_DEPLOYMENT=gpt-realtime-mini\n```\n\n**Note**: Endpoint should NOT include `/openai/v1/` - just the base URL.\n\n## Core Workflow\n\n### Backend Audio Generation\n\n```python\nfrom openai import AsyncOpenAI\nimport base64\n\n# Convert HTTPS endpoint to WebSocket URL\nws_url = endpoint.replace(\"https://\", \"wss://\") + \"/openai/v1\"\n\nclient = AsyncOpenAI(\n    websocket_base_url=ws_url,\n    api_key=api_key\n)\n\naudio_chunks = []\ntranscript_parts = []\n\nasync with client.realtime.connect(model=\"gpt-realtime-mini\") as conn:\n    # Configure for audio-only output\n    await conn.session.update(session={\n        \"output_modalities\": [\"audio\"],\n        \"instructions\": \"You are a narrator. Speak naturally.\"\n    })\n    \n    # Send text to narrate\n    await conn.conversation.item.create(item={\n        \"type\": \"message\",\n        \"role\": \"user\",\n        \"content\": [{\"type\": \"input_text\", \"text\": prompt}]\n    })\n    \n    await conn.response.create()\n    \n    # Collect streaming events\n    async for event in conn:\n        if event.type == \"response.output_audio.delta\":\n            audio_chunks.append(base64.b64decode(event.delta))\n        elif event.type == \"response.output_audio_transcript.delta\":\n            transcript_parts.append(event.delta)\n        elif event.type == \"response.done\":\n            break\n\n# Convert PCM to WAV (see scripts/pcm_to_wav.py)\npcm_audio = b''.join(audio_chunks)\nwav_audio = pcm_to_wav(pcm_audio, sample_rate=24000)\n```\n\n### Frontend Audio Playback\n\n```javascript\n// Convert base64 WAV to playable blob\nconst base64ToBlob = (base64, mimeType) => {\n  const bytes = atob(base64);\n  const arr = new Uint8Array(bytes.length);\n  for (let i = 0; i < bytes.length; i++) arr[i] = bytes.charCodeAt(i);\n  return new Blob([arr], { type: mimeType });\n};\n\nconst audioBlob = base64ToBlob(response.audio_data, 'audio/wav');\nconst audioUrl = URL.createObjectURL(audioBlob);\nnew Audio(audioUrl).play();\n```\n\n## Voice Options\n\n| Voice | Character |\n|-------|-----------|\n| alloy | Neutral |\n| echo | Warm |\n| fable | Expressive |\n| onyx | Deep |\n| nova | Friendly |\n| shimmer | Clear |\n\n## Realtime API Events\n\n- `response.output_audio.delta` - Base64 audio chunk\n- `response.output_audio_transcript.delta` - Transcript text\n- `response.done` - Generation complete\n- `error` - Handle with `event.error.message`\n\n## Audio Format\n\n- **Input**: Text prompt\n- **Output**: PCM audio (24kHz, 16-bit, mono)\n- **Storage**: Base64-encoded WAV\n\n## References\n\n- **Full architecture**: See references/architecture.md for complete stack design\n- **Code examples**: See references/code-examples.md for production patterns\n- **PCM conversion**: Use scripts/pcm_to_wav.py for audio format conversion\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "python",
-        "javascript",
-        "api",
-        "ai",
-        "gpt",
-        "workflow",
-        "design",
-        "azure",
-        "rag"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-14T07:07:01.118Z"
-    },
-    {
       "id": "anthropic-pptx",
       "name": "pptx",
       "slug": "pptx",
@@ -26763,7 +26771,7 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 380
+      "count": 381
     },
     {
       "id": "document-processing",
@@ -26777,14 +26785,14 @@
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 128
+      "count": 129
     },
     {
       "id": "creative-media",
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 100
+      "count": 99
     },
     {
       "id": "security-systems",
@@ -26798,7 +26806,7 @@
       "name": "Business & Marketing",
       "description": "Skills for marketing, branding, lead generation, and business operations.",
       "icon": "briefcase",
-      "count": 51
+      "count": 50
     },
     {
       "id": "productivity-organization",
@@ -26835,48 +26843,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 205671
+      "stars": 207224
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 14,
       "newSkillCount": 3,
-      "stars": 140466
+      "stars": 140985
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 61696
+      "stars": 61861
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 1,
-      "stars": 74792
+      "stars": 74905
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1263
+      "stars": 1267
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1003,
-      "newSkillCount": 6,
-      "stars": 38614
+      "newSkillCount": 10,
+      "stars": 38732
     }
   ],
-  "lastUpdated": "2026-05-25T10:26:35.386Z",
+  "lastUpdated": "2026-05-26T10:13:44.587Z",
   "stats": {
     "totalSkills": 1101,
-    "newSkills": 18,
-    "scrapedAt": "2026-05-25T10:26:35.386Z"
+    "newSkills": 22,
+    "scrapedAt": "2026-05-26T10:13:44.587Z"
   }
 }

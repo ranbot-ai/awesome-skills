@@ -1,0 +1,30 @@
+{
+  "id": "antigravity-ii-commons",
+  "name": "ii-commons",
+  "slug": "ii-commons",
+  "description": "Deterministic search across arXiv, PubMed/PMC, and US policy corpora with daily freshness cutoffs.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ii-commons",
+  "content": "\n# II-Commons\n\n## Overview\n\nII-Commons provides deterministic retrieval for research agents across arXiv, PubMed/PMC, and supported US policy corpora. Use it when a task needs reproducible search, metadata lookup, full-document Markdown retrieval, or a freshness check before answering with recent evidence.\n\nThe upstream project publishes a Node.js CLI as `@intelligentinternet/ii-commons` and a full agent skill at `skills/ii-commons/`.\n\n## When to Use This Skill\n\n- Use when searching arXiv, PubMed/PMC, or supported US policy corpora for evidence.\n- Use when the user asks for latest or recent research and corpus freshness matters.\n- Use when you need stable identifiers, metadata, or full-document Markdown for downstream analysis.\n- Use when comparing evidence across scientific literature and policy documents.\n\n## How It Works\n\n### Step 1: Check Corpus Freshness\n\nRun `cutoff` before freshness-sensitive searches:\n\n```bash\nnpx @intelligentinternet/ii-commons cutoff\n```\n\nReport the relevant cutoff date before interpreting recent results.\n\n### Step 2: Search the Right Corpus\n\nUse exactly this command shape:\n\n```bash\nnpx @intelligentinternet/ii-commons search arxiv \"large language model inference\" --max-results 10\nnpx @intelligentinternet/ii-commons search pubmed \"type 2 diabetes review\" --start 20240000 --max-results 10\nnpx @intelligentinternet/ii-commons search policy \"state overtime rule for agricultural workers\" --jurisdictions US-CA --max-results 10\n```\n\nChoose `arxiv` for preprints and technical research, `pubmed` for biomedical and clinical literature, and `policy` for supported US policy corpora.\n\n### Step 3: Retrieve Metadata or Markdown\n\nUse stable identifiers from search results:\n\n```bash\nnpx @intelligentinternet/ii-commons meta \"arXiv:2402.03578\"\nnpx @intelligentinternet/ii-commons markdown \"PMCID:PMC11152602\"\n```\n\nBuild summaries from search results first, then request Markdown when detailed inspection or full-document grounding is needed.\n\n## Installation\n\nRun the CLI with `npx`:\n\n```bash\nnpx @intelligentinternet/ii-commons --help\n```\n\nOr install globally:\n\n```bash\nnpm install -g @intelligentinternet/ii-commons\nii-commons cutoff\n```\n\nTo install the full upstream agent skill, install the `skills/ii-commons/` folder from:\n\n```text\nhttps://github.com/Intelligent-Internet/II-Commons-Skills\n```\n\n## Best Practices\n\n- Prefer server-side date filters such as `--start` and `--end` for time-bounded arXiv and PubMed searches.\n- Preserve canonical identifiers such as `arXiv:<id>`, `PMID:<id>`, `PMCID:PMC<id>`, and `policy:<jurisdiction>:<id>`.\n- Use `cutoff` as the authoritative freshness boundary for each corpus.\n- Keep non-time filters conservative until initial search results show the right scope.\n\n## Limitations\n\n- Requires Node.js 18 or newer and outbound network access to `commons.ii.inc`.\n- Basic usage works without authentication; higher usage limits may require an API token from `https://commons.ii.inc/`.\n- Supported policy coverage is limited to the policy corpora exposed by II-Commons.\n\n## Security & Safety Notes\n\n- Do not print or expose `II_COMMONS_API_KEY` values.\n- Treat outputs as retrieval evidence, not expert review. For medical, legal, or policy-sensitive work, cite sources and preserve uncertainty.\n- Commands call an external API service; confirm network access is allowed in the user's environment before running them.\n\n## Related Skills\n\n- Use broader web-search or deep-research skills when evidence is outside arXiv, PubMed/PMC, or supported policy corpora.\n- Use citation-management skills after II-Commons has identified stable source records.\n",
+  "tags": [
+    "node",
+    "markdown",
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "document",
+    "security",
+    "rag",
+    "cro"
+  ],
+  "useCases": [
+    "Use when searching arXiv, PubMed/PMC, or supported US policy corpora for evidence.",
+    "Use when the user asks for latest or recent research and corpus freshness matters.",
+    "Use when you need stable identifiers, metadata, or full-document Markdown for downstream analysis.",
+    "Use when comparing evidence across scientific literature and policy documents."
+  ],
+  "scrapedAt": "2026-05-26T10:11:56.768Z"
+}
