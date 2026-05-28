@@ -7417,6 +7417,30 @@
       "scrapedAt": "2026-01-26T13:17:10.639Z"
     },
     {
+      "id": "antigravity-bumblebee",
+      "name": "bumblebee",
+      "slug": "bumblebee",
+      "description": "Run Bumblebee supply-chain inventory and exposure scans on macOS/Linux to detect compromised packages, extensions, and MCP host configs.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bumblebee",
+      "content": "\n# Bumblebee Security Scan\n\nBumblebee (https://github.com/perplexityai/bumblebee) is a read-only inventory collector that surfaces package, extension, and developer-tool metadata on developer endpoints. It answers a focused supply-chain question: when an advisory names a package or version, do any matches exist on this machine right now?\n\nThis skill drives a single Bumblebee scan from start to finish:\n\n1. Verify Go is on the PATH (provide install guidance if not).\n2. Verify or install the `bumblebee` binary.\n3. Run the requested scan profile (`baseline`, `project`, or `deep`).\n4. Save raw NDJSON output plus a Markdown report into the user's workspace.\n5. Summarize findings — especially exposure-catalog matches — in the chat reply.\n\nCommunicate with the user in the language they used (German for Stefan). Code, commit messages, and on-disk file contents stay in English to match existing project conventions.\n\n## When to Use This Skill\n\nUse this skill when an advisory, incident report, or exposure catalog names compromised packages,\ndeveloper tools, browser/editor extensions, or MCP host configuration that may exist on a local\nmacOS or Linux developer endpoint.\n\nUse it for read-only inventory and exposure checks. Do not use it to patch, uninstall, quarantine,\nor otherwise mutate the scanned machine.\n\n## Step 1 — Clarify the scan request\n\nBefore running anything, confirm two things with the user via `AskUserQuestion`, unless the message already pins them down:\n\n- **Profile**: `baseline` (global package roots), `project` (specific dev folders like `~/code`), or `deep` (explicit `--root` paths, including `$HOME` for incident response).\n- **Roots**: For `project` and `deep` profiles, ask which directories to scan. `deep` is the only profile that accepts a bare-home root.\n\nIf the user has an advisory or exposure-catalog file ready, also ask whether they want to pass it via `--exposure-catalog`. The skill does not ship its own catalogs — point them at `threat_intel/` in the Bumblebee repo if they ask where to find ready-made ones.\n\nSkip the questions for one-liner asks like \"lauf mal ne Baseline-Scan\" — just run a baseline.\n\n## Step 2 — Check Go\n\nRun `command -v go && go version` in bash. Three outcomes:\n\n- **Go ≥ 1.25 present** → continue.\n- **Go present but < 1.25** → tell the user the version, explain Bumblebee needs Go 1.25+, and stop until they upgrade.\n- **Go missing** → do not install Go automatically. Show platform-appropriate instructions and stop:\n  - macOS: `brew install go` (or download from https://go.dev/dl/).\n  - Debian/Ubuntu: prefer the official tarball from https://go.dev/dl/ because distro repos lag; `sudo apt install golang-go` only as fallback.\n  - Fedora/RHEL: `sudo dnf install golang` or the official tarball.\n\nAfter installation, the user must ensure `$GOBIN` (or `$HOME/go/bin`) is on `$PATH` so `bumblebee` is found later.\n\n## Step 3 — Check or install Bumblebee\n\nRun `command -v bumblebee && bumblebee version`. If missing:\n\n```bash\ngo install github.com/perplexityai/bumblebee/cmd/bumblebee@latest\n```\n\nThen re-check `bumblebee version`. If the binary still cannot be located, the user's `GOBIN`/`PATH` is likely misconfigured — surface the resolved `go env GOPATH` and `go env GOBIN` so they can fix it. Do not fall back to running the binary by absolute path silently; explain what is happening.\n\nOnce installed, also run `bumblebee selftest` as a sanity check. A non-zero exit means the local install is broken and the scan should not proceed.\n\n## Step 4 — Run the scan\n\nAll scans write NDJSON to a file. Use the workspace folder for output so the user can open the results afterwards.\n\nOutput filenames (use the user's workspace path; the example below assumes `$OUT` is set):\n\n- `bumblebee-<profile>-<UTC-timestamp>.ndjson` — raw records.\n- `bumblebee-<profile>-<UTC-timestamp>.report.md` — Markdown report (generated in Step 5).\n\nPick a sensible `--max-duration` so a runaway scan does not hang the session. Reasonable defaults:\n\n- `baseline`: 5m\n- `project`: 10m\n- `deep`: 15m (warn the user that scanning `$HOME` can still take longer; offer to raise the limit)\n\nAlways stream stderr to a sibling `.log` file — Bumblebee emits diagnostic NDJSON there that helps explain partial scans.\n\n### Baseline\n\n```bash\nbumblebee scan --profile baseline \\\n  --max-duration 5m \\\n  > \"$OUT/bumblebee-baseline-$TS.ndjson\" \\\n  2> \"$OUT/bumblebee-baseline-$TS.log\"\n```\n\nOptional: scope to specific ecosystems if the user only cares about, say, npm and PyPI:\n\n```bash\nbumblebee scan --profile baseline --ecosystem npm,pypi ...\n```\n\n### Project\n\nEach `--root` must be an existing absolute path. Reject bare `$HOME` for this profile (Bumblebee will reject it too — surface the message clearly).\n\n```bash\nbumblebee scan --profile project \\\n  --root \"$HOME/code\" \\\n  --root \"$HOME/Developer\" \\\n  --max-duration 10m \\\n  > \"$OUT/bumblebee-project-$TS.ndjson\" \\\n  2> \"$OUT/bumblebee-project-$TS.log\"\n```\n\n### Deep\n\nUsed for incident response — broad ",
+      "tags": [
+        "python",
+        "markdown",
+        "mcp",
+        "claude",
+        "ai",
+        "design",
+        "document",
+        "security",
+        "rag"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-05-28T10:15:37.667Z"
+    },
+    {
       "id": "antigravity-bun-development",
       "name": "bun-development",
       "slug": "bun-development",
@@ -9556,6 +9580,30 @@
       "scrapedAt": "2026-01-26T13:17:41.339Z"
     },
     {
+      "id": "antigravity-complexity-cuts",
+      "name": "complexity-cuts",
+      "slug": "complexity-cuts",
+      "description": "Lower Big-O on existing code via a one-transformation-at-a-time playbook with verify-revert-stop. For new code use lemmaly; for math-level wins escalate to mathguard.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/complexity-cuts",
+      "content": "\n# complexity-cuts — Lower Big-O on Existing Code\n\n`lemmaly` prevents bad complexity before code is written. **complexity-cuts** fixes it after the fact: code already exists, it works, but its time or space complexity is worse than necessary.\n\n**Violating the letter of these rules is violating the spirit of the skill.** Adapting \"just a little\" is how a faster-but-wrong rewrite ships.\n\n## When to Use This Skill\n\nUse **complexity-cuts** when refactoring existing code that has poor Big-O:\n\n- Nested loops, `O(n²)` or worse scans, repeated work, redundant allocations, blown memory.\n- Stated symptoms: \"this is slow on large inputs\", \"times out\", \"OOM\", \"too much memory\", \"reduce complexity\", \"optimize this algorithm\".\n- N+1 query patterns in ORMs (Prisma, Drizzle, SQLAlchemy, Django, ActiveRecord).\n- `await` inside `for` over independent items causing serial latency.\n\nFor *preventing* bad complexity before code is written, use **`lemmaly`**. For math-level optimizations (Bloom, HLL, FFT, JL projection), escalate to **`mathguard`**.\n\n## The Iron Law\n\n```text\nNO TRANSFORMATION WITHOUT EXISTING TESTS GREEN BEFORE AND AFTER\n```\n\nIf the code has no tests, you write a characterization test first (golden input → current output). Then transform. Then verify the test still passes. If you skip this, the optimization can silently break callers — and faster-but-wrong is worse than slow-and-right.\n\n## Non-negotiable rules\n\n1. **State current and target Big-O before touching code.** In one line:\n   - Current: `time = O(?)`, `space = O(?)`\n   - Target: `time = O(?)`, `space = O(?)`\n   - Dominant input dimension (n = what, how large in practice)\n\n   If you cannot state current Big-O, you do not yet understand the code. Read more.\n\n2. **Identify the bottleneck, do not guess.** Point to the exact line(s) responsible for the dominant term. Nested loop? Repeated linear scan? Recomputation? Allocation inside a hot loop? The fix lives there, not elsewhere.\n\n3. **One transformation at a time, with a verify-revert-stop loop.** The loop is:\n\n   1. Apply exactly one transformation from the playbook.\n   2. Run the existing test suite (or the characterization test you wrote per the Iron Law).\n   3. If any test breaks: **revert immediately.** Do not patch the test. Do not patch around the failure. Revert.\n   4. Count reverts on this piece of code. If **3 reverts in a row**, STOP optimizing. The bottleneck is wrong, the transformation is wrong, or the code has invariants you have not modeled. Escalate to `invariant-guard` and write the missing contract — do not try a fourth transformation.\n   5. Only after a transformation lands green: pick the next one.\n\n   Stacked changes hide regressions. Patched tests hide regressions louder.\n\n4. **Preserve semantics exactly.** Lower complexity must not change outputs, ordering guarantees, stability, or error behavior. If the optimization requires a semantic change (e.g. unordered output), call it out explicitly and confirm it is acceptable.\n\n5. **No invented numbers.** Never write \"10x faster\" or \"saves 200MB\" without measuring. Write `<measured: TBD>` and move on, or actually measure with a representative input.\n\n6. **Always report the measured speedup ratio after a transformation lands.** Once the new code is green, run a representative benchmark (same input, same machine, warm cache) and report `before → after` plus the ratio as `N× faster` (or `N× less memory`). One line, attached to the diff:\n\n   ```text\n   p50:  186 ms → 1.1 ms   (169× faster, n=20,000, 200 samples)\n   ```\n\n   If you cannot measure (e.g. the win is purely asymptotic on inputs you don't have), say so explicitly: `asymptotic only, no measurement — O(n²) → O(n)`. Never silently skip this step.\n\n## The transformation playbook\n\nThe vast majority of real-world Big-O wins come from a small set of moves. Try them in this order:\n\n### Time-complexity reductions\n\n| Smell | Fix | Typical win |\n|---|---|---|\n| `for x in A: if x in B` where B is list/array | Convert B to `Set`/`Map` once | O(n·m) → O(n+m) |\n| Nested loop computing pairs/joins | Hash-join on the key; index by lookup field | O(n·m) → O(n+m) |\n| Repeated `.find` / `.indexOf` / `.includes` inside a loop | Precompute index `Map<key, item>` outside loop | O(n^2) → O(n) |\n| Repeated recomputation of same value | Memoize / cache by input key | O(n·f(n)) → O(n + f(n)) |\n| Sort inside a loop | Sort once outside | O(n^2 log n) → O(n log n) |\n| Linear scan for min/max/median repeatedly | Heap / sorted structure | O(n·k) → O(n log k) |\n| Recursive recomputation (naive Fibonacci shape) | Memoize, or convert to iterative DP | exponential → O(n) |\n| String concatenation in a loop (some langs) | Use builder / `join` / `array.push` then join | O(n^2) → O(n) |\n| Repeated regex compile in loop | Compile once outside | constant-factor, large |\n| Counting / grouping via nested loop | Single pass with `Counter` / `Map<k, count>` | O(n^2) → O(n) |\n| Sliding-window written as nested loop | Two-pointer ",
+      "tags": [
+        "claude",
+        "ai",
+        "workflow",
+        "prisma"
+      ],
+      "useCases": [
+        "Nested loops, `O(n²)` or worse scans, repeated work, redundant allocations, blown memory.",
+        "Stated symptoms: \"this is slow on large inputs\", \"times out\", \"OOM\", \"too much memory\", \"reduce complexity\", \"optimize this algorithm\".",
+        "N+1 query patterns in ORMs (Prisma, Drizzle, SQLAlchemy, Django, ActiveRecord).",
+        "`await` inside `for` over independent items causing serial latency."
+      ],
+      "scrapedAt": "2026-05-28T10:16:09.160Z"
+    },
+    {
       "id": "antigravity-comprehensive-review-full-review",
       "name": "comprehensive-review-full-review",
       "slug": "comprehensive-review-full-review",
@@ -11666,6 +11714,28 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-04-17T08:00:32.133Z"
+    },
+    {
+      "id": "antigravity-decision-navigator",
+      "name": "decision-navigator",
+      "slug": "decision-navigator",
+      "description": "Guide stuck or overwhelmed users through targeted branching questions until they reach concrete next steps.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/decision-navigator",
+      "content": "\n# Decision Navigator\n\nHelp users who feel stuck or overwhelmed by guiding them through a structured branching exploration\nof their situation — one clear question at a time — until they arrive at concrete, actionable steps.\n\n## Core Philosophy\n\nMost people go blank not because they're incapable, but because the problem space feels infinite.\nYour job is to collapse that space progressively: ask one clarifying question, offer 3–5 distinct\npaths, let them choose, and repeat — getting more specific each level — until you reach a leaf\nwhere concrete steps make sense.\n\nNever overwhelm with a wall of options or advice upfront. Navigate, don't lecture.\n\n---\n\n## When to Use This Skill\n\nUse this skill whenever a user feels stuck, overwhelmed, or does not know where to start.\nTrigger on phrases like \"I don't know what to do\", \"I want to X but don't know how\",\n\"I'm not sure where to begin\", \"help me figure out...\", \"I feel lost about...\", or broad\nopen-ended goals like \"I want to start a business\", \"I want to change careers\", \"I want to\nlearn something new\", or \"I need to make a decision about X\".\n\nDo not wait for the user to ask a precise question. If they seem stuck or overwhelmed, use\nthis skill.\n\n## The Process\n\n### Step 1 — Acknowledge and orient (1–2 sentences)\n\nReflect the situation back briefly so the user feels heard. Don't give advice yet.\n\n> \"Changing careers is a big one — lots of directions it could go. Let me help you narrow it down.\"\n\n### Step 2 — Ask one clarifying question\n\nAsk the single most useful question to understand *what kind* of problem this actually is.\nFrame it as a choice between 3–5 concrete options, not open-ended.\n\n**Option labels must be short** — 2 to 6 words max. No explanations inside the bullet.\nThe question itself carries the context; the options are just the choices.\n\n**Good question format:**\n> \"What's driving this for you right now?\n> - Unhappy in my current role\n> - Want to earn more\n> - Want more flexibility\n> - Found a new interest\n> - Not sure yet\"\n\n**Bad question format:**\n> \"Tell me more about your situation.\" ← too open, doesn't reduce the space\n\n> \"- Simplicity: I want the easiest setup with zero server management.\" ← option labels should never have colons or sub-explanations\n\n### Step 2b — Extract before you ask\n\nIf the user's message already contains useful information (they described constraints, named\nplatforms, listed requirements), pull that out first. Don't make them re-answer what they\nalready told you.\n\n> \"Ok so you've got: Docker container ready, needs auth + multi-tenant DB, websockets, and\n> the client wants AWS or GCP. That's a lot. What's the scariest part right now?\n> - Choosing between AWS and GCP\n> - Understanding how all the pieces connect\n> - Actually deploying the container\n> - Not sure where to even begin\"\n\n### Step 3 — Branch based on their answer\n\nAfter they choose, go one level deeper. Each level should feel more specific.\n\nTypical depth: 3–4 levels before reaching actionable steps.\n\n**Level 1** — What kind of problem is this? (motivation, constraint, knowledge gap, fear, resources...)\n**Level 2** — What's the most important factor for them? (urgency, risk tolerance, resources available...)\n**Level 3** — What's their current situation / starting point?\n**Level 4** (leaf) — Give concrete steps\n\n### Step 4 — Deliver concrete steps at the leaf\n\nWhen you've narrowed things down enough (usually 3–4 questions in), stop branching and give\n3–6 specific, ordered action steps. These should be immediately doable, not vague advice.\n\n**Good leaf output:**\n> Based on what you've shared — you're unhappy in your current role, want to stay in tech, and\n> have about 3 months before you need to move — here's where to start:\n>\n> 1. Spend one hour this week writing down what specifically drains you vs. energizes you at work.\n> 2. Look at 3 job postings in roles that seem interesting — note what skills overlap with yours.\n> 3. Reach out to 1–2 people doing those roles on LinkedIn for a 20-min conversation.\n> 4. Set a decision deadline: commit to applying somewhere within 6 weeks.\n> 5. Tell one trusted person about your plan so you have accountability.\n\n**Bad leaf output:**\n> \"You should network more and update your resume.\" ← too vague\n\n---\n\n## Branching Guidelines\n\n### How to design your questions\n\n- **Short option labels** — 2 to 6 words. Never a colon + explanation inside a bullet.\n  The question sets the context; options are just the fork in the road.\n- **Mutually exclusive options** — each choice should lead down a genuinely different path\n- **Concrete labels** — \"Earn more money\" not \"financial reasons\"\n- **Cover the realistic space** — include the uncomfortable options (e.g. \"Scared of failing\")\n- **Always offer an escape** — include \"Not sure yet\" so no one feels forced\n- **Extract first** — if the user already gave you info, acknowledge it before asking the next question.\n  Summarize what you know in 1–2 lines, then ask only what's still missing.\n\n### When to ",
+      "tags": [
+        "api",
+        "claude",
+        "ai",
+        "design",
+        "docker",
+        "aws",
+        "gcp"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-05-28T10:16:40.527Z"
     },
     {
       "id": "antigravity-deep-research",
@@ -18754,6 +18824,35 @@
       "scrapedAt": "2026-03-13T07:07:47.421Z"
     },
     {
+      "id": "antigravity-invariant-guard",
+      "name": "invariant-guard",
+      "slug": "invariant-guard",
+      "description": "Correctness-first: forces writing the function contract, loop invariant, termination argument, and edge cases BEFORE code. Catches Boyer-Moore, leftmost binary search, QuickSelect traps.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/invariant-guard",
+      "content": "\n# invariant-guard — Correctness-First Coding\n\nThe model knows what a loop invariant is. It knows recursion needs a base case. It knows about empty lists, integer overflow, and the difference between `<` and `≤`. It just does not write these down before producing code, so it ships subtle correctness bugs that tests do not catch.\n\ninvariant-guard fixes the behavior. State the invariants. State the base case. State the termination argument. State the edge cases. Then write the code — and verify that the code maintains what you stated.\n\n**Violating the letter of these rules is violating the spirit of the skill.** \"I know this algorithm\" is the exact rationalization that ships off-by-one and missing-postcondition bugs.\n\n## When to Use This Skill\n\nUse **invariant-guard** when writing or reviewing algorithms where the obvious implementation is subtly wrong:\n\n- Postcondition stronger than the loop's natural invariant: Boyer–Moore majority, Floyd's cycle detection, leftmost vs any binary search, QuickSelect partition.\n- In-place mutation with read+write pointers: dedup-in-place, partition, rotate.\n- Recursion with multiple parameters or accumulator state.\n- Off-by-one suspects with duplicates, empty inputs, boundary values.\n- Iterative refinements that must terminate: fixed-point, Newton, EM.\n- Any function where you catch yourself thinking \"I know this algorithm\" — the trap is usually in the contract, not the loop body.\n\nPairs with `lemmaly` (picks the algorithm) and `mathguard` (picks the math). Load `invariant-guard` *after* the algorithm has been chosen and *before* the loop body is written.\n\n## The Iron Law\n\n```text\nNO LOOP OR RECURSION WITHOUT A WRITTEN INVARIANT AND TERMINATION ARGUMENT\n```\n\nIf you cannot write the invariant in one sentence, you have not designed the loop. Write code anyway and you are coding by guess — and the bug will be in the case you did not enumerate.\n\n## Non-negotiable rules\n\n1. **Every loop gets a one-line invariant.** Before writing any loop, state in one sentence what is true at the top of every iteration. Examples:\n   - \"At loop top: `result` contains the sum of `a[0..i)`.\"\n   - \"At loop top: `lo ≤ target_position ≤ hi`.\"\n   - \"At loop top: `seen` contains every element processed so far; `dups` contains every element that appeared at least twice.\"\n\n   If you cannot write the invariant in one sentence, you have not designed the loop yet.\n\n2. **Every loop gets a one-line termination argument.** Name the quantity that strictly decreases (or strictly increases toward a bound) on every iteration. Examples:\n   - \"`hi − lo` strictly decreases each iteration.\"\n   - \"`i` increases by 1 and is bounded above by `n`.\"\n   - \"`stack.length` strictly decreases each pop; nothing pushes inside this branch.\"\n\n   No termination argument, no loop.\n\n3. **Every recursion gets an explicit base case and a measure.** Before writing a recursive function, state:\n   - The base case(s) — the smallest inputs that return without recursing.\n   - The measure — a non-negative integer that strictly decreases on every recursive call (e.g. `len(xs)`, `hi − lo`, `depth`, `n`).\n   - The combination — how the recursive results combine into the answer.\n\n   No base case + measure, no recursion. (Mutual recursion: state the measure across the cycle.)\n\n4. **List edge cases before writing, not after.** For every function operating on a collection or number, list which of these apply and how they behave:\n   - Empty input (`[]`, `\"\"`, `null`, `undefined`, `None`).\n   - Singleton (`[x]`).\n   - All-equal elements.\n   - Already-sorted / reverse-sorted input.\n   - Duplicates (when uniqueness is assumed).\n   - Negative numbers, zero, exactly the boundary value.\n   - Integer overflow / underflow at the type max/min.\n   - NaN, ±Infinity, `-0`, denormals (for floats).\n   - Off-by-one boundaries: index 0, index n−1, index n, length 0, length 1.\n   - Concurrent modification while iterating.\n\n   The cases that apply must each have a one-phrase expected behavior written down.\n\n5. **Make illegal states unreachable, not just unhandled.** Prefer encoding constraints in types and structure so the wrong state cannot be constructed:\n   - Sum type over boolean flag soup (`Loading | Loaded(data) | Error(msg)` not `{loading, data, error}`).\n   - Newtype for IDs that must not be swapped (`UserId` vs `OrderId`).\n   - Non-empty list type when the function requires at least one element.\n   - Parsed value at the boundary, not validated repeatedly downstream (parse-don't-validate).\n\n   If the language cannot encode it, write the invariant as a comment and assert it at the boundary.\n\n## The pre-write protocol\n\nBefore producing non-trivial code that has loops, recursion, or non-trivial state, your message must contain — in this order:\n\n1. **Function contract** — preconditions, postconditions, and what the function returns. One line each.\n2. **Loop invariants** — one per loop. (Rule 1.)\n3. **Termination arguments** — one per loop or recursion. (Rules 2, 3.",
+      "tags": [
+        "typescript",
+        "node",
+        "claude",
+        "ai",
+        "template",
+        "design",
+        "document",
+        "cro"
+      ],
+      "useCases": [
+        "Postcondition stronger than the loop's natural invariant: Boyer–Moore majority, Floyd's cycle detection, leftmost vs any binary search, QuickSelect partition.",
+        "In-place mutation with read+write pointers: dedup-in-place, partition, rotate.",
+        "Recursion with multiple parameters or accumulator state.",
+        "Off-by-one suspects with duplicates, empty inputs, boundary values.",
+        "Iterative refinements that must terminate: fixed-point, Newton, EM."
+      ],
+      "scrapedAt": "2026-05-28T10:18:20.695Z"
+    },
+    {
       "id": "antigravity-inventory-demand-planning",
       "name": "inventory-demand-planning",
       "slug": "inventory-demand-planning",
@@ -20285,6 +20384,35 @@
       "scrapedAt": "2026-03-08T06:56:58.597Z"
     },
     {
+      "id": "antigravity-lemmaly",
+      "name": "lemmaly",
+      "slug": "lemmaly",
+      "description": "Algorithm-first discipline: state Big-O, data structure, and algorithm family BEFORE writing loops, queries, or recursion. Catches O(n^2), N+1, and brute-force defaults.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/lemmaly",
+      "content": "\n# lemmaly — Algorithm-First Proof\n\nThe model already knows Big-O, hash tables, divide-and-conquer, dynamic programming, sorting, graph algorithms, and amortized analysis. It just does not apply them spontaneously. lemmaly fixes the behavior, not the knowledge.\n\nThis skill is the gateway for an algorithm-discipline suite of four skills (`lemmaly`, `mathguard`, `invariant-guard`, `complexity-cuts`). It enforces the hard rules that every other guard in the suite assumes.\n\n**Violating the letter of these rules is violating the spirit of the skill.** \"Just this once\" is how O(n²) ships to production.\n\n## When to Use This Skill\n\nUse **lemmaly** when:\n\n- Writing, editing, or reviewing code that involves loops, collections, lookups, searches, joins, recursion, graphs, queries, or any computation over more than a handful of items.\n- About to write a `for` inside a `for`, `.find` / `.includes` / `.indexOf` inside a loop, `await` inside `for` / `map` / `forEach` over independent items, or one query per item in a collection.\n- Auditing a codebase / PR for known anti-patterns (await-in-loop, `.includes` inside `.filter`, string-concat in loop, `SELECT *`, N+1, etc.).\n- Reviewing AI-generated code that \"looks idiomatic\" but might hide O(n²) or N+1.\n\nWhen in doubt, **start at lemmaly** — it is the gateway and will tell you when to escalate to its three sibling skills.\n\n| If you are about to… | Use | Why |\n| --- | --- | --- |\n| Write *new* code that loops, queries, joins, recurses, or processes a collection | **lemmaly** | Forces complexity + data structure + algorithm family **before** code is written. |\n| Refactor *existing* code that is already slow, OOMs, times out, or has nested loops / N+1 / repeated work | **complexity-cuts** | Corrective playbook for code that already shipped with bad Big-O. |\n| Implement an algorithm where the obvious version is subtly wrong (binary search variants, in-place dedup, Boyer–Moore, QuickSelect partition, recursion with accumulators, fixed-point / termination concerns) | **invariant-guard** | Forces writing the function contract + loop invariant before code. The trap is in the contract, not the loop body. |\n| Work with n ≥ 10⁶, similarity search, dedup at scale, top-K, streaming analytics, cardinality estimation, embeddings, FFT/NTT, dimensionality reduction, computational geometry, randomized algorithms | **mathguard** | Classical algorithms have hit their lower bound; an approximate or math-heavy technique (Bloom, HLL, Count-Min, MinHash/LSH, FFT, JL projection, sweep line, kd-tree) gives the asymptotic win. |\n\n### Routing flow\n\n```text\nAre you writing new code?\n├── yes → lemmaly (state complexity, structure, family BEFORE coding)\n│         ├── classical algorithm at its lower bound AND n is large? → mathguard\n│         └── subtle correctness trap (invariant, base case, off-by-one)? → invariant-guard\n└── no, refactoring existing slow / OOM / timed-out code → complexity-cuts\n          └── still slow after classical fixes? → mathguard\n```\n\n### One-line mental model\n\n- **lemmaly** = think first (prevention).\n- **complexity-cuts** = clean up bad Big-O (correction).\n- **invariant-guard** = prove it's correct (verification).\n- **mathguard** = beat the classical floor (acceleration).\n\n## The Iron Law\n\n```text\nNO NON-TRIVIAL CODE WITHOUT STATED COMPLEXITY, DATA STRUCTURE, AND ALGORITHM FAMILY\n```\n\nBefore you write a loop, a recursion, a query, or any computation over more than a handful of items, three things must appear in your message — in this order:\n\n1. `time = O(?)`, `space = O(?)`, with the dominant input dimension named.\n2. The data structure you will use, with a one-phrase reason.\n3. The algorithm family (one of: linear scan, two-pointer, sliding window, binary search, sort+sweep, hash join, BFS/DFS, topo sort, Dijkstra/A*, union-find, DP, greedy, recursion+memo, prefix sum, segment tree, monoid reduction).\n\nIf you cannot state all three, you do not understand the problem yet. Ask, or read more code. Do not write code.\n\n## Non-negotiable rules\n\n1. **State complexity before writing any non-trivial code.** In one line:\n   - `time = O(?)`, `space = O(?)`\n   - Dominant input dimension: `n = what`, with realistic magnitude (e.g. `n ~ 10^6 rows`)\n   - If you cannot state these, you do not yet understand the problem. Ask, or read more code.\n\n2. **Name the data structure with a one-phrase reason.** Every collection-shaped value gets a deliberate choice from `Array / List / Set / HashMap / TreeMap / Heap / Deque / Trie / Graph / BitSet / Counter / LinkedList` — with the reason: \"Set for O(1) membership inside the loop\", \"Heap for top-K in O(n log k)\", \"Counter to fold the nested loop into a single pass\". Default to hashed structures (`Set`, `Map`) for lookup inside loops. Default to streaming/iterator over materialized list when n is large.\n\n3. **Identify the algorithm family before writing.** Name one of: `linear scan`, `divide and conquer`, `two-pointer`, `sliding window`, `binary search`,",
+      "tags": [
+        "python",
+        "javascript",
+        "typescript",
+        "node",
+        "claude",
+        "ai",
+        "document",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Writing, editing, or reviewing code that involves loops, collections, lookups, searches, joins, recursion, graphs, queries, or any computation over more than a handful of items.",
+        "About to write a `for` inside a `for`, `.find` / `.includes` / `.indexOf` inside a loop, `await` inside `for` / `map` / `forEach` over independent items, or one query per item in a collection.",
+        "Auditing a codebase / PR for known anti-patterns (await-in-loop, `.includes` inside `.filter`, string-concat in loop, `SELECT *`, N+1, etc.).",
+        "Reviewing AI-generated code that \"looks idiomatic\" but might hide O(n²) or N+1."
+      ],
+      "scrapedAt": "2026-05-28T10:18:43.304Z"
+    },
+    {
       "id": "antigravity-lex",
       "name": "lex",
       "slug": "lex",
@@ -21667,6 +21795,34 @@
         "When the user mentions \"complexidade ciclomatica\" or related topics"
       ],
       "scrapedAt": "2026-03-08T06:57:17.599Z"
+    },
+    {
+      "id": "antigravity-mathguard",
+      "name": "mathguard",
+      "slug": "mathguard",
+      "description": "Math-heavy escalation for n >= 10^6 — Bloom, HyperLogLog, Count-Min, MinHash/LSH, FFT, JL projection, sweep line. Use when classical O(n log n) is the floor and approximate or math wins.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/mathguard",
+      "content": "\n# mathguard — Math-Heavy Optimization for AI Code\n\n`lemmaly` makes you pick the right classical algorithm. `mathguard` kicks in when the classical algorithm is already optimal but **mathematics gives a better bound** — usually by accepting bounded approximation, exploiting structure, or moving to a smarter algebraic space.\n\nThe model knows these techniques. It almost never proposes them spontaneously. mathguard fixes that.\n\n**Violating the letter of these rules is violating the spirit of the skill.** A Bloom filter where the caller assumed exact answers is a production incident, not an optimization.\n\n## When to Use This Skill\n\nUse **mathguard** when:\n\n- Working with large-scale data (`n ≥ 10⁶`): similarity search, deduplication, top-K / heavy-hitters, streaming analytics, cardinality estimation, embeddings, recommender systems.\n- Doing signal/image processing, polynomial or big-integer arithmetic, convolution, graph distance, computational geometry, randomized algorithms.\n- The classical O(n log n) is already the floor and you need an asymptotic win (Bloom filter, HyperLogLog, Count-Min Sketch, MinHash/LSH, FFT/NTT, Johnson-Lindenstrauss projection, sweep line, kd-tree/BVH, fast exponentiation, monoid parallel reduction, amortized potential method).\n- Loaded *after* `lemmaly` has confirmed the classical answer is not enough.\n\nDo **not** use mathguard when:\n- The caller needs exact answers (auth, billing, dedup-for-correctness, primary keys).\n- `n` is small (n < 10⁴) and the path is not hot.\n- The bottleneck is I/O, not CPU/memory.\n\n## The Iron Law\n\n```text\nNO APPROXIMATE STRUCTURE WITHOUT WRITTEN ε/δ AND EXPLICIT CALLER ACCEPTANCE\n```\n\nProbabilistic data structures (Bloom, HyperLogLog, Count-Min, MinHash/LSH, t-digest), randomized projections (JL), and lossy transforms (floating FFT) all change the answer's meaning. Before proposing one:\n\n1. Write the error parameter the caller will see (false-positive rate, relative error, distortion bound).\n2. Identify the caller and state, in one sentence, that they tolerate this kind of wrong answer.\n3. If you cannot identify the caller, or they need exact (auth checks, billing, dedup keys, deduplication for correctness, anything that flows into a primary key), DO NOT propose the approximate structure. Keep classical, or escalate to a sharded/streaming exact design.\n\nThis rule has saved more incidents than any other in this skill. Do not soften it.\n\n## Non-negotiable rules\n\n1. **Declare exact vs approximate up front.** Before suggesting a math-level technique, state:\n   - `mode: exact` or `mode: approximate`\n   - If approximate: the error parameter (ε, δ, false-positive rate) and a sentence on whether the caller can tolerate it.\n   - If the caller needs exact and there is no exact win, say so and stop — do not silently degrade to approximate.\n\n2. **Cite the technique by name.** Never describe a probabilistic or numerical trick in vague terms. Name it: `Bloom filter`, `HyperLogLog`, `Count-Min Sketch`, `MinHash + LSH`, `Johnson–Lindenstrauss projection`, `FFT`, `NTT`, `fast exponentiation`, `Karatsuba`, `Strassen`, `sweep line`, `kd-tree`, `BVH`, `union-find with path compression`, `Floyd's cycle detection`, `Boyer-Moore majority`, `reservoir sampling`, `Knuth shuffle`, `Aho-Corasick`, `suffix automaton`, `segment tree with lazy propagation`, `Fenwick tree`, `monoid scan / parallel prefix`. A named technique is auditable; \"a smart approximation\" is not.\n\n3. **State the trade you are making.** Every math-level optimization buys something at a cost. In one line:\n   - Buys: `space`, `time`, `wall-clock`, `parallelism`.\n   - Costs: `accuracy ε=?`, `code complexity`, `dependency`, `non-determinism`, `numerical stability`.\n   - If the cost is invisible to the caller, write \"callers see no change\".\n\n4. **Justify the asymptotic win.** Do not propose a math technique without a one-line bound argument:\n   - \"HyperLogLog: count uniques in O(log log n) bits at standard error 1.04/√m.\"\n   - \"FFT: polynomial multiplication O(n log n) vs schoolbook O(n²).\"\n   - \"JL projection: preserves pairwise distances within (1±ε) using O(log n / ε²) dimensions.\"\n   - \"Sweep line: rectangle overlap from O(n²) pair checks to O(n log n) events.\"\n   No bound, no proposal.\n\n5. **Forbid math cargo-culting.** Do not introduce these techniques when:\n   - n is small enough that a linear scan finishes in microseconds (n < ~10⁴ unless it is a hot path).\n   - The problem is I/O-bound — the math win disappears behind network/disk.\n   - Exact answers are required and no exact technique exists.\n   - The team will not maintain it (write that down: \"team familiarity: ?\").\n\n## The pre-proposal protocol\n\nBefore suggesting a math-level technique, your message must contain — in this order:\n\n1. **The classical floor** — what is the best non-mathy algorithm and its Big-O? (\"Hash join is O(n+m); we're already there.\")\n2. **Why classical is not enough** — n too large, space blows up, real-time deadline, etc.\n3. **The mat",
+      "tags": [
+        "claude",
+        "ai",
+        "design",
+        "document",
+        "image",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Working with large-scale data (`n ≥ 10⁶`): similarity search, deduplication, top-K / heavy-hitters, streaming analytics, cardinality estimation, embeddings, recommender systems.",
+        "Doing signal/image processing, polynomial or big-integer arithmetic, convolution, graph distance, computational geometry, randomized algorithms.",
+        "Loaded *after* `lemmaly` has confirmed the classical answer is not enough.",
+        "The caller needs exact answers (auth, billing, dedup-for-correctness, primary keys).",
+        "`n` is small (n < 10⁴) and the path is not hot."
+      ],
+      "scrapedAt": "2026-05-28T10:19:06.929Z"
     },
     {
       "id": "antigravity-matplotlib",
@@ -25764,157 +25920,6 @@
       "scrapedAt": "2026-02-26T07:13:02.744Z"
     },
     {
-      "id": "antigravity-pipecat-friday-agent",
-      "name": "pipecat-friday-agent",
-      "slug": "pipecat-friday-agent",
-      "description": "Build a low-latency, Iron Man-inspired tactical voice assistant (F.R.I.D.A.Y.) using Pipecat, Gemini, and OpenAI.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pipecat-friday-agent",
-      "content": "\n# Pipecat Friday Agent\n\n## Overview\n\nThis skill provides a blueprint for building **F.R.I.D.A.Y.** (Replacement Integrated Digital Assistant Youth), a local voice assistant inspired by the tactical AI from the Iron Man films. It uses the **Pipecat** framework to orchestrate a low-latency pipeline:\n- **STT**: OpenAI Whisper (`whisper-1`) or `gpt-4o-transcribe`\n- **LLM**: Google Gemini 2.5 Flash (via a compatibility shim)\n- **TTS**: OpenAI TTS (`nova` voice)\n- **Transport**: Local Audio (Hardware Mic/Speakers)\n\n## When to Use This Skill\n\n- Use when you want to build a real-time, conversational voice agent.\n- Use when working with the Pipecat framework for pipeline-based AI.\n- Use when you need to integrate multiple providers (Google and OpenAI) into a single voice loop.\n- Use when building Iron Man-themed or tactical-themed voice applications.\n\n## How It Works\n\n### Step 1: Install Dependencies\n\nYou will need the Pipecat framework and its service providers installed:\n```bash\npip install pipecat-ai[openai,google,silero] python-dotenv\n```\n\n### Step 2: Configure Environment\n\nCreate a `.env` file with your API keys:\n```env\nOPENAI_API_KEY=your_openai_key\nGOOGLE_API_KEY=your_google_key\n```\n\n### Step 3: Run the Agent\n\nExecute the provided Python script to start the interface:\n```bash\npython scripts/friday_agent.py\n```\n\n## Core Concepts\n\n### Pipeline Architecture\nThe agent follows a linear pipeline: `Mic -> VAD -> STT -> LLM -> TTS -> Speaker`. This allows for granular control over each stage, unlike end-to-end speech-to-speech models.\n\n### Google Compatibility Shim\nSince Google's Gemini API has a different message format than OpenAI's standard (which Pipecat aggregators expect), the script includes a `GoogleSafeContext` and `GoogleSafeMessage` class to bridge the gap.\n\n## Best Practices\n\n- ✅ **Use Silero VAD**: It is robust for local hardware and prevents background noise from triggering the LLM.\n- ✅ **Concise Prompts**: Tactical agents should give short, data-dense responses to minimize latency.\n- ✅ **Sample Rate Match**: OpenAI TTS outputs at 24kHz; ensure your `audio_out_sample_rate` matches to avoid high-pitched or slowed audio.\n- ❌ **No Polite Fillers**: Avoid \"Hello, how can I help you today?\" Instead, use \"Systems nominal. Ready for commands.\"\n\n## Troubleshooting\n\n- **Problem:** Audio is choppy or delayed.\n  - **Solution:** Check your `OUTPUT_DEVICE` index. Run a script like `test_audio_output.py` to find the correct hardware index for your OS.\n- **Problem:** \"Validation error\" for message format.\n  - **Solution:** Ensure the `GoogleSafeContext` shim is correctly translating OpenAI-style dicts to Gemini-style schema.\n\n## Related Skills\n\n- `@voice-agents` - General principles of voice AI.\n- `@agent-tool-builder` - Add tools (Search, Lights, etc.) to your Friday agent.\n- `@llm-architect` - Optimizing the LLM layer.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "python",
-        "api",
-        "ai",
-        "agent",
-        "llm",
-        "gpt"
-      ],
-      "useCases": [
-        "Use when you want to build a real-time, conversational voice agent.",
-        "Use when working with the Pipecat framework for pipeline-based AI.",
-        "Use when you need to integrate multiple providers (Google and OpenAI) into a single voice loop.",
-        "Use when building Iron Man-themed or tactical-themed voice applications."
-      ],
-      "scrapedAt": "2026-03-11T07:08:00.455Z"
-    },
-    {
-      "id": "antigravity-pipedrive-automation",
-      "name": "pipedrive-automation",
-      "slug": "pipedrive-automation",
-      "description": "Automate Pipedrive CRM operations including deals, contacts, organizations, activities, notes, and pipeline management via Rube MCP (Composio). Always search tools first for current schemas.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pipedrive-automation",
-      "content": "\n# Pipedrive Automation via Rube MCP\n\nAutomate Pipedrive CRM workflows including deal management, contact and organization operations, activity scheduling, notes, and pipeline/stage queries through Composio's Pipedrive toolkit.\n\n## Prerequisites\n\n- Rube MCP must be connected (RUBE_SEARCH_TOOLS available)\n- Active Pipedrive connection via `RUBE_MANAGE_CONNECTIONS` with toolkit `pipedrive`\n- Always call `RUBE_SEARCH_TOOLS` first to get current tool schemas\n\n## Setup\n\n**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.\n\n1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds\n2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `pipedrive`\n3. If connection is not ACTIVE, follow the returned auth link to complete Pipedrive OAuth\n4. Confirm connection status shows ACTIVE before running any workflows\n\n## Core Workflows\n\n### 1. Create and Manage Deals\n\n**When to use**: User wants to create a new deal, update an existing deal, or review deal details in the sales pipeline.\n\n**Tool sequence**:\n1. `PIPEDRIVE_SEARCH_ORGANIZATIONS` - Find existing org to link to the deal [Optional]\n2. `PIPEDRIVE_ADD_AN_ORGANIZATION` - Create organization if none found [Optional]\n3. `PIPEDRIVE_SEARCH_PERSONS` - Find existing contact to link [Optional]\n4. `PIPEDRIVE_ADD_A_PERSON` - Create contact if none found [Optional]\n5. `PIPEDRIVE_GET_ALL_PIPELINES` - Resolve pipeline ID [Prerequisite]\n6. `PIPEDRIVE_GET_ALL_STAGES` - Resolve stage ID within the pipeline [Prerequisite]\n7. `PIPEDRIVE_ADD_A_DEAL` - Create the deal with title, value, org_id, person_id, stage_id [Required]\n8. `PIPEDRIVE_UPDATE_A_DEAL` - Modify deal properties after creation [Optional]\n9. `PIPEDRIVE_ADD_A_PRODUCT_TO_A_DEAL` - Attach line items/products [Optional]\n\n**Key parameters**:\n- `title`: Deal title (required for creation)\n- `value`: Monetary value of the deal\n- `currency`: 3-letter ISO currency code (e.g., \"USD\")\n- `pipeline_id` / `stage_id`: Numeric IDs for pipeline placement\n- `org_id` / `person_id`: Link to organization and contact\n- `status`: \"open\", \"won\", or \"lost\"\n- `expected_close_date`: Format YYYY-MM-DD\n\n**Pitfalls**:\n- `title` is the only required field for `PIPEDRIVE_ADD_A_DEAL`; all others are optional\n- Custom fields appear as long hash keys in responses; use dealFields endpoint to map them\n- `PIPEDRIVE_UPDATE_A_DEAL` requires the numeric `id` of the deal\n- Setting `status` to \"lost\" requires also providing `lost_reason`\n\n### 2. Manage Contacts (Persons and Organizations)\n\n**When to use**: User wants to create, update, search, or list contacts and companies in Pipedrive.\n\n**Tool sequence**:\n1. `PIPEDRIVE_SEARCH_PERSONS` - Search for existing person by name, email, or phone [Prerequisite]\n2. `PIPEDRIVE_ADD_A_PERSON` - Create new contact if not found [Required]\n3. `PIPEDRIVE_UPDATE_A_PERSON` - Modify existing contact details [Optional]\n4. `PIPEDRIVE_GET_DETAILS_OF_A_PERSON` - Retrieve full contact record [Optional]\n5. `PIPEDRIVE_SEARCH_ORGANIZATIONS` - Search for existing organization [Prerequisite]\n6. `PIPEDRIVE_ADD_AN_ORGANIZATION` - Create new organization if not found [Required]\n7. `PIPEDRIVE_UPDATE_AN_ORGANIZATION` - Modify organization properties [Optional]\n8. `PIPEDRIVE_GET_DETAILS_OF_AN_ORGANIZATION` - Retrieve full org record [Optional]\n\n**Key parameters**:\n- `name`: Required for both person and organization creation\n- `email`: Array of objects with `value`, `label`, `primary` fields for persons\n- `phone`: Array of objects with `value`, `label`, `primary` fields for persons\n- `org_id`: Link a person to an organization\n- `visible_to`: 1 = owner only, 3 = entire company\n- `term`: Search term for SEARCH_PERSONS / SEARCH_ORGANIZATIONS (minimum 2 characters)\n\n**Pitfalls**:\n- `PIPEDRIVE_ADD_AN_ORGANIZATION` may auto-merge with an existing org; check `response.additional_data.didMerge`\n- Email and phone fields are arrays of objects, not plain strings: `[{\"value\": \"test@example.com\", \"label\": \"work\", \"primary\": true}]`\n- `PIPEDRIVE_SEARCH_PERSONS` wildcards like `*` or `@` are NOT supported; use `PIPEDRIVE_GET_ALL_PERSONS` to list all\n- Deletion via `PIPEDRIVE_DELETE_A_PERSON` or `PIPEDRIVE_DELETE_AN_ORGANIZATION` is soft-delete with 30-day retention, then permanent\n\n### 3. Schedule and Track Activities\n\n**When to use**: User wants to create calls, meetings, tasks, or other activities linked to deals, contacts, or organizations.\n\n**Tool sequence**:\n1. `PIPEDRIVE_SEARCH_PERSONS` or `PIPEDRIVE_GET_DETAILS_OF_A_DEAL` - Resolve linked entity IDs [Prerequisite]\n2. `PIPEDRIVE_ADD_AN_ACTIVITY` - Create the activity with subject, type, due date [Required]\n3. `PIPEDRIVE_UPDATE_AN_ACTIVITY` - Modify activity details or mark as done [Optional]\n4. `PIPEDRIVE_GET_DETAILS_OF_AN_ACTIVITY` - Retrieve activity record [Optional]\n5. `PIPEDRIVE_GET_ALL_ACTIVITIES_ASSIGNED_TO_A_PARTICULAR_USER` - List user's activities [Optional]\n\n**Key parameters**:\n- `subject`: Acti",
-      "tags": [
-        "api",
-        "mcp",
-        "ai",
-        "automation",
-        "workflow",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-19T07:12:49.446Z"
-    },
-    {
-      "id": "antigravity-pitch-psychologist",
-      "name": "pitch-psychologist",
-      "slug": "pitch-psychologist",
-      "description": "One sentence - what this skill does and when to invoke it",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pitch-psychologist",
-      "content": "You are a **Persuasion Scientist and Narrative Psychologist**. Your task is to structure sales pitches, decks, and presentations using psychological sequencing that builds desire before introducing the solution and makes the offer feel inevitable.\n\n## When to Use\n- Use when a sales, investor, or product pitch needs stronger belief progression and audience alignment.\n- Use when the pitch must move from attention to trust to commitment with less resistance.\n\n## CONTEXT GATHERING\n\nBefore building a pitch, establish:\n\n1. **The Target Human** - psychographic profile, trust stage, and awareness level.\n2. **The Objective** - the decision or commitment the pitch must produce.\n3. **The Output** - deck, talk track, one-pager, or demo script.\n4. **Constraints** - audience type, time limit, and ethical boundaries.\n\nIf the decision context is unclear, ask before proceeding.\n\n## PSYCHOLOGICAL FRAMEWORK: DESIRE-THEN-SOLUTION ARC\n\n### Mechanism\nPeople are more persuadable when they first feel the problem, the aspiration, and the cost of staying put, then receive the solution as the natural resolution. Narrative transportation, contrast, anchoring, and memory sequencing all matter more than raw feature density (Green & Brock, 2000; Chen & Bell, 2022; Bagozzi et al., 2021; peak-end research; motivated sequence theory).\n\n### Execution Steps\n\n**Step 1 - Open with the audience's world**\nStart from the customer's current reality and stakes.\n*Research basis: self-relevance and narrative transportation increase receptivity (Green & Brock, 2000; Dragojevic et al., 2024).*\n\n**Step 2 - Build desire before solution**\nShow the better future and the cost of not getting there.\n*Research basis: desire-first sequencing reduces defensive processing and improves belief change (Monroe's motivated sequence; narrative persuasion studies).*\n\n**Step 3 - Frame the contrast**\nMake the current state and proposed state visibly different.\n*Research basis: contrast and anchoring shape evaluation by shifting the reference point (Ariely et al., 2003; Houdek, 2016).*\n\n**Step 4 - Introduce the solution as the bridge**\nPosition the offer as the path through the tension you already established.\n*Research basis: people accept solutions more readily when the problem has been emotionally and cognitively prepared (Bagozzi et al., 2021).*\n\n**Step 5 - End with remembered clarity**\nClose on the key idea, proof, and next step.\n*Research basis: the peak-end rule shapes what audiences recall after the pitch (memory and decision research; Chen & Bell, 2022).*\n\n## DECISION MATRIX\n\n### Variable: audience type\n- If technical -> lead with evidence, then implications, then demo.\n- If executive -> lead with risk, opportunity, then business outcome.\n- If consumer -> lead with desire, identity, then ease of action.\n- If skeptical -> lead with proof, then only enough story to connect it.\n\n### Variable: awareness stage\n- If unaware -> start with the problem and the cost of delay.\n- If problem aware -> sharpen the problem and show a believable alternative.\n- If solution aware -> show why your approach fits best.\n- If product aware -> reduce hesitation with proof and clarity.\n\n### Variable: pitch length\n- If short -> compress into problem, tension, bridge, ask.\n- If medium -> add proof and comparison.\n- If long -> add case logic, objections, and decision support.\n\n## FAILURE MODES - DO NOT DO THESE\n\n**Failure Mode 1**\n- Agents typically: open with features.\n- Why it fails psychologically: the audience has no emotional reason to care yet.\n- Instead: open with the world and tension.\n\n**Failure Mode 2**\n- Agents typically: pack the pitch with details before desire is built.\n- Why it fails psychologically: cognitive load increases and persuasion drops.\n- Instead: sequence desire before explanation.\n\n**Failure Mode 3**\n- Agents typically: end weakly.\n- Why it fails psychologically: people remember the ending and the peak more than the middle.\n- Instead: end on the key idea and next step.\n\n## ETHICAL GUARDRAILS\n\nThis skill must:\n- Be truthful about capabilities and tradeoffs.\n- Avoid theatrical pressure or fake inevitability.\n- Respect the audience's right to decline.\n\nThe line between persuasion and manipulation is sequencing ideas to help a person evaluate a real offer versus engineering a narrative that hides material facts. Never cross it.\n\n## SKILL CHAINING\n\nBefore invoking this skill, the agent should have completed:\n- [ ] `@customer-psychographic-profiler`\n- [ ] `@jobs-to-be-done-analyst`\n- [ ] `@awareness-stage-mapper`\n- [ ] `@trust-calibrator`\n\nThis skill's output feeds into:\n- [ ] `@deck-writing`\n- [ ] `@sales-page`\n- [ ] `@presentation-script`\n\n## OUTPUT QUALITY CHECK\n\nBefore finalizing output, the agent asks:\n- [ ] Did I build desire before explaining the solution?\n- [ ] Did I use contrast effectively?\n- [ ] Did I choose the right pitch sequence for the audience?\n- [ ] Did I end with remembered clarity?\n- [ ] Would the pitch still feel honest if challenged?\n\n## Limitations\n-",
-      "tags": [
-        "ai",
-        "agent",
-        "presentation",
-        "rag",
-        "cro"
-      ],
-      "useCases": [
-        "Use when a sales, investor, or product pitch needs stronger belief progression and audience alignment.",
-        "Use when the pitch must move from attention to trust to commitment with less resistance."
-      ],
-      "scrapedAt": "2026-04-05T07:21:15.605Z"
-    },
-    {
-      "id": "antigravity-plaid-fintech",
-      "name": "plaid-fintech",
-      "slug": "plaid-fintech",
-      "description": "Expert patterns for Plaid API integration including Link token flows, transactions sync, identity verification, Auth for ACH, balance checks, webhook handling, and fintech compliance best practices.",
-      "category": "Development & Code Tools",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/plaid-fintech",
-      "content": "\n# Plaid Fintech\n\nExpert patterns for Plaid API integration including Link token flows,\ntransactions sync, identity verification, Auth for ACH, balance checks,\nwebhook handling, and fintech compliance best practices.\n\n## Patterns\n\n### Link Token Creation and Exchange\n\nCreate a link_token for Plaid Link, exchange public_token for access_token.\nLink tokens are short-lived, one-time use. Access tokens don't expire but\nmay need updating when users change passwords.\n\n// server.ts - Link token creation endpoint\nimport { Configuration, PlaidApi, PlaidEnvironments, Products, CountryCode } from 'plaid';\n\nconst configuration = new Configuration({\n  basePath: PlaidEnvironments[process.env.PLAID_ENV || 'sandbox'],\n  baseOptions: {\n    headers: {\n      'PLAID-CLIENT-ID': process.env.PLAID_CLIENT_ID,\n      'PLAID-SECRET': process.env.PLAID_SECRET,\n    },\n  },\n});\n\nconst plaidClient = new PlaidApi(configuration);\n\n// Create link token for new user\napp.post('/api/plaid/create-link-token', async (req, res) => {\n  const { userId } = req.body;\n\n  try {\n    const response = await plaidClient.linkTokenCreate({\n      user: {\n        client_user_id: userId,  // Your internal user ID\n      },\n      client_name: 'My Finance App',\n      products: [Products.Transactions],\n      country_codes: [CountryCode.Us],\n      language: 'en',\n      webhook: 'https://yourapp.com/api/plaid/webhooks',\n      // Request 180 days for recurring transactions\n      transactions: {\n        days_requested: 180,\n      },\n    });\n\n    res.json({ link_token: response.data.link_token });\n  } catch (error) {\n    console.error('Link token creation failed:', error);\n    res.status(500).json({ error: 'Failed to create link token' });\n  }\n});\n\n// Exchange public token for access token\napp.post('/api/plaid/exchange-token', async (req, res) => {\n  const { publicToken, userId } = req.body;\n\n  try {\n    // Exchange for permanent access token\n    const exchangeResponse = await plaidClient.itemPublicTokenExchange({\n      public_token: publicToken,\n    });\n\n    const { access_token, item_id } = exchangeResponse.data;\n\n    // Store securely - access_token doesn't expire!\n    await db.plaidItem.create({\n      data: {\n        userId,\n        itemId: item_id,\n        accessToken: await encrypt(access_token),  // Encrypt at rest\n        status: 'ACTIVE',\n        products: ['transactions'],\n      },\n    });\n\n    // Trigger initial transaction sync\n    await initiateTransactionSync(item_id, access_token);\n\n    res.json({ success: true, itemId: item_id });\n  } catch (error) {\n    console.error('Token exchange failed:', error);\n    res.status(500).json({ error: 'Failed to exchange token' });\n  }\n});\n\n// Frontend - React component\nimport { usePlaidLink } from 'react-plaid-link';\n\nfunction BankLinkButton({ userId }: { userId: string }) {\n  const [linkToken, setLinkToken] = useState<string | null>(null);\n\n  useEffect(() => {\n    async function createLinkToken() {\n      const response = await fetch('/api/plaid/create-link-token', {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify({ userId }),\n      });\n      const { link_token } = await response.json();\n      setLinkToken(link_token);\n    }\n    createLinkToken();\n  }, [userId]);\n\n  const { open, ready } = usePlaidLink({\n    token: linkToken,\n    onSuccess: async (publicToken, metadata) => {\n      // Exchange public token for access token\n      await fetch('/api/plaid/exchange-token', {\n        method: 'POST',\n        headers: { 'Content-Type': 'application/json' },\n        body: JSON.stringify({ publicToken, userId }),\n      });\n    },\n    onExit: (error, metadata) => {\n      if (error) {\n        console.error('Link exit error:', error);\n      }\n    },\n  });\n\n  return (\n    <button onClick={() => open()} disabled={!ready}>\n      Connect Bank Account\n    </button>\n  );\n}\n\n### Context\n\n- initial bank linking\n- user onboarding\n- connecting accounts\n\n### Transactions Sync\n\nUse /transactions/sync for incremental transaction updates. More efficient\nthan /transactions/get. Handle webhooks for real-time updates instead of\npolling.\n\n// Transactions sync service\ninterface TransactionSyncState {\n  cursor: string | null;\n  hasMore: boolean;\n}\n\nasync function syncTransactions(\n  accessToken: string,\n  itemId: string\n): Promise<void> {\n  // Get last cursor from database\n  const item = await db.plaidItem.findUnique({\n    where: { itemId },\n  });\n\n  let cursor = item?.transactionsCursor || null;\n  let hasMore = true;\n  let addedCount = 0;\n  let modifiedCount = 0;\n  let removedCount = 0;\n\n  while (hasMore) {\n    try {\n      const response = await plaidClient.transactionsSync({\n        access_token: accessToken,\n        cursor: cursor || undefined,\n        count: 500,  // Max per request\n      });\n\n      const { added, modified, removed, next_cursor, has_more } = response.data;\n\n      // Process added transactions\n      if (added.length > 0) {\n        await db.transaction.createMany({\n      ",
-      "tags": [
-        "react",
-        "api",
-        "ai",
-        "design",
-        "security",
-        "stripe",
-        "rag",
-        "seo"
-      ],
-      "useCases": [
-        "User mentions or implies: plaid",
-        "User mentions or implies: bank account linking",
-        "User mentions or implies: bank connection",
-        "User mentions or implies: ach",
-        "User mentions or implies: account aggregation"
-      ],
-      "scrapedAt": "2026-01-26T13:20:16.733Z"
-    },
-    {
-      "id": "antigravity-plan-writing",
-      "name": "plan-writing",
-      "slug": "plan-writing",
-      "description": "Structured task planning with clear breakdowns, dependencies, and verification criteria. Use when implementing features, refactoring, or any multi-step work.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/plan-writing",
-      "content": "\n# Plan Writing\n\n> Source: obra/superpowers\n\n## Overview\nThis skill provides a framework for breaking down work into clear, actionable tasks with verification criteria.\n\n## Task Breakdown Principles\n\n### 1. Small, Focused Tasks\n- Each task should take 2-5 minutes\n- One clear outcome per task\n- Independently verifiable\n\n### 2. Clear Verification\n- How do you know it's done?\n- What can you check/test?\n- What's the expected output?\n\n### 3. Logical Ordering\n- Dependencies identified\n- Parallel work where possible\n- Critical path highlighted\n- **Phase X: Verification is always LAST**\n\n### 4. Dynamic Naming in Project Root\n- Plan files are saved as `{task-slug}.md` in the PROJECT ROOT\n- Name derived from task (e.g., \"add auth\" → `auth-feature.md`)\n- **NEVER** inside `.claude/`, `docs/`, or temp folders\n\n## Planning Principles (NOT Templates!)\n\n> 🔴 **NO fixed templates. Each plan is UNIQUE to the task.**\n\n### Principle 1: Keep It SHORT\n\n| ❌ Wrong | ✅ Right |\n|----------|----------|\n| 50 tasks with sub-sub-tasks | 5-10 clear tasks max |\n| Every micro-step listed | Only actionable items |\n| Verbose descriptions | One-line per task |\n\n> **Rule:** If plan is longer than 1 page, it's too long. Simplify.\n\n---\n\n### Principle 2: Be SPECIFIC, Not Generic\n\n| ❌ Wrong | ✅ Right |\n|----------|----------|\n| \"Set up project\" | \"Run `npx create-next-app`\" |\n| \"Add authentication\" | \"Install next-auth, create `/api/auth/[...nextauth].ts`\" |\n| \"Style the UI\" | \"Add Tailwind classes to `Header.tsx`\" |\n\n> **Rule:** Each task should have a clear, verifiable outcome.\n\n---\n\n### Principle 3: Dynamic Content Based on Project Type\n\n**For NEW PROJECT:**\n- What tech stack? (decide first)\n- What's the MVP? (minimal features)\n- What's the file structure?\n\n**For FEATURE ADDITION:**\n- Which files are affected?\n- What dependencies needed?\n- How to verify it works?\n\n**For BUG FIX:**\n- What's the root cause?\n- What file/line to change?\n- How to test the fix?\n\n---\n\n### Principle 4: Scripts Are Project-Specific\n\n> 🔴 **DO NOT copy-paste script commands. Choose based on project type.**\n\n| Project Type | Relevant Scripts |\n|--------------|------------------|\n| Frontend/React | `ux_audit.py`, `accessibility_checker.py` |\n| Backend/API | `api_validator.py`, `security_scan.py` |\n| Mobile | `mobile_audit.py` |\n| Database | `schema_validator.py` |\n| Full-stack | Mix of above based on what you touched |\n\n**Wrong:** Adding all scripts to every plan\n**Right:** Only scripts relevant to THIS task\n\n---\n\n### Principle 5: Verification is Simple\n\n| ❌ Wrong | ✅ Right |\n|----------|----------|\n| \"Verify the component works correctly\" | \"Run `npm run dev`, click button, see toast\" |\n| \"Test the API\" | \"curl localhost:3000/api/users returns 200\" |\n| \"Check styles\" | \"Open browser, verify dark mode toggle works\" |\n\n---\n\n## Plan Structure (Flexible, Not Fixed!)\n\n```\n# [Task Name]\n\n## Goal\nOne sentence: What are we building/fixing?\n\n## Tasks\n- [ ] Task 1: [Specific action] → Verify: [How to check]\n- [ ] Task 2: [Specific action] → Verify: [How to check]\n- [ ] Task 3: [Specific action] → Verify: [How to check]\n\n## Done When\n- [ ] [Main success criteria]\n```\n\n> **That's it.** No phases, no sub-sections unless truly needed.\n> Keep it minimal. Add complexity only when required.\n\n## Notes\n[Any important considerations]\n```\n\n---\n\n## Best Practices (Quick Reference)\n\n1. **Start with goal** - What are we building/fixing?\n2. **Max 10 tasks** - If more, break into multiple plans\n3. **Each task verifiable** - Clear \"done\" criteria\n4. **Project-specific** - No copy-paste templates\n5. **Update as you go** - Mark `[x]` when complete\n\n---\n\n## When to Use\n- New project from scratch\n- Adding a feature\n- Fixing a bug (if complex)\n- Refactoring multiple files\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "react",
-        "api",
-        "claude",
-        "ai",
-        "template",
-        "security",
-        "tailwind",
-        "cro"
-      ],
-      "useCases": [
-        "New project from scratch",
-        "Adding a feature",
-        "Fixing a bug (if complex)",
-        "Refactoring multiple files"
-      ],
-      "scrapedAt": "2026-01-26T13:20:18.112Z"
-    },
-    {
-      "id": "antigravity-planning-with-files",
-      "name": "planning-with-files",
-      "slug": "planning-with-files",
-      "description": "Work like Manus: Use persistent markdown files as your \"working memory on disk.\"",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/planning-with-files",
-      "content": "\n# Planning with Files\n\nWork like Manus: Use persistent markdown files as your \"working memory on disk.\"\n\n## Important: Where Files Go\n\nWhen using this skill:\n\n- **Templates** are stored in the skill directory at `${CLAUDE_PLUGIN_ROOT}/templates/`\n- **Your planning files** (`task_plan.md`, `findings.md`, `progress.md`) should be created in **your project directory** — the folder where you're working\n\n| Location | What Goes There |\n|----------|-----------------|\n| Skill directory (`${CLAUDE_PLUGIN_ROOT}/`) | Templates, scripts, reference docs |\n| Your project directory | `task_plan.md`, `findings.md`, `progress.md` |\n\nThis ensures your planning files live alongside your code, not buried in the skill installation folder.\n\n## Quick Start\n\nBefore ANY complex task:\n\n1. **Create `task_plan.md`** in your project — Use [templates/task_plan.md](templates/task_plan.md) as reference\n2. **Create `findings.md`** in your project — Use [templates/findings.md](templates/findings.md) as reference\n3. **Create `progress.md`** in your project — Use [templates/progress.md](templates/progress.md) as reference\n4. **Re-read plan before decisions** — Refreshes goals in attention window\n5. **Update after each phase** — Mark complete, log errors\n\n> **Note:** All three planning files should be created in your current working directory (your project root), not in the skill's installation folder.\n\n## The Core Pattern\n\n```\nContext Window = RAM (volatile, limited)\nFilesystem = Disk (persistent, unlimited)\n\n→ Anything important gets written to disk.\n```\n\n## File Purposes\n\n| File | Purpose | When to Update |\n|------|---------|----------------|\n| `task_plan.md` | Phases, progress, decisions | After each phase |\n| `findings.md` | Research, discoveries | After ANY discovery |\n| `progress.md` | Session log, test results | Throughout session |\n\n## Critical Rules\n\n### 1. Create Plan First\nNever start a complex task without `task_plan.md`. Non-negotiable.\n\n### 2. The 2-Action Rule\n> \"After every 2 view/browser/search operations, IMMEDIATELY save key findings to text files.\"\n\nThis prevents visual/multimodal information from being lost.\n\n### 3. Read Before Decide\nBefore major decisions, read the plan file. This keeps goals in your attention window.\n\n### 4. Update After Act\nAfter completing any phase:\n- Mark phase status: `in_progress` → `complete`\n- Log any errors encountered\n- Note files created/modified\n\n### 5. Log ALL Errors\nEvery error goes in the plan file. This builds knowledge and prevents repetition.\n\n```markdown\n## Errors Encountered\n| Error | Attempt | Resolution |\n|-------|---------|------------|\n| FileNotFoundError | 1 | Created default config |\n| API timeout | 2 | Added retry logic |\n```\n\n### 6. Never Repeat Failures\n```\nif action_failed:\n    next_action != same_action\n```\nTrack what you tried. Mutate the approach.\n\n## The 3-Strike Error Protocol\n\n```\nATTEMPT 1: Diagnose & Fix\n  → Read error carefully\n  → Identify root cause\n  → Apply targeted fix\n\nATTEMPT 2: Alternative Approach\n  → Same error? Try different method\n  → Different tool? Different library?\n  → NEVER repeat exact same failing action\n\nATTEMPT 3: Broader Rethink\n  → Question assumptions\n  → Search for solutions\n  → Consider updating the plan\n\nAFTER 3 FAILURES: Escalate to User\n  → Explain what you tried\n  → Share the specific error\n  → Ask for guidance\n```\n\n## Read vs Write Decision Matrix\n\n| Situation | Action | Reason |\n|-----------|--------|--------|\n| Just wrote a file | DON'T read | Content still in context |\n| Viewed image/PDF | Write findings NOW | Multimodal → text before lost |\n| Browser returned data | Write to file | Screenshots don't persist |\n| Starting new phase | Read plan/findings | Re-orient if context stale |\n| Error occurred | Read relevant file | Need current state to fix |\n| Resuming after gap | Read all planning files | Recover state |\n\n## The 5-Question Reboot Test\n\nIf you can answer these, your context management is solid:\n\n| Question | Answer Source |\n|----------|---------------|\n| Where am I? | Current phase in task_plan.md |\n| Where am I going? | Remaining phases |\n| What's the goal? | Goal statement in plan |\n| What have I learned? | findings.md |\n| What have I done? | progress.md |\n\n## When to Use This Pattern\n\n**Use for:**\n- Multi-step tasks (3+ steps)\n- Research tasks\n- Building/creating projects\n- Tasks spanning many tool calls\n- Anything requiring organization\n\n**Skip for:**\n- Simple questions\n- Single-file edits\n- Quick lookups\n\n## Templates\n\nCopy these templates to start:\n\n- [templates/task_plan.md](templates/task_plan.md) — Phase tracking\n- [templates/findings.md](templates/findings.md) — Research storage\n- [templates/progress.md](templates/progress.md) — Session logging\n\n## Scripts\n\nHelper scripts for automation:\n\n- `scripts/init-session.sh` — Initialize all planning files\n- `scripts/check-complete.sh` — Verify all phases complete\n\n## Advanced Topics\n\n- **Manus Principles:** See [reference.md](reference.md)\n- **Real Examples:** See [examp",
-      "tags": [
-        "pdf",
-        "markdown",
-        "api",
-        "claude",
-        "ai",
-        "automation",
-        "template",
-        "image",
-        "rag"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:20:19.383Z"
-    },
-    {
       "id": "anthropic-pptx",
       "name": "pptx",
       "slug": "pptx",
@@ -26771,21 +26776,21 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 381
+      "count": 378
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 345
+      "count": 349
     },
     {
       "id": "development-code-tools",
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 129
+      "count": 128
     },
     {
       "id": "creative-media",
@@ -26843,48 +26848,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 208691
+      "stars": 210386
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 14,
       "newSkillCount": 3,
-      "stars": 141622
+      "stars": 142288
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 62061
+      "stars": 62221
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 1,
-      "stars": 75016
+      "stars": 75130
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1269
+      "stars": 1270
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1003,
-      "newSkillCount": 6,
-      "stars": 38863
+      "newSkillCount": 12,
+      "stars": 38977
     }
   ],
-  "lastUpdated": "2026-05-27T10:11:32.785Z",
+  "lastUpdated": "2026-05-28T10:19:55.054Z",
   "stats": {
     "totalSkills": 1101,
-    "newSkills": 18,
-    "scrapedAt": "2026-05-27T10:11:32.785Z"
+    "newSkills": 24,
+    "scrapedAt": "2026-05-28T10:19:55.054Z"
   }
 }
