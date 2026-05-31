@@ -143,9 +143,11 @@ spec:
 brew install fluxcd/tap/flux
 
 # Alternative: download the official installer, inspect it, then execute it
-curl -fsSLo /tmp/flux-install.sh https://fluxcd.io/install.sh
-sed -n '1,160p' /tmp/flux-install.sh
-sudo bash /tmp/flux-install.sh
+tmpdir="$(mktemp -d)"
+trap 'rm -rf "$tmpdir"' EXIT
+curl -fsSLo "$tmpdir/flux-install.sh" https://fluxcd.io/install.sh
+sed -n '1,160p' "$tmpdir/flux-install.sh"
+sudo bash "$tmpdir/flux-install.sh"
 
 # Bootstrap Flux
 flux bootstrap github \
@@ -252,7 +254,3 @@ strategy:
 ## Secret Management
 
 ### External Secrets Operator
-
-```yaml
-apiVersion: external-secrets.io/v1beta1
-kind: ExternalSecr

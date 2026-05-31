@@ -1,0 +1,28 @@
+{
+  "id": "antigravity-longbridge",
+  "name": "longbridge",
+  "slug": "longbridge",
+  "description": "125+ agent skills for Longbridge Securities — real-time quotes, charts, fundamentals, portfolio analysis, options, and more for HK/US/A-share/SG markets. Trilingual: Simplified Chinese, Traditional Chinese, English.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/longbridge",
+  "content": "\n# Longbridge\n\n## Overview\n\nLongbridge is the official skill collection for Longbridge Securities, covering 125+ agent skills across real-time market data, chart analysis, company fundamentals, portfolio management, options, sector screening, and more. Supports HK, US, A-share (SH/SZ), and SG markets. All skills are trilingual (Simplified Chinese / Traditional Chinese / English).\n\nSource repository: [github.com/longbridge/skills](https://github.com/longbridge/skills) (~840 stars, MIT)\n\n## When to Use This Skill\n\n- Use when the user asks about stock prices, charts, or market data for HK/US/A-share/SG markets\n- Use when the user wants company fundamentals, earnings, or analyst ratings\n- Use when the user asks about their portfolio, positions, or account P&L via Longbridge\n- Use when the user wants options analysis, sector rankings, capital flow, or news\n- Use when the user asks in Chinese (Simplified or Traditional) or English about any securities topic\n\n## How It Works\n\n### Step 1: Discover the Right Subcommand\n\n```bash\nlongbridge --help\n```\n\nList all available subcommands. Never hard-code subcommand names — the CLI evolves.\n\n### Step 2: Check Subcommand Options\n\n```bash\nlongbridge <subcommand> --help\n```\n\nConfirm flags and output format before calling.\n\n### Step 3: Call with JSON Output\n\n```bash\nlongbridge <subcommand> --format json\n```\n\nParse the structured output and render in the user's language (detect from input).\n\n## Authentication\n\n```bash\nlongbridge auth login          # Basic market data (read-only)\nlongbridge auth login --trade  # Portfolio and account features\n```\n\n## Install\n\n```bash\n# Claude Code plugin marketplace\n/plugin marketplace add longbridge/skills\n\n# Or via npx\nnpx skills add https://github.com/longbridge/skills\n```\n\n## MCP Fallback\n\nIf the `longbridge` CLI binary is not installed, fall back to MCP tools. Inspect available MCP tools at runtime — do not hard-code MCP tool names as they change with server versions.\n\n## Limitations\n\n- Portfolio and account features require login with Trade scope.\n- Real-time data is subject to Longbridge data subscription (delayed data available without subscription).\n- Crypto symbols use `.HAS` suffix on the Longbridge platform.\n- This skill does not place orders — read-only by default unless using the account write scope.\n\n## Security & Safety Notes\n\n- All market data queries are read-only (no side effects).\n- Watchlist mutations and order-related features follow a preview + confirm two-step protocol.\n- Credentials are handled by the Longbridge auth system; this skill does not store or transmit tokens.\n",
+  "tags": [
+    "api",
+    "mcp",
+    "claude",
+    "ai",
+    "agent",
+    "security",
+    "cro"
+  ],
+  "useCases": [
+    "Use when the user asks about stock prices, charts, or market data for HK/US/A-share/SG markets",
+    "Use when the user wants company fundamentals, earnings, or analyst ratings",
+    "Use when the user asks about their portfolio, positions, or account P&L via Longbridge",
+    "Use when the user wants options analysis, sector rankings, capital flow, or news",
+    "Use when the user asks in Chinese (Simplified or Traditional) or English about any securities topic"
+  ],
+  "scrapedAt": "2026-05-31T08:58:45.686Z"
+}

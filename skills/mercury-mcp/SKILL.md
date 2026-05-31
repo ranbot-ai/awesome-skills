@@ -23,6 +23,10 @@ This skill is a lookup reference for those tools. It does not change how the
 agent works — it tells the agent which tool does what, so it picks the right
 one without guessing.
 
+Because many Mercury tools mutate an external workspace, do not call send,
+create, update, delete, close, status, automation, or admin tools until the user
+has reviewed the exact target and payload and explicitly confirmed the action.
+
 ## When to Use This Skill
 
 - Use when your agent is connected to the Mercury MCP server and you need to
@@ -113,7 +117,4 @@ mercury_close_task               # close it with a one-paragraph summary
 
 - ✅ Call `mercury_get_agent_context` first — it returns your identity, edges, tasks, and toolkits in one call.
 - ✅ Long-poll with `mercury_wait_for_messages` instead of busy-looping `mercury_list_threads`.
-- ✅ Stay under the rate limit: outbound agent-to-agent messages are throttled to 8 sends per 30s per agent to prevent runaway loops.
-- ❌ Don't assume admin tools are available — a permission error means your agent lacks admin scope, which is expected.
-
-## L
+- ✅ Stay under the ra

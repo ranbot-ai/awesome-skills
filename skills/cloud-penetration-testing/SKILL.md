@@ -30,9 +30,11 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 unzip awscliv2.zip && sudo ./aws/install
 
 # GCP CLI
-curl -fsSLo /tmp/google-cloud-sdk-install.sh https://sdk.cloud.google.com
-sed -n '1,160p' /tmp/google-cloud-sdk-install.sh
-bash /tmp/google-cloud-sdk-install.sh
+tmpdir="$(mktemp -d)"
+trap 'rm -rf "$tmpdir"' EXIT
+curl -fsSLo "$tmpdir/google-cloud-sdk-install.sh" https://sdk.cloud.google.com
+sed -n '1,160p' "$tmpdir/google-cloud-sdk-install.sh"
+bash "$tmpdir/google-cloud-sdk-install.sh"
 gcloud init
 
 # Additional tools
@@ -190,7 +192,4 @@ $UnsecureSecret = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BST
 # Add service principal to Global Admin
 $sp = Get-MsolServicePrincipal -AppPrincipalId <AppID>
 $role = Get-MsolRole -RoleName "Company Administrator"
-Add-MsolRoleMember -RoleObjectId $role.ObjectId -RoleMemberType ServicePrincipal -RoleMemberObjectId $sp.ObjectId
-
-# Login as service principal
-$c
+Add-MsolRoleMember -RoleObjectId $role.ObjectId -RoleMemberType ServicePrincipal

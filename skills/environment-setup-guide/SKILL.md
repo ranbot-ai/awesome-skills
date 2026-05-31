@@ -85,9 +85,11 @@ Provide verification steps to ensure everything works:
 **macOS (using Homebrew):**
 \`\`\`bash
 # Install Homebrew if not installed
-curl -fsSLo /tmp/homebrew-install.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
-sed -n '1,160p' /tmp/homebrew-install.sh
-/bin/bash /tmp/homebrew-install.sh
+tmpdir="$(mktemp -d)"
+trap 'rm -rf "$tmpdir"' EXIT
+curl -fsSLo "$tmpdir/homebrew-install.sh" https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+sed -n '1,160p' "$tmpdir/homebrew-install.sh"
+/bin/bash "$tmpdir/homebrew-install.sh"
 
 # Install Node.js
 brew install node
@@ -99,9 +101,11 @@ brew install node
 sudo apt update
 
 # Install Node.js and npm
-curl -fsSLo /tmp/nodesource-setup.sh https://deb.nodesource.com/setup_20.x
-sed -n '1,160p' /tmp/nodesource-setup.sh
-sudo -E bash /tmp/nodesource-setup.sh
+tmpdir="$(mktemp -d)"
+trap 'rm -rf "$tmpdir"' EXIT
+curl -fsSLo "$tmpdir/nodesource-setup.sh" https://deb.nodesource.com/setup_20.x
+sed -n '1,160p' "$tmpdir/nodesource-setup.sh"
+sudo -E bash "$tmpdir/nodesource-setup.sh"
 sudo apt install -y nodejs
 \`\`\`
 
@@ -205,11 +209,4 @@ python3 --version  # Should show Python 3.11.x
 pip3 --version     # Should show pip 23.x.x
 \`\`\`
 
-### Step 3: Create Virtual Environment
-
-\`\`\`bash
-# Navigate to project directory
-cd my-project
-
-# Create virtual environment
-python3 -m venv venv
+### Step 3: Crea

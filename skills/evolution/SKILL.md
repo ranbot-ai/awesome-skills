@@ -37,9 +37,11 @@ For reliable automatic triggering, use Claude Code hooks. Install with `--with-h
 
 ```bash
 # Install makepad-skills with hooks enabled
-curl -fsSLo /tmp/makepad-skills-install.sh https://raw.githubusercontent.com/ZhangHanDong/makepad-skills/main/install.sh
-sed -n '1,160p' /tmp/makepad-skills-install.sh
-bash /tmp/makepad-skills-install.sh --with-hooks
+tmpdir="$(mktemp -d)"
+trap 'rm -rf "$tmpdir"' EXIT
+curl -fsSLo "$tmpdir/makepad-skills-install.sh" https://raw.githubusercontent.com/ZhangHanDong/makepad-skills/main/install.sh
+sed -n '1,160p' "$tmpdir/makepad-skills-install.sh"
+bash "$tmpdir/makepad-skills-install.sh" --with-hooks
 ```
 
 This will install hooks to `.claude/hooks/` and configure `.claude/settings.json`:
@@ -159,6 +161,3 @@ Ask yourself:
 - Is this a reusable pattern? (not project-specific)
 - Did it take significant effort to figure out?
 - Would it help other Makepad developers?
-- Is it not already documented in makepad-skills?
-
-### Step 2: Cla
