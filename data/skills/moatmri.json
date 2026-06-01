@@ -1,0 +1,24 @@
+{
+  "id": "antigravity-moatmri",
+  "name": "moatmri",
+  "slug": "moatmri",
+  "description": "Analyze AI disruption pressure across a business, map competitive exposure, and produce a 90-day defensive action plan.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/moatmri",
+  "content": "\n# MoatMRI — AI Disruption Pressure Analysis\n\n*Where does intelligence pressure break this system first?*\n\n## When to Use This Skill\n\n- \"Is my business at risk from AI? Where am I most exposed?\"\n- \"How would an AI-native startup take over my market?\"\n- \"What should I do in the next 90 days to defend against AI disruption?\"\n- \"I'm doing due diligence on [company] — what's their AI displacement risk?\"\n- \"Where does my competitive moat actually hold against AI pressure?\"\n\n## How It Works\n\n### Step 1 — Gather Inputs\n\nAsk if not provided:\n- **Industry** (e.g., \"real estate\", \"community banking\", \"retail pharmacy\", \"law firm\")\n- **Entity type** (e.g., \"independent broker\", \"solo practitioner\", \"regional franchise\")\n- **Target name** (optional — specific organization for named analysis)\n\n## Limitations\n\n- Produces strategic risk analysis, not audited market research or investment advice.\n- Depends on current company, market, regulatory, and competitive context supplied by the user or gathered from reliable sources.\n- Treats disruption scenarios as planning tools; scores should be revisited as new evidence appears.\n\n### Step 2 — 10-Vector Pressure Map\n\nScore AI disruption pressure across exactly these 10 vectors (0–10):\n\n| # | Vector | What to Measure |\n|---|--------|----------------|\n| 1 | **labor_substitution** | Which roles/functions are directly automatable |\n| 2 | **customer_interface** | How AI changes how customers reach this entity |\n| 3 | **knowledge_commoditization** | Does AI commoditize the expertise this entity sells |\n| 4 | **pricing_pressure** | Does AI enable lower-cost competitors to undercut |\n| 5 | **supply_chain_automation** | Does AI change input costs or supplier relationships |\n| 6 | **data_moat** | Does this entity have proprietary data AI can't replicate |\n| 7 | **trust_relationship_moat** | How much does customer loyalty protect against displacement |\n| 8 | **distribution_channel_disruption** | Does AI create new channels that bypass this entity |\n| 9 | **regulatory_compliance_exposure** | Does AI alter the regulatory or liability landscape |\n| 10 | **decision_speed_gap** | Does AI accelerate decisions in ways that disadvantage this entity |\n\nFor each vector produce: **score**, **headline**, **near_term** (12 months), **far_term** (3 years).\n\n**Aggregate risk score:** mean of all 10 vectors. Flag any vector ≥ 7 as critical.\n\n### Step 3 — AI Front-Door Takeover Storyboard\n\n6-step narrative of how an AI-native competitor displaces this entity:\n1. The entry point\n2. The wedge (first 10% of market)\n3. The acceleration (what makes it compound)\n4. The tipping point (when incumbent can't recover)\n5. The aftermath\n6. The survivor profile\n\n### Step 4 — 90-Day Counterstrike Plan\n\n- **Track A (Days 0–30):** Immediate defense — what to stop, what to protect\n- **Track B (Days 31–60):** Intelligence-layer build — data/relationships to fortify\n- **Track C (Days 61–90):** Offensive positioning — use AI pressure as competitive weapon\n\n## Best Practices\n\n- ✅ Score all 10 vectors before calculating aggregate — resist stopping at obvious ones\n- ✅ Keep the storyboard specific to industry/entity, not generic disruption narrative\n- ✅ Track C should be actionable within 90 days, not aspirational 3-year strategy\n- ❌ Don't conflate data_moat with trust_relationship_moat — they protect differently\n\n## Additional Resources\n\n- Repository: [thebrierfox/moatmri-skill](https://github.com/thebrierfox/moatmri-skill)\n- Full BYOK tool: [ace-license-server-production.up.railway.app/byok/moatmri](https://ace-license-server-production.up.railway.app/byok/moatmri)\n- Built by [IntuiTek¹](https://intuitek.ai) (~K¹) — MIT License\n",
+  "tags": [
+    "ai",
+    "automation",
+    "cro"
+  ],
+  "useCases": [
+    "\"Is my business at risk from AI? Where am I most exposed?\"",
+    "\"How would an AI-native startup take over my market?\"",
+    "\"What should I do in the next 90 days to defend against AI disruption?\"",
+    "\"I'm doing due diligence on [company] — what's their AI displacement risk?\"",
+    "\"Where does my competitive moat actually hold against AI pressure?\""
+  ],
+  "scrapedAt": "2026-06-01T11:51:49.521Z"
+}
