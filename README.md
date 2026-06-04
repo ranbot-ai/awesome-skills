@@ -6,7 +6,7 @@
 
 ## Features
 
-- **Multi-Source Scraper**: Collects agent skills from 6+ GitHub repositories
+- **Multi-Source Scraper**: Collects agent skills from 7+ GitHub repositories
 - **Modern Website**: Next.js 16 + Tailwind CSS frontend with search, filtering, and detailed skill pages
 - **300+ Skills**: Curated from top AI agent skill repositories
 - **Categories**: Skills organized by category (Development, AI & Agents, Business, Creative, etc.)
@@ -23,6 +23,7 @@
 | [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | 67k+ | AI-driven development skills |
 | [Prat011/awesome-llm-skills](https://github.com/Prat011/awesome-llm-skills) | 700+ | LLM and AI Agent skills collection |
 | [sickn33/antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) | 3.6k+ | 253+ agentic skills for Claude Code, Gemini CLI, Cursor & more |
+| [Sequenzy/skills](https://github.com/Sequenzy/skills) | 1+ | Sequenzy lifecycle and transactional email agent skills |
 
 ## Install Skills
 
@@ -114,7 +115,7 @@ cd awesome-skills
 # Search for skills
 ./scripts/install-skills.sh --search docker
 
-# Install all skills from a source (anthropic, composio, superpowers, openhands, awesome-llm, antigravity)
+# Install all skills from a source (anthropic, composio, superpowers, openhands, awesome-llm, antigravity, sequenzy)
 ./scripts/install-skills.sh --source anthropic
 
 # Install skills by category
@@ -264,6 +265,7 @@ awesome-skills/
 │   │       ├── anthropic.ts
 │   │       ├── antigravity.ts
 │   │       ├── awesome-llm.ts
+│   │       ├── sequenzy.ts
 │   │       ├── composio.ts
 │   │       ├── openhands.ts
 │   │       └── superpowers.ts
