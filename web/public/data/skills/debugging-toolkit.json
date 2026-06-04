@@ -1,0 +1,16 @@
+{
+  "id": "antigravity-debugging-toolkit",
+  "name": "debugging-toolkit",
+  "slug": "debugging-toolkit",
+  "description": "Use when working with debugging toolkit smart debug (Alias for debugging-toolkit-smart-debug)",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/debugging-toolkit",
+  "content": "\n# Debugging Toolkit\n\n> **This is an alias.** The canonical skill is **`debugging-toolkit-smart-debug`**.\n\nThis skill redirects to `debugging-toolkit-smart-debug`. Load it from the vault:\n\n`skill-libraries/code-quality/debugging-toolkit-smart-debug/SKILL.md`\n\n## When to Use\n- Use this skill when working with debugging toolkit smart debug (Alias for debugging-toolkit-smart-debug)\n\n## Why this alias exists\n\nUsers commonly search for `debugging-toolkit` but the full skill name in this collection is `debugging-toolkit-smart-debug`. This alias ensures discoverability.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n\n## Examples\n```text\nUse @debugging-toolkit for this task: Use when working with debugging toolkit smart debug (Alias for debugging-toolkit-smart-debug).\n\nApply the skill to my current work and walk me through the safest next steps,\nkey checks, and the concrete output I should produce.\n```\n",
+  "tags": [],
+  "useCases": [
+    "Use this skill when working with debugging toolkit smart debug (Alias for debugging-toolkit-smart-debug)"
+  ],
+  "scrapedAt": "2026-06-04T10:08:12.310Z"
+}

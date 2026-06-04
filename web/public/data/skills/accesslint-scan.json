@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-accesslint-scan",
+  "name": "accesslint-scan",
+  "slug": "accesslint-scan",
+  "description": "Audit a live page for accessibility issues, locate each WCAG violation precisely, and return a selector-grounded fix worklist without editing.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/accesslint-scan",
+  "content": "\nAudit a live page and report what's broken and where. Locate; don't fix. If no URL in `$ARGUMENTS`, ask for one.\n\n## When to Use\n- Use this skill when the task matches this description: Audit a live page for accessibility issues, locate each WCAG violation precisely, and return a selector-grounded fix worklist without editing.\n\n## 1. Audit\n\n```bash\nPORT=$(npx -y @accesslint/chrome@latest ensure | node -e 'process.stdin.on(\"data\",d=>process.stdout.write(\"\"+JSON.parse(d).port))')\nnpx -y @accesslint/cli@latest \"<url>\" --port \"$PORT\" --format json\n```\n\nFlags as needed: `--selector`, `--wait-for \"<selector>\"`, `--include-aaa`, `--disable <rules>`.\n\n## 2. Report\n\nCounts by impact, then one entry per violation:\n\n- **where** — selector verbatim + `file:line (symbol)` if `source` is present — never fabricate. If no violation has `source`, note \"source mapping unavailable — located by selector only\".\n- **evidence** — contrast ratio, missing attribute, empty name\n- **fix** — mechanical change or `NEEDS HUMAN`\n\nDon't edit. For fixes: apply mechanical ones then re-run to verify; for bulk work hand off to `accesslint:audit`.\n\n## 3. Tear down\n\n```bash\nnpx -y @accesslint/chrome@latest stop --all  # skip if ensure reported \"managed\":false\n```\n\n## Gotchas\n\n- `ensure` always determines the port — never hardcode 9222.\n- CLI exit 2 = bad URL or page never loaded; check the dev server.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
+  "tags": [
+    "node",
+    "ai"
+  ],
+  "useCases": [
+    "Use this skill when the task matches this description: Audit a live page for accessibility issues, locate each WCAG violation precisely, and return a selector-grounded fix worklist without editing."
+  ],
+  "scrapedAt": "2026-06-04T10:04:55.780Z"
+}
