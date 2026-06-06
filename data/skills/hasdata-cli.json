@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-hasdata-cli",
+  "name": "hasdata-cli",
+  "slug": "hasdata-cli",
+  "description": "Command-line access to search, scraping, and structured web data.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hasdata-cli",
+  "content": "\n# hasdata\n\nUse the `hasdata` CLI for real-time web data. One subcommand per API — flags, enums, defaults are derived from the live schema at `api.hasdata.com/apis`.\n\n## When to Use\n\nUse this skill when:\n\n- The user wants to use the HasData CLI.\n- The user needs current web data from the command line.\n- The user wants to automate data collection in scripts.\n- The user wants to retrieve search, ecommerce, travel, or local business data.\n- The user needs web-page scraping through the CLI.\n\n## Prerequisites\n\n- `command -v hasdata` — if missing, download the installer from `https://raw.githubusercontent.com/HasData/hasdata-cli/main/install.sh`, inspect it, then run it locally with `sh install.sh`.\n- One-time setup: the user runs `hasdata configure`, pastes their API key, and it's saved to `~/.hasdata/config.yaml` (mode 0600). Every future call picks it up automatically.\n- If a call fails with `no API key configured`, the user hasn't run `hasdata configure` yet — tell them to. **Never invent a key.**\n\n## Quick start\n\n```bash\nhasdata <api> --flag value [--flag value ...] --raw | jq .\n```\n\nAlways pass `--raw` when piping to `jq` (skips pretty-print and TTY detection). Use `--pretty` only for human-readable terminal output.\n\n## Picking the right subcommand\n\n| User intent | Subcommand |\n| --- | --- |\n| Web search (\"what does Google say about…\") | `google-serp` (full features) or `google-serp-light` (cheap, single page) |\n| Latest news | `google-news` |\n| AI Mode SERP | `google-ai-mode` |\n| Shopping / product prices | `google-shopping` (broad), `amazon-search` / `amazon-product` (Amazon), `shopify-products` (Shopify) |\n| Immersive product page | `google-immersive-product` |\n| Maps / places / reviews | `google-maps`, `google-maps-place`, `google-maps-reviews`, `google-maps-photos`, `google-maps-posts` |\n| Yelp / YellowPages local data | `yelp-search`, `yelp-place`, `yellowpages-search`, `yellowpages-place` |\n| Real-estate listings (homes for sale/rent/sold) | `zillow-listing`, `redfin-listing` |\n| Real-estate single property deep dive | `zillow-property`, `redfin-property` |\n| Travel — short-term rentals | `airbnb-listing`, `airbnb-property` |\n| Travel — hotels / lodging | `booking-search`, `booking-place` |\n| Travel — flights | `google-flights` |\n| Jobs | `indeed-listing`, `indeed-job`, `glassdoor-listing`, `glassdoor-job` |\n| Bing search | `bing-serp` |\n| Trends | `google-trends` |\n| Images | `google-images` |\n| Short videos | `google-short-videos` |\n| Events | `google-events` |\n| YouTube search / video / channel / transcript | `youtube-search-api`, `youtube-video-api`, `youtube-channel-api`, `youtube-transcript-api` |\n| Instagram profile | `instagram-profile` |\n| Amazon seller | `amazon-seller`, `amazon-seller-products` |\n| **Scrape a specific URL** | `web-scraping` — supports JS rendering, proxies, markdown output, AI extraction, screenshots |\n\nFor exact flags of a subcommand, run `hasdata <api> --help` or read the matching file in `references/`.\n\n## Non-obvious triggers (when to reach for hasdata even if the user doesn't say \"scrape\")\n\nThe user often won't ask for a SERP API or a scraper directly. Map these intents to the skill:\n\n- **\"Is this still true?\" / \"What's the latest on X?\" / \"Has Y happened yet?\"** — LLM training data is stale. Run `google-serp` or `google-news` to ground the answer.\n- **\"Summarize this article\" / \"TL;DR this URL\"** — Use `web-scraping --output-format markdown` and feed the markdown into the summary prompt. Beats copy-paste because it strips ads, nav, scripts.\n- **\"Verify this link\" / \"Is this site real?\"** — `web-scraping --url X --no-block-resources` returns status + screenshot. Or `google-serp --q \"site:example.com\"`.\n- **\"What does X say about itself?\"** — Pull the company's own homepage with `web-scraping --output-format markdown`, then summarize.\n- **\"Find me alternatives to X\"** — `google-serp --q \"X alternatives\"` or `google-shopping --q \"X competitors\"`.\n- **\"What's the going rate for X?\"** — `google-shopping` (broad) or `amazon-search` (Amazon-specific) with `jq` to extract the price distribution.\n- **\"Phone number / address for X\"** — `google-maps-place` or `yelp-place`. Don't guess from training data.\n- **\"Are people happy with X service?\" / \"Is X reputable?\"** — `google-maps-reviews --place-id ... --sort lowest` for negative samples; `glassdoor-job` for employer rep.\n- **\"What's the salary range for Y role?\"** — `indeed-listing` filtered by role + location, then `jq` over `.jobs[].salary`.\n- **\"Find me homes/apartments matching X criteria\"** — `zillow-listing` / `redfin-listing` / `airbnb-listing` with the corresponding filters.\n- **\"Recent sold comps near X\"** — `zillow-listing --type sold --keyword \"X\" --days-on-zillow 12m`.\n- **\"Track this product's price\"** — Loop `amazon-product --asin X` on a schedule; persist `.price` to a file.\n- **\"Summarize / cite this YouTube video\"** — `youtube-transcript-api --v-param VID --raw | jq -r '.transcript[].snippet'` → feed to the sum",
+  "tags": [
+    "markdown",
+    "api",
+    "ai",
+    "agent",
+    "llm",
+    "workflow",
+    "image",
+    "rag",
+    "seo",
+    "cro"
+  ],
+  "useCases": [
+    "The user wants to use the HasData CLI.",
+    "The user needs current web data from the command line.",
+    "The user wants to automate data collection in scripts.",
+    "The user wants to retrieve search, ecommerce, travel, or local business data.",
+    "The user needs web-page scraping through the CLI."
+  ],
+  "scrapedAt": "2026-06-06T08:43:36.123Z"
+}

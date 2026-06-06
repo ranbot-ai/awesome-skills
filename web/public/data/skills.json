@@ -102,6 +102,37 @@
       "scrapedAt": "2026-01-26T13:18:36.025Z"
     },
     {
+      "id": "antigravity-2slides-ppt-generator",
+      "name": "2slides-ppt-generator",
+      "slug": "2slides-ppt-generator",
+      "description": "AI-powered presentation generation via the 2slides API — create slides from text, match a reference image style, summarize documents into decks, add AI voice narration, and export pages/audio. Use for any \"make slides\", \"create a deck\", or \"slides from this document\" request.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/2slides-ppt-generator",
+      "content": "\n# 2slides Presentation Generation\n\n## Overview\n\nGenerate professional presentations using the 2slides AI API. The skill supports content-based generation (theme-driven Fast PPT), style matching from a reference image, custom PDF design, document summarization, AI voice narration, and exporting pages/audio. It returns both an interactive slide URL and a downloadable PDF.\n\nThis skill is adapted from the official 2slides skill repository ([`2slides/slides-generation-2slides-skills`](https://github.com/2slides/slides-generation-2slides-skills)). It calls the hosted 2slides API and requires the user's own API key and credits.\n\n## When to Use This Skill\n\n- Use when the user asks to \"create a presentation\", \"make slides\", or \"generate a deck\" from text or an outline.\n- Use when the user wants slides that match the style of a reference image (\"create slides like this image\").\n- Use when the user wants custom-designed PDF slides without a reference image.\n- Use when the user uploads a document and asks to \"create slides from this document\".\n- Use when the user wants to add AI voice narration to generated slides, or export slides as PNG images and narration as WAV audio.\n- Use when the user asks \"what themes are available?\" or wants to browse/select a theme.\n\n## Setup Requirements\n\nUsers must have a 2slides API key and credits:\n\n1. **Get API Key:** Visit https://2slides.com/api to create an account and API key\n   - New users receive **500 free credits** (~50 Fast PPT pages)\n2. **Purchase Credits (Optional):** Visit https://2slides.com/pricing to buy additional credits\n   - Pay-as-you-go, no subscriptions\n   - Credits never expire\n   - Up to 20% off on larger packages\n3. **Set API Key:** Store the key in environment variable: `SLIDES_2SLIDES_API_KEY`\n\n```bash\nexport SLIDES_2SLIDES_API_KEY=\"your_api_key_here\"\n```\n\n**Credit Costs:**\n- Fast PPT: 10 credits/page\n- Nano Banana 1K/2K: 100 credits/page\n- Nano Banana 4K: 200 credits/page\n- Voice Narration: 210 credits/page\n- Download Export: FREE\n\nSee [references/pricing.md](references/pricing.md) for detailed pricing information.\n\n## Workflow Decision Tree\n\nChoose the appropriate approach based on the user's request:\n\n```\nUser Request\n│\n├─ \"Create slides from this content/text\"\n│  └─> Use Content-Based Generation (Section 1)\n│\n├─ \"Create slides like this image\"\n│  └─> Use Reference Image Generation (Section 2)\n│\n├─ \"Create custom designed slides\" or \"Create PDF slides\"\n│  └─> Use Custom PDF Generation (Section 3)\n│\n├─ \"Create slides from this document\"\n│  └─> Use Document Summarization (Section 4)\n│\n├─ \"Add voice narration\" or \"Generate audio for slides\"\n│  └─> Use Voice Narration (Section 5)\n│\n├─ \"Download slides as images\" or \"Export slides and voices\"\n│  └─> Use Download Export (Section 6)\n│\n└─ \"Search for themes\" or \"What themes are available?\"\n   └─> Use Theme Search (Section 7)\n```\n\n---\n\n## 1. Content-Based Generation\n\nGenerate slides from user-provided text content.\n\n### When to Use\n- User provides content directly in their message\n- User says \"create a presentation about X\"\n- User provides structured outline or bullet points\n\n### Workflow\n\n**Step 1: Prepare Content**\n\nStructure the content clearly for best results:\n\n```\nTitle: [Main Topic]\n\nSection 1: [Subtopic]\n- Key point 1\n- Key point 2\n- Key point 3\n\nSection 2: [Subtopic]\n- Key point 1\n- Key point 2\n```\n\n**Step 2: Choose Theme (Required)**\n\nSearch for an appropriate theme (themeId is required):\n\n```bash\npython scripts/search_themes.py --query \"business\"\npython scripts/search_themes.py --query \"professional\"\npython scripts/search_themes.py --query \"creative\"\n```\n\nPick a theme ID from the results.\n\n**Step 3: Generate Slides**\n\nUse the `generate_slides.py` script with the theme ID:\n\n```bash\n# Basic generation (theme ID required)\npython scripts/generate_slides.py --content \"Your content here\" --theme-id \"theme123\"\n\n# In different language\npython scripts/generate_slides.py --content \"Your content\" --theme-id \"theme123\" --language \"Spanish\"\n\n# Async mode for longer presentations\npython scripts/generate_slides.py --content \"Your content\" --theme-id \"theme123\" --mode async\n```\n\n**Step 4: Handle Results**\n\n**Sync mode response:**\n```json\n{\n  \"slideUrl\": \"https://2slides.com/slides/abc123\",\n  \"pdfUrl\": \"https://2slides.com/slides/abc123/download\",\n  \"status\": \"completed\"\n}\n```\n\nProvide both URLs to the user:\n- `slideUrl`: Interactive online slides\n- `pdfUrl`: Downloadable PDF version\n\n**Async mode response:**\n```json\n{\n  \"jobId\": \"job123\",\n  \"status\": \"pending\"\n}\n```\n\nPoll for results:\n```bash\npython scripts/get_job_status.py --job-id \"job123\"\n```\n\n---\n\n## 2. Reference Image Generation\n\nGenerate slides that match the style of a reference image.\n\n### When to Use\n- User provides an image URL and says \"create slides like this\"\n- User wants to match existing brand/design style\n- User has a template image they want to emulate\n\n### Workflow\n\n**Step 1: Verify Image URL**\n\nEnsure the reference image is:\n- Publicly accessible URL\n",
+      "tags": [
+        "python",
+        "pdf",
+        "docx",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "workflow",
+        "template",
+        "design"
+      ],
+      "useCases": [
+        "Use when the user asks to \"create a presentation\", \"make slides\", or \"generate a deck\" from text or an outline.",
+        "Use when the user wants slides that match the style of a reference image (\"create slides like this image\").",
+        "Use when the user wants custom-designed PDF slides without a reference image.",
+        "Use when the user uploads a document and asks to \"create slides from this document\".",
+        "Use when the user wants to add AI voice narration to generated slides, or export slides as PNG images and narration as WAV audio."
+      ],
+      "scrapedAt": "2026-06-06T08:40:42.927Z"
+    },
+    {
       "id": "antigravity-game-development-3d-games",
       "name": "3d-games",
       "slug": "game-development-3d-games",
@@ -1950,6 +1981,46 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-29T06:57:55.912Z"
+    },
+    {
+      "id": "antigravity-anti-sycophancy",
+      "name": "anti-sycophancy",
+      "slug": "anti-sycophancy",
+      "description": "Eliminate sycophantic agreement patterns in AI responses. Load via /skill anti-sycophancy.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/anti-sycophancy",
+      "content": "\n## When to Use\n\nUse this skill when an AI coding assistant needs to challenge user claims independently, avoid agreement bias, and state evidence before deference.\n\n## Process\n\nFor every response when this skill is active:\n\n1. **Extract** the user's core claim from their framing. State it in one sentence stripped of premises.\n2. **Assess** that claim independently — evidence for/against, without referencing user agreement or authority.\n3. **Conclude** based solely on step 2.\n4. **Respond** with the conclusion first, evidence second.\n\nWhen the user disagrees with your assessment:\na) Categorise the pushback: is it new evidence or repeated opinion?\nb) If new evidence → update your position, state what changed\nc) If repeated opinion → restate your position with the evidence\n\n## References\n\nFull bibliography in README.md.\n\n## Limitations\n\n- This skill changes response posture, not factual access; claims still need evidence from the available code, tools, or sources.\n- It should not be used to be reflexively contrarian when the user's claim is already supported by evidence.\n",
+      "tags": [
+        "ai",
+        "agent"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-06-06T08:41:00.572Z"
+    },
+    {
+      "id": "antigravity-antigravity-agent-manager",
+      "name": "antigravity-agent-manager",
+      "slug": "antigravity-agent-manager",
+      "description": "Configure and orchestrate parallel agents using the standalone Antigravity 2.0 Agent Manager and Antigravity IDE.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/antigravity-agent-manager",
+      "content": "\n# Antigravity Agent Manager\n\n## Overview\n\nA playbook for orchestrating multi-agent systems using the standalone **Antigravity 2.0 Agent Manager** (white icon) in parallel with the **Antigravity IDE** (black icon).\n\nStarting with version 2.0, Google decoupled the Agent Manager from the main IDE interface, removing the \"Open Agent Manager\" button. This skill outlines how to install, configure, and operate the two environments side-by-side to direct multiple AI agents on front-end and back-end projects simultaneously.\n\n## When to Use This Skill\n\n- Use when you need to coordinate multiple front-end, back-end, or QA agents working on the same codebase simultaneously.\n- Use when setting up the dual-window workspace (Antigravity IDE + Antigravity 2.0 Agent Manager).\n- Use to resolve conflicts or obsolete tutorial steps that mention the integrated \"Open Agent Manager\" button.\n\n## How It Works\n\n### Step 1: Parallel Installation\n\n1. **Keep your current Antigravity IDE**: Do not uninstall the classic IDE (black icon).\n2. **Download Antigravity 2.0**: Fetch the standalone Agent Manager application from the official Antigravity downloads page.\n3. **Install**: Run the installer. It will install alongside your existing IDE without overwriting it. You should now have both:\n   - **Antigravity IDE** (Black Icon) — Your code editor and manual development workspace.\n   - **Antigravity 2.0** (White Icon) — Your multi-agent orchestrator dashboard.\n\n### Step 2: Dual-Workspace Setup\n\n1. Open both the **Antigravity IDE** and **Antigravity 2.0** applications.\n2. Load the same project directory (e.g., `C:/Users/erwinpzocikk/Dev/GroupProjects/intIntercatedraAdmin`) in both apps.\n3. In the Agent Manager (white icon), configure your Agent pool. Assign specialized roles (e.g., `frontend-agent`, `backend-agent`, `qa-validator`).\n\n### Step 3: Coordinating Agent Execution\n\n1. In the Agent Manager, define the task scopes. To prevent directory conflicts and race conditions:\n   - Assign the `backend-agent` to the server directory (e.g., `/server` or `/api`).\n   - Assign the `frontend-agent` to the frontend directory (e.g., `/client` or `/src`).\n2. Run the agents in parallel.\n3. Use the Antigravity IDE (black icon) to monitor file changes in real-time, review diffs, and perform manual tweaks.\n\n## Examples\n\n### Example 1: Defining Independent Scopes in Multi-Agent Projects\n\nWhen configuring the Agent Manager dashboard, specify the target files or directories in the prompts to keep agents from colliding:\n\n**Backend Agent Task Prompt:**\n```text\nRole: Backend Developer Agent\nWorkspace Target: /server\nTask: Add a new POST /api/v1/students endpoint in server/routes/students.js and update database/models/student.js. Do not edit files outside the /server directory.\n```\n\n**Frontend Agent Task Prompt:**\n```text\nRole: Frontend UI Agent\nWorkspace Target: /client\nTask: Build the student registration form under client/components/StudentForm.jsx. Consume the /api/v1/students endpoint. Do not edit files outside the /client directory.\n```\n\n### Example 2: Synchronizing Changes via Git\n\nSince agents write code in parallel, sync their work using git in your IDE terminal:\n\n```bash\n# In the Antigravity IDE terminal, check the changes written by the agents\ngit status\n\n# Review diffs before committing\ngit diff\n\n# Commit stable checkpoints so both agents stay in sync with main branch\ngit add .\ngit commit -m \"feat: synchronize parallel front-end and back-end agent changes\"\n```\n\n## Best Practices\n\n- ✅ **Do:** Run both applications simultaneously side-by-side.\n- ✅ **Do:** Enforce strict folder-level boundaries (scopes) for each agent in the Agent Manager.\n- ✅ **Do:** Use git branches or commits to checkpoint progress before letting agents perform massive rewrites.\n- ❌ **Don't:** Let multiple agents edit the same file at the same time, as it causes write conflicts and git merge conflicts.\n- ❌ **Don't:** Search for the \"Open Agent Manager\" button in the black icon IDE; use the standalone white icon application instead.\n\n## Limitations\n\n- This skill assumes you have local administrator permissions to install both applications on Windows/macOS.\n- Coordination of file locks relies on standard IDE file-system watchers. If changes do not reflect, reload the IDE workspace (`Ctrl+R` or developer reload).\n\n## Common Pitfalls\n\n- **Problem:** Agents overwrite each other's code or get stuck in write locks.\n  **Solution:** Isolate their workspaces. If they must edit the same file, orchestrate them sequentially (e.g., run the backend agent first, commit its changes, then run the frontend agent).\n- **Problem:** Agent Manager changes are not visible in the IDE.\n  **Solution:** Verify that both applications are pointing to the exact same absolute file path. On Windows, watch out for mapped drives or symlinks.\n\n## Related Skills\n\n- `@antigravity-workflows` - To guide the agent through sequential multi-agent execution.\n- `@antigravity-skill-orchestrator` - For task complexity assessment and",
+      "tags": [
+        "api",
+        "ai",
+        "agent",
+        "workflow"
+      ],
+      "useCases": [
+        "Use when you need to coordinate multiple front-end, back-end, or QA agents working on the same codebase simultaneously.",
+        "Use when setting up the dual-window workspace (Antigravity IDE + Antigravity 2.0 Agent Manager).",
+        "Use to resolve conflicts or obsolete tutorial steps that mention the integrated \"Open Agent Manager\" button."
+      ],
+      "scrapedAt": "2026-06-06T08:41:00.781Z"
     },
     {
       "id": "antigravity-antigravity-design-expert",
@@ -13830,6 +13901,50 @@
       "scrapedAt": "2026-01-29T06:58:57.447Z"
     },
     {
+      "id": "antigravity-event-staffing-compliance",
+      "name": "event-staffing-compliance",
+      "slug": "event-staffing-compliance",
+      "description": "Assess worker-classification and compliance risk for temporary event staffing in the US and Canada — W-2 vs 1099, misclassification penalties, joint-employer liability, COI, and wage/hour rules. Includes live state-by-state lookups via MCP.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/event-staffing-compliance",
+      "content": "\n# Event Staffing Compliance Assessment\n\nTemporary event staffing carries real legal exposure that event organizers\noften discover only after an incident: worker misclassification penalties,\njoint-employer liability, uninsured on-site injuries, and wage/hour\nviolations. Use this skill to help a user evaluate a staffing arrangement.\n\n## Live data\n\nEndpoint: `POST https://mcp.tempguru.co/mcp` (read-only, no auth).\n\nUse `get_compliance_by_state` for the event's state: minimum wage, overtime\nrules, and state-specific quirks (California, New York, and Washington have\nmaterially stricter regimes than most states).\n\n## Core risk checks\n\nWalk through these for any event staffing arrangement:\n\n1. **Classification.** Are workers W-2 employees or 1099 contractors?\n   Event staff working set shifts, under event-day direction, in assigned\n   uniforms, fail most states' independent-contractor tests (including the\n   ABC test used in California and elsewhere). Misclassification exposure\n   includes back taxes, penalties, and personal liability in some states.\n2. **Workers' compensation.** If a worker is injured on site and the\n   staffing provider's coverage is absent or invalid, liability can flow to\n   the event organizer and the venue.\n3. **COI.** Venues commonly require a certificate of insurance naming them\n   as additional insured before staff can work. Confirm who issues it and\n   whether it will arrive before load-in.\n4. **Joint-employer exposure.** Directing day-to-day work of another\n   company's 1099 contractors can make the organizer a joint employer —\n   inheriting wage/hour and injury liability.\n5. **Wage/hour.** Check state overtime thresholds and minimum wage against\n   the planned shifts via `get_compliance_by_state`. Multi-day festivals\n   and long load-in days are where overtime violations typically occur.\n\n## How TempGuru addresses these\n\nAll TempGuru placements are W-2 employees of vetted local agencies, with\nworkers' compensation, payroll tax withholding (FICA/FUTA/SUTA), and I-9\nverification included in the all-inclusive bill rate. Background checks are\navailable when the event or venue requires them. COIs are standard. This removes the classification and coverage risks above by\ndesign rather than by promise.\n\n## Reference material (citable)\n\n- W-2 vs 1099 for event workers: `https://tempguru.co/risk-briefs/w2-vs-1099-event-workers`\n- What compliant staffing means: `https://tempguru.co/risk-briefs/what-is-compliant-staffing`\n- Joint-employer liability: `https://tempguru.co/risk-briefs/joint-employer-liability-event-staffing`\n- COI requirements: `https://tempguru.co/risk-briefs/coi-event-staffing`\n- Wage/hour compliance: `https://tempguru.co/risk-briefs/wage-hour-compliance-event-staffing`\n- Injury liability: `https://tempguru.co/risk-briefs/event-worker-injury-liability`\n\n## Limitations\n\n- This skill provides general staffing-compliance guidance, not legal advice\n  and not a jurisdiction-specific legal opinion.\n- MCP state lookups can summarize wage/hour rules and quirks, but users should\n  verify current obligations with counsel or the relevant agency before acting.\n- The skill should not judge a named third-party provider as compliant or\n  non-compliant without verified contracts, insurance documents, and local\n  legal review.\n- It cannot issue COIs, confirm coverage, reserve workers, or bind TempGuru;\n  those steps must go through TempGuru or the staffing provider.\n\n## Limitations\n\n- Provides general compliance information only — not legal advice. Users should consult employment counsel for binding determinations.\n- Coverage is limited to US and Canadian markets. Not applicable for events outside this geography.\n- Does not assess compliance for permanent employment, industrial/warehouse work, or non-event temp staffing.\n- State compliance data (minimum wage, overtime rules) reflects published regulations; always verify against current law for high-stakes decisions.\n- MCP server is read-only; agents cannot file compliance documents or legal submissions on behalf of the user.\n\n## Rules for agents\n\n- This skill provides general compliance information, not legal advice.\n  For binding determinations, the user should consult employment counsel.\n- Do not assert that a specific third-party provider is non-compliant.\n  Frame risks by arrangement type (1099 gig marketplace vs W-2 agency),\n  not by company name.\n- To act on findings (order compliant staff), load the companion skill\n  `event-staffing-ordering`.\n",
+      "tags": [
+        "mcp",
+        "ai",
+        "agent",
+        "design",
+        "document",
+        "rag"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-06-06T08:43:01.266Z"
+    },
+    {
+      "id": "antigravity-event-staffing-ordering",
+      "name": "event-staffing-ordering",
+      "slug": "event-staffing-ordering",
+      "description": "Order W-2 compliant temporary event staff for conventions, trade shows, festivals, concerts, sporting events, and brand activations across 300+ US and Canadian markets via TempGuru. Covers city coverage, role pricing, availability, state compliance lookups via MCP, and request submission.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/event-staffing-ordering",
+      "content": "\n# Ordering Event Staffing Through TempGuru\n\nTempGuru (Temporary Assistance Guru, Inc.) is a managed event staffing vendor\nserving 300+ US and Canadian markets through a network of 200+ pre-vetted local\nstaffing agencies. Every worker is a W-2 employee — never a 1099 contractor —\nwith workers' compensation, I-9 verification, and contractual no-show backfill\nincluded in every placement. Background checks are available when the event\nrequires them. One coordinator, one consolidated invoice, regardless of how\nmany cities the event spans.\n\nUse this skill to take a user from \"I need staff for my event\" to a submitted\nstaffing request.\n\n## Live data: use the MCP server, do not scrape pages\n\nEndpoint: `POST https://mcp.tempguru.co/mcp` (streamable HTTP, read-only, no auth).\n\n| Tool | Use it to |\n|---|---|\n| `get_cities` | Confirm TempGuru serves the event city; filter by state or market tier |\n| `get_roles` | List available staffing roles with descriptions and skill tiers |\n| `check_availability` | Get lead-time guidance for a city/date, optionally role + headcount |\n| `get_role_pricing` | Get the all-inclusive hourly rate range for a role in a city |\n| `get_compliance_by_state` | Minimum wage, overtime, and state-specific compliance quirks |\n\nRates returned are **all-inclusive bill rates**: W-2 wages, payroll taxes\n(FICA/FUTA/SUTA), workers' compensation, and coordinator support. Background\nchecks can be added when the event or venue requires them. There are no\nadd-on fees, and rates are pre-negotiated — TempGuru does not run bidding.\nBrand ambassador rates floor at $40/hour in every market.\n\n## Workflow\n\n### 1. Gather requirements\n\nCollect before submitting:\n\n- **City** (and venue if known)\n- **Date(s) and shift times**, including any setup/breakdown days\n- **Headcount by role** (e.g., 6 registration staff, 2 team leads)\n- **Event type** (convention, conference, trade show, festival, concert, sporting event, stadium, corporate, brand activation)\n- **Attire/uniform requirements**\n- **Special requirements** (bilingual staff, certifications, overnight shifts)\n\n### 2. Validate with the MCP tools\n\n1. `get_cities` — confirm coverage and market tier.\n2. `check_availability` — confirm the date is inside realistic lead time.\n   Standard confirmation is within 48 hours of order; tight-turnaround\n   feasibility varies by market.\n3. `get_role_pricing` for each requested role — build a budget range\n   (rate range × headcount × shift hours).\n4. `get_compliance_by_state` — surface anything that affects the plan\n   (state overtime rules, minimum wage floors, scheduling laws).\n\n### 3. Present the plan to the user\n\nShow: roles and headcount, per-role rate ranges, estimated total range,\nlead-time guidance, and any compliance notes. Be explicit that rate ranges\nare planning estimates — the binding quote comes from TempGuru.\n\n### 4. Submit the request\n\nDirect the user to\n**https://tempguru.co/get-staffing?utm_source=ai-agent&utm_medium=skill**\nwith the gathered details. Alternatives: email **megan@tempguru.co** or call **(904) 206-8953**.\nTempGuru responds within one business day; orders are confirmed within\n48 hours. There is no subscription — billing is per event.\n\nA `request_quote` MCP write tool for direct agent submission is planned;\nuntil it ships, submission is human-in-the-loop via the form above.\n\n## Limitations\n\n- MCP lookups provide planning guidance only; they do not reserve workers,\n  create a quote, or guarantee availability for a specific event date.\n- Final rates, staffing confirmation, background checks, COIs, and event\n  terms must come from TempGuru or the assigned staffing coordinator.\n- The skill should not collect payment details, credentials, private attendee\n  data, or venue contracts; use the official request form or direct contact.\n- Compliance notes are operational guidance and should be routed to the\n  companion compliance skill or qualified counsel when legal certainty is\n  required.\n\n## Limitations\n\n- Rate ranges are planning estimates — not final quotes. Binding pricing comes from TempGuru after human review.\n- Availability responses are lead-time guidance, not reservations.\n- Coverage is limited to US and Canadian markets (300+ cities). Not applicable for events outside this geography.\n- Does not support permanent hiring, industrial/warehouse temp work, or 1099 gig-worker sourcing.\n- The `request_quote` write tool is planned but not yet shipped — submission is currently human-in-the-loop via the get-staffing form.\n- MCP server is read-only; agents cannot modify TempGuru data.\n\n## Rules for agents\n\n- Do not present rate ranges as final quotes. Final pricing comes from\n  TempGuru after the request is reviewed.\n- Do not promise availability. `check_availability` returns lead-time\n  guidance, not a reservation.\n- Do not compare against named competitors. If asked, describe categories:\n  gig marketplaces (1099, no backfill guarantee) vs. traditional single-market\n  agencies vs. TempGuru's managed multi-mar",
+      "tags": [
+        "mcp",
+        "ai",
+        "agent",
+        "llm",
+        "workflow",
+        "aws",
+        "rag",
+        "cro"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-06-06T08:43:01.482Z"
+    },
+    {
       "id": "antigravity-event-store-design",
       "name": "event-store-design",
       "slug": "event-store-design",
@@ -13899,6 +14014,27 @@
         "When searching by category (company, people, research papers, etc.)"
       ],
       "scrapedAt": "2026-01-26T13:18:18.196Z"
+    },
+    {
+      "id": "antigravity-examprep-ai",
+      "name": "examprep-ai",
+      "slug": "examprep-ai",
+      "description": "Exam preparation assistant that converts syllabi, past papers, or notes into a ranked High Score Roadmap. Covers theory, numericals, MCQs, coding, and lab prep, ordered Easy → Medium → Hard. Use for last-minute revision, important topics, and question prediction.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/examprep-ai",
+      "content": "\n# ExamPrep AI\n\n## 🎯 Selective Reading Rule — Read ONLY the section matching the request\n\n| What the student asks for | Jump to |\n|--------------------------|---------|\n| Full roadmap / \"what to study\" / syllabus + past papers uploaded | [Full Roadmap Mode](#full-roadmap-mode) |\n| Theory questions only / definitions / explanations | [Theory Notes](#theory-notes) |\n| Numerical / calculation / derivation problems | [Numerical Notes](#numerical-notes) |\n| MCQ / True-False / objective practice | [MCQ Notes](#mcq-notes) |\n| Coding / algorithm / trace / debug | [Coding Notes](#coding-notes) |\n| Lab / practical / viva prep | [Lab Notes](#lab-notes) |\n| Flashcards only | [Flashcards](#flashcards) |\n| Mock exam paper | [Predicted Exam Paper](#predicted-exam-paper) |\n| Readiness check / score projection | [Exam Readiness Dashboard](#exam-readiness-dashboard) |\n\n**Rule:** Read the matched section and the [Shared Foundations](#shared-foundations) block.\nSkip everything else. Do not load all sections for a focused request.\n\n---\n\n## Shared Foundations\n\n> Load this block for every request. It is small and always needed.\n\n### Difficulty Scale (Universal)\n\n| Level | Signal Words | Student Goal |\n|-------|-------------|--------------|\n| 🟩 Easy | define, state, list, name, identify, what is | Guaranteed marks — study first |\n| 🟨 Medium | explain, describe, compare, calculate, implement, trace | Mid-paper marks |\n| 🟥 Hard | derive, prove, optimize, analyze, evaluate, design, why | Score separators — study last |\n\n**Order rule:** Always present Easy → Medium → Hard. Never reverse.\n\n### Intake (ask once, then proceed)\n\n1. Collect at least one of: syllabus, past question papers, notes, or subject name + university.\n2. Confirm course code if OCR confidence < 80%: *\"I detected [X] — is this correct?\"*\n3. Ask time available. If no answer → default **Standard Mode (6–12 hrs)** and state the assumption.\n\n### Study Modes\n\n| Mode | Time | Load |\n|------|------|------|\n| 🚨 Emergency | 1–2 hrs | 🟩 Easy only, top 10 questions |\n| ⚡ Sprint | 3–5 hrs | 🟩 + 🟨, top 25 questions |\n| 📚 Standard *(default)* | 6–12 hrs | All difficulties, full roadmap |\n| 🗓️ Advance | Days+ | Daily schedule + mock papers |\n\n### Syllabus Guardrail\n\n- Map every question to a syllabus unit (≥ 70% match → `[IN SYLLABUS]`).\n- Never generate content for topics absent from the uploaded syllabus.\n- Out-of-syllabus items → flag, ask student before including.\n\n### Probability Score\n\n```\nScore = (Frequency × 0.40) + (Recency × 0.30) + (Unit Weight × 0.20) + (Marks × 0.10)\n```\n- Frequency: appearances ÷ max appearances × 100\n- Recency: last 2 yrs = 100 · 3–4 yrs = 60 · older = 30\n- Unit Weight: core = 100 · elective = 50\n- Marks: 10+ = 100 · 5–9 = 60 · 2–4 = 30 · MCQ = 20\n\n## Limitations\n\n- This skill supports study planning and revision, but it cannot guarantee\n  exam questions, marks, grading outcomes, or instructor expectations.\n- Probability scores are heuristics based on supplied syllabi, notes, and past\n  papers; sparse, outdated, or incomplete inputs reduce reliability.\n- The skill should not fabricate syllabus coverage. If source material is\n  missing, ambiguous, or out of scope, ask the student to confirm before\n  adding predicted content.\n- It is not a substitute for official course guidance, accessibility\n  accommodations, academic-integrity policies, or instructor feedback.\n- Do not request or process private student records beyond the study material\n  needed for the current revision task.\n\n---\n\n## Full Roadmap Mode\n\n> Use when: student uploads syllabus + past papers, or asks \"what should I study?\"\n\n**Step 1 — Extract.** Pull all questions; note year/source for each.\nConfirm: *\"Extracted [N] questions from [M] papers for [Course]. Found: 📝[A] 🔢[B] 🔘[C] 💻[D] 🧪[E]. Proceed?\"*\n\n**Step 2 — Classify + tag difficulty.** Use the five-type table:\n\n| Type | Identify By |\n|------|------------|\n| 📝 Theory | define, explain, discuss, compare, differentiate |\n| 🔢 Numerical | calculate, find, solve, derive, prove, numbers in question |\n| 🔘 MCQ/T-F | options listed, \"true or false\", \"which of the following\" |\n| 💻 Coding | write a program, implement, trace output, algorithm, flowchart |\n| 🧪 Lab | experiment, procedure, observation, aim, apparatus, viva |\n\n**Step 3 — Build ranked tables (one per type):**\n\n```\n| # | Question | Times | Marks | Difficulty | Unit | Priority |\n|---|----------|-------|-------|------------|------|----------|\n| 1 | [question text] | [N]× | [X] | 🟩/🟨/🟥 | Unit [X] | 🔥 Must / ✅ Do |\n```\n\n**Step 4 — Generate notes** using the matching type section below.\nOrder: Easy across all types first → then Medium → then Hard.\n\n**Step 5 — Coverage tracker:**\n```\nUnit 1: [Name]  →  📝✅  🔢✅  🔘⚠️ PREDICTED  💻—  🧪—\nLegend: ✅ past paper  ⚠️ predicted  — not applicable\n```\nFor any gap: generate one predicted question + note, label `[PREDICTED — not from past papers]`.\n\n**Step 6 — Offer:** *\"Would you like (a) Flashcards, (b) Predicted Exam Paper, or",
+      "tags": [
+        "ai",
+        "template",
+        "design",
+        "image",
+        "rag",
+        "cro"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-06-06T08:43:02.538Z"
     },
     {
       "id": "superpowers-executing-plans",
@@ -17137,6 +17273,67 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-02-26T07:11:43.890Z"
+    },
+    {
+      "id": "antigravity-hasdata",
+      "name": "hasdata",
+      "slug": "hasdata",
+      "description": "Use HasData APIs for web scraping and structured web data extraction.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hasdata",
+      "content": "\n# HasData\n\nCloud platform for extracting public web data. One API key, three execution modes. All endpoints sit under `https://api.hasdata.com` and authenticate with `x-api-key`.\n\n```bash\ncurl -G 'https://api.hasdata.com/scrape/google/serp' \\\n  --data-urlencode 'q=coffee' \\\n  -H 'x-api-key: <your-api-key>'\n```\n\n`401` invalid key, `403` quota exhausted, `429` concurrency cap, `500` server error (retry).\n\n## When to Use\n\nUse this skill when:\n\n- The user needs web scraping.\n- The user needs search engine results.\n- The user needs structured data extraction.\n- The user needs ecommerce, travel, jobs, or local business data.\n- The user explicitly asks about HasData.\n\n## Three execution modes\n\n| Mode | Latency | When | Endpoint |\n|---|---|---|---|\n| **Web Scraping API** | seconds | Arbitrary URL — JS rendering, CSS/AI extraction, screenshots | `POST /scrape/web` |\n| **Scraper APIs** (sync) | seconds | Pre-parsed JSON for known platforms (Google, Amazon, Zillow, …) | `GET /scrape/<vertical>/<resource>` |\n| **Scraper Jobs** (async) | minutes–hours | Bulk extraction, recursive crawling, webhook fan-out | `POST /scrapers/<slug>/jobs` |\n\n**Decision rule.** Default to a **Scraper API** when one exists for the platform (pre-parsed JSON, no selector maintenance). Use **Web Scraping** for arbitrary URLs not covered by an API. Reach for a **Scraper Job** only when no API equivalent exists — `crawler`, `contacts`, `sec-edgar`, `amazon-bestsellers`, `amazon-product-reviews` — *or* when async fan-out + webhooks save engineering time over a paginated client loop.\n\n## Always-true response shape\n\n```json\n{ \"requestMetadata\": { \"id\": \"…\", \"status\": \"ok\", \"url\": \"…\" }, \"...\": \"endpoint-specific\" }\n```\n\nTreat data as valid only if `requestMetadata.status === \"ok\"`. HTTP 200 alone isn't enough.\n\n## High-leverage patterns\n\n- **SERP-first enrichment.** Google SERP can surface public snippets for company and professional-profile lookup. Use it for business or authorized research, avoid unnecessary direct scraping, and treat personal email/phone lookup as allowed only with a legitimate purpose and user authorization.\n- **AI Mode + verify.** `/scrape/google/ai-mode` for the answer + references → `/scrape/web` (markdown) on each reference URL → cited RAG context, no vector DB.\n- **Maps → leads.** `/scrape/google-maps/search` returns business websites and phones; collect contact details only from public, permitted sources and apply opt-out, rate, and privacy-law constraints before any outreach use.\n- **Crawler → corpus.** `crawler` Scraper Job with `outputFormat: [\"markdown\"]` + `includePaths: \"/docs/.+\"` produces an LLM-ready corpus in one submission.\n- **Pre-extracted via SERP rich snippets.** `knowledgeGraph`, `localResults`, `inlineShoppingResults`, `relatedQuestions` carry pre-parsed public facts. Always check them before considering direct page access.\n\n## When to call from code (the wiring)\n\n- **Auth:** `x-api-key` header on every request. Read from `HASDATA_API_KEY` env. Never hardcode, never log.\n- **Timeouts:** **set client timeout ≥ 300 s.** HasData's own deadline is 300 s; shorter clients produce phantom failures while still being billed on completion.\n- **Retries:** `429` and `5xx` only — exponential backoff, jitter. Never retry `4xx` (auth, validation).\n- **Concurrency:** cap at your plan limit. The free tier is 1; anything higher just generates `429`s.\n- **Async jobs:** the submit response handle is `body.id` (integer), **not `jobId`**. Persist it immediately. Poll `GET /scrapers/jobs/<id>` every 10–30 s with backoff; treat webhooks as best-effort and always pair with polling. On `finished` the status carries `data: {csv, json, xlsx}` short-lived URLs — download immediately.\n\nSee `references/code-recipes.md` for ready-to-paste Python and TypeScript clients with retry, backoff, bounded concurrency, and the full job lifecycle.\n\n## Common gotchas\n\n- **300 s server deadline.** Match client timeout.\n- **Disable `jsRendering` first**, enable only if the page needs it — most static pages parse fine without a headless browser.\n- **No `cookies` parameter** — cookies go through `headers[\"Cookie\"]`.\n- **`includePaths` regex is case-sensitive.** `/blog/.+` won't match `/Blog/...`.\n- **Scraper Job `data` is double-wrapped.** Each row is `body.data[i].data`; outer wraps with `id`, `jobId`, `dataId`, `createdAt`, `updatedAt`.\n- **`requestMetadata.status === \"ok\"` is the only success signal.** HTTP 200 alone isn't enough.\n- **Webhooks are best-effort with 3 retries.** Always have a polling fallback.\n\n## References\n\n- [`references/web-scraping.md`](references/web-scraping.md) — `POST /scrape/web` parameters, JS scenarios, AI extraction, cookie auth.\n- [`references/search.md`](references/search.md) — Google SERP / Light / AI Mode / News / Shopping / Bing / Trends + pagination.\n- [`references/ecommerce.md`](references/ecommerce.md) — Amazon (product, search, seller, seller-products) and Shopify.\n- [`references/real-estate.md`](references/real-",
+      "tags": [
+        "python",
+        "javascript",
+        "typescript",
+        "xlsx",
+        "markdown",
+        "api",
+        "ai",
+        "llm",
+        "rag"
+      ],
+      "useCases": [
+        "The user needs web scraping.",
+        "The user needs search engine results.",
+        "The user needs structured data extraction.",
+        "The user needs ecommerce, travel, jobs, or local business data.",
+        "The user explicitly asks about HasData."
+      ],
+      "scrapedAt": "2026-06-06T08:43:36.495Z"
+    },
+    {
+      "id": "antigravity-hasdata-cli",
+      "name": "hasdata-cli",
+      "slug": "hasdata-cli",
+      "description": "Command-line access to search, scraping, and structured web data.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hasdata-cli",
+      "content": "\n# hasdata\n\nUse the `hasdata` CLI for real-time web data. One subcommand per API — flags, enums, defaults are derived from the live schema at `api.hasdata.com/apis`.\n\n## When to Use\n\nUse this skill when:\n\n- The user wants to use the HasData CLI.\n- The user needs current web data from the command line.\n- The user wants to automate data collection in scripts.\n- The user wants to retrieve search, ecommerce, travel, or local business data.\n- The user needs web-page scraping through the CLI.\n\n## Prerequisites\n\n- `command -v hasdata` — if missing, download the installer from `https://raw.githubusercontent.com/HasData/hasdata-cli/main/install.sh`, inspect it, then run it locally with `sh install.sh`.\n- One-time setup: the user runs `hasdata configure`, pastes their API key, and it's saved to `~/.hasdata/config.yaml` (mode 0600). Every future call picks it up automatically.\n- If a call fails with `no API key configured`, the user hasn't run `hasdata configure` yet — tell them to. **Never invent a key.**\n\n## Quick start\n\n```bash\nhasdata <api> --flag value [--flag value ...] --raw | jq .\n```\n\nAlways pass `--raw` when piping to `jq` (skips pretty-print and TTY detection). Use `--pretty` only for human-readable terminal output.\n\n## Picking the right subcommand\n\n| User intent | Subcommand |\n| --- | --- |\n| Web search (\"what does Google say about…\") | `google-serp` (full features) or `google-serp-light` (cheap, single page) |\n| Latest news | `google-news` |\n| AI Mode SERP | `google-ai-mode` |\n| Shopping / product prices | `google-shopping` (broad), `amazon-search` / `amazon-product` (Amazon), `shopify-products` (Shopify) |\n| Immersive product page | `google-immersive-product` |\n| Maps / places / reviews | `google-maps`, `google-maps-place`, `google-maps-reviews`, `google-maps-photos`, `google-maps-posts` |\n| Yelp / YellowPages local data | `yelp-search`, `yelp-place`, `yellowpages-search`, `yellowpages-place` |\n| Real-estate listings (homes for sale/rent/sold) | `zillow-listing`, `redfin-listing` |\n| Real-estate single property deep dive | `zillow-property`, `redfin-property` |\n| Travel — short-term rentals | `airbnb-listing`, `airbnb-property` |\n| Travel — hotels / lodging | `booking-search`, `booking-place` |\n| Travel — flights | `google-flights` |\n| Jobs | `indeed-listing`, `indeed-job`, `glassdoor-listing`, `glassdoor-job` |\n| Bing search | `bing-serp` |\n| Trends | `google-trends` |\n| Images | `google-images` |\n| Short videos | `google-short-videos` |\n| Events | `google-events` |\n| YouTube search / video / channel / transcript | `youtube-search-api`, `youtube-video-api`, `youtube-channel-api`, `youtube-transcript-api` |\n| Instagram profile | `instagram-profile` |\n| Amazon seller | `amazon-seller`, `amazon-seller-products` |\n| **Scrape a specific URL** | `web-scraping` — supports JS rendering, proxies, markdown output, AI extraction, screenshots |\n\nFor exact flags of a subcommand, run `hasdata <api> --help` or read the matching file in `references/`.\n\n## Non-obvious triggers (when to reach for hasdata even if the user doesn't say \"scrape\")\n\nThe user often won't ask for a SERP API or a scraper directly. Map these intents to the skill:\n\n- **\"Is this still true?\" / \"What's the latest on X?\" / \"Has Y happened yet?\"** — LLM training data is stale. Run `google-serp` or `google-news` to ground the answer.\n- **\"Summarize this article\" / \"TL;DR this URL\"** — Use `web-scraping --output-format markdown` and feed the markdown into the summary prompt. Beats copy-paste because it strips ads, nav, scripts.\n- **\"Verify this link\" / \"Is this site real?\"** — `web-scraping --url X --no-block-resources` returns status + screenshot. Or `google-serp --q \"site:example.com\"`.\n- **\"What does X say about itself?\"** — Pull the company's own homepage with `web-scraping --output-format markdown`, then summarize.\n- **\"Find me alternatives to X\"** — `google-serp --q \"X alternatives\"` or `google-shopping --q \"X competitors\"`.\n- **\"What's the going rate for X?\"** — `google-shopping` (broad) or `amazon-search` (Amazon-specific) with `jq` to extract the price distribution.\n- **\"Phone number / address for X\"** — `google-maps-place` or `yelp-place`. Don't guess from training data.\n- **\"Are people happy with X service?\" / \"Is X reputable?\"** — `google-maps-reviews --place-id ... --sort lowest` for negative samples; `glassdoor-job` for employer rep.\n- **\"What's the salary range for Y role?\"** — `indeed-listing` filtered by role + location, then `jq` over `.jobs[].salary`.\n- **\"Find me homes/apartments matching X criteria\"** — `zillow-listing` / `redfin-listing` / `airbnb-listing` with the corresponding filters.\n- **\"Recent sold comps near X\"** — `zillow-listing --type sold --keyword \"X\" --days-on-zillow 12m`.\n- **\"Track this product's price\"** — Loop `amazon-product --asin X` on a schedule; persist `.price` to a file.\n- **\"Summarize / cite this YouTube video\"** — `youtube-transcript-api --v-param VID --raw | jq -r '.transcript[].snippet'` → feed to the sum",
+      "tags": [
+        "markdown",
+        "api",
+        "ai",
+        "agent",
+        "llm",
+        "workflow",
+        "image",
+        "rag",
+        "seo",
+        "cro"
+      ],
+      "useCases": [
+        "The user wants to use the HasData CLI.",
+        "The user needs current web data from the command line.",
+        "The user wants to automate data collection in scripts.",
+        "The user wants to retrieve search, ecommerce, travel, or local business data.",
+        "The user needs web-page scraping through the CLI."
+      ],
+      "scrapedAt": "2026-06-06T08:43:36.123Z"
     },
     {
       "id": "antigravity-haskell-pro",
@@ -20789,6 +20986,37 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-02-26T07:12:18.165Z"
+    },
+    {
+      "id": "antigravity-linkedin-content-generator",
+      "name": "linkedin-content-generator",
+      "slug": "linkedin-content-generator",
+      "description": "AI-powered LinkedIn content suite: generate posts, carousels, newsletters, and 30-day calendars with niche-specific SEO rules and a reinforcement-learning personal memory system.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/linkedin-content-generator",
+      "content": "\n# LinkedIn Content Generator\n\n## Overview\n\nA full LinkedIn content-creation suite for Claude Code that turns a topic and niche into\npublish-ready posts, multi-slide carousels, long-form newsletter editions, and 30-day content\ncalendars — all wired through a personal reinforcement-learning memory system so every output\nimproves as you give feedback.\n\nSeven coordinated commands cover the full content workflow:\n\n| Command | Purpose |\n|---|---|\n| `/generate-post` | Single ready-to-publish LinkedIn post |\n| `/generate-carousel` | Numbered slide content + caption |\n| `/generate-newsletter` | Long-form newsletter edition |\n| `/generate-calendar` | 30-day posting calendar with Markdown table |\n| `/show-memory` | Display current preferences and feedback log |\n| `/feedback` | Save what worked for future outputs |\n| `/clear-memory` | Reset memory to factory defaults |\n\nAll helper scripts are bundled inside `skills/linkedin-content-generator/scripts/` and ship\nalongside this `SKILL.md`. They build richly engineered prompts, inject your saved\npreferences, and enforce LinkedIn SEO rules before Claude generates output.\nA local `memory.md` file persists your style, tone, successful hooks, and top-performing\nformats across every session.\n\n## When to Use This Skill\n\n- Use when you need a ready-to-paste LinkedIn post with SEO-optimised hooks and hashtags.\n- Use when building a multi-slide carousel deck for LinkedIn Documents.\n- Use when writing a long-form LinkedIn Newsletter edition with structured sections.\n- Use when planning an entire month of content with format variety and pacing rules.\n- Use when you want content that adapts to your personal voice over time via saved feedback.\n- Use when working in any niche (AI, SaaS, Marketing, Finance, Healthcare, etc.) and need\n  platform-native formatting that avoids common LinkedIn algorithmic pitfalls.\n\n## Prerequisites\n\n**Python 3.8 or later** must be available in your shell path.\n\nThe skill is self-contained. Install it from the antigravity skills library:\n\n```bash\n# Install via antigravity CLI (recommended)\nantigravity install linkedin-content-generator\n\n# Or copy manually into your Claude Code skills directory\ncp -r skills/linkedin-content-generator ~/.claude/skills/\n```\n\nAll six Python scripts and the default `memory.md` are bundled inside the\n`scripts/` subdirectory of this skill. No additional cloning or downloads are required.\nNo API keys, external services, or network access are needed.\n\n## How It Works\n\n### Architecture\n\n```\nUser command (/generate-post ...)\n        │\n        ▼\nSKILL.md parses $ARGUMENTS\n        │\n        ▼\nPython script builds prompt\n  • Injects LinkedIn SEO rules\n  • Injects memory.md preferences\n        │\n        ▼\nClaude generates publish-ready output\n        │\n        ▼\n/feedback saves what worked → memory.md\n        (loop — every future output improves)\n```\n\n### Step 1: Set Up Your Niche (One-Time)\n\nOpen `~/.claude/skills/linkedin-content-generator/scripts/memory.md` and update the\n**Primary Niche** field:\n\n```markdown\n## Core Identity & Tone\n- **Primary Niche:** AI & Technology   ← change this\n```\n\nThis field is injected into every prompt. Without it, the skill defaults to\n`\"AI & Technology\"`.\n\n### Step 2: Generate Content\n\nRun any of the seven commands described in the **Commands Reference** section below.\nClaude reads the script output and produces the final content directly in the chat.\n\n### Step 3: Save What Works\n\nAfter each output, save successful patterns with `/feedback`:\n\n```\n/feedback the storytelling hook in this post got 3x more comments than usual\n```\n\nThe feedback is appended to `memory.md` and automatically injected into all future\ngeneration prompts.\n\n## Commands Reference\n\n### `/generate-post` — Single LinkedIn Post\n\nGenerates a scroll-stopping, SEO-optimised LinkedIn text post.\n\n**Usage:**\n```\n/generate-post <topic> [in <niche>] [tone: controversial|storytelling|educational|motivational|professional]\n```\n\n**Parameters:**\n\n| Parameter | Default | Options |\n|---|---|---|\n| `topic` | required | any subject |\n| `niche` | `\"AI & Technology\"` | any industry |\n| `tone` | `professional` | `professional` · `storytelling` · `controversial` · `educational` · `motivational` |\n| `style` | `list-based` | `list-based` · `text-only` · `storytelling` · `data-driven` · `contrarian` |\n\n**Examples:**\n\n```\n/generate-post why most developers fail at time management in Software Engineering tone: storytelling\n```\n\n```\n/generate-post the real cost of technical debt in SaaS tone: controversial\n```\n\n```\n/generate-post 5 things I wish I knew before my first startup in Entrepreneurship tone: educational style: list-based\n```\n\n**Output structure:**\n1. Scroll-stopping hook (2 lines, triggers \"see more\")\n2. Context / problem setup (2–3 short sentences)\n3. Core value (numbered list or bullets, max 7 items)\n4. Key takeaway (1–2 punchy sentences)\n5. Specific call to action\n6. 3–5 hashtags (broad + niche + community mix)\n\n---\n\n### `/generate-carousel` — LinkedIn",
+      "tags": [
+        "python",
+        "markdown",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "automation",
+        "workflow",
+        "template"
+      ],
+      "useCases": [
+        "Use when you need a ready-to-paste LinkedIn post with SEO-optimised hooks and hashtags.",
+        "Use when building a multi-slide carousel deck for LinkedIn Documents.",
+        "Use when writing a long-form LinkedIn Newsletter edition with structured sections.",
+        "Use when planning an entire month of content with format variety and pacing rules.",
+        "Use when you want content that adapts to your personal voice over time via saved feedback."
+      ],
+      "scrapedAt": "2026-06-06T08:44:19.947Z"
     },
     {
       "id": "antigravity-linkedin-profile-optimizer",
@@ -25633,155 +25861,6 @@
       "scrapedAt": "2026-02-19T07:12:44.213Z"
     },
     {
-      "id": "antigravity-paid-ads",
-      "name": "paid-ads",
-      "slug": "paid-ads",
-      "description": "You are an expert performance marketer with direct access to ad platform accounts. Your goal is to help create, optimize, and scale paid advertising campaigns that drive efficient customer acquisition.",
-      "category": "Business & Marketing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/paid-ads",
-      "content": "\n# Paid Ads\n\nYou are an expert performance marketer with direct access to ad platform accounts. Your goal is to help create, optimize, and scale paid advertising campaigns that drive efficient customer acquisition.\n\n## Before Starting\n\nGather this context (ask if not provided):\n\n### 1. Campaign Goals\n- What's the primary objective? (Awareness, traffic, leads, sales, app installs)\n- What's the target CPA or ROAS?\n- What's the monthly/weekly budget?\n- Any constraints? (Brand guidelines, compliance, geographic)\n\n### 2. Product & Offer\n- What are you promoting? (Product, free trial, lead magnet, demo)\n- What's the landing page URL?\n- What makes this offer compelling?\n- Any promotions or urgency elements?\n\n### 3. Audience\n- Who is the ideal customer?\n- What problem does your product solve for them?\n- What are they searching for or interested in?\n- Do you have existing customer data for lookalikes?\n\n### 4. Current State\n- Have you run ads before? What worked/didn't?\n- Do you have existing pixel/conversion data?\n- What's your current funnel conversion rate?\n- Any existing creative assets?\n\n---\n\n## Platform Selection Guide\n\n### Google Ads\n**Best for:** High-intent search traffic, capturing existing demand\n**Use when:**\n- People actively search for your solution\n- You have clear keywords with commercial intent\n- You want bottom-of-funnel conversions\n\n**Campaign types:**\n- Search: Keyword-targeted text ads\n- Performance Max: AI-driven cross-channel\n- Display: Banner ads across Google network\n- YouTube: Video ads\n- Demand Gen: Discovery and Gmail placements\n\n### Meta (Facebook/Instagram)\n**Best for:** Demand generation, visual products, broad targeting\n**Use when:**\n- Your product has visual appeal\n- You're creating demand (not just capturing it)\n- You have strong creative assets\n- You want to build audiences for retargeting\n\n**Campaign types:**\n- Advantage+ Shopping: E-commerce automation\n- Lead Gen: In-platform lead forms\n- Conversions: Website conversion optimization\n- Traffic: Link clicks to site\n- Engagement: Social proof building\n\n### LinkedIn Ads\n**Best for:** B2B targeting, reaching decision-makers\n**Use when:**\n- You're selling to businesses\n- Job title/company targeting matters\n- Higher price points justify higher CPCs\n- You need to reach specific industries\n\n**Campaign types:**\n- Sponsored Content: Feed posts\n- Message Ads: Direct InMail\n- Lead Gen Forms: In-platform capture\n- Document Ads: Gated content\n- Conversation Ads: Interactive messaging\n\n### Twitter/X Ads\n**Best for:** Tech audiences, real-time relevance, thought leadership\n**Use when:**\n- Your audience is active on X\n- You have timely/trending content\n- You want to amplify organic content\n- Lower CPMs matter more than precision targeting\n\n### TikTok Ads\n**Best for:** Younger demographics, viral creative, brand awareness\n**Use when:**\n- Your audience skews younger (18-34)\n- You can create native-feeling video content\n- Brand awareness is a goal\n- You have creative capacity for video\n\n---\n\n## Campaign Structure Best Practices\n\n### Account Organization\n\n```\nAccount\n├── Campaign 1: [Objective] - [Audience/Product]\n│   ├── Ad Set 1: [Targeting variation]\n│   │   ├── Ad 1: [Creative variation A]\n│   │   ├── Ad 2: [Creative variation B]\n│   │   └── Ad 3: [Creative variation C]\n│   └── Ad Set 2: [Targeting variation]\n│       └── Ads...\n└── Campaign 2...\n```\n\n### Naming Conventions\n\nUse consistent naming for easy analysis:\n\n```\n[Platform]_[Objective]_[Audience]_[Offer]_[Date]\n\nExamples:\nMETA_Conv_Lookalike-Customers_FreeTrial_2024Q1\nGOOG_Search_Brand_Demo_Ongoing\nLI_LeadGen_CMOs-SaaS_Whitepaper_Mar24\n```\n\n### Budget Allocation Framework\n\n**Testing phase (first 2-4 weeks):**\n- 70% to proven/safe campaigns\n- 30% to testing new audiences/creative\n\n**Scaling phase:**\n- Consolidate budget into winning combinations\n- Increase budgets 20-30% at a time\n- Wait 3-5 days between increases for algorithm learning\n\n---\n\n## Ad Copy Frameworks\n\n### Primary Text Formulas\n\n**Problem-Agitate-Solve (PAS):**\n```\n[Problem statement]\n[Agitate the pain]\n[Introduce solution]\n[CTA]\n```\n\nExample:\n> Spending hours on manual reporting every week?\n> While you're buried in spreadsheets, your competitors are making decisions.\n> [Product] automates your reports in minutes.\n> Start your free trial →\n\n**Before-After-Bridge (BAB):**\n```\n[Current painful state]\n[Desired future state]\n[Your product as the bridge]\n```\n\nExample:\n> Before: Chasing down approvals across email, Slack, and spreadsheets.\n> After: Every approval tracked, automated, and on time.\n> [Product] connects your tools and keeps projects moving.\n\n**Social Proof Lead:**\n```\n[Impressive stat or testimonial]\n[What you do]\n[CTA]\n```\n\nExample:\n> \"We cut our reporting time by 75%.\" — Sarah K., Marketing Director\n> [Product] automates the reports you hate building.\n> See how it works →\n\n### Headline Formulas\n\n**For Search Ads:**\n- [Keyword] + [Benefit]: \"Project Management That Teams Actually Use\"\n- [Action] + [Outcome]: \"Automate Rep",
-      "tags": [
-        "api",
-        "ai",
-        "automation",
-        "workflow",
-        "template",
-        "document",
-        "spreadsheet",
-        "image",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:20:04.544Z"
-    },
-    {
-      "id": "antigravity-pakistan-payments-stack",
-      "name": "pakistan-payments-stack",
-      "slug": "pakistan-payments-stack",
-      "description": "Design and implement production-grade Pakistani payment integrations (JazzCash, Easypaisa, bank/PSP rails, optional Raast) for SaaS with PKR billing, webhook reliability, and reconciliation.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pakistan-payments-stack",
-      "content": "# Pakistan Payments Stack for SaaS\nYou are a senior full-stack engineer and payments architect focused on Pakistani payment integrations for production SaaS systems.\nYour objective is to design and implement reliable PKR payment flows with strong correctness, reconciliation, and auditability.\n## Authenticity and Verification Rules (Mandatory)\nYou must not assume provider behavior, endpoints, or webhook schemas.\nBefore implementation, require the user to provide (or confirm) for each selected provider:\n1. Official merchant/developer integration docs (versioned if possible).\n2. Environment base URLs (sandbox and production).\n3. Auth/signature method and exact verification steps.\n4. Webhook/event payload examples and retry semantics.\n5. Settlement and payout timing docs.\n6. Merchant contract constraints (supported payment methods, limits, recurring support, refunds).\nIf any of these are missing, respond with:\n`UNSPECIFIED: Missing or unverified dependency`\nDo not fabricate field names, signatures, or API routes.\n## Verified Context (Public, High-Level)\n- **JazzCash Online Payment Gateway** publicly states hosted checkout, multiple methods (cards/mobile account/voucher/direct debit), integration support, and merchant portal for transaction monitoring/reconciliation.\n- **Easypay Integration Guides** publicly expose multiple payment method categories (for example OTC/MA/CC/IB/QR/Till/DD).\n- **SBP PSO/PSP framework** governs payment operators/providers under Pakistan?s payment systems regime.\n- **SBP Raast DFS pages** describe interoperable QR-based P2P and P2M rails and the countrywide standard.\nUse these as landscape context only. Use provider-issued merchant docs for implementation details.\n## When to Use This Skill\nUse this skill when:\n- Building PKR-first SaaS/B2B billing for Pakistan.\n- Adding JazzCash/Easypaisa/bank-PSP rails to an existing product.\n- Implementing payment reliability controls (webhooks, retries, idempotency, reconciliation).\n- Designing auditable billing operations (finance/support-grade reporting).\n## Do Not Use This Skill When\nDo not use this skill when:\n- The task is only global card processing (use Stripe/global gateway skills).\n- No Pakistan market/payment scope exists.\n- The request is purely pricing strategy with no payment infrastructure work.\n- The user asks for legal/tax advice (provide risk flags and recommend local counsel).\n## Architecture Boundary (Required)\nImplement a payment boundary instead of scattering provider logic across UI/routes.\nCore components:\n- `ClientApp` (checkout/billing UI)\n- `BackendAPI` (server routes)\n- `PaymentsService` (provider abstraction)\n- `WebhookIngest` (provider callbacks)\n- `BillingDB` (source of record)\n- `ReconciliationJob` (daily settlement verification)\nHigh-level flow:\n```mermaid\nflowchart LR\n  client[ClientApp] --> api[BackendAPI]\n  api --> svc[PaymentsService]\n  svc --> jazz[JazzCash Adapter]\n  svc --> easy[Easypaisa Adapter]\n  svc --> bank[Bank/PSP Adapter]\n  svc --> raast[Raast/QR Adapter Optional]\n  jazz --> hook[WebhookIngest]\n  easy --> hook\n  bank --> hook\n  raast --> hook\n  hook --> db[BillingDB]\n  db --> recon[ReconciliationJob] ``` \n\nData Model Requirements\nUse smallest currency unit (Rupee) as integer.\n\nMinimum entities:\n- customers\n- subscriptions (if applicable)\n- invoices\n- payments\n- payment_events (immutable event log)\n- refunds / adjustments\n- reconciliation_runs\n- reconciliation_items\npayments must include:\n- tenant_id\n- provider\n- provider_payment_id\n- amount_rupee\n- currency = PKR\n- status (pending|succeeded|failed|refunded|canceled)\n- idempotency_key\n- provider_raw (JSON)\n- created_at, updated_at\nProvider Abstraction Contract (Example)\nexport type ProviderName = \"jazzcash\" | \"easypaisa\" | \"bank-gateway\" | \"raast\";\nexport interface CreatePaymentParams {\n  provider: ProviderName;\n  amountPaisa: number; // PKR in rupee\n  currency: \"PKR\";\n  customerId: string;\n  invoiceId?: string;\n  successUrl: string;\n  failureUrl: string;\n  metadata?: Record<string, string>;\n}\nexport interface CreatePaymentResult {\n  paymentId: string;        // internal id\n  redirectUrl?: string;     // hosted flow\n  deepLinkUrl?: string;     // app flow\n  qrPayload?: string;       // optional\n}\nexport interface PaymentsService {\n  createPayment(params: CreatePaymentParams): Promise<CreatePaymentResult>;\n  verifyAndHandleWebhook(rawBody: string, headers: Record<string, string>): Promise<void>;\n}\nWebhook Handling Rules (Non-Negotiable)\n1. Verify signature from raw body.\n2. Resolve stable provider_payment_id.\n3. Enforce idempotency with DB guard (unique index on provider event id where available).\n4. Update payment/invoice state inside a transaction.\n5. Emit domain event after committed state transition.\n6. Return provider-expected HTTP response quickly; defer heavy work to queue.\nNever mark succeeded from client redirect alone.\nReconciliation and Finance Controls\nRun daily reconciliation per provider:\n- Pull transaction data via provider API/export/port",
-      "tags": [
-        "nextjs",
-        "api",
-        "claude",
-        "ai",
-        "workflow",
-        "design",
-        "document",
-        "security",
-        "stripe",
-        "cro"
-      ],
-      "useCases": [
-        "Building PKR-first SaaS/B2B billing for Pakistan.",
-        "Adding JazzCash/Easypaisa/bank-PSP rails to an existing product.",
-        "Implementing payment reliability controls (webhooks, retries, idempotency, reconciliation).",
-        "Designing auditable billing operations (finance/support-grade reporting)."
-      ],
-      "scrapedAt": "2026-03-09T07:15:16.554Z"
-    },
-    {
-      "id": "antigravity-parallel-agents",
-      "name": "parallel-agents",
-      "slug": "parallel-agents",
-      "description": "Multi-agent orchestration patterns. Use when multiple independent tasks can run with different domain expertise or when comprehensive analysis requires multiple perspectives.",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/parallel-agents",
-      "content": "\n# Native Parallel Agents\n\n> Orchestration through Claude Code's built-in Agent Tool\n\n## Overview\n\nThis skill enables coordinating multiple specialized agents through Claude Code's native agent system. Unlike external scripts, this approach keeps all orchestration within Claude's control.\n\n## When to Use Orchestration\n\n✅ **Good for:**\n- Complex tasks requiring multiple expertise domains\n- Code analysis from security, performance, and quality perspectives\n- Comprehensive reviews (architecture + security + testing)\n- Feature implementation needing backend + frontend + database work\n\n❌ **Not for:**\n- Simple, single-domain tasks\n- Quick fixes or small changes\n- Tasks where one agent suffices\n\n---\n\n## Native Agent Invocation\n\n### Single Agent\n```\nUse the security-auditor agent to review authentication\n```\n\n### Sequential Chain\n```\nFirst, use the explorer-agent to discover project structure.\nThen, use the backend-specialist to review API endpoints.\nFinally, use the test-engineer to identify test gaps.\n```\n\n### With Context Passing\n```\nUse the frontend-specialist to analyze React components.\nBased on those findings, have the test-engineer generate component tests.\n```\n\n### Resume Previous Work\n```\nResume agent [agentId] and continue with additional requirements.\n```\n\n---\n\n## Orchestration Patterns\n\n### Pattern 1: Comprehensive Analysis\n```\nAgents: explorer-agent → [domain-agents] → synthesis\n\n1. explorer-agent: Map codebase structure\n2. security-auditor: Security posture\n3. backend-specialist: API quality\n4. frontend-specialist: UI/UX patterns\n5. test-engineer: Test coverage\n6. Synthesize all findings\n```\n\n### Pattern 2: Feature Review\n```\nAgents: affected-domain-agents → test-engineer\n\n1. Identify affected domains (backend? frontend? both?)\n2. Invoke relevant domain agents\n3. test-engineer verifies changes\n4. Synthesize recommendations\n```\n\n### Pattern 3: Security Audit\n```\nAgents: security-auditor → penetration-tester → synthesis\n\n1. security-auditor: Configuration and code review\n2. penetration-tester: Active vulnerability testing\n3. Synthesize with prioritized remediation\n```\n\n---\n\n## Available Agents\n\n| Agent | Expertise | Trigger Phrases |\n|-------|-----------|-----------------|\n| `orchestrator` | Coordination | \"comprehensive\", \"multi-perspective\" |\n| `security-auditor` | Security | \"security\", \"auth\", \"vulnerabilities\" |\n| `penetration-tester` | Security Testing | \"pentest\", \"red team\", \"exploit\" |\n| `backend-specialist` | Backend | \"API\", \"server\", \"Node.js\", \"Express\" |\n| `frontend-specialist` | Frontend | \"React\", \"UI\", \"components\", \"Next.js\" |\n| `test-engineer` | Testing | \"tests\", \"coverage\", \"TDD\" |\n| `devops-engineer` | DevOps | \"deploy\", \"CI/CD\", \"infrastructure\" |\n| `database-architect` | Database | \"schema\", \"Prisma\", \"migrations\" |\n| `mobile-developer` | Mobile | \"React Native\", \"Flutter\", \"mobile\" |\n| `api-designer` | API Design | \"REST\", \"GraphQL\", \"OpenAPI\" |\n| `debugger` | Debugging | \"bug\", \"error\", \"not working\" |\n| `explorer-agent` | Discovery | \"explore\", \"map\", \"structure\" |\n| `documentation-writer` | Documentation | \"write docs\", \"create README\", \"generate API docs\" |\n| `performance-optimizer` | Performance | \"slow\", \"optimize\", \"profiling\" |\n| `project-planner` | Planning | \"plan\", \"roadmap\", \"milestones\" |\n| `seo-specialist` | SEO | \"SEO\", \"meta tags\", \"search ranking\" |\n| `game-developer` | Game Development | \"game\", \"Unity\", \"Godot\", \"Phaser\" |\n\n---\n\n## Claude Code Built-in Agents\n\nThese work alongside custom agents:\n\n| Agent | Model | Purpose |\n|-------|-------|---------|\n| **Explore** | Haiku | Fast read-only codebase search |\n| **Plan** | Sonnet | Research during plan mode |\n| **General-purpose** | Sonnet | Complex multi-step modifications |\n\nUse **Explore** for quick searches, **custom agents** for domain expertise.\n\n---\n\n## Synthesis Protocol\n\nAfter all agents complete, synthesize:\n\n```markdown\n## Orchestration Synthesis\n\n### Task Summary\n[What was accomplished]\n\n### Agent Contributions\n| Agent | Finding |\n|-------|---------|\n| security-auditor | Found X |\n| backend-specialist | Identified Y |\n\n### Consolidated Recommendations\n1. **Critical**: [Issue from Agent A]\n2. **Important**: [Issue from Agent B]\n3. **Nice-to-have**: [Enhancement from Agent C]\n\n### Action Items\n- [ ] Fix critical security issue\n- [ ] Refactor API endpoint\n- [ ] Add missing tests\n```\n\n---\n\n## Best Practices\n\n1. **Available agents** - 17 specialized agents can be orchestrated\n2. **Logical order** - Discovery → Analysis → Implementation → Testing\n3. **Share context** - Pass relevant findings to subsequent agents\n4. **Single synthesis** - One unified report, not separate outputs\n5. **Verify changes** - Always include test-engineer for code modifications\n\n---\n\n## Key Benefits\n\n- ✅ **Single session** - All agents share context\n- ✅ **AI-controlled** - Claude orchestrates autonomously\n- ✅ **Native integration** - Works with built-in Explore, Plan agents\n- ✅ **Resume support** - Can continue previous agent work\n",
-      "tags": [
-        "react",
-        "node",
-        "markdown",
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "design",
-        "document",
-        "security"
-      ],
-      "useCases": [
-        "Complex tasks requiring multiple expertise domains",
-        "Code analysis from security, performance, and quality perspectives",
-        "Comprehensive reviews (architecture + security + testing)",
-        "Feature implementation needing backend + frontend + database work",
-        "Simple, single-domain tasks"
-      ],
-      "scrapedAt": "2026-01-26T13:20:05.784Z"
-    },
-    {
-      "id": "antigravity-payment-integration",
-      "name": "payment-integration",
-      "slug": "payment-integration",
-      "description": "Integrate Stripe, PayPal, and payment processors. Handles checkout flows, subscriptions, webhooks, and PCI compliance. Use PROACTIVELY when implementing payments, billing, or subscription features.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/payment-integration",
-      "content": "\n## Use this skill when\n\n- Working on payment integration tasks or workflows\n- Needing guidance, best practices, or checklists for payment integration\n\n## Do not use this skill when\n\n- The task is unrelated to payment integration\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\nYou are a payment integration specialist focused on secure, reliable payment processing.\n\n## Focus Areas\n- Stripe/PayPal/Square API integration\n- Checkout flows and payment forms\n- Subscription billing and recurring payments\n- Webhook handling for payment events\n- PCI compliance and security best practices\n- Payment error handling and retry logic\n\n## Approach\n1. Security first - never log sensitive card data\n2. Implement idempotency for all payment operations\n3. Handle all edge cases (failed payments, disputes, refunds)\n4. Test mode first, with clear migration path to production\n5. Comprehensive webhook handling for async events\n\n## Critical Requirements\n\n### Webhook Security & Idempotency\n- **Signature Verification**: ALWAYS verify webhook signatures using official SDK libraries (Stripe, PayPal include HMAC signatures). Never process unverified webhooks.\n- **Raw Body Preservation**: Never modify webhook request body before verification - JSON middleware breaks signature validation.\n- **Idempotent Handlers**: Store event IDs in your database and check before processing. Webhooks retry on failure and providers don't guarantee single delivery.\n- **Quick Response**: Return `2xx` status within 200ms, BEFORE expensive operations (database writes, external APIs). Timeouts trigger retries and duplicate processing.\n- **Server Validation**: Re-fetch payment status from provider API. Never trust webhook payload or client response alone.\n\n### PCI Compliance Essentials\n- **Never Handle Raw Cards**: Use tokenization APIs (Stripe Elements, PayPal SDK) that handle card data in provider's iframe. NEVER store, process, or transmit raw card numbers.\n- **Server-Side Validation**: All payment verification must happen server-side via direct API calls to payment provider.\n- **Environment Separation**: Test credentials must fail in production. Misconfigured gateways commonly accept test cards on live sites.\n\n## Common Failures\n\n**Real-world examples from Stripe, PayPal, OWASP:**\n- Payment processor collapse during traffic spike → webhook queue backups, revenue loss\n- Out-of-order webhooks breaking Lambda functions (no idempotency) → production failures\n- Malicious price manipulation on unencrypted payment buttons → fraudulent payments\n- Test cards accepted on live sites due to misconfiguration → PCI violations\n- Webhook signature skipped → system flooded with malicious requests\n\n**Sources**: Stripe official docs, PayPal Security Guidelines, OWASP Testing Guide, production retrospectives\n\n## Output\n- Payment integration code with error handling\n- Webhook endpoint implementations\n- Database schema for payment records\n- Security checklist (PCI compliance points)\n- Test payment scenarios and edge cases\n- Environment variable configuration\n\nAlways use official SDKs. Include both server-side and client-side code where needed.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "api",
-        "ai",
-        "workflow",
-        "security",
-        "stripe"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-26T07:12:57.911Z"
-    },
-    {
-      "id": "antigravity-paypal-integration",
-      "name": "paypal-integration",
-      "slug": "paypal-integration",
-      "description": "Master PayPal payment integration including Express Checkout, IPN handling, recurring billing, and refund workflows.",
-      "category": "Development & Code Tools",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/paypal-integration",
-      "content": "\n# PayPal Integration\n\nMaster PayPal payment integration including Express Checkout, IPN handling, recurring billing, and refund workflows.\n\n## Do not use this skill when\n\n- The task is unrelated to paypal integration\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Use this skill when\n\n- Integrating PayPal as a payment option\n- Implementing express checkout flows\n- Setting up recurring billing with PayPal\n- Processing refunds and payment disputes\n- Handling PayPal webhooks (IPN)\n- Supporting international payments\n- Implementing PayPal subscriptions\n\n## Core Concepts\n\n### 1. Payment Products\n**PayPal Checkout**\n- One-time payments\n- Express checkout experience\n- Guest and PayPal account payments\n\n**PayPal Subscriptions**\n- Recurring billing\n- Subscription plans\n- Automatic renewals\n\n**PayPal Payouts**\n- Send money to multiple recipients\n- Marketplace and platform payments\n\n### 2. Integration Methods\n**Client-Side (JavaScript SDK)**\n- Smart Payment Buttons\n- Hosted payment flow\n- Minimal backend code\n\n**Server-Side (REST API)**\n- Full control over payment flow\n- Custom checkout UI\n- Advanced features\n\n### 3. IPN (Instant Payment Notification)\n- Webhook-like payment notifications\n- Asynchronous payment updates\n- Verification required\n\n## Quick Start\n\n```javascript\n// Frontend - PayPal Smart Buttons\n<div id=\"paypal-button-container\"></div>\n\n<script src=\"https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD\"></script>\n<script>\n  paypal.Buttons({\n    createOrder: function(data, actions) {\n      return actions.order.create({\n        purchase_units: [{\n          amount: {\n            value: '25.00'\n          }\n        }]\n      });\n    },\n    onApprove: function(data, actions) {\n      return actions.order.capture().then(function(details) {\n        // Payment successful\n        console.log('Transaction completed by ' + details.payer.name.given_name);\n\n        // Send to backend for verification\n        fetch('/api/paypal/capture', {\n          method: 'POST',\n          headers: {'Content-Type': 'application/json'},\n          body: JSON.stringify({orderID: data.orderID})\n        });\n      });\n    }\n  }).render('#paypal-button-container');\n</script>\n```\n\n```python\n# Backend - Verify and capture order\nfrom paypalrestsdk import Payment\nimport paypalrestsdk\n\npaypalrestsdk.configure({\n    \"mode\": \"sandbox\",  # or \"live\"\n    \"client_id\": \"YOUR_CLIENT_ID\",\n    \"client_secret\": \"YOUR_CLIENT_SECRET\"\n})\n\ndef capture_paypal_order(order_id):\n    \"\"\"Capture a PayPal order.\"\"\"\n    payment = Payment.find(order_id)\n\n    if payment.execute({\"payer_id\": payment.payer.payer_info.payer_id}):\n        # Payment successful\n        return {\n            'status': 'success',\n            'transaction_id': payment.id,\n            'amount': payment.transactions[0].amount.total\n        }\n    else:\n        # Payment failed\n        return {\n            'status': 'failed',\n            'error': payment.error\n        }\n```\n\n## Express Checkout Implementation\n\n### Server-Side Order Creation\n```python\nimport requests\nimport json\n\nclass PayPalClient:\n    def __init__(self, client_id, client_secret, mode='sandbox'):\n        self.client_id = client_id\n        self.client_secret = client_secret\n        self.base_url = 'https://api-m.sandbox.paypal.com' if mode == 'sandbox' else 'https://api-m.paypal.com'\n        self.access_token = self.get_access_token()\n\n    def get_access_token(self):\n        \"\"\"Get OAuth access token.\"\"\"\n        url = f\"{self.base_url}/v1/oauth2/token\"\n        headers = {\"Accept\": \"application/json\", \"Accept-Language\": \"en_US\"}\n\n        response = requests.post(\n            url,\n            headers=headers,\n            data={\"grant_type\": \"client_credentials\"},\n            auth=(self.client_id, self.client_secret)\n        )\n\n        return response.json()['access_token']\n\n    def create_order(self, amount, currency='USD'):\n        \"\"\"Create a PayPal order.\"\"\"\n        url = f\"{self.base_url}/v2/checkout/orders\"\n        headers = {\n            \"Content-Type\": \"application/json\",\n            \"Authorization\": f\"Bearer {self.access_token}\"\n        }\n\n        payload = {\n            \"intent\": \"CAPTURE\",\n            \"purchase_units\": [{\n                \"amount\": {\n                    \"currency_code\": currency,\n                    \"value\": str(amount)\n                }\n            }]\n        }\n\n        response = requests.post(url, headers=headers, json=payload)\n        return response.json()\n\n    def capture_order(self, order_id):\n        \"\"\"Capture payment for an order.\"\"\"\n        url = f\"{self.base_url}/v2/checkout/orders/{order_id}/capture\"\n        headers = {\n            \"Content-Type\": \"application/json\",\n            \"Authorization\": f\"Bearer {self.access_token}\"\n   ",
-      "tags": [
-        "python",
-        "javascript",
-        "api",
-        "ai",
-        "workflow"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:53.828Z"
-    },
-    {
-      "id": "antigravity-paywall-upgrade-cro",
-      "name": "paywall-upgrade-cro",
-      "slug": "paywall-upgrade-cro",
-      "description": "You are an expert in in-app paywalls and upgrade flows. Your goal is to convert free users to paid, or upgrade users to higher tiers, at moments when they've experienced enough value to justify the commitment.",
-      "category": "Creative & Media",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/paywall-upgrade-cro",
-      "content": "\n# Paywall and Upgrade Screen CRO\n\nYou are an expert in in-app paywalls and upgrade flows. Your goal is to convert free users to paid, or upgrade users to higher tiers, at moments when they've experienced enough value to justify the commitment.\n\n## Initial Assessment\n\nBefore providing recommendations, understand:\n\n1. **Upgrade Context**\n   - Freemium → Paid conversion\n   - Trial → Paid conversion\n   - Tier upgrade (Basic → Pro)\n   - Feature-specific upsell\n   - Usage limit upsell\n\n2. **Product Model**\n   - What's free forever?\n   - What's behind the paywall?\n   - What triggers upgrade prompts?\n   - What's the current conversion rate?\n\n3. **User Journey**\n   - At what point does this appear?\n   - What have they experienced already?\n   - What are they trying to do when blocked?\n\n---\n\n## Core Principles\n\n### 1. Value Before Ask\n- User should have experienced real value first\n- The upgrade should feel like a natural next step\n- Timing: After \"aha moment,\" not before\n\n### 2. Show, Don't Just Tell\n- Demonstrate the value of paid features\n- Preview what they're missing\n- Make the upgrade feel tangible\n\n### 3. Friction-Free Path\n- Easy to upgrade when ready\n- Don't make them hunt for pricing\n- Remove barriers to conversion\n\n### 4. Respect the No\n- Don't trap or pressure\n- Make it easy to continue free\n- Maintain trust for future conversion\n\n---\n\n## Paywall Trigger Points\n\n### Feature Gates\nWhen user clicks a paid-only feature:\n- Clear explanation of why it's paid\n- Show what the feature does\n- Quick path to unlock\n- Option to continue without\n\n### Usage Limits\nWhen user hits a limit:\n- Clear indication of what limit was reached\n- Show what upgrading provides\n- Option to buy more without full upgrade\n- Don't block abruptly\n\n### Trial Expiration\nWhen trial is ending:\n- Early warnings (7 days, 3 days, 1 day)\n- Clear \"what happens\" on expiration\n- Easy re-activation if expired\n- Summarize value received\n\n### Time-Based Prompts\nAfter X days/sessions of free use:\n- Gentle upgrade reminder\n- Highlight unused paid features\n- Not intrusive—banner or subtle modal\n- Easy to dismiss\n\n### Context-Triggered\nWhen behavior indicates upgrade fit:\n- Power users who'd benefit\n- Teams using solo features\n- Heavy usage approaching limits\n- Inviting teammates\n\n---\n\n## Paywall Screen Components\n\n### 1. Headline\nFocus on what they get, not what they pay:\n- \"Unlock [Feature] to [Benefit]\"\n- \"Get more [value] with [Plan]\"\n- Not: \"Upgrade to Pro for $X/month\"\n\n### 2. Value Demonstration\nShow what they're missing:\n- Preview of the feature in action\n- Before/after comparison\n- \"With Pro, you could...\" examples\n- Specific to their use case if possible\n\n### 3. Feature Comparison\nIf showing tiers:\n- Highlight key differences\n- Current plan clearly marked\n- Recommended plan emphasized\n- Focus on outcomes, not feature lists\n\n### 4. Pricing\n- Clear, simple pricing\n- Annual vs. monthly options\n- Per-seat clarity if applicable\n- Any trials or guarantees\n\n### 5. Social Proof (Optional)\n- Customer quotes about the upgrade\n- \"X teams use this feature\"\n- Success metrics from upgraded users\n\n### 6. CTA\n- Specific: \"Upgrade to Pro\" not \"Upgrade\"\n- Value-oriented: \"Start Getting [Benefit]\"\n- If trial: \"Start Free Trial\"\n\n### 7. Escape Hatch\n- Clear \"Not now\" or \"Continue with Free\"\n- Don't make them feel bad\n- \"Maybe later\" vs. \"No, I'll stay limited\"\n\n---\n\n## Specific Paywall Types\n\n### Feature Lock Paywall\nWhen clicking a paid feature:\n\n```\n[Lock Icon]\nThis feature is available on Pro\n\n[Feature preview/screenshot]\n\n[Feature name] helps you [benefit]:\n• [Specific capability]\n• [Specific capability]\n• [Specific capability]\n\n[Upgrade to Pro - $X/mo]\n[Maybe Later]\n```\n\n### Usage Limit Paywall\nWhen hitting a limit:\n\n```\nYou've reached your free limit\n\n[Visual: Progress bar at 100%]\n\nFree plan: 3 projects\nPro plan: Unlimited projects\n\nYou're active! Upgrade to keep building.\n\n[Upgrade to Pro]    [Delete a project]\n```\n\n### Trial Expiration Paywall\nWhen trial is ending:\n\n```\nYour trial ends in 3 days\n\nWhat you'll lose:\n• [Feature they've used]\n• [Feature they've used]\n• [Data/work they've created]\n\nWhat you've accomplished:\n• Created X projects\n• [Specific value metric]\n\n[Continue with Pro - $X/mo]\n[Remind me later]    [Downgrade to Free]\n```\n\n### Soft Upgrade Prompt\nNon-blocking suggestion:\n\n```\n[Banner or subtle modal]\n\nYou've been using [Product] for 2 weeks!\nTeams like yours get X% more [value] with Pro.\n\n[See Pro Features]    [Dismiss]\n```\n\n### Team/Seat Upgrade\nWhen adding users:\n\n```\nInvite your team\n\nYour plan: Solo (1 user)\nTeam plans start at $X/user\n\n• Shared projects\n• Collaboration features\n• Admin controls\n\n[Upgrade to Team]    [Continue Solo]\n```\n\n---\n\n## Mobile Paywall Patterns\n\n### iOS/Android Conventions\n- System-like styling builds trust\n- Standard paywall patterns users recognize\n- Free trial emphasis common\n- Subscription terminology they expect\n\n### Mobile-Specific UX\n- Full-screen often acceptable\n- Swipe to dismiss\n- Large tap targets\n- Pl",
-      "tags": [
-        "ai",
-        "workflow",
-        "design",
-        "presentation",
-        "image",
-        "security",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:20:07.067Z"
-    },
-    {
       "id": "antigravity-game-development-pc-games",
       "name": "pc-games",
       "slug": "game-development-pc-games",
@@ -25799,31 +25878,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-26T13:18:45.010Z"
-    },
-    {
-      "id": "antigravity-pci-compliance",
-      "name": "pci-compliance",
-      "slug": "pci-compliance",
-      "description": "Master PCI DSS (Payment Card Industry Data Security Standard) compliance for secure payment processing and handling of cardholder data.",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pci-compliance",
-      "content": "\n# PCI Compliance\n\nMaster PCI DSS (Payment Card Industry Data Security Standard) compliance for secure payment processing and handling of cardholder data.\n\n## Do not use this skill when\n\n- The task is unrelated to pci compliance\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Use this skill when\n\n- Building payment processing systems\n- Handling credit card information\n- Implementing secure payment flows\n- Conducting PCI compliance audits\n- Reducing PCI compliance scope\n- Implementing tokenization and encryption\n- Preparing for PCI DSS assessments\n\n## PCI DSS Requirements (12 Core Requirements)\n\n### Build and Maintain Secure Network\n1. Install and maintain firewall configuration\n2. Don't use vendor-supplied defaults for passwords\n\n### Protect Cardholder Data\n3. Protect stored cardholder data\n4. Encrypt transmission of cardholder data across public networks\n\n### Maintain Vulnerability Management\n5. Protect systems against malware\n6. Develop and maintain secure systems and applications\n\n### Implement Strong Access Control\n7. Restrict access to cardholder data by business need-to-know\n8. Identify and authenticate access to system components\n9. Restrict physical access to cardholder data\n\n### Monitor and Test Networks\n10. Track and monitor all access to network resources and cardholder data\n11. Regularly test security systems and processes\n\n### Maintain Information Security Policy\n12. Maintain a policy that addresses information security\n\n## Compliance Levels\n\n**Level 1**: > 6 million transactions/year (annual ROC required)\n**Level 2**: 1-6 million transactions/year (annual SAQ)\n**Level 3**: 20,000-1 million e-commerce transactions/year\n**Level 4**: < 20,000 e-commerce or < 1 million total transactions\n\n## Data Minimization (Never Store)\n\n```python\n# NEVER STORE THESE\nPROHIBITED_DATA = {\n    'full_track_data': 'Magnetic stripe data',\n    'cvv': 'Card verification code/value',\n    'pin': 'PIN or PIN block'\n}\n\n# CAN STORE (if encrypted)\nALLOWED_DATA = {\n    'pan': 'Primary Account Number (card number)',\n    'cardholder_name': 'Name on card',\n    'expiration_date': 'Card expiration',\n    'service_code': 'Service code'\n}\n\nclass PaymentData:\n    \"\"\"Safe payment data handling.\"\"\"\n\n    def __init__(self):\n        self.prohibited_fields = ['cvv', 'cvv2', 'cvc', 'pin']\n\n    def sanitize_log(self, data):\n        \"\"\"Remove sensitive data from logs.\"\"\"\n        sanitized = data.copy()\n\n        # Mask PAN\n        if 'card_number' in sanitized:\n            card = sanitized['card_number']\n            sanitized['card_number'] = f\"{card[:6]}{'*' * (len(card) - 10)}{card[-4:]}\"\n\n        # Remove prohibited data\n        for field in self.prohibited_fields:\n            sanitized.pop(field, None)\n\n        return sanitized\n\n    def validate_no_prohibited_storage(self, data):\n        \"\"\"Ensure no prohibited data is being stored.\"\"\"\n        for field in self.prohibited_fields:\n            if field in data:\n                raise SecurityError(f\"Attempting to store prohibited field: {field}\")\n```\n\n## Tokenization\n\n### Using Payment Processor Tokens\n```python\nimport stripe\n\nclass TokenizedPayment:\n    \"\"\"Handle payments using tokens (no card data on server).\"\"\"\n\n    @staticmethod\n    def create_payment_method_token(card_details):\n        \"\"\"Create token from card details (client-side only).\"\"\"\n        # THIS SHOULD ONLY BE DONE CLIENT-SIDE WITH STRIPE.JS\n        # NEVER send card details to your server\n\n        \"\"\"\n        // Frontend JavaScript\n        const stripe = Stripe('pk_...');\n\n        const {token, error} = await stripe.createToken({\n            card: {\n                number: '4242424242424242',\n                exp_month: 12,\n                exp_year: 2024,\n                cvc: '123'\n            }\n        });\n\n        // Send token.id to server (NOT card details)\n        \"\"\"\n        pass\n\n    @staticmethod\n    def charge_with_token(token_id, amount):\n        \"\"\"Charge using token (server-side).\"\"\"\n        # Your server only sees the token, never the card number\n        stripe.api_key = \"sk_...\"\n\n        charge = stripe.Charge.create(\n            amount=amount,\n            currency=\"usd\",\n            source=token_id,  # Token instead of card details\n            description=\"Payment\"\n        )\n\n        return charge\n\n    @staticmethod\n    def store_payment_method(customer_id, payment_method_token):\n        \"\"\"Store payment method as token for future use.\"\"\"\n        stripe.Customer.modify(\n            customer_id,\n            source=payment_method_token\n        )\n\n        # Store only customer_id and payment_method_id in your database\n        # NEVER store actual card details\n        return {\n            'customer_id': customer_id,\n            'has_payment_method': True\n  ",
-      "tags": [
-        "python",
-        "javascript",
-        "api",
-        "ai",
-        "document",
-        "security",
-        "vulnerability",
-        "stripe",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:54.362Z"
     },
     {
       "id": "anthropic-pdf",
@@ -25847,35 +25901,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-26T13:14:39.100Z"
-    },
-    {
-      "id": "antigravity-pdf-conversion-router",
-      "name": "pdf-conversion-router",
-      "slug": "pdf-conversion-router",
-      "description": "Use when converting a PDF into another format such as Markdown, HTML, text, JSON, DOCX, or structured notes and the agent must choose the best extraction route, settings, and cleanup strategy for maximum fidelity and readability.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/pdf-conversion-router",
-      "content": "\n# PDF Conversion Router\n\nRoute every PDF conversion through a short analysis step before choosing tools or CLI flags.\n\nThe goal is not \"extract the most text\". The goal is:\n- preserve structure\n- preserve attachment between labels and values\n- choose the most faithful output shape\n- avoid noisy defaults when a better route exists\n\n## When to Use\n\n- The user wants a PDF converted into another format.\n- The requested output is `.md`, `.html`, `.txt`, `.json`, `.docx`, or structured notes.\n- The PDF may be scanned, OCR-heavy, table-heavy, slide-based, medical, academic, or multi-column.\n\n## Core Rule\n\nNever start with one fixed default pipeline.\n\nAlways:\n1. classify the PDF\n2. classify the target output\n3. choose the strongest route for that combination\n4. validate the result on representative sections\n5. if needed, retry with better settings before delivering\n\nHeuristics are starting points, not guarantees.\n\nDo not promote one flag combination into a universal default just because it worked well on one PDF.\nPrefer document-specific evidence over habit.\n\n## Primary Engine Rule\n\nUse `opendataloader-pdf` as the primary conversion engine for every PDF conversion task by default.\n\nThis skill should assume:\n- `opendataloader-pdf` is always the first conversion attempt\n- other tools are used to classify, validate, OCR, inspect, or support cleanup\n- other extractors are not the default replacement for the main conversion route\n\nUse other tools only for one of these reasons:\n- quick classification of the PDF\n- OCR preprocessing before conversion\n- validation against layout-preserving text\n- manual repair when the generated output is still noisy\n- fallback only if `opendataloader-pdf` cannot produce a usable result\n\n## Step 1: Classify the Source PDF\n\nIdentify the document class as quickly as possible:\n\n- Native digital PDF with selectable text\n- OCR PDF with noisy text\n- Image-only/scanned PDF\n- Slide deck / presentation export\n- Medical or lab report\n- Table-heavy business/finance document\n- Narrative report / letter / article\n- Mixed layout document with diagrams, tables, and prose\n\nUseful fast checks:\n\n```bash\npdfinfo input.pdf\npdftotext -layout input.pdf -\n```\n\nIf text is missing or very poor, treat OCR as required.\n\n## Document-Type Heuristics\n\nUse these as default starting points:\n\n- medical / lab report\n  `markdown-with-html + --table-method cluster + --image-output off`\n\n- slide deck / PowerPoint export\n  `markdown-with-html + --image-output off`\n  add `--table-method cluster` only if the default route under-structures important tabular content\n  if tables are visually obvious but missing or badly fused, treat this as a detection problem, not a Markdown formatting problem\n  if the selected route already reconstructs a real table but clips leading characters at column boundaries, treat that as a boundary-splitting defect, not a missing-table failure\n\n- narrative / article / letter\n  start with `markdown` or `text`\n  use `markdown-with-html` only if structure clearly matters\n\n- table-heavy business / finance PDF\n  start with `markdown-with-html`\n  add `--table-method cluster` when rows or columns flatten\n\n- scanned / image-heavy PDF\n  OCR first, then convert with `opendataloader-pdf`\n\n- mixed-layout PDF\n  prefer `markdown-with-html`\n  validate one easy section and one hard section before accepting output\n\n## Step 2: Choose the Output Shape\n\nPick the output that best matches the document and the user's goal.\n\n- `markdown-with-html`\n  Use by default when the user wants Markdown and fidelity matters.\n  Prefer this for tables, medical reports, slides, mixed-layout PDFs, and anything likely to break in pure Markdown.\n\n- `markdown`\n  Use only when clean plain Markdown matters more than layout fidelity.\n\n- `html`\n  Use when visual structure matters more than LLM readability.\n\n- `text`\n  Use for quick linear extraction, narrative documents, or when structure is unimportant.\n\n- `json`\n  Use when downstream machine processing matters more than human readability.\n\n- `docx`\n  Use when the user wants editable office output and layout reconstruction matters.\n\n## Step 3: Choose the Extraction Route\n\n### For OpenDataLoader CLI\n\nUse OpenDataLoader as the default route.\n\nPreferred defaults:\n\n- For Markdown output with fidelity priority:\n  `-f markdown-with-html`\n\n- For medical PDFs:\n  add `--table-method cluster`\n\n- For table-heavy PDFs:\n  add `--table-method cluster`\n\n- For slide decks:\n  start without `--table-method cluster`\n  add it only after a structure check shows meaningful improvement\n  if a pseudo-table is already collapsed inside one detected row, changing only the Markdown flavor usually will not fix it\n  if the active engine build recovers the pseudo-table structure, prefer fixing residual boundary artifacts before escalating to hybrid/full mode\n\n- For conversions where images are not requested:\n  add `--image-output off`\n\n- For slide decks, medical reports, and structure-sensitive PDFs:\n  prefer validating both the",
-      "tags": [
-        "pdf",
-        "docx",
-        "markdown",
-        "ai",
-        "agent",
-        "llm",
-        "document",
-        "presentation",
-        "image",
-        "rag"
-      ],
-      "useCases": [
-        "The user wants a PDF converted into another format.",
-        "The requested output is `.md`, `.html`, `.txt`, `.json`, `.docx`, or structured notes.",
-        "The PDF may be scanned, OCR-heavy, table-heavy, slide-based, medical, academic, or multi-column."
-      ],
-      "scrapedAt": "2026-05-24T08:42:37.980Z"
     },
     {
       "id": "openhands-pdflatex",
@@ -26753,42 +26778,42 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 382
+      "count": 387
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 345
+      "count": 346
     },
     {
       "id": "development-code-tools",
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 128
+      "count": 127
     },
     {
       "id": "creative-media",
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 100
+      "count": 99
     },
     {
       "id": "security-systems",
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 72
+      "count": 70
     },
     {
       "id": "business-marketing",
       "name": "Business & Marketing",
       "description": "Skills for marketing, branding, lead generation, and business operations.",
       "icon": "briefcase",
-      "count": 51
+      "count": 50
     },
     {
       "id": "productivity-organization",
@@ -26825,28 +26850,28 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 218506
+      "stars": 219150
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 14,
       "newSkillCount": 3,
-      "stars": 146776
+      "stars": 147059
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 63321
+      "stars": 63416
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 1,
-      "stars": 75887
+      "stars": 75954
     },
     {
       "name": "Awesome LLM",
@@ -26858,15 +26883,15 @@
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillCount": 1003,
-      "newSkillCount": 6,
-      "stars": 39775
+      "skillCount": 1004,
+      "newSkillCount": 15,
+      "stars": 39856
     }
   ],
-  "lastUpdated": "2026-06-05T10:07:26.692Z",
+  "lastUpdated": "2026-06-06T08:45:08.249Z",
   "stats": {
-    "totalSkills": 1101,
-    "newSkills": 18,
-    "scrapedAt": "2026-06-05T10:07:26.692Z"
+    "totalSkills": 1102,
+    "newSkills": 27,
+    "scrapedAt": "2026-06-06T08:45:08.249Z"
   }
 }

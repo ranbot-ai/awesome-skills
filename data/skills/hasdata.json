@@ -1,0 +1,30 @@
+{
+  "id": "antigravity-hasdata",
+  "name": "hasdata",
+  "slug": "hasdata",
+  "description": "Use HasData APIs for web scraping and structured web data extraction.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hasdata",
+  "content": "\n# HasData\n\nCloud platform for extracting public web data. One API key, three execution modes. All endpoints sit under `https://api.hasdata.com` and authenticate with `x-api-key`.\n\n```bash\ncurl -G 'https://api.hasdata.com/scrape/google/serp' \\\n  --data-urlencode 'q=coffee' \\\n  -H 'x-api-key: <your-api-key>'\n```\n\n`401` invalid key, `403` quota exhausted, `429` concurrency cap, `500` server error (retry).\n\n## When to Use\n\nUse this skill when:\n\n- The user needs web scraping.\n- The user needs search engine results.\n- The user needs structured data extraction.\n- The user needs ecommerce, travel, jobs, or local business data.\n- The user explicitly asks about HasData.\n\n## Three execution modes\n\n| Mode | Latency | When | Endpoint |\n|---|---|---|---|\n| **Web Scraping API** | seconds | Arbitrary URL — JS rendering, CSS/AI extraction, screenshots | `POST /scrape/web` |\n| **Scraper APIs** (sync) | seconds | Pre-parsed JSON for known platforms (Google, Amazon, Zillow, …) | `GET /scrape/<vertical>/<resource>` |\n| **Scraper Jobs** (async) | minutes–hours | Bulk extraction, recursive crawling, webhook fan-out | `POST /scrapers/<slug>/jobs` |\n\n**Decision rule.** Default to a **Scraper API** when one exists for the platform (pre-parsed JSON, no selector maintenance). Use **Web Scraping** for arbitrary URLs not covered by an API. Reach for a **Scraper Job** only when no API equivalent exists — `crawler`, `contacts`, `sec-edgar`, `amazon-bestsellers`, `amazon-product-reviews` — *or* when async fan-out + webhooks save engineering time over a paginated client loop.\n\n## Always-true response shape\n\n```json\n{ \"requestMetadata\": { \"id\": \"…\", \"status\": \"ok\", \"url\": \"…\" }, \"...\": \"endpoint-specific\" }\n```\n\nTreat data as valid only if `requestMetadata.status === \"ok\"`. HTTP 200 alone isn't enough.\n\n## High-leverage patterns\n\n- **SERP-first enrichment.** Google SERP can surface public snippets for company and professional-profile lookup. Use it for business or authorized research, avoid unnecessary direct scraping, and treat personal email/phone lookup as allowed only with a legitimate purpose and user authorization.\n- **AI Mode + verify.** `/scrape/google/ai-mode` for the answer + references → `/scrape/web` (markdown) on each reference URL → cited RAG context, no vector DB.\n- **Maps → leads.** `/scrape/google-maps/search` returns business websites and phones; collect contact details only from public, permitted sources and apply opt-out, rate, and privacy-law constraints before any outreach use.\n- **Crawler → corpus.** `crawler` Scraper Job with `outputFormat: [\"markdown\"]` + `includePaths: \"/docs/.+\"` produces an LLM-ready corpus in one submission.\n- **Pre-extracted via SERP rich snippets.** `knowledgeGraph`, `localResults`, `inlineShoppingResults`, `relatedQuestions` carry pre-parsed public facts. Always check them before considering direct page access.\n\n## When to call from code (the wiring)\n\n- **Auth:** `x-api-key` header on every request. Read from `HASDATA_API_KEY` env. Never hardcode, never log.\n- **Timeouts:** **set client timeout ≥ 300 s.** HasData's own deadline is 300 s; shorter clients produce phantom failures while still being billed on completion.\n- **Retries:** `429` and `5xx` only — exponential backoff, jitter. Never retry `4xx` (auth, validation).\n- **Concurrency:** cap at your plan limit. The free tier is 1; anything higher just generates `429`s.\n- **Async jobs:** the submit response handle is `body.id` (integer), **not `jobId`**. Persist it immediately. Poll `GET /scrapers/jobs/<id>` every 10–30 s with backoff; treat webhooks as best-effort and always pair with polling. On `finished` the status carries `data: {csv, json, xlsx}` short-lived URLs — download immediately.\n\nSee `references/code-recipes.md` for ready-to-paste Python and TypeScript clients with retry, backoff, bounded concurrency, and the full job lifecycle.\n\n## Common gotchas\n\n- **300 s server deadline.** Match client timeout.\n- **Disable `jsRendering` first**, enable only if the page needs it — most static pages parse fine without a headless browser.\n- **No `cookies` parameter** — cookies go through `headers[\"Cookie\"]`.\n- **`includePaths` regex is case-sensitive.** `/blog/.+` won't match `/Blog/...`.\n- **Scraper Job `data` is double-wrapped.** Each row is `body.data[i].data`; outer wraps with `id`, `jobId`, `dataId`, `createdAt`, `updatedAt`.\n- **`requestMetadata.status === \"ok\"` is the only success signal.** HTTP 200 alone isn't enough.\n- **Webhooks are best-effort with 3 retries.** Always have a polling fallback.\n\n## References\n\n- [`references/web-scraping.md`](references/web-scraping.md) — `POST /scrape/web` parameters, JS scenarios, AI extraction, cookie auth.\n- [`references/search.md`](references/search.md) — Google SERP / Light / AI Mode / News / Shopping / Bing / Trends + pagination.\n- [`references/ecommerce.md`](references/ecommerce.md) — Amazon (product, search, seller, seller-products) and Shopify.\n- [`references/real-estate.md`](references/real-",
+  "tags": [
+    "python",
+    "javascript",
+    "typescript",
+    "xlsx",
+    "markdown",
+    "api",
+    "ai",
+    "llm",
+    "rag"
+  ],
+  "useCases": [
+    "The user needs web scraping.",
+    "The user needs search engine results.",
+    "The user needs structured data extraction.",
+    "The user needs ecommerce, travel, jobs, or local business data.",
+    "The user explicitly asks about HasData."
+  ],
+  "scrapedAt": "2026-06-06T08:43:36.495Z"
+}
