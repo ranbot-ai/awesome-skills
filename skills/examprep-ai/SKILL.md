@@ -10,6 +10,14 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/exam
 
 # ExamPrep AI
 
+## When to Use
+
+Use this skill when you need to:
+- Convert a syllabus, past papers, or study notes into a prioritized roadmap.
+- Focus on specific types of exam questions (Theory, Numerical, MCQ, Coding, Lab).
+- Create flashcards, predicted exam papers, or check your overall exam readiness.
+- Perform last-minute revision or deep-dive into important exam topics.
+
 ## 🎯 Selective Reading Rule — Read ONLY the section matching the request
 
 | What the student asks for | Jump to |
@@ -116,13 +124,4 @@ Confirm: *"Extracted [N] questions from [M] papers for [Course]. Found: 📝[A] 
 ```
 
 **Step 4 — Generate notes** using the matching type section below.
-Order: Easy across all types first → then Medium → then Hard.
-
-**Step 5 — Coverage tracker:**
-```
-Unit 1: [Name]  →  📝✅  🔢✅  🔘⚠️ PREDICTED  💻—  🧪—
-Legend: ✅ past paper  ⚠️ predicted  — not applicable
-```
-For any gap: generate one predicted question + note, label `[PREDICTED — not from past papers]`.
-
-**Step 6 — Offer:** *"Would you like (a) Flashcards, (b) Predicted Exam Paper, or
+Order: Easy across all 

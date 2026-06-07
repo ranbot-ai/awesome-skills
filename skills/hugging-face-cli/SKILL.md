@@ -9,7 +9,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugg
 
 
 Install by downloading the installer script first, reviewing it, and then running it locally. Example:
-`curl -LsSf https://hf.co/cli/install.sh -o /tmp/hf-install.sh && less /tmp/hf-install.sh && bash /tmp/hf-install.sh`
+`tmpdir="$(mktemp -d)" && trap 'rm -rf "$tmpdir"' EXIT && curl -LsSf https://hf.co/cli/install.sh -o "$tmpdir/hf-install.sh" && less "$tmpdir/hf-install.sh" && bash "$tmpdir/hf-install.sh"`
 
 ## When to Use
 Use this skill when you need the `hf` CLI for Hub authentication, downloads, uploads, repo management, or basic compute operations.
@@ -64,8 +64,4 @@ Generated with `huggingface_hub v1.8.0`. Run `hf skills add --force` to regenera
 - `hf collections info COLLECTION_SLUG` — Get info about a collection on the Hub. Output is in JSON format.
 - `hf collections list` — List collections on the Hub. `[--owner TEXT --item TEXT --sort CHOICE --limit INTEGER --format CHOICE --quiet]`
 - `hf collections update COLLECTION_SLUG` — Update a collection's metadata on the Hub. `[--title TEXT --description TEXT --position INTEGER --private --theme TEXT]`
-- `hf collections update-item COLLECTION_SLUG ITEM_OBJECT_ID` — Update an item in a collection. `[--note TEXT --position INTEGER]`
-
-### `hf datasets` — Interact with datasets on the Hub.
-
-- `hf 
+- `hf collections update-item COLLECTION_SLUG ITEM_OBJECT_ID` — Update an item in a collection. `[--note TEXT --position I
