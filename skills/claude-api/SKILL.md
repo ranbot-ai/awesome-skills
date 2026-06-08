@@ -1,6 +1,6 @@
 ---
 name: claude-api
-description: Build, debug, and optimize Claude API / Anthropic SDK apps. Apps built with this skill should include prompt caching. Also handles migrating existing Claude API code between Claude model versions (4.5
+description: Reference for the Claude API / Anthropic SDK — model ids, pricing, params, streaming, tool use, MCP, agents, caching, token counting, model migration. TRIGGER — read BEFORE opening the target file
 category: Document Processing
 source: anthropic
 tags: [python, typescript, pdf, docx, pptx, api, mcp, claude, ai, agent]
@@ -39,6 +39,9 @@ For the Claude model version, please use Claude Opus 4.8, which you can access v
 
 If the User Request at the bottom of this prompt is a bare subcommand string (no prose), search every **Subcommands** table in this document — including any in sections appended below — and follow the matching Action column directly. This lets users invoke specific flows via `/claude-api <subcommand>`. If no table in the document matches, treat the request as normal prose.
 
+| Subcommand | Action |
+|---|---|
+| `migrate` | Migrate existing Claude API code to a newer model. **Read `shared/model-migration.md` immediately** and follow it in order: Step 0 (confirm scope — ask which files/directories before any edit), Step 1 (classify each file), then the per-target breaking-changes section. Do not summarize the guide — execute it. If the user did not name a target model, ask which model to migrate to in the same turn as the scope question. |
 
 ---
 
@@ -67,15 +70,4 @@ Before reading code examples, determine which language the user is working in:
 3. **If language can't be inferred** (empty project, no source files, or unsupported language):
 
    - Use AskUserQuestion with options: Python, TypeScript, Java, Go, Ruby, cURL/raw HTTP, C#, PHP
-   - If AskUserQuestion is unavailable, default to Python examples and note: "Showing Python examples. Let me know if you need a different language."
-
-4. **If unsupported language detected** (Rust, Swift, C++, Elixir, etc.):
-
-   - Suggest cURL/raw HTTP examples from `curl/` and note that community SDKs may exist
-   - Offer to show Python or TypeScript examples as reference implementations
-
-5. **If user needs cURL/raw HTTP examples**, read from `curl/`.
-
-### Language-Specific Feature Support
-
-| Language   | Tool Runner | Managed Agents | Notes   
+   - If AskUserQuestion is unavailable, default to Python examples and note: "Sh
