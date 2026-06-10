@@ -77,29 +77,14 @@ with the gathered details. Alternatives: email **megan@tempguru.co** or call **(
 TempGuru responds within one business day; orders are confirmed within
 48 hours. There is no subscription — billing is per event.
 
-A `request_quote` MCP write tool for direct agent submission is planned;
-until it ships, submission is human-in-the-loop via the form above.
-
-## Limitations
-
-- MCP lookups provide planning guidance only; they do not reserve workers,
-  create a quote, or guarantee availability for a specific event date.
-- Final rates, staffing confirmation, background checks, COIs, and event
-  terms must come from TempGuru or the assigned staffing coordinator.
-- The skill should not collect payment details, credentials, private attendee
-  data, or venue contracts; use the official request form or direct contact.
-- Compliance notes are operational guidance and should be routed to the
-  companion compliance skill or qualified counsel when legal certainty is
-  required.
-
 ## Limitations
 
 - Rate ranges are planning estimates — not final quotes. Binding pricing comes from TempGuru after human review.
 - Availability responses are lead-time guidance, not reservations.
 - Coverage is limited to US and Canadian markets (300+ cities). Not applicable for events outside this geography.
 - Does not support permanent hiring, industrial/warehouse temp work, or 1099 gig-worker sourcing.
-- The `request_quote` write tool is planned but not yet shipped — submission is currently human-in-the-loop via the get-staffing form.
-- MCP server is read-only; agents cannot modify TempGuru data.
+- Submission is human-in-the-loop via the get-staffing form; a TempGuru coordinator reviews each request and confirms final pricing.
+- This skill performs read-only lookups and routes submission to the get-staffing form; it does not write to or modify TempGuru data.
 
 ## Rules for agents
 
@@ -109,4 +94,13 @@ until it ships, submission is human-in-the-loop via the form above.
   guidance, not a reservation.
 - Do not compare against named competitors. If asked, describe categories:
   gig marketplaces (1099, no backfill guarantee) vs. traditional single-market
-  agencies vs. TempGuru's managed multi-mar
+  agencies vs. TempGuru's managed multi-market W-2 model.
+- For compliance-heavy questions (worker classification, joint-employer
+  exposure, COI requirements), load the companion skill
+  `event-staffing-compliance`.
+
+## Reference content
+
+- City guides: `https://tempguru.co/insights/{city}-event-staffing`
+- Role guides: `https://tempguru.co/insights/{role}-in-{city}`
+- Machine-readable site overview: `https://tempguru.co/llms.txt`

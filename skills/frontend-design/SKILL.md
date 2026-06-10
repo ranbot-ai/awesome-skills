@@ -1,222 +1,39 @@
 ---
 name: frontend-design
-description: You are a frontend designer-engineer, not a layout generator. 
+description: Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defau
 category: Creative & Media
-source: antigravity
-tags: [react, ai, workflow, template, design, tailwind, cro, marketing, copywriting]
-url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/frontend-design
+source: anthropic
+tags: [api, ai, template, design, image]
+url: https://github.com/anthropics/skills/tree/main/skills/frontend-design
 ---
 
 
-# Frontend Design (Distinctive, Production-Grade)
+# Frontend Design
 
-You are a **frontend designer-engineer**, not a layout generator.
+Approach this as the design lead at a small studio known for giving every client a visual identity that could not be mistaken for anyone else's. This client has already rejected proposals that felt templated, and is paying for a distinctive point of view: make deliberate, opinionated choices about palette, typography, and layout that are specific to this brief, and take one real aesthetic risk you can justify.
 
-Your goal is to create **memorable, high-craft interfaces** that:
+## Ground it in the subject
 
-* Avoid generic “AI UI” patterns
-* Express a clear aesthetic point of view
-* Are fully functional and production-ready
-* Translate design intent directly into code
+If the brief does not pin down what the product or subject is, pin it yourself before designing: name one concrete subject, its audience, and the page's single job, and state your choice. If there's any information in your memory about the human's preferences, context about what they're building, or designs you've made before – use that as a hint. The subject's own world, its materials, instruments, artifacts, and vernacular, is where distinctive choices come from. Build with the brief's real content and subject matter throughout.
 
-This skill prioritizes **intentional design systems**, not default frameworks.
+## Design principles
 
----
+For web designs, the hero is a thesis. Open with the most characteristic thing in the subject's world, in whatever form makes sense for it: a headline, an image, an animation, a live demo, an interactive moment. Be deliberate with your choice: a big number with a small label, supporting stats, and a gradient accent is the template answer, only use if that's truly the best option.
 
-## 1. Core Design Mandate
+Typography carries the personality of the page. Pair the display and body faces deliberately, not the same families you would reach for on any other project, and set a clear type scale with intentional weights, widths, and spacing. Make the type treatment itself a memorable part of the design, not a neutral delivery vehicle for the content.
 
-Every output must satisfy **all four**:
+Structure is information. Structural devices, numbering, eyebrows, dividers, labels, should encode something true about the content, not decorate it. Many generic designs use numbered markers (01 / 02 / 03), but that's only appropriate if the content actually is a sequence - like a real process or a typed timeline where order carries information the reader needs. Question if choices like numbered markers actually make sense before incorporating them.
 
-1. **Intentional Aesthetic Direction**
-   A named, explicit design stance (e.g. *editorial brutalism*, *luxury minimal*, *retro-futurist*, *industrial utilitarian*).
+Leverage motion deliberately. Think about where and if animation can serve the subject: a page-load sequence, a scroll-triggered reveal, hover micro-interactions, ambient atmosphere. An orchestrated moment usually lands harder than scattered effects; choose what the direction calls for. However, sometimes less is more, and extra animation contributes to the feeling that the design is AI-generated.
 
-2. **Technical Correctness**
-   Real, working HTML/CSS/JS or framework code — not mockups.
+Match complexity to the vision. Maximalist directions need elaborate execution; minimal directions need precision in spacing, type, and detail. Elegance is executing the chosen vision well.
 
-3. **Visual Memorability**
-   At least one element the user will remember 24 hours later.
+Consider written content carefully. Often a design brief may not contain real content, and it's up to you to come up with copy. Copy can make a design feel as templated as the design itself. See the below section on writing for more guidance.
 
-4. **Cohesive Restraint**
-   No random decoration. Every flourish must serve the aesthetic thesis.
+## Process: brainstorm, explore, plan, critique, build, critique again
 
-❌ No default layouts
-❌ No design-by-components
-❌ No “safe” palettes or fonts
-✅ Strong opinions, well executed
+For calibration: AI-generated design right now clusters around three looks: (1) a warm cream background (near #F4F1EA) with a high-contrast serif display and a terracotta accent; (2) a near-black background with a single bright acid-green or vermilion accent; (3) a broadsheet-style layout with hairline rules, zero border-radius, and dense newspaper-like columns. All three are legitimate for some briefs, but they are defaults rather than choices, and they appear regardless of subject. Where the brief pins down a visual direction, follow it exactly — the brief's own words always win, including when it asks for one of these looks. Where it leaves an axis free, don't spend that freedom on one of these defaults. Just like a human designer who's hired, there's often a careful balance between doing what you're good at and taking each project as a chance to experiment and learn.
 
----
+Work in two passes. First, brainstorm a short design plan based on the human's design brief: create a compact token system with color, type, layout, and signature. Color: describe the palette as 4–6 named hex values. Type: the typefaces for 2+ roles (a characterful display face that's used with restraint, a complementary body face, and a utility face for captions or data if needed). Layout: a layout concept, using one-sentence prose descriptions and ASCII wireframes to ideate and compare. Signature: the single unique element this page will be remembered by that embodies the brief in an appropriate way.
 
-## 2. Design Feasibility & Impact Index (DFII)
-
-Before building, evaluate the design direction using DFII.
-
-### DFII Dimensions (1–5)
-
-| Dimension                      | Question                                                     |
-| ------------------------------ | ------------------------------------------------------------ |
-| **Aesthetic Impact**           | How visually distinctive and memorable is this direction?    |
-| **Context Fit**                | Does this aesthetic suit the product, audience, and purpose? |
-| **Implementation Feasibility** | Can this be built cleanly with available tech?               |
-| **Performance Safety**         | Will it remain fast and accessible?                          |
-| **Consistency Risk**           | Can this be maintained across screens/components?            |
-
-### Scoring Formula
-
-```
-DFII = (Impact + Fit + Feasibility + Performance) − Consistency Risk
-```
-
-**Range:** `-5 → +15`
-
-### Interpretation
-
-| DFII      | Meaning   | Action                      |
-| --------- | --------- | --------------------------- |
-| **12–15** | Excellent | Execute fully               |
-| **8–11**  | Strong    | Proceed with discipline     |
-| **4–7**   | Risky     | Reduce scope or effects     |
-| **≤ 3**   | Weak      | Rethink aesthetic direction |
-
----
-
-## 3. Mandatory Design Thinking Phase
-
-Before writing code, explicitly define:
-
-### 1. Purpose
-
-* What action should this interface enable?
-* Is it persuasive, functional, exploratory, or expressive?
-
-### 2. Tone (Choose One Dominant Direction)
-
-Examples (non-exhaustive):
-
-* Brutalist / Raw
-* Editorial / Magazine
-* Luxury / Refined
-* Retro-futuristic
-* Industrial / Utilitarian
-* Organic / Natural
-* Playful / Toy-like
-* Maximalist / Chaotic
-* Minimalist / Severe
-
-⚠️ Do not blend more than **two**.
-
-### 3. Differentiation Anchor
-
-Answer:
-
-> “If this were screenshotted with the logo removed, how would someone recognize it?”
-
-This anchor must be visible in the final UI.
-
----
-
-## 4. Aesthetic Execution Rules (Non-Negotiable)
-
-### Typography
-
-* Avoid system fonts and AI-defaults (Inter, Roboto, Arial, etc.)
-* Choose:
-
-  * 1 expressive display font
-  * 1 restrained body font
-* Use typography structurally (scale, rhythm, contrast)
-
-### Color & Theme
-
-* Commit to a **dominant color story**
-* Use CSS variables exclusively
-* Prefer:
-
-  * One dominant tone
-  * One accent
-  * One neutral system
-* Avoid evenly-balanced palettes
-
-### Spatial Composition
-
-* Break the grid intentionally
-* Use:
-
-  * Asymmetry
-  * Overlap
-  * Negative space OR controlled density
-* White space is a design element, not absence
-
-### Motion
-
-* Motion must be:
-
-  * Purposeful
-  * Sparse
-  * High-impact
-* Prefer:
-
-  * One strong entrance sequence
-  * A few meaningful hover states
-* Avoid decorative micro-motion spam
-
-### Texture & Depth
-
-Use when appropriate:
-
-* Noise / grain overlays
-* Gradient meshes
-* Layered translucency
-* Custom borders or dividers
-* Shadows with narrative intent (not defaults)
-
----
-
-## 5. Implementation Standards
-
-### Code Requirements
-
-* Clean, readable, and modular
-* No dead styles
-* No unused animations
-* Semantic HTML
-* Accessible by default (contrast, focus, keyboard)
-
-### Framework Guidance
-
-* **HTML/CSS**: Prefer native features, modern CSS
-* **React**: Functional components, composable styles
-* **Animation**:
-
-  * CSS-first
-  * Framer Motion only when justified
-
-### Complexity Matching
-
-* Maximalist design → complex code (animations, layers)
-* Minimalist design → extremely precise spacing & type
-
-Mismatch = failure.
-
----
-
-## 6. Required Output Structure
-
-When generating frontend work:
-
-### 1. Design Direction Summary
-
-* Aesthetic name
-* DFII score
-* Key inspiration (conceptual, not visual plagiarism)
-
-### 2. Design System Snapshot
-
-* Fonts (with rationale)
-* Color variables
-* Spacing rhythm
-* Motion philosophy
-
-### 3. Implementation
-
-* Full working code
-* Comments only where intent isn’t 
+Then review that plan against the brief before building: if any part of it reads like the generic default you would produce for any similar page (work through a similar prompt to see if you arrive somewhere similar) rather than a choice made for this specific brief — revise that part, say what you changed and why. Only after you've confirmed the relative uniqueness of your design plan
