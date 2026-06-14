@@ -40,7 +40,7 @@ For reliable automatic triggering, use Claude Code hooks. Install with `--with-h
 tmpdir="$(mktemp -d)"
 trap 'rm -rf "$tmpdir"' EXIT
 curl -fsSLo "$tmpdir/makepad-skills-install.sh" https://raw.githubusercontent.com/ZhangHanDong/makepad-skills/main/install.sh
-sed -n '1,160p' "$tmpdir/makepad-skills-install.sh"
+cat "$tmpdir/makepad-skills-install.sh"  # review the full installer before executing
 bash "$tmpdir/makepad-skills-install.sh" --with-hooks
 ```
 
@@ -160,4 +160,4 @@ Trigger skill evolution when any of these occur during development:
 Ask yourself:
 - Is this a reusable pattern? (not project-specific)
 - Did it take significant effort to figure out?
-- Would it help other Makepad developers?
+- Would 

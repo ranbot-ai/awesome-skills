@@ -78,7 +78,7 @@ brew install linkerd
 tmpdir="$(mktemp -d)"
 trap 'rm -rf "$tmpdir"' EXIT
 curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install -o "$tmpdir/linkerd-install.sh"
-sed -n '1,160p' "$tmpdir/linkerd-install.sh"
+cat "$tmpdir/linkerd-install.sh"  # review the full installer before executing
 sh "$tmpdir/linkerd-install.sh"
 
 # Validate cluster
@@ -217,5 +217,4 @@ metadata:
   namespace: my-namespace
 spec:
   server:
-    name: my-service-http
-  client:
+  

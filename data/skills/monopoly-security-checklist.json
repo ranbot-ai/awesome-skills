@@ -1,0 +1,22 @@
+{
+  "id": "antigravity-monopoly-security-checklist",
+  "name": "security-checklist",
+  "slug": "monopoly-security-checklist",
+  "description": "Reference document for monopoly security-checklist.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/monopoly/security-checklist",
+  "content": "\n# MONOPOLY — Security Hardening Checklist\n\n## Network Security\n- [ ] All services inside private VPC; only LB/API GW exposed publicly\n- [ ] Security groups follow least-privilege (deny all, allow specific ports/CIDRs)\n- [ ] NACLs as secondary defense layer\n- [ ] WAF enabled with OWASP top 10 ruleset\n- [ ] DDoS protection (Cloudflare / AWS Shield Standard minimum)\n- [ ] VPN or Private Link for inter-service communication in multi-region\n\n## Authentication & Authorization\n- [ ] JWT tokens with short expiry (15 min access, 7 day refresh)\n- [ ] OAuth 2.0 / OIDC for third-party auth\n- [ ] MFA enforced for admin accounts\n- [ ] RBAC or ABAC for authorization\n- [ ] No secrets in JWT payload (use opaque references)\n- [ ] Token revocation strategy (Redis blocklist or short TTL)\n\n## API Security\n- [ ] Rate limiting at API gateway (per user, per IP, per endpoint)\n- [ ] Input validation and sanitization on all endpoints\n- [ ] SQL injection prevention (parameterized queries, ORM)\n- [ ] XSS prevention (output encoding, CSP headers)\n- [ ] CSRF protection (SameSite cookies, CSRF tokens)\n- [ ] CORS policy locked down (not wildcard `*`)\n- [ ] HTTP security headers (HSTS, X-Frame-Options, X-Content-Type-Options)\n\n## Data Security\n- [ ] Encryption in transit (TLS 1.2+ everywhere, TLS 1.3 preferred)\n- [ ] Encryption at rest (AES-256 for DBs, S3 SSE)\n- [ ] PII data identified, minimized, and encrypted at field level where needed\n- [ ] Database backups encrypted\n- [ ] No sensitive data in logs (PII, passwords, tokens, card numbers)\n\n## Secrets Management\n- [ ] No secrets in code or environment variables in plain text\n- [ ] Secrets manager in use (HashiCorp Vault, AWS Secrets Manager, GCP Secret Manager)\n- [ ] Secrets rotation automated\n- [ ] IAM roles for service-to-service auth (not static credentials)\n\n## Supply Chain & Dependencies\n- [ ] Dependency scanning (Snyk, Dependabot, npm audit)\n- [ ] Container image scanning (Trivy, ECR scanning)\n- [ ] Pin dependency versions in production\n- [ ] SBOM (Software Bill of Materials) generated for compliance\n\n## Incident Response\n- [ ] Audit logs for all admin actions and data access\n- [ ] Alerting on anomalous access patterns\n- [ ] Incident response runbook documented\n- [ ] Data breach notification process defined (GDPR 72-hour rule)\n- [ ] Regular penetration testing scheduled\n\n## Compliance (as applicable)\n- [ ] GDPR: data residency, right to deletion, consent tracking\n- [ ] PCI-DSS: if handling card data — never store raw PANs\n- [ ] HIPAA: if health data — encryption, audit logs, BAA with vendors\n- [ ] SOC 2 Type II: access control, availability, confidentiality evidence\n\n\n## Limitations\n- This is a reference document and may not cover all edge cases. Always verify architectures before production.\n",
+  "tags": [
+    "api",
+    "ai",
+    "document",
+    "image",
+    "security",
+    "aws",
+    "gcp"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-06-14T09:50:29.603Z"
+}

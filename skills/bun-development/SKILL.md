@@ -36,7 +36,7 @@ brew install oven-sh/bun/bun
 tmpdir="$(mktemp -d)"
 trap 'rm -rf "$tmpdir"' EXIT
 curl -fsSLo "$tmpdir/bun-install.sh" https://bun.sh/install
-sed -n '1,160p' "$tmpdir/bun-install.sh"
+cat "$tmpdir/bun-install.sh"  # review the full installer before executing
 bash "$tmpdir/bun-install.sh"
 
 # Windows
@@ -249,5 +249,4 @@ bun --hot run server.ts
 ```typescript
 // .env file is loaded automatically!
 
-// Access environment variables
-const ap
+// Acc
