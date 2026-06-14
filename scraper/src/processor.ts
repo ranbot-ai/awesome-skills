@@ -7,6 +7,7 @@ export interface RepoStars {
   superpowers: number;
   awesomeLlm: number;
   antigravity: number;
+  xquik: number;
 }
 
 const CATEGORY_ICONS: Record<string, string> = {
@@ -38,7 +39,7 @@ const CATEGORY_DESCRIPTIONS: Record<string, string> = {
 export function processSkills(
   skills: Skill[],
   existingSkills: Skill[] = [],
-  stars: RepoStars = { composio: 0, openhands: 0, anthropic: 0, superpowers: 0, awesomeLlm: 0, antigravity: 0 }
+  stars: RepoStars = { composio: 0, openhands: 0, anthropic: 0, superpowers: 0, awesomeLlm: 0, antigravity: 0, xquik: 0 }
 ): ScrapedData {
   const scrapedAt = new Date().toISOString();
 
@@ -146,6 +147,13 @@ export function processSkills(
       skillCount: sourceCount.get('antigravity') || 0,
       newSkillCount: newSkillsBySource.get('antigravity') || 0,
       stars: stars.antigravity,
+    },
+    {
+      name: 'Xquik',
+      url: 'https://github.com/Xquik-dev/x-twitter-scraper',
+      skillCount: sourceCount.get('xquik') || 0,
+      newSkillCount: newSkillsBySource.get('xquik') || 0,
+      stars: stars.xquik,
     },
   ];
 

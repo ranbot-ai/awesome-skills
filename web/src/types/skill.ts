@@ -4,7 +4,7 @@ export interface Skill {
   slug: string;
   description: string;
   category: string;
-  source: 'composio' | 'openhands' | 'anthropic' | 'superpowers' | 'awesome-llm';
+  source: 'composio' | 'openhands' | 'anthropic' | 'superpowers' | 'awesome-llm' | 'antigravity' | 'xquik';
   repoUrl: string;
   skillUrl: string;
   author?: string;

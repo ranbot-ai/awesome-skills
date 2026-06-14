@@ -7,6 +7,7 @@ import { scrapeAnthropicSkills, ANTHROPIC_REPO } from './scrapers/anthropic.js';
 import { scrapeSuperPowersSkills, SUPERPOWERS_REPO } from './scrapers/superpowers.js';
 import { scrapeAwesomeLLMSkills, AWESOME_LLM_REPO } from './scrapers/awesome-llm.js';
 import { scrapeAntigravitySkills, ANTIGRAVITY_REPO } from './scrapers/antigravity.js';
+import { scrapeXquikSkills, XQUIK_REPO } from './scrapers/xquik.js';
 import { processSkills, generateSearchIndex, type RepoStars } from './processor.js';
 import { fetchRepoInfo, checkInitialRateLimit } from './github.js';
 import type { Skill, ScrapedData, GitHubRepo } from './types.js';
@@ -58,6 +59,7 @@ async function main() {
     openhands: await fetchStars(OPENHANDS_REPO),
     awesomeLlm: await fetchStars(AWESOME_LLM_REPO),
     antigravity: await fetchStars(ANTIGRAVITY_REPO),
+    xquik: await fetchStars(XQUIK_REPO),
   };
   console.log(`  • Superpowers: ${stars.superpowers.toLocaleString()} stars`);
   console.log(`  • Anthropic: ${stars.anthropic.toLocaleString()} stars`);
@@ -65,6 +67,7 @@ async function main() {
   console.log(`  • OpenHands: ${stars.openhands.toLocaleString()} stars`);
   console.log(`  • Awesome LLM: ${stars.awesomeLlm.toLocaleString()} stars`);
   console.log(`  • Antigravity: ${stars.antigravity.toLocaleString()} stars`);
+  console.log(`  • Xquik: ${stars.xquik.toLocaleString()} stars`);
   console.log('');
 
   const allSkills: Skill[] = [];
@@ -120,6 +123,15 @@ async function main() {
     allSkills.push(...antigravitySkills);
   } catch (err) {
     console.error('Error scraping Antigravity Skills:', err);
+  }
+
+  console.log('');
+
+  try {
+    const xquikSkills = await scrapeXquikSkills();
+    allSkills.push(...xquikSkills);
+  } catch (err) {
+    console.error('Error scraping Xquik Skills:', err);
   }
 
   console.log('\n' + '='.repeat(50));
