@@ -6,7 +6,7 @@
 
 ## Features
 
-- **Multi-Source Scraper**: Collects agent skills from 6+ GitHub repositories
+- **Multi-Source Scraper**: Collects agent skills from 7+ GitHub repositories
 - **Modern Website**: Next.js 16 + Tailwind CSS frontend with search, filtering, and detailed skill pages
 - **300+ Skills**: Curated from top AI agent skill repositories
 - **Categories**: Skills organized by category (Development, AI & Agents, Business, Creative, etc.)
@@ -23,6 +23,7 @@
 | [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | 67k+ | AI-driven development skills |
 | [Prat011/awesome-llm-skills](https://github.com/Prat011/awesome-llm-skills) | 700+ | LLM and AI Agent skills collection |
 | [sickn33/antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) | 3.6k+ | 253+ agentic skills for Claude Code, Gemini CLI, Cursor & more |
+| [maxbaluev/accreted-intelligence](https://github.com/maxbaluev/accreted-intelligence) | 2+ | MCP-backed memory loop skills for AccInt solve, frames, and outcomes |
 
 ## Install Skills
 

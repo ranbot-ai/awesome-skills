@@ -89,6 +89,26 @@ export function Footer() {
                   Awesome LLM Skills
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://github.com/sickn33/antigravity-awesome-skills"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  Antigravity Skills
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/maxbaluev/accreted-intelligence"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  AccInt Skills
+                </a>
+              </li>
             </ul>
           </div>
 

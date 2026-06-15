@@ -35,6 +35,8 @@ export function getSourceLabel(source: string): string {
     anthropic: 'Anthropic',
     superpowers: 'Superpowers',
     'awesome-llm': 'Awesome LLM',
+    antigravity: 'Antigravity',
+    accint: 'AccInt',
   };
   return labels[source] || source;
 }
@@ -46,6 +48,8 @@ export function getSourceColor(source: string): string {
     anthropic: 'bg-orange-500',
     superpowers: 'bg-yellow-500',
     'awesome-llm': 'bg-pink-500',
+    antigravity: 'bg-sky-500',
+    accint: 'bg-cyan-500',
   };
   return colors[source] || 'bg-gray-500';
 }
