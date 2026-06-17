@@ -1,0 +1,23 @@
+{
+  "id": "antigravity-deterministic-design",
+  "name": "deterministic-design",
+  "slug": "deterministic-design",
+  "description": "Render the UI and prove it's balanced + usable: a deterministic layout audit (centroid / optical-center / pixel-oracle balance via explicit math + annotated screenshot) plus a vision-judged Nielsen usability audit by a separate fresh-eyes judge. The measurement layer taste-only design skills lack.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/deterministic-design",
+  "content": "## When to Use\n\nUse to catch AI-generated UI that \"looks off\", is misaligned or centered-mush, or fails usability — when you need to PROVE a layout is balanced and usable instead of trusting the model's eye. Compose it with any taste/token design skill before reporting design \"done\".\n\n_Source: [connerkward/deterministic-design-skill](https://github.com/connerkward/deterministic-design-skill) (MIT)._\n\n# deterministic-design\n\nThesis: **determinism beats AI randomness.** A model can't trust its own eye on layout — so\ndon't. Render the UI and *measure* it.\n\nTwo sub-skills (load as needed):\n- **[design-spatial](https://github.com/connerkward/deterministic-design-skill/blob/main/design-spatial/SKILL.md)** — deterministic layout audit: explicit grid\n  + 8-pt spacing, and `layout-audit.js` computes centroid / optical-center / pixel-oracle\n  balance and draws an annotated screenshot. **Numbers, not vibes.** Plus a render-then-\n  critique vision loop.\n- **[design-ux](https://github.com/connerkward/deterministic-design-skill/blob/main/design-ux/SKILL.md)** — usability audit: scores the rendered UI against\n  Nielsen's 10 + interaction heuristics via a SEPARATE fresh-eyes judge → prioritized fix list.\n\nThis **improves** existing design skills (including the default Anthropic one) by adding the\nlayer they lack — it doesn't just advise on taste, it renders, measures, and judges the\noutput. Composable with any design skill.\n\nIn central this lives as a subdir of ckw-design; it **publishes separately** as\n`deterministic-design-skill` (its own distribution) via publish-skill. One of the two\nflagship narratives — the *determinism* one; its sibling is human-in-the-loop (lookdev).\n\n## Limitations\n\n- Layout metrics and vision-judged audits catch many spatial and usability failures, but they are not a substitute for product judgment or user testing.\n- The workflow requires a rendered UI or screenshot; it cannot validate components that have not been built or captured.\n- Automated scoring can miss brand nuance, copy tone, accessibility needs, and domain-specific user expectations.\n",
+  "tags": [
+    "claude",
+    "ai",
+    "workflow",
+    "design",
+    "aws"
+  ],
+  "useCases": [
+    "**[design-spatial](https://github.com/connerkward/deterministic-design-skill/blob/main/design-spatial/SKILL.md)** — deterministic layout audit: explicit grid",
+    "**[design-ux](https://github.com/connerkward/deterministic-design-skill/blob/main/design-ux/SKILL.md)** — usability audit: scores the rendered UI against"
+  ],
+  "scrapedAt": "2026-06-17T11:09:52.680Z"
+}
