@@ -1,0 +1,150 @@
+---
+name: y2k-design
+description: Web and App implementation guide for Y2K Design. Trigger when user wants chrome effects, futuristic 2000s look, blob shapes, and tech optimism. 
+category: Creative & Media
+source: antigravity
+tags: [react, ai, llm, design, image, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-it/y2k-design
+---
+
+
+# Y2K Design
+
+> "The optimistic, shiny future as imagined in 1999. Chrome, blobs, and alien tech."
+
+
+## When to Use
+Use this sub-style when the user's request matches the aesthetic described above. This is a child reference of the `design-it` skill and is not meant to be triggered directly.
+
+## Core Principles
+1. **Metallic & Chrome Effects**: Extensive use of silver, chrome, and shiny metallic gradients.
+2. **Organic, Amorphous Shapes**: "Blob" architecture, curved intersecting lines, and liquid-like forms.
+3. **Tech-Optimism**: Circuit board motifs, target crosshairs, and digital grid backgrounds.
+
+## Visual DNA
+- **Colors**: Silver/chrome, bright cyan, hot pink, lime green. **Industrial Chic** mixed with neon accents works well.
+- **Typography**: Extended (wide) sans-serifs, pixel fonts, or futuristic/alien display fonts (e.g., `Orbitron`, `Syncopate`).
+- **Styling**: Outer glows, metallic bevels, and starry glints (sparkles).
+
+## Web Implementation
+- Rely heavily on complex linear and radial gradients to simulate shiny metal.
+- **CSS Example**:
+```css
+body {
+  background-color: #000000;
+  /* Digital grid background */
+  background-image: linear-gradient(#333 1px, transparent 1px),
+                    linear-gradient(90deg, #333 1px, transparent 1px);
+  background-size: 20px 20px;
+  color: #ffffff;
+  font-family: 'Syncopate', sans-serif;
+}
+
+.y2k-chrome-text {
+  font-size: 4rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  
+  /* Chrome gradient effect */
+  background: linear-gradient(
+    to bottom, 
+    #ffffff 0%, 
+    #999999 45%, 
+    #222222 50%, 
+    #cccccc 55%, 
+    #ffffff 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  
+  /* Outer glow */
+  filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5));
+}
+
+.y2k-blob-btn {
+  background: linear-gradient(135deg, #00FFFF, #FF00FF);
+  border: none;
+  border-radius: 50% 20% / 10% 40%; /* Amorphous blob shape */
+  padding: 20px 40px;
+  color: #fff;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #000;
+  box-shadow: 0 0 15px #FF00FF;
+}
+```
+
+## App Implementation
+
+### SwiftUI
+```swift
+struct Y2KDesignView: View {
+    // Chrome Gradient
+    let chromeGradient = LinearGradient(
+        colors: [Color.white, Color(white: 0.6), Color(white: 0.2), Color(white: 0.8), Color.white],
+        startPoint: .top,
+        endPoint: .bottom
+    )
+    
+    var body: some View {
+        ZStack {
+            Color.black.ignoresSafeArea()
+            
+            VStack(spacing: 40) {
+                // Chrome Text
+                Text("Y2K FUTURE")
+                    .font(.custom("Syncopate-Bold", size: 48))
+                    .foregroundStyle(chromeGradient)
+                    // Cyan glow
+                    .shadow(color: Color(hex: "00FFFF"), radius: 10, x: 0, y: 0)
+                
+                // Blob Button (Faked with Capsule in standard SwiftUI, requires Path for true blob)
+                Button(action: {}) {
+                    Text("ENTER CORE")
+                        .font(.custom("Orbitron-Bold", size: 20))
+                        .foregroundColor(.white)
+                        .padding(.vertical, 20)
+                        .padding(.horizontal, 40)
+                        .background(LinearGradient(colors: [Color(hex: "00FFFF"), Color(hex: "FF00FF")], startPoint: .topLeading, endPoint: .bottomTrailing))
+                        .clipShape(Capsule())
+                        // Glow
+                        .shadow(color: Color(hex: "FF00FF").opacity(0.8), radius: 15, x: 0, y: 0)
+                }
+            }
+        }
+    }
+}
+```
+- SwiftUI's `.foregroundStyle()` makes applying a complex multi-stop `LinearGradient` to text trivial, which is exactly how you build the Chrome Text effect.
+- Add an un-offset `.shadow()` with a neon color to create the Y2K outer glow.
+
+### Flutter
+```dart
+class Y2KDesignScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Chrome Text via ShaderMask
+            ShaderMask(
+              shaderCallback: (bounds) => const LinearGradient(
+                begin: Alignment.topCenter, end: Alignment.bottomCenter,
+                colors: [Colors.white, Color(0xFF999999), Color(0xFF222222), Color(0xFFCCCCCC), Colors.white],
+                stops: [0.0, 0.45, 0.5, 0.55, 1.0],
+              ).createShader(bounds),
+              child: const Text(
+                'Y2K FUTURE',
+                style: TextStyle(
+                  fontFamily: 'Syncopate', fontSize: 48, fontWeight: FontWeight.w900, color: Colors.white,
+                  shadows: [Shadow(color: Color(0xFF00FFFF), blurRadius: 20)], // Glow
+                ),
+              ),
+            ),
+            const SizedBox(height: 40),
+            
+            // Neon Button
+            Container(
+              decoration: Bo

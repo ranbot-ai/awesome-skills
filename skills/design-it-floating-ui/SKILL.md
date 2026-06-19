@@ -1,0 +1,145 @@
+---
+name: floating-ui
+description: Web and App implementation guide for Floating UI. Trigger when user wants detached cards, elevated components, and a light, airy feel. 
+category: Creative & Media
+source: antigravity
+tags: [react, ai, llm, design, image, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-it/floating-ui
+---
+
+
+# Floating UI
+
+> "Defying gravity. Elements that hover effortlessly above the surface."
+
+
+## When to Use
+Use this sub-style when the user's request matches the aesthetic described above. This is a child reference of the `design-it` skill and is not meant to be triggered directly.
+
+## Core Principles
+1. **Detachment**: UI elements (like nav bars, sidebars, or main content cards) do not touch the edges of the screen. They float with margins on all sides.
+2. **Soft, Diffuse Shadows**: Large, highly blurred shadows directly beneath elements.
+3. **Pill Shapes & Rounds**: Fully rounded corners (pill shapes) enhance the floating, bubble-like aesthetic.
+
+## Visual DNA
+- **Colors**: **Earth-Grounded Elegance** or **Minimalist Slate**. Use a slightly tinted background (off-white or very light gray) so the floating white elements pop.
+- **Typography**: Clean, airy sans-serifs with generous line height.
+- **Layout**: The "floating island" pattern for navigation (a pill-shaped nav bar centered at the bottom or top of the screen).
+
+## Web Implementation
+- Focus on large margins and specific shadow styles.
+- **CSS Example**:
+```css
+body {
+  background-color: var(--bg-primary); /* e.g., #F4F4F9 */
+  padding: 24px; /* Ensure nothing touches the edge */
+}
+
+.floating-nav {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border-radius: 50px; /* Pill shape */
+  padding: 12px 32px;
+  
+  /* Large, soft shadow */
+  box-shadow: 0 16px 40px rgba(0,0,0,0.08);
+  
+  display: flex;
+  gap: 24px;
+}
+
+.floating-card {
+  background: white;
+  border-radius: 24px;
+  padding: 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+```
+
+## App Implementation
+
+### SwiftUI
+```swift
+struct FloatingUIView: View {
+    var body: some View {
+        ZStack {
+            // Very light background
+            Color(red: 0.95, green: 0.95, blue: 0.97).ignoresSafeArea()
+            
+            ScrollView {
+                VStack(spacing: 24) {
+                    // Floating Content Card
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Floating Card")
+                            .font(.title2).fontWeight(.bold)
+                        Text("This card hovers above the background, with massive soft shadows and completely rounded corners.")
+                            .foregroundColor(.secondary)
+                    }
+                    .padding(32)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Color.white)
+                    .cornerRadius(32) // Very large radius
+                    // Large, highly blurred shadow
+                    .shadow(color: Color.black.opacity(0.05), radius: 30, x: 0, y: 15)
+                    .padding(.horizontal, 24) // Keeps it detached from edges
+                }
+                .padding(.top, 40)
+            }
+            
+            // Floating Pill Navigation
+            VStack {
+                Spacer()
+                HStack(spacing: 40) {
+                    Image(systemName: "house.fill").foregroundColor(.blue)
+                    Image(systemName: "magnifyingglass").foregroundColor(.gray)
+                    Image(systemName: "bell.fill").foregroundColor(.gray)
+                    Image(systemName: "person.fill").foregroundColor(.gray)
+                }
+                .padding(.vertical, 16)
+                .padding(.horizontal, 32)
+                .background(Color.white)
+                .clipShape(Capsule()) // Pill shape
+                .shadow(color: Color.black.opacity(0.1), radius: 25, x: 0, y: 10)
+                .padding(.bottom, 32) // Detached from bottom edge
+            }
+        }
+    }
+}
+```
+- A `.clipShape(Capsule())` with a massive `.shadow()` creates the perfect floating pill navigation bar.
+- Push the `.shadow(radius: ...)` up to 25 or 30 with a very low opacity (0.05) to get the soft, diffuse hover effect.
+
+### Flutter
+```dart
+class FloatingUIScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFFF4F4F9),
+      body: Stack(
+        children: [
+          ListView(
+            padding: const EdgeInsets.all(24),
+            children: [
+              // Floating Content Card
+              Container(
+                margin: const EdgeInsets.only(bottom: 24),
+                padding: const EdgeInsets.all(32),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(32), // Large radius
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.05),
+                      blurRadius: 30,
+                      offset: const Offset(0, 15),
+                    )
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  chi
