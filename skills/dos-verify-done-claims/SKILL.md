@@ -3,7 +3,7 @@ name: dos-verify-done-claims
 description: Before accepting an agent's 'done / shipped / fixed' claim, verify it against ground truth (git ancestry + the commit's own diff) using the DOS kernel's `dos verify` and `dos commit-audit` — never t
 category: AI & Agents
 source: antigravity
-tags: [api, claude, ai, agent, llm, security]
+tags: [python, api, claude, ai, agent, llm, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dos-verify-done-claims
 ---
 
@@ -42,7 +42,9 @@ This skill adapts the DOS reference "witness-claim" pattern
 ### Step 1: Install the kernel (once)
 
 ```bash
-pip install dos-kernel        # provides the `dos` CLI; deterministic, no key
+python3 -m venv .dos-venv
+. .dos-venv/bin/activate
+python -m pip install 'dos-kernel==<reviewed-version>'  # provides the `dos` CLI
 ```
 
 ### Step 2: Audit the latest commit's claim vs its diff
@@ -121,5 +123,4 @@ dos verify --workspace . AUTH AUTH2 --json --no-ci
 ## Best Practices
 
 - ✅ Run `dos commit-audit HEAD` immediately after every agent commit.
-- ✅ Treat `source: none` / `CLAIM_UNWITNESSED` as "not done", not as a tool error.
-- ✅ C
+- ✅ Treat `source: none` / `CLAIM_

@@ -97,7 +97,7 @@ Format the execution results into a standardized JSON schema and write it to the
       <action>Tap the username input field</action>
       <action>Type "testuser" into the input</action>
       <action>Tap the password input field</action>
-      <action>Type "password123" into the input</action>
+      <action>Type a redacted test password into the input</action>
       <action>Tap the "Login" button</action>
       <action>Verify that the Home dashboard is visible and user profile photo is shown</action>
    </actions>
@@ -141,4 +141,4 @@ Format the execution results into a standardized JSON schema and write it to the
       "comment": "Tapped center of password input."
     },
     {
-      "action": "Type \"password123\"
+      "action": "Type a re

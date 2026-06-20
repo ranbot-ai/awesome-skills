@@ -3,7 +3,7 @@ name: atlas-contract
 description: Goal-integrity skill. Use for backend/API/persistence, preserve/do-not-change, tests/validation, mocks, rework, multi-part requests. Emits Goal Contracts, Deviation Notices, Phase Checks, Final Audits
 category: Creative & Media
 source: antigravity
-tags: [api, ai, agent, template, design, image, security, rag, cro]
+tags: [api, claude, ai, agent, template, design, image, security, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/atlas-contract
 ---
 

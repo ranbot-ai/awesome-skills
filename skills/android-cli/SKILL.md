@@ -3,12 +3,10 @@ name: android-cli
 description: Orchestrates Android development tasks including project creation, deployment, SDK management, and environment diagnostics using the `android` command-line tool. 
 category: Document Processing
 source: antigravity
-tags: [api, claude, ai, agent, template, document, image, security]
+tags: [api, claude, ai, agent, template, document, image]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/android-cli
 ---
 
-
-<!-- security-allowlist: curl-pipe-bash -->
 
 # Android CLI Specialist
 
@@ -23,11 +21,17 @@ This skill provides instructions for using the `android` CLI tool. The tool incl
 
 ## Installation
 
-If the `android` tool is not in the path, install it. To install, run the following command:
+If the `android` tool is not in the path, download the platform installer to a private temporary directory, inspect it, then run it only after the user confirms the source and contents:
 
-- **Linux:** `curl -fsSL https://dl.google.com/android/cli/latest/linux_x86_64/install.sh | bash`
-- **macOS:** `curl -fsSL https://dl.google.com/android/cli/latest/darwin_arm64/install.sh | bash`
-- **Windows:** `curl.exe -fsSL https://dl.google.com/android/cli/latest/windows_x86_64/install.cmd -o "%TEMP%\i.cmd" && "%TEMP%\i.cmd"`
+```bash
+tmpdir="$(mktemp -d "${TMPDIR:-/tmp}/android-cli.XXXXXX")" || exit 1
+curl -fsSL https://dl.google.com/android/cli/latest/linux_x86_64/install.sh -o "$tmpdir/install.sh"
+sed -n '1,160p' "$tmpdir/install.sh"
+# After review and explicit user confirmation:
+bash "$tmpdir/install.sh"
+```
+
+Use the matching `darwin_arm64/install.sh` or `windows_x86_64/install.cmd` URL for macOS or Windows. Do not pipe mutable network installer scripts directly into a shell.
 
 ## SDK Management
 
@@ -115,10 +119,4 @@ Commands:
   layout    Returns the layout tree of an application
   run       Deploy an Android Application
   screen    Commands to view the device
-  sdk       Download and list SDK packages
-  skills    Manage skills
-  update    Update the Android CLI
-
-create
-          Usage: android create [-h] [--verbose] [--list] [--minSdk=api]
-                               
+  sdk       Download and list SDK pack

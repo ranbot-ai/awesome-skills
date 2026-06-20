@@ -1,9 +1,9 @@
 ---
 name: event-staffing-ordering
 description: Order W-2 compliant temporary event staff for conventions, trade shows, festivals, concerts, sporting events, and brand activations across 300+ US and Canadian markets via TempGuru. Covers city covera
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [mcp, ai, agent, llm, workflow, aws, rag, cro]
+tags: [mcp, ai, agent, llm, workflow, document, aws, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/event-staffing-ordering
 ---
 
@@ -51,6 +51,10 @@ Collect before submitting:
 - **Event type** (convention, conference, trade show, festival, concert, sporting event, stadium, corporate, brand activation)
 - **Attire/uniform requirements**
 - **Special requirements** (bilingual staff, certifications, overnight shifts)
+
+Do not collect payment details, credentials, private attendee data, venue
+contracts, or other sensitive documents in chat. Route those through TempGuru's
+human-reviewed submission and contracting process instead.
 
 ### 2. Validate with the MCP tools
 

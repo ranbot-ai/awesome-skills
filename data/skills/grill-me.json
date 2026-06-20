@@ -1,0 +1,21 @@
+{
+  "id": "antigravity-grill-me",
+  "name": "grill-me",
+  "slug": "grill-me",
+  "description": "A relentless interview to sharpen a plan or design.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/grill-me",
+  "content": "\n## When to Use\n\nUse when this workflow matches the user request: A relentless interview to sharpen a plan or design.\n\n\n_Source: [mattpocock/skills](https://github.com/mattpocock/skills) (MIT)._Run a `/grilling` session.\n\n\n## Limitations\n\n- Requires the upstream tool, account, API key, or local setup when the workflow names one.\n- Does not authorize destructive, production, paid, or external-message actions without explicit user approval.\n- Validate generated artifacts or recommendations against the user's real sources before treating them as final.\n",
+  "tags": [
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "workflow",
+    "design"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-06-20T09:31:29.424Z"
+}

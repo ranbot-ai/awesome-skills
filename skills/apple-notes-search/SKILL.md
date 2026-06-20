@@ -45,7 +45,9 @@ Disk Access. Steps, in order:
 2. **Clone + install deps:**
    ```bash
    git clone https://github.com/connerkward/mcp-apple-notes
-   cd mcp-apple-notes && bun install
+   cd mcp-apple-notes
+   git checkout <reviewed-tag-or-commit>
+   bun install
    ```
 3. **Grant Full Disk Access to bun.** Run `which bun`, then open System Settings →
    Privacy & Security → Full Disk Access, click `+`, and add that exact `bun` binary
@@ -85,4 +87,4 @@ Disk Access. Steps, in order:
 | `index-health` | Sync status, last-indexed time, note count. Run this if results seem stale. |
 
 For "synthesize what I think about X" the synthesis lives in the **web app** endpoint
-(`GET /api/synthesize?q=` at `http://localhost:3741/` when run 
+(`GET /api/synthesize?

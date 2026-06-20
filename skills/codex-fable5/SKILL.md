@@ -58,7 +58,7 @@ Decide which operating mode fits the task:
 For durable local ledgers, install the source plugin and use its helper CLI. Only do this in an authorized local workspace.
 
 ```bash
-codex plugin marketplace add baskduf/FableCodex --ref main
+codex plugin marketplace add baskduf/FableCodex --ref <reviewed-tag-or-commit>
 codex plugin add codex-fable5@fablecodex
 ```
 
@@ -114,4 +114,4 @@ Agent behavior:
 ## Best Practices
 
 - State conclusions plainly, then give the evidence that supports them.
-- Prefer real checks over confidence: run or inspect the thing
+- Prefer real checks over confidence: run 

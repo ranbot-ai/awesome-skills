@@ -1,0 +1,21 @@
+{
+  "id": "antigravity-grilling",
+  "name": "grilling",
+  "slug": "grilling",
+  "description": "Interview the user relentlessly about a plan or design. Use when the user wants to stress-test a plan before building, or uses any 'grill' trigger phrases.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/grilling",
+  "content": "\n## When to Use\n\nUse when this workflow matches the user request: Interview the user relentlessly about a plan or design. Use when the user wants to stress-test a plan before building, or uses any 'grill' trigger phrases.\n\n\n_Source: [mattpocock/skills](https://github.com/mattpocock/skills) (MIT)._Interview me relentlessly about every aspect of this plan until we reach a shared understanding. Walk down each branch of the design tree, resolving dependencies between decisions one-by-one. For each question, provide your recommended answer.\n\nAsk the questions one at a time, waiting for feedback on each question before continuing. Asking multiple questions at once is bewildering.\n\nIf a question can be answered by exploring the codebase, explore the codebase instead.\n\n\n## Limitations\n\n- Requires the upstream tool, account, API key, or local setup when the workflow names one.\n- Does not authorize destructive, production, paid, or external-message actions without explicit user approval.\n- Validate generated artifacts or recommendations against the user's real sources before treating them as final.\n",
+  "tags": [
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "workflow",
+    "design"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-06-20T09:31:29.961Z"
+}

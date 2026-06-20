@@ -1,0 +1,22 @@
+{
+  "id": "antigravity-domain-modeling",
+  "name": "domain-modeling",
+  "slug": "domain-modeling",
+  "description": "Build and sharpen a project's domain model. Use when the user wants to pin down domain terminology or a ubiquitous language, record an architectural decision, or when another skill needs to maintain the domain model.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/domain-modeling",
+  "content": "\n# Domain Modeling\n\n## When to Use\n\nUse when this workflow matches the user request: Build and sharpen a project's domain model. Use when the user wants to pin down domain terminology or a ubiquitous language, record an architectural decision, or when another skill needs to maintain the domain model.\n\n\n_Source: [mattpocock/skills](https://github.com/mattpocock/skills) (MIT)._\n\nActively build and sharpen the project's domain model as you design. This is the *active* discipline — challenging terms, inventing edge-case scenarios, and writing the glossary and decisions down the moment they crystallise. (Merely *reading* `CONTEXT.md` for vocabulary is not this skill — that's a one-line habit any skill can do. This skill is for when you're changing the model, not just consuming it.)\n\n## File structure\n\nMost repos have a single context:\n\n```\n/\n├── CONTEXT.md\n├── docs/\n│   └── adr/\n│       ├── 0001-event-sourced-orders.md\n│       └── 0002-postgres-for-write-model.md\n└── src/\n```\n\nIf a `CONTEXT-MAP.md` exists at the root, the repo has multiple contexts. The map points to where each one lives:\n\n```\n/\n├── CONTEXT-MAP.md\n├── docs/\n│   └── adr/                          ← system-wide decisions\n├── src/\n│   ├── ordering/\n│   │   ├── CONTEXT.md\n│   │   └── docs/adr/                 ← context-specific decisions\n│   └── billing/\n│       ├── CONTEXT.md\n│       └── docs/adr/\n```\n\nCreate files lazily — only when you have something to write. If no `CONTEXT.md` exists, create one when the first term is resolved. If no `docs/adr/` exists, create it when the first ADR is needed.\n\n## During the session\n\n### Challenge against the glossary\n\nWhen the user uses a term that conflicts with the existing language in `CONTEXT.md`, call it out immediately. \"Your glossary defines 'cancellation' as X, but you seem to mean Y — which is it?\"\n\n### Sharpen fuzzy language\n\nWhen the user uses vague or overloaded terms, propose a precise canonical term. \"You're saying 'account' — do you mean the Customer or the User? Those are different things.\"\n\n### Discuss concrete scenarios\n\nWhen domain relationships are being discussed, stress-test them with specific scenarios. Invent scenarios that probe edge cases and force the user to be precise about the boundaries between concepts.\n\n### Cross-reference with code\n\nWhen the user states how something works, check whether the code agrees. If you find a contradiction, surface it: \"Your code cancels entire Orders, but you just said partial cancellation is possible — which is right?\"\n\n### Update CONTEXT.md inline\n\nWhen a term is resolved, update `CONTEXT.md` right there. Don't batch these up — capture them as they happen. Use the format in [CONTEXT-FORMAT.md](./CONTEXT-FORMAT.md).\n\n`CONTEXT.md` should be totally devoid of implementation details. Do not treat `CONTEXT.md` as a spec, a scratch pad, or a repository for implementation decisions. It is a glossary and nothing else.\n\n### Offer ADRs sparingly\n\nOnly offer to create an ADR when all three are true:\n\n1. **Hard to reverse** — the cost of changing your mind later is meaningful\n2. **Surprising without context** — a future reader will wonder \"why did they do it this way?\"\n3. **The result of a real trade-off** — there were genuine alternatives and you picked one for specific reasons\n\nIf any of the three is missing, skip the ADR. Use the format in [ADR-FORMAT.md](./ADR-FORMAT.md).\n\n\n## Limitations\n\n- Requires the upstream tool, account, API key, or local setup when the workflow names one.\n- Does not authorize destructive, production, paid, or external-message actions without explicit user approval.\n- Validate generated artifacts or recommendations against the user's real sources before treating them as final.\n",
+  "tags": [
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "workflow",
+    "design",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-06-20T09:30:34.645Z"
+}

@@ -3,7 +3,7 @@ name: atlas-ledger
 description: Companion to atlas-contract. Auto-invoked by its Final Audit on caught drift; also use after Post Reviews or user requests to record a mistake. Distills drift into WHEN/DON'T/INSTEAD clauses, writes t
 category: Development & Code Tools
 source: antigravity
-tags: [api, ai, agent, design, security]
+tags: [api, claude, ai, agent, design, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/atlas-ledger
 ---
 

@@ -38,7 +38,14 @@ Users must have a 2slides API key and credits:
 3. **Set API Key:** Store the key in environment variable: `SLIDES_2SLIDES_API_KEY`
 
 ```bash
-export SLIDES_2SLIDES_API_KEY="your_api_key_here"
+read -r -s SLIDES_2SLIDES_API_KEY
+export SLIDES_2SLIDES_API_KEY
+```
+
+4. **Install Script Dependencies:** From this skill directory, install the pinned local requirements before using the Python scripts:
+
+```bash
+python -m pip install -r requirements.txt
 ```
 
 **Credit Costs:**
@@ -171,13 +178,4 @@ python scripts/get_job_status.py --job-id "job123"
 Generate slides that match the style of a reference image.
 
 ### When to Use
-- User provides an image URL and says "create slides like this"
-- User wants to match existing brand/design style
-- User has a template image they want to emulate
-
-### Workflow
-
-**Step 1: Verify Image URL**
-
-Ensure the reference image is:
-- Publicly accessible URL
+- User provides an image URL and says "create slides like thi
