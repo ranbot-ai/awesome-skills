@@ -685,6 +685,31 @@
       "scrapedAt": "2026-01-26T13:15:26.996Z"
     },
     {
+      "id": "antigravity-agent-creator",
+      "name": "agent-creator",
+      "slug": "agent-creator",
+      "description": "Create custom AI subagents with proper plugin structure, persona generation, and companion routing skills.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-creator",
+      "content": "\n# Agent Creator\n\nA skill for creating custom subagents packaged inside proper plugins. This skill\nhandles the entire flow: gathering requirements, generating a rich persona from\neven a one-line description, scaffolding the correct folder structure, and\noptionally creating a companion skill that auto-routes tasks to the new agent.\n\n## When to use\n\nUse this skill whenever you need a dedicated, isolated \"brain\" to handle a specific repetitive task, or when you find yourself repeatedly pasting the same massive system prompt or constraints into the main chat. Creating a dedicated subagent keeps the main conversation lightweight and focused.\n\n## Why this exists\n\nSubagents live inside plugins at `<appDataDir>\\config\\plugins\\`. For\na subagent to be properly registered and invokable, it needs to be inside a\nplugin's `agents/` directory with a valid `plugin.json`. Getting this structure\nright manually is tedious and error-prone. This skill automates the entire\nprocess so the user can go from \"I want an agent that reviews code\" to a fully\nfunctional, properly structured subagent in under a minute.\n\n## Target directory\n\nAll agents are created inside plugins at:\n```\n<appDataDir>\\config\\plugins\\<plugin-name>\\\n```\n\nIf the user wants the agent inside an **existing plugin**, add the agent folder\nto that plugin's `agents/` directory. If no plugin is specified, create a new\nplugin named `<agent-name>-plugin`.\n\n## Workflow\n\nFollow these steps in order. Do NOT skip the interview — even a one-line\ndescription from the user needs to be expanded into a proper persona.\n\n### Step 1: Gather requirements\n\nAsk the user these questions one at a time (use the `ask_question` tool where\nappropriate, or ask conversationally if the flow is natural):\n\n1. **Agent name** — What should this agent be called?\n   - Guide: short, lowercase, hyphenated (e.g., `code-reviewer`, `sql-expert`, `test-writer`)\n\n2. **Purpose** — What is this agent for? (even a single line is fine)\n   - Example: \"review code\", \"write SQL queries\", \"generate unit tests\"\n\n3. **Plugin placement** — Should this go into an existing plugin or a new one?\n   - List the user's existing plugins from `<appDataDir>\\config\\plugins\\`\n   - Default: create a new plugin named `<agent-name>-plugin`\n\n4. **Companion skill** — Should I also create a routing skill that auto-triggers\n   this agent? (Default: yes)\n\n### Step 2: Generate the persona\n\nThis is the most important step. The user might give you a one-liner like\n\"for reviewing code\" — your job is to expand that into a rich, detailed persona\nthat makes the agent genuinely excellent at its job.\n\nA good persona includes:\n\n- **Identity**: Who the agent is and what it specializes in\n- **Expertise areas**: Specific domains, technologies, or methodologies it knows\n- **Personality traits**: How it communicates (e.g., direct, thorough, cautious)\n- **Working style**: How it approaches problems step by step\n- **Output format**: What its responses look like (structured, prose, etc.)\n- **Constraints**: What it should NOT do or what it should defer to others\n- **Quality standards**: What \"good work\" looks like for this agent\n\nFor example, if the user says \"for reviewing code\", generate a persona like:\n\n> You are a senior code reviewer with 15+ years of experience across multiple\n> languages and paradigms. You approach every review with three priorities:\n> correctness first, maintainability second, performance third. You never\n> approve code you haven't fully understood. You flag security vulnerabilities\n> with high urgency. You distinguish between blocking issues (must fix),\n> suggestions (should consider), and nitpicks (style preference). You provide\n> concrete fix suggestions, not just problem descriptions. You check for edge\n> cases, error handling, resource leaks, and race conditions. You respect the\n> codebase's existing patterns unless they are actively harmful.\n\n### Step 3: Create the folder structure\n\nCreate the following structure:\n\n```\nplugins/<plugin-name>/\n├── plugin.json\n├── agents/\n│   └── <agent-name>.md\n└── skills/                    (only if companion skill requested)\n    └── use-<agent-name>/\n        └── SKILL.md\n```\n\n### Step 4: Write plugin.json\n\nIf creating a new plugin, write a minimal `plugin.json`:\n\n```json\n{\n  \"name\": \"<plugin-name>\",\n  \"description\": \"<Brief description of what this plugin provides>\",\n  \"version\": \"1.0.0\"\n}\n```\n\nIf adding to an existing plugin, do NOT modify the existing `plugin.json`.\n\n### Step 5: Write the agent file\n\nWrite the `<agent-name>.md` file in the `agents/` folder following this exact structure. Ensure you include the YAML frontmatter and the Prompt Defense Baseline verbatim. For the `model` field in the frontmatter, dynamically insert the name of the model currently powering the session you are running in (e.g., `gemini-3.1-pro`, `opus`, `sonnet`).\n\n```markdown\n---\nname: <agent-name>\ndescription: <One-line summary of what this agent does.>\ntools: [\"Read\", \"Grep\", \"Glob\", \"Bash\"]\nmodel: <current-mo",
+      "tags": [
+        "python",
+        "javascript",
+        "markdown",
+        "api",
+        "ai",
+        "agent",
+        "automation",
+        "workflow",
+        "template",
+        "document"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-06-22T12:14:59.688Z"
+    },
+    {
       "id": "antigravity-agent-evaluation",
       "name": "agent-evaluation",
       "slug": "agent-evaluation",
@@ -3962,6 +3987,32 @@
         "You want an E2E toolchain that can both execute tests and explain failures for AI coding workflows."
       ],
       "scrapedAt": "2026-03-17T07:14:54.180Z"
+    },
+    {
+      "id": "antigravity-ax-extract-workflow",
+      "name": "ax-extract-workflow",
+      "slug": "ax-extract-workflow",
+      "description": "Reconstruct workflow behind a past coding-agent artifact using local ax sessions/commits/skills/tool traces. Use when asked how X was built.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ax-extract-workflow",
+      "content": "\n# ax Extract Workflow\n\n## Overview\n\nUse this skill to reconstruct the workflow behind a past coding-agent artifact:\na shipped feature, PR, demo, refactor, report, or other concrete result. It uses\nthe local `ax` graph to connect commits, sessions, turns, skills, and tool traces\ninto a short \"how this got made\" narrative.\n\n`ax` must be installed, available on `PATH`, and able to reach its local database.\nIf ax cannot connect to its DB, report the connection failure and stop instead of\nguessing from memory.\n\n## When to Use This Skill\n\n- Use when the user asks \"how did we build X?\", \"what made X work?\", or \"extract the workflow behind this artifact.\"\n- Use when the anchor is a commit SHA, date, feature name, PR, session, or repo-local artifact.\n- Use when the user wants the sequence of agent skills, prompts, commands, decisions, and checks that led to a result.\n- Do not use for a generic activity summary; use normal session listing instead.\n\n## How It Works\n\n### Step 1: Resolve the Anchor\n\nIdentify the best anchor from the user's request:\n\n- Commit SHA: use it directly.\n- Date or date range: inspect sessions around the date.\n- Topic, feature, or artifact name: search recall for related turns, commits, and skills.\n- \"This repo recently\": list recent sessions for the current repo.\n\n```bash\nax recall \"live ingest dashboard\" --sources=turn,commit,skill --scope=here\nax sessions near abc1234 --json\nax sessions around 2026-06-15 --days=3 --json\nax sessions here --days=14\n```\n\nThese commands are read-only inspection commands.\n\n### Step 2: Pick Relevant Sessions\n\nChoose the few sessions most likely to explain the artifact. Prefer sessions\nthat mention the artifact, touch related files, include relevant commits, or have\nskills and tool calls that match the work.\n\nIf several candidates are plausible, show the user the candidates and ask which\none to inspect.\n\n### Step 3: Inspect the Session Trail\n\nOpen each selected session and look for:\n\n- skills used and their order\n- user steering points and clarified constraints\n- files, tests, and commands that changed the direction of the work\n- subagent or tool traces that produced key evidence\n- verification steps before the result was considered done\n\n```bash\nax sessions show <session-id> --json\nax sessions show <session-id> --by-role\nax recall \"specific keyword from the artifact\" --sources=turn,commit --scope=here\n```\n\n### Step 4: Write the Reconstruction\n\nReturn the result inline unless the user asks for a file. Keep it short and\nevidence-grounded:\n\n1. Anchor: the date, commit, feature, or artifact you resolved.\n2. Ordered workflow: 4-8 steps showing the skill or action and what it produced.\n3. Key decisions: the user or agent choices that changed the path.\n4. Verification: tests, reviews, checks, or manual evidence.\n5. Reproducer brief: the compact recipe for doing similar work again.\n\nUse session IDs, commit SHAs, and file paths as citations when available.\n\n## Examples\n\n### Reconstruct a Feature from a Commit\n\n```bash\nax sessions near 8f31c2a --json\nax sessions show <session-id> --by-role\nax sessions show <session-id> --json\n```\n\nOutput shape:\n\n```text\nAnchor: 8f31c2a, live ingest dashboard\n\nWorkflow:\n1. Problem framing -> narrowed the failure to stale dashboard polling.\n2. Session recall -> found the earlier ingest-stream design and constraints.\n3. Implementation -> wired the server event bus and browser subscription.\n4. Verification -> ran typecheck and refreshed the dashboard locally.\n\nReproducer brief:\nStart from the failing artifact, find nearby sessions, inspect role-grouped\nskills, then summarize the smallest ordered path from framing to verification.\n```\n\n### Reconstruct Work Around a Date\n\n```bash\nax sessions around 2026-06-15 --days=2 --json\nax recall \"otel receiver\" --sources=turn,commit,skill --scope=here\n```\n\nUse this when the user remembers when the work happened but not the commit.\n\n## Best Practices\n\n- Start from the most concrete anchor available: SHA beats date, date beats vague topic.\n- Treat ax as the source of truth; do not invent missing skills, costs, commands, or decisions.\n- Quote sparingly and only when a user decision or command matters to the reconstruction.\n- Keep private transcript details private; summarize rather than dumping logs.\n- Separate \"what happened\" from \"what to repeat next time.\"\n\n## Limitations\n\n- Requires a working local ax installation and reachable local ax database.\n- Only sees sessions, commits, skills, and tool traces that ax has ingested.\n- Session data can be incomplete when an agent provider omits tool output, cost, or reasoning data.\n- It reconstructs workflow, not correctness; still inspect the code and run project checks when making engineering decisions.\n\n## Security & Safety Notes\n\n- Do not upload private transcripts, session logs, prompts, tool outputs, or local database exports.\n- Redact secrets, tokens, customer data, file contents, and private conversation text from summaries.\n- Use read-only ax inspection comma",
+      "tags": [
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "design",
+        "security"
+      ],
+      "useCases": [
+        "Use when the user asks \"how did we build X?\", \"what made X work?\", or \"extract the workflow behind this artifact.\"",
+        "Use when the anchor is a commit SHA, date, feature name, PR, session, or repo-local artifact.",
+        "Use when the user wants the sequence of agent skills, prompts, commands, decisions, and checks that led to a result.",
+        "Do not use for a generic activity summary; use normal session listing instead."
+      ],
+      "scrapedAt": "2026-06-22T12:15:45.793Z"
     },
     {
       "id": "antigravity-axiom",
@@ -26503,57 +26554,6 @@
       "scrapedAt": "2026-01-29T06:59:47.253Z"
     },
     {
-      "id": "antigravity-nodejs-best-practices",
-      "name": "nodejs-best-practices",
-      "slug": "nodejs-best-practices",
-      "description": "Node.js development principles and decision-making. Framework selection, async patterns, security, and architecture. Teaches thinking, not copying.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/nodejs-best-practices",
-      "content": "\n# Node.js Best Practices\n\n> Principles and decision-making for Node.js development in 2025.\n> **Learn to THINK, not memorize code patterns.**\n\n## When to Use\nUse this skill when making Node.js architecture decisions, choosing frameworks, designing async patterns, or applying security and deployment best practices.\n\n---\n\n## ⚠️ How to Use This Skill\n\nThis skill teaches **decision-making principles**, not fixed code to copy.\n\n- ASK user for preferences when unclear\n- Choose framework/pattern based on CONTEXT\n- Don't default to same solution every time\n\n---\n\n## 1. Framework Selection (2025)\n\n### Decision Tree\n\n```\nWhat are you building?\n│\n├── Edge/Serverless (Cloudflare, Vercel)\n│   └── Hono (zero-dependency, ultra-fast cold starts)\n│\n├── High Performance API\n│   └── Fastify (2-3x faster than Express)\n│\n├── Enterprise/Team familiarity\n│   └── NestJS (structured, DI, decorators)\n│\n├── Legacy/Stable/Maximum ecosystem\n│   └── Express (mature, most middleware)\n│\n└── Full-stack with frontend\n    └── Next.js API Routes or tRPC\n```\n\n### Comparison Principles\n\n| Factor | Hono | Fastify | Express |\n|--------|------|---------|---------|\n| **Best for** | Edge, serverless | Performance | Legacy, learning |\n| **Cold start** | Fastest | Fast | Moderate |\n| **Ecosystem** | Growing | Good | Largest |\n| **TypeScript** | Native | Excellent | Good |\n| **Learning curve** | Low | Medium | Low |\n\n### Selection Questions to Ask:\n1. What's the deployment target?\n2. Is cold start time critical?\n3. Does team have existing experience?\n4. Is there legacy code to maintain?\n\n---\n\n## 2. Runtime Considerations (2025)\n\n### Native TypeScript\n\n```\nNode.js 22+: --experimental-strip-types\n├── Run .ts files directly\n├── No build step needed for simple projects\n└── Consider for: scripts, simple APIs\n```\n\n### Module System Decision\n\n```\nESM (import/export)\n├── Modern standard\n├── Better tree-shaking\n├── Async module loading\n└── Use for: new projects\n\nCommonJS (require)\n├── Legacy compatibility\n├── More npm packages support\n└── Use for: existing codebases, some edge cases\n```\n\n### Runtime Selection\n\n| Runtime | Best For |\n|---------|----------|\n| **Node.js** | General purpose, largest ecosystem |\n| **Bun** | Performance, built-in bundler |\n| **Deno** | Security-first, built-in TypeScript |\n\n---\n\n## 3. Architecture Principles\n\n### Layered Structure Concept\n\n```\nRequest Flow:\n│\n├── Controller/Route Layer\n│   ├── Handles HTTP specifics\n│   ├── Input validation at boundary\n│   └── Calls service layer\n│\n├── Service Layer\n│   ├── Business logic\n│   ├── Framework-agnostic\n│   └── Calls repository layer\n│\n└── Repository Layer\n    ├── Data access only\n    ├── Database queries\n    └── ORM interactions\n```\n\n### Why This Matters:\n- **Testability**: Mock layers independently\n- **Flexibility**: Swap database without touching business logic\n- **Clarity**: Each layer has single responsibility\n\n### When to Simplify:\n- Small scripts → Single file OK\n- Prototypes → Less structure acceptable\n- Always ask: \"Will this grow?\"\n\n---\n\n## 4. Error Handling Principles\n\n### Centralized Error Handling\n\n```\nPattern:\n├── Create custom error classes\n├── Throw from any layer\n├── Catch at top level (middleware)\n└── Format consistent response\n```\n\n### Error Response Philosophy\n\n```\nClient gets:\n├── Appropriate HTTP status\n├── Error code for programmatic handling\n├── User-friendly message\n└── NO internal details (security!)\n\nLogs get:\n├── Full stack trace\n├── Request context\n├── User ID (if applicable)\n└── Timestamp\n```\n\n### Status Code Selection\n\n| Situation | Status | When |\n|-----------|--------|------|\n| Bad input | 400 | Client sent invalid data |\n| No auth | 401 | Missing or invalid credentials |\n| No permission | 403 | Valid auth, but not allowed |\n| Not found | 404 | Resource doesn't exist |\n| Conflict | 409 | Duplicate or state conflict |\n| Validation | 422 | Schema valid but business rules fail |\n| Server error | 500 | Our fault, log everything |\n\n---\n\n## 5. Async Patterns Principles\n\n### When to Use Each\n\n| Pattern | Use When |\n|---------|----------|\n| `async/await` | Sequential async operations |\n| `Promise.all` | Parallel independent operations |\n| `Promise.allSettled` | Parallel where some can fail |\n| `Promise.race` | Timeout or first response wins |\n\n### Event Loop Awareness\n\n```\nI/O-bound (async helps):\n├── Database queries\n├── HTTP requests\n├── File system\n└── Network operations\n\nCPU-bound (async doesn't help):\n├── Crypto operations\n├── Image processing\n├── Complex calculations\n└── → Use worker threads or offload\n```\n\n### Avoiding Event Loop Blocking\n\n- Never use sync methods in production (fs.readFileSync, etc.)\n- Offload CPU-intensive work\n- Use streaming for large data\n\n---\n\n## 6. Validation Principles\n\n### Validate at Boundaries\n\n```\nWhere to validate:\n├── API entry point (request body/params)\n├── Before database operations\n├── External data (API responses, file uploads)\n└── Environment variables (startup)\n```\n\n### Validation Library Selection\n\n| Library | Best For",
-      "tags": [
-        "typescript",
-        "react",
-        "node",
-        "api",
-        "ai",
-        "design",
-        "image",
-        "security",
-        "rag"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:19:51.090Z"
-    },
-    {
-      "id": "antigravity-nosql-expert",
-      "name": "nosql-expert",
-      "slug": "nosql-expert",
-      "description": "Expert guidance for distributed NoSQL databases (Cassandra, DynamoDB). Focuses on mental models, query-first modeling, single-table design, and avoiding hot partitions in high-scale systems.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/nosql-expert",
-      "content": "\n# NoSQL Expert Patterns (Cassandra & DynamoDB)\n\n## Overview\n\nThis skill provides professional mental models and design patterns for **distributed wide-column and key-value stores** (specifically Apache Cassandra and Amazon DynamoDB).\n\nUnlike SQL (where you model data entities), or document stores (like MongoDB), these distributed systems require you to **model your queries first**.\n\n## When to Use\n- **Designing for Scale**: Moving beyond simple single-node databases to distributed clusters.\n- **Technology Selection**: Evaluating or using **Cassandra**, **ScyllaDB**, or **DynamoDB**.\n- **Performance Tuning**: Troubleshooting \"hot partitions\" or high latency in existing NoSQL systems.\n- **Microservices**: Implementing \"database-per-service\" patterns where highly optimized reads are required.\n\n## The Mental Shift: SQL vs. Distributed NoSQL\n\n| Feature | SQL (Relational) | Distributed NoSQL (Cassandra/DynamoDB) |\n| :--- | :--- | :--- |\n| **Data modeling** | Model Entities + Relationships | Model **Queries** (Access Patterns) |\n| **Joins** | CPU-intensive, at read time | **Pre-computed** (Denormalized) at write time |\n| **Storage cost** | Expensive (minimize duplication) | Cheap (duplicate data for read speed) |\n| **Consistency** | ACID (Strong) | **BASE (Eventual)** / Tunable |\n| **Scalability** | Vertical (Bigger machine) | **Horizontal** (More nodes/shards) |\n\n> **The Golden Rule:** In SQL, you design the data model to answer *any* query. In NoSQL, you design the data model to answer *specific* queries efficiently.\n\n## Core Design Patterns\n\n### 1. Query-First Modeling (Access Patterns)\n\nYou typically cannot \"add a query later\" without migration or creating a new table/index.\n\n**Process:**\n1.  **List all Entities** (User, Order, Product).\n2.  **List all Access Patterns** (\"Get User by Email\", \"Get Orders by User sorted by Date\").\n3.  **Design Table(s)** specifically to serve those patterns with a single lookup.\n\n### 2. The Partition Key is King\n\nData is distributed across physical nodes based on the **Partition Key (PK)**.\n-   **Goal:** Even distribution of data and traffic.\n-   **Anti-Pattern:** Using a low-cardinality PK (e.g., `status=\"active\"` or `gender=\"m\"`) creates **Hot Partitions**, limiting throughput to a single node's capacity.\n-   **Best Practice:** Use high-cardinality keys (User IDs, Device IDs, Composite Keys).\n\n### 3. Clustering / Sort Keys\n\nWithin a partition, data is sorted on disk by the **Clustering Key (Cassandra)** or **Sort Key (DynamoDB)**.\n-   This allows for efficient **Range Queries** (e.g., `WHERE user_id=X AND date > Y`).\n-   It effectively pre-sorts your data for specific retrieval requirements.\n\n### 4. Single-Table Design (Adjacency Lists)\n\n*Primary use: DynamoDB (but concepts apply elsewhere)*\n\nStoring multiple entity types in one table to enable pre-joined reads.\n\n| PK (Partition) | SK (Sort) | Data Fields... |\n| :--- | :--- | :--- |\n| `USER#123` | `PROFILE` | `{ name: \"Ian\", email: \"...\" }` |\n| `USER#123` | `ORDER#998` | `{ total: 50.00, status: \"shipped\" }` |\n| `USER#123` | `ORDER#999` | `{ total: 12.00, status: \"pending\" }` |\n\n-   **Query:** `PK=\"USER#123\"`\n-   **Result:** Fetches User Profile AND all Orders in **one network request**.\n\n### 5. Denormalization & Duplication\n\nDon't be afraid to store the same data in multiple tables to serve different query patterns.\n-   **Table A:** `users_by_id` (PK: uuid)\n-   **Table B:** `users_by_email` (PK: email)\n\n*Trade-off: You must manage data consistency across tables (often using eventual consistency or batch writes).*\n\n## Specific Guidance\n\n### Apache Cassandra / ScyllaDB\n\n-   **Primary Key Structure:** `((Partition Key), Clustering Columns)`\n-   **No Joins, No Aggregates:** Do not try to `JOIN` or `GROUP BY`. Pre-calculate aggregates in a separate counter table.\n-   **Avoid `ALLOW FILTERING`:** If you see this in production, your data model is wrong. It implies a full cluster scan.\n-   **Writes are Cheap:** Inserts and Updates are just appends to the LSM tree. Don't worry about write volume as much as read efficiency.\n-   **Tombstones:** Deletes are expensive markers. Avoid high-velocity delete patterns (like queues) in standard tables.\n\n### AWS DynamoDB\n\n-   **GSI (Global Secondary Index):** Use GSIs to create alternative views of your data (e.g., \"Search Orders by Date\" instead of by User).\n    -   *Note:* GSIs are eventually consistent.\n-   **LSI (Local Secondary Index):** Sorts data differently *within* the same partition. Must be created at table creation time.\n-   **WCU / RCU:** Understand capacity modes. Single-table design helps optimize consumed capacity units.\n-   **TTL:** Use Time-To-Live attributes to automatically expire old data (free delete) without creating tombstones.\n\n## Expert Checklist\n\nBefore finalizing your NoSQL schema:\n\n-   [ ] **Access Pattern Coverage:** Does every query pattern map to a specific table or index?\n-   [ ] **Cardinality Check:** Does the Partition Key have enough unique values to spread tr",
-      "tags": [
-        "node",
-        "ai",
-        "design",
-        "document",
-        "aws",
-        "rag",
-        "cro"
-      ],
-      "useCases": [
-        "**Designing for Scale**: Moving beyond simple single-node databases to distributed clusters.",
-        "**Technology Selection**: Evaluating or using **Cassandra**, **ScyllaDB**, or **DynamoDB**.",
-        "**Performance Tuning**: Troubleshooting \"hot partitions\" or high latency in existing NoSQL systems.",
-        "**Microservices**: Implementing \"database-per-service\" patterns where highly optimized reads are required."
-      ],
-      "scrapedAt": "2026-01-26T13:19:52.279Z"
-    },
-    {
       "id": "awesome-llm-notion-knowledge-capture",
       "name": "notion-knowledge-capture",
       "slug": "awesome-llm-notion-knowledge-capture",
@@ -28073,14 +28073,14 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 383
+      "count": 384
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 350
+      "count": 349
     },
     {
       "id": "creative-media",
@@ -28145,48 +28145,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 234546
+      "stars": 235633
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 153331
+      "stars": 153788
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 65387
+      "stars": 65507
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 1,
-      "stars": 77881
+      "stars": 77994
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1338
+      "stars": 1340
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1063,
-      "newSkillCount": 7,
-      "stars": 41268
+      "newSkillCount": 9,
+      "stars": 41370
     }
   ],
-  "lastUpdated": "2026-06-21T10:03:05.599Z",
+  "lastUpdated": "2026-06-22T12:20:54.446Z",
   "stats": {
     "totalSkills": 1162,
-    "newSkills": 18,
-    "scrapedAt": "2026-06-21T10:03:05.599Z"
+    "newSkills": 20,
+    "scrapedAt": "2026-06-22T12:20:54.446Z"
   }
 }
