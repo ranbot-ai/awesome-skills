@@ -3,7 +3,7 @@ name: agent-creator
 description: Create custom AI subagents with proper plugin structure, persona generation, and companion routing skills. 
 category: AI & Agents
 source: antigravity
-tags: [python, javascript, markdown, api, ai, agent, automation, workflow, template, document]
+tags: [python, javascript, markdown, api, claude, ai, agent, automation, workflow, template]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-creator
 ---
 
@@ -38,6 +38,13 @@ All agents are created inside plugins at:
 If the user wants the agent inside an **existing plugin**, add the agent folder
 to that plugin's `agents/` directory. If no plugin is specified, create a new
 plugin named `<agent-name>-plugin`.
+
+Before creating any path, validate both `<agent-name>` and `<plugin-name>`:
+
+- accept only lowercase letters, numbers, and single hyphens: `^[a-z0-9]+(-[a-z0-9]+)*$`
+- reject `/`, `\`, `.`, `..`, absolute paths, whitespace, shell metacharacters, and YAML metacharacters
+- resolve the final target path and verify it stays under `<appDataDir>\config\plugins\`
+- stop and ask for a safe replacement instead of sanitizing a suspicious name silently
 
 ## Workflow
 
@@ -120,11 +127,4 @@ If adding to an existing plugin, do NOT modify the existing `plugin.json`.
 
 ### Step 5: Write the agent file
 
-Write the `<agent-name>.md` file in the `agents/` folder following this exact structure. Ensure you include the YAML frontmatter and the Prompt Defense Baseline verbatim. For the `model` field in the frontmatter, dynamically insert the name of the model currently powering the session you are running in (e.g., `gemini-3.1-pro`, `opus`, `sonnet`).
-
-```markdown
----
-name: <agent-name>
-description: <One-line summary of what this agent does.>
-tools: ["Read", "Grep", "Glob", "Bash"]
-model: <current-mo
+Write the `<agent-name>.md` file in the `agents/` fo
