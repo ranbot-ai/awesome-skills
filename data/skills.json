@@ -14945,6 +14945,35 @@
       "scrapedAt": "2026-03-07T06:54:23.661Z"
     },
     {
+      "id": "antigravity-emil-design-eng",
+      "name": "emil-design-eng",
+      "slug": "emil-design-eng",
+      "description": "Use when designing or reviewing polished product UI with Emil Kowalski-inspired animation, interaction, and component craft guidance.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/emil-design-eng",
+      "content": "\n# Design Engineering\n\n## When to Use\n\n- Use when the user asks for UI polish, product design critique, animation direction, or high-craft component decisions.\n- Use when reviewing frontend code for motion quality, easing, duration, physicality, interaction feedback, or subtle interface details.\n- Use when building or refining React, Tailwind, CSS, or Framer Motion interfaces where taste and perceived quality matter.\n\n## Limitations\n\n- This skill provides design engineering judgment; it does not replace project-specific product requirements, accessibility testing, or real-device motion review.\n- Verify framework versions, installed dependencies, and rendered behavior before treating animation or UI recommendations as production-ready.\n- Do not apply these rules mechanically when an existing brand system, platform convention, or user requirement calls for a different interaction language.\n\n## Initial Response\n\nWhen this skill is first invoked without a specific question, respond only with:\n\n> I'm ready to help you build interfaces that feel right, my knowledge comes from Emil Kowalski's design engineering philosophy. If you want to dive even deeper, check out Emil’s course: [animations.dev](https://animations.dev/).\n\nDo not provide any other information until the user asks a question.\n\nYou are a design engineer with the craft sensibility. You build interfaces where every detail compounds into something that feels right. You understand that in a world where everyone's software is good enough, taste is the differentiator.\n\n## Core Philosophy\n\n### Taste is trained, not innate\n\nGood taste is not personal preference. It is a trained instinct: the ability to see beyond the obvious and recognize what elevates. You develop it by surrounding yourself with great work, thinking deeply about why something feels good, and practicing relentlessly.\n\nWhen building UI, don't just make it work. Study why the best interfaces feel the way they do. Reverse engineer animations. Inspect interactions. Be curious.\n\n### Unseen details compound\n\nMost details users never consciously notice. That is the point. When a feature functions exactly as someone assumes it should, they proceed without giving it a second thought. That is the goal.\n\n> \"All those unseen details combine to produce something that's just stunning, like a thousand barely audible voices all singing in tune.\" - Paul Graham\n\nEvery decision below exists because the aggregate of invisible correctness creates interfaces people love without knowing why.\n\n### Beauty is leverage\n\nPeople select tools based on the overall experience, not just functionality. Good defaults and good animations are real differentiators. Beauty is underutilized in software. Use it as leverage to stand out.\n\n## Review Format (Required)\n\nWhen reviewing UI code, you MUST use a markdown table with Before/After columns. Do NOT use a list with \"Before:\" and \"After:\" on separate lines. Always output an actual markdown table like this:\n\n| Before | After | Why |\n| --- | --- | --- |\n| `transition: all 300ms` | `transition: transform 200ms ease-out` | Specify exact properties; avoid `all` |\n| `transform: scale(0)` | `transform: scale(0.95); opacity: 0` | Nothing in the real world appears from nothing |\n| `ease-in` on dropdown | `ease-out` with custom curve | `ease-in` feels sluggish; `ease-out` gives instant feedback |\n| No `:active` state on button | `transform: scale(0.97)` on `:active` | Buttons must feel responsive to press |\n| `transform-origin: center` on popover | `transform-origin: var(--radix-popover-content-transform-origin)` | Popovers should scale from their trigger (not modals — modals stay centered) |\n\nWrong format (never do this):\n\n```\nBefore: transition: all 300ms\nAfter: transition: transform 200ms ease-out\n────────────────────────────\nBefore: scale(0)\nAfter: scale(0.95)\n```\n\nCorrect format: A single markdown table with | Before | After | Why | columns, one row per issue found. The \"Why\" column briefly explains the reasoning.\n\n## The Animation Decision Framework\n\nBefore writing any animation code, answer these questions in order:\n\n### 1. Should this animate at all?\n\n**Ask:** How often will users see this animation?\n\n| Frequency                                                   | Decision                     |\n| ----------------------------------------------------------- | ---------------------------- |\n| 100+ times/day (keyboard shortcuts, command palette toggle) | No animation. Ever.          |\n| Tens of times/day (hover effects, list navigation)          | Remove or drastically reduce |\n| Occasional (modals, drawers, toasts)                        | Standard animation           |\n| Rare/first-time (onboarding, feedback forms, celebrations)  | Can add delight              |\n\n**Never animate keyboard-initiated actions.** These actions are repeated hundreds of times daily. Animation makes them feel slow, delayed, and disconnected from the user's actions.\n\nRaycast has no open/close animation. That ",
+      "tags": [
+        "javascript",
+        "react",
+        "markdown",
+        "api",
+        "claude",
+        "ai",
+        "design",
+        "document",
+        "image",
+        "tailwind"
+      ],
+      "useCases": [
+        "Use when the user asks for UI polish, product design critique, animation direction, or high-craft component decisions.",
+        "Use when reviewing frontend code for motion quality, easing, duration, physicality, interaction feedback, or subtle interface details.",
+        "Use when building or refining React, Tailwind, CSS, or Framer Motion interfaces where taste and perceived quality matter."
+      ],
+      "scrapedAt": "2026-06-25T09:37:21.938Z"
+    },
+    {
       "id": "antigravity-emotional-arc-designer",
       "name": "emotional-arc-designer",
       "slug": "emotional-arc-designer",
@@ -26541,25 +26570,6 @@
       "scrapedAt": "2026-01-26T13:19:49.936Z"
     },
     {
-      "id": "antigravity-nft-standards",
-      "name": "nft-standards",
-      "slug": "nft-standards",
-      "description": "Master ERC-721 and ERC-1155 NFT standards, metadata best practices, and advanced NFT features.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/nft-standards",
-      "content": "\n# NFT Standards\n\nMaster ERC-721 and ERC-1155 NFT standards, metadata best practices, and advanced NFT features.\n\n## Do not use this skill when\n\n- The task is unrelated to nft standards\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Use this skill when\n\n- Creating NFT collections (art, gaming, collectibles)\n- Implementing marketplace functionality\n- Building on-chain or off-chain metadata\n- Creating soulbound tokens (non-transferable)\n- Implementing royalties and revenue sharing\n- Developing dynamic/evolving NFTs\n\n## ERC-721 (Non-Fungible Token Standard)\n\n```solidity\n// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\nimport \"@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol\";\nimport \"@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol\";\nimport \"@openzeppelin/contracts/access/Ownable.sol\";\nimport \"@openzeppelin/contracts/utils/Counters.sol\";\n\ncontract MyNFT is ERC721URIStorage, ERC721Enumerable, Ownable {\n    using Counters for Counters.Counter;\n    Counters.Counter private _tokenIds;\n\n    uint256 public constant MAX_SUPPLY = 10000;\n    uint256 public constant MINT_PRICE = 0.08 ether;\n    uint256 public constant MAX_PER_MINT = 20;\n\n    constructor() ERC721(\"MyNFT\", \"MNFT\") {}\n\n    function mint(uint256 quantity) external payable {\n        require(quantity > 0 && quantity <= MAX_PER_MINT, \"Invalid quantity\");\n        require(_tokenIds.current() + quantity <= MAX_SUPPLY, \"Exceeds max supply\");\n        require(msg.value >= MINT_PRICE * quantity, \"Insufficient payment\");\n\n        for (uint256 i = 0; i < quantity; i++) {\n            _tokenIds.increment();\n            uint256 newTokenId = _tokenIds.current();\n            _safeMint(msg.sender, newTokenId);\n            _setTokenURI(newTokenId, generateTokenURI(newTokenId));\n        }\n    }\n\n    function generateTokenURI(uint256 tokenId) internal pure returns (string memory) {\n        // Return IPFS URI or on-chain metadata\n        return string(abi.encodePacked(\"ipfs://QmHash/\", Strings.toString(tokenId), \".json\"));\n    }\n\n    // Required overrides\n    function _beforeTokenTransfer(\n        address from,\n        address to,\n        uint256 tokenId,\n        uint256 batchSize\n    ) internal override(ERC721, ERC721Enumerable) {\n        super._beforeTokenTransfer(from, to, tokenId, batchSize);\n    }\n\n    function _burn(uint256 tokenId) internal override(ERC721, ERC721URIStorage) {\n        super._burn(tokenId);\n    }\n\n    function tokenURI(uint256 tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {\n        return super.tokenURI(tokenId);\n    }\n\n    function supportsInterface(bytes4 interfaceId)\n        public\n        view\n        override(ERC721, ERC721Enumerable)\n        returns (bool)\n    {\n        return super.supportsInterface(interfaceId);\n    }\n\n    function withdraw() external onlyOwner {\n        payable(owner()).transfer(address(this).balance);\n    }\n}\n```\n\n## ERC-1155 (Multi-Token Standard)\n\n```solidity\n// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\nimport \"@openzeppelin/contracts/token/ERC1155/ERC1155.sol\";\nimport \"@openzeppelin/contracts/access/Ownable.sol\";\n\ncontract GameItems is ERC1155, Ownable {\n    uint256 public constant SWORD = 1;\n    uint256 public constant SHIELD = 2;\n    uint256 public constant POTION = 3;\n\n    mapping(uint256 => uint256) public tokenSupply;\n    mapping(uint256 => uint256) public maxSupply;\n\n    constructor() ERC1155(\"ipfs://QmBaseHash/{id}.json\") {\n        maxSupply[SWORD] = 1000;\n        maxSupply[SHIELD] = 500;\n        maxSupply[POTION] = 10000;\n    }\n\n    function mint(\n        address to,\n        uint256 id,\n        uint256 amount\n    ) external onlyOwner {\n        require(tokenSupply[id] + amount <= maxSupply[id], \"Exceeds max supply\");\n\n        _mint(to, id, amount, \"\");\n        tokenSupply[id] += amount;\n    }\n\n    function mintBatch(\n        address to,\n        uint256[] memory ids,\n        uint256[] memory amounts\n    ) external onlyOwner {\n        for (uint256 i = 0; i < ids.length; i++) {\n            require(tokenSupply[ids[i]] + amounts[i] <= maxSupply[ids[i]], \"Exceeds max supply\");\n            tokenSupply[ids[i]] += amounts[i];\n        }\n\n        _mintBatch(to, ids, amounts, \"\");\n    }\n\n    function burn(\n        address from,\n        uint256 id,\n        uint256 amount\n    ) external {\n        require(from == msg.sender || isApprovedForAll(from, msg.sender), \"Not authorized\");\n        _burn(from, id, amount);\n        tokenSupply[id] -= amount;\n    }\n}\n```\n\n## Metadata Standards\n\n### Off-Chain Metadata (IPFS)\n\n```json\n{\n  \"name\": \"NFT #1\",\n  \"description\": \"Description of the NFT\",\n  \"image\": \"ipfs://QmImageHash\",\n  \"attributes\": [\n    {\n      \"trait_type\": \"Background\",\n      \"v",
-      "tags": [
-        "ai",
-        "template",
-        "image",
-        "rag"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:46.967Z"
-    },
-    {
       "id": "awesome-llm-notion-knowledge-capture",
       "name": "notion-knowledge-capture",
       "slug": "awesome-llm-notion-knowledge-capture",
@@ -28079,14 +28089,14 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 384
+      "count": 383
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 349
+      "count": 350
     },
     {
       "id": "creative-media",
@@ -28151,48 +28161,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 237348
+      "stars": 238232
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 154564
+      "stars": 154990
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 65712
+      "stars": 65844
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 1,
-      "stars": 78202
+      "stars": 78286
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1342
+      "stars": 1341
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1063,
       "newSkillCount": 8,
-      "stars": 41550
+      "stars": 41656
     }
   ],
-  "lastUpdated": "2026-06-24T09:46:20.458Z",
+  "lastUpdated": "2026-06-25T09:40:10.693Z",
   "stats": {
     "totalSkills": 1162,
     "newSkills": 19,
-    "scrapedAt": "2026-06-24T09:46:20.458Z"
+    "scrapedAt": "2026-06-25T09:40:10.693Z"
   }
 }
