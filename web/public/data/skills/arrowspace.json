@@ -1,0 +1,25 @@
+{
+  "id": "antigravity-arrowspace",
+  "name": "arrowspace",
+  "slug": "arrowspace",
+  "description": "Spectral vector search using graph Laplacian eigenstructure. Use when cosine/L2 similarity misses latent structure in your embeddings.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/arrowspace",
+  "content": "\n# ArrowSpace\n\nSpectral vector search that augments nearest-neighbour search with graph Laplacian features. Computes a Laplacian over the item graph and uses the Rayleigh quotient to produce a λτ (lambda-tau) score per item, enabling search that respects both semantic similarity and structural role.\n\n## When to Use This Skill\n\n- Cosine or L2 similarity misses latent structure in your embeddings\n- You want graph-based retrieval with spectral awareness\n- You need to characterise the spectral properties of an embedding space\n- You are building RAG pipelines where contextual role matters alongside semantic content\n\n## How It Works\n\n### Step 1: Install and import\n\n```bash\npip install arrowspace\n```\n\n```python\nfrom arrowspace import ArrowSpaceBuilder\nimport numpy as np\n```\n\n### Step 2: Prepare your data\n\nPass an (N, d) float64 NumPy array of embedding vectors:\n\n```python\nitems = np.array([[0.1, 0.2, 0.3],\n                  [0.0, 0.5, 0.1],\n                  [0.9, 0.1, 0.0]], dtype=np.float64)\n```\n\n### Step 3: Configure graph parameters\n\n```python\ngraph_params = {\"eps\": 0.2, \"k\": 6, \"topk\": 3, \"p\": 2.0, \"sigma\": 1.0}\nbuilder = ArrowSpaceBuilder(items, graph_params=graph_params)\naspace = builder.build()\n```\n\n### Step 4: Query\n\n```python\nlambdas = aspace.lambdas()           # array indexed by insertion order\nsorted_res = aspace.lambdas_sorted()  # (score, index) pairs ascending\n```\n\nHigher λτ values indicate items that are both semantically close and structurally central.\n\n## Examples\n\n### Example 1: Basic spectral retrieval\n\n```python\nitems = np.random.randn(100, 64).astype(np.float64)\nbuilder = ArrowSpaceBuilder(items, graph_params={\"eps\": 0.5, \"k\": 10, \"topk\": 5, \"p\": 2.0, \"sigma\": None})\naspace = builder.build()\nscores = aspace.lambdas()\ntop_indices = np.argsort(scores)[-5:]\n```\n\n### Example 2: Compare spectral vs cosine ranking\n\n```python\nfrom sklearn.metrics.pairwise import cosine_similarity\ncos_sim = cosine_similarity(items)\ncosine_order = np.argsort(cos_sim[0])[::-1]\nspectral_order = np.argsort(aspace.lambdas())[::-1]\n```\n\n## Best Practices\n\n- ✅ Normalise embeddings to unit norm before passing to ArrowSpace\n- ✅ Start with eps proportional to 1/sqrt(dim) and tune from there\n- ✅ Use k between 3 and 25 depending on dataset size (rule: N/50)\n- ✅ Set sigma=None to auto-select kernel width from distance distribution\n- ❌ Don't use with fewer than 10 items (graph structure is not meaningful)\n- ❌ Don't use for real-time streaming data (ArrowSpace is batch-oriented)\n\n## Limitations\n\n- This skill does not replace environment-specific validation, testing, or expert review.\n- ArrowSpace is batch-oriented and not designed for real-time indexing of streaming data.\n\n## Common Pitfalls\n\n- **Problem:** eps is too small, producing a disconnected graph\n  **Solution:** Increase eps, or set it proportional to 1/sqrt(embedding_dim)\n\n- **Problem:** k is too large, producing a dense graph with washed-out spectral features\n  **Solution:** Keep k ≤ 25 for most datasets\n\n## Related Skills\n\n- `vector-database-engineer` — General vector database expertise\n- `embedding-strategies` — Embedding model selection and chunking\n- `similarity-search-patterns` — Semantic search implementation patterns\n- `hybrid-search-implementation` — Combined semantic + keyword search\n",
+  "tags": [
+    "python",
+    "claude",
+    "ai",
+    "design",
+    "rag"
+  ],
+  "useCases": [
+    "Cosine or L2 similarity misses latent structure in your embeddings",
+    "You want graph-based retrieval with spectral awareness",
+    "You need to characterise the spectral properties of an embedding space",
+    "You are building RAG pipelines where contextual role matters alongside semantic content"
+  ],
+  "scrapedAt": "2026-06-26T09:39:56.513Z"
+}

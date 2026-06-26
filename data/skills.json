@@ -3239,6 +3239,31 @@
       "scrapedAt": "2026-02-26T07:09:01.240Z"
     },
     {
+      "id": "antigravity-arrowspace",
+      "name": "arrowspace",
+      "slug": "arrowspace",
+      "description": "Spectral vector search using graph Laplacian eigenstructure. Use when cosine/L2 similarity misses latent structure in your embeddings.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/arrowspace",
+      "content": "\n# ArrowSpace\n\nSpectral vector search that augments nearest-neighbour search with graph Laplacian features. Computes a Laplacian over the item graph and uses the Rayleigh quotient to produce a λτ (lambda-tau) score per item, enabling search that respects both semantic similarity and structural role.\n\n## When to Use This Skill\n\n- Cosine or L2 similarity misses latent structure in your embeddings\n- You want graph-based retrieval with spectral awareness\n- You need to characterise the spectral properties of an embedding space\n- You are building RAG pipelines where contextual role matters alongside semantic content\n\n## How It Works\n\n### Step 1: Install and import\n\n```bash\npip install arrowspace\n```\n\n```python\nfrom arrowspace import ArrowSpaceBuilder\nimport numpy as np\n```\n\n### Step 2: Prepare your data\n\nPass an (N, d) float64 NumPy array of embedding vectors:\n\n```python\nitems = np.array([[0.1, 0.2, 0.3],\n                  [0.0, 0.5, 0.1],\n                  [0.9, 0.1, 0.0]], dtype=np.float64)\n```\n\n### Step 3: Configure graph parameters\n\n```python\ngraph_params = {\"eps\": 0.2, \"k\": 6, \"topk\": 3, \"p\": 2.0, \"sigma\": 1.0}\nbuilder = ArrowSpaceBuilder(items, graph_params=graph_params)\naspace = builder.build()\n```\n\n### Step 4: Query\n\n```python\nlambdas = aspace.lambdas()           # array indexed by insertion order\nsorted_res = aspace.lambdas_sorted()  # (score, index) pairs ascending\n```\n\nHigher λτ values indicate items that are both semantically close and structurally central.\n\n## Examples\n\n### Example 1: Basic spectral retrieval\n\n```python\nitems = np.random.randn(100, 64).astype(np.float64)\nbuilder = ArrowSpaceBuilder(items, graph_params={\"eps\": 0.5, \"k\": 10, \"topk\": 5, \"p\": 2.0, \"sigma\": None})\naspace = builder.build()\nscores = aspace.lambdas()\ntop_indices = np.argsort(scores)[-5:]\n```\n\n### Example 2: Compare spectral vs cosine ranking\n\n```python\nfrom sklearn.metrics.pairwise import cosine_similarity\ncos_sim = cosine_similarity(items)\ncosine_order = np.argsort(cos_sim[0])[::-1]\nspectral_order = np.argsort(aspace.lambdas())[::-1]\n```\n\n## Best Practices\n\n- ✅ Normalise embeddings to unit norm before passing to ArrowSpace\n- ✅ Start with eps proportional to 1/sqrt(dim) and tune from there\n- ✅ Use k between 3 and 25 depending on dataset size (rule: N/50)\n- ✅ Set sigma=None to auto-select kernel width from distance distribution\n- ❌ Don't use with fewer than 10 items (graph structure is not meaningful)\n- ❌ Don't use for real-time streaming data (ArrowSpace is batch-oriented)\n\n## Limitations\n\n- This skill does not replace environment-specific validation, testing, or expert review.\n- ArrowSpace is batch-oriented and not designed for real-time indexing of streaming data.\n\n## Common Pitfalls\n\n- **Problem:** eps is too small, producing a disconnected graph\n  **Solution:** Increase eps, or set it proportional to 1/sqrt(embedding_dim)\n\n- **Problem:** k is too large, producing a dense graph with washed-out spectral features\n  **Solution:** Keep k ≤ 25 for most datasets\n\n## Related Skills\n\n- `vector-database-engineer` — General vector database expertise\n- `embedding-strategies` — Embedding model selection and chunking\n- `similarity-search-patterns` — Semantic search implementation patterns\n- `hybrid-search-implementation` — Combined semantic + keyword search\n",
+      "tags": [
+        "python",
+        "claude",
+        "ai",
+        "design",
+        "rag"
+      ],
+      "useCases": [
+        "Cosine or L2 similarity misses latent structure in your embeddings",
+        "You want graph-based retrieval with spectral awareness",
+        "You need to characterise the spectral properties of an embedding space",
+        "You are building RAG pipelines where contextual role matters alongside semantic content"
+      ],
+      "scrapedAt": "2026-06-26T09:39:56.513Z"
+    },
+    {
       "id": "antigravity-article-illustrations",
       "name": "article-illustrations",
       "slug": "article-illustrations",
@@ -17803,6 +17828,33 @@
       "scrapedAt": "2026-03-08T06:56:11.539Z"
     },
     {
+      "id": "antigravity-gh-image",
+      "name": "gh-image",
+      "slug": "gh-image",
+      "description": "Upload local images to GitHub and get canonical user-attachments embed URLs; use when asked to attach a screenshot to a PR, issue, or comment, or to embed before/after images in a README.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gh-image",
+      "content": "\n# Upload images to GitHub (gh-image)\n\nGitHub has **no public API** for image uploads — the web UI uses an internal\nendpoint that mints `user-attachments` URLs scoped to the repo's visibility.\n[`gh-image`](https://github.com/drogers0/gh-image) (MIT, © drogers0) replicates\nthat flow as a `gh` CLI extension, so an agent can upload a local image from the\nterminal and get a ready-to-embed Markdown image line back.\n\n## Overview\n\nThis skill drives `gh-image` to turn a local image file into a hosted GitHub\n`user-attachments` URL, then embeds that URL into a pull request, issue, or\ncomment. It is the missing \"attach a screenshot\" capability for terminal agents.\n\n## When to Use This Skill\n\nUse this skill when asked to:\n\n- \"Attach a screenshot to the PR\" or \"add an image to the PR description\"\n- \"Put this image in the issue\" / \"comment with these screenshots\"\n- \"Show the test results / before-and-after in the PR\"\n- Embed any local image into GitHub Markdown without leaving the terminal\n\n## How It Works\n\n### Step 1: Verify prerequisites\n\n```bash\ngh auth status                                   # gh installed & authenticated\ngh extension list | grep -q 'drogers0/gh-image' \\\n  || gh extension install drogers0/gh-image      # idempotent install\n```\n\n`gh-image` does **not** use the `gh` token for the upload (that endpoint rejects\ntokens). It needs a GitHub `user_session` cookie, resolved in this order:\n`--token <value>` flag → `GH_SESSION_TOKEN` env var (use in CI/headless) → a\nlogged-in browser's cookie store (default for local use).\n\n### Step 2: Upload\n\n```bash\n# Use an absolute path; --repo is optional inside a repo working dir.\ngh image \"/abs/path/screenshot.png\" --repo <owner>/<repo>\n```\n\n`gh image` prints Markdown to **stdout**, one line per image:\n\n```\n![screenshot.png](https://github.com/user-attachments/assets/<uuid>)\n```\n\nCapture that output — it is the embeddable reference.\n\n### Step 3: Embed into the PR / issue / comment\n\n```bash\nMD=\"$(gh image \"/abs/path/shot.png\" --repo owner/repo)\"\nBODY=\"$(gh pr view <pr> --repo owner/repo --json body -q .body)\"\nprintf '%s\\n\\n## Screenshots\\n\\n%s\\n' \"$BODY\" \"$MD\" \\\n  | gh pr edit <pr> --repo owner/repo --body-file -\n```\n\nUse `gh pr comment`, `gh issue edit`, or `gh issue comment` with `--body-file -`\nfor other targets. Always pass `--body-file -` (not inline `--body`) so multi-line\nbodies and special characters can't break shell quoting.\n\n### Step 4: Verify\n\n```bash\ngh pr view <pr> --repo owner/repo --json body -q .body   # confirm URL present\n```\n\n## Examples\n\n- **Attach a CleanShot screenshot to PR #42:** upload the file, append it under a\n  `## Screenshots` heading in the PR body.\n- **Embed before/after images in a README:** upload both, paste the two Markdown\n  lines into the README at the relevant section.\n\n## Best Practices\n\n- Resolve globs to absolute paths first; quote paths with spaces/Unicode.\n- For display sizing, embed an HTML tag instead of bare Markdown:\n  `<img width=\"800\" src=\"https://github.com/user-attachments/assets/<uuid>\" />`.\n- In CI, set `GH_SESSION_TOKEN` from a dedicated bot account.\n\n## Limitations\n\n- **Session cookie required.** A `user_session` cookie grants full account access\n  (not scoped like a PAT) — treat it like a password; use a bot account in CI.\n- **Write access to the target repo is required**; orgs that enforce SAML SSO need\n  the session authorized at `https://github.com/orgs/<org>/sso` first.\n- **Private-repo images stay private:** the `user-attachments` URL inherits repo\n  visibility, so an anonymous fetch on a private repo returns 404/403 by design.\n- **Windows + Chrome 127+** cannot read cookies (library limitation) — use another\n  browser or `GH_SESSION_TOKEN`.\n- The skill embeds the Markdown itself; `gh-image` only prints the URL.\n",
+      "tags": [
+        "markdown",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "design",
+        "image"
+      ],
+      "useCases": [
+        "\"Attach a screenshot to the PR\" or \"add an image to the PR description\"",
+        "\"Put this image in the issue\" / \"comment with these screenshots\"",
+        "\"Show the test results / before-and-after in the PR\"",
+        "Embed any local image into GitHub Markdown without leaving the terminal"
+      ],
+      "scrapedAt": "2026-06-26T09:45:55.553Z"
+    },
+    {
       "id": "antigravity-gh-review-requests",
       "name": "gh-review-requests",
       "slug": "gh-review-requests",
@@ -18060,6 +18112,36 @@
         "User says \"my GitHub pipeline is failing\" or \"set up CI for my repo\""
       ],
       "scrapedAt": "2026-05-31T08:57:36.017Z"
+    },
+    {
+      "id": "antigravity-github-actions-debugger",
+      "name": "github-actions-debugger",
+      "slug": "github-actions-debugger",
+      "description": "Specialized skill for diagnosing, analyzing, and fixing failing GitHub Actions workflows by parsing run logs and pipeline definitions.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/github-actions-debugger",
+      "content": "\n# GitHub Actions Pipeline Debugger\n\n## Overview\n\nThis skill is designed to act as an expert CI/CD diagnostician. It focuses specifically on reading raw logs from failed GitHub Actions, identifying the root cause of the crash or failure, and outputting the precise YAML or code changes required to fix the pipeline.\n\n## When to Use\n\n- Use when a GitHub Actions workflow fails unexpectedly and the error log is long, obscure, or misleading.\n- Use when debugging dependency mismatch errors, missing secrets, caching issues, or runner environment problems in CI.\n- Use to optimize slow pipelines by identifying bottlenecks in workflow steps.\n- Use to update and modernize deprecated actions or workflow syntax.\n\n## How It Works\n\n1. **Log Ingestion & Redaction:** Analyze the provided GitHub Actions workflow log (often exported as a raw text file or pasted directly). **CRITICAL SAFETY REQUIREMENT:** The user/agent must redact all sensitive credentials, secrets, tokens, private keys, and internal system paths from the logs before pasting or uploading them.\n2. **Context Mapping:** Cross-reference the failure point with the specific step and job in the `.github/workflows/*.yml` definition.\n3. **Root Cause Analysis:** Identify if the failure is due to:\n   - Missing or misconfigured secrets (`${{ secrets.API_KEY }}`).\n   - Node/Python/OS environment version mismatches.\n   - Flaky tests or timeout limits.\n   - Syntax errors in bash scripts run within the `run:` block.\n   - Invalid action versions or deprecated actions.\n4. **Resolution Proposal:** Provide a direct `diff` of the `.yml` file or the underlying script that needs to be modified.\n\n## Best Practices\n\n- **Provide Full Context:** Always review both the workflow definition (`.yml` file) and the failure log simultaneously to ensure accurate diagnosis.\n- **Check Action Versions:** Many failures are caused by deprecated runtime versions (e.g., Node.js 16) in older third-party actions (e.g., `actions/checkout@v2`). Always recommend upgrading to the latest major versions (e.g., `v4`).\n- **Permissions Audit:** Ensure the workflow has the correct `permissions:` block if it's attempting to write to the repository, packages, or deploy environments.\n- **Reproducibility:** If a test fails in CI but passes locally, investigate environment differences such as timezone, headless browser state, memory limits, or parallel execution race conditions.\n\n## Examples\n\n### Example 1: Fixing a Deprecated Node.js Action Version Error\n**Failing Log:**\n```text\nWarning: The Go/Node.js/Python version used by this action is deprecated.\nError: Node.js 16 actions are deprecated. Please update to use Node.js 20.\n```\n\n**Proposed Fix Diff:**\n```diff\n       - name: Checkout Code\n-        uses: actions/checkout@v2\n+        uses: actions/checkout@v4\n```\n\n### Example 2: Diagnosing and Fixing a Missing Repository Secret\n**Failing Log:**\n```text\nRun npm run deploy\n  npm run deploy\n  shell: /usr/bin/bash -e {0}\nError: API Key is required for deployment. Process exited with code 1.\n```\n\n**Proposed Fix Diff:**\n```diff\n       - name: Deploy App\n         run: npm run deploy\n+        env:\n+          DEPLOY_API_KEY: ${{ secrets.DEPLOY_API_KEY }}\n```\n\n## Security & Safety Notes\n\n- **Credential Exposure & Raw Log Redaction**: Under no circumstances should raw logs containing unmasked secrets, private URLs, deployment targets, or tokens be processed without prior redaction. Always ensure the user or agent redacts all sensitive info before ingestion.\n- **Dry-Run Mode**: When recommending modifications to bash script steps inside workflows, ensure you suggest adding flags like `--dry-run` or staging execution where possible to prevent unintended side effects in downstream environments during debugging.\n\n## Limitations\n\n- The skill cannot securely read repository secrets. It can only infer missing or malformed secrets if the log complains about undefined environment variables or authentication failures.\n- It cannot execute the GitHub action itself to test the fix; validation requires pushing the proposed fix to the repository and triggering a workflow run.\n- Network-related transient failures (e.g., a package registry being down temporarily) might be incorrectly diagnosed as structural workflow issues if not carefully analyzed.\n\n## Common Pitfalls\n\n- **Ignoring Transient Failures**: Mistaking temporary network dropouts or registry downtime (e.g., npm or pip install errors) for actual code or configuration bugs. Always check if a rerun succeeds before attempting heavy changes.\n- **Hardcoding Tokens**: Fixing authentication errors by hardcoding secrets or API tokens directly into the YAML files instead of utilizing GitHub Secrets (`${{ secrets.SECRET_NAME }}`).\n- **Overlooking Caching Side Effects**: Forgetting that outdated cache keys can keep corrupt dependencies loaded. If dependency installation is failing, try running a job with actions caching bypassed.\n\n## Related Skills\n\n- `@devops-troubleshooter` - General DevOps and ",
+      "tags": [
+        "python",
+        "node",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "automation",
+        "workflow",
+        "design",
+        "security"
+      ],
+      "useCases": [
+        "Use when a GitHub Actions workflow fails unexpectedly and the error log is long, obscure, or misleading.",
+        "Use when debugging dependency mismatch errors, missing secrets, caching issues, or runner environment problems in CI.",
+        "Use to optimize slow pipelines by identifying bottlenecks in workflow steps.",
+        "Use to update and modernize deprecated actions or workflow syntax."
+      ],
+      "scrapedAt": "2026-06-26T09:46:01.813Z"
     },
     {
       "id": "antigravity-github-actions-templates",
@@ -26490,86 +26572,6 @@
       "scrapedAt": "2026-01-29T06:59:45.959Z"
     },
     {
-      "id": "antigravity-nextjs-best-practices",
-      "name": "nextjs-best-practices",
-      "slug": "nextjs-best-practices",
-      "description": "Next.js App Router principles. Server Components, data fetching, routing patterns.",
-      "category": "Business & Marketing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/nextjs-best-practices",
-      "content": "\n# Next.js Best Practices\n\n> Principles for Next.js App Router development.\n\n---\n\n## 1. Server vs Client Components\n\n### Decision Tree\n\n```\nDoes it need...?\n│\n├── useState, useEffect, event handlers\n│   └── Client Component ('use client')\n│\n├── Direct data fetching, no interactivity\n│   └── Server Component (default)\n│\n└── Both? \n    └── Split: Server parent + Client child\n```\n\n### By Default\n\n| Type | Use |\n|------|-----|\n| **Server** | Data fetching, layout, static content |\n| **Client** | Forms, buttons, interactive UI |\n\n---\n\n## 2. Data Fetching Patterns\n\n### Fetch Strategy\n\n| Pattern | Use |\n|---------|-----|\n| **Default** | Static (cached at build) |\n| **Revalidate** | ISR (time-based refresh) |\n| **No-store** | Dynamic (every request) |\n\n### Data Flow\n\n| Source | Pattern |\n|--------|---------|\n| Database | Server Component fetch |\n| API | fetch with caching |\n| User input | Client state + server action |\n\n---\n\n## 3. Routing Principles\n\n### File Conventions\n\n| File | Purpose |\n|------|---------|\n| `page.tsx` | Route UI |\n| `layout.tsx` | Shared layout |\n| `loading.tsx` | Loading state |\n| `error.tsx` | Error boundary |\n| `not-found.tsx` | 404 page |\n\n### Route Organization\n\n| Pattern | Use |\n|---------|-----|\n| Route groups `(name)` | Organize without URL |\n| Parallel routes `@slot` | Multiple same-level pages |\n| Intercepting `(.)` | Modal overlays |\n\n---\n\n## 4. API Routes\n\n### Route Handlers\n\n| Method | Use |\n|--------|-----|\n| GET | Read data |\n| POST | Create data |\n| PUT/PATCH | Update data |\n| DELETE | Remove data |\n\n### Best Practices\n\n- Validate input with Zod\n- Return proper status codes\n- Handle errors gracefully\n- Use Edge runtime when possible\n\n---\n\n## 5. Performance Principles\n\n### Image Optimization\n\n- Use next/image component\n- Set priority for above-fold\n- Provide blur placeholder\n- Use responsive sizes\n\n### Bundle Optimization\n\n- Dynamic imports for heavy components\n- Route-based code splitting (automatic)\n- Analyze with bundle analyzer\n\n---\n\n## 6. Metadata\n\n### Static vs Dynamic\n\n| Type | Use |\n|------|-----|\n| Static export | Fixed metadata |\n| generateMetadata | Dynamic per-route |\n\n### Essential Tags\n\n- title (50-60 chars)\n- description (150-160 chars)\n- Open Graph images\n- Canonical URL\n\n---\n\n## 7. Caching Strategy\n\n### Cache Layers\n\n| Layer | Control |\n|-------|---------|\n| Request | fetch options |\n| Data | revalidate/tags |\n| Full route | route config |\n\n### Revalidation\n\n| Method | Use |\n|--------|-----|\n| Time-based | `revalidate: 60` |\n| On-demand | `revalidatePath/Tag` |\n| No cache | `no-store` |\n\n---\n\n## 8. Server Actions\n\n### Use Cases\n\n- Form submissions\n- Data mutations\n- Revalidation triggers\n\n### Best Practices\n\n- Mark with 'use server'\n- Validate all inputs\n- Return typed responses\n- Handle errors\n\n---\n\n## 9. Anti-Patterns\n\n| ❌ Don't | ✅ Do |\n|----------|-------|\n| 'use client' everywhere | Server by default |\n| Fetch in client components | Fetch in server |\n| Skip loading states | Use loading.tsx |\n| Ignore error boundaries | Use error.tsx |\n| Large client bundles | Dynamic imports |\n\n---\n\n## 10. Project Structure\n\n```\napp/\n├── (marketing)/     # Route group\n│   └── page.tsx\n├── (dashboard)/\n│   ├── layout.tsx   # Dashboard layout\n│   └── page.tsx\n├── api/\n│   └── [resource]/\n│       └── route.ts\n└── components/\n    └── ui/\n```\n\n---\n\n> **Remember:** Server Components are the default for a reason. Start there, add client only when needed.\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "nextjs",
-        "api",
-        "workflow",
-        "image",
-        "marketing"
-      ],
-      "useCases": [
-        "Form submissions",
-        "Data mutations",
-        "Revalidation triggers"
-      ],
-      "scrapedAt": "2026-01-26T13:19:48.743Z"
-    },
-    {
-      "id": "antigravity-nextjs-seo-indexing",
-      "name": "nextjs-seo-indexing",
-      "slug": "nextjs-seo-indexing",
-      "description": "Fix SEO indexing issues, crawl budget problems, and Search Console coverage errors for Next.js apps. Covers canonical tags, noindex audits, sitemap health, static rendering, and internal linking.",
-      "category": "Business & Marketing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/nextjs-seo-indexing",
-      "content": "\n# Next.js SEO Indexing & Crawl Budget Skill\n\nFix Google Search Console coverage issues, canonical problems, sitemap errors, and crawl budget waste in Next.js apps.\n\n---\n\n## When to Use\n\n- Use when a Next.js site has Google Search Console coverage issues such as duplicate canonicals, accidental noindex, crawl waste, or discovered-but-not-indexed URLs.\n- Use when auditing sitemap, robots.txt, redirect, internal-linking, or static-rendering problems before an SEO release.\n- Use when you need framework-specific examples for Next.js App Router metadata, `generateMetadata`, `robots.js`, and sitemap routes.\n\n---\n\n## Understanding Search Console Coverage States\n\n| Status | Meaning | Fix |\n|--------|---------|-----|\n| Crawled – not indexed | Google crawled but chose not to index | Improve content quality + canonical + internal links |\n| Duplicate without canonical | Multiple URLs serve same content, no canonical | Add explicit canonical to the preferred URL |\n| Excluded by noindex | `noindex` tag present | Remove noindex if page should be indexed |\n| Duplicate, Google chose different canonical | Google prefers a different URL than you specified | Align canonical with the URL Google naturally picks |\n| Alternative page with proper canonical | Correct — non-preferred duplicate pointing to canonical | Expected behavior, not a problem |\n| Not found 404 | Page deleted or URL changed | Add redirect or restore page |\n| Discovered – not indexed | Google knows it exists but hasn't crawled it | Improve internal linking + crawl budget |\n| Page with redirect | Redirect chain or redirect to wrong target | Shorten redirect chain, verify destination |\n\n---\n\n## Step 1 — Canonical Audit\n\n### Next.js App Router (metadata export)\n```js\n// app/blog/my-post/page.js\nexport const metadata = {\n  title: 'My Post Title',\n  alternates: {\n    canonical: 'https://www.yourdomain.com/blog/my-post',\n  },\n};\n```\n\n### Next.js App Router (generateMetadata)\n```js\nexport async function generateMetadata({ params }) {\n  return {\n    alternates: {\n      canonical: `https://www.yourdomain.com/blog/${params.slug}`,\n    },\n  };\n}\n```\n\n### Common canonical mistakes to fix:\n```js\n// ❌ WRONG — relative URL\ncanonical: '/blog/my-post'\n\n// ❌ WRONG — missing trailing slash inconsistency  \n// (pick one and stick with it sitewide)\n\n// ✓ CORRECT — absolute URL, consistent scheme + subdomain\ncanonical: 'https://www.yourdomain.com/blog/my-post'\n```\n\n---\n\n## Step 2 — Noindex Audit\n\nFind pages that are accidentally noindexed:\n\n```bash\n# Search for noindex in metadata\nrg -n --glob '*.{js,ts,jsx,tsx}' 'noindex|robots.*noindex' app pages\n\n# Check layout.js — a noindex here affects ALL pages\ngrep -n \"robots\" app/layout.js\n```\n\nIn Next.js App Router, `robots` in the root layout applies globally. Only set it there if you want the whole site affected.\n\n```js\n// app/layout.js — only set robots if you need sitewide control\nexport const metadata = {\n  // ✓ Allow indexing\n  robots: { index: true, follow: true },\n  // ❌ This would noindex the entire site:\n  // robots: { index: false }\n};\n```\n\n---\n\n## Step 3 — Sitemap Health\n\n### Verify sitemap routes return 200 + valid XML\n```bash\ncurl -sI https://www.yourdomain.com/sitemap.xml | grep -i \"content-type\\|status\"\ncurl -s https://www.yourdomain.com/sitemap.xml | head -20\n```\n\n### Next.js App Router sitemap (recommended pattern)\n```js\n// app/sitemap.js\nexport default async function sitemap() {\n  const baseUrl = 'https://www.yourdomain.com';\n  \n  // Static pages\n  const staticPages = [\n    { url: baseUrl, lastModified: new Date(), changeFrequency: 'daily', priority: 1.0 },\n    { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },\n  ];\n  \n  // Dynamic pages (fetch from DB or CMS)\n  const posts = await getPosts(); // your data fetch\n  const dynamicPages = posts.map(post => ({\n    url: `${baseUrl}/blog/${post.slug}`,\n    lastModified: new Date(post.updatedAt),\n    changeFrequency: 'weekly',\n    priority: 0.7,\n  }));\n  \n  return [...staticPages, ...dynamicPages];\n}\n```\n\n### Multiple sitemaps (sitemap index)\n```js\n// app/sitemap-tools/sitemap.js  \n// app/sitemap-blog/sitemap.js\n// Each returns an array of URL entries\n```\n\n---\n\n## Step 4 — Static Rendering Verification\n\nPages must be statically generated (or SSR with metadata in HTML) for Google to see SEO tags.\n\n```bash\n# Check build output — pages should show ● (static) not λ (dynamic)\nnpm run build 2>&1 | grep -E \"○|●|λ|/blog|/tools\"\n```\n\n```text\n○  /about             (static)\n●  /blog/[slug]       (SSG)  ← good\nλ  /api/data          (serverless) ← expected for APIs\n```\n\nIf important pages are `λ` (fully dynamic with no static generation), add:\n\n```js\n// app/blog/[slug]/page.js\nexport async function generateStaticParams() {\n  const posts = await getPosts();\n  return posts.map(post => ({ slug: post.slug }));\n}\n```\n\n---\n\n## Step 5 — Internal Linking Audit\n\nPages with zero internal links are rarely indexed. Every important page should be reachable fro",
-      "tags": [
-        "nextjs",
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "rag",
-        "seo",
-        "cro"
-      ],
-      "useCases": [
-        "Use when a Next.js site has Google Search Console coverage issues such as duplicate canonicals, accidental noindex, crawl waste, or discovered-but-not-indexed URLs.",
-        "Use when auditing sitemap, robots.txt, redirect, internal-linking, or static-rendering problems before an SEO release.",
-        "Use when you need framework-specific examples for Next.js App Router metadata, `generateMetadata`, `robots.js`, and sitemap routes."
-      ],
-      "scrapedAt": "2026-06-01T11:52:03.802Z"
-    },
-    {
-      "id": "antigravity-nextjs-supabase-auth",
-      "name": "nextjs-supabase-auth",
-      "slug": "nextjs-supabase-auth",
-      "description": "Expert integration of Supabase Auth with Next.js App Router",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/nextjs-supabase-auth",
-      "content": "\n# Next.js + Supabase Auth\n\nExpert integration of Supabase Auth with Next.js App Router\n\n## Capabilities\n\n- nextjs-auth\n- supabase-auth-nextjs\n- auth-middleware\n- auth-callback\n\n## Prerequisites\n\n- Required skills: nextjs-app-router, supabase-backend\n\n## Patterns\n\n### Supabase Client Setup\n\nCreate properly configured Supabase clients for different contexts\n\n**When to use**: Setting up auth in a Next.js project\n\n// lib/supabase/client.ts (Browser client)\n'use client'\nimport { createBrowserClient } from '@supabase/ssr'\n\nexport function createClient() {\n  return createBrowserClient(\n    process.env.NEXT_PUBLIC_SUPABASE_URL!,\n    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!\n  )\n}\n\n// lib/supabase/server.ts (Server client)\nimport { createServerClient } from '@supabase/ssr'\nimport { cookies } from 'next/headers'\n\nexport async function createClient() {\n  const cookieStore = await cookies()\n  return createServerClient(\n    process.env.NEXT_PUBLIC_SUPABASE_URL!,\n    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,\n    {\n      cookies: {\n        getAll() {\n          return cookieStore.getAll()\n        },\n        setAll(cookiesToSet) {\n          cookiesToSet.forEach(({ name, value, options }) => {\n            cookieStore.set(name, value, options)\n          })\n        },\n      },\n    }\n  )\n}\n\n### Auth Middleware\n\nProtect routes and refresh sessions in middleware\n\n**When to use**: You need route protection or session refresh\n\n// middleware.ts\nimport { createServerClient } from '@supabase/ssr'\nimport { NextResponse, type NextRequest } from 'next/server'\n\nexport async function middleware(request: NextRequest) {\n  let response = NextResponse.next({ request })\n\n  const supabase = createServerClient(\n    process.env.NEXT_PUBLIC_SUPABASE_URL!,\n    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,\n    {\n      cookies: {\n        getAll() {\n          return request.cookies.getAll()\n        },\n        setAll(cookiesToSet) {\n          cookiesToSet.forEach(({ name, value, options }) => {\n            response.cookies.set(name, value, options)\n          })\n        },\n      },\n    }\n  )\n\n  // Refresh session if expired\n  const { data: { user } } = await supabase.auth.getUser()\n\n  // Protect dashboard routes\n  if (request.nextUrl.pathname.startsWith('/dashboard') && !user) {\n    return NextResponse.redirect(new URL('/login', request.url))\n  }\n\n  return response\n}\n\nexport const config = {\n  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],\n}\n\n### Auth Callback Route\n\nHandle OAuth callback and exchange code for session\n\n**When to use**: Using OAuth providers (Google, GitHub, etc.)\n\n// app/auth/callback/route.ts\nimport { createClient } from '@/lib/supabase/server'\nimport { NextResponse } from 'next/server'\n\nexport async function GET(request: Request) {\n  const { searchParams, origin } = new URL(request.url)\n  const code = searchParams.get('code')\n  const next = searchParams.get('next') ?? '/'\n\n  if (code) {\n    const supabase = await createClient()\n    const { error } = await supabase.auth.exchangeCodeForSession(code)\n    if (!error) {\n      return NextResponse.redirect(`${origin}${next}`)\n    }\n  }\n\n  return NextResponse.redirect(`${origin}/auth/error`)\n}\n\n### Server Action Auth\n\nHandle auth operations in Server Actions\n\n**When to use**: Login, logout, or signup from Server Components\n\n// app/actions/auth.ts\n'use server'\nimport { createClient } from '@/lib/supabase/server'\nimport { redirect } from 'next/navigation'\nimport { revalidatePath } from 'next/cache'\n\nexport async function signIn(formData: FormData) {\n  const supabase = await createClient()\n  const { error } = await supabase.auth.signInWithPassword({\n    email: formData.get('email') as string,\n    password: formData.get('password') as string,\n  })\n\n  if (error) {\n    return { error: error.message }\n  }\n\n  revalidatePath('/', 'layout')\n  redirect('/dashboard')\n}\n\nexport async function signOut() {\n  const supabase = await createClient()\n  await supabase.auth.signOut()\n  revalidatePath('/', 'layout')\n  redirect('/')\n}\n\n### Get User in Server Component\n\nAccess the authenticated user in Server Components\n\n**When to use**: Rendering user-specific content server-side\n\n// app/dashboard/page.tsx\nimport { createClient } from '@/lib/supabase/server'\nimport { redirect } from 'next/navigation'\n\nexport default async function DashboardPage() {\n  const supabase = await createClient()\n  const { data: { user } } = await supabase.auth.getUser()\n\n  if (!user) {\n    redirect('/login')\n  }\n\n  return (\n    <div>\n      <h1>Welcome, {user.email}</h1>\n    </div>\n  )\n}\n\n## Validation Checks\n\n### Using getSession() for Auth Checks\n\nSeverity: ERROR\n\nMessage: getSession() doesn't verify the JWT. Use getUser() for secure auth checks.\n\nFix action: Replace getSession() with getUser() for security-critical checks\n\n### OAuth Without Callback Route\n\nSeverity: ERROR\n\nMessage: Using OAuth but missing callback route at app/auth/callback/route.ts\n\nFix action: Create app/auth/callback/route.ts to handle OAuth redirects\n\n##",
-      "tags": [
-        "nextjs",
-        "ai",
-        "workflow",
-        "design",
-        "image",
-        "security",
-        "supabase",
-        "stripe"
-      ],
-      "useCases": [
-        "User mentions or implies: supabase auth next",
-        "User mentions or implies: authentication next.js",
-        "User mentions or implies: login supabase",
-        "User mentions or implies: auth middleware",
-        "User mentions or implies: protected route"
-      ],
-      "scrapedAt": "2026-01-26T13:19:49.936Z"
-    },
-    {
       "id": "awesome-llm-notion-knowledge-capture",
       "name": "notion-knowledge-capture",
       "slug": "awesome-llm-notion-knowledge-capture",
@@ -28089,7 +28091,7 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 383
+      "count": 384
     },
     {
       "id": "document-processing",
@@ -28110,7 +28112,7 @@
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 125
+      "count": 126
     },
     {
       "id": "security-systems",
@@ -28124,7 +28126,7 @@
       "name": "Business & Marketing",
       "description": "Skills for marketing, branding, lead generation, and business operations.",
       "icon": "briefcase",
-      "count": 56
+      "count": 54
     },
     {
       "id": "productivity-organization",
@@ -28161,48 +28163,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 238232
+      "stars": 239074
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 154990
+      "stars": 155377
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 65844
+      "stars": 65979
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 1,
-      "stars": 78286
+      "stars": 78390
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1341
+      "stars": 1342
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1063,
-      "newSkillCount": 8,
-      "stars": 41656
+      "newSkillCount": 10,
+      "stars": 41742
     }
   ],
-  "lastUpdated": "2026-06-25T09:40:10.693Z",
+  "lastUpdated": "2026-06-26T09:49:22.160Z",
   "stats": {
     "totalSkills": 1162,
-    "newSkills": 19,
-    "scrapedAt": "2026-06-25T09:40:10.693Z"
+    "newSkills": 21,
+    "scrapedAt": "2026-06-26T09:49:22.160Z"
   }
 }
