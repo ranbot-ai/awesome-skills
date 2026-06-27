@@ -1354,6 +1354,31 @@
       "scrapedAt": "2026-03-17T07:14:06.121Z"
     },
     {
+      "id": "antigravity-ai-loop",
+      "name": "ai-loop",
+      "slug": "ai-loop",
+      "description": "Runs a bounded spec-build-review development loop with explicit scope, stop conditions, and human approval gates for risky or ambiguous work.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-loop",
+      "content": "\n# AI-Loop Skill\n\n## Overview\n\nThe `ai-loop` skill structures a bounded development cycle for agentic workflows. By dividing the process into distinct planning (Spec), implementation (Build), and validation (Review) phases, it helps an agent build and correct scoped code changes while keeping requirements, risk gates, and stop conditions explicit.\n\n## When to Use This Skill\n\n- Use when you need a feature built from scratch or heavily modified, and you want the agent to handle the lifecycle (specification, implementation, and verification) inside one clearly bounded workflow.\n- Use when working with isolated components, modules, or features that have well-defined scopes and constraints.\n- Use when the user asks for a complete development pass but the work still has clear success criteria, a reasonable verification path, and no unresolved safety or product decisions.\n\n## How It Works\n\nThis skill executes a controlled development loop composed of three phases: Spec, Build, and Review. When invoked, the agent moves through those phases until the scoped requirements pass verification, a stop condition is reached, or human approval is needed.\n\nBefore starting, define:\n\n- The maximum number of build-review iterations.\n- The verification commands or manual checks that count as evidence.\n- The actions that require explicit approval, such as destructive commands, production changes, external service writes, or broad architectural pivots.\n\n### Phase 1: Spec (Planning)\n\n1. Interview the user about the feature or app they want to build. Ask one focused question at a time until you fully understand the goal, the must-have requirements, the constraints, and what \"done\" looks like.\n2. **Do not start building yet.**\n3. When you have enough information, write a clear, detailed specification and save it to `specs/<feature-name>.md`.\n4. The spec must include:\n   - The objective\n   - The exact requirements\n   - Edge cases to handle\n   - A concrete definition of done that someone could check the build against\n   - The iteration budget, verification commands, and approval gates.\n\n### Phase 2: Build (Implementation)\n\n1. Read the spec you just created in `specs/<feature-name>.md`.\n2. Build exactly what it describes.\n3. **Do not add features**, do not refactor unrelated code, and do not invent requirements that aren't in the spec.\n4. Focus strictly on fulfilling the spec. List which spec requirements you covered so the review step can check them.\n\n### Phase 3: Review (Verification)\n\n1. Compare your implementation against `specs/<feature-name>.md`.\n2. Go requirement by requirement and verify if it was met. List every gap, bug, or missing piece, naming the exact spec item each one fails.\n3. If anything fails and the iteration budget is not exhausted, write the specific fixes needed and **loop back to Phase 2 (Build)** to address them.\n4. Stop and ask for human input when the next fix would change the spec, exceed the iteration budget, require risky operations, or depend on product decisions not captured in the spec.\n5. Only pass the build and conclude the skill execution when every requirement in the spec is fully met and the declared verification evidence has passed.\n\n## Examples\n\n### Example 1: Creating a Basic Statistics Helper\n\n**User:**\n> I want to add a utility for calculating basic statistics (mean, median, mode) of an array of numbers.\n\n**Agent (Phase 1 - Spec):**\n> I can help with that. To get started, what programming language should this statistics calculator be implemented in? Also, how should empty arrays or invalid inputs be handled?\n\n**User:**\n> JavaScript. If the array is empty, return null. If there are non-numbers, ignore them.\n\n**Agent (Phase 1 - Spec):**\n> Thank you. I have created the specification file at `specs/stats-calculator.md` with the requirements we discussed. Now, I will start implementing it.\n\n**Agent (Phase 2 - Build):**\n> *(Creates `stats_calculator.js` and implements `mean`, `median`, and `mode` matching the spec exactly)*\n> I have finished implementing the calculator. I will now verify the implementation.\n\n**Agent (Phase 3 - Review):**\n> Checking implementation against `specs/stats-calculator.md`:\n> - Requirement: mean calculation -> PASS\n> - Requirement: median calculation -> PASS\n> - Requirement: mode calculation -> PASS\n> - Requirement: empty array returns null -> PASS\n> - Requirement: non-numbers are ignored -> FAIL (I noticed `mode` doesn't filter out non-numbers).\n>\n> I will now loop back to Phase 2 to fix the `mode` function.\n\n**Agent (Phase 2 - Build Loop-Back):**\n> *(Fixes `mode` to filter out non-numbers)*\n> I have updated the implementation. Let's re-verify.\n\n**Agent (Phase 3 - Review):**\n> - Requirement: mode filters non-numbers -> PASS\n> \n> All requirements passed! The statistics calculator is complete and verified.\n\n## Best Practices\n\n- ✅ Do ask clarifying questions one at a time to avoid overwhelming the user during the planning phase.\n- ✅ Do document edge cases explicitly in `specs/<",
+      "tags": [
+        "javascript",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "document",
+        "security"
+      ],
+      "useCases": [
+        "Use when working with isolated components, modules, or features that have well-defined scopes and constraints.",
+        "Use when the user asks for a complete development pass but the work still has clear success criteria, a reasonable verification path, and no unresolved safety or product decisions."
+      ],
+      "scrapedAt": "2026-06-27T08:43:59.525Z"
+    },
+    {
       "id": "antigravity-ai-md",
       "name": "ai-md",
       "slug": "ai-md",
@@ -11763,6 +11788,36 @@
         "User mentions or implies: role-based agents"
       ],
       "scrapedAt": "2026-01-26T13:17:57.211Z"
+    },
+    {
+      "id": "antigravity-cron-doctor",
+      "name": "cron-doctor",
+      "slug": "cron-doctor",
+      "description": "Diagnose and validate cron expressions before they ship. Catches the five silent death-traps: impossible dates that never fire, OR-semantics that fire too often, midnight spikes, uneven step drift, and leap-year February 29.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cron-doctor",
+      "content": "\n# cron-doctor\n\n## Overview\n\nCron is deceptively error-prone. The failure mode is **silent** — a syntactically\nvalid expression that simply never fires, or fires far more often than intended.\n`0 0 30 2 *` parses cleanly and then sits dead forever (February has no 30th).\n`0 0 1,15 * 1` looks like \"1st and 15th if Monday\" but actually means \"1st, 15th,\n**OR** every Monday\" — ~6 fires/month instead of ~2.\n\nThis skill teaches an agent to catch those before they reach production. It comes\nwith a zero-dependency validation engine (`scripts/cron-engine.js`, no install\nneeded) that parses, describes, deep-validates, and computes next fire times.\n\n## When to Use This Skill\n\n- Use when a user writes, edits, reviews, or deploys a cron expression — in a\n  crontab, a Kubernetes `CronJob`, a GitHub Actions `schedule`, an Airflow DAG,\n  a Celery beat schedule, a systemd timer, or any scheduled task.\n- Use when debugging a job that \"didn't fire\" or \"fired at the wrong time.\"\n- Use when a user asks \"what does this cron expression mean?\" or \"when will this\n  run next?\" or \"how often does this run per year?\"\n- Use when reviewing a CI/CD pipeline or infrastructure config that contains a\n  `schedule` field.\n- Use when a user pastes a 5-field cron expression and asks for a sanity check.\n\n## How It Works\n\n### Step 1: Parse the expression\n\nSplit on whitespace into 5 fields: minute, hour, day-of-month, month, day-of-week.\nConfirm valid ranges:\n\n| Field | Position | Range | Notes |\n|-------|----------|-------|-------|\n| minute | 1 | 0–59 | |\n| hour | 2 | 0–23 | |\n| day-of-month | 3 | 1–31 | |\n| month | 4 | 1–12 | names (JAN–DEC) accepted |\n| day-of-week | 5 | 0–7 | 0 and 7 both = Sunday; names (SUN–SAT) accepted |\n\n### Step 2: Describe it in plain English\n\nState what the user *thinks* it does vs. what it *actually* does. Be explicit\nabout OR-vs-AND semantics for day-of-month + day-of-week (see death-trap #2).\n\n### Step 3: Run the trap checklist\n\nCheck the five death-traps below and flag any that apply.\n\n### Step 4: Calculate next runs and annual fire count\n\nCompute the next 5 fire times as concrete dates so the user can verify the\nschedule behaves as expected. Estimate annual fire count — a schedule that fires\n365×/year vs. 12×/year is a ~30× cost and load difference.\n\n## The Five Cron Death-Traps\n\nThese are the bugs that pass `crontab -l` validation but break in production.\n\n### 1. Impossible dates — the \"never fires\" bug\n\n```\n0 0 30 2 *\n```\n\n**Valid syntax. Never fires.** February has no 30th. This schedule is a dead job\nthat silently sits forever. The same applies to day 31 in any 30-day month:\n`0 0 31 4 *`, `0 0 31 6 *`, `0 0 31 9 *`, `0 0 31 11 *`.\n\n**Fix:** use `0 0 28-31 * *` and check for end-of-month in the script, or use `L`\n(last day) syntax if your scheduler supports it.\n\n### 2. OR-semantics — the \"fires too often\" bug\n\n```\n0 0 1,15 * 1\n```\n\n**Does NOT mean** \"midnight on the 1st and 15th if it's Monday.\"\n**Does mean** \"midnight on the 1st, the 15th, **OR** every Monday.\" That's ~6\nfires/month instead of ~2.\n\nThis is the single most misunderstood cron rule. When **both** day-of-month AND\nday-of-week are restricted (neither is `*`), cron uses OR logic, not AND.\n\n**Fix:** if you need \"1st and 15th only if Monday,\" run daily and check in the\nscript:\n\n```bash\n0 0 * * 1 [ \"$(date +%d)\" = \"01\" -o \"$(date +%d)\" = \"15\" ] && your-command\n```\n\n### 3. Midnight spike — the \"everything at once\" bug\n\n```\n0 0 * * *\n```\n\nEvery job scheduled at `0 0` competes for resources at exactly 00:00. Database\nbackups, log rotations, cert renewals, report generation — all fire simultaneously.\nThis causes load spikes, connection-pool exhaustion, and cascading timeouts.\n\n**Fix:** stagger jobs across the hour. Use `17 2 * * *` or `43 3 * * *` instead of\n`0 0`. Jitter is your friend.\n\n### 4. Uneven steps — the \"drift\" bug\n\n```\n*/7 * * * *\n```\n\n**Does NOT mean** \"every 7 minutes evenly.\" It means \"every 7 minutes starting at\n0, then resets at 60.\" So: 0, 7, 14, 21, 28, 35, 42, 49, 56 — then 0 again\n(a 4-minute gap). The intervals drift: 7,7,7,7,7,7,7,7,**4**.\n\n**Fix:** 60 is not divisible by 7. Use step values that divide 60 evenly: `*/5`,\n`*/10`, `*/15`, `*/20`, `*/30`. If you truly need every-7-minutes, use a loop with\n`sleep 420`.\n\n### 5. Leap-year February 29 — the \"annual surprise\"\n\n```\n0 0 29 2 *\n```\n\nFires only on leap years — February 29, 2024 / 2028 / 2032… If someone writes this\nexpecting \"end of February,\" they'll be confused for 3 out of every 4 years.\n\n**Fix:** use `0 0 28 2 *` and handle the 29th case in the script if needed.\n\n## Using the validation script\n\nThis skill ships a zero-dependency engine at `scripts/cron-engine.js` (Node.js, no\n`npm install` needed). You can use it programmatically or from the CLI:\n\n```javascript\n// Programmatic — Node.js, zero dependencies\nconst { describe, validate, nextRuns, formatNextRuns } = require('./scripts/cron-engine.js');\n\n// Parse + describe -> returns { text, error, parsed }\nconst d = describe('0 0",
+      "tags": [
+        "javascript",
+        "node",
+        "claude",
+        "ai",
+        "agent",
+        "security",
+        "docker",
+        "kubernetes",
+        "cro"
+      ],
+      "useCases": [
+        "Use when a user writes, edits, reviews, or deploys a cron expression — in a",
+        "Use when debugging a job that \"didn't fire\" or \"fired at the wrong time.\"",
+        "Use when a user asks \"what does this cron expression mean?\" or \"when will this",
+        "Use when reviewing a CI/CD pipeline or infrastructure config that contains a",
+        "Use when a user pastes a 5-field cron expression and asks for a sanity check."
+      ],
+      "scrapedAt": "2026-06-27T08:46:04.170Z"
     },
     {
       "id": "antigravity-crossframe",
@@ -26526,52 +26581,6 @@
       "scrapedAt": "2026-03-07T06:56:17.416Z"
     },
     {
-      "id": "antigravity-news-sentiment-engine",
-      "name": "news-sentiment-engine",
-      "slug": "news-sentiment-engine",
-      "description": "Multi-source RSS news aggregation with Claude-powered sentiment analysis and structured briefing output",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/news-sentiment-engine",
-      "content": "# News Sentiment Engine (Free)\n\nCollect and analyze AI/tech news from multiple sources with Claude-powered sentiment analysis. Open source lite version.\n\n## When to Use\n\n- Use when preparing a concise AI or technology news briefing from multiple RSS sources.\n- Use when you need ranked article summaries with sentiment, tags, and impact scoring.\n- Use when monitoring industry changes across product launches, policy moves, and infrastructure shifts.\n- Use when deduplicating overlapping coverage before writing a daily or weekly briefing.\n\n## What it does\n\n- Collects news from 4+ RSS feeds (TechCrunch, The Verge, Ars Technica, Hacker News)\n- Deduplicates articles across sources\n- Ranks by importance (industry impact, technology trends, policy changes)\n- Generates structured briefing with sentiment tags\n- Outputs formatted briefing card\n\n## Usage\n\n```\nCollect latest AI/tech news from RSS feeds.\nRank top 5 by importance to the tech industry.\nFor each: summary (2-3 sentences), sentiment (positive/negative/neutral),\nimpact score (1-5), industry tags, one-sentence commentary.\nOutput as a structured briefing card.\n```\n\n## Example Output\n\n```\nAI/Tech News Briefing — 2026-05-13\n\n1. OpenAI announces GPT-5 with 2M context window\n   Source: TechCrunch | Impact: 5/5\n   Tags: #AI #LLM #OpenAI\n   Sentiment: Positive\n\n   Summary: OpenAI unveiled GPT-5 with a 2M token context window and\n   improved reasoning. Enterprise pricing starts at $0.03/1k tokens.\n\n   Commentary: Direct competitive pressure on Anthropic Claude 3.5.\n   Enterprise deals may shift in H2 2026.\n\n2. EU AI Act enforcement begins for high-risk systems\n   Source: The Verge | Impact: 4/5\n   Tags: #Regulation #EU #Compliance\n   Sentiment: Neutral\n```\n\n## Output Format\n\nFor each article:\n- Title + source + publish date\n- Summary (2-3 sentences)\n- Industry tags: [AI, Semiconductor, Cloud, etc.]\n- Sentiment: Positive/Negative/Neutral\n- Impact score: 1-5\n- Commentary: 1-sentence industry perspective\n\n## Setup\n\nThe optional setup below clones and runs a third-party Node project from\n`tellmefrankie/news-engine`. Review and pin that repository yourself before\nrunning it, and do not expose API keys to an unreviewed checkout.\n\n```bash\ngit clone https://github.com/tellmefrankie/news-engine\ncd news-engine\npnpm install\ncp .env.example .env\n# Requires: ANTHROPIC_API_KEY\npnpm dev -- --collect-only\n```\n\nNo paid APIs required for free tier. Anthropic API key only.\n\n## Limitations\n\n- RSS feeds can lag, disappear, throttle, or duplicate syndicated coverage.\n- Sentiment and impact scores are briefing aids, not authoritative market or policy analysis.\n- The example setup runs third-party code; review the repository and environment variables before use.\n- Outputs should be cross-checked against original article sources before publication or investment use.\n\n## Pro Version\n\nFree tier covers news collection and basic analysis.\n\n**Full bundle — $29 one-time**: Investment-grade analysis (portfolio impact scoring, options flow correlation, earnings catalyst detection), Telegram auto-delivery.\n→ https://jaehyunpark.gumroad.com/l/tcyahy\n\n## Author\n\nCore module from a production news analysis engine processing 50+ articles daily since 2026.\n",
-      "tags": [
-        "node",
-        "api",
-        "claude",
-        "ai",
-        "llm",
-        "gpt",
-        "rag",
-        "cro"
-      ],
-      "useCases": [
-        "Use when preparing a concise AI or technology news briefing from multiple RSS sources.",
-        "Use when you need ranked article summaries with sentiment, tags, and impact scoring.",
-        "Use when monitoring industry changes across product launches, policy moves, and infrastructure shifts.",
-        "Use when deduplicating overlapping coverage before writing a daily or weekly briefing."
-      ],
-      "scrapedAt": "2026-05-14T08:51:25.757Z"
-    },
-    {
-      "id": "antigravity-nextjs-app-router-patterns",
-      "name": "nextjs-app-router-patterns",
-      "slug": "nextjs-app-router-patterns",
-      "description": "Comprehensive patterns for Next.js 14+ App Router architecture, Server Components, and modern full-stack React development.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/nextjs-app-router-patterns",
-      "content": "\n# Next.js App Router Patterns\n\nComprehensive patterns for Next.js 14+ App Router architecture, Server Components, and modern full-stack React development.\n\n## Use this skill when\n\n- Building new Next.js applications with App Router\n- Migrating from Pages Router to App Router\n- Implementing Server Components and streaming\n- Setting up parallel and intercepting routes\n- Optimizing data fetching and caching\n- Building full-stack features with Server Actions\n\n## Do not use this skill when\n\n- The task is unrelated to next.js app router patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "react",
-        "nextjs",
-        "ai"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:45.959Z"
-    },
-    {
       "id": "awesome-llm-notion-knowledge-capture",
       "name": "notion-knowledge-capture",
       "slug": "awesome-llm-notion-knowledge-capture",
@@ -28091,14 +28100,14 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 384
+      "count": 382
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 350
+      "count": 352
     },
     {
       "id": "creative-media",
@@ -28163,48 +28172,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 239074
+      "stars": 239665
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 155377
+      "stars": 155686
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 65979
+      "stars": 66065
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 25,
       "newSkillCount": 1,
-      "stars": 78390
+      "stars": 78459
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1342
+      "stars": 1344
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1063,
-      "newSkillCount": 10,
-      "stars": 41742
+      "newSkillCount": 9,
+      "stars": 41805
     }
   ],
-  "lastUpdated": "2026-06-26T09:49:22.160Z",
+  "lastUpdated": "2026-06-27T08:49:32.719Z",
   "stats": {
     "totalSkills": 1162,
-    "newSkills": 21,
-    "scrapedAt": "2026-06-26T09:49:22.160Z"
+    "newSkills": 20,
+    "scrapedAt": "2026-06-27T08:49:32.719Z"
   }
 }
