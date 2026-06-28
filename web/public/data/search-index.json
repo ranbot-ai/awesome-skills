@@ -10076,11 +10076,11 @@
     "typescript",
     "pdf",
     "docx",
+    "xlsx",
     "pptx",
     "api",
     "mcp",
     "ai",
-    "agent",
     "document",
     "processing"
   ],
