@@ -38,7 +38,7 @@ Use this skill when asked to:
 ```bash
 gh auth status                                   # gh installed & authenticated
 gh extension list | grep -q 'drogers0/gh-image' \
-  || gh extension install drogers0/gh-image      # idempotent install
+  || gh extension install drogers0/gh-image      # review/pin the extension source first
 ```
 
 `gh-image` does **not** use the `gh` token for the upload (that endpoint rejects

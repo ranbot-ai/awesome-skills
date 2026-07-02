@@ -2,7 +2,7 @@
   "id": "antigravity-hugging-face-vision-trainer",
   "name": "hugging-face-vision-trainer",
   "slug": "hugging-face-vision-trainer",
-  "description": "Train or fine-tune vision models on Hugging Face Jobs for detection, classification, and SAM or SAM2 segmentation.",
+  "description": "Trains and fine-tunes vision models for object detection (D-FINE, RT-DETR v2, DETR, YOLOS), image classification (timm models — MobileNetV3, MobileViT, ResNet, ViT/DINOv3 — plus any Transformers classifier), and SAM/SAM2 segmentation using Hugging Face Transformers on Hugging Face Jobs...",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -17,8 +17,8 @@
     "template",
     "document",
     "image",
-    "rag",
-    "cro"
+    "security",
+    "rag"
   ],
   "useCases": [
     "Fine-tune object detection models (D-FINE, RT-DETR v2, DETR, YOLOS) on cloud GPUs or local",

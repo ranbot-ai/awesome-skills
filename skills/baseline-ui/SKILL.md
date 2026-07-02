@@ -1,21 +1,20 @@
 ---
 name: baseline-ui
-description: Validates animation durations, enforces typography scale, checks component accessibility, and prevents layout anti-patterns in Tailwind CSS projects. Use when building UI components, reviewing CSS uti
+description: Quickly deslop UI code by fixing spacing, hierarchy, typography, and small layout issues. Use when the interface needs a fast cleanup or polish pass. 
 category: Creative & Media
 source: antigravity
-tags: [javascript, react, ai, design, image, tailwind, rag, cro]
+tags: [javascript, react, ai, design, image, security, tailwind, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/baseline-ui
 ---
 
 
 # Baseline UI
+## When to Use
+
+Use this skill when you need quickly deslop UI code by fixing spacing, hierarchy, typography, and small layout issues. Use when the interface needs a fast cleanup or polish pass.
+
 
 Enforces an opinionated UI baseline to prevent AI-generated interface slop.
-
-## When to Use
-- You are building or reviewing Tailwind-based UI and want a strict baseline for accessibility, motion, typography, and layout.
-- The task is to prevent generic or sloppy AI-generated interface decisions before they spread through the codebase.
-- You need concrete UI constraints to apply to a file review or an ongoing frontend implementation.
 
 ## How to use
 
@@ -95,6 +94,7 @@ Enforces an opinionated UI baseline to prevent AI-generated interface slop.
 - SHOULD use existing theme or Tailwind CSS color tokens before introducing new ones
 
 ## Limitations
-- Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
+
+- Use this skill only when the task clearly matches its upstream source and local project context.
+- Verify commands, generated code, dependencies, credentials, and external service behavior before applying changes.
+- Do not treat examples as a substitute for environment-specific tests, security review, or user approval for destructive or costly actions.

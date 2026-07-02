@@ -1,9 +1,9 @@
 ---
 name: hugging-face-model-trainer
-description: Train or fine-tune TRL language models on Hugging Face Jobs, including SFT, DPO, GRPO, and GGUF export. 
+description: Train or fine-tune language and vision models using TRL (Transformer Reinforcement Learning) or Unsloth with Hugging Face Jobs infrastructure. Covers SFT, DPO, GRPO and reward modeling training method
 category: Document Processing
 source: antigravity
-tags: [python, mcp, claude, ai, llm, gpt, workflow, template, document, image]
+tags: [python, api, mcp, claude, ai, llm, gpt, workflow, template, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugging-face-model-trainer
 ---
 
@@ -78,7 +78,7 @@ Before starting any training job, verify:
 - Hugging Face Account with [Pro](https://hf.co/pro), [Team](https://hf.co/enterprise), or [Enterprise](https://hf.co/enterprise) plan (Jobs require paid plan)
 - Authenticated login: Check with `hf_whoami()`
 - **HF_TOKEN for Hub Push** ⚠️ CRITICAL - Training environment is ephemeral, must push to Hub or ALL training results are lost
-- Token must have write permissions  
+- Token must have write permissions
 - **MUST pass `secrets={"HF_TOKEN": "$HF_TOKEN"}` in job config** to make token available (the `$HF_TOKEN` syntax
   references your actual token value)
 
@@ -105,4 +105,4 @@ Before starting any training job, verify:
 4. **Wait for user** to request status checks - don't poll automatically
 
 ### Ground Rules
-- **J
+- **Job

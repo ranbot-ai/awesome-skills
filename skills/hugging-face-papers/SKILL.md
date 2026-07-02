@@ -1,9 +1,9 @@
 ---
 name: hugging-face-papers
-description: Read and analyze Hugging Face paper pages or arXiv papers with markdown and papers API metadata. 
-category: AI & Agents
+description: Look up and read Hugging Face paper pages in markdown, and use the papers API for structured metadata such as authors, linked models/datasets/spaces, Github repo and project page. Use when the user sh
+category: Document Processing
 source: antigravity
-tags: [pdf, markdown, api, ai]
+tags: [pdf, markdown, api, ai, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugging-face-papers
 ---
 
@@ -21,6 +21,7 @@ Whenever someone mentions a HF paper or arXiv abstract/PDF URL in a model card, 
 The Hugging Face team has built an easy-to-use API to interact with paper pages. Content of the papers can be fetched as markdown, or structured metadata can be returned such as author names, linked models/datasets/spaces, linked Github repo and project page.
 
 ## When to Use
+
 - User shares a Hugging Face paper page URL (e.g. `https://huggingface.co/papers/2602.08025`)
 - User shares a Hugging Face markdown paper page URL (e.g. `https://huggingface.co/papers/2602.08025.md`)
 - User shares an arXiv URL (e.g. `https://arxiv.org/abs/2602.08025` or  `https://arxiv.org/pdf/2602.08025`)
@@ -121,4 +122,4 @@ curl "https://huggingface.co/api/settings/papers/claim" \
   - `paperId` (string, required): arXiv paper identifier being claimed
   - `claimAuthorId` (string): author entry on the paper being claimed, 24-char hex ID
   - `targetUserId` (string): HF user who should receive the claim, 24-char hex ID
-- Response: paper authors
+- Response: paper author

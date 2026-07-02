@@ -2,15 +2,30 @@
   "id": "antigravity-aws-serverless-eda",
   "name": "aws-serverless-eda",
   "slug": "aws-serverless-eda",
-  "description": "404: Not Found",
-  "category": "AI & Agents",
+  "description": "AWS serverless and event-driven architecture expert based on Well-Architected Framework. Use when building serverless APIs, Lambda functions, REST APIs, microservices, or async workflows. Covers Lambda with TypeScript/Python, API Gateway (REST/HTTP), DynamoDB, Step Functions,...",
+  "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-serverless-eda",
-  "content": "\n404: Not Found",
+  "content": "\n# AWS Serverless & Event-Driven Architecture\n\nThis skill provides comprehensive guidance for building serverless applications and event-driven architectures on AWS based on Well-Architected Framework principles.\n\n## AWS Documentation Requirement\n\nAlways verify AWS facts using MCP tools (`mcp__aws-mcp__*` or `mcp__*awsdocs*__*`) before answering. The `aws-mcp-setup` dependency is auto-loaded — if MCP tools are unavailable, guide the user through that skill's setup flow.\n\n## Serverless MCP Servers\n\nThis skill leverages the CDK MCP server (provided via `aws-cdk-development` dependency) and AWS Documentation MCP for serverless guidance.\n\n> **Note**: The following AWS MCP servers are available separately via the Full AWS MCP Server (see `aws-mcp-setup` skill) and are not bundled with this plugin:\n> - AWS Serverless MCP — SAM CLI lifecycle (init, deploy, local test)\n> - AWS Lambda Tool MCP — Direct Lambda invocation\n> - AWS Step Functions MCP — Workflow orchestration\n> - Amazon SNS/SQS MCP — Messaging and queue management\n\n## When to Use This Skill\n\nUse this skill when:\n- Building serverless applications with Lambda\n- Designing event-driven architectures\n- Implementing microservices patterns\n- Creating asynchronous processing workflows\n- Orchestrating multi-service transactions\n- Building real-time data processing pipelines\n- Implementing saga patterns for distributed transactions\n- Designing for scale and resilience\n\n## AWS Well-Architected Serverless Design Principles\n\n### 1. Speedy, Simple, Singular\n\n**Functions should be concise and single-purpose**\n\n```typescript\n// ✅ GOOD - Single purpose, focused function\nexport const processOrder = async (event: OrderEvent) => {\n  // Only handles order processing\n  const order = await validateOrder(event);\n  await saveOrder(order);\n  await publishOrderCreatedEvent(order);\n  return { statusCode: 200, body: JSON.stringify({ orderId: order.id }) };\n};\n\n// ❌ BAD - Function does too much\nexport const handleEverything = async (event: any) => {\n  // Handles orders, inventory, payments, shipping...\n  // Too many responsibilities\n};\n```\n\n**Keep functions environmentally efficient and cost-aware**:\n- Minimize cold start times\n- Optimize memory allocation\n- Use provisioned concurrency only when needed\n- Leverage connection reuse\n\n### 2. Think Concurrent Requests, Not Total Requests\n\n**Design for concurrency, not volume**\n\nLambda scales horizontally - design considerations should focus on:\n- Concurrent execution limits\n- Downstream service throttling\n- Shared resource contention\n- Connection pool sizing\n\n```typescript\n// Consider concurrent Lambda executions accessing DynamoDB\nconst table = new dynamodb.Table(this, 'Table', {\n  billingMode: dynamodb.BillingMode.PAY_PER_REQUEST, // Auto-scales with load\n});\n\n// Or with provisioned capacity + auto-scaling\nconst table = new dynamodb.Table(this, 'Table', {\n  billingMode: dynamodb.BillingMode.PROVISIONED,\n  readCapacity: 5,\n  writeCapacity: 5,\n});\n\n// Enable auto-scaling for concurrent load\ntable.autoScaleReadCapacity({ minCapacity: 5, maxCapacity: 100 });\ntable.autoScaleWriteCapacity({ minCapacity: 5, maxCapacity: 100 });\n```\n\n### 3. Share Nothing\n\n**Function runtime environments are short-lived**\n\n```typescript\n// ❌ BAD - Relying on local file system\nexport const handler = async (event: any) => {\n  fs.writeFileSync('/tmp/data.json', JSON.stringify(data)); // Lost after execution\n};\n\n// ✅ GOOD - Use persistent storage\nexport const handler = async (event: any) => {\n  await s3.putObject({\n    Bucket: process.env.BUCKET_NAME,\n    Key: 'data.json',\n    Body: JSON.stringify(data),\n  });\n};\n```\n\n**State management**:\n- Use DynamoDB for persistent state\n- Use Step Functions for workflow state\n- Use ElastiCache for session state\n- Use S3 for file storage\n\n### 4. Assume No Hardware Affinity\n\n**Applications must be hardware-agnostic**\n\nInfrastructure can change without notice:\n- Lambda functions can run on different hardware\n- Container instances can be replaced\n- No assumption about underlying infrastructure\n\n**Design for portability**:\n- Use environment variables for configuration\n- Avoid hardware-specific optimizations\n- Test across different environments\n\n### 5. Orchestrate with State Machines, Not Function Chaining\n\n**Use Step Functions for orchestration**\n\n```typescript\n// ❌ BAD - Lambda function chaining\nexport const handler1 = async (event: any) => {\n  const result = await processStep1(event);\n  await lambda.invoke({\n    FunctionName: 'handler2',\n    Payload: JSON.stringify(result),\n  });\n};\n\n// ✅ GOOD - Step Functions orchestration\nconst stateMachine = new stepfunctions.StateMachine(this, 'OrderWorkflow', {\n  definition: stepfunctions.Chain\n    .start(validateOrder)\n    .next(processPayment)\n    .next(shipOrder)\n    .next(sendConfirmation),\n});\n```\n\n**Benefits of Step Functions**:\n- Visual workflow representation\n- Built-in error handling and retries\n- Execution history and debugging\n- Parallel and sequential execution\n- Service integrat",
   "tags": [
-    "aws"
+    "python",
+    "typescript",
+    "node",
+    "api",
+    "mcp",
+    "ai",
+    "workflow",
+    "design",
+    "document",
+    "presentation"
   ],
-  "useCases": [],
-  "scrapedAt": "2026-03-07T06:52:30.356Z"
+  "useCases": [
+    "Building serverless applications with Lambda",
+    "Designing event-driven architectures",
+    "Implementing microservices patterns",
+    "Creating asynchronous processing workflows",
+    "Orchestrating multi-service transactions"
+  ],
+  "scrapedAt": "2026-07-02T09:23:51.393Z"
 }

@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-ci-cd-and-automation",
+  "name": "ci-cd-and-automation",
+  "slug": "ci-cd-and-automation",
+  "description": "Automates CI/CD pipeline setup. Use when setting up or modifying build and deployment pipelines. Use when you need to automate quality gates, configure test runners in CI, or establish deployment strategies.",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ci-cd-and-automation",
+  "content": "\n# CI/CD and Automation\n\n## Overview\n\nAutomate quality gates so that no change reaches production without passing tests, lint, type checking, and build. CI/CD is the enforcement mechanism for every other skill — it catches what humans and agents miss, and it does so consistently on every single change.\n\n**Shift Left:** Catch problems as early in the pipeline as possible. A bug caught in linting costs minutes; the same bug caught in production costs hours. Move checks upstream — static analysis before tests, tests before staging, staging before production.\n\n**Faster is Safer:** Smaller batches and more frequent releases reduce risk, not increase it. A deployment with 3 changes is easier to debug than one with 30. Frequent releases build confidence in the release process itself.\n\n## When to Use\n\n- Setting up a new project's CI pipeline\n- Adding or modifying automated checks\n- Configuring deployment pipelines\n- When a change should trigger automated verification\n- Debugging CI failures\n\n## The Quality Gate Pipeline\n\nEvery change goes through these gates before merge:\n\n```\nPull Request Opened\n    │\n    ▼\n┌─────────────────┐\n│   LINT CHECK     │  eslint, prettier\n│   ↓ pass         │\n│   TYPE CHECK     │  tsc --noEmit\n│   ↓ pass         │\n│   UNIT TESTS     │  jest/vitest\n│   ↓ pass         │\n│   BUILD          │  npm run build\n│   ↓ pass         │\n│   INTEGRATION    │  API/DB tests\n│   ↓ pass         │\n│   E2E (optional) │  Playwright/Cypress\n│   ↓ pass         │\n│   SECURITY AUDIT │  npm audit\n│   ↓ pass         │\n│   BUNDLE SIZE    │  bundlesize check\n└─────────────────┘\n    │\n    ▼\n  Ready for review\n```\n\n**No gate can be skipped.** If lint fails, fix lint — don't disable the rule. If a test fails, fix the code — don't skip the test.\n\n## GitHub Actions Configuration\n\n### Basic CI Pipeline\n\n```yaml\n# .github/workflows/ci.yml\nname: CI\n\non:\n  pull_request:\n    branches: [main]\n  push:\n    branches: [main]\n\njobs:\n  quality:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n          cache: 'npm'\n\n      - name: Install dependencies\n        run: npm ci\n\n      - name: Lint\n        run: npm run lint\n\n      - name: Type check\n        run: npx tsc --noEmit\n\n      - name: Test\n        run: npm test -- --coverage\n\n      - name: Build\n        run: npm run build\n\n      - name: Security audit\n        run: npm audit --audit-level=high\n```\n\n### With Database Integration Tests\n\n```yaml\n  integration:\n    runs-on: ubuntu-latest\n    services:\n      postgres:\n        image: postgres:16\n        env:\n          POSTGRES_DB: testdb\n          POSTGRES_USER: ci_user\n          POSTGRES_PASSWORD: ${{ secrets.CI_DB_PASSWORD }}\n        ports:\n          - 5432:5432\n        options: >-\n          --health-cmd pg_isready\n          --health-interval 10s\n          --health-timeout 5s\n          --health-retries 5\n\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n          cache: 'npm'\n      - run: npm ci\n      - name: Run migrations\n        run: npx prisma migrate deploy\n        env:\n          DATABASE_URL: postgresql://ci_user:${{ secrets.CI_DB_PASSWORD }}@localhost:5432/testdb\n      - name: Integration tests\n        run: npm run test:integration\n        env:\n          DATABASE_URL: postgresql://ci_user:${{ secrets.CI_DB_PASSWORD }}@localhost:5432/testdb\n```\n\n> **Note:** Even for CI-only test databases, use GitHub Secrets for credentials rather than hardcoding values. This builds good habits and prevents accidental reuse of test credentials in other contexts.\n\n### E2E Tests\n\n```yaml\n  e2e:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n          cache: 'npm'\n      - run: npm ci\n      - name: Install Playwright\n        run: npx playwright install --with-deps chromium\n      - name: Build\n        run: npm run build\n      - name: Run E2E tests\n        run: npx playwright test\n      - uses: actions/upload-artifact@v4\n        if: failure()\n        with:\n          name: playwright-report\n          path: playwright-report/\n```\n\n## Feeding CI Failures Back to Agents\n\nThe power of CI with AI agents is the feedback loop. When CI fails:\n\n```\nCI fails\n    │\n    ▼\nCopy the failure output\n    │\n    ▼\nFeed it to the agent:\n\"The CI pipeline failed with this error:\n[paste specific error]\nFix the issue and verify locally before pushing again.\"\n    │\n    ▼\nAgent fixes → pushes → CI runs again\n```\n\n**Key patterns:**\n\n```\nLint failure → Agent runs `npm run lint --fix` and commits\nType error  → Agent reads the error location and fixes the type\nTest failure → Agent follows debugging-and-error-recovery skill\nBuild error → Agent checks config and dependencies\n```\n\n## Deployment Strategies\n\n### Preview Deployments\n\nEvery PR gets a preview deployment for manual testing:\n\n```yaml\n# Deploy preview ",
+  "tags": [
+    "typescript",
+    "node",
+    "api",
+    "ai",
+    "agent",
+    "automation",
+    "workflow",
+    "template",
+    "design",
+    "image"
+  ],
+  "useCases": [
+    "Setting up a new project's CI pipeline",
+    "Adding or modifying automated checks",
+    "Configuring deployment pipelines",
+    "When a change should trigger automated verification",
+    "Debugging CI failures"
+  ],
+  "scrapedAt": "2026-07-02T09:24:58.263Z"
+}

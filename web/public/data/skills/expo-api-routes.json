@@ -3,7 +3,7 @@
   "name": "expo-api-routes",
   "slug": "expo-api-routes",
   "description": "Guidelines for creating API routes in Expo Router with EAS Hosting",
-  "category": "Development & Code Tools",
+  "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/expo-api-routes",
@@ -15,10 +15,10 @@
     "api",
     "ai",
     "gpt",
+    "document",
+    "security",
     "supabase",
-    "firebase",
-    "stripe",
-    "rag"
+    "firebase"
   ],
   "useCases": [
     "**Server-side secrets** — API keys, database credentials, or tokens that must never reach the client",

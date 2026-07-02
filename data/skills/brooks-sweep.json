@@ -1,0 +1,20 @@
+{
+  "id": "antigravity-brooks-sweep",
+  "name": "brooks-sweep",
+  "slug": "brooks-sweep",
+  "description": "Full-sweep mode: runs a unified analysis across all quality dimensions — code decay, architecture, tech debt, and test quality — then applies fixes directly to the codebase. Safe changes are auto-applied; risky changes are confirmed before execution. Drawing on twelve classic...",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/brooks-sweep",
+  "content": "\n# Brooks-Lint — Full Sweep & Auto-Fix\n## When to Use\n\nUse this skill when you need full-sweep mode: runs a unified analysis across all quality dimensions — code decay, architecture, tech debt, and test quality — then applies fixes directly to the codebase. Safe changes are auto-applied; risky changes are confirmed before execution. Drawing on twelve classic...\n\n\n## Setup\n\n1. Read `../_shared/common.md` for the Iron Law, Project Config, Report Template, and Health Score rules\n2. Read `../_shared/source-coverage.md` for book-level coverage, exceptions, and tradeoffs\n3. Read `../_shared/decay-risks.md` for production risk symptom definitions\n4. Read `../_shared/test-decay-risks.md` for test risk symptom definitions\n5. Read `sweep-guide.md` in this directory for the unified scan and fix process\n\n## Process\n\n**If the user has not specified a project or directory:** apply Auto Scope Detection\nfrom `../_shared/common.md` to determine the review scope before proceeding.\n\n1. Show pre-flight consent notice and wait for the user's one-time approval (Step 0 of the guide)\n2. Enumerate scope and initialize the `unresolvable` / `non_critical_rounds` / `fix_log` state (Step 1 of the guide)\n3. Run the four dimensions in sequence — review, test, debt, audit — each scanning, classifying, applying Safe + Extended-Safe fixes, and verifying via the project test command (Steps 2–5 of the guide)\n4. Iterate: re-scan modified files + same-module + static consumers; converge on a clean round, retire 3-retry failures to the `unresolvable` set, cap non-critical rounds at 3 (Step 6 of the guide)\n5. Aggregate residual and unresolvable items and output the Full Sweep Report (Steps 7–8 of the guide)\n\n**Mode line in report:** `Full Sweep`\n\n## Limitations\n\n- Use this skill only when the task clearly matches its upstream source and local project context.\n- Verify commands, generated code, dependencies, credentials, and external service behavior before applying changes.\n- Do not treat examples as a substitute for environment-specific tests, security review, or user approval for destructive or costly actions.\n",
+  "tags": [
+    "ai",
+    "template",
+    "security",
+    "rag",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-07-02T09:24:43.553Z"
+}

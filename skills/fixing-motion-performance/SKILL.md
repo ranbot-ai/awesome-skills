@@ -3,12 +3,16 @@ name: fixing-motion-performance
 description: Audit and fix animation performance issues including layout thrashing, compositor properties, scroll-linked motion, and blur effects. Use when animations stutter, transitions jank, or reviewing CSS/JS
 category: AI & Agents
 source: antigravity
-tags: [api, ai, image, cro]
+tags: [api, ai, image, security, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fixing-motion-performance
 ---
 
 
 # fixing-motion-performance
+## When to Use
+
+Use this skill when you need audit and fix animation performance issues including layout thrashing, compositor properties, scroll-linked motion, and blur effects. Use when animations stutter, transitions jank, or reviewing CSS/JS animation performance.
+
 
 Fix animation performance issues.
 
@@ -25,7 +29,8 @@ Fix animation performance issues.
 
 Do not migrate animation libraries unless explicitly requested. Apply rules within the existing stack.
 
-## When to Use
+## when to apply
+
 Reference these guidelines when:
 - adding or changing UI animations (CSS, WAAPI, Motion, rAF, GSAP)
 - refactoring janky interactions or transitions
@@ -142,11 +147,4 @@ el.style.left = el.getBoundingClientRect().left + 10 + 'px';
 // after — measure once, animate via transform
 const first = el.getBoundingClientRect();
 el.classList.add('moved');
-const last = el.getBoundingClientRect();
-el.style.transform = `translateX(${first.left - last.left}px)`;
-requestAnimationFrame(() => { el.style.transition = 'transform 0.3s'; el.style.transform = ''; });
-```
-
-## review guidance
-
-- enforce critical rules first (never patterns, tool b
+const last

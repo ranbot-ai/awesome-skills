@@ -1,0 +1,22 @@
+{
+  "id": "antigravity-expo-observe",
+  "name": "expo-observe",
+  "slug": "expo-observe",
+  "description": "Use for anything related to EAS Observe — adding `expo-observe` to an Expo project (AppMetricsRoot/ObserveRoot HOC, markInteractive, the useObserve hook, and the Expo Router / React Navigation integrations for per-route metrics), querying via the EAS CLI (`eas observe:metrics-summary`,...",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/expo-observe",
+  "content": "\n# EAS Observe\n## When to Use\n\nUse this skill when you need use for anything related to EAS Observe — adding `expo-observe` to an Expo project (AppMetricsRoot/ObserveRoot HOC, markInteractive, the useObserve hook, and the Expo Router / React Navigation integrations for per-route metrics), querying via the EAS CLI (`eas observe:metrics-summary`,...\n\n\nEAS Observe tracks startup, navigation, and custom-event performance from production Expo apps.\n\n> **Source of truth:** https://docs.expo.dev/eas/observe/ — always consult the canonical docs when API details matter, especially get-started, configuration, integrations, and the metrics reference. EAS Observe is evolving; this skill's references are written to stay accurate but may lag the docs.\n\n## Which reference to read\n\nThe three reference files in `./references/` cover the three things people typically need this skill for:\n\n- **Adding EAS Observe to a project** → [`./references/setup.md`](./references/setup.md). Install, wrap the root layout (`AppMetricsRoot` on SDK 55, `ObserveRoot` on SDK 56+), call `markInteractive()` (global on SDK 55, via the `useObserve()` hook on SDK 56+), and optional per-route navigation metrics through the Expo Router / React Navigation integrations.\n- **Querying metrics from the terminal** → [`./references/queries.md`](./references/queries.md). The five `eas observe:*` commands — `metrics-summary`, `metrics`, `routes`, `events`, `versions` — with flags, table layouts, JSON shapes, and common workflows.\n- **Reading a dashboard or CLI output** → [`./references/metrics.md`](./references/metrics.md). Target thresholds per metric, what the TTI `frameRate.*` params mean, and diagnostic patterns for telling slow-but-smooth startup apart from main-thread contention or hard blocks.\n\n## Quick links to the docs\n\n- Get started: https://docs.expo.dev/eas/observe/get-started/\n- Dashboard guide: https://docs.expo.dev/eas/observe/dashboard/\n- Metrics reference: https://docs.expo.dev/eas/observe/reference/metrics/\n- Expo Router integration: https://docs.expo.dev/eas/observe/integrations/expo-router/\n- React Navigation integration: https://docs.expo.dev/eas/observe/integrations/react-navigation/\n- Configuration: https://docs.expo.dev/eas/observe/configuration/\n\n## Limitations\n\n- Use this skill only when the task clearly matches its upstream product or API scope.\n- Verify commands, API behavior, pricing, quotas, credentials, and deployment effects against current official documentation before making changes.\n- Do not treat generated examples as a substitute for environment-specific tests, security review, or user approval for destructive or costly actions.\n",
+  "tags": [
+    "react",
+    "api",
+    "ai",
+    "workflow",
+    "document",
+    "security",
+    "seo"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-07-02T09:27:13.601Z"
+}

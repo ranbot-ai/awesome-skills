@@ -2,15 +2,30 @@
   "id": "antigravity-aws-cdk-development",
   "name": "aws-cdk-development",
   "slug": "aws-cdk-development",
-  "description": "404: Not Found",
-  "category": "Development & Code Tools",
+  "description": "AWS Cloud Development Kit (CDK) expert for building cloud infrastructure with TypeScript/Python. Use when creating CDK stacks, defining CDK constructs, implementing infrastructure as code, or when the user mentions CDK, CloudFormation, IaC, cdk synth, cdk deploy, or wants to define AWS...",
+  "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-cdk-development",
-  "content": "\n404: Not Found",
+  "content": "\n# AWS CDK Development\n\nThis skill provides comprehensive guidance for developing AWS infrastructure using the Cloud Development Kit (CDK), with integrated MCP servers for accessing latest AWS knowledge and CDK utilities.\n\n## AWS Documentation Requirement\n\nAlways verify AWS facts using MCP tools (`mcp__aws-mcp__*` or `mcp__*awsdocs*__*`) before answering. The `aws-mcp-setup` dependency is auto-loaded — if MCP tools are unavailable, guide the user through that skill's setup flow.\n\n## CDK-Specific MCP Guidance\n\nAWS Labs replaced the dedicated CDK MCP server (`awslabs.cdk-mcp-server`) with the broader `awslabs.aws-iac-mcp-server`, which covers CDK alongside CloudFormation and other AWS infrastructure-as-code workflows.\n\nFor CDK construct lookups, best-practice recommendations, and pattern guidance, install `awslabs.aws-iac-mcp-server`. It ships in the `deploy-on-aws` plugin from `awslabs/agent-plugins`, or can be registered directly with `claude mcp add aws-iac uvx awslabs.aws-iac-mcp-server@latest`.\n\n**When to reach for it**:\n- CDK construct recommendations and API lookups\n- CDK and CloudFormation best-practice patterns\n- Validation of synthesized templates\n- Cross-resource configuration guidance\n\n## When to Use This Skill\n\nUse this skill when:\n- Creating new CDK stacks or constructs\n- Refactoring existing CDK infrastructure\n- Implementing Lambda functions within CDK\n- Following AWS CDK best practices\n- Validating CDK stack configurations before deployment\n- Verifying AWS service capabilities and regional availability\n\n## Core CDK Principles\n\n### Resource Naming\n\n**CRITICAL**: Do NOT explicitly specify resource names when they are optional in CDK constructs.\n\n**Why**: CDK-generated names enable:\n- **Reusable patterns**: Deploy the same construct/pattern multiple times without conflicts\n- **Parallel deployments**: Multiple stacks can deploy simultaneously in the same region\n- **Cleaner shared logic**: Patterns and shared code can be initialized multiple times without name collision\n- **Stack isolation**: Each stack gets uniquely identified resources automatically\n\n**Pattern**: Let CDK generate unique names automatically using CloudFormation's naming mechanism.\n\n```typescript\n// ❌ BAD - Explicit naming prevents reusability and parallel deployments\nnew lambda.Function(this, 'MyFunction', {\n  functionName: 'my-lambda',  // Avoid this\n  // ...\n});\n\n// ✅ GOOD - Let CDK generate unique names\nnew lambda.Function(this, 'MyFunction', {\n  // No functionName specified - CDK generates: StackName-MyFunctionXXXXXX\n  // ...\n});\n```\n\n**Security Note**: For different environments (dev, staging, prod), follow AWS Security Pillar best practices by using separate AWS accounts rather than relying on resource naming within a single account. Account-level isolation provides stronger security boundaries.\n\n### Lambda Function Development\n\nUse the appropriate Lambda construct based on runtime:\n\n**TypeScript/JavaScript**: Use `@aws-cdk/aws-lambda-nodejs`\n```typescript\nimport { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';\n\nnew NodejsFunction(this, 'MyFunction', {\n  entry: 'lambda/handler.ts',\n  handler: 'handler',\n  // Automatically handles bundling, dependencies, and transpilation\n});\n```\n\n**Python**: Use `@aws-cdk/aws-lambda-python`\n```typescript\nimport { PythonFunction } from '@aws-cdk/aws-lambda-python-alpha';\n\nnew PythonFunction(this, 'MyFunction', {\n  entry: 'lambda',\n  index: 'handler.py',\n  handler: 'handler',\n  // Automatically handles dependencies and packaging\n});\n```\n\n**Benefits**:\n- Automatic bundling and dependency management\n- Transpilation handled automatically\n- No manual packaging required\n- Consistent deployment patterns\n\n### Pre-Deployment Validation\n\nUse a **multi-layer validation strategy** for comprehensive CDK quality checks:\n\n#### Layer 1: Real-Time IDE Feedback (Recommended)\n\n**For TypeScript/JavaScript projects**:\n\nInstall [cdk-nag](https://github.com/cdklabs/cdk-nag) for synthesis-time validation:\n```bash\nnpm install --save-dev cdk-nag\n```\n\nAdd to your CDK app:\n```typescript\nimport { Aspects } from 'aws-cdk-lib';\nimport { AwsSolutionsChecks } from 'cdk-nag';\n\nconst app = new App();\nAspects.of(app).add(new AwsSolutionsChecks());\n```\n\n**Optional - VS Code users**: Install [CDK NAG Validator extension](https://marketplace.visualstudio.com/items?itemName=alphacrack.cdk-nag-validator) for faster feedback on file save.\n\n**For Python/Java/C#/Go projects**: cdk-nag is available in all CDK languages and provides the same synthesis-time validation.\n\n#### Layer 2: Synthesis-Time Validation (Required)\n\n1. **Synthesis with cdk-nag**: Validate stack with comprehensive rules\n   ```bash\n   cdk synth  # cdk-nag runs automatically via Aspects\n   ```\n\n2. **Suppress legitimate exceptions** with documented reasons:\n   ```typescript\n   import { NagSuppressions } from 'cdk-nag';\n\n   // Document WHY the exception is needed\n   NagSuppressions.addResourceSuppressions(resource, [\n     {\n       id: 'AwsSolutions-L1',\n       rea",
   "tags": [
-    "aws"
+    "python",
+    "javascript",
+    "typescript",
+    "node",
+    "api",
+    "mcp",
+    "claude",
+    "ai",
+    "agent",
+    "workflow"
   ],
-  "useCases": [],
-  "scrapedAt": "2026-03-07T06:52:28.140Z"
+  "useCases": [
+    "Creating new CDK stacks or constructs",
+    "Refactoring existing CDK infrastructure",
+    "Implementing Lambda functions within CDK",
+    "Following AWS CDK best practices",
+    "Validating CDK stack configurations before deployment"
+  ],
+  "scrapedAt": "2026-07-02T09:23:49.239Z"
 }

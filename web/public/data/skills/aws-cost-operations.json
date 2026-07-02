@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-aws-cost-operations",
+  "name": "aws-cost-operations",
+  "slug": "aws-cost-operations",
+  "description": "AWS cost optimization, monitoring, and operational excellence expert. Use when analyzing AWS bills, estimating costs, setting up CloudWatch alarms, querying logs, auditing CloudTrail activity, or assessing security posture. Essential when user mentions AWS costs, spending, billing,...",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-cost-operations",
+  "content": "\n# AWS Cost & Operations\n\nThis skill provides comprehensive guidance for AWS cost optimization, monitoring, observability, and operational excellence with integrated MCP servers.\n\n## AWS Documentation Requirement\n\nAlways verify AWS facts using MCP tools (`mcp__aws-mcp__*` or `mcp__*awsdocs*__*`) before answering. The `aws-mcp-setup` dependency is auto-loaded — if MCP tools are unavailable, guide the user through that skill's setup flow.\n\n## Integrated MCP Servers\n\nThis plugin provides 3 MCP servers:\n\n### Bundled Servers\n\n#### 1. AWS Pricing MCP Server (`pricing`)\n**Purpose**: Pre-deployment cost estimation and optimization\n- Estimate costs before deploying resources\n- Compare pricing across regions\n- Calculate Total Cost of Ownership (TCO)\n- Evaluate different service options for cost efficiency\n\n#### 2. AWS Cost Explorer MCP Server (`costexp`)\n**Purpose**: Detailed cost analysis and reporting\n- Analyze historical spending patterns\n- Identify cost anomalies and trends\n- Forecast future costs\n- Analyze cost by service, region, or tag\n\n#### 3. Amazon CloudWatch MCP Server (`cw`)\n**Purpose**: Metrics, alarms, and logs analysis\n- Query CloudWatch metrics and logs\n- Create and manage CloudWatch alarms\n- Troubleshoot operational issues\n- Monitor resource utilization\n\n> **Note**: The following servers are available separately via the Full AWS MCP Server (see `aws-mcp-setup` skill) and are not bundled with this plugin:\n> - AWS Billing and Cost Management MCP — Real-time billing details\n> - CloudWatch Application Signals MCP — APM and SLOs\n> - AWS Managed Prometheus MCP — PromQL queries for containers\n> - AWS CloudTrail MCP — API activity audit\n> - AWS Well-Architected Security Assessment MCP — Security posture assessment\n\n## When to Use This Skill\n\nUse this skill when:\n- Optimizing AWS costs and reducing spending\n- Estimating costs before deployment\n- Monitoring application and infrastructure performance\n- Setting up observability and alerting\n- Analyzing spending patterns and trends\n- Investigating operational issues\n- Auditing AWS activity and changes\n- Assessing security posture\n- Implementing operational excellence\n\n## Cost Optimization Best Practices\n\n### Pre-Deployment Cost Estimation\n\n**Always estimate costs before deploying**:\n1. Use **AWS Pricing MCP** to estimate resource costs\n2. Compare pricing across different regions\n3. Evaluate alternative service options\n4. Calculate expected monthly costs\n5. Plan for scaling and growth\n\n**Example workflow**:\n```\n\"Estimate the monthly cost of running a Lambda function with\n1 million invocations, 512MB memory, 3-second duration in us-east-1\"\n```\n\n### Cost Analysis and Optimization\n\n**Regular cost reviews**:\n1. Use **Cost Explorer MCP** to analyze spending trends\n2. Identify cost anomalies and unexpected charges\n3. Review costs by service, region, and environment\n4. Compare actual vs. budgeted costs\n5. Generate cost optimization recommendations\n\n**Cost optimization strategies**:\n- Right-size over-provisioned resources\n- Use appropriate storage classes (S3, EBS)\n- Implement auto-scaling for dynamic workloads\n- Leverage Savings Plans and Reserved Instances\n- Delete unused resources and snapshots\n- Use cost allocation tags effectively\n\n### Budget Monitoring\n\n**Track spending against budgets**:\n1. Use **Billing and Cost Management MCP** to monitor budgets\n2. Set up budget alerts for threshold breaches\n3. Review budget utilization regularly\n4. Adjust budgets based on trends\n5. Implement cost controls and governance\n\n## Monitoring and Observability Best Practices\n\n### CloudWatch Metrics and Alarms\n\n**Implement comprehensive monitoring**:\n1. Use **CloudWatch MCP** to query metrics and logs\n2. Set up alarms for critical metrics:\n   - CPU and memory utilization\n   - Error rates and latency\n   - Queue depths and processing times\n   - API gateway throttling\n   - Lambda errors and timeouts\n3. Create CloudWatch dashboards for visualization\n4. Use log insights for troubleshooting\n\n**Example alarm scenarios**:\n- Lambda error rate > 1%\n- EC2 CPU utilization > 80%\n- API Gateway 4xx/5xx error spike\n- DynamoDB throttled requests\n- ECS task failures\n\n### Application Performance Monitoring\n\n**Monitor application health**:\n1. Use **CloudWatch Application Signals MCP** for APM\n2. Track service-level objectives (SLOs)\n3. Monitor application dependencies\n4. Identify performance bottlenecks\n5. Set up distributed tracing\n\n### Container and Kubernetes Monitoring\n\n**For containerized workloads**:\n1. Use **AWS Managed Prometheus MCP** for metrics\n2. Monitor container resource utilization\n3. Track pod and node health\n4. Create PromQL queries for custom metrics\n5. Set up alerts for container anomalies\n\n## Audit and Security Best Practices\n\n### CloudTrail Activity Analysis\n\n**Audit AWS activity**:\n1. Use **CloudTrail MCP** to analyze API activity\n2. Track who made changes to resources\n3. Investigate security incidents\n4. Monitor for suspicious activity patterns\n5. Audit compliance with policies\n\n**Co",
+  "tags": [
+    "node",
+    "api",
+    "mcp",
+    "ai",
+    "workflow",
+    "document",
+    "security",
+    "kubernetes",
+    "aws",
+    "rag"
+  ],
+  "useCases": [
+    "Optimizing AWS costs and reducing spending",
+    "Estimating costs before deployment",
+    "Monitoring application and infrastructure performance",
+    "Setting up observability and alerting",
+    "Analyzing spending patterns and trends"
+  ],
+  "scrapedAt": "2026-07-02T09:23:49.805Z"
+}

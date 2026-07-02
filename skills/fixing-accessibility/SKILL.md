@@ -3,12 +3,16 @@ name: fixing-accessibility
 description: Audit and fix HTML accessibility issues including ARIA labels, keyboard navigation, focus management, color contrast, and form errors. Use when adding interactive controls, forms, dialogs, or reviewin
 category: AI & Agents
 source: antigravity
-tags: [ai, image, cro]
+tags: [ai, image, security, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fixing-accessibility
 ---
 
 
 # fixing-accessibility
+## When to Use
+
+Use this skill when you need audit and fix HTML accessibility issues including ARIA labels, keyboard navigation, focus management, color contrast, and form errors. Use when adding interactive controls, forms, dialogs, or reviewing WCAG compliance.
+
 
 Fix accessibility issues.
 
@@ -25,7 +29,8 @@ Fix accessibility issues.
 
 Do not rewrite large parts of the UI. Prefer minimal, targeted fixes.
 
-## When to Use
+## when to apply
+
 Reference these guidelines when:
 - adding or changing buttons, links, inputs, menus, dialogs, tabs, dropdowns
 - building forms, validation, error states, helper text
@@ -140,6 +145,7 @@ Reference these guidelines when:
 - for complex widgets (menu, dialog, combobox), prefer established accessible primitives over custom behavior
 
 ## Limitations
-- Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
+
+- Use this skill only when the task clearly matches its upstream source and local project context.
+- Verify commands, generated code, dependencies, credentials, and external service behavior before applying changes.
+- Do not treat examples as a substitute for environmen

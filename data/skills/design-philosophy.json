@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-design-philosophy",
+  "name": "design-philosophy",
+  "slug": "design-philosophy",
+  "description": "Visual philosophy and art-direction for frontend. Use when creating high-concept work, campaigns, or when the user asks for a visual philosophy, manifesto, or unmistakable art-like aesthetic.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-philosophy",
+  "content": "\n# Design philosophy\n## When to Use\n\nUse this skill when you need visual philosophy and art-direction for frontend. Use when creating high-concept work, campaigns, or when the user asks for a visual philosophy, manifesto, or unmistakable art-like aesthetic.\n\n\nApply with **design** for high-concept work, campaigns, or when the user asks for a visual philosophy, manifesto, or art-like aesthetic. This skill guides creating a named movement and expressing it visually.\n\n## Visual philosophy (when creating \"art\" or high-concept work)\n\n1. **Name the movement** (1–2 words): e.g. \"Brutalist Joy,\" \"Chromatic Silence,\" \"Metabolist Dreams.\"\n2. **Articulate in 4–6 paragraphs** how the philosophy manifests through: space and form; color and material; scale and rhythm; composition and balance; visual hierarchy. Avoid redundancy; each aspect once.\n3. **Craftsmanship**: Stress that the work should look meticulously crafted, labored over with care, the product of deep expertise — \"painstaking attention,\" \"master-level execution.\" Repeat this framing.\n4. **Minimal text**: Information lives in design, not paragraphs. Text sparse and essential; integrated as visual element.\n5. **Creative space**: Be specific about direction but concise so the executor can make high-level interpretive choices with the same level of craft.\n\nFor philosophy examples, see [reference.md](reference.md). The numbered checklist above is the canonical generation procedure.\n\n## Deducing the subtle reference\n\nBefore building: identify one subtle conceptual thread from the request. The topic is a subtle, niche reference embedded in the work — not literal, always sophisticated. Someone familiar with the subject should feel it intuitively; others experience a strong abstract composition. Weave it into form, color, and composition. \"Jazz quote\" principle: only those who know catch it; everyone benefits.\n\n## Limitations\n\n- Use this skill only when the task clearly matches its upstream source and local project context.\n- Verify commands, generated code, dependencies, credentials, and external service behavior before applying changes.\n- Do not treat examples as a substitute for environment-specific tests, security review, or user approval for destructive or costly actions.\n",
+  "tags": [
+    "ai",
+    "design",
+    "security",
+    "rag"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-07-02T09:26:34.788Z"
+}

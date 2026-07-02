@@ -1,17 +1,18 @@
 ---
 name: hugging-face-community-evals
-description: Run local evaluations for Hugging Face Hub models with inspect-ai or lighteval. 
-category: AI & Agents
+description: Run evaluations for Hugging Face Hub models using inspect-ai and lighteval on local hardware. Use for backend selection, local GPU evals, and choosing between vLLM / Transformers / accelerate. Not for
+category: Document Processing
 source: antigravity
-tags: [ai, llm, automation, workflow, template, cro]
+tags: [api, ai, llm, automation, workflow, template, document, security, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugging-face-community-evals
 ---
 
 
 # Overview
-
 ## When to Use
-Use this skill for local model evaluation, backend selection, and GPU smoke tests outside the Hugging Face Jobs workflow.
+
+Use this skill when you need run evaluations for Hugging Face Hub models using inspect-ai and lighteval on local hardware. Use for backend selection, local GPU evals, and choosing between vLLM / Transformers / accelerate. Not for HF Jobs orchestration, model-card PRs, .eval_results publication, or community-evals...
+
 
 This skill is for **running evaluations against models on the Hugging Face Hub on local hardware**.
 
@@ -168,11 +169,4 @@ then switch to the **`hugging-face-jobs`** skill and pass it one of these script
 `lighteval` task strings use `suite|task|num_fewshot`:
 - `leaderboard|mmlu|5`
 - `leaderboard|gsm8k|5`
-- `leaderboard|arc_challenge|25`
-- `lighteval|hellaswag|0`
-
-Multiple `lighteval` tasks can be comma-separated in `--tasks`.
-
-# Backend Selection
-
-- Prefer `inspect_vllm_uv.py --backend vllm` for fast GPU
+- `lea

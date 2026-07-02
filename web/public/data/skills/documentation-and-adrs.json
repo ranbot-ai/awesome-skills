@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-documentation-and-adrs",
+  "name": "documentation-and-adrs",
+  "slug": "documentation-and-adrs",
+  "description": "Records decisions and documentation. Use when making architectural decisions, changing public APIs, shipping features, or when you need to record context that future engineers and agents will need to understand the codebase.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/documentation-and-adrs",
+  "content": "\n# Documentation and ADRs\n\n## Overview\n\nDocument decisions, not just code. The most valuable documentation captures the *why* — the context, constraints, and trade-offs that led to a decision. Code shows *what* was built; documentation explains *why it was built this way* and *what alternatives were considered*. This context is essential for future humans and agents working in the codebase.\n\n## When to Use\n\n- Making a significant architectural decision\n- Choosing between competing approaches\n- Adding or changing a public API\n- Shipping a feature that changes user-facing behavior\n- Onboarding new team members (or agents) to the project\n- When you find yourself explaining the same thing repeatedly\n\n**When NOT to use:** Don't document obvious code. Don't add comments that restate what the code already says. Don't write docs for throwaway prototypes.\n\n## Architecture Decision Records (ADRs)\n\nADRs capture the reasoning behind significant technical decisions. They're the highest-value documentation you can write.\n\n### When to Write an ADR\n\n- Choosing a framework, library, or major dependency\n- Designing a data model or database schema\n- Selecting an authentication strategy\n- Deciding on an API architecture (REST vs. GraphQL vs. tRPC)\n- Choosing between build tools, hosting platforms, or infrastructure\n- Any decision that would be expensive to reverse\n\n### ADR Template\n\nStore ADRs in `docs/decisions/` with sequential numbering:\n\n```markdown\n# ADR-001: Use PostgreSQL for primary database\n\n## Status\nAccepted | Superseded by ADR-XXX | Deprecated\n\n## Date\n2025-01-15\n\n## Context\nWe need a primary database for the task management application. Key requirements:\n- Relational data model (users, tasks, teams with relationships)\n- ACID transactions for task state changes\n- Support for full-text search on task content\n- Managed hosting available (for small team, limited ops capacity)\n\n## Decision\nUse PostgreSQL with Prisma ORM.\n\n## Alternatives Considered\n\n### MongoDB\n- Pros: Flexible schema, easy to start with\n- Cons: Our data is inherently relational; would need to manage relationships manually\n- Rejected: Relational data in a document store leads to complex joins or data duplication\n\n### SQLite\n- Pros: Zero configuration, embedded, fast for reads\n- Cons: Limited concurrent write support, no managed hosting for production\n- Rejected: Not suitable for multi-user web application in production\n\n### MySQL\n- Pros: Mature, widely supported\n- Cons: PostgreSQL has better JSON support, full-text search, and ecosystem tooling\n- Rejected: PostgreSQL is the better fit for our feature requirements\n\n## Consequences\n- Prisma provides type-safe database access and migration management\n- We can use PostgreSQL's full-text search instead of adding Elasticsearch\n- Team needs PostgreSQL knowledge (standard skill, low risk)\n- Hosting on managed service (Supabase, Neon, or RDS)\n```\n\n### ADR Lifecycle\n\n```\nPROPOSED → ACCEPTED → (SUPERSEDED or DEPRECATED)\n```\n\n- **Don't delete old ADRs.** They capture historical context.\n- When a decision changes, write a new ADR that references and supersedes the old one.\n\n## Inline Documentation\n\n### When to Comment\n\nComment the *why*, not the *what*:\n\n```typescript\n// BAD: Restates the code\n// Increment counter by 1\ncounter += 1;\n\n// GOOD: Explains non-obvious intent\n// Rate limit uses a sliding window — reset counter at window boundary,\n// not on a fixed schedule, to prevent burst attacks at window edges\nif (now - windowStart > WINDOW_SIZE_MS) {\n  counter = 0;\n  windowStart = now;\n}\n```\n\n### When NOT to Comment\n\n```typescript\n// Don't comment self-explanatory code\nfunction calculateTotal(items: CartItem[]): number {\n  return items.reduce((sum, item) => sum + item.price * item.quantity, 0);\n}\n\n// Don't leave TODO comments for things you should just do now\n// TODO: add error handling  ← Just add it\n\n// Don't leave commented-out code\n// const oldImplementation = () => { ... }  ← Delete it, git has history\n```\n\n### Document Known Gotchas\n\n```typescript\n/**\n * IMPORTANT: This function must be called before the first render.\n * If called after hydration, it causes a flash of unstyled content\n * because the theme context isn't available during SSR.\n *\n * See ADR-003 for the full design rationale.\n */\nexport function initializeTheme(theme: Theme): void {\n  // ...\n}\n```\n\n## API Documentation\n\nFor public APIs (REST, GraphQL, library interfaces):\n\n### Inline with Types (Preferred for TypeScript)\n\n```typescript\n/**\n * Creates a new task.\n *\n * @param input - Task creation data (title required, description optional)\n * @returns The created task with server-generated ID and timestamps\n * @throws {ValidationError} If title is empty or exceeds 200 characters\n * @throws {AuthenticationError} If the user is not authenticated\n *\n * @example\n * const task = await createTask({ title: 'Buy groceries' });\n * console.log(task.id); // \"task_abc123\"\n */\nexport async function createTask(input: CreateTaskInput): Promise<Task> {\n  // ...\n}",
+  "tags": [
+    "typescript",
+    "markdown",
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "template",
+    "design",
+    "document",
+    "security"
+  ],
+  "useCases": [
+    "Making a significant architectural decision",
+    "Choosing between competing approaches",
+    "Adding or changing a public API",
+    "Shipping a feature that changes user-facing behavior",
+    "Onboarding new team members (or agents) to the project"
+  ],
+  "scrapedAt": "2026-07-02T09:26:47.791Z"
+}

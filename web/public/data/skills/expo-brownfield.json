@@ -1,0 +1,24 @@
+{
+  "id": "antigravity-expo-brownfield",
+  "name": "expo-brownfield",
+  "slug": "expo-brownfield",
+  "description": "Integrate Expo and React Native into an existing native iOS or Android app. Use when the user mentions brownfield, embedding React Native in a native app, AAR/XCFramework, or adding Expo to an existing Kotlin/Swift project. Covers both the isolated approach and the integrated approach.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/expo-brownfield",
+  "content": "\n# Expo Brownfield\n## When to Use\n\nUse this skill when you need integrate Expo and React Native into an existing native iOS or Android app. Use when the user mentions brownfield, embedding React Native in a native app, AAR/XCFramework, or adding Expo to an existing Kotlin/Swift project. Covers both the isolated approach and the integrated approach.\n\n\nA **brownfield** app is an existing native iOS or Android app that adopts React Native incrementally, as opposed to a **greenfield** app that is React Native from day one.\n\nExpo supports two distinct ways to add React Native to a brownfield project:\n\n| Approach       | What ships to the native app                                        | When to choose                                                                   |\n| -------------- | ------------------------------------------------------------------- | -------------------------------------------------------------------------------- |\n| **Isolated**   | Prebuilt AAR / XCFramework                                          | Native team doesn't need Node or RN tooling; RN code can live in a separate repo |\n| **Integrated** | React Native sources added to the existing Gradle / CocoaPods build | One team owns everything; comfortable with RN tooling; wants a single build      |\n\nFor the full decision matrix, see [./references/comparison.md](./references/comparison.md).\n\n## Pick an approach\n\nUse these quick rules — fall through to `comparison.md` for anything ambiguous.\n\n- **Choose isolated** if the iOS/Android team must consume RN as a regular library dependency (AAR or XCFramework), without installing Node, Yarn, or the React Native build toolchain.\n- **Choose isolated** if RN code and native code live in separate repositories or release on independent cadences.\n- **Choose integrated** if a single team owns both the native and RN code and is willing to add React Native + Expo to the native project's Gradle and CocoaPods setup.\n- **Choose integrated** if you want hot reload and JS source maps to work seamlessly inside the existing native build process.\n\n## References\n\n- ./references/brownfield-isolated.md -- Build RN as AAR/XCFramework and consume from the native app (BrownfieldActivity, ReactNativeViewController, ReactNativeView)\n- ./references/brownfield-integrated.md -- Add RN and Expo directly to existing Gradle and CocoaPods builds (ReactActivity, RCTRootView, Podfile)\n- ./references/comparison.md -- Decision criteria, trade-offs, and scenario mapping for choosing an approach\n- ./references/troubleshooting.md -- Metro connection, build, signing, and module-resolution issues common to both approaches\n\nMore information available at https://docs.expo.dev/brownfield/overview/\n\n## Shared prerequisites\n\nBoth approaches require, in the environment that _builds_ the React Native side:\n\n- **Node.js (LTS)** — runs the Expo CLI and JavaScript code.\n- **Yarn** — manages JavaScript dependencies.\n\nThe integrated approach additionally requires **CocoaPods** on iOS (`sudo gem install cocoapods`). The isolated approach does **not** require CocoaPods or any RN tooling in the consuming native app.\n\n## Versioning note\n\n**Expo SDK 55 is the minimum supported version for brownfield integration.** Earlier SDKs lack `expo-brownfield`, the required `ExpoReactHostFactory` / `ExpoReactNativeFactory` entry points, and the current autolinking surface. When creating the Expo project, always pin the SDK explicitly:\n\n```sh\nnpx create-expo-app@latest my-project --template default@sdk-55\n```\n\nPin the same Expo SDK across both the RN project and any embedded dependencies.\n\n## Limitations\n\n- Use this skill only when the task clearly matches its upstream product or API scope.\n- Verify commands, API behavior, pricing, quotas, credentials, and deployment effects against current official documentation before making changes.\n- Do not treat generated examples as a substitute for environment-specific tests, security review, or user approval for destructive or costly actions.\n",
+  "tags": [
+    "javascript",
+    "react",
+    "node",
+    "api",
+    "ai",
+    "template",
+    "document",
+    "security",
+    "cro"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-07-02T09:27:09.696Z"
+}

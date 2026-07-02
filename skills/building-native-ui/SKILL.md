@@ -1,19 +1,18 @@
 ---
 name: building-native-ui
 description: Complete guide for building beautiful apps with Expo Router. Covers fundamentals, styling, components, navigation, animations, patterns, and native tabs. 
-category: Creative & Media
+category: Document Processing
 source: antigravity
-tags: [react, api, ai, presentation, image, tailwind, rag, cro]
+tags: [react, api, ai, document, presentation, image, security, tailwind, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/building-native-ui
 ---
 
 
 # Expo UI Guidelines
-
 ## When to Use
-- You are building a native-feeling Expo Router application and need guidance on navigation, controls, effects, or platform-specific UI.
-- You need to decide whether Expo Go is sufficient or a custom native build is actually required.
-- The task involves modern Expo UI patterns across animations, tabs, headers, storage, media, or visual effects.
+
+Use this skill when you need complete guide for building beautiful apps with Expo Router. Covers fundamentals, styling, components, navigation, animations, patterns, and native tabs.
+
 
 ## References
 
@@ -23,7 +22,7 @@ Consult these resources as needed:
 references/
   animations.md          Reanimated: entering, exiting, layout, scroll-driven, gestures
   controls.md            Native iOS: Switch, Slider, SegmentedControl, DateTimePicker, Picker
-  form-sheet.md          Form sheets in expo-router: configuration, footers and background interaction. 
+  form-sheet.md          Form sheets in expo-router: configuration, footers and background interaction.
   gradients.md           CSS gradients via experimental_backgroundImage (New Arch only)
   icons.md               SF Symbols via expo-image (sf: source), names, animations, weights
   media.md               Camera, audio, video, and file saving
@@ -96,6 +95,8 @@ See `./references/route-structure.md` for detailed route conventions.
 - `React.use` not `React.useContext`
 - `expo-image` Image component instead of intrinsic element `img`
 - `expo-glass-effect` for liquid glass backdrops
+- `Color` from `expo-router` for native semantic colors, not raw `PlatformColor` (type-safe, auto-adapts to light/dark)
+- In SDK 56+, never import from `@react-navigation/*` directly — use `expo-router/react-navigation` instead (covers `@react-navigation/native`, `/core`, `/elements`, `/routers`)
 
 ## Responsiveness
 
@@ -109,5 +110,4 @@ See `./references/route-structure.md` for detailed route conventions.
 
 - Use expo-haptics conditionally on iOS to make more delightful experiences
 - Use views with built-in haptics like `<Switch />` from React Native and `@react-native-community/datetimepicker`
-- When a route belongs to a Stack, its first child should almost always be a ScrollView with `contentInsetAdjustmentBehavior="automatic"` set
-- When addi
+- When a route belon

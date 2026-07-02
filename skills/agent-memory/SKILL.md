@@ -1,33 +1,82 @@
 ---
-name: agent_memory
-description: 1. Repository structure 
+name: agent-memory
+description: A hybrid memory system that provides persistent, searchable knowledge management for AI agents. 
 category: AI & Agents
-source: openhands
-tags: [pr, agent, memory]
-url: https://github.com/OpenHands/OpenHands/blob/main/skills/agent_memory.md
+source: antigravity
+tags: [node, markdown, mcp, ai, agent, workflow, design, document, security]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-memory
 ---
 
 
-* Repository memory: Use .openhands/microagents/repo.md under each repository root to store and access important information.
-  - If this file exists, it will be added to your context automatically.
-  - If missing, you should create it unless the user has explicitly asked you to not do so.
+# agentMemory Skill
+## When to Use
 
-* Store and maintain **general knowledge** that will be helpful for most future tasks:
-  1. Repository structure
-  2. Common commands (build, lint, test, pre-commit, etc.)
-  3. Code style preferences
-  4. Workflows and best practices
-  5. Any other repository-specific knowledge you learn
+Use this skill when you need a hybrid memory system that provides persistent, searchable knowledge management for AI agents.
 
-* IMPORTANT: ONLY LOG the information that would be helpful for different future tasks, for example, how to configure the settings, how to setup the repository. Do NOT add issue-specific information (e.g., what specific error you have ran into and how you fix it).
 
-* When adding new information:
-  - ALWAYS ask for user confirmation first by listing the exact items (numbered 1, 2, 3, etc.) you plan to save to repo.md
-  - Only save the items the user approves (they may ask you to save a subset)
-  - Ensure it integrates nicely with existing knowledge in repo.md
-  - Reorganize the content if needed to maintain clarity and organization
-  - Group related information together under appropriate sections or headings
-  - If you've only explored a portion of the codebase, clearly note this limitation in the repository structure documentation
-  - If you don't know the essential commands for working with the repository, such as lint or typecheck, ask the user and suggest adding them to repo.md for future reference (with permission)
+This skill extends your capabilities by providing a persistent, searchable memory bank that automatically syncs with project documentation.
 
-When you receive this message, please review and summarize your recent actions and observations, then present a list of valuable information that should be saved in repo.md to the user.
+## Prerequisites
+
+- Node.js installed
+- Check if `agentMemory` is already installed in the project:
+  ```bash
+  ls -la .agentMemory
+  ```
+
+## Setup
+
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Build the Project**:
+   ```bash
+   npm run compile
+   ```
+
+3. **Start the Memory Server**:
+   You need to run the MCP server to interact with the memory bank.
+   ```bash
+   npm run start-server <project_id> <absolute_path_to_workspace>
+   ```
+   *Note: This skill typically runs as a background process or via an mcp-server configuration. ensuring it is running is key.*
+
+## Capabilities (MCP Tools)
+
+Once the server is running, you can use these tools:
+
+### `memory_search`
+Search for memories by query, type, or tags.
+- **Args**: `query` (string), `type?` (string), `tags?` (string[])
+- **Usage**: "Find all authentication patterns" -> `memory_search({ query: "authentication", type: "pattern" })`
+
+### `memory_write`
+Record new knowledge or decisions.
+- **Args**: `key` (string), `type` (string), `content` (string), `tags?` (string[])
+- **Usage**: "Save this architecture decision" -> `memory_write({ key: "auth-v1", type: "decision", content: "..." })`
+
+### `memory_read`
+Retrieve specific memory content by key.
+- **Args**: `key` (string)
+- **Usage**: "Get the auth design" -> `memory_read({ key: "auth-v1" })`
+
+### `memory_stats`
+View analytics on memory usage.
+- **Usage**: "Show memory statistics" -> `memory_stats({})`
+
+## Workflow
+
+1. **Initialization**: The first time you run this in a project, it may attempt to import existing markdown memory banks from `.kilocode/`, `.clinerules/`, or `.roo/`.
+2. **Development Loop**:
+   - **Before Task**: Search memory for relevant context.
+   - **During Task**: Use read/search to answer questions.
+   - **After Task**: Write new findings to memory.
+3. **Sync**: Your writes are automatically synced to standard markdown files in the project.
+
+## Limitations
+
+- Use this skill only when the task clearly matches its upstream source and local project context.
+- Verify commands, generated code, dependencies, credentials, and external service behavior before applying changes.
+- Do not treat examples as a substitute for environment-specific tests, security review, or user approval for destructive or costly actions.

@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-accint-commitments",
+  "name": "accint-commitments",
+  "slug": "accint-commitments",
+  "description": "Triage acc's open promises and close them with honest real-world verdicts via acc_act(runtime=\"outcome\").",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/accint-commitments",
+  "content": "\n# commitments\n## When to Use\n\nUse this skill when you need triage acc's open promises and close them with honest real-world verdicts via acc_act(runtime=\"outcome\").\n\n\nRouting sugar over the two MCP verbs — no logic lives here.\n\n1. List open promises: `acc commitments` (CLI, read-only observation).\n2. For each closeable one: `acc_act(runtime=\"outcome\", input={\"ref\": \"<id>\", \"good\": true|false, \"note\": \"...\"})`.\n3. Provenance discipline: the default `self_graded` is a WEAK prior (credits at 0.25×).\n   Pass `owner` only when the owner validated, `external`/`runtime` only when reality did\n   (a real reply, a passing test, a world result). Never tag your own grade as reality.\n4. Leave genuinely-waiting commitments open — `waiting` is a first-class clean state.\n\n## Limitations\n\n- Use this skill only when the task clearly matches its upstream source and local project context.\n- Verify commands, generated code, dependencies, credentials, and external service behavior before applying changes.\n- Do not treat examples as a substitute for environment-specific tests, security review, or user approval for destructive or costly actions.\n",
+  "tags": [
+    "mcp",
+    "claude",
+    "ai",
+    "security"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-07-02T09:22:53.621Z"
+}

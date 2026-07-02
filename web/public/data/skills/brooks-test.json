@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-brooks-test",
+  "name": "brooks-test",
+  "slug": "brooks-test",
+  "description": "Test quality review drawing on twelve classic engineering books — with primary focus on xUnit Test Patterns, The Art of Unit Testing, How Google Tests Software, and Working Effectively with Legacy Code — that diagnoses structural problems in an existing test suite: brittleness, mock...",
+  "category": "Development & Code Tools",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/brooks-test",
+  "content": "\n# Brooks-Lint — Test Quality Review\n## When to Use\n\nUse this skill when you need test quality review drawing on twelve classic engineering books — with primary focus on xUnit Test Patterns, The Art of Unit Testing, How Google Tests Software, and Working Effectively with Legacy Code — that diagnoses structural problems in an existing test suite: brittleness, mock...\n\n\n## Setup\n\n1. Read `../_shared/common.md` for the Iron Law, Project Config, Report Template, and Health Score rules\n2. Read `../_shared/source-coverage.md` for book-level coverage, exceptions, and tradeoffs\n3. Read `../_shared/test-decay-risks.md` for test-space symptom definitions and source attributions\n4. Read `test-guide.md` in this directory for the test quality review framework\n\n## Process\n\n**If the user has not shared test files or pointed to a test directory:** apply Auto\nScope Detection from `../_shared/common.md` to determine the review scope before proceeding.\n\n1. Build the test suite map (guide's \"Before You Start\" section)\n2. Scan for each test decay risk in the order specified (Steps 1–4 of the guide)\n3. Apply the Iron Law and output using the Report Template (Step 5 of the guide)\n\n**Mode line in report:** `Test Quality Review`\n\n## Limitations\n\n- Use this skill only when the task clearly matches its upstream source and local project context.\n- Verify commands, generated code, dependencies, credentials, and external service behavior before applying changes.\n- Do not treat examples as a substitute for environment-specific tests, security review, or user approval for destructive or costly actions.\n",
+  "tags": [
+    "ai",
+    "template",
+    "security",
+    "rag"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-07-02T09:24:43.908Z"
+}

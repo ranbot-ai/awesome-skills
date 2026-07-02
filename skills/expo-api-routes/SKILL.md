@@ -1,9 +1,9 @@
 ---
 name: expo-api-routes
 description: Guidelines for creating API routes in Expo Router with EAS Hosting 
-category: Development & Code Tools
+category: Document Processing
 source: antigravity
-tags: [typescript, react, node, api, ai, gpt, supabase, firebase, stripe, rag]
+tags: [typescript, react, node, api, ai, gpt, document, security, supabase, firebase]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/expo-api-routes
 ---
 

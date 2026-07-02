@@ -1,17 +1,18 @@
 ---
 name: hugging-face-paper-publisher
 description: Publish and manage research papers on Hugging Face Hub. Supports creating paper pages, linking papers to models/datasets, claiming authorship, and generating professional markdown-based research artic
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [python, markdown, api, ai, llm, workflow, template, design, cro]
+tags: [python, markdown, api, ai, llm, workflow, template, design, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugging-face-paper-publisher
 ---
 
 
 # Overview
-
 ## When to Use
-Use this skill when a user wants to publish, link, index, or manage research papers on the Hugging Face Hub.
+
+Use this skill when you need publish and manage research papers on Hugging Face Hub. Supports creating paper pages, linking papers to models/datasets, claiming authorship, and generating professional markdown-based research articles.
+
 This skill provides comprehensive tools for AI engineers and researchers to publish, manage, and link research papers on the Hugging Face Hub. It streamlines the workflow from paper creation to publication, including integration with arXiv, model/dataset linking, and authorship management.
 
 ## Integration with HF Ecosystem
@@ -160,11 +161,4 @@ uv run scripts/paper_manager.py claim \
 **Check Authorship Status:**
 ```bash
 uv run scripts/paper_manager.py check-authorship \
-  --arxiv-id "2301.12345"
-```
-
-### Method 4: Manage Paper Visibility
-
-Control which verified papers appear on your public profile.
-
-**List
+  --arxiv-id

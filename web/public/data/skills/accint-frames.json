@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-accint-frames",
+  "name": "accint-frames",
+  "slug": "accint-frames",
+  "description": "Drain acc's deliberation queue — open/waiting brain_frames checkpointed by headless runs — via acc_act(runtime=\"continue\").",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/accint-frames",
+  "content": "\n# frames\n## When to Use\n\nUse this skill when you need drain acc's deliberation queue — open/waiting brain_frames checkpointed by headless runs — via acc_act(runtime=\"continue\").\n\n\nRouting sugar over the two MCP verbs — no logic lives here.\n\n1. List the queue: `acc frames` (CLI, read-only observation).\n2. For each open/waiting frame: read its typed hole + retrieved context, deliberate,\n   then submit via\n   `acc_act(runtime=\"continue\", input={\"frame_id\": ..., \"submit_token\": ..., \"proposal_text\": ...})`.\n3. End `proposal_text` with `PREDICT: <0.00-1.00> <why>`; acc strips that line before\n   the owner sees it and uses it to calibrate the Work Model against later outcomes.\n4. An identical duplicate submit replays the cached result — resubmitting is safe.\n5. Surface each resolution's `commitment` id and cited `[ids]`; drain the queue fully\n   before taking new work — checkpointed frames are work headless runs saved for you.\n\n## Limitations\n\n- Use this skill only when the task clearly matches its upstream source and local project context.\n- Verify commands, generated code, dependencies, credentials, and external service behavior before applying changes.\n- Do not treat examples as a substitute for environment-specific tests, security review, or user approval for destructive or costly actions.\n",
+  "tags": [
+    "mcp",
+    "claude",
+    "ai",
+    "security"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-07-02T09:22:53.922Z"
+}

@@ -1,0 +1,17 @@
+{
+  "id": "antigravity-implement",
+  "name": "implement",
+  "slug": "implement",
+  "description": "Implement a piece of work based on a PRD or set of issues.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/implement",
+  "content": "\n\n## When to Use\n\nUse this skill when you need implement a piece of work based on a PRD or set of issues.\n\nImplement the work described by the user in the PRD or issues.\n\nUse /tdd where possible, at pre-agreed seams.\n\nRun typechecking regularly, single test files regularly, and the full test suite once at the end.\n\nOnce done, use /review to review the work.\n\nCommit your work to the current branch.\n\n## Limitations\n\n- Use this skill only when the task clearly matches its upstream source and local project context.\n- Verify commands, generated code, dependencies, credentials, and external service behavior before applying changes.\n- Do not treat examples as a substitute for environment-specific tests, security review, or user approval for destructive or costly actions.\n",
+  "tags": [
+    "ai",
+    "security"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-07-02T09:28:34.347Z"
+}

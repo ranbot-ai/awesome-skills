@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-brooks-debt",
+  "name": "brooks-debt",
+  "slug": "brooks-debt",
+  "description": "Tech debt assessment that identifies, classifies, and prioritizes maintainability problems — helping teams build a refactoring roadmap — drawing on twelve classic engineering books. Triggers when: user asks about tech debt, refactoring priorities, what to clean up first, or asks \"why...",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/brooks-debt",
+  "content": "\n# Brooks-Lint — Tech Debt Assessment\n## When to Use\n\nUse this skill when you need tech debt assessment that identifies, classifies, and prioritizes maintainability problems — helping teams build a refactoring roadmap — drawing on twelve classic engineering books. Triggers when: user asks about tech debt, refactoring priorities, what to clean up first, or asks \"why...\n\n\n## Setup\n\n1. Read `../_shared/common.md` for the Iron Law, Project Config, Report Template, and Health Score rules\n2. Read `../_shared/source-coverage.md` for book-level coverage, exceptions, and tradeoffs\n3. Read `../_shared/decay-risks.md` for symptom definitions and source attributions\n4. Read `debt-guide.md` in this directory for the debt classification framework\n\n## Process\n\n**If the user has not described the codebase or pointed to specific areas:** apply Auto\nScope Detection from `../_shared/common.md` to determine the assessment scope before proceeding.\n\n1. Scan for all six decay risks (Step 1 of the guide); list every finding before scoring\n2. Apply the Pain × Spread priority formula and classify debt intent (Steps 2–3 of the guide)\n3. Group findings by decay risk (Step 4 of the guide)\n4. Output using the Report Template from common.md, plus the Debt Summary Table\n\n**Mode line in report:** `Tech Debt Assessment`\n\n## Limitations\n\n- Use this skill only when the task clearly matches its upstream source and local project context.\n- Verify commands, generated code, dependencies, credentials, and external service behavior before applying changes.\n- Do not treat examples as a substitute for environment-specific tests, security review, or user approval for destructive or costly actions.\n",
+  "tags": [
+    "ai",
+    "template",
+    "security",
+    "rag"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-07-02T09:24:42.391Z"
+}

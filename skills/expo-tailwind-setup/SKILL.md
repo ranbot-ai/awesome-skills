@@ -1,21 +1,20 @@
 ---
 name: expo-tailwind-setup
 description: Set up Tailwind CSS v4 in Expo with react-native-css and NativeWind v5 for universal styling 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [javascript, typescript, react, api, ai, image, tailwind, cro]
+tags: [javascript, typescript, react, api, ai, document, image, security, tailwind, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/expo-tailwind-setup
 ---
 
 
 # Tailwind CSS Setup for Expo with react-native-css
+## When to Use
+
+Use this skill when you need set up Tailwind CSS v4 in Expo with react-native-css and NativeWind v5 for universal styling.
+
 
 This guide covers setting up Tailwind CSS v4 in Expo using react-native-css and NativeWind v5 for universal styling across iOS, Android, and Web.
-
-## When to Use
-- You need to set up Tailwind CSS v4 styling in an Expo app using `react-native-css` and NativeWind v5.
-- The task involves configuring Metro, PostCSS, global CSS, or package versions for Expo + Tailwind.
-- You want one styling setup that works across iOS, Android, and web in an Expo project.
 
 ## Overview
 
@@ -210,4 +209,10 @@ export const Pressable = (
 ) => {
   return useCssElement(RNPressable, props, { className: "style" });
 };
-Press
+Pressable.displayName = "CSS(Pressable)";
+
+// TextInput
+export const TextInput = (
+  props: React.ComponentProps<typeof RNTextInput> & { className?: string }
+) => {
+  return u

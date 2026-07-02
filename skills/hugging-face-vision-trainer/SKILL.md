@@ -1,9 +1,9 @@
 ---
 name: hugging-face-vision-trainer
-description: Train or fine-tune vision models on Hugging Face Jobs for detection, classification, and SAM or SAM2 segmentation. 
+description: Trains and fine-tunes vision models for object detection (D-FINE, RT-DETR v2, DETR, YOLOS), image classification (timm models — MobileNetV3, MobileViT, ResNet, ViT/DINOv3 — plus any Transformers c
 category: Document Processing
 source: antigravity
-tags: [python, api, mcp, ai, workflow, template, document, image, rag, cro]
+tags: [python, api, mcp, ai, workflow, template, document, image, security, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugging-face-vision-trainer
 ---
 
