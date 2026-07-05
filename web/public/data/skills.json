@@ -12431,6 +12431,35 @@
       "scrapedAt": "2026-03-08T06:55:04.652Z"
     },
     {
+      "id": "antigravity-context-kit",
+      "name": "context-kit",
+      "slug": "context-kit",
+      "description": "Evaluate, adapt, and safely install Context Kit personal context artifacts for Claude Code or adjacent agent workflows.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/context-kit",
+      "content": "\n# Context Kit\n\n## When to Use\n\nUse this skill when the user wants to:\n\n- Set up durable personal context files for Claude Code or another coding agent\n- Compare Context Kit's Personal Context Artifact pattern with an existing memory or project-notes system\n- Adapt a context template structure without copying private details into the chat\n- Review whether a one-line installer or downloaded skill pack is appropriate before running it\n- Create a safer, local-first plan for CRM notes, open loops, session digests, or morning briefings\n\n## Overview\n\nContext Kit is an external project that organizes personal context into Markdown artifacts and companion\nClaude Code skills. This skill helps the user decide what to adopt, where to store it, and how to avoid\nturning a useful context system into a pile of sensitive data.\n\nTreat every personal context file as private by default. These files may contain identity details, family\ncontext, work history, contact notes, mental models, health constraints, or relationship information. Do\nnot paste them into third-party tools, public repositories, issue trackers, or model contexts unless the\nuser explicitly approves the exact subset.\n\n## Safety Rules\n\n1. Do not run a remote install script until the user has seen the command, source repository, and target\n   paths it will write to.\n2. Prefer cloning or downloading the repository for inspection before executing any installer:\n   ```bash\n   git clone https://github.com/JDDavenport/context-kit.git\n   cd context-kit\n   sed -n '1,220p' scripts/install.sh\n   ```\n3. Never store passwords, API keys, recovery codes, private keys, session tokens, or payment details in\n   personal context artifacts.\n4. If the user wants contact notes or CRM files, store only information they are comfortable keeping in\n   local plaintext Markdown.\n5. Before adding these files to a repo, confirm `.gitignore` excludes the chosen private context directory.\n6. If adapting Context Kit to a team or company setting, separate personal context from company-confidential\n   or customer-confidential information.\n\n## Setup Workflow\n\n1. Ask what the user wants Context Kit to improve: session startup context, voice consistency, relationship\n   memory, open-loop tracking, daily briefings, or handoff summaries.\n2. Inspect the upstream project and installer before running anything.\n3. Choose a storage location:\n   - Claude Code default: `~/.claude/context/` and `~/.claude/skills/`\n   - Project-local context: `.agent/context/` or another ignored directory\n   - Portable setup: a private notes repo with explicit sync rules\n4. Create a minimal starter set before filling everything:\n   - `pca-wiki.md` for durable identity and domains\n   - `pca-mental-models.md` for decision rules\n   - `pca-voice.md` for writing preferences\n   - `pca-protocols.md` for hard rules and boundaries\n5. Add only enough detail to make the next agent session useful. Leave sensitive, speculative, or outdated\n   details out until there is a clear reason to include them.\n6. Add a recurring review cadence. Personal context goes stale quickly; stale context is worse than no\n   context when it drives decisions.\n\n## Installation Review Checklist\n\nBefore running an installer, verify:\n\n- The repository URL is exactly the one the user intended\n- The script writes only to expected local directories\n- The script does not upload files, send telemetry, or edit shell startup files unexpectedly\n- The target directories are not inside a public repo\n- The user has a rollback path, such as removing the copied templates and skills\n\nIf anything is unclear, stop at inspection and provide the user with the exact lines that need review.\n\n## Examples\n\n### Example: Inspect before installing\n\n```bash\ngit clone https://github.com/JDDavenport/context-kit.git\ncd context-kit\nsed -n '1,220p' scripts/install.sh\nfind templates skills -maxdepth 2 -type f | sort\n```\n\nAfter inspection, summarize the files that would be installed and ask for confirmation before running the\ninstaller.\n\n### Example: Create a private project-local context directory\n\n```bash\nmkdir -p .agent/context\nprintf '.agent/context/\\n' >> .gitignore\ncp ~/Downloads/context-kit/templates/pca-wiki.md .agent/context/pca-wiki.md\n```\n\nThen trim the template to the minimum useful fields for the project instead of filling every personal\nsection immediately.\n\n## Best Practices\n\n- Keep context files short enough that an agent can read them at session start without drowning in stale\n  detail.\n- Separate durable facts from temporary state. Use project workplans or task trackers for temporary state.\n- Label assumptions and uncertain memories instead of presenting them as facts.\n- Review personal context after major life, role, health, or project changes.\n- Store voice examples and anti-examples separately from private identity details when possible.\n\n## Common Pitfalls\n\n- Running a shell installer directly from `curl` without inspecting it first\n- Committing personal context files to a ",
+      "tags": [
+        "markdown",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "template",
+        "rag"
+      ],
+      "useCases": [
+        "Set up durable personal context files for Claude Code or another coding agent",
+        "Compare Context Kit's Personal Context Artifact pattern with an existing memory or project-notes system",
+        "Adapt a context template structure without copying private details into the chat",
+        "Review whether a one-line installer or downloaded skill pack is appropriate before running it",
+        "Create a safer, local-first plan for CRM notes, open loops, session digests, or morning briefings"
+      ],
+      "scrapedAt": "2026-07-05T09:16:16.062Z"
+    },
+    {
       "id": "antigravity-context-management-context-restore",
       "name": "context-management-context-restore",
       "slug": "context-management-context-restore",
@@ -26181,37 +26210,6 @@
       "scrapedAt": "2026-03-05T07:05:22.089Z"
     },
     {
-      "id": "antigravity-llm-structured-output",
-      "name": "llm-structured-output",
-      "slug": "llm-structured-output",
-      "description": "Get reliable JSON, enums, and typed objects from LLMs using response_format, tool_use, and schema-constrained decoding across OpenAI, Anthropic, and Google APIs.\n",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/llm-structured-output",
-      "content": "\n# LLM Structured Output\n\n## What This Skill Does\n\nExtract typed, validated data from LLM API responses instead of parsing free-text. This skill covers the three main approaches: OpenAI's `response_format` with JSON Schema, Anthropic's `tool_use` block for structured extraction, and Google's `responseSchema` in Gemini. You will learn when each approach works, when it breaks, and how to build retry logic around schema validation failures that every production system encounters.\n\n## When to Use This Skill\n\n- The user needs to extract structured data (JSON objects, arrays, enums) from an LLM response\n- The user is building a pipeline where LLM output feeds directly into code (database writes, API calls, UI rendering)\n- The user asks about `response_format`, `json_mode`, `json_object`, or `json_schema` in OpenAI\n- The user asks about using Anthropic's `tool_use` or `tool_result` blocks for data extraction (not for actual tool execution)\n- The user asks about Zod schemas with `zodResponseFormat()` from the `openai` npm package\n- The user needs to parse LLM output into Pydantic models using `instructor`, `marvin`, or manual validation\n- The user is getting malformed JSON, missing fields, or wrong types from LLM responses and needs a fix\n- The user asks about `controlled generation`, `constrained decoding`, or `grammar-based sampling` in local models\n\nDo NOT use this skill when:\n- The user wants free-form text generation (summaries, essays, chat)\n- The user is asking about Zod for form validation or API input validation (use `zod-validation-expert` instead)\n- The user needs prompt engineering for better text quality (not structure)\n- The user wants to call real external tools/APIs (this skill covers using tool_use as a structured output hack, not actual tool orchestration)\n\n## Core Workflow\n\n1. Identify the target schema. Ask the user what fields they need extracted. Define every field with its type, whether it's required or optional, and valid enum values if applicable. Do not proceed without a concrete schema.\n\n2. Choose the provider-appropriate method:\n   - **OpenAI (gpt-4o, gpt-4o-mini):** Use `response_format: { type: \"json_schema\", json_schema: { ... } }`. This enables Structured Outputs with guaranteed schema conformance via constrained decoding.\n   - **Anthropic (Claude):** Define a single tool with the target schema as `input_schema` and set `tool_choice: { type: \"tool\", name: \"extract_data\" }`. Claude returns the structured data in the `tool_use` content block.\n   - **Google (Gemini):** Use `generationConfig.responseSchema` with a JSON Schema object and set `responseMimeType: \"application/json\"`.\n   - **Local models (llama.cpp, vLLM):** Use GBNF grammars or `--json-schema` flag for constrained decoding at the token level.\n\n3. Write the schema definition in the user's language. For Python, define a Pydantic `BaseModel`. For TypeScript, define a Zod schema and convert it with `zodResponseFormat()`. For raw API calls, write JSON Schema directly.\n\n4. Include field-level descriptions in the schema. Every field should have a `description` string that tells the model what to put there. Models use these descriptions as implicit prompt instructions — a field described as `\"The user's sentiment as positive, negative, or neutral\"` produces better results than a bare `sentiment: str` with no context.\n\n5. Set the system prompt to reinforce structure. Tell the model its job is data extraction, not conversation. Example: `\"You are a data extraction system. Analyze the input and return the requested fields. Do not include explanations outside the JSON structure.\"`\n\n6. If using OpenAI's `json_schema` mode, set `\"strict\": true` in the schema definition. This activates constrained decoding where the model can only output tokens that conform to the schema. Without `strict: true`, the model may still produce invalid JSON.\n\n7. If using Anthropic's tool_use approach, extract the structured data from `response.content` by finding the block where `type == \"tool_use\"` and reading its `input` field. Do not parse the text blocks — the structured data lives exclusively in the tool_use block.\n\n8. Validate the response against the schema in your application code. Even with constrained decoding, validate with Pydantic's `model_validate()` or Zod's `.parse()` before passing data downstream. This catches semantic issues (empty strings, out-of-range numbers) that schema conformance alone cannot prevent.\n\n9. Build a retry loop for validation failures. When validation fails, send the original input plus the failed output and the validation error back to the model with an instruction like `\"Your previous output failed validation: {error}. Fix the output.\"` Cap retries at 3 attempts.\n\n10. Log every structured output call with: the input, the raw response, the parsed result, and any validation errors. When structured output breaks in production, you need these logs to determine whether the failure was a schema design issue, a prompt issue, or ",
-      "tags": [
-        "python",
-        "typescript",
-        "api",
-        "claude",
-        "ai",
-        "llm",
-        "gpt",
-        "workflow",
-        "design",
-        "document"
-      ],
-      "useCases": [
-        "The user needs to extract structured data (JSON objects, arrays, enums) from an LLM response",
-        "The user is building a pipeline where LLM output feeds directly into code (database writes, API calls, UI rendering)",
-        "The user asks about `response_format`, `json_mode`, `json_object`, or `json_schema` in OpenAI",
-        "The user asks about using Anthropic's `tool_use` or `tool_result` blocks for data extraction (not for actual tool execution)",
-        "The user asks about Zod schemas with `zodResponseFormat()` from the `openai` npm package"
-      ],
-      "scrapedAt": "2026-03-14T07:03:27.253Z"
-    },
-    {
       "id": "antigravity-agent-squad-luna",
       "name": "luna",
       "slug": "agent-squad-luna",
@@ -28040,48 +28038,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 245773
+      "stars": 246469
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 158055
+      "stars": 158301
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 66764
+      "stars": 66841
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 24,
       "newSkillCount": 2,
-      "stars": 79362
+      "stars": 79463
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1363
+      "stars": 1364
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1060,
-      "newSkillCount": 6,
-      "stars": 42312
+      "newSkillCount": 7,
+      "stars": 42359
     }
   ],
-  "lastUpdated": "2026-07-04T08:54:11.289Z",
+  "lastUpdated": "2026-07-05T09:19:33.233Z",
   "stats": {
     "totalSkills": 1158,
-    "newSkills": 18,
-    "scrapedAt": "2026-07-04T08:54:11.289Z"
+    "newSkills": 19,
+    "scrapedAt": "2026-07-05T09:19:33.233Z"
   }
 }
