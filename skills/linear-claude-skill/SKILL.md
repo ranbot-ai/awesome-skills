@@ -129,10 +129,12 @@ If setup reports a missing API key:
 
 ```bash
 # Option A: Add to shell profile (~/.zshrc or ~/.bashrc)
-export LINEAR_API_KEY="lin_api_your_key_here"
+read -rsp "Linear API key: " LINEAR_API_KEY
+echo
+export LINEAR_API_KEY
 
 # Option B: Add to Claude Code environment
-echo 'LINEAR_API_KEY=lin_api_your_key_here' >> ~/.claude/.env
+printf 'LINEAR_API_KEY=%s\n' "$LINEAR_API_KEY" >> ~/.claude/.env
 
 # Then reload your shell or restart Claude Code
 ```
@@ -204,5 +206,4 @@ See [Project Management Commands](#project-management-commands) for full referen
 
 - **Traceability**: Issues are linked to their project from creation
 - **Metrics**: Project progress tracking is accurate from day one
-- **Workflow**: No time wasted moving issues between projects
-- **O
+- **Workflow**: No time wasted moving i

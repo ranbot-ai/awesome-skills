@@ -3,7 +3,7 @@ name: environment-setup-guide
 description: Guide developers through setting up development environments with proper tools, dependencies, and configurations 
 category: Document Processing
 source: antigravity
-tags: [python, node, markdown, api, ai, template, document, image, security, docker]
+tags: [python, node, markdown, api, ai, template, document, image, docker, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/environment-setup-guide
 ---
 
@@ -109,13 +109,10 @@ sudo -E bash "$tmpdir/nodesource-setup.sh"
 sudo apt install -y nodejs
 \`\`\`
 
-**Windows (using Chocolatey):**
+**Windows (using winget):**
 \`\`\`powershell
-# Install Chocolatey if not installed
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-
 # Install Node.js
-choco install nodejs
+winget install OpenJS.NodeJS.LTS
 \`\`\`
 
 ### Step 2: Verify Installation
@@ -206,4 +203,21 @@ choco install python --version=3.11
 
 \`\`\`bash
 python3 --version  # Should show Python 3.11.x
-pip3 
+pip3 --version     # Should show pip 23.x.x
+\`\`\`
+
+### Step 3: Create Virtual Environment
+
+\`\`\`bash
+# Navigate to project directory
+cd my-project
+
+# Create virtual environment
+python3 -m venv venv
+
+# Activate virtual environment
+# macOS/Linux:
+source venv/bin/activate
+
+# Windows:
+venv\Scripts\activat

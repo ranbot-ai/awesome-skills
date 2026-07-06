@@ -74,6 +74,7 @@ ArmClient
 ### 1. Create SQL Server
 
 ```csharp
+using System;
 using Azure.ResourceManager.Sql;
 using Azure.ResourceManager.Sql.Models;
 
@@ -85,7 +86,7 @@ var resourceGroup = await subscription
 var serverData = new SqlServerData(AzureLocation.EastUS)
 {
     AdministratorLogin = "sqladmin",
-    AdministratorLoginPassword = "YourSecurePassword123!",
+    AdministratorLoginPassword = Environment.GetEnvironmentVariable("SQL_ADMIN_PASSWORD") ?? throw new InvalidOperationException("SQL_ADMIN_PASSWORD is required"),
     Version = "12.0",
     MinimalTlsVersion = SqlMinimalTlsVersion.Tls1_2,
     PublicNetworkAccess = ServerNetworkAccessFlag.Enabled
@@ -202,8 +203,4 @@ await foreach (var srv in subscription.GetSqlServersAsync())
 // List databases in a server
 await foreach (var db in server.GetSqlDatabases())
 {
-    Console.WriteLine($"Database: {db.Data.Name}, SKU: {db.Data.Sku?.Name}");
-}
-
-// List elastic pools
-await foreach (var ep in server.GetElasticPools()
+    Console.WriteLine($"Database:

@@ -43,7 +43,7 @@ if [ -z "$FIREWORKS_API_KEY" ]; then
   echo "ERROR: FIREWORKS_API_KEY is not set."
   echo "Create a Fireworks AI account at: https://fireworks.ai/"
   echo "Then export it in your shell profile (~/.zshrc or ~/.bashrc):"
-  echo '  export FIREWORKS_API_KEY="your_api_key_here"'
+  echo '  read -rsp "Fireworks API key: " FIREWORKS_API_KEY; echo; export FIREWORKS_API_KEY'
   exit 1
 fi
 echo "FIREWORKS_API_KEY is set."
@@ -130,7 +130,4 @@ After gathering input, run this script to get responses from all selected models
 QUERY="USER_QUERY_HERE"
 MODELS='["accounts/fireworks/models/glm-5", "accounts/fireworks/models/deepseek-v3p1"]'
 
-python3 << 'PYEOF'
-import os
-import json
-import req
+python3 << 'PY

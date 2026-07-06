@@ -83,9 +83,10 @@ To streamline real-time audio/video app development, use a third-party integrati
 #### Python
 
 ```python
+import os
 from google import genai
 
-client = genai.Client(api_key="YOUR_API_KEY")
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 ```
 
 #### JavaScript
@@ -116,5 +117,4 @@ async with client.aio.live.connect(model="gemini-3.1-flash-live-preview", config
 #### JavaScript
 ```js
 const session = await ai.live.connect({
-  model: 'gemini-3.1-flash-live-preview',
-  con
+  model: 'gemini-3.1-fl

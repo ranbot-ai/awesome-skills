@@ -179,7 +179,7 @@ db.query(query, [email]);
 
 **❌ Bad - Hardcoded secret:**
 \`\`\`javascript
-const API_KEY = 'sk_live_abc123xyz';
+const leakedToken = '[redacted live key]';
 \`\`\`
 
 **✅ Good - Environment variable:**
@@ -204,4 +204,4 @@ if (!API_KEY) {
 - [ ] Magic numbers are replaced with constants
 
 ### Structure
-- [ ] Functions
+- [ ] Fun

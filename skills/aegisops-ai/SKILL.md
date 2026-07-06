@@ -89,7 +89,7 @@ Create a `.env` file in the root directory to securely
 store your credentials:
 
 ```bash
-echo "GEMINI_API_KEY='your_api_key_here'" > .env
+printf 'GEMINI_API_KEY=%s\n' "$GEMINI_API_KEY" > .env
 ```
 ## 🏁 Operational Dashboard
 
@@ -126,4 +126,4 @@ python3 main.py
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required inputs, permi
+- Stop and ask for clarification if required inputs, 

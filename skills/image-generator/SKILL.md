@@ -26,7 +26,9 @@ Before using this skill, the user must set the `GEMINI_API_KEY` environment vari
 1. Get a free API key from [Google AI Studio](https://aistudio.google.com/)
 2. Export the key in your shell profile (`~/.zshrc`, `~/.bashrc`, etc.):
    ```bash
-   export GEMINI_API_KEY="your_api_key_here"
+   read -rsp "Gemini API key: " GEMINI_API_KEY
+   echo
+   export GEMINI_API_KEY
    ```
 3. Restart your terminal or run `source ~/.zshrc` (or `~/.bashrc`)
 
@@ -178,5 +180,4 @@ curl -s -X POST \
 # Save the output image
 python3 -c "
 import json, base64
-with open('/tmp/gemini_response.json') as f:
-    data = js
+with open('/tmp/gemini_

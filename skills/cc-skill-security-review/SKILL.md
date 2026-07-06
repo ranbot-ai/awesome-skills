@@ -27,8 +27,8 @@ This skill ensures all code follows security best practices and identifies poten
 
 #### ❌ NEVER Do This
 ```typescript
-const apiKey = "sk-proj-xxxxx"  // Hardcoded secret
-const dbPassword = "password123" // In source code
+const leakedToken = "[redacted API key]"  // Hardcoded secret
+const dbCredential = "[redacted password]" // In source code
 ```
 
 #### ✅ ALWAYS Do This
@@ -206,4 +206,4 @@ function renderUserContent(html: string) {
     ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'p'],
     ALLOWED_ATTR: []
   })
-  return <div dangerouslySetInnerHTML={{ __htm
+  return <div dangerouslyS

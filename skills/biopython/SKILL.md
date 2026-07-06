@@ -54,11 +54,12 @@ uv pip install biopython
 For NCBI database access, always set your email address (required by NCBI):
 
 ```python
+import os
 from Bio import Entrez
 Entrez.email = "your.email@example.com"
 
 # Optional: API key for higher rate limits (10 req/s instead of 3 req/s)
-Entrez.api_key = "your_api_key_here"
+Entrez.api_key = os.environ.get("NCBI_API_KEY")
 ```
 
 ## Using This Skill
@@ -163,4 +164,3 @@ for alignment in blast_record.alignments[:5]:
 **Reference:** `references/structure.md`
 
 Use for:
-- Parsing PDB and mmC

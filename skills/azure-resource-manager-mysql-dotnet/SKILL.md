@@ -62,6 +62,7 @@ Subscription
 ### 1. Create MySQL Flexible Server
 
 ```csharp
+using System;
 using Azure.ResourceManager.MySql.FlexibleServers;
 using Azure.ResourceManager.MySql.FlexibleServers.Models;
 
@@ -76,7 +77,7 @@ MySqlFlexibleServerData data = new MySqlFlexibleServerData(AzureLocation.EastUS)
 {
     Sku = new MySqlFlexibleServerSku("Standard_D2ds_v4", MySqlFlexibleServerSkuTier.GeneralPurpose),
     AdministratorLogin = "mysqladmin",
-    AdministratorLoginPassword = "YourSecurePassword123!",
+    AdministratorLoginPassword = Environment.GetEnvironmentVariable("MYSQL_ADMIN_PASSWORD") ?? throw new InvalidOperationException("MYSQL_ADMIN_PASSWORD is required"),
     Version = MySqlFlexibleServerVersion.Ver8_0_21,
     Storage = new MySqlFlexibleServerStorage
     {
@@ -160,7 +161,4 @@ MySqlFlexibleServerConfigurationResource config = await configurations
     .GetAsync("max_connections");
 
 // Update configuration
-MySqlFlexibleServerConfigurationData configData = new MySqlFlexibleServerConfigurationData
-{
-    Value = "500",
-    Source = MySqlFlexibleServerConfigurationSour
+MySqlFlexibleServerConfigurationData c

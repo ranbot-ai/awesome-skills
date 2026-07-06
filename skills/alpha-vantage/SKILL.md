@@ -18,7 +18,9 @@ Access 20+ years of global financial data: equities, options, forex, crypto, com
 2. Set as environment variable:
 
 ```bash
-export ALPHAVANTAGE_API_KEY="your_key_here"
+read -rsp "Alpha Vantage API key: " ALPHAVANTAGE_API_KEY
+echo
+export ALPHAVANTAGE_API_KEY
 ```
 
 ## Installation
@@ -137,4 +139,4 @@ Use this skill when tackling tasks related to its primary domain or functionalit
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required inputs, permissions, saf
+- Stop and ask for clar
