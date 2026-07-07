@@ -1,0 +1,25 @@
+{
+  "id": "antigravity-codex-subagent",
+  "name": "codex-subagent",
+  "slug": "codex-subagent",
+  "description": "Launch Codex CLI as an isolated subagent for bounded coding, review, or verification tasks.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/codex-subagent",
+  "content": "\n# Codex CLI as a Subagent\n\n## When to Use\n\n- Use when a bounded coding, review, or verification task can run in a separate Codex CLI session.\n- Use when parallel work needs explicit file ownership and a clear definition of done.\n\nCodex CLI is OpenAI's terminal coding agent. `codex exec` runs it non-interactively:\nit works autonomously in a sandbox, streams progress to stderr, and prints only the\nfinal message to stdout. Auth reuses the user's ChatGPT subscription — never an API key.\n\n## When to delegate\n\n- Self-contained coding task with clear success criteria (fix, feature, refactor, review).\n- Parallel work: several independent tasks at once (see Parallel runs).\n- Second opinion / independent verification of your own changes.\n\nDo NOT delegate tasks that need conversation context you can't fully write into the prompt.\n\n## Preflight\n\n```bash\ncodex --version       # missing? npm i -g @openai/codex  (or: brew install --cask codex)\ncodex login status    # exit 0 + \"Logged in using ChatGPT\" = ready\n```\n\nNot logged in → stop and tell the user to run `codex login` (one-time browser OAuth).\nNever read, print, or copy credentials (`~/.codex/auth.json`).\n\n## Launch\n\n```bash\nOUT=$(mktemp /tmp/codex-out.XXXXXX)\ncodex exec \\\n  --cd /path/to/repo \\\n  --sandbox workspace-write \\\n  --output-last-message \"$OUT\" \\\n  \"Full task prompt: goal, constraints, files to touch, definition of done.\" \\\n  </dev/null\n```\n\n- `</dev/null` is MANDATORY when stdin is not a real terminal (background shells,\n  scripts): codex treats open stdin as extra context and waits forever for EOF.\n- Codex sees NOTHING of your conversation. Put all context in the prompt:\n  goal, relevant paths, constraints, and how to verify it's done.\n- Long prompt? Pipe it via stdin instead: `codex exec [flags] - < /tmp/task.md`.\n- Wrap the command in a background/Bash subagent if your host agent has one\n  (Cursor: Task tool with a shell subagent) so Codex's verbose stream stays out\n  of the parent context. Fallback: a plain background terminal.\n- Runs take minutes and have no built-in timeout — background it and monitor.\n- Optional: `-m <model>` to override the model, `--json` for JSONL event stream.\n\n## Collect results\n\n```bash\ncat \"$OUT\"                            # final message = the deliverable\ngit -C /path/to/repo status --short   # see what Codex actually changed\n```\n\nFollow-up in the same session (run from the same cwd — resume filters by cwd):\n\n```bash\ncodex exec resume --last \"follow-up instruction\" </dev/null\n```\n\n## Parallel runs\n\nParallelize only genuinely independent tasks, and assign file ownership upfront so\nresults merge cleanly. One git worktree per Codex run — never two in the same tree:\n\n```bash\ngit worktree add /tmp/wt-taskA -b codex/task-a\ncodex exec --cd /tmp/wt-taskA --sandbox workspace-write -o /tmp/outA.md \"task A\" </dev/null\n```\n\n## Failure modes\n\n- Hangs forever with no output → stdin was left open. Kill it, relaunch with `</dev/null`.\n- `codex login status` non-zero → the user must run `codex login`. Don't work around it.\n- ChatGPT plan rate limit hit → report to the user; never retry in a loop.\n- \"Not a git repo\" error → add `--skip-git-repo-check`, or init a repo first.\n- Network is blocked inside the workspace-write sandbox by default. If the task\n  needs it (installs, API calls): `-c sandbox_workspace_write.network_access=true`.\n- NEVER use `--dangerously-bypass-approvals-and-sandbox`.\n\n## Rules\n\n- One task per launch. Split big jobs into multiple launches.\n- Review Codex's diff yourself before declaring the task done.\n\n## Cursor-native wrapper (optional)\n\nFor auto-routing and `/codex` invocation inside Cursor, add `~/.cursor/agents/codex.md` —\na custom subagent whose description is \"delegates coding tasks to Codex CLI\" and whose\nbody points at this skill.\n\n## Limitations\n\n- Adapted from `davidondrej/skills`; verify local paths, tools, credentials, and agent features before acting.\n- For commands, remote access, scheduling, browser automation, or file-changing workflows, get explicit user approval and confirm the target environment first.\n",
+  "tags": [
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "gpt",
+    "automation",
+    "workflow"
+  ],
+  "useCases": [
+    "Use when a bounded coding, review, or verification task can run in a separate Codex CLI session.",
+    "Use when parallel work needs explicit file ownership and a clear definition of done."
+  ],
+  "scrapedAt": "2026-07-07T09:54:35.935Z"
+}

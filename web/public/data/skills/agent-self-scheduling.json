@@ -1,0 +1,26 @@
+{
+  "id": "antigravity-agent-self-scheduling",
+  "name": "agent-self-scheduling",
+  "slug": "agent-self-scheduling",
+  "description": "Schedule AI agent runs with cron, loops, or external clocks while avoiding unsafe tight autonomous timers.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-self-scheduling",
+  "content": "\n# Agent Self-Scheduling\n\n## When to Use\n\n- Use when the user asks for recurring, scheduled, heartbeat, or looped agent work.\n- Use when you need to choose between cron, external schedulers, hooks, or built-in agent scheduling.\n\nFirst question: does the agent have a built-in scheduler (Hermes → Camp B), or do you own the clock (everything else → Camp A)?\n\nUniversal floor: cron is 1 minute minimum (5-field expr, no seconds) — every camp. For sub-minute you MUST use a `while ...; sleep N; done` loop, a TS extension, or an event hook. Never put an LLM on a tight timer.\n\n## Camp A — one-shot agents, you own the clock\n\nThese run once and exit (amnesiac unless resumed). Schedule them externally.\n\n```bash\nclaude -p \"PROMPT\" --output-format json --allowedTools \"Read,Edit,Bash\"  # Claude Code\ncodex exec --json \"PROMPT\"                                                # Codex\npi run \"PROMPT\"                                                           # Pi\n```\n\nWrap in a clock:\n\n```bash\n# 1. cron (>= 1 min floor)\n*/10 * * * * cd /path/to/project && pi run \"check X and report\" >> ~/agent.log 2>&1\n# 2. systemd timer (Linux, survives reboot, better logging) — OnUnitActiveSec=10min\n# 3. dumb loop (sub-minute, or no cron available)\nwhile true; do pi run \"check X\"; sleep 30; done\n```\n\nGotchas (each breaks unattended runs if ignored):\n- **Permissions hang forever.** Pass `--allowedTools` (Claude) or sandbox/auto-approve flags (Codex), or the run blocks on a prompt.\n- **Use JSON output** (`--output-format json` / `--json`) so the wrapper parses results deterministically.\n- **Runs are amnesiac.** Resume (`codex exec resume --last`) or persist state to a file the next run reads.\n\nPi has NO built-in scheduler/loop/heartbeat by design — external clock only (or a TS extension for agent-side timers).\n\n### cmux — orchestration only, NO scheduler\n\ncmux has no timer/watch/cron. Three ways to loop it: orchestrator-driven (`send` → `sleep` → `read-screen` on your own clock), a dumb while-sleep wrapper, or — preferred — event-driven via `cmux notify` + OSC terminal hooks, which is cheaper and more responsive than polling. `read-screen` is non-interruptive, safe to poll.\n\nIf a loop checks another agent, send the user a one-line status each check: what the agent is doing, on track or not. (Claude Code may prefill a predicted next user message after finishing — that's Claude, not the user.)\n\n## Camp B — Hermes built-in scheduler\n\nHermes' gateway ticks every 60s and runs due jobs in fresh isolated sessions. State-check first:\n\n```bash\nhermes gateway install            # user-level ( --system to survive reboot)\nhermes cron create \"every 1h\" \"summarize new emails and report\" --skill himalaya\nhermes cron create \"0 9 * * *\" \"post daily standup\"      # cron expr\nhermes cron create \"30m\" \"one-shot reminder in 30 min\"   # one-shot delay\n```\n\nHermes-unique: **zero-token mode** (run a script, deliver stdout verbatim — use for watchdogs), **chaining** (`context_from` pipes one job's output into the next), **self-terminating loops**, and **loop safety** (scheduled sessions cannot create more cron jobs — don't schedule from inside a scheduled job). Each run is a fresh session: the prompt must carry all context.\n\n## Heartbeat pattern\n\nOne fast recurring tick gates many slower per-task checks: the tick reads a task list + per-task `last_run` timestamps and only acts on tasks that are due. In Hermes use a recurring job (zero-token mode when nothing's due); in Camp A use a while-sleep loop. Define active-hours, and stay silent when nothing is due — no empty noise.\n\n## Verify it fires (before reporting success)\n\n1. Camp A: log file grows after one interval, or run the wrapped command once by hand → clean JSON, exit 0.\n2. Camp B: `hermes cron list` shows the job + sane `next_run`; trigger a run-now to confirm delivery.\n3. Confirm permission/sandbox flags are present — the #1 silent failure is a hung permission prompt.\n4. Heartbeats: confirm a nothing-due tick stays silent.\n\n## Limitations\n\n- Adapted from `davidondrej/skills`; verify local paths, tools, credentials, and agent features before acting.\n- For commands, remote access, scheduling, browser automation, or file-changing workflows, get explicit user approval and confirm the target environment first.\n",
+  "tags": [
+    "claude",
+    "ai",
+    "agent",
+    "llm",
+    "automation",
+    "workflow",
+    "design",
+    "cro"
+  ],
+  "useCases": [
+    "Use when the user asks for recurring, scheduled, heartbeat, or looped agent work.",
+    "Use when you need to choose between cron, external schedulers, hooks, or built-in agent scheduling."
+  ],
+  "scrapedAt": "2026-07-07T09:52:11.080Z"
+}

