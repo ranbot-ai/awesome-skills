@@ -11411,6 +11411,33 @@
       "scrapedAt": "2026-06-16T11:24:21.777Z"
     },
     {
+      "id": "antigravity-codex-profiles",
+      "name": "codex-profiles",
+      "slug": "codex-profiles",
+      "description": "Use codex-profiles to run Codex CLI or Codex Desktop with isolated CODEX_HOME profiles for separate accounts, projects, and local state.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/codex-profiles",
+      "content": "\n# Codex Profiles\n\n## Overview\n\nUse `codex-profiles` when a user wants separate Codex CLI or Codex Desktop contexts for work, personal, school, client, or project-specific activity. The tool wraps Codex's `CODEX_HOME` support so each profile has its own Codex home directory for auth, config, sessions, connectors, plugins, caches, logs, and local state.\n\nThis skill is for profile selection and operational safety around that boundary. It is not an official OpenAI project, and it does not provide full OS-level isolation.\n\n## When to Use This Skill\n\n- Use when the user wants to keep multiple Codex accounts or project contexts separate on one machine.\n- Use when a workflow needs a different `CODEX_HOME` without manually exporting environment variables.\n- Use when diagnosing which Codex profile is active or whether profiles are logged in.\n- Use when the user asks about Codex account switching without copying `auth.json`.\n- Use when launching Codex Desktop from a profile, only after confirming the user accepts app/process disruption.\n\n## How It Works\n\n### Step 1: Confirm Scope and Installation\n\nFirst check whether the user wants CLI-only profile switching or Codex Desktop profile launching. Desktop operations can quit, launch, clone, or rebuild app instances, so get explicit approval before running them.\n\nIf the tool is already installed, inspect the live command surface:\n\n```bash\ncodex-profile --help\ncodex-profile doctor\ncodex-profile list\ncodex-profile status\n```\n\nIf it is not installed, prefer package-manager installs the user can inspect and control:\n\n```bash\nnpm install -g codex-profile\nbrew install Ducksss/tap/codex-profile\n```\n\nDo not run remote install scripts automatically. If the user asks for a source install, clone the repository and inspect its install instructions first.\n\n### Step 2: Create or Select a Profile\n\nCreate a new isolated Codex home only when the user names the intended profile:\n\n```bash\ncodex-profile init work\ncodex-profile path work\n```\n\nAsk the user to log in once per profile when needed:\n\n```bash\ncodex-profile login work\n```\n\nDo not copy, parse, print, or migrate `auth.json` tokens between profiles.\n\n### Step 3: Run Codex CLI With a Profile\n\nUse the CLI profile wrapper for ordinary agent work:\n\n```bash\ncodex-profile cli work\ncodex-profile cli work exec \"run tests and summarize failures\"\n```\n\nFor one-off shell sessions, prefer the tool's environment or shell activation commands after checking `--help`:\n\n```bash\ncodex-profile env work\ncodex-profile shell-init --help\n```\n\n### Step 4: Use Desktop Profile Commands Carefully\n\nCodex Desktop launch flows can affect running app state. Before running them, state which profile, app mode, and workspace will be used, then wait for approval.\n\n```bash\ncodex-profile app work ~/Dev/project\ncodex-profile app work --instance ~/Dev/project\n```\n\nUse `--instance` only when the user wants side-by-side Desktop profiles and accepts the additional local app clone and separate Electron user-data boundary.\n\n## Examples\n\n### Example 1: Read-Only Profile Audit\n\n```bash\ncodex-profile list\ncodex-profile status\ncodex-profile doctor\n```\n\nUse this before changing profile state. It should not expose token contents.\n\n### Example 2: CLI Task in a Work Profile\n\n```bash\ncodex-profile cli work exec \"inspect this repository and run its test suite\"\n```\n\nConfirm the profile name is intentional before running long tasks.\n\n### Example 3: Manual CODEX_HOME Equivalent\n\nIf the wrapper is unavailable, explain the underlying boundary instead of improvising token movement:\n\n```bash\nCODEX_HOME=\"$HOME/.codex-work\" codex\nCODEX_HOME=\"$HOME/.codex-work\" codex exec \"review this change\"\n```\n\n## Best Practices\n\n- Keep profile names explicit and boring, such as `work`, `personal`, `client-a`, or `school`.\n- Use `status`, `list`, and `doctor` before destructive or Desktop actions.\n- Treat each profile as a separate local Codex home, not as a full sandbox.\n- Keep secrets inside the account/profile that owns them; do not copy auth files between profiles.\n- Prefer CLI profile commands for routine work and reserve Desktop app commands for user-approved context switches.\n- Verify behavior against the installed `codex-profile --help`, because command flags can change.\n\n## Limitations\n\n- `codex-profiles` is community-maintained and is not an official OpenAI tool.\n- It isolates Codex state through separate `CODEX_HOME` directories; it does not isolate the operating-system user, shell history, SSH keys, browser cookies, GitHub CLI auth, or unrelated application state.\n- Desktop profile launch behavior is macOS-focused and can change with Codex Desktop releases.\n- Existing Codex sessions may still contain project context from before a profile strategy was adopted.\n- The tool does not replace backups for important Codex state.\n\n## Security & Safety Notes\n\n- Never copy, print, parse, or migrate `auth.json` tokens as a shortcut.\n- Do not run Desktop launch, app clone, rebuild, remove, or profile deletion comm",
+      "tags": [
+        "mcp",
+        "ai",
+        "agent",
+        "workflow",
+        "document",
+        "security"
+      ],
+      "useCases": [
+        "Use when the user wants to keep multiple Codex accounts or project contexts separate on one machine.",
+        "Use when a workflow needs a different `CODEX_HOME` without manually exporting environment variables.",
+        "Use when diagnosing which Codex profile is active or whether profiles are logged in.",
+        "Use when the user asks about Codex account switching without copying `auth.json`.",
+        "Use when launching Codex Desktop from a profile, only after confirming the user accepts app/process disruption."
+      ],
+      "scrapedAt": "2026-07-08T08:40:06.718Z"
+    },
+    {
       "id": "antigravity-codex-review",
       "name": "codex-review",
       "slug": "codex-review",
@@ -21299,6 +21326,24 @@
       "scrapedAt": "2026-01-29T06:59:13.288Z"
     },
     {
+      "id": "antigravity-go-in-depth",
+      "name": "go-in-depth",
+      "slug": "go-in-depth",
+      "description": "Go in depth harness — fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/go-in-depth",
+      "content": "\n# Go In Depth\n\n## Overview\n\nGo in depth harness — fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report. Run the \"go-in-depth\" workflow.\n\n## When to Use\n\nWhen the user wants a deep, multi-source, fact-checked research report on any topic. BEFORE invoking, check if the question is specific enough to research directly — if underspecified (e.g., \"what car to buy\" without budget/use-case/region), ask 2-3 clarifying questions to narrow scope. Then pass the refined question as args, weaving the answers in.\n\n## How It Works\n\nPhases:\n- Scope: Decompose question (from args) into 5 search angles\n- Search: 5 parallel WebSearch agents, one per angle\n- Fetch: URL-dedup, fetch top 15 sources, extract falsifiable claims\n- Verify: 3-vote adversarial verification per claim (need 2/3 refutes to kill)\n- Synthesize: Merge semantic dupes, rank by confidence, cite sources\n\n## Examples\n\n### Example 1: Run go-in-depth workflow\n```\nWorkflow({ name: \"go-in-depth\" })\n```\n\n### Example 2: Research with refined question\n```\nWorkflow({ name: \"go-in-depth\", args: { query: \"best hybrid cars under $30k in the US for families\" } })\n```\n\n### Example 3: Deep dive into a technical concept\n```\nWorkflow({ name: \"go-in-depth\", args: { query: \"how does the transformer architecture handle positional encoding?\" } })\n```\n\n### Example 4: Fact-checking a medical claim\n```\nWorkflow({ name: \"go-in-depth\", args: { query: \"efficacy of intermittent fasting for long-term weight loss in adults\" } })\n```\n\n## Workflow Script\n\n[scripts/workflow-script.js](scripts/workflow-script.js)\n\n## Limitations\n\n- **Slow execution**: Multi-agent searches, fetching, and 3-vote verification take significant time. Not for quick facts.\n- **Context intensive**: Analyzing 15 full sources uses large context limits.\n- **Synthesis risks**: May struggle if source material is weak or equally conflicting.\n",
+      "tags": [
+        "ai",
+        "agent",
+        "workflow"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-07-08T08:43:17.693Z"
+    },
+    {
       "id": "antigravity-go-playwright",
       "name": "go-playwright",
       "slug": "go-playwright",
@@ -26193,53 +26238,6 @@
       "scrapedAt": "2026-01-31T06:52:53.304Z"
     },
     {
-      "id": "antigravity-linkedin-automation",
-      "name": "linkedin-automation",
-      "slug": "linkedin-automation",
-      "description": "Automate LinkedIn tasks via Rube MCP (Composio): create posts, manage profile, company info, comments, and image uploads. Always search tools first for current schemas.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/linkedin-automation",
-      "content": "\n# LinkedIn Automation via Rube MCP\n\nAutomate LinkedIn operations through Composio's LinkedIn toolkit via Rube MCP.\n\n## Prerequisites\n\n- Rube MCP must be connected (RUBE_SEARCH_TOOLS available)\n- Active LinkedIn connection via `RUBE_MANAGE_CONNECTIONS` with toolkit `linkedin`\n- Always call `RUBE_SEARCH_TOOLS` first to get current tool schemas\n\n## Setup\n\n**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.\n\n\n1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds\n2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `linkedin`\n3. If connection is not ACTIVE, follow the returned auth link to complete LinkedIn OAuth\n4. Confirm connection status shows ACTIVE before running any workflows\n\n## Core Workflows\n\n### 1. Create a LinkedIn Post\n\n**When to use**: User wants to publish a text post on LinkedIn\n\n**Tool sequence**:\n1. `LINKEDIN_GET_MY_INFO` - Get authenticated user's profile info [Prerequisite]\n2. `LINKEDIN_REGISTER_IMAGE_UPLOAD` - Register image upload if post includes an image [Optional]\n3. `LINKEDIN_CREATE_LINKED_IN_POST` - Publish the post [Required]\n\n**Key parameters**:\n- `text`: Post content text\n- `visibility`: 'PUBLIC' or 'CONNECTIONS'\n- `media_title`: Title for attached media\n- `media_description`: Description for attached media\n\n**Pitfalls**:\n- Must retrieve user profile URN via GET_MY_INFO before creating a post\n- Image uploads require a two-step process: register upload first, then include the asset in the post\n- Post text has character limits enforced by LinkedIn API\n- Visibility defaults may vary; always specify explicitly\n\n### 2. Get Profile Information\n\n**When to use**: User wants to retrieve their LinkedIn profile or company details\n\n**Tool sequence**:\n1. `LINKEDIN_GET_MY_INFO` - Get authenticated user's profile [Required]\n2. `LINKEDIN_GET_COMPANY_INFO` - Get company page details [Optional]\n\n**Key parameters**:\n- No parameters needed for GET_MY_INFO (uses authenticated user)\n- `organization_id`: Company/organization ID for GET_COMPANY_INFO\n\n**Pitfalls**:\n- GET_MY_INFO returns the authenticated user only; cannot look up other users\n- Company info requires the numeric organization ID, not the company name or vanity URL\n- Some profile fields may be restricted based on OAuth scopes granted\n\n### 3. Manage Post Images\n\n**When to use**: User wants to upload and attach images to LinkedIn posts\n\n**Tool sequence**:\n1. `LINKEDIN_REGISTER_IMAGE_UPLOAD` - Register an image upload with LinkedIn [Required]\n2. Upload the image binary to the returned upload URL [Required]\n3. `LINKEDIN_GET_IMAGES` - Verify uploaded image status [Optional]\n4. `LINKEDIN_CREATE_LINKED_IN_POST` - Create post with the image asset [Required]\n\n**Key parameters**:\n- `owner`: URN of the image owner (user or organization)\n- `image_id`: ID of the uploaded image for GET_IMAGES\n\n**Pitfalls**:\n- The upload is a two-phase process: register then upload binary\n- Image asset URN from registration must be used when creating the post\n- Supported formats typically include JPG, PNG, and GIF\n- Large images may take time to process before they are available\n\n### 4. Comment on Posts\n\n**When to use**: User wants to comment on an existing LinkedIn post\n\n**Tool sequence**:\n1. `LINKEDIN_CREATE_COMMENT_ON_POST` - Add a comment to a post [Required]\n\n**Key parameters**:\n- `post_id`: The URN or ID of the post to comment on\n- `text`: Comment content\n- `actor`: URN of the commenter (user or organization)\n\n**Pitfalls**:\n- Post ID must be a valid LinkedIn URN format\n- The actor URN must match the authenticated user or a managed organization\n- Rate limits apply to comment creation; avoid rapid-fire comments\n\n### 5. Delete a Post\n\n**When to use**: User wants to remove a previously published LinkedIn post\n\n**Tool sequence**:\n1. `LINKEDIN_DELETE_LINKED_IN_POST` - Delete the specified post [Required]\n\n**Key parameters**:\n- `post_id`: The URN or ID of the post to delete\n\n**Pitfalls**:\n- Deletion is permanent and cannot be undone\n- Only the post author or organization admin can delete a post\n- The post_id must be the exact URN returned when the post was created\n\n## Common Patterns\n\n### ID Resolution\n\n**User URN from profile**:\n```\n1. Call LINKEDIN_GET_MY_INFO\n2. Extract user URN (e.g., 'urn:li:person:XXXXXXXXXX')\n3. Use URN as actor/owner in subsequent calls\n```\n\n**Organization ID from company**:\n```\n1. Call LINKEDIN_GET_COMPANY_INFO with organization_id\n2. Extract organization URN for posting as a company page\n```\n\n### Image Upload Flow\n\n- Call REGISTER_IMAGE_UPLOAD to get upload URL and asset URN\n- Upload the binary image to the provided URL\n- Use the asset URN when creating a post with media\n- Verify with GET_IMAGES if upload status is uncertain\n\n## Known Pitfalls\n\n**Authentication**:\n- LinkedIn OAuth tokens have limited scopes; ensure required permissions are granted\n- Tokens expire; re-authenticate if API calls return 401 errors\n\n**URN Formats**:\n- LinkedIn ",
-      "tags": [
-        "api",
-        "mcp",
-        "ai",
-        "automation",
-        "workflow",
-        "document",
-        "image"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-19T07:12:09.016Z"
-    },
-    {
-      "id": "antigravity-linkedin-cli",
-      "name": "linkedin-cli",
-      "slug": "linkedin-cli",
-      "description": "Use when automating LinkedIn via CLI: fetch profiles, search people/companies, send messages, manage connections, create posts, and Sales Navigator.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/linkedin-cli",
-      "content": "\n## When to Use\nUse this skill when you need to automate LinkedIn tasks such as profile fetching, connection management, or post creation via CLI, especially when integrated into automated workflows.\n\n# LinkedIn Skill\n\nYou have access to `linkedin` – a CLI tool for LinkedIn automation. Use it to fetch profiles, search people and companies, send messages, manage connections, create posts, react, comment, and more.\n\nEach command sends a request to Linked API, which runs a real cloud browser to perform the action on LinkedIn. Operations are **not instant** – expect 30 seconds to several minutes depending on complexity.\n\nIf `linkedin` is not available, install it:\n\n```bash\nnpm install -g @linkedapi/linkedin-cli\n```\n\n## Authentication\n\nIf a command fails with exit code 2 (authentication error), ask the user to set up their account:\n\n1. Go to [app.linkedapi.io](https://app.linkedapi.io) and sign up or log in\n2. Connect their LinkedIn account\n3. Copy the **Linked API Token** and **Identification Token** from the dashboard\n\nOnce the user provides the tokens, run:\n\n```bash\nlinkedin setup --linked-api-token=TOKEN --identification-token=TOKEN\n```\n\n### When to Use\nUse this skill when you need to **orchestrate LinkedIn actions from scripts or an AI agent** instead of clicking through the web UI:\n\n- Building outreach, research, or recruiting workflows that rely on LinkedIn data and messaging.\n- Enriching leads or accounts by fetching people and company profiles in bulk.\n- Coordinating multi-step Sales Navigator or workflow runs where JSON output and exit codes are required.\n\nAlways respect LinkedIn’s terms of service, local regulations, and your organisation’s compliance policies when using automation against real accounts.\n\n## Global Flags\n\nAlways use `--json` and `-q` for machine-readable output:\n\n```bash\nlinkedin <command> --json -q\n```\n\n| Flag                    | Description                             |\n| ----------------------- | --------------------------------------- |\n| `--json`                | Structured JSON output                  |\n| `--quiet` / `-q`        | Suppress stderr progress messages       |\n| `--fields name,url,...` | Select specific fields in output        |\n| `--no-color`            | Disable colors                          |\n| `--account \"Name\"`      | Use a specific account for this command |\n\n## Output Format\n\nSuccess:\n\n```json\n{ \"success\": true, \"data\": { \"name\": \"John Doe\", \"headline\": \"Engineer\" } }\n```\n\nError:\n\n```json\n{\n  \"success\": false,\n  \"error\": { \"type\": \"personNotFound\", \"message\": \"Person not found\" }\n}\n```\n\nExit code 0 means the API call succeeded – always check the `success` field for the action outcome. Non-zero exit codes indicate infrastructure errors:\n\n| Exit Code | Meaning                                                                                     |\n| --------- | ------------------------------------------------------------------------------------------- |\n| 0         | Success (check `success` field – action may have returned an error like \"person not found\") |\n| 1         | General/unexpected error                                                                    |\n| 2         | Missing or invalid tokens                                                                   |\n| 3         | Subscription/plan required                                                                  |\n| 4         | LinkedIn account issue                                                                      |\n| 5         | Invalid arguments                                                                           |\n| 6         | Rate limited                                                                                |\n| 7         | Network error                                                                               |\n| 8         | Workflow timeout (workflowId returned for recovery)                                         |\n\n## Commands\n\n### Fetch a Person Profile\n\n```bash\nlinkedin person fetch <url> [flags] --json -q\n```\n\nOptional flags to include additional data:\n\n- `--experience` – work history\n- `--education` – education history\n- `--skills` – skills list\n- `--languages` – languages\n- `--posts` – recent posts (with `--posts-limit N`, `--posts-since TIMESTAMP`)\n- `--comments` – recent comments (with `--comments-limit N`, `--comments-since TIMESTAMP`)\n- `--reactions` – recent reactions (with `--reactions-limit N`, `--reactions-since TIMESTAMP`)\n\nOnly request additional data when needed – each flag increases execution time.\n\n```bash\n# Basic profile\nlinkedin person fetch https://www.linkedin.com/in/username --json -q\n\n# With experience and education\nlinkedin person fetch https://www.linkedin.com/in/username --experience --education --json -q\n\n# With last 5 posts\nlinkedin person fetch https://www.linkedin.com/in/username --posts --posts-limit 5 --json -q\n```\n\n### Search People\n\n```bash\nlinkedin person search [flags] --json -q\n```\n\n| Flag                   | Description            ",
-      "tags": [
-        "react",
-        "pdf",
-        "api",
-        "ai",
-        "agent",
-        "automation",
-        "workflow",
-        "design",
-        "document",
-        "image"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-26T07:12:18.165Z"
-    },
-    {
       "id": "antigravity-agent-squad-luna",
       "name": "luna",
       "slug": "agent-squad-luna",
@@ -27996,14 +27994,14 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 384
+      "count": 383
     },
     {
       "id": "ai-agents",
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 357
+      "count": 358
     },
     {
       "id": "creative-media",
@@ -28068,48 +28066,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 248197
+      "stars": 249230
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 159019
+      "stars": 159320
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 67042
+      "stars": 67139
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 24,
       "newSkillCount": 2,
-      "stars": 79713
+      "stars": 79945
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1374
+      "stars": 1377
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1060,
-      "newSkillCount": 21,
-      "stars": 42509
+      "newSkillCount": 8,
+      "stars": 42584
     }
   ],
-  "lastUpdated": "2026-07-07T09:58:39.706Z",
+  "lastUpdated": "2026-07-08T08:44:43.430Z",
   "stats": {
     "totalSkills": 1158,
-    "newSkills": 33,
-    "scrapedAt": "2026-07-07T09:58:39.706Z"
+    "newSkills": 20,
+    "scrapedAt": "2026-07-08T08:44:43.430Z"
   }
 }

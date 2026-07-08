@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-go-in-depth",
+  "name": "go-in-depth",
+  "slug": "go-in-depth",
+  "description": "Go in depth harness — fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/go-in-depth",
+  "content": "\n# Go In Depth\n\n## Overview\n\nGo in depth harness — fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report. Run the \"go-in-depth\" workflow.\n\n## When to Use\n\nWhen the user wants a deep, multi-source, fact-checked research report on any topic. BEFORE invoking, check if the question is specific enough to research directly — if underspecified (e.g., \"what car to buy\" without budget/use-case/region), ask 2-3 clarifying questions to narrow scope. Then pass the refined question as args, weaving the answers in.\n\n## How It Works\n\nPhases:\n- Scope: Decompose question (from args) into 5 search angles\n- Search: 5 parallel WebSearch agents, one per angle\n- Fetch: URL-dedup, fetch top 15 sources, extract falsifiable claims\n- Verify: 3-vote adversarial verification per claim (need 2/3 refutes to kill)\n- Synthesize: Merge semantic dupes, rank by confidence, cite sources\n\n## Examples\n\n### Example 1: Run go-in-depth workflow\n```\nWorkflow({ name: \"go-in-depth\" })\n```\n\n### Example 2: Research with refined question\n```\nWorkflow({ name: \"go-in-depth\", args: { query: \"best hybrid cars under $30k in the US for families\" } })\n```\n\n### Example 3: Deep dive into a technical concept\n```\nWorkflow({ name: \"go-in-depth\", args: { query: \"how does the transformer architecture handle positional encoding?\" } })\n```\n\n### Example 4: Fact-checking a medical claim\n```\nWorkflow({ name: \"go-in-depth\", args: { query: \"efficacy of intermittent fasting for long-term weight loss in adults\" } })\n```\n\n## Workflow Script\n\n[scripts/workflow-script.js](scripts/workflow-script.js)\n\n## Limitations\n\n- **Slow execution**: Multi-agent searches, fetching, and 3-vote verification take significant time. Not for quick facts.\n- **Context intensive**: Analyzing 15 full sources uses large context limits.\n- **Synthesis risks**: May struggle if source material is weak or equally conflicting.\n",
+  "tags": [
+    "ai",
+    "agent",
+    "workflow"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-07-08T08:43:17.693Z"
+}
