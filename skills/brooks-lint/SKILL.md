@@ -3,7 +3,7 @@ name: brooks-lint
 description: AI code reviewer grounded in classic software engineering books for catching design smells, coupling issues, and architectural risks. 
 category: Development & Code Tools
 source: antigravity
-tags: [claude, ai, design, security, rag]
+tags: [claude, ai, agent, design, security, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/brooks-lint
 ---
 
@@ -61,7 +61,7 @@ Brooks Lint applies each book's core principles as a review lens:
 # Search: "brooks-lint" in Claude Code > Extensions
 
 # Or install via NPX (Antigravity)
-npx antigravity-awesome-skills --claude
+npx agentic-awesome-skills --claude
 # Then invoke: @brooks-lint
 ```
 
@@ -119,3 +119,5 @@ npx antigravity-awesome-skills --claude
 - `@logic-lens` — Complementary: catches logic bugs; brooks-lint catches design issues
 - `@security-auditor` — Specialized security-only deep scan
 - `@lint-and-validate` — Style/syntax linting to run alongside design review
+
+##
