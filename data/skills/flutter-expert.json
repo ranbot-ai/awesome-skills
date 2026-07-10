@@ -11,14 +11,14 @@
   "tags": [
     "react",
     "api",
+    "claude",
     "ai",
     "automation",
     "workflow",
     "design",
     "document",
     "presentation",
-    "image",
-    "security"
+    "image"
   ],
   "useCases": [
     "\"Architect a Flutter app with clean architecture and Riverpod\"",

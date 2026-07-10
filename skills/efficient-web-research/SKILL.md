@@ -15,6 +15,9 @@ using the right tool at the right depth, and stopping as soon as the question is
 
 ---
 
+## When to Use
+- Use this skill when the task matches this description: Protocol for token-efficient web research. Use when accessing URLs, GitHub repos, or running search queries. Prevents full-page fetching waste.
+
 ## Core Principle
 
 > **Fetch the minimum needed to answer. Skim before you dive. Stop when you can answer.**
@@ -151,13 +154,4 @@ Extract and keep:
 
 ---
 
-## Search Protocol
-
-Use when the user gives a topic, question, or query — not a specific URL.
-
-### Step 1 — Sharpen the Query Before Searching
-
-Do NOT search the raw user query. Transform it first:
-
-```
-Raw: "how to deploy fastap
+## Search Pr

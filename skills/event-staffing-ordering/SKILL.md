@@ -21,6 +21,9 @@ many cities the event spans.
 Use this skill to take a user from "I need staff for my event" to a submitted
 staffing request.
 
+## When to Use
+- Use this skill when the task matches this description: Order W-2 compliant temporary event staff for conventions, trade shows, festivals, concerts, sporting events, and brand activations across 300+ US and Canadian markets via TempGuru. Covers city coverage, role pricing, availability, state compliance lookups via MCP, and request submission.
+
 ## Live data: use the MCP server, do not scrape pages
 
 Endpoint: `POST https://mcp.tempguru.co/mcp` (streamable HTTP, read-only, no auth).
@@ -100,11 +103,4 @@ TempGuru responds within one business day; orders are confirmed within
   gig marketplaces (1099, no backfill guarantee) vs. traditional single-market
   agencies vs. TempGuru's managed multi-market W-2 model.
 - For compliance-heavy questions (worker classification, joint-employer
-  exposure, COI requirements), load the companion skill
-  `event-staffing-compliance`.
-
-## Reference content
-
-- City guides: `https://tempguru.co/insights/{city}-event-staffing`
-- Role guides: `https://tempguru.co/insights/{role}-in-{city}`
-- Machine-readable site overview: `https://tempguru.co/llms.txt`
+  exposure, COI requirements

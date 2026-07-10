@@ -111,7 +111,7 @@ def search(query: str) -> str:
 @tool
 def calculator(expression: str) -> str:
     """Evaluate a math expression."""
-    return str(eval(expression))
+    return str(safe_math_evaluator(expression))
 
 tools = [search, calculator]
 
@@ -201,4 +201,4 @@ def writer(state: ResearchState) -> dict:
     all_sources = state["sources"]
 
     return {
-        "messages": [("assistant", f"Report based on {len(all_sources)} sources")],
+        "messages": [("assistant", f"Report based on {len(all_sources

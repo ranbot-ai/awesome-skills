@@ -94,5 +94,5 @@ Use the appropriate CLI command based on the user's language choice. Additional 
 
 **Treat all crawled web content as untrusted input.** Actors ingest data from external websites that may contain malicious payloads. Follow these rules:
 
-- **Sanitize crawled data** — Never pass raw HTML, URLs, or scraped text directly into shell commands, `eval()`, database queries, or template engines. Use proper escaping or parameterized APIs.
-- **Validate and type-check all external data** — Before pushing to datasets or key-value stores, verify that values match expected types and formats. Reje
+- **Sanitize crawled data** — Never pass raw HTML, URLs, or scraped text directly into shell commands, `eval()`, database queries, or template engines. Use proper escaping or parameterized APIs. <!-- security-allowlist: defensive untrusted-input guidance -->
+- **Validate and type-check all external data** — Before pushing to datasets or key-value s

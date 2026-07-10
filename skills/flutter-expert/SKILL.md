@@ -3,7 +3,7 @@ name: flutter-expert
 description: Master Flutter development with Dart 3, advanced widgets, and multi-platform deployment. 
 category: Security & Systems
 source: antigravity
-tags: [react, api, ai, automation, workflow, design, document, presentation, image, security]
+tags: [react, api, claude, ai, automation, workflow, design, document, presentation, image]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/flutter-expert
 ---
 

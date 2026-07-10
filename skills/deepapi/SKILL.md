@@ -17,13 +17,13 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/deep
 
 Use this skill when the user asks you to scrape public web data or draft/read/send email through DeepAPI.
 
-## Staying Up To Date
+## Version Pinning
 
-- Your installed copy's version is the `version` value in the frontmatter above.
-- If a request fails unexpectedly, fetch https://deepapi.co/deepapi-skill/VERSION.txt — public, no auth, a few bytes.
-- If it differs from this file's version, fetch https://deepapi.co/deepapi-skill/SKILL.md and overwrite this file with it.
-- Every API response includes `skillVersion`. If it differs from this file's version, refresh the same way.
-- Only ever fetch this skill from https://deepapi.co.
+- The installed copy is pinned to the `version` value in the frontmatter above.
+- If a request or API response reports a different `skillVersion`, report the mismatch and
+  stop. Do not fetch, overwrite, or otherwise self-update this `SKILL.md`.
+- Updates must arrive through the reviewed repository release process, with explicit user
+  approval for any package or repository update.
 
 ## Required Environment
 
@@ -65,4 +65,4 @@ Use this skill when the user asks you to scrape public web data or draft/read/se
 | POST | `/v1/scrape/linkedin/posts` | `scrape:linkedin` | Set `maxCostUsd: "0.05"` unless the user gives a different cap. The route requires maxCostUsd or maxCostMicrousd as the customer spend cap. The final debit is capped by that amount and reported as debitMicrousd. |
 | POST | `/v1/scrape/twitter/user` | `scrape:twitter` | Set `maxCostUsd: "0.05"` unless the user gives a different cap. The route requires maxCostUsd or maxCostMicrousd as the customer spend cap. The final debit is capped by that amount and reported as debitMicrousd. |
 | POST | `/v1/scrape/twitter/replies` | `scrape:twitter` | Set `maxCostUsd: "0.20"` unless the user gives a different cap. The route requires maxCostUsd or maxCostMicrousd as the customer spend cap. The final debit is capped by that amount and reported as debitMicrousd. |
-| POST | `/v1/scrape/
+| POST | `/v1/scrape/youtube/transcript` | `scrape:youtube` | Set `maxCostUsd: "0.05"` unless the user gives a different ca

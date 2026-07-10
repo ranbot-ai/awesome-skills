@@ -1,0 +1,27 @@
+{
+  "id": "antigravity-gemini-deep-research",
+  "name": "gemini-deep-research",
+  "slug": "gemini-deep-research",
+  "description": "Run autonomous multi-step research with Google's Gemini Deep Research Agent: kick off a query, poll progress, and collect a cited report for market analysis or literature reviews.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gemini-deep-research",
+  "content": "\n# Gemini Deep Research Skill\n\n## When to Use\n\n- Use when a question needs autonomous multi-step research with cited sources (market analysis, literature reviews, competitive scans)\n- Use when you want to start a Gemini Deep Research run, poll its progress, and collect the final report\n- Use when a quick web search is not enough and a structured, source-grounded report is required\n\nRun autonomous research tasks that plan, search, read, and synthesize information into comprehensive reports.\n\n## Requirements\n\n- Python 3.8+\n- httpx: `pip install -r requirements.txt`\n- GEMINI_API_KEY environment variable\n\n## Setup\n\n1. Get a Gemini API key from [Google AI Studio](https://aistudio.google.com/)\n2. Set the environment variable:\n   ```bash\n   export GEMINI_API_KEY=your-api-key-here\n   ```\n   Or create a `.env` file in the skill directory.\n\n## Safety Gate\n\nBefore starting a research job, show the user the exact query, the fact that it will be sent\nto Google's Gemini service, the expected cost range, and the output destination. Start a job\nonly after explicit approval. Do not include private workspace material, credentials, personal\ndata, or confidential customer information in a query.\n\n## Usage\n\n### Start a research task\n```bash\npython3 scripts/research.py --query \"Research the history of Kubernetes\"\n```\n\n### With structured output format\n```bash\npython3 scripts/research.py --query \"Compare Python web frameworks\" \\\n  --format \"1. Executive Summary\\n2. Comparison Table\\n3. Recommendations\"\n```\n\n### Stream progress in real-time\n```bash\npython3 scripts/research.py --query \"Analyze EV battery market\" --stream\n```\n\n### Start without waiting\n```bash\npython3 scripts/research.py --query \"Research topic\" --no-wait\n```\n\n### Check status of running research\n```bash\npython3 scripts/research.py --status <interaction_id>\n```\n\n### Wait for completion\n```bash\npython3 scripts/research.py --wait <interaction_id>\n```\n\n### Continue from previous research\n```bash\npython3 scripts/research.py --query \"Elaborate on point 2\" --continue <interaction_id>\n```\n\n### List recent research\n```bash\npython3 scripts/research.py --list\n```\n\n## Output Formats\n\n- **Default**: Human-readable markdown report\n- **JSON** (`--json`): Structured data for programmatic use\n- **Raw** (`--raw`): Unprocessed API response\n\n## Cost & Time\n\n| Metric | Value |\n|--------|-------|\n| Time | 2-10 minutes per task |\n| Cost | $2-5 per task (varies by complexity) |\n| Token usage | ~250k-900k input, ~60k-80k output |\n\n## Best Use Cases\n\n- Market analysis and competitive landscaping\n- Technical literature reviews\n- Due diligence research\n- Historical research and timelines\n- Comparative analysis (frameworks, products, technologies)\n\n## Workflow\n\n1. User requests research → Run `--query \"...\"`\n2. Inform user of estimated time (2-10 minutes)\n3. Monitor with `--stream` or poll with `--status`\n4. Return formatted results\n5. Use `--continue` for follow-up questions\n\n## Exit Codes\n\n- **0**: Success\n- **1**: Error (API error, config issue, timeout)\n- **130**: Cancelled by user (Ctrl+C)\n\n## Limitations\n\n- Each research job is a paid, third-party API request; costs and availability can change, and\n  the listed estimate is not a spending authorization.\n- Reports may contain incomplete, stale, or incorrect citations. Verify consequential claims\n  against primary sources.\n- This skill cannot guarantee that a prompt is safe to disclose; redact proprietary or personal\n  material before requesting user approval.\n- An API key must remain local and must never be committed, printed, or sent in a query.\n",
+  "tags": [
+    "python",
+    "markdown",
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "workflow",
+    "kubernetes"
+  ],
+  "useCases": [
+    "Use when a question needs autonomous multi-step research with cited sources (market analysis, literature reviews, competitive scans)",
+    "Use when you want to start a Gemini Deep Research run, poll its progress, and collect the final report",
+    "Use when a quick web search is not enough and a structured, source-grounded report is required"
+  ],
+  "scrapedAt": "2026-07-10T10:22:31.061Z"
+}

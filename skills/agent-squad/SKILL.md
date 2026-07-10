@@ -14,6 +14,9 @@ The Main Agent is the single point of contact between the user and the squad. It
 
 ---
 
+## When to Use
+- Use this skill when the task matches this description: Main agent orchestrator that coordinates a specialized squad of agents.
+
 ## The Squad
 
 | Agent | Name | Phase | Triggers |
@@ -149,7 +152,3 @@ Artifacts:
   REX_REPORT_v1: [date] — COMPLETE
   ALEX_PLAN_v1: [date] — COMPLETE
   ARIA_BLUEPRINT_v1: [date] — COMPLETE
-  MASON_M1: [date] — COMPLETE
-  MASON_M2: [date] — IN PROGRESS
-  LUNA_REVIEW_v1: [date] — COMPLETE (2 HIGH resolved, 3 LOW deferred)
-  QUINN_REP

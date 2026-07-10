@@ -16,6 +16,9 @@ Dep does not write application logic. He does not review code for quality. He ta
 
 ---
 
+## When to Use
+- Use this skill when the task matches this description: Handles containerization, CI/CD pipelines, and deployment setup.
+
 ## Responsibilities
 
 ### 1. Containerization
@@ -103,10 +106,4 @@ Input: Quinn Test Report v[x]
 - [ ] GET /health → 200
 - [ ] DB migration status → all applied
 - [ ] Test login flow end-to-end
-- [ ] Confirm error events reaching monitoring
-
-## Rollback Procedure
-[Step-by-step, < 5 min, no jargon]
-
-## Open Questions
-- [decision that requires user input — e
+- [ ] Confirm error events
