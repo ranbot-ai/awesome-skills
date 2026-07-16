@@ -2564,6 +2564,35 @@
       "scrapedAt": "2026-02-11T07:11:41.442Z"
     },
     {
+      "id": "antigravity-anywrite",
+      "name": "anywrite",
+      "slug": "anywrite",
+      "description": "Compiled CLI covering all 52 endpoints of the Anytype local API — objects, properties, tags, search, chat, files — one binary, no MCP server needed.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/anywrite",
+      "content": "\n# anywrite\n\n## Overview\n\n`anywrite` is a single compiled Bun/TypeScript CLI for the [Anytype](https://anytype.io) desktop app's local HTTP API — **all 52 endpoints** across spaces, objects, properties, tags, types, templates, lists, chat, files, members, search, and auth — as one binary with zero runtime dependencies. It exists as a low-context alternative to Anytype's official MCP server: rather than exposing 52 always-loaded tools to every agent session, `anywrite` is a normal CLI wired as a skill that costs zero context until it's actually invoked, and is equally usable from a terminal or any script.\n\n## When to Use This Skill\n\n- Use when the user mentions Anytype or asks to create, update, search, or organize notes, tasks, or PKM objects.\n- Use when working with Anytype spaces, properties, tags, types, templates, or lists (sets and collections).\n- Use when the user asks to upload files to a space, chat inside a space, or read/write structured objects programmatically.\n\n## How It Works\n\n### Step 1: Ensure Anytype desktop is running and authenticated\n\nThe Anytype desktop app must be running locally (default `http://localhost:31009`). Authenticate once:\n\n```bash\n./dist/anywrite auth --status        # shows configured yes/no and where the key came from\n./dist/anywrite auth                 # challenge flow — a 4-digit code appears in the app\n./dist/anywrite auth --code 1234     # non-interactive form of the same exchange\n```\n\nThe key is written to `~/.anywrite/config.json` and is never printed by any command.\n\n### Step 2: Invoke a resource + action\n\n```\nanywrite <resource> <action> [positionals] [--flag value]\n```\n\nResources: `spaces`, `objects`, `properties`, `tags`, `types`, `templates`, `lists`, `files`, `members`, `search`, `chat`, `auth`. Output is JSON by default; add `--pretty` for a human view, `--json` as an escape hatch for anything the typed flags don't model yet. `space`/`type`/`property` positionals accept a name or an id — names are resolved to ids automatically.\n\n## Examples\n\n### Example 1: Create and update an object\n\n```bash\n./dist/anywrite objects create <space> --type task --name \"Buy milk\"\n./dist/anywrite objects update <space> <object_id> --status \"Done\"\n```\n\n### Example 2: Search and upload a file\n\n```bash\n./dist/anywrite search global --query \"task\" --types task\n./dist/anywrite files upload <space> --file ./image.png\n```\n\n### Example 3: Read chat messages\n\n```bash\n./dist/anywrite chat messages <space> <chat_id> --all\n```\n\n## Best Practices\n\n- ✅ Pass names for `space`/`type`/`property` and let the CLI resolve them to ids.\n- ✅ Use default JSON output for scripting and `--pretty` for human review.\n- ✅ Reach for `--json` when a brand-new API field isn't yet covered by a typed flag.\n- ❌ Don't set an empty-string emoji `--icon`; omit the flag entirely instead.\n- ❌ Don't expect `lists add`/`remove` to work on sets — they only apply to collections.\n\n## Limitations\n\n- This skill does not replace environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, or safety boundaries are missing.\n- Bounded by the Anytype local API itself: no block-level editing (body is whole-markdown replace only), no member invite/role management, no template create/update/delete, no space deletion.\n- The object body field is named `--body` on create but `--markdown` on update.\n\n## Security & Safety Notes\n\n- The API key is stored locally in `~/.anywrite/config.json` and is never printed by any command, including `auth --status`.\n- Config precedence at runtime: `ANYTYPE_API_KEY` env var, then `~/.anywrite/config.json`, then a read-only fallback to an existing `~/.anytype-cli/config.yaml`.\n- All operations target a locally-running Anytype desktop instance; no data is sent to third-party servers.\n- Delete is a soft archive everywhere and is idempotent — a repeated delete stays `200`, never `410`.\n\n## Common Pitfalls\n\n- **Problem:** `lists add`/`remove` silently does nothing on a set.\n  **Solution:** These only work on collections, not sets.\n- **Problem:** Re-uploading an identical file returns an existing object id instead of a new one.\n  **Solution:** This is intentional — file upload dedupes by content hash.\n- **Problem:** Chat messages don't paginate like everything else.\n  **Solution:** Chat paginates by cursor; every other resource paginates by offset.\n\n## Related Skills\n\n- `@docx` - When the deliverable is a Word document rather than an Anytype object.\n",
+      "tags": [
+        "typescript",
+        "docx",
+        "markdown",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "template",
+        "document"
+      ],
+      "useCases": [
+        "Use when the user mentions Anytype or asks to create, update, search, or organize notes, tasks, or PKM objects.",
+        "Use when working with Anytype spaces, properties, tags, types, templates, or lists (sets and collections).",
+        "Use when the user asks to upload files to a space, chat inside a space, or read/write structured objects programmatically."
+      ],
+      "scrapedAt": "2026-07-16T08:23:18.304Z"
+    },
+    {
       "id": "antigravity-aomi-transact",
       "name": "aomi-transact",
       "slug": "aomi-transact",
@@ -15862,6 +15891,32 @@
       "scrapedAt": "2026-07-02T09:26:41.511Z"
     },
     {
+      "id": "antigravity-diagnose-android-overheating",
+      "name": "diagnose-android-overheating",
+      "slug": "diagnose-android-overheating",
+      "description": "Use when diagnosing Android overheating, idle heat, thermal throttling, charging or radio heat, or abnormal battery drain with read-only ADB evidence and approval gates.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/diagnose-android-overheating",
+      "content": "\n# Diagnose Android Overheating\n\n## Overview\n\nFind the most likely source of Android device heat by correlating thermal state, battery conditions, CPU activity, wakeups, radios, sensors, charging, and the user's timeline. Keep diagnosis read-only by default, distinguish evidence from inference, and propose only the smallest reversible intervention after the user approves it.\n\n## When to Use This Skill\n\n- Use when an Android phone is hot, warm while idle, thermally throttled, shutting down from heat, or draining its battery unusually fast.\n- Use when heat appears during charging, weak cellular signal, 5G use, navigation, camera use, gaming, media playback, tethering, or background activity.\n- Use when the user wants to identify an offending app, service, wakelock, sensor, modem condition, or charging condition through ADB.\n- Use when a previous Android optimization or debloat attempt may have left settings that changed power or thermal behavior.\n- Use for physical phones and tablets. For profiling the energy use of an app under development, use an app-performance skill instead.\n\n## Safety Stop\n\nStop software diagnosis when the device shows battery swelling, smoke, hissing, leaking, a sharp chemical odor, repeated thermal shutdowns, or heat severe enough that it cannot be handled safely. Tell the user to disconnect power if this can be done safely, power the device off, keep it away from flammable material, and seek manufacturer or qualified repair support. Do not suggest cooling the device in a refrigerator or freezer, puncturing it, continuing to charge it, or running stress tests.\n\n## Diagnostic Contract\n\nBefore collecting data:\n\n1. Confirm the user owns or is authorized to inspect the device.\n2. Ask what “hot” means: location on the handset, activity, charging state, network type, onset, duration, and whether the heat also occurs while idle.\n3. Record the device model, Android version, recent OS/app changes, charger and cable, ambient conditions, and visible thermal warnings.\n4. Explain that an attached USB cable can charge and warm the device. Use wireless ADB or short capture windows when possible, and compare with the cable disconnected.\n5. Select a specific device serial when more than one ADB target is present. Never assume the first listed device is the intended phone.\n\n## Workflow\n\n### 1. Capture an Untouched Baseline\n\nDo not reset Batterystats, force-stop apps, clear caches, change network modes, alter AppOps, enable battery saver, or change developer settings before preserving the initial state.\n\nStart with read-only commands:\n\n```bash\nadb devices -l\nadb -s <serial> shell getprop ro.product.manufacturer\nadb -s <serial> shell getprop ro.product.model\nadb -s <serial> shell getprop ro.build.version.release\nadb -s <serial> shell getprop ro.build.version.sdk\nadb -s <serial> shell uptime\nadb -s <serial> shell dumpsys battery\nadb -s <serial> shell dumpsys thermalservice\nadb -s <serial> shell dumpsys cpuinfo\nadb -s <serial> shell top -n 1\n```\n\nIf a service or option is unavailable, record that limitation. Do not turn missing output into a healthy verdict. Android and OEM builds expose different services, fields, permissions, and `top` syntax.\n\n### 2. Choose the Evidence Branch\n\nRead [evidence-and-interpretation.md](references/evidence-and-interpretation.md), then collect only the branches that match the symptom:\n\n- heat while idle: battery history, power state, alarms, jobs, sensors, location, and radios;\n- heat while charging: battery/USB state and a controlled unplugged comparison;\n- heat under one app: process CPU, package memory, jobs, wakelocks, network, camera, and location;\n- heat in weak signal or mobile data: telephony, connectivity, signal changes, and mobile-radio activity;\n- heat during camera, navigation, gaming, or playback: CPU/GPU-adjacent state, display, camera/media, sensors, location, and network activity;\n- heat after a setting change: capture current values and compare them with the known previous state before proposing rollback.\n\nDo not collect a full bugreport unless narrow evidence is insufficient. Bugreports can contain account identifiers, app activity, network details, notifications, and other sensitive data.\n\n### 3. Reproduce with a Controlled Comparison\n\nDefine one pass/fail comparison before changing anything. Examples:\n\n- idle with airplane mode versus idle on weak cellular signal;\n- same workload on Wi-Fi versus mobile data;\n- charging versus unplugged after the battery level is stable;\n- suspect app active versus closed by the user;\n- screen on at fixed brightness versus screen off;\n- before versus after the recent OS or app update, when a real reference exists.\n\nKeep workload, duration, brightness, case, charger, ambient conditions, and starting battery level as constant as practical. Timestamp each observation. Avoid benchmarks or synthetic load unless the user explicitly asks and the device is not already thermally stressed.\n\n### 4. Correlate, Do Not Guess\n\nRequire at ",
+      "tags": [
+        "claude",
+        "ai",
+        "workflow",
+        "security",
+        "cro"
+      ],
+      "useCases": [
+        "Use when an Android phone is hot, warm while idle, thermally throttled, shutting down from heat, or draining its battery unusually fast.",
+        "Use when heat appears during charging, weak cellular signal, 5G use, navigation, camera use, gaming, media playback, tethering, or background activity.",
+        "Use when the user wants to identify an offending app, service, wakelock, sensor, modem condition, or charging condition through ADB.",
+        "Use when a previous Android optimization or debloat attempt may have left settings that changed power or thermal behavior.",
+        "Use for physical phones and tablets. For profiling the energy use of an app under development, use an app-performance skill instead."
+      ],
+      "scrapedAt": "2026-07-16T08:27:07.946Z"
+    },
+    {
       "id": "antigravity-diagnosing-bugs",
       "name": "diagnosing-bugs",
       "slug": "diagnosing-bugs",
@@ -16124,6 +16179,32 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-29T06:58:47.288Z"
+    },
+    {
+      "id": "antigravity-ditto",
+      "name": "ditto",
+      "slug": "ditto",
+      "description": "Use when a user asks to mine or update a private, evidence-backed work profile from local Claude Code, Codex, Copilot CLI, or OpenCode sessions.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ditto",
+      "content": "\n# Ditto\n\n## Overview\n\nDitto mines only the user's words from real local coding-agent session logs and\nturns repeated, supported patterns into private work, design, and writing\nprofiles. It keeps dated session receipts, rejects authored rules and memory as\nsource evidence, and requires approval before model-backed mining begins.\n\nThis standalone skill routes a compatible, already-installed Ditto runtime.\nNative namespaced routing is available through the upstream Ditto plugin.\n\n## When to Use This Skill\n\n- Use when the user explicitly asks to set up, run, update, re-mine, or deepen Ditto.\n- Use when the user wants an agent profile derived from real coding-session history rather than a questionnaire or rules file.\n- Use when native `ditto:mine` is unavailable and the user already has a compatible Ditto runtime installed.\n\nDo not trigger this skill merely because personalization might be useful. Mining\nrequires an explicit user request.\n\n## How It Works\n\n### 1. Resolve an installed runtime\n\nAsk the user for the path to an existing, trusted Ditto runtime, or use the\nnative upstream plugin when it is already installed. Retain the exact Python 3\nexecutable path as `PYTHON3`, the runtime path as `DITTO_PY`, and its matching\n`MINING_PROMPT.md` path. Confirm the installed version and source before use.\n\nDo not download or install executable code as part of this skill. If Ditto is\nnot installed, stop and direct the user to the upstream installation guidance;\ninstallation is a separate, explicit decision.\n\n### 2. Show the read-only mining plan\n\nMine only real user-authored sessions. Never synthesize a profile from\n`AGENTS.md`, `CLAUDE.md`, memory files, rules files, or a typed self-description.\n\nRun the full-history quality-default preflight:\n\n```bash\n\"$PYTHON3\" \"$DITTO_PY\" plugin preflight\n```\n\nShow the user the valid session count, post-dedupe source tokens, selected source\ntokens, cache hits, planned worker calls, and planned reducer calls. Wait for\nexplicit approval of this displayed plan before any model-backed work.\n\nIf the user explicitly asks for a quick preview, add `--preview` and say exactly:\n\n> Quick preview creates a starter profile from selected history, not the full profile.\n\nNever present preview as the default or as equivalent to the full-history result.\n\n### 3. Prepare the approved run\n\nRetain the displayed `approval_hash`, then prepare with the exact approved mode.\nFor the full-history plan, run:\n\n```bash\n\"$PYTHON3\" \"$DITTO_PY\" plugin prepare --approved-plan-hash HASH\n```\n\nFor an approved quick-preview plan, preserve preview mode explicitly:\n\n```bash\n\"$PYTHON3\" \"$DITTO_PY\" plugin prepare --preview --approved-plan-hash HASH\n```\n\nIf the hash changes, show the new plan and obtain approval again. Retain the\nreturned `run_id`, assigned segment and report paths, and `pack_path`.\n\n### 4. Mine and validate evidence\n\nFor every uncached selected segment, run one worker over only that segment and\nthe per-segment contract in the resolved `MINING_PROMPT.md`. Cache each JSON\nreport with `plugin cache-report` and stop on rejection.\n\nRun one strongest-available reducer over only the validated reports and reducer\ncontract. Write the complete pack to `pack_path`, validate it, and activate only\nthe validated pack with `plugin activate`.\n\n### 5. Verify and report\n\nRun `plugin status`, render the profile card, and report:\n\n- active version and core profile path\n- active and inactive domains\n- selected source tokens and actual worker/reducer passes\n- cache reuse\n- card path\n- any exact targeted-deepen instruction\n\nIf the current host already has the native Ditto plugin, do not create a\ncompeting direct profile installation.\n\n## Examples\n\n### Full-history setup\n\n```text\nUser: run ditto on my coding history\nAgent: resolves the pinned runtime, shows the read-only full-history plan, and\nwaits for explicit cost approval before starting any mining workers.\n```\n\n### Explicit quick preview\n\n```text\nUser: give me a cheap ditto preview first\nAgent: runs preflight with --preview, labels it as a starter profile, and waits\nfor approval of the displayed preview plan.\n```\n\n## Best Practices\n\n- Keep raw sessions, caches, receipts, and generated profiles private by default.\n- Report exact observed counts and paths; never estimate provider billing or coverage.\n- Preserve the approval hash and mode through the complete run.\n- Stop on validation failure instead of activating a partial profile.\n- Share the card or a short trait, not the full private profile or receipt appendix.\n\n## Limitations\n\n- Ditto models working behavior; it does not make the underlying model smarter.\n- Sparse or repetitive histories can leave design or writing domains inactive.\n- Provider system prompts, tool traffic, and billing overhead are outside Ditto's exact token accounting.\n- Quick preview has lower recall than the full-history quality default.\n- Automatic work, design, and writing routing requires the upstream native plugin.\n\n## Security & Safety Notes\n\n- Thi",
+      "tags": [
+        "python",
+        "claude",
+        "ai",
+        "agent",
+        "design",
+        "security",
+        "rag"
+      ],
+      "useCases": [
+        "Use when the user explicitly asks to set up, run, update, re-mine, or deepen Ditto.",
+        "Use when the user wants an agent profile derived from real coding-session history rather than a questionnaire or rules file.",
+        "Use when native `ditto:mine` is unavailable and the user already has a compatible Ditto runtime installed."
+      ],
+      "scrapedAt": "2026-07-16T08:27:13.366Z"
     },
     {
       "id": "antigravity-django-access-review",
@@ -26122,89 +26203,6 @@
       "scrapedAt": "2026-03-08T06:56:56.550Z"
     },
     {
-      "id": "antigravity-leiloeiro-juridico",
-      "name": "leiloeiro-juridico",
-      "slug": "leiloeiro-juridico",
-      "description": "Analise juridica de leiloes: nulidades, bem de familia, alienacao fiduciaria, CPC arts 829-903, Lei 9514/97, onus reais, embargos e jurisprudencia.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/leiloeiro-juridico",
-      "content": "\n# SKILL JURÍDICA — LEILÕES DE IMÓVEIS\n\n## Overview\n\nAnalise juridica de leiloes: nulidades, bem de familia, alienacao fiduciaria, CPC arts 829-903, Lei 9514/97, onus reais, embargos e jurisprudencia.\n\n## When to Use This Skill\n\n- When the user mentions \"juridico leilao\" or related topics\n- When the user mentions \"nulidade leilao\" or related topics\n- When the user mentions \"bem de familia leilao\" or related topics\n- When the user mentions \"alienacao fiduciaria leilao\" or related topics\n- When the user mentions \"cpc 829\" or related topics\n- When the user mentions \"fraude execucao\" or related topics\n\n## Do Not Use This Skill When\n\n- The task is unrelated to leiloeiro juridico\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## How It Works\n\nVocê é um **Advogado Especialista** com domínio absoluto em:\n- Direito Processual Civil (execução, expropriação, arrematação)\n- Direito Imobiliário (registro, ônus reais, alienação fiduciária)\n- Jurisprudência do STJ e STF sobre leilões\n\n---\n\n### 1.1 Leilão Judicial (Cpc/2015)\n\n**Fluxo Processual Completo:**\n```\nAção de Execução\n    ↓\nCitação do devedor (Art. 829 CPC) — 3 dias para pagar\n    ↓\nPenhora (Arts. 831-847 CPC)\n    ↓\nAvaliação (Arts. 870-878 CPC)\n    ↓\nPublicação do Edital (Art. 887 CPC) — mínimo 5 dias antes\n    ↓\nIntimação do devedor, cônjuge, credores (Art. 889 CPC)\n    ↓\n1ª Praça/Leilão — lance mínimo = avaliação (Art. 891 caput)\n    ↓ (se não arrematado)\n2ª Praça/Leilão — sem valor mínimo, salvo vil preço (Art. 891 §1º)\n    ↓\nArrematação — Auto de Arrematação (Art. 901 CPC)\n    ↓\nCarta de Arrematação (Art. 901 §1º CPC)\n    ↓\nRegistro no Cartório de Imóveis\n```\n\n**Artigos Chave do CPC/2015:**\n\n| Artigo | Conteúdo |\n|--------|----------|\n| Art. 829 | Citação na execução — 3 dias para pagar |\n| Art. 831 | Penhora — princípio da menor onerosidade |\n| Art. 835 | Ordem preferencial de penhora |\n| Art. 842 | Intimação do cônjuge/companheiro (imóvel) |\n| Art. 867 | Usufruto de imóvel ou empresa como alternativa |\n| Art. 870 | Avaliação — realizada pelo oficial ou perito |\n| Art. 873 | Reavaliação — quando cabível |\n| Art. 876 | Adjudicação — direito preferencial do exequente |\n| Art. 879 | Formas de expropriação |\n| Art. 881 | Alienação por iniciativa particular |\n| Art. 882 | Hasta pública — modalidades |\n| Art. 884 | Quem pode arrematar |\n| Art. 885 | Impedidos de arrematar (devedor, tutor, curador...) |\n| Art. 886 | Condições de pagamento na arrematação |\n| Art. 887 | Edital — conteúdo obrigatório |\n| Art. 888 | Publicação do edital |\n| Art. 889 | Intimações obrigatórias antes do leilão |\n| Art. 890 | Pagamento na arrematação |\n| Art. 891 | Valor mínimo (avaliação no 1º; vedação ao vil preço) |\n| Art. 892 | Pagamento em cheque ou transferência |\n| Art. 893 | Licitação por procuração |\n| Art. 894 | Usufruto como forma de adjudicação do exequente |\n| Art. 895 | Parcelamento da arrematação |\n| Art. 896 | Garantia do leiloeiro |\n| Art. 897 | Preferência na arrematação |\n| Art. 898 | Desfazimento da arrematação |\n| Art. 901 | Auto de \n\n### 1.2 Leilão Extrajudicial — Alienação Fiduciária (Lei 9.514/97)\n\n**Fluxo Legal Completo:**\n```\nInadimplência do devedor fiduciante\n    ↓\nIntimação pelo Cartório de Registro de Imóveis (Art. 26, §1º)\n    ↓\nPrazo de 15 dias para purgar a mora (Art. 26, §1º)\n    ↓ (se não purgada)\nConsolidação da propriedade em nome do credor fiduciário (Art. 26, §7º)\n    ↓\nPagamento de ITBI + laudêmio (se couber) pelo credor\n    ↓\n1º Leilão — mínimo: valor do imóvel fixado em contrato (Art. 27, §1º)\n    ↓ (se não arrematado)\n2º Leilão (15 dias depois) — mínimo: valor da dívida (Art. 27, §2º)\n    ↓ (se arrematado)\nLiquidação da dívida / devolução do saldo ao devedor (Art. 27, §4º)\n    ↓ (se não arrematado no 2º)\nCredor incorpora o imóvel — dívida extinta (Art. 27, §5º)\n```\n\n**Artigos Chave da Lei 9.514/97:**\n\n| Artigo | Conteúdo |\n|--------|----------|\n| Art. 22 | Conceito de alienação fiduciária de imóvel |\n| Art. 23 | Constituição da propriedade fiduciária — registro |\n| Art. 24 | Obrigações do fiduciante (devedor) |\n| Art. 25 | Pagamento total — extinção da fiducia |\n| Art. 26 | Inadimplência → consolidação da propriedade |\n| Art. 26, §1º | Intimação pelo CRI — prazo 15 dias |\n| Art. 26, §2º | O que deve ser pago para purgar a mora |\n| Art. 26, §5º | Consolidação — se mora não purgada |\n| Art. 27 | Leilão extrajudicial — procedimento |\n| Art. 27, §1º | 1º Leilão — valor mínimo = valor do imóvel |\n| Art. 27, §2º | 2º Leilão — valor mínimo = dívida total |\n| Art. 27, §4º | Saldo positivo ao devedor |\n| Art. 27, §5º | Imóvel não arrematado → credor fica com ele |\n| Art. 27, §6º | Despejo do devedor após consolidação |\n| Art. 27, §7º | Dívida quitada no 2º leilão mesmo parcialmente |\n| Art. 30 | Direito do fiduciante à imissão na posse |\n\n---\n\n### 2.1 Risco De Nulidade Da Hasta Pública\n\n**ALTO RISCO — Verificar Sempre:**\n\n**a) Intimação do cônjuge (Art. 842 CPC)**\n- Cônjuge DEVE ",
-      "tags": [
-        "python",
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "document"
-      ],
-      "useCases": [
-        "When the user mentions \"juridico leilao\" or related topics",
-        "When the user mentions \"nulidade leilao\" or related topics",
-        "When the user mentions \"bem de familia leilao\" or related topics",
-        "When the user mentions \"alienacao fiduciaria leilao\" or related topics",
-        "When the user mentions \"cpc 829\" or related topics"
-      ],
-      "scrapedAt": "2026-03-08T06:56:57.238Z"
-    },
-    {
-      "id": "antigravity-leiloeiro-mercado",
-      "name": "leiloeiro-mercado",
-      "slug": "leiloeiro-mercado",
-      "description": "Analise de mercado imobiliario para leiloes. Liquidez, desagio tipico, ROI, estrategias de saida (flip/reforma/renda), Selic 2025 e benchmark CDI/FII.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/leiloeiro-mercado",
-      "content": "\n# SKILL DE MERCADO — ANALISTA DE ATIVOS IMOBILIÁRIOS EM LEILÃO\n\n## Overview\n\nAnalise de mercado imobiliario para leiloes. Liquidez, desagio tipico, ROI, estrategias de saida (flip/reforma/renda), Selic 2025 e benchmark CDI/FII.\n\n## When to Use This Skill\n\n- When the user mentions \"mercado leilao imovel\" or related topics\n- When the user mentions \"roi leilao\" or related topics\n- When the user mentions \"liquidez imovel leilao\" or related topics\n- When the user mentions \"desagio leilao\" or related topics\n- When the user mentions \"flip imovel leilao\" or related topics\n- When the user mentions \"reforma leilao\" or related topics\n\n## Do Not Use This Skill When\n\n- The task is unrelated to leiloeiro mercado\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## How It Works\n\nVocê é um **Analista Profissional de Mercado Imobiliário** especializado em\nativos estressados (distressed assets) e leilões, com visão estratégica de\ninvestimento, liquidez, retorno e timing de mercado.\n\n---\n\n## Mapa De Liquidez (Tempo Médio De Revenda Pós-Arrematação)\n\n| Segmento | Capital SP/RJ | Capitais Grandes | Interior | Interior Pequeno |\n|----------|--------------|-----------------|----------|-----------------|\n| Apart. 1-2 quartos | 30-60 dias | 60-90 dias | 90-180 dias | 180-360 dias |\n| Apart. 3 quartos | 60-90 dias | 90-150 dias | 120-240 dias | 240+ dias |\n| Casa condomínio | 60-120 dias | 90-180 dias | 120-240 dias | 240+ dias |\n| Sala comercial | 120-240 dias | 180-360 dias | 360+ dias | 360+ dias |\n| Terreno urbano | 90-180 dias | 180-360 dias | 180-360 dias | 360+ dias |\n| Galpão logístico | 90-180 dias | 90-180 dias | 180-360 dias | 360+ dias |\n| Imóvel rural | 180-360 dias | 360+ dias | 360+ dias | 360+ dias |\n\n**Fatores que aceleram a venda:**\n- Preço abaixo do mercado (10-15% de desconto)\n- Imóvel reformado e apresentável\n- Documentação regularizada\n- Boa foto e anúncio em portais (ZAP, Viva Real)\n- Corretor CRECI com carteira de clientes\n\n**Fatores que travam a venda:**\n- Pendências documentais (ITBI não pago, matrícula não atualizada)\n- Imóvel em mau estado / obras inacabadas\n- Débitos não quitados que aparecem na matrícula\n- Litígio pendente no imóvel (ação real)\n\n---\n\n## Por Modalidade\n\n**Leilões Judiciais (CPC):**\n```\n1º Leilão (mínimo = avaliação):\n  - Frequência de arrematação no 1º: 20-30%\n  - Deságio médio nas arrematações do 1º: 0-15% (compram pela avaliação)\n\n2º Leilão (sem mínimo / veda vil preço):\n  - Frequência de arrematação no 2º: 50-70%\n  - Deságio médio nas arrematações do 2º: 30-50%\n  - Deságio máximo observado: até 65-70% (imóveis problemáticos)\n```\n\n**Leilões Extrajudiciais (Lei 9.514/97 — Bancos):**\n```\n1º Leilão (mínimo = valor do imóvel, dado em contrato):\n  - Frequência de arrematação: 30-50%\n  - Deságio médio: 20-35%\n  - CEF: deságio médio histórico ~28%\n\n2º Leilão (mínimo = saldo devedor):\n  - Frequência de arrematação: 60-80%\n  - Deságio médio: 35-55%\n  - Oportunidade: saldo devedor pode ser muito menor que valor de mercado\n```\n\n**Venda Direta Bancária:**\n```\nNegociação direta (sem concorrência):\n  - Deságio médio: 15-30%\n  - Menos competição que leilão\n  - Possibilidade de financiamento pelo próprio banco\n  - CEF financia até 80% do valor de avaliação nas vendas diretas\n```\n\n## Mapa De Deságio Por Situação Do Imóvel\n\n| Situação | Faixa de Deságio |\n|----------|-----------------|\n| Desocupado, sem débitos, documentação ok | 15-25% |\n| Desocupado, débitos quantificados | 25-35% |\n| Ocupado (devedor cooperativo) | 30-40% |\n| Ocupado (litigioso) + débitos | 40-55% |\n| Irregular documentalmente | 35-50% |\n| Imóvel em mau estado | 35-55% |\n| Combinação de problemas | 50-70% |\n\n---\n\n## Estratégia A — Flip Rápido (Curto Prazo)\n\n**Perfil:** Investidor com capital e rede de compradores finais.\n\n```\nComprar com deságio de 35%+\n↓\nRegularizar documentação (1-3 meses)\n↓\nReforma leve se necessário (opcional)\n↓\nVender com 15-20% de desconto sobre VMP (mais rápido que mercado)\n↓\nLucro bruto: 15-20% sobre o investido em 3-9 meses\n```\n\n**Análise:**\n- Retorno bruto esperado: 15-25%\n- Prazo: 3-12 meses\n- Risco: médio (se imóvel bem selecionado)\n- Capital necessário: 100% do lance + custos\n\n## Estratégia B — Reforma E Valorização (Médio Prazo)\n\n**Perfil:** Investidor com capital e conhecimento em obras.\n\n```\nComprar com deságio de 40%+\n↓\nReforma completa (3-6 meses)\n↓\nVender pelo valor de mercado de imóvel reformado (premium de 20-30%)\n↓\nLucro bruto: 30-50% sobre o investido\n```\n\n**Análise:**\n- Retorno bruto esperado: 30-50%\n- Prazo: 6-18 meses\n- Risco: médio-alto (risco de obra e mercado)\n- Capital necessário: 100% lance + 20-30% do lance em reforma\n\n## Estratégia C — Renda (Longo Prazo)\n\n**Perfil:** Investidor que busca fluxo de caixa passivo.\n\n```\nComprar com deságio de 25%+\n↓\nRegularizar e alugar (1-3 meses)\n↓\nReceber aluguel abaixo do preço de mercado (para locar rápido)\n↓\nYield superior ao mercado pela base de custo menor\n```\n\n**Yield tí",
-      "tags": [
-        "python",
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "document",
-        "cro"
-      ],
-      "useCases": [
-        "When the user mentions \"mercado leilao imovel\" or related topics",
-        "When the user mentions \"roi leilao\" or related topics",
-        "When the user mentions \"liquidez imovel leilao\" or related topics",
-        "When the user mentions \"desagio leilao\" or related topics",
-        "When the user mentions \"flip imovel leilao\" or related topics"
-      ],
-      "scrapedAt": "2026-03-08T06:56:57.940Z"
-    },
-    {
-      "id": "antigravity-leiloeiro-risco",
-      "name": "leiloeiro-risco",
-      "slug": "leiloeiro-risco",
-      "description": "Analise de risco em leiloes de imoveis. Score 36 pontos, riscos juridicos/financeiros/operacionais, stress test 4 cenarios e ROI ponderado por risco.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/leiloeiro-risco",
-      "content": "\n# SKILL DE RISCO — AUDITOR DE RISCO EM LEILÕES\n\n## Overview\n\nAnalise de risco em leiloes de imoveis. Score 36 pontos, riscos juridicos/financeiros/operacionais, stress test 4 cenarios e ROI ponderado por risco.\n\n## When to Use This Skill\n\n- When the user mentions \"risco leilao\" or related topics\n- When the user mentions \"analise risco imovel leilao\" or related topics\n- When the user mentions \"score risco leilao\" or related topics\n- When the user mentions \"imovel seguro leilao\" or related topics\n- When the user mentions \"stress test leilao\" or related topics\n- When the user mentions \"roi ponderado leilao\" or related topics\n\n## Do Not Use This Skill When\n\n- The task is unrelated to leiloeiro risco\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## How It Works\n\nVocê é um **Auditor de Risco Sênior** especializado em leilões de imóveis, com visão\nintegrada de riscos jurídicos, financeiros, operacionais e de mercado. Seu papel é\nmapear todos os riscos, quantificar os que podem ser quantificados e recomendar\na decisão de investimento.\n\n---\n\n## Categoria 1 — Riscos Jurídicos\n\n#### 1.1 Risco de Nulidade da Arrematação\n\n| Risco | Probabilidade | Impacto | Score |\n|-------|--------------|---------|-------|\n| Falta de intimação do cônjuge | Médio | Muito Alto | 🔴 |\n| Edital publicado incorretamente | Baixo | Alto | 🟡 |\n| Avaliação desatualizada (>12 meses) | Médio | Médio | 🟡 |\n| Bem impenhorável não arguido | Baixo | Muito Alto | 🔴 |\n| Embargos com efeito suspensivo | Baixo | Muito Alto | 🔴 |\n| Processo com recursos pendentes | Médio | Alto | 🟡 |\n| Cônjuge sem meação respeitada | Baixo | Alto | 🟡 |\n\n**Como mitigar:**\n- Solicitar certidão dos autos (ou pesquisa no e-SAJ/PJE)\n- Verificar se consta intimação do cônjuge\n- Checar presença de embargos via busca no sistema processual\n- Confirmar publicação do edital nos veículos exigidos\n\n#### 1.2 Risco de Bem de Família\n\n**Checklist de Exposição:**\n- [ ] É o único imóvel do devedor? → **Alto risco de bem de família**\n- [ ] Devedor reside no imóvel? → **Alto risco**\n- [ ] Imóvel foi arguido como bem de família nos autos? → **Verificar decisão judicial**\n- [ ] Execução é de crédito condominial ou tributário do próprio imóvel? → Exceção legal (pode penhorar)\n- [ ] Fiança locatícia? → Súmula 549 STJ (pode penhorar — mas há divergência)\n\n**Decisão:**\n```\nSe o imóvel É bem de família E a execução NÃO é de débito do próprio imóvel\nou crédito do art. 3º da Lei 8.009/90:\n→ RISCO MUITO ALTO — NÃO ARREMATAR sem análise profunda dos autos\n```\n\n#### 1.3 Risco de Ônus Reais Ocultos\n\n| Ônus | Como Detectar | Impacto |\n|------|--------------|---------|\n| Hipoteca anterior | Certidão de ônus reais | Alto (pode retomar o imóvel) |\n| Usufruto vitalício | Matrícula atualizada | Muito Alto (não tem uso) |\n| Penhora anterior | Certidão do distribuidor | Médio |\n| Servidão | Matrícula | Médio (limita uso) |\n| Aforamento (marinha) | Matrícula + SPU | Médio (laudêmio) |\n| Ação de usucapião | Distribuidor | Alto (terceiro reivindica) |\n| Promessa de compra e venda reg. | Matrícula | Alto |\n\n**Ação:** Sempre obter certidão\n\n## Categoria 2 — Riscos Financeiros\n\n#### 2.1 Risco de Débitos Acumulados\n\n**Metodologia de Cálculo:**\n\n```\nIPTU:\n  - Checar na prefeitura do município\n  - Calcular débito total (principal + multa 20% + juros 1% a.m.)\n  - Prazo prescricional: 5 anos (CTN Art. 174)\n  - Impacto: propter rem — arrematante paga\n\nCONDOMÍNIO:\n  - Solicitar ao síndico/administradora extrato completo\n  - Incluir: taxa condominial + multas + correção\n  - Impacto: propter rem — arrematante paga (Súmula STJ 478)\n  - Atenção: condomínio pode ter ação de cobrança paralela\n\nÁGUA/ESGOTO:\n  - Verificar com concessionária (SABESP, CEDAE, Copasa etc.)\n  - Pode gerar suspensão do serviço — custo de religação\n  - Em geral: dívida pessoal, não propter rem (mas varia por estado)\n\nENERGIA ELÉTRICA:\n  - Débito pessoal (não propter rem)\n  - Verificar se há suspensão do serviço\n\nTABELA RÁPIDA:\nDébito estimado IPTU:          R$ ____________\nDébito estimado Condomínio:    R$ ____________\nDébito estimado Água:          R$ ____________\nOutros:                        R$ ____________\nTOTAL DÉBITOS:                 R$ ____________\n```\n\n#### 2.2 Risco de Desocupação\n\n**Estimativa de Custo por Cenário:**\n\n| Cenário | Custo Honorários | Custo de Tempo | Prazo | Probabilidade |\n|---------|-----------------|----------------|-------|---------------|\n| Ocupante sai voluntariamente | R$ 0 | R$ 0 | 0-30 dias | 20-30% |\n| Negociação + ajuda de custo | R$ 3-10k | R$ 0 | 30-90 dias | 30-40% |\n| Ação de imissão sem resistência | R$ 5-15k | custo financ. | 3-6 meses | 20-30% |\n| Imissão + recursos do devedor | R$ 10-30k | custo financ. | 6-18 meses | 10-20% |\n| Processo longo + violência | R$ 20-50k | custo financ. | 12-36 meses | 5-10% |\n\n**Custo financeiro do tempo (capital imobilizado):**\n```\nCapital imobilizado × Taxa CDI × Meses / 12\nExemplo: R$ 300.000 ",
-      "tags": [
-        "python",
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "document",
-        "cro"
-      ],
-      "useCases": [
-        "When the user mentions \"risco leilao\" or related topics",
-        "When the user mentions \"analise risco imovel leilao\" or related topics",
-        "When the user mentions \"score risco leilao\" or related topics",
-        "When the user mentions \"imovel seguro leilao\" or related topics",
-        "When the user mentions \"stress test leilao\" or related topics"
-      ],
-      "scrapedAt": "2026-03-08T06:56:58.597Z"
-    },
-    {
       "id": "antigravity-agent-squad-luna",
       "name": "luna",
       "slug": "agent-squad-luna",
@@ -27940,14 +27938,14 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 379
+      "count": 377
     },
     {
       "id": "ai-agents",
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 359
+      "count": 360
     },
     {
       "id": "creative-media",
@@ -27961,7 +27959,7 @@
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 133
+      "count": 134
     },
     {
       "id": "security-systems",
@@ -28012,48 +28010,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 254987
+      "stars": 255660
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 161263
+      "stars": 161547
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 67758
+      "stars": 67853
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 24,
       "newSkillCount": 2,
-      "stars": 80844
+      "stars": 80953
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1393
+      "stars": 1395
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1057,
-      "newSkillCount": 6,
-      "stars": 43270
+      "newSkillCount": 9,
+      "stars": 43382
     }
   ],
-  "lastUpdated": "2026-07-15T08:37:09.607Z",
+  "lastUpdated": "2026-07-16T08:30:00.267Z",
   "stats": {
     "totalSkills": 1155,
-    "newSkills": 18,
-    "scrapedAt": "2026-07-15T08:37:09.607Z"
+    "newSkills": 21,
+    "scrapedAt": "2026-07-16T08:30:00.267Z"
   }
 }
