@@ -1,9 +1,9 @@
 ---
 name: finishing-a-development-branch
 description: Use when implementation is complete, all tests pass, and you need to decide how to integrate the work - guides completion of development work by presenting structured options for merge, PR, or cleanup
-category: Development & Code Tools
+category: Document Processing
 source: antigravity
-tags: [ai, agent, workflow]
+tags: [ai, agent, workflow, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/finishing-a-development-branch
 ---
 
@@ -51,9 +51,11 @@ git merge-base HEAD main 2>/dev/null || git merge-base HEAD master 2>/dev/null
 
 Or ask: "This branch split from main - is that correct?"
 
+Read `AGENTS.md` and maintainer documentation, then inspect effective protection for the base branch. If pull requests or required checks are enforced, mark local merge as unavailable and use the repository's guarded PR/merge workflow. In `agentic-awesome-skills`, defer maintainer merges to `antigravity-maintainer-batch-release` and `npm run merge:batch`.
+
 ### Step 3: Present Options
 
-Present exactly these 4 options:
+For an unprotected base branch, present exactly these 4 options:
 
 ```
 Implementation complete. What would you like to do?
@@ -68,9 +70,13 @@ Which option?
 
 **Don't add explanation** - keep options concise.
 
+For a protected base branch, do not offer local merge. Present only push/create PR, keep as-is, and discard, while preserving the same confirmation rule for discard.
+
 ### Step 4: Execute Choice
 
 #### Option 1: Merge Locally
+
+Use this option only after proving that repository policy and server-side protection permit local integration into the base branch. Otherwise stop and route through Option 2.
 
 ```bash
 # Switch to base branch
@@ -209,5 +215,4 @@ This skill is applicable to execute the workflow or actions described in the ove
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
+- Do not treat the output as a substitute for environment-specific validation, testing, or expert

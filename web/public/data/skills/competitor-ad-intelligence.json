@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-competitor-ad-intelligence",
+  "name": "competitor-ad-intelligence",
+  "slug": "competitor-ad-intelligence",
+  "description": "Research public competitor ads, analyze creative patterns and landing pages, and produce an evidence-labeled strategic teardown.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/competitor-ad-intelligence",
+  "content": "\n# Competitor Ad Intelligence\n\n## Overview\n\nResearch competitor ads from Meta and Google, analyze creative patterns, map observable landing-page funnels, and produce a strategic teardown — hooks, formats, positioning bets, vulnerabilities, and counter-plays.\n\n**Core principle:** A competitor's public ad portfolio is partial evidence about its growth strategy. Long-running ads can indicate continued investment, but public libraries do not expose conversion performance or spend. Separate observations from hypotheses, cite every observed ad or page, and label all performance and budget inferences explicitly.\n\n## When to Use This Skill\n\n- \"What ads are my competitors running?\"\n- \"Tear down [competitor]'s ad strategy\"\n- \"Find new creative angles for our paid campaigns\"\n- \"Reverse-engineer [competitor]'s paid funnel\"\n- \"What hooks are working in [our space]?\"\n- \"Audit the ad landscape before we launch\"\n- \"Find weaknesses in [competitor]'s ad strategy\"\n- \"What format — video, image, carousel — is dominant in our category?\"\n\n## Phase 0: Intake\n\nGather from the user:\n\n1. **Competitor names + domains** (e.g., `apollo.io`, `clay.run`)\n2. **Your product/domain** — for comparison framing\n3. **Channels:** Meta only, Google only, or both? (default: both)\n4. **Depth level:**\n   - **Standard:** Ad scrape + creative analysis + landing page analysis\n   - **Deep:** Standard + historical comparison + funnel reconstruction + counter-plays\n5. **Product category** — helps frame analysis\n6. **Known competitor landing pages?** — any URLs already spotted in their ads\n\n## Phase 1: Research Meta Ads\n\nFor each competitor domain, research ads visible in Meta Ad Library and public search results.\n\nUse `web_search` only to discover first-party library pages and candidate references:\n\n```\nweb_search: site:facebook.com/ads/library \"[competitor_name]\"\nweb_search: \"[competitor_name]\" Meta Ad Library active ads\nweb_search: \"[competitor_name]\" facebook ads examples\n```\n\nYou can also visit the Meta Ad Library directly: `https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=US&q=<competitor_name>`\n\nPrefer manual browser research. Use automated collection only when the platform expressly permits it and the user has authorized it; comply with current terms, robots directives, and rate limits. If the page is blocked, incomplete, dynamic-only, or requires authentication, report the coverage gap; do not bypass the control or invent missing ads or attributes.\n\n**Collect per ad:**\n- Ad copy (headline + primary text)\n- Visual type (image / video / carousel)\n- CTA button text\n- Landing page URL\n- Active duration (first seen, still running or stopped)\n- Platforms (Facebook, Instagram, Audience Network)\n- Ad variations (A/B tests — same landing page, different creative)\n\n## Phase 2: Research Google Ads\n\nFor each competitor domain, research ads visible in Google Ads Transparency Center.\n\nUse `web_search` to find competitor ads in Google Ads Transparency Center (publicly accessible):\n\n```\nweb_search: site:adstransparency.google.com \"[competitor_name]\"\nweb_search: \"[competitor_name]\" Google Ads transparency\nweb_search: \"[competitor_name]\" google search ads examples\n```\n\nYou can also visit directly: `https://adstransparency.google.com/?search_text=<competitor_name>`\n\nPrefer manual browser research. Treat search snippets and third-party examples as secondary evidence and identify them as such. Use automated fetching only when permitted and authorized.\n\n**Collect per ad:**\n- Headline variants (up to 3)\n- Description lines\n- Ad type (Search / Display / YouTube / Shopping)\n- Landing page URL\n- Geographic targeting (if visible)\n\n## Phase 3: Analyze Creative Patterns\n\nAfter collecting all ads, perform structured analysis.\n\n### Hook Pattern Clustering\n\nGroup all ad headlines/openers by hook type:\n\n| Hook Type | Pattern | Example |\n|-----------|---------|---------|\n| **Fear/Loss** | Risk of missing out or falling behind | \"Your competitors are already using AI SDRs\" |\n| **Outcome** | Direct result promise | \"10x your pipeline in 30 days\" |\n| **Question** | Challenges current assumption | \"Still doing outbound manually?\" |\n| **Social proof** | Names customers or numbers | \"Join 500+ B2B teams using [product]\" |\n| **Contrarian** | Challenges conventional wisdom | \"Cold email isn't dead. Your copy is.\" |\n| **Empathy** | Validates their pain | \"We know SDR ramp time is brutal\" |\n| **Product-led** | Feature as hook | \"[Feature] is live — see what's new\" |\n\nCount how many ads per competitor use each hook type. This reveals their primary messaging strategy.\n\n### Format Distribution\n\n| Format | Meta | Google |\n|--------|------|--------|\n| Static image | [N] | N/A |\n| Video | [N] | [N] |\n| Carousel | [N] | N/A |\n| Search text | N/A | [N] |\n| Display banner | N/A | [N] |\n\n### CTA Taxonomy\n\nList all unique CTAs found. Common patterns:\n- **Urgency:** \"Start free\", \"Try now\", \"Get started today\"\n- **Low-friction:** \"See how it works\", \"Watch demo\", \"Learn mo",
+  "tags": [
+    "markdown",
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "automation",
+    "design",
+    "document",
+    "image",
+    "vulnerability"
+  ],
+  "useCases": [
+    "\"What ads are my competitors running?\"",
+    "\"Tear down [competitor]'s ad strategy\"",
+    "\"Find new creative angles for our paid campaigns\"",
+    "\"Reverse-engineer [competitor]'s paid funnel\"",
+    "\"What hooks are working in [our space]?\""
+  ],
+  "scrapedAt": "2026-07-17T08:21:57.407Z"
+}

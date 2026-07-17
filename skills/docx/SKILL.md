@@ -1,167 +1,80 @@
 ---
 name: docx
-description: Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', or requests to produce 
+description: Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files) or Word templates (.dotx files). Triggers include: any mention of 'Word doc', 'word document', 
 category: Document Processing
 source: anthropic
-tags: [python, javascript, pdf, docx, claude, ai, template, document, spreadsheet, image]
+tags: [python, pdf, docx, markdown, api, ai, template, document, spreadsheet, image]
 url: https://github.com/anthropics/skills/tree/main/skills/docx
 ---
 
 
 # DOCX creation, editing, and analysis
 
-## Overview
-
-A .docx file is a ZIP archive containing XML files.
-
-## Quick Reference
+A `.docx` is a ZIP archive of XML files. Choose your approach by task:
 
 | Task | Approach |
-|------|----------|
-| Read/analyze content | `pandoc` or unpack for raw XML |
-| Create new document | Use `docx-js` - see Creating New Documents below |
-| Edit existing document | Unpack → edit XML → repack - see Editing Existing Documents below |
+|---|---|
+| **Create** a new document | Write a `docx` (npm) script — see gotchas below |
+| **Edit** an existing document | `unzip` → edit `word/document.xml` → `zip` (docx-js cannot open existing files) |
+| **Read** content | `pandoc -t markdown file.docx` |
 
-### Converting .doc to .docx
+> Script paths below are relative to this skill's directory.
 
-Legacy `.doc` files must be converted before editing:
+## Creating with docx-js — gotchas
 
-```bash
-python scripts/office/soffice.py --headless --convert-to docx document.doc
-```
+`docx` is preinstalled — do not run `npm install` first; write the script and `require('docx')` directly. Only if that require fails: `npm install docx`. The model knows the API; these are the footguns:
 
-### Reading Content
+- **Page size defaults to A4.** For US Letter set `page: { size: { width: 12240, height: 15840 } }` (DXA; 1440 = 1″).
+- **Landscape:** pass portrait dimensions and `orientation: PageOrientation.LANDSCAPE` — docx-js swaps width/height internally.
+- **Tables need dual widths:** set `columnWidths` on the table AND `width` on every cell, both in `WidthType.DXA` (PERCENTAGE breaks in Google Docs). Column widths must sum to the table width.
+- **Table shading:** use `ShadingType.CLEAR`, never `SOLID` (renders black).
+- **Lists:** never insert `•` literally; use a `numbering` config with `LevelFormat.BULLET`.
+- **`ImageRun` requires `type:`** (`"png"`, `"jpg"`, …).
+- **`PageBreak` must be inside a `Paragraph`.**
+- **Never use `\n`** — use separate `Paragraph` elements.
+- **TOC:** headings must use built-in `HeadingLevel.*`; custom heading styles need `outlineLevel` set or they won't appear.
+- **Don't use a table as a horizontal rule** — use a paragraph bottom border instead.
+- **Dot-leader / right-aligned-on-same-line:** use `PositionalTab` (`alignment: PositionalTabAlignment.RIGHT`, `leader: PositionalTabLeader.DOT`) inside a `TextRun`, not literal `.` or space padding.
 
-```bash
-# Text extraction with tracked changes
-pandoc --track-changes=all document.docx -o output.md
+## Verify the output
 
-# Raw XML access
-python scripts/office/unpack.py document.docx unpacked/
-```
-
-### Converting to Images
-
-```bash
-python scripts/office/soffice.py --headless --convert-to pdf document.docx
-pdftoppm -jpeg -r 150 document.pdf page
-```
-
-### Accepting Tracked Changes
-
-To produce a clean document with all tracked changes accepted (requires LibreOffice):
+After writing a `.docx`, render it and look at it:
 
 ```bash
-python scripts/accept_changes.py input.docx output.docx
+python scripts/office/soffice.py --headless --convert-to pdf output.docx
+pdftoppm -jpeg -r 100 output.pdf page
+ls page-*.jpg   # then Read the images
 ```
 
----
+`pdftoppm` zero-pads page numbers to the width of the page count (`page-01.jpg`…`page-12.jpg`).
 
-## Creating New Documents
+## Editing existing documents
 
-Generate .docx files with JavaScript, then validate. Install: `npm install -g docx`
+Legacy `.doc` files must be converted first: `python scripts/office/soffice.py --headless --convert-to docx file.doc`.
 
-### Setup
-```javascript
-const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, ImageRun,
-        Header, Footer, AlignmentType, PageOrientation, LevelFormat, ExternalHyperlink,
-        InternalHyperlink, Bookmark, FootnoteReferenceRun, PositionalTab,
-        PositionalTabAlignment, PositionalTabRelativeTo, PositionalTabLeader,
-        TabStopType, TabStopPosition, Column, SectionType,
-        TableOfContents, HeadingLevel, BorderStyle, WidthType, ShadingType,
-        VerticalAlign, PageNumber, PageBreak } = require('docx');
-
-const doc = new Document({ sections: [{ children: [/* content */] }] });
-Packer.toBuffer(doc).then(buffer => fs.writeFileSync("doc.docx", buffer));
-```
-
-### Validation
-After creating the file, validate it. If validation fails, unpack, fix the XML, and repack.
 ```bash
-python scripts/office/validate.py doc.docx
+unzip -q doc.docx -d unpacked/
+find unpacked -type l -delete   # strip symlink entries — docx from external parties is untrusted
+python scripts/merge_runs.py unpacked/   # coalesce fragmented runs so text is findable
+# edit unpacked/word/document.xml in place — do NOT reformat or pretty-print
+(cd unpacked && rm -f ../out.docx && zip -Xr ../out.docx .)
+python scripts/office/validate.py out.docx --original doc.docx   # XSD checks; --auto-repair fixes common issues
+# redlining? add --author "<the name you redlined under>" to check every edit is tracked
 ```
 
-### Page Size
+Word splits text across many `<w:r>` runs (revision ids, spell-check markers), so a phrase you can see in the document often doesn't exist as a contiguous string in the XML. `merge_runs.py` merges adjacent identically-formatted runs in `word/document.xml` without changing content or rendering; it also accepts a `.docx` directly (`python scripts/merge_runs.py doc.docx -o merged.docx`).
 
-```javascript
-// CRITICAL: docx-js defaults to A4, not US Letter
-// Always set page size explicitly for consistent results
-sections: [{
-  properties: {
-    page: {
-      size: {
-        width: 12240,   // 8.5 inches in DXA
-        height: 15840   // 11 inches in DXA
-      },
-      margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 } // 1 inch margins
-    }
-  },
-  children: [/* content */]
-}]
-```
+**Tracked changes:** when redlining, validate with `--author "<the name you redlined under>"` (needs `--original`) — it reports any text you changed without a `<w:ins>`/`<w:del>` around it, which is easy to do by accident and invisible in the accepted view. Wrap runs in `<w:ins>`/`<w:del>` with `w:id`, `w:author`, `w:date` attributes. Inside `<w:del>`, the text element is `<w:delText>`, not `<w:t>`. A deleted paragraph mark (`<w:pPr><w:rPr><w:del w:id=".." w:author=".." w:date=".."/></w:rPr></w:pPr>`) means "merge this paragraph into the next" — so deleting a paragraph outright is that plus a `<w:del>` around every run. The `<w:del/>` must come before the rPr's other children; their order is schema-enforced.
 
-**Common page sizes (DXA units, 1440 DXA = 1 inch):**
+To produce a clean copy with all tracked changes accepted: `python scripts/accept_changes.py in.docx out.docx`.
 
-| Paper | Width | Height | Content Width (1" margins) |
-|-------|-------|--------|---------------------------|
-| US Letter | 12,240 | 15,840 | 9,360 |
-| A4 (default) | 11,906 | 16,838 | 9,026 |
+Accepting a deleted paragraph mark should join that paragraph to the one below it, so a paragraph whose runs are *all* deleted vanishes. Word does this; `accept_changes.py` and `pandoc --track-changes=accept` don't always. Both fail the same way — they strip the deleted text but leave the emptied paragraph behind, which reads as a stray empty bullet when it was auto-numbered:
 
-**Landscape orientation:** docx-js swaps width/height internally, so pass portrait dimensions and let it handle the swap:
-```javascript
-size: {
-  width: 12240,   // Pass SHORT edge as width
-  height: 15840,  // Pass LONG edge as height
-  orientation: PageOrientation.LANDSCAPE  // docx-js swaps them in the XML
-},
-// Content width = 15840 - left margin - right margin (uses the long edge)
-```
+- `pandoc --track-changes=accept` never joins the paragraphs.
+- `accept_changes.py` (LibreOffice) joins them correctly, except when the deleted paragraph is followed by an empty spacer paragraph.
 
-### Styles (Override Built-in Headings)
+An empty bullet in either view is an artifact of that view, not a defect in the document. Check paragraph deletions in the XML.
 
-Use Arial as the default font (universally supported). Keep titles black for readability.
+## Comments
 
-```javascript
-const doc = new Document({
-  styles: {
-    default: { document: { run: { font: "Arial", size: 24 } } }, // 12pt default
-    paragraphStyles: [
-      // IMPORTANT: Use exact IDs to override built-in styles
-      { id: "Heading1", name: "Heading 1", basedOn: "Normal", next: "Normal", quickFormat: true,
-        run: { size: 32, bold: true, font: "Arial" },
-        paragraph: { spacing: { before: 240, after: 240 }, outlineLevel: 0 } }, // outlineLevel required for TOC
-      { id: "Heading2", name: "Heading 2", basedOn: "Normal", next: "Normal", quickFormat: true,
-        run: { size: 28, bold: true, font: "Arial" },
-        paragraph: { spacing: { before: 180, after: 180 }, outlineLevel: 1 } },
-    ]
-  },
-  sections: [{
-    children: [
-      new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun("Title")] }),
-    ]
-  }]
-});
-```
-
-### Lists (NEVER use unicode bullets)
-
-```javascript
-// ❌ WRONG - never manually insert bullet characters
-new Paragraph({ children: [new TextRun("• Item")] })  // BAD
-new Paragraph({ children: [new TextRun("\u2022 Item")] })  // BAD
-
-// ✅ CORRECT - use numbering config with LevelFormat.BULLET
-const doc = new Document({
-  numbering: {
-    config: [
-      { reference: "bullets",
-        levels: [{ level: 0, format: LevelFormat.BULLET, text: "•", alignment: AlignmentType.LEFT,
-          style: { paragraph: { indent: { left: 720, hanging: 360 } } } }] },
-      { reference: "numbers",
-        levels: [{ level: 0, format: LevelFormat.DECIMAL, text: "%1.", alignment: AlignmentType.LEFT,
-          style: { paragraph: { indent: { left: 720, hanging: 360 } } } }] },
-    ]
-  },
-  sections: [{
-    children: [
-      new Paragraph({ numberin
+Comments require six cross-linked files. Use the helper — directory mode when you'll also be editing `document.xml` (saves an u

@@ -1,78 +1,126 @@
 ---
 name: git-pr-workflows-git-workflow
-description: Orchestrate a comprehensive git workflow from code review through PR creation, leveraging specialized agents for quality assurance, testing, and deployment readiness. This workflow implements modern g
-category: AI & Agents
+description: Orchestrate review, tests, commits, branch pushes, and pull-request creation with parallel agents. Use when completed changes must move through validation into a PR or guarded merge. 
+category: Document Processing
 source: antigravity
-tags: [markdown, api, ai, agent, llm, automation, workflow, template, design, document]
+tags: [api, ai, agent, workflow, document, security, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/git-pr-workflows-git-workflow
 ---
 
 
-# Complete Git Workflow with Multi-Agent Orchestration
+# Guarded Git Pull Request Workflow
 
-Orchestrate a comprehensive git workflow from code review through PR creation, leveraging specialized agents for quality assurance, testing, and deployment readiness. This workflow implements modern git best practices including Conventional Commits, automated testing, and structured PR creation.
+Move completed changes from local review to a verified pull request without bypassing repository policy or branch protection.
 
-[Extended thinking: This workflow coordinates multiple specialized agents to ensure code quality before commits are made. The code-reviewer agent performs initial quality checks, test-automator ensures all tests pass, and deployment-engineer verifies production readiness. By orchestrating these agents sequentially with context passing, we prevent broken code from entering the repository while maintaining high velocity. The workflow supports both trunk-based and feature-branch strategies with configurable options for different team needs.]
+## When to Use
 
-## Use this skill when
+Use for completed implementation work that must be reviewed, tested, committed, pushed to a topic branch, and opened as a pull request. Use the repository's dedicated maintainer or release workflow instead when one is mandatory.
 
-- Working on complete git workflow with multi-agent orchestration tasks or workflows
-- Needing guidance, best practices, or checklists for complete git workflow with multi-agent orchestration
+## Policy Gate
 
-## Do not use this skill when
+Before mutation:
 
-- The task is unrelated to complete git workflow with multi-agent orchestration
-- You need a different domain or tool outside this scope
+1. Read `AGENTS.md`, contribution guidance, maintainer docs, and relevant nested instructions.
+2. Inspect the current branch, worktree, remotes, upstream, and effective target-branch protection.
+3. Discover repository-native validation, commit, PR, merge, and release commands.
+4. Preserve unrelated dirty and staged files.
 
-## Instructions
+Repository policy wins over flags and user shorthand. Trunk-based development does not imply a direct push: when the target is protected, use a short-lived branch and pull request. If a repository defines a mandatory maintainer skill or guarded merge command, hand off merge and release actions to it. In `agentic-awesome-skills`, use `antigravity-maintainer-batch-release` and `npm run merge:batch`.
 
-- Clarify goals, constraints, and required inputs.
-- Apply relevant best practices and validate outcomes.
-- Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
+## Inputs
 
-## Configuration
+Resolve these from the request and repository:
 
-**Target branch**: $ARGUMENTS (defaults to 'main' if not specified)
+- target branch, defaulting to the repository default branch;
+- intended changed files and excluded user work;
+- required test, lint, security, build, and documentation checks;
+- branch naming and commit-message conventions;
+- draft or ready-for-review PR state;
+- required reviewers, labels, issue links, and merge method.
 
-**Supported flags**:
-- `--skip-tests`: Skip automated test execution (use with caution)
-- `--draft-pr`: Create PR as draft for work-in-progress
-- `--no-push`: Perform all checks but don't push to remote
-- `--squash`: Squash commits before pushing
-- `--conventional`: Enforce Conventional Commits format strictly
-- `--trunk-based`: Use trunk-based development workflow
-- `--feature-branch`: Use feature branch workflow (default)
+Ask only when a missing choice changes the result materially.
 
-## Phase 1: Pre-Commit Review and Analysis
+## Workflow
 
-### 1. Code Quality Assessment
-- Use Task tool with subagent_type="code-reviewer"
-- Prompt: "Review all uncommitted changes for code quality issues. Check for: 1) Code style violations, 2) Security vulnerabilities, 3) Performance concerns, 4) Missing error handling, 5) Incomplete implementations. Generate a detailed report with severity levels (critical/high/medium/low) and provide specific line-by-line feedback. Output format: JSON with {issues: [], summary: {critical: 0, high: 0, medium: 0, low: 0}, recommendations: []}"
-- Expected output: Structured code review report for next phase
+### 1. Capture the exact change
 
-### 2. Dependency and Breaking Change Analysis
-- Use Task tool with subagent_type="code-reviewer"
-- Prompt: "Analyze the changes for: 1) New dependencies or version changes, 2) Breaking API changes, 3) Database schema modifications, 4) Configuration changes, 5) Backward compatibility issues. Context from previous review: [insert issues summary]. Identify any changes that require migration scripts or documentation updates."
-- Context from previous: Code quality issues that might indicate breaking changes
-- Expected output: Breaking change assessment and migration requirements
+```bash
+git status --short --branch
+git diff --stat
+git diff --cached --stat
+git branch --show-current
+git remote -v
+```
 
-## Phase 2: Testing and Validation
+Confirm every file in scope. Stop if staged or dirty files cannot be separated safely.
 
-### 1. Test Execution and Coverage
-- Use Task tool with subagent_type="unit-testing::test-automator"
-- Prompt: "Execute all test suites for the modified code. Run: 1) Unit tests, 2) Integration tests, 3) End-to-end tests if applicable. Generate coverage report and identify any untested code paths. Based on review issues: [insert critical/high issues], ensure tests cover the problem areas. Provide test results in format: {passed: [], failed: [], skipped: [], coverage: {statements: %, branches: %, functions: %, lines: %}, untested_critical_paths: []}"
-- Context from previous: Critical code review issues that need test coverage
-- Expected output: Complete test results and coverage metrics
+### 2. Review in parallel
 
-### 2. Test Recommendations and Gap Analysis
-- Use Task tool with subagent_type="unit-testing::test-automator"
-- Prompt: "Based on test results [insert summary] and code changes, identify: 1) Missing test scenarios, 2) Edge cases not covered, 3) Integration points needing verification, 4) Performance benchmarks needed. Generate test implementation recommendations prioritized by risk. Consider the breaking changes identified: [insert breaking changes]."
-- Context from previous: Test results, breaking changes, untested paths
-- Expected output: Prioritized list of additional tests needed
+When subagents are available and authorized, assign independent bounded passes for:
 
-## Phase 3: Commit Message Generation
+- correctness and regression risk;
+- security, secrets, permissions, and dependency risk;
+- test coverage and repository-policy compliance.
 
-### 1. Change Analysis and Categorization
-- Use Task tool with subagent_type="code-reviewer"
-- Prompt: "Analyze all changes and categorize them according to Conventional Commits specification. Identify the primary change type (feat/fix/docs/style/refactor/perf/test/build/ci/chore/revert) and scope. For changes: [insert file list and summary], determine if thi
+Give each reviewer the raw diff and repository instructions. Keep the main agent responsible for deduplication, severity, edits, and final verification.
+
+### 3. Validate and repair
+
+Run the repository's targeted checks, then its required pre-PR suite. If a check fails:
+
+1. identify whether the cause is source, policy, environment, or infrastructure;
+2. fix only source or policy defects in scope;
+3. rerun the targeted failure;
+4. rerun the complete required suite.
+
+Do not weaken gates, hide skipped tests, or treat deterministic failures as flaky.
+
+### 4. Prepare the branch and commit
+
+Fetch the target before committing. If currently on a protected/default branch, create a topic branch before mutation.
+
+```bash
+git fetch origin <target-branch>
+git switch -c <topic-branch> origin/<target-branch>
+git status --short --branch
+```
+
+Stage only intended paths and create focused conventional commits according to repository policy. Rebase or update the topic branch when strict required checks demand the latest target; never force a shared branch without explicit authorization.
+
+### 5. Push and create the pull request
+
+```bash
+git push -u origin <topic-branch>
+gh pr create --base <target-branch> --head <topic-branch> \
+  --title "<conventional title>" --body-file <body-file>
+```
+
+The PR body must truthfully include:
+
+- what changed and why;
+- tests and validation actually run;
+- risk, deployment, rollback, and breaking-change notes when applicable;
+- issue links, screenshots, and repository checklists when applicable.
+
+Never mark a pending automated review or test as completed.
+
+### 6. Verify the remote result
+
+```bash
+gh pr view <pr-number> --json headRefOid,baseRefOid,mergeable,mergeStateStatus,url
+gh pr checks <pr-number>
+```
+
+Bind review evidence to the current full head SHA. If the head or base changes, discard stale conclusions and rerun affected checks.
+
+Use the repository's guarded merge path. Do not replace required checks, merge queues, exact-SHA attestations, or maintainer commands with a raw merge API. After merge, fetch the target and verify the requested remote, CI, deployment, or release state.
+
+## Stop Condition
+
+Finish when the PR exists at the intended head, required checks are green or have one exact blocker, review evidence is current, unrelated user work is preserved, and any requested guarded merge or deployment is verified.
+
+## Limitations
+
+- This workflow cannot bypass branch protection, required reviews, repository permissions, or missing credentials.
+- It does not authorize destructive cleanup, force pushes, merges, deployments, or releases beyond the user's request and repository policy.
+- Keep unresolved environment or infrastructure failures explicit; do not convert them into source changes without evidence.
