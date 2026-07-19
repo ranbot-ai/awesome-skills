@@ -22,9 +22,8 @@ Master advanced Git techniques to maintain clean history, collaborate effectivel
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
-## Use this skill when
+## When to Use
 
 - Cleaning up commit history before merging
 - Applying specific commits across branches
@@ -241,4 +240,10 @@ git fetch origin
 git cherry-pick hotfix/critical-bug
 
 # Clean up when done
-git worktree remove ../myapp-hot
+git worktree remove ../myapp-hotfix
+```
+
+### Workflow 5: Recover from Mistakes
+
+```bash
+# Accidentally reset to wrong comm
