@@ -3,7 +3,7 @@ name: antigravity-maintainer-batch-release
 description: Run protected AAS maintainer sweeps, PR merge batches, canonical sync, Core preview checks, and scripted releases. Use for repository maintenance, main alignment, CLI/MCP/Workbench changes, or release
 category: Document Processing
 source: antigravity
-tags: [api, mcp, ai, agent, llm, automation, workflow, template, document, security]
+tags: [api, mcp, claude, ai, agent, llm, automation, workflow, template, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/antigravity-maintainer-batch-release
 ---
 

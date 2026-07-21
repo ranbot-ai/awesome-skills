@@ -2942,6 +2942,7 @@
     "tasks.",
     "api",
     "mcp",
+    "claude",
     "ai",
     "agent",
     "llm",
@@ -2949,7 +2950,6 @@
     "workflow",
     "template",
     "document",
-    "security",
     "processing"
   ],
   "antigravity-antigravity-skill-orchestrator": [
