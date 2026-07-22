@@ -43,8 +43,8 @@ Before changing anything:
 
 2. Validate changed skills truthfully.
    - Run `npm run validate`, `npm run validate:references`, `npm run security:docs`, changed-skill evidence, and the relevant tests.
-   - Inspect semantics, safety, provenance, declared risk, limitations, and all tracked bundle files directly. Treat inferred risk labels and heuristic quality scores as non-authoritative; do not change a skill merely to satisfy a lexical signal.
-   - Inspect the `skill-review` workflow on the exact current head SHA.
+   - Treat the entire tracked `skills/<skill-id>/**` subtree as skill content. Inspect semantics, safety, provenance, declared risk, limitations, and every bundled file directly, including nested examples, scripts, lockfiles, references, and assets. Never reduce evidence or review to `SKILL.md` or a fixed support-directory allowlist.
+   - Require changed-skill evidence to cover every Git record in each changed canonical skill subtree. Require the `skill-review` workflow for changes under `skills/**` or `plugins/**/skills/**`; its reusable result must be keyed by the complete nearest skill-directory fingerprint on the exact current head SHA.
    - `review` means Tessl semantic review actually ran or a valid identical-content result was reused.
    - `manual-review-required` means Tessl credentials or credits were unavailable, or Tessl did not produce a passing result. Perform the maintainer semantic review and attest with `--reviewed-head <full-40-character-sha>`.
    - Any non-passing Tessl outcome produces `manual-review-required`; complete the semantic review and bind the judgment to the exact head instead of treating a heuristic score as merge authority.
@@ -63,19 +63,8 @@ Before changing anything:
      ```
 
    - `merge:batch` may normalize the PR body and close/reopen the PR. GitHub creates the replacement workflow runs asynchronously; the command must wait for and approve only post-reopen workflow/check-suite IDs. Older runs on the same SHA cannot satisfy or fail the fresh gate.
+   - Same-repository location is not sufficient authority for sensitive changes. The guarded same-repository exception is limited to a PR authored by the repository owner and requires an exact full-head attestation; collaborator-authored sensitive PRs fail closed under the external safety policy.
    - The routine protected checks are `pr-policy`, `pr-evidence`, `source-validation`, and `artifact-preview`. The retired `aas-v1-baseline` workflow is not a merge prerequisite and must not be awaited or approved during source or canonical-sync batches.
    - If the PR head or base changes, discard stale evidence and rerun from a fresh `origin/main`.
 
-5. Converge canonical state once after the source batch.
-   - Wait for the protected `automation/canonical-repo-state` PR.
-   - Verify its managed-only diff, required checks, merge result, and the resulting `origin/main`.
-   - If an unmanaged repair remains, use a topic PR; never patch `main` directly.
-
-## Hosted Catalog and Legacy Redirect Bridge
-
-Treat the current catalog and the legacy user-site bridge as one public system:
-
-- Current catalog: `sickn33/agentic-awesome-skills` at `https://sickn33.github.io/agentic-awesome-skills/`.
-- Legacy bridge: `sickn33/sickn33.github.io` at `https://sickn33.github.io/antigravity-awesome-skills/`.
-
-For SEO, i
+5. Converge canonical state 

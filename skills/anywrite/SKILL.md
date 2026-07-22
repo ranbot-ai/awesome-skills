@@ -24,12 +24,14 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/anyw
 
 ### Step 1: Ensure Anytype desktop is running and authenticated
 
+This repository does not ship the `anywrite` executable. The user must install or build a reviewed upstream release outside the current workspace and provide its explicit absolute path. Before use, verify that path is an executable regular file, is not a symlink, and is not a workspace-relative `dist/` artifact. Never auto-discover or execute `./dist/anywrite` from the repository being worked on.
+
 The Anytype desktop app must be running locally (default `http://localhost:31009`). Authenticate once:
 
 ```bash
-./dist/anywrite auth --status        # shows configured yes/no and where the key came from
-./dist/anywrite auth                 # challenge flow — a 4-digit code appears in the app
-./dist/anywrite auth --code 1234     # non-interactive form of the same exchange
+"/absolute/path/to/anywrite" auth --status        # shows configured yes/no and where the key came from
+"/absolute/path/to/anywrite" auth                 # challenge flow — a 4-digit code appears in the app
+"/absolute/path/to/anywrite" auth --code 1234     # non-interactive form of the same exchange
 ```
 
 The key is written to `~/.anywrite/config.json` and is never printed by any command.
@@ -47,21 +49,21 @@ Resources: `spaces`, `objects`, `properties`, `tags`, `types`, `templates`, `lis
 ### Example 1: Create and update an object
 
 ```bash
-./dist/anywrite objects create <space> --type task --name "Buy milk"
-./dist/anywrite objects update <space> <object_id> --status "Done"
+"/absolute/path/to/anywrite" objects create <space> --type task --name "Buy milk"
+"/absolute/path/to/anywrite" objects update <space> <object_id> --status "Done"
 ```
 
 ### Example 2: Search and upload a file
 
 ```bash
-./dist/anywrite search global --query "task" --types task
-./dist/anywrite files upload <space> --file ./image.png
+"/absolute/path/to/anywrite" search global --query "task" --types task
+"/absolute/path/to/anywrite" files upload <space> --file ./image.png
 ```
 
 ### Example 3: Read chat messages
 
 ```bash
-./dist/anywrite chat messages <space> <chat_id> --all
+"/absolute/path/to/anywrite" chat messages <space> <chat_id> --all
 ```
 
 ## Best Practices
