@@ -53,18 +53,14 @@ Before changing anything:
 3. Run checks in parallel where independent.
    - Use the repository validation, test, docs-security, source-credit, reference, warning-budget, and targeted app checks required by the changed files.
    - Fix deterministic policy failures in the source; do not wait for them as if they were flaky CI.
+   - Treat `pr-policy` fork classification from the exact protected-base implementation as an unprivileged fail-fast gate before dependent work, never as approval authority. `merge:batch` must still recompute the current trusted decision before approving any fork run or merging.
+   - Treat `impact_profile` as shadow-only telemetry. It must not skip, downgrade, or satisfy any required check.
+   - For ordinary source PRs, require `source-validation` to generate preview state once and `artifact-preview` to verify the manifest bound to the exact head and run identity. For canonical-sync PRs, rely on `pr-policy` exact-tree reproduction, keep `source-validation` lightweight, require `artifact-preview` to confirm no drift, and retain final CI and CodeQL on the merged `main` commit.
+   - Keep timing observational and test sharding opt-in. Required CI must continue to run the full unsharded `npm run test`; deterministic local shards may be used only through `npm run test:local -- --shard-index N --shard-count M`.
 
 4. Merge accepted source PRs in conflict-aware order.
    - Run a dry classification first when useful.
    - For changed skill content, review the exact head and run:
 
      ```bash
-     npm run merge:batch -- --prs <PR_LIST> --reviewed-head <FULL_HEAD_SHA>
-     ```
-
-   - `merge:batch` may normalize the PR body and close/reopen the PR. GitHub creates the replacement workflow runs asynchronously; the command must wait for and approve only post-reopen workflow/check-suite IDs. Older runs on the same SHA cannot satisfy or fail the fresh gate.
-   - Same-repository location is not sufficient authority for sensitive changes. The guarded same-repository exception is limited to a PR authored by the repository owner and requires an exact full-head attestation; collaborator-authored sensitive PRs fail closed under the external safety policy.
-   - The routine protected checks are `pr-policy`, `pr-evidence`, `source-validation`, and `artifact-preview`. The retired `aas-v1-baseline` workflow is not a merge prerequisite and must not be awaited or approved during source or canonical-sync batches.
-   - If the PR head or base changes, discard stale evidence and rerun from a fresh `origin/main`.
-
-5. Converge canonical state 
+     npm run merge:batch
