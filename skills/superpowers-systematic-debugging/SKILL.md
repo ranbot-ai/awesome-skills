@@ -12,8 +12,6 @@ url: https://github.com/obra/superpowers/tree/main/skills/systematic-debugging
 
 ## Overview
 
-Random fixes waste time and create new bugs. Quick patches mask underlying issues.
-
 **Core principle:** ALWAYS find root cause before attempting fixes. Symptom fixes are failure.
 
 **Violating the letter of this process is violating the spirit of debugging.**
@@ -186,4 +184,9 @@ You MUST complete each phase before proceeding to the next.
 2. **Implement Single Fix**
    - Address the root cause identified
    - ONE change at a time
-   - No "while I'm here" improvemen
+   - No "while I'm here" improvements
+   - No bundled refactoring
+
+3. **Verify Fix**
+   - Test passes now?
+   - No othe
