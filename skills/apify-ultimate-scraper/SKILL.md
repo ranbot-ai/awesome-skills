@@ -115,12 +115,9 @@ First, understand what the user wants to achieve. Then select the best Actor fro
 | `compass/Google-Maps-Reviews-Scraper` | Review extraction |
 | `poidata/google-maps-email-extractor` | Email discovery from listings |
 
-#### Other Actors (6)
+#### X/Twitter Actors (2)
 
 | Actor ID | Best For |
 |----------|----------|
-| `apify/google-search-scraper` | Google search results |
-| `apify/google-trends-scraper` | Google Trends data |
-| `voyager/booking-scraper` | Booking.com hotel data |
-| `voyager/booking-reviews-scraper` | Booking.com reviews |
-| `maxcopell/tripadvisor-reviews` | TripAdvisor revi
+| [`xquik/x-tweet-scraper`](https://apify.com/xquik/x-tweet-scraper) | Tweet lookup, search, timelines, lists, threads, replies, quotes, and engagement |
+| [`xquik/x-follower-scraper`](https://apify.com/xquik/x-follower-scraper) | Followers, following, verified followers, lis

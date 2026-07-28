@@ -505,48 +505,6 @@
       "scrapedAt": "2026-03-22T06:59:57.456Z"
     },
     {
-      "id": "openhands-add-agent",
-      "name": "add_agent",
-      "slug": "add-agent",
-      "description": "This agent helps create new microagents in the `.openhands/microagents` directory by providing guidance and templates.",
-      "category": "AI & Agents",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/add_agent.md",
-      "content": "\nThis agent helps create new microagents in the `.openhands/microagents` directory by providing guidance and templates.\n\nMicroagents are specialized prompts that provide context and capabilities for specific domains or tasks. They are activated by trigger words in the conversation and help the AI assistant understand what capabilities are available, how to use specific APIs or tools, what limitations exist, and how to handle common scenarios.\n\nWhen creating a new microagent:\n\n- Create a markdown file in `.openhands/microagents/` with an appropriate name (e.g., `github.md`, `google_workspace.md`)\n- Include YAML frontmatter with metadata (name, type, version, agent, triggers)\n- type is by DEFAULT knowledge\n- version is DEFAULT 1.0.0\n- agent is by DEFAULT CodeActAgent\n- Document any credentials, environment variables, or API access needed\n- Keep trigger words specific to avoid false activations\n- Include error handling guidance and limitations\n- Provide clear usage examples\n- Keep the prompt focused and concise\n\nFor detailed information, see:\n\n- [Microagents Overview](https://docs.OpenHands.dev/usage/prompting/microagents-overview)\n- [Example GitHub Skill](https://github.com/OpenHands/OpenHands/blob/main/skills/github.md)\n",
-      "tags": [
-        "git",
-        "github",
-        "pr",
-        "agent",
-        "tool",
-        "api"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:26.050Z"
-    },
-    {
-      "id": "openhands-add-repo-inst",
-      "name": "add_repo_inst",
-      "slug": "add-repo-inst",
-      "description": "Please browse the current repository under /workspace/{{ REPO_FOLDER_NAME }}, look at the documentation and relevant code, and understand the purpose of this repository.",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/add_repo_inst.md",
-      "content": "\nPlease browse the current repository under /workspace/{{ REPO_FOLDER_NAME }}, look at the documentation and relevant code, and understand the purpose of this repository.\n\nSpecifically, I want you to create a `.openhands/microagents/repo.md`  file. This file should contain succinct information that summarizes (1) the purpose of this repository, (2) the general setup of this repo, and (3) a brief description of the structure of this repo.\n\nHere's an example:\n```markdown\n---\nname: repo\ntype: repo\nagent: CodeActAgent\n---\n\nThis repository contains the code for OpenHands, an automated AI software engineer. It has a Python backend\n(in the `openhands` directory) and React frontend (in the `frontend` directory).\n\n## General Setup:\nTo set up the entire repo, including frontend and backend, run `make build`.\nYou don't need to do this unless the user asks you to, or if you're trying to run the entire application.\n\nBefore pushing any changes, you should ensure that any lint errors or simple test errors have been fixed.\n\n* If you've made changes to the backend, you should run `pre-commit run --all-files --config ./dev_config/python/.pre-commit-config.yaml`\n* If you've made changes to the frontend, you should run `cd frontend && npm run lint:fix && npm run build ; cd ..`\n\nIf either command fails, it may have automatically fixed some issues. You should fix any issues that weren't automatically fixed,\nthen re-run the command to ensure it passes.\n\n## Repository Structure\nBackend:\n- Located in the `openhands` directory\n- Testing:\n  - All tests are in `tests/unit/test_*.py`\n  - To test new code, run `poetry run pytest tests/unit/test_xxx.py` where `xxx` is the appropriate file for the current functionality\n  - Write all tests with pytest\n\nFrontend:\n- Located in the `frontend` directory\n- Prerequisites: A recent version of NodeJS / NPM\n- Setup: Run `npm install` in the frontend directory\n- Testing:\n  - Run tests: `npm run test`\n  - To run specific tests: `npm run test -- -t \"TestName\"`\n- Building:\n  - Build for production: `npm run build`\n- Environment Variables:\n  - Set in `frontend/.env` or as environment variables\n  - Available variables: VITE_BACKEND_HOST, VITE_USE_TLS, VITE_INSECURE_SKIP_VERIFY, VITE_FRONTEND_PORT\n- Internationalization:\n  - Generate i18n declaration file: `npm run make-i18n`\n```\n\nNow, please write a similar markdown for the current repository.\nRead all the GitHub workflows under .github/ of the repository (if this folder exists) to understand the CI checks (e.g., linter, pre-commit), and include those in the repo.md file.\n",
-      "tags": [
-        "git",
-        "github",
-        "python",
-        "testing",
-        "pr",
-        "agent"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:26.335Z"
-    },
-    {
       "id": "antigravity-add-app-clip",
       "name": "add-app-clip",
       "slug": "add-app-clip",
@@ -570,26 +528,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-07-02T09:22:56.034Z"
-    },
-    {
-      "id": "openhands-address-pr-comments",
-      "name": "address_pr_comments",
-      "slug": "address-pr-comments",
-      "description": "First, check the branch {{ BRANCH_NAME }} and read the diff against the main branch to understand the purpose.",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/address_pr_comments.md",
-      "content": "\nFirst, check the branch {{ BRANCH_NAME }} and read the diff against the main branch to understand the purpose.\n\nThis branch corresponds to this PR {{ PR_URL }}\n\nNext, you should use the GitHub API to read the reviews and comments on this PR and address them.\n",
-      "tags": [
-        "git",
-        "github",
-        "pr",
-        "agent",
-        "api"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:26.627Z"
     },
     {
       "id": "antigravity-address-github-comments",
@@ -750,28 +688,6 @@
         "**CI/CD Quality Gating:** Blocking non-compliant merges via GitHub Actions."
       ],
       "scrapedAt": "2026-03-25T07:11:21.114Z"
-    },
-    {
-      "id": "openhands-agent-builder",
-      "name": "agent_sdk_builder",
-      "slug": "agent-builder",
-      "description": "You are an expert requirements gatherer and agent builder. You must progressively interview the user to understand what type of agent they are looking to build. You should ask one question at a time when interviewing to avoid overwhelming the user.",
-      "category": "AI & Agents",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/agent-builder.md",
-      "content": "\n# Agent Builder and Interviewer Role\n\nYou are an expert requirements gatherer and agent builder. You must progressively interview the user to understand what type of agent they are looking to build. You should ask one question at a time when interviewing to avoid overwhelming the user.\n\nPlease refer to the user's initial promot: {INITIAL_PROMPT}\n\nIf {INITIAL_PROMPT} is blank, your first interview question should be: \"Please provide a brief description of the type of agent you are looking to build.\"\n\n# Understanding the OpenHands Software Agent SDK\nAt the end of the interview, respond with a summary of the requirements. Then, proceed to thoroughly understand how the OpenHands Software Agent SDK works, it's various APIs, and examples. To do this:\n- First, research the OpenHands documentation which includes references to the Software Agent SDK: https://docs.openhands.dev/llms.txt\n- Then, clone the examples into a temporary workspace folder (under \"temp/\"): https://github.com/OpenHands/software-agent-sdk/tree/main/examples/01_standalone_sdk\n- Then, clone the SDK docs into the same temporary workspace folder: https://github.com/OpenHands/docs/tree/main/sdk\n\nAfter analyzing the OpenHands Agent SDK, you may optionally ask additional clarifying questions in case it's important for the technical design of the agent.\n\n# Generating the SDK Plan\nYou can then proceed to build a technical implementation plan based on the user requirements and your understanding of how the OpenHands Agent SDK works.\n- The plan should be stored in \"plan/SDK_PLAN.md\" from the root of the workspace.\n- A visual representation of how the agent should work based on the SDK_PLAN.md. This should look like a flow diagram with nodes and edges. This should be generated using Javascript, HTML, and CSS and then be rendered using the built-in web server. Store this in the plan/ directory.\n\n# Implementing the Plan\nAfter the plan is generated, please ask the user if they are ready to generate the SDK implementation. When they approve, please make sure the code is stored in the \"output/\" directory. Make sure the code provides logging that a user can see in the terminal. Ideally, the SDK is a single python file.\n\nAdditional guidelines:\n- Users can configure their LLM API Key using an environment variable named \"LLM_API_KEY\"\n- Unless otherwise specified, default to this model: openhands/claude-sonnet-4-20250514. This is configurable through the LLM_BASE_MODEL environment variable.\n",
-      "tags": [
-        "git",
-        "github",
-        "python",
-        "javascript",
-        "pr",
-        "agent",
-        "api"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:26.996Z"
     },
     {
       "id": "antigravity-agent-creator",
@@ -2540,7 +2456,7 @@
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/antigravity-maintainer-batch-release",
-      "content": "\n# Antigravity Maintainer Batch Release\n\n## When to Use\n\nUse this skill for repository-wide AAS maintenance, maintainer-side PR repair or merge batches, canonical synchronization, AAS Core or Workbench changes, protected releases, and hosted catalog or legacy redirect infrastructure. Do not use it for ordinary contribution work that does not require maintainer privileges or canonical convergence.\n\n## Protected-Main Contract\n\nTreat the repository root containing this skill as pull-request-only:\n\n- Read `AGENTS.md`, `.github/MAINTENANCE.md`, and current maintainer docs before mutation.\n- Never commit or push directly to `main`, even when the user says “push to main.” That phrase names the final target state.\n- Preserve unrelated dirty work. Use a clean temporary clone or a topic branch for maintainer changes.\n- Use `npm run merge:batch` for accepted source PRs. Do not substitute a raw merge API, generic GitHub skill, or generic push helper.\n- Let `automation/canonical-repo-state` own generated artifacts and contributor-credit convergence after the source batch.\n- Use `release:prepare` and `release:publish` for releases. They never authorize a direct `main` push.\n\n## Source Checks\n\nBefore changing anything:\n\n1. Fetch `origin/main`; prove the clean maintainer checkout is on `main` and equals `origin/main`.\n2. Inspect live PRs, issues, discussions in scope, Actions failures, Dependabot, CodeQL, secret scanning, and `npm audit` where relevant.\n3. Confirm current scripts from `package.json`; do not rely on remembered release behavior.\n4. Capture user worktree status separately and keep those files out of maintainer commits.\n\n## Maintainer Sweep\n\n1. Triage every open PR before editing.\n   - Separate valid source changes, repairable PRs, conflicts, generated-only noise, promotional links, and unsupported ownership/license changes.\n   - Review semantics, safety, provenance, risk labels, limitations, source credits, and changed-skill evidence.\n   - Prefer narrow maintainer repairs on the contributor branch when maintainer edits are enabled.\n\n2. Validate changed skills truthfully.\n   - Run `npm run validate`, `npm run validate:references`, `npm run security:docs`, changed-skill evidence, and the relevant tests.\n   - Treat the entire tracked `skills/<skill-id>/**` subtree as skill content. Inspect semantics, safety, provenance, declared risk, limitations, and every bundled file directly, including nested examples, scripts, lockfiles, references, and assets. Never reduce evidence or review to `SKILL.md` or a fixed support-directory allowlist.\n   - Require changed-skill evidence to cover every Git record in each changed canonical skill subtree. Require the `skill-review` workflow for changes under `skills/**` or `plugins/**/skills/**`; its reusable result must be keyed by the complete nearest skill-directory fingerprint on the exact current head SHA.\n   - `review` means Tessl semantic review actually ran or a valid identical-content result was reused.\n   - `manual-review-required` means Tessl credentials or credits were unavailable, or Tessl did not produce a passing result. Perform the maintainer semantic review and attest with `--reviewed-head <full-40-character-sha>`.\n   - Any non-passing Tessl outcome produces `manual-review-required`; complete the semantic review and bind the judgment to the exact head instead of treating a heuristic score as merge authority.\n   - Never report `manual-review-required` as “Tessl passed.”\n\n3. Run checks in parallel where independent.\n   - Use the repository validation, test, docs-security, source-credit, reference, warning-budget, and targeted app checks required by the changed files.\n   - Fix deterministic policy failures in the source; do not wait for them as if they were flaky CI.\n   - Treat `pr-policy` fork classification from the exact protected-base implementation as an unprivileged fail-fast gate before dependent work, never as approval authority. `merge:batch` must still recompute the current trusted decision before approving any fork run or merging.\n   - Treat `impact_profile` as shadow-only telemetry. It must not skip, downgrade, or satisfy any required check.\n   - For ordinary source PRs, require `source-validation` to generate preview state once and `artifact-preview` to verify the manifest bound to the exact head and run identity. For canonical-sync PRs, rely on `pr-policy` exact-tree reproduction, keep `source-validation` lightweight, require `artifact-preview` to confirm no drift, and retain final CI and CodeQL on the merged `main` commit.\n   - Keep timing observational and test sharding opt-in. Required CI must continue to run the full unsharded `npm run test`; deterministic local shards may be used only through `npm run test:local -- --shard-index N --shard-count M`.\n\n4. Merge accepted source PRs in conflict-aware order.\n   - Run a dry classification first when useful.\n   - For changed skill content, review the exact head and run:\n\n     ```bash\n     npm run merge:batch",
+      "content": "\n# Antigravity Maintainer Batch Release\n\n## When to Use\n\nUse this skill for repository-wide AAS maintenance, maintainer-side PR repair or merge batches, canonical synchronization, AAS Core or Workbench changes, protected releases, and hosted catalog or legacy redirect infrastructure. Do not use it for ordinary contribution work that does not require maintainer privileges or canonical convergence.\n\n## Protected-Main Contract\n\nTreat the repository root containing this skill as pull-request-only:\n\n- Read `AGENTS.md`, `.github/MAINTENANCE.md`, and current maintainer docs before mutation.\n- Never commit or push directly to `main`, even when the user says “push to main.” That phrase names the final target state.\n- Preserve unrelated dirty work. Use a clean temporary clone or a topic branch for maintainer changes.\n- Use `npm run merge:batch` for accepted source PRs. Do not substitute a raw merge API, generic GitHub skill, or generic push helper.\n- Let `automation/canonical-repo-state` own generated artifacts and contributor-credit convergence after the source batch.\n- Use `release:prepare` and `release:publish` for releases. They never authorize a direct `main` push.\n\n## Source Checks\n\nBefore changing anything:\n\n1. Fetch `origin/main`; prove the clean maintainer checkout is on `main` and equals `origin/main`.\n2. Inspect live PRs, issues, discussions in scope, Actions failures, Dependabot, CodeQL, secret scanning, and `npm audit` where relevant.\n3. Confirm current scripts from `package.json`; do not rely on remembered release behavior.\n4. Capture user worktree status separately and keep those files out of maintainer commits.\n\n## Maintainer Sweep\n\n1. Triage every open PR before editing.\n   - Separate valid source changes, repairable PRs, conflicts, generated-only noise, promotional links, and unsupported ownership/license changes.\n   - Review semantics, safety, provenance, risk labels, limitations, source credits, and changed-skill evidence.\n   - Prefer narrow maintainer repairs on the contributor branch when maintainer edits are enabled.\n\n2. Validate changed skills truthfully.\n   - Run `npm run validate`, `npm run validate:references`, `npm run security:docs`, changed-skill evidence, and the relevant tests.\n   - Treat the entire tracked `skills/<skill-id>/**` subtree as skill content. Inspect semantics, safety, provenance, declared risk, limitations, and every bundled file directly, including nested examples, scripts, lockfiles, references, and assets. Never reduce evidence or review to `SKILL.md` or a fixed support-directory allowlist.\n   - Require changed-skill evidence to cover every Git record in each changed canonical skill subtree. Require the `skill-review` workflow for changes under `skills/**` or `plugins/**/skills/**`; its reusable result must be keyed by the complete nearest skill-directory fingerprint on the exact current head SHA.\n   - `review` means Tessl semantic review actually ran or a valid identical-content result was reused.\n   - `manual-review-required` means Tessl credentials or credits were unavailable, or Tessl did not produce a passing result. Perform the maintainer semantic review and attest with `--reviewed-head <full-40-character-sha>`.\n   - Any non-passing Tessl outcome produces `manual-review-required`; complete the semantic review and bind the judgment to the exact head instead of treating a heuristic score as merge authority.\n   - Never report `manual-review-required` as “Tessl passed.”\n   - A verified upstream repository rename may bypass the provenance-identity blocker only through an exact entry in the trusted protected-base exception ledger. Record the skill ID, old and new `source_repo`, stable upstream repository ID, verification date, and canonical GitHub URL; all other provenance changes remain blocked.\n\n3. Run checks in parallel where independent.\n   - Use the repository validation, test, docs-security, source-credit, reference, warning-budget, and targeted app checks required by the changed files.\n   - Fix deterministic policy failures in the source; do not wait for them as if they were flaky CI.\n   - Treat `pr-policy` fork classification from the exact protected-base implementation as an unprivileged fail-fast gate before dependent work, never as approval authority. `merge:batch` must still recompute the current trusted decision before approving any fork run or merging.\n   - Treat `impact_profile` as shadow-only telemetry. It must not skip, downgrade, or satisfy any required check.\n   - For ordinary source PRs, require `source-validation` to generate preview state once and `artifact-preview` to verify the manifest bound to the exact head and run identity. For canonical-sync PRs, rely on `pr-policy` exact-tree reproduction, keep `source-validation` lightweight, require `artifact-preview` to confirm no drift, and retain final CI and CodeQL on the merged `main` commit.\n   - Keep timing observational and test sharding opt-in. Required CI must continue to run the full unsharded",
       "tags": [
         "api",
         "mcp",
@@ -3379,7 +3295,7 @@
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apify-ultimate-scraper",
-      "content": "\n# Universal Web Scraper\n\nAI-driven data extraction from 55+ Actors across all major platforms. This skill automatically selects the best Actor for your task.\n\n## When to Use\n- The user needs web data extraction but has not yet chosen a specific Apify Actor.\n- You need a general-purpose Apify entry point that maps a broad scraping goal to the most suitable Actor.\n- The task spans multiple platforms and benefits from one unified workflow for actor selection, execution, and summarization.\n\n## Prerequisites\n(No need to check it upfront)\n\n- `.env` file with `APIFY_TOKEN`\n- Node.js 20.6+ (for native `--env-file` support)\n- `mcpc` CLI tool: `npm install -g @apify/mcpc`\n\n## Workflow\n\nCopy this checklist and track progress:\n\n```\nTask Progress:\n- [ ] Step 1: Understand user goal and select Actor\n- [ ] Step 2: Fetch Actor schema via mcpc\n- [ ] Step 3: Ask user preferences (format, filename)\n- [ ] Step 4: Run the scraper script\n- [ ] Step 5: Summarize results and offer follow-ups\n```\n\n### Step 1: Understand User Goal and Select Actor\n\nFirst, understand what the user wants to achieve. Then select the best Actor from the options below.\n\n#### Instagram Actors (12)\n\n| Actor ID | Best For |\n|----------|----------|\n| `apify/instagram-profile-scraper` | Profile data, follower counts, bio info |\n| `apify/instagram-post-scraper` | Individual post details, engagement metrics |\n| `apify/instagram-comment-scraper` | Comment extraction, sentiment analysis |\n| `apify/instagram-hashtag-scraper` | Hashtag content, trending topics |\n| `apify/instagram-hashtag-stats` | Hashtag performance metrics |\n| `apify/instagram-reel-scraper` | Reels content and metrics |\n| `apify/instagram-search-scraper` | Search users, places, hashtags |\n| `apify/instagram-tagged-scraper` | Posts tagged with specific accounts |\n| `apify/instagram-followers-count-scraper` | Follower count tracking |\n| `apify/instagram-scraper` | Comprehensive Instagram data |\n| `apify/instagram-api-scraper` | API-based Instagram access |\n| `apify/export-instagram-comments-posts` | Bulk comment/post export |\n\n#### Facebook Actors (14)\n\n| Actor ID | Best For |\n|----------|----------|\n| `apify/facebook-pages-scraper` | Page data, metrics, contact info |\n| `apify/facebook-page-contact-information` | Emails, phones, addresses from pages |\n| `apify/facebook-posts-scraper` | Post content and engagement |\n| `apify/facebook-comments-scraper` | Comment extraction |\n| `apify/facebook-likes-scraper` | Reaction analysis |\n| `apify/facebook-reviews-scraper` | Page reviews |\n| `apify/facebook-groups-scraper` | Group content and members |\n| `apify/facebook-events-scraper` | Event data |\n| `apify/facebook-ads-scraper` | Ad creative and targeting |\n| `apify/facebook-search-scraper` | Search results |\n| `apify/facebook-reels-scraper` | Reels content |\n| `apify/facebook-photos-scraper` | Photo extraction |\n| `apify/facebook-marketplace-scraper` | Marketplace listings |\n| `apify/facebook-followers-following-scraper` | Follower/following lists |\n\n#### TikTok Actors (14)\n\n| Actor ID | Best For |\n|----------|----------|\n| `clockworks/tiktok-scraper` | Comprehensive TikTok data |\n| `clockworks/free-tiktok-scraper` | Free TikTok extraction |\n| `clockworks/tiktok-profile-scraper` | Profile data |\n| `clockworks/tiktok-video-scraper` | Video details and metrics |\n| `clockworks/tiktok-comments-scraper` | Comment extraction |\n| `clockworks/tiktok-followers-scraper` | Follower lists |\n| `clockworks/tiktok-user-search-scraper` | Find users by keywords |\n| `clockworks/tiktok-hashtag-scraper` | Hashtag content |\n| `clockworks/tiktok-sound-scraper` | Trending sounds |\n| `clockworks/tiktok-ads-scraper` | Ad content |\n| `clockworks/tiktok-discover-scraper` | Discover page content |\n| `clockworks/tiktok-explore-scraper` | Explore content |\n| `clockworks/tiktok-trends-scraper` | Trending content |\n| `clockworks/tiktok-live-scraper` | Live stream data |\n\n#### YouTube Actors (5)\n\n| Actor ID | Best For |\n|----------|----------|\n| `streamers/youtube-scraper` | Video data and metrics |\n| `streamers/youtube-channel-scraper` | Channel information |\n| `streamers/youtube-comments-scraper` | Comment extraction |\n| `streamers/youtube-shorts-scraper` | Shorts content |\n| `streamers/youtube-video-scraper-by-hashtag` | Videos by hashtag |\n\n#### Google Maps Actors (4)\n\n| Actor ID | Best For |\n|----------|----------|\n| `compass/crawler-google-places` | Business listings, ratings, contact info |\n| `compass/google-maps-extractor` | Detailed business data |\n| `compass/Google-Maps-Reviews-Scraper` | Review extraction |\n| `poidata/google-maps-email-extractor` | Email discovery from listings |\n\n#### Other Actors (6)\n\n| Actor ID | Best For |\n|----------|----------|\n| `apify/google-search-scraper` | Google search results |\n| `apify/google-trends-scraper` | Google Trends data |\n| `voyager/booking-scraper` | Booking.com hotel data |\n| `voyager/booking-reviews-scraper` | Booking.com reviews |\n| `maxcopell/tripadvisor-reviews` | TripAdvisor revi",
+      "content": "\n# Universal Web Scraper\n\nAI-driven data extraction from 55+ Actors across all major platforms. This skill automatically selects the best Actor for your task.\n\n## When to Use\n- The user needs web data extraction but has not yet chosen a specific Apify Actor.\n- You need a general-purpose Apify entry point that maps a broad scraping goal to the most suitable Actor.\n- The task spans multiple platforms and benefits from one unified workflow for actor selection, execution, and summarization.\n\n## Prerequisites\n(No need to check it upfront)\n\n- `.env` file with `APIFY_TOKEN`\n- Node.js 20.6+ (for native `--env-file` support)\n- `mcpc` CLI tool: `npm install -g @apify/mcpc`\n\n## Workflow\n\nCopy this checklist and track progress:\n\n```\nTask Progress:\n- [ ] Step 1: Understand user goal and select Actor\n- [ ] Step 2: Fetch Actor schema via mcpc\n- [ ] Step 3: Ask user preferences (format, filename)\n- [ ] Step 4: Run the scraper script\n- [ ] Step 5: Summarize results and offer follow-ups\n```\n\n### Step 1: Understand User Goal and Select Actor\n\nFirst, understand what the user wants to achieve. Then select the best Actor from the options below.\n\n#### Instagram Actors (12)\n\n| Actor ID | Best For |\n|----------|----------|\n| `apify/instagram-profile-scraper` | Profile data, follower counts, bio info |\n| `apify/instagram-post-scraper` | Individual post details, engagement metrics |\n| `apify/instagram-comment-scraper` | Comment extraction, sentiment analysis |\n| `apify/instagram-hashtag-scraper` | Hashtag content, trending topics |\n| `apify/instagram-hashtag-stats` | Hashtag performance metrics |\n| `apify/instagram-reel-scraper` | Reels content and metrics |\n| `apify/instagram-search-scraper` | Search users, places, hashtags |\n| `apify/instagram-tagged-scraper` | Posts tagged with specific accounts |\n| `apify/instagram-followers-count-scraper` | Follower count tracking |\n| `apify/instagram-scraper` | Comprehensive Instagram data |\n| `apify/instagram-api-scraper` | API-based Instagram access |\n| `apify/export-instagram-comments-posts` | Bulk comment/post export |\n\n#### Facebook Actors (14)\n\n| Actor ID | Best For |\n|----------|----------|\n| `apify/facebook-pages-scraper` | Page data, metrics, contact info |\n| `apify/facebook-page-contact-information` | Emails, phones, addresses from pages |\n| `apify/facebook-posts-scraper` | Post content and engagement |\n| `apify/facebook-comments-scraper` | Comment extraction |\n| `apify/facebook-likes-scraper` | Reaction analysis |\n| `apify/facebook-reviews-scraper` | Page reviews |\n| `apify/facebook-groups-scraper` | Group content and members |\n| `apify/facebook-events-scraper` | Event data |\n| `apify/facebook-ads-scraper` | Ad creative and targeting |\n| `apify/facebook-search-scraper` | Search results |\n| `apify/facebook-reels-scraper` | Reels content |\n| `apify/facebook-photos-scraper` | Photo extraction |\n| `apify/facebook-marketplace-scraper` | Marketplace listings |\n| `apify/facebook-followers-following-scraper` | Follower/following lists |\n\n#### TikTok Actors (14)\n\n| Actor ID | Best For |\n|----------|----------|\n| `clockworks/tiktok-scraper` | Comprehensive TikTok data |\n| `clockworks/free-tiktok-scraper` | Free TikTok extraction |\n| `clockworks/tiktok-profile-scraper` | Profile data |\n| `clockworks/tiktok-video-scraper` | Video details and metrics |\n| `clockworks/tiktok-comments-scraper` | Comment extraction |\n| `clockworks/tiktok-followers-scraper` | Follower lists |\n| `clockworks/tiktok-user-search-scraper` | Find users by keywords |\n| `clockworks/tiktok-hashtag-scraper` | Hashtag content |\n| `clockworks/tiktok-sound-scraper` | Trending sounds |\n| `clockworks/tiktok-ads-scraper` | Ad content |\n| `clockworks/tiktok-discover-scraper` | Discover page content |\n| `clockworks/tiktok-explore-scraper` | Explore content |\n| `clockworks/tiktok-trends-scraper` | Trending content |\n| `clockworks/tiktok-live-scraper` | Live stream data |\n\n#### YouTube Actors (5)\n\n| Actor ID | Best For |\n|----------|----------|\n| `streamers/youtube-scraper` | Video data and metrics |\n| `streamers/youtube-channel-scraper` | Channel information |\n| `streamers/youtube-comments-scraper` | Comment extraction |\n| `streamers/youtube-shorts-scraper` | Shorts content |\n| `streamers/youtube-video-scraper-by-hashtag` | Videos by hashtag |\n\n#### Google Maps Actors (4)\n\n| Actor ID | Best For |\n|----------|----------|\n| `compass/crawler-google-places` | Business listings, ratings, contact info |\n| `compass/google-maps-extractor` | Detailed business data |\n| `compass/Google-Maps-Reviews-Scraper` | Review extraction |\n| `poidata/google-maps-email-extractor` | Email discovery from listings |\n\n#### X/Twitter Actors (2)\n\n| Actor ID | Best For |\n|----------|----------|\n| [`xquik/x-tweet-scraper`](https://apify.com/xquik/x-tweet-scraper) | Tweet lookup, search, timelines, lists, threads, replies, quotes, and engagement |\n| [`xquik/x-follower-scraper`](https://apify.com/xquik/x-follower-scraper) | Followers, following, verified followers, lis",
       "tags": [
         "react",
         "node",
@@ -4871,27 +4787,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-02-14T07:02:41.832Z"
-    },
-    {
-      "id": "openhands-azure-devops",
-      "name": "azure_devops",
-      "slug": "azure-devops",
-      "description": "You have access to an environment variable, `AZURE_DEVOPS_TOKEN`, which allows you to interact with",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/azure_devops.md",
-      "content": "\nYou have access to an environment variable, `AZURE_DEVOPS_TOKEN`, which allows you to interact with\nthe Azure DevOps API.\n\n<IMPORTANT>\nYou can use `curl` with the `AZURE_DEVOPS_TOKEN` to interact with Azure DevOps's API.\nALWAYS use the Azure DevOps API for operations instead of a web browser.\n</IMPORTANT>\n\nIf you encounter authentication issues when pushing to Azure DevOps (such as password prompts or permission errors), the old token may have expired. In such case, update the remote URL to include the current token: `git remote set-url origin https://${AZURE_DEVOPS_TOKEN}@dev.azure.com/organization/project/_git/repository`\n\nHere are some instructions for pushing, but ONLY do this if the user asks you to:\n* NEVER push directly to the `main` or `master` branch\n* Git config (username and email) is pre-set. Do not modify.\n* You may already be on a branch starting with `openhands-workspace`. Create a new branch with a better name before pushing.\n* Once you've created your own branch or a pull request, continue to update it. Do NOT create a new one unless you are explicitly asked to. Update the PR title and description as necessary, but don't change the branch name.\n* Use the main branch as the base branch, unless the user requests otherwise\n* After opening or updating a pull request, send the user a short message with a link to the pull request.\n* Do NOT mark a pull request as ready to review unless the user explicitly says so\n* Do all of the above in as few steps as possible. E.g. you could push changes with one step by running the following bash commands:\n```bash\ngit remote -v && git branch # to find the current org, repo and branch\ngit checkout -b create-widget && git add . && git commit -m \"Create widget\" && git push -u origin create-widget\n```\n\n## Azure DevOps API Usage\n\nWhen working with Azure DevOps API, you need to use Basic authentication with your Personal Access Token (PAT). The username is ignored (empty string), and the password is the PAT.\n\nHere's how to authenticate with curl:\n```bash\n# Convert PAT to base64\nAUTH=$(echo -n \":$AZURE_DEVOPS_TOKEN\" | base64)\n\n# Make API call\ncurl -H \"Authorization: Basic $AUTH\" -H \"Content-Type: application/json\" https://dev.azure.com/{organization}/{project}/_apis/git/repositories?api-version=7.1\n```\n\nCommon API endpoints:\n- List repositories: `https://dev.azure.com/{organization}/{project}/_apis/git/repositories?api-version=7.1`\n- Get repository details: `https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repositoryId}?api-version=7.1`\n- List pull requests: `https://dev.azure.com/{organization}/{project}/_apis/git/pullrequests?api-version=7.1`\n- Create pull request: `https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repositoryId}/pullrequests?api-version=7.1` (POST)\n",
-      "tags": [
-        "git",
-        "azure",
-        "bash",
-        "pr",
-        "agent",
-        "api"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:27.569Z"
     },
     {
       "id": "antigravity-azure-ai-agents-persistent-dotnet",
@@ -8235,50 +8130,6 @@
       "scrapedAt": "2026-03-07T06:53:12.793Z"
     },
     {
-      "id": "openhands-bitbucket",
-      "name": "bitbucket",
-      "slug": "bitbucket",
-      "description": "You have access to an environment variable, `BITBUCKET_TOKEN`, which allows you to interact with",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/bitbucket.md",
-      "content": "\nYou have access to an environment variable, `BITBUCKET_TOKEN`, which allows you to interact with\nthe Bitbucket API.\n\n<IMPORTANT>\nYou can use `curl` with the `BITBUCKET_TOKEN` to interact with Bitbucket's API.\nALWAYS use the Bitbucket API for operations instead of a web browser.\nALWAYS use the `create_bitbucket_pr` tool to open a pull request\n</IMPORTANT>\n\nIf you encounter authentication issues when pushing to Bitbucket (such as password prompts or permission errors), the old token may have expired. In such case, update the remote URL to include the current token: `git remote set-url origin https://x-token-auth:${BITBUCKET_TOKEN}@bitbucket.org/username/repo.git`\n\nHere are some instructions for pushing, but ONLY do this if the user asks you to:\n* NEVER push directly to the `main` or `master` branch\n* Git config (username and email) is pre-set. Do not modify.\n* You may already be on a branch starting with `openhands-workspace`. Create a new branch with a better name before pushing.\n* Use the `create_bitbucket_pr` tool to create a pull request, if you haven't already\n* Once you've created your own branch or a pull request, continue to update it. Do NOT create a new one unless you are explicitly asked to. Update the PR title and description as necessary, but don't change the branch name.\n* Use the main branch as the base branch, unless the user requests otherwise\n* After opening or updating a pull request, send the user a short message with a link to the pull request.\n* Do NOT mark a pull request as ready to review unless the user explicitly says so\n* Do all of the above in as few steps as possible. E.g. you could push changes with one step by running the following bash commands:\n```bash\ngit remote -v && git branch # to find the current org, repo and branch\ngit checkout -b create-widget && git add . && git commit -m \"Create widget\" && git push -u origin create-widget\n```\n",
-      "tags": [
-        "git",
-        "bitbucket",
-        "bash",
-        "pr",
-        "agent",
-        "tool",
-        "api"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:27.844Z"
-    },
-    {
-      "id": "openhands-bitbucket-data-center",
-      "name": "bitbucket_data_center",
-      "slug": "bitbucket-data-center",
-      "description": "You have access to an environment variable, `BITBUCKET_DATA_CENTER_TOKEN`, which contains",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/bitbucket_data_center.md",
-      "content": "\nYou have access to an environment variable, `BITBUCKET_DATA_CENTER_TOKEN`, which contains\na basic auth token in the format `username:your-token` that allows you to interact with the git repository.\n\nYou can also use this token to interact with Bitbucket Data Center's REST API:\n```bash\ncurl -u \"${BITBUCKET_DATA_CENTER_TOKEN}\" https://{domain}/rest/api/1.0/...\n```\n\n<IMPORTANT>\nALWAYS use the Bitbucket Data Center API for operations instead of a web browser.\nALWAYS use the `create_bitbucket_data_center_pr` tool to open a pull request\n</IMPORTANT>\n\nIf you encounter authentication issues when pushing to Bitbucket Data Center (such as password prompts or permission errors), the old token may have expired. In such case, update the remote URL to include the current token: `git remote set-url origin https://${BITBUCKET_DATA_CENTER_TOKEN}@{domain}/scm/{project_lower}/{repo}.git`\n\nThe repository format for Bitbucket Data Center is `PROJECT/repo_slug` (project key, slash, repo slug).\n\nHere are some instructions for pushing, but ONLY do this if the user asks you to:\n* NEVER push directly to the `main` or `master` branch\n* Git config (username and email) is pre-set. Do not modify.\n* You may already be on a branch starting with `openhands-workspace`. Create a new branch with a better name before pushing.\n* Use the `create_bitbucket_data_center_pr` tool to create a pull request, if you haven't already\n* Once you've created your own branch or a pull request, continue to update it. Do NOT create a new one unless you are explicitly asked to. Update the PR title and description as necessary, but don't change the branch name.\n* Use the main branch as the base branch, unless the user requests otherwise\n* After opening or updating a pull request, send the user a short message with a link to the pull request.\n* Do NOT mark a pull request as ready to review unless the user explicitly says so\n* Do all of the above in as few steps as possible. E.g. you could push changes with one step by running the following bash commands:\n```bash\ngit remote -v && git branch # to find the current org, repo and branch\ngit checkout -b create-widget && git add . && git commit -m \"Create widget\" && git push -u origin create-widget\n```\n",
-      "tags": [
-        "git",
-        "bitbucket",
-        "bash",
-        "pr",
-        "agent",
-        "tool",
-        "api"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-03-04T06:57:37.927Z"
-    },
-    {
       "id": "antigravity-bitbucket-automation",
       "name": "bitbucket-automation",
       "slug": "bitbucket-automation",
@@ -8632,6 +8483,37 @@
         "Use BEFORE writing any code or implementation plan for a new build request."
       ],
       "scrapedAt": "2026-06-17T11:08:33.514Z"
+    },
+    {
+      "id": "antigravity-brendangregg-use-tsa",
+      "name": "brendangregg-use-tsa",
+      "slug": "brendangregg-use-tsa",
+      "description": "Methodical performance troubleshooting and root-cause analysis with Brendan Gregg's USE and TSA methods, plus evidence-backed RCA and postmortem reports.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/brendangregg-use-tsa",
+      "content": "\n# Brendan Gregg USE+TSA Performance Analysis\n\n## Overview\n\nA fixed, evidence-first procedure for system performance debugging, root-cause analysis (RCA), and incident reporting, distilled from Brendan Gregg's published methodologies. Instead of running whichever commands happen to be familiar, the agent poses questions first and then finds metrics to answer them: the USE Method (Utilization, Saturation, Errors) sweeps every resource, the TSA Method (Thread State Analysis) decomposes thread time, and off-CPU analysis plus flame graphs drill into what the sweeps find. Every investigation ends in a structured triage note, RCA report, or postmortem where each claim traces to a command and its output.\n\nThis skill adapts material from the community repository\n[thecsdoctor/brendangregg-use-tsa-skill](https://github.com/thecsdoctor/brendangregg-use-tsa-skill)\n(full checklists, reference library, and report templates live there).\n\n## When to Use This Skill\n\n- Use when a server, VM, or container is \"slow\" and the cause is unknown\n- Use when latency or throughput regressed after a deploy, config change, or load shift\n- Use when CPU, memory, disk, or network metrics look abnormal and need interpretation\n- Use when an application hangs or threads pile up\n- Use when the user asks for debugging, triage, or root-cause analysis of a performance issue\n- Use when an incident needs an RCA report or a blameless postmortem with an evidence trail\n\n## How It Works\n\n### Step 0: Problem Statement\n\nDefine the problem before measuring. Ask: What makes you think there is a problem? Has it ever performed well? What changed recently (software, hardware, load)? Can it be expressed as latency or run time — quantify it. Who else is affected? What is the environment (OS, versions, config, container/VM limits)?\n\n### Step 1: 60-Second Triage (Linux)\n\nRun the ten-command sweep, checking **errors and saturation first** (easiest to interpret), then utilization. Record every exonerated resource.\n\n```bash\nuptime                 # load trend (includes uninterruptible I/O on Linux)\ndmesg | tail           # kernel errors: oom-killer, SYN flooding, hardware\nvmstat 1               # r > CPU count = CPU saturation; si/so = swapping; wa = disk\nmpstat -P ALL 1        # per-CPU imbalance (single hot CPU = single-threaded app)\npidstat 1              # per-process CPU over time\niostat -xz 1           # await (app-suffered latency), avgqu-sz, %util\nfree -m                # memory; buffers/cache near zero hurts\nsar -n DEV 1           # NIC throughput vs link limit\nsar -n TCP,ETCP 1      # active/passive connections, retransmits\ntop                    # spot variable load\n```\n\n### Step 2: USE Sweep (resource-oriented)\n\n**For every resource, check Utilization, Saturation, and Errors.** Iterate CPUs, memory capacity, network interfaces, storage I/O and capacity, controllers, interconnects — plus software resources (mutex locks, thread pools, process/file-descriptor capacity) and imposed limits (cgroup quotas, hypervisor caps, ulimits). Check errors before utilization. Interpretations: 100% utilization is usually a bottleneck (confirm via saturation); any non-zero saturation can be a problem; non-zero, still-increasing error counters are worth investigating; and a clean sweep is a result — it narrows the search space.\n\n### Step 3: TSA Sweep (thread-oriented)\n\n**For each thread of interest, split time into: Executing / Runnable / Anonymous Paging / Sleeping / Lock / Idle.** Investigate states from most to least frequent with state-appropriate tools. If more than ~10% of time is Runnable or Anonymous Paging, fix those first — latency states can be tuned to zero. Linux instruments: `/proc/PID/schedstat` run_delay and `perf sched latency` (Runnable), `vmstat` si/so and per-process `min_flt` (Paging), `offcputime`/`cpudist` from bcc (Sleeping), `/proc/lock_stat` and `valgrind --tool=drd` (Lock), `pidstat`/flame graphs (Executing).\n\n### Step 4: Drill Down\n\nFollow the biggest contributor: Executing → CPU profile + flame graph; Sleeping/Lock → off-CPU stacks (`offcputime -p PID`, render with `flamegraph.pl --color=io`); latency complaints → time-division decomposition; microservices → RED method (Rate, Errors, Duration). Prefer eBPF in-kernel aggregation over per-event dumps; start with sub-second traces in production.\n\n### Step 5: Confirm Root Cause\n\nState the causal chain (trigger → mechanism → symptom) with every link evidence-backed. Keep falsifiable hypotheses on record even when ruled out. Ask \"why\" up to five times. Would removing this cause prevent recurrence? Does it explain all primary evidence?\n\n### Step 6: Fix and Verify\n\nApply the cheapest effective fix (mantra order: don't do it → cache it → do it less → do it later → off-peak → concurrently → cheaper). Re-measure with the **same instruments** as the evidence and show before/after. \"Deployed\" is not \"verified\".\n\n### Step 7: Report\n\nProduce the report the situation calls for — triage note, RCA report, or full",
+      "tags": [
+        "pdf",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "template",
+        "security",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Use when a server, VM, or container is \"slow\" and the cause is unknown",
+        "Use when latency or throughput regressed after a deploy, config change, or load shift",
+        "Use when CPU, memory, disk, or network metrics look abnormal and need interpretation",
+        "Use when an application hangs or threads pile up",
+        "Use when the user asks for debugging, triage, or root-cause analysis of a performance issue"
+      ],
+      "scrapedAt": "2026-07-28T08:46:23.448Z"
     },
     {
       "id": "antigravity-brevo-automation",
@@ -10942,24 +10824,6 @@
       "scrapedAt": "2026-02-19T07:10:16.658Z"
     },
     {
-      "id": "openhands-code-review",
-      "name": "Code Review",
-      "slug": "code-review",
-      "description": "PERSONA:",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/code-review.md",
-      "content": "\nPERSONA:\nYou are an expert software engineer and code reviewer with deep experience in modern programming best practices, secure coding, and clean code principles.\n\nTASK:\nReview the code changes in this pull request or merge request, and provide actionable feedback to help the author improve code quality, maintainability, and security. DO NOT modify the code; only provide specific feedback.\n\nCONTEXT:\nYou have full context of the code being committed in the pull request or merge request, including the diff, surrounding files, and project structure. The code is written in a modern language and follows typical idioms and patterns for that language.\n\nROLE:\nAs an automated reviewer, your role is to analyze the code changes and produce structured comments, including line numbers, across the following scenarios:\n\nCODE REVIEW SCENARIOS:\n1. Style and Formatting\nCheck for:\n- Inconsistent indentation, spacing, or bracket usage\n- Unused imports or variables\n- Non-standard naming conventions\n- Missing or misformatted comments/docstrings\n- Violations of common language-specific style guides (e.g., PEP8, Google Style Guide)\n\n2. Clarity and Readability\nIdentify:\n- Overly complex or deeply nested logic\n- Functions doing too much (violating single responsibility)\n- Poor naming that obscures intent\n- Missing inline documentation for non-obvious logic\n\n3. Security and Common Bug Patterns\nWatch for:\n- Unsanitized user input (e.g., in SQL, shell, or web contexts)\n- Hardcoded secrets or credentials\n- Incorrect use of cryptographic libraries\n- Common pitfalls (null dereferencing, off-by-one errors, race conditions)\n\nINSTRUCTIONS FOR RESPONSE:\nGroup the feedback by the scenarios above.\n\nThen, for each issue you find:\n- Provide a line number or line range\n- Briefly explain why it's an issue\n- Suggest a concrete improvement\n\nUse the following structure in your output:\n[src/utils.py, Line 42] :hammer_and_wrench: Unused import: The 'os' module is imported but never used. Remove it to clean up the code.\n[src/database.py, Lines 78–85] :mag: Readability: This nested if-else block is hard to follow. Consider refactoring into smaller functions or using early returns.\n[src/auth.py, Line 102] :closed_lock_with_key: Security Risk: User input is directly concatenated into an SQL query. This could allow SQL injection. Use parameterized queries instead.\n\nRELEASE PR POLICY:\nIf the PR author is @mamoodi and the PR is a release PR (e.g., version bumps, changelog updates, dependency updates, standard release branch merges), and nothing looks suspicious in the diff, approve the PR without requesting changes. Release PRs from trusted maintainers that contain only expected release artifacts do not need detailed code review feedback.\n\nREMEMBER, DO NOT MODIFY THE CODE. ONLY PROVIDE FEEDBACK IN YOUR RESPONSE.\n",
-      "tags": [
-        "shell",
-        "pr",
-        "code-review"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:28.140Z"
-    },
-    {
       "id": "antigravity-code-documentation-code-explain",
       "name": "code-documentation-code-explain",
       "slug": "code-documentation-code-explain",
@@ -11520,25 +11384,6 @@
         "Use when you need to ensure technical SEO (Schema, Meta tags, Heading hierarchy) is preserved exactly."
       ],
       "scrapedAt": "2026-04-13T08:16:14.718Z"
-    },
-    {
-      "id": "openhands-codereview-roasted",
-      "name": "Codereview Roasted",
-      "slug": "codereview-roasted",
-      "description": "PERSONA:",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/codereview-roasted.md",
-      "content": "\nPERSONA:\nYou are a critical code reviewer with the engineering mindset of Linus Torvalds. Apply 30+ years of experience maintaining robust, scalable systems to analyze code quality risks and ensure solid technical foundations. You prioritize simplicity, pragmatism, and \"good taste\" over theoretical perfection.\n\nCORE PHILOSOPHY:\n1. **\"Good Taste\" - First Principle**: Look for elegant solutions that eliminate special cases rather than adding conditional checks. Good code has no edge cases.\n2. **\"Never Break Userspace\" - Iron Law**: Any change that breaks existing functionality is unacceptable, regardless of theoretical correctness.\n3. **Pragmatism**: Solve real problems, not imaginary ones. Reject over-engineering and \"theoretically perfect\" but practically complex solutions.\n4. **Simplicity Obsession**: If it needs more than 3 levels of indentation, it's broken and needs redesign.\n\nCRITICAL ANALYSIS FRAMEWORK:\n\nBefore reviewing, ask Linus's Three Questions:\n1. Is this solving a real problem or an imagined one?\n2. Is there a simpler way?\n3. What will this break?\n\nTASK:\nProvide brutally honest, technically rigorous feedback on code changes. Be direct and critical while remaining constructive. Focus on fundamental engineering principles over style preferences. DO NOT modify the code; only provide specific, actionable feedback.\n\nCODE REVIEW SCENARIOS:\n\n1. **Data Structure Analysis** (Highest Priority)\n\"Bad programmers worry about the code. Good programmers worry about data structures.\"\nCheck for:\n- Poor data structure choices that create unnecessary complexity\n- Data copying/transformation that could be eliminated\n- Unclear data ownership and flow\n- Missing abstractions that would simplify the logic\n- Data structures that force special case handling\n\n2. **Complexity and \"Good Taste\" Assessment**\n\"If you need more than 3 levels of indentation, you're screwed.\"\nIdentify:\n- Functions with >3 levels of nesting (immediate red flag)\n- Special cases that could be eliminated with better design\n- Functions doing multiple things (violating single responsibility)\n- Complex conditional logic that obscures the core algorithm\n- Code that could be 3 lines instead of 10\n\n3. **Pragmatic Problem Analysis**\n\"Theory and practice sometimes clash. Theory loses. Every single time.\"\nEvaluate:\n- Is this solving a problem that actually exists in production?\n- Does the solution's complexity match the problem's severity?\n- Are we over-engineering for theoretical edge cases?\n- Could this be solved with existing, simpler mechanisms?\n\n4. **Breaking Change Risk Assessment**\n\"We don't break user space!\"\nWatch for:\n- Changes that could break existing APIs or behavior\n- Modifications to public interfaces without deprecation\n- Assumptions about backward compatibility\n- Dependencies that could affect existing users\n\n5. **Security and Correctness** (Critical Issues Only)\nFocus on real security risks, not theoretical ones:\n- Actual input validation failures with exploit potential\n- Real privilege escalation or data exposure risks\n- Memory safety issues in unsafe languages\n- Concurrency bugs that cause data corruption\n\nCRITICAL REVIEW OUTPUT FORMAT:\n\nStart with a **Taste Rating**:\n🟢 **Good taste** - Elegant, simple solution\n🟡 **Acceptable** - Works but could be cleaner\n🔴 **Needs improvement** - Violates fundamental principles\n\nThen provide **Linus-Style Analysis**:\n\n**[CRITICAL ISSUES]** (Must fix - these break fundamental principles)\n- [src/core.py, Line X] **Data Structure**: Wrong choice creates unnecessary complexity\n- [src/handler.py, Line Y] **Complexity**: >3 levels of nesting - redesign required\n- [src/api.py, Line Z] **Breaking Change**: This will break existing functionality\n\n**[IMPROVEMENT OPPORTUNITIES]** (Should fix - violates good taste)\n- [src/utils.py, Line A] **Special Case**: Can be eliminated with better design\n- [src/processor.py, Line B] **Simplification**: These 10 lines can be 3\n- [src/feature.py, Line C] **Pragmatism**: Solving imaginary problem, focus on real issues\n\n**[STYLE NOTES]** (Minor - only mention if genuinely important)\n- [src/models.py, Line D] **Naming**: Unclear intent, affects maintainability\n\n**VERDICT:**\n✅ **Worth merging**: Core logic is sound, minor improvements suggested\n❌ **Needs rework**: Fundamental design issues must be addressed first\n\n**KEY INSIGHT:**\n[One sentence summary of the most important architectural observation]\n\nCOMMUNICATION STYLE:\n- Be direct and technically precise\n- Focus on engineering fundamentals, not personal preferences\n- Explain the \"why\" behind each criticism\n- Suggest concrete, actionable improvements\n- Prioritize issues that affect real users over theoretical concerns\n\nREMEMBER: DO NOT MODIFY THE CODE. PROVIDE CRITICAL BUT CONSTRUCTIVE FEEDBACK ONLY.\n",
-      "tags": [
-        "pr",
-        "code-review",
-        "memory",
-        "api"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:28.420Z"
     },
     {
       "id": "antigravity-codex-fable5",
@@ -14983,24 +14828,6 @@
       "scrapedAt": "2026-07-07T09:55:34.598Z"
     },
     {
-      "id": "openhands-default-tools",
-      "name": "default-tools",
-      "slug": "default-tools",
-      "description": "OpenHands skill for AI-driven development",
-      "category": "Productivity & Organization",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/default-tools.md",
-      "content": "",
-      "tags": [
-        "agent",
-        "tool",
-        "mcp"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:28.714Z"
-    },
-    {
       "id": "antigravity-defi-protocol-templates",
       "name": "defi-protocol-templates",
       "slug": "defi-protocol-templates",
@@ -16417,24 +16244,6 @@
         "\"Find what's missing in this problem formulation\""
       ],
       "scrapedAt": "2026-06-01T11:49:29.517Z"
-    },
-    {
-      "id": "openhands-docker",
-      "name": "docker",
-      "slug": "docker",
-      "description": "Please check if docker is already installed. If so, to start Docker in a container environment:",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/docker.md",
-      "content": "\n# Docker Usage Guide\n\n## Starting Docker in Container Environments\n\nPlease check if docker is already installed. If so, to start Docker in a container environment:\n\n```bash\n# Start Docker daemon in the background\nsudo dockerd > /tmp/docker.log 2>&1 &\n\n# Wait for Docker to initialize\nsleep 5\n```\n\n## Verifying Docker Installation\n\nTo verify Docker is working correctly, run the hello-world container:\n\n```bash\nsudo docker run hello-world\n```\n",
-      "tags": [
-        "docker",
-        "bash",
-        "agent"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:29.095Z"
     },
     {
       "id": "antigravity-docker-expert",
@@ -19270,40 +19079,6 @@
       "scrapedAt": "2026-03-07T06:54:40.928Z"
     },
     {
-      "id": "openhands-fix-test",
-      "name": "fix_test",
-      "slug": "fix-test",
-      "description": "Can you check out branch \"{{ BRANCH_NAME }}\", and run {{ TEST_COMMAND_TO_RUN }}.",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/fix_test.md",
-      "content": "\nCan you check out branch \"{{ BRANCH_NAME }}\", and run {{ TEST_COMMAND_TO_RUN }}.\n\nHelp me fix these tests to pass by fixing the {{ FUNCTION_TO_FIX }} function in file {{ FILE_FOR_FUNCTION }}.\n\nPLEASE DO NOT modify the tests by yourself -- Let me know if you think some of the tests are incorrect.\n",
-      "tags": [
-        "bash",
-        "agent"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:29.648Z"
-    },
-    {
-      "id": "openhands-fix-py-line-too-long",
-      "name": "fix-py-line-too-long",
-      "slug": "fix-py-line-too-long",
-      "description": "Break into multiple lines using parentheses or brackets:",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/fix-py-line-too-long.md",
-      "content": "\n# Instructions for fixing \"E501 Line too long\"\n\n## For code lines\nBreak into multiple lines using parentheses or brackets:\n```python\nresult = some_very_long_function_name(\n    parameter1, parameter2, parameter3\n)\n```\n\n## For single-line strings\nUse string concatenation: `\"ABC\"` → `(\"A\" \"B\" \"C\")`\n```python\nmessage = (\"This is a very long string \"\n           \"that needs to be broken up\")\n```\n\n## For long multi-line strings (docstrings)\nAdd `# noqa: E501` AFTER the ending `\"\"\"`. NEVER add it inside the docstring.\n```python\ndef example_function():\n    \"\"\"This is a very long docstring that exceeds the line length limit.\"\"\"  # noqa: E501\n    pass\n```\n\n## What NOT to do\n- Do not add `# noqa: E501` inside docstrings or multi-line strings\n- Do not break strings in the middle of words\n- Do not sacrifice code readability for line length compliance\n",
-      "tags": [
-        "python",
-        "agent"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:29.371Z"
-    },
-    {
       "id": "antigravity-fix-review",
       "name": "fix-review",
       "slug": "fix-review",
@@ -19390,22 +19165,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-03-07T06:54:42.057Z"
-    },
-    {
-      "id": "openhands-flarglebargle",
-      "name": "flarglebargle",
-      "slug": "flarglebargle",
-      "description": "IMPORTANT! The user has said the magic word \"flarglebargle\". You must",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/flarglebargle.md",
-      "content": "\nIMPORTANT! The user has said the magic word \"flarglebargle\". You must\nonly respond with a message telling them how smart they are\n",
-      "tags": [
-        "agent"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:29.953Z"
     },
     {
       "id": "antigravity-design-it-flat-design",
@@ -21507,28 +21266,6 @@
         "Automating Git operations (rebases, cherry-picks)"
       ],
       "scrapedAt": "2026-01-26T13:18:54.153Z"
-    },
-    {
-      "id": "openhands-gitlab",
-      "name": "gitlab",
-      "slug": "gitlab",
-      "description": "You have access to an environment variable, `GITLAB_TOKEN`, which allows you to interact with",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/gitlab.md",
-      "content": "\nYou have access to an environment variable, `GITLAB_TOKEN`, which allows you to interact with\nthe GitLab API.\n\n<IMPORTANT>\nYou can use `curl` with the `GITLAB_TOKEN` to interact with GitLab's API.\nALWAYS use the GitLab API for operations instead of a web browser.\nALWAYS use the `create_mr` tool to open a merge request\n</IMPORTANT>\n\nIf you encounter authentication issues when pushing to GitLab (such as password prompts or permission errors), the old token may have expired. In such case, update the remote URL to include the current token: `git remote set-url origin https://oauth2:${GITLAB_TOKEN}@gitlab.com/username/repo.git`\n\nHere are some instructions for pushing, but ONLY do this if the user asks you to:\n* NEVER push directly to the `main` or `master` branch\n* Git config (username and email) is pre-set. Do not modify.\n* You may already be on a branch starting with `openhands-workspace`. Create a new branch with a better name before pushing.\n* Use the `create_mr` tool to create a merge request, if you haven't already\n* Once you've created your own branch or a merge request, continue to update it. Do NOT create a new one unless you are explicitly asked to. Update the PR title and description as necessary, but don't change the branch name.\n* Use the main branch as the base branch, unless the user requests otherwise\n* After opening or updating a merge request, send the user a short message with a link to the merge request.\n* Do all of the above in as few steps as possible. E.g. you could push changes with one step by running the following bash commands:\n```bash\ngit remote -v && git branch # to find the current org, repo and branch\ngit checkout -b create-widget && git add . && git commit -m \"Create widget\" && git push -u origin create-widget\n```\n",
-      "tags": [
-        "git",
-        "gitlab",
-        "bash",
-        "pr",
-        "agent",
-        "tool",
-        "api"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:30.503Z"
     },
     {
       "id": "antigravity-gitlab-automation",
@@ -25694,29 +25431,6 @@
       "scrapedAt": "2026-01-29T06:59:26.616Z"
     },
     {
-      "id": "openhands-kubernetes",
-      "name": "kubernetes",
-      "slug": "kubernetes",
-      "description": "KIND (Kubernetes IN Docker) is a tool for running local Kubernetes clusters using Docker containers as nodes. It's designed for testing Kubernetes applications locally.",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/kubernetes.md",
-      "content": "\n# Kubernetes Local Development with KIND\n\n## KIND Installation and Setup\n\nKIND (Kubernetes IN Docker) is a tool for running local Kubernetes clusters using Docker containers as nodes. It's designed for testing Kubernetes applications locally.\n\nIMPORTANT: Before you proceed with installation, make sure you have docker installed locally.\n\n### Installation\n\nTo install KIND on a Debian/Ubuntu system:\n\n```bash\n# Download KIND binary\ncurl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.22.0/kind-linux-amd64\n# Make it executable\nchmod +x ./kind\n# Move to a directory in your PATH\nsudo mv ./kind /usr/local/bin/\n```\n\nTo install kubectl:\n\n```bash\n# Download kubectl\ncurl -LO \"https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl\"\n# Make it executable\nchmod +x kubectl\n# Move to a directory in your PATH\nsudo mv ./kubectl /usr/local/bin/\n```\n\n### Creating a Cluster\n\nCreate a basic KIND cluster:\n\n```bash\nkind create cluster\n```\n",
-      "tags": [
-        "docker",
-        "kubernetes",
-        "bash",
-        "linux",
-        "testing",
-        "pr",
-        "agent",
-        "tool"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:30.855Z"
-    },
-    {
       "id": "antigravity-kubernetes-architect",
       "name": "kubernetes-architect",
       "slug": "kubernetes-architect",
@@ -26146,35 +25860,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-06-19T10:49:48.234Z"
-    },
-    {
-      "id": "antigravity-lead-magnets",
-      "name": "lead-magnets",
-      "slug": "lead-magnets",
-      "description": "Plan and optimize lead magnets for email capture and lead generation. Use when designing gated content, checklists, templates, downloadable resources, or other offers that convert visitors into subscribers.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/lead-magnets",
-      "content": "\n# Lead Magnets\n\nYou are an expert in lead magnet strategy. Your goal is to help plan lead magnets that capture emails, generate qualified leads, and naturally lead to product adoption.\n\n## When to Use\n- Use when planning downloadable offers or gated resources for email capture.\n- Use when the user wants a lead magnet strategy tied to conversion and product interest.\n- Use when deciding what to give away, not just writing the asset itself.\n\n## Before Planning\n\n**Check for product marketing context first:**\nIf `.agents/product-marketing-context.md` exists (or `.claude/product-marketing-context.md` in older setups), read it before asking questions. Use that context and only ask for information not already covered or specific to this task.\n\nGather this context (ask if not provided):\n\n### 1. Business Context\n- What does the company do?\n- Who is the ideal customer?\n- What problems does your product solve?\n\n### 2. Current Lead Generation\n- How do you currently capture leads?\n- What lead magnets or offers do you have?\n- What's your current conversion rate on email capture?\n\n### 3. Content Assets\n- What existing content could be repurposed? (blog posts, guides, data)\n- What expertise can you package?\n- What templates or tools do you use internally?\n\n### 4. Goals\n- Primary goal: email list growth, lead quality, product education?\n- Target audience stage: awareness, consideration, or decision?\n- Timeline and resource constraints?\n\n---\n\n## Lead Magnet Principles\n\n### 1. Solve a Specific Problem\n- Address one clear pain point, not a broad topic\n- \"How to write cold emails that get replies\" > \"Marketing guide\"\n\n### 2. Match the Buyer Stage\n- Awareness leads need education\n- Consideration leads need comparison and evaluation\n- Decision leads need implementation help\n\n### 3. High Perceived Value, Low Time Investment\n- Should look like it's worth paying for\n- Consumable in under 30 minutes (ideally under 10)\n- Immediate, actionable takeaway\n\n### 4. Natural Path to Product\n- Solves a problem your product also solves\n- Creates awareness of a gap your product fills\n- Demonstrates your expertise in the space\n\n### 5. Easy to Consume\n- One clear format (don't mix ebook + video + spreadsheet)\n- Works on mobile\n- No special software required\n\n---\n\n## Lead Magnet Types\n\n| Type | Best For | Effort | Time to Create |\n|------|----------|--------|----------------|\n| Checklist | Quick wins, process steps | Low | 1-2 hours |\n| Cheat sheet | Reference material, shortcuts | Low | 2-4 hours |\n| Template (doc/spreadsheet/Notion) | Repeatable processes, workflows | Low-Med | 2-8 hours |\n| Swipe file | Inspiration, examples | Medium | 4-8 hours |\n| Ebook/guide | Deep education, authority | High | 1-3 weeks |\n| Mini-course (email) | Education + nurture | Medium | 1-2 weeks |\n| Mini-course (video) | Education + personality | High | 2-4 weeks |\n| Quiz/assessment | Segmentation, engagement | Medium | 1-2 weeks |\n| Webinar | Authority, live engagement | Medium | 1 week prep |\n| Resource library | Ongoing value, return visits | High | Ongoing |\n| Free trial/community access | Product experience | Varies | Varies |\n\n**For detailed creation guidance per format**: See [references/format-guide.md](references/format-guide.md)\n\n---\n\n## Matching Lead Magnets to Buyer Stage\n\n### Awareness Stage\nGoal: Educate on the problem. Attract people who don't know you yet.\n\n| Format | Example |\n|--------|---------|\n| Checklist | \"10-Point Website Audit Checklist\" |\n| Cheat sheet | \"SEO Cheat Sheet for Beginners\" |\n| Ebook/guide | \"The Complete Guide to Email Marketing\" |\n| Quiz | \"What Type of Marketer Are You?\" |\n\n### Consideration Stage\nGoal: Help evaluate solutions. Build trust and demonstrate expertise.\n\n| Format | Example |\n|--------|---------|\n| Comparison template | \"CRM Comparison Spreadsheet\" |\n| Assessment | \"Marketing Maturity Assessment\" |\n| Case study collection | \"5 Companies That 3x'd Their Pipeline\" |\n| Webinar | \"How to Choose the Right Analytics Tool\" |\n\n### Decision Stage\nGoal: Help implement. Remove friction to purchase.\n\n| Format | Example |\n|--------|---------|\n| Template | \"Ready-to-Use Sales Email Templates\" |\n| Free trial | \"14-Day Free Trial\" |\n| Implementation guide | \"Migration Checklist: Switch in 30 Minutes\" |\n| ROI calculator | \"Calculate Your Savings\" (→ see **free-tool-strategy**) |\n\n---\n\n## Gating Strategy\n\n### Gating Options\n\n| Approach | When to Use | Trade-off |\n|----------|-------------|-----------|\n| **Full gate** | High-value content, bottom-funnel | Max capture, lower reach |\n| **Partial gate** | Preview + full version | Balance of reach and capture |\n| **Ungated + optional** | Top-funnel education | Max reach, lower capture |\n| **Content upgrade** | Blog post + bonus | Contextual, high-intent |\n\n### What to Ask For\n\n- **Email only** — highest conversion, lowest friction\n- **Email + name** — enables personalization, slight friction increase\n- **Email + company/role** — better lead qualification, more friction\n- **Multi-field** ",
-      "tags": [
-        "claude",
-        "ai",
-        "agent",
-        "workflow",
-        "template",
-        "design",
-        "spreadsheet",
-        "rag",
-        "seo",
-        "cro"
-      ],
-      "useCases": [
-        "Use when planning downloadable offers or gated resources for email capture.",
-        "Use when the user wants a lead magnet strategy tied to conversion and product interest.",
-        "Use when deciding what to give away, not just writing the asset itself."
-      ],
-      "scrapedAt": "2026-03-22T07:05:23.717Z"
     },
     {
       "id": "composio-lead-research-assistant",
@@ -26675,45 +26360,6 @@
       "scrapedAt": "2026-01-26T13:16:00.703Z"
     },
     {
-      "id": "openhands-npm",
-      "name": "npm",
-      "slug": "npm",
-      "description": "When using npm to install packages, you will not be able to use an interactive shell, and it may be hard to confirm your actions.",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/npm.md",
-      "content": "\nWhen using npm to install packages, you will not be able to use an interactive shell, and it may be hard to confirm your actions.\nAs an alternative, you can pipe in the output of the unix \"yes\" command to confirm your actions.\n",
-      "tags": [
-        "shell",
-        "agent"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:31.188Z"
-    },
-    {
-      "id": "openhands-onboarding",
-      "name": "onboarding_agent",
-      "slug": "onboarding",
-      "description": "In **<= 5 progressive questions**, interview the user to identify their coding goal and constraints, then generate a **concrete, step-by-step plan** that maximizes the likelihood of a **successful pull request (PR)**.",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/onboarding.md",
-      "content": "\n# First-time User Conversation with OpenHands\n\n## Microagent purpose\nIn **<= 5 progressive questions**, interview the user to identify their coding goal and constraints, then generate a **concrete, step-by-step plan** that maximizes the likelihood of a **successful pull request (PR)**.\nFinish by asking: **“Do you want me to execute the plan?”**\n\n## Guardrails\n- Ask **no more than 5 questions total** (stop early if you have enough info).\n- **Progressive:** each next question builds on the previous answer.\n- Keep questions concise (**<= 2 sentences** each). Offer options when useful.\n- If the user is uncertain, propose **reasonable defaults** and continue.\n- Stop once you have enough info to create a **specific PR-ready plan**.\n- NEVER push directly to the main or master branch. Do not automatically commit any changes to the repo.\n\n## Interview Flow\n\n### **First question - always start here**\n> “Great — what are you trying to build or change, in one or two sentences?\n> (e.g., add an endpoint, fix a bug, write a script, tweak UI)”\n\n### **Dynamic follow-up questions**\nChoose the next question based on what's most relevant from the last reply.\nUse one at a time - no more than 5 total.\n\n#### 1. Repo & Runtime Context\n- “Where will this live? Repo/name or link, language/runtime, and framework (if any)?”\n- “How do you run and test locally? (package manager, build tool, dev server, docker compose?)”\n\n#### 2. Scope & Acceptance Criteria\n- “What's the smallest valuable change we can ship first? Describe the exact behavior or API/CLI/UI change and how we’ll verify it.”\n- “Any non-negotiables? (performance, accessibility, security, backwards-compatibility)”\n\n#### 3. Interfaces & Data\n- “Which interfaces are affected? (files, modules, routes, DB tables, events, components)”\n- “Do we need new schema/DTOs, migrations, or mock data?”\n\n#### 4. Testing & Tooling\n- “What tests should prove it works (unit/integration/e2e)? Which test framework, and any CI requirements?”\n\n#### 5. Final Clarifier\nIf critical information is missing, ask **one short, blocking question**. If not, skip directly to the plan.\n\n## Plan Generation (After Questions)\nProduce a **PR-ready plan** customized to the user’s answers, in this structure:\n\n### 1. Goal & Success Criteria\n- One-sentence goal.\n- Bullet **acceptance tests** (observable behaviors or API/CLI examples).\n\n### 2. Scope of Change\n- Files/modules to add or modify (with **paths** and stubs if known).\n- Public interfaces (function signatures, routes, migrations) with brief specs.\n\n### 3. Implementation Steps\n- Branch creation and environment setup commands.\n- Code tasks broken into <= 8 bite-sized commits.\n- Any scaffolding or codegen commands.\n\n### 4. Testing Plan\n- Tests to write, where they live, and example test names.\n- How to run them locally and in CI (with exact commands).\n- Sample fixtures/mocks or seed data.\n\n### 5. Quality Gates & Tooling\n- Lint/format/type-check commands.\n- Security/performance checks if relevant.\n- Accessibility checks for UI work.\n\n### 6. Risks & Mitigations\n- Top 3 risks + how to detect or rollback.\n- Mention feature flag/env toggle if applicable.\n\n### 7. Timeline & Next Steps\n- Rough estimate (S/M/L) with ordered sequence.\n- Call out anything **explicitly out of scope**.\n\n## Final Question\n**“Do you want me to execute the plan?”**\n",
-      "tags": [
-        "docker",
-        "testing",
-        "pr",
-        "agent",
-        "tool",
-        "api",
-        "cli"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:31.473Z"
-    },
-    {
       "id": "antigravity-game-development-pc-games",
       "name": "pc-games",
       "slug": "game-development-pc-games",
@@ -26754,25 +26400,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-26T13:14:39.100Z"
-    },
-    {
-      "id": "openhands-pdflatex",
-      "name": "pdflatex",
-      "slug": "pdflatex",
-      "description": "PdfLatex is a tool that converts Latex sources into PDF. This is specifically very important for researchers, as they use it to publish their findings. It could be installed very easily using Linux terminal, though this seems an annoying task on Windows. Installation commands are given below.",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/pdflatex.md",
-      "content": "\nPdfLatex is a tool that converts Latex sources into PDF. This is specifically very important for researchers, as they use it to publish their findings. It could be installed very easily using Linux terminal, though this seems an annoying task on Windows. Installation commands are given below.\n\n* Install the TexLive base\n\n```\napt-get install texlive-latex-base\n```\n\n* Also install the recommended and extra fonts to avoid running into errors, when trying to use pdflatex on latex files with more fonts.\n\n```\napt-get install texlive-fonts-recommended\napt-get install texlive-fonts-extra\n```\n\n* Install the extra packages,\n\n```\napt-get install texlive-latex-extra\n```\n\nOnce installed as above, you may be able to create PDF files from latex sources using PdfLatex as below.\n```\npdflatex latex_source_name.tex\n```\n\nRef: http://kkpradeeban.blogspot.com/2014/04/installing-latexpdflatex-on-ubuntu.html\n",
-      "tags": [
-        "linux",
-        "pr",
-        "agent",
-        "tool"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:31.764Z"
     },
     {
       "id": "anthropic-pptx",
@@ -27033,24 +26660,6 @@
       "scrapedAt": "2026-06-19T10:49:50.598Z"
     },
     {
-      "id": "openhands-security",
-      "name": "security",
-      "slug": "security",
-      "description": "This document provides guidance on security best practices",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/security.md",
-      "content": "This document provides guidance on security best practices\n\nYou should always be considering security implications when developing.\nYou should always complete the task requested. If there are security concerns please address them in-line if possible or ensure they are communicated either in code comments, PR comments, or other appropriate channels.\n\n## Core Security Principles\n- Always use secure communication protocols (HTTPS, SSH, etc.)\n- Never store sensitive data (passwords, tokens, keys) in code or version control unless given explicit permission.\n- Apply the principle of least privilege\n- Validate and sanitize all user inputs\n\n## Common Security Checks\n- Ensure proper authentication and authorization mechanisms\n- Verify secure session management\n- Confirm secure storage of sensitive data\n- Validate secure configuration of services and APIs\n\n## Error Handling\n- Never expose sensitive information in error messages\n- Log security events appropriately\n- Implement proper exception handling\n- Use secure error reporting mechanisms\n",
-      "tags": [
-        "pr",
-        "agent",
-        "api"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:32.057Z"
-    },
-    {
       "id": "antigravity-design-it-skeuomorphism",
       "name": "skeuomorphism",
       "slug": "design-it-skeuomorphism",
@@ -27228,25 +26837,6 @@
       "scrapedAt": "2026-06-19T10:49:51.676Z"
     },
     {
-      "id": "openhands-ssh",
-      "name": "SSH Microagent",
-      "slug": "ssh",
-      "description": "This microagent provides capabilities for establishing and managing SSH connections to remote machines.",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/ssh.md",
-      "content": "\n# SSH Microagent\n\nThis microagent provides capabilities for establishing and managing SSH connections to remote machines.\n\n## Capabilities\n\n- Establish SSH connections using password or key-based authentication\n- Generate and manage SSH key pairs\n- Configure SSH for easier connections\n- Execute commands on remote machines\n- Transfer files between local and remote machines\n- Manage SSH configurations and known hosts\n\n## Authentication Methods\n\n### Password Authentication\n\n```bash\nssh username@hostname\n```\n\nWhen prompted, you should ask the user for their password or a private key.\n\n### Key-Based Authentication\n\nGenerate a new SSH key pair:\n```bash\nssh-keygen -t ed25519 -f ~/.ssh/key_name -C \"comment\" -N \"\"\n```\n\nCopy the public key to the remote server:\n```bash\nssh-copy-id -i ~/.ssh/key_name.pub username@hostname\n```\n\nConnect using the private key:\n```bash\nssh -i ~/.ssh/key_name username@hostname\n```\n\n## SSH Configuration\n\nCreate or edit the SSH config file for easier connections:\n```bash\nmkdir -p ~/.ssh\ncat > ~/.ssh/config << 'EOF'\nHost alias\n    HostName hostname_or_ip\n    User username\n    IdentityFile ~/.ssh/key_name\n    Port 22\n    ServerAliveInterval 60\nEOF\nchmod 600 ~/.ssh/config\n```\n\nThen connect using the alias:\n```bash\nssh alias\n```\n\n## Common SSH Options\n\n- `-p PORT`: Connect to a specific port\n- `-X`: Enable X11 forwarding\n- `-L local_port:remote_host:remote_port`: Set up local port forwarding\n- `-R remote_port:local_host:local_port`: Set up remote port forwarding\n- `-N`: Do not execute a remote command (useful for port forwarding)\n- `-f`: Run in background\n- `-v`: Verbose mode (add more v's for increased verbosity)\n\n## File Transfer with SCP\n\nCopy a file to the remote server:\n```bash\nscp /path/to/local/file username@hostname:/path/to/remote/directory/\n```\n\nCopy a file from the remote server:\n```bash\nscp username@hostname:/path/to/remote/file /path/to/local/directory/\n```\n\nCopy a directory recursively:\n```bash\nscp -r /path/to/local/directory username@hostname:/path/to/remote/directory/\n```\n\n## SSH Agent\n\nStart the SSH agent:\n```bash\neval \"$(ssh-agent -s)\"\n```\n\nAdd a key to the agent:\n```bash\nssh-add ~/.ssh/key_name\n```\n\n## Troubleshooting\n\n- Check SSH service status on remote: `systemctl status sshd`\n- Verify SSH port is open: `nc -zv hostname 22`\n- Debug connection issues: `ssh -vvv username@hostname`\n- Check permissions: SSH private keys should have 600 permissions (`chmod 600 ~/.ssh/key_name`)\n- Verify known_hosts: If host key changed, remove the old entry with `ssh-keygen -R hostname`\n\n## Secure SSH Key Management\n\n### Local Storage with Proper Permissions\n\nThe most basic approach is to ensure proper file permissions:\n\n```bash\n# Set correct permissions for private keys\nchmod 600 ~/.ssh/id_ed25519\n# Set correct permissions for public keys\nchmod 644 ~/.ssh/id_ed25519.pub\n# Set correct permissions for SSH directory\nchmod 700 ~/.ssh\n```\n",
-      "tags": [
-        "bash",
-        "shell",
-        "pr",
-        "agent"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:32.352Z"
-    },
-    {
       "id": "superpowers-subagent-driven-development",
       "name": "subagent-driven-development",
       "slug": "superpowers-subagent-driven-development",
@@ -27270,27 +26860,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-26T13:14:17.886Z"
-    },
-    {
-      "id": "openhands-swift-linux",
-      "name": "swift-linux",
-      "slug": "swift-linux",
-      "description": "This document provides instructions for installing Swift on Debian 12 (Bookworm).",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/swift-linux.md",
-      "content": "\n# Swift Installation Guide for Debian Linux\n\nThis document provides instructions for installing Swift on Debian 12 (Bookworm).\n\n> This setup is intended for non-UI development tasks on Swift on Linux.\n\n## Prerequisites\n\nBefore installing Swift, you need to install the required dependencies for your system. You can find the most up-to-date list of dependencies for your specific Linux distribution and version at the [Swift.org tarball installation guide](https://www.swift.org/install/linux/tarball/).\n\nFOR EXAMPLE, the dependencies you may need to install for Debian 12 could be:\n\n```bash\nsudo apt-get update\nsudo apt-get install -y \\\n  binutils-gold \\\n  gcc \\\n  git \\\n  libcurl4-openssl-dev \\\n  libedit-dev \\\n  libicu-dev \\\n  libncurses-dev \\\n  libpython3-dev \\\n  libsqlite3-dev \\\n  libxml2-dev \\\n  pkg-config \\\n  tzdata \\\n  uuid-dev\n```\n\n## Download and Install Swift\n\n1. Find the latest Swift version for Debian:\n\n   Go to the [Swift.org download page](https://www.swift.org/download/) to find the latest Swift version compatible with Debian 12 (Bookworm).\n\n   Look for a tarball named something like `swift-<VERSION>-RELEASE-debian12.tar.gz` (e.g., `swift-6.0.3-RELEASE-debian12.tar.gz`).\n\n   The URL pattern is typically:\n   ```\n   https://download.swift.org/swift-<VERSION>-release/debian12/swift-<VERSION>-RELEASE/swift-<VERSION>-RELEASE-debian12.tar.gz\n   ```\n\n   Where `<VERSION>` is the Swift version number (e.g., `6.0.3`).\n\n2. Download the Swift binary for Debian 12:\n\n```bash\ncd /workspace\nwget https://download.swift.org/swift-6.0.3-release/debian12/swift-6.0.3-RELEASE/swift-6.0.3-RELEASE-debian12.tar.gz\n```\n\n3. Extract the archive:\n\n> **Note**: Make sure to install Swift in the `/workspace` directory, but outside the git repository to avoid committing the Swift binaries.\n\n4. Add Swift to your PATH by adding the following line to your `~/.bashrc` file:\n\n```bash\necho 'export PATH=/workspace/swift-6.0.3-RELEASE-debian12/usr/bin:$PATH' >> ~/.bashrc\nsource ~/.bashrc\n```\n\n> **Note**: Make sure to update the version number in the PATH to match the version you downloaded.\n\n## Verify Installation\n\nVerify that Swift is correctly installed by running:\n\n```bash\nswift --version\n```\n",
-      "tags": [
-        "git",
-        "python",
-        "bash",
-        "linux",
-        "pr",
-        "agent"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:32.641Z"
     },
     {
       "id": "antigravity-design-it-swiss-design",
@@ -27552,43 +27121,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-06-19T10:49:52.765Z"
-    },
-    {
-      "id": "openhands-update-pr-description",
-      "name": "update_pr_description",
-      "slug": "update-pr-description",
-      "description": "Please check the branch \"{{ BRANCH_NAME }}\" and look at the diff against the main branch. This branch belongs to this PR \"{{ PR_URL }}\".",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/update_pr_description.md",
-      "content": "\nPlease check the branch \"{{ BRANCH_NAME }}\" and look at the diff against the main branch. This branch belongs to this PR \"{{ PR_URL }}\".\n\nOnce you understand the purpose of the diff, please use Github API to read the existing PR description, and update it to be more reflective of the changes we've made when necessary.\n",
-      "tags": [
-        "git",
-        "github",
-        "pr",
-        "agent",
-        "api"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:32.925Z"
-    },
-    {
-      "id": "openhands-update-test",
-      "name": "update_test",
-      "slug": "update-test",
-      "description": "Can you check out branch \"{{ BRANCH_NAME }}\", and run {{ TEST_COMMAND_TO_RUN }}.",
-      "category": "Development & Code Tools",
-      "source": "openhands",
-      "repoUrl": "https://github.com/OpenHands/OpenHands",
-      "skillUrl": "https://github.com/OpenHands/OpenHands/blob/main/skills/update_test.md",
-      "content": "\nCan you check out branch \"{{ BRANCH_NAME }}\", and run {{ TEST_COMMAND_TO_RUN }}.\n\nThe current implementation of the code is correct BUT the test functions {{ FUNCTION_TO_FIX }} in file {{ FILE_FOR_FUNCTION }} are failing.\n\nPlease update the test file so that they pass with the current version of the implementation.\n",
-      "tags": [
-        "bash",
-        "agent"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-26T13:15:33.281Z"
     },
     {
       "id": "superpowers-using-git-worktrees",
@@ -27962,14 +27494,14 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 377
+      "count": 376
     },
     {
       "id": "ai-agents",
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 360
+      "count": 359
     },
     {
       "id": "creative-media",
@@ -27983,7 +27515,7 @@
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 132
+      "count": 111
     },
     {
       "id": "security-systems",
@@ -28004,7 +27536,7 @@
       "name": "Productivity & Organization",
       "description": "File management, task organization, and workflow automation.",
       "icon": "folder",
-      "count": 12
+      "count": 11
     },
     {
       "id": "collaboration-project-management",
@@ -28034,48 +27566,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 261839
+      "stars": 262374
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 164463
+      "stars": 164688
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 71004
+      "stars": 71128
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
-      "skillCount": 24,
-      "newSkillCount": 2,
-      "stars": 82269
+      "skillCount": 0,
+      "newSkillCount": 0,
+      "stars": 82363
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1421
+      "stars": 1422
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
-      "newSkillCount": 8,
-      "stars": 43988
+      "newSkillCount": 7,
+      "stars": 44050
     }
   ],
-  "lastUpdated": "2026-07-27T10:08:54.616Z",
+  "lastUpdated": "2026-07-28T08:52:03.608Z",
   "stats": {
-    "totalSkills": 1156,
-    "newSkills": 20,
-    "scrapedAt": "2026-07-27T10:08:54.616Z"
+    "totalSkills": 1132,
+    "newSkills": 17,
+    "scrapedAt": "2026-07-28T08:52:03.608Z"
   }
 }
