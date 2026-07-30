@@ -8,6 +8,20 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ethi
 ---
 
 
+> **⚠️ AUTHORIZED USE ONLY**
+> This skill is for educational purposes or authorized security assessments only.
+> You must have explicit, written permission from the system owner before using this tool.
+> Misuse of this tool is illegal and strictly prohibited.
+
+> **Mandatory confirmation gate**
+> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:
+> 1. Ask the user to state the exact target URL, IP, account, or resource.
+> 2. Ask the user to confirm written authorization and the permitted scope.
+> 3. Show the exact command(s) and explain their expected effect.
+> 4. Wait for explicit confirmation in the current conversation.
+>
+> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
+
 > AUTHORIZED USE ONLY: Use this skill only for authorized penetration testing engagements, defensive validation, or controlled educational environments.
 
 # Ethical Hacking Methodology
@@ -180,41 +194,4 @@ nmap --script=vuln target.com
 | 80 | HTTP | Web |
 | 443 | HTTPS | Secure web |
 | 445 | SMB | Windows shares |
-| 3306 | MySQL | Database |
-| 3389 | RDP | Remote desktop |
-
-### Phase 4: Vulnerability Analysis
-
-Identify exploitable weaknesses:
-
-**Automated Scanning**
-```bash
-# Nikto web scanner
-nikto -h http://target.com
-
-# OpenVAS (command line)
-omp -u admin -w password --xml="<get_tasks/>"
-
-# Nessus (via API)
-nessuscli scan --target target.com
-```
-
-**Web Application Testing (OWASP)**
-- SQL Injection
-- Cross-Site Scripting (XSS)
-- Broken Authentication
-- Security Misconfiguration
-- Sensitive Data Exposure
-- XML External Entities (XXE)
-- Broken Access Control
-- Insecure Deserialization
-- Using Components with Known Vulnerabilities
-- Insufficient Logging & Monitoring
-
-**Manual Techniques**
-```bash
-# Directory brute forcing
-gobuster dir -u http://target.com -w /usr/share/wordlists/dirb/common.txt
-
-# Subdomain enumeration
-gobuster dns -d target.com -w /usr/share/word
+| 3306 |

@@ -7,8 +7,15 @@ tags: [python, pdf, api, ai, agent, automation, workflow, template, document, im
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/file-path-traversal
 ---
 
+> **⚠️ AUTHORIZED USE ONLY**
+> This skill is for educational purposes or authorized security assessments only.
+> You must have explicit, written permission from the system owner before using this tool.
+> Misuse of this tool is illegal and strictly prohibited.
 
-> AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
+> **Mandatory confirmation gate**
+> Before any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target, ask for the exact target URL, IP, account, or resource and confirmation of written authorization and permitted scope.
+> Show the exact command(s), explain their expected effect, and wait for explicit confirmation in the current conversation.
+> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
 # File Path Traversal Testing
 
@@ -199,28 +206,4 @@ images/../../../etc/passwd
 ....\\....\\etc\\passwd
 ```
 
-### Phase 5: Linux Target Files
-
-High-value files to target:
-
-```bash
-# System files
-/etc/passwd           # User accounts
-/etc/shadow           # Password hashes (root only)
-/etc/group            # Group information
-/etc/hosts            # Host mappings
-/etc/hostname         # System hostname
-/etc/issue            # System banner
-
-# SSH files
-/root/.ssh/id_rsa           # Root private key
-/root/.ssh/authorized_keys  # Authorized keys
-/home/<user>/.ssh/id_rsa    # User private keys
-/etc/ssh/sshd_config        # SSH configuration
-
-# Web server files
-/etc/apache2/apache2.conf
-/etc/nginx/nginx.conf
-/etc/apache2/sites-enabled/000-default.conf
-/var/log/apache2/access.log
-/var/log/apa
+### Phase 5: Linux Targe

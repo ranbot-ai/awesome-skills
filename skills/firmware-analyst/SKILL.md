@@ -8,6 +8,20 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/firm
 ---
 
 
+> **⚠️ AUTHORIZED USE ONLY**
+> This skill is for educational purposes or authorized security assessments only.
+> You must have explicit, written permission from the system owner before using this tool.
+> Misuse of this tool is illegal and strictly prohibited.
+
+> **Mandatory confirmation gate**
+> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:
+> 1. Ask the user to state the exact target URL, IP, account, or resource.
+> 2. Ask the user to confirm written authorization and the permitted scope.
+> 3. Show the exact command(s) and explain their expected effect.
+> 4. Wait for explicit confirmation in the current conversation.
+>
+> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
+
 # Download from vendor
 wget http://vendor.com/firmware/update.bin
 
@@ -181,30 +195,4 @@ Firmware updates        - Unencrypted downloads
 
 ### Extraction Tools
 ```
-binwalk v3           - Firmware extraction and analysis (Rust rewrite, faster, fewer false positives)
-firmware-mod-kit     - Firmware modification toolkit
-jefferson            - JFFS2 extraction
-ubi_reader           - UBIFS extraction
-sasquatch            - SquashFS with non-standard features
-```
-
-### Analysis Tools
-```
-Ghidra               - Multi-architecture disassembly
-IDA Pro              - Commercial disassembler
-Binary Ninja         - Modern RE platform
-radare2              - Scriptable analysis
-Firmware Analysis Toolkit (FAT)
-FACT                 - Firmware Analysis and Comparison Tool
-```
-
-### Emulation
-```
-QEMU                 - Full system and user-mode emulation
-Firmadyne            - Automated firmware emulation
-EMUX                 - ARM firmware emulator
-qemu-user-static     - Static QEMU for chroot emulation
-Unicorn              - CPU emulation framework
-```
-
-### Hardwar
+binwalk v3           - Firmware extraction

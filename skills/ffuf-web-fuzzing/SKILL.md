@@ -8,6 +8,20 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ffuf
 ---
 
 
+> **⚠️ AUTHORIZED USE ONLY**
+> This skill is for educational purposes or authorized security assessments only.
+> You must have explicit, written permission from the system owner before using this tool.
+> Misuse of this tool is illegal and strictly prohibited.
+
+> **Mandatory confirmation gate**
+> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:
+> 1. Ask the user to state the exact target URL, IP, account, or resource.
+> 2. Ask the user to confirm written authorization and the permitted scope.
+> 3. Show the exact command(s) and explain their expected effect.
+> 4. Wait for explicit confirmation in the current conversation.
+>
+> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
+
 # FFUF (Fuzz Faster U Fool) Skill
 
 ## When to Use
@@ -124,21 +138,4 @@ ffuf -w /path/to/wordlist.txt -u https://target.com -H "User-Agent: FUZZ" -H "X-
 **CRITICAL:** Always use `-ac` unless you have a specific reason not to. This is especially important when having Claude analyze results, as it dramatically reduces noise and false positives.
 
 ```bash
-# Auto-calibration - ALWAYS USE THIS
-ffuf -w /path/to/wordlist.txt -u https://target.com/FUZZ -ac
-
-# Per-host auto-calibration (useful for multiple hosts)
-ffuf -w /path/to/wordlist.txt -u https://target.com/FUZZ -ach
-
-# Custom auto-calibration string (for specific patterns)
-ffuf -w /path/to/wordlist.txt -u https://target.com/FUZZ -acc "404NotFound"
-```
-
-**Why `-ac` is essential:**
-- Automatically detects and filters repetitive false positive responses
-- Removes noise from dynamic websites with random content
-- Makes results analysis much easier for both humans and Claude
-- Prevents thousands of identical 404/403 responses from cluttering output
-- Adapts to the target's specific behavior
-
-**When Claude analyzes your ffuf results, `-ac` is MANDATORY** - without it, Claude will waste time sifting through thousands of false positives instead of finding the interesting anomalies.
+# Auto-calibration - ALWAYS USE

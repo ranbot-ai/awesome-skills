@@ -8,6 +8,20 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/brok
 ---
 
 
+> **⚠️ AUTHORIZED USE ONLY**
+> This skill is for educational purposes or authorized security assessments only.
+> You must have explicit, written permission from the system owner before using this tool.
+> Misuse of this tool is illegal and strictly prohibited.
+
+> **Mandatory confirmation gate**
+> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:
+> 1. Ask the user to state the exact target URL, IP, account, or resource.
+> 2. Ask the user to confirm written authorization and the permitted scope.
+> 3. Show the exact command(s) and explain their expected effect.
+> 4. Wait for explicit confirmation in the current conversation.
+>
+> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
+
 # Broken Authentication Testing
 
 ## Purpose
@@ -169,42 +183,4 @@ Analyze session token security:
 # Capture session cookie
 Cookie: SESSIONID=abc123def456
 
-# Test token characteristics
-1. Entropy - Is it random enough?
-2. Length - Sufficient length (128+ bits)?
-3. Predictability - Sequential patterns?
-4. Secure flags - HttpOnly, Secure, SameSite?
-```
-
-Session token analysis:
-
-```python
-#!/usr/bin/env python3
-import requests
-import hashlib
-
-# Collect multiple session tokens
-tokens = []
-for i in range(100):
-    response = requests.get("https://target.com/login")
-    token = response.cookies.get("SESSIONID")
-    tokens.append(token)
-
-# Analyze for patterns
-# Check for sequential increments
-# Calculate entropy
-# Look for timestamp components
-```
-
-### Phase 7: Session Fixation Testing
-
-Test if session is regenerated after authentication:
-
-```bash
-# Step 1: Get session before login
-GET /login HTTP/1.1
-Response: Set-Cookie: SESSIONID=abc123
-
-# Step 2: Login with same session
-POST /login HTTP/1.1
-Cookie: SESSIONID=ab
+# Test toke

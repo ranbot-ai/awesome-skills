@@ -8,6 +8,20 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-e
 ---
 
 
+> **⚠️ AUTHORIZED USE ONLY**
+> This skill is for educational purposes or authorized security assessments only.
+> You must have explicit, written permission from the system owner before using this tool.
+> Misuse of this tool is illegal and strictly prohibited.
+
+> **Mandatory confirmation gate**
+> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:
+> 1. Ask the user to state the exact target URL, IP, account, or resource.
+> 2. Ask the user to confirm written authorization and the permitted scope.
+> 3. Show the exact command(s) and explain their expected effect.
+> 4. Wait for explicit confirmation in the current conversation.
+>
+> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
+
 # AI Engineering Toolkit
 
 ## Overview
@@ -41,11 +55,6 @@ Walks through a complete architecture decision tree: document format → parsing
 
 ### Skill 4: Agent Safety Guard
 
-> **⚠️ AUTHORIZED USE ONLY**
-> This skill is for educational purposes or authorized security assessments only.
-> You must have explicit, written permission from the system owner before using this tool.
-> Misuse of this tool is illegal and strictly prohibited.
-
 Executes a 65-point red-team audit across 5 attack categories: direct prompt injection, indirect prompt injection (via RAG documents), information extraction (system prompt / API key leakage), tool abuse (SQL injection, path traversal, command injection), and goal hijacking. The AI constructs adversarial test prompts for evaluation purposes, asks the user for confirmation before each test phase, judges pass/fail, and generates fix recommendations. All tests are contained within the evaluation context and do not interact with external systems. It is recommended to run audits in a sandboxed environment (Docker/VM).
 
 ### Skill 5: Eval Harness Builder
@@ -76,13 +85,4 @@ Result: 65 tests executed. 3 critical failures found: Base64-encoded instruction
 
 ## Best Practices
 
-- ✅ Run prompt-evaluator before any production deployment — set a team baseline (e.g., ≥70/100)
-- ✅ Use context-budget-planner early in development, not after hitting truncation issues
-- ✅ Run agent-safety-guard as a pre-launch gate, not post-incident
-- ✅ Combine skills in sequence: RAG design → context optimization → prompt polish → security audit → eval setup
-- ❌ Don't rely on a single dimension score — look at the full profile
-- ❌ Don't skip the security audit because "it's just an internal tool"
-
-## Security & Safety Notes
-
-- All skills are read-only analysis and advisory workflows. No skills modify files or make network re
+- ✅ Run prompt-evaluator before any pro

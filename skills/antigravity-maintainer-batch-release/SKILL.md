@@ -45,6 +45,7 @@ Before changing anything:
    - Run `npm run validate`, `npm run validate:references`, `npm run security:docs`, changed-skill evidence, and the relevant tests.
    - Treat the entire tracked `skills/<skill-id>/**` subtree as skill content. Inspect semantics, safety, provenance, declared risk, limitations, and every bundled file directly, including nested examples, scripts, lockfiles, references, and assets. Never reduce evidence or review to `SKILL.md` or a fixed support-directory allowlist.
    - Require changed-skill evidence to cover every Git record in each changed canonical skill subtree. Require the `skill-review` workflow for changes under `skills/**` or `plugins/**/skills/**`; its reusable result must be keyed by the complete nearest skill-directory fingerprint on the exact current head SHA.
+   - Keep canonical skill ownership lookup proportional to changed-path depth, not total registry size, and preserve the five-minute trusted evaluator budget so repository-wide evidence completes without weakening fail-closed checks. Parse a legacy executable-mode canonical `SKILL.md` only as private, non-executable snapshot data; keep it reported as unsafe and never materialize symlinks, gitlinks, or other executable files.
    - `review` means Tessl semantic review actually ran or a valid identical-content result was reused.
    - `manual-review-required` means Tessl credentials or credits were unavailable, or Tessl did not produce a passing result. Perform the maintainer semantic review and attest with `--reviewed-head <full-40-character-sha>`.
    - Any non-passing Tessl outcome produces `manual-review-required`; complete the semantic review and bind the judgment to the exact head instead of treating a heuristic score as merge authority.
@@ -56,5 +57,4 @@ Before changing anything:
    - Fix deterministic policy failures in the source; do not wait for them as if they were flaky CI.
    - Treat `pr-policy` fork classification from the exact protected-base implementation as an unprivileged fail-fast gate before dependent work, never as approval authority. `merge:batch` must still recompute the current trusted decision before approving any fork run or merging.
    - Treat `impact_profile` as shadow-only telemetry. It must not skip, downgrade, or satisfy any required check.
-   - For ordinary source PRs, require `source-validation` to generate preview state once and `artifact-preview` to verify the manifest bound to the exact head and run identity. For canonical-sync PRs, rely on `pr-policy` exact-tree reproduction, keep `source-validation` lightweight, require `artifact-preview` to confirm no drift, and retain final CI and CodeQL on the merged `main` commit.
-   - Keep timing observational and test sharding opt-in. Required CI must continue to run the full unsharded
+   - For ordinary source PRs, require `source-validation` to generate p
