@@ -1154,6 +1154,34 @@
       "scrapedAt": "2026-04-04T07:09:25.338Z"
     },
     {
+      "id": "antigravity-agents-generator",
+      "name": "agents-generator",
+      "slug": "agents-generator",
+      "description": "Generate project-specific AGENTS.md and companion rules by analyzing a codebase. Supports full, minimal, update, and dry-run modes with package-manager detection, monorepos, backups, managed blocks, confidence scoring, and command validation.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agents-generator",
+      "content": "\n# Skill: agents-generator\n\n> [!WARNING]\n> **[Authorized Use Only]** This skill writes or updates `AGENTS.md`, `.agents/rules/`, optional platform instruction files, and timestamped backups in the target project. Read the detected inputs and proposed outputs first, obtain approval before changing target files, and use it only inside the user's intended project scope.\n\n## When to Use\n\nUse this skill when the user wants to:\n\n- create a complete, project-specific `AGENTS.md` instead of generic agent rules;\n- generate companion rules for detected frameworks, tests, databases, styling, or monorepo packages;\n- create a minimal `AGENTS.md`, preview changes without writing, or update existing instructions after the stack changes.\n\nDo not use it to invent conventions without inspecting the target project, to overwrite instructions outside the user's scope, or to treat generated guidance as a substitute for human review.\n\nGenerates a tailored AGENTS.md + `.agents/rules/*.md` for the target project — not a template with placeholders, but a living document that matches the project's real toolchain.\n\n## What you get\n\nFrom a project that uses **Bun + Next.js 16 + Tailwind + Vitest + Server Actions**, the skill produces:\n\n```\nAGENTS.md\n├── Setup commands: bun install, bun dev, bun run test:run, bun doctor\n├── Verification Cycle: bunx tsc --noEmit → bun run lint → bun run test:run → bun doctor\n├── Conventions: \"Bun always. Plain TypeScript types + guards.\"\n└── Architecture → .agents/rules/architecture.md\n\n.agents/rules/\n├── architecture.md       ← ASCII diagram with real directories, exact versions\n├── frontend-patterns.md  ← Component rules, state locations, trust boundaries\n├── server-actions.md     ← downloadVideo() flow, DownloadResult type, rate limiter\n├── testing.md            ← \"74 tests in 5 files\", vitest commands, mock patterns\n├── git-workflow.md       ← Conventional commits, pre-commit checks\n└── sdd-workflow.md       ← Preflight defaults, post-apply verification\n```\n\nRules NOT generated: `backend.md` (no NestJS), `database.md` (no ORM), `i18n.md` (hardcoded Spanish), `forms.md` (manual inputs), `styling.md` (Tailwind in frontend rules).\n\n## Activation Contract\n\nGenerate AGENTS.md + `.agents/rules/*.md` for the target project. Never guess — read the project's actual files first.\n\n### Mode selection\n\n| User says | Mode | Output |\n|-----------|------|--------|\n| \"simple AGENTS.md\", \"just the basics\", \"minimal\" | **Minimal** | Single `AGENTS.md` (~30 lines, no rule files) |\n| \"full AGENTS.md\", \"with rules\", \"complete\", or default | **Full** | `AGENTS.md` + `.agents/rules/*.md` |\n| \"update AGENTS.md\", \"refresh\", \"my stack changed\" | **Update** | Diff existing, regenerate only what changed |\n\n### Dry-run mode\n\nIf the user asks to \"preview\", \"show what would change\", \"dry-run\": run all detection but do NOT write files. Show detection summary, files that would be created, skipped rules, and sample output.\n\n## Hard Rules\n\n- **Read before writing.** Read `package.json`, all config files, and directory structure before generating anything.\n- **Detect package manager FIRST.** Check lockfiles: `bun.lock`→bun, `pnpm-lock.yaml`→pnpm, `package-lock.json`→npm, `yarn.lock`→yarn. NEVER default to npm. Every command uses the detected PM.\n- **Generate only what applies.** No backend rules for frontend-only. No database rules without ORM.\n- **Auto-format and lint generated files.** Run `[format cmd]` and `[lint cmd]` on generated files only — never the whole project. These are fast, safe operations.\n- **Validate commands.** Every command in output must exist as a script key in `package.json`.\n- **No placeholders.** Scan output for `{{`, `TODO`, `add here`, `...`. Reject if any remain.\n- **Backup first.** If files exist, copy to `.agents/backups/` with timestamp.\n\n## Execution Steps\n\n### Common\n\n1. `git rev-parse --show-toplevel` → project root.\n2. **Detect package manager FIRST**: check lockfiles. `bun.lock`→bun, `pnpm-lock.yaml`→pnpm, `package-lock.json`→npm, `yarn.lock`→yarn. Never default to npm.\n3. Read `package.json` (scripts, deps, workspaces). Save scripts for validation.\n4. Read config files and explore directory structure.\n5. Select mode (ask if ambiguous).\n\n### Full mode\n\n1. Read `assets/agents-full.md` — this is the AGENTS.md structure with all sections and filling rules.\n2. Read project files and fill every placeholder with real data. Never use generic text.\n3. Generate `AGENTS.md` at project root. Wrap content in `<!-- AGENTS-GENERATED-START -->` / `<!-- AGENTS-GENERATED-END -->`.\n4. For each applicable rule category, read the corresponding template from `assets/` and generate the rule file in `.agents/rules/`.\n5. If Claude detected (`.claude/` or `CLAUDE.md`): generate thin `CLAUDE.md` from `assets/claude.md`.\n6. If platform files detected: generate from `assets/platform.md`.\n\n### Minimal mode\n\n1. Read `assets/agents-minimal.md` — 30-line agents.md standard format.\n2. Generate single `AGENTS.md`.\n\n### Update mode\n\n1.",
+      "tags": [
+        "typescript",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "template",
+        "document",
+        "security",
+        "tailwind"
+      ],
+      "useCases": [
+        "create a complete, project-specific `AGENTS.md` instead of generic agent rules;",
+        "generate companion rules for detected frameworks, tests, databases, styling, or monorepo packages;",
+        "create a minimal `AGENTS.md`, preview changes without writing, or update existing instructions after the stack changes."
+      ],
+      "scrapedAt": "2026-08-02T08:31:21.481Z"
+    },
+    {
       "id": "antigravity-agents-md",
       "name": "agents-md",
       "slug": "agents-md",
@@ -20916,6 +20944,36 @@
       "scrapedAt": "2026-03-08T06:56:11.539Z"
     },
     {
+      "id": "antigravity-gh-attach",
+      "name": "gh-attach",
+      "slug": "gh-attach",
+      "description": "Upload and download GitHub user-attachments (screenshots, PDFs, zips, videos) from the terminal; use when asked to attach or embed a file in a PR, issue, or comment, or download an attachment URL.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gh-attach",
+      "content": "\n# Upload and download GitHub user-attachments (gh-attach)\n\nGitHub has **no public API** for user-attachments. The web UI uses an internal\nendpoint that mints `github.com/user-attachments` URLs whose visibility follows the\nrepository they belong to. [`gh-attach`](https://github.com/sudosubin/gh-attach)\n(MIT, sudosubin) replicates that drag-and-drop flow as a `gh` CLI extension, so an\nagent can upload a local file from the terminal, get a URL back, and later download\nan attachment URL to a file.\n\n## Overview\n\nThis skill drives `gh-attach` to turn a local file (screenshot, image, PDF, zip,\nlog, or video) into a hosted GitHub `user-attachments` URL, then embeds that URL\ninto a pull request, issue, or comment. It also downloads an existing attachment\nURL back to a local file. GitHub auto-renders the URL as an image, video, or file\nwherever it is pasted, and the URL inherits the repository's visibility, so a\nprivate-repo upload stays private. It works against GitHub Cloud and GitHub\nEnterprise Server.\n\n## When to Use This Skill\n\nUse this skill when asked to:\n\n- \"Attach a screenshot to the PR\" or \"add an image to the PR description\"\n- \"Attach this file (PDF, zip, log, video) to the issue or comment\"\n- \"Embed before/after screenshots\" in a PR, issue, or README\n- \"Download this GitHub attachment\" from a `user-attachments` URL\n\n## How It Works\n\n### Step 1: Verify prerequisites\n\n```bash\ngh auth status                                   # gh installed and authenticated\ngh extension list | grep -q 'gh attach' \\\n  || gh extension install sudosubin/gh-attach    # review/pin the extension source first\n```\n\nUploads use a GitHub `user_session` browser cookie, **not** the `gh` token (that\nendpoint rejects tokens). By default `gh` must be authenticated so `gh-attach` can\nselect the matching browser account (Chromium family, Firefox family, or Safari).\nIf the wrong account is selected, add `--browser <name> --profile <name>`. For\nheadless or CI use, set `GH_ATTACH_SESSION_TOKEN` to the bare `user_session` cookie\nvalue and treat it as a full account credential.\n\n### Step 2: Upload\n\n```bash\n# Use an absolute quoted path; -R is optional inside a repo working dir.\nURL=$(gh attach \"/abs/path/screenshot.png\" -R <owner>/<repo>)\n```\n\n`gh attach` prints the URL on one line to **stdout**. For GitHub Enterprise Server,\nuse `-R host/owner/repo`. Capture the output; it is the embeddable reference.\n\n### Step 3: Embed into the PR / issue / comment\n\n```bash\nprintf '## Screenshots\\n\\n%s\\n' \"$URL\" \\\n  | gh pr comment <pr> -R <owner>/<repo> --body-file -\n```\n\nUse `gh pr edit`, `gh issue comment`, or `gh issue edit` with `--body-file -` for\nother targets. Always pass `--body-file -` (not inline `--body`) so multi-line\nbodies and special characters cannot break shell quoting. GitHub auto-renders the\nURL, so paste it as-is.\n\n### Step 4: Download\n\n```bash\n# Specify the destination explicitly.\ngh attach download \"$URL\" -O \"/abs/path/out.png\"\n```\n\nDownloads of private attachments use the active `gh` token, with browser cookies as\nan authorization fallback.\n\n## Examples\n\n- **Attach a screenshot to PR #42:** upload the file, then append the URL under a\n  `## Screenshots` heading in the PR body with `gh pr edit ... --body-file -`.\n- **Embed before/after screenshots in a README:** upload both files, paste the two\n  URLs into the README at the relevant section.\n- **Download an attachment for review:** run `gh attach download \"$URL\" -O out.zip`\n  to fetch a `user-attachments` file locally.\n\n## Best Practices\n\n- Resolve globs to absolute paths first, and quote paths that contain spaces or\n  Unicode.\n- For display sizing, embed an HTML tag instead of the bare URL:\n  `<img width=\"800\" src=\"$URL\">`.\n- In CI, set `GH_ATTACH_SESSION_TOKEN` from a dedicated bot account.\n- `gh-attach` can upload multiple files concurrently and emit Markdown or JSON\n  output with jq-style filtering when you need to script around the result.\n\n## Limitations\n\n- **Session cookie required.** A `user_session` cookie grants full account access\n  (it is not scoped like a PAT), so treat it like a password and prefer a bot\n  account in CI.\n- **Write access to the target repo is required** to upload.\n- **Private-repo attachments stay private:** the `user-attachments` URL inherits\n  repo visibility, so an anonymous fetch on a private repo returns 404 or 403 by\n  design.\n- GitHub Cloud and GitHub Enterprise Server each decide which file extensions and\n  content types they accept.\n- The skill embeds the URL itself; `gh attach` only prints it.\n\n## Security & Safety Notes\n\n- The `user_session` cookie and `GH_ATTACH_SESSION_TOKEN` are full-account\n  credentials. Never print them, never paste them on a command line, and never\n  commit them. Prefer a dedicated bot account for headless or CI use.\n- Uploaded attachments are auto-rendered by GitHub, so only upload files you intend\n  to share with everyone who can view the target repository.\n- Confirm the destination `-R <owner>/<repo>` before uploading s",
+      "tags": [
+        "pdf",
+        "markdown",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "design",
+        "image",
+        "security",
+        "rag"
+      ],
+      "useCases": [
+        "\"Attach a screenshot to the PR\" or \"add an image to the PR description\"",
+        "\"Attach this file (PDF, zip, log, video) to the issue or comment\"",
+        "\"Embed before/after screenshots\" in a PR, issue, or README",
+        "\"Download this GitHub attachment\" from a `user-attachments` URL"
+      ],
+      "scrapedAt": "2026-08-02T08:38:04.168Z"
+    },
+    {
       "id": "antigravity-gh-image",
       "name": "gh-image",
       "slug": "gh-image",
@@ -25779,37 +25837,6 @@
       "scrapedAt": "2026-01-26T13:19:11.428Z"
     },
     {
-      "id": "antigravity-langgraph",
-      "name": "langgraph",
-      "slug": "langgraph",
-      "description": "Expert in LangGraph - the production-grade framework for building stateful, multi-actor AI applications. Covers graph construction, state management, cycles and branches, persistence with checkpointers, human-in-the-loop patterns, and the ReAct agent pattern.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/langgraph",
-      "content": "\n# LangGraph\n\nExpert in LangGraph - the production-grade framework for building stateful, multi-actor\nAI applications. Covers graph construction, state management, cycles and branches,\npersistence with checkpointers, human-in-the-loop patterns, and the ReAct agent pattern.\nUsed in production at LinkedIn, Uber, and 400+ companies. This is LangChain's recommended\napproach for building agents.\n\n**Role**: LangGraph Agent Architect\n\nYou are an expert in building production-grade AI agents with LangGraph. You\nunderstand that agents need explicit structure - graphs make the flow visible\nand debuggable. You design state carefully, use reducers appropriately, and\nalways consider persistence for production. You know when cycles are needed\nand how to prevent infinite loops.\n\n### Expertise\n\n- Graph topology design\n- State schema patterns\n- Conditional branching\n- Persistence strategies\n- Human-in-the-loop\n- Tool integration\n- Error handling and recovery\n\n## Capabilities\n\n- Graph construction (StateGraph)\n- State management and reducers\n- Node and edge definitions\n- Conditional routing\n- Checkpointers and persistence\n- Human-in-the-loop patterns\n- Tool integration\n- Streaming and async execution\n\n## Prerequisites\n\n- 0: Python proficiency\n- 1: LLM API basics\n- 2: Async programming concepts\n- 3: Graph theory fundamentals\n- Required skills: Python 3.9+, langgraph package, LLM API access (OpenAI, Anthropic, etc.), Understanding of graph concepts\n\n## Scope\n\n- 0: Python-only (TypeScript in early stages)\n- 1: Learning curve for graph concepts\n- 2: State management complexity\n- 3: Debugging can be challenging\n\n## Ecosystem\n\n### Primary\n\n- LangGraph\n- LangChain\n- LangSmith (observability)\n\n### Common_integrations\n\n- OpenAI / Anthropic / Google\n- Tavily (search)\n- SQLite / PostgreSQL (persistence)\n- Redis (state store)\n\n### Platforms\n\n- Python applications\n- FastAPI / Flask backends\n- Cloud deployments\n\n## Patterns\n\n### Basic Agent Graph\n\nSimple ReAct-style agent with tools\n\n**When to use**: Single agent with tool calling\n\nfrom typing import Annotated, TypedDict\nfrom langgraph.graph import StateGraph, START, END\nfrom langgraph.graph.message import add_messages\nfrom langgraph.prebuilt import ToolNode\nfrom langchain_openai import ChatOpenAI\nfrom langchain_core.tools import tool\n\n# 1. Define State\nclass AgentState(TypedDict):\n    messages: Annotated[list, add_messages]\n    # add_messages reducer appends, doesn't overwrite\n\n# 2. Define Tools\n@tool\ndef search(query: str) -> str:\n    \"\"\"Search the web for information.\"\"\"\n    # Implementation here\n    return f\"Results for: {query}\"\n\n@tool\ndef calculator(expression: str) -> str:\n    \"\"\"Evaluate a math expression.\"\"\"\n    return str(safe_math_evaluator(expression))\n\ntools = [search, calculator]\n\n# 3. Create LLM with tools\nllm = ChatOpenAI(model=\"gpt-4o\").bind_tools(tools)\n\n# 4. Define Nodes\ndef agent(state: AgentState) -> dict:\n    \"\"\"The agent node - calls LLM.\"\"\"\n    response = llm.invoke(state[\"messages\"])\n    return {\"messages\": [response]}\n\n# Tool node handles tool execution\ntool_node = ToolNode(tools)\n\n# 5. Define Routing\ndef should_continue(state: AgentState) -> str:\n    \"\"\"Route based on whether tools were called.\"\"\"\n    last_message = state[\"messages\"][-1]\n    if last_message.tool_calls:\n        return \"tools\"\n    return END\n\n# 6. Build Graph\ngraph = StateGraph(AgentState)\n\n# Add nodes\ngraph.add_node(\"agent\", agent)\ngraph.add_node(\"tools\", tool_node)\n\n# Add edges\ngraph.add_edge(START, \"agent\")\ngraph.add_conditional_edges(\"agent\", should_continue, [\"tools\", END])\ngraph.add_edge(\"tools\", \"agent\")  # Loop back\n\n# Compile\napp = graph.compile()\n\n# 7. Run\nresult = app.invoke({\n    \"messages\": [(\"user\", \"What is 25 * 4?\")]\n})\n\n### State with Reducers\n\nComplex state management with custom reducers\n\n**When to use**: Multiple agents updating shared state\n\nfrom typing import Annotated, TypedDict\nfrom operator import add\nfrom langgraph.graph import StateGraph\n\n# Custom reducer for merging dictionaries\ndef merge_dicts(left: dict, right: dict) -> dict:\n    return {**left, **right}\n\n# State with multiple reducers\nclass ResearchState(TypedDict):\n    # Messages append (don't overwrite)\n    messages: Annotated[list, add_messages]\n\n    # Research findings merge\n    findings: Annotated[dict, merge_dicts]\n\n    # Sources accumulate\n    sources: Annotated[list[str], add]\n\n    # Current step (overwrites - no reducer)\n    current_step: str\n\n    # Error count (custom reducer)\n    errors: Annotated[int, lambda a, b: a + b]\n\n# Nodes return partial state updates\ndef researcher(state: ResearchState) -> dict:\n    # Only return fields being updated\n    return {\n        \"findings\": {\"topic_a\": \"New finding\"},\n        \"sources\": [\"source1.com\"],\n        \"current_step\": \"researching\"\n    }\n\ndef writer(state: ResearchState) -> dict:\n    # Access accumulated state\n    all_findings = state[\"findings\"]\n    all_sources = state[\"sources\"]\n\n    return {\n        \"messages\": [(\"assistant\", f\"Report based on {len(all_sources",
-      "tags": [
-        "python",
-        "typescript",
-        "react",
-        "node",
-        "api",
-        "ai",
-        "agent",
-        "llm",
-        "gpt",
-        "workflow"
-      ],
-      "useCases": [
-        "User mentions or implies: langgraph",
-        "User mentions or implies: langchain agent",
-        "User mentions or implies: stateful agent",
-        "User mentions or implies: agent graph",
-        "User mentions or implies: react agent"
-      ],
-      "scrapedAt": "2026-01-26T13:19:12.698Z"
-    },
-    {
       "id": "composio-langsmith-fetch",
       "name": "langsmith-fetch",
       "slug": "langsmith-fetch",
@@ -25838,27 +25865,6 @@
         "📊 \"Review agent performance\" or \"Check token usage\""
       ],
       "scrapedAt": "2026-01-26T13:15:10.094Z"
-    },
-    {
-      "id": "antigravity-laravel-expert",
-      "name": "laravel-expert",
-      "slug": "laravel-expert",
-      "description": "Senior Laravel Engineer role for production-grade, maintainable, and idiomatic Laravel solutions. Focuses on clean architecture, security, performance, and modern standards (Laravel 10/11+).",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/laravel-expert",
-      "content": "\n# Laravel Expert\n\n## Skill Metadata\n\nName: laravel-expert  \nFocus: General Laravel Development  \nScope: Laravel Framework (10/11+)\n\n---\n\n## Role\n\nYou are a Senior Laravel Engineer.\n\nYou provide production-grade, maintainable, and idiomatic Laravel solutions.\n\nYou prioritize:\n\n- Clean architecture\n- Readability\n- Testability\n- Security best practices\n- Performance awareness\n- Convention over configuration\n\nYou follow modern Laravel standards and avoid legacy patterns unless explicitly required.\n\n---\n\n## Use This Skill When\n\n- Building new Laravel features\n- Refactoring legacy Laravel code\n- Designing APIs\n- Creating validation logic\n- Implementing authentication/authorization\n- Structuring services and business logic\n- Optimizing database interactions\n- Reviewing Laravel code quality\n\n---\n\n## Do NOT Use When\n\n- The project is not Laravel-based\n- The task is framework-agnostic PHP only\n- The user requests non-PHP solutions\n- The task is unrelated to backend engineering\n\n---\n\n## Engineering Principles\n\n### Architecture\n\n- Keep controllers thin\n- Move business logic into Services\n- Use FormRequest for validation\n- Use API Resources for API responses\n- Use Policies/Gates for authorization\n- Apply Dependency Injection\n- Avoid static abuse and global state\n\n### Routing\n\n- Use route model binding\n- Group routes logically\n- Apply middleware properly\n- Separate web and api routes\n\n### Validation\n\n- Always validate input\n- Never use request()->all() blindly\n- Prefer FormRequest classes\n- Return structured validation errors for APIs\n\n### Eloquent & Database\n\n- Use guarded/fillable correctly\n- Avoid N+1 (use eager loading)\n- Prefer query scopes for reusable filters\n- Avoid raw queries unless necessary\n- Use transactions for critical operations\n\n### API Development\n\n- Use API Resources\n- Standardize JSON structure\n- Use proper HTTP status codes\n- Implement pagination\n- Apply rate limiting\n\n### Authentication\n\n- Use Laravel’s native auth system\n- Prefer Sanctum for SPA/API\n- Implement password hashing securely\n- Never expose sensitive data in responses\n\n### Queues & Jobs\n\n- Offload heavy operations to queues\n- Use dispatchable jobs\n- Ensure idempotency where needed\n\n### Caching\n\n- Cache expensive queries\n- Use cache tags if supported\n- Invalidate cache properly\n\n### Blade & Views\n\n- Escape user input\n- Avoid business logic in views\n- Use components for reuse\n\n---\n\n## Anti-Patterns to Avoid\n\n- Fat controllers\n- Business logic in routes\n- Massive service classes\n- Direct model manipulation without validation\n- Blind mass assignment\n- Hardcoded configuration values\n- Duplicated logic across controllers\n\n---\n\n## Response Standards\n\nWhen generating code:\n\n- Provide complete, production-ready examples\n- Include namespace declarations\n- Use strict typing when possible\n- Follow PSR standards\n- Use proper return types\n- Add minimal but meaningful comments\n- Do not over-engineer\n\nWhen reviewing code:\n\n- Identify structural problems\n- Suggest Laravel-native improvements\n- Explain tradeoffs clearly\n- Provide refactored example if necessary\n\n---\n\n## Output Structure\n\nWhen designing a feature:\n\n1. Architecture Overview\n2. File Structure\n3. Code Implementation\n4. Explanation\n5. Possible Improvements\n\nWhen refactoring:\n\n1. Identified Issues\n2. Refactored Version\n3. Why It’s Better\n\n---\n\n## Behavioral Constraints\n\n- Prefer Laravel-native solutions over third-party packages\n- Avoid unnecessary abstractions\n- Do not introduce microservice architecture unless requested\n- Do not assume cloud infrastructure\n- Keep solutions pragmatic and realistic\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "api",
-        "ai",
-        "design",
-        "security",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-17T07:14:38.672Z"
     },
     {
       "id": "antigravity-design-it-layered-design",
@@ -27521,7 +27527,7 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 360
+      "count": 359
     },
     {
       "id": "creative-media",
@@ -27535,7 +27541,7 @@
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 112
+      "count": 113
     },
     {
       "id": "security-systems",
@@ -27586,48 +27592,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 264567
+      "stars": 264890
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 165521
+      "stars": 165700
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 71503
+      "stars": 71581
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 82742
+      "stars": 82834
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1427
+      "stars": 1430
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
       "newSkillCount": 8,
-      "stars": 44252
+      "stars": 44289
     }
   ],
-  "lastUpdated": "2026-08-01T08:37:15.250Z",
+  "lastUpdated": "2026-08-02T08:39:44.418Z",
   "stats": {
     "totalSkills": 1132,
     "newSkills": 18,
-    "scrapedAt": "2026-08-01T08:37:15.250Z"
+    "scrapedAt": "2026-08-02T08:39:44.418Z"
   }
 }
