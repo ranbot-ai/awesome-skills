@@ -65,10 +65,10 @@ If the user asks to "preview", "show what would change", "dry-run": run all dete
 
 ## Hard Rules
 
-- **Read before writing.** Read `package.json`, all config files, and directory structure before generating anything.
+- **Read before writing, but never read secrets.** Read `package.json`, non-secret config files, and directory structure before generating anything. Never open `.env`, `.env.local`, credential stores, or similarly secret-bearing files. Derive environment variable names only from `.env.example` placeholders and source references such as `process.env.NAME`, without reading or reporting values.
 - **Detect package manager FIRST.** Check lockfiles: `bun.lock`→bun, `pnpm-lock.yaml`→pnpm, `package-lock.json`→npm, `yarn.lock`→yarn. NEVER default to npm. Every command uses the detected PM.
 - **Generate only what applies.** No backend rules for frontend-only. No database rules without ORM.
-- **Auto-format and lint generated files.** Run `[format cmd]` and `[lint cmd]` on generated files only — never the whole project. These are fast, safe operations.
+- **Do not execute project scripts by default.** Package-manager scripts are repository-controlled shell entry points. Detect and document candidate format/lint commands, but do not run them unless the user separately requests execution after the exact script body and invoked tooling have been reviewed.
 - **Validate commands.** Every command in output must exist as a script key in `package.json`.
 - **No placeholders.** Scan output for `{{`, `TODO`, `add here`, `...`. Reject if any remain.
 - **Backup first.** If files exist, copy to `.agents/backups/` with timestamp.
@@ -80,23 +80,11 @@ If the user asks to "preview", "show what would change", "dry-run": run all dete
 1. `git rev-parse --show-toplevel` → project root.
 2. **Detect package manager FIRST**: check lockfiles. `bun.lock`→bun, `pnpm-lock.yaml`→pnpm, `package-lock.json`→npm, `yarn.lock`→yarn. Never default to npm.
 3. Read `package.json` (scripts, deps, workspaces). Save scripts for validation.
-4. Read config files and explore directory structure.
+4. Read non-secret config files and explore directory structure. Exclude `.env*` files other than placeholder-only `.env.example`; never read secret values.
 5. Select mode (ask if ambiguous).
 
 ### Full mode
 
 1. Read `assets/agents-full.md` — this is the AGENTS.md structure with all sections and filling rules.
 2. Read project files and fill every placeholder with real data. Never use generic text.
-3. Generate `AGENTS.md` at project root. Wrap content in `<!-- AGENTS-GENERATED-START -->` / `<!-- AGENTS-GENERATED-END -->`.
-4. For each applicable rule category, read the corresponding template from `assets/` and generate the rule file in `.agents/rules/`.
-5. If Claude detected (`.claude/` or `CLAUDE.md`): generate thin `CLAUDE.md` from `assets/claude.md`.
-6. If platform files detected: generate from `assets/platform.md`.
-
-### Minimal mode
-
-1. Read `assets/agents-minimal.md` — 30-line agents.md standard format.
-2. Generate single `AGENTS.md`.
-
-### Update mode
-
-1.
+3. Generate `AGENTS.md` at project root. Wrap cont

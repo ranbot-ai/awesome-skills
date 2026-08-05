@@ -3,7 +3,7 @@ name: antigravity-maintainer-batch-release
 description: Run protected AAS maintainer sweeps, PR merge batches, canonical sync, Core preview checks, and scripted releases. Use for repository maintenance, main alignment, CLI/MCP/Workbench changes, or release
 category: Document Processing
 source: antigravity
-tags: [api, mcp, claude, ai, agent, llm, automation, workflow, template, document]
+tags: [node, api, mcp, claude, ai, agent, llm, automation, workflow, template]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/antigravity-maintainer-batch-release
 ---
 
@@ -55,6 +55,5 @@ Before changing anything:
 3. Run checks in parallel where independent.
    - Use the repository validation, test, docs-security, source-credit, reference, warning-budget, and targeted app checks required by the changed files.
    - Fix deterministic policy failures in the source; do not wait for them as if they were flaky CI.
-   - Treat `pr-policy` fork classification from the exact protected-base implementation as an unprivileged fail-fast gate before dependent work, never as approval authority. `merge:batch` must still recompute the current trusted decision before approving any fork run or merging.
-   - Treat `impact_profile` as shadow-only telemetry. It must not skip, downgrade, or satisfy any required check.
-   - For ordinary source PRs, require `source-validation` to generate p
+   - Treat `pr-policy` fork classification from the exact protected-base implementation as an unprivileged fail-fast gate before dependent work, never as approval authority. Install and resolve every dependency used by that classifier from the same protected-base worktree; never expose it to pull-request-controlled `node_modules`. `merge:batch` must still recompute the current trusted decision before approving any fork run or merging.
+   - Treat `impact_profile
