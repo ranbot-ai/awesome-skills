@@ -22,7 +22,8 @@ Guide for implementing and maintaining context as a managed artifact alongside c
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
+- Use the workflow, artifact relationships, and validation checklist below when
+  detailed implementation guidance is required.
 
 ## Use this skill when
 
@@ -176,8 +177,4 @@ After completing a feature track:
 2. Update any affected success metrics
 3. Document any scope changes from original plan
 
-### Verify Context Before Implementation
-
-Before starting any track:
-
-1. Read all 
+### Verify Context Before Implementa

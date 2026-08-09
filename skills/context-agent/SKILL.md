@@ -10,26 +10,36 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cont
 
 # Context Agent
 
-## Overview
+> Este guia e intencionalmente escrito em portugues brasileiro. O cabecalho
+> Os cabecalhos `When to Use` e `Limitations` permanecem em ingles apenas para
+> compatibilidade com a descoberta e a validacao automatica do catalogo.
+
+> [!WARNING]
+> Esta skill escreve contexto, registros, um banco SQLite e `MEMORY.md` em
+> caminhos locais; a manutencao tambem pode arquivar e remover resumos antigos.
+> Confirme os caminhos, mantenha um backup e obtenha aprovacao explicita antes
+> de executar `init`, `save`, `archive` ou `maintain`.
+
+## Visao Geral
 
 Agente de contexto para continuidade entre sessoes. Salva resumos, decisoes, tarefas pendentes e carrega briefing automatico na sessao seguinte.
 
 ## When to Use This Skill
 
-- When the user mentions "salvar contexto" or related topics
-- When the user mentions "salva o contexto" or related topics
-- When the user mentions "proxima sessao" or related topics
-- When the user mentions "briefing sessao" or related topics
-- When the user mentions "resumo sessao" or related topics
-- When the user mentions "continuidade sessao" or related topics
+- Quando o usuario mencionar "salvar contexto" ou assuntos relacionados
+- Quando o usuario mencionar "salva o contexto" ou assuntos relacionados
+- Quando o usuario mencionar "proxima sessao" ou assuntos relacionados
+- Quando o usuario mencionar "briefing sessao" ou assuntos relacionados
+- Quando o usuario mencionar "resumo sessao" ou assuntos relacionados
+- Quando o usuario mencionar "continuidade sessao" ou assuntos relacionados
 
-## Do Not Use This Skill When
+## Quando Nao Usar Esta Skill
 
-- The task is unrelated to context agent
-- A simpler, more specific tool can handle the request
-- The user needs general-purpose assistance without domain expertise
+- A tarefa nao estiver relacionada a continuidade de contexto
+- Uma ferramenta mais simples e especifica puder atender ao pedido
+- O usuario precisar apenas de assistencia geral, sem esta especializacao
 
-## How It Works
+## Como Funciona
 
 Continuidade perfeita entre sessões do Claude Code. Captura, comprime e
 restaura contexto automaticamente — tópicos, decisões, tarefas, erros,
@@ -144,23 +154,4 @@ reconstrói índice de busca.
 - **Arquivos modificados**: quais arquivos foram editados/criados
 - **Descobertas**: insights técnicos importantes
 - **Erros resolvidos**: problemas e suas soluções
-- **Questões em aberto**: perguntas sem resposta
-- **Métricas**: tokens consumidos, mensagens, tool calls
-
-## Integração Com Memory.Md
-
-O ACTIVE_CONTEXT.md é automaticamente copiado para:
-`C:\Users\renat\.claude\projects\C--Users-renat-skills\memory\MEMORY.md`
-
-Como o MEMORY.md é incluído no system prompt de toda sessão, o Claude
-sempre começa sabendo o estado atual dos projetos, tarefas pendentes
-e decisões tomadas — sem precisar de nenhuma ação manual.
-
-## Referências
-
-- Para formato detalhado dos arquivos: `references/context-format.md`
-- Para regras de compressão e arquivamento: `references/compression-rules.md`
-
-## Best Practices
-
-- Provide clear, specific context about you
+- **Questões em aberto**: perguntas sem respost

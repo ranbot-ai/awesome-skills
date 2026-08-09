@@ -3,7 +3,7 @@ name: context-window-management
 description: Strategies for managing LLM context windows including summarization, trimming, routing, and avoiding context rot 
 category: AI & Agents
 source: antigravity
-tags: [api, claude, ai, llm, workflow, design, langchain, rag, cro]
+tags: [typescript, api, claude, ai, llm, workflow, design, langchain, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/context-window-management
 ---
 
@@ -47,6 +47,7 @@ Different strategies based on context size
 
 **When to use**: Building any multi-turn conversation system
 
+```typescript
 interface ContextTier {
     maxTokens: number;
     strategy: 'full' | 'summarize' | 'rag';
@@ -87,6 +88,7 @@ async function prepareContext(messages: Message[]): PreparedContext {
             return { messages: [...relevant, ...recentMessages(messages)], model: tier.model };
     }
 }
+```
 
 ### Serial Position Optimization
 
@@ -94,6 +96,7 @@ Place important content at start and end
 
 **When to use**: Constructing prompts with significant context
 
+```typescript
 // LLMs weight beginning and end more heavily
 // Structure prompts to leverage this
 
@@ -132,6 +135,7 @@ function buildOptimalPrompt(components: {
 
     return parts.join('\n\n');
 }
+```
 
 ### Intelligent Summarization
 
@@ -139,6 +143,7 @@ Summarize by importance, not just recency
 
 **When to use**: Context exceeds optimal size
 
+```typescript
 interface MessageWithMetadata extends Message {
     importance: number;  // 0-1 score
     hasCriticalInfo: boolean;  // User preferences, decisions
@@ -171,5 +176,4 @@ async function smartSummarize(
 
     // Summarize the low-importance messages
     if (summarizePool.length > 0) {
-        const summary = await llm.complete(`
-            Summarize these messages, 
+        const summary = await llm

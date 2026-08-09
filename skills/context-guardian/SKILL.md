@@ -10,26 +10,36 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cont
 
 # Context Guardian
 
-## Overview
+> Este guia e intencionalmente escrito em portugues brasileiro. O cabecalho
+> Os cabecalhos `When to Use` e `Limitations` permanecem em ingles apenas para
+> compatibilidade com a descoberta e a validacao automatica do catalogo.
+
+> [!WARNING]
+> Esta skill cria snapshots e pode remove-los durante a poda. Confirme o
+> diretorio de dados, mantenha um backup e obtenha aprovacao explicita antes de
+> executar `save` ou `prune`; nunca presuma autorizacao para alterar `MEMORY.md`
+> ou outros arquivos de contexto do usuario.
+
+## Visao Geral
 
 Guardiao de contexto que preserva dados criticos antes da compactacao automatica. Snapshots, verificacao de integridade e zero perda de informacao.
 
 ## When to Use This Skill
 
-- When the user mentions "compactacao contexto" or related topics
-- When the user mentions "perda de contexto" or related topics
-- When the user mentions "snapshot contexto" or related topics
-- When the user mentions "preservar contexto" or related topics
-- When the user mentions "contexto critico" or related topics
-- When the user mentions "antes de compactar" or related topics
+- Quando o usuario mencionar "compactacao contexto" ou assuntos relacionados
+- Quando o usuario mencionar "perda de contexto" ou assuntos relacionados
+- Quando o usuario mencionar "snapshot contexto" ou assuntos relacionados
+- Quando o usuario mencionar "preservar contexto" ou assuntos relacionados
+- Quando o usuario mencionar "contexto critico" ou assuntos relacionados
+- Quando o usuario mencionar "antes de compactar" ou assuntos relacionados
 
-## Do Not Use This Skill When
+## Quando Nao Usar Esta Skill
 
-- The task is unrelated to context guardian
-- A simpler, more specific tool can handle the request
-- The user needs general-purpose assistance without domain expertise
+- A tarefa nao estiver relacionada a preservacao de contexto
+- Uma ferramenta mais simples e especifica puder atender ao pedido
+- O usuario precisar apenas de assistencia geral, sem esta especializacao
 
-## How It Works
+## Como Funciona
 
 Sistema de integridade de contexto que protege projetos tecnicoss complexos contra
 perda de informacao durante compactacao automatica do Claude Code. Enquanto o
@@ -108,14 +118,4 @@ P2 = perda toleravel).
 |-----------|--------------|---------|
 | Decisoes tecnicas | Escolhas de arquitetura, padrao, tecnologia E motivo | "Usamos parameterized queries porque f-strings causam SQL injection" |
 | Estado de tarefas | O que foi feito, o que falta, dependencias | "18/18 match OK, falta ZIP" |
-| Correcoes aplicadas | Bug, causa raiz, solucao exata, arquivos afetados | "instagram/db.py: SQL injection via f-string → ? placeholders" |
-| Codigo gerado/modificado | Caminho exato, linhas alteradas, natureza da mudanca | "match_skills.py:40-119: adicionou 5 categorias" |
-| Erros encontrados | Mensagem exata, stack trace relevante, como resolveu | "TypeError at line 45 → cast para int" |
-| Comandos que funcionaram | Comando completo que produziu resultado correto | "python verify_zips.py → 22/22 OK" |
-
-**P1 — Perda Grave (preservar com verificacao)**
-
-| Categoria | O que extrair |
-|-----------|--------------|
-| Padroes descobertos | Convencoes, patterns de codigo observados |
-| Dependencias entre componentes | "scan_registry
+| Correcoes aplicadas | Bug, causa raiz, solucao exata, arquivos afetados | "instagram/db.py: SQL injection via
