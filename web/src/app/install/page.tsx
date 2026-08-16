@@ -125,7 +125,8 @@ const sources = [
   { name: 'anthropic', description: 'Official Anthropic skills', count: '16+' },
   { name: 'composio', description: 'Community Claude skills', count: '16+' },
   { name: 'superpowers', description: 'Agentic development skills', count: '14+' },
-  { name: 'openhands', description: 'AI-driven development', count: '10+' }
+  { name: 'openhands', description: 'AI-driven development', count: '10+' },
+  { name: 'ai-tutor', description: 'AI learning tutor & mistake book', count: '6' }
 ];
 
 export default function InstallPage() {

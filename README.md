@@ -23,6 +23,7 @@
 | [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | 67k+ | AI-driven development skills |
 | [Prat011/awesome-llm-skills](https://github.com/Prat011/awesome-llm-skills) | 700+ | LLM and AI Agent skills collection |
 | [sickn33/antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) | 3.6k+ | 253+ agentic skills for Claude Code, Gemini CLI, Cursor & more |
+| [zv38/ai-tutor](https://github.com/zv38/ai-tutor) | | AI learning tutor skill: explain mistakes, teach concepts, plan study, quiz & review with a forgetting-curve mistake book |
 
 ## Install Skills
 
@@ -114,7 +115,7 @@ cd awesome-skills
 # Search for skills
 ./scripts/install-skills.sh --search docker
 
-# Install all skills from a source (anthropic, composio, superpowers, openhands, awesome-llm, antigravity)
+# Install all skills from a source (anthropic, composio, superpowers, openhands, awesome-llm, antigravity, ai-tutor)
 ./scripts/install-skills.sh --source anthropic
 
 # Install skills by category
@@ -266,7 +267,8 @@ awesome-skills/
 │   │       ├── awesome-llm.ts
 │   │       ├── composio.ts
 │   │       ├── openhands.ts
-│   │       └── superpowers.ts
+│   │       ├── superpowers.ts
+│   │       └── ai-tutor.ts
 │   └── package.json
 ├── web/                    # Next.js frontend
 │   ├── src/

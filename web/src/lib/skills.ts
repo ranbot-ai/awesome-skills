@@ -46,6 +46,7 @@ export function getSourceColor(source: string): string {
     anthropic: 'bg-orange-500',
     superpowers: 'bg-yellow-500',
     'awesome-llm': 'bg-pink-500',
+    'ai-tutor': 'bg-indigo-500',
   };
   return colors[source] || 'bg-gray-500';
 }
