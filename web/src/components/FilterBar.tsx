@@ -19,6 +19,7 @@ const sources = [
   { id: 'all', name: 'All Sources' },
   { id: 'composio', name: 'ComposioHQ' },
   { id: 'openhands', name: 'OpenHands' },
+  { id: 'ai-tutor', name: 'AI Tutor' },
 ];
 
 export function FilterBar({

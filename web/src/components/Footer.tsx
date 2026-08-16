@@ -89,6 +89,16 @@ export function Footer() {
                   Awesome LLM Skills
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://github.com/zv38/ai-tutor"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  AI Tutor Skills
+                </a>
+              </li>
             </ul>
           </div>
 

@@ -7,6 +7,7 @@ export interface RepoStars {
   superpowers: number;
   awesomeLlm: number;
   antigravity: number;
+  aiTutor: number;
 }
 
 const CATEGORY_ICONS: Record<string, string> = {
@@ -38,7 +39,7 @@ const CATEGORY_DESCRIPTIONS: Record<string, string> = {
 export function processSkills(
   skills: Skill[],
   existingSkills: Skill[] = [],
-  stars: RepoStars = { composio: 0, openhands: 0, anthropic: 0, superpowers: 0, awesomeLlm: 0, antigravity: 0 }
+  stars: RepoStars = { composio: 0, openhands: 0, anthropic: 0, superpowers: 0, awesomeLlm: 0, antigravity: 0, aiTutor: 0 }
 ): ScrapedData {
   const scrapedAt = new Date().toISOString();
 
@@ -146,6 +147,13 @@ export function processSkills(
       skillCount: sourceCount.get('antigravity') || 0,
       newSkillCount: newSkillsBySource.get('antigravity') || 0,
       stars: stars.antigravity,
+    },
+    {
+      name: 'AI Tutor',
+      url: 'https://github.com/zv38/ai-tutor',
+      skillCount: sourceCount.get('ai-tutor') || 0,
+      newSkillCount: newSkillsBySource.get('ai-tutor') || 0,
+      stars: stars.aiTutor,
     },
   ];
 
