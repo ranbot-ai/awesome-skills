@@ -1,0 +1,26 @@
+{
+  "id": "antigravity-agent-qa-result-triage",
+  "name": "agent-qa-result-triage",
+  "slug": "agent-qa-result-triage",
+  "description": "Triage failed Agent QA runs with MCP evidence, artifacts, logs, fixed failure categories, confidence, and actionable next steps.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-qa-result-triage",
+  "content": "\n# Agent QA Result Triage\n\n## Overview\n\nClassify a failed Agent QA run from its recorded evidence instead of guessing. Inspect the run, steps, artifacts, and logs; choose one fixed category; and return confidence, likely ownership, and the next evidence-backed action.\n\n## When to Use\n\n- Investigating a failed or interrupted Agent QA run.\n- Inspecting run artifacts, step results, or execution logs.\n- Comparing recent related runs for recurring failure patterns.\n- Deciding whether a failure belongs to a test, product, hook, browser/mobile runtime, or infrastructure owner.\n\n## Workflow\n\n1. Start with `agent_qa_get_run` for run status, suite child context, steps, and attempts.\n2. Fetch evidence before deciding:\n   - `agent_qa_get_run_artifact`\n   - `agent_qa_get_run_steps`\n   - `agent_qa_get_run_logs`\n   - `agent_qa_get_run_execution_logs`\n3. Call `agent_qa_classify_failure` and use its category as the default classification unless stronger evidence contradicts it.\n4. Compare recent related runs when they are available in the classifier output.\n5. Return a concise triage result: category, confidence, evidence, likely fix area, and next action.\n6. For code changes, switch to `agent-qa-debug-fix` after triage is complete.\n\n## Categories\n\nUse exactly one category from `references/triage-categories.md`:\n\n- `timeout`\n- `appium_startup`\n- `browser_disconnect`\n- `element_not_found`\n- `assertion_failure`\n- `hook_failure`\n- `infrastructure`\n- `unknown_failure`\n\n## Evidence Rules\n\n- Quote or summarize concrete artifact, log, or step evidence.\n- Mention missing artifact sections when they limit confidence.\n- Do not invent screenshots, videos, logs, or memory context that MCP did not return.\n- If MCP is unavailable, use dashboard REST APIs or Agent QA CLI output as a fallback and state which evidence was unavailable.\n- Redact credentials, session tokens, personal data, and unrelated application content from the report.\n\n## Example\n\n```json\n{\n  \"category\": \"element_not_found\",\n  \"confidence\": \"high\",\n  \"evidence\": [\"Step 4 could not resolve the described checkout button\"],\n  \"likely_fix_area\": \"test definition or changed product UI\",\n  \"next_action\": \"Inspect the captured UI context, then compare the current checkout screen\"\n}\n```\n\n## Limitations\n\n- Classification is only as reliable as the retained run artifacts and logs.\n- A failure category identifies the most likely failure surface; it does not prove root cause.\n- Missing screenshots, DOM/accessibility context, device logs, or prior runs must lower confidence.\n- This skill does not modify tests or application code; use `agent-qa-debug-fix` for an authorized repair.\n",
+  "tags": [
+    "api",
+    "mcp",
+    "claude",
+    "ai",
+    "agent",
+    "workflow"
+  ],
+  "useCases": [
+    "Investigating a failed or interrupted Agent QA run.",
+    "Inspecting run artifacts, step results, or execution logs.",
+    "Comparing recent related runs for recurring failure patterns.",
+    "Deciding whether a failure belongs to a test, product, hook, browser/mobile runtime, or infrastructure owner."
+  ],
+  "scrapedAt": "2026-08-17T07:06:07.540Z"
+}

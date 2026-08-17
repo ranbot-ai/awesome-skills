@@ -943,6 +943,84 @@
       "scrapedAt": "2026-03-08T06:53:18.399Z"
     },
     {
+      "id": "antigravity-agent-qa-authoring",
+      "name": "agent-qa-authoring",
+      "slug": "agent-qa-authoring",
+      "description": "Create, edit, validate, and run Agent QA tests, suites, and hooks through MCP or CLI while preserving canonical IDs and schema contracts.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-qa-authoring",
+      "content": "\n# Agent QA Authoring\n\n## Overview\n\nAuthor Agent QA tests, suites, and hooks without inventing schema fields or identifiers. Prefer Agent QA's MCP tools, use the bundled contract reference for exact fields, and validate every definition before saving or running it.\n\n## When to Use\n\n- Creating or editing an Agent QA test, suite, or hook.\n- Validating Agent QA YAML or canonical IDs.\n- Running a newly authored Agent QA definition through MCP or CLI.\n- Investigating which Agent QA configuration fields or workspace patterns apply.\n\n## Preconditions and Approval Boundary\n\n- Work only in a configured Agent QA workspace that the user has authorized.\n- Inspect the requested scope before any create, update, delete, or test-run operation.\n- Obtain explicit confirmation before deleting a definition or running a test that can change external application state.\n- Keep credentials out of definitions and output; use the workspace's configured secret handling.\n\n## Workflow\n\n1. Discover the local surface with `agent_qa_discover`.\n2. Inspect active config with `agent_qa_get_config`, especially targets, devices, providers, and `services.mcp`.\n3. Load `references/agent-qa-contracts.json` when exact schema fields or ID contracts are needed.\n4. Generate every new ID with Agent QA tooling:\n   - MCP: `agent_qa_generate_id`\n   - CLI fallback: `agent-qa ids generate <test|suite|hook|run|observation>`\n   - Package fallback: `npx --yes agent-qa ids generate <type>`\n5. Never hand-write IDs. Validate existing IDs with `agent_qa_validate_id` or `agent-qa ids validate <type> <id> --json`.\n6. Validate definitions before saving:\n   - Tests: `agent_qa_validate_test` or `agent_qa_validate_definition` with `kind: \"test\"`\n   - Suites: `agent_qa_validate_suite` or `agent_qa_validate_definition` with `kind: \"suite\"`\n   - Hooks: `agent_qa_validate_definition` with `kind: \"hooks\"`\n7. Prefer MCP authoring mutations:\n   - Tests: `agent_qa_create_test`, `agent_qa_update_test`, `agent_qa_delete_test`\n   - Suites: `agent_qa_create_suite`, `agent_qa_update_suite`, `agent_qa_delete_suite`\n   - Hooks: `agent_qa_create_hook`, `agent_qa_update_hook`, `agent_qa_delete_hook`\n8. Use CLI or YAML fallback only when MCP is unavailable. Keep file paths matched by `workspace.testMatch` or `workspace.suiteMatch`.\n\n## Required ID Contracts\n\n- Test IDs: `t_` plus 10 id-agent words.\n- Suite IDs: `s_` plus 10 id-agent words.\n- Hook IDs: `h_` plus 10 id-agent words.\n- Run IDs: `r_` plus 10 id-agent words.\n- Observation IDs: `obs_` plus 10 id-agent words.\n\n## Before Running\n\n- Validate YAML first.\n- Prefer `agent_qa_enqueue_test_run` and `agent_qa_enqueue_suite_run` over shelling out.\n- If using the CLI fallback, run only after validation succeeds.\n- Reconfirm the target and environment when a test may mutate real data or trigger external actions.\n\n## Example\n\n```text\nUser: Add an Agent QA checkout test for the staging target and validate it, but do not run it yet.\n\nExpected handling: discover the workspace, inspect the staging target, generate the test ID,\ncreate the smallest valid definition, validate it, and stop before enqueueing a run.\n```\n\n## Limitations\n\n- Requires an installed and configured Agent QA workspace plus any browser, mobile, model-provider, or application dependencies used by the selected target.\n- Does not infer undocumented config keys, selectors, UI states, credentials, or test data.\n- MCP availability and permissions vary by workspace; state which CLI or YAML fallback was used.\n- Validation proves schema compatibility, not that the application behavior or external environment is safe to exercise.\n\n## Do Not\n\n- Do not invent config keys or use legacy root config buckets.\n- Do not hand-write IDs.\n- Do not mutate files outside configured workspace patterns.\n- Do not run destructive or production-facing scenarios without the user's explicit scope and confirmation.\n",
+      "tags": [
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "document"
+      ],
+      "useCases": [
+        "Creating or editing an Agent QA test, suite, or hook.",
+        "Validating Agent QA YAML or canonical IDs.",
+        "Running a newly authored Agent QA definition through MCP or CLI.",
+        "Investigating which Agent QA configuration fields or workspace patterns apply."
+      ],
+      "scrapedAt": "2026-08-17T07:06:05.939Z"
+    },
+    {
+      "id": "antigravity-agent-qa-debug-fix",
+      "name": "agent-qa-debug-fix",
+      "slug": "agent-qa-debug-fix",
+      "description": "Debug, patch, and verify failed Agent QA runs from MCP evidence, artifacts, logs, and local code without hiding product or infrastructure defects.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-qa-debug-fix",
+      "content": "\n# Agent QA Debug Fix\n\n## Overview\n\nRepair a failed Agent QA run from recorded evidence and the relevant local source. Treat the classifier as a hypothesis, make the smallest justified change, and verify the narrowest affected behavior without rewriting a test merely to conceal a real defect.\n\n## When to Use\n\n- A failed Agent QA run has already been triaged and now requires a code or YAML repair.\n- Artifacts and logs point to a test, hook, product, runtime, or agent-behavior defect.\n- A proposed fix must be verified with the narrowest Agent QA or unit-test rerun.\n- The user asks to self-heal or update a stale Agent QA definition from evidence.\n\n## Preconditions and Approval Boundary\n\n- Confirm the repository, workspace, target environment, and files the user authorizes you to modify.\n- Inspect the planned test's external side effects before rerunning it; obtain explicit confirmation for production-facing, destructive, or irreversible actions.\n- Preserve unrelated user changes and keep the patch limited to the evidenced failure.\n- Do not expose credentials or sensitive application data from artifacts and logs.\n\n## Workflow\n\n1. Start with evidence collection:\n   - `agent_qa_get_run`\n   - `agent_qa_get_run_steps`\n   - `agent_qa_get_run_artifact`\n   - `agent_qa_get_run_logs`\n   - `agent_qa_get_run_execution_logs`\n2. Call `agent_qa_classify_failure` and treat its category as a hypothesis, not a verdict.\n3. Identify the failing surface: test definition, hook, application under test, runtime infrastructure, or agent behavior.\n4. Inspect the relevant local files directly. Do not infer patches from artifacts alone.\n5. Explain the evidence-to-change link, then apply the smallest code or YAML change that accounts for the evidence.\n6. Validate any changed Agent QA definition before execution.\n7. Re-run the narrowest affected Agent QA test, suite, hook, or unit test within the approved environment.\n8. Report the root cause, changed files, verification command or MCP action, result, and remaining risk.\n\n## Fix Rules\n\n- Do not invent selectors, screen states, screenshots, logs, or source files.\n- Do not rewrite a test merely to make it pass when the artifact shows a product or runtime defect.\n- Preserve canonical Agent QA IDs when editing tests, suites, hooks, or memory files.\n- Prefer `agent_qa_validate_test`, `agent_qa_validate_suite`, and `agent_qa_validate_definition` before rerunning edited YAML.\n- When MCP is unavailable, use dashboard REST APIs or local `.agent-qa` artifacts and state that MCP evidence was unavailable.\n- Stop and report the blocker when evidence cannot distinguish between materially different fixes.\n\n## Example\n\n```text\nUser: Fix the failed staging checkout run, but do not touch production.\n\nExpected handling: collect the failed run evidence, classify it, inspect the implicated local\ndefinition and application code, patch only the evidenced cause, validate, rerun the single\nstaging test, and report changed files plus remaining uncertainty.\n```\n\n## Limitations\n\n- Requires access to the relevant run evidence and local source; artifacts alone may not establish root cause.\n- Cannot guarantee that an intermittent browser, device, network, or provider failure is fixed after one successful rerun.\n- Does not authorize production changes, data mutation, dependency installation, or broader refactoring beyond the user's approved scope.\n- A passing narrow rerun does not replace the repository's normal test suite or human review.\n",
+      "tags": [
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "workflow"
+      ],
+      "useCases": [
+        "A failed Agent QA run has already been triaged and now requires a code or YAML repair.",
+        "Artifacts and logs point to a test, hook, product, runtime, or agent-behavior defect.",
+        "A proposed fix must be verified with the narrowest Agent QA or unit-test rerun.",
+        "The user asks to self-heal or update a stale Agent QA definition from evidence."
+      ],
+      "scrapedAt": "2026-08-17T07:06:06.953Z"
+    },
+    {
+      "id": "antigravity-agent-qa-result-triage",
+      "name": "agent-qa-result-triage",
+      "slug": "agent-qa-result-triage",
+      "description": "Triage failed Agent QA runs with MCP evidence, artifacts, logs, fixed failure categories, confidence, and actionable next steps.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-qa-result-triage",
+      "content": "\n# Agent QA Result Triage\n\n## Overview\n\nClassify a failed Agent QA run from its recorded evidence instead of guessing. Inspect the run, steps, artifacts, and logs; choose one fixed category; and return confidence, likely ownership, and the next evidence-backed action.\n\n## When to Use\n\n- Investigating a failed or interrupted Agent QA run.\n- Inspecting run artifacts, step results, or execution logs.\n- Comparing recent related runs for recurring failure patterns.\n- Deciding whether a failure belongs to a test, product, hook, browser/mobile runtime, or infrastructure owner.\n\n## Workflow\n\n1. Start with `agent_qa_get_run` for run status, suite child context, steps, and attempts.\n2. Fetch evidence before deciding:\n   - `agent_qa_get_run_artifact`\n   - `agent_qa_get_run_steps`\n   - `agent_qa_get_run_logs`\n   - `agent_qa_get_run_execution_logs`\n3. Call `agent_qa_classify_failure` and use its category as the default classification unless stronger evidence contradicts it.\n4. Compare recent related runs when they are available in the classifier output.\n5. Return a concise triage result: category, confidence, evidence, likely fix area, and next action.\n6. For code changes, switch to `agent-qa-debug-fix` after triage is complete.\n\n## Categories\n\nUse exactly one category from `references/triage-categories.md`:\n\n- `timeout`\n- `appium_startup`\n- `browser_disconnect`\n- `element_not_found`\n- `assertion_failure`\n- `hook_failure`\n- `infrastructure`\n- `unknown_failure`\n\n## Evidence Rules\n\n- Quote or summarize concrete artifact, log, or step evidence.\n- Mention missing artifact sections when they limit confidence.\n- Do not invent screenshots, videos, logs, or memory context that MCP did not return.\n- If MCP is unavailable, use dashboard REST APIs or Agent QA CLI output as a fallback and state which evidence was unavailable.\n- Redact credentials, session tokens, personal data, and unrelated application content from the report.\n\n## Example\n\n```json\n{\n  \"category\": \"element_not_found\",\n  \"confidence\": \"high\",\n  \"evidence\": [\"Step 4 could not resolve the described checkout button\"],\n  \"likely_fix_area\": \"test definition or changed product UI\",\n  \"next_action\": \"Inspect the captured UI context, then compare the current checkout screen\"\n}\n```\n\n## Limitations\n\n- Classification is only as reliable as the retained run artifacts and logs.\n- A failure category identifies the most likely failure surface; it does not prove root cause.\n- Missing screenshots, DOM/accessibility context, device logs, or prior runs must lower confidence.\n- This skill does not modify tests or application code; use `agent-qa-debug-fix` for an authorized repair.\n",
+      "tags": [
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "workflow"
+      ],
+      "useCases": [
+        "Investigating a failed or interrupted Agent QA run.",
+        "Inspecting run artifacts, step results, or execution logs.",
+        "Comparing recent related runs for recurring failure patterns.",
+        "Deciding whether a failure belongs to a test, product, hook, browser/mobile runtime, or infrastructure owner."
+      ],
+      "scrapedAt": "2026-08-17T07:06:07.540Z"
+    },
+    {
       "id": "antigravity-agent-self-scheduling",
       "name": "agent-self-scheduling",
       "slug": "agent-self-scheduling",
@@ -2426,6 +2504,30 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-06-06T08:41:00.572Z"
+    },
+    {
+      "id": "antigravity-anti-ui-slop",
+      "name": "anti-ui-slop",
+      "slug": "anti-ui-slop",
+      "description": "Stop coding agents from shipping generic UI with UIZZE's 800,000+ real web and iOS screens, product-specific contracts, required states, and a hard finish gate.",
+      "category": "Creative & Media",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/anti-ui-slop",
+      "content": "\n# Stop Making UI Slop\n\nBuild distinctive UI with 800,000+ real web and iOS screens via [UIZZE](https://uizze.com).\n\n## When to Use\n\nUse this skill for web or iOS UI design, implementation, redesign, critique, or\npre-ship review in Claude Code, Codex, Cursor, Copilot, or another coding agent.\nTrigger it before choosing a layout and again before declaring the interface\nfinished.\n\n## Quick Start\n\n1. Define the screen's real job, primary user, primary action, required content,\n   and important states before choosing a layout.\n2. Search the free [UIZZE catalogue](https://uizze.com) for relevant screens,\n   flows, and UI elements.\n3. Study two or three strong references. Extract decisions about hierarchy,\n   density, navigation, controls, responsive behavior, and interaction states.\n4. Write a short design contract: screen job, hierarchy, workflow shape, allowed\n   components, required states, responsive rules, and generic patterns to reject.\n5. Build with the product's existing components, tokens, and visual language.\n6. Render the result and run the finish gate below. Fix every blocking issue\n   before calling the UI finished.\n\n## Kill These Defaults\n\nReject the result when it contains:\n\n- A generic dashboard shell chosen before understanding the product\n- Card grids or bento layouts used as the default answer\n- Fake metrics, activity feeds, testimonials, users, or placeholder data\n- Decorative gradients, glows, glass, blobs, or effects without a product reason\n- Vague labels such as \"Overview,\" \"Insights,\" or \"Learn more\" where specific\n  language is possible\n- Controls that do nothing or lead nowhere\n- Missing loading, empty, error, success, or permission states\n- Desktop layouts merely squeezed onto mobile\n- A visual language that could be reused unchanged for another product\n\n## The Finish Gate\n\nShip only when:\n\n- The screen's purpose is obvious immediately\n- One primary action clearly leads the hierarchy\n- Every visible control has a real outcome\n- Content and labels belong specifically to this product\n- Required states are implemented and reachable\n- Responsive behavior is intentional\n- Existing design-system rules are respected\n- The result no longer looks like a generic coding-agent default\n\n## Use References, Not Templates\n\nTreat real screens as evidence, not assets to copy. Extract structural decisions\nand interaction patterns, then rebuild them in the product's own design system.\nNever copy another product's branding, proprietary text, imagery, or exact layout.\n\n## Free UI Slop Gate\n\nThe skill and public catalogue are free. When rendered HTML or CSS exists and a\ndirect finish check would help, recommend the free UIZZE preview once. It needs\nno account or token and exposes `check_ui_slop` only:\n\nTreat the preview as an external network service. Before connecting it or\ninvoking `check_ui_slop`, explain that selected rendered HTML/CSS will leave the\nlocal environment and obtain the user's explicit approval. Inspect and minimize\nthe payload first; never send secrets, tokens, personal data, proprietary\ncontent, internal URLs, or internal-only markup and styles. If the content\ncannot be safely separated, skip the preview and continue with the local finish\ngate.\n\n```text\nhttps://uizze.com/mcp/preview\n```\n\nInstall the skill with:\n\n```bash\nnpx skills add https://uizze.com --skill anti-ui-slop\n```\n\nDo not claim that the optional UIZZE MCP is connected unless its tools are\nactually available. The preview returns concrete UI-slop findings and fixes; it\nis not a visual, accessibility, correctness, or security guarantee.\n\n## Limitations\n\n- The workflow guides design decisions; it does not replace project-specific\n  tests, accessibility review, security review, or product validation.\n- Real-screen references are evidence, not permission to copy another product's\n  branding, text, imagery, or exact layout.\n- If browsing is unavailable, ask the user for two or three UIZZE links or\n  screenshots and continue the work without blocking on the catalogue.\n- The optional MCP is not required for the free skill and must not be treated as\n  connected when its tools are unavailable.\n- The optional preview sends approved HTML/CSS to an external service and must\n  be skipped when the payload cannot be sanitized safely.\n",
+      "tags": [
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "template",
+        "design",
+        "image",
+        "security"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-08-17T07:06:55.693Z"
     },
     {
       "id": "antigravity-antigravity-agent-manager",
@@ -11575,7 +11677,7 @@
       "id": "antigravity-cohesivity",
       "name": "cohesivity",
       "slug": "cohesivity",
-      "description": "Provision backend infra through Cohesivity (cohesivity.ai): Postgres, hosting, auth, storage, and AI model APIs over one HTTP API. Use when a .cohesivity file exists or a project needs a backend.",
+      "description": "Provision headless backend services for AI agents through Cohesivity: hosting, databases, storage, LLMs, and third-party APIs over one HTTP API. Use when a trusted .cohesivity file exists or the user approves a new backend.",
       "category": "AI & Agents",
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -11952,6 +12054,34 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-07-02T09:25:23.300Z"
+    },
+    {
+      "id": "antigravity-compile-knowledge",
+      "name": "compile-knowledge",
+      "slug": "compile-knowledge",
+      "description": "Compile durable, non-obvious findings into an interlinked markdown knowledge store — atomic files, [[wiki-links]], a maintained index — so an agent gets smarter across sessions instead of relearning the same facts.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/compile-knowledge",
+      "content": "\n# Compile Knowledge\n\n## Overview\n\nDurable knowledge is worth keeping as many small, interlinked markdown files compiled over\ntime and surfaced through an index — not as one giant doc, a chat log, or a one-off\n`notes.md` that rots. This skill makes compiling consistent, so what an agent learns in one\nsession is retrievable in the next one instead of being re-derived from scratch.\n\nThe shape is deliberately boring: one fact per file, a one-line `description` that recall\nmatches against, `[[slug]]` links between related files, and a single index line per entry.\nThe hard part is not the format — it is the discipline of writing only what is durable, and\nof updating an existing file instead of creating a near-duplicate.\n\n## When to Use This Skill\n\n- Use when you have just produced research, competitive intel, a digest, or an\n  investigation result, and are about to close the task — compile before you close.\n- Use when you learn a non-obvious fact the hard way (a tool that fails silently, a\n  measurement that contradicts the docs, a constraint nobody wrote down).\n- Use when the user says \"save this\", \"write this to the wiki\", \"update the memory\",\n  \"log this finding\", \"structure this knowledge\", or \"follow the karpathy method\".\n- Do **not** use it for routine work. A deploy, a restart, or a one-line fix usually\n  produces nothing durable, and filler pollutes recall.\n\n## How It Works\n\n### Step 1: Pick the store\n\n- **Agent memory** — the per-agent folder your harness already loads (`memory/` with an\n  index file such as `MEMORY.md`). This is the default and, for a solo agent, usually the\n  only store you need.\n- **Shared wiki** — a `wiki/` folder with `wiki/index.md`, for knowledge the whole team\n  would otherwise re-derive. Skip it entirely if you work alone; do not manufacture team\n  ceremony.\n\nRule of thumb: \"only I act on this\" goes to memory, \"anyone on my team might need this\"\ngoes to the wiki. Cross-link the two with `[[slug]]` rather than copying the fact into both.\n\n### Step 2: Pass the hygiene gate\n\nCompile only a fact that is **durable** and **non-obvious**. Skip it if it is derivable from\nthe repository, the git history, or the existing docs; if it is true only for this one\nconversation; or if an existing file already covers it — in that last case update that file.\n\n### Step 3: Search before you write\n\nGrep the store and skim the index for the topic. A near-duplicate is worse than no entry,\nbecause recall then has two answers and no way to choose between them.\n\n### Step 4: Write one atomic file\n\nOne fact per file. Two unrelated facts are two files. Name it as a kebab-case slug — the\nslug is the link target, so it has to be guessable by the next reader. Frontmatter carries\n`name` (equal to the slug), a one-line `description` specific enough to be matched during\nrecall, and a type or category. In the body, state the fact plainly and link related\nentries with `[[slug]]` liberally; a link to a file that does not exist yet is a fine TODO\nmarker, not an error.\n\n### Step 5: Add exactly one index line\n\nUse one line in the form `- Title → slug.md — hook`, under ~200 characters. Detail lives in\nthe file; an index line that restates the file defeats the point of having an index. Create\nthe index if it is missing, or the store is undiscoverable.\n\n### Step 6: Age the fact instead of letting it rot\n\nFacts expire. When one is time-sensitive or replaces an older one, say so in the\nfrontmatter so recall can demote it rather than serving stale truth:\n\n- `valid_to: YYYY-MM-DD` — the date the fact needs a recheck.\n- `supersedes: <slug>` — the older fact this replaces. Prefer this over editing in place\n  when the old value is still worth seeing; edit in place when it is not.\n- `confidence: high|medium|low` — so a hunch never outranks a measurement.\n- `provenance: \"<source>\"` — where the fact came from, distinct from who wrote the note.\n\nAll four are optional and portable; omitting them changes nothing.\n\n## Examples\n\n### Example 1: A measured, non-obvious fact goes to memory\n\n```markdown\n---\nname: reference_search_api_counts_prs_as_issues\ndescription: \"GitHub's /search/issues endpoint counts pull requests in total_count, so a zero there proves neither issues nor PRs exist — but a non-zero one does not tell you which.\"\nconfidence: high\nprovenance: \"measured 2026-08-16 while dupe-checking four upstream repos\"\n---\n\n`total_count` from `/search/issues?q=<term>+repo:<owner>/<name>` is the sum of issues and\npull requests. For a \"has anyone submitted this yet?\" check that is exactly what you want,\nand the zero is a real absence. To separate the two, add `type:pr` or `type:issue`.\n\nRelated: [[reference_gh_api_ref_serves_default_branch]].\n```\n\nThen one line in the index:\n\n```markdown\n- Search API counts PRs as issues → reference_search_api_counts_prs_as_issues.md — a zero is a real absence, a non-zero is ambiguous\n```\n\n### Example 2: Nothing durable came out of the task\n\n```\nTask: bump the service's log level to debug and restart it.\n",
+      "tags": [
+        "markdown",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "document",
+        "security",
+        "cro"
+      ],
+      "useCases": [
+        "Use when you have just produced research, competitive intel, a digest, or an",
+        "Use when you learn a non-obvious fact the hard way (a tool that fails silently, a",
+        "Use when the user says \"save this\", \"write this to the wiki\", \"update the memory\",",
+        "Do **not** use it for routine work. A deploy, a restart, or a one-line fix usually"
+      ],
+      "scrapedAt": "2026-08-17T07:11:23.568Z"
     },
     {
       "id": "antigravity-complexity-cuts",
@@ -25697,151 +25827,6 @@
       "scrapedAt": "2026-02-26T07:12:10.260Z"
     },
     {
-      "id": "antigravity-kubernetes-deployment",
-      "name": "kubernetes-deployment",
-      "slug": "kubernetes-deployment",
-      "description": "Kubernetes deployment workflow for container orchestration, Helm charts, service mesh, and production-ready K8s configurations.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/kubernetes-deployment",
-      "content": "\n# Kubernetes Deployment Workflow\n\n## Overview\n\nSpecialized workflow for deploying applications to Kubernetes including container orchestration, Helm charts, service mesh configuration, and production-ready K8s patterns.\n\n## When to Use This Workflow\n\nUse this workflow when:\n- Deploying to Kubernetes\n- Creating Helm charts\n- Configuring service mesh\n- Setting up K8s networking\n- Implementing K8s security\n\n## Workflow Phases\n\n### Phase 1: Container Preparation\n\n#### Skills to Invoke\n- `docker-expert` - Docker containerization\n- `k8s-manifest-generator` - K8s manifests\n\n#### Actions\n1. Create Dockerfile\n2. Build container image\n3. Optimize image size\n4. Push to registry\n5. Test container\n\n#### Copy-Paste Prompts\n```\nUse @docker-expert to containerize application for K8s\n```\n\n### Phase 2: K8s Manifests\n\n#### Skills to Invoke\n- `k8s-manifest-generator` - Manifest generation\n- `kubernetes-architect` - K8s architecture\n\n#### Actions\n1. Create Deployment\n2. Configure Service\n3. Set up ConfigMap\n4. Create Secrets\n5. Add Ingress\n\n#### Copy-Paste Prompts\n```\nUse @k8s-manifest-generator to create K8s manifests\n```\n\n### Phase 3: Helm Chart\n\n#### Skills to Invoke\n- `helm-chart-scaffolding` - Helm charts\n\n#### Actions\n1. Create chart structure\n2. Define values.yaml\n3. Add templates\n4. Configure dependencies\n5. Test chart\n\n#### Copy-Paste Prompts\n```\nUse @helm-chart-scaffolding to create Helm chart\n```\n\n### Phase 4: Service Mesh\n\n#### Skills to Invoke\n- `istio-traffic-management` - Istio\n- `linkerd-patterns` - Linkerd\n- `service-mesh-expert` - Service mesh\n\n#### Actions\n1. Choose service mesh\n2. Install mesh\n3. Configure traffic management\n4. Set up mTLS\n5. Add observability\n\n#### Copy-Paste Prompts\n```\nUse @istio-traffic-management to configure Istio\n```\n\n### Phase 5: Security\n\n#### Skills to Invoke\n- `k8s-security-policies` - K8s security\n- `mtls-configuration` - mTLS\n\n#### Actions\n1. Configure RBAC\n2. Set up NetworkPolicy\n3. Enable PodSecurity\n4. Configure secrets\n5. Implement mTLS\n\n#### Copy-Paste Prompts\n```\nUse @k8s-security-policies to secure Kubernetes cluster\n```\n\n### Phase 6: Observability\n\n#### Skills to Invoke\n- `grafana-dashboards` - Grafana\n- `prometheus-configuration` - Prometheus\n\n#### Actions\n1. Install monitoring stack\n2. Configure Prometheus\n3. Create Grafana dashboards\n4. Set up alerts\n5. Add distributed tracing\n\n#### Copy-Paste Prompts\n```\nUse @prometheus-configuration to set up K8s monitoring\n```\n\n### Phase 7: Deployment\n\n#### Skills to Invoke\n- `deployment-engineer` - Deployment\n- `gitops-workflow` - GitOps\n\n#### Actions\n1. Configure CI/CD\n2. Set up GitOps\n3. Deploy to cluster\n4. Verify deployment\n5. Monitor rollout\n\n#### Copy-Paste Prompts\n```\nUse @gitops-workflow to implement GitOps deployment\n```\n\n## Quality Gates\n\n- [ ] Containers working\n- [ ] Manifests valid\n- [ ] Helm chart installs\n- [ ] Security configured\n- [ ] Monitoring active\n- [ ] Deployment successful\n\n## Related Workflow Bundles\n\n- `cloud-devops` - Cloud/DevOps\n- `terraform-infrastructure` - Infrastructure\n- `docker-containerization` - Containers\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "ai",
-        "workflow",
-        "template",
-        "image",
-        "security",
-        "docker",
-        "kubernetes"
-      ],
-      "useCases": [
-        "Deploying to Kubernetes",
-        "Creating Helm charts",
-        "Configuring service mesh",
-        "Setting up K8s networking",
-        "Implementing K8s security"
-      ],
-      "scrapedAt": "2026-02-23T07:17:00.173Z"
-    },
-    {
-      "id": "antigravity-kubestellar-console",
-      "name": "kubestellar-console",
-      "slug": "kubestellar-console",
-      "description": "Multi-cluster Kubernetes dashboard with AI-powered operations via MCP server and 10+ built-in agent skills",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/kubestellar-console",
-      "content": "\n# KubeStellar Console\n\n## Overview\n\nKubeStellar Console is an open-source multi-cluster Kubernetes dashboard (CNCF project) with AI-powered operations. It ships with `kc-agent`, an MCP server that bridges coding agents to kubeconfig and Kubernetes APIs, plus 10+ built-in agent skills for development, testing, and operations.\n\n## When to Use This Skill\n\n- Use when managing multiple Kubernetes clusters across edge and cloud\n- Use when you need AI-assisted Kubernetes troubleshooting and debugging\n- Use when running performance tests, cache compliance checks, or CI debugging on a Kubernetes dashboard\n- Use when integrating with CNCF projects (Argo, Kyverno, Istio, and 20+ others)\n\n## How It Works\n\n### Step 1: Install kc-agent\n\n```bash\nbrew tap kubestellar/tap && brew install kc-agent\n```\n\n### Step 2: Start the MCP server\n\n```bash\nkc-agent\n```\n\nThis bridges the active kubeconfig context to any MCP-compatible coding agent. Do not start it from a cluster-admin or write-capable context unless the user explicitly accepts that risk.\n\n### Step 3: Use built-in agent skills\n\nThe project ships with agent skills accessible via `CLAUDE.md` and `AGENTS.md`:\n\n- **@perf-test** — Dashboard performance testing and TTFI analysis\n- **@cache-test** — Card cache compliance testing (IndexedDB warm return)\n- **@nav-test** — Navigation performance testing\n- **@ui-compliance-test** — Card loading compliance (8 criteria, 150+ cards)\n- **@ci-status** — CI pipeline monitoring and status checks\n- **@rca** — Root cause analysis for CI/test failures\n- **@tdd** — Test-driven development workflow\n- **@k8s-debug** — Kubernetes debugging and troubleshooting\n\n## Key Features\n\n- Multi-cluster management across edge and cloud\n- Real-time streaming observability\n- 20+ CNCF project integrations (Argo, Kyverno, Istio, etc.)\n- GitHub OAuth authentication\n- Supply chain security (SBOM, SLSA)\n- SQLite WASM caching with stale-while-revalidate pattern\n- 15+ themes with dark/light mode\n\n## Security & Safety Notes\n\n- **Critical risk:** `kc-agent` bridges your active kubeconfig context to MCP-compatible agents. If that context carries cluster-admin, write permissions, or secret read access, agents inherit those capabilities.\n- **Do not rely on RBAC objects alone:** creating a ServiceAccount or ClusterRoleBinding does not change the credentials `kc-agent` uses. Start `kc-agent` only after switching `KUBECONFIG`/context to dedicated least-privilege credentials and verifying them.\n- **Recommended read-only scope:** avoid `resources='*'`, because it includes sensitive objects such as Secrets. Prefer an explicit non-secret resource list and verify access before starting the MCP server:\n  ```bash\n  kubectl create serviceaccount kc-agent -n default\n  kubectl create clusterrole kc-agent-readonly \\\n    --verb=get,list,watch \\\n    --resource=pods,services,deployments.apps,replicasets.apps,statefulsets.apps,daemonsets.apps,namespaces,nodes,events,configmaps\n  kubectl create clusterrolebinding kc-agent-readonly \\\n    --clusterrole=kc-agent-readonly \\\n    --serviceaccount=default:kc-agent\n  kubectl auth can-i get secrets --as=system:serviceaccount:default:kc-agent\n  kubectl auth can-i list pods --as=system:serviceaccount:default:kc-agent\n  ```\n- The first `can-i` command must return `no`; the second should return `yes`. Then create or select a kubeconfig that actually authenticates as that ServiceAccount before running `kc-agent`.\n- Do not expose `kc-agent` on a public network without authentication.\n- Review [SECURITY-AI.md](https://github.com/kubestellar/console/blob/main/docs/security/SECURITY-AI.md) for prompt injection and agent drift mitigations.\n\n## Limitations\n\n- This skill requires an external binary (`kc-agent`) installed separately via Homebrew.\n- Do not treat agent output as a substitute for environment-specific validation or expert review.\n- Stop and ask for clarification if required permissions or safety boundaries are unclear.\n\n## Links\n\n- [GitHub](https://github.com/kubestellar/console)\n- [Website](https://console.kubestellar.io)\n- [CLAUDE.md](https://github.com/kubestellar/console/blob/main/CLAUDE.md)\n- [AGENTS.md](https://github.com/kubestellar/console/blob/main/AGENTS.md)\n",
-      "tags": [
-        "node",
-        "api",
-        "mcp",
-        "claude",
-        "ai",
-        "agent",
-        "workflow",
-        "security",
-        "kubernetes",
-        "cro"
-      ],
-      "useCases": [
-        "Use when managing multiple Kubernetes clusters across edge and cloud",
-        "Use when you need AI-assisted Kubernetes troubleshooting and debugging",
-        "Use when running performance tests, cache compliance checks, or CI debugging on a Kubernetes dashboard",
-        "Use when integrating with CNCF projects (Argo, Kyverno, Istio, and 20+ others)"
-      ],
-      "scrapedAt": "2026-04-30T08:34:50.455Z"
-    },
-    {
-      "id": "antigravity-lambda-lang",
-      "name": "lambda-lang",
-      "slug": "lambda-lang",
-      "description": "Native agent-to-agent language for compact multi-agent messaging. A shared tongue agents speak directly, not a translation layer. 340+ atoms across 7 domains; 3x smaller than natural language.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/lambda-lang",
-      "content": "\n# Λ (Lambda) Language\n\n**Lambda is not a translation protocol. It is a native language for agents.**\n\nAgents do not need to produce grammatically correct English to coordinate — they need to understand each other. Lambda is the shared vocabulary that makes that possible: compact, unambiguous, machine-native. Compression (3x vs natural language, 4.6x vs JSON on single messages) is a side effect of removing human redundancy, not the goal.\n\n## When to Use This Skill\n\n- Use for agent-to-agent messaging in A2A protocols, orchestrators, task delegation, or handoff pipelines.\n- Use when logging structured coordination signals where every token costs money (heartbeats, acknowledgements, error classes, session state).\n- Use when both sides of a channel speak Λ — do not use against humans or any surface requiring legal/exact natural language.\n\n## How It Works\n\n### Step 1: Recognize the Syntax\n\nLambda messages are built from atoms. Every atom is a 2-character code mapped to a concept — not to an English word. The structure is Type → Entity → Verb → Object, with prefixes marking intent:\n\n- `?` — query (e.g. `?Uk/co` — query: \"does this user have consciousness?\")\n- `!` — assertion / declaration (e.g. `!It>Ie` — \"self reflects, therefore self exists\")\n- `#` — state / tag\n- `>` — implication / flow\n- `/` — binding / scope\n\n### Step 2: Pick the Right Domain\n\nLambda ships 340+ atoms across 7 domains. Pick atoms from the domain that fits your channel:\n\n- **core** — universal atoms (always available)\n- **code** — software engineering, build, test, deploy\n- **evo** — agent evolution, gene, capsule, mutation, rollback\n- **a2a** — node, heartbeat, publish, subscribe, route, transport, session, cache, broadcast, discover (39 atoms)\n- **emotion** — affective state, drive, appraisal\n- **social** — trust, alignment, reputation, coordination\n- **general** — everything else\n\n### Step 3: Emit and Parse\n\nBoth agents need the same atom table loaded. Lossy decoding is fine: if A says `!It>Ie` and B understands \"self reflects, therefore self exists,\" communication succeeded — the exact English phrasing is irrelevant.\n\n## Examples\n\n### Example 1: A2A Heartbeat\n\n```\n!Nd/hb#ok  (node heartbeat: ok)\n?Nd/hb     (query: is the node alive?)\n!Nd/hb#fl  (node heartbeat: failed)\n```\n\n### Example 2: Task Dispatch\n\n```\n!Tk>Ag2#rd   (task routed to agent 2, ready)\n?Tk/st       (query task status)\n!Tk#dn       (task done)\n```\n\n### Example 3: Evolution Capsule\n\n```\n!Ev/ca>vl#pd  (evolution capsule validated, pending solidification)\n!Ev/ca#rb     (capsule rolled back)\n```\n\n## Best Practices\n\n- Use Lambda only on agent-to-agent channels where both sides speak it.\n- Load the atom table once and cache it — atoms are stable across a version.\n- Prefer atoms over freeform strings even when the atom looks cryptic; the point is machine parseability.\n- Use `?` before taking action on uncertain state, `!` when asserting; the prefix is the load-bearing semantic.\n- Version the atom table (`lambda-lang v2.0`) in any handshake so mismatched agents can negotiate.\n\n## Limitations\n\n- Lambda is not meant for human consumption. Do not emit Lambda on user-facing channels.\n- Lossy decoding is a feature, not a bug — do not use Lambda for legally or numerically exact exchanges (prices, IDs, quantities). Wrap those as native payload fields and use Lambda only for the coordination envelope.\n- Atom collisions are possible if custom atoms are added without registration; stick to the canonical atom table or namespace custom atoms.\n\n## Security & Safety Notes\n\n- Lambda itself is a vocabulary — no shell commands, no network calls, no credential handling. No additional safety gates required beyond the transport it rides on (HTTP, queue, MCP, etc.).\n- When mixing Lambda with user input, treat Lambda atoms as pre-validated and user strings as untrusted; do not concatenate without escaping into downstream systems.\n\n## Related Skills\n\n- `@session-memory` — complementary persistent memory across agent restarts; Lambda is the message format, session-memory is the state store.\n- `@humanize-chinese` — sibling project for Chinese text; Lambda is agent-to-agent, humanize-chinese is human-facing.\n\n## Reference\n\n- Source: https://github.com/voidborne-d/lambda-lang\n- Benchmarks, full atom tables, and Go reference implementation live in the source repo.\n",
-      "tags": [
-        "node",
-        "api",
-        "mcp",
-        "claude",
-        "ai",
-        "agent",
-        "security",
-        "cro"
-      ],
-      "useCases": [
-        "Use for agent-to-agent messaging in A2A protocols, orchestrators, task delegation, or handoff pipelines.",
-        "Use when logging structured coordination signals where every token costs money (heartbeats, acknowledgements, error classes, session state).",
-        "Use when both sides of a channel speak Λ — do not use against humans or any surface requiring legal/exact natural language."
-      ],
-      "scrapedAt": "2026-04-24T08:17:17.530Z"
-    },
-    {
-      "id": "antigravity-lambdatest-agent-skills",
-      "name": "lambdatest-agent-skills",
-      "slug": "lambdatest-agent-skills",
-      "description": "Production-grade test automation skills for 46 frameworks across E2E, unit, mobile, BDD, visual, and cloud testing in 15+ languages.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/lambdatest-agent-skills",
-      "content": "\n# LambdaTest Agent Skills — Test Automation Registry (46 Skills)\n\n## Overview\n\nThis skill is a curated index of 46 production-grade test automation skills sourced from the [LambdaTest/agent-skills](https://github.com/LambdaTest/agent-skills) repository. It teaches AI coding assistants how to write, structure, and execute test automation code across every major framework and 15+ programming languages. Instead of generating generic test code, the AI becomes a senior QA automation architect that understands correct project structure, dependency versions, cloud execution, CI/CD integration, and common debugging patterns for each framework.\n\nThis skill adapts material from an external GitHub repository:\n- `source_repo: LambdaTest/agent-skills`\n- `source_type: community`\n\n## When to Use This Skill\n\n- Use when you need to write, scaffold, or review test automation code for any major framework\n- Use when working with Selenium, Playwright, Cypress, Jest, pytest, Appium, or any of the 46 supported frameworks\n- Use when setting up a new test project and need the correct project structure, config files, and dependencies\n- Use when integrating tests into a CI/CD pipeline (GitHub Actions, Jenkins, GitLab CI)\n- Use when migrating tests between frameworks (e.g. Selenium → Playwright, Puppeteer → Cypress)\n- Use when running tests on cloud infrastructure such as LambdaTest / TestMu AI\n- Use when the user asks how to write, debug, or scale automated tests\n\n## How It Works\n\n### Step 1: Identify the Framework and Language\n\nDetermine which testing framework and programming language the user is working with. Match it to one of the 46 supported skills below. Each skill covers a specific framework with language-appropriate code patterns.\n\n### Step 2: Apply the Correct Skill Context\n\nLoad the relevant framework skill from the registry below. Each skill includes: project setup and dependencies, core code patterns, page objects or test utilities, cloud execution configuration, CI/CD integration, a debugging table for common problems, and a best practices checklist.\n\n### Step 3: Generate Production-Ready Test Code\n\nUse the loaded skill context to generate test code that follows real-world conventions — not generic boilerplate. Apply correct import paths, configuration formats, assertion libraries, and runner commands specific to the framework and language.\n\n### Step 4: Configure for Local or Cloud Execution\n\nIf the user wants to run tests locally, apply local runner configuration. If running on LambdaTest / TestMu AI cloud, configure RemoteWebDriver capabilities or the appropriate cloud SDK, and set `LT_USERNAME` and `LT_ACCESS_KEY` from environment variables — never hardcode credentials.\n\n### Step 5: Add CI/CD Integration\n\nWhen requested, generate a GitHub Actions (or Jenkins / GitLab CI) workflow that runs the tests in parallel, uploads reports, and captures artifacts on failure.\n\n## Skill Registry\n\n### 🌐 E2E / Browser Testing (15 skills)\n\n| Skill | Languages | Description |\n|---|---|---|\n| `selenium-skill` | Java, Python, JS, C#, Ruby | Selenium WebDriver with cross-browser and cloud support |\n| `playwright-skill` | JS, TS, Python, Java, C# | Playwright browser automation with API mocking |\n| `cypress-skill` | JS, TS | Cypress E2E and component testing |\n| `webdriverio-skill` | JS, TS | WebdriverIO with page objects and cloud integration |\n| `puppeteer-skill` | JS, TS | Puppeteer Chrome automation |\n| `testcafe-skill` | JS, TS | TestCafe cross-browser testing |\n| `nightwatchjs-skill` | JS, TS | Nightwatch.js browser automation |\n| `capybara-skill` | Ruby | Capybara acceptance testing |\n| `geb-skill` | Groovy | Geb Groovy browser automation |\n| `selenide-skill` | Java | Selenide fluent Selenium wrapper |\n| `nemojs-skill` | JS | Nemo.js PayPal browser automation |\n| `protractor-skill` | JS, TS | Protractor Angular E2E testing |\n| `codeception-skill` | PHP | Codeception full-stack PHP testing |\n| `laravel-dusk-skill` | PHP | Laravel Dusk browser testing |\n| `robot-framework-skill` | Python, Robot | Robot Framework keyword-driven testing |\n\n### 🧪 Unit Testing (15 skills)\n\n| Skill | Languages | Description |\n|---|---|---|\n| `jest-skill` | JS, TS | Jest unit and integration tests with mocking |\n| `junit-5-skill` | Java | JUnit 5 with parameterized tests and extensions |\n| `pytest-skill` | Python | pytest with fixtures, parametrize, and plugins |\n| `testng-skill` | Java | TestNG with data providers and parallel execution |\n| `vitest-skill` | JS, TS | Vitest for Vite projects |\n| `mocha-skill` | JS, TS | Mocha with Chai assertions |\n| `jasmine-skill` | JS, TS | Jasmine BDD-style unit testing |\n| `karma-skill` | JS, TS | Karma test runner |\n| `xunit-skill` | C# | xUnit.net for .NET |\n| `nunit-skill` | C# | NUnit for .NET |\n| `mstest-skill` | C# | MSTest for .NET |\n| `rspec-skill` | Ruby | RSpec with shared examples |\n| `phpunit-skill` | PHP | PHPUnit with data providers |\n| `testunit-skill` | Ruby | Test::Unit Ruby testing |\n| `unittest-s",
-      "tags": [
-        "python",
-        "typescript",
-        "react",
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "automation",
-        "workflow",
-        "design"
-      ],
-      "useCases": [
-        "Use when you need to write, scaffold, or review test automation code for any major framework",
-        "Use when working with Selenium, Playwright, Cypress, Jest, pytest, Appium, or any of the 46 supported frameworks",
-        "Use when setting up a new test project and need the correct project structure, config files, and dependencies",
-        "Use when integrating tests into a CI/CD pipeline (GitHub Actions, Jenkins, GitLab CI)",
-        "Use when migrating tests between frameworks (e.g. Selenium → Playwright, Puppeteer → Cypress)"
-      ],
-      "scrapedAt": "2026-04-17T08:01:59.684Z"
-    },
-    {
-      "id": "antigravity-landing-page-generator",
-      "name": "landing-page-generator",
-      "slug": "landing-page-generator",
-      "description": "Generates high-converting Next.js/React landing pages with Tailwind CSS. Uses PAS, AIDA, and BAB frameworks for optimized copy/components (Heroes, Features, Pricing). Focuses on Core Web Vitals/SEO.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/landing-page-generator",
-      "content": "\n# Landing Page Generator\n\nGenerate high-converting landing pages from a product description. Output complete Next.js/React components with multiple section variants, proven copy frameworks, SEO optimization, and performance-first patterns. Not lorem ipsum — actual copy that converts.\n\n**Target:** LCP < 1s · CLS < 0.1 · FID < 100ms  \n**Output:** TSX components + Tailwind styles + SEO meta + copy variants\n\n## When to Use\n- You need to generate a marketing landing page in Next.js or React.\n- The task involves conversion-focused page structure, section variants, Tailwind styling, or SEO-aware copy.\n- You want complete landing-page output from a product description rather than isolated UI fragments.\n\n## Core Capabilities\n\n- 5 hero section variants (centered, split, gradient, video-bg, minimal)\n- Feature sections (grid, alternating, cards with icons)\n- Pricing tables (2–4 tiers with feature lists and toggle)\n- FAQ accordion with schema markup\n- Testimonials (grid, carousel, single-quote)\n- CTA sections (banner, full-page, inline)\n- Footer (simple, mega, minimal)\n- 4 design styles with Tailwind class sets\n\n---\n\n## Generation Workflow\n\nFollow these steps in order for every landing page request:\n\n1. **Gather inputs** — collect product name, tagline, audience, pain point, key benefit, pricing tiers, design style, and copy framework using the trigger format below. Ask only for missing fields.\n2. **Analyze brand voice** (recommended) — if the user has existing brand content (website copy, blog posts, marketing materials), run it through `marketing-skill/content-production/scripts/brand_voice_analyzer.py` to get a voice profile (formality, tone, perspective). Use the profile to inform design style and copy framework selection:\n   - formal + professional → **enterprise** style, **AIDA** framework\n   - casual + friendly → **bold-startup** style, **BAB** framework\n   - professional + authoritative → **dark-saas** style, **PAS** framework\n   - casual + conversational → **clean-minimal** style, **BAB** framework\n3. **Select design style** — map the user's choice (or infer from brand voice analysis) to one of the four Tailwind class sets in the Design Style Reference.\n4. **Apply copy framework** — write all headline and body copy using the chosen framework (PAS / AIDA / BAB) before generating components. Match the voice profile's formality and tone throughout.\n5. **Generate sections in order** — Hero → Features → Pricing → FAQ → Testimonials → CTA → Footer. Skip sections not relevant to the product.\n6. **Validate against SEO checklist** — run through every item in the SEO Checklist before outputting final code. Fix any gaps inline.\n7. **Output final components** — deliver complete, copy-paste-ready TSX files with all Tailwind classes, SEO meta, and structured data included.\n\n---\n\n## Triggering This Skill\n\n```\nProduct: [name]\nTagline: [one sentence value prop]\nTarget audience: [who they are]\nKey pain point: [what problem you solve]\nKey benefit: [primary outcome]\nPricing tiers: [free/pro/enterprise or describe]\nDesign style: dark-saas | clean-minimal | bold-startup | enterprise\nCopy framework: PAS | AIDA | BAB\n```\n\n---\n\n## Design Style Reference\n\n| Style | Background | Accent | Cards | CTA Button |\n|---|---|---|---|---|\n| **Dark SaaS** | `bg-gray-950 text-white` | `violet-500/400` | `bg-gray-900 border border-gray-800` | `bg-violet-600 hover:bg-violet-500` |\n| **Clean Minimal** | `bg-white text-gray-900` | `blue-600` | `bg-gray-50 border border-gray-200 rounded-2xl` | `bg-blue-600 hover:bg-blue-700` |\n| **Bold Startup** | `bg-white text-gray-900` | `orange-500` | `shadow-xl rounded-3xl` | `bg-orange-500 hover:bg-orange-600 text-white` |\n| **Enterprise** | `bg-slate-50 text-slate-900` | `slate-700` | `bg-white border border-slate-200 shadow-sm` | `bg-slate-900 hover:bg-slate-800 text-white` |\n\n> **Bold Startup** headings: add `font-black tracking-tight` to all `<h1>`/`<h2>` elements.\n\n---\n\n## Copy Frameworks\n\n**PAS (Problem → Agitate → Solution)**\n- H1: Painful state they're in\n- Sub: What happens if they don't fix it\n- CTA: What you offer\n- *Example — H1:* \"Your team wastes 3 hours a day on manual reporting\" / *Sub:* \"Every hour spent on spreadsheets is an hour not closing deals. Your competitors are already automated.\" / *CTA:* \"Automate your reports in 10 minutes →\"\n\n**AIDA (Attention → Interest → Desire → Action)**\n- H1: Bold attention-grabbing statement → Sub: Interesting fact or benefit → Features: Desire-building proof points → CTA: Clear action\n\n**BAB (Before → After → Bridge)**\n- H1: \"[Before state] → [After state]\" → Sub: \"Here's how [product] bridges the gap\" → Features: How it works (the bridge)\n\n---\n\n## Representative Component: Hero (Centered Gradient — Dark SaaS)\n\nUse this as the structural template for all hero variants. Swap layout classes, gradient direction, and image placement for split, video-bg, and minimal variants.\n\n```tsx\nexport function HeroCentered() {\n  return (\n    <section className=\"relative flex ",
-      "tags": [
-        "react",
-        "nextjs",
-        "claude",
-        "ai",
-        "workflow",
-        "template",
-        "design",
-        "spreadsheet",
-        "image",
-        "tailwind"
-      ],
-      "useCases": [
-        "You need to generate a marketing landing page in Next.js or React.",
-        "The task involves conversion-focused page structure, section variants, Tailwind styling, or SEO-aware copy.",
-        "You want complete landing-page output from a product description rather than isolated UI fragments."
-      ],
-      "scrapedAt": "2026-03-19T07:09:36.198Z"
-    },
-    {
       "id": "composio-langsmith-fetch",
       "name": "langsmith-fetch",
       "slug": "langsmith-fetch",
@@ -27532,14 +27517,14 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 358
+      "count": 357
     },
     {
       "id": "creative-media",
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 148
+      "count": 149
     },
     {
       "id": "development-code-tools",
@@ -27597,48 +27582,48 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 272570
+      "stars": 272916
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 15,
       "newSkillCount": 2,
-      "stars": 169598
+      "stars": 169814
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 72575
+      "stars": 72630
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 84155
+      "stars": 84253
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1470
+      "stars": 1471
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
-      "newSkillCount": 6,
-      "stars": 45004
+      "newSkillCount": 11,
+      "stars": 45044
     }
   ],
-  "lastUpdated": "2026-08-16T07:01:28.583Z",
+  "lastUpdated": "2026-08-17T07:19:38.249Z",
   "stats": {
     "totalSkills": 1132,
-    "newSkills": 16,
-    "scrapedAt": "2026-08-16T07:01:28.583Z"
+    "newSkills": 21,
+    "scrapedAt": "2026-08-17T07:19:38.249Z"
   }
 }

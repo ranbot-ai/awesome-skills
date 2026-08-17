@@ -1,0 +1,26 @@
+{
+  "id": "antigravity-agent-qa-authoring",
+  "name": "agent-qa-authoring",
+  "slug": "agent-qa-authoring",
+  "description": "Create, edit, validate, and run Agent QA tests, suites, and hooks through MCP or CLI while preserving canonical IDs and schema contracts.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-qa-authoring",
+  "content": "\n# Agent QA Authoring\n\n## Overview\n\nAuthor Agent QA tests, suites, and hooks without inventing schema fields or identifiers. Prefer Agent QA's MCP tools, use the bundled contract reference for exact fields, and validate every definition before saving or running it.\n\n## When to Use\n\n- Creating or editing an Agent QA test, suite, or hook.\n- Validating Agent QA YAML or canonical IDs.\n- Running a newly authored Agent QA definition through MCP or CLI.\n- Investigating which Agent QA configuration fields or workspace patterns apply.\n\n## Preconditions and Approval Boundary\n\n- Work only in a configured Agent QA workspace that the user has authorized.\n- Inspect the requested scope before any create, update, delete, or test-run operation.\n- Obtain explicit confirmation before deleting a definition or running a test that can change external application state.\n- Keep credentials out of definitions and output; use the workspace's configured secret handling.\n\n## Workflow\n\n1. Discover the local surface with `agent_qa_discover`.\n2. Inspect active config with `agent_qa_get_config`, especially targets, devices, providers, and `services.mcp`.\n3. Load `references/agent-qa-contracts.json` when exact schema fields or ID contracts are needed.\n4. Generate every new ID with Agent QA tooling:\n   - MCP: `agent_qa_generate_id`\n   - CLI fallback: `agent-qa ids generate <test|suite|hook|run|observation>`\n   - Package fallback: `npx --yes agent-qa ids generate <type>`\n5. Never hand-write IDs. Validate existing IDs with `agent_qa_validate_id` or `agent-qa ids validate <type> <id> --json`.\n6. Validate definitions before saving:\n   - Tests: `agent_qa_validate_test` or `agent_qa_validate_definition` with `kind: \"test\"`\n   - Suites: `agent_qa_validate_suite` or `agent_qa_validate_definition` with `kind: \"suite\"`\n   - Hooks: `agent_qa_validate_definition` with `kind: \"hooks\"`\n7. Prefer MCP authoring mutations:\n   - Tests: `agent_qa_create_test`, `agent_qa_update_test`, `agent_qa_delete_test`\n   - Suites: `agent_qa_create_suite`, `agent_qa_update_suite`, `agent_qa_delete_suite`\n   - Hooks: `agent_qa_create_hook`, `agent_qa_update_hook`, `agent_qa_delete_hook`\n8. Use CLI or YAML fallback only when MCP is unavailable. Keep file paths matched by `workspace.testMatch` or `workspace.suiteMatch`.\n\n## Required ID Contracts\n\n- Test IDs: `t_` plus 10 id-agent words.\n- Suite IDs: `s_` plus 10 id-agent words.\n- Hook IDs: `h_` plus 10 id-agent words.\n- Run IDs: `r_` plus 10 id-agent words.\n- Observation IDs: `obs_` plus 10 id-agent words.\n\n## Before Running\n\n- Validate YAML first.\n- Prefer `agent_qa_enqueue_test_run` and `agent_qa_enqueue_suite_run` over shelling out.\n- If using the CLI fallback, run only after validation succeeds.\n- Reconfirm the target and environment when a test may mutate real data or trigger external actions.\n\n## Example\n\n```text\nUser: Add an Agent QA checkout test for the staging target and validate it, but do not run it yet.\n\nExpected handling: discover the workspace, inspect the staging target, generate the test ID,\ncreate the smallest valid definition, validate it, and stop before enqueueing a run.\n```\n\n## Limitations\n\n- Requires an installed and configured Agent QA workspace plus any browser, mobile, model-provider, or application dependencies used by the selected target.\n- Does not infer undocumented config keys, selectors, UI states, credentials, or test data.\n- MCP availability and permissions vary by workspace; state which CLI or YAML fallback was used.\n- Validation proves schema compatibility, not that the application behavior or external environment is safe to exercise.\n\n## Do Not\n\n- Do not invent config keys or use legacy root config buckets.\n- Do not hand-write IDs.\n- Do not mutate files outside configured workspace patterns.\n- Do not run destructive or production-facing scenarios without the user's explicit scope and confirmation.\n",
+  "tags": [
+    "mcp",
+    "claude",
+    "ai",
+    "agent",
+    "workflow",
+    "document"
+  ],
+  "useCases": [
+    "Creating or editing an Agent QA test, suite, or hook.",
+    "Validating Agent QA YAML or canonical IDs.",
+    "Running a newly authored Agent QA definition through MCP or CLI.",
+    "Investigating which Agent QA configuration fields or workspace patterns apply."
+  ],
+  "scrapedAt": "2026-08-17T07:06:05.939Z"
+}
