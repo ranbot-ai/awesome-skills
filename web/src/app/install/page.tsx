@@ -113,7 +113,7 @@ const commands = {
   'list': './scripts/install-skills.sh --list',
   'local-install': './scripts/install-skills.sh --local ./data',
   'search': './scripts/install-skills.sh --search docker',
-  'source': './scripts/install-skills.sh --source anthropic',
+  'source': './scripts/install-skills.sh --source accint',
   'category': './scripts/install-skills.sh --category "Development"',
   'info': './scripts/install-skills.sh --info code-review',
   'update': './scripts/install-skills.sh --update',
@@ -125,7 +125,10 @@ const sources = [
   { name: 'anthropic', description: 'Official Anthropic skills', count: '16+' },
   { name: 'composio', description: 'Community Claude skills', count: '16+' },
   { name: 'superpowers', description: 'Agentic development skills', count: '14+' },
-  { name: 'openhands', description: 'AI-driven development', count: '10+' }
+  { name: 'openhands', description: 'AI-driven development', count: '10+' },
+  { name: 'awesome-llm', description: 'LLM and agent skills', count: '20+' },
+  { name: 'antigravity', description: 'Agentic workflow skills', count: '250+' },
+  { name: 'accint', description: 'MCP-backed memory loop skills', count: '3+' }
 ];
 
 export default function InstallPage() {
@@ -352,7 +355,7 @@ export default function InstallPage() {
                       <div className="flex-1">
                         <h3 className="text-lg font-semibold text-white mb-2">Or Install by Source</h3>
                         <p className="text-slate-400 text-sm mb-4">
-                          Install all skills from a specific source (anthropic, composio, superpowers, openhands):
+                          Install all skills from a specific source (anthropic, composio, superpowers, openhands, accint):
                         </p>
                         <CodeBlock code={commands['source']} />
                       </div>

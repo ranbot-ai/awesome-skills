@@ -3,10 +3,11 @@
 import { ChevronDown, Filter, X } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
-import type { SkillCategory } from '@/types/skill';
+import type { SkillCategory, SourceInfo } from '@/types/skill';
 
 interface FilterBarProps {
   categories: SkillCategory[];
+  sources: SourceInfo[];
   selectedCategory: string;
   selectedSource: string;
   onCategoryChange: (category: string) => void;
@@ -15,14 +16,19 @@ interface FilterBarProps {
   filteredCount: number;
 }
 
-const sources = [
-  { id: 'all', name: 'All Sources' },
-  { id: 'composio', name: 'ComposioHQ' },
-  { id: 'openhands', name: 'OpenHands' },
-];
+const sourceIdsByName: Record<string, string> = {
+  Superpowers: 'superpowers',
+  Anthropic: 'anthropic',
+  ComposioHQ: 'composio',
+  OpenHands: 'openhands',
+  'Awesome LLM': 'awesome-llm',
+  Antigravity: 'antigravity',
+  AccInt: 'accint',
+};
 
 export function FilterBar({
   categories,
+  sources,
   selectedCategory,
   selectedSource,
   onCategoryChange,
@@ -49,6 +55,13 @@ export function FilterBar({
   }, []);
 
   const hasFilters = selectedCategory !== 'all' || selectedSource !== 'all';
+  const sourceOptions = [
+    { id: 'all', name: 'All Sources' },
+    ...sources.map((source) => ({
+      id: sourceIdsByName[source.name] || source.name.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      name: source.name,
+    })),
+  ];
 
   const clearFilters = () => {
     onCategoryChange('all');
@@ -61,7 +74,7 @@ export function FilterBar({
   };
 
   const getSourceName = () => {
-    return sources.find(s => s.id === selectedSource)?.name || 'All Sources';
+    return sourceOptions.find(s => s.id === selectedSource)?.name || 'All Sources';
   };
 
   return (
@@ -136,7 +149,7 @@ export function FilterBar({
 
           {showSourceDropdown && (
             <div className="absolute top-full left-0 mt-2 w-48 bg-slate-800 border border-slate-700 rounded-xl shadow-xl z-50 overflow-hidden">
-              {sources.map((source) => (
+              {sourceOptions.map((source) => (
                 <button
                   key={source.id}
                   onClick={() => {

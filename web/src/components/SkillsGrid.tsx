@@ -140,6 +140,7 @@ export function SkillsGrid({ skills, categories, sources }: SkillsGridProps) {
         <div className="container mx-auto px-4">
           <FilterBar
             categories={categories}
+            sources={sources}
             selectedCategory={selectedCategory}
             selectedSource={selectedSource}
             onCategoryChange={setSelectedCategory}
