@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-dsh-deepread",
+  "name": "dsh-deepread",
+  "slug": "dsh-deepread",
+  "description": "Use for evidence-first reading of articles, books, PDFs, web pages, or document sets, with knowledge maps and Feynman checks.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dsh-deepread",
+  "content": "\n# DeepRead\n\n## Overview\n\nDeepRead turns long-form material into an evidence-first reading report. It separates claims, evidence, data, examples, assumptions, counterarguments, and limitations instead of producing an untraceable summary.\n\nThe workflow supports five modes: quick orientation, deep argument analysis, knowledge mapping, Feynman explanation, and whole-book synthesis. Use the host agent's available file, PDF, OCR, and web-reading tools; never invent source content that was not successfully retrieved.\n\n## When to Use\n\n- Use when a user asks to read, summarize, or critically analyze an article, book, PDF, web page, or document collection.\n- Use when important claims must remain connected to evidence and source locations.\n- Use when the user wants a mind map, concept map, comparison matrix, or structured study notes.\n- Use when the user wants to test understanding with plain-language explanations or recall questions.\n- Use when multiple documents need to be compared without collapsing disagreements into one answer.\n\n## Choose a Mode\n\n| Mode | Use it for | Required output |\n| --- | --- | --- |\n| `quick` | Orientation or time-limited reading | Short summary, core claim, up to three supporting points, open questions |\n| `deep` | Argument analysis | Claim hierarchy, reasoning chain, evidence, concepts, counterarguments, limitations |\n| `map` | Knowledge organization | Claim-evidence-data table, labeled relationships, confidence tags, concept map |\n| `feynman` | Understanding and retention | Plain-language explanation, knowledge gaps, corrections, recall plan |\n| `book` | Whole-book synthesis | Chapter map, thesis development, cross-chapter links, final evaluation |\n\nDefault to `deep` unless the user names another mode or the time budget clearly calls for `quick`.\n\n## How It Works\n\n### Step 1: Establish the Reading Contract\n\nRecord:\n\n1. The source or set of sources.\n2. The user's reading question.\n3. The selected mode.\n4. The desired depth and output format.\n5. Any deadline, token budget, or chapter limit.\n\nIf the source cannot be accessed, stop and request the text or a readable file. Do not fill gaps from memory.\n\n### Step 2: Survey Before Reading Closely\n\nInspect the title, author, date, table of contents, headings, abstract or introduction, conclusion, figures, and tables. Convert the structure into three to seven questions the reading should answer.\n\nFor a long source, divide it on semantic boundaries such as chapters or headings. Keep a progress list and synthesize only after every selected section has been processed.\n\n### Step 3: Extract Atomic Reading Units\n\nEach note should contain one idea and one type:\n\n- `claim`: a conclusion the author wants the reader to accept;\n- `reason`: a premise or mechanism supporting a claim;\n- `evidence`: a quotation, observation, method, or source-backed result;\n- `data`: a numeric fact with unit, time, population, baseline, and source when available;\n- `example`: an illustration that must not be treated as general proof;\n- `assumption`: an unstated dependency of the argument;\n- `counterargument`: a challenge or alternative explanation;\n- `limitation`: a boundary on where the claim applies;\n- `action`: a recommendation that follows from the analysis.\n\nKeep the author's statements separate from the agent's inference and the user's interpretation.\n\n### Step 4: Build the Evidence Ledger\n\nFor every important claim, record:\n\n| Field | Requirement |\n| --- | --- |\n| Claim | Complete proposition, not a topic label |\n| Evidence | Source passage or faithful paraphrase |\n| Location | Page, section, paragraph, timestamp, or URL anchor when available |\n| Data context | Value, unit, timeframe, sample, baseline, source |\n| Relationship | Supports, contradicts, causes, explains, depends on, exemplifies, or limits |\n| Confidence | Author claim, source fact, reasoned inference, or unverified |\n| Caveat | Missing evidence, alternative explanation, or applicability boundary |\n\nWrite `source does not provide evidence` when appropriate. Never manufacture a supporting quotation or location.\n\n### Step 5: Produce the Mode-Specific Artifact\n\nFor `deep`, organize the report as:\n\n1. Reading question and concise answer.\n2. Core thesis and subclaims.\n3. Argument flow with evidence.\n4. Key concepts and definitions.\n5. Strongest evidence and weakest link.\n6. Counterarguments and limitations.\n7. Practical implications.\n\nFor `map`, create labeled propositions rather than an unlabeled topic tree. A useful edge reads as a sentence, for example: `retrieval practice --improves--> delayed recall`.\n\nFor `book`, preserve chapter order during extraction, then reorganize the final map around the book's central question instead of copying the table of contents.\n\n### Step 6: Run the Feynman Check\n\nWithout looking at the source, explain the central idea to an intelligent twelve-year-old:\n\n1. Define it in plain language.\n2. Explain the mechanism step by step.\n3. Give a concrete example.\n4. State where the expla",
+  "tags": [
+    "node",
+    "pdf",
+    "claude",
+    "ai",
+    "agent",
+    "workflow",
+    "document",
+    "security",
+    "rag",
+    "cro"
+  ],
+  "useCases": [
+    "Use when a user asks to read, summarize, or critically analyze an article, book, PDF, web page, or document collection.",
+    "Use when important claims must remain connected to evidence and source locations.",
+    "Use when the user wants a mind map, concept map, comparison matrix, or structured study notes.",
+    "Use when the user wants to test understanding with plain-language explanations or recall questions.",
+    "Use when multiple documents need to be compared without collapsing disagreements into one answer."
+  ],
+  "scrapedAt": "2026-08-18T07:01:42.639Z"
+}

@@ -746,6 +746,33 @@
       "scrapedAt": "2026-01-26T13:16:19.418Z"
     },
     {
+      "id": "antigravity-agent-evaluation-reporting",
+      "name": "agent-evaluation-reporting",
+      "slug": "agent-evaluation-reporting",
+      "description": "Use when summarizing agent evaluations where autonomous, assisted, failed, timed-out, or invalid outcomes must remain distinct and comparable.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-evaluation-reporting",
+      "content": "\n# Agent Evaluation Reporting\n\n## Overview\n\nTurn raw agent evaluation runs into a decision-ready report without hiding failures or overstating capability. Keep outcome populations, denominators, latency populations, and experiment conditions explicit so readers can reproduce every headline number.\n\n## When to Use This Skill\n\n- Use when reporting benchmark, regression, pilot, or production evaluation runs for an AI agent.\n- Use when autonomous and human-assisted completions appear in the same result set.\n- Use when failures, timeouts, infrastructure-invalid runs, retries, or partial results affect the denominator.\n- Use when comparing two agents, prompts, harnesses, or releases and deciding whether the comparison is valid.\n\n## How It Works\n\n### Step 1: Freeze the comparison contract\n\nRecord the task set and sampling, model and provider, prompt or policy version, tool and harness versions, evaluator rubric, timeout and retry policy, token or cost budget, environment, and human-intervention policy. Assign the configuration a stable label or digest.\n\nIf a material condition differs between runs, mark the comparison as non-equivalent. Report a directional observation only; do not claim that the changed agent caused the difference.\n\n### Step 2: Build a mutually exclusive outcome ledger\n\nClassify every scheduled attempt exactly once:\n\n| Outcome | Meaning |\n|---|---|\n| `autonomous_success` | The agent satisfied the evaluator without human intervention. |\n| `assisted_success` | The task succeeded only after a human intervened. |\n| `failure` | The run reached a terminal, evaluable failure. |\n| `timeout` | The run exhausted its declared time or step budget. |\n| `invalid` | The agent never received a valid evaluation because the harness, environment, or input failed. |\n\nPreserve attempt ID, task ID or seed, retry index, parent attempt ID, configuration label, outcome, intervention count, duration, cost, evaluator evidence, and invalid reason when available. Never silently drop invalid or retried runs.\n\nAlso build a unique-task rollup. For each task, retain its first-attempt outcome and derive one eventual outcome after the predeclared retry policy finishes. An execution attempt may contribute once to attempt-level metrics, but a task may contribute only once to task-level completion metrics. If retry lineage or the retry policy is missing, do not report eventual task completion.\n\n### Step 3: Lock each metric to a denominator\n\nLet `N_all` be all execution attempts, including retries, and `N_eval = N_all - N_invalid` be evaluable attempts. Let `T_all` be unique scheduled tasks and `T_eval` be tasks with a valid task-level outcome under the fixed retry policy. Report counts beside every rate.\n\n```text\nautonomous attempt success = N_autonomous / N_eval\nassisted attempt success   = N_assisted / N_eval\nattempt non-completion     = (N_failure + N_timeout) / N_eval\ninvalid-attempt rate       = N_invalid / N_all\nfirst-attempt completion   = T_first_attempt_completed / T_all\neventual task completion   = T_eventual_completed / T_eval\noperational task delivery  = T_eventual_completed / T_all\n```\n\nLabel attempt-level and unique-task metrics explicitly; never call an attempt-level rate workflow completion. Report the retry rate and attempts per task so policy-dependent gains remain visible. Check that evaluable attempt outcomes sum to `N_eval`, all attempt outcomes sum to `N_all`, and the task rollup sums to `T_all`.\n\nIf `N_eval == 0`, report every attempt capability rate as `unavailable` rather than dividing by zero, and mark any gate that depends on those rates `inconclusive`. Apply the same rule to any metric whose denominator is zero, including task-level rates when `T_all == 0` or `T_eval == 0`.\n\n### Step 4: Keep latency and cost populations honest\n\nReport autonomous-completion latency, assisted end-to-end latency, and failure time-to-terminal separately. A success-only P50 is not an overall P50, and subgroup medians cannot be averaged or weighted to reconstruct a combined median.\n\nCalculate an all-run percentile only from per-run observations and state how timeouts are handled. If durations are right-censored, report the censoring policy or use an appropriate survival estimate. Apply the same population labels to token and cost metrics.\n\n### Step 5: Quantify uncertainty and comparability\n\nFor stochastic evaluations, show sample size and an interval or repeated-run distribution beside headline rates. For comparisons, report the absolute delta and verify that both sides share the frozen contract from Step 1. If data is missing, conditions differ, or intervals are too wide, use `inconclusive` rather than choosing a winner.\n\n### Step 6: Map evidence to predeclared decision gates\n\nDefine readiness gates before reading the result, such as minimum autonomous success, maximum timeout rate, zero critical safety violations, and latency or cost bounds. Return `pass`, `fail`, or `inconclusive` for each gate.\n\nDo not infer production readi",
+      "tags": [
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "design",
+        "security",
+        "rag"
+      ],
+      "useCases": [
+        "Use when reporting benchmark, regression, pilot, or production evaluation runs for an AI agent.",
+        "Use when autonomous and human-assisted completions appear in the same result set.",
+        "Use when failures, timeouts, infrastructure-invalid runs, retries, or partial results affect the denominator.",
+        "Use when comparing two agents, prompts, harnesses, or releases and deciding whether the comparison is valid."
+      ],
+      "scrapedAt": "2026-08-18T06:53:10.622Z"
+    },
+    {
       "id": "antigravity-agent-framework-azure-ai-py",
       "name": "agent-framework-azure-ai-py",
       "slug": "agent-framework-azure-ai-py",
@@ -10362,6 +10389,27 @@
       "scrapedAt": "2026-03-27T07:18:53.318Z"
     },
     {
+      "id": "anthropic-claude-academy-guide",
+      "name": "claude-academy-guide",
+      "slug": "claude-academy-guide",
+      "description": "Stop and check this skill before finishing any reply to a question about how to use Claude or a Claude product — it recommends matching courses, tutorials, and use cases from Claude Academy (academy.claude.com), Anthropic's learning hub. Trigger on: \"how do I\", \"how can I\", \"getting started with\", \"what can Claude do\", \"teach me\", \"learn to use\"; questions about artifacts, projects, skills, plugins, connectors, MCP, Claude Code, Claude Cowork, Claude in Excel, Claude in PowerPoint, Claude in Chrome, the Claude API, or prompting technique; requests about rolling Claude out to a team, class, or organization; and any ask for training materials, onboarding content, or learning resources. Use it when the user is learning how to use a feature or product — not when they are mid-task and just want the task done. This skill composes with other skills: after consulting product documentation to answer how a Claude feature works, also check here for a matching course or tutorial — a docs-grounded answer and an Academy recommendation belong together, even when another skill has already answered the question. Only recommend on a strong match; never invent Academy content.\n",
+      "category": "Document Processing",
+      "source": "anthropic",
+      "repoUrl": "https://github.com/anthropics/skills",
+      "skillUrl": "https://github.com/anthropics/skills/tree/main/skills/claude-academy-guide",
+      "content": "\n# Claude Academy guide\n\n## Purpose\n\nWhen a user asks a question about Claude, a Claude product, or a general\n\"how do I use AI for X\" question, check the Academy catalog (see \"The\ncatalog\" below) for a strong match. If one exists, mention it naturally at\nthe end of your normal answer.\n\nAll content lives on [Claude Academy](https://academy.claude.com),\nAnthropic's learning hub. It offers three kinds of content:\n\n- **Courses** — structured, multi-lesson learning paths, most with a\n  certificate on completion.\n- **Tutorials** — short practical guides to a single feature or workflow.\n- **Use cases** — worked examples of applying Claude to a concrete task,\n  usually with a prompt to try.\n\nThe Academy also has product hubs that collect everything about one\nsurface: [Claude](https://academy.claude.com/claude),\n[Claude Code](https://academy.claude.com/code),\n[Claude Cowork](https://academy.claude.com/cowork),\n[AI Fluency](https://academy.claude.com/fluency), and the\n[developer platform](https://academy.claude.com/platform). When a user\nwants to explore a whole product rather than one topic, a hub link is\noften the better recommendation than any single item.\n\n## Rules\n\n1. **Answer the question first.** Always give the user a direct, helpful\n   answer to whatever they asked. The content suggestion is a supplement,\n   never a replacement.\n\n2. **Only recommend on strong matches.** A strong match is about intent,\n   not just topic. The user must be asking *how to use a Claude feature*\n   or *how to get started with X* — they're looking for a resource to\n   learn from. \"How do projects work?\" is a strong match. \"Help me\n   organize this document\" is not, even though projects are topically\n   relevant — they're mid-task, they want help with the task, not a\n   tutorial about the feature.\n\n   If the match is weak or tangential, say nothing about the catalog.\n   A caveat is the tell: if you'd write \"while this is focused on X, it\n   might help with...\" or \"this doesn't cover exactly that, but...\" —\n   that hedge is the match failing. Don't recommend through a caveat.\n\n   Silence is better than noise — and noise has a real cost. A user who\n   clicks a recommendation that doesn't help them learns to ignore the\n   next one. One wrong recommendation burns more trust than ten right\n   ones build. When you're not sure, the quiet answer is the right one.\n\n3. **Never hallucinate content.** The only Academy links you may share\n   are item URLs taken from the catalog you fetched in this conversation,\n   the product hub pages named in the Purpose section, and the resources\n   library (rule 7). Do not invent titles, descriptions, or URLs, do not\n   guess at slugs for content you believe should exist, and do not name\n   specific courses or tutorials from memory — if you have not read the\n   catalog, you do not know what is in it.\n\n4. **Keep it brief and natural.** After your answer, add a short line like:\n\n   > You might also find this helpful: [Title](URL) — one-sentence description.\n\n   Do not list more than 2 items. One is usually best. This cap applies\n   to every reply, including when the question itself is a request for\n   learning content (\"what training materials do you have for my sales\n   team?\") — it is tempting to treat the listing as the answer and\n   enumerate everything that applies, but a curated pick serves the\n   reader better than a list. Name the best one or two items, then point\n   to the [resources library](https://academy.claude.com/resources) for\n   the rest. (When one of the five product hubs named in the Purpose\n   section covers the topic, that hub is also a good pointer — but those\n   five are the only hub pages that exist, so never construct a hub-style\n   URL for any other domain.)\n\n5. **Don't be pushy.** Use phrasing like \"you might find this interesting\"\n   or \"there's a tutorial that covers this\" — not \"you should read\" or \"I\n   recommend you complete.\"\n\n6. **Use the exact URLs from the catalog.** Every item lives at\n   `https://academy.claude.com/` plus its path: `/courses/{slug}` for\n   courses, `/tutorials/{slug}` for tutorials, `/use-cases/{slug}` for\n   use cases. Copy each item's `url` from the catalog verbatim — never\n   rewrite it onto another domain or path, and never \"correct\" its kind:\n   a tutorial's URL always starts with /tutorials/ even when it reads like\n   a course, and vice versa.\n\n7. **When you can't name a specific item, point to the Academy itself.**\n   This covers two cases: nothing in the catalog is a strong match, or you\n   could not read the catalog at all (no way to fetch URLs, the fetch\n   failed, or the file was stale — see below). In either case, if the\n   user clearly wants learning content on a Claude topic, point them at\n   the matching product hub from the Purpose section or at the searchable\n   library at\n   [academy.claude.com/resources](https://academy.claude.com/resources)\n   instead of recommending a weak match or a title from memory. If they\n   were not clearly looki",
+      "tags": [
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "workflow",
+        "document"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-08-18T06:52:13.892Z"
+    },
+    {
       "id": "antigravity-claude-ally-health",
       "name": "claude-ally-health",
       "slug": "claude-ally-health",
@@ -13543,6 +13591,36 @@
       "scrapedAt": "2026-06-27T08:46:04.170Z"
     },
     {
+      "id": "antigravity-cross-platform-contract-propagation-audit",
+      "name": "cross-platform-contract-propagation-audit",
+      "slug": "cross-platform-contract-propagation-audit",
+      "description": "Use when auditing whether a field, enum, flag, or API contract propagates consistently across storage, services, clients, analytics, and tests.",
+      "category": "Business & Marketing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cross-platform-contract-propagation-audit",
+      "content": "\n# Cross-Platform Contract Propagation Audit\n\n## Overview\n\nAudit a contract change from its source through every transformation and consumer before release. Treat a field that exists in one schema as incomplete until its meaning, defaults, wire behavior, rollout controls, client handling, analytics, and tests are proven across all relevant paths.\n\nThis is a read-only evidence workflow. It reports propagation gaps; it does not implement them.\n\n## When to Use This Skill\n\n- Use when adding or changing a field, enum value, status, capability, or feature flag shared by multiple components.\n- Use when database, backend, API, Web, Android, iOS, jobs, events, or analytics may interpret the same value differently.\n- Use when a change must preserve existing records, older clients, or a default-off rollout.\n- Use when a change looks complete in one endpoint but may be missing from alternate entry points or generated models.\n\n## How It Works\n\n### Step 1: Write the semantic contract\n\nBefore tracing files, state the business invariant and define every observable state. Distinguish values that languages and serializers often collapse:\n\n| State | Questions to answer |\n|---|---|\n| missing | Is the property absent on the wire or in an old record? |\n| `null` | Is it unknown, inherited, unsupported, or invalid? |\n| `false` or zero | Is this an explicit disabled value or a default? |\n| `true` or non-zero | What behavior becomes available? |\n| unknown enum | Must old consumers ignore, preserve, or reject it? |\n\nRecord compatibility requirements, ownership, rollout condition, and the exact user-visible or system behavior for each state. Do not accept `optional`, `nullable`, and `default false` as equivalent without evidence.\n\n### Step 2: Enumerate the propagation graph\n\nList every relevant node before judging completeness:\n\n```text\nsource of truth\n  -> persistence and migration\n  -> domain model and mapper\n  -> service or policy computation\n  -> every API, event, cache, and job projection\n  -> generated or handwritten client model\n  -> client state and presentation logic\n  -> analytics and operational observability\n  -> tests, rollout, and rollback checks\n```\n\nInclude alternate read/write endpoints, list/detail projections, background consumers, offline caches, admin surfaces, older app versions, and feature-flag evaluation points when they are in scope. Mark a node `not applicable` only with a reason.\n\n### Step 3: Trace evidence edge by edge\n\nFor each edge, cite the producer, transformation, consumer, and test using file paths, symbols, schema names, or other inspectable evidence. Assign one status:\n\n| Status | Meaning |\n|---|---|\n| `proven` | Producer and consumer agree, with direct evidence and relevant test coverage. |\n| `partial` | Some paths or states agree, but coverage is incomplete. |\n| `missing` | A required propagation edge or consumer is absent. |\n| `conflict` | Two layers implement different semantics. |\n| `unknown` | Evidence is unavailable or ambiguous. |\n| `not_applicable` | The layer is outside scope, with a stated reason. |\n\nDo not upgrade `likely`, convention, type compatibility, or a framework default to `proven`. A declaration proves shape, not runtime mapping or behavior.\n\n### Step 4: Check the high-risk boundaries\n\nInspect these boundaries explicitly:\n\n- **Migration and existing data:** default, backfill, nullability, rollback, mixed-version reads and writes.\n- **Domain mapping:** missing/null coercion, enum fallbacks, validation, derived values, serialization symmetry.\n- **Fan-out surfaces:** list and detail DTOs, events, caches, jobs, search indexes, SDKs, and alternate API versions.\n- **Client compatibility:** missing and explicit-null decoding, unknown enums, generated-model drift, cached payloads, release or minified builds.\n- **Rollout control:** flag default, evaluation location, cohort consistency, kill switch, and behavior when stored data disagrees with the flag.\n- **Analytics:** offered, rendered, attempted, succeeded, and failed events carry enough contract and version context to join reliably.\n\n### Step 5: Build a state-by-path test matrix\n\nCross the semantic states from Step 1 with every material path from Step 2. At minimum, include existing-data defaults, enabled and disabled values, flag on and off, alternate endpoints, current clients, and representative older clients.\n\nFor each cell, record the expected result, evidence, and status. A unit test at one layer does not prove an end-to-end cell. Use `unknown` for unexecuted cells.\n\n### Step 6: Decide against explicit release gates\n\nDerive gates from the stated contract, not from intuition. A release is blocked when an edge or compatibility invariant that the contract explicitly requires is `missing`, `conflict`, or `unknown`, or when rollback cannot contain the new behavior. Use `inconclusive` only when the release contract itself is absent or ambiguous, so the audit cannot determine which edges or invariants are required. Do not downgrade a ",
+      "tags": [
+        "node",
+        "api",
+        "claude",
+        "ai",
+        "workflow",
+        "design",
+        "presentation",
+        "security",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Use when adding or changing a field, enum value, status, capability, or feature flag shared by multiple components.",
+        "Use when database, backend, API, Web, Android, iOS, jobs, events, or analytics may interpret the same value differently.",
+        "Use when a change must preserve existing records, older clients, or a default-off rollout.",
+        "Use when a change looks complete in one endpoint but may be missing from alternate entry points or generated models."
+      ],
+      "scrapedAt": "2026-08-18T06:59:07.931Z"
+    },
+    {
       "id": "antigravity-crossframe",
       "name": "crossframe",
       "slug": "crossframe",
@@ -16176,6 +16254,23 @@
       "scrapedAt": "2026-03-07T06:54:12.164Z"
     },
     {
+      "id": "anthropic-discernment-nudge",
+      "name": "discernment-nudge",
+      "slug": "discernment-nudge",
+      "description": "After you give a substantive answer or draft that the user may act on — advice or recommendations, drafted artifacts such as goals, plans, pitches, proposals, or emails, estimates or projections, analysis or interpretation of data, factual claims they may rely on, or a multi-step argument — invoke this skill BEFORE finalizing your reply and then, if it applies, append 2-3 short follow-up questions, each tied to something specific in what you just produced, that help the user check key facts, probe the reasoning or assumptions, and notice missing context. Do this at most once per conversation. Skip it when the user asked a trivial how-to or simple lookup, wants a purely educational explanation, asked you only to format, convert, or assemble a file from content they provided, is writing code they will run, is doing creative writing or casual chat, or already asked you to double-check, cite, or review — the skill file explains these boundaries and the exact output format.\n",
+      "category": "Document Processing",
+      "source": "anthropic",
+      "repoUrl": "https://github.com/anthropics/skills",
+      "skillUrl": "https://github.com/anthropics/skills/tree/main/skills/discernment-nudge",
+      "content": "\n# Discernment nudge\n\n## Why this exists\n\nPeople often take an AI answer at face value, especially when it's\nconfidently written and well-structured. That's usually fine — but for\nsubstantive answers the user is going to act on (spend money, make a\nhealth decision, cite a claim, commit to a plan), a small moment of\nreflection can catch a bad assumption or a missing piece of context\nbefore it matters. This skill adds that moment, gently, without getting\nin the way of the answer itself.\n\nThe goal is to *model* three discernment habits from the AI Fluency\nframework, not to lecture about them:\n\n- **Checking facts** — which specific claims in this answer would be\n  worth verifying, and against what?\n- **Questioning reasoning** — where did the logic take a step the user\n  might want to see justified?\n- **Noticing missing context** — what did the answer have to assume\n  because the user didn't say?\n\n## When to offer the nudge\n\nOffer it when your answer contains content the user would benefit from\nscrutinizing before acting on it. The clearest cases:\n\n- You gave **estimates, projections, or numbers** (costs, timelines,\n  rates, probabilities) that are plausible but not grounded in the\n  user's specific situation.\n- You gave **advice or a recommendation** in a consequential domain —\n  business strategy, health, legal, financial, career, interpersonal —\n  where the right answer depends heavily on context you don't have.\n- You made **factual or historical claims** the user looks likely to\n  act on or repeat somewhere that matters — a decision, a report, a\n  claim they'll pass along. Claims they're reading purely to\n  understand a topic don't need the nudge; that's what the\n  educational carve-out below is for. (Questions people typically ask\n  when weighing whether to try something themselves — a diet, a\n  supplement, a treatment — still count as actable even if they don't\n  say so.)\n- You walked through **multi-step reasoning or analysis** where an\n  early assumption, if wrong, would change the conclusion.\n- You **interpreted data or research** on the user's behalf.\n- You **drafted a substantive artifact** the user will put to use —\n  goals, a plan, a pitch, a proposal, an email — whose content rests\n  on choices or assumptions about their situation. (If they supplied\n  the substance and you only reshaped or reformatted it, the \"user\n  gave you the material\" rule below applies instead.)\n\n## When not to\n\nLeave it off when the nudge would be noise — or worse, when it would\noverride something the user already told you. Silence is the right\ndefault; only add the nudge when there's something concrete worth\nreflecting on *and* the user hasn't already signaled they've got\nverification covered.\n\n**Once per conversation.** Offer the nudge at most once in a\nconversation. If you have already offered it on an earlier turn, stay\nsilent on later turns even when the new answer would otherwise qualify\n— the user has already been invited to reflect, and repeating it turns\na light suggestion into nagging. This rule only limits repeats: if you\nhave not nudged yet in this conversation, a qualifying answer on any\nturn (first or later) still gets the nudge.\n\n- **Creative writing** — poems, stories, brainstorming, drafting\n  copy. The user is the judge of whether it's good; there's nothing\n  to verify.\n- **Casual conversation** — greetings, small talk, opinion swapping.\n- **Code the user will execute** — running it is the verification.\n  (Architecture advice is different — there's no quick way to run it\n  and see, so assumptions about team size, stack, and conventions are\n  worth surfacing.)\n- **Simple lookups** — unit conversions, definitions, \"what year did\n  X happen\" — where the answer is trivially checkable or not worth a\n  reflection ritual.\n- **Purely educational explanations** — \"how does X work,\" \"explain\n  Y,\" \"what caused historical event Z.\" The user is building\n  understanding, not about to make a decision on it. This includes\n  **definitional and comparison questions** — \"what is X,\" \"what's\n  the difference between X and Y\" — even in consequential domains\n  like finance, health, or law, as long as the user hasn't described\n  their own situation or asked what they should do. Explaining what a\n  Roth IRA is isn't advice; \"which one should I open?\" is. (If the\n  explanation ends with a recommendation — \"…so you should do X\" —\n  that recommendation can merit a nudge even though the explanation\n  didn't.)\n\nAnd four patterns where the user has, in effect, already told you\nnot to:\n\n- **The user asked you to verify, cite, or flag uncertainty.** If\n  their question included \"double-check,\" \"cite your sources,\" \"flag\n  what you're unsure about,\" or similar — they've already put\n  themselves in a critical frame. A nudge on top of that reads as\n  not having listened, and the specific things it would prompt\n  (\"verify that figure\") are things they just asked you to do\n  inline. Do the verifying in the answer — name the source next to\n  e",
+      "tags": [
+        "ai",
+        "document"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-08-18T06:52:14.772Z"
+    },
+    {
       "id": "antigravity-discord-automation",
       "name": "discord-automation",
       "slug": "discord-automation",
@@ -17105,6 +17200,37 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-02-19T07:11:10.409Z"
+    },
+    {
+      "id": "antigravity-dsh-deepread",
+      "name": "dsh-deepread",
+      "slug": "dsh-deepread",
+      "description": "Use for evidence-first reading of articles, books, PDFs, web pages, or document sets, with knowledge maps and Feynman checks.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dsh-deepread",
+      "content": "\n# DeepRead\n\n## Overview\n\nDeepRead turns long-form material into an evidence-first reading report. It separates claims, evidence, data, examples, assumptions, counterarguments, and limitations instead of producing an untraceable summary.\n\nThe workflow supports five modes: quick orientation, deep argument analysis, knowledge mapping, Feynman explanation, and whole-book synthesis. Use the host agent's available file, PDF, OCR, and web-reading tools; never invent source content that was not successfully retrieved.\n\n## When to Use\n\n- Use when a user asks to read, summarize, or critically analyze an article, book, PDF, web page, or document collection.\n- Use when important claims must remain connected to evidence and source locations.\n- Use when the user wants a mind map, concept map, comparison matrix, or structured study notes.\n- Use when the user wants to test understanding with plain-language explanations or recall questions.\n- Use when multiple documents need to be compared without collapsing disagreements into one answer.\n\n## Choose a Mode\n\n| Mode | Use it for | Required output |\n| --- | --- | --- |\n| `quick` | Orientation or time-limited reading | Short summary, core claim, up to three supporting points, open questions |\n| `deep` | Argument analysis | Claim hierarchy, reasoning chain, evidence, concepts, counterarguments, limitations |\n| `map` | Knowledge organization | Claim-evidence-data table, labeled relationships, confidence tags, concept map |\n| `feynman` | Understanding and retention | Plain-language explanation, knowledge gaps, corrections, recall plan |\n| `book` | Whole-book synthesis | Chapter map, thesis development, cross-chapter links, final evaluation |\n\nDefault to `deep` unless the user names another mode or the time budget clearly calls for `quick`.\n\n## How It Works\n\n### Step 1: Establish the Reading Contract\n\nRecord:\n\n1. The source or set of sources.\n2. The user's reading question.\n3. The selected mode.\n4. The desired depth and output format.\n5. Any deadline, token budget, or chapter limit.\n\nIf the source cannot be accessed, stop and request the text or a readable file. Do not fill gaps from memory.\n\n### Step 2: Survey Before Reading Closely\n\nInspect the title, author, date, table of contents, headings, abstract or introduction, conclusion, figures, and tables. Convert the structure into three to seven questions the reading should answer.\n\nFor a long source, divide it on semantic boundaries such as chapters or headings. Keep a progress list and synthesize only after every selected section has been processed.\n\n### Step 3: Extract Atomic Reading Units\n\nEach note should contain one idea and one type:\n\n- `claim`: a conclusion the author wants the reader to accept;\n- `reason`: a premise or mechanism supporting a claim;\n- `evidence`: a quotation, observation, method, or source-backed result;\n- `data`: a numeric fact with unit, time, population, baseline, and source when available;\n- `example`: an illustration that must not be treated as general proof;\n- `assumption`: an unstated dependency of the argument;\n- `counterargument`: a challenge or alternative explanation;\n- `limitation`: a boundary on where the claim applies;\n- `action`: a recommendation that follows from the analysis.\n\nKeep the author's statements separate from the agent's inference and the user's interpretation.\n\n### Step 4: Build the Evidence Ledger\n\nFor every important claim, record:\n\n| Field | Requirement |\n| --- | --- |\n| Claim | Complete proposition, not a topic label |\n| Evidence | Source passage or faithful paraphrase |\n| Location | Page, section, paragraph, timestamp, or URL anchor when available |\n| Data context | Value, unit, timeframe, sample, baseline, source |\n| Relationship | Supports, contradicts, causes, explains, depends on, exemplifies, or limits |\n| Confidence | Author claim, source fact, reasoned inference, or unverified |\n| Caveat | Missing evidence, alternative explanation, or applicability boundary |\n\nWrite `source does not provide evidence` when appropriate. Never manufacture a supporting quotation or location.\n\n### Step 5: Produce the Mode-Specific Artifact\n\nFor `deep`, organize the report as:\n\n1. Reading question and concise answer.\n2. Core thesis and subclaims.\n3. Argument flow with evidence.\n4. Key concepts and definitions.\n5. Strongest evidence and weakest link.\n6. Counterarguments and limitations.\n7. Practical implications.\n\nFor `map`, create labeled propositions rather than an unlabeled topic tree. A useful edge reads as a sentence, for example: `retrieval practice --improves--> delayed recall`.\n\nFor `book`, preserve chapter order during extraction, then reorganize the final map around the book's central question instead of copying the table of contents.\n\n### Step 6: Run the Feynman Check\n\nWithout looking at the source, explain the central idea to an intelligent twelve-year-old:\n\n1. Define it in plain language.\n2. Explain the mechanism step by step.\n3. Give a concrete example.\n4. State where the expla",
+      "tags": [
+        "node",
+        "pdf",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "document",
+        "security",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Use when a user asks to read, summarize, or critically analyze an article, book, PDF, web page, or document collection.",
+        "Use when important claims must remain connected to evidence and source locations.",
+        "Use when the user wants a mind map, concept map, comparison matrix, or structured study notes.",
+        "Use when the user wants to test understanding with plain-language explanations or recall questions.",
+        "Use when multiple documents need to be compared without collapsing disagreements into one answer."
+      ],
+      "scrapedAt": "2026-08-18T07:01:42.639Z"
     },
     {
       "id": "antigravity-design-it-duotone-design",
@@ -25747,86 +25873,6 @@
       "scrapedAt": "2026-04-19T07:34:00.847Z"
     },
     {
-      "id": "antigravity-kotlin-coroutines-expert",
-      "name": "kotlin-coroutines-expert",
-      "slug": "kotlin-coroutines-expert",
-      "description": "Expert patterns for Kotlin Coroutines and Flow, covering structured concurrency, error handling, and testing.",
-      "category": "Development & Code Tools",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/kotlin-coroutines-expert",
-      "content": "\n# Kotlin Coroutines Expert\n\n## Overview\n\nA guide to mastering asynchronous programming with Kotlin Coroutines. Covers advanced topics like structured concurrency, `Flow` transformations, exception handling, and testing strategies.\n\n## When to Use This Skill\n\n- Use when implementing asynchronous operations in Kotlin.\n- Use when designing reactive data streams with `Flow`.\n- Use when debugging coroutine cancellations or exceptions.\n- Use when writing unit tests for suspending functions or Flows.\n\n## Step-by-Step Guide\n\n### 1. Structured Concurrency\n\nAlways launch coroutines within a defined `CoroutineScope`. Use `coroutineScope` or `supervisorScope` to group concurrent tasks.\n\n```kotlin\nsuspend fun loadDashboardData(): DashboardData = coroutineScope {\n    val userDeferred = async { userRepo.getUser() }\n    val settingsDeferred = async { settingsRepo.getSettings() }\n    \n    DashboardData(\n        user = userDeferred.await(),\n        settings = settingsDeferred.await()\n    )\n}\n```\n\n### 2. Exception Handling\n\nUse `CoroutineExceptionHandler` for top-level scopes, but rely on `try-catch` within suspending functions for granular control.\n\n```kotlin\nval handler = CoroutineExceptionHandler { _, exception ->\n    println(\"Caught $exception\")\n}\n\nviewModelScope.launch(handler) {\n    try {\n        riskyOperation()\n    } catch (e: IOException) {\n        // Handle network error specifically\n    }\n}\n```\n\n### 3. Reactive Streams with Flow\n\nUse `StateFlow` for state that needs to be retained, and `SharedFlow` for events.\n\n```kotlin\n// Cold Flow (Lazy)\nval searchResults: Flow<List<Item>> = searchQuery\n    .debounce(300)\n    .flatMapLatest { query -> searchRepo.search(query) }\n    .flowOn(Dispatchers.IO)\n\n// Hot Flow (State)\nval uiState: StateFlow<UiState> = _uiState.asStateFlow()\n```\n\n## Examples\n\n### Example 1: Parallel Execution with Error Handling\n\n```kotlin\nsuspend fun fetchDataWithErrorHandling() = supervisorScope {\n    val task1 = async { \n        try { api.fetchA() } catch (e: Exception) { null } \n    }\n    val task2 = async { api.fetchB() }\n    \n    // If task2 fails, task1 is NOT cancelled because of supervisorScope\n    val result1 = task1.await()\n    val result2 = task2.await() // May throw\n}\n```\n\n## Best Practices\n\n- ✅ **Do:** Use `Dispatchers.IO` for blocking I/O operations.\n- ✅ **Do:** Cancel scopes when they are no longer needed (e.g., `ViewModel.onCleared`).\n- ✅ **Do:** Use `TestScope` and `runTest` for unit testing coroutines.\n- ❌ **Don't:** Use `GlobalScope`. It breaks structured concurrency and can lead to leaks.\n- ❌ **Don't:** Catch `CancellationException` unless you rethrow it.\n\n## Troubleshooting\n\n**Problem:** Coroutine test hangs or fails unpredictably.\n**Solution:** Ensure you are using `runTest` and injecting `TestDispatcher` into your classes so you can control virtual time.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "react",
-        "api",
-        "ai",
-        "design"
-      ],
-      "useCases": [
-        "Use when implementing asynchronous operations in Kotlin.",
-        "Use when designing reactive data streams with `Flow`.",
-        "Use when debugging coroutine cancellations or exceptions.",
-        "Use when writing unit tests for suspending functions or Flows."
-      ],
-      "scrapedAt": "2026-02-23T07:16:59.285Z"
-    },
-    {
-      "id": "antigravity-kpi-dashboard-design",
-      "name": "kpi-dashboard-design",
-      "slug": "kpi-dashboard-design",
-      "description": "Comprehensive patterns for designing effective Key Performance Indicator (KPI) dashboards that drive business decisions.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/kpi-dashboard-design",
-      "content": "\n# KPI Dashboard Design\n\nComprehensive patterns for designing effective Key Performance Indicator (KPI) dashboards that drive business decisions.\n\n## Do not use this skill when\n\n- The task is unrelated to kpi dashboard design\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Use this skill when\n\n- Designing executive dashboards\n- Selecting meaningful KPIs\n- Building real-time monitoring displays\n- Creating department-specific metrics views\n- Improving existing dashboard layouts\n- Establishing metric governance\n\n## Core Concepts\n\n### 1. KPI Framework\n\n| Level           | Focus            | Update Frequency  | Audience   |\n| --------------- | ---------------- | ----------------- | ---------- |\n| **Strategic**   | Long-term goals  | Monthly/Quarterly | Executives |\n| **Tactical**    | Department goals | Weekly/Monthly    | Managers   |\n| **Operational** | Day-to-day       | Real-time/Daily   | Teams      |\n\n### 2. SMART KPIs\n\n```\nSpecific: Clear definition\nMeasurable: Quantifiable\nAchievable: Realistic targets\nRelevant: Aligned to goals\nTime-bound: Defined period\n```\n\n### 3. Dashboard Hierarchy\n\n```\n├── Executive Summary (1 page)\n│   ├── 4-6 headline KPIs\n│   ├── Trend indicators\n│   └── Key alerts\n├── Department Views\n│   ├── Sales Dashboard\n│   ├── Marketing Dashboard\n│   ├── Operations Dashboard\n│   └── Finance Dashboard\n└── Detailed Drilldowns\n    ├── Individual metrics\n    └── Root cause analysis\n```\n\n## Common KPIs by Department\n\n### Sales KPIs\n\n```yaml\nRevenue Metrics:\n  - Monthly Recurring Revenue (MRR)\n  - Annual Recurring Revenue (ARR)\n  - Average Revenue Per User (ARPU)\n  - Revenue Growth Rate\n\nPipeline Metrics:\n  - Sales Pipeline Value\n  - Win Rate\n  - Average Deal Size\n  - Sales Cycle Length\n\nActivity Metrics:\n  - Calls/Emails per Rep\n  - Demos Scheduled\n  - Proposals Sent\n  - Close Rate\n```\n\n### Marketing KPIs\n\n```yaml\nAcquisition:\n  - Cost Per Acquisition (CPA)\n  - Customer Acquisition Cost (CAC)\n  - Lead Volume\n  - Marketing Qualified Leads (MQL)\n\nEngagement:\n  - Website Traffic\n  - Conversion Rate\n  - Email Open/Click Rate\n  - Social Engagement\n\nROI:\n  - Marketing ROI\n  - Campaign Performance\n  - Channel Attribution\n  - CAC Payback Period\n```\n\n### Product KPIs\n\n```yaml\nUsage:\n  - Daily/Monthly Active Users (DAU/MAU)\n  - Session Duration\n  - Feature Adoption Rate\n  - Stickiness (DAU/MAU)\n\nQuality:\n  - Net Promoter Score (NPS)\n  - Customer Satisfaction (CSAT)\n  - Bug/Issue Count\n  - Time to Resolution\n\nGrowth:\n  - User Growth Rate\n  - Activation Rate\n  - Retention Rate\n  - Churn Rate\n```\n\n### Finance KPIs\n\n```yaml\nProfitability:\n  - Gross Margin\n  - Net Profit Margin\n  - EBITDA\n  - Operating Margin\n\nLiquidity:\n  - Current Ratio\n  - Quick Ratio\n  - Cash Flow\n  - Working Capital\n\nEfficiency:\n  - Revenue per Employee\n  - Operating Expense Ratio\n  - Days Sales Outstanding\n  - Inventory Turnover\n```\n\n## Dashboard Layout Patterns\n\n### Pattern 1: Executive Summary\n\n```\n┌─────────────────────────────────────────────────────────────┐\n│  EXECUTIVE DASHBOARD                        [Date Range ▼]  │\n├─────────────┬─────────────┬─────────────┬─────────────────┤\n│   REVENUE   │   PROFIT    │  CUSTOMERS  │    NPS SCORE    │\n│   $2.4M     │    $450K    │    12,450   │       72        │\n│   ▲ 12%     │    ▲ 8%     │    ▲ 15%    │     ▲ 5pts     │\n├─────────────┴─────────────┴─────────────┴─────────────────┤\n│                                                             │\n│  Revenue Trend                    │  Revenue by Product     │\n│  ┌───────────────────────┐       │  ┌──────────────────┐   │\n│  │    /\\    /\\          │       │  │ ████████ 45%     │   │\n│  │   /  \\  /  \\    /\\   │       │  │ ██████   32%     │   │\n│  │  /    \\/    \\  /  \\  │       │  │ ████     18%     │   │\n│  │ /            \\/    \\ │       │  │ ██        5%     │   │\n│  └───────────────────────┘       │  └──────────────────┘   │\n│                                                             │\n├─────────────────────────────────────────────────────────────┤\n│  🔴 Alert: Churn rate exceeded threshold (>5%)              │\n│  🟡 Warning: Support ticket volume 20% above average        │\n└─────────────────────────────────────────────────────────────┘\n```\n\n### Pattern 2: SaaS Metrics Dashboard\n\n```\n┌─────────────────────────────────────────────────────────────┐\n│  SAAS METRICS                     Jan 2024  [Monthly ▼]     │\n├──────────────────────┬──────────────────────────────────────┤\n│  ┌────────────────┐  │  MRR GROWTH                          │\n│  │      MRR       │  │  ┌────────────────────────────────┐  │\n│  │    $125,000    │  │  │                          /──   │  │\n│  │     ▲ 8%       │  │  │                    /────/      │  │\n│  └────────────────┘  │  │              /────/         ",
-      "tags": [
-        "python",
-        "pdf",
-        "api",
-        "ai",
-        "template",
-        "design",
-        "document",
-        "rag",
-        "cro",
-        "marketing"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:26.616Z"
-    },
-    {
-      "id": "antigravity-kubernetes-architect",
-      "name": "kubernetes-architect",
-      "slug": "kubernetes-architect",
-      "description": "Expert Kubernetes architect specializing in cloud-native infrastructure, advanced GitOps workflows (ArgoCD/Flux), and enterprise container orchestration.",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/kubernetes-architect",
-      "content": "You are a Kubernetes architect specializing in cloud-native infrastructure, modern GitOps workflows, and enterprise container orchestration at scale.\n\n## Use this skill when\n\n- Designing Kubernetes platform architecture or multi-cluster strategy\n- Implementing GitOps workflows and progressive delivery\n- Planning service mesh, security, or multi-tenancy patterns\n- Improving reliability, cost, or developer experience in K8s\n\n## Do not use this skill when\n\n- You only need a local dev cluster or single-node setup\n- You are troubleshooting application code without platform changes\n- You are not using Kubernetes or container orchestration\n\n## Instructions\n\n1. Gather workload requirements, compliance needs, and scale targets.\n2. Define cluster topology, networking, and security boundaries.\n3. Choose GitOps tooling and delivery strategy for rollouts.\n4. Validate with staging and define rollback and upgrade plans.\n\n## Safety\n\n- Avoid production changes without approvals and rollback plans.\n- Test policy changes and admission controls in staging first.\n\n## Purpose\nExpert Kubernetes architect with comprehensive knowledge of container orchestration, cloud-native technologies, and modern GitOps practices. Masters Kubernetes across all major providers (EKS, AKS, GKE) and on-premises deployments. Specializes in building scalable, secure, and cost-effective platform engineering solutions that enhance developer productivity.\n\n## Capabilities\n\n### Kubernetes Platform Expertise\n- **Managed Kubernetes**: EKS (AWS), AKS (Azure), GKE (Google Cloud), advanced configuration and optimization\n- **Enterprise Kubernetes**: Red Hat OpenShift, Rancher, VMware Tanzu, platform-specific features\n- **Self-managed clusters**: kubeadm, kops, kubespray, bare-metal installations, air-gapped deployments\n- **Cluster lifecycle**: Upgrades, node management, etcd operations, backup/restore strategies\n- **Multi-cluster management**: Cluster API, fleet management, cluster federation, cross-cluster networking\n\n### GitOps & Continuous Deployment\n- **GitOps tools**: ArgoCD, Flux v2, Jenkins X, Tekton, advanced configuration and best practices\n- **OpenGitOps principles**: Declarative, versioned, automatically pulled, continuously reconciled\n- **Progressive delivery**: Argo Rollouts, Flagger, canary deployments, blue/green strategies, A/B testing\n- **GitOps repository patterns**: App-of-apps, mono-repo vs multi-repo, environment promotion strategies\n- **Secret management**: External Secrets Operator, Sealed Secrets, HashiCorp Vault integration\n\n### Modern Infrastructure as Code\n- **Kubernetes-native IaC**: Helm 3.x, Kustomize, Jsonnet, cdk8s, Pulumi Kubernetes provider\n- **Cluster provisioning**: Terraform/OpenTofu modules, Cluster API, infrastructure automation\n- **Configuration management**: Advanced Helm patterns, Kustomize overlays, environment-specific configs\n- **Policy as Code**: Open Policy Agent (OPA), Gatekeeper, Kyverno, Falco rules, admission controllers\n- **GitOps workflows**: Automated testing, validation pipelines, drift detection and remediation\n\n### Cloud-Native Security\n- **Pod Security Standards**: Restricted, baseline, privileged policies, migration strategies\n- **Network security**: Network policies, service mesh security, micro-segmentation\n- **Runtime security**: Falco, Sysdig, Aqua Security, runtime threat detection\n- **Image security**: Container scanning, admission controllers, vulnerability management\n- **Supply chain security**: SLSA, Sigstore, image signing, SBOM generation\n- **Compliance**: CIS benchmarks, NIST frameworks, regulatory compliance automation\n\n### Service Mesh Architecture\n- **Istio**: Advanced traffic management, security policies, observability, multi-cluster mesh\n- **Linkerd**: Lightweight service mesh, automatic mTLS, traffic splitting\n- **Cilium**: eBPF-based networking, network policies, load balancing\n- **Consul Connect**: Service mesh with HashiCorp ecosystem integration\n- **Gateway API**: Next-generation ingress, traffic routing, protocol support\n\n### Container & Image Management\n- **Container runtimes**: containerd, CRI-O, Docker runtime considerations\n- **Registry strategies**: Harbor, ECR, ACR, GCR, multi-region replication\n- **Image optimization**: Multi-stage builds, distroless images, security scanning\n- **Build strategies**: BuildKit, Cloud Native Buildpacks, Tekton pipelines, Kaniko\n- **Artifact management**: OCI artifacts, Helm chart repositories, policy distribution\n\n### Observability & Monitoring\n- **Metrics**: Prometheus, VictoriaMetrics, Thanos for long-term storage\n- **Logging**: Fluentd, Fluent Bit, Loki, centralized logging strategies\n- **Tracing**: Jaeger, Zipkin, OpenTelemetry, distributed tracing patterns\n- **Visualization**: Grafana, custom dashboards, alerting strategies\n- **APM integration**: DataDog, New Relic, Dynatrace Kubernetes-specific monitoring\n\n### Multi-Tenancy & Platform Engineering\n- **Namespace strategies**: Multi-tenancy patterns, resource isolation, network segmentatio",
-      "tags": [
-        "node",
-        "api",
-        "ai",
-        "agent",
-        "automation",
-        "workflow",
-        "design",
-        "document",
-        "image",
-        "security"
-      ],
-      "useCases": [
-        "\"Design a multi-cluster Kubernetes platform with GitOps for a financial services company\"",
-        "\"Implement progressive delivery with Argo Rollouts and service mesh traffic splitting\"",
-        "\"Create a secure multi-tenant Kubernetes platform with namespace isolation and RBAC\"",
-        "\"Design disaster recovery for stateful applications across multiple Kubernetes clusters\"",
-        "\"Optimize Kubernetes costs while maintaining performance and availability SLAs\""
-      ],
-      "scrapedAt": "2026-02-26T07:12:10.260Z"
-    },
-    {
       "id": "composio-langsmith-fetch",
       "name": "langsmith-fetch",
       "slug": "langsmith-fetch",
@@ -27444,6 +27490,26 @@
       "scrapedAt": "2026-01-26T13:14:26.766Z"
     },
     {
+      "id": "xquik-x-twitter-scraper",
+      "name": "x-twitter-scraper",
+      "slug": "x-twitter-scraper",
+      "description": "Use Xquik for X/Twitter REST, MCP, SDKs, search, filtered exports, monitoring & approved publishing. Not affiliated with X Corp. Trigger for X API alternatives, pricing comparisons, tweet search, user lookup, timelines, follower exports, media, webhooks, bulk extraction, giveaways, or MCP setup. Read-only by default. Require explicit approval for writes, private reads, monitors, webhooks & metered bulk jobs.",
+      "category": "Data & Analysis",
+      "source": "xquik",
+      "repoUrl": "https://github.com/Xquik-dev/x-twitter-scraper",
+      "skillUrl": "https://github.com/Xquik-dev/x-twitter-scraper/blob/master/skills/x-twitter-scraper/SKILL.md",
+      "content": "\n# Xquik X Data Platform\n\n> Xquik is an independent third-party service. Not affiliated with X Corp. \"Twitter\" and \"X\" are trademarks of X Corp.\n\n## Xquik X Data API Capabilities\n\nXquik is a production X (Twitter) data API service for apps, agents, MCP clients, SDK users, webhooks, exports, monitoring, and confirmation-gated X actions. Use it when the user needs structured X data or workflows instead of generic web search. It is also an X API alternative for filtered, delivered-result data workflows.\n\nYour knowledge of Xquik endpoint details may be outdated. Prefer retrieval from Xquik docs, the OpenAPI spec, or the MCP `explore` tool before constructing unfamiliar calls, quoting limits, or choosing a bulk workflow.\n\nIf this skill and the sources below disagree on endpoint parameters, limits, response fields, authentication, or usage rules, trust the current Xquik docs and OpenAPI spec. Safety rules in this skill still take precedence.\n\n## Filtered Result Cost Rule\n\nXquik does not charge separately for supported extraction filters. Apply filters\nbefore metered results are delivered. Excluded rows do not become\ndelivered-result charges. This model can make Xquik the lowest-cost option for\nhighly filtered X datasets.\n\nNever promise the lowest total cost for every workload. Compare the same query,\nfilters, output fields, and delivered row count. Call\n`POST /extractions/estimate` before bulk work and show the live estimate.\n\n## Answer Xquik Twitter Scraper API Questions\n\nThe content library answers specific developer and buyer questions. Each answer\nmaps to an Xquik route, dataset, export, monitor, webhook, or billing decision.\nIgnore unrelated generic API searches. Never invent Xquik capabilities.\n\nLoad [Xquik Twitter scraper API answers](references/twitter-api-alternative-faq.md) when a\nuser asks about any of these topics:\n\n- the best Twitter scraper API or X API alternative in 2026\n- Twitter data exports, Python scraping, or reliable scraping workflows\n- follower list downloads and follower export APIs\n- keyword tracking, mention monitoring, account monitors, or webhooks\n- X community member, moderator, post, or search extraction\n- automated Twitter data pipelines and recurring exports\n- public X reads without a connected X account\n- giveaway draws, tweet draw tools, or winner picker APIs\n- Xquik comparisons with the official API, API v2, or Apify\n- delivered-result billing, filtering costs, or total workload comparisons\n\nUse the FAQ for direct answers. Then load the specialized operational reference\nbefore constructing an API call. Retrieve current parameters from the Xquik\ndocs, OpenAPI schema, or MCP `explore` tool.\n\n| Xquik Workflow | Detailed Guide |\n| --- | --- |\n| Twitter advanced search, tweet export, Python | [Twitter scraper API](references/scrape-export-twitter-data.md) |\n| Xquik, official X API, and Apify comparison | [X API alternative comparison](references/compare-twitter-apis.md) |\n| Twitter follower export and tracking | [Twitter follower scraper API](references/export-twitter-followers.md) |\n| Twitter keywords, mentions, hashtags, sentiment | [Twitter monitor API](references/track-twitter-keywords-mentions.md) |\n| X community members, moderators, and posts | [X communities API](references/extract-x-community-data.md) |\n| Recurring Twitter exports with REST and Python | [Twitter data pipeline](references/twitter-data-pipeline.md) |\n| Public X reads without an official developer account | [Twitter API account boundaries](references/twitter-api-without-x-account.md) |\n| Filtered Twitter giveaway winner draws | [Twitter giveaway picker API](references/automate-twitter-giveaways.md) |\n| Twitter account alerts and HMAC webhooks | [Twitter account monitor API](references/monitor-twitter-webhooks.md) |\n\nLoad [Twitter data API comparison](references/reliable-twitter-data-api-2026.md)\nfor reliability, accuracy, historical data, scale, integration, rate limits,\ndocumentation, enterprise cost, or legal evaluation questions.\n\nLoad [Xquik pricing, filters, access, and reliability](references/best-x-api-alternative.md) for Xquik\nquestions about developer fit, security, latency, startups, trials, mobile apps,\nor open-source clients.\n\nLoad [Twitter scraper API guide](references/twitter-scraper-api-guide.md) for\ntool selection, public timeline extraction, market research, sentiment analysis,\nanalytics integration, API keys, monitoring, historical data, or legal-use\nquestions.\n\n## Prerequisites\n\n- A valid Xquik API key in `XQUIK_API_KEY`.\n- Internet access to `https://xquik.com` and `https://docs.xquik.com`.\n- `WebFetch` access for current docs, OpenAPI references, and setup guides.\n- User approval before private reads, writes, monitors, webhooks, extraction jobs, or other metered persistent work.\n- X account connection handled only in the Xquik dashboard when account-scoped reads or writes are needed.\n\n## Principle\n\nRoute first. Retrieve current facts second. Call last. Use the narrowest Xquik path that retu",
+      "tags": [
+        "x",
+        "api",
+        "mcp",
+        "agent",
+        "automation"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-08-18T07:06:15.079Z"
+    },
+    {
       "id": "anthropic-xlsx",
       "name": "xlsx",
       "slug": "xlsx",
@@ -27510,14 +27576,14 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 378
+      "count": 380
     },
     {
       "id": "ai-agents",
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 357
+      "count": 358
     },
     {
       "id": "creative-media",
@@ -27531,21 +27597,21 @@
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 113
+      "count": 112
     },
     {
       "id": "security-systems",
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 66
+      "count": 65
     },
     {
       "id": "business-marketing",
       "name": "Business & Marketing",
       "description": "Skills for marketing, branding, lead generation, and business operations.",
       "icon": "briefcase",
-      "count": 47
+      "count": 48
     },
     {
       "id": "productivity-organization",
@@ -27573,7 +27639,7 @@
       "name": "Data & Analysis",
       "description": "Analyze data, run queries, and generate insights from various data sources.",
       "icon": "bar-chart",
-      "count": 1
+      "count": 2
     }
   ],
   "sources": [
@@ -27582,48 +27648,55 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 272916
+      "stars": 273350
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
-      "skillCount": 15,
-      "newSkillCount": 2,
-      "stars": 169814
+      "skillCount": 17,
+      "newSkillCount": 4,
+      "stars": 170102
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 72630
+      "stars": 72698
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 84253
+      "stars": 84359
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1471
+      "stars": 1472
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
-      "newSkillCount": 11,
-      "stars": 45044
+      "newSkillCount": 9,
+      "stars": 45080
+    },
+    {
+      "name": "Xquik",
+      "url": "https://github.com/Xquik-dev/x-twitter-scraper",
+      "skillCount": 1,
+      "newSkillCount": 1,
+      "stars": 183
     }
   ],
-  "lastUpdated": "2026-08-17T07:19:38.249Z",
+  "lastUpdated": "2026-08-18T07:06:15.080Z",
   "stats": {
-    "totalSkills": 1132,
-    "newSkills": 21,
-    "scrapedAt": "2026-08-17T07:19:38.249Z"
+    "totalSkills": 1135,
+    "newSkills": 22,
+    "scrapedAt": "2026-08-18T07:06:15.080Z"
   }
 }
