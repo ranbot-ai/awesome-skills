@@ -818,6 +818,34 @@
       "scrapedAt": "2026-02-12T07:15:10.229Z"
     },
     {
+      "id": "antigravity-agent-harness-fault-injection",
+      "name": "agent-harness-fault-injection",
+      "slug": "agent-harness-fault-injection",
+      "description": "Use when an agent workflow needs deterministic recovery evidence for sandbox, MCP/tool, worker, checkpoint, memory, or orchestration failures.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-harness-fault-injection",
+      "content": "\n# Agent Harness Fault Injection\n\n## Overview\n\nUse a deterministic, non-production fault schedule to test whether an agent\nworkflow preserves state, budgets, safety boundaries, and evidence when a\ndependency fails. The output is a small fault matrix, an event timeline, and a\nverdict that distinguishes recovered, contained, unrecoverable, and\ninconclusive runs.\n\n## When to Use This Skill\n\n- Use when a multi-step agent, state machine, loop, or multi-agent workflow has a new recovery path.\n- Use when sandbox execution, an MCP/tool call, a worker, a checkpoint store, or memory can time out or disappear.\n- Use before claiming retry, resume, deadline, isolation, or partial-failure behavior is production-ready.\n- Use when a regression needs reproducible failure evidence instead of a random chaos run.\n\nDo not use this skill against a production target, real user data, live credentials,\nor an unbounded external service. Convert those cases to a local simulator or an\nauthorized staging harness first.\n\n## Safety and Boundary Preconditions\n\n1. Freeze the workflow revision, model/prompt configuration, tool schemas, seed,\n   input fixture, timeout, retry budget, deadline, and expected terminal states.\n2. Run in a disposable sandbox with synthetic inputs and stubbed tools. Keep\n   network disabled unless the test explicitly needs a local test server.\n3. Make every injected failure an in-memory or fixture-controlled event. Never\n   delete real data, revoke real credentials, kill an unrelated process, or\n   mutate a live service to create a failure.\n4. Record the test scope and a run identifier before starting. A missing scope,\n   fixture, or recovery contract makes the verdict `inconclusive`.\n\n## Recovery Contract\n\nWrite the invariant before injecting a fault. A useful contract names the state\nthat must survive and the side effects that must not repeat:\n\n```text\nAfter recovery, resume from the latest durable checkpoint, preserve the task\nidentity and safety policy, spend no more than the remaining retry/deadline\nbudget, and commit each externally visible effect at most once.\n```\n\nModel the workflow with explicit states. For example:\n\n```text\ncreated -> running -> checkpointed -> waiting_for_tool\n                       |                |\n                       v                v\n                    failed <--------- recovering -> resumed -> completed\n```\n\nFor each transition, define the owner, durable fields, allowed retry count,\nand terminal behavior. In-memory values are not checkpoints unless the harness\nproves they survive the simulated restart.\n\n## Fault Matrix\n\nSelect the smallest set of faults that covers the new recovery logic. Do not\nrandomize the schedule until a deterministic schedule has passed.\n\n| Fault | Injection boundary | Required observation | Expected containment |\n|---|---|---|---|\n| sandbox denial | before a tool starts | no unsafe side effect; reason is retained | retry only when policy allows |\n| MCP/tool timeout | after request id is assigned | timeout is attributed to that request | bounded retry with same idempotency key |\n| worker restart | after checkpoint write | worker reloads the same task version | resume from latest checkpoint |\n| missing/stale checkpoint | before resume | stale data is rejected or marked | stop safely; never invent progress |\n| parallel branch failure | one branch after fan-out | sibling status is preserved | join policy decides retry, degrade, or stop |\n| memory loss | clear ephemeral context | durable facts are reconstructed | ask or stop when required facts are absent |\n| retry/deadline exhaustion | on the final attempt | no extra call is scheduled | terminal `failed` or `timed_out` |\n\n## Deterministic Injection Schedule\n\nUse event numbers rather than wall-clock randomness. A schedule should be\nportable across harnesses:\n\n```json\n{\n  \"seed\": \"harness-fixture-07\",\n  \"faults\": [\n    {\"event\": \"tool.call\", \"ordinal\": 2, \"kind\": \"timeout\", \"tool\": \"search\"},\n    {\"event\": \"worker.start\", \"ordinal\": 2, \"kind\": \"restart\"},\n    {\"event\": \"branch.join\", \"ordinal\": 1, \"kind\": \"partial_failure\", \"branch\": \"summarize\"}\n  ]\n}\n```\n\nThe harness should emit the schedule, not merely the seed. Keep fault identity\nseparate from the observed error so a wrapper cannot accidentally turn a\ntimeout into a generic failure. Run the same schedule twice and compare the\nnormalized timeline before trying a different schedule.\n\n## Recovery Rules by Boundary\n\n### Sandbox and MCP/tool failures\n\n- Assign a request id and idempotency key before the call.\n- Distinguish timeout, explicit tool error, invalid output, and policy denial.\n- Retry only the declared retryable classes; preserve the original error and\n  attempt count in the evidence.\n- Do not retry a side effect unless the tool contract says the key is safe to\n  replay. A read timeout is not proof that a write did not happen.\n- When the deadline or retry budget is exhausted, emit one terminal event and\n  stop scheduling work.\n\n### Worker restart an",
+      "tags": [
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "design",
+        "security",
+        "cro"
+      ],
+      "useCases": [
+        "Use when a multi-step agent, state machine, loop, or multi-agent workflow has a new recovery path.",
+        "Use when sandbox execution, an MCP/tool call, a worker, a checkpoint store, or memory can time out or disappear.",
+        "Use before claiming retry, resume, deadline, isolation, or partial-failure behavior is production-ready.",
+        "Use when a regression needs reproducible failure evidence instead of a random chaos run."
+      ],
+      "scrapedAt": "2026-08-20T06:54:33.400Z"
+    },
+    {
       "id": "antigravity-agent-manager-skill",
       "name": "agent-manager-skill",
       "slug": "agent-manager-skill",
@@ -4259,6 +4287,33 @@
         "User wants executive summaries of long audio content"
       ],
       "scrapedAt": "2026-02-06T07:04:18.180Z"
+    },
+    {
+      "id": "antigravity-audit-agent-run-evidence",
+      "name": "audit-agent-run-evidence",
+      "slug": "audit-agent-run-evidence",
+      "description": "Use when an agent, harness, gateway, MCP workflow, or multi-step automation claims completion and the available traces, checkpoints, approvals, tool calls, or deployment records must be judged without trusting self-reported success.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/audit-agent-run-evidence",
+      "content": "\n# Audit Agent Run Evidence\n\n## Overview\n\nTurn an end-to-end success statement into independently decidable claims. Reconstruct what happened from available records, grade each claim against the strongest witness, and keep missing evidence distinct from failure.\n\nThis is a read-only audit. Do not rerun tools, approve actions, resume workers, deploy artifacts, or modify evidence unless the user separately authorizes those actions.\n\n## When to Use\n\n- Auditing a completed or interrupted agent run from traces and artifacts.\n- Checking whether an agent's end-to-end success claim is actually supported.\n- Reviewing MCP, gateway, sandbox, checkpoint, retry, memory, approval, or deployment evidence.\n- Separating autonomous success from human-assisted or merely requested outcomes.\n\nDo not use this skill to design instrumentation for a future run or to perform the missing actions. It evaluates evidence that already exists.\n\n## Establish the Contract\n\nRecord these inputs before judging the run:\n\n- declared goal and terminal success criteria;\n- run, workflow, task, and parent identifiers;\n- immutable code, configuration, model, prompt, tool-schema, and artifact revisions when available;\n- actors and trust boundaries: orchestrator, worker, sandbox, MCP server, gateway, human approver, CI, and deployment platform;\n- retry, deadline, token, cost, concurrency, and human-escalation budgets;\n- supplied evidence inventory and known collection gaps.\n\nDo not silently strengthen the original success criteria. Do not weaken them to match the evidence that happens to exist.\n\n## Build a Claim Ledger\n\nSplit the overall claim into atomic predicates. Give every row a stable claim ID.\n\n| Field | Required content |\n|---|---|\n| `claim_id` | Stable identifier |\n| `predicate` | One falsifiable statement |\n| `required_witness` | Source that can independently prove it |\n| `evidence_refs` | Exact event, log, artifact, or record IDs |\n| `counterevidence_refs` | Conflicting records |\n| `coverage` | Required instances versus observed instances |\n| `verdict` | `proven`, `partially_proven`, `contradicted`, or `not_proven` |\n| `gap` | Missing field, actor, interval, or verification |\n\nTypical predicates include:\n\n- every required step reached its terminal postcondition;\n- sandbox isolation held for every executing worker;\n- each required MCP/tool call has a correlated response;\n- retries respected idempotency and did not duplicate committed effects;\n- a checkpoint was durably written, verified, and actually used for resume;\n- parallel branches satisfied the declared join policy;\n- memory reads cite a versioned source rather than an untracked summary;\n- retry, deadline, token, cost, and escalation budgets were respected;\n- approval was granted by an authorized human for the exact artifact and target;\n- the platform deployed that same artifact and passed the declared health checks.\n\n## Normalize Evidence\n\nPreserve original records and create a normalized event view with:\n\n```json\n{\n  \"run_id\": \"run-123\",\n  \"event_id\": \"evt-42\",\n  \"sequence\": 42,\n  \"observed_at\": \"RFC3339 timestamp\",\n  \"actor\": {\"type\": \"worker\", \"id\": \"worker-2\"},\n  \"operation\": \"mcp.search\",\n  \"state_before\": \"researching\",\n  \"state_after\": \"researching\",\n  \"attempt\": 2,\n  \"request_id\": \"req-9\",\n  \"idempotency_key\": \"task-7:search:2\",\n  \"input_digest\": \"sha256:...\",\n  \"output_digest\": \"sha256:...\",\n  \"checkpoint_seq\": 3,\n  \"parent_event_id\": \"evt-41\",\n  \"status\": \"succeeded\",\n  \"evidence_ref\": \"tool-log:991\"\n}\n```\n\nUse `null` or `unknown` for absent values. Never synthesize IDs, timestamps, digests, costs, approvals, or outcomes.\n\nVerify bundle hashes or signatures when supplied. Check duplicate IDs, broken parent links, non-monotonic per-source sequences, impossible state transitions, unaccounted clock skew, and unexplained trace gaps. Treat an integrity failure as counterevidence for claims that depend on the affected records.\n\n## Rank Witnesses\n\nPrefer the witness closest to the effect:\n\n| Claim | Strong witness | Insufficient alone |\n|---|---|---|\n| Code changed | Commit/tree and diff | Agent narration |\n| Test passed | Complete test result bound to revision | Command invocation |\n| MCP effect occurred | Server or provider audit record | Client request |\n| Checkpoint resumed | Durable checkpoint plus verified load event | Checkpoint file exists |\n| Human approved | Authorization-system decision bound to artifact and target | Approval requested |\n| Deployment succeeded | Platform record plus required health checks | Deployment started |\n| Memory grounded a decision | Versioned memory read and citation | Final answer resembles memory |\n\nAn orchestrator and its child worker are not independent witnesses when they repeat the same unverified result. A cryptographic digest proves byte identity, not semantic correctness.\n\n## Reconstruct the Run\n\n1. Order events by causal links and per-source sequence; use timestamps only as supporting evidence.\n2. Build the state-transition path and mar",
+      "tags": [
+        "mcp",
+        "ai",
+        "agent",
+        "automation",
+        "workflow",
+        "design",
+        "rag"
+      ],
+      "useCases": [
+        "Auditing a completed or interrupted agent run from traces and artifacts.",
+        "Checking whether an agent's end-to-end success claim is actually supported.",
+        "Reviewing MCP, gateway, sandbox, checkpoint, retry, memory, approval, or deployment evidence.",
+        "Separating autonomous success from human-assisted or merely requested outcomes."
+      ],
+      "scrapedAt": "2026-08-20T06:55:38.662Z"
     },
     {
       "id": "antigravity-audit-context-building",
@@ -8460,6 +8515,34 @@
         "Use when parallel step detection and dependency graphs matter"
       ],
       "scrapedAt": "2026-03-11T07:04:30.269Z"
+    },
+    {
+      "id": "antigravity-boost-asio-pro",
+      "name": "boost-asio-pro",
+      "slug": "boost-asio-pro",
+      "description": "Use when writing asynchronous C++ networking code with Boost.Asio or standalone Asio — TCP/UDP servers and clients, SSL/TLS, timers, strands, composed async ops. Covers io_context, co_spawn, awaitable, async_read/async_write, asio::spawn, yield_context, and pre-C++20 callback styles.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/boost-asio-pro",
+      "content": "\n# Boost.Asio / standalone Asio\n\n## Overview\n\nWrite async C++ networking code that compiles on the *user's* Boost, not the newest one. Asio's API changed shape three times (classic `io_service` → `io_context` → C++20 coroutines) and most Asio code on the internet is from the first era, so **pick the style from the toolchain first**, then follow that style's reference file.\n\n**References:** [Boost.Asio](https://www.boost.org/doc/libs/latest/doc/html/boost_asio.html) · [standalone Asio](https://think-async.com/Asio/)\n\nAsio's API changed shape three times, so the same task has three correct answers depending on the Boost version in front of you. This skill makes the agent establish that version first, then apply the rules that are genuinely easy to get wrong — strand versus write serialization, buffer and connection lifetime, composed reads for framing — and finally check its own output against a list before calling it done.\n\n## When to Use This Skill\n\n- Use when writing or reviewing async C++ networking code with Boost.Asio or standalone Asio: TCP/UDP servers and clients, SSL/TLS streams, timers, resolvers.\n- Use when the code involves `io_context`, `io_service`, `co_spawn`, `awaitable`, `async_read`, `async_write`, `strand`, `asio::spawn`, `yield_context`, or completion-handler callbacks.\n- Use when the target toolchain is old: an older Boost or a pre-C++20 standard, where coroutine examples will not compile.\n- Use when async code compiles but misbehaves: interleaved writes, dangling buffers, sockets closing early, `operation_aborted` treated as an error.\n\n## Step 1: pick the style (do this before writing code)\n\nDetermine the Boost (or Asio) version and the C++ standard actually in use — `find_package(Boost)` output, `dpkg -l libboost-dev`, `brew info boost`, `CMAKE_CXX_STANDARD`, or ask. Do not assume the newest.\n\n| Boost | C++ std | Style | Read |\n|-------|---------|-------|------|\n| ≥ 1.77 | C++20 | Coroutines (`co_await` + `awaitable<T>`) — preferred | [references/coroutines.md](references/coroutines.md) |\n| ≥ 1.74 | C++11–17 | Completion handlers (callbacks) — the portable baseline | [references/pre-cpp20.md](references/pre-cpp20.md) |\n| ≥ 1.80 | C++11–17 | Stackful `asio::spawn` + `yield_context` (links Boost.Coroutine — not header-only) | [references/pre-cpp20.md](references/pre-cpp20.md) |\n| 1.62–1.65 | C++11 | Classic `io_service` / `strand.wrap` / `expires_from_now` | [references/classic-boost.md](references/classic-boost.md) |\n\nSSL/TLS in any style: [references/ssl.md](references/ssl.md). CMake for any style: [references/build.md](references/build.md).\n\n`io_context`, `make_strand`, `bind_executor`, `steady_timer`, `signal_set`, `async_read`/`async_write`/`async_read_until`, buffers and `resolver` are **library** features — identical in the coroutine and callback styles. Only the suspension mechanism differs.\n\n## Step 2: version floors (verified by compiling, not from docs)\n\nReach for one of these and the build breaks on older distros:\n\n| Feature | Floor |\n|---------|-------|\n| `experimental/awaitable_operators.hpp` (the `\\|\\|` / `&&` operators) | **Boost ≥ 1.77** / Asio ≥ 1.20 |\n| `as_tuple` completion token | **Boost ≥ 1.79** / Asio ≥ 1.21 |\n| `co_composed` (custom composed ops) | **Boost ≥ 1.85** / Asio ≥ 1.30 |\n| 3-arg `asio::spawn(ex, fn, token)` | **Boost ≥ 1.80** (older Boost has only `spawn(ex, fn)`) |\n| `any_io_executor` (`strand<any_io_executor>`, `tcp::socket`'s default executor) | **Boost ≥ 1.74** — the floor for the callback style; below it, use legacy `io_context::strand` |\n| `io_context`, `make_strand`, `expires_after` | **Boost ≥ 1.66** — below it, classic `io_service` |\n\nDistro floors that bite: **Debian bookworm ships Boost 1.74** (no `awaitable_operators.hpp` — `#include` fails outright), Ubuntu 20.04 ships 1.71 (no `any_io_executor`), Debian 9 ships 1.62.\n\nLanguage, not library: the chrono literals `250ms` / `30s` are **C++14**. For a true C++11 build write `std::chrono::milliseconds(250)`.\n\n## Step 3: the rules that are actually easy to get wrong\n\n**A strand does not serialize writes.** A strand serializes handler *execution*, not whole composed operations. Two `async_write`s in flight on the same strand still **interleave bytes on the wire**. Full-duplex (a read loop plus concurrent pushes/replies) needs a per-connection strand **and** an outbound queue with an in-flight flag, so at most one `async_write` exists at a time. This is the single most common wrong answer about Asio.\n\n**Buffers do not own memory.** `asio::buffer()` is a view. Storage must outlive the operation: coroutine locals are fine across `co_await` in the same frame; in callback style the same data must become a **member**, not a local.\n\n**Connections must outlive their handlers.** `enable_shared_from_this`, and capture `self` in *every* `co_spawn` / handler — read loop, write loop, and each timer.\n\n**Frame with composed reads.** `async_read` (fills the buffer exactly) for a length prefix and then the body; ne",
+      "tags": [
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "document",
+        "security",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Use when writing or reviewing async C++ networking code with Boost.Asio or standalone Asio: TCP/UDP servers and clients, SSL/TLS streams, timers, resolvers.",
+        "Use when the code involves `io_context`, `io_service`, `co_spawn`, `awaitable`, `async_read`, `async_write`, `strand`, `asio::spawn`, `yield_context`, or completion-handler callbacks.",
+        "Use when the target toolchain is old: an older Boost or a pre-C++20 standard, where coroutine examples will not compile.",
+        "Use when async code compiles but misbehaves: interleaved writes, dangling buffers, sockets closing early, `operation_aborted` treated as an error."
+      ],
+      "scrapedAt": "2026-08-20T06:56:49.251Z"
     },
     {
       "id": "antigravity-box-automation",
@@ -25799,79 +25882,6 @@
       "scrapedAt": "2026-01-26T13:19:10.117Z"
     },
     {
-      "id": "antigravity-keyword-extractor",
-      "name": "keyword-extractor",
-      "slug": "keyword-extractor",
-      "description": "Extracts up to 50 highly relevant SEO keywords from text. Use when user wants to generate or extract keywords for given text.\n",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/keyword-extractor",
-      "content": "\n# Keyword Extractor\n\nExtracts **max 50 relevant keywords** from text and formats them in a strict machine-ready structure.\n\n---\n\n## QUICK START\n\nJump to any section:\n1. [CORE MANDATE](#core-mandate) – Output rules and formatting \n2. [WHEN TO USE](#when-to-use) – Trigger conditions for this skill \n3. [KEYWORD QUALITY RULES](#keyword-quality-rules) – Priorities and forbidden keywords \n4. [WORKFLOW](#workflow) – Step-by-step generation and processing \n5. [FAILURE HANDLING](#failure-handling) – Short text or edge cases \n\n---\n\n# CORE MANDATE\n\nReturn **exactly one comma-separated line** of keywords, following these rules:\n- max 50 keywords  \n- ordered by relevance  \n- all lowercase  \n- no duplicates or near-duplicates  \n- mix of single words and 2–4 word phrases  \n- no numbering, bullets, explanations, or trailing period\n\n---\n\n## When to Use\nUse this skill when the user wants to generate or extract **SEO-friendly keywords or tags** from text including:\n- Extracting keywords or tags for any given text or paragraph  \n- Creating **comma-separated keywords or tags** suitable for SEO, search, or metadata  \n- Generating topic-specific keywords or tags based on the content’s main subjects and concepts  \n\nThis skill should be triggered for **all text-based keyword extraction requests**, regardless of phrasing, as long as the goal is SEO, tagging, or metadata generation.\n\nDo NOT trigger this skill for:  \n- Summaries or paraphrasing requests  \n- Text analysis without keyword generation\n\n---\n\n# KEYWORD QUALITY RULES\n\nPrefer noun phrases over verbs or adjectives.\nPrefer keywords useful for:\n- SEO and search\n- tagging\n- metadata\n\nPrioritize:\n- domain terminology\n- meaningful nouns\n- search phrases\n- entities\n- technical concepts\n\nAvoid weak keywords like:\n- things and various topics\n- general concepts\n- important ideas\n- methods\n\n**IMPORTANT: Each keyword must strictly represent a phrase that a user would type into a search engine**\n\n---\n\n# WORKFLOW\n\n## Step 1 — Analyze\n\nIdentify:\n- main subject\n- key topics\n- domain terminology\n- entities\n- concepts\n\nIgnore filler words.\n\n---\n\n## Step 2 — Generate Keywords\n\nGenerate up to 50 strictly SEO-friendly keywords directly from the text.\n\nInclude:\n- core topics\n- domain terminology\n- related concepts\n- common search queries\n\nAllowed formats:\n- single words\n- 2 word phrases\n- 3 word phrases\n- 4 word phrases\n\nExample:\n```machine learning, neural networks, deep learning models, ai algorithms, data science tools```\n\nAvoid vague keywords, filler phrases, adjectives without nouns like:\n```important methods, different ideas, various techniques, things```\n\nKeywords must not exceed 4 words.\n\n---\n\n## Step 3 — Rank\n\nOrder keywords by SEO importance using these signals:\n1. main topic of the text\n2. high-value domain terminology\n3. technologies, tools, or entities mentioned\n4. common search queries related to the topic\n5. supporting contextual topics\n\nMost important keywords should always appear first.\n\n---\n\n## Step 4 — Normalize\n\nEnsure:\n- lowercase, comma separated, no duplicates\n- ≤50 keywords\n- Remove near-duplicate keywords that represent the same concept.\n- Keep only the most common search phrase.\n- If two keywords represent the same concept, keep only the more common search phrase.\n\n---\n\n## Step 5 — Validate\n\nBefore returning output ensure:\n- keyword_count <= 50\n- no duplicates and near-duplicates\n- all lowercase and comma separated\n- no trailing period\n- each keyword is a clear searchable topic\n- keywords do not exceed 4 words\n\nIf any rule fails regenerate the list.\n\n---\n\n# FAILURE HANDLING\n\nIf text is very short, infer likely topics and still generate keywords. Never exceed 50 keywords.\n\n---\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "ai",
-        "workflow",
-        "rag",
-        "seo"
-      ],
-      "useCases": [
-        "Extracting keywords or tags for any given text or paragraph",
-        "Creating **comma-separated keywords or tags** suitable for SEO, search, or metadata",
-        "Generating topic-specific keywords or tags based on the content’s main subjects and concepts",
-        "Summaries or paraphrasing requests",
-        "Text analysis without keyword generation"
-      ],
-      "scrapedAt": "2026-03-12T07:11:04.106Z"
-    },
-    {
-      "id": "antigravity-klaviyo-automation",
-      "name": "klaviyo-automation",
-      "slug": "klaviyo-automation",
-      "description": "Automate Klaviyo tasks via Rube MCP (Composio): manage email/SMS campaigns, inspect campaign messages, track tags, and monitor send jobs. Always search tools first for current schemas.",
-      "category": "Business & Marketing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/klaviyo-automation",
-      "content": "\n# Klaviyo Automation via Rube MCP\n\nAutomate Klaviyo email and SMS marketing operations through Composio's Klaviyo toolkit via Rube MCP.\n\n## Prerequisites\n\n- Rube MCP must be connected (RUBE_SEARCH_TOOLS available)\n- Active Klaviyo connection via `RUBE_MANAGE_CONNECTIONS` with toolkit `klaviyo`\n- Always call `RUBE_SEARCH_TOOLS` first to get current tool schemas\n\n## Setup\n\n**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.\n\n\n1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds\n2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `klaviyo`\n3. If connection is not ACTIVE, follow the returned auth link to complete Klaviyo authentication\n4. Confirm connection status shows ACTIVE before running any workflows\n\n## Core Workflows\n\n### 1. List and Filter Campaigns\n\n**When to use**: User wants to browse, search, or filter marketing campaigns\n\n**Tool sequence**:\n1. `KLAVIYO_GET_CAMPAIGNS` - List campaigns with channel and status filters [Required]\n\n**Key parameters**:\n- `channel`: Campaign channel - 'email' or 'sms' (required by Klaviyo API)\n- `filter`: Additional filter string (e.g., `equals(status,\"draft\")`)\n- `sort`: Sort field with optional `-` prefix for descending (e.g., '-created_at', 'name')\n- `page_cursor`: Pagination cursor for next page\n- `include_archived`: Include archived campaigns (default: false)\n\n**Pitfalls**:\n- `channel` is required; omitting it can produce incomplete or unexpected results\n- Pagination is mandatory for full coverage; a single call returns only one page (default ~10)\n- Follow `page_cursor` until exhausted to get all campaigns\n- Status filtering via `filter` (e.g., `equals(status,\"draft\")`) can return mixed statuses; always validate `data[].attributes.status` client-side\n- Status strings are case-sensitive and can be compound (e.g., 'Cancelled: No Recipients')\n- Response shape is nested: `response.data.data` with status at `data[].attributes.status`\n\n### 2. Get Campaign Details\n\n**When to use**: User wants detailed information about a specific campaign\n\n**Tool sequence**:\n1. `KLAVIYO_GET_CAMPAIGNS` - Find campaign to get its ID [Prerequisite]\n2. `KLAVIYO_GET_CAMPAIGN` - Retrieve full campaign details [Required]\n\n**Key parameters**:\n- `campaign_id`: Campaign ID string (e.g., '01GDDKASAP8TKDDA2GRZDSVP4H')\n- `include_messages`: Include campaign messages in response\n- `include_tags`: Include tags in response\n\n**Pitfalls**:\n- Campaign IDs are alphanumeric strings, not numeric\n- `include_messages` and `include_tags` add related data to the response via Klaviyo's include mechanism\n- Campaign details include audiences, send strategy, tracking options, and scheduling info\n\n### 3. Inspect Campaign Messages\n\n**When to use**: User wants to view the email/SMS content of a campaign\n\n**Tool sequence**:\n1. `KLAVIYO_GET_CAMPAIGN` - Find campaign and its message IDs [Prerequisite]\n2. `KLAVIYO_GET_CAMPAIGN_MESSAGE` - Get message content details [Required]\n\n**Key parameters**:\n- `id`: Message ID string\n- `fields__campaign__message`: Sparse fieldset for message attributes (e.g., 'content.subject', 'content.from_email', 'content.body')\n- `fields__campaign`: Sparse fieldset for campaign attributes\n- `fields__template`: Sparse fieldset for template attributes\n- `include`: Related resources to include ('campaign', 'template')\n\n**Pitfalls**:\n- Message IDs are separate from campaign IDs; extract from campaign response\n- Sparse fieldset syntax uses dot notation for nested fields: 'content.subject', 'content.from_email'\n- Email messages have content fields: subject, preview_text, from_email, from_label, reply_to_email\n- SMS messages have content fields: body\n- Including 'template' provides the HTML/text content of the email\n\n### 4. Manage Campaign Tags\n\n**When to use**: User wants to view tags associated with campaigns for organization\n\n**Tool sequence**:\n1. `KLAVIYO_GET_CAMPAIGN_RELATIONSHIPS_TAGS` - Get tag IDs for a campaign [Required]\n\n**Key parameters**:\n- `id`: Campaign ID string\n\n**Pitfalls**:\n- Returns only tag IDs, not tag names/details\n- Tag IDs can be used with Klaviyo's tag endpoints for full details\n- Rate limit: 3/s burst, 60/m steady (stricter than other endpoints)\n\n### 5. Monitor Campaign Send Jobs\n\n**When to use**: User wants to check the status of a campaign send operation\n\n**Tool sequence**:\n1. `KLAVIYO_GET_CAMPAIGN_SEND_JOB` - Check send job status [Required]\n\n**Key parameters**:\n- `id`: Send job ID\n\n**Pitfalls**:\n- Send job IDs are returned when a campaign send is initiated\n- Job statuses indicate whether the send is queued, in progress, complete, or failed\n- Rate limit: 10/s burst, 150/m steady\n\n## Common Patterns\n\n### Campaign Discovery Pattern\n\n```\n1. Call KLAVIYO_GET_CAMPAIGNS with channel='email'\n2. Paginate through all results via page_cursor\n3. Filter by status client-side for accuracy\n4. Extract campaign IDs for detailed inspection\n```\n\n### Sparse Fieldset Pattern\n\nKlaviyo s",
-      "tags": [
-        "api",
-        "mcp",
-        "ai",
-        "automation",
-        "workflow",
-        "template",
-        "rag",
-        "marketing"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-19T07:12:03.585Z"
-    },
-    {
-      "id": "antigravity-kotler-macro-analyzer",
-      "name": "kotler-macro-analyzer",
-      "slug": "kotler-macro-analyzer",
-      "description": "Professional PESTEL/SWOT analysis agent based on Kotler's methodology for strategic market audits.",
-      "category": "Business & Marketing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/kotler-macro-analyzer",
-      "content": "\n# Kotler Macro-Environment Analyzer\n\n## Overview\nThis skill transforms the agent into a senior strategic consultant specializing in Philip Kotler’s macro-marketing environment analysis. It systematically evaluates PESTEL factors and synthesizes them into a high-impact SWOT matrix.\n\n## When to Use This Skill\n- Use when conducting market entry research or a periodic strategic audit.\n- Use to validate business assumptions against real-time macro-economic indicators (GDP, inflation, regulations).\n- Use when preparing for high-level business planning sessions.\n\n## How It Works\n### Step 1: Real-time Data Retrieval\nThe agent uses search tools to gather the latest economic, political, and legal data for the target region.\n### Step 2: PESTEL Mapping\nFindings are categorized into Political, Economic, Social, Technological, Environmental, and Legal dimensions.\n### Step 3: SWOT Synthesis\nMacro-trends are mapped to Opportunities and Threats, while internal user data is mapped to Strengths and Weaknesses.\n\n## Examples\n\n### Example 1: Regional Market Entry\n\"Conduct a Kotler-style strategic audit for a renewable energy startup planning to enter the Eastern European market in 2026. Focus on regulatory shifts and green energy subsidies.\"\n\n### Example 2: Competitive Resilience\n\"Analyze the current macro-environment for a retail chain in Ukraine. Identify threats from inflation and opportunities from shifting consumer displacement trends.\"\n\n## Best Practices\n- ✅ Always use search tools to verify specific economic indicators (e.g., current central bank rates).\n- ✅ Link SWOT points directly to the PESTEL findings for logical continuity.\n- ❌ Do not provide generic analysis without region-specific data or numerical evidence.\n\n## Limitations\n- **Expert Review Required**: This skill provides strategic frameworks but does not substitute for professional financial, legal, or management consulting.\n- **Data Freshness**: The quality of the output depends on the real-time availability of data from search tools; results may vary in rapidly shifting economic environments.\n- **Scope**: The analysis focuses on macro-level factors and does not include detailed internal operational auditing.\n",
-      "tags": [
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "cro",
-        "marketing"
-      ],
-      "useCases": [
-        "Use when conducting market entry research or a periodic strategic audit.",
-        "Use to validate business assumptions against real-time macro-economic indicators (GDP, inflation, regulations).",
-        "Use when preparing for high-level business planning sessions."
-      ],
-      "scrapedAt": "2026-04-19T07:34:00.847Z"
-    },
-    {
       "id": "composio-langsmith-fetch",
       "name": "langsmith-fetch",
       "slug": "langsmith-fetch",
@@ -27575,14 +27585,14 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 380
+      "count": 381
     },
     {
       "id": "ai-agents",
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 358
+      "count": 359
     },
     {
       "id": "creative-media",
@@ -27610,7 +27620,7 @@
       "name": "Business & Marketing",
       "description": "Skills for marketing, branding, lead generation, and business operations.",
       "icon": "briefcase",
-      "count": 48
+      "count": 46
     },
     {
       "id": "productivity-organization",
@@ -27647,55 +27657,55 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 273820
+      "stars": 274455
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 17,
-      "newSkillCount": 3,
-      "stars": 170348
+      "newSkillCount": 2,
+      "stars": 170541
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 72773
+      "stars": 72846
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 84446
+      "stars": 84532
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1474
+      "stars": 1475
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
-      "newSkillCount": 6,
-      "stars": 45112
+      "newSkillCount": 9,
+      "stars": 45158
     },
     {
       "name": "Xquik",
       "url": "https://github.com/Xquik-dev/x-twitter-scraper",
       "skillCount": 1,
       "newSkillCount": 0,
-      "stars": 183
+      "stars": 184
     }
   ],
-  "lastUpdated": "2026-08-19T07:08:09.599Z",
+  "lastUpdated": "2026-08-20T07:02:48.921Z",
   "stats": {
     "totalSkills": 1135,
-    "newSkills": 17,
-    "scrapedAt": "2026-08-19T07:08:09.599Z"
+    "newSkills": 19,
+    "scrapedAt": "2026-08-20T07:02:48.921Z"
   }
 }

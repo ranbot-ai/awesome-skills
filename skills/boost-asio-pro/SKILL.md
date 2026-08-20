@@ -1,0 +1,68 @@
+---
+name: boost-asio-pro
+description: Use when writing asynchronous C++ networking code with Boost.Asio or standalone Asio — TCP/UDP servers and clients, SSL/TLS, timers, strands, composed async ops. Covers io_context, co_spawn, awaitab
+category: Document Processing
+source: antigravity
+tags: [api, claude, ai, agent, document, security, rag, cro]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/boost-asio-pro
+---
+
+
+# Boost.Asio / standalone Asio
+
+## Overview
+
+Write async C++ networking code that compiles on the *user's* Boost, not the newest one. Asio's API changed shape three times (classic `io_service` → `io_context` → C++20 coroutines) and most Asio code on the internet is from the first era, so **pick the style from the toolchain first**, then follow that style's reference file.
+
+**References:** [Boost.Asio](https://www.boost.org/doc/libs/latest/doc/html/boost_asio.html) · [standalone Asio](https://think-async.com/Asio/)
+
+Asio's API changed shape three times, so the same task has three correct answers depending on the Boost version in front of you. This skill makes the agent establish that version first, then apply the rules that are genuinely easy to get wrong — strand versus write serialization, buffer and connection lifetime, composed reads for framing — and finally check its own output against a list before calling it done.
+
+## When to Use This Skill
+
+- Use when writing or reviewing async C++ networking code with Boost.Asio or standalone Asio: TCP/UDP servers and clients, SSL/TLS streams, timers, resolvers.
+- Use when the code involves `io_context`, `io_service`, `co_spawn`, `awaitable`, `async_read`, `async_write`, `strand`, `asio::spawn`, `yield_context`, or completion-handler callbacks.
+- Use when the target toolchain is old: an older Boost or a pre-C++20 standard, where coroutine examples will not compile.
+- Use when async code compiles but misbehaves: interleaved writes, dangling buffers, sockets closing early, `operation_aborted` treated as an error.
+
+## Step 1: pick the style (do this before writing code)
+
+Determine the Boost (or Asio) version and the C++ standard actually in use — `find_package(Boost)` output, `dpkg -l libboost-dev`, `brew info boost`, `CMAKE_CXX_STANDARD`, or ask. Do not assume the newest.
+
+| Boost | C++ std | Style | Read |
+|-------|---------|-------|------|
+| ≥ 1.77 | C++20 | Coroutines (`co_await` + `awaitable<T>`) — preferred | [references/coroutines.md](references/coroutines.md) |
+| ≥ 1.74 | C++11–17 | Completion handlers (callbacks) — the portable baseline | [references/pre-cpp20.md](references/pre-cpp20.md) |
+| ≥ 1.80 | C++11–17 | Stackful `asio::spawn` + `yield_context` (links Boost.Coroutine — not header-only) | [references/pre-cpp20.md](references/pre-cpp20.md) |
+| 1.62–1.65 | C++11 | Classic `io_service` / `strand.wrap` / `expires_from_now` | [references/classic-boost.md](references/classic-boost.md) |
+
+SSL/TLS in any style: [references/ssl.md](references/ssl.md). CMake for any style: [references/build.md](references/build.md).
+
+`io_context`, `make_strand`, `bind_executor`, `steady_timer`, `signal_set`, `async_read`/`async_write`/`async_read_until`, buffers and `resolver` are **library** features — identical in the coroutine and callback styles. Only the suspension mechanism differs.
+
+## Step 2: version floors (verified by compiling, not from docs)
+
+Reach for one of these and the build breaks on older distros:
+
+| Feature | Floor |
+|---------|-------|
+| `experimental/awaitable_operators.hpp` (the `\|\|` / `&&` operators) | **Boost ≥ 1.77** / Asio ≥ 1.20 |
+| `as_tuple` completion token | **Boost ≥ 1.79** / Asio ≥ 1.21 |
+| `co_composed` (custom composed ops) | **Boost ≥ 1.85** / Asio ≥ 1.30 |
+| 3-arg `asio::spawn(ex, fn, token)` | **Boost ≥ 1.80** (older Boost has only `spawn(ex, fn)`) |
+| `any_io_executor` (`strand<any_io_executor>`, `tcp::socket`'s default executor) | **Boost ≥ 1.74** — the floor for the callback style; below it, use legacy `io_context::strand` |
+| `io_context`, `make_strand`, `expires_after` | **Boost ≥ 1.66** — below it, classic `io_service` |
+
+Distro floors that bite: **Debian bookworm ships Boost 1.74** (no `awaitable_operators.hpp` — `#include` fails outright), Ubuntu 20.04 ships 1.71 (no `any_io_executor`), Debian 9 ships 1.62.
+
+Language, not library: the chrono literals `250ms` / `30s` are **C++14**. For a true C++11 build write `std::chrono::milliseconds(250)`.
+
+## Step 3: the rules that are actually easy to get wrong
+
+**A strand does not serialize writes.** A strand serializes handler *execution*, not whole composed operations. Two `async_write`s in flight on the same strand still **interleave bytes on the wire**. Full-duplex (a read loop plus concurrent pushes/replies) needs a per-connection strand **and** an outbound queue with an in-flight flag, so at most one `async_write` exists at a time. This is the single most common wrong answer about Asio.
+
+**Buffers do not own memory.** `asio::buffer()` is a view. Storage must outlive the operation: coroutine locals are fine across `co_await` in the same frame; in callback style the same data must become a **member**, not a local.
+
+**Connections must outlive their handlers.** `enable_shared_from_this`, and capture `self` in *every* `co_spawn` / handler — read loop, write loop, and each timer.
+
+**Frame with composed reads.** `async_read` (fills the buffer exactly) for a length prefix and then the body; ne
