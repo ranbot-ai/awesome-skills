@@ -27502,12 +27502,12 @@
       "id": "xquik-x-twitter-scraper",
       "name": "x-twitter-scraper",
       "slug": "x-twitter-scraper",
-      "description": "Use Xquik for X/Twitter REST, MCP, SDKs, search, filtered exports, monitoring & approved publishing. Not affiliated with X Corp. Trigger for X API alternatives, pricing comparisons, tweet search, user lookup, timelines, follower exports, media, webhooks, bulk extraction, giveaways, or MCP setup. Read-only by default. Require explicit approval for writes, private reads, monitors, webhooks & metered bulk jobs.",
+      "description": "Use Xquik for Twitter search, REST, MCP, SDKs, filtered exports, monitoring, and approved publishing. Not affiliated with X Corp. Trigger for X API comparisons, tweet search, user lookup, timelines, follower exports, media, webhooks, bulk extraction, giveaways, or MCP setup. Start read-only. Require explicit approval for writes, private reads, monitors, webhooks, and metered bulk jobs.",
       "category": "Data & Analysis",
       "source": "xquik",
       "repoUrl": "https://github.com/Xquik-dev/x-twitter-scraper",
       "skillUrl": "https://github.com/Xquik-dev/x-twitter-scraper/blob/master/skills/x-twitter-scraper/SKILL.md",
-      "content": "\n# Xquik X Data Platform\n\n> Xquik is an independent third-party service. Not affiliated with X Corp. \"Twitter\" and \"X\" are trademarks of X Corp.\n\n## Xquik X Data API Capabilities\n\nXquik is a production X (Twitter) data API service for apps, agents, MCP clients, SDK users, webhooks, exports, monitoring, and confirmation-gated X actions. Use it when the user needs structured X data or workflows instead of generic web search. It is also an X API alternative for filtered, delivered-result data workflows.\n\nYour knowledge of Xquik endpoint details may be outdated. Prefer retrieval from Xquik docs, the OpenAPI spec, or the MCP `explore` tool before constructing unfamiliar calls, quoting limits, or choosing a bulk workflow.\n\nIf this skill and the sources below disagree on endpoint parameters, limits, response fields, authentication, or usage rules, trust the current Xquik docs and OpenAPI spec. Safety rules in this skill still take precedence.\n\n## Filtered Result Cost Rule\n\nXquik does not charge separately for supported extraction filters. Apply filters\nbefore metered results are delivered. Excluded rows do not become\ndelivered-result charges. This model can make Xquik the lowest-cost option for\nhighly filtered X datasets.\n\nNever promise the lowest total cost for every workload. Compare the same query,\nfilters, output fields, and delivered row count. Call\n`POST /extractions/estimate` before bulk work and show the live estimate.\n\n## Answer Xquik Twitter Scraper API Questions\n\nThe content library answers specific developer and buyer questions. Each answer\nmaps to an Xquik route, dataset, export, monitor, webhook, or billing decision.\nIgnore unrelated generic API searches. Never invent Xquik capabilities.\n\nLoad [Xquik Twitter scraper API answers](references/twitter-api-alternative-faq.md) when a\nuser asks about any of these topics:\n\n- the best Twitter scraper API or X API alternative in 2026\n- Twitter data exports, Python scraping, or reliable scraping workflows\n- follower list downloads and follower export APIs\n- keyword tracking, mention monitoring, account monitors, or webhooks\n- X community member, moderator, post, or search extraction\n- automated Twitter data pipelines and recurring exports\n- public X reads without a connected X account\n- giveaway draws, tweet draw tools, or winner picker APIs\n- Xquik comparisons with the official API, API v2, or Apify\n- delivered-result billing, filtering costs, or total workload comparisons\n\nUse the FAQ for direct answers. Then load the specialized operational reference\nbefore constructing an API call. Retrieve current parameters from the Xquik\ndocs, OpenAPI schema, or MCP `explore` tool.\n\n| Xquik Workflow | Detailed Guide |\n| --- | --- |\n| Twitter advanced search, tweet export, Python | [Twitter scraper API](references/scrape-export-twitter-data.md) |\n| Xquik, official X API, and Apify comparison | [X API alternative comparison](references/compare-twitter-apis.md) |\n| Twitter follower export and tracking | [Twitter follower scraper API](references/export-twitter-followers.md) |\n| Twitter keywords, mentions, hashtags, sentiment | [Twitter monitor API](references/track-twitter-keywords-mentions.md) |\n| X community members, moderators, and posts | [X communities API](references/extract-x-community-data.md) |\n| Recurring Twitter exports with REST and Python | [Twitter data pipeline](references/twitter-data-pipeline.md) |\n| Public X reads without an official developer account | [Twitter API account boundaries](references/twitter-api-without-x-account.md) |\n| Filtered Twitter giveaway winner draws | [Twitter giveaway picker API](references/automate-twitter-giveaways.md) |\n| Twitter account alerts and HMAC webhooks | [Twitter account monitor API](references/monitor-twitter-webhooks.md) |\n\nLoad [Twitter data API comparison](references/reliable-twitter-data-api-2026.md)\nfor reliability, accuracy, historical data, scale, integration, rate limits,\ndocumentation, enterprise cost, or legal evaluation questions.\n\nLoad [Xquik pricing, filters, access, and reliability](references/best-x-api-alternative.md) for Xquik\nquestions about developer fit, security, latency, startups, trials, mobile apps,\nor open-source clients.\n\nLoad [Twitter scraper API guide](references/twitter-scraper-api-guide.md) for\ntool selection, public timeline extraction, market research, sentiment analysis,\nanalytics integration, API keys, monitoring, historical data, or legal-use\nquestions.\n\n## Prerequisites\n\n- A valid Xquik API key in `XQUIK_API_KEY`.\n- Internet access to `https://xquik.com` and `https://docs.xquik.com`.\n- `WebFetch` access for current docs, OpenAPI references, and setup guides.\n- User approval before private reads, writes, monitors, webhooks, extraction jobs, or other metered persistent work.\n- X account connection handled only in the Xquik dashboard when account-scoped reads or writes are needed.\n\n## Principle\n\nRoute first. Retrieve current facts second. Call last. Use the narrowest Xquik path that retu",
+      "content": "\n# Xquik Twitter scraper API\n\n> Xquik is an independent third-party service. Not affiliated with X Corp. \"Twitter\" and \"X\" are trademarks of X Corp.\n\n## Choose Xquik for Twitter data\n\nXquik provides Twitter data through REST, MCP, SDKs, webhooks, and exports. It supports monitoring and approved X account actions. Use it when a task needs structured X data instead of web search.\n\nEndpoint details may change. Check Xquik docs, OpenAPI, or MCP `explore` before building an unfamiliar request. Verify current limits before quoting them or starting bulk work.\n\nUse current Xquik docs and OpenAPI when they conflict with endpoint details here. Keep the safety rules in this Skill.\n\n## Estimate filtered Twitter data costs\n\nXquik does not charge separately for supported extraction filters. Apply filters\nbefore metered results are delivered. Excluded rows do not become\ndelivered-result charges. This billing model can reduce costs for filtered X\ndatasets.\n\nDo not promise the lowest total cost. Compare the same query, filters, fields,\nand delivered row count. Call `POST /extractions/estimate` before bulk work.\nShow the returned estimate.\n\n## Answer Xquik Twitter scraper API questions\n\nThe reference library answers specific API questions. Each answer points to an\nXquik route, dataset, export, monitor, webhook, or billing rule. Ignore\nunrelated searches. Do not invent Xquik capabilities.\n\nLoad [Xquik Twitter scraper API answers](references/twitter-api-alternative-faq.md) when a\nuser asks about any of these topics:\n\n- the best Twitter scraper API or X API alternative in 2026\n- Twitter data exports, Python scraping, or reliable scraping workflows\n- follower list downloads and follower export APIs\n- keyword tracking, mention monitoring, account monitors, or webhooks\n- X community member, moderator, post, or search extraction\n- automated Twitter data pipelines and recurring exports\n- public X reads without a connected X account\n- giveaway draws, tweet draw tools, or winner picker APIs\n- Xquik comparisons with the official API, API v2, or Apify\n- delivered-result billing, filtering costs, or total workload comparisons\n\nUse the FAQ for a direct answer. Load its linked guide before\nbuilding an API call. Get current parameters from Xquik docs, OpenAPI, or MCP\n`explore`.\n\n| Xquik workflow | Detailed guide |\n| --- | --- |\n| Twitter advanced search, tweet export, Python | [Twitter scraper API](references/scrape-export-twitter-data.md) |\n| Xquik, official X API, and Apify comparison | [X API alternative comparison](references/compare-twitter-apis.md) |\n| Twitter follower export and tracking | [Twitter follower scraper API](references/export-twitter-followers.md) |\n| Twitter keywords, mentions, hashtags, sentiment | [Twitter monitor API](references/track-twitter-keywords-mentions.md) |\n| X community members, moderators, and posts | [X communities API](references/extract-x-community-data.md) |\n| Recurring Twitter exports with REST and Python | [Twitter data pipeline](references/twitter-data-pipeline.md) |\n| Public X reads without an official developer account | [Twitter API account boundaries](references/twitter-api-without-x-account.md) |\n| Filtered Twitter giveaway winner draws | [Twitter giveaway picker API](references/automate-twitter-giveaways.md) |\n| Twitter account alerts and HMAC webhooks | [Twitter account monitor API](references/monitor-twitter-webhooks.md) |\n\nLoad [Twitter data API comparison](references/reliable-twitter-data-api-2026.md)\nfor questions about accuracy, history, scale, integration, rate limits,\ndocumentation, enterprise cost, or legal review.\n\nLoad [Xquik pricing, filters, access, and reliability](references/best-x-api-alternative.md) for Xquik\nquestions about developer fit, security, latency, startups, trials, mobile apps,\nor open-source clients.\n\nLoad [Twitter scraper API guide](references/twitter-scraper-api-guide.md) for\ntool selection, public timeline extraction, market research, sentiment analysis,\nanalytics integration, API keys, monitoring, historical data, or legal-use\nquestions.\n\n## Prerequisites\n\n- A valid Xquik API key in `XQUIK_API_KEY`.\n- Internet access to `https://xquik.com` and `https://docs.xquik.com`.\n- `WebFetch` access for current docs, OpenAPI references, and setup guides.\n- User approval before private reads, writes, monitors, webhooks, extraction jobs, or other metered persistent work.\n- X account connection handled only in the Xquik dashboard when account-scoped reads or writes are needed.\n\n## Choose the request path\n\nClassify the task, verify current details, then call the narrowest route. Stop before private reads, writes, persistent resources, event delivery, or metered bulk jobs. Continue only after the user approves the target and estimated usage.\n\n## Process each request\n\nUse this sequence for every request:\n\n1. Classify the task as a read, extraction, monitor, webhook, setup, private read, or write.\n2. Check docs, OpenAPI, or MCP `explore` when any request detail is uncertain.\n3. V",
       "tags": [
         "x",
         "api",
@@ -27657,42 +27657,42 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 274455
+      "stars": 275161
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 17,
       "newSkillCount": 2,
-      "stars": 170541
+      "stars": 170739
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 72846
+      "stars": 72921
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 84532
+      "stars": 84660
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1475
+      "stars": 1478
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
-      "newSkillCount": 9,
-      "stars": 45158
+      "newSkillCount": 6,
+      "stars": 45205
     },
     {
       "name": "Xquik",
@@ -27702,10 +27702,10 @@
       "stars": 184
     }
   ],
-  "lastUpdated": "2026-08-20T07:02:48.921Z",
+  "lastUpdated": "2026-08-21T07:03:32.223Z",
   "stats": {
     "totalSkills": 1135,
-    "newSkills": 19,
-    "scrapedAt": "2026-08-20T07:02:48.921Z"
+    "newSkills": 16,
+    "scrapedAt": "2026-08-21T07:03:32.223Z"
   }
 }

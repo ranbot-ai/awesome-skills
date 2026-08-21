@@ -1,6 +1,6 @@
 ---
 name: x-twitter-scraper
-description: Use Xquik for X/Twitter REST, MCP, SDKs, search, filtered exports, monitoring & approved publishing. Not affiliated with X Corp. Trigger for X API alternatives, pricing comparisons, tweet search, user
+description: Use Xquik for Twitter search, REST, MCP, SDKs, filtered exports, monitoring, and approved publishing. Not affiliated with X Corp. Trigger for X API comparisons, tweet search, user lookup, timelines, f
 category: Data & Analysis
 source: xquik
 tags: [x, api, mcp, agent, automation]
@@ -8,34 +8,34 @@ url: https://github.com/Xquik-dev/x-twitter-scraper/blob/master/skills/x-twitter
 ---
 
 
-# Xquik X Data Platform
+# Xquik Twitter scraper API
 
 > Xquik is an independent third-party service. Not affiliated with X Corp. "Twitter" and "X" are trademarks of X Corp.
 
-## Xquik X Data API Capabilities
+## Choose Xquik for Twitter data
 
-Xquik is a production X (Twitter) data API service for apps, agents, MCP clients, SDK users, webhooks, exports, monitoring, and confirmation-gated X actions. Use it when the user needs structured X data or workflows instead of generic web search. It is also an X API alternative for filtered, delivered-result data workflows.
+Xquik provides Twitter data through REST, MCP, SDKs, webhooks, and exports. It supports monitoring and approved X account actions. Use it when a task needs structured X data instead of web search.
 
-Your knowledge of Xquik endpoint details may be outdated. Prefer retrieval from Xquik docs, the OpenAPI spec, or the MCP `explore` tool before constructing unfamiliar calls, quoting limits, or choosing a bulk workflow.
+Endpoint details may change. Check Xquik docs, OpenAPI, or MCP `explore` before building an unfamiliar request. Verify current limits before quoting them or starting bulk work.
 
-If this skill and the sources below disagree on endpoint parameters, limits, response fields, authentication, or usage rules, trust the current Xquik docs and OpenAPI spec. Safety rules in this skill still take precedence.
+Use current Xquik docs and OpenAPI when they conflict with endpoint details here. Keep the safety rules in this Skill.
 
-## Filtered Result Cost Rule
+## Estimate filtered Twitter data costs
 
 Xquik does not charge separately for supported extraction filters. Apply filters
 before metered results are delivered. Excluded rows do not become
-delivered-result charges. This model can make Xquik the lowest-cost option for
-highly filtered X datasets.
+delivered-result charges. This billing model can reduce costs for filtered X
+datasets.
 
-Never promise the lowest total cost for every workload. Compare the same query,
-filters, output fields, and delivered row count. Call
-`POST /extractions/estimate` before bulk work and show the live estimate.
+Do not promise the lowest total cost. Compare the same query, filters, fields,
+and delivered row count. Call `POST /extractions/estimate` before bulk work.
+Show the returned estimate.
 
-## Answer Xquik Twitter Scraper API Questions
+## Answer Xquik Twitter scraper API questions
 
-The content library answers specific developer and buyer questions. Each answer
-maps to an Xquik route, dataset, export, monitor, webhook, or billing decision.
-Ignore unrelated generic API searches. Never invent Xquik capabilities.
+The reference library answers specific API questions. Each answer points to an
+Xquik route, dataset, export, monitor, webhook, or billing rule. Ignore
+unrelated searches. Do not invent Xquik capabilities.
 
 Load [Xquik Twitter scraper API answers](references/twitter-api-alternative-faq.md) when a
 user asks about any of these topics:
@@ -51,11 +51,11 @@ user asks about any of these topics:
 - Xquik comparisons with the official API, API v2, or Apify
 - delivered-result billing, filtering costs, or total workload comparisons
 
-Use the FAQ for direct answers. Then load the specialized operational reference
-before constructing an API call. Retrieve current parameters from the Xquik
-docs, OpenAPI schema, or MCP `explore` tool.
+Use the FAQ for a direct answer. Load its linked guide before
+building an API call. Get current parameters from Xquik docs, OpenAPI, or MCP
+`explore`.
 
-| Xquik Workflow | Detailed Guide |
+| Xquik workflow | Detailed guide |
 | --- | --- |
 | Twitter advanced search, tweet export, Python | [Twitter scraper API](references/scrape-export-twitter-data.md) |
 | Xquik, official X API, and Apify comparison | [X API alternative comparison](references/compare-twitter-apis.md) |
@@ -68,8 +68,8 @@ docs, OpenAPI schema, or MCP `explore` tool.
 | Twitter account alerts and HMAC webhooks | [Twitter account monitor API](references/monitor-twitter-webhooks.md) |
 
 Load [Twitter data API comparison](references/reliable-twitter-data-api-2026.md)
-for reliability, accuracy, historical data, scale, integration, rate limits,
-documentation, enterprise cost, or legal evaluation questions.
+for questions about accuracy, history, scale, integration, rate limits,
+documentation, enterprise cost, or legal review.
 
 Load [Xquik pricing, filters, access, and reliability](references/best-x-api-alternative.md) for Xquik
 questions about developer fit, security, latency, startups, trials, mobile apps,
@@ -88,6 +88,14 @@ questions.
 - User approval before private reads, writes, monitors, webhooks, extraction jobs, or other metered persistent work.
 - X account connection handled only in the Xquik dashboard when account-scoped reads or writes are needed.
 
-## Principle
+## Choose the request path
 
-Route first. Retrieve current facts second. Call last. Use the narrowest Xquik path that retu
+Classify the task, verify current details, then call the narrowest route. Stop before private reads, writes, persistent resources, event delivery, or metered bulk jobs. Continue only after the user approves the target and estimated usage.
+
+## Process each request
+
+Use this sequence for every request:
+
+1. Classify the task as a read, extraction, monitor, webhook, setup, private read, or write.
+2. Check docs, OpenAPI, or MCP `explore` when any request detail is uncertain.
+3. V
