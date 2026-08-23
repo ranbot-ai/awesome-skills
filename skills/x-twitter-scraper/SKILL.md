@@ -82,20 +82,14 @@ questions.
 
 ## Prerequisites
 
-- A valid Xquik API key in `XQUIK_API_KEY`.
+- For REST, a valid Xquik API key in `XQUIK_API_KEY`.
+- For MCP, client-managed OAuth 2.1. Use an API-key fallback only when the client cannot complete OAuth.
 - Internet access to `https://xquik.com` and `https://docs.xquik.com`.
-- `WebFetch` access for current docs, OpenAPI references, and setup guides.
+- `WebFetch` access for public docs, OpenAPI references, and setup guides only.
+- Configured `mcp__xquik__explore` and `mcp__xquik__xquik` tools for authenticated calls. REST examples require a user-controlled HTTP client that can send `x-api-key`.
 - User approval before private reads, writes, monitors, webhooks, extraction jobs, or other metered persistent work.
 - X account connection handled only in the Xquik dashboard when account-scoped reads or writes are needed.
 
 ## Choose the request path
 
-Classify the task, verify current details, then call the narrowest route. Stop before private reads, writes, persistent resources, event delivery, or metered bulk jobs. Continue only after the user approves the target and estimated usage.
-
-## Process each request
-
-Use this sequence for every request:
-
-1. Classify the task as a read, extraction, monitor, webhook, setup, private read, or write.
-2. Check docs, OpenAPI, or MCP `explore` when any request detail is uncertain.
-3. V
+Classify the task, verify current details, then call the narrowest route. Stop before private reads, writes, persistent resources, event delivery, or metered bulk jobs. Continue only after th
