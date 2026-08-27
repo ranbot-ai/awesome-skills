@@ -1,0 +1,22 @@
+{
+  "id": "antigravity-browser-extension-reverse",
+  "name": "browser-extension-reverse",
+  "slug": "browser-extension-reverse",
+  "description": "Authorized reverse engineering of Chrome/Firefox extensions: manifest analysis, background workers, content scripts, and extension-based credential or data-exposure research.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/browser-extension-reverse",
+  "content": "> **⚠️ AUTHORIZED USE ONLY**\n> This skill is for educational purposes or authorized security assessments only.\n> You must have explicit, written permission from the system owner before using this tool.\n> Misuse of this tool is illegal and strictly prohibited.\n\n> **Mandatory confirmation gate**\n> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:\n> 1. Ask the user to state the exact target URL, IP, account, or resource.\n> 2. Ask the user to confirm written authorization and the permitted scope.\n> 3. Show the exact command(s) and explain their expected effect.\n> 4. Wait for explicit confirmation in the current conversation.\n>\n> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.\n\n# Browser Extension Reverse Engineering\n## When to Use\n\n- Auditing a browser extension's behavior and permissions in an authorized review.\n- Investigating how an extension handles credentials or sensitive page data.\n\n\n## 适用场景\n\n- Chrome/Edge MV2/MV3 扩展分析\n- Firefox 扩展\n- 恶意扩展 IOC、供应链扩展投毒调查\n- 扩展实现的签名/加密/代理逻辑还原\n\n## 工作流\n\n### 1. 包体\n\n```text\n□ crx 解压 / 从 profile 取扩展目录\n□ manifest.json：permissions、host_permissions、background、content_scripts\n□ 评估过度权限（<all_urls>、webRequest、debugger）\n```\n\n### 2. 逻辑\n\n```text\n□ service_worker / background 入口\n□ content_script 注入点与世界（isolated）\n□ chrome.storage / IndexedDB 密钥\n□ 与 `js-reverse` 相同：Observe 网络与消息传递（runtime.sendMessage）\n```\n\n### 3. 动态\n\n```text\n□ 开发者模式加载解压目录\n□ chrome://extensions 检查错误\n□ DevTools 附加 service worker\n□ 必要时 Frida/浏览器 CDP（jshookmcp）\n```\n\n## 工具链\n\n| 工具 | 用途 |\n|------|------|\n| 解压/jq | manifest |\n| Chrome DevTools | worker 调试 |\n| js-reverse 工具链 | 深度 JS |\n| YARA | 恶意扩展规则 |\n\n## 参考\n\n- `references/extension-analysis.md`\n- field-journal 扩展恢复相关条目\n- `../js-reverse/` `../malware-analysis/`\n\n## 路由上下文\n\n**上游**: MASTER R30  \n**下游**: 复杂混淆 JS → `js-reverse`；投毒调查 → supply-chain / malware\n\n## 任务完成自检\n\n- [ ] 是否列出权限面与入口脚本？\n- [ ] 是否还原关键数据流？\n- [ ] Checklist？\n\n## Limitations\n\n- Extension stores update frequently; findings can go stale.\n- Dynamic analysis requires a profile isolated from personal accounts.\n\n> Adapted from [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) (MIT).\n",
+  "tags": [
+    "mcp",
+    "ai",
+    "security",
+    "rag"
+  ],
+  "useCases": [
+    "Auditing a browser extension's behavior and permissions in an authorized review.",
+    "Investigating how an extension handles credentials or sensitive page data."
+  ],
+  "scrapedAt": "2026-08-27T17:33:44.394Z"
+}

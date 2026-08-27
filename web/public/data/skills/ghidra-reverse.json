@@ -1,0 +1,25 @@
+{
+  "id": "antigravity-ghidra-reverse",
+  "name": "ghidra-reverse",
+  "slug": "ghidra-reverse",
+  "description": "Free/open reverse engineering with Ghidra (headless or GUI): decompilation, cross-references, scripting, and optional Ghidra MCP workflows when IDA is unavailable.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ghidra-reverse",
+  "content": "# Ghidra Reverse Engineering\n## When to Use\n\n- Static analysis of binaries without an IDA license.\n- Bulk headless decompilation or scripted analysis across many binaries.\n\n\n## 适用场景\n\n- 无 IDA 许可证时的主逆向入口\n- 批量 headless 分析 / CI 中反编译\n- Ghidra 脚本（Java/Python Jython/PyGhidra）自动化\n- 与 `binary-diff` / `patch-diff-exploit` 的 ghidriff 联动\n\n## 与 IDA 分工\n\n| 需求 | 优先 |\n|------|------|\n| 已有 IDA MCP 深挖 | `ida-reverse/` |\n| 开源 / 批量 / 教学 | **本 skill** |\n| 仅 CLI 快速侦察 | `radare2/` |\n\n## 工作流\n\n### 1. 项目与自动分析\n\n```text\n□ 新建 Project → Import 文件 → Analyze（默认分析器）\n□ 记录语言/编译器识别结果与基址\n□ 标记入口、导出表、字符串 xref\n```\n\n### 2. 关键函数\n\n```text\n□ 从字符串 / 导入 API 反查\n□ Decompile 窗口还原算法\n□ 重命名函数/变量；写 Plate comment\n□ 需要动态时交接 Frida/GDB（reverse-engineering 动态章）\n```\n\n### 3. Headless（批量）\n\n```bash\n# 示例：analyzeHeadless 路径因安装而异，MUST 从 tool-index 取\nanalyzeHeadless /path/to/project Proj -import sample.bin -postScript ExportDecomp.py\n```\n\n### 4. MCP（若已配置）\n\n```text\n□ 确认 ghidra MCP 端口（常见 8765，以 tool-index 为准）\n□ 用 MCP 工具拉反编译 / xrefs，禁止猜端口\n```\n\n## 工具链\n\n| 工具 | 用途 | 自举 |\n|------|------|------|\n| Ghidra | 反编译主工具 | 手动 release / 包管理器 |\n| ghidra-mcp | AI 桥 | bootstrap 能力名 `ghidra-mcp` |\n| ghidriff | 补丁差分 | 见 `patch-diff-exploit` |\n\n## 参考\n\n- `references/ghidra-cheatsheet.md`\n- `../ida-reverse/` `../radare2/` `../binary-diff/`\n\n## 路由上下文\n\n**上游**: MASTER R22  \n**下游**: 动态验证 → Frida/GDB；利用 → `pwn-chain`  \n**同级**: `ida-reverse`（商业深挖）\n\n## 任务完成自检\n\n- [ ] 是否基于真实 Ghidra/tool-index 路径？\n- [ ] 是否标注函数地址与重命名？\n- [ ] 是否有可复现步骤？\n- [ ] Checklist / journal？\n\n## Limitations\n\n- Decompiler output is less polished than IDA's for some architectures.\n- Large firmware images may need significant RAM and patience.\n\n> Adapted from [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) (MIT).\n",
+  "tags": [
+    "python",
+    "api",
+    "mcp",
+    "ai",
+    "workflow",
+    "image",
+    "cro"
+  ],
+  "useCases": [
+    "Static analysis of binaries without an IDA license.",
+    "Bulk headless decompilation or scripted analysis across many binaries."
+  ],
+  "scrapedAt": "2026-08-27T17:38:17.178Z"
+}

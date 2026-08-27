@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-go-rust-reverse",
+  "name": "go-rust-reverse",
+  "slug": "go-rust-reverse",
+  "description": "Reverse engineer stripped Go and Rust binaries: runtime recognition, pclntab/module metadata recovery, panic-string analysis, and idiomatic decompilation strategies.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/go-rust-reverse",
+  "content": "# Go / Rust Binary Reverse Engineering\n## When to Use\n\n- Analyzing a stripped Go or Rust binary where symbols are absent.\n- Recovering function boundaries and names from language-specific metadata.\n\n\n## 适用场景\n\n- 剥离符号的 Go 恶意软件/工具\n- Rust 发行二进制、panic 字符串驱动分析\n- 与通用 ida/ghidra 互补的语言专用方法\n\n## 工作流\n\n### Go\n\n```text\n□ 识别 go.buildid、runtime 符号残留、pclntab\n□ GoReSym / redress / IDA Go 插件恢复函数名\n□ 注意 interface、slice、string 结构在反编译中的形态\n□ 网络/加密库路径：crypto/* net/http\n```\n\n### Rust\n\n```text\n□ panic 字符串、rust_begin_unwind、crate 路径暗示\n□ 范型实例化导致的代码膨胀；先定位字符串 xref\n□ 异步/tokio 状态机需结合交叉引用\n```\n\n### 动态\n\n```text\n□ 仍可用 Frida；注意 Go 栈与调度\n□ 优先日志与配置字符串驱动断点\n```\n\n## 工具链\n\n| 工具 | 用途 |\n|------|------|\n| GoReSym | Go 元数据 |\n| IDA/Ghidra + Go/Rust 插件 | 反编译 |\n| radare2 | 快速字符串 |\n| strings / rabin2 | 分诊 |\n\n## 参考\n\n- `references/go-rust-notes.md`\n- `../reverse-engineering/go-reverse.md` `../ida-reverse/` `../ghidra-reverse/`\n- seed: `field-journal/seed-002_go-malware-stripped.md`\n\n## 路由上下文\n\n**上游**: MASTER R33  \n**下游**: 恶意样本流程 `malware-analysis`；通用 RE `reverse-engineering`\n\n## 任务完成自检\n\n- [ ] 是否恢复关键函数名或等价映射？\n- [ ] 是否标注语言运行时证据？\n- [ ] Checklist？\n\n## Limitations\n\n- New compiler versions change metadata layouts; tooling must be kept current.\n- Aggressive inlining still yields large, hard-to-read decompilation.\n\n> Adapted from [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) (MIT).\n",
+  "tags": [
+    "ai"
+  ],
+  "useCases": [
+    "Analyzing a stripped Go or Rust binary where symbols are absent.",
+    "Recovering function boundaries and names from language-specific metadata."
+  ],
+  "scrapedAt": "2026-08-27T17:38:30.552Z"
+}

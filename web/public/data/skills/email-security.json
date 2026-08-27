@@ -1,0 +1,21 @@
+{
+  "id": "antigravity-email-security",
+  "name": "email-security",
+  "slug": "email-security",
+  "description": "Authorized email security review: phishing analysis, SPF/DKIM/DMARC header authentication, BEC pattern investigation, and mailbox token abuse research.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/email-security",
+  "content": "> **⚠️ AUTHORIZED USE ONLY**\n> This skill is for educational purposes or authorized security assessments only.\n> You must have explicit, written permission from the system owner before using this tool.\n> Misuse of this tool is illegal and strictly prohibited.\n\n> **Mandatory confirmation gate**\n> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:\n> 1. Ask the user to state the exact target URL, IP, account, or resource.\n> 2. Ask the user to confirm written authorization and the permitted scope.\n> 3. Show the exact command(s) and explain their expected effect.\n> 4. Wait for explicit confirmation in the current conversation.\n>\n> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.\n\n# Email Security & Phishing Analysis\n## When to Use\n\n- Analyzing suspicious messages or domain spoofing exposure.\n- Validating a domain's email authentication posture.\n\n\n## 适用场景\n\n- 钓鱼邮件拆解与 IOC\n- SPF/DKIM/DMARC 配置评估\n- BEC 商务邮件欺诈模式\n- OAuth 应用钓鱼 / 邮箱令牌滥用（联合 llm/cloud 身份）\n- 安全意识演练设计（授权）\n\n## 工作流\n\n```text\n□ 完整原始头：Received 链、From/Return-Path 一致性\n□ SPF/DKIM/DMARC 对齐结果\n□ URL 沙箱与附件静态（联合 malware-analysis）\n□ 仿冒品牌与回复地址差异\n□ 租户：反钓鱼策略、外部标记、MFA、OAuth app 同意\n```\n\n## 工具链\n\n| 工具 | 用途 |\n|------|------|\n| 邮件客户端「查看源」 | 头 |\n| dig/nslookup | SPF/DMARC 记录 |\n| urlscan / 沙箱 | 链接与附件 |\n| 租户管理中心 | 策略 |\n\n## 参考\n\n- `references/email-auth-checklist.md`\n- `../malware-analysis/` `../attack-chain/`（钓鱼阶段） `../windows-ad/`（令牌）\n\n## 路由上下文\n\n**上游**: MASTER R36  \n**MUST NOT**: 未授权对第三方域群发测试钓鱼\n\n## 任务完成自检\n\n- [ ] 头认证结论是否完整？\n- [ ] IOC 是否可检测化（联合 threat-hunting）？\n- [ ] Checklist？\n\n## Limitations\n\n- Live mailbox investigation touches personal data; minimize and anonymize.\n- Header analysis cannot detect compromise that leaves no mail trail.\n\n> Adapted from [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) (MIT).\n",
+  "tags": [
+    "ai",
+    "llm",
+    "security"
+  ],
+  "useCases": [
+    "Analyzing suspicious messages or domain spoofing exposure.",
+    "Validating a domain's email authentication posture."
+  ],
+  "scrapedAt": "2026-08-27T17:36:59.666Z"
+}

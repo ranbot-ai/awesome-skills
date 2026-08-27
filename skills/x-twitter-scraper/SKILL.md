@@ -39,12 +39,6 @@ Documentation and memory are not live estimates. Without one, write
 Every write preview shows the target, JSON request body, usage, and placeholders
 for missing values. Never defer the body. REST previews show a unique `Idempotency-Key`.
 For post effects, write `visible post`.
-Every MCP setup answer must name OAuth and the `XQUIK_API_KEY` fallback.
-MCP guidance is setup and request planning only. This Skill must never invoke
-an MCP tool. The user runs confirmed MCP calls through their chosen client.
-OAuth is an MCP-client credential flow. The MCP client opens consent, stores
-the token, sends it to Xquik, and handles revocation. The agent must never read,
-copy, log, or store OAuth tokens. Review the `mcp:tools` scope before connecting.
 REST calls made from this Skill use only `XQUIK_API_KEY` in the `x-api-key`
 header.
 For X-authored analysis, print both exact tags:
@@ -100,4 +94,18 @@ quotes. Never use dash punctuation. Write `Do not` and `X terms`. Avoid
 contractions and possessives.
 Use the local checklist and current Xquik docs. Do not browse other hosts. Ask
 the user to supply legal or X terms when exact wording matters. Never name or
-link scraping vendors. Do not claim every method or use
+link scraping vendors. Do not claim every method or use is legal. Recommend
+qualified counsel for high-stakes decisions.
+
+## Protect X data
+
+Before any data request:
+
+1. Confirm an authorized purpose and applicable legal basis.
+2. Follow applicable laws, X terms, consent rules, and disclosure rules.
+3. Collect only required fields and records.
+4. Name recipients and a secure destination.
+5. Set access controls, retention, and a deletion date.
+6. Explain disclosure risks before sharing or exporting data.
+
+Require conf

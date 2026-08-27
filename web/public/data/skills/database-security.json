@@ -1,0 +1,22 @@
+{
+  "id": "antigravity-database-security",
+  "name": "database-security",
+  "slug": "database-security",
+  "description": "Authorized database security assessment across PostgreSQL, MySQL, MSSQL, MongoDB, and Redis: exposure, authorization gaps, UDF/command execution paths, and misconfiguration review.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/database-security",
+  "content": "> **⚠️ AUTHORIZED USE ONLY**\n> This skill is for educational purposes or authorized security assessments only.\n> You must have explicit, written permission from the system owner before using this tool.\n> Misuse of this tool is illegal and strictly prohibited.\n\n> **Mandatory confirmation gate**\n> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:\n> 1. Ask the user to state the exact target URL, IP, account, or resource.\n> 2. Ask the user to confirm written authorization and the permitted scope.\n> 3. Show the exact command(s) and explain their expected effect.\n> 4. Wait for explicit confirmation in the current conversation.\n>\n> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.\n\n# Database Security Assessment\n## When to Use\n\n- Assessing database hardening and exposure within an approved scope.\n- Checking authz boundaries and risky server-side execution features.\n\n\n## 适用场景\n\n- 数据库未授权/弱口令/错误绑定 0.0.0.0\n- 权限过大、危险功能（xp_cmdshell、COPY PROGRAM、UDF）\n- 横向：从应用账号到 DBA\n- NoSQL 注入与 Redis 写文件等（授权环境）\n\n## 工作流\n\n```text\n□ 网络暴露与 TLS\n□ 账号角色与 grantee\n□ 敏感表访问控制\n□ 危险配置：file_priv、xp_cmdshell、load_file\n□ 审计日志是否开启\n□ 备份与快照权限\n```\n\n## 工具链\n\n| 工具 | 用途 |\n|------|------|\n| 官方 CLI | 连接与枚举 |\n| sqlmap | 注入验证（授权） |\n| nuclei | 已知暴露模板 |\n| 云 RDS 控制台审计 | 配置 |\n\n## 参考\n\n- `references/db-misconfig-checklist.md`\n- `../pentest-tools/` `../cloud-k8s/`\n\n## 路由上下文\n\n**上游**: MASTER R35  \n**下游**: 获 OS 命令 → attack-chain；云托管 → cloud-k8s\n\n## 任务完成自检\n\n- [ ] 是否避免未授权写删？\n- [ ] 是否区分配置问题与可利用链？\n- [ ] Checklist？\n\n## Limitations\n\n- Never run against production data stores without explicit written approval.\n- Active exploitation paths (UDF/command exec) are destructive-capable; simulate first.\n\n> Adapted from [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) (MIT).\n",
+  "tags": [
+    "ai",
+    "security",
+    "pentest",
+    "cro"
+  ],
+  "useCases": [
+    "Assessing database hardening and exposure within an approved scope.",
+    "Checking authz boundaries and risky server-side execution features."
+  ],
+  "scrapedAt": "2026-08-27T17:35:42.654Z"
+}

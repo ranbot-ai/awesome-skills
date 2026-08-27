@@ -1,0 +1,21 @@
+{
+  "id": "antigravity-digital-forensics",
+  "name": "digital-forensics",
+  "slug": "digital-forensics",
+  "description": "Authorized digital forensics: memory dumps, disk timelines, PCAP investigation, artifact triage, and incident-response evidence preservation.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/digital-forensics",
+  "content": "# Digital Forensics & IR Artifacts\n## When to Use\n\n- Investigating a suspected incident with forensic rigor.\n- Building defensible timelines from disk/memory/network artifacts.\n\n\n## 适用场景\n\n- 内存转储分析（Volatility 2/3）\n- 磁盘/ E01 / 落地文件时间线\n- PCAP 溯源与协议还原（可联合 `protocol-reverse/`）\n- 主机伪影：Prefetch、Shimcache、Event Log、浏览器历史\n- 应急响应 IOC 提炼（联合 `malware-analysis/` / `threat-hunting/`）\n\n## 工作流\n\n### 1. 保全\n\n```text\n□ 计算 SHA256；记录时区与采集命令\n□ 工作在副本上；原始只读\n□ chain of custody 备注写入 timeline\n```\n\n### 2. 内存\n\n```bash\nvol -f mem.dmp windows.info\nvol -f mem.dmp windows.pslist\nvol -f mem.dmp windows.netscan\nvol -f mem.dmp windows.cmdline\n```\n\n### 3. 主机伪影\n\n```text\n□ 事件日志：Security / PowerShell / Sysmon\n□ 持久化：Run 键、服务、计划任务、WMI\n□ 执行痕迹：Amcache、Prefetch、BAM\n```\n\n### 4. 网络\n\n```text\n□ tshark 统计会话与 DNS\n□ 导出可疑流 → protocol-reverse 或 malware C2 分析\n```\n\n## 工具链\n\n| 工具 | 用途 |\n|------|------|\n| Volatility 3 | 内存 |\n| Timeline Explorer / Plaso | 超级时间线 |\n| tshark | PCAP |\n| Eric Zimmerman 工具集 | Windows 伪影 |\n| Autopsy / FTK Imager | 磁盘 |\n\n## 参考\n\n- `references/forensics-triage.md`\n- `../malware-analysis/` `../threat-hunting/` `../protocol-reverse/`\n\n## 路由上下文\n\n**上游**: MASTER R25  \n**下游**: 恶意样本深挖 → malware-analysis；规则 → threat-hunting\n\n## 任务完成自检\n\n- [ ] 是否保全哈希与副本策略？\n- [ ] 时间线是否可复核？\n- [ ] IOC 是否脱敏分级？\n- [ ] Checklist？\n\n## Limitations\n\n- Chain-of-custody requirements apply; work on verified copies, never originals.\n- Encrypted or anti-forensic artifacts may be unrecoverable.\n\n> Adapted from [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) (MIT).\n",
+  "tags": [
+    "ai",
+    "image",
+    "security"
+  ],
+  "useCases": [
+    "Investigating a suspected incident with forensic rigor.",
+    "Building defensible timelines from disk/memory/network artifacts."
+  ],
+  "scrapedAt": "2026-08-27T17:36:32.947Z"
+}

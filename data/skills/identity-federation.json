@@ -1,0 +1,22 @@
+{
+  "id": "antigravity-identity-federation",
+  "name": "identity-federation",
+  "slug": "identity-federation",
+  "description": "Authorized assessment of federated identity systems: SAML, OIDC, OAuth2 flows, SSO misconfiguration, and token-confusion issues.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/identity-federation",
+  "content": "> **⚠️ AUTHORIZED USE ONLY**\n> This skill is for educational purposes or authorized security assessments only.\n> You must have explicit, written permission from the system owner before using this tool.\n> Misuse of this tool is illegal and strictly prohibited.\n\n> **Mandatory confirmation gate**\n> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:\n> 1. Ask the user to state the exact target URL, IP, account, or resource.\n> 2. Ask the user to confirm written authorization and the permitted scope.\n> 3. Show the exact command(s) and explain their expected effect.\n> 4. Wait for explicit confirmation in the current conversation.\n>\n> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.\n\n# Identity Federation (SAML / OIDC / OAuth)\n## When to Use\n\n- Testing SSO/federation flows within an approved scope.\n- Hunting signature-validation or audience-confusion flaws.\n\n\n## 适用场景\n\n- SAML Response 签名/断言篡改面（经典缺陷模式）\n- OIDC 隐式/授权码 + PKCE 缺失\n- redirect_uri / state / nonce 问题\n- IdP 与 SP 元数据、多租户 issuer 混淆\n- 与 `api-security` JWT 攻击互补（本 skill 偏联邦与 SSO 流）\n\n## 工作流\n\n```text\n□ 画清：User → SP → IdP → Token → SP\n□ 收集：/.well-known/openid-configuration、SAML metadata\n□ 检查：redirect_uri 精确匹配、state 绑定、PKCE\n□ 检查：SAML 签名覆盖范围、algorithm 降级\n□ 会话固定与登出失效\n```\n\n## 工具链\n\n| 工具 | 用途 |\n|------|------|\n| Burp + SAML Raider 等 | 断言编辑（授权） |\n| jwt_tool | JWT 段 |\n| 浏览器 DevTools | 重定向链 |\n| IdP 管理日志 | 审计 |\n\n## 参考\n\n- `references/sso-flow-checklist.md`\n- `../api-security/` `../windows-ad/`（企业 IdP）\n\n## 路由上下文\n\n**上游**: MASTER R37  \n**下游**: 纯 API JWT → api-security；云 IdP → cloud-k8s\n\n## 任务完成自检\n\n- [ ] 是否映射完整 SSO 流？\n- [ ] 每个 Finding 是否有复现与影响？\n- [ ] Checklist？\n\n## Limitations\n\n- IdP-side testing is often out of scope; confirm boundaries first.\n- Token replay tests can lock out real users; stage carefully.\n\n> Adapted from [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) (MIT).\n",
+  "tags": [
+    "api",
+    "ai",
+    "security",
+    "aws"
+  ],
+  "useCases": [
+    "Testing SSO/federation flows within an approved scope.",
+    "Hunting signature-validation or audience-confusion flaws."
+  ],
+  "scrapedAt": "2026-08-27T17:39:23.527Z"
+}

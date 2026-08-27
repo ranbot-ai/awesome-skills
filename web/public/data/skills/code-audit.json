@@ -1,0 +1,28 @@
+{
+  "id": "antigravity-code-audit",
+  "name": "code-audit",
+  "slug": "code-audit",
+  "description": "Authorized source-code security review and SAST workflows: Semgrep and CodeQL pattern hunting, dangerous API identification, and fix verification.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/code-audit",
+  "content": "# Source Code Security Audit\n## When to Use\n\n- Reviewing a codebase for security defects with static analysis.\n- Verifying that a vulnerability fix actually removes the flawed pattern.\n\n\n## 适用场景\n\n- 白盒审计、PR/差分安全审查\n- Semgrep / CodeQL / Bandit / gosec 等 SAST\n- 危险 API、注入点、鉴权缺失、加密误用\n- 与 `supply-chain-security/` 分工：本 skill 偏**自有代码逻辑**，供应链偏依赖与管道\n\n## 工作流\n\n### 1. 范围与威胁模型\n\n```text\n□ 信任边界：用户输入、文件、反序列化、SSRF、鉴权中间件\n□ 高价值资产：鉴权、支付、管理端、密钥处理\n```\n\n### 2. 自动扫描\n\n```bash\nsemgrep --config auto .\n# 或项目规则包\nsemgrep --config p/owasp-top-ten .\n```\n\n### 3. 人工验证（MUST）\n\n```text\n□ 每个 SAST 命中：可达性？可利用性？误报？\n□ 鉴权：IDOR/越权、缺校验、错误的多租户隔离\n□ 注入：SQL/命令/模板/LDAP\n□ 加密：硬编码密钥、ECB、自定义 crypto\n```\n\n### 4. 产出\n\n```text\nFinding：位置 + 数据流 + PoC + 修复建议\n可选 ATT&CK / CWE 编号\n```\n\n## 工具链\n\n| 工具 | 语言/场景 |\n|------|-----------|\n| Semgrep | 多语言快速规则 |\n| CodeQL | 深数据流（GitHub） |\n| Bandit | Python |\n| gosec / staticcheck | Go |\n| SpotBugs / FindSecBugs | Java |\n\n## 参考\n\n- `references/sast-review-checklist.md`\n- `../supply-chain-security/` `../api-security/` `../llm-security/`（Agent 代码）\n\n## 路由上下文\n\n**上游**: MASTER R26  \n**角色**: `ops/role-map.md` cae  \n**下游**: 依赖漏洞 → supply-chain；运行时验证 → pentest-tools\n\n## 任务完成自检\n\n- [ ] 是否人工验证而非只贴扫描器输出？\n- [ ] 是否含修复建议？\n- [ ] 是否限定在授权仓库范围？\n- [ ] Checklist？\n\n## Limitations\n\n- Static analysis produces false positives; manual triage is required.\n- Coverage depends on language support of the chosen SAST engine.\n\n> Adapted from [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) (MIT).\n",
+  "tags": [
+    "python",
+    "api",
+    "ai",
+    "agent",
+    "llm",
+    "workflow",
+    "security",
+    "pentest",
+    "vulnerability",
+    "rag"
+  ],
+  "useCases": [
+    "Reviewing a codebase for security defects with static analysis.",
+    "Verifying that a vulnerability fix actually removes the flawed pattern."
+  ],
+  "scrapedAt": "2026-08-27T17:34:22.044Z"
+}

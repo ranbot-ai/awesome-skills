@@ -1,0 +1,28 @@
+{
+  "id": "antigravity-cloud-k8s",
+  "name": "cloud-k8s",
+  "slug": "cloud-k8s",
+  "description": "Authorized cloud, container, and Kubernetes security assessment: metadata SSRF, IAM misconfiguration, container escape paths, and cluster RBAC review.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cloud-k8s",
+  "content": "> **⚠️ AUTHORIZED USE ONLY**\n> This skill is for educational purposes or authorized security assessments only.\n> You must have explicit, written permission from the system owner before using this tool.\n> Misuse of this tool is illegal and strictly prohibited.\n\n> **Mandatory confirmation gate**\n> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:\n> 1. Ask the user to state the exact target URL, IP, account, or resource.\n> 2. Ask the user to confirm written authorization and the permitted scope.\n> 3. Show the exact command(s) and explain their expected effect.\n> 4. Wait for explicit confirmation in the current conversation.\n>\n> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.\n\n# Cloud / Container / Kubernetes Security\n## When to Use\n\n- Assessing cloud workload or Kubernetes cluster security within an approved scope.\n- Reviewing IAM/RBAC configurations for privilege-escalation paths.\n\n\n## 适用场景\n\n- 云元数据 SSRF（169.254.169.254 / IMDS）\n- IAM 过度权限、公开存储桶、错误安全组\n- Docker/containerd 逃逸路径评估\n- Kubernetes RBAC、Secrets、Admission、供应链镜像\n- 容器镜像漏洞（可联动 `supply-chain-security/`）\n\n## 工作流\n\n### Phase 1 — 身份与边界\n\n```text\n□ 当前身份：云 AK/SK、K8s SA、节点 SSH？\n□ 范围：单账号 / 单 cluster / 单 namespace\n□ 网络档：authorized_target_only\n```\n\n### Phase 2 — 云控制面\n\n```bash\n# 示例（按厂商替换；MUST 在授权账号内）\naws sts get-caller-identity\naws s3 ls\n# Azure / GCP 对应 identity 命令\n```\n\n```text\n□ 公开桶 / 错误 ACL\n□ 元数据：IMDSv1 vs v2；SSRF 链\n□ 角色可扮演（PassRole）与横向\n```\n\n### Phase 3 — 容器\n\n```text\n□ 是否 privileged / hostPath / hostNetwork\n□ capabilities（SYS_ADMIN 等）\n□ 可写宿主机路径 → 逃逸候选\n□ 镜像历史与已知 CVE → Trivy\n```\n\n### Phase 4 — Kubernetes\n\n```bash\nkubectl auth can-i --list\nkubectl get pods,secrets,svc -A\nkubectl get clusterrolebindings\n```\n\n```text\n□ SA token 挂载与权限\n□ 危险 admission webhook 缺失\n□ etcd / dashboard 暴露\n□ 网络策略是否默认放行\n```\n\n## 工具链\n\n| 工具 | 用途 | 自举 |\n|------|------|------|\n| kubectl | 集群交互 | 手动 |\n| trivy | 镜像/IaC | bootstrap `trivy` 若可用 |\n| kube-bench / kubeaudit | CIS/配置 | 手动 |\n| pacu / scoutsuite | 云审计（授权） | 手动 |\n| nuclei | 已知云漏洞模板 | bootstrap nmap/nuclei 生态 |\n\n## 参考\n\n- `references/k8s-cloud-checklist.md`\n- CTF 对照：`../../CTF-Sandbox-Orchestrator/competition-agent-cloud/`\n- `../supply-chain-security/` `../pentest-tools/`\n\n## 路由上下文\n\n**上游**: MASTER R23  \n**下游**: 拿到节点 shell → `attack-chain` / `windows-ad`；镜像漏洞 → supply-chain  \n**MUST NOT**: 未授权扫公有云其他租户\n\n## 任务完成自检\n\n- [ ] 是否限定在授权账号/cluster？\n- [ ] 发现是否含复现与影响？\n- [ ] 是否避免破坏性操作？\n- [ ] 报告 / journal？\n\n## Limitations\n\n- Cloud provider API calls may incur cost and trigger alerts; coordinate with the owner.\n- Escape-path validation must stay inside disposable lab clusters.\n\n> Adapted from [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) (MIT).\n",
+  "tags": [
+    "api",
+    "ai",
+    "agent",
+    "security",
+    "pentest",
+    "docker",
+    "kubernetes",
+    "aws",
+    "gcp",
+    "azure"
+  ],
+  "useCases": [
+    "Assessing cloud workload or Kubernetes cluster security within an approved scope.",
+    "Reviewing IAM/RBAC configurations for privilege-escalation paths."
+  ],
+  "scrapedAt": "2026-08-27T17:34:17.760Z"
+}
