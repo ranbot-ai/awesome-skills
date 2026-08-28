@@ -1415,6 +1415,31 @@
       "scrapedAt": "2026-05-12T08:48:25.269Z"
     },
     {
+      "id": "antigravity-agy-delegate",
+      "name": "agy-delegate",
+      "slug": "agy-delegate",
+      "description": "Delegate coding tasks to the Google Antigravity CLI (`agy`) only when the user explicitly requests it, while the orchestrator retains review and landing responsibility.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agy-delegate",
+      "content": "# Antigravity Delegate\n\n## When to Use\n\n- You want to delegate a bounded coding task to a separate `agy` implementer (`Google Antigravity`) and then review its diff yourself.\n- The user explicitly asked for delegation to this implementer.\n\nYou are the **orchestrator**. This skill lets you hand a bounded coding task to a separate\n**implementer** - the Google Antigravity CLI (`agy`) - then review what it produced and land it\nyourself. You write the brief and own the judgment; Antigravity does the typing in its own\nconversation; you verify and commit.\n\nNothing here is specific to one orchestrating agent. The loop needs only the ability to run a shell\ncommand and read a file, so any comparable agent can drive it. It is designed for and run on Claude\nCode; treat other orchestrators as designed-for, not yet proven.\n\n## When NOT to use this\n\n- The task is small enough to just do inline - delegation overhead is not worth it.\n- The `agy` CLI is not installed or not authenticated. Install it from Antigravity's CLI docs and run\n  the first-launch setup.\n- You want to write the code yourself, or you only need Antigravity's opinion on code you wrote (a\n  `--read-only` dispatch covers review without edits, but a plain review may not need delegation at all).\n\n## Prerequisites (check once)\n\n1. `agy help` succeeds. If not, install the Antigravity CLI and complete first-launch setup.\n2. `agy models` succeeds. That proves the CLI can authenticate and list the available model labels.\n3. You are in (or will point `--cd` at) the target git repository.\n\nThese checks do not prove that a headless write will be approved. In `--print` mode, Antigravity\ncannot prompt for a write permission and may auto-deny it. The relay detects that denial instead of\nreporting completion.\n\n## Choose the implementer model\n\n`agy` has a configured default model, so `--model` is optional. Use it when the human has a preferred\nAntigravity model label for the task. Otherwise let Antigravity use its own current default rather than\nguessing.\n\n## The loop\n\nRun these five steps per task. Steps 1, 4, and 5 are your judgment; 2 and 3 are mechanical.\n\n### 1. Write the brief\n\nAntigravity sees only the text you send plus what it can inspect in the workspace - no chat history, no\nshared context. Everything the task needs goes in the brief: the goal, the current state, what to\nchange, what to leave untouched, the project's **actual** gate commands, and a report contract. Tell\nAntigravity it will **not** commit (you will). Keep one task per brief. Full guidance and a template:\n[references/writing-the-brief.md](references/writing-the-brief.md).\n\n### 2. Dispatch\n\nSend the brief to Antigravity with the bundled helper. It wraps `agy --print`, captures the run, and\nwrites a structured `result.json` - so your only job is \"run a command, read a file.\" (`<skill-dir>`\nbelow is this skill's installed directory - the folder containing this `SKILL.md`.)\n\n```bash\nnode \"<skill-dir>/scripts/relay.mjs\" --brief brief.txt --cd /path/to/repo\n# choose a model label:                 add --model \"<label from agy models>\"\n# reasoning effort (low, medium, high): add --effort high\n# read-only (plan mode — no edits):     add --read-only\n# enable Antigravity terminal sandbox:  add --sandbox\n# resume the most recent conversation:  add --resume-last  (delta brief only)\n# see all options:                      node .../relay.mjs --help\n```\n\nThe helper starts a fresh Antigravity project by default and passes `--add-dir <repo>` (the `--cd`\npath, absolute) so `agy` has an explicit workspace. It does **not** pass `--dangerously-skip-permissions` by default.\nMechanics, flags, and the `result.json` shape: [references/dispatch-and-poll.md](references/dispatch-and-poll.md).\n\n### 3. Wait for completion\n\nThe helper blocks until Antigravity finishes, so back it with whatever your orchestrator offers and\nresume when it returns:\n\n- **Claude Code:** run the Bash call with `run_in_background: true`; you are notified on completion.\n- **Plain shell / other agents:** run it in the foreground for short tasks, or background it and poll\n  the result file.\n\nDo not trust progress trackers over reality: a run is finished when `result.json` is written and the\nprocess has exited. Read the working tree, not a status line. The implementer's full report is\nthe `finalMessage` field in `result.json` (also printed in full on stdout between the report markers).\n\n### 4. Review - do not trust the self-report\n\nAntigravity's `result.json` includes its own final message and any gate claims. **Re-verify, don't\naccept:**\n\n- **Re-run the project's gates yourself** (the test/lint/build commands from step 1).\n- **Read the diff** against the brief: did Antigravity do what was asked, nothing more and nothing less?\n  `touchedFiles` in the result is your starting point.\n- **Run the relevant guard skills** on the diff if you have them installed.\n- For schema/migration changes, round-trip them; for removals, grep for dangling references.\n\nFull ch",
+      "tags": [
+        "node",
+        "claude",
+        "ai",
+        "agent",
+        "template",
+        "design",
+        "document"
+      ],
+      "useCases": [
+        "You want to delegate a bounded coding task to a separate `agy` implementer (`Google Antigravity`) and then review its diff yourself.",
+        "The user explicitly asked for delegation to this implementer."
+      ],
+      "scrapedAt": "2026-08-28T18:27:18.793Z"
+    },
+    {
       "id": "antigravity-ai-agent-development",
       "name": "ai-agent-development",
       "slug": "ai-agent-development",
@@ -1833,6 +1858,32 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-26T13:16:28.090Z"
+    },
+    {
+      "id": "antigravity-aider-delegate",
+      "name": "aider-delegate",
+      "slug": "aider-delegate",
+      "description": "Delegate coding tasks to Aider (`aider`) only when the user explicitly requests it, while the orchestrator retains review and landing responsibility.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aider-delegate",
+      "content": "# Aider Delegate\n\n## When to Use\n\n- You want to delegate a bounded coding task to a separate `aider` implementer (`Aider`) and then review its diff yourself.\n- The user explicitly asked for delegation to this implementer.\n\nYou are the **orchestrator**. Hand a bounded coding task to a separate **implementer** - Aider - then\nreview what it produced and land it yourself. You write the brief and own the judgment; Aider does the\ntyping in its own run; you verify and commit.\n\nThe loop needs only a shell command and file access, so any comparable orchestrator can drive it.\n\n## The one thing to know about Aider\n\n**Aider commits by default.** Two of its defaults would destroy the reviewable diff this skill exists\nto produce:\n\n- `--auto-commits` (default `True`) - Aider commits its own edits after each exchange.\n- `--dirty-commits` (default `True`) - Aider commits **your** pre-existing uncommitted work before it\n  starts editing.\n\nThe relay always passes `--no-auto-commits` and `--no-dirty-commits`, and neither is configurable\nthrough it. If you ever drive `aider` by hand instead of through the relay, pass both yourself, or the\nwork lands as commits you never reviewed. The relay also passes `--no-gitignore`, because Aider\notherwise writes `.aider*` into `.gitignore` on startup and dirties the tree you are about to read.\n\n## When NOT to use this\n\n- The task is small enough to do inline; delegation overhead is not worth it.\n- The `aider` CLI is not installed, or no model is configured for it.\n- You want the implementer to manage its own commits. Aider can, but this skill deliberately turns\n  that off - the diff is the deliverable.\n\n## Prerequisites (check once)\n\n1. Install Aider - `python -m pip install aider-chat`, or the standalone installer from the\n   [Aider install docs](https://aider.chat/docs/install.html).\n2. Configure a model. Aider reads provider keys from the environment (`OPENAI_API_KEY`,\n   `ANTHROPIC_API_KEY`, …) or its own config; see [Aider's model docs](https://aider.chat/docs/llms.html).\n3. Confirm `aider --version` succeeds.\n4. Work in, or point `--cd` at, the target git repository.\n\n## Choose the model\n\nAider uses its own configured model when `--model` is omitted. Pass `--model <name>` to pick another.\n\n## Local and self-hosted models\n\nAider talks to any OpenAI-compatible endpoint, so this is also the skill for delegating to a model\nrunning on the user's own hardware - llama.cpp's server, Ollama, vLLM, LM Studio, or anything else\nthat serves the same API. Pair `--model` with `--api-base`:\n\n```bash\nnode \"<skill-dir>/scripts/relay.mjs\" --brief brief.txt --cd /path/to/repo \\\n  --model openai/<served-model-name> --api-base http://127.0.0.1:<port>/v1\n```\n\nThree things differ from a hosted provider:\n\n- **The `openai/` prefix is required.** It tells Aider to speak the OpenAI protocol to your endpoint;\n  the part after it is whatever name your server reports, not a provider catalog name.\n- **A placeholder key is still needed.** Export any non-empty `OPENAI_API_KEY`. The client library\n  requires the header even when the server ignores its value.\n- **Ask for a smaller edit format.** Local models often fail Aider's default `diff` format, which\n  requires exact search/replace blocks. `--edit-format whole` trades tokens for reliability; keep the\n  brief's scope tight with `--file` so whole-file rewrites stay cheap.\n\nA local endpoint that is not running looks like a hang, not an error: Aider retries the connection\nuntil the relay's `--timeout` watchdog fires and reports `status: \"timeout\"`. Confirm the server is up\nbefore dispatching a long brief.\n\n### Staying offline\n\nNo account or provider registration is involved: Aider is a pip install, the endpoint is yours, and\n`OPENAI_API_KEY` only has to be non-empty. The relay pins the flags that would otherwise reach the\nnetwork on their own - `--no-check-update`, `--no-analytics` (Aider's own default is `random`, which\nopts some sessions in by itself), and `--no-detect-urls`, without which Aider offers to scrape any URL\nin the brief and `--yes-always` accepts that offer silently.\n\n`--no-suggest-shell-commands` closes the remaining path by which a run could reach the network without\nbeing asked to. What stays outside the relay's control is the brief itself: instructions that tell\nAider to install a package or call an API will still be carried out, and `--auto-lint` runs the\nrepository's own tooling. Offline here means nothing in the dispatch path reaches out on its own - not\nthat a sandbox is stopping it.\n\n## The loop\n\nRun these five steps per task. Steps 1, 4, and 5 require judgment; 2 and 3 are mechanical.\n\n### 1. Write the brief\n\nAider sees only the text you send plus the files in its editing scope - no chat history or shared\ncontext. Include the goal, current state, what to change, what to leave untouched, the project's\n**actual** gates, and a report contract. Keep one task per brief. See\n[references/writing-the-brief.md](references/writing-the-brief.md).\n\n### 2. ",
+      "tags": [
+        "python",
+        "node",
+        "api",
+        "ai",
+        "agent",
+        "llm",
+        "design",
+        "security"
+      ],
+      "useCases": [
+        "You want to delegate a bounded coding task to a separate `aider` implementer (`Aider`) and then review its diff yourself.",
+        "The user explicitly asked for delegation to this implementer."
+      ],
+      "scrapedAt": "2026-08-28T18:27:26.341Z"
     },
     {
       "id": "antigravity-airflow-dag-patterns",
@@ -7829,6 +7880,33 @@
       "scrapedAt": "2026-02-15T07:03:48.990Z"
     },
     {
+      "id": "antigravity-babysit-pr",
+      "name": "babysit-pr",
+      "slug": "babysit-pr",
+      "description": "Babysit a pull request through its bot review rounds: verify, fix, reply, resolve. Use for any babysit or watch-the-PR ask.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/babysit-pr",
+      "content": "# Babysit a PR\n\n## When to Use\n\n- A PR/MR has accumulated bot review threads that need verification, fixes, replies, and resolution.\n- You want to drive a PR from 'just opened' to 'nothing left unanswered' across multiple review rounds.\n\nGoal: carry a pull request (GitHub) or merge request (GitLab) from \"just opened\" to \"nothing left\nunanswered,\" without the human having to sit and refresh the page. \"PR\" below means either.\n\nReview bots are diff-anchored samplers. Every push mints a fresh round, and a fix in one place can\nlight up commentary somewhere adjacent. Left alone, a PR accumulates half-answered threads that\nnobody resolves, and the real bug in round three gets buried under nitpicks from rounds one and two.\nYour job is to be the person who reads every finding, decides what is actually true, fixes what\nblocks, and closes every loop in writing.\n\nYou know how to drive `gh` (GitHub), `glab` (GitLab), and git. What follows is only the judgment this\nloop needs and the few API calls that are easy to get wrong. The harvest script picks the forge from\nthe cwd's git origin; everything it returns has the same shape on both, with a `capabilities` block\nnaming what that forge cannot tell you.\n\n## The three rules that matter most\n\nVerify before you believe. A bot's severity badge is a guess made without running anything. Treat\nevery finding, including the P1s, as a claim to check against the code. Bots are frequently right\n(that is why this loop is worth running), and they are also confidently wrong often enough that\nshipping their suggestions unexamined will introduce bugs. Read the actual code path before you\nagree or disagree.\n\nEvery thread gets an answer. A finding you fixed, rejected, or deferred is only closed once you have\nsaid so in that thread and resolved it. Silence reads as \"ignored\" to the next human who opens the\nPR, and it is how a real bug gets lost.\n\nPublish before you answer. A \"fixed\" reply is only true once the remote branch carries the fix.\nNever post a confirmed reply, or resolve its thread, while the fix exists only locally. Rejections\nneed no push. Reply with evidence and resolve immediately.\n\n## Harvest the round\n\nFindings arrive on two different surfaces, and a round that reads only one silently misses half of\nthem. This is the single most common way a babysit loop goes wrong:\n\n- Inline review threads. This is where debate-review and Codex post their findings (Codex attaches\n  P1/P2-badged inline comments to an otherwise boilerplate review body; an empty-looking body proves\n  nothing). Each thread carries a `thread_id` (to resolve) and a `reply_to` (to reply inside the\n  thread). On GitHub these are GraphQL review threads; on GitLab they are discussions.\n- Top-level review bodies. This is where Greptile summarizes, Codex sometimes posts a numbered list,\n  and debate-review posts its round summary. These have no thread to resolve; answer them with one PR\n  comment per round. On GitHub they are review objects; on GitLab they are plain notes.\n\nThe bundled script returns both in one call, already correlated (`<skill-dir>` is the folder that\nholds this SKILL.md):\n\n```bash\n\"<skill-dir>/scripts/threads.sh\" <N> > /tmp/pr-<N>-round-<k>.json\n```\n\nNever trust a filtered count without its unfiltered twin. Before applying any jq filter to the\nharvest, print the raw totals (`jq '{threads: (.threads|length), reviews: (.reviews|length)}'`) and\ncompare. A filter that eliminates 100% of items is presumed broken until the field names are\nverified against the actual schema (`jq '.threads[0] | keys'`). jq selects on a misspelled field\nfail silently-empty, and a \"clean round\" built on one is how a P1 gets a merge-gate mention posted\nover it. That has happened. GitHub tooling fails by returning less data, not by erroring; pair this with the\npagination rule.\n\nNever describe an object you did not fetch. If a query for a specific id returns empty, that is a\nstop signal. Say \"I can't see it\" and fetch it another way (`gh api .../reviews/<id>`), never narrate\nits presumed content. Related trap: every inline thread reply arrives wrapped in a zero-byte\n`COMMENTED` review object, so a watcher's \"new review\" event may be just a reply wrapper, not a new\nround. threads.sh's `.reviews` does not include these wrappers, so a review id from an event that is\nmissing from the harvest means \"wrapper\", not \"gone\".\n\nDiff it against the previous round's file to see what is genuinely new. `outdated: true` on a thread\nmeans the line moved underneath it. The finding may already be fixed, so check it against current\ncode before spending the round on it. A `comment_count` bump on a thread you already handled means a\nbot followed up inside it.\n\nHas this reviewer seen the current push? Only trust a field that names a sha. On GitHub each review\ncarries `commit_id`; compare it to `head`. For debate-review on either forge, the round body's\n`debate_head` is the sha it reviewed. On GitLab other reviewers' notes carry no sha (`capabilities.\nre",
+      "tags": [
+        "node",
+        "api",
+        "ai",
+        "agent",
+        "gpt",
+        "document",
+        "security",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "A PR/MR has accumulated bot review threads that need verification, fixes, replies, and resolution.",
+        "You want to drive a PR from 'just opened' to 'nothing left unanswered' across multiple review rounds."
+      ],
+      "scrapedAt": "2026-08-28T18:29:03.359Z"
+    },
+    {
       "id": "antigravity-backend-architect",
       "name": "backend-architect",
       "slug": "backend-architect",
@@ -10788,6 +10866,32 @@
       "scrapedAt": "2026-01-26T13:17:30.622Z"
     },
     {
+      "id": "antigravity-claude-delegate",
+      "name": "claude-delegate",
+      "slug": "claude-delegate",
+      "description": "Delegate coding tasks to a separate Claude Code CLI process or Claude session only when the user explicitly requests it, while the orchestrator retains review and landing responsibility.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/claude-delegate",
+      "content": "# Claude Delegate\n\n## When to Use\n\n- You want to delegate a bounded coding task to a separate `claude` implementer (`Claude Code`) and then review its diff yourself.\n- The user explicitly asked for delegation to this implementer.\n\nYou are the **orchestrator**. Delegate one bounded coding task to a separate **implementer** — a Claude\nCode CLI session — then review what it produced and land it yourself. You write the brief and own the\njudgment; the separate Claude session edits the working tree; you verify and commit.\n\nThis skill is not a signal for the current Claude to implement directly. Use it only after the human\nexplicitly asks for delegation to another Claude Code process or session.\n\n## When not to use this\n\n- The human asked the current agent to implement the task directly.\n- The task is small enough to do inline and the human did not request delegation.\n- The `claude` CLI is missing or unauthenticated (`claude auth status`).\n- The task needs a stronger host boundary than Claude Code's tool permissions and shell-only sandbox\n  provide. Use an isolated container or VM for that requirement.\n\n## Prerequisites\n\n1. `claude --version` succeeds.\n2. `claude auth status` reports an authenticated session. On macOS the live credentials sit in the\n   login Keychain; when the orchestrator's own sandbox blocks Keychain access (Codex's sandbox\n   does), `claude` falls back to a possibly stale credentials file and reports `loggedIn: false`\n   even though the login is valid. Re-run the check — and the dispatch itself — with that sandbox\n   escalated or outside it before concluding the CLI is unauthenticated.\n3. The target repository is the directory passed with `--cd`.\n4. On Linux/WSL2, Claude's sandbox dependencies are installed. The normal relay profile is\n   configured to fail when the sandbox is unavailable instead of silently running shell commands\n   unsandboxed. Existing merged settings can still affect the effective boundary.\n\n## The loop\n\n### 1. Write the brief\n\nThe separate session has no orchestrator chat history. It receives the brief on stdin and can inspect\nthe target working tree.\n\nClaude Code automatically discovers the target project's `CLAUDE.md` and normal local Claude\nconfiguration because the relay does not use `--bare`. It does **not** generically auto-load\n`AGENTS.md`. Read `AGENTS.md` yourself and copy every load-bearing constraint and the real gate\ncommands into the brief. Tell the implementer not to commit. Keep one task per brief.\n\nTemplate and details: [references/writing-the-brief.md](references/writing-the-brief.md).\n\n### 2. Dispatch\n\n```bash\nnode \"<skill-dir>/scripts/relay.mjs\" --brief brief.txt --cd /path/to/repo\n# review/diagnosis only:                 add --read-only\n# continue the latest session:           add --resume-last\n# continue the recorded session:         add --session <id>\n# choose limits:                         add --max-turns 40 --max-budget-usd 10\n# hard relay deadline:                   add --timeout 2h\n# inspect every option:                  node .../relay.mjs --help\n```\n\n`<skill-dir>` is this installed skill directory, the folder containing this `SKILL.md`.\n\nThe relay runs `claude -p --output-format stream-json --verbose`, sends the brief through stdin, and\nwrites artifacts under the system temp directory by default. It never uses `--bg` or `--bare`, and it\nnever commits. See [references/dispatch-and-poll.md](references/dispatch-and-poll.md).\n\n### 3. Wait\n\nThe relay blocks until Claude exits. Use the orchestrator's background-command facility, or run it in\nthe foreground and wait. Completion means the process exited and `result.json` exists.\n\n- A pre-run usage error exits 2 and writes no `result.json`.\n- A missing `claude` exits 127 and writes `status: \"claude_unavailable\"`.\n- Timeout and caught relay signals terminate the whole implementer process tree and preserve an\n  outcome artifact.\n\nRead `finalMessage`, `touchedFiles`, `resultSubtype`, and the raw artifact paths from `result.json`.\n\n### 4. Review\n\nTreat the implementer's report and gate outcomes as claims:\n\n- Review edits to existing tests before a green gate means anything.\n- Re-run the project's actual gates yourself.\n- Read the complete diff against the brief, starting with `touchedFiles`.\n- Inspect untracked and staged content as well as the ordinary diff.\n- Run relevant guard skills if installed.\n\nFull checklist: [references/review-and-land.md](references/review-and-land.md).\n\n### 5. Land\n\nThe **orchestrator commits** only after the gates pass and the diff holds. For rework, resume the same\nClaude session with a delta brief:\n\n```bash\necho \"Keep the implementation, replace the mocked DB test with the migrated fixture, and remove the\nunused import.\" | node \"<skill-dir>/scripts/relay.mjs\" --session <id> --cd /path/to/repo\n```\n\nReview a resumed run exactly like the first run.\n\n## Permission profiles\n\nThe normal profile is deliberately explicit:\n\n- `acceptEdits` permission mode.\n- Built-in tools restricted t",
+      "tags": [
+        "node",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "template",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "You want to delegate a bounded coding task to a separate `claude` implementer (`Claude Code`) and then review its diff yourself.",
+        "The user explicitly asked for delegation to this implementer."
+      ],
+      "scrapedAt": "2026-08-28T18:29:49.252Z"
+    },
+    {
       "id": "antigravity-claude-in-chrome-troubleshooting",
       "name": "claude-in-chrome-troubleshooting",
       "slug": "claude-in-chrome-troubleshooting",
@@ -11034,6 +11138,28 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-02-19T07:10:14.993Z"
+    },
+    {
+      "id": "antigravity-cline-delegate",
+      "name": "cline-delegate",
+      "slug": "cline-delegate",
+      "description": "Delegate coding tasks to the Cline CLI (`cline`) only when the user explicitly requests it, while the orchestrator retains review and landing responsibility.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cline-delegate",
+      "content": "# Cline Delegate\n\n## When to Use\n\n- You want to delegate a bounded coding task to a separate `cline` implementer (`Cline`) and then review its diff yourself.\n- The user explicitly asked for delegation to this implementer.\n\nYou are the **orchestrator**. Delegate a bounded coding task to a separate **implementer** - the Cline\ncoding agent CLI - then review what it produced and land it yourself. You write the brief and own\nthe judgment; the implementer makes changes in its own session in a clean working tree; you verify\nand commit.\n\nThe loop needs only a shell command and file access, so any comparable orchestrator can drive it.\n\n## When NOT to use this\n\n- The task is small enough to do inline; delegation overhead is not worth it.\n- The `cline` CLI is not installed or authenticated.\n- You require the relay to configure a sandbox. Cline exposes sandbox controls, but this relay\n  leaves them to the CLI environment; use `--plan` when the run must be read-only.\n\n## Prerequisites (check once)\n\n1. Install `cline` (npm or bundled binary; the relay probes `cline --version`).\n2. Authenticate: run `cline auth` (interactive sign-in), or configure\n   `ANTHROPIC_API_KEY` / an OpenAI-compatible base URL.\n3. Confirm `cline --version` succeeds.\n4. Work in, or point `--cd` at, the target git repository.\n\n## Choose the model (optional)\n\nCline picks a default model. To choose another, pass the separate `--model <id>` or `--provider <name>`\n(e.g. `anthropic`, `openai-native`, `openrouter`). The relay accepts letters, digits,\nand `. _ : / -` only (the value reaches a shell on Windows).\n\n## The loop\n\nRun these five steps per task. Steps 1, 4, and 5 require judgment; 2 and 3 are mechanical.\n\n### 1. Write a brief\n\nCline sees only the text you send. It cannot read your conversation: the brief must stand alone\nwith the goal, current state, what to change, what to leave untouched, the project's **real**\ngates, and a report contract. Keep each brief to a single task. Write it to a file and pass it as\nthe relay's `--brief`. See [references/writing-the-brief.md](references/writing-the-brief.md).\n\n### 2. Dispatch\n\nUse the bundled relay. It runs `cline --json -v`, streams the brief on stdin behind a fixed\npositional instruction, captures the JSON event stream, and writes `result.json`.\n\n```bash\nnode \"<skill-dir>/scripts/relay.mjs\" --brief brief.txt --cd /path/to/repo\n# choose a model / provider:        add --model <id>  --provider <name>\n# read-only planning pass:          add --plan   (forces --auto-approve false)\n# deny approval-required tools:     add --auto-approve false\n# hard time limit (watchdog):        add --timeout 2h   (the 30m default suits brief runs; most implementation briefs should be 1-2h)\n# see all options:                   node .../relay.mjs --help\n```\n\nThe child's cwd pins the workspace. The relay writes artifacts under the system temp dir by\ndefault and never commits. See [references/dispatch-and-poll.md](references/dispatch-and-poll.md).\n\n### 3. Wait for completion\n\nThe relay blocks until cline finishes. Run it with the orchestrator's background-command\nfacility, or background it in the shell and poll for `result.json`. A pre-run usage error exits 2\nand writes no result; a missing `cline` exits 127 and writes `status: \"cline_unavailable\"`.\n\nCompletion means the process exited and `result.json` exists - trust process state and the\nworking tree, not the progress display. Cline's final message is the `finalMessage` field of\n`result.json`.\n\n### 4. Review - do not trust the self-report\n\n- Re-run the project's gates yourself.\n- Read the diff against the brief, starting with `touchedFiles`.\n- Run relevant guard skills if installed.\n\nSee [references/review-and-land.md](references/review-and-land.md).\n\n### 5. Land it\n\nIf the work is good, commit it. The relay never commits - the diff and `result.json` are the\nrecord; run `git status` and `git diff` first to confirm exactly what changed. If the group has a\nPR flow, make the commit and push a branch; let human review happen. If the diff is wrong or\nincomplete, re-dispatch a corrected brief in a fresh run and review again.\n\n## Autonomy and permissions\n\nThe relay explicitly passes Cline's `--auto-approve`, defaulting to `true` in act mode. Cline\nplan mode can request a switch to act mode, so `--plan` forces `--auto-approve false`; the relay\nrejects `--plan --auto-approve true`. That pair is the read-only gate. Cline also exposes sandbox\nthrough `--data-dir` / `CLINE_SANDBOX`, but the relay does not configure or override it. Plan-first\nfor anything risky, then review the plan before a separate act-mode dispatch. Malformed or malicious\nbriefs remain dangerous in act mode because commands run as the current user.\n\n## Authorization model\n\nDelegation is something the human opts into. Once briefed, cline works as a tool you approved use\nof. The boundary is: **do not accept conclusions from the self-report**; verify everything on\ndisk. For anything touching credentials, production data, o",
+      "tags": [
+        "node",
+        "api",
+        "ai",
+        "agent"
+      ],
+      "useCases": [
+        "You want to delegate a bounded coding task to a separate `cline` implementer (`Cline`) and then review its diff yourself.",
+        "The user explicitly asked for delegation to this implementer."
+      ],
+      "scrapedAt": "2026-08-28T18:29:53.748Z"
     },
     {
       "id": "antigravity-close-automation",
@@ -11936,6 +12062,31 @@
       "scrapedAt": "2026-04-13T08:16:14.718Z"
     },
     {
+      "id": "antigravity-codex-delegate",
+      "name": "codex-delegate",
+      "slug": "codex-delegate",
+      "description": "Delegate coding tasks to the OpenAI Codex CLI only when the user explicitly requests it, while the orchestrator retains review and landing responsibility.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/codex-delegate",
+      "content": "# Codex Delegate\n\n## When to Use\n\n- You want to delegate a bounded coding task to a separate `codex` implementer (`OpenAI Codex`) and then review its diff yourself.\n- The user explicitly asked for delegation to this implementer.\n\nYou are the **orchestrator**. This skill lets you hand a bounded coding task to a separate\n**implementer** — the OpenAI Codex CLI — then review what it produced and land it yourself. You write\nthe brief and own the judgment; Codex does the typing in its own sandbox; you verify and commit.\n\nNothing here is specific to one orchestrating agent. The loop needs only the ability to run a shell\ncommand and read a file, so it works the same whether you are Claude Code, OpenCode with a selected\nmodel, or any comparable agent. (It is designed for and run on Claude Code; treat other orchestrators\nas designed-for, not yet proven.)\n\n## When NOT to use this\n\n- The task is small enough to just do inline — delegation overhead is not worth it.\n- The `codex` CLI is not installed or not authenticated (run `codex login`).\n- You want to write the code yourself, or you only need a review (use Codex's own `review` command).\n\n## Prerequisites (check once)\n\n1. `codex --version` succeeds. If not, install (`npm i -g @openai/codex`) and `codex login`.\n2. **Confirm which `codex` is on PATH.** Multiple installs are common (e.g. a current npm/nvm copy and\n   a stale Homebrew one). `command -v codex` shows the active one and `codex --version` its version —\n   an old binary predates flags this skill relies on (`codex exec --json`, `-o`, `exec resume`). The\n   relay also records the version it ran into `result.json`, so a stale binary is visible after the fact.\n3. You are in (or will point `--cd` at) the target git repository.\n\n## The loop\n\nRun these five steps per task. Steps 1, 4, and 5 are your judgment; 2 and 3 are mechanical.\n\n### 1. Write the brief\n\nCodex sees **only** the text you send — no repo memory, no chat history, no shared context. Everything the\ntask needs goes in the brief: the goal, the current state, what to change, what to leave untouched,\nthe project's **actual** gate commands (discover them from the repo's CLAUDE.md/AGENTS.md/Makefile —\ndo not assume), and a report contract. Tell Codex it will **not** commit (you will). Keep one task per\nbrief. Full guidance and a template: [references/writing-the-brief.md](references/writing-the-brief.md).\n\n### 2. Dispatch\n\nSend the brief to Codex with the bundled helper. It wraps `codex exec`, captures the run, and writes a\nstructured `result.json` — so your only job is \"run a command, read a file.\" (`<skill-dir>` below is\nthis skill's installed directory — the folder containing this `SKILL.md`, i.e. the directory you loaded\nthe skill from. Claude Code prints it as \"Base directory for this skill\" when the skill loads; on other\norchestrators use that same directory — if unsure where it landed, run\n`find ~ -name relay.mjs -path '*codex-delegate*'` and substitute the directory above it.)\n\n```bash\nnode \"<skill-dir>/scripts/relay.mjs\" --brief brief.txt --cd /path/to/repo\n# read-only (review/diagnosis, no edits):   add --read-only\n# continue the exact Codex session:         add --session <threadId>  (from result.json; send only the delta brief)\n# fallback when no thread id is available:  add --resume-last\n# hard time limit (watchdog):               add --timeout 2h  (default: off; implementation runs routinely need 1-2h)\n# see all options:                          node .../relay.mjs --help\n```\n\nThe helper defaults to a write-capable (`workspace-write`) sandbox and writes its artifacts to a temp\ndir, so the repo under review stays clean. It **never commits** — see step 5. Mechanics, flags, and the\n`result.json` shape: [references/dispatch-and-poll.md](references/dispatch-and-poll.md).\n\n### 3. Wait for completion\n\nThe helper blocks until Codex finishes, so back it with whatever your orchestrator offers and resume\nwhen it returns:\n\n- **Claude Code:** run the Bash call with `run_in_background: true`; you are notified on completion.\n- **Plain shell / other agents:** run it in the foreground for short tasks, or background it and poll\n  the result file — `… &` in bash/zsh (including Git Bash/WSL), or your shell's equivalent (`Start-Job`\n  in PowerShell, `start /b` in cmd). The run is done when `result.json` exists with a `status`. (A\n  pre-run usage error — bad args or an empty brief — instead exits with code 2 and a stderr message and\n  writes no result file, so check the exit code too. A missing `codex` binary exits 127 but *does* write\n  a `result.json` with status `codex_unavailable`.)\n\nDo not trust progress trackers over reality: a run is finished when `result.json` is written and the\nprocess has exited. Read the working tree, not a status line. The implementer's full report is\nthe `finalMessage` field in `result.json` (also printed in full on stdout between the report markers).\n\n### 4. Review — do not trust the self-report\n\nCodex's `result.json` includes its own sum",
+      "tags": [
+        "node",
+        "claude",
+        "ai",
+        "agent",
+        "template",
+        "design",
+        "cro"
+      ],
+      "useCases": [
+        "You want to delegate a bounded coding task to a separate `codex` implementer (`OpenAI Codex`) and then review its diff yourself.",
+        "The user explicitly asked for delegation to this implementer."
+      ],
+      "scrapedAt": "2026-08-28T18:30:09.681Z"
+    },
+    {
       "id": "antigravity-codex-fable5",
       "name": "codex-fable5",
       "slug": "codex-fable5",
@@ -12163,6 +12314,30 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-06-19T10:49:43.679Z"
+    },
+    {
+      "id": "antigravity-commandcode-delegate",
+      "name": "commandcode-delegate",
+      "slug": "commandcode-delegate",
+      "description": "Delegate coding tasks to the Command Code CLI (`cmd`) only when the user explicitly requests it, while the orchestrator retains review and landing responsibility.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/commandcode-delegate",
+      "content": "# Command Code Delegate\n\n## When to Use\n\n- You want to delegate a bounded coding task to a separate `commandcode` implementer (`Command Code`) and then review its diff yourself.\n- The user explicitly asked for delegation to this implementer.\n\nYou are the **orchestrator**. This skill lets you hand a bounded coding task to a separate\n**implementer** — the Command Code CLI (`cmd`) — then review what it produced and land it yourself.\nYou write the brief and own the judgment; Command Code does the typing in your working tree; you\nverify and commit.\n\nNothing here is specific to one orchestrating agent. The loop needs only the ability to run a shell\ncommand and read a file, so it works the same whether you are Claude Code, OpenCode with a selected\nmodel, or any comparable agent. (It is designed for and run on Claude Code; treat other orchestrators\nas designed-for, not yet proven.)\n\n## When NOT to use this\n\n- The task is small enough to just do inline — delegation overhead is not worth it.\n- The `cmd` CLI is not installed or not authenticated (run `cmd login`).\n- You want to write the code yourself, or you only need a review (Command Code has its own `/review`).\n- You are on native Windows and `cmdc --version` does not work. Upstream recommends WSL for stable Windows use.\n\n## Read this before the first dispatch: the autonomy model\n\nCommand Code's headless mode has **exactly two states, with nothing in between**:\n\n- **Default (`-p` with no `--yolo`):** read, grep, and glob work. Every write, edit, and shell call is\n  refused by the CLI's permission layer, and headless mode has no prompt to grant them mid-run. This\n  is the relay's `--read-only`.\n- **`--yolo` (alias `--dangerously-skip-permissions`):** every tool is allowed, anywhere the process\n  can reach. There is no filesystem sandbox and no path restriction. This is what an implementation\n  run needs, so the relay passes it by default.\n\n`--permission-mode auto-accept` and `--tools-all` do **not** lift the headless write gate. Direct CLI\nprobes refused write, edit, and shell with both. So an implementation run\nthrough Command Code is a full-trust run: scope it with a tight brief and a clean working tree, not\nwith a sandbox. The brief is guidance, and a git worktree isolates a checkout without containing the\nprocess. If writes outside the target tree are unacceptable, use an OS-enforced sandbox such as\n`codex-delegate` or run this one inside a container.\n\nBefore the first write-capable run, explain this unsandboxed full-trust mode and obtain explicit\nhuman acceptance. A request to delegate to Command Code is not by itself consent to host-wide access.\n\n## Prerequisites (check once)\n\n1. `cmd --version` succeeds and `cmd status` reports authenticated. If not, install Command Code and\n   run `cmd login`.\n2. **Confirm the CLI on PATH.** On macOS/Linux, `command -v cmd` shows the active `cmd`. On native\n   Windows, use `cmdc --version`; `cmd` is the system shell. The relay uses `cmdc` there and launches\n   its npm `.cmd` shim through `cmd.exe`. `COMMANDCODE_BIN` remains an absolute-path override and must\n   never point to the system command interpreter. The relay records the version it ran in\n   `result.json`, so a wrong binary is visible after the fact.\n3. You are in (or will point `--cd` at) the target git repository, and its tree is clean before you\n   dispatch — a full-trust run is much easier to review against a clean baseline.\n\n## The loop\n\nRun these five steps per task. Steps 1, 4, and 5 are your judgment; 2 and 3 are mechanical.\n\n### 1. Write the brief\n\nCommand Code sees **only** the text you send — no repo memory, no chat history, no shared context\n(beyond the repo's own `AGENTS.md`, which it reads automatically). Everything the task needs goes in\nthe brief: the goal, the current state, what to change, what to leave untouched, the project's\n**actual** gate commands (discover them from the repo's AGENTS.md/CLAUDE.md/Makefile — do not assume),\nand a report contract. Tell it that it will **not** commit (you will). Keep one task per brief. Full\nguidance and a template: [references/writing-the-brief.md](references/writing-the-brief.md).\n\n### 2. Dispatch\n\nSend the brief to Command Code with the bundled helper. It wraps `cmd -p`, captures the run, and\nwrites a structured `result.json` — so your only job is \"run a command, read a file.\" (`<skill-dir>`\nbelow is this skill's installed directory — the folder containing this `SKILL.md`, i.e. the directory\nyou loaded the skill from. Claude Code prints it as \"Base directory for this skill\" when the skill\nloads; on other orchestrators use that same directory — if unsure where it landed, run\n`find ~ -name relay.mjs -path '*commandcode-delegate*'` and substitute the directory above it.)\n\n```bash\nnode \"<skill-dir>/scripts/relay.mjs\" --brief brief.txt --cd /path/to/repo\n# read-only (review/diagnosis, no edits):   add --read-only\n# continue the exact session:               add --session <sessionId>  (from result.json; send only th",
+      "tags": [
+        "node",
+        "claude",
+        "ai",
+        "agent",
+        "template",
+        "design"
+      ],
+      "useCases": [
+        "You want to delegate a bounded coding task to a separate `commandcode` implementer (`Command Code`) and then review its diff yourself.",
+        "The user explicitly asked for delegation to this implementer."
+      ],
+      "scrapedAt": "2026-08-28T18:30:13.635Z"
     },
     {
       "id": "antigravity-commit",
@@ -13525,6 +13700,27 @@
       "scrapedAt": "2026-02-28T06:51:47.459Z"
     },
     {
+      "id": "antigravity-copilot-delegate",
+      "name": "copilot-delegate",
+      "slug": "copilot-delegate",
+      "description": "Delegate coding tasks to the GitHub Copilot CLI (`copilot`) only when the user explicitly requests it, while the orchestrator retains review and landing responsibility.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/copilot-delegate",
+      "content": "# Copilot Delegate\n\n## When to Use\n\n- You want to delegate a bounded coding task to a separate `copilot` implementer (`GitHub Copilot CLI`) and then review its diff yourself.\n- The user explicitly asked for delegation to this implementer.\n\nYou are the **orchestrator**. Delegate a bounded coding task to a separate **implementer** — the\nGitHub Copilot CLI — then review what it produced and land it yourself. You write the brief and own\nthe judgment; the implementer makes changes in its own session in a clean working tree; you verify\nand commit.\n\nThe loop needs only a shell command and file access, so any comparable orchestrator can drive it.\n\n## When NOT to use this\n\n- The task is small enough to do inline; delegation overhead is not worth it.\n- The `copilot` CLI is not installed or authenticated.\n- You need a hard sandbox. Copilot exposes sandbox controls, but they are upstream-experimental\n  (MXC-based, controlled via the `/sandbox` command and settings, disabled by default) — this relay\n  does not configure them. `--read-only` only disables edit tools (`--mode plan`); shell commands\n  still run. If project files must not change at all, dispatch against a clean or isolated worktree.\n\n## Prerequisites (check once)\n\n1. Install `copilot` (`npm install -g @github/copilot`; the CLI requires Node 22+, the relay\n   itself runs on Node 18+ — the relay probes `copilot version`).\n2. Authenticate: run `copilot login` (interactive web/device flow), or set\n   `COPILOT_GITHUB_TOKEN` / `GH_TOKEN` / `GITHUB_TOKEN` in the environment.\n3. Confirm `copilot version` succeeds.\n4. Work in, or point `--cd` at, the target git repository.\n\n## Choose the model (optional)\n\nCopilot picks a default model (`auto`). To choose another, pass `--model <name>`.\nThe relay accepts letters, digits, and `. _ : / -` only (the value reaches a shell on Windows).\n\n## Choose the effort (optional)\n\nCopilot supports a reasoning effort dial: `--effort <level>` with values\n`low`, `medium`, `high`, `xhigh`, or `max`. The relay rejects any other value\nbefore dispatch.\n\n## The loop\n\nRun these five steps per task. Steps 1, 4, and 5 require judgment; 2 and 3 are mechanical.\n\n### 1. Write a brief\n\nCopilot sees only the text you send. It cannot read your conversation: the brief must stand alone\nwith the goal, current state, what to change, what to leave untouched, the project's **real**\ngates, and a report contract. Keep each brief to a single task. Write it to a file and pass it as\nthe relay's `--brief`. See [references/writing-the-brief.md](references/writing-the-brief.md).\n\n### 2. Dispatch\n\nUse the bundled relay. It runs `copilot -p` with `--output-format json --no-color --stream off`,\ncaptures the JSONL event stream, and writes `result.json`.\n\n```bash\nnode \"<skill-dir>/scripts/relay.mjs\" --brief brief.txt --cd /path/to/repo\n# choose a model:                    add --model <name>\n# set reasoning effort:              add --effort <level>\n# read-only planning pass:           add --read-only  (forces --mode plan)\n# full tool autonomy:                add --allow-all-tools\n# hard time limit (watchdog):        add --timeout 2h   (the 30m default suits brief runs)\n# resume a session:                  add --session <id>  or  --resume-last\n# see all options:                   node .../relay.mjs --help\n```\n\nThe child's cwd pins the workspace. The relay writes artifacts under the system temp dir by\ndefault and never commits. See [references/dispatch-and-poll.md](references/dispatch-and-poll.md).\n\n### 3. Wait for completion\n\nThe relay blocks until copilot finishes. Run it with the orchestrator's background-command\nfacility, or background it in the shell and poll for `result.json`. A pre-run usage error exits 2\nand writes no result; a missing `copilot` exits 127 and writes `status: \"copilot_unavailable\"`.\n\nCompletion means the process exited and `result.json` exists — trust process state and the\nworking tree, not the progress display. Copilot's final assistant message is the `finalMessage`\nfield of `result.json`.\n\n### 4. Review — do not trust the self-report\n\n- Re-run the project's gates yourself.\n- Read the diff against the brief, starting with `touchedFiles`.\n- Run relevant guard skills if installed.\n\nSee [references/review-and-land.md](references/review-and-land.md).\n\n### 5. Land it\n\nIf the work is good, commit it. The relay never commits — the diff and `result.json` are the\nrecord; run `git status` and `git diff` first to confirm exactly what changed. If the group has a\nPR flow, make the commit and push a branch; let human review happen. If the diff is wrong or\nincomplete, re-dispatch a corrected brief in a fresh run and review again.\n\n## Autonomy and permissions\n\nWithout `--allow-all-tools`, copilot auto-denies tool calls in headless mode: the process exits 0\nbut the relay detects the denial events and reports `status: \"failed\"` with the CLI's own error\nmessage and a hint to pass `--allow-all-tools`. This is the honest default — the orchestrator sees\nthe failure rath",
+      "tags": [
+        "node",
+        "ai",
+        "agent"
+      ],
+      "useCases": [
+        "You want to delegate a bounded coding task to a separate `copilot` implementer (`GitHub Copilot CLI`) and then review its diff yourself.",
+        "The user explicitly asked for delegation to this implementer."
+      ],
+      "scrapedAt": "2026-08-28T18:30:35.503Z"
+    },
+    {
       "id": "antigravity-copilot-sdk",
       "name": "copilot-sdk",
       "slug": "copilot-sdk",
@@ -14303,6 +14499,29 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-07-02T09:26:00.361Z"
+    },
+    {
+      "id": "antigravity-cursor-delegate",
+      "name": "cursor-delegate",
+      "slug": "cursor-delegate",
+      "description": "Delegate coding tasks to the Cursor Agent CLI (`cursor-agent`) only when the user explicitly requests it, while the orchestrator retains review and landing responsibility.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cursor-delegate",
+      "content": "# Cursor Delegate\n\n## When to Use\n\n- You want to delegate a bounded coding task to a separate `cursor` implementer (`Cursor Agent`) and then review its diff yourself.\n- The user explicitly asked for delegation to this implementer.\n\nYou are the **orchestrator**. Hand a bounded coding task to a separate **implementer** — the Cursor\nAgent CLI — then review what it produced and land it yourself. You write the brief and own the\njudgment; Cursor does the typing in its own session; you verify and commit.\n\nThe loop needs only a shell command and file access, so any comparable orchestrator can drive it.\n\n## When NOT to use this\n\n- The task is small enough to do inline; delegation overhead is not worth it.\n- The `cursor-agent` CLI is not installed or authenticated (run `cursor-agent login`).\n- You want to write the code yourself, or you only need Cursor's opinion on code you wrote (a\n  `--read-only` dispatch covers that — see below — but a plain review may not need delegation at all).\n\n## Prerequisites (check once)\n\n1. `cursor-agent --version` succeeds. If not, follow the installer for your platform at\n   [cursor.com/cli](https://cursor.com/cli), inspect what it will run, and authenticate with\n   `cursor-agent login`.\n2. `cursor-agent status` shows you logged in.\n3. You are in (or will point `--cd` at) the target git repository. The relay passes `--trust`, so\n   point it only at repositories you trust.\n\n## Choose the model\n\nOmitting `--model` uses your Cursor default (usually `auto` — Cursor picks). To pin one, pass\n`--model <name>` with a name from the account's live `cursor-agent models` output — select from that\nlist rather than inventing a name. Parameterized forms like `<name>[context=1m,effort=high]` are\nforwarded as-is. The model that actually served the run is recorded as `resolvedModel` in\n`result.json`.\n\n## The loop\n\nRun these five steps per task. Steps 1, 4, and 5 require judgment; 2 and 3 are mechanical.\n\n### 1. Write the brief\n\nCursor sees only the text you send plus what it can inspect in the workspace — no chat history or\nshared context. Include the goal, current state, what to change, what to leave untouched, the\nproject's **actual** gates, and a report contract. Tell Cursor not to commit. Keep one task per\nbrief. See [references/writing-the-brief.md](references/writing-the-brief.md).\n\n### 2. Dispatch\n\nUse the bundled helper. It wraps `cursor-agent -p`, feeds the brief on stdin, captures the\nstructured event stream, and writes `result.json`. (`<skill-dir>` is the installed folder containing\nthis `SKILL.md`.)\n\n```bash\nnode \"<skill-dir>/scripts/relay.mjs\" --brief brief.txt --cd /path/to/repo\n# read-only (plan mode — review/diagnosis, no edits):  add --read-only\n# write-capable without automatic command approval:   add --no-force\n# explicitly override Cursor's sandbox for this run:  add --sandbox enabled|disabled\n# pin a model from `cursor-agent models`:              add --model <name>\n# resume the most recent session:                      add --resume-last  (delta brief only)\n# resume a specific session:                           add --session <id> (delta brief only)\n# hard time limit (watchdog):                          add --timeout 2h  (the 30m default suits short runs; implementation briefs routinely need 1-2h)\n# see all options:                                     node .../relay.mjs --help\n```\n\nThe child process's cwd pins the workspace. On Cursor `2026.07.23` or newer, use repeatable\n`--add-dir` flags only for extra workspace directories. The relay writes artifacts under the system\ntemp dir by default and never commits. See\n[references/dispatch-and-poll.md](references/dispatch-and-poll.md).\n\n### 3. Wait for completion\n\nThe helper blocks until Cursor finishes. Run it with the orchestrator's background-command facility,\nor background it in the shell and poll for `result.json`. A pre-run usage error exits 2 and writes no\nresult; a missing `cursor-agent` exits 127 and writes `status: \"cursor_agent_unavailable\"`.\n\nTrust process state and the working tree over a progress display. Completion means the process exited\nand `result.json` exists. Cursor's full report is the `finalMessage` field in `result.json` (also\nprinted in full on stdout between the report markers).\n\n**Windows + hooks caveat:** if the user has Cursor hooks configured (`~/.cursor/hooks.json`, or\nClaude Code `PreToolUse` hooks, which cursor-agent imports), dispatching from a Git Bash (MSYS)\nconsole makes cursor-agent feed PowerShell-syntax hook wrappers to bash, so every command Cursor\ntries to run is blocked — edits still land, gates do not run. Dispatch from a PowerShell or cmd\nconsole instead. Details: [references/dispatch-and-poll.md](references/dispatch-and-poll.md).\n\n### 4. Review — do not trust the self-report\n\nTreat Cursor's final message and gate claims as claims:\n\n- Re-run the project's gates yourself.\n- Read the diff against the brief, starting with `touchedFiles`.\n- Run relevant guard skills if installed.\n- Round-trip migration",
+      "tags": [
+        "node",
+        "claude",
+        "ai",
+        "agent",
+        "design"
+      ],
+      "useCases": [
+        "You want to delegate a bounded coding task to a separate `cursor` implementer (`Cursor Agent`) and then review its diff yourself.",
+        "The user explicitly asked for delegation to this implementer."
+      ],
+      "scrapedAt": "2026-08-28T18:31:09.030Z"
     },
     {
       "id": "antigravity-customer-psychographic-profiler",
@@ -15281,6 +15500,30 @@
       "scrapedAt": "2026-02-20T07:07:05.505Z"
     },
     {
+      "id": "antigravity-debate-review",
+      "name": "debate-review",
+      "slug": "debate-review",
+      "description": "Two-model debate review of a GitHub PR, GitLab MR, Azure DevOps PR, or local working tree, posted as inline comments or printed. Use for any PR/MR review request, or a local review before a PR exists.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/debate-review",
+      "content": "# debate-review\n\n## When to Use\n\n- You have a GitHub PR or GitLab MR that needs a thorough pre-merge review.\n- You want a two-model debate (main reviewer vs. debate reviewer) to catch blind spots before posting inline comments.\n\nTwo models argue before anything is posted. A main reviewer finds issues. A debate reviewer tries to\nknock them down and may add its own. The main reviewer then makes the final call, and one review with\ninline comments lands on the PR or MR. It posts from the user's own `gh`, `glab` or `az` account as a\nnon-approval review or comment. It never approves and never requests changes.\n\nYou are the orchestrator. You run one command and relay the result. You do not review the diff\nyourself, and you do not touch the PR.\n\n## Run it\n\n```bash\nnode \"<skill-dir>/scripts/review-pr.mjs\" --local [--base <ref>]\nnode \"<skill-dir>/scripts/review-pr.mjs\" <pr-url | number> [--dry-run]\n```\n\n- If the user wants a review and there is no PR/MR URL, run `--local` from the repo (or `--repo-dir`). Do not invent a URL. Relay stdout. `--local` never talks to a forge and rejects non-UTF-8 Git paths rather than decoding them lossily.\n- `<pr-url>` is a GitHub `/pull/N`, GitLab `/-/merge_requests/N`, or Azure DevOps\n  `/_git/<repo>/pullrequest/N` URL (`dev.azure.com` or the legacy `*.visualstudio.com`). A bare number\n  resolves against the cwd's `origin`, including Azure DevOps https and `ssh.dev.azure.com:v3/` remotes.\n- `--dry-run` prints a live PR review instead of posting it. It does not combine with `--local`.\n- Azure DevOps needs `az` logged in (`az login`) with access to the project. No extension is required,\n  the script talks to the REST API through `az rest`. A review there is N inline comment threads plus\n  one closed summary thread, since Azure DevOps has no single review object; the alert blockquotes\n  render as plain quotes, which still read.\n- The reviewers are two delegate-skills lanes, `review-main` and `review-debate`. If either is missing\n  the script says so. Add them with `delegate-setup`. Pick two different implementers, since the debate\n  is only worth something when the second model doesn't share the first one's blind spots (main\n  `claude` or `grok`, debate `codex` at high effort is a good pair). For a one-off, pass\n  `--main <implementer>` or `--debate <implementer>`. Only implementers whose relay has `--read-only`\n  are accepted. These two lanes belong to the reviewer. Don't point them at a lane you use for other\n  work, such as a plan-debate lane.\n- Exit code `3` means this head sha already has a debate-review. Re-run with `--force` to post again.\n- A run takes minutes, since it is two or three implementer sessions back to back. Run it in the\n  background and report the printed URL when it finishes. Don't poll tightly.\n\nAll flags: `--help`. Contracts: [references/schema.md](references/schema.md). What gets posted:\n[references/comment-format.md](references/comment-format.md). The reviewer briefs live in `assets/prompts/`\nand the script fills them in; you don't need to read them.\n\n## After it posts\n\nEach posted comment carries a `<!-- debate-review:<id> status=... -->` marker. `babysit-pr` handles\nGitHub and GitLab rounds (verify, fix blockers, reply, resolve). It cannot harvest Azure DevOps yet,\nso relay Azure findings directly to the user. Don't act on the findings yourself unless asked.\n\n## Artifacts\n\n`~/.cache/debate-review/<owner>__<repo>/<N>/<head>/` holds `run.json` (all three documents, timings,\nwhat was posted) plus `main/`, `debate/`, and `final/`, each with the brief sent and the relay's\n`result.json`.\n`--local` writes under `~/.cache/debate-review/local/<repo>/<branch>/<head>/` instead.\n\n\n## Limitations\n\n- Requires `delegate-skills` with `review-main` and `review-debate` lanes and authenticated `gh`/`glab`.\n- Docs-only import — executable helpers (`scripts/`) not included; see upstream for full runtime. Posts a single `COMMENT` review only.\n\n> Adapted from [amElnagdy/review-skills](https://github.com/amElnagdy/review-skills) (MIT) — docs-only, runtime not bundled.\n",
+      "tags": [
+        "node",
+        "api",
+        "claude",
+        "ai",
+        "document",
+        "azure"
+      ],
+      "useCases": [
+        "You have a GitHub PR or GitLab MR that needs a thorough pre-merge review.",
+        "You want a two-model debate (main reviewer vs. debate reviewer) to catch blind spots before posting inline comments."
+      ],
+      "scrapedAt": "2026-08-28T18:31:26.289Z"
+    },
+    {
       "id": "antigravity-debug-buttercup",
       "name": "debug-buttercup",
       "slug": "debug-buttercup",
@@ -15555,6 +15798,30 @@
         "Use for docs, articles, blog posts, and similar public web content."
       ],
       "scrapedAt": "2026-03-22T07:03:11.511Z"
+    },
+    {
+      "id": "antigravity-delegate-setup",
+      "name": "delegate-setup",
+      "slug": "delegate-setup",
+      "description": "Configure approved delegation lanes across installed implementer CLIs, including optional model and effort choices, then write global or project config only after explicit user approval.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/delegate-setup",
+      "content": "# Delegate Setup\n\n## When to Use\n\n- You want to configure which implementer CLI handles which kind of work (fleet lanes).\n- You need to discover installed implementers and write lane config after user approval.\n\nYou are the **orchestrator** in **setup mode**. Discover installed implementer CLIs, propose a\n**fleet of lanes**, and write configuration only after the user approves.\n\nThis skill does **not** dispatch coding work. It only authors the lane map.\n\nOne concept: **lanes**. Never say “routes.”\n\nExample lane: **feature** → implementer `opencode`, model `opencode/grok`, variant `high`\n(OpenCode uses `variant` for reasoning intensity, not `effort`).\n\n## When NOT to use this\n\n- The user wants a task implemented — use the matching `*-delegate` skill instead.\n- A one-off model change on a single dispatch — pass `--model` / `--effort` / `--variant` on that relay.\n\n## Hard rules\n\n1. Every lane **must** include `implementer`.\n2. Put dials on the same object (`model`, `effort` or `variant`, …) only if that implementer supports them — see [references/schema.md](references/schema.md).\n3. Show a human-readable lane table **and** the full JSON before every write; re-show after every tweak.\n4. Write **only** after an explicit approval (“yes”, “approve”, “write it”).\n5. Ask scope unless already clear: **global** (all projects) vs **this repo only**. Never create a project file just because cwd is a git repo. If there is no git repo, default to global and say so.\n6. Do not invent model identifiers.\n7. In interview or usage-scan mode, never write **any** dial the user did not give you and the schema does not require — omit it, so the CLI’s or relay’s own default applies.\n8. Prefer 3–5 useful lanes over a kitchen-sink map.\n9. Never edit `AGENTS.md`, `CLAUDE.md`, or other user agent-instruction files.\n10. Never run a `*-delegate` relay from this skill.\n\n(`<skill-dir>` is this skill’s install directory — the folder that contains this `SKILL.md`.)\n\n## Flow\n\n`discover → load → grounding menu → propose (with Basis) → scope → approve → write`\n\n### 1. Discover\n\n```bash\nnode \"<skill-dir>/scripts/discover.mjs\"\n```\n\nSummarize installed vs missing, auth (`true` / `false` / `null` = unknown), and whether models were\n`reported`, `aliases` (curated aliases in the registry, not live discovery — full model names also\nwork), `unsupported`, or `failed`.\n\n### 2. Load existing (effective map)\n\n```bash\nnode \"<skill-dir>/scripts/config.mjs\" load --cwd \"$PWD\"\n```\n\n- Neither present → “No lanes configured yet.”\n- Otherwise → table of **effective** lanes with a Source column (`global` / `project`). Do not paste\n  both raw files unless asked.\n- If `projectPresent` is true and `projectTrusted` is false, label the project lanes **untrusted**.\n  They cannot dispatch until the user reviews and approves a project write.\n\n### 3. Propose\n\nDiscovery reports capability, never task fit. So ask **one** grounding question before proposing\nanything — one question, three options, not a wizard:\n\n> How should I pick the lanes? **(1) Quick defaults** — I decide, no questions.\n> **(2) Interview** — about four questions on how you want work allocated.\n> **(3) Usage scan** — I re-read your CLIs’ local session folders (counts and dates only, never the\n> conversations) and let the numbers place your lanes — if one CLI dominates, expect one question\n> about its role. Happy to do 2 and 3 together.\n\n- **Quick defaults** → propose immediately.\n- **Interview** → the four questions (allocation policy, never model rankings) and how to ask them\n  (one medium per round) live in [references/setup-dialogue.md](references/setup-dialogue.md) — read\n  it before you ask.\n- **Usage scan** → `node \"<skill-dir>/scripts/discover.mjs\" --usage`. Tell the user it is metadata\n  only before running it. Each discovered CLI gains `usage: { sessions, lastUsed }`; `null` means no\n  probe is wired — unknown, not unused.\n- **Both** → run the scan first, then ask only what the numbers cannot answer.\n- Inside a git repo, repo signals (languages, test weight, frontend share) are a fourth source of\n  evidence. They do not change the menu; they feed the proposal and the `repo` basis.\n\n**That menu is also the consent surface** — the option chosen sets how much of the map is yours to\ndecide:\n\n- **Quick defaults** — the user hired your opinion. A full map is legitimate, dials included; label\n  every lane `my opinion`, say plainly that the map is your opinion, and keep it cheap to revise.\n- **Interview / usage scan** — evidence modes, so **every** dial is gated (rule 7): set one only from\n  the user’s answer, or where the schema requires it (opencode lanes require `model`). Omitting is\n  always safe — every dial has a default the user already lives with, and a CLI’s configured default\n  is their standing choice, better evidence than your priors. Choosing which installed implementer\n  gets a lane is still yours — Basis `my opinion` — but a dial that raises spend is not: offer your\n  dial picks only as an add",
+      "tags": [
+        "node",
+        "claude",
+        "ai",
+        "agent",
+        "security",
+        "cro"
+      ],
+      "useCases": [
+        "You want to configure which implementer CLI handles which kind of work (fleet lanes).",
+        "You need to discover installed implementers and write lane config after user approval."
+      ],
+      "scrapedAt": "2026-08-28T18:31:32.082Z"
     },
     {
       "id": "antigravity-delegating-to-agents",
@@ -19372,6 +19639,31 @@
       "scrapedAt": "2026-01-31T06:52:06.560Z"
     },
     {
+      "id": "antigravity-falsify",
+      "name": "falsify",
+      "slug": "falsify",
+      "description": "The scientific thinking protocol for AI agents. Use when facing complex, ambiguous, or high-stakes questions where guessing is costly: hypothesis → attempt to break it → evidence → calibrated conclusion.",
+      "category": "Creative & Media",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/falsify",
+      "content": "\n# Falsify — The Scientific Thinking Protocol\n\n> Think like a first-rate scientist: doubt first, verify, then believe.\n> 像一流科学家一样思考：先证伪，再相信；先标不确定，再下结论。\n\n## Overview\n\nfalsify is a single-Markdown skill that installs a 5-stage scientific thinking protocol on any AI agent (Codex, Claude Code, DeepSeek Harness, Cursor, Gemini CLI, and 20+ more). It stops the agent from giving confident answers it cannot falsify. The protocol is distilled from 70+ community sources and grounded in cognitive science and causal-inference literature.\n\n## The Iron Law\n\n\n```\nNO VERDICT WITHOUT A FALSIFIABLE HYPOTHESIS.\n没有可证伪的假设，就没有结论。\n```\n\n<EXTREMELY-IMPORTANT>\nIf you cannot write down what would prove you wrong, you are not allowed to conclude. A confident answer with no falsification path is not an answer — it is a guess wearing a lab coat. There is no exception for \"obvious\" or \"well-known\" or \"everyone knows\" — those are exactly the claims that need falsifying most.\n</EXTREMELY-IMPORTANT>\n\n## When to Use This Skill\n\n\n**Activate (depth mode)** for:\n- Architecture / design decisions with trade-offs\n- \"Why\" questions about a failing system or data anomaly\n- Recommendations that will be acted on (a library, a fix, a strategy)\n- Claims about what a user, market, or system \"will\" do\n- Anything where being wrong costs time, money, or trust\n\n**Do NOT activate (answer simply)** for:\n- Factual recall you can verify in one lookup\n- Trivial questions where the answer is obvious and consequences are zero\n- Small talk. Not everything is a thesis defense.\n\nEvery rule below is contextual: read the question first, then pull only what fits. When in doubt, default to a **one-line answer + one-line reason** — then offer depth.\n\n## How It Works\n\n\nEach stage has a deliverable. Do not skip ahead. The protocol is the point. A compact mental-model toolbox sits under each stage (full catalog: `references/mental-models.md`).\n\n### Stage 0 — Read the room (读题)\nRestate the actual question in one sentence. Name the stakes: who acts on this answer, and what happens if it is wrong. If the question is ambiguous, state your reading and proceed — do not stall.\n\n**Orientation check** — before reasoning, notice if the answer is already emotionally committed (this is not about the user; it is about you):\n- *Conclusion-preserving*: already leaning one way and explaining away the rest → ask \"what would have to be true for the other side to win?\"\n- *Completion-seeking*: wants *an* answer, not *the right* answer → insert a pause before settling.\n- *Authority-preserving*: attached to sounding expert → stress-test the idea as if advising someone else.\n- If you catch any of these, name it silently and compensate. Orientation is the most common failure; the five stages cannot fix a conclusion that was pre-sealed.\n\n**Frontier questioning** — if you need input from the user, ask the whole open frontier in **one round**: number each question and give your recommended answer next to it. Never ask for anything you could look up yourself. One question at a time is interrogation, not collaboration. The user's answers unblock the next frontier; recompute and repeat.\n\n**Effort routing** (Kahneman dual-process / Simon bounded rationality): before choosing depth, route the question explicitly. Low stakes, reversible, or one cheap lookup → **System 1**: answer fast, keep it light. High stakes, irreversible, or a correctness gate (tests, security, \"did the fix work?\") → **System 2**: run the full protocol. Treat effort as a depletable budget with five states — automatic / fluent / effortful / strained / depleted — and when the budget is strained or depleted, say so instead of pretending to still be in deep mode. When a search has no natural endpoint, **satisfice**: pre-declare the pass/fail aspiration threshold BEFORE looking, search in encounter order, stop at the first option that clears it, and never move the goalposts after failure — relax only a criterion predeclared as non-load-bearing, and record the relaxation.\n\n**Situation routing** (Cynefin / Snowden): before choosing a method, classify the cause–effect domain — the wrong-domain method is itself the failure mode. **Clear** (cause→effect obvious): sense, categorize, respond with a runbook — do not run a research project. **Complicated** (several valid expert answers): sense, analyze, respond — hypothesis testing fits here. **Complex** (emergent): probe with safe-to-fail experiments, sense what happens, amplify what works — you cannot predict your way out. **Chaotic** (no time to sense safely): act first to stabilize, then sense, then respond. **Disorder**: split the problem into parts and classify each. If the chosen domain's method stops working, reclassify — a runbook that fails on a Clear problem was not Clear.\n\n**Time-pressure mode** (Boyd OODA): when the situation is moving and waiting for certainty costs more than a reversible action, do not run the full protocol — act at ~70% confidence with a known rollback, then immediat",
+      "tags": [
+        "markdown",
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "template",
+        "design",
+        "security",
+        "rag",
+        "cro"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-08-28T18:32:54.611Z"
+    },
+    {
       "id": "antigravity-family-health-analyzer",
       "name": "family-health-analyzer",
       "slug": "family-health-analyzer",
@@ -22894,6 +23186,36 @@
       "scrapedAt": "2026-04-18T07:21:01.136Z"
     },
     {
+      "id": "antigravity-graceful-shutdown",
+      "name": "graceful-shutdown",
+      "slug": "graceful-shutdown",
+      "description": "Implement graceful shutdown for servers and workers: drain connections, finish in-flight work, release resources, and exit cleanly on SIGTERM/SIGINT.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/graceful-shutdown",
+      "content": "\n# Graceful Shutdown\n\n## Overview\n\nA skill for implementing graceful shutdown in servers, workers, and long-running processes. Ensures in-flight requests complete, background jobs finish or checkpoint, database connections close cleanly, and the process exits with a proper status code. Essential for zero-downtime deployments in container orchestrators (Kubernetes, ECS, Docker Compose) and bare-metal process managers (systemd, PM2).\n\n## When to Use This Skill\n\n- Use when building an HTTP server that must not drop active connections during deploys\n- Use when writing a background worker that processes jobs from a queue\n- Use when deploying to Kubernetes, Docker, or any environment that sends SIGTERM before killing\n- Use when the user says \"graceful shutdown\", \"drain connections\", \"handle SIGTERM\", \"zero downtime\", or \"don't kill active requests\"\n- Use when implementing health check endpoints (`/healthz`, `/readyz`) for orchestrators\n\n## How It Works\n\n### Step 1: Register signal handlers early\n\nTrap `SIGTERM` (orchestrator shutdown) and `SIGINT` (Ctrl+C) at process startup. Set a flag so the application knows it is shutting down.\n\n```typescript\nlet isShuttingDown = false;\n\nfunction onShutdownSignal(signal: string): void {\n  if (isShuttingDown) return; // prevent double-shutdown\n  isShuttingDown = true;\n  console.log(`Received ${signal}, starting graceful shutdown...`);\n  shutdown();\n}\n\nprocess.on(\"SIGTERM\", () => onShutdownSignal(\"SIGTERM\"));\nprocess.on(\"SIGINT\", () => onShutdownSignal(\"SIGINT\"));\n```\n\n### Step 2: Stop accepting new work\n\nImmediately stop the server from accepting new connections. For HTTP servers, call `server.close()`. For queue workers, stop polling for new jobs.\n\n```typescript\nasync function shutdown(): Promise<void> {\n  // 1. Stop accepting new connections\n  server.close(() => {\n    console.log(\"Server closed — no new connections accepted\");\n  });\n\n  // 2. Mark health check as not-ready so load balancers stop routing\n  //    (readiness probe returns 503 from this point)\n}\n```\n\n### Step 3: Drain in-flight work with a deadline\n\nWait for active requests and background tasks to finish, but enforce a hard deadline so the process never hangs indefinitely.\n\n```typescript\nconst DRAIN_TIMEOUT_MS = 25_000; // must be less than orchestrator's terminationGracePeriodSeconds\n\nasync function drainAndExit(): Promise<void> {\n  const deadline = setTimeout(() => {\n    console.error(\"Drain timeout reached — forcing exit\");\n    process.exit(1);\n  }, DRAIN_TIMEOUT_MS);\n  deadline.unref(); // don't keep the event loop alive just for the timer\n\n  try {\n    // Wait for active connections to finish\n    await waitForActiveConnections();\n\n    // Flush buffered data (logs, metrics, queues)\n    await flushBuffers();\n\n    // Close external resource handles\n    await closeResources();\n\n    console.log(\"Graceful shutdown complete\");\n    process.exit(0);\n  } catch (err) {\n    console.error(\"Error during shutdown:\", err);\n    process.exit(1);\n  }\n}\n```\n\n### Step 4: Implement readiness and liveness probes\n\nOrchestrators use these to decide whether to route traffic and whether to restart the container.\n\n```typescript\nimport { createServer, IncomingMessage, ServerResponse } from \"node:http\";\n\nfunction handleHealthCheck(req: IncomingMessage, res: ServerResponse): void {\n  if (req.url === \"/healthz\") {\n    // Liveness: is the process alive and not deadlocked?\n    res.writeHead(200).end(\"ok\");\n    return;\n  }\n\n  if (req.url === \"/readyz\") {\n    // Readiness: should traffic be routed here?\n    if (isShuttingDown) {\n      res.writeHead(503).end(\"shutting down\");\n    } else {\n      res.writeHead(200).end(\"ready\");\n    }\n    return;\n  }\n}\n```\n\n### Step 5: Track active connections\n\nMaintain a count of in-flight requests so you know when draining is complete.\n\n```typescript\nlet activeConnections = 0;\nlet drainResolve: (() => void) | null = null;\n\nfunction onRequestStart(): void {\n  activeConnections++;\n}\n\nfunction onRequestEnd(): void {\n  activeConnections--;\n  if (isShuttingDown && activeConnections === 0 && drainResolve) {\n    drainResolve();\n  }\n}\n\nfunction waitForActiveConnections(): Promise<void> {\n  if (activeConnections === 0) return Promise.resolve();\n  return new Promise((resolve) => {\n    drainResolve = resolve;\n  });\n}\n```\n\n## Examples\n\n### Example 1: Express.js server with graceful shutdown\n\n```typescript\nimport express from \"express\";\nimport { createServer } from \"node:http\";\n\nconst app = express();\nconst server = createServer(app);\nlet isShuttingDown = false;\nlet activeRequests = 0;\n\n// Track in-flight requests\napp.use((req, res, next) => {\n  if (isShuttingDown) {\n    res.setHeader(\"Connection\", \"close\");\n    res.status(503).json({ error: \"Server is shutting down\" });\n    return;\n  }\n  activeRequests++;\n  res.on(\"finish\", () => activeRequests--);\n  next();\n});\n\n// Health endpoints\napp.get(\"/healthz\", (_, res) => res.send(\"ok\"));\napp.get(\"/readyz\", (_, res) => {\n  res.status(isShuttingDown ? 503 : 200).send(isShuttingDown ",
+      "tags": [
+        "python",
+        "typescript",
+        "node",
+        "api",
+        "claude",
+        "ai",
+        "template",
+        "docker",
+        "kubernetes"
+      ],
+      "useCases": [
+        "Use when building an HTTP server that must not drop active connections during deploys",
+        "Use when writing a background worker that processes jobs from a queue",
+        "Use when deploying to Kubernetes, Docker, or any environment that sends SIGTERM before killing",
+        "Use when the user says \"graceful shutdown\", \"drain connections\", \"handle SIGTERM\", \"zero downtime\", or \"don't kill active requests\"",
+        "Use when implementing health check endpoints (`/healthz`, `/readyz`) for orchestrators"
+      ],
+      "scrapedAt": "2026-08-28T18:33:57.659Z"
+    },
+    {
       "id": "antigravity-design-it-gradient-design",
       "name": "gradient-design",
       "slug": "design-it-gradient-design",
@@ -23105,6 +23427,32 @@
         "Use when the user says \"use grok\", \"grok build\", \"have grok implement\", or \"send to grok\""
       ],
       "scrapedAt": "2026-07-10T10:23:42.218Z"
+    },
+    {
+      "id": "antigravity-grok-delegate",
+      "name": "grok-delegate",
+      "slug": "grok-delegate",
+      "description": "Delegate coding tasks to the Grok Build CLI only when the user explicitly requests it, while the orchestrator retains review and landing responsibility.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/grok-delegate",
+      "content": "# Grok Delegate\n\n## When to Use\n\n- You want to delegate a bounded coding task to a separate `grok` implementer (`Grok Build`) and then review its diff yourself.\n- The user explicitly asked for delegation to this implementer.\n\nYou are the **orchestrator**. This skill lets you hand a bounded coding task to a separate\n**implementer** — the Grok Build CLI (`grok`) — then review what it produced and land it yourself. You\nwrite the brief and own the judgment; Grok does the typing under an explicit autonomy profile; you\nverify and commit.\n\nNothing here is specific to one orchestrating agent. The loop needs only the ability to run a shell\ncommand and read a file, so it works the same whether you are Claude Code, Cursor, OpenCode with a\nselected model, or any comparable agent. (It is designed for Claude Code and Cursor; treat other\norchestrators as designed-for, not yet proven.)\n\n## When NOT to use this\n\n- The task is small enough to just do inline — delegation overhead is not worth it.\n- The `grok` CLI is not installed, not authenticated, or the account lacks Grok Build beta access.\n- You want to write the code yourself, or you only need a review without an implementer run.\n\n## Prerequisites (check once)\n\n1. `grok version` succeeds. If not, install on any platform with\n   `npm i -g @xai-official/grok` (or use the installer from xAI's official Grok CLI docs) and\n   authenticate (`grok login`, or `grok login --device-auth` on headless hosts, or set\n   `XAI_API_KEY`).\n2. **Confirm which `grok` is on PATH.** `command -v grok` shows the active binary and `grok version`\n   its version — the relay records the version it ran into `result.json`, so a stale binary is visible\n   after the fact.\n3. You are in (or will point `--cd` at) the target git repository.\n\n## The loop\n\nRun these five steps per task. Steps 1, 4, and 5 are your judgment; 2 and 3 are mechanical.\n\n### 1. Write the brief\n\nGrok sees **only** the text you send — no orchestrator chat history, no shared context. Everything the\ntask needs goes in the brief: the goal, the current state, what to change, what to leave untouched,\nthe project's **actual** gate commands (discover them from the repo's CLAUDE.md/AGENTS.md/Makefile —\ndo not assume), and a report contract. Tell Grok it will **not** commit (you will). Keep one task per\nbrief. Full guidance and a template: [references/writing-the-brief.md](references/writing-the-brief.md).\n\n### 2. Dispatch\n\nSend the brief to Grok with the bundled helper. It wraps `grok -p`, captures the run, and writes a\nstructured `result.json` — so your only job is \"run a command, read a file.\" (`<skill-dir>` below is\nthis skill's installed directory — the folder containing this `SKILL.md`, i.e. the directory you loaded\nthe skill from. Claude Code prints it as \"Base directory for this skill\" when the skill loads; on other\norchestrators use that same directory — if unsure where it landed, run\n`find ~ -name relay.mjs -path '*grok-delegate*'` and substitute the directory above it.)\n\n```bash\nnode \"<skill-dir>/scripts/relay.mjs\" --brief brief.txt --cd /path/to/repo\n# read-only (review/diagnosis; best-effort — verify touchedFiles): add --read-only\n# continue the previous Grok session:       add --resume-last  (send only the delta brief)\n# hard time limit (watchdog):               add --timeout 2h  (default: off; implementation runs routinely need 1-2h)\n# see all options:                          node .../relay.mjs --help\n```\n\nThe helper defaults to a write-capable (`workspace-write`) autonomy profile — `--always-approve` plus\n`--sandbox workspace` — and writes its artifacts to a temp dir, so the repo under review stays clean.\nIt **never commits** — see step 5. Mechanics, flags, and the `result.json` shape:\n[references/dispatch-and-poll.md](references/dispatch-and-poll.md).\n\n### 3. Wait for completion\n\nThe helper blocks until Grok finishes, so back it with whatever your orchestrator offers and resume\nwhen it returns:\n\n- **Claude Code:** run the Bash call with `run_in_background: true`; you are notified on completion.\n- **Plain shell / other agents:** run it in the foreground for short tasks, or background it and poll\n  the result file — `… &` in bash/zsh (including Git Bash/WSL), or your shell's equivalent (`Start-Job`\n  in PowerShell, `start /b` in cmd). The run is done when `result.json` exists with a `status`. (A\n  pre-run usage error — bad args or an empty brief — instead exits with code 2 and a stderr message and\n  writes no result file, so check the exit code too. A missing `grok` binary exits 127 but *does* write\n  a `result.json` with status `grok_unavailable`.)\n\nDo not trust progress trackers over reality: a run is finished when `result.json` is written and the\nprocess has exited. Read the working tree, not a status line. The implementer's full report is\nthe `finalMessage` field in `result.json` (also printed in full on stdout between the report markers).\n\n### 4. Review — do not trust the self-report\n\nGrok's `result.json` includes its own",
+      "tags": [
+        "node",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "template",
+        "design",
+        "rag"
+      ],
+      "useCases": [
+        "You want to delegate a bounded coding task to a separate `grok` implementer (`Grok Build`) and then review its diff yourself.",
+        "The user explicitly asked for delegation to this implementer."
+      ],
+      "scrapedAt": "2026-08-28T18:34:01.385Z"
     },
     {
       "id": "antigravity-growth-engine",
@@ -25433,143 +25781,18 @@
       "scrapedAt": "2026-01-26T13:19:02.776Z"
     },
     {
-      "id": "antigravity-instagram",
-      "name": "instagram",
-      "slug": "instagram",
-      "description": "Integracao completa com Instagram via Graph API. Publicacao, analytics, comentarios, DMs, hashtags, agendamento, templates e gestao de contas Business/Creator.",
-      "category": "Business & Marketing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/instagram",
-      "content": "\n# Skill: Instagram Integration\n\n## Overview\n\nIntegracao completa com Instagram via Graph API. Publicacao, analytics, comentarios, DMs, hashtags, agendamento, templates e gestao de contas Business/Creator.\n\n## When to Use This Skill\n\n- When the user mentions \"instagram\" or related topics\n- When the user mentions \"ig\" or related topics\n- When the user mentions \"post instagram\" or related topics\n- When the user mentions \"publicar instagram\" or related topics\n- When the user mentions \"reels instagram\" or related topics\n- When the user mentions \"stories instagram\" or related topics\n\n## Do Not Use This Skill When\n\n- The task is unrelated to instagram\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## How It Works\n\nControle completo da conta Instagram via Graph API. Publicação, comunidade, analytics,\nDMs, hashtags, templates e dashboard — tudo gerido com governança (rate limits, audit log,\nconfirmações antes de ações públicas).\n\n## Resumo Rápido\n\n| Área | Scripts | O que faz |\n|------|---------|-----------|\n| **Setup** | `account_setup.py`, `auth.py` | Configurar conta, OAuth, token |\n| **Publicação** | `publish.py`, `schedule.py` | Publicar foto/vídeo/reel/story/carrossel, agendar |\n| **Comunidade** | `comments.py`, `messages.py` | Comentários, DMs, menções |\n| **Analytics** | `insights.py`, `analyze.py` | Métricas, melhores horários, top posts |\n| **Hashtags** | `hashtags.py` | Pesquisa e tracking |\n| **Inteligência** | `templates.py`, `analyze.py` | Templates de conteúdo, tendências |\n| **Infra** | `export.py`, `serve_api.py`, `run_all.py` | Exportar, dashboard, sync |\n| **Leitura** | `profile.py`, `media.py` | Perfil, listar mídia |\n\n## Localização\n\n```\nC:\\Users\\renat\\skills\\instagram\\\n├── SKILL.md\n├── scripts/\n│   ├── requirements.txt\n│   │  # ── CORE ──\n│   ├── config.py                     # Paths, constantes, specs de mídia\n│   ├── db.py                         # SQLite: accounts, posts, comments, insights\n│   ├── auth.py                       # OAuth 2.0, token storage/refresh\n│   ├── api_client.py                 # Instagram Graph API wrapper + retry\n│   ├── governance.py                 # Rate limits, audit log, confirmações\n│   │  # ── FEATURES ──\n│   ├── account_setup.py              # Detecção conta, migração, verificação\n│   ├── publish.py                    # Publicar + upload local via Imgur\n│   ├── schedule.py                   # Orquestrador: approved → published\n│   ├── comments.py                   # Ler/responder/deletar comentários\n│   ├── messages.py                   # DMs (enviar/receber/listar)\n│   ├── insights.py                   # Fetch + store métricas\n│   ├── hashtags.py                   # Pesquisa + tracking\n│   ├── profile.py                    # Ver/atualizar perfil\n│   ├── media.py                      # Listar mídia, detalhes\n│   │  # ── INTELIGÊNCIA ──\n│   ├── templates.py                  # Templates de caption/hashtags\n│   ├── analyze.py                    # Melhores horários, top posts\n│   │  # ── INFRA ──\n│   ├── export.py                     # Exportar JSON/CSV/JSONL\n│   ├── serve_api.py                  # FastAPI + dashboard\n│   └── run_all.py                    # Sync completo\n├── references/\n│   ├── graph_api.md                  # Endpoints e parâmetros\n│   ├── permissions.md                # Scopes OAuth por feature\n│   ├── rate_limits.md                # Limites 2025\n│   ├── account_types.md              # Business vs Creator\n│   ├── publishing_guide.md           # Specs de mídia\n│   ├── setup_walkthrough.md          # Guia Meta App\n│   └── schema.md                     # ER diagram\n├── static/\n│   └── dashboard.html                # Dashboard Chart.js\n└── data/\n    \n\n## Instalação (Uma Vez)\n\n```bash\npip install -r C:\\Users\\renat\\skills\\instagram\\scripts\\requirements.txt\n```\n\n## Configuração Inicial\n\n```bash\n\n## 1. Verificar Tipo De Conta Instagram\n\npython C:\\Users\\renat\\skills\\instagram\\scripts\\account_setup.py --check\n\n## 2. Configurar Oauth (Abre Browser Para Autorização)\n\npython C:\\Users\\renat\\skills\\instagram\\scripts\\auth.py --setup\n\n## 3. Verificar Se Está Tudo Funcionando\n\npython C:\\Users\\renat\\skills\\instagram\\scripts\\profile.py --view\n```\n\nSe a conta for pessoal, o script `account_setup.py --guide` dá instruções de migração\npara Business ou Creator.\n\n## Foto (Aceita Arquivo Local — Faz Upload Automático Via Imgur)\n\npython C:\\Users\\renat\\skills\\instagram\\scripts\\publish.py --type photo --image caminho/foto.jpg --caption \"Texto do post\"\n\n## Vídeo\n\npython C:\\Users\\renat\\skills\\instagram\\scripts\\publish.py --type video --video caminho/video.mp4 --caption \"Meu vídeo\"\n\n## Reel\n\npython C:\\Users\\renat\\skills\\instagram\\scripts\\publish.py --type reel --video caminho/reel.mp4 --caption \"Novo reel!\"\n\n## Story\n\npython C:\\Users\\renat\\skills\\instagram\\scripts\\publish.py --type story --image caminho/story.jpg\n\n## Carrossel (2-10 Imagens)\n\npython C:\\Users\\renat\\skills\\instagram\\scripts\\publish.py ",
-      "tags": [
-        "python",
-        "api",
-        "claude",
-        "ai",
-        "template",
-        "image",
-        "rag",
-        "cro",
-        "marketing"
-      ],
-      "useCases": [
-        "When the user mentions \"instagram\" or related topics",
-        "When the user mentions \"ig\" or related topics",
-        "When the user mentions \"post instagram\" or related topics",
-        "When the user mentions \"publicar instagram\" or related topics",
-        "When the user mentions \"reels instagram\" or related topics"
-      ],
-      "scrapedAt": "2026-03-08T06:56:41.274Z"
-    },
-    {
-      "id": "antigravity-instagram-automation",
-      "name": "instagram-automation",
-      "slug": "instagram-automation",
-      "description": "Automate Instagram tasks via Rube MCP (Composio): create posts, carousels, manage media, get insights, and publishing limits. Always search tools first for current schemas.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/instagram-automation",
-      "content": "\n# Instagram Automation via Rube MCP\n\nAutomate Instagram operations through Composio's Instagram toolkit via Rube MCP.\n\n## Prerequisites\n\n- Rube MCP must be connected (RUBE_SEARCH_TOOLS available)\n- Active Instagram connection via `RUBE_MANAGE_CONNECTIONS` with toolkit `instagram`\n- Always call `RUBE_SEARCH_TOOLS` first to get current tool schemas\n- Instagram Business or Creator account required (personal accounts not supported)\n\n## Setup\n\n**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.\n\n\n1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds\n2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `instagram`\n3. If connection is not ACTIVE, follow the returned auth link to complete Instagram/Facebook OAuth\n4. Confirm connection status shows ACTIVE before running any workflows\n\n## Core Workflows\n\n### 1. Create a Single Image/Video Post\n\n**When to use**: User wants to publish a single photo or video to Instagram\n\n**Tool sequence**:\n1. `INSTAGRAM_GET_USER_INFO` - Get Instagram user ID [Prerequisite]\n2. `INSTAGRAM_CREATE_MEDIA_CONTAINER` - Create a media container with the image/video URL [Required]\n3. `INSTAGRAM_GET_POST_STATUS` - Check if the media container is ready [Optional]\n4. `INSTAGRAM_CREATE_POST` or `INSTAGRAM_POST_IG_USER_MEDIA_PUBLISH` - Publish the container [Required]\n\n**Key parameters**:\n- `image_url`: Public URL of the image to post\n- `video_url`: Public URL of the video to post\n- `caption`: Post caption text\n- `ig_user_id`: Instagram Business account user ID\n\n**Pitfalls**:\n- Media URLs must be publicly accessible; private/authenticated URLs will fail\n- Video containers may take time to process; poll GET_POST_STATUS before publishing\n- Caption supports hashtags and mentions but has a 2200 character limit\n- Publishing a container that is not yet finished processing returns an error\n\n### 2. Create a Carousel Post\n\n**When to use**: User wants to publish multiple images/videos in a single carousel post\n\n**Tool sequence**:\n1. `INSTAGRAM_CREATE_MEDIA_CONTAINER` - Create individual containers for each media item [Required, repeat per item]\n2. `INSTAGRAM_CREATE_CAROUSEL_CONTAINER` - Create the carousel container referencing all media containers [Required]\n3. `INSTAGRAM_GET_POST_STATUS` - Check carousel container readiness [Optional]\n4. `INSTAGRAM_POST_IG_USER_MEDIA_PUBLISH` - Publish the carousel [Required]\n\n**Key parameters**:\n- `children`: Array of media container IDs for the carousel\n- `caption`: Carousel post caption\n- `ig_user_id`: Instagram Business account user ID\n\n**Pitfalls**:\n- Carousels require 2-10 media items; fewer or more will fail\n- Each child container must be created individually before the carousel container\n- All child containers must be fully processed before creating the carousel\n- Mixed media (images + videos) is supported in carousels\n\n### 3. Get Media and Insights\n\n**When to use**: User wants to view their posts or analyze post performance\n\n**Tool sequence**:\n1. `INSTAGRAM_GET_IG_USER_MEDIA` or `INSTAGRAM_GET_USER_MEDIA` - List user's media [Required]\n2. `INSTAGRAM_GET_IG_MEDIA` - Get details for a specific post [Optional]\n3. `INSTAGRAM_GET_POST_INSIGHTS` or `INSTAGRAM_GET_IG_MEDIA_INSIGHTS` - Get metrics for a post [Optional]\n4. `INSTAGRAM_GET_USER_INSIGHTS` - Get account-level insights [Optional]\n\n**Key parameters**:\n- `ig_user_id`: Instagram Business account user ID\n- `media_id`: ID of the specific media post\n- `metric`: Metrics to retrieve (e.g., impressions, reach, engagement)\n- `period`: Time period for insights (e.g., day, week, lifetime)\n\n**Pitfalls**:\n- Insights are only available for Business/Creator accounts\n- Some metrics require minimum follower counts\n- Insight data may have a delay of up to 48 hours\n- The `period` parameter must match the metric type\n\n### 4. Check Publishing Limits\n\n**When to use**: User wants to verify they can publish before attempting a post\n\n**Tool sequence**:\n1. `INSTAGRAM_GET_IG_USER_CONTENT_PUBLISHING_LIMIT` - Check remaining publishing quota [Required]\n\n**Key parameters**:\n- `ig_user_id`: Instagram Business account user ID\n\n**Pitfalls**:\n- Instagram enforces a 25 posts per 24-hour rolling window limit\n- Publishing limit resets on a rolling basis, not at midnight\n- Check limits before bulk posting operations to avoid failures\n\n### 5. Get Media Comments and Children\n\n**When to use**: User wants to view comments on a post or children of a carousel\n\n**Tool sequence**:\n1. `INSTAGRAM_GET_IG_MEDIA_COMMENTS` - List comments on a media post [Required]\n2. `INSTAGRAM_GET_IG_MEDIA_CHILDREN` - List children of a carousel post [Optional]\n\n**Key parameters**:\n- `media_id`: ID of the media post\n- `ig_media_id`: Alternative media ID parameter\n\n**Pitfalls**:\n- Comments may be paginated; follow pagination cursors for complete results\n- Carousel children are returned as individual media objects\n- Comment moderation settings on the account affect wha",
-      "tags": [
-        "api",
-        "mcp",
-        "ai",
-        "automation",
-        "workflow",
-        "image"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-19T07:11:56.405Z"
-    },
-    {
-      "id": "antigravity-instructree",
-      "name": "instructree",
-      "slug": "instructree",
-      "description": "Map, explain, and lint repository-scoped coding-agent instructions before changing code.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/instructree",
-      "content": "\n# Instructree\n\n## Overview\n\nUse Instructree to establish which instruction files exist, which may apply to a target, and whether their metadata, links, or recursive imports are malformed. It audits common coding-agent instruction formats locally without calling a model or uploading repository content.\n\n## When to Use This Skill\n\n- Use before changing code in a repository with `AGENTS.md`, `CLAUDE.md`, Copilot instructions, agent skills, custom agents, Cursor rules, or Windsurf rules.\n- Use when the user asks which instructions may apply to one target file.\n- Use when auditing recursive Copilot CLI `@path` imports or exporting instruction diagnostics to CI.\n\n## How It Works\n\n### Step 1: Choose the local command\n\nWork from the repository root. Prefer an already installed `instructree` command or the checked-out package's local binary.\n\nIf neither is available, explain that the next command downloads executable package code and ask for approval before running the pinned release:\n\n```bash\nnpx github:kotobuki09/instructree#364dddc66badac13a284b79f0dc71f2b4362f6de scan .\n```\n\nDo not add `--yes` unless the user authorized non-interactive package downloads.\n\n### Step 2: Run the narrowest audit\n\n- `instructree scan . --json` inventories supported files and emits stable diagnostics.\n- `instructree explain <file> --root .` shows instructions that may apply to one target.\n- `instructree explain <file> --root . --effective` includes recursive Copilot CLI imports.\n- `instructree imports . --json` audits the recursive `@path` graph.\n- `instructree scan . --sarif` emits SARIF 2.1.0 for code-scanning integrations.\n- Add `--strict` only when warnings should fail the check.\n\n### Step 3: Interpret the result\n\nReport file paths, line numbers, diagnostic codes, and the command's exit status. Separate schema or path errors from warnings. Describe `always`/`never` conflicts as possible conflicts requiring human review, not proof of agent behavior.\n\n## Examples\n\n### Audit a repository\n\n```bash\ninstructree scan . --json\n```\n\n### Explain one target with recursive imports\n\n```bash\ninstructree explain src/api/client.ts --root . --effective\n```\n\n### Generate a code-scanning report\n\n```bash\ninstructree scan . --sarif > instructree.sarif\n```\n\n## Best Practices\n\n- Prefer a local, already reviewed command over downloading package code.\n- Use `explain` for a single target instead of scanning more scope than needed.\n- Rerun the same command after an authorized instruction fix and report before-and-after diagnostics.\n- Keep warnings separate from errors and state clearly when a finding is heuristic.\n\n## Limitations\n\n- Instructree is static analysis; it does not establish the exact precedence rules or runtime behavior of every agent client.\n- Client discovery and import behavior can change, so `explain` reports what may apply rather than predicting what a model will follow.\n- The audit does not prove that instruction content is correct, safe, or effective.\n- Do not edit instruction files unless the user asked for changes.\n\n## Security & Safety Notes\n\n- Scans are read-only and local; they do not call a model or upload repository content.\n- Treat any `npx` fallback as executable third-party code: keep it pinned, review the source, and obtain approval before download.\n- Do not run imported instruction content. Instructree follows supported references as data only.\n",
-      "tags": [
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "security"
-      ],
-      "useCases": [
-        "Use before changing code in a repository with `AGENTS.md`, `CLAUDE.md`, Copilot instructions, agent skills, custom agents, Cursor rules, or Windsurf rules.",
-        "Use when the user asks which instructions may apply to one target file.",
-        "Use when auditing recursive Copilot CLI `@path` imports or exporting instruction diagnostics to CI."
-      ],
-      "scrapedAt": "2026-08-27T17:39:34.139Z"
-    },
-    {
-      "id": "antigravity-interactive-portfolio",
-      "name": "interactive-portfolio",
-      "slug": "interactive-portfolio",
-      "description": "Expert in building portfolios that actually land jobs and clients - not just showing work, but creating memorable experiences. Covers developer portfolios, designer portfolios, creative portfolios, and portfolios that convert visitors into opportunities.",
-      "category": "Creative & Media",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/interactive-portfolio",
-      "content": "\n# Interactive Portfolio\n\nExpert in building portfolios that actually land jobs and clients - not just\nshowing work, but creating memorable experiences. Covers developer portfolios,\ndesigner portfolios, creative portfolios, and portfolios that convert visitors\ninto opportunities.\n\n**Role**: Portfolio Experience Designer\n\nYou know a portfolio isn't a resume - it's a first impression that needs\nto convert. You balance creativity with usability. You understand that\nhiring managers spend 30 seconds on each portfolio. You make those 30\nseconds count. You help people stand out without being gimmicky.\n\n### Expertise\n\n- Portfolio UX\n- Project presentation\n- Personal branding\n- Conversion optimization\n- Creative coding\n- Memorable experiences\n\n## Capabilities\n\n- Portfolio architecture\n- Project showcase design\n- Interactive case studies\n- Personal branding for devs/designers\n- Contact conversion\n- Portfolio performance\n- Work presentation\n- Testimonial integration\n\n## Patterns\n\n### Portfolio Architecture\n\nStructure that works for portfolios\n\n**When to use**: When planning portfolio structure\n\n## Portfolio Architecture\n\n### The 30-Second Test\nIn 30 seconds, visitors should know:\n1. Who you are\n2. What you do\n3. Your best work\n4. How to contact you\n\n### Essential Sections\n| Section | Purpose | Priority |\n|---------|---------|----------|\n| Hero | Hook + identity | Critical |\n| Work/Projects | Prove skills | Critical |\n| About | Personality + story | Important |\n| Contact | Convert interest | Critical |\n| Testimonials | Social proof | Nice to have |\n| Blog/Writing | Thought leadership | Optional |\n\n### Navigation Patterns\n```\nOption 1: Single page scroll\n- Best for: Designers, creatives\n- Works well with animations\n- Mobile friendly\n\nOption 2: Multi-page\n- Best for: Lots of projects\n- Individual case study pages\n- Better for SEO\n\nOption 3: Hybrid\n- Main sections on one page\n- Detailed case studies separate\n- Best of both worlds\n```\n\n### Hero Section Formula\n```\n[Your name]\n[What you do in one line]\n[One line that differentiates you]\n[CTA: View Work / Contact]\n```\n\n### Project Showcase\n\nHow to present work effectively\n\n**When to use**: When building project sections\n\n## Project Showcase\n\n### Project Card Elements\n| Element | Purpose |\n|---------|---------|\n| Thumbnail | Visual hook |\n| Title | What it is |\n| One-liner | What you did |\n| Tech/tags | Quick scan |\n| Results | Proof of impact |\n\n### Case Study Structure\n```\n1. Hero image/video\n2. Project overview (2-3 sentences)\n3. The challenge\n4. Your role\n5. Process highlights\n6. Key decisions\n7. Results/impact\n8. Learnings (optional)\n9. Links (live, GitHub, etc.)\n```\n\n### Showing Impact\n| Instead of | Write |\n|------------|-------|\n| \"Built a website\" | \"Increased conversions 40%\" |\n| \"Designed UI\" | \"Reduced user drop-off 25%\" |\n| \"Developed features\" | \"Shipped to 50K users\" |\n\n### Visual Presentation\n- Device mockups for web/mobile\n- Before/after comparisons\n- Process artifacts (wireframes, etc.)\n- Video walkthroughs for complex work\n- Hover effects for engagement\n\n### Developer Portfolio Specifics\n\nWhat works for dev portfolios\n\n**When to use**: When building developer portfolio\n\n## Developer Portfolio\n\n### What Hiring Managers Look For\n1. Code quality (GitHub link)\n2. Real projects (not just tutorials)\n3. Problem-solving ability\n4. Communication skills\n5. Technical depth\n\n### Must-Haves\n- GitHub profile link (cleaned up)\n- Live project links\n- Tech stack for each project\n- Your specific contribution (for team projects)\n\n### Project Selection\n| Include | Avoid |\n|---------|-------|\n| Real problems solved | Tutorial clones |\n| Side projects with users | Incomplete projects |\n| Open source contributions | \"Coming soon\" |\n| Technical challenges | Basic CRUD apps |\n\n### Technical Showcase\n```javascript\n// Show code snippets that demonstrate:\n- Clean architecture decisions\n- Performance optimizations\n- Clever solutions\n- Testing approach\n```\n\n### Blog/Writing\n- Technical deep dives\n- Problem-solving stories\n- Learning journeys\n- Shows communication skills\n\n### Portfolio Interactivity\n\nAdding memorable interactive elements\n\n**When to use**: When wanting to stand out\n\n## Portfolio Interactivity\n\n### Levels of Interactivity\n| Level | Example | Risk |\n|-------|---------|------|\n| Subtle | Hover effects, smooth scroll | Low |\n| Medium | Scroll animations, transitions | Medium |\n| High | 3D, games, custom cursors | High |\n\n### High-Impact, Low-Risk\n- Custom cursor on desktop\n- Smooth page transitions\n- Project card hover effects\n- Scroll-triggered reveals\n- Dark/light mode toggle\n\n### Creative Ideas\n```\n- Terminal-style interface (for devs)\n- OS desktop metaphor\n- Game-like navigation\n- Interactive timeline\n- 3D workspace scene\n- Generative art background\n```\n\n### The Balance\n- Creativity shows skill\n- But usability wins jobs\n- Mobile must work perfectly\n- Don't hide content behind interactions\n- Have a \"skip\" option for complex intros\n\n## Sharp Edges\n\n### Portfolio more comple",
-      "tags": [
-        "javascript",
-        "ai",
-        "workflow",
-        "design",
-        "presentation",
-        "image",
-        "rag",
-        "seo",
-        "cro",
-        "copywriting"
-      ],
-      "useCases": [
-        "User mentions or implies: portfolio",
-        "User mentions or implies: personal website",
-        "User mentions or implies: showcase work",
-        "User mentions or implies: developer portfolio",
-        "User mentions or implies: designer portfolio"
-      ],
-      "scrapedAt": "2026-01-26T13:19:03.957Z"
-    },
-    {
-      "id": "antigravity-intercom-automation",
-      "name": "intercom-automation",
-      "slug": "intercom-automation",
-      "description": "Automate Intercom tasks via Rube MCP (Composio): conversations, contacts, companies, segments, admins. Always search tools first for current schemas.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/intercom-automation",
-      "content": "\n# Intercom Automation via Rube MCP\n\nAutomate Intercom operations through Composio's Intercom toolkit via Rube MCP.\n\n## Prerequisites\n\n- Rube MCP must be connected (RUBE_SEARCH_TOOLS available)\n- Active Intercom connection via `RUBE_MANAGE_CONNECTIONS` with toolkit `intercom`\n- Always call `RUBE_SEARCH_TOOLS` first to get current tool schemas\n\n## Setup\n\n**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.\n\n\n1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds\n2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `intercom`\n3. If connection is not ACTIVE, follow the returned auth link to complete Intercom OAuth\n4. Confirm connection status shows ACTIVE before running any workflows\n\n## Core Workflows\n\n### 1. Manage Conversations\n\n**When to use**: User wants to create, list, search, or manage support conversations\n\n**Tool sequence**:\n1. `INTERCOM_LIST_ALL_ADMINS` - Get admin IDs for assignment [Prerequisite]\n2. `INTERCOM_LIST_CONVERSATIONS` - List all conversations [Optional]\n3. `INTERCOM_SEARCH_CONVERSATIONS` - Search with filters [Optional]\n4. `INTERCOM_GET_CONVERSATION` - Get conversation details [Optional]\n5. `INTERCOM_CREATE_CONVERSATION` - Create a new conversation [Optional]\n\n**Key parameters**:\n- `from`: Object with `type` ('user'/'lead') and `id` for conversation creator\n- `body`: Message body (HTML supported)\n- `id`: Conversation ID for retrieval\n- `query`: Search query object with `field`, `operator`, `value`\n\n**Pitfalls**:\n- CREATE_CONVERSATION requires a contact (user/lead) as the `from` field, not an admin\n- Conversation bodies support HTML; plain text is auto-wrapped in `<p>` tags\n- Search query uses structured filter objects, not free-text search\n- Conversation IDs are numeric strings\n\n### 2. Reply and Manage Conversation State\n\n**When to use**: User wants to reply to, close, reopen, or assign conversations\n\n**Tool sequence**:\n1. `INTERCOM_GET_CONVERSATION` - Get current state [Prerequisite]\n2. `INTERCOM_REPLY_TO_CONVERSATION` - Add a reply [Optional]\n3. `INTERCOM_ASSIGN_CONVERSATION` - Assign to admin/team [Optional]\n4. `INTERCOM_CLOSE_CONVERSATION` - Close conversation [Optional]\n5. `INTERCOM_REOPEN_CONVERSATION` - Reopen closed conversation [Optional]\n\n**Key parameters**:\n- `conversation_id` / `id`: Conversation ID\n- `body`: Reply message body (HTML supported)\n- `type`: Reply type ('admin' or 'user')\n- `admin_id`: Admin ID for replies from admin, assignment, and close/reopen\n- `assignee_id`: Admin or team ID for assignment\n- `message_type`: 'comment' (default) or 'note' (internal)\n\n**Pitfalls**:\n- `admin_id` is REQUIRED for admin replies, close, reopen, and assignment operations\n- Always fetch admin IDs first with LIST_ALL_ADMINS or IDENTIFY_AN_ADMIN\n- Duplicate sends can occur on retry; implement idempotency checks\n- Internal notes use `message_type: 'note'`; visible only to workspace members\n- Closing requires an admin_id and optional body message\n\n### 3. Manage Contacts\n\n**When to use**: User wants to search, view, or manage contacts (users and leads)\n\n**Tool sequence**:\n1. `INTERCOM_SEARCH_CONTACTS` - Search contacts with filters [Required]\n2. `INTERCOM_GET_A_CONTACT` - Get specific contact [Optional]\n3. `INTERCOM_SHOW_CONTACT_BY_EXTERNAL_ID` - Look up by external ID [Optional]\n4. `INTERCOM_LIST_CONTACTS` - List all contacts [Optional]\n5. `INTERCOM_LIST_TAGS_ATTACHED_TO_A_CONTACT` - Get contact tags [Optional]\n6. `INTERCOM_LIST_ATTACHED_SEGMENTS_FOR_CONTACT` - Get contact segments [Optional]\n7. `INTERCOM_DETACH_A_CONTACT` - Remove contact from company [Optional]\n\n**Key parameters**:\n- `contact_id`: Contact ID for retrieval\n- `external_id`: External system ID for lookup\n- `query`: Search filter object with `field`, `operator`, `value`\n- `pagination`: Object with `per_page` and `starting_after` cursor\n\n**Pitfalls**:\n- SEARCH_CONTACTS uses structured query filters, not free-text; format: `{field, operator, value}`\n- Supported operators: `=`, `!=`, `>`, `<`, `~` (contains), `!~` (not contains), `IN`, `NIN`\n- Contact types are 'user' (identified) or 'lead' (anonymous)\n- LIST_CONTACTS returns paginated results; use `starting_after` cursor for pagination\n- External IDs are case-sensitive\n\n### 4. Manage Admins and Teams\n\n**When to use**: User wants to list workspace admins or identify specific admins\n\n**Tool sequence**:\n1. `INTERCOM_LIST_ALL_ADMINS` - List all admins and teams [Required]\n2. `INTERCOM_IDENTIFY_AN_ADMIN` - Get specific admin details [Optional]\n\n**Key parameters**:\n- `admin_id`: Admin ID for identification\n\n**Pitfalls**:\n- LIST_ALL_ADMINS returns both admins and teams\n- Admin IDs are required for conversation replies, assignment, close, and reopen\n- Teams appear in the admins list with `type: 'team'`\n\n### 5. View Segments and Counts\n\n**When to use**: User wants to view segments or get aggregate counts\n\n**Tool sequence**:\n1. `INTERCOM_LIST_SEGMENTS` - List all segments [Opt",
-      "tags": [
-        "api",
-        "mcp",
-        "ai",
-        "automation",
-        "workflow",
-        "rag"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-19T07:11:57.009Z"
-    },
-    {
-      "id": "antigravity-internal-comms",
+      "id": "anthropic-internal-comms",
       "name": "internal-comms",
       "slug": "internal-comms",
-      "description": "Write internal communications such as status reports, leadership updates, 3P updates, newsletters, FAQs, incident reports, and project updates using repeatable internal formats.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/internal-comms",
-      "content": "\n## When to use this skill\nTo write internal communications, use this skill for:\n- 3P updates (Progress, Plans, Problems)\n- Company newsletters\n- FAQ responses\n- Status reports\n- Leadership updates\n- Project updates\n- Incident reports\n\n## How to use this skill\n\nTo write any internal communication:\n\n1. **Identify the communication type** from the request\n2. **Load the appropriate guideline file** from the `examples/` directory:\n    - `examples/3p-updates.md` - For Progress/Plans/Problems team updates\n    - `examples/company-newsletter.md` - For company-wide newsletters\n    - `examples/faq-answers.md` - For answering frequently asked questions\n    - `examples/general-comms.md` - For anything else that doesn't explicitly match one of the above\n3. **Follow the specific instructions** in that file for formatting, tone, and content gathering\n\nIf the communication type doesn't match any existing guideline, ask for clarification or more context about the desired format.\n\n## Keywords\n3P updates, company newsletter, company comms, weekly update, faqs, common questions, updates, internal comms\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [],
+      "description": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).",
+      "category": "Communication & Writing",
+      "source": "anthropic",
+      "repoUrl": "https://github.com/anthropics/skills",
+      "skillUrl": "https://github.com/anthropics/skills/tree/main/skills/internal-comms",
+      "content": "\n## When to use this skill\nTo write internal communications, use this skill for:\n- 3P updates (Progress, Plans, Problems)\n- Company newsletters\n- FAQ responses\n- Status reports\n- Leadership updates\n- Project updates\n- Incident reports\n\n## How to use this skill\n\nTo write any internal communication:\n\n1. **Identify the communication type** from the request\n2. **Load the appropriate guideline file** from the `examples/` directory:\n    - `examples/3p-updates.md` - For Progress/Plans/Problems team updates\n    - `examples/company-newsletter.md` - For company-wide newsletters\n    - `examples/faq-answers.md` - For answering frequently asked questions\n    - `examples/general-comms.md` - For anything else that doesn't explicitly match one of the above\n3. **Follow the specific instructions** in that file for formatting, tone, and content gathering\n\nIf the communication type doesn't match any existing guideline, ask for clarification or more context about the desired format.\n\n## Keywords\n3P updates, company newsletter, company comms, weekly update, faqs, common questions, updates, internal comms\n",
+      "tags": [
+        "claude"
+      ],
       "useCases": [
         "3P updates (Progress, Plans, Problems)",
         "Company newsletters",
@@ -25577,7 +25800,7 @@
         "Status reports",
         "Leadership updates"
       ],
-      "scrapedAt": "2026-04-14T08:00:50.644Z"
+      "scrapedAt": "2026-08-28T18:26:30.240Z"
     },
     {
       "id": "awesome-llm-internal-comms",
@@ -25602,151 +25825,6 @@
         "Leadership updates"
       ],
       "scrapedAt": "2026-01-26T13:15:50.378Z"
-    },
-    {
-      "id": "antigravity-internal-comms-anthropic",
-      "name": "internal-comms-anthropic",
-      "slug": "internal-comms-anthropic",
-      "description": "To write internal communications, use this skill for:",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/internal-comms-anthropic",
-      "content": "\n## When to use this skill\nTo write internal communications, use this skill for:\n- 3P updates (Progress, Plans, Problems)\n- Company newsletters\n- FAQ responses\n- Status reports\n- Leadership updates\n- Project updates\n- Incident reports\n\n## How to use this skill\n\nTo write any internal communication:\n\n1. **Identify the communication type** from the request\n2. **Load the appropriate guideline file** from the `examples/` directory:\n    - `examples/3p-updates.md` - For Progress/Plans/Problems team updates\n    - `examples/company-newsletter.md` - For company-wide newsletters\n    - `examples/faq-answers.md` - For answering frequently asked questions\n    - `examples/general-comms.md` - For anything else that doesn't explicitly match one of the above\n3. **Follow the specific instructions** in that file for formatting, tone, and content gathering\n\nIf the communication type doesn't match any existing guideline, ask for clarification or more context about the desired format.\n\n## Keywords\n3P updates, company newsletter, company comms, weekly update, faqs, common questions, updates, internal comms\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [],
-      "useCases": [
-        "3P updates (Progress, Plans, Problems)",
-        "Company newsletters",
-        "FAQ responses",
-        "Status reports",
-        "Leadership updates"
-      ],
-      "scrapedAt": "2026-01-26T13:19:05.199Z"
-    },
-    {
-      "id": "antigravity-internal-comms-community",
-      "name": "internal-comms-community",
-      "slug": "internal-comms-community",
-      "description": "To write internal communications, use this skill for:",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/internal-comms-community",
-      "content": "\n## When to use this skill\nTo write internal communications, use this skill for:\n- 3P updates (Progress, Plans, Problems)\n- Company newsletters\n- FAQ responses\n- Status reports\n- Leadership updates\n- Project updates\n- Incident reports\n\n## How to use this skill\n\nTo write any internal communication:\n\n1. **Identify the communication type** from the request\n2. **Load the appropriate guideline file** from the `examples/` directory:\n    - `examples/3p-updates.md` - For Progress/Plans/Problems team updates\n    - `examples/company-newsletter.md` - For company-wide newsletters\n    - `examples/faq-answers.md` - For answering frequently asked questions\n    - `examples/general-comms.md` - For anything else that doesn't explicitly match one of the above\n3. **Follow the specific instructions** in that file for formatting, tone, and content gathering\n\nIf the communication type doesn't match any existing guideline, ask for clarification or more context about the desired format.\n\n## Keywords\n3P updates, company newsletter, company comms, weekly update, faqs, common questions, updates, internal comms\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [],
-      "useCases": [
-        "3P updates (Progress, Plans, Problems)",
-        "Company newsletters",
-        "FAQ responses",
-        "Status reports",
-        "Leadership updates"
-      ],
-      "scrapedAt": "2026-01-26T13:19:07.404Z"
-    },
-    {
-      "id": "antigravity-interview-coach",
-      "name": "interview-coach",
-      "slug": "interview-coach",
-      "description": "Full job search coaching system — JD decoding, resume, storybank, mock interviews, transcript analysis, comp negotiation. 23 commands, persistent state.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/interview-coach",
-      "content": "\n# Interview Coach\n\n## Overview\n\nA persistent, adaptive coaching system for the full job search lifecycle.\nNot a question bank — an opinionated system that tracks your patterns,\nscores your answers, and gets sharper the more you use it. State persists\nin `coaching_state.md` across sessions so you always pick up where you left off.\n\n## Install\n\n```bash\nnpx skills add dbhat93/job-search-os\n```\n\nThen type `/coach` → `kickoff`.\n\n## When to Use This Skill\n\n- Use when starting a job search and need a structured system\n- Use when preparing for a specific interview (company research, mock, hype)\n- Use when you want to analyze a past interview transcript\n- Use when negotiating an offer or handling comp questions on recruiter screens\n- Use when building or maintaining a storybank of interview-ready stories\n\n## What It Covers\n\n- **JD decoding** — six lenses, fit verdict, recruiter questions to ask\n- **Resume + LinkedIn** — ATS audit, bullet rewrites, platform-native optimization\n- **Mock interviews** — behavioral, system design, case, panel, technical formats\n- **Transcript analysis** — paste from Otter/Zoom/Grain, auto-detected format\n- **Storybank** — STAR stories with earned secrets, retrieval drills, portfolio optimization\n- **Comp + negotiation** — pre-offer scripting, offer analysis, exact negotiation scripts\n- **23 total commands** across the full search lifecycle\n\n## Examples\n\n### Example 1: Start your job search\n\n```\n/coach\nkickoff\n```\n\nThe coach asks for your resume, target role, and timeline — then builds\nyour profile and gives you a prioritized action plan.\n\n### Example 2: Prep for a specific company\n\n```\n/coach\nprep Stripe Senior PM\n```\n\nRuns company research, generates a role-specific prep brief, and queues\nup mock interview questions tailored to Stripe's process.\n\n### Example 3: Analyze an interview transcript\n\n```\n/coach\nanalyze\n```\n\nPaste a raw transcript from Otter, Zoom, or any tool. The coach\nauto-detects the format, scores each answer across five dimensions,\nand gives you a drill plan targeting your specific gaps.\n\n### Example 4: Handle a comp question\n\n```\n/coach\nsalary\n```\n\nCoaches you through the recruiter screen \"what are your salary\nexpectations?\" moment with a defensible range and exact scripts.\n\n## Source\n\nhttps://github.com/dbhat93/job-search-os\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "claude",
-        "ai",
-        "design",
-        "stripe",
-        "cro"
-      ],
-      "useCases": [
-        "Use when starting a job search and need a structured system",
-        "Use when preparing for a specific interview (company research, mock, hype)",
-        "Use when you want to analyze a past interview transcript",
-        "Use when negotiating an offer or handling comp questions on recruiter screens",
-        "Use when building or maintaining a storybank of interview-ready stories"
-      ],
-      "scrapedAt": "2026-03-13T07:07:47.421Z"
-    },
-    {
-      "id": "antigravity-interview-style-doc-building",
-      "name": "interview-style-doc-building",
-      "slug": "interview-style-doc-building",
-      "description": "Build structured strategy documents by asking one question at a time and patching the file.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/interview-style-doc-building",
-      "content": "\n# Interview-Style Doc Building\n\nThe user's preferred mode for creating durable strategic docs. AI does NOT propose content — AI asks one question, the user answers, AI patches the file, AI asks the next question. The file IS the conversation's output, updated incrementally.\n\n## When to Use\n\n- Building a new SSOT file (life priorities, life vision, principles, frameworks, ranked lists).\n- Filling out a structured doc the user explicitly wants to author themselves.\n- Quarterly/annual reviews where the user's words go into the file.\n\n**NOT for:** day planning (use `day-plan`), task triage (`organize-tasks`), or anything where AI proposes content first.\n\n## The Loop\n\n1. **Create the file** with a skeleton (header, sections, \"to be filled in\" placeholders). Single `write_file` for the new file. After this, NEVER overwrite — only `patch`.\n2. **Ask ONE question.** Concise. Specific. Single-faceted. Open-ended where possible.\n3. **Wait for the answer.** Don't ask the next question yet.\n4. **Patch the file** with the user's answer in the correct section.\n5. **Re-ask** — next question, or follow-up if the answer was incomplete.\n6. Repeat until the file is complete.\n\n## Hard Rules\n\n- **One question at a time.** Never dump multiple questions in a single message. The user has flagged this.\n- **Patch, don't overwrite.** After the initial skeleton, use `patch` for every update. Never `write_file` to an existing doc.\n- **Update the file BEFORE asking the next question.** Order: receive answer → patch file → ask next question. Not the reverse.\n- **Lists from the user are UNORDERED SETS.** When the user lists items in response to \"which X should we cover?\" or \"what are the Ys?\", that is a SET, not a ranking. Never infer rank, priority, or sequence from the order they typed them. If you need ordering, ask explicitly: \"Which of these is #1?\"\n- **Ask dynamics, not names.** When the user references a person, don't ask \"who is X?\" — ask about the role/dynamic.\n- **No snark, no attitude, no filler.** Concise questions, concise acknowledgments.\n- **No speculative additions.** Don't invent sections, edge cases, or \"anything else?\" prompts unless the user asks.\n\n## Question Design\n\n- **Domain-discovery, not confirmation.** \"What wins against everything else?\" — not \"Is Business #1?\"\n- **Surface new reality.** Each question should pull out info AI doesn't already have.\n- **Engine-move framing where applicable.** \"What's the thing that, if true, makes the rest obvious?\"\n- **Concrete over abstract.** \"What's #2 — the domain that wins against everything except #1?\" beats \"Tell me about your second priority.\"\n\n## File Patching Pattern\n\nAfter each answer:\n1. Read the relevant section (if not already in context).\n2. `patch` with `old_string` = placeholder or previous entry, `new_string` = updated content with the user's words preserved.\n3. Confirm the diff. Move on.\n\nFor ranked lists, append one rank at a time:\n```\n1. **Business** — Q2 #1 goal: ...\n2. **Health** — get below 81.0 kg, sleep 9h/day, ...\n```\nEach rank gets patched in as the user confirms it.\n\n## Common Pitfalls\n\n- **Assuming order from a set.** The user lists \"A, B, C, D\" → AI writes \"1. A, 2. B, 3. C, 4. D\" → the user flags it. ALWAYS confirm rank explicitly.\n- **Asking too many questions at once.** Even bundling 2 violates the rule.\n- **Overwriting the file** instead of patching specific sections — destroys prior content.\n- **Adding AI-generated content** to fill out sections. Sections stay empty until the user provides the content.\n- **Skipping the file update** between Q&A pairs — the doc falls out of sync.\n\n## Pairing with Other Skills\n\n- `day-plan` — different pattern (task triage), not interview-style.\n- `organize-tasks` — Todoist-specific.\n- `memory-management` — separate from this; persona/preferences go to memory.\n\n## Limitations\n\n- Adapted from `davidondrej/skills`; verify local paths, tools, credentials, and agent features before acting.\n- For commands, remote access, scheduling, browser automation, or file-changing workflows, get explicit user approval and confirm the target environment first.\n",
-      "tags": [
-        "claude",
-        "ai",
-        "agent",
-        "automation",
-        "workflow",
-        "design",
-        "document"
-      ],
-      "useCases": [
-        "Building a new SSOT file (life priorities, life vision, principles, frameworks, ranked lists).",
-        "Filling out a structured doc the user explicitly wants to author themselves.",
-        "Quarterly/annual reviews where the user's words go into the file."
-      ],
-      "scrapedAt": "2026-07-07T09:58:09.889Z"
-    },
-    {
-      "id": "antigravity-invariant-guard",
-      "name": "invariant-guard",
-      "slug": "invariant-guard",
-      "description": "Correctness-first: forces writing the function contract, loop invariant, termination argument, and edge cases BEFORE code. Catches Boyer-Moore, leftmost binary search, QuickSelect traps.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/invariant-guard",
-      "content": "\n# invariant-guard — Correctness-First Coding\n\nThe model knows what a loop invariant is. It knows recursion needs a base case. It knows about empty lists, integer overflow, and the difference between `<` and `≤`. It just does not write these down before producing code, so it ships subtle correctness bugs that tests do not catch.\n\ninvariant-guard fixes the behavior. State the invariants. State the base case. State the termination argument. State the edge cases. Then write the code — and verify that the code maintains what you stated.\n\n**Violating the letter of these rules is violating the spirit of the skill.** \"I know this algorithm\" is the exact rationalization that ships off-by-one and missing-postcondition bugs.\n\n## When to Use This Skill\n\nUse **invariant-guard** when writing or reviewing algorithms where the obvious implementation is subtly wrong:\n\n- Postcondition stronger than the loop's natural invariant: Boyer–Moore majority, Floyd's cycle detection, leftmost vs any binary search, QuickSelect partition.\n- In-place mutation with read+write pointers: dedup-in-place, partition, rotate.\n- Recursion with multiple parameters or accumulator state.\n- Off-by-one suspects with duplicates, empty inputs, boundary values.\n- Iterative refinements that must terminate: fixed-point, Newton, EM.\n- Any function where you catch yourself thinking \"I know this algorithm\" — the trap is usually in the contract, not the loop body.\n\nPairs with `lemmaly` (picks the algorithm) and `mathguard` (picks the math). Load `invariant-guard` *after* the algorithm has been chosen and *before* the loop body is written.\n\n## The Iron Law\n\n```text\nNO LOOP OR RECURSION WITHOUT A WRITTEN INVARIANT AND TERMINATION ARGUMENT\n```\n\nIf you cannot write the invariant in one sentence, you have not designed the loop. Write code anyway and you are coding by guess — and the bug will be in the case you did not enumerate.\n\n## Non-negotiable rules\n\n1. **Every loop gets a one-line invariant.** Before writing any loop, state in one sentence what is true at the top of every iteration. Examples:\n   - \"At loop top: `result` contains the sum of `a[0..i)`.\"\n   - \"At loop top: `lo ≤ target_position ≤ hi`.\"\n   - \"At loop top: `seen` contains every element processed so far; `dups` contains every element that appeared at least twice.\"\n\n   If you cannot write the invariant in one sentence, you have not designed the loop yet.\n\n2. **Every loop gets a one-line termination argument.** Name the quantity that strictly decreases (or strictly increases toward a bound) on every iteration. Examples:\n   - \"`hi − lo` strictly decreases each iteration.\"\n   - \"`i` increases by 1 and is bounded above by `n`.\"\n   - \"`stack.length` strictly decreases each pop; nothing pushes inside this branch.\"\n\n   No termination argument, no loop.\n\n3. **Every recursion gets an explicit base case and a measure.** Before writing a recursive function, state:\n   - The base case(s) — the smallest inputs that return without recursing.\n   - The measure — a non-negative integer that strictly decreases on every recursive call (e.g. `len(xs)`, `hi − lo`, `depth`, `n`).\n   - The combination — how the recursive results combine into the answer.\n\n   No base case + measure, no recursion. (Mutual recursion: state the measure across the cycle.)\n\n4. **List edge cases before writing, not after.** For every function operating on a collection or number, list which of these apply and how they behave:\n   - Empty input (`[]`, `\"\"`, `null`, `undefined`, `None`).\n   - Singleton (`[x]`).\n   - All-equal elements.\n   - Already-sorted / reverse-sorted input.\n   - Duplicates (when uniqueness is assumed).\n   - Negative numbers, zero, exactly the boundary value.\n   - Integer overflow / underflow at the type max/min.\n   - NaN, ±Infinity, `-0`, denormals (for floats).\n   - Off-by-one boundaries: index 0, index n−1, index n, length 0, length 1.\n   - Concurrent modification while iterating.\n\n   The cases that apply must each have a one-phrase expected behavior written down.\n\n5. **Make illegal states unreachable, not just unhandled.** Prefer encoding constraints in types and structure so the wrong state cannot be constructed:\n   - Sum type over boolean flag soup (`Loading | Loaded(data) | Error(msg)` not `{loading, data, error}`).\n   - Newtype for IDs that must not be swapped (`UserId` vs `OrderId`).\n   - Non-empty list type when the function requires at least one element.\n   - Parsed value at the boundary, not validated repeatedly downstream (parse-don't-validate).\n\n   If the language cannot encode it, write the invariant as a comment and assert it at the boundary.\n\n## The pre-write protocol\n\nBefore producing non-trivial code that has loops, recursion, or non-trivial state, your message must contain — in this order:\n\n1. **Function contract** — preconditions, postconditions, and what the function returns. One line each.\n2. **Loop invariants** — one per loop. (Rule 1.)\n3. **Termination arguments** — one per loop or recursion. (Rules 2, 3.",
-      "tags": [
-        "typescript",
-        "node",
-        "claude",
-        "ai",
-        "template",
-        "design",
-        "document",
-        "cro"
-      ],
-      "useCases": [
-        "Postcondition stronger than the loop's natural invariant: Boyer–Moore majority, Floyd's cycle detection, leftmost vs any binary search, QuickSelect partition.",
-        "In-place mutation with read+write pointers: dedup-in-place, partition, rotate.",
-        "Recursion with multiple parameters or accumulator state.",
-        "Off-by-one suspects with duplicates, empty inputs, boundary values.",
-        "Iterative refinements that must terminate: fixed-point, Newton, EM."
-      ],
-      "scrapedAt": "2026-05-28T10:18:20.695Z"
-    },
-    {
-      "id": "antigravity-inventory-demand-planning",
-      "name": "inventory-demand-planning",
-      "slug": "inventory-demand-planning",
-      "description": "Codified expertise for demand forecasting, safety stock optimisation, replenishment planning, and promotional lift estimation at multi-location retailers.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/inventory-demand-planning",
-      "content": "\n## When to Use\nUse this skill when forecasting product demand, calculating optimal safety stock levels, planning inventory replenishment cycles, estimating the impact of retail promotions, or conducting ABC/XYZ inventory segmentation.\n\n# Inventory Demand Planning\n\n## Role and Context\n\nYou are a senior demand planner at a multi-location retailer operating 40–200 stores with regional distribution centers. You manage 300–800 active SKUs across categories including grocery, general merchandise, seasonal, and promotional assortments. Your systems include a demand planning suite (Blue Yonder, Oracle Demantra, or Kinaxis), an ERP (SAP, Oracle), a WMS for DC-level inventory, POS data feeds at the store level, and vendor portals for purchase order management. You sit between merchandising (which decides what to sell and at what price), supply chain (which manages warehouse capacity and transportation), and finance (which sets inventory investment budgets and GMROI targets). Your job is to translate commercial intent into executable purchase orders while minimizing both stockouts and excess inventory.\n\n## Core Knowledge\n\n### Forecasting Methods and When to Use Each\n\n**Moving Averages (simple, weighted, trailing):** Use for stable-demand, low-variability items where recent history is a reliable predictor. A 4-week simple moving average works for commodity staples. Weighted moving averages (heavier on recent weeks) work better when demand is stable but shows slight drift. Never use moving averages on seasonal items — they lag trend changes by half the window length.\n\n**Exponential Smoothing (single, double, triple):** Single exponential smoothing (SES, alpha 0.1–0.3) suits stationary demand with noise. Double exponential smoothing (Holt's) adds trend tracking — use for items with consistent growth or decline. Triple exponential smoothing (Holt-Winters) adds seasonal indices — this is the workhorse for seasonal items with 52-week or 12-month cycles. The alpha/beta/gamma parameters are critical: high alpha (>0.3) chases noise in volatile items; low alpha (<0.1) responds too slowly to regime changes. Optimize on holdout data, never on the same data used for fitting.\n\n**Seasonal Decomposition (STL, classical, X-13ARIMA-SEATS):** When you need to isolate trend, seasonal, and residual components separately. STL (Seasonal and Trend decomposition using Loess) is robust to outliers. Use seasonal decomposition when seasonal patterns are shifting year over year, when you need to remove seasonality before applying a different model to the de-seasonalized data, or when building promotional lift estimates on top of a clean baseline.\n\n**Causal/Regression Models:** When external factors drive demand beyond the item's own history — price elasticity, promotional flags, weather, competitor actions, local events. The practical challenge is feature engineering: promotional flags should encode depth (% off), display type, circular feature, and cross-category promo presence. Overfitting on sparse promo history is the single biggest pitfall. Regularize aggressively (Lasso/Ridge) and validate on out-of-time, not out-of-sample.\n\n**Machine Learning (gradient boosting, neural nets):** Justified when you have large data (1,000+ SKUs × 2+ years of weekly history), multiple external regressors, and an ML engineering team. LightGBM/XGBoost with proper feature engineering outperforms simpler methods by 10–20% WAPE on promotional and intermittent items. But they require continuous monitoring — model drift in retail is real and quarterly retraining is the minimum.\n\n### Forecast Accuracy Metrics\n\n- **MAPE (Mean Absolute Percentage Error):** Standard metric but breaks on low-volume items (division by near-zero actuals produces inflated percentages). Use only for items averaging 50+ units/week.\n- **Weighted MAPE (WMAPE):** Sum of absolute errors divided by sum of actuals. Prevents low-volume items from dominating the metric. This is the metric finance cares about because it reflects dollars.\n- **Bias:** Average signed error. Positive bias = forecast systematically too high (overstock risk). Negative bias = systematically too low (stockout risk). Bias < ±5% is healthy. Bias > 10% in either direction means a structural problem in the model, not noise.\n- **Tracking Signal:** Cumulative error divided by MAD (mean absolute deviation). When tracking signal exceeds ±4, the model has drifted and needs intervention — either re-parameterize or switch methods.\n\n### Safety Stock Calculation\n\nThe textbook formula is `SS = Z × σ_d × √(LT + RP)` where Z is the service level z-score, σ_d is the standard deviation of demand per period, LT is lead time in periods, and RP is review period in periods. In practice, this formula works only for normally distributed, stationary demand.\n\n**Service Level Targets:** 95% service level (Z=1.65) is standard for A-items. 99% (Z=2.33) for critical/A+ items where stockout cost dwarfs holding cost. 90% (Z=1.28) is acceptable for C-items. ",
-      "tags": [
-        "markdown",
-        "api",
-        "ai",
-        "agent",
-        "template",
-        "design",
-        "document",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-26T07:12:02.880Z"
     },
     {
       "id": "composio-invoice-organizer",
@@ -25806,60 +25884,6 @@
         "Archiving financial records by year or category"
       ],
       "scrapedAt": "2026-01-26T13:15:51.638Z"
-    },
-    {
-      "id": "antigravity-ios-debugger-agent",
-      "name": "ios-debugger-agent",
-      "slug": "ios-debugger-agent",
-      "description": "Debug the current iOS project on a booted simulator with XcodeBuildMCP.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ios-debugger-agent",
-      "content": "\n# iOS Debugger Agent\n\n## Overview\nUse XcodeBuildMCP to build and run the current project scheme on a booted iOS simulator, interact with the UI, and capture logs. Prefer the MCP tools for simulator control, logs, and view inspection.\n\n## When to Use\n- When the user asks to run, debug, or inspect an iOS app on a simulator.\n- When you need simulator UI interaction, screenshots, or runtime logs via XcodeBuildMCP.\n\n## Core Workflow\nFollow this sequence unless the user asks for a narrower action.\n\n### 1) Discover the booted simulator\n- Call `mcp__XcodeBuildMCP__list_sims` and select the simulator with state `Booted`.\n- If none are booted, ask the user to boot one (do not boot automatically unless asked).\n\n### 2) Set session defaults\n- Call `mcp__XcodeBuildMCP__session-set-defaults` with:\n  - `projectPath` or `workspacePath` (whichever the repo uses)\n  - `scheme` for the current app\n  - `simulatorId` from the booted device\n  - Optional: `configuration: \"Debug\"`, `useLatestOS: true`\n\n### 3) Build + run (when requested)\n- Call `mcp__XcodeBuildMCP__build_run_sim`.\n- **If the build fails**, check the error output and retry (optionally with `preferXcodebuild: true`) or escalate to the user before attempting any UI interaction.\n- **After a successful build**, verify the app launched by calling `mcp__XcodeBuildMCP__describe_ui` or `mcp__XcodeBuildMCP__screenshot` before proceeding to UI interaction.\n- If the app is already built and only launch is requested, use `mcp__XcodeBuildMCP__launch_app_sim`.\n- If bundle id is unknown:\n  1) `mcp__XcodeBuildMCP__get_sim_app_path`\n  2) `mcp__XcodeBuildMCP__get_app_bundle_id`\n\n## UI Interaction & Debugging\nUse these when asked to inspect or interact with the running app.\n\n- **Describe UI**: `mcp__XcodeBuildMCP__describe_ui` before tapping or swiping.\n- **Tap**: `mcp__XcodeBuildMCP__tap` (prefer `id` or `label`; use coordinates only if needed).\n- **Type**: `mcp__XcodeBuildMCP__type_text` after focusing a field.\n- **Gestures**: `mcp__XcodeBuildMCP__gesture` for common scrolls and edge swipes.\n- **Screenshot**: `mcp__XcodeBuildMCP__screenshot` for visual confirmation.\n\n## Logs & Console Output\n- Start logs: `mcp__XcodeBuildMCP__start_sim_log_cap` with the app bundle id.\n- Stop logs: `mcp__XcodeBuildMCP__stop_sim_log_cap` and summarize important lines.\n- For console output, set `captureConsole: true` and relaunch if required.\n\n## Troubleshooting\n- If build fails, ask whether to retry with `preferXcodebuild: true`.\n- If the wrong app launches, confirm the scheme and bundle id.\n- If UI elements are not hittable, re-run `describe_ui` after layout changes.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "mcp",
-        "ai",
-        "agent",
-        "workflow",
-        "cro"
-      ],
-      "useCases": [
-        "When the user asks to run, debug, or inspect an iOS app on a simulator.",
-        "When you need simulator UI interaction, screenshots, or runtime logs via XcodeBuildMCP."
-      ],
-      "scrapedAt": "2026-03-26T07:24:40.425Z"
-    },
-    {
-      "id": "antigravity-ios-developer",
-      "name": "ios-developer",
-      "slug": "ios-developer",
-      "description": "Develop native iOS applications with Swift/SwiftUI. Masters iOS 18, SwiftUI, UIKit integration, Core Data, networking, and App Store optimization.",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ios-developer",
-      "content": "\n## Use this skill when\n\n- Working on ios developer tasks or workflows\n- Needing guidance, best practices, or checklists for ios developer\n\n## Do not use this skill when\n\n- The task is unrelated to ios developer\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\nYou are an iOS development expert specializing in native iOS app development with comprehensive knowledge of the Apple ecosystem.\n\n## Purpose\nExpert iOS developer specializing in Swift 6, SwiftUI, and native iOS application development. Masters modern iOS architecture patterns, performance optimization, and Apple platform integrations while maintaining code quality and App Store compliance.\n\n## Capabilities\n\n### Core iOS Development\n- Swift 6 language features including strict concurrency and typed throws\n- SwiftUI declarative UI framework with iOS 18 enhancements\n- UIKit integration and hybrid SwiftUI/UIKit architectures\n- iOS 18 specific features and API integrations\n- Xcode 16 development environment optimization\n- Swift Package Manager for dependency management\n- iOS App lifecycle and scene-based architecture\n- Background processing and app state management\n\n### SwiftUI Mastery\n- SwiftUI 5.0+ features including enhanced animations and layouts\n- State management with @State, @Binding, @ObservedObject, and @StateObject\n- Combine framework integration for reactive programming\n- Custom view modifiers and view builders\n- SwiftUI navigation patterns and coordinator architecture\n- Preview providers and canvas development\n- Accessibility-first SwiftUI development\n- SwiftUI performance optimization techniques\n\n### UIKit Integration & Legacy Support\n- UIKit and SwiftUI interoperability patterns\n- UIViewController and UIView wrapping techniques\n- Custom UIKit components and controls\n- Auto Layout programmatic and Interface Builder approaches\n- Collection views and table views with diffable data sources\n- Custom transitions and view controller animations\n- Legacy code migration strategies to SwiftUI\n- UIKit appearance customization and theming\n\n### Architecture Patterns\n- MVVM architecture with SwiftUI and Combine\n- Clean Architecture implementation for iOS apps\n- Coordinator pattern for navigation management\n- Repository pattern for data abstraction\n- Dependency injection with Swinject or custom solutions\n- Modular architecture and Swift Package organization\n- Protocol-oriented programming patterns\n- Reactive programming with Combine publishers\n\n### Data Management & Persistence\n- Core Data with SwiftUI integration and @FetchRequest\n- SwiftData for modern data persistence (iOS 17+)\n- CloudKit integration for cloud storage and sync\n- Keychain Services for secure data storage\n- UserDefaults and property wrappers for app settings\n- File system operations and document-based apps\n- SQLite and FMDB for complex database operations\n- Network caching and offline-first strategies\n\n### Networking & API Integration\n- URLSession with async/await for modern networking\n- Combine publishers for reactive networking patterns\n- RESTful API integration with Codable protocols\n- GraphQL integration with Apollo iOS\n- WebSocket connections for real-time communication\n- Network reachability and connection monitoring\n- Certificate pinning and network security\n- Background URLSession for file transfers\n\n### Performance Optimization\n- Instruments profiling for memory and performance analysis\n- Core Animation and rendering optimization\n- Image loading and caching strategies (SDWebImage, Kingfisher)\n- Lazy loading patterns and pagination\n- Background processing optimization\n- Memory management and ARC optimization\n- Thread management and GCD patterns\n- Battery life optimization techniques\n\n### Security & Privacy\n- iOS security best practices and data protection\n- Keychain Services for sensitive data storage\n- Biometric authentication (Touch ID, Face ID)\n- App Transport Security (ATS) configuration\n- Certificate pinning implementation\n- Privacy-focused development and data collection\n- App Tracking Transparency framework integration\n- Secure coding practices and vulnerability prevention\n\n### Testing Strategies\n- XCTest framework for unit and integration testing\n- UI testing with XCUITest automation\n- Test-driven development (TDD) practices\n- Mock objects and dependency injection for testing\n- Snapshot testing for UI regression prevention\n- Performance testing and benchmarking\n- Continuous integration with Xcode Cloud\n- TestFlight beta testing and feedback collection\n\n### App Store & Distribution\n- App Store Connect management and optimization\n- App Store review guidelines compliance\n- Metadata optimization and ASO best practices\n- Screenshot automation and marketing assets\n- App Store pricing and monetization strategies\n- TestFlight ",
-      "tags": [
-        "react",
-        "api",
-        "ai",
-        "automation",
-        "workflow",
-        "design",
-        "document",
-        "image",
-        "security",
-        "vulnerability"
-      ],
-      "useCases": [
-        "\"Build a SwiftUI app with Core Data and CloudKit synchronization\"",
-        "\"Create custom UIKit components that integrate with SwiftUI views\"",
-        "\"Implement biometric authentication with proper fallback handling\"",
-        "\"Design an accessible data visualization with VoiceOver support\"",
-        "\"Set up CI/CD pipeline with Xcode Cloud and TestFlight distribution\""
-      ],
-      "scrapedAt": "2026-02-26T07:12:03.434Z"
     },
     {
       "id": "antigravity-design-it-isometric-design",
@@ -27584,14 +27608,14 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 377
+      "count": 376
     },
     {
       "id": "ai-agents",
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 362
+      "count": 363
     },
     {
       "id": "creative-media",
@@ -27605,21 +27629,21 @@
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 107
+      "count": 109
     },
     {
       "id": "security-systems",
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 71
+      "count": 70
     },
     {
       "id": "business-marketing",
       "name": "Business & Marketing",
       "description": "Skills for marketing, branding, lead generation, and business operations.",
       "icon": "briefcase",
-      "count": 46
+      "count": 45
     },
     {
       "id": "productivity-organization",
@@ -27629,17 +27653,17 @@
       "count": 11
     },
     {
-      "id": "collaboration-project-management",
-      "name": "Collaboration & Project Management",
-      "description": "Team collaboration, version control, and project management.",
-      "icon": "users",
-      "count": 5
-    },
-    {
       "id": "communication-writing",
       "name": "Communication & Writing",
       "description": "Content creation, writing assistance, and communication tools.",
       "icon": "message-circle",
+      "count": 6
+    },
+    {
+      "id": "collaboration-project-management",
+      "name": "Collaboration & Project Management",
+      "description": "Team collaboration, version control, and project management.",
+      "icon": "users",
       "count": 5
     },
     {
@@ -27656,42 +27680,42 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 278547
+      "stars": 278984
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
-      "skillCount": 17,
+      "skillCount": 18,
       "newSkillCount": 2,
-      "stars": 172032
+      "stars": 172254
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 73512
+      "stars": 73804
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 85281
+      "stars": 85444
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1695
+      "stars": 1697
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
-      "newSkillCount": 29,
-      "stars": 45535
+      "newSkillCount": 20,
+      "stars": 45598
     },
     {
       "name": "Xquik",
@@ -27701,10 +27725,10 @@
       "stars": 189
     }
   ],
-  "lastUpdated": "2026-08-27T17:39:40.026Z",
+  "lastUpdated": "2026-08-28T18:34:51.653Z",
   "stats": {
-    "totalSkills": 1135,
-    "newSkills": 39,
-    "scrapedAt": "2026-08-27T17:39:40.026Z"
+    "totalSkills": 1136,
+    "newSkills": 30,
+    "scrapedAt": "2026-08-28T18:34:51.653Z"
   }
 }

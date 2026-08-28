@@ -1,10 +1,10 @@
 ---
 name: internal-comms
-description: Write internal communications such as status reports, leadership updates, 3P updates, newsletters, FAQs, incident reports, and project updates using repeatable internal formats. 
-category: AI & Agents
-source: antigravity
-tags: []
-url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/internal-comms
+description: A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal com
+category: Communication & Writing
+source: anthropic
+tags: [claude]
+url: https://github.com/anthropics/skills/tree/main/skills/internal-comms
 ---
 
 
@@ -34,8 +34,3 @@ If the communication type doesn't match any existing guideline, ask for clarific
 
 ## Keywords
 3P updates, company newsletter, company comms, weekly update, faqs, common questions, updates, internal comms
-
-## Limitations
-- Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
