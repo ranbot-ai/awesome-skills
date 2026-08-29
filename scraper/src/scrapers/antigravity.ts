@@ -9,6 +9,16 @@ const ANTIGRAVITY_REPO: GitHubRepo = {
   skillsPath: 'skills',
 };
 
+// Some Antigravity entries are repackaged from their original repositories.
+// Keep the directory as the discovery source, but send users to the canonical
+// project for attribution, updates, and installation instructions.
+const CANONICAL_SKILL_SOURCES: Record<string, { repoUrl: string; skillUrl: string }> = {
+  'dsh-deepread': {
+    repoUrl: 'https://github.com/xiehuan123/dsh-deepread',
+    skillUrl: 'https://github.com/xiehuan123/dsh-deepread/tree/main/skills/dsh-deepread',
+  },
+};
+
 function slugify(name: string): string {
   return name
     .toLowerCase()
@@ -236,6 +246,7 @@ async function processSkillDirectory(
 
       const description = extractDescription(markdownContent, frontmatter.description);
       const category = inferCategory(dirName, content);
+      const canonicalSource = CANONICAL_SKILL_SOURCES[dirName];
 
       const skill: Skill = {
         id: `antigravity-${dirName}`,
@@ -244,8 +255,10 @@ async function processSkillDirectory(
         description,
         category,
         source: 'antigravity',
-        repoUrl: `https://github.com/${ANTIGRAVITY_REPO.owner}/${ANTIGRAVITY_REPO.repo}`,
-        skillUrl: getGitHubUrl(ANTIGRAVITY_REPO, dirPath),
+        repoUrl: canonicalSource?.repoUrl ?? `https://github.com/${ANTIGRAVITY_REPO.owner}/${ANTIGRAVITY_REPO.repo}`,
+        skillUrl: canonicalSource?.skillUrl ?? getGitHubUrl(ANTIGRAVITY_REPO, dirPath),
+        author: canonicalSource ? frontmatter.author : undefined,
+        authorUrl: canonicalSource?.repoUrl,
         content: markdownContent.slice(0, 5000),
         tags: extractTags(content, name),
         useCases: extractUseCases(content),
