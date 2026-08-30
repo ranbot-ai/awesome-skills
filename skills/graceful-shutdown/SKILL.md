@@ -93,20 +93,21 @@ async function drainAndExit(): Promise<void> {
 
 ### Step 4: Implement readiness and liveness probes
 
-Orchestrators use these to decide whether to route traffic and whether to restart the container.
+Orchestrators use these to decide whether to route traffic and whether to restart the container. Liveness proves the process is alive; readiness controls whether traffic is routed. While the listener is still available during a drain, keep liveness healthy and return 503 only from readiness. After the listener closes, new probes cannot connect, so do not promise that HTTP liveness remains reachable for the entire termination window.
 
 ```typescript
 import { createServer, IncomingMessage, ServerResponse } from "node:http";
 
 function handleHealthCheck(req: IncomingMessage, res: ServerResponse): void {
   if (req.url === "/healthz") {
-    // Liveness: is the process alive and not deadlocked?
+    // Keep liveness distinct from readiness while the listener is available.
+    // Drain-rejection middleware must not turn this endpoint into a 503.
     res.writeHead(200).end("ok");
     return;
   }
 
   if (req.url === "/readyz") {
-    // Readiness: should traffic be routed here?
+    // Readiness: 503 during shutdown so the load balancer stops routing.
     if (isShuttingDown) {
       res.writeHead(503).end("shutting down");
     } else {
@@ -119,57 +120,28 @@ function handleHealthCheck(req: IncomingMessage, res: ServerResponse): void {
 
 ### Step 5: Track active connections
 
-Maintain a count of in-flight requests so you know when draining is complete.
+Maintain a count of in-flight requests so you know when draining is complete. Use a once guard covering both `finish` and `close` events so that client disconnects (aborted requests) correctly decrement the counter.
 
 ```typescript
 let activeConnections = 0;
 let drainResolve: (() => void) | null = null;
 
-function onRequestStart(): void {
+function trackRequest(res: ServerResponse): void {
   activeConnections++;
-}
-
-function onRequestEnd(): void {
-  activeConnections--;
-  if (isShuttingDown && activeConnections === 0 && drainResolve) {
-    drainResolve();
+  let counted = true;
+  function release(): void {
+    if (!counted) return;
+    counted = false;
+    activeConnections--;
+    if (isShuttingDown && activeConnections === 0 && drainResolve) {
+      drainResolve();
+    }
   }
+  res.on("finish", release);
+  res.on("close", release);
 }
 
 function waitForActiveConnections(): Promise<void> {
   if (activeConnections === 0) return Promise.resolve();
   return new Promise((resolve) => {
-    drainResolve = resolve;
-  });
-}
-```
-
-## Examples
-
-### Example 1: Express.js server with graceful shutdown
-
-```typescript
-import express from "express";
-import { createServer } from "node:http";
-
-const app = express();
-const server = createServer(app);
-let isShuttingDown = false;
-let activeRequests = 0;
-
-// Track in-flight requests
-app.use((req, res, next) => {
-  if (isShuttingDown) {
-    res.setHeader("Connection", "close");
-    res.status(503).json({ error: "Server is shutting down" });
-    return;
-  }
-  activeRequests++;
-  res.on("finish", () => activeRequests--);
-  next();
-});
-
-// Health endpoints
-app.get("/healthz", (_, res) => res.send("ok"));
-app.get("/readyz", (_, res) => {
-  res.status(isShuttingDown ? 503 : 200).send(isShuttingDown 
+    drain
