@@ -61,6 +61,19 @@ Do not guess parameters from another model, because names such as `size`,
 
 ## Workflow
 
+### 0. Create a Private Per-Run Workspace
+
+Run the remaining shell snippets in the same shell session. Create a private
+directory before writing prompts, responses, prediction IDs, or signed URLs;
+the parameter expansion in later steps fails closed when this setup was skipped.
+
+```bash
+umask 077
+atlas_tmp_dir=$(mktemp -d "${TMPDIR:-/tmp}/atlas-cloud-media.XXXXXXXX") || exit 1
+chmod 700 -- "$atlas_tmp_dir"
+trap 'rm -rf -- "$atlas_tmp_dir"' EXIT
+```
+
 ### 1. Discover and Validate a Model
 
 Fetch the catalog, filter by `type` (`Image` or `Video`), and match the user's
@@ -73,10 +86,10 @@ Example discovery request:
 ```bash
 curl --fail --silent --show-error \
   "https://api.atlascloud.ai/api/v1/models" \
-  --output /tmp/atlas-models.json
+  --output "${atlas_tmp_dir:?run private workspace setup first}/models.json"
 
 jq -r '.data[] | select(.type == "Image") | [.model, .displayName, .schema] | @tsv' \
-  /tmp/atlas-models.json
+  "$atlas_tmp_dir/models.json"
 ```
 
 ### 2. Submit One Generation Task
@@ -91,15 +104,15 @@ jq -n \
   --arg model "qwen-image-3.0/text-to-image" \
   --arg prompt "A paper-cut city map in blue and white, clean editorial style" \
   '{model: $model, prompt: $prompt, size: "1024*1024", n: 1}' \
-  > /tmp/atlas-image-request.json
+  > "${atlas_tmp_dir:?run private workspace setup first}/request.json"
 
 curl --fail --silent --show-error \
   --request POST \
   "https://api.atlascloud.ai/api/v1/model/generateImage" \
   --header "Authorization: Bearer $ATLASCLOUD_API_KEY" \
   --header "Content-Type: application/json" \
-  --data @/tmp/atlas-image-request.json \
-  --output /tmp/atlas-submit.json
+  --data @"$atlas_tmp_dir/request.json" \
+  --output "$atlas_tmp_dir/submit.json"
 ```
 
 Video example using a catalog-confirmed model:
@@ -116,15 +129,15 @@ jq -n \
     ratio: "16:9",
     generate_audio: false,
     watermark: false
-  }' > /tmp/atlas-video-request.json
+  }' > "${atlas_tmp_dir:?run private workspace setup first}/request.json"
 
 curl --fail --silent --show-error \
   --request POST \
   "https://api.atlascloud.ai/api/v1/model/generateVideo" \
   --header "Authorization: Bearer $ATLASCLOUD_API_KEY" \
   --header "Content-Type: application/json" \
-  --data @/tmp/atlas-video-request.json \
-  --output /tmp/atlas-submit.json
+  --data @"$atlas_tmp_dir/request.json" \
+  --output "$atlas_tmp_dir/submit.json"
 ```
 
 Check that `.data.id` is a non-empty string before polling. Treat a non-2xx
@@ -134,21 +147,4 @@ automatically because the original task may still have been accepted.
 ### 3. Poll with a Deadline
 
 Poll every three seconds. Accept `completed` or `succeeded` as success, stop on
-`failed` or `timeout`, and stop after ten minutes. Preserve the prediction ID
-for diagnostics, but never log request headers or the API key.
-
-```bash
-prediction_id=$(jq -er '.data.id | select(type == "string" and length > 0)' \
-  /tmp/atlas-submit.json)
-
-for attempt in $(seq 1 200); do
-  sleep 3
-  curl --fail --silent --show-error \
-    "https://api.atlascloud.ai/api/v1/model/prediction/$prediction_id" \
-    --header "Authorization: Bearer $ATLASCLOUD_API_KEY" \
-    --output /tmp/atlas-prediction.json
-
-  status=$(jq -r '.data.status // "unknown"' /tmp/atlas-prediction.json)
-  case "$status" in
-    completed|succeeded) break ;;
-    failed|timeout)
+`failed` or `timeout`, and stop after ten minutes. Preserve the pr
