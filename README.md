@@ -24,7 +24,7 @@
 | [Prat011/awesome-llm-skills](https://github.com/Prat011/awesome-llm-skills) | 700+ | LLM and AI Agent skills collection |
 | [sickn33/antigravity-awesome-skills](https://github.com/sickn33/antigravity-awesome-skills) | 3.6k+ | 253+ agentic skills for Claude Code, Gemini CLI, Cursor & more |
 | [Xquik-dev/x-twitter-scraper](https://github.com/Xquik-dev/x-twitter-scraper) | 100+ | X data skill for search, extraction, monitoring, webhooks, MCP, and SDK workflows |
-| [JasonColapietro/suede-creator-skills](https://github.com/JasonColapietro/suede-creator-skills) | 150+ | 71 Agent Skills for Claude Code and Codex: code review and A-F grading, AI evals, CI gates, design, copy, SEO, app shipping, creator rights |
+| [JasonColapietro/suede-creator-skills](https://github.com/JasonColapietro/suede-creator-skills) | 129 | Open-source Agent Skills for Claude Code and Codex: code review and A-F grading, AI evals, CI gates, design, copy, SEO, app shipping, creator rights |
 
 ## Install Skills
 
