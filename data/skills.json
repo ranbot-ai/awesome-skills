@@ -10451,6 +10451,33 @@
       "scrapedAt": "2026-03-07T06:53:26.531Z"
     },
     {
+      "id": "antigravity-check-identity-pack",
+      "name": "check-identity-pack",
+      "slug": "check-identity-pack",
+      "description": "Run an AFP 100-point or AUSTRAC safe-harbour identity check over a set of documents, and report exactly what's missing. Use when the user asks to check identity documents, verify someone's ID for onboarding, or assess whether a document pack satisfies Australian identity requirements.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/check-identity-pack",
+      "content": "\n# Check Identity Pack\n\nRun an AFP 100-point or AUSTRAC safe-harbour identity check over a document set. Reports the points attained, per-document status, and **exactly what's missing** — so the user can request only the absent documents and re-run. Uses the Stipple API (free anonymous tier).\n\n## When to use\n\n- Onboarding employees, tenants, contractors, or customers in Australia\n- KYC flows needing AFP 100-point or AUSTRAC safe-harbour compliance\n- \"Do these documents satisfy the 100-point check?\"\n\n## Instructions\n\n1. **Get the documents.** Multiple file paths or URLs (PDF/images): passport, driver's licence, medicare card, bank statement, utility bill, etc.\n\n2. **Choose the scheme:**\n   - `afp_100_point` — the standard Australian 100-point system\n   - `austrac_safe_harbour` — AUSTRAC safe-harbour identity verification\n\n3. **Run the check.** POST the document set (multipart, multiple `files` parts):\n\n   ```bash\n   curl -X POST \"https://www.stipple.sh/v1/identity-check?scheme=afp_100_point\" \\\n     -F \"files=@passport.pdf\" \\\n     -F \"files=@medicare-card.jpg\" \\\n     -F \"files=@bank-statement.pdf\" \\\n     -H \"Authorization: Bearer $STIPPLE_API_KEY\"\n   ```\n\n4. **Interpret the response.**\n\n   - `status` — complete / incomplete / failed\n   - `points_total` — points attained (e.g. 95/100)\n   - `checks[]` — per-document: type detected, point value, status\n   - `missing[]` — **exactly what is missing** (e.g. \"evidence of current residential address within last 3 months\")\n\n5. **Report with the gap list front and centre.** The product here is the *exactly-what's-missing* list — the user's onboarding UX can loop on it: request only what's absent, re-run, done.\n\n6. **Important caveat.** Identity check answers *who is this* — it does NOT answer *is this document genuine*. A forged passport that matches the name scores points. For genuineness, pair with the `verify-document` skill on each document first.\n\n## Output format\n\n```\nAFP 100-point check: incomplete\n\n  points attained: 95/100\n  - passport: 70 pts — ok\n  - medicare_card: 25 pts — ok\n  - drivers_licence: 40 pts — ok\n\n  exactly what is missing:\n    -> evidence of current residential address within last 3 months\n```\n\n## Limitations and Safety\n\n- This workflow uploads identity and address documents to a hosted third-party\n  service. Obtain the user's explicit approval before transmission, minimize the\n  files and fields sent, and confirm the provider's current retention, residency,\n  access, and deletion terms for the intended jurisdiction.\n- A points result is an aid to review, not a legal KYC/AML determination. Verify\n  scheme rules against current AFP, AUSTRAC, and organizational requirements and\n  keep a qualified human reviewer responsible for the onboarding decision.\n- Never treat a passing score as proof that a document is genuine or that the\n  named person controls it; run independent authenticity and liveness checks where\n  the decision warrants them.\n\n## Notes\n\n- Costs 2 credits per check; free weekly allowance applies\n- Point values: passport 70, citizenship certificate 70, birth certificate 70, driver's licence 40, medicare card 25, bank statement 25, utility bill 25, council rates 25\n- The check maps documents to the scheme and reports gaps — it does not verify document authenticity (use `verify-document` for that)\n- Free key at https://www.stipple.sh for metering beyond the anonymous allowance\n",
+      "tags": [
+        "pdf",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "document",
+        "image"
+      ],
+      "useCases": [
+        "Onboarding employees, tenants, contractors, or customers in Australia",
+        "KYC flows needing AFP 100-point or AUSTRAC safe-harbour compliance",
+        "\"Do these documents satisfy the 100-point check?\""
+      ],
+      "scrapedAt": "2026-09-01T11:28:46.911Z"
+    },
+    {
       "id": "antigravity-chrome-extension-developer",
       "name": "chrome-extension-developer",
       "slug": "chrome-extension-developer",
@@ -16312,6 +16339,36 @@
       "scrapedAt": "2026-07-02T09:26:36.855Z"
     },
     {
+      "id": "antigravity-detect-ai-text",
+      "name": "detect-ai-text",
+      "slug": "detect-ai-text",
+      "description": "Estimate whether a document's prose was written by AI, with the linguistic tells and honest abstention on non-prose. Use when the user asks whether an essay, report, CV, submission, or article was AI-generated — for triage, not proof.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/detect-ai-text",
+      "content": "\n# AI-Text Detection\n\nEstimate the probability that a document's prose was written by AI, with the specific linguistic tells and an honest abstention when the document isn't prose. Uses the Stipple API (free anonymous tier).\n\n## When to use\n\n- Educators screening student submissions\n- Publishers and platforms triaging inbound content\n- HR reviewing AI-drafted CVs (flag, don't reject)\n- Researchers checking source provenance\n\n## Instructions\n\n1. **Get the document.** URL, local file path (PDF, DOCX, TXT, MD), or raw text via `--text`.\n\n2. **Run detection.**\n\n   ```bash\n   curl -X POST https://www.stipple.sh/v1/detect-ai-text \\\n     -F \"file=@essay.pdf\" \\\n     -H \"Authorization: Bearer $STIPPLE_API_KEY\"\n   ```\n\n   For raw text: POST JSON `{\"text\": \"...\"}` to the same endpoint.\n\n3. **Interpret the response.**\n\n   - `applicable: false` — the document is not prose (forms, tables, scans, spreadsheets). Detection is **deliberately refused** rather than guessed. Report this and stop.\n   - `probability` — model confidence (0–1), NOT a calibrated truth\n   - `lean` — \"ai\" | \"human\" | \"unsure\"\n   - `tells[]` — the specific phrases/patterns flagged (e.g. \"It is important to note that\", uniform sentence length, low burstiness)\n   - `reasoning` — why the model reached its verdict\n   - `limitations` — always present; the API states its own noise profile\n\n4. **Report honestly.** This measures *style, not authenticity*:\n\n   | Question | Tool |\n   |---|---|\n   | Was this *written* by AI? (style) | this skill |\n   | Is this document *genuine/tampered*? (forensics) | `verify-document` skill |\n\n   A human can write generically; an AI can write plainly. One triage signal, never a verdict.\n\n## Output format\n\n```\nAI-written probability: 0.87  (lean: ai)\nprose ratio: 0.82\n\nlinguistic tells:\n  - \"It is important to note that, in today's fast-paced world\" (stock phrase)\n  - uniform sentence length across paragraphs\n  - low burstiness; no authorial asides\n\nreasoning: The text relies entirely on formulaic transition clichés...\nlimitations: The probability is the model's CONFIDENCE, not a calibrated truth.\n```\n\n## Limitations and Safety\n\n- AI-text detection is probabilistic and can disproportionately flag templated,\n  coached, translated, accessibility-assisted, or non-native-English writing. Do\n  not use it as proof of misconduct or as the sole basis for employment, academic,\n  publishing, or disciplinary action.\n- Uploading a document sends its contents to a hosted third party. Obtain explicit\n  approval first, remove unnecessary personal or confidential material, and verify\n  the provider's current retention and deletion terms.\n- Preserve the original work and give the affected person a meaningful human review\n  and appeal path before any consequential decision.\n\n## Notes\n\n- Non-prose documents (forms, tables, payslips) get `applicable: false` — the engine refuses rather than guessing\n- Can false-flag templated/coached or non-native-English writing — always present as one signal alongside human review\n- Free anonymous tier works without a key; free key at https://www.stipple.sh\n",
+      "tags": [
+        "pdf",
+        "docx",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "template",
+        "document",
+        "spreadsheet",
+        "rag"
+      ],
+      "useCases": [
+        "Educators screening student submissions",
+        "Publishers and platforms triaging inbound content",
+        "HR reviewing AI-drafted CVs (flag, don't reject)",
+        "Researchers checking source provenance"
+      ],
+      "scrapedAt": "2026-09-01T11:31:07.811Z"
+    },
+    {
       "id": "antigravity-deterministic-design",
       "name": "deterministic-design",
       "slug": "deterministic-design",
@@ -19365,6 +19422,33 @@
       "scrapedAt": "2026-03-07T06:54:33.152Z"
     },
     {
+      "id": "antigravity-extract-document-data",
+      "name": "extract-document-data",
+      "slug": "extract-document-data",
+      "description": "Extract structured, grounded fields from documents — values cite their page, missing values abstain instead of hallucinating. Use for parsing invoices, payslips, statements, contracts.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/extract-document-data",
+      "content": "\n# Extract Document Data\n\nExtract structured JSON from documents with per-value grounding: every extracted value cites where it came from (page number, confidence), and values that aren't clearly present are reported in `not_found` rather than hallucinated. Uses the Stipple API (free anonymous tier).\n\n## When to use\n\n- Parsing payslips, invoices, bank statements, receipts, or contracts\n- Converting unstructured documents to JSON for downstream systems\n- Any extraction where hallucinated values are worse than missing values (lending, accounting, compliance)\n\n## Instructions\n\n1. **Get the document.** URL or local file path (PDF, PNG, JPEG, DOCX).\n\n2. **Choose the extraction mode:**\n   - **Ad-hoc fields** — tell the API exactly which fields you want:\n     ```bash\n     curl -X POST https://www.stipple.sh/v1/extract \\\n       -F \"file=@payslip.pdf\" \\\n       -F 'fields=[{\"name\":\"employer_name\"},{\"name\":\"net_pay\"},{\"name\":\"pay_date\"}]' \\\n       -H \"Authorization: Bearer $STIPPLE_API_KEY\"\n     ```\n   - **Template** — use a built-in schema: `payslip`, `tax_invoice`, `bank_statement`, `receipt`, `contract`\n   - **Schema-free** — omit `fields` and let the model extract what it finds\n\n3. **Interpret the response.**\n\n   ```json\n   {\n     \"mode\": \"schema_free\",\n     \"document_type\": \"payslip\",\n     \"pages_read\": 1,\n     \"fields\": {\n       \"employer_name\": {\"value\": \"Acme Cleaning Pty Ltd\", \"confidence\": 0.95, \"page\": 1},\n       \"net_pay\": {\"value\": \"2845.10\", \"confidence\": 0.97, \"page\": 1}\n     },\n     \"not_found\": [\"ytd_tax\"]\n   }\n   ```\n\n   - Every value carries `confidence` (the model's self-report) and `page` (grounding)\n   - `not_found[]` lists requested fields the model couldn't find — **absences are reported, never guessed**\n   - `pages_read` shows how many pages were processed (page limits apply per document)\n\n4. **Report honestly.** This is *extraction, not verification* — values are what the document **shows**, not proof it's genuine:\n   - \"Employer: Acme Cleaning Pty Ltd (confidence 0.95, page 1)\"\n   - \"ytd_tax: not found in document\" — never \"ytd_tax: 0\" or a guess\n   - For \"is this document genuine?\", pair with the `verify-document` skill first\n\n## Output format\n\n```\nPayslip fields (grounded, not guessed):\n\n  Employer          Acme Cleaning Pty Ltd  (confidence 0.95, page 1)\n  Employee          J. Citizen             (confidence 0.98, page 1)\n  Net pay           2,845.10               (confidence 0.97, page 1)\n  Superannuation    268.20                 (confidence 0.93, page 1)\n\nnot_found: ytd_tax\n(absences are reported, never hallucinated)\n```\n\n## Limitations and Safety\n\n- Invoices, statements, payslips, and contracts often contain sensitive personal,\n  financial, or commercial data. Obtain explicit approval before uploading them to\n  a hosted third party, minimize the submitted content, and confirm current\n  retention, residency, access, and deletion terms.\n- Confidence and page grounding do not prove that an extracted value is correct or\n  that the source document is authentic. Reconcile consequential values against the\n  original document and authoritative systems before payment, lending, accounting,\n  compliance, or legal action.\n- Keep the original file and extraction response so a human reviewer can reproduce\n  and correct disputed fields.\n\n## Notes\n\n- Costs 1 credit per page read by the model (minimum 1); free weekly allowance applies\n- Templates: `payslip`, `tax_invoice`, `bank_statement`, `receipt`, `contract` — pass as the `template` form field\n- Tables are extracted with structure preserved; multi-page documents are processed page by page\n- Pairs with `verify-document` (run first, for authenticity) — an extracted value from a tampered document is still wrong\n- Free key at https://www.stipple.sh for metering beyond the anonymous allowance\n",
+      "tags": [
+        "pdf",
+        "docx",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "template",
+        "document"
+      ],
+      "useCases": [
+        "Parsing payslips, invoices, bank statements, receipts, or contracts",
+        "Converting unstructured documents to JSON for downstream systems",
+        "Any extraction where hallucinated values are worse than missing values (lending, accounting, compliance)"
+      ],
+      "scrapedAt": "2026-09-01T11:32:09.455Z"
+    },
+    {
       "id": "antigravity-fable-safe-prompt",
       "name": "fable-safe-prompt",
       "slug": "fable-safe-prompt",
@@ -20170,6 +20254,33 @@
         "Do not use it to search a general social feed, profile strangers, infer"
       ],
       "scrapedAt": "2026-07-27T10:06:41.804Z"
+    },
+    {
+      "id": "antigravity-find-matching-tenders",
+      "name": "find-matching-tenders",
+      "slug": "find-matching-tenders",
+      "description": "Find open AU/NZ government tenders matching what a company does, ranked by fit with why and gap analysis. Use when the user asks to find tenders, bid opportunities, government contracts, or RFPs for their business (or a client's).",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/find-matching-tenders",
+      "content": "\n# Find Matching Tenders\n\nSearch live AU/NZ government tenders, rank them against what a company actually does (read from its website), and explain why each opportunity is relevant — including the capability gaps to prepare evidence for. Tender search is free forever on the Stipple API; no API key or signup needed.\n\n## When to use\n\n- Business development: \"find tenders we could bid on\"\n- Market research: \"what government work is out there for cybersecurity firms in NSW?\"\n- Bid pipeline maintenance: \"check for new construction tenders this week\"\n\n## Instructions\n\n1. **Get the company profile.** Ask for the company's website URL. If the user provides a description instead, skip resolution and use their description directly as capability context.\n\n2. **Resolve the company** (optional but improves matching):\n\n   ```bash\n   curl -X POST https://www.stipple.sh/v1/companies/resolve \\\n     -H \"Content-Type: application/json\" \\\n     -d '{\"query\": \"https://your-company.com\"}'\n   ```\n\n   Returns the company's registered name, ABN, jurisdiction, and status.\n\n3. **Search open tenders** (free, no key):\n\n   ```bash\n   curl \"https://www.stipple.sh/v1/tenders?q=construction&jurisdiction=AU&limit=10\"\n   ```\n\n   Filters: `q` (keyword), `jurisdiction` (AU, AU-NSW, AU-VIC, NZ, ...), `limit`, `offset`.\n\n4. **Rank against the company** (optional, uses free weekly allowance):\n\n   ```bash\n   curl -X POST https://www.stipple.sh/v1/tenders/match \\\n     -H \"Content-Type: application/json\" \\\n     -d '{\"url\": \"https://your-company.com\", \"jurisdiction\": \"AU\", \"limit\": 5}'\n   ```\n\n   Returns ranked matches with `why[]` (why it fits) and `gaps[]` (capability evidence to prepare).\n\n5. **Check data provenance** if results seem thin (free):\n\n   ```bash\n   curl \"https://www.stipple.sh/v1/tenders/sources\"\n   ```\n\n   Shows which government feeds are indexed and their freshness — explains why a search can be empty.\n\n6. **Report honestly.** Match scores are *fit signals*, not win probabilities. Present `gaps[]` as \"prepare evidence for this\", not disqualification.\n\n## Output format\n\n```\nFound 403 open tenders matching \"construction\" (AU/NZ)\n\n#1 [AU-NSW] Digital platform modernisation services\n    buyer:  NSW Department of ...\n    why:    matches 'cloud migration', 'API integration' from your services\n    gap:    no evidence found for 'ICT security assessment'\n    closes: 2026-09-15\n    https://...\n\n#2 [NZ] ...\n```\n\n## Limitations and Safety\n\n- The hosted service receives the search terms and, for matching, the supplied\n  company URL or description. Obtain approval before sending private capability or\n  client information and do not include secrets or non-public bid strategy.\n- Feed coverage and freshness can be incomplete. Confirm eligibility, scope,\n  amendments, deadlines, and submission instructions on the issuing authority's\n  primary tender page before investing time or submitting a bid.\n- Match scores and gap analysis are triage signals, not procurement advice, an\n  eligibility ruling, or a probability of winning.\n\n## Notes\n\n- Tender search and source listing are free forever — no key, no credits\n- Matching costs a small number of credits on the free weekly allowance\n- For ongoing monitoring, pair with a cron job that re-runs step 3 daily and diffs results\n- Data sources: NZ GETS, NSW eTendering, VendorPanel, and other government feeds\n",
+      "tags": [
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "document",
+        "security",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Business development: \"find tenders we could bid on\"",
+        "Market research: \"what government work is out there for cybersecurity firms in NSW?\"",
+        "Bid pipeline maintenance: \"check for new construction tenders this week\""
+      ],
+      "scrapedAt": "2026-09-01T11:32:24.741Z"
     },
     {
       "id": "superpowers-finishing-a-development-branch",
@@ -25678,109 +25789,6 @@
       "scrapedAt": "2026-04-18T07:21:21.133Z"
     },
     {
-      "id": "antigravity-infinite-gratitude",
-      "name": "infinite-gratitude",
-      "slug": "infinite-gratitude",
-      "description": "Multi-agent research skill for parallel research execution (10 agents, battle-tested with real case studies).",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/infinite-gratitude",
-      "content": "\n# Infinite Gratitude\n\n> **Source**: [sstklen/infinite-gratitude](https://github.com/sstklen/infinite-gratitude)\n\n## Description\n\nA multi-agent research skill designed for parallel research execution. It orchestrates 10 agents to conduct deep research, battle-tested with real case studies.\n\n## When to Use\nUse this skill when you need to perform extensive, parallelized research on a topic, leveraging multiple agents to gather and synthesize information more efficiently than a single linear process.\n\n## How to Use\n\nThis is an external skill. Please refer to the [official repository](https://github.com/sstklen/infinite-gratitude) for installation and usage instructions.\n\n```bash\ngit clone https://github.com/sstklen/infinite-gratitude\n```\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "agent",
-        "design",
-        "rag"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:20.762Z"
-    },
-    {
-      "id": "antigravity-infinity",
-      "name": "infinity",
-      "slug": "infinity",
-      "description": "Enforces a strict input boundary protocol (detect, classify, filter, verify) to ensure untrusted data never reaches business logic raw.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/infinity",
-      "content": "\n# infinity — Input Boundary & Validation Protocol\n\n## Core Philosophy\n\n> Nothing untrusted ever reaches the core — it is stopped before contact. No external data touches the codebase raw. Every boundary where data enters the system must have a filter.\n\nThe #1 source of silent bugs, crashes, and vulnerabilities is external data that arrives in an unexpected shape and gets used directly without checking. This skill enforces a filter layer at every entry point, every time.\n\n---\n\n## When to Use This Skill\n\n- Use when you need to handle an API response\n- Use when reading user input or adding a form handler\n- Use when working with environment variables or CLI arguments\n- Use when parsing webhooks or reading from the filesystem\n- Use when any code calls `.body`, `.params`, `.query`, `.env`, `fs.read`, or a third-party SDK response\n\n---\n\n## The Four Phases\n\n### PHASE 1 — Boundary Detection\n\nBefore writing or modifying any code that involves external data, the AI must identify and list every entry point in scope:\n\n- HTTP request bodies, headers, query params\n- User form inputs and UI-submitted data\n- Environment variables and config files\n- Third-party API responses\n- Webhook payloads\n- File reads from disk\n- CLI arguments\n- Database query results from external sources\n- WebSocket messages\n\n> **The AI must not write any data-handling logic until every entry point in scope is listed.**\n\n---\n\n### PHASE 2 — Classify Each Input\n\nFor every entry point identified, the AI classifies it into one of three trust levels:\n\n| Level | Definition | Examples |\n|---|---|---|\n| `TRUSTED` | Internal constants, hardcoded values, your own compile-time config | Enum values, hardcoded defaults, internal constants |\n| `SEMI-TRUSTED` | Your own internal services, internal APIs, controlled infrastructure | Internal microservice responses, your own database reads |\n| `UNTRUSTED` | Anything from users, the internet, third parties, or the filesystem | User input, external API responses, uploaded files, env vars, CLI args |\n\n> **Rule:** `TRUSTED` inputs may be used directly. `SEMI-TRUSTED` and `UNTRUSTED` inputs must pass through a filter layer before any use.\n\nThe AI outputs this classification before writing any handling code:\n\n```\nINFINITY — BOUNDARY MAP\n─────────────────────────────────────────\nEntry Point              | Trust Level  | Filter Required\n─────────────────────────────────────────\nreq.body.email           | UNTRUSTED    | ✓ format + sanitize\nprocess.env.API_KEY      | UNTRUSTED    | ✓ presence + non-empty\ninternalService.getData()| SEMI-TRUSTED | ✓ schema validate\nPAGINATION_LIMIT = 20    | TRUSTED      | ✗ none needed\n─────────────────────────────────────────\n```\n\n---\n\n### PHASE 3 — Mandatory Filter Layer\n\nEvery `UNTRUSTED` and `SEMI-TRUSTED` input must pass through validation before it reaches any business logic, storage, or rendering. The AI must apply the right filter type for the right context:\n\n**Type Checking**\n- Verify the input is the expected type before using it\n- Never assume a string is a string, a number is a number, or an array is an array\n\n**Schema Validation**\n- For objects and API responses, validate shape before accessing nested fields\n- If a required field is missing, reject — do not use a fallback that hides the problem\n\n**Sanitization**\n- Strip or escape content before rendering to UI (prevent XSS)\n- Normalize strings before storage (trim whitespace, consistent casing where appropriate)\n\n**Presence & Format Checks**\n- Env vars: must exist and be non-empty before use\n- IDs and tokens: must match expected format before use\n\n**Rejection Rule**\n- On invalid input: reject explicitly and return a clear error\n- Never silently use bad data with a fallback\n- Never let bad data pass through to fix itself \"downstream\"\n\n```\n// WRONG — using raw input directly\nconst user = await db.find(req.params.id);\n\n// RIGHT — validate before use\nconst id = req.params.id;\nif (!id || typeof id !== 'string' || !isValidUUID(id)) {\n  return res.status(400).json({ error: 'Invalid ID format' });\n}\nconst user = await db.find(id);\n```\n\n---\n\n### PHASE 4 — Self-Check Before Done\n\nBefore the AI declares any data-handling code complete, it traces each entry point and confirms:\n\n```\nINFINITY — VERIFICATION\n─────────────────────────────────────────\nEntry Point              | Filter Exists | Filter Type\n─────────────────────────────────────────\nreq.body.email           | ✓ YES         | format + sanitize\nprocess.env.API_KEY      | ✓ YES         | presence check\ninternalService.getData()| ✓ YES         | schema validation\n─────────────────────────────────────────\nUnfiltered inputs reaching logic: NONE ✓\n─────────────────────────────────────────\n```\n\nIf any `UNTRUSTED` or `SEMI-TRUSTED` input reaches logic, storage, or rendering without a filter — the AI flags it. It does not silently pass.\n\n---\n\n## Hard Rules (Never Violated)\n\n- **No raw external data in business logic.** Ever.\n- **No silent fallbacks on bad input.** Reject explicitly.\n- **No assum",
-      "tags": [
-        "api",
-        "ai",
-        "security",
-        "rag",
-        "cro"
-      ],
-      "useCases": [
-        "Use when you need to handle an API response",
-        "Use when reading user input or adding a form handler",
-        "Use when working with environment variables or CLI arguments",
-        "Use when parsing webhooks or reading from the filesystem",
-        "Use when any code calls `.body`, `.params`, `.query`, `.env`, `fs.read`, or a third-party SDK response"
-      ],
-      "scrapedAt": "2026-06-24T09:45:07.282Z"
-    },
-    {
-      "id": "antigravity-ingest-youtube",
-      "name": "ingest-youtube",
-      "slug": "ingest-youtube",
-      "description": "Pull a YouTube video transcript into a queryable markdown vault with yt-dlp subtitle discovery, VTT cleanup, metadata frontmatter, and capture-seed stubs.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ingest-youtube",
-      "content": "\n# ingest-youtube — YouTube-to-vault connector\n\nPulls YouTube transcripts into a markdown vault as queryable typed-memory entries that downstream skills (knowledge graph extraction, voice-fingerprint training, content repurposing, action-item extraction) can act on.\n\nSame pattern as ingest-slack, ingest-whatsapp, ingest-notion, ingest-linear, ingest-github, ingest-gmail. Adding YouTube means a new normalizer, not a new architecture.\n\n## When to use\n\n- User pastes a YouTube URL and asks for a transcript or summary\n- User says `/ingest-youtube <url>` for a single video\n- User asks to capture, sync, ingest, transcribe, or pull a talk/podcast/keynote into the vault\n\nDo NOT use for:\n- Downloading the actual video file (use `yt-dlp` directly with `-f best`)\n- Channel-wide ingestion or `--days` windows; this script ingests one video URL at a time\n- Live streams (transcripts are not stable)\n- Non-YouTube sources (Vimeo, Twitch, Twitter Spaces have their own connectors)\n- One-off transcript reads where the user does not want a vault file (run `yt-dlp --write-auto-sub` directly and pipe to stdout)\n\n## How it works\n\n1. Parse the input as one YouTube video URL.\n2. Verify `yt-dlp` is installed. If not, the script exits with install instructions: `brew install yt-dlp` (macOS) or `pip3 install --user yt-dlp`.\n3. Validate the URL as a single http(s) YouTube video and call `yt-dlp --ignore-config --list-subs -- <url>` to enumerate available subtitles.\n4. Subtitle priority: manual subs > auto-generated captions. Manual subs preserve creator-provided punctuation and speaker labels; auto-gen is uppercase + no punctuation.\n5. Download the highest-priority subtitle as VTT via `yt-dlp --write-sub --sub-lang <lang> --skip-download`. Default language preference: `en,es` (English first, Spanish second).\n6. Strip VTT timing markers and merge into clean prose paragraphs. Deduplicate repeated lines (auto-generated VTTs are line-doubled). Preserve speaker labels if the source had them.\n7. Pull video metadata (title, channel, upload date, duration, video_id, URL) via `yt-dlp --print-json --skip-download`.\n8. Slugify the channel name and video title. Write to `External Inputs/YouTube/<channel-slug>/<YYYY-MM-DD>-<video-slug>.md`.\n9. Scan transcript for trigger keywords (decision, framework, model, principle, \"the lesson is\", playbook, anti-pattern, case study). For each match, create a writing-seed stub at `Meta/Captures/<YYYY-MM-DD>-youtube-<channel-slug>-<video-id>.md` so the seed lands in the captures aggregator.\n10. Print summary: file path, transcript word count, language, seeds detected.\n\n## Invocation\n\n```bash\npython3 ingest.py <youtube-url> [--vault <path>] [--lang <code>]\n```\n\nDefaults:\n- `--vault`: `$VAULT_ROOT` env var or current directory\n- `--lang`: `en,es` (English first, Spanish second; matches a common bilingual default)\n- `--whisper`: accepted as a future fallback flag, but this version writes a stub when no subtitles are available\n\n## Output contract\n\nThe vault file at `External Inputs/YouTube/<channel-slug>/<YYYY-MM-DD>-<video-slug>.md` has frontmatter:\n\n```yaml\n---\ntype: external-input\nsource: youtube\nvideo_id: <11-char ID>\nurl: https://www.youtube.com/watch?v=<id>\nchannel: <channel-name>\nchannel_url: https://www.youtube.com/<handle>\ntitle: <video title>\nupload_date: <YYYY-MM-DD>\nduration_seconds: <int>\nlanguage: <ISO code>\nsubtitle_source: manual | auto | whisper\nword_count: <int>\ningested_at: <ISO 8601 timestamp>\n---\n```\n\nBody is the cleaned transcript as paragraph prose. If the source had speaker labels, format as `**<speaker>:** <text>` per turn.\n\n## Idempotency\n\nRe-ingesting the same video URL overwrites the same vault file. The seed stub filenames hash the video_id, so the same source video produces the same stub filename across re-runs. Re-runs refresh, never duplicate.\n\n## Missing subtitles\n\nIf `yt-dlp --list-subs` returns no manual or auto subtitles, the script writes a stub vault note with the video metadata and source URL instead of failing silently. The `--whisper` flag is reserved for a future local transcription fallback and currently reports that the fallback is not implemented.\n\nFor a manual fallback today, download audio with `yt-dlp`, transcribe it with your local Whisper workflow, and add captions or transcript text before rerunning the ingest.\n\n## Limitations\n\n- Ingests one YouTube video URL per run; channel handles, playlists, and `--days` windows are out of scope.\n- Depends on subtitles returned by `yt-dlp`; videos without subtitles produce a metadata stub, not a transcript.\n- Does not download video files or perform built-in Whisper transcription in this version.\n- Network availability, YouTube subtitle access, and local `yt-dlp` behavior determine whether ingest succeeds.\n\n## Acceptance test\n\nRun against the first YouTube video ever uploaded:\n\n```bash\npython3 ingest.py \"https://www.youtube.com/watch?v=jNQXAC9IVRw\" --vault /tmp/test\n```\n\nExpected output:\n```\nWrote 39 words to /tmp/test/External In",
-      "tags": [
-        "python",
-        "markdown",
-        "ai",
-        "agent",
-        "workflow",
-        "rag",
-        "cro"
-      ],
-      "useCases": [
-        "User pastes a YouTube URL and asks for a transcript or summary",
-        "User says `/ingest-youtube <url>` for a single video",
-        "User asks to capture, sync, ingest, transcribe, or pull a talk/podcast/keynote into the vault",
-        "Downloading the actual video file (use `yt-dlp` directly with `-f best`)",
-        "Channel-wide ingestion or `--days` windows; this script ingests one video URL at a time"
-      ],
-      "scrapedAt": "2026-05-12T08:52:38.488Z"
-    },
-    {
-      "id": "antigravity-inngest",
-      "name": "inngest",
-      "slug": "inngest",
-      "description": "Inngest expert for serverless-first background jobs, event-driven workflows, and durable execution without managing queues or workers.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/inngest",
-      "content": "\n# Inngest Integration\n\nInngest expert for serverless-first background jobs, event-driven workflows,\nand durable execution without managing queues or workers.\n\n## Principles\n\n- Events are the primitive - everything triggers from events, not queues\n- Steps are your checkpoints - each step result is durably stored\n- Sleep is not a hack - Inngest sleeps are real, not blocking threads\n- Retries are automatic - but you control the policy\n- Functions are just HTTP handlers - deploy anywhere that serves HTTP\n- Concurrency is a first-class concern - protect downstream services\n- Idempotency keys prevent duplicates - use them for critical operations\n- Fan-out is built-in - one event can trigger many functions\n\n## Capabilities\n\n- inngest-functions\n- event-driven-workflows\n- step-functions\n- serverless-background-jobs\n- durable-sleep\n- fan-out-patterns\n- concurrency-control\n- scheduled-functions\n\n## Scope\n\n- redis-queues -> bullmq-specialist\n- workflow-orchestration -> temporal-craftsman\n- message-streaming -> event-architect\n- infrastructure -> infra-architect\n\n## Tooling\n\n### Core\n\n- inngest\n- inngest-cli\n\n### Frameworks\n\n- nextjs\n- express\n- hono\n- remix\n- sveltekit\n\n### Deployment\n\n- vercel\n- cloudflare-workers\n- netlify\n- railway\n- fly-io\n\n### Patterns\n\n- step-functions\n- event-fan-out\n- scheduled-cron\n- webhook-handling\n\n## Patterns\n\n### Basic Function Setup\n\nInngest function with typed events in Next.js\n\n**When to use**: Starting with Inngest in any Next.js project\n\n// lib/inngest/client.ts\nimport { Inngest } from 'inngest';\n\nexport const inngest = new Inngest({\n  id: 'my-app',\n  schemas: new EventSchemas().fromRecord<Events>(),\n});\n\n// Define your events with types\ntype Events = {\n  'user/signed.up': { data: { userId: string; email: string } };\n  'order/placed': { data: { orderId: string; total: number } };\n};\n\n// lib/inngest/functions.ts\nimport { inngest } from './client';\n\nexport const sendWelcomeEmail = inngest.createFunction(\n  { id: 'send-welcome-email' },\n  { event: 'user/signed.up' },\n  async ({ event, step }) => {\n    // Step 1: Get user details\n    const user = await step.run('get-user', async () => {\n      return await db.users.findUnique({ where: { id: event.data.userId } });\n    });\n\n    // Step 2: Send welcome email\n    await step.run('send-email', async () => {\n      await resend.emails.send({\n        to: user.email,\n        subject: 'Welcome!',\n        template: 'welcome',\n      });\n    });\n\n    // Step 3: Wait 24 hours, then send tips\n    await step.sleep('wait-for-tips', '24h');\n\n    await step.run('send-tips', async () => {\n      await resend.emails.send({\n        to: user.email,\n        subject: 'Getting Started Tips',\n        template: 'tips',\n      });\n    });\n  }\n);\n\n// app/api/inngest/route.ts (Next.js App Router)\nimport { serve } from 'inngest/next';\nimport { inngest } from '@/lib/inngest/client';\nimport { sendWelcomeEmail } from '@/lib/inngest/functions';\n\nexport const { GET, POST, PUT } = serve({\n  client: inngest,\n  functions: [sendWelcomeEmail],\n});\n\n### Multi-Step Workflow\n\nComplex workflow with parallel steps and error handling\n\n**When to use**: Processing that involves multiple services or long waits\n\nexport const processOrder = inngest.createFunction(\n  {\n    id: 'process-order',\n    retries: 3,\n    concurrency: { limit: 10 },  // Max 10 orders processing at once\n  },\n  { event: 'order/placed' },\n  async ({ event, step }) => {\n    const { orderId } = event.data;\n\n    // Parallel steps - both run simultaneously\n    const [inventory, payment] = await Promise.all([\n      step.run('check-inventory', () => checkInventory(orderId)),\n      step.run('validate-payment', () => validatePayment(orderId)),\n    ]);\n\n    if (!inventory.available) {\n      // Send event instead of direct call (fan-out pattern)\n      await step.sendEvent('notify-backorder', {\n        name: 'order/backordered',\n        data: { orderId, items: inventory.missing },\n      });\n      return { status: 'backordered' };\n    }\n\n    // Process payment\n    const charge = await step.run('charge-payment', async () => {\n      return await stripe.charges.create({\n        amount: event.data.total,\n        customer: payment.customerId,\n      });\n    });\n\n    // Ship order\n    await step.run('ship-order', () => fulfillment.ship(orderId));\n\n    return { status: 'completed', chargeId: charge.id };\n  }\n);\n\n### Scheduled/Cron Functions\n\nFunctions that run on a schedule\n\n**When to use**: Recurring tasks like daily reports or cleanup jobs\n\nexport const dailyDigest = inngest.createFunction(\n  { id: 'daily-digest' },\n  { cron: '0 9 * * *' },  // Every day at 9am UTC\n  async ({ step }) => {\n    // Get all users who want digests\n    const users = await step.run('get-users', async () => {\n      return await db.users.findMany({\n        where: { digestEnabled: true },\n      });\n    });\n\n    // Send to each user (creates child events)\n    await step.sendEvent(\n      'send-digests',\n      users.map(user => ({\n        name: 'digest/send',\n        ",
-      "tags": [
-        "nextjs",
-        "pdf",
-        "api",
-        "ai",
-        "agent",
-        "llm",
-        "automation",
-        "workflow",
-        "template",
-        "design"
-      ],
-      "useCases": [
-        "User mentions or implies: inngest",
-        "User mentions or implies: serverless background job",
-        "User mentions or implies: event-driven workflow",
-        "User mentions or implies: step function",
-        "User mentions or implies: durable execution"
-      ],
-      "scrapedAt": "2026-01-26T13:19:02.776Z"
-    },
-    {
       "id": "anthropic-internal-comms",
       "name": "internal-comms",
       "slug": "internal-comms",
@@ -27608,14 +27616,14 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 376
+      "count": 379
     },
     {
       "id": "ai-agents",
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 363
+      "count": 360
     },
     {
       "id": "creative-media",
@@ -27680,42 +27688,42 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 279904
+      "stars": 280241
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 172747
+      "stars": 172911
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 74126
+      "stars": 74186
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 85740
+      "stars": 85832
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1705
+      "stars": 1708
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
-      "newSkillCount": 6,
-      "stars": 45745
+      "newSkillCount": 10,
+      "stars": 45791
     },
     {
       "name": "Xquik",
@@ -27725,10 +27733,10 @@
       "stars": 192
     }
   ],
-  "lastUpdated": "2026-08-31T13:28:30.480Z",
+  "lastUpdated": "2026-09-01T11:34:14.555Z",
   "stats": {
     "totalSkills": 1136,
-    "newSkills": 15,
-    "scrapedAt": "2026-08-31T13:28:30.480Z"
+    "newSkills": 19,
+    "scrapedAt": "2026-09-01T11:34:14.555Z"
   }
 }

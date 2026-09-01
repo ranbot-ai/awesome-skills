@@ -1,0 +1,27 @@
+{
+  "id": "antigravity-extract-document-data",
+  "name": "extract-document-data",
+  "slug": "extract-document-data",
+  "description": "Extract structured, grounded fields from documents — values cite their page, missing values abstain instead of hallucinating. Use for parsing invoices, payslips, statements, contracts.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/extract-document-data",
+  "content": "\n# Extract Document Data\n\nExtract structured JSON from documents with per-value grounding: every extracted value cites where it came from (page number, confidence), and values that aren't clearly present are reported in `not_found` rather than hallucinated. Uses the Stipple API (free anonymous tier).\n\n## When to use\n\n- Parsing payslips, invoices, bank statements, receipts, or contracts\n- Converting unstructured documents to JSON for downstream systems\n- Any extraction where hallucinated values are worse than missing values (lending, accounting, compliance)\n\n## Instructions\n\n1. **Get the document.** URL or local file path (PDF, PNG, JPEG, DOCX).\n\n2. **Choose the extraction mode:**\n   - **Ad-hoc fields** — tell the API exactly which fields you want:\n     ```bash\n     curl -X POST https://www.stipple.sh/v1/extract \\\n       -F \"file=@payslip.pdf\" \\\n       -F 'fields=[{\"name\":\"employer_name\"},{\"name\":\"net_pay\"},{\"name\":\"pay_date\"}]' \\\n       -H \"Authorization: Bearer $STIPPLE_API_KEY\"\n     ```\n   - **Template** — use a built-in schema: `payslip`, `tax_invoice`, `bank_statement`, `receipt`, `contract`\n   - **Schema-free** — omit `fields` and let the model extract what it finds\n\n3. **Interpret the response.**\n\n   ```json\n   {\n     \"mode\": \"schema_free\",\n     \"document_type\": \"payslip\",\n     \"pages_read\": 1,\n     \"fields\": {\n       \"employer_name\": {\"value\": \"Acme Cleaning Pty Ltd\", \"confidence\": 0.95, \"page\": 1},\n       \"net_pay\": {\"value\": \"2845.10\", \"confidence\": 0.97, \"page\": 1}\n     },\n     \"not_found\": [\"ytd_tax\"]\n   }\n   ```\n\n   - Every value carries `confidence` (the model's self-report) and `page` (grounding)\n   - `not_found[]` lists requested fields the model couldn't find — **absences are reported, never guessed**\n   - `pages_read` shows how many pages were processed (page limits apply per document)\n\n4. **Report honestly.** This is *extraction, not verification* — values are what the document **shows**, not proof it's genuine:\n   - \"Employer: Acme Cleaning Pty Ltd (confidence 0.95, page 1)\"\n   - \"ytd_tax: not found in document\" — never \"ytd_tax: 0\" or a guess\n   - For \"is this document genuine?\", pair with the `verify-document` skill first\n\n## Output format\n\n```\nPayslip fields (grounded, not guessed):\n\n  Employer          Acme Cleaning Pty Ltd  (confidence 0.95, page 1)\n  Employee          J. Citizen             (confidence 0.98, page 1)\n  Net pay           2,845.10               (confidence 0.97, page 1)\n  Superannuation    268.20                 (confidence 0.93, page 1)\n\nnot_found: ytd_tax\n(absences are reported, never hallucinated)\n```\n\n## Limitations and Safety\n\n- Invoices, statements, payslips, and contracts often contain sensitive personal,\n  financial, or commercial data. Obtain explicit approval before uploading them to\n  a hosted third party, minimize the submitted content, and confirm current\n  retention, residency, access, and deletion terms.\n- Confidence and page grounding do not prove that an extracted value is correct or\n  that the source document is authentic. Reconcile consequential values against the\n  original document and authoritative systems before payment, lending, accounting,\n  compliance, or legal action.\n- Keep the original file and extraction response so a human reviewer can reproduce\n  and correct disputed fields.\n\n## Notes\n\n- Costs 1 credit per page read by the model (minimum 1); free weekly allowance applies\n- Templates: `payslip`, `tax_invoice`, `bank_statement`, `receipt`, `contract` — pass as the `template` form field\n- Tables are extracted with structure preserved; multi-page documents are processed page by page\n- Pairs with `verify-document` (run first, for authenticity) — an extracted value from a tampered document is still wrong\n- Free key at https://www.stipple.sh for metering beyond the anonymous allowance\n",
+  "tags": [
+    "pdf",
+    "docx",
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "template",
+    "document"
+  ],
+  "useCases": [
+    "Parsing payslips, invoices, bank statements, receipts, or contracts",
+    "Converting unstructured documents to JSON for downstream systems",
+    "Any extraction where hallucinated values are worse than missing values (lending, accounting, compliance)"
+  ],
+  "scrapedAt": "2026-09-01T11:32:09.455Z"
+}

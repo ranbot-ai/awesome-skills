@@ -1,0 +1,27 @@
+{
+  "id": "antigravity-check-identity-pack",
+  "name": "check-identity-pack",
+  "slug": "check-identity-pack",
+  "description": "Run an AFP 100-point or AUSTRAC safe-harbour identity check over a set of documents, and report exactly what's missing. Use when the user asks to check identity documents, verify someone's ID for onboarding, or assess whether a document pack satisfies Australian identity requirements.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/check-identity-pack",
+  "content": "\n# Check Identity Pack\n\nRun an AFP 100-point or AUSTRAC safe-harbour identity check over a document set. Reports the points attained, per-document status, and **exactly what's missing** — so the user can request only the absent documents and re-run. Uses the Stipple API (free anonymous tier).\n\n## When to use\n\n- Onboarding employees, tenants, contractors, or customers in Australia\n- KYC flows needing AFP 100-point or AUSTRAC safe-harbour compliance\n- \"Do these documents satisfy the 100-point check?\"\n\n## Instructions\n\n1. **Get the documents.** Multiple file paths or URLs (PDF/images): passport, driver's licence, medicare card, bank statement, utility bill, etc.\n\n2. **Choose the scheme:**\n   - `afp_100_point` — the standard Australian 100-point system\n   - `austrac_safe_harbour` — AUSTRAC safe-harbour identity verification\n\n3. **Run the check.** POST the document set (multipart, multiple `files` parts):\n\n   ```bash\n   curl -X POST \"https://www.stipple.sh/v1/identity-check?scheme=afp_100_point\" \\\n     -F \"files=@passport.pdf\" \\\n     -F \"files=@medicare-card.jpg\" \\\n     -F \"files=@bank-statement.pdf\" \\\n     -H \"Authorization: Bearer $STIPPLE_API_KEY\"\n   ```\n\n4. **Interpret the response.**\n\n   - `status` — complete / incomplete / failed\n   - `points_total` — points attained (e.g. 95/100)\n   - `checks[]` — per-document: type detected, point value, status\n   - `missing[]` — **exactly what is missing** (e.g. \"evidence of current residential address within last 3 months\")\n\n5. **Report with the gap list front and centre.** The product here is the *exactly-what's-missing* list — the user's onboarding UX can loop on it: request only what's absent, re-run, done.\n\n6. **Important caveat.** Identity check answers *who is this* — it does NOT answer *is this document genuine*. A forged passport that matches the name scores points. For genuineness, pair with the `verify-document` skill on each document first.\n\n## Output format\n\n```\nAFP 100-point check: incomplete\n\n  points attained: 95/100\n  - passport: 70 pts — ok\n  - medicare_card: 25 pts — ok\n  - drivers_licence: 40 pts — ok\n\n  exactly what is missing:\n    -> evidence of current residential address within last 3 months\n```\n\n## Limitations and Safety\n\n- This workflow uploads identity and address documents to a hosted third-party\n  service. Obtain the user's explicit approval before transmission, minimize the\n  files and fields sent, and confirm the provider's current retention, residency,\n  access, and deletion terms for the intended jurisdiction.\n- A points result is an aid to review, not a legal KYC/AML determination. Verify\n  scheme rules against current AFP, AUSTRAC, and organizational requirements and\n  keep a qualified human reviewer responsible for the onboarding decision.\n- Never treat a passing score as proof that a document is genuine or that the\n  named person controls it; run independent authenticity and liveness checks where\n  the decision warrants them.\n\n## Notes\n\n- Costs 2 credits per check; free weekly allowance applies\n- Point values: passport 70, citizenship certificate 70, birth certificate 70, driver's licence 40, medicare card 25, bank statement 25, utility bill 25, council rates 25\n- The check maps documents to the scheme and reports gaps — it does not verify document authenticity (use `verify-document` for that)\n- Free key at https://www.stipple.sh for metering beyond the anonymous allowance\n",
+  "tags": [
+    "pdf",
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "workflow",
+    "document",
+    "image"
+  ],
+  "useCases": [
+    "Onboarding employees, tenants, contractors, or customers in Australia",
+    "KYC flows needing AFP 100-point or AUSTRAC safe-harbour compliance",
+    "\"Do these documents satisfy the 100-point check?\""
+  ],
+  "scrapedAt": "2026-09-01T11:28:46.911Z"
+}
