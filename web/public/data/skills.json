@@ -1338,26 +1338,29 @@
       "id": "antigravity-agents-md",
       "name": "agents-md",
       "slug": "agents-md",
-      "description": "This skill should be used when the user asks to \"create AGENTS.md\", \"update AGENTS.md\", \"maintain agent docs\", \"set up CLAUDE.md\", or needs to keep agent instructions concise. Enforces research-backed best practices for minimal, high-signal agent documentation.",
+      "description": "Create, revise, or audit AGENTS.md files from repository evidence, verified commands, and correctly scoped instructions without overwriting maintainer intent.",
       "category": "AI & Agents",
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agents-md",
-      "content": "\n# Maintaining AGENTS.md\n\nAGENTS.md is the canonical agent-facing documentation. Keep it minimal—agents are capable and don't need hand-holding. Target under 60 lines; never exceed 100. Instruction-following quality degrades as document length increases.\n\n## When to Use\n- The user asks to create, update, or audit `AGENTS.md` or `CLAUDE.md`.\n- The project needs concise, high-signal agent instructions derived from the actual toolchain and repo layout.\n- Existing agent documentation is too long, duplicated, or drifting away from real project conventions.\n\n## File Setup\n\n1. Create `AGENTS.md` at project root\n2. Create symlink: `ln -s AGENTS.md CLAUDE.md`\n\n## Before Writing\n\nAnalyze the project to understand what belongs in the file:\n\n1. **Package manager** — Check for lock files (`pnpm-lock.yaml`, `yarn.lock`, `package-lock.json`, `uv.lock`, `poetry.lock`)\n2. **Linter/formatter configs** — Look for `.eslintrc`, `biome.json`, `ruff.toml`, `.prettierrc`, etc. (don't duplicate these in AGENTS.md)\n3. **CI/build commands** — Check `Makefile`, `package.json` scripts, CI configs for canonical commands\n4. **Monorepo indicators** — Check for `pnpm-workspace.yaml`, `nx.json`, Cargo workspace, or subdirectory `package.json` files\n5. **Existing conventions** — Check for existing CONTRIBUTING.md, docs/, or README patterns\n\n## Writing Rules\n\n- **Headers + bullets** — No paragraphs\n- **Code blocks** — For commands and templates\n- **Reference, don't embed** — Point to existing docs: \"See `CONTRIBUTING.md` for setup\" or \"Follow patterns in `src/api/routes/`\"\n- **No filler** — No intros, conclusions, or pleasantries\n- **Trust capabilities** — Omit obvious context\n- **Prefer file-scoped commands** — Per-file test/lint/typecheck commands over project-wide builds\n- **Don't duplicate linters** — Code style lives in linter configs, not AGENTS.md\n\n## Required Sections\n\n### Package Manager\nWhich tool and key commands only:\n```markdown\n## Package Manager\nUse **pnpm**: `pnpm install`, `pnpm dev`, `pnpm test`\n```\n\n### File-Scoped Commands\nPer-file commands are faster and cheaper than full project builds. Always include when available:\n```markdown\n## File-Scoped Commands\n| Task | Command |\n|------|---------|\n| Typecheck | `pnpm tsc --noEmit path/to/file.ts` |\n| Lint | `pnpm eslint path/to/file.ts` |\n| Test | `pnpm jest path/to/file.test.ts` |\n```\n\n### Commit Attribution\nAlways include this section. Agents should use their own identity:\n```markdown\n## Commit Attribution\nAI commits MUST include:\n```\nCo-Authored-By: (the agent model's name and attribution byline)\n```\nExample: `Co-Authored-By: Claude Sonnet 4 <noreply@example.com>`\n```\n\n### Key Conventions\nProject-specific patterns agents must follow. Keep brief.\n\n## Optional Sections\n\nAdd only if truly needed:\n- API route patterns (show template, not explanation)\n- CLI commands (table format)\n- File naming conventions\n- Project structure hints (point to critical files, flag legacy code to avoid)\n- Monorepo overrides (subdirectory `AGENTS.md` files override root)\n\n## Anti-Patterns\n\nOmit these:\n- \"Welcome to...\" or \"This document explains...\"\n- \"You should...\" or \"Remember to...\"\n- Linter/formatter rules already in config files (`.eslintrc`, `biome.json`, `ruff.toml`)\n- Listing installed skills or plugins (agents discover these automatically)\n- Full project-wide build commands when file-scoped alternatives exist\n- Obvious instructions (\"run tests\", \"write clean code\")\n- Explanations of why (just say what)\n- Long prose paragraphs\n\n## Example Structure\n\n```markdown\n# Agent Instructions\n\n## Package Manager\nUse **pnpm**: `pnpm install`, `pnpm dev`\n\n## Commit Attribution\nAI commits MUST include:\n```\nCo-Authored-By: (the agent model's name and attribution byline)\n```\n\n## File-Scoped Commands\n| Task | Command |\n|------|---------|\n| Typecheck | `pnpm tsc --noEmit path/to/file.ts` |\n| Lint | `pnpm eslint path/to/file.ts` |\n| Test | `pnpm jest path/to/file.test.ts` |\n\n## API Routes\n[Template code block]\n\n## CLI\n| Command | Description |\n|---------|-------------|\n| `pnpm cli sync` | Sync data |\n```\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
+      "content": "\n# Maintain AGENTS.md from repository evidence\n\n## Overview\n\nCreate or improve agent instructions that help a coding agent change the\nrepository correctly without rediscovering its workflow. Base every\nrepository-specific command, path, and rule on evidence in the current\ncheckout.\n\nPrefer a focused diff over a wholesale rewrite. There is no universal line\nlimit, required section list, symlink layout, or commit-attribution policy;\nfollow the repository's own needs and maintainer intent.\n\n## When to Use\n\n- The user asks to create, update, shorten, or audit `AGENTS.md`.\n- A monorepo needs root instructions plus narrower package-level overrides.\n- Existing agent instructions contain stale commands, duplicated policy, or\n  unsupported claims.\n- The user wants to reconcile `AGENTS.md` with `CLAUDE.md`,\n  `.github/copilot-instructions.md`, or other repository instruction files.\n\nUse `@agents-generator` instead when the task specifically calls for its\npackaged generation modes, assets, or backup workflow. Use this skill when a\nmaintainer-readable, evidence-first edit is the primary goal.\n\n## How It Works\n\n### 1. Preserve existing intent\n\nBefore writing, read every instruction file that applies to the target path,\nincluding existing `AGENTS.md` files and relevant tool-specific files such as\n`CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, and\n`.github/instructions/*.instructions.md`.\n\n- Improve an existing `AGENTS.md` in place when possible.\n- Preserve accurate maintainer-authored rules and repository-specific policy.\n- Do not replace another tool's instruction file with a symlink unless the\n  user requests it and repository evidence shows identical content is desired.\n- Do not silently choose between conflicting instructions. Follow the\n  higher-priority applicable rule, or ask when the intended policy cannot be\n  established from the repository.\n\n### 2. Build a bounded evidence map\n\nInspect only enough of the repository to establish how work is actually done:\n\n1. Read the project overview and contribution guidance, such as `README*`,\n   `CONTRIBUTING*`, and relevant docs.\n2. Read manifests, lockfiles, workspace files, task runners, and build config\n   to identify supported tools and exact commands.\n3. Read CI workflows to learn required checks. Do not assume every CI or\n   deployment job is safe or appropriate to run locally.\n4. Inspect representative source and test files for naming, layout, and test\n   conventions.\n5. Identify generated files, migrations, vendored code, large fixtures,\n   secrets boundaries, and production-only operations.\n\nPrefer `rg --files` and `rg` for discovery when available. Track the source of\neach non-obvious command or rule so unsupported claims do not enter the final\nfile.\n\n### 3. Choose the instruction scope\n\nUse the root `AGENTS.md` for repository-wide guidance. Add or revise a nested\n`AGENTS.md` only when a subtree has materially different commands,\narchitecture, conventions, or safety boundaries.\n\nKeep shared rules at the root and only differences in nested files. For tools\nthat implement the public AGENTS.md convention, the nearest file in the\ndirectory tree controls the working subtree. Do not copy the full root file\ninto every package.\n\n### 4. Write high-signal guidance\n\nChoose headings that fit the repository instead of forcing a fixed template.\nInclude the following only when supported by evidence:\n\n- **Repository map:** the few directories and boundaries an agent must know.\n- **Setup and commands:** exact install, development, build, lint, type-check,\n  and test commands, with the working directory when it is not obvious.\n- **Focused validation:** targeted checks for a small change and broader checks\n  required before handoff.\n- **Change rules:** generated-file ownership, migrations, schemas, APIs,\n  dependencies, and cross-package coordination.\n- **Safety boundaries:** secrets, production data, destructive commands,\n  deployments, and operations that require explicit authorization.\n- **Contribution rules:** repository-specific naming, formatting, commit, or\n  pull-request requirements that affect implementation or handoff.\n\nWrite direct, testable statements. Prefer:\n\n```markdown\n- From the repository root, run `npm test -- path/to/file.test.ts` for a focused test.\n```\n\nover:\n\n```markdown\n- Make sure tests pass and follow best practices.\n```\n\nLink to maintained documentation instead of copying it. Distinguish required\nchecks from optional, slow, privileged, or deployment-only checks.\n\n### 5. Validate before handoff\n\n1. Re-read each changed `AGENTS.md` completely.\n2. Remove contradictions, duplicate rules, placeholders, and stale claims.\n3. Confirm every mentioned file and directory exists.\n4. Cross-check commands against manifests or CI, and run safe, proportionate\n   checks when useful.\n5. If nested files changed, confirm each contains only subtree-specific rules\n   and does not conflict accidentally with the root.\n6. Review the diff as a maintainer: every adde",
       "tags": [
         "markdown",
         "api",
         "claude",
         "ai",
         "agent",
+        "workflow",
         "template",
         "document",
-        "rag"
+        "security",
+        "cro"
       ],
       "useCases": [
-        "The user asks to create, update, or audit `AGENTS.md` or `CLAUDE.md`.",
-        "The project needs concise, high-signal agent instructions derived from the actual toolchain and repo layout.",
-        "Existing agent documentation is too long, duplicated, or drifting away from real project conventions."
+        "The user asks to create, update, shorten, or audit `AGENTS.md`.",
+        "A monorepo needs root instructions plus narrower package-level overrides.",
+        "Existing agent instructions contain stale commands, duplicated policy, or",
+        "The user wants to reconcile `AGENTS.md` with `CLAUDE.md`,"
       ],
       "scrapedAt": "2026-03-07T06:52:00.128Z"
     },
@@ -10796,7 +10799,7 @@
       "source": "anthropic",
       "repoUrl": "https://github.com/anthropics/skills",
       "skillUrl": "https://github.com/anthropics/skills/tree/main/skills/claude-api",
-      "content": "\n# Building LLM-Powered Applications with Claude\n\nThis skill helps you build LLM-powered applications with Claude. Choose the right surface based on your needs, detect the project language, then read the relevant language-specific documentation.\n\n## Before You Start\n\nScan the target file (or, if no target file, the prompt and project) for non-Anthropic provider markers — `import openai`, `from openai`, `langchain_openai`, `OpenAI(`, `gpt-4`, `gpt-5`, file names like `agent-openai.py` or `*-generic.py`, or any explicit instruction to keep the code provider-neutral. If you find any, stop and tell the user that this skill produces Claude/Anthropic SDK code; ask whether they want to switch the file to Claude or want a non-Claude implementation. Do not edit a non-Anthropic file with Anthropic SDK calls.\n\n## Output Requirement\n\nWhen the user asks you to add, modify, or implement a Claude feature, your code must call Claude through one of:\n\n1. **The official Anthropic SDK** for the project's language (`anthropic`, `@anthropic-ai/sdk`, `com.anthropic.*`, etc.). This is the default whenever a supported SDK exists for the project.\n2. **Raw HTTP** (`curl`, `requests`, `fetch`, `httpx`, etc.) — only when the user explicitly asks for cURL/REST/raw HTTP, the project is a shell/cURL project, or the language has no official SDK.\n\nNever mix the two — don't reach for `requests`/`fetch` in a Python or TypeScript project just because it feels lighter. Never fall back to OpenAI-compatible shims.\n\n**Never guess SDK usage.** Function names, class names, namespaces, method signatures, and import paths must come from explicit documentation — either the `{lang}/` files in this skill or the official SDK repositories or documentation links listed in `shared/live-sources.md`. If the binding you need is not explicitly documented in the skill files, WebFetch the relevant SDK repo from `shared/live-sources.md` before writing code. Do not infer Ruby/Java/Go/PHP/C# APIs from cURL shapes or from another language's SDK.\n\n**If WebFetch or repository access fails** (network restricted, timeouts, clone blocked): do not keep retrying — write code from the patterns and namespace/package tables in the `{lang}/` file, run the compiler or interpreter on it, and iterate on the error output. For statically-typed SDKs (C#, Java, Go) a compile-fix loop against local errors reaches working code faster than blocked network research.\n\n## Defaults\n\nUnless the user requests otherwise:\n\nFor the Claude model version, please use Claude Opus 5, which you can access via the exact model string `claude-opus-5`. Please default to using adaptive thinking (`thinking: {type: \"adaptive\"}`) for anything remotely complicated. And finally, please default to streaming for any request that may involve long input, long output, or high `max_tokens` — it prevents hitting request timeouts. Use the SDK's `.get_final_message()` / `.finalMessage()` helper to get the complete response if you don't need to handle individual stream events\n\n## ⚠️ API Drift — Your Training Prior May Be Stale\n\nSeveral common Claude API shapes changed in 2025–2026. If you recall a pattern from training, verify it against the `{lang}/` files in this skill before writing — the rows below are the most frequent drift points:\n\n| Area | Stale prior | Current API |\n|---|---|---|\n| Extended thinking | `thinking: {type: \"enabled\", budget_tokens: N}` | On Claude 4.6+ models: `thinking: {type: \"adaptive\"}`. `budget_tokens` is deprecated on Opus 4.6 / Sonnet 4.6 and **rejected with a 400** on Fable 5 / Sonnet 5 / Opus 5 / 4.8 / 4.7. Pre-4.6 models still use `budget_tokens`. |\n| Web search / web fetch tool type | `web_search_20250305`, `web_fetch_20250910` | `web_search_20260209`, `web_fetch_20260209` (dynamic filtering) on Opus 5/4.8/4.7/4.6, Sonnet 5, and Sonnet 4.6. Older models keep the basic variants; on Vertex AI only basic `web_search_20250305` is available (web fetch is not on Vertex) — see the Server Tools QR below. |\n| PHP parameter names | snake_case wire names as named args (`max_tokens`) | Top-level named args are camelCase (`maxTokens`). Nested array keys vary by feature (e.g. `'taskBudget'`, `'skillID'`, `'mcp_server_name'`) — copy the exact key from the documented example; do not bulk-convert. |\n| Managed Agents credentials | Keep secrets host-side via custom tools (the only option before vaults shipped) | Vault `environment_variable` credentials — stored by Anthropic, substituted at egress, never visible in the sandbox (`shared/managed-agents-tools.md` → Vaults). Host-side custom tools remain the fallback for self-hosted sandboxes. |\n\nThe `{lang}/` files in this skill are authoritative over recalled patterns.\n\n---\n\n## Subcommands\n\nIf the User Request at the bottom of this prompt is a bare subcommand string (no prose), search every **Subcommands** table in this document — including any in sections appended below — and follow the matching Action column directly. This lets users invoke specific flows via ",
+      "content": "\n# Building LLM-Powered Applications with Claude\n\nThis skill helps you build LLM-powered applications with Claude. Choose the right surface based on your needs, detect the project language, then read the relevant language-specific documentation.\n\n## Before You Start\n\nScan the target file (or, if no target file, the prompt and project) for non-Anthropic provider markers - `import openai`, `from openai`, `langchain_openai`, `OpenAI(`, `gpt-4`, `gpt-5`, file names like `agent-openai.py` or `*-generic.py`, or any explicit instruction to keep the code provider-neutral. If you find any, stop and tell the user that this skill produces Claude/Anthropic SDK code; ask whether they want to switch the file to Claude or want a non-Claude implementation. Do not edit a non-Anthropic file with Anthropic SDK calls. (Exception: the `prompt-audit` subcommand is non-interactive and does not stop here - it records non-Anthropic provider markers in its report's stated assumptions and never proposes switching a non-Anthropic file to the Anthropic SDK.)\n\n## Output Requirement\n\nWhen the user asks you to add, modify, or implement a Claude feature, your code must call Claude through one of:\n\n1. **The official Anthropic SDK** for the project's language (`anthropic`, `@anthropic-ai/sdk`, `com.anthropic.*`, etc.). This is the default whenever a supported SDK exists for the project.\n2. **Raw HTTP** (`curl`, `requests`, `fetch`, `httpx`, etc.) - only when the user explicitly asks for cURL/REST/raw HTTP, the project is a shell/cURL project, or the language has no official SDK.\n\nNever mix the two - don't reach for `requests`/`fetch` in a Python or TypeScript project just because it feels lighter. Never fall back to OpenAI-compatible shims.\n\n**Never guess SDK usage.** Function names, class names, namespaces, method signatures, and import paths must come from explicit documentation - either the `{lang}/` files in this skill or the official SDK repositories or documentation links listed in `shared/live-sources.md`. If the binding you need is not explicitly documented in the skill files, WebFetch the relevant SDK repo from `shared/live-sources.md` before writing code. Do not infer Ruby/Java/Go/PHP/C# APIs from cURL shapes or from another language's SDK.\n\n**If WebFetch or repository access fails** (network restricted, timeouts, clone blocked): do not keep retrying - write code from the patterns and namespace/package tables in the `{lang}/` file, run the compiler or interpreter on it, and iterate on the error output. For statically-typed SDKs (C#, Java, Go) a compile-fix loop against local errors reaches working code faster than blocked network research.\n\n## Defaults\n\nUnless the user requests otherwise:\n\nFor the Claude model version, please use Claude Opus 5, which you can access via the exact model string `claude-opus-5`. Please default to using adaptive thinking (`thinking: {type: \"adaptive\"}`) for anything remotely complicated. And finally, please default to streaming for any request that may involve long input, long output, or high `max_tokens` - it prevents hitting request timeouts. Use the SDK's `.get_final_message()` / `.finalMessage()` helper to get the complete response if you don't need to handle individual stream events\n\n## Warning: API Drift - Your Training Prior May Be Stale\n\nSeveral common Claude API shapes changed in 2025-2026. If you recall a pattern from training, verify it against the `{lang}/` files in this skill before writing - the rows below are the most frequent drift points:\n\n| Area | Stale prior | Current API |\n|---|---|---|\n| Extended thinking | `thinking: {type: \"enabled\", budget_tokens: N}` | On Claude 4.6+ models: `thinking: {type: \"adaptive\"}`. `budget_tokens` is deprecated on Opus 4.6 / Sonnet 4.6 and **rejected with a 400** on Fable 5/5.1 / Sonnet 5 / Opus 5 / 4.8 / 4.7. Pre-4.6 models still use `budget_tokens`. |\n| Web search / web fetch tool type | `web_search_20250305`, `web_fetch_20250910` | `web_search_20260209`, `web_fetch_20260209` (dynamic filtering) on Opus 5/4.8/4.7/4.6, Sonnet 5, and Sonnet 4.6. Older models keep the basic variants; on Vertex AI only basic `web_search_20250305` is available (web fetch is not on Vertex) - see the Server Tools QR below. |\n| PHP parameter names | snake_case wire names as named args (`max_tokens`) | Top-level named args are camelCase (`maxTokens`). Nested array keys vary by feature (e.g. `'taskBudget'`, `'skillID'`, `'mcp_server_name'`) - copy the exact key from the documented example; do not bulk-convert. |\n| Managed Agents credentials | Keep secrets host-side via custom tools (the only option before vaults shipped) | Vault `environment_variable` credentials - stored by Anthropic, substituted at egress, never visible in the sandbox (`shared/managed-agents-tools.md` -> Vaults). Host-side custom tools remain the fallback for self-hosted sandboxes. |\n| Files API / Skills | `client.beta.files.*` / `client.beta.skills.*` with beta `files-api-2025-04-14` / `skills-2025-10-02` | O",
       "tags": [
         "python",
         "typescript",
@@ -18392,6 +18395,28 @@
       "scrapedAt": "2026-03-08T06:55:37.594Z"
     },
     {
+      "id": "antigravity-email-issue-fixer",
+      "name": "email-issue-fixer",
+      "slug": "email-issue-fixer",
+      "description": "Fix small email mistakes without touching the writer's voice, and strip tracking parameters from links on request. Always returns the corrected draft plus a change list.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/email-issue-fixer",
+      "content": "\n# Email Issue Fixer\n\nFix the small mistakes that make an email look careless, without touching the writer's voice or what the email commits to. Always return the corrected draft plus a list of what changed.\n\n## When to Use\n\n- Use when the user asks to \"fix my email\", \"check the grammar before I send\", \"proofread this email\", or any pre-send cleanup of a draft.\n- Use when the user also asks to \"clean the links\" or remove tracking from the URLs in an email. Link cleaning is never automatic.\n- Do not use for casual rewrites, tone makeovers, or structural restyling that the user did not ask for.\n\n## Pass 1: correctness only\n\nFix these:\n\n- Duplicated words (\"a a\", \"the the\") and wrong articles. Choose a/an by sound, not spelling: \"an hour\", \"a university\", \"a one-time offer\".\n- Subject-verb agreement (\"the reports is done\" becomes \"the reports are done\").\n- Wrong-word slips: your/you're, its/it's, than/then, affect/effect, their/there.\n- Capitalization, doubled spaces, missing or doubled punctuation.\n\nLeave these alone. They are voice, not errors:\n\n- Sentence fragments, contractions, one-line paragraphs.\n- Lowercase greetings and sign-offs, informal phrasing, slang the writer chose.\n- Repetition used for emphasis.\n\nIf you cannot tell whether something is a mistake or a choice, leave it and mention it in the summary instead of changing it.\n\nNever change names, numbers, dates, quoted text, or anything that alters what the email promises or asks for.\n\n## Pass 2: links (only when the user asks)\n\nDo not touch links during a normal proofread. Clean them only when the user asks for it.\n\nWhen asked, remove only these unambiguous tracking keys:\n\n- `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`, `mc_cid`, `mc_eid`, `fbclid`, `gclid`, `igshid`, `_hsenc`, `_hsmi`\n\nKeep every other parameter. Values like `id`, `page`, `v`, `q`, or anything unfamiliar are often what makes the link work. When in doubt, keep it.\n\nTreat `ref`, `ref_src`, and similarly generic keys as ambiguous: they are sometimes attribution, sometimes application state the link needs to work. Do not strip them automatically. Only remove them when context confirms they are attribution, or ask the writer first.\n\nDo not delete whole links. Do not delete a link because it appears twice; signature links and repeated calls to action are usually deliberate.\n\nFlag rather than fix: shortened links (bit.ly and similar), unfamiliar domains, and any query string that looks like a token, session ID, or credential. Point them out and let the writer decide.\n\nIf a query parameter looks like a credential, token, or session ID, do not echo its value anywhere in the output. Keep the link only by replacing the sensitive value with a placeholder such as `[REDACTED]` (for example `?auth=[REDACTED]`), list the redaction in \"Changes made\", and tell the writer to re-enter the real value before sending. If they prefer, advise rotating the leaked value first.\n\n## Always return\n\n- The corrected email, in the same format and layout it arrived in.\n- A \"Changes made\" list, one line per change.\n- A \"Left alone\" list for anything you judged to be voice or an ambiguous link.\n- If nothing needed fixing, say so plainly rather than inventing changes.\n\n## Never\n\n- Send, schedule, or file the email. Hand the draft back for the writer to send.\n- Repeat credentials, tokens, or personal details found inside links.\n- Rewrite for tone, length, or structure unless asked. If the user wants that, ask what direction they want first.\n\n## Examples\n\n### Articles and agreement\n\nInput:\n\n```text\nPlease find attached a a copy of the report. Our sales team achieved a amazing quarter.\n```\n\nOutput:\n\n```text\nPlease find attached a copy of the report. Our sales team achieved an amazing quarter.\n```\n\nChanges made:\n\n- a a to a (duplicated word)\n- a amazing to an amazing (vowel sound)\n\n### Link cleaning\n\nInput:\n\n```text\nhttps://app.example.com/reports?utm_source=newsletter&utm_medium=email&id=123\n```\n\nOutput:\n\n```text\nhttps://app.example.com/reports?id=123\n```\n\nChanges made:\n\n- Removed 2 tracking parameters (utm_source, utm_medium)\n- Kept id=123, which the link needs to open the right report\n\n## Limitations\n\nThis reads and edits text only. It cannot judge whether the email's facts, tone, or timing are right. That stays with the writer.",
+      "tags": [
+        "api",
+        "ai",
+        "rag"
+      ],
+      "useCases": [
+        "Use when the user asks to \"fix my email\", \"check the grammar before I send\", \"proofread this email\", or any pre-send cleanup of a draft.",
+        "Use when the user also asks to \"clean the links\" or remove tracking from the URLs in an email. Link cleaning is never automatic.",
+        "Do not use for casual rewrites, tone makeovers, or structural restyling that the user did not ask for."
+      ],
+      "scrapedAt": "2026-09-02T11:10:41.020Z"
+    },
+    {
       "id": "antigravity-email-security",
       "name": "email-security",
       "slug": "email-security",
@@ -25762,33 +25787,6 @@
       "scrapedAt": "2026-04-14T08:00:47.285Z"
     },
     {
-      "id": "antigravity-industrial-brutalist-ui",
-      "name": "industrial-brutalist-ui",
-      "slug": "industrial-brutalist-ui",
-      "description": "Use when creating raw industrial or tactical telemetry UIs with rigid grids, stark typography, CRT effects, and high-density data.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/industrial-brutalist-ui",
-      "content": "# SKILL: Industrial Brutalism & Tactical Telemetry UI\n\n## When to Use\n\n- Use when the user wants a brutalist, industrial, Swiss-print, CRT terminal, or tactical telemetry interface.\n- Use when building data-heavy dashboards, portfolios, editorial pages, or command-center UIs that should feel raw and mechanical.\n- Use when a design must reject soft gradients, rounded consumer UI, glassmorphism, and generic SaaS card layouts.\n\n## Limitations\n\n- This style is intentionally severe and may not fit consumer products, accessibility-sensitive flows, or brands that require warmth and softness.\n- CRT, halftone, dithering, and degradation effects must be tested for readability, contrast, and motion sensitivity.\n- Do not mix the light industrial and dark telemetry palettes in the same interface unless the user explicitly asks for a controlled hybrid.\n\n\n## 1. Skill Meta\n**Name:** Industrial Brutalism & Tactical Telemetry Interface Engineering\n**Description:** Advanced proficiency in architecting web interfaces that synthesize mid-century Swiss Typographic design, industrial manufacturing manuals, and retro-futuristic aerospace/military terminal interfaces. This discipline requires absolute mastery over rigid modular grids, extreme typographic scale contrast, purely utilitarian color palettes, and the programmatic simulation of analog degradation (halftones, CRT scanlines, bitmap dithering). The objective is to construct digital environments that project raw functionality, mechanical precision, and high data density, deliberately discarding conventional consumer UI patterns.\n\n## 2. Visual Archetypes\nThe design system operates by merging two distinct but highly compatible visual paradigms. **Pick ONE per project and commit to it. Do not alternate or mix both modes within the same interface.**\n\n### 2.1 Swiss Industrial Print\nDerived from 1960s corporate identity systems and heavy machinery blueprints.\n*   **Characteristics:** High-contrast light modes (newsprint/off-white substrates). Reliance on monolithic, heavy sans-serif typography. Unforgiving structural grids outlined by visible dividing lines. Aggressive, asymmetric use of negative space punctuated by oversized, viewport-bleeding numerals or letterforms. Heavy use of primary red as an alert/accent color.\n\n### 2.2 Tactical Telemetry & CRT Terminal\nDerived from classified military databases, legacy mainframes, and aerospace Heads-Up Displays (HUDs).\n*   **Characteristics:** Dark mode exclusivity. High-density tabular data presentation. Absolute dominance of monospaced typography. Integration of technical framing devices (ASCII brackets, crosshairs). Application of simulated hardware limitations (phosphor glow, scanlines, low bit-depth rendering).\n\n## 3. Typographic Architecture\nTypography is the primary structural and decorative infrastructure. Imagery is secondary. The system demands extreme variance in scale, weight, and spacing.\n\n### 3.1 Macro-Typography (Structural Headers)\n*   **Classification:** Neo-Grotesque / Heavy Sans-Serif.\n*   **Optimal Web Fonts:** Neue Haas Grotesk (Black), Inter (Extra Bold/Black), Archivo Black, Roboto Flex (Heavy), Monument Extended.\n*   **Implementation Parameters:**\n    *   **Scale:** Deployed at massive scales using fluid typography (e.g., `clamp(4rem, 10vw, 15rem)`).\n    *   **Tracking (Letter-spacing):** Extremely tight, often negative (`-0.03em` to `-0.06em`), forcing glyphs to form solid architectural blocks.\n    *   **Leading (Line-height):** Highly compressed (`0.85` to `0.95`).\n    *   **Casing:** Exclusively uppercase for structural impact.\n\n### 3.2 Micro-Typography (Data & Telemetry)\n*   **Classification:** Monospace / Technical Sans.\n*   **Optimal Web Fonts:** JetBrains Mono, IBM Plex Mono, Space Mono, VT323, Courier Prime.\n*   **Implementation Parameters:**\n    *   **Scale:** Fixed and small (`10px` to `14px` / `0.7rem` to `0.875rem`).\n    *   **Tracking:** Generous (`0.05em` to `0.1em`) to simulate mechanical typewriter spacing or terminal matrices.\n    *   **Leading:** Standard to tight (`1.2` to `1.4`).\n    *   **Casing:** Exclusively uppercase. Used for all metadata, navigation, unit IDs, and coordinates.\n\n### 3.3 Textural Contrast (Artistic Disruption)\n*   **Classification:** High-Contrast Serif.\n*   **Optimal Web Fonts:** Playfair Display, EB Garamond, Times New Roman.\n*   **Implementation Parameters:** Used exceedingly sparingly. Must be subjected to heavy post-processing (halftone filters, 1-bit dithering) to degrade vector perfection and create textural juxtaposition against the clean sans-serifs.\n\n## 4. Color System\nThe color architecture is uncompromising. Gradients, soft drop shadows, and modern translucency are strictly prohibited. Colors simulate physical media or primitive emissive displays.\n\n**CRITICAL: Choose ONE substrate palette per project and use it consistently. Never mix light and dark substrates within the same interface.**\n\n### If Swiss Industrial Print (Light):\n*   **Background:** `#F4F4F0` or `",
-      "tags": [
-        "claude",
-        "ai",
-        "design",
-        "document",
-        "presentation",
-        "image",
-        "stripe",
-        "cro"
-      ],
-      "useCases": [
-        "Use when the user wants a brutalist, industrial, Swiss-print, CRT terminal, or tactical telemetry interface.",
-        "Use when building data-heavy dashboards, portfolios, editorial pages, or command-center UIs that should feel raw and mechanical.",
-        "Use when a design must reject soft gradients, rounded consumer UI, glassmorphism, and generic SaaS card layouts."
-      ],
-      "scrapedAt": "2026-04-18T07:21:21.133Z"
-    },
-    {
       "id": "anthropic-internal-comms",
       "name": "internal-comms",
       "slug": "internal-comms",
@@ -27616,14 +27614,14 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 379
+      "count": 378
     },
     {
       "id": "ai-agents",
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 360
+      "count": 361
     },
     {
       "id": "creative-media",
@@ -27688,42 +27686,42 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 280241
+      "stars": 280654
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 172911
+      "stars": 173135
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 74186
+      "stars": 74268
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 85832
+      "stars": 85939
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1708
+      "stars": 1709
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
-      "newSkillCount": 10,
-      "stars": 45791
+      "newSkillCount": 7,
+      "stars": 45856
     },
     {
       "name": "Xquik",
@@ -27733,10 +27731,10 @@
       "stars": 192
     }
   ],
-  "lastUpdated": "2026-09-01T11:34:14.555Z",
+  "lastUpdated": "2026-09-02T11:14:53.078Z",
   "stats": {
     "totalSkills": 1136,
-    "newSkills": 19,
-    "scrapedAt": "2026-09-01T11:34:14.555Z"
+    "newSkills": 16,
+    "scrapedAt": "2026-09-02T11:14:53.078Z"
   }
 }

@@ -1,133 +1,125 @@
 ---
 name: agents-md
-description: This skill should be used when the user asks to "create AGENTS.md", "update AGENTS.md", "maintain agent docs", "set up CLAUDE.md", or needs to keep agent instructions concise. Enforces research-backed
+description: Create, revise, or audit AGENTS.md files from repository evidence, verified commands, and correctly scoped instructions without overwriting maintainer intent. 
 category: AI & Agents
 source: antigravity
-tags: [markdown, api, claude, ai, agent, template, document, rag]
+tags: [markdown, api, claude, ai, agent, workflow, template, document, security, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agents-md
 ---
 
 
-# Maintaining AGENTS.md
+# Maintain AGENTS.md from repository evidence
 
-AGENTS.md is the canonical agent-facing documentation. Keep it minimal—agents are capable and don't need hand-holding. Target under 60 lines; never exceed 100. Instruction-following quality degrades as document length increases.
+## Overview
+
+Create or improve agent instructions that help a coding agent change the
+repository correctly without rediscovering its workflow. Base every
+repository-specific command, path, and rule on evidence in the current
+checkout.
+
+Prefer a focused diff over a wholesale rewrite. There is no universal line
+limit, required section list, symlink layout, or commit-attribution policy;
+follow the repository's own needs and maintainer intent.
 
 ## When to Use
-- The user asks to create, update, or audit `AGENTS.md` or `CLAUDE.md`.
-- The project needs concise, high-signal agent instructions derived from the actual toolchain and repo layout.
-- Existing agent documentation is too long, duplicated, or drifting away from real project conventions.
 
-## File Setup
+- The user asks to create, update, shorten, or audit `AGENTS.md`.
+- A monorepo needs root instructions plus narrower package-level overrides.
+- Existing agent instructions contain stale commands, duplicated policy, or
+  unsupported claims.
+- The user wants to reconcile `AGENTS.md` with `CLAUDE.md`,
+  `.github/copilot-instructions.md`, or other repository instruction files.
 
-1. Create `AGENTS.md` at project root
-2. Create symlink: `ln -s AGENTS.md CLAUDE.md`
+Use `@agents-generator` instead when the task specifically calls for its
+packaged generation modes, assets, or backup workflow. Use this skill when a
+maintainer-readable, evidence-first edit is the primary goal.
 
-## Before Writing
+## How It Works
 
-Analyze the project to understand what belongs in the file:
+### 1. Preserve existing intent
 
-1. **Package manager** — Check for lock files (`pnpm-lock.yaml`, `yarn.lock`, `package-lock.json`, `uv.lock`, `poetry.lock`)
-2. **Linter/formatter configs** — Look for `.eslintrc`, `biome.json`, `ruff.toml`, `.prettierrc`, etc. (don't duplicate these in AGENTS.md)
-3. **CI/build commands** — Check `Makefile`, `package.json` scripts, CI configs for canonical commands
-4. **Monorepo indicators** — Check for `pnpm-workspace.yaml`, `nx.json`, Cargo workspace, or subdirectory `package.json` files
-5. **Existing conventions** — Check for existing CONTRIBUTING.md, docs/, or README patterns
+Before writing, read every instruction file that applies to the target path,
+including existing `AGENTS.md` files and relevant tool-specific files such as
+`CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md`, and
+`.github/instructions/*.instructions.md`.
 
-## Writing Rules
+- Improve an existing `AGENTS.md` in place when possible.
+- Preserve accurate maintainer-authored rules and repository-specific policy.
+- Do not replace another tool's instruction file with a symlink unless the
+  user requests it and repository evidence shows identical content is desired.
+- Do not silently choose between conflicting instructions. Follow the
+  higher-priority applicable rule, or ask when the intended policy cannot be
+  established from the repository.
 
-- **Headers + bullets** — No paragraphs
-- **Code blocks** — For commands and templates
-- **Reference, don't embed** — Point to existing docs: "See `CONTRIBUTING.md` for setup" or "Follow patterns in `src/api/routes/`"
-- **No filler** — No intros, conclusions, or pleasantries
-- **Trust capabilities** — Omit obvious context
-- **Prefer file-scoped commands** — Per-file test/lint/typecheck commands over project-wide builds
-- **Don't duplicate linters** — Code style lives in linter configs, not AGENTS.md
+### 2. Build a bounded evidence map
 
-## Required Sections
+Inspect only enough of the repository to establish how work is actually done:
 
-### Package Manager
-Which tool and key commands only:
-```markdown
-## Package Manager
-Use **pnpm**: `pnpm install`, `pnpm dev`, `pnpm test`
-```
+1. Read the project overview and contribution guidance, such as `README*`,
+   `CONTRIBUTING*`, and relevant docs.
+2. Read manifests, lockfiles, workspace files, task runners, and build config
+   to identify supported tools and exact commands.
+3. Read CI workflows to learn required checks. Do not assume every CI or
+   deployment job is safe or appropriate to run locally.
+4. Inspect representative source and test files for naming, layout, and test
+   conventions.
+5. Identify generated files, migrations, vendored code, large fixtures,
+   secrets boundaries, and production-only operations.
 
-### File-Scoped Commands
-Per-file commands are faster and cheaper than full project builds. Always include when available:
-```markdown
-## File-Scoped Commands
-| Task | Command |
-|------|---------|
-| Typecheck | `pnpm tsc --noEmit path/to/file.ts` |
-| Lint | `pnpm eslint path/to/file.ts` |
-| Test | `pnpm jest path/to/file.test.ts` |
-```
+Prefer `rg --files` and `rg` for discovery when available. Track the source of
+each non-obvious command or rule so unsupported claims do not enter the final
+file.
 
-### Commit Attribution
-Always include this section. Agents should use their own identity:
-```markdown
-## Commit Attribution
-AI commits MUST include:
-```
-Co-Authored-By: (the agent model's name and attribution byline)
-```
-Example: `Co-Authored-By: Claude Sonnet 4 <noreply@example.com>`
-```
+### 3. Choose the instruction scope
 
-### Key Conventions
-Project-specific patterns agents must follow. Keep brief.
+Use the root `AGENTS.md` for repository-wide guidance. Add or revise a nested
+`AGENTS.md` only when a subtree has materially different commands,
+architecture, conventions, or safety boundaries.
 
-## Optional Sections
+Keep shared rules at the root and only differences in nested files. For tools
+that implement the public AGENTS.md convention, the nearest file in the
+directory tree controls the working subtree. Do not copy the full root file
+into every package.
 
-Add only if truly needed:
-- API route patterns (show template, not explanation)
-- CLI commands (table format)
-- File naming conventions
-- Project structure hints (point to critical files, flag legacy code to avoid)
-- Monorepo overrides (subdirectory `AGENTS.md` files override root)
+### 4. Write high-signal guidance
 
-## Anti-Patterns
+Choose headings that fit the repository instead of forcing a fixed template.
+Include the following only when supported by evidence:
 
-Omit these:
-- "Welcome to..." or "This document explains..."
-- "You should..." or "Remember to..."
-- Linter/formatter rules already in config files (`.eslintrc`, `biome.json`, `ruff.toml`)
-- Listing installed skills or plugins (agents discover these automatically)
-- Full project-wide build commands when file-scoped alternatives exist
-- Obvious instructions ("run tests", "write clean code")
-- Explanations of why (just say what)
-- Long prose paragraphs
+- **Repository map:** the few directories and boundaries an agent must know.
+- **Setup and commands:** exact install, development, build, lint, type-check,
+  and test commands, with the working directory when it is not obvious.
+- **Focused validation:** targeted checks for a small change and broader checks
+  required before handoff.
+- **Change rules:** generated-file ownership, migrations, schemas, APIs,
+  dependencies, and cross-package coordination.
+- **Safety boundaries:** secrets, production data, destructive commands,
+  deployments, and operations that require explicit authorization.
+- **Contribution rules:** repository-specific naming, formatting, commit, or
+  pull-request requirements that affect implementation or handoff.
 
-## Example Structure
+Write direct, testable statements. Prefer:
 
 ```markdown
-# Agent Instructions
-
-## Package Manager
-Use **pnpm**: `pnpm install`, `pnpm dev`
-
-## Commit Attribution
-AI commits MUST include:
-```
-Co-Authored-By: (the agent model's name and attribution byline)
+- From the repository root, run `npm test -- path/to/file.test.ts` for a focused test.
 ```
 
-## File-Scoped Commands
-| Task | Command |
-|------|---------|
-| Typecheck | `pnpm tsc --noEmit path/to/file.ts` |
-| Lint | `pnpm eslint path/to/file.ts` |
-| Test | `pnpm jest path/to/file.test.ts` |
+over:
 
-## API Routes
-[Template code block]
-
-## CLI
-| Command | Description |
-|---------|-------------|
-| `pnpm cli sync` | Sync data |
+```markdown
+- Make sure tests pass and follow best practices.
 ```
 
-## Limitations
-- Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
+Link to maintained documentation instead of copying it. Distinguish required
+checks from optional, slow, privileged, or deployment-only checks.
+
+### 5. Validate before handoff
+
+1. Re-read each changed `AGENTS.md` completely.
+2. Remove contradictions, duplicate rules, placeholders, and stale claims.
+3. Confirm every mentioned file and directory exists.
+4. Cross-check commands against manifests or CI, and run safe, proportionate
+   checks when useful.
+5. If nested files changed, confirm each contains only subtree-specific rules
+   and does not conflict accidentally with the root.
+6. Review the diff as a maintainer: every adde
