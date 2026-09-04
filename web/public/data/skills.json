@@ -18701,6 +18701,36 @@
       "scrapedAt": "2026-03-07T06:54:24.931Z"
     },
     {
+      "id": "antigravity-entropy-box",
+      "name": "entropy-box",
+      "slug": "entropy-box",
+      "description": "Entropy Box knowledge-compiler for embodied-AI: turns bounded requirements into grounded workflows via Solution Consult, Search, Lookup, and Evidence. Do not use it to control physical robots.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/entropy-box",
+      "content": "# Entropy Box\n\nEntropy Box is an agent-native knowledge compiler and capability substrate for\nembodied-AI development. It compiles fragmented papers, repositories, ROS packages,\nmodels, datasets, simulators, benchmarks, standards, and engineering documentation\ninto a persistent, typed, deduplicated, machine-consumable knowledge artifact.\n\nIts public Panorama Graph is not merely a search index or visualization. It represents\nthe field through domains, vertical topics, task chains, normalized capabilities,\nimplementation assets, dependency relations, and evidence. Use it to understand where\na technical problem sits in the whole embodied-AI system and how knowledge can be\ncomposed into an engineering path.\n\nSolution Consult is the primary runtime capability. The calling agent remains\nresponsible for clarifying the request, decomposing broad goals into bounded technical\nquestions, deciding which questions need separate consultations, and synthesizing the\nresults. Do not send an underspecified ambition such as \"build a general robot\" as one\nquery and treat the returned text as a complete solution.\n\nThe current public surface reports more than 52,177 entity nodes, 7,913 task chains,\n66,714 dependency edges, 37,757 atomic capabilities or associated assets, and 2,511\nvertical topic libraries. These counts evolve; verify the live site before quoting\nthem.\n\n## When to Use\n\n- Use when you need a grounded, source-linked implementation path for an embodied-AI task (manipulation, navigation, perception, control, planning, simulation, and related systems).\n- Use when selecting or comparing methods, capabilities, assets, dependencies, or evidence for a bounded technical requirement.\n- Use when mapping a problem to the embodied-AI field, tracing task chains, or assembling a development workflow from retrieved structure.\n- Do not use it to directly control physical robots, or for unrelated scientific domains or generic software development.\n\n## What this skill enables\n\nChoose and sequence modes according to the user's task:\n\n1. **Solution consultation** — ask how a bounded technical requirement can be\n   implemented, which approaches can satisfy it, and which capabilities, dependencies,\n   assets, constraints, and gaps belong in the candidate solution.\n2. **Targeted knowledge search** — run RAG retrieval for a concrete question or build a\n   fuller understanding of a technology selected during consultation.\n3. **Entity anchoring** — resolve a known ID, name, or alias to a structured topic,\n   capability, or asset record.\n4. **Evidence verification** — retrieve source-linked comparisons, limitations,\n   engineering notes, negative results, and benchmark context.\n5. **Panorama navigation** — place a question within the embodied-AI field, find\n   adjacent domains and topics, and explain the wider technical context.\n6. **Topic research** — inspect a vertical topic as a structured unit rather than a\n   bag of documents.\n7. **Task-chain analysis** — decompose a goal into ordered, branching, or merging\n   engineering steps.\n8. **Capability and dependency analysis** — identify what a system must be able to do,\n   what each capability requires, and which capabilities are reusable across topics.\n9. **Asset discovery and selection** — connect capabilities to repositories, packages,\n   models, datasets, simulators, sensors, benchmarks, and other implementation assets.\n10. **Grounded workflow assembly** — compose task chains, capabilities, assets, evidence,\n   constraints, and gaps into a candidate development workflow.\n11. **Knowledge-compiler analysis** — study how fragmented technical knowledge is\n   normalized, admitted, related, updated, and made available to agents.\n\nThe scope is broad inside embodied AI and bounded outside it. Do not trigger this skill\nfor unrelated scientific domains or generic software development merely because a task\nmentions AI.\n\n## Panorama structure\n\nThe public taxonomy spans 15 top-level domains:\n\n- Foundation Models\n- Human-Robot Interaction\n- Learning and Adaptation\n- Localization\n- Manipulation\n- Mapping and SLAM\n- Motion and Control\n- Multi-Robot Systems\n- Navigation\n- Perception\n- Planning and Decision\n- Reasoning and Agents\n- Safety and Trust\n- Simulation and Digital Twins\n- System Infrastructure\n\nDo not treat these domains as isolated folders. Many real systems cross several of\nthem. A mobile manipulator, for example, may require perception, localization,\nnavigation, planning, manipulation, motion control, safety, simulation, and system\ninfrastructure.\n\nRead [references/panorama.md](references/panorama.md) when mapping a field, traversing\ngraph layers, or producing a capability landscape.\n\n## Route each question correctly\n\n| User need | Route |\n| --- | --- |\n| Task-level \"how\": accomplish an embodied-AI task with given robots/sensors | **Consult** |\n| A concrete technical question or a deep study of a selected method | **Search** |\n| A known `CAP_...`, `AST_...`, topic ID, name, or alias | **Lookup*",
+      "tags": [
+        "node",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "workflow",
+        "design",
+        "document"
+      ],
+      "useCases": [
+        "Use when you need a grounded, source-linked implementation path for an embodied-AI task (manipulation, navigation, perception, control, planning, simulation, and related systems).",
+        "Use when selecting or comparing methods, capabilities, assets, dependencies, or evidence for a bounded technical requirement.",
+        "Use when mapping a problem to the embodied-AI field, tracing task chains, or assembling a development workflow from retrieved structure.",
+        "Do not use it to directly control physical robots, or for unrelated scientific domains or generic software development."
+      ],
+      "scrapedAt": "2026-09-04T11:12:32.782Z"
+    },
+    {
       "id": "antigravity-environment-setup-guide",
       "name": "environment-setup-guide",
       "slug": "environment-setup-guide",
@@ -21350,9 +21380,10 @@
       "source": "anthropic",
       "repoUrl": "https://github.com/anthropics/skills",
       "skillUrl": "https://github.com/anthropics/skills/tree/main/skills/frontend-design",
-      "content": "\n# Frontend Design\n\nApproach this as the design lead at a small studio known for giving every client a visual identity that could not be mistaken for anyone else's. This client has already rejected proposals that felt templated, and is paying for a distinctive point of view: make deliberate, opinionated choices about palette, typography, and layout that are specific to this brief, and take one real aesthetic risk you can justify.\n\n## Ground it in the subject\n\nIf the brief does not pin down what the product or subject is, pin it yourself before designing: name one concrete subject, its audience, and the page's single job, and state your choice. If there's any information in your memory about the human's preferences, context about what they're building, or designs you've made before – use that as a hint. The subject's own world, its materials, instruments, artifacts, and vernacular, is where distinctive choices come from. Build with the brief's real content and subject matter throughout.\n\n## Design principles\n\nFor web designs, the hero is a thesis. Open with the most characteristic thing in the subject's world, in whatever form makes sense for it: a headline, an image, an animation, a live demo, an interactive moment. Be deliberate with your choice: a big number with a small label, supporting stats, and a gradient accent is the template answer, only use if that's truly the best option.\n\nTypography carries the personality of the page. Pair the display and body faces deliberately, not the same families you would reach for on any other project, and set a clear type scale with intentional weights, widths, and spacing. Make the type treatment itself a memorable part of the design, not a neutral delivery vehicle for the content.\n\nStructure is information. Structural devices, numbering, eyebrows, dividers, labels, should encode something true about the content, not decorate it. Many generic designs use numbered markers (01 / 02 / 03), but that's only appropriate if the content actually is a sequence - like a real process or a typed timeline where order carries information the reader needs. Question if choices like numbered markers actually make sense before incorporating them.\n\nLeverage motion deliberately. Think about where and if animation can serve the subject: a page-load sequence, a scroll-triggered reveal, hover micro-interactions, ambient atmosphere. An orchestrated moment usually lands harder than scattered effects; choose what the direction calls for. However, sometimes less is more, and extra animation contributes to the feeling that the design is AI-generated.\n\nMatch complexity to the vision. Maximalist directions need elaborate execution; minimal directions need precision in spacing, type, and detail. Elegance is executing the chosen vision well.\n\nConsider written content carefully. Often a design brief may not contain real content, and it's up to you to come up with copy. Copy can make a design feel as templated as the design itself. See the below section on writing for more guidance.\n\n## Process: brainstorm, explore, plan, critique, build, critique again\n\nFor calibration: AI-generated design right now clusters around three looks: (1) a warm cream background (near #F4F1EA) with a high-contrast serif display and a terracotta accent; (2) a near-black background with a single bright acid-green or vermilion accent; (3) a broadsheet-style layout with hairline rules, zero border-radius, and dense newspaper-like columns. All three are legitimate for some briefs, but they are defaults rather than choices, and they appear regardless of subject. Where the brief pins down a visual direction, follow it exactly — the brief's own words always win, including when it asks for one of these looks. Where it leaves an axis free, don't spend that freedom on one of these defaults. Just like a human designer who's hired, there's often a careful balance between doing what you're good at and taking each project as a chance to experiment and learn.\n\nWork in two passes. First, brainstorm a short design plan based on the human's design brief: create a compact token system with color, type, layout, and signature. Color: describe the palette as 4–6 named hex values. Type: the typefaces for 2+ roles (a characterful display face that's used with restraint, a complementary body face, and a utility face for captions or data if needed). Layout: a layout concept, using one-sentence prose descriptions and ASCII wireframes to ideate and compare. Signature: the single unique element this page will be remembered by that embodies the brief in an appropriate way.\n\nThen review that plan against the brief before building: if any part of it reads like the generic default you would produce for any similar page (work through a similar prompt to see if you arrive somewhere similar) rather than a choice made for this specific brief — revise that part, say what you changed and why. Only after you've confirmed the relative uniqueness of your design plan",
+      "content": "\n# Frontend Design\n\nApproach this as the design lead at a design studio known for giving every client a distinct visual identity that is not mistaken for anyone else's. This client has already rejected proposals that felt cliché or templated, and is paying for a distinctive point of view: make deliberate, opinionated choices about palette, typography, and layout that are specific to this brief, and take aesthetic risk if justified.\n\n## Ground your designs in the subject matter\n\nIf the brief does not identify what the product or subject matter is, identify it yourself before designing, and confirm with the client. You can come up with one concrete subject, the design's audience, and the design's primary job, as a proposal. If there's any information in your memory about the client's preferences or context about what they're building, use that as a hint. The subject's industry, subject matter, materials, and vernacular are where distinctive visual choices come from — a design for a toy for girls aged 8–11 will be very aesthetically different from a dashboard for financial analysts. Build with the brief's real content and subject matter throughout.\n\n## Design principles\n\nFor web designs, the hero is the first thing viewers will see. Open with the most characteristic thing in the subject's world, in the form that is most appropriate: a headline, an image, an animation, a live demo, an interactive moment, or other treatments. Be deliberate with your choice: a big number with a small label, supporting stats, and a gradient accent is the default treatment, so only use it if that's truly the best option.\n\nTypography carries the personality of the page. You don't need a different typeface for display or headline text and body content: use one family or two, and if two, make them clearly distinct.\n\nChoose your typefaces deliberately, not the default families you would reach for on any other project, and set a clear type scale following the default guidance of The Elements of Typographic Style with intentional weights, widths, and spacing. When type is used as a headline or visual element, use the type treatment itself as an active part of the design, not a neutral delivery vehicle for the content.\n\nDefault to line lengths of less than 80 characters. Serif typefaces can have slightly longer line lengths; give serif body text slightly more line-height than a sans-serif.\n\nAvoid these default typographic treatments; they are the commonest tells of a generated page:\n- Accenting just a single word or phrase in a headline, like putting one word in italic/bold or a different color.\n- Using all caps for labels.\n- Adding unnecessary typographic labels above content.\n\nVisual structure is information. Structural devices like outlines, borders, numbering, eyebrows, dividers, labels, etc., encode useful information about the content rather than decorate it. Many generic designs use numbered markers (01 / 02 / 03), but that's only appropriate if the content actually is a sequence — like a stepped process or a timeline. Before adding numbered markers, check the content really is a sequence.\n\nUse non-user-triggered motion sparingly and deliberately, only to draw attention. A single orchestrated moment — one page-load sequence or one reveal — lands better than scattered effects; fade-and-slide-up entrances on each section and hover transitions on every card are the generic default and read as AI-generated. Motion that answers a person's action (opening, expanding, confirming) is welcome when it shows what changed.\n\nConsider written content carefully. Often a design brief may not contain real content, and it's up to you to come up with copy and placeholder content. Copy can make a design feel as templated as the design itself. See the below section on writing for more guidance.\n\n## Process: plan, review against the brief, build, critique\n\nFor calibration, AI-generated design right now clusters around some traits:\n1. a warm cream background (near #F4F1EA) with a high-contrast serif display and a terracotta or warm-clay accent (often near #D97757 — Anthropic's own Claude-interaction accent, so on a user's brief it reads as a tell);\n2. a near-black background with a single bright acid-green or vermilion accent;\n3. a broadsheet-style layout with hairline rules, zero border-radius, and dense newspaper-like columns;\n4. the SaaS-card kit: content chopped into identical rounded cards, one border-radius on everything regardless of hierarchy, the same soft grey shadow (rgba(0,0,0,.1)) under each, and gradient washes as decoration;\n5. template chrome that appears whatever the subject: a tracked-out ALL-CAPS eyebrow label above every heading; meta strings joined with middle dots ('A · B · C'); labels built as 'WORD — fragment' with a spaced em dash; tinted near-black (#0B0B0B, #111) standing in for black; a monospace face for small data labels; a '→' appended to link and button text.\n\nAll traits are legitimate for some briefs, but they are default",
       "tags": [
         "api",
+        "claude",
         "ai",
         "template",
         "design",
@@ -25757,36 +25788,6 @@
       "scrapedAt": "2026-07-02T09:28:36.243Z"
     },
     {
-      "id": "antigravity-indexing-issue-auditor",
-      "name": "indexing-issue-auditor",
-      "slug": "indexing-issue-auditor",
-      "description": "High-level technical SEO and site architecture auditor. Invoke to scan local or live environments for indexing, crawl budget, and structural errors.",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/indexing-issue-auditor",
-      "content": "\n# Indexing Issue Auditor & Technical SEO Architect\n\n## Overview\n\nAct as a **Senior Technical SEO Architect, Web Infrastructure Engineer, and Site Reliability Auditor**. Your objective is to perform a deep-dive scan of a website's architecture to identify, diagnose, and fix crawl health issues, indexing blocks, and structural SEO failures.\n\nYour job is NOT just to find issues — your goal is to **design and rebuild** the site's architecture into a fully optimized system that Google fully trusts.\n\n## When to Use This Skill\n\n- Use when preparing or auditing a site for **Google Search Console** health.\n- Use when encountering **\"Discovered but not currently indexed\"** or other mass indexing errors.\n- Use to audit **Sitemaps, Robots.txt, and URL structures** for crawl budget waste.\n- Use when designing a **New Site Architecture** or performing a content silo migration.\n- Use to perform a **Site Reliability Audit** specifically focused on SEO stability and redirect integrity.\n\n## Input Types\n\n- **Directory Path**: Scanning local folder structures for `sitemap.xml`, `robots.txt`, and canonical logic in templates.\n- **Search Console Reports**: Analyzing exported CSVs of indexing errors (404s, Soft 404s, Redirect loops).\n- **Public Domain URL**: Performing a live scan of architectural signals (Crawl depth, response codes).\n- **Architecture Drafts**: Evaluating proposed URL structures or internal linking maps before deployment.\n\n## How It Works (Mandatory Phases)\n\nYou must scan and audit in this exact order:\n\n### Phase 1: Indexing System Health\nDetect 404s, \"Crawled but not indexed\", \"Soft 404s\", and noindex tags. Explain why Google rejected indexing and define if the issue is Content, Technical, or Structural.\n\n### Phase 2: Crawl Architecture\nAnalyze crawl depth, identify orphan pages, and map the internal linking graph to find crawl budget waste.\n\n### Phase 3: Sitemap Architecture Audit\nValidate that sitemaps contain ONLY indexable URLs (no redirects, no 404s). Segment sitemaps by type (pages/posts/products) and ensure canonical alignment.\n- **Internationalization**: Validate that `hreflang` tags have correct return links and match the sitemap entries for multi-region setups.\n\n### Phase 4: URL Architecture Design\nIdentify URL duplication patterns and parameter-heavy URLs. Propose a \"Clean URL Architecture Model.\"\n\n### Phase 5: Redirect & Link Flow\nIdentify redirect chains and loops. Map the flow of internal link equity and propose a \"Clean Redirect Flow Map.\"\n\n### Phase 6: Content Quality Engine\nDetect thin pages, duplicate clusters, and auto-generated content. Propose a consolidation plan.\n\n### Phase 7: Technical Server Health\nCheck for 5xx errors, 403 blocks, and API failures affecting crawler stability.\n- **SSR & Hydration**: Verify if Googlebot is seeing the same content as users in JavaScript-heavy environments (Next.js/Nuxt). Detect if \"hidden\" content requires client-side hydration that Google cannot complete.\n\n### Phase 8: Performance & Resource Loading\nAudit render-blocking JS, CSS delays, and lazy loading errors from a structural perspective.\n\n### Phase 9: Internal Linking System Design\nRedesign the internal linking graph into a topical SEO Silo (Hub and Spoke) model.\n\n### Phase 10: Final Rebuild Plan\nProduce a step-by-step cleanup order and an SEO stabilization roadmap (Day 1 → Day 30).\n\n## Master Issue Control Table\nFor every audit, you MUST generate a table in this exact format:\n\n| # | Issue | Layer (SEO/Crawl/Server/Content) | Affected URLs/Patterns | Root Cause | Fix (Technical) | Fix (Structural) | Priority | Status |\n|---|---|---|---|---|---|---|---|---|\n| 1 | Redirect Loop | Server | /blog/old-post | Nested .htaccess rule | Flatten to 1-hop | Redesign routing | High | Open |\n\n## Examples\n\n### Example 1: Local Directory Audit\n**Input**: Root directory of a static site project.\n**Scan Result**: Detected a `robots.txt` blocking `/public/static` but missing an entry for the `/api` route.\n**Fix**: Added `Disallow: /api/*` and verified `sitemap.xml` includes only the `/app/` routes.\n\n### Example 2: Indexing Reversal\n**Input**: GSC Report showing 40% \"Crawled - currently not indexed\".\n**Diagnosis**: Architectural duplication (Parameter-based vs. Static URLs).\n**Fix**: Implemented strict Canonicalization and parameterized URL handling in `robots.txt`.\n\n## Best Practices\n\n- ✅ **Provide FIX + STRUCTURAL DESIGN**: Do not just report; provide the technical fix and the architectural redesign.\n- ✅ **Logical Verification**: Never assume an issue; verify each response code and link logic.\n- ✅ **Quantify Impact**: Define the system-level impact of every architectural choice.\n- ❌ **No Fluff**: Focus on actionable, engineering-level structured output.\n\n## Common Pitfalls\n\n- **Problem**: Treating indexing issues as \"content only\" when they are often architectural.\n- **Solution**: Check server status codes and canonical logic before assuming content quality is the cause.\n- **Problem**: Ignoring \"Crawl Depth\" (pages bu",
-      "tags": [
-        "javascript",
-        "api",
-        "claude",
-        "ai",
-        "template",
-        "design",
-        "security",
-        "vulnerability",
-        "seo"
-      ],
-      "useCases": [
-        "Use when preparing or auditing a site for **Google Search Console** health.",
-        "Use when encountering **\"Discovered but not currently indexed\"** or other mass indexing errors.",
-        "Use to audit **Sitemaps, Robots.txt, and URL structures** for crawl budget waste.",
-        "Use when designing a **New Site Architecture** or performing a content silo migration.",
-        "Use to perform a **Site Reliability Audit** specifically focused on SEO stability and redirect integrity."
-      ],
-      "scrapedAt": "2026-04-14T08:00:47.285Z"
-    },
-    {
       "id": "anthropic-internal-comms",
       "name": "internal-comms",
       "slug": "internal-comms",
@@ -27614,7 +27615,7 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 378
+      "count": 379
     },
     {
       "id": "ai-agents",
@@ -27642,7 +27643,7 @@
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 70
+      "count": 69
     },
     {
       "id": "business-marketing",
@@ -27686,42 +27687,42 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 281068
+      "stars": 281617
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 173388
+      "stars": 173886
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 74363
+      "stars": 74442
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 86050
+      "stars": 86150
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1711
+      "stars": 1715
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
-      "newSkillCount": 6,
-      "stars": 45895
+      "newSkillCount": 7,
+      "stars": 45961
     },
     {
       "name": "Xquik",
@@ -27731,10 +27732,10 @@
       "stars": 193
     }
   ],
-  "lastUpdated": "2026-09-03T11:09:27.284Z",
+  "lastUpdated": "2026-09-04T11:15:03.645Z",
   "stats": {
     "totalSkills": 1136,
-    "newSkills": 15,
-    "scrapedAt": "2026-09-03T11:09:27.284Z"
+    "newSkills": 16,
+    "scrapedAt": "2026-09-04T11:15:03.645Z"
   }
 }
