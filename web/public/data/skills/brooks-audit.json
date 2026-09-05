@@ -2,7 +2,7 @@
   "id": "antigravity-brooks-audit",
   "name": "brooks-audit",
   "slug": "brooks-audit",
-  "description": "Architecture audit that maps module dependencies, checks layering integrity, and flags structural decay across a codebase, drawing on twelve classic engineering books. Triggers when: user asks to audit architecture, review folder/module structure, check for circular imports, understand...",
+  "description": "Architecture audit that maps module dependencies, checks layering integrity, and flags structural decay across a codebase, drawing on twelve classic engineering books.",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

@@ -1,6 +1,6 @@
 ---
 name: developer-advocacy
-description: When the user wants to do developer advocacy activities including conference talks, live coding, podcasts, and building in public. Trigger phrases include "developer advocacy," "devrel," "conference t
+description: When the user wants to do developer advocacy activities including conference talks, live coding, podcasts, and building in public. 
 category: Security & Systems
 source: antigravity
 tags: [react, markdown, ai, agent, template, security, vulnerability, kubernetes, aws, cro]

@@ -1,6 +1,6 @@
 ---
 name: ab-testing
-description: When the user wants to plan, design, or implement an A/B test or experiment, or build a growth experimentation program. Also use when the user mentions "A/B test," "split test," "experiment," "test th
+description: When the user wants to plan, design, or implement an A/B test or experiment, or build a growth experimentation program. 
 category: Document Processing
 source: antigravity
 tags: [javascript, claude, ai, agent, template, design, document, image, security, rag]

@@ -2,7 +2,7 @@
   "id": "antigravity-aws-cdk-development",
   "name": "aws-cdk-development",
   "slug": "aws-cdk-development",
-  "description": "AWS Cloud Development Kit (CDK) expert for building cloud infrastructure with TypeScript/Python. Use when creating CDK stacks, defining CDK constructs, implementing infrastructure as code, or when the user mentions CDK, CloudFormation, IaC, cdk synth, cdk deploy, or wants to define AWS...",
+  "description": "AWS Cloud Development Kit (CDK) expert for building cloud infrastructure with TypeScript/Python.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

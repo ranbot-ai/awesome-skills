@@ -1,6 +1,6 @@
 ---
 name: gemini-interactions-api
-description: Use this skill when writing code that calls the Gemini API for text generation, multi-turn chat, multimodal understanding, image generation, video generation, streaming responses, background research 
+description: Build with the Gemini Interactions API for text, chat, multimodal generation, streaming, managed or background agents, function calling, structured output, and generateContent migrations. 
 category: Document Processing
 source: antigravity
 tags: [python, javascript, typescript, node, api, mcp, ai, agent, document, image]

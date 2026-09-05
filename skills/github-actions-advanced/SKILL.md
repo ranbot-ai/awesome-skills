@@ -3,7 +3,7 @@ name: github-actions-advanced
 description: Design, debug, and harden GitHub Actions CI/CD workflows, including reusable workflows, matrix builds, self-hosted runners, OIDC authentication, caching, environments, secrets, and release automation.
 category: AI & Agents
 source: antigravity
-tags: [python, javascript, typescript, node, api, ai, automation, workflow, template, design]
+tags: [api, ai, automation, workflow, design, image, security, docker, kubernetes]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/github-actions-advanced
 ---
 
@@ -13,6 +13,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gith
 Expert guidance for designing, writing, debugging, and securing **production-grade** GitHub Actions workflows.
 
 ---
+
+## Detailed Guide
+
+Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.
 
 ## When to Use This Skill
 
@@ -32,153 +36,96 @@ Expert guidance for designing, writing, debugging, and securing **production-gra
 
 ---
 
-## Step 1: Understand Context Before Responding
+## Security Hardening
 
-When invoked, first gather context:
-
-```bash
-# Discover existing workflows in the repo
-find .github/workflows -name "*.yml" -o -name "*.yaml" 2>/dev/null | head -20
-
-# Check for composite actions
-find .github/actions -name "action.yml" 2>/dev/null
-
-# Detect tech stack (influences runner OS, language setup actions)
-ls package.json requirements.txt Gemfile go.mod Cargo.toml pom.xml 2>/dev/null
-```
-
-Then adapt recommendations to:
-- Existing workflow patterns in the repo
-- The tech stack and language runtime
-- Whether this is a monorepo or single-project repo
-- Whether self-hosted or GitHub-hosted runners are in use
-
----
-
-## Workflow Structure Reference
+### 1. Always Declare Permissions (Least Privilege)
 
 ```yaml
-name: Workflow Name
-
-on:                          # Triggers (see Triggers section)
-  push:
-    branches: [main]
-
-permissions:                 # Always declare — principle of least privilege
+# Workflow-level default — restrict everything
+permissions:
   contents: read
 
-env:                         # Workflow-level env vars
-  NODE_VERSION: '20'
+jobs:
+  publish:
+    # Job-level override — only expand what's needed
+    permissions:
+      contents: write        # Only for release/publish jobs
+      packages: write        # Only for container push jobs
+      pull-requests: write   # Only for PR comment jobs
+      id-token: write        # Only for OIDC auth jobs
+```
 
-concurrency:                 # Prevent duplicate runs
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true   # Cancel older runs for same branch
+### 2. Pin Third-Party Actions to Full Commit SHA
+
+```yaml
+# ❌ UNSAFE — tag can be mutated or hijacked
+- uses: actions/checkout@v4
+
+# ✅ SAFE — commit SHA is immutable
+- uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+
+# Tool to automate SHA pinning:
+# npx pin-github-action .github/workflows/*.yml
+# or: pip install ratchet && ratchet pin .github/workflows/
+```
+
+### 3. Prevent Script Injection
+
+```yaml
+# ❌ UNSAFE — attacker controls PR title, which gets expanded in shell
+- run: echo "${{ github.event.pull_request.title }}"
+
+# ✅ SAFE — pass through environment variable (shell doesn't evaluate it)
+- env:
+    PR_TITLE: ${{ github.event.pull_request.title }}
+  run: echo "$PR_TITLE"
+
+# ✅ SAFE — expressions in if: conditions are evaluated by Actions, not shell
+- if: github.event.pull_request.draft == false
+  run: echo "Not a draft"
+```
+
+Never place `${{ ... }}` directly inside `run:` when the value can come from
+PR metadata, workflow inputs, repository files, matrix JSON, or earlier job
+outputs. Put it in `env:` first, validate allowlisted values where possible, and
+reference the shell variable with quotes.
+
+### 4. Restrict `pull_request_target` Usage
+
+```yaml
+# Only run when a maintainer adds a specific label — prevents untrusted execution
+on:
+  pull_request_target:
+    types: [labeled]
 
 jobs:
-  job-id:
-    name: Human-readable name
-    runs-on: ubuntu-24.04    # Pin OS version — never use -latest in prod
-    timeout-minutes: 15      # Always set — prevents runaway jobs
-    environment: production  # Links to GitHub Environment (approvals/secrets)
+  validate:
+    # Double-guard: check label name AND author_association
+    if: |
+      github.event.label.name == 'safe-to-test' &&
+      (github.event.pull_request.author_association == 'COLLABORATOR' ||
+       github.event.pull_request.author_association == 'MEMBER' ||
+       github.event.pull_request.author_association == 'OWNER')
+```
 
-    steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
-      - name: Step name
-        run: echo "hello"
+### 5. Harden with StepSecurity
+
+```yaml
+# Add to every workflow — hardens runner, monitors outbound traffic
+- uses: step-security/harden-runner@4d991eb9995541a0b71d1b66f1f98a5f1bef422c  # v2.11.0
+  with:
+    egress-policy: audit          # Start with 'audit', move to 'block' after confirming allowlist
+    allowed-endpoints: >
+      api.github.com:443
+      registry.npmjs.org:443
+      objects.githubusercontent.com:443
 ```
 
 ---
 
-## Triggers (`on:`)
+## Limitations
 
-### Common Patterns
-
-```yaml
-on:
-  push:
-    branches: [main, 'release/**']
-    paths-ignore: ['**.md', 'docs/**']   # Skip docs-only changes
-
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches: [main]
-
-  workflow_dispatch:                      # Manual trigger with inputs
-    inputs:
-      environment:
-        description: 'Deploy target'
-        required: true
-        type: choice
-        options: [staging, production]
-      dry-run:
-        description: 'Dry run only?'
-        type: boolean
-        default: false
-
-  schedule:
-    - cron: '0 2 * * 1'                 # Monday 2am UTC
-
-  workflow_call:                          # Called by other workflows (reusable)
-    inputs:
-      image-tag:
-        type: string
-        required: true
-    secrets:
-      deploy-token:
-        required: true
-
-  release:
-    types: [published]                   # Trigger only on published releases
-
-  pull_request_target:                   # Runs with repo secrets — use with care!
-    types: [labeled]                     # Gate with label + author_association check
-```
-
-> **Security Warning:** `pull_request_target` runs with repo secrets. Only use after a maintainer labels the PR. Never check out fork code without explicit sandboxing.
-
----
-
-## Reusable Workflows
-
-Split large pipelines into composable units stored in `.github/workflows/`.
-
-**Convention:** Prefix internal/reusable workflows with `_` (e.g., `_build.yml`).
-
-### Caller (`.github/workflows/deploy.yml`)
-
-```yaml
-jobs:
-  call-build:
-    uses: ./.github/workflows/_build.yml        # Same-repo reusable
-    # uses: org/repo/.github/workflows/build.yml@main  # Cross-repo
-    with:
-      image-tag: ${{ github.sha }}
-    secrets: inherit                             # Pass all caller secrets down
-  
-  call-test:
-    uses: ./.github/workflows/_test.yml
-    with:
-      node-version: '20'
-    secrets:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}       # Explicit secret passing
-```
-
-### Reusable Workflow (`.github/workflows/_build.yml`)
-
-```yaml
-on:
-  workflow_call:
-    inputs:
-      image-tag:
-        type: string
-        required: true
-      push:
-        type: boolean
-        default: false
-    secrets:
-      registry-token:
-        required: false
-    outputs:
-      digest:
-        description: "Image digest"
-        value: ${{ jobs.buil
+- Use this skill only when the task clearly matches the scope described above.
+- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
+- Always test reusable workflows in a feature branch before merging to main.
+- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.

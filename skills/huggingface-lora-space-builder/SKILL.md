@@ -1,6 +1,6 @@
 ---
 name: huggingface-lora-space-builder
-description: Build and publish a Gradio demo on Hugging Face Spaces for a user-provided LoRA. Use when someone asks to create, generate, ship, or publish a Space, demo, Gradio app, or playground for a LoRA — inc
+description: Build and publish a Gradio demo on Hugging Face Spaces for a user-provided LoRA. 
 category: Document Processing
 source: antigravity
 tags: [python, react, api, ai, workflow, template, design, document, image, security]

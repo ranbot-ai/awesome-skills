@@ -3,7 +3,7 @@ name: cc-skill-security-review
 description: This skill ensures all code follows security best practices and identifies potential vulnerabilities. Use when implementing authentication or authorization, handling user input or file uploads, or cre
 category: Security & Systems
 source: antigravity
-tags: [typescript, react, nextjs, api, ai, workflow, image, security, vulnerability, supabase]
+tags: [typescript, react, api, ai, image, security, vulnerability, supabase, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cc-skill-security-review
 ---
 
@@ -11,6 +11,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cc-s
 # Security Review Skill
 
 This skill ensures all code follows security best practices and identifies potential vulnerabilities.
+
+## Detailed Guide
+
+Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.
 
 ## When to Use
 - Implementing authentication or authorization
@@ -192,18 +196,4 @@ CREATE POLICY "Users update own data"
 - [ ] Authorization checks before sensitive operations
 - [ ] Row Level Security enabled in Supabase
 - [ ] Role-based access control implemented
-- [ ] Session management secure
-
-### 5. XSS Prevention
-
-#### Sanitize HTML
-```typescript
-import DOMPurify from 'isomorphic-dompurify'
-
-// ALWAYS sanitize user-provided HTML
-function renderUserContent(html: string) {
-  const clean = DOMPurify.sanitize(html, {
-    ALLOWED_TAGS: ['b', 'i', 'em', 'strong', 'p'],
-    ALLOWED_ATTR: []
-  })
-  return <div dangerouslyS
+- [ ] Session management secur

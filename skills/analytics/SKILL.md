@@ -1,6 +1,6 @@
 ---
 name: analytics
-description: When the user wants to set up, improve, or audit analytics tracking and measurement. Also use when the user mentions "set up tracking," "GA4," "Google Analytics," "conversion tracking," "event trackin
+description: When the user wants to set up, improve, or audit analytics tracking and measurement. 
 category: Document Processing
 source: antigravity
 tags: [javascript, markdown, mcp, claude, ai, agent, document, spreadsheet, security, seo]

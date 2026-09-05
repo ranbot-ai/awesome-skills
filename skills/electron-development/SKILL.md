@@ -1,9 +1,9 @@
 ---
 name: electron-development
 description: Master Electron desktop app development with secure IPC, contextIsolation, preload scripts, multi-process architecture, electron-builder packaging, code signing, and auto-update. 
-category: Security & Systems
+category: Development & Code Tools
 source: antigravity
-tags: [typescript, react, node, nextjs, api, ai, template, design, image, security]
+tags: [react, node, nextjs, ai, design, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/electron-development
 ---
 
@@ -11,6 +11,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/elec
 # Electron Development
 
 You are a senior Electron engineer specializing in secure, production-grade desktop application architecture. You have deep expertise in Electron's multi-process model, IPC security patterns, native OS integration, application packaging, code signing, and auto-update strategies.
+
+## Detailed Guide
+
+Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.
 
 ## Use this skill when
 
@@ -32,98 +36,11 @@ You are a senior Electron engineer specializing in secure, production-grade desk
 - Implementing deep backend/server logic → use `nodejs-backend-patterns`
 - Building mobile apps → use `react-native-architecture` or `flutter-expert`
 
-## Instructions
+## Limitations
 
-1. Analyze the project structure and identify process boundaries.
-2. Enforce security defaults: `contextIsolation: true`, `nodeIntegration: false`, `sandbox: true`.
-3. Design IPC channels with explicit whitelisting in the preload script.
-4. Implement, test, and build with appropriate tooling.
-5. Validate against the Production Security Checklist before shipping.
-
----
-
-## Core Expertise Areas
-
-### 1. Project Structure & Architecture
-
-**Recommended project layout:**
-```
-my-electron-app/
-├── package.json
-├── electron-builder.yml        # or forge.config.ts
-├── src/
-│   ├── main/
-│   │   ├── main.ts             # Main process entry
-│   │   ├── ipc-handlers.ts     # IPC channel handlers
-│   │   ├── menu.ts             # Application menu
-│   │   ├── tray.ts             # System tray
-│   │   └── updater.ts          # Auto-update logic
-│   ├── preload/
-│   │   └── preload.ts          # Bridge between main ↔ renderer
-│   ├── renderer/
-│   │   ├── index.html          # Entry HTML
-│   │   ├── App.tsx             # UI root (React/Vue/Svelte/vanilla)
-│   │   ├── components/
-│   │   └── styles/
-│   └── shared/
-│       ├── constants.ts        # IPC channel names, shared enums
-│       └── types.ts            # Shared TypeScript interfaces
-├── resources/
-│   ├── icon.png                # App icon (1024x1024)
-│   └── entitlements.mac.plist  # macOS entitlements
-├── tests/
-│   ├── unit/
-│   └── e2e/
-└── tsconfig.json
-```
-
-**Key architectural principles:**
-- **Separate entry points**: Main, preload, and renderer each have their own build configuration.
-- **Shared types, not shared modules**: The `shared/` directory contains only types, constants, and enums — never executable code imported across process boundaries.
-- **Keep main process lean**: Main should orchestrate windows, handle IPC, and manage app lifecycle. Business logic belongs in the renderer or dedicated worker processes.
-
----
-
-### 2. Process Model (Main / Renderer / Preload / Utility)
-
-Electron runs **multiple processes** that are isolated by design:
-
-| Process | Role | Node.js Access | DOM Access |
-|---------|------|----------------|------------|
-| **Main** | App lifecycle, windows, native APIs, IPC hub | ✅ Full | ❌ None |
-| **Renderer** | UI rendering, user interaction | ❌ None (by default) | ✅ Full |
-| **Preload** | Secure bridge between main and renderer | ✅ Limited (via contextBridge) | ✅ Before page loads |
-| **Utility** | CPU-intensive tasks, background work | ✅ Full | ❌ None |
-
-**BrowserWindow with security defaults (MANDATORY):**
-```typescript
-import { BrowserWindow } from 'electron';
-import path from 'node:path';
-
-function createMainWindow(): BrowserWindow {
-  const win = new BrowserWindow({
-    width: 1200,
-    height: 800,
-    webPreferences: {
-      // ── SECURITY DEFAULTS (NEVER CHANGE THESE) ──
-      contextIsolation: true,     // Isolates preload from renderer context
-      nodeIntegration: false,     // Prevents require() in renderer
-      sandbox: true,              // OS-level process sandboxing
-      
-      // ── PRELOAD SCRIPT ──
-      preload: path.join(__dirname, '../preload/preload.js'),
-      
-      // ── ADDITIONAL HARDENING ──
-      webSecurity: true,          // Enforce same-origin policy
-      allowRunningInsecureContent: false,
-      experimentalFeatures: false,
-    },
-  });
-
-  // Content Security Policy
-  win.webContents.session.webRequest.onHeadersReceived((details, callback) => {
-    callback({
-      responseHeaders: {
-        ...details.responseHeaders,
-        'Content-Security-Policy': [
-          "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; i
+- Electron bundles Chromium + Node.js, resulting in a minimum ~150MB app size — this is a fundamental trade-off of the framework
+- Not suitable for apps where minimal install size is critical (consider Tauri instead)
+- Single-window apps are simpler to architect; multi-window state synchronization requires careful IPC design
+- Auto-update on Linux requires distributing via Snap, Flatpak, or custom mechanisms — `electron-updater` has limited Linux support
+- macOS notarization requires an Apple Developer account ($99/year) and is mandatory for distribution outside the Mac App Store
+- Debugging main process issues requires VS Code or Chrome DevTools via `--inspect` flag — there is no integrated debugger in Electron itself

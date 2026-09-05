@@ -1,6 +1,6 @@
 ---
 name: claimable-postgres
-description: Provision instant temporary Postgres databases via Claimable Postgres by Neon (neon.new) with no login, signup, or credit card. Supports REST API, CLI, and SDK. Use when users ask for a quick Postgres
+description: Provision instant temporary Postgres databases via Claimable Postgres by Neon (neon.new) with no login, signup, or credit card. Supports REST API, CLI, and SDK. 
 category: Document Processing
 source: antigravity
 tags: [typescript, node, api, ai, agent, workflow, document, security, prisma, aws]

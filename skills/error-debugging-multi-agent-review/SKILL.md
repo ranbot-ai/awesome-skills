@@ -3,159 +3,52 @@ name: error-debugging-multi-agent-review
 description: Use when working with error debugging multi agent review 
 category: AI & Agents
 source: antigravity
-tags: [python, ai, agent, workflow, design, security, rag, cro]
+tags: [ai, agent, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/error-debugging-multi-agent-review
 ---
 
 
-# Multi-Agent Code Review Orchestration Tool
+## Compatibility and maintenance
 
-## Use this skill when
+Primary editorial path for this compatibility group. The full instructions and support files remain local so existing installations
+continue to work offline. This is one shared procedure, not an additional capability.
+Preserve the callable ID when an existing manifest or client configuration uses it.
+Modified in AAS on 2026-09-05; original metadata and license notices are retained.
 
-- Working on multi-agent code review orchestration tool tasks or workflows
-- Needing guidance, best practices, or checklists for multi-agent code review orchestration tool
+# Coordinate a bounded code review
 
-## Do not use this skill when
+## When to Use
+Review a defined diff or subsystem from several relevant perspectives, such as
+correctness, authorization and performance. The skill describes a review procedure;
+it does not install an orchestration engine or prove compliance.
 
-- The task is unrelated to multi-agent code review orchestration tool
-- You need a different domain or tool outside this scope
+## Inputs and execution scope
+Pin repository/base/head, the changed paths, intended behavior and available tests.
+Use independent agents only if the user authorizes delegation and the host supports
+it. Otherwise conduct the perspectives sequentially. Do not spawn agents merely
+because this callable ID contains “multi-agent”. Read-only review is the default;
+fixes, external posts and deployment stay within the user's actual task authority.
 
-## Instructions
+## Review process
+1. Read the complete diff and the directly affected call paths and tests.
+2. Choose only perspectives relevant to the change. Give each authorized reviewer a
+   bounded question, owned paths, time/effort limit and expected evidence format.
+3. Record findings with exact locations, trigger, consequence and reproduction. Keep
+   hypotheses separate from demonstrated failures; do not invent confidence scores.
+4. Reproduce important findings centrally. Deduplicate by root cause, not wording.
+5. Resolve disagreement through code or tests. Weighted votes and multiple agents
+   repeating a claim are not evidence of correctness.
+6. Return blockers first, then material improvements and untested areas. Preserve
+   the original failing result; a rerun does not erase it.
 
-- Clarify goals, constraints, and required inputs.
-- Apply relevant best practices and validate outcomes.
-- Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
+## Example
+For a tenant-scoped cache change, review key construction, authorization context and
+invalidation. Reproduce two tenants requesting the same prompt and different prompt
+versions within one tenant. Expected result: a finding only if an actual cross-scope
+hit or stale result can occur, with the smallest case showing it. A general style
+opinion must not be presented as a data-exposure defect.
 
-## Role: Expert Multi-Agent Review Orchestration Specialist
-
-A sophisticated AI-powered code review system designed to provide comprehensive, multi-perspective analysis of software artifacts through intelligent agent coordination and specialized domain expertise.
-
-## Context and Purpose
-
-The Multi-Agent Review Tool leverages a distributed, specialized agent network to perform holistic code assessments that transcend traditional single-perspective review approaches. By coordinating agents with distinct expertise, we generate a comprehensive evaluation that captures nuanced insights across multiple critical dimensions:
-
-- **Depth**: Specialized agents dive deep into specific domains
-- **Breadth**: Parallel processing enables comprehensive coverage
-- **Intelligence**: Context-aware routing and intelligent synthesis
-- **Adaptability**: Dynamic agent selection based on code characteristics
-
-## Tool Arguments and Configuration
-
-### Input Parameters
-- `$ARGUMENTS`: Target code/project for review
-  - Supports: File paths, Git repositories, code snippets
-  - Handles multiple input formats
-  - Enables context extraction and agent routing
-
-### Agent Types
-1. Code Quality Reviewers
-2. Security Auditors
-3. Architecture Specialists
-4. Performance Analysts
-5. Compliance Validators
-6. Best Practices Experts
-
-## Multi-Agent Coordination Strategy
-
-### 1. Agent Selection and Routing Logic
-- **Dynamic Agent Matching**:
-  - Analyze input characteristics
-  - Select most appropriate agent types
-  - Configure specialized sub-agents dynamically
-- **Expertise Routing**:
-  ```python
-  def route_agents(code_context):
-      agents = []
-      if is_web_application(code_context):
-          agents.extend([
-              "security-auditor",
-              "web-architecture-reviewer"
-          ])
-      if is_performance_critical(code_context):
-          agents.append("performance-analyst")
-      return agents
-  ```
-
-### 2. Context Management and State Passing
-- **Contextual Intelligence**:
-  - Maintain shared context across agent interactions
-  - Pass refined insights between agents
-  - Support incremental review refinement
-- **Context Propagation Model**:
-  ```python
-  class ReviewContext:
-      def __init__(self, target, metadata):
-          self.target = target
-          self.metadata = metadata
-          self.agent_insights = {}
-
-      def update_insights(self, agent_type, insights):
-          self.agent_insights[agent_type] = insights
-  ```
-
-### 3. Parallel vs Sequential Execution
-- **Hybrid Execution Strategy**:
-  - Parallel execution for independent reviews
-  - Sequential processing for dependent insights
-  - Intelligent timeout and fallback mechanisms
-- **Execution Flow**:
-  ```python
-  def execute_review(review_context):
-      # Parallel independent agents
-      parallel_agents = [
-          "code-quality-reviewer",
-          "security-auditor"
-      ]
-
-      # Sequential dependent agents
-      sequential_agents = [
-          "architecture-reviewer",
-          "performance-optimizer"
-      ]
-  ```
-
-### 4. Result Aggregation and Synthesis
-- **Intelligent Consolidation**:
-  - Merge insights from multiple agents
-  - Resolve conflicting recommendations
-  - Generate unified, prioritized report
-- **Synthesis Algorithm**:
-  ```python
-  def synthesize_review_insights(agent_results):
-      consolidated_report = {
-          "critical_issues": [],
-          "important_issues": [],
-          "improvement_suggestions": []
-      }
-      # Intelligent merging logic
-      return consolidated_report
-  ```
-
-### 5. Conflict Resolution Mechanism
-- **Smart Conflict Handling**:
-  - Detect contradictory agent recommendations
-  - Apply weighted scoring
-  - Escalate complex conflicts
-- **Resolution Strategy**:
-  ```python
-  def resolve_conflicts(agent_insights):
-      conflict_resolver = ConflictResolutionEngine()
-      return conflict_resolver.process(agent_insights)
-  ```
-
-### 6. Performance Optimization
-- **Efficiency Techniques**:
-  - Minimal redundant processing
-  - Cached intermediate results
-  - Adaptive agent resource allocation
-- **Optimization Approach**:
-  ```python
-  def optimize_review_process(review_context):
-      return ReviewOptimizer.allocate_resources(review_context)
-  ```
-
-### 7. Quality Validation Framework
-- **Comprehensive Validation**:
-  - Cross-agent result verification
-  - Statistical confi
+## Limitations
+No agent-routing code, compliance validator or quality-score calculator is bundled.
+Parallel review adds cost and can duplicate blind spots. This procedure cannot prove
+whole-repository safety from a diff, nor authorize production load tests or messages.

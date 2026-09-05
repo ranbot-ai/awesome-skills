@@ -1,6 +1,6 @@
 ---
 name: competitor-profiling
-description: When the user wants to research, profile, or analyze competitors from their URLs. Also use when the user mentions 'competitor profile,' 'competitor research,' 'competitor analysis,' 'profile this comp
+description: When the user wants to research, profile, or analyze competitors from their URLs. 
 category: Document Processing
 source: antigravity
 tags: [markdown, api, mcp, claude, ai, agent, template, document, security, rag]

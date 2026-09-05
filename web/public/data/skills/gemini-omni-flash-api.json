@@ -2,7 +2,7 @@
   "id": "antigravity-gemini-omni-flash-api",
   "name": "gemini-omni-flash-api",
   "slug": "gemini-omni-flash-api",
-  "description": "Use this skill for generative video editing, text-to-video, image-referenced video generation, and first-frame-to-video transition animations using the official google-genai SDK. Includes workflows for pre-processing/optimizing high-resolution or long source videos with ffmpeg,...",
+  "description": "Use this skill for generative video editing, text-to-video, image-referenced video generation, and first-frame-to-video transition animations using the official google-genai SDK.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

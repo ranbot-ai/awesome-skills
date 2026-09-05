@@ -1,6 +1,6 @@
 ---
 name: bug-hunt-swarm
-description: Parallel read-only multi-agent root-cause investigation for bugs, regressions, crashes, flaky behavior, or unexplained failures. Use when the user asks to investigate a bug, find the root cause, trace
+description: Parallel read-only multi-agent root-cause investigation for bugs, regressions, crashes, flaky behavior, or unexplained failures. 
 category: AI & Agents
 source: antigravity
 tags: [ai, agent, workflow, security, cro]

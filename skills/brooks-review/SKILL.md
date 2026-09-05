@@ -1,6 +1,6 @@
 ---
 name: brooks-review
-description: PR code review that surfaces decay risks, design smells, and maintainability issues with concrete Symptom → Source → Consequence → Remedy findings, drawing on twelve classic engineering books. T
+description: PR code review that surfaces decay risks, design smells, and maintainability issues with concrete Symptom → Source → Consequence → Remedy findings, drawing on twelve classic engineering books. 
 category: AI & Agents
 source: antigravity
 tags: [ai, template, design, security, rag]
@@ -32,6 +32,12 @@ from `../_shared/common.md` to determine the review scope before proceeding.
 4. Output using the Report Template from common.md
 
 **Mode line in report:** `PR Review`
+
+## Example
+
+**User request:**
+
+> Use @brooks-review for this task: PR code review that surfaces decay risks, design smells, and maintainability issues with concrete Symptom → Source → Consequence → Remedy findings, drawing on twelve classic engineering books.
 
 ## Limitations
 

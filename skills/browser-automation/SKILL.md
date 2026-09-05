@@ -1,91 +1,22 @@
 ---
 name: browser-automation
-description: Browser automation powers web testing, scraping, and AI agent interactions. The difference between a flaky script and a reliable system comes down to understanding selectors, waiting strategies, and a
-category: Document Processing
+description: Build reliable browser checks using observed UI state, semantic locators, bounded waits, isolated test data and explicit outcome verification. 
+category: AI & Agents
 source: antigravity
-tags: [api, ai, agent, llm, automation, workflow, design, document, image, rag]
+tags: [api, ai, automation, workflow, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/browser-automation
 ---
 
 
 # Browser Automation
 
-Browser automation powers web testing, scraping, and AI agent interactions.
-The difference between a flaky script and a reliable system comes down to
-understanding selectors, waiting strategies, and anti-detection patterns.
+Use the browser tool already selected by the user or installed in the project. Playwright, Puppeteer and Selenium have different integrations; choose from actual requirements rather than unsupported success-rate claims. Modified by AAS maintainers on 2026-09-05: removed unverified comparisons and bypass defaults, clarified waiting and evidence limits.
 
-This skill covers Playwright (recommended) and Puppeteer, with patterns for
-testing, scraping, and agentic browser control. Key insight: Playwright won
-the framework war. Unless you need Puppeteer's stealth ecosystem or are
-Chrome-only, Playwright is the better choice in 2025.
+Separate tests of applications you control from interaction with an existing authenticated browser. Do not replace the latter with a fresh unauthenticated session or extract credentials to make an automation test work.
 
-Critical distinction: Testing automation (predictable apps you control) vs
-scraping/agent automation (unpredictable sites that fight back). Different
-problems, different solutions.
+## Detailed Guide
 
-## Principles
-
-- Use user-facing locators (getByRole, getByText) over CSS/XPath
-- Never add manual waits - Playwright's auto-wait handles it
-- Each test/task should be fully isolated with fresh context
-- Screenshots and traces are your debugging lifeline
-- Headless for CI, headed for debugging
-- Anti-detection is cat-and-mouse - stay current or get blocked
-
-## Capabilities
-
-- browser-automation
-- playwright
-- puppeteer
-- headless-browsers
-- web-scraping
-- browser-testing
-- e2e-testing
-- ui-automation
-- selenium-alternatives
-
-## Scope
-
-- api-testing → backend
-- load-testing → performance-thinker
-- accessibility-testing → accessibility-specialist
-- visual-regression-testing → ui-design
-
-## Tooling
-
-### Frameworks
-
-- Playwright - When: Default choice - cross-browser, auto-waiting, best DX Note: 96% success rate, 4.5s avg execution, Microsoft-backed
-- Puppeteer - When: Chrome-only, need stealth plugins, existing codebase Note: 75% success rate at scale, but best stealth ecosystem
-- Selenium - When: Legacy systems, specific language bindings Note: Slower, more verbose, but widest browser support
-
-### Stealth_tools
-
-- puppeteer-extra-plugin-stealth - When: Need to bypass bot detection with Puppeteer Note: Gold standard for anti-detection
-- playwright-extra - When: Stealth plugins for Playwright Note: Port of puppeteer-extra ecosystem
-- undetected-chromedriver - When: Selenium anti-detection Note: Dynamic bypass of detection
-
-### Cloud_browsers
-
-- Browserbase - When: Managed headless infrastructure Note: Built-in stealth mode, session management
-- BrowserStack - When: Cross-browser testing at scale Note: Real devices, CI integration
-
-## Patterns
-
-### Test Isolation Pattern
-
-Each test runs in complete isolation with fresh state
-
-**When to use**: Testing, any automation that needs reproducibility
-
-# TEST ISOLATION:
-
-"""
-Each test gets its own:
-- Browser context (cookies, storage)
-- Fresh page
-- Clean state
-"""
+Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.
 
 ## Playwright Test Example
 """
@@ -106,69 +37,56 @@ test('user can remove item from cart', async ({ page }) => {
 });
 """
 
-## Shared Authentication Pattern
-"""
-// Save auth state once, reuse across tests
-// setup.ts
-import { test as setup } from '@playwright/test';
-
-setup('authenticate', async ({ page }) => {
-  await page.goto('/login');
-  await page.getByLabel('Email').fill('user@example.com');
-  await page.getByLabel('Password').fill('password');
-  await page.getByRole('button', { name: 'Sign in' }).click();
-
-  // Wait for auth to complete
-  await page.waitForURL('/dashboard');
-
-  // Save authentication state
-  await page.context().storageState({
-    path: './playwright/.auth/user.json'
-  });
-});
-
-// playwright.config.ts
-export default defineConfig({
-  projects: [
-    { name: 'setup', testMatch: /.*\.setup\.ts/ },
-    {
-      name: 'tests',
-      dependencies: ['setup'],
-      use: {
-        storageState: './playwright/.auth/user.json',
-      },
-    },
-  ],
-});
-"""
-
-### User-Facing Locator Pattern
-
-Select elements the way users see them
-
-**When to use**: Always - the default approach for selectors
-
-# USER-FACING LOCATORS:
-
-"""
-Priority order:
-1. getByRole  - Best: matches accessibility tree
-2. getByText  - Good: matches visible content
-3. getByLabel - Good: matches form labels
-4. getByTestId - Fallback: explicit test contracts
-5. CSS/XPath - Last resort: fragile, avoid
-"""
-
 ## Good Examples (User-Facing)
 """
 // By role - THE BEST CHOICE
 await page.getByRole('button', { name: 'Submit' }).click();
 await page.getByRole('link', { name: 'Sign up' }).click();
-await page.getByRole('heading', { name: 'Dashboard' }).isVisible();
+await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
 await page.getByRole('textbox', { name: 'Search' }).fill('query');
 
 // By text content
-await page.getByText('Welcome back').isVisible();
+await expect(page.getByText('Welcome back')).toBeVisible();
 await page.getByText(/Order #\d+/).click();  // Regex supported
 
-// By l
+// By label (forms)
+await page.getByLabel('Email address').fill('user@example.com');
+await page.getByLabel('Password').fill('secret');
+
+// By placeholder
+await page.getByPlaceholder('Search...').fill('query');
+
+// By test ID (when no user-facing option works)
+await page.getByTestId('submit-button').click();
+"""
+
+## Bad Examples (Fragile)
+"""
+// DON'T - CSS selectors tied to structure
+await page.locator('.btn-primary.submit-form').click();
+await page.locator('#header > div > button:nth-child(2)').click();
+
+// DON'T - XPath tied to structure
+await page.locator('//div[@class="form"]/button[1]').click();
+
+// DON'T - Auto-generated selectors
+await page.locator('[data-v-12345]').click();
+"""
+
+## When to Use
+
+Use to verify a real browser workflow, diagnose a UI timing failure or collect explicitly authorized page data. Inspect the current page and available tool APIs before selecting locators or actions.
+
+## Worked example and prerequisites
+
+Input: exporting a reviewed JSON file from a local web app. Have the app running, the intended browser available and a synthetic form value. Observe the export control, register the download event before clicking, inspect the downloaded JSON and confirm that editing the input invalidates the old preview. Expected: one file containing the reviewed value, with no hidden project data or network submission.
+
+Use explicit desktop/mobile viewports and inspect keyboard/focus behavior when the task includes usability. A locked desktop leaves interactive verification pending; unit tests and headless probes are separate evidence.
+
+## Limitations
+
+- Auto-waiting checks actionability, not business correctness or successful backend writes.
+- Screenshots, HTML, traces and auth-state files may contain private information; capture only the authorized scope.
+- Retrying a read can be safe; retrying checkout, deletion or sending a message may duplicate a side effect. Verify state before repeating it.
+- Resource blocking and mocked responses change the environment and cannot establish unmodified production behavior.
+- Examples require the project’s imports, runner and fixture routes; no browser, service or account is installed by this skill.

@@ -8,6 +8,13 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/host
 ---
 
 
+## Compatibility and maintenance
+
+Primary editorial path for this compatibility group. The full instructions and support files remain local so existing installations
+continue to work offline. This is one shared procedure, not an additional capability.
+Preserve the callable ID when an existing manifest or client configuration uses it.
+Modified in AAS on 2026-09-05; original metadata and license notices are retained.
+
 # Azure AI Hosted Agents (Python)
 
 Build container-based hosted agents using `ImageBasedHostedAgentDefinition` from the Azure AI Projects SDK.
@@ -15,10 +22,10 @@ Build container-based hosted agents using `ImageBasedHostedAgentDefinition` from
 ## Installation
 
 ```bash
-pip install azure-ai-projects>=2.0.0b3 azure-identity
+pip install 'azure-ai-projects>=2.0.0b3,<3' azure-identity
 ```
 
-**Minimum SDK Version:** `2.0.0b3` or later required for hosted agent support.
+These are preview-era SDK v2 sketches. Check the exact installed version and current Azure hosted-agent documentation before provisioning; a broad version range is not an integration test.
 
 ## Environment Variables
 
@@ -37,11 +44,13 @@ Before creating hosted agents:
 
 ## Authentication
 
-Always use `DefaultAzureCredential`:
+Use the approved Azure credential flow for the intended tenant/subscription; this sketch uses `DefaultAzureCredential`:
 
 ```python
 from azure.identity import DefaultAzureCredential
 from azure.ai.projects import AIProjectClient
+
+import os
 
 credential = DefaultAzureCredential()
 client = AIProjectClient(
@@ -152,7 +161,7 @@ definition=ImageBasedHostedAgentDefinition(
 )
 ```
 
-**Resource Limits:**
+**Illustrative resource sizes; verify regional/SKU limits before provisioning:**
 | Resource | Min | Max | Default |
 |----------|-----|-----|---------|
 | CPU | 0.5 | 4 | 1 |
@@ -174,38 +183,4 @@ tools=[{"type": "code_interpreter"}]
 tools=[
     {"type": "code_interpreter"},
     {
-        "type": "mcp",
-        "server_label": "my-mcp-server",
-        "server_url": "https://my-mcp-server.example.com"
-    }
-]
-```
-
-### Multiple Tools
-
-```python
-tools=[
-    {"type": "code_interpreter"},
-    {"type": "file_search"},
-    {
-        "type": "mcp",
-        "server_label": "custom-tool",
-        "server_url": "https://custom-tool.example.com"
-    }
-]
-```
-
-### Environment Variables
-
-Pass configuration to your container:
-
-```python
-environment_variables={
-    "AZURE_AI_PROJECT_ENDPOINT": os.environ["AZURE_AI_PROJECT_ENDPOINT"],
-    "MODEL_NAME": "gpt-4o-mini",
-    "LOG_LEVEL": "INFO",
-    "CUSTOM_CONFIG": "value"
-}
-```
-
-**Best Practice:** Never hardcode secrets. Use environment var
+        "type"

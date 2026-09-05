@@ -1,6 +1,6 @@
 ---
 name: eas-update-insights
-description: Check the health of published EAS Updates: crash rates, install/launch counts, unique users, payload size, and the split between embedded and OTA users per channel. Use when the user asks how an updat
+description: Check the health of published EAS Updates: crash rates, install/launch counts, unique users, payload size, and the split between embedded and OTA users per channel. 
 category: AI & Agents
 source: antigravity
 tags: [ai, workflow, design, rag, cro]

@@ -2,7 +2,7 @@
   "id": "antigravity-design-ux",
   "name": "design-ux",
   "slug": "design-ux",
-  "description": "UX / usability audit — heuristic evaluation of INTERACTIVE UIs (not just visual polish). Load with design when a UI \"feels off\", \"sucks to use\", is hard to learn, needs an instruction wall, or before shipping an interactive tool/editor/app. Scores the RENDERED UI against Nielsen's 10 +...",
+  "description": "UX / usability audit — heuristic evaluation of INTERACTIVE UIs (not just visual polish). Load with design when a UI \"feels off\", \"sucks to use\", is hard to learn, needs an instruction wall, or before shipping an interactive tool/editor/app.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

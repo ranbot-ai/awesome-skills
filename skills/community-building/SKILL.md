@@ -1,6 +1,6 @@
 ---
 name: community-building
-description: When the user wants to build, grow, or improve a developer community on Discord, Slack, or forums. Trigger phrases include "developer community," "Discord server," "Slack community," "community strate
+description: When the user wants to build, grow, or improve a developer community on Discord, Slack, or forums. 
 category: Document Processing
 source: antigravity
 tags: [markdown, ai, agent, automation, template, document, security, rag, seo, cro]

@@ -1,6 +1,6 @@
 ---
 name: customer-research
-description: When the user wants to conduct, analyze, or synthesize customer research. Use when the user mentions "customer research," "ICP research," "talk to customers," "analyze transcripts," "customer intervie
+description: When the user wants to conduct, analyze, or synthesize customer research. 
 category: Document Processing
 source: antigravity
 tags: [claude, ai, agent, template, document, spreadsheet, security, rag, cro, marketing]

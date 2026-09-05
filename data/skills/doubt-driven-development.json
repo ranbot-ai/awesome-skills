@@ -2,7 +2,7 @@
   "id": "antigravity-doubt-driven-development",
   "name": "doubt-driven-development",
   "slug": "doubt-driven-development",
-  "description": "Subjects every non-trivial decision to a fresh-context adversarial review before it stands. Use when correctness matters more than speed, when working in unfamiliar code, when stakes are high (production, security-sensitive logic, irreversible operations), or any time a confident...",
+  "description": "Subjects every non-trivial decision to a fresh-context adversarial review before it stands.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

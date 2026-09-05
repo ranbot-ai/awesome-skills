@@ -12,6 +12,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-d
 
 This skill covers the data transformations you do every day: working with arrays, reshaping objects, normalizing API responses, grouping data, and safely accessing nested values. Each section shows the imperative approach first, then the functional equivalent, with honest assessments of when each approach shines.
 
+## Detailed Guide
+
+Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.
+
 ## When to Use
 - You need to transform arrays, objects, grouped data, or nested values in TypeScript.
 - The task involves reshaping API responses, null-safe access, aggregation, or normalization.
@@ -19,171 +23,171 @@ This skill covers the data transformations you do every day: working with arrays
 
 ---
 
-## Table of Contents
+## 6. Real-World Examples
 
-1. [Array Operations](#1-array-operations)
-2. [Object Transformations](#2-object-transformations)
-3. [Data Normalization](#3-data-normalization)
-4. [Grouping and Aggregation](#4-grouping-and-aggregation)
-5. [Null-Safe Access](#5-null-safe-access)
-6. [Real-World Examples](#6-real-world-examples)
-7. [When to Use What](#7-when-to-use-what)
-
----
-
-## 1. Array Operations
-
-Array operations are the bread and butter of data transformation. Let's replace verbose loops with expressive, chainable operations.
-
-### Map: Transform Every Element
-
-**The Task**: Convert an array of prices from cents to dollars.
-
-#### Imperative Approach
+### Example 1: Transform API Response to UI-Ready Data
 
 ```typescript
-const pricesInCents = [999, 1499, 2999, 4999];
-
-function convertToDollars(prices: number[]): number[] {
-  const result: number[] = [];
-  for (let i = 0; i < prices.length; i++) {
-    result.push(prices[i] / 100);
-  }
-  return result;
+// API response
+interface ApiOrder {
+  order_id: string;
+  customer: {
+    id: string;
+    full_name: string;
+  };
+  line_items: Array<{
+    product_id: string;
+    product_name: string;
+    qty: number;
+    unit_price: number;
+  }>;
+  order_date: string;
+  status: 'pending' | 'processing' | 'shipped' | 'delivered';
 }
 
-const dollars = convertToDollars(pricesInCents);
-// [9.99, 14.99, 29.99, 49.99]
-```
-
-#### Functional Approach
-
-```typescript
-const pricesInCents = [999, 1499, 2999, 4999];
-
-const toDollars = (cents: number): number => cents / 100;
-
-const dollars = pricesInCents.map(toDollars);
-// [9.99, 14.99, 29.99, 49.99]
-```
-
-**Why functional is better here**: The intent is immediately clear. `map` says "transform each element." The transformation logic (`toDollars`) is named and reusable. No index management, no manual array building.
-
-### Filter: Keep What Matches
-
-**The Task**: Get all active users from a list.
-
-#### Imperative Approach
-
-```typescript
-interface User {
+// What the UI needs
+interface OrderSummary {
   id: string;
-  name: string;
-  isActive: boolean;
+  customerName: string;
+  itemCount: number;
+  total: number;
+  formattedTotal: string;
+  date: string;
+  statusLabel: string;
+  statusColor: string;
 }
 
-function getActiveUsers(users: User[]): User[] {
-  const result: User[] = [];
-  for (const user of users) {
-    if (user.isActive) {
-      result.push(user);
-    }
-  }
-  return result;
-}
-```
+// Transformation
+const STATUS_CONFIG: Record<string, { label: string; color: string }> = {
+  pending: { label: 'Pending', color: 'yellow' },
+  processing: { label: 'Processing', color: 'blue' },
+  shipped: { label: 'Shipped', color: 'purple' },
+  delivered: { label: 'Delivered', color: 'green' },
+};
 
-#### Functional Approach
+const formatCurrency = (cents: number): string =>
+  `$${(cents / 100).toFixed(2)}`;
 
-```typescript
-const isActive = (user: User): boolean => user.isActive;
+const formatDate = (iso: string): string =>
+  new Date(iso).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  });
 
-const activeUsers = users.filter(isActive);
-
-// Or inline for simple predicates
-const activeUsers = users.filter(user => user.isActive);
-```
-
-**Why functional is better here**: The predicate (`isActive`) is separated from the iteration logic. You can reuse, test, and compose predicates independently.
-
-### Reduce: Accumulate Into Something New
-
-**The Task**: Calculate the total price of items in a cart.
-
-#### Imperative Approach
-
-```typescript
-interface CartItem {
-  name: string;
-  price: number;
-  quantity: number;
-}
-
-function calculateTotal(items: CartItem[]): number {
-  let total = 0;
-  for (const item of items) {
-    total += item.price * item.quantity;
-  }
-  return total;
-}
-```
-
-#### Functional Approach
-
-```typescript
-const calculateTotal = (items: CartItem[]): number =>
-  items.reduce(
-    (total, item) => total + item.price * item.quantity,
+const toOrderSummary = (order: ApiOrder): OrderSummary => {
+  const total = order.line_items.reduce(
+    (sum, item) => sum + item.qty * item.unit_price,
     0
   );
 
-// Or break out the line total calculation
-const lineTotal = (item: CartItem): number => item.price * item.quantity;
+  const status = STATUS_CONFIG[order.status] ?? STATUS_CONFIG.pending;
 
-const calculateTotal = (items: CartItem[]): number =>
-  items.map(lineTotal).reduce((a, b) => a + b, 0);
+  return {
+    id: order.order_id,
+    customerName: order.customer.full_name,
+    itemCount: order.line_items.reduce((sum, item) => sum + item.qty, 0),
+    total,
+    formattedTotal: formatCurrency(total),
+    date: formatDate(order.order_date),
+    statusLabel: status.label,
+    statusColor: status.color,
+  };
+};
+
+// Transform all orders
+const toOrderSummaries = (orders: ApiOrder[]): OrderSummary[] =>
+  orders.map(toOrderSummary);
 ```
 
-**Honest assessment**: For simple sums, the imperative loop is actually quite readable. The functional version shines when you need to compose the accumulation with other transformations, or when the reduction logic is complex enough to benefit from being named.
-
-### Chaining: Combine Operations
-
-**The Task**: Get the names of all active premium users, sorted alphabetically.
-
-#### Imperative Approach
+### Example 2: Merge User Settings with Defaults
 
 ```typescript
-interface User {
+interface AppSettings {
+  theme: {
+    mode: 'light' | 'dark' | 'system';
+    primaryColor: string;
+    fontSize: 'small' | 'medium' | 'large';
+  };
+  notifications: {
+    email: boolean;
+    push: boolean;
+    sms: boolean;
+    frequency: 'immediate' | 'daily' | 'weekly';
+  };
+  privacy: {
+    showProfile: boolean;
+    showActivity: boolean;
+    allowAnalytics: boolean;
+  };
+}
+
+type DeepPartial<T> = {
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
+};
+
+const DEFAULT_SETTINGS: AppSettings = {
+  theme: {
+    mode: 'system',
+    primaryColor: '#007bff',
+    fontSize: 'medium',
+  },
+  notifications: {
+    email: true,
+    push: true,
+    sms: false,
+    frequency: 'immediate',
+  },
+  privacy: {
+    showProfile: true,
+    showActivity: true,
+    allowAnalytics: true,
+  },
+};
+
+const deepMergeSettings = (
+  defaults: AppSettings,
+  user: DeepPartial<AppSettings>
+): AppSettings => ({
+  theme: { ...defaults.theme, ...user.theme },
+  notifications: { ...defaults.notifications, ...user.notifications },
+  privacy: { ...defaults.privacy, ...user.privacy },
+});
+
+// Usage
+const userPreferences: DeepPartial<AppSettings> = {
+  theme: { mode: 'dark' },
+  notifications: { sms: true, frequency: 'daily' },
+};
+
+const finalSettings = deepMergeSettings(DEFAULT_SETTINGS, userPreferences);
+```
+
+### Example 3: Group Orders by Customer with Totals
+
+```typescript
+interface Order {
   id: string;
-  name: string;
-  isActive: boolean;
-  tier: 'free' | 'premium';
+  customerId: string;
+  customerName: string;
+  items: Array<{ name: string; price: number; quantity: number }>;
+  date: string;
 }
 
-function getActivePremiumNames(users: User[]): string[] {
-  const result: string[] = [];
-  for (const user of users) {
-    if (user.isActive && user.tier === 'premium') {
-      result.push(user.name);
-    }
-  }
-  result.sort((a, b) => a.localeCompare(b));
-  return result;
+interface CustomerOrderSummary {
+  customerId: string;
+  customerName: string;
+  orderCount: number;
+  totalSpent: number;
+  orders: Order[];
 }
-```
 
-#### Functional Approach
+const calculateOrderTotal = (order: Order): number =>
+  order.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-```typescript
-const getActivePremiumNames = (users: User[]): string[] =>
-  users
-    .filter(user => user.isActive)
-    .filter(user => user.tier === 'premium')
-    .map(user => user.name)
-    .sort((a, b) => a.localeCompare(b));
+const groupOrdersByCustomer = (orders: Order[]): CustomerOrderSummary[] => {
+  const grouped = groupBy((order: Order) => order.customerId)(orders);
 
-// Or with named predicates for reuse
-const isActive = (user: User): boolean => user.isActive;
-const isPremium = (user: User): boolean => user.tier === 'premium';
-const getName = (user: User): string => user.name;
-const alphabetically = (a: string, b: string): number => a.localeCompare(b);
+  return Object.entries(grouped).map(([customerId, customerOrders]) => ({
+    customerId,
+    customerName: customerOrders[0].customerName

@@ -1,6 +1,6 @@
 ---
 name: hugging-face-cli
-description: Hugging Face Hub CLI (`hf`) for downloading, uploading, and managing models, datasets, spaces, buckets, repos, papers, jobs, and more on the Hugging Face Hub. Use when: handling authentication; managi
+description: Hugging Face Hub CLI (`hf`) for downloading, uploading, and managing models, datasets, spaces, buckets, repos, papers, jobs, and more on the Hugging Face Hub. 
 category: Document Processing
 source: antigravity
 tags: [python, markdown, api, claude, ai, agent, gpt, document, image, security]

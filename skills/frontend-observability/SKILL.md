@@ -1,6 +1,6 @@
 ---
 name: frontend-observability
-description: A portable, framework-agnostic field-side observability system for any React or React Native app. Establishes one typed event taxonomy (canonical event-name constants, never inline strings), a best-ef
+description: A portable, framework-agnostic field-side observability system for any React or React Native app. 
 category: AI & Agents
 source: antigravity
 tags: [react, node, api, claude, ai, agent, security, firebase, rag, cro]

@@ -115,6 +115,8 @@ Before finalizing output, the agent asks:
 - [ ] Is the new position consistent across touchpoints?
 - [ ] Would the audience experience this as more credible, not just prettier?
 
-## Limitations
-- Use this skill only when the task clearly matches the scope described above.
-- 
+## Example
+
+**User request:**
+
+> Diagnose how a market currently perceives a brand and how to re

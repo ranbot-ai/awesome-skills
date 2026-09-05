@@ -2,7 +2,7 @@
   "id": "antigravity-frontend-data-contracts",
   "name": "frontend-data-contracts",
   "slug": "frontend-data-contracts",
-  "description": "A portable, framework-agnostic discipline for type safety at the network edge of any React or React Native app. Establishes one typed API client as the single fetch boundary, a parse-don't-validate rule that turns wire JSON into trusted domain types before it enters the app, a single...",
+  "description": "A portable, framework-agnostic discipline for type safety at the network edge of any React or React Native app.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

@@ -2,7 +2,7 @@
   "id": "antigravity-api-designer",
   "name": "api-designer",
   "slug": "api-designer",
-  "description": "Generates complete, production-ready REST API endpoint specifications for any system or domain the user describes. Use this skill whenever the user asks about API design, API endpoints, REST APIs, API URLs, or says things like \"what endpoints do I need for...\", \"design an API for...\",...",
+  "description": "Generates complete, production-ready REST API endpoint specifications for any system or domain the user describes.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

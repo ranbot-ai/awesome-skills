@@ -1,6 +1,6 @@
 ---
 name: brooks-debt
-description: Tech debt assessment that identifies, classifies, and prioritizes maintainability problems — helping teams build a refactoring roadmap — drawing on twelve classic engineering books. Triggers when:
+description: Tech debt assessment that identifies, classifies, and prioritizes maintainability problems — helping teams build a refactoring roadmap — drawing on twelve classic engineering books. 
 category: AI & Agents
 source: antigravity
 tags: [ai, template, security, rag]

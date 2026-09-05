@@ -14,6 +14,10 @@ Stop writing nested try/catch blocks. Stop losing error context. Start building 
 
 **TaskEither is simply an async operation that tracks success or failure.** That's it. No fancy terminology needed.
 
+## Detailed Guide
+
+Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.
+
 ## When to Use
 - You need async error handling in TypeScript with `TaskEither`.
 - The task involves wrapping Promises, composing API calls, or replacing nested `try/catch` flows.
@@ -26,170 +30,158 @@ Stop writing nested try/catch blocks. Stop losing error context. Start building 
 
 ---
 
-## 1. Wrapping Promises Safely
+## 5. Real API Examples
 
-### The Problem: Try/Catch Everywhere
+### Complete Fetch Wrapper
 
 ```typescript
-// BEFORE: Try/catch hell
-async function getUserData(userId: string) {
-  try {
-    const response = await fetch(`/api/users/${userId}`)
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`)
-    }
-    const user = await response.json()
-
-    try {
-      const posts = await fetch(`/api/users/${userId}/posts`)
-      if (!posts.ok) {
-        throw new Error(`HTTP ${posts.status}`)
-      }
-      const postsData = await posts.json()
-      return { user, posts: postsData }
-    } catch (postsError) {
-      // Now what? Return partial data? Rethrow? Log?
-      console.error('Failed to fetch posts:', postsError)
-      return { user, posts: [] }
-    }
-  } catch (error) {
-    // Lost all context about what failed
-    console.error('Something failed:', error)
-    throw error
-  }
+// types.ts
+interface ApiError {
+  code: string
+  message: string
+  status: number
+  details?: unknown
 }
-```
 
-### The Solution: Wrap Once, Handle Cleanly
+// api.ts
+const createApiError = (
+  code: string,
+  message: string,
+  status: number,
+  details?: unknown
+): ApiError => ({ code, message, status, details })
 
-```typescript
-import * as TE from 'fp-ts/TaskEither'
-import * as E from 'fp-ts/Either'
-import { pipe } from 'fp-ts/function'
-
-// One wrapper function - reuse everywhere
-const fetchJson = <T>(url: string): TE.TaskEither<Error, T> =>
+const request = <T>(
+  url: string,
+  options: RequestInit = {}
+): TE.TaskEither<ApiError, T> =>
   TE.tryCatch(
     async () => {
-      const response = await fetch(url)
+      const response = await fetch(url, {
+        headers: {
+          'Content-Type': 'application/json',
+          ...options.headers,
+        },
+        ...options,
+      })
+
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+        const body = await response.json().catch(() => ({}))
+        throw createApiError(
+          body.code || 'HTTP_ERROR',
+          body.message || response.statusText,
+          response.status,
+          body
+        )
       }
+
+      // Handle 204 No Content
+      if (response.status === 204) {
+        return undefined as T
+      }
+
       return response.json()
     },
-    (error) => error instanceof Error ? error : new Error(String(error))
+    (error): ApiError => {
+      if (typeof error === 'object' && error !== null && 'code' in error) {
+        return error as ApiError
+      }
+      return createApiError(
+        'NETWORK_ERROR',
+        error instanceof Error ? error.message : 'Request failed',
+        0
+      )
+    }
   )
 
-// AFTER: Clean and composable
-const getUser = (userId: string) => fetchJson<User>(`/api/users/${userId}`)
-const getPosts = (userId: string) => fetchJson<Post[]>(`/api/users/${userId}/posts`)
-```
+// API client
+const api = {
+  get: <T>(url: string) => request<T>(url),
 
-### tryCatch Explained
+  post: <T>(url: string, body: unknown) =>
+    request<T>(url, {
+      method: 'POST',
+      body: JSON.stringify(body)
+    }),
 
-`TE.tryCatch` takes two things:
-1. An async function that might throw
-2. A function to convert the thrown value into your error type
+  put: <T>(url: string, body: unknown) =>
+    request<T>(url, {
+      method: 'PUT',
+      body: JSON.stringify(body)
+    }),
 
-```typescript
-TE.tryCatch(
-  () => somePromise,           // The async work
-  (thrown) => toError(thrown)  // Convert failures to your error type
-)
-```
-
-### Creating Success and Failure Values
-
-```typescript
-// Wrap a value as success
-const success = TE.right<Error, number>(42)
-
-// Wrap a value as failure
-const failure = TE.left<Error, number>(new Error('Nope'))
-
-// From a nullable value (null/undefined becomes error)
-const fromNullable = TE.fromNullable(new Error('Value was null'))
-const result = fromNullable(maybeUser) // TaskEither<Error, User>
-
-// From a condition
-const mustBePositive = TE.fromPredicate(
-  (n: number) => n > 0,
-  (n) => new Error(`Expected positive, got ${n}`)
-)
-```
-
----
-
-## 2. Chaining Async Operations
-
-### The Problem: Callback Hell / Nested Awaits
-
-```typescript
-// BEFORE: Deeply nested, hard to follow
-async function processOrder(orderId: string) {
-  try {
-    const order = await fetchOrder(orderId)
-    if (!order) throw new Error('Order not found')
-
-    try {
-      const user = await fetchUser(order.userId)
-      if (!user) throw new Error('User not found')
-
-      try {
-        const inventory = await checkInventory(order.items)
-        if (!inventory.available) throw new Error('Out of stock')
-
-        try {
-          const payment = await chargePayment(user, order.total)
-          if (!payment.success) throw new Error('Payment failed')
-
-          try {
-            const shipment = await createShipment(order, user)
-            return { order, shipment, payment }
-          } catch (e) {
-            // Refund payment? Log? What's the state now?
-            await refundPayment(payment.id)
-            throw e
-          }
-        } catch (e) {
-          throw e
-        }
-      } catch (e) {
-        throw e
-      }
-    } catch (e) {
-      throw e
-    }
-  } catch (e) {
-    console.error('Order processing failed', e)
-    throw e
-  }
+  delete: (url: string) =>
+    request<void>(url, { method: 'DELETE' }),
 }
+
+// Usage
+const getUser = (id: string) => api.get<User>(`/api/users/${id}`)
+const createUser = (data: CreateUserDto) => api.post<User>('/api/users', data)
+const updateUser = (id: string, data: UpdateUserDto) => api.put<User>(`/api/users/${id}`, data)
+const deleteUser = (id: string) => api.delete(`/api/users/${id}`)
 ```
 
-### The Solution: Clean Pipelines with chain
+### Database Operations (Prisma Example)
 
 ```typescript
-// AFTER: Flat, readable pipeline
-const processOrder = (orderId: string) =>
-  pipe(
-    fetchOrder(orderId),
-    TE.chain(order => fetchUser(order.userId)),
-    TE.chain(user =>
-      pipe(
-        checkInventory(order.items),
-        TE.chain(inventory => chargePayment(user, order.total))
+import { PrismaClient, Prisma } from '@prisma/client'
+
+type DbError =
+  | { _tag: 'NotFound'; entity: string; id: string }
+  | { _tag: 'UniqueViolation'; field: string }
+  | { _tag: 'ConnectionError'; cause: unknown }
+
+const prisma = new PrismaClient()
+
+const wrapPrisma = <T>(
+  operation: () => Promise<T>
+): TE.TaskEither<DbError, T> =>
+  TE.tryCatch(
+    operation,
+    (error): DbError => {
+      if (error instanceof Prisma.PrismaClientKnownRequestError) {
+        if (error.code === 'P2002') {
+          const field = (error.meta?.target as string[])?.join(', ') || 'unknown'
+          return { _tag: 'UniqueViolation', field }
+        }
+        if (error.code === 'P2025') {
+          return { _tag: 'NotFound', entity: 'Record', id: 'unknown' }
+        }
+      }
+      return { _tag: 'ConnectionError', cause: error }
+    }
+  )
+
+// Repository pattern
+const userRepository = {
+  findById: (id: string): TE.TaskEither<DbError, User> =>
+    pipe(
+      wrapPrisma(() => prisma.user.findUnique({ where: { id } })),
+      TE.chain(user =>
+        user
+          ? TE.right(user)
+          : TE.left({ _tag: 'NotFound', entity: 'User', id })
       )
     ),
-    TE.chain(payment => createShipment(order, user, payment))
-  )
-```
 
-### chain vs map
+  findByEmail: (email: string): TE.TaskEither<DbError, User | null> =>
+    wrapPrisma(() => prisma.user.findUnique({ where: { email } })),
 
-Use `map` when your transformation is synchronous and can't fail:
+  create: (data: CreateUserInput): TE.TaskEither<DbError, User> =>
+    wrapPrisma(() => prisma.user.create({ data })),
 
-```typescript
-pipe(
-  fetchUser(userId),
-  TE.map(user => user.name.toUpperCase())  // Just tran
+  update: (id: string, data: UpdateUserInput): TE.TaskEither<DbError, User> =>
+    wrapPrisma(() => prisma.user.update({ where: { id }, data })),
+
+  delete: (id: string): TE.TaskEither<DbError, void> =>
+    pipe(
+      wrapPrisma(() => prisma.user.delete({ where: { id } })),
+      TE.map(() => undefined)
+    ),
+}
+
+// Service using repository
+const createUserService = (input: CreateUserInput) =>
+  pipe(
+    // Check email doesn't exist
+    use

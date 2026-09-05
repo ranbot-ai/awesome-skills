@@ -1,6 +1,6 @@
 ---
 name: frontend-data-contracts
-description: A portable, framework-agnostic discipline for type safety at the network edge of any React or React Native app. Establishes one typed API client as the single fetch boundary, a parse-don't-validate ru
+description: A portable, framework-agnostic discipline for type safety at the network edge of any React or React Native app. 
 category: AI & Agents
 source: antigravity
 tags: [react, api, claude, ai, agent, security, cro]

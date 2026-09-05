@@ -1,9 +1,9 @@
 ---
 name: hugging-face-vision-trainer
-description: Trains and fine-tunes vision models for object detection (D-FINE, RT-DETR v2, DETR, YOLOS), image classification (timm models — MobileNetV3, MobileViT, ResNet, ViT/DINOv3 — plus any Transformers c
+description: Train object detection, image classification, and SAM or SAM2 segmentation models locally or on Hugging Face Jobs, with dataset validation and results saved to the Hub. 
 category: Document Processing
 source: antigravity
-tags: [python, api, mcp, ai, workflow, template, document, image, security, rag]
+tags: [python, api, mcp, ai, document, image, security, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugging-face-vision-trainer
 ---
 
@@ -11,6 +11,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugg
 # Vision Model Training on Hugging Face Jobs
 
 Train object detection, image classification, and SAM/SAM2 segmentation models on managed cloud GPUs. No local GPU setup required—results are automatically saved to the Hugging Face Hub.
+
+## Detailed Guide
+
+Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.
 
 ## When to Use This Skill
 
@@ -23,19 +27,6 @@ Use this skill when users want to:
 - Train segmentation models on custom mask datasets with prompts
 - Run vision training jobs on Hugging Face Jobs infrastructure
 - Ensure trained vision models are permanently saved to the Hub
-
-## Related Skills
-
-- **`hugging-face-jobs`** — General HF Jobs infrastructure: token authentication, hardware flavors, timeout management, cost estimation, secrets, environment variables, scheduled jobs, and result persistence. **Refer to the Jobs skill for any non-training-specific Jobs questions** (e.g., "how do secrets work?", "what hardware is available?", "how do I pass tokens?").
-- **`hugging-face-model-trainer`** — TRL-based language model training (SFT, DPO, GRPO). Use that skill for text/language model fine-tuning.
-
-## Local Script Execution
-
-Helper scripts use PEP 723 inline dependencies. Run them with `uv run`:
-```bash
-uv run scripts/dataset_inspector.py --dataset username/dataset-name --split train
-uv run scripts/estimate_cost.py --help
-```
 
 ## Prerequisites Checklist
 
@@ -77,31 +68,8 @@ Before starting any training job, verify:
 - **Timeout must exceed expected training time** — Default 30min is TOO SHORT. See directive #6 for recommended values.
 - **Hub push must be enabled** — `push_to_hub=True`, `hub_model_id="username/model-name"`, token in `secrets`
 
-## Dataset Validation
+## Limitations
 
-**Validate dataset format BEFORE launching GPU training to prevent the #1 cause of training failures: format mismatches.**
-
-**ALWAYS validate for** unknown/custom datasets or any dataset you haven't trained with before. **Skip for** `cppe-5` (the default in the training script).
-
-### Running the Inspector
-
-**Option 1: Via HF Jobs (recommended — avoids local SSL/dependency issues):**
-```python
-hf_jobs("uv", {
-    "script": "path/to/dataset_inspector.py",
-    "script_args": ["--dataset", "username/dataset-name", "--split", "train"]
-})
-```
-
-**Option 2: Locally:**
-```bash
-uv run scripts/dataset_inspector.py --dataset username/dataset-name --split train
-```
-
-**Option 3: Via `HfApi().run_uv_job()` (if hf_jobs MCP unavailable):**
-```python
-from huggingface_hub import HfApi
-api = HfApi()
-api.run_uv_job(
-    script="scripts/dataset_inspector.py",
-    script_args=["--dataset", "usern
+- Use this skill only when the task clearly matches its upstream product or API scope.
+- Verify commands, API behavior, pricing, quotas, credentials, and deployment effects against current official documentation before making changes.
+- Do not treat generated examples as a substitute for environment-specific tests, security review, or user approval for destructive or costly actions.

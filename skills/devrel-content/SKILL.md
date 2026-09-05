@@ -1,6 +1,6 @@
 ---
 name: devrel-content
-description: When the user wants to create technical content for developers including blog posts, tutorials, and documentation. Trigger phrases include "write a blog post," "technical article," "developer content,
+description: When the user wants to create technical content for developers including blog posts, tutorials, and documentation. 
 category: Document Processing
 source: antigravity
 tags: [python, javascript, typescript, react, node, markdown, api, ai, agent, template]

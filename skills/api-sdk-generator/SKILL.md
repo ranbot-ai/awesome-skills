@@ -1,6 +1,6 @@
 ---
 name: api-sdk-generator
-description: Generates client SDK code, API wrapper libraries, request/response models, and language-specific usage patterns for any REST API. Use whenever the user asks to "generate an SDK", "write a client libra
+description: Generates client SDK code, API wrapper libraries, request/response models, and language-specific usage patterns for any REST API. 
 category: Development & Code Tools
 source: antigravity
 tags: [python, typescript, api, ai, agent, security]

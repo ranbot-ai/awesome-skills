@@ -2,7 +2,7 @@
   "id": "antigravity-community-building",
   "name": "community-building",
   "slug": "community-building",
-  "description": "When the user wants to build, grow, or improve a developer community on Discord, Slack, or forums. Trigger phrases include \"developer community,\" \"Discord server,\" \"Slack community,\" \"community strategy,\" \"community engagement,\" \"community moderation,\" \"community growth,\" or \"community...",
+  "description": "When the user wants to build, grow, or improve a developer community on Discord, Slack, or forums.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

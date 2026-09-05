@@ -1,6 +1,6 @@
 ---
 name: docs-as-marketing
-description: Transform documentation into a powerful marketing channel that attracts, converts, and retains developers. This skill covers creating documentation that ranks in search, converts visitors into users, 
+description: Transform documentation into a powerful marketing channel that attracts, converts, and retains developers. 
 category: Document Processing
 source: antigravity
 tags: [python, javascript, react, node, markdown, api, ai, document, security, rag]

@@ -1,6 +1,6 @@
 ---
 name: alternatives-pages
-description: Create "[Competitor] alternative" and comparison pages for developer tools. Build honest, high-converting comparison content that ranks for competitive search terms. Trigger phrases: "alternatives pag
+description: Create "[Competitor] alternative" and comparison pages for developer tools. Build honest, high-converting comparison content that ranks for competitive search terms. 
 category: Document Processing
 source: antigravity
 tags: [ai, document, security, rag, seo, marketing]

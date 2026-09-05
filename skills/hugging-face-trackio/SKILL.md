@@ -1,6 +1,6 @@
 ---
 name: hugging-face-trackio
-description: Track and visualize ML training experiments with Trackio. Use when logging metrics during training (Python API), firing alerts for training diagnostics, or retrieving/analyzing logged metrics (CLI). S
+description: Track and visualize ML training experiments with Trackio. Use when logging metrics during training (Python API), firing alerts for training diagnostics, or retrieving/analyzing logged metrics (CLI). 
 category: AI & Agents
 source: antigravity
 tags: [python, api, ai, agent, llm, automation, workflow, document, security]

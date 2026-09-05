@@ -3,7 +3,7 @@ name: haskell-pro
 description: Expert Haskell engineer specializing in advanced type systems, pure 
 category: Development & Code Tools
 source: antigravity
-tags: [ai, workflow, design]
+tags: [ai, workflow, design, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/haskell-pro
 ---
 
@@ -55,6 +55,12 @@ You are a Haskell expert specializing in strongly typed functional programming a
 - QuickCheck/Hspec tests with property-based reasoning
 
 Provide modern, maintainable Haskell that balances rigor with practicality.
+
+## Example
+
+**User request:**
+
+> Review this Haskell implementation for correctness, idiomatic design, performance, and test coverage.
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

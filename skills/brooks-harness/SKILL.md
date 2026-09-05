@@ -1,6 +1,6 @@
 ---
 name: brooks-harness
-description: Maintenance orchestrator for the brooks-lint plugin itself. Runs a sequential subagent pipeline — author → eval → QA → trigger-audit → release — to add or edit a skill, refresh the eval su
+description: Maintenance orchestrator for the brooks-lint plugin itself. 
 category: Document Processing
 source: antigravity
 tags: [markdown, claude, ai, agent, document, security, rag, cro]

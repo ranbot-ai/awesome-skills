@@ -1,6 +1,6 @@
 ---
 name: hugo-to-markdown
-description: Convert Hugo documentation sites and Hugo-managed content into standard Markdown. Use when Agent needs to inspect a local Hugo repository, read hugo.toml or config files, content/, archetypes/, layout
+description: Convert Hugo documentation sites and Hugo-managed content into standard Markdown. 
 category: Document Processing
 source: antigravity
 tags: [python, markdown, ai, agent, workflow, template, document, presentation, image, security]

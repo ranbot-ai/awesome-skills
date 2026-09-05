@@ -1,6 +1,6 @@
 ---
 name: api-designer
-description: Generates complete, production-ready REST API endpoint specifications for any system or domain the user describes. Use this skill whenever the user asks about API design, API endpoints, REST APIs, API
+description: Generates complete, production-ready REST API endpoint specifications for any system or domain the user describes. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, agent, design, document, security]

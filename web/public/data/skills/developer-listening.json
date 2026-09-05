@@ -2,7 +2,7 @@
   "id": "antigravity-developer-listening",
   "name": "developer-listening",
   "slug": "developer-listening",
-  "description": "Monitor what developers say about your brand, competitors, and the problems they're solving. Track mentions and conversations across GitHub, Hacker News, Reddit, Stack Overflow, Twitter, and Discord. Trigger phrases: \"developer listening\", \"monitor developer conversations\", \"track...",
+  "description": "Monitor what developers say about your brand, competitors, and the problems they're solving. Track mentions and conversations across GitHub, Hacker News, Reddit, Stack Overflow, Twitter, and Discord.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

@@ -1,6 +1,6 @@
 ---
 name: competitor-tracking
-description: Systematic competitor analysis for developer tools. Track features, pricing, positioning, content strategy, and community sentiment for direct and indirect competitors. Trigger phrases: "competitor an
+description: Systematic competitor analysis for developer tools. Track features, pricing, positioning, content strategy, and community sentiment for direct and indirect competitors. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, document, security, aws, gcp, azure, rag, seo, cro]

@@ -1,6 +1,6 @@
 ---
 name: developer-audience-context
-description: When the user wants to establish or update their developer audience context. Also use when starting any other developer marketing skill to ensure foundational context is loaded. Trigger phrases includ
+description: When the user wants to establish or update their developer audience context. Also use when starting any other developer marketing skill to ensure foundational context is loaded. 
 category: Document Processing
 source: antigravity
 tags: [markdown, api, ai, agent, document, security, tailwind, supabase, stripe, docker]

@@ -2,7 +2,7 @@
   "id": "antigravity-developer-audience-context",
   "name": "developer-audience-context",
   "slug": "developer-audience-context",
-  "description": "When the user wants to establish or update their developer audience context. Also use when starting any other developer marketing skill to ensure foundational context is loaded. Trigger phrases include \"developer persona,\" \"target developers,\" \"who are our developers,\" \"developer...",
+  "description": "When the user wants to establish or update their developer audience context. Also use when starting any other developer marketing skill to ensure foundational context is loaded.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

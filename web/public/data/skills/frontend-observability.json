@@ -2,7 +2,7 @@
   "id": "antigravity-frontend-observability",
   "name": "frontend-observability",
   "slug": "frontend-observability",
-  "description": "A portable, framework-agnostic field-side observability system for any React or React Native app. Establishes one typed event taxonomy (canonical event-name constants, never inline strings), a best-effort non-blocking provider fan-out so a failing or absent analytics provider can never...",
+  "description": "A portable, framework-agnostic field-side observability system for any React or React Native app.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

@@ -15,6 +15,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/desi
 - Use when React, Next.js, Tailwind, motion, component states, typography, spacing, color, or responsive behavior need senior-level design judgment.
 - Use when the output must override common LLM UI biases such as centered heroes, purple gradients, card overuse, poor states, and fragile layouts.
 
+## Example
+
+**User request:**
+
+> Review this interface with @design-taste-frontend, identify the highest-impact design problems, and propose an implementation-ready improvement.
+
 ## Limitations
 
 - This skill provides frontend design and implementation guidance; it does not replace project-specific product requirements, accessibility review, or user testing.
@@ -60,4 +66,4 @@ LLMs have statistical biases toward specific UI cliché patterns. Proactively co
 
 **Rule 2: Color Calibration**
 * **Constraint:** Max 1 Accent Color. Saturation < 80%.
-* **THE LILA BAN:** The "AI Purple/Blue" aesthetic is strictly BANNED. No purple button glows, no neon gradients. Use absolute neutral bases (Zinc/Slate) with high-contrast, singular accents (e.g
+* **THE LILA BAN

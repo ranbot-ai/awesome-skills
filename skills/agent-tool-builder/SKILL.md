@@ -3,7 +3,7 @@ name: agent-tool-builder
 description: Tools are how AI agents interact with the world. A well-designed tool is the difference between an agent that works and one that hallucinates, fails silently, or costs 10x more tokens than necessary. 
 category: AI & Agents
 source: antigravity
-tags: [python, typescript, api, mcp, claude, ai, agent, llm, automation, design]
+tags: [python, mcp, claude, ai, agent, llm, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-tool-builder
 ---
 
@@ -21,170 +21,71 @@ and the emerging MCP standard that's becoming the lingua franca for AI tools.
 Key insight: Tool descriptions are more important than tool implementations.
 The LLM never sees your code - it only sees the schema and description.
 
-## Principles
+## Detailed Guide
 
-- Description quality > implementation quality for LLM accuracy
-- Aim for fewer than 20 tools - more causes confusion
-- Every tool needs explicit error handling - silent failures poison agents
-- Return strings, not objects - LLMs process text
-- Validation gates before execution - reject, fix, or escalate, never silent fail
-- Test tools with the LLM, not just unit tests
+Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.
 
-## Capabilities
-
-- agent-tools
-- function-calling
-- tool-schema-design
-- mcp-tools
-- tool-validation
-- tool-error-handling
-
-## Scope
-
-- multi-agent-coordination → multi-agent-orchestration
-- agent-memory → agent-memory-systems
-- api-design → api-designer
-- llm-prompting → prompt-engineering
-
-## Tooling
-
-### Standards
-
-- JSON Schema - When: All tool definitions Note: The universal format for tool schemas
-- MCP (Model Context Protocol) - When: Building reusable, cross-platform tools Note: Anthropic's open standard, widely adopted
-
-### Frameworks
-
-- Anthropic SDK - When: Claude-based agents Note: Beta tool runner handles most complexity
-- OpenAI Functions - When: OpenAI-based agents Note: Use strict mode for guaranteed schema compliance
-- Vercel AI SDK - When: Multi-provider tool handling Note: Abstracts differences between providers
-- LangChain Tools - When: LangChain-based agents Note: Converts MCP tools to LangChain format
-
-## Patterns
-
-### Tool Schema Design
-
-Creating clear, unambiguous JSON Schema for tools
-
-**When to use**: Defining any new tool for an agent
-
-# TOOL SCHEMA BEST PRACTICES:
-
-## 1. Detailed Descriptions (Most Important)
+## Python Example
 """
-BAD - Too vague:
-{
-  "name": "get_stock_price",
-  "description": "Gets stock price",
-  "input_schema": {
-    "type": "object",
-    "properties": {
-      "ticker": {"type": "string"}
-    }
-  }
-}
+import anthropic
+from anthropic import beta_tool
 
-GOOD - Comprehensive:
-{
-  "name": "get_stock_price",
-  "description": "Retrieves the current stock price for a given ticker
-    symbol. The ticker symbol must be a valid symbol for a publicly
-    traded company on a major US stock exchange like NYSE or NASDAQ.
-    Returns the latest trade price in USD. Use when the user asks
-    about current or recent stock prices. Does NOT provide historical
-    data, company info, or predictions.",
-  "input_schema": {
-    "type": "object",
-    "properties": {
-      "ticker": {
-        "type": "string",
-        "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
-      }
-    },
-    "required": ["ticker"]
-  }
-}
+client = anthropic.Anthropic()
+
+@beta_tool
+def get_weather(location: str, unit: str = "fahrenheit") -> str:
+    '''Get the current weather in a given location.
+
+    Args:
+        location: The city and state, e.g. San Francisco, CA
+        unit: Temperature unit, either 'celsius' or 'fahrenheit'
+    '''
+    # Implementation
+    return json.dumps({"temperature": "72°F", "conditions": "Sunny"})
+
+@beta_tool
+def search_web(query: str) -> str:
+    '''Search the web for information.
+
+    Args:
+        query: The search query
+    '''
+    # Implementation
+    return json.dumps({"results": [...]})
+
+# Tool runner handles the loop
+runner = client.beta.messages.tool_runner(
+    model="claude-sonnet-4-5",
+    max_tokens=1024,
+    tools=[get_weather, search_web],
+    messages=[
+        {"role": "user", "content": "What's the weather in Paris?"}
+    ]
+)
+
+# Process each message
+for message in runner:
+    print(message.content[0].text)
+
+# Or just get final result
+final = runner.until_done()
 """
 
-## 2. Parameter Descriptions
-"""
-Every parameter needs:
-- What it is
-- Format expected
-- Example value
-- Edge cases/limitations
+## When to Use
+- User mentions or implies: agent tool
+- User mentions or implies: function calling
+- User mentions or implies: tool schema
+- User mentions or implies: tool design
+- User mentions or implies: mcp server
+- User mentions or implies: mcp tool
+- User mentions or implies: tool use
+- User mentions or implies: build tool for agent
+- User mentions or implies: define function
+- User mentions or implies: input_schema
+- User mentions or implies: tool_use
+- User mentions or implies: tool_result
 
-{
-  "location": {
-    "type": "string",
-    "description": "City and state/country. Format: 'City, State' for US
-      (e.g., 'San Francisco, CA') or 'City, Country' for international
-      (e.g., 'Tokyo, Japan'). Do not use ZIP codes or coordinates."
-  },
-  "unit": {
-    "type": "string",
-    "enum": ["celsius", "fahrenheit"],
-    "description": "Temperature unit. Defaults to user's locale if not
-      specified. Use 'fahrenheit' for US users, 'celsius' for others."
-  }
-}
-"""
-
-## 3. Use Enums When Possible
-"""
-Enums constrain the LLM to valid values:
-
-"priority": {
-  "type": "string",
-  "enum": ["low", "medium", "high", "critical"],
-  "description": "Task priority level"
-}
-
-"action": {
-  "type": "string",
-  "enum": ["create", "read", "update", "delete"],
-  "description": "The CRUD operation to perform"
-}
-"""
-
-## 4. Required vs Optional
-"""
-Be explicit about what's required:
-
-{
-  "type": "object",
-  "properties": {
-    "query": {...},      // Required
-    "limit": {...},      // Optional with default
-    "offset": {...}      // Optional
-  },
-  "required": ["query"],
-  "additionalProperties": false  // Strict mode
-}
-"""
-
-### Tool with Input Examples
-
-Using examples to guide LLM tool usage
-
-**When to use**: Complex tools with nested objects or format-sensitive inputs
-
-# TOOL USE EXAMPLES (Anthropic Beta Feature):
-
-"""
-Examples show Claude concrete patterns that schemas can't express.
-Improves accuracy from 72% to 90% on complex operations.
-"""
-
-{
-  "name": "create_calendar_event",
-  "description": "Creates a calendar event with optional attendees and reminders",
-  "input_schema": {
-    "type": "object",
-    "properties": {
-      "title": {"type": "string", "description": "Event title"},
-      "start_time": {
-        "type": "string",
-        "description": "ISO 8601 datetime, e.g. 2024-03-15T14:00:00Z"
-      },
-      "durat
+## Limitations
+- Use this skill only when the task clearly matches the scope described above.
+- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
+- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.

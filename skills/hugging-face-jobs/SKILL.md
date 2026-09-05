@@ -1,29 +1,18 @@
 ---
 name: hugging-face-jobs
 description: Run workloads on Hugging Face Jobs with managed CPUs, GPUs, TPUs, secrets, and Hub persistence. 
-category: Document Processing
+category: AI & Agents
 source: antigravity
-tags: [python, pdf, api, mcp, ai, llm, workflow, template, document, image]
+tags: [python, api, mcp, ai, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugging-face-jobs
 ---
 
 
 # Running Workloads on Hugging Face Jobs
 
-## Overview
+## Detailed Guide
 
-Run any workload on fully managed Hugging Face infrastructure. No local setup required—jobs run on cloud CPUs, GPUs, or TPUs and can persist results to the Hugging Face Hub.
-
-**Common use cases:**
-- **Data Processing** - Transform, filter, or analyze large datasets
-- **Batch Inference** - Run inference on thousands of samples
-- **Experiments & Benchmarks** - Reproducible ML experiments
-- **Model Training** - Fine-tune models (see `model-trainer` skill for TRL-specific training)
-- **Synthetic Data Generation** - Generate datasets using LLMs
-- **Development & Testing** - Test code without local GPU setup
-- **Scheduled Jobs** - Automate recurring tasks
-
-**For model training specifically:** See the `model-trainer` skill for TRL-based training workflows.
+Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.
 
 ## When to Use This Skill
 
@@ -35,18 +24,6 @@ Use this skill when users want to:
 - Schedule recurring tasks
 - Use GPUs/TPUs for any workload
 - Persist results to the Hugging Face Hub
-
-## Key Directives
-
-When assisting with jobs:
-
-1. **ALWAYS use `hf_jobs()` MCP tool** - Submit jobs using `hf_jobs("uv", {...})` or `hf_jobs("run", {...})`. The `script` parameter accepts Python code directly. Do NOT save to local files unless the user explicitly requests it. Pass the script content as a string to `hf_jobs()`.
-
-2. **Always handle authentication** - Jobs that interact with the Hub require `HF_TOKEN` via secrets. See Token Usage section below.
-
-3. **Provide job details after submission** - After submitting, provide job ID, monitoring URL, estimated time, and note that the user can request status checks later.
-
-4. **Set appropriate timeouts** - Default 30min may be insufficient for long-running tasks.
 
 ## Prerequisites Checklist
 
@@ -146,4 +123,56 @@ hf_jobs("uv", {
 **Security concerns:**
 - Token visible in code/logs
 - Must manually update if token rotates
-- Risk of tok
+- Risk of token exposure
+
+#### Method 3: Environment Variable (Less Secure)
+
+```python
+hf_jobs("uv", {
+    "script": "your_script.py",
+    "env": {"HF_TOKEN": "hf_abc123..."}  # ⚠️ Less secure than secrets
+})
+```
+
+**Difference from secrets:**
+- `env` variables are visible in job logs
+- `secrets` are encrypted server-side
+- Always prefer `secrets` for tokens
+
+### Using Tokens in Scripts
+
+**In your Python script, tokens are available as environment variables:**
+
+```python
+# /// script
+# dependencies = ["huggingface-hub"]
+# ///
+
+import os
+from huggingface_hub import HfApi
+
+# Token is automatically available if passed via secrets
+token = os.environ.get("HF_TOKEN")
+
+# Use with Hub API
+api = HfApi(token=token)
+
+# Or let huggingface_hub auto-detect
+api = HfApi()  # Automatically uses HF_TOKEN env var
+```
+
+**Best practices:**
+- Don't hardcode tokens in scripts
+- Use `os.environ.get("HF_TOKEN")` to access
+- Let `huggingface_hub` auto-detect when possible
+- Verify token exists before Hub operations
+
+### Token Verification
+
+**Check if you're logged in:**
+```python
+from huggingface_hub import whoami
+user_info = whoami()  # Returns your username if authenticated
+```
+
+**Verif

@@ -1,6 +1,6 @@
 ---
 name: huggingface-best
-description: Use when the user asks about finding the best, top, or recommended model for a task, wants to know what AI model to use, or wants to compare models by benchmark scores. Triggers on: "best model for X"
+description: Use when the user asks about finding the best, top, or recommended model for a task, wants to know what AI model to use, or wants to compare models by benchmark scores. 
 category: Document Processing
 source: antigravity
 tags: [markdown, api, claude, ai, agent, gpt, document, image, security, rag]

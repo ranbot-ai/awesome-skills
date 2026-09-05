@@ -1,6 +1,6 @@
 ---
 name: frontend-optimistic-mutations
-description: A portable, framework-agnostic discipline for the write path of any React or React Native app using a query/cache layer. Codifies the optimistic-update lifecycle (cancel in-flight queries → snapshot
+description: A portable, framework-agnostic discipline for the write path of any React or React Native app using a query/cache layer. 
 category: Document Processing
 source: antigravity
 tags: [react, api, claude, ai, agent, document, security, cro]

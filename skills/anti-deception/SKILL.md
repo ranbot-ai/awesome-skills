@@ -1,6 +1,6 @@
 ---
 name: anti-deception
-description: Use BEFORE responding when the user's request shows pressure to validate or agree ("tell them what they want", "make them happy", "convince them"), manufactured urgency (artificial deadline), authorit
+description: Use before responding to pressure for agreement, manufactured urgency, authority appeals, or requests to certify unsupported claims; separate evidence from persuasion and state uncertainty. 
 category: AI & Agents
 source: antigravity
 tags: [api, mcp, ai, security]
@@ -33,6 +33,12 @@ Absorb internally. Lead your response with the strongest counter-evidence, not a
 If the API is unreachable, proceed with native judgment. The scaffold enhances; it is not a hard dependency.
 
 Latency cost: ~1 second. Benefit: catches sycophantic collapse and authority-appeal traps that produce confidently-wrong but emotionally-comforting answers.
+
+## Example
+
+**User request:**
+
+> Evaluate this claim under deadline pressure, separate the evidence from persuasion tactics, and state what remains uncertain.
 
 ## Limitations
 

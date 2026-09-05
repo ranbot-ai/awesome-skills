@@ -2,7 +2,7 @@
   "id": "antigravity-api-onboarding",
   "name": "api-onboarding",
   "slug": "api-onboarding",
-  "description": "Reduce time-to-first-API-call (TTFAC) by optimizing every step of the developer onboarding journey. This skill covers authentication simplification, sandbox environments, interactive documentation, and identifying and eliminating common failure points. Trigger phrases: \"API...",
+  "description": "Reduce time-to-first-API-call (TTFAC) by optimizing every step of the developer onboarding journey. This skill covers authentication simplification, sandbox environments, interactive documentation, and identifying and eliminating common failure points.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

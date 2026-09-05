@@ -1,6 +1,6 @@
 ---
 name: applicationinsights-web-ts
-description: Instrument browser/web apps with the Application Insights JavaScript SDK (@microsoft/applicationinsights-web). Use for Real User Monitoring (RUM) — page views, clicks, AJAX/fetch dependencies, excep
+description: Instrument browser/web apps with the Application Insights JavaScript SDK (@microsoft/applicationinsights-web). 
 category: AI & Agents
 source: antigravity
 tags: [javascript, typescript, react, node, api, mcp, ai, agent, gpt, security]

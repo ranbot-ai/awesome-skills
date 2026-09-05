@@ -1,6 +1,6 @@
 ---
 name: fixing-metadata
-description: Audit and fix HTML metadata including page titles, meta descriptions, canonical URLs, Open Graph tags, Twitter cards, favicons, JSON-LD structured data, and robots directives. Use when adding SEO meta
+description: Audit and fix HTML metadata including page titles, meta descriptions, canonical URLs, Open Graph tags, Twitter cards, favicons, JSON-LD structured data, and robots directives. 
 category: Business & Marketing
 source: antigravity
 tags: [react, markdown, api, ai, workflow, image, security, seo, cro, marketing]
@@ -114,6 +114,12 @@ Reference these guidelines when:
 - verify social cards on a real URL, not localhost
 - prefer stable, boring metadata over clever or dynamic
 - keep diffs minimal and scoped to metadata only
+
+## Example
+
+**User request:**
+
+> Audit and fix HTML metadata including page titles, meta descriptions, canonical URLs, Open Graph tags, Twitter cards, favicons, JSON-LD structured data, and robots directives.
 
 ## Limitations
 

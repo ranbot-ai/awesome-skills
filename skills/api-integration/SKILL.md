@@ -1,6 +1,6 @@
 ---
 name: api-integration
-description: Designs event-driven architectures, webhook systems, API chaining flows, ETL pipelines, and integration patterns between services. Use whenever the user asks about webhooks, event streaming, API compo
+description: Designs event-driven architectures, webhook systems, API chaining flows, ETL pipelines, and integration patterns between services. 
 category: Development & Code Tools
 source: antigravity
 tags: [python, api, ai, agent, design, security]

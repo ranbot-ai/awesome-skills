@@ -2,7 +2,7 @@
   "id": "antigravity-api-analyzer",
   "name": "api-analyzer",
   "slug": "api-analyzer",
-  "description": "Validates whether an API request is correct based on provided inputs (method, URL, headers, body, auth, query params). Use this skill whenever a user wants to check, validate, debug, or verify an API call — including when they paste a curl command, show endpoint details, ask \"is this...",
+  "description": "Validates whether an API request is correct based on provided inputs (method, URL, headers, body, auth, query params).",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

@@ -1,12 +1,19 @@
 ---
 name: code-refactoring-tech-debt
-description: You are a technical debt expert specializing in identifying, quantifying, and prioritizing technical debt in software projects. Analyze the codebase to uncover debt, assess its impact, and create acti
+description: Identify technical debt from actual code and change history, estimate its impact, and prioritize bounded improvements with explicit assumptions. 
 category: Document Processing
 source: antigravity
 tags: [python, react, markdown, api, ai, workflow, design, document, security, aws]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/code-refactoring-tech-debt
 ---
 
+
+## Compatibility and maintenance
+
+Primary editorial path for this compatibility group. The full instructions and support files remain local so existing installations
+continue to work offline. This is one shared procedure, not an additional capability.
+Preserve the callable ID when an existing manifest or client configuration uses it.
+Modified in AAS on 2026-09-05; original metadata and license notices are retained.
 
 # Technical Debt Analysis and Remediation
 
@@ -26,7 +33,11 @@ You are a technical debt expert specializing in identifying, quantifying, and pr
 The user needs a comprehensive technical debt analysis to understand what's slowing down development, increasing bugs, and creating maintenance challenges. Focus on practical, measurable improvements with clear ROI.
 
 ## Requirements
-$ARGUMENTS
+Inspect the current repository, hotspots and real change/incident history. The numbers,
+thresholds, staffing and timelines below are hypothetical planning examples, not
+measurements, promised returns or mandatory quality gates. Report missing cost/usage
+inputs as unknown; never fill them with fabricated telemetry. Review-only scope does
+not authorize broad refactors, policy changes or deployment.
 
 ## Instructions
 
@@ -165,38 +176,3 @@ Metrics:
     outdated_minor: 34
     security_vulnerabilities: 7
     deprecated_apis: 15
-```
-
-**Trend Analysis**
-```python
-debt_trends = {
-    "2024_Q1": {"score": 750, "items": 125},
-    "2024_Q2": {"score": 820, "items": 142},
-    "2024_Q3": {"score": 890, "items": 156},
-    "growth_rate": "18% quarterly",
-    "projection": "1200 by 2025_Q1 without intervention"
-}
-```
-
-### 4. Prioritized Remediation Plan
-
-Create an actionable roadmap based on ROI:
-
-**Quick Wins (High Value, Low Effort)**
-Week 1-2:
-```
-1. Extract duplicate validation logic to shared module
-   Effort: 8 hours
-   Savings: 20 hours/month
-   ROI: 250% in first month
-
-2. Add error monitoring to payment service
-   Effort: 4 hours
-   Savings: 15 hours/month debugging
-   ROI: 375% in first month
-
-3. Automate deployment script
-   Effort: 12 hours
-   Savings: 2 hours/deployment × 20 deploys/month
-   ROI: 333% in first month
-```

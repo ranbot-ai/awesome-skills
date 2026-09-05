@@ -3,12 +3,14 @@ name: ai-agents-architect
 description: Expert in designing and building autonomous AI agents. Masters tool use, memory systems, planning strategies, and multi-agent orchestration. 
 category: AI & Agents
 source: antigravity
-tags: [react, api, mcp, claude, ai, agent, llm, design, document, langchain]
+tags: [react, api, mcp, ai, agent, llm, workflow, design, document, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-agents-architect
 ---
 
 
 # AI Agents Architect
+
+Modified in AAS on 2026-09-05: bounded actions, privacy and explicit permission checks.
 
 Expert in designing and building autonomous AI agents. Masters tool use,
 memory systems, planning strategies, and multi-agent orchestration.
@@ -60,7 +62,7 @@ Reason-Act-Observe cycle for step-by-step execution
 
 **When to use**: Simple tool use with clear action-observation flow
 
-- Thought: reason about what to do next
+- Decision summary: record the selected next action and its observable basis
 - Action: select and invoke a tool
 - Observation: process tool result
 - Repeat until task complete or stuck
@@ -119,7 +121,7 @@ Save state for resumption after failures
 - Checkpoint after each successful step
 - Store task state, memory, and progress
 - Resume from last checkpoint on failure
-- Clean up checkpoints on completion
+- Retain or remove checkpoints according to the user’s authorized retention policy
 
 ## Sharp Edges
 
@@ -192,13 +194,4 @@ see. Silent failures become loud failures later.
 Recommended fix:
 
 Explicit error handling:
-- Return error messages to agent
-- Include error type and recovery hints
-- Let agent retry or choose alternative
-- Log errors for debugging
-
-### Storing everything in agent memory
-
-Severity: MEDIUM
-
-S
+- Return error messages to a

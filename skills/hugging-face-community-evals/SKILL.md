@@ -1,6 +1,6 @@
 ---
 name: hugging-face-community-evals
-description: Run evaluations for Hugging Face Hub models using inspect-ai and lighteval on local hardware. Use for backend selection, local GPU evals, and choosing between vLLM / Transformers / accelerate. Not for
+description: Run evaluations for Hugging Face Hub models using inspect-ai and lighteval on local hardware. Use for backend selection, local GPU evals, and choosing between vLLM / Transformers / accelerate. 
 category: Document Processing
 source: antigravity
 tags: [api, ai, llm, automation, workflow, template, document, security, cro]

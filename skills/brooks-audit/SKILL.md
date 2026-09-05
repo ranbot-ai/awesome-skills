@@ -1,6 +1,6 @@
 ---
 name: brooks-audit
-description: Architecture audit that maps module dependencies, checks layering integrity, and flags structural decay across a codebase, drawing on twelve classic engineering books. Triggers when: user asks to audi
+description: Architecture audit that maps module dependencies, checks layering integrity, and flags structural decay across a codebase, drawing on twelve classic engineering books. 
 category: Development & Code Tools
 source: antigravity
 tags: [node, ai, template, security, rag, cro]

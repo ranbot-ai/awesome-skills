@@ -1,6 +1,6 @@
 ---
 name: doubt-driven-development
-description: Subjects every non-trivial decision to a fresh-context adversarial review before it stands. Use when correctness matters more than speed, when working in unfamiliar code, when stakes are high (product
+description: Subjects every non-trivial decision to a fresh-context adversarial review before it stands. 
 category: AI & Agents
 source: antigravity
 tags: [markdown, api, claude, ai, agent, design, document, security, rag, cro]

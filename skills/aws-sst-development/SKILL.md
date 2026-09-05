@@ -1,6 +1,6 @@
 ---
 name: aws-sst-development
-description: SST v4 (Ion) expert for managing AWS resources as code with the Pulumi-backed framework. Use when writing or editing sst.config.ts, building infra/ modules (sst.aws.Function/Bucket/Dynamo/Cron/Service
+description: SST v4 (Ion) expert for managing AWS resources as code with the Pulumi-backed framework. 
 category: Development & Code Tools
 source: antigravity
 tags: [python, typescript, node, api, mcp, claude, ai, template, security, aws]

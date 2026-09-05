@@ -1,6 +1,6 @@
 ---
 name: hugging-face-papers
-description: Look up and read Hugging Face paper pages in markdown, and use the papers API for structured metadata such as authors, linked models/datasets/spaces, Github repo and project page. Use when the user sh
+description: Look up and read Hugging Face paper pages in markdown, and use the papers API for structured metadata such as authors, linked models/datasets/spaces, Github repo and project page. 
 category: Document Processing
 source: antigravity
 tags: [pdf, markdown, api, ai, document, security]

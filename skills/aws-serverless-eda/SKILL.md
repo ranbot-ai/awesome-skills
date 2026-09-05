@@ -1,9 +1,9 @@
 ---
 name: aws-serverless-eda
-description: AWS serverless and event-driven architecture expert based on Well-Architected Framework. Use when building serverless APIs, Lambda functions, REST APIs, microservices, or async workflows. Covers Lambd
+description: AWS serverless and event-driven architecture expert based on Well-Architected Framework. Use when building serverless APIs, Lambda functions, REST APIs, microservices, or async workflows. 
 category: Document Processing
 source: antigravity
-tags: [python, typescript, node, api, mcp, ai, workflow, design, document, presentation]
+tags: [typescript, node, api, mcp, ai, workflow, design, document, presentation, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-serverless-eda
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: expo-observe
-description: Use for anything related to EAS Observe — adding `expo-observe` to an Expo project (AppMetricsRoot/ObserveRoot HOC, markInteractive, the useObserve hook, and the Expo Router / React Navigation integ
+description: Set up and query EAS Observe for Expo apps, including root integration, interactive markers, route metrics, CLI summaries, traces, logs, and performance diagnosis. 
 category: Document Processing
 source: antigravity
 tags: [react, api, ai, workflow, document, security, seo]

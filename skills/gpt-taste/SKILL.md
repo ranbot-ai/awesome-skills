@@ -15,6 +15,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gpt-
 - Use when GSAP, pinned scroll, scrubbing, card stacking, horizontal motion, or other advanced animation is appropriate.
 - Use when the output must avoid narrow six-line hero headings, cheap meta labels, empty bento cells, and generic left-right sections.
 
+## Example
+
+**User request:**
+
+> Create an award-level landing page, marketing page, or creative frontend with cinematic motion.
+
 ## Limitations
 
 - This skill assumes a frontend project can support GSAP or equivalent animation libraries; check dependencies and performance budgets before implementation.
@@ -61,6 +67,4 @@ The Hero must breathe. It must NOT be a narrow, 6-line text wall.
 - **Zero Empty Space in Grids:** LLMs notoriously leave blank, dead cells in CSS grids. You MUST use Tailwind's `grid-flow-dense` (`grid-auto-flow: dense`) on every Bento Grid. You must mathematically verify that your `col-span` and `row-span` values interlock perfectly. No grid shall have a missing corner or empty void.
 - **Card Restraint:** Do not use too many cards. 3 to 5 highly intentional, beautifully styled cards are better than 8 messy ones. Fill them with a mix of large imagery, dense typography, or CSS effects.
 
-## 5. ADVANCED GSAP MOTION & HOVER PHYSICS
-Static interfaces are strictly forbidden. You must write real GSAP (`@gsap/react`, `ScrollTrigger`).
-- **Hover Physics:** 
+## 5. ADVANCED GSAP MOTION & HOVER 

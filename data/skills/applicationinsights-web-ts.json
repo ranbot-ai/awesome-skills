@@ -2,7 +2,7 @@
   "id": "antigravity-applicationinsights-web-ts",
   "name": "applicationinsights-web-ts",
   "slug": "applicationinsights-web-ts",
-  "description": "Instrument browser/web apps with the Application Insights JavaScript SDK (@microsoft/applicationinsights-web). Use for Real User Monitoring (RUM) — page views, clicks, AJAX/fetch dependencies, exceptions, custom events, and browser-side GenAI agent traces correlated to backend...",
+  "description": "Instrument browser/web apps with the Application Insights JavaScript SDK (@microsoft/applicationinsights-web).",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

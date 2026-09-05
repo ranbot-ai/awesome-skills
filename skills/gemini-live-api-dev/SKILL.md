@@ -1,6 +1,6 @@
 ---
 name: gemini-live-api-dev
-description: Use this skill when building real-time, bidirectional streaming applications with the Gemini Live API. Covers WebSocket-based audio/video/text streaming, voice activity detection (VAD), native audio f
+description: Use this skill when building real-time, bidirectional streaming applications with the Gemini Live API. 
 category: Document Processing
 source: antigravity
 tags: [python, javascript, typescript, api, mcp, ai, agent, llm, document, image]

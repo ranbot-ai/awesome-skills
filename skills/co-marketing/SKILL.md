@@ -1,6 +1,6 @@
 ---
 name: co-marketing
-description: When the user wants to find co-marketing partners, plan joint campaigns, or brainstorm partnership opportunities. Use when the user says 'co-marketing,' 'partner marketing,' 'joint campaign,' 'who sho
+description: When the user wants to find co-marketing partners, plan joint campaigns, or brainstorm partnership opportunities. 
 category: Business & Marketing
 source: antigravity
 tags: [claude, ai, agent, workflow, template, security, seo, cro, marketing]

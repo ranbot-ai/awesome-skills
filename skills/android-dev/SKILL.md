@@ -3,16 +3,16 @@ name: android-dev
 description: Production-grade Android app development guide covering native (Kotlin/Java), cross-platform (Flutter, RN, KMM), and hybrid architectures. 
 category: Document Processing
 source: antigravity
-tags: [javascript, typescript, react, api, ai, design, document, presentation, image, security]
+tags: [api, ai, design, document, security, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/android-dev
 ---
 
 
 # Android App Development Skill
 
-## Overview
+## Detailed Guide
 
-This skill guides production-grade Android and cross-platform (non-iOS) app development following practices used at big tech companies. It covers the entire development lifecycle — architecture, UI, code quality, testing, error handling, release, and maintenance.
+Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.
 
 ## When to Use This Skill
 
@@ -30,95 +30,9 @@ This skill guides production-grade Android and cross-platform (non-iOS) app deve
 
 ---
 
-## §1 Stack Selection
+## Limitations
 
-Choose based on team, requirements, and platform targets. **Do not recommend iOS-specific paths.**
-
-### Native Android — Kotlin + Jetpack Compose
-**Best for:** Android-only apps, hardware-intensive features, best-in-class UX, new projects.
-- Language: **Kotlin**
-- UI: **Jetpack Compose** (modern declarative UI)
-- Key libs: Room, Retrofit/Ktor, Hilt, WorkManager, DataStore, Navigation Compose
-- Reference: `references/native-android.md`
-
-### Native Android — Java + XML Views
-**Best for:** Existing Java codebases, teams without Kotlin experience, legacy app maintenance, incremental Kotlin migration.
-- Language: **Java** (fully supported by Google, not deprecated)
-- UI: **XML Layouts** (ConstraintLayout, RecyclerView, ViewBinding)
-- Key libs: Room, Retrofit, Hilt, WorkManager, LiveData, ViewModel
-- Java and Kotlin **coexist seamlessly** in the same project — migrate incrementally
-- Reference: `references/java-android.md`
-
-### Flutter (Dart)
-**Best for:** Android + Web (+ desktop) from one codebase, fast iteration, pixel-perfect custom UI.
-- Language: **Dart**
-- UI: Flutter Widget tree (Material 3 / Cupertino widgets available but target Material for Android)
-- Key libs: Provider/Riverpod/Bloc, Dio, Drift/Isar, go_router, flutter_local_notifications
-- Reference: `references/flutter.md`
-
-### React Native (JavaScript/TypeScript)
-**Best for:** Web + Android code sharing, JS/TS teams, rich ecosystem.
-- Language: **TypeScript** (preferred)
-- UI: React Native core components + NativeWind / React Native Paper
-- Key libs: React Navigation, Zustand/Redux Toolkit, React Query, MMKV
-- Reference: `references/react-native.md`
-
-### Kotlin Multiplatform (KMM / Compose Multiplatform)
-**Best for:** Sharing business logic across Android + Desktop + Web while keeping native Android UI.
-- Language: **Kotlin** everywhere
-- UI: Native Compose on Android; Compose Multiplatform for shared UI
-- Key libs: Ktor, SQLDelight, Koin, kotlinx.serialization, Napier
-- Reference: `references/kmm.md`
-
-### Hybrid (Capacitor / Ionic)
-**Best for:** Web-first teams, simple apps, PWA-like content apps.
-- Language: TypeScript + HTML/CSS
-- UI: Ionic components or custom web UI
-- Avoid for: Heavy animations, native sensor access, high-performance games
-- Reference: `references/hybrid.md`
-
-### Decision Matrix
-
-| Requirement | Native Kotlin | Native Java | Flutter | RN | KMM | Hybrid |
-|---|---|---|---|---|---|---|
-| Android-only (new) | ✅ Best | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Android-only (existing Java) | ⚠️ migrate | ✅ Best | ❌ | ❌ | ⚠️ | ❌ |
-| Android + Web | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ Best |
-| Android + Desktop | ❌ | ❌ | ✅ | ⚠️ | ✅ | ⚠️ |
-| Shared business logic only | N/A | N/A | N/A | N/A | ✅ Best | N/A |
-| Native performance | ✅ | ✅ | ✅ | ⚠️ | ✅ | ❌ |
-| JS/TS team | ❌ | ❌ | ❌ | ✅ Best | ❌ | ✅ |
-| Custom pixel-perfect UI | ✅ | ⚠️ | ✅ Best | ⚠️ | ✅ | ❌ |
-
----
-
-## §2 Architecture
-
-### Core Principle: Separation of Concerns
-Every production Android project must separate **UI**, **business logic**, and **data** into distinct, independently testable layers.
-
-### Recommended Architecture: Clean Architecture + MVI/MVVM
-
-```
-app/
-├── ui/              # Composables / Activities / Fragments / Screen states
-├── presentation/    # ViewModels, UI State, UI Events
-├── domain/          # Use cases, domain models, repository interfaces
-├── data/            # Repository impl, remote (API), local (DB), mappers
-└── di/              # Dependency injection modules
-```
-
-**Data flow (unidirectional):**
-```
-User Action → ViewModel/Store → Use Case → Repository → Data Source
-                    ↓
-             UI State (sealed class / StateFlow)
-                    ↓
-             Composable / View renders state
-```
-
-### Key Architecture Patterns by Stack
-
-**Native (MVVM + MVI):**
-- `StateFlow` / `SharedFlow` for reactive state
-- `sealed class UiState` + `sealed class UiEven
+- This skill is scoped to Android and Android-adjacent delivery paths; it does not cover iOS-only architecture, App Store release operations, or Apple platform UI guidance.
+- Version numbers, Play Console policy thresholds, and recommended libraries can change; verify release-critical details against current Android, Google Play, and library documentation before shipping.
+- Code snippets are architecture patterns, not complete applications; adapt package names, dependency versions, permissions, privacy disclosures, and security controls to the actual project.
+- The guidance does not replace device QA, accessibility review, security review, legal/privacy review, or store compliance checks for a production release.

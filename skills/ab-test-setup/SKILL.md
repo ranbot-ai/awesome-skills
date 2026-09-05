@@ -1,9 +1,9 @@
 ---
 name: ab-test-setup
-description: Structured guide for setting up A/B tests with mandatory gates for hypothesis, metrics, and execution readiness. 
+description: Use when designing an A/B or split test: define the hypothesis, control and variants, estimate sample size, verify tracking, and predeclare metrics and stopping rules. 
 category: Document Processing
 source: antigravity
-tags: [ai, workflow, design, document]
+tags: [python, ai, design, document, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ab-test-setup
 ---
 
@@ -12,11 +12,11 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ab-t
 
 ## 1️⃣ Purpose & Scope
 
-Ensure every A/B test is **valid, rigorous, and safe** before a single line of code is written.
+Define an experiment that can answer a specific product question, and verify its assumptions before exposing users. This procedure cannot guarantee validity by itself.
 
-- Prevents "peeking"
-- Enforces statistical power
-- Blocks invalid hypotheses
+- Documents the stopping rule
+- Estimates sample needs under stated assumptions
+- Makes the hypothesis and decision criteria reviewable
 
 ---
 
@@ -51,11 +51,7 @@ Before designing variants or metrics, you MUST:
   - Expected direction of effect
   - Minimum Detectable Effect (MDE)
 
-Ask explicitly:
-
-> “Is this the final hypothesis we are committing to for this test?”
-
-**Do NOT proceed until confirmed.**
+Use the hypothesis already agreed in the task. If a launch-critical choice is missing, present the concrete choice for confirmation while continuing independent analysis. Do not repeatedly request approval for a decision already authorized.
 
 ---
 
@@ -117,7 +113,7 @@ Define upfront:
 
 - Baseline rate
 - MDE
-- Significance level (typically 95%)
+- Significance level alpha (often 0.05, corresponding to 95% confidence)
 - Statistical power (typically 80%)
 
 Estimate:
@@ -133,10 +129,10 @@ Estimate:
 
 Before entering the Execution Readiness Gate below, run through this checklist to make "Tracking is verified" mean something concrete:
 
-1. **Event firing:** Trigger each event the primary and secondary metrics depend on (sign-up, add-to-cart, custom event) on staging or a debug page, and confirm it lands in your analytics destination within 30 seconds.
+1. **Event firing:** Trigger each event the primary and secondary metrics depend on (sign-up, add-to-cart, custom event) on staging or a debug page, and confirm it arrives within that pipeline’s documented latency; record the observed delay.
 2. **Variant attribution:** Verify that the variant assignment ID is attached to every fired event — not just the entry event. Use your analytics' raw event view to compare a sample of 5+ events per variant.
-3. **De-duplication:** Confirm that a user reloading the page does not cause double-counted events. If your stack uses client-side de-duping, the variant ID must be part of the dedup key.
-4. **Sample randomization:** Pull the first 100 assignment records from your assignment table; the variant split should be within ±5% of the configured allocation.
+3. **De-duplication:** Confirm that a user reloading the page does not cause double-counted events. Use a stable event/transaction ID and document cross-client/server deduplication; a variant label alone is not a unique event key.
+4. **Sample randomization:** Check sample-ratio mismatch against the configured allocation with a pre-specified statistical check and adequate records. A fixed ±5% band on 100 records is not a valid universal randomization test. Inspect assignment stability, unit independence and missing exposure records.
 5. **Guardrail metric pipeline:** Each guardrail metric defined in §6️⃣ must have a working dashboard or alert by the time the test launches.
 
 If any of the above fails, stop and resolve it before Gate 8.
@@ -191,26 +187,4 @@ When interpreting results:
 
 | Result               | Action                                 |
 | -------------------- | -------------------------------------- |
-| Significant positive | Consider rollout                       |
-| Significant negative | Reject variant, document learning      |
-| Inconclusive         | Consider more traffic or bolder change |
-| Guardrail failure    | Do not ship, even if primary wins      |
-
----
-
-## Documentation & Learning
-
-### Test Record (Mandatory)
-
-Document:
-
-- Hypothesis
-- Variants
-- Metrics
-- Sample size vs achieved
-- Results
-- Decision
-- Learnings
-- Follow-up ideas
-
-Store records in a shared, searchable location to avoid repeated 
+| Significant positive 

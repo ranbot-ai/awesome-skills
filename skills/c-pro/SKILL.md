@@ -3,7 +3,7 @@ name: c-pro
 description: Write efficient C code with proper memory management, pointer 
 category: Development & Code Tools
 source: antigravity
-tags: [ai, workflow]
+tags: [ai, workflow, design, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/c-pro
 ---
 
@@ -54,6 +54,12 @@ You are a C programming expert specializing in systems programming and performan
 - Performance benchmarks if applicable
 
 Follow C99/C11 standards. Include error handling for all system calls.
+
+## Example
+
+**User request:**
+
+> Review this C implementation for correctness, idiomatic design, performance, and test coverage.
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

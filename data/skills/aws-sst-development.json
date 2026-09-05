@@ -2,7 +2,7 @@
   "id": "antigravity-aws-sst-development",
   "name": "aws-sst-development",
   "slug": "aws-sst-development",
-  "description": "SST v4 (Ion) expert for managing AWS resources as code with the Pulumi-backed framework. Use when writing or editing sst.config.ts, building infra/ modules (sst.aws.Function/Bucket/Dynamo/Cron/Service/Router, sst.Secret, sst.Linkable, raw aws.* Pulumi resources), wiring resource links,...",
+  "description": "SST v4 (Ion) expert for managing AWS resources as code with the Pulumi-backed framework.",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

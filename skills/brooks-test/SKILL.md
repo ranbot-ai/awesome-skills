@@ -1,6 +1,6 @@
 ---
 name: brooks-test
-description: Test quality review drawing on twelve classic engineering books — with primary focus on xUnit Test Patterns, The Art of Unit Testing, How Google Tests Software, and Working Effectively with Legacy C
+description: Review test-suite quality using established testing literature; identify brittleness, mock abuse, unclear fixtures, weak assertions, slow feedback, and maintenance risks. 
 category: Development & Code Tools
 source: antigravity
 tags: [ai, template, security, rag]

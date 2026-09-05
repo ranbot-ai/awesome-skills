@@ -1,9 +1,9 @@
 ---
 name: analytics-product
 description: Analytics de produto — PostHog, Mixpanel, eventos, funnels, cohorts, retencao, north star metric, OKRs e dashboards de produto. 
-category: Business & Marketing
+category: Document Processing
 source: antigravity
-tags: [python, api, claude, ai, template, design]
+tags: [python, api, claude, ai, template, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/analytics-product
 ---
 
@@ -16,7 +16,8 @@ Analytics de produto — PostHog, Mixpanel, eventos, funnels, cohorts, retencao,
 
 ## When to Use This Skill
 
-- When you need specialized assistance with this domain
+- Use para definir um evento de ativacao, investigar queda de funil ou calcular retencao com denominador e janela explicitos.
+- Antes de instrumentar, registre a decisao de produto, a fonte de dados, o consentimento aplicavel, o fuso horario e a unidade de analise.
 
 ## Do Not Use This Skill When
 
@@ -39,7 +40,7 @@ Errado:    signup, click, conversion
 
 ---
 
-## Eventos Essenciais Da Auri
+## Exemplo ilustrativo: eventos de um assistente
 
 ```python
 AURI_EVENTS = {
@@ -102,7 +103,7 @@ track("user_123", "conversation_started", {
 
 ---
 
-## Funil De Ativacao Auri
+## Funil ilustrativo de ativacao (numeros hipoteticos)
 
 ```
 Visita landing page          (100%)
@@ -128,7 +129,8 @@ Para cada drop-off > benchmark:
 2. Entender: por que? (session recordings, surveys)
 3. Hipotese: qual mudanca poderia melhorar?
 4. Testar: A/B test com amostra estatisticamente significante
-5. Medir: 2 semanas minimo, p-value < 0.05
+5. Medir: janela e amostra predefinidas, efeito com intervalo, qualidade e guardrails
+   Nao encerrar cedo por um p-value favoravel; investigar SRM e perdas de tracking
 6. Aprender: mesmo se falhar, entende-se o usuario melhor
 ```
 
@@ -161,22 +163,6 @@ def calculate_cohort_retention(events_df):
     return retention
 ```
 
-## Benchmarks De Retencao (Assistentes De Voz)
+## Faixas ilustrativas de retencao (nao sao benchmarks de mercado)
 
-| Semana | Pessimo | Ok | Bom | Excelente |
-|--------|---------|-----|-----|-----------|
-| W1 | <20% | 20-35% | 35-50% | >50% |
-| W4 | <10% | 10-20% | 20-30% | >30% |
-| W8 | <5% | 5-12% | 12-20% | >20% |
-
----
-
-## Definindo A North Star Da Auri
-
-```
-Framework:
-1. O que cria valor real para o usuario? -> Conversas que geram insight/acao
-2. O que prediz crescimento de longo prazo? -> Usuarios com 3+ conv/semana
-3. Como medir? -> "Weekly Active Conversationalists" (WAC)
-
-North Star: WAC (Weekly Active Conv
+Estes numeros nao possuem fonte ou validacao externa. Use apenas como exemplo de formato; substitua por

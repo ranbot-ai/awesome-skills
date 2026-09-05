@@ -15,6 +15,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/high
 - Use when building a landing page, portfolio, SaaS UI, consumer product page, or app surface that needs premium depth and motion.
 - Use when the design must avoid generic fonts, harsh shadows, static layouts, default navbars, and ordinary Bootstrap-style grids.
 
+## Example
+
+**User request:**
+
+> Review this interface with @high-end-visual-design, identify the highest-impact design problems, and propose an implementation-ready improvement.
+
 ## Limitations
 
 - This skill is visual-design focused; it does not replace brand strategy, conversion research, accessibility validation, or production QA.
@@ -55,5 +61,4 @@ Before writing code, silently "roll the dice" and select ONE combination from th
 
 ## 4. HAPTIC MICRO-AESTHETICS (COMPONENT MASTERY)
 
-### A. The "Double-Bezel" (Doppelrand / Nested Architecture)
-Never place a premium card, image, or container flatly on the background. They must look like physical, machined hardware (like a glass
+### A. The "Doub

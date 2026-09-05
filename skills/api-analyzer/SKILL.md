@@ -1,6 +1,6 @@
 ---
 name: api-analyzer
-description: Validates whether an API request is correct based on provided inputs (method, URL, headers, body, auth, query params). Use this skill whenever a user wants to check, validate, debug, or verify an API 
+description: Validates whether an API request is correct based on provided inputs (method, URL, headers, body, auth, query params). 
 category: Document Processing
 source: antigravity
 tags: [api, ai, agent, automation, design, document, security]

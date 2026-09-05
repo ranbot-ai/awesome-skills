@@ -1,7 +1,7 @@
 ---
 name: hugging-face-datasets
 description: Create and manage datasets on Hugging Face Hub. Supports initializing repos, defining configs/system prompts, streaming row updates, and SQL-based dataset querying/transformation. Designed to work alo
-category: Creative & Media
+category: AI & Agents
 source: antigravity
 tags: [python, api, mcp, ai, workflow, template, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugging-face-datasets
@@ -11,135 +11,121 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/hugg
 # Overview
 This skill provides tools to manage datasets on the Hugging Face Hub with a focus on creation, configuration, content management, and SQL-based data manipulation. It is designed to complement the existing Hugging Face MCP server by providing dataset editing and querying capabilities.
 
+## Detailed Guide
+
+Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.
+
 ## When to Use
 - You need to create, configure, or update datasets on the Hugging Face Hub.
 - You want SQL-style querying, transformation, or export flows over Hub datasets.
 - You are managing dataset content and metadata directly rather than only searching existing datasets.
 
-## Integration with HF MCP Server
-- **Use HF MCP Server for**: Dataset discovery, search, and metadata retrieval
-- **Use This Skill for**: Dataset creation, content editing, SQL queries, data transformation, and structured data formatting
+## Python API Usage
 
-# Version
-2.1.0
+```python
+from sql_manager import HFDatasetSQL
 
-# Dependencies
-# This skill uses PEP 723 scripts with inline dependency management
-# Scripts auto-install requirements when run with: uv run scripts/script_name.py
+sql = HFDatasetSQL()
 
-- uv (Python package manager)
-- Getting Started: See "Usage Instructions" below for PEP 723 usage
+# Query
+results = sql.query("cais/mmlu", "SELECT * FROM data WHERE subject='nutrition' LIMIT 10")
 
-# Core Capabilities
-
-## 1. Dataset Lifecycle Management
-- **Initialize**: Create new dataset repositories with proper structure
-- **Configure**: Store detailed configuration including system prompts and metadata
-- **Stream Updates**: Add rows efficiently without downloading entire datasets
-
-## 2. SQL-Based Dataset Querying (NEW)
-Query any Hugging Face dataset using DuckDB SQL via `scripts/sql_manager.py`:
-- **Direct Queries**: Run SQL on datasets using the `hf://` protocol
-- **Schema Discovery**: Describe dataset structure and column types
-- **Data Sampling**: Get random samples for exploration
-- **Aggregations**: Count, histogram, unique values analysis
-- **Transformations**: Filter, join, reshape data with SQL
-- **Export & Push**: Save results locally or push to new Hub repos
-
-## 3. Multi-Format Dataset Support
-Supports diverse dataset types through template system:
-- **Chat/Conversational**: Chat templating, multi-turn dialogues, tool usage examples
-- **Text Classification**: Sentiment analysis, intent detection, topic classification
-- **Question-Answering**: Reading comprehension, factual QA, knowledge bases
-- **Text Completion**: Language modeling, code completion, creative writing
-- **Tabular Data**: Structured data for regression/classification tasks
-- **Custom Formats**: Flexible schema definition for specialized needs
-
-## 4. Quality Assurance Features
-- **JSON Validation**: Ensures data integrity during uploads
-- **Batch Processing**: Efficient handling of large datasets
-- **Error Recovery**: Graceful handling of upload failures and conflicts
-
-# Usage Instructions
-
-The skill includes two Python scripts that use PEP 723 inline dependency management:
-
-> **All paths are relative to the directory containing this SKILL.md
-file.**
-> Scripts are run with: `uv run scripts/script_name.py [arguments]`
-
-- `scripts/dataset_manager.py` - Dataset creation and management
-- `scripts/sql_manager.py` - SQL-based dataset querying and transformation
-
-### Prerequisites
-- `uv` package manager installed
-- `HF_TOKEN` environment variable must be set with a Write-access token
-
----
-
-# SQL Dataset Querying (sql_manager.py)
-
-Query, transform, and push Hugging Face datasets using DuckDB SQL. The `hf://` protocol provides direct access to any public dataset (or private with token).
-
-## Quick Start
-
-```bash
-# Query a dataset
-uv run scripts/sql_manager.py query \
-  --dataset "cais/mmlu" \
-  --sql "SELECT * FROM data WHERE subject='nutrition' LIMIT 10"
-
-# Get dataset schema
-uv run scripts/sql_manager.py describe --dataset "cais/mmlu"
-
-# Sample random rows
-uv run scripts/sql_manager.py sample --dataset "cais/mmlu" --n 5
-
-# Count rows with filter
-uv run scripts/sql_manager.py count --dataset "cais/mmlu" --where "subject='nutrition'"
-```
-
-## SQL Query Syntax
-
-Use `data` as the table name in your SQL - it gets replaced with the actual `hf://` path:
-
-```sql
--- Basic select
-SELECT * FROM data LIMIT 10
-
--- Filtering
-SELECT * FROM data WHERE subject='nutrition'
-
--- Aggregations
-SELECT subject, COUNT(*) as cnt FROM data GROUP BY subject ORDER BY cnt DESC
-
--- Column selection and transformation
-SELECT question, choices[answer] AS correct_answer FROM data
-
--- Regex matching
-SELECT * FROM data WHERE regexp_matches(question, 'nutrition|diet')
-
--- String functions
-SELECT regexp_replace(question, '\n', '') AS cleaned FROM data
-```
-
-## Common Operations
-
-### 1. Explore Dataset Structure
-```bash
 # Get schema
-uv run scripts/sql_manager.py describe --dataset "cais/mmlu"
+schema = sql.describe("cais/mmlu")
 
-# Get unique values in column
-uv run scripts/sql_manager.py unique --dataset "cais/mmlu" --column "subject"
+# Sample
+samples = sql.sample("cais/mmlu", n=5, seed=42)
 
-# Get value distribution
-uv run scripts/sql_manager.py histogram --dataset "cais/mmlu" --column "subject" --bins 20
+# Count
+count = sql.count("cais/mmlu", where="subject='nutrition'")
+
+# Histogram
+dist = sql.histogram("cais/mmlu", "subject")
+
+# Filter and transform
+results = sql.filter_and_transform(
+    "cais/mmlu",
+    select="subject, COUNT(*) as cnt",
+    group_by="subject",
+    order_by="cnt DESC",
+    limit=10
+)
+
+# Push to Hub
+url = sql.push_to_hub(
+    "cais/mmlu",
+    "username/nutrition-subset",
+    sql="SELECT * FROM data WHERE subject='nutrition'",
+    private=True
+)
+
+# Export locally
+sql.export_to_parquet("cais/mmlu", "output.parquet", sql="SELECT * FROM data LIMIT 100")
+
+sql.close()
 ```
 
-### 2. Filter and Transform
+## Example 1: Create Training Subset from Existing Dataset
 ```bash
-# Complex filtering with SQL
+# 1. Explore the source dataset
+uv run scripts/sql_manager.py describe --dataset "cais/mmlu"
+uv run scripts/sql_manager.py histogram --dataset "cais/mmlu" --column "subject"
+
+# 2. Query and create subset
 uv run scripts/sql_manager.py query \
   --dataset "cais/mmlu" \
-  --sql "SELECT subject, COUNT(*) as cnt FROM data 
+  --sql "SELECT * FROM data WHERE subject IN ('nutrition', 'anatomy', 'clinical_knowledge')" \
+  --push-to "username/mmlu-medical-subset" \
+  --private
+```
+
+## Example 2: Transform and Reshape Data
+```bash
+# Transform MMLU to QA format with correct answers extracted
+uv run scripts/sql_manager.py query \
+  --dataset "cais/mmlu" \
+  --sql "SELECT question, choices[answer] as correct_answer, subject FROM data" \
+  --push-to "username/mmlu-qa-format"
+```
+
+## Example 3: Merge Multiple Dataset Splits
+```bash
+# Export multiple splits and combine
+uv run scripts/sql_manager.py export \
+  --dataset "cais/mmlu" \
+  --split "*" \
+  --output "mmlu_all.parquet"
+```
+
+## Example 4: Quality Filtering
+```bash
+# Filter for high-quality examples
+uv run scripts/sql_manager.py query \
+  --dataset "squad" \
+  --sql "SELECT * FROM data WHERE LENGTH(context) > 500 AND LENGTH(question) > 20" \
+  --push-to "username/squad-filtered"
+```
+
+## Example 5: Create Custom Training Dataset
+```bash
+# 1. Query source data
+uv run scripts/sql_manager.py export \
+  --dataset "cais/mmlu" \
+  --sql "SELECT question, subject FROM data WHERE subject='nutrition'" \
+  --output "nutrition_source.jsonl" \
+  --format jsonl
+
+# 2. Process with your pipeline (add answers, format, etc.)
+
+# 3. Push processed data
+uv run scripts/dataset_manager.py init --repo_id "username/nutrition-training"
+uv run scripts/dataset_manager.py add_rows \
+  --repo_id "username/nutrition-training" \
+  --template qa \
+  --rows_json "$(cat processed_data.json)"
+```
+
+## Limitations
+- Use this skill only when the task clearly matches the scope described above.
+- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
+- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.

@@ -2,7 +2,7 @@
   "id": "antigravity-huggingface-zerogpu",
   "name": "huggingface-zerogpu",
   "slug": "huggingface-zerogpu",
-  "description": "AI demos and GPU compute with Gradio Spaces and Hugging Face Spaces ZeroGPU. Use when writing or reviewing code that uses `@spaces.GPU`, configuring `python_version` or `requirements.txt` for a ZeroGPU Space, or handling ZeroGPU-specific code constraints — pickle-based process...",
+  "description": "AI demos and GPU compute with Gradio Spaces and Hugging Face Spaces ZeroGPU.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

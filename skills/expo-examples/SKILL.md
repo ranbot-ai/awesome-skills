@@ -1,6 +1,6 @@
 ---
 name: expo-examples
-description: Expo's official example projects — the expo/examples repo of ~70 `with-*` integrations (Stripe, Clerk, Supabase, OpenAI, maps, Reanimated, SQLite, Skia, NativeWind, and more). Use when integrating a
+description: Expo's official example projects — the expo/examples repo of ~70 `with-*` integrations (Stripe, Clerk, Supabase, OpenAI, maps, Reanimated, SQLite, Skia, NativeWind, and more). 
 category: Document Processing
 source: antigravity
 tags: [api, ai, workflow, document, security, tailwind, supabase, stripe, cro]

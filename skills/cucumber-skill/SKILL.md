@@ -1,6 +1,6 @@
 ---
 name: cucumber-skill
-description: Generates Cucumber BDD tests with Gherkin feature files and step definitions in Java, JavaScript, or Ruby. Use when user mentions "Cucumber", "Gherkin", "Feature/Scenario", "Given/When/Then", "BDD". T
+description: Generates Cucumber BDD tests with Gherkin feature files and step definitions in Java, JavaScript, or Ruby. Use when user mentions "Cucumber", "Gherkin", "Feature/Scenario", "Given/When/Then", "BDD". 
 category: AI & Agents
 source: antigravity
 tags: [javascript, api, ai, agent, image, security]

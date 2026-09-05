@@ -1,6 +1,6 @@
 ---
 name: expo-ui
-description: Build native UI with the @expo/ui package: real SwiftUI on iOS and Jetpack Compose on Android rendered from React in an Expo or React Native app. Covers universal cross-platform components (Host, Colu
+description: Build native UI with the @expo/ui package: real SwiftUI on iOS and Jetpack Compose on Android rendered from React in an Expo or React Native app. 
 category: Document Processing
 source: antigravity
 tags: [react, api, ai, document, security, cro]

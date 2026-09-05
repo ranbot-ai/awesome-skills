@@ -1,110 +1,25 @@
 ---
 name: developer-sandbox
 description: Design and build interactive playgrounds that let developers experience your product without commitment. This skill covers playground architecture, pre-populated examples, embedding strategies, gating
-category: Document Processing
+category: Development & Code Tools
 source: antigravity
-tags: [python, javascript, typescript, react, node, api, ai, workflow, design, document]
+tags: [javascript, react, api, ai, design, security, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/developer-sandbox
 ---
 
 
 # Interactive Playgrounds and Demo Environments
+
+## Detailed Guide
+
+Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.
+
 ## When to Use
 
 Use this skill when you need design and build interactive playgrounds that let developers experience your product without commitment. This skill covers playground architecture, pre-populated examples, embedding strategies, gating decisions, and converting playground users to signups. Trigger phrases: "developer...
 
 
 Let developers experience your product before they commit. A great playground removes the biggest barrier to adoption: uncertainty about whether your product solves their problem.
-
-## Overview
-
-Developer playgrounds serve multiple purposes:
-- **Evaluation**: Let developers test before investing setup time
-- **Learning**: Interactive environment for understanding concepts
-- **Marketing**: Demonstrate capabilities without sales calls
-- **Support**: Reproducible environment for debugging issues
-
-This skill covers designing playgrounds that convert curious visitors into active users.
-
-## Before You Start
-
-Review the **developer-audience-context** skill to understand:
-- What do developers want to validate before signing up?
-- What's the typical evaluation workflow in your space?
-- What competing products offer playgrounds?
-- What's the minimum viable experience that demonstrates value?
-
-Your playground should answer the questions developers have when evaluating.
-
-## Playground Design Principles
-
-### Principle 1: Instant Gratification
-
-Developers should see something meaningful within 10 seconds of landing.
-
-**Good**: Page loads with a working example already running
-**Bad**: Empty editor with "Type your code here" placeholder
-
-```html
-<!-- Good: Pre-loaded, running example -->
-<div class="playground">
-  <div class="editor">
-    <pre><code>// Analyze sentiment of this text
-const result = await api.analyze("I love this product!");
-console.log(result.sentiment); // "positive"</code></pre>
-  </div>
-  <div class="output">
-    <pre>{ "sentiment": "positive", "confidence": 0.94 }</pre>
-  </div>
-  <button class="run-btn">Run ▶️</button>
-</div>
-```
-
-### Principle 2: Progressive Complexity
-
-Start simple, let developers go deeper as curiosity grows.
-
-**Level 1: One-Click Demo**
-```
-[Analyze Text] → See result immediately
-```
-
-**Level 2: Editable Input**
-```
-[Edit the text] → [Run] → See result
-```
-
-**Level 3: Full API Access**
-```
-Edit code → Modify parameters → See raw request/response
-```
-
-**Level 4: Full Playground**
-```
-Multiple files → Import SDK → Build mini-app
-```
-
-### Principle 3: Real API, Real Results
-
-Never fake the results. Use your actual API with sandbox credentials.
-
-**Why real matters:**
-- Builds trust (not a demo, but actual product)
-- Shows real performance characteristics
-- Demonstrates actual error handling
-- No surprises when they sign up
-
-### Principle 4: Zero Friction
-
-No signup required for basic playground. No installation. No configuration.
-
-```
-❌ Bad: "Sign up to try the playground"
-❌ Bad: "Install our CLI to continue"
-❌ Bad: "Configure your environment..."
-
-✅ Good: Works immediately in browser
-```
 
 ## Pre-Populated Examples
 
@@ -172,12 +87,8 @@ app.post('/analyze', async (req, res) => {
 - [ ] Real-world use case is obvious
 - [ ] Leads to natural "what else can it do?" curiosity
 
-## Sharing and Embedding
+## Limitations
 
-### Shareable Playground URLs
-
-Enable developers to share their playground state:
-
-```
-https://playground.example.com/?code=BASE64_ENCODED_CODE
-https://playground
+- Use this skill only when the task clearly matches its upstream source and local project context.
+- Verify commands, generated code, dependencies, credentials, and external service behavior before applying changes.
+- Do not treat examples as a substitute for environment-specific tests, security review, or user approval for destructive or costly actions.

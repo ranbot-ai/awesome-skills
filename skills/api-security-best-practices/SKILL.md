@@ -3,215 +3,107 @@ name: api-security-best-practices
 description: Implement secure API design patterns including authentication, authorization, input validation, rate limiting, and protection against common API vulnerabilities 
 category: Security & Systems
 source: antigravity
-tags: [javascript, node, markdown, api, ai, workflow, design, document, security, hacking]
+tags: [javascript, node, api, ai, design, document, security, prisma, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/api-security-best-practices
 ---
 
 
 # API Security Best Practices
 
-## Overview
+Review the request boundary from caller identity through authorization, validated
+input, storage and observable response. Preserve the application's actual identity
+provider and data model rather than introducing a second authentication system.
 
-Guide developers in building secure APIs by implementing authentication, authorization, input validation, rate limiting, and protection against common vulnerabilities. This skill covers security patterns for REST, GraphQL, and WebSocket APIs.
+## When to Use
 
-## When to Use This Skill
+Use when adding a protected endpoint, reviewing object access, replacing permissive
+request parsing, or investigating an API abuse path. For a concrete defect, start
+with the failing route and its callers; do not deploy unrelated security infrastructure.
 
-- Use when designing new API endpoints
-- Use when securing existing APIs
-- Use when implementing authentication and authorization
-- Use when protecting against API attacks (injection, DDoS, etc.)
-- Use when conducting API security reviews
-- Use when preparing for security audits
-- Use when implementing rate limiting and throttling
-- Use when handling sensitive data in APIs
+## Inputs and prerequisites
 
-## How It Works
+Record the routes, caller/tenant model, identity provider, token contract, runtime and
+locked dependency versions, database schema, proxy topology and authorized test scope.
+Use synthetic identities in a test environment. Existing task authorization carries
+forward; production scans, account writes and message sends need their own authority.
+The Node examples below are integration sketches for Express, jsonwebtoken and Zod;
+application/database adapters are deliberately named rather than presented as a full
+runnable service. Confirm APIs against the installed versions before integrating.
 
-### Step 1: Authentication & Authorization
+## 1. Authenticate the exact token contract
 
-I'll help you implement secure authentication:
-- Choose authentication method (JWT, OAuth 2.0, API keys)
-- Implement token-based authentication
-- Set up role-based access control (RBAC)
-- Secure session management
-- Implement multi-factor authentication (MFA)
+Prefer the established provider/session middleware. When the service owns an HMAC
+JWT contract, require a strong server-owned key, a fixed algorithm, exact issuer and
+audience, and required runtime claims. Do not infer permissions from a decoded token
+before signature verification. Never accept a caller-selected verification algorithm.
 
-### Step 2: Input Validation & Sanitization
-
-Protect against injection attacks:
-- Validate all input data
-- Sanitize user inputs
-- Use parameterized queries
-- Implement request schema validation
-- Prevent SQL injection, XSS, and command injection
-
-### Step 3: Rate Limiting & Throttling
-
-Prevent abuse and DDoS attacks:
-- Implement rate limiting per user/IP
-- Set up API throttling
-- Configure request quotas
-- Handle rate limit errors gracefully
-- Monitor for suspicious activity
-
-### Step 4: Data Protection
-
-Secure sensitive data:
-- Encrypt data in transit (HTTPS/TLS)
-- Encrypt sensitive data at rest
-- Implement proper error handling (no data leaks)
-- Sanitize error messages
-- Use secure headers
-
-### Step 5: API Security Testing
-
-Verify security implementation:
-- Test authentication and authorization
-- Perform penetration testing
-- Check for common vulnerabilities (OWASP API Top 10)
-- Validate input handling
-- Test rate limiting
-
-
-## Examples
-
-### Example 1: Implementing JWT Authentication
-
-```markdown
-## Secure JWT Authentication Implementation
-
-### Authentication Flow
-
-1. User logs in with credentials
-2. Server validates credentials
-3. Server generates JWT token
-4. Client stores token securely
-5. Client sends token with each request
-6. Server validates token
-
-### Implementation
-
-#### 1. Generate Secure JWT Tokens
-
-\`\`\`javascript
-// auth.js
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-
-// Login endpoint
-app.post('/api/auth/login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    
-    // Validate input
-    if (!email || !password) {
-      return res.status(400).json({ 
-        error: 'Email and password are required' 
-      });
-    }
-    
-    // Find user
-    const user = await db.user.findUnique({ 
-      where: { email } 
-    });
-    
-    if (!user) {
-      // Don't reveal if user exists
-      return res.status(401).json({ 
-        error: 'Invalid credentials' 
-      });
-    }
-    
-    // Verify password
-    const validPassword = await bcrypt.compare(
-      password, 
-      user.passwordHash
-    );
-    
-    if (!validPassword) {
-      return res.status(401).json({ 
-        error: 'Invalid credentials' 
-      });
-    }
-    
-    // Generate JWT token
-    const token = jwt.sign(
-      { 
-        userId: user.id,
-        email: user.email,
-        role: user.role
-      },
-      process.env.JWT_SECRET,
-      { 
-        expiresIn: '1h',
-        issuer: 'your-app',
-        audience: 'your-app-users'
-      }
-    );
-    
-    // Generate refresh token
-    const refreshToken = jwt.sign(
-      { userId: user.id },
-      process.env.JWT_REFRESH_SECRET,
-      { expiresIn: '7d' }
-    );
-    
-    // Store refresh token in database
-    await db.refreshToken.create({
-      data: {
-        token: refreshToken,
-        userId: user.id,
-        expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
-      }
-    });
-    
-    res.json({
-      token,
-      refreshToken,
-      expiresIn: 3600
-    });
-    
-  } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({ 
-      error: 'An error occurred during login' 
-    });
-  }
-});
-\`\`\`
-
-#### 2. Verify JWT Tokens (Middleware)
-
-\`\`\`javascript
-// middleware/auth.js
+```javascript
 const jwt = require('jsonwebtoken');
 
-function authenticateToken(req, res, next) {
-  // Get token from header
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
-  
-  if (!token) {
-    return res.status(401).json({ 
-      error: 'Access token required' 
-    });
+// Illustrative first-party access-token contract; not a third-party OAuth adapter.
+const ACCESS_POLICY = {
+  algorithms: ['HS256'], issuer: 'example-auth', audience: 'example-api'
+};
+function verifyAccessToken(token, signingKey) {
+  const claims = jwt.verify(token, signingKey, ACCESS_POLICY);
+  if (!claims || typeof claims !== 'object' ||
+      typeof claims.sub !== 'string' || !claims.sub ||
+      typeof claims.tenantId !== 'string' || !claims.tenantId ||
+      !Number.isSafeInteger(claims.exp) || !Number.isSafeInteger(claims.iat) ||
+      claims.exp <= claims.iat) {
+    throw new Error('Invalid access claims');
   }
-  
-  // Verify token
-  jwt.verify(
-    token, 
-    process.env.JWT_SECRET,
-    { 
-      issuer: 'your-app',
-      audience: 'your-app-users'
-    },
-    (err, user) => {
-      if (err) {
-        if (err.name === 'TokenExpiredError') {
-          return res.status(401).json({ 
-            error: 'Token expired' 
-          });
-        }
-        return res.status(403).json({ 
-          error: 'Invalid token' 
-        });
+  return { subject: claims.sub, tenantId: claims.tenantId };
+}
+function readBearer(header) {
+  if (typeof header !== 'string' || header.length > 8192) return null;
+  const match = /^Bearer ([A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+)$/i.exec(header);
+  return match ? match[1] : null;
+}
+```
+
+Issue access tokens with the same issuer/audience/algorithm and a short application-
+approved expiration. Handle verification failure as a generic 401 without echoing the
+token or exception. Expiration alone does not revoke a token; define revocation or
+short-lived sessions according to the actual threat model. A service using asymmetric
+provider keys needs the provider's discovery/JWKS validation and key-rotation policy,
+not this HMAC example. Never reuse an access token as a refresh token.
+
+### Refresh sessions
+
+Use the provider's supported session flow or a server-side opaque refresh design:
+store only a digest, expiry, user/session family and revocation state. In one atomic
+transaction consume the old active token and create the replacement. Concurrent reuse
+must not issue two successors; defined reuse handling revokes the affected family.
+Check current user status and permissions when issuing new access tokens. Bind refresh
+to the intended client/session and protect cookie-based requests against CSRF. Do not
+log tokens, store them plaintext in a database, or return a refresh token through a URL.
+Test simultaneous refresh, expiry, replay, revocation and transaction failure before
+calling the flow complete. No database transaction adapter is bundled here.
+
+## 2. Authorize the resource and operation
+
+Authentication identifies the caller; authorization decides the exact operation on
+an object and tenant. A role name does not automatically grant cross-tenant access.
+Apply the owner/tenant predicate in the database mutation to avoid a check-then-write
+race, and allowlist writable properties. Use 404/403 consistently with the product's
+resource-disclosure policy.
+
+```javascript
+// Prisma-style sketch; id and tenant types must match your actual schema.
+async function deleteOwnedPost(prisma, postId, principal) {
+  const result = await prisma.post.deleteMany({
+    where: { id: postId, userId: principal.subject, tenantId: principal.tenantId }
+  });
+  return result.count === 1;
+}
+```
+
+An administrator path needs an explicit separate policy and audit event; do not add
+an implicit admin bypass to every owner check. Test a valid user accessing another
+user's object, the same ID in another tenant, deleted memberships and bulk endpoints.
+
+## 3. Parse once, then use the validated value
+
+Reject partial numeric parses (`12abc` is not ID 12), unsafe integers, unexpected
+properties and oversized requests. Use parameterized database queries.

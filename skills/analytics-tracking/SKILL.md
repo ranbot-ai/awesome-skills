@@ -3,7 +3,7 @@ name: analytics-tracking
 description: Design, audit, and improve analytics tracking systems that produce reliable, decision-ready data. 
 category: Document Processing
 source: antigravity
-tags: [ai, workflow, design, document, seo, cro, marketing]
+tags: [ai, design, document, seo, cro, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/analytics-tracking
 ---
 
@@ -19,9 +19,9 @@ You do **not** treat GA4 numbers as truth unless validated.
 
 ---
 
-## Phase 0: Measurement Readiness & Signal Quality Index (Required)
+## Phase 0: Measurement Evidence and Optional Review Rubric
 
-Before adding or changing tracking, calculate the **Measurement Readiness & Signal Quality Index**.
+Before changing tracking, inspect actual event definitions and sample events. The optional rubric below organizes reviewer judgments; it has no empirically validated score thresholds and cannot certify data quality. Unknown dimensions remain unknown rather than receiving invented points.
 
 ### Purpose
 
@@ -29,7 +29,7 @@ This index answers:
 
 > **Can this analytics setup produce reliable, decision-grade insights?**
 
-It prevents:
+Use it to identify possible:
 
 * event sprawl
 * vanity tracking
@@ -111,22 +111,22 @@ This is a **diagnostic score**, not a performance KPI.
 
 ---
 
-### Readiness Bands (Required)
+### Illustrative planning bands (not validation gates)
 
 | Score  | Verdict               | Interpretation                    |
 | ------ | --------------------- | --------------------------------- |
-| 85–100 | **Measurement-Ready** | Safe to optimize and experiment   |
+| 85–100 | **Measurement-Ready** | Review whether observed evidence supports the intended decision   |
 | 70–84  | **Usable with Gaps**  | Fix issues before major decisions |
 | 55–69  | **Unreliable**        | Data cannot be trusted yet        |
 | <55    | **Broken**            | Do not act on this data           |
 
-If verdict is **Broken**, stop and recommend remediation first.
+Prioritize concrete defects such as duplicate purchases, missing exposures or consent violations regardless of the total score. A high score must never override a failed reconciliation.
 
 ---
 
 ## Phase 1: Context & Decision Definition
 
-(Proceed only after scoring)
+(Start from the product decision and available evidence)
 
 ### 1. Business Context
 
@@ -243,38 +243,4 @@ Rules:
 
 * lowercase
 * underscores
-* no spaces
-* no ambiguity
-
----
-
-### Event Properties (Context, Not Noise)
-
-Include:
-
-* where (page, section)
-* who (user_type, plan)
-* how (method, variant)
-
-Avoid:
-
-* PII
-* free-text fields
-* duplicated auto-properties
-
----
-
-## Conversion Strategy
-
-### What Qualifies as a Conversion
-
-A conversion must represent:
-
-* real value
-* completed intent
-* irreversible progress
-
-Examples:
-
-* signup_completed
-* purcha
+* no spac

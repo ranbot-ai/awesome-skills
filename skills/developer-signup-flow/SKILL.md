@@ -1,6 +1,6 @@
 ---
 name: developer-signup-flow
-description: Design frictionless signup experiences for developers including GitHub OAuth, API key generation, and onboarding personalization. Trigger phrases: developer signup, dev registration, OAuth flow, API k
+description: Design frictionless signup experiences for developers including GitHub OAuth, API key generation, and onboarding personalization. 
 category: Development & Code Tools
 source: antigravity
 tags: [python, javascript, api, ai, design, security, supabase, firebase, stripe, marketing]
