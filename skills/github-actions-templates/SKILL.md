@@ -1,232 +1,75 @@
 ---
 name: github-actions-templates
 description: Production-ready GitHub Actions workflow patterns for testing, building, and deploying applications. 
-category: Security & Systems
+category: AI & Agents
 source: antigravity
-tags: [python, node, api, ai, workflow, template, design, image, security, vulnerability]
+tags: [node, ai, workflow, template, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/github-actions-templates
 ---
 
 
-# GitHub Actions Templates
+# GitHub Actions Workflow Patterns
 
-Production-ready GitHub Actions workflow patterns for testing, building, and deploying applications.
+## When to Use
 
-## Do not use this skill when
+Implement testing, matrix builds, artifact preparation or an explicitly authorized deployment workflow for an existing repository.
 
-- The task is unrelated to github actions templates
-- You need a different domain or tool outside this scope
+## Inputs
 
-## Instructions
+Inspect the repository's actual scripts, lockfile, supported runtimes, required check names and release policy. Read `resources/implementation-playbook.md` and `references/common-workflows.md` before choosing job boundaries.
 
-- Clarify goals, constraints, and required inputs.
-- Apply relevant best practices and validate outcomes.
-- Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
+## Test Workflow
 
-## Purpose
-
-Create efficient, secure GitHub Actions workflows for continuous integration and deployment across various tech stacks.
-
-## Use this skill when
-
-- Automate testing and deployment
-- Build Docker images and push to registries
-- Deploy to Kubernetes clusters
-- Run security scans
-- Implement matrix builds for multiple environments
-
-## Common Workflow Patterns
-
-### Pattern 1: Test Workflow
+This Node example assumes the target repository declares `npm test` and supports Node 22. Adapt the runtime and command to the actual project. The pinned action revisions are explicit review inputs; verify them before adopting or updating the template.
 
 ```yaml
 name: Test
-
 on:
-  push:
-    branches: [ main, develop ]
   pull_request:
-    branches: [ main ]
-
+  push:
+    branches: [main]
+permissions:
+  contents: read
 jobs:
   test:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-
+    timeout-minutes: 15
     steps:
-    - uses: actions/checkout@v4
-
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-
-    - name: Install dependencies
-      run: npm ci
-
-    - name: Run linter
-      run: npm run lint
-
-    - name: Run tests
-      run: npm test
-
-    - name: Upload coverage
-      uses: codecov/codecov-action@v3
-      with:
-        files: ./coverage/lcov.info
+      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm test
 ```
 
-**Reference:** See `assets/test-workflow.yml`
+## Matrix Builds
 
-### Pattern 2: Build and Push Docker Image
+Add a matrix only for versions and operating systems the project supports. Keep dependencies reproducible, identify failing combinations, and avoid hiding failures with blanket continue-on-error. Test required-check behavior when jobs are conditionally skipped.
 
-```yaml
-name: Build and Push
+## Build and Publication
 
-on:
-  push:
-    branches: [ main ]
-    tags: [ 'v*' ]
+Build an artifact from the tested commit and record its identity. Publication needs a separate trusted job with the minimum registry permission. Do not publish artifacts produced by arbitrary untrusted code in a privileged context; bind accepted artifacts to their exact source and producing workflow.
 
-env:
-  REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+## Deployment
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+Use the project's protected release path. Identify the immutable artifact, destination, workload identity, rollout and rollback checks before adding deployment commands. A named GitHub environment does not configure reviewers automatically. Verify its actual protections. Do not label a placeholder echo command as a successful deployment.
 
-    steps:
-    - uses: actions/checkout@v4
+## Verification
 
-    - name: Log in to Container Registry
-      uses: docker/login-action@v3
-      with:
-        registry: ${{ env.REGISTRY }}
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+Exercise one passing change and one deliberate test failure on a topic branch. Confirm the failing check prevents downstream publication. Inspect tokens, runner isolation, caches and artifact boundaries. Keep production credentials absent from untrusted validation jobs.
 
-    - name: Extract metadata
-      id: meta
-      uses: docker/metadata-action@v5
-      with:
-        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-        tags: |
-          type=ref,event=branch
-          type=ref,event=pr
-          type=semver,pattern={{version}}
-          type=semver,pattern={{major}}.{{minor}}
+## Example
 
-    - name: Build and push
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        push: true
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
-        cache-from: type=gha
-        cache-to: type=gha,mode=max
-```
+A project needs Linux and Windows tests. Select its supported runtime, add the two runner combinations and confirm that either failure blocks the required result. Prepare publication separately; do not add registry credentials to the matrix.
 
-**Reference:** See `assets/deploy-workflow.yml`
+## Limitations
 
-### Pattern 3: Deploy to Kubernetes
+This skill supplies patterns, not an installed deployment program. Repository policy, runner trust and environment settings must be inspected. Review every third-party action at its full commit SHA and treat logs and uploaded artifacts as possible data-exposure paths.
 
-```yaml
-name: Deploy to Kubernetes
+## Sources
 
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-west-2
-
-    - name: Update kubeconfig
-      run: |
-        aws eks update-kubeconfig --name production-cluster --region us-west-2
-
-    - name: Deploy to Kubernetes
-      run: |
-        kubectl apply -f k8s/
-        kubectl rollout status deployment/my-app -n production
-        kubectl get services -n production
-
-    - name: Verify deployment
-      run: |
-        kubectl get pods -n production
-        kubectl describe deployment my-app -n production
-```
-
-### Pattern 4: Matrix Build
-
-```yaml
-name: Matrix Build
-
-on: [push, pull_request]
-
-jobs:
-  build:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ['3.9', '3.10', '3.11', '3.12']
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-    - name: Run tests
-      run: pytest
-```
-
-**Reference:** See `assets/matrix-build.yml`
-
-## Workflow Best Practices
-
-1. **Use specific action versions** (@v4, not @latest)
-2. **Cache dependencies** to speed up builds
-3. **Use secrets** for sensitive data
-4. **Implement status checks** on PRs
-5. **Use matrix builds** for multi-version testing
-6. **Set appropriate permissions**
-7. **Use reusable workflows** for common patterns
-8. **Implement approval gates** for production
-9. **Add notification steps** for failures
-10. **Use self-hosted runners** for sensitive workloads
-
-## Reusable Workflows
-
-```yaml
-# .github/workflows/reusable-test.yml
-name: Reusa
+- [GitHub secure workflow guidance](https://docs.github.com/en/actions/reference/security/secure-use)

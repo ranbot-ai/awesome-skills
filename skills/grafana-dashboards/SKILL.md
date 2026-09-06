@@ -119,7 +119,7 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
 }
 ```
 
-**Reference:** See `assets/api-dashboard.json`
+**Reference:** See [inline example](#api-monitoring-dashboard)
 
 ## Panel Types
 
@@ -232,4 +232,4 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
         "name": "service",
         "type": "query",
         "datasource": "Prometheus",
-        "query": "label_values(kube_service_i
+        "query": "label_value

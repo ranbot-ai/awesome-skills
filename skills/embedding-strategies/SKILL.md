@@ -3,7 +3,7 @@ name: embedding-strategies
 description: Guide to selecting and optimizing embedding models for vector search applications. 
 category: Document Processing
 source: antigravity
-tags: [python, markdown, api, ai, template, document, langchain, rag]
+tags: [python, markdown, api, ai, template, document, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/embedding-strategies
 ---
 
@@ -117,9 +117,11 @@ class LocalEmbedder:
     def __init__(
         self,
         model_name: str = "BAAI/bge-large-en-v1.5",
-        device: str = "cuda"
+        device: str = "cpu",
+        query_prefix: str = ""
     ):
         self.model = SentenceTransformer(model_name, device=device)
+        self.query_prefix = query_prefix  # Choose from the selected model card.
 
     def embed(
         self,
@@ -137,11 +139,8 @@ class LocalEmbedder:
         return embeddings
 
     def embed_query(self, query: str) -> np.ndarray:
-        """Embed a query with BGE-style prefix."""
-        # BGE models benefit from query prefix
-        if "bge" in self.model.get_sentence_embedding_dimension():
-            query = f"Represent this sentence for searching relevant passages: {query}"
-        return self.embed([query])[0]
+        """Embed a query with the explicitly configured model prefix."""
+        return self.embed([self.query_prefix + query])[0]
 
     def embed_documents(self, documents: List[str]) -> np.ndarray:
         """Embed documents for indexing."""
@@ -173,16 +172,12 @@ def chunk_by_tokens(
     tokenizer=None
 ) -> List[str]:
     """Chunk text by token count."""
-    import tiktoken
-    tokenizer = tokenizer or tiktoken.get_encoding("cl100k_base")
+    if not isinstance(chunk_size, int) or not isinstance(chunk_overlap, int):
+        raise ValueError("chunk size and overlap must be integers")
+    if chunk_size <= 0 or not 0 <= chunk_overlap < chunk_size:
+        raise ValueError("require chunk_size > 0 and 0 <= overlap < chunk_size")
+    if tokenizer is None:
+        import tiktoken
+        tokenizer = tiktoken.get_encoding("cl100k_base")
 
-    tokens = tokenizer.encode(text)
-    chunks = []
-
-    start = 0
-    while start < len(tokens):
-        end = start + chunk_size
-        chunk_tokens = tokens[start:end]
-        chunk_text = tokenizer.decode(chunk_tokens)
-        chunks.append(chunk_text)
-        start = e
+    tokens =
