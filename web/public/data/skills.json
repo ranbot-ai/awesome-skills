@@ -1389,6 +1389,33 @@
       "scrapedAt": "2026-05-12T08:48:25.269Z"
     },
     {
+      "id": "antigravity-agy-auto",
+      "name": "agy-auto",
+      "slug": "agy-auto",
+      "description": "Configure agy-auto PreToolUse security gate to run Antigravity CLI (agy) unattended with layered policy controls instead of --dangerously-skip-permissions.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agy-auto",
+      "content": "\n# agy-auto — Antigravity Auto-Permission & Security Gate\n\n## Overview\n\n`agy-auto` is a PreToolUse hook and security harness for Google Antigravity CLI (`agy`) that enables safe unattended execution without relying on `--dangerously-skip-permissions`. It passes every pending tool call through a multi-layered policy gate: deterministic hard-deny rules, deterministic fast-allow for workspace-scoped and read-only operations, an LLM classifier fallback (Gemini Flash Lite or local llama.cpp), and single-use scoped token approvals with Zero Ambient Authority.\n\n## When to Use This Skill\n\n- Use when running Antigravity CLI (`agy`) unattended or in background agent loops and you want automated tool permissions without exposing system files or credentials.\n- Use when you need granular, auditable controls over shell commands, file modifications, and network egress during `agy` workflows.\n- Use when setting up a secure pair-programming environment with Antigravity that prevents prompt injection attacks from escaping the workspace.\n\n## How It Works\n\n### Step 1: Review, Pin, and Install agy-auto\n\n> [!IMPORTANT]\n> Because `agy-auto` installs as an active PreToolUse hook on the permission evaluation path, never clone a mutable branch directly into your live plugin directory. Always clone to a temporary staging folder, pin an immutable release tag or commit SHA, and inspect the codebase before making the hook executable.\n\n**Option A: Native Antigravity Plugin (Recommended)**\n```bash\n# 1. Clone into a temporary review directory and checkout an immutable release tag\ngit clone https://github.com/onkarbadve/agy-auto.git /tmp/agy-auto-review\ncd /tmp/agy-auto-review\ngit checkout v0.2.0-alpha\n\n# 2. Inspect hook.sh and engine/ files before deployment\nless hook.sh\npython3 -m unittest -v tests/test_engine.py\n\n# 3. Once reviewed and verified, copy to the Antigravity plugin directory and set permissions\nmkdir -p ~/.gemini/config/plugins/agy-auto\ncp -r . ~/.gemini/config/plugins/agy-auto/\nchmod +x ~/.gemini/config/plugins/agy-auto/hook.sh\n```\n\nEnsure `toolPermission: \"always-proceed\"` is configured in `~/.gemini/antigravity-cli/settings.json` so hooks can gate tool calls:\n```json\n{\n  \"toolPermission\": \"always-proceed\"\n}\n```\n\n**Option B: Global Hook via Installer**\n```bash\n# 1. Clone to an isolated location and pin release\ngit clone https://github.com/onkarbadve/agy-auto.git ~/.local/share/agy-auto\ncd ~/.local/share/agy-auto\ngit checkout v0.2.0-alpha\n\n# 2. Review and run the installer\nchmod +x hook.sh\n./install.sh                  # registers hook in hooks.json, sets always-proceed, runs smoke tests\n```\n\n### Step 2: Policy Evaluation Layers\n\n`agy-auto` evaluates each tool invocation through sequential layers (first match wins):\n\n1. **Hard Deny**: Immediately blocks recursive deletes outside workspace, credential reads (`~/.ssh`, `.env`, cloud tokens), git history rewrites (`push --force`, `rebase`), package publishing, system file writes (`/etc`, shell rc), and gate tampering.\n2. **Fast Allow**: Immediately permits parsed read-only commands (`cat`, `grep`, `git status`) and workspace-confined writes without invoking an LLM.\n3. **Classifier**: Ambiguous or grey-area commands fall through to an LLM classifier (Google Gemini 3.5 Flash Lite free tier, or a local `llama.cpp` / Ollama endpoint) that reviews the pending call against conversation context and fail-closes on timeout.\n4. **Scoped Action Approval**: If a command is denied or needs human judgment, the engine issues a single-use 6-character action token bound strictly to `(tool, normalized_cmd, cwd)`. You approve it by replying `> agy-approve <token>` in chat. Conversational phrases like \"yes\" or \"proceed\" are ignored to prevent ambient authority leakage.\n\n## Examples\n\n### Example 1: Approving a Blocked Command\n\nWhen an unclassified command is blocked, `agy-auto` outputs a token:\n```text\ntool call denied by pre-tool hook: [agy-auto/classifier] needs human approval: pip install requests. Reply '> agy-approve a1b2c3' in chat to proceed.\n```\nTo authorize this specific command for a single run, reply directly in the chat:\n```text\n> agy-approve a1b2c3\n```\n\n### Example 2: Configuring a Local Model Backend\n\nTo run `agy-auto` completely offline using llama.cpp or Ollama instead of cloud APIs, edit `~/.gemini/config/agy-auto/policy.toml`:\n```toml\n[classifier]\nendpoint = \"http://127.0.0.1:8080/v1/chat/completions\"\nmodel = \"qwen2.5-coder:7b\"\ntimeout_s = 20\n```\n\n### Example 3: Running Headless Invocations\n\nWhen invoking `agy` in headless mode (`-p`), always pass `--add-dir` so `agy-auto` recognizes the workspace boundaries:\n```bash\nagy --add-dir . -p \"Run test suite and fix failing cases\"\n```\n\n## Best Practices\n\n- ✅ Always keep `toolPermission: \"always-proceed\"` enabled so the pre-tool hook can intercept and gate every tool call.\n- ✅ Add custom repetitive dev tools (e.g. specialized compilers, formatters) to `[fast_allow]` in `~/.gemini/config/agy-auto/policy.toml` for instant sub-millisecond exe",
+      "tags": [
+        "python",
+        "api",
+        "ai",
+        "agent",
+        "llm",
+        "workflow",
+        "document",
+        "security"
+      ],
+      "useCases": [
+        "Use when running Antigravity CLI (`agy`) unattended or in background agent loops and you want automated tool permissions without exposing system files or credentials.",
+        "Use when you need granular, auditable controls over shell commands, file modifications, and network egress during `agy` workflows.",
+        "Use when setting up a secure pair-programming environment with Antigravity that prevents prompt injection attacks from escaping the workspace."
+      ],
+      "scrapedAt": "2026-09-12T10:26:54.309Z"
+    },
+    {
       "id": "antigravity-agy-delegate",
       "name": "agy-delegate",
       "slug": "agy-delegate",
@@ -10986,6 +11013,36 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-02-19T07:10:14.993Z"
+    },
+    {
+      "id": "antigravity-client-secret-exposure-audit",
+      "name": "client-secret-exposure-audit",
+      "slug": "client-secret-exposure-audit",
+      "description": "Audit a deployed web app for secrets exposed to the browser: hardcoded API keys/tokens in JS, secrets in HTML meta/attributes/comments, publicly reachable source/config/deploy files, and header/CORS misconfig.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/client-secret-exposure-audit",
+      "content": "\n# Client-Side Secret & Sensitive-File Exposure Audit\n\n## Overview\n\nModern web apps ship a lot of code and config to the browser. When credentials\nleak into that client-visible surface — hardcoded in JavaScript, tucked into HTML\n`meta`/`data-*` attributes or comments, or served as raw source/config/deploy\nfiles that were never meant to be public — anyone can read them with `curl` and a\nbrowser. This skill is a **defensive, read-only** workflow for finding that class\nof exposure on a web app **you are authorized to assess**.\n\nIt maps to OWASP **A02:2021 Cryptographic Failures** (sensitive data exposure),\n**A05:2021 Security Misconfiguration**, and CWE-798 (hardcoded credentials),\nCWE-200 (sensitive information exposure), CWE-540 (source code in a production\nbuild). It only fetches resources the server already hands to any anonymous\nvisitor — it does not exploit, brute-force, or mutate anything.\n\n## When to Use This Skill\n\n- Use when you need to check whether a deployed site leaks API keys, tokens, or\n  passwords in its client-side bundle before shipping or during a review.\n- Use when working with a static/SPA deployment (Vercel, Netlify, Nginx, S3,\n  GitHub Pages) and you want to confirm no source/config/deploy files are\n  publicly reachable.\n- Use when the user asks to \"find secrets,\" \"audit exposed files,\" \"check the\n  JS/HTML for credentials,\" or run a lightweight sensitive-data-exposure pass on\n  a URL they own or are authorized to test.\n- Do **not** use this to attack third-party sites. See *Security & Safety Notes*.\n\n## How It Works\n\nSet the target once. Every command below reads only what the server serves\npublicly.\n\n```bash\nBASE=\"https://TARGET.example\"     # authorized target, no trailing path\nWORK=\"$(mktemp -d)\"; cd \"$WORK\"\n```\n\n### Step 1: Fetch the page and inspect response headers\n\n```bash\ncurl -s -D headers.txt -o body.html \"$BASE/\"\ncat headers.txt\n```\n\nFlag on the headers:\n\n- `access-control-allow-origin: *` — permissive CORS (worse when paired with\n  credentials).\n- Missing `Content-Security-Policy`, `X-Frame-Options`/`frame-ancestors`,\n  `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy`.\n- Missing/weak `Strict-Transport-Security`.\n- `Server`/framework version banners that fingerprint the stack.\n\n### Step 2: Grep the HTML for secrets and sinks\n\n```bash\ngrep -inE \"secret|passwd|password|api[_-]?key|apikey|token|bearer|authorization|\\\nakia|sk_live|sk_test|pk_live|whsec_|ghp_|aiza|private[_-]?key|mongodb(\\+srv)?://|\\\ndata-[a-z-]*(secret|token|key|access)\" body.html\ngrep -inE \"<!--\" body.html            # read every HTML comment\ngrep -ioE '<meta[^>]+>' body.html     # meta tags often carry keys/ids\ngrep -ioE '<script[^>]+src=\"[^\"]+\"'   body.html   # enumerate JS bundles\n```\n\nSecrets hide in `data-*` attributes, `<meta>` tags, `hidden` `<div>`s, and\n`<!-- comments -->` at least as often as in scripts.\n\n### Step 3: Pull every JavaScript bundle and scan it\n\n```bash\n# extract script srcs, resolve relative paths against $BASE, fetch and scan\ngrep -ioE 'src=\"[^\"]+\\.js\"' body.html | sed -E 's/^src=\"//; s/\"$//' \\\n | while read -r p; do\n     u=\"$p\"; case \"$p\" in http*) ;; /*) u=\"$BASE$p\";; *) u=\"$BASE/$p\";; esac\n     f=\"js_$(echo \"$p\" | tr '/:' '__')\"\n     curl -s \"$u\" -o \"$f\" && echo \"== $u ==\"\n   done\ngrep -rinE \"secret|password|api[_-]?key|token|bearer|sk_(live|test)|pk_(live|test)|\\\nwhsec_|akia|aiza|jwt|signing[_-]?key|admin[_-]?token|mongodb|redis://\" js_* 2>/dev/null\n```\n\nAlso scan any sourcemaps (`*.js.map`) — they can rebuild original source with\ncomments intact.\n\n### Step 4: Probe for publicly reachable source / config / deploy files\n\nSPAs often have a catch-all rewrite that returns `index.html` for unknown paths,\nso **compare response sizes** — a path whose size differs from the SPA fallback\nis a real, distinct file.\n\n```bash\nFALLBACK=$(curl -s \"$BASE/____nope____$RANDOM\" | wc -c)   # SPA fallback size\nfor p in /.env /.env.local /.env.production /.git/config /.git/HEAD \\\n  /package.json /package-lock.json /vercel.json /.vercel/project.json \\\n  /Dockerfile /docker-compose.yml /wrangler.toml /.gitignore \\\n  /server/index.js /src/config/app.config.js /config.js \\\n  /src/services/payment.service.js /webpack.config.js /next.config.js; do\n    read -r code size < <(curl -s -o /dev/null -w \"%{http_code} %{size_download}\" \"$BASE$p\")\n    [ \"$code\" = \"200\" ] && [ \"$size\" != \"$FALLBACK\" ] && echo \"REAL FILE  $code $size  $p\"\ndone\n```\n\nFor any real file found, fetch it and re-run the Step 2/3 secret grep. Follow\n`require(...)`/`import` paths inside those files to discover more source files\n(routes, controllers, services, webhooks) and repeat.\n\n### Step 5: Triage and score\n\nRate each finding by blast radius, not by where it was found:\n\n| Severity | Examples |\n|---|---|\n| **Critical** | Live provider secret keys (`sk_live_`, cloud `AKIA…`+secret, DB URI with password, private signing/JWT secret, admin bearer token) reachable anonymously |\n| **High** | Server-side source/config/deploy f",
+      "tags": [
+        "javascript",
+        "markdown",
+        "api",
+        "claude",
+        "ai",
+        "workflow",
+        "security",
+        "stripe",
+        "docker",
+        "aws"
+      ],
+      "useCases": [
+        "Use when you need to check whether a deployed site leaks API keys, tokens, or",
+        "Use when working with a static/SPA deployment (Vercel, Netlify, Nginx, S3,",
+        "Use when the user asks to \"find secrets,\" \"audit exposed files,\" \"check the",
+        "Do **not** use this to attack third-party sites. See *Security & Safety Notes*."
+      ],
+      "scrapedAt": "2026-09-12T10:31:01.891Z"
     },
     {
       "id": "antigravity-cline-delegate",
@@ -25291,53 +25348,6 @@
       "scrapedAt": "2026-01-29T06:59:19.688Z"
     },
     {
-      "id": "antigravity-incident-response-smart-fix",
-      "name": "incident-response-smart-fix",
-      "slug": "incident-response-smart-fix",
-      "description": "[Extended thinking: This workflow implements a sophisticated debugging and resolution pipeline that leverages AI-assisted debugging tools and observability platforms to systematically diagnose and res",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/incident-response-smart-fix",
-      "content": "\n# Intelligent Issue Resolution with Multi-Agent Orchestration\n\n[Extended thinking: This workflow implements a sophisticated debugging and resolution pipeline that leverages AI-assisted debugging tools and observability platforms to systematically diagnose and resolve production issues. The intelligent debugging strategy combines automated root cause analysis with human expertise, using modern 2024/2025 practices including AI code assistants (GitHub Copilot, Claude Code), observability platforms (Sentry, DataDog, OpenTelemetry), git bisect automation for regression tracking, and production-safe debugging techniques like distributed tracing and structured logging. The process follows a rigorous four-phase approach: (1) Issue Analysis Phase - error-detective and debugger agents analyze error traces, logs, reproduction steps, and observability data to understand the full context of the failure including upstream/downstream impacts, (2) Root Cause Investigation Phase - debugger and code-reviewer agents perform deep code analysis, automated git bisect to identify introducing commit, dependency compatibility checks, and state inspection to isolate the exact failure mechanism, (3) Fix Implementation Phase - domain-specific agents (python-pro, typescript-pro, rust-expert, etc.) implement minimal fixes with comprehensive test coverage including unit, integration, and edge case tests while following production-safe practices, (4) Verification Phase - test-automator and performance-engineer agents run regression suites, performance benchmarks, security scans, and verify no new issues are introduced. Complex issues spanning multiple systems require orchestrated coordination between specialist agents (database-optimizer → performance-engineer → devops-troubleshooter) with explicit context passing and state sharing. The workflow emphasizes understanding root causes over treating symptoms, implementing lasting architectural improvements, automating detection through enhanced monitoring and alerting, and preventing future occurrences through type system enhancements, static analysis rules, and improved error handling patterns. Success is measured not just by issue resolution but by reduced mean time to recovery (MTTR), prevention of similar issues, and improved system resilience.]\n\n## Use this skill when\n\n- Working on intelligent issue resolution with multi-agent orchestration tasks or workflows\n- Needing guidance, best practices, or checklists for intelligent issue resolution with multi-agent orchestration\n\n## Do not use this skill when\n\n- The task is unrelated to intelligent issue resolution with multi-agent orchestration\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "python",
-        "typescript",
-        "claude",
-        "ai",
-        "agent",
-        "automation",
-        "workflow",
-        "security",
-        "rag"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:19.972Z"
-    },
-    {
-      "id": "antigravity-incident-runbook-templates",
-      "name": "incident-runbook-templates",
-      "slug": "incident-runbook-templates",
-      "description": "Production-ready templates for incident response runbooks covering detection, triage, mitigation, resolution, and communication.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/incident-runbook-templates",
-      "content": "\n# Incident Runbook Templates\n\nProduction-ready templates for incident response runbooks covering detection, triage, mitigation, resolution, and communication.\n\n## Do not use this skill when\n\n- The task is unrelated to incident runbook templates\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Use this skill when\n\n- Creating incident response procedures\n- Building service-specific runbooks\n- Establishing escalation paths\n- Documenting recovery procedures\n- Responding to active incidents\n- Onboarding on-call engineers\n\n## Core Concepts\n\n### 1. Incident Severity Levels\n\n| Severity | Impact | Response Time | Example |\n|----------|--------|---------------|---------|\n| **SEV1** | Complete outage, data loss | 15 min | Production down |\n| **SEV2** | Major degradation | 30 min | Critical feature broken |\n| **SEV3** | Minor impact | 2 hours | Non-critical bug |\n| **SEV4** | Minimal impact | Next business day | Cosmetic issue |\n\n### 2. Runbook Structure\n\n```\n1. Overview & Impact\n2. Detection & Alerts\n3. Initial Triage\n4. Mitigation Steps\n5. Root Cause Investigation\n6. Resolution Procedures\n7. Verification & Rollback\n8. Communication Templates\n9. Escalation Matrix\n```\n\n## Runbook Templates\n\n### Template 1: Service Outage Runbook\n\n```markdown\n# [Service Name] Outage Runbook\n\n## Overview\n**Service**: Payment Processing Service\n**Owner**: Platform Team\n**Slack**: #payments-incidents\n**PagerDuty**: payments-oncall\n\n## Impact Assessment\n- [ ] Which customers are affected?\n- [ ] What percentage of traffic is impacted?\n- [ ] Are there financial implications?\n- [ ] What's the blast radius?\n\n## Detection\n### Alerts\n- `payment_error_rate > 5%` (PagerDuty)\n- `payment_latency_p99 > 2s` (Slack)\n- `payment_success_rate < 95%` (PagerDuty)\n\n### Dashboards\n- [Payment Service Dashboard](https://grafana/d/payments)\n- [Error Tracking](https://sentry.io/payments)\n- [Dependency Status](https://status.stripe.com)\n\n## Initial Triage (First 5 Minutes)\n\n### 1. Assess Scope\n```bash\n# Check service health\nkubectl get pods -n payments -l app=payment-service\n\n# Check recent deployments\nkubectl rollout history deployment/payment-service -n payments\n\n# Check error rates\ncurl -s \"http://prometheus:9090/api/v1/query?query=sum(rate(http_requests_total{status=~'5..'}[5m]))\"\n```\n\n### 2. Quick Health Checks\n- [ ] Can you reach the service? `curl -I https://api.company.com/payments/health`\n- [ ] Database connectivity? Check connection pool metrics\n- [ ] External dependencies? Check Stripe, bank API status\n- [ ] Recent changes? Check deploy history\n\n### 3. Initial Classification\n| Symptom | Likely Cause | Go To Section |\n|---------|--------------|---------------|\n| All requests failing | Service down | Section 4.1 |\n| High latency | Database/dependency | Section 4.2 |\n| Partial failures | Code bug | Section 4.3 |\n| Spike in errors | Traffic surge | Section 4.4 |\n\n## Mitigation Procedures\n\n### 4.1 Service Completely Down\n```bash\n# Step 1: Check pod status\nkubectl get pods -n payments\n\n# Step 2: If pods are crash-looping, check logs\nkubectl logs -n payments -l app=payment-service --tail=100\n\n# Step 3: Check recent deployments\nkubectl rollout history deployment/payment-service -n payments\n\n# Step 4: ROLLBACK if recent deploy is suspect\nkubectl rollout undo deployment/payment-service -n payments\n\n# Step 5: Scale up if resource constrained\nkubectl scale deployment/payment-service -n payments --replicas=10\n\n# Step 6: Verify recovery\nkubectl rollout status deployment/payment-service -n payments\n```\n\n### 4.2 High Latency\n```bash\n# Step 1: Check database connections\nkubectl exec -n payments deploy/payment-service -- \\\n  curl localhost:8080/metrics | grep db_pool\n\n# Step 2: Check slow queries (if DB issue)\npsql -h $DB_HOST -U $DB_USER -c \"\n  SELECT pid, now() - query_start AS duration, query\n  FROM pg_stat_activity\n  WHERE state = 'active' AND duration > interval '5 seconds'\n  ORDER BY duration DESC;\"\n\n# Step 3: Kill long-running queries if needed\npsql -h $DB_HOST -U $DB_USER -c \"SELECT pg_terminate_backend(pid);\"\n\n# Step 4: Check external dependency latency\ncurl -w \"@curl-format.txt\" -o /dev/null -s https://api.stripe.com/v1/health\n\n# Step 5: Enable circuit breaker if dependency is slow\nkubectl set env deployment/payment-service \\\n  STRIPE_CIRCUIT_BREAKER_ENABLED=true -n payments\n```\n\n### 4.3 Partial Failures (Specific Errors)\n```bash\n# Step 1: Identify error pattern\nkubectl logs -n payments -l app=payment-service --tail=500 | \\\n  grep -i error | sort | uniq -c | sort -rn | head -20\n\n# Step 2: Check error tracking\n# Go to Sentry: https://sentry.io/payments\n\n# Step 3: If specific endpoint, enable feature flag to disable\ncurl -X POST https://api.company.com/internal/feature-flags \\\n  -d '{\"flag\": \"DISABLE_PROB",
-      "tags": [
-        "markdown",
-        "api",
-        "ai",
-        "template",
-        "document",
-        "security",
-        "stripe",
-        "kubernetes"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:20.463Z"
-    },
-    {
       "id": "anthropic-internal-comms",
       "name": "internal-comms",
       "slug": "internal-comms",
@@ -27165,14 +27175,14 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 389
+      "count": 390
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 350
+      "count": 349
     },
     {
       "id": "creative-media",
@@ -27237,55 +27247,55 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 285040
+      "stars": 285559
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 175765
+      "stars": 175911
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 74853
+      "stars": 74902
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 87365
+      "stars": 87596
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1732
+      "stars": 1736
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
-      "newSkillCount": 6,
-      "stars": 46268
+      "newSkillCount": 8,
+      "stars": 46307
     },
     {
       "name": "Xquik",
       "url": "https://github.com/Xquik-dev/x-twitter-scraper",
       "skillCount": 1,
       "newSkillCount": 0,
-      "stars": 195
+      "stars": 196
     }
   ],
-  "lastUpdated": "2026-09-11T11:11:58.074Z",
+  "lastUpdated": "2026-09-12T10:38:28.066Z",
   "stats": {
     "totalSkills": 1136,
-    "newSkills": 15,
-    "scrapedAt": "2026-09-11T11:11:58.074Z"
+    "newSkills": 17,
+    "scrapedAt": "2026-09-12T10:38:28.066Z"
   }
 }
