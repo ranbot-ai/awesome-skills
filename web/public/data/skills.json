@@ -22532,6 +22532,36 @@
       "scrapedAt": "2026-01-29T06:59:12.795Z"
     },
     {
+      "id": "antigravity-glasser",
+      "name": "glasser",
+      "slug": "glasser",
+      "description": "Search, inspect, and run third-party data APIs through one CLI when the environment has no suitable integration.",
+      "category": "Business & Marketing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/glasser",
+      "content": "\n# Glasser\n\n## Overview\n\nGlasser is a commercial API broker that exposes third-party data providers\nthrough one CLI and one account. Use it to fill a data gap after checking the\nenvironment's free tools and the user's existing integrations. Provider output\nkeeps its native structure, so inspect the selected endpoint before every run.\n\nThis skill was contributed by a member of the Glasser team.\n\n## When to Use This Skill\n\n- Use when a task needs current web, news, search, social, business, people,\n  places, shopping, image, video, or enrichment data that available tools\n  cannot supply.\n- Use when the user wants pay-per-call access without creating a separate\n  account with the underlying provider.\n- Use for marketing and research workflows that need structured evidence from\n  a named data provider.\n- Prefer the user's explicit provider choice, existing API keys, installed\n  integrations, and free tools before Glasser.\n\n## How It Works\n\n### Step 1: Check Availability and Authentication\n\nUse the CLI only if it is already installed or the user has approved its\ninstallation under the host environment's software-installation policy.\nInstallation instructions are maintained at\n<https://glasser.ai/SKILL.md>. Do not download or install executable code\nwithout the review and approval required by the current environment.\n\nCheck the CLI and account:\n\n```bash\nglasser --version\nglasser balance\n```\n\nIf authentication is missing in an interactive session, run `glasser login`.\nIt opens a browser-based device flow. Relay the URL and code printed by the CLI\nand wait for the command to finish. Never ask the user to paste a Key into chat.\n\nFor unattended environments, the user can configure `GLASSER_API_KEY` through\nthe environment's secret manager. Never write it to a project file or include\nit in a command argument.\n\n### Step 2: Discover Candidate Endpoints\n\nSearch by capability instead of guessing a provider or endpoint:\n\n```bash\nglasser search -q \"Google search results\"\nglasser search -q \"company enrichment\"\nglasser search -q \"Reddit posts and comments\"\n```\n\nCompare the provider, endpoint, and listed price. Search results are ranked by\nrelevance; rank is not a quality or price recommendation.\n\n### Step 3: Inspect the Contract\n\nInspect the exact endpoint before constructing input:\n\n```bash\nglasser inspect -p serper -e /search\n```\n\nRecord:\n\n- the current price and all charge clauses;\n- required and optional input fields;\n- fields that control result volume;\n- run mode and timeout;\n- the provider that will receive the request.\n\nSchemas, prices, and charge clauses can change. The live `inspect` result is\nthe contract for the next run.\n\n### Step 4: Authorize the Paid Scope\n\nOnly `run` spends the workspace balance. Before the first paid call, show the\nuser the provider, endpoint, per-call price, charge exceptions, input scope,\nand requested result volume. Wait for approval unless the user already gave an\nexact scope or budget that covers the call.\n\nCreate the provider-native JSON input in a file after inspection. A file avoids\nshell-quoting errors and keeps the request reviewable. Do not include unrelated\npersonal, confidential, or credential data.\n\n### Step 5: Run and Recover Safely\n\nRun the approved request:\n\n```bash\nglasser run -p serper -e /search -f request.json --wait\n```\n\nThe CLI prints an Idempotency-Key. If a timeout or transport failure leaves the\noutcome uncertain, repeat the request with that same key:\n\n```bash\nglasser run -p serper -e /search -f request.json --idempotency-key <same-key> --wait\n```\n\nDo not create a new key for an ambiguous retry. It can create and charge a\nsecond run. For a known run, use `glasser runs get -r <run-id> --wait` instead\nof starting another one.\n\n### Step 6: Report Evidence and Cost\n\nFor every run used in the answer, report:\n\n1. the provider and endpoint;\n2. the Glasser run status;\n3. what the provider response says;\n4. the exact `Charge` printed by the CLI;\n5. the private `Run URL` printed by the CLI.\n\n`COMPLETED` means the provider answered. It does not guarantee that the\nprovider found a result, so describe both the run status and the payload.\n\n## Examples\n\n### Example 1: Research a Search Results Page\n\n```text\nFind a Google SERP endpoint in Glasser, show me its current price and input\nschema, and ask before running one query for \"best email marketing tools\".\n```\n\nThe agent searches the catalog, inspects the selected endpoint, obtains paid\nscope approval, writes input that matches the live schema, and returns sourced\nresults with the charge and Run URL.\n\n### Example 2: Fill a Company-Data Gap\n\n```text\nOur current tools cannot enrich these five companies. Find suitable Glasser\nendpoints, compare their prices and required inputs, and stop before spending.\n```\n\nThe agent returns a provider comparison without making a paid run.\n\n## Best Practices\n\n- Start with the smallest result count that can answer the question.\n- Reuse data already retrieved during the current task.\n- Keep exact decim",
+      "tags": [
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "image",
+        "security",
+        "rag",
+        "seo"
+      ],
+      "useCases": [
+        "Use when a task needs current web, news, search, social, business, people,",
+        "Use when the user wants pay-per-call access without creating a separate",
+        "Use for marketing and research workflows that need structured evidence from",
+        "Prefer the user's explicit provider choice, existing API keys, installed"
+      ],
+      "scrapedAt": "2026-09-13T11:39:45.444Z"
+    },
+    {
       "id": "antigravity-design-it-glassmorphism",
       "name": "glassmorphism",
       "slug": "design-it-glassmorphism",
@@ -25323,31 +25353,6 @@
       "scrapedAt": "2026-02-26T07:11:58.799Z"
     },
     {
-      "id": "antigravity-incident-response-incident-response",
-      "name": "incident-response-incident-response",
-      "slug": "incident-response-incident-response",
-      "description": "Use when working with incident response incident response",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/incident-response-incident-response",
-      "content": "\n## Use this skill when\n\n- Working on incident response incident response tasks or workflows\n- Needing guidance, best practices, or checklists for incident response incident response\n\n## Do not use this skill when\n\n- The task is unrelated to incident response incident response\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\nOrchestrate multi-agent incident response with modern SRE practices for rapid resolution and learning:\n\n[Extended thinking: This workflow implements a comprehensive incident command system (ICS) following modern SRE principles. Multiple specialized agents collaborate through defined phases: detection/triage, investigation/mitigation, communication/coordination, and resolution/postmortem. The workflow emphasizes speed without sacrificing accuracy, maintains clear communication channels, and ensures every incident becomes a learning opportunity through blameless postmortems and systematic improvements.]\n\n## Configuration\n\n### Severity Levels\n- **P0/SEV-1**: Complete outage, security breach, data loss - immediate all-hands response\n- **P1/SEV-2**: Major degradation, significant user impact - rapid response required\n- **P2/SEV-3**: Minor degradation, limited impact - standard response\n- **P3/SEV-4**: Cosmetic issues, no user impact - scheduled resolution\n\n### Incident Types\n- Performance degradation\n- Service outage\n- Security incident\n- Data integrity issue\n- Infrastructure failure\n- Third-party service disruption\n\n## Phase 1: Detection & Triage\n\n### 1. Incident Detection and Classification\n- Use Task tool with subagent_type=\"incident-responder\"\n- Prompt: \"URGENT: Detect and classify incident: $ARGUMENTS. Analyze alerts from PagerDuty/Opsgenie/monitoring. Determine: 1) Incident severity (P0-P3), 2) Affected services and dependencies, 3) User impact and business risk, 4) Initial incident command structure needed. Check error budgets and SLO violations.\"\n- Output: Severity classification, impact assessment, incident command assignments, SLO status\n- Context: Initial alerts, monitoring dashboards, recent changes\n\n### 2. Observability Analysis\n- Use Task tool with subagent_type=\"observability-monitoring::observability-engineer\"\n- Prompt: \"Perform rapid observability sweep for incident: $ARGUMENTS. Query: 1) Distributed tracing (OpenTelemetry/Jaeger), 2) Metrics correlation (Prometheus/Grafana/DataDog), 3) Log aggregation (ELK/Splunk), 4) APM data, 5) Real User Monitoring. Identify anomalies, error patterns, and service degradation points.\"\n- Output: Observability findings, anomaly detection, service health matrix, trace analysis\n- Context: Severity level from step 1, affected services\n\n### 3. Initial Mitigation\n- Use Task tool with subagent_type=\"incident-responder\"\n- Prompt: \"Implement immediate mitigation for P$SEVERITY incident: $ARGUMENTS. Actions: 1) Traffic throttling/rerouting if needed, 2) Feature flag disabling for affected features, 3) Circuit breaker activation, 4) Rollback assessment for recent deployments, 5) Scale resources if capacity-related. Prioritize user experience restoration.\"\n- Output: Mitigation actions taken, temporary fixes applied, rollback decisions\n- Context: Observability findings, severity classification\n\n## Phase 2: Investigation & Root Cause Analysis\n\n### 4. Deep System Debugging\n- Use Task tool with subagent_type=\"error-debugging::debugger\"\n- Prompt: \"Conduct deep debugging for incident: $ARGUMENTS using observability data. Investigate: 1) Stack traces and error logs, 2) Database query performance and locks, 3) Network latency and timeouts, 4) Memory leaks and CPU spikes, 5) Dependency failures and cascading errors. Apply Five Whys analysis.\"\n- Output: Root cause identification, contributing factors, dependency impact map\n- Context: Observability analysis, mitigation status\n\n### 5. Security Assessment\n- Use Task tool with subagent_type=\"security-scanning::security-auditor\"\n- Prompt: \"Assess security implications of incident: $ARGUMENTS. Check: 1) DDoS attack indicators, 2) Authentication/authorization failures, 3) Data exposure risks, 4) Certificate issues, 5) Suspicious access patterns. Review WAF logs, security groups, and audit trails.\"\n- Output: Security assessment, breach analysis, vulnerability identification\n- Context: Root cause findings, system logs\n\n### 6. Performance Engineering Analysis\n- Use Task tool with subagent_type=\"application-performance::performance-engineer\"\n- Prompt: \"Analyze performance aspects of incident: $ARGUMENTS. Examine: 1) Resource utilization patterns, 2) Query optimization opportunities, 3) Caching effectiveness, 4) Load balancer health, 5) CDN performance, 6) Autoscaling triggers. Identify bottlenecks and capacity issues.\"\n- Output: Performance bottlenecks, resource reco",
-      "tags": [
-        "api",
-        "ai",
-        "agent",
-        "automation",
-        "workflow",
-        "design",
-        "document",
-        "security",
-        "vulnerability",
-        "marketing"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:19.688Z"
-    },
-    {
       "id": "anthropic-internal-comms",
       "name": "internal-comms",
       "slug": "internal-comms",
@@ -27203,14 +27208,14 @@
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 66
+      "count": 65
     },
     {
       "id": "business-marketing",
       "name": "Business & Marketing",
       "description": "Skills for marketing, branding, lead generation, and business operations.",
       "icon": "briefcase",
-      "count": 43
+      "count": 44
     },
     {
       "id": "productivity-organization",
@@ -27247,55 +27252,55 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 285559
+      "stars": 285983
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 175911
+      "stars": 176045
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 74902
+      "stars": 74937
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 87596
+      "stars": 87727
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1736
+      "stars": 1737
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
-      "newSkillCount": 8,
-      "stars": 46307
+      "newSkillCount": 7,
+      "stars": 46349
     },
     {
       "name": "Xquik",
       "url": "https://github.com/Xquik-dev/x-twitter-scraper",
       "skillCount": 1,
       "newSkillCount": 0,
-      "stars": 196
+      "stars": 198
     }
   ],
-  "lastUpdated": "2026-09-12T10:38:28.066Z",
+  "lastUpdated": "2026-09-13T11:41:07.105Z",
   "stats": {
     "totalSkills": 1136,
-    "newSkills": 17,
-    "scrapedAt": "2026-09-12T10:38:28.066Z"
+    "newSkills": 16,
+    "scrapedAt": "2026-09-13T11:41:07.105Z"
   }
 }
