@@ -27252,42 +27252,42 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 285983
+      "stars": 286477
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 176045
+      "stars": 176225
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 74937
+      "stars": 75002
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 87727
+      "stars": 87851
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1737
+      "stars": 1738
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
-      "newSkillCount": 7,
-      "stars": 46349
+      "newSkillCount": 6,
+      "stars": 46390
     },
     {
       "name": "Xquik",
@@ -27297,10 +27297,10 @@
       "stars": 198
     }
   ],
-  "lastUpdated": "2026-09-13T11:41:07.105Z",
+  "lastUpdated": "2026-09-14T12:31:19.235Z",
   "stats": {
     "totalSkills": 1136,
-    "newSkills": 16,
-    "scrapedAt": "2026-09-13T11:41:07.105Z"
+    "newSkills": 15,
+    "scrapedAt": "2026-09-14T12:31:19.235Z"
   }
 }
