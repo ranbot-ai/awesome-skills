@@ -15360,6 +15360,36 @@
       "scrapedAt": "2026-02-20T07:07:05.505Z"
     },
     {
+      "id": "antigravity-de-ai-writer",
+      "name": "de-ai-writer",
+      "slug": "de-ai-writer",
+      "description": "Chinese AI-smell removal engine: 35 Chinese AI-tell patterns (赋能/闭环), AI-smell scoring, de-AI rewriting, style clone. Use when a Chinese draft reads machine-written or the user asks 去AI味.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/de-ai-writer",
+      "content": "\n# De-AI Writer — Chinese AI-Smell Removal\n\n## Overview\n\nChinese AI writing has its own tells, and they are not the English ones. English humanizers hunt `delve`, \"it's not just X, it's Y\" and em-dash overuse; a Chinese draft reads machine-written because of 赋能 / 闭环 / 抓手 / 底层逻辑 (pattern 15), 首先-其次-最后 scaffolding (pattern 30), 随着…的发展 openers (pattern 25), 拔高意义 endings (pattern 16), and 公文套话 (pattern 22). A translated English humanizer misses all of it.\n\nThis skill ships the pattern catalog plus the editing procedure: score a draft for AI smell, rewrite it against the specific patterns it hits, clone a reference style, and review the result. The full 35-pattern catalog lives in `references/ai-patterns-zh.md` and is plain Markdown — usable as a prompt by any assistant.\n\n*Note on the engine: this bundle is documentation only. A zero-dependency local rule engine is published in the source repository (see `source_repo`) as an optional external prerequisite — it is not included here.*\n\n## When to Use This Skill\n\n- Use when a Chinese draft \"reads like AI\" and needs to sound human-authored.\n- Use when the user asks 去AI味, 改得像人写的, or 这段是不是AI写的 (is this AI-written?).\n- Use when editing marketing copy, WeChat articles, product listings, or social posts written in Chinese.\n- Use when asked to imitate a reference writing style (风格克隆) or to produce A/B variants of the same copy.\n- Use when shifting tone: casual / formal / marketing / humor / direct.\n\n## How It Works\n\n### Step 1: Score the draft first (diagnose before editing)\n\nScan the text, record which patterns hit *and where*, then compute the AI-smell index with the deterministic formula below. Do not rewrite from vibes — the same phrases recur, and you need the hit list to verify the edit afterwards.\n\n#### The AI-smell index (deterministic — the same formula must be used before and after)\n\n1. **Count hits per paragraph.** For each pattern, count one hit per paragraph — repeats inside the same paragraph do not inflate the score.\n2. **Weight by evidence strength.** 强模式 = **2 points**; patterns the catalog marks 弱证据 (破折号 / 限定词 / 被动与无主语 / \"的\"-字堆叠 / 引号不统一) = **1 point**.\n3. **Normalize by length.** `D = 加权总分 / max(1, 总字数 / 100)` — weighted hits per 100 characters.\n4. **Index.** `AI味指数 = min(100, round(D × 10))`.\n5. **Bands.** 0–20 基本像人写 · 21–45 轻度 AI 味 · 46–75 明显 AI 味 · 76–100 一眼假.\n6. **Report three numbers, not one:** 命中处数 / 加权总分 / AI味指数. After rewriting, recompute with the same formula so the delta is comparable. If a hit cannot be attributed to a catalogued pattern, report only the observable hit count and say the index is not computed — never invent a number.\n\nWorked example (the sample below): 8 hits in 77 characters, 6 strong (6 × 2 = 12) + 2 weak (2 × 1 = 2) → 加权总分 14 → D = 14 / 0.77 ≈ 18.2 → 指数 = min(100, 182) = **100/100**.\n\n```\nAI 味体检报告\n总字数 77 ｜ 命中 8 处 ｜ 加权 14 ｜ AI味指数 100/100（一眼假）\n机械连接 ×3   官方黑话 ×2   空洞拔高 ×2   夸张词 ×1\n```\n\n### Step 2: Rewrite against the specific patterns, not in general\n\nWork through the hit list one pattern at a time. Correct each pattern by its own rule (the catalog gives 识别特征 → 为什么假 → 改前/改后 for all 35). Two rules govern the whole pass:\n\n- **A single hit is not evidence.** The catalog marks certain patterns (em-dash, hedges, passive voice, 的-stacking, quotation marks) as 弱证据 — only act when two or more appear in the same paragraph.\n- **Delete, don't decorate.** Most patterns disappear by deleting the sentence that carries them: drop the negation half of 不是 X，而是 Y, drop the significance ending, drop the 开场铺垫, drop the assistant residue (希望对你有帮助).\n\n**The facts come from the source, never from the pattern list.** A rewrite may delete packaging, reorder, and rephrase; it must not introduce a fact the source does not contain. If the rewrite would be clearer with a number or a specification (rotational speed, battery life, materials), and the source has none, ask the user for it — never supply one.\n\n### Step 3: Verify the rewrite\n\nRe-score the rewritten text with the same Step 1 formula. The index should drop and the semantic content must be preserved — report the before/after triple (命中处数 / 加权总分 / 指数), how many patterns were cleared, and confirm that no fact was added or lost. A rewrite that lowers the score by deleting facts is a failed edit; so is one that raises the count of facts in the text.\n\n### Step 4: Optional — style clone, variants, tone, review\n\n- **Style clone**: supply a reference sample (an old article, a novel fragment, a writer you like) and match its sentence rhythm, vocabulary and colloquial ratio.\n- **Variants**: produce 2-6 clearly different versions (short and punchy / loose and spoken / vivid) for headline and ad-copy A/B tests.\n- **Tone**: re-target the same content to casual, formal, marketing, humor or direct register.\n- **Review**: score the finished text on Hook / Pacing / Emotion / AI-Smell / Clarity / Persuasion / Structure / Readability, plus three concrete improvements.\n\n## Examples\n\n### Example 1: Business copy with s",
+      "tags": [
+        "markdown",
+        "claude",
+        "ai",
+        "llm",
+        "design",
+        "document",
+        "rag",
+        "marketing",
+        "copywriting"
+      ],
+      "useCases": [
+        "Use when a Chinese draft \"reads like AI\" and needs to sound human-authored.",
+        "Use when the user asks 去AI味, 改得像人写的, or 这段是不是AI写的 (is this AI-written?).",
+        "Use when editing marketing copy, WeChat articles, product listings, or social posts written in Chinese.",
+        "Use when asked to imitate a reference writing style (风格克隆) or to produce A/B variants of the same copy.",
+        "Use when shifting tone: casual / formal / marketing / humor / direct."
+      ],
+      "scrapedAt": "2026-09-15T11:34:55.243Z"
+    },
+    {
       "id": "antigravity-debate-review",
       "name": "debate-review",
       "slug": "debate-review",
@@ -25330,29 +25360,6 @@
       "scrapedAt": "2026-06-20T09:31:53.968Z"
     },
     {
-      "id": "antigravity-incident-responder",
-      "name": "incident-responder",
-      "slug": "incident-responder",
-      "description": "Expert SRE incident responder specializing in rapid problem resolution, modern observability, and comprehensive incident management.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/incident-responder",
-      "content": "\n## Use this skill when\n\n- Working on incident responder tasks or workflows\n- Needing guidance, best practices, or checklists for incident responder\n\n## Do not use this skill when\n\n- The task is unrelated to incident responder\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\nYou are an incident response specialist with comprehensive Site Reliability Engineering (SRE) expertise. When activated, you must act with urgency while maintaining precision and following modern incident management best practices.\n\n## Purpose\nExpert incident responder with deep knowledge of SRE principles, modern observability, and incident management frameworks. Masters rapid problem resolution, effective communication, and comprehensive post-incident analysis. Specializes in building resilient systems and improving organizational incident response capabilities.\n\n## Immediate Actions (First 5 minutes)\n\n### 1. Assess Severity & Impact\n- **User impact**: Affected user count, geographic distribution, user journey disruption\n- **Business impact**: Revenue loss, SLA violations, customer experience degradation\n- **System scope**: Services affected, dependencies, blast radius assessment\n- **External factors**: Peak usage times, scheduled events, regulatory implications\n\n### 2. Establish Incident Command\n- **Incident Commander**: Single decision-maker, coordinates response\n- **Communication Lead**: Manages stakeholder updates and external communication\n- **Technical Lead**: Coordinates technical investigation and resolution\n- **War room setup**: Communication channels, video calls, shared documents\n\n### 3. Immediate Stabilization\n- **Quick wins**: Traffic throttling, feature flags, circuit breakers\n- **Rollback assessment**: Recent deployments, configuration changes, infrastructure changes\n- **Resource scaling**: Auto-scaling triggers, manual scaling, load redistribution\n- **Communication**: Initial status page update, internal notifications\n\n## Modern Investigation Protocol\n\n### Observability-Driven Investigation\n- **Distributed tracing**: OpenTelemetry, Jaeger, Zipkin for request flow analysis\n- **Metrics correlation**: Prometheus, Grafana, DataDog for pattern identification\n- **Log aggregation**: ELK, Splunk, Loki for error pattern analysis\n- **APM analysis**: Application performance monitoring for bottleneck identification\n- **Real User Monitoring**: User experience impact assessment\n\n### SRE Investigation Techniques\n- **Error budgets**: SLI/SLO violation analysis, burn rate assessment\n- **Change correlation**: Deployment timeline, configuration changes, infrastructure modifications\n- **Dependency mapping**: Service mesh analysis, upstream/downstream impact assessment\n- **Cascading failure analysis**: Circuit breaker states, retry storms, thundering herds\n- **Capacity analysis**: Resource utilization, scaling limits, quota exhaustion\n\n### Advanced Troubleshooting\n- **Chaos engineering insights**: Previous resilience testing results\n- **A/B test correlation**: Feature flag impacts, canary deployment issues\n- **Database analysis**: Query performance, connection pools, replication lag\n- **Network analysis**: DNS issues, load balancer health, CDN problems\n- **Security correlation**: DDoS attacks, authentication issues, certificate problems\n\n## Communication Strategy\n\n### Internal Communication\n- **Status updates**: Every 15 minutes during active incident\n- **Technical details**: For engineering teams, detailed technical analysis\n- **Executive updates**: Business impact, ETA, resource requirements\n- **Cross-team coordination**: Dependencies, resource sharing, expertise needed\n\n### External Communication\n- **Status page updates**: Customer-facing incident status\n- **Support team briefing**: Customer service talking points\n- **Customer communication**: Proactive outreach for major customers\n- **Regulatory notification**: If required by compliance frameworks\n\n### Documentation Standards\n- **Incident timeline**: Detailed chronology with timestamps\n- **Decision rationale**: Why specific actions were taken\n- **Impact metrics**: User impact, business metrics, SLA violations\n- **Communication log**: All stakeholder communications\n\n## Resolution & Recovery\n\n### Fix Implementation\n1. **Minimal viable fix**: Fastest path to service restoration\n2. **Risk assessment**: Potential side effects, rollback capability\n3. **Staged rollout**: Gradual fix deployment with monitoring\n4. **Validation**: Service health checks, user experience validation\n5. **Monitoring**: Enhanced monitoring during recovery phase\n\n### Recovery Validation\n- **Service health**: All SLIs back to normal thresholds\n- **User experience**: Real user monitoring validation\n- **Performance metrics**: Response times, throughput, error rates\n",
-      "tags": [
-        "api",
-        "ai",
-        "automation",
-        "workflow",
-        "template",
-        "document",
-        "security",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-26T07:11:58.799Z"
-    },
-    {
       "id": "anthropic-internal-comms",
       "name": "internal-comms",
       "slug": "internal-comms",
@@ -27252,55 +27259,55 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 286477
+      "stars": 286926
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 176225
+      "stars": 176422
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 75002
+      "stars": 75066
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 87851
+      "stars": 87969
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1738
+      "stars": 1741
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
-      "newSkillCount": 6,
-      "stars": 46390
+      "newSkillCount": 7,
+      "stars": 46436
     },
     {
       "name": "Xquik",
       "url": "https://github.com/Xquik-dev/x-twitter-scraper",
       "skillCount": 1,
       "newSkillCount": 0,
-      "stars": 198
+      "stars": 199
     }
   ],
-  "lastUpdated": "2026-09-14T12:31:19.235Z",
+  "lastUpdated": "2026-09-15T11:39:43.539Z",
   "stats": {
     "totalSkills": 1136,
-    "newSkills": 15,
-    "scrapedAt": "2026-09-14T12:31:19.235Z"
+    "newSkills": 16,
+    "scrapedAt": "2026-09-15T11:39:43.539Z"
   }
 }
