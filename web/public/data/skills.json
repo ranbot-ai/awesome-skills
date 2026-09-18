@@ -8224,6 +8224,35 @@
       "scrapedAt": "2026-03-22T07:01:47.262Z"
     },
     {
+      "id": "antigravity-beatra-ai-video-studio",
+      "name": "beatra-ai-video-studio",
+      "slug": "beatra-ai-video-studio",
+      "description": "Install and use the official Beatra AI Video Studio package, pinned by digest, for paid text-to-video, image-to-video, and video edit or extend jobs on the hosted Beatra service.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/beatra-ai-video-studio",
+      "content": "\n# Beatra AI Video Studio\n\n## Overview\n\nBeatra AI Video Studio is Beatra's official agent package for short AI video\nwork: text-to-video, image-to-video, first/last-frame interpolation,\nreference-guided generation, and editing or extending an existing clip. The\nvideo is produced on the hosted, paid Beatra service (`mcp.beatra.ai`).\n\nThis catalog entry is a **reviewed pointer, not the executable package**. It\ncontains no client code and performs no Beatra operation by itself. The package\nit points to bundles three standard-library Python scripts that make network\ncalls, store a credential, and can replace their own files. Read\n[Install](#install-pinned-verified-approved-twice) and\n[Security & Safety Notes](#security--safety-notes) before activating it.\n\n| Pinned identity | Value |\n| --- | --- |\n| Package | `beatra-ai-video-studio` `1.2.5` |\n| Archive | `https://cdn.beatra.ai/agent-packages/beatra-ai-video-studio/v1.2.5/beatra-ai-video-studio-skill-1.2.5.zip` |\n| Archive SHA-256 | `679a3ddc06c7be631ef31f002f918465a26f17a189ffac723f45dfd348e1fc4a` |\n| Source tree | [`beatra-ai/beatra-skills@95d662f`](https://github.com/beatra-ai/beatra-skills/tree/95d662f7aeddd6e2aa6da9e14f9c985e3f6b914d/skills/beatra-ai-video-studio) (full SHA `95d662f7aeddd6e2aa6da9e14f9c985e3f6b914d`) |\n| License | MIT No Attribution (MIT-0) |\n\nThe archive holds 17 regular files (no symlinks, no executable bits, no\nbinaries), and every file is byte-identical to the source tree at that commit.\n\n## When to Use This Skill\n\n- Use when the user explicitly wants a short AI video clip produced on Beatra\n  and accepts that the work is paid and runs on a hosted service.\n- Use when a still image should be animated, two frames interpolated, or an\n  existing clip edited or extended by Beatra.\n- Do not use for local-only or offline video editing, timeline assembly, or\n  when the user has not agreed to send prompts and media to a third party.\n\n## Install (pinned, verified, approved twice)\n\n### Step 1: Download and verify into a review directory\n\nExplain that this downloads an external package from `cdn.beatra.ai`, then ask\nfor approval. Only after approval:\n\n```bash\numask 077\nreview_dir=\"$(mktemp -d)\"\ncd \"$review_dir\" || exit 1\ncurl -fsSLO \"https://cdn.beatra.ai/agent-packages/beatra-ai-video-studio/v1.2.5/beatra-ai-video-studio-skill-1.2.5.zip\"\nprintf '%s  %s\\n' \\\n  '679a3ddc06c7be631ef31f002f918465a26f17a189ffac723f45dfd348e1fc4a' \\\n  'beatra-ai-video-studio-skill-1.2.5.zip' | shasum -a 256 -c -\n```\n\nStop if the check does not print `OK`. The expected digest comes from this\ncatalog entry, not from a file on the same CDN.\n\n### Step 2: Inspect before activation\n\n```bash\nunzip -l beatra-ai-video-studio-skill-1.2.5.zip\nunzip -q beatra-ai-video-studio-skill-1.2.5.zip\nfind beatra-ai-video-studio -type l -print            # expect no output\nfind beatra-ai-video-studio -type f -perm -111 -print # expect no output\ngrep -n '\"auto_update\": True' beatra-ai-video-studio/scripts/mcp_client.py\n```\n\nOptionally confirm byte identity with the public source tree (a second,\nindependent host):\n\n```bash\ngit clone --quiet --filter=blob:none --no-checkout https://github.com/beatra-ai/beatra-skills.git src\ngit -C src checkout --quiet 95d662f7aeddd6e2aa6da9e14f9c985e3f6b914d -- skills/beatra-ai-video-studio\n(cd beatra-ai-video-studio && find . -type f | LC_ALL=C sort | xargs shasum -a 256) > archive.sha\n(cd src/skills/beatra-ai-video-studio && find . -type f | LC_ALL=C sort | xargs shasum -a 256) > tree.sha\ncmp archive.sha tree.sha && echo IDENTICAL\n```\n\nReport to the user what the review found: `SKILL.md`, `manifest.json`, 12\nMarkdown references, and `scripts/authorize.py`, `scripts/mcp_client.py`,\n`scripts/uninstall.py` (Python 3.10+, standard library only, no dependency\ninstallation, no lifecycle hooks). Summarize the network, credential,\nlocal-state, telemetry, and self-update behavior listed under\n[Security & Safety Notes](#security--safety-notes).\n\n### Step 3: Copy in and disable self-update before any other command\n\nAsk for a **second, separate** approval, because this changes agent\nconfiguration. Then copy the reviewed tree to the host's skills directory\n(Claude Code shown; use the equivalent path for other hosts) and immediately\nturn off silent self-update for that exact path:\n\n```bash\ndest=\"$HOME/.claude/skills/beatra-ai-video-studio\"\ntest ! -e \"$dest\" || { echo \"destination exists; stop and ask the user\"; exit 1; }\ncp -R beatra-ai-video-studio \"$dest\"\npython3 \"$dest/scripts/mcp_client.py\" update --auto off\n```\n\nThe last command must print\n`Automatic Beatra package updates are disabled.` It writes only\n`~/.beatra/updates/<id>/state.json` and makes no network request. Run it\nbefore `authorize.py`, `verify`, `tools`, `upload`, or `call`: in version 1.2.5\nself-update is **on by default** (see below). The setting is keyed to the\nresolved install path, so repeat it after moving or re-copying the directory.\n\n### Step 4: Authorize as its own decision\n\nAuthorization opens a b",
+      "tags": [
+        "python",
+        "markdown",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "document",
+        "image",
+        "security"
+      ],
+      "useCases": [
+        "Use when the user explicitly wants a short AI video clip produced on Beatra",
+        "Use when a still image should be animated, two frames interpolated, or an",
+        "Do not use for local-only or offline video editing, timeline assembly, or"
+      ],
+      "scrapedAt": "2026-09-18T11:00:17.786Z"
+    },
+    {
       "id": "antigravity-beautiful-prose",
       "name": "beautiful-prose",
       "slug": "beautiful-prose",
@@ -25334,32 +25363,6 @@
       "scrapedAt": "2026-07-02T09:28:34.347Z"
     },
     {
-      "id": "antigravity-improve-codebase-architecture",
-      "name": "improve-codebase-architecture",
-      "slug": "improve-codebase-architecture",
-      "description": "Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.",
-      "category": "Creative & Media",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/improve-codebase-architecture",
-      "content": "\n# Improve Codebase Architecture\n\n## When to Use\n\nUse when this workflow matches the user request: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.\n\n\n_Source: [mattpocock/skills](https://github.com/mattpocock/skills) (MIT)._\n\nSurface architectural friction and propose **deepening opportunities** — refactors that turn shallow modules into deep ones. The aim is testability and AI-navigability.\n\nThis command is _informed_ by the project's domain model and built on a shared design vocabulary:\n\n- Run the `/codebase-design` skill for the architecture vocabulary (**module**, **interface**, **depth**, **seam**, **adapter**, **leverage**, **locality**) and its principles (the deletion test, \"the interface is the test surface\", \"one adapter = hypothetical seam, two = real\"). Use these terms exactly in every suggestion — don't drift into \"component,\" \"service,\" \"API,\" or \"boundary.\"\n- The domain language in `CONTEXT.md` gives names to good seams; ADRs in `docs/adr/` record decisions this command should not re-litigate.\n\n## Process\n\n### 1. Explore\n\nRead the project's domain glossary (`CONTEXT.md`) and any ADRs in the area you're touching first.\n\nThen use the Agent tool with `subagent_type=Explore` to walk the codebase. Don't follow rigid heuristics — explore organically and note where you experience friction:\n\n- Where does understanding one concept require bouncing between many small modules?\n- Where are modules **shallow** — interface nearly as complex as the implementation?\n- Where have pure functions been extracted just for testability, but the real bugs hide in how they're called (no **locality**)?\n- Where do tightly-coupled modules leak across their seams?\n- Which parts of the codebase are untested, or hard to test through their current interface?\n\nApply the **deletion test** to anything you suspect is shallow: would deleting it concentrate complexity, or just move it? A \"yes, concentrates\" is the signal you want.\n\n### 2. Present candidates as an HTML report\n\nWrite a self-contained HTML file to the OS temp directory so nothing lands in the repo. Resolve the temp dir from `$TMPDIR`, falling back to `/tmp` (or `%TEMP%` on Windows), and write to `<tmpdir>/architecture-review-<timestamp>.html` so each run gets a fresh file. Open it for the user — `xdg-open <path>` on Linux, `open <path>` on macOS, `start <path>` on Windows — and tell them the absolute path.\n\nThe report uses **Tailwind via CDN** for layout and styling, and **Mermaid via CDN** for diagrams where a graph/flow/sequence reliably communicates the structure. Mix Mermaid with hand-crafted CSS/SVG visuals — use Mermaid when relationships are graph-shaped (call graphs, dependencies, sequences), and hand-built divs/SVG when you want something more editorial (mass diagrams, cross-sections, collapse animations). Each candidate gets a **before/after visualisation**. Be visual.\n\nFor each candidate, render a card with:\n\n- **Files** — which files/modules are involved\n- **Problem** — why the current architecture is causing friction\n- **Solution** — plain English description of what would change\n- **Benefits** — explained in terms of locality and leverage, and how tests would improve\n- **Before / After diagram** — side-by-side, custom-drawn, illustrating the shallowness and the deepening\n- **Recommendation strength** — one of `Strong`, `Worth exploring`, `Speculative`, rendered as a badge\n\nEnd the report with a **Top recommendation** section: which candidate you'd tackle first and why.\n\n**Use CONTEXT.md vocabulary for the domain, and the `/codebase-design` vocabulary for the architecture.** If `CONTEXT.md` defines \"Order,\" talk about \"the Order intake module\" — not \"the FooBarHandler,\" and not \"the Order service.\"\n\n**ADR conflicts**: if a candidate contradicts an existing ADR, only surface it when the friction is real enough to warrant revisiting the ADR. Mark it clearly in the card (e.g. a warning callout: _\"contradicts ADR-0007 — but worth reopening because…\"_). Don't list every theoretical refactor an ADR forbids.\n\nSee [HTML-REPORT.md](HTML-REPORT.md) for the full HTML scaffold, diagram patterns, and styling guidance.\n\nDo NOT propose interfaces yet. After the file is written, ask the user: \"Which of these would you like to explore?\"\n\n### 3. Grilling loop\n\nOnce the user picks a candidate, run the `/grilling` skill to walk the design tree with them — constraints, dependencies, the shape of the deepened module, what sits behind the seam, what tests survive.\n\nSide effects happen inline as decisions crystallize — run the `/domain-modeling` skill to keep the domain model current as you go:\n\n- **Naming a deepened module after a concept not in `CONTEXT.md`?** Add the term to `CONTEXT.md`. Create the file lazily if it doesn't exist.\n- **Sharpening a fuzzy term during the conversation?** Update `CONTEXT.md` right there.\n- **User rejects the candidate with a load-bearing reason?** Offer an ADR, framed ",
-      "tags": [
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "workflow",
-        "design",
-        "tailwind",
-        "rag",
-        "cro"
-      ],
-      "useCases": [
-        "The domain language in `CONTEXT.md` gives names to good seams; ADRs in `docs/adr/` record decisions this command should not re-litigate."
-      ],
-      "scrapedAt": "2026-06-20T09:31:53.968Z"
-    },
-    {
       "id": "anthropic-internal-comms",
       "name": "internal-comms",
       "slug": "internal-comms",
@@ -27194,14 +27197,14 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 349
+      "count": 350
     },
     {
       "id": "creative-media",
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 147
+      "count": 146
     },
     {
       "id": "development-code-tools",
@@ -27259,42 +27262,42 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 14,
       "newSkillCount": 0,
-      "stars": 287871
+      "stars": 288323
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 176796
+      "stars": 176973
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 75253
+      "stars": 75263
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 88258
+      "stars": 88391
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1744
+      "stars": 1746
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
-      "newSkillCount": 6,
-      "stars": 46522
+      "newSkillCount": 7,
+      "stars": 46553
     },
     {
       "name": "Xquik",
@@ -27304,10 +27307,10 @@
       "stars": 199
     }
   ],
-  "lastUpdated": "2026-09-17T11:32:50.293Z",
+  "lastUpdated": "2026-09-18T11:08:36.868Z",
   "stats": {
     "totalSkills": 1136,
-    "newSkills": 15,
-    "scrapedAt": "2026-09-17T11:32:50.293Z"
+    "newSkills": 16,
+    "scrapedAt": "2026-09-18T11:08:36.868Z"
   }
 }
