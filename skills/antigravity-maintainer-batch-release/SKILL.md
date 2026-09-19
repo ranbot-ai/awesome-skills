@@ -40,6 +40,7 @@ Before changing anything:
    - Separate valid source changes, repairable PRs, conflicts, generated-only noise, promotional links, and unsupported ownership/license changes.
    - Review semantics, safety, provenance, risk labels, limitations, source credits, and changed-skill evidence.
    - Prefer narrow maintainer repairs on the contributor branch when maintainer edits are enabled.
+   - Optional accelerator before editing: run `npm run maintainer:sweep` for repo health, open PR check rollup, advisory download of CI `pr-evidence-*` artifacts (when `pr-evidence` succeeded), optional Jev triage (`TYPESAFE_API_KEY` in `.env.local`), `merge:batch --dry-run` on CI-ready PRs, and a **Next actions** hint list. Prefer CI evidence over re-running `npm run pr:evidence` locally when the artifact head matches. For a single head only, use `npm run maintainer:jev-hints -- --base origin/main --head <head-sha>`. Sweep/Jev/CI summaries are advisory only; `merge:batch` recomputes from trusted `main`, and Tessl plus `--reviewed-head` attestation remain authoritative. See `docs/maintainers/maintainer-sweep.md` and `docs/maintainers/jev-hints.md`.
 
 2. Validate changed skills truthfully.
    - Run `npm run validate`, `npm run validate:references`, `npm run security:docs`, changed-skill evidence, and the relevant tests.
@@ -50,10 +51,4 @@ Before changing anything:
    - `manual-review-required` means Tessl credentials or credits were unavailable, or Tessl did not produce a passing result. Perform the maintainer semantic review and attest with `--reviewed-head <full-40-character-sha>`.
    - Any non-passing Tessl outcome produces `manual-review-required`; complete the semantic review and bind the judgment to the exact head instead of treating a heuristic score as merge authority.
    - Never report `manual-review-required` as “Tessl passed.”
-   - Scoped content-review fingerprints document exact bytes and observed checks, not general reliability. Keep explicit compatibility aliases and their complete local support bundles synchronized; the alias-integrity regression checks equality without affecting selection eligibility. Report remaining corpus debt rather than awarding an unqualified validation badge.
-   - A verified upstream repository rename may bypass the provenance-identity blocker only through an exact entry in the trusted protected-base exception ledger. Record the skill ID, old and new `source_repo`, stable upstream repository ID, verification date, and canonical GitHub URL; all other provenance changes remain blocked.
-
-3. Run checks in parallel where independent.
-   - Use the repository validation, test, docs-security, source-credit, reference, warning-budget, and targeted app checks required by the changed files.
-   - Fix deterministic policy failures in the source; do not wait for them as if they were flaky CI.
-   - For source-only changed paths, a Git copy changes only its destination; renames change both
+   - Scoped content-review fingerprints document exact bytes and observed checks, not general reliability. Keep explicit compatibility aliases and their complete local support bundles synchronized; the alias-integrity regression checks equality without affecting selection eligibility. Report remaining corpus debt rather than awarding an

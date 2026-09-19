@@ -81,6 +81,18 @@ naming and copy rules, platform requirements — one line each, with exact
 values copied verbatim from the spec. Every task's requirements implicitly
 include this section.]
 
+## Review Focus
+
+[The five input classes or failure modes the spec implies but no task's
+tests exercise that are most likely to bite a person using this software
+— one line each, naming the input or condition and the behavior a
+reasonable person would expect, most likely first. The spec is a vision
+document: it says what the software must do, not everything it will
+meet, and its silence on an input is not permission for that input to
+break the program. Write the list here, once, with the spec in front of
+you. Then, for each line, add the test that pins it to the task that
+owns the code, in that task's own step style.]
+
 ---
 ```
 
@@ -108,32 +120,4 @@ def test_specific_behavior():
     assert result == expected
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
-
-Run: `pytest tests/path/test.py::test_name -v`
-Expected: FAIL with "function not defined"
-
-- [ ] **Step 3: Write minimal implementation**
-
-```python
-def function(input):
-    return expected
-```
-
-- [ ] **Step 4: Run test to verify it passes**
-
-Run: `pytest tests/path/test.py::test_name -v`
-Expected: PASS
-
-- [ ] **Step 5: Commit**
-
-```bash
-git add tests/path/test.py src/path/file.py
-git commit -m "feat: add specific feature"
-```
-````
-
-## No Placeholders
-
-Every step must contain the actual content an engineer needs. These are **plan failures** — never write them:
-- "TBD", "TODO", "implement later", "f
+- [ ] **Step 2: Run test 

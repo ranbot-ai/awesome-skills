@@ -187,6 +187,16 @@ Confirm:
 
 **Other tests fail?** Fix now.
 
+**"Other tests" means the project's suite, not just your file.** A
+green run of the test you wrote is not a green suite. Before you call
+the change done, run the project's test command (bare `pytest`,
+`npm test`, `cargo test` — whatever the repo uses) even when your task
+named only one test file. A scope statement in your task bounds the
+deliverable, not your verification. Any failure that run shows —
+including one you didn't cause — goes in your report by name; a red
+test you watched scroll past and didn't mention is a report falsified
+by omission.
+
 ### REFACTOR - Clean Up
 
 After green only:
@@ -209,14 +219,4 @@ Next failing test for next feature.
 | **Shows intent** | Demonstrates desired API | Obscures what code should do |
 
 When writing or changing any test, read [writing-good-tests.md](writing-good-tests.md) for the rules that keep tests honest:
-- Name the production change that would make the test fail — before writing it
-- Assert on real behavior, never on mock behavior
-- Keep test-only code in test utilities, out of production classes
-- Understand a dependency's side effects before mocking it
-
-## Common Rationalizations
-
-| Excuse | Reality |
-|--------|---------|
-| "Too simple to test" | Simple code breaks. Test takes 30 seconds. |
-| "I'll test after" | Tests written after pass immediately — which proves nothing. They may test the wrong thing, test the implementation instead of the behavior, or 
+- Nam

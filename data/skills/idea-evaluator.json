@@ -1,0 +1,24 @@
+{
+  "id": "antigravity-idea-evaluator",
+  "name": "idea-evaluator",
+  "slug": "idea-evaluator",
+  "description": "Evaluates an idea by hosting a multi-turn debate between a Pro and Con agent, delivering a final verdict on whether it's worth pursuing.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/idea-evaluator",
+  "content": "\n# Idea Evaluator Orchestrator\n\n## Overview\n\nThe Idea Evaluator skill acts as an impartial judge for evaluating new concepts, features, or project ideas. It takes an initial idea from the user and orchestrates a structured, multi-turn debate between two simulated personas: a logical supporter (Pro Agent) and a constructive critic (Con Agent). \n\nBy pitting these two perspectives against each other, it surfaces the strongest arguments for both sides before delivering a comprehensive final verdict on whether the idea is worth building.\n\n## When to Use This Skill\n\n- Use when you have a new idea but don't know if it's worth your time or effort to build.\n- Use when evaluating potential features for a product to decide on priorities.\n- Use when you want to rigorously stress-test an assumption before committing code.\n\n## How It Works\n\nWhen triggered with an idea, you (the AI) will act as the Orchestrator and facilitate the following workflow:\n\n### Step 1: Initialize the Debate\nYou will assume the role of the Orchestrator. Introduce the debate and clearly state the idea being evaluated. Spawn or simulate the two participants:\n- `@idea-evaluator-pro`: The logical supporter.\n- `@idea-evaluator-con`: The constructive critic.\n\n### Step 2: The Debate (3 Turns)\nConduct a 3-turn debate where the Pro and Con agents respond to each other.\n- **Turn 1 (Initial Pitches):** Pro presents the strongest case for the idea. Con presents the strongest immediate risks and flaws.\n- **Turn 2 (Rebuttals):** Pro addresses Con's risks. Con challenges Pro's optimism.\n- **Turn 3 (Closing Statements):** Both agents summarize their final stance on why the idea will succeed or fail.\n\n*Note: Ensure the agents do not blindly agree/disagree but base their arguments on logic, market realities, and technical feasibility.*\n\n### Step 3: Final Verdict\nOnce the debate concludes, the Orchestrator steps in as the Judge. Provide a comprehensive summary formatted with:\n- **Pros:** The strongest validated points in favor.\n- **Cons:** The most critical risks identified.\n- **Final Verdict:** A definitive recommendation (e.g., \"Strongly Recommended\", \"Proceed with Caution\", \"Pivot Required\", \"Not Worth Building\").\n- **Why:** A brief justification summarizing the debate outcome.\n\n## Examples\n\n### Example 1: Evaluating a new app idea\n\n**User:** \"Evaluate this idea: A social network exclusively for houseplants where users post updates on their plant's growth.\"\n\n**Agent:** (Proceeds to run the 3-turn debate between Pro and Con, followed by the Orchestrator's final verdict detailing the niche appeal versus retention challenges).\n\n## Best Practices\n\n- ✅ Ensure the Pro and Con agents directly address each other's points during rebuttals.\n- ✅ The Orchestrator must remain strictly neutral until the Final Verdict.\n- ❌ Don't let the agents devolve into generic AI pleasantries; keep the debate sharp and analytical.\n- ❌ Don't skip the debate steps; the back-and-forth is crucial for deep validation.\n\n## Limitations\n\n- The verdict is based on simulated reasoning and logic, not actual market data or user feedback.\n- This skill is for brainstorming and validation, not a guarantee of business success.\n\n## Related Skills\n\n- `@idea-evaluator-pro` - The supporting persona used in this debate.\n- `@idea-evaluator-con` - The critical persona used in this debate.\n",
+  "tags": [
+    "claude",
+    "ai",
+    "agent",
+    "workflow",
+    "aws"
+  ],
+  "useCases": [
+    "Use when you have a new idea but don't know if it's worth your time or effort to build.",
+    "Use when evaluating potential features for a product to decide on priorities.",
+    "Use when you want to rigorously stress-test an assumption before committing code."
+  ],
+  "scrapedAt": "2026-09-19T10:49:42.445Z"
+}
