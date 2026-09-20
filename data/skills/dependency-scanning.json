@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-dependency-scanning",
+  "name": "dependency-scanning",
+  "slug": "dependency-scanning",
+  "description": "Scan package dependencies for known vulnerabilities using Snyk, Dependabot, and OWASP Dependency-Check.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dependency-scanning",
+  "content": "\n# Dependency Scanning\n\nIdentify vulnerabilities in third-party dependencies and libraries.\n\n## When to Use This Skill\n\nUse this skill when:\n- Managing third-party dependencies\n- Implementing software composition analysis\n- Meeting compliance requirements\n- Securing the software supply chain\n- Automating vulnerability detection\n\n## Prerequisites\n\n- Package manifest files (package.json, requirements.txt, etc.)\n- CI/CD pipeline access\n- Dependency scanning tool\n\n## Tool Comparison\n\n| Tool | Type | Languages | Best For |\n|------|------|-----------|----------|\n| Snyk | Commercial/Free | Many | Comprehensive SCA |\n| Dependabot | Free (GitHub) | Many | Automated PRs |\n| OWASP Dep-Check | OSS | Many | Free scanning |\n| npm audit | Built-in | Node.js | Quick checks |\n| pip-audit | OSS | Python | Python projects |\n| Trivy | OSS | Many | Container deps |\n\n## Snyk\n\n### CLI Usage\n\n```bash\n# Install\nnpm install -g snyk\n\n# Authenticate\nsnyk auth\n\n# Test project\nsnyk test\n\n# Monitor project (track over time)\nsnyk monitor\n\n# Test specific manifest\nsnyk test --file=package.json\nsnyk test --file=requirements.txt\n\n# Output formats\nsnyk test --json > snyk-results.json\nsnyk test --sarif > snyk-results.sarif\n\n# Fix vulnerabilities\nsnyk fix\n\n# Ignore vulnerability\nsnyk ignore --id=SNYK-JS-LODASH-567746 --expiry=2024-12-31 --reason=\"No exploit path\"\n```\n\n### CI Integration\n\n```yaml\n# .github/workflows/snyk.yml\nname: Snyk Security\n\non:\n  push:\n    branches: [main]\n  pull_request:\n\njobs:\n  snyk:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n\n      - name: Run Snyk to check for vulnerabilities\n        uses: snyk/actions/node@master\n        env:\n          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}\n        with:\n          args: --severity-threshold=high\n\n      - name: Upload results to GitHub\n        uses: github/codeql-action/upload-sarif@v3\n        with:\n          sarif_file: snyk.sarif\n```\n\n### Policy File\n\n```yaml\n# .snyk\nversion: v1.25.0\nignore:\n  SNYK-JS-LODASH-567746:\n    - '*':\n        reason: No user input reaches this function\n        expires: 2024-12-31\n        created: 2024-01-15\n\n  'snyk:lic:npm:gpl-3.0':\n    - '*':\n        reason: Internal use only\n        \npatch: {}\n```\n\n## GitHub Dependabot\n\n### Configuration\n\n```yaml\n# .github/dependabot.yml\nversion: 2\nupdates:\n  # JavaScript/Node.js\n  - package-ecosystem: \"npm\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n      day: \"monday\"\n    open-pull-requests-limit: 10\n    reviewers:\n      - \"security-team\"\n    labels:\n      - \"dependencies\"\n      - \"security\"\n    ignore:\n      - dependency-name: \"aws-sdk\"\n        update-types: [\"version-update:semver-major\"]\n    groups:\n      development-dependencies:\n        dependency-type: \"development\"\n        update-types:\n          - \"minor\"\n          - \"patch\"\n\n  # Python\n  - package-ecosystem: \"pip\"\n    directory: \"/\"\n    schedule:\n      interval: \"daily\"\n    \n  # Docker\n  - package-ecosystem: \"docker\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n    \n  # GitHub Actions\n  - package-ecosystem: \"github-actions\"\n    directory: \"/\"\n    schedule:\n      interval: \"weekly\"\n```\n\n### Security Alerts\n\n```yaml\n# Automated security updates\n# Enable in repository Settings > Security > Dependabot\n\n# Dependabot will automatically:\n# - Create PRs for vulnerable dependencies\n# - Update to patched versions\n# - Provide CVE details in PR description\n```\n\n## OWASP Dependency-Check\n\n### Installation\n\n```bash\n# Download\nwget https://github.com/jeremylong/DependencyCheck/releases/download/v9.0.0/dependency-check-9.0.0-release.zip\nunzip dependency-check-9.0.0-release.zip\n\n# Or via Homebrew\nbrew install dependency-check\n```\n\n### Usage\n\n```bash\n# Scan project\ndependency-check --project \"MyProject\" \\\n  --scan /path/to/project \\\n  --out /path/to/reports \\\n  --format HTML \\\n  --format JSON\n\n# With specific analyzers\ndependency-check --project \"MyProject\" \\\n  --scan . \\\n  --enableExperimental \\\n  --disableRetireJS\n\n# CI configuration\ndependency-check --project \"MyProject\" \\\n  --scan . \\\n  --format JSON \\\n  --failOnCVSS 7 \\\n  --suppression suppression.xml\n```\n\n### Suppression File\n\n```xml\n<!-- suppression.xml -->\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<suppressions xmlns=\"https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd\">\n  <suppress>\n    <notes>False positive - not using vulnerable function</notes>\n    <packageUrl regex=\"true\">^pkg:npm/lodash@.*$</packageUrl>\n    <cve>CVE-2021-23337</cve>\n  </suppress>\n  \n  <suppress until=\"2024-12-31\">\n    <notes>Risk accepted - mitigated by WAF</notes>\n    <cpe>cpe:/a:apache:struts:2.5.0</cpe>\n    <vulnerabilityName>CVE-2023-12345</vulnerabilityName>\n  </suppress>\n</suppressions>\n```\n\n### Maven Integration\n\n```xml\n<!-- pom.xml -->\n<plugin>\n  <groupId>org.owasp</groupId>\n  <artifactId>dependency-check-maven</artifactId>\n  <version>9.0.0</version>\n  <configuration>\n    <failBuildOnCVSS>7</failBuildOnCVSS>\n    <suppressionFiles>\n      <suppressionFile>suppression",
+  "tags": [
+    "python",
+    "javascript",
+    "node",
+    "ai",
+    "agent",
+    "workflow",
+    "template",
+    "document",
+    "image",
+    "security"
+  ],
+  "useCases": [
+    "Managing third-party dependencies",
+    "Implementing software composition analysis",
+    "Meeting compliance requirements",
+    "Securing the software supply chain",
+    "Automating vulnerability detection"
+  ],
+  "scrapedAt": "2026-09-20T11:08:00.132Z"
+}

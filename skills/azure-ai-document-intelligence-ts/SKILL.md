@@ -52,7 +52,7 @@ const client = DocumentIntelligence(
 );
 ```
 
-## Analyze Document (URL)
+## Analyze Document https://example.com
 
 ```typescript
 import DocumentIntelligence, {
@@ -190,5 +190,4 @@ for await (const model of paginate(client, response)) {
 ```typescript
 const initialResponse = await client.path("/documentModels:build").post({
   body: {
-    modelId: "my-custom-model",
-    desc
+    modelId: "my-custom-mo

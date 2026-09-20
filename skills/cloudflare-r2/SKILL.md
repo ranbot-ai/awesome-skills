@@ -1,0 +1,204 @@
+---
+name: cloudflare-r2
+description: Manage Cloudflare R2 buckets, lifecycle, and signed URLs. Use for low-egress object storage and media delivery. 
+category: AI & Agents
+source: antigravity
+tags: [python, typescript, pdf, api, ai, agent, template, image, security, aws]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cloudflare-r2
+---
+
+
+# Cloudflare R2
+
+S3-compatible object storage with zero egress fees, built on Cloudflare's global network.
+
+## When to Use
+
+- Storing user uploads, media files, backups, or static assets.
+- Replacing AWS S3 to eliminate egress costs for read-heavy workloads.
+- Serving files at the edge via Workers or public bucket access.
+- Building multi-cloud storage that avoids vendor lock-in (S3 API compatible).
+- Storing ML model artifacts, training data, or inference results.
+
+## Prerequisites
+
+- Cloudflare account with R2 enabled (dashboard > R2 > subscribe).
+- Wrangler CLI v3+ installed: `npm install -g wrangler`.
+- Authenticated via `wrangler login` or `CLOUDFLARE_API_TOKEN`.
+- For S3 API access: R2 API token created under **R2 > Manage R2 API Tokens**.
+
+## Bucket Management with Wrangler
+
+### Create and List Buckets
+
+```bash
+# Create a new bucket
+npx wrangler r2 bucket create app-assets
+
+# Create a bucket in a specific region (hint for data locality)
+npx wrangler r2 bucket create eu-uploads --location=eu
+
+# List all buckets
+npx wrangler r2 bucket list
+
+# Delete an empty bucket
+npx wrangler r2 bucket delete old-bucket
+```
+
+### Object Operations
+
+```bash
+# Upload a single file
+npx wrangler r2 object put app-assets/images/logo.png --file=./logo.png
+
+# Upload with content type
+npx wrangler r2 object put app-assets/data/report.json \
+  --file=./report.json \
+  --content-type="application/json"
+
+# Download an object
+npx wrangler r2 object get app-assets/images/logo.png --file=./downloaded-logo.png
+
+# Delete an object
+npx wrangler r2 object delete app-assets/images/old-logo.png
+
+# Get object metadata
+npx wrangler r2 object head app-assets/images/logo.png
+```
+
+## S3-Compatible API Access
+
+R2 supports the S3 API, so existing tools (AWS CLI, boto3, s3cmd) work out of the box.
+
+### Generate R2 API Tokens
+
+1. Go to **R2 > Manage R2 API Tokens > Create API token**.
+2. Select permissions: Object Read & Write, or Object Read only.
+3. Scope to specific buckets if possible.
+4. Save the Access Key ID and Secret Access Key.
+
+### AWS CLI Configuration
+
+```bash
+# Configure a named profile for R2
+aws configure --profile r2
+# Access Key ID: <your-r2-access-key>
+# Secret Access Key: <your-r2-secret-key>
+# Region: auto
+# Output: json
+
+# Use the R2 endpoint
+export R2_ENDPOINT="https://<ACCOUNT_ID>.r2.cloudflarestorage.com"
+
+# List buckets
+aws s3 ls --endpoint-url=$R2_ENDPOINT --profile=r2
+
+# Sync a directory
+aws s3 sync ./dist s3://app-assets/static/ \
+  --endpoint-url=$R2_ENDPOINT \
+  --profile=r2
+
+# Copy a file
+aws s3 cp ./backup.tar.gz s3://app-assets/backups/backup-$(date +%Y%m%d).tar.gz \
+  --endpoint-url=$R2_ENDPOINT \
+  --profile=r2
+
+# List objects with prefix
+aws s3 ls s3://app-assets/images/ \
+  --endpoint-url=$R2_ENDPOINT \
+  --profile=r2
+
+# Remove objects by prefix
+aws s3 rm s3://app-assets/tmp/ --recursive \
+  --endpoint-url=$R2_ENDPOINT \
+  --profile=r2
+```
+
+### Python boto3 Client
+
+```python
+import boto3
+
+s3 = boto3.client(
+    "s3",
+    endpoint_url="https://<ACCOUNT_ID>.r2.cloudflarestorage.com",
+    aws_access_key_id="<R2_ACCESS_KEY>",
+    aws_secret_access_key="<R2_SECRET_KEY>",
+    region_name="auto",
+)
+
+# Upload file
+s3.upload_file("./report.pdf", "app-assets", "reports/report.pdf")
+
+# Generate presigned URL (valid for 1 hour)
+url = s3.generate_presigned_url(
+    "get_object",
+    Params={"Bucket": "app-assets", "Key": "reports/report.pdf"},
+    ExpiresIn=3600,
+)
+print(url)
+
+# List objects
+response = s3.list_objects_v2(Bucket="app-assets", Prefix="images/", MaxKeys=100)
+for obj in response.get("Contents", []):
+    print(f"{obj['Key']} - {obj['Size']} bytes")
+```
+
+## Worker Bindings
+
+Bind R2 buckets to Workers or Pages Functions for server-side access without API tokens.
+
+### Wrangler Configuration
+
+```toml
+# wrangler.toml
+name = "asset-worker"
+main = "src/index.ts"
+compatibility_date = "2024-09-01"
+
+[[r2_buckets]]
+binding = "ASSETS"
+bucket_name = "app-assets"
+
+[[r2_buckets]]
+binding = "UPLOADS"
+bucket_name = "user-uploads"
+```
+
+### Worker with R2 Operations
+
+```typescript
+// src/index.ts
+interface Env {
+  ASSETS: R2Bucket;
+  UPLOADS: R2Bucket;
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    const url = new URL(request.url);
+
+    // GET — serve file from R2
+    if (request.method === "GET") {
+      const key = url.pathname.slice(1); // strip leading /
+      const object = await env.ASSETS.get(key);
+
+      if (!object) {
+        return new Response("Not Found", { status: 404 });
+      }
+
+      const headers = new Headers();
+      object.writeHttpMetadata(headers);
+      headers.set("etag", object.httpEtag);
+      headers.set("cache-control", "public, max-age=86400");
+
+      return new Response(object.body, { headers });
+    }
+
+    // PUT — upload file to R2
+    if (request.method === "PUT") {
+      const key = url.pathname.slice(1);
+      const contentType = request.headers.get("content-type") || "application/octet-stream";
+
+      await env.UPLOADS.put(key, request.body, {
+        h

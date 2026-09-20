@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-cloudflare-pages",
+  "name": "cloudflare-pages",
+  "slug": "cloudflare-pages",
+  "description": "Deploy static sites and full-stack apps on Cloudflare Pages with previews, functions, and custom domains.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cloudflare-pages",
+  "content": "\n# Cloudflare Pages\n\nDeploy frontend projects with preview builds, edge functions, and global CDN delivery on Cloudflare's network.\n\n## When to Use\n\n- Deploying static sites (React, Vue, Astro, Hugo, Next.js static export).\n- Full-stack applications using Pages Functions for server-side logic.\n- Projects that need automatic preview deployments per pull request.\n- Teams that want zero-config CDN with custom domain and TLS.\n- Migrating from Vercel, Netlify, or GitHub Pages to Cloudflare's ecosystem.\n\n## Prerequisites\n\n- Node.js 18+ and npm installed locally.\n- A Cloudflare account (free tier works for most projects).\n- Wrangler CLI installed: `npm install -g wrangler`.\n- Authenticated via `wrangler login` or `CLOUDFLARE_API_TOKEN` environment variable.\n- Source code in a Git repository (GitHub or GitLab for dashboard integration).\n\n## Project Setup via Wrangler\n\n### Create a New Project\n\n```bash\n# Create a new Pages project\nnpx wrangler pages project create my-site\n\n# List existing projects\nnpx wrangler pages project list\n\n# Delete a project (removes all deployments)\nnpx wrangler pages project delete my-site\n```\n\n### Deploy from Local Build Output\n\n```bash\n# Build your framework first\nnpm run build\n\n# Deploy the output directory\nnpx wrangler pages deploy dist --project-name=my-site\n\n# Deploy with a custom branch name (triggers preview URL)\nnpx wrangler pages deploy dist --project-name=my-site --branch=feature-auth\n\n# Deploy and get the deployment URL in JSON\nnpx wrangler pages deploy dist --project-name=my-site --branch=main 2>&1 | tail -1\n```\n\n### List and Manage Deployments\n\n```bash\n# List recent deployments\nnpx wrangler pages deployment list --project-name=my-site\n\n# Tail live logs from a deployment\nnpx wrangler pages deployment tail --project-name=my-site --environment=production\n```\n\n## Dashboard Git Integration\n\n1. Navigate to **Workers & Pages > Create application > Pages**.\n2. Connect your GitHub or GitLab account.\n3. Select the repository and configure:\n   - **Production branch**: `main`\n   - **Build command**: `npm run build`\n   - **Build output directory**: `dist` (or `build`, `.next`, `public` depending on framework)\n4. Set environment variables per environment (Production vs Preview).\n\n### Framework Presets\n\nCloudflare auto-detects frameworks. Override if needed:\n\n| Framework  | Build Command        | Output Directory |\n|------------|----------------------|------------------|\n| React CRA  | `npm run build`      | `build`          |\n| Vite       | `npm run build`      | `dist`           |\n| Next.js    | `npx @cloudflare/next-on-pages` | `.vercel/output/static` |\n| Astro      | `npm run build`      | `dist`           |\n| Hugo       | `hugo`               | `public`         |\n| SvelteKit  | `npm run build`      | `.svelte-kit/cloudflare` |\n\n## Preview Deployments\n\nEvery non-production branch gets a unique preview URL automatically.\n\n```\n# URL format for preview deployments\nhttps://<commit-hash>.<project-name>.pages.dev\nhttps://<branch-name>.<project-name>.pages.dev\n```\n\n### Branch-Based Access Control\n\n```bash\n# Set preview branch patterns in wrangler.toml (Pages-specific)\n# Or configure via dashboard: Settings > Builds & deployments\n# Include branches: feature/*, staging\n# Exclude branches: dependabot/*\n```\n\n### Preview Comment on Pull Requests\n\nEnable the Cloudflare Pages GitHub App to post deployment URLs as PR comments. Configure under **Settings > Builds & deployments > Preview comment**.\n\n## Pages Functions\n\nPages Functions provide server-side logic deployed alongside your static site. Place files in a `functions/` directory at the project root.\n\n### Basic API Route\n\n```typescript\n// functions/api/hello.ts\nexport const onRequestGet: PagesFunction = async (context) => {\n  return new Response(JSON.stringify({ message: \"Hello from the edge\" }), {\n    headers: { \"Content-Type\": \"application/json\" },\n  });\n};\n\n// functions/api/users/[id].ts — dynamic route parameter\nexport const onRequestGet: PagesFunction = async (context) => {\n  const userId = context.params.id;\n  return new Response(JSON.stringify({ userId }), {\n    headers: { \"Content-Type\": \"application/json\" },\n  });\n};\n```\n\n### Middleware\n\n```typescript\n// functions/_middleware.ts — runs before all routes\nexport const onRequest: PagesFunction = async (context) => {\n  const authHeader = context.request.headers.get(\"Authorization\");\n  if (!authHeader || !authHeader.startsWith(\"Bearer \")) {\n    return new Response(\"Unauthorized\", { status: 401 });\n  }\n  return context.next();\n};\n```\n\n### Functions with Bindings\n\n```typescript\n// functions/api/data.ts — using KV and D1 bindings\ninterface Env {\n  MY_KV: KVNamespace;\n  MY_DB: D1Database;\n  MY_BUCKET: R2Bucket;\n}\n\nexport const onRequestGet: PagesFunction<Env> = async (context) => {\n  // Read from KV\n  const cached = await context.env.MY_KV.get(\"key\");\n  if (cached) return new Response(cached);\n\n  // Query D1\n  const result = await context.env.MY_DB.prepare(\n    \"SELECT * FROM items LIMIT 10\"\n  ).al",
+  "tags": [
+    "typescript",
+    "react",
+    "node",
+    "api",
+    "ai",
+    "agent",
+    "workflow",
+    "template",
+    "security",
+    "rag"
+  ],
+  "useCases": [
+    "Deploying static sites (React, Vue, Astro, Hugo, Next.js static export).",
+    "Full-stack applications using Pages Functions for server-side logic.",
+    "Projects that need automatic preview deployments per pull request.",
+    "Teams that want zero-config CDN with custom domain and TLS.",
+    "Migrating from Vercel, Netlify, or GitHub Pages to Cloudflare's ecosystem."
+  ],
+  "scrapedAt": "2026-09-20T11:06:15.953Z"
+}

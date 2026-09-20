@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-container-scanning",
+  "name": "container-scanning",
+  "slug": "container-scanning",
+  "description": "Scan container images for vulnerabilities using Trivy, Grype, and cloud-native tools.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/container-scanning",
+  "content": "\n# Container Scanning\n\nScan container images for vulnerabilities and security misconfigurations.\n\n## When to Use This Skill\n\nUse this skill when:\n- Building container images\n- Implementing container security gates\n- Scanning registry images\n- Meeting compliance requirements\n- Hardening container deployments\n\n## Prerequisites\n\n- Container runtime (Docker, Podman)\n- Container images to scan\n- Scanning tool installation\n\n## Tool Comparison\n\n| Tool | License | Speed | Features |\n|------|---------|-------|----------|\n| Trivy | OSS | Fast | Comprehensive, IaC |\n| Grype | OSS | Fast | Accurate, SBOM |\n| Clair | OSS | Medium | Registry integration |\n| Snyk Container | Commercial | Fast | Fix suggestions |\n| Docker Scout | Commercial | Fast | GitHub integration |\n\n## Trivy\n\n### Installation\n\n```bash\n# Linux\ncurl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh -o /tmp/install-trivy.sh && sh /tmp/install-trivy.sh && rm /tmp/install-trivy.sh -s -- -b /usr/local/bin\n\n# macOS\nbrew install trivy\n\n# Docker\ndocker pull aquasec/trivy\n```\n\n### Image Scanning\n\n```bash\n# Scan local image\ntrivy image myapp:latest\n\n# Scan remote image\ntrivy image nginx:1.25\n\n# JSON output\ntrivy image --format json -o results.json myapp:latest\n\n# Filter by severity\ntrivy image --severity HIGH,CRITICAL myapp:latest\n\n# Ignore unfixed vulnerabilities\ntrivy image --ignore-unfixed myapp:latest\n\n# Exit code on vulnerability\ntrivy image --exit-code 1 --severity CRITICAL myapp:latest\n```\n\n### Filesystem Scanning\n\n```bash\n# Scan project directory\ntrivy fs /path/to/project\n\n# Scan Dockerfile\ntrivy config Dockerfile\n\n# Scan Kubernetes manifests\ntrivy config k8s/\n```\n\n### Configuration\n\n```yaml\n# trivy.yaml\ntimeout: 10m\nseverity:\n  - HIGH\n  - CRITICAL\nignore-unfixed: true\nexit-code: 1\n\nvulnerability:\n  type:\n    - os\n    - library\n\nscan:\n  file-patterns:\n    - \"Dockerfile\"\n    - \"*.yaml\"\n```\n\n### CI Integration\n\n```yaml\n# GitHub Actions\nname: Container Security\n\non:\n  push:\n    branches: [main]\n  pull_request:\n\njobs:\n  scan:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n\n      - name: Build image\n        run: docker build -t myapp:${{ github.sha }} .\n\n      - name: Run Trivy\n        uses: aquasecurity/trivy-action@master\n        with:\n          image-ref: 'myapp:${{ github.sha }}'\n          format: 'sarif'\n          output: 'trivy-results.sarif'\n          severity: 'CRITICAL,HIGH'\n          exit-code: '1'\n\n      - name: Upload results\n        uses: github/codeql-action/upload-sarif@v3\n        with:\n          sarif_file: 'trivy-results.sarif'\n```\n\n## Grype\n\n### Installation\n\n```bash\n# Linux/macOS\ncurl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh -o /tmp/install-grype.sh && sh /tmp/install-grype.sh && rm /tmp/install-grype.sh -s -- -b /usr/local/bin\n\n# Homebrew\nbrew install grype\n```\n\n### Usage\n\n```bash\n# Scan image\ngrype myapp:latest\n\n# Scan from SBOM\ngrype sbom:./sbom.json\n\n# JSON output\ngrype myapp:latest -o json > results.json\n\n# Filter severity\ngrype myapp:latest --fail-on high\n\n# Scan directory\ngrype dir:/path/to/project\n```\n\n### Configuration\n\n```yaml\n# .grype.yaml\ncheck-for-app-update: false\nfail-on-severity: high\noutput: \"json\"\nscope: \"Squashed\"\n\nignore:\n  - vulnerability: CVE-2023-12345\n    reason: \"False positive\"\n    expires: \"2024-12-31\"\n```\n\n## Docker Scout\n\n### Usage\n\n```bash\n# Enable Docker Scout\ndocker scout quickview myapp:latest\n\n# Full CVE report\ndocker scout cves myapp:latest\n\n# Compare images\ndocker scout compare myapp:v1 myapp:v2\n\n# Recommendations\ndocker scout recommendations myapp:latest\n```\n\n### CI Integration\n\n```yaml\n- name: Docker Scout\n  uses: docker/scout-action@v1\n  with:\n    command: cves\n    image: ${{ env.IMAGE_NAME }}\n    sarif-file: scout-results.sarif\n    summary: true\n```\n\n## Registry Integration\n\n### Amazon ECR\n\n```bash\n# Enable scan on push\naws ecr put-image-scanning-configuration \\\n  --repository-name myapp \\\n  --image-scanning-configuration scanOnPush=true\n\n# Get scan findings\naws ecr describe-image-scan-findings \\\n  --repository-name myapp \\\n  --image-id imageTag=latest\n\n# Start manual scan\naws ecr start-image-scan \\\n  --repository-name myapp \\\n  --image-id imageTag=latest\n```\n\n### Azure ACR\n\n```bash\n# Enable Defender for Containers\naz security pricing create \\\n  --name Containers \\\n  --tier Standard\n\n# View scan results in Azure Portal or:\naz acr repository show \\\n  --name myregistry \\\n  --image myapp:latest\n```\n\n### Google Artifact Registry\n\n```bash\n# Enable vulnerability scanning\ngcloud artifacts repositories update myrepo \\\n  --location=us-central1 \\\n  --enable-vulnerability-scanning\n\n# View vulnerabilities\ngcloud artifacts docker images describe \\\n  us-central1-docker.pkg.dev/project/myrepo/myapp:latest \\\n  --show-package-vulnerability\n```\n\n## Admission Controllers\n\n### OPA Gatekeeper\n\n```yaml\napiVersion: templates.gatekeeper.sh/v1beta1\nkind: ConstraintTemplate\nmetadata:\n  name: k8sallowedrepos\nspec:\n  crd:\n    spec:\n      names:",
+  "tags": [
+    "python",
+    "react",
+    "api",
+    "ai",
+    "agent",
+    "template",
+    "document",
+    "image",
+    "security",
+    "vulnerability"
+  ],
+  "useCases": [
+    "Building container images",
+    "Implementing container security gates",
+    "Scanning registry images",
+    "Meeting compliance requirements",
+    "Hardening container deployments"
+  ],
+  "scrapedAt": "2026-09-20T11:06:49.017Z"
+}

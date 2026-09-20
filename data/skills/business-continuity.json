@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-business-continuity",
+  "name": "business-continuity",
+  "slug": "business-continuity",
+  "description": "Develop business continuity plans and impact analysis. Implement BCP testing and communication procedures. Use when building organizational resilience.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/business-continuity",
+  "content": "\n# Business Continuity Planning\n\nDevelop and maintain business continuity capabilities including Business Impact Analysis, communication plans, recovery procedures, and testing schedules for organizational resilience.\n\n## When to Use\n\n- Developing a formal Business Continuity Plan (BCP) for the organization\n- Conducting a Business Impact Analysis (BIA) to prioritize recovery efforts\n- Establishing communication plans for crisis scenarios\n- Defining recovery procedures for critical business processes\n- Scheduling and conducting BCP exercises and tests\n- Meeting compliance requirements for continuity planning (SOC 2, ISO 27001, HIPAA, FedRAMP)\n\n## BCP Framework\n\n```yaml\nbcp_phases:\n  1_governance:\n    actions:\n      - Obtain executive sponsorship and funding\n      - Assign BCP coordinator and team\n      - Define BCP scope and policy\n      - Establish BCP committee with cross-functional representation\n    deliverables:\n      - BCP policy statement\n      - BCP team charter and roster\n      - Scope document\n\n  2_analysis:\n    actions:\n      - Conduct Business Impact Analysis (BIA)\n      - Perform risk assessment for continuity threats\n      - Identify critical business processes and dependencies\n      - Determine recovery priorities and resource requirements\n    deliverables:\n      - BIA report\n      - Risk assessment report\n      - Critical process inventory\n\n  3_strategy:\n    actions:\n      - Select recovery strategies for each critical process\n      - Identify alternate work arrangements (remote, alternate site)\n      - Define technology recovery strategies (DR plan)\n      - Establish vendor and supply chain contingencies\n    deliverables:\n      - Recovery strategy document\n      - Technology recovery plan\n      - Alternate site arrangements\n\n  4_plan_development:\n    actions:\n      - Write detailed recovery procedures\n      - Develop communication plans (internal and external)\n      - Create emergency response procedures\n      - Document roles, responsibilities, and contact information\n    deliverables:\n      - Business Continuity Plan document\n      - Communication plan\n      - Emergency response procedures\n      - Contact lists and call trees\n\n  5_testing:\n    actions:\n      - Develop test plan and schedule\n      - Conduct exercises (tabletop, functional, full-scale)\n      - Evaluate results and identify gaps\n      - Update plans based on lessons learned\n    deliverables:\n      - Test plan\n      - Exercise reports\n      - Updated BCP based on findings\n\n  6_maintenance:\n    actions:\n      - Review and update BCP annually (minimum)\n      - Update after significant organizational changes\n      - Refresh BIA when business processes change\n      - Maintain training and awareness program\n    deliverables:\n      - Annual BCP review record\n      - Updated BIA (if changes occurred)\n      - Training completion records\n```\n\n## Business Impact Analysis Template\n\n```yaml\nbia_template:\n  process_assessment:\n    process_name: \"\"\n    process_owner: \"\"\n    department: \"\"\n    description: \"\"\n\n    criticality_classification:\n      mission_critical:\n        max_tolerable_downtime: \"0-4 hours\"\n        description: \"Failure causes immediate, severe impact to customers or revenue\"\n        examples:\n          - Payment processing\n          - Authentication and authorization\n          - Core API serving customer requests\n          - Order fulfillment\n\n      essential:\n        max_tolerable_downtime: \"4-24 hours\"\n        description: \"Failure causes significant degradation but not complete loss\"\n        examples:\n          - Customer support systems\n          - Reporting and dashboards\n          - Email and notifications\n          - Billing and invoicing\n\n      important:\n        max_tolerable_downtime: \"1-3 days\"\n        description: \"Failure causes inconvenience and workarounds are available\"\n        examples:\n          - Internal collaboration tools\n          - Analytics and BI platforms\n          - HR self-service systems\n          - Knowledge base\n\n      non_essential:\n        max_tolerable_downtime: \"3-7 days\"\n        description: \"Failure has minimal operational impact\"\n        examples:\n          - Development and test environments\n          - Training platforms\n          - Archive systems\n\n    impact_categories:\n      financial:\n        revenue_loss_per_hour: \"\"\n        penalty_or_fine_risk: \"\"\n        recovery_cost_estimate: \"\"\n\n      operational:\n        affected_employees: \"\"\n        affected_customers: \"\"\n        workaround_available: \"yes/no\"\n        workaround_description: \"\"\n\n      reputational:\n        customer_visibility: \"high/medium/low\"\n        media_attention_risk: \"high/medium/low\"\n        regulatory_reporting_required: \"yes/no\"\n\n      legal_regulatory:\n        compliance_impact: \"\"\n        contractual_sla_breach: \"yes/no\"\n        sla_penalty_details: \"\"\n\n    dependencies:\n      technology:\n        - system: \"\"\n          rto: \"\"\n          rpo: \"\"\n          dr_strategy: \"\"\n      people:\n        - role: \"\"\n    ",
+  "tags": [
+    "markdown",
+    "api",
+    "ai",
+    "agent",
+    "llm",
+    "template",
+    "design",
+    "document",
+    "presentation",
+    "security"
+  ],
+  "useCases": [
+    "Developing a formal Business Continuity Plan (BCP) for the organization",
+    "Conducting a Business Impact Analysis (BIA) to prioritize recovery efforts",
+    "Establishing communication plans for crisis scenarios",
+    "Defining recovery procedures for critical business processes",
+    "Scheduling and conducting BCP exercises and tests"
+  ],
+  "scrapedAt": "2026-09-20T11:05:41.538Z"
+}

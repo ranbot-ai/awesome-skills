@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-firewall-config",
+  "name": "firewall-config",
+  "slug": "firewall-config",
+  "description": "Configure iptables, nftables, and cloud firewalls. Implement network segmentation and traffic filtering. Use when securing network perimeters or implementing security zones.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/firewall-config",
+  "content": "\n# Firewall Configuration\n\nConfigure host-based and cloud firewalls for network security.\n\n## When to Use This Skill\n\nUse this skill when:\n- Setting up a new server and need to restrict network access\n- Implementing network segmentation between application tiers\n- Configuring cloud security groups for AWS, GCP, or Azure resources\n- Migrating from iptables to nftables\n- Auditing existing firewall rules for compliance\n- Responding to a security incident requiring emergency network blocks\n\n## Prerequisites\n\n- Root or sudo access on Linux hosts\n- AWS CLI configured for cloud security groups\n- Understanding of TCP/IP, ports, and protocols\n- Network diagram showing required traffic flows\n\n## iptables\n\n### Basic Setup with Default Deny\n\n```bash\n# Flush existing rules\niptables -F\niptables -X\niptables -t nat -F\niptables -t mangle -F\n\n# Default policies - deny all inbound, allow outbound\niptables -P INPUT DROP\niptables -P FORWARD DROP\niptables -P OUTPUT ACCEPT\n\n# Allow established connections\niptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT\n\n# Allow loopback\niptables -A INPUT -i lo -j ACCEPT\n\n# Drop invalid packets\niptables -A INPUT -m conntrack --ctstate INVALID -j DROP\n\n# Allow SSH (restrict to management subnet)\niptables -A INPUT -p tcp --dport 22 -s 10.0.100.0/24 -j ACCEPT\n\n# Allow HTTP/HTTPS from anywhere\niptables -A INPUT -p tcp -m multiport --dports 80,443 -j ACCEPT\n\n# Allow ICMP (ping) with rate limiting\niptables -A INPUT -p icmp --icmp-type echo-request -m limit --limit 1/s --limit-burst 4 -j ACCEPT\n\n# Log dropped packets (rate limited to avoid log flooding)\niptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix \"IPTABLES-DROP: \" --log-level 4\n\n# Save rules (Debian/Ubuntu)\niptables-save > /etc/iptables/rules.v4\nip6tables-save > /etc/iptables/rules.v6\n```\n\n### Anti-DDoS Rules\n\n```bash\n# SYN flood protection\niptables -A INPUT -p tcp --syn -m limit --limit 25/s --limit-burst 50 -j ACCEPT\niptables -A INPUT -p tcp --syn -j DROP\n\n# Limit new connections per source IP\niptables -A INPUT -p tcp --dport 80 -m connlimit --connlimit-above 50 -j REJECT\n\n# Block port scanning (detect TCP flags abuse)\niptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP\niptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP\niptables -A INPUT -p tcp --tcp-flags ALL FIN,URG,PSH -j DROP\niptables -A INPUT -p tcp --tcp-flags SYN,RST SYN,RST -j DROP\niptables -A INPUT -p tcp --tcp-flags SYN,FIN SYN,FIN -j DROP\n```\n\n### Application-Specific Rules\n\n```bash\n# Web server with database backend\n# Allow app servers to reach database (port 5432)\niptables -A INPUT -p tcp --dport 5432 -s 10.0.1.0/24 -j ACCEPT\n\n# Allow monitoring (Prometheus node exporter)\niptables -A INPUT -p tcp --dport 9100 -s 10.0.200.0/24 -j ACCEPT\n\n# DNS resolution\niptables -A INPUT -p udp --sport 53 -j ACCEPT\niptables -A INPUT -p tcp --sport 53 -j ACCEPT\n\n# NTP\niptables -A INPUT -p udp --sport 123 -j ACCEPT\n\n# Block specific IP (incident response)\niptables -I INPUT 1 -s 203.0.113.50 -j DROP\n```\n\n## UFW (Uncomplicated Firewall)\n\n```bash\n# Enable UFW with default deny\nufw default deny incoming\nufw default allow outgoing\nufw enable\n\n# Allow SSH from management network\nufw allow from 10.0.100.0/24 to any port 22 proto tcp\n\n# Allow HTTP/HTTPS\nufw allow 80/tcp\nufw allow 443/tcp\n\n# Allow specific application profile\nufw allow 'Nginx Full'\n\n# Rate limit SSH (max 6 connections in 30 seconds)\nufw limit ssh\n\n# Allow port range\nufw allow 8000:8080/tcp\n\n# Deny specific IP\nufw deny from 203.0.113.50\n\n# Check status\nufw status verbose\nufw status numbered\n\n# Delete a rule by number\nufw delete 3\n\n# Application profiles\nufw app list\nufw app info 'Nginx Full'\n```\n\n## nftables\n\n### Complete Server Configuration\n\n```bash\n#!/usr/sbin/nft -f\nflush ruleset\n\n# Define variables\ndefine LAN = 10.0.0.0/16\ndefine MGMT = 10.0.100.0/24\ndefine MONITOR = 10.0.200.0/24\n\ntable inet filter {\n  # Rate limiting set\n  set rate_limit {\n    type ipv4_addr\n    flags dynamic,timeout\n    timeout 1m\n  }\n\n  chain input {\n    type filter hook input priority 0; policy drop;\n\n    # Connection tracking\n    ct state established,related accept\n    ct state invalid drop\n\n    # Loopback\n    iif \"lo\" accept\n\n    # ICMP and ICMPv6\n    ip protocol icmp icmp type { echo-request, destination-unreachable, time-exceeded } limit rate 10/second accept\n    ip6 nexthdr icmpv6 icmpv6 type { echo-request, nd-neighbor-solicit, nd-router-advert } accept\n\n    # SSH from management only\n    tcp dport 22 ip saddr $MGMT accept\n\n    # HTTP/HTTPS from anywhere\n    tcp dport { 80, 443 } accept\n\n    # Prometheus metrics from monitoring subnet\n    tcp dport 9100 ip saddr $MONITOR accept\n\n    # Rate limit new connections\n    tcp flags syn limit rate over 25/second burst 50 packets drop\n\n    # Log dropped traffic\n    log prefix \"nft-drop: \" level warn limit rate 5/minute\n  }\n\n  chain forward {\n    type filter hook forward priority 0; policy drop;\n  }\n\n  chain output {\n    type filter hook output priority 0; policy accept;\n\n    # Optiona",
+  "tags": [
+    "node",
+    "ai",
+    "agent",
+    "template",
+    "document",
+    "security",
+    "docker",
+    "aws",
+    "gcp",
+    "azure"
+  ],
+  "useCases": [
+    "Setting up a new server and need to restrict network access",
+    "Implementing network segmentation between application tiers",
+    "Configuring cloud security groups for AWS, GCP, or Azure resources",
+    "Migrating from iptables to nftables",
+    "Auditing existing firewall rules for compliance"
+  ],
+  "scrapedAt": "2026-09-20T11:09:45.862Z"
+}

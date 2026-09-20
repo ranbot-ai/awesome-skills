@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-firebase-app-platform",
+  "name": "firebase-app-platform",
+  "slug": "firebase-app-platform",
+  "description": "Build and operate apps on Firebase using Auth, Firestore, Cloud Functions, and Hosting. Use when building mobile/web backends with managed services, real-time data sync, or serverless APIs.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/firebase-app-platform",
+  "content": "\n# Firebase App Platform\n\nShip mobile and web backends with Firebase managed services.\n\n## When to Use This Skill\n\nUse this skill when:\n- Building mobile or web apps with real-time data sync\n- Need authentication with minimal backend code\n- Prototyping quickly with managed infrastructure\n- Building serverless APIs with Cloud Functions\n- Hosting static sites or SPAs with CDN\n\n## Prerequisites\n\n- Node.js 18+\n- Firebase CLI (`npm install -g firebase-tools`)\n- Google Cloud account (Firebase is part of GCP)\n- A Firebase project (create at console.firebase.google.com)\n\n## Quick Start\n\n```bash\n# Install and authenticate\nnpm install -g firebase-tools\nfirebase login\n\n# Initialize in your project directory\nfirebase init\n# Select: Firestore, Functions, Hosting, Emulators\n\n# Start local emulators\nfirebase emulators:start\n\n# Deploy everything\nfirebase deploy\n\n# Deploy specific services\nfirebase deploy --only functions\nfirebase deploy --only hosting\nfirebase deploy --only firestore:rules\n```\n\n## Firestore Database\n\n### Security Rules\n\n```javascript\n// firestore.rules\nrules_version = '2';\nservice cloud.firestore {\n  match /databases/{database}/documents {\n    // Users can only read/write their own data\n    match /users/{userId} {\n      allow read, write: if request.auth != null && request.auth.uid == userId;\n    }\n\n    // Messages: authenticated users can read, only owner can write\n    match /channels/{channelId}/messages/{messageId} {\n      allow read: if request.auth != null;\n      allow create: if request.auth != null\n        && request.resource.data.userId == request.auth.uid\n        && request.resource.data.body is string\n        && request.resource.data.body.size() <= 5000;\n      allow update, delete: if request.auth != null\n        && resource.data.userId == request.auth.uid;\n    }\n\n    // Admin-only collection\n    match /admin/{document=**} {\n      allow read, write: if request.auth != null\n        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';\n    }\n\n    // Default: deny everything\n    match /{document=**} {\n      allow read, write: if false;\n    }\n  }\n}\n```\n\n### Data Operations\n\n```typescript\n// lib/firestore.ts\nimport { getFirestore, collection, doc, setDoc, getDoc,\n         query, where, orderBy, limit, onSnapshot,\n         serverTimestamp, increment } from \"firebase/firestore\";\n\nconst db = getFirestore();\n\n// Create document with auto-ID\nasync function createMessage(channelId: string, body: string, userId: string) {\n  const ref = doc(collection(db, \"channels\", channelId, \"messages\"));\n  await setDoc(ref, {\n    body,\n    userId,\n    createdAt: serverTimestamp(),\n  });\n  return ref.id;\n}\n\n// Real-time listener\nfunction subscribeToMessages(channelId: string, callback: (msgs: any[]) => void) {\n  const q = query(\n    collection(db, \"channels\", channelId, \"messages\"),\n    orderBy(\"createdAt\", \"desc\"),\n    limit(50)\n  );\n  return onSnapshot(q, (snapshot) => {\n    const messages = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));\n    callback(messages);\n  });\n}\n\n// Atomic counter\nasync function incrementViews(postId: string) {\n  await setDoc(doc(db, \"posts\", postId), {\n    views: increment(1),\n  }, { merge: true });\n}\n```\n\n### Indexes\n\n```json\n// firestore.indexes.json\n{\n  \"indexes\": [\n    {\n      \"collectionGroup\": \"messages\",\n      \"queryScope\": \"COLLECTION\",\n      \"fields\": [\n        { \"fieldPath\": \"channelId\", \"order\": \"ASCENDING\" },\n        { \"fieldPath\": \"createdAt\", \"order\": \"DESCENDING\" }\n      ]\n    }\n  ]\n}\n```\n\n## Authentication\n\n```typescript\n// lib/auth.ts\nimport { getAuth, signInWithPopup, GoogleAuthProvider,\n         createUserWithEmailAndPassword, signInWithEmailAndPassword,\n         signOut, onAuthStateChanged } from \"firebase/auth\";\n\nconst auth = getAuth();\n\n// Google sign-in\nasync function signInWithGoogle() {\n  const provider = new GoogleAuthProvider();\n  const result = await signInWithPopup(auth, provider);\n  return result.user;\n}\n\n// Email/password registration\nasync function register(email: string, password: string) {\n  const result = await createUserWithEmailAndPassword(auth, email, password);\n  return result.user;\n}\n\n// Auth state listener\nonAuthStateChanged(auth, (user) => {\n  if (user) {\n    console.log(\"Signed in:\", user.uid, user.email);\n  } else {\n    console.log(\"Signed out\");\n  }\n});\n```\n\n## Cloud Functions\n\n```typescript\n// functions/src/index.ts\nimport { onRequest } from \"firebase-functions/v2/https\";\nimport { onDocumentCreated } from \"firebase-functions/v2/firestore\";\nimport { getFirestore } from \"firebase-admin/firestore\";\nimport { initializeApp } from \"firebase-admin/app\";\n\ninitializeApp();\nconst db = getFirestore();\n\n// HTTP function (API endpoint)\nexport const api = onRequest({ cors: true, region: \"us-central1\" }, async (req, res) => {\n  if (req.method !== \"GET\") {\n    res.status(405).send(\"Method not allowed\");\n    return;\n  }\n  const snapshot = await db.collection(\"posts\").orderBy(\"createdAt\", \"desc\").limit(10).get();\n  const p",
+  "tags": [
+    "javascript",
+    "typescript",
+    "node",
+    "api",
+    "ai",
+    "agent",
+    "template",
+    "document",
+    "security",
+    "firebase"
+  ],
+  "useCases": [
+    "Building mobile or web apps with real-time data sync",
+    "Need authentication with minimal backend code",
+    "Prototyping quickly with managed infrastructure",
+    "Building serverless APIs with Cloud Functions",
+    "Hosting static sites or SPAs with CDN"
+  ],
+  "scrapedAt": "2026-09-20T11:09:44.483Z"
+}

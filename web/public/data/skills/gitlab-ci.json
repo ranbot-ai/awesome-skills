@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-gitlab-ci",
+  "name": "gitlab-ci",
+  "slug": "gitlab-ci",
+  "description": "Configure GitLab CI/CD pipelines and runners for automated building, testing, and deployment.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gitlab-ci",
+  "content": "\n# GitLab CI/CD\n\nAutomate your software delivery pipeline with GitLab's integrated CI/CD system.\n\n## When to Use This Skill\n\nUse this skill when:\n- Setting up CI/CD pipelines in GitLab\n- Configuring GitLab runners (shared or self-hosted)\n- Creating multi-stage deployment pipelines\n- Implementing GitLab Auto DevOps\n- Managing CI/CD variables and secrets\n\n## Prerequisites\n\n- GitLab repository (gitlab.com or self-hosted)\n- Basic understanding of YAML\n- For self-hosted runners: Linux server or Kubernetes cluster\n\n## Pipeline Configuration\n\nCreate `.gitlab-ci.yml` in repository root:\n\n```yaml\nstages:\n  - build\n  - test\n  - deploy\n\nvariables:\n  NODE_VERSION: \"20\"\n\nbuild:\n  stage: build\n  image: node:${NODE_VERSION}\n  script:\n    - npm ci\n    - npm run build\n  artifacts:\n    paths:\n      - dist/\n    expire_in: 1 hour\n\ntest:\n  stage: test\n  image: node:${NODE_VERSION}\n  script:\n    - npm ci\n    - npm test\n  coverage: '/Coverage: \\d+\\.\\d+%/'\n\ndeploy:\n  stage: deploy\n  script:\n    - ./deploy.sh\n  environment:\n    name: production\n    url: https://example.com\n  only:\n    - main\n```\n\n## Job Configuration\n\n### Rules-Based Execution\n\n```yaml\ndeploy:\n  script: ./deploy.sh\n  rules:\n    - if: $CI_COMMIT_BRANCH == \"main\"\n      when: manual\n    - if: $CI_PIPELINE_SOURCE == \"merge_request_event\"\n      when: never\n    - when: on_success\n```\n\n### Parallel Jobs\n\n```yaml\ntest:\n  stage: test\n  parallel: 3\n  script:\n    - npm test -- --shard=$CI_NODE_INDEX/$CI_NODE_TOTAL\n```\n\n### Matrix Builds\n\n```yaml\ntest:\n  stage: test\n  parallel:\n    matrix:\n      - NODE_VERSION: [\"18\", \"20\", \"22\"]\n        OS: [\"alpine\", \"slim\"]\n  image: node:${NODE_VERSION}-${OS}\n  script:\n    - npm test\n```\n\n## Caching\n\n```yaml\ncache:\n  key:\n    files:\n      - package-lock.json\n  paths:\n    - node_modules/\n  policy: pull-push\n\nbuild:\n  cache:\n    key: build-cache\n    paths:\n      - .cache/\n    policy: pull\n```\n\n## Artifacts\n\n```yaml\nbuild:\n  artifacts:\n    paths:\n      - dist/\n      - coverage/\n    reports:\n      junit: junit.xml\n      coverage_report:\n        coverage_format: cobertura\n        path: coverage/cobertura.xml\n    expire_in: 1 week\n    when: always\n```\n\n## Environments and Deployments\n\n```yaml\ndeploy_staging:\n  stage: deploy\n  script:\n    - deploy --env staging\n  environment:\n    name: staging\n    url: https://staging.example.com\n    on_stop: stop_staging\n\nstop_staging:\n  stage: deploy\n  script:\n    - undeploy --env staging\n  environment:\n    name: staging\n    action: stop\n  when: manual\n```\n\n## Docker Builds\n\n```yaml\nbuild_image:\n  stage: build\n  image: docker:24\n  services:\n    - docker:24-dind\n  variables:\n    DOCKER_TLS_CERTDIR: \"/certs\"\n  script:\n    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY\n    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .\n    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA\n```\n\n## GitLab Runners\n\n### Install Runner\n\n```bash\n# Download and install\ncurl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash\nsudo apt install gitlab-runner\n\n# Register runner\nsudo gitlab-runner register \\\n  --url https://gitlab.com/ \\\n  --registration-token TOKEN \\\n  --executor docker \\\n  --docker-image alpine:latest\n```\n\n### Runner Configuration\n\n```toml\n# /etc/gitlab-runner/config.toml\n[[runners]]\n  name = \"docker-runner\"\n  url = \"https://gitlab.com/\"\n  token = \"TOKEN\"\n  executor = \"docker\"\n  [runners.docker]\n    image = \"alpine:latest\"\n    privileged = true\n    volumes = [\"/cache\", \"/var/run/docker.sock:/var/run/docker.sock\"]\n```\n\n### Runner Tags\n\n```yaml\nbuild:\n  tags:\n    - docker\n    - linux\n  script:\n    - make build\n```\n\n## CI/CD Variables\n\n### Protected Variables\n\nDefine in Settings > CI/CD > Variables:\n- `AWS_ACCESS_KEY_ID` (protected, masked)\n- `AWS_SECRET_ACCESS_KEY` (protected, masked)\n\n### Using Variables\n\n```yaml\ndeploy:\n  script:\n    - aws s3 sync dist/ s3://$S3_BUCKET\n  variables:\n    AWS_DEFAULT_REGION: us-east-1\n```\n\n## Include and Extend\n\n### Include Templates\n\n```yaml\ninclude:\n  - template: Security/SAST.gitlab-ci.yml\n  - project: 'group/shared-ci'\n    file: '/templates/deploy.yml'\n  - local: '/ci/jobs.yml'\n```\n\n### Extend Jobs\n\n```yaml\n.base_job:\n  image: node:20\n  before_script:\n    - npm ci\n\nbuild:\n  extends: .base_job\n  script:\n    - npm run build\n\ntest:\n  extends: .base_job\n  script:\n    - npm test\n```\n\n## Multi-Project Pipelines\n\n```yaml\ntrigger_downstream:\n  stage: deploy\n  trigger:\n    project: group/downstream-project\n    branch: main\n    strategy: depend\n```\n\n## Common Issues\n\n### Issue: Pipeline Stuck\n**Problem**: Jobs stay pending\n**Solution**: Check runner availability and tags matching\n\n### Issue: Docker-in-Docker Fails\n**Problem**: Cannot connect to Docker daemon\n**Solution**: Use `docker:dind` service with proper TLS configuration\n\n### Issue: Cache Not Working\n**Problem**: Cache misses between jobs\n**Solution**: Verify cache key and ensure runners share distributed cache\n\n## Best Practices\n\n- Use `rules` instead of `only/excep",
+  "tags": [
+    "node",
+    "ai",
+    "agent",
+    "template",
+    "image",
+    "security",
+    "docker",
+    "kubernetes",
+    "aws",
+    "rag"
+  ],
+  "useCases": [
+    "Setting up CI/CD pipelines in GitLab",
+    "Configuring GitLab runners (shared or self-hosted)",
+    "Creating multi-stage deployment pipelines",
+    "Implementing GitLab Auto DevOps",
+    "Managing CI/CD variables and secrets"
+  ],
+  "scrapedAt": "2026-09-20T11:10:43.840Z"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-change-management",
+  "name": "change-management",
+  "slug": "change-management",
+  "description": "Implement change management processes. Configure CAB reviews, change windows, and rollback procedures. Use when managing production changes.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/change-management",
+  "content": "\n# Change Management\n\nImplement structured change management processes covering change classification, CAB workflows, emergency change procedures, and automation for compliance with SOC 2, ITIL, and regulatory frameworks.\n\n## Change Classification\n\n```yaml\nchange_types:\n  standard:\n    risk: Low\n    approval: Pre-approved (no per-change approval needed)\n    lead_time: None (within maintenance window)\n    examples:\n      - Routine patching within tested patch sets\n      - Certificate rotation with established procedure\n      - Scaling operations (adding/removing instances within limits)\n      - Pre-approved configuration changes\n      - Log rotation and archival\n    requirements:\n      - Change must match an approved Standard Change template\n      - Automated testing must pass\n      - Documented rollback procedure exists\n      - Within defined maintenance window\n\n  normal_low:\n    risk: Low\n    approval: Peer review (1 approver)\n    lead_time: 2 business days\n    examples:\n      - Non-critical configuration changes\n      - Feature flag toggles\n      - Documentation updates to production systems\n      - Adding monitoring dashboards or alerts\n\n  normal_medium:\n    risk: Medium\n    approval: Team lead + peer review (2 approvers)\n    lead_time: 5 business days\n    examples:\n      - Application deployments with new features\n      - Database schema changes (non-breaking)\n      - Network rule modifications\n      - Integration endpoint changes\n      - Dependency version upgrades\n\n  normal_high:\n    risk: High\n    approval: CAB review required\n    lead_time: 10 business days\n    examples:\n      - Infrastructure migrations\n      - Breaking database schema changes\n      - Major version upgrades (OS, runtime, database engine)\n      - Changes to authentication or authorization systems\n      - Multi-service coordinated deployments\n      - Changes affecting data processing or compliance controls\n\n  emergency:\n    risk: Variable\n    approval: Emergency CAB (minimum 2 approvers from on-call)\n    lead_time: None (immediate implementation)\n    examples:\n      - Security vulnerability remediation (active exploitation)\n      - Production outage resolution\n      - Data integrity emergency fixes\n      - Regulatory compliance deadline fixes\n    requirements:\n      - Retroactive full documentation within 48 hours\n      - Post-implementation review required\n      - CAB retroactive review at next meeting\n```\n\n## Change Request Template\n\n```yaml\nchange_request:\n  metadata:\n    id: \"CR-YYYY-NNNN\"\n    title: \"\"\n    requestor: \"\"\n    date_submitted: \"\"\n    target_date: \"\"\n    change_type: \"\"  # standard | normal_low | normal_medium | normal_high | emergency\n\n  description:\n    summary: \"Brief description of the change\"\n    detailed_description: \"Full technical details of what will change\"\n    business_justification: \"Why this change is needed\"\n    affected_systems: []\n    affected_services: []\n    affected_users: \"Description of user impact\"\n\n  risk_assessment:\n    risk_level: \"\"  # low | medium | high\n    impact_if_failed: \"What happens if the change fails\"\n    likelihood_of_failure: \"\"  # low | medium | high\n    risk_mitigation: \"Steps to reduce risk\"\n    dependencies: \"Other systems or changes this depends on\"\n\n  implementation:\n    change_window:\n      start: \"\"\n      end: \"\"\n      maintenance_window: true\n    implementation_steps:\n      - step: \"Step 1 description\"\n        responsible: \"Person/team\"\n        estimated_duration: \"X minutes\"\n      - step: \"Step 2 description\"\n        responsible: \"Person/team\"\n        estimated_duration: \"X minutes\"\n\n  testing:\n    pre_change_testing:\n      - \"Unit tests pass\"\n      - \"Integration tests pass\"\n      - \"Staging deployment verified\"\n    post_change_verification:\n      - \"Health check endpoints responding\"\n      - \"Key transactions processing successfully\"\n      - \"No error rate increase in monitoring\"\n      - \"Performance metrics within baseline\"\n\n  rollback:\n    rollback_plan: \"Detailed steps to revert the change\"\n    rollback_trigger: \"Conditions that trigger rollback\"\n    rollback_estimated_time: \"X minutes\"\n    rollback_steps:\n      - \"Step 1: Revert deployment to previous version\"\n      - \"Step 2: Verify rollback successful\"\n      - \"Step 3: Notify stakeholders\"\n    data_rollback: \"Describe any data migration rollback needed\"\n\n  communication:\n    stakeholders_notified: []\n    notification_sent_date: \"\"\n    status_page_update: true\n    customer_notification_required: false\n\n  approvals:\n    technical_reviewer: \"\"\n    technical_approval_date: \"\"\n    security_reviewer: \"\"\n    security_approval_date: \"\"\n    cab_approval_date: \"\"\n    cab_notes: \"\"\n\n  closure:\n    implementation_date: \"\"\n    implementation_result: \"\"  # success | partial | failed | rolled_back\n    post_implementation_review: \"\"\n    lessons_learned: \"\"\n    follow_up_actions: []\n```\n\n## CAB Workflow\n\n```yaml\ncab_workflow:\n  meeting_schedule:\n    regular_cab: \"Weekly, Thursday 2:00 PM\"\n    emergency_cab: \"On-demand, minimum 2",
+  "tags": [
+    "markdown",
+    "api",
+    "ai",
+    "agent",
+    "automation",
+    "workflow",
+    "template",
+    "document",
+    "security",
+    "vulnerability"
+  ],
+  "useCases": [
+    "Establishing change management processes for production environments",
+    "Implementing change advisory board (CAB) workflows",
+    "Defining change classification and approval requirements",
+    "Configuring automated change tracking in CI/CD pipelines",
+    "Handling emergency changes with proper controls and documentation"
+  ],
+  "scrapedAt": "2026-09-20T11:05:52.256Z"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "antigravity-container-hardening",
+  "name": "container-hardening",
+  "slug": "container-hardening",
+  "description": "Secure Docker images and container runtime configurations.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/container-hardening",
+  "content": "\n# Container Hardening\n\nSecure container images and runtime configurations.\n\n## When to Use This Skill\n\nUse this skill when:\n- Building secure container images\n- Hardening container deployments\n- Meeting container security requirements\n- Implementing defense in depth\n\n## Dockerfile Security\n\n```dockerfile\n# Use minimal base image\nFROM alpine:3.18\n\n# Don't run as root\nRUN addgroup -g 1001 -S appgroup && \\\n    adduser -u 1001 -S appuser -G appgroup\n\n# Copy with specific ownership\nCOPY --chown=appuser:appgroup . /app\n\n# Remove unnecessary packages\nRUN apk del --purge build-dependencies && \\\n    rm -rf /var/cache/apk/*\n\n# Use non-root user\nUSER appuser\n\n# Read-only filesystem support\nWORKDIR /app\n```\n\n## Runtime Security\n\n```bash\n# Run with security options\ndocker run -d \\\n  --read-only \\\n  --tmpfs /tmp \\\n  --security-opt=no-new-privileges:true \\\n  --cap-drop=ALL \\\n  --cap-add=NET_BIND_SERVICE \\\n  --user 1001:1001 \\\n  myapp:latest\n```\n\n## Kubernetes Security Context\n\n```yaml\napiVersion: v1\nkind: Pod\nspec:\n  securityContext:\n    runAsNonRoot: true\n    runAsUser: 1001\n    fsGroup: 1001\n  containers:\n  - name: app\n    securityContext:\n      allowPrivilegeEscalation: false\n      readOnlyRootFilesystem: true\n      capabilities:\n        drop: [\"ALL\"]\n```\n\n## Image Scanning\n\n```bash\n# Scan with Trivy\ntrivy image --severity HIGH,CRITICAL myapp:latest\n\n# Use distroless images\nFROM gcr.io/distroless/static-debian11\n```\n\n## Best Practices\n\n- Use minimal base images\n- Run as non-root user\n- Enable read-only filesystem\n- Drop all capabilities\n- Scan images regularly\n- Sign and verify images\n- Use secrets management\n\n## Related Skills\n\n- container-scanning (`container-scanning`) - Vulnerability scanning\n- kubernetes-hardening (`kubernetes-hardening`) - K8s security\n\n## Limitations\n\n- Apply guidance only within authorized scope; test destructive steps in non-production first.\n- Docs-only import: upstream scripts and templates not bundled.\n\n### Example\n\n```bash\n# Read-only first: inventory before any active step.\nwhich <tool> && <tool> --help | head -n 20\n```\n\n> Adapted from [BagelHole/DevOps-Security-Agent-Skills](https://github.com/BagelHole/DevOps-Security-Agent-Skills) (MIT); frontmatter, When to Use/Limitations, and safety boundaries added for upstream compliance. Docs-only import: helper scripts and templates not bundled.\n",
+  "tags": [
+    "api",
+    "ai",
+    "agent",
+    "template",
+    "image",
+    "security",
+    "vulnerability",
+    "docker",
+    "kubernetes"
+  ],
+  "useCases": [
+    "Building secure container images",
+    "Hardening container deployments",
+    "Meeting container security requirements",
+    "Implementing defense in depth"
+  ],
+  "scrapedAt": "2026-09-20T11:06:48.347Z"
+}

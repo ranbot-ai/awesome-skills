@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-cloud-iam-deep",
+  "name": "cloud-iam-deep",
+  "slug": "cloud-iam-deep",
+  "description": "Cloud IAM red-team attack chain across AWS, Azure, GCP",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cloud-iam-deep",
+  "content": "> **⚠️ AUTHORIZED USE ONLY**\n> This skill is for educational purposes or authorized security assessments only.\n> You must have explicit, written permission from the system owner before using this tool.\n> Misuse of this tool is illegal and strictly prohibited.\n\n> **Mandatory confirmation gate**\n> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:\n> 1. Ask the user to state the exact target URL, IP, account, or resource.\n> 2. Ask the user to confirm written authorization and the permitted scope.\n> 3. Show the exact command(s) and explain their expected effect.\n> 4. Wait for explicit confirmation in the current conversation.\n>\n> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.\n\n## When to use\n\nTrigger when:\n- A cloud credential surfaces (key, secret, token, JSON file)\n- SSRF chain reaches IMDS / metadata endpoint\n- APK / git-leak reveals embedded cloud key\n- Recon shows public S3/GCS/Azure-blob with permissions you can verify\n- A Kubernetes API or service-account token is exposed\n- Post-RCE on a cloud-hosted instance — pivot to cloud control plane\n\nDo NOT use for:\n- On-prem-only environments (use AD attack skills — but those are out of scope per external-only boundary)\n- Web2 vulns that happen to be on AWS — use the relevant `hunt-*` skill\n\n---\n\n## Credential identification (first 60 seconds)\n\n```bash\n# AWS access key patterns\nAKIA[0-9A-Z]{16}                # IAM user access key (long-term)\nASIA[0-9A-Z]{16}                # STS temporary credential\nAGPA[0-9A-Z]{16}                # IAM group\nAIDA[0-9A-Z]{16}                # IAM user (user-id)\nAROA[0-9A-Z]{16}                # IAM role\nANPA[0-9A-Z]{16}                # Managed policy\n\n# AWS secret pattern (40-char base64-ish — context required)\n[A-Za-z0-9/+=]{40}              # AWS secret access key\n\n# Azure\nAccountKey=[A-Za-z0-9+/=]{86}   # Storage account key\nclient_secret pattern + UUID    # Azure AD app credential\n\n# GCP service account JSON\n{\n  \"type\": \"service_account\",\n  \"project_id\": \"...\",\n  \"private_key_id\": \"...\",\n  \"private_key\": \"-----BEGIN PRIVATE KEY-----...\"\n}\n\n# K8s SA token (JWT format — decode to confirm)\neyJhbGciOiJSUzI1...     # decode kid claim to see issuer\n```\n\n---\n\n## AWS — read-only validation (the safe first step)\n\n```bash\n# Set credential\nexport AWS_ACCESS_KEY_ID=\"AKIA...\"\nexport AWS_SECRET_ACCESS_KEY=\"...\"\n\n# 1. WHO am I?\naws sts get-caller-identity\n# Returns: UserId, Account, Arn\n# Arn tells you: IAM user vs role, account ID, name\n\n# 2. WHAT can I do? (the privesc question)\n# Try common read-only first — failures still inform you\naws iam list-users 2>&1 | head -5\naws iam list-roles 2>&1 | head -5\naws iam list-policies 2>&1 | head -5\naws iam list-groups 2>&1 | head -5\n\n# 3. WHAT policies are attached to me?\naws iam list-attached-user-policies --user-name <self>\naws iam list-user-policies --user-name <self>          # inline policies\naws iam list-groups-for-user --user-name <self>\n\n# 4. Service-by-service surface\naws ec2 describe-instances --max-items 1 2>&1 | head\naws s3 ls 2>&1 | head -10\naws lambda list-functions --max-items 5 2>&1 | head\naws rds describe-db-instances --max-items 5 2>&1 | head\naws secretsmanager list-secrets --max-results 5 2>&1 | head\naws ssm describe-parameters --max-results 5 2>&1 | head\n\n# 5. Audit any cross-account / external trust\naws iam list-roles --query 'Roles[?contains(AssumeRolePolicyDocument.Statement[0].Principal.AWS, `arn:aws:iam::`)]' 2>&1 | head -20\n```\n\n---\n\n## AWS privesc patterns (24+ documented — `iam_privesc` techniques)\n\nQuick lookup — if you have any of these IAM actions, escalate via the listed technique:\n\n| You have | Escalate via |\n|---|---|\n| `iam:CreateAccessKey` | Create access key on any user → impersonate |\n| `iam:CreateLoginProfile` | Set a console password on a user → login |\n| `iam:UpdateLoginProfile` | Reset console password on a user |\n| `iam:AttachUserPolicy` | Attach AdministratorAccess to self |\n| `iam:AttachGroupPolicy` | Attach AdministratorAccess to a group you're in |\n| `iam:AttachRolePolicy` + sts:AssumeRole | Attach to a role you can assume |\n| `iam:PutUserPolicy` | Inline AdministratorAccess to self |\n| `iam:PutGroupPolicy` | Inline policy on a group |\n| `iam:PutRolePolicy` | Inline on a role you can assume |\n| `iam:AddUserToGroup` | Add self to admin group |\n| `iam:UpdateAssumeRolePolicy` + sts:AssumeRole | Modify trust to allow self |\n| `iam:CreatePolicyVersion` | Create v2 of an attached policy with admin |\n| `iam:SetDefaultPolicyVersion` | Switch attached policy to admin version |\n| `iam:PassRole` + ec2:RunInstances | Launch EC2 as admin role → use instance creds |\n| `iam:PassRole` + lambda:CreateFunction/InvokeFunction | Run code as admin role |\n| `iam:PassRole` + cloudformation:CreateStack | CF stack creates resources as admin |\n| `iam:PassRole` + glue:CreateDevEndpoint | Notebook runs as a",
+  "tags": [
+    "node",
+    "api",
+    "claude",
+    "ai",
+    "workflow",
+    "document",
+    "security",
+    "hacking",
+    "kubernetes",
+    "aws"
+  ],
+  "useCases": [
+    "A cloud credential surfaces (key, secret, token, JSON file)",
+    "SSRF chain reaches IMDS / metadata endpoint",
+    "APK / git-leak reveals embedded cloud key",
+    "Recon shows public S3/GCS/Azure-blob with permissions you can verify",
+    "A Kubernetes API or service-account token is exposed"
+  ],
+  "scrapedAt": "2026-09-20T11:06:14.045Z"
+}

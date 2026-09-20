@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-circleci",
+  "name": "circleci",
+  "slug": "circleci",
+  "description": "Configure CircleCI workflows and orbs for continuous integration and deployment.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/circleci",
+  "content": "\n# CircleCI\n\nBuild, test, and deploy applications using CircleCI's cloud-native CI/CD platform.\n\n## When to Use This Skill\n\nUse this skill when:\n- Setting up CI/CD pipelines with CircleCI\n- Using orbs for reusable configuration\n- Optimizing build times with caching and parallelism\n- Configuring CircleCI workflows and approvals\n- Managing CircleCI contexts and secrets\n\n## Prerequisites\n\n- CircleCI account connected to repository\n- Project enabled in CircleCI dashboard\n- Basic YAML understanding\n\n## Configuration File\n\nCreate `.circleci/config.yml`:\n\n```yaml\nversion: 2.1\n\norbs:\n  node: circleci/node@5.2\n  docker: circleci/docker@2.4\n\nexecutors:\n  default:\n    docker:\n      - image: cimg/node:20.10\n    working_directory: ~/project\n\njobs:\n  build:\n    executor: default\n    steps:\n      - checkout\n      - node/install-packages:\n          pkg-manager: npm\n      - run:\n          name: Build application\n          command: npm run build\n      - persist_to_workspace:\n          root: .\n          paths:\n            - dist\n\n  test:\n    executor: default\n    steps:\n      - checkout\n      - node/install-packages:\n          pkg-manager: npm\n      - run:\n          name: Run tests\n          command: npm test\n\n  deploy:\n    executor: default\n    steps:\n      - checkout\n      - attach_workspace:\n          at: .\n      - run:\n          name: Deploy\n          command: ./deploy.sh\n\nworkflows:\n  build-test-deploy:\n    jobs:\n      - build\n      - test:\n          requires:\n            - build\n      - deploy:\n          requires:\n            - test\n          filters:\n            branches:\n              only: main\n```\n\n## Executors\n\n### Docker Executor\n\n```yaml\nexecutors:\n  node:\n    docker:\n      - image: cimg/node:20.10\n      - image: cimg/postgres:15.0\n        environment:\n          POSTGRES_USER: test\n          POSTGRES_DB: testdb\n    working_directory: ~/app\n```\n\n### Machine Executor\n\n```yaml\nexecutors:\n  linux-machine:\n    machine:\n      image: ubuntu-2204:current\n    resource_class: large\n```\n\n### macOS Executor\n\n```yaml\nexecutors:\n  macos:\n    macos:\n      xcode: \"15.0.0\"\n    resource_class: macos.m1.medium.gen1\n```\n\n## Caching\n\n### Dependency Caching\n\n```yaml\njobs:\n  build:\n    steps:\n      - checkout\n      - restore_cache:\n          keys:\n            - v1-deps-{{ checksum \"package-lock.json\" }}\n            - v1-deps-\n      - run: npm ci\n      - save_cache:\n          key: v1-deps-{{ checksum \"package-lock.json\" }}\n          paths:\n            - node_modules\n```\n\n### Multi-Key Caching\n\n```yaml\n- restore_cache:\n    keys:\n      - v1-{{ .Branch }}-{{ checksum \"package-lock.json\" }}\n      - v1-{{ .Branch }}-\n      - v1-main-\n      - v1-\n```\n\n## Workspaces\n\n### Persist Data\n\n```yaml\njobs:\n  build:\n    steps:\n      - checkout\n      - run: npm run build\n      - persist_to_workspace:\n          root: .\n          paths:\n            - dist\n            - node_modules\n\n  deploy:\n    steps:\n      - attach_workspace:\n          at: ~/project\n      - run: ./deploy.sh\n```\n\n## Parallelism\n\n### Test Splitting\n\n```yaml\njobs:\n  test:\n    parallelism: 4\n    steps:\n      - checkout\n      - run:\n          name: Run tests\n          command: |\n            TESTFILES=$(circleci tests glob \"test/**/*.test.js\" | circleci tests split --split-by=timings)\n            npm test -- $TESTFILES\n      - store_test_results:\n          path: test-results\n```\n\n## Workflows\n\n### Sequential Jobs\n\n```yaml\nworkflows:\n  pipeline:\n    jobs:\n      - build\n      - test:\n          requires:\n            - build\n      - deploy:\n          requires:\n            - test\n```\n\n### Parallel Jobs\n\n```yaml\nworkflows:\n  pipeline:\n    jobs:\n      - build\n      - test-unit:\n          requires:\n            - build\n      - test-integration:\n          requires:\n            - build\n      - deploy:\n          requires:\n            - test-unit\n            - test-integration\n```\n\n### Manual Approval\n\n```yaml\nworkflows:\n  deploy-prod:\n    jobs:\n      - build\n      - test\n      - hold:\n          type: approval\n          requires:\n            - test\n      - deploy-production:\n          requires:\n            - hold\n```\n\n### Scheduled Workflows\n\n```yaml\nworkflows:\n  nightly:\n    triggers:\n      - schedule:\n          cron: \"0 2 * * *\"\n          filters:\n            branches:\n              only:\n                - main\n    jobs:\n      - build\n      - test\n```\n\n### Branch Filtering\n\n```yaml\nworkflows:\n  build-deploy:\n    jobs:\n      - build:\n          filters:\n            branches:\n              only:\n                - main\n                - /feature-.*/\n      - deploy:\n          filters:\n            branches:\n              only: main\n            tags:\n              only: /^v.*/\n```\n\n## Orbs\n\n### Using Orbs\n\n```yaml\nversion: 2.1\n\norbs:\n  aws-cli: circleci/aws-cli@4.1\n  kubernetes: circleci/kubernetes@1.3\n\njobs:\n  deploy:\n    executor: aws-cli/default\n    steps:\n      - aws-cli/setup:\n          aws_access_key_id: AWS_ACCESS_KEY_ID\n          aws_secret_access_key: AWS_SECRET_ACCESS_KEY\n      - kubernetes/install-",
+  "tags": [
+    "node",
+    "ai",
+    "agent",
+    "workflow",
+    "template",
+    "image",
+    "security",
+    "docker",
+    "kubernetes",
+    "aws"
+  ],
+  "useCases": [
+    "Setting up CI/CD pipelines with CircleCI",
+    "Using orbs for reusable configuration",
+    "Optimizing build times with caching and parallelism",
+    "Configuring CircleCI workflows and approvals",
+    "Managing CircleCI contexts and secrets"
+  ],
+  "scrapedAt": "2026-09-20T11:05:57.812Z"
+}

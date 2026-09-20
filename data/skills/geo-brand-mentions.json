@@ -1,0 +1,26 @@
+{
+  "id": "antigravity-geo-brand-mentions",
+  "name": "geo-brand-mentions",
+  "slug": "geo-brand-mentions",
+  "description": "Brand mention and authority scanner for AI visibility.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/geo-brand-mentions",
+  "content": "\n# Brand Mention Scanner Skill\n\n## Core Insight\n\nBrand mentions correlate approximately 3x more strongly with AI visibility than traditional backlinks. An Ahrefs study published in December 2025, analyzing 75,000 brands across AI search platforms, found that **unlinked brand mentions** -- references to a brand name without a hyperlink -- are a stronger predictor of whether AI systems cite and recommend a brand than Domain Rating or backlink count.\n\nThe critical finding: **the platform where the mention appears matters enormously.** Not all mentions are equal. A mention on YouTube or Reddit carries far more weight for AI citation than a mention on a low-authority blog, because AI training data and retrieval systems disproportionately index high-engagement platforms.\n\nThis inverts a core assumption of traditional SEO. In traditional SEO, a backlink from a high-DR site is the gold standard. In GEO, an unlinked mention on Reddit or a YouTube video description may be more valuable than a dofollow backlink from a DR 70 blog.\n\n---\n\n\n## Contents\n\n- [Platform Importance Ranking for AI Citations](references/details.md)\n- [Composite Brand Authority Score](references/details.md)\n- [Analysis Procedure](references/details.md)\n- [Output Format](references/details.md)\n- [Brand Authority Score: [X]/100 ([Rating])](references/details.md)\n- [Platform Detail](references/details.md)\n- [Recommendations](references/details.md)\n- [Competitive Context](references/details.md)\n- [Key Takeaway](references/details.md)\n- [Reference Data](references/details.md)\n\n## When to Use\n\n- You need a Generative Engine Optimization task for a website: audit, citability, crawlers, schema, llms.txt, content, platform tuning, or client reporting.\n- Run read-only analysis first; propose site changes before making any.\n\n## Limitations\n\n- Audits are read-only analysis; never publish, deploy, or modify the target site without explicit approval.\n- Scores and citation likelihoods are heuristics, not guarantees from AI search platforms.\n- Docs-only import: upstream scripts, agents, hooks, and schema templates are not bundled.\n\n### Example\n\n```bash\ncurl -s https://example.com/robots.txt\ncurl -s https://example.com/llms.txt\n```\n\n> Adapted from [zubair-trabzada/geo-seo-claude](https://github.com/zubair-trabzada/geo-seo-claude) (MIT); frontmatter, When to Use/Limitations, and safety boundaries added for upstream compliance. Docs-only import: upstream runtime helpers not bundled.\n",
+  "tags": [
+    "pdf",
+    "claude",
+    "ai",
+    "agent",
+    "llm",
+    "template",
+    "seo",
+    "cro"
+  ],
+  "useCases": [
+    "You need a Generative Engine Optimization task for a website: audit, citability, crawlers, schema, llms.txt, content, platform tuning, or client reporting.",
+    "Run read-only analysis first; propose site changes before making any."
+  ],
+  "scrapedAt": "2026-09-20T11:10:26.252Z"
+}

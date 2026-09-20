@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-datadog",
+  "name": "datadog",
+  "slug": "datadog",
+  "description": "Implement Datadog monitoring and APM for infrastructure and applications.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/datadog",
+  "content": "\n# Datadog\n\nMonitor infrastructure and applications with Datadog's unified observability platform.\n\n## When to Use This Skill\n\nUse this skill when:\n- Implementing enterprise-grade monitoring\n- Setting up APM and distributed tracing\n- Creating unified dashboards for infrastructure and apps\n- Configuring intelligent alerting\n- Monitoring cloud infrastructure (AWS, Azure, GCP)\n\n## Prerequisites\n\n- Datadog account and API key\n- Agent installation access\n- Application code access for APM\n\n## Agent Installation\n\n### Linux\n\n```bash\n# Install agent\nDD_API_KEY=<YOUR_API_KEY> DD_SITE=\"datadoghq.com\" bash -c \"$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)\"\n\n# Or via package manager\napt-get update && apt-get install datadog-agent\n\n# Configure API key\necho \"api_key: YOUR_API_KEY\" >> /etc/datadog-agent/datadog.yaml\n\n# Start agent\nsystemctl start datadog-agent\nsystemctl enable datadog-agent\n```\n\n### Docker\n\n```yaml\n# docker-compose.yml\nversion: '3.8'\n\nservices:\n  datadog-agent:\n    image: gcr.io/datadoghq/agent:7\n    environment:\n      - DD_API_KEY=${DD_API_KEY}\n      - DD_SITE=datadoghq.com\n      - DD_LOGS_ENABLED=true\n      - DD_APM_ENABLED=true\n      - DD_PROCESS_AGENT_ENABLED=true\n    volumes:\n      - /var/run/docker.sock:/var/run/docker.sock:ro\n      - /proc/:/host/proc/:ro\n      - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro\n    ports:\n      - \"8126:8126\"  # APM\n      - \"8125:8125/udp\"  # DogStatsD\n```\n\n### Kubernetes\n\n```bash\n# Using Helm\nhelm repo add datadog https://helm.datadoghq.com\n\nhelm install datadog datadog/datadog \\\n  --set datadog.apiKey=${DD_API_KEY} \\\n  --set datadog.site=datadoghq.com \\\n  --set datadog.logs.enabled=true \\\n  --set datadog.apm.portEnabled=true \\\n  --set datadog.processAgent.enabled=true \\\n  --namespace datadog \\\n  --create-namespace\n```\n\n## Agent Configuration\n\n```yaml\n# /etc/datadog-agent/datadog.yaml\napi_key: YOUR_API_KEY\nsite: datadoghq.com\n\n# Hostname\nhostname: myserver.example.com\n\n# Tags applied to all metrics\ntags:\n  - env:production\n  - service:myapp\n  - team:platform\n\n# Log collection\nlogs_enabled: true\n\n# APM\napm_config:\n  enabled: true\n  apm_dd_url: https://trace.agent.datadoghq.com\n\n# Process monitoring\nprocess_config:\n  enabled: true\n\n# Container monitoring\ncontainer_collect_all: true\ndocker_labels_as_tags:\n  app: service\n  environment: env\n```\n\n## Integration Configuration\n\n### MySQL\n\n```yaml\n# /etc/datadog-agent/conf.d/mysql.d/conf.yaml\ninit_config:\n\ninstances:\n  - host: localhost\n    port: 3306\n    username: datadog\n    password: <PASSWORD>\n    tags:\n      - env:production\n    options:\n      replication: true\n      extra_status_metrics: true\n```\n\n### PostgreSQL\n\n```yaml\n# /etc/datadog-agent/conf.d/postgres.d/conf.yaml\ninit_config:\n\ninstances:\n  - host: localhost\n    port: 5432\n    username: datadog\n    password: <PASSWORD>\n    dbname: mydb\n    collect_activity_metrics: true\n    collect_database_size_metrics: true\n```\n\n### NGINX\n\n```yaml\n# /etc/datadog-agent/conf.d/nginx.d/conf.yaml\ninit_config:\n\ninstances:\n  - nginx_status_url: http://localhost:80/nginx_status\n    tags:\n      - env:production\n```\n\n## Log Collection\n\n### File-Based Logs\n\n```yaml\n# /etc/datadog-agent/conf.d/myapp.d/conf.yaml\nlogs:\n  - type: file\n    path: /var/log/myapp/*.log\n    service: myapp\n    source: python\n    sourcecategory: custom\n    tags:\n      - env:production\n\n  - type: file\n    path: /var/log/nginx/access.log\n    service: nginx\n    source: nginx\n    log_processing_rules:\n      - type: exclude_at_match\n        name: exclude_healthchecks\n        pattern: health_check\n```\n\n### Docker Logs\n\n```yaml\n# docker-compose.yml\nservices:\n  myapp:\n    labels:\n      com.datadoghq.ad.logs: '[{\"source\": \"python\", \"service\": \"myapp\"}]'\n```\n\n### Kubernetes Logs\n\n```yaml\n# Pod annotation\napiVersion: v1\nkind: Pod\nmetadata:\n  annotations:\n    ad.datadoghq.com/myapp.logs: |\n      [{\n        \"source\": \"python\",\n        \"service\": \"myapp\",\n        \"log_processing_rules\": [{\n          \"type\": \"multi_line\",\n          \"name\": \"python_tracebacks\",\n          \"pattern\": \"^Traceback\"\n        }]\n      }]\n```\n\n## APM Configuration\n\n### Python\n\n```python\nfrom ddtrace import patch_all, tracer\n\n# Automatic instrumentation\npatch_all()\n\n# Configure tracer\ntracer.configure(\n    hostname='localhost',\n    port=8126,\n    service='myapp',\n    env='production',\n    version='1.0.0'\n)\n\n# Manual instrumentation\n@tracer.wrap(service='myapp', resource='process_order')\ndef process_order(order_id):\n    with tracer.trace('validate_order') as span:\n        span.set_tag('order_id', order_id)\n        # Validation logic\n    \n    with tracer.trace('save_order'):\n        # Save logic\n        pass\n```\n\n```bash\n# Install library\npip install ddtrace\n\n# Run with auto-instrumentation\nddtrace-run python app.py\n```\n\n### Node.js\n\n```javascript\nconst tracer = require('dd-trace').init({\n  service: 'myapp',\n  env: 'production',\n  version: '1.0.0',\n  logInjection: true\n});\n\n// Manual instrumentation\nconst span = tracer.startSpan('custom_",
+  "tags": [
+    "python",
+    "javascript",
+    "node",
+    "api",
+    "ai",
+    "agent",
+    "template",
+    "image",
+    "security",
+    "docker"
+  ],
+  "useCases": [
+    "Implementing enterprise-grade monitoring",
+    "Setting up APM and distributed tracing",
+    "Creating unified dashboards for infrastructure and apps",
+    "Configuring intelligent alerting",
+    "Monitoring cloud infrastructure (AWS, Azure, GCP)"
+  ],
+  "scrapedAt": "2026-09-20T11:07:46.118Z"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-access-review",
+  "name": "access-review",
+  "slug": "access-review",
+  "description": "Conduct periodic access reviews and certifications. Implement access governance and recertification workflows. Use when managing access compliance.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/access-review",
+  "content": "\n# Access Review\n\nImplement periodic access review processes for AWS IAM, GitHub, Okta, and other identity providers, including automated reporting, certification workflows, and unused permission detection.\n\n## Access Review Process\n\n```yaml\naccess_review_workflow:\n  1_scope:\n    actions:\n      - Define systems in scope for the review cycle\n      - Identify review owners (managers, system owners)\n      - Set review timeline and deadlines\n      - Generate access inventory from all identity sources\n    frequency:\n      privileged_access: Quarterly\n      standard_access: Semi-annually\n      service_accounts: Quarterly\n      api_keys: Monthly\n\n  2_extract:\n    actions:\n      - Pull current access data from all systems\n      - Correlate identities across platforms (SSO mapping)\n      - Enrich with last login and activity data\n      - Flag accounts for review (inactive, over-privileged, orphaned)\n\n  3_review:\n    actions:\n      - Assign review items to appropriate managers\n      - Manager certifies each user's access (approve/revoke/modify)\n      - Risk-based prioritization (privileged users reviewed first)\n      - Escalate non-responses after deadline\n    decisions:\n      approve: \"Access is appropriate for current role\"\n      modify: \"Access needs adjustment (reduce/change scope)\"\n      revoke: \"Access is no longer needed\"\n\n  4_remediate:\n    actions:\n      - Revoke access flagged for removal\n      - Modify access as directed by reviewers\n      - Document exceptions with justification\n      - Confirm changes with system owners\n    sla:\n      revocations: \"Complete within 5 business days of decision\"\n      modifications: \"Complete within 10 business days\"\n      exceptions: \"Approved by security team, documented, time-limited\"\n\n  5_report:\n    actions:\n      - Generate completion metrics (% reviewed, % on time)\n      - Document all decisions and actions taken\n      - Archive evidence for compliance audits\n      - Identify process improvements for next cycle\n```\n\n## AWS IAM Access Review Scripts\n\n```bash\n#!/usr/bin/env bash\n# aws-iam-review.sh - Comprehensive IAM access review report\n\nOUTPUT_DIR=\"./access-review/$(date +%Y-%m)\"\nmkdir -p \"$OUTPUT_DIR\"\n\necho \"=== AWS IAM Access Review ===\"\n\n# Generate credential report\naws iam generate-credential-report > /dev/null\nsleep 10\naws iam get-credential-report --output text --query Content | \\\n  base64 -d > \"$OUTPUT_DIR/credential-report.csv\"\n\necho \"--- Users Without MFA ---\"\naws iam get-credential-report --output text --query Content | base64 -d | \\ <!-- security-allowlist: documented payload decoding technique reference, do not execute outside authorized scope -->\n  awk -F, 'NR>1 && $4==\"true\" && $8==\"false\" {print $1}' | \\\n  tee \"$OUTPUT_DIR/users-without-mfa.txt\"\n\necho \"--- Inactive Users (90+ days) ---\"\nTHRESHOLD=$(date -d '90 days ago' +%Y-%m-%dT%H:%M:%S 2>/dev/null || date -v-90d +%Y-%m-%dT%H:%M:%S)\naws iam get-credential-report --output text --query Content | base64 -d | \\ <!-- security-allowlist: documented payload decoding technique reference, do not execute outside authorized scope -->\n  awk -F, -v t=\"$THRESHOLD\" 'NR>1 && $5!=\"N/A\" && $5!=\"no_information\" && $5<t {\n    print $1\",\"$5\n  }' | tee \"$OUTPUT_DIR/inactive-users.csv\"\n\necho \"--- Stale Access Keys (90+ days unused) ---\"\nfor user in $(aws iam list-users --query 'Users[*].UserName' --output text); do\n  for key_id in $(aws iam list-access-keys --user-name \"$user\" \\\n    --query 'AccessKeyMetadata[?Status==`Active`].AccessKeyId' --output text); do\n    last_used=$(aws iam get-access-key-last-used --access-key-id \"$key_id\" \\\n      --query 'AccessKeyLastUsed.LastUsedDate' --output text)\n    if [ \"$last_used\" = \"None\" ] || [ \"$last_used\" \\< \"$THRESHOLD\" ]; then\n      echo \"$user,$key_id,$last_used\"\n    fi\n  done\ndone | tee \"$OUTPUT_DIR/stale-access-keys.csv\"\n\necho \"--- Users With Admin Policies ---\"\nfor user in $(aws iam list-users --query 'Users[*].UserName' --output text); do\n  policies=$(aws iam list-attached-user-policies --user-name \"$user\" \\\n    --query 'AttachedPolicies[*].PolicyName' --output text)\n  if echo \"$policies\" | grep -qi \"admin\\|fullaccess\"; then\n    groups=$(aws iam list-groups-for-user --user-name \"$user\" \\\n      --query 'Groups[*].GroupName' --output text)\n    echo \"$user|policies:$policies|groups:$groups\"\n  fi\ndone | tee \"$OUTPUT_DIR/admin-users.txt\"\n\necho \"--- IAM Roles With Cross-Account Trust ---\"\nfor role in $(aws iam list-roles --query 'Roles[*].RoleName' --output text); do\n  trust=$(aws iam get-role --role-name \"$role\" \\\n    --query 'Role.AssumeRolePolicyDocument' --output json 2>/dev/null)\n  if echo \"$trust\" | grep -q '\"AWS\"' && echo \"$trust\" | grep -qv \"$(aws sts get-caller-identity --query Account --output text)\"; then\n    echo \"$role: $trust\" | jq -c '.Statement[].Principal'\n  fi\ndone | tee \"$OUTPUT_DIR/cross-account-roles.txt\"\n\necho \"--- Service Accounts (Programmatic Only) ---\"\naws iam get-credential-report --output text --query Content | base64 -d | \\ <!-- security-allowlist: doc",
+  "tags": [
+    "python",
+    "markdown",
+    "api",
+    "ai",
+    "agent",
+    "automation",
+    "workflow",
+    "template",
+    "document",
+    "security"
+  ],
+  "useCases": [
+    "Conducting quarterly or annual access reviews for compliance (SOC 2, HIPAA, PCI DSS, ISO 27001)",
+    "Identifying and removing stale accounts and unused credentials",
+    "Certifying that current access levels match job responsibilities",
+    "Detecting excessive privileges and dormant service accounts",
+    "Generating evidence for auditor requests on access governance"
+  ],
+  "scrapedAt": "2026-09-20T11:02:34.138Z"
+}

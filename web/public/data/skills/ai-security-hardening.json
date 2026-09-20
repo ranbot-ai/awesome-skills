@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-ai-security-hardening",
+  "name": "ai-security-hardening",
+  "slug": "ai-security-hardening",
+  "description": "Harden AI/LLM deployments against prompt injection, data exfiltration, model theft, and supply chain attacks.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-security-hardening",
+  "content": "\n# AI Security Hardening\n\nSecure LLM and AI systems against prompt injection, jailbreaks, data leakage, and supply chain threats in production environments.\n\n## When to Use This Skill\n\nUse this skill when:\n- Deploying an LLM-powered application handling sensitive user data\n- Protecting against prompt injection attacks in AI agents\n- Implementing output filtering and content moderation\n- Securing model weights and API endpoints from theft\n- Achieving SOC2 or ISO 27001 compliance for AI systems\n\n## AI-Specific Threat Model\n\n```\nThreat                    Risk                          Control\n─────────────────────────────────────────────────────────────────────\nPrompt injection          System prompt override         Input sanitization, separate context\nData exfiltration         PII in model outputs           Output filtering, DLP scanning\nJailbreaking             Policy bypass                  Content moderation, guardrails\nModel theft               Weight extraction via API      Rate limiting, access controls\nTraining data poisoning   Backdoored fine-tuned model    Dataset validation, provenance\nSupply chain attack       Malicious model weights        Signature verification, scanning\nInsecure output           XSS/SQLi from LLM response     Output encoding, parameterized queries\n```\n\n## Prompt Injection Defense\n\n```python\nimport re\nfrom typing import Optional\n\nINJECTION_PATTERNS = [\n    r\"ignore\\s+(all\\s+)?(previous|prior|above)\\s+instructions\",\n    r\"you\\s+are\\s+now\\s+\",\n    r\"new\\s+instructions?:\",\n    r\"system\\s+prompt\",\n    r\"forget\\s+everything\",\n    r\"act\\s+as\\s+\",\n    r\"jailbreak\",\n    r\"dan\\s+mode\",\n    r\"<\\s*system\\s*>\",\n    r\"\\[INST\\]\",\n]\n\ndef detect_prompt_injection(user_input: str) -> tuple[bool, Optional[str]]:\n    \"\"\"Return (is_suspicious, matched_pattern).\"\"\"\n    normalized = user_input.lower().strip()\n    for pattern in INJECTION_PATTERNS:\n        if re.search(pattern, normalized, re.IGNORECASE):\n            return True, pattern\n    return False, None\n\ndef sanitize_user_input(user_input: str, max_length: int = 4000) -> str:\n    \"\"\"Sanitize input before passing to LLM.\"\"\"\n    # Truncate\n    user_input = user_input[:max_length]\n\n    # Remove null bytes and control characters\n    user_input = re.sub(r'[\\x00-\\x08\\x0b\\x0c\\x0e-\\x1f\\x7f]', '', user_input)\n\n    # Check for injection\n    suspicious, pattern = detect_prompt_injection(user_input)\n    if suspicious:\n        raise ValueError(f\"Potential prompt injection detected: {pattern}\")\n\n    return user_input\n```\n\n## Guardrails with NeMo Guardrails\n\n```python\n# guardrails.yaml\nfrom nemoguardrails import RailsConfig, LLMRails\n\nconfig = RailsConfig.from_path(\"./guardrails-config\")\nrails = LLMRails(config)\n\nasync def safe_llm_call(user_message: str) -> str:\n    response = await rails.generate_async(\n        messages=[{\"role\": \"user\", \"content\": user_message}]\n    )\n    return response[\"content\"]\n```\n\n```yaml\n# guardrails-config/config.yml\nmodels:\n  - type: main\n    engine: openai\n    model: gpt-4o-mini\n\nrails:\n  input:\n    flows:\n      - check jailbreak\n      - check sensitive data\n  output:\n    flows:\n      - check output for PII\n      - check output for harmful content\n```\n\n## Output Filtering & PII Scrubbing\n\n```python\nimport re\nfrom presidio_analyzer import AnalyzerEngine\nfrom presidio_anonymizer import AnonymizerEngine\n\nanalyzer = AnalyzerEngine()\nanonymizer = AnonymizerEngine()\n\nPII_ENTITIES = [\"PERSON\", \"EMAIL_ADDRESS\", \"PHONE_NUMBER\", \"CREDIT_CARD\",\n                \"US_SSN\", \"IBAN_CODE\", \"IP_ADDRESS\", \"LOCATION\"]\n\ndef scrub_pii_from_output(text: str) -> str:\n    \"\"\"Remove PII from LLM output before returning to user.\"\"\"\n    results = analyzer.analyze(text=text, entities=PII_ENTITIES, language=\"en\")\n    if not results:\n        return text\n    anonymized = anonymizer.anonymize(text=text, analyzer_results=results)\n    return anonymized.text\n\ndef validate_output_safety(output: str) -> bool:\n    \"\"\"Check output doesn't contain prompt injection artifacts.\"\"\"\n    dangerous_patterns = [\n        r\"<\\s*script\\s*>\",         # XSS\n        r\"javascript:\",             # XSS\n        r\";\\s*(DROP|DELETE|INSERT)\",# SQLi\n        r\"\\$\\{.*\\}\",               # template injection\n        r\"`.*`\",                   # command injection in some contexts\n    ]\n    for pattern in dangerous_patterns:\n        if re.search(pattern, output, re.IGNORECASE):\n            return False\n    return True\n```\n\n## API Security for LLM Endpoints\n\n```python\nfrom fastapi import FastAPI, HTTPException, Depends, Request\nfrom fastapi.security import HTTPBearer, HTTPAuthorizationCredentials\nimport jwt\nimport time\nfrom collections import defaultdict\n\napp = FastAPI()\nsecurity = HTTPBearer()\n\n# Rate limiting (per API key)\nrequest_counts = defaultdict(list)\n\ndef rate_limit(api_key: str, max_requests: int = 100, window_seconds: int = 60):\n    now = time.time()\n    requests = request_counts[api_key]\n    # Remove old requests outside window\n    request_counts[api_key] = [t for t in requests if now - t ",
+  "tags": [
+    "python",
+    "javascript",
+    "api",
+    "ai",
+    "agent",
+    "llm",
+    "gpt",
+    "template",
+    "security",
+    "kubernetes"
+  ],
+  "useCases": [
+    "Deploying an LLM-powered application handling sensitive user data",
+    "Protecting against prompt injection attacks in AI agents",
+    "Implementing output filtering and content moderation",
+    "Securing model weights and API endpoints from theft",
+    "Achieving SOC2 or ISO 27001 compliance for AI systems"
+  ],
+  "scrapedAt": "2026-09-20T11:03:07.632Z"
+}

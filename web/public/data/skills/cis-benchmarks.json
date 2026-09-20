@@ -1,0 +1,30 @@
+{
+  "id": "antigravity-cis-benchmarks",
+  "name": "cis-benchmarks",
+  "slug": "cis-benchmarks",
+  "description": "Audit and remediate CIS benchmark violations.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cis-benchmarks",
+  "content": "\n# CIS Benchmarks\n\nImplement and audit CIS security benchmarks.\n\n## When to Use This Skill\n\nUse this skill when:\n- Assessing security compliance\n- Implementing security baselines\n- Meeting regulatory requirements\n- Hardening systems to standards\n\n## Assessment Tools\n\n### OpenSCAP\n\n```bash\n# Install\napt install openscap-scanner scap-security-guide\n\n# Run CIS benchmark scan\noscap xccdf eval \\\n  --profile xccdf_org.ssgproject.content_profile_cis \\\n  --results results.xml \\\n  --report report.html \\\n  /usr/share/xml/scap/ssg/content/ssg-ubuntu2204-ds.xml\n```\n\n### Lynis\n\n```bash\n# Install\napt install lynis\n\n# Run audit\nlynis audit system\n\n# Generate report\nlynis audit system --report-file /tmp/lynis-report.dat\n```\n\n### InSpec\n\n```ruby\n# cis-profile/controls/ssh.rb\ncontrol 'cis-ssh-1' do\n  impact 1.0\n  title 'Ensure SSH root login is disabled'\n  \n  describe sshd_config do\n    its('PermitRootLogin') { should eq 'no' }\n  end\nend\n\ncontrol 'cis-ssh-2' do\n  impact 0.7\n  title 'Ensure SSH password authentication is disabled'\n  \n  describe sshd_config do\n    its('PasswordAuthentication') { should eq 'no' }\n  end\nend\n```\n\n```bash\n# Run InSpec\ninspec exec cis-profile -t ssh://user@target\n```\n\n### Kubernetes CIS\n\n```bash\n# kube-bench\ndocker run --rm -v /etc:/etc:ro -v /var:/var:ro \\\n  aquasec/kube-bench:latest run --targets node\n\n# Check specific sections\nkube-bench run --targets master --check 1.1,1.2\n```\n\n## Remediation Workflow\n\n```yaml\nworkflow:\n  1_scan:\n    - Run automated assessment\n    - Generate baseline report\n    \n  2_analyze:\n    - Review findings\n    - Identify false positives\n    - Prioritize by risk\n    \n  3_remediate:\n    - Apply fixes\n    - Document exceptions\n    - Verify changes\n    \n  4_validate:\n    - Re-run assessment\n    - Confirm remediation\n    - Generate compliance report\n```\n\n## Best Practices\n\n- Baseline before hardening\n- Document exceptions\n- Automate assessments\n- Track compliance over time\n- Regular re-assessment\n- Version control configurations\n\n## Related Skills\n\n- linux-hardening (`linux-hardening`) - Linux security\n- vulnerability-scanning (`vulnerability-scanning`) - Security scanning\n\n## Limitations\n\n- Apply guidance only within authorized scope; test destructive steps in non-production first.\n- Docs-only import: upstream scripts and templates not bundled.\n\n### Example\n\n```bash\n# Read-only first: inventory before any active step.\nwhich <tool> && <tool> --help | head -n 20\n```\n\n> Adapted from [BagelHole/DevOps-Security-Agent-Skills](https://github.com/BagelHole/DevOps-Security-Agent-Skills) (MIT); frontmatter, When to Use/Limitations, and safety boundaries added for upstream compliance. Docs-only import: helper scripts and templates not bundled.\n",
+  "tags": [
+    "node",
+    "ai",
+    "agent",
+    "workflow",
+    "template",
+    "document",
+    "security",
+    "vulnerability",
+    "docker",
+    "kubernetes"
+  ],
+  "useCases": [
+    "Assessing security compliance",
+    "Implementing security baselines",
+    "Meeting regulatory requirements",
+    "Hardening systems to standards"
+  ],
+  "scrapedAt": "2026-09-20T11:05:58.484Z"
+}

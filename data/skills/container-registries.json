@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-container-registries",
+  "name": "container-registries",
+  "slug": "container-registries",
+  "description": "Manage container registries including ECR, ACR, GCR, and Docker Hub.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/container-registries",
+  "content": "\n# Container Registries\n\nStore, manage, and distribute container images across cloud and self-hosted registries.\n\n## When to Use This Skill\n\nUse this skill when:\n- Pushing and pulling container images\n- Configuring registry authentication\n- Setting up image retention policies\n- Managing private container registries\n- Implementing image scanning and security\n\n## Prerequisites\n\n- Docker or Podman installed\n- Cloud CLI tools (AWS CLI, az, gcloud) for respective registries\n- Appropriate IAM permissions\n\n## Docker Hub\n\n### Authentication\n\n```bash\n# Login\ndocker login\n\n# Login with token\necho \"$DOCKER_TOKEN\" | docker login -u username --password-stdin\n```\n\n### Push/Pull Images\n\n```bash\n# Tag image\ndocker tag myapp:latest username/myapp:latest\n\n# Push\ndocker push username/myapp:latest\n\n# Pull\ndocker pull username/myapp:latest\n```\n\n### Automated Builds\n\nConfigure in Docker Hub UI:\n1. Connect GitHub/Bitbucket repository\n2. Set build rules (branch → tag mapping)\n3. Configure build context and Dockerfile path\n\n## Amazon ECR\n\n### Setup\n\n```bash\n# Create repository\naws ecr create-repository \\\n  --repository-name myapp \\\n  --image-scanning-configuration scanOnPush=true \\\n  --encryption-configuration encryptionType=AES256\n\n# Get registry URI\nREGISTRY=$(aws ecr describe-repositories \\\n  --repository-names myapp \\\n  --query 'repositories[0].repositoryUri' \\\n  --output text | cut -d'/' -f1)\n```\n\n### Authentication\n\n```bash\n# Login (Docker)\naws ecr get-login-password --region us-east-1 | \\\n  docker login --username AWS --password-stdin $REGISTRY\n\n# Login with credential helper\n# Add to ~/.docker/config.json:\n{\n  \"credHelpers\": {\n    \"123456789.dkr.ecr.us-east-1.amazonaws.com\": \"ecr-login\"\n  }\n}\n```\n\n### Push/Pull\n\n```bash\n# Tag and push\ndocker tag myapp:latest $REGISTRY/myapp:latest\ndocker push $REGISTRY/myapp:latest\n\n# Pull\ndocker pull $REGISTRY/myapp:latest\n```\n\n### Lifecycle Policy\n\n```bash\n# Create lifecycle policy\naws ecr put-lifecycle-policy \\\n  --repository-name myapp \\\n  --lifecycle-policy-text '{\n    \"rules\": [\n      {\n        \"rulePriority\": 1,\n        \"description\": \"Keep last 10 images\",\n        \"selection\": {\n          \"tagStatus\": \"any\",\n          \"countType\": \"imageCountMoreThan\",\n          \"countNumber\": 10\n        },\n        \"action\": {\n          \"type\": \"expire\"\n        }\n      }\n    ]\n  }'\n```\n\n### Repository Policy\n\n```bash\n# Allow cross-account access\naws ecr set-repository-policy \\\n  --repository-name myapp \\\n  --policy-text '{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n      {\n        \"Sid\": \"CrossAccountPull\",\n        \"Effect\": \"Allow\",\n        \"Principal\": {\n          \"AWS\": \"arn:aws:iam::OTHER_ACCOUNT:root\"\n        },\n        \"Action\": [\n          \"ecr:GetDownloadUrlForLayer\",\n          \"ecr:BatchGetImage\"\n        ]\n      }\n    ]\n  }'\n```\n\n## Azure Container Registry (ACR)\n\n### Setup\n\n```bash\n# Create registry\naz acr create \\\n  --resource-group mygroup \\\n  --name myregistry \\\n  --sku Standard \\\n  --admin-enabled false\n\n# Get login server\naz acr show --name myregistry --query loginServer -o tsv\n```\n\n### Authentication\n\n```bash\n# Login with Azure CLI\naz acr login --name myregistry\n\n# Login with service principal\ndocker login myregistry.azurecr.io \\\n  -u $SP_APP_ID \\\n  -p $SP_PASSWORD\n\n# Get access token\naz acr login --name myregistry --expose-token\n```\n\n### Push/Pull\n\n```bash\n# Tag and push\ndocker tag myapp:latest myregistry.azurecr.io/myapp:latest\ndocker push myregistry.azurecr.io/myapp:latest\n\n# ACR Build (build in cloud)\naz acr build \\\n  --registry myregistry \\\n  --image myapp:latest \\\n  --file Dockerfile .\n```\n\n### Retention Policy\n\n```bash\n# Enable retention policy\naz acr config retention update \\\n  --registry myregistry \\\n  --status enabled \\\n  --days 30 \\\n  --type UntaggedManifests\n```\n\n### Geo-Replication\n\n```bash\n# Enable replication\naz acr replication create \\\n  --registry myregistry \\\n  --location westeurope\n\n# List replications\naz acr replication list --registry myregistry\n```\n\n## Google Container Registry (GCR) / Artifact Registry\n\n### Setup (Artifact Registry)\n\n```bash\n# Create repository\ngcloud artifacts repositories create myrepo \\\n  --repository-format=docker \\\n  --location=us-central1 \\\n  --description=\"Docker repository\"\n```\n\n### Authentication\n\n```bash\n# Configure Docker auth\ngcloud auth configure-docker us-central1-docker.pkg.dev\n\n# Or use credential helper\ngcloud auth print-access-token | \\\n  docker login -u oauth2accesstoken --password-stdin \\\n  https://us-central1-docker.pkg.dev\n```\n\n### Push/Pull\n\n```bash\n# Tag for Artifact Registry\ndocker tag myapp:latest \\\n  us-central1-docker.pkg.dev/PROJECT_ID/myrepo/myapp:latest\n\n# Push\ndocker push us-central1-docker.pkg.dev/PROJECT_ID/myrepo/myapp:latest\n\n# Pull\ndocker pull us-central1-docker.pkg.dev/PROJECT_ID/myrepo/myapp:latest\n```\n\n### Cleanup Policy\n\n```bash\n# Create cleanup policy\ngcloud artifacts repositories set-cleanup-policies myrepo \\\n  --location=us-central1 \\\n  --policy=policy.json\n\n# policy.json\n{\n  \"name\": \"delete-old\"",
+  "tags": [
+    "ai",
+    "agent",
+    "template",
+    "image",
+    "security",
+    "vulnerability",
+    "docker",
+    "aws",
+    "azure",
+    "rag"
+  ],
+  "useCases": [
+    "Pushing and pulling container images",
+    "Configuring registry authentication",
+    "Setting up image retention policies",
+    "Managing private container registries",
+    "Implementing image scanning and security"
+  ],
+  "scrapedAt": "2026-09-20T11:06:48.680Z"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-dast-scanning",
+  "name": "dast-scanning",
+  "slug": "dast-scanning",
+  "description": "Perform dynamic application security testing with OWASP ZAP, Burp Suite, and Nikto.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dast-scanning",
+  "content": "> **⚠️ AUTHORIZED USE ONLY**\n> This skill is for educational purposes or authorized security assessments only.\n> You must have explicit, written permission from the system owner before using this tool.\n> Misuse of this tool is illegal and strictly prohibited.\n\n> **Mandatory confirmation gate**\n> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:\n> 1. Ask the user to state the exact target URL, IP, account, or resource.\n> 2. Ask the user to confirm written authorization and the permitted scope.\n> 3. Show the exact command(s) and explain their expected effect.\n> 4. Wait for explicit confirmation in the current conversation.\n>\n> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.\n\n# DAST Scanning\n\nTest running applications for security vulnerabilities through dynamic analysis.\n\n## When to Use This Skill\n\nUse this skill when:\n- Testing deployed applications\n- Performing automated security scans\n- Finding runtime vulnerabilities\n- Testing authentication flows\n- Validating API security\n\n## Prerequisites\n\n- Running application instance\n- Network access to target\n- Testing authorization\n- Understanding of web security\n\n## Tool Overview\n\n| Tool | Type | Best For |\n|------|------|----------|\n| OWASP ZAP | OSS | Automated scanning, CI |\n| Burp Suite | Commercial | Manual testing, advanced |\n| Nikto | OSS | Web server scanning |\n| Nuclei | OSS | Template-based scanning |\n| Arachni | OSS | Comprehensive scanning |\n\n## OWASP ZAP\n\n### Docker Setup\n\n```bash\n# Run ZAP in daemon mode\ndocker run -d --name zap \\\n  -p 8080:8080 \\\n  -v $(pwd)/reports:/zap/reports \\\n  ghcr.io/zaproxy/zaproxy:stable \\\n  zap.sh -daemon -host 0.0.0.0 -port 8080 \\\n  -config api.addrs.addr.name=.* \\\n  -config api.addrs.addr.regex=true\n```\n\n### Baseline Scan\n\n```bash\n# Quick baseline scan\ndocker run --rm -v $(pwd):/zap/wrk \\\n  ghcr.io/zaproxy/zaproxy:stable \\\n  zap-baseline.py -t https://target.example.com \\\n  -r baseline-report.html\n\n# With authentication\ndocker run --rm -v $(pwd):/zap/wrk \\\n  ghcr.io/zaproxy/zaproxy:stable \\\n  zap-baseline.py -t https://target.example.com \\\n  -r report.html \\\n  --auth-login-url https://target.example.com/login \\\n  --auth-username user \\\n  --auth-password pass\n```\n\n### Full Scan\n\n```bash\n# Comprehensive scan\ndocker run --rm -v $(pwd):/zap/wrk \\\n  ghcr.io/zaproxy/zaproxy:stable \\\n  zap-full-scan.py -t https://target.example.com \\\n  -r full-report.html \\\n  -J full-report.json\n```\n\n### API Scan\n\n```bash\n# OpenAPI specification scan\ndocker run --rm -v $(pwd):/zap/wrk \\\n  ghcr.io/zaproxy/zaproxy:stable \\\n  zap-api-scan.py -t https://target.example.com/openapi.json \\\n  -f openapi \\\n  -r api-report.html\n```\n\n### ZAP Automation Framework\n\n```yaml\n# zap-automation.yaml\nenv:\n  contexts:\n    - name: \"Default Context\"\n      urls:\n        - \"https://target.example.com\"\n      includePaths:\n        - \"https://target.example.com/.*\"\n      excludePaths:\n        - \"https://target.example.com/logout.*\"\n      authentication:\n        method: \"form\"\n        parameters:\n          loginUrl: \"https://target.example.com/login\"\n          loginRequestData: \"username={%username%}&password={%password%}\"\n        verification:\n          method: \"response\"\n          loggedInRegex: \"\\\\QWelcome\\\\E\"\n      users:\n        - name: \"testuser\"\n          credentials:\n            username: \"test@example.com\"\n            password: \"password123\"\n\njobs:\n  - type: spider\n    parameters:\n      context: \"Default Context\"\n      user: \"testuser\"\n      maxDuration: 10\n      \n  - type: spiderAjax\n    parameters:\n      context: \"Default Context\"\n      user: \"testuser\"\n      maxDuration: 10\n      \n  - type: passiveScan-wait\n    parameters:\n      maxDuration: 5\n      \n  - type: activeScan\n    parameters:\n      context: \"Default Context\"\n      user: \"testuser\"\n      policy: \"Default Policy\"\n      \n  - type: report\n    parameters:\n      template: \"traditional-html\"\n      reportDir: \"/zap/reports\"\n      reportFile: \"zap-report\"\n```\n\n```bash\n# Run automation\ndocker run --rm -v $(pwd):/zap/wrk \\\n  ghcr.io/zaproxy/zaproxy:stable \\\n  zap.sh -cmd -autorun /zap/wrk/zap-automation.yaml\n```\n\n## CI/CD Integration\n\n### GitHub Actions\n\n```yaml\nname: DAST Scan\n\non:\n  workflow_dispatch:\n  schedule:\n    - cron: '0 2 * * *'\n\njobs:\n  dast:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n\n      - name: Start Application\n        run: |\n          docker-compose up -d\n          sleep 30  # Wait for app to be ready\n\n      - name: OWASP ZAP Scan\n        uses: zaproxy/action-full-scan@v0.8.0\n        with:\n          target: 'http://localhost:8080'\n          rules_file_name: '.zap/rules.tsv'\n          cmd_options: '-a'\n\n      - name: Upload Report\n        uses: actions/upload-artifact@v4\n        if: always()\n        with:\n          name: zap-report\n          path: report_html.html\n```\n\n### GitLab CI\n\n```yaml\nd",
+  "tags": [
+    "python",
+    "api",
+    "ai",
+    "agent",
+    "automation",
+    "workflow",
+    "template",
+    "image",
+    "security",
+    "docker"
+  ],
+  "useCases": [
+    "Testing deployed applications",
+    "Performing automated security scans",
+    "Finding runtime vulnerabilities",
+    "Testing authentication flows",
+    "Validating API security"
+  ],
+  "scrapedAt": "2026-09-20T11:07:37.817Z"
+}

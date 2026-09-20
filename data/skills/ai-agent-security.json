@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-ai-agent-security",
+  "name": "ai-agent-security",
+  "slug": "ai-agent-security",
+  "description": "Secure AI agents against prompt injection, tool abuse, and data exfiltration with defense-in-depth controls.",
+  "category": "Security & Systems",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-agent-security",
+  "content": "\n# AI Agent Security\n\nProtect agentic AI systems from adversarial input, unsafe tool execution, data leakage, and privilege abuse with layered security controls.\n\n## Prerequisites\n\n- Python 3.10+ for guardrail code examples\n- Docker or Podman for sandbox execution\n- OpenTelemetry collector for audit logging\n- Familiarity with your agent framework (LangChain, CrewAI, Autogen, custom)\n- Access to policy engine (OPA/Cedar) for permission boundaries\n\n## Threat Model — STRIDE for AI Agents\n\nAI agents introduce a unique threat surface. Apply STRIDE specifically to agentic components:\n\n| Threat | Agent-Specific Example | Control |\n|--------|----------------------|---------|\n| **Spoofing** | Attacker crafts input that mimics a trusted internal tool response | Signed tool responses, HMAC verification |\n| **Tampering** | Prompt injection modifies agent reasoning mid-chain | Input validation, prompt armoring |\n| **Repudiation** | Agent takes destructive action with no audit trail | Immutable structured logging |\n| **Information Disclosure** | Agent leaks PII, secrets, or internal architecture in responses | Output filtering, content classifiers |\n| **Denial of Service** | Adversarial prompt causes infinite tool loops or token exhaustion | Rate limits, token budgets, circuit breakers |\n| **Elevation of Privilege** | Agent escalates from read-only to write via chained tool calls | RBAC per tool, least-privilege scoping |\n\n### Key Threat Categories\n\n**Prompt Injection** — Untrusted content (user input, web scrapes, document contents) manipulates the agent's system prompt or reasoning chain to execute unintended actions.\n\n**Tool Abuse** — The agent calls tools in sequences or with parameters the designer did not anticipate, achieving effects beyond its intended scope.\n\n**Data Exfiltration** — The agent encodes sensitive data (credentials, PII, internal IPs) into its responses, tool calls, or outbound HTTP requests.\n\n**Cross-Tenant Leakage** — In multi-tenant deployments, context from one tenant's session bleeds into another through shared memory, vector stores, or cache.\n\n**Privilege Escalation** — The agent chains low-privilege tool calls to achieve high-privilege outcomes (e.g., read config -> extract credentials -> call admin API).\n\n## Input Validation\n\nEvery input to an agent must be sanitized before it reaches the model or any tool. This includes user messages, tool outputs being fed back, and retrieved documents.\n\n### Prompt Injection Detection\n\n```python\nimport re\nfrom dataclasses import dataclass\nfrom enum import Enum\n\nclass RiskLevel(Enum):\n    LOW = \"low\"\n    MEDIUM = \"medium\"\n    HIGH = \"high\"\n    CRITICAL = \"critical\"\n\n@dataclass\nclass ValidationResult:\n    is_safe: bool\n    risk_level: RiskLevel\n    matched_rules: list[str]\n    sanitized_input: str\n\nINJECTION_PATTERNS = [\n    (r\"ignore\\s+(all\\s+)?(previous|prior|above)\\s+(instructions|prompts|rules)\", \"instruction_override\"),\n    (r\"you\\s+are\\s+now\\s+(a|an|the)\\s+\", \"role_hijack\"),\n    (r\"system\\s*:\\s*\", \"system_prompt_inject\"),\n    (r\"<\\|?(system|im_start|endoftext)\\|?>\", \"control_token_inject\"),\n    (r\"\\[INST\\]|\\[\\/INST\\]|<<SYS>>\", \"template_inject\"),\n    (r\"(?:execute|run|eval)\\s*\\(\", \"code_execution_attempt\"),\n    (r\"(?:curl|wget|nc|ncat)\\s+\", \"network_command_inject\"),\n    (r\"(?:rm\\s+-rf|mkfs|dd\\s+if=|chmod\\s+777)\", \"destructive_command\"),\n    (r\"(?:\\/etc\\/passwd|\\/etc\\/shadow|\\.env\\b|\\.ssh\\/)\", \"path_traversal\"),\n    (r\"(?:BEGIN\\s+(?:RSA|DSA|EC)\\s+PRIVATE\\s+KEY)\", \"secret_exfil_attempt\"),\n]\n\ndef validate_agent_input(user_input: str, max_length: int = 4096) -> ValidationResult:\n    \"\"\"Validate and sanitize input before passing to agent.\"\"\"\n    matched = []\n    risk = RiskLevel.LOW\n\n    # Length check\n    if len(user_input) > max_length:\n        matched.append(\"input_too_long\")\n        risk = RiskLevel.MEDIUM\n\n    # Null byte and control character removal\n    sanitized = user_input.replace(\"\\x00\", \"\")\n    sanitized = re.sub(r\"[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f]\", \"\", sanitized)\n\n    # Pattern matching\n    for pattern, rule_name in INJECTION_PATTERNS:\n        if re.search(pattern, sanitized, re.IGNORECASE):\n            matched.append(rule_name)\n            risk = RiskLevel.HIGH\n\n    # Stacked injection detection (multiple suspicious patterns)\n    if len(matched) >= 3:\n        risk = RiskLevel.CRITICAL\n\n    is_safe = risk in (RiskLevel.LOW, RiskLevel.MEDIUM)\n\n    return ValidationResult(\n        is_safe=is_safe,\n        risk_level=risk,\n        matched_rules=matched,\n        sanitized_input=sanitized[:max_length] if is_safe else \"\",\n    )\n```\n\n### Content Classification Middleware\n\nUse a lightweight classifier as middleware before the agent processes any input:\n\n```python\nfrom functools import wraps\nfrom typing import Callable\n\ndef input_guard(validator: Callable = validate_agent_input):\n    \"\"\"Decorator that guards agent entry points against unsafe input.\"\"\"\n    def decorator(func):\n        @wraps(func)\n        async def wrapper(user_input: str, *args, **kwargs):",
+  "tags": [
+    "python",
+    "api",
+    "ai",
+    "agent",
+    "workflow",
+    "template",
+    "design",
+    "document",
+    "image",
+    "security"
+  ],
+  "useCases": [
+    "Building AI agents that invoke tools, APIs, or shell commands",
+    "Deploying agents with access to production databases, cloud accounts, or internal services",
+    "Hardening multi-tenant agent platforms against cross-tenant data leakage",
+    "Adding guardrails to autonomous coding agents or SRE bots",
+    "Designing approval workflows for high-risk agent actions"
+  ],
+  "scrapedAt": "2026-09-20T11:03:01.186Z"
+}

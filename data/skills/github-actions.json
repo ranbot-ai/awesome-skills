@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-github-actions",
+  "name": "github-actions",
+  "slug": "github-actions",
+  "description": "Build, test, and deploy applications using GitHub Actions workflows.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/github-actions",
+  "content": "\n# GitHub Actions\n\nAutomate software workflows directly in your GitHub repository with GitHub Actions.\n\n## When to Use This Skill\n\nUse this skill when:\n- Setting up CI/CD pipelines for GitHub repositories\n- Automating build, test, and deployment workflows\n- Creating reusable workflow components\n- Configuring self-hosted runners\n- Managing workflow secrets and variables\n- Debugging failed workflow runs\n\n## Prerequisites\n\n- GitHub repository with write access\n- Understanding of YAML syntax\n- For self-hosted runners: server with Docker (optional)\n\n## Workflow File Structure\n\nWorkflows are defined in `.github/workflows/` directory:\n\n```yaml\nname: CI Pipeline\n\non:\n  push:\n    branches: [main, develop]\n  pull_request:\n    branches: [main]\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - name: Setup Node.js\n        uses: actions/setup-node@v4\n        with:\n          node-version: '20'\n          cache: 'npm'\n      - run: npm ci\n      - run: npm test\n```\n\n## Common Triggers\n\n### Push and Pull Request\n\n```yaml\non:\n  push:\n    branches: [main]\n    paths:\n      - 'src/**'\n      - 'package.json'\n  pull_request:\n    branches: [main]\n```\n\n### Scheduled Runs\n\n```yaml\non:\n  schedule:\n    - cron: '0 2 * * *'  # Daily at 2 AM UTC\n```\n\n### Manual Dispatch\n\n```yaml\non:\n  workflow_dispatch:\n    inputs:\n      environment:\n        description: 'Deployment environment'\n        required: true\n        default: 'staging'\n        type: choice\n        options:\n          - staging\n          - production\n```\n\n## Job Configuration\n\n### Matrix Builds\n\n```yaml\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        node-version: [18, 20, 22]\n        os: [ubuntu-latest, windows-latest]\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: ${{ matrix.node-version }}\n      - run: npm test\n```\n\n### Job Dependencies\n\n```yaml\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: npm run build\n      \n  test:\n    needs: build\n    runs-on: ubuntu-latest\n    steps:\n      - run: npm test\n      \n  deploy:\n    needs: [build, test]\n    runs-on: ubuntu-latest\n    steps:\n      - run: ./deploy.sh\n```\n\n### Environment Protection\n\n```yaml\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    environment:\n      name: production\n      url: https://example.com\n    steps:\n      - run: ./deploy.sh\n```\n\n## Secrets and Variables\n\n### Using Secrets\n\n```yaml\nsteps:\n  - name: Deploy\n    env:\n      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}\n      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}\n    run: aws s3 sync ./dist s3://my-bucket\n```\n\n### Using Variables\n\n```yaml\nsteps:\n  - name: Build\n    env:\n      API_URL: ${{ vars.API_URL }}\n    run: npm run build\n```\n\n## Caching Dependencies\n\n```yaml\n- uses: actions/cache@v4\n  with:\n    path: ~/.npm\n    key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}\n    restore-keys: |\n      ${{ runner.os }}-node-\n```\n\n## Artifacts\n\n### Upload Artifacts\n\n```yaml\n- uses: actions/upload-artifact@v4\n  with:\n    name: build-output\n    path: dist/\n    retention-days: 5\n```\n\n### Download Artifacts\n\n```yaml\n- uses: actions/download-artifact@v4\n  with:\n    name: build-output\n    path: dist/\n```\n\n## Docker Builds\n\n```yaml\njobs:\n  docker:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      \n      - name: Login to Docker Hub\n        uses: docker/login-action@v3\n        with:\n          username: ${{ secrets.DOCKER_USERNAME }}\n          password: ${{ secrets.DOCKER_PASSWORD }}\n      \n      - name: Build and push\n        uses: docker/build-push-action@v5\n        with:\n          context: .\n          push: true\n          tags: user/app:latest\n```\n\n## Reusable Workflows\n\n### Define Reusable Workflow\n\n```yaml\n# .github/workflows/reusable-deploy.yml\nname: Reusable Deploy\n\non:\n  workflow_call:\n    inputs:\n      environment:\n        required: true\n        type: string\n    secrets:\n      deploy_key:\n        required: true\n\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    environment: ${{ inputs.environment }}\n    steps:\n      - run: echo \"Deploying to ${{ inputs.environment }}\"\n```\n\n### Call Reusable Workflow\n\n```yaml\njobs:\n  deploy-staging:\n    uses: ./.github/workflows/reusable-deploy.yml\n    with:\n      environment: staging\n    secrets:\n      deploy_key: ${{ secrets.STAGING_KEY }}\n```\n\n## Self-Hosted Runners\n\n### Register Runner\n\n```bash\n# Download runner\nmkdir actions-runner && cd actions-runner\ncurl -o actions-runner-linux-x64.tar.gz -L https://github.com/actions/runner/releases/download/v2.311.0/actions-runner-linux-x64-2.311.0.tar.gz\ntar xzf actions-runner-linux-x64.tar.gz\n\n# Configure\n./config.sh --url https://github.com/OWNER/REPO --token TOKEN\n\n# Run\n./run.sh\n```\n\n### Use Self-Hosted Runner\n\n```yaml\njobs:\n  build:\n    runs-on: self-hosted\n    steps:\n      - uses: actions/checkout@v4\n```\n\n## Debugging Workflows\n\n### Enable Debug Logging\n\nSet repository sec",
+  "tags": [
+    "node",
+    "api",
+    "ai",
+    "agent",
+    "workflow",
+    "template",
+    "security",
+    "docker",
+    "aws",
+    "cro"
+  ],
+  "useCases": [
+    "Setting up CI/CD pipelines for GitHub repositories",
+    "Automating build, test, and deployment workflows",
+    "Creating reusable workflow components",
+    "Configuring self-hosted runners",
+    "Managing workflow secrets and variables"
+  ],
+  "scrapedAt": "2026-09-20T11:10:40.389Z"
+}

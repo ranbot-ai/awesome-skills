@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-ai-pipeline-orchestration",
+  "name": "ai-pipeline-orchestration",
+  "slug": "ai-pipeline-orchestration",
+  "description": "Orchestrate AI/ML pipelines for data ingestion, model training, batch inference, and RAG indexing using Prefect, Airflow, or Dagster.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-pipeline-orchestration",
+  "content": "\n# AI Pipeline Orchestration\n\nBuild reliable, observable AI workflows — from document ingestion to batch inference to model training pipelines.\n\n## When to Use This Skill\n\nUse this skill when:\n- Scheduling recurring RAG document ingestion and re-indexing\n- Orchestrating multi-step batch LLM processing workflows\n- Running nightly model evaluation and fine-tuning jobs\n- Building ETL pipelines that feed into AI models\n- Managing dependencies between data preparation and model serving\n\n## Tool Selection\n\n| Tool | Best For | Complexity | GPU Jobs |\n|------|----------|------------|----------|\n| **Prefect** | Modern Python-first; easy to adopt | Low | Good |\n| **Airflow** | Complex DAGs; large teams; existing usage | High | Good |\n| **Dagster** | Asset-centric; strong data lineage | Medium | Excellent |\n| **Temporal** | Long-running workflows; reliability-first | Medium | Good |\n\n## Prefect — Quick Start\n\n```bash\npip install prefect prefect-kubernetes\n\n# Start Prefect server (or use Prefect Cloud)\nprefect server start\n\n# In another terminal\nprefect worker start --pool default-agent-pool\n```\n\n## Prefect: RAG Ingestion Pipeline\n\n```python\nfrom prefect import flow, task, get_run_logger\nfrom prefect.tasks import task_input_hash\nfrom datetime import timedelta\nimport hashlib\n\n@task(cache_key_fn=task_input_hash, cache_expiration=timedelta(hours=24))\ndef fetch_documents(source_url: str) -> list[dict]:\n    \"\"\"Fetch documents from source; cached to avoid re-fetching.\"\"\"\n    logger = get_run_logger()\n    logger.info(f\"Fetching from {source_url}\")\n    # ... fetch logic\n    return documents\n\n@task(retries=3, retry_delay_seconds=30)\ndef chunk_and_embed(documents: list[dict]) -> list[dict]:\n    \"\"\"Chunk documents and generate embeddings with retry on failure.\"\"\"\n    from sentence_transformers import SentenceTransformer\n    model = SentenceTransformer(\"BAAI/bge-large-en-v1.5\")\n    chunks = []\n    for doc in documents:\n        doc_chunks = chunk_text(doc[\"content\"])\n        embeddings = model.encode(doc_chunks, batch_size=64)\n        for chunk, emb in zip(doc_chunks, embeddings):\n            chunks.append({\"text\": chunk, \"embedding\": emb.tolist(),\n                           \"source\": doc[\"url\"], \"doc_hash\": doc[\"hash\"]})\n    return chunks\n\n@task(retries=2)\ndef upsert_to_vector_store(chunks: list[dict]) -> int:\n    \"\"\"Upsert embeddings to Qdrant, skip unchanged documents.\"\"\"\n    from qdrant_client import QdrantClient\n    client = QdrantClient(\"http://qdrant:6333\")\n    client.upsert(collection_name=\"knowledge-base\", points=[...])\n    return len(chunks)\n\n@flow(name=\"rag-ingestion\", log_prints=True)\ndef rag_ingestion_pipeline(sources: list[str]):\n    \"\"\"Full RAG ingestion flow — runs daily.\"\"\"\n    logger = get_run_logger()\n    total = 0\n    for source in sources:\n        docs = fetch_documents(source)\n        chunks = chunk_and_embed(docs)\n        count = upsert_to_vector_store(chunks)\n        total += count\n        logger.info(f\"Ingested {count} chunks from {source}\")\n    logger.info(f\"Pipeline complete: {total} total chunks indexed\")\n\nif __name__ == \"__main__\":\n    rag_ingestion_pipeline.serve(\n        name=\"daily-rag-ingestion\",\n        cron=\"0 2 * * *\",          # 2 AM daily\n        parameters={\"sources\": [\"https://docs.myapp.com\", \"https://api.myapp.com/kb\"]},\n    )\n```\n\n## Prefect: Batch LLM Inference Pipeline\n\n```python\nfrom prefect import flow, task\nfrom prefect.concurrency.sync import concurrency\nimport asyncio\nfrom openai import AsyncOpenAI\n\n@task(retries=3, retry_delay_seconds=60)\nasync def process_batch(items: list[dict], model: str = \"gpt-4o-mini\") -> list[dict]:\n    \"\"\"Process a batch of items through LLM with rate limit protection.\"\"\"\n    client = AsyncOpenAI()\n    async with concurrency(\"openai-api\", occupy=len(items)):  # rate limit\n        tasks = [\n            client.chat.completions.create(\n                model=model,\n                messages=[{\"role\": \"user\", \"content\": item[\"prompt\"]}],\n                max_tokens=256,\n            )\n            for item in items\n        ]\n        responses = await asyncio.gather(*tasks, return_exceptions=True)\n\n    results = []\n    for item, response in zip(items, responses):\n        if isinstance(response, Exception):\n            results.append({**item, \"error\": str(response), \"output\": None})\n        else:\n            results.append({**item, \"output\": response.choices[0].message.content})\n    return results\n\n@flow(name=\"batch-llm-inference\")\nasync def batch_inference_flow(input_file: str, output_file: str, batch_size: int = 50):\n    import json\n    items = [json.loads(line) for line in open(input_file)]\n    batches = [items[i:i+batch_size] for i in range(0, len(items), batch_size)]\n\n    all_results = []\n    for batch in batches:\n        results = await process_batch(batch)\n        all_results.extend(results)\n\n    with open(output_file, \"w\") as f:\n        for result in all_results:\n            f.write(json.dumps(result) + \"\\n\")\n    return len(all_results)\n```\n\n## Airflow: Model ",
+  "tags": [
+    "python",
+    "node",
+    "api",
+    "ai",
+    "agent",
+    "llm",
+    "gpt",
+    "workflow",
+    "template",
+    "document"
+  ],
+  "useCases": [
+    "Scheduling recurring RAG document ingestion and re-indexing",
+    "Orchestrating multi-step batch LLM processing workflows",
+    "Running nightly model evaluation and fine-tuning jobs",
+    "Building ETL pipelines that feed into AI models",
+    "Managing dependencies between data preparation and model serving"
+  ],
+  "scrapedAt": "2026-09-20T11:03:06.240Z"
+}

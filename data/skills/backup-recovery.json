@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-backup-recovery",
+  "name": "backup-recovery",
+  "slug": "backup-recovery",
+  "description": "Implement backup and recovery strategies. Configure rsync, Restic, and cloud backups. Use when designing data protection solutions.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/backup-recovery",
+  "content": "\n# Backup and Recovery\n\nImplement comprehensive backup and recovery strategies using rsync, Restic, and cloud storage backends. Covers the 3-2-1 rule, automated scheduling, S3/B2 backends, encryption, restore procedures, and verification testing.\n\n## When to Use\n\n- Designing a backup strategy for servers, databases, or application data\n- Setting up Restic for encrypted, deduplicated backups to local or cloud storage\n- Automating backups with systemd timers or cron\n- Restoring data after accidental deletion, corruption, or disaster\n- Migrating data between environments using backup/restore workflows\n- Verifying backup integrity and testing recovery procedures\n\n## Prerequisites\n\n- `rsync` installed (included in most Linux distributions)\n- `restic` installed (v0.16+ recommended)\n- Cloud CLI configured for the backend: AWS CLI for S3, `b2` CLI for Backblaze B2\n- Sufficient storage at the backup destination (2-3x source size for retention)\n- SSH access for remote rsync targets\n- `systemd` or `cron` for scheduling\n\n## The 3-2-1 Backup Rule\n\n- **3** copies of your data (1 primary + 2 backups)\n- **2** different storage media or types (e.g., local disk + cloud)\n- **1** copy offsite (cloud storage, remote datacenter)\n\n## rsync Backups\n\n### Basic Operations\n\n```bash\n# Sync a local directory to a backup location\nrsync -avz --delete /data/ /backup/data/\n\n# Flags explained:\n# -a  archive mode (preserves permissions, ownership, timestamps, symlinks)\n# -v  verbose output\n# -z  compress data during transfer\n# --delete  remove files at destination that no longer exist at source\n\n# Sync to a remote server over SSH\nrsync -avz -e \"ssh -i ~/.ssh/backup_key\" /data/ backup@remote:/backups/server01/\n\n# Exclude patterns\nrsync -avz --delete \\\n  --exclude='*.tmp' \\\n  --exclude='*.log' \\\n  --exclude='.cache/' \\\n  --exclude='node_modules/' \\\n  /data/ /backup/data/\n\n# Use an exclude file for complex patterns\nrsync -avz --delete --exclude-from=/etc/backup-excludes.txt /data/ /backup/data/\n\n# Dry run (preview what would change)\nrsync -avzn --delete /data/ /backup/data/\n\n# Limit bandwidth to 50 MB/s and show progress\nrsync -avz --bwlimit=50000 --progress /data/ backup@remote:/backups/\n```\n\n### Incremental Backups with Hard Links\n\n```bash\n# Incremental: unchanged files hard-linked to previous backup (saves space)\nrsync -avz --delete \\\n  --link-dest=/backup/daily/latest \\\n  /data/ /backup/daily/$(date +%Y-%m-%d)/\n\n# Update the 'latest' symlink\nln -snf /backup/daily/$(date +%Y-%m-%d) /backup/daily/latest\n\n# Remove backups older than 30 days\nfind /backup/daily -maxdepth 1 -type d -name \"20*\" -mtime +30 -exec rm -rf {} \\;\n```\n\n## Restic Backup\n\n### Installation\n\n```bash\n# Debian / Ubuntu\napt install -y restic\n\n# RHEL / CentOS\ndnf install -y restic\n\n# Or download the latest binary\ncurl -L https://github.com/restic/restic/releases/latest/download/restic_0.17.3_linux_amd64.bz2 \\\n  | bunzip2 > /usr/local/bin/restic\nchmod +x /usr/local/bin/restic\n\n# Verify installation\nrestic version\n```\n\n### Initialize a Repository\n\n```bash\n# Local repository\nrestic init --repo /backup/restic-repo\n\n# AWS S3 backend\nexport AWS_ACCESS_KEY_ID=\"AKIAEXAMPLE\"\nexport AWS_SECRET_ACCESS_KEY=\"secretkey\"\nrestic init --repo s3:s3.amazonaws.com/my-backup-bucket\n\n# S3-compatible (MinIO)\nexport AWS_ACCESS_KEY_ID=\"minioadmin\"\nexport AWS_SECRET_ACCESS_KEY=\"miniosecret\"\nrestic init --repo s3:http://minio.example.com:9000/backup-bucket\n\n# Backblaze B2 backend\nexport B2_ACCOUNT_ID=\"accountid\"\nexport B2_ACCOUNT_KEY=\"accountkey\"\nrestic init --repo b2:my-backup-bucket:server01\n\n# SFTP backend\nrestic init --repo sftp:backup@remote:/backups/server01\n\n# Restic will prompt for a repository password -- store it securely\n# Use a password file for automation\necho \"my-secure-repo-password\" > /etc/restic/password.txt\nchmod 600 /etc/restic/password.txt\n```\n\n### Backup Operations\n\n```bash\n# Basic backup\nrestic backup /data --repo /backup/restic-repo --password-file /etc/restic/password.txt\n\n# Backup multiple directories\nrestic backup /data /etc /var/lib/postgresql \\\n  --repo s3:s3.amazonaws.com/my-backup-bucket \\\n  --password-file /etc/restic/password.txt\n\n# Backup with exclusions\nrestic backup /data \\\n  --exclude='*.tmp' \\\n  --exclude='*.log' \\\n  --exclude-file=/etc/restic/excludes.txt \\\n  --repo /backup/restic-repo \\\n  --password-file /etc/restic/password.txt\n\n# Backup with tags (useful for filtering snapshots later)\nrestic backup /data \\\n  --tag server01 --tag production --tag daily \\\n  --repo /backup/restic-repo \\\n  --password-file /etc/restic/password.txt\n\n# Backup stdin (e.g., database dump)\npg_dump -U postgres mydb | restic backup --stdin --stdin-filename mydb.sql \\\n  --repo s3:s3.amazonaws.com/my-backup-bucket \\\n  --password-file /etc/restic/password.txt\n\n# Verbose output showing files processed\nrestic backup /data -v \\\n  --repo /backup/restic-repo \\\n  --password-file /etc/restic/password.txt\n```\n\n### Snapshot Management\n\n```bash\n# List all snapshots (add --tag <tag> to filter)\nrestic snapsh",
+  "tags": [
+    "node",
+    "ai",
+    "agent",
+    "automation",
+    "workflow",
+    "template",
+    "design",
+    "security",
+    "aws",
+    "rag"
+  ],
+  "useCases": [
+    "Designing a backup strategy for servers, databases, or application data",
+    "Setting up Restic for encrypted, deduplicated backups to local or cloud storage",
+    "Automating backups with systemd timers or cron",
+    "Restoring data after accidental deletion, corruption, or disaster",
+    "Migrating data between environments using backup/restore workflows"
+  ],
+  "scrapedAt": "2026-09-20T11:05:09.872Z"
+}

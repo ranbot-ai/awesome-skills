@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-feature-flags",
+  "name": "feature-flags",
+  "slug": "feature-flags",
+  "description": "Implement feature flags for progressive feature rollout using LaunchDarkly, Unleash, or custom solutions.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/feature-flags",
+  "content": "\n# Feature Flags\n\nControl feature releases and enable progressive rollout with feature flag systems.\n\n## Prerequisites\n\n- Application code access\n- Feature flag service or self-hosted solution\n- Basic understanding of deployment patterns\n\n## Feature Flag Types\n\n| Type | Purpose | Example |\n|------|---------|---------|\n| Release | Control feature visibility | New checkout flow |\n| Experiment | A/B testing | Button color test |\n| Ops | Runtime configuration | Rate limiting |\n| Permission | User access control | Premium features |\n| Kill Switch | Emergency disable | Third-party integration |\n\n## LaunchDarkly\n\n### SDK Setup (Node.js)\n\n```javascript\nconst LaunchDarkly = require('launchdarkly-node-server-sdk');\n\nconst client = LaunchDarkly.init(process.env.LAUNCHDARKLY_SDK_KEY);\n\nawait client.waitForInitialization();\n\n// Evaluate flag\nconst user = {\n  key: 'user-123',\n  email: 'user@example.com',\n  custom: {\n    plan: 'premium',\n    company: 'acme'\n  }\n};\n\nconst showNewFeature = await client.variation('new-checkout', user, false);\n\nif (showNewFeature) {\n  // New feature code\n} else {\n  // Existing code\n}\n```\n\n### React SDK\n\n```javascript\nimport { withLDProvider, useFlags, useLDClient } from 'launchdarkly-react-client-sdk';\n\n// Provider setup\nexport default withLDProvider({\n  clientSideID: 'your-client-side-id',\n  user: {\n    key: 'user-123',\n    email: 'user@example.com'\n  }\n})(App);\n\n// Using flags in component\nfunction FeatureComponent() {\n  const { newCheckout, experimentVariant } = useFlags();\n  const ldClient = useLDClient();\n\n  // Track events\n  const handleClick = () => {\n    ldClient.track('checkout-started');\n  };\n\n  if (newCheckout) {\n    return <NewCheckout onClick={handleClick} />;\n  }\n  return <OldCheckout onClick={handleClick} />;\n}\n```\n\n### Targeting Rules\n\n```yaml\n# LaunchDarkly targeting configuration\nflag: new-checkout\ntargeting:\n  # Individual users\n  targets:\n    - variation: true\n      values: ['user-123', 'user-456']\n  \n  # Rules\n  rules:\n    # Beta users\n    - variation: true\n      clauses:\n        - attribute: email\n          op: endsWith\n          values: ['@company.com']\n    \n    # Premium plan\n    - variation: true\n      clauses:\n        - attribute: plan\n          op: in\n          values: ['premium', 'enterprise']\n    \n    # Percentage rollout\n    - variation: true\n      rollout:\n        variations:\n          - variation: true\n            weight: 20000  # 20%\n          - variation: false\n            weight: 80000  # 80%\n  \n  # Default\n  fallthrough:\n    variation: false\n```\n\n## Unleash\n\n### Server Setup\n\n```yaml\n# docker-compose.yml\nversion: '3.8'\n\nservices:\n  unleash:\n    image: unleashorg/unleash-server:latest\n    ports:\n      - \"4242:4242\"\n    environment:\n      - DATABASE_URL=postgres://postgres:password@db/unleash\n      - DATABASE_SSL=false\n    depends_on:\n      - db\n\n  db:\n    image: postgres:15\n    environment:\n      - POSTGRES_PASSWORD=password\n      - POSTGRES_DB=unleash\n    volumes:\n      - postgres-data:/var/lib/postgresql/data\n\nvolumes:\n  postgres-data:\n```\n\n### SDK Setup (Node.js)\n\n```javascript\nconst { initialize } = require('unleash-client');\n\nconst unleash = initialize({\n  url: 'http://localhost:4242/api',\n  appName: 'my-app',\n  customHeaders: {\n    Authorization: 'your-api-token'\n  }\n});\n\nunleash.on('ready', () => {\n  // Check feature\n  const isEnabled = unleash.isEnabled('new-checkout');\n  \n  // With context\n  const context = {\n    userId: 'user-123',\n    properties: {\n      plan: 'premium'\n    }\n  };\n  \n  const isEnabledForUser = unleash.isEnabled('new-checkout', context);\n  \n  // Get variant\n  const variant = unleash.getVariant('experiment-flag', context);\n  console.log(variant.name); // 'control' or 'treatment'\n});\n```\n\n### Activation Strategies\n\n```yaml\n# Standard strategies\nstrategies:\n  - name: default\n    # On/off for everyone\n    \n  - name: userWithId\n    parameters:\n      userIds: 'user-1,user-2,user-3'\n    \n  - name: gradualRolloutUserId\n    parameters:\n      percentage: 25\n      groupId: 'new-feature'\n    \n  - name: gradualRolloutRandom\n    parameters:\n      percentage: 50\n    \n  - name: flexibleRollout\n    parameters:\n      rollout: 30\n      stickiness: userId\n      groupId: 'checkout-exp'\n```\n\n## Custom Implementation\n\n### Database-Backed Flags\n\n```python\n# models.py\nfrom django.db import models\n\nclass FeatureFlag(models.Model):\n    name = models.CharField(max_length=100, unique=True)\n    enabled = models.BooleanField(default=False)\n    rollout_percentage = models.IntegerField(default=0)\n    allowed_users = models.JSONField(default=list)\n    rules = models.JSONField(default=dict)\n    created_at = models.DateTimeField(auto_now_add=True)\n    updated_at = models.DateTimeField(auto_now=True)\n\n# service.py\nimport hashlib\n\nclass FeatureFlagService:\n    def __init__(self):\n        self._cache = {}\n    \n    def is_enabled(self, flag_name, user_id=None, context=None):\n        flag = self._get_flag(flag_name)\n        \n        if not flag or not flag.enabled:\n      ",
+  "tags": [
+    "python",
+    "javascript",
+    "react",
+    "node",
+    "api",
+    "ai",
+    "agent",
+    "template",
+    "image",
+    "security"
+  ],
+  "useCases": [
+    "Implementing gradual feature rollouts",
+    "Enabling trunk-based development",
+    "Running A/B tests and experiments",
+    "Managing feature lifecycles",
+    "Implementing kill switches for production"
+  ],
+  "scrapedAt": "2026-09-20T11:09:37.150Z"
+}

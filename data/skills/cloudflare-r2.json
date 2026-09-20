@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-cloudflare-r2",
+  "name": "cloudflare-r2",
+  "slug": "cloudflare-r2",
+  "description": "Manage Cloudflare R2 buckets, lifecycle, and signed URLs. Use for low-egress object storage and media delivery.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cloudflare-r2",
+  "content": "\n# Cloudflare R2\n\nS3-compatible object storage with zero egress fees, built on Cloudflare's global network.\n\n## When to Use\n\n- Storing user uploads, media files, backups, or static assets.\n- Replacing AWS S3 to eliminate egress costs for read-heavy workloads.\n- Serving files at the edge via Workers or public bucket access.\n- Building multi-cloud storage that avoids vendor lock-in (S3 API compatible).\n- Storing ML model artifacts, training data, or inference results.\n\n## Prerequisites\n\n- Cloudflare account with R2 enabled (dashboard > R2 > subscribe).\n- Wrangler CLI v3+ installed: `npm install -g wrangler`.\n- Authenticated via `wrangler login` or `CLOUDFLARE_API_TOKEN`.\n- For S3 API access: R2 API token created under **R2 > Manage R2 API Tokens**.\n\n## Bucket Management with Wrangler\n\n### Create and List Buckets\n\n```bash\n# Create a new bucket\nnpx wrangler r2 bucket create app-assets\n\n# Create a bucket in a specific region (hint for data locality)\nnpx wrangler r2 bucket create eu-uploads --location=eu\n\n# List all buckets\nnpx wrangler r2 bucket list\n\n# Delete an empty bucket\nnpx wrangler r2 bucket delete old-bucket\n```\n\n### Object Operations\n\n```bash\n# Upload a single file\nnpx wrangler r2 object put app-assets/images/logo.png --file=./logo.png\n\n# Upload with content type\nnpx wrangler r2 object put app-assets/data/report.json \\\n  --file=./report.json \\\n  --content-type=\"application/json\"\n\n# Download an object\nnpx wrangler r2 object get app-assets/images/logo.png --file=./downloaded-logo.png\n\n# Delete an object\nnpx wrangler r2 object delete app-assets/images/old-logo.png\n\n# Get object metadata\nnpx wrangler r2 object head app-assets/images/logo.png\n```\n\n## S3-Compatible API Access\n\nR2 supports the S3 API, so existing tools (AWS CLI, boto3, s3cmd) work out of the box.\n\n### Generate R2 API Tokens\n\n1. Go to **R2 > Manage R2 API Tokens > Create API token**.\n2. Select permissions: Object Read & Write, or Object Read only.\n3. Scope to specific buckets if possible.\n4. Save the Access Key ID and Secret Access Key.\n\n### AWS CLI Configuration\n\n```bash\n# Configure a named profile for R2\naws configure --profile r2\n# Access Key ID: <your-r2-access-key>\n# Secret Access Key: <your-r2-secret-key>\n# Region: auto\n# Output: json\n\n# Use the R2 endpoint\nexport R2_ENDPOINT=\"https://<ACCOUNT_ID>.r2.cloudflarestorage.com\"\n\n# List buckets\naws s3 ls --endpoint-url=$R2_ENDPOINT --profile=r2\n\n# Sync a directory\naws s3 sync ./dist s3://app-assets/static/ \\\n  --endpoint-url=$R2_ENDPOINT \\\n  --profile=r2\n\n# Copy a file\naws s3 cp ./backup.tar.gz s3://app-assets/backups/backup-$(date +%Y%m%d).tar.gz \\\n  --endpoint-url=$R2_ENDPOINT \\\n  --profile=r2\n\n# List objects with prefix\naws s3 ls s3://app-assets/images/ \\\n  --endpoint-url=$R2_ENDPOINT \\\n  --profile=r2\n\n# Remove objects by prefix\naws s3 rm s3://app-assets/tmp/ --recursive \\\n  --endpoint-url=$R2_ENDPOINT \\\n  --profile=r2\n```\n\n### Python boto3 Client\n\n```python\nimport boto3\n\ns3 = boto3.client(\n    \"s3\",\n    endpoint_url=\"https://<ACCOUNT_ID>.r2.cloudflarestorage.com\",\n    aws_access_key_id=\"<R2_ACCESS_KEY>\",\n    aws_secret_access_key=\"<R2_SECRET_KEY>\",\n    region_name=\"auto\",\n)\n\n# Upload file\ns3.upload_file(\"./report.pdf\", \"app-assets\", \"reports/report.pdf\")\n\n# Generate presigned URL (valid for 1 hour)\nurl = s3.generate_presigned_url(\n    \"get_object\",\n    Params={\"Bucket\": \"app-assets\", \"Key\": \"reports/report.pdf\"},\n    ExpiresIn=3600,\n)\nprint(url)\n\n# List objects\nresponse = s3.list_objects_v2(Bucket=\"app-assets\", Prefix=\"images/\", MaxKeys=100)\nfor obj in response.get(\"Contents\", []):\n    print(f\"{obj['Key']} - {obj['Size']} bytes\")\n```\n\n## Worker Bindings\n\nBind R2 buckets to Workers or Pages Functions for server-side access without API tokens.\n\n### Wrangler Configuration\n\n```toml\n# wrangler.toml\nname = \"asset-worker\"\nmain = \"src/index.ts\"\ncompatibility_date = \"2024-09-01\"\n\n[[r2_buckets]]\nbinding = \"ASSETS\"\nbucket_name = \"app-assets\"\n\n[[r2_buckets]]\nbinding = \"UPLOADS\"\nbucket_name = \"user-uploads\"\n```\n\n### Worker with R2 Operations\n\n```typescript\n// src/index.ts\ninterface Env {\n  ASSETS: R2Bucket;\n  UPLOADS: R2Bucket;\n}\n\nexport default {\n  async fetch(request: Request, env: Env): Promise<Response> {\n    const url = new URL(request.url);\n\n    // GET — serve file from R2\n    if (request.method === \"GET\") {\n      const key = url.pathname.slice(1); // strip leading /\n      const object = await env.ASSETS.get(key);\n\n      if (!object) {\n        return new Response(\"Not Found\", { status: 404 });\n      }\n\n      const headers = new Headers();\n      object.writeHttpMetadata(headers);\n      headers.set(\"etag\", object.httpEtag);\n      headers.set(\"cache-control\", \"public, max-age=86400\");\n\n      return new Response(object.body, { headers });\n    }\n\n    // PUT — upload file to R2\n    if (request.method === \"PUT\") {\n      const key = url.pathname.slice(1);\n      const contentType = request.headers.get(\"content-type\") || \"application/octet-stream\";\n\n      await env.UPLOADS.put(key, request.body, {\n        h",
+  "tags": [
+    "python",
+    "typescript",
+    "pdf",
+    "api",
+    "ai",
+    "agent",
+    "template",
+    "image",
+    "security",
+    "aws"
+  ],
+  "useCases": [
+    "Storing user uploads, media files, backups, or static assets.",
+    "Replacing AWS S3 to eliminate egress costs for read-heavy workloads.",
+    "Serving files at the edge via Workers or public bucket access.",
+    "Building multi-cloud storage that avoids vendor lock-in (S3 API compatible).",
+    "Storing ML model artifacts, training data, or inference results."
+  ],
+  "scrapedAt": "2026-09-20T11:06:16.307Z"
+}

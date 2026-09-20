@@ -1,52 +1,298 @@
 ---
-name: azure_devops
-description: You have access to an environment variable, `AZURE_DEVOPS_TOKEN`, which allows you to interact with 
+name: azure-devops
+description: Set up Azure Pipelines for CI/CD, configure build and release pipelines, manage Azure DevOps projects, and integrate with Azure services. 
 category: Development & Code Tools
-source: openhands
-tags: [git, azure, bash, pr, agent, api]
-url: https://github.com/OpenHands/OpenHands/blob/main/skills/azure_devops.md
+source: antigravity
+tags: [node, api, ai, agent, template, image, security, docker, kubernetes, azure]
+url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-devops
 ---
 
 
-You have access to an environment variable, `AZURE_DEVOPS_TOKEN`, which allows you to interact with
-the Azure DevOps API.
+# Azure DevOps Pipelines
 
-<IMPORTANT>
-You can use `curl` with the `AZURE_DEVOPS_TOKEN` to interact with Azure DevOps's API.
-ALWAYS use the Azure DevOps API for operations instead of a web browser.
-</IMPORTANT>
+Build, test, and deploy applications using Azure Pipelines with YAML or classic editor.
 
-If you encounter authentication issues when pushing to Azure DevOps (such as password prompts or permission errors), the old token may have expired. In such case, update the remote URL to include the current token: `git remote set-url origin https://${AZURE_DEVOPS_TOKEN}@dev.azure.com/organization/project/_git/repository`
+## When to Use This Skill
 
-Here are some instructions for pushing, but ONLY do this if the user asks you to:
-* NEVER push directly to the `main` or `master` branch
-* Git config (username and email) is pre-set. Do not modify.
-* You may already be on a branch starting with `openhands-workspace`. Create a new branch with a better name before pushing.
-* Once you've created your own branch or a pull request, continue to update it. Do NOT create a new one unless you are explicitly asked to. Update the PR title and description as necessary, but don't change the branch name.
-* Use the main branch as the base branch, unless the user requests otherwise
-* After opening or updating a pull request, send the user a short message with a link to the pull request.
-* Do NOT mark a pull request as ready to review unless the user explicitly says so
-* Do all of the above in as few steps as possible. E.g. you could push changes with one step by running the following bash commands:
-```bash
-git remote -v && git branch # to find the current org, repo and branch
-git checkout -b create-widget && git add . && git commit -m "Create widget" && git push -u origin create-widget
+Use this skill when:
+- Creating CI/CD pipelines in Azure DevOps
+- Configuring build and release stages
+- Managing Azure DevOps service connections
+- Deploying to Azure or other cloud platforms
+- Setting up multi-stage YAML pipelines
+
+## Prerequisites
+
+- Azure DevOps organization and project
+- Service connections for target environments
+- Basic YAML understanding
+- Azure subscription (for Azure deployments)
+
+## YAML Pipeline Structure
+
+Create `azure-pipelines.yml` in repository root:
+
+```yaml
+trigger:
+  branches:
+    include:
+      - main
+      - develop
+  paths:
+    include:
+      - src/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  nodeVersion: '20.x'
+
+stages:
+  - stage: Build
+    jobs:
+      - job: BuildJob
+        steps:
+          - task: NodeTool@0
+            inputs:
+              versionSpec: $(nodeVersion)
+          - script: |
+              npm ci
+              npm run build
+            displayName: 'Build application'
+          - publish: $(Build.ArtifactStagingDirectory)
+            artifact: drop
+
+  - stage: Deploy
+    dependsOn: Build
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+    jobs:
+      - deployment: DeployWeb
+        environment: 'production'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - script: echo Deploying to production
 ```
 
-## Azure DevOps API Usage
+## Triggers
 
-When working with Azure DevOps API, you need to use Basic authentication with your Personal Access Token (PAT). The username is ignored (empty string), and the password is the PAT.
+### Branch Triggers
 
-Here's how to authenticate with curl:
-```bash
-# Convert PAT to base64
-AUTH=$(echo -n ":$AZURE_DEVOPS_TOKEN" | base64)
-
-# Make API call
-curl -H "Authorization: Basic $AUTH" -H "Content-Type: application/json" https://dev.azure.com/{organization}/{project}/_apis/git/repositories?api-version=7.1
+```yaml
+trigger:
+  branches:
+    include:
+      - main
+      - release/*
+    exclude:
+      - feature/*
+  tags:
+    include:
+      - v*
 ```
 
-Common API endpoints:
-- List repositories: `https://dev.azure.com/{organization}/{project}/_apis/git/repositories?api-version=7.1`
-- Get repository details: `https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repositoryId}?api-version=7.1`
-- List pull requests: `https://dev.azure.com/{organization}/{project}/_apis/git/pullrequests?api-version=7.1`
-- Create pull request: `https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repositoryId}/pullrequests?api-version=7.1` (POST)
+### Pull Request Triggers
+
+```yaml
+pr:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - src/*
+    exclude:
+      - docs/*
+```
+
+### Scheduled Triggers
+
+```yaml
+schedules:
+  - cron: '0 2 * * *'
+    displayName: 'Nightly build'
+    branches:
+      include:
+        - main
+    always: true
+```
+
+## Jobs and Stages
+
+### Parallel Jobs
+
+```yaml
+stages:
+  - stage: Test
+    jobs:
+      - job: UnitTests
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - script: npm run test:unit
+      
+      - job: IntegrationTests
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - script: npm run test:integration
+```
+
+### Matrix Strategy
+
+```yaml
+jobs:
+  - job: Build
+    strategy:
+      matrix:
+        linux:
+          vmImage: 'ubuntu-latest'
+        windows:
+          vmImage: 'windows-latest'
+        mac:
+          vmImage: 'macos-latest'
+    pool:
+      vmImage: $(vmImage)
+    steps:
+      - script: npm test
+```
+
+### Job Dependencies
+
+```yaml
+stages:
+  - stage: Build
+    jobs:
+      - job: A
+        steps:
+          - script: echo Job A
+      - job: B
+        dependsOn: A
+        steps:
+          - script: echo Job B
+```
+
+## Variables and Parameters
+
+### Variable Groups
+
+```yaml
+variables:
+  - group: 'production-secrets'
+  - name: buildConfiguration
+    value: 'Release'
+```
+
+### Runtime Parameters
+
+```yaml
+parameters:
+  - name: environment
+    displayName: 'Environment'
+    type: string
+    default: 'dev'
+    values:
+      - dev
+      - staging
+      - prod
+
+stages:
+  - stage: Deploy
+    variables:
+      env: ${{ parameters.environment }}
+    jobs:
+      - job: Deploy
+        steps:
+          - script: echo "Deploying to $(env)"
+```
+
+### Secret Variables
+
+```yaml
+variables:
+  - name: mySecret
+    value: $(SECRET_FROM_PIPELINE)  # Set in pipeline settings
+
+steps:
+  - script: |
+      echo "Using secret"
+      ./deploy.sh
+    env:
+      API_KEY: $(mySecret)
+```
+
+## Templates
+
+### Job Template
+
+```yaml
+# templates/build-job.yml
+parameters:
+  - name: nodeVersion
+    default: '20'
+
+jobs:
+  - job: Build
+    steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: ${{ parameters.nodeVersion }}
+      - script: npm ci && npm run build
+```
+
+### Using Templates
+
+```yaml
+# azure-pipelines.yml
+stages:
+  - stage: Build
+    jobs:
+      - template: templates/build-job.yml
+        parameters:
+          nodeVersion: '20'
+```
+
+### Stage Template
+
+```yaml
+# templates/deploy-stage.yml
+parameters:
+  - name: environment
+    type: string
+  - name: serviceConnection
+    type: string
+
+stages:
+  - stage: Deploy_${{ parameters.environment }}
+    jobs:
+      - deployment: Deploy
+        environment: ${{ parameters.environment }}
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: AzureWebApp@1
+                  inputs:
+                    azureSubscription: ${{ parameters.serviceConnection }}
+                    appName: 'myapp-${{ parameters.environment }}'
+```
+
+## Deployments
+
+### Environment Deployments
+
+```yaml
+stages:
+  - stage: DeployStaging
+    jobs:
+      - deployment: DeployWeb
+        environment: 'staging'
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - download: current
+                  

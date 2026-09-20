@@ -1,0 +1,30 @@
+{
+  "id": "antigravity-alerting-oncall",
+  "name": "alerting-oncall",
+  "slug": "alerting-oncall",
+  "description": "Set up alerting rules, configure on-call rotations, and manage incident response workflows.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/alerting-oncall",
+  "content": "\n# Alerting & On-Call\n\nConfigure effective alerting and on-call management for production systems.\n\n## Prerequisites\n\n- Monitoring system (Prometheus, Datadog, etc.)\n- On-call platform (PagerDuty, Opsgenie, Grafana OnCall)\n- Communication channels (Slack, email)\n\n## Alerting Best Practices\n\n### Alert Categories\n\n```yaml\n# Severity levels\ncritical:\n  - Service completely down\n  - Data loss imminent\n  - Security breach\n  response: Immediate page, wake people up\n\nhigh:\n  - Service degraded significantly\n  - Error rate above SLO\n  - Capacity near limit\n  response: Page during business hours, notify after hours\n\nmedium:\n  - Performance degradation\n  - Non-critical component failure\n  - Warning thresholds exceeded\n  response: Notify via Slack, review next business day\n\nlow:\n  - Informational alerts\n  - Capacity planning triggers\n  - Routine maintenance needed\n  response: Email notification, weekly review\n```\n\n### Alert Design Principles\n\n```yaml\n# Good alert characteristics\nalerts:\n  actionable:\n    - Every alert should require human action\n    - Include runbook links\n    - Clear remediation steps\n\n  relevant:\n    - Alert on symptoms, not causes\n    - Focus on user impact\n    - Avoid alerting on expected behavior\n\n  timely:\n    - Appropriate thresholds\n    - Suitable evaluation windows\n    - Account for normal variance\n\n  unique:\n    - No duplicate alerts\n    - Proper alert grouping\n    - Clear ownership\n```\n\n## Prometheus Alerting\n\n### Alert Rules\n\n```yaml\n# prometheus/rules/alerts.yml\ngroups:\n  - name: service_alerts\n    rules:\n      # High-level service health\n      - alert: ServiceDown\n        expr: up{job=\"myapp\"} == 0\n        for: 1m\n        labels:\n          severity: critical\n        annotations:\n          summary: \"Service {{ $labels.instance }} is down\"\n          description: \"{{ $labels.job }} on {{ $labels.instance }} has been down for more than 1 minute.\"\n          runbook_url: \"https://wiki.example.com/runbooks/service-down\"\n\n      # Error rate alert\n      - alert: HighErrorRate\n        expr: |\n          sum(rate(http_requests_total{status=~\"5..\"}[5m])) by (service)\n          / sum(rate(http_requests_total[5m])) by (service) > 0.05\n        for: 5m\n        labels:\n          severity: critical\n        annotations:\n          summary: \"High error rate for {{ $labels.service }}\"\n          description: \"Error rate is {{ $value | humanizePercentage }} for the last 5 minutes\"\n\n      # Latency alert (SLO-based)\n      - alert: HighLatency\n        expr: |\n          histogram_quantile(0.95, \n            sum(rate(http_request_duration_seconds_bucket[5m])) by (le, service)\n          ) > 0.5\n        for: 5m\n        labels:\n          severity: high\n        annotations:\n          summary: \"P95 latency above 500ms for {{ $labels.service }}\"\n```\n\n### Alertmanager Configuration\n\n```yaml\n# alertmanager.yml\nglobal:\n  resolve_timeout: 5m\n  slack_api_url: 'https://hooks.slack.com/services/xxx'\n  pagerduty_url: 'https://events.pagerduty.com/v2/enqueue'\n\ntemplates:\n  - '/etc/alertmanager/templates/*.tmpl'\n\nroute:\n  receiver: 'default-receiver'\n  group_by: ['alertname', 'service']\n  group_wait: 30s\n  group_interval: 5m\n  repeat_interval: 4h\n  \n  routes:\n    # Critical alerts go to PagerDuty\n    - match:\n        severity: critical\n      receiver: 'pagerduty-critical'\n      group_wait: 0s\n      repeat_interval: 1h\n\n    # High severity during business hours\n    - match:\n        severity: high\n      receiver: 'slack-high'\n      active_time_intervals:\n        - business-hours\n\n    # Route by team\n    - match_re:\n        team: platform.*\n      receiver: 'platform-team'\n\nreceivers:\n  - name: 'default-receiver'\n    slack_configs:\n      - channel: '#alerts'\n        send_resolved: true\n\n  - name: 'pagerduty-critical'\n    pagerduty_configs:\n      - service_key: 'xxx'\n        severity: critical\n        description: '{{ .CommonAnnotations.summary }}'\n        details:\n          firing: '{{ template \"pagerduty.firing\" . }}'\n\n  - name: 'slack-high'\n    slack_configs:\n      - channel: '#alerts-high'\n        title: '{{ .CommonAnnotations.summary }}'\n        text: '{{ .CommonAnnotations.description }}'\n        actions:\n          - type: button\n            text: 'Runbook'\n            url: '{{ .CommonAnnotations.runbook_url }}'\n          - type: button\n            text: 'Dashboard'\n            url: '{{ .CommonAnnotations.dashboard_url }}'\n\n  - name: 'platform-team'\n    slack_configs:\n      - channel: '#platform-alerts'\n\ntime_intervals:\n  - name: business-hours\n    time_intervals:\n      - weekdays: ['monday:friday']\n        times:\n          - start_time: '09:00'\n            end_time: '17:00'\n\ninhibit_rules:\n  - source_match:\n      severity: critical\n    target_match:\n      severity: high\n    equal: ['service']\n```\n\n## PagerDuty Integration\n\n### Service Configuration\n\n```yaml\n# Terraform example\nresource \"pagerduty_service\" \"myapp\" {\n  name                    = \"MyApp Production\"\n  description             = \"Production application service\"\n  escala",
+  "tags": [
+    "markdown",
+    "api",
+    "ai",
+    "agent",
+    "workflow",
+    "template",
+    "design",
+    "document",
+    "image",
+    "security"
+  ],
+  "useCases": [
+    "name: \"Production Critical\"",
+    "\"@oncall-primary\"",
+    "\"@oncall-secondary\"",
+    "\"@engineering-manager\""
+  ],
+  "scrapedAt": "2026-09-20T11:03:12.636Z"
+}

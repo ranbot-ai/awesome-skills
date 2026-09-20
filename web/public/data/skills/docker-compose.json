@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-docker-compose",
+  "name": "docker-compose",
+  "slug": "docker-compose",
+  "description": "Define and run multi-container Docker applications using Docker Compose.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/docker-compose",
+  "content": "\n# Docker Compose\n\nOrchestrate multi-container applications with declarative YAML configuration.\n\n## When to Use This Skill\n\nUse this skill when:\n- Running multi-container applications locally\n- Setting up development environments\n- Defining service dependencies and networking\n- Managing application stacks with multiple services\n- Creating reproducible development setups\n\n## Prerequisites\n\n- Docker Engine with Compose plugin (v2)\n- Basic Docker knowledge\n- YAML syntax understanding\n\n## Basic Configuration\n\n### Simple Application Stack\n\n```yaml\n# docker-compose.yml\nversion: '3.8'\n\nservices:\n  web:\n    build: .\n    ports:\n      - \"3000:3000\"\n    environment:\n      - NODE_ENV=development\n      - DATABASE_URL=postgres://postgres:secret@db:5432/myapp\n    depends_on:\n      - db\n      - redis\n\n  db:\n    image: postgres:15-alpine\n    environment:\n      POSTGRES_USER: postgres\n      POSTGRES_PASSWORD: secret\n      POSTGRES_DB: myapp\n    volumes:\n      - postgres-data:/var/lib/postgresql/data\n    ports:\n      - \"5432:5432\"\n\n  redis:\n    image: redis:7-alpine\n    ports:\n      - \"6379:6379\"\n\nvolumes:\n  postgres-data:\n```\n\n## Service Configuration\n\n### Build Options\n\n```yaml\nservices:\n  app:\n    build:\n      context: ./app\n      dockerfile: Dockerfile.dev\n      args:\n        NODE_VERSION: \"20\"\n      target: development\n      cache_from:\n        - myapp:cache\n    image: myapp:dev\n```\n\n### Environment Variables\n\n```yaml\nservices:\n  app:\n    environment:\n      - NODE_ENV=production\n      - API_KEY=${API_KEY}  # From shell or .env file\n    env_file:\n      - .env\n      - .env.local\n```\n\n### Port Mapping\n\n```yaml\nservices:\n  web:\n    ports:\n      - \"3000:3000\"           # HOST:CONTAINER\n      - \"127.0.0.1:9229:9229\" # Bind to localhost only\n      - \"8080-8090:8080-8090\" # Port range\n    expose:\n      - \"3000\"                # Internal only (no host binding)\n```\n\n### Volume Mounts\n\n```yaml\nservices:\n  app:\n    volumes:\n      # Named volume\n      - app-data:/app/data\n      # Bind mount\n      - ./src:/app/src\n      # Read-only bind mount\n      - ./config:/app/config:ro\n      # Anonymous volume (for node_modules)\n      - /app/node_modules\n\nvolumes:\n  app-data:\n    driver: local\n```\n\n### Dependencies\n\n```yaml\nservices:\n  web:\n    depends_on:\n      db:\n        condition: service_healthy\n      redis:\n        condition: service_started\n\n  db:\n    image: postgres:15\n    healthcheck:\n      test: [\"CMD-SHELL\", \"pg_isready -U postgres\"]\n      interval: 10s\n      timeout: 5s\n      retries: 5\n```\n\n## Networking\n\n### Custom Networks\n\n```yaml\nservices:\n  frontend:\n    networks:\n      - frontend-net\n\n  backend:\n    networks:\n      - frontend-net\n      - backend-net\n\n  db:\n    networks:\n      - backend-net\n\nnetworks:\n  frontend-net:\n    driver: bridge\n  backend-net:\n    driver: bridge\n    internal: true  # No external access\n```\n\n### Network Aliases\n\n```yaml\nservices:\n  db:\n    networks:\n      backend:\n        aliases:\n          - database\n          - postgres\n\nnetworks:\n  backend:\n```\n\n## Resource Limits\n\n```yaml\nservices:\n  app:\n    deploy:\n      resources:\n        limits:\n          cpus: '2'\n          memory: 1G\n        reservations:\n          cpus: '0.5'\n          memory: 256M\n```\n\n## Multiple Compose Files\n\n### Override Files\n\n```yaml\n# docker-compose.yml (base)\nservices:\n  web:\n    image: myapp:latest\n    ports:\n      - \"3000:3000\"\n\n# docker-compose.override.yml (development - auto-loaded)\nservices:\n  web:\n    build: .\n    volumes:\n      - ./src:/app/src\n    environment:\n      - DEBUG=true\n\n# docker-compose.prod.yml (production)\nservices:\n  web:\n    deploy:\n      replicas: 3\n    environment:\n      - DEBUG=false\n```\n\n### Using Multiple Files\n\n```bash\n# Development (uses override automatically)\ndocker compose up\n\n# Production\ndocker compose -f docker-compose.yml -f docker-compose.prod.yml up\n\n# Merge and view final config\ndocker compose -f docker-compose.yml -f docker-compose.prod.yml config\n```\n\n## Profiles\n\n```yaml\nservices:\n  web:\n    image: myapp\n\n  db:\n    image: postgres:15\n\n  debug:\n    image: busybox\n    profiles:\n      - debug\n\n  monitoring:\n    image: prometheus\n    profiles:\n      - monitoring\n```\n\n```bash\n# Run without profiles (web, db only)\ndocker compose up\n\n# Run with debug profile\ndocker compose --profile debug up\n\n# Run with multiple profiles\ndocker compose --profile debug --profile monitoring up\n```\n\n## Commands\n\n### Lifecycle\n\n```bash\n# Start services\ndocker compose up -d\n\n# Start specific service\ndocker compose up -d web\n\n# Stop services\ndocker compose stop\n\n# Stop and remove containers\ndocker compose down\n\n# Stop and remove everything including volumes\ndocker compose down -v --rmi all\n\n# Restart services\ndocker compose restart web\n```\n\n### Building\n\n```bash\n# Build images\ndocker compose build\n\n# Build without cache\ndocker compose build --no-cache\n\n# Build and start\ndocker compose up --build\n\n# Pull latest images\ndocker compose pull\n```\n\n### Monitoring\n\n```bash\n# View logs\ndocker compose logs -f\n\n# View specific servic",
+  "tags": [
+    "node",
+    "api",
+    "ai",
+    "agent",
+    "workflow",
+    "template",
+    "image",
+    "security",
+    "docker",
+    "kubernetes"
+  ],
+  "useCases": [
+    "Running multi-container applications locally",
+    "Setting up development environments",
+    "Defining service dependencies and networking",
+    "Managing application stacks with multiple services",
+    "Creating reproducible development setups"
+  ],
+  "scrapedAt": "2026-09-20T11:08:43.554Z"
+}

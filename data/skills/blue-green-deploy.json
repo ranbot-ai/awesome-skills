@@ -1,0 +1,30 @@
+{
+  "id": "antigravity-blue-green-deploy",
+  "name": "blue-green-deploy",
+  "slug": "blue-green-deploy",
+  "description": "Configure zero-downtime deployment strategies including blue-green, canary, and rolling deployments.",
+  "category": "AI & Agents",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/blue-green-deploy",
+  "content": "\n# Blue-Green & Deployment Strategies\n\nImplement zero-downtime deployment patterns for production systems.\n\n## Prerequisites\n\n- Load balancer or ingress controller\n- Container orchestration (K8s) or cloud platform\n- CI/CD pipeline\n- Health check endpoints\n\n## Deployment Strategy Overview\n\n```\n┌─────────────────────────────────────────────────────────────┐\n│                    DEPLOYMENT STRATEGIES                     │\n├─────────────┬─────────────┬─────────────┬──────────────────┤\n│  Blue-Green │   Canary    │   Rolling   │    Recreate      │\n├─────────────┼─────────────┼─────────────┼──────────────────┤\n│ Full env    │ Gradual %   │ Pod by pod  │ All at once      │\n│ swap        │ rollout     │ replacement │                  │\n├─────────────┼─────────────┼─────────────┼──────────────────┤\n│ Instant     │ Slow, safe  │ Moderate    │ Fast, risky      │\n│ rollback    │ rollback    │ rollback    │                  │\n├─────────────┼─────────────┼─────────────┼──────────────────┤\n│ 2x resources│ +10-25%     │ Same        │ Same             │\n│ needed      │ resources   │ resources   │                  │\n└─────────────┴─────────────┴─────────────┴──────────────────┘\n```\n\n## Blue-Green Deployment\n\n### Concept\n\n```\nBefore:\n┌─────────┐     ┌───────────────┐\n│  Users  │────▶│  Blue (v1)    │ ◀── Active\n└─────────┘     └───────────────┘\n                ┌───────────────┐\n                │  Green (v2)   │ ◀── Staging\n                └───────────────┘\n\nAfter Switch:\n┌─────────┐     ┌───────────────┐\n│  Users  │     │  Blue (v1)    │ ◀── Standby\n└─────────┘     └───────────────┘\n      │         ┌───────────────┐\n      └────────▶│  Green (v2)   │ ◀── Active\n                └───────────────┘\n```\n\n### Kubernetes Implementation\n\n```yaml\n# blue-deployment.yaml\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: myapp-blue\n  labels:\n    app: myapp\n    version: blue\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: myapp\n      version: blue\n  template:\n    metadata:\n      labels:\n        app: myapp\n        version: blue\n    spec:\n      containers:\n      - name: myapp\n        image: myapp:v1.0.0\n        ports:\n        - containerPort: 8080\n        readinessProbe:\n          httpGet:\n            path: /health\n            port: 8080\n          initialDelaySeconds: 5\n          periodSeconds: 5\n---\n# green-deployment.yaml\napiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: myapp-green\n  labels:\n    app: myapp\n    version: green\nspec:\n  replicas: 3\n  selector:\n    matchLabels:\n      app: myapp\n      version: green\n  template:\n    metadata:\n      labels:\n        app: myapp\n        version: green\n    spec:\n      containers:\n      - name: myapp\n        image: myapp:v2.0.0\n        ports:\n        - containerPort: 8080\n        readinessProbe:\n          httpGet:\n            path: /health\n            port: 8080\n          initialDelaySeconds: 5\n          periodSeconds: 5\n---\n# service.yaml - Switch by changing selector\napiVersion: v1\nkind: Service\nmetadata:\n  name: myapp\nspec:\n  selector:\n    app: myapp\n    version: blue  # Change to 'green' to switch\n  ports:\n  - port: 80\n    targetPort: 8080\n```\n\n### Switch Script\n\n```bash\n#!/bin/bash\n# blue-green-switch.sh\n\nCURRENT=$(kubectl get svc myapp -o jsonpath='{.spec.selector.version}')\nNEW_VERSION=$1\n\necho \"Current version: $CURRENT\"\necho \"Switching to: $NEW_VERSION\"\n\n# Verify new deployment is ready\nkubectl rollout status deployment/myapp-$NEW_VERSION\n\n# Check health\nHEALTH=$(kubectl exec -it deployment/myapp-$NEW_VERSION -- curl -s localhost:8080/health)\nif [ \"$HEALTH\" != \"ok\" ]; then\n  echo \"Health check failed\"\n  exit 1\nfi\n\n# Switch traffic\nkubectl patch svc myapp -p \"{\\\"spec\\\":{\\\"selector\\\":{\\\"version\\\":\\\"$NEW_VERSION\\\"}}}\"\n\necho \"Switched to $NEW_VERSION\"\n```\n\n### AWS ECS Blue-Green\n\n```yaml\n# AWS CodeDeploy appspec.yml\nversion: 0.0\nResources:\n  - TargetService:\n      Type: AWS::ECS::Service\n      Properties:\n        TaskDefinition: \"arn:aws:ecs:region:account:task-definition/myapp:2\"\n        LoadBalancerInfo:\n          ContainerName: \"myapp\"\n          ContainerPort: 8080\nHooks:\n  - BeforeInstall: \"LambdaFunctionToValidateBeforeTrafficShift\"\n  - AfterInstall: \"LambdaFunctionToValidateAfterTrafficShift\"\n  - AfterAllowTestTraffic: \"LambdaFunctionToValidateTestTraffic\"\n  - BeforeAllowTraffic: \"LambdaFunctionToValidateBeforeAllowTraffic\"\n  - AfterAllowTraffic: \"LambdaFunctionToValidateAfterAllowTraffic\"\n```\n\n## Canary Deployment\n\n### Kubernetes with Istio\n\n```yaml\n# VirtualService for traffic splitting\napiVersion: networking.istio.io/v1beta1\nkind: VirtualService\nmetadata:\n  name: myapp\nspec:\n  hosts:\n  - myapp\n  http:\n  - match:\n    - headers:\n        x-canary:\n          exact: \"true\"\n    route:\n    - destination:\n        host: myapp\n        subset: canary\n  - route:\n    - destination:\n        host: myapp\n        subset: stable\n      weight: 90\n    - destination:\n        host: myapp\n        subset: canary\n      weight: 10\n---\napiVersion: networking.istio.io/v1beta1\nkind: Destination",
+  "tags": [
+    "python",
+    "api",
+    "ai",
+    "agent",
+    "template",
+    "image",
+    "security",
+    "kubernetes",
+    "aws"
+  ],
+  "useCases": [
+    "Implementing zero-downtime deployments",
+    "Reducing deployment risk",
+    "Enabling instant rollbacks",
+    "Running canary releases",
+    "Performing A/B testing in production"
+  ],
+  "scrapedAt": "2026-09-20T11:05:22.248Z"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-git-workflow",
+  "name": "git-workflow",
+  "slug": "git-workflow",
+  "description": "Implement Git branching strategies, PR workflows, and release management patterns.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/git-workflow",
+  "content": "\n# Git Workflow\n\nImplement effective branching strategies and pull request workflows for team collaboration.\n\n## When to Use This Skill\n\nUse this skill when:\n- Establishing team Git workflows\n- Implementing branching strategies\n- Configuring pull request processes\n- Setting up release management\n- Improving code review practices\n\n## Prerequisites\n\n- Git installed\n- Repository hosting (GitHub, GitLab, Bitbucket)\n- Basic Git knowledge\n\n## Branching Strategies\n\n### Trunk-Based Development\n\nBest for: Continuous deployment, small teams, mature CI/CD\n\n```\nmain ─────●─────●─────●─────●─────●─────●─────●\n          │     │     │     │     │     │\n          └─●   └─●   └─●   └─●   └─●   └─●\n         feature branches (short-lived)\n```\n\n```bash\n# Create short-lived feature branch\ngit checkout main\ngit pull origin main\ngit checkout -b feature/add-login\n\n# Work and commit frequently\ngit add .\ngit commit -m \"feat: add login form\"\n\n# Keep branch updated\ngit fetch origin\ngit rebase origin/main\n\n# Merge quickly (same day ideally)\ngit checkout main\ngit pull origin main\ngit merge feature/add-login\ngit push origin main\ngit branch -d feature/add-login\n```\n\n### GitHub Flow\n\nBest for: Continuous delivery, web applications\n\n```\nmain ─────●─────●───────────●─────────────●─────●\n          │           ↑           ↑       ↑\n          └───●───●───┘           │       │\n              feature/login       │       │\n                                  │       │\n          └───●───●───●───●───────┘       │\n              feature/dashboard           │\n                                          │\n          └───●─────────────────────────┘\n              hotfix/security-patch\n```\n\n```bash\n# Create feature branch from main\ngit checkout main\ngit pull origin main\ngit checkout -b feature/user-dashboard\n\n# Push and create PR\ngit push -u origin feature/user-dashboard\n\n# After review, merge via PR (squash recommended)\n# Delete branch after merge\n```\n\n### GitFlow\n\nBest for: Scheduled releases, versioned products\n\n```\nmain     ────────●────────────────●──────────────●\n                 ↑                ↑              ↑\nrelease  ────────┼────●───●──────┼──────────────┼\n                 │    │   │      │              │\ndevelop  ───●────●────┼───●──●───●───●───●───●──┼\n            │         │      │       │   │      │\nfeature  ───┴─────────┘      │       │   │      │\n                             │       │   │      │\nhotfix   ────────────────────┴───────┼───┼──────┘\n                                     │   │\nfeature  ────────────────────────────┴───┘\n```\n\n```bash\n# Initialize GitFlow\ngit flow init\n\n# Start feature\ngit flow feature start user-auth\n\n# Finish feature (merges to develop)\ngit flow feature finish user-auth\n\n# Start release\ngit flow release start 1.0.0\n\n# Finish release (merges to main and develop)\ngit flow release finish 1.0.0\n\n# Hotfix\ngit flow hotfix start security-fix\ngit flow hotfix finish security-fix\n```\n\n## Commit Conventions\n\n### Conventional Commits\n\n```\n<type>(<scope>): <description>\n\n[optional body]\n\n[optional footer(s)]\n```\n\nTypes:\n- `feat`: New feature\n- `fix`: Bug fix\n- `docs`: Documentation\n- `style`: Formatting\n- `refactor`: Code restructuring\n- `test`: Adding tests\n- `chore`: Maintenance\n\nExamples:\n```bash\ngit commit -m \"feat(auth): add OAuth2 login support\"\ngit commit -m \"fix(api): handle null response from payment service\"\ngit commit -m \"docs: update API documentation for v2 endpoints\"\ngit commit -m \"refactor(db): optimize user query performance\"\n\n# Breaking change\ngit commit -m \"feat(api)!: change response format for user endpoint\n\nBREAKING CHANGE: The user endpoint now returns an object instead of array\"\n```\n\n### Commit Message Template\n\n```bash\n# Create template file ~/.gitmessage\n# Subject line (50 chars max)\n\n# Body (72 chars per line max)\n# - What changed\n# - Why it changed\n# - Any side effects\n\n# Footer\n# Fixes #123\n# Co-authored-by: Name <email>\n\n# Configure Git to use template\ngit config --global commit.template ~/.gitmessage\n```\n\n## Pull Request Workflow\n\n### PR Template\n\n```markdown\n<!-- .github/pull_request_template.md -->\n## Description\nBrief description of changes\n\n## Type of Change\n- [ ] Bug fix (non-breaking change)\n- [ ] New feature (non-breaking change)\n- [ ] Breaking change\n- [ ] Documentation update\n\n## Testing\n- [ ] Unit tests added/updated\n- [ ] Integration tests added/updated\n- [ ] Manual testing performed\n\n## Checklist\n- [ ] Code follows project style guidelines\n- [ ] Self-review performed\n- [ ] Documentation updated\n- [ ] No new warnings introduced\n\n## Related Issues\nCloses #\n\n## Screenshots (if applicable)\n```\n\n### Branch Protection Rules\n\n```yaml\n# GitHub branch protection\nbranch_protection:\n  branch: main\n  required_pull_request_reviews:\n    required_approving_review_count: 1\n    dismiss_stale_reviews: true\n    require_code_owner_reviews: true\n  required_status_checks:\n    strict: true\n    contexts:\n      - \"ci/tests\"\n      - \"ci/lint\"\n  restrictions:\n    users: []\n    teams: [\"maintainers\"]\n  enforce_admins:",
+  "tags": [
+    "javascript",
+    "markdown",
+    "api",
+    "ai",
+    "agent",
+    "automation",
+    "workflow",
+    "template",
+    "document",
+    "security"
+  ],
+  "useCases": [
+    "Establishing team Git workflows",
+    "Implementing branching strategies",
+    "Configuring pull request processes",
+    "Setting up release management",
+    "Improving code review practices"
+  ],
+  "scrapedAt": "2026-09-20T11:10:38.176Z"
+}
