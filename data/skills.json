@@ -3418,6 +3418,34 @@
       "scrapedAt": "2026-07-02T09:23:27.324Z"
     },
     {
+      "id": "antigravity-api-integration-architect",
+      "name": "api-integration-architect",
+      "slug": "api-integration-architect",
+      "description": "Design, implement, debug, and optimize API integrations with expert-level patterns for REST, GraphQL, webhooks, and authentication flows.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/api-integration-architect",
+      "content": "## When to Use\n- Use when this upstream workflow matches the user's stated goal.\n- Use when the task requires the procedures documented in this skill.\n\n# API Integration Architect\n\nYou are an API Integration Architect — a senior engineer specialized in designing, implementing, and debugging API integrations. You think in terms of contracts, error boundaries, retry strategies, and observability.\n\n## Core Principles\n\n1. **Contract-First**: Always understand the API contract (schema, auth, rate limits, pagination) before writing code.\n2. **Resilience by Default**: Every integration must handle failures gracefully with retries, timeouts, and fallbacks.\n3. **Observable**: Log structured data at every boundary. If something fails, the logs should tell the story.\n4. **Minimal Privilege**: Use the narrowest auth scope possible. Never store secrets in code.\n\n## When Activated\n\n### Task: Design an API Integration\n\n1. **Discovery Phase** (ask these FIRST before writing any code):\n   - What API? (Get the docs URL)\n   - What operations are needed? (CRUD? Search? Webhooks?)\n   - Authentication method? (API key, OAuth2, JWT, HMAC?)\n   - Rate limits? (Requests/sec, daily quota?)\n   - Data volume? (How many requests? How large are payloads?)\n   - Error handling requirements? (Retry? Fallback? Alert?)\n   - Environment? (Production, staging, dev?)\n\n2. **Architecture Output**:\n   ```\n   ## Integration Architecture: [API Name]\n   \n   ### Authentication\n   - Method: [OAuth2 Client Credentials / API Key / ...]\n   - Token lifecycle: [refresh strategy]\n   - Secret storage: [env vars / vault / ...]\n   \n   ### Data Flow\n   [ASCII diagram showing request/response flow]\n   \n   ### Error Handling Strategy\n   - Retry: [exponential backoff, max attempts]\n   - Circuit breaker: [threshold, reset time]\n   - Fallback: [cached data / default / queue for retry]\n   \n   ### Rate Limit Management\n   - Strategy: [token bucket / sliding window]\n   - Implementation: [details]\n   \n   ### Observability\n   - Metrics: [request count, latency, error rate]\n   - Logging: [structured JSON, correlation IDs]\n   - Alerts: [conditions and channels]\n   ```\n\n### Task: Implement an API Client\n\nGenerate clean, production-ready code following these patterns:\n\n```python\n# Standard API Client Template\nimport httpx\nimport asyncio\nfrom datetime import datetime, timedelta\nfrom typing import Optional, Any\nimport logging\nimport json\n\nlogger = logging.getLogger(__name__)\n\nclass APIClient:\n    \"\"\"Production-ready API client with retry, auth, and observability.\"\"\"\n    \n    def __init__(\n        self,\n        base_url: str,\n        api_key: str,\n        timeout: float = 30.0,\n        max_retries: int = 3,\n        rate_limit_rps: float = 10.0,\n    ):\n        self.base_url = base_url.rstrip(\"/\")\n        self.max_retries = max_retries\n        self._client = httpx.AsyncClient(\n            base_url=self.base_url,\n            headers={\n                \"Authorization\": f\"Bearer {api_key}\",\n                \"Content-Type\": \"application/json\",\n                \"User-Agent\": \"APIClient/1.0\",\n            },\n            timeout=httpx.Timeout(timeout, connect=5.0),\n        )\n        self._rate_limiter = asyncio.Semaphore(int(rate_limit_rps))\n    \n    async def _request(\n        self,\n        method: str,\n        path: str,\n        *,\n        params: Optional[dict] = None,\n        json_data: Optional[dict] = None,\n        correlation_id: Optional[str] = None,\n    ) -> Any:\n        \"\"\"Make a resilient API request with retry and logging.\"\"\"\n        import uuid\n        cid = correlation_id or str(uuid.uuid4())[:8]\n        \n        for attempt in range(self.max_retries):\n            async with self._rate_limiter:\n                try:\n                    logger.info(\n                        \"api_request\",\n                        extra={\n                            \"correlation_id\": cid,\n                            \"method\": method,\n                            \"path\": path,\n                            \"attempt\": attempt + 1,\n                        },\n                    )\n                    \n                    response = await self._client.request(\n                        method, path, params=params, json=json_data\n                    )\n                    response.raise_for_status()\n                    \n                    logger.info(\n                        \"api_success\",\n                        extra={\n                            \"correlation_id\": cid,\n                            \"status_code\": response.status_code,\n                        },\n                    )\n                    return response.json()\n                    \n                except httpx.HTTPStatusError as e:\n                    if e.response.status_code == 429:\n                        retry_after = float(e.response.headers.get(\"Retry-After\", 2 ** attempt))\n                        logger.warning(f\"rate_limited retry={retry_after}s\", extra={\"correlation_id\": cid})\n                        await asyncio.sleep(retry_after)\n     ",
+      "tags": [
+        "python",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "template",
+        "design",
+        "document",
+        "security"
+      ],
+      "useCases": [
+        "Use when this upstream workflow matches the user's stated goal.",
+        "Use when the task requires the procedures documented in this skill."
+      ],
+      "scrapedAt": "2026-09-21T12:30:47.795Z"
+    },
+    {
       "id": "antigravity-api-onboarding",
       "name": "api-onboarding",
       "slug": "api-onboarding",
@@ -3805,6 +3833,34 @@
       "scrapedAt": "2026-03-02T07:07:16.747Z"
     },
     {
+      "id": "antigravity-apify-generate-output-schema",
+      "name": "apify-generate-output-schema",
+      "slug": "apify-generate-output-schema",
+      "description": "Generate output schemas (dataset_schema.json, output_schema.json, key_value_store_schema.json) for an Apify Actor by analyzing its source code. Use when creating or updating Actor output schemas.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apify-generate-output-schema",
+      "content": "## When to Use\n- Use when this upstream workflow matches the user's stated goal.\n- Use when the task requires the procedures documented in this skill.\n\n# Generate Actor output schema\n\nYou are generating output schema files for an Apify Actor. The output schema tells Apify Console how to display run results. You will analyze the Actor's source code, create `dataset_schema.json`, `output_schema.json`, and `key_value_store_schema.json` (if the Actor uses key-value store), and update `actor.json`.\n\n## Core principles\n\n- **Analyze code first**: Read the Actor's source to understand what data it actually pushes to the dataset — never guess\n- **Every field is nullable**: APIs and websites are unpredictable — always set `\"nullable\": true`\n- **Anonymize examples**: Never use real user IDs, usernames, or personal data in examples\n- **Verify against code**: If TypeScript types exist, cross-check the schema against both the type definition AND the code that produces the values\n- **Reuse existing patterns**: Before generating schemas, check if other Actors in the same repository already have output schemas — match their structure, naming conventions, description style, and formatting\n- **Don't reinvent the wheel**: Reuse existing type definitions, interfaces, and utilities from the codebase instead of creating duplicate definitions\n\n---\n\n## Phase 1: Discover Actor structure\n\n**Goal**: Locate the Actor and understand its output\n\nInitial request: $ARGUMENTS\n\n**Actions**:\n1. Create todo list with all phases\n2. Find the `.actor/` directory containing `actor.json`\n3. Read `actor.json` to understand the Actor's configuration\n4. Check if `dataset_schema.json`, `output_schema.json`, and `key_value_store_schema.json` already exist\n5. **Search for existing schemas in the repository**: Look for other `.actor/` directories or schema files (e.g., `**/dataset_schema.json`, `**/output_schema.json`, `**/key_value_store_schema.json`) to learn the repo's conventions — match their description style, field naming, example formatting, and overall structure\n6. Find all places where data is pushed to the dataset:\n   - **JavaScript/TypeScript**: Search for `Actor.pushData(`, `dataset.pushData(`, `Dataset.pushData(`\n   - **Python**: Search for `Actor.push_data(`, `dataset.push_data(`, `Dataset.push_data(`\n7. Find all places where data is stored in the key-value store:\n   - **JavaScript/TypeScript**: Search for `Actor.setValue(`, `keyValueStore.setValue(`, `KeyValueStore.setValue(`\n   - **Python**: Search for `Actor.set_value(`, `key_value_store.set_value(`, `KeyValueStore.set_value(`\n8. Find output type definitions — **reuse them directly** instead of recreating from scratch:\n   - **TypeScript**: Look for output type interfaces/types (e.g., in `src/types/`, `src/types/output.ts`). If an interface or type already defines the output shape, derive the schema fields from it — do not create a parallel definition\n   - **Python**: Look for TypedDict, dataclass, or Pydantic model definitions. Use the existing field names, types, and docstrings as the source of truth\n9. Check for existing shared schema utilities or helper functions in the codebase that handle schema generation or validation — reuse them rather than creating new logic\n10. If inline `storages.dataset` or `storages.keyValueStore` config exists in `actor.json`, note it for migration\n\nPresent findings to user: list all discovered dataset output fields, key-value store keys, their types, and where they come from.\n\n---\n\n## Phase 2: Generate `dataset_schema.json`\n\n**Goal**: Create a complete dataset schema with field definitions and display views\n\n### File structure\n\n```json\n{\n    \"actorSpecification\": 1,\n    \"fields\": {\n        \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n        \"type\": \"object\",\n        \"properties\": {\n            // ALL output fields here — every field the Actor can produce,\n            // not just the ones shown in the overview view\n        },\n        \"required\": [],\n        \"additionalProperties\": true\n    },\n    \"views\": {\n        \"overview\": {\n            \"title\": \"Overview\",\n            \"description\": \"Most important fields at a glance\",\n            \"transformation\": {\n                \"fields\": [\n                    // 8-12 most important field names\n                ]\n            },\n            \"display\": {\n                \"component\": \"table\",\n                \"properties\": {\n                    // Display config for each overview field\n                }\n            }\n        }\n    }\n}\n```\n\n### Consistency with existing schemas\n\nIf existing output schemas were found in the repository during Phase 1 (step 5), follow their conventions:\n- Match the **description writing style** (sentence case vs. lowercase, period vs. no period, etc.)\n- Match the **field naming convention** (camelCase vs. snake_case) — this must also match the actual keys produced by the Actor code\n- Match the **example value style** (e.g., date formats, URL patterns, placeholder names)\n- Match t",
+      "tags": [
+        "python",
+        "javascript",
+        "typescript",
+        "pdf",
+        "api",
+        "ai",
+        "agent",
+        "workflow",
+        "template",
+        "document"
+      ],
+      "useCases": [
+        "Use when this upstream workflow matches the user's stated goal.",
+        "Use when the task requires the procedures documented in this skill."
+      ],
+      "scrapedAt": "2026-09-21T12:30:57.992Z"
+    },
+    {
       "id": "antigravity-apify-influencer-discovery",
       "name": "apify-influencer-discovery",
       "slug": "apify-influencer-discovery",
@@ -3829,6 +3885,34 @@
         "You need Apify-based extraction plus a shortlist or summary of suitable influencer candidates."
       ],
       "scrapedAt": "2026-03-02T07:07:17.353Z"
+    },
+    {
+      "id": "antigravity-apify-integration-development",
+      "name": "apify-integration-development",
+      "slug": "apify-integration-development",
+      "description": "Curated upstream guidance for Apify Integration Development; use when the workflow matches the user goal.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apify-integration-development",
+      "content": "## When to Use\n- Use when this upstream workflow matches the user's stated goal.\n- Use when the task requires the procedures documented in this skill.\n\n# Apify Integration Development\n\nDesign and build an **official Apify integration** for a company's product, with minimal help from Apify. This skill covers every integration shape Apify supports - workflow-automation apps, AI agent plugins (coding agents and harnesses), AI framework packages, and direct application clients - so a partner team can ship a first-class Apify integration end to end. The cross-cutting rules below apply to all of them, and one category-specific reference file carries the rest.\n\n> **Building an official integration?** Once you publish it, contact **integrations@apify.com** so the Apify team can review, test, and validate your integration before it reaches users. We'll check the capability surface, cost controls, error handling, and attribution headers, and help you close any gaps.\n\n## Step 0 - Learn the Apify model first (required)\n\nBefore designing anything, fetch and read `https://apify.com/agents.md`. It is the canonical quickstart for AI agents and the single source of truth for vocabulary, the run flow, and the cost rule. If the fetch fails, the mini-glossary below keeps the skill usable.\n\nApify vocabulary (always written with a capital A on the platform):\n\n- **Actor** - a serverless cloud program that takes JSON input, performs a task, and produces structured output. Not an AI agent.\n- **Actor Run** - one execution of an Actor. Each run has its own dataset, key-value store, and request queue, and ends in a terminal status (`SUCCEEDED`, `FAILED`, `TIMED-OUT`, `ABORTED`).\n- **Dataset** - append-only structured storage for a run's results. An Actor call returns the dataset ID, not its contents.\n- **Key-Value Store** - unstructured/file storage (screenshots, HTML, OUTPUT).\n- **Actor Task** - a saved, parameterized configuration for running an Actor.\n- **Apify Store** - the marketplace of Actors at `https://apify.com/store.md`.\n- **Apify Console** - the web UI at `https://console.apify.com`.\n- **Compute Unit (CU)** - billing unit: memory (MB) x duration (hours).\n\nFurther terms (build, standby, request queue, proxy, pricing models): `https://docs.apify.com/llms.txt`.\n\n## Use Apify MCP for live context while planning\n\nThe Apify MCP server is the fastest way to research Actors, schemas, pricing, and docs during integration design. See `https://docs.apify.com/integrations/mcp` (append `.md` for a markdown version).\n\nIf Apify MCP tools are already available in this environment, use them:\n\n- `search-actors` - find Actors by platform/product keyword (search by product name, not end goal).\n- `fetch-actor-details` - read an Actor's input schema, output format, README, and pricing before you encode its shape into the integration.\n- `search-apify-docs` / `fetch-apify-docs` - pull contextual documentation pages.\n\nThe anonymous discovery subset (`search-actors`, `fetch-actor-details`, `search-apify-docs`, `fetch-apify-docs`) works without an account, so you can research even before the developer has connected their token.\n\n## Pick your integration shape\n\nRead exactly one reference file based on the product you are integrating into. Each reference carries the category-specific UX design, a canonical capability matrix, and a definition-of-done checklist.\n\n| Product shape | Examples | Read |\n|---|---|---|\n| Workflow automation platform | Zapier, n8n, Make, Pipedream, Activepieces | `references/workflow-automation.md` |\n| AI agent plugin (coding agent or harness) | Cursor, Claude Code, Codex, GitHub Copilot (coding agents); OpenClaw-style runtimes, Hermes-style harnesses (harnesses) | `references/ai-harness-plugin.md` |\n| AI framework package (PyPI/npm for LLM frameworks) | LangChain, LlamaIndex, Haystack, Vercel AI SDK | `references/ai-framework-package.md` |\n| Application integration (direct client) | A backend service, scheduled job, product feature calling Actors via `apify-client` or REST | `references/sdk-integration.md` |\n\nPaths are relative to this skill folder. If your product spans two shapes (e.g. an AI harness built on top of a framework package), read both - the rules compose. The AI agent plugin reference covers **two approaches with different trade-offs**: a lightweight skills + MCP bundle for skills/MCP-aware coding agents, and a custom tool-registry plugin for OpenClaw/Hermes-style harnesses.\n\n## Cross-cutting design rules (true for every integration type)\n\nThese invariants were extracted from every existing Apify integration. Apply them regardless of shape.\n\n### Vocabulary mirroring\nModel the integration's resources on Apify's domain (Actor / Run / Dataset / KV Store / Task). Users coming from Apify Console should find the same concepts under the same names.\n\n### Asynchronous run flow with bounded polling\nActors can run for seconds to hours. Use the asynchronous flow, never the 300-second synchronous endpoint for anything but sho",
+      "tags": [
+        "python",
+        "node",
+        "markdown",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "automation"
+      ],
+      "useCases": [
+        "Use when this upstream workflow matches the user's stated goal.",
+        "Use when the task requires the procedures documented in this skill."
+      ],
+      "scrapedAt": "2026-09-21T12:30:59.142Z"
     },
     {
       "id": "antigravity-apify-lead-generation",
@@ -4317,6 +4401,32 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-29T06:58:01.072Z"
+    },
+    {
+      "id": "antigravity-architecture-review",
+      "name": "architecture-review",
+      "slug": "architecture-review",
+      "description": "Review repository architecture using Ontoly Software Graph and MCP capabilities. Use when asked to explain architecture, module boundaries, package topology, service ownership, or architectural risk.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/architecture-review",
+      "content": "## When to Use\n- Use when this upstream workflow matches the user's stated goal.\n- Use when the task requires the procedures documented in this skill.\n\n# Architecture Review\n\nUse this skill when the user asks for architecture review using Ontoly evidence.\n\n## Required Workflow\n\nFollow [the shared Ontoly workflow. Also read [graph evidence rules, [MCP usage, [best practices, and [fallback rules when the task requires detail.\n\n## Ontoly Capabilities\n\nUse these capabilities first: `ExplainArchitecture`, `GraphStatistics`, `FindCycles`, `FindDependencies`, `EvidencePack`.\n\n## Output Contract\n\nReturn:\n\n- answer or plan\n- capabilities invoked\n- graph evidence with node ids, edge types, source spans, and graph hash when available\n- confidence: high, medium, or low\n- fallback reason if repository files were inspected\n\n## Boundaries\n\nDo not implement compiler, query, MCP, SDK, or business logic in the skill. Do not search repository files until Ontoly cannot answer or evidence must be confirmed.\n\n## Resources\n\n- [Examples\n- [Prompt template\n- [Capability notes\n\n## Learn more\n\n- Documentation: https://ontoly.xyz/docs\n- This skill on the web: https://ontoly.xyz/skills#architecture-review\n- All Ontoly Agent Skills: https://ontoly.xyz/skills\n- Install via skills.sh: https://www.skills.sh/?q=0xsarwagya/ontoly\n\n\n## Examples\n\n```text\nUser: Apply this skill to my current task.\nAssistant: Follow the workflow in this skill, cite limitations, and ask before risky steps.\n```\n\n## Limitations\n\n- Imported upstream skill; verify credentials, permissions, and safety boundaries before execution.\n- Does not replace environment-specific validation, testing, or maintainer review.\n",
+      "tags": [
+        "node",
+        "mcp",
+        "ai",
+        "agent",
+        "llm",
+        "workflow",
+        "template",
+        "document"
+      ],
+      "useCases": [
+        "Use when this upstream workflow matches the user's stated goal.",
+        "Use when the task requires the procedures documented in this skill."
+      ],
+      "scrapedAt": "2026-09-21T12:31:11.385Z"
     },
     {
       "id": "antigravity-argocd-gitops",
@@ -13291,6 +13401,34 @@
       "scrapedAt": "2026-01-29T06:58:24.752Z"
     },
     {
+      "id": "antigravity-code-review-sensei",
+      "name": "code-review-sensei",
+      "slug": "code-review-sensei",
+      "description": "Expert code reviewer that catches bugs, security issues, performance problems, and design flaws with actionable fix suggestions.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/code-review-sensei",
+      "content": "## When to Use\n- Use when this upstream workflow matches the user's stated goal.\n- Use when the task requires the procedures documented in this skill.\n\n# Code Review Sensei\n\nYou are a senior code reviewer with 15+ years of experience across multiple languages and domains. You review code like a mentor — firm on quality, clear in feedback, and always educational.\n\n## Review Framework\n\nFor every code review, evaluate across 5 dimensions:\n\n### 1. 🐛 Correctness\n- Logic errors\n- Off-by-one errors\n- Null/undefined handling\n- Race conditions\n- State management bugs\n- Error handling completeness\n\n### 2. 🔒 Security\n- Input validation and sanitization\n- SQL injection / XSS / CSRF risks\n- Authentication/authorization gaps\n- Secret exposure (hardcoded keys, tokens in logs)\n- Dependency vulnerabilities\n- Data exposure (over-fetching, missing field-level auth)\n\n### 3. ⚡ Performance\n- Algorithmic complexity (O(n²) where O(n) suffices?)\n- Unnecessary allocations/copies\n- Missing indexes or N+1 queries\n- Blocking I/O in async contexts\n- Memory leaks (unclosed connections, event listeners)\n- Caching opportunities\n\n### 4. 🏗️ Design\n- Single Responsibility Principle\n- Coupling between components\n- API contract clarity\n- Error propagation strategy\n- Testability\n- Extensibility without modification\n\n### 5. 📖 Readability\n- Naming clarity\n- Function/method length\n- Nesting depth\n- Comment quality (why, not what)\n- Consistent style\n\n## Review Output Format\n\n```\n## Code Review: [File/Component Name]\n\n### Summary\n[1-2 sentence overall assessment]\n\n### Critical Issues 🔴\n[Issues that MUST be fixed before merge]\n\n**Issue 1: [Title]**\n- **Dimension**: Security / Correctness / Performance\n- **Location**: Line X-Y\n- **Problem**: [What's wrong]\n- **Impact**: [What could go wrong]\n- **Fix**: \n```language\n// Fixed code here\n```\n\n### Warnings 🟡\n[Issues that should be addressed soon]\n\n**Issue 2: [Title]**\n- **Dimension**: Performance / Design\n- **Location**: Line X-Y  \n- **Problem**: [What's suboptimal]\n- **Suggestion**: [How to improve]\n\n### Suggestions 🟢\n[Nice-to-have improvements]\n\n### Positive Notes ✅\n[What's done well — always include at least one]\n\n### Metrics\n| Dimension | Score (1-5) | Notes |\n|-----------|-------------|-------|\n| Correctness | | |\n| Security | | |\n| Performance | | |\n| Design | | |\n| Readability | | |\n```\n\n## Language-Specific Checks\n\n### Python\n- Use `pathlib` over `os.path`\n- Check for mutable default arguments (`def foo(x=[])`)\n- Verify proper resource cleanup (`with` statements)\n- Check for type annotation completeness\n- Look for proper use of `async/await`\n\n### JavaScript/TypeScript\n- Check for `==` vs `===`\n- Verify proper promise handling (no unhandled rejections)\n- Look for memory leaks in event listeners / subscriptions\n- Check TypeScript `any` usage\n- Verify proper error boundaries in React\n\n### Go\n- Check error handling (no swallowed errors)\n- Verify goroutine cleanup\n- Look for unbuffered channels that could deadlock\n- Check for proper context propagation\n- Verify mutex usage and potential deadlocks\n\n### Rust\n- Check for unnecessary `.clone()`\n- Verify lifetime annotations\n- Look for potential panics (`unwrap()` in production)\n- Check for proper error propagation with `?`\n- Verify unsafe block justification\n\n## Anti-Patterns to Always Flag\n\n1. **God Function**: >50 lines doing too many things → Extract functions\n2. **Magic Numbers**: Unnamed constants → Named constants or config\n3. **Copy-Paste Code**: Duplicated logic → Extract shared function\n4. **Premature Optimization**: Complex code for theoretical speedup → Benchmark first\n5. **Over-Engineering**: Abstract factory for 2 implementations → Simplify\n6. **Swallowed Errors**: `except: pass` or `.catch(() => {})` → At minimum, log it\n7. **Global Mutable State**: Module-level mutable variables → Dependency injection\n\n## Review Behavior Rules\n\n1. **Always read the FULL diff before commenting** — partial reviews miss context\n2. **Never suggest a rewrite** — suggest incremental improvements\n3. **Always explain WHY** — \"This is wrong\" is not useful; \"This causes X because Y\" is\n4. **Prioritize by impact** — Security > Correctness > Performance > Design > Style\n5. **Be specific** — Point to exact lines, give exact fixes\n6. **Acknowledge good code** — Reviews aren't just for finding problems\n\n\n## Examples\n\n```text\nUser: Apply this skill to my current task.\nAssistant: Follow the workflow in this skill, cite limitations, and ask before risky steps.\n```\n\n## Limitations\n\n- Imported upstream skill; verify credentials, permissions, and safety boundaries before execution.\n- Does not replace environment-specific validation, testing, or maintainer review.\n",
+      "tags": [
+        "python",
+        "javascript",
+        "typescript",
+        "react",
+        "api",
+        "claude",
+        "ai",
+        "workflow",
+        "design",
+        "document"
+      ],
+      "useCases": [
+        "Use when this upstream workflow matches the user's stated goal.",
+        "Use when the task requires the procedures documented in this skill."
+      ],
+      "scrapedAt": "2026-09-21T12:34:12.051Z"
+    },
+    {
       "id": "antigravity-code-reviewer",
       "name": "code-reviewer",
       "slug": "code-reviewer",
@@ -13582,6 +13720,32 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-06-20T09:29:18.885Z"
+    },
+    {
+      "id": "antigravity-codebase-onboarding",
+      "name": "codebase-onboarding",
+      "slug": "codebase-onboarding",
+      "description": "Onboard a developer to a repository using Ontoly graph summaries. Use when asked to explain a new codebase, identify entrypoints, map packages, or suggest first files to inspect.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/codebase-onboarding",
+      "content": "## When to Use\n- Use when this upstream workflow matches the user's stated goal.\n- Use when the task requires the procedures documented in this skill.\n\n# Codebase Onboarding\n\nUse this skill when the user asks for codebase onboarding using Ontoly evidence.\n\n## Required Workflow\n\nFollow [the shared Ontoly workflow. Also read [graph evidence rules, [MCP usage, [best practices, and [fallback rules when the task requires detail.\n\n## Ontoly Capabilities\n\nUse these capabilities first: `ExplainArchitecture`, `FindEntrypoints`, `GraphStatistics`, `FindFeatureOwner`, `EvidencePack`.\n\n## Output Contract\n\nReturn:\n\n- answer or plan\n- capabilities invoked\n- graph evidence with node ids, edge types, source spans, and graph hash when available\n- confidence: high, medium, or low\n- fallback reason if repository files were inspected\n\n## Boundaries\n\nDo not implement compiler, query, MCP, SDK, or business logic in the skill. Do not search repository files until Ontoly cannot answer or evidence must be confirmed.\n\n## Resources\n\n- [Examples\n- [Prompt template\n- [Capability notes\n\n## Learn more\n\n- Documentation: https://ontoly.xyz/docs\n- This skill on the web: https://ontoly.xyz/skills#codebase-onboarding\n- All Ontoly Agent Skills: https://ontoly.xyz/skills\n- Install via skills.sh: https://www.skills.sh/?q=0xsarwagya/ontoly\n\n\n## Examples\n\n```text\nUser: Apply this skill to my current task.\nAssistant: Follow the workflow in this skill, cite limitations, and ask before risky steps.\n```\n\n## Limitations\n\n- Imported upstream skill; verify credentials, permissions, and safety boundaries before execution.\n- Does not replace environment-specific validation, testing, or maintainer review.\n",
+      "tags": [
+        "node",
+        "mcp",
+        "ai",
+        "agent",
+        "llm",
+        "workflow",
+        "template",
+        "document"
+      ],
+      "useCases": [
+        "Use when this upstream workflow matches the user's stated goal.",
+        "Use when the task requires the procedures documented in this skill."
+      ],
+      "scrapedAt": "2026-09-21T12:34:18.006Z"
     },
     {
       "id": "antigravity-codebase-to-wordpress-converter",
@@ -14566,6 +14730,33 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-26T13:14:57.775Z"
+    },
+    {
+      "id": "antigravity-connection-auth-rules",
+      "name": "connection-auth-rules",
+      "slug": "connection-auth-rules",
+      "description": "Build a Connection Auth Rules for a Monte Carlo connection type. Fetches live connector schemas and transform steps from the apollo-agent repo.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/connection-auth-rules",
+      "content": "## When to Use\n- Use when this upstream workflow matches the user's stated goal.\n- Use when the task requires the procedures documented in this skill.\n\n# Connection Auth Rules Builder\n\nUse this skill when the user wants to build a Connection Auth Rules (stored as `ctp_config`) for a Monte Carlo connection. The config is stored on the `Connection` object in the monolith and tells the Apollo agent how to transform flat credentials into the driver-specific `connect_args` format.\n\n## When to activate this skill\n\nActivate when the user:\n\n- Asks to create, build, or generate a Connection Auth Rules\n- Asks what fields are needed for a connection type's Connection Auth Rules\n- Wants to customize credential transformation for a connection\n- Asks about `MapperConfig`, `TransformStep`, or `CtpConfig`\n- Says things like \"help me write Connection Auth Rules for X\", \"what's the connection auth rules format for X\"\n\n## When NOT to activate this skill\n\nDo not activate when the user is:\n\n- Creating monitors (use the monitor-creation skill)\n- Investigating data incidents (use the analyze-root-cause skill)\n- Setting up a connection in the UI (this skill builds the JSON config, not UI flows)\n\n---\n\n## Step 1 — List available connection types\n\nLocate the companion script with Bash:\n\n```bash\nfind -L ~/.claude . -name fetch_schema.py -path \"*/connection-auth-rules/*\" 2>/dev/null | head -1\n```\n\nThen run it:\n\n```bash\npython3 <script_path> --list\n```\n\nThe script outputs JSON. Parse `result.connectors` — each entry has a `name` field. Present the names to the user and ask which connection type they want to build a config for.\n\n**If the script fails:** Show the error output and offer to retry. Do not proceed until you have the connector list.\n\n---\n\n## Step 2 — Fetch the connector schema\n\nOnce the user selects a connection type, run the script with that connector name:\n\n```bash\npython3 <script_path> --connector <name>\n```\n\nThe script outputs JSON. Parse `result.schema`:\n\n- **`output_keys`** — the driver-level `connect_args` keys the mapper must produce (from the connector's `TypedDict`)\n- **`default_field_map`** — the existing default mapping (credential field → Jinja2 template)\n- **`default_steps`** — any default transform steps already configured\n\nPresent a summary to the user:\n\n- The output keys\n- The default mapper field_map entries\n- Any existing steps with their types\n\n---\n\n## Step 3 — Optionally fetch available transform steps\n\nIf the connector's default config (from Step 2) already includes steps, or if the user indicates they need custom transform steps, run:\n\n```bash\npython3 <script_path> --connector <name> --transforms\n```\n\nParse `result.transforms` — each entry has:\n- `name` — the step type string used in `\"type\"`\n- `step_input` — fields the step reads from the pipeline state\n- `step_output` — derived fields the step writes, referenceable as `{{ derived.<key> }}` in the mapper\n- `step_field_map` — typical mapper entry to wire the step's output into `connect_args`\n\nPresent the available steps with their full contracts (input, output, and field_map hint).\n\n**If the script fails:** Tell the user and offer to retry. You can continue without step data — just describe steps as unknown and ask the user to specify them manually.\n\n---\n\n## Step 4 — Build the mapper\n\nWalk the user through each output key in the TypedDict:\n\n1. Show the default template from the connector's `MapperConfig` (if one exists).\n2. Ask if they want to keep the default or customize it.\n3. For custom values, help the user write a Jinja2 template expression.\n\n### Jinja2 template help\n\nThe template context has two namespaces:\n\n- **`raw`** — the flat credential dict as received. Use `{{ raw.field_name }}` to reference a credential field directly. Example: `{{ raw.client_id }}`\n- **`derived`** — fields added by transform steps. Use `{{ derived.field_name }}` to reference a step's output. Example: `{{ derived.private_key_pem }}`\n\nCommon patterns:\n- Simple field reference: `\"{{ raw.username }}\"`\n- Conditional/default: `\"{{ raw.port | default('1433') }}\"`\n- Concatenation: `\"{{ raw.host }}:{{ raw.port }}\"`\n\nWhen the user doesn't know their credential field names, remind them these come from the Data Collector's credential dict — the keys are whatever the DC sends for that connection type.\n\n---\n\n## Step 5 — Configure transform steps (optional)\n\nIf the connector needs steps (e.g. decoding a PEM certificate, constructing a derived field), help the user configure each step. A step dict has these fields:\n\n| Field | Required | Description |\n|-------|----------|-------------|\n| `type` | yes | Step type name (e.g. `\"load_private_key\"`) |\n| `input` | yes | Dict of template strings the step reads (e.g. `{\"pem\": \"{{ raw.private_key_pem }}\"}`) |\n| `output` | yes | Dict mapping the step's logical output names to derived key names (e.g. `{\"private_key\": \"private_key_der\"}`) |\n| `when` | no | Jinja2 boolean expression — step only runs if this evaluates to true (e.g. `\"raw.ssl_ca_pem is ",
+      "tags": [
+        "python",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "template",
+        "document",
+        "rag"
+      ],
+      "useCases": [
+        "Use when this upstream workflow matches the user's stated goal.",
+        "Use when the task requires the procedures documented in this skill."
+      ],
+      "scrapedAt": "2026-09-21T12:34:37.320Z"
     },
     {
       "id": "antigravity-constant-time-analysis",
@@ -17661,6 +17852,32 @@
       "scrapedAt": "2026-06-13T09:24:47.141Z"
     },
     {
+      "id": "antigravity-dependency-analysis",
+      "name": "dependency-analysis",
+      "slug": "dependency-analysis",
+      "description": "Analyze internal and package dependencies using Ontoly graph traversal. Use when asked which modules, packages, services, or files depend on each other.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dependency-analysis",
+      "content": "## When to Use\n- Use when this upstream workflow matches the user's stated goal.\n- Use when the task requires the procedures documented in this skill.\n\n# Dependency Analysis\n\nUse this skill when the user asks for dependency analysis using Ontoly evidence.\n\n## Required Workflow\n\nFollow [the shared Ontoly workflow. Also read [graph evidence rules, [MCP usage, [best practices, and [fallback rules when the task requires detail.\n\n## Ontoly Capabilities\n\nUse these capabilities first: `FindDependencies`, `FindDependents`, `FindCycles`, `GraphStatistics`, `EvidencePack`.\n\n## Output Contract\n\nReturn:\n\n- answer or plan\n- capabilities invoked\n- graph evidence with node ids, edge types, source spans, and graph hash when available\n- confidence: high, medium, or low\n- fallback reason if repository files were inspected\n\n## Boundaries\n\nDo not implement compiler, query, MCP, SDK, or business logic in the skill. Do not search repository files until Ontoly cannot answer or evidence must be confirmed.\n\n## Resources\n\n- [Examples\n- [Prompt template\n- [Capability notes\n\n## Learn more\n\n- Documentation: https://ontoly.xyz/docs\n- This skill on the web: https://ontoly.xyz/skills#dependency-analysis\n- All Ontoly Agent Skills: https://ontoly.xyz/skills\n- Install via skills.sh: https://www.skills.sh/?q=0xsarwagya/ontoly\n\n\n## Examples\n\n```text\nUser: Apply this skill to my current task.\nAssistant: Follow the workflow in this skill, cite limitations, and ask before risky steps.\n```\n\n## Limitations\n\n- Imported upstream skill; verify credentials, permissions, and safety boundaries before execution.\n- Does not replace environment-specific validation, testing, or maintainer review.\n",
+      "tags": [
+        "node",
+        "mcp",
+        "ai",
+        "agent",
+        "llm",
+        "workflow",
+        "template",
+        "document"
+      ],
+      "useCases": [
+        "Use when this upstream workflow matches the user's stated goal.",
+        "Use when the task requires the procedures documented in this skill."
+      ],
+      "scrapedAt": "2026-09-21T12:36:02.426Z"
+    },
+    {
       "id": "antigravity-dependency-management-deps-audit",
       "name": "dependency-management-deps-audit",
       "slug": "dependency-management-deps-audit",
@@ -18555,6 +18772,34 @@
         "When you need specialized assistance with this domain"
       ],
       "scrapedAt": "2026-03-08T06:55:27.239Z"
+    },
+    {
+      "id": "antigravity-devops-pipeline-builder",
+      "name": "devops-pipeline-builder",
+      "slug": "devops-pipeline-builder",
+      "description": "Design and implement CI/CD pipelines, Docker configurations, deployment strategies, and infrastructure automation with production-ready patterns.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/devops-pipeline-builder",
+      "content": "## When to Use\n- Use when this upstream workflow matches the user's stated goal.\n- Use when the task requires the procedures documented in this skill.\n\n# DevOps Pipeline Builder\n\nYou are a DevOps engineer who has built and maintained pipelines processing millions of deployments. You design for reliability, speed, and security — in that order.\n\n## Decision Framework\n\nBefore writing any pipeline/config, establish:\n\n1. **Project type**: Web app, API, library, microservice, monolith?\n2. **Language/stack**: What build tools? What test framework?\n3. **Deployment target**: Docker, K8s, VM, serverless, static?\n4. **Environment strategy**: dev → staging → production?\n5. **Compliance needs**: SOC2? HIPAA? Any audit requirements?\n6. **Team size**: 1 person vs 50 devs changes the complexity budget\n\n## Pipeline Patterns\n\n### GitHub Actions — Standard Web App\n\n```yaml\nname: CI/CD Pipeline\n\non:\n  push:\n    branches: [main]\n  pull_request:\n    branches: [main]\n\nenv:\n  REGISTRY: ghcr.io\n  IMAGE_NAME: ${{ github.repository }}\n\njobs:\n  test:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: '22'\n          cache: 'npm'\n      - run: npm ci\n      - run: npm test\n      - run: npm run lint\n      # Security audit\n      - run: npm audit --audit-level=high\n      \n  build-and-push:\n    needs: test\n    if: github.ref == 'refs/heads/main'\n    runs-on: ubuntu-latest\n    permissions:\n      contents: read\n      packages: write\n    steps:\n      - uses: actions/checkout@v4\n      - uses: docker/login-action@v3\n        with:\n          registry: ${{ env.REGISTRY }}\n          username: ${{ github.actor }}\n          password: ${{ secrets.GITHUB_TOKEN }}\n      - uses: docker/build-push-action@v5\n        with:\n          context: .\n          push: true\n          tags: |\n            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest\n            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}\n          cache-from: type=gha\n          cache-to: type=gha,mode=max\n\n  deploy:\n    needs: build-and-push\n    runs-on: ubuntu-latest\n    environment: production\n    steps:\n      - run: |\n          # Add deployment commands here\n          echo \"Deploying ${{ github.sha }} to production\"\n```\n\n### Docker — Multi-stage Production Build\n\n```dockerfile\n# Stage 1: Build\nFROM node:22-alpine AS builder\nWORKDIR /app\nCOPY package*.json ./\nRUN npm ci --ignore-scripts\nCOPY . .\nRUN npm run build\n\n# Stage 2: Production\nFROM node:22-alpine AS runner\nWORKDIR /app\nRUN addgroup --system --gid 1001 appgroup && \\\n    adduser --system --uid 1001 appuser\n\nCOPY --from=builder /app/dist ./dist\nCOPY --from=builder /app/node_modules ./node_modules\nCOPY --from=builder /app/package.json ./\n\nUSER appuser\nEXPOSE 3000\nHEALTHCHECK --interval=30s --timeout=3s \\\n  CMD wget -qO- http://localhost:3000/health || exit 1\n\nCMD [\"node\", \"dist/server.js\"]\n```\n\n## Deployment Strategy Decision Tree\n\n```\nIs zero-downtime required?\n├── Yes\n│   ├── Have load balancer/ingress?\n│   │   ├── Yes → Blue/Green or Rolling Update\n│   │   └── No → Canary with traffic splitting\n│   └── Database migrations?\n│       ├── Yes → Backward-compatible migrations first\n│       └── No → Simple rolling update\n└── No\n    ├── Is it a dev/staging env?\n    │   └── Yes → Direct push, recreate containers\n    └── No → Why not? Add zero-downtime.\n```\n\n## Common Anti-Patterns to Avoid\n\n| Anti-Pattern | Why It's Bad | Fix |\n|---|---|---|\n| `latest` tag in production | Non-reproducible, untraceable | Use SHA or semver tags |\n| Build secrets in Dockerfile | Visible in image layers | Multi-stage + build args |\n| No health checks | Orchestration can't detect failures | Add HEALTHCHECK |\n| Running as root | Security risk | Create non-root user |\n| Giant Docker images | Slow pulls, attack surface | Multi-stage builds, alpine |\n| No `.dockerignore` | Slow builds, leaked secrets | Create comprehensive `.dockerignore` |\n| Hardcoded env vars | Inflexible, unsecretive | Runtime env injection |\n| No pipeline caching | Slow CI, wasted compute | Cache layers and dependencies |\n\n## Infrastructure Checklist\n\nFor any production deployment, verify:\n\n- [ ] Health check endpoint exists and checks all dependencies\n- [ ] Graceful shutdown (SIGTERM handling)\n- [ ] Structured logging (JSON, correlation IDs)\n- [ ] Secrets management (not in env vars in K8s, use sealed secrets/vault)\n- [ ] Resource limits set (CPU/memory requests and limits)\n- [ ] Monitoring dashboards configured\n- [ ] Alert rules for: high error rate, high latency, low availability\n- [ ] Rollback procedure documented and tested\n- [ ] Database migration strategy (backward compatible)\n- [ ] Rate limiting configured\n\n## When Asked to Debug CI/CD\n\n1. Check the **exact error message** — it usually tells you what's wrong\n2. Verify **secret availability** — most CI failures are auth/secret issues\n3. Check **dependency caching** — stale cache = weird errors\n4. Verify **environment parity** — \"works on ",
+      "tags": [
+        "node",
+        "api",
+        "claude",
+        "ai",
+        "automation",
+        "workflow",
+        "design",
+        "document",
+        "image",
+        "security"
+      ],
+      "useCases": [
+        "Use when this upstream workflow matches the user's stated goal.",
+        "Use when the task requires the procedures documented in this skill."
+      ],
+      "scrapedAt": "2026-09-21T12:36:40.960Z"
     },
     {
       "id": "antigravity-devops-troubleshooter",
@@ -20065,6 +20310,111 @@
       "scrapedAt": "2026-03-08T06:55:36.987Z"
     },
     {
+      "id": "antigravity-eas-app-stores",
+      "name": "eas-app-stores",
+      "slug": "eas-app-stores",
+      "description": "Curated upstream guidance for Eas App Stores; use when the workflow matches the user goal.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/eas-app-stores",
+      "content": "## When to Use\n- Use when this upstream workflow matches the user's stated goal.\n- Use when the task requires the procedures documented in this skill.\n\n# App Store Deployment\n\n> **EAS service - costs apply.** Cloud builds use EAS plan resources, and EAS services have free-tier and paid-plan limits. Apple Developer and Google Play memberships are separate. Check https://expo.dev/pricing for the requested service.\n\nThis skill covers building and releasing iOS and Android apps with EAS: Expo and other React Native projects, plus existing native apps. EAS is a delivery service; native apps can use it without adding Expo or React Native to their runtime. The native setup walkthrough currently covers SwiftUI/UIKit on iOS.\n\n## Choose the project path\n\n- **SwiftUI/UIKit app with no React Native runtime:** read [references/native-ios.md] before changing its build configuration. Keep the Xcode project and Swift code as the app's source of truth. The Expo/React Native quick-start and development-client examples below do not apply to this path.\n- **Native Android app with no React Native runtime:** preserve its existing native build setup. See [references/play-store.md] for submission; the Swift/iOS setup instructions do not apply. A dedicated native Android setup walkthrough is not yet included.\n- **Expo/React Native app:** use the quick-start below, then the relevant store reference.\n- **Adding React Native screens to an existing native app:** use `expo-brownfield` for that integration; return here for distribution.\n\nUse the archive and icon checks in [references/native-ios.md] during initial native iOS setup, after changing versioning, bundle IDs, or icons, or when diagnosing a rejected upload. Routine releases follow the EAS build/submit flow and the processing and availability checks in [references/testflight.md]. A successful EAS build or a queued submission does not establish Apple acceptance, tester access, or an App Store release.\n\n## References\n\nConsult these resources as needed:\n\n- ./references/workflows.md -- CI/CD workflows for automated store releases and PR previews\n- ./references/testflight.md -- Submitting iOS builds to TestFlight for beta testing\n- ./references/app-store-metadata.md -- Managing App Store metadata and ASO optimization\n- ./references/play-store.md -- Submitting Android builds to Google Play Store\n- ./references/ios-app-store.md -- iOS App Store submission and review process\n- ./references/native-ios.md -- Native Swift/SwiftUI/UIKit setup, versioning, and archive verification without an Expo runtime\n\n## Expo / React Native Quick Start\n\n### Install EAS CLI\n\n```bash\nnpm install -g eas-cli\neas login\n```\n\n### Initialize EAS\n\n```bash\nnpx eas-cli@latest init\n```\n\n`eas init` links or creates the EAS project. Run `eas build:configure` to create build profiles in `eas.json`; preserve existing project and store identifiers when a release setup already exists.\n\n## Build Commands\n\n### Production Builds\n\n```bash\n# iOS App Store build\nnpx eas-cli@latest build -p ios --profile production\n\n# Android Play Store build\nnpx eas-cli@latest build -p android --profile production\n\n# Both platforms\nnpx eas-cli@latest build --profile production\n```\n\n### Submit to Stores\n\n```bash\n# iOS: Build and submit to App Store Connect\nnpx eas-cli@latest build -p ios --profile production --auto-submit\n\n# Android: Build and submit to Play Store\nnpx eas-cli@latest build -p android --profile production --auto-submit\n\n# Expo / React Native shortcut for iOS TestFlight\nnpx testflight\n```\n\n## Web & API Route Hosting\n\nDeploying an Expo website or Expo Router API routes to EAS Hosting (`npx expo export -p web` then `eas deploy`) is covered by the `eas-hosting` skill. This skill focuses on native app store releases.\n\n## EAS Configuration\n\nExample for an Expo / React Native project (native Swift profiles are in `references/native-ios.md`):\n\n```json\n{\n  \"cli\": {\n    \"version\": \">= 16.0.1\",\n    \"appVersionSource\": \"remote\"\n  },\n  \"build\": {\n    \"production\": {\n      \"autoIncrement\": true,\n      \"ios\": {\n        \"resourceClass\": \"m-medium\"\n      }\n    },\n    \"development\": {\n      \"developmentClient\": true,\n      \"distribution\": \"internal\"\n    }\n  },\n  \"submit\": {\n    \"production\": {\n      \"ios\": {\n        \"appleId\": \"your@email.com\",\n        \"ascAppId\": \"1234567890\"\n      },\n      \"android\": {\n        \"serviceAccountKeyPath\": \"./google-service-account.json\",\n        \"track\": \"internal\"\n      }\n    }\n  }\n}\n```\n\n## Platform-Specific Guides\n\n### iOS\n\n- For native Swift apps, use the explicit build/submit flow in `references/native-ios.md`\n- For Expo / React Native apps, `npx testflight` provides a quick TestFlight flow\n- Configure Apple credentials via `eas credentials`\n- See ./references/testflight.md for credential setup\n- See ./references/ios-app-store.md for App Store submission\n\n### Android\n\n- Set up Google Play Console service account\n- Configure tracks: internal → closed → open → production\n- See ./references/play-store.md for detaile",
+      "tags": [
+        "react",
+        "api",
+        "ai",
+        "agent",
+        "workflow",
+        "document"
+      ],
+      "useCases": [
+        "Use when this upstream workflow matches the user's stated goal.",
+        "Use when the task requires the procedures documented in this skill."
+      ],
+      "scrapedAt": "2026-09-21T12:37:11.714Z"
+    },
+    {
+      "id": "antigravity-eas-hosting",
+      "name": "eas-hosting",
+      "slug": "eas-hosting",
+      "description": "Curated upstream guidance for Eas Hosting; use when the workflow matches the user goal.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/eas-hosting",
+      "content": "# EAS Hosting\n\n> **EAS service - costs apply.** EAS Hosting is a paid Expo Application Services product with free-tier limits; production deploys use your plan's request and bandwidth allowance. See https://expo.dev/pricing. Authoring API routes and exporting the web bundle are free and open source, and you can self-host the exported server output instead of EAS Hosting.\n\nEAS Hosting deploys your Expo **web app and API routes** to Expo's managed edge (Cloudflare Workers). Export the web bundle with `npx expo export -p web` and ship it with `eas deploy` - the same command deploys any Expo Router API routes bundled alongside it. This skill covers deploying a website, authoring API routes, and the hosting runtime; see the Deployment section below for the deploy workflow.\n\n## When to Use API Routes\n\nUse API routes when you need:\n\n- **Server-side secrets** — API keys, database credentials, or tokens that must never reach the client\n- **Database operations** — Direct database queries that shouldn't be exposed\n- **Third-party API proxies** — Hide API keys when calling external services (OpenAI, Stripe, etc.)\n- **Server-side validation** — Validate data before database writes\n- **Webhook endpoints** — Receive callbacks from services like Stripe or GitHub\n- **Rate limiting** — Control access at the server level\n- **Heavy computation** — Offload processing that would be slow on mobile\n\n## When NOT to Use API Routes\n\nAvoid API routes when:\n\n- **Data is already public** — Use direct fetch to public APIs instead\n- **No secrets required** — Static data or client-safe operations\n- **Real-time updates needed** — Use WebSockets or services like Supabase Realtime\n- **Simple CRUD** — Consider Firebase, Supabase, or Convex for managed backends\n- **File uploads** — Use direct-to-storage uploads (S3 presigned URLs, Cloudflare R2)\n- **Authentication only** — Use Clerk, Auth0, or Firebase Auth instead\n\n## File Structure\n\nAPI routes live in the `app` directory with `+api.ts` suffix:\n\n```\napp/\n  api/\n    hello+api.ts          → GET /api/hello\n    users+api.ts          → /api/users\n    users/[id]+api.ts     → /api/users/:id\n  (tabs)/\n    index.tsx\n```\n\n## Basic API Route\n\n```ts\n// app/api/hello+api.ts\nexport function GET(request: Request) {\n  return Response.json({ message: \"Hello from Expo!\" });\n}\n```\n\n## HTTP Methods\n\nExport named functions for each HTTP method:\n\n```ts\n// app/api/items+api.ts\nexport function GET(request: Request) {\n  return Response.json({ items: [] });\n}\n\nexport async function POST(request: Request) {\n  const body = await request.json();\n  return Response.json({ created: body }, { status: 201 });\n}\n\nexport async function PUT(request: Request) {\n  const body = await request.json();\n  return Response.json({ updated: body });\n}\n\nexport async function DELETE(request: Request) {\n  return new Response(null, { status: 204 });\n}\n```\n\n## Dynamic Routes\n\n```ts\n// app/api/users/[id]+api.ts\nexport function GET(request: Request, { id }: { id: string }) {\n  return Response.json({ userId: id });\n}\n```\n\n## Request Handling\n\n### Query Parameters\n\n```ts\nexport function GET(request: Request) {\n  const url = new URL(request.url);\n  const page = url.searchParams.get(\"page\") ?? \"1\";\n  const limit = url.searchParams.get(\"limit\") ?? \"10\";\n\n  return Response.json({ page, limit });\n}\n```\n\n### Headers\n\n```ts\nexport function GET(request: Request) {\n  const auth = request.headers.get(\"Authorization\");\n\n  if (!auth) {\n    return Response.json({ error: \"Unauthorized\" }, { status: 401 });\n  }\n\n  return Response.json({ authenticated: true });\n}\n```\n\n### JSON Body\n\n```ts\nexport async function POST(request: Request) {\n  const { email, password } = await request.json();\n\n  if (!email || !password) {\n    return Response.json({ error: \"Missing fields\" }, { status: 400 });\n  }\n\n  return Response.json({ success: true });\n}\n```\n\n## Environment Variables\n\nUse `process.env` for server-side secrets:\n\n```ts\n// app/api/ai+api.ts\nexport async function POST(request: Request) {\n  const { prompt } = await request.json();\n\n  const response = await fetch(\"https://api.openai.com/v1/chat/completions\", {\n    method: \"POST\",\n    headers: {\n      \"Content-Type\": \"application/json\",\n      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,\n    },\n    body: JSON.stringify({\n      model: \"gpt-4\",\n      messages: [{ role: \"user\", content: prompt }],\n    }),\n  });\n\n  const data = await response.json();\n  return Response.json(data);\n}\n```\n\nSet environment variables:\n\n- **Local**: Create `.env` file (never commit)\n- **EAS Hosting**: Use `eas env:create` or Expo dashboard\n\n## CORS Headers\n\nAdd CORS for web clients:\n\n```ts\nconst corsHeaders = {\n  \"Access-Control-Allow-Origin\": \"*\",\n  \"Access-Control-Allow-Methods\": \"GET, POST, PUT, DELETE, OPTIONS\",\n  \"Access-Control-Allow-Headers\": \"Content-Type, Authorization\",\n};\n\nexport function OPTIONS() {\n  return new Response(null, { headers: corsHeaders });\n}\n\nexport function GET() {\n  return Response.json({ data: \"value\" }, { headers",
+      "tags": [
+        "typescript",
+        "react",
+        "node",
+        "api",
+        "ai",
+        "agent",
+        "gpt",
+        "workflow",
+        "supabase",
+        "firebase"
+      ],
+      "useCases": [
+        "**Server-side secrets** — API keys, database credentials, or tokens that must never reach the client",
+        "**Database operations** — Direct database queries that shouldn't be exposed",
+        "**Third-party API proxies** — Hide API keys when calling external services (OpenAI, Stripe, etc.)",
+        "**Server-side validation** — Validate data before database writes",
+        "**Webhook endpoints** — Receive callbacks from services like Stripe or GitHub"
+      ],
+      "scrapedAt": "2026-09-21T12:37:12.802Z"
+    },
+    {
+      "id": "antigravity-eas-observe",
+      "name": "eas-observe",
+      "slug": "eas-observe",
+      "description": "Curated upstream guidance for Eas Observe; use when the workflow matches the user goal.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/eas-observe",
+      "content": "## When to Use\n- Use when this upstream workflow matches the user's stated goal.\n- Use when the task requires the procedures documented in this skill.\n\n# EAS Observe\n\n> **EAS service - costs apply.** EAS Observe is an Expo Application Services product. The free EAS plan allows up to 10,000 monthly active users, with a limited set of features; higher usage requires a paid subscription. For details, see https://expo.dev/pricing#plan-features.\n\nEAS Observe tracks startup, navigation, and custom-event performance from production Expo apps. It needs a development or production build — the native library is not in Expo Go.\n\n> **Source of truth:** https://docs.expo.dev/eas/observe/ — always consult the canonical docs when API details matter, especially get-started, configuration, integrations, and the metrics reference. EAS Observe is evolving; this skill's references are written to stay accurate but may lag the docs.\n\n## Which reference to read\n\nThe four reference files in `./references/` cover what people typically need this skill for:\n\n- **Adding EAS Observe to a project** → [`./references/setup.md`]. Install, wrap the root layout (`AppMetricsRoot` on SDK 55, `ObserveRoot` on SDK 56+), mark the app interactive (global `markInteractive()` on SDK 55, the `useObserve()` hook or `<ObserveInteractiveMarker />` on SDK 56+), optional per-route navigation metrics through the Expo Router / React Navigation integrations, user-defined events via `Observe.logEvent` (SDK 56+), error reporting, and runtime configuration (sampling, dispatch, environments, custom endpoint).\n- **Querying metrics from the terminal** → [`./references/queries.md`]. The six `eas observe:*` commands — `metrics-summary`, `metrics`, `routes`, `events`, `session`, `versions` — with flags, metric aliases, table layouts, JSON shapes, and common workflows.\n- **Reading a dashboard or CLI output** → [`./references/metrics.md`]. Target thresholds per metric, what the automatic TTI params mean (`frameRate.*`, `device.*`, `network.*`), and diagnostic patterns for telling slow-but-smooth startup apart from main-thread contention, hard blocks, or throttled devices.\n- **Shipping an Observe integration in a library** → [`./references/third-party.md`]. For package authors only (SDK 57+): optional peer dependency, config declaration merging, `Observe.registerIntegration()`, and event naming.\n\n## Quick links to the docs\n\n- Get started: https://docs.expo.dev/eas/observe/get-started/\n- Dashboard guide: https://docs.expo.dev/eas/observe/dashboard/\n- Querying with EAS CLI: https://docs.expo.dev/eas/observe/eas-cli/\n- Metrics reference: https://docs.expo.dev/eas/observe/reference/metrics/\n- Expo Router integration: https://docs.expo.dev/eas/observe/integrations/expo-router/\n- React Navigation integration: https://docs.expo.dev/eas/observe/integrations/react-navigation/\n- User-defined events: https://docs.expo.dev/eas/observe/events/\n- Configuration: https://docs.expo.dev/eas/observe/configuration/\n- Third-party integrations: https://docs.expo.dev/eas/observe/integrations/third-party/\n- EAS Update download performance: https://docs.expo.dev/eas/observe/eas-update/\n- Troubleshooting: https://docs.expo.dev/eas/observe/reference/troubleshooting/\n\n## Known gaps between the docs and the shipped code\n\nVerified against `eas-cli` 21.8.0 and `expo-observe` 57.0.9. Trust this skill's references over the docs on these points, but re-check with `--help` and the installed package before relying on them:\n\n- All six CLI commands are on the [Querying with EAS CLI](https://docs.expo.dev/eas/observe/eas-cli/) page. Older doc builds list only four and omit `observe:routes` and `observe:session`.\n- Navigation metric aliases are `nav_cold_ttr`, `nav_warm_ttr`, and `nav_tti`. There are no bare `cold_ttr` / `warm_ttr` aliases in the CLI.\n- Sorting uses `--sort <slowest|fastest|newest|oldest>`. There is no `--order` flag.\n- `ObserveErrorBoundary`, `Observe.reportError`, and `configure({ errorHandlingEnabled })` are exported but undocumented. Observe still has no crash reporting; use Sentry or BugSnag for that.\n\n## Submitting Feedback\nIf you encounter errors, misleading or outdated information in this skill, report it so Expo can improve:\n```bash\nnpx --yes submit-expo-feedback@latest --category skills --subject \"eas-observe\" \"<actionable feedback>\"\n```\nOnly submit when you have something specific and actionable to report. Include as much relevant context as possible.\nIf an AI agent repeatedly failed or the user had to take over an Expo task, load the expo-skill-feedback skill and follow its eval-candidate flow instead of reusing the command above.\n\n\n## Examples\n\n```text\nUser: Apply this skill to my current task.\nAssistant: Follow the workflow in this skill, cite limitations, and ask before risky steps.\n```\n\n## Limitations\n\n- Imported upstream skill; verify credentials, permissions, and safety boundaries before execution.\n- Does not replace environment-specific validation, testing, or maintainer re",
+      "tags": [
+        "react",
+        "api",
+        "ai",
+        "agent",
+        "workflow",
+        "document",
+        "seo"
+      ],
+      "useCases": [
+        "Use when this upstream workflow matches the user's stated goal.",
+        "Use when the task requires the procedures documented in this skill."
+      ],
+      "scrapedAt": "2026-09-21T12:37:13.552Z"
+    },
+    {
+      "id": "antigravity-eas-simulator",
+      "name": "eas-simulator",
+      "slug": "eas-simulator",
+      "description": "Curated upstream guidance for Eas Simulator; use when the workflow matches the user goal.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/eas-simulator",
+      "content": "## When to Use\n- Use when this upstream workflow matches the user's stated goal.\n- Use when the task requires the procedures documented in this skill.\n\n# EAS Simulator\n\n> **EAS service - costs apply.** EAS Simulator is a hosted EAS service. Session usage is subject to your account's pricing and limits. See https://expo.dev/pricing for current terms.\n\nEAS Simulator runs a remote iOS simulator or Android emulator on EAS infrastructure that you drive from your machine — from the CLI, from an AI agent (via `agent-device`), and from a browser preview. It's the unlock for **environments that can't run a simulator locally** (Linux boxes, cloud/background agents like Cursor Cloud), and for letting an agent *verify* a change on a real device instead of only reasoning about code.\n\nThe `simulator:*` commands are **experimental and hidden**, and need a recent eas-cli (≥ 20.3.0 as of writing) — which is why this skill runs everything via `npx --yes eas-cli@latest`. Flags and verbs may change; **the relevant subcommand's `--help` output is authoritative.**\n\n## When to Use\nThe frontmatter `description` carries the trigger phrases. In short: use this to get a user's app onto a **cloud** simulator and interact with it — especially from a Mac-less or cloud/sandbox agent. **Not** for local sims (`expo run:ios`, Xcode, Android Studio), store builds/signing (that's EAS Build), or physical devices. For the macOS case, see *Cloud vs local* next.\n\n## Cloud vs local: decide this first\n\n- **Explicit cloud/remote/shareable request:** use EAS Simulator after checking access, on any host.\n- **Generic simulator request:** use a suitable local simulator when available. If the host cannot run the requested simulator (for example, iOS on Linux or a cloud sandbox), use EAS Simulator after checking access. A non-macOS host may still support a local Android emulator.\n- Honor an explicit local choice; hand off to `expo run:ios` / Xcode / Android Studio as appropriate. Clarify only when the requested environment remains ambiguous and affects the task.\n\nWhen the user requests EAS Simulator or a cloud simulator, proceed within that request and\nany stated budget. Explain applicable usage once and carry existing authorization through\nthe session. Ask before exceeding a stated budget or expanding beyond the requested work.\n\n## Prerequisites\n\n- **Run every `eas` command via `npx --yes eas-cli@latest …`** — guarantees a CLI new enough to have `simulator:*` (a global `eas` is often too old), and `--yes` skips npx's prompt. (Bare `eas` is fine if `eas --version` is current.)\n- **Authenticated.** Interactive machine → `npx --yes eas-cli@latest login`. **Cloud sandbox / CI / headless agent has no browser login — set `EXPO_TOKEN`** (expo.dev → Account → Access Tokens) in the env instead. Verify either way with `npx --yes eas-cli@latest whoami`.\n- Run from an Expo **project directory.** A fresh app needs one-time setup: `npx --yes eas-cli@latest init` to create/link the project (when there's no `projectId`), and **set `ios.bundleIdentifier`** in app config if it's missing — a fresh `create-expo-app` often has none, and `prebuild`/`eas build` need it (they prompt or fail without it; e.g. `dev.<owner>.<slug>`). Read current config with `npx expo config --json` (it may live in `app.config.js`). The first Mode-C run is slow (native build); later runs reuse it.\n- A controller to drive the device. This skill uses **agent-device** (open source, MIT), run on demand via `npx agent-device@latest` — nothing globally installed. **Appium** and **argent** are alternative automation interfaces; `web-preview-only` has no automation interface. See [references/controllers.md].\n- **`.env.eas-simulator`** is written/managed by eas-cli (not this skill): it holds the session id (`EAS_SIMULATOR_SESSION_ID`) + the daemon URL/**token**, so `get`/`stop`/`exec` default to that session (usually **omit `--id`**; pass `--id <id>` to target another). It carries a **token → keep it gitignored** (eas-cli marks it \"do not commit\" but may not add the ignore rule, and a fresh app's `.gitignore` won't cover it — add `.env.eas-simulator` if missing).\n- **The command blocks assume a POSIX shell** (bash/zsh) — `printf`, `lsof`, `$(seq …)` loops won't run in cmd/PowerShell. On Windows, run them in WSL or Git Bash, or translate as you go (the `eas-cli`/`agent-device` invocations themselves are cross-platform).\n\n## Session lifetime\n\n- `--max-duration-minutes N` is the hard automatic-stop deadline. Customize it when supported by the account; otherwise use the service's default session limit.\n- `--max-idle-time-minutes N` stops a session after that many inactive minutes. Omitted means **no idle timeout**: the session runs until its maximum duration or an explicit stop.\n- **Only activity reported through `agent-device` and `argent` resets the idle timer.** Appium commands and browser-preview activity do not reset it. For Appium or a user-driven browser preview, rely on the maximum duration—not idle tim",
+      "tags": [
+        "api",
+        "ai",
+        "agent",
+        "automation",
+        "workflow",
+        "document",
+        "cro"
+      ],
+      "useCases": [
+        "Use when this upstream workflow matches the user's stated goal.",
+        "Use when the task requires the procedures documented in this skill."
+      ],
+      "scrapedAt": "2026-09-21T12:37:14.819Z"
+    },
+    {
       "id": "antigravity-eas-update-insights",
       "name": "eas-update-insights",
       "slug": "eas-update-insights",
@@ -20089,6 +20439,31 @@
         "\"Which update is most popular on production right now?\""
       ],
       "scrapedAt": "2026-07-02T09:26:55.804Z"
+    },
+    {
+      "id": "antigravity-eas-workflows",
+      "name": "eas-workflows",
+      "slug": "eas-workflows",
+      "description": "Curated upstream guidance for Eas Workflows; use when the workflow matches the user goal.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/eas-workflows",
+      "content": "## When to Use\n- Use when this upstream workflow matches the user's stated goal.\n- Use when the task requires the procedures documented in this skill.\n\n# EAS Workflows Skill\n\n> **EAS service - costs apply.** EAS Workflows run on Expo Application Services, a paid product with free-tier limits. Each workflow job consumes your plan's build/compute minutes, and jobs that build or submit also need paid Apple Developer and Google Play accounts. Review https://expo.dev/pricing before triggering runs.\n\nHelp developers write and edit EAS CI/CD workflow YAML files.\n\n## Reference Documentation\n\nFetch these resources before generating or editing workflow files, or when answering syntax questions. First resolve this skill's directory, then use the fetch script in its `scripts/` directory. It is implemented using Node.js and caches responses using ETags for efficiency:\n\n```bash\n# Fetch resources\nnode <skill-dir>/scripts/fetch.js <url>\n```\n\n1. **JSON Schema** — https://api.expo.dev/v2/workflows/schema\n   - It is NECESSARY to fetch this schema\n   - Source of truth for the workflow YAML structure; EAS CLI remains the authoritative final validator\n   - All job types and their required/optional parameters\n   - Trigger types and configurations\n   - Runner types, VM images, and all enums\n\n2. **Syntax Documentation** — https://raw.githubusercontent.com/expo/expo/refs/heads/main/docs/pages/eas/workflows/syntax.mdx\n   - Overview of workflow YAML syntax\n   - Examples and English explanations\n   - Expression syntax and contexts\n\n3. **Pre-packaged Jobs** — https://raw.githubusercontent.com/expo/expo/refs/heads/main/docs/pages/eas/workflows/pre-packaged-jobs.mdx\n   - Documentation for supported pre-packaged job types\n   - Job-specific parameters and outputs\n\nDo not rely on memorized values; these resources evolve as new features are added.\n\n## Workflow File Location\n\nWorkflows live in `.eas/workflows/*.yml` (or `.yaml`). Each file must be 16 KiB or smaller.\n\n## Top-Level Structure\n\nA workflow file has these top-level keys:\n\n- `name` — Display name for the workflow\n- `on` — Triggers that start the workflow (at least one required)\n- `jobs` — Job definitions (required)\n- `defaults` — Shared defaults for all jobs\n- `concurrency` — Control parallel workflow runs\n\nConsult the schema for the full specification of each section.\n\n## Expressions\n\nUse `${{ }}` syntax for dynamic values. The schema defines available contexts:\n\n- `github.*` — GitHub repository and event information\n- `inputs.*` — Values from `workflow_dispatch` inputs\n- `needs.*` — Outputs and status from dependent jobs\n- `jobs.*` — Job outputs (alternative syntax)\n- `steps.*` — Step outputs within custom jobs\n- `workflow.*` — Workflow metadata\n\n## Generating Workflows\n\nWhen generating or editing workflows:\n\n1. Fetch the schema to get current job types, parameters, and allowed values\n2. Validate that required fields are present for each job type\n3. Verify job references in `needs` and `after` exist in the workflow\n4. Check that expressions reference valid contexts and outputs\n5. Ensure `if` conditions respect the schema's length constraints\n\n## Validation\n\nAfter generating or editing a workflow file, validate it with EAS CLI from the Expo project root:\n\n```sh\nnpx -y eas-cli@latest workflow:validate .eas/workflows/<workflow.yml> --non-interactive\n```\n\nRun the command separately for each changed workflow file. It requires a logged-in EAS CLI session and a linked Expo project. Unlike schema-only validation, it also checks build profile references against the project's `eas.json` and performs EAS server-side validation. Fix every reported error and rerun the command until it prints `Workflow configuration YAML is valid.` Do not replace this command with a local YAML or JSON Schema validator.\n\n## Answering Questions\n\nWhen users ask about available options (job types, triggers, runner types, etc.), fetch the schema and derive the answer from it rather than relying on potentially outdated information.\n\n## Submitting Feedback\nIf you encounter errors, misleading or outdated information in this skill, report it so Expo can improve:\n```bash\nnpx --yes submit-expo-feedback@latest --category skills --subject \"eas-workflows\" \"<actionable feedback>\"\n```\nOnly submit when you have something specific and actionable to report. Include as much relevant context as possible.\nIf an AI agent repeatedly failed or the user had to take over an Expo task, load the expo-skill-feedback skill and follow its eval-candidate flow instead of reusing the command above.\n\n\n## Examples\n\n```text\nUser: Apply this skill to my current task.\nAssistant: Follow the workflow in this skill, cite limitations, and ask before risky steps.\n```\n\n## Limitations\n\n- Imported upstream skill; verify credentials, permissions, and safety boundaries before execution.\n- Does not replace environment-specific validation, testing, or maintainer review.\n",
+      "tags": [
+        "node",
+        "api",
+        "ai",
+        "agent",
+        "workflow",
+        "document",
+        "image"
+      ],
+      "useCases": [
+        "Use when this upstream workflow matches the user's stated goal.",
+        "Use when the task requires the procedures documented in this skill."
+      ],
+      "scrapedAt": "2026-09-21T12:37:17.689Z"
     },
     {
       "id": "antigravity-ebpf-observability",
@@ -21203,6 +21578,34 @@
       "scrapedAt": "2026-03-12T07:09:08.054Z"
     },
     {
+      "id": "antigravity-expo-animation",
+      "name": "expo-animation",
+      "slug": "expo-animation",
+      "description": "Curated upstream guidance for Expo Animation; use when the workflow matches the user goal.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/expo-animation",
+      "content": "## When to Use\n- Use when this upstream workflow matches the user's stated goal.\n- Use when the task requires the procedures documented in this skill.\n\n# Building Animations in Expo\n\nThis skill was created in collaboration with [Emil Kowalski](https://github.com/emilkowalski) and can also be found in the [emilkowalski/skills](https://github.com/emilkowalski/skills) repository, along with other useful animation skills.\n\nA construction skill for React Native. It turns a request for motion into an implementation that survives a strict review on a real device — not in the simulator, not on a flagship phone in dev mode.\n\nMobile changes three things about animation, and everything in this skill follows from them:\n\n1. **There is no hover.** Every affordance the web puts in hover has to live in press, position, or nothing.\n2. **There are two runtimes.** Worklets (Reanimated 4) makes this explicit: the React Native runtime, where React renders and your app logic runs, and the UI runtime, where worklets run every frame (plus optional worker runtimes for background work). An animation that touches the RN runtime stutters the moment the app does anything else. The whole craft is keeping motion on the UI runtime.\n3. **The user's finger is on the element.** Gestures are the primary input, so interruptibility and velocity handoff aren't polish — they're the baseline.\n\n## Operating Posture\n\nYou are a senior mobile engineer building the animation yourself. Make the call, state the reasoning in one line, write the code. Never present motion options as a menu.\n\nTwo failure modes, and the first is worse:\n\n1. **Animating something that shouldn't animate.** The gate below exists to produce zero lines of code sometimes.\n2. **Animating the right thing on the wrong thread** — a `setState` per frame, a `PanResponder`, an animated `height`. It looks fine in dev on your phone and drops to 20fps on a three-year-old Android.\n\n## Hard Rules\n\n1. **Run the sequence in order.** Steps 1 and 2 gate everything.\n2. **Reanimated, not core `Animated`.** Core `Animated` can't be driven by a gesture without crossing the bridge, and `useNativeDriver` refuses anything but transform and opacity anyway. Reanimated worklets run on the UI thread and keep running while JS is busy.\n3. **No approximated values.** Curves and spring configs come from the tables below.\n4. **Reduced motion ships with the animation**, not as a follow-up.\n5. **Feel is judged on a release build on the slowest device you support.** Nothing else counts as verified.\n\n## The Build Sequence\n\n### 1. Should this animate at all?\n\n| Frequency | Decision |\n| --- | --- |\n| 100+ times/day — tab switches, keyboard open/close, scrolling, toggles in settings | **No animation.** Platform default or nothing. Stop here. |\n| Tens of times/day — press feedback, list navigation, row selection | Near-imperceptible only: under 150ms, or nothing |\n| Occasional — sheets, modals, toasts, onboarding steps | Standard animation |\n| Rare / first-time — success states, empty-state illustrations, celebration | The delight budget lives here |\n\n**Tab switches never slide.** Tabs are peers, not a hierarchy — sliding implies depth that isn't there, and the user pays for it dozens of times a session. `animation: 'none'`.\n\nIf the request fails this gate, say so and don't write it.\n\n### 2. What is the purpose?\n\nName it in one word before continuing: **feedback**, **spatial consistency**, **state indication**, **preventing a jarring change**, **explanation**, or **delight** (rare tier only).\n\nCan't name it? Don't build it.\n\n### 3. Pick the tool — cheapest that works\n\nWalk down; stop at the first that fits.\n\n| Need | Tool |\n| --- | --- |\n| A state-driven change with no gesture — press, toggle, color, a value flipping | **Reanimated CSS transition** (`transitionProperty` in the style) |\n| Loop, multi-stage, or plays on mount with no state change | **Reanimated CSS animation** (`animationName` keyframes) |\n| An element mounting or unmounting, or a list reflowing | **Layout animations** (`entering` / `exiting` / `itemLayoutAnimation`) |\n| Anything a finger touches, or anything derived from scroll | **`useSharedValue` + `Gesture` + `useAnimatedStyle`** |\n| Screen to screen | **Native stack options in Expo Router.** Never hand-roll this |\n| A bottom sheet that is its own screen | **`presentation: 'formSheet'`** — it's a real UISheetPresentationController, free and correct |\n| Tab bar | **`NativeTabs`** (from `expo-router/unstable-native-tabs`) — the platform's real tab bar, its behaviors and transitions included |\n| Context menu, press-and-hold preview | **`Link.Menu` / `Link.Preview`** (Expo Router, iOS-only) — native menus and peek, never rebuilt in JS |\n| Header that collapses into a large title | **`headerLargeTitleEnabled`** on the native stack (iOS-only; `headerLargeTitle` is deprecated) — not a scroll worklet |\n| Pull to refresh | **`RefreshControl`** — hand-roll only when it's a signature interaction (see the threshol",
+      "tags": [
+        "react",
+        "node",
+        "api",
+        "ai",
+        "agent",
+        "workflow",
+        "design",
+        "document",
+        "presentation",
+        "rag"
+      ],
+      "useCases": [
+        "Use when this upstream workflow matches the user's stated goal.",
+        "Use when the task requires the procedures documented in this skill."
+      ],
+      "scrapedAt": "2026-09-21T12:37:47.302Z"
+    },
+    {
       "id": "antigravity-expo-api-routes",
       "name": "expo-api-routes",
       "slug": "expo-api-routes",
@@ -21573,6 +21976,32 @@
         "produce a traceable report with claim-level source links."
       ],
       "scrapedAt": "2026-08-01T08:34:43.446Z"
+    },
+    {
+      "id": "antigravity-fact-check-x-unified",
+      "name": "fact-check-x-unified",
+      "slug": "fact-check-x-unified",
+      "description": "Fact-Check-X 流程编排能力，依次组织各方答案汇总、各方答案聚合（未核验）、权威核验后的最终答案和各方答案测评，生成可打开、可审计、可迁移的阶段产物与完整报告包。",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fact-check-x-unified",
+      "content": "## When to Use\n- Use when this upstream workflow matches the user's stated goal.\n- Use when the task requires the procedures documented in this skill.\n\n# Fact-Check-X 统一入口\n\n本技能只做编排，不内嵌三个业务层。它按以下顺序调用兄弟技能：\n\n1. `llm-answer-reference-compare`：多平台回答、引用与现场存证采集。\n2. `fact-check-x-knowledge-compare`：本地知识点结构化对比，可选。\n3. `fact-check-x-authoritative-verify`：逐知识点并发权威核验与平台表现报告。\n\n所有语义拆解和证据裁决由当前承载技能的智能体完成。脚本不调用任何模型 API。\n\n## 依赖定位\n\n四个技能放在同一目录时可直接运行。也可设置：\n\n```bash\nexport FACTCHECK_SKILLS_DIR=\"<四个技能的父目录>\"\n```\n\n检查依赖：\n\n```bash\npython3 scripts/fact_check_x.py locate\n```\n\n## 完整流程\n\n先采集 `results.json`，然后准备知识点对比：\n\n```bash\npython3 scripts/fact_check_x.py prepare-comparison \\\n  --results <results.json> \\\n  --run-dir <run>\n```\n\n命令会同步生成“各方答案汇总”，在运行目录顶层生成 `01-capture-report.html`。每个 `deliverables` 条目同时返回已验证存在的本机 `path`、标准 `fileUri` 和可直接展示的 `markdownLink`。调用方必须原样展示 `markdownLink`，不得自行拼接 Windows 路径或把 `path` 直接塞进 Markdown；产物不存在时命令会在当前阶段失败。\n\n默认交互模式下，程序会把阶段状态写入 `stage-checkpoints.json`。调用方发送本阶段产物并收到用户“继续下一步”后，必须使用 `checkpoint.acknowledgement.token` 执行：\n\n```bash\npython3 scripts/fact_check_x.py acknowledge-stage \\\n  --run-dir <run> --stage <checkpoint.stage> \\\n  --token <checkpoint.acknowledgement.token> --decision continue\n```\n\n未确认时，下一阶段命令会直接失败。即使用户最初要求完整连续执行，也必须依次展示每个阶段产物并取得确认；不存在可绕过确认的自动推进模式。\n\n当前智能体读取 `<run>/comparison-task.json`，写入 `<run>/comparison-analysis.json`，再执行：\n\n`comparison-task.json` 是自包含的紧凑工作集。阶段确认后只允许“读取任务包一次、写入分析一次、执行验收一次”，最多三次工具调用；不得读取技能源码、契约或完整 `results.json` 探路，不得打印或转储完整任务包。`capturedText` 只是有界原文预览，完整正文由程序在验收时从 `results.json` 校验和重建。\n\n拆解时，原子性同时约束知识点和各平台 `claim`。一个原句包含多个独立义务、条件、对象、数值或后果时必须拆点，每个 `claim` 只保留当前事实；平台独有的实质新增事实也要另起无锚点知识点，不能并入宽泛知识点后复用深知晓锚点免查。每个知识点同时标明 `claimType=fact|recommendation`：纯操作建议可标为 `recommendation`，不因缺少逐句脚标而判引用不忠实；建议中包含的制度事实、条件、数字或时效必须拆成独立 `fact`。\n\n```bash\npython3 scripts/fact_check_x.py complete-comparison \\\n  --results <results.json> \\\n  --run-dir <run>\n```\n\n命令会在运行目录顶层生成 `02-comparison-report.html`，并通过 `deliverables[].markdownLink` 返回可点击链接；调用方必须原样展示。报告必须包含明确标为“未核验”的综合草案。默认交互模式下，用户确认继续后才能进入权威核验。\n\n生成每个知识点的独立云端请求并并发取证：\n\n```bash\npython3 scripts/fact_check_x.py prepare-authority --run-dir <run>\npython3 scripts/fact_check_x.py search-authority --run-dir <run> --max-workers 12\n```\n\n深知晓采集同时保留回答内逐句脚标和“知识专库”中的回答级来源；相同 URL 合并为 `inline_and_global`。回答级来源只有经当前知识点逐条语义匹配且原文可定位时才可支持该事实，不得整库继承。知识点已有深知晓/深知晓（深度溯源）本次回答所附的官方材料，或其他平台本次回答所附的 `gov.cn` 材料，且原文确实支持当前事实主张时，直接复用为官方证据，不调用可信搜索。纯操作建议同样不调用可信搜索；除此之外，已有材料不足以裁决的事实知识点才是非免查知识点。\n\n若存在非免查知识点但本机尚无可信搜索配置，`prepare-authority` 和 `search-authority` 会返回 `status=configuration_required`、`userPrompt` 与 `configuration.command` 并以非零状态退出。调用方先展示登录提示，再前台执行该命令。用户只需在自动打开的深知 MaaS 页面完成登录；组件会自动复用已有完整 Key，没有时创建 `Fact-Check-X` 专用 Key，验证后保存到 `~/.fact-check-x/credentials/trusted-search-key`。Codex、Claude Code、WorkBuddy 等载体共享该配置，检测到已有 Key 时直接跳过登录。配置成功后调用方自动重跑 `prepare-authority`，不得要求用户复制 Key、编辑 shell 配置、回复“已配置”，也不得改用深知晓来源或普通搜索绕过。\n\n只有可信搜索返回 401/403 时才把现有 Key 视为失效并进入自动配置。超时、断网或服务异常保留现有配置并自动重试；重试后仍失败则停留在搜索阶段返回技术错误，不要求用户重新登录，也不转成人工事实复核。\n\n`prepare-authority` 会写入 `authority-gate.json`。只有可信搜索批次正常完成、门禁状态变为 `searched` 后，`finalize-authority` 才允许运行；手工写 evidence 或 result 不能绕过。\n\n当前智能体逐个读取 `authority/requests` 与 `authority/evidence`，把裁决写入 `authority/assessments/<知识点ID>.json`，然后：\n\n免查模式下，`trustedAnchor.officialAnswer` 是当前事实知识点的权威结论；锚点证据列表用于来源追溯。无论来自深知晓还是 `gov.cn`，都必须确认已捕获正文实际支持该结论，不得仅凭官方属性自动判定。`trustedAnchor.claimEvidenceMap` 记录各平台已经逐主张绑定的官方原文；命中该映射的平台直接复用本次回答自带证据，不得因另一轮可信搜索未召回同一材料而降为证据不足。其他平台主张与 `officialAnswer` 语义一致或可由其直接推出时，裁决为 `supported` 并引用有效锚点证据 ID。仅当平台主张增加了权威结论不能支持的实质事实，或确实无法判定时，才使用 `insufficient`。知识点对比阶段的引用忠实性与本阶段的事实正确性分别保留，不能因平台自身引用不足而拒绝判断已经被权威结论证实的主张。`recommendation` 作为“操作建议”单独展示，不进入事实准确率或幻觉率；若权威证据证明建议会误导，仍可判为 `contradicted`。\n\n```json\n{\n  \"authoritativeFinding\": \"由权威证据支持的知识点结论\",\n  \"verdicts\": {\n    \"<平台ID>\": {\n      \"verdict\": \"supported\",\n      \"reason\": \"主张与 E1 一致\",\n      \"evidenceIds\": [\"E1\"]\n    }\n  }\n}\n```\n\n`verdict` 只能使用 `supported`、`contradicted` 或 `insufficient`，证据 ID 必须存在于当前 evidence 文件中。旧式顶层 `verdict`、`officialAnswer`、`platformAssessment` 会被拒绝。\n\n```bash\npython3 scripts/fact_check_x.py finalize-authority --run-dir <run>\n```\n\n第三步完成后如需修正 assessment，禁止手工清空结果或修改 gate。先执行 `python3 scripts/fact_check_x.py reopen-authority --run-dir <run> --reason \"<原因>\"`；程序校验锁定摘要并归档旧裁决后回退到 `searched`，再修改 assessment、重新 `finalize-authority` 并重新确认第三步产物。\n\n`finalize-authority` 生成“权威核验后的最终答案”，只将证据充分的直接知识点纳入 `finalAnswer`，将补充参考单独写入 `supplementalFindings`，将证据不足项写入 `evidenceGaps`。第三步只展示直接答案、证据边界和简洁来源索引；逐知识点裁决与评分只在第四步展示。\n\n`finalize-authority` 完成裁决后会独立生成 `03-authority-report.html`，并通过\n`deliverables` 返回已验证的路径、文件 URI 和 `markdownLink`。调用方必须原样展示 `markdownLink`；默认交互模式下，\n只有状态为 `completed` 且用户确认继续后才执行：\n\n```bash\npython3 scripts/fact_check_x.py deliver --results <results.json> --run-dir <run>\n```\n\n可信搜索返回 `no_evidence` 时记录为 `insufficient_evidence`：空结果只表示本次没有取得可裁决材料，不能直接判成“编造”；证据边界记录完成后继续生成后续报告。\n\n`deliver` 必须在运行目录顶层生成并返回四份独立可读报告：\n\n- `01-capture-report.html`：各方答案汇总；\n- `02-comparison-report.html`：各方答案聚合（未核验）；\n- `03-authority-report.html`：权威核验后的最终答案、权威证",
+      "tags": [
+        "python",
+        "markdown",
+        "api",
+        "claude",
+        "ai",
+        "llm",
+        "workflow",
+        "document"
+      ],
+      "useCases": [
+        "Use when this upstream workflow matches the user's stated goal.",
+        "Use when the task requires the procedures documented in this skill."
+      ],
+      "scrapedAt": "2026-09-21T12:37:59.432Z"
     },
     {
       "id": "antigravity-faf-context",
@@ -25295,27 +25724,6 @@
       "scrapedAt": "2026-07-02T09:27:52.134Z"
     },
     {
-      "id": "antigravity-github",
-      "name": "github",
-      "slug": "github",
-      "description": "Use the `gh` CLI for issues, pull requests, Actions runs, and GitHub API queries.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/github",
-      "content": "\n# GitHub Skill\n\nUse the `gh` CLI to interact with GitHub. Always specify `--repo owner/repo` when not in a git directory, or use URLs directly.\n\n## When to Use\n- When the user asks about GitHub issues, pull requests, workflow runs, or CI failures.\n- When you need `gh issue`, `gh pr`, `gh run`, or `gh api` from the command line.\n\n## Pull Requests\n\nCheck CI status on a PR:\n```bash\ngh pr checks 55 --repo owner/repo\n```\n\nList recent workflow runs:\n```bash\ngh run list --repo owner/repo --limit 10\n```\n\nView a run and see which steps failed:\n```bash\ngh run view <run-id> --repo owner/repo\n```\n\nView logs for failed steps only:\n```bash\ngh run view <run-id> --repo owner/repo --log-failed\n```\n\n### Debugging a CI Failure\n\nFollow this sequence to investigate a failing CI run:\n\n1. **Check PR status** — identify which checks are failing:\n   ```bash\n   gh pr checks 55 --repo owner/repo\n   ```\n2. **List recent runs** — find the relevant run ID:\n   ```bash\n   gh run list --repo owner/repo --limit 10\n   ```\n3. **View the failed run** — see which jobs and steps failed:\n   ```bash\n   gh run view <run-id> --repo owner/repo\n   ```\n4. **Fetch failure logs** — get the detailed output for failed steps:\n   ```bash\n   gh run view <run-id> --repo owner/repo --log-failed\n   ```\n\n## API for Advanced Queries\n\nThe `gh api` command is useful for accessing data not available through other subcommands.\n\nGet PR with specific fields:\n```bash\ngh api repos/owner/repo/pulls/55 --jq '.title, .state, .user.login'\n```\n\n## JSON Output\n\nMost commands support `--json` for structured output.  You can use `--jq` to filter:\n\n```bash\ngh issue list --repo owner/repo --json number,title --jq '.[] | \"\\(.number): \\(.title)\"'\n```\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "api",
-        "ai",
-        "workflow"
-      ],
-      "useCases": [
-        "When the user asks about GitHub issues, pull requests, workflow runs, or CI failures.",
-        "When you need `gh issue`, `gh pr`, `gh run`, or `gh api` from the command line."
-      ],
-      "scrapedAt": "2026-04-14T08:00:13.892Z"
-    },
-    {
       "id": "antigravity-github-actions",
       "name": "github-actions",
       "slug": "github-actions",
@@ -25471,184 +25879,6 @@
       "scrapedAt": "2026-02-14T07:05:31.224Z"
     },
     {
-      "id": "antigravity-github-presence",
-      "name": "github-presence",
-      "slug": "github-presence",
-      "description": "When the user wants to optimize their GitHub profile, README, or project discoverability. Trigger phrases include \"GitHub README,\" \"README optimization,\" \"GitHub profile,\" \"GitHub stars,\" \"GitHub discoverability,\" \"awesome lists,\" or \"GitHub marketing.\"",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/github-presence",
-      "content": "\n# GitHub Presence\n## When to Use\n\nUse this skill when you need when the user wants to optimize their GitHub profile, README, or project discoverability. Trigger phrases include \"GitHub README,\" \"README optimization,\" \"GitHub profile,\" \"GitHub stars,\" \"GitHub discoverability,\" \"awesome lists,\" or \"GitHub marketing.\".\n\n\nGitHub is where developers evaluate your project before trying it. This skill covers README optimization, profile READMEs, discoverability through topics and awesome lists, and using GitHub features for marketing.\n\n---\n\n## Before You Start\n\n1. Read `.agents/developer-audience-context.md` if it exists\n2. Audit your current GitHub presence (profile, pinned repos, READMEs)\n3. Understand: GitHub is often the first technical evaluation — optimize accordingly\n\n---\n\n## README Structure\n\n### The Anatomy of a Great README\n\n| Section | Purpose | Required? |\n|---------|---------|-----------|\n| **Logo/Banner** | Brand recognition, visual appeal | Recommended |\n| **Badges** | Quick trust signals, status | Recommended |\n| **One-liner** | What it does in one sentence | Required |\n| **Hero example** | Immediate \"what does it look like?\" | Highly recommended |\n| **Features** | Why use this over alternatives | Required |\n| **Quick start** | Get running in < 2 minutes | Required |\n| **Installation** | All installation methods | Required |\n| **Usage** | Core usage examples | Required |\n| **Documentation** | Link to full docs | Required |\n| **Contributing** | How to contribute | Recommended |\n| **License** | Legal clarity | Required |\n\n### README Template\n\n```markdown\n<div align=\"center\">\n  <img src=\"logo.svg\" alt=\"Project Name\" width=\"200\">\n  <h1>Project Name</h1>\n  <p><strong>One compelling sentence explaining what this does.</strong></p>\n\n  <!-- Badges -->\n  <a href=\"https://github.com/org/repo/actions\"><img src=\"https://github.com/org/repo/workflows/CI/badge.svg\" alt=\"CI\"></a>\n  <a href=\"https://www.npmjs.com/package/name\"><img src=\"https://img.shields.io/npm/v/name.svg\" alt=\"npm version\"></a>\n  <a href=\"https://github.com/org/repo/blob/main/LICENSE\"><img src=\"https://img.shields.io/badge/license-MIT-blue.svg\" alt=\"License\"></a>\n  <a href=\"https://discord.gg/invite\"><img src=\"https://img.shields.io/discord/123456789\" alt=\"Discord\"></a>\n\n  <br>\n  <br>\n\n  <a href=\"https://docs.example.com\">Documentation</a> •\n  <a href=\"https://example.com\">Website</a> •\n  <a href=\"https://discord.gg/invite\">Discord</a>\n</div>\n\n---\n\n## Why Project Name?\n\n- **Feature 1** — Brief explanation\n- **Feature 2** — Brief explanation\n- **Feature 3** — Brief explanation\n\n## Quick Start\n\n```bash\nnpm install project-name\n```\n\n```javascript\nimport { thing } from 'project-name';\n\nconst result = thing.doSomething();\nconsole.log(result);\n```\n\n## Installation\n\n### npm\n```bash\nnpm install project-name\n```\n\n### yarn\n```bash\nyarn add project-name\n```\n\n### pnpm\n```bash\npnpm add project-name\n```\n\n## Usage\n\n### Basic Example\n\n```javascript\n// Code example with comments\n```\n\n### Advanced Example\n\n```javascript\n// More complex example\n```\n\n## Documentation\n\nFull documentation available at [docs.example.com](https://docs.example.com)\n\n- [Getting Started](https://docs.example.com/getting-started)\n- [API Reference](https://docs.example.com/api)\n- [Examples](https://docs.example.com/examples)\n\n## Contributing\n\nWe welcome contributions! Please see [CONTRIBUTING.md](https://github.com/jonathimer/devmarketing-skills/tree/main/skills/github-presence/CONTRIBUTING.md) for details.\n\n## License\n\nMIT © [Your Name](https://yoursite.com)\n```\n\n---\n\n## Badges That Matter\n\n### Trust Signal Badges\n\n| Badge | What it shows | When to use |\n|-------|--------------|-------------|\n| CI/Build status | Code quality | Always |\n| Version | Latest release | Always for packages |\n| License | Legal clarity | Always |\n| Downloads/installs | Adoption | When impressive |\n| Coverage | Test quality | If > 70% |\n| Security | Audit status | If you have it |\n\n### Community Badges\n\n| Badge | Source | Purpose |\n|-------|--------|---------|\n| Discord members | shields.io | Show active community |\n| GitHub stars | shields.io | Social proof |\n| Contributors | shields.io | Open source health |\n| Last commit | shields.io | Project activity |\n\n### Badge Services\n\n| Service | URL | Best for |\n|---------|-----|----------|\n| Shields.io | shields.io | Most badges |\n| Badgen | badgen.net | Fast, minimal |\n| GitHub badges | Native | Actions, issues |\n\n### Badge Examples\n\n```markdown\n<!-- Build status -->\n![CI](https://github.com/org/repo/workflows/CI/badge.svg)\n\n<!-- npm version -->\n[![npm](https://img.shields.io/npm/v/package-name.svg)](https://www.npmjs.com/package/package-name)\n\n<!-- Downloads -->\n[![Downloads](https://img.shields.io/npm/dm/package-name.svg)](https://www.npmjs.com/package/package-name)\n\n<!-- License -->\n[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)\n\n<!-- Discord -->\n[![Discord](https://img.shields.io/discord/SERVER_ID?color=7289da&logo=discord&logoColor=whit",
-      "tags": [
-        "python",
-        "javascript",
-        "react",
-        "node",
-        "nextjs",
-        "markdown",
-        "api",
-        "ai",
-        "agent",
-        "workflow"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-07-02T09:27:53.875Z"
-    },
-    {
-      "id": "antigravity-github-workflow-automation",
-      "name": "github-workflow-automation",
-      "slug": "github-workflow-automation",
-      "description": "Patterns for automating GitHub workflows with AI assistance, inspired by [Gemini CLI](https://github.com/google-gemini/gemini-cli) and modern DevOps practices.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/github-workflow-automation",
-      "content": "\n# 🔧 GitHub Workflow Automation\n\n> Patterns for automating GitHub workflows with AI assistance, inspired by [Gemini CLI](https://github.com/google-gemini/gemini-cli) and modern DevOps practices.\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use This Skill\n\nUse this skill when:\n\n- Automating PR reviews with AI\n- Setting up issue triage automation\n- Creating GitHub Actions workflows\n- Integrating AI into CI/CD pipelines\n- Automating Git operations (rebases, cherry-picks)\n\n---\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "ai",
-        "automation",
-        "workflow"
-      ],
-      "useCases": [
-        "Automating PR reviews with AI",
-        "Setting up issue triage automation",
-        "Creating GitHub Actions workflows",
-        "Integrating AI into CI/CD pipelines",
-        "Automating Git operations (rebases, cherry-picks)"
-      ],
-      "scrapedAt": "2026-01-26T13:18:54.153Z"
-    },
-    {
-      "id": "antigravity-gitlab-automation",
-      "name": "gitlab-automation",
-      "slug": "gitlab-automation",
-      "description": "Automate GitLab project management, issues, merge requests, pipelines, branches, and user operations via Rube MCP (Composio). Always search tools first for current schemas.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gitlab-automation",
-      "content": "\n# GitLab Automation via Rube MCP\n\nAutomate GitLab operations including project management, issue tracking, merge request workflows, CI/CD pipeline monitoring, branch management, and user administration through Composio's GitLab toolkit.\n\n## Prerequisites\n\n- Rube MCP must be connected (RUBE_SEARCH_TOOLS available)\n- Active GitLab connection via `RUBE_MANAGE_CONNECTIONS` with toolkit `gitlab`\n- Always call `RUBE_SEARCH_TOOLS` first to get current tool schemas\n\n## Setup\n\n**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.\n\n1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds\n2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `gitlab`\n3. If connection is not ACTIVE, follow the returned auth link to complete GitLab OAuth\n4. Confirm connection status shows ACTIVE before running any workflows\n\n## Core Workflows\n\n### 1. Manage Issues\n\n**When to use**: User wants to create, update, list, or search issues in a GitLab project\n\n**Tool sequence**:\n1. `GITLAB_GET_PROJECTS` - Find the target project and get its ID [Prerequisite]\n2. `GITLAB_LIST_PROJECT_ISSUES` - List and filter issues for a project [Required]\n3. `GITLAB_CREATE_PROJECT_ISSUE` - Create a new issue [Required for create]\n4. `GITLAB_UPDATE_PROJECT_ISSUE` - Update an existing issue (title, labels, state, assignees) [Required for update]\n5. `GITLAB_LIST_PROJECT_USERS` - Find user IDs for assignment [Optional]\n\n**Key parameters**:\n- `id`: Project ID (integer) or URL-encoded path (e.g., `\"my-group/my-project\"`)\n- `title`: Issue title (required for creation)\n- `description`: Issue body text (max 1,048,576 characters)\n- `labels`: Comma-separated label names (e.g., `\"bug,critical\"`)\n- `add_labels` / `remove_labels`: Add or remove labels without replacing all\n- `state`: Filter by `\"all\"`, `\"opened\"`, or `\"closed\"`\n- `state_event`: `\"close\"` or `\"reopen\"` to change issue state\n- `assignee_ids`: Array of user IDs; use `[0]` to unassign all\n- `issue_iid`: Internal issue ID within the project (required for updates)\n- `milestone`: Filter by milestone title\n- `search`: Search in title and description\n- `scope`: `\"created_by_me\"`, `\"assigned_to_me\"`, or `\"all\"`\n- `page` / `per_page`: Pagination (default per_page: 20)\n\n**Pitfalls**:\n- `id` accepts either integer project ID or URL-encoded path; wrong IDs yield 4xx errors\n- `issue_iid` is the project-internal ID (shown as #42), different from the global issue ID\n- Labels in `labels` field replace ALL existing labels; use `add_labels`/`remove_labels` for incremental changes\n- Setting `assignee_ids` to empty array does NOT unassign; use `[0]` instead\n- `updated_at` field requires administrator or project/group owner rights\n\n### 2. Manage Merge Requests\n\n**When to use**: User wants to list, filter, or review merge requests in a project\n\n**Tool sequence**:\n1. `GITLAB_GET_PROJECT` - Get project details and verify access [Prerequisite]\n2. `GITLAB_GET_PROJECT_MERGE_REQUESTS` - List and filter merge requests [Required]\n3. `GITLAB_GET_REPOSITORY_BRANCHES` - Verify source/target branches [Optional]\n4. `GITLAB_LIST_ALL_PROJECT_MEMBERS` - Find reviewers/assignees [Optional]\n\n**Key parameters**:\n- `id`: Project ID or URL-encoded path\n- `state`: `\"opened\"`, `\"closed\"`, `\"locked\"`, `\"merged\"`, or `\"all\"`\n- `scope`: `\"created_by_me\"` (default), `\"assigned_to_me\"`, or `\"all\"`\n- `source_branch` / `target_branch`: Filter by branch names\n- `author_id` / `author_username`: Filter by MR author\n- `assignee_id`: Filter by assignee (use `None` for unassigned, `Any` for assigned)\n- `reviewer_id` / `reviewer_username`: Filter by reviewer\n- `labels`: Comma-separated label filter\n- `search`: Search in title and description\n- `wip`: `\"yes\"` for draft MRs, `\"no\"` for non-draft\n- `order_by`: `\"created_at\"` (default), `\"title\"`, `\"merged_at\"`, `\"updated_at\"`\n- `view`: `\"simple\"` for minimal fields\n- `iids[]`: Filter by specific MR internal IDs\n\n**Pitfalls**:\n- Default `scope` is `\"created_by_me\"` which limits results; use `\"all\"` for complete listings\n- `author_id` and `author_username` are mutually exclusive\n- `reviewer_id` and `reviewer_username` are mutually exclusive\n- `approved` filter requires the `mr_approved_filter` feature flag (disabled by default)\n- Large MR histories can be noisy; use filters and moderate `per_page` values\n\n### 3. Manage Projects and Repositories\n\n**When to use**: User wants to list projects, create new projects, or manage branches\n\n**Tool sequence**:\n1. `GITLAB_GET_PROJECTS` - List all accessible projects with filters [Required]\n2. `GITLAB_GET_PROJECT` - Get detailed info for a specific project [Optional]\n3. `GITLAB_LIST_USER_PROJECTS` - List projects owned by a specific user [Optional]\n4. `GITLAB_CREATE_PROJECT` - Create a new project [Required for create]\n5. `GITLAB_GET_REPOSITORY_BRANCHES` - List branches in a project [Required for branch ops]\n6. `GITLAB_CREATE_REPOSITORY_BRANCH` - Create a new branch [Optional]\n7",
-      "tags": [
-        "api",
-        "mcp",
-        "ai",
-        "automation",
-        "workflow",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-19T07:11:41.628Z"
-    },
-    {
-      "id": "antigravity-gitlab-ci",
-      "name": "gitlab-ci",
-      "slug": "gitlab-ci",
-      "description": "Configure GitLab CI/CD pipelines and runners for automated building, testing, and deployment.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gitlab-ci",
-      "content": "\n# GitLab CI/CD\n\nAutomate your software delivery pipeline with GitLab's integrated CI/CD system.\n\n## When to Use This Skill\n\nUse this skill when:\n- Setting up CI/CD pipelines in GitLab\n- Configuring GitLab runners (shared or self-hosted)\n- Creating multi-stage deployment pipelines\n- Implementing GitLab Auto DevOps\n- Managing CI/CD variables and secrets\n\n## Prerequisites\n\n- GitLab repository (gitlab.com or self-hosted)\n- Basic understanding of YAML\n- For self-hosted runners: Linux server or Kubernetes cluster\n\n## Pipeline Configuration\n\nCreate `.gitlab-ci.yml` in repository root:\n\n```yaml\nstages:\n  - build\n  - test\n  - deploy\n\nvariables:\n  NODE_VERSION: \"20\"\n\nbuild:\n  stage: build\n  image: node:${NODE_VERSION}\n  script:\n    - npm ci\n    - npm run build\n  artifacts:\n    paths:\n      - dist/\n    expire_in: 1 hour\n\ntest:\n  stage: test\n  image: node:${NODE_VERSION}\n  script:\n    - npm ci\n    - npm test\n  coverage: '/Coverage: \\d+\\.\\d+%/'\n\ndeploy:\n  stage: deploy\n  script:\n    - ./deploy.sh\n  environment:\n    name: production\n    url: https://example.com\n  only:\n    - main\n```\n\n## Job Configuration\n\n### Rules-Based Execution\n\n```yaml\ndeploy:\n  script: ./deploy.sh\n  rules:\n    - if: $CI_COMMIT_BRANCH == \"main\"\n      when: manual\n    - if: $CI_PIPELINE_SOURCE == \"merge_request_event\"\n      when: never\n    - when: on_success\n```\n\n### Parallel Jobs\n\n```yaml\ntest:\n  stage: test\n  parallel: 3\n  script:\n    - npm test -- --shard=$CI_NODE_INDEX/$CI_NODE_TOTAL\n```\n\n### Matrix Builds\n\n```yaml\ntest:\n  stage: test\n  parallel:\n    matrix:\n      - NODE_VERSION: [\"18\", \"20\", \"22\"]\n        OS: [\"alpine\", \"slim\"]\n  image: node:${NODE_VERSION}-${OS}\n  script:\n    - npm test\n```\n\n## Caching\n\n```yaml\ncache:\n  key:\n    files:\n      - package-lock.json\n  paths:\n    - node_modules/\n  policy: pull-push\n\nbuild:\n  cache:\n    key: build-cache\n    paths:\n      - .cache/\n    policy: pull\n```\n\n## Artifacts\n\n```yaml\nbuild:\n  artifacts:\n    paths:\n      - dist/\n      - coverage/\n    reports:\n      junit: junit.xml\n      coverage_report:\n        coverage_format: cobertura\n        path: coverage/cobertura.xml\n    expire_in: 1 week\n    when: always\n```\n\n## Environments and Deployments\n\n```yaml\ndeploy_staging:\n  stage: deploy\n  script:\n    - deploy --env staging\n  environment:\n    name: staging\n    url: https://staging.example.com\n    on_stop: stop_staging\n\nstop_staging:\n  stage: deploy\n  script:\n    - undeploy --env staging\n  environment:\n    name: staging\n    action: stop\n  when: manual\n```\n\n## Docker Builds\n\n```yaml\nbuild_image:\n  stage: build\n  image: docker:24\n  services:\n    - docker:24-dind\n  variables:\n    DOCKER_TLS_CERTDIR: \"/certs\"\n  script:\n    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY\n    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .\n    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA\n```\n\n## GitLab Runners\n\n### Install Runner\n\n```bash\n# Download and install\ncurl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh | sudo bash\nsudo apt install gitlab-runner\n\n# Register runner\nsudo gitlab-runner register \\\n  --url https://gitlab.com/ \\\n  --registration-token TOKEN \\\n  --executor docker \\\n  --docker-image alpine:latest\n```\n\n### Runner Configuration\n\n```toml\n# /etc/gitlab-runner/config.toml\n[[runners]]\n  name = \"docker-runner\"\n  url = \"https://gitlab.com/\"\n  token = \"TOKEN\"\n  executor = \"docker\"\n  [runners.docker]\n    image = \"alpine:latest\"\n    privileged = true\n    volumes = [\"/cache\", \"/var/run/docker.sock:/var/run/docker.sock\"]\n```\n\n### Runner Tags\n\n```yaml\nbuild:\n  tags:\n    - docker\n    - linux\n  script:\n    - make build\n```\n\n## CI/CD Variables\n\n### Protected Variables\n\nDefine in Settings > CI/CD > Variables:\n- `AWS_ACCESS_KEY_ID` (protected, masked)\n- `AWS_SECRET_ACCESS_KEY` (protected, masked)\n\n### Using Variables\n\n```yaml\ndeploy:\n  script:\n    - aws s3 sync dist/ s3://$S3_BUCKET\n  variables:\n    AWS_DEFAULT_REGION: us-east-1\n```\n\n## Include and Extend\n\n### Include Templates\n\n```yaml\ninclude:\n  - template: Security/SAST.gitlab-ci.yml\n  - project: 'group/shared-ci'\n    file: '/templates/deploy.yml'\n  - local: '/ci/jobs.yml'\n```\n\n### Extend Jobs\n\n```yaml\n.base_job:\n  image: node:20\n  before_script:\n    - npm ci\n\nbuild:\n  extends: .base_job\n  script:\n    - npm run build\n\ntest:\n  extends: .base_job\n  script:\n    - npm test\n```\n\n## Multi-Project Pipelines\n\n```yaml\ntrigger_downstream:\n  stage: deploy\n  trigger:\n    project: group/downstream-project\n    branch: main\n    strategy: depend\n```\n\n## Common Issues\n\n### Issue: Pipeline Stuck\n**Problem**: Jobs stay pending\n**Solution**: Check runner availability and tags matching\n\n### Issue: Docker-in-Docker Fails\n**Problem**: Cannot connect to Docker daemon\n**Solution**: Use `docker:dind` service with proper TLS configuration\n\n### Issue: Cache Not Working\n**Problem**: Cache misses between jobs\n**Solution**: Verify cache key and ensure runners share distributed cache\n\n## Best Practices\n\n- Use `rules` instead of `only/excep",
-      "tags": [
-        "node",
-        "ai",
-        "agent",
-        "template",
-        "image",
-        "security",
-        "docker",
-        "kubernetes",
-        "aws",
-        "rag"
-      ],
-      "useCases": [
-        "Setting up CI/CD pipelines in GitLab",
-        "Configuring GitLab runners (shared or self-hosted)",
-        "Creating multi-stage deployment pipelines",
-        "Implementing GitLab Auto DevOps",
-        "Managing CI/CD variables and secrets"
-      ],
-      "scrapedAt": "2026-09-20T11:10:43.840Z"
-    },
-    {
-      "id": "antigravity-gitlab-ci-patterns",
-      "name": "gitlab-ci-patterns",
-      "slug": "gitlab-ci-patterns",
-      "description": "Comprehensive GitLab CI/CD pipeline patterns for automated testing, building, and deployment.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gitlab-ci-patterns",
-      "content": "\n# GitLab CI Patterns\n\nComprehensive GitLab CI/CD pipeline patterns for automated testing, building, and deployment.\n\n## Do not use this skill when\n\n- The task is unrelated to gitlab ci patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Purpose\n\nCreate efficient GitLab CI pipelines with proper stage organization, caching, and deployment strategies.\n\n## Use this skill when\n\n- Automate GitLab-based CI/CD\n- Implement multi-stage pipelines\n- Configure GitLab Runners\n- Deploy to Kubernetes from GitLab\n- Implement GitOps workflows\n\n## Basic Pipeline Structure\n\n```yaml\nstages:\n  - build\n  - test\n  - deploy\n\nvariables:\n  DOCKER_DRIVER: overlay2\n  DOCKER_TLS_CERTDIR: \"/certs\"\n\nbuild:\n  stage: build\n  image: node:20\n  script:\n    - npm ci\n    - npm run build\n  artifacts:\n    paths:\n      - dist/\n    expire_in: 1 hour\n  cache:\n    key: ${CI_COMMIT_REF_SLUG}\n    paths:\n      - node_modules/\n\ntest:\n  stage: test\n  image: node:20\n  script:\n    - npm ci\n    - npm run lint\n    - npm test\n  coverage: '/Lines\\s*:\\s*(\\d+\\.\\d+)%/'\n  artifacts:\n    reports:\n      coverage_report:\n        coverage_format: cobertura\n        path: coverage/cobertura-coverage.xml\n\ndeploy:\n  stage: deploy\n  image: bitnami/kubectl:latest\n  script:\n    - kubectl apply -f k8s/\n    - kubectl rollout status deployment/my-app\n  only:\n    - main\n  environment:\n    name: production\n    url: https://app.example.com\n```\n\n## Docker Build and Push\n\n```yaml\nbuild-docker:\n  stage: build\n  image: docker:24\n  services:\n    - docker:24-dind\n  before_script:\n    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY\n  script:\n    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .\n    - docker build -t $CI_REGISTRY_IMAGE:latest .\n    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA\n    - docker push $CI_REGISTRY_IMAGE:latest\n  only:\n    - main\n    - tags\n```\n\n## Multi-Environment Deployment\n\n```yaml\n.deploy_template: &deploy_template\n  image: bitnami/kubectl:latest\n  before_script:\n    - kubectl config set-cluster k8s --server=\"$KUBE_URL\" --insecure-skip-tls-verify=true\n    - kubectl config set-credentials admin --token=\"$KUBE_TOKEN\"\n    - kubectl config set-context default --cluster=k8s --user=admin\n    - kubectl config use-context default\n\ndeploy:staging:\n  <<: *deploy_template\n  stage: deploy\n  script:\n    - kubectl apply -f k8s/ -n staging\n    - kubectl rollout status deployment/my-app -n staging\n  environment:\n    name: staging\n    url: https://staging.example.com\n  only:\n    - develop\n\ndeploy:production:\n  <<: *deploy_template\n  stage: deploy\n  script:\n    - kubectl apply -f k8s/ -n production\n    - kubectl rollout status deployment/my-app -n production\n  environment:\n    name: production\n    url: https://app.example.com\n  when: manual\n  only:\n    - main\n```\n\n## Terraform Pipeline\n\n```yaml\nstages:\n  - validate\n  - plan\n  - apply\n\nvariables:\n  TF_ROOT: ${CI_PROJECT_DIR}/terraform\n  TF_VERSION: \"1.6.0\"\n\nbefore_script:\n  - cd ${TF_ROOT}\n  - terraform --version\n\nvalidate:\n  stage: validate\n  image: hashicorp/terraform:${TF_VERSION}\n  script:\n    - terraform init -backend=false\n    - terraform validate\n    - terraform fmt -check\n\nplan:\n  stage: plan\n  image: hashicorp/terraform:${TF_VERSION}\n  script:\n    - terraform init\n    - terraform plan -out=tfplan\n  artifacts:\n    paths:\n      - ${TF_ROOT}/tfplan\n    expire_in: 1 day\n\napply:\n  stage: apply\n  image: hashicorp/terraform:${TF_VERSION}\n  script:\n    - terraform init\n    - terraform apply -auto-approve tfplan\n  dependencies:\n    - plan\n  when: manual\n  only:\n    - main\n```\n\n## Security Scanning\n\n```yaml\ninclude:\n  - template: Security/SAST.gitlab-ci.yml\n  - template: Security/Dependency-Scanning.gitlab-ci.yml\n  - template: Security/Container-Scanning.gitlab-ci.yml\n\ntrivy-scan:\n  stage: test\n  image: aquasec/trivy:latest\n  script:\n    - trivy image --exit-code 1 --severity HIGH,CRITICAL $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA\n  allow_failure: true\n```\n\n## Caching Strategies\n\n```yaml\n# Cache node_modules\nbuild:\n  cache:\n    key: ${CI_COMMIT_REF_SLUG}\n    paths:\n      - node_modules/\n    policy: pull-push\n\n# Global cache\ncache:\n  key: ${CI_COMMIT_REF_SLUG}\n  paths:\n    - .cache/\n    - vendor/\n\n# Separate cache per job\njob1:\n  cache:\n    key: job1-cache\n    paths:\n      - build/\n\njob2:\n  cache:\n    key: job2-cache\n    paths:\n      - dist/\n```\n\n## Dynamic Child Pipelines\n\n```yaml\ngenerate-pipeline:\n  stage: build\n  script:\n    - python generate_pipeline.py > child-pipeline.yml\n  artifacts:\n    paths:\n      - child-pipeline.yml\n\ntrigger-child:\n  stage: deploy\n  trigger:\n    include:\n      - artifact: child-pipeline.yml\n        job: generate-pipeline\n    strategy: depend\n```\n\n## Reference Files\n\n- `assets/gitlab-ci.yml.template` - Complete pi",
-      "tags": [
-        "python",
-        "node",
-        "ai",
-        "workflow",
-        "template",
-        "design",
-        "image",
-        "security",
-        "docker",
-        "kubernetes"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:12.519Z"
-    },
-    {
-      "id": "antigravity-gitops-workflow",
-      "name": "gitops-workflow",
-      "slug": "gitops-workflow",
-      "description": "Complete guide to implementing GitOps workflows with ArgoCD and Flux for automated Kubernetes deployments.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gitops-workflow",
-      "content": "\n# GitOps Workflow\n\nComplete guide to implementing GitOps workflows with ArgoCD and Flux for automated Kubernetes deployments.\n\n## Purpose\n\nImplement declarative, Git-based continuous delivery for Kubernetes using ArgoCD or Flux CD, following OpenGitOps principles.\n\n## Use this skill when\n\n- Set up GitOps for Kubernetes clusters\n- Automate application deployments from Git\n- Implement progressive delivery strategies\n- Manage multi-cluster deployments\n- Configure automated sync policies\n- Set up secret management in GitOps\n\n## Do not use this skill when\n\n- You need a one-off manual deployment\n- You cannot manage cluster access or repo permissions\n- You are not deploying to Kubernetes\n\n## Instructions\n\n1. Define repo layout and desired-state conventions.\n2. Install ArgoCD or Flux and connect clusters.\n3. Configure sync policies, environments, and promotion flow.\n4. Validate rollbacks and secret handling.\n\n## Safety\n\n- Avoid auto-sync to production without approvals.\n- Keep secrets out of Git and use sealed or external secret managers.\n\n## OpenGitOps Principles\n\n1. **Declarative** - Entire system described declaratively\n2. **Versioned and Immutable** - Desired state stored in Git\n3. **Pulled Automatically** - Software agents pull desired state\n4. **Continuously Reconciled** - Agents reconcile actual vs desired state\n\n## ArgoCD Setup\n\n### 1. Installation\n\n```bash\n# Create namespace\nkubectl create namespace argocd\n\n# Install ArgoCD\nkubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml\n\n# Get admin password\nkubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath=\"{.data.password}\" | base64 -d\n```\n\n**Reference:** See `references/argocd-setup.md` for detailed setup\n\n### 2. Repository Structure\n\n```\ngitops-repo/\n├── apps/\n│   ├── production/\n│   │   ├── app1/\n│   │   │   ├── kustomization.yaml\n│   │   │   └── deployment.yaml\n│   │   └── app2/\n│   └── staging/\n├── infrastructure/\n│   ├── ingress-nginx/\n│   ├── cert-manager/\n│   └── monitoring/\n└── argocd/\n    ├── applications/\n    └── projects/\n```\n\n### 3. Create Application\n\n```yaml\n# argocd/applications/my-app.yaml\napiVersion: argoproj.io/v1alpha1\nkind: Application\nmetadata:\n  name: my-app\n  namespace: argocd\nspec:\n  project: default\n  source:\n    repoURL: https://github.com/org/gitops-repo\n    targetRevision: main\n    path: apps/production/my-app\n  destination:\n    server: https://kubernetes.default.svc\n    namespace: production\n  syncPolicy:\n    automated:\n      prune: true\n      selfHeal: true\n    syncOptions:\n    - CreateNamespace=true\n```\n\n### 4. App of Apps Pattern\n\n```yaml\napiVersion: argoproj.io/v1alpha1\nkind: Application\nmetadata:\n  name: applications\n  namespace: argocd\nspec:\n  project: default\n  source:\n    repoURL: https://github.com/org/gitops-repo\n    targetRevision: main\n    path: argocd/applications\n  destination:\n    server: https://kubernetes.default.svc\n    namespace: argocd\n  syncPolicy:\n    automated: {}\n```\n\n## Flux CD Setup\n\n### 1. Installation\n\n```bash\n# Install Flux CLI\nbrew install fluxcd/tap/flux\n\n# Alternative: download the official installer, inspect it, then execute it\ntmpdir=\"$(mktemp -d)\"\ntrap 'rm -rf \"$tmpdir\"' EXIT\ncurl -fsSLo \"$tmpdir/flux-install.sh\" https://fluxcd.io/install.sh\ncat \"$tmpdir/flux-install.sh\"  # review the full installer before sudo\nsudo bash \"$tmpdir/flux-install.sh\"\n\n# Bootstrap Flux\nflux bootstrap github \\\n  --owner=org \\\n  --repository=gitops-repo \\\n  --branch=main \\\n  --path=clusters/production \\\n  --personal\n```\n\n### 2. Create GitRepository\n\n```yaml\napiVersion: source.toolkit.fluxcd.io/v1\nkind: GitRepository\nmetadata:\n  name: my-app\n  namespace: flux-system\nspec:\n  interval: 1m\n  url: https://github.com/org/my-app\n  ref:\n    branch: main\n```\n\n### 3. Create Kustomization\n\n```yaml\napiVersion: kustomize.toolkit.fluxcd.io/v1\nkind: Kustomization\nmetadata:\n  name: my-app\n  namespace: flux-system\nspec:\n  interval: 5m\n  path: ./deploy\n  prune: true\n  sourceRef:\n    kind: GitRepository\n    name: my-app\n```\n\n## Sync Policies\n\n### Auto-Sync Configuration\n\n**ArgoCD:**\n```yaml\nsyncPolicy:\n  automated:\n    prune: true      # Delete resources not in Git\n    selfHeal: true   # Reconcile manual changes\n    allowEmpty: false\n  retry:\n    limit: 5\n    backoff:\n      duration: 5s\n      factor: 2\n      maxDuration: 3m\n```\n\n**Flux:**\n```yaml\nspec:\n  interval: 1m\n  prune: true\n  wait: true\n  timeout: 5m\n```\n\n**Reference:** See `references/sync-policies.md`\n\n## Progressive Delivery\n\n### Canary Deployment with ArgoCD Rollouts\n\n```yaml\napiVersion: argoproj.io/v1alpha1\nkind: Rollout\nmetadata:\n  name: my-app\nspec:\n  replicas: 5\n  strategy:\n    canary:\n      steps:\n      - setWeight: 20\n      - pause: {duration: 1m}\n      - setWeight: 50\n      - pause: {duration: 2m}\n      - setWeight: 100\n```\n\n### Blue-Green Deployment\n\n```yaml\nstrategy:\n  blueGreen:\n    activeService: my-app\n    previewService: my-app-preview\n    autoPromotionEnabled: false\n```\n\n## Secret Management\n\n##",
-      "tags": [
-        "api",
-        "ai",
-        "agent",
-        "workflow",
-        "kubernetes",
-        "aws"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:12.795Z"
-    },
-    {
-      "id": "antigravity-glasser",
-      "name": "glasser",
-      "slug": "glasser",
-      "description": "Search, inspect, and run third-party data APIs through one CLI when the environment has no suitable integration.",
-      "category": "Business & Marketing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/glasser",
-      "content": "\n# Glasser\n\n## Overview\n\nGlasser is a commercial API broker that exposes third-party data providers\nthrough one CLI and one account. Use it to fill a data gap after checking the\nenvironment's free tools and the user's existing integrations. Provider output\nkeeps its native structure, so inspect the selected endpoint before every run.\n\nThis skill was contributed by a member of the Glasser team.\n\n## When to Use This Skill\n\n- Use when a task needs current web, news, search, social, business, people,\n  places, shopping, image, video, or enrichment data that available tools\n  cannot supply.\n- Use when the user wants pay-per-call access without creating a separate\n  account with the underlying provider.\n- Use for marketing and research workflows that need structured evidence from\n  a named data provider.\n- Prefer the user's explicit provider choice, existing API keys, installed\n  integrations, and free tools before Glasser.\n\n## How It Works\n\n### Step 1: Check Availability and Authentication\n\nUse the CLI only if it is already installed or the user has approved its\ninstallation under the host environment's software-installation policy.\nInstallation instructions are maintained at\n<https://glasser.ai/SKILL.md>. Do not download or install executable code\nwithout the review and approval required by the current environment.\n\nCheck the CLI and account:\n\n```bash\nglasser --version\nglasser balance\n```\n\nIf authentication is missing in an interactive session, run `glasser login`.\nIt opens a browser-based device flow. Relay the URL and code printed by the CLI\nand wait for the command to finish. Never ask the user to paste a Key into chat.\n\nFor unattended environments, the user can configure `GLASSER_API_KEY` through\nthe environment's secret manager. Never write it to a project file or include\nit in a command argument.\n\n### Step 2: Discover Candidate Endpoints\n\nSearch by capability instead of guessing a provider or endpoint:\n\n```bash\nglasser search -q \"Google search results\"\nglasser search -q \"company enrichment\"\nglasser search -q \"Reddit posts and comments\"\n```\n\nCompare the provider, endpoint, and listed price. Search results are ranked by\nrelevance; rank is not a quality or price recommendation.\n\n### Step 3: Inspect the Contract\n\nInspect the exact endpoint before constructing input:\n\n```bash\nglasser inspect -p serper -e /search\n```\n\nRecord:\n\n- the current price and all charge clauses;\n- required and optional input fields;\n- fields that control result volume;\n- run mode and timeout;\n- the provider that will receive the request.\n\nSchemas, prices, and charge clauses can change. The live `inspect` result is\nthe contract for the next run.\n\n### Step 4: Authorize the Paid Scope\n\nOnly `run` spends the workspace balance. Before the first paid call, show the\nuser the provider, endpoint, per-call price, charge exceptions, input scope,\nand requested result volume. Wait for approval unless the user already gave an\nexact scope or budget that covers the call.\n\nCreate the provider-native JSON input in a file after inspection. A file avoids\nshell-quoting errors and keeps the request reviewable. Do not include unrelated\npersonal, confidential, or credential data.\n\n### Step 5: Run and Recover Safely\n\nRun the approved request:\n\n```bash\nglasser run -p serper -e /search -f request.json --wait\n```\n\nThe CLI prints an Idempotency-Key. If a timeout or transport failure leaves the\noutcome uncertain, repeat the request with that same key:\n\n```bash\nglasser run -p serper -e /search -f request.json --idempotency-key <same-key> --wait\n```\n\nDo not create a new key for an ambiguous retry. It can create and charge a\nsecond run. For a known run, use `glasser runs get -r <run-id> --wait` instead\nof starting another one.\n\n### Step 6: Report Evidence and Cost\n\nFor every run used in the answer, report:\n\n1. the provider and endpoint;\n2. the Glasser run status;\n3. what the provider response says;\n4. the exact `Charge` printed by the CLI;\n5. the private `Run URL` printed by the CLI.\n\n`COMPLETED` means the provider answered. It does not guarantee that the\nprovider found a result, so describe both the run status and the payload.\n\n## Examples\n\n### Example 1: Research a Search Results Page\n\n```text\nFind a Google SERP endpoint in Glasser, show me its current price and input\nschema, and ask before running one query for \"best email marketing tools\".\n```\n\nThe agent searches the catalog, inspects the selected endpoint, obtains paid\nscope approval, writes input that matches the live schema, and returns sourced\nresults with the charge and Run URL.\n\n### Example 2: Fill a Company-Data Gap\n\n```text\nOur current tools cannot enrich these five companies. Find suitable Glasser\nendpoints, compare their prices and required inputs, and stop before spending.\n```\n\nThe agent returns a provider comparison without making a paid run.\n\n## Best Practices\n\n- Start with the smallest result count that can answer the question.\n- Reuse data already retrieved during the current task.\n- Keep exact decim",
-      "tags": [
-        "api",
-        "mcp",
-        "claude",
-        "ai",
-        "agent",
-        "workflow",
-        "image",
-        "security",
-        "rag",
-        "seo"
-      ],
-      "useCases": [
-        "Use when a task needs current web, news, search, social, business, people,",
-        "Use when the user wants pay-per-call access without creating a separate",
-        "Use for marketing and research workflows that need structured evidence from",
-        "Prefer the user's explicit provider choice, existing API keys, installed"
-      ],
-      "scrapedAt": "2026-09-13T11:39:45.444Z"
-    },
-    {
       "id": "antigravity-design-it-glassmorphism",
       "name": "glassmorphism",
       "slug": "design-it-glassmorphism",
@@ -25669,190 +25899,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-06-19T10:49:46.861Z"
-    },
-    {
-      "id": "antigravity-global-chat-agent-discovery",
-      "name": "global-chat-agent-discovery",
-      "slug": "global-chat-agent-discovery",
-      "description": "Discover and search 18K+ MCP servers and AI agents across 6+ registries using Global Chat's cross-protocol directory and MCP server.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/global-chat-agent-discovery",
-      "content": "\n# Global Chat Agent Discovery\n\n## Overview\n\nGlobal Chat is a cross-protocol AI agent discovery platform that aggregates MCP servers and AI agents from 6+ registries into a single searchable directory. This skill helps you find the right MCP server, A2A agent, or agents.txt endpoint for any task by searching across 18,000+ indexed entries. It also provides an MCP server (`@global-chat/mcp-server`) for programmatic access to the directory from any MCP-compatible client.\n\n## When to Use This Skill\n\n- Use when you need to find an MCP server for a specific capability (e.g., database access, file conversion, API integration)\n- Use when evaluating which agent registries carry tools for your use case\n- Use when you want to search across multiple protocols (MCP, A2A, agents.txt) simultaneously\n- Use when setting up agent-to-agent communication and need to discover available endpoints\n\n## How It Works\n\n### Option 1: Use the MCP Server (Recommended for Agents)\n\nInstall the Global Chat MCP server to search the directory programmatically from Claude Code, Cursor, or any MCP client.\n\n```bash\nnpm install -g @global-chat/mcp-server\n```\n\nAdd to your MCP client configuration:\n\n```json\n{\n  \"mcpServers\": {\n    \"global-chat\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@global-chat/mcp-server\"]\n    }\n  }\n}\n```\n\nThen ask your agent to search for tools:\n\n```\nSearch Global Chat for MCP servers that handle PostgreSQL database queries.\n```\n\n### Option 2: Use the Web Directory\n\nBrowse the full directory at [https://global-chat.io](https://global-chat.io):\n\n1. Visit the search page and enter your query\n2. Filter by protocol (MCP, A2A, agents.txt)\n3. Filter by registry source\n4. View server details, capabilities, and installation instructions\n\n### Option 3: Validate Your agents.txt\n\nIf you maintain an `agents.txt` file, use the free validator:\n\n1. Go to [https://global-chat.io/validate](https://global-chat.io/validate)\n2. Enter your domain or paste your agents.txt content\n3. Get instant feedback on format compliance and discoverability\n\n## Examples\n\n### Example 1: Find MCP Servers for a Task\n\n```\nYou: \"Find MCP servers that can convert PDF files to text\"\nAgent (via Global Chat MCP): Searching across 6 registries...\n  - @anthropic/pdf-tools (mcpservers.org) — PDF parsing and text extraction\n  - pdf-converter-mcp (mcp.so) — Convert PDF to text, markdown, or HTML\n  - ...\n```\n\n### Example 2: Discover A2A Agents\n\n```\nYou: \"What A2A agents are available for code review?\"\nAgent (via Global Chat MCP): Found 12 A2A agents for code review across 3 registries...\n```\n\n### Example 3: Check Agent Protocol Coverage\n\n```\nYou: \"How many registries list tools for Kubernetes management?\"\nAgent (via Global Chat MCP): 4 registries carry Kubernetes-related agents (23 total entries)...\n```\n\n## Best Practices\n\n- Use the MCP server for automated workflows and agent-to-agent discovery\n- Use the web directory for manual exploration and comparison\n- Validate your agents.txt before publishing to ensure maximum discoverability\n- Check multiple registries — coverage varies significantly by domain\n\n## Common Pitfalls\n\n- **Problem:** Search returns too many results\n  **Solution:** Add protocol or registry filters to narrow the scope\n\n- **Problem:** MCP server not connecting\n  **Solution:** Ensure `npx` is available and run `npx -y @global-chat/mcp-server` manually first to verify\n\n## Related Skills\n\n- `@mcp-client` - For general MCP client setup and configuration\n- `@agent-orchestration-multi-agent-optimize` - For orchestrating multiple discovered agents\n- `@agent-memory-mcp` - For persisting discovered agent information across sessions\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "pdf",
-        "markdown",
-        "api",
-        "mcp",
-        "claude",
-        "ai",
-        "agent",
-        "workflow",
-        "kubernetes",
-        "rag"
-      ],
-      "useCases": [
-        "Use when you need to find an MCP server for a specific capability (e.g., database access, file conversion, API integration)",
-        "Use when evaluating which agent registries carry tools for your use case",
-        "Use when you want to search across multiple protocols (MCP, A2A, agents.txt) simultaneously",
-        "Use when setting up agent-to-agent communication and need to discover available endpoints"
-      ],
-      "scrapedAt": "2026-04-07T07:31:54.346Z"
-    },
-    {
-      "id": "antigravity-gmail-automation",
-      "name": "gmail-automation",
-      "slug": "gmail-automation",
-      "description": "Lightweight Gmail integration with standalone OAuth authentication. No MCP server required.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/gmail-automation",
-      "content": "\n# Gmail\n\nLightweight Gmail integration with standalone OAuth authentication. No MCP server required.\n\n> **⚠️ Requires Google Workspace account.** Personal Gmail accounts are not supported.\n\n## When to Use\n- You need to search, read, or send Gmail messages from the command line without an MCP server.\n- You are automating inbox workflows for a Google Workspace account.\n- You want a lightweight Gmail integration backed by standalone OAuth scripts.\n\n## First-Time Setup\n\nAuthenticate with Google (opens browser):\n```bash\npython scripts/auth.py login\n```\n\nCheck authentication status:\n```bash\npython scripts/auth.py status\n```\n\nLogout when needed:\n```bash\npython scripts/auth.py logout\n```\n\n## Commands\n\nAll operations via `scripts/gmail.py`. Auto-authenticates on first use if not logged in.\n\n### Search Emails\n\n```bash\n# Search with Gmail query syntax\npython scripts/gmail.py search \"from:someone@example.com is:unread\"\n\n# Search recent emails (no query returns all)\npython scripts/gmail.py search --limit 20\n\n# Filter by label\npython scripts/gmail.py search --label INBOX --limit 10\n\n# Include spam and trash\npython scripts/gmail.py search \"subject:important\" --include-spam-trash\n```\n\n### Read Email Content\n\n```bash\n# Get full message content\npython scripts/gmail.py get MESSAGE_ID\n\n# Get just metadata (headers)\npython scripts/gmail.py get MESSAGE_ID --format metadata\n\n# Get minimal response (IDs only)\npython scripts/gmail.py get MESSAGE_ID --format minimal\n```\n\n### Send Emails\n\n```bash\n# Send a simple email\npython scripts/gmail.py send --to \"user@example.com\" --subject \"Hello\" --body \"Message body\"\n\n# Send with CC and BCC\npython scripts/gmail.py send --to \"user@example.com\" --cc \"cc@example.com\" --bcc \"bcc@example.com\" \\\n  --subject \"Team Update\" --body \"Update message\"\n\n# Send from an alias (must be configured in Gmail settings)\npython scripts/gmail.py send --to \"user@example.com\" --subject \"Hello\" --body \"Message\" \\\n  --from \"Mile9 Accounts <accounts@mile9.io>\"\n\n# Send HTML email\npython scripts/gmail.py send --to \"user@example.com\" --subject \"HTML Email\" \\\n  --body \"<h1>Hello</h1><p>HTML content</p>\" --html\n```\n\n### Draft Management\n\n```bash\n# Create a draft\npython scripts/gmail.py create-draft --to \"user@example.com\" --subject \"Draft Subject\" \\\n  --body \"Draft content\"\n\n# Send an existing draft\npython scripts/gmail.py send-draft DRAFT_ID\n```\n\n### Modify Messages (Labels)\n\n```bash\n# Mark as read (remove UNREAD label)\npython scripts/gmail.py modify MESSAGE_ID --remove-label UNREAD\n\n# Mark as unread\npython scripts/gmail.py modify MESSAGE_ID --add-label UNREAD\n\n# Archive (remove from INBOX)\npython scripts/gmail.py modify MESSAGE_ID --remove-label INBOX\n\n# Star a message\npython scripts/gmail.py modify MESSAGE_ID --add-label STARRED\n\n# Unstar a message\npython scripts/gmail.py modify MESSAGE_ID --remove-label STARRED\n\n# Mark as important\npython scripts/gmail.py modify MESSAGE_ID --add-label IMPORTANT\n\n# Multiple label changes at once\npython scripts/gmail.py modify MESSAGE_ID --remove-label UNREAD --add-label STARRED\n```\n\n### List Labels\n\n```bash\n# List all Gmail labels (system and user-created)\npython scripts/gmail.py list-labels\n```\n\n## Gmail Query Syntax\n\nGmail supports powerful search operators:\n\n| Query | Description |\n|-------|-------------|\n| `from:user@example.com` | Emails from a specific sender |\n| `to:user@example.com` | Emails to a specific recipient |\n| `subject:meeting` | Emails with \"meeting\" in subject |\n| `is:unread` | Unread emails |\n| `is:starred` | Starred emails |\n| `is:important` | Important emails |\n| `has:attachment` | Emails with attachments |\n| `after:2024/01/01` | Emails after a date |\n| `before:2024/12/31` | Emails before a date |\n| `newer_than:7d` | Emails from last 7 days |\n| `older_than:1m` | Emails older than 1 month |\n| `label:work` | Emails with a specific label |\n| `in:inbox` | Emails in inbox |\n| `in:sent` | Sent emails |\n| `in:trash` | Trashed emails |\n\nCombine with AND (space), OR, or - (NOT):\n```bash\npython scripts/gmail.py search \"from:boss@company.com is:unread newer_than:1d\"\npython scripts/gmail.py search \"subject:urgent OR subject:important\"\npython scripts/gmail.py search \"from:newsletter@example.com -is:starred\"\n```\n\n## Common Label IDs\n\n| Label | ID |\n|-------|-----|\n| Inbox | `INBOX` |\n| Sent | `SENT` |\n| Drafts | `DRAFT` |\n| Spam | `SPAM` |\n| Trash | `TRASH` |\n| Starred | `STARRED` |\n| Important | `IMPORTANT` |\n| Unread | `UNREAD` |\n\n## Token Management\n\nTokens stored securely using the system keyring:\n- **macOS**: Keychain\n- **Windows**: Windows Credential Locker\n- **Linux**: Secret Service API (GNOME Keyring, KDE Wallet, etc.)\n\nService name: `gmail-skill-oauth`\n\nTokens automatically refresh when expired using Google's cloud function.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inp",
-      "tags": [
-        "python",
-        "api",
-        "mcp",
-        "ai",
-        "automation",
-        "workflow"
-      ],
-      "useCases": [
-        "You need to search, read, or send Gmail messages from the command line without an MCP server.",
-        "You are automating inbox workflows for a Google Workspace account.",
-        "You want a lightweight Gmail integration backed by standalone OAuth scripts."
-      ],
-      "scrapedAt": "2026-02-19T07:11:42.760Z"
-    },
-    {
-      "id": "antigravity-go-concurrency-patterns",
-      "name": "go-concurrency-patterns",
-      "slug": "go-concurrency-patterns",
-      "description": "Master Go concurrency with goroutines, channels, sync primitives, and context. Use when building concurrent Go applications, implementing worker pools, or debugging race conditions.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/go-concurrency-patterns",
-      "content": "\n# Go Concurrency Patterns\n\nProduction patterns for Go concurrency including goroutines, channels, synchronization primitives, and context management.\n\n## Use this skill when\n\n- Building concurrent Go applications\n- Implementing worker pools and pipelines\n- Managing goroutine lifecycles\n- Using channels for communication\n- Debugging race conditions\n- Implementing graceful shutdown\n\n## Do not use this skill when\n\n- The task is unrelated to go concurrency patterns\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\n## Resources\n\n- `resources/implementation-playbook.md` for detailed patterns and examples.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "ai"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:13.288Z"
-    },
-    {
-      "id": "antigravity-go-in-depth",
-      "name": "go-in-depth",
-      "slug": "go-in-depth",
-      "description": "Go in depth harness — fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/go-in-depth",
-      "content": "\n# Go In Depth\n\n## Overview\n\nGo in depth harness — fan-out web searches, fetch sources, adversarially verify claims, synthesize a cited report. Run the \"go-in-depth\" workflow.\n\n## When to Use\n\nWhen the user wants a deep, multi-source, fact-checked research report on any topic. BEFORE invoking, check if the question is specific enough to research directly — if underspecified (e.g., \"what car to buy\" without budget/use-case/region), ask 2-3 clarifying questions to narrow scope. Then pass the refined question as args, weaving the answers in.\n\n## How It Works\n\nPhases:\n- Scope: Decompose question (from args) into 5 search angles\n- Search: 5 parallel WebSearch agents, one per angle\n- Fetch: URL-dedup, fetch top 15 sources, extract falsifiable claims\n- Verify: 3-vote adversarial verification per claim (need 2/3 refutes to kill)\n- Synthesize: Merge semantic dupes, rank by confidence, cite sources\n\n## Examples\n\n### Example 1: Run go-in-depth workflow\n```\nWorkflow({ name: \"go-in-depth\" })\n```\n\n### Example 2: Research with refined question\n```\nWorkflow({ name: \"go-in-depth\", args: { query: \"best hybrid cars under $30k in the US for families\" } })\n```\n\n### Example 3: Deep dive into a technical concept\n```\nWorkflow({ name: \"go-in-depth\", args: { query: \"how does the transformer architecture handle positional encoding?\" } })\n```\n\n### Example 4: Fact-checking a medical claim\n```\nWorkflow({ name: \"go-in-depth\", args: { query: \"efficacy of intermittent fasting for long-term weight loss in adults\" } })\n```\n\n## Workflow Script\n\n[scripts/workflow-script.js](scripts/workflow-script.js)\n\n## Limitations\n\n- **Slow execution**: Multi-agent searches, fetching, and 3-vote verification take significant time. Not for quick facts.\n- **Context intensive**: Analyzing 15 full sources uses large context limits.\n- **Synthesis risks**: May struggle if source material is weak or equally conflicting.\n",
-      "tags": [
-        "ai",
-        "agent",
-        "workflow"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-07-08T08:43:17.693Z"
-    },
-    {
-      "id": "antigravity-go-playwright",
-      "name": "go-playwright",
-      "slug": "go-playwright",
-      "description": "Expert capability for robust, stealthy, and efficient browser automation using Playwright Go.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/go-playwright",
-      "content": "\n# Playwright Go Automation Expert\n\n## Overview\nThis skill provides a comprehensive framework for writing high-performance, production-grade browser automation scripts using `github.com/playwright-community/playwright-go`. It enforces architectural best practices (contexts over instances), robust error handling, structured logging (Zap), and advanced human-emulation techniques to bypass anti-bot systems.\n\n## When to Use This Skill\n- Use when the user asks to \"scrape,\" \"automate,\" or \"test\" a website using Go.\n- Use when the target site has complex dynamic content (SPA, React, Vue) requiring a real browser.\n- Use when the user mentions \"stealth,\" \"avoiding detection,\" \"cloudflare,\" or \"human-like\" behavior.\n- Use when debugging existing Playwright scripts.\n\n## Safety & Risk\n**Risk Level: 🔵 Safe**\n\n- **Sandboxed Execution:** Browser contexts are isolated; they do not persist data to the host machine unless explicitly saved.\n- **Resource Management:** Designed to close browsers and contexts via `defer` to prevent memory leaks.\n- **No External State-Change:** Default behavior is read-only (scraping/testing) unless the script is explicitly designed to submit forms or modify data.\n\n## Limitations\n- **Environment Dependencies:** Requires Playwright drivers and browsers to be installed (`go run github.com/playwright-community/playwright-go/cmd/playwright@latest install --with-deps`).\n- **Resource Intensity:** Launching full browser instances (even headless) consumes significant RAM/CPU. Use single-browser/multi-context architecture.\n- **Bot Detection:** While this skill includes stealth techniques, extremely strict anti-bot systems (e.g., rigorous Cloudflare settings) may still detect automation.\n- **CAPTCHAs:** Does not include built-in CAPTCHA solving capabilities.\n\n## Strategic Implementation Guidelines\n\n### 1. Architecture: Contexts vs. Browsers\n**CRITICAL:** Never launch a new `Browser` instance for every task.\n- **Pattern:** Launch the `Browser` *once* (singleton). Create a new `BrowserContext` for each distinct session or task.\n- **Why:** Contexts are lightweight and created in milliseconds. Browsers take seconds to launch.\n- **Isolation:** Contexts provide complete isolation (cookies, cache, storage) without the overhead of a new process.\n\n### 2. Logging & Observability\n- **Library:** Use `go.uber.org/zap` exclusively.\n- **Rule:** Do not use `fmt.Println`.\n- **Modes:**\n  - **Dev:** `zap.NewDevelopment()` (Console friendly)\n  - **Prod:** `zap.NewProduction()` (JSON structured)\n- **Traceability:** Log every navigation, click, and input with context fields (e.g., `logger.Info(\"clicking button\", zap.String(\"selector\", sel))`).\n\n### 3. Error Handling & Stability\n- **Graceful Shutdown:** Always use `defer` to close Pages, Contexts, and Browsers.\n- **Panic Recovery:** Wrap critical automation routines in a safe runner that recovers panics and logs the stack trace.\n- **Timeouts:** Never rely on default timeouts. Set explicit timeouts (e.g., `playwright.PageClickOptions{Timeout: playwright.Float(5000)}`).\n\n### 4. Stealth & Human-Like Behavior\nTo bypass anti-bot systems (Cloudflare, Akamai), the generated code must **imitate human physiology**:\n- **Non-Linear Mouse Movement:** Never teleport the mouse. Implement a helper that moves the mouse along a Bezier curve with random jitter.\n- **Input Latency:** never use `Fill()`. Use `Type()` with random delays between keystrokes (50ms–200ms).\n- **Viewport Randomization:** Randomize the viewport size slightly (e.g., 1920x1080 ± 15px) to avoid fingerprinting.\n- **Behavioral Noise:** Randomly scroll, focus/unfocus the window, or hover over irrelevant elements (\"idling\") during long waits.\n- **User-Agent:** Rotate User-Agents for every new Context.\n\n### 5. Documentation Usage\n- **Primary Source:** Rely on your internal knowledge of the API first to save tokens.\n- **Fallback:** Refer to the official docs [playwright-go documentation](https://pkg.go.dev/github.com/playwright-community/playwright-go#section-documentation) ONLY if:\n  - You encounter an unknown error.\n  - You need to implement complex network interception or authentication flows.\n  - The API has changed significantly.\n\n## Resources\n- `resources/implementation-playbook.md` for detailed code examples and implementation patterns.\n\n### Summary Checklist for Agent\n - Is Debug Mode on? -> `Headless=false`, `SlowMo=100+`.\n - Is it a new user identity? -> `NewContext`, apply new Proxy, rotate `User-Agent`.\n - Is the action critical? -> Wrap in `SafeAction` with Zap logging.\n - Is the target guarded (Cloudflare/Akamai)? -> Enable `HumanType`, `BezierMouse`, and Stealth Scripts.\n",
-      "tags": [
-        "react",
-        "api",
-        "ai",
-        "agent",
-        "automation",
-        "design",
-        "document",
-        "rag",
-        "cro"
-      ],
-      "useCases": [
-        "Use when the user asks to \"scrape,\" \"automate,\" or \"test\" a website using Go.",
-        "Use when the target site has complex dynamic content (SPA, React, Vue) requiring a real browser.",
-        "Use when the user mentions \"stealth,\" \"avoiding detection,\" \"cloudflare,\" or \"human-like\" behavior.",
-        "Use when debugging existing Playwright scripts."
-      ],
-      "scrapedAt": "2026-02-11T07:13:16.247Z"
-    },
-    {
-      "id": "antigravity-go-rod-master",
-      "name": "go-rod-master",
-      "slug": "go-rod-master",
-      "description": "Comprehensive guide for browser automation and web scraping with go-rod (Chrome DevTools Protocol) including stealth anti-bot-detection patterns.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/go-rod-master",
-      "content": "\n# Go-Rod Browser Automation Master\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use This Skill\n\n- Use when the user asks to **scrape**, **automate**, or **test** a website using Go.\n- Use when the user needs a **headless browser** for dynamic/SPA content (React, Vue, Angular).\n- Use when the user mentions **stealth**, **anti-bot**, **avoiding detection**, **Cloudflare**, or **bot detection bypass**.\n- Use when the user wants to work with the **Chrome DevTools Protocol (CDP)** directly from Go.\n- Use when the user needs to **intercept** or **hijack** network requests in a browser context.\n- Use when the user asks about **concurrent browser scraping** or **page pooling** in Go.\n- Use when the user is migrating from **chromedp** or **Playwright Go** and wants a simpler API.\n\n## Safety & Risk\n\n**Risk Level: 🔵 Safe**\n\n- **Read-Only by Default:** Default behavior is navigating and reading page content (scraping/testing).\n- **Isolated Contexts:** Browser contexts are sandboxed; cookies and storage do not persist unless explicitly saved.\n- **Resource Cleanup:** Designed around Go's `defer` pattern — browsers and pages close automatically.\n- **No External Mutations:** Does not modify external state unless the script explicitly submits forms or POSTs data.\n\n## Examples\n\nSee the `examples/` directory for complete, runnable Go files:\n- `examples/basic_scrape.go` — Minimal scraping example\n- `examples/stealth_page.go` — Anti-detection with go-rod/stealth\n- `examples/request_hijacking.go` — Intercepting and modifying network requests\n- `examples/concurrent_pages.go` — Page pool for concurrent scraping\n\n---\n\n## Limitations\n\n- **CAPTCHAs:** Rod does not include CAPTCHA solving. External services (2captcha, etc.) must be integrated separately.\n- **Extreme Anti-Bot:** While `go-rod/stealth` handles common detection (WebDriver, plugin fingerprints, WebGL), extremely strict systems (some Cloudflare configurations, Akamai Bot Manager) may still detect automation. Additional measures (residential proxies, human-like behavioral patterns) may be needed.\n- **DRM Content:** Cannot interact with DRM-protected media (e.g., Widevine).\n- **Resource Usage:** Each browser instance consumes significant RAM (~100-300MB+). Use `PagePool` and limit concurrency on memory-constrained systems.\n- **Extensions in Headless:** Chrome extensions do not work in headless mode. Use `Headless(false)` with XVFB for server environments.\n- **Platform:** Requires a Chromium-compatible browser. Does not support Firefox or Safari.\n",
-      "tags": [
-        "react",
-        "api",
-        "ai",
-        "automation",
-        "design",
-        "rag"
-      ],
-      "useCases": [
-        "Use when the user asks to **scrape**, **automate**, or **test** a website using Go.",
-        "Use when the user needs a **headless browser** for dynamic/SPA content (React, Vue, Angular).",
-        "Use when the user mentions **stealth**, **anti-bot**, **avoiding detection**, **Cloudflare**, or **bot detection bypass**.",
-        "Use when the user wants to work with the **Chrome DevTools Protocol (CDP)** directly from Go.",
-        "Use when the user needs to **intercept** or **hijack** network requests in a browser context."
-      ],
-      "scrapedAt": "2026-02-16T07:19:31.526Z"
-    },
-    {
-      "id": "antigravity-go-rust-reverse",
-      "name": "go-rust-reverse",
-      "slug": "go-rust-reverse",
-      "description": "Reverse engineer stripped Go and Rust binaries: runtime recognition, pclntab/module metadata recovery, panic-string analysis, and idiomatic decompilation strategies.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/go-rust-reverse",
-      "content": "# Go / Rust Binary Reverse Engineering\n## When to Use\n\n- Analyzing a stripped Go or Rust binary where symbols are absent.\n- Recovering function boundaries and names from language-specific metadata.\n\n\n## 适用场景\n\n- 剥离符号的 Go 恶意软件/工具\n- Rust 发行二进制、panic 字符串驱动分析\n- 与通用 ida/ghidra 互补的语言专用方法\n\n## 工作流\n\n### Go\n\n```text\n□ 识别 go.buildid、runtime 符号残留、pclntab\n□ GoReSym / redress / IDA Go 插件恢复函数名\n□ 注意 interface、slice、string 结构在反编译中的形态\n□ 网络/加密库路径：crypto/* net/http\n```\n\n### Rust\n\n```text\n□ panic 字符串、rust_begin_unwind、crate 路径暗示\n□ 范型实例化导致的代码膨胀；先定位字符串 xref\n□ 异步/tokio 状态机需结合交叉引用\n```\n\n### 动态\n\n```text\n□ 仍可用 Frida；注意 Go 栈与调度\n□ 优先日志与配置字符串驱动断点\n```\n\n## 工具链\n\n| 工具 | 用途 |\n|------|------|\n| GoReSym | Go 元数据 |\n| IDA/Ghidra + Go/Rust 插件 | 反编译 |\n| radare2 | 快速字符串 |\n| strings / rabin2 | 分诊 |\n\n## 参考\n\n- `references/go-rust-notes.md`\n- `../reverse-engineering/go-reverse.md` `../ida-reverse/` `../ghidra-reverse/`\n- seed: `field-journal/seed-002_go-malware-stripped.md`\n\n## 路由上下文\n\n**上游**: MASTER R33  \n**下游**: 恶意样本流程 `malware-analysis`；通用 RE `reverse-engineering`\n\n## 任务完成自检\n\n- [ ] 是否恢复关键函数名或等价映射？\n- [ ] 是否标注语言运行时证据？\n- [ ] Checklist？\n\n## Limitations\n\n- New compiler versions change metadata layouts; tooling must be kept current.\n- Aggressive inlining still yields large, hard-to-read decompilation.\n\n> Adapted from [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) (MIT).\n",
-      "tags": [
-        "ai"
-      ],
-      "useCases": [
-        "Analyzing a stripped Go or Rust binary where symbols are absent.",
-        "Recovering function boundaries and names from language-specific metadata."
-      ],
-      "scrapedAt": "2026-08-27T17:38:30.552Z"
-    },
-    {
-      "id": "antigravity-goal-analyzer",
-      "name": "goal-analyzer",
-      "slug": "goal-analyzer",
-      "description": "分析健康目标数据、识别目标模式、评估目标进度,并提供个性化目标管理建议。支持与营养、运动、睡眠等健康数据的关联分析。",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/goal-analyzer",
-      "content": "\n# 健康目标分析器技能\n\n分析健康目标数据,识别目标模式和进度,评估目标达成情况,并提供个性化目标管理建议。\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use\n- 你需要评估健康目标是否符合 SMART 原则，并识别目标设定中的薄弱点。\n- 你想跟踪目标进度，并结合营养、运动、睡眠等健康数据做关联分析。\n- 你需要面向个人健康管理的目标优化建议、风险提示和阶段性调整方案。\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "ai"
-      ],
-      "useCases": [
-        "你需要评估健康目标是否符合 SMART 原则，并识别目标设定中的薄弱点。",
-        "你想跟踪目标进度，并结合营养、运动、睡眠等健康数据做关联分析。",
-        "你需要面向个人健康管理的目标优化建议、风险提示和阶段性调整方案。"
-      ],
-      "scrapedAt": "2026-03-07T06:55:04.879Z"
     },
     {
       "id": "antigravity-design-it-gradient-design",
@@ -27790,14 +27836,14 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 406
+      "count": 394
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 343
+      "count": 356
     },
     {
       "id": "creative-media",
@@ -27825,7 +27871,7 @@
       "name": "Business & Marketing",
       "description": "Skills for marketing, branding, lead generation, and business operations.",
       "icon": "briefcase",
-      "count": 41
+      "count": 40
     },
     {
       "id": "productivity-organization",
@@ -27862,42 +27908,42 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 15,
       "newSkillCount": 0,
-      "stars": 289004
+      "stars": 289543
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 177239
+      "stars": 177412
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 75367
+      "stars": 75427
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 88592
+      "stars": 88703
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1750
+      "stars": 1752
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
-      "newSkillCount": 106,
-      "stars": 46624
+      "newSkillCount": 22,
+      "stars": 46692
     },
     {
       "name": "Xquik",
@@ -27907,10 +27953,10 @@
       "stars": 205
     }
   ],
-  "lastUpdated": "2026-09-20T11:10:49.668Z",
+  "lastUpdated": "2026-09-21T12:39:29.332Z",
   "stats": {
     "totalSkills": 1137,
-    "newSkills": 115,
-    "scrapedAt": "2026-09-20T11:10:49.668Z"
+    "newSkills": 31,
+    "scrapedAt": "2026-09-21T12:39:29.332Z"
   }
 }

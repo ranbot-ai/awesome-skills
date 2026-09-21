@@ -1,0 +1,26 @@
+{
+  "id": "antigravity-architecture-review",
+  "name": "architecture-review",
+  "slug": "architecture-review",
+  "description": "Review repository architecture using Ontoly Software Graph and MCP capabilities. Use when asked to explain architecture, module boundaries, package topology, service ownership, or architectural risk.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/architecture-review",
+  "content": "## When to Use\n- Use when this upstream workflow matches the user's stated goal.\n- Use when the task requires the procedures documented in this skill.\n\n# Architecture Review\n\nUse this skill when the user asks for architecture review using Ontoly evidence.\n\n## Required Workflow\n\nFollow [the shared Ontoly workflow. Also read [graph evidence rules, [MCP usage, [best practices, and [fallback rules when the task requires detail.\n\n## Ontoly Capabilities\n\nUse these capabilities first: `ExplainArchitecture`, `GraphStatistics`, `FindCycles`, `FindDependencies`, `EvidencePack`.\n\n## Output Contract\n\nReturn:\n\n- answer or plan\n- capabilities invoked\n- graph evidence with node ids, edge types, source spans, and graph hash when available\n- confidence: high, medium, or low\n- fallback reason if repository files were inspected\n\n## Boundaries\n\nDo not implement compiler, query, MCP, SDK, or business logic in the skill. Do not search repository files until Ontoly cannot answer or evidence must be confirmed.\n\n## Resources\n\n- [Examples\n- [Prompt template\n- [Capability notes\n\n## Learn more\n\n- Documentation: https://ontoly.xyz/docs\n- This skill on the web: https://ontoly.xyz/skills#architecture-review\n- All Ontoly Agent Skills: https://ontoly.xyz/skills\n- Install via skills.sh: https://www.skills.sh/?q=0xsarwagya/ontoly\n\n\n## Examples\n\n```text\nUser: Apply this skill to my current task.\nAssistant: Follow the workflow in this skill, cite limitations, and ask before risky steps.\n```\n\n## Limitations\n\n- Imported upstream skill; verify credentials, permissions, and safety boundaries before execution.\n- Does not replace environment-specific validation, testing, or maintainer review.\n",
+  "tags": [
+    "node",
+    "mcp",
+    "ai",
+    "agent",
+    "llm",
+    "workflow",
+    "template",
+    "document"
+  ],
+  "useCases": [
+    "Use when this upstream workflow matches the user's stated goal.",
+    "Use when the task requires the procedures documented in this skill."
+  ],
+  "scrapedAt": "2026-09-21T12:31:11.385Z"
+}
