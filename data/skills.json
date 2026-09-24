@@ -928,6 +928,36 @@
       "scrapedAt": "2026-07-02T09:23:00.477Z"
     },
     {
+      "id": "antigravity-agent-memory-discipline",
+      "name": "agent-memory-discipline",
+      "slug": "agent-memory-discipline",
+      "description": "Rules for when an agent should recall from long-term memory before acting and when it should save decisions, corrections and failures afterwards. Works with any memory backend.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-memory-discipline",
+      "content": "\n# Agent Memory Discipline\n\n## Overview\n\nConnecting a memory tool does not make an agent use it: tools register, the session runs, and nothing gets recalled or saved. This skill supplies the missing part, standing rules for when to read memory and when to write it.\n\nThe problem it solves is specific. An agent with memory available still repeats settled questions, reverts corrected habits, and loses decisions between sessions, because nothing tells it when recall and save are due. The rules below make both moments explicit.\n\n## When to Use This Skill\n\n- Use when a memory tool or MCP memory server is connected but the agent is not using it consistently.\n- Use when the user complains that the assistant loses preferences, conventions or past decisions between sessions.\n- Use when setting up persistent memory for a project and the agent needs standing rules for reading and writing it.\n- Use when the user says \"remember this\", \"what did we decide\", \"recall\", or \"save this for next time\".\n\n## How It Works\n\n### Before You Start: Any Memory Backend\n\nThe agent needs a memory tool it can call. Any backend works, and the rules are identical for each:\n\n- **Files.** A `memory/` folder of Markdown notes, one fact per file. No dependencies, fully greppable, versionable in git.\n- **A local MCP memory server.** Keeps everything on the local machine; several open-source options exist.\n- **A hosted memory service over MCP.** Adds portability across tools and machines at the cost of the data living elsewhere.\n\nAuthentication is whatever the chosen backend requires: none for a local folder, the server's own configuration for a local MCP server, an API key or OAuth sign-in for a hosted service. This skill never handles credentials itself and never writes them into memory.\n\n### Step 1: Recall Before Acting\n\nRead memory **before** doing any of these, not after:\n\n- starting work on a project touched before\n- choosing a library, pattern, or tool\n- writing tests, commits, or documentation, where conventions apply\n- answering \"how do we usually do X here\"\n- anything the user phrases as \"again\", \"like last time\", or \"as we agreed\"\n\nSkip recall for one-off factual questions, arithmetic, or anything fully specified in the current message. Recall costs a tool call and context; spending it on a self-contained question is waste.\n\nSearch with the words the user actually used, plus the project or repository name. If the first search returns nothing useful, try one broader query, then stop and proceed without memory rather than looping.\n\n### Step 2: Save After Deciding\n\nWrite to memory when one of these has just happened:\n\n- a **decision** was made and will still matter next week (\"we use pnpm\", \"the billing module stays untouched\")\n- the user **corrected** the agent, which is the strongest signal there is\n- an approach **failed**, and why it failed\n- a preference was stated that applies beyond this task\n- a fact about the environment was discovered the hard way (a port, a flag, a service that must be running)\n\nDo **not** save: the contents of files that can be read again, restatements of the current task, transient state, anything the user marked as temporary, and anything containing secrets, tokens, or personal data.\n\nOne memory, one fact. A paragraph containing four decisions cannot be superseded cleanly when one of them changes.\n\n### Step 3: Write It So It Survives\n\nA memory that is useless in three weeks was written wrong. Give each entry, in the text if the backend has no fields for it:\n\n- **what** was decided or observed, in one sentence\n- **why**, briefly, because the reason outlives the decision\n- **when** it became true, and when it stopped being true if it has\n- **where it came from**: a file, a commit, a conversation, a test run\n\nPrefer the user's own words over a paraphrase. Paraphrase drifts.\n\n### Step 4: Close the Past Instead of Overwriting It\n\nWhen something changes, the old memory is not wrong. It is **closed**.\n\nIf the project moved from Redux to Zustand, \"we use Redux\" was true from January to June. Deleting it destroys the explanation for every component written in that window. Mark it superseded, keep its validity window, and write the new one alongside.\n\nThis is the single most destructive habit in agent memory, and it stays invisible until someone asks a question about old code.\n\n### Step 5: Keep Contradictions Visible\n\nIf recall returns two entries that disagree, do not pick the closer match and proceed. Surface both, with their dates, and ask or flag. A convention that a recent failure contradicts is exactly the situation where the user needs to be told, not smoothed over.\n\n### Step 6: Weigh Evidence and Policy Differently\n\n- **Evidence** is what happened: one run, one failure, one observation. Cheap, plentiful, individually unreliable.\n- **Policy** is what should happen: a convention, a decision, a rule. Expensive, and should be hard to change by accident.\n\nAn observation becomes policy when a human confirms it, when ",
+      "tags": [
+        "markdown",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "design",
+        "document",
+        "security",
+        "rag"
+      ],
+      "useCases": [
+        "Use when a memory tool or MCP memory server is connected but the agent is not using it consistently.",
+        "Use when the user complains that the assistant loses preferences, conventions or past decisions between sessions.",
+        "Use when setting up persistent memory for a project and the agent needs standing rules for reading and writing it.",
+        "Use when the user says \"remember this\", \"what did we decide\", \"recall\", or \"save this for next time\"."
+      ],
+      "scrapedAt": "2026-09-24T11:28:16.347Z"
+    },
+    {
       "id": "antigravity-agent-memory-mcp",
       "name": "agent-memory-mcp",
       "slug": "agent-memory-mcp",
@@ -11849,6 +11879,37 @@
       "scrapedAt": "2026-03-07T06:53:26.531Z"
     },
     {
+      "id": "antigravity-chatexport-need-miner",
+      "name": "chatexport-need-miner",
+      "slug": "chatexport-need-miner",
+      "description": "Mines offline Telegram Desktop chat exports (result.json) for unmet market needs and product opportunities using chunked streaming and verbatim quote grounding. Trigger phrases: mine chat export, telegram result.json, find unmet needs, analyze telegram chat.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/chatexport-need-miner",
+      "content": "\n# ChatExport Need Miner: Offline Market Signal & Pain-Point Extractor\n\nTransform offline Telegram Desktop chat exports (`result.json`) into quantified, quote-grounded rankings of unmet market needs with zero memory crashes and absolute source fidelity.\n\n## When to Use This Skill\n\nActivate this skill when:\n- The user provides an offline Telegram Desktop chat export (`result.json` or multi-file directory) and requests market research, customer problem analysis, or tool opportunity discovery.\n- The user asks: \"What are people in this chat struggling with?\", \"Find product ideas from this export\", \"What tools do users wish existed?\", or \"Mine complaints from this group\".\n- Analyzing multi-megabyte or gigabyte JSON dumps where standard in-memory deserialization (`json.load()`) risks out-of-memory (OOM) fatal crashes.\n- Cross-referencing user complaints across multiple independent communities to eliminate echo-chamber noise.\n\nDo NOT use this skill when:\n- The user wants live channel scraping, continuous bot monitoring, or MTProto API automation (use dedicated online fetchers).\n- Analyzing personal 1-on-1 romantic or private relationships.\n- Processing generic SaaS helpdesk feeds (Zendesk, Intercom, Gong) with structured ticket schemas.\n\n## Core Mental Models & Non-Negotiable Rules\n\n1. **The 4MB Stream & Overlap Invariant (Memory Ceiling <= 8MB)**:\n   - Telegram Desktop `result.json` files routinely exceed 500MB to 5GB.\n   - NEVER load an entire export into memory with `json.load()` or `fs.readFileSync()`.\n   - Read the file in fixed 4MB chunks with a 4KB overlap tail.\n   - **Boundary Counting Law**: A substring hit is recorded if and only if its terminus falls past the overlap boundary. This guarantees zero missed boundary-spanning phrases and strictly zero duplicate counts.\n\n2. **Cross-Chat Multiplicity Law ($U \\ge 3$ Priority)**:\n   - One user posting 50 complaints in a single chat is an anecdote; 5 distinct users posting the same complaint across 3 independent chats is a market signal.\n   - Cluster rank score is calculated as:\n     $$\\text{Score} = U \\times \\sqrt{H}$$\n     where $U$ is the number of distinct chat exports containing the signal, and $H$ is the total verified keyword hits.\n   - A pattern appearing in $U \\ge 3$ chats always outranks a pattern confined to $U = 1$, regardless of raw hit volume.\n\n3. **Verbatim Quote Anchor & Anti-Hallucination Law**:\n   - Every identified need theme MUST be backed by 2 to 5 verbatim quotes with exact ISO timestamp (`date`) and chat identifier.\n   - NEVER paraphrase a quote inside quotation marks. NEVER synthesize synthetic user statements.\n   - If a hypothesized theme lacks verbatim quote support, it MUST be marked `[UNCONFIRMED / NO VERBATIM EVIDENCE]`.\n\n4. **Bi-Lingual Case-Insensitive Seed Lexicons**:\n   - Russian Lexicon: `не хватает`, `вот бы`, `бесит`, `надоело`, `задолбал`, `ищу инструмент`, `ищу бот`, `есть ли бот`, `есть ли сервис`, `посоветуйте тул`, `не работает`, `вручную`, `рутина`, `приходится руками`.\n   - English Lexicon: `i wish`, `missing`, `annoying`, `frustrating`, `looking for a tool`, `is there an app`, `is there a bot`, `any alternative to`, `doesn't work`, `manually`, `repetitive`, `waste of time`.\n   - Custom terms may be added only when explicitly approved or provided by the user.\n\n5. **Strict Air-Gap & Zero Exfiltration**:\n   - The entire analysis executes locally and offline. No network requests, no external telemetry, no remote LLM proxying of raw message contents.\n\n## Named Sins & Anti-Patterns (Что категорически ЗАПРЕЩЕНО)\n\n| Anti-Pattern | Manifestation in Code/Workflow | Mandatory Production Counter-Rule |\n| :--- | :--- | :--- |\n| **The OOM Slurp** | `data = json.load(open('result.json'))` on 800MB file. | Use incremental regex streaming or chunked buffered file reading with `<= 8MB` RAM footprint. |\n| **Chunk Boundary Blindness** | Chunking without overlap, truncating `\"looking for a tool\"` across 4096-byte splits. | Maintain a 4KB sliding overlap tail across chunk transitions. |\n| **Double-Count Overlap Trap** | Counting hits found in both chunk $N$ and the overlap window of chunk $N+1$. | Only increment match counter if `match.end() > overlap_size`. |\n| **The Echo-Chamber Distortion** | Elevating a bug mentioned 80 times by 1 single user in 1 chat to the #1 product opportunity. | Apply Cross-Chat Multiplicity Law ($U \\times \\sqrt{H}$) and count unique authors when available. |\n| **Hallucinated Quotations** | \"User expressed desire for better sync\" written in quotes as `\"I really need better sync\"`. | Exact substring slice from source buffer; if unquoted, label as synthetic analysis. |\n| **Service Message Pollution** | Mining system notifications (`\"pinned a message\"`, `\"joined group\"`, bot spam) as human needs. | Filter out messages where `type == \"service\"` or text begins with known bot commands (`/start`). |\n| **Premature Uniqueness Claim** | Stating \"No tool currently exists for this problem\" without validation. | Run explicit c",
+      "tags": [
+        "python",
+        "api",
+        "claude",
+        "ai",
+        "llm",
+        "automation",
+        "workflow",
+        "docker",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "The user provides an offline Telegram Desktop chat export (`result.json` or multi-file directory) and requests market research, customer problem analysis, or tool opportunity discovery.",
+        "The user asks: \"What are people in this chat struggling with?\", \"Find product ideas from this export\", \"What tools do users wish existed?\", or \"Mine complaints from this group\".",
+        "Analyzing multi-megabyte or gigabyte JSON dumps where standard in-memory deserialization (`json.load()`) risks out-of-memory (OOM) fatal crashes.",
+        "Cross-referencing user complaints across multiple independent communities to eliminate echo-chamber noise.",
+        "The user wants live channel scraping, continuous bot monitoring, or MTProto API automation (use dedicated online fetchers)."
+      ],
+      "scrapedAt": "2026-09-24T11:33:06.373Z"
+    },
+    {
       "id": "antigravity-check-identity-pack",
       "name": "check-identity-pack",
       "slug": "check-identity-pack",
@@ -16691,6 +16752,34 @@
       "scrapedAt": "2026-01-27T06:45:53.708Z"
     },
     {
+      "id": "antigravity-dali-short-address-commissioner",
+      "name": "dali-short-address-commissioner",
+      "slug": "dali-short-address-commissioner",
+      "description": "Commissions DALI and DALI-2 (IEC 62386) lighting buses: short-address assignment (0-63), 24-bit binary search collision resolution, groups, and DT8 color control. Trigger phrases: commission dali, dali short address, dali collision resolution, dali bus addressing, dali-2 setup.",
+      "category": "Creative & Media",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dali-short-address-commissioner",
+      "content": "\n# DALI Short-Address Commissioner: Deterministic IEC 62386 Bus Provisioning\n\nSystematically discover, resolve address collisions, assign short addresses (0–63), program groups and scenes, configure DT8 color gear, and schedule emergency battery duration tests on DALI and DALI-2 networks per IEC 62386.\n\n## When to Use This Skill\n\nActivate this skill when:\n- Bringing up, commissioning, or expanding DALI or DALI-2 lighting installations (KNX/DALI gateways, Tridonic, Philips Dynalite, Helvar, Osram, Lunatone).\n- The user asks: \"How do I commission this DALI bus?\", \"Fix duplicate DALI short addresses\", \"Assign DALI addresses without erasing existing fixtures\", or \"Program DALI groups and DT8 tunable white\".\n- Resolving address clash loops where multiple ballasts respond simultaneously to broadcast queries.\n- Designing or scheduling DALI-2 Part 202 emergency lighting duration and function tests across staggered floor circuits.\n\nDo NOT use this skill when:\n- Commissioning DMX512/RDM stage lighting, 0–10V analog dimming, or proprietary wireless RF networks (Zigbee, Bluetooth Mesh, Casambi).\n- Diagnosing dead ballasts or physical wiring faults before basic DALI bus voltage (12V–20.5V DC) and current limits (<= 250mA) are confirmed.\n- Programming building-wide KNX logic (this skill covers the DALI protocol domain strictly).\n\n## Core Mental Models & Non-Negotiable Rules\n\n1. **The 64-Address Bus Capacity Law**:\n   - A single DALI subnet supports strictly **0 to 63 short addresses** (64 control gear units maximum).\n   - Groups are strictly bounded to **0 to 15** (16 groups).\n   - Scenes are strictly bounded to **0 to 15** (16 scenes).\n   - If an installation has 65+ ballasts, the physical bus MUST be segmented into multiple DALI subnets with separate line masters or gateways.\n\n2. **The Double-Command 100ms Transmission Invariant**:\n   - Configuration and addressing commands (INITIALISE [cmd 258], RANDOMISE [259], SET SHORT ADDRESS [267], ENABLE WRITE [cmd 32], etc.) MUST be transmitted **twice within 100ms** to be executed by control gear.\n   - Sending an addressing command only once will result in silent ignored execution by all IEC 62386 compliant gear.\n\n3. **The 15-Minute Hardware Commissioning Timer**:\n   - Transmitting `INITIALISE` (cmd 258) starts a mandatory 15-minute countdown timer inside every ballast's micro-controller.\n   - All discovery, random address binary searching, and short address assignment MUST complete within 15 minutes, or the bus must receive a periodic keep-alive `INITIALISE` refresh.\n   - Upon completion, the master MUST transmit `TERMINATE` (cmd 257) to lock operational memory and exit programming state.\n\n4. **24-Bit Random Address Binary Search ($2^{24} = 16,777,216$ Space)**:\n   - When gear enters randomizing state (`RANDOMISE`), each unit generates a pseudo-random 24-bit integer (`0x000000` to `0xFFFFFF`).\n   - The master searches the 24-bit space using `SEARCHADDRH`, `SEARCHADDRM`, `SEARCHADDRL` and `COMPARE` (cmd 265).\n   - If multiple ballasts match, the master performs binary search down to a single device.\n   - Once isolated, assign short address via `PROGRAM SHORT ADDRESS` (cmd 267) and immediately transmit `WITHDRAW` (cmd 266) so the addressed fixture drops out of remaining search iterations.\n\n5. **Physical Identify & Non-Destructive Extension Invariant**:\n   - Every assigned short address MUST be verified visually using `IDENTIFY` or toggling `RECALL MAX LEVEL` / `OFF` before committing to lighting schedules.\n   - When adding fixtures to an existing operational line, NEVER broadcast a global `INITIALISE (all)`; use `INITIALISE (without short address)` so already-commissioned ballasts (0–63) preserve their programming.\n\n## Named Sins & Anti-Patterns (Что категорически ЗАПРЕЩЕНО)\n\n| Anti-Pattern | Manifestation in Code/Workflow | Mandatory Production Counter-Rule |\n| :--- | :--- | :--- |\n| **Single-Shot Addressing Commands** | Sending cmd 258 or cmd 267 once without repetition. | Always repeat configuration commands within a strict 100ms window. |\n| **Exceeding 64 Short Addresses** | Attempting to assign address 64 or 65 on one loop. | Partition into Subnet A and Subnet B; enforce 0–63 maximum. |\n| **Timer Starvation** | Letting the 15-minute `INITIALISE` window expire mid-search. | Issue keep-alive refresh or optimize binary search loop to < 3 minutes. |\n| **Ghost Address Overwrite** | Assigning address 0 without scanning if address 0 is in use. | Run non-destructive `QUERY STATUS` (cmd 144) across 0–63 before reassigning. |\n| **Bus Overcurrent Overload** | Connecting 64 ballasts (2mA each) + sensors to a 100mA PSU. | Verify total quiescent load $\\le$ PSU rating (250mA max per IEC 62386). |\n| **DT8 / DT6 Type Mismatch** | Controlling tunable white gear with single-channel DT6 arc power. | Issue `SELECT DIMMING CURVE / COLOUR` (Part 209) and send DT8 color coordinates. |\n| **Simultaneous Emergency Discharge** | Triggering 3-hour duration tests on all emergency lights at once. | Stag",
+      "tags": [
+        "python",
+        "claude",
+        "ai",
+        "automation",
+        "workflow",
+        "design",
+        "cro"
+      ],
+      "useCases": [
+        "Bringing up, commissioning, or expanding DALI or DALI-2 lighting installations (KNX/DALI gateways, Tridonic, Philips Dynalite, Helvar, Osram, Lunatone).",
+        "The user asks: \"How do I commission this DALI bus?\", \"Fix duplicate DALI short addresses\", \"Assign DALI addresses without erasing existing fixtures\", or \"Program DALI groups and DT8 tunable white\".",
+        "Resolving address clash loops where multiple ballasts respond simultaneously to broadcast queries.",
+        "Designing or scheduling DALI-2 Part 202 emergency lighting duration and function tests across staggered floor circuits.",
+        "Commissioning DMX512/RDM stage lighting, 0–10V analog dimming, or proprietary wireless RF networks (Zigbee, Bluetooth Mesh, Casambi)."
+      ],
+      "scrapedAt": "2026-09-24T11:35:39.943Z"
+    },
+    {
       "id": "antigravity-design-it-dark-mode",
       "name": "dark-mode",
       "slug": "design-it-dark-mode",
@@ -21121,6 +21210,37 @@
       "scrapedAt": "2026-01-26T13:18:15.817Z"
     },
     {
+      "id": "antigravity-eol-resistor-calculator",
+      "name": "eol-resistor-calculator",
+      "slug": "eol-resistor-calculator",
+      "description": "Calculates and validates end-of-line (EOL, SEOL, DEOL, TEOL) resistor loops for intrusion alarm panels (Honeywell, DSC, Paradox, Bosch) with wire gauge drop and state tables. Trigger phrases: eol resistor, deol wiring, alarm zone resistor, calculate end of line, double eol tamper.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/eol-resistor-calculator",
+      "content": "\n# EOL Resistor Calculator: Precision Intrusion Loop Supervision & State Solver\n\nAccurately size, configure, and troubleshoot Single (SEOL), Double (DEOL), and Triple (TEOL) end-of-line resistor loops across major security panel architectures with copper wire drop compensation and tamper state discrimination.\n\n## When to Use This Skill\n\nActivate this skill when:\n- Sizing, retrofitting, or diagnosing hardwired security loops on alarm panels (DSC PowerSeries/Neo, Honeywell Ademco Vista, Paradox EVO/Spectra, Bosch B/G Series, Texecom Premier Elite).\n- The user asks: \"How do I wire double EOL on a DSC panel?\", \"Calculate zone loop resistance for a 200m cable run\", \"Troubleshoot a constant zone tamper fault\", or \"What resistor values does Honeywell Vista use?\".\n- Differentiating between Normal, Alarm, Tamper (Short), and Cut (Open) circuit states across varying panel threshold windows.\n- Sizing copper loop resistance drops on long perimeter runs (e.g. 22 AWG over 150+ meters) to prevent phantom false alarms.\n\nDo NOT use this skill when:\n- Designing wireless sensors or addressable polling loop multiplexers (polling loops use digital transponders, not passive EOL resistors).\n- Bypassing safety or life-safety supervision circuits (never advise strapping out resistors or bypassing line supervision).\n- Working on 2-wire smoke detector loops without consulting panel-specific smoke circuit polarity and current-limiting specs.\n\n## Core Mental Models & Non-Negotiable Rules\n\n1. **The Far-End Placement Axiom (Strict Anti-Panel Stacking)**:\n   - Resistors MUST be installed **inside the sensor housing at the farthest physical end of the cable run**.\n   - Placing resistors across screw terminals inside the alarm panel enclosure protects only the metal cabinet itself; the entire 50-meter cable run to the sensor is left vulnerable to undetected wire cuts or staple shorts.\n   - Any wiring diagram showing EOL resistors at the panel board for field sensors is flagged as a Grade 2/Grade 3 compliance violation.\n\n2. **The 4-State Double-EOL (DEOL) Truth Table**:\n   - Double EOL uses two resistors: an End-of-Line resistor ($R_{EOL}$) and an Alarm contact resistor ($R_{ALARM}$).\n   - Standard series-parallel configuration (e.g., DSC standard 5.6k / 5.6k):\n     $$\\text{Loop State} = \\begin{cases} \n     0\\ \\Omega\\ (\\text{Short Circuit}) & \\implies \\mathbf{Tamper\\ (Short)} \\\\\n     R_{EOL}\\ (5.6\\text{k}\\ \\Omega) & \\implies \\mathbf{Normal\\ (Secure)} \\\\\n     R_{EOL} + R_{ALARM}\\ (11.2\\text{k}\\ \\Omega) & \\implies \\mathbf{Alarm\\ (Tripped)} \\\\\n     \\infty\\ \\Omega\\ (\\text{Open Circuit}) & \\implies \\mathbf{Tamper\\ (Cut\\ Wire)}\n     \\end{cases}$$\n   - This provides complete supervised discrimination between intruder activation and physical sabotage.\n\n3. **Copper Wire Resistance Compensation Formula**:\n   - Long field cable runs add series loop resistance across both conductors:\n     $$R_{loop} = 2 \\times D \\times \\rho_{gauge}$$\n     where $D$ is one-way distance in meters, and $\\rho_{gauge}$ is resistance per meter:\n     - **22 AWG (0.326 mm²)**: $0.053\\ \\Omega/\\text{meter}$ ($16.14\\ \\Omega/1000\\text{ft}$)\n     - **20 AWG (0.518 mm²)**: $0.033\\ \\Omega/\\text{meter}$ ($10.15\\ \\Omega/1000\\text{ft}$)\n     - **18 AWG (0.823 mm²)**: $0.021\\ \\Omega/\\text{meter}$ ($6.38\\ \\Omega/1000\\text{ft}$)\n   - A 150m run of 22 AWG adds $2 \\times 150 \\times 0.053 \\approx 15.9\\ \\Omega$. Ensure total loop resistance does not push readings beyond the panel's $\\pm 15\\%$ ADC tolerance window.\n\n4. **Panel Reference Resistor Standards Matrix**:\n   - **DSC PowerSeries / Neo**: $5.6\\text{k}\\ \\Omega$ SEOL / $5.6\\text{k} + 5.6\\text{k}$ DEOL.\n   - **Honeywell Ademco Vista**: $2.0\\text{k}\\ \\Omega$ SEOL (Standard zones), $1.0\\text{k}$ (Zone 1 on some models).\n   - **Paradox EVO / Spectra**: $1.0\\text{k}\\ \\Omega$ SEOL / $1.0\\text{k} + 1.0\\text{k}$ DEOL (or ATZ mode with $1.0\\text{k} / 2.2\\text{k}$).\n   - **Bosch B / G Series**: Dual supervision with $1.0\\text{k} / 2.0\\text{k}$ or panel-selectable windows.\n   - **Texecom Premier Elite**: $2.2\\text{k} / 4.7\\text{k}$ or selectable Grade 3 Triple-EOL ($4.7\\text{k} / 4.7\\text{k} / 2.2\\text{k}$ anti-mask).\n\n5. **ADC Voltage Divider Acceptance Windows**:\n   - Security panels measure zone voltage through an internal pull-up resistor ($R_{pullup}$, typically $1\\text{k}$ to $3.3\\text{k}\\ \\Omega$) connected to a reference voltage ($V_{ref}$, typically $5.0\\text{V}$ or $13.8\\text{V}$).\n   - Terminal voltage is given by:\n     $$V_{zone} = V_{ref} \\times \\frac{R_{loop\\_total}}{R_{pullup} + R_{loop\\_total}}$$\n   - Always confirm whether a measured terminal voltage falls inside the manufacturer's specified ADC threshold window before replacing field hardware.\n\n## Named Sins & Anti-Patterns (Что категорически ЗАПРЕЩЕНО)\n\n| Anti-Pattern | Manifestation in Code/Workflow | Mandatory Production Counter-Rule |\n| :--- | :--- | :--- |\n| **Panel-Terminal Resistor Stacking** | Crimping EOL resistors into the screw terminals on the panel PCB. | Install resist",
+      "tags": [
+        "python",
+        "markdown",
+        "claude",
+        "ai",
+        "workflow",
+        "design",
+        "document",
+        "security",
+        "rag",
+        "seo"
+      ],
+      "useCases": [
+        "Sizing, retrofitting, or diagnosing hardwired security loops on alarm panels (DSC PowerSeries/Neo, Honeywell Ademco Vista, Paradox EVO/Spectra, Bosch B/G Series, Texecom Premier Elite).",
+        "Differentiating between Normal, Alarm, Tamper (Short), and Cut (Open) circuit states across varying panel threshold windows.",
+        "Sizing copper loop resistance drops on long perimeter runs (e.g. 22 AWG over 150+ meters) to prevent phantom false alarms.",
+        "Designing wireless sensors or addressable polling loop multiplexers (polling loops use digital transponders, not passive EOL resistors).",
+        "Bypassing safety or life-safety supervision circuits (never advise strapping out resistors or bypassing line supervision)."
+      ],
+      "scrapedAt": "2026-09-24T11:38:07.646Z"
+    },
+    {
       "id": "antigravity-error-debugging-error-analysis",
       "name": "error-debugging-error-analysis",
       "slug": "error-debugging-error-analysis",
@@ -21267,6 +21387,37 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-29T06:58:56.678Z"
+    },
+    {
+      "id": "antigravity-esl-price-sync",
+      "name": "esl-price-sync",
+      "slug": "esl-price-sync",
+      "description": "Synchronizes retail prices between ERP/POS systems and Electronic Shelf Labels (SES-imagotag, ZKONG, Pricer, Hanshow, SOLUM) with delta watermarking, idempotency, and battery modeling. Trigger phrases: esl price sync, electronic shelf labels, zkong sync, ses imagotag price, ghost pricing audit.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/esl-price-sync",
+      "content": "\n# ESL Price Sync: Deterministic Retail Shelf-Edge Pricing Architecture\n\nEnsure strict real-time parity between ERP/POS price masters and Electronic Shelf Label (ESL) fleets (SES-imagotag, ZKONG, Pricer, Hanshow, SOLUM) via bounded delta streams, monotonic idempotency tokens, and Sub-GHz RF battery preservation models.\n\n## When to Use This Skill\n\nActivate this skill when:\n- Designing, implementing, or auditing integration pipelines between enterprise retail masters (SAP, Oracle Retail, Dynamics 365, Lightspeed) and ESL server platforms.\n- The user asks: \"How do I sync price updates to ESL tags without draining batteries?\", \"Debug ghost pricing where POS doesn't match the shelf tag\", \"Design an idempotent delta feed for ZKONG or SES-imagotag\", or \"Schedule promotional pricing with automatic rollback\".\n- Reconciling price discrepancy logs between central ERP databases, ESL middleware, and wireless base station ACK telemetry.\n- Calculating battery life depletion curves for e-paper tags running on CR2450 coin cells under varying refresh frequencies.\n\nDo NOT use this skill when:\n- Managing e-commerce web store frontends or dynamic pricing algorithms (this skill governs faithful delivery of decided prices to physical tags).\n- Troubleshooting individual dead hardware tags before gateway RF coverage and RSSI signal propagation have been verified.\n- Performing live write operations on production store fleets without a preceding read-only audit verification pass.\n\n## Core Mental Models & Non-Negotiable Rules\n\n1. **The 5-Layer ESL Architecture Pipeline**:\n   - Every price synchronization event traverses five distinct operational tiers:\n     $$\\mathbf{Price\\ Master\\ (ERP/POS)} \\xrightarrow{\\text{Extract}} \\mathbf{Transform\\ Middleware} \\xrightarrow{\\text{API/Message}} \\mathbf{ESL\\ Server} \\xrightarrow{\\text{Sub-GHz/2.4GHz}} \\mathbf{Base\\ Station\\ (AP)} \\xrightarrow{\\text{RF\\ Packet}} \\mathbf{Physical\\ Tag}$$\n   - **Traceability Invariant**: Every price payload MUST carry a deterministic `trace_id` recording timestamps and status codes across all five layers. A \"200 OK\" from the ESL central server API is NEVER treated as proof that the physical shelf display has updated.\n\n2. **Strict Delta Discipline & Cryptographic Watermarking**:\n   - Pushing a full 50,000-SKU store catalog on a scheduled cron is strictly forbidden.\n   - Updates MUST be generated by calculating a cryptographic row hash:\n     $$\\text{RowHash} = \\text{SHA256}(\\text{SKU} + \\text{BasePrice} + \\text{PromoPrice} + \\text{Currency} + \\text{UnitOfMeasure} + \\text{Barcode} + \\text{TemplateID})$$\n   - Only records where $\\text{RowHash}_{new} \\neq \\text{RowHash}_{pushed}$ are queued for transmission.\n   - Full pushes are strictly restricted to initial store commissioning and disaster recovery restores.\n\n3. **Monotonic Idempotency & Out-of-Order Packet Defense**:\n   - High-volume retail message brokers inevitably deliver packets out of order during network re-balancing.\n   - Every transmission packet MUST include an `idempotency_key` and a monotonically increasing `version_timestamp` (ISO 8601 UTC).\n   - If an incoming price payload has $\\text{version\\_timestamp} \\le \\text{last\\_applied\\_version}$, the ESL middleware MUST discard the payload to eliminate race condition reversions.\n\n4. **RF Gateway Rate-Limiting & Battery Longevity Budget**:\n   - Each physical e-paper display refresh costs between $12\\ \\mu\\text{Ah}$ and $25\\ \\mu\\text{Ah}$.\n   - A dual-CR2450 battery pack provides $1,200\\text{ mAh}$ nominal capacity ($960\\text{ mAh}$ usable considering passivation and low-temperature shelf environments).\n   - **The 3-Update Daily Rule**: Limiting tag updates to $\\le 3$ refreshes per day guarantees a $5.5\\text{--}7\\text{ year}$ operational lifespan.\n   - **Base Station Queue Throttling**: Gateways operate over shared Sub-GHz (868/915 MHz) or proprietary 2.4 GHz RF channels. Batch transmissions must not exceed 150 tag updates per gateway per minute to prevent RF collision retries from draining batteries.\n\n5. **Read-Only Audit Mode by Default**:\n   - Diagnostic and reconciliation tasks MUST execute in read-only audit mode.\n   - Output discrepancy reports containing SKU, ERP Price, Gateway ACK Price, and Divergence Layer.\n   - State-changing write updates require explicit operator consent.\n\n## Named Sins & Anti-Patterns (Что категорически ЗАПРЕЩЕНО)\n\n| Anti-Pattern | Manifestation in Code/Workflow | Mandatory Production Counter-Rule |\n| :--- | :--- | :--- |\n| **Scheduled Full Catalog Floods** | Blasting 60,000 tags every night at midnight. | Stream strict deltas using SHA256 content watermarks. |\n| **Ghost Price Blindness** | Assuming API `200 OK` means the customer sees the new price. | Track gateway ACK packet receipts (`status: ACK_CONFIRMED`). |\n| **Non-Idempotent Retries** | Retrying failed HTTP calls without idempotency keys. | Attach `UUIDv5(sku, store_id, price_timestamp)` to all mutations. |\n| **Timezone Ambiguity** | Pushing promo prices without UTC/local time",
+      "tags": [
+        "python",
+        "api",
+        "claude",
+        "ai",
+        "workflow",
+        "template",
+        "design",
+        "document",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "Designing, implementing, or auditing integration pipelines between enterprise retail masters (SAP, Oracle Retail, Dynamics 365, Lightspeed) and ESL server platforms.",
+        "Reconciling price discrepancy logs between central ERP databases, ESL middleware, and wireless base station ACK telemetry.",
+        "Calculating battery life depletion curves for e-paper tags running on CR2450 coin cells under varying refresh frequencies.",
+        "Managing e-commerce web store frontends or dynamic pricing algorithms (this skill governs faithful delivery of decided prices to physical tags).",
+        "Troubleshooting individual dead hardware tags before gateway RF coverage and RSSI signal propagation have been verified."
+      ],
+      "scrapedAt": "2026-09-24T11:38:14.198Z"
     },
     {
       "id": "antigravity-ethical-hacking-methodology",
@@ -25724,37 +25875,6 @@
       "scrapedAt": "2026-07-02T09:27:52.134Z"
     },
     {
-      "id": "antigravity-github-actions",
-      "name": "github-actions",
-      "slug": "github-actions",
-      "description": "Build, test, and deploy applications using GitHub Actions workflows.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/github-actions",
-      "content": "\n# GitHub Actions\n\nAutomate software workflows directly in your GitHub repository with GitHub Actions.\n\n## When to Use This Skill\n\nUse this skill when:\n- Setting up CI/CD pipelines for GitHub repositories\n- Automating build, test, and deployment workflows\n- Creating reusable workflow components\n- Configuring self-hosted runners\n- Managing workflow secrets and variables\n- Debugging failed workflow runs\n\n## Prerequisites\n\n- GitHub repository with write access\n- Understanding of YAML syntax\n- For self-hosted runners: server with Docker (optional)\n\n## Workflow File Structure\n\nWorkflows are defined in `.github/workflows/` directory:\n\n```yaml\nname: CI Pipeline\n\non:\n  push:\n    branches: [main, develop]\n  pull_request:\n    branches: [main]\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - name: Setup Node.js\n        uses: actions/setup-node@v4\n        with:\n          node-version: '20'\n          cache: 'npm'\n      - run: npm ci\n      - run: npm test\n```\n\n## Common Triggers\n\n### Push and Pull Request\n\n```yaml\non:\n  push:\n    branches: [main]\n    paths:\n      - 'src/**'\n      - 'package.json'\n  pull_request:\n    branches: [main]\n```\n\n### Scheduled Runs\n\n```yaml\non:\n  schedule:\n    - cron: '0 2 * * *'  # Daily at 2 AM UTC\n```\n\n### Manual Dispatch\n\n```yaml\non:\n  workflow_dispatch:\n    inputs:\n      environment:\n        description: 'Deployment environment'\n        required: true\n        default: 'staging'\n        type: choice\n        options:\n          - staging\n          - production\n```\n\n## Job Configuration\n\n### Matrix Builds\n\n```yaml\njobs:\n  test:\n    runs-on: ubuntu-latest\n    strategy:\n      matrix:\n        node-version: [18, 20, 22]\n        os: [ubuntu-latest, windows-latest]\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-node@v4\n        with:\n          node-version: ${{ matrix.node-version }}\n      - run: npm test\n```\n\n### Job Dependencies\n\n```yaml\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - run: npm run build\n      \n  test:\n    needs: build\n    runs-on: ubuntu-latest\n    steps:\n      - run: npm test\n      \n  deploy:\n    needs: [build, test]\n    runs-on: ubuntu-latest\n    steps:\n      - run: ./deploy.sh\n```\n\n### Environment Protection\n\n```yaml\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    environment:\n      name: production\n      url: https://example.com\n    steps:\n      - run: ./deploy.sh\n```\n\n## Secrets and Variables\n\n### Using Secrets\n\n```yaml\nsteps:\n  - name: Deploy\n    env:\n      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}\n      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}\n    run: aws s3 sync ./dist s3://my-bucket\n```\n\n### Using Variables\n\n```yaml\nsteps:\n  - name: Build\n    env:\n      API_URL: ${{ vars.API_URL }}\n    run: npm run build\n```\n\n## Caching Dependencies\n\n```yaml\n- uses: actions/cache@v4\n  with:\n    path: ~/.npm\n    key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}\n    restore-keys: |\n      ${{ runner.os }}-node-\n```\n\n## Artifacts\n\n### Upload Artifacts\n\n```yaml\n- uses: actions/upload-artifact@v4\n  with:\n    name: build-output\n    path: dist/\n    retention-days: 5\n```\n\n### Download Artifacts\n\n```yaml\n- uses: actions/download-artifact@v4\n  with:\n    name: build-output\n    path: dist/\n```\n\n## Docker Builds\n\n```yaml\njobs:\n  docker:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      \n      - name: Login to Docker Hub\n        uses: docker/login-action@v3\n        with:\n          username: ${{ secrets.DOCKER_USERNAME }}\n          password: ${{ secrets.DOCKER_PASSWORD }}\n      \n      - name: Build and push\n        uses: docker/build-push-action@v5\n        with:\n          context: .\n          push: true\n          tags: user/app:latest\n```\n\n## Reusable Workflows\n\n### Define Reusable Workflow\n\n```yaml\n# .github/workflows/reusable-deploy.yml\nname: Reusable Deploy\n\non:\n  workflow_call:\n    inputs:\n      environment:\n        required: true\n        type: string\n    secrets:\n      deploy_key:\n        required: true\n\njobs:\n  deploy:\n    runs-on: ubuntu-latest\n    environment: ${{ inputs.environment }}\n    steps:\n      - run: echo \"Deploying to ${{ inputs.environment }}\"\n```\n\n### Call Reusable Workflow\n\n```yaml\njobs:\n  deploy-staging:\n    uses: ./.github/workflows/reusable-deploy.yml\n    with:\n      environment: staging\n    secrets:\n      deploy_key: ${{ secrets.STAGING_KEY }}\n```\n\n## Self-Hosted Runners\n\n### Register Runner\n\n```bash\n# Download runner\nmkdir actions-runner && cd actions-runner\ncurl -o actions-runner-linux-x64.tar.gz -L https://github.com/actions/runner/releases/download/v2.311.0/actions-runner-linux-x64-2.311.0.tar.gz\ntar xzf actions-runner-linux-x64.tar.gz\n\n# Configure\n./config.sh --url https://github.com/OWNER/REPO --token TOKEN\n\n# Run\n./run.sh\n```\n\n### Use Self-Hosted Runner\n\n```yaml\njobs:\n  build:\n    runs-on: self-hosted\n    steps:\n      - uses: actions/checkout@v4\n```\n\n## Debugging Workflows\n\n### Enable Debug Logging\n\nSet repository sec",
-      "tags": [
-        "node",
-        "api",
-        "ai",
-        "agent",
-        "workflow",
-        "template",
-        "security",
-        "docker",
-        "aws",
-        "cro"
-      ],
-      "useCases": [
-        "Setting up CI/CD pipelines for GitHub repositories",
-        "Automating build, test, and deployment workflows",
-        "Creating reusable workflow components",
-        "Configuring self-hosted runners",
-        "Managing workflow secrets and variables"
-      ],
-      "scrapedAt": "2026-09-20T11:10:40.389Z"
-    },
-    {
       "id": "antigravity-github-actions-advanced",
       "name": "github-actions-advanced",
       "slug": "github-actions-advanced",
@@ -25783,100 +25903,6 @@
         "User says \"my GitHub pipeline is failing\" or \"set up CI for my repo\""
       ],
       "scrapedAt": "2026-05-31T08:57:36.017Z"
-    },
-    {
-      "id": "antigravity-github-actions-debugger",
-      "name": "github-actions-debugger",
-      "slug": "github-actions-debugger",
-      "description": "Specialized skill for diagnosing, analyzing, and fixing failing GitHub Actions workflows by parsing run logs and pipeline definitions.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/github-actions-debugger",
-      "content": "\n# GitHub Actions Pipeline Debugger\n\n## Overview\n\nThis skill is designed to act as an expert CI/CD diagnostician. It focuses specifically on reading raw logs from failed GitHub Actions, identifying the root cause of the crash or failure, and outputting the precise YAML or code changes required to fix the pipeline.\n\n## When to Use\n\n- Use when a GitHub Actions workflow fails unexpectedly and the error log is long, obscure, or misleading.\n- Use when debugging dependency mismatch errors, missing secrets, caching issues, or runner environment problems in CI.\n- Use to optimize slow pipelines by identifying bottlenecks in workflow steps.\n- Use to update and modernize deprecated actions or workflow syntax.\n\n## How It Works\n\n1. **Log Ingestion & Redaction:** Analyze the provided GitHub Actions workflow log (often exported as a raw text file or pasted directly). **CRITICAL SAFETY REQUIREMENT:** The user/agent must redact all sensitive credentials, secrets, tokens, private keys, and internal system paths from the logs before pasting or uploading them.\n2. **Context Mapping:** Cross-reference the failure point with the specific step and job in the `.github/workflows/*.yml` definition.\n3. **Root Cause Analysis:** Identify if the failure is due to:\n   - Missing or misconfigured secrets (`${{ secrets.API_KEY }}`).\n   - Node/Python/OS environment version mismatches.\n   - Flaky tests or timeout limits.\n   - Syntax errors in bash scripts run within the `run:` block.\n   - Invalid action versions or deprecated actions.\n4. **Resolution Proposal:** Provide a direct `diff` of the `.yml` file or the underlying script that needs to be modified.\n\n## Best Practices\n\n- **Provide Full Context:** Always review both the workflow definition (`.yml` file) and the failure log simultaneously to ensure accurate diagnosis.\n- **Check Action Versions:** Many failures are caused by deprecated runtime versions (e.g., Node.js 16) in older third-party actions (e.g., `actions/checkout@v2`). Always recommend upgrading to the latest major versions (e.g., `v4`).\n- **Permissions Audit:** Ensure the workflow has the correct `permissions:` block if it's attempting to write to the repository, packages, or deploy environments.\n- **Reproducibility:** If a test fails in CI but passes locally, investigate environment differences such as timezone, headless browser state, memory limits, or parallel execution race conditions.\n\n## Examples\n\n### Example 1: Fixing a Deprecated Node.js Action Version Error\n**Failing Log:**\n```text\nWarning: The Go/Node.js/Python version used by this action is deprecated.\nError: Node.js 16 actions are deprecated. Please update to use Node.js 20.\n```\n\n**Proposed Fix Diff:**\n```diff\n       - name: Checkout Code\n-        uses: actions/checkout@v2\n+        uses: actions/checkout@v4\n```\n\n### Example 2: Diagnosing and Fixing a Missing Repository Secret\n**Failing Log:**\n```text\nRun npm run deploy\n  npm run deploy\n  shell: /usr/bin/bash -e {0}\nError: API Key is required for deployment. Process exited with code 1.\n```\n\n**Proposed Fix Diff:**\n```diff\n       - name: Deploy App\n         run: npm run deploy\n+        env:\n+          DEPLOY_API_KEY: ${{ secrets.DEPLOY_API_KEY }}\n```\n\n## Security & Safety Notes\n\n- **Credential Exposure & Raw Log Redaction**: Under no circumstances should raw logs containing unmasked secrets, private URLs, deployment targets, or tokens be processed without prior redaction. Always ensure the user or agent redacts all sensitive info before ingestion.\n- **Dry-Run Mode**: When recommending modifications to bash script steps inside workflows, ensure you suggest adding flags like `--dry-run` or staging execution where possible to prevent unintended side effects in downstream environments during debugging.\n\n## Limitations\n\n- The skill cannot securely read repository secrets. It can only infer missing or malformed secrets if the log complains about undefined environment variables or authentication failures.\n- It cannot execute the GitHub action itself to test the fix; validation requires pushing the proposed fix to the repository and triggering a workflow run.\n- Network-related transient failures (e.g., a package registry being down temporarily) might be incorrectly diagnosed as structural workflow issues if not carefully analyzed.\n\n## Common Pitfalls\n\n- **Ignoring Transient Failures**: Mistaking temporary network dropouts or registry downtime (e.g., npm or pip install errors) for actual code or configuration bugs. Always check if a rerun succeeds before attempting heavy changes.\n- **Hardcoding Tokens**: Fixing authentication errors by hardcoding secrets or API tokens directly into the YAML files instead of utilizing GitHub Secrets (`${{ secrets.SECRET_NAME }}`).\n- **Overlooking Caching Side Effects**: Forgetting that outdated cache keys can keep corrupt dependencies loaded. If dependency installation is failing, try running a job with actions caching bypassed.\n\n## Related Skills\n\n- `@devops-troubleshooter` - General DevOps and ",
-      "tags": [
-        "python",
-        "node",
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "automation",
-        "workflow",
-        "design",
-        "security"
-      ],
-      "useCases": [
-        "Use when a GitHub Actions workflow fails unexpectedly and the error log is long, obscure, or misleading.",
-        "Use when debugging dependency mismatch errors, missing secrets, caching issues, or runner environment problems in CI.",
-        "Use to optimize slow pipelines by identifying bottlenecks in workflow steps.",
-        "Use to update and modernize deprecated actions or workflow syntax."
-      ],
-      "scrapedAt": "2026-06-26T09:46:01.813Z"
-    },
-    {
-      "id": "antigravity-github-actions-templates",
-      "name": "github-actions-templates",
-      "slug": "github-actions-templates",
-      "description": "Production-ready GitHub Actions workflow patterns for testing, building, and deploying applications.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/github-actions-templates",
-      "content": "\n# GitHub Actions Workflow Patterns\n\n## When to Use\n\nImplement testing, matrix builds, artifact preparation or an explicitly authorized deployment workflow for an existing repository.\n\n## Inputs\n\nInspect the repository's actual scripts, lockfile, supported runtimes, required check names and release policy. Read `resources/implementation-playbook.md` and `references/common-workflows.md` before choosing job boundaries.\n\n## Test Workflow\n\nThis Node example assumes the target repository declares `npm test` and supports Node 22. Adapt the runtime and command to the actual project. The pinned action revisions are explicit review inputs; verify them before adopting or updating the template.\n\n```yaml\nname: Test\non:\n  pull_request:\n  push:\n    branches: [main]\npermissions:\n  contents: read\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: 15\n    steps:\n      - uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd\n        with:\n          persist-credentials: false\n      - uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444\n        with:\n          node-version: '22'\n          cache: npm\n      - run: npm ci\n      - run: npm test\n```\n\n## Matrix Builds\n\nAdd a matrix only for versions and operating systems the project supports. Keep dependencies reproducible, identify failing combinations, and avoid hiding failures with blanket continue-on-error. Test required-check behavior when jobs are conditionally skipped.\n\n## Build and Publication\n\nBuild an artifact from the tested commit and record its identity. Publication needs a separate trusted job with the minimum registry permission. Do not publish artifacts produced by arbitrary untrusted code in a privileged context; bind accepted artifacts to their exact source and producing workflow.\n\n## Deployment\n\nUse the project's protected release path. Identify the immutable artifact, destination, workload identity, rollout and rollback checks before adding deployment commands. A named GitHub environment does not configure reviewers automatically. Verify its actual protections. Do not label a placeholder echo command as a successful deployment.\n\n## Verification\n\nExercise one passing change and one deliberate test failure on a topic branch. Confirm the failing check prevents downstream publication. Inspect tokens, runner isolation, caches and artifact boundaries. Keep production credentials absent from untrusted validation jobs.\n\n## Example\n\nA project needs Linux and Windows tests. Select its supported runtime, add the two runner combinations and confirm that either failure blocks the required result. Prepare publication separately; do not add registry credentials to the matrix.\n\n## Limitations\n\nThis skill supplies patterns, not an installed deployment program. Repository policy, runner trust and environment settings must be inspected. Review every third-party action at its full commit SHA and treat logs and uploaded artifacts as possible data-exposure paths.\n\n## Sources\n\n- [GitHub secure workflow guidance](https://docs.github.com/en/actions/reference/security/secure-use)\n",
-      "tags": [
-        "node",
-        "ai",
-        "workflow",
-        "template",
-        "security"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:11.967Z"
-    },
-    {
-      "id": "antigravity-github-automation",
-      "name": "github-automation",
-      "slug": "github-automation",
-      "description": "Operate GitHub issues, pull requests, branches, checks, workflows, and permissions through Rube MCP. Use when GitHub work must be queried or changed programmatically with repository-policy safeguards.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/github-automation",
-      "content": "\n# GitHub Automation via Rube MCP\n\nUse Composio's GitHub toolkit through Rube MCP while preserving repository policy, exact revision identity, and branch protection.\n\n## When to Use\n\nUse for programmatic GitHub issue, pull-request, branch, Actions, deployment, collaborator, or protection tasks when Rube MCP is available. Prefer the native `gh` workflow or a repository-specific maintainer command when local repository policy requires it.\n\n## Setup\n\n1. Confirm `RUBE_SEARCH_TOOLS` is available.\n2. Search for the current GitHub tool schemas before composing calls.\n3. Use `RUBE_MANAGE_CONNECTIONS` with toolkit `github` and complete OAuth only if the connection is not active.\n4. Resolve the exact `owner/repo`; do not rely on a similarly named repository.\n\nNever request, print, or persist GitHub credentials in prompts or artifacts.\n\n## Repository Policy Gate\n\nBefore mutation, read `AGENTS.md`, contribution and maintainer docs, then inspect the default branch and effective protection. Repository-native commands and required checks take precedence over generic Rube operations.\n\nIf a repository provides a guarded merge or release command, use it instead of the generic merge tool. In `agentic-awesome-skills`, use `antigravity-maintainer-batch-release` and `npm run merge:batch` so exact-SHA review, fresh check-suite binding, and protected `main` are enforced.\n\n## Workflows\n\n### Issues\n\n1. List or search existing issues before creating a duplicate.\n2. Distinguish issues from pull requests in mixed results.\n3. Read the current item, comments, labels, and linked PRs before changing state.\n4. Create, comment, label, assign, or close only within the user's requested scope.\n5. Re-read the item and verify the resulting state.\n\nPaginate until the requested result set is complete. Treat silent omission of labels or assignees as a permissions failure, not success.\n\n### Pull requests\n\n1. Resolve the PR and capture its number, base, full head SHA, draft state, author, fork identity, and mergeability.\n2. Inspect changed files, reviews, conversations, and required check runs.\n3. Bind every review or approval decision to the current full head SHA.\n4. Create or update the PR body truthfully; never mark pending tests or reviews as completed.\n5. Immediately before merge, re-read base/head identity, branch protection, mergeability, required checks, and repository policy.\n6. Use the repository's guarded merge path. Call a generic merge tool only when policy permits it and the user authorized the merge.\n7. Verify the PR reports `MERGED` and confirm the target branch contains the intended commit.\n\nDo not treat a successful API call that enables auto-merge or queues work as an immediate merge.\n\n### Branches and references\n\n1. Resolve the source commit SHA and target ref explicitly.\n2. Create topic branches rather than updating protected/default branches directly.\n3. Reject non-fast-forward or force updates unless the user explicitly authorizes them and repository policy permits them.\n4. Confirm the remote ref after mutation.\n\nDeletion, force-push, default-branch changes, and protection changes are destructive or high-impact actions requiring explicit authorization.\n\n### Actions and deployments\n\n1. Resolve the workflow by trusted ID or path and confirm `workflow_dispatch` support before dispatch.\n2. Bind run inspection to the intended event, ref, and head SHA.\n3. Distinguish `queued`, `in_progress`, `action_required`, `completed`, and `skipped` states.\n4. Read failed job logs before proposing source changes.\n5. Wait for terminal success and verify the deployed or published surface separately.\n\nDo not approve fork workflow runs by raw run ID when the repository provides a guarded approval command.\n\n### Permissions and protection\n\n1. Read collaborators, role, branch protection, and applicable rulesets before proposing changes.\n2. Treat a 404 protection response as “not configured” only after confirming repository and branch identity.\n3. Show the exact before/after policy and impact before any protection or permission mutation.\n4. Re-read effective state after the change.\n\n## Failure Rules\n\n- Re-resolve tool schemas when Rube reports missing or changed parameters.\n- Stop on repository ambiguity, stale head/base SHA, missing permissions, incomplete pagination, or inconclusive protection state.\n- Never bypass required checks, reviews, merge queues, maintainer commands, or server-side branch protection.\n- Do not claim a merge, workflow, deployment, or permission change succeeded without reading the resulting remote state.\n\n## Example\n\n**User request:**\n\n> Operate GitHub issues, pull requests, branches, checks, workflows, and permissions through Rube MCP.\n\n## Limitations\n\n- Available Rube tool names and schemas can change; discover them at runtime.\n- GitHub permissions, organization policy, and external checks can block otherwise valid operations.\n- This skill does not authorize repository deletion, force pushes, protection changes, merges, deployme",
-      "tags": [
-        "api",
-        "mcp",
-        "ai",
-        "agent",
-        "automation",
-        "workflow"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-19T07:11:40.710Z"
-    },
-    {
-      "id": "antigravity-github-issue-creator",
-      "name": "github-issue-creator",
-      "slug": "github-issue-creator",
-      "description": "Turn error logs, screenshots, voice notes, and rough bug reports into crisp, developer-ready GitHub issues with repro steps, impact, and evidence.",
-      "category": "Creative & Media",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/github-issue-creator",
-      "content": "\n# GitHub Issue Creator\n\nTransform messy input (error logs, voice notes, screenshots) into clean, actionable GitHub issues.\n\n## Output Template\n\n```markdown\n## Summary\n[One-line description of the issue]\n\n## Environment\n- **Product/Service**: \n- **Region/Version**: \n- **Browser/OS**: (if relevant)\n\n## Reproduction Steps\n1. [Step]\n2. [Step]\n3. [Step]\n\n## Expected Behavior\n[What should happen]\n\n## Actual Behavior\n[What actually happens]\n\n## Error Details\n```\n[Error message/code if applicable]\n```\n\n## Visual Evidence\n[Reference to attached screenshots/GIFs]\n\n## Impact\n[Severity: Critical/High/Medium/Low + brief explanation]\n\n## Additional Context\n[Any other relevant details]\n```\n\n## Output Location\n\n**Create issues as markdown files** in `/issues/` directory at the repo root. Use naming convention: `YYYY-MM-DD-short-description.md`\n\n## Guidelines\n\n**Be crisp**: No fluff. Every word should add value.\n\n**Extract structure from chaos**: Voice dictation and raw notes often contain the facts buried in casual language. Pull them out.\n\n**Infer missing context**: If user mentions \"same project\" or \"the dashboard\", use context from conversation or memory to fill in specifics.\n\n**Placeholder sensitive data**: Use `[PROJECT_NAME]`, `[USER_ID]`, etc. for anything that might be sensitive.\n\n**Match severity to impact**:\n- Critical: Service down, data loss, security issue\n- High: Major feature broken, no workaround\n- Medium: Feature impaired, workaround exists\n- Low: Minor inconvenience, cosmetic\n\n**Image/GIF handling**: Reference attachments inline. Format: `!Description`\n\n## Examples\n\n**Input (voice dictation)**:\n> so I was trying to deploy the agent and it just failed silently no error nothing the workflow ran but then poof gone from the list had to refresh and try again three times\n\n**Output**:\n```markdown\n## Summary\nAgent deployment fails silently - no error displayed, agent disappears from list\n\n## Environment\n- **Product/Service**: Azure AI Foundry\n- **Region/Version**: westus2\n\n## Reproduction Steps\n1. Navigate to agent deployment\n2. Configure and deploy agent\n3. Observe workflow completes\n4. Check agent list\n\n## Expected Behavior\nAgent appears in list with deployment status, errors shown if deployment fails\n\n## Actual Behavior\nAgent disappears from list. No error message. Requires page refresh and retry.\n\n## Impact\n**High** - Blocks agent deployment workflow, no feedback on failure cause\n\n## Additional Context\nRequired 3 retry attempts before successful deployment\n```\n\n---\n\n**Input (error paste)**:\n> Error: PERMISSION_DENIED when publishing to Teams channel. Code: 403. Was working yesterday.\n\n**Output**:\n```markdown\n## Summary\n403 PERMISSION_DENIED error when publishing to Teams channel\n\n## Environment\n- **Product/Service**: Copilot Studio → Teams integration\n- **Region/Version**: [REGION]\n\n## Reproduction Steps\n1. Configure agent for Teams channel\n2. Attempt to publish\n\n## Expected Behavior\nAgent publishes successfully to Teams channel\n\n## Actual Behavior\nReturns `PERMISSION_DENIED` with code 403\n\n## Error Details\n```\nError: PERMISSION_DENIED\nCode: 403\n```\n\n## Impact\n**High** - Blocks Teams integration, regression from previous working state\n\n## Additional Context\nWas working yesterday - possible permission/config change or service regression\n```\n\n## When to Use\nUse this skill when you have unstructured bug input such as pasted errors, support notes, screenshots, or voice dictation and need to turn it into a clean GitHub issue with a summary, reproduction steps, expected vs actual behavior, impact, and attachment references.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "markdown",
-        "ai",
-        "agent",
-        "workflow",
-        "template",
-        "image",
-        "security",
-        "azure"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-14T07:05:31.224Z"
     },
     {
       "id": "antigravity-design-it-glassmorphism",
@@ -27836,14 +27862,14 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 394
+      "count": 391
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 356
+      "count": 358
     },
     {
       "id": "creative-media",
@@ -27857,7 +27883,7 @@
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 114
+      "count": 115
     },
     {
       "id": "security-systems",
@@ -27908,28 +27934,28 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 15,
       "newSkillCount": 0,
-      "stars": 290411
+      "stars": 290970
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 177749
+      "stars": 177892
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 75522
+      "stars": 75579
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 88957
+      "stars": 89047
     },
     {
       "name": "Awesome LLM",
@@ -27942,8 +27968,8 @@
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
-      "newSkillCount": 6,
-      "stars": 46815
+      "newSkillCount": 11,
+      "stars": 46858
     },
     {
       "name": "Xquik",
@@ -27953,10 +27979,10 @@
       "stars": 205
     }
   ],
-  "lastUpdated": "2026-09-23T11:25:39.878Z",
+  "lastUpdated": "2026-09-24T11:40:24.696Z",
   "stats": {
     "totalSkills": 1137,
-    "newSkills": 15,
-    "scrapedAt": "2026-09-23T11:25:39.878Z"
+    "newSkills": 20,
+    "scrapedAt": "2026-09-24T11:40:24.696Z"
   }
 }
