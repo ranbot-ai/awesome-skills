@@ -22908,6 +22908,32 @@
       "scrapedAt": "2026-03-07T06:54:39.079Z"
     },
     {
+      "id": "antigravity-film-crew",
+      "name": "film-crew",
+      "slug": "film-crew",
+      "description": "Turn a one-line AI video idea into a shot list and per-shot, model-ready prompts via a film crew (director, DP, gaffer, editor, script supervisor). Also fixes failing video prompts and diagnoses bad clips before a reroll. Works with Wan, LTX, Kling, Veo, Seedance, Hailuo, Runway.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/film-crew",
+      "content": "\n# Film Crew\n\nYou are the producer. You don't write one prompt and hope. You run the idea past a crew,\neach with one job, then hand the user a shot list and one prompt per shot that a video\nmodel can actually execute.\n\nMost failed AI video clips fail for boring, fixable reasons: two actions in one clip,\nno camera instruction, a subject described differently in every shot, physics the model\ncan't do in 5 seconds, or a prompt that describes a *feeling* instead of a *frame*.\nThe crew exists to catch those before generation, and to diagnose them after.\n\n## When to Use This Skill\n\n- Use when someone wants to plan an AI video (ad, short, music video intro) before generating clips.\n- Use when a text-to-video or image-to-video prompt keeps failing and needs a diagnosis and rewrite.\n- Use after a bad generation to decide the one change to make before the next reroll.\n- Do not use it to generate, edit or render video; it produces planning documents and prompts only.\n\n## Modes\n\nPick the mode from the request. Default is **Plan**.\n\n| Mode | When | Output |\n|---|---|---|\n| **Plan** | \"make a video of…\", an idea, a script, a product | `SHOT_LIST.md` + per-shot prompts |\n| **Fix** | user pastes a prompt that isn't working | diagnosis + rewritten prompt |\n| **Review** | user describes or shares a generated clip | what went wrong + the one change to make before the next reroll |\n\n## Plan mode\n\n### 0. Intake (keep it short)\n\nOnly ask what you can't reasonably default. Ask at most 3 questions, in one message.\nIf the user said \"just go\", use the defaults.\n\n| Field | Default |\n|---|---|\n| Platform / aspect | 9:16 vertical, short-form feed |\n| Total length | 15 s |\n| Target model | model-agnostic (write the generic adapter) |\n| Mode per shot | text-to-video, unless the user has a reference image. **Real product or real person → ask for a photo and use image-to-video**; text-to-video invents a different mug. |\n| Audio | none in the prompt, unless the target model generates audio *and* the user wants it in-model (otherwise add it in the edit) |\n\n### 1. Run the crew, in order\n\nRead each role file before running that role. Each role writes its own short section.\nKeep every section terse: the output is a production document, not an essay.\n\n1. **Director** → `references/roles/director.md` — logline, intent, beat sheet with timings, the hook.\n2. **Production designer** → `references/roles/production-designer.md` — the *continuity bible*: locked descriptors for every recurring character, prop and location.\n3. **Director of photography** → `references/roles/dp.md` — per shot: size, lens, angle, height, ONE camera move.\n4. **Gaffer** → `references/roles/gaffer.md` — time of day, key direction, color temperature, practicals, contrast.\n5. **Editor** → `references/roles/editor.md` — shot durations that fit the model's clip length, cut types, first-frame hook, ending.\n6. **Sound** → `references/roles/sound.md` — only if the target model generates audio, or the user will add music/SFX in the edit.\n7. **Script supervisor** → `references/roles/script-supervisor.md` — continuity + feasibility + \"unslop\" pass. Has veto power: any shot it flags gets rewritten before output.\n\n### 2. Write the prompts\n\nRead `references/model-prompting.md`. For each shot, assemble the prompt from the crew's\ndecisions in this order, then run it through the target model's adapter:\n\n```\n[shot size + lens + camera move] of [subject, verbatim from the continuity bible]\n[doing ONE visible action, present tense], in [location, verbatim from the bible].\n[lighting from the gaffer]. [style / film look]. [audio line, only if supported]\n```\n\nThis order is the generic default. When the target model's adapter specifies a different\norder, **the adapter wins**.\n\nRules that apply to every model:\n- One subject action and one camera move per shot. Two actions = two shots.\n- Paste continuity descriptors **verbatim** in every shot: the FULL version when the whole subject is in frame, the TIGHT version for close-ups. Never paraphrase either.\n- Describe what the camera sees, not what the viewer should feel. \"Tense\" is not a frame; \"sweat on the upper lip, jaw clenched, eyes on the door\" is.\n- No on-screen text, logos or readable signage unless the model is known to render text. Add text in the edit.\n- Keep each shot within the model's max clip length (see adapter). Plan for 1–2 s of handles.\n- Image-to-video: describe only motion and camera. Don't re-describe what's already in the image.\n\n### 3. Output\n\nWrite `SHOT_LIST.md` using `references/templates/shot-list.md`. If the user is working in a repo\nor folder, save it there; otherwise print it. Include:\n- the crew sections (short),\n- the shot table,\n- one copy-paste prompt block per shot (plus negative prompt where the model supports it),\n- a **reroll plan**: for each shot, the most likely failure and what to change if it happens.\n\nEnd with one line telling the user which shot is highest-risk and why.\n\n## Fix mode\n\n1. Read `references/roles/",
+      "tags": [
+        "claude",
+        "ai",
+        "template",
+        "design",
+        "document",
+        "image"
+      ],
+      "useCases": [
+        "Use when someone wants to plan an AI video (ad, short, music video intro) before generating clips.",
+        "Use when a text-to-video or image-to-video prompt keeps failing and needs a diagnosis and rewrite.",
+        "Use after a bad generation to decide the one change to make before the next reroll.",
+        "Do not use it to generate, edit or render video; it produces planning documents and prompts only."
+      ],
+      "scrapedAt": "2026-09-25T11:44:50.197Z"
+    },
+    {
       "id": "antigravity-find-bugs",
       "name": "find-bugs",
       "slug": "find-bugs",
@@ -25875,36 +25901,6 @@
       "scrapedAt": "2026-07-02T09:27:52.134Z"
     },
     {
-      "id": "antigravity-github-actions-advanced",
-      "name": "github-actions-advanced",
-      "slug": "github-actions-advanced",
-      "description": "Design, debug, and harden GitHub Actions CI/CD workflows, including reusable workflows, matrix builds, self-hosted runners, OIDC authentication, caching, environments, secrets, and release automation.\n",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/github-actions-advanced",
-      "content": "\n# GitHub Actions Advanced Skill\n\nExpert guidance for designing, writing, debugging, and securing **production-grade** GitHub Actions workflows.\n\n---\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use This Skill\n\n- User mentions GitHub Actions, `.github/workflows`, CI/CD pipelines, runners, jobs, steps, or actions\n- User wants to automate builds, tests, deployments, or releases via GitHub\n- User asks about matrix builds, reusable workflows, composite actions, or self-hosted runners\n- User needs help with OIDC authentication, caching strategies, or secrets management\n- User says \"my GitHub pipeline is failing\" or \"set up CI for my repo\"\n- User asks about workflow security, hardening, or environment protection rules\n\n## When NOT to Use This Skill\n\n- The user is working with GitLab CI/CD → recommend `gitlab-ci-patterns`\n- The user is working with CircleCI, Jenkins, or other CI platforms\n- The task is purely about Docker image building without GitHub context → recommend `docker-expert`\n- The task is about Kubernetes deployment configuration → recommend `kubernetes-architect`\n\n---\n\n## Security Hardening\n\n### 1. Always Declare Permissions (Least Privilege)\n\n```yaml\n# Workflow-level default — restrict everything\npermissions:\n  contents: read\n\njobs:\n  publish:\n    # Job-level override — only expand what's needed\n    permissions:\n      contents: write        # Only for release/publish jobs\n      packages: write        # Only for container push jobs\n      pull-requests: write   # Only for PR comment jobs\n      id-token: write        # Only for OIDC auth jobs\n```\n\n### 2. Pin Third-Party Actions to Full Commit SHA\n\n```yaml\n# ❌ UNSAFE — tag can be mutated or hijacked\n- uses: actions/checkout@v4\n\n# ✅ SAFE — commit SHA is immutable\n- uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2\n\n# Tool to automate SHA pinning:\n# npx pin-github-action .github/workflows/*.yml\n# or: pip install ratchet && ratchet pin .github/workflows/\n```\n\n### 3. Prevent Script Injection\n\n```yaml\n# ❌ UNSAFE — attacker controls PR title, which gets expanded in shell\n- run: echo \"${{ github.event.pull_request.title }}\"\n\n# ✅ SAFE — pass through environment variable (shell doesn't evaluate it)\n- env:\n    PR_TITLE: ${{ github.event.pull_request.title }}\n  run: echo \"$PR_TITLE\"\n\n# ✅ SAFE — expressions in if: conditions are evaluated by Actions, not shell\n- if: github.event.pull_request.draft == false\n  run: echo \"Not a draft\"\n```\n\nNever place `${{ ... }}` directly inside `run:` when the value can come from\nPR metadata, workflow inputs, repository files, matrix JSON, or earlier job\noutputs. Put it in `env:` first, validate allowlisted values where possible, and\nreference the shell variable with quotes.\n\n### 4. Restrict `pull_request_target` Usage\n\n```yaml\n# Only run when a maintainer adds a specific label — prevents untrusted execution\non:\n  pull_request_target:\n    types: [labeled]\n\njobs:\n  validate:\n    # Double-guard: check label name AND author_association\n    if: |\n      github.event.label.name == 'safe-to-test' &&\n      (github.event.pull_request.author_association == 'COLLABORATOR' ||\n       github.event.pull_request.author_association == 'MEMBER' ||\n       github.event.pull_request.author_association == 'OWNER')\n```\n\n### 5. Harden with StepSecurity\n\n```yaml\n# Add to every workflow — hardens runner, monitors outbound traffic\n- uses: step-security/harden-runner@4d991eb9995541a0b71d1b66f1f98a5f1bef422c  # v2.11.0\n  with:\n    egress-policy: audit          # Start with 'audit', move to 'block' after confirming allowlist\n    allowed-endpoints: >\n      api.github.com:443\n      registry.npmjs.org:443\n      objects.githubusercontent.com:443\n```\n\n---\n\n## Limitations\n\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Always test reusable workflows in a feature branch before merging to main.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "api",
-        "ai",
-        "automation",
-        "workflow",
-        "design",
-        "image",
-        "security",
-        "docker",
-        "kubernetes"
-      ],
-      "useCases": [
-        "User mentions GitHub Actions, `.github/workflows`, CI/CD pipelines, runners, jobs, steps, or actions",
-        "User wants to automate builds, tests, deployments, or releases via GitHub",
-        "User asks about matrix builds, reusable workflows, composite actions, or self-hosted runners",
-        "User needs help with OIDC authentication, caching strategies, or secrets management",
-        "User says \"my GitHub pipeline is failing\" or \"set up CI for my repo\""
-      ],
-      "scrapedAt": "2026-05-31T08:57:36.017Z"
-    },
-    {
       "id": "antigravity-design-it-glassmorphism",
       "name": "glassmorphism",
       "slug": "design-it-glassmorphism",
@@ -27862,14 +27858,14 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 391
+      "count": 390
     },
     {
       "id": "document-processing",
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 358
+      "count": 359
     },
     {
       "id": "creative-media",
@@ -27934,42 +27930,42 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 15,
       "newSkillCount": 0,
-      "stars": 290970
+      "stars": 291410
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 177892
+      "stars": 178062
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 75579
+      "stars": 75613
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 89047
+      "stars": 89132
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1760
+      "stars": 1761
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
-      "newSkillCount": 11,
-      "stars": 46858
+      "newSkillCount": 7,
+      "stars": 46889
     },
     {
       "name": "Xquik",
@@ -27979,10 +27975,10 @@
       "stars": 205
     }
   ],
-  "lastUpdated": "2026-09-24T11:40:24.696Z",
+  "lastUpdated": "2026-09-25T11:46:17.250Z",
   "stats": {
     "totalSkills": 1137,
-    "newSkills": 20,
-    "scrapedAt": "2026-09-24T11:40:24.696Z"
+    "newSkills": 16,
+    "scrapedAt": "2026-09-25T11:46:17.250Z"
   }
 }
