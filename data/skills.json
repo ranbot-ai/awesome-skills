@@ -20763,6 +20763,37 @@
       "scrapedAt": "2026-03-14T07:01:15.096Z"
     },
     {
+      "id": "antigravity-electron-drive-skill",
+      "name": "electron-drive-skill",
+      "slug": "electron-drive-skill",
+      "description": "Launch the project's Electron app on a scratch profile and drive it: click, type, screenshot, run renderer or main-process code, read logs. Use to verify UI changes end to end.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/electron-drive-skill",
+      "content": "\n# Driving the Electron app\n\n## Overview\n\n`scripts/drive.mjs` launches the project's Electron app under Playwright in a\nbackground daemon and keeps it running between commands, so each action\n(click, type, snapshot, screenshot, eval) is one fast shell call. Every launch\nuses a scratch profile, so the agent can check a UI change or reproduce a bug\nin the real app, not only in unit tests, without touching the user's data.\n\n## When to Use This Skill\n\n- Use when you need to verify a UI change in the running Electron app.\n- Use when reproducing a renderer or startup bug, or a failure that only\n  shows up in the production build (for example a stricter CSP).\n- Use when checking first-run, onboarding or settings screens.\n- Use when exercising a feature end to end, including IPC through the preload\n  bridge or code in the main process.\n- Do not use it for web apps without Electron, or for multi-window flows (see\n  Limitations).\n\n## How It Works\n\n### Step 1: Check prerequisites\n\n`scripts/drive.mjs`, in this skill's directory, finds the project by the\nnearest `package.json`, so run it from anywhere inside the project. Set `DR`\nto its absolute path.\n\nIt needs `electron` and `playwright-core` (1.49 or later) installed in the\nproject. If `start` says either is missing, tell the user rather than\ninstalling it yourself. Launch settings come from `drive.config.json` at the\nproject root (see Step 4); with no file, it runs `electron .`.\n\n### Step 2: Start, look, act, stop\n\n```bash\nDR=<this skill's directory>/scripts/drive.mjs\n\n$DR start                  # last build, profile 'default'; prints status\n$DR snapshot               # accessibility tree: find what to click, by role and name\n$DR click 'role=button[name=\"Get started\"]'\n$DR fill 'role=textbox[name=\"Email\"]' 'test@example.com'\n$DR wait 'text=Welcome'\n$DR screenshot             # prints a PNG path; Read it to see the window\n$DR logs --lines 80        # main and renderer console, plus the config's logFile\n$DR stop                   # ALWAYS, before finishing\n```\n\n- **Start options:**\n  - `--build`: run the config's `build` command first. **Needed after any\n    source change** if the app runs from a build, because the build is\n    otherwise stale; `start` prints its age.\n  - `--fresh`: wipe the scratch profile, which gives you the app's first-run\n    state.\n  - `--profile <name>`: a separate scratch profile.\n  - `--dev`: see Step 5.\n- **Targets** are Playwright selectors. Prefer `role=button[name=\"…\"]` from\n  `snapshot` output, then `text=…`, then CSS.\n- **`--`** ends the flags. Put it before text that starts with dashes:\n  `$DR fill 'role=textbox[name=\"Args\"]' -- --verbose`.\n- Other commands: `select <target> <value|label>`, `press <key>`,\n  `status`, `screenshot --selector <css>`. `$DR help` lists everything.\n\n### Step 3: Run code in the app\n\n**`eval <js>`** runs in the renderer, **`main <js>`** in the main process\n(`electron` and `process` are in scope, `require` is not). Use a bare\nexpression, or a body with `return`. `-` reads the code from stdin, which\navoids quoting entirely. The result comes back as JSON, so return plain data:\na DOM node or a function comes back as `undefined` or `{}`.\n\nTo exercise IPC, call whatever the app's preload exposes through `eval`. That\ngoes through the real preload bridge, as the app's own renderer code does.\n\n### Step 4: Configure the launch (optional)\n\n`drive.config.json` at the project root; every field is optional:\n\n```json\n{\n  \"build\": \"npm run build\",\n  \"args\": [\".\"],\n  \"env\": { \"APP_DATA_DIR\": \"{profile}/data\" },\n  \"logFile\": \"logs/main.log\",\n  \"dev\": {\n    \"args\": [\".\"],\n    \"env\": { \"ELECTRON_RENDERER_URL\": \"http://localhost:5173\" },\n    \"url\": \"http://localhost:5173\"\n  }\n}\n```\n\n- `args`: what Electron is launched with: an app directory whose\n  `package.json` `main` is the built entry point, or the entry file itself.\n- `env`: added to the app's environment. `{profile}` becomes the scratch\n  profile directory (in `env` values only, not in `args`). This is how data\n  kept outside `userData` is redirected: `APP_DATA_DIR` is only an example\n  name, and it has an effect only if the app reads it. Check the app's source\n  for the variable it actually uses.\n- `logFile`: a log file relative to the profile directory, shown by `logs`.\n\nIf a project has no config and `start` fails or launches the wrong thing,\nwork out these values from the project's `package.json` and build setup,\nthen suggest a `drive.config.json` to the user.\n\n### Step 5: Dev mode (optional)\n\nFor a fast loop on renderer code, with hot reload and source maps:\n\n1. The user (or a background Bash call) starts the renderer dev server\n   **without** its own Electron. Many templates' `start`/`dev` scripts launch\n   Electron too, and two instances would share state. The config's\n   `dev.url` is checked before launch.\n2. `$DR start --dev` launches Electron with `dev.args` and `dev.env`, and\n   `NODE_ENV=development`.\n\n## Examples\n\n### Example 1: Verify a change to the first-run s",
+      "tags": [
+        "javascript",
+        "node",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "automation",
+        "template",
+        "design",
+        "document"
+      ],
+      "useCases": [
+        "Use when you need to verify a UI change in the running Electron app.",
+        "Use when reproducing a renderer or startup bug, or a failure that only",
+        "Use when checking first-run, onboarding or settings screens.",
+        "Use when exercising a feature end to end, including IPC through the preload",
+        "Do not use it for web apps without Electron, or for multi-window flows (see"
+      ],
+      "scrapedAt": "2026-09-26T11:20:07.429Z"
+    },
+    {
       "id": "antigravity-elixir-pro",
       "name": "elixir-pro",
       "slug": "elixir-pro",
@@ -25846,37 +25877,6 @@
       "scrapedAt": "2026-01-26T13:18:51.993Z"
     },
     {
-      "id": "antigravity-git-workflow",
-      "name": "git-workflow",
-      "slug": "git-workflow",
-      "description": "Implement Git branching strategies, PR workflows, and release management patterns.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/git-workflow",
-      "content": "\n# Git Workflow\n\nImplement effective branching strategies and pull request workflows for team collaboration.\n\n## When to Use This Skill\n\nUse this skill when:\n- Establishing team Git workflows\n- Implementing branching strategies\n- Configuring pull request processes\n- Setting up release management\n- Improving code review practices\n\n## Prerequisites\n\n- Git installed\n- Repository hosting (GitHub, GitLab, Bitbucket)\n- Basic Git knowledge\n\n## Branching Strategies\n\n### Trunk-Based Development\n\nBest for: Continuous deployment, small teams, mature CI/CD\n\n```\nmain ─────●─────●─────●─────●─────●─────●─────●\n          │     │     │     │     │     │\n          └─●   └─●   └─●   └─●   └─●   └─●\n         feature branches (short-lived)\n```\n\n```bash\n# Create short-lived feature branch\ngit checkout main\ngit pull origin main\ngit checkout -b feature/add-login\n\n# Work and commit frequently\ngit add .\ngit commit -m \"feat: add login form\"\n\n# Keep branch updated\ngit fetch origin\ngit rebase origin/main\n\n# Merge quickly (same day ideally)\ngit checkout main\ngit pull origin main\ngit merge feature/add-login\ngit push origin main\ngit branch -d feature/add-login\n```\n\n### GitHub Flow\n\nBest for: Continuous delivery, web applications\n\n```\nmain ─────●─────●───────────●─────────────●─────●\n          │           ↑           ↑       ↑\n          └───●───●───┘           │       │\n              feature/login       │       │\n                                  │       │\n          └───●───●───●───●───────┘       │\n              feature/dashboard           │\n                                          │\n          └───●─────────────────────────┘\n              hotfix/security-patch\n```\n\n```bash\n# Create feature branch from main\ngit checkout main\ngit pull origin main\ngit checkout -b feature/user-dashboard\n\n# Push and create PR\ngit push -u origin feature/user-dashboard\n\n# After review, merge via PR (squash recommended)\n# Delete branch after merge\n```\n\n### GitFlow\n\nBest for: Scheduled releases, versioned products\n\n```\nmain     ────────●────────────────●──────────────●\n                 ↑                ↑              ↑\nrelease  ────────┼────●───●──────┼──────────────┼\n                 │    │   │      │              │\ndevelop  ───●────●────┼───●──●───●───●───●───●──┼\n            │         │      │       │   │      │\nfeature  ───┴─────────┘      │       │   │      │\n                             │       │   │      │\nhotfix   ────────────────────┴───────┼───┼──────┘\n                                     │   │\nfeature  ────────────────────────────┴───┘\n```\n\n```bash\n# Initialize GitFlow\ngit flow init\n\n# Start feature\ngit flow feature start user-auth\n\n# Finish feature (merges to develop)\ngit flow feature finish user-auth\n\n# Start release\ngit flow release start 1.0.0\n\n# Finish release (merges to main and develop)\ngit flow release finish 1.0.0\n\n# Hotfix\ngit flow hotfix start security-fix\ngit flow hotfix finish security-fix\n```\n\n## Commit Conventions\n\n### Conventional Commits\n\n```\n<type>(<scope>): <description>\n\n[optional body]\n\n[optional footer(s)]\n```\n\nTypes:\n- `feat`: New feature\n- `fix`: Bug fix\n- `docs`: Documentation\n- `style`: Formatting\n- `refactor`: Code restructuring\n- `test`: Adding tests\n- `chore`: Maintenance\n\nExamples:\n```bash\ngit commit -m \"feat(auth): add OAuth2 login support\"\ngit commit -m \"fix(api): handle null response from payment service\"\ngit commit -m \"docs: update API documentation for v2 endpoints\"\ngit commit -m \"refactor(db): optimize user query performance\"\n\n# Breaking change\ngit commit -m \"feat(api)!: change response format for user endpoint\n\nBREAKING CHANGE: The user endpoint now returns an object instead of array\"\n```\n\n### Commit Message Template\n\n```bash\n# Create template file ~/.gitmessage\n# Subject line (50 chars max)\n\n# Body (72 chars per line max)\n# - What changed\n# - Why it changed\n# - Any side effects\n\n# Footer\n# Fixes #123\n# Co-authored-by: Name <email>\n\n# Configure Git to use template\ngit config --global commit.template ~/.gitmessage\n```\n\n## Pull Request Workflow\n\n### PR Template\n\n```markdown\n<!-- .github/pull_request_template.md -->\n## Description\nBrief description of changes\n\n## Type of Change\n- [ ] Bug fix (non-breaking change)\n- [ ] New feature (non-breaking change)\n- [ ] Breaking change\n- [ ] Documentation update\n\n## Testing\n- [ ] Unit tests added/updated\n- [ ] Integration tests added/updated\n- [ ] Manual testing performed\n\n## Checklist\n- [ ] Code follows project style guidelines\n- [ ] Self-review performed\n- [ ] Documentation updated\n- [ ] No new warnings introduced\n\n## Related Issues\nCloses #\n\n## Screenshots (if applicable)\n```\n\n### Branch Protection Rules\n\n```yaml\n# GitHub branch protection\nbranch_protection:\n  branch: main\n  required_pull_request_reviews:\n    required_approving_review_count: 1\n    dismiss_stale_reviews: true\n    require_code_owner_reviews: true\n  required_status_checks:\n    strict: true\n    contexts:\n      - \"ci/tests\"\n      - \"ci/lint\"\n  restrictions:\n    users: []\n    teams: [\"maintainers\"]\n  enforce_admins:",
-      "tags": [
-        "javascript",
-        "markdown",
-        "api",
-        "ai",
-        "agent",
-        "automation",
-        "workflow",
-        "template",
-        "document",
-        "security"
-      ],
-      "useCases": [
-        "Establishing team Git workflows",
-        "Implementing branching strategies",
-        "Configuring pull request processes",
-        "Setting up release management",
-        "Improving code review practices"
-      ],
-      "scrapedAt": "2026-09-20T11:10:38.176Z"
-    },
-    {
       "id": "antigravity-git-workflow-and-versioning",
       "name": "git-workflow-and-versioning",
       "slug": "git-workflow-and-versioning",
@@ -27731,15 +27731,15 @@
       "source": "superpowers",
       "repoUrl": "https://github.com/obra/superpowers",
       "skillUrl": "https://github.com/obra/superpowers/tree/main/skills/writing-plans",
-      "content": "\n# Writing Plans\n\n## Overview\n\nWrite comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.\n\nAssume they are a skilled developer, but know almost nothing about our toolset or problem domain. Assume they don't know good test design very well.\n\n**Announce at start:** \"I'm using the writing-plans skill to create the implementation plan.\"\n\n**Context:** If working in an isolated worktree, it should have been created via the `superpowers:using-git-worktrees` skill at execution time.\n\n**Save plans to:** `docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md`\n- (User preferences for plan location override this default)\n\n## Scope Check\n\nIf the spec covers multiple independent subsystems, it should have been broken into sub-project specs during brainstorming. If it wasn't, suggest breaking this into separate plans — one per subsystem. Each plan should produce working, testable software on its own.\n\n## File Structure\n\nBefore defining tasks, map out which files will be created or modified and what each one is responsible for. This is where decomposition decisions get locked in.\n\n- Design units with clear boundaries and well-defined interfaces. Each file should have one clear responsibility.\n- You reason best about code you can hold in context at once, and your edits are more reliable when files are focused. Prefer smaller, focused files over large ones that do too much.\n- Files that change together should live together. Split by responsibility, not by technical layer.\n- In existing codebases, follow established patterns. If the codebase uses large files, don't unilaterally restructure - but if a file you're modifying has grown unwieldy, including a split in the plan is reasonable.\n\nThis structure informs the task decomposition. Each task should produce self-contained changes that make sense independently.\n\n## Task Right-Sizing\n\nA task is the smallest unit that carries its own test cycle and is worth a\nfresh reviewer's gate. When drawing task boundaries: fold setup,\nconfiguration, scaffolding, and documentation steps into the task whose\ndeliverable needs them; split only where a reviewer could meaningfully\nreject one task while approving its neighbor. Each task ends with an\nindependently testable deliverable.\n\n## Bite-Sized Task Granularity\n\n**Each step is one action (2-5 minutes):**\n- \"Write the failing test\" - step\n- \"Run it to make sure it fails\" - step\n- \"Implement the minimal code to make the test pass\" - step\n- \"Run the tests and make sure they pass\" - step\n- \"Commit\" - step\n\n## Plan Document Header\n\n**Every plan MUST start with this header:**\n\n```markdown\n# [Feature Name] Implementation Plan\n\n> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.\n\n**Goal:** [One sentence describing what this builds]\n\n**Architecture:** [2-3 sentences about approach]\n\n**Tech Stack:** [Key technologies/libraries]\n\n**Spec:** [path to the spec/design doc this plan implements — the plan\nargues from the spec, so the spec travels with it; executors read both]\n\n## Global Constraints\n\n[The spec's project-wide requirements — version floors, dependency limits,\nnaming and copy rules, platform requirements — one line each, with exact\nvalues copied verbatim from the spec. Every task's requirements implicitly\ninclude this section.]\n\n## Review Focus\n\n[The five input classes or failure modes the spec implies but no task's\ntests exercise that are most likely to bite a person using this software\n— one line each, naming the input or condition and the behavior a\nreasonable person would expect, most likely first. The spec is a vision\ndocument: it says what the software must do, not everything it will\nmeet, and its silence on an input is not permission for that input to\nbreak the program. Write the list here, once, with the spec in front of\nyou. Then, for each line, add the test that pins it to the task that\nowns the code, in that task's own step style.]\n\n---\n```\n\n## Task Structure\n\n````markdown\n### Task N: [Component Name]\n\n**Files:**\n- Create: `exact/path/to/file.py`\n- Modify: `exact/path/to/existing.py:123-145`\n- Test: `tests/exact/path/to/test.py`\n\n**Interfaces:**\n- Consumes: [what this task uses from earlier tasks — exact signatures]\n- Produces: [what later tasks rely on — exact function names, parameter\n  and return types. A task's implementer sees only their own task; this\n  block is how they learn the names and types neighboring tasks use.]\n\n- [ ] **Step 1: Write the failing test**\n\n```python\ndef test_specific_behavior():\n    result = function(input)\n    assert result == expected\n```\n\n- [ ] **Step 2: Run test ",
+      "content": "\n# Writing Plans\n\n## Overview\n\nWrite implementation plans for an engineer who has not seen this codebase or this spec. Assume they write idiomatic code in the project's language once they know the exact interface and the exact test, and that they will make a reasonable choice wherever the plan leaves one open. What they cannot know is what you decided: which files, which names and signatures, which values from the spec, which tests prove each task. Document those. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.\n\n**Announce at start:** \"I'm using the writing-plans skill to create the implementation plan.\"\n\n**Context:** If working in an isolated worktree, it should have been created via the `superpowers:using-git-worktrees` skill at execution time.\n\n**Save plans to:** `docs/superpowers/plans/YYYY-MM-DD-<feature-name>.md`\n- (User preferences for plan location override this default)\n\n## Scope Check\n\nIf the spec covers multiple independent subsystems, it should have been broken into sub-project specs during brainstorming. If it wasn't, suggest breaking this into separate plans — one per subsystem. Each plan should produce working, testable software on its own.\n\n## File Structure\n\nBefore defining tasks, map out which files will be created or modified and what each one is responsible for. This is where decomposition decisions get locked in.\n\n- Design units with clear boundaries and well-defined interfaces. Each file should have one clear responsibility.\n- You reason best about code you can hold in context at once, and your edits are more reliable when files are focused. Prefer smaller, focused files over large ones that do too much.\n- Files that change together should live together. Split by responsibility, not by technical layer.\n- In existing codebases, follow established patterns. If the codebase uses large files, don't unilaterally restructure - but if a file you're modifying has grown unwieldy, including a split in the plan is reasonable.\n\nThis structure informs the task decomposition. Each task should produce self-contained changes that make sense independently.\n\n## Task Right-Sizing\n\nA task is the smallest unit that carries its own test cycle and is worth a\nfresh reviewer's gate. When drawing task boundaries: fold setup,\nconfiguration, scaffolding, and documentation steps into the task whose\ndeliverable needs them; split only where a reviewer could meaningfully\nreject one task while approving its neighbor. Each task ends with an\nindependently testable deliverable.\n\n## Step Granularity\n\n**Each step is one action with a checkable result:**\n- \"Write the failing test\" - step\n- \"Run it to make sure it fails\" - step\n- \"Implement the minimal code to make the test pass\" - step\n- \"Run the tests and make sure they pass\" - step\n- \"Commit\" - step\n\n## Plan Document Header\n\n**Every plan MUST start with this header:**\n\n```markdown\n# [Feature Name] Implementation Plan\n\n> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.\n\n**Goal:** [One sentence describing what this builds]\n\n**Architecture:** [2-3 sentences about approach]\n\n**Tech Stack:** [Key technologies/libraries]\n\n**Spec:** [path to the spec/design doc this plan implements — the plan\nargues from the spec, so the spec travels with it; executors read both]\n\n## Global Constraints\n\n[The spec's project-wide requirements — version floors, dependency limits,\nnaming and copy rules, platform requirements — one line each, with exact\nvalues copied verbatim from the spec. Every task's requirements implicitly\ninclude this section.]\n\n## Review Focus\n\n[The five input classes or failure modes the spec implies but no task's\ntests exercise that are most likely to bite a person using this software\n— one line each, naming the input or condition and the behavior a\nreasonable person would expect, most likely first. The spec is a vision\ndocument: it says what the software must do, not everything it will\nmeet, and its silence on an input is not permission for that input to\nbreak the program. Write the list here, once, with the spec in front of\nyou. Then, for each line, add the test that pins it to the task that\nowns the code, in that task's own step style.]\n\n---\n```\n\n## Task Structure\n\n````markdown\n### Task N: [Component Name]\n\n**Files:**\n- Create: `exact/path/to/file.py`\n- Modify: `exact/path/to/existing.py:123-145`\n- Test: `tests/exact/path/to/test.py`\n\n**Interfaces:**\n- Consumes: [what this task uses from earlier tasks — exact signatures]\n- Produces: [what later tasks rely on — exact function names, parameter\n  and return types. A task's implementer sees only their own task; this\n  block is how they learn the names and types neighboring tasks use.]\n\n- [ ] **Step 1: Write the failing test**\n\n```python\ndef test_specific_behavior():\n    result = function(input)\n    assert result == expected\n`",
       "tags": [
         "tdd",
-        "testing",
         "git",
         "worktree",
         "brainstorming",
         "subagent",
         "agent",
+        "verification",
         "writing",
         "plans"
       ],
@@ -27930,55 +27930,55 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 15,
       "newSkillCount": 0,
-      "stars": 291410
+      "stars": 291828
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 178062
+      "stars": 178488
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 75613
+      "stars": 75657
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 89132
+      "stars": 89194
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1761
+      "stars": 1763
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1058,
       "newSkillCount": 7,
-      "stars": 46889
+      "stars": 46935
     },
     {
       "name": "Xquik",
       "url": "https://github.com/Xquik-dev/x-twitter-scraper",
       "skillCount": 1,
       "newSkillCount": 0,
-      "stars": 205
+      "stars": 206
     }
   ],
-  "lastUpdated": "2026-09-25T11:46:17.250Z",
+  "lastUpdated": "2026-09-26T11:22:41.152Z",
   "stats": {
     "totalSkills": 1137,
     "newSkills": 16,
-    "scrapedAt": "2026-09-25T11:46:17.250Z"
+    "scrapedAt": "2026-09-26T11:22:41.152Z"
   }
 }

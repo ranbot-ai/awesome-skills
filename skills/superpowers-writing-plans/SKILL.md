@@ -3,7 +3,7 @@ name: writing-plans
 description: Use when you have a spec or requirements for a multi-step task, before touching code 
 category: Collaboration & Project Management
 source: superpowers
-tags: [tdd, testing, git, worktree, brainstorming, subagent, agent, writing, plans]
+tags: [tdd, git, worktree, brainstorming, subagent, agent, verification, writing, plans]
 url: https://github.com/obra/superpowers/tree/main/skills/writing-plans
 ---
 
@@ -12,9 +12,7 @@ url: https://github.com/obra/superpowers/tree/main/skills/writing-plans
 
 ## Overview
 
-Write comprehensive implementation plans assuming the engineer has zero context for our codebase and questionable taste. Document everything they need to know: which files to touch for each task, code, testing, docs they might need to check, how to test it. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.
-
-Assume they are a skilled developer, but know almost nothing about our toolset or problem domain. Assume they don't know good test design very well.
+Write implementation plans for an engineer who has not seen this codebase or this spec. Assume they write idiomatic code in the project's language once they know the exact interface and the exact test, and that they will make a reasonable choice wherever the plan leaves one open. What they cannot know is what you decided: which files, which names and signatures, which values from the spec, which tests prove each task. Document those. Give them the whole plan as bite-sized tasks. DRY. YAGNI. TDD. Frequent commits.
 
 **Announce at start:** "I'm using the writing-plans skill to create the implementation plan."
 
@@ -47,9 +45,9 @@ deliverable needs them; split only where a reviewer could meaningfully
 reject one task while approving its neighbor. Each task ends with an
 independently testable deliverable.
 
-## Bite-Sized Task Granularity
+## Step Granularity
 
-**Each step is one action (2-5 minutes):**
+**Each step is one action with a checkable result:**
 - "Write the failing test" - step
 - "Run it to make sure it fails" - step
 - "Implement the minimal code to make the test pass" - step
@@ -118,6 +116,4 @@ owns the code, in that task's own step style.]
 def test_specific_behavior():
     result = function(input)
     assert result == expected
-```
-
-- [ ] **Step 2: Run test 
+`

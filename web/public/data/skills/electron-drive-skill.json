@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-electron-drive-skill",
+  "name": "electron-drive-skill",
+  "slug": "electron-drive-skill",
+  "description": "Launch the project's Electron app on a scratch profile and drive it: click, type, screenshot, run renderer or main-process code, read logs. Use to verify UI changes end to end.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/electron-drive-skill",
+  "content": "\n# Driving the Electron app\n\n## Overview\n\n`scripts/drive.mjs` launches the project's Electron app under Playwright in a\nbackground daemon and keeps it running between commands, so each action\n(click, type, snapshot, screenshot, eval) is one fast shell call. Every launch\nuses a scratch profile, so the agent can check a UI change or reproduce a bug\nin the real app, not only in unit tests, without touching the user's data.\n\n## When to Use This Skill\n\n- Use when you need to verify a UI change in the running Electron app.\n- Use when reproducing a renderer or startup bug, or a failure that only\n  shows up in the production build (for example a stricter CSP).\n- Use when checking first-run, onboarding or settings screens.\n- Use when exercising a feature end to end, including IPC through the preload\n  bridge or code in the main process.\n- Do not use it for web apps without Electron, or for multi-window flows (see\n  Limitations).\n\n## How It Works\n\n### Step 1: Check prerequisites\n\n`scripts/drive.mjs`, in this skill's directory, finds the project by the\nnearest `package.json`, so run it from anywhere inside the project. Set `DR`\nto its absolute path.\n\nIt needs `electron` and `playwright-core` (1.49 or later) installed in the\nproject. If `start` says either is missing, tell the user rather than\ninstalling it yourself. Launch settings come from `drive.config.json` at the\nproject root (see Step 4); with no file, it runs `electron .`.\n\n### Step 2: Start, look, act, stop\n\n```bash\nDR=<this skill's directory>/scripts/drive.mjs\n\n$DR start                  # last build, profile 'default'; prints status\n$DR snapshot               # accessibility tree: find what to click, by role and name\n$DR click 'role=button[name=\"Get started\"]'\n$DR fill 'role=textbox[name=\"Email\"]' 'test@example.com'\n$DR wait 'text=Welcome'\n$DR screenshot             # prints a PNG path; Read it to see the window\n$DR logs --lines 80        # main and renderer console, plus the config's logFile\n$DR stop                   # ALWAYS, before finishing\n```\n\n- **Start options:**\n  - `--build`: run the config's `build` command first. **Needed after any\n    source change** if the app runs from a build, because the build is\n    otherwise stale; `start` prints its age.\n  - `--fresh`: wipe the scratch profile, which gives you the app's first-run\n    state.\n  - `--profile <name>`: a separate scratch profile.\n  - `--dev`: see Step 5.\n- **Targets** are Playwright selectors. Prefer `role=button[name=\"…\"]` from\n  `snapshot` output, then `text=…`, then CSS.\n- **`--`** ends the flags. Put it before text that starts with dashes:\n  `$DR fill 'role=textbox[name=\"Args\"]' -- --verbose`.\n- Other commands: `select <target> <value|label>`, `press <key>`,\n  `status`, `screenshot --selector <css>`. `$DR help` lists everything.\n\n### Step 3: Run code in the app\n\n**`eval <js>`** runs in the renderer, **`main <js>`** in the main process\n(`electron` and `process` are in scope, `require` is not). Use a bare\nexpression, or a body with `return`. `-` reads the code from stdin, which\navoids quoting entirely. The result comes back as JSON, so return plain data:\na DOM node or a function comes back as `undefined` or `{}`.\n\nTo exercise IPC, call whatever the app's preload exposes through `eval`. That\ngoes through the real preload bridge, as the app's own renderer code does.\n\n### Step 4: Configure the launch (optional)\n\n`drive.config.json` at the project root; every field is optional:\n\n```json\n{\n  \"build\": \"npm run build\",\n  \"args\": [\".\"],\n  \"env\": { \"APP_DATA_DIR\": \"{profile}/data\" },\n  \"logFile\": \"logs/main.log\",\n  \"dev\": {\n    \"args\": [\".\"],\n    \"env\": { \"ELECTRON_RENDERER_URL\": \"http://localhost:5173\" },\n    \"url\": \"http://localhost:5173\"\n  }\n}\n```\n\n- `args`: what Electron is launched with: an app directory whose\n  `package.json` `main` is the built entry point, or the entry file itself.\n- `env`: added to the app's environment. `{profile}` becomes the scratch\n  profile directory (in `env` values only, not in `args`). This is how data\n  kept outside `userData` is redirected: `APP_DATA_DIR` is only an example\n  name, and it has an effect only if the app reads it. Check the app's source\n  for the variable it actually uses.\n- `logFile`: a log file relative to the profile directory, shown by `logs`.\n\nIf a project has no config and `start` fails or launches the wrong thing,\nwork out these values from the project's `package.json` and build setup,\nthen suggest a `drive.config.json` to the user.\n\n### Step 5: Dev mode (optional)\n\nFor a fast loop on renderer code, with hot reload and source maps:\n\n1. The user (or a background Bash call) starts the renderer dev server\n   **without** its own Electron. Many templates' `start`/`dev` scripts launch\n   Electron too, and two instances would share state. The config's\n   `dev.url` is checked before launch.\n2. `$DR start --dev` launches Electron with `dev.args` and `dev.env`, and\n   `NODE_ENV=development`.\n\n## Examples\n\n### Example 1: Verify a change to the first-run s",
+  "tags": [
+    "javascript",
+    "node",
+    "api",
+    "claude",
+    "ai",
+    "agent",
+    "automation",
+    "template",
+    "design",
+    "document"
+  ],
+  "useCases": [
+    "Use when you need to verify a UI change in the running Electron app.",
+    "Use when reproducing a renderer or startup bug, or a failure that only",
+    "Use when checking first-run, onboarding or settings screens.",
+    "Use when exercising a feature end to end, including IPC through the preload",
+    "Do not use it for web apps without Electron, or for multi-window flows (see"
+  ],
+  "scrapedAt": "2026-09-26T11:20:07.429Z"
+}
