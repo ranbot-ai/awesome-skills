@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-accounting-audit-system-builder",
+  "name": "accounting-audit-system-builder",
+  "slug": "accounting-audit-system-builder",
+  "description": "Routes an accounting or audit request to the right module skill, from software selection through monthly closing, asking only what is missing. Use for books of accounts or audit files.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/accounting-audit-system-builder",
+  "content": "\n# Accounting & Audit System Builder\n\nRouter for 16 accounting and audit skills, one per stage of the accounting cycle. It\nworks out where in the cycle the user actually is, then hands off to that one module\nskill. It never builds anything itself.\n\n## Overview\n\nA business does not need 100 databases. It needs the two or three it will keep current\nfor the stage it is at. This skill identifies the stage, asks only what is still missing\none question at a time, stops as soon as the remaining answers stop changing the route,\nthen recommends two or three modules and waits for the user to pick.\n\nThe cycle it routes along:\n\n```\nSoftware selected\n  -> Source document filed\n    -> Transaction recorded (purchase | sales)\n      -> Cash or bank movement recorded (receipt | payment)\n        -> Cash counted and day book closed\n          -> Ledgers, stock and statutory balances reconciled\n            -> Month closed and statements produced\n              -> Credit cycle analysed\n                -> Audit file assembled\n```\n\nEach module skill runs the same contract: context first, a recommendation, and artifacts\nonly on request. This skill never emits a schema, a CSV or a Notion template.\n\n## When to Use This Skill\n\n- \"Set up our accounting system\"\n- \"We need books of accounts for the business\"\n- \"Help us prepare for the auditor\"\n- \"Our accountant asks for things every month and we assemble them manually\"\n- \"Turn our tally process into a proper system\"\n\nDo not use it when the user has already named one specific book or report and just wants\nthe file - go straight to that module skill.\n\n## How It Works\n\nFollow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.\n\n### Step 1 - Identify the stage, not the tool\n\nRead the request and place it on the cycle before asking anything. The stage is the\nroute.\n\n- \"which software\", \"new system\", \"migrate\" -> Software Selection\n- \"where do we file invoices\", \"track documents\" -> Source Document & Filing\n- \"purchases\", \"supplier bills\" -> Purchase Accounting\n- \"sales\", \"invoices we raise\", \"receivables\" -> Sales Accounting\n- \"money received\", \"collections\" -> Receipt Accounting\n- \"money paid out\", \"vendor payments\" -> Payment Accounting\n- \"petty cash\", \"small cash\" -> Petty Cash Management\n- \"daily cash and bank\", \"day book\" -> Day Book\n- \"party balances differ\", \"debtor statement mismatch\" -> Party / Ledger Reconciliation\n- \"expenses\", \"bills without invoices\" -> Expense Accounting\n- \"salary\", \"wages\", \"payroll entries\" -> Salary & Wage Accounting\n- \"TDS\", \"withholding\" -> TDS Booking & Payment\n- \"stock count\", \"shortage\", \"inventory match\" -> Inventory / Stock Reconciliation\n- \"month end\", \"trial balance\", \"financial statements\" -> Monthly Closing & Statements\n- \"collection period\", \"who owes us longest\" -> Credit-Cycle Analysis\n- \"audit file\", \"auditor checklist\", \"year-end papers\" -> Audit Preparation\n\n\"how do I ...\" is an advice question. Answer it, and offer the build only if it helps.\n\nAsk only if this is the highest-value missing fact; otherwise proceed without an opener:\n\n> **Q:** Where in the accounting cycle is the business right now?\n\nIf the user requests an artifact, route to the matching module and continue the build.\nA routing step does not require separate permission. Never label a failed check `Done`.\n\n### Step 2 - Ask only what is missing\n\nSkip anything the user already answered, in any earlier message. Ask the rest one at a\ntime, and stop as soon as the remaining answers would not change the output. Never\ninvent an answer - if the user does not know, record it as unknown and carry on.\n\n- **Business** - What does the business do? / Trading, service or both? / Approximate\n  monthly transaction count?\n- **Systems** - Which accounting software today? / Is anything in a spreadsheet? /\n  Who does the entries - internal or an accountant?\n- **Compliance** - Which taxes are registered? / VAT or GST? / TDS, payroll and\n  statutory obligations?\n- **Position** - Is anything outstanding or unreconciled? / Any known differences?\n- **Outcome** - What do you need? / Ongoing books, a month-end pack or an audit file?\n\n### Step 3 - Recommend the smallest workflow\n\nMatch on what the user named, not on what the tier allows. Present two or three modules,\none line of reason each, and ask which to start. A list of 100 is not a recommendation.\nFull index: `catalog.md`.\n\n**Starter** - 7 modules, the usual starting set: Sales Accounting, Purchase Accounting,\nReceipt Accounting, Payment Accounting, Petty Cash Management, Day Book, Expense\nAccounting. Add TDS Booking & Payment once the business is registered and deducting.\n\n**Growth** - Starter plus Accounting Software Selection, Source Document & Filing, Party /\nLedger Reconciliation, Inventory / Stock Reconciliation, Salary & Wage Accounting and\nMonthly Closing & Statements.\n\n**Scale** - select additional modules from this 16-module accounting pack only as needed.\n",
+  "tags": [
+    "api",
+    "ai",
+    "agent",
+    "workflow",
+    "template",
+    "design",
+    "document",
+    "spreadsheet",
+    "presentation",
+    "security"
+  ],
+  "useCases": [
+    "\"Set up our accounting system\"",
+    "\"We need books of accounts for the business\"",
+    "\"Help us prepare for the auditor\"",
+    "\"Our accountant asks for things every month and we assemble them manually\"",
+    "\"Turn our tally process into a proper system\""
+  ],
+  "scrapedAt": "2026-09-30T12:16:30.656Z"
+}

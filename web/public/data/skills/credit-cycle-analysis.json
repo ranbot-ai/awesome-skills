@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-credit-cycle-analysis",
+  "name": "credit-cycle-analysis",
+  "slug": "credit-cycle-analysis",
+  "description": "Debtor and creditor credit-cycle analysis: weighted collection or payment days, ageing buckets, credit limit utilisation and gap against benchmark. Use for working-capital review.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/credit-cycle-analysis",
+  "content": "\n# Debtor & Creditor Credit-Cycle Analysis\n\n**What it is:** How long the business actually waits to be paid and how long it actually takes to pay, measured per party and per period.\n\n## Overview\n\nWorks out the smallest useful **Debtor & Creditor Credit-Cycle Analysis** setup for the business in\nfront of it, then builds it only when asked. The default output is a short recommendation, not a\nspreadsheet. Artifacts - CSV, SQL DDL, JSON Schema, Notion mapping - are produced on request, from\none field list so they cannot drift apart.\n\nLayer: Layer 8: Close & Analyse. Fits: Growth stage. Table code: n/a.\n\n**The SOP rule this skill is built around:** analyse debtors on the average collection period,\noutstanding invoices, overdue receivables and the aging of receivables; analyse creditors on the\naverage payment period, outstanding supplier balances, overdue payables and supplier aging; then\ncompare the debtor collection cycle with the creditor payment cycle. The comparison is the point.\nTwo cycles measured the same way can be read against each other, and the day-to-day pressure of\nwaiting longer than you take is invisible as a line on the balance sheet. That pressure is\nmeasured in **days** here. Turning it into money is a separate calculation with its own basis,\nbelow.\n\n**Six concepts that never stand in for each other.** This table exists to keep them apart, and\nmost of the wrong answers come from swapping one for another:\n\n| Concept | What it answers | Field that carries it |\n|---|---|---|\n| Contractual terms | What was agreed | `Contractual Terms Days` |\n| Actual cycle | What actually happened | `Actual Collection/Payment Days`, `Weighted Days` |\n| Benchmark | What to compare against | `Benchmark Days`, `Gap vs Benchmark` |\n| Aging | How old the unpaid items are | bucket amounts, and `Aging Bucket` on the invoice/bill detail |\n| Debtor-vs-creditor timing | Which side of the cycle is longer | `Cycle Gap Days` on the comparison record |\n| Working-capital funding | What the timing difference costs in money | `Estimated Working-Capital Funding`, `Calculation Basis` |\n\nConflating them is the defect this module is built to prevent. Contractual terms of 30 days and\nan actual collection cycle of 42 days are two facts about the same party, and the 42 is the one\nthat reaches the bank account. Writing the 30 into `Actual Collection/Payment Days` because it is\nthe number in the contract is a substituted value, not a measurement.\n\n**Aging lives on the invoice, not on the party.** One party can hold open invoices in several\naging buckets on the same day. So the party-period record carries the bucket **amounts**\n(`Current Amount`, `Aging 0-30 Amount`, `Aging 31-60 Amount`, `Aging 61-90 Amount`, `Aging 91-180 Amount`, `Aging Over 180 Amount`)\nand the single `Aging Bucket` belongs to one invoice or one bill on the aging-detail record. A\nparty row carrying one `Aging Bucket` cannot describe a real aging position and is replaced by\nthe bucket amounts.\n\n**Neutral field names.** The two movement fields are `Credit Movement` and `Settlement`, for\ncustomers and for suppliers alike. `Credit Movement` is the credit-side activity that created the\nbalance in the period - customer invoices on the debtor side, supplier bills on the creditor\nside. `Settlement` is what closed it - customer collections, supplier payments. A name like\n`Total Billed` describes only the debtor side and quietly makes the creditor side unreadable.\n\n**The balance identity, and what happens when it fails.**\n\n```\nClosing Balance = Opening Balance + Credit Movement - Settlement +/- Adjustments\n```\n\nCheck it on every row. If it does not hold, the difference is **recorded and marked**, never\nrepaired by editing a component. A silently balanced row is worse than an unbalanced one,\nbecause the next period inherits it.\n\n**The cycle gap is descriptive, not a verdict.**\n\n```\nCycle Gap Days = Debtor Collection Days - Creditor Payment Days\n```\n\nPositive means customers take longer to pay than the business takes to pay suppliers. Zero means\nthe two measured cycles are equal. Negative means suppliers are paid later than customers are\ncollected. A positive gap is not automatically bad - it is often the ordinary consequence of\nselling on credit to a customer base and buying on shorter terms. The module states the\ndifference and leaves the judgement to the business.\n\n**Working-capital funding needs a monetary basis, and the basis is always written down.**\n\n```\nEstimated Working-Capital Funding = Cycle Gap Days x Relevant Daily Credit Movement\n```\n\nThis is only computed when the relevant monetary basis exists, and `Calculation Basis` always\nrecords how that basis was built. A plausible daily figure is:\n\n```\nRelevant Daily Credit Movement = Relevant annual credit movement / 365\n```\n\nand it is only used when the selected annual movement is appropriate for the analysis. Where the\nmonetary basis is missing, `Estimated Working-Capital Funding` is `Unknown` and the record says so.\nNever i",
+  "tags": [
+    "api",
+    "ai",
+    "automation",
+    "workflow",
+    "template",
+    "design",
+    "document",
+    "spreadsheet",
+    "security",
+    "rag"
+  ],
+  "useCases": [
+    "debtor collection analysis",
+    "creditor payment analysis",
+    "receivables aging and payables aging",
+    "average collection period or average payment period",
+    "customer payment behaviour and supplier payment behaviour"
+  ],
+  "scrapedAt": "2026-09-30T12:22:44.617Z"
+}

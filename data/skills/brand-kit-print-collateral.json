@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-brand-kit-print-collateral",
+  "name": "brand-kit-print-collateral",
+  "slug": "brand-kit-print-collateral",
+  "description": "Print collateral spec: item, finished and trim size, bleed, colour mode, stock and GSM, finish, safe margin, print method, quantity and unit cost. Use for cards and letterhead.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/brand-kit-print-collateral",
+  "content": "\n# Brand Kit & Print Collateral\n\n**What it is:** the printed identity set - letterhead, visiting card, employee ID card, folder, invoice, quotation and the email signature block - specified to the point where any printer can produce it.\n\n## Overview\n\nWorks out the smallest useful collateral set for the business in front of it, then builds it\nonly when asked. The default output is a short recommendation, not a set of layout files.\nThe collateral register - CSV, SQL DDL, JSON Schema, Notion mapping - is produced on\nrequest, from one field list so the four cannot drift apart.\n\nLayer: Layer 2: Brand & Design. Fits: Starter stage. Table code: n/a.\n\n**The rule this table exists to enforce:** the finished size and the trim size are\ndifferent things, and a designer who forgets the difference pays for the reprint. The\nfinished size is what gets cut; the trim size is finished size plus bleed on every edge.\nThe table keeps them in separate columns for exactly that reason, and the same logic\nseparates colour mode, stock weight and finish - three decisions a printer asks about\nbefore a job starts, and three that cannot be changed after it starts.\n\n## When to Use This Skill\n\n- letterhead, visiting card, business card, ID card, employee card, name badge\n- compliment slip, folder, envelope, invoice, quotation, statement\n- email signature block\n- \"our print looks wrong\"\n- prepress, bleed, CMYK, crop marks, stock weight, lamination\n- brand guidelines for anything that gets printed\n\nDo not use it for: the digital design system (`design-theme-guide`), the mark itself\n(`logo-image-design`), or the email body templates - the signature block is in scope here,\nthe body is `business-email-template`.\n\nDo not use it before an approved mark exists. Collateral built with no approved logo is a\nrewrite later; route to `logo-image-design` first and note the dependency.\n\n## How It Works\n\nFollow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.\n\n### Step 1 - Identify intent\n\nRead the request and pick the intent before asking anything.\n\n- \"design\" / \"make\" / \"we need\" -> artifacts wanted; go to Step 2.\n- \"we already print these\" -> something exists; capture it, then Step 2.\n- \"print came out wrong\" / \"fix\" -> a prepress or specification problem; capture what went\n  wrong, then Step 2.\n- \"review\" / \"check\" -> a check, not a build.\n\nAsk only if this is the highest-value missing fact; otherwise proceed without an opener:\n\n> **Q:** What is the business called, and what does one line of it actually do?\n\n### Step 2 - Ask only what is missing\n\nTreat ambiguous replies as unanswered and ask which explicit option the user means. Record unknown values as `Unknown`; `Unknown` is not zero. A record must not be `Done` when a required check fails.\n\nSkip anything already answered. Ask the rest one at a time, and stop as soon as the\nremaining answers would not change the item list or the specification.\n\n- **Identity** - Exact business name, address and phone as they must print? / Logo file\n  available in an editable or vector format? / Anything already printed that must match?\n- **Items** - Which items are needed - letterhead, card, employee card, folder, invoice,\n  envelope? / Which need to be two-sided? / Is the employee card for access control, or\n  purely for identity?\n- **Volume** - How many of each, now and over the year? / Who prints it - a local printer,\n  a national one, or an online print service?\n- **Specification** - Any stock or finish already decided? / Does it need to be writable -\n  pen, pencil, thermal printer? / Any wet or outdoor exposure?\n- **Employee card detail** - What goes on it - photo, name, role, department, phone, or a\n  barcode? / What is the data-protection position on employee photos and role data?\n\nNever invent an answer. Names, addresses, phone numbers, quantities, stock weights, printer\nnames, prices and barcode schemes the user has not supplied are `Unknown`.\n\n### Step 3 - Hold the internal context\n\n```yaml\nmodule: brand-kit-print-collateral\nintent: null            # design | fix | review | import\nscale: null             # Starter | Growth | Scale, only if the answer changes it\nareas:\n  \"Identity\": null\n  \"Items\": null\n  \"Volume\": null\n  \"Specification\": null\n  \"Employee Card Detail\": null\nrequested_outputs: []\nconfirmed_facts: []\nopen_questions: []\n```\n\n### Step 4 - Recommend the smallest workflow\n\nBuild an already requested artifact without asking again. For advice-only requests, give a short recommendation and offer the relevant artifact.\n\n**Recommended approach:** Four items that between them cover almost every business - A4\nletterhead, a 55x90mm visiting card, an 85.54mm employee card in the same family, and a\nsingle-page email signature. Each specified with trim, bleed, colour mode, stock and\nfinish stated once, plus a PDF proof and a print-ready export with crop marks. Build the\nenvelope and folder only when someone asks for them",
+  "tags": [
+    "pdf",
+    "markdown",
+    "ai",
+    "workflow",
+    "template",
+    "design",
+    "document",
+    "presentation",
+    "image",
+    "security"
+  ],
+  "useCases": [
+    "letterhead, visiting card, business card, ID card, employee card, name badge",
+    "compliment slip, folder, envelope, invoice, quotation, statement",
+    "email signature block",
+    "\"our print looks wrong\"",
+    "prepress, bleed, CMYK, crop marks, stock weight, lamination"
+  ],
+  "scrapedAt": "2026-09-30T12:20:21.310Z"
+}

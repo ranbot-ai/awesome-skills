@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-audit-preparation",
+  "name": "audit-preparation",
+  "slug": "audit-preparation",
+  "description": "Audit preparation register: required document, period covered, request and receipt dates, preparer and reviewer, auditor queries and adjustments. Use for assembling an audit file.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/audit-preparation",
+  "content": "\n# Audit Preparation\n\n**What it is:** The audit file checklist, so nothing the auditor asks for has to be hunted for at year end.\n\n## Overview\n\nWorks out the smallest useful **Audit Preparation** setup for the business in front of it, then\nbuilds it only when asked. The default output is a short recommendation, not a\nspreadsheet. Artifacts - CSV, SQL DDL, JSON Schema, Notion mapping - are produced on\nrequest, from one field list so they cannot drift apart.\n\nBe clear about what this is. It assembles the file. It does not perform the audit, it\ndoes not test anything, and it produces no opinion on the financial statements - only a\nqualified auditor can do that, and only after doing work this skill has no part in. What\nit does is make sure the ten sections of the audit file exist, that each document is\nrequested, received, tracked and filed in one place, and that every query and adjustment\nraised along the way has a visible answer.\n\nOne rule that causes most of the trouble at year end: permanent documents and tax filings\nneed current originals, not copies of copies. A registration certificate that lapsed, a\nlicence that was never renewed, a return filed only as a screenshot of a portal - each one\nturns into an avoidable exception. Current originals, verified and dated, or the document\nis not there.\n\nLayer: Layer 9: Audit. Fits: Growth stage. Table code: n/a.\n\n## When to Use This Skill\n\n- audit file checklist\n- audit document request tracker\n- audit query log\n- year-end document collection\n- audit handover register\n\nAlso use it when the user says \"the audit file checklist, so nothing the auditor asks for has to be hunted for at year end\", or describes the same process happening in a\nspreadsheet, a document or someone inboxes.\n\nDo not use it for: the audit itself, assurance on the financial statements, or legal advice. This skill produces\nempty templates only - it never holds or processes real employee or customer data.\n\n## How It Works\n\nFollow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.\n\n### Step 1 - Identify intent\n\nRead the request and pick the intent before asking anything.\n\n- \"set up\" or \"build\" or \"create\" -> the user wants artifacts; go to Step 2.\n- \"our process is ...\" or \"it is in a sheet\" -> the user wants to move an existing process; capture it, then Step 2.\n- \"is this right\" or \"review\" or \"audit\" -> the user wants a check, not a build; answer from what they share.\n- \"how do I ...\" -> advice question; answer directly and offer the build only if it helps.\n\nAsk only if this is the highest-value missing fact; otherwise proceed without an opener:\n\n> **Q:** When did the auditor last ask you for something, and how long did it take to find?\n\n### Step 2 - Ask only what is missing\n\nTreat ambiguous replies as unanswered and ask which explicit option the user means. Record unknown values as `Unknown`; `Unknown` is not zero. A record must not be `Done` when a required check fails.\n\nSkip anything the user already answered, in any earlier message. Ask the rest one at a\ntime, and stop as soon as the remaining answers would not change the output.\n\n- **Audit** - Internal, statutory or both? / Is an auditor appointed? / First audit or a repeat?\n- **Period** - Which financial year? / Year end date? / Single entity or group?\n- **File** - What exists today? / Where is it kept? / How is it handed over?\n- **Requests** - Requests in writing? / Who tracks them? / How long do they take to close?\n- **Outcome** - What do you need? / A checklist, a request tracker or both?\n\nNever invent an answer. If the user does not know, record it as unknown and carry on.\n\n### Step 3 - Hold the internal context\n\nHold the answers in this shape. It stays internal - it is not shown to the user unless\nthey ask, and it never carries a value the user did not give.\n\n```yaml\nmodule: audit-preparation\nintent: null            # setup | advice | review | fix | build | convert | export\nscale: null             # Starter | Growth | Scale, only if the answer changes it\nareas:\n  \"Audit\": null\n  \"Period\": null\n  \"File\": null\n  \"Requests\": null\n  \"Outcome\": null\nrequested_outputs: []   # csv | sql | json | notion | xlsx - requested formats only\nconfirmed_facts: []     # only what the user actually said\nopen_questions: []      # the unanswered ones, in the order worth asking\n```\n\n### Step 4 - Recommend the smallest workflow\n\nBuild an already requested artifact without asking again. For advice-only requests, give a short recommendation and offer the relevant artifact.\n\n**Recommended approach:** One audit file record per document, tagged to the section of the file it belongs to, carrying the request date, the received date, days pending and any query or adjustment, so the file is assembled continuously instead of hunted for in the last week of the year.\n\n**Why this one:** The ten sections of the audit file are fixed from year to year, so a checklist is the whole job - th",
+  "tags": [
+    "xlsx",
+    "markdown",
+    "ai",
+    "automation",
+    "workflow",
+    "template",
+    "document",
+    "spreadsheet",
+    "security",
+    "rag"
+  ],
+  "useCases": [
+    "audit file checklist",
+    "audit document request tracker",
+    "audit query log",
+    "year-end document collection",
+    "audit handover register"
+  ],
+  "scrapedAt": "2026-09-30T12:18:31.684Z"
+}

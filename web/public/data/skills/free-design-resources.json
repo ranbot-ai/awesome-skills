@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-free-design-resources",
+  "name": "free-design-resources",
+  "slug": "free-design-resources",
+  "description": "Design resource register: resource and provider, licence type, commercial-use and attribution rules, export format, lock-in risk, free tier limit and accessibility notes. Use for tool vetting.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/free-design-resources",
+  "content": "\n# Free Design Resources\n\n**What it is:** the register of free design tools, fonts, icons, images and templates the\nbusiness uses, and what each one actually permits.\n\n## Overview\n\nWorks out the smallest set of free tools that covers what the business is trying to make,\nthen builds it only when asked. The default output is a short recommendation, not a\nlicence review. The resource clearance and adoption register - CSV, SQL, JSON Schema, Notion\nmapping - is produced on request, from one field list so the four cannot drift apart.\n\nLayer: Layer 1: Foundation. Fits: Starter stage. Table code: n/a.\n\n**The rule this table exists to enforce:** \"free\" is not a licence term, so `Licence Type`\nand `Commercial Use Allowed` are the fields that matter, and the full map in\n`../../references/free-design-resource-map.md` is the evidence base for them. A free tool is safe\nto use and unsafe to depend on when it cannot export, when it holds the only copy of the\nwork, or when its terms forbid the one thing the business needs - commercial use, logo\nuse, print, or client work. `Export Format` and `Vendor Lock-In Risk` exist to catch\nexactly that.\n\n**The second rule:** accessibility and licence are checked at the same time. A font under\n14px, a grey-on-grey pair from a template, or an icon set used without its licence\nattribution are both defects, and both are cheap to avoid at the point of selection.\n\n## When to Use This Skill\n\n- free design tools, free alternatives, \"what can we use for nothing\"\n- free fonts, free icons, free images, free templates, stock photography\n- licensing, licence terms, commercial use, attribution, redistribution\n- \"can we use this\", \"is this free to use\", \"is this allowed for a client\"\n- tool consolidation, cancelling a subscription, reducing design spend\n- design accessibility, contrast checking, free colour palette tools\n- brand kit on a zero budget, open source design system\n\nDo not use it for: building the design system itself (`design-theme-guide`), the artwork\n(`logo-image-design`), or a legal opinion on a licence agreement.\n\n## How It Works\n\nFollow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.\n\n### Step 1 - Identify intent\n\nRead the request and pick the intent before asking anything.\n\n- \"what can we use\" / \"find\" / \"we need\" -> artifacts wanted; go to Step 2.\n- \"is this allowed\" / \"can I use this\" -> a licence question, answer it before anything\n  else.\n- \"review\" / \"audit\" / \"we are paying too much\" -> a review, not a build.\n- \"we already picked a tool\" -> a clearance check on one item; go straight to Step 4.\n\nAsk only if this is the highest-value missing fact; otherwise proceed without an opener:\n\n> **Q:** What are you trying to make, and is it for the business itself or for a client?\n\n### Step 2 - Ask only what is missing\n\nTreat ambiguous replies as unanswered and ask which explicit option the user means. Record unknown values as `Unknown`; `Unknown` is not zero. A record must not be `Done` when a required check fails.\n\nSkip anything already answered. Ask the rest one at a time, and stop as soon as the\nremaining answers would not change the shortlist.\n\n- **What is being made** - Logo, brand kit, website, social posts, documents, print, video,\n  or a product interface? / Print, screen, or both - and for print, which sizes and which\n  process?\n- **Who is it for** - The business's own marketing, or work delivered to a client? / Is the\n  business itself a registered company, and in which country? / Will anything be sold, or is\n  it internal only?\n- **Budget reality** - Is zero a hard constraint, or is a small one-off payment acceptable\n  to remove a problem? / Is there a card on file for anything that has a free tier?\n- **Constraints** - Anyone on the team with specific skills, or accessibility needs? / Any\n  existing tool the business has already paid for and should use? / Any file formats the\n  client or printer requires?\n- **Risk** - Does anything need to be editable by a non-designer in two years? / Is there any\n  chance of reselling the output, or licensing it on?\n\nNever invent an answer. Licence terms, prices, feature lists, export formats and\nattribution requirements are **not** invented here - they are read from the provider's own\ncurrent terms and recorded with the source and the date it was read. Anything not verified\nis `Unverified`, which is a different value from `No`.\n\n### Step 3 - Hold the internal context\n\n```yaml\nmodule: free-design-resources\nintent: null            # set up | review | report | import\nareas:\n  \"What is being made\": null\n  \"Who is it for\": null\n  \"Budget reality\": null\n  \"Constraints\": null\n  \"Risk\": null\nrequested_outputs: []\nconfirmed_facts: []\nopen_questions: []\n```\n\n### Step 4 - Recommend the smallest workflow\n\nBuild an already requested artifact without asking again. For advice-only requests, give a short recommendation and offer the relevant artifact.\n\n**Recommended ",
+  "tags": [
+    "pdf",
+    "markdown",
+    "ai",
+    "workflow",
+    "template",
+    "design",
+    "document",
+    "image",
+    "security",
+    "rag"
+  ],
+  "useCases": [
+    "free design tools, free alternatives, \"what can we use for nothing\"",
+    "free fonts, free icons, free images, free templates, stock photography",
+    "licensing, licence terms, commercial use, attribution, redistribution",
+    "\"can we use this\", \"is this free to use\", \"is this allowed for a client\"",
+    "tool consolidation, cancelling a subscription, reducing design spend"
+  ],
+  "scrapedAt": "2026-09-30T12:27:00.622Z"
+}

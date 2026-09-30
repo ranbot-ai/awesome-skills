@@ -1,0 +1,30 @@
+{
+  "id": "antigravity-360-feedback-system",
+  "name": "360-feedback-system",
+  "slug": "360-feedback-system",
+  "description": "360 feedback register: reviewer, subject, review cycle, visibility, due date and score, as CSV, SQL, JSON Schema or Notion on request. Use for 360 reviews or peer feedback cycles.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/360-feedback-system",
+  "content": "\n# 360° Feedback System\n\n**What it is:** Records one feedback response per row, with the field list built only from what the user confirms.\n\n## Overview\n\nWorks out the smallest useful 360° feedback setup for the business in front of it, then builds\nit only when asked. The default output is a short recommendation, not a spreadsheet. CSV, SQL\nDDL, JSON Schema and the Notion mapping are derived from the one Field Reference below, so they\ncannot drift apart.\n\nThree conceptual models are kept separate, because merging them is what forces fields to be\ninvented:\n\n- **Response** - one row per feedback response. The only model with a table in this skill.\n- **Scoring Configuration** - scale, weights, missing and not-applicable handling, rounding.\n  Configuration, never a column on the response row.\n- **Questions** - the question set and its version, held only when questions change between\n  cycles. A question ID is a column on Response only once that requirement is confirmed.\n\nArtifacts are empty templates by default. The single illustrative row is a shape placeholder\ncarrying `Example` / `-EXAMPLE-` values, never business data.\n\nLayer: Layer 4: Manage. Fits: Growth stage. Table code: n/a.\n\n## When to Use This Skill\n\n- 360 feedback\n- feedback system\n- peer review tool\n- 360 degree feedback tracker\n\nAlso use it when the user says \"holistic feedback\", or describes the same process happening in a\nspreadsheet, a document or someone's inbox.\n\nNot for payroll, tax, legal, or employment-decision work. This skill does not automate those.\n\n## How It Works\n\nFollow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.\n\nThe rules below stand on their own. If the shared execution contract at\n`../../references/execution-contract.md` is unavailable, follow this file directly; a missing\nreference never blocks basic execution.\n\n### Step 1 - Identify intent\n\nRead the request and pick one intent before asking anything. This is the canonical set, used\nhere and in the context block with the same spelling:\n\n| Intent | Trigger | Go to |\n|---|---|---|\n| `advice` | \"how do I ...\", \"what should we\" | Answer, offer the build only if it helps |\n| `review` | \"is this right\", \"review\", \"audit\" | Check what they share |\n| `build` | \"set up\", \"build\", \"create\" | Step 2 |\n| `convert` | \"move it from our sheet/forms\" | Capture their process, then Step 2 |\n| `export` | \"give me the CSV / SQL / JSON / Notion\" for confirmed rules | Step 5 |\n\nOne message, one question, no batching. Never ask a question whose answer would not change the\nrecommendation or the requested artifact.\n\n### Scope boundary\n\nDecline only the specific high-risk action that is out of scope, and continue with the rest of\nthe request. Example: for a request that mixes feedback capture with payroll, decline the payroll\ncalculation and proceed with the feedback setup.\n\n### Step 2 - Ask only what is missing\n\nSkip anything already answered in any earlier message. Ask the rest one at a time, and stop as\nsoon as the remaining answers would not change the output.\n\nDecide fields from the answers, not from habit. The only fields that need no confirmation are the\nones in the minimum core below. Each optional field needs a confirmed requirement behind it:\n\n| Candidate field | Only add when the user confirms |\n|---|---|\n| `Score` | A scoring mode on a defined scale |\n| Additional score fields | Named competency areas, one per confirmed area |\n| `Due Date` | Deadlines are part of their process |\n| `Reviewer` | Responses are identified or confidential, not anonymous |\n| `Review Cycle` | Feedback runs in more than one cycle |\n| `Submitted Date` | Submission is timestamped in their process |\n| `Question ID` | The question set changes between cycles |\n| `Feedback Subject` | A subject is recorded at all |\n\n`Feedback Subject` stays a generic label. The subject may be a person, a project, a customer or\na team, so take the type from the user rather than assuming an employee.\n\nNever invent an answer. Record it as unknown and carry on. `Unknown` is a real value meaning not\nyet supplied. Never turn Unknown into zero, and never turn a blank into a zero. Never re-ask an\nunknown already recorded.\n\nAnswers like `yes`, `no`, `maybe`, `same`, `okay` or `fine` are not an answer to a\nmultiple-choice question. Re-ask as an explicit choice:\n\n> **Q:** Which do you mean: **identified** or **anonymous** feedback?\n>\n> **A:** maybe\n\nKeep only the answered part of a partial answer, and leave the rest `Unknown`.\n\n### Step 3 - Hold the internal context\n\nHold the answers in this shape. It stays internal, is not shown unless asked, and never carries a\nvalue the user did not give.\n\n```yaml\nmodule: 360-feedback-system\nintent: null            # advice | review | build | convert | export\nscale: null             # only when the answer changes the recommendation\nareas:\n  \"Subject\": null\n  \"Relationships\": null\n  \"Visibility\": null\n  \"Scoring\": null\n  ",
+  "tags": [
+    "xlsx",
+    "markdown",
+    "ai",
+    "agent",
+    "automation",
+    "workflow",
+    "template",
+    "document",
+    "spreadsheet",
+    "security"
+  ],
+  "useCases": [
+    "360 feedback",
+    "feedback system",
+    "peer review tool",
+    "360 degree feedback tracker"
+  ],
+  "scrapedAt": "2026-09-30T12:16:21.631Z"
+}

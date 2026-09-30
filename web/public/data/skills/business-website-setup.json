@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-business-website-setup",
+  "name": "business-website-setup",
+  "slug": "business-website-setup",
+  "description": "Website page register: URL, title, meta description, search intent, NAP block, schema type, canonical, indexability and Core Web Vitals target. Use for site builds and SEO reviews.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/business-website-setup",
+  "content": "\n# Business Website Setup\n\n**What it is:** the smallest site that ranks and converts - the page list, what each page is\nfor, which search intent it answers, and the technical and structured-data requirements\nthat make it findable.\n\n## Overview\n\nWorks out the smallest useful site for the business in front of it, then builds the plan\nonly when asked. The default output is a short recommendation, not a page map. The page\nregister - CSV, SQL DDL, JSON Schema, Notion mapping - is produced on request, from one\nfield list so the four cannot drift apart.\n\nLayer: Layer 5: Fulfil. Fits: Growth stage. Table code: n/a.\n\n**The rule this table exists to enforce:** a page with no declared search intent is a page\nthat ranks for nothing and a page with no declared owner is a page that rots. `Primary\nKeyword`, `Search Intent` and `Owner` are therefore required, and the NAP block is a\nper-page field rather than a global assumption - a business with one location and one\nservice area genuinely does repeat the NAP on every page, and a multi-location business\ngenuinely does not.\n\n## When to Use This Skill\n\n- build a website, set up a website, website plan\n- page structure, sitemap, site map, information architecture\n- \"we have a website but nobody finds us\"\n- on-page SEO, meta titles, meta descriptions, headings\n- structured data, schema, LocalBusiness, Service, FAQ\n- Core Web Vitals, page speed, mobile\n- NAP on the website, local signals, Google Search Console\n\nDo not use it for: the ranking asset that is not the website - that is\n`gbp-local-seo-intent`; the design tokens (`design-theme-guide`); off-site citations\n(`seo-directory-backlinks`); or a one-page campaign, which is `linktree-link-hub`.\n\n## How It Works\n\nFollow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.\n\n### Step 1 - Identify intent\n\nRead the request and pick the intent before asking anything.\n\n- \"build\" / \"set up\" / \"we need\" -> artifacts wanted; go to Step 2.\n- \"we have one already\" -> something exists; capture it, then Step 2.\n- \"not ranking\" / \"not found\" / \"fix\" -> capture the current state and the queries, then\n  Step 2.\n- \"review\" / \"audit\" / \"check\" -> a check, not a build.\n- \"which pages should we have\" -> a decision question, not a build.\n\nAsk only if this is the highest-value missing fact; otherwise proceed without an opener:\n\n> **Q:** What is the business called, and what does one line of it actually do?\n\n### Step 2 - Ask only what is missing\n\nTreat ambiguous replies as unanswered and ask which explicit option the user means. Record unknown values as `Unknown`; `Unknown` is not zero. A record must not be `Done` when a required check fails.\n\nSkip anything already answered. Ask the rest one at a time, and stop as soon as the\nremaining answers would not change the page list.\n\n- **Business** - Name, address, phone, services, service area? / Do customers visit a\n  location, or is it a service-area business? / One location or several?\n- **Current** - Is there a site today, and on what - WordPress, Shopify, Wix, Squarespace,\n  a builder, or hand-built? / Who can publish a page? / Is there a developer or is it\n  self-serve?\n- **Customers** - What are the three questions a customer asks before they buy? / What do\n  they search for? / Do they compare, or just want the nearest option?\n- **Proof** - Any reviews, ratings, certifications, case studies or photos that can be shown?\n  / Is there a team, a location, a process worth showing?\n- **Outcome** - What is the site's job - calls, enquiries, bookings, direct sales, or just\n  credibility? / Is there a phone number or WhatsApp that must be reachable in one tap?\n\nNever invent an answer. Services, keywords, addresses, phone numbers, review counts,\nplatforms and metrics the user has not supplied are `Unknown`.\n\n### Step 3 - Hold the internal context\n\n```yaml\nmodule: business-website-setup\nintent: null            # set up | fix | review | report | import\nscale: null             # Starter | Growth | Scale, only if the answer changes it\nareas:\n  \"Business\": null\n  \"Current\": null\n  \"Customers\": null\n  \"Proof\": null\n  \"Outcome\": null\nrequested_outputs: []\nconfirmed_facts: []\nopen_questions: []\n```\n\n### Step 4 - Recommend the smallest workflow\n\nBuild an already requested artifact without asking again. For advice-only requests, give a short recommendation and offer the relevant artifact.\n\n**Recommended approach:** Five to eight pages, one per service and one per place, plus home,\nabout, contact and a service-area page. Every service gets its own page with its own\nintent, its own NAP block and `LocalBusiness` or `Service` structured data. Mobile-first,\nfast, one clear call to action per page, and a review widget on the pages that earn trust.\nNo blog unless someone will actually write it.\n\n**Why this one:** One page per service is what ranks - a single homepage cannot rank for\nsix different things at once, and a page covering three servi",
+  "tags": [
+    "javascript",
+    "markdown",
+    "api",
+    "ai",
+    "workflow",
+    "template",
+    "design",
+    "document",
+    "presentation",
+    "image"
+  ],
+  "useCases": [
+    "build a website, set up a website, website plan",
+    "page structure, sitemap, site map, information architecture",
+    "\"we have a website but nobody finds us\"",
+    "on-page SEO, meta titles, meta descriptions, headings",
+    "structured data, schema, LocalBusiness, Service, FAQ"
+  ],
+  "scrapedAt": "2026-09-30T12:20:45.478Z"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-expense-accounting",
+  "name": "expense-accounting",
+  "slug": "expense-accounting",
+  "description": "Expense accounting register: expense number and date, payee with PAN and VAT, bill reference, document type, amount with VAT, ledger account, approver and status. Use for expense bookkeeping.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/expense-accounting",
+  "content": "\n# Expense Accounting\n\n**What it is:** One row per bill or valid supporting document, carrying the nature of the expense, the document behind it, the applicable tax information and the ledger account together.\n\n## Overview\n\nWorks out the smallest useful **Expense Accounting** setup for the business in front of it, then\nbuilds it only when asked. The default output is a short recommendation, not a\nspreadsheet. Artifacts - CSV, SQL DDL, JSON Schema, Notion mapping - are produced on\nrequest, from one field list so they cannot drift apart.\n\nThree guardrails shape the whole table.\n\n**Tax is recorded, never assumed.** Being VAT-registered does not tell you the rate, whether\nthe expense is taxable, whether input tax is recoverable, whether the amount is\ntax-inclusive, or whether a reverse charge or another treatment applies. TDS is not part of\nan expense entry at all unless the business actually deducts it. Every tax field in the\nminimum schema is optional until a rate *and* a treatment have been supplied by the user.\n\n**An expense entry is not a payment.** Payment mode, payment date, payment reference, net\npayable, TDS and department are payment-stage facts. They do not appear in an expense-only\nsetup. If the user asks for payment tracking, that is a deliberate scope change and the\nfields are added then, not by default.\n\n**The document must be the real document.** Where no formal invoice exists, an internal\nsupporting document is defensible only where the transaction would not normally produce\none - purchases from farmers and individual suppliers, wage sheets, rent agreements and\nrent records. The absence of an invoice does **not** automatically justify raising a\npurchase \"Kharche/Kharpai\". `Document Type`, `Internal Support Justified` and\n`Justification` exist to hold that decision, and a reviewer holds it, not this skill. No\nlabel in the `Document Type` list makes any document legally sufficient.\n\nLayer: Layer 5: Expense & Payroll. Fits: Starter stage. Table code: n/a.\n\n## When to Use This Skill\n\n- expense register\n- petty expense sheet\n- expense book with tax\n- bill and voucher log\n- expenses booked to the right account\n\nAlso use it when the user describes the same process happening in a spreadsheet, on paper,\nor in someone's inbox.\n\nDo not use it for: payroll calculation, tax filing, tax-return preparation, legal advice,\ndeciding whether a transaction is legally deductible, deciding which tax rate applies,\ndeciding whether a supporting document is legally sufficient, or processing real employee,\ncustomer, supplier, PAN, VAT or banking data. This skill produces templates only.\n\n## How It Works\n\nFollow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.\n\n### Step 1 - Identify intent\n\nRead the request and pick the intent before asking anything.\n\n- \"set up\" / \"build\" / \"create\" -> a new structure; go to Step 2.\n- \"our expenses are in a sheet\" / \"we currently record ...\" -> capture the existing\n  process first, then Step 2.\n- \"is this right\" / \"review this\" / \"audit this\" -> a check, not a build; answer from what\n  they share and do not rebuild.\n- \"how do I ...\" -> advice; answer directly and offer a build only if it helps.\n\n### Step 2 - Ask only what is missing\n\nTreat ambiguous replies as unanswered and ask which explicit option the user means. Record unknown values as `Unknown`; `Unknown` is not zero. A record must not be `Done` when a required check fails.\n\nOne message, one question, no batching. Skip anything the user already answered, in any\nearlier message. Ask only questions whose answer would change the recommended structure or\nthe requested artifact. Stop as soon as the remaining unknowns would not change the output.\nRecord `Unknown` and move on when the user does not know, and never ask the same unknown\ntwice.\n\nThe opening question targets the highest-value missing fact. Do not ask for the largest\nexpense category as a warm-up because it does not change the table structure.\n\nFor a new setup the usual first question is:\n\n> **Q:** What do you want to record: expense entries only, payments too, or both?\n\nThen, only as needed:\n\n- **Existing process** - Are you starting from scratch, or replacing an existing sheet or\n  book?\n- **Categories** - What expense categories do you actually use? If the user does not\n  know, keep `Category` configurable. Do not impose a standard category list as though it\n  were confirmed.\n- **Documents** - Do you normally receive a bill or invoice for each expense? If not,\n  what do you keep when there is no formal bill? Record the actual document type.\n- **Tax** - Which tax information do you need on each expense? If VAT/GST: do you need the\n  rate and the amount recorded separately? If TDS/withholding is not used, TDS fields are\n  absent from the schema rather than optional-but-present.\n- **Accounting** - Do you assign each expense to a ledger account? Who decides the account?\n- **Approval** - Do",
+  "tags": [
+    "xlsx",
+    "markdown",
+    "ai",
+    "automation",
+    "workflow",
+    "template",
+    "document",
+    "spreadsheet",
+    "security",
+    "cro"
+  ],
+  "useCases": [
+    "expense register",
+    "petty expense sheet",
+    "expense book with tax",
+    "bill and voucher log",
+    "expenses booked to the right account"
+  ],
+  "scrapedAt": "2026-09-30T12:25:59.799Z"
+}

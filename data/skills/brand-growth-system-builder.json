@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-brand-growth-system-builder",
+  "name": "brand-growth-system-builder",
+  "slug": "brand-growth-system-builder",
+  "description": "Route requests across 13 brand and growth modules. Use when an SME needs help choosing branding, website, local SEO, content, or cloud-planning workflows.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/brand-growth-system-builder",
+  "content": "\n# Brand & Growth System Builder\n\nRouter for 13 brand and growth modules: the design theme, the logo and image library, the\nprint brand kit, the business website, the Google Business Profile, the backlink and\ncitation directories, the email templates, the presentation deck, the social channels, the\nprofessional code of conduct, the observability and cloud plan, and the free design\nresource map.\n\nThe 13 modules are published flat, as siblings at `skills/<slug>/`. This pack is a router\nand a catalog and holds no modules of its own; it only places a request on the dependency\norder and names the module to load.\n\nIt works out what the business actually needs, then hands off to the one module skill that\nmatches. It never builds anything itself.\n\n## Overview\n\nA small business does not need 13 brand systems. It needs the two or three that make\nsomeone pick it: a theme it can build against, a profile Google can rank, and one asset\nset it does not re-make every month. This skill identifies the intent, asks only what is\nstill missing one question at a time, stops as soon as the answers stop changing the\nroute, then recommends two or three modules and waits for the user to pick.\n\nEach module skill then runs the same contract: context first, a recommendation, and\nartifacts only on request. This skill never emits a schema, a CSV, a token file or a\nNotion template.\n\n## When to Use This Skill\n\n- \"Set up our branding and website\"\n- \"I need a Google Business Profile that ranks\"\n- \"Where do I list my business for backlinks?\"\n- \"Design a logo, letterhead and visiting card\"\n- \"Set up our Facebook, LinkedIn and TikTok\"\n- \"I need a code of conduct and email templates\"\n- \"Plan our cloud spend and monitoring\"\n\nDo not use it when the user has already named one specific asset and just wants it - go\nstraight to that module skill.\n\n## How It Works\n\nFollow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.\n\n### Step 1 - Identify intent\n\nRead the request and pick the intent before asking anything.\n\n- \"set up\" / \"build\" / \"create\" -> artifacts wanted; go to Step 2.\n- \"review\" / \"is this right\" / \"audit\" -> a check, not a build; answer from what they share.\n- \"how do I ...\" -> advice question; answer directly, offer the build only if it helps.\n- \"fix\" -> something already exists and is wrong; capture the current state, then Step 2.\n\n### Step 2 - Ask only what is missing\n\nOne question per message. Skip anything already answered in any earlier message. The five\ngroups below are the only intake; take only the ones that change the answer.\n\n- **Business** - What does the business do, in one line? / Who is the customer? / Physical\n  address customers can visit, or service-area only? / City, country.\n- **Brand** - Name as it must appear everywhere, spelling included? / One primary colour\n  already decided? / Any logo, colours or documents in use today?\n- **Digital** - Is there a website today, on which platform? / Who writes the copy? / Any\n  social accounts already open?\n- **Reach** - How many people, and how many locations or staff? / One office or several?\n  / B2B, retail, service or mixed?\n- **Outcome** - What has to exist in 30 days? / Who signs off on brand decisions?\n\nNever invent a business fact. Names, addresses, phone numbers, colours, domains and\nfollower counts that the user has not supplied are `Unknown` and stay that way.\n\n### Step 3 - Hold the internal context\n\n```yaml\nmodule: brand-growth-system-builder\nintent: null            # set up | fix | review | report | import\nscale: null             # Starter | Growth | Scale, only if it changes the answer\nareas:\n  \"Business\": null\n  \"Brand\": null\n  \"Digital\": null\n  \"Reach\": null\n  \"Outcome\": null\nrequested_outputs: []\nconfirmed_facts: []\nopen_questions: []\n```\n\n### Step 4 - Recommend two or three modules\n\nPick the smallest set that gets to a live profile and a usable asset set. Rank them by\nwhat unblocks the rest. Then stop and wait for the user to choose. Examples of the shape\nof a route:\n\n- Nothing exists: `design-theme-guide` -> `gbp-local-seo-intent` -> `business-website-setup`\n- Profile live, no assets: `logo-image-design` -> `brand-kit-print-collateral` -> `linktree-link-hub`\n- Website live, not ranking: `gbp-local-seo-intent` -> `seo-directory-backlinks` -> `presentation-deck`\n- Team growing: `code-of-conduct` -> `business-email-template` -> `observability-cloud-planning`\n\n### Step 5 - Never build here\n\nThis router produces no files. When the user picks a module, read its sibling SKILL.md and continue the requested work. Each module\nskill owns its own artifacts and its own field list.\n\nFor Notion, read the selected module and then the Notion helper. Manual artifacts need\nno connection; live workspace changes follow the shared execution contract.\n\n## Examples\n\n**Prompt**\n\n```\nWe are launching a local service business. We need a consistent identity, a website,\nand a Google Business Profile, but ",
+  "tags": [
+    "ai",
+    "agent",
+    "workflow",
+    "template",
+    "design",
+    "document",
+    "presentation",
+    "image",
+    "security",
+    "seo"
+  ],
+  "useCases": [
+    "\"Set up our branding and website\"",
+    "\"I need a Google Business Profile that ranks\"",
+    "\"Where do I list my business for backlinks?\"",
+    "\"Design a logo, letterhead and visiting card\"",
+    "\"Set up our Facebook, LinkedIn and TikTok\""
+  ],
+  "scrapedAt": "2026-09-30T12:20:19.214Z"
+}

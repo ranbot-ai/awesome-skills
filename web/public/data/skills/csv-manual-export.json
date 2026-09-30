@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-csv-manual-export",
+  "name": "csv-manual-export",
+  "slug": "csv-manual-export",
+  "description": "CSV Manual Export: a UTF-8 CSV template from a confirmed field list, empty by default, with no invented columns or values. Use for an import, staging or handoff file.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/csv-manual-export",
+  "content": "\n# CSV Manual Export\n\n**What it is:** a clean, empty CSV of a field list someone already confirmed - the\ntransport format, with nothing invented and nothing hidden.\n\n## Overview\n\nProduces a CSV representation of a confirmed business schema. Use it for CSV templates,\nimport files, Excel-compatible CSV, a Notion import CSV, a database staging CSV, or a\nhandoff file between systems.\n\nCSV is data transport, not a database. This is a helper: it defines no table of its own\nand renders whatever field list the active module already confirmed, so the header here\nis the same header the module emits.\n\nLayer: n/a. Fits: every stage. Table code: n/a - it renders the active module's table.\n\n## When to Use This Skill\n\n- give me a CSV template\n- export this as a CSV\n- I need a file to import into another system\n- stage this data for a load\n- hand this over to another team as a CSV\n- make it Notion-importable\n\nAlso use it when a module has confirmed a field list and the user wants that list as a\nfile for a system that is not this repository's.\n\nDo not use it when the user asked only for a mapping, an explanation, or a different\nformat. Then output only what was asked for.\n\n## How It Works\n\nFollow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.\n\n### Step 1 - Identify intent\n\nRead the request and pick the intent before asking anything.\n\n- \"a template\" -> an empty CSV template: header row, no data rows.\n- \"with a couple of rows to see the shape\" -> a CSV with example rows, only when asked,\n  and obviously fake.\n- \"this import rejected my file\", \"the columns are wrong\" -> CSV correction: only the\n  columns or escaping that was asked for.\n- \"what goes in which column\" -> CSV column mapping: the mapping, no file.\n- \"for Notion\", \"to load into the accounting package\" -> CSV for import into that system,\n  which may need an encoding or a delimiter the user names.\n\nDefault to no example rows and to UTF-8:\n\n```yaml\nexample_rows: false\nencoding: UTF-8\n```\n\nUse UTF-8 with a byte order mark when Excel compatibility matters. Ask for a delimiter\nonly when the target system is one the user has named and its delimiter is not a comma.\n\n### Step 2 - Ask only what is missing\n\nReuse everything already confirmed, including by the module that owns the field list: the\nfield names and types, the select options, the date and currency fields, the statuses and\nthe IDs. Never ask again for information the user has already supplied.\n\nAsk one short question per message, and only when the answer changes the file:\n\n> **Q:** Do you want the header only, or a couple of example rows?\n\n> **Q:** Which system is importing this file?\n\nIf the answer does not materially change the result, do not ask.\n\n### Step 3 - Hold the internal context\n\nHold the answers in this shape. It stays internal - it is not shown to the user unless\nthey ask, and it never carries a value the user did not give.\n\n```yaml\nmodule: csv-manual-export\nintent: null            # set in Step 1, one of: template, examples, import, correction, mapping\nsource_module: null     # the module whose field list this renders\ntarget_system: null     # named only when the user names one\ndelimiter: \",\"\nencoding: UTF-8\nbom: true               # false only when the target system rejects a byte order mark\nexample_rows: false\nconfirmed_facts: []     # only what the user actually said\nopen_questions: []      # the unanswered ones, in the order worth asking\n```\n\n`source_module` is the one field this skill needs that a module skill does not have. If it\nis unknown, ask which list to export, because a header invented from a guess is a header\nthe user has to fix by hand.\n\n### Step 4 - Recommend the smallest workflow\n\nProduce an already requested output without asking again. For advice-only requests, give a short recommendation and offer the relevant output.\n\n**Recommended approach:** one UTF-8 file, a header of the exact field names in the\ncanonical order, and no rows. Add a one-line type note beside it if the importing system\nneeds one.\n\n**Why this one:** a CSV carries no types, formulas, relations or validation. The file is\nthe easy half; the columns that come in as Text on the far side are the half that decides\nwhether the import was worth doing.\n\n**Workflow:** Field list confirmed -> Header written -> Encoding and delimiter set ->\n(imported) -> Column types set on the far side\n\n### Step 5 - Build only on request\n\nOnce the user asks, emit the CSV as data only. Keep prose outside machine-readable data; provide file links and material limitations separately.\nDo not add SQL, JSON or a Notion mapping unless it was asked for - a file plus a paragraph\nof explanation is not what \"just the CSV\" means.\n\n#### The header\n\nEvery header comes from the confirmed field list, in the canonical order. Never rename a\ncolumn silently, reorder columns without reason, invent a column, or drop a field.\n\n#### Empty by default\n\n```csv\nField 1,Field 2,Fie",
+  "tags": [
+    "api",
+    "ai",
+    "agent",
+    "workflow",
+    "template",
+    "design",
+    "document",
+    "spreadsheet",
+    "presentation",
+    "image"
+  ],
+  "useCases": [
+    "give me a CSV template",
+    "export this as a CSV",
+    "I need a file to import into another system",
+    "stage this data for a load",
+    "hand this over to another team as a CSV"
+  ],
+  "scrapedAt": "2026-09-30T12:23:17.038Z"
+}

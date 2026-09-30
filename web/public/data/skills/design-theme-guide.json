@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-design-theme-guide",
+  "name": "design-theme-guide",
+  "slug": "design-theme-guide",
+  "description": "Design-token register: colour, typography, spacing and radius tokens with light and dark values, contrast ratio and WCAG level. Use for design system documentation.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-theme-guide",
+  "content": "\n# Design Theme Guide\n\n**What it is:** the documented value set a business designs against - colour, type, space, radius, motion - with every colour pair contrast-tested and written down.\n\n## Overview\n\nWorks out the smallest useful theme for the business in front of it, then builds it only\nwhen asked. The default output is a short recommendation, not a token file. The token\nregister - CSV, SQL DDL, JSON Schema, Notion mapping - is produced on request, from one\nfield list so the four cannot drift apart.\n\nLayer: Layer 2: Brand & Design. Fits: Starter stage. Table code: n/a.\n\n**The rule this table exists to enforce:** a theme is a set of *values*, not a set of\nscreens. If a colour, size or spacing value is not a row in the register, it is not part of\nthe system, and anything using it is a one-off. `Value` alone is the single source; the\nlight and dark variants and the type metrics exist on the same row because they are the\nsame token, and a token split across rows drifts within a month.\n\n## When to Use This Skill\n\n- brand colours, colour palette, theme\n- typography, font pairing, type scale\n- spacing, grid, layout rules\n- \"we have no design system\"\n- dark mode and light mode variants\n- accessibility of our own colours\n- Figma variables, Style Dictionary, CSS custom properties, `tokens.json`\n\nDo not use it for: designing the logo itself (that is `logo-image-design`), choosing a\ntypeface's licence (`logo-image-design` covers rights), or a specific component's behaviour.\n\n## How It Works\n\nFollow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.\n\n### Step 1 - Identify intent\n\nRead the request and pick the intent before asking anything.\n\n- \"set up\" / \"build\" / \"create\" -> the user wants the token set; go to Step 2.\n- \"our colours are a mess\" / \"fix\" -> something exists; capture what is in use, then Step 2.\n- \"is this accessible\" / \"review\" / \"audit\" -> a check, not a build; answer from what they share.\n- \"how do we ...\" -> advice question; answer directly and offer the build only if it helps.\n\nAsk only if this is the highest-value missing fact; otherwise proceed without an opener:\n\n> **Q:** What is the business called, and what does one line of it actually do?\n\n### Step 2 - Ask only what is missing\n\nTreat ambiguous replies as unanswered and ask which explicit option the user means. Record unknown values as `Unknown`; `Unknown` is not zero. A record must not be `Done` when a required check fails.\n\nSkip anything the user already answered, in any earlier message. Ask the rest one at a\ntime, and stop as soon as the remaining answers would not change the token set.\n\n- **Identity** - Business name and what it does? / One colour already decided, and is it\n  fixed by a customer, a client or a sign? / Any existing logo, colours or documents?\n- **Surface** - Website only, or print and social as well? / Dark mode needed? / Any CMS\n  or design tool already in use (Figma, Shopify, WordPress, custom)?\n- **Type** - Any typeface already chosen, licensed or not? / Long documents or short\n  marketing copy? / Any script other than Latin?\n- **Access** - Is there a public-sector, EU-market or accessibility obligation? / Has\n  anyone reported low contrast or readability before?\n- **Governance** - Who decides a colour change? / Does the theme need to be handed to an\n  external developer or agency?\n\nNever invent an answer. Hex codes, brand colours, font names and typeface licences the user\nhas not supplied are `Unknown`.\n\n### Step 3 - Hold the internal context\n\n```yaml\nmodule: design-theme-guide\nintent: null            # set up | fix | review | report | import\nscale: null             # Starter | Growth | Scale, only if the answer changes it\nareas:\n  \"Identity\": null\n  \"Surface\": null\n  \"Type\": null\n  \"Access\": null\n  \"Governance\": null\nrequested_outputs: []   # csv | sql | json | notion | xlsx - requested formats only\nconfirmed_facts: []\nopen_questions: []\n```\n\n### Step 4 - Recommend the smallest workflow\n\nBuild an already requested artifact without asking again. For advice-only requests, give a short recommendation and offer the relevant artifact.\n\n**Recommended approach:** One token register with a brand colour as the single source for\naccents, a neutral ramp for everything else, one display face and one body face at a fixed\ntype scale, a 4 or 8 point spacing unit, and light and dark variants. Every colour pair\nthat carries text gets a measured ratio and a WCAG level in the row itself, so the\naccessibility of the theme is auditable rather than remembered.\n\n**Why this one:** A theme that exists as values is the only thing that makes the website,\nthe deck, the letterhead and the social posts look like one business. Screens cannot do\nthat, and a theme with no contrast measurement is a theme that fails the first time\nsomeone chooses a pastel.\n\n**Workflow:** Seed colour chosen → Neutral ramp derived → Semantic colour roles assigned →\nEvery text pair cont",
+  "tags": [
+    "pdf",
+    "xlsx",
+    "markdown",
+    "ai",
+    "workflow",
+    "template",
+    "design",
+    "document",
+    "presentation",
+    "image"
+  ],
+  "useCases": [
+    "brand colours, colour palette, theme",
+    "typography, font pairing, type scale",
+    "spacing, grid, layout rules",
+    "\"we have no design system\"",
+    "dark mode and light mode variants"
+  ],
+  "scrapedAt": "2026-09-30T12:24:26.204Z"
+}

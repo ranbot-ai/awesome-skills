@@ -1,0 +1,30 @@
+{
+  "id": "antigravity-competency-matrix",
+  "name": "competency-matrix",
+  "slug": "competency-matrix",
+  "description": "Competency matrix of expected proficiency by job title and grade, with assessment method and linked skill area. Use for role frameworks and hiring bars.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/competency-matrix",
+  "content": "\n# Competency Matrix\n\n**What it is:** Skill levels.\n\n## Overview\n\nWorks out the smallest useful **Competency Matrix** setup for the business in front of it, then\nbuilds it only when asked. The default output is a short recommendation, not a\nspreadsheet. Artifacts - CSV, SQL DDL, JSON Schema, Notion mapping - are produced on\nrequest, from one field list so they cannot drift apart.\n\nLayer: Layer 5: Develop. Fits: Scale stage. Table code: n/a.\n\n## When to Use This Skill\n\n- competency matrix\n- skills framework\n- role competency model\n- capability matrix\n\nAlso use it when the user says \"skill levels\" for **roles** (what each role must show), or\ndescribes the same process happening in a spreadsheet, a document or someone's inbox.\n\nDo not use it for: payroll calculation, tax filing, or legal advice; assessing named people\nagainst expected levels (that is `skill-gap-analysis`); or certifying competence. This skill\nproduces empty templates only - it never holds or processes real employee or customer data.\n\n## How It Works\n\nFollow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.\n\n### Step 1 - Identify intent\n\nRead the request and pick the intent before asking anything.\n\n- \"set up\" or \"build\" or \"create\" -> `set up`; go to Step 2.\n- \"our process is ...\" or \"it is in a sheet\" -> `import`; capture it, then Step 2.\n- \"is this right\" or \"review\" or \"audit\" -> `review`; answer from what they share. Do not open an intake question.\n- \"how do I ...\" -> `report`; answer directly and offer the build only if it helps.\n- \"fix\" -> `fix`; correct confirmed defects in the supplied material.\n\nOne message, one question, no batching. If intent is `set up` or `import` and the user has\nnot named the roles, open with:\n\n> **Q:** Which roles need a competency model?\n\nIf they already named roles, ask the next missing fact that would change the recommendation\nor the requested artifact. Never ask a question whose answer would not change the result.\n\n### Step 2 - Ask only what is missing\n\nSkip anything the user already answered, in any earlier message. Ask the rest one at a\ntime, and stop as soon as the remaining answers would not change the output.\n\n- **Roles** - Which roles? Skip if already named. This table also stores two different\n  \"level\" facts. Do not ask \"How many levels?\" until you know which: **Grade Level**\n  (job grade) or **Expected Level** (proficiency). First ask which they mean, using those\n  two names. After that answer, ask how many and what they are called.\n- **Competencies** - Which competencies? / Derived from what?\n- **Assessment** - Who assesses? / Self or manager? / How often?\n- **Current process** - Is anything documented? / Training linked? / What is missing?\n- **Outcome** - What do you need? A matrix, an assessment sheet, or a link to a gap record?\n  Do not assume a skill-gap table unless they asked for that link.\n\nNever invent an answer. If the user does not know, record it as unknown and carry on.\nCountry and software are not required inputs for a country-neutral, tool-neutral\ncompetency-matrix review. Ask for either only when the user supplied country- or\ntool-specific requirements that materially change the requested result.\n\n### Step 3 - Hold the internal context\n\nHold the answers in this shape. It stays internal - it is not shown to the user unless\nthey ask, and it never carries a value the user did not give.\n\n```yaml\nmodule: competency-matrix\nintent: null            # setup | advice | review | fix | build | convert | export\nscale: null             # Starter | Growth | Scale, only if the answer changes it\nareas:\n  \"Roles\": null\n  \"Competencies\": null\n  \"Assessment\": null\n  \"Current process\": null\n  \"Outcome\": null\nrequested_outputs: []   # csv | sql | json | notion | xlsx - requested formats only\nconfirmed_facts: []     # only what the user actually said\nopen_questions: []      # the unanswered ones, in the order worth asking\n```\n\n### Step 4 - Recommend the smallest workflow\n\nGive a short recommendation from confirmed facts only, then ask whether to build it. Do not\nbuild unprompted. Ask: \"Want me to build the CSV, SQL DDL, JSON Schema, Notion mapping, or an\nExcel workbook from these confirmed rules?\"\n\n**Recommended approach:** Define a small set of proficiency levels and attach each competency\nto the confirmed roles. Include grades only when the user named them. Mention a gap or\ntraining link only when the user confirmed they need one.\n\n**Why this one:** A matrix that is not attached to roles (and, when confirmed, to a later\nassessment or gap record) does not change any decision.\n\n**Workflow:** Roles → Competencies → Level expectations → Assessment. Add a gap and training\nlink only when that outcome was confirmed.\n\n### Step 5 - Build only on request\n\nOnce the user asks for it, emit the artifacts as data only. No preamble, no summary, no\nclosing line. The Field Reference is the documented starting shape. If the user confir",
+  "tags": [
+    "xlsx",
+    "markdown",
+    "ai",
+    "agent",
+    "automation",
+    "workflow",
+    "template",
+    "document",
+    "spreadsheet",
+    "security"
+  ],
+  "useCases": [
+    "competency matrix",
+    "skills framework",
+    "role competency model",
+    "capability matrix"
+  ],
+  "scrapedAt": "2026-09-30T12:22:04.375Z"
+}

@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-code-of-conduct",
+  "name": "code-of-conduct",
+  "slug": "code-of-conduct",
+  "description": "Build a human-reviewed conduct register after context-first intake. Use when an SME needs policy acknowledgements, complaint handling, and breach follow-up.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/code-of-conduct",
+  "content": "\n# Professional Code of Conduct\n\n**What it is:** the professional conduct policy the business runs on, and the register that\nrecords who has read it, who has been trained, what was reported, what was investigated,\nand what was followed up.\n\n## Overview\n\nWorks out the smallest useful conduct policy for the business in front of it, then builds\nit only when asked. The default output is a short recommendation, not a policy document. The\nacknowledgement and breach register - CSV, SQL DDL, JSON Schema, Notion mapping - is\nproduced on request, from one field list so the four cannot drift apart.\n\nLayer: Layer 7: Protect. Fits: Starter stage. Table code: n/a.\n\n**The rule this table exists to enforce:** a code of conduct is not a document, it is a\npromise that people can be held to. That requires three separate things kept apart in the\nregister: that someone was **given** the policy, that they **understood** it, and that a\nreport is **investigated** and **followed up**. A ticked acknowledgement that only means a\nPDF was opened is not a third of anything - it is nothing.\n\n**The second rule, and the one that is not negotiable:** a person is never judged by this\nskill. Investigation, findings, sanctions and sign-off are human decisions made under the\nbusiness's own procedure and applicable law. The register records that a step happened and\nwho did it. It never records a conclusion.\n\n## When to Use This Skill\n\n- code of conduct, workplace policy, ethics policy, values and behaviour\n- professional standards, expected behaviour, acceptable use\n- staff handbook section on conduct\n- complaint, grievance, misconduct, breach, warning\n- policy acknowledgement, training record, sign-off sheet\n- \"our staff are not professional\", \"customers complained about behaviour\"\n- contractor, supplier and partner conduct expectations\n\nDo not use it for: the disciplinary process itself, which belongs to\n`disciplinary-pip-tracker` in the operational pack; a formal legal drafting task; or\ninvestigation, adjudication or any decision about a person.\n\n## How It Works\n\nFollow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.\n\n### Step 1 - Identify intent\n\nRead the request and pick the intent before asking anything.\n\n- \"write\" / \"set up\" / \"we need\" -> artifacts wanted; go to Step 2.\n- \"we have one\" / \"review\" / \"is this ok\" -> a check, not a build.\n- \"someone complained\" / \"what do we do\" -> an incident, not a policy question. Answer from\n  the business's procedure, escalate to a human, and do not build anything.\n- \"a breach happened\" / \"handle\" -> a case. This skill does not handle cases.\n\nAsk only if this is the highest-value missing fact; otherwise proceed without an opener:\n\n> **Q:** How many people work in the business, and does it have any employees at all yet?\n\n### Step 2 - Ask only what is missing\n\nTreat ambiguous replies as unanswered and ask which explicit option the user means. Record unknown values as `Unknown`; `Unknown` is not zero. A record must not be `Done` when a required check fails.\n\nSkip anything already answered. Ask the rest one at a time, and stop as soon as the\nremaining answers would not change the policy.\n\n- **People** - How many employees, and are there contractors, interns or agency staff? /\n  Are any in a regulated profession? / Is anyone in a union or covered by a collective\n  agreement?\n- **Setting** - Office, site, retail floor, remote, or mixed? / Does anyone work with\n  children, vulnerable adults, or handle money, medication or data?\n- **Rules** - Any existing employee handbook, or HR provider? / Any sector code, licensing\n  body or accreditation with its own conduct rules? / Any written disciplinary procedure\n  already in place?\n- **Law** - Which country are the employees in? / Has anyone advised on what employment law\n  requires - notice, right to be accompanied, right to appeal?\n- **Practical** - Who receives a complaint, and who is independent enough to investigate?\n  / How is a breach recorded today, if at all? / Does the business want the policy to cover\n  social media and personal conduct outside work?\n\nNever invent an answer. Employee names, roles, jurisdictions, legal references, union\nnames, awarding bodies and disciplinary outcomes the user has not supplied are `Unknown`.\nThis skill never supplies legal text.\n\n### Step 3 - Hold the internal context\n\n```yaml\nmodule: code-of-conduct\nintent: null            # set up | review | report | import\nscale: null             # Starter | Growth | Scale, only if the answer changes it\nareas:\n  \"People\": null\n  \"Setting\": null\n  \"Rules\": null\n  \"Law\": null\n  \"Practical\": null\nrequested_outputs: []\nconfirmed_facts: []\nopen_questions: []\n```\n\n### Step 4 - Recommend the smallest workflow\n\nBuild an already requested artifact without asking again. For advice-only requests, give a short recommendation and offer the relevant artifact.\n\n**Recommended approach:** A two-page policy that a p",
+  "tags": [
+    "pdf",
+    "markdown",
+    "ai",
+    "workflow",
+    "template",
+    "design",
+    "document",
+    "spreadsheet",
+    "presentation",
+    "security"
+  ],
+  "useCases": [
+    "code of conduct, workplace policy, ethics policy, values and behaviour",
+    "professional standards, expected behaviour, acceptable use",
+    "staff handbook section on conduct",
+    "complaint, grievance, misconduct, breach, warning",
+    "policy acknowledgement, training record, sign-off sheet"
+  ],
+  "scrapedAt": "2026-09-30T12:21:42.867Z"
+}

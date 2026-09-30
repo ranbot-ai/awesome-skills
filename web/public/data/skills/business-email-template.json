@@ -1,0 +1,31 @@
+{
+  "id": "antigravity-business-email-template",
+  "name": "business-email-template",
+  "slug": "business-email-template",
+  "description": "Business email template register: trigger, sender and recipient type, subject pattern, body structure, personalisation tokens and send checks. Use for repeatable outbound email.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/business-email-template",
+  "content": "\n# Business Email Templates\n\n**What it is:** the repeatable emails a business actually sends - enquiry reply, quote, invoice, payment reminder, onboarding, complaint, review request, newsletter - with the sendable copy, the authentication records and the accessibility and spam checks each one needs.\n\n## Overview\n\nWorks out the smallest useful template set for the business in front of it, then builds it\nonly when asked. The default output is a short recommendation, not a set of email files.\nThe template register - CSV, SQL DDL, JSON Schema, Notion mapping - is produced on request,\nfrom one field list so the four cannot drift apart.\n\nLayer: Layer 6: Engage. Fits: Starter stage. Table code: n/a.\n\n**The rule this table exists to enforce:** a template is not the HTML. A template is the\nenvelope - who it is from, who it is to, what triggers it, what subject pattern it uses, and\nwhether the domain is allowed to send it - plus the body. `Sender Role` and `Trigger`\nexist because most \"our email looks unprofessional\" complaints are a missing trigger and a\nmissing signature, not a missing design. And every template needs a plain-text version,\nwhich is a separate field here rather than an afterthought inside the HTML.\n\n## When to Use This Skill\n\n- email templates, email signatures blocks for body copy, cold outreach\n- enquiry reply, quotation, invoice email, payment reminder\n- welcome email, onboarding, delivery notification\n- complaint response, review request, newsletter, offer\n- \"our emails go to spam\", SPF, DKIM, DMARC, deliverability\n- email tone and structure standards\n- \"make our emails look professional\"\n\nDo not use it for: the printed signature block on letterhead and cards\n(`brand-kit-print-collateral`), the mailbox and account register\n(`company-email-accounts` in the operational pack), or marketing campaign automation.\n\n## How It Works\n\nFollow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.\n\n### Step 1 - Identify intent\n\nRead the request and pick the intent before asking anything.\n\n- \"set up\" / \"build\" / \"we need\" -> artifacts wanted; go to Step 2.\n- \"ours look bad\" / \"fix\" -> something exists; capture what is sent today, then Step 2.\n- \"they go to spam\" / \"review\" / \"audit\" -> a deliverability check, not a build.\n- \"how do I write ...\" -> advice question; answer directly, offer the build only if it helps.\n\nAsk only if this is the highest-value missing fact; otherwise proceed without an opener:\n\n> **Q:** What is the business called, and what does one line of it actually do?\n\n### Step 2 - Ask only what is missing\n\nTreat ambiguous replies as unanswered and ask which explicit option the user means. Record unknown values as `Unknown`; `Unknown` is not zero. A record must not be `Done` when a required check fails.\n\nSkip anything already answered. Ask the rest one at a time, and stop as soon as the\nremaining answers would not change the template list.\n\n- **Volume** - How many emails a day, and who reads them - one person or a team? / Are\n  they sent from a Gmail/Outlook account, a proper domain mailbox, or a platform?\n- **Categories** - Which of enquiry, quote, invoice, reminder, welcome, complaint, review\n  request, newsletter actually happen? / Which are sent today, in any form?\n- **Authentication** - Does the business send from its own domain? / Have SPF, DKIM and\n  DMARC been set up? / Is anything sent through a third-party tool?\n- **Constraints** - Any legal or regulatory wording that must appear - unsubscribe,\n  sender identity, VAT or GST particulars, a claims address? / Any language the business\n  must not use?\n- **Tone** - Formal or plain-spoken? / Who signs, by title or by name? / Any sector that\n  has a required service standard?\n\nNever invent an answer. Domain names, SPF records, DKIM selectors, unsubscribe periods,\nlegal wording, senders, volumes and metrics the user has not supplied are `Unknown`.\n\n### Step 3 - Hold the internal context\n\n```yaml\nmodule: business-email-template\nintent: null            # set up | fix | review | report | import\nscale: null             # Starter | Growth | Scale, only if the answer changes it\nareas:\n  \"Volume\": null\n  \"Categories\": null\n  \"Authentication\": null\n  \"Constraints\": null\n  \"Tone\": null\nrequested_outputs: []\nconfirmed_facts: []\nopen_questions: []\n```\n\n### Step 4 - Recommend the smallest workflow\n\nBuild an already requested artifact without asking again. For advice-only requests, give a short recommendation and offer the relevant artifact.\n\n**Recommended approach:** Start with the four that are sent every week and carry the most\nrisk - enquiry reply, quote, invoice with payment terms, and payment reminder - plus one\nplain-text alternative for each. Put the signature block in a single place so it is edited\nonce. Confirm SPF, DKIM and DMARC before anything is sent from the domain, because no\ntemplate quality survives an unauthenticated domain.\n\n**Why this one:** Those four",
+  "tags": [
+    "markdown",
+    "ai",
+    "automation",
+    "workflow",
+    "template",
+    "design",
+    "document",
+    "image",
+    "security",
+    "rag"
+  ],
+  "useCases": [
+    "email templates, email signatures blocks for body copy, cold outreach",
+    "enquiry reply, quotation, invoice email, payment reminder",
+    "welcome email, onboarding, delivery notification",
+    "complaint response, review request, newsletter, offer",
+    "\"our emails go to spam\", SPF, DKIM, DMARC, deliverability"
+  ],
+  "scrapedAt": "2026-09-30T12:20:44.699Z"
+}
