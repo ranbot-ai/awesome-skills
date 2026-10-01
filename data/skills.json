@@ -18988,6 +18988,31 @@
       "scrapedAt": "2026-01-31T06:51:42.813Z"
     },
     {
+      "id": "antigravity-deep-research-framework",
+      "name": "deep-research-framework",
+      "slug": "deep-research-framework",
+      "description": "Framework for deep research reports: define the question and tier sources first, cross-verify, then write conclusion-first reports with explicit uncertainty statements. Use when the user asks for a research report, topic investigation, or competitive analysis.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/deep-research-framework",
+      "content": "\n# Deep Research Report Framework\n\nProduce a report whose \"conclusions are trustworthy, process is traceable, and the unknowns are explicitly marked.\" The quality floor of research is set by its sources, not its prose.\n\n## When to Use\n\n- Use when the user asks for a research report, topic investigation, or competitive analysis.\n- Use when sources need tiering and cross-verification before writing conclusions.\n\n## Workflow\n\n1. **Define the question**: write in one sentence what the report must answer. Add at most 3 sub-questions. Starting before the question is clear guarantees the research will sprawl.\n2. **Tier your sources** (tier before you search, so you don't believe whatever you find first):\n   - Primary: official docs, original papers, original filings, protocol/legal texts, measured data.\n   - Secondary: reputable press, industry reports, expert interviews.\n   - Tertiary: social-media posts, forum threads, aggregator sites — leads only, never evidence.\n3. **Cross-verify**: key conclusions need two or more independent sources. Two sources quoting the same origin don't count as independent. If no second source exists, downgrade the conclusion to \"single-source claim\" and mark it as such.\n4. **Writing structure** (conclusion first):\n   - Opening: 3–5 lines stating the core conclusions.\n   - Body: one section per sub-question, each in \"conclusion → evidence → sources\" order.\n   - Closing: uncertainty statement — \"what wasn't found, what's speculation, under what conditions the conclusions change.\"\n5. **Timestamps**: date every key fact (\"as of Sep 2026\"). Undated information is treated as \"possibly stale\" by default.\n\n## Rules\n\n- Mark speculation as speculation. Use \"may\", \"likely\", \"unverified\" — never dress speculation up with \"clearly\" or \"it is well known\".\n- No tertiary source supports a core conclusion. A forum thread can point a direction, never serve as evidence.\n- Every number in the report has a source. A number without a source is deleted, not rewritten.\n- State \"what you don't know\" before \"what you know\" — honest uncertainty beats pretty certainty.\n\n## Minimal example (report outline template)\n\n```markdown\n# Research Report: <Topic> (example outline)\n\n**Core conclusions** (3–5 lines): …\n\n## 1. Sub-question one\n- Conclusion: …\n- Evidence: … (source: primary/secondary, as of …)\n- Evidence: … (second independent source)\n\n## 2. Sub-question two\n…\n\n## Uncertainty statement\n- Not found: …\n- Single-source claims: … (one source only, pending verification)\n- Invalidation conditions: if … changes, conclusion X in this report needs reassessment.\n```\n\n## Limitations\n\n- Source quality is the ceiling of the report. Declared \"primary sources\" cannot be verified for authenticity by this skill; it only enforces the tiering and cross-verification discipline.\n- Independent-source requirements are a judgment call. Two outlets quoting the same wire story or press release count as one origin, and the skill cannot detect shared-origin syndication automatically.\n- Web access is required for source-backed research. Without search or fetch tools the skill stops rather than writing a report from memory, or marks every external fact `[UNVERIFIED]` and warns on the cover.\n- Recency claims expire. A dated fact (\"as of Sep 2026\") is only valid until the underlying source changes; the skill does not re-verify older reports.\n\n## Anti-patterns\n\n- ❌ Single-source verdicts: one social-media post becomes \"research shows\".\n- ❌ Speculation as fact: \"clearly\" and \"it is well known\" are the most dangerous words in a research report.\n- ❌ Undated facts: 2023 data presented as the current state; the conclusion quietly expires.\n- ❌ Evidence pile with no conclusion: 20 sources listed, and the reader still can't tell what the author believes.\n- ❌ Hiding the unknowns: burying what wasn't found makes the report look omniscient and plants landmines.\n",
+      "tags": [
+        "markdown",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "template",
+        "cro"
+      ],
+      "useCases": [
+        "Use when the user asks for a research report, topic investigation, or competitive analysis.",
+        "Use when sources need tiering and cross-verification before writing conclusions."
+      ],
+      "scrapedAt": "2026-10-01T12:59:23.416Z"
+    },
+    {
       "id": "antigravity-deepapi",
       "name": "deepapi",
       "slug": "deepapi",
@@ -24738,6 +24763,31 @@
       "scrapedAt": "2026-03-07T06:54:40.928Z"
     },
     {
+      "id": "antigravity-five-axis-code-review",
+      "name": "five-axis-code-review",
+      "slug": "five-axis-code-review",
+      "description": "Five-axis code review checklist (correctness, security, readability, performance, test coverage) producing actionable comments instead of style nitpicks. Use when the user asks to review code, a diff, or a pull request.",
+      "category": "Development & Code Tools",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/five-axis-code-review",
+      "content": "\n# Code Review Checklist\n\nOne review answers a single question: \"Will this code become someone else's problem within three months?\" Walk the five axes in order; each axis gets pass / fail / N-A, and every failure must come with a concrete fix.\n\n## When to Use\n\n- Use when the user asks to review code, a diff, or a pull request.\n- Use when a review should stay actionable and skip style nitpicks.\n\n## Workflow\n\n1. **Check the scope first**: look at the diff size. Over ~400 changed lines, ask for a split before reviewing — review quality on huge diffs always collapses.\n2. **Check axis by axis** (order = priority):\n   - **Correctness**: edge cases (null, empty, zero, negative, oversized), concurrency/timing assumptions, error handling (are exceptions swallowed?). The only axis that can block a merge.\n   - **Security**: is user input concatenated into SQL / shell commands / HTML; are secrets or tokens hard-coded; does logging leak sensitive data.\n   - **Readability**: do names say what things are; does each function do one thing; are magic numbers named. Flag only what you can't understand — not \"I'd write it differently.\"\n   - **Performance**: repeated queries or recomputation inside loops; N+1 problems; avoidable large-object copies. No data-free performance speculation (\"this might get slow\" is not a comment).\n   - **Test coverage**: does new logic have tests; do edge cases have cases. All-green tests with the critical path uncovered still get sent back.\n3. **Write the comments**: fixed format — `[axis] file:line problem → suggested fix`. Only actionable suggestions; \"could be optimized\" is not one.\n4. **Triage**: `Must fix` (correctness / security) vs `Should fix` (readability / performance / tests). \"Should fix\" doesn't block the merge, but say so explicitly.\n\n## Rules\n\n- At most 10 comments per review. More than that means the code is too broken — send it back for a rewrite instead of grading 50 items.\n- No style policing: indentation, quotes, semicolons — that's the linter's job, not a human's.\n- Speak with the diff: every comment must cite a concrete line of code. A comment without a code reference is invalid.\n\n## Checklist (minimal executable version)\n\n```markdown\n## Code review checklist\n\n- [ ] Correctness: edge cases (null/0/negative/oversized) handled, exceptions not swallowed\n- [ ] Correctness: concurrency/timing assumptions hold, no races\n- [ ] Security: no SQL/shell/HTML injection points, no hard-coded secrets, no sensitive data in logs\n- [ ] Readability: names are descriptive, functions have a single responsibility, no magic numbers\n- [ ] Performance: no repeated queries/computation in loops, no N+1, no evidence-free performance worries\n- [ ] Tests: new logic is covered, edge cases have cases\n- [ ] Scope: diff ≤ ~400 lines, otherwise split first\n```\n\nExample review comments:\n\n```text\n[Must fix][Correctness] order.py:87 empty order list triggers IndexError → guard for empty before taking [0]\n[Should fix][Readability] order.py:92 magic number 86400 → name it SECONDS_PER_DAY\n```\n\n## Limitations\n\n- Covers five review axes, not every quality dimension. Domain-specific correctness (financial rounding, protocol conformance, accessibility conformance) still needs its own specialist review.\n- The five axes are heuristics for a human reviewer. A clean pass on the checklist does not prove the change is correct, secure, or performant.\n- Security review here is a reading checklist, not a scanner. Static analysis, dependency audit and secret scanning run as separate tools.\n- The skill reviews diffs; it cannot establish that requirements were met, and an empty findings list only means no finding was evidenced in the reviewed scope.\n\n## Anti-patterns\n\n- ❌ Drive-by LGTM: approving before reading the whole diff — the review is theater.\n- ❌ Style police: 18 of 20 comments about quotes and line breaks while a null-pointer dereference slips through.\n- ❌ Comments without code: \"this logic looks off\" — which logic? Which line? Unsaid means invalid.\n- ❌ Performance speculation: \"this loop might be slow at scale\" — a performance comment without data is noise.\n- ❌ Grading 50 items: when there are too many problems to list, the right move is \"rewrite and resubmit\", not playing teacher.\n",
+      "tags": [
+        "markdown",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "security",
+        "rag"
+      ],
+      "useCases": [
+        "Use when the user asks to review code, a diff, or a pull request.",
+        "Use when a review should stay actionable and skip style nitpicks."
+      ],
+      "scrapedAt": "2026-10-01T13:02:45.006Z"
+    },
+    {
       "id": "antigravity-fix-review",
       "name": "fix-review",
       "slug": "fix-review",
@@ -25923,56 +25973,6 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-07-02T09:27:39.164Z"
-    },
-    {
-      "id": "antigravity-frontend-ui-dark-ts",
-      "name": "frontend-ui-dark-ts",
-      "slug": "frontend-ui-dark-ts",
-      "description": "A modern dark-themed React UI system using Tailwind CSS and Framer Motion. Designed for dashboards, admin panels, and data-rich applications with glassmorphism effects and tasteful animations.",
-      "category": "Creative & Media",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/frontend-ui-dark-ts",
-      "content": "\n# Frontend UI Dark Theme (TypeScript)\n\nA modern dark-themed React UI system using **Tailwind CSS** and **Framer Motion**. Designed for dashboards, admin panels, and data-rich applications with glassmorphism effects and tasteful animations.\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## Color Usage\n\n| Use Case | Color | Class |\n|----------|-------|-------|\n| Primary action | Brand purple | `bg-brand text-white` |\n| Primary hover | Brand hover | `hover:bg-brand-hover` |\n| Page background | Neutral bg1 | `bg-neutral-bg1` |\n| Card background | Neutral bg2 | `bg-neutral-bg2` |\n| Elevated surface | Neutral bg3 | `bg-neutral-bg3` |\n| Input background | Neutral bg2 | `bg-neutral-bg2` |\n| Input focus | Neutral bg3 | `focus:bg-neutral-bg3` |\n| Border default | Border default | `border-border` |\n| Border subtle | Border subtle | `border-border-subtle` |\n| Success | Status success | `text-status-success` |\n| Warning | Status warning | `text-status-warning` |\n| Error | Status error | `text-status-error` |\n\n## When to Use\nThis skill is applicable to execute the workflow or actions described in the overview.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "typescript",
-        "react",
-        "ai",
-        "workflow",
-        "design",
-        "tailwind"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-12T07:17:20.036Z"
-    },
-    {
-      "id": "antigravity-frontend-ui-engineering",
-      "name": "frontend-ui-engineering",
-      "slug": "frontend-ui-engineering",
-      "description": "Builds production-quality UIs. Use when building or modifying user-facing interfaces. Use when creating components, implementing layouts, managing state, or when the output needs to look and feel production-quality rather than AI-generated.",
-      "category": "Creative & Media",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/frontend-ui-engineering",
-      "content": "\n# Frontend UI Engineering\n\n## Overview\n\nBuild production-quality user interfaces that are accessible, performant, and visually polished. The goal is UI that looks like it was built by a design-aware engineer at a top company — not like it was generated by an AI. This means real design system adherence, proper accessibility, thoughtful interaction patterns, and no generic \"AI aesthetic.\"\n\n## When to Use\n\n- Building new UI components or pages\n- Modifying existing user-facing interfaces\n- Implementing responsive layouts\n- Adding interactivity or state management\n- Fixing visual or UX issues\n\n## Component Architecture\n\n### File Structure\n\nColocate everything related to a component:\n\n```\nsrc/components/\n  TaskList/\n    TaskList.tsx          # Component implementation\n    TaskList.test.tsx     # Tests\n    TaskList.stories.tsx  # Storybook stories (if using)\n    use-task-list.ts      # Custom hook (if complex state)\n    types.ts              # Component-specific types (if needed)\n```\n\n### Component Patterns\n\n**Prefer composition over configuration:**\n\n```tsx\n// Good: Composable\n<Card>\n  <CardHeader>\n    <CardTitle>Tasks</CardTitle>\n  </CardHeader>\n  <CardBody>\n    <TaskList tasks={tasks} />\n  </CardBody>\n</Card>\n\n// Avoid: Over-configured\n<Card\n  title=\"Tasks\"\n  headerVariant=\"large\"\n  bodyPadding=\"md\"\n  content={<TaskList tasks={tasks} />}\n/>\n```\n\n**Keep components focused:**\n\n```tsx\n// Good: Does one thing\nexport function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {\n  return (\n    <li className=\"flex items-center gap-3 p-3\">\n      <Checkbox checked={task.done} onChange={() => onToggle(task.id)} />\n      <span className={task.done ? 'line-through text-muted' : ''}>{task.title}</span>\n      <Button variant=\"ghost\" size=\"sm\" onClick={() => onDelete(task.id)}>\n        <TrashIcon />\n      </Button>\n    </li>\n  );\n}\n```\n\n**Separate data fetching from presentation:**\n\n```tsx\n// Container: handles data\nexport function TaskListContainer() {\n  const { tasks, isLoading, error } = useTasks();\n\n  if (isLoading) return <TaskListSkeleton />;\n  if (error) return <ErrorState message=\"Failed to load tasks\" retry={refetch} />;\n  if (tasks.length === 0) return <EmptyState message=\"No tasks yet\" />;\n\n  return <TaskList tasks={tasks} />;\n}\n\n// Presentation: handles rendering\nexport function TaskList({ tasks }: { tasks: Task[] }) {\n  return (\n    <ul role=\"list\" className=\"divide-y\">\n      {tasks.map(task => <TaskItem key={task.id} task={task} />)}\n    </ul>\n  );\n}\n```\n\n## State Management\n\n**Choose the simplest approach that works:**\n\n```\nLocal state (useState)           → Component-specific UI state\nLifted state                     → Shared between 2-3 sibling components\nContext                          → Theme, auth, locale (read-heavy, write-rare)\nURL state (searchParams)         → Filters, pagination, shareable UI state\nServer state (React Query, SWR)  → Remote data with caching\nGlobal store (Zustand, Redux)    → Complex client state shared app-wide\n```\n\n**Avoid prop drilling deeper than 3 levels.** If you're passing props through components that don't use them, introduce context or restructure the component tree.\n\n## Design System Adherence\n\n### Avoid the AI Aesthetic\n\nAI-generated UI has recognizable patterns. Avoid all of them:\n\n| AI Default | Why It Is a Problem | Production Quality |\n|---|---|---|\n| Purple/indigo everything | Models default to visually \"safe\" palettes, making every app look identical | Use the project's actual color palette |\n| Excessive gradients | Gradients add visual noise and clash with most design systems | Flat or subtle gradients matching the design system |\n| Rounded everything (rounded-2xl) | Maximum rounding signals \"friendly\" but ignores the hierarchy of corner radii in real designs | Consistent border-radius from the design system |\n| Generic hero sections | Template-driven layout with no connection to the actual content or user need | Content-first layouts |\n| Lorem ipsum-style copy | Placeholder text hides layout problems that real content reveals (length, wrapping, overflow) | Realistic placeholder content |\n| Oversized padding everywhere | Equal generous padding destroys visual hierarchy and wastes screen space | Consistent spacing scale |\n| Stock card grids | Uniform grids are a layout shortcut that ignores information priority and scanning patterns | Purpose-driven layouts |\n| Shadow-heavy design | Layered shadows add depth that competes with content and slows rendering on low-end devices | Subtle or no shadows unless the design system specifies |\n\n### Spacing and Layout\n\nUse a consistent spacing scale. Don't invent values:\n\n```css\n/* Use the scale: 0.25rem increments (or whatever the project uses) */\n/* Good */  padding: 1rem;      /* 16px */\n/* Good */  gap: 0.75rem;       /* 12px */\n/* Bad */   padding: 13px;      /* Not on any scale */\n/* Bad */   margin-top: 2.3rem; /* Not on any scale */\n```\n\n### Typography\n\nRespect the type hierarchy:\n\n```\nh1 → Page title (one per page)\nh",
-      "tags": [
-        "react",
-        "ai",
-        "agent",
-        "template",
-        "design",
-        "presentation",
-        "security",
-        "tailwind"
-      ],
-      "useCases": [
-        "Building new UI components or pages",
-        "Modifying existing user-facing interfaces",
-        "Implementing responsive layouts",
-        "Adding interactivity or state management",
-        "Fixing visual or UX issues"
-      ],
-      "scrapedAt": "2026-07-02T09:27:40.174Z"
     },
     {
       "id": "antigravity-design-it-frutiger-aero",
@@ -27866,21 +27866,21 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 368
+      "count": 369
     },
     {
       "id": "creative-media",
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 123
+      "count": 121
     },
     {
       "id": "development-code-tools",
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 105
+      "count": 106
     },
     {
       "id": "security-systems",
@@ -27931,55 +27931,55 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 15,
       "newSkillCount": 0,
-      "stars": 293256
+      "stars": 293693
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 179096
+      "stars": 179249
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 75951
+      "stars": 76283
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 89599
+      "stars": 89698
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1770
+      "stars": 1773
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1047,
-      "newSkillCount": 58,
-      "stars": 47101
+      "newSkillCount": 8,
+      "stars": 47146
     },
     {
       "name": "Xquik",
       "url": "https://github.com/Xquik-dev/x-twitter-scraper",
       "skillCount": 1,
       "newSkillCount": 0,
-      "stars": 211
+      "stars": 210
     }
   ],
-  "lastUpdated": "2026-09-30T12:27:14.327Z",
+  "lastUpdated": "2026-10-01T13:03:20.721Z",
   "stats": {
     "totalSkills": 1126,
-    "newSkills": 67,
-    "scrapedAt": "2026-09-30T12:27:14.327Z"
+    "newSkills": 17,
+    "scrapedAt": "2026-10-01T13:03:20.721Z"
   }
 }
