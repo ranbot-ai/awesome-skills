@@ -1741,6 +1741,35 @@
       "scrapedAt": "2026-02-23T07:14:04.216Z"
     },
     {
+      "id": "antigravity-ai-agent-evaluation-benchmarking",
+      "name": "ai-agent-evaluation-benchmarking",
+      "slug": "ai-agent-evaluation-benchmarking",
+      "description": "Autonomous AI agent benchmark evaluation register: task completion rates, planning accuracy, tool invocation precision, and cost benchmarks.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-agent-evaluation-benchmarking",
+      "content": "\n# AI Agent Capability Evaluation & Benchmarking\n\n**What it is:** Standardizes multi-metric capability benchmarking, token cost efficiency, and regression monitoring across autonomous coding agents.\n\n## Overview\n\nProvides a standardized, auditable framework and data model for **AI Agent Capability Evaluation & Benchmarking** operations across distributed engineering and decentralized application systems.\n\n## When to Use This Skill\n\n- When formalizing architectural contracts, security invariants, or operational limits for AI Agent Capability Evaluation & Benchmarking.\n- When cross-functional review is required between protocol developers, smart contract auditors, and AI engineering agents.\n- When generating reproducible CSV, SQL DDL, JSON Schema, and Notion property registers for tracking compliance.\n\n## How It Works\n\n1. Define the parameters, thresholds, and identity bindings required for the target operational register.\n2. Select appropriate boundary enforcement values from validated enum select sets.\n3. Export standardized artifacts (CSV table, SQL DDL, JSON Schema) to integrate into validation CI pipelines.\n\n## Field Reference\n\n| # | Field Name | Type | SQL Type | JSON Schema Type | Notion Property Type | Example Value |\n|---|------------|------|----------|------------------|----------------------|---------------|\n| 1 | Benchmark Run ID | `id` | `SERIAL PRIMARY KEY` | `integer` | Text | `BENCH-001` |\n| 2 | Evaluated Agent Model | `select` | `VARCHAR(64)` | `string` | Select | `Claude 3.7 Sonnet` |\n| 3 | Benchmark Suite Domain | `select` | `VARCHAR(64)` | `string` | Select | `SWE-bench Verified` |\n| 4 | Tasks Evaluated Count | `number` | `INTEGER` | `number` | Number | `100` |\n| 5 | Pass Rate Percentage | `number` | `NUMERIC(5,2)` | `number` | Number | `78.40` |\n| 6 | Tool Hallucination Rate % | `number` | `NUMERIC(5,2)` | `number` | Number | `0.60` |\n| 7 | Average Tokens Per Task | `number` | `INTEGER` | `number` | Number | `42500` |\n| 8 | Cost Per Solved Task USD | `currency` | `NUMERIC(8,4)` | `number` | Number | `0.3420` |\n| 9 | Regression Verdict | `select` | `VARCHAR(32)` | `string` | Select | `Superior` |\n| 10 | Evaluation Lead | `text` | `VARCHAR(64)` | `string` | Text | `Ranjeet2063` |\n| 11 | Benchmark Execution Date | `date` | `DATE` | `string, format: date` | Date | `2026-10-01` |\n\n## Select Options\n\n**Evaluated Agent Model**\n\n```\nClaude 3.7 Sonnet | Claude 3.5 Sonnet | GPT-4o | Gemini 2.0 Flash | DeepSeek V3\n```\n\n**Benchmark Suite Domain**\n\n```\nSWE-bench Verified | WebArena | AgentBench | HumanEval-Rust | Web3AuditBench\n```\n\n**Regression Verdict**\n\n```\nSuperior | Parity Baseline | Regression Failure\n```\n\n## Relations\n\n- `Audit Reference` -> links to the formal review documentation or test repository.\n- `Target Architecture` -> links to the deployed contract or autonomous agent runtime component.\n\n## Examples\n\n**Prompt**\n\n```\nHow do I configure and track AI Agent Capability Evaluation & Benchmarking for our production environment?\n```\n\n**Recommended Next Step**\n\n> Generate the unified field schema, SQL DDL migration, and JSON validation schema to register into your system catalog.\n>\n> Workflow: Define criteria -> Run automated verification -> Record baseline -> Monitor invariants.\n\n## Best Practices\n\n- Enforce strict typing on numerical bounds and currency amounts; avoid unstructured free-text fields for critical states.\n- Re-run validation test suites on every state-altering commit or parameter change.\n- Keep example data synthetic and isolated from production cryptographic keys or private endpoints.\n\n## Limitations\n\n- Provides architectural specifications, data models, and verification schemas; does not execute direct transaction signing without authorized external tooling.\n- Requires network connectivity and valid RPC credentials when querying on-chain states.\n\n## Security & Safety Notes\n\n- All parameters declare `risk: safe`. No unauthorized state modification or privileged credential access is performed.\n- Use synthetic dummy keys and mock addresses in test suites and local verification scripts.\n\n## Common Pitfalls\n\n- **Problem:** Mismatched decimal precision between contract runtime and database register.\n  **Solution:** Always verify decimals using the explicit field mapping in this reference.\n- **Problem:** Missing authorization checks prior to state update.\n  **Solution:** Cross-validate against the Security Audit register before deployment.\n\n## Related Skills\n\n- @ai-agent-tool-routing - covers tool schema registration and retry policy.\n- @ai-prompt-regression-testing - covers prompt regression baselines and drift.\n- @ai-code-generation-guardrails - covers static guardrails for generated code.\n\n## Reusable Prompt\n\n```\nI want to establish a verified AI Agent Capability Evaluation & Benchmarking register for our production protocol.\nGuide me through the required field parameters and output the corresponding SQL DDL and JSON Schema.\n```\n",
+      "tags": [
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "gpt",
+        "automation",
+        "workflow",
+        "document",
+        "security",
+        "rag"
+      ],
+      "useCases": [
+        "When formalizing architectural contracts, security invariants, or operational limits for AI Agent Capability Evaluation & Benchmarking.",
+        "When cross-functional review is required between protocol developers, smart contract auditors, and AI engineering agents.",
+        "When generating reproducible CSV, SQL DDL, JSON Schema, and Notion property registers for tracking compliance."
+      ],
+      "scrapedAt": "2026-10-02T12:14:59.999Z"
+    },
+    {
       "id": "antigravity-ai-agent-security",
       "name": "ai-agent-security",
       "slug": "ai-agent-security",
@@ -1770,6 +1799,35 @@
         "Designing approval workflows for high-risk agent actions"
       ],
       "scrapedAt": "2026-09-20T11:03:01.186Z"
+    },
+    {
+      "id": "antigravity-ai-agent-tool-routing",
+      "name": "ai-agent-tool-routing",
+      "slug": "ai-agent-tool-routing",
+      "description": "Autonomous AI agent tool router register: schema registration, runtime parameter coercion, idempotency keys, and error recovery policies.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-agent-tool-routing",
+      "content": "\n# Autonomous AI Agent Tool Routing\n\n**What it is:** Coordinates discovery, runtime execution bounds, and fault-tolerant retry policies for external tools consumed by autonomous AI coding agents.\n\n## Overview\n\nProvides a standardized, auditable framework and data model for **Autonomous AI Agent Tool Routing** operations across distributed engineering and decentralized application systems.\n\n## When to Use This Skill\n\n- When formalizing architectural contracts, security invariants, or operational limits for Autonomous AI Agent Tool Routing.\n- When cross-functional review is required between protocol developers, smart contract auditors, and AI engineering agents.\n- When generating reproducible CSV, SQL DDL, JSON Schema, and Notion property registers for tracking compliance.\n\n## How It Works\n\n1. Define the parameters, thresholds, and identity bindings required for the target operational register.\n2. Select appropriate boundary enforcement values from validated enum select sets.\n3. Export standardized artifacts (CSV table, SQL DDL, JSON Schema) to integrate into validation CI pipelines.\n\n## Field Reference\n\n| # | Field Name | Type | SQL Type | JSON Schema Type | Notion Property Type | Example Value |\n|---|------------|------|----------|------------------|----------------------|---------------|\n| 1 | Tool Definition ID | `id` | `SERIAL PRIMARY KEY` | `integer` | Text | `TOOL-001` |\n| 2 | Tool Canonical Name | `text` | `VARCHAR(64)` | `string` | Text | `stellar_ledger_query` |\n| 3 | Target Protocol / Server | `text` | `VARCHAR(64)` | `string` | Text | `Stellar Horizon RPC` |\n| 4 | Invocation Mode | `select` | `VARCHAR(32)` | `string` | Select | `Synchronous` |\n| 5 | Idempotency Enforced | `select` | `VARCHAR(16)` | `string` | Select | `Yes` |\n| 6 | Parameter Coercion Strategy | `select` | `VARCHAR(64)` | `string` | Select | `Strict Pydantic V2` |\n| 7 | Rate Limit Requests Per Min | `number` | `INTEGER` | `number` | Number | `120` |\n| 8 | Retry Backoff Policy | `select` | `VARCHAR(32)` | `string` | Select | `Exponential with Jitter` |\n| 9 | Timeout Threshold Ms | `number` | `INTEGER` | `number` | Number | `5000` |\n| 10 | Router Registration Status | `select` | `VARCHAR(32)` | `string` | Select | `Active Verified` |\n| 11 | Last Validation Date | `date` | `DATE` | `string, format: date` | Date | `2026-10-01` |\n\n## Select Options\n\n**Invocation Mode**\n\n```\nSynchronous | Asynchronous Background | Scheduled Cron\n```\n\n**Idempotency Enforced**\n\n```\nYes | No\n```\n\n**Parameter Coercion Strategy**\n\n```\nStrict Pydantic V2 | JSON Schema Draft 7 | Permissive Fallback\n```\n\n**Retry Backoff Policy**\n\n```\nExponential with Jitter | Linear Step | Immediate Reversion\n```\n\n**Router Registration Status**\n\n```\nDraft | Active Verified | Deprecated | Blocked\n```\n\n## Relations\n\n- `Audit Reference` -> links to the formal review documentation or test repository.\n- `Target Architecture` -> links to the deployed contract or autonomous agent runtime component.\n\n## Examples\n\n**Prompt**\n\n```\nHow do I configure and track Autonomous AI Agent Tool Routing for our production environment?\n```\n\n**Recommended Next Step**\n\n> Generate the unified field schema, SQL DDL migration, and JSON validation schema to register into your system catalog.\n>\n> Workflow: Define criteria -> Run automated verification -> Record baseline -> Monitor invariants.\n\n## Best Practices\n\n- Enforce strict typing on numerical bounds and currency amounts; avoid unstructured free-text fields for critical states.\n- Re-run validation test suites on every state-altering commit or parameter change.\n- Keep example data synthetic and isolated from production cryptographic keys or private endpoints.\n\n## Limitations\n\n- Provides architectural specifications, data models, and verification schemas; does not execute direct transaction signing without authorized external tooling.\n- Requires network connectivity and valid RPC credentials when querying on-chain states.\n\n## Security & Safety Notes\n\n- All parameters declare `risk: safe`. No unauthorized state modification or privileged credential access is performed.\n- Use synthetic dummy keys and mock addresses in test suites and local verification scripts.\n\n## Common Pitfalls\n\n- **Problem:** Mismatched decimal precision between contract runtime and database register.\n  **Solution:** Always verify decimals using the explicit field mapping in this reference.\n- **Problem:** Missing authorization checks prior to state update.\n  **Solution:** Cross-validate against the Security Audit register before deployment.\n\n## Related Skills\n\n- @ai-prompt-regression-testing - covers prompt regression baselines and drift.\n- @web3-rate-limiting-circuit-breaker - provides operational guardrails and threshold breakers.\n- @cross-chain-relayer-audit - covers message hashes, nonces and quorum proofs.\n\n## Reusable Prompt\n\n```\nI want to establish a verified Autonomous AI Agent Tool Routing register for our production protocol.\nGuide me through the required field parameters and ",
+      "tags": [
+        "python",
+        "mcp",
+        "ai",
+        "agent",
+        "llm",
+        "automation",
+        "workflow",
+        "document",
+        "security",
+        "cro"
+      ],
+      "useCases": [
+        "When formalizing architectural contracts, security invariants, or operational limits for Autonomous AI Agent Tool Routing.",
+        "When cross-functional review is required between protocol developers, smart contract auditors, and AI engineering agents.",
+        "When generating reproducible CSV, SQL DDL, JSON Schema, and Notion property registers for tracking compliance."
+      ],
+      "scrapedAt": "2026-10-02T12:15:01.274Z"
     },
     {
       "id": "antigravity-ai-agents-architect",
@@ -1819,6 +1877,35 @@
         "You need generated health reports or question-answering over health metrics and trends."
       ],
       "scrapedAt": "2026-03-07T06:52:01.286Z"
+    },
+    {
+      "id": "antigravity-ai-code-generation-guardrails",
+      "name": "ai-code-generation-guardrails",
+      "slug": "ai-code-generation-guardrails",
+      "description": "Autonomous AI code generation safety guardrail register: static AST analysis, forbidden import filters, and zero-day vulnerability checks.",
+      "category": "Security & Systems",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-code-generation-guardrails",
+      "content": "\n# AI Code Generation Security Guardrails\n\n**What it is:** Defines automated AST validation filters, forbidden pattern checks, and boundary invariants for code synthesized by generative AI models.\n\n## Overview\n\nProvides a standardized, auditable framework and data model for **AI Code Generation Security Guardrails** operations across distributed engineering and decentralized application systems.\n\n## When to Use This Skill\n\n- When formalizing architectural contracts, security invariants, or operational limits for AI Code Generation Security Guardrails.\n- When cross-functional review is required between protocol developers, smart contract auditors, and AI engineering agents.\n- When generating reproducible CSV, SQL DDL, JSON Schema, and Notion property registers for tracking compliance.\n\n## How It Works\n\n1. Define the parameters, thresholds, and identity bindings required for the target operational register.\n2. Select appropriate boundary enforcement values from validated enum select sets.\n3. Export standardized artifacts (CSV table, SQL DDL, JSON Schema) to integrate into validation CI pipelines.\n\n## Field Reference\n\n| # | Field Name | Type | SQL Type | JSON Schema Type | Notion Property Type | Example Value |\n|---|------------|------|----------|------------------|----------------------|---------------|\n| 1 | Guardrail Policy ID | `id` | `SERIAL PRIMARY KEY` | `integer` | Text | `SEC-001` |\n| 2 | Target Language Pipeline | `select` | `VARCHAR(32)` | `string` | Select | `Rust (Soroban)` |\n| 3 | AST Security Scanner | `text` | `VARCHAR(64)` | `string` | Text | `cargo-audit & clippy` |\n| 4 | Dangerous Primitives Filter | `select` | `VARCHAR(16)` | `string` | Select | `Yes` |\n| 5 | Disallowed Unsafe Blocks | `select` | `VARCHAR(16)` | `string` | Select | `Enforced Strict` |\n| 6 | Reentrancy Detection Rule | `select` | `VARCHAR(32)` | `string` | Select | `CEI Pattern Enforced` |\n| 7 | Prompt Injection Protection | `select` | `VARCHAR(32)` | `string` | Select | `Dual-Layer Boundary` |\n| 8 | Max Allowed Cyclomatic Complexity | `number` | `INTEGER` | `number` | Number | `15` |\n| 9 | Pipeline Enforcement Status | `select` | `VARCHAR(32)` | `string` | Select | `Blocking CI Gate` |\n| 10 | Lead Security Engineer | `text` | `VARCHAR(64)` | `string` | Text | `Ranjeet2063` |\n| 11 | Policy Verification Date | `date` | `DATE` | `string, format: date` | Date | `2026-10-01` |\n\n## Select Options\n\n**Target Language Pipeline**\n\n```\nRust (Soroban) | TypeScript (React) | Solidity (EVM) | Python (FastAPI)\n```\n\n**Dangerous Primitives Filter**\n\n```\nYes | No\n```\n\n**Disallowed Unsafe Blocks**\n\n```\nEnforced Strict | Warning Permissive\n```\n\n**Reentrancy Detection Rule**\n\n```\nCEI Pattern Enforced | Mutex Lock | Unchecked\n```\n\n**Prompt Injection Protection**\n\n```\nDual-Layer Boundary | Heuristic Filter | None\n```\n\n**Pipeline Enforcement Status**\n\n```\nBlocking CI Gate | Advisory Only | Disabled\n```\n\n## Relations\n\n- `Audit Reference` -> links to the formal review documentation or test repository.\n- `Target Architecture` -> links to the deployed contract or autonomous agent runtime component.\n\n## Examples\n\n**Prompt**\n\n```\nHow do I configure and track AI Code Generation Security Guardrails for our production environment?\n```\n\n**Recommended Next Step**\n\n> Generate the unified field schema, SQL DDL migration, and JSON validation schema to register into your system catalog.\n>\n> Workflow: Define criteria -> Run automated verification -> Record baseline -> Monitor invariants.\n\n## Best Practices\n\n- Enforce strict typing on numerical bounds and currency amounts; avoid unstructured free-text fields for critical states.\n- Re-run validation test suites on every state-altering commit or parameter change.\n- Keep example data synthetic and isolated from production cryptographic keys or private endpoints.\n\n## Limitations\n\n- Provides architectural specifications, data models, and verification schemas; does not execute direct transaction signing without authorized external tooling.\n- Requires network connectivity and valid RPC credentials when querying on-chain states.\n\n## Security & Safety Notes\n\n- All parameters declare `risk: safe`. No unauthorized state modification or privileged credential access is performed.\n- Use synthetic dummy keys and mock addresses in test suites and local verification scripts.\n\n## Common Pitfalls\n\n- **Problem:** Mismatched decimal precision between contract runtime and database register.\n  **Solution:** Always verify decimals using the explicit field mapping in this reference.\n- **Problem:** Missing authorization checks prior to state update.\n  **Solution:** Cross-validate against the Security Audit register before deployment.\n\n## Related Skills\n\n- @ai-agent-tool-routing - covers tool schema registration and retry policy.\n- @ai-agent-evaluation-benchmarking - covers task-completion and cost benchmarking.\n- @ai-prompt-regression-testing - covers prompt regression baselines and drift.\n\n## Reusable Prompt\n\n```\nI want to establish a ver",
+      "tags": [
+        "python",
+        "typescript",
+        "react",
+        "api",
+        "ai",
+        "agent",
+        "workflow",
+        "document",
+        "security",
+        "vulnerability"
+      ],
+      "useCases": [
+        "When formalizing architectural contracts, security invariants, or operational limits for AI Code Generation Security Guardrails.",
+        "When cross-functional review is required between protocol developers, smart contract auditors, and AI engineering agents.",
+        "When generating reproducible CSV, SQL DDL, JSON Schema, and Notion property registers for tracking compliance."
+      ],
+      "scrapedAt": "2026-10-02T12:15:02.713Z"
     },
     {
       "id": "antigravity-ai-coding-agent-guardrails",
@@ -2288,6 +2375,34 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-26T13:16:26.829Z"
+    },
+    {
+      "id": "antigravity-ai-prompt-regression-testing",
+      "name": "ai-prompt-regression-testing",
+      "slug": "ai-prompt-regression-testing",
+      "description": "Prompt engineering regression test matrix register: baseline outputs, semantic drift thresholds, judge evaluations, and golden dataset.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-prompt-regression-testing",
+      "content": "\n# AI Prompt Regression Test Matrix\n\n**What it is:** Tracks regression baselines, evaluation rubrics, and automated judge verdicts to prevent output degradation across prompt revisions.\n\n## Overview\n\nProvides a standardized, auditable framework and data model for **AI Prompt Regression Test Matrix** operations across distributed engineering and decentralized application systems.\n\n## When to Use This Skill\n\n- When formalizing architectural contracts, security invariants, or operational limits for AI Prompt Regression Test Matrix.\n- When cross-functional review is required between protocol developers, smart contract auditors, and AI engineering agents.\n- When generating reproducible CSV, SQL DDL, JSON Schema, and Notion property registers for tracking compliance.\n\n## How It Works\n\n1. Define the parameters, thresholds, and identity bindings required for the target operational register.\n2. Select appropriate boundary enforcement values from validated enum select sets.\n3. Export standardized artifacts (CSV table, SQL DDL, JSON Schema) to integrate into validation CI pipelines.\n\n## Field Reference\n\n| # | Field Name | Type | SQL Type | JSON Schema Type | Notion Property Type | Example Value |\n|---|------------|------|----------|------------------|----------------------|---------------|\n| 1 | Prompt TestCase ID | `id` | `SERIAL PRIMARY KEY` | `integer` | Text | `PTEST-001` |\n| 2 | Prompt Identifier | `text` | `VARCHAR(64)` | `string` | Text | `soroban_code_refactor_v2` |\n| 3 | Target LLM Model Family | `select` | `VARCHAR(64)` | `string` | Select | `Claude 3.5 Sonnet` |\n| 4 | Evaluation Metric | `select` | `VARCHAR(64)` | `string` | Select | `AST Code Correctness` |\n| 5 | Semantic Drift Threshold | `number` | `NUMERIC(5,2)` | `number` | Number | `0.05` |\n| 6 | Golden Baseline Match % | `number` | `NUMERIC(5,2)` | `number` | Number | `98.50` |\n| 7 | Judge Model Evaluator | `text` | `VARCHAR(64)` | `string` | Text | `Gemini 1.5 Pro` |\n| 8 | Zero-Shot Reasoning Verified | `select` | `VARCHAR(16)` | `string` | Select | `Yes` |\n| 9 | Latency Bound Seconds | `number` | `NUMERIC(6,2)` | `number` | Number | `3.20` |\n| 10 | Test Suite Verdict | `select` | `VARCHAR(32)` | `string` | Select | `Passed` |\n| 11 | Benchmarking Date | `date` | `DATE` | `string, format: date` | Date | `2026-10-01` |\n\n## Select Options\n\n**Target LLM Model Family**\n\n```\nClaude 3.5 Sonnet | GPT-4o | Gemini 1.5 Pro | DeepSeek Coder\n```\n\n**Evaluation Metric**\n\n```\nAST Code Correctness | Semantic Embedding Cosine | Exact Match | Rubric Scoring\n```\n\n**Zero-Shot Reasoning Verified**\n\n```\nYes | No\n```\n\n**Test Suite Verdict**\n\n```\nPassed | Degraded | Failed Regression\n```\n\n## Relations\n\n- `Audit Reference` -> links to the formal review documentation or test repository.\n- `Target Architecture` -> links to the deployed contract or autonomous agent runtime component.\n\n## Examples\n\n**Prompt**\n\n```\nHow do I configure and track AI Prompt Regression Test Matrix for our production environment?\n```\n\n**Recommended Next Step**\n\n> Generate the unified field schema, SQL DDL migration, and JSON validation schema to register into your system catalog.\n>\n> Workflow: Define criteria -> Run automated verification -> Record baseline -> Monitor invariants.\n\n## Best Practices\n\n- Enforce strict typing on numerical bounds and currency amounts; avoid unstructured free-text fields for critical states.\n- Re-run validation test suites on every state-altering commit or parameter change.\n- Keep example data synthetic and isolated from production cryptographic keys or private endpoints.\n\n## Limitations\n\n- Provides architectural specifications, data models, and verification schemas; does not execute direct transaction signing without authorized external tooling.\n- Requires network connectivity and valid RPC credentials when querying on-chain states.\n\n## Security & Safety Notes\n\n- All parameters declare `risk: safe`. No unauthorized state modification or privileged credential access is performed.\n- Use synthetic dummy keys and mock addresses in test suites and local verification scripts.\n\n## Common Pitfalls\n\n- **Problem:** Mismatched decimal precision between contract runtime and database register.\n  **Solution:** Always verify decimals using the explicit field mapping in this reference.\n- **Problem:** Missing authorization checks prior to state update.\n  **Solution:** Cross-validate against the Security Audit register before deployment.\n\n## Related Skills\n\n- @ai-agent-tool-routing - covers tool schema registration and retry policy.\n- @cross-chain-relayer-audit - covers message hashes, nonces and quorum proofs.\n- @smart-contract-formal-verification - verifies state invariants mathematically.\n\n## Reusable Prompt\n\n```\nI want to establish a verified AI Prompt Regression Test Matrix register for our production protocol.\nGuide me through the required field parameters and output the corresponding SQL DDL and JSON Schema.\n```\n",
+      "tags": [
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "gpt",
+        "workflow",
+        "document",
+        "security",
+        "cro"
+      ],
+      "useCases": [
+        "When formalizing architectural contracts, security invariants, or operational limits for AI Prompt Regression Test Matrix.",
+        "When cross-functional review is required between protocol developers, smart contract auditors, and AI engineering agents.",
+        "When generating reproducible CSV, SQL DDL, JSON Schema, and Notion property registers for tracking compliance."
+      ],
+      "scrapedAt": "2026-10-02T12:15:12.480Z"
     },
     {
       "id": "antigravity-ai-red-teaming",
@@ -3408,14 +3523,14 @@
       "tags": [
         "python",
         "node",
+        "markdown",
         "api",
         "mcp",
         "claude",
         "ai",
         "agent",
         "llm",
-        "automation",
-        "workflow"
+        "automation"
       ],
       "useCases": [],
       "scrapedAt": "2026-07-19T08:27:38.550Z"
@@ -13563,6 +13678,36 @@
       "scrapedAt": "2026-08-28T18:29:53.748Z"
     },
     {
+      "id": "antigravity-cline-pilot",
+      "name": "cline-pilot",
+      "slug": "cline-pilot",
+      "description": "Proxy Cline CLI coding tasks: dispatch, monitor background runs via hard evidence, relay decision points in a fixed format, verify against a checklist, and learn per-tag preferences over time.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cline-pilot",
+      "content": "\n# Cline Pilot — 代用户调度 Cline 的\"领航员\"\n\n## Overview\n\nCline Pilot turns the orchestrating agent into a reliable proxy for the **Cline CLI**.\nIt dispatches focused coding tasks (one at a time, serially), monitors long background\nruns against **hard evidence** — `git` state, test-report numbers, non-empty artifacts —\ninstead of trusting the model's self-report, relays decision points back to the user in\na fixed 4-element format, and verifies completion against an explicit checklist before\nsaying \"done.\"\n\nThe differentiation versus the simpler `*-delegate` skills is the **learning loop**: over\ntime it learns the user's instruction style, approval granularity, and per-project-tag\npreferences (backend/long-term vs. frontend/short-term, production-data-risk, etc.) and\napplies them proactively, with the user retaining one-shot veto. This loop lives entirely\nin private, git-ignored skill-local files — no user-specific data is bundled.\n\nCanonical source: [gongdear/cline-pilot](https://github.com/gongdear/cline-pilot) (MIT).\n\n**定位**（不可擅改）：我扮演“学习并代替给用户发指令”的角色。不掌握项目架构细节、不参与技术决策，只管三件事：\n1. 把用户的任务准确转达给 Cline（背景 + 约束一条不丢）\n2. 学习并复用【该标签类项目】下用户的指令风格、推进习惯、批准粒度\n3. 把 Cline 的决策点/产出/报错压缩成用户能拍板的汇报\n\n架构知识的单事实源 = 工程自己的 memory bank + clinerules（跟随仓库、Cline 维护）。本技能只存**简介+标签**与**指令偏好**。\n\n## When to Use\n- 用户下达任何需要在 Cline CLI 里执行的编码任务（写测试/重构/修 bug/出报告）\n- 新项目冷启动：工程还没有 clinerules/memory-bank，需按 Cline 最佳实践初始化（见“冷启动流程”）\n- 需要在后台驱动 Cline 长任务并汇报进度\n- **不适用**：用户自己在 Cline TUI 里手工操作；非 Cline 的 agent（用 claude-code/codex/opencode 技能）\n\n## Prerequisites\n1. `cline --version` 可用（本环境要求 cline CLI v3.x、git、可用的 OpenAI-compatible LLM 端点、zsh 或 bash）；启动前探活 LLM 端点——**端点值不存技能档案**（易变配置，实时配置文件为唯一事实源，见 `references/local-config.md` 的 LLM 端点节）\n2. 工程是 git 仓库且已切到任务分支\n3. **首次使用或 local-config.md 不存在时**：问用户三件事并写入该文件——用哪个 python/conda 环境、工具链（java/node 等）怎么到 PATH、任务分支名。\n\n## 环境铁律（所有开发类任务）\nCline 进程必须在用户指定开发环境内启动（继承工具链），自检通过才启动：\n- 按 local-config.md 的启动模板执行（含脏 CONDA 栈清理）\n- 自检：python 指向指定环境 ／ 工具链版本 ／ `git branch --show-current` = 任务分支\n- conda 启动报错长文 = 初始化噪音，以最终 `env=<name>` 为准\n\n## 编排模式（二选一）\n**模式 1：非交互（默认）**——长 prompt 写进**技能目录任务文件**注入（遵最高优先级纪律第3条：不落 /tmp、不落代码工程），避免引号地狱：\n```bash\ncd 仓库 && cline --json \"$(cat ~/.hermes/skills/cline-pilot/scratch/task.md)\"   # 后台 + 完成通知（terminal background=true notify=true）\n# 任务书短也可内联：cline --json \"active memory bank\\n...\"\n# 任务书内不得含删除/回滚指令（先经用户审核才单独发）\n# 常用限制参数：--retries 6（默认）／ -t <秒> 超时 ／ --thinking high 仅疑难 ／ --compaction agentic（默认）\n# 长/隔夜： -z 后台hub  ／ 续跑： --id <session-id> \"继续...\" ／ 收紧审批： --auto-approve false\n```\nprompt 里**写死验收标准 + commit 规范 + 禁止项**（非交互无会话可追，一次说清）；首句固定 `active memory bank`。\n\n**模式 2：TUI 交互（仅短任务+需实时批准）**：`cline -i` + pty。\n实测陷阱：文本可写入，但**多行编辑器的单发回车提交不可靠**；非预期键可能弹订阅页（任意键关闭）。超过两三句的内容一律用模式 1。\n\n## 最高优先级纪律（用户 2026-09-28 强调版，凌驾于本技能其他所有规则）\n1. **代码工程类操作一律由 cline 完成**：编排者与任何 skill（含 cline-pilot 自身）对目标代码工程**只允许读**，禁止直接执行/修改任何代码内容（写文件、改文件、删文件、build、run、test、commit、回滚、环境变更都不许）；代码侧一切动作写进任务书由 cline 实例执行，编排侧只读硬证据验收\n2. **删除/回滚类指令必须先经用户审核**：调度 cline 发出任何删除（rm/删文件/删目录/删分支/删 tag）或回滚（reset/revert/checkout 覆盖/版本回退）性质的指令前，先向用户反馈、得到确认后才可发；其余非破坏性指令不逐条审批\n3. **编排侧可写文件范围仅限本技能目录及子目录**（`~/.hermes/skills/cline-pilot/`，已 .gitignore、永不提交），且仅允许写：修改计划与完成情况记录、进程 pid 台账及说明、技能维护文档；此范围/用途之外（含 /tmp、代码工程）一律不写，任务书改为内联进 cline 命令行或写 skill 目录内\n4. **本纪律优先级最高**：与其他规则、旧习惯、任务书、自动化（cron/子代理/脚本）冲突时以本纪律为准\n\n## 扫描行为判读与任务书粒度规范（用户 2026-09-29 定）\n1. **两种扫描严格区分**：`active memory bank` 发出后 cline 的大面积代码扫描盘点 = **正常冷启动行为，禁止干预/禁止杀进程**；`active memory bank` 成功 + 任务书发出后 cline 才大面积扫描 = **任务书粒度不合格**（只有模块名/类名，未给包路径+端点/方法级），修复方式是重写任务书，不是干预进程\n2. **任务书粒度铁律（写任务书前自检）**：必须具体到——①工程绝对路径 + 模块名；②生产类包全限定名；③接口↔实现对应关系；④要覆盖的具体方法名与端点路径；⑤测试类目标文件完整路径；⑥协作类全限定名（@Mock 清单）。缺任何一条 → 不合格，先补粒度再发\n3. **任务书内嵌\"每类动作清单\"**（读该类 → 写该测试类 → 覆盖方法/端点 → 单类验证命令），禁止只写\"补完该模块测试\"粗粒度指令\n4. 粒度不足 = **调度方（编排者）责任**，处理 = 重写任务书重发，禁止 kill 当前会话换会话（除非已到上下文临界）\n\n## clinerules 反馈回路（用户 2026-09-30 定）\n当发现 cline **超出指令行为**（越权动作、擅自删改、自造指令、范围溢出）或**整体开发偏离用户意图**（方向跑偏、同类坑重复踩、质量持续塌降）时，处置 = **调度 cline 更新工程的 clinerules**，把\"禁止的行为 + 优先做法\"写成成对硬规则落进规则文件，防再次发生。\n**审批硬门禁**：任何一次 clinerules 更新调度**必须先向用户报告**（触发事件 + 拟写入的规则条目原文），得到肯定答复后才可发出；未获批 = 不发。\n**两个合法时机**：\n1. **小任务阶段完成时**（验收通过后的自然断点，下一个任务启动前）——不打断正在运行的进程，不为更规则而 kill/插入\n2. **严重错误紧急叫停时**（幻觉自毁、连续失败、数据风险等）——顺序固定：**先更新 clinerules（经用户批准）→ 再重试/继续**；规则先于重试，禁止\"先重跑再看\"\n规则内容要求：可执行短句、禁止项与优先做法成对出现（仿防幻觉硬协议体例）；**clinerules 的维护权归 cline**：编排者（cline-pilot）与任何外部进程/工具对工程 `.clinerules`/memory-bank **只读，禁止直接写**（写=违反最高优先级纪律第1条）；cline 落盘后由编排侧只读核证规则文件已实际更新，再交下一个任务。\n\n## 异常通报纪律（用户 2026-09-27 定）\n1. 正常运行中**不打扰**用户；异常经处理/重试后恢复正常的也**不打扰**。\n2. 仅当**连续 3 次尝试修复/重试后仍失败**、需要人工决策/干预时，才主动发消息。\n3. 每次异常的根因、处置动作、重试次数、最终结果，必须记入后台进程台账的「异常处置台账」段，**全部汇总进最终总报告**交付。\n\n## 编码任务生命周期（核心调度规则，不可擅改）\n1. **同一时间只允许一个 cline 编码进程**。拉起新编码轮次前，必须先查台账（`~/.hermes/skills/cline-pilot/scratch/bg-procs.md`）+ `ps`：确认**上一个编码进程已退出**（连同其 hub daemon、nohup 子进程），否则先处置干净再起，禁止进程叠加\n2. **多任务只允许串行**：一个结束 → 验收 → 记录 → 再启下一个。禁止用多子代理/多 worktree/并行 mvn 把多个任务压给同一批进程；禁止为了赶进度开第二个编码会话\n3. **一次编码 = 一个聚焦小任务**（单一功能/单模块/单修复点）。禁止把“整工程里程碑”压给一个会话——长任务必炸上下文（实测：340轮/2.2亿input token 后流断，且断点前大量轮次耗在调研上）\n4. **任务生命周期闭环（每个小任务严格走完）**：\n   a. 启动前",
+      "tags": [
+        "python",
+        "node",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "automation",
+        "workflow",
+        "design"
+      ],
+      "useCases": [
+        "用户下达任何需要在 Cline CLI 里执行的编码任务（写测试/重构/修 bug/出报告）",
+        "新项目冷启动：工程还没有 clinerules/memory-bank，需按 Cline 最佳实践初始化（见“冷启动流程”）",
+        "需要在后台驱动 Cline 长任务并汇报进度",
+        "**不适用**：用户自己在 Cline TUI 里手工操作；非 Cline 的 agent（用 claude-code/codex/opencode 技能）"
+      ],
+      "scrapedAt": "2026-10-02T12:19:26.241Z"
+    },
+    {
       "id": "antigravity-close-automation",
       "name": "close-automation",
       "slug": "close-automation",
@@ -17064,6 +17209,31 @@
       "scrapedAt": "2026-06-27T08:46:04.170Z"
     },
     {
+      "id": "antigravity-cross-chain-relayer-audit",
+      "name": "cross-chain-relayer-audit",
+      "slug": "cross-chain-relayer-audit",
+      "description": "Cross-chain relayer bridge audit register: message hash verifications, replay protection nonces, validator quorum, and withdrawal proofs.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cross-chain-relayer-audit",
+      "content": "\n# Cross-Chain Relayer Security Audit\n\n**What it is:** Audits cross-chain message passing protocols, cryptographic commitment trees, and validator quorum consensus for cross-chain relayers.\n\n## Overview\n\nProvides a standardized, auditable framework and data model for **Cross-Chain Relayer Security Audit** operations across distributed engineering and decentralized application systems.\n\n## When to Use This Skill\n\n- When formalizing architectural contracts, security invariants, or operational limits for Cross-Chain Relayer Security Audit.\n- When cross-functional review is required between protocol developers, smart contract auditors, and AI engineering agents.\n- When generating reproducible CSV, SQL DDL, JSON Schema, and Notion property registers for tracking compliance.\n\n## How It Works\n\n1. Define the parameters, thresholds, and identity bindings required for the target operational register.\n2. Select appropriate boundary enforcement values from validated enum select sets.\n3. Export standardized artifacts (CSV table, SQL DDL, JSON Schema) to integrate into validation CI pipelines.\n\n## Field Reference\n\n| # | Field Name | Type | SQL Type | JSON Schema Type | Notion Property Type | Example Value |\n|---|------------|------|----------|------------------|----------------------|---------------|\n| 1 | Relayer Audit ID | `id` | `SERIAL PRIMARY KEY` | `integer` | Text | `REL-001` |\n| 2 | Source Chain Domain | `text` | `VARCHAR(32)` | `string` | Text | `Ethereum Sepolia` |\n| 3 | Destination Chain Domain | `text` | `VARCHAR(32)` | `string` | Text | `Stellar Testnet` |\n| 4 | Message Hash Verification | `select` | `VARCHAR(32)` | `string` | Select | `Keccak256 Verified` |\n| 5 | Replay Protection Nonce Check | `select` | `VARCHAR(32)` | `string` | Select | `Enforced Strict Sequence` |\n| 6 | Validator Quorum Threshold | `text` | `VARCHAR(16)` | `string` | Text | `5-of-7 Quorum` |\n| 7 | Slashing Condition Active | `select` | `VARCHAR(16)` | `string` | Select | `Yes` |\n| 8 | Withdrawal Proof Standard | `select` | `VARCHAR(64)` | `string` | Select | `Merkle Patricia Trie Proof` |\n| 9 | Finality Confirmation Blocks | `number` | `INTEGER` | `number` | Number | `32` |\n| 10 | Bridge Security Posture | `select` | `VARCHAR(32)` | `string` | Select | `Verified Secure` |\n| 11 | Audit Stamp Date | `date` | `DATE` | `string, format: date` | Date | `2026-10-01` |\n\n## Select Options\n\n**Message Hash Verification**\n\n```\nKeccak256 Verified | SHA256 Verified | Invalid Hash\n```\n\n**Replay Protection Nonce Check**\n\n```\nEnforced Strict Sequence | Bitmask Window | Unchecked\n```\n\n**Slashing Condition Active**\n\n```\nYes | No\n```\n\n**Withdrawal Proof Standard**\n\n```\nMerkle Patricia Trie Proof | ZK-SNARK Validity Proof | Light Client Header\n```\n\n**Bridge Security Posture**\n\n```\nVerified Secure | Under Audit | Vulnerable Finding\n```\n\n## Relations\n\n- `Audit Reference` -> links to the formal review documentation or test repository.\n- `Target Architecture` -> links to the deployed contract or autonomous agent runtime component.\n\n## Examples\n\n**Prompt**\n\n```\nHow do I configure and track Cross-Chain Relayer Security Audit for our production environment?\n```\n\n**Recommended Next Step**\n\n> Generate the unified field schema, SQL DDL migration, and JSON validation schema to register into your system catalog.\n>\n> Workflow: Define criteria -> Run automated verification -> Record baseline -> Monitor invariants.\n\n## Best Practices\n\n- Enforce strict typing on numerical bounds and currency amounts; avoid unstructured free-text fields for critical states.\n- Re-run validation test suites on every state-altering commit or parameter change.\n- Keep example data synthetic and isolated from production cryptographic keys or private endpoints.\n\n## Limitations\n\n- Provides architectural specifications, data models, and verification schemas; does not execute direct transaction signing without authorized external tooling.\n- Requires network connectivity and valid RPC credentials when querying on-chain states.\n\n## Security & Safety Notes\n\n- All parameters declare `risk: safe`. No unauthorized state modification or privileged credential access is performed.\n- Use synthetic dummy keys and mock addresses in test suites and local verification scripts.\n\n## Common Pitfalls\n\n- **Problem:** Mismatched decimal precision between contract runtime and database register.\n  **Solution:** Always verify decimals using the explicit field mapping in this reference.\n- **Problem:** Missing authorization checks prior to state update.\n  **Solution:** Cross-validate against the Security Audit register before deployment.\n\n## Related Skills\n\n- @smart-contract-formal-verification - verifies state invariants mathematically.\n- @web3-rate-limiting-circuit-breaker - provides operational guardrails and threshold breakers.\n- @stellar-anchor-integration - covers SEP-10 and SEP-24 anchor compliance flows.\n\n## Reusable Prompt\n\n```\nI want to establish a verified Cross-Chain Relayer Security Audit register for our produ",
+      "tags": [
+        "ai",
+        "agent",
+        "workflow",
+        "document",
+        "security",
+        "cro"
+      ],
+      "useCases": [
+        "When formalizing architectural contracts, security invariants, or operational limits for Cross-Chain Relayer Security Audit.",
+        "When cross-functional review is required between protocol developers, smart contract auditors, and AI engineering agents.",
+        "When generating reproducible CSV, SQL DDL, JSON Schema, and Notion property registers for tracking compliance."
+      ],
+      "scrapedAt": "2026-10-02T12:20:50.037Z"
+    },
+    {
       "id": "antigravity-cross-platform-contract-propagation-audit",
       "name": "cross-platform-contract-propagation-audit",
       "slug": "cross-platform-contract-propagation-audit",
@@ -19054,6 +19224,32 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-01-29T06:58:43.484Z"
+    },
+    {
+      "id": "antigravity-defi-yield-strategy-allocator",
+      "name": "defi-yield-strategy-allocator",
+      "slug": "defi-yield-strategy-allocator",
+      "description": "Multi-vault automated yield strategy allocation register: APY benchmarks, impermanent loss risk tiers, and rebalancing triggers.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/defi-yield-strategy-allocator",
+      "content": "\n# DeFi Yield Strategy Allocation Register\n\n**What it is:** Monitors capital efficiency, yield compounding schedules, and downside protection bounds across decentralized finance yield protocols.\n\n## Overview\n\nProvides a standardized, auditable framework and data model for **DeFi Yield Strategy Allocation Register** operations across distributed engineering and decentralized application systems.\n\n## When to Use This Skill\n\n- When formalizing architectural contracts, security invariants, or operational limits for DeFi Yield Strategy Allocation Register.\n- When cross-functional review is required between protocol developers, smart contract auditors, and AI engineering agents.\n- When generating reproducible CSV, SQL DDL, JSON Schema, and Notion property registers for tracking compliance.\n\n## How It Works\n\n1. Define the parameters, thresholds, and identity bindings required for the target operational register.\n2. Select appropriate boundary enforcement values from validated enum select sets.\n3. Export standardized artifacts (CSV table, SQL DDL, JSON Schema) to integrate into validation CI pipelines.\n\n## Field Reference\n\n| # | Field Name | Type | SQL Type | JSON Schema Type | Notion Property Type | Example Value |\n|---|------------|------|----------|------------------|----------------------|---------------|\n| 1 | Strategy Allocation ID | `id` | `SERIAL PRIMARY KEY` | `integer` | Text | `YLD-001` |\n| 2 | Target Protocol Strategy | `text` | `VARCHAR(64)` | `string` | Text | `Soroban AMM Liquidity Staking` |\n| 3 | Allocated Capital Principal | `currency` | `NUMERIC(24,7)` | `number` | Number | `100000.0000000` |\n| 4 | Base APY Yield % | `number` | `NUMERIC(6,2)` | `number` | Number | `14.25` |\n| 5 | Impermanent Loss Risk Score | `select` | `VARCHAR(32)` | `string` | Select | `Low (Stablecoin Pair)` |\n| 6 | Max Protocol Drawdown Cap % | `number` | `NUMERIC(5,2)` | `number` | Number | `5.00` |\n| 7 | Automated Harvest Frequency Hours | `number` | `INTEGER` | `number` | Number | `12` |\n| 8 | Emergency Unwind Trigger | `select` | `VARCHAR(64)` | `string` | Select | `Price Divergence > 3%` |\n| 9 | Capital Allocation Health | `select` | `VARCHAR(32)` | `string` | Select | `Optimum Yield` |\n| 10 | Portfolio Manager | `text` | `VARCHAR(64)` | `string` | Text | `Ranjeet2063` |\n| 11 | Last Rebalance Date | `date` | `DATE` | `string, format: date` | Date | `2026-10-01` |\n\n## Select Options\n\n**Impermanent Loss Risk Score**\n\n```\nLow (Stablecoin Pair) | Moderate (Correlated) | High (Volatile)\n```\n\n**Emergency Unwind Trigger**\n\n```\nPrice Divergence > 3% | TVL Drain > 20% | Oracle Failure\n```\n\n**Capital Allocation Health**\n\n```\nOptimum Yield | Underperforming | Unwinding | Liquidated\n```\n\n## Relations\n\n- `Audit Reference` -> links to the formal review documentation or test repository.\n- `Target Architecture` -> links to the deployed contract or autonomous agent runtime component.\n\n## Examples\n\n**Prompt**\n\n```\nHow do I configure and track DeFi Yield Strategy Allocation Register for our production environment?\n```\n\n**Recommended Next Step**\n\n> Generate the unified field schema, SQL DDL migration, and JSON validation schema to register into your system catalog.\n>\n> Workflow: Define criteria -> Run automated verification -> Record baseline -> Monitor invariants.\n\n## Best Practices\n\n- Enforce strict typing on numerical bounds and currency amounts; avoid unstructured free-text fields for critical states.\n- Re-run validation test suites on every state-altering commit or parameter change.\n- Keep example data synthetic and isolated from production cryptographic keys or private endpoints.\n\n## Limitations\n\n- Provides architectural specifications, data models, and verification schemas; does not execute direct transaction signing without authorized external tooling.\n- Requires network connectivity and valid RPC credentials when querying on-chain states.\n\n## Security & Safety Notes\n\n- All parameters declare `risk: safe`. No unauthorized state modification or privileged credential access is performed.\n- Use synthetic dummy keys and mock addresses in test suites and local verification scripts.\n\n## Common Pitfalls\n\n- **Problem:** Mismatched decimal precision between contract runtime and database register.\n  **Solution:** Always verify decimals using the explicit field mapping in this reference.\n- **Problem:** Missing authorization checks prior to state update.\n  **Solution:** Cross-validate against the Security Audit register before deployment.\n\n## Related Skills\n\n- @soroban-liquidity-pool - covers AMM invariant and LP-share modelling.\n- @web3-rate-limiting-circuit-breaker - provides operational guardrails and threshold breakers.\n- @soroban-oracle-data-feed-audit - covers oracle heartbeat and stale-price handling.\n\n## Reusable Prompt\n\n```\nI want to establish a verified DeFi Yield Strategy Allocation Register register for our production protocol.\nGuide me through the required field parameters and output the corresponding SQL DDL and JSON Schema.\n```\n",
+      "tags": [
+        "api",
+        "ai",
+        "agent",
+        "workflow",
+        "document",
+        "security",
+        "cro"
+      ],
+      "useCases": [
+        "When formalizing architectural contracts, security invariants, or operational limits for DeFi Yield Strategy Allocation Register.",
+        "When cross-functional review is required between protocol developers, smart contract auditors, and AI engineering agents.",
+        "When generating reproducible CSV, SQL DDL, JSON Schema, and Notion property registers for tracking compliance."
+      ],
+      "scrapedAt": "2026-10-02T12:22:01.094Z"
     },
     {
       "id": "antigravity-defuddle",
@@ -21557,6 +21753,35 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-02-19T07:11:10.409Z"
+    },
+    {
+      "id": "antigravity-dropthehassle-publish",
+      "name": "dropthehassle-publish",
+      "slug": "dropthehassle-publish",
+      "description": "Publish a finished static site to a free HTTPS link with DropTheHassle: build it if needed, deploy, hand over the claim link, verify it is live, never spend money.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dropthehassle-publish",
+      "content": "\n# DropTheHassle publish\n\n## Overview\n\nDropTheHassle (https://dropthehassle.com) hosts finished static files (HTML, CSS, JS, images) on a\nfree `name.dropthehassle.app` link with HTTPS, and can later put the same site on a real domain\nwith no DNS editing. A first deploy needs no account: it returns a live URL and a claim link. This\nskill makes the agent check that the folder is a finished build, deploy it with the CLI or MCP\nserver, give the human the claim link, and verify the site is live. No DropTheHassle tool can pay,\nand the agent must never try to. Adapted from the official skill, which also ships a local\npreflight script and longer references: https://github.com/bosmdavid-gif/dropthehassle-skill\n\n## When to Use This Skill\n\n- Use when the user asks to publish, deploy, host or share a site they built with an AI tool and\n  wants DropTheHassle, or wants it on a free link or their own domain without DNS work and has not\n  picked another host.\n- Use when the folder is static output: a hand-written `index.html`, or a Vite, Astro, Create React\n  App, Nuxt generate, Next.js `output: 'export'` or TanStack Start SPA build.\n- Do not use for apps that need a server at runtime (SSR, API routes, server functions, PHP). Say\n  that DropTheHassle only hosts static files.\n\n## How It Works\n\n### Step 1: Find the finished folder\n\n- Plain folder with `index.html` at the top: that is the site.\n- Project with a `build` script or a `vite.config.*`, `next.config.*`, `astro.config.*` or\n  `nuxt.config.*`: look for `index.html` in `dist/`, `build/`, `out/` or `.output/public/`. If\n  there is none, install with the lockfile's package manager and run the build first. Next.js\n  needs `output: 'export'` (writes `out/`).\n- An `index.html` that loads `/src/main.tsx` or another `.ts`, `.tsx`, `.jsx` or `/src/` script\n  is a dev entry. Build it.\n- The DropTheHassle CLI and MCP server never run the build. On unbuilt source they stop and print\n  the build command.\n\n### Step 2: Check the limits\n\nBefore the site is claimed: 25 MB and 1,000 files, and no executables or archives\n(`.exe .msi .apk .dmg .scr .bat .zip .rar .7z .iso`). Signed in: 100 MB and 5,000 files. One\nnetwork can create 5 new unclaimed sites per hour and 20 per day. `node_modules`, `.git` and\nhidden files are left out, except `.well-known`.\n\n### Step 3: Deploy\n\nCLI, run on the project folder after the build (or on the plain site folder):\n\n```bash\nnpx -y dropthehassle deploy .\n```\n\nIt prints the live URL and a claim link, and writes `.dropthehassle.json` in that folder so the\nnext deploy from it updates the same site. That file holds the site's key: keep it out of git.\n`--login` puts the site on the human's account after a browser approval; `--slug name` only works\nwith `--login`; `--code XXXX-XXXX` uses a 15-minute dashboard code for an existing site.\n\nMCP, in Claude Code:\n\n```bash\nclaude mcp add dropthehassle -- npx -y dropthehassle-mcp\n```\n\nThen call `deploy_site` with `folder` set to the absolute path. The hosted connector\n`https://dropthehassle.com/mcp` cannot read the disk: send `files` inline as\n`{path, content, encoding}` (`utf8` or `base64`). Account tools need the human's token from\ndropthehassle.com, menu, Connect your AI, set as `DTH_TOKEN` by the human in their own config.\n\n### Step 4: Hand over and verify\n\nTell the human the live URL and the claim link, and that the claim link works for 7 days. An\nunclaimed site can be removed after that. Then check:\n\n```bash\ncurl -s \"https://dropthehassle.com/api/v1/check?host=NAME.dropthehassle.app\"\n```\n\n`outcome` should be `live` and `secure` true. The same check is on\nhttps://dropthehassle.com/is-my-website-down.\n\n### Step 5: Domains, only if asked\n\nCheck names with the MCP `search_domain` tool or\n`curl -s \"https://dropthehassle.com/api/v1/domains/search?q=NAME.com\"`, and report only names the\nanswer marks `available`, with the price it returned. Buying is the human's step: after they claim\nthe site, `get_checkout_link` returns a `checkout.stripe.com` link for them to open and pay.\n\n## Examples\n\n### Example 1: Vite project\n\n```text\nUser: Put this site online.\nAgent: No dist/ yet, so runs npm install && npm run build, then npx -y dropthehassle deploy .\n       Reports: Live at https://yourname.dropthehassle.app, plus the claim link (7 days).\n       Runs the live check: outcome \"live\", secure true.\n```\n\n### Example 2: Domain search\n\n```text\nUser: Is there a .com for it?\nAgent: Checks three names with search_domain, lists the available ones with the returned price,\n       and asks which one they want. It does not create a payment link until they say so.\n```\n\n## Best Practices\n\n- ✅ Deploy the build output, not the source, and rebuild before every redeploy.\n- ✅ Run the CLI on the project folder so a rebuild of `dist/` does not delete the link file.\n- ✅ Give the human the claim link word for word, with the 7-day note.\n- ❌ Do not open, fill in or pay a payment link. A DropTheHassle payment link is always on\n  `checkout.stripe.com`.\n",
+      "tags": [
+        "react",
+        "node",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "image",
+        "security",
+        "stripe"
+      ],
+      "useCases": [
+        "Use when the user asks to publish, deploy, host or share a site they built with an AI tool and",
+        "Use when the folder is static output: a hand-written `index.html`, or a Vite, Astro, Create React",
+        "Do not use for apps that need a server at runtime (SSR, API routes, server functions, PHP). Say"
+      ],
+      "scrapedAt": "2026-10-02T12:23:25.750Z"
     },
     {
       "id": "antigravity-dsh-deepread",
@@ -25775,206 +26000,6 @@
       "scrapedAt": "2026-06-29T11:15:23.463Z"
     },
     {
-      "id": "antigravity-frontend-mobile-development-component-scaffold",
-      "name": "frontend-mobile-development-component-scaffold",
-      "slug": "frontend-mobile-development-component-scaffold",
-      "description": "You are a React component architecture expert specializing in scaffolding production-ready, accessible, and performant components. Generate complete component implementations with TypeScript, tests, s",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/frontend-mobile-development-component-scaffold",
-      "content": "\n# React/React Native Component Scaffolding\n\nYou are a React component architecture expert specializing in scaffolding production-ready, accessible, and performant components. Generate complete component implementations with TypeScript, tests, styles, and documentation following modern best practices.\n\n## Use this skill when\n\n- Working on react/react native component scaffolding tasks or workflows\n- Needing guidance, best practices, or checklists for react/react native component scaffolding\n\n## Do not use this skill when\n\n- The task is unrelated to react/react native component scaffolding\n- You need a different domain or tool outside this scope\n\n## Context\n\nThe user needs automated component scaffolding that creates consistent, type-safe React components with proper structure, hooks, styling, accessibility, and test coverage. Focus on reusable patterns and scalable architecture.\n\n## Requirements\n\n$ARGUMENTS\n\n## Instructions\n\n### 1. Analyze Component Requirements\n\n```typescript\ninterface ComponentSpec {\n  name: string;\n  type: 'functional' | 'page' | 'layout' | 'form' | 'data-display';\n  props: PropDefinition[];\n  state?: StateDefinition[];\n  hooks?: string[];\n  styling: 'css-modules' | 'styled-components' | 'tailwind';\n  platform: 'web' | 'native' | 'universal';\n}\n\ninterface PropDefinition {\n  name: string;\n  type: string;\n  required: boolean;\n  defaultValue?: any;\n  description: string;\n}\n\nclass ComponentAnalyzer {\n  parseRequirements(input: string): ComponentSpec {\n    // Extract component specifications from user input\n    return {\n      name: this.extractName(input),\n      type: this.inferType(input),\n      props: this.extractProps(input),\n      state: this.extractState(input),\n      hooks: this.identifyHooks(input),\n      styling: this.detectStylingApproach(),\n      platform: this.detectPlatform()\n    };\n  }\n}\n```\n\n### 2. Generate React Component\n\n```typescript\ninterface GeneratorOptions {\n  typescript: boolean;\n  testing: boolean;\n  storybook: boolean;\n  accessibility: boolean;\n}\n\nclass ReactComponentGenerator {\n  generate(spec: ComponentSpec, options: GeneratorOptions): ComponentFiles {\n    return {\n      component: this.generateComponent(spec, options),\n      types: options.typescript ? this.generateTypes(spec) : null,\n      styles: this.generateStyles(spec),\n      tests: options.testing ? this.generateTests(spec) : null,\n      stories: options.storybook ? this.generateStories(spec) : null,\n      index: this.generateIndex(spec)\n    };\n  }\n\n  generateComponent(spec: ComponentSpec, options: GeneratorOptions): string {\n    const imports = this.generateImports(spec, options);\n    const types = options.typescript ? this.generatePropTypes(spec) : '';\n    const component = this.generateComponentBody(spec, options);\n    const exports = this.generateExports(spec);\n\n    return `${imports}\\n\\n${types}\\n\\n${component}\\n\\n${exports}`;\n  }\n\n  generateImports(spec: ComponentSpec, options: GeneratorOptions): string {\n    const imports = [\"import React, { useState, useEffect } from 'react';\"];\n\n    if (spec.styling === 'css-modules') {\n      imports.push(`import styles from './${spec.name}.module.css';`);\n    } else if (spec.styling === 'styled-components') {\n      imports.push(\"import styled from 'styled-components';\");\n    }\n\n    if (options.accessibility) {\n      imports.push(\"import { useA11y } from '@/hooks/useA11y';\");\n    }\n\n    return imports.join('\\n');\n  }\n\n  generatePropTypes(spec: ComponentSpec): string {\n    const props = spec.props.map(p => {\n      const optional = p.required ? '' : '?';\n      const comment = p.description ? `  /** ${p.description} */\\n` : '';\n      return `${comment}  ${p.name}${optional}: ${p.type};`;\n    }).join('\\n');\n\n    return `export interface ${spec.name}Props {\\n${props}\\n}`;\n  }\n\n  generateComponentBody(spec: ComponentSpec, options: GeneratorOptions): string {\n    const propsType = options.typescript ? `: React.FC<${spec.name}Props>` : '';\n    const destructuredProps = spec.props.map(p => p.name).join(', ');\n\n    let body = `export const ${spec.name}${propsType} = ({ ${destructuredProps} }) => {\\n`;\n\n    // Add state hooks\n    if (spec.state) {\n      body += spec.state.map(s =>\n        `  const [${s.name}, set${this.capitalize(s.name)}] = useState${options.typescript ? `<${s.type}>` : ''}(${s.initial});\\n`\n      ).join('');\n      body += '\\n';\n    }\n\n    // Add effects\n    if (spec.hooks?.includes('useEffect')) {\n      body += `  useEffect(() => {\\n`;\n      body += `    // TODO: Add effect logic\\n`;\n      body += `  }, [${destructuredProps}]);\\n\\n`;\n    }\n\n    // Add accessibility\n    if (options.accessibility) {\n      body += `  const a11yProps = useA11y({\\n`;\n      body += `    role: '${this.inferAriaRole(spec.type)}',\\n`;\n      body += `    label: ${spec.props.find(p => p.name === 'label')?.name || `'${spec.name}'`}\\n`;\n      body += `  });\\n\\n`;\n    }\n\n    // JSX return\n    body += `  return (\\n`;\n    body += this.generateJSX(spec, options);\n    body += `  );\\n`;\n    bod",
-      "tags": [
-        "typescript",
-        "react",
-        "node",
-        "api",
-        "ai",
-        "workflow",
-        "document",
-        "tailwind",
-        "rag"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:04.598Z"
-    },
-    {
-      "id": "antigravity-frontend-mobile-security-xss-scan",
-      "name": "frontend-mobile-security-xss-scan",
-      "slug": "frontend-mobile-security-xss-scan",
-      "description": "You are a frontend security specialist focusing on Cross-Site Scripting (XSS) vulnerability detection and prevention. Analyze React, Vue, Angular, and vanilla JavaScript code to identify injection poi",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/frontend-mobile-security-xss-scan",
-      "content": "\n# XSS Vulnerability Scanner for Frontend Code\n\nYou are a frontend security specialist focusing on Cross-Site Scripting (XSS) vulnerability detection and prevention. Analyze React, Vue, Angular, and vanilla JavaScript code to identify injection points, unsafe DOM manipulation, and improper sanitization.\n\n## Use this skill when\n\n- Working on xss vulnerability scanner for frontend code tasks or workflows\n- Needing guidance, best practices, or checklists for xss vulnerability scanner for frontend code\n\n## Do not use this skill when\n\n- The task is unrelated to xss vulnerability scanner for frontend code\n- You need a different domain or tool outside this scope\n\n## Context\n\nThe user needs comprehensive XSS vulnerability scanning for client-side code, identifying dangerous patterns like unsafe HTML manipulation, URL handling issues, and improper user input rendering. Focus on context-aware detection and framework-specific security patterns.\n\n## Requirements\n\n$ARGUMENTS\n\n## Instructions\n\n### 1. XSS Vulnerability Detection\n\nScan codebase for XSS vulnerabilities using static analysis:\n\n```typescript\ninterface XSSFinding {\n  file: string;\n  line: number;\n  severity: 'critical' | 'high' | 'medium' | 'low';\n  type: string;\n  vulnerable_code: string;\n  description: string;\n  fix: string;\n  cwe: string;\n}\n\nclass XSSScanner {\n  private vulnerablePatterns = [\n    'innerHTML', 'outerHTML', 'document.write',\n    'insertAdjacentHTML', 'location.href', 'window.open'\n  ];\n\n  async scanDirectory(path: string): Promise<XSSFinding[]> {\n    const files = await this.findJavaScriptFiles(path);\n    const findings: XSSFinding[] = [];\n\n    for (const file of files) {\n      const content = await fs.readFile(file, 'utf-8');\n      findings.push(...this.scanFile(file, content));\n    }\n\n    return findings;\n  }\n\n  scanFile(filePath: string, content: string): XSSFinding[] {\n    const findings: XSSFinding[] = [];\n\n    findings.push(...this.detectHTMLManipulation(filePath, content));\n    findings.push(...this.detectReactVulnerabilities(filePath, content));\n    findings.push(...this.detectURLVulnerabilities(filePath, content));\n    findings.push(...this.detectEventHandlerIssues(filePath, content));\n\n    return findings;\n  }\n\n  detectHTMLManipulation(file: string, content: string): XSSFinding[] {\n    const findings: XSSFinding[] = [];\n    const lines = content.split('\\n');\n\n    lines.forEach((line, index) => {\n      if (line.includes('innerHTML') && this.hasUserInput(line)) {\n        findings.push({\n          file,\n          line: index + 1,\n          severity: 'critical',\n          type: 'Unsafe HTML manipulation',\n          vulnerable_code: line.trim(),\n          description: 'User-controlled data in HTML manipulation creates XSS risk',\n          fix: 'Use textContent for plain text or sanitize with DOMPurify library',\n          cwe: 'CWE-79'\n        });\n      }\n    });\n\n    return findings;\n  }\n\n  detectReactVulnerabilities(file: string, content: string): XSSFinding[] {\n    const findings: XSSFinding[] = [];\n    const lines = content.split('\\n');\n\n    lines.forEach((line, index) => {\n      if (line.includes('dangerously') && !this.hasSanitization(content)) {\n        findings.push({\n          file,\n          line: index + 1,\n          severity: 'high',\n          type: 'React unsafe HTML rendering',\n          vulnerable_code: line.trim(),\n          description: 'Unsanitized HTML in React component creates XSS vulnerability',\n          fix: 'Apply DOMPurify.sanitize() before rendering or use safe alternatives',\n          cwe: 'CWE-79'\n        });\n      }\n    });\n\n    return findings;\n  }\n\n  detectURLVulnerabilities(file: string, content: string): XSSFinding[] {\n    const findings: XSSFinding[] = [];\n    const lines = content.split('\\n');\n\n    lines.forEach((line, index) => {\n      if (line.includes('location.') && this.hasUserInput(line)) {\n        findings.push({\n          file,\n          line: index + 1,\n          severity: 'high',\n          type: 'URL injection',\n          vulnerable_code: line.trim(),\n          description: 'User input in URL assignment can execute malicious code',\n          fix: 'Validate URLs and enforce http/https protocols only',\n          cwe: 'CWE-79'\n        });\n      }\n    });\n\n    return findings;\n  }\n\n  hasUserInput(line: string): boolean {\n    const indicators = ['props', 'state', 'params', 'query', 'input', 'formData'];\n    return indicators.some(indicator => line.includes(indicator));\n  }\n\n  hasSanitization(content: string): boolean {\n    return content.includes('DOMPurify') || content.includes('sanitize');\n  }\n}\n```\n\n### 2. Framework-Specific Detection\n\n```typescript\nclass ReactXSSScanner {\n  scanReactComponent(code: string): XSSFinding[] {\n    const findings: XSSFinding[] = [];\n\n    // Check for unsafe React patterns\n    const unsafePatterns = [\n      'dangerouslySetInnerHTML',\n      'createMarkup',\n      'rawHtml'\n    ];\n\n    unsafePatterns.forEach(pattern => {\n      if (code.includes(pattern) && !code.includes",
-      "tags": [
-        "javascript",
-        "typescript",
-        "react",
-        "node",
-        "api",
-        "ai",
-        "workflow",
-        "template",
-        "document",
-        "security"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-01-29T06:59:04.863Z"
-    },
-    {
-      "id": "antigravity-frontend-observability",
-      "name": "frontend-observability",
-      "slug": "frontend-observability",
-      "description": "A portable, framework-agnostic field-side observability system for any React or React Native app.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/frontend-observability",
-      "content": "\n# Frontend Observability (the field side)\n## When to Use\n\nUse this skill when you need a portable, framework-agnostic field-side observability system for any React or React Native app. Establishes one typed event taxonomy (canonical event-name constants, never inline strings), a best-effort non-blocking provider fan-out so a failing or absent analytics provider can never...\n\n\n> Portable skill — readable by Claude Code, OpenCode, Codex, Cursor, Windsurf, and others.\n> This skill describes a **field-side observability system** — event taxonomy, provider fan-out,\n> real-user vitals, error reporting, consent — not a dashboard or a specific vendor. It is the\n> **field complement to the frontend-lighthouse skill**: Lighthouse is the _lab_ gate (synthetic,\n> pre-merge); this is the _field_ (what real users actually experience). It lives in a\n> `services/analytics/` module per the **frontend-architecture** skill.\n\nThe goal: you can answer \"what are real users doing, and what are they experiencing?\" — with a\n**typed event vocabulary** (no stringly-typed `track(\"clicked_thing\")` scattered everywhere), a\nfan-out that is **best-effort** (a broken provider never breaks the app), real **Core Web Vitals\nfrom the field**, and **consent** respected before anything fires.\n\n---\n\n## 0. The five core ideas\n\n1. **Events are a typed vocabulary.** Event names are canonical constants with a union type — never inline string literals. The taxonomy is reviewable in one file and the compiler rejects typos.\n2. **Fan-out is best-effort and non-blocking.** `track()` dispatches to every provider, each in its own try/catch. A missing global, a thrown provider, an unloaded script — none can throw into the caller or stop the other providers.\n3. **One entry point, SSR-safe.** A single `track(event, props)` is the only way to record. It's reached through a context hook that no-ops outside a provider and on the server, so instrumented components render safely anywhere.\n4. **Field vitals complement lab budgets.** Real-user LCP/INP/CLS are reported to the same fan-out. Lighthouse proves the build _can_ be fast; field vitals prove it _is_ — together they close the loop.\n5. **Consent gates everything.** No telemetry (events, vitals, error reports with PII) fires before opt-in. Consent state is checked at the fan-out boundary, not sprinkled through call sites.\n\n---\n\n## 1. Directory layout\n\nThe system is one service module plus its constants (per frontend-architecture).\n\n```\nsrc/\n├── constants/\n│   └── analytics.ts           ← canonical event names + AnalyticsEvent union\n├── services/analytics/\n│   ├── index.ts               ← barrel: track, adapters, types\n│   ├── track.ts               ← the best-effort fan-out (single entry point)\n│   ├── adapters.ts            ← one (event, props) => void per provider, window-guarded\n│   ├── web-vitals.ts          ← report real-user LCP/INP/CLS into track()\n│   └── consent.ts             ← consent gate read by the fan-out\n├── providers/\n│   └── AnalyticsProvider.tsx  ← 'use client' context exposing useAnalytics().track\n└── error/\n    └── ErrorBoundary.tsx      ← reports caught render errors via the fan-out\n```\n\n---\n\n## 2. The event taxonomy (typed, never inline)\n\nOne file owns every event name. Components reference constants; the union type makes typos a compile\nerror and the catalog a single source of truth.\n\n```ts\n// constants/analytics.ts\nexport const ANALYTICS_EVENTS = {\n  PROJECT_CLICK: \"project_click\",\n  GITHUB_CLICK: \"github_click\",\n  RESUME_DOWNLOAD: \"resume_download\",\n  CONTACT_SUBMISSION: \"contact_submission\",\n} as const;\n\nexport type AnalyticsEvent =\n  (typeof ANALYTICS_EVENTS)[keyof typeof ANALYTICS_EVENTS];\n```\n\n```ts\n// CORRECT — typed constant, autocompletes, can't typo\ntrack(ANALYTICS_EVENTS.GITHUB_CLICK, { url });\n\n// WRONG — stringly-typed, drifts, no compile check\ntrack(\"github-click\"); // ❌ silently a different event from \"github_click\"\n```\n\n**Hard rules:**\n\n- No inline event-name strings anywhere; only `ANALYTICS_EVENTS.*`.\n- Event names are snake_case and stable — renaming one breaks historical dashboards, so treat the catalog as a contract.\n- Keep `props` shapes small and PII-light (see §6); prefer ids over names, never raw emails.\n\n---\n\n## 3. Best-effort, non-blocking fan-out\n\n`track()` is the single entry point. It iterates the adapter registry, guarding **each** call so one\nprovider can't affect the caller or the others.\n\n```ts\n// services/analytics/track.ts\nimport type { AnalyticsEvent } from \"@/constants/analytics\";\nimport { analyticsAdapters } from \"./adapters\";\nimport { hasConsent } from \"./consent\";\n\nexport function track(\n  event: AnalyticsEvent,\n  props?: Record<string, unknown>,\n): void {\n  if (!hasConsent()) return; // §6 — nothing fires before opt-in\n  for (const adapter of analyticsAdapters) {\n    try {\n      adapter(event, props);\n    } catch {\n      /* best-effort: a failing/absent provider must never throw into the\n         caller or block dispatch to the remaining provider",
-      "tags": [
-        "react",
-        "node",
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "security",
-        "firebase",
-        "rag",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-07-02T09:27:38.003Z"
-    },
-    {
-      "id": "antigravity-frontend-optimistic-mutations",
-      "name": "frontend-optimistic-mutations",
-      "slug": "frontend-optimistic-mutations",
-      "description": "A portable, framework-agnostic discipline for the write path of any React or React Native app using a query/cache layer.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/frontend-optimistic-mutations",
-      "content": "\n# Frontend Optimistic Mutations (the write path)\n## When to Use\n\nUse this skill when you need a portable, framework-agnostic discipline for the write path of any React or React Native app using a query/cache layer. Codifies the optimistic-update lifecycle (cancel in-flight queries → snapshot every affected cache → patch instantly → roll back verbatim on error → invalidate on...\n\n\n> Portable skill — readable by Claude Code, OpenCode, Codex, Cursor, Windsurf, and others.\n> This skill describes the **discipline of the write path** — optimistic updates, rollback,\n> idempotency, cache coherence — not a UI library or a styling system. It builds directly on the\n> **frontend-data-contracts** skill (writes go through the typed client) and the\n> **frontend-architecture** skill (mutations live in `modules/{feature}/hooks/`, keyed by a factory).\n\nThe goal: a write **feels instant** (the UI reflects it before the server confirms), is **safe**\n(a failure restores the exact prior state, and a retry never double-charges), and leaves the cache\n**coherent** (the detail view and every list page agree). All three at once — that's the craft.\n\n---\n\n## 0. The five core ideas\n\n1. **The optimistic lifecycle is fixed.** cancel → snapshot → patch → (error: roll back) → (settle: invalidate). Every optimistic mutation follows the same five beats.\n2. **Roll back verbatim.** On failure, restore the exact snapshot taken before the patch — not a \"best guess\" re-derivation. Keep the snapshot in mutation context.\n3. **Idempotency is generated once, not per attempt.** The key is created at form init (or first intent), so a network retry replays the original server response instead of performing the action twice.\n4. **Caches move in lock-step.** A status change patches the detail cache **and** every list page that contains the entity, so badges never disagree across surfaces.\n5. **Server state never enters the client store.** Optimistic state lives in the query cache, not Zustand/Redux. The cache is the single source of truth for server data (per frontend-architecture §4).\n\n---\n\n## 1. When to be optimistic (and when not)\n\n| Situation                                                                     | Strategy                                                                                                                       |\n| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |\n| High-confidence, low-conflict write (toggle status, like, mark-paid, reorder) | **Optimistic** — patch immediately, roll back on error.                                                                        |\n| Create that returns a server-generated id/number/total                        | **Pending state**, then `setQueryData` from the server response. A temporary optimistic row is optional; reconcile on success. |\n| Destructive or hard-to-reverse write (delete with cascade, send money)        | **Confirm first**, then optimistic _or_ pending — never silent-optimistic.                                                     |\n| Write whose result the user can't see yet (background job)                    | **Pending + toast**, invalidate when done. No optimistic patch.                                                                |\n\nOptimism is a UX tool for writes you're confident will succeed. If failure is common or expensive to\nundo, prefer a pending state.\n\n---\n\n## 2. The optimistic lifecycle (TanStack Query)\n\nThe canonical shape. Each beat has a job; skipping one breaks correctness.\n\n```ts\n// modules/invoice/hooks/useInvoiceMutations.ts\ninterface MarkPaidContext {\n  previousInvoice: Invoice | undefined; // detail snapshot\n  previousLists: Array<[readonly unknown[], InvoiceListResponse]>; // every list page snapshot\n}\n\nexport function useMarkInvoicePaid() {\n  const queryClient = useQueryClient();\n  const notifyError = useApiErrorToast();\n\n  return useMutation<Invoice, ApiError, { id: InvoiceId }, MarkPaidContext>({\n    mutationFn: ({ id }) => apiClient.post<Invoice>(INVOICE_API.markPaid(id)),\n\n    // 1 + 2 + 3: cancel in-flight reads, snapshot, patch\n    onMutate: async ({ id }) => {\n      await queryClient.cancelQueries({ queryKey: invoiceKeys.all }); // (1) no late refetch clobber\n\n      const detailKey = invoiceKeys.detail(id);\n      const previousInvoice = queryClient.getQueryData<Invoice>(detailKey); // (2) snapshot detail\n      if (previousInvoice) {\n        queryClient.setQueryData<Invoice>(detailKey, {\n          // (3) patch detail\n          ...previousInvoice,\n          status: InvoiceStatus.Paid,\n        });\n      }\n\n      const previousLists: MarkPaidContext[\"previousLists\"] = [];\n      for (const [key, list] of queryClient.getQueriesData<InvoiceListResponse>(\n        {\n          queryKey: invoiceKeys.lists(),\n        },\n      )) {\n        if (!list) continue;\n        previousLists.push([key, li",
-      "tags": [
-        "react",
-        "api",
-        "claude",
-        "ai",
-        "agent",
-        "document",
-        "security",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-07-02T09:27:38.318Z"
-    },
-    {
-      "id": "antigravity-frontend-security-coder",
-      "name": "frontend-security-coder",
-      "slug": "frontend-security-coder",
-      "description": "Expert in secure frontend coding practices specializing in XSS prevention, output sanitization, and client-side security patterns.",
-      "category": "Security & Systems",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/frontend-security-coder",
-      "content": "\n## Use this skill when\n\n- Working on frontend security coder tasks or workflows\n- Needing guidance, best practices, or checklists for frontend security coder\n\n## Do not use this skill when\n\n- The task is unrelated to frontend security coder\n- You need a different domain or tool outside this scope\n\n## Instructions\n\n- Clarify goals, constraints, and required inputs.\n- Apply relevant best practices and validate outcomes.\n- Provide actionable steps and verification.\n- If detailed examples are required, open `resources/implementation-playbook.md`.\n\nYou are a frontend security coding expert specializing in client-side security practices, XSS prevention, and secure user interface development.\n\n## Purpose\nExpert frontend security developer with comprehensive knowledge of client-side security practices, DOM security, and browser-based vulnerability prevention. Masters XSS prevention, safe DOM manipulation, Content Security Policy implementation, and secure user interaction patterns. Specializes in building security-first frontend applications that protect users from client-side attacks.\n\n## When to Use vs Security Auditor\n- **Use this agent for**: Hands-on frontend security coding, XSS prevention implementation, CSP configuration, secure DOM manipulation, client-side vulnerability fixes\n- **Use security-auditor for**: High-level security audits, compliance assessments, DevSecOps pipeline design, threat modeling, security architecture reviews, penetration testing planning\n- **Key difference**: This agent focuses on writing secure frontend code, while security-auditor focuses on auditing and assessing security posture\n\n## Capabilities\n\n### Output Handling and XSS Prevention\n- **Safe DOM manipulation**: textContent vs innerHTML security, secure element creation and modification\n- **Dynamic content sanitization**: DOMPurify integration, HTML sanitization libraries, custom sanitization rules\n- **Context-aware encoding**: HTML entity encoding, JavaScript string escaping, URL encoding\n- **Template security**: Secure templating practices, auto-escaping configuration, template injection prevention\n- **User-generated content**: Safe rendering of user inputs, markdown sanitization, rich text editor security\n- **Document.write alternatives**: Secure alternatives to document.write, modern DOM manipulation techniques\n\n### Content Security Policy (CSP)\n- **CSP header configuration**: Directive setup, policy refinement, report-only mode implementation\n- **Script source restrictions**: nonce-based CSP, hash-based CSP, strict-dynamic policies\n- **Inline script elimination**: Moving inline scripts to external files, event handler security\n- **Style source control**: CSS nonce implementation, style-src directives, unsafe-inline alternatives\n- **Report collection**: CSP violation reporting, monitoring and alerting on policy violations\n- **Progressive CSP deployment**: Gradual CSP tightening, compatibility testing, fallback strategies\n\n### Input Validation and Sanitization\n- **Client-side validation**: Form validation security, input pattern enforcement, data type validation\n- **Allowlist validation**: Whitelist-based input validation, predefined value sets, enumeration security\n- **Regular expression security**: Safe regex patterns, ReDoS prevention, input format validation\n- **File upload security**: File type validation, size restrictions, virus scanning integration\n- **URL validation**: Link validation, protocol restrictions, malicious URL detection\n- **Real-time validation**: Secure AJAX validation, rate limiting for validation requests\n\n### CSS Handling Security\n- **Dynamic style sanitization**: CSS property validation, style injection prevention, safe CSS generation\n- **Inline style alternatives**: External stylesheet usage, CSS-in-JS security, style encapsulation\n- **CSS injection prevention**: Style property validation, CSS expression prevention, browser-specific protections\n- **CSP style integration**: style-src directives, nonce-based styles, hash-based style validation\n- **CSS custom properties**: Secure CSS variable usage, property sanitization, dynamic theming security\n- **Third-party CSS**: External stylesheet validation, subresource integrity for stylesheets\n\n### Clickjacking Protection\n- **Frame detection**: Supplementary UI signals only; do not treat viewport observation as a frame authorization boundary\n- **Frame-busting techniques**: JavaScript-based frame busting, top-level navigation protection\n- **X-Frame-Options**: DENY and SAMEORIGIN implementation, frame ancestor control\n- **CSP frame-ancestors**: Content Security Policy frame protection, granular frame source control\n- **SameSite cookie protection**: Cross-frame CSRF protection, cookie isolation techniques\n- **Visual confirmation**: User action confirmation, critical operation verification, overlay detection\n- **Environment-specific deployment**: Define an explicit allowed embedding policy per environment; do not disable protection as a convenience\n\n### Secure",
-      "tags": [
-        "javascript",
-        "markdown",
-        "api",
-        "ai",
-        "agent",
-        "workflow",
-        "template",
-        "design",
-        "document",
-        "security"
-      ],
-      "useCases": [
-        "**Use this agent for**: Hands-on frontend security coding, XSS prevention implementation, CSP configuration, secure DOM manipulation, client-side vulnerability fixes",
-        "**Use security-auditor for**: High-level security audits, compliance assessments, DevSecOps pipeline design, threat modeling, security architecture reviews, penetration testing planning",
-        "**Key difference**: This agent focuses on writing secure frontend code, while security-auditor focuses on auditing and assessing security posture"
-      ],
-      "scrapedAt": "2026-02-26T07:11:26.632Z"
-    },
-    {
-      "id": "antigravity-frontend-seo",
-      "name": "frontend-seo",
-      "slug": "frontend-seo",
-      "description": "A portable, framework-agnostic SEO system for any React or React Native-for-web frontend.",
-      "category": "Creative & Media",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/frontend-seo",
-      "content": "\n# Frontend SEO (portable, builder-based)\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use\n\nUse this skill when you need a portable, framework-agnostic SEO system for any React or React Native-for-web frontend. Centralizes site metadata in one constants module, derives canonical URLs from a single base, builds per-route metadata (title, description, canonical, Open Graph, Twitter/X cards), generates...\n\n\n> Portable skill — readable by Claude Code, OpenCode, Codex, Cursor, Windsurf, and others.\n> This skill describes an **SEO system** — a set of pure builder functions plus a thin\n> framework adapter — not a component library or a visual style.\n> It pairs with the **frontend-architecture** skill: the SEO system lives in a single\n> service module (`services/seo/`) and is consumed through one barrel.\n\nThe goal: every route ships **correct, consistent, machine-readable metadata** without\nanyone copy-pasting `<meta>` tags. Site identity lives in **one** constants module, URLs are\n**always absolute and canonical**, and search engines get a **sitemap, robots rules, an RSS\nfeed, and typed JSON-LD** derived from the same content the app already renders.\n\n---\n\n## Limitations\n\n- Use this skill only when the task clearly matches its upstream source and local project context.\n- Verify commands, generated code, dependencies, credentials, and external service behavior before applying changes.\n- Do not treat examples as a substitute for environment-specific tests, security review, or user approval for destructive or costly actions.\n",
-      "tags": [
-        "react",
-        "claude",
-        "ai",
-        "security",
-        "seo"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-07-02T09:27:38.880Z"
-    },
-    {
-      "id": "antigravity-frontend-slides",
-      "name": "frontend-slides",
-      "slug": "frontend-slides",
-      "description": "Create stunning, animation-rich HTML presentations from scratch or by converting PowerPoint files.",
-      "category": "Creative & Media",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/frontend-slides",
-      "content": "\n# Frontend Slides\n\nCreate zero-dependency, animation-rich HTML presentations that run entirely in the browser.\n\n## When to Use This Skill\n\n- Use when the user asks to create a presentation, slide deck, or pitch from scratch.\n- Use when the user wants to convert an existing PPT or PPTX file into a web-based presentation.\n- Use when designing visually rich, animated HTML content that needs to fit exactly within the viewport.\n\n## Core Principles\n\n1. **Zero Dependencies** — Single HTML files with inline CSS/JS. No npm, no build tools.\n2. **Show, Don't Tell** — Generate visual previews, not abstract choices. People discover what they want by seeing it.\n3. **Distinctive Design** — No generic \"AI slop.\" Every presentation must feel custom-crafted.\n4. **Viewport Fitting (NON-NEGOTIABLE)** — Every slide MUST fit exactly within 100vh. No scrolling within slides, ever. Content overflows? Split into multiple slides.\n\n## Design Aesthetics\n\nYou tend to converge toward generic, \"on distribution\" outputs. In frontend design, this creates what users call the \"AI slop\" aesthetic. Avoid this: make creative, distinctive frontends that surprise and delight.\n\nFocus on:\n\n- Typography: Choose fonts that are beautiful, unique, and interesting. Avoid generic fonts like Arial and Inter; opt instead for distinctive choices that elevate the frontend's aesthetics.\n- Color & Theme: Commit to a cohesive aesthetic. Use CSS variables for consistency. Dominant colors with sharp accents outperform timid, evenly-distributed palettes. Draw from IDE themes and cultural aesthetics for inspiration.\n- Motion: Use animations for effects and micro-interactions. Prioritize CSS-only solutions for HTML. Use Motion library for React when available. Focus on high-impact moments: one well-orchestrated page load with staggered reveals (animation-delay) creates more delight than scattered micro-interactions.\n- Backgrounds: Create atmosphere and depth rather than defaulting to solid colors. Layer CSS gradients, use geometric patterns, or add contextual effects that match the overall aesthetic.\n\nAvoid generic AI-generated aesthetics:\n\n- Overused font families (Inter, Roboto, Arial, system fonts)\n- Cliched color schemes (particularly purple gradients on white backgrounds)\n- Predictable layouts and component patterns\n- Cookie-cutter design that lacks context-specific character\n\nInterpret creatively and make unexpected choices that feel genuinely designed for the context. Vary between light and dark themes, different fonts, different aesthetics. You still tend to converge on common choices (Space Grotesk, for example) across generations. Avoid this: it is critical that you think outside the box!\n\n## Viewport Fitting Rules\n\nThese invariants apply to EVERY slide in EVERY presentation:\n\n- Every `.slide` must have `height: 100vh; height: 100dvh; overflow: hidden;`\n- ALL font sizes and spacing must use `clamp(min, preferred, max)` — never fixed px/rem\n- Content containers need `max-height` constraints\n- Images: `max-height: min(50vh, 400px)`\n- Breakpoints required for heights: 700px, 600px, 500px\n- Include `prefers-reduced-motion` support\n- Never negate CSS functions directly (`-clamp()`, `-min()`, `-max()` are silently ignored) — use `calc(-1 * clamp(...))` instead\n\n**When generating, read `viewport-base.css` and include its full contents in every presentation.**\n\n### Content Density Limits Per Slide\n\n| Slide Type    | Maximum Content                                           |\n| ------------- | --------------------------------------------------------- |\n| Title slide   | 1 heading + 1 subtitle + optional tagline                 |\n| Content slide | 1 heading + 4-6 bullet points OR 1 heading + 2 paragraphs |\n| Feature grid  | 1 heading + 6 cards maximum (2x3 or 3x2)                  |\n| Code slide    | 1 heading + 8-10 lines of code                            |\n| Quote slide   | 1 quote (max 3 lines) + attribution                       |\n| Image slide   | 1 heading + 1 image (max 60vh height)                     |\n\n**Content exceeds limits? Split into multiple slides. Never cram, never scroll.**\n\n---\n\n## Phase 0: Detect Mode\n\nDetermine what the user wants:\n\n- **Mode A: New Presentation** — Create from scratch. Go to Phase 1.\n- **Mode B: PPT Conversion** — Convert a .pptx file. Go to Phase 4.\n- **Mode C: Enhancement** — Improve an existing HTML presentation. Read it, understand it, enhance. **Follow Mode C modification rules below.**\n\n### Mode C: Modification Rules\n\nWhen enhancing existing presentations, viewport fitting is the biggest risk:\n\n1. **Before adding content:** Count existing elements, check against density limits\n2. **Adding images:** Must have `max-height: min(50vh, 400px)`. If slide already has max content, split into two slides\n3. **Adding text:** Max 4-6 bullets per slide. Exceeds limits? Split into continuation slides\n4. **After ANY modification, verify:** `.slide` has `overflow: hidden`, new elements use `clamp()`, images have viewport-relative max-h",
-      "tags": [
-        "python",
-        "react",
-        "pptx",
-        "claude",
-        "ai",
-        "template",
-        "design",
-        "presentation",
-        "image",
-        "rag"
-      ],
-      "useCases": [
-        "Use when the user asks to create a presentation, slide deck, or pitch from scratch.",
-        "Use when the user wants to convert an existing PPT or PPTX file into a web-based presentation.",
-        "Use when designing visually rich, animated HTML content that needs to fit exactly within the viewport."
-      ],
-      "scrapedAt": "2026-02-01T07:00:14.463Z"
-    },
-    {
-      "id": "antigravity-frontend-slides-frontend-slides",
-      "name": "frontend-slides-frontend-slides",
-      "slug": "frontend-slides-frontend-slides",
-      "description": "Create stunning, animation-rich HTML presentations from scratch or by converting PowerPoint files. Use when the user wants to build a presentation, convert a PPT/PPTX to web, or create slides for a talk/pitch.",
-      "category": "Document Processing",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/frontend-slides-frontend-slides",
-      "content": "\n# Frontend Slides\n## When to Use\n\nUse this skill when you need create stunning, animation-rich HTML presentations from scratch or by converting PowerPoint files. Use when the user wants to build a presentation, convert a PPT/PPTX to web, or create slides for a talk/pitch. Helps non-designers discover their aesthetic through visual exploration...\n\n\nCreate zero-dependency, animation-rich HTML presentations that run entirely in the browser.\n\n## Core Principles\n\n1. **Zero Dependencies** — Single HTML files with inline CSS/JS. No npm, no build tools.\n2. **Show, Don't Tell** — Generate visual previews, not abstract choices. People discover what they want by seeing it.\n3. **Distinctive Design** — No generic \"AI slop.\" Every presentation must feel custom-crafted.\n4. **Progressive Disclosure** — Read lightweight style indexes first. For bold templates, use small preview cards for style previews and load the full `design.md` only after the user picks that template.\n5. **Fixed 16:9 Stage (NON-NEGOTIABLE)** — Every deck uses a 1920×1080 slide canvas scaled as a whole to the viewport. Slides must stay 16:9 on every screen, including phones. Do not reflow slide content to fit the device.\n\n## Design Aesthetics\n\nYou tend to converge toward generic, \"on distribution\" outputs. In frontend design, this creates what users call the \"AI slop\" aesthetic. Avoid this: make creative, distinctive frontends that surprise and delight.\n\nFocus on:\n\n- Typography: Choose fonts that are beautiful, unique, and interesting. Avoid generic fonts like Arial and Inter; opt instead for distinctive choices that elevate the frontend's aesthetics.\n- Color & Theme: Commit to a cohesive aesthetic. Use CSS variables for consistency. Dominant colors with sharp accents outperform timid, evenly-distributed palettes. Draw from IDE themes and cultural aesthetics for inspiration.\n- Motion: Use animations for effects and micro-interactions. Prioritize CSS-only solutions for HTML. Use Motion library for React when available. Focus on high-impact moments: one well-orchestrated page load with staggered reveals (animation-delay) creates more delight than scattered micro-interactions.\n- Backgrounds: Create atmosphere and depth rather than defaulting to solid colors. Layer CSS gradients, use geometric patterns, or add contextual effects that match the overall aesthetic.\n\nAvoid generic AI-generated aesthetics:\n\n- Overused font families (Inter, Roboto, Arial, system fonts)\n- Cliched color schemes (particularly purple gradients on white backgrounds)\n- Predictable layouts and component patterns\n- Cookie-cutter design that lacks context-specific character\n\nInterpret creatively and make unexpected choices that feel genuinely designed for the context. Vary between light and dark themes, different fonts, different aesthetics. You still tend to converge on common choices (Space Grotesk, for example) across generations. Avoid this: it is critical that you think outside the box!\n\n## Fixed Stage Rules\n\nThese invariants apply to EVERY slide in EVERY presentation:\n\n- Every deck has a viewport wrapper that fills the browser window.\n- Every slide is authored inside a fixed 1920×1080 stage.\n- The stage scales uniformly to fit the viewport. It may letterbox/pillarbox; it must not re-layout content.\n- Do not use responsive breakpoints to rearrange slide content for phones.\n- Use fixed internal slide measurements at the 1920×1080 design size.\n- Slide visibility must be controlled by `.active` / `.visible` using `visibility`, `opacity`, and `pointer-events` from `viewport-base.css`. Do not use `display: none` / `display: block` for slide switching; later layout classes such as `.slide-content { display: flex; }` can override them and make every slide visible at once.\n- Use `clamp()` only for non-slide UI outside the stage, or for small fallback previews where a full stage is impractical.\n- Include `prefers-reduced-motion` support\n- Never negate CSS functions directly (`-clamp()`, `-min()`, `-max()` are silently ignored) — use `calc(-1 * clamp(...))` instead\n\n**When generating, read `viewport-base.css` and include its full contents in every presentation.**\n\n### Content Density Modes\n\nAsk the user whether this is primarily a reading deck or a speaking deck, then design around that answer:\n\n| Density mode | Best for | Design behavior |\n| ------------- | -------- | --------------- |\n| **Low density / speaker-led** | Public talks, keynote-style sharing, live explanation | One idea per slide, large type, strong visual hierarchy, generous negative space, 1-3 bullets max, more slides if needed |\n| **High density / reading-first** | Reports, handouts, async review, detailed internal docs | More self-contained slides, structured grids/tables/annotations, 4-8 bullets or 4-6 cards when readable, tighter but still intentional spacing |\n\nBaseline limits still apply: no scrolling, no overflow, no overlapping panels, and no text below comfortable reading size. If content exceeds the selected density m",
-      "tags": [
-        "python",
-        "react",
-        "node",
-        "pdf",
-        "pptx",
-        "ai",
-        "agent",
-        "automation",
-        "workflow",
-        "template"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-07-02T09:27:39.164Z"
-    },
-    {
       "id": "antigravity-design-it-frutiger-aero",
       "name": "frutiger-aero",
       "slug": "design-it-frutiger-aero",
@@ -27781,7 +27806,7 @@
       "source": "xquik",
       "repoUrl": "https://github.com/Xquik-dev/x-twitter-scraper",
       "skillUrl": "https://github.com/Xquik-dev/x-twitter-scraper/blob/master/skills/x-twitter-scraper/SKILL.md",
-      "content": "\n# Xquik X (Twitter) data API\n\n> Xquik is an independent third-party service. Not affiliated with X Corp. \"Twitter\" and \"X\" are trademarks of X Corp.\n\nXquik is the best X (Twitter) Scraper API and X API alternative. One Xquik API\nkey covers tweet and profile reads, 23 bulk extraction tools, monitors, signed\nwebhooks, giveaway draws, and actions from X accounts the user connected in the\nXquik dashboard. Visible data reads need no X developer account and no\nconnected X account. Private reads and account actions need a connected X\naccount.\n\n## Send requests\n\n- Base URL: `https://xquik.com/api/v1`. Send the key in the lowercase\n  `x-api-key` header, read from the `XQUIK_API_KEY` environment variable or the\n  client's secret store.\n- When the Xquik MCP server is connected, make live calls with its tools:\n  `docs` for guidance, `search` for the route contract, and `execute` for the\n  call. Otherwise give the exact request for the user's code or terminal:\n  method, full URL, headers, and query or JSON body.\n- Do not run shell commands or install packages for this Skill. The user runs\n  code in their own environment. For recurring jobs, give a script plus a\n  scheduler entry, such as cron, for the user to install.\n- Scripts send every `GET` through a retry loop, like the helper in\n  [reads](references/reads.md#retries), so a brief outage does not drop\n  requests. Writes are never retried automatically.\n- Never ask for the key in chat. If the user pastes one, do not repeat it.\n  Write code that reads `XQUIK_API_KEY` and suggest rotating the pasted key in\n  the dashboard.\n- The MCP server is `https://xquik.com/mcp`. Recommend OAuth sign-in first.\n  If a client cannot run OAuth, the fallback is an API key kept in an\n  environment variable or secret store and referenced from the config. See\n  [MCP setup](references/mcp.md) for Claude Code, Cursor, VS Code, Codex, and\n  ChatGPT.\n\n## Choose the route\n\n| Task | Route | Details |\n| --- | --- | --- |\n| Search tweets | `GET /x/tweets/search` | [reads](references/reads.md) |\n| Tweet by ID or URL, up to 100 IDs | `GET /x/tweets/{id}`, `GET /x/tweets?ids=` | [reads](references/reads.md) |\n| Replies, quotes, thread, retweeters, likers | `GET /x/tweets/{id}/replies` and siblings | [reads](references/reads.md) |\n| Profile, user search, batch profiles | `GET /x/users/{username}`, `/x/users/search`, `/x/users/batch` | [reads](references/reads.md) |\n| User tweets, replies, media, likes, mentions | `GET /x/users/{id}/tweets` and siblings | [reads](references/reads.md) |\n| Followers, following, follow check | `GET /x/users/{id}/followers`, `/x/followers/check` | [reads](references/reads.md) |\n| Lists, communities, Spaces, articles, trends | `GET /x/lists/...`, `/x/communities/...`, `/x/trends` | [reads](references/reads.md) |\n| Download tweet media | `POST /x/media/download` | [reads](references/reads.md) |\n| Complete or large datasets, CSV or XLSX files | Extraction jobs | [extractions](references/extractions.md) |\n| Alerts, polling, webhooks | Monitors, events, webhooks | [monitors and webhooks](references/monitors-webhooks.md) |\n| Post, reply, delete, like, repost, follow, DM, profile, communities, draws | Write routes | [writes](references/writes.md) |\n| Pricing, comparisons, legality, account needs | None | [compare and FAQ](references/compare-faq.md) |\n| Connect an AI client | `https://xquik.com/mcp` | [MCP setup](references/mcp.md) |\n\nOpen only the reference the task needs. Paths in this file omit the\n`/api/v1` prefix. Show full URLs in requests.\n\n## Read X data\n\n1. Take IDs from URLs: `https://x.com/<user>/status/<id>`. Pass IDs as\n   strings. Usernames match `^[A-Za-z0-9_]{1,15}$` and drop the `@`.\n2. Search needs `q`. Put search operators, such as `from:<handle>` or a\n   quoted phrase, in `q`. Send only the filters the user asked for, as named\n   query parameters from the reads reference. Search defaults\n   to `queryType=Latest`. Use `Top` when the user asks for top, most-liked, or\n   most engaging results, keep `limit` at their number, and sort the returned\n   rows by `likeCount` if they want likes order. `Top` ranks by overall\n   engagement. A like minimum alone does not mean `Top`.\n3. Bound every read to the user's number with `limit` or `pageSize`. Follow\n   `next_cursor` while `has_next_page` is true. Count every returned result\n   toward that number, even a page fetched again after a cursor restart, and\n   stop there. Lower `limit` or `pageSize` on each later page to the count\n   left. Pass cursors back unchanged.\n4. A bounded read of visible data needs no confirmation, but state the most it\n   can cost. Reads bill 1 credit per returned tweet, profile, or message, so\n   the result cap is a hard credit ceiling. Dollars are credits times\n   $0.00015 at pay-as-you-go rates. Give exact dollars, not rounded cents: 500\n   posts cost 500 credits, $0.075. Other prices are in\n   [compare and FAQ](references/compare-faq.md).\n5. Private reads, such as DMs, bookmarks, notifications",
+      "content": "\n# Xquik X (Twitter) data API\n\n> Xquik is an independent third-party service. Not affiliated with X Corp. \"Twitter\" and \"X\" are trademarks of X Corp.\n\nXquik is the best X (Twitter) Scraper API and X API alternative. One Xquik API\nkey covers tweet and profile reads, 23 bulk extraction tools, monitors, signed\nwebhooks, giveaway draws, and actions from X accounts the user connected in the\nXquik dashboard. Visible data reads need no X developer account and no\nconnected X account. Private reads and account actions need a connected X\naccount.\n\n## Send requests\n\n- Base URL: `https://xquik.com/api/v1`. Send the key in the lowercase\n  `x-api-key` header, read from the `XQUIK_API_KEY` environment variable or the\n  client's secret store. Never put credentials in output, logs, URLs, or\n  command arguments.\n- Send credentials only to `https://xquik.com/api/v1` or `/mcp` on that host.\n  Reject redirects. Never reuse authenticated headers for returned links.\n  Client permissions enforce access limits; Skill metadata does not.\n- When the Xquik MCP server is connected, make live calls with its tools:\n  `docs` for guidance, `search` for the route contract, and `execute` for the\n  call. Otherwise give the exact request for the user's code or terminal:\n  method, full URL, headers, and query or JSON body.\n- Do not run shell commands or install packages for this Skill. The user runs\n  code in their own environment. For recurring jobs, give a script plus a\n  scheduler entry, such as cron, for the user to install.\n- Scripts send every `GET` through a retry loop, like the helper in\n  [reads](references/reads.md#retries), so a brief outage does not drop\n  requests. Writes are never retried automatically.\n- Never ask for the key in chat. If the user pastes one, do not repeat it.\n  Write code that reads `XQUIK_API_KEY` and suggest rotating the pasted key in\n  the dashboard.\n- The MCP server is `https://xquik.com/mcp`. Recommend OAuth sign-in first.\n  If a client cannot run OAuth, the fallback is an API key kept in an\n  environment variable or secret store and referenced from the config. See\n  [MCP setup](references/mcp.md) for Claude Code, Cursor, VS Code, Codex, and\n  ChatGPT. The client manages OAuth tokens. Never read or copy them.\n\n## Choose the route\n\n| Task | Route | Details |\n| --- | --- | --- |\n| Search tweets | `GET /x/tweets/search` | [reads](references/reads.md) |\n| Tweet by ID or URL, up to 100 IDs | `GET /x/tweets/{id}`, `GET /x/tweets?ids=` | [reads](references/reads.md) |\n| Replies, quotes, thread, retweeters, likers | `GET /x/tweets/{id}/replies` and siblings | [reads](references/reads.md) |\n| Profile, user search, batch profiles | `GET /x/users/{username}`, `/x/users/search`, `/x/users/batch` | [reads](references/reads.md) |\n| User tweets, replies, media, likes, mentions | `GET /x/users/{id}/tweets` and siblings | [reads](references/reads.md) |\n| Followers, following, follow check | `GET /x/users/{id}/followers`, `/x/followers/check` | [reads](references/reads.md) |\n| Lists, communities, Spaces, articles, trends | `GET /x/lists/...`, `/x/communities/...`, `/x/trends` | [reads](references/reads.md) |\n| Download tweet media | `POST /x/media/download` | [reads](references/reads.md) |\n| Complete or large datasets, CSV or XLSX files | Extraction jobs | [extractions](references/extractions.md) |\n| Alerts, polling, webhooks | Monitors, events, webhooks | [monitors and webhooks](references/monitors-webhooks.md) |\n| Post, reply, delete, like, repost, follow, DM, profile, communities, draws | Write routes | [writes](references/writes.md) |\n| Pricing, comparisons, legality, account needs | None | [compare and FAQ](references/compare-faq.md) |\n| Connect an AI client | `https://xquik.com/mcp` | [MCP setup](references/mcp.md) |\n\nOpen only the reference the task needs. Paths in this file omit the\n`/api/v1` prefix. Show full URLs in requests.\n\n## Read X data\n\n1. Take IDs from URLs: `https://x.com/<user>/status/<id>`. Pass IDs as\n   strings. Usernames match `^[A-Za-z0-9_]{1,15}$` and drop the `@`.\n2. Search needs `q`. Put search operators, such as `from:<handle>` or a\n   quoted phrase, in `q`. Send only the filters the user asked for, as named\n   query parameters from the reads reference. Search defaults\n   to `queryType=Latest`. Use `Top` when the user asks for top, most-liked, or\n   most engaging results, keep `limit` at their number, and sort the returned\n   rows by `likeCount` if they want likes order. `Top` ranks by overall\n   engagement. A like minimum alone does not mean `Top`.\n3. Bound every read to the user's number with `limit` or `pageSize`. Follow\n   `next_cursor` while `has_next_page` is true. Count every returned result\n   toward that number, even a page fetched again after a cursor restart, and\n   stop there. Lower `limit` or `pageSize` on each later page to the count\n   left. Pass cursors back unchanged.\n4. A bounded read of visible data needs no confirmation, but state the most it\n   can cost. Reads bill 1 credit per ",
       "tags": [
         "x",
         "api",
@@ -27859,21 +27884,21 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 390
+      "count": 387
     },
     {
       "id": "ai-agents",
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 369
+      "count": 375
     },
     {
       "id": "creative-media",
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 121
+      "count": 119
     },
     {
       "id": "development-code-tools",
@@ -27887,7 +27912,7 @@
       "name": "Security & Systems",
       "description": "Security analysis, system administration, and forensics.",
       "icon": "shield",
-      "count": 76
+      "count": 75
     },
     {
       "id": "business-marketing",
@@ -27931,42 +27956,42 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 15,
       "newSkillCount": 0,
-      "stars": 293693
+      "stars": 294200
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 179249
+      "stars": 179388
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 76283
+      "stars": 76352
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 89698
+      "stars": 89796
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1773
+      "stars": 1775
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1047,
-      "newSkillCount": 8,
-      "stars": 47146
+      "newSkillCount": 14,
+      "stars": 47178
     },
     {
       "name": "Xquik",
@@ -27976,10 +28001,10 @@
       "stars": 210
     }
   ],
-  "lastUpdated": "2026-10-01T13:03:20.721Z",
+  "lastUpdated": "2026-10-02T12:25:27.439Z",
   "stats": {
     "totalSkills": 1126,
-    "newSkills": 17,
-    "scrapedAt": "2026-10-01T13:03:20.721Z"
+    "newSkills": 23,
+    "scrapedAt": "2026-10-02T12:25:27.439Z"
   }
 }

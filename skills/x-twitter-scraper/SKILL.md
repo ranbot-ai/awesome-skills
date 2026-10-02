@@ -23,7 +23,11 @@ account.
 
 - Base URL: `https://xquik.com/api/v1`. Send the key in the lowercase
   `x-api-key` header, read from the `XQUIK_API_KEY` environment variable or the
-  client's secret store.
+  client's secret store. Never put credentials in output, logs, URLs, or
+  command arguments.
+- Send credentials only to `https://xquik.com/api/v1` or `/mcp` on that host.
+  Reject redirects. Never reuse authenticated headers for returned links.
+  Client permissions enforce access limits; Skill metadata does not.
 - When the Xquik MCP server is connected, make live calls with its tools:
   `docs` for guidance, `search` for the route contract, and `execute` for the
   call. Otherwise give the exact request for the user's code or terminal:
@@ -41,7 +45,7 @@ account.
   If a client cannot run OAuth, the fallback is an API key kept in an
   environment variable or secret store and referenced from the config. See
   [MCP setup](references/mcp.md) for Claude Code, Cursor, VS Code, Codex, and
-  ChatGPT.
+  ChatGPT. The client manages OAuth tokens. Never read or copy them.
 
 ## Choose the route
 
@@ -81,9 +85,4 @@ Open only the reference the task needs. Paths in this file omit the
    stop there. Lower `limit` or `pageSize` on each later page to the count
    left. Pass cursors back unchanged.
 4. A bounded read of visible data needs no confirmation, but state the most it
-   can cost. Reads bill 1 credit per returned tweet, profile, or message, so
-   the result cap is a hard credit ceiling. Dollars are credits times
-   $0.00015 at pay-as-you-go rates. Give exact dollars, not rounded cents: 500
-   posts cost 500 credits, $0.075. Other prices are in
-   [compare and FAQ](references/compare-faq.md).
-5. Private reads, such as DMs, bookmarks, notifications
+   can cost. Reads bill 1 credit per 
