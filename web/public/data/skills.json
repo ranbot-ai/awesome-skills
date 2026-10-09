@@ -5289,6 +5289,36 @@
       "scrapedAt": "2026-07-09T09:52:08.324Z"
     },
     {
+      "id": "antigravity-ask-human-expert",
+      "name": "ask-human-expert",
+      "slug": "ask-human-expert",
+      "description": "Ask real executives and domain experts a question through Instant Expert for a written answer or short call: practitioner knowledge, customer discovery. Free test mode; live sends need approval.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ask-human-expert",
+      "content": "\n# Ask a Human Expert\n\n## Overview\n\nInstant Expert sends a paid ask from the user's account to real professionals: executives, operators and domain experts it finds from a description, or one specific person the user names. Each ask is a question for a written or voice answer, or a 15 to 60 minute call. The person is paid only if they answer or book, and the user is charged only then. Use it for knowledge work (judgment and first-hand experience from specific people), not errands or physical tasks.\n\nThe agent drives Instant Expert's MCP tools. When they aren't connected, it calls the free test server with `curl`, so the whole flow can be tried with no account or card. Adapted from the official skill, which also bundles a small test-mode helper script: https://github.com/Instant-Expert/skills\n\n## When to Use This Skill\n\n- Use when the answer needs a practitioner's experience rather than a web page: \"How long did SOC 2 Type II take you?\", \"How do claims teams at mid-size insurers triage?\"\n- Use for customer discovery, user interviews, expert input, or a first conversation with a kind of buyer.\n- Use when the user names someone to reach: \"Jane Doe, VP of Sales at Acme\", a LinkedIn URL or an email.\n- Use when the user asks whether anyone answered an earlier ask.\n- Do not use to find personal contact details, to get confidential or material non-public information, for physical tasks, or to message people the user hasn't approved.\n\n## How It Works\n\n### Step 1: Pick the mode\n\nIf the session already has the Instant Expert MCP tools (`search_people`, `queue_requests`, `prepare_request_order` and so on), call them directly. A result with `\"test_mode\": true` came from test mode; anything else is the user's live account.\n\nOtherwise start a free 24-hour test sandbox. No account or card is needed, and each network can start 5 an hour, so reuse the token until it expires:\n\n```bash\nmkdir -p ~/.config/instant-expert\ncurl -sS -X POST https://instant.expert/api/sandbox -o ~/.config/instant-expert/sandbox.json\n```\n\nThe saved JSON has `token`, `expires_at` and `mcp_url`. Call a tool by posting a JSON-RPC `tools/call` to the test server. It is stateless, so no `initialize` step is needed:\n\n```bash\ncurl -sS https://instant.expert/mcp/test \\\n  -H \"Authorization: Bearer $(sed -n 's/.*\"token\":\"\\([^\"]*\\)\".*/\\1/p' ~/.config/instant-expert/sandbox.json)\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: application/json, text/event-stream\" \\\n  -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"tools/call\",\"params\":{\"name\":\"list_requests\",\"arguments\":{}}}'\n```\n\nThe answer is in `result.structuredContent` (the same JSON is in `result.content[0].text`). `result.isError: true` means the tool rejected the call; read its message. Use `\"method\":\"tools/list\"` to see every tool and its arguments. An HTTP 401 means the sandbox expired, so start a new one.\n\nTest mode has about 300 fictional people at fictional companies, so a niche search comes back with the closest fictional matches. Invitations are recorded instead of sent, the fictional people answer within seconds, and orders use a Stripe test card. Nothing reaches a real person or moves real money. Tell the user once that results are simulated.\n\n### Step 2: Choose who to ask\n\nTools that start work (`search_people`, `import_people`, `queue_requests`) return a `job_id`. Poll `get_job`, waiting `poll_after_seconds` between calls, until `status` is `succeeded` or `failed`. Give every new operation its own `idempotency_key`, and reuse a key only to retry the same call.\n\n- A named person with a LinkedIn URL or email: skip searching and pass `people` to `queue_requests`, for example `[{\"linkedin_url\": \"https://www.linkedin.com/in/...\"}]`.\n- A named person with only a name and company: call `import_people` with `people` set to `[{\"name\": \"...\", \"company\": \"...\"}]`, then `get_search`. If there's no match, ask the user for a LinkedIn URL or email.\n- A kind of person: call `search_people` once with the whole request, including how many people and any exclusions, then read the list with `get_search` (`page_size: 100`).\n- Only a goal (\"we're building X, who should we talk to?\"): call `plan_outreach` with a `description`, let the user pick an audience, then run its `search_query` through `search_people`.\n\n### Step 3: Draft the ask\n\nCall `queue_requests` with `search_id` (plus `person_profile_ids` to keep a subset) or `people`, and:\n\n- `message`: the question, in the user's words, up to 500 characters. Leave the price out; the invitation states it.\n- `request_type`: `text_voice_note` for a written or voice answer, or `call` with `call_duration_minutes` of 15, 30, 45 or 60.\n- `offer_cents`, `max_spend_cents` and an `idempotency_key`.\n\nPoll `get_job` for the `draft_id`.\n\n### Step 4: Preview, approve and send\n\nCall `prepare_request_order` with the `draft_id` (for a call, also the user's IANA `time_zone`, such as `America/New_York`). Show the user the recipients, message, `pricing_summary`, total cap, card, payment m",
+      "tags": [
+        "markdown",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "security",
+        "stripe",
+        "cro"
+      ],
+      "useCases": [
+        "Use when the answer needs a practitioner's experience rather than a web page: \"How long did SOC 2 Type II take you?\", \"How do claims teams at mid-size insurers triage?\"",
+        "Use for customer discovery, user interviews, expert input, or a first conversation with a kind of buyer.",
+        "Use when the user names someone to reach: \"Jane Doe, VP of Sales at Acme\", a LinkedIn URL or an email.",
+        "Use when the user asks whether anyone answered an earlier ask.",
+        "Do not use to find personal contact details, to get confidential or material non-public information, for physical tasks, or to message people the user hasn't approved."
+      ],
+      "scrapedAt": "2026-10-09T12:57:36.530Z"
+    },
+    {
       "id": "antigravity-ask-matt",
       "name": "ask-matt",
       "slug": "ask-matt",
@@ -5329,6 +5359,36 @@
       ],
       "useCases": [],
       "scrapedAt": "2026-03-07T06:52:22.265Z"
+    },
+    {
+      "id": "antigravity-assay",
+      "name": "assay",
+      "slug": "assay",
+      "description": "Run assay on a web page you just wrote or changed. It opens the page in a real browser, drives every control, and reports where the page contradicts itself. Deterministic, no API key, no network.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/assay",
+      "content": "\n# Assay\n\n## Overview\n\nA page you have just written has no tests yet. `assay` serves the page locally, opens it in a real Chromium browser through Playwright, finds every control on it, uses all of them, and reports where the page contradicts itself. There are no tests to write, no LLM, no API key, and no network. The same page gives the same result every time.\n\nUse this skill after you create or change a web page, to run assay on that page and report the one line it prints. The skill reports the result and does not change code because of it unless you ask.\n\n## When to Use This Skill\n\n- Use when you have just created an HTML page and want to know whether its controls work before you move on.\n- Use when you changed a page, or the JavaScript or CSS that a page loads, and want to confirm the page still holds together.\n- Use when the user asks you to check, QA, or smoke-test a local web page.\n- Run it once at the end, after the last edit, on each page you changed. Do not run it while you are still making changes.\n\n## How It Works\n\n### Step 1: Install the CLI once\n\nInstall assay from PyPI. The package is named `assay-ui` and the command it installs is `assay`.\n\n```bash\npip install assay-ui\n```\n\nIt needs Python 3.10 or newer. On the first run assay downloads the Chromium build Playwright uses.\n\n### Step 2: Run assay on the page you changed\n\nPoint assay at the page itself and ask for the one-line summary.\n\n```bash\nassay <the page you changed> --one-line\n```\n\nPoint it at a file such as `todo.html` or `dist/index.html`. A folder also works and opens the `index.html` inside it. The page is often a folder or two above the file you edited, so a change to a script or stylesheet still means running assay on the page that loads it. assay needs no key, network, or configuration. A small page takes seconds, and a busy one can take a minute or more.\n\n### Step 3: Report the one line assay printed, verbatim\n\nPut assay's output, word for word, as the last thing in your reply. It is already one line, or one line and a short list. Do not summarize it, reformat it, add to it, or write your own version.\n\nA clean run looks like this, with assay's own numbers and wording.\n\n```text\nassay: checked todo/todo.html, 8 checks, nothing flagged.\n```\n\nA run that flagged something looks like this, followed by a short list.\n\n```text\nassay: checked notes/index.html, 12 checks, 4 flagged:\n```\n\nReport the line whether it flagged anything or not. Without it, the reader cannot tell a clean page from a check that never ran.\n\nIf the command did not run, say so in your own words, name the page, and quote what the shell actually printed. Never describe a check that did not happen as one that passed, and never guess at a cause.\n\n### Step 4: Report the finding and stop\n\nReport what assay found and stop. Do not edit code in response to a finding in the same reply. If the user then asks you to fix it, fix it.\n\n## Examples\n\n### Example 1: A page that checks out clean\n\n**User:** I added a to-do list at `todo/todo.html`. Does it work?\n\n```bash\nassay todo/todo.html --one-line\n```\n\n```text\nassay: checked todo/todo.html, 8 checks, nothing flagged.\n```\n\nReport that line as the last thing in the reply, and do not change the page.\n\n### Example 2: A page where assay flagged something\n\n```bash\nassay notes/ --one-line\n```\n\n```text\nassay: checked notes/index.html, 12 checks, 4 flagged:\n  - draw on canvas twice, then press Undo twice: it reacted one press late\n```\n\nReport the whole line and its short list, say that a finding is a place to look rather than a confirmed bug, and wait for the user to ask before changing anything.\n\n### Example 3: The command did not run\n\n```bash\nassay dist/index.html --one-line\n```\n\n```text\nassay: error: dist/index.html does not exist\n```\n\nSay that assay did not run, name the page, and quote the message. Do not report a check that never happened as one that passed.\n\n## Best Practices\n\n- ✅ Run assay once, at the end, on each page you changed.\n- ✅ Point it at the built page, such as `dist/index.html`, not at a source template.\n- ✅ Print assay's one line exactly as it came out, as the last thing in your reply.\n- ✅ When assay flags something, treat it as a place to look and wait to be asked before changing code.\n- ❌ Do not run assay while you are still editing the page.\n- ❌ Do not summarize, reword, or invent the result, and never report a check that did not run as one that passed.\n\n## Limitations\n\n- assay will not build your project. Point it at built output. Given a source tree, it says so and names the command to run, and it will not run `npm install` for you, because installing dependencies executes their setup scripts.\n- assay checks one page. It does not crawl, so run it on each page you changed.\n- assay cannot check intent. A control that runs but does the wrong thing usually is not caught, because assay presses what the page offers and reports what followed without knowing what the page is for.\n- A finding is a place to look, not a confir",
+      "tags": [
+        "python",
+        "javascript",
+        "react",
+        "api",
+        "claude",
+        "ai",
+        "llm",
+        "template",
+        "document",
+        "security"
+      ],
+      "useCases": [
+        "Use when you have just created an HTML page and want to know whether its controls work before you move on.",
+        "Use when you changed a page, or the JavaScript or CSS that a page loads, and want to confirm the page still holds together.",
+        "Use when the user asks you to check, QA, or smoke-test a local web page.",
+        "Run it once at the end, after the last edit, on each page you changed. Do not run it while you are still making changes."
+      ],
+      "scrapedAt": "2026-10-09T12:57:37.630Z"
     },
     {
       "id": "antigravity-asset-inventory",
@@ -23216,6 +23276,37 @@
       "scrapedAt": "2026-09-24T11:38:07.646Z"
     },
     {
+      "id": "antigravity-equibles",
+      "name": "equibles",
+      "slug": "equibles",
+      "description": "Query Equibles for US stock market data: SEC filing search, XBRL financial statements, earnings call transcripts, insider and 13F holdings, and daily prices.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/equibles",
+      "content": "\n# Equibles: US Stock Market Data\n\n## Overview\n\nEquibles serves data on US-listed companies from SEC filings, company releases and earnings calls: full-text search over 10-K, 10-Q, 8-K and other filings, XBRL financial statements, earnings call transcripts, Form 4 insider transactions, 13F institutional holdings, congressional trades, short interest and end-of-day prices. Search results and statement lines carry the filing date and document they came from, so answers can cite their source.\n\nThe same data is available through a hosted MCP server and a JSON REST API. This skill covers both: when to use which, the filing search and read workflow, statements, insider and 13F data, transcripts, and the plan limits.\n\n## When to Use\n\n- Use when the user asks what a company's 10-K, 10-Q or 8-K says about a topic and wants the passage quoted.\n- Use when the user wants an income statement, balance sheet or cash-flow statement for a fiscal year or quarter.\n- Use when the user asks who bought or sold shares: company insiders (Forms 4 and 5), 13F institutional holders, or members of Congress.\n- Use when the user wants an earnings call transcript or daily price history for a US-listed stock.\n- Do not use for order execution, crypto or non-US macro series. Equibles never places trades.\n\n## Access and Authentication\n\n### MCP server (preferred when the client supports it)\n\n- Endpoint: `https://mcp.equibles.com/mcp` (Streamable HTTP), listed in the official MCP registry as `io.github.daniel3303/equibles`.\n- ChatGPT and Claude connect over OAuth with no API key. In Claude Code: `claude mcp add --transport http equibles https://mcp.equibles.com/mcp`, then run `/mcp` and choose Authenticate.\n- If the client already has it connected, prefer its tools (`SearchDocuments`, `GetFinancialStatement`, `GetInsiderTransactions`, `GetTopHolders`, `GetEarningsCallTranscript`) over raw HTTP calls.\n- Most tools only read data. Portfolio, watchlist and feedback tools write to the user's own Equibles account; call them only when the user asks.\n\n### REST API\n\n- Base URL: `https://api.equibles.com/v1`. OpenAPI spec: `https://api.equibles.com/openapi/v1.json`.\n- Every request needs an API key (it starts with `eq_`). Read it from the `EQUIBLES_API_KEY` environment variable and send it as `Authorization: Bearer $EQUIBLES_API_KEY`. Never put the key in the URL or print it.\n- A request without a key returns HTTP 401 with `\"code\": \"unauthorized\"`. That means a key is needed, not that the data is missing.\n- Responses are JSON with camelCase fields and `yyyy-MM-dd` dates. Paged endpoints return `data` plus `meta` (`limit`, `offset`, `count`, `hasMore`).\n- Errors share one shape: `{\"error\": {\"code\", \"message\", \"status\"}}`.\n\n### Plans\n\n- The free plan allows 100 requests a day, shared between MCP tool calls and REST requests, and resets at 00:00 UTC. No credit card.\n- Free covers end-of-day prices. Option chains and intraday quotes need a Plus or Pro plan.\n- REST responses with status 400 to 599 do not count against the daily allowance.\n\n## How It Works\n\n### Step 1: Search filings for the topic\n\n```bash\ncurl -s -H \"Authorization: Bearer $EQUIBLES_API_KEY\" \\\n  \"https://api.equibles.com/v1/stocks/AAPL/filings/search?query=tariffs&documentType=TenK&limit=3\" \\\n  | jq '.data[] | {documentId, documentTypeName, filedDate, startLineNumber, url, text}'\n```\n\nUse `/v1/filings/search?query=...` (no ticker in the path) to search every company. Each excerpt carries a `documentId` and the line where it starts.\n\n### Step 2: Read the surrounding lines\n\n```bash\ncurl -s -H \"Authorization: Bearer $EQUIBLES_API_KEY\" \\\n  \"https://api.equibles.com/v1/filings/$DOCUMENT_ID/lines?startLine=698&endLine=764\" \\\n  | jq -r '.lines[] | \"\\(.number): \\(.text)\"'\n```\n\nStart at the excerpt's `startLineNumber` (Apple's tariff risk factor sat at line 698 of its 2025 10-K) and read at most 500 lines per request. Quote from these lines, and cite the filing type and `filedDate`.\n\n### Step 3: Pull the numbers\n\n```bash\ncurl -s -H \"Authorization: Bearer $EQUIBLES_API_KEY\" \\\n  \"https://api.equibles.com/v1/stocks/MSFT/financial-statements/income?year=2025&period=FY\" \\\n  | jq '{companyName, fiscalYear, fiscalPeriod, rows: [.data[] | {lineItem, value, unit, periodStart, periodEnd, form, filedDate}]}'\n```\n\n`statement` is `income`, `balance` or `cashflow`; `period` is `FY` or `Q1` to `Q4`. Fiscal years follow the company's own calendar (Microsoft's fiscal 2025 ended in June 2025), so state `periodEnd` with every figure.\n\n## Examples\n\n### Example 1: Open-market insider trades\n\n```bash\ncurl -s -H \"Authorization: Bearer $EQUIBLES_API_KEY\" \\\n  \"https://api.equibles.com/v1/stocks/INTC/insider-transactions?startDate=2026-01-01&limit=100\" \\\n  | jq '[.data[] | select(.isOpenMarketTrade) | {transactionDate, insiderName, role, transactionType, shares, pricePerShare, value}]'\n```\n\nFilter on `isOpenMarketTrade`. `transactionType` also labels conversions, tax withholding and expirations as Buy or Sell, and those are n",
+      "tags": [
+        "python",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "gpt",
+        "workflow",
+        "document",
+        "security",
+        "cro"
+      ],
+      "useCases": [
+        "Use when the user asks what a company's 10-K, 10-Q or 8-K says about a topic and wants the passage quoted.",
+        "Use when the user wants an income statement, balance sheet or cash-flow statement for a fiscal year or quarter.",
+        "Use when the user asks who bought or sold shares: company insiders (Forms 4 and 5), 13F institutional holders, or members of Congress.",
+        "Use when the user wants an earnings call transcript or daily price history for a US-listed stock.",
+        "Do not use for order execution, crypto or non-US macro series. Equibles never places trades."
+      ],
+      "scrapedAt": "2026-10-09T13:04:15.675Z"
+    },
+    {
       "id": "antigravity-error-debugging-error-analysis",
       "name": "error-debugging-error-analysis",
       "slug": "error-debugging-error-analysis",
@@ -25962,73 +26053,6 @@
       "scrapedAt": "2026-01-31T06:52:12.424Z"
     },
     {
-      "id": "antigravity-fp-ts-pragmatic",
-      "name": "fp-ts-pragmatic",
-      "slug": "fp-ts-pragmatic",
-      "description": "A practical, jargon-free guide to fp-ts functional programming - the 80/20 approach that gets results without the academic overhead. Use when writing TypeScript with fp-ts library.",
-      "category": "Development & Code Tools",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-ts-pragmatic",
-      "content": "\n# Pragmatic Functional Programming\n\n**Read this first.** This guide cuts through the academic jargon and shows you what actually matters. No category theory. No abstract nonsense. Just patterns that make your code better.\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use This Skill\n\n- When starting with fp-ts and need practical guidance\n- When writing TypeScript code that handles nullable values, errors, or async operations\n- When you want cleaner, more maintainable functional code without the academic overhead\n- When refactoring imperative code to functional style\n\n## When NOT to Use FP\n\nFunctional programming is not always the answer. Here's when to keep it simple.\n\n### Simple Null Checks\n\n```typescript\n// Just use optional chaining - it's built into the language\nconst city = user?.address?.city ?? 'Unknown'\n\n// DON'T overcomplicate it\nconst city = pipe(\n  O.fromNullable(user),\n  O.flatMap(u => O.fromNullable(u.address)),\n  O.flatMap(a => O.fromNullable(a.city)),\n  O.getOrElse(() => 'Unknown')\n)\n```\n\n### Simple Loops\n\n```typescript\n// A for loop is fine when you need early exit or complex logic\nfunction findFirst(items: Item[], predicate: (i: Item) => boolean): Item | null {\n  for (const item of items) {\n    if (predicate(item)) return item\n  }\n  return null\n}\n\n// DON'T force FP when it doesn't help\nconst result = pipe(\n  items,\n  A.findFirst(predicate),\n  O.toNullable\n)\n```\n\n### Performance-Critical Code\n\n```typescript\n// For hot paths, imperative is faster (no intermediate arrays)\nfunction sumLarge(numbers: number[]): number {\n  let sum = 0\n  for (let i = 0; i < numbers.length; i++) {\n    sum += numbers[i]\n  }\n  return sum\n}\n\n// fp-ts creates intermediate structures\nconst sum = pipe(numbers, A.reduce(0, (acc, n) => acc + n))\n```\n\n### When Your Team Doesn't Know FP\n\nIf you're the only one who can read the code, it's not good code.\n\n```typescript\n// If your team knows this pattern\nasync function getUser(id: string): Promise<User | null> {\n  try {\n    const response = await fetch(`/api/users/${id}`)\n    if (!response.ok) return null\n    return await response.json()\n  } catch {\n    return null\n  }\n}\n\n// Don't force this on them\nconst getUser = (id: string): TE.TaskEither<Error, User> =>\n  pipe(\n    TE.tryCatch(() => fetch(`/api/users/${id}`), E.toError),\n    TE.flatMap(r => r.ok ? TE.right(r) : TE.left(new Error('Not found'))),\n    TE.flatMap(r => TE.tryCatch(() => r.json(), E.toError))\n  )\n```\n\n---\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "typescript",
-        "api",
-        "ai",
-        "rag"
-      ],
-      "useCases": [
-        "When starting with fp-ts and need practical guidance",
-        "When writing TypeScript code that handles nullable values, errors, or async operations",
-        "When you want cleaner, more maintainable functional code without the academic overhead",
-        "When refactoring imperative code to functional style"
-      ],
-      "scrapedAt": "2026-01-31T06:52:12.823Z"
-    },
-    {
-      "id": "antigravity-fp-ts-react",
-      "name": "fp-ts-react",
-      "slug": "fp-ts-react",
-      "description": "Practical patterns for using fp-ts with React - hooks, state, forms, data fetching. Use when building React apps with functional programming patterns. Works with React 18/19, Next.js 14/15.",
-      "category": "Development & Code Tools",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-ts-react",
-      "content": "\n# Functional Programming in React\n\nPractical patterns for React apps. No jargon, just code that works.\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use This Skill\n\n- When building React apps with fp-ts for type-safe state management\n- When handling loading/error/success states in data fetching\n- When implementing form validation with error accumulation\n- When using React 18/19 or Next.js 14/15 with functional patterns\n\n---\n\n## When to Use What\n\n| Situation | Use |\n|-----------|-----|\n| Value might not exist | `Option<T>` |\n| Operation might fail (sync) | `Either<E, A>` |\n| Async operation might fail | `TaskEither<E, A>` |\n| Need loading/error/success UI | `RemoteData<E, A>` |\n| Form with multiple validations | `Either` with validation applicative |\n| Dependency injection | Context + `ReaderTaskEither` |\n| Prevent re-renders with fp-ts | `useMemo` or `fp-ts-react-stable-hooks` |\n\n---\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "react",
-        "ai"
-      ],
-      "useCases": [
-        "When building React apps with fp-ts for type-safe state management",
-        "When handling loading/error/success states in data fetching",
-        "When implementing form validation with error accumulation",
-        "When using React 18/19 or Next.js 14/15 with functional patterns"
-      ],
-      "scrapedAt": "2026-01-31T06:52:13.192Z"
-    },
-    {
-      "id": "antigravity-fp-types-ref",
-      "name": "fp-types-ref",
-      "slug": "fp-types-ref",
-      "description": "Quick reference for fp-ts types. Use when user asks which type to use, needs Option/Either/Task decision help, or wants fp-ts imports.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-types-ref",
-      "content": "\n# fp-ts Quick Reference\n\n## When to Use\n- You need help choosing between `Option`, `Either`, `Task`, `TaskEither`, or related fp-ts types.\n- The task is about imports, decision guidance, or selecting the right abstraction for a TypeScript flow.\n- You want a compact reference for common fp-ts type choices and patterns.\n\n## Which Type Should I Use?\n\n```\nIs the operation async?\n├─ NO: Does it involve errors?\n│   ├─ YES → Either<Error, Value>\n│   └─ NO: Might value be missing?\n│       ├─ YES → Option<Value>\n│       └─ NO → Just use the value\n└─ YES: Does it involve errors?\n    ├─ YES → TaskEither<Error, Value>\n    └─ NO: Might value be missing?\n        ├─ YES → TaskOption<Value>\n        └─ NO → Task<Value>\n```\n\n## Common Imports\n\n```typescript\n// Core\nimport { pipe, flow } from 'fp-ts/function'\n\n// Types\nimport * as O from 'fp-ts/Option'      // Maybe exists\nimport * as E from 'fp-ts/Either'      // Success or failure\nimport * as TE from 'fp-ts/TaskEither' // Async + failure\nimport * as T from 'fp-ts/Task'        // Async (no failure)\nimport * as A from 'fp-ts/Array'       // Array utilities\n```\n\n## One-Line Patterns\n\n| Need | Code |\n|------|------|\n| Wrap nullable | `O.fromNullable(value)` |\n| Default value | `O.getOrElse(() => default)` |\n| Transform if exists | `O.map(fn)` |\n| Chain optionals | `O.flatMap(fn)` |\n| Wrap try/catch | `E.tryCatch(() => risky(), toError)` |\n| Wrap async | `TE.tryCatch(() => fetch(url), toError)` |\n| Run pipe | `pipe(value, fn1, fn2, fn3)` |\n\n## Pattern Match\n\n```typescript\n// Option\npipe(maybe, O.match(\n  () => 'nothing',\n  (val) => `got ${val}`\n))\n\n// Either\npipe(result, E.match(\n  (err) => `error: ${err}`,\n  (val) => `success: ${val}`\n))\n```\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "typescript",
-        "ai"
-      ],
-      "useCases": [
-        "You need help choosing between `Option`, `Either`, `Task`, `TaskEither`, or related fp-ts types.",
-        "The task is about imports, decision guidance, or selecting the right abstraction for a TypeScript flow.",
-        "You want a compact reference for common fp-ts type choices and patterns."
-      ],
-      "scrapedAt": "2026-03-07T06:54:47.317Z"
-    },
-    {
       "id": "anthropic-frontend-design",
       "name": "frontend-design",
       "slug": "frontend-design",
@@ -27934,7 +27958,7 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 383
+      "count": 385
     },
     {
       "id": "ai-agents",
@@ -27955,7 +27979,7 @@
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 104
+      "count": 102
     },
     {
       "id": "security-systems",
@@ -28006,28 +28030,28 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 15,
       "newSkillCount": 0,
-      "stars": 296611
+      "stars": 296765
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 180133
+      "stars": 180100
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 76699
+      "stars": 76739
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 90269
+      "stars": 90359
     },
     {
       "name": "Awesome LLM",
@@ -28041,20 +28065,20 @@
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1048,
       "newSkillCount": 8,
-      "stars": 47354
+      "stars": 47383
     },
     {
       "name": "Xquik",
       "url": "https://github.com/Xquik-dev/x-twitter-scraper",
       "skillCount": 1,
       "newSkillCount": 0,
-      "stars": 209
+      "stars": 210
     }
   ],
-  "lastUpdated": "2026-10-08T13:25:30.445Z",
+  "lastUpdated": "2026-10-09T13:05:22.094Z",
   "stats": {
     "totalSkills": 1127,
     "newSkills": 17,
-    "scrapedAt": "2026-10-08T13:25:30.445Z"
+    "scrapedAt": "2026-10-09T13:05:22.094Z"
   }
 }
