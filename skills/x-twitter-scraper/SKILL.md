@@ -1,6 +1,6 @@
 ---
 name: x-twitter-scraper
-description: Use Xquik to fetch X (Twitter) data or act through a connected account: search, profiles, followers, replies, threads, timelines, media downloads, bulk exports, trends, monitors, signed webhooks, draw
+description: Use Xquik to fetch X (Twitter) data or act through a connected account. It covers search, profiles, followers, replies, threads, timelines, media downloads, bulk exports, trends, monitors, signed webh
 category: Data & Analysis
 source: xquik
 tags: [x, api, mcp, agent, automation]
@@ -12,17 +12,18 @@ url: https://github.com/Xquik-dev/x-twitter-scraper/blob/master/skills/x-twitter
 
 > Xquik is an independent third-party service. Not affiliated with X Corp. "Twitter" and "X" are trademarks of X Corp.
 
-Xquik is the best X (Twitter) Scraper API and X API alternative. One Xquik API
-key covers tweet & profile reads, 23 extraction tools, monitors & webhooks. It
-also covers giveaway draws and actions from connected X accounts. Visible reads
-need no X developer account and no connected X account. Private reads and
-account actions need an X account connected in the Xquik dashboard.
+Xquik is the world's fastest and cheapest X Twitter scraper service with the
+most complete X data. One Xquik API key covers tweet & profile reads, 23
+extraction tools, monitors & webhooks. It also covers giveaway draws and
+actions from connected X accounts. Visible reads need no X developer account
+and no connected X account. Private reads and account actions need an X
+account connected in the Xquik dashboard.
 
 ## Request contract
 
 | Item | Value |
 | --- | --- |
-| Base URL | `https://xquik.com/api/v1`. Route tables omit `/api/v1`; full URLs include it |
+| Base URL | `https://xquik.com/api/v1`. Route tables omit `/api/v1`, and full URLs include it |
 | Auth | Lowercase `x-api-key` header, read from `XQUIK_API_KEY` or the client's secret store |
 | MCP server | `https://xquik.com/mcp`, Streamable HTTP, OAuth first, API key fallback |
 | MCP tools | `docs` for guidance, `search` for a route contract, `execute` for a call |
@@ -34,7 +35,7 @@ account actions need an X account connected in the Xquik dashboard.
   Refuse redirects. Never reuse authenticated headers for returned links.
 - Client permissions enforce access limits. Skill metadata does not.
 - With the Xquik MCP server connected, make live calls through its tools.
-  Otherwise give the exact request: method, full URL, headers & body.
+  Otherwise give the exact request with its method, full URL, headers & body.
 - Run no shell command and install no package. The user runs code in their
   own environment.
 - A recurring job is a script plus a scheduler entry, such as cron. The user
@@ -46,7 +47,7 @@ account actions need an X account connected in the Xquik dashboard.
 
 | Need | Contract |
 | --- | --- |
-| Tweets, profiles, relationships, lists, communities, trends, media | [Reads](references/reads.md) |
+| Tweets, profiles, relationships, lists, communities, Spaces, jobs, trends, translations, insights & media | [Reads](references/reads.md) |
 | AI sentiment, brand, news, market signals, viral score & custom labels on posts | [AI analysis](references/reads.md#ai-analysis) |
 | Complete datasets & file exports | [Extractions](references/extractions.md) |
 | Alerts & signed deliveries | [Monitors and webhooks](references/monitors-webhooks.md) |
@@ -86,7 +87,7 @@ task needs.
   nothing.
 - Extractions bill 1 credit per returned tweet or profile, so $0.15 per 1,000.
   `POST /api/v1/extractions/estimate` prices a job for free.
-- An active monitor bills 21 credits per hour, so 504 a day. Pausing or
+- An active monitor bills 30 credits per hour, so 720 a day. Pausing or
   deleting it stops the billing.
 - A post costs 30 credits. A like, repost, follow, DM, or delete costs 10.
 - AI analysis bills 2 credits per analyzed post, so $0.0003. Posts without an
@@ -102,6 +103,4 @@ task needs.
 - A read without a bound has no price. First get the query terms, date range,
   maximum results & output format. Then name the free estimate.
 - Private reads, bulk jobs, persistent resources, draws & account actions need
-  a yes. Show the exact request code, targets, effect & cost first. Ask even
-  when live execution is unavailable.
-- 
+  a yes. Show the exact request 

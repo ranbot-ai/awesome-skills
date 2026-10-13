@@ -1,6 +1,6 @@
 ---
 name: copywriting-psychologist
-description: One sentence - what this skill does and when to invoke it 
+description: Write or revise conversion copy using audience awareness, motivations, and credible proof when ads, landing pages, or sales messages feel generic. 
 category: Business & Marketing
 source: antigravity
 tags: [ai, agent, cro, marketing, copywriting]

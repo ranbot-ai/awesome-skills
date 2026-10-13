@@ -1,6 +1,6 @@
 ---
 name: emotional-arc-designer
-description: One sentence - what this skill does and when to invoke it 
+description: Map the emotional progression of a narrative, page, or campaign when content needs a coherent path from attention to action. 
 category: Security & Systems
 source: antigravity
 tags: [ai, agent, design, vulnerability, cro, copywriting]

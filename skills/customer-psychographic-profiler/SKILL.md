@@ -1,6 +1,6 @@
 ---
 name: customer-psychographic-profiler
-description: One sentence - what this skill does and when to invoke it 
+description: Build an evidence-grounded customer profile of motivations, fears, identity, and trust barriers before positioning, copywriting, or funnel design. 
 category: AI & Agents
 source: antigravity
 tags: [ai, agent, design, image, security, cro, copywriting]
