@@ -29,7 +29,6 @@ Build features guided by data insights, A/B testing, and continuous measurement 
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 ## Phase 1: Data Analysis and Hypothesis Formation
 
@@ -74,4 +73,5 @@ Build features guided by data insights, A/B testing, and continuous measurement 
 
 ### 7. Backend Implementation
 - Use Task tool with subagent_type="backend-development::backend-architect"
-- Cont
+- Context: Architecture design and feature requirements
+- Prompt: "Implement backend for

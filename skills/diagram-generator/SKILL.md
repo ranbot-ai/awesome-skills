@@ -7,6 +7,10 @@ tags: [python, node, pdf, markdown, api, ai, workflow, template, image, pentest]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/diagram-generator
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
+
 # Diagram Generator
 ## When to Use
 
@@ -81,7 +85,4 @@ General Mermaid rules:
 Use Graphviz for large, dense, or layout-sensitive relationship diagrams.
 
 - Prefer `digraph G` for directed relationships and `graph G` for undirected networks.
-- Set layout-friendly graph attributes at the top: `rankdir=LR`, `nodesep`, `ranksep`, and `splines=true` when helpful.
-- Use `subgraph cluster_name` for boundaries and subsystems.
-- Use plain labels and restrained styling.
-- Use edge labels only when they add me
+- Set layout-friendly graph attributes at the top: `rankdir=LR`, `nod

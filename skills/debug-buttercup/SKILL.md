@@ -1,11 +1,19 @@
 ---
 name: debug-buttercup
 description: All pods run in namespace crs. Use when pods in the crs namespace are in CrashLoopBackOff, OOMKilled, or restarting, multiple services restart simultaneously (cascade failure), or redis is unresponsiv
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [node, api, ai, llm, workflow, template, docker, kubernetes, rag, cro]
+tags: [node, api, ai, llm, workflow, template, document, docker, kubernetes, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/debug-buttercup
 ---
+
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+- `<support-root>/references/failure-patterns.md`
+
+Ask for the original supporting material or an existing installation before using a step that depends on these paths; this catalog does not identify a verified download source for them. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
 
 
 # Debug Buttercup
@@ -129,32 +137,4 @@ kubectl logs -n crs -l app.kubernetes.io/name=redis --tail=200
 kubectl exec -n crs <redis-pod> -- redis-cli
 
 # Inside redis-cli: key diagnostics
-INFO memory          # used_memory_human, maxmemory
-INFO persistence     # aof_enabled, aof_last_bgrewrite_status, aof_delayed_fsync
-INFO clients         # connected_clients, blocked_clients
-INFO stats           # total_connections_received, rejected_connections
-CLIENT LIST          # see who's connected
-DBSIZE               # total keys
-
-# AOF configuration
-CONFIG GET appendonly     # is AOF enabled?
-CONFIG GET appendfsync   # fsync policy: everysec, always, or no
-
-# What is /data mounted on? (disk vs tmpfs matters for AOF performance)
-```
-
-```bash
-kubectl exec -n crs <redis-pod> -- mount | grep /data
-kubectl exec -n crs <redis-pod> -- du -sh /data/
-```
-
-### Queue Inspection
-
-Buttercup uses Redis streams with consumer groups. Queue names:
-
-| Queue | Stream Key |
-|-------|-----------|
-| Build | fuzzer_build_queue |
-| Build Output | fuzzer_build_output_queue |
-| Crash | fuzzer_crash_queue |
-| Confirmed Vu
+INFO memory          #

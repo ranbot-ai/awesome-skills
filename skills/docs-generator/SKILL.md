@@ -7,6 +7,10 @@ tags: [markdown, api, ai, template, document, security, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/docs-generator
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
+
 # Technical Documentation
 ## When to Use
 
@@ -67,7 +71,9 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/docs
 - 敏感信息（真实 token、密码、内部 URL）用占位符替代
 - **MUST** 包含 Evidence → Finding → Path 链（见 `../ops/evidence-finding-path.md` 与模板 §0）
 - **MUST** 读取 `references/vendor-report-rules.md`：选定 `malware` / `apt` 或 `flavor = null`（漏洞任务可叠加 thin `vuln`）；无 flavor 时只输出原任务模板和适用的 Base 元素，不强制 IOC/ATT&CK
-- **SHOULD** 引用 case `scope.md` / `timeline.md`（`../scripts/case-init.ps1`）
+- **SHOULD** 引用 case `scope.md` / `timeline.md`（`scripts/case-init.ps1`）
+
+`case-init.ps1` writes `scope.md`, `timeline.md`, `workitems.md`, and `README.md` under `work/<CaseName>/`. It refuses to run when that case directory already exists; choose a new `-CaseName` to preserve prior case data.
 
 ### 图表集成
 
@@ -163,16 +169,4 @@ For README, API endpoint, and file organization templates, see [references/templ
 
 **上游入口**: 所有安全/逆向 skill 在任务完成后自动调用本 skill
 **触发方式**:
-- 自动：任务完成后作为行为链第 9 步执行
-- 手动：用户说"写报告"、"出文档"、"writeup"
-
-**同级关联模块**:
-- `apk-reverse/` — APK 逆向完成后生成逆向报告
-- `ida-reverse/` — 二进制分析完成后生成逆向报告
-- `radare2/` — CLI 分析完成后生成逆向报告
-- `js-reverse/` — JS 签名逆向完成后生成签名报告
-- `reverse-engineering/` — 通用逆向完成后生成逆向报告
-- `field-journal/` — 报告内容同时作为进化日志的数据来源
-
-**安全报告模板**: `references/security-report-templates.md`
-**厂商报告规则**: `references/vendor-report-rules.md`（flavor: malware | apt | null；optional overlay: vul
+- 自动：任务完成后作为行为链第 9 步执

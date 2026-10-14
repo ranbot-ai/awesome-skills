@@ -7,6 +7,13 @@ tags: [python, ai, workflow, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-servicebus-py
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
+
+## Restored helper safety
+
+`scripts/setup_servicebus.py` can create or delete Service Bus queues, topics, and subscriptions. Delete commands require `--confirm-delete`; subscription creation with `--filter` replaces the default rule on the newly created subscription. Confirm the namespace and exact entity/action with the user before live use; prefer a disposable test namespace.
 
 # Azure Service Bus SDK for Python
 
@@ -155,25 +162,4 @@ async with receiver:
 | Action | Effect |
 |--------|--------|
 | `complete_message()` | Remove from queue (success) |
-| `abandon_message()` | Release lock, retry immediately |
-| `dead_letter_message()` | Move to dead-letter queue |
-| `defer_message()` | Set aside, receive by sequence number |
-
-## Topics and Subscriptions
-
-```python
-# Send to topic
-sender = client.get_topic_sender(topic_name="mytopic")
-async with sender:
-    await sender.send_messages(ServiceBusMessage("Topic message"))
-
-# Receive from subscription
-receiver = client.get_subscription_receiver(
-    topic_name="mytopic",
-    subscription_name="mysubscription"
-)
-async with receiver:
-    messages = await receiver.receive_messages(max_message_count=10)
-```
-
-## Sessions 
+| `abandon_message()` | Release lock, retry im

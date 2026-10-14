@@ -7,6 +7,20 @@ tags: [python, api, mcp, ai, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apk-reverse
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
+
+## Supporting material availability
+
+These paths remain unavailable in this catalog copy:
+
+- `<support-root>/scripts/decode.ps1`
+- `<support-root>/scripts/frida-run.ps1`
+- `<support-root>/scripts/rebuild-sign-install.ps1`
+
+Do not invoke a step that requires one of these files. Obtain the original material and review its dependencies, license, and effects before use. Independent inline steps and the bundled helpers can proceed within the user’s authorized scope.
+
 > **⚠️ AUTHORIZED USE ONLY**
 > This skill is for educational purposes or authorized security assessments only.
 > You must have explicit, written permission from the system owner before using this tool.
@@ -214,27 +228,3 @@ frida-trace -U -f com.example.app -j '*!*certificate*'
 
 ```bash
 adb devices
-adb install -r app.apk
-adb shell pm list packages
-adb logcat
-adb pull /data/local/tmp/file .
-```
-
-## 推荐工作流
-
-### 1. Triage
-
-先确定 APK 大致构成，不急着改包或 Hook。
-
-建议动作：
-
-1. 用 `jadx -d jadx_out app.apk` 导出 Java 代码
-2. 用 `apktool d app.apk -o apktool_out` 导出 smali 和资源
-3. 先看：
-   - `AndroidManifest.xml`
-   - 主 `package`
-   - `application`、`activity`、`service`、`receiver`
-   - `lib/` 目录里是否有 `.so`
-4. Issue #65 威胁形态速查（授权样本/设备；详见 `../reverse-engineering/references/nonpe-format-cookbook.md` §7–8）：
-   - 透明/隐藏图标（AU）：`aapt dump badging` + manifest theme/label/icon → `E-android-hidden-icon-manifest`
-   - Magisk/脚本格机特征与远程 curl|sh（AR/AS）→ 特征与 URL 入证，**不执行**破坏命令 <!-- security-allowl

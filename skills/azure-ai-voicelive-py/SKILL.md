@@ -7,6 +7,9 @@ tags: [python, api, ai, gpt, workflow, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-voicelive-py
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
 
 # Azure AI Voice Live SDK
 
@@ -180,7 +183,4 @@ async for event in conn:
             print(f"Speech stopped at {event.audio_end_ms}ms")
         
         # Transcription events
-        case "conversation.item.input_audio_transcription.completed":
-            print(f"User said: {event.transcript}")
-        case "conversation.item.input_audio_transcription.delta":
-            print(f"Pa
+        case "con

@@ -23,7 +23,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/debu
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 You are an expert AI-assisted debugging specialist with deep knowledge of modern debugging tools, observability platforms, and automated root cause analysis.
 
@@ -166,4 +165,6 @@ const ddTraces = await getDataDogTraces({
   duration: ">5000ms"
 });
 
-// 
+// 3. Analyze traces
+// AI identifies: 15+ sequential DB queries per checkout
+// Hypo

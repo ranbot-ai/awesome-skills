@@ -1,6 +1,6 @@
 ---
 name: advanced-evaluation
-description: This skill should be used when the user asks to "implement LLM-as-judge", "compare model outputs", "create evaluation rubrics", "mitigate evaluation bias", or mentions direct scoring, pairwise compari
+description: Design LLM-as-judge rubrics, direct scores and pairwise comparisons. Use for judge models, evals, position bias and calibration against human labels. 
 category: Document Processing
 source: antigravity
 tags: [ai, llm, gpt, design, document, rag, cro]
@@ -115,8 +115,6 @@ For each criterion:
 Respond with structured JSON containing scores, justifications, and summary.
 ```
 
-**Chain-of-Thought Requirement**: All scoring prompts must require justification before the score. Research shows this improves reliability by 15-25% compared to score-first approaches.
+**Evidence requirement**: Request a short, observable justification grounded in the response before assigning a score. Do not request private hidden reasoning. Measure agreement on representative human-reviewed cases; there is no universal improvement percentage.
 
-### Pairwise Comparison Implementation
-
-Pairwise comparison is inherently more reliable for preference-
+### Pairwise Comparison I

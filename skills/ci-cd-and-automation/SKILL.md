@@ -58,6 +58,10 @@ Pull Request Opened
 
 **No gate can be skipped.** If lint fails, fix lint — don't disable the rule. If a test fails, fix the code — don't skip the test.
 
+## Execution boundary
+
+These are separate templates for a project with the named scripts and locked CLIs already installed. Pin reviewed action revisions and use least-privilege permissions. Production and preview jobs need their own authorized identity, target and environment protections; untrusted PRs must not receive deployment secrets. Verify artifact transfer and recovery scope before applying. Auto-merge is optional and must follow the repository’s actual maintainer policy.
+
 ## GitHub Actions Configuration
 
 ### Basic CI Pipeline
@@ -180,26 +184,4 @@ Copy the failure output
 Feed it to the agent:
 "The CI pipeline failed with this error:
 [paste specific error]
-Fix the issue and verify locally before pushing again."
-    │
-    ▼
-Agent fixes → pushes → CI runs again
-```
-
-**Key patterns:**
-
-```
-Lint failure → Agent runs `npm run lint --fix` and commits
-Type error  → Agent reads the error location and fixes the type
-Test failure → Agent follows debugging-and-error-recovery skill
-Build error → Agent checks config and dependencies
-```
-
-## Deployment Strategies
-
-### Preview Deployments
-
-Every PR gets a preview deployment for manual testing:
-
-```yaml
-# Deploy preview 
+Fix the issue and veri

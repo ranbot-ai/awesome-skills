@@ -1,27 +1,24 @@
 ---
 name: agent-memory-systems
-description: Memory is the cornerstone of intelligent agents. Without it, every interaction starts from zero. This skill covers the architecture of agent memory: short-term (context window), long-term (vector stor
+description: Design tenant-scoped memory, retrieval and retention for agents. Use when planning RAG, conversation history, vector stores or remembering across sessions. 
 category: AI & Agents
 source: antigravity
-tags: [ai, agent, gpt, rag, cro]
+tags: [ai, agent, gpt, design, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-memory-systems
 ---
 
 
 # Agent Memory Systems
 
-Memory is the cornerstone of intelligent agents. Without it, every interaction
-starts from zero. This skill covers the architecture of agent memory: short-term
-(context window), long-term (vector stores), and the cognitive architectures
-that organize them.
+Choose semantic records for facts/preferences, episodic records for events, and procedural records for reusable methods. Keep retrieval quality separate from storage volume and bind persistent access to verified identity.
 
-Key insight: Memory isn't just storage - it's retrieval. A million stored facts
-mean nothing if you can't find the right one. Chunking, embedding, and retrieval
-strategies determine whether your agent remembers or forgets.
+## Procedure
 
-The field is fragmented with inconsistent terminology. We use the CoALA cognitive
-architecture framework: semantic memory (facts), episodic memory (experiences),
-and procedural memory (how-to knowledge).
+1. Establish the actual task, authenticated tenant/user, permission to retain content, retention limits and existing store/model versions.
+2. Read the guide's tenant-scoped contract and relevant storage/chunking sections. Select an adapter supported by the installed SDK; the guide's historical sketches are not deployable integrations.
+3. Specify record IDs, source evidence, timestamps, namespace, retrieval limits and conflict/version policy. Preserve originals and propose consolidation without deletion.
+4. Test cross-identity rejection, stale/conflicting records, bounded retrieval and failed writes with isolated fixtures. Benchmark retrieval against held-out questions before expanding storage.
+5. Deliver the architecture and evidence-backed change plan, listing unresolved adapters and hosted cost/data destinations. Apply only the persistence or provider operations actually authorized.
 
 ## Detailed Guide
 
@@ -43,9 +40,9 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 
 ## Example
 
-**User request:**
+**Request:** “Our support agent forgets preferences between sessions. Design memory for two customer tenants without sharing their history.”
 
-> Use @agent-memory-systems for this task: Memory is the cornerstone of intelligent agents.
+**Output:** Load the tenant-scoped contract and background-extraction sections. Propose a semantic namespace per verified tenant/user, records with source IDs and revisions, and bounded retrieval. Retain conflicting preferences until the owner resolves them; include tests that tenant B cannot retrieve or consolidate tenant A records. Identify the existing persistent adapter and consent/retention evidence before any write.
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.

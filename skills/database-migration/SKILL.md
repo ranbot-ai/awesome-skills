@@ -7,6 +7,20 @@ tags: [javascript, typescript, ai, template, document, prisma, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/database-migration
 ---
 
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+- `<support-root>/references/orm-switching.md`
+- `<support-root>/references/schema-migration.md`
+- `<support-root>/references/data-transformation.md`
+- `<support-root>/references/rollback-strategies.md`
+- `<support-root>/assets/schema-migration-template.sql`
+- `<support-root>/assets/data-migration-script.py`
+- `<support-root>/scripts/test-migration.sh`
+
+Ask for the original supporting material or an existing installation before using a step that depends on these paths; this catalog does not identify a verified download source for them. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
+
 
 # Database Migration
 
@@ -22,7 +36,6 @@ Master database schema and data migrations across ORMs (Sequelize, TypeORM, Pris
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 ## Use this skill when
 
@@ -166,55 +179,4 @@ module.exports = {
 // Step 3: Remove old column
 module.exports = {
   up: async (queryInterface) => {
-    await queryInterface.removeColumn('users', 'name');
-  },
-
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn('users', 'name', {
-      type: Sequelize.STRING
-    });
-  }
-};
-```
-
-### Changing Column Types
-```javascript
-module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    // For large tables, use multi-step approach
-
-    // 1. Add new column
-    await queryInterface.addColumn('users', 'age_new', {
-      type: Sequelize.INTEGER
-    });
-
-    // 2. Copy and transform data
-    await queryInterface.sequelize.query(`
-      UPDATE users
-      SET age_new = CAST(age AS INTEGER)
-      WHERE age IS NOT NULL
-    `);
-
-    // 3. Drop old column
-    await queryInterface.removeColumn('users', 'age');
-
-    // 4. Rename new column
-    await queryInterface.renameColumn('users', 'age_new', 'age');
-  },
-
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.changeColumn('users', 'age', {
-      type: Sequelize.STRING
-    });
-  }
-};
-```
-
-## Data Transformations
-
-### Complex Data Migration
-```javascript
-module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    // Get all records
-    const [users] 
+    await queryInterface.removeColumn('users', '

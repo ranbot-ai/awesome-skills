@@ -1,11 +1,19 @@
 ---
 name: context-kit
 description: Evaluate, adapt, and safely install Context Kit personal context artifacts for Claude Code or adjacent agent workflows. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [markdown, api, claude, ai, agent, workflow, template, rag]
+tags: [markdown, api, claude, ai, agent, workflow, template, document, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/context-kit
 ---
+
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+- `<support-root>/scripts/install.sh`
+
+Obtain the required material from the [declared upstream source](https://github.com/JDDavenport/context-kit), or from a user-provided installation of that source. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
 
 
 # Context Kit
@@ -98,23 +106,4 @@ installer.
 
 ```bash
 mkdir -p .agent/context
-printf '.agent/context/\n' >> .gitignore
-cp ~/Downloads/context-kit/templates/pca-wiki.md .agent/context/pca-wiki.md
-```
-
-Then trim the template to the minimum useful fields for the project instead of filling every personal
-section immediately.
-
-## Best Practices
-
-- Keep context files short enough that an agent can read them at session start without drowning in stale
-  detail.
-- Separate durable facts from temporary state. Use project workplans or task trackers for temporary state.
-- Label assumptions and uncertain memories instead of presenting them as facts.
-- Review personal context after major life, role, health, or project changes.
-- Store voice examples and anti-examples separately from private identity details when possible.
-
-## Common Pitfalls
-
-- Running a shell installer directly from `curl` without inspecting it first
-- Committing personal context files to a 
+printf '.agent/contex

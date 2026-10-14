@@ -7,6 +7,16 @@ tags: [markdown, api, ai, workflow, template, document, image, security, vulnera
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/firmware-analyst
 ---
 
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+- `./scripts/getArch.sh`
+- `./scripts/makeImage.sh`
+- `./scripts/inferNetwork.sh`
+
+Ask for the original supporting material or an existing installation before using a step that depends on these paths; this catalog does not identify a verified download source for them. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
+
 
 > **⚠️ AUTHORIZED USE ONLY**
 > This skill is for educational purposes or authorized security assessments only.
@@ -61,7 +71,6 @@ Logic analyzer     - Protocol capture and analysis
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 ## Firmware Analysis Workflow
 
@@ -156,43 +165,4 @@ mipsel-linux-gnu-gcc exploit.c -o exploit
 Hardcoded credentials     - Default passwords in firmware
 Backdoor accounts         - Hidden admin accounts
 Weak password hashing     - MD5, no salt
-Authentication bypass     - Logic flaws in login
-Session management        - Predictable tokens
-```
-
-### Command Injection
-```c
-// Vulnerable pattern
-char cmd[256];
-sprintf(cmd, "ping %s", user_input);
-system(cmd);
-
-// Test payloads
-; id
-| cat /etc/passwd
-`whoami`
-$(id)
-```
-
-### Memory Corruption
-```
-Stack buffer overflow    - strcpy, sprintf without bounds
-Heap overflow           - Improper allocation handling
-Format string           - printf(user_input)
-Integer overflow        - Size calculations
-Use-after-free          - Improper memory management
-```
-
-### Information Disclosure
-```
-Debug interfaces        - UART, JTAG left enabled
-Verbose errors          - Stack traces, paths
-Configuration files     - Exposed credentials
-Firmware updates        - Unencrypted downloads
-```
-
-## Tool Proficiency
-
-### Extraction Tools
-```
-binwalk v3           - Firmware extraction
+Authentication bypass     - Log

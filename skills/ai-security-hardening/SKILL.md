@@ -35,7 +35,9 @@ Supply chain attack       Malicious model weights        Signature verification,
 Insecure output           XSS/SQLi from LLM response     Output encoding, parameterized queries
 ```
 
-## Prompt Injection Defense
+## Prompt-injection indicators and authorization boundaries
+
+Regex indicators have false positives and bypasses. They do not establish a prompt-injection security boundary. Keep untrusted content separate, enforce server-side tool/data authorization independent of model text, minimize accessible secrets and require approval for scoped side effects. The examples below are illustrative detectors, not proof an input or output is safe.
 
 ```python
 import re
@@ -133,8 +135,8 @@ def scrub_pii_from_output(text: str) -> str:
     anonymized = anonymizer.anonymize(text=text, analyzer_results=results)
     return anonymized.text
 
-def validate_output_safety(output: str) -> bool:
-    """Check output doesn't contain prompt injection artifacts."""
+def has_no_known_output_indicators(output: str) -> bool:
+    """No known regex match; does not prove SQL, HTML or command safety."""
     dangerous_patterns = [
         r"<\s*script\s*>",         # XSS
         r"javascript:",             # XSS
@@ -150,21 +152,4 @@ def validate_output_safety(output: str) -> bool:
 
 ## API Security for LLM Endpoints
 
-```python
-from fastapi import FastAPI, HTTPException, Depends, Request
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-import jwt
-import time
-from collections import defaultdict
-
-app = FastAPI()
-security = HTTPBearer()
-
-# Rate limiting (per API key)
-request_counts = defaultdict(list)
-
-def rate_limit(api_key: str, max_requests: int = 100, window_seconds: int = 60):
-    now = time.time()
-    requests = request_counts[api_key]
-    # Remove old requests outside window
-    request_counts[api_key] = [t for t in requests if now - t 
+Schematic example: bind SECRET_KEY, TOKEN_ISSUER and TOKEN_AUDIENCE to a verified trusted configuration. Require explicit scopes

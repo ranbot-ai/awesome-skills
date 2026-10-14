@@ -7,6 +7,9 @@ tags: [api, ai, workflow, document, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-resource-manager-cosmosdb-dotnet
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
 
 # Azure.ResourceManager.CosmosDB (.NET)
 
@@ -184,8 +187,4 @@ await database.CreateOrUpdateCosmosDBSqlDatabaseThroughputAsync(
 ```csharp
 // Get keys
 var keys = await account.GetKeysAsync();
-Console.WriteLine($"Primary Key: {keys.Value.PrimaryMasterKey}");
-
-// Get connection strings
-var connectionStrings = await account.GetConnectionStringsAsync();
-foreach (var cs in connectionStrings.Value.
+Console.Wr

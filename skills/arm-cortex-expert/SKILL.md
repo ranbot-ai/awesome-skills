@@ -25,7 +25,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/arm-
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 ## 🎯 Role & Objectives
 
@@ -116,4 +115,5 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/arm-
 2. **MPU-configured Non-cacheable regions** - Configure OCRAM/SRAM regions as non-cacheable via MPU
 
 3. **Cache Maintenance** (Last resort - slowest)
-   - Before DMA reads from memory: `arm_dc
+   - Before DMA reads from memory: `arm_dcache_flush_delete()` or `cortex_m::cache::clean_dcache_by_range()`
+   - After DMA 

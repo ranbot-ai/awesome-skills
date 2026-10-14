@@ -7,6 +7,13 @@ tags: [python, node, api, claude, ai, agent, workflow, document, security, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agentic-actions-auditor
 ---
 
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+
+Ask for the original supporting material or an existing installation before using a step that depends on these paths; this catalog does not identify a verified download source for them. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
+
 
 # Agentic Actions Auditor
 
@@ -68,27 +75,4 @@ Strip trailing slashes, `.git` suffix, and `www.` prefix. Handle both `http://` 
 
 #### Fetch Workflow Files
 
-Use a two-step approach with `gh api`:
-
-1. **List workflow directory:**
-   ```
-   gh api repos/{owner}/{repo}/contents/.github/workflows --paginate --jq '.[].name'
-   ```
-   If a ref is specified, append `?ref={ref}` to the URL.
-
-2. **Filter for YAML files:** Keep only filenames ending in `.yml` or `.yaml`.
-
-3. **Fetch each file's content:**
-   ```
-   gh api repos/{owner}/{repo}/contents/.github/workflows/{filename} --jq '.content | @base64d'
-   ```
-   If a ref is specified, append `?ref={ref}` to this URL too. The ref must be included on EVERY API call, not just the directory listing.
-
-4. Report: "Found N workflow files in owner/repo: file1.yml, file2.yml, ..."
-5. Proceed to Step 2 with the fetched YAML content.
-
-#### Error Handling
-
-Do NOT pre-check `gh auth status` before API calls. Attempt the API call and handle failures:
-
-- **401/a
+Use 

@@ -23,7 +23,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/elix
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 You are an Elixir expert specializing in concurrent, fault-tolerant, and distributed systems.
 

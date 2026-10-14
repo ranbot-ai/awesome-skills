@@ -7,6 +7,9 @@ tags: [api, ai, workflow, document, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-search-documents-dotnet
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
 
 # Azure.Search.Documents (.NET)
 
@@ -185,11 +188,4 @@ await foreach (SearchResult<Hotel> result in results.GetResultsAsync())
 ```csharp
 var options = new SearchOptions
 {
-    Facets = { "rating,count:5", "category" }
-};
-
-var results = await searchClient.SearchAsync<Hotel>("*", options);
-
-foreach (var facet in results.Value.Facets["rating"])
-{
-    Console.WriteLine($"Rating {facet.Value}: {f
+    Facets = { "rating,count:

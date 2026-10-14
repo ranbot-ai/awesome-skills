@@ -7,6 +7,15 @@ tags: [markdown, api, ai, agent, design, document, security, vulnerability, rag,
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/code-review-and-quality
 ---
 
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+- `<support-root>/references/security-checklist.md`
+- `<support-root>/references/performance-checklist.md`
+
+Obtain the required material from the [declared upstream source](https://github.com/addyosmani/agent-skills), or from a user-provided installation of that source. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
+
 
 # Code Review and Quality
 
@@ -75,24 +84,4 @@ For detailed security guidance, see `security-and-hardening`. Does the change in
 - Is authentication/authorization checked where needed?
 - Are SQL queries parameterized (no string concatenation)?
 - Are outputs encoded to prevent XSS?
-- Are dependencies from trusted sources with no known vulnerabilities?
-- Is data from external sources (APIs, logs, user content, config files) treated as untrusted?
-- Are external data flows validated at system boundaries before use in logic or rendering?
-
-### 5. Performance
-
-For detailed profiling and optimization, see `performance-optimization`. Does the change introduce performance problems?
-
-- Any N+1 query patterns?
-- Any unbounded loops or unconstrained data fetching?
-- Any synchronous operations that should be async?
-- Any unnecessary re-renders in UI components?
-- Any missing pagination on list endpoints?
-- Any large objects created in hot paths?
-
-## Structural Remedies
-
-When you flag a structural problem, propose the move — not just the problem. A review that only says "this is complex" leaves the author guessing. Reach for a named restructuring:
-
-- **Replace a chain of conditionals** with a typed model or an explicit dispatcher.
-- **Collap
+- Are dependencies from trusted sou

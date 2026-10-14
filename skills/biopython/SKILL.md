@@ -7,6 +7,9 @@ tags: [python, api, ai, workflow, document, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/biopython
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
 
 # Biopython: Computational Molecular Biology in Python
 
@@ -155,12 +158,4 @@ result_handle = NCBIWWW.qblast("blastn", "nt", "ATCGATCGATCG")
 blast_record = NCBIXML.read(result_handle)
 
 # Display top hits
-for alignment in blast_record.alignments[:5]:
-    print(f"{alignment.title}: E-value={alignment.hsps[0].expect}")
-```
-
-### 5. Structural Bioinformatics (Bio.PDB)
-
-**Reference:** `references/structure.md`
-
-Use for:
+for alignment in blas

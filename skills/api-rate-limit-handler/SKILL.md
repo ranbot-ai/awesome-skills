@@ -50,22 +50,20 @@ function getRetryDelay(
   if (retryAfter) {
     const seconds = Number(retryAfter);
     if (Number.isFinite(seconds) && seconds >= 0) {
-      return Math.min(seconds * 1000, maxDelayMs);
+      return seconds * 1000;
     }
     // HTTP-date format
     const date = new Date(retryAfter).getTime();
     if (Number.isFinite(date)) {
-      return Math.min(Math.max(0, date - Date.now()), maxDelayMs);
+      return Math.max(0, date - Date.now());
     }
   }
 
   // GitHub documents x-ratelimit-reset as Unix epoch seconds.
-  const githubReset = Number(response.headers.get("x-ratelimit-reset"));
+  const resetHeader = response.headers.get("x-ratelimit-reset");
+  const githubReset = resetHeader === null || resetHeader.trim() === "" ? NaN : Number(resetHeader);
   if (Number.isFinite(githubReset)) {
-    return Math.min(
-      Math.max(0, githubReset * 1000 - Date.now()),
-      maxDelayMs
-    );
+    return Math.max(0, githubReset * 1000 - Date.now());
   }
 
   // Fallback: capped exponential backoff with full jitter.
@@ -73,6 +71,8 @@ function getRetryDelay(
   return Math.floor(Math.random() * cap);
 }
 ```
+
+Upstream hints are minimum waits; never truncate them to retry early. If a hint exceeds the remaining operation budget, stop without scheduling another request. The cap applies only to fallback backoff.
 
 Provider-specific reset headers do not share one unit or format. For example,
 some APIs return durations while GitHub returns epoch seconds. Parse an
@@ -99,7 +99,7 @@ async function fetchWithRetry(
     if (response.ok) return response;
 
     // Terminal errors — do not retry
-    if ([400, 401, 403, 404, 422].includes(response.status)) {
+    if (![408, 429, 500, 502, 503, 504].includes(response.status)) {
       throw new Error(`Terminal error ${response.status}: ${response.statusText}`);
     }
 
@@ -115,9 +115,9 @@ async function fetchWithRetry(
     }
 
     const remaining = maxElapsedMs - (Date.now() - startedAt);
-    const delay = Math.min(getRetryDelay(response, attempt), remaining);
-    if (delay <= 0) {
-      throw new Error(`Retry deadline exceeded after ${maxElapsedMs}ms`);
+    const delay = getRetryDelay(response, attempt);
+    if (remaining <= 0 || delay > remaining) {
+      throw new Error(`Retry cannot be scheduled within ${maxElapsedMs}ms`);
     }
 
     // Release the connection before waiting when the body is not needed.
@@ -152,12 +152,4 @@ class TokenBucket {
 
   async acquire(): Promise<void> {
     const ticket = this.queue.then(() => this.acquireOnce());
-    this.queue = ticket.catch(() => undefined);
-    return ticket;
-  }
-
-  private async acquireOnce(): Promise<void> {
-    this.refill();
-    if (this.tokens < 1) {
-      const waitMs = ((1 - this.tokens) / this.refillRate) * 1000;
-      await new Promise(resolve =
+    this.queue = ticket.catch(() => und

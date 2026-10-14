@@ -1,6 +1,6 @@
 ---
 name: build
-description: name: build Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validati
+description: Develop major features through research, planning, implementation, and progress tracking. 
 category: Creative & Media
 source: antigravity
 tags: [ai, workflow, cro]
@@ -8,14 +8,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/buil
 ---
 
 
----
-name: build
-description: Feature development pipeline - research, plan, track, and implement major features.
-argument-hint: [subcommand] [name]
-metadata:
-  author: Shpigford
-  version: "1.0"
----
 
 Feature development pipeline - research, plan, track, and implement major features.
 

@@ -22,7 +22,7 @@ Transform raw data into compelling narratives that drive decisions and inspire a
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
+- Use the frameworks and examples below; verify calculations against the supplied source data.
 
 ## Use this skill when
 
@@ -65,6 +65,8 @@ Resolution: Insights and recommendations
 | **Visuals**   | Clarity  | Charts, diagrams, highlights     |
 
 ## Story Frameworks
+
+The numeric stories below are synthetic teaching examples, not observed customer outcomes or benchmarks. Replace their figures with verified input, show assumptions, and distinguish association from causation. Recalculate totals before recommending spending or forecasting impact.
 
 ### Framework 1: The Problem-Solution Story
 
@@ -190,7 +192,7 @@ Should we expand into EMEA or APAC first?
 | Growth      | 30%    | 3          | 5          |
 | Competition | 20%    | 2          | 4          |
 | Ease        | 25%    | 2          | 3          |
-| **Total**   |        | **2.9**    | **4.1**    |
+| **Total**   |        | **3.05**   | **4.05**   |
 
 ## The Recommendation
 
@@ -215,17 +217,4 @@ Start simple, add layers:
 Slide 1: "Revenue is growing" [single line chart]
 Slide 2: "But growth is slowing" [add growth rate overlay]
 Slide 3: "Driven by one segment" [add segment breakdown]
-Slide 4: "Which is saturating" [add market share]
-Slide 5: "We need new segments" [add opportunity zones]
-```
-
-### Technique 2: Contrast and Compare
-
-```markdown
-Before/After:
-┌─────────────────┬─────────────────┐
-│ BEFORE │ AFTER │
-│ │ │
-│ Process: 5 days│ Process: 1 day │
-│ Errors: 15% │ Errors: 2% │
-│ Cost: $50/unit │ Cost: $20/uni
+Slide 4: "Which is saturating" [add marke

@@ -23,7 +23,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/comp
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 Orchestrate comprehensive multi-dimensional code review using specialized review agents
 
@@ -73,4 +72,6 @@ Use Task tool with security and performance agents, incorporating Phase 1 findin
 
 ## Phase 3: Testing & Documentation Review
 
-Use Task tool for te
+Use Task tool for test and documentation quality assessment:
+
+### 3A. Test Coverage & Quality Analysis

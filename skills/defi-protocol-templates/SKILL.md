@@ -1,11 +1,27 @@
 ---
 name: defi-protocol-templates
 description: Implement DeFi protocols with production-ready templates for staking, AMMs, governance, and lending systems. Use when building decentralized finance applications or smart contract protocols. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [ai, template, security, rag]
+tags: [ai, template, document, security, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/defi-protocol-templates
 ---
+
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+- `<support-root>/references/staking.md`
+- `<support-root>/references/liquidity-pools.md`
+- `<support-root>/references/governance-tokens.md`
+- `<support-root>/references/lending-protocols.md`
+- `<support-root>/references/flash-loans.md`
+- `<support-root>/assets/staking-contract.sol`
+- `<support-root>/assets/amm-contract.sol`
+- `<support-root>/assets/governance-token.sol`
+- `<support-root>/assets/lending-protocol.sol`
+
+Ask for the original supporting material or an existing installation before using a step that depends on these paths; this catalog does not identify a verified download source for them. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
 
 
 # DeFi Protocol Templates
@@ -22,7 +38,6 @@ Production-ready templates for common DeFi protocols including staking, AMMs, go
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 ## Use this skill when
 
@@ -127,41 +142,4 @@ contract StakingRewards is ReentrancyGuard, Ownable {
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
-
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-
-contract SimpleAMM {
-    IERC20 public token0;
-    IERC20 public token1;
-
-    uint256 public reserve0;
-    uint256 public reserve1;
-
-    uint256 public totalSupply;
-    mapping(address => uint256) public balanceOf;
-
-    event Mint(address indexed to, uint256 amount);
-    event Burn(address indexed from, uint256 amount);
-    event Swap(address indexed trader, uint256 amount0In, uint256 amount1In, uint256 amount0Out, uint256 amount1Out);
-
-    constructor(address _token0, address _token1) {
-        token0 = IERC20(_token0);
-        token1 = IERC20(_token1);
-    }
-
-    function addLiquidity(uint256 amount0, uint256 amount1) external returns (uint256 shares) {
-        token0.transferFrom(msg.sender, address(this), amount0);
-        token1.transferFrom(msg.sender, address(this), amount1);
-
-        if (totalSupply == 0) {
-            shares = sqrt(amount0 * amount1);
-        } else {
-            shares = min(
-                (amount0 * totalSupply) / reserve0,
-                (amount1 * totalSupply) / reserve1
-            );
-        }
-
-        require(shares > 0, "Shares = 0");
-        _mint(msg.sender, sha
+pragma solidity 

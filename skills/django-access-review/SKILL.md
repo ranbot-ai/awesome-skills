@@ -1,18 +1,13 @@
 ---
 name: django-access-review
-description: name: django-access-review Find access control vulnerabilities by investigating how the codebase answers one question: 
+description: Review Django and DRF authorization flows for IDOR, object permissions, query scoping, and tenant isolation. 
 category: Document Processing
 source: antigravity
-tags: [python, markdown, api, ai, document, security, rag]
+tags: [python, markdown, api, ai, document, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/django-access-review
 ---
 
 
----
-name: django-access-review
-description: Django access control and IDOR security review. Use when reviewing Django views, DRF viewsets, ORM queries, or any Python/Django code handling user authorization. Trigger keywords: "IDOR", "access control", "authorization", "Django permissions", "object permissions", "tenant...
---- LICENSE
----
 
 <!--
 Reference material based on OWASP Cheat Sheet Series (CC BY-SA 4.0)
@@ -169,4 +164,17 @@ Trace the code to answer this:
 
 Pick a concrete endpoint and trace it completely.
 
-### Example Inves
+### Example Investigation
+
+```
+Endpoint: GET /api/documents/{pk}/
+
+1. Find the view handling this URL
+   → DocumentViewSet.retrieve() in api/views.py
+
+2. Check what DocumentViewSet inherits from
+   → class DocumentViewSet(viewsets.ModelViewSet)
+   → No custom base class with authorization
+
+3. Check permission_classes
+   → permission_classes = [IsAuthenti

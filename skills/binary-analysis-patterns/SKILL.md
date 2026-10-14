@@ -27,7 +27,6 @@ Comprehensive patterns and techniques for analyzing compiled binaries, understan
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 ## Disassembly Fundamentals
 
@@ -263,4 +262,11 @@ strlen_done:
 
 ; strcpy pattern
 strcpy_loop:
-mov al, [
+mov al, [rsi]
+mov [rdi], al
+test al, al
+jz strcpy_done
+inc rsi
+inc rdi
+jmp strcpy_loop
+strc

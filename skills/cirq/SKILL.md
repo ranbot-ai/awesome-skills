@@ -7,6 +7,9 @@ tags: [python, api, ai, workflow, template, design, document, presentation, azur
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cirq
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
 
 # Cirq - Quantum Computing with Python
 
@@ -167,10 +170,4 @@ Common topics:
 For information about designing experiments, parameter sweeps, data collection, and using the ReCirq framework, see:
 - **references/experiments.md** - Complete guide to quantum experiments
 
-Common topics:
-- Experiment design patterns
-- Parameter sweeps and data collection
-- ReCirq framework structure
-- Common algorithms (VQE, QAOA, QPE)
-- Data analysis and visualization
-- Statistical ana
+Common 

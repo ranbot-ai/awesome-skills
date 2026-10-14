@@ -1,11 +1,20 @@
 ---
 name: cowork-to-code-bridge
 description: Use an already-installed, independently verified cowork-to-code bridge to run narrowly approved actions on the user's own macOS, Linux, or WSL2 machine through a local file queue. 
-category: Development & Code Tools
+category: Document Processing
 source: antigravity
-tags: [python, api, mcp, claude, ai, agent]
+tags: [python, api, mcp, claude, ai, agent, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cowork-to-code-bridge
 ---
+
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+- `<support-root>/scripts/git_status.sh`
+- `<support-root>/scripts/run_claude.sh`
+
+Obtain the required material from the [declared upstream source](https://github.com/abhinaykrupa/cowork-to-code-bridge), or from a user-provided installation of that source. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
 
 
 # cowork-to-code-bridge
@@ -94,30 +103,4 @@ Before queueing any task, require the owner to confirm all of these:
    allows this variable to override caller-supplied permission flags, so the
    request's `permission_scope` alone is not evidence of confinement. When the
    variable is unset, confirm the generated scope mapping in task logs. When it
-   is set, inspect the service environment and configuration directly; logs
-   only show that the caller scope was overridden, not the effective flags.
-9. A per-task budget ceiling and bounded output retention are configured.
-
-If any precondition is unknown, stop instead of probing or repairing the
-machine automatically.
-
-## Core API
-
-```python
-from cowork_to_code_bridge import (
-    call_remote,
-    cancel_task,
-    poll_task_result,
-    queue_task,
-)
-```
-
-| Function | Behavior |
-|---|---|
-| `call_remote` | Run one short, fixed approved script and wait. |
-| `queue_task` | Queue bounded work and return a `task_id`. |
-| `poll_task_result` | Read the current result without repeating the task. |
-| `cancel_task` | Cancel queued work or signal an in-flight process group. |
-
-Use `queue_task` for anything that may exceed roughly 30 seconds. Always use a
-stable, operation-specific `idempotency_key` for state-chan
+   

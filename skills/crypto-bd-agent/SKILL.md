@@ -1,6 +1,6 @@
 ---
 name: crypto-bd-agent
-description: Production-tested patterns for building AI agents that autonomously discover, > evaluate, and acquire token listings for cryptocurrency exchanges. 
+description: Production-tested patterns for building AI agents that autonomously discover, evaluate, and acquire token listings for cryptocurrency exchanges. 
 category: Security & Systems
 source: antigravity
 tags: [api, ai, agent, llm, workflow, design, security, vulnerability, rag, cro]

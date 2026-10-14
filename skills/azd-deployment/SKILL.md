@@ -1,9 +1,9 @@
 ---
 name: azd-deployment
-description: Deploy containerized frontend + backend applications to Azure Container Apps with remote builds, managed identity, and idempotent infrastructure. 
-category: Development & Code Tools
+description: Prepare and verify authorized Azure Container Apps deployments with azd. Use for azure.yaml, Bicep, remote builds, managed identity and post-deploy checks. 
+category: Document Processing
 source: antigravity
-tags: [python, api, ai, workflow, template, image, docker, azure, cro]
+tags: [python, api, ai, workflow, template, document, image, docker, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azd-deployment
 ---
 
@@ -11,6 +11,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azd-
 # Azure Developer CLI (azd) Container Apps Deployment
 
 Deploy containerized frontend + backend applications to Azure Container Apps with remote builds, managed identity, and idempotent infrastructure.
+
+## Authorization and preparation
+
+Inspect existing project files and the active tenant, subscription and environment first. Provisioning, deployment, role assignments and hook execution change cloud resources and may incur costs. Prepare the exact diff, target, estimated impact and rollback plan; execute only when the user explicitly authorizes that deployment. Do not print environment values or credentials into shared logs.
 
 ## Quick Start
 
@@ -163,51 +167,16 @@ output SERVICE_BACKEND_URI string = backend.outputs.uri
 output BACKEND_PRINCIPAL_ID string = backend.outputs.principalId
 ```
 
-## Idempotent Deployments
+## Deployment Repeatability
 
-### Why azd up is Idempotent
+### Reconciliation and revision changes
 
 1. **Bicep is declarative** - Resources reconcile to desired state
 2. **Remote builds tag uniquely** - Image tags include deployment timestamp
 3. **ACR reuses layers** - Only changed layers upload
 
-### Preserving Manual Changes
+### Preserve unmanaged changes deliberately
 
-Custom domains added via Portal can be lost on redeploy. Preserve with hooks:
+Inventory custom domains, ingress, role assignments and other Portal-managed settings before preparing a deployment. Move desired settings into reviewed infrastructure code or prepare a specific restoration plan. Setting a property to `null` is not a general guarantee that Azure will preserve an out-of-band edit. Repeated deployment may create new image revisions and execute hooks again; inspect those effects rather than claiming every hook is idempotent.
 
-```yaml
-hooks:
-  preprovision:
-    shell: sh
-    run: |
-      # Save custom domains before provision
-      if az containerapp show --name "$FRONTEND_NAME" -g "$RG" &>/dev/null; then
-        az containerapp show --name "$FRONTEND_NAME" -g "$RG" \
-          --query "properties.configuration.ingress.customDomains" \
-          -o json > /tmp/domains.json
-      fi
-
-  postprovision:
-    shell: sh
-    run: |
-      # Verify/restore custom domains
-      if [ -f /tmp/domains.json ]; then
-        echo "Saved domains: $(cat /tmp/domains.json)"
-      fi
-```
-
-### Handling Existing Resources
-
-```bicep
-// Reference existing ACR (don't recreate)
-resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-07-01' existing = {
-  name: containerRegistryName
-}
-
-// Set customDomains to null to preserve Portal-added domains
-customDomains: empty(customDomainsParam) ? null : customDomainsParam
-```
-
-## Container App Service Discovery
-
-Internal HTTP routin
+Reference an existing container registry explicitly in the project's Bicep when it is meant to remain externally ma

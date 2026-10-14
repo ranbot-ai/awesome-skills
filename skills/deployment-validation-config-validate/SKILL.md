@@ -1,9 +1,9 @@
 ---
 name: deployment-validation-config-validate
-description: You are a configuration management expert specializing in validating, testing, and ensuring the correctness of application configurations. Create comprehensive validation schemas, implement configurat
+description: Validate application configurations with schemas, configuration tests, and checks for security and environment consistency. 
 category: AI & Agents
 source: antigravity
-tags: [ai, workflow, cro]
+tags: [ai, workflow, security, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/deployment-validation-config-validate
 ---
 

@@ -27,7 +27,6 @@ Revert changes by logical work unit with full git awareness. Supports reverting 
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 ## Pre-flight Checks
 
@@ -204,4 +203,8 @@ Executing revert plan...
 
 [2/4] Reverting def5678...
       git revert --no-edit def5678
-      
+      ✓ Success
+
+[3/4] Reverting ghi9012...
+      git revert --no-edit ghi9012
+      ✓ S

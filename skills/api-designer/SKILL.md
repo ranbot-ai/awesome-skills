@@ -7,6 +7,15 @@ tags: [api, ai, agent, design, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/api-designer
 ---
 
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+- `<support-root>/references/domains.md`
+- `<support-root>/references/testmu_example.md`
+
+Obtain the required material from the [declared upstream source](https://github.com/LambdaTest/agent-skills), or from a user-provided installation of that source. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
+
 
 # API Designer Skill
 ## When to Use
@@ -129,22 +138,4 @@ Read `references/testmu_example.md` for generating API structure and providing e
 
 Once the API design output is delivered, ask the user:
 
-"Would you like me to generate API documentation for this design? (yes/no)"
-
-If the user says **yes**:
-- Check if the API Documentation skill is available in the installed skills list
-- If the skill **is available**:
-  - Read and follow the instructions in the API Documentation skill
-  - Use the API design output above as the input
-  - Deliver the documentation as plain text output
-- If the skill **is NOT available**:
-  - Inform the user: "It looks like the API Documentation skill isn't installed.
-    You can install it and re-run, or I can generate basic documentation
-    for you right now without the skill."
-  - If the user wants basic documentation generated anyway, produce a simple
-    plain text API documentation covering endpoints, parameters, and responses
-    based on the design above
-  - If the user wants to install first, guide them to add the skill and restart
-
-If the user says **no**:
-- End the ta
+"Would you 

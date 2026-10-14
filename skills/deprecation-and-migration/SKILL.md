@@ -3,7 +3,7 @@ name: deprecation-and-migration
 description: Manages deprecation and migration. Use when removing old systems, APIs, or features. Use when migrating users from one implementation to another. Use when deciding whether to maintain or sunset existi
 category: Document Processing
 source: antigravity
-tags: [typescript, markdown, api, ai, agent, design, document, security]
+tags: [typescript, markdown, api, ai, agent, design, document, security, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/deprecation-and-migration
 ---
 
@@ -93,7 +93,7 @@ Don't deprecate without a working alternative. The replacement must:
 ### Migration Guide
 1. Replace `import { client } from 'old-service'` with `import { client } from 'new-service'`
 2. Update configuration (see examples below)
-3. Run the migration verification script: `npx migrate-check`
+3. Run the project-owned migration verification command documented in this guide. Do not execute an unknown package from the registry.
 ```
 
 ### Step 3: Migrate Incrementally
@@ -112,18 +112,4 @@ Migrate consumers one at a time, not all at once. For each consumer:
 
 ### Step 4: Remove the Old System
 
-Only after all consumers have migrated:
-
-```
-1. Verify zero active usage (metrics, logs, dependency analysis)
-2. Remove the code
-3. Remove associated tests, documentation, and configuration
-4. Remove the deprecation notices
-5. Celebrate — removing code is an achievement
-```
-
-## Migration Patterns
-
-### Strangler Pattern
-
-Run old
+Use observed usage across a representative window and account for infrequent/offline consumers. Prepare an authorized rollback or archive before destructive removal; a missing recent log entry alone is not proof of zero consumers. Keep historical migration

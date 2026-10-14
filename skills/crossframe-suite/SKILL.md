@@ -1,11 +1,19 @@
 ---
 name: crossframe-suite
 description: Use when the user explicitly invokes CrossFrame Suite for Chinese structural diagnosis workflows across relationships, organizations, public issues, philosophy, research, or essay output. 
-category: Creative & Media
+category: Document Processing
 source: antigravity
-tags: [claude, ai, agent, workflow, template, cro]
+tags: [claude, ai, agent, workflow, template, document, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/crossframe-suite
 ---
+
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+- `crossframe-essay/templates/article-type-selection-dialog.md`
+
+Obtain the required material from the [declared upstream source](https://github.com/xi-kari/crossframe-skill), or from a user-provided installation of that source. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
 
 # CrossFrame Suite
 
@@ -100,14 +108,4 @@ crossframe -> [needed sibling skills] -> crossframe-essay(full-visible-v5-longfo
 
 ## 调度原则
 
-- 基础先行：多数复杂任务先由 `crossframe` 建立事实边界、尺度窗口、机制候选和判断档位。
-- 场景追加：只读取本次必要的专项 skill，不把全部 skill 一起触发。
-- 成文后置：写文章前先有结构洞察底稿；公共、组织、辩论、读书等专项判断先完成，再进入 `crossframe-essay`。
-- 默认成文：suite 被触发时，最终输出默认走 `crossframe-essay`，输出档位固定为 `full-visible-v5-longform`；专项产物先做，文章后置。
-- 模式/角色先行：suite 开头只确认输出模式与角色；没有触发词时展示 `templates/mode-selection-dialog.md` 并等待回复，不直接开始。
-- 文章类型后置：文章类型只在进入 `crossframe-essay` 后、结构洞察底稿生成后确认；它决定文章表达形态和写作技法读取，不改变 suite 的主路由。
-- 胶囊归属：suite 只传入 `selection_state`、`workflow_state`、`voice_mode` 和文章层开关；不得读取 v5 源索引、不得展开连读包、不得生成 `v5-read-state-capsule`。胶囊由 `crossframe` 核心层在命中 source modules、入口包和必须同读闭包后生成。
-- 声口由角色决定：suite 默认成文时，根据 `output-mode-selector.md` 将 `voice_mode` 和 `topic_sensitivity` 传给 `crossframe-essay`。用户显式要求“亲切/编辑口吻/答复体”时覆盖。
-- 长文契约：任何从 suite 进入、且未显式关闭文章层的 CrossFrame 内容任务，默认不是短答，不得用项目符号诊断、摘要式回答或“如果只要一句话”替代完整正文。
-- 成文边界：默认对所有 CrossFrame 内容任务成文；只有用户用“只要/不要文章/短答/表格/清单/纯诊断/仅行动方案”等词明确关闭时，才关闭文章层。
-- 源连续
+- 基础先行：多数复杂任务先由 

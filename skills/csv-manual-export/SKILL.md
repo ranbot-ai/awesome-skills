@@ -7,7 +7,6 @@ tags: [api, ai, agent, workflow, template, design, document, spreadsheet, presen
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/csv-manual-export
 ---
 
-
 # CSV Manual Export
 
 **What it is:** a clean, empty CSV of a field list someone already confirmed - the
@@ -132,4 +131,4 @@ column silently, reorder columns without reason, invent a column, or drop a fiel
 #### Empty by default
 
 ```csv
-Field 1,Field 2,Fie
+Field 1,Field 2,Fiel

@@ -7,6 +7,9 @@ tags: [api, ai, workflow, security, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-resource-manager-sql-dotnet
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
 
 # Azure.ResourceManager.Sql (.NET)
 
@@ -197,10 +200,3 @@ await firewallCollection.CreateOrUpdateAsync(
 // List all servers in subscription
 await foreach (var srv in subscription.GetSqlServersAsync())
 {
-    Console.WriteLine($"Server: {srv.Data.Name} in {srv.Data.Location}");
-}
-
-// List databases in a server
-await foreach (var db in server.GetSqlDatabases())
-{
-    Console.WriteLine($"Database:

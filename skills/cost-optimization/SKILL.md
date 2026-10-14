@@ -7,6 +7,17 @@ tags: [xlsx, ai, template, spreadsheet, aws, gcp, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cost-optimization
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
+
+## Supporting material availability
+
+These paths remain unavailable in this catalog copy:
+
+- `<support-root>/assets/cost-analysis-template.xlsx`
+
+Do not invoke a step that requires one of these files. Obtain the original material and review its dependencies, license, and effects before use. Independent inline steps and the bundled helpers can proceed within the user’s authorized scope.
 
 # Cloud Cost Optimization
 
@@ -22,7 +33,6 @@ Strategies and patterns for optimizing cloud costs across AWS, Azure, and GCP.
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 ## Purpose
 
@@ -221,23 +231,4 @@ resource "aws_budgets_budget" "monthly" {
 ```
 Development: t3.small RDS
 Staging: t3.large RDS
-Production: r6g.2xlarge RDS with read replicas
-```
-
-### Pattern 3: Multi-Tier Storage
-```
-Hot data: S3 Standard
-Warm data: S3 Standard-IA (30 days)
-Cold data: S3 Glacier (90 days)
-Archive: S3 Deep Archive (365 days)
-```
-
-### Pattern 4: Auto-Scaling
-```hcl
-resource "aws_autoscaling_policy" "scale_up" {
-  name                   = "scale-up"
-  scaling_adjustment     = 2
-  adjustment_type        = "ChangeInCapacity"
-  cooldown              = 300
-  autoscaling_group_name = aws_autoscaling_group.main.name
-}
+Product

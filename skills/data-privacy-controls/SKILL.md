@@ -36,7 +36,7 @@ empty templates only - it never holds or processes real employee or customer dat
 
 ## How It Works
 
-Follow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.
+Use the self-contained workflow below; no parent module or integration is required for empty local templates. Record lawful basis and retention as unknown until a qualified owner supplies them; a checkbox or example row does not establish compliance.
 
 ### Step 1 - Identify intent
 
@@ -100,15 +100,7 @@ Once the user asks for it, derive the fields from the confirmed context and emit
 requested artifacts. For machine-readable text, keep prose outside the data; for files,
 provide a usable link. Report material validation failures or limitations separately.
 
-**A selected Notion output is rendered by `notion-manual-import`, so route the
-Notion step there.** When the user selects Notion, hand that step to
-@notion-manual-import: it holds the CSV, the property
-mapping, the import steps and the verification checklist, and it renders the Field
-Reference below instead of defining a table of its own. Do not restate the mapping
-here and do not improvise the import steps. Manual CSV and mapping outputs need no
-connection. For requested workspace changes, follow the shared contract: verify actual
-tool access and the target before writing. A user saying "connected" is not tool evidence.
-Never ask for a Notion password or token.
+For a Notion output, provide the CSV and property mapping below for manual import. If `notion-manual-import` is separately available, it may assist with import instructions; it is optional. For requested workspace writes, verify actual tool access and the precise target, apply the authorized change, and read it back before claiming completion. Never ask for a password or token.
 
 For an Excel-compatible CSV, use UTF-8 with a byte order mark so Excel opens the
 text correctly. A CSV is not an `.xlsx` workbook; create `.xlsx` only when the user
@@ -117,4 +109,5 @@ A CSV carries no types, so after it, name the columns
 that need a number, date or currency format applied.
 
 ```csv
-Control,Data Category,Module,Legal Basis,Retention Period,Access Roles,Encryption,Consent Re
+Control,Data Category,Module,Legal Basis,Retention Period,Access Roles,Encryption,Consent Required,Owner,Last Reviewed,Status,Control ID
+Employee data retention,Personal,Invoices & Billing,Contractual necessity,24 months after last activity,"People team, Finance",At rest and i

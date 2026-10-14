@@ -7,6 +7,14 @@ tags: [python, api, claude, ai, workflow, template, document, image, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-studio-image
 ---
 
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+- `<support-root>/references/api-reference.md`
+
+Ask for the original supporting material or an existing installation before using a step that depends on these paths; this catalog does not identify a verified download source for them. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
+
 
 # AI Studio Image — Especialista em Imagens Humanizadas
 
@@ -127,29 +135,4 @@ O motor de humanizacao adiciona camadas de realismo:
 - Sem iluminacao de estudio
 - Reflexos naturais em superficies
 
-**Camada 3 — Imperfeicoes Humanas:**
-- Enquadramento ligeiramente imperfeito (nao centralizado matematicamente)
-- Foco seletivo natural (algo levemente fora de foco no background)
-- Micro-tremor de maos (nitidez nao e absoluta)
-- Elementos aleatorios do ambiente real
-
-**Camada 4 — Autenticidade:**
-- Expressoes faciais genuinas (nao poses de estudio)
-- Roupas e cenarios do dia-a-dia
-- Textura de pele real (poros, marcas sutis — sem pele de porcelana)
-- Proporcoes corporais realistas
-
-**Camada 5 — Contexto Ambiental:**
-- Cenarios reais (nao fundos genericos de stock)
-- Objetos do cotidiano no ambiente
-- Iluminacao consistente com o cenario
-- Hora do dia coerente com a atividade
-
-## Passo 4: Gerar A Imagem
-
-```bash
-python C:\Users\renat\skills\ai-studio-image\scripts\generate.py \
-  --prompt "prompt humanizado gerado no passo anterior" \
-  --mode influencer \
-  --format square \
-  --model gemin
+**Camada 3 —

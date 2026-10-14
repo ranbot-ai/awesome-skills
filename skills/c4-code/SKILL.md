@@ -25,7 +25,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/c4-c
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 ## Overview
 
@@ -195,4 +194,4 @@ flowchart TB
 | -------------------------------- | -------------------------------- | ------------------------------------------------------- |
 | OOP (classes, interfaces)        | `classDiagram`                   | Show inheritance, composition, interface implementation |
 | FP (pure functions, pipelines)   | `flowchart`                      | Show data transformations and function composition      |
-| FP (modules with ex
+| FP (modules with exports)        | `classDiagram` with `<<module>>` | Show module structure and depen

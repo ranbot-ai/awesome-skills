@@ -7,6 +7,9 @@ tags: [python, api, ai, workflow, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-speech-to-text-rest-py
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
 
 # Azure Speech to Text REST API for Short Audio
 
@@ -200,11 +203,4 @@ def get_access_token() -> str:
         token_url,
         headers={
             "Ocp-Apim-Subscription-Key": api_key,
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Content-Length": "0"
-        }
-    )
-    response.raise_for_status()
-    return response.text
-
-# Use token in requests (val
+        

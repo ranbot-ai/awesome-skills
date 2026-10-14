@@ -7,6 +7,17 @@ tags: [api, ai, workflow, document, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-mgmt-apimanagement-dotnet
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
+
+## Supporting material availability
+
+These paths remain unavailable in this catalog copy:
+
+- `<support-root>/references/policies.md`
+
+Do not invoke a step that requires one of these files. Obtain the original material and review its dependencies, license, and effects before use. Independent inline steps and the bundled helpers can proceed within the user’s authorized scope.
 
 # Azure.ResourceManager.ApiManagement (.NET)
 
@@ -165,26 +176,4 @@ var subscriptionData = new ApiManagementSubscriptionCreateOrUpdateContent
 {
     DisplayName = "My Subscription",
     Scope = $"/products/{product.Data.Name}",
-    State = ApiManagementSubscriptionState.Active
-};
-
-var subscriptionCollection = service.GetApiManagementSubscriptions();
-var subOperation = await subscriptionCollection.CreateOrUpdateAsync(
-    WaitUntil.Completed,
-    "my-subscription",
-    subscriptionData);
-
-ApiManagementSubscriptionResource subscription = subOperation.Value;
-
-// Get subscription keys
-var keys = await subscription.GetSecretsAsync();
-Console.WriteLine($"Primary Key: {keys.Value.PrimaryKey}");
-```
-
-### 5. Set API Policy
-
-```csharp
-var policyXml = @"
-<policies>
-    <inbound>
-        <rate-limit calls=""100"" renewal-period=
+    State = ApiManagementSubs

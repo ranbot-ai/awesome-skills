@@ -7,6 +7,20 @@ tags: [javascript, typescript, react, api, ai, template, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/angular-migration
 ---
 
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+- `<support-root>/references/hybrid-mode.md`
+- `<support-root>/references/component-migration.md`
+- `<support-root>/references/dependency-injection.md`
+- `<support-root>/references/routing.md`
+- `<support-root>/assets/hybrid-bootstrap.ts`
+- `<support-root>/assets/migration-timeline.md`
+- `<support-root>/scripts/analyze-angular-app.sh`
+
+Ask for the original supporting material or an existing installation before using a step that depends on these paths; this catalog does not identify a verified download source for them. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
+
 
 # Angular Migration
 
@@ -161,60 +175,4 @@ angular.module('myApp').directive('userCard', function() {
     restrict: 'E',
     scope: {
       user: '=',
-      onDelete: '&'
-    },
-    template: `
-      <div class="card">
-        <h3>{{ user.name }}</h3>
-        <button ng-click="onDelete()">Delete</button>
-      </div>
-    `
-  };
-});
-```
-
-```typescript
-// After: Angular component
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-
-@Component({
-  selector: 'app-user-card',
-  template: `
-    <div class="card">
-      <h3>{{ user.name }}</h3>
-      <button (click)="delete.emit()">Delete</button>
-    </div>
-  `
-})
-export class UserCardComponent {
-  @Input() user: any;
-  @Output() delete = new EventEmitter<void>();
-}
-
-// Usage: <app-user-card [user]="user" (delete)="handleDelete()"></app-user-card>
-```
-
-## Service Migration
-
-```javascript
-// Before: AngularJS service
-angular.module('myApp').factory('UserService', function($http) {
-  return {
-    getUser: function(id) {
-      return $http.get('/api/users/' + id);
-    },
-    saveUser: function(user) {
-      return $http.post('/api/users', user);
-    }
-  };
-});
-```
-
-```typescript
-// After: Angular service
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
-@Injectable({
-  providedI
+      o

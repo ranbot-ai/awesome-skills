@@ -7,6 +7,16 @@ tags: [python, node, api, claude, ai, agent, llm, automation, workflow, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cline-pilot
 ---
 
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+- `<support-root>/references/local-config.md`
+- `<support-root>/references/project-profiles.md`
+- `<support-root>/references/decision-log.md`
+
+Obtain the required material from the [declared upstream source](https://github.com/gongdear/cline-pilot), or from a user-provided installation of that source. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
+
 
 # Cline Pilot — 代用户调度 Cline 的"领航员"
 
@@ -80,19 +90,3 @@ prompt 里**写死验收标准 + commit 规范 + 禁止项**（非交互无会�
 ## clinerules 反馈回路（用户 2026-09-30 定）
 当发现 cline **超出指令行为**（越权动作、擅自删改、自造指令、范围溢出）或**整体开发偏离用户意图**（方向跑偏、同类坑重复踩、质量持续塌降）时，处置 = **调度 cline 更新工程的 clinerules**，把"禁止的行为 + 优先做法"写成成对硬规则落进规则文件，防再次发生。
 **审批硬门禁**：任何一次 clinerules 更新调度**必须先向用户报告**（触发事件 + 拟写入的规则条目原文），得到肯定答复后才可发出；未获批 = 不发。
-**两个合法时机**：
-1. **小任务阶段完成时**（验收通过后的自然断点，下一个任务启动前）——不打断正在运行的进程，不为更规则而 kill/插入
-2. **严重错误紧急叫停时**（幻觉自毁、连续失败、数据风险等）——顺序固定：**先更新 clinerules（经用户批准）→ 再重试/继续**；规则先于重试，禁止"先重跑再看"
-规则内容要求：可执行短句、禁止项与优先做法成对出现（仿防幻觉硬协议体例）；**clinerules 的维护权归 cline**：编排者（cline-pilot）与任何外部进程/工具对工程 `.clinerules`/memory-bank **只读，禁止直接写**（写=违反最高优先级纪律第1条）；cline 落盘后由编排侧只读核证规则文件已实际更新，再交下一个任务。
-
-## 异常通报纪律（用户 2026-09-27 定）
-1. 正常运行中**不打扰**用户；异常经处理/重试后恢复正常的也**不打扰**。
-2. 仅当**连续 3 次尝试修复/重试后仍失败**、需要人工决策/干预时，才主动发消息。
-3. 每次异常的根因、处置动作、重试次数、最终结果，必须记入后台进程台账的「异常处置台账」段，**全部汇总进最终总报告**交付。
-
-## 编码任务生命周期（核心调度规则，不可擅改）
-1. **同一时间只允许一个 cline 编码进程**。拉起新编码轮次前，必须先查台账（`~/.hermes/skills/cline-pilot/scratch/bg-procs.md`）+ `ps`：确认**上一个编码进程已退出**（连同其 hub daemon、nohup 子进程），否则先处置干净再起，禁止进程叠加
-2. **多任务只允许串行**：一个结束 → 验收 → 记录 → 再启下一个。禁止用多子代理/多 worktree/并行 mvn 把多个任务压给同一批进程；禁止为了赶进度开第二个编码会话
-3. **一次编码 = 一个聚焦小任务**（单一功能/单模块/单修复点）。禁止把“整工程里程碑”压给一个会话——长任务必炸上下文（实测：340轮/2.2亿input token 后流断，且断点前大量轮次耗在调研上）
-4. **任务生命周期闭环（每个小任务严格走完）**：
-   a. 启动前

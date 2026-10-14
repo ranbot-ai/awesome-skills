@@ -1,6 +1,6 @@
 ---
 name: anti-reversing-techniques
-description: AUTHORIZED USE ONLY: This skill contains dual-use security techniques. Before proceeding with any bypass or analysis: > 1. 
+description: Analyze anti-debugging, obfuscation, and anti-tamper techniques during authorized binary analysis and reverse engineering. 
 category: Security & Systems
 source: antigravity
 tags: [ai, document, security, pentest, aws]

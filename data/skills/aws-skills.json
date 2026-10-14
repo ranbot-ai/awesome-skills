@@ -2,16 +2,21 @@
   "id": "antigravity-aws-skills",
   "name": "aws-skills",
   "slug": "aws-skills",
-  "description": "AWS development with infrastructure automation and cloud architecture patterns",
-  "category": "AI & Agents",
+  "description": "Plan and review AWS architecture and infrastructure changes using the upstream AWS skill collection.",
+  "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-skills",
-  "content": "\n# Aws Skills\n\n## Overview\n\nAWS development with infrastructure automation and cloud architecture patterns\n\n## When to Use This Skill\n\nUse this skill when you need to work with aws development with infrastructure automation and cloud architecture patterns.\n\n## Instructions\n\nThis skill provides guidance and patterns for aws development with infrastructure automation and cloud architecture patterns.\n\nFor more information, see the [source repository](https://github.com/zxkane/aws-skills).\n\n## Example\n\n**User request:**\n\n> Use @aws-skills for this task: AWS development with infrastructure automation and cloud architecture patterns.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
+  "content": "\n# AWS Skill Collection Workflow\n\n## When to Use\n- You need to choose an AWS architecture or infrastructure workflow for an existing application.\n- You want to review an infrastructure plan before any cloud change.\n\n## Workflow\n1. Establish the application requirements, existing AWS services, target account/region, constraints, and required outcome. Read the project's infrastructure definitions before proposing changes.\n2. Open the [upstream AWS skill collection](https://github.com/zxkane/aws-skills) and select the workflow matching the actual services and infrastructure framework. This catalog entry is a routing workflow; it does not bundle every upstream skill.\n3. Read that workflow's prerequisites and referenced documentation. For an existing deployment, request authorized read-only inventory or use user-provided configuration; do not infer account identity from names.\n4. Produce an architecture or infrastructure plan with resource boundaries, IAM access, networking, cost assumptions, and a validation/rollback plan. Distinguish observed configuration from proposed changes.\n5. Review the plan with the user before any operation that creates, modifies, or deletes cloud resources. Follow the selected tool's current documentation and the project's normal review/deployment process.\n6. Verify the result against the requested requirements and report which checks ran, which were simulated, and which require deployment access.\n\n## Example\n> Review this application's AWS infrastructure and propose a least-privilege change plan. Read configuration first; do not deploy.\n\n## Limitations\n- The upstream collection is an external prerequisite; report inaccessible guidance instead of inventing its instructions.\n- Planning does not prove a deployment works. Never claim account, pricing, permissions, or availability without current evidence.\n- Cloud changes require the user's authorized scope and the project's deployment controls.\n",
   "tags": [
-    "automation",
+    "ai",
+    "workflow",
+    "document",
     "aws"
   ],
-  "useCases": [],
+  "useCases": [
+    "You need to choose an AWS architecture or infrastructure workflow for an existing application.",
+    "You want to review an infrastructure plan before any cloud change."
+  ],
   "scrapedAt": "2026-01-31T06:50:46.780Z"
 }

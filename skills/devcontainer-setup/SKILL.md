@@ -7,6 +7,9 @@ tags: [python, typescript, node, claude, ai, workflow, template, docker]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/devcontainer-setup
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
 
 # Devcontainer Setup Skill
 
@@ -186,15 +189,4 @@ Detect package manager from lockfile and chain with base command:
 "ghcr.io/devcontainers/features/rust:1": {}
 ```
 
-**devcontainer.json extensions:**
-
-Add to `customizations.vscode.extensions`:
-```json
-"rust-lang.rust-analyzer",
-"tamasfe.even-better-toml"
-```
-
-Add to `customizations.vscode.settings`:
-```json
-"[rust]": {
- 
+**devcontainer

@@ -7,6 +7,9 @@ tags: [python, typescript, node, api, mcp, claude, ai, template, security, aws]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-sst-development
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
 
 # SST v4 for AWS
 ## When to Use
@@ -89,7 +92,4 @@ consistency, but recognize a project may differ).
   Use `$interpolate` (or `pulumi.interpolate`). A bare top-level
   `` `${bucket.arn}/*` `` stringifies the `Output` to a `[Output<T>]` placeholder
   and produces a broken ARN that only fails at deploy time (it type-checks and
-  `sst dev` runs fine). The fix is `$interpolate`​`` `${bucket.arn}/*` ``. This
-  has caused prod deploy outages. See `references/authoring.md` § Outputs.
-- **Migrating a resource between Pulumi *types* should default to two PRs** —
-  Pulumi creates-before-de
+  `sst dev` runs fine). The fix is `$interpolate`​`` `${bucket.arn

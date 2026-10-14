@@ -1,11 +1,19 @@
 ---
 name: ai-analyzer
 description: AI驱动的综合健康分析系统，整合多维度健康数据、识别异常模式、预测健康风险、提供个性化建议。支持智能问答和AI健康报告生成。 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [javascript, api, ai, tailwind, cro]
+tags: [javascript, api, ai, document, tailwind, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-analyzer
 ---
+
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+- `<support-root>/scripts/generate_ai_report.py`
+
+Ask for the original supporting material or an existing installation before using a step that depends on these paths; this catalog does not identify a verified download source for them. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
 
 
 # AI健康分析器
@@ -215,18 +223,4 @@ const allergies = exists('data/allergies.json') ? readFile('data/allergies.json'
 ## 技术实现
 
 ### 工具限制
-此Skill仅使用以下工具：
-- **Read**: 读取JSON数据文件
-- **Grep**: 搜索特定模式
-- **Glob**: 按模式查找数据文件
-- **Write**: 生成HTML报告和更新历史记录
-
-### 性能优化
-- 增量读取：仅读取指定时间范围的数据文件
-- 数据缓存：避免重复读取同一文件
-- 延迟计算：按需生成图表数据
-
-## Limitations
-- Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
+此

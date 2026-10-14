@@ -7,6 +7,9 @@ tags: [python, api, mcp, ai, agent, gpt, workflow, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-framework-azure-ai-py
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
 
 # Agent Framework Azure Hosted Agents
 
@@ -183,8 +186,4 @@ async def main():
         thread = agent.get_new_thread()
         
         # First turn
-        result1 = await agent.run("What's the weather in Seattle?", thread=thread)
-        print(f"Agent: {result1.text}")
-        
-        # Second turn - context is maintained
-        result2 = await agent.run("What about Portland?", thread=thr
+        result1 = await agent.run("What's the weather

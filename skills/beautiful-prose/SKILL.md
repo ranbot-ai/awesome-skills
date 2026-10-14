@@ -7,7 +7,6 @@ tags: [claude, ai, template, image, rag, cro, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/beautiful-prose
 ---
 
-
 # Beautiful Prose (Claude Skill)
 
 A hard-edged writing skill for producing timeless, forceful English prose without modern AI tics.
@@ -196,7 +195,4 @@ Fail the output if any are true:
 
 ## Tests
 
-See `references/test-cases.md`.
-
-## Limitations
-- Use this skill only when the task clearly matches the scope describe
+Use the inline good/bad examples and manual lint checklist above. This catalog copy has no automated style test suite.

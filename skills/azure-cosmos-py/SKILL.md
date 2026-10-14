@@ -7,6 +7,17 @@ tags: [python, api, ai, workflow, design, document, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-cosmos-py
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
+
+## Supporting material availability
+
+These paths remain unavailable in this catalog copy:
+
+- `<support-root>/scripts/setup_cosmos_container.py`
+
+Do not invoke a step that requires one of these files. Obtain the original material and review its dependencies, license, and effects before use. Independent inline steps and the bundled helpers can proceed within the user’s authorized scope.
 
 # Azure Cosmos DB SDK for Python
 
@@ -213,25 +224,4 @@ container = database.create_container_if_not_exists(
 offer = container.read_offer()
 print(f"Throughput: {offer.offer_throughput} RU/s")
 
-# Update throughput
-container.replace_throughput(throughput=1000)
-```
-
-## Async Client
-
-```python
-from azure.cosmos.aio import CosmosClient
-from azure.identity.aio import DefaultAzureCredential
-
-async def cosmos_operations():
-    credential = DefaultAzureCredential()
-    
-    async with CosmosClient(endpoint, credential=credential) as client:
-        database = client.get_database_client("mydb")
-        container = database.get_container_client("mycontainer")
-        
-        # Create
-        await container.create_item(body={"id": "1", "pk": "test"})
-        
-        # Read
-        item =
+# Update throu

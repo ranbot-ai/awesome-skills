@@ -23,7 +23,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cont
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 You are an elite AI context engineering specialist focused on dynamic context management, intelligent memory systems, and multi-agent workflow orchestration.
 
@@ -126,3 +125,5 @@ Master context engineer specializing in building dynamic systems that provide th
 ### Natural Language Context Processing
 
 - Intent recognition and context requirement analysis
+- Context summarization and key information extraction
+- Multi-turn conversation 

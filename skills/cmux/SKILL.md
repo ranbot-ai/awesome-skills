@@ -7,6 +7,14 @@ tags: [python, pdf, markdown, api, claude, ai, agent, automation, workflow, docu
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cmux
 ---
 
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+- `<support-root>/references/socket-api.md`
+
+Obtain the required material from the [declared upstream source](https://github.com/davidondrej/skills), or from a user-provided installation of that source. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
+
 
 # cmux Control
 
@@ -75,25 +83,4 @@ Claude Code cmux note: after Claude finishes, it may prefill a predicted next us
 cmux send "echo hi\n"                                       # focused terminal
 cmux send-key "ctrl+c"                                       # enter|tab|esc|backspace|arrows|ctrl+x|shift+tab
 cmux send --surface surface:7 "npm run build"               # specific surface (NOT send-surface)
-cmux send-key --surface surface:7 enter                     # specific surface (NOT send-key-surface)
-```
-
-## Notifications & Sidebar Metadata
-
-```bash
-cmux notify --title "Done" --body "tests passed"
-cmux set-status build "compiling" --icon hammer --color "#ff9500"
-cmux set-progress 0.5 --label "Building..."
-cmux log --level success "All 42 tests passed"               # info|progress|success|warning|error
-cmux trigger-flash --workspace "$CMUX_WORKSPACE_ID"          # blue-ring attention cue
-cmux sidebar-state --json                                    # dump all sidebar metadata
-```
-
-## Browser Automation (WKWebView)
-
-Workflow: open → wait → snapshot → act → re-snapshot.
-
-```bash
-S=$(cmux --json browser open https://example.com | jq -r .result.surface_ref)
-cmux browser "$S" wait --load-state complete --timeout-ms 15000
-cmux browser "$S" snapshot --interactive  
+cmux send-ke

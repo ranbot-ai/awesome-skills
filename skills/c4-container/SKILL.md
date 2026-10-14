@@ -25,7 +25,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/c4-c
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 ## Containers
 
@@ -165,4 +164,5 @@ When synthesizing containers, provide:
 - Complete API documentation with OpenAPI/Swagger specifications
 - Links to all contained components
 - Mermaid container diagrams showing deployment architecture
-- Links to deployment 
+- Links to deployment configurations (Dockerfiles, K8s manifests, etc.)
+- Infrastructure requirements an

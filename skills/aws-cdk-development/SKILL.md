@@ -7,6 +7,13 @@ tags: [python, javascript, typescript, node, api, mcp, claude, ai, agent, workfl
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-cdk-development
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
+
+## Restored helper safety
+
+`scripts/validate-stack.sh` runs `cdk synth` from the caller-selected project root, which executes that project's CDK application and dependencies, can write `cdk.out`, and may contact AWS context providers if the project requires lookups. Review the project and AWS context before invoking it. The helper does not deploy; deployment needs separate user authorization.
 
 # AWS CDK Development
 
@@ -125,21 +132,4 @@ Aspects.of(app).add(new AwsSolutionsChecks());
 
 **Optional - VS Code users**: Install [CDK NAG Validator extension](https://marketplace.visualstudio.com/items?itemName=alphacrack.cdk-nag-validator) for faster feedback on file save.
 
-**For Python/Java/C#/Go projects**: cdk-nag is available in all CDK languages and provides the same synthesis-time validation.
-
-#### Layer 2: Synthesis-Time Validation (Required)
-
-1. **Synthesis with cdk-nag**: Validate stack with comprehensive rules
-   ```bash
-   cdk synth  # cdk-nag runs automatically via Aspects
-   ```
-
-2. **Suppress legitimate exceptions** with documented reasons:
-   ```typescript
-   import { NagSuppressions } from 'cdk-nag';
-
-   // Document WHY the exception is needed
-   NagSuppressions.addResourceSuppressions(resource, [
-     {
-       id: 'AwsSolutions-L1',
-       rea
+**For P

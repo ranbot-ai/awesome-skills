@@ -22,7 +22,6 @@ Production patterns for Bazel in large-scale monorepos.
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 ## Use this skill when
 
@@ -212,4 +211,5 @@ jest_test(
 ### Template 4: Python Library BUILD
 
 ```python
-# libs/ml
+# libs/ml/BUILD.bazel
+load("@rules_python//python:defs.bzl", "py_library", "py_test", "py_b

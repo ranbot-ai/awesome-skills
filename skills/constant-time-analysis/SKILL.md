@@ -7,6 +7,9 @@ tags: [python, javascript, typescript, node, api, ai, document, vulnerability, c
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/constant-time-analysis
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
 
 # Constant-Time Analysis
 
@@ -130,7 +133,4 @@ Note: Swift compiles to native code like C/C++/Go/Rust, so it uses assembly-leve
 | C, C++, Go, Rust       | Compiler in PATH (`gcc`/`clang`, `go`, `rustc`)           |
 | Swift                  | Xcode or Swift toolchain (`swiftc` in PATH)               |
 | Java                   | JDK with `javac` and `javap` in PATH                      |
-| Kotlin                 | Kotlin compiler (`kotlinc`) + JDK (`javap`) in PATH       |
-| C#                     | .NET SDK + `ilspycmd` (`dotnet tool install -g ilspycmd`) |
-| PHP                    | PHP with VLD extension or OPcache                         |
-| JavaScript/
+| Kotlin                 | Kotlin compiler (`kotlinc`) + JDK (`javap`) in PATH   

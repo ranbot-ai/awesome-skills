@@ -29,7 +29,6 @@ Generate comprehensive C4 architecture documentation for an existing repository/
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 ## Overview
 
@@ -107,4 +106,8 @@ For each directory, starting from the deepest:
 - Identify logical component boundaries based on:
   - Domain boundaries (related business functionality)
   - Technical boundaries (shared frameworks, libraries)
-  - Organizational boundarie
+  - Organizational boundaries (team ownership, if evident)
+
+### 2.2 Create Component Documentation
+
+For each i

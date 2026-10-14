@@ -7,6 +7,9 @@ tags: [python, api, ai, workflow, template]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fastapi-router-py
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
 
 # FastAPI Router
 

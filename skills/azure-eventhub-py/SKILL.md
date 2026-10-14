@@ -7,6 +7,13 @@ tags: [python, ai, workflow, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-eventhub-py
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
+
+## Restored helper safety
+
+`scripts/setup_consumer.py` authenticates to the configured Event Hub. `send` publishes event data; `receive` prints event bodies and properties and can write or advance a Blob checkpoint. Confirm the exact namespace, hub, payload/count, starting position, data handling, and checkpoint destination before live use.
 
 # Azure Event Hubs SDK for Python
 
@@ -175,22 +182,4 @@ async def send_events():
     ) as producer:
         batch = await producer.create_batch()
         batch.add(EventData("Async event"))
-        await producer.send_batch(batch)
-
-async def receive_events():
-    async def on_event(partition_context, event):
-        print(event.body_as_str())
-        await partition_context.update_checkpoint(event)
-    
-    async with EventHubConsumerClient(
-        fully_qualified_namespace="<namespace>.servicebus.windows.net",
-        eventhub_name="my-eventhub",
-        consumer_group="$Default",
-        credential=DefaultAzureCredential()
-    ) as consumer:
-        await consumer.receive(on_event=on_event)
-
-asyncio.run(send_events())
-```
-
-## Ev
+        await 

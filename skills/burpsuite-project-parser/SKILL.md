@@ -3,9 +3,16 @@ name: burpsuite-project-parser
 description: Searches and explores Burp Suite project files (.burp) from the command line. Use when searching response headers or bodies with regex patterns, extracting security audit findings, dumping proxy histo
 category: Security & Systems
 source: antigravity
-tags: [api, ai, workflow, security, vulnerability, cro]
+tags: [api, ai, workflow, document, security, vulnerability, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/burpsuite-project-parser
 ---
+
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+
+Ask for the original supporting material or an existing installation before using a step that depends on these paths; this catalog does not identify a verified download source for them. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
 
 
 # Burp Project Parser
@@ -123,31 +130,4 @@ auditItems
 ```
 Returns all security findings. Output includes: name, severity, confidence, host, port, protocol, url.
 
-**Note:** Audit items are small (no bodies) - safe to retrieve with `head -n 100`.
-
-### Dump Proxy History (AVOID)
-```bash
-proxyHistory
-```
-**NEVER use this directly.** Use sub-component filters instead:
-- `proxyHistory.request.headers`
-- `proxyHistory.response.headers`
-
-### Dump Site Map (AVOID)
-```bash
-siteMap
-```
-**NEVER use this directly.** Use sub-component filters instead.
-
-## Output Limits (REQUIRED)
-
-**CRITICAL: Always check result size BEFORE retrieving data.** A broad search can return thousands of records, each potentially megabytes. This will overflow the context window.
-
-### Step 1: Always Check Size First
-
-Before any search, check BOTH record count AND byte size:
-
-```bash
-# Check record count AND total bytes - never skip this step
-{baseDir}/scripts/burp-search.sh project.burp proxyHistory | wc -cl
-{baseDir}/scripts/burp-search.sh project.burp "res
+**Note:** Audit items are sm

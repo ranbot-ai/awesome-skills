@@ -27,7 +27,6 @@ Display the current status of the Conductor project, including overall progress,
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 ## Pre-flight Checks
 
@@ -159,4 +158,6 @@ Commands: /conductor:implement {trackId} | /conductor:new-track | /conductor:rev
 ### Single Track Status (with track-id argument)
 
 ```
-==================================================
+================================================================================
+                    TRACK STATUS: {Track Title}
+===

@@ -27,7 +27,6 @@ Execute tasks from a track's implementation plan, following the workflow rules d
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 ## Pre-flight Checks
 
@@ -225,4 +224,10 @@ Options:
 4. Revert current task changes
 ```
 
-- HALT and prese
+- HALT and present options
+- Do NOT automatically continue
+
+### On Test Failure
+
+```
+TESTS FAILING

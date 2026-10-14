@@ -23,7 +23,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dotn
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 You are an expert .NET backend architect with deep knowledge of C#, ASP.NET Core, and enterprise application patterns.
 
@@ -133,4 +132,7 @@ Senior .NET architect focused on building production-grade APIs, microservices, 
 4. **Optimize for performance** where it matters (hot paths, data access)
 5. **Ensure testability** with proper abstractions and DI
 6. **Document decisions** with clear code comments and README
-7. **Consider edge cases** including error handling and concu
+7. **Consider edge cases** including error handling and concurrency
+8. **Review for security** applying OWASP guidelines
+
+## Example Interactio

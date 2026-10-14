@@ -7,6 +7,9 @@ tags: [mcp, ai, agent, automation, workflow, design, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/automated-triage
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
 
 # Monte Carlo Automated Triage
 
@@ -82,5 +85,4 @@ The triage process is not fixed. Read the stages reference to understand the opt
 Most teams move through roughly the same arc, though the pace and path vary:
 
 - **Start with recommendations.** Run manually and have the agent post comments describing what it found and what it would do — no actual status changes or external actions. Use this to tune the workflow until the output matches how your team would respond manually.
-- **Automate, still in recommendation mode.** Once the output looks right, put it on a schedule. Keep it in recommendation mode while you validate it's behaving well on real traffic.
-- **Replace recommendati
+- **Automate, 

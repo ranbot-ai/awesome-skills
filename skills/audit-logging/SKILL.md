@@ -1,9 +1,9 @@
 ---
 name: audit-logging
 description: Implement centralized audit logging and SIEM integration. Configure log retention and security monitoring. Use when implementing audit trail requirements. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [python, node, markdown, api, ai, agent, llm, template, security, kubernetes]
+tags: [python, node, markdown, api, ai, agent, llm, template, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/audit-logging
 ---
 
@@ -17,7 +17,7 @@ Implement comprehensive audit logging for compliance, security monitoring, and f
 - Setting up centralized logging for compliance frameworks (SOC 2, HIPAA, PCI DSS)
 - Implementing security event monitoring and alerting
 - Building audit trails for regulatory requirements
-- Configuring log retention and tamper-proof storage
+- Configuring log retention and integrity-protected storage
 - Integrating application logs with SIEM platforms
 
 ## Log Categories
@@ -152,10 +152,10 @@ from datetime import datetime, timezone
 from functools import wraps
 
 class AuditLogger:
-    def __init__(self, service_name, logger_name="audit"):
+    def __init__(self, service_name, log_path, logger_name="audit"):
         self.service = service_name
         self.logger = logging.getLogger(logger_name)
-        handler = logging.FileHandler("/var/log/app/audit.log")
+        handler = logging.FileHandler(log_path)
         handler.setFormatter(logging.Formatter("%(message)s"))
         self.logger.addHandler(handler)
         self.logger.setLevel(logging.INFO)
@@ -183,4 +183,4 @@ class AuditLogger:
         self._prev_hash = log_entry["hash"]
         self.logger.info(json.dumps(log_entry))
 
-    def log_auth(self, user,
+    def log_auth(self, user

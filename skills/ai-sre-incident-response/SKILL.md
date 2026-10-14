@@ -3,7 +3,7 @@ name: ai-sre-incident-response
 description: Build AI-focused SRE incident response practices for LLM outages, degraded quality, runaway cost events, and safety regressions. 
 category: AI & Agents
 source: antigravity
-tags: [python, markdown, api, ai, agent, llm, gpt, template, security, rag]
+tags: [markdown, api, ai, agent, llm, template, security, kubernetes, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-sre-incident-response
 ---
 
@@ -54,6 +54,8 @@ Apply SRE rigor to AI systems where incidents include quality regressions, unsaf
 
 ## Prometheus Alert Rules
 
+The thresholds below are illustrative. Calibrate them to the declared SLO, metric units, tenant budgets and workload; a groundedness proxy is not a verified quality measurement. Counter rates are per second, so the cost-per-minute alert explicitly multiplies by 60.
+
 ```yaml
 # prometheus-ai-alerts.yaml
 groups:
@@ -81,7 +83,7 @@ groups:
 
       - alert: TokenCostExplosion
         expr: |
-          sum(rate(llm_token_cost_dollars[5m])) by (tenant)
+          60 * sum(rate(llm_token_cost_dollars[5m])) by (tenant)
           > 0.50
         for: 3m
         labels:
@@ -147,9 +149,4 @@ RESPONDER: On-call AI platform engineer
 4. If provider is down:
      a. Enable fallback model route in gateway config.
      b. kubectl set env deployment/llm-gateway FALLBACK_ENABLED=true
-     c. Verify fallback traffic is flowing via Grafana dashboard.
-5. If self-hosted model is down:
-     a. Check pod status: kubectl get pods -l app=llm-inference -n ai
-     b. Check GPU health: kubectl logs -l app=llm-inference --tail=50
-     c. Restart if OOM: kubectl rollout restart deployment/llm-inference -n ai
-6
+     c. Verify fallback traffic is flowing via 

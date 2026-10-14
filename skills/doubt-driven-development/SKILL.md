@@ -7,6 +7,14 @@ tags: [markdown, api, claude, ai, agent, design, document, security, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/doubt-driven-development
 ---
 
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+- `<support-root>/references/orchestration-patterns.md`
+
+Obtain the required material from the [declared upstream source](https://github.com/addyosmani/agent-skills), or from a user-provided installation of that source. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
+
 
 # Doubt-Driven Development
 
@@ -85,27 +93,4 @@ A fresh-context reviewer needs the **artifact** and the **contract**, not the jo
 - Decision: the proposal in 3–5 sentences plus the constraints it has to satisfy
 - Assertion: the claim plus the evidence that supposedly supports it (kept distinct from the Step 1 CLAIM block, which is the orchestrator's hypothesis under scrutiny)
 
-Strip your reasoning. If you hand over conclusions, you'll get back validation of your conclusions. The unit must be small enough that a reviewer can hold it in mind in one read — if it's a 500-line PR, decompose first.
-
-### Step 3: DOUBT — Invoke the fresh-context reviewer
-
-The reviewer's prompt **must be adversarial**. Framing decides the answer.
-
-```
-Adversarial review. Find what is wrong with this artifact.
-Assume the author is overconfident. Look for:
-- Unstated assumptions
-- Edge cases not handled
-- Hidden coupling or shared state
-- Ways the contract could be violated
-- Existing conventions this might break
-- Failure modes under unexpected input
-
-Do NOT validate. Do NOT summarize. Find issues, or state
-explicitly that you cannot find any after thorough examination.
-
-ARTIFACT: <paste artifact>
-CONTRACT: <paste contract>
-```
-
-**Pass ARTIFACT + CONTRACT only. Do NOT pass the CLAIM.** Handing the reviewer your conclusion biases it toward agreement. The reviewer must independe
+Strip your reasoning. If you hand over conclusions, you'll get back validation of your conclusions. The unit must 

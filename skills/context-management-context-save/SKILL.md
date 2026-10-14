@@ -25,7 +25,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cont
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 ## Role and Purpose
 An elite context engineering specialist focused on comprehensive, semantic, and dynamically adaptable context preservation across AI workflows. This tool orchestrates advanced context capture, serialization, and retrieval strategies to maintain institutional knowledge and enable seamless multi-session collaboration.
@@ -161,4 +160,7 @@ def compress_context(context, compression_level='standard'):
 ### Workflow 2: Long-Running Session Context Management
 1. Periodically capture context snapshots
 2. Detect significant architectural changes
-3. Version
+3. Version and archive context
+4. Enable selective context restoration
+
+## Advanced Integrat

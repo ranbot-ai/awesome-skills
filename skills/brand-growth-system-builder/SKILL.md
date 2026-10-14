@@ -7,6 +7,16 @@ tags: [ai, agent, workflow, template, design, document, presentation, image, sec
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/brand-growth-system-builder
 ---
 
+## Supporting material availability
+
+This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
+
+- `../../references/free-design-resource-map.md`
+- `../../references/print-brand-kit-specs.md`
+- `../../references/backlink-directory-master-list.md`
+
+Obtain the required material from the [declared upstream source](https://github.com/WHOISABHISHEKADHIKARI/sme-ops-system-builder), or from a user-provided installation of that source. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
+
 
 # Brand & Growth System Builder
 
@@ -99,26 +109,4 @@ open_questions: []
 ### Step 4 - Recommend two or three modules
 
 Pick the smallest set that gets to a live profile and a usable asset set. Rank them by
-what unblocks the rest. Then stop and wait for the user to choose. Examples of the shape
-of a route:
-
-- Nothing exists: `design-theme-guide` -> `gbp-local-seo-intent` -> `business-website-setup`
-- Profile live, no assets: `logo-image-design` -> `brand-kit-print-collateral` -> `linktree-link-hub`
-- Website live, not ranking: `gbp-local-seo-intent` -> `seo-directory-backlinks` -> `presentation-deck`
-- Team growing: `code-of-conduct` -> `business-email-template` -> `observability-cloud-planning`
-
-### Step 5 - Never build here
-
-This router produces no files. When the user picks a module, read its sibling SKILL.md and continue the requested work. Each module
-skill owns its own artifacts and its own field list.
-
-For Notion, read the selected module and then the Notion helper. Manual artifacts need
-no connection; live workspace changes follow the shared execution contract.
-
-## Examples
-
-**Prompt**
-
-```
-We are launching a local service business. We need a consistent identity, a website,
-and a Google Business Profile, but 
+what unblocks the rest. Then stop an

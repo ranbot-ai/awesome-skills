@@ -7,6 +7,13 @@ tags: [python, api, ai, workflow, template, document, security, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-cosmos-db-py
 ---
 
+## Bundled upstream support
+
+Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](UPSTREAM-NOTICE.md) for their pinned sources, licenses, hashes, and import changes.
+
+## Restored helper safety
+
+The integration fixture in `assets/conftest_template.py` connects to the configured Cosmos endpoint; `cleanup_test_docs` deletes records explicitly added to its tracking list. Use only an isolated disposable test container with test-only records, never production data. Copying the template does not connect to Cosmos.
 
 # Cosmos DB Service Implementation
 
@@ -149,20 +156,4 @@ class ProjectService:
         doc = await get_document(project_id, partition_key=workspace_id)
         if doc is None:
             return None
-        return self._doc_to_model(doc)
-```
-
-**Full patterns**: See references/service-layer.md
-
-## Core Principles
-
-### Security Requirements
-
-1. **RBAC Authentication**: Use `DefaultAzureCredential` in Azure — never store keys in code
-2. **Emulator-Only Keys**: Hardcode the well-known emulator key only for local development
-3. **Parameterized Queries**: Always use `@parameter` syntax — never string concatenation
-4. **Partition Key Validation**: Validate partition key access matches user authorization
-
-### Clean Code Conventions
-
-1. **Single Responsibility**: 
+        return self._doc_t
