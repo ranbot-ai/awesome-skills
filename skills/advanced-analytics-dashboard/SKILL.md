@@ -32,11 +32,13 @@ Also use it when the user says "predictive insights", or describes the same proc
 spreadsheet, a document or someone inboxes.
 
 Do not use it for: payroll calculation, tax filing, or legal advice. This skill produces
-empty templates only - it never holds or processes real employee or customer data.
+empty templates by default. A requested review may transiently use supplied data; minimize it rather than claiming the host never processes it.
 
 ## How It Works
 
 Follow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.
+
+The upstream shared contract is not bundled; use this file directly. Confirm metric units, aggregation grain, period, timezone and source freshness. Missing values are not zero; show targets only when supplied.
 
 ### Step 1 - Identify intent
 
@@ -110,8 +112,4 @@ connection. For requested workspace changes, follow the shared contract: verify 
 tool access and the target before writing. A user saying "connected" is not tool evidence.
 Never ask for a Notion password or token.
 
-For an Excel-compatible CSV, use UTF-8 with a byte order mark so Excel opens the
-text correctly. A CSV is not an `.xlsx` workbook; create `.xlsx` only when the user
-requests a workbook.
-A CSV carries no types, so after it, name the columns
-that need a number, date or currency format applied.
+For an Excel-compat

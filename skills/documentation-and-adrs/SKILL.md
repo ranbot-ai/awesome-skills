@@ -40,13 +40,13 @@ ADRs capture the reasoning behind significant technical decisions. They're the h
 
 ### ADR Template
 
-Store ADRs in `docs/decisions/` with sequential numbering:
+Follow the repository's existing ADR location and numbering; use `docs/decisions/` only if no convention exists. The following decision and alternatives are fictional project assumptions, not universal database rankings:
 
 ```markdown
 # ADR-001: Use PostgreSQL for primary database
 
 ## Status
-Accepted | Superseded by ADR-XXX | Deprecated
+Proposed | Accepted | Superseded by ADR-XXX | Deprecated
 
 ## Date
 2025-01-15
@@ -71,7 +71,7 @@ Use PostgreSQL with Prisma ORM.
 ### SQLite
 - Pros: Zero configuration, embedded, fast for reads
 - Cons: Limited concurrent write support, no managed hosting for production
-- Rejected: Not suitable for multi-user web application in production
+- Rejected: Our measured concurrent-write requirements exceed the selected deployment's constraints; assess SQLite for the actual workload before rejecting it
 
 ### MySQL
 - Pros: Mature, widely supported
@@ -106,8 +106,8 @@ Comment the *why*, not the *what*:
 counter += 1;
 
 // GOOD: Explains non-obvious intent
-// Rate limit uses a sliding window — reset counter at window boundary,
-// not on a fixed schedule, to prevent burst attacks at window edges
+// This simple counter resets its window on the first request after expiry.
+// It is not a sliding-window limiter; assess bursts near the boundary.
 if (now - windowStart > WINDOW_SIZE_MS) {
   counter = 0;
   windowStart = now;
@@ -157,12 +157,4 @@ For public APIs (REST, GraphQL, library interfaces):
  * @param input - Task creation data (title required, description optional)
  * @returns The created task with server-generated ID and timestamps
  * @throws {ValidationError} If title is empty or exceeds 200 characters
- * @throws {AuthenticationError} If the user is not authenticated
- *
- * @example
- * const task = await createTask({ title: 'Buy groceries' });
- * console.log(task.id); // "task_abc123"
- */
-export async function createTask(input: CreateTaskInput): Promise<Task> {
-  // ...
-}
+ * @

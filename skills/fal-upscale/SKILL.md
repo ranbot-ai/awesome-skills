@@ -18,11 +18,19 @@ Upscale and enhance image and video resolution using AI
 
 Use this skill when you need to work with upscale and enhance image and video resolution using ai.
 
-## Instructions
+## Procedure
 
-This skill provides guidance and patterns for upscale and enhance image and video resolution using ai.
+Inspect the actual source image/video and resolve desired dimensions, scaling factor,
+output format, preservation constraints and budget. Use an available integration's
+verified input schema; no upscaler/runtime is bundled and the historical upstream
+path is absent from the current source tree. Confirm upload authorization and avoid
+exposing private media or inventing a supported model.
 
-For more information, see the [source repository](https://github.com/fal-ai-community/skills/blob/main/skills/claude.ai/fal-upscale/SKILL.md).
+Submit only the requested operation; record job identity and actual status. Compare
+returned dimensions, artifacts and subject/detail preservation against the source.
+Keep the original unchanged and deliver the actual returned file. Increased pixel
+count does not prove recovered real detail; generated enhancement can alter content.
+If execution is unavailable, return the job specification with that limitation.
 
 ## Example
 

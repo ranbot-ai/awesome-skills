@@ -3,7 +3,7 @@ name: docker-compose
 description: Define and run multi-container Docker applications using Docker Compose. 
 category: Document Processing
 source: antigravity
-tags: [node, api, ai, agent, workflow, template, image, security, docker, kubernetes]
+tags: [node, api, ai, agent, workflow, template, design, image, security, docker]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/docker-compose
 ---
 
@@ -21,6 +21,10 @@ Use this skill when:
 - Managing application stacks with multiple services
 - Creating reproducible development setups
 
+## Execution Scope
+
+Confirm the selected Docker context and project before any operation. Build instructions execute contributed commands; inspect the Dockerfile, build context, scripts and downloaded dependencies first. Image publication, shared-container stops and volume deletion need authorization for the exact target. Do not expose environment values, image history or logs containing credentials. These examples are independent fragments with project-specific assets, not a complete deployment.
+
 ## Prerequisites
 
 - Docker Engine with Compose plugin (v2)
@@ -33,16 +37,15 @@ Use this skill when:
 
 ```yaml
 # docker-compose.yml
-version: '3.8'
 
 services:
   web:
     build: .
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
     environment:
       - NODE_ENV=development
-      - DATABASE_URL=postgres://postgres:secret@db:5432/myapp
+      - DATABASE_URL=postgres://postgres:${POSTGRES_PASSWORD:?set a local fixture password}@db:5432/myapp
     depends_on:
       - db
       - redis
@@ -51,17 +54,17 @@ services:
     image: postgres:15-alpine
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: secret
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set a local fixture password}
       POSTGRES_DB: myapp
     volumes:
       - postgres-data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
 
   redis:
     image: redis:7-alpine
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"
 
 volumes:
   postgres-data:
@@ -104,7 +107,7 @@ services:
 services:
   web:
     ports:
-      - "3000:3000"           # HOST:CONTAINER
+      - "127.0.0.1:3000:3000"           # HOST:CONTAINER
       - "127.0.0.1:9229:9229" # Bind to localhost only
       - "8080-8090:8080-8090" # Port range
     expose:
@@ -218,7 +221,7 @@ services:
   web:
     image: myapp:latest
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"
 
 # docker-compose.override.yml (development - auto-loaded)
 services:
@@ -283,50 +286,4 @@ docker compose --profile debug up
 docker compose --profile debug --profile monitoring up
 ```
 
-## Commands
-
-### Lifecycle
-
-```bash
-# Start services
-docker compose up -d
-
-# Start specific service
-docker compose up -d web
-
-# Stop services
-docker compose stop
-
-# Stop and remove containers
-docker compose down
-
-# Stop and remove everything including volumes
-docker compose down -v --rmi all
-
-# Restart services
-docker compose restart web
-```
-
-### Building
-
-```bash
-# Build images
-docker compose build
-
-# Build without cache
-docker compose build --no-cache
-
-# Build and start
-docker compose up --build
-
-# Pull latest images
-docker compose pull
-```
-
-### Monitoring
-
-```bash
-# View logs
-docker compose logs -f
-
-# View specific servic
+## Com

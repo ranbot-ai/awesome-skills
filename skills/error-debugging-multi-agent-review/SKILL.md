@@ -1,6 +1,6 @@
 ---
 name: error-debugging-multi-agent-review
-description: Use when working with error debugging multi agent review 
+description: Review a defined code diff from relevant correctness, authorization and performance perspectives; delegate only when authorized and reproduce findings centrally. 
 category: AI & Agents
 source: antigravity
 tags: [ai, agent, cro]

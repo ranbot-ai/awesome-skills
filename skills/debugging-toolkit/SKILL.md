@@ -3,7 +3,7 @@ name: debugging-toolkit
 description: Use when working with debugging toolkit smart debug (Alias for debugging-toolkit-smart-debug) 
 category: AI & Agents
 source: antigravity
-tags: []
+tags: [ai]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/debugging-toolkit
 ---
 
@@ -14,7 +14,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/debu
 
 This skill redirects to `debugging-toolkit-smart-debug`. Load it from the vault:
 
-`skill-libraries/code-quality/debugging-toolkit-smart-debug/SKILL.md`
+`../debugging-toolkit-smart-debug/SKILL.md` relative to this installed skill directory. If that target is not installed, report the missing dependency rather than claiming the alias executed.
 
 ## When to Use
 - Use this skill when working with debugging toolkit smart debug (Alias for debugging-toolkit-smart-debug)

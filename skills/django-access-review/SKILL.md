@@ -1,9 +1,9 @@
 ---
 name: django-access-review
-description: Review Django and DRF authorization flows for IDOR, object permissions, query scoping, and tenant isolation. 
+description: Use when reviewing Django or DRF access control: trace authorization flows, IDOR risks, object permissions, query scoping and tenant isolation before proposing a verified fix. 
 category: Document Processing
 source: antigravity
-tags: [python, markdown, api, ai, document, rag]
+tags: [python, markdown, api, ai, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/django-access-review
 ---
 

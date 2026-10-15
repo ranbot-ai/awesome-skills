@@ -1,9 +1,9 @@
 ---
 name: 3d-web-experience
-description: Expert in building 3D experiences for the web - Three.js, React Three Fiber, Spline, WebGL, and interactive 3D scenes. Covers product configurators, 3D portfolios, immersive websites, and bringing dep
+description: Use when building or debugging web 3D scenes, product configurators or portfolios with Three.js, React Three Fiber or Spline; review assets, loading, controls, fallbacks and performance. 
 category: Creative & Media
 source: antigravity
-tags: [javascript, react, ai, agent, workflow, design, image, rag, cro, marketing]
+tags: [javascript, react, node, api, ai, agent, workflow, design, image, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/3d-web-experience
 ---
 
@@ -90,6 +90,7 @@ export default function Scene() {
 ```jsx
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, useGLTF } from '@react-three/drei';
+import { Suspense } from 'react';
 
 function Model() {
   const { scene } = useGLTF('/model.glb');
@@ -100,8 +101,10 @@ export default function Scene() {
   return (
     <Canvas>
       <ambientLight />
-      <Model />
-      <OrbitControls />
+      <Suspense fallback={null}>
+        <Model />
+      </Suspense>
+      <OrbitControls enableZoom={false} />
     </Canvas>
   );
 }
@@ -118,7 +121,7 @@ Getting models web-ready
 ### Format Selection
 | Format | Use Case | Size |
 |--------|----------|------|
-| GLB/GLTF | Standard web 3D | Smallest |
+| GLB/GLTF | Standard web 3D | Depends on geometry/textures/compression |
 | FBX | From 3D software | Large |
 | OBJ | Simple meshes | Medium |
 | USDZ | Apple AR | Medium |
@@ -126,28 +129,38 @@ Getting models web-ready
 ### Optimization Pipeline
 ```
 1. Model in Blender/etc
-2. Reduce poly count (< 100K for web)
+2. Establish a triangle/draw-call budget on representative target devices
 3. Bake textures (combine materials)
 4. Export as GLB
 5. Compress with gltf-transform
-6. Test file size (< 5MB ideal)
+6. Measure transfer size, decode time, memory and frame time against the project budget
 ```
 
 ### GLTF Compression
 ```bash
-# Install gltf-transform
-npm install -g @gltf-transform/cli
+# Use the reviewed version already pinned in the project lockfile.
+# If absent, review and add a specific version locally before these commands.
 
 # Compress model
-gltf-transform optimize input.glb output.glb \
+./node_modules/.bin/gltf-transform optimize input.glb output.glb \
   --compress draco \
   --texture-compress webp
 ```
 
 ### Loading in R3F
+
+This component needs the React/R3F/drei versions installed by the project and an
+actual `/model.glb` asset. Add an application error boundary for failed asset loads.
+
 ```jsx
 import { useGLTF, useProgress, Html } from '@react-three/drei';
 import { Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
+
+function Model() {
+  const { scene } = useGLTF('/model.glb');
+  return <primitive object={scene} />;
+}
 
 function Loader() {
   const { progress } = useProgress();
@@ -157,6 +170,7 @@ function Loader() {
 export default function Scene() {
   return (
     <Canvas>
+      <ambientLight />
       <Suspense fallback={<Loader />}>
         <Model />
       </Suspense>
@@ -176,7 +190,8 @@ export default function Scene() {
 ### R3F + Scroll Controls
 ```jsx
 import { ScrollControls, useScroll } from '@react-three/drei';
-import { useFrame } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { useRef } from 'react';
 
 function RotatingModel() {
   const scroll = useScroll();
@@ -184,10 +199,15 @@ function RotatingModel() {
 
   useFrame(() => {
     // Rotate based on scroll position
-    ref.current.rotation.y = scroll.offset * Math.PI * 2;
+    if (ref.current) ref.current.rotation.y = scroll.offset * Math.PI * 2;
   });
 
-  return <mesh ref={ref}>...</mesh>;
+  return (
+    <mesh ref={ref}>
+      <boxGeometry args={[1, 1, 1]} />
+      <meshNormalMaterial />
+    </mesh>
+  );
 }
 
 export default function Scene() {
@@ -206,49 +226,5 @@ export default function Scene() {
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
-gsap.to(camera.position, {
-  scrollTrigger: {
-    trigger: '.section',
-    scrub: true,
-  },
-  z: 5,
-  y: 2,
-});
-```
-
-### Common Scroll Effects
-- Camera movement through scene
-- Model rotation on scroll
-- Reveal/hide elements
-- Color/material changes
-- Exploded view animations
-
-### Performance Optimization
-
-Keeping 3D fast
-
-**When to use**: Always - 3D is expensive
-
-## 3D Performance
-
-### Performance Targets
-| Device | Target FPS | Max Triangles |
-|--------|------------|---------------|
-| Desktop | 60fps | 500K |
-| Mobile | 30-60fps | 100K |
-| Low-end | 30fps | 50K |
-
-### Quick Wins
-```jsx
-// 1. Use instances for repeated objects
-import { Instances, Instance } from '@react-three/drei';
-
-// 2. Limit lights
-<ambientLight intensity={0.5} />
-<directionalLight /> // Just one
-
-// 3. Use LOD (Level of Detail)
-import { LOD } from 'three';
-
-// 4. Lazy load models
-c
+gsap.registerPlugin(ScrollTrigger);
+// Integration fragm

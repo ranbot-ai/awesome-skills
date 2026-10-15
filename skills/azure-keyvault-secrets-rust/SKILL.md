@@ -3,7 +3,7 @@ name: azure-keyvault-secrets-rust
 description: Azure Key Vault Secrets SDK for Rust. Use for storing and retrieving secrets, passwords, and API keys. Triggers: "keyvault secrets rust", "SecretClient rust", "get secret rust", "set secret rust". 
 category: Development & Code Tools
 source: antigravity
-tags: [api, ai, workflow, security, azure, rag]
+tags: [api, ai, security, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-keyvault-secrets-rust
 ---
 
@@ -12,16 +12,18 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azur
 
 Client library for Azure Key Vault Secrets — secure storage for passwords, API keys, and other secrets.
 
+The examples below require a reviewed compatible crate set and replacement of every resource placeholder. Do not use production data for demonstration writes.
+
 ## Installation
 
 ```sh
-cargo add azure_security_keyvault_secrets azure_identity
+cargo add azure_security_keyvault_secrets@=1.0.1 azure_identity@=1.0.0 azure_core@=1.1.0
 ```
 
 ## Environment Variables
 
 ```bash
-AZURE_KEYVAULT_URL=https://<vault-name>.vault.azure.net/
+export AZURE_KEYVAULT_URL="https://<vault-name>.vault.azure.net/"
 ```
 
 ## Authentication
@@ -48,7 +50,8 @@ let secret = client
     .await?
     .into_model()?;
 
-println!("Secret value: {:?}", secret.value);
+let secret_value = secret.value.ok_or("Secret has no value")?;
+// Pass directly to the authorized consumer; never print the value.
 ```
 
 ### Set Secret
@@ -96,7 +99,7 @@ client.delete_secret("secret-name", None).await?;
 use azure_security_keyvault_secrets::ResourceExt;
 use futures::TryStreamExt;
 
-let mut pager = client.list_secret_properties(None)?.into_stream();
+let mut pager = client.list_secret_properties(None)?;
 while let Some(secret) = pager.try_next().await? {
     let name = secret.resource_id()?.name;
     println!("Secret: {}", name);
@@ -135,6 +138,8 @@ Assign these Key Vault roles:
 - `Key Vault Secrets User` — get and list
 - `Key Vault Secrets Officer` — full CRUD
 
+The reviewed example set uses `azure_security_keyvault_secrets 1.0.1` and compatible Azure core/credential crates. Record and commit Cargo.lock; source/API review is not a compiler or live-service test.
+
 ## Reference Links
 
 | Resource | Link |
@@ -144,9 +149,10 @@ Assign these Key Vault roles:
 | crates.io | https://crates.io/crates/azure_security_keyvault_secrets |
 
 ## When to Use
-This skill is applicable to execute the workflow or actions described in the overview.
+Use when a Rust application retrieves a specified secret/version or performs authorized secret creation, metadata updates, listing or deletion in an identified Key Vault.
 
 ## Limitations
-- Use this skill only when the task clearly matches the scope described above.
+- Examples are fragments inside async application code, with compatible pinned Azure crates and the required Tokio/Serde/Futures dependencies; verify the selected version’s API before use. They were reviewed against official source/reference, not compiled or run against a cloud account here.
+- Use an authorized tenant, resource and identity with least privilege. Writes, overwrites, deletes, backup retrieval and account changes require the corresponding scope; cleanup may remove only explicitly identified disposable resources. Bound requests, retries and downloaded bytes, and do not log payloads, credentials or secret values.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.

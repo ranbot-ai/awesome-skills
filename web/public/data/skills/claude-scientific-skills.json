@@ -7,10 +7,12 @@
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/claude-scientific-skills",
-  "content": "\n# Claude Scientific Skills\n\n## Overview\n\nScientific research and analysis skills\n\n## When to Use This Skill\n\nUse this skill when you need to work with scientific research and analysis skills.\n\n## Instructions\n\nThis skill provides guidance and patterns for scientific research and analysis skills.\n\nFor more information, see the [source repository](https://github.com/K-Dense-AI/claude-scientific-skills).\n\n## Example\n\n**User request:**\n\n> Use @claude-scientific-skills for this task: Scientific research and analysis skills.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
+  "content": "\n# Claude Scientific Skills\n\n## Overview\n\nScientific research and analysis skills\n\n## When to Use This Skill\n\nUse this skill when you need to work with scientific research and analysis skills.\n\n## Instructions\n\nThis is a discovery guide to the upstream scientific library; its many scientific\npackages and workflows are not bundled inside this entrypoint.\n\n1. Identify the scientific question, discipline, input data, desired analysis,\n   computational environment, and evidence needed to support the result.\n2. Browse the source repository for the particular relevant skill; inspect its full\n   instructions, supporting files, dependencies, data licenses and limitations.\n3. Prefer an appropriate already-installed canonical AAS skill when available.\n   Import or install upstream content only within the user's authorized scope;\n   do not silently load the whole library or execute unreviewed scripts.\n4. Record methods, package versions, data provenance, uncertainty and actual checks.\n   Separate reproduced results from proposed analysis or vendor claims.\n\nThe upstream library now calls itself Scientific Agent Skills. The original source\nURL is preserved for attribution and redirects to the same project.\n\n## Example\n\n**User request:**\n\n> Use @claude-scientific-skills for this task: Scientific research and analysis skills.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
   "tags": [
     "claude",
-    "ai"
+    "ai",
+    "agent",
+    "workflow"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-31T06:51:08.192Z"

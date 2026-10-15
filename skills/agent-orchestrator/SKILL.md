@@ -16,7 +16,8 @@ Meta-skill que orquestra todos os agentes do ecossistema. Scan automatico de ski
 
 ## When to Use This Skill
 
-- When you need specialized assistance with this domain
+- Quando o usuario pede um inventario local de skills ou um plano de coordenacao para uma tarefa com varias capacidades.
+- Quando e necessario comparar candidatos explicitamente, sem executar suas instrucoes nem iniciar agentes.
 
 ## Do Not Use This Skill When
 
@@ -30,19 +31,19 @@ Meta-skill que funciona como camada central de decisao e coordenacao para todo
 o ecossistema de skills. Faz varredura automatica, identifica agentes relevantes
 e orquestra multiplos skills para tarefas complexas.
 
-## Principio: Zero Intervencao Manual
+## Principio: Descoberta Solicitada e Plano Revisavel
 
-- **SEMPRE faz varredura** antes de processar qualquer solicitacao
-- Novas skills sao **auto-detectadas e incluidas** ao criar SKILL.md em qualquer subpasta
+- Faz varredura somente no escopo solicitado; esta skill nao deve interceptar todas as solicitacoes
+- Novas skills sao detectadas na proxima varredura explicita, dentro dos roots e do limite de profundidade
 - Skills removidas sao **auto-excluidas** do registry
-- Nenhum comando manual e necessario para registrar novas skills
+- Execute a varredura explicitamente; o matcher nao inicia uma varredura automaticamente
 
 ---
 
 ## Workflow Obrigatorio (Toda Solicitacao)
 
-Execute estes passos ANTES de processar qualquer request do usuario.
-Os scripts usam paths relativos automaticamente - funciona de qualquer diretorio.
+Execute estes passos apenas quando a tarefa pede esta ferramenta. Scores sao heuristicas locais, nao prova de seguranca, compatibilidade ou autorizacao. Um plano nao executa skills; delegacao, mensagens e publicacao exigem autorizacao do usuario.
+Os scripts localizam arquivos a partir da propria instalacao, mas os comandos abaixo pressupõem que o diretorio pai de `agent-orchestrator` seja o diretorio atual. De outro local, use o caminho absoluto do script.
 
 ## Passo 1: Auto-Discovery (Varredura)
 
@@ -50,7 +51,7 @@ Os scripts usam paths relativos automaticamente - funciona de qualquer diretorio
 python agent-orchestrator/scripts/scan_registry.py
 ```
 
-Ultra-rapido (<100ms) via cache de hashes MD5. So re-processa arquivos alterados.
+Usa cache de hashes SHA-256 para reprocessar arquivos alterados. O tempo depende do tamanho da arvore; nao ha garantia de 100ms.
 Retorna JSON com resumo de todos os skills encontrados.
 
 ## Passo 2: Match De Skills
@@ -63,9 +64,9 @@ Retorna JSON com skills ranqueadas por relevancia. Interpretar o resultado:
 
 | Resultado              | Acao                                                    |
 |:-----------------------|:--------------------------------------------------------|
-| `matched: 0`          | Nenhum skill relevante. Operar normalmente sem skills.  |
-| `matched: 1`          | Um skill relevante. Carregar seu SKILL.md e seguir.     |
-| `matched: 2+`         | Multiplos skills. Executar Passo 3 (orquestracao).      |
+| `matched: 0`          | Nenhum candidato acima do limite heuristico; nao prova ausencia de skills relevantes.  |
+| `matched: 1`          | Um candidato. Inspecionar escopo, arquivos, dependencias e autorizacao antes de selecionar.     |
+| `matched: 2+`         | Multiplos candidatos. Propor um plano somente se a tarefa pede coordenacao.      |
 
 ## Passo 3: Orquestracao (Se Matched >= 2)
 
@@ -86,10 +87,19 @@ python agent-orchestrator/scripts/scan_registry.py && python agent-orchestrator/
 
 ## Skill Registry
 
-O registry vive em:
+Antes de executar, defina `AGENT_ORCHESTRATOR_DATA_DIR` como caminho absoluto de
+um diretorio privado autorizado fora da instalacao da skill. Registry, hashes e
+atribuicoes de projeto ficam nesse diretorio. Nao use um diretorio compartilhado
+ou uma arvore com links simbolicos; inspecione o conteudo antes de reutilizar.
+
+```bash
+export AGENT_ORCHESTRATOR_DATA_DIR="<diretorio-absoluto-autorizado>"
 ```
-agent-orchestrator/data/registry.json
-```
+
+Execute a varredura explicitamente antes do matcher. Falha de leitura, JSON
+invalido ou registry ausente nao significa que nenhuma skill existe. Caminhos
+distintos permanecem no inventario mesmo com nomes iguais; selecao por nome
+ambiguo deve parar. O limite de profundidade do scanner torna o inventario parcial.
 
 ## Locais De Busca
 
@@ -108,55 +118,7 @@ Cada entrada no registry contem:
 | description    | Descricao completa (triggers inclusos)             |
 | location       | Caminho absoluto do diretorio                      |
 | skill_md       | Caminho absoluto do SKILL.md                       |
-| registered     | Se esta em .claude/skills/ (true/false)            |
+| registered     | Se esta em .claude/skills/ (true/false); nao prova carregamento pelo host            |
 | capabilities   | Tags de capacidade (auto-extraidas + explicitas)   |
 | triggers       | Keywords de ativacao extraidas da description      |
-| language       | Linguagem principal (python/nodejs/bash/none)      |
-| status         | active / incomplete / missing                      |
-
-## Comandos Do Registry
-
-```bash
-
-## Scan Rapido (Usa Cache De Hashes)
-
-python agent-orchestrator/scripts/scan_registry.py
-
-## Tabela De Status Detalhada
-
-python agent-orchestrator/scripts/scan_registry.py --status
-
-## Re-Scan Completo (Ignora Cache)
-
-python agent-orchestrator/scripts/scan_registry.py --force
-```
-
----
-
-## Algoritmo De Matching
-
-Para cada solicitacao, o matcher pontua skills usando:
-
-| Criterio                     | Pontos | Exemplo                               |
-|:-----------------------------|:-------|:--------------------------------------|
-| Nome do skill na query       | +15    | "use web-scraper" -> web-scraper      |
-| Keyword trigger exata        | +10    | "scrape" -> web-scraper               |
-| Categoria de capacidade      | +5     | data-extraction -> web-scraper        |
-| Sobreposicao de palavras     | +1     | Palavras da query na description      |
-| Boost de projeto             | +20    | Skill atribuida ao projeto ativo      |
-
-Threshold minimo: 5 pontos. Skills abaixo disso sao ignoradas.
-
-## Match Com Projeto
-
-```bash
-python agent-orchestrator/scripts/match_skills.py --project meu-projeto "query aqui"
-```
-
-Skills atribuidas ao projeto recebem +20 de boost automatico.
-
----
-
-## Padroes De Orquestracao
-
-Quando multiplos skills sao rele
+| language       | Linguagem prin

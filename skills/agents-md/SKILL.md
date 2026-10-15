@@ -76,9 +76,7 @@ Use the root `AGENTS.md` for repository-wide guidance. Add or revise a nested
 `AGENTS.md` only when a subtree has materially different commands,
 architecture, conventions, or safety boundaries.
 
-Keep shared rules at the root and only differences in nested files. For tools
-that implement the public AGENTS.md convention, the nearest file in the
-directory tree controls the working subtree. Do not copy the full root file
+Keep shared rules at the root and only differences in nested files. For tools that implement the public AGENTS.md convention, apply root/ancestor guidance and narrower subtree instructions according to the target host's precedence. The nearest file does not silently erase unrelated ancestor rules. Do not copy the full root file
 into every package.
 
 ### 4. Write high-signal guidance
@@ -120,6 +118,4 @@ checks from optional, slow, privileged, or deployment-only checks.
 3. Confirm every mentioned file and directory exists.
 4. Cross-check commands against manifests or CI, and run safe, proportionate
    checks when useful.
-5. If nested files changed, confirm each contains only subtree-specific rules
-   and does not conflict accidentally with the root.
-6. Review the diff as a maintainer: every adde
+5. If nested files changed, confirm each contains only subtree-specific r

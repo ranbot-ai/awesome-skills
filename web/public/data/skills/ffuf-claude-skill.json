@@ -3,13 +3,16 @@
   "name": "ffuf-claude-skill",
   "slug": "ffuf-claude-skill",
   "description": "Web fuzzing with ffuf",
-  "category": "AI & Agents",
+  "category": "Security & Systems",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ffuf-claude-skill",
-  "content": "\n# Ffuf Claude Skill\n\n## Overview\n\nWeb fuzzing with ffuf\n\n## When to Use This Skill\n\nUse this skill when you need to work with web fuzzing with ffuf.\n\n## Instructions\n\nThis skill provides guidance and patterns for web fuzzing with ffuf.\n\nFor more information, see the [source repository](https://github.com/jthack/ffuf_claude_skill).\n\n## Example\n\n**User request:**\n\n> Use @ffuf-claude-skill for this task: Web fuzzing with ffuf.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
+  "content": "\n# Ffuf Claude Skill\n\n> **⚠️ AUTHORIZED USE ONLY**\n> This skill is for educational purposes or authorized security assessments only.\n> You must have explicit, written permission from the system owner before using this tool.\n> Misuse of this tool is illegal and strictly prohibited.\n\n## Overview\n\nWeb fuzzing with ffuf\n\n## When to Use This Skill\n\nUse this skill when you need to work with web fuzzing with ffuf.\n\n## Instructions\n\nUse only a specifically authorized fuzzing target and allowed paths. Record host,\nprotocol, scope, time window, request-rate limits and prohibited side effects before\nsending traffic. This AAS entrypoint does not bundle ffuf, a wordlist or an upstream\nrunner. Inspect the installed version's help and review the selected wordlist.\n\nPlan a bounded run against a local or explicitly authorized test environment;\navoid writes, authenticated-state changes and rate-limit bypass. Compare candidate\nresponses with a known missing-path baseline; response size/status alone does not\nprove a vulnerability. Preserve request/response evidence after redacting secrets,\nstop on target instability or scope changes, and report untested paths as unknown.\n## Mandatory confirmation gate\n\nBefore each probing command, collect the exact target URL, IP, account, or resource, written authorization and permitted scope. Show the exact command and expected effect. Wait for explicit confirmation in the current conversation. Without confirmation, remain read-only and provide defensive guidance only. No traffic is authorized simply by invoking this guide.\n\n## Example\n\n**User request:**\n\n> Use @ffuf-claude-skill for this task: Web fuzzing with ffuf.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
   "tags": [
-    "claude"
+    "claude",
+    "ai",
+    "security",
+    "vulnerability"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-31T06:52:07.937Z"

@@ -17,7 +17,12 @@ Luna is the squad's quality gate. Nothing moves to Quinn (QA) or Dep (Deployment
 ---
 
 ## When to Use
-- Use this skill when the task matches this description: Reviews code for objective correctness, security, and reliability.
+
+Use when reviewing a specific revision for reachable correctness, security or reliability defects against its actual requirements.
+
+## Host and scope contract
+
+The squad names describe optional roles, not installed agents, merge authority or permission to delegate. Use existing user context and repository artifacts when a named report is absent. Follow the actual host's authorization, tool schemas and requested batch cadence; do not add handoff or approval checkpoints for routine scoped work. Pass exact revision and artifact paths with evidence and unresolved items, not merely version labels. Keep private data and secrets out of reports.
 
 ## Responsibilities
 
@@ -27,9 +32,9 @@ Luna is the squad's quality gate. Nothing moves to Quinn (QA) or Dep (Deployment
 - Check for **authorization flaws**: missing ownership checks, privilege escalation, IDOR patterns.
 - Verify **secrets handling**: no hardcoded keys, tokens, or passwords anywhere in the codebase.
 - Check **input validation coverage**: every external input (request body, query params, headers, file uploads) validated and sanitized.
-- Verify **password storage**: bcrypt/argon2 only, no weak algorithms.
+- Verify **password storage**: an appropriate current password KDF with reviewed parameters and migration policy.
 - Check **HTTP security headers** are applied.
-- Verify **CORS configuration** is not wildcard-open in production config.
+- Verify **CORS configuration** matches the endpoint trust model; wildcard public non-credentialed resources differ from private credentialed APIs.
 
 ### 2. Reliability & Correctness
 - Check all **async operations** have proper error handling — no unhandled promise rejections.
@@ -50,7 +55,7 @@ Luna is the squad's quality gate. Nothing moves to Quinn (QA) or Dep (Deployment
 ### 4. Deprecated / Dangerous Patterns
 - Flag use of **deprecated APIs** in the chosen framework or language version.
 - Flag **known dangerous functions**: `eval()`, `exec()`, `pickle.loads()` on user data, `innerHTML` with user content, etc. <!-- security-allowlist: defensive review checklist -->
-- Flag **memory leak patterns**: event listeners not removed, circular references, unclosed streams.
+- Flag **memory leak patterns**: unreleased listeners/subscriptions, retained object graphs, unclosed streams.
 - Flag **unbounded operations**: loops over unvalidated user-supplied lengths, regex on unsanitized input (ReDoS).
 
 ### 5. What Luna Does NOT Flag
@@ -87,30 +92,4 @@ Overall status: [PASS / PASS WITH CONDITIONS / BLOCK]
 ### [CRITICAL/HIGH/MED/LOW] — [Short Title]
 File: [path/filename], Line: [n] (if applicable)
 Issue: [What is wrong, technically precise]
-Risk: [What can go wrong if this is not fixed]
-Fix: [Concrete recommendation — not vague]
-
-### ...
-
-## Blueprint Conformance
-- [✓] File structure matches
-- [✗] Endpoint [X] returns 200 instead of 201 on creation — fix required
-
-## Checklist Verification
-- [✓] [task id] DoD confirmed met
-- [✗] [task id] DoD not met — [specific gap]
-
-## Handoff Recommendation
-- Ready for Quinn (QA): [yes / after CRITICAL+HIGH fixes]
-- Ready for Dep (Deployment): [yes / no]
-
-## Notes for Quinn (QA)
-- [areas that need extra test coverage based on findings]
-```
-
----
-
-## Handoff Protocol
-
-When reporting CRITICAL or HIGH findings:
-- Route directly back to **Mason** with specific file and f
+Risk: [What can go wrong 

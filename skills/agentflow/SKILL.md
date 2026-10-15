@@ -3,7 +3,7 @@ name: agentflow
 description: Orchestrate autonomous AI development pipelines through your Kanban board (Asana, GitHub Projects, Linear). Manages multi-worker Claude Code dispatch, deterministic quality gates, adversarial review, 
 category: AI & Agents
 source: antigravity
-tags: [claude, ai, agent, design, document, rag, cro]
+tags: [claude, ai, agent, workflow, template, design, document, aws, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agentflow
 ---
 
@@ -14,7 +14,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agen
 
 AgentFlow turns your existing Kanban board into a fully autonomous AI development pipeline. Instead of building custom orchestration infrastructure, it treats your project management tool (Asana, GitHub Projects, Linear) as a distributed state machine — tasks move through stages, AI agents read and write state via comments, and humans intervene through the same UI they already use.
 
-The result is complete pipeline observability from your phone, free crash recovery (state lives in your PM tool, not in memory), and human override at any point by dragging a card.
+The result is complete pipeline observability from your phone, recoverable task state (state lives in your PM tool, not in memory), and human override at any point by dragging a card.
 
 ## When to Use This Skill
 
@@ -22,7 +22,7 @@ The result is complete pipeline observability from your phone, free crash recove
 - Use when you want deterministic quality gates (tsc/eslint/tests) before AI review on AI-generated code
 - Use when you want full pipeline visibility from your Kanban board or phone
 - Use when running a solo or team project that needs autonomous task dispatch with cost tracking
-- Use when you need crash-proof orchestration that survives session restarts
+- Use when you need orchestration designed to recover after session restarts
 
 ## Core Concepts
 
@@ -36,15 +36,21 @@ A crontab-driven one-shot sweep runs every 15 minutes. No daemon, no session dep
 
 ### Deterministic Before Probabilistic
 
-Hard gates (tsc + eslint + tests) run before any AI review, catching roughly 60% of issues at near-zero cost. AI review comes after, as a second layer.
+Hard gates (tsc + eslint + tests) run before any AI review, catching detectable errors before the more expensive review; coverage and cost must be measured. AI review comes after, as a second layer.
 
 ### Adversarial Review
 
-A different AI agent reviews code and must list 3 things wrong before deciding to pass. This prevents rubber-stamp approvals.
+An independent review should report only substantiated findings and incomplete coverage. Do not require an arbitrary number of flaws or fabricate issues to pass a gate.
 
 ### Transitive Priority Dispatch
 
 Tasks that unblock the most downstream work get built first, automatically computing the critical path.
+
+## Prerequisites and authorization
+
+This AAS tree contains the guide only. Slash commands, cron script, worker runtime, board integration and templates named below belong to the separately reviewed upstream installation; do not claim they exist locally. Verify a fixed upstream revision, license, schemas and setup first. Creating board tasks/comments, spawning workers, configuring schedules, paid model calls, merging and publishing each require the user's applicable authorization. Preserve existing host files and use the current repository maintainer gates.
+
+For concurrent workers, require atomic task claims or leases, disjoint write ownership, bounded concurrency and verified artifact SHAs. A stale heartbeat does not prove a worker stopped; prevent duplicate paid jobs or writes before reassignment.
 
 ## Skills / Commands
 
@@ -100,7 +106,7 @@ claude -p "/sdlc-worker --slot T5"
 ```bash
 # Add to crontab (runs every 15 minutes)
 crontab -e
-# Add: */15 * * * * ~/.claude/sdlc/agentflow-cron.sh >> /tmp/agentflow-orchestrate.log 2>&1
+# Add: */15 * * * * ~/.claude/sdlc/agentflow-cron.sh >> /path/to/private/agentflow-orchestrate.log 2>&1
 ```
 
 ### 5. Monitor and Intervene
@@ -118,29 +124,5 @@ claude -p "/sdlc-stop"
 Each stage enforces specific gates before promotion:
 
 - **Build to Review**: `tsc` + `eslint` + `npm test` must all pass (deterministic)
-- **Review to Test**: Adversarial reviewer must list 3 issues before passing
-- **Test to Integrate**: 80% coverage threshold on new files
-- **Integrate to Done**: Full test suite on main after merge; auto-reverts on failure
-
-## Cost Tracking
-
-Per-task cost tracking with stage ceilings (Sonnet defaults):
-
-- Research: ~$0.10
-- Build: ~$0.40
-- Review: ~$0.10
-- Test: ~$0.05
-- Integrate: ~$0.03
-
-Automatic guardrails: warning at $3/$8, hard stop at $10/$20 (Sonnet/Opus) with human escalation.
-
-## Safety and Recovery
-
-- **Auto-revert**: Integration failures trigger `git revert` (new commit, never force-push)
-- **Blocked tasks**: After 2 failed attempts, tasks escalate to human review
-- **Dead agent detection**: Heartbeat every 5 min, reassign after 10 min timeout
-- **Graceful shutdown**: `/sdlc-stop` drains workers, returns unstarted tasks to backlog
-- **Scope creep detection**: PR diff files compared against predicted files list
-- **Spec drift detection**: SHA-256 hash comparison catches requirement changes mid-sprint
-
-## Inst
+- **Review to Test**: Evidence-based review resolves blocking findings and records coverage
+- **Test to Integrate**: 80%

@@ -51,7 +51,7 @@ for approval. Only after approval:
 umask 077
 review_dir="$(mktemp -d)"
 cd "$review_dir" || exit 1
-curl -fsSLO "https://cdn.beatra.ai/agent-packages/ai-image-generation-studio/v0.1.4/ai-image-generation-studio-skill-0.1.4.zip"
+curl --connect-timeout 10 --max-time 60 -fsSO "https://cdn.beatra.ai/agent-packages/ai-image-generation-studio/v0.1.4/ai-image-generation-studio-skill-0.1.4.zip"
 printf '%s  %s\n' \
   'b357edb0f9f2546435c89cf1ef8278596e28a7629229a78fcab9804decd13682' \
   'ai-image-generation-studio-skill-0.1.4.zip' | shasum -a 256 -c -
@@ -62,15 +62,19 @@ catalog entry, not from a file on the same CDN.
 
 ### Step 2: Inspect before activation
 
+Before extraction, inspect every ZIP member name, Unix mode, declared size and total expanded size. Reject absolute/traversing paths, entries outside the intended package root, duplicate or case-colliding names, symlinks, devices and executable/binary files. Set bounded file-count, per-file and total extraction limits. Extract only after that preflight passes into the fresh private review directory; inspecting links after extraction cannot prevent an escape. A matching archive hash is an integrity check against this receipt, not permission to execute or proof of complete safety.
+
+
 ```bash
 unzip -l ai-image-generation-studio-skill-0.1.4.zip
+# After the complete member preflight passes:
 unzip -q ai-image-generation-studio-skill-0.1.4.zip
 find ai-image-generation-studio -type l -print            # expect no output
 find ai-image-generation-studio -type f -perm -111 -print # expect no output
 grep -n '"auto_update": True' ai-image-generation-studio/scripts/mcp_client.py
 ```
 
-Optionally confirm byte identity with the public source tree (a second,
+Confirm byte identity with the public source tree before activation (a second,
 independent host):
 
 ```bash
@@ -90,25 +94,6 @@ under [Security & Safety Notes](#security--safety-notes).
 
 ### Step 3: Copy in and disable self-update before any other command
 
-Ask for a **second, separate** approval, because this changes agent
-configuration. Then copy the reviewed tree to the host's skills directory
+Obtain explicit authorization for this host configuration change if it is not already covered by the user's request; do not repeat an existing scoped approval. Then copy the reviewed tree to the host's skills directory
 (Claude Code shown; use the equivalent path for other hosts) and immediately
-turn off silent self-update for that exact path:
-
-```bash
-dest="$HOME/.claude/skills/ai-image-generation-studio"
-test ! -e "$dest" || { echo "destination exists; stop and ask the user"; exit 1; }
-cp -R ai-image-generation-studio "$dest"
-python3 "$dest/scripts/mcp_client.py" update --auto off
-```
-
-The last command must print
-`Automatic Beatra package updates are disabled.` It writes only
-`~/.beatra/updates/<id>/state.json` and makes no network request. Run it
-before `authorize.py`, `verify`, `tools`, `upload`, or `call`: in this
-pinned version self-update is **on by default**. The setting is keyed to the
-resolved install path, so repeat it after moving or re-copying the directory.
-
-### Step 4: Authorize as its own decision
-
-Authorization opens a browser sign-in and stores a beare
+turn off silent self-update for that 

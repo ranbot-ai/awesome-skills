@@ -51,7 +51,7 @@ for approval. Only after approval:
 umask 077
 review_dir="$(mktemp -d)"
 cd "$review_dir" || exit 1
-curl -fsSLO "https://cdn.beatra.ai/agent-packages/ai-multilingual-dubbing/v0.1.9/ai-multilingual-dubbing-skill-0.1.9.zip"
+curl --connect-timeout 10 --max-time 60 -fsSO "https://cdn.beatra.ai/agent-packages/ai-multilingual-dubbing/v0.1.9/ai-multilingual-dubbing-skill-0.1.9.zip"
 printf '%s  %s\n' \
   'ef8cd40a6b8a435a5f9d903c66a726c9c64cac8da63a186682c4a88851b2becc' \
   'ai-multilingual-dubbing-skill-0.1.9.zip' | shasum -a 256 -c -
@@ -62,15 +62,19 @@ catalog entry, not from a file on the same CDN.
 
 ### Step 2: Inspect before activation
 
+Before extraction, reject ZIP members with absolute/traversing paths, entries outside the package root, duplicate/case-colliding names, symlinks, devices or executable/binary content. Bound member count, per-file and total expanded size. Extract only after this preflight passes into the fresh private review directory; later link checks cannot prevent an escape.
+
 ```bash
 unzip -l ai-multilingual-dubbing-skill-0.1.9.zip
+
+# Only after complete member preflight passes:
 unzip -q ai-multilingual-dubbing-skill-0.1.9.zip
 find ai-multilingual-dubbing -type l -print            # expect no output
 find ai-multilingual-dubbing -type f -perm -111 -print # expect no output
 grep -n '"auto_update": True' ai-multilingual-dubbing/scripts/mcp_client.py
 ```
 
-Optionally confirm byte identity with the public source tree (a second,
+Confirm byte identity before activation with the public source tree (a second,
 independent host):
 
 ```bash
@@ -97,18 +101,6 @@ turn off silent self-update for that exact path:
 
 ```bash
 dest="$HOME/.claude/skills/ai-multilingual-dubbing"
-test ! -e "$dest" || { echo "destination exists; stop and ask the user"; exit 1; }
+test ! -e "$dest" && test ! -L "$dest" || { echo "destination exists; stop and ask the user"; exit 1; }
 cp -R ai-multilingual-dubbing "$dest"
-python3 "$dest/scripts/mcp_client.py" update --auto off
-```
-
-The last command must print
-`Automatic Beatra package updates are disabled.` It writes only
-`~/.beatra/updates/<id>/state.json` and makes no network request. Run it
-before `authorize.py`, `verify`, `tools`, `upload`, or `call`: in this
-pinned version self-update is **on by default**. The setting is keyed to the
-resolved install path, so repeat it after moving or re-copying the directory.
-
-### Step 4: Authorize as its own decision
-
-Authorization open
+python3 "$dest/scripts/mcp_client.py" u

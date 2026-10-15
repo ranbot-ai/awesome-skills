@@ -1,9 +1,9 @@
 ---
 name: ai-analyzer
-description: AI驱动的综合健康分析系统，整合多维度健康数据、识别异常模式、预测健康风险、提供个性化建议。支持智能问答和AI健康报告生成。 
+description: AI驱动的综合健康分析系统，整合多维度健康数据、识别异常模式、整理风险因素、提供一般性健康信息。支持智能问答和AI健康报告生成。 
 category: Document Processing
 source: antigravity
-tags: [javascript, api, ai, document, tailwind, cro]
+tags: [javascript, ai, document, tailwind, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-analyzer
 ---
 
@@ -18,12 +18,18 @@ Ask for the original supporting material or an existing installation before usin
 
 # AI健康分析器
 
-基于AI技术的综合健康分析系统，提供智能健康洞察、风险预测和个性化建议。
+用于整理已提供的健康数据、描述趋势并准备与医生讨论的问题；这份说明不是经过临床验证的预测系统。
 
 ## When to Use
 - The user wants AI-driven health analysis across multiple health datasets or lifestyle signals.
 - You need anomaly detection, risk prediction, or personalized recommendations based on health inputs.
 - You need generated health reports or question-answering over health metrics and trends.
+
+## 输入与证据边界
+
+这些方法是可选分析思路，不是已实现或验证的算法。统计异常不等于医学异常；CUSUM、Z分数和相关性需要足够、可比的样本，相关不证明因果。营养摄入低于参考量不直接证明缺乏，睡眠问卷不诊断睡眠障碍。紧急症状按当地急救流程处理，避免让报告生成延误就医。
+
+参考：[ADA风险筛查](https://diabetes.org/diabetes-risk-test)、[ACC风险工具](https://tools.acc.org/ascvd-risk-estimator-plus/)。
 
 ## 核心功能
 
@@ -141,11 +147,11 @@ const allergies = exists('data/allergies.json') ? readFile('data/allergies.json'
 
 #### 步骤 6: 风险预测
 
-基于Framingham、ADA、ACC/AHA等标准进行风险预测：
+核对具体模型版本、必要输入、适用人群及时间范围；没有这些信息时只描述风险因素，不计算疾病概率：
 
-- 高血压风险（10年概率）
-- 糖尿病风险（10年概率）
-- 心血管疾病风险（10年概率）
+- 高血压相关因素：只有适用于目标人群的明确验证模型才可计算其规定的时间范围
+- 糖尿病风险筛查：ADA问卷分数不是个人10年发病概率
+- 心血管风险：仅在全部必要输入、适用年龄和模型版本经核对后使用相应工具
 - 营养缺乏风险
 - 睡眠障碍风险
 
@@ -165,7 +171,7 @@ const allergies = exists('data/allergies.json') ? readFile('data/allergies.json'
 
 #### 步骤 9: 更新AI历史记录
 
-记录分析结果到 `data/ai-history.json`
+只有用户请求保留记录时，才在其确认的私密目标保存最少必要结果；保留原文件，不自动写入历史。
 
 ## 数据源
 
@@ -199,28 +205,4 @@ const allergies = exists('data/allergies.json') ? readFile('data/allergies.json'
 ## 安全与合规
 
 ### 必须遵循
-- ❌ 不给出医疗诊断
-- ❌ 不给出具体用药剂量建议
-- ❌ 不判断生死预后
-- ❌ 不替代医生建议
-- ✅ 所有分析必须标注"仅供参考"
-- ✅ Level 3建议必须包含免责声明
-- ✅ 高风险预测必须建议咨询医生
-
-### 隐私保护
-- ✅ 所有数据保持本地
-- ✅ 无外部API调用
-- ✅ HTML报告独立运行
-
-## 相关命令
-
-- `/ai analyze` - AI综合分析
-- `/ai predict [risk_type]` - 健康风险预测
-- `/ai chat [query]` - 自然语言问答
-- `/ai report generate [type]` - 生成AI健康报告
-- `/ai status` - 查看AI功能状态
-
-## 技术实现
-
-### 工具限制
-此
+- 

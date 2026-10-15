@@ -21,16 +21,15 @@ Use this skill whenever you need a dedicated, isolated "brain" to handle a speci
 
 ## Why this exists
 
-Subagents live inside plugins at `<appDataDir>\config\plugins\`. For
+The contributed example assumes a Windows-style host layout `<appDataDir>\config\plugins\`; it is not a universal Codex/Claude plugin path. For
 a subagent to be properly registered and invokable, it needs to be inside a
 plugin's `agents/` directory with a valid `plugin.json`. Getting this structure
 right manually is tedious and error-prone. This skill automates the entire
-process so the user can go from "I want an agent that reviews code" to a fully
-functional, properly structured subagent in under a minute.
+process so the user can go from "I want an agent that reviews code" to a reviewable agent package. Activation requires host-specific schema validation and an actual invocation check.
 
 ## Target directory
 
-All agents are created inside plugins at:
+Confirm the user's target host and its supported schema/path first. Codex and Claude distribution remain intentionally blocked in this skill's metadata until compatible packaging is validated. Do not remove these blocks merely because a folder can be created. The legacy example layout is:
 ```
 <appDataDir>\config\plugins\<plugin-name>\
 ```
@@ -48,8 +47,7 @@ Before creating any path, validate both `<agent-name>` and `<plugin-name>`:
 
 ## Workflow
 
-Follow these steps in order. Do NOT skip the interview — even a one-line
-description from the user needs to be expanded into a proper persona.
+Use information already supplied, make routine reversible drafting choices, and ask only for material missing host, purpose or placement requirements. Creating a persona does not grant permission to spawn agents or modify global host configuration.
 
 ### Step 1: Gather requirements
 
@@ -67,7 +65,7 @@ appropriate, or ask conversationally if the flow is natural):
    - Default: create a new plugin named `<agent-name>-plugin`
 
 4. **Companion skill** — Should I also create a routing skill that auto-triggers
-   this agent? (Default: yes)
+   this agent? (Create only when requested)
 
 ### Step 2: Generate the persona
 
@@ -87,7 +85,7 @@ A good persona includes:
 
 For example, if the user says "for reviewing code", generate a persona like:
 
-> You are a senior code reviewer with 15+ years of experience across multiple
+> Act as a careful code reviewer working across multiple
 > languages and paradigms. You approach every review with three priorities:
 > correctness first, maintainability second, performance third. You never
 > approve code you haven't fully understood. You flag security vulnerabilities
@@ -106,25 +104,4 @@ plugins/<plugin-name>/
 ├── plugin.json
 ├── agents/
 │   └── <agent-name>.md
-└── skills/                    (only if companion skill requested)
-    └── use-<agent-name>/
-        └── SKILL.md
-```
-
-### Step 4: Write plugin.json
-
-If creating a new plugin, write a minimal `plugin.json`:
-
-```json
-{
-  "name": "<plugin-name>",
-  "description": "<Brief description of what this plugin provides>",
-  "version": "1.0.0"
-}
-```
-
-If adding to an existing plugin, do NOT modify the existing `plugin.json`.
-
-### Step 5: Write the agent file
-
-Write the `<agent-name>.md` file in the `agents/` fo
+└── skills/                    (only i

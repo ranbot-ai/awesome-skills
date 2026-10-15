@@ -3,7 +3,7 @@ name: agentfolio
 description: Skill for discovering and researching autonomous AI agents, tools, and ecosystems using the AgentFolio directory. 
 category: AI & Agents
 source: antigravity
-tags: [api, ai, agent, workflow, design, security, cro, marketing]
+tags: [api, ai, agent, workflow, design, document, security, cro, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agentfolio
 ---
 
@@ -65,7 +65,7 @@ This skill helps you:
 - For each relevant agent:
   - Note supported platforms (GitHub, GitLab, Jenkins, etc.).
   - Capture how they explain autonomy and safety boundaries.
-  - Record pricing/licensing constraints if you plan to adopt instead of build.
+  - Verify current pricing/licensing and advertised benchmarks against the vendor's primary documentation before recommending adoption.
 
 ### 2) Competitive and inspiration research for a new skill
 
@@ -77,7 +77,7 @@ This skill helps you:
 ### 3) Vendor shortlisting
 
 - When choosing between multiple agent vendors:
-  - Use AgentFolio entries as a neutral directory.
+  - Use AgentFolio entries as discovery leads; do not assume neutrality or independent verification.
   - Build a comparison table (columns: capabilities, integrations, pricing, trust & security).
   - Use that table to drive a more formal evaluation or proof-of-concept.
 
@@ -97,6 +97,7 @@ This skill is applicable when you need to **discover or compare autonomous AI ag
 - When you want inspiration or best practices from existing agent products.
 
 ## Limitations
+- Directory entries can be stale or promotional. Record access dates, distinguish vendor claims from independent evidence, and mark missing information rather than inventing capabilities.
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.

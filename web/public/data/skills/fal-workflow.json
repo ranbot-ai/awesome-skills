@@ -3,15 +3,19 @@
   "name": "fal-workflow",
   "slug": "fal-workflow",
   "description": "Generate workflow JSON files for chaining AI models",
-  "category": "AI & Agents",
+  "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fal-workflow",
-  "content": "\n# Fal Workflow\n\n## Overview\n\nGenerate workflow JSON files for chaining AI models\n\n## When to Use This Skill\n\nUse this skill when you need to work with generate workflow json files for chaining ai models.\n\n## Instructions\n\nThis skill provides guidance and patterns for generate workflow json files for chaining ai models.\n\nFor more information, see the [source repository](https://github.com/fal-ai-community/skills/blob/main/skills/claude.ai/fal-workflow/SKILL.md).\n\n## Example\n\n**User request:**\n\n> Generate workflow JSON files for chaining AI models.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
+  "content": "\n# Fal Workflow\n\n## Overview\n\nGenerate workflow JSON files for chaining AI models\n\n## When to Use\n\nCreate a reviewable graph for a multi-step fal.ai media workflow, or plan an\nexplicitly authorized run through an already available integration.\n\n## Workflow Authoring\n\nResolve inputs, outputs, dependencies, model schemas, privacy and cost limits.\nDistinguish a portable JSON deliverable from local CLI orchestration; AAS does not\nbundle the upstream CLI or references. Inspect current endpoint schemas before\nchoosing models. Keep node IDs consistent with keys and include every referenced\nnode in dependencies. Use `run` or `display` nodes for the documented JSON runtime;\ninput fields belong in its input schema. Whole-value references are distinct from\nunsupported string interpolation.\n\nThis illustrative node fragment requires a matching real producer and surrounding\nworkflow schema; it is not a standalone runnable file:\n\n```json\n{\"id\":\"output\",\"type\":\"display\",\"depends\":[\"image\"],\"fields\":{\"image\":\"$image.images.0.url\"}}\n```\n\nValidate graph references and real model contracts before delivery. Drafting does\nnot authorize upload, execution or publication. Report schema validation and actual\njob execution separately; no “production-ready” guarantee.\n\nCurrent richer source: [fal workflow](https://github.com/fal-ai-community/skills/blob/main/skills/fal-workflow/SKILL.md).\n\n## Example\n\n**User request:**\n\n> Generate workflow JSON files for chaining AI models.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
   "tags": [
+    "node",
     "claude",
     "ai",
-    "workflow"
+    "workflow",
+    "document",
+    "image",
+    "rag"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-31T06:52:06.560Z"

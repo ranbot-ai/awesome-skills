@@ -1,9 +1,9 @@
 ---
 name: ai-inference-service-mesh
-description: Use service mesh patterns for AI inference traffic management, mTLS, canary releases, policy enforcement, and cross-cluster resilience. 
+description: Use verified service mesh patterns for AI inference traffic management, mTLS, canary releases, policy enforcement, and cross-cluster resilience. 
 category: AI & Agents
 source: antigravity
-tags: [api, ai, agent, llm, template, security, rag, cro]
+tags: [api, ai, agent, llm, template, design, security, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-inference-service-mesh
 ---
 
@@ -23,8 +23,11 @@ Apply Istio/Linkerd mesh controls to secure and optimize east-west AI traffic ac
 
 ## Prerequisites
 
+Confirm the exact cluster/context, mesh version, CRD schemas, owned namespace and authorized mutation scope. Examples are alternative fragments, not a manifest to apply wholesale: multiple DestinationRules for the same host must be consolidated under the installed version's merge rules. Preview and validate in a disposable environment; protect production routes and rollback evidence.
+
+
 ```bash
-# Install Istio with production profile
+# Illustrative mutating install; default is not a validated production configuration
 istioctl install --set profile=default \
   --set meshConfig.accessLogFile=/dev/stdout \
   --set meshConfig.defaultConfig.holdApplicationUntilProxyStarts=true
@@ -127,38 +130,12 @@ spec:
     protocol: TLS
   resolution: DNS
   location: MESH_EXTERNAL
----
-apiVersion: networking.istio.io/v1alpha3
-kind: DestinationRule
-metadata:
-  name: openai-api-tls
-  namespace: ai-inference
-spec:
-  host: api.openai.com
-  trafficPolicy:
-    tls:
-      mode: SIMPLE
-    connectionPool:
-      http:
-        h2UpgradePolicy: UPGRADE
-      tcp:
-        maxConnections: 50
----
-apiVersion: security.istio.io/v1beta1
-kind: AuthorizationPolicy
-metadata:
-  name: restrict-egress
-  namespace: ai-inference
-spec:
-  action: ALLOW
-  rules:
-  - to:
-    - operation:
-        hosts:
-        - "api.openai.com"
-        - "models.anthropic.com"
-        - "*.blob.core.windows.net"
+
 ```
+
+A `ServiceEntry` registers a service; it is not a complete egress firewall. Namespace `AuthorizationPolicy` controls requests to selected workloads, not arbitrary outbound HTTPS by destination host. Enforce approved egress through a verified gateway/network policy and test bypass routes. For application-originated HTTPS, do not also originate TLS in a DestinationRule without a designed HTTP-to-TLS route (double TLS breaks the connection).
+
+Official guidance: [Istio egress control](https://istio.io/latest/docs/tasks/traffic-management/egress/egress-control/).
 
 ## Traffic Management
 
@@ -221,22 +198,4 @@ metadata:
   name: model-server
   namespace: ai-inference
 spec:
-  host: model-server
-  trafficPolicy:
-    connectionPool:
-      http:
-        h2UpgradePolicy: UPGRADE
-        maxRequestsPerConnection: 100
-      tcp:
-        maxConnections: 200
-        connectTimeout: 5s
-    loadBalancer:
-      simple: LEAST_REQUEST
-  subsets:
-  - name: v1-stable
-    labels:
-      version: v1
-    trafficPolicy:
-      connectionPool:
-        http:
-          maxRequestsPerConnection: 5
+  h

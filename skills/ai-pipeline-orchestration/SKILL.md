@@ -3,7 +3,7 @@ name: ai-pipeline-orchestration
 description: Orchestrate AI/ML pipelines for data ingestion, model training, batch inference, and RAG indexing using Prefect, Airflow, or Dagster. 
 category: Document Processing
 source: antigravity
-tags: [python, node, api, ai, agent, llm, gpt, workflow, template, document]
+tags: [python, node, api, ai, agent, llm, workflow, template, design, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-pipeline-orchestration
 ---
 
@@ -20,6 +20,10 @@ Use this skill when:
 - Running nightly model evaluation and fine-tuning jobs
 - Building ETL pipelines that feed into AI models
 - Managing dependencies between data preparation and model serving
+
+## Execution contract
+
+These are application design fragments: adapters, datasets, model files, secrets, vector schemas and deployment handlers are not bundled. Pin supported framework/provider versions, select the actual target and permissions, and authorize schedules, provider charges and writes separately. Use synthetic fixtures first; preserve private data, validate fetched sources, and persist versioned checkpoints to avoid repeating side effects.
 
 ## Tool Selection
 
@@ -42,9 +46,9 @@ prefect server start
 prefect worker start --pool default-agent-pool
 ```
 
-## Prefect: RAG Ingestion Pipeline
+## Prefect: RAG ingestion design sketch (not executable)
 
-```python
+```text
 from prefect import flow, task, get_run_logger
 from prefect.tasks import task_input_hash
 from datetime import timedelta
@@ -105,15 +109,15 @@ if __name__ == "__main__":
 
 ```python
 from prefect import flow, task
-from prefect.concurrency.sync import concurrency
+from prefect.concurrency.asyncio import concurrency
 import asyncio
 from openai import AsyncOpenAI
 
-@task(retries=3, retry_delay_seconds=60)
-async def process_batch(items: list[dict], model: str = "gpt-4o-mini") -> list[dict]:
+@task(retries=0)  # A batch retry can repeat successful billable calls
+async def process_batch(items: list[dict], model: str) -> list[dict]:
     """Process a batch of items through LLM with rate limit protection."""
-    client = AsyncOpenAI()
-    async with concurrency("openai-api", occupy=len(items)):  # rate limit
+    client = AsyncOpenAI(timeout=60.0, max_retries=0)
+    async with concurrency("openai-api", occupy=len(items), timeout_seconds=30, strict=True):  # Concurrent slots, not requests per minute
         tasks = [
             client.chat.completions.create(
                 model=model,
@@ -124,29 +128,10 @@ async def process_batch(items: list[dict], model: str = "gpt-4o-mini") -> list[d
         ]
         responses = await asyncio.gather(*tasks, return_exceptions=True)
 
+    await client.close()
     results = []
     for item, response in zip(items, responses):
         if isinstance(response, Exception):
-            results.append({**item, "error": str(response), "output": None})
+            results.append({**item, "error": type(response).__name__, "output": None})
         else:
-            results.append({**item, "output": response.choices[0].message.content})
-    return results
-
-@flow(name="batch-llm-inference")
-async def batch_inference_flow(input_file: str, output_file: str, batch_size: int = 50):
-    import json
-    items = [json.loads(line) for line in open(input_file)]
-    batches = [items[i:i+batch_size] for i in range(0, len(items), batch_size)]
-
-    all_results = []
-    for batch in batches:
-        results = await process_batch(batch)
-        all_results.extend(results)
-
-    with open(output_file, "w") as f:
-        for result in all_results:
-            f.write(json.dumps(result) + "\n")
-    return len(all_results)
-```
-
-## Airflow: Model 
+            results.append({**item, "output": response.choices[

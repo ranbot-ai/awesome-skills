@@ -12,7 +12,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-l
 
 ## Overview
 
-Turn a brand name, industry, or reference image into logo concepts and a scalable brand mark, from inside Claude Code, Codex, or OpenClaw. The work is produced on the hosted, paid Beatra service
+Turn a brand name, industry, or reference image into logo concepts; verify vector geometry, small-size legibility and trademark rights before treating a raster generation as a scalable brand mark, from inside Claude Code, Codex, or OpenClaw. The work is produced on the hosted, paid Beatra service
 (`mcp.beatra.ai`).
 
 This catalog entry is a **reviewed pointer, not the executable package**. It
@@ -51,7 +51,7 @@ for approval. Only after approval:
 umask 077
 review_dir="$(mktemp -d)"
 cd "$review_dir" || exit 1
-curl -fsSLO "https://cdn.beatra.ai/agent-packages/ai-logo-maker/v0.1.7/ai-logo-maker-skill-0.1.7.zip"
+curl --connect-timeout 10 --max-time 60 -fsSO "https://cdn.beatra.ai/agent-packages/ai-logo-maker/v0.1.7/ai-logo-maker-skill-0.1.7.zip"
 printf '%s  %s\n' \
   'a6ce019ccb55abf017d6c68233dc9804e8534d5cb4e1c27c2646fb31f59eac55' \
   'ai-logo-maker-skill-0.1.7.zip' | shasum -a 256 -c -
@@ -62,15 +62,19 @@ catalog entry, not from a file on the same CDN.
 
 ### Step 2: Inspect before activation
 
+Preflight every ZIP member before extraction: reject absolute/traversing names, entries outside this package root, duplicates/case collisions, symlinks/devices/executable files, and excessive file count or expanded size. Extract only within the fresh private review directory after these checks pass; post-extraction link checks cannot prevent an escape.
+
 ```bash
 unzip -l ai-logo-maker-skill-0.1.7.zip
+
+# Only after complete member preflight passes:
 unzip -q ai-logo-maker-skill-0.1.7.zip
 find ai-logo-maker -type l -print            # expect no output
 find ai-logo-maker -type f -perm -111 -print # expect no output
 grep -n '"auto_update": True' ai-logo-maker/scripts/mcp_client.py
 ```
 
-Optionally confirm byte identity with the public source tree (a second,
+Confirm byte identity before activation with the public source tree (a second,
 independent host):
 
 ```bash
@@ -97,7 +101,7 @@ turn off silent self-update for that exact path:
 
 ```bash
 dest="$HOME/.claude/skills/ai-logo-maker"
-test ! -e "$dest" || { echo "destination exists; stop and ask the user"; exit 1; }
+test ! -e "$dest" && test ! -L "$dest" || { echo "destination exists; stop and ask the user"; exit 1; }
 cp -R ai-logo-maker "$dest"
 python3 "$dest/scripts/mcp_client.py" update --auto off
 ```
@@ -105,21 +109,4 @@ python3 "$dest/scripts/mcp_client.py" update --auto off
 The last command must print
 `Automatic Beatra package updates are disabled.` It writes only
 `~/.beatra/updates/<id>/state.json` and makes no network request. Run it
-before `authorize.py`, `verify`, `tools`, `upload`, or `call`: in this
-pinned version self-update is **on by default**. The setting is keyed to the
-resolved install path, so repeat it after moving or re-copying the directory.
-
-### Step 4: Authorize as its own decision
-
-Authorization opens a browser sign-in and stores a bearer token. Ask first.
-
-```bash
-python3 "$dest/scripts/authorize.py"
-```
-
-Start a new agent session if the host discovers skills only at startup.
-
-## How It Works
-
-1. Read the installed package's `SKILL.md` and its references; they define the
-   routes, payload shapes, and rev
+before `authorize.py`, `verify`

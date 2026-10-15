@@ -2,7 +2,7 @@
   "id": "antigravity-code-refactoring-context-restore",
   "name": "code-refactoring-context-restore",
   "slug": "code-refactoring-context-restore",
-  "description": "Use when working with code refactoring context restore",
+  "description": "Resume interrupted project work from a handoff and current checkout evidence; reconcile completed work, pending changes and existing user constraints.",
   "category": "Development & Code Tools",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",

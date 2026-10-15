@@ -32,11 +32,13 @@ Also use it when the user says "who holds admin rights on each system, with a ba
 spreadsheet, a document or someone inboxes.
 
 Do not use it for: payroll calculation, tax filing, or legal advice. This skill produces
-empty templates only - it never holds or processes real employee or customer data.
+empty templates by default. A requested review may transiently use supplied data; minimize it rather than promising the host never processes it.
 
 ## How It Works
 
 Follow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.
+
+The upstream shared execution contract is not bundled; use this file directly. For an account-by-account register, derive a separate confirmed account identifier and grain instead of repeating the system aggregate counts on every account. Store a vault reference only, never passwords, tokens or recovery codes.
 
 ### Step 1 - Identify intent
 
@@ -88,7 +90,7 @@ open_questions: []      # the unanswered ones, in the order worth asking
 
 If an artifact was requested, build it after resolving essential missing facts. Otherwise give a short recommendation and offer the relevant artifact.
 
-**Recommended approach:** Keep one row per named admin account with a system, an owner and a last-reviewed date. Shared logins are the first thing to fix.
+**Recommended approach:** Keep one row per system with named main and backup admins, aggregate admin count and review dates. Shared logins are the first thing to fix.
 
 **Why this one:** Privileged accounts are the ones that matter after someone leaves. Naming an owner per account is what makes removal possible.
 
@@ -106,11 +108,4 @@ Notion step there.** When the user selects Notion, hand that step to
 mapping, the import steps and the verification checklist, and it renders the Field
 Reference below instead of defining a table of its own. Do not restate the mapping
 here and do not improvise the import steps. Manual CSV and mapping outputs need no
-connection. For requested workspace changes, follow the shared contract: verify actual
-tool access and the target before writing. A user saying "connected" is not tool evidence.
-Never ask for a Notion password or token.
-
-For an Excel-compatible CSV, use UTF-8 with a byte order mark so Excel opens the
-text correctly. A CSV is not an `.xlsx` workbook; create `.xlsx` only when the user
-requests a workbook.
-A CSV carries no types, so after it, name
+connection. For requested workspace changes, follow the share

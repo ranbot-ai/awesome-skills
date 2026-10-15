@@ -2,7 +2,7 @@
   "id": "antigravity-django-access-review",
   "name": "django-access-review",
   "slug": "django-access-review",
-  "description": "Review Django and DRF authorization flows for IDOR, object permissions, query scoping, and tenant isolation.",
+  "description": "Use when reviewing Django or DRF access control: trace authorization flows, IDOR risks, object permissions, query scoping and tenant isolation before proposing a verified fix.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -13,8 +13,7 @@
     "markdown",
     "api",
     "ai",
-    "document",
-    "rag"
+    "document"
   ],
   "useCases": [
     "You need to review Django or DRF code for access control gaps, IDOR risk, or object-level authorization failures.",

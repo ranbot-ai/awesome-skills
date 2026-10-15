@@ -49,8 +49,7 @@ Not for payroll, tax, legal, or employment-decision work. This skill does not au
 
 Follow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.
 
-The rules below stand on their own. If the shared execution contract at
-`../../references/execution-contract.md` is unavailable, follow this file directly; a missing
+The rules below stand on their own. If the upstream shared execution contract (not bundled here) is unavailable, follow this file directly; a missing
 reference never blocks basic execution.
 
 ### Step 1 - Identify intent
@@ -66,7 +65,7 @@ here and in the context block with the same spelling:
 | `convert` | "move it from our sheet/forms" | Capture their process, then Step 2 |
 | `export` | "give me the CSV / SQL / JSON / Notion" for confirmed rules | Step 5 |
 
-One message, one question, no batching. Never ask a question whose answer would not change the
+Prefer one concise question for a material ambiguity; bundle related missing facts when the user prefers it. Never ask a question whose answer would not change the
 recommendation or the requested artifact.
 
 ### Scope boundary
@@ -121,7 +120,4 @@ intent: null            # advice | review | build | convert | export
 scale: null             # only when the answer changes the recommendation
 areas:
   "Subject": null
-  "Relationships": null
-  "Visibility": null
-  "Scoring": null
-  
+  "Relations

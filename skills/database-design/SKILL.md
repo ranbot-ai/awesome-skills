@@ -3,7 +3,7 @@ name: database-design
 description: Database design principles and decision-making. Schema design, indexing strategy, ORM selection, serverless databases. 
 category: Creative & Media
 source: antigravity
-tags: [ai, workflow, design, prisma]
+tags: [ai, design, prisma]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/database-design
 ---
 
@@ -56,7 +56,7 @@ Before designing schema:
 ❌ Ignore N+1 queries
 
 ## When to Use
-This skill is applicable to execute the workflow or actions described in the overview.
+Use when selecting a database model, reviewing schema relationships and indexes, or assessing a proposed schema with the bundled advisory tools.
 
 ## Schema helper
 

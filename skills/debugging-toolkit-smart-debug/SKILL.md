@@ -1,6 +1,6 @@
 ---
 name: debugging-toolkit-smart-debug
-description: Use when working with debugging toolkit smart debug 
+description: Diagnose failures from reproduction steps, traces, logs and code; test hypotheses and verify a scoped fix without inventing production evidence. 
 category: Document Processing
 source: antigravity
 tags: [typescript, node, api, ai, agent, workflow, document, rag]
@@ -10,8 +10,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/debu
 
 ## Use this skill when
 
-- Working on debugging toolkit smart debug tasks or workflows
-- Needing guidance, best practices, or checklists for debugging toolkit smart debug
+- A reproducible failure or intermittent incident needs evidence-driven debugging.
+- Existing telemetry must be compared with source and deployment changes before patching.
 
 ## Do not use this skill when
 
@@ -41,7 +41,7 @@ Parse for:
 ## Workflow
 
 ### 1. Initial Triage
-Use Task tool (subagent_type="debugger") for AI-powered analysis:
+Analyze directly; use a debugger subagent only when the user authorizes delegation and the host exposes that capability:
 - Error pattern recognition
 - Stack trace analysis with probable causes
 - Component dependency analysis
@@ -67,7 +67,7 @@ Query for:
 
 ### 3. Hypothesis Generation
 For each hypothesis include:
-- Probability score (0-100%)
+- Qualitative confidence and what evidence would change it; do not invent calibrated probabilities
 - Supporting evidence from logs/traces/code
 - Falsification criteria
 - Testing approach
@@ -87,7 +87,7 @@ Select based on issue characteristics:
 **Interactive Debugging**: Reproducible locally → VS Code/Chrome DevTools, step-through
 **Observability-Driven**: Production issues → Sentry/DataDog/Honeycomb, trace analysis
 **Time-Travel**: Complex state issues → rr/Redux DevTools, record & replay
-**Chaos Engineering**: Intermittent under load → Chaos Monkey/Gremlin, inject failures
+**Controlled Fault Reproduction**: Use an isolated test environment and bounded authorized faults; never infer permission for production chaos tests
 **Statistical**: Small % of cases → Delta debugging, compare success vs failure
 
 ### 5. Intelligent Instrumentation
@@ -100,7 +100,9 @@ AI suggests optimal breakpoint/logpoint locations:
 
 Use conditional breakpoints and logpoints for production-like environments.
 
-### 6. Production-Safe Techniques
+### 6. Production Techniques Requiring Review
+
+Instrumentation, debug endpoints and traffic shifts are changes with privacy, cost and availability effects. Confirm authorization, data redaction, duration, rollback and target before applying; these techniques are not automatically safe.
 **Dynamic Instrumentation**: OpenTelemetry spans, non-invasive attributes
 **Feature-Flagged Debug Logging**: Conditional logging for specific users
 **Sampling-Based Profiling**: Continuous profiling with minimal overhead (Pyroscope)
@@ -144,27 +146,6 @@ Success criteria:
 - Add monitoring/alerts for similar issues
 - Document troubleshooting steps in runbook
 
-## Example: Minimal Debug Session
+## Example: Illustrative Debug Session
 
-```typescript
-// Issue: "Checkout timeout errors (intermittent)"
-
-// 1. Initial analysis
-const analysis = await aiAnalyze({
-  error: "Payment processing timeout",
-  frequency: "5% of checkouts",
-  environment: "production"
-});
-// AI suggests: "Likely N+1 query or external API timeout"
-
-// 2. Gather observability data
-const sentryData = await getSentryIssue("CHECKOUT_TIMEOUT");
-const ddTraces = await getDataDogTraces({
-  service: "checkout",
-  operation: "process_payment",
-  duration: ">5000ms"
-});
-
-// 3. Analyze traces
-// AI identifies: 15+ sequential DB queries per checkout
-// Hypo
+The helpers, spans and metrics below are pseudocode for a hypothetical case; no implementation, telemetry integration

@@ -1,19 +1,15 @@
 ---
 name: agentic-actions-auditor
-description: Audits GitHub Actions workflows for security vulnerabilities in AI agent integrations  including Claude Code Action,  Gemini CLI, OpenAI Codex, and GitHub AI  Inference.  Detects attack vectors where 
+description: Audits GitHub Actions workflows for security vulnerabilities in AI agent integrations including Claude Code Action, Gemini CLI, OpenAI Codex, and GitHub AI  Inference. Detects attack vectors where att
 category: AI & Agents
 source: antigravity
-tags: [python, node, api, claude, ai, agent, workflow, document, security, cro]
+tags: [python, javascript, node, api, claude, ai, agent, workflow, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agentic-actions-auditor
 ---
 
 ## Supporting material availability
 
-This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
-
-
-Ask for the original supporting material or an existing installation before using a step that depends on these paths; this catalog does not identify a verified download source for them. Resolve each path relative to that installation, inspect its contents, and verify any applicable license and execution prerequisites. Do not run a command or claim a referenced procedure was followed until its required file exists. Do not fabricate the missing scripts or treat an unrelated file with the same name as equivalent. Independent steps fully documented here can proceed within the user’s authorized scope; report any dependent step as unavailable.
-
+This AAS tree bundles the inline methodology only. The contributed guide named a foundations file, action profiles, cross-file resolution and nine vector reference files, but those files and an independently verified upstream source are absent. Do not claim they were read. Apply the inline checks below and report unsupported action-version details as unverified; recover external materials only from a verified source with a confirmed license.
 
 # Agentic Actions Auditor
 
@@ -75,4 +71,12 @@ Strip trailing slashes, `.git` suffix, and `www.` prefix. Handle both `http://` 
 
 #### Fetch Workflow Files
 
-Use 
+Use a two-step approach with `gh api`:
+
+1. **List workflow directory:**
+   ```
+   gh api repos/{owner}/{repo}/contents/.github/workflows --paginate --jq '.[].name'
+   ```
+   Resolve the requested/default ref to a full SHA and use that SHA on every fetch; URL-encode path/ref components and pass endpoints as quoted structured arguments.
+
+2. **Filter for YAML files:*

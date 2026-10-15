@@ -3,7 +3,7 @@ name: agent-orchestration-multi-agent-optimize
 description: Optimize multi-agent systems with coordinated profiling, workload distribution, and cost-aware orchestration. Use when improving agent performance, throughput, or reliability. 
 category: AI & Agents
 source: antigravity
-tags: [python, api, claude, ai, agent, llm, gpt, workflow, design, rag]
+tags: [api, ai, agent, llm, workflow, design, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-orchestration-multi-agent-optimize
 ---
 
@@ -30,6 +30,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agen
 3. Apply orchestration changes and cost controls incrementally.
 4. Validate improvements with repeatable tests and rollbacks.
 
+## Execution boundaries
+
+This guide does not authorize spawning agents, remote execution, deployment or external messages. Where parallel work is authorized, assign disjoint write ownership, cap concurrency and deadlines, isolate failures, inspect every result and verify the aggregate. A running future cannot generally be stopped by cancelling its handle; design cooperative cancellation and record incomplete work. Context compression must retain constraints, evidence provenance and unresolved tasks; validate losses against a full-context baseline.
+
 ## Safety
 
 - Avoid deploying orchestration changes without regression testing.
@@ -39,7 +43,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agen
 
 ### Context
 
-The Multi-Agent Optimization Tool is an advanced AI-driven framework designed to holistically improve system performance through intelligent, coordinated agent-based optimization. Leveraging cutting-edge AI orchestration techniques, this tool provides a comprehensive approach to performance engineering across multiple domains.
+This is an orchestration design guide, not a bundled framework. Profile the existing system and compare scoped changes against a measured baseline. Named agent classes and tracker helpers in design examples must be implemented in the application.
 
 ### Core Capabilities
 
@@ -84,9 +88,9 @@ The tool processes optimization arguments with flexible input parameters:
    - Network request optimization
    - Core Web Vitals monitoring
 
-### Profiling Code Example
+### Profiling design sketch (not executable)
 
-```python
+```text
 def multi_agent_profiler(target_system):
     agents = [
         DatabasePerformanceAgent(target_system),
@@ -110,9 +114,9 @@ def multi_agent_profiler(target_system):
 - Dynamic context window resizing
 - Token budget management
 
-### Context Compression Algorithm
+### Context compression design sketch (not executable)
 
-```python
+```text
 def compress_context(context, max_tokens=4000):
     # Semantic compression using embedding-based truncation
     compressed_context = semantic_truncate(
@@ -132,9 +136,9 @@ def compress_context(context, max_tokens=4000):
 - Dynamic workload distribution
 - Fault-tolerant agent interactions
 
-### Orchestration Framework
+### Orchestration design sketch (not executable)
 
-```python
+```text
 class MultiAgentOrchestrator:
     def __init__(self, agents):
         self.agents = agents
@@ -152,31 +156,4 @@ class MultiAgentOrchestrator:
             for future in concurrent.futures.as_completed(futures):
                 agent = futures[future]
                 result = future.result()
-                self.performance_tracker.log(agent, result)
-```
-
-## 4. Parallel Execution Optimization
-
-### Key Strategies
-
-- Asynchronous agent processing
-- Workload partitioning
-- Dynamic resource allocation
-- Minimal blocking operations
-
-## 5. Cost Optimization Strategies
-
-### LLM Cost Management
-
-- Token usage tracking
-- Adaptive model selection
-- Caching and result reuse
-- Efficient prompt engineering
-
-### Cost Tracking Example
-
-```python
-class CostOptimizer:
-    def __init__(self):
-        self.token_budget = 100000  # Monthly budget
-      
+                self.perf

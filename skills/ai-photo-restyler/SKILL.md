@@ -12,7 +12,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-p
 
 ## Overview
 
-Turn a photo into anime, manga, comic, cartoon, watercolor, clay, or 3D character art while the subject stays recognizable, and reuse the same look across a whole set, from inside Claude Code, Codex, or OpenClaw. The work is produced on the hosted, paid Beatra service
+Turn a photo into anime, manga, comic, cartoon, watercolor, clay, or 3D character art then review likeness and style consistency across the set rather than assuming they are preserved, from inside Claude Code, Codex, or OpenClaw. The work is produced on the hosted, paid Beatra service
 (`mcp.beatra.ai`).
 
 This catalog entry is a **reviewed pointer, not the executable package**. It
@@ -51,7 +51,7 @@ for approval. Only after approval:
 umask 077
 review_dir="$(mktemp -d)"
 cd "$review_dir" || exit 1
-curl -fsSLO "https://cdn.beatra.ai/agent-packages/ai-photo-restyler/v0.1.4/ai-photo-restyler-skill-0.1.4.zip"
+curl --connect-timeout 10 --max-time 60 -fsSO "https://cdn.beatra.ai/agent-packages/ai-photo-restyler/v0.1.4/ai-photo-restyler-skill-0.1.4.zip"
 printf '%s  %s\n' \
   'ac7e4070f7e931a095f55c19ee09adb4ba70f4880fb66dbfe755823e3bfa2449' \
   'ai-photo-restyler-skill-0.1.4.zip' | shasum -a 256 -c -
@@ -62,15 +62,19 @@ catalog entry, not from a file on the same CDN.
 
 ### Step 2: Inspect before activation
 
+Preflight all ZIP member names/modes/sizes before extraction. Reject traversal/absolute or out-of-package paths, duplicate/case-colliding entries, symlinks/devices/executable/binary files, and excessive count/expanded size. Extract only afterward into the fresh private directory; post-extraction checks do not prevent an escape.
+
 ```bash
 unzip -l ai-photo-restyler-skill-0.1.4.zip
+
+# Only after complete member preflight passes:
 unzip -q ai-photo-restyler-skill-0.1.4.zip
 find ai-photo-restyler -type l -print            # expect no output
 find ai-photo-restyler -type f -perm -111 -print # expect no output
 grep -n '"auto_update": True' ai-photo-restyler/scripts/mcp_client.py
 ```
 
-Optionally confirm byte identity with the public source tree (a second,
+Confirm byte identity before activation with the public source tree (a second,
 independent host):
 
 ```bash
@@ -97,24 +101,11 @@ turn off silent self-update for that exact path:
 
 ```bash
 dest="$HOME/.claude/skills/ai-photo-restyler"
-test ! -e "$dest" || { echo "destination exists; stop and ask the user"; exit 1; }
+test ! -e "$dest" && test ! -L "$dest" || { echo "destination exists; stop and ask the user"; exit 1; }
 cp -R ai-photo-restyler "$dest"
 python3 "$dest/scripts/mcp_client.py" update --auto off
 ```
 
 The last command must print
 `Automatic Beatra package updates are disabled.` It writes only
-`~/.beatra/updates/<id>/state.json` and makes no network request. Run it
-before `authorize.py`, `verify`, `tools`, `upload`, or `call`: in this
-pinned version self-update is **on by default**. The setting is keyed to the
-resolved install path, so repeat it after moving or re-copying the directory.
-
-### Step 4: Authorize as its own decision
-
-Authorization opens a browser sign-in and stores a bearer token. Ask first.
-
-```bash
-python3 "$dest/scripts/authorize.py"
-```
-
-Start a new agent session if the host discovers skills o
+`~/.beatra/updates/<id>/state.json` and makes no network request. Ru

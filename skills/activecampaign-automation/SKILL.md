@@ -20,13 +20,17 @@ Automate ActiveCampaign CRM and marketing automation operations through Composio
 
 ## Setup
 
-**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
+**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. Authentication and permissions depend on the host and current Rube integration; adding an endpoint alone does not prove access. Apply host configuration only when authorized.
 
 
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `active_campaign`
 3. If connection is not ACTIVE, follow the returned auth link to complete ActiveCampaign authentication
 4. Confirm connection status shows ACTIVE before running any workflows
+
+## Authorization and verification
+
+Tool slugs and parameter notes are examples; discovered current schemas take precedence. Identify the exact account, contacts and requested mutations, read existing state, and check whether tags or automation enrollment trigger outbound messages. Contact creation does not imply subscription consent. Obtain explicit authorization for sending/enrollment with those effects, and preserve unsubscribe/suppression status. Read results back; reconcile timeouts before retrying non-idempotent operations.
 
 ## Core Workflows
 
@@ -35,8 +39,8 @@ Automate ActiveCampaign CRM and marketing automation operations through Composio
 **When to use**: User wants to create new contacts or look up existing ones
 
 **Tool sequence**:
-1. `ACTIVE_CAMPAIGN_FIND_CONTACT` - Search for an existing contact [Optional]
-2. `ACTIVE_CAMPAIGN_CREATE_CONTACT` - Create a new contact [Required]
+1. `ACTIVE_CAMPAIGN_FIND_CONTACT` - Search for an exact existing contact before a requested create/update
+2. `ACTIVE_CAMPAIGN_CREATE_CONTACT` - Create only when requested and not already present; lookup-only requests perform no create
 
 **Key parameters for find**:
 - `email`: Search by email address
@@ -111,22 +115,4 @@ Automate ActiveCampaign CRM and marketing automation operations through Composio
 
 **Key parameters**:
 - `contact_email`: Email of the contact to enroll (required)
-- `automation_id`: ID of the target automation (required)
-
-**Pitfalls**:
-- The contact must already exist in ActiveCampaign
-- Automations can only be created through the ActiveCampaign UI, not via API
-- `automation_id` must reference an existing, active automation
-- The tool performs a two-step process: lookup contact by email, then enroll
-- Automation IDs can be found in the ActiveCampaign UI or via GET /api/3/automations
-
-### 5. Create Contact Tasks
-
-**When to use**: User wants to create follow-up tasks associated with contacts
-
-**Tool sequence**:
-1. `ACTIVE_CAMPAIGN_FIND_CONTACT` - Find the contact to associate the task with [Prerequisite]
-2. `ACTIVE_CAMPAIGN_CREATE_CONTACT_TASK` - Create the task [Required]
-
-**Key parameters**:
-- `re
+- `aut

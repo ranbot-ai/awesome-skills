@@ -1,9 +1,9 @@
 ---
 name: ai-dev-jobs-mcp
-description: Search 8,400+ AI and ML jobs across 489 companies, inspect listings and employers, match roles, and view salary and market stats via AI Dev Jobs MCP 
-category: Development & Code Tools
+description: Search indexed AI and ML jobs, inspect listings and employers, match roles, and view salary and market stats via AI Dev Jobs MCP 
+category: Document Processing
 source: antigravity
-tags: [python, api, mcp, claude, ai, agent, llm, workflow, design, cro]
+tags: [python, api, mcp, claude, ai, agent, llm, workflow, template, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-dev-jobs-mcp
 ---
 
@@ -12,7 +12,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-d
 
 ## Overview
 
-AI Dev Jobs is a remote MCP server that gives AI agents access to a live index of AI and ML job listings. As of April 17, 2026, the live MCP stats report 8,405 active roles across 489 companies, a $213,500 median salary, and 600 new jobs this week. Agents can search jobs by role, location, or company, retrieve full job details, list hiring companies, match roles to a profile, and get salary or aggregate market statistics. It is designed for AI agents that assist with job searching, recruiting, or labor market analysis.
+AI Dev Jobs is a remote MCP server that gives AI agents access to a live index of AI and ML job listings. Coverage and market statistics change; retrieve current results with timestamps and do not treat a contributed historical snapshot as current market evidence. Agents can search jobs by role, location, or company, retrieve full job details, list hiring companies, match roles to a profile, and get salary or aggregate market statistics. It is designed for AI agents that assist with job searching, recruiting, or labor market analysis.
 
 ## When to Use This Skill
 
@@ -23,7 +23,7 @@ AI Dev Jobs is a remote MCP server that gives AI agents access to a live index o
 
 ## MCP Configuration
 
-Add the AI Dev Jobs MCP server to your client configuration. The endpoint uses streamable HTTP and requires no authentication.
+Add the AI Dev Jobs MCP server to your client configuration. The endpoint uses streamable HTTP and has historically been documented as unauthenticated; verify current access requirements.
 
 ### Claude Desktop / Cursor / Windsurf
 
@@ -37,7 +37,11 @@ Add the AI Dev Jobs MCP server to your client configuration. The endpoint uses s
 }
 ```
 
-No API key or authentication is required.
+Verify actual available tool schemas and access. A host configuration template does not prove the endpoint is available or that a connection succeeded.
+
+## Privacy and source verification
+
+Search with the minimum necessary skills/preferences; transmitting a private CV or identifying candidate details requires explicit consent. Do not submit applications, contact recruiters or configure monitoring without the corresponding user request. Verify listing dates, location/remote eligibility, salary currency/period and application URL against the employer's original page; exclude stale or suspicious listings. Market medians require a disclosed sample and missing-salary policy.
 
 ## Available Tools
 
@@ -158,14 +162,4 @@ The agent will call `get_salary_data({ tag: "llm", level: "senior" })` and summa
 ## Best Practices
 
 - Use `search_jobs` with specific keywords for targeted results rather than broad queries
-- Use `list_companies` to discover companies, then `search_jobs` filtered by company name for focused searches
-- Use `get_stats` to provide users with market context before diving into specific listings
-- Use `match_jobs` when the user gives skills, seniority, location, or work arrangement preferences
-- Use `get_salary_data` only as market context; remind users that listings and compensation change quickly
-- Combine with resume or cover letter skills to create end-to-end job application workflows
-
-## Limitations
-
-- The index covers AI and ML roles specifically; general software engineering jobs outside the AI space may not be included.
-- Job listings are refreshed regularly but may have a short delay before new postings appear.
-- Salary data is available when companies provide it
+- Use `list_companies` to discover companies, then `search_jobs` filtered by

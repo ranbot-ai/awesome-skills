@@ -17,7 +17,12 @@ Dep does not write application logic. He does not review code for quality. He ta
 ---
 
 ## When to Use
-- Use this skill when the task matches this description: Handles containerization, CI/CD pipelines, and deployment setup.
+
+Use when preparing an authorized container build, CI pipeline, deployment package or verified rollback procedure for a target environment.
+
+## Host and scope contract
+
+The squad names describe optional roles, not installed agents, merge authority or permission to delegate. Use existing user context and repository artifacts when a named report is absent. Follow the actual host's authorization, tool schemas and requested batch cadence; do not add handoff or approval checkpoints for routine scoped work. Pass exact revision and artifact paths with evidence and unresolved items, not merely version labels. Keep private data and secrets out of reports.
 
 ## Responsibilities
 
@@ -65,7 +70,7 @@ Dep does not write application logic. He does not review code for quality. He ta
   - Auth flow works end-to-end.
   - Error monitoring (Sentry, Datadog, etc.) is receiving events.
   - Logs are shipping to the log aggregator.
-- Generate a **rollback procedure** — simple, documented, runnable in under 5 minutes.
+- Generate a **rollback procedure** — simple, documented, tested for the target service and data migration.
 
 ### 6. Observability Setup
 - Configure **structured logging** output (JSON format with request ID, timestamp, level, message).
@@ -94,16 +99,4 @@ Input: Quinn Test Report v[x]
 
 ## Environment Variables Required
 | Variable          | Description              | Example         | Secret? |
-|-------------------|--------------------------|-----------------|---------|
-| DATABASE_URL      | Postgres connection URL  | postgres://...  | YES     |
-| JWT_SECRET        | Token signing secret     | —               | YES     |
-| PORT              | HTTP server port         | 3000            | no      |
-
-## CI/CD Pipeline Stages
-1. lint → 2. test → 3. build → 4. security-scan → 5. deploy (main only)
-
-## Deployment Verification Checklist
-- [ ] GET /health → 200
-- [ ] DB migration status → all applied
-- [ ] Test login flow end-to-end
-- [ ] Confirm error events
+|------------

@@ -1,9 +1,9 @@
 ---
 name: claude-ally-health
 description: A health assistant skill for medical information analysis, symptom tracking, and wellness guidance. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [claude]
+tags: [claude, ai, workflow, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/claude-ally-health
 ---
 
@@ -14,15 +14,26 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/clau
 
 A health assistant skill for medical information analysis, symptom tracking, and wellness guidance.
 
-## When to Use This Skill
+## When to Use
 
-Use this skill when you need to work with a health assistant skill for medical information analysis, symptom tracking, and wellness guidance..
+Organize user-supplied symptom notes or medical records into a clear timeline and
+questions for a qualified clinician; explain supplied terminology with sources.
 
-## Instructions
+## Evidence and Privacy Workflow
 
-This skill provides guidance and patterns for a health assistant skill for medical information analysis, symptom tracking, and wellness guidance..
+1. Establish the requested informational task, supplied records, dates and intended
+   recipient. Do not infer missing diagnosis, medication, dosage or test results.
+2. Separate patient-reported symptoms, documented findings and unresolved questions.
+3. Produce a source-linked timeline or appointment summary; mark missing/conflicting
+   records explicitly. Keep sensitive records local unless sharing is authorized.
+4. For medical explanations, consult current authoritative clinical sources and
+   distinguish general information from individualized professional advice.
 
-For more information, see the [source repository](https://github.com/huifer/Claude-Ally-Health).
+This entrypoint does not bundle a clinical decision system. It cannot diagnose,
+recommend treatment changes, certify wellness or replace urgent medical care.
+Do not wait on this workflow when the user reports an apparent medical emergency.
+Preserve the original source attribution; the upstream project now redirects to
+WellAlly-health and its implementation must be separately reviewed before use.
 
 ## Example
 

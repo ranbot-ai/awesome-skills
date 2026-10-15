@@ -3,7 +3,7 @@ name: ai-agent-development
 description: AI agent development workflow for building autonomous agents, multi-agent systems, and agent orchestration with CrewAI, LangGraph, and custom agents. 
 category: AI & Agents
 source: antigravity
-tags: [ai, agent, llm, automation, workflow, design, langgraph, crewai, rag]
+tags: [ai, agent, llm, automation, workflow, design, document, langgraph, crewai, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-agent-development
 ---
 
@@ -22,6 +22,12 @@ Use this workflow when:
 - Implementing agent orchestration
 - Adding tool integration to agents
 - Setting up agent memory
+
+## Scope and execution
+
+Choose the phases that match the user’s task; this document is an index, not an instruction to run every listed skill. Read a selected skill before using it. Respect repository and user constraints. Cloud calls, host configuration, publishing, destructive operations and spending require the applicable authorization; a workflow checklist does not grant it.
+
+Multi-agent phases describe the product being built. They do not authorize the assistant to spawn or delegate to agents during this task. Use an existing single-agent architecture when appropriate and record evaluation inputs, observed results and limitations.
 
 ## Workflow Phases
 

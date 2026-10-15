@@ -3,13 +3,16 @@
   "name": "claude-ally-health",
   "slug": "claude-ally-health",
   "description": "A health assistant skill for medical information analysis, symptom tracking, and wellness guidance.",
-  "category": "AI & Agents",
+  "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/claude-ally-health",
-  "content": "\n# Claude Ally Health\n\n## Overview\n\nA health assistant skill for medical information analysis, symptom tracking, and wellness guidance.\n\n## When to Use This Skill\n\nUse this skill when you need to work with a health assistant skill for medical information analysis, symptom tracking, and wellness guidance..\n\n## Instructions\n\nThis skill provides guidance and patterns for a health assistant skill for medical information analysis, symptom tracking, and wellness guidance..\n\nFor more information, see the [source repository](https://github.com/huifer/Claude-Ally-Health).\n\n## Example\n\n**User request:**\n\n> Use @claude-ally-health for this task: A health assistant skill for medical information analysis, symptom tracking, and wellness guidance.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
+  "content": "\n# Claude Ally Health\n\n## Overview\n\nA health assistant skill for medical information analysis, symptom tracking, and wellness guidance.\n\n## When to Use\n\nOrganize user-supplied symptom notes or medical records into a clear timeline and\nquestions for a qualified clinician; explain supplied terminology with sources.\n\n## Evidence and Privacy Workflow\n\n1. Establish the requested informational task, supplied records, dates and intended\n   recipient. Do not infer missing diagnosis, medication, dosage or test results.\n2. Separate patient-reported symptoms, documented findings and unresolved questions.\n3. Produce a source-linked timeline or appointment summary; mark missing/conflicting\n   records explicitly. Keep sensitive records local unless sharing is authorized.\n4. For medical explanations, consult current authoritative clinical sources and\n   distinguish general information from individualized professional advice.\n\nThis entrypoint does not bundle a clinical decision system. It cannot diagnose,\nrecommend treatment changes, certify wellness or replace urgent medical care.\nDo not wait on this workflow when the user reports an apparent medical emergency.\nPreserve the original source attribution; the upstream project now redirects to\nWellAlly-health and its implementation must be separately reviewed before use.\n\n## Example\n\n**User request:**\n\n> Use @claude-ally-health for this task: A health assistant skill for medical information analysis, symptom tracking, and wellness guidance.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
   "tags": [
-    "claude"
+    "claude",
+    "ai",
+    "workflow",
+    "document"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-31T06:51:06.505Z"

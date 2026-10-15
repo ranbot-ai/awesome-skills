@@ -14,7 +14,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ad-c
 
 Take raw campaign performance data and turn it into testable decisions. Normalize the inputs, distinguish descriptive results from causal evidence, quantify uncertainty when the data supports it, and propose bounded budget experiments.
 
-**Core principle:** Most startup founders check their ad dashboard, see a ROAS number, and either panic or celebrate. This skill gives you the nuanced analysis a paid media specialist would: what's actually significant, what's noise, and where your next dollar should go. It also solves the allocation problem — most startups either spread budget too thin across channels (no channel gets enough to learn) or dump everything into one channel (missing cheaper opportunities elsewhere).
+**Core principle:** Use verified measurements and explicit uncertainty to prioritize tests. This guide supports analysis, not a guarantee of optimal allocation or specialist performance.
 
 ## When to Use This Skill
 
@@ -80,7 +80,7 @@ When data is comparable, produce a channel-level rollup:
 | Meta (FB/IG) | ... | | | | | | | | | |
 | LinkedIn | ... | | | | | | | | | |
 | [Other] | ... | | | | | | | | | |
-| **Total** | $[X] | | | | | [N] | | $[X] avg | [X] avg | $[X] avg |
+| **Total** | $[X] | | | | | [N] | | Total spend / total conversions | Total value / total spend | Total spend / verified acquired customers |
 
 *CAC = estimated customer acquisition cost only when CPA means cost per lead at the same funnel entry point and channel-specific downstream rates are available.
 
@@ -102,4 +102,7 @@ For each campaign:
 |--------|-------|-----------|--------|
 | CTR | [X%] | [Target or sourced benchmark] | [Above/Within/Below] |
 | CPC | $[X] | [Target or sourced benchmark] | [Above/Within/Below] |
-| Conv Rate |
+| Conv Rate | [X%] | [Target or sourced benchmark] | [Above/Within/Below] |
+| CPA | $[X] | [Target or sourced benchmark] | [Above/Within/Below] |
+| ROAS | [X] | [Target or sourced benchmark] | [Above/Within/Below] |
+| Impression Share | 

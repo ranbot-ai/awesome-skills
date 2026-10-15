@@ -3,10 +3,24 @@ name: ai-red-teaming
 description: Run structured AI red team exercises for jailbreak resistance, data exfiltration risk, harmful output controls, and agent tool abuse resilience. 
 category: Security & Systems
 source: antigravity
-tags: [python, markdown, api, ai, agent, llm, gpt, workflow, template, design]
+tags: [python, markdown, api, ai, agent, llm, workflow, template, design, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-red-teaming
 ---
 
+
+> **⚠️ AUTHORIZED USE ONLY**
+> This skill is for educational purposes or authorized security assessments only.
+> You must have explicit, written permission from the system owner before using this tool.
+> Misuse of this tool is illegal and strictly prohibited.
+
+> **Mandatory confirmation gate**
+> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:
+> 1. Ask the user to state the exact target URL, IP, account, or resource.
+> 2. Ask the user to confirm written authorization and the permitted scope.
+> 3. Show the exact command(s) and explain their expected effect.
+> 4. Wait for explicit confirmation in the current conversation.
+>
+> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
 # AI Red Teaming
 
@@ -93,6 +107,8 @@ categories:
 
 ## Automated Testing Script
 
+This template sends prompts to a provider and is not a test of a deployed application's tools, retrieval or tenant boundaries. Use a synthetic sandbox and exact target configuration; no real secrets, destructive tools or unrelated accounts. Supply a validated target adapter and independent per-case rubric before using results as a gate.
+
 ```python
 #!/usr/bin/env python3
 """ai_red_team_runner.py - Automated red team test harness."""
@@ -110,39 +126,4 @@ from typing import Optional
 class RedTeamResult:
     test_id: str
     category: str
-    prompt: str
-    response: str
-    model: str
-    model_version: str
-    attack_successful: bool
-    severity: str
-    confidence: float
-    timestamp: str
-    latency_ms: float
-    tokens_used: int
-
-class AIRedTeamRunner:
-    def __init__(self, config_path: str):
-        with open(config_path) as f:
-            self.config = yaml.safe_load(f)
-        self.results: list[RedTeamResult] = []
-
-    def generate_test_id(self, category: str, prompt: str) -> str:
-        h = hashlib.sha256(f"{category}:{prompt}".encode()).hexdigest()[:12]
-        return f"RT-{category[:4].upper()}-{h}"
-
-    def send_prompt(self, prompt: str) -> dict:
-        """Send prompt to target model. Replace with your SDK client."""
-        import openai
-        client = openai.OpenAI()
-        start = time.time()
-        response = client.chat.completions.create(
-            model=self.config["target_model"],
-            messages=[
-                {"role": "system", "content": self.config.get("system_prompt", "")},
-                {"role": "user", "content": prompt},
-            ],
-            max_tokens=self.config.get("max_tokens", 1024),
-            temperature=self.config.get("temperature", 0.0),
-        )
-  
+    
