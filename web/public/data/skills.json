@@ -1597,6 +1597,57 @@
       "scrapedAt": "2026-03-07T06:51:59.539Z"
     },
     {
+      "id": "antigravity-agentic-test-audit",
+      "name": "agentic-test-audit",
+      "slug": "agentic-test-audit",
+      "description": "Audit a pytest suite: surviving mutants and untested code, flaky, order-dependent and slow tests, and removal candidates checked on held-out mutants. Report-only.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agentic-test-audit",
+      "content": "\n# Audit a test suite\n\n## Overview\n\nThis skill measures whether a Python test suite is a good check. It asks whether the suite would\nnotice broken code, whether it is fast and stable enough to run on every change, and which tests\ncost time without adding detection. A pinned runner does the measuring; the skill reports and\ndoes not change tests. Upstream source:\n[timini/agentic-verification](https://github.com/timini/agentic-verification/tree/v0.3.0/plugin/skills/audit).\n\n## When to Use This Skill\n\n- Use when the user asks to audit, review, speed up, prune or strengthen their pytest tests.\n- Use when the user asks which tests are useful, flaky or slow.\n- Use `@agentic-verify` instead to check a single change.\n\n## How It Works\n\nArguments: `$ARGUMENTS`. The first word is the mode: `quick` (default) or `deep`. Anything\nelse goes to the runner. To check a single change rather than the whole suite, use the\n`agentic-verify` skill instead.\n\nAn agent can only be trusted as far as the checks it runs. This skill measures whether a test\nsuite is a good check: whether it would notice broken code, whether it is fast and stable enough\nto run on every change, and which tests cost time without adding detection.\n\n### Runner\n\n```bash\nAV='uvx --from git+https://github.com/timini/agentic-verification@v0.3.0#subdirectory=runner agentic-verification'\n$AV quick|deep <path> [--budget-minutes N]\n$AV prune-check <path> --tests-file <file> --from-run <run-dir>\n$AV replay --run <run-dir> --mutant <id>\n```\n\nThe runner works in a disposable copy and writes only to `.test-suite-audit/` in the project;\nsuggest adding that to `.gitignore`. It needs Python 3.12+ and `pytest-cov` in the project's\nenvironment, and `pytest-randomly` for order checks. Use a Bash timeout of the budget plus 2\nminutes. The last stdout line is JSON with the report paths.\n\n### Rules\n\n- The runner measures; you interpret. Never state a number the report does not contain, and\n  never upgrade a label (an *inferred* finding stays inferred).\n- Report-only. Do not edit, delete, skip or quarantine tests, or change source code, unless the\n  user asks for a specific change after reading the report.\n- Coverage overlap is never evidence that a test is redundant, and tests that are each redundant\n  are not redundant together. Only a removal set that `prune-check` did not refute may be\n  presented as removable, and even then as \"not refuted\", not \"safe\".\n- A surviving mutant is a candidate gap, not proof of a bug. Do not decide that a mutant is\n  equivalent yourself; say it needs human review.\n- When the user pushes for one of these conclusions, explain the measured reason from\n  [the study evidence](https://github.com/timini/agentic-verification/blob/v0.3.0/plugin/skills/audit/reference/evidence.md) instead of just declining.\n\n### Steps\n\n1. **Check the target.** Confirm it is a pytest project. Look for `test-suite-audit.toml`; if\n   absent, the runner discovers source packages, test directories and the interpreter\n   (`.venv/bin/python`, then `python3`). If discovery looks wrong (for example a monorepo),\n   write a `test-suite-audit.toml` only after asking. Keys: `python`, `source`, `tests`,\n   `pytest_args`, `env`, `workers`, `protected` (node ID prefixes or marker names of tests that\n   must never be proposed for removal). If `pytest-cov` is missing, say coverage will be \"not\n   assessed\" and offer the install command; do not install anything without asking.\n2. **State the budget** before running. Quick is 5 minutes: one baseline run, timings, coverage,\n   overlap, no mutants. Deep is 30 minutes by default: three file-order and three random-order\n   runs, coverage, every deletion mutant, then a seeded sample of classical mutants until the\n   budget ends. In our benchmark, 12 to 14 minutes completed deep audits of projects up to about\n   3,300 executable lines; dateutil (about 3,600) and click (about 5,000) needed more.\n3. **Run the audit** and read `report.json` (full evidence) and `report.md`. See\n   [reading the report](https://github.com/timini/agentic-verification/blob/v0.3.0/plugin/skills/audit/reference/report.md) for statuses, labels and the detection rate.\n4. **If the deep audit proposed removal candidates**, treat them as an upper bound: in our\n   study such sets covered about 80% of each suite and every one lost kills on held-out mutants.\n   Run `prune-check` on them with\n   `--from-run <run-dir>`, so the check uses mutants the set was not chosen from. Give it at\n   least 10 minutes. Report its verdict: `refuted` (with the kills or lines lost) or `not refuted`\n   (with the number of killed mutants checked and the upper bound it gives).\n   If it is refuted, keep the tests it names as sole killers, and say the rest is still\n   unproven. Never present a refuted set as removable.\n5. **Summarise under three headings**, findings in the report's order, each with its label,\n   evidence and next validation step:\n   - *Does it catch broken code?* Surviving mutants, pseudo-test",
+      "tags": [
+        "python",
+        "node",
+        "claude",
+        "ai",
+        "agent",
+        "security",
+        "rag"
+      ],
+      "useCases": [
+        "Use when the user asks to audit, review, speed up, prune or strengthen their pytest tests.",
+        "Use when the user asks which tests are useful, flaky or slow.",
+        "Use `@agentic-verify` instead to check a single change."
+      ],
+      "scrapedAt": "2026-10-16T11:06:16.114Z"
+    },
+    {
+      "id": "antigravity-agentic-verify",
+      "name": "agentic-verify",
+      "slug": "agentic-verify",
+      "description": "Check that a Python change is caught by tests: run every mutant of the changed lines and write tests until they catch them. Reports evidence instead of a diff to read.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agentic-verify",
+      "content": "\n# Verify a change\n\n## Overview\n\nThis skill checks that code Claude wrote or changed is actually tested. It defines the check\nbefore coding, runs every mutant of the changed lines with a pinned runner, and writes tests until\nthe tests catch them. It reports which mutants were killed and which new tests fail on the old\ncode, so the user can trust the change from evidence. Upstream source:\n[timini/agentic-verification](https://github.com/timini/agentic-verification/tree/v0.3.0/plugin/skills/verify).\n\n## When to Use This Skill\n\n- Use after implementing a feature or fix in a Python/pytest project, before saying the work is done.\n- Use when the user asks whether a change is tested.\n- Use `@agentic-test-audit` instead to review a whole test suite rather than one change.\n\n## How It Works\n\nArguments: `$ARGUMENTS`. `--base` is the git revision to compare with: `HEAD` (default) checks\nuncommitted work, a branch such as `main` checks a whole branch. Other options go to the runner.\n\nThe goal is that the user can trust the change from evidence, without reading every line. A\nchange is verified when the tests fail if any part of it is wrong. Passing tests alone do not\nshow that: our study found 71% of the calls that could be deleted unnoticed sat in functions\nthat looked well tested.\n\n### Runner\n\n```bash\nAV='uvx --from git+https://github.com/timini/agentic-verification@v0.3.0#subdirectory=runner agentic-verification'\n$AV verify <project-root> --base <rev> [--budget-minutes N]\n$AV replay --run <run-dir> --mutant <id> --all\n$AV base-check <project-root> --base <rev> [tests...]\n```\n\nPass the project root (the directory pytest runs in), not a package directory or a file.\n`base-check` runs tests against the production source as it was at `--base`, in a disposable\ncopy, and lists the tests that pass now and fail there: those detect the change.\n\nThe runner works in a disposable copy and writes only to `.test-suite-audit/` in the project.\nIt needs Python 3.12+ and `pytest-cov` in the project's environment, plus `pytest-randomly` for\nthe order check. Use a Bash timeout of the budget plus 2 minutes. The last stdout line is JSON\nwith the verdict and report paths.\n\n### Rules\n\n- Never weaken, skip or delete an existing test to get a verified verdict, and never edit a\n  test so it matches wrong behaviour. If an existing test fails, the change or the test is wrong:\n  find out which and tell the user.\n- A new test must assert behaviour a user of the code depends on: a result, an effect, an\n  error. Do not assert on private helpers or mock the code under change. A test that mocks the\n  thing it checks passes when the feature is broken.\n- Only the runner decides that a mutant is killed. Do not call a mutant equivalent yourself;\n  list it for the user with your reasoning.\n- Do not retry a failing or flaky test until it passes. Report it; it hides real failures.\n- Never stash, revert or edit production files to see a test fail on the old code. Use\n  `base-check`, which does it in a copy; an interrupted stash leaves the user's code broken.\n\n### Steps\n\n1. **Define the check first.** Before writing code (or, if the code exists, before testing it),\n   restate the success criteria in one to three lines, and pick the strongest oracle available:\n   - an end-to-end or public-API test of the user-visible behaviour, if there is a flow to drive;\n   - a property, for pure logic: round trip, invariant, idempotence, or agreement with a simple\n     reference implementation (Hypothesis, if the project has it or the user agrees to add it);\n   - a differential test, for a refactor or migration: the old version (`git show <base>:<file>`)\n     is the oracle; compare on generated inputs and list intentional differences with a reason;\n   - example tests otherwise, including the edge cases the criteria name.\n   Write that test and see it fail before the change. If the change already exists, run\n   `base-check` to confirm the test fails on the old code.\n2. **Keep the loop fast.** While iterating, run only the tests for the area you are changing.\n   The verify report lists the tests covering the changed lines and how long they take.\n3. **Run verify** once the change and its tests are written. Read the verdict:\n   - `verified`: every changed line runs under a test and every mutant of the changed lines was\n     killed. Go to step 5.\n   - `gaps`: changed lines no test runs, surviving mutants, or a suite that is not green and\n     deterministic. Go to step 4.\n   - `incomplete`: the budget ended first (rerun with a larger `--budget-minutes`), or no\n     mutant applies to the changed lines, for example a decorated function. Then the mutants\n     give no evidence: rely on `base-check` and say so.\n   - `no change`: nothing under the source packages changed since `--base`; check the base.\n4. **Close each gap**, then rerun verify (step 3). Stop after three rounds and report what is left.\n   - Surviving mutant: read its patch in `mutants/<id>.patch`. It shows a wrong version o",
+      "tags": [
+        "python",
+        "api",
+        "claude",
+        "ai",
+        "agent",
+        "security"
+      ],
+      "useCases": [
+        "Use after implementing a feature or fix in a Python/pytest project, before saying the work is done.",
+        "Use when the user asks whether a change is tested.",
+        "Use `@agentic-test-audit` instead to review a whole test suite rather than one change."
+      ],
+      "scrapedAt": "2026-10-16T11:06:16.618Z"
+    },
+    {
       "id": "antigravity-agentmail",
       "name": "agentmail",
       "slug": "agentmail",
@@ -4619,6 +4670,36 @@
         "You need structured market data plus a synthesized view of opportunities or risks."
       ],
       "scrapedAt": "2026-03-02T07:07:18.399Z"
+    },
+    {
+      "id": "antigravity-apify-reddit-scraper",
+      "name": "apify-reddit-scraper",
+      "slug": "apify-reddit-scraper",
+      "description": "Scrape Reddit posts, comments, subreddits and users with the harshmaur/reddit-scraper Apify Actor. No Reddit API key. Keyword search, date windows, full threads.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apify-reddit-scraper",
+      "content": "\n# Reddit Scraper\n\nTurn a plain-language Reddit request into one run of `harshmaur/reddit-scraper` and hand back structured posts, comments, users or communities. One Actor covers search, subreddit listings, permalinks, user profiles and community metadata, so routing is about picking the right **input field**, not the right Actor.\n\nDisclosure: the Actor this skill routes to is paid (pay per result) and built by the skill author. Links carry no affiliate parameters.\n\n## When to Use\n\n- The user wants Reddit posts, comments, subreddits or user profiles as structured data.\n- The user wants to monitor a brand, product or competitor on Reddit, or track mentions since a date.\n- The user wants every comment from a thread, or the newest posts from one or more subreddits.\n- The user lost access to the Reddit API or Reddit RSS feeds and needs the same data without an API key.\n\n## Example prompts\n\nPrompts this skill handles:\n\n- \"Find every Reddit post from the last 30 days where someone asks for a Notion alternative, and pull the comments.\"\n- \"Scrape the newest 200 posts in r/SaaS and r/startups.\"\n- \"Give me all comments on this thread: https://www.reddit.com/r/webdev/comments/abc123/...\"\n- \"Track mentions of `Linear` and `Jira` on Reddit since 2026-08-01 and send each hit to my Slack channel.\"\n- \"What has u/spez posted recently?\"\n\nOut of scope (the boundary):\n\n- \"Post a reply in r/startups\" — this Actor only reads Reddit. Use the Reddit API with the user's own account.\n- \"Find Reddit threads *about* the pain of managing invoices\" — Reddit search is literal keyword matching, not semantic. Expand the topic into 3–8 short literal keywords first (see Step 1), then run one search per keyword.\n\n## Prerequisites\n\n- Apify account ([sign up](https://apify.com)); the free plan covers small runs.\n- Authentication via one of:\n  - `apify login` (OAuth, if using the Apify CLI)\n  - `APIFY_TOKEN` environment variable\n  - Token from [Apify Console → Settings → Integrations](https://console.apify.com/settings/integrations)\n- Apify CLI (`npm install -g apify-cli`), or the Apify MCP server (see \"Calling the Actor\").\n\n## Workflow\n\n### Step 1 — Classify the request and pick input fields\n\n| User gives you | Field to use | Notes |\n|---|---|---|\n| Keywords, a brand, a product, a phrase | `searchTerms` (array) | One search per term, each with its own `maxPostsCount`. Keep terms short and literal (`\"notion alternative\"`, not a sentence). Free plans search the first 40 terms per run. |\n| Keywords + \"only in r/X\" | `searchTerms` + `withinCommunity` | Accepts `developers`, `r/developers` or the full subreddit URL. |\n| A subreddit to scrape in bulk | `subredditUrls` (array of names or community URLs) | Fetches far more posts than a plain listing. **Never put post permalinks here** — they are dropped silently and the run finishes with 0 items. |\n| Post, user-profile, subreddit or search-page URLs | `startUrls` (array of `{ \"url\": ... }`) | Search options (sort/time/community) do NOT apply to these. `/s/` share links work too; the Actor resolves them. |\n| \"since <date>\" / \"between <dates>\" / \"last month\" / \"past week\" | `postedAfter`, `postedBefore` (`YYYY-MM-DD`) | Relative periods too: \"last month\" → `postedAfter` = today − 1 month. Also `commentedAfter` / `commentedBefore` for comments. Results are fetched newest-first and stop early once older than the window; `searchSort` and `searchTime` are ignored while a date is set. |\n| \"with comments\" / \"full thread\" | `crawlCommentsPerPost: true` + `maxCommentsPerPost` | Multiplies result count and cost — see gotchas. |\n| \"comments that mention X\" | `searchComments: true`, `searchPosts: false` | Comment search across Reddit. |\n| \"which subreddits are about X\" | `searchCommunities: true` | Returns `dataType: \"community\"` rows. |\n| \"send to Slack / Notion / Sheets\" | `mcpConnector` + `mcpTarget` (+ `mcpMessage`) | Requires an authorized MCP connector in the user's Apify account; see `references/input-mapping.md`. |\n\nWhen the user's phrase is descriptive rather than literal (\"people frustrated with their CRM\"), draft 3–8 literal keywords (`\"CRM sucks\"`, `\"switching from HubSpot\"`, `\"CRM recommendation\"`), put them in the run section of your answer (Step 3), and run them as `searchTerms`.\n\n### Step 2 — Build the input\n\nStart from these defaults and change only what the request needs:\n\n```json\n{\n  \"searchTerms\": [\"notion alternative\"],\n  \"searchPosts\": true,\n  \"searchComments\": false,\n  \"searchCommunities\": false,\n  \"searchSort\": \"new\",\n  \"searchTime\": \"month\",\n  \"maxPostsCount\": 50,\n  \"crawlCommentsPerPost\": false,\n  \"maxCommentsPerPost\": 50,\n  \"includeNSFW\": false\n}\n```\n\n- `searchSort`: `new` for monitoring, `relevance` for precise matching, `top` / `hot` for what performed, `comments` for the most discussed.\n- `searchTime`: `hour` | `day` | `week` | `month` | `year` | `all`. When the user names a period — a date or a relative one like \"last month\", \"past week\" — you have two options, and you must pick one ",
+      "tags": [
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "document",
+        "image",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "The user wants Reddit posts, comments, subreddits or user profiles as structured data.",
+        "The user wants to monitor a brand, product or competitor on Reddit, or track mentions since a date.",
+        "The user wants every comment from a thread, or the newest posts from one or more subreddits.",
+        "The user lost access to the Reddit API or Reddit RSS feeds and needs the same data without an API key."
+      ],
+      "scrapedAt": "2026-10-16T11:07:17.367Z"
     },
     {
       "id": "antigravity-apify-trend-analysis",
@@ -13281,6 +13362,33 @@
         "\"Do these documents satisfy the 100-point check?\""
       ],
       "scrapedAt": "2026-09-01T11:28:46.911Z"
+    },
+    {
+      "id": "antigravity-chord-onchain-trading",
+      "name": "chord-onchain-trading",
+      "slug": "chord-onchain-trading",
+      "description": "Read DEX market data and prepare best-route swap quotes and unsigned swap transactions on eight EVM chains with the Chord API. Never signs or moves funds.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/chord-onchain-trading",
+      "content": "\n# Chord: On-chain Market Data and Swap Preparation\n\n## Overview\n\nChord (https://getchord.xyz) indexes DEX swaps on Ethereum, Base, Arbitrum One, BNB Chain, Avalanche, Monad, Robinhood Chain and Arc, prices tokens from those trades, and routes a swap across the DEXs of a chain through one router contract. This skill reads that data and prepares swaps as unsigned transactions for the user's own wallet. Adapted from the MIT `chord` skill in getchordlabs/chord; this edition is self-contained (no helper script, no API key, no Chord Ask).\n\n## When to Use This Skill\n\n- The user asks for a token price, chart (OHLCV), the most traded tokens, or chain and DEX volume on one of the eight chains.\n- The user wants a swap quote or route (\"how much USDC for 0.5 ETH on Base?\").\n- The user wants an unsigned swap transaction to sign in their own wallet, after reviewing the quote.\n- Do not use it for other chains, transfers, bridging, perps, limit orders or exchange accounts.\n\n## How It Works\n\nBase URL `https://api.getchord.xyz/v1`, REST and JSON, no key (about 60 requests a minute per IP). Reference: https://getchord.xyz/docs and https://getchord.xyz/docs/openapi.json. A hosted MCP server with the same data exists at `https://api.getchord.xyz/v1/mcp`; if its `chord_*` tools are already connected, the same rules apply to them. Do not install software or change the host configuration to use this skill.\n\n| Chain | id | key |\n|---|---|---|\n| Ethereum | 1 | `ethereum` |\n| Base | 8453 | `base` |\n| Arbitrum One | 42161 | `arbitrum` |\n| BNB Chain | 56 | `bnb` |\n| Avalanche | 43114 | `avalanche` |\n| Monad | 143 | `monad` |\n| Robinhood Chain | 4663 | `robinhood` |\n| Arc | 5042 | `arc` |\n\n1. Resolve tokens with `GET /tokens?chain=ID` (curated list with decimals). If a symbol has several candidates, show full addresses and ask.\n2. Read data: `GET /chains` (what each chain supports), `GET /chains/{key}/tokens?limit=10` (most traded, for 1, 8453, 42161, 56, 43114), `GET /candles?chain=ID&token=ADDR&tf=1h&limit=168`.\n3. Quote with `GET /meta/quote?chain=ID&tokenIn=ADDR&tokenOut=ADDR&amount=RAW&slippageBps=50` without a wallet. `amount` is an integer in the input token's smallest unit; the zero address means the native gas token.\n4. Show a summary and stop (see Security & Safety Notes). Only after the user confirms in a later message, call the same quote with `taker=WALLET` (or `POST /meta/swap`) to get the unsigned `tx`, the exact `approval` if one is needed, and a `simulation` from that wallet.\n5. Hand the unsigned transaction to the user's wallet. Say it is unsigned and not sent.\n\n## Examples\n\nRead-only quote, 0.01 ETH to USDC on Base:\n\n```bash\ncurl -s \"https://api.getchord.xyz/v1/meta/quote?chain=8453&tokenIn=0x0000000000000000000000000000000000000000&tokenOut=0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913&amount=10000000000000000&slippageBps=50\"\n```\n\nThe answer names `provider` (`chord` when Chord's router answered, a third-party aggregator only when Chord's router failed, with `fallbackReason`), `amountOut` and `minAmountOut` in smallest units after fees, `priceImpactPct`, `valueLossPct`, `feeBps` and `route.venues`.\n\nMost traded tokens on Arbitrum in the last 24 hours:\n\n```bash\ncurl -s \"https://api.getchord.xyz/v1/chains/arbitrum/tokens?limit=10\"\n```\n\n## Best Practices\n\n- Numbers come only from calls made in this conversation; name the chain (name and id), the source and the time with every figure.\n- Read decimals from the API; never assume 18 (USDC has 6; USDT and USDC on BNB Chain have 18).\n- Show full addresses wherever money may move and compare every character (address poisoning).\n- Flag a major (USDC, USDT, WETH) at a non-canonical address, bridged versus native variants (USDC vs USDC.e or USDbC), and look-alike tickers.\n- Analysis is not advice: describe what the data shows, never recommend a trade or promise returns.\n\n## Limitations\n\n- Eight EVM chains only; Solana data exists in the API but Solana swaps are not open to keys yet.\n- No transfers, bridging, deposits, perps, leverage, limit or stop orders, or exchange accounts.\n- A Chord price is the last trade on the token's main venue, not an exchange quote; `stale` or a large `staleSec` on a chain's status means figures may lag.\n- Taxed tokens are refused (`422 TAXED_TOKEN`); an empty route means no pool can fill the size.\n- Rate limit about 60 requests a minute per IP; retry a failed call at most once.\n\n## Security & Safety Notes\n\nRisk is `critical` because the skill prepares fund-moving transactions, even though it never signs or sends them.\n\n- Never sign or broadcast anything. Never ask for, accept or store a private key or seed phrase.\n- Every swap needs an explicit confirmation in a later message. First message: action, chain, amounts with full token addresses, minimum received, price impact and value loss, provider, fee, route, the router address that will be the transaction `to` and approval spender, and the wallet. Then ask the user to reply confirm or cancel, and stop.\n-",
+      "tags": [
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "security",
+        "rag",
+        "cro"
+      ],
+      "useCases": [
+        "The user asks for a token price, chart (OHLCV), the most traded tokens, or chain and DEX volume on one of the eight chains.",
+        "The user wants a swap quote or route (\"how much USDC for 0.5 ETH on Base?\").",
+        "The user wants an unsigned swap transaction to sign in their own wallet, after reviewing the quote.",
+        "Do not use it for other chains, transfers, bridging, perps, limit orders or exchange accounts."
+      ],
+      "scrapedAt": "2026-10-16T11:10:02.612Z"
     },
     {
       "id": "antigravity-chrome-extension-developer",
@@ -26072,97 +26180,6 @@
       "scrapedAt": "2026-03-07T06:54:43.228Z"
     },
     {
-      "id": "antigravity-fp-backend",
-      "name": "fp-backend",
-      "slug": "fp-backend",
-      "description": "Functional programming patterns for Node.js/Deno backend development using fp-ts, ReaderTaskEither, and functional dependency injection",
-      "category": "Development & Code Tools",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-backend",
-      "content": "\n# fp-ts Backend Patterns\n\nFunctional programming patterns for building type-safe, testable backend services using fp-ts.\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use\n- You are building or refactoring a Node.js or Deno backend with fp-ts.\n- The task involves dependency injection, service composition, or typed backend errors with `ReaderTaskEither`.\n- You need functional backend architecture patterns rather than isolated utility snippets.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "typescript",
-        "node",
-        "ai"
-      ],
-      "useCases": [
-        "You are building or refactoring a Node.js or Deno backend with fp-ts.",
-        "The task involves dependency injection, service composition, or typed backend errors with `ReaderTaskEither`.",
-        "You need functional backend architecture patterns rather than isolated utility snippets."
-      ],
-      "scrapedAt": "2026-03-07T06:54:43.507Z"
-    },
-    {
-      "id": "antigravity-fp-data-transforms",
-      "name": "fp-data-transforms",
-      "slug": "fp-data-transforms",
-      "description": "Everyday data transformations using functional patterns - arrays, objects, grouping, aggregation, and null-safe access",
-      "category": "Development & Code Tools",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-data-transforms",
-      "content": "\n# Practical Data Transformations\n\nThis skill covers the data transformations you do every day: working with arrays, reshaping objects, normalizing API responses, grouping data, and safely accessing nested values. Each section shows the imperative approach first, then the functional equivalent, with honest assessments of when each approach shines.\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use\n- You need to transform arrays, objects, grouped data, or nested values in TypeScript.\n- The task involves reshaping API responses, null-safe access, aggregation, or normalization.\n- You want practical functional patterns for everyday data work instead of low-level loops.\n\n---\n\n## 6. Real-World Examples\n\n### Example 1: Transform API Response to UI-Ready Data\n\n```typescript\n// API response\ninterface ApiOrder {\n  order_id: string;\n  customer: {\n    id: string;\n    full_name: string;\n  };\n  line_items: Array<{\n    product_id: string;\n    product_name: string;\n    qty: number;\n    unit_price: number;\n  }>;\n  order_date: string;\n  status: 'pending' | 'processing' | 'shipped' | 'delivered';\n}\n\n// What the UI needs\ninterface OrderSummary {\n  id: string;\n  customerName: string;\n  itemCount: number;\n  total: number;\n  formattedTotal: string;\n  date: string;\n  statusLabel: string;\n  statusColor: string;\n}\n\n// Transformation\nconst STATUS_CONFIG: Record<string, { label: string; color: string }> = {\n  pending: { label: 'Pending', color: 'yellow' },\n  processing: { label: 'Processing', color: 'blue' },\n  shipped: { label: 'Shipped', color: 'purple' },\n  delivered: { label: 'Delivered', color: 'green' },\n};\n\nconst formatCurrency = (cents: number): string =>\n  `$${(cents / 100).toFixed(2)}`;\n\nconst formatDate = (iso: string): string =>\n  new Date(iso).toLocaleDateString('en-US', {\n    month: 'short',\n    day: 'numeric',\n    year: 'numeric',\n  });\n\nconst toOrderSummary = (order: ApiOrder): OrderSummary => {\n  const total = order.line_items.reduce(\n    (sum, item) => sum + item.qty * item.unit_price,\n    0\n  );\n\n  const status = STATUS_CONFIG[order.status] ?? STATUS_CONFIG.pending;\n\n  return {\n    id: order.order_id,\n    customerName: order.customer.full_name,\n    itemCount: order.line_items.reduce((sum, item) => sum + item.qty, 0),\n    total,\n    formattedTotal: formatCurrency(total),\n    date: formatDate(order.order_date),\n    statusLabel: status.label,\n    statusColor: status.color,\n  };\n};\n\n// Transform all orders\nconst toOrderSummaries = (orders: ApiOrder[]): OrderSummary[] =>\n  orders.map(toOrderSummary);\n```\n\n### Example 2: Merge User Settings with Defaults\n\n```typescript\ninterface AppSettings {\n  theme: {\n    mode: 'light' | 'dark' | 'system';\n    primaryColor: string;\n    fontSize: 'small' | 'medium' | 'large';\n  };\n  notifications: {\n    email: boolean;\n    push: boolean;\n    sms: boolean;\n    frequency: 'immediate' | 'daily' | 'weekly';\n  };\n  privacy: {\n    showProfile: boolean;\n    showActivity: boolean;\n    allowAnalytics: boolean;\n  };\n}\n\ntype DeepPartial<T> = {\n  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];\n};\n\nconst DEFAULT_SETTINGS: AppSettings = {\n  theme: {\n    mode: 'system',\n    primaryColor: '#007bff',\n    fontSize: 'medium',\n  },\n  notifications: {\n    email: true,\n    push: true,\n    sms: false,\n    frequency: 'immediate',\n  },\n  privacy: {\n    showProfile: true,\n    showActivity: true,\n    allowAnalytics: true,\n  },\n};\n\nconst deepMergeSettings = (\n  defaults: AppSettings,\n  user: DeepPartial<AppSettings>\n): AppSettings => ({\n  theme: { ...defaults.theme, ...user.theme },\n  notifications: { ...defaults.notifications, ...user.notifications },\n  privacy: { ...defaults.privacy, ...user.privacy },\n});\n\n// Usage\nconst userPreferences: DeepPartial<AppSettings> = {\n  theme: { mode: 'dark' },\n  notifications: { sms: true, frequency: 'daily' },\n};\n\nconst finalSettings = deepMergeSettings(DEFAULT_SETTINGS, userPreferences);\n```\n\n### Example 3: Group Orders by Customer with Totals\n\n```typescript\ninterface Order {\n  id: string;\n  customerId: string;\n  customerName: string;\n  items: Array<{ name: string; price: number; quantity: number }>;\n  date: string;\n}\n\ninterface CustomerOrderSummary {\n  customerId: string;\n  customerName: string;\n  orderCount: number;\n  totalSpent: number;\n  orders: Order[];\n}\n\nconst calculateOrderTotal = (order: Order): number =>\n  order.items.reduce((sum, item) => sum + item.price * item.quantity, 0);\n\nconst groupOrdersByCustomer = (orders: Order[]): CustomerOrderSummary[] => {\n  const grouped = groupBy((order: Order) => order.customerId)(orders);\n\n  return Object.entries(grouped).map(([customerId, customerOrders]) => ({\n    customerId,\n    customerName: customerOrders[0].customerName",
-      "tags": [
-        "typescript",
-        "api",
-        "claude",
-        "ai",
-        "cro"
-      ],
-      "useCases": [
-        "You need to transform arrays, objects, grouped data, or nested values in TypeScript.",
-        "The task involves reshaping API responses, null-safe access, aggregation, or normalization.",
-        "You want practical functional patterns for everyday data work instead of low-level loops."
-      ],
-      "scrapedAt": "2026-03-07T06:54:43.821Z"
-    },
-    {
-      "id": "antigravity-fp-either-ref",
-      "name": "fp-either-ref",
-      "slug": "fp-either-ref",
-      "description": "Quick reference for Either type. Use when user needs error handling, validation, or operations that can fail with typed errors.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-either-ref",
-      "content": "\n# Either Quick Reference\n\nEither = success or failure. `Right(value)` or `Left(error)`.\n\n## When to Use\n- You need a quick fp-ts reference for typed synchronous error handling.\n- The task involves validation, fallible operations, or converting throwing code to `Either`.\n- You want a compact cheat sheet rather than a long tutorial.\n\n## Create\n\n```typescript\nimport * as E from 'fp-ts/Either'\n\nE.right(value)           // Success\nE.left(error)            // Failure\nE.fromNullable(err)(x)   // null → Left(err), else Right(x)\nE.tryCatch(fn, toError)  // try/catch → Either\n```\n\n## Transform\n\n```typescript\nE.map(fn)                // Transform Right value\nE.mapLeft(fn)            // Transform Left error\nE.flatMap(fn)            // Chain (fn returns Either)\nE.filterOrElse(pred, toErr) // Right → Left if pred fails\n```\n\n## Extract\n\n```typescript\nE.getOrElse(err => fallbackValue)  // Get Right or default\nE.match(onLeft, onRight)     // Pattern match\nE.toUnion(either)            // E | A (loses type info)\n```\n\n## Common Patterns\n\n```typescript\nimport { pipe, identity } from 'fp-ts/function'\nimport * as E from 'fp-ts/Either'\n\n// Toy validation; an @ check is not complete email validation\nconst validateEmail = (s: string): E.Either<string, string> =>\n  s.includes('@') ? E.right(s) : E.left('Invalid email')\n\n// Chain validations (stops at first error)\npipe(\n  E.right({ email: 'test@example.com', age: 25 }),\n  E.flatMap(d => pipe(validateEmail(d.email), E.map(() => d))),\n  E.flatMap(d => d.age >= 18 ? E.right(d) : E.left('Must be 18+'))\n)\n\n// Convert throwing code\nconst parseJson = (s: string) => E.tryCatch(\n  () => JSON.parse(s),\n  (e) => `Parse error: ${e}`\n)\n```\n\n## vs try/catch\n\n```typescript\n// ❌ try/catch - errors not in types\ntry {\n  const data = JSON.parse(input)\n  process(data)\n} catch (e) {\n  handleError(e)\n}\n\n// ✅ Either - errors explicit in types\npipe(\n  E.tryCatch(() => JSON.parse(input), String),\n  E.flatMap(data => E.tryCatch(() => process(data), String)),\n  E.match(handleError, identity)\n)\n```\n\nUse Either when **error type matters** and you want to chain operations.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n\n## Reference scope\n\nThese are fp-ts 2.x fragments. Supply application variables, types, validators and imports, and check the installed version. `map` does not catch thrown exceptions. `Task` has no typed error channel; an improperly wrapped promise can still reject. Use `tryCatch` at fallible boundaries.\n\nOfficial API: [fp-ts modules](https://gcanti.github.io/fp-ts/modules/).\n",
-      "tags": [
-        "typescript",
-        "api",
-        "ai",
-        "rag"
-      ],
-      "useCases": [
-        "You need a quick fp-ts reference for typed synchronous error handling.",
-        "The task involves validation, fallible operations, or converting throwing code to `Either`.",
-        "You want a compact cheat sheet rather than a long tutorial."
-      ],
-      "scrapedAt": "2026-03-07T06:54:44.135Z"
-    },
-    {
-      "id": "antigravity-fp-errors",
-      "name": "fp-errors",
-      "slug": "fp-errors",
-      "description": "Stop throwing everywhere - handle errors as values using Either and TaskEither for cleaner, more predictable code",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fp-errors",
-      "content": "\n# Practical Error Handling with fp-ts\n\nThis skill teaches you how to handle errors without try/catch spaghetti. No academic jargon - just practical patterns for real problems.\n\nThe core idea: **Errors are just data**. Instead of throwing them into the void and hoping someone catches them, return them as values that TypeScript can track.\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use\n- You need to replace exception-heavy code with `Either` or `TaskEither`.\n- The task involves validation, domain errors, or clearer error contracts in TypeScript.\n- You want pragmatic fp-ts error-handling guidance for real application code.\n\n---\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
-      "tags": [
-        "typescript",
-        "ai",
-        "rag"
-      ],
-      "useCases": [
-        "You need to replace exception-heavy code with `Either` or `TaskEither`.",
-        "The task involves validation, domain errors, or clearer error contracts in TypeScript.",
-        "You want pragmatic fp-ts error-handling guidance for real application code."
-      ],
-      "scrapedAt": "2026-03-07T06:54:44.429Z"
-    },
-    {
       "id": "anthropic-frontend-design",
       "name": "frontend-design",
       "slug": "frontend-design",
@@ -28061,14 +28078,14 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 410
+      "count": 411
     },
     {
       "id": "ai-agents",
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 364
+      "count": 365
     },
     {
       "id": "creative-media",
@@ -28082,7 +28099,7 @@
       "name": "Development & Code Tools",
       "description": "Tools for building, testing, and deploying software with AI assistance.",
       "icon": "code",
-      "count": 96
+      "count": 94
     },
     {
       "id": "security-systems",
@@ -28133,28 +28150,28 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 15,
       "newSkillCount": 0,
-      "stars": 299417
+      "stars": 300328
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 181268
+      "stars": 181493
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 77149
+      "stars": 77220
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 90950
+      "stars": 91043
     },
     {
       "name": "Awesome LLM",
@@ -28167,8 +28184,8 @@
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1048,
-      "newSkillCount": 6,
-      "stars": 47645
+      "newSkillCount": 9,
+      "stars": 47709
     },
     {
       "name": "Xquik",
@@ -28178,10 +28195,10 @@
       "stars": 213
     }
   ],
-  "lastUpdated": "2026-10-15T11:23:50.401Z",
+  "lastUpdated": "2026-10-16T11:14:59.351Z",
   "stats": {
     "totalSkills": 1127,
-    "newSkills": 15,
-    "scrapedAt": "2026-10-15T11:23:50.401Z"
+    "newSkills": 18,
+    "scrapedAt": "2026-10-16T11:14:59.351Z"
   }
 }
