@@ -2767,6 +2767,33 @@
       "scrapedAt": "2026-01-26T13:16:28.090Z"
     },
     {
+      "id": "antigravity-aident-loadout",
+      "name": "aident-loadout",
+      "slug": "aident-loadout",
+      "description": "Run multi-step work across apps the user connected in Aident Loadout: live action schemas, connection checks, cost preflight, and approval before side effects.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aident-loadout",
+      "content": "\n# Aident Loadout\n\nAident Loadout (https://aident.ai) is a capability layer for AI agents. The user\nconnects apps once (OAuth in the browser, API keys kept in Aident Vault), and\nany MCP client can search those apps' actions by intent, read the live schema,\ncheck cost, and run the action. Every run is recorded in Audit. The tools come\nfrom the hosted `aident` MCP server.\n\n## When to Use\n\n- Use when the user asks you to look something up in, or do something with, a service they connected through Aident Loadout (for example Gmail, Slack, GitHub, Linear, Notion or Google Sheets).\n- Use when the user wants to know which Aident action can do a task, what it will cost, or whether an account is connected.\n- Use when the user needs a reusable multi-step procedure from Aident's 400+ Skills (research, outreach, content, operations).\n- Do not use it for questions you can answer from the current conversation, or for services the user has not connected.\n\n## Connect once\n\nIf the `aident` tools are missing, tell the user:\n\n- Claude Code: `claude mcp add --transport http aident https://loadout.aident.ai/mcp`, then sign in with OAuth in the browser on first use.\n- Other MCP clients: add a Streamable HTTP server at `https://loadout.aident.ai/mcp` and sign in with OAuth.\n- Docs: https://docs.aident.ai/loadout/overview\n\nNever ask for credentials, API keys, MFA codes or other secrets in chat.\n\n## Workflow\n\n1. Identify the concrete outcome and the services involved.\n2. If the exact canonical action name is unknown, call `capabilities_search` with a short description of the operation.\n3. Call `capabilities_get` before the first use of an action to read its current input schema, side effects, account requirements and approval behavior.\n4. Use `vault` to check connection status. If a connection is missing, give the user the returned Aident-hosted connection URL.\n5. Call `capabilities_preflight` before a metered or dynamically priced action, and explain the returned cost or approval requirement before going on.\n6. Before a side-effecting action, state the target, the effect and the important inputs. Get any acknowledgement the action requires and keep the exact acknowledged request.\n7. Call `capabilities_execute` with the exact canonical action name and schema-valid input. Report the result without exposing internal identifiers or private provider data the user did not ask for.\n\nUse `skills_search` and `skills_read` when the user needs domain guidance or a multi-step procedure rather than a single known action.\n\n## Examples\n\n```text\nUser: Find the open Linear issues assigned to me and post a summary in #standup on Slack.\n\n1. capabilities_search \"list Linear issues assigned to me\" and \"post Slack message\"\n2. capabilities_get on both actions to read their schemas\n3. vault: confirm Linear and Slack are connected (if not, share the connection URL and stop)\n4. capabilities_execute the Linear read, then draft the summary\n5. Show the exact Slack message and channel, wait for the user's yes\n6. capabilities_execute the Slack post and report the result\n```\n\n```text\nUser: How much would it cost to scrape these 20 pages?\n\n1. capabilities_search \"scrape a web page\"\n2. capabilities_preflight with the 20 URLs\n3. Report the returned cost and ask before running anything\n```\n\n## Rules\n\n- Treat connection, acknowledgement and credit-approval requirements as hard gates.\n- Do not send, publish, delete, disconnect or change external data unless the user asked for that effect and any required acknowledgement is satisfied.\n- Do not use Aident Loadout to buy subscriptions, credits, tokens or other digital goods.\n- Keep provider access inside the user's authorized accounts and the requested task.\n- Do not claim an action succeeded until its terminal result confirms success.\n\n## Limitations\n\n- Requires an Aident account and the `aident` MCP server connected; actions only reach apps the user has connected or built-in Aident services.\n- Built-in and metered services draw from the user's Aident balance; costs come from `capabilities_preflight` and can change.\n- Action schemas change over time, so always read the live schema with `capabilities_get` instead of reusing remembered inputs.\n- The hosted service is closed source; this skill file is MIT-licensed.\n",
+      "tags": [
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "workflow",
+        "cro"
+      ],
+      "useCases": [
+        "Use when the user asks you to look something up in, or do something with, a service they connected through Aident Loadout (for example Gmail, Slack, GitHub, Linear, Notion or Google Sheets).",
+        "Use when the user wants to know which Aident action can do a task, what it will cost, or whether an account is connected.",
+        "Use when the user needs a reusable multi-step procedure from Aident's 400+ Skills (research, outreach, content, operations).",
+        "Do not use it for questions you can answer from the current conversation, or for services the user has not connected."
+      ],
+      "scrapedAt": "2026-10-18T10:45:03.358Z"
+    },
+    {
       "id": "antigravity-aider-delegate",
       "name": "aider-delegate",
       "slug": "aider-delegate",
@@ -18333,6 +18360,36 @@
       "scrapedAt": "2026-09-30T12:23:18.135Z"
     },
     {
+      "id": "antigravity-curlshot",
+      "name": "curlshot",
+      "slug": "curlshot",
+      "description": "Capture web page screenshots, PDFs and scrolling videos, or render HTML/Markdown to images, with the hosted CurlShot API.",
+      "category": "AI & Agents",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/curlshot",
+      "content": "\n# CurlShot screenshots\n\nCurlShot (https://curlshot.com) is a hosted screenshot API. It renders a web\npage in a real browser and returns an image (PNG, JPEG, WebP), a PDF, or a\nvideo of the page scrolling (MP4, WebM, GIF). One HTTP request does it.\n\n## When to Use\n\n- Use when the user wants a screenshot, full-page capture, or mobile/tablet view of a public URL.\n- Use when the user wants a PDF or a scrolling video (MP4, WebM, GIF) of a web page.\n- Use when the user wants their own HTML or Markdown rendered to an image or PDF (social cards, reports, previews).\n- Requires a CurlShot access key in the `CURLSHOT_API_KEY` environment variable.\n\n## Before you start\n\n- The access key is read from `CURLSHOT_API_KEY`. If it is not set, ask the user to set it. A free key (100 screenshots a month, no card) comes from https://curlshot.com/register.\n- Never print the key, write it into a file in the repository, or put it in a link you show the user.\n- Only public pages work out of the box. Local and private network addresses (localhost, 192.168.x.x, ...) are refused: for a local page, send its HTML instead (see below).\n- Sending HTML or Markdown uploads that content to CurlShot. Confirm with the user before sending anything private or confidential.\n\n## Take a screenshot\n\n```bash\ncurl -sS -G \"https://curlshot.com/api/v1/screenshot\" \\\n  -H \"X-Access-Key: $CURLSHOT_API_KEY\" \\\n  --data-urlencode \"url=https://example.com\" \\\n  -d format=png \\\n  --output screenshot.png\n```\n\n`-G` with `--data-urlencode` keeps the page address correctly encoded. Check\nthe HTTP status: on an error the body is JSON with `error_code` and\n`error_message` instead of an image.\n\n## Common options\n\nAdd each option as one more `-d name=value` (GET) or as a field in a POST JSON body.\n\n| Want | Option |\n| --- | --- |\n| Whole page, top to bottom | `full_page=true` |\n| Phone or tablet view | `viewport_device=<preset>` (list: https://curlshot.com/docs/devices.md) |\n| Window size | `viewport_width=1440`, `viewport_height=900` |\n| Retina sharpness | `device_scale_factor=2` |\n| Dark theme | `dark_mode=true` |\n| One element only | `selector=<css selector>` |\n| Output format | `format=png` / `jpeg` / `webp` / `pdf` / `mp4` / `webm` / `gif` |\n| Hide cookie banners and ads | `block_cookie_banners=true`, `block_ads=true` |\n| Wait for content | `wait_until=networkidle`, `delay=2`, `wait_for_selector=<css selector>` |\n| Reuse a stored copy for free | `cache=true` |\n\nA misspelled option is rejected with `invalid_options` and a hint, never\nignored. Every option: https://curlshot.com/docs/options.md\n\n## Render your own HTML or Markdown\n\nPOST JSON when the input is long:\n\n```bash\ncurl -sS -X POST \"https://curlshot.com/api/v1/screenshot\" \\\n  -H \"X-Access-Key: $CURLSHOT_API_KEY\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"html\": \"<h1>Hello</h1>\", \"format\": \"png\", \"viewport_width\": 1200, \"viewport_height\": 630}' \\\n  --output card.png\n```\n\nUse `\"markdown\": \"...\"` instead of `html` to render Markdown as a styled page,\nand `\"format\": \"pdf\"` for a PDF.\n\n## Examples\n\n### Example 1: Full-page mobile screenshot without cookie banners\n\n```bash\ncurl -sS -G \"https://curlshot.com/api/v1/screenshot\" \\\n  -H \"X-Access-Key: $CURLSHOT_API_KEY\" \\\n  --data-urlencode \"url=https://example.com/pricing\" \\\n  -d viewport_device=iphone_15_pro \\\n  -d full_page=true \\\n  -d block_cookie_banners=true \\\n  -d format=webp \\\n  --output pricing-mobile.webp\n```\n\nCheck https://curlshot.com/docs/devices.md for the exact preset names.\n\n### Example 2: Save a page as PDF\n\n```bash\ncurl -sS -G \"https://curlshot.com/api/v1/screenshot\" \\\n  -H \"X-Access-Key: $CURLSHOT_API_KEY\" \\\n  --data-urlencode \"url=https://example.com/docs\" \\\n  -d format=pdf \\\n  --output docs.pdf\n```\n\n## Usage and billing\n\nOne successful render counts as one screenshot, whatever its size. Failed\nrenders and cache hits are free. Responses carry rate-limit and concurrency\nheaders. Paid plans start at $19/month; the free plan is 100 screenshots a\nmonth. Ask before running large batches that could use up the user's quota.\n\n## MCP alternative\n\nAgents with MCP support can use the hosted server instead of HTTP calls:\n`https://curlshot.com/api/mcp` (streamable HTTP, `Authorization: Bearer <key>`),\ntools `take_screenshot` and `list_devices`. Setup per client is in the\n[curlshot-mcp README](https://github.com/SergiuPogor/curlshot-mcp).\n\n## Limitations\n\n- Needs network access to `curlshot.com` and a CurlShot account key; it does not run a browser locally.\n- Pages behind a login, on localhost, or on private networks cannot be captured by URL; render their HTML instead.\n- Each successful render uses one screenshot from the account's monthly quota.\n- HTML and Markdown inputs are sent to a third-party service; do not send secrets or confidential content without the user's consent.\n- Sites with aggressive bot protection may return an error page or a challenge screen instead of the real content.\n\n## Docs\n\n- Getting started: https://curlshot.com/docs/getting-sta",
+      "tags": [
+        "pdf",
+        "markdown",
+        "api",
+        "mcp",
+        "claude",
+        "ai",
+        "agent",
+        "llm",
+        "image",
+        "cro"
+      ],
+      "useCases": [
+        "Use when the user wants a screenshot, full-page capture, or mobile/tablet view of a public URL.",
+        "Use when the user wants a PDF or a scrolling video (MP4, WebM, GIF) of a web page.",
+        "Use when the user wants their own HTML or Markdown rendered to an image or PDF (social cards, reports, previews).",
+        "Requires a CurlShot access key in the `CURLSHOT_API_KEY` environment variable."
+      ],
+      "scrapedAt": "2026-10-18T10:50:54.426Z"
+    },
+    {
       "id": "antigravity-cursor-delegate",
       "name": "cursor-delegate",
       "slug": "cursor-delegate",
@@ -26141,47 +26198,6 @@
       "scrapedAt": "2026-03-07T06:54:42.639Z"
     },
     {
-      "id": "antigravity-form-cro",
-      "name": "form-cro",
-      "slug": "form-cro",
-      "description": "Optimize any form that is NOT signup or account registration — including lead capture, contact, demo request, application, survey, quote, and checkout forms.",
-      "category": "Creative & Media",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/form-cro",
-      "content": "\n# Form Conversion Rate Optimization (Form CRO)\n\nYou are an expert in **form optimization and friction reduction**.\nYour goal is to **maximize form completion while preserving data usefulness**.\n\nYou do **not** blindly reduce fields.\nYou do **not** optimize forms in isolation from their business purpose.\nYou do **not** assume more data equals better leads.\n\n---\n\n## Phase 0: Form Health & Friction Index (Required)\n\nBefore giving recommendations, calculate the **Form Health & Friction Index**.\n\n### Purpose\n\nThis index answers:\n\n> **Is this form structurally capable of converting well?**\n\nIt prevents:\n\n* premature redesigns\n* gut-feel field removal\n* optimization without measurement\n* “just make it shorter” mistakes\n\n---\n\n## 🔢 Form Health & Friction Index\n\n### Total Score: **0–100**\n\nThis is a **diagnostic score**, not a KPI.\n\n---\n\n### Scoring Categories & Weights\n\n| Category                     | Weight  |\n| ---------------------------- | ------- |\n| Field Necessity & Efficiency | 30      |\n| Value–Effort Balance         | 20      |\n| Cognitive Load & Clarity     | 20      |\n| Error Handling & Recovery    | 15      |\n| Trust & Friction Reduction   | 10      |\n| Mobile Usability             | 5       |\n| **Total**                    | **100** |\n\n---\n\n### Category Definitions\n\n#### 1. Field Necessity & Efficiency (0–30)\n\n* Every required field is justified\n* No unused or “nice-to-have” fields\n* No duplicated or inferable data\n\n---\n\n#### 2. Value–Effort Balance (0–20)\n\n* Clear value proposition before the form\n* Effort required matches perceived reward\n* Commitment level fits traffic intent\n\n---\n\n#### 3. Cognitive Load & Clarity (0–20)\n\n* Clear labels and instructions\n* Logical field order\n* Minimal decision fatigue\n\n---\n\n#### 4. Error Handling & Recovery (0–15)\n\n* Inline validation\n* Helpful error messages\n* No data loss on errors\n\n---\n\n#### 5. Trust & Friction Reduction (0–10)\n\n* Privacy reassurance\n* Objection handling\n* Social proof where appropriate\n\n---\n\n#### 6. Mobile Usability (0–5)\n\n* Touch-friendly\n* Proper keyboards\n* No horizontal scrolling or cramped fields\n\n---\n\n### Health Bands (Required)\n\n| Score  | Verdict                  | Interpretation                   |\n| ------ | ------------------------ | -------------------------------- |\n| 85–100 | **High-Performing**      | Optimize incrementally           |\n| 70–84  | **Usable with Friction** | Clear optimization opportunities |\n| 55–69  | **Conversion-Limited**   | Structural issues present        |\n| <55    | **Broken**               | Redesign before testing          |\n\nIf verdict is **Broken**, stop and recommend structural fixes first.\n\n---\n\n## Phase 1: Context & Constraints\n\n### 1. Form Type\n\n* Lead capture\n* Contact\n* Demo / sales request\n* Application\n* Survey / feedback\n* Quote / estimate\n* Checkout (non-account)\n\n---\n\n### 2. Business Context\n\n* What happens after submission?\n* Which fields are actually used?\n* What qualifies as a “good” submission?\n* Any legal or compliance constraints?\n\n---\n\n### 3. Current Performance\n\n* Completion rate\n* Field-level drop-off (if available)\n* Mobile vs desktop split\n* Known abandonment points\n\n---\n\n## Core Principles (Non-Negotiable)\n\n### 1. Every Field Has a Cost\n\nEach required field reduces completion.\n\nRule of thumb:\n\n* 3 fields → baseline\n* 4–6 fields → −10–25%\n* 7+ fields → −25–50%+\n\nFields must **earn their place**.\n\n---\n\n### 2. Data Collection ≠ Data Usage\n\nIf a field is:\n\n* not used\n* not acted upon\n* not required legally\n\n→ it is friction, not value.\n\n---\n\n### 3. Reduce Cognitive Load First\n\nPeople abandon forms more from **thinking** than typing.\n\n---\n\n## Field-Level Optimization\n\n### Email\n\n* Single field (no confirmation)\n* Inline validation\n* Typo correction\n* Correct mobile keyboard\n\n---\n\n### Name\n\n* Single “Name” field by default\n* Split only if operationally required\n\n---\n\n### Phone\n\n* Optional unless critical\n* Explain why if required\n* Auto-format and support country codes\n\n---\n\n### Company / Organization\n\n* Auto-suggest when possible\n* Infer from email domain\n* Enrich after submission if feasible\n\n---\n\n### Job Title / Role\n\n* Dropdown if segmentation matters\n* Optional by default\n\n---\n\n### Free-Text Fields\n\n* Optional unless essential\n* Clear guidance on length/purpose\n* Expand on focus\n\n---\n\n### Selects & Checkboxes\n\n* Radio buttons if <5 options\n* Searchable selects if long\n* Clear “Other” handling\n\n---\n\n## Layout & Flow\n\n### Field Order\n\n1. Easiest first (email, name)\n2. Commitment-building fields\n3. Sensitive or high-effort fields last\n\n---\n\n### Labels & Placeholders\n\n* Labels must always be visible\n* Placeholders are examples only\n* Avoid label-as-placeholder anti-pattern\n\n---\n\n### Single vs Multi-Column\n\n* Default to single column\n* Multi-column only for closely related fields\n\n---\n\n## Multi-Step Forms\n\n### Use When\n\n* 6+ fields\n* Distinct logical sections\n* Qualification or routing required\n\n### Best Practices\n\n* Progress indicator\n* Back navigation\n* Save progress\n* One topic pe",
-      "tags": [
-        "ai",
-        "workflow",
-        "design",
-        "security",
-        "cro"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-02-26T07:11:20.970Z"
-    },
-    {
-      "id": "antigravity-formik-patterns",
-      "name": "formik-patterns",
-      "slug": "formik-patterns",
-      "description": "Formik form handling with validation patterns. Use when building forms, implementing validation, or handling form submission.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/formik-patterns",
-      "content": "\n# Formik Patterns\n## When to Use\n\nUse this skill when you need formik form handling with validation patterns. Use when building forms, implementing validation, or handling form submission.\n\n\n## Basic Form Setup\n\n```tsx\nimport { useFormik } from 'formik';\nimport * as yup from 'yup';\n\nconst validationSchema = yup.object({\n  email: yup.string().email('Invalid email').required('Email is required'),\n  password: yup.string().min(8, 'Min 8 characters').required('Password is required'),\n});\n\nconst LoginForm = () => {\n  const formik = useFormik({\n    initialValues: {\n      email: '',\n      password: '',\n    },\n    validationSchema,\n    onSubmit: async (values) => {\n      await loginMutation({ variables: { input: values } });\n    },\n  });\n\n  return (\n    <VStack gap=\"$4\">\n      <Input\n        label=\"Email\"\n        value={formik.values.email}\n        onChangeText={formik.handleChange('email')}\n        onBlur={formik.handleBlur('email')}\n        error={formik.touched.email ? formik.errors.email : undefined}\n        keyboardType=\"email-address\"\n        autoCapitalize=\"none\"\n      />\n\n      <Input\n        label=\"Password\"\n        value={formik.values.password}\n        onChangeText={formik.handleChange('password')}\n        onBlur={formik.handleBlur('password')}\n        error={formik.touched.password ? formik.errors.password : undefined}\n        secureTextEntry\n      />\n\n      <Button\n        onPress={formik.handleSubmit}\n        isDisabled={!formik.isValid || formik.isSubmitting}\n        isLoading={formik.isSubmitting}\n      >\n        Login\n      </Button>\n    </VStack>\n  );\n};\n```\n\n## Validation Schemas\n\n### Common Patterns\n\n```typescript\nimport * as yup from 'yup';\n\n// Email\nemail: yup.string()\n  .email('Invalid email address')\n  .required('Email is required')\n\n// Password with requirements\npassword: yup.string()\n  .min(8, 'Must be at least 8 characters')\n  .matches(/[a-z]/, 'Must contain lowercase letter')\n  .matches(/[A-Z]/, 'Must contain uppercase letter')\n  .matches(/[0-9]/, 'Must contain number')\n  .required('Password is required')\n\n// Confirm password\nconfirmPassword: yup.string()\n  .oneOf([yup.ref('password')], 'Passwords must match')\n  .required('Please confirm password')\n\n// Phone number\nphone: yup.string()\n  .matches(/^\\+?[1-9]\\d{1,14}$/, 'Invalid phone number')\n  .required('Phone is required')\n\n// Optional field with validation when present\nwebsite: yup.string()\n  .url('Must be a valid URL')\n  .nullable()\n\n// Number with range\nquantity: yup.number()\n  .min(1, 'Minimum 1')\n  .max(100, 'Maximum 100')\n  .required('Quantity required')\n\n// Array with minimum items\ntags: yup.array()\n  .of(yup.string())\n  .min(1, 'Select at least one tag')\n```\n\n### Conditional Validation\n\n```typescript\nconst schema = yup.object({\n  hasCompany: yup.boolean(),\n  companyName: yup.string().when('hasCompany', {\n    is: true,\n    then: (schema) => schema.required('Company name required'),\n    otherwise: (schema) => schema.nullable(),\n  }),\n});\n```\n\n## Form Field Helpers\n\n### Input Helper\n\n```tsx\nconst getFieldProps = (name: keyof typeof formik.values) => ({\n  value: formik.values[name],\n  onChangeText: formik.handleChange(name),\n  onBlur: formik.handleBlur(name),\n  error: formik.touched[name] ? formik.errors[name] : undefined,\n});\n\n// Usage\n<Input label=\"Email\" {...getFieldProps('email')} />\n```\n\n### Select/Picker Helper\n\n```tsx\n<Select\n  label=\"Country\"\n  value={formik.values.country}\n  onValueChange={(value) => formik.setFieldValue('country', value)}\n  error={formik.touched.country ? formik.errors.country : undefined}\n  options={countryOptions}\n/>\n```\n\n## Form Submission with GraphQL\n\n```tsx\nconst CreateItemForm = () => {\n  const [createItem] = useCreateItemMutation({\n    onCompleted: () => {\n      toast.success({ title: 'Item created' });\n      navigation.goBack();\n    },\n    onError: (error) => {\n      console.error('createItem failed:', error);\n      toast.error({ title: 'Failed to create item' });\n    },\n  });\n\n  const formik = useFormik({\n    initialValues: { name: '', description: '' },\n    validationSchema,\n    onSubmit: async (values, { setSubmitting }) => {\n      try {\n        await createItem({ variables: { input: values } });\n      } finally {\n        setSubmitting(false);\n      }\n    },\n  });\n\n  return (\n    <VStack gap=\"$4\">\n      {/* Form fields */}\n      <Button\n        onPress={formik.handleSubmit}\n        isDisabled={!formik.isValid || formik.isSubmitting}\n        isLoading={formik.isSubmitting}\n      >\n        Create\n      </Button>\n    </VStack>\n  );\n};\n```\n\n## Edit Form with Initial Values\n\n```tsx\nconst EditItemForm = ({ item }: { item: Item }) => {\n  const [updateItem] = useUpdateItemMutation({\n    onCompleted: () => toast.success({ title: 'Saved' }),\n    onError: (error) => {\n      console.error('updateItem failed:', error);\n      toast.error({ title: 'Save failed' });\n    },\n  });\n\n  const formik = useFormik({\n    initialValues: {\n      name: item.name,\n      description: item.description ?? '',\n    },\n    enable",
-      "tags": [
-        "typescript",
-        "react",
-        "api",
-        "claude",
-        "ai",
-        "security"
-      ],
-      "useCases": [],
-      "scrapedAt": "2026-07-02T09:27:27.647Z"
-    },
-    {
       "id": "anthropic-frontend-design",
       "name": "frontend-design",
       "slug": "frontend-design",
@@ -28087,14 +28103,14 @@
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 365
+      "count": 366
     },
     {
       "id": "creative-media",
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 114
+      "count": 113
     },
     {
       "id": "development-code-tools",
@@ -28152,55 +28168,55 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 15,
       "newSkillCount": 0,
-      "stars": 300924
+      "stars": 301390
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 181671
+      "stars": 181869
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 77275
+      "stars": 77345
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 91101
+      "stars": 91174
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1804
+      "stars": 1806
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1048,
-      "newSkillCount": 6,
-      "stars": 47749
+      "newSkillCount": 7,
+      "stars": 47827
     },
     {
       "name": "Xquik",
       "url": "https://github.com/Xquik-dev/x-twitter-scraper",
       "skillCount": 1,
       "newSkillCount": 0,
-      "stars": 213
+      "stars": 214
     }
   ],
-  "lastUpdated": "2026-10-17T10:34:07.653Z",
+  "lastUpdated": "2026-10-18T10:54:13.188Z",
   "stats": {
     "totalSkills": 1127,
-    "newSkills": 15,
-    "scrapedAt": "2026-10-17T10:34:07.653Z"
+    "newSkills": 16,
+    "scrapedAt": "2026-10-18T10:54:13.188Z"
   }
 }
