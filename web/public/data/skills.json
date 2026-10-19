@@ -3750,23 +3750,17 @@
       "id": "antigravity-antigravity-maintainer-batch-release",
       "name": "antigravity-maintainer-batch-release",
       "slug": "antigravity-maintainer-batch-release",
-      "description": "Run protected AAS maintainer sweeps, PR merge batches, canonical sync, Core preview checks, and scripted releases. Use for repository maintenance, main alignment, CLI/MCP/Workbench changes, or release work; not ordinary contribution tasks.",
-      "category": "Document Processing",
+      "description": "Run protected AAS maintainer sweeps, PR merge batches, resumable review, immutable distribution, Core checks, and scripted releases. Use for repository maintenance, main alignment, CLI/MCP/Workbench changes, or release work; not ordinary contribution tasks.",
+      "category": "AI & Agents",
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/antigravity-maintainer-batch-release",
-      "content": "\n# Antigravity Maintainer Batch Release\n\n## When to Use\n\nUse this skill for repository-wide AAS maintenance, maintainer-side PR repair or merge batches, canonical synchronization, AAS Core or Workbench changes, protected releases, and hosted catalog or legacy redirect infrastructure. Do not use it for ordinary contribution work that does not require maintainer privileges or canonical convergence.\n\n## Protected-Main Contract\n\nTreat the repository root containing this skill as pull-request-only:\n\n- Read `AGENTS.md`, `.github/MAINTENANCE.md`, and current maintainer docs before mutation.\n- Never commit or push directly to `main`, even when the user says “push to main.” That phrase names the final target state.\n- Preserve unrelated dirty work. Use a clean temporary clone or a topic branch for maintainer changes.\n- Use `npm run merge:batch` for accepted source PRs. Do not substitute a raw merge API, generic GitHub skill, or generic push helper.\n- Let `automation/canonical-repo-state` own generated artifacts and contributor-credit convergence after the source batch. That lane runs `sync:repo-state`, which now also recomputes the README `## Top Contributors` leaderboards through `sync:top-contributors`: never hand-edit those tables, and treat a stale ranking as a generator or exclusion-list defect instead.\n- Use `release:prepare` and `release:publish` for releases. They never authorize a direct `main` push.\n\n## Source Checks\n\nBefore changing anything:\n\n1. Fetch `origin/main`; prove the clean maintainer checkout is on `main` and equals `origin/main`.\n2. Inspect live PRs, issues, discussions in scope, Actions failures, Dependabot, CodeQL, secret scanning, and `npm audit` where relevant.\n3. Confirm current scripts from `package.json` and the workflow files listed in **Current CI workflow**; do not rely on remembered CI or release behavior.\n4. Capture user worktree status separately and keep those files out of maintainer commits.\n\n## Current CI workflow\n\nRead `.github/workflows/ci.yml`, `.github/workflows/skill-review.yml`, `.github/workflows/skillspector-advisory.yml`, and their protected-base scripts on the exact task base. Job dependencies define execution order; file order and a green workflow badge do not define merge authority.\n\n### Required PR checks and independent review\n\n| Lane | Actual sequence and evidence |\n| --- | --- |\n| Intake | `pr-policy` runs first. Ordinary source PRs use the exact protected-base classifier and its dependencies for fork safety and source-only policy. |\n| Source validation | After `pr-policy`, `source-validation` checks sources, refreshes ephemeral generated state once, validates applicable references, runs the complete unsharded test suite and documentation security checks, and uploads the exact-head preview manifest. |\n| Changed-skill evidence | Also after `pr-policy`, `pr-evidence` runs in parallel with `source-validation`. It publishes changed-skill evidence and a shadow decision manifest, then enforces deterministic regressions. Its advisory semantic-review state does not replace the separate skill-review result. |\n| Artifact preview | `artifact-preview` waits for `pr-policy` and `source-validation`, verifies the source-preview manifest and its repository/head/workflow/run-attempt bindings, and does not regenerate ordinary source-PR artifacts. It does not wait for `pr-evidence`. |\n| Semantic review | The separate `skill-review.yml` workflow fingerprints the complete changed skill trees. `review` means a passing Tessl result or valid identical-content reuse; `manual-review-required` needs the maintainer's semantic review and exact full-head attestation. It is independent of the required-CI DAG. |\n| Static advisory scan | The separate PR-only `skillspector-advisory.yml` workflow runs `evidence-ready`, then `skillspector-advisory`. It waits for the latest GitHub Actions `pr-evidence` check for the same PR and exact head SHA, independently of `source-validation`, `artifact-preview`, and semantic review. |\n\nThe four routine protected checks remain `pr-policy`, `pr-evidence`, `source-validation`, and `artifact-preview`. Review skill-content changes truthfully and use `merge:batch` with exact-head attestation where required. SkillSpector, Jev, shadow decisions, and timing telemetry neither satisfy these checks nor authorize a merge. Inspect available advisory findings during semantic review, but do not add an advisory workflow to branch protection, fork-run approval prerequisites, or `merge:batch` without a separately authorized contract change.\n\nFor protected canonical-sync PRs, `pr-policy` reproduces the exact managed tree from trusted `main`; `source-validation` and `pr-evidence` record lightweight successful boundaries, while `artifact-preview` regenerates to confirm no drift. Do not describe those boundary jobs as fresh source tests or semantic scans. On merged `main`, `main-validation-and-sync` performs the repository-state sync, reference validation, dependency audit, full tests",
+      "content": "\n# Antigravity Maintainer Batch Release\n\n## When to Use\n\nUse for AAS maintainer sweeps, PR repairs and merge batches, runtime/catalog releases, installed maintainer-skill alignment, and public deployment verification. Ordinary contributors do not need maintainer privileges.\n\n## Operating sequence\n\n1. Preserve dirty work. Use an isolated current-main checkout. Read the exact-base AGENTS.md, `.github/MAINTENANCE.md`, `package.json`, and [maintenance contract](references/maintenance-contract.md). Mandatory tools must exist on that base; never import retired procedures from another checkout.\n2. For a source PR batch, inventory its PR numbers, start `npm run maintenance:cycle -- start` on clean current main before content analysis/review, and follow the [complete cycle](references/maintenance-cycle.md). The runner measures source maintenance without a release; finish it before release preparation. For a release-only task or a sweep with no PRs, record the overall start separately; do not invent a PR or start a source cycle that cannot finish. Triage the full authorized scope. Repair source PRs, run the component plan, review the entire tracked `skills/<skill-id>/**` subtree, and inspect relevant advisories. Do not substitute a heuristic score for semantic review.\n3. Use `maintenance:cycle merge`, which delegates to `merge:batch`, or invoke `npm run merge:batch` directly when no source cycle applies. These share the sole merge authority; do not run both for the same merge. Keep strict protected main and admin enforcement. Safe analysis may precede review; merge still requires current checks and either real Tessl review or exact-head maintainer attestation. Private signed receipts may reuse unchanged content/context review. Preserve owner-only sensitive-change and protected-base fork-ledger restrictions.\n4. Use guided intake to collect all blockers, then resume with a private external `--state-dir`. Record each blocker once; after two equivalent unproductive checks, continue independent work. Re-fetch PR state and protection every time. Continue independent PRs after a blocked PR; report failures. Follow the cycle reference’s deterministic failure codes and bounded read retries. Never repeat a write with an unknown outcome, steal an active state lock, or reuse stale CI evidence. Do not rewrite PR metadata, automatically retry base drift, or use GitHub auto-merge.\n5. Ordinary source merges generate ephemeral validation state only. Tracked distribution snapshots and contributor credits refresh in the protected release PR; no ordinary canonical-sync PR is required.\n6. When authorized, use `release:prepare` and `release:publish`. Prepare already validates; do not duplicate its suite with diagnostic preflight. Merge the prepared release PR through protection. The immutable candidate is built once, checked on supported platforms, and consumed unchanged by npm/Pages. Main may advance while the released commit remains protected ancestry.\n7. For compatible catalog-only publication, use the independent catalog workflow and immutable revision/SRI. Preserve offline operation, rollback and agent-owned selection. Do not bump or republish runtime just to update catalog data.\n8. Finish a source batch with `maintenance:cycle verify` on exact main CI/CodeQL after all other source-cycle actions. Without publication, stop there: public distribution snapshots intentionally remain at the last release. For releases, complete the full-release-alignment gate in the contract, including actual public bytes and live surfaces. Report personal MCP configuration and session reload separately. Update installed maintainer skills from the adopted canonical source, preserving unrelated installations.\n\n## Examples\n\nPrepare safe analyses without merging:\n\n```sh\nnpm run merge:batch -- --prs 123,124 --prepare-only\n```\n\nAfter actual semantic review, persist the evidence and merge:\n\n```sh\nnpm run merge:batch -- --prs 123,124 --state-dir /absolute/private/state --reviewed-head FULL_40_CHARACTER_SHA --reviewer maintainer --review-evidence 'Complete bundle, provenance, safety and limitations reviewed'\n```\n\nUse real IDs, paths and a full immutable SHA. The state directory must already exist, be privately owned and mode 0700, and be outside source checkouts.\n\n## Validation\n\nRead [component validation](references/component-validation.md) and the [maintenance contract](references/maintenance-contract.md) for exact checks, release proof, catalog compatibility and timing methodology. Required checks remain `pr-policy`, `pr-evidence`, `source-validation`, `artifact-preview`. Unknown/shared/policy changes receive full validation.\n\n## Limitations\n\nThis skill grants no additional publication or messaging authority. Tessl unavailable means `manual-review-required`, not a passing review. Jev, SkillSpector and timing reports are advisory. Never use direct main push, admin bypass, mutable artifact identity, PR-controlled review receipts, or invented native-client reload ",
       "tags": [
-        "python",
-        "node",
-        "markdown",
-        "api",
         "mcp",
-        "claude",
         "ai",
         "agent",
-        "llm",
-        "automation"
+        "workflow"
       ],
       "useCases": [],
       "scrapedAt": "2026-07-19T08:27:38.550Z"
@@ -28096,14 +28090,14 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 411
+      "count": 410
     },
     {
       "id": "ai-agents",
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 366
+      "count": 367
     },
     {
       "id": "creative-media",
@@ -28168,42 +28162,42 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 15,
       "newSkillCount": 0,
-      "stars": 301390
+      "stars": 301909
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 181869
+      "stars": 182137
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 77345
+      "stars": 77423
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 91174
+      "stars": 91260
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1806
+      "stars": 1807
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1048,
-      "newSkillCount": 7,
-      "stars": 47827
+      "newSkillCount": 5,
+      "stars": 47936
     },
     {
       "name": "Xquik",
@@ -28213,10 +28207,10 @@
       "stars": 214
     }
   ],
-  "lastUpdated": "2026-10-18T10:54:13.188Z",
+  "lastUpdated": "2026-10-19T12:55:46.750Z",
   "stats": {
     "totalSkills": 1127,
-    "newSkills": 16,
-    "scrapedAt": "2026-10-18T10:54:13.188Z"
+    "newSkills": 14,
+    "scrapedAt": "2026-10-19T12:55:46.750Z"
   }
 }

@@ -1,9 +1,9 @@
 ---
 name: antigravity-maintainer-batch-release
-description: Run protected AAS maintainer sweeps, PR merge batches, canonical sync, Core preview checks, and scripted releases. Use for repository maintenance, main alignment, CLI/MCP/Workbench changes, or release
-category: Document Processing
+description: Run protected AAS maintainer sweeps, PR merge batches, resumable review, immutable distribution, Core checks, and scripted releases. Use for repository maintenance, main alignment, CLI/MCP/Workbench c
+category: AI & Agents
 source: antigravity
-tags: [python, node, markdown, api, mcp, claude, ai, agent, llm, automation]
+tags: [mcp, ai, agent, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/antigravity-maintainer-batch-release
 ---
 
@@ -12,43 +12,39 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/anti
 
 ## When to Use
 
-Use this skill for repository-wide AAS maintenance, maintainer-side PR repair or merge batches, canonical synchronization, AAS Core or Workbench changes, protected releases, and hosted catalog or legacy redirect infrastructure. Do not use it for ordinary contribution work that does not require maintainer privileges or canonical convergence.
+Use for AAS maintainer sweeps, PR repairs and merge batches, runtime/catalog releases, installed maintainer-skill alignment, and public deployment verification. Ordinary contributors do not need maintainer privileges.
 
-## Protected-Main Contract
+## Operating sequence
 
-Treat the repository root containing this skill as pull-request-only:
+1. Preserve dirty work. Use an isolated current-main checkout. Read the exact-base AGENTS.md, `.github/MAINTENANCE.md`, `package.json`, and [maintenance contract](references/maintenance-contract.md). Mandatory tools must exist on that base; never import retired procedures from another checkout.
+2. For a source PR batch, inventory its PR numbers, start `npm run maintenance:cycle -- start` on clean current main before content analysis/review, and follow the [complete cycle](references/maintenance-cycle.md). The runner measures source maintenance without a release; finish it before release preparation. For a release-only task or a sweep with no PRs, record the overall start separately; do not invent a PR or start a source cycle that cannot finish. Triage the full authorized scope. Repair source PRs, run the component plan, review the entire tracked `skills/<skill-id>/**` subtree, and inspect relevant advisories. Do not substitute a heuristic score for semantic review.
+3. Use `maintenance:cycle merge`, which delegates to `merge:batch`, or invoke `npm run merge:batch` directly when no source cycle applies. These share the sole merge authority; do not run both for the same merge. Keep strict protected main and admin enforcement. Safe analysis may precede review; merge still requires current checks and either real Tessl review or exact-head maintainer attestation. Private signed receipts may reuse unchanged content/context review. Preserve owner-only sensitive-change and protected-base fork-ledger restrictions.
+4. Use guided intake to collect all blockers, then resume with a private external `--state-dir`. Record each blocker once; after two equivalent unproductive checks, continue independent work. Re-fetch PR state and protection every time. Continue independent PRs after a blocked PR; report failures. Follow the cycle reference’s deterministic failure codes and bounded read retries. Never repeat a write with an unknown outcome, steal an active state lock, or reuse stale CI evidence. Do not rewrite PR metadata, automatically retry base drift, or use GitHub auto-merge.
+5. Ordinary source merges generate ephemeral validation state only. Tracked distribution snapshots and contributor credits refresh in the protected release PR; no ordinary canonical-sync PR is required.
+6. When authorized, use `release:prepare` and `release:publish`. Prepare already validates; do not duplicate its suite with diagnostic preflight. Merge the prepared release PR through protection. The immutable candidate is built once, checked on supported platforms, and consumed unchanged by npm/Pages. Main may advance while the released commit remains protected ancestry.
+7. For compatible catalog-only publication, use the independent catalog workflow and immutable revision/SRI. Preserve offline operation, rollback and agent-owned selection. Do not bump or republish runtime just to update catalog data.
+8. Finish a source batch with `maintenance:cycle verify` on exact main CI/CodeQL after all other source-cycle actions. Without publication, stop there: public distribution snapshots intentionally remain at the last release. For releases, complete the full-release-alignment gate in the contract, including actual public bytes and live surfaces. Report personal MCP configuration and session reload separately. Update installed maintainer skills from the adopted canonical source, preserving unrelated installations.
 
-- Read `AGENTS.md`, `.github/MAINTENANCE.md`, and current maintainer docs before mutation.
-- Never commit or push directly to `main`, even when the user says “push to main.” That phrase names the final target state.
-- Preserve unrelated dirty work. Use a clean temporary clone or a topic branch for maintainer changes.
-- Use `npm run merge:batch` for accepted source PRs. Do not substitute a raw merge API, generic GitHub skill, or generic push helper.
-- Let `automation/canonical-repo-state` own generated artifacts and contributor-credit convergence after the source batch. That lane runs `sync:repo-state`, which now also recomputes the README `## Top Contributors` leaderboards through `sync:top-contributors`: never hand-edit those tables, and treat a stale ranking as a generator or exclusion-list defect instead.
-- Use `release:prepare` and `release:publish` for releases. They never authorize a direct `main` push.
+## Examples
 
-## Source Checks
+Prepare safe analyses without merging:
 
-Before changing anything:
+```sh
+npm run merge:batch -- --prs 123,124 --prepare-only
+```
 
-1. Fetch `origin/main`; prove the clean maintainer checkout is on `main` and equals `origin/main`.
-2. Inspect live PRs, issues, discussions in scope, Actions failures, Dependabot, CodeQL, secret scanning, and `npm audit` where relevant.
-3. Confirm current scripts from `package.json` and the workflow files listed in **Current CI workflow**; do not rely on remembered CI or release behavior.
-4. Capture user worktree status separately and keep those files out of maintainer commits.
+After actual semantic review, persist the evidence and merge:
 
-## Current CI workflow
+```sh
+npm run merge:batch -- --prs 123,124 --state-dir /absolute/private/state --reviewed-head FULL_40_CHARACTER_SHA --reviewer maintainer --review-evidence 'Complete bundle, provenance, safety and limitations reviewed'
+```
 
-Read `.github/workflows/ci.yml`, `.github/workflows/skill-review.yml`, `.github/workflows/skillspector-advisory.yml`, and their protected-base scripts on the exact task base. Job dependencies define execution order; file order and a green workflow badge do not define merge authority.
+Use real IDs, paths and a full immutable SHA. The state directory must already exist, be privately owned and mode 0700, and be outside source checkouts.
 
-### Required PR checks and independent review
+## Validation
 
-| Lane | Actual sequence and evidence |
-| --- | --- |
-| Intake | `pr-policy` runs first. Ordinary source PRs use the exact protected-base classifier and its dependencies for fork safety and source-only policy. |
-| Source validation | After `pr-policy`, `source-validation` checks sources, refreshes ephemeral generated state once, validates applicable references, runs the complete unsharded test suite and documentation security checks, and uploads the exact-head preview manifest. |
-| Changed-skill evidence | Also after `pr-policy`, `pr-evidence` runs in parallel with `source-validation`. It publishes changed-skill evidence and a shadow decision manifest, then enforces deterministic regressions. Its advisory semantic-review state does not replace the separate skill-review result. |
-| Artifact preview | `artifact-preview` waits for `pr-policy` and `source-validation`, verifies the source-preview manifest and its repository/head/workflow/run-attempt bindings, and does not regenerate ordinary source-PR artifacts. It does not wait for `pr-evidence`. |
-| Semantic review | The separate `skill-review.yml` workflow fingerprints the complete changed skill trees. `review` means a passing Tessl result or valid identical-content reuse; `manual-review-required` needs the maintainer's semantic review and exact full-head attestation. It is independent of the required-CI DAG. |
-| Static advisory scan | The separate PR-only `skillspector-advisory.yml` workflow runs `evidence-ready`, then `skillspector-advisory`. It waits for the latest GitHub Actions `pr-evidence` check for the same PR and exact head SHA, independently of `source-validation`, `artifact-preview`, and semantic review. |
+Read [component validation](references/component-validation.md) and the [maintenance contract](references/maintenance-contract.md) for exact checks, release proof, catalog compatibility and timing methodology. Required checks remain `pr-policy`, `pr-evidence`, `source-validation`, `artifact-preview`. Unknown/shared/policy changes receive full validation.
 
-The four routine protected checks remain `pr-policy`, `pr-evidence`, `source-validation`, and `artifact-preview`. Review skill-content changes truthfully and use `merge:batch` with exact-head attestation where required. SkillSpector, Jev, shadow decisions, and timing telemetry neither satisfy these checks nor authorize a merge. Inspect available advisory findings during semantic review, but do not add an advisory workflow to branch protection, fork-run approval prerequisites, or `merge:batch` without a separately authorized contract change.
+## Limitations
 
-For protected canonical-sync PRs, `pr-policy` reproduces the exact managed tree from trusted `main`; `source-validation` and `pr-evidence` record lightweight successful boundaries, while `artifact-preview` regenerates to confirm no drift. Do not describe those boundary jobs as fresh source tests or semantic scans. On merged `main`, `main-validation-and-sync` performs the repository-state sync, reference validation, dependency audit, full tests
+This skill grants no additional publication or messaging authority. Tessl unavailable means `manual-review-required`, not a passing review. Jev, SkillSpector and timing reports are advisory. Never use direct main push, admin bypass, mutable artifact identity, PR-controlled review receipts, or invented native-client reload 
