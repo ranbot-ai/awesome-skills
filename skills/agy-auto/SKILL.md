@@ -3,12 +3,17 @@ name: agy-auto
 description: Configure agy-auto PreToolUse security gate to run Antigravity CLI (agy) unattended with layered policy controls instead of --dangerously-skip-permissions. 
 category: AI & Agents
 source: antigravity
-tags: [python, api, ai, agent, llm, workflow, document, security]
+tags: [api, ai, agent, llm, workflow, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agy-auto
 ---
 
 
 # agy-auto — Antigravity Auto-Permission & Security Gate
+
+## External tool prerequisite
+
+Use only an already installed tool whose exact version, complete dependency tree and integrity have been reviewed. This skill does not bootstrap tools or activate external plugins. If the prerequisite is missing, stop that executable path and report it; continue with static analysis when possible. A separate installation task must pin immutable artifacts, stage them outside active agent directories with lifecycle scripts disabled, inspect every bundled file and executable entry point (including tests and hooks), and obtain approval before activation or host configuration changes. Do not substitute a same-named workspace script or fetch a moving branch.
+
 
 ## Overview
 
@@ -28,20 +33,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agy-
 > Because `agy-auto` installs as an active PreToolUse hook on the permission evaluation path, never clone a mutable branch directly into your live plugin directory. Always clone to a temporary staging folder, pin an immutable release tag or commit SHA, and inspect the codebase before making the hook executable.
 
 **Option A: Native Antigravity Plugin (Recommended)**
-```bash
-# 1. Clone into a temporary review directory and checkout an immutable release tag
-git clone https://github.com/onkarbadve/agy-auto.git /tmp/agy-auto-review
-cd /tmp/agy-auto-review
-git checkout <verified-full-commit-sha>
-
-# 2. Inspect hook.sh and engine/ files before deployment
-less hook.sh
-python3 -m unittest -v tests/test_engine.py
-
-# 3. Once reviewed and verified, copy to the Antigravity plugin directory and set permissions
-# Host activation requires explicit user approval, an existing-config backup,
-# and a reviewed non-overwriting installation into the confirmed host path.
-```
+Use an existing reviewed immutable installation; no upstream code, tests or installer may run during preparation.
 
 Only if the exact CLI/hook combination has been verified to fail closed on missing, failed and tampered hooks, and the user explicitly approves this host permission change, configure `toolPermission: "always-proceed"` in `~/.gemini/antigravity-cli/settings.json` so hooks can gate tool calls:
 ```json
@@ -51,16 +43,7 @@ Only if the exact CLI/hook combination has been verified to fail closed on missi
 ```
 
 **Option B: Global Hook via Installer**
-```bash
-# 1. Clone to an isolated location and pin release
-git clone https://github.com/onkarbadve/agy-auto.git ~/.local/share/agy-auto
-cd ~/.local/share/agy-auto
-git checkout <verified-full-commit-sha>
-
-# 2. Review and run the installer
-chmod +x hook.sh
-./install.sh                  # registers hook in hooks.json, sets always-proceed, runs smoke tests
-```
+Use an existing reviewed immutable installation; no upstream code, tests or installer may run during preparation.
 
 ### Step 2: Policy Evaluation Layers
 
@@ -91,4 +74,4 @@ To authorize this specific command for a single run, reply directly in the chat:
 To run `agy-auto` completely offline using llama.cpp or Ollama instead of cloud APIs, edit `~/.gemini/config/agy-auto/policy.toml`:
 ```toml
 [classifier]
-endpoint = 
+endpoint = "http://127.0.0.1:8080/v1/chat/com

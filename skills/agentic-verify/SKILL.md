@@ -37,7 +37,7 @@ that looked well tested.
 ### Runner
 
 ```bash
-AV='uvx --from git+https://github.com/timini/agentic-verification@v0.3.0#subdirectory=runner agentic-verification'
+AV='uvx --from git+https://github.com/timini/agentic-verification@07608b3b9e4e359bc0b93b3eca94bb78d67e369e#subdirectory=runner agentic-verification'
 $AV verify <project-root> --base <rev> [--budget-minutes N]
 $AV replay --run <run-dir> --mutant <id> --all
 $AV base-check <project-root> --base <rev> [tests...]
@@ -90,4 +90,4 @@ with the verdict and report paths.
      give no evidence: rely on `base-check` and say so.
    - `no change`: nothing under the source packages changed since `--base`; check the base.
 4. **Close each gap**, then rerun verify (step 3). Stop after three rounds and report what is left.
-   - Surviving mutant: read its patch in `mutants/<id>.patch`. It shows a wrong version o
+   - Surviving mutant: read its patch in `mutants/<id>.

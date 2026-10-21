@@ -10,6 +10,11 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/drop
 
 # DropTheHassle publish
 
+## External tool prerequisite
+
+Use only an already installed tool whose exact version, complete dependency tree and integrity have been reviewed. This skill does not bootstrap tools or activate external plugins. If the prerequisite is missing, stop that executable path and report it; continue with static analysis when possible. A separate installation task must pin immutable artifacts, stage them outside active agent directories with lifecycle scripts disabled, inspect every bundled file and executable entry point (including tests and hooks), and obtain approval before activation or host configuration changes. Do not substitute a same-named workspace script or fetch a moving branch.
+
+
 ## Overview
 
 DropTheHassle (https://dropthehassle.com) hosts finished static files (HTML, CSS, JS, images) on a
@@ -56,7 +61,7 @@ hidden files are left out, except `.well-known`.
 CLI, run on the project folder after the build (or on the plain site folder):
 
 ```bash
-npx -y dropthehassle deploy .
+dropthehassle deploy .
 ```
 
 It prints the live URL and a claim link, and writes `.dropthehassle.json` in that folder so the
@@ -67,7 +72,7 @@ with `--login`; `--code XXXX-XXXX` uses a 15-minute dashboard code for an existi
 MCP, in Claude Code:
 
 ```bash
-claude mcp add dropthehassle -- npx -y dropthehassle-mcp
+claude mcp add dropthehassle -- dropthehassle-mcp
 ```
 
 Then call `deploy_site` with `folder` set to the absolute path. The hosted connector
@@ -100,23 +105,6 @@ the site, `get_checkout_link` returns a `checkout.stripe.com` link for them to o
 
 ```text
 User: Put this site online.
-Agent: No dist/ yet, so runs npm install && npm run build, then npx -y dropthehassle deploy .
+Agent: No dist/ yet, so runs npm install && npm run build, then dropthehassle deploy .
        Reports: Live at https://yourname.dropthehassle.app, plus the claim link (7 days).
-       Runs the live check: outcome "live", secure true.
-```
-
-### Example 2: Domain search
-
-```text
-User: Is there a .com for it?
-Agent: Checks three names with search_domain, lists the available ones with the returned price,
-       and asks which one they want. It does not create a payment link until they say so.
-```
-
-## Best Practices
-
-- ✅ Deploy the build output, not the source, and rebuild before every redeploy.
-- ✅ Run the CLI on the project folder so a rebuild of `dist/` does not delete the link file.
-- ✅ Give the human the claim link word for word, with the 7-day note.
-- ❌ Do not open, fill in or pay a payment link. A DropTheHassle payment link is always on
-  `checkout.stripe.com`.
+       Runs the live chec

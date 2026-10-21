@@ -3,7 +3,7 @@ name: container-scanning
 description: Scan container images for vulnerabilities using Trivy, Grype, and cloud-native tools. 
 category: Security & Systems
 source: antigravity
-tags: [python, react, api, ai, agent, template, document, image, security, vulnerability]
+tags: [python, react, api, ai, agent, template, design, document, image, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/container-scanning
 ---
 
@@ -43,7 +43,7 @@ Use this skill when:
 
 ```bash
 # Linux
-curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh -o /tmp/install-trivy.sh && sh /tmp/install-trivy.sh && rm /tmp/install-trivy.sh -s -- -b /usr/local/bin
+# Tool prerequisite: use a verified preinstalled binary; no network installer runs here.
 
 # macOS
 brew install trivy
@@ -111,7 +111,8 @@ scan:
 
 ### CI Integration
 
-```yaml
+```text
+NON-EXECUTABLE CI DESIGN: before adoption, use least-privilege jobs, pin every action to a reviewed full SHA, and provision verified fixed-version tools in a digest-pinned runner image. Never expose credentials during tool provisioning.
 # GitHub Actions
 name: Container Security
 
@@ -130,7 +131,7 @@ jobs:
         run: docker build -t myapp:${{ github.sha }} .
 
       - name: Run Trivy
-        uses: aquasecurity/trivy-action@master
+        step: Run the preinstalled reviewed Trivy binary
         with:
           image-ref: 'myapp:${{ github.sha }}'
           format: 'sarif'
@@ -150,7 +151,7 @@ jobs:
 
 ```bash
 # Linux/macOS
-curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh -o /tmp/install-grype.sh && sh /tmp/install-grype.sh && rm /tmp/install-grype.sh -s -- -b /usr/local/bin
+# Tool prerequisite: use a verified preinstalled binary; no network installer runs here.
 
 # Homebrew
 brew install grype
@@ -210,7 +211,8 @@ docker scout recommendations myapp:latest
 
 ### CI Integration
 
-```yaml
+```text
+NON-EXECUTABLE CI DESIGN: before adoption, use least-privilege jobs, pin every action to a reviewed full SHA, and provision verified fixed-version tools in a digest-pinned runner image. Never expose credentials during tool provisioning.
 - name: Docker Scout
   uses: docker/scout-action@v1
   with:
@@ -264,21 +266,4 @@ gcloud artifacts repositories update myrepo \
   --enable-vulnerability-scanning
 
 # View vulnerabilities
-gcloud artifacts docker images describe \
-  us-central1-docker.pkg.dev/project/myrepo/myapp:latest \
-  --show-package-vulnerability
-```
-
-## Admission Controllers
-
-### OPA Gatekeeper
-
-```yaml
-apiVersion: templates.gatekeeper.sh/v1beta1
-kind: ConstraintTemplate
-metadata:
-  name: k8sallowedrepos
-spec:
-  crd:
-    spec:
-      names:
+gcloud artifacts docker images describe

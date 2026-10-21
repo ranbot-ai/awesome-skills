@@ -37,7 +37,7 @@ to run on every change, and which tests cost time without adding detection.
 ### Runner
 
 ```bash
-AV='uvx --from git+https://github.com/timini/agentic-verification@v0.3.0#subdirectory=runner agentic-verification'
+AV='uvx --from git+https://github.com/timini/agentic-verification@07608b3b9e4e359bc0b93b3eca94bb78d67e369e#subdirectory=runner agentic-verification'
 $AV quick|deep <path> [--budget-minutes N]
 $AV prune-check <path> --tests-file <file> --from-run <run-dir>
 $AV replay --run <run-dir> --mutant <id>
@@ -88,4 +88,4 @@ minutes. The last stdout line is JSON with the report paths.
    unproven. Never present a refuted set as removable.
 5. **Summarise under three headings**, findings in the report's order, each with its label,
    evidence and next validation step:
-   - *Does it catch broken code?* Surviving mutants, pseudo-test
+   - *Does it catch broken cod

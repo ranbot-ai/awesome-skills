@@ -24,7 +24,8 @@ Build and deploy serverless applications with Azure Functions. Covers function a
 
 ```bash
 # Install Azure CLI
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+# Prerequisite: organization-approved Azure CLI installed from a verified signed package.
+az version
 
 # Install Azure Functions Core Tools v4
 npm install -g azure-functions-core-tools@4
@@ -196,5 +197,4 @@ def process_upload(blob: func.InputStream):
 ### Timer Trigger -- Python
 
 ```python
-@app.timer_trigger(schedule="0 */5 * * * *", arg_name="timer",
-             
+@app.timer_trigger(schedule="0

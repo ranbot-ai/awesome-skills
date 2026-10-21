@@ -68,6 +68,22 @@ Based on the file extension or language context, refer to the appropriate guide:
 | Python     | `.py`                             | references/python.md             |
 | Ruby       | `.rb`                             | references/ruby.md                 |
 
+## Runtime prerequisite and execution boundary
+
+This catalog bundles documentation only; `ct_analyzer/analyzer.py` is not included.
+The commands below and in the language references are illustrative upstream usage,
+not an instruction to resolve or execute missing code. Stop if a separately installed,
+reviewed analyzer is unavailable. Record its immutable source identity and inspect its
+complete runtime and locked dependencies before any separately authorized setup.
+Use only existing approved language tools; do not let `uv`, `npx`, PECL or a guide's
+bootstrap commands fetch a moving dependency. Review the selected analyzer's command
+construction and target-execution behavior before using it on untrusted code.
+
+For PHP, require VLD with `vld.execute=0`; refuse any analyzer that falls back to
+OPcache target execution. For compilation, bytecode inspection and all other language
+backends, use an isolated environment without unrelated credentials or network access.
+Do not treat disassembly as proof that a tool cannot execute target code.
+
 ## Quick Start
 
 ```bash
@@ -109,28 +125,4 @@ uv run {baseDir}/ct_analyzer/analyzer.py CryptoUtils.kt
 uv run {baseDir}/ct_analyzer/analyzer.py CryptoUtils.cs
 ```
 
-Note: Java, Kotlin, and C# compile to bytecode (JVM/CIL) that runs on a virtual machine with JIT compilation. The analyzer examines the bytecode directly, not the JIT-compiled native code. The `--arch` and `--opt-level` flags do not apply to these languages.
-
-### Swift (iOS/macOS)
-
-```bash
-# Analyze Swift for native architecture
-uv run {baseDir}/ct_analyzer/analyzer.py crypto.swift
-
-# Analyze for specific architecture (iOS devices)
-uv run {baseDir}/ct_analyzer/analyzer.py --arch arm64 crypto.swift
-
-# Analyze with different optimization levels
-uv run {baseDir}/ct_analyzer/analyzer.py --opt-level O0 crypto.swift
-```
-
-Note: Swift compiles to native code like C/C++/Go/Rust, so it uses assembly-level analysis and supports `--arch` and `--opt-level` flags.
-
-### Prerequisites
-
-| Language               | Requirements                                              |
-| ---------------------- | --------------------------------------------------------- |
-| C, C++, Go, Rust       | Compiler in PATH (`gcc`/`clang`, `go`, `rustc`)           |
-| Swift                  | Xcode or Swift toolchain (`swiftc` in PATH)               |
-| Java                   | JDK with `javac` and `javap` in PATH                      |
-| Kotlin                 | Kotlin compiler (`kotlinc`) + JDK (`javap`) in PATH   
+Note: Java, Kotlin, and C# compile to bytecode (JVM/CIL) that runs on a virtual machine with JIT compilation. The analyzer examines the bytecode directly, not the JIT-compiled native code. The `--arch` and `--opt-level` flags do not apply to these 

@@ -1,9 +1,9 @@
 ---
 name: ai-podcast-voiceover
 description: Install and use the official AI Podcast Voiceover package, pinned by digest, for paid hosted work on the Beatra service. 
-category: Document Processing
+category: AI & Agents
 source: antigravity
-tags: [python, markdown, api, mcp, claude, ai, agent, document, security]
+tags: [python, markdown, api, mcp, claude, ai, agent, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-podcast-voiceover
 ---
 
@@ -18,21 +18,20 @@ Turn an article, notes, or a finished script into a solo podcast episode with a 
 This catalog entry is a **reviewed pointer, not the executable package**. It
 contains no client code and performs no Beatra operation by itself. The package
 it points to bundles three standard-library Python scripts that make network
-calls, store a credential, and can replace their own files. Read
+calls and store a credential. It has no self-updater: it never downloads
+code and never changes its own files. Read
 [Install](#install-pinned-verified-approved-twice) and
 [Security & Safety Notes](#security--safety-notes) before activating it.
 
 | Pinned identity | Value |
 | --- | --- |
-| Package | `ai-podcast-voiceover` `0.1.7` |
-| Archive | `https://cdn.beatra.ai/agent-packages/ai-podcast-voiceover/v0.1.7/ai-podcast-voiceover-skill-0.1.7.zip` |
-| Archive SHA-256 | `571a9b48f7e32e5350a4916f502ed78c66b16f6bffdde33dda1c4c1b00996c87` |
-| Source tree | [`beatra-ai/ai-podcast-voiceover-skill@ddca11e`](https://github.com/beatra-ai/ai-podcast-voiceover-skill/tree/ddca11ec6853184468eab57a5b4b3649e5293f4d/skills/ai-podcast-voiceover) (full SHA `ddca11ec6853184468eab57a5b4b3649e5293f4d`) |
+| Package | `ai-podcast-voiceover` `0.2.5` |
+| Source commit | [`beatra-ai/ai-podcast-voiceover-skill@0fe5c52`](https://github.com/beatra-ai/ai-podcast-voiceover-skill/tree/0fe5c523fc42754ba8d328e2db4df895a6276ee3/skills/ai-podcast-voiceover) (full SHA `0fe5c523fc42754ba8d328e2db4df895a6276ee3`) |
+| Package tree | `3e9432060beedd7f2592804bc928fb26b595e2fd` (Git tree ID of `skills/ai-podcast-voiceover` at that commit) |
 | License | MIT No Attribution (MIT-0) |
 
-The archive holds regular files only (no symlinks, no executable bits, no
-binaries). Confirm that with the inspect commands below. Every file must be
-byte-identical to the source tree at the pinned commit.
+The pinned tree holds regular files only (no symlinks, no executable bits, no
+binaries). Confirm that with the inspect commands below.
 
 ## When to Use This Skill
 
@@ -42,70 +41,72 @@ byte-identical to the source tree at the pinned commit.
 
 ## Install (pinned, verified, approved twice)
 
-### Step 1: Download and verify into a review directory
+### Step 1: Fetch the pinned tree into a review directory
 
-Explain that this downloads an external package from `cdn.beatra.ai`, then ask
+Explain that this fetches an external package from `github.com`, then ask
 for approval. Only after approval:
 
 ```bash
+set -e
 umask 077
 review_dir="$(mktemp -d)"
 cd "$review_dir" || exit 1
-curl --connect-timeout 10 --max-time 60 -fsSO "https://cdn.beatra.ai/agent-packages/ai-podcast-voiceover/v0.1.7/ai-podcast-voiceover-skill-0.1.7.zip"
-printf '%s  %s\n' \
-  '571a9b48f7e32e5350a4916f502ed78c66b16f6bffdde33dda1c4c1b00996c87' \
-  'ai-podcast-voiceover-skill-0.1.7.zip' | shasum -a 256 -c -
+git clone --quiet --filter=blob:none --no-checkout https://github.com/beatra-ai/ai-podcast-voiceover-skill.git src
+git -C src checkout --quiet 0fe5c523fc42754ba8d328e2db4df895a6276ee3 -- skills/ai-podcast-voiceover
+test "$(git -C src rev-parse '0fe5c523fc42754ba8d328e2db4df895a6276ee3:skills/ai-podcast-voiceover')" = '3e9432060beedd7f2592804bc928fb26b595e2fd' && echo TREE-OK
 ```
 
-Stop if the check does not print `OK`. The expected digest comes from this
-catalog entry, not from a file on the same CDN.
+Stop if the last command does not print `TREE-OK`. The expected commit and
+tree IDs come from this catalog entry, not from the package or its website,
+and Git addresses every fetched object by its hash.
 
 ### Step 2: Inspect before activation
 
-Before extraction, reject absolute/traversing or out-of-package member paths, duplicates/case collisions, links/devices/executable/binary files and excessive member count/expanded sizes. Extract only after this ZIP preflight passes into a fresh private directory; later link checks do not prevent an escape.
-
 ```bash
-unzip -l ai-podcast-voiceover-skill-0.1.7.zip
-
-# Only after complete member preflight passes:
-unzip -q ai-podcast-voiceover-skill-0.1.7.zip
-find ai-podcast-voiceover -type l -print            # expect no output
-find ai-podcast-voiceover -type f -perm -111 -print # expect no output
-grep -n '"auto_update": True' ai-podcast-voiceover/scripts/mcp_client.py
+git -C src ls-tree -r 0fe5c523fc42754ba8d328e2db4df895a6276ee3 -- skills/ai-podcast-voiceover | awk '$1 != "100644"'  # expect no output
+grep -n -E 'maybe_auto_update|download_update|_apply_update' src/skills/ai-podcast-voiceover/scripts/mcp_client.py  # expect no output
 ```
 
-Confirm byte identity before activation with the public source tree (a second,
-independent host):
+The first check lists any symlink, executable, or submodule entry; the second
+finds the entry points of the self-updater that earlier versions shipped.
 
-```bash
-git clone --quiet --filter=blob:none --no-checkout https://github.com/beatra-ai/ai-podcast-voiceover-skill.git src
-git -C src checkout --quiet ddca11ec6853184468eab57a5b4b3649e5293f4d -- skills/ai-podcast-voiceover
-(cd ai-podcast-voiceover && find . -type f | LC_ALL=C sort | xargs shasum -a 256) > archive.sha
-(cd src/skills/ai-podcast-voiceover && find . -type f | LC_ALL=C sort | xargs shasum -a 256) > tree.sha
-cmp archive.sha tree.sha && echo IDENTICAL
-```
-
-Report to the user what the review found: `SKILL.md`, `manifest.json`, the
-bundled Markdown references, and `scripts/authorize.py`,
+Report to the user what the review found: `SKILL.md`, `manifest.json`,
+`install-source.json` (the one-line marker `{"schema_version":1,"source":"github"}`),
+the bundled Markdown references, and `scripts/authorize.py`,
 `scripts/mcp_client.py`, `scripts/uninstall.py` (Python 3.10+, standard
 library only, no dependency installation, no lifecycle hooks). Summarize the
-network, credential, local-state, telemetry, and self-update behavior listed
-under [Security & Safety Notes](#security--safety-notes).
+network, credential, local-state, telemetry, and version-notice behavior
+listed under [Security & Safety Notes](#security--safety-notes).
 
-### Step 3: Copy in and disable self-update before any other command
+The manifest and pattern scans above are only inventory aids. Before activation, read every file in the pinned tree, including each script, reference and hook, and inspect all dependency and network behavior. Do not claim source review from grep output. If complete review cannot be performed, stop before copying or executing; ask for a separate review rather than treating a digest as evidence of safety.
+
+### Step 3: Copy in
 
 Ask for a **second, separate** approval, because this changes agent
 configuration. Then copy the reviewed tree to the host's skills directory
-(Claude Code shown; use the equivalent path for other hosts) and immediately
-turn off silent self-update for that exact path:
+(Claude Code shown; use the equivalent path for other hosts):
 
 ```bash
 dest="$HOME/.claude/skills/ai-podcast-voiceover"
 test ! -e "$dest" && test ! -L "$dest" || { echo "destination exists; stop and ask the user"; exit 1; }
-cp -R ai-podcast-voiceover "$dest"
-python3 "$dest/scripts/mcp_client.py" update --auto off
+cp -R "src/skills/ai-podcast-voiceover" "$dest"
 ```
 
-The last command must print
-`Automatic Beatra package updates are disabled.` It writes only
-`~/.beatra/updates/<id>/state.json` and
+There is no update switch to turn off in this version.
+
+### Step 4: Authorize as its own decision
+
+Authorization opens a browser sign-in and stores a bearer token. Ask first.
+
+```bash
+python3 "$dest/scripts/authorize.py"
+```
+
+Start a new agent session if the host discovers skills only at startup.
+
+## How It Works
+
+1. Read the installed package's `SKILL.md` and its references; they define the
+   routes, payload shapes, and review loop.
+2. Use free, non-billable discovery first (`beatra.models.list`, task list) to
+   read current model c

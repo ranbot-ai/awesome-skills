@@ -1,9 +1,9 @@
 ---
 name: ai-photo-restyler
 description: Install and use the official Photo to Anime package, pinned by digest, for paid hosted work on the Beatra service. 
-category: Document Processing
+category: AI & Agents
 source: antigravity
-tags: [python, markdown, api, mcp, claude, ai, agent, document, image, security]
+tags: [python, markdown, api, mcp, claude, ai, agent, image, security, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-photo-restyler
 ---
 
@@ -18,21 +18,20 @@ Turn a photo into anime, manga, comic, cartoon, watercolor, clay, or 3D characte
 This catalog entry is a **reviewed pointer, not the executable package**. It
 contains no client code and performs no Beatra operation by itself. The package
 it points to bundles three standard-library Python scripts that make network
-calls, store a credential, and can replace their own files. Read
+calls and store a credential. It has no self-updater: it never downloads
+code and never changes its own files. Read
 [Install](#install-pinned-verified-approved-twice) and
 [Security & Safety Notes](#security--safety-notes) before activating it.
 
 | Pinned identity | Value |
 | --- | --- |
-| Package | `ai-photo-restyler` `0.1.4` |
-| Archive | `https://cdn.beatra.ai/agent-packages/ai-photo-restyler/v0.1.4/ai-photo-restyler-skill-0.1.4.zip` |
-| Archive SHA-256 | `ac7e4070f7e931a095f55c19ee09adb4ba70f4880fb66dbfe755823e3bfa2449` |
-| Source tree | [`beatra-ai/photo-to-anime-skill@87bc4c4`](https://github.com/beatra-ai/photo-to-anime-skill/tree/87bc4c4e993e1ab49ded9e065087c1796cb7cbe4/skills/ai-photo-restyler) (full SHA `87bc4c4e993e1ab49ded9e065087c1796cb7cbe4`) |
+| Package | `ai-photo-restyler` `0.2.2` |
+| Source commit | [`beatra-ai/photo-to-anime-skill@c2d3fbf`](https://github.com/beatra-ai/photo-to-anime-skill/tree/c2d3fbfffd9c0a04de5672ff8764f88fb13904ea/skills/ai-photo-restyler) (full SHA `c2d3fbfffd9c0a04de5672ff8764f88fb13904ea`) |
+| Package tree | `32cb74bf0ecd7caed1983d514940bdefd96b2a2c` (Git tree ID of `skills/ai-photo-restyler` at that commit) |
 | License | MIT No Attribution (MIT-0) |
 
-The archive holds regular files only (no symlinks, no executable bits, no
-binaries). Confirm that with the inspect commands below. Every file must be
-byte-identical to the source tree at the pinned commit.
+The pinned tree holds regular files only (no symlinks, no executable bits, no
+binaries). Confirm that with the inspect commands below.
 
 ## When to Use This Skill
 
@@ -42,70 +41,72 @@ byte-identical to the source tree at the pinned commit.
 
 ## Install (pinned, verified, approved twice)
 
-### Step 1: Download and verify into a review directory
+### Step 1: Fetch the pinned tree into a review directory
 
-Explain that this downloads an external package from `cdn.beatra.ai`, then ask
+Explain that this fetches an external package from `github.com`, then ask
 for approval. Only after approval:
 
 ```bash
+set -e
 umask 077
 review_dir="$(mktemp -d)"
 cd "$review_dir" || exit 1
-curl --connect-timeout 10 --max-time 60 -fsSO "https://cdn.beatra.ai/agent-packages/ai-photo-restyler/v0.1.4/ai-photo-restyler-skill-0.1.4.zip"
-printf '%s  %s\n' \
-  'ac7e4070f7e931a095f55c19ee09adb4ba70f4880fb66dbfe755823e3bfa2449' \
-  'ai-photo-restyler-skill-0.1.4.zip' | shasum -a 256 -c -
+git clone --quiet --filter=blob:none --no-checkout https://github.com/beatra-ai/photo-to-anime-skill.git src
+git -C src checkout --quiet c2d3fbfffd9c0a04de5672ff8764f88fb13904ea -- skills/ai-photo-restyler
+test "$(git -C src rev-parse 'c2d3fbfffd9c0a04de5672ff8764f88fb13904ea:skills/ai-photo-restyler')" = '32cb74bf0ecd7caed1983d514940bdefd96b2a2c' && echo TREE-OK
 ```
 
-Stop if the check does not print `OK`. The expected digest comes from this
-catalog entry, not from a file on the same CDN.
+Stop if the last command does not print `TREE-OK`. The expected commit and
+tree IDs come from this catalog entry, not from the package or its website,
+and Git addresses every fetched object by its hash.
 
 ### Step 2: Inspect before activation
 
-Preflight all ZIP member names/modes/sizes before extraction. Reject traversal/absolute or out-of-package paths, duplicate/case-colliding entries, symlinks/devices/executable/binary files, and excessive count/expanded size. Extract only afterward into the fresh private directory; post-extraction checks do not prevent an escape.
-
 ```bash
-unzip -l ai-photo-restyler-skill-0.1.4.zip
-
-# Only after complete member preflight passes:
-unzip -q ai-photo-restyler-skill-0.1.4.zip
-find ai-photo-restyler -type l -print            # expect no output
-find ai-photo-restyler -type f -perm -111 -print # expect no output
-grep -n '"auto_update": True' ai-photo-restyler/scripts/mcp_client.py
+git -C src ls-tree -r c2d3fbfffd9c0a04de5672ff8764f88fb13904ea -- skills/ai-photo-restyler | awk '$1 != "100644"'  # expect no output
+grep -n -E 'maybe_auto_update|download_update|_apply_update' src/skills/ai-photo-restyler/scripts/mcp_client.py  # expect no output
 ```
 
-Confirm byte identity before activation with the public source tree (a second,
-independent host):
+The first check lists any symlink, executable, or submodule entry; the second
+finds the entry points of the self-updater that earlier versions shipped.
 
-```bash
-git clone --quiet --filter=blob:none --no-checkout https://github.com/beatra-ai/photo-to-anime-skill.git src
-git -C src checkout --quiet 87bc4c4e993e1ab49ded9e065087c1796cb7cbe4 -- skills/ai-photo-restyler
-(cd ai-photo-restyler && find . -type f | LC_ALL=C sort | xargs shasum -a 256) > archive.sha
-(cd src/skills/ai-photo-restyler && find . -type f | LC_ALL=C sort | xargs shasum -a 256) > tree.sha
-cmp archive.sha tree.sha && echo IDENTICAL
-```
-
-Report to the user what the review found: `SKILL.md`, `manifest.json`, the
-bundled Markdown references, and `scripts/authorize.py`,
+Report to the user what the review found: `SKILL.md`, `manifest.json`,
+`install-source.json` (the one-line marker `{"schema_version":1,"source":"github"}`),
+the bundled Markdown references, and `scripts/authorize.py`,
 `scripts/mcp_client.py`, `scripts/uninstall.py` (Python 3.10+, standard
 library only, no dependency installation, no lifecycle hooks). Summarize the
-network, credential, local-state, telemetry, and self-update behavior listed
-under [Security & Safety Notes](#security--safety-notes).
+network, credential, local-state, telemetry, and version-notice behavior
+listed under [Security & Safety Notes](#security--safety-notes).
 
-### Step 3: Copy in and disable self-update before any other command
+The manifest and pattern scans above are only inventory aids. Before activation, read every file in the pinned tree, including each script, reference and hook, and inspect all dependency and network behavior. Do not claim source review from grep output. If complete review cannot be performed, stop before copying or executing; ask for a separate review rather than treating a digest as evidence of safety.
+
+### Step 3: Copy in
 
 Ask for a **second, separate** approval, because this changes agent
 configuration. Then copy the reviewed tree to the host's skills directory
-(Claude Code shown; use the equivalent path for other hosts) and immediately
-turn off silent self-update for that exact path:
+(Claude Code shown; use the equivalent path for other hosts):
 
 ```bash
 dest="$HOME/.claude/skills/ai-photo-restyler"
 test ! -e "$dest" && test ! -L "$dest" || { echo "destination exists; stop and ask the user"; exit 1; }
-cp -R ai-photo-restyler "$dest"
-python3 "$dest/scripts/mcp_client.py" update --auto off
+cp -R "src/skills/ai-photo-restyler" "$dest"
 ```
 
-The last command must print
-`Automatic Beatra package updates are disabled.` It writes only
-`~/.beatra/updates/<id>/state.json` and makes no network request. Ru
+There is no update switch to turn off in this version.
+
+### Step 4: Authorize as its own decision
+
+Authorization opens a browser sign-in and stores a bearer token. Ask first.
+
+```bash
+python3 "$dest/scripts/authorize.py"
+```
+
+Start a new agent session if the host discovers skills only at startup.
+
+## How It Works
+
+1. Read the installed package's `SKILL.md` and its references; they define the
+   routes, payload shapes, and review loop.
+2. Use free, non-billable discovery first (`beatra.models.list`, task list) to
+   read current model cards and credit estimates.

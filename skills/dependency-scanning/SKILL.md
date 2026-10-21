@@ -3,7 +3,7 @@ name: dependency-scanning
 description: Scan package dependencies for known vulnerabilities using Snyk, Dependabot, and OWASP Dependency-Check. 
 category: Security & Systems
 source: antigravity
-tags: [python, javascript, node, ai, agent, workflow, template, document, image, security]
+tags: [python, javascript, node, ai, agent, workflow, template, design, document, image]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dependency-scanning
 ---
 
@@ -72,7 +72,8 @@ snyk ignore --id=SNYK-JS-LODASH-567746 --expiry=2024-12-31 --reason="No exploit 
 
 ### CI Integration
 
-```yaml
+```text
+NON-EXECUTABLE CI DESIGN: before adoption, use least-privilege jobs, pin every action to a reviewed full SHA, and provision verified fixed-version tools in a digest-pinned runner image. Never expose credentials during tool provisioning.
 # .github/workflows/snyk.yml
 name: Snyk Security
 
@@ -88,7 +89,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/node@master
+        step: Run the preinstalled reviewed Snyk binary
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
@@ -239,13 +240,4 @@ dependency-check --project "MyProject" \
 
 ### Maven Integration
 
-```xml
-<!-- pom.xml -->
-<plugin>
-  <groupId>org.owasp</groupId>
-  <artifactId>dependency-check-maven</artifactId>
-  <version>9.0.0</version>
-  <configuration>
-    <failBuildOnCVSS>7</failBuildOnCVSS>
-    <suppressionFiles>
-      <suppressionFile>suppression
+```

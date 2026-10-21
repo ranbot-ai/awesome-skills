@@ -1,87 +1,35 @@
 ---
 name: datacircle
-description: Look up LinkedIn profiles by URL through Datacircle (Up2Data, HarvestAPI or Fetchin, no markup), over its hosted MCP server or REST API, with the user's yes before each paid call. 
-category: Development & Code Tools
+description: Every GTM API plan on datacircle.dev, as one file you download and query. Use it to compare or price a GTM data API. 
+category: AI & Agents
 source: antigravity
-tags: [api, mcp, claude, ai, gpt, security, stripe]
+tags: [python, react, api, mcp, claude, ai, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/datacircle
 ---
 
 
-# Datacircle: LinkedIn Profiles, No Markup
+# Datacircle
 
-## Overview
+Datacircle lists all the GTM APIs. This skill gives you every plan on datacircle.dev as one file.
 
-Datacircle is a data co-op. Query your favorite B2B data APIs through us. Same request, same price, no markup.
+## When to use
 
-You send the provider's own request to api.datacircle.dev, with your Datacircle key. That's the only change. Right now we have 3 live LinkedIn profile APIs that we trust: Up2Data, HarvestAPI and Fetchin. Each request goes to the provider and gets the profile as it is today.
+Use it to compare or price a GTM data API.
 
-This skill covers both ways in, the hosted MCP server and the REST API: which provider to pick, asking before every paid lookup, reading the cost and balance on each answer, and the errors.
-
-## When to Use
-
-- Use when the user gives one or more LinkedIn profile URLs and wants the person's current role, company, work history, education or skills.
-- Use when the user asks for their Datacircle balance, or why a Datacircle call answered `402` or `429`.
-- Do not use to find people by name, title or company: Datacircle looks a profile up by its LinkedIn URL only.
-- Do not use for outreach. This skill reads profiles; it never sends a message or a connection request.
-
-## Access and Authentication
-
-### MCP server (preferred when the client supports it)
-
-- Endpoint: `https://api.datacircle.dev/mcp` (Streamable HTTP), in the official MCP registry as `dev.datacircle/datacircle`.
-- Claude Code: `claude mcp add --transport http datacircle https://api.datacircle.dev/mcp`, then run `/mcp` to sign in. In Claude (Settings, Connectors) and ChatGPT (developer mode), add the same URL as a custom connector. The first time, your client signs you in with your Datacircle email (OAuth). Or send your API key as a Bearer token:
+## 1. Download it
 
 ```bash
-claude mcp add --transport http datacircle https://api.datacircle.dev/mcp \
-  --header "Authorization: Bearer $DATACIRCLE_API_KEY"
+curl -sL --compressed -o datacircle.json https://datacircle.dev/datacircle.json
 ```
 
-- If the client already has it connected, prefer its tools over raw HTTP: `get_linkedin_profile` (`url`, and `provider`: `up2data`, the default, `harvestapi` or `fetchin`) and `get_balance` (free). It also has `list_files`, `get_download_link` and `add_funds`.
+Or the same rows and columns as CSV: `https://datacircle.dev/datacircle.csv`. In the CSV, we write each list or object as JSON.
 
-### REST API
+## 2. The model
 
-- Base URL: `https://api.datacircle.dev`. OpenAPI spec: `https://docs.datacircle.dev/openapi.json`. Docs: `https://docs.datacircle.dev`.
-- Read the API key from the `DATACIRCLE_API_KEY` environment variable and send it as `Authorization: Bearer $DATACIRCLE_API_KEY`. Never put the key in a URL and never print it.
-- The `X-Data-Provider` header names the provider (`up2data`, `harvestapi` or `fetchin`). The request and the answer are the provider's own, plus a `datacircle_meta` object.
+One row is one plan of one call. A provider's plan that covers two calls is two rows. Every row has every key below. Prices are in dollars, except `pay`, which is in the plan's `currency`.
 
-### Prices and limits
-
-- Sign up at datacircle.dev with your work email: a $5 credit, that's 2,105 LinkedIn profiles at $2.375 per 1,000.
-- $2.375 per 1,000 through Up2Data (a profile it can't find is free), $3.70 per 1,000 through HarvestAPI.
-- $1.485 per 1,000 through Fetchin, a profile it can't find billed the same.
-- Up2Data takes $1 a day per account (421 profiles), with a shared daily limit for all customers, then answers 429 until 00:00 UTC. HarvestAPI has no daily limit.
-- Fetchin has no daily limit either.
-- A call your balance can't cover answers 402. Add funds, from $5, on your dashboard.
-
-## How It Works
-
-### Step 1: Say the cost, then wait for the user's yes
-
-Every lookup is paid from the user's balance. Before any lookup, even a single one, say which provider you will use and what it costs ($0.002375 a profile through Up2Data, $0.0037 through HarvestAPI, $0.001485 through Fetchin; for a list, the total), and wait for the user's yes. Ask again before switching provider or adding URLs the user didn't give.
-
-### Step 2: Look the profile up through Up2Data (the default)
-
-Pick Up2Data first: a profile it can't find is free. Send the full profile URL; Up2Data refuses a bare public identifier with a `400`.
-
-```bash
-curl -s -X POST "https://api.datacircle.dev/v1/profiles/enrich" \
-  -H "Authorization: Bearer $DATACIRCLE_API_KEY" \
-  -H "X-Data-Provider: up2data" \
-  -H "Content-Type: application/json" \
-  -d '{"url": "https://www.linkedin.com/in/williamhgates"}' \
-  | jq '{name: .data.full_name, headline: .data.headline, company: .data.current_company.name, positions: [.data.positions[]? | {title, company, started_at, ended_at}], cost: .datacircle_meta}'
-```
-
-The body also takes `fields` (only those top-level fields of `data`, same price), `with_followers_and_connections` and `with_full_skills_and_endorsements` (same price, slower).
-
-### Step 3: Use HarvestAPI or Fetchin past Up2Data's daily limit
-
-Use HarvestAPI or Fetchin when Up2Data answers `429`, HarvestAPI when the user needs the member's interests, which only it returns. Say which provider you used.
-
-```bash
-curl -s -G "https://api.datacircle.dev/linkedin/profile" \
-  --data-urlencode "url=https://www.linkedin.com/in/williamhgates" \
-  -H "Authorization: Bearer $DATACIRCLE_API_KEY" \
-  -H "X-Data-Provider: harvestapi" \
-  | jq '{name: "\(.element.firstName) \(.element.lastName)", headline: .element.headline, experience
+| Key | Type | Meaning |
+|---|---|---|
+| `name` | text | The row's name, unique on the sheet: the provider, then the plan's price, like "API Builderz, $50 monthly", "HarvestAPI, $280 pack", "Crawlbase, pay as you go", "Bright Data, top-up" (a prepaid balance of any amount), "free" or "contact us". If two plans share a price, we add the plan's name, then the call's method and path, its units and the call's name, until no two rows share a name. We build the name for the sheet and leave it out of the sheet's CSV and JSON. datacircle.json and datacircle.csv have the name from its API's sheet. |
+| `provider` | text | Who sells the endpoint. On the sheet, it starts each row's API plan. |
+| `api` | text | This column names each row's API. "Employee profile" returns a person's LinkedIn profile, on LinkedIn profiles. "Cached employee profile" returns it from the provider's copy of LinkedIn, on Cached LinkedIn profiles, which lists the LinkedIn profile plans whose Freshness says a copy. "Employee email" finds a person's work email, on Find email. "Cached employee email", on the Find cached email sheet, finds a person's work email in the provider's stored data. "Email validation" checks whether an address takes mail, on Validate email. "Employee phone" finds a person's phone number, on Find phone. "Company profile" returns a company's LinkedIn page, on LinkedIn company profiles. "Cached company profile", on the Cached LinkedIn company profiles sheet, returns a company's LinkedIn page from the provider's copy of LinkedIn. "Company headcount" counts a company's staff, on its own sheet. "Cached company headcount", on the Cached company headcount sheet, counts a company's staff from the provider's stored data. "Phone validation" checks whether a phone number is valid, on Validate phone. "Post comments" returns the comments on a LinkedIn post, on LinkedIn post comments. "Post reactions" returns who reacted to a LinkedIn post and how, on LinkedIn post reactions. "Employee lookalikes" returns people similar to the one you send, on Similar people. "Company lookalikes" returns companies similar to the one you send, on Similar companies. "Company technologies" returns the tools a company uses, on its own sheet. "Company job count" counts the jobs a company has open on LinkedIn, on its own sheet. "Employee posts" returns a person's LinkedIn posts, on LinkedIn person posts. "Company posts" returns a company's LinkedIn posts, on LinkedIn company posts. "Company funding" returns a company's funding rounds, on its own sheet. "Company jobs" returns the jobs a company has open, on Company open jobs. "Employee search" finds people by job title, company and place, on LinkedIn people search. "Company search" finds companies by industry, size and place, on LinkedIn company search. "Job search" finds jobs by title, company and place, on LinkedIn job search. "Reverse email lookup" finds the person behind an email, on its own sheet. "Post search" finds posts by keyword, on LinkedIn post search. "Post details" returns a post from its URL or ID, on LinkedIn post details. "Job details" returns a job from its URL or ID, on LinkedIn job details. "Employee comments" returns the comments a person left on posts, on LinkedIn person comments. "Employee reactions" returns the posts a person reacted to, on LinkedIn person reactions. "Post reposts" returns the people who reposted a LinkedIn post, on LinkedIn post reposts. "Employee recommendations" returns the recommendations on a person's LinkedIn profile, on LinkedIn person recommendations. "Job lookalikes" returns jobs similar to the one you send, on Similar jobs. "Employee articles" returns a person's LinkedIn articles, on LinkedIn person articles. "Company enrichment" returns a company's profile from the provider's own database, on Company enrichment. "Cached company enrichment", on the Cached company enrichment sheet, returns a company's profile from the provider's stored data. "People search" finds people in the provider's own database. "Cached people search", on the Cached people search sheet, finds people in the provider's stored data. "Company discovery" finds companies in the provider's own database. "Cached company discovery", on the Cached company discovery sheet, finds companies in the provider's stored data. "Job postings" finds job postings in the provider's own database. "Job p

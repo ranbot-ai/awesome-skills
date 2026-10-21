@@ -1,9 +1,9 @@
 ---
 name: ai-image-generation-studio
 description: Install and use the official AI Image Generator package, pinned by digest, for paid hosted work on the Beatra service. 
-category: Document Processing
+category: Creative & Media
 source: antigravity
-tags: [python, markdown, api, mcp, claude, ai, agent, document, image, security]
+tags: [python, markdown, api, mcp, claude, ai, agent, image, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-image-generation-studio
 ---
 
@@ -18,21 +18,20 @@ Generate, compose, and edit product images, brand visuals, posters, social graph
 This catalog entry is a **reviewed pointer, not the executable package**. It
 contains no client code and performs no Beatra operation by itself. The package
 it points to bundles three standard-library Python scripts that make network
-calls, store a credential, and can replace their own files. Read
+calls and store a credential. It has no self-updater: it never downloads
+code and never changes its own files. Read
 [Install](#install-pinned-verified-approved-twice) and
 [Security & Safety Notes](#security--safety-notes) before activating it.
 
 | Pinned identity | Value |
 | --- | --- |
-| Package | `ai-image-generation-studio` `0.1.4` |
-| Archive | `https://cdn.beatra.ai/agent-packages/ai-image-generation-studio/v0.1.4/ai-image-generation-studio-skill-0.1.4.zip` |
-| Archive SHA-256 | `b357edb0f9f2546435c89cf1ef8278596e28a7629229a78fcab9804decd13682` |
-| Source tree | [`beatra-ai/ai-image-generator-skill@13c7b9b`](https://github.com/beatra-ai/ai-image-generator-skill/tree/13c7b9b2a2197fb91deb6a3a1466124db620c3d1/skills/ai-image-generation-studio) (full SHA `13c7b9b2a2197fb91deb6a3a1466124db620c3d1`) |
+| Package | `ai-image-generation-studio` `0.2.3` |
+| Source commit | [`beatra-ai/ai-image-generator-skill@8e1b53d`](https://github.com/beatra-ai/ai-image-generator-skill/tree/8e1b53d105701194f03a8d4566a37b33fc7560b9/skills/ai-image-generation-studio) (full SHA `8e1b53d105701194f03a8d4566a37b33fc7560b9`) |
+| Package tree | `b27876bca12d5eeb07fc7c41cb2ab64d086af519` (Git tree ID of `skills/ai-image-generation-studio` at that commit) |
 | License | MIT No Attribution (MIT-0) |
 
-The archive holds regular files only (no symlinks, no executable bits, no
-binaries). Confirm that with the inspect commands below. Every file must be
-byte-identical to the source tree at the pinned commit.
+The pinned tree holds regular files only (no symlinks, no executable bits, no
+binaries). Confirm that with the inspect commands below.
 
 ## When to Use This Skill
 
@@ -42,58 +41,70 @@ byte-identical to the source tree at the pinned commit.
 
 ## Install (pinned, verified, approved twice)
 
-### Step 1: Download and verify into a review directory
+### Step 1: Fetch the pinned tree into a review directory
 
-Explain that this downloads an external package from `cdn.beatra.ai`, then ask
+Explain that this fetches an external package from `github.com`, then ask
 for approval. Only after approval:
 
 ```bash
+set -e
 umask 077
 review_dir="$(mktemp -d)"
 cd "$review_dir" || exit 1
-curl --connect-timeout 10 --max-time 60 -fsSO "https://cdn.beatra.ai/agent-packages/ai-image-generation-studio/v0.1.4/ai-image-generation-studio-skill-0.1.4.zip"
-printf '%s  %s\n' \
-  'b357edb0f9f2546435c89cf1ef8278596e28a7629229a78fcab9804decd13682' \
-  'ai-image-generation-studio-skill-0.1.4.zip' | shasum -a 256 -c -
+git clone --quiet --filter=blob:none --no-checkout https://github.com/beatra-ai/ai-image-generator-skill.git src
+git -C src checkout --quiet 8e1b53d105701194f03a8d4566a37b33fc7560b9 -- skills/ai-image-generation-studio
+test "$(git -C src rev-parse '8e1b53d105701194f03a8d4566a37b33fc7560b9:skills/ai-image-generation-studio')" = 'b27876bca12d5eeb07fc7c41cb2ab64d086af519' && echo TREE-OK
 ```
 
-Stop if the check does not print `OK`. The expected digest comes from this
-catalog entry, not from a file on the same CDN.
+Stop if the last command does not print `TREE-OK`. The expected commit and
+tree IDs come from this catalog entry, not from the package or its website,
+and Git addresses every fetched object by its hash.
 
 ### Step 2: Inspect before activation
 
-Before extraction, inspect every ZIP member name, Unix mode, declared size and total expanded size. Reject absolute/traversing paths, entries outside the intended package root, duplicate or case-colliding names, symlinks, devices and executable/binary files. Set bounded file-count, per-file and total extraction limits. Extract only after that preflight passes into the fresh private review directory; inspecting links after extraction cannot prevent an escape. A matching archive hash is an integrity check against this receipt, not permission to execute or proof of complete safety.
-
-
 ```bash
-unzip -l ai-image-generation-studio-skill-0.1.4.zip
-# After the complete member preflight passes:
-unzip -q ai-image-generation-studio-skill-0.1.4.zip
-find ai-image-generation-studio -type l -print            # expect no output
-find ai-image-generation-studio -type f -perm -111 -print # expect no output
-grep -n '"auto_update": True' ai-image-generation-studio/scripts/mcp_client.py
+git -C src ls-tree -r 8e1b53d105701194f03a8d4566a37b33fc7560b9 -- skills/ai-image-generation-studio | awk '$1 != "100644"'  # expect no output
+grep -n -E 'maybe_auto_update|download_update|_apply_update' src/skills/ai-image-generation-studio/scripts/mcp_client.py  # expect no output
 ```
 
-Confirm byte identity with the public source tree before activation (a second,
-independent host):
+The first check lists any symlink, executable, or submodule entry; the second
+finds the entry points of the self-updater that earlier versions shipped.
 
-```bash
-git clone --quiet --filter=blob:none --no-checkout https://github.com/beatra-ai/ai-image-generator-skill.git src
-git -C src checkout --quiet 13c7b9b2a2197fb91deb6a3a1466124db620c3d1 -- skills/ai-image-generation-studio
-(cd ai-image-generation-studio && find . -type f | LC_ALL=C sort | xargs shasum -a 256) > archive.sha
-(cd src/skills/ai-image-generation-studio && find . -type f | LC_ALL=C sort | xargs shasum -a 256) > tree.sha
-cmp archive.sha tree.sha && echo IDENTICAL
-```
-
-Report to the user what the review found: `SKILL.md`, `manifest.json`, the
-bundled Markdown references, and `scripts/authorize.py`,
+Report to the user what the review found: `SKILL.md`, `manifest.json`,
+`install-source.json` (the one-line marker `{"schema_version":1,"source":"github"}`),
+the bundled Markdown references, and `scripts/authorize.py`,
 `scripts/mcp_client.py`, `scripts/uninstall.py` (Python 3.10+, standard
 library only, no dependency installation, no lifecycle hooks). Summarize the
-network, credential, local-state, telemetry, and self-update behavior listed
-under [Security & Safety Notes](#security--safety-notes).
+network, credential, local-state, telemetry, and version-notice behavior
+listed under [Security & Safety Notes](#security--safety-notes).
 
-### Step 3: Copy in and disable self-update before any other command
+The manifest and pattern scans above are only inventory aids. Before activation, read every file in the pinned tree, including each script, reference and hook, and inspect all dependency and network behavior. Do not claim source review from grep output. If complete review cannot be performed, stop before copying or executing; ask for a separate review rather than treating a digest as evidence of safety.
+
+### Step 3: Copy in
 
 Obtain explicit authorization for this host configuration change if it is not already covered by the user's request; do not repeat an existing scoped approval. Then copy the reviewed tree to the host's skills directory
-(Claude Code shown; use the equivalent path for other hosts) and immediately
-turn off silent self-update for that 
+(Claude Code shown; use the equivalent path for other hosts):
+
+```bash
+dest="$HOME/.claude/skills/ai-image-generation-studio"
+test ! -e "$dest" && test ! -L "$dest" || { echo "destination exists; stop and ask the user"; exit 1; }
+cp -R "src/skills/ai-image-generation-studio" "$dest"
+```
+
+There is no update switch to turn off in this version.
+
+### Step 4: Authorize as its own decision
+
+Authorization opens a browser sign-in and stores a bearer token. Ask first.
+
+```bash
+python3 "$dest/scripts/authorize.py"
+```
+
+Start a new agent session if the host discovers skills only at startup.
+
+## How It Works
+
+1. Read the installed package's `SKILL.md` and its references; they define the
+   routes, payload shapes, and review loop.
+2. Use free, n

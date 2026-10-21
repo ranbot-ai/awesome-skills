@@ -1,9 +1,9 @@
 ---
 name: beatra-ai-video-studio
 description: Install and use the official Beatra AI Video Studio package, pinned by digest, for paid text-to-video, image-to-video, and video edit or extend jobs on the hosted Beatra service. 
-category: Document Processing
+category: AI & Agents
 source: antigravity
-tags: [python, markdown, api, mcp, claude, ai, agent, document, image, security]
+tags: [python, markdown, api, mcp, claude, ai, agent, image, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/beatra-ai-video-studio
 ---
 
@@ -20,20 +20,20 @@ video is produced on the hosted, paid Beatra service (`mcp.beatra.ai`).
 This catalog entry is a **reviewed pointer, not the executable package**. It
 contains no client code and performs no Beatra operation by itself. The package
 it points to bundles three standard-library Python scripts that make network
-calls, store a credential, and can replace their own files. Read
+calls and store a credential. It has no self-updater: it never downloads
+code and never changes its own files. Read
 [Install](#install-pinned-verified-approved-twice) and
 [Security & Safety Notes](#security--safety-notes) before activating it.
 
 | Pinned identity | Value |
 | --- | --- |
-| Package | `beatra-ai-video-studio` `1.2.5` |
-| Archive | `https://cdn.beatra.ai/agent-packages/beatra-ai-video-studio/v1.2.5/beatra-ai-video-studio-skill-1.2.5.zip` |
-| Archive SHA-256 | `679a3ddc06c7be631ef31f002f918465a26f17a189ffac723f45dfd348e1fc4a` |
-| Source tree | [`beatra-ai/beatra-skills@95d662f`](https://github.com/beatra-ai/beatra-skills/tree/95d662f7aeddd6e2aa6da9e14f9c985e3f6b914d/skills/beatra-ai-video-studio) (full SHA `95d662f7aeddd6e2aa6da9e14f9c985e3f6b914d`) |
+| Package | `beatra-ai-video-studio` `1.3.5` |
+| Source commit | [`beatra-ai/beatra-skills@b7ab8ed`](https://github.com/beatra-ai/beatra-skills/tree/b7ab8ed02980ee44b6dac62633f8d79daf0809ab/skills/beatra-ai-video-studio) (full SHA `b7ab8ed02980ee44b6dac62633f8d79daf0809ab`) |
+| Package tree | `5183c76c894e650691c8bb638257dd202b23e66c` (Git tree ID of `skills/beatra-ai-video-studio` at that commit) |
 | License | MIT No Attribution (MIT-0) |
 
-The archive holds 17 regular files (no symlinks, no executable bits, no
-binaries), and every file is byte-identical to the source tree at that commit.
+The pinned tree holds regular files only (no symlinks, no executable bits, no
+binaries). Confirm that with the inspect commands below.
 
 ## When to Use This Skill
 
@@ -46,73 +46,70 @@ binaries), and every file is byte-identical to the source tree at that commit.
 
 ## Install (pinned, verified, approved twice)
 
-### Step 1: Download and verify into a review directory
+### Step 1: Fetch the pinned tree into a review directory
 
-Explain that this downloads an external package from `cdn.beatra.ai`, then ask
+Explain that this fetches an external package from `github.com`, then ask
 for approval. Only after approval:
 
 ```bash
+set -e
 umask 077
 review_dir="$(mktemp -d)"
 cd "$review_dir" || exit 1
-curl -fsSLO "https://cdn.beatra.ai/agent-packages/beatra-ai-video-studio/v1.2.5/beatra-ai-video-studio-skill-1.2.5.zip"
-printf '%s  %s\n' \
-  '679a3ddc06c7be631ef31f002f918465a26f17a189ffac723f45dfd348e1fc4a' \
-  'beatra-ai-video-studio-skill-1.2.5.zip' | shasum -a 256 -c -
+git clone --quiet --filter=blob:none --no-checkout https://github.com/beatra-ai/beatra-skills.git src
+git -C src checkout --quiet b7ab8ed02980ee44b6dac62633f8d79daf0809ab -- skills/beatra-ai-video-studio
+test "$(git -C src rev-parse 'b7ab8ed02980ee44b6dac62633f8d79daf0809ab:skills/beatra-ai-video-studio')" = '5183c76c894e650691c8bb638257dd202b23e66c' && echo TREE-OK
 ```
 
-Stop if the check does not print `OK`. The expected digest comes from this
-catalog entry, not from a file on the same CDN.
+Stop if the last command does not print `TREE-OK`. The expected commit and
+tree IDs come from this catalog entry, not from the package or its website,
+and Git addresses every fetched object by its hash.
 
 ### Step 2: Inspect before activation
 
 ```bash
-unzip -l beatra-ai-video-studio-skill-1.2.5.zip
-unzip -q beatra-ai-video-studio-skill-1.2.5.zip
-find beatra-ai-video-studio -type l -print            # expect no output
-find beatra-ai-video-studio -type f -perm -111 -print # expect no output
-grep -n '"auto_update": True' beatra-ai-video-studio/scripts/mcp_client.py
+git -C src ls-tree -r b7ab8ed02980ee44b6dac62633f8d79daf0809ab -- skills/beatra-ai-video-studio | awk '$1 != "100644"'  # expect no output
+grep -n -E 'maybe_auto_update|download_update|_apply_update' src/skills/beatra-ai-video-studio/scripts/mcp_client.py  # expect no output
 ```
 
-Optionally confirm byte identity with the public source tree (a second,
-independent host):
+The first check lists any symlink, executable, or submodule entry; the second
+finds the entry points of the self-updater that earlier versions shipped.
 
-```bash
-git clone --quiet --filter=blob:none --no-checkout https://github.com/beatra-ai/beatra-skills.git src
-git -C src checkout --quiet 95d662f7aeddd6e2aa6da9e14f9c985e3f6b914d -- skills/beatra-ai-video-studio
-(cd beatra-ai-video-studio && find . -type f | LC_ALL=C sort | xargs shasum -a 256) > archive.sha
-(cd src/skills/beatra-ai-video-studio && find . -type f | LC_ALL=C sort | xargs shasum -a 256) > tree.sha
-cmp archive.sha tree.sha && echo IDENTICAL
-```
+Report to the user what the review found: `SKILL.md`, `manifest.json`,
+`install-source.json` (the one-line marker `{"schema_version":1,"source":"github"}`),
+the bundled Markdown references, and `scripts/authorize.py`,
+`scripts/mcp_client.py`, `scripts/uninstall.py` (Python 3.10+, standard
+library only, no dependency installation, no lifecycle hooks). Summarize the
+network, credential, local-state, telemetry, and version-notice behavior
+listed under [Security & Safety Notes](#security--safety-notes).
 
-Report to the user what the review found: `SKILL.md`, `manifest.json`, 12
-Markdown references, and `scripts/authorize.py`, `scripts/mcp_client.py`,
-`scripts/uninstall.py` (Python 3.10+, standard library only, no dependency
-installation, no lifecycle hooks). Summarize the network, credential,
-local-state, telemetry, and self-update behavior listed under
-[Security & Safety Notes](#security--safety-notes).
+The manifest and pattern scans above are only inventory aids. Before activation, read every file in the pinned tree, including each script, reference and hook, and inspect all dependency and network behavior. Do not claim source review from grep output. If complete review cannot be performed, stop before copying or executing; ask for a separate review rather than treating a digest as evidence of safety.
 
-### Step 3: Copy in and disable self-update before any other command
+### Step 3: Copy in
 
 Ask for a **second, separate** approval, because this changes agent
 configuration. Then copy the reviewed tree to the host's skills directory
-(Claude Code shown; use the equivalent path for other hosts) and immediately
-turn off silent self-update for that exact path:
+(Claude Code shown; use the equivalent path for other hosts):
 
 ```bash
 dest="$HOME/.claude/skills/beatra-ai-video-studio"
-test ! -e "$dest" || { echo "destination exists; stop and ask the user"; exit 1; }
-cp -R beatra-ai-video-studio "$dest"
-python3 "$dest/scripts/mcp_client.py" update --auto off
+test ! -e "$dest" && test ! -L "$dest" || { echo "destination exists; stop and ask the user"; exit 1; }
+cp -R "src/skills/beatra-ai-video-studio" "$dest"
 ```
 
-The last command must print
-`Automatic Beatra package updates are disabled.` It writes only
-`~/.beatra/updates/<id>/state.json` and makes no network request. Run it
-before `authorize.py`, `verify`, `tools`, `upload`, or `call`: in version 1.2.5
-self-update is **on by default** (see below). The setting is keyed to the
-resolved install path, so repeat it after moving or re-copying the directory.
+There is no update switch to turn off in this version.
 
 ### Step 4: Authorize as its own decision
 
-Authorization opens a b
+Authorization opens a browser sign-in and stores a bearer token. Ask first.
+
+```bash
+python3 "$dest/scripts/authorize.py"
+```
+
+Start a new agent session if the host discovers skills only at startup.
+
+## How It Works
+
+1. Read the installed package's `SKILL.md` and its references; they define the
+   video rou
