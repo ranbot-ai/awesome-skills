@@ -17,8 +17,8 @@
     "worktree",
     "code-review",
     "subagent",
-    "workflow",
-    "agent"
+    "agent",
+    "verification"
   ],
   "useCases": [
     "You have a plan from superpowers:writing-plans and your human partner",

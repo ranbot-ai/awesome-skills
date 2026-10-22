@@ -22,7 +22,7 @@ You write test cases (pressure scenarios with subagents), watch them fail (basel
 
 **REQUIRED BACKGROUND:** You MUST understand superpowers:test-driven-development before using this skill. That skill defines the fundamental RED-GREEN-REFACTOR cycle. This skill adapts TDD to documentation.
 
-**Official guidance:** For Anthropic's official skill authoring best practices, see anthropic-best-practices.md. This document provides additional patterns and guidelines that complement the TDD-focused approach in this skill.
+**Official guidance:** For Anthropic's official skill authoring best practices, see references/anthropic-best-practices.md. This document provides additional patterns and guidelines that complement the TDD-focused approach in this skill.
 
 ## What is a Skill?
 
@@ -95,57 +95,54 @@ skills/
 - Code patterns (< 50 lines)
 - Everything else
 
-## SKILL.md Structure
+## Writing SKILL.md
 
-**Frontmatter (YAML):**
-- Two required fields: `name` and `description` (see [agentskills.io/specification](https://agentskills.io/specification) for all supported fields)
-- Max 1024 characters total
-- `name`: Use letters, numbers, and hyphens only (no parentheses, special chars)
-- `description`: Third-person, describes ONLY when to use (NOT what it does)
-  - Start with "Use when..." to focus on triggering conditions
-  - Include specific symptoms, situations, and contexts
-  - **NEVER summarize the skill's process or workflow** (see SDO section for why)
-  - Keep under 500 characters if possible
+A skill's `description` says only when to use it: triggering conditions and
+symptoms, starting with "Use when...". It never summarizes the skill's
+workflow, because an agent that reads a workflow summary follows it instead
+of reading the skill.
 
-```markdown
----
-name: Skill-Name-With-Hyphens
-description: Use when [specific triggering conditions and symptoms]
----
+When you write or change a skill's frontmatter, name or description, or
+need to cut its size, read [references/discovery.md](references/discovery.md):
+the SKILL.md template, description and keyword guidance, naming, token
+budgets, and cross-referencing other skills.
 
-# Skill Name
+## Flowcharts
 
-## Overview
-What is this? Core principle in 1-2 sentences.
+When you add or change a flowchart in a skill, read
+[references/flowcharts.md](references/flowcharts.md) first: when a flowchart
+earns its place, the graphviz conventions, and how to render one.
 
-## When to Use
-[Small inline flowchart IF decision non-obvious]
+## Code Examples
 
-Bullet list with SYMPTOMS and use cases
-When NOT to use
+**One excellent example beats many mediocre ones**
 
-## Core Pattern (for techniques/patterns)
-Before/after code comparison
+Choose most relevant language:
+- Testing techniques → TypeScript/JavaScript
+- System debugging → Shell/Python
+- Data processing → Python
 
-## Quick Reference
-Table or bullets for scanning common operations
+**Good example:**
+- Complete and runnable
+- Well-commented explaining WHY
+- From real scenario
+- Shows pattern clearly
+- Ready to adapt (not generic template)
 
-## Implementation
-Inline code for simple patterns
-Link to file for heavy reference or reusable tools
+**Don't:**
+- Implement in 5+ languages
+- Create fill-in-the-blank templates
+- Write contrived examples
 
-## Common Mistakes
-What goes wrong + fixes
+You're good at porting - one great example is enough.
 
-## Real-World Impact (optional)
-Concrete results
+## File Organization
+
+### Self-Contained Skill
 ```
+defense-in-depth/
+  SKILL.md    # Everything inline
+```
+When: All content fits, no heavy reference needed
 
-
-## Skill Discovery Optimization (SDO)
-
-**Critical for discovery:** Future agents need to FIND your skill
-
-### 1. Rich Description Field
-
-**Purpose:** Your agent reads the description 
+### Skill with Reusabl

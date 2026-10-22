@@ -3,7 +3,7 @@ name: executing-plans
 description: Use when executing an implementation plan in the current session as the implementer yourself — your human partner chose inline execution, or no subagent tool is available 
 category: Collaboration & Project Management
 source: superpowers
-tags: [tdd, testing, debug, debugging, git, worktree, code-review, subagent, workflow, agent]
+tags: [tdd, testing, debug, debugging, git, worktree, code-review, subagent, agent, verification]
 url: https://github.com/obra/superpowers/tree/main/skills/executing-plans
 ---
 
