@@ -37,7 +37,7 @@ use azure_storage_blob::clients::{BlobClient, BlobClientOptions};
 let credential = DeveloperToolsCredential::new(None)?;
 let blob_client = BlobClient::new(
     Url::parse("https://<account>.blob.core.windows.net/container-name/blob-name")?,
-    Some(credential),
+    Some(credential.clone()),
     Some(BlobClientOptions::default()),
 )?;
 ```
@@ -145,4 +145,4 @@ Use when a Rust application uploads/downloads a specified Azure blob, reads its 
 
 ## Limitations
 - Examples are fragments inside async application code, with compatible pinned Azure crates and the required Tokio/Serde/Futures dependencies; verify the selected version’s API before use. They were reviewed against official source/reference, not compiled or run against a cloud account here.
-- Use an authorized tenant, resource and identity with least privilege. Writes, overwrites, deletes, backup retrieval and account changes require the corresponding scope; cleanup may remove only explicitly identified disposable resources. Bound requests, retries and downloaded bytes, and do not log payloads, credentials o
+- Use an authorized tenant, resource and identity with least privilege. Writes, overwrites, deletes, backup retrieval and account changes require the corresponding scope; cleanup may remove only explicitly identified disposable resources. Bound requests, retries and downloaded bytes, and do not log payloads, crede

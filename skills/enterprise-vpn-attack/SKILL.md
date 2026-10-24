@@ -3,7 +3,7 @@ name: enterprise-vpn-attack
 description: External SSL VPN / remote-access appliance attack matrix 
 category: Security & Systems
 source: antigravity
-tags: [python, node, api, claude, ai, template, document, security, rag, cro]
+tags: [python, node, api, claude, ai, template, document, security, vulnerability, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/enterprise-vpn-attack
 ---
 
@@ -111,13 +111,19 @@ curl -skI 'https://target/my.policy' | head -10
 
 ---
 
+## Historical CVE leads — not verified applicability
+
+Ranges and example probes below are imported leads, not an authoritative affected
+version list or validated tests. Before selecting a test, read the exact vendor
+advisory and fixed builds/configuration prerequisites. A table entry, status code,
+response size or scanner label alone is not a finding. Traversal/session-memory
+examples can expose real credentials; prefer owner-supplied build evidence and
+synthetic lab fixtures and do not collect unrelated users' sessions.
+
 ## CVE matrix — pre-auth or auth-bypass (2018-2026)
 
 ### Cisco ASA / AnyConnect
 
 | CVE | Affects | Type | Test |
 |---|---|---|---|
-| **CVE-2018-0296** | ASA pre-9.x specific builds | Path traversal — info disclosure (sessions, config) | `GET /+CSCOT+/translation-table?type=mst&textdomain=/%2bCSCOE%2b/portal_inc.lua` |
-| **CVE-2020-3452** | ASA, FTD before specific patch levels | Path traversal — file read | `GET /+CSCOE+/files/file_name.html?Filename=Microsoft.Manifest+/+CSCOT+/lua/test.lua` and variations |
-| **CVE-2023-20269** | ASA, FTD specific | Auth bypass on SSL VPN | Brute-force a group + valid creds combo against `/+webvpn+/index.html` |
-| **CVE-2024-20481** | RAVPN | 
+| **CVE-2018-0296** | ASA p

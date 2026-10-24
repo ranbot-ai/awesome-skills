@@ -63,7 +63,7 @@ Prefer manual browser research. Use automated collection only when the platform 
 - Landing page URL
 - Active duration (first seen, still running or stopped)
 - Platforms (Facebook, Instagram, Audience Network)
-- Ad variations (A/B tests — same landing page, different creative)
+- Possible creative variants (same landing page, different creative; controlled test design unknown)
 
 ## Phase 2: Research Google Ads
 
@@ -122,4 +122,4 @@ Count how many ads per competitor use each hook type. This reveals their primary
 
 List all unique CTAs found. Common patterns:
 - **Urgency:** "Start free", "Try now", "Get started today"
-- **Low-friction:** "See how it works", "Watch demo", "Learn mo
+- **Low-friction:** "See how i

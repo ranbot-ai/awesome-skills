@@ -35,6 +35,10 @@ references/
   module-config.md           expo-module.config.json fields, file placement, and autolinking behavior
 ```
 
+## Native integration limits
+
+Pin the scaffold and Expo SDK versions and verify available CLI options before running them. These native modules require a development/rebuilt native app; adding native code is not an Expo Go or OTA-only update. Preserve native modifications before prebuild, request platform permissions with accurate purpose strings, and validate native inputs, lifecycle cleanup and thread affinity on both platforms. Snippets omit imports/helpers and are not a compiled package.
+
 ## Quick Start
 
 Prefer `create-expo-module` over manually creating native module files and directories. In practice, the best path is usually to create the scaffold first and then build on top of it. The scaffold sets up the expected layout, `expo-module.config.json`, podspec or Gradle files, TypeScript bindings, and the standalone example app flow.
@@ -105,35 +109,4 @@ import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
 
 class MyModule : Module() {
-  override fun definition() = ModuleDefinition {
-    Name("MyModule")
-
-    Function("hello") { name: String ->
-      "Hello $name!"
-    }
-  }
-}
-```
-
-**TypeScript:**
-
-```typescript
-import { requireNativeModule } from "expo";
-
-const MyModule = requireNativeModule("MyModule");
-
-export function hello(name: string): string {
-  return MyModule.hello(name);
-}
-```
-
-### expo-module.config.json
-
-```json
-{
-  "platforms": ["android", "apple"],
-  "apple": {
-    "modules": ["MyModule"]
-  },
-  "android": {
-   
+  

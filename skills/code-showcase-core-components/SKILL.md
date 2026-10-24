@@ -3,7 +3,7 @@ name: code-showcase-core-components
 description: Core component library and design system patterns. Use when building UI, using design tokens, or working with the component library. 
 category: Document Processing
 source: antigravity
-tags: [react, node, claude, ai, design, document, image, security]
+tags: [react, node, api, claude, ai, design, document, image, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/code-showcase-core-components
 ---
 
@@ -13,6 +13,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/code
 
 Use this skill when you need core component library and design system patterns. Use when building UI, using design tokens, or working with the component library.
 
+
+This entry describes the upstream project's component API/token names, not a bundled component library or universal React Native API. Verify actual exports, tokens and props in the target repository before using snippets. CardProps/variantStyles, handlers and imported components are illustrative dependencies; token use alone does not prove contrast, labeling or behavior.
 
 ## Design System Overview
 
@@ -266,13 +268,4 @@ const Card = ({ padding = '$4', variant = 'elevated', children }: CardProps) => 
 );
 ```
 
-## Integration with Other Skills
-
-- **react-ui-patterns**: Use core components for UI states
-- **testing-patterns**: Mock core components in tests
-- **storybook**: Document component variants
-
-## Limitations
-
-- Use this skill only when the task clearly matches its upstream source and local project context.
-- Verify commands, generated code, dependencies, credentials, and external service behav
+## Integration with O

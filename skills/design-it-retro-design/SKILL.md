@@ -114,7 +114,7 @@ struct RetroCard: View {
 ```
 - A grain texture image can be overlaid using `.blendMode(.multiply)`. Be aware of memory usage with full-screen textures.
 - Use `.shadow(radius: 0)` to create the hard offset shadows typical of 70s print media.
-- Custom fonts like Cooper Black are absolutely required.
+- Custom fonts are optional; use licensed and registered fonts with system fallbacks.
 
 ### Flutter
 ```dart
@@ -134,6 +134,7 @@ class RetroCard extends StatelessWidget {
             opacity: 0.3,
             child: Image.asset('assets/film_grain.png', 
               fit: BoxFit.cover, 
+              color: paperColor, // colorBlendMode requires a color to blend with this image
               colorBlendMode: BlendMode.multiply),
           ),
           Center(
@@ -152,7 +153,4 @@ class RetroCard extends StatelessWidget {
                 ],
               ),
               child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-      
+                mainAxi

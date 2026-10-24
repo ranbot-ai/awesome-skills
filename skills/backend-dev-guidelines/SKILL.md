@@ -3,7 +3,7 @@ name: backend-dev-guidelines
 description: You are a senior backend engineer operating production-grade services under strict architectural and reliability constraints. Use when routes, controllers, services, repositories, express middleware, 
 category: Development & Code Tools
 source: antigravity
-tags: [typescript, node, api, ai, workflow, design, prisma, cro]
+tags: [typescript, node, api, ai, workflow, design, document, security, prisma, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/backend-dev-guidelines
 ---
 
@@ -22,7 +22,7 @@ Your goal is to build **predictable, observable, and maintainable backend system
 * Centralized configuration
 * First-class observability
 
-This skill defines **how backend code must be written**, not merely suggestions.
+Use these patterns when they fit the target repository; its architecture, authorization model and dependency versions take precedence. This documentation does not ship a runnable service.
 
 ---
 
@@ -46,13 +46,13 @@ Before implementing or modifying a backend feature, assess feasibility.
 BFRI = (Architectural Fit + Testability) − (Complexity + Data Risk + Operational Risk)
 ```
 
-**Range:** `-10 → +10`
+**Range:** `-13 → +7` (each input is 1–5). This is an informal discussion aid, not a validated risk model or merge gate.
 
 ### Interpretation
 
 | BFRI     | Meaning   | Action                 |
 | -------- | --------- | ---------------------- |
-| **6–10** | Safe      | Proceed                |
+| **6–7**  | Lower concern      | Proceed                |
 | **3–5**  | Moderate  | Add tests + monitoring |
 | **0–2**  | Risky     | Refactor or isolate    |
 | **< 0**  | Dangerous | Redesign before coding |
@@ -66,15 +66,15 @@ Automatically applies when working on:
 * Express middleware
 * Prisma database access
 * Zod validation
-* Sentry error tracking
+* Approved error tracking with redaction and destination/retention controls
 * Configuration management
 * Backend refactors or migrations
 
 ---
 
-## 2. Core Architecture Doctrine (Non-Negotiable)
+## 2. Architecture Pattern (When Adopted by the Repository)
 
-### 1. Layered Architecture Is Mandatory
+### 1. Layered Architecture Option
 
 ```
 Routes → Controllers → Services → Repositories → Database
@@ -141,7 +141,7 @@ No raw `res.json` calls outside BaseController helpers.
 
 ---
 
-### 5. All Errors Go to Sentry
+### 5. Capture Unexpected Errors at One Approved Boundary
 
 ```ts
 catch (error) {
@@ -213,15 +213,4 @@ src/
 
 | Layer      | Convention                |
 | ---------- | ------------------------- |
-| Controller | `PascalCaseController.ts` |
-| Service    | `camelCaseService.ts`     |
-| Repository | `PascalCaseRepository.ts` |
-| Routes     | `camelCaseRoutes.ts`      |
-| Validators | `camelCase.schema.ts`     |
-
----
-
-## 5. Dependency Injection Rules
-
-* Services receive dependencies via constructor
-* No importin
+| Controller | `Pas

@@ -16,7 +16,9 @@ Use this skill when you need add an iOS App Clip target to an Expo app. Use when
 
 Adds an iOS App Clip target to an Expo project. The Clip lives in `targets/clip/`, ships alongside the parent app, and is invoked from a URL on the app's domain via an Apple App Site Association (AASA) file.
 
-The parent app's bundle ID becomes `com.<username>.<app-name>` and the Clip's is automatically derived as `<parent>.clip` (e.g. `com.bacon.may20.clip`).
+Preserve an existing parent app bundle ID; do not rename a registered app to fit an example. For a new app, an illustrative parent ID is `com.<username>.<app-name>` and the Clip's is automatically derived as `<parent>.clip` (e.g. `com.bacon.may20.clip`).
+
+Third-party package commands (`bun create target`, setup-safari, testflight) can install/execute code and modify Apple account state. Inspect/pin the selected implementation and verify host/Expo support first. Creating registrations, production deployment, store metadata pushes and submissions require their own authorized scope. IDs, domains, team IDs and iTunes IDs below are examples. Merge AASA entries with existing associations rather than replacing them, and mirror only permissions actually supported and needed by the Clip; full-app permissions are not automatically available. Verify current Apple size/invocation requirements before selecting a deployment target.
 
 ## 1. Set `bundleIdentifier` and `appleTeamId`
 
@@ -128,39 +130,10 @@ Paste the JSON `setup-safari` printed, but **add an `appclips` block** for the C
 
 Notes:
 
-- The file has **no extension** and **no `Content-Type` requirements** beyond being served as-is. Expo Router static export serves files in `public/` verbatim.
+- The file has **no extension** and serve it as `application/json` over HTTPS without redirects. Expo Router static export serves files in `public/` verbatim.
 - The `appclips` block is what lets a URL on the domain launch the Clip.
 - `webcredentials` is used for sharing credentials between the website, parent app, and the App Clip.
 - `activitycontinuation` is optional and used for sharing the link between mobile and desktop. Must be used with `Head` from expo-router — see https://docs.expo.dev/router/advanced/apple-handoff/
 - Notation and route-disabling details: https://sosumi.ai/documentation/xcode/supporting-associated-domains
 
-## 6. Add the Smart App Banner meta tag
-
-Create `src/app/+html.tsx` (Expo Router's HTML shell) and add the tag from `setup-safari`. Create the versioned template if it doesn't exist:
-
-```sh
-bunx expo customize src/app/+html.tsx
-```
-
-Add the meta tag to the `<head>`:
-
-```tsx
-import { ScrollViewStyleReset } from "expo-router/html";
-
-export default function Root({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="apple-itunes-app" content="app-id=6771566491" />
-        <ScrollViewStyleReset />
-      </head>
-      <body>{children}</body>
-    </html>
-  );
-}
-```
-
-To
+## 6. Add the Smart App

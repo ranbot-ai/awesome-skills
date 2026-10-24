@@ -12,6 +12,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azur
 
 Client library for Azure Key Vault Certificates — secure storage and management of certificates.
 
+## Version and execution scope
+
+Examples are API sketches: first inspect Cargo.lock and the matching SDK docs for signatures/features, async runtime and response models. Use a test vault and least privilege; importing a PFX/private key or changing/deleting certificate policy requires the corresponding authorized scope. Keep import passwords/private keys in a secret store, never source or logs. A delete response does not prove purge or removal of every related key/secret version; inspect the actual lifecycle state.
+
 ## Installation
 
 ```sh
@@ -183,5 +187,4 @@ This skill is applicable to execute the workflow or actions described in the ove
 
 ## Limitations
 - Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
+- Do not treat the output as a substitute for environment-specific validation, testing, o

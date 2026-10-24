@@ -3,7 +3,7 @@ name: neumorphism
 description: Web and App implementation guide for Neumorphism (Soft UI). Trigger when user wants soft shadows, extruded appearance, and light source simulation. 
 category: Creative & Media
 source: antigravity
-tags: [react, ai, design, image, rag]
+tags: [react, api, ai, design, image, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-it/neumorphism
 ---
 
@@ -19,7 +19,7 @@ Use this sub-style when the user's request matches the aesthetic described above
 ## Core Principles
 1. **Unified Surface Color**: The background and the elements MUST share the exact same base color.
 2. **Dual Shadows**: Elements are shaped by two shadows: a light shadow (highlight) on the side facing the light source, and a dark shadow on the opposite side.
-3. **No Borders**: The shape is entirely defined by the shadows.
+3. **Accessible Boundaries**: Shadows establish the style, but add a visible border or other indicator when needed to identify controls and focus.
 
 ## Visual DNA
 - **Colors**: Works best with mid-tone neutrals. **Desert Mirage**, **Earth-Grounded Elegance**, or **Sophisticated Neutral** are perfect. Avoid pure white or pure black (shadows/highlights won't show).
@@ -133,9 +133,5 @@ struct NeuButton: View {
 }
 ```
 - The key trick: two `.shadow()` modifiers — one white (top-left), one dark (bottom-right).
-- Inner shadow (pressed state) requires a ZStack/overlay hack since SwiftUI doesn't have native `inset` shadows. Clip stroked shapes to simulate.
-- The view's background color MUST match its parent's background exactly.
-
-### Flutter
-```dart
-class NeuCard extend
+- Recent SwiftUI supports ShapeStyle.shadow(.inner(...)); the overlay example is a fallback for older targets, not the only implementation.
+- The view's background color MUST matc

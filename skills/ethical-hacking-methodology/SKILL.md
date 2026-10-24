@@ -3,7 +3,7 @@ name: ethical-hacking-methodology
 description: Master the complete penetration testing lifecycle from reconnaissance through reporting. This skill covers the five stages of ethical hacking methodology, essential tools, attack techniques, and profe
 category: Security & Systems
 source: antigravity
-tags: [pdf, api, ai, workflow, template, document, security, hacking, vulnerability, rag]
+tags: [pdf, api, ai, workflow, template, document, security, hacking, vulnerability, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ethical-hacking-methodology
 ---
 
@@ -82,7 +82,7 @@ Classification of security professionals:
 
 ### Phase 2: Reconnaissance
 
-Gather information without direct system interaction:
+Separate third-party passive research from DNS lookups and tools that may directly contact infrastructure. DNS enumeration and dnsrecon are not guaranteed passive:
 
 **Passive Reconnaissance**
 ```bash
@@ -190,8 +190,4 @@ nmap --script=vuln target.com
 | 22 | SSH | Secure shell |
 | 23 | Telnet | Unencrypted remote |
 | 25 | SMTP | Email |
-| 53 | DNS | Name resolution |
-| 80 | HTTP | Web |
-| 443 | HTTPS | Secure web |
-| 445 | SMB | Windows shares |
-| 3306 |
+| 53 | DN

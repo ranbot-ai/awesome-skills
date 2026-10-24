@@ -71,7 +71,8 @@ If the user asks to "preview", "show what would change", "dry-run": run all dete
 - **Do not execute project scripts by default.** Package-manager scripts are repository-controlled shell entry points. Detect and document candidate format/lint commands, but do not run them unless the user separately requests execution after the exact script body and invoked tooling have been reviewed.
 - **Validate commands.** Every command in output must exist as a script key in `package.json`.
 - **No placeholders.** Scan output for `{{`, `TODO`, `add here`, `...`. Reject if any remain.
-- **Backup first.** If files exist, copy to `.agents/backups/` with timestamp.
+- **Backup first.** If files exist, preserve timestamped copies outside generated-rule discovery paths. Refuse symlinked target files or parents. In update mode replace only one well-formed managed block; preserve everything outside it. If markers are absent, duplicated or malformed, propose a diff instead of overwriting.
+- **Preserve policy.** Existing project/user rules outrank templates. Do not infer approval, attribution, branch, release or review rules from stack dependencies. Label proposed new conventions and obtain adoption approval.
 
 ## Execution Steps
 
@@ -79,12 +80,4 @@ If the user asks to "preview", "show what would change", "dry-run": run all dete
 
 1. `git rev-parse --show-toplevel` → project root.
 2. **Detect package manager FIRST**: check lockfiles. `bun.lock`→bun, `pnpm-lock.yaml`→pnpm, `package-lock.json`→npm, `yarn.lock`→yarn. Never default to npm.
-3. Read `package.json` (scripts, deps, workspaces). Save scripts for validation.
-4. Read non-secret config files and explore directory structure. Exclude `.env*` files other than placeholder-only `.env.example`; never read secret values.
-5. Select mode (ask if ambiguous).
-
-### Full mode
-
-1. Read `assets/agents-full.md` — this is the AGENTS.md structure with all sections and filling rules.
-2. Read project files and fill every placeholder with real data. Never use generic text.
-3. Generate `AGENTS.md` at project root. Wrap cont
+3. Read `package.json` (scripts, deps, workspaces). Save scrip

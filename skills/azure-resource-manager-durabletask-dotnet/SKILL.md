@@ -23,8 +23,7 @@ dotnet add package Azure.ResourceManager.DurableTask
 dotnet add package Azure.Identity
 ```
 
-**Current Versions**: Stable v1.0.0 (2025-11-03), Preview v1.0.0-beta.1 (2025-04-24)
-**API Version**: 2025-11-01
+These snippets target the historical 1.0 API shape; they are not a claim about the latest version. Pin a reviewed package version and check its generated types and API version against [Microsoft's SDK reference](https://learn.microsoft.com/en-us/dotnet/api/azure.resourcemanager.durabletask.durabletaskschedulerresource?view=azure-dotnet) before adapting the examples.
 
 ## Environment Variables
 
@@ -170,15 +169,4 @@ Console.WriteLine($"Found: {existingScheduler.Value.Data.Name}");
 
 // Or use extension method
 var schedulerResource = armClient.GetDurableTaskSchedulerResource(
-    DurableTaskSchedulerResource.CreateResourceIdentifier(
-        subscriptionId,
-        "my-resource-group",
-        "my-scheduler"));
-var scheduler = await schedulerResource.GetAsync();
-```
-
-### 6. Update Scheduler
-
-```csharp
-// Get current scheduler
-var scheduler = await schedulerC
+    DurableTaskSchedulerResourc

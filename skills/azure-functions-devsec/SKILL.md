@@ -20,6 +20,8 @@ Build and deploy serverless applications with Azure Functions. Covers function a
 - You need to respond to Azure service events (Blob Storage, Service Bus, Cosmos DB changes).
 - You are implementing lightweight microservices or scheduled tasks.
 
+Historical snippets require current runtime/plan/region and extension compatibility verification; scale-to-zero, billing and slot support vary by plan. Confirm subscription/resource IDs, cost, secrets, storage and rollback before provisioning/deploying/swapping. Function keys are shared access secrets, not user/object-level authorization. HTTP records here are synthetic examples, not persisted users. Validate/allowlist request fields and never spread arbitrary input into protected output/state.
+
 ## Prerequisites
 
 ```bash
@@ -141,7 +143,7 @@ def create_user(req: func.HttpRequest) -> func.HttpResponse:
 
     logging.info(f"Creating user: {body.get('name')}")
     return func.HttpResponse(
-        json.dumps({"id": "new-id", **body}),
+        json.dumps({"id": "new-id", "name": body.get("name")}),
         status_code=201,
         mimetype="application/json"
     )
@@ -176,25 +178,4 @@ app.http("createUser", {
   route: "users",
   handler: async (request, context) => {
     const body = await request.json();
-    context.log(`Creating user: ${body.name}`);
-
-    return { status: 201, jsonBody: { id: "new-id", ...body } };
-  },
-});
-```
-
-### Blob Trigger -- Python
-
-```python
-@app.blob_trigger(arg_name="blob", path="uploads/{name}",
-                   connection="AzureWebJobsStorage")
-def process_upload(blob: func.InputStream):
-    logging.info(f"Processing blob: {blob.name}, Size: {blob.length} bytes")
-    content = blob.read()
-    # Process file content here
-```
-
-### Timer Trigger -- Python
-
-```python
-@app.timer_trigger(schedule="0
+    context

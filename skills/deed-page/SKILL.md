@@ -55,12 +55,25 @@ check that it holds no `.env` files, keys, tokens or personal data.
 
 ### Step 3: Publish
 
+Do not expose the returned token in shared tool logs. Capture responses into an owner-only private file, parse only public status/URL fields and retain the token through an approved secret mechanism. Build the optional authorization header as a protected curl config file rather than shell word-splitting an expanded string:
+
+```bash
+umask 077
+: > "$UPLOAD_DIR/headers.conf"
+if [ -n "${DEEDPAGE_TOKEN:-}" ]; then
+  case "$DEEDPAGE_TOKEN" in *[!A-Za-z0-9._~-]*) echo "Unexpected token characters" >&2; exit 1;; esac
+  printf 'header = "Authorization: Bearer %s"\n' "$DEEDPAGE_TOKEN" > "$UPLOAD_DIR/headers.conf"
+fi
+```
+
+The upload snippets below illustrate the request; add protected response capture before running them. Verify current provider limits, privacy and retention; “permanent” is a provider claim, not an availability guarantee.
+
 A single HTML file is stored as `index.html`:
 
 ```bash
 curl -sS -T report.html "https://deed.page/v1/sites?slug=$SLUG&ref=$REF" \
   -H "X-Client: <agent name>" \
-  ${DEEDPAGE_TOKEN:+-H "Authorization: Bearer $DEEDPAGE_TOKEN"}
+  --config "$UPLOAD_DIR/headers.conf"
 ```
 
 A folder: its contents go to the site root, so it should contain `index.html`:
@@ -69,7 +82,7 @@ A folder: its contents go to the site root, so it should contain `index.html`:
 tar -C ./site -czf "$UPLOAD_DIR/site.tar.gz" . &&
 curl -sS -T "$UPLOAD_DIR/site.tar.gz" "https://deed.page/v1/sites?slug=$SLUG&ref=$REF" \
   -H "X-Client: <agent name>" \
-  ${DEEDPAGE_TOKEN:+-H "Authorization: Bearer $DEEDPAGE_TOKEN"}
+  --config "$UPLOAD_DIR/headers.conf"
 ```
 
 A successful response:
@@ -120,18 +133,4 @@ Agent: Rebuilds, tars dist/ and re-runs the folder publish with DEEDPAGE_TOKEN s
 - ❌ Do not delete a site unless the user asks for that exact slug.
 - ❌ Do not loop new publishes on errors; read the error code first.
 
-## Limitations
-
-- Static files only. Server code does not run.
-- Free plan: 25 sites, 25 MB per site, 60 publishes per hour, 4 MB per single request. Larger
-  sites use the manifest upload flow at https://deed.page/docs.
-- A lost token cannot be recovered unless the owner attached an optional recovery email. The site
-  stays online either way.
-- Cloud sandboxes that block outbound network access need `deed.page` allowed.
-- Errors: 400 `slug_invalid` (fix the slug), 409 `slug_taken` (use the `suggestion` field or a
-  new suffix), 409 `version_conflict` (re-read and retry), 422 `content_rejected` (remove the
-  file, do not retry), 429 (wait `retry_after` seconds).
-
-## Security & Safety Notes
-
-- Publishing puts files on the public internet. Confirm the folder contents first; hidden fi
+## 

@@ -40,6 +40,10 @@ Do **not** use for:
 
 ---
 
+## Catalog scope and evidence discipline
+
+This tree does not bundle FUNCTION_MICRO_ANALYSIS_EXAMPLE.md, OUTPUT_REQUIREMENTS.md, COMPLETENESS_CHECKLIST.md or a function-analyzer agent definition. Use the inline structure below and report missing upstream material; do not claim those files/agents were read or run. Numeric depth targets are prompts for inquiry, not permission to invent invariants or assumptions. Explicitly mark unknown behavior and uninspected external code; unresolved uncertainty is a valid result and must not be erased to satisfy a completion checklist.
+
 ## 2. How This Skill Behaves
 
 When active, Claude will:
@@ -135,21 +139,4 @@ When encountering calls, **continue the same micro-first analysis across boundar
 Treat as an internal call:
 - Jump into the target contract/function.
 - Continue block-by-block micro-analysis.
-- Propagate invariants and assumptions seamlessly.
-- Consider edge cases based on the *actual* code, not a black-box guess.
-
-**Case B — External Call Without Available Code (True External / Black Box)**
-Analyze as adversarial:
-- Describe payload/value/gas or parameters sent.
-- Identify assumptions about the target.
-- Consider all outcomes:
-  - revert
-  - incorrect/strange return values
-  - unexpected state changes
-  - misbehavior
-  - reentrancy (if applicable)
-
-#### Continuity Rule
-Treat the entire call chain as **one continuous execution flow**.
-Never reset context.
-All invariants, assumptions, and
+- Propagate invariants and as

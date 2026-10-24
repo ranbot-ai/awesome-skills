@@ -3,7 +3,7 @@ name: azure-ai-textanalytics-py
 description: Azure AI Text Analytics SDK for sentiment analysis, entity recognition, key phrases, language detection, PII, and healthcare NLP. Use for natural language processing on text. 
 category: Document Processing
 source: antigravity
-tags: [python, api, ai, workflow, document, azure, cro]
+tags: [python, api, ai, workflow, document, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-textanalytics-py
 ---
 
@@ -51,6 +51,10 @@ client = TextAnalyticsClient(
     credential=DefaultAzureCredential()
 )
 ```
+
+## Data handling
+
+Calls send document text to Azure. Obtain authorization for private, PII or health data and verify region, retention and permitted use; redaction is probabilistic and does not guarantee de-identification. Healthcare extraction is not diagnosis. Examples are independent fragments; check each per-document error before consuming result fields.
 
 ## Sentiment Analysis
 
@@ -105,7 +109,7 @@ for doc in result:
     if not doc.is_error:
         print(f"Redacted: {doc.redacted_text}")
         for entity in doc.entities:
-            print(f"PII: {entity.text} ({entity.category})")
+            print(f"PII category: {entity.category}")  # Do not log detected sensitive values.
 ```
 
 ## Key Phrase Extraction
@@ -178,17 +182,4 @@ for doc_results in results:
     for result in doc_results:
         if result.kind == "EntityRecognition":
             print(f"Entities: {[e.text for e in result.entities]}")
-        elif result.kind == "KeyPhraseExtraction":
-            print(f"Key phrases: {result.key_phrases}")
-        elif result.kind == "SentimentAnalysis":
-            print(f"Sentiment: {result.sentiment}")
-```
-
-## Async Client
-
-```python
-from azure.ai.textanalytics.aio import TextAnalyticsClient
-from azure.identity.aio import DefaultAzureCredential
-
-async def analyze():
-    async with TextAnalyti
+     

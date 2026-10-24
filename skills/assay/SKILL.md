@@ -1,6 +1,6 @@
 ---
 name: assay
-description: Run assay on a web page you just wrote or changed. It opens the page in a real browser, drives every control, and reports where the page contradicts itself. Deterministic, no API key, no network. 
+description: Run assay on a web page you just wrote or changed. It opens the page in a real browser, drives every control, and reports where the page contradicts itself. Local browser checks without an LLM API key
 category: Document Processing
 source: antigravity
 tags: [python, javascript, react, api, claude, ai, llm, template, document, security]
@@ -12,7 +12,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/assa
 
 ## Overview
 
-A page you have just written has no tests yet. `assay` serves the page locally, opens it in a real Chromium browser through Playwright, finds every control on it, uses all of them, and reports where the page contradicts itself. There are no tests to write, no LLM, no API key, and no network. The same page gives the same result every time.
+A page you have just written has no tests yet. `assay` serves the page locally, opens it in a real Chromium browser through Playwright, finds every control on it, uses all of them, and reports where the page contradicts itself. There is no LLM API key requirement. Browser behavior can vary with application state, timing, browser version and network dependencies; repeated results are evidence only for the tested environment.
 
 Use this skill after you create or change a web page, to run assay on that page and report the one line it prints. The skill reports the result and does not change code because of it unless you ask.
 
@@ -43,7 +43,7 @@ Point assay at the page itself and ask for the one-line summary.
 assay <the page you changed> --one-line
 ```
 
-Point it at a file such as `todo.html` or `dist/index.html`. A folder also works and opens the `index.html` inside it. The page is often a folder or two above the file you edited, so a change to a script or stylesheet still means running assay on the page that loads it. assay needs no key, network, or configuration. A small page takes seconds, and a busy one can take a minute or more.
+Point it at a file such as `todo.html` or `dist/index.html`. A folder also works and opens the `index.html` inside it. The page is often a folder or two above the file you edited, so a change to a script or stylesheet still means running assay on the page that loads it. assay needs no LLM API key; initial browser installation and page dependencies may use the network. A small page takes seconds, and a busy one can take a minute or more.
 
 ### Step 3: Report the one line assay printed, verbatim
 
@@ -123,5 +123,4 @@ Say that assay did not run, name the page, and quote the message. Do not report 
 
 - assay will not build your project. Point it at built output. Given a source tree, it says so and names the command to run, and it will not run `npm install` for you, because installing dependencies executes their setup scripts.
 - assay checks one page. It does not crawl, so run it on each page you changed.
-- assay cannot check intent. A control that runs but does the wrong thing usually is not caught, because assay presses what the page offers and reports what followed without knowing what the page is for.
-- A finding is a place to look, not a confir
+- assay cannot check intent. A control that runs but does the wrong thing usually is not caught, because ass

@@ -84,7 +84,7 @@ before submission.
 Example discovery request:
 
 ```bash
-curl --fail --silent --show-error \
+curl --fail --silent --show-error --connect-timeout 10 --max-time 60 \
   "https://api.atlascloud.ai/api/v1/models" \
   --output "${atlas_tmp_dir:?run private workspace setup first}/models.json"
 
@@ -106,13 +106,15 @@ jq -n \
   '{model: $model, prompt: $prompt, size: "1024*1024", n: 1}' \
   > "${atlas_tmp_dir:?run private workspace setup first}/request.json"
 
-curl --fail --silent --show-error \
+curl --fail --silent --show-error --connect-timeout 10 --max-time 60 \
   --request POST \
   "https://api.atlascloud.ai/api/v1/model/generateImage" \
-  --header "Authorization: Bearer $ATLASCLOUD_API_KEY" \
+  --header @- \
   --header "Content-Type: application/json" \
   --data @"$atlas_tmp_dir/request.json" \
-  --output "$atlas_tmp_dir/submit.json"
+  --output "$atlas_tmp_dir/submit.json" <<EOF
+Authorization: Bearer ${ATLASCLOUD_API_KEY}
+EOF
 ```
 
 Video example using a catalog-confirmed model:
@@ -131,13 +133,15 @@ jq -n \
     watermark: false
   }' > "${atlas_tmp_dir:?run private workspace setup first}/request.json"
 
-curl --fail --silent --show-error \
+curl --fail --silent --show-error --connect-timeout 10 --max-time 60 \
   --request POST \
   "https://api.atlascloud.ai/api/v1/model/generateVideo" \
-  --header "Authorization: Bearer $ATLASCLOUD_API_KEY" \
+  --header @- \
   --header "Content-Type: application/json" \
   --data @"$atlas_tmp_dir/request.json" \
-  --output "$atlas_tmp_dir/submit.json"
+  --output "$atlas_tmp_dir/submit.json" <<EOF
+Authorization: Bearer ${ATLASCLOUD_API_KEY}
+EOF
 ```
 
 Check that `.data.id` is a non-empty string before polling. Treat a non-2xx
@@ -146,5 +150,4 @@ automatically because the original task may still have been accepted.
 
 ### 3. Poll with a Deadline
 
-Poll every three seconds. Accept `completed` or `succeeded` as success, stop on
-`failed` or `timeout`, and stop after ten minutes. Preserve the pr
+Poll every thre

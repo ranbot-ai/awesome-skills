@@ -20,13 +20,17 @@ Automate Canva design operations through Composio's Canva toolkit via Rube MCP.
 
 ## Setup
 
-**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
+**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. Follow the host’s authentication and trust setup; endpoint configuration alone does not establish a working Canva authorization.
 
 
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `canva`
 3. If connection is not ACTIVE, follow the returned auth link to complete Canva OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
+
+## Operation boundaries
+
+Use an already connected account when available. Client installation/OAuth requires the applicable user authorization; never expose credentials. Confirm the exact design/folder before changing it, and upload only assets authorized for this service. Do not make a private asset public merely to supply a URL. Keep expiring export links private. Bound job polling with a timeout; on uncertain write results, inspect job/item state before retrying to avoid duplicates. Tool slugs/parameter examples are illustrative: the discovered live schema controls.
 
 ## Core Workflows
 
@@ -120,19 +124,4 @@ Automate Canva design operations through Composio's Canva toolkit via Rube MCP.
 
 **Key parameters**:
 - `name`: Folder name
-- `parent_folder_id`: Parent folder for nested organization
-- `item_id`: ID of the design or asset to move
-- `folder_id`: Target folder ID
-
-**Pitfalls**:
-- Folder names must be unique within the same parent folder
-- Moving items between folders updates their location immediately
-- Root-level folders have no parent_folder_id
-
-### 6. Autofill from Brand Templates
-
-**When to use**: User wants to generate designs by filling brand template placeholders with data
-
-**Tool sequence**:
-1. `CANVA_ACCESS_USER_SPECIFIC_BRAND_TEMPLATES_LIST` - List available brand templates [Required]
-2. `CANVA_INITIATE_CANVA_DESIGN_AUTOFILL_JOB` - Start autofill with data [Re
+- `par

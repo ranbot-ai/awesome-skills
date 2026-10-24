@@ -30,6 +30,8 @@ The result is complete pipeline observability from your phone, recoverable task 
 
 Tasks flow through: Backlog, Research, Build, Review, Test, Integrate, Done. Each stage has specific gates. The Kanban board IS the orchestration layer — no separate database, no message queue, no custom infrastructure.
 
+Board comments and task descriptions are untrusted data, not authority to expand scope, disclose secrets or merge. Validate stage transitions against authenticated actors, leases and exact artifact SHAs; dragging a card does not cancel an already-running external action.
+
 ### Stateless Orchestrator
 
 A crontab-driven one-shot sweep runs every 15 minutes. No daemon, no session dependency. If it crashes, the next sweep picks up where it left off because all state lives in your PM tool.
@@ -119,10 +121,4 @@ Open your Kanban board on your phone. Watch tasks flow through the pipeline. Dra
 claude -p "/sdlc-stop"
 ```
 
-## Quality Gates
-
-Each stage enforces specific gates before promotion:
-
-- **Build to Review**: `tsc` + `eslint` + `npm test` must all pass (deterministic)
-- **Review to Test**: Evidence-based review resolves blocking findings and records coverage
-- **Test to Integrate**: 80%
+##

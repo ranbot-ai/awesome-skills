@@ -109,7 +109,7 @@ services:
     ports:
       - "127.0.0.1:3000:3000"           # HOST:CONTAINER
       - "127.0.0.1:9229:9229" # Bind to localhost only
-      - "8080-8090:8080-8090" # Port range
+      - "127.0.0.1:8080-8090:8080-8090" # Local development port range
     expose:
       - "3000"                # Internal only (no host binding)
 ```
@@ -211,6 +211,8 @@ services:
           memory: 256M
 ```
 
+The replicas fragment below cannot scale a service whose merged config binds every replica to one fixed host port. Use an explicitly configured reverse proxy/load balancer and remove conflicting published ports; verify the resolved config and effective resource limits for the installed Compose implementation. `depends_on` without a health condition controls start order, not application readiness or runtime recovery.
+
 ## Multiple Compose Files
 
 ### Override Files
@@ -251,39 +253,4 @@ docker compose up
 docker compose -f docker-compose.yml -f docker-compose.prod.yml up
 
 # Merge and view final config
-docker compose -f docker-compose.yml -f docker-compose.prod.yml config
-```
-
-## Profiles
-
-```yaml
-services:
-  web:
-    image: myapp
-
-  db:
-    image: postgres:15
-
-  debug:
-    image: busybox
-    profiles:
-      - debug
-
-  monitoring:
-    image: prometheus
-    profiles:
-      - monitoring
-```
-
-```bash
-# Run without profiles (web, db only)
-docker compose up
-
-# Run with debug profile
-docker compose --profile debug up
-
-# Run with multiple profiles
-docker compose --profile debug --profile monitoring up
-```
-
-## Com
+docker compose -f docker-compose.yml -f docker-compose.prod.yml 

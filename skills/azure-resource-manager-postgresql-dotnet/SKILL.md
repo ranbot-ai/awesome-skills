@@ -19,10 +19,9 @@ dotnet add package Azure.ResourceManager.PostgreSql
 dotnet add package Azure.Identity
 ```
 
-**Current Version**: v1.2.0 (GA)  
-**API Version**: 2023-12-01-preview
+**Example baseline**: SDK v1.2.0 / API 2023-12-01-preview. This is not a current-version assertion; select and pin a supported SDK/API for the target subscription and compile these snippets against it.
 
-> **Note**: This skill focuses on PostgreSQL Flexible Server. Single Server is deprecated and scheduled for retirement.
+> **Note**: This skill focuses on PostgreSQL Flexible Server. Single Server is retired; use Flexible Server and check current regional/version support.
 
 ## Environment Variables
 
@@ -59,6 +58,8 @@ Subscription
 
 ## Core Workflows
 
+These are separate illustrative snippets, not one compilable program. Add imports (`Azure`, `Azure.Core`, resource-group types) as required by the installed SDK. Confirm subscription/resource IDs, cost, availability and rollback before provisioning or resizing; confirm a recoverable backup and exact target before deletion. ARM credentials manage infrastructure; database connections separately need authorized database roles. Refresh Entra tokens for newly opened pooled connections using Npgsql’s password-provider API rather than retaining one token indefinitely.
+
 ### 1. Create PostgreSQL Flexible Server
 
 ```csharp
@@ -66,10 +67,8 @@ using System;
 using Azure.ResourceManager.PostgreSql.FlexibleServers;
 using Azure.ResourceManager.PostgreSql.FlexibleServers.Models;
 
-ResourceGroupResource resourceGroup = await client
-    .GetDefaultSubscriptionAsync()
-    .Result
-    .GetResourceGroupAsync("my-resource-group");
+var subscription = await client.GetDefaultSubscriptionAsync();
+ResourceGroupResource resourceGroup = (await subscription.GetResourceGroupAsync("my-resource-group")).Value;
 
 PostgreSqlFlexibleServerCollection servers = resourceGroup.GetPostgreSqlFlexibleServers();
 
@@ -134,21 +133,4 @@ Console.WriteLine($"Database created: {database.Data.Name}");
 ### 3. Configure Firewall Rules
 
 ```csharp
-PostgreSqlFlexibleServerFirewallRuleCollection firewallRules = server.GetPostgreSqlFlexibleServerFirewallRules();
-
-// Allow specific IP range
-PostgreSqlFlexibleServerFirewallRuleData ruleData = new PostgreSqlFlexibleServerFirewallRuleData
-{
-    StartIPAddress = System.Net.IPAddress.Parse("10.0.0.1"),
-    EndIPAddress = System.Net.IPAddress.Parse("10.0.0.255")
-};
-
-ArmOperation<PostgreSqlFlexibleServerFirewallRuleResource> operation = await firewallRules
-    .CreateOrUpdateAsync(WaitUntil.Completed, "allow-internal", ruleData);
-
-// Allow Azure services
-PostgreSqlFlexibleServerFirewallRuleData azureServicesRule = new PostgreSqlFlexibleServerFirewallRuleData
-{
-    StartIPAddress = System.Net.IPAddress.Parse("0.0.0.0"),
-    EndIPAddress = System.Net.IPAddress.Parse("0.0.0.0")
-};
+PostgreSqlFlexibleServerFirew

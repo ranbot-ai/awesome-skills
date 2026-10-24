@@ -10,7 +10,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/chat
 
 # ChatExport Need Miner: Offline Market Signal & Pain-Point Extractor
 
-Transform offline Telegram Desktop chat exports (`result.json`) into quantified, quote-grounded rankings of unmet market needs with zero memory crashes and absolute source fidelity.
+Transform offline Telegram Desktop chat exports (`result.json`) into quantified, quote-grounded rankings of unmet market needs using bounded candidate scanning followed by message-level source verification.
 
 ## Untrusted evidence boundary
 
@@ -31,18 +31,18 @@ Do NOT use this skill when:
 
 ## Core Mental Models & Non-Negotiable Rules
 
-1. **The 4MB Stream & Overlap Invariant (Memory Ceiling <= 8MB)**:
+1. **Chunked Candidate Scan (no fixed total-process memory guarantee)**:
    - Telegram Desktop `result.json` files routinely exceed 500MB to 5GB.
    - NEVER load an entire export into memory with `json.load()` or `fs.readFileSync()`.
-   - Read the file in fixed 4MB chunks with a 4KB overlap tail.
-   - **Boundary Counting Law**: A substring hit is recorded if and only if its terminus falls past the overlap boundary. This guarantees zero missed boundary-spanning phrases and strictly zero duplicate counts.
+   - The example reads four million decoded characters at a time with a4096-character overlap. Unicode storage, copies, regex and result aggregation consume additional memory; measure actual peak RSS.
+   - **Boundary Counting Law**: A substring hit is recorded if and only if its terminus falls past the overlap boundary. This avoids overlap duplicates only for bounded matches fitting the overlap. Raw JSON escapes, normalization and overly long matches can still hide signals; it is not a complete message parser.
 
 2. **Cross-Chat Multiplicity Law ($U \ge 3$ Priority)**:
    - One user posting 50 complaints in a single chat is an anecdote; 5 distinct users posting the same complaint across 3 independent chats is a market signal.
    - Cluster rank score is calculated as:
      $$\text{Score} = U \times \sqrt{H}$$
      where $U$ is the number of distinct chat exports containing the signal, and $H$ is the total verified keyword hits.
-   - A pattern appearing in $U \ge 3$ chats always outranks a pattern confined to $U = 1$, regardless of raw hit volume.
+   - The numeric score alone does not guarantee breadth priority. If breadth-first ranking is desired, sort by `(U >= 3, Score)` descending and label that policy explicitly.
 
 3. **Verbatim Quote Anchor & Anti-Hallucination Law**:
    - Every identified need theme MUST be backed by 2 to 5 verbatim quotes with exact ISO timestamp (`date`) and chat identifier.
@@ -61,6 +61,4 @@ Do NOT use this skill when:
 
 | Anti-Pattern | Manifestation in Code/Workflow | Mandatory Production Counter-Rule |
 | :--- | :--- | :--- |
-| **The OOM Slurp** | `data = json.load(open('result.json'))` on 800MB file. | Use incremental regex streaming or chunked buffered file reading with `<= 8MB` RAM footprint. |
-| **Chunk Boundary Blindness** | Chunking without overlap, truncating `"looking for a tool"` across 4096-byte splits. | Maintain a 4KB sliding overlap tail across chunk transitions. |
-| **Double-Count Overlap Trap** | Counting hits found in both chunk $N$ and the overlap window of chunk $N+1$.
+| **The OOM Slurp** | `data = json.load(open('result.json'))` on 800MB file. | Use incremental regex streaming or chunked buffered file reading 

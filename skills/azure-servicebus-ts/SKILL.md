@@ -3,7 +3,7 @@ name: azure-servicebus-ts
 description: Enterprise messaging with queues, topics, and subscriptions. 
 category: Document Processing
 source: antigravity
-tags: [typescript, ai, workflow, document, azure, cro]
+tags: [typescript, ai, workflow, document, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-servicebus-ts
 ---
 
@@ -37,6 +37,10 @@ const fullyQualifiedNamespace = process.env.SERVICEBUS_NAMESPACE!;
 const client = new ServiceBusClient(fullyQualifiedNamespace, new DefaultAzureCredential());
 ```
 
+## Delivery boundaries
+
+Examples mutate queues and independent fragments reuse names. Sending, scheduling and settling messages require authorization for the exact namespace/entity. Make business processing idempotent before completion; peek-lock can redeliver after failure. Avoid logging private bodies, renew locks where needed and close the shared client on shutdown.
+
 ## Core Workflow
 
 ### Send Messages to Queue
@@ -52,8 +56,10 @@ await sender.sendMessages({
 
 // Batch messages
 const batch = await sender.createMessageBatch();
-batch.tryAddMessage({ body: "Message 1" });
-batch.tryAddMessage({ body: "Message 2" });
+if (!batch.tryAddMessage({ body: "Message 1" }) ||
+    !batch.tryAddMessage({ body: "Message 2" })) {
+  throw new Error("Message batch exceeds size limit; split and retry deliberately");
+}
 await sender.sendMessages(batch);
 
 await sender.close();
@@ -146,8 +152,9 @@ const dlqReceiver = client.createReceiver("my-queue", { subQueueType: "deadLette
 const dlqMessages = await dlqReceiver.receiveMessages(10);
 for (const msg of dlqMessages) {
   console.log(`DLQ Reason: ${msg.deadLetterReason}`);
-  // Reprocess or log
-  await dlqReceiver.completeMessage(msg);
+  // Inspect and durably record the authorized recovery outcome first.
+  // Complete only after successful recovery; logging alone must not delete DLQ evidence.
+  // await dlqReceiver.completeMessage(msg);
 }
 ```
 
@@ -183,31 +190,4 @@ await receiver.completeMessage(deferredMessage[0]);
 ```typescript
 const receiver = client.createReceiver("my-queue");
 
-// Peek without removing
-const peekedMessages = await receiver.peekMessages(10);
-for (const msg of peekedMessages) {
-  console.log(`Peeked: ${msg.body}`);
-}
-```
-
-## Key Types
-
-```typescript
-import {
-  ServiceBusClient,
-  ServiceBusSender,
-  ServiceBusReceiver,
-  ServiceBusSessionReceiver,
-  ServiceBusMessage,
-  ServiceBusReceivedMessage,
-  ProcessMessageCallback,
-  ProcessErrorCallback,
-} from "@azure/service-bus";
-```
-
-## Receive Modes
-
-```typescript
-// Peek-Lock (default) - message locked until completed/abandoned
-const receiver = client.createReceiver("my-queue", { receiveMode: "peekLock" });
-await receiver.completeMessage
+// Peek without r

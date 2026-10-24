@@ -26,7 +26,7 @@ dotnet add package Azure.ResourceManager.CosmosDB
 dotnet add package Azure.Identity
 ```
 
-**Current Versions**: Stable v1.4.0, Preview v1.4.0-beta.13
+**Version scope**: Imported examples are historical and are not a current-version declaration; pin and compile against the intended SDK. Required common imports include Azure, Azure.Core and Azure.ResourceManager.Resources.
 
 ## Environment Variables
 
@@ -45,7 +45,7 @@ using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.CosmosDB;
 
-// Always use DefaultAzureCredential
+// Choose the intended tenant/identity explicitly; DefaultAzureCredential is convenient for local development.
 var credential = new DefaultAzureCredential();
 var armClient = new ArmClient(credential);
 
@@ -72,6 +72,8 @@ ArmClient
             ├── MongoDBDatabaseResource
             └── CosmosDBTableResource
 ```
+
+Confirm subscription, tenant, region, exact resources, budget and network/retention policy before provisioning. Deletion/failover/rotation require explicit authorization; ARM RBAC and data-plane RBAC are separate.
 
 ## Core Workflow
 
@@ -167,24 +169,4 @@ var throughputData = new ThroughputSettingsUpdateData(
     });
 
 // Autoscale throughput
-var autoscaleData = new ThroughputSettingsUpdateData(
-    new ThroughputSettingsResourceInfo
-    {
-        AutoscaleSettings = new AutoscaleSettingsResourceInfo
-        {
-            MaxThroughput = 4000
-        }
-    });
-
-// Apply to database
-await database.CreateOrUpdateCosmosDBSqlDatabaseThroughputAsync(
-    WaitUntil.Completed,
-    throughputData);
-```
-
-### 5. Get Connection Information
-
-```csharp
-// Get keys
-var keys = await account.GetKeysAsync();
-Console.Wr
+var autoscaleDa

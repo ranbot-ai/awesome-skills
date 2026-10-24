@@ -60,6 +60,8 @@ Provide comprehensive techniques for testing REST, SOAP, and GraphQL APIs during
 
 ## Core Workflow
 
+Use controlled test accounts/tenants and read-only canary resources. Scope rate, concurrency, duration, write/delete methods, SSRF destinations and any callback endpoint in the rules of engagement. DoS/deep recursion, credential attacks and destructive method tests require explicit separate approval and a disposable lab where possible. Stop on rate limits or unexpected access to real personal data; never evade limits through IP rotation. Payloads below are hypotheses, not proof of a vulnerability or a mandate to try every technique.
+
 ### Step 1: API Reconnaissance
 
 Identify API type and enumerate endpoints:
@@ -137,7 +139,7 @@ URL?id=<LEGIT>&id=<VICTIM>
 {"id":"56456"}                    → OK
 {"id":"56456 AND 1=1#"}           → OK  
 {"id":"56456 AND 1=2#"}           → OK
-{"id":"56456 AND 1=3#"}           → ERROR (vulnerable!)
+{"id":"56456 AND 1=3#"}           → Observe response; an error alone proves nothing
 {"id":"56456 AND sleep(15)#"}     → SLEEP 15 SEC
 ```
 
@@ -185,41 +187,4 @@ DELETE /api/v1/users/1
 PATCH /api/v1/users/1
 
 # Switch content type
-Content-Type: application/json → application/xml
-```
-
----
-
-## GraphQL-Specific Testing
-
-### Introspection Query
-
-Fetch entire backend schema:
-
-```graphql
-{__schema{queryType{name},mutationType{name},types{kind,name,description,fields(includeDeprecated:true){name,args{name,type{name,kind}}}}}}
-```
-
-**URL-encoded version:**
-
-```
-/graphql?query={__schema{types{name,kind,description,fields{name}}}}
-```
-
-### GraphQL IDOR
-
-```graphql
-# Try accessing other user IDs
-query {
-  user(id: "OTHER_USER_ID") {
-    email
-    password
-    creditCard
-  }
-}
-```
-
-### GraphQL SQL/NoSQL Injection
-
-```graphql
-mut
+Content-Type: application/jso

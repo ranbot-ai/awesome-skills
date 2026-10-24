@@ -25,6 +25,8 @@ This setup uses:
 - **NativeWind v5** - Metro transformer for Tailwind in React Native
 - **@tailwindcss/postcss** - PostCSS plugin for Tailwind v4
 
+This is a historical NativeWind 5 preview/nightly recipe. Verify the current Expo SDK/React/NativeWind compatibility and pinned dependency APIs before changing an existing app. Merge Metro/Babel/PostCSS settings without discarding unrelated plugins. Package-manager resolutions differ; do not assume Yarn resolutions affect npm. Validate native and web builds plus accessibility/reduced-motion behavior.
+
 ## Installation
 
 ```bash
@@ -132,6 +134,8 @@ With Tailwind v4 and NativeWind v5, you do NOT need a babel.config.js for Tailwi
 
 Since react-native-css requires explicit CSS element wrapping, create reusable components:
 
+Import src/global.css once in the actual app entry/root layout. Add `export { Image } from "./image";` to src/tw/index.tsx if using the barrel import shown below.
+
 ### Main Components (`src/tw/index.tsx`)
 
 ```tsx
@@ -193,26 +197,4 @@ Text.displayName = "CSS(Text)";
 export const ScrollView = (
   props: React.ComponentProps<typeof RNScrollView> & {
     className?: string;
-    contentContainerClassName?: string;
-  }
-) => {
-  return useCssElement(RNScrollView, props, {
-    className: "style",
-    contentContainerClassName: "contentContainerStyle",
-  });
-};
-ScrollView.displayName = "CSS(ScrollView)";
-
-// Pressable
-export const Pressable = (
-  props: React.ComponentProps<typeof RNPressable> & { className?: string }
-) => {
-  return useCssElement(RNPressable, props, { className: "style" });
-};
-Pressable.displayName = "CSS(Pressable)";
-
-// TextInput
-export const TextInput = (
-  props: React.ComponentProps<typeof RNTextInput> & { className?: string }
-) => {
-  return u
+    contentContainerClassName?

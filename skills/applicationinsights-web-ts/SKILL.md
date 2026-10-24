@@ -11,7 +11,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/appl
 # Application Insights JavaScript SDK (Web) for TypeScript
 ## When to Use
 
-Use this skill when you need instrument browser/web apps with the Application Insights JavaScript SDK (@microsoft/applicationinsights-web). Use for Real User Monitoring (RUM) — page views, clicks, AJAX/fetch dependencies, exceptions, custom events, and browser-side GenAI agent traces correlated to backend...
+Use this skill when you need instrument browser/web apps with the Application Insights JavaScript SDK (@microsoft/applicationinsights-web). Use for Real User Monitoring (RUM) — page views, clicks, AJAX/fetch dependencies, exceptions, custom events, and browser-side GenAI agent traces with explicitly verified backend correlation.
 
 
 Real User Monitoring (RUM) for browser apps with `@microsoft/applicationinsights-web`. Auto-collects page views, AJAX/fetch dependencies, unhandled exceptions, and (with the Click Analytics plugin) clicks. Supports custom events, metrics, and **GenAI agent traces** that follow OpenTelemetry GenAI semantic conventions and correlate to backend spans via W3C Trace Context.
@@ -63,16 +63,16 @@ NEXT_PUBLIC_APPINSIGHTS_CONNECTION_STRING="InstrumentationKey=..."
 ## Quick Start (npm)
 
 ```typescript
-import { ApplicationInsights } from "@microsoft/applicationinsights-web";
+import { ApplicationInsights, DistributedTracingModes } from "@microsoft/applicationinsights-web";
 
 export const appInsights = new ApplicationInsights({
   config: {
     connectionString: import.meta.env.VITE_APPINSIGHTS_CONNECTION_STRING,
     enableAutoRouteTracking: true,        // SPA route changes -> page views
-    enableCorsCorrelation: true,          // propagate Request-Id / traceparent to cross-origin AJAX
-    enableRequestHeaderTracking: true,
-    enableResponseHeaderTracking: true,
-    distributedTracingMode: 2,            // DistributedTracingModes.AI_AND_W3C — emit traceparent for backend correlation
+    enableCorsCorrelation: false, // opt in only for approved backend origins          // propagate Request-Id / traceparent to cross-origin AJAX
+    enableRequestHeaderTracking: false, // avoid collecting credentials/PII
+    enableResponseHeaderTracking: false,
+    distributedTracingMode: DistributedTracingModes.W3C, // import the enum; do not infer names from numeric literals
     autoTrackPageVisitTime: true,
     disableFetchTracking: false,          // fetch() is auto-instrumented by default
     excludeRequestFromAutoTrackingPatterns: [/livemetrics\.azure\.com/i]
@@ -89,18 +89,14 @@ Call `loadAppInsights()` exactly once, as early as possible (before user interac
 
 Recommended when you want auto-updating SDK and zero build pipeline. Paste this as the **first** `<script>` in `<head>`:
 
-```html
-<script type="text/javascript" src="https://js.monitor.azure.com/scripts/b/ai.3.gbl.min.js" crossorigin="anonymous"></script>
-<script type="text/javascript">
-  var appInsights = window.appInsights || function (cfg) {
-    /* See: https://learn.microsoft.com/azure/azure-monitor/app/javascript-sdk
-       Use the latest snippet from the Microsoft Learn page above — it includes
-       backup-CDN failover (cr), SDK-load-failure reporting, and the queue shim
-       so calls before SDK ready are not lost. */
-  }({ src: "https://js.monitor.azure.com/scripts/b/ai.3.gbl.min.js",
-      crossOrigin: "anonymous",
-      cfg: { connectionString: "YOUR_CONNECTION_STRING" } });
-</script>
+```text
+Retrieve and review the complete loader snippet from the official SDK setup page.
+The prior queue-shim placeholder was not an implementation and must not be pasted as working code.
 ```
 
-Loader-only API (queued until SDK loads):
+Loader-only API (queued until SDK loads): `trackEvent`, `trackPageView`, `trackException`, `trackTrace`, `trackDependencyData`, `trackMetric`, `trackPageViewPerformance`, `startTrackPage`, `stopTrackPage`, `startTrackEvent`, `stopTrackEvent`, `addTelemetryInitializer`, `setAuthenticatedUserContext`, `clearAuthenticatedUserContext`, `flush`.
+
+## Core Tracking APIs
+
+```typescript
+// Page views (SPAs that disable e

@@ -64,10 +64,10 @@ struct ClayCard: View {
         VStack(spacing: 16) {
             Image(systemName: "cloud.sun.fill")
                 .font(.system(size: 48))
-                .foregroundColor(.white)
+                .foregroundColor(Color(white: 0.15))
             Text("Claymorphic Card")
                 .font(.system(size: 20, weight: .bold, design: .rounded))
-                .foregroundColor(.white)
+                .foregroundColor(Color(white: 0.15))
         }
         .padding(40)
         .background(Color(red: 0.97, green: 0.71, blue: 0.65)) // Soft coral
@@ -135,7 +135,5 @@ class _ClayCardState extends State<ClayCard> with SingleTickerProviderStateMixin
                 blurRadius: 24,
               ),
             ],
-            // Gradient border for the clay volume effect
-            border: GradientBorder(
-              gradient: LinearGradient(
-            
+            // Standard Flutter fallback; a gradient border needs a custom painter.
+            border: Border.all(color: 

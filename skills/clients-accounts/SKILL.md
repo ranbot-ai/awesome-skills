@@ -17,7 +17,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/clie
 Works out the smallest useful **Clients & Accounts** setup for the business in front of it, then
 builds it only when asked. The default output is a short recommendation, not a
 spreadsheet. Artifacts - CSV, SQL DDL, JSON Schema, Notion mapping - are produced on
-request, from one field list so they cannot drift apart.
+request, from one field list, then verify their mappings agree.
 
 Layer: Layer 8: Operate. Fits: Starter stage. Table code: n/a.
 
@@ -36,7 +36,8 @@ empty templates only - it never holds or processes real employee or customer dat
 
 ## How It Works
 
-Follow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.
+The upstream shared execution contract is not bundled; use this file's stated
+intent, placeholder-only, output and external-write rules without inventing a read. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.
 
 ### Step 1 - Identify intent
 
@@ -106,13 +107,11 @@ so do not add tax rate or tax amount fields to the schema unless the user asks f
 Outstanding = Total Invoiced - Total Paid
 ```
 
-Round once, at the end, to 2 decimal places, and use the rounded figure everywhere. When credits, write-offs
+For this two-decimal example, round once at the end; confirm currency precision before adapting, and use the rounded figure everywhere. When credits, write-offs
 or a part payment mean the two totals do not explain the difference, record why in `Notes` and leave
 `Outstanding` as the arithmetic result - do not adjust `Total Paid` to force a tie-out. If the user has
 not supplied either total, leave `Outstanding` empty rather than defaulting it to 0.
 
 ### Step 5 - Build only on request
 
-Once the user asks for it, derive the fields from the confirmed context and emit the
-requested artifacts. For machine-readable text, keep prose outside the data; for files,
-provide a usable
+Once t

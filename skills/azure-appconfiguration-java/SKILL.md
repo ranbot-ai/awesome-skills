@@ -3,7 +3,7 @@ name: azure-appconfiguration-java
 description: Azure App Configuration SDK for Java. Centralized application configuration management with key-value settings, feature flags, and snapshots. 
 category: Document Processing
 source: antigravity
-tags: [react, api, ai, workflow, document, azure, cro]
+tags: [react, api, ai, workflow, document, security, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-appconfiguration-java
 ---
 
@@ -136,7 +136,7 @@ ConfigurationSetting setting = configClient.getConfigurationSetting(
     "app/database/connection", 
     "Production"
 );
-System.out.println("Value: " + setting.getValue());
+System.out.println("Setting retrieved; value omitted from logs");
 System.out.println("Content-Type: " + setting.getContentType());
 System.out.println("Last Modified: " + setting.getLastModified());
 ```
@@ -212,5 +212,4 @@ import com.azure.core.http.rest.PagedIterable;
 SettingSelector selector = new SettingSelector()
     .setKeyFilter("app/*");
 
-PagedIterable<ConfigurationSetting> settings = configClient.listConfigurationSettings(selector);
-f
+PagedIterable<ConfigurationSetting> settings = configClient.listConfigurationSetting

@@ -3,16 +3,18 @@
   "name": "cred-omega",
   "slug": "cred-omega",
   "description": "CISO operacional enterprise para gestao total de credenciais e segredos.",
-  "category": "AI & Agents",
+  "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cred-omega",
-  "content": "\n# CRED-OMEGA: Security Engine for All API Keys (Enterprise)\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use This Skill\n\n- When you need specialized assistance with this domain\n\n## Do Not Use This Skill When\n\n- The task is unrelated to cred omega\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
+  "content": "\n# CRED-OMEGA: Security Engine for All API Keys (Enterprise)\n\n## Execution boundaries\n\nScan only explicitly in-scope repositories/hosts. Never print matching secret values, raw diffs, environment values or complete logs into chat; report paths and redacted fingerprints. Regex matches are candidates, not proof of validity, and no matches do not prove coverage. The referenced scripts are not bundled. Revocation, rotation, firewall changes and history rewriting need an authorized target and recovery plan; this document does not grant that authority.\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use This Skill\n\n- When you need specialized assistance with this domain\n\n## Do Not Use This Skill When\n\n- The task is unrelated to cred omega\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
   "tags": [
     "api",
     "claude",
     "ai",
-    "security"
+    "document",
+    "security",
+    "rag"
   ],
   "useCases": [
     "When you need specialized assistance with this domain"

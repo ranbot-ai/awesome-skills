@@ -3,7 +3,7 @@ name: color-blocking
 description: Web and App implementation guide for Color Blocking. Trigger when user wants large color sections, striking layout divisions, and Mondrian-style grids. 
 category: Creative & Media
 source: antigravity
-tags: [react, ai, llm, template, design]
+tags: [react, ai, llm, template, design, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-it/color-blocking
 ---
 
@@ -27,7 +27,7 @@ Use this sub-style when the user's request matches the aesthetic described above
 - **Borders**: Often uses thick black borders (`2px solid #000`) between blocks to emphasize the grid, reminiscent of Mondrian paintings.
 
 ## Web Implementation
-- CSS Grid is the only way to effectively build this.
+- CSS Grid is one option; flex layouts and native stacks also support color blocking. Keep content scrollable and collapse columns on narrow screens.
 - **CSS Example**:
 ```css
 body {
@@ -39,7 +39,7 @@ body {
 .color-block-grid {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: 60vh 40vh;
+  grid-template-rows: minmax(min-content, 3fr) minmax(min-content, 2fr);
   /* Thick black lines between blocks */
   gap: 4px;
   background-color: #000; 
@@ -145,6 +145,4 @@ class ColorBlockingScreen extends StatelessWidget {
               flex: 2, // 2/5 of vertical space
               child: Row(
                 children: [
-                  Expanded(flex: 1, child: ColorBlock(color: const Color(0xFFEF4444), text: 'BOLD', textColor: Colors.white)),
-                  const SizedBox(width: 4),
-                  Expanded(flex: 2, child: ColorBlock(color: Colors.white, text: 'MINIMAL'
+                  Expanded(flex: 1, child: ColorBlock(color: const Color(0xFFEF4444), text: 'BOLD', textColor: Colors.white))

@@ -98,7 +98,7 @@ You pay only for transcripts in the dataset. Videos with no captions, private vi
 | Scale | $4.33 |
 | Business and higher | $4.00 |
 
-`cost ≈ videos × $0.005`. For channels, videos = channels × `maxVideos`. Under about 200 videos ($1), run it. Above that, state the estimate and get a yes first.
+`cost ≈ videos × $0.005`. For channels, videos = channels × `maxVideos`. The $1/200-video example is not spending authorization. Verify current Actor pricing and obtain approval for the actual input, maximum results and budget, unless existing explicit authorization already covers that scope.
 
 ```bash
 apify actors call "harshmaur/youtube-transcript-scraper" \
@@ -125,5 +125,4 @@ Each row has `dataType`: `transcript` or `failed`.
 |---|---|
 | Video | `videoId`, `url`, `title`, `description`, `durationSeconds`, `publishedAt`, `category`, `keywords`, `thumbnail` |
 | Numbers | `viewCount`, `likeCount`, `commentCount` |
-| Channel | `channelName`, `channelId`, `channelUrl`, `channelUsername`, `subscriberCount` |
-| Transcript | `transcriptText` (plain text), `transcript` (segments with `start`, `end`, `duration`, `text` 
+| Channel | `channelName`, `channelId`, `channelUrl`, `channelUsername

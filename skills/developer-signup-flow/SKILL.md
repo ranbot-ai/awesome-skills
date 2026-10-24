@@ -32,7 +32,7 @@ Review the `/devmarketing-skills/skills/developer-audience-context` skill to und
 
 For developer tools, GitHub OAuth should be your primary option. Here's why:
 
-1. **Identity verification built-in** - Active GitHub accounts have commit history, repos, and social proof
+1. **Account authentication** - OAuth authenticates a GitHub account; public activity does not verify a person, employer or business entitlement
 2. **Scope familiarity** - Developers understand GitHub's permission model
 3. **Profile data** - You get username, email, and can infer experience level from public activity
 4. **Trust signal** - GitHub is where developers already live
@@ -81,7 +81,7 @@ Email+password signup should exist but not dominate. It serves:
 
 **If you support email signup:**
 - Allow signup with just email—send magic link, don't require password creation
-- Never require email verification before showing the dashboard
+- A read-only preview may precede verification; verify ownership before account linking, secrets, paid resources or sensitive workspace access
 - Offer "Set password later" for developers who prefer magic links
 
 ## Reducing Form Fields
@@ -133,13 +133,8 @@ For each field you want to add, answer:
 - What decision does this field enable that can't wait?
 - What's the conversion cost of this field?
 
-Research suggests each additional required field reduces conversion by 5-10%.
+Measure field impact in your own funnel; no universal per-field conversion penalty is established here.
 
 ## API Key Generation UX
 
-### Immediate Key Generation
-
-Developers sign up to write code. Show them an API key immediately.
-
-**Good implementation (Stripe):**
-1. OAuth compl
+### I

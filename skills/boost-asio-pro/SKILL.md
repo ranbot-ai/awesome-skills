@@ -25,6 +25,8 @@ Asio's API changed shape three times, so the same task has three correct answers
 - Use when the target toolchain is old: an older Boost or a pre-C++20 standard, where coroutine examples will not compile.
 - Use when async code compiles but misbehaves: interleaved writes, dangling buffers, sockets closing early, `operation_aborted` treated as an error.
 
+The bundled examples are sketches, not a locally verified build matrix. Upstream compilation/CI claims below are author-reported historical evidence, not results from this catalog review. Verify API headers, tokens and namespace locations against the installed release; some coroutine snippets assume newer default completion tokens. Use explicit `asio::use_awaitable` for older supported releases. Bound read buffers and outbound queues, handle cancellation and shutdown, and supply all omitted declarations before treating a sketch as a server.
+
 ## Step 1: pick the style (do this before writing code)
 
 Determine the Boost (or Asio) version and the C++ standard actually in use — `find_package(Boost)` output, `dpkg -l libboost-dev`, `brew info boost`, `CMAKE_CXX_STANDARD`, or ask. Do not assume the newest.
@@ -59,10 +61,4 @@ Language, not library: the chrono literals `250ms` / `30s` are **C++14**. For a 
 
 ## Step 3: the rules that are actually easy to get wrong
 
-**A strand does not serialize writes.** A strand serializes handler *execution*, not whole composed operations. Two `async_write`s in flight on the same strand still **interleave bytes on the wire**. Full-duplex (a read loop plus concurrent pushes/replies) needs a per-connection strand **and** an outbound queue with an in-flight flag, so at most one `async_write` exists at a time. This is the single most common wrong answer about Asio.
-
-**Buffers do not own memory.** `asio::buffer()` is a view. Storage must outlive the operation: coroutine locals are fine across `co_await` in the same frame; in callback style the same data must become a **member**, not a local.
-
-**Connections must outlive their handlers.** `enable_shared_from_this`, and capture `self` in *every* `co_spawn` / handler — read loop, write loop, and each timer.
-
-**Frame with composed reads.** `async_read` (fills the buffer exactly) for a length prefix and then the body; ne
+**A strand does not serialize writes.** A strand serializes handler *execution*, not whole composed operations. Two `async_write`s in flight on the same strand still **interleave bytes on the wire**. Full-duplex (a read loop plus concurrent pushes/replies) needs a per-connection strand **and** an outbound queue with an in-flight flag, so at most one `async_write` exists at a time. This is the sing

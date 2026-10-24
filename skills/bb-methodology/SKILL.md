@@ -3,7 +3,7 @@ name: bb-methodology
 description: Use at the START of any bug bounty hunting session, when switching targets, or when feeling lost about what to do next. 
 category: Security & Systems
 source: antigravity
-tags: [python, javascript, pdf, api, claude, ai, automation, workflow, template, design]
+tags: [python, pdf, api, claude, ai, automation, workflow, template, design, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bb-methodology
 ---
 
@@ -23,9 +23,13 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bb-m
 
 # Bug Bounty Methodology: Workflow + Mindset
 
-Master orchestrator for hunting sessions. Combines the 5-phase non-linear workflow with the critical thinking framework that separates top 1% hunters from the rest.
+A planning framework for authorized assessment sessions. It provides no measured top-percentile performance guarantee.
 
 ---
+
+## Scope and evidence boundary
+
+Follow the actual written program/SoW, scoped assets, testing methods, request/concurrency limits and stop conditions. Newly discovered assets, origin IPs and third-party integrations are not automatically in scope. Slash commands and linked skills are external dependencies, not bundled functions. Do not automatically install or execute them. Imported anecdotes/test counts are not independently verified by this bundle.
 
 ## PART 0: MODE CONFIRMATION (Before Anything Else)
 
@@ -33,8 +37,8 @@ Master orchestrator for hunting sessions. Combines the 5-phase non-linear workfl
 
 | Engagement type | What counts as a finding | What gets rejected |
 |---|---|---|
-| **Bug bounty** (H1 / Bugcrowd / Intigriti / private VDP) | Impact-demonstrated bugs ONLY. Full chain to attacker-attainable harm. | Hygiene (EoL software alone, permissive CSP alone, stack traces, info disclosure without concrete impact, "best practice" violations) |
-| **Red team** (external client engagement) | Hygiene findings + recon + IoCs + defensive-state observations are ALL deliverables | Nothing — even "no finding here" is reportable as a positive defensive observation |
+| **Bug bounty** (H1 / Bugcrowd / Intigriti / private VDP) | Impact-demonstrated bugs ONLY. Full chain to attacker-attainable harm. | Eligibility depends on the actual program; hygiene or disclosure may be accepted when its policy allows it |
+| **Red team** (external client engagement) | Hygiene findings + recon + IoCs + defensive-state observations are ALL deliverables | Deliverables depend on the rules of engagement; a negative test is an observation under stated conditions, not security certification |
 | **Pentest** (signed SoW / WAPT) | Depends on SoW. Read scope explicitly. Usually accepts hygiene + impact + recon | Out-of-scope assets, unsigned testing |
 | **Internal audit** | Compliance-mapped findings (PCI / ISO / NIST / DPDPA / GDPR) | Findings without a control-mapping |
 
@@ -62,7 +66,7 @@ Before touching any tool:
 
 1. **Confidentiality** -- steal data the attacker shouldn't see
 2. **Integrity** -- modify data the attacker shouldn't change
-3. **Availability** -- disrupt service (app-level DoS only)
+3. **Availability** -- evaluate resilience only if explicitly permitted; app-level DoS is still disruptive
 4. **Account Takeover** -- control another user's account
 5. **RCE** -- execute commands on the server
 
@@ -87,13 +91,4 @@ Before touching any tool:
 - Send coupon request 10x simultaneously -> Race condition?
 - Replace `guid=f8a2...` with `id=100` on sibling endpoint -> IDOR?
 
-#### 2. Multi-Perspective (multiple angles)
-
-| Perspective | What to check |
-|------------|---------------|
-| Horizontal (same role) | User A's token + User B's ID -> IDOR |
-| Vertical (different role) | Regular user -> `/admin/deleteUser` |
-| Data flow (proxy view) | Hidden params in JSON: `debug=false`, `discount_rate` |
-| Time/State | Race conditions, post-delete session reuse |
-| Client environment | Mobile UA -> legacy API with weaker auth |
-| Business impact | "What's the $ damage if th
+#### 2. Multi-Pe

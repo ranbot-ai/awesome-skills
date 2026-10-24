@@ -3,7 +3,7 @@ name: context-degradation
 description: Language models exhibit predictable degradation patterns as context length increases. Understanding these patterns is essential for diagnosing failures and designing resilient systems. 
 category: AI & Agents
 source: antigravity
-tags: [markdown, api, claude, ai, agent, gpt, design, document, image, rag]
+tags: [markdown, api, ai, agent, design, document, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/context-degradation
 ---
 
@@ -31,10 +31,10 @@ These patterns are predictable and can be mitigated through architectural patter
 
 ### The Lost-in-Middle Phenomenon
 
-The most well-documented degradation pattern is the "lost-in-middle" effect, where models demonstrate U-shaped attention curves. Information at the beginning and end of context receives reliable attention, while information buried in the middle suffers from dramatically reduced recall accuracy.
+The most well-documented degradation pattern is the "lost-in-middle" effect, where evaluated models can show U-shaped task-performance curves. Information at the beginning and end of context receives reliable attention, while information buried in the middle suffers from dramatically reduced recall accuracy.
 
 **Empirical Evidence**
-Research demonstrates that relevant information placed in the middle of context experiences 10-40% lower recall accuracy compared to the same information at the beginning or end. This is not a failure of the model but a consequence of attention mechanics and training data distributions.
+The Lost in the Middle paper reports position-sensitive performance on its evaluated retrieval/question-answering tasks. The magnitude depends on the model/task; it does not establish a universal 10–40% loss or a single causal mechanism.
 
 Models allocate massive attention to the first token (often the BOS token) to stabilize internal states. This creates an "attention sink" that soaks up attention budget. As context grows, the limited budget is stretched thinner, and middle tokens fail to garner sufficient attention weight for reliable retrieval.
 
@@ -62,4 +62,4 @@ Recovery requires removing or replacing poisoned content. This may involve trunc
 Context distraction emerges when context grows so long that models over-focus on provided information at the expense of their training knowledge. The model attends to everything in context regardless of relevance, and this creates pressure to use provided information even when internal knowledge is more accurate.
 
 **The Distractor Effect**
-Research shows that even a single irrelevant document in context reduces performance on tasks involving relevant documents. Multiple distractors compound degradation. The effect is not about noise in absolute terms but about attention allocation—irrelevant information competes with relevant in
+Research shows that even a single irrelevant document in context reduces performance on tasks involving relevant documents. Multiple distractors compound degradation. The effect is not about noise in absolute terms but about attention allocation—irrelevant information competes with relevant information for limited attention budg

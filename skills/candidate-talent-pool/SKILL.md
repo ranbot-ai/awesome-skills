@@ -90,7 +90,7 @@ If an artifact was requested, build it after resolving essential missing facts. 
 
 **Recommended approach:** Keep a warm pool with consent and a re-engage date. It is a contact list with a purpose, not a resume archive.
 
-**Why this one:** Rejected candidates are the cheapest hiring source you have, and the most commonly thrown away. Consent and a re-engage date are what make it reusable.
+**Why this one:** Previous applicants may be a relevant source when retention and re-contact are appropriate. Consent and a re-engage date are what make it reusable.
 
 **Workflow:** Candidate added → Consent → Re-engage date → Reminder → Reopen role
 
@@ -108,4 +108,4 @@ Notion step there.** When the user selects Notion, hand that step to
 mapping, the import steps and the verification checklist, and it renders the Field
 Reference below instead of defining a table of its own. Do not restate the mapping
 here and do not improvise the import steps. Manual CSV and mapping outputs need no
-connection. For requested workspace changes, follow the shared contract: verify act
+connection. For requested workspace changes, follow the shared contract: verify actual

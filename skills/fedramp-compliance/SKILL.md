@@ -21,22 +21,28 @@ Implement FedRAMP (Federal Risk and Authorization Management Program) requiremen
 - Preparing for a Third-Party Assessment Organization (3PAO) audit
 - Operating a FedRAMP-authorized system and maintaining authorization
 
-## Impact Levels
+## Resolve the Applicable Program First
+
+This is an illustrative Rev5 evidence-planning guide, not a current certification checklist. Record the service boundary, agency customers, selected Rev5 or 20x path, class, rule version and effective date before mapping controls. In the 2026 transition, FedRAMP uses certification and Classes A–D terminology; the timeline permits early adoption before January 2027 mandatory adoption, with area-specific effective dates. Legacy Low/Moderate/High labels below provide historical context only. Do not select a category from a data-type example alone: assess confidentiality, integrity and availability impact with the responsible agency and current rules.
+
+Use the current official baseline and templates, not the illustrative subset below. JAB P-ATO is not a required route for High systems; JAB authorizations transitioned to the single FedRAMP designation. An agency’s authorization to operate remains a separate decision.
+
+## Historical Impact Labels (Illustrative)
 
 ```yaml
 impact_levels:
   low:
-    control_count: ~125
+    baseline: "Resolve current applicable official baseline"
     use_case: "Publicly available federal information"
     examples:
       - Public-facing websites with no sensitive data
       - Open data portals
       - Marketing and informational systems
     data_types: "No PII, no CUI, publicly releasable only"
-    authorization_path: "FedRAMP Tailored (Li-SaaS) or standard Low"
+    path: "Resolve current program/class and eligibility"
 
   moderate:
-    control_count: ~325
+    baseline: "Resolve current applicable official baseline"
     use_case: "Most federal systems, including CUI"
     examples:
       - Email and collaboration platforms
@@ -44,19 +50,18 @@ impact_levels:
       - Financial management systems
       - HR and personnel systems
     data_types: "CUI, PII, law enforcement sensitive (LES)"
-    authorization_path: "Agency or JAB P-ATO"
-    note: "~80% of FedRAMP authorizations are at Moderate"
+    path: "Resolve current program/class and eligibility"
 
   high:
-    control_count: ~425
+    baseline: "Resolve current applicable official baseline"
     use_case: "High-impact federal systems"
     examples:
       - Law enforcement and criminal justice systems
       - Emergency services and public safety
       - Financial systems with significant impact
       - Healthcare systems with PHI
-    data_types: "Classified-adjacent, life-safety, critical infrastructure"
-    authorization_path: "JAB P-ATO required"
+    data_types: "Unclassified high-impact federal information; classified systems require a separate regime"
+    path: "Resolve current program/class and eligibility"
 ```
 
 ## NIST 800-53 Control Families
@@ -112,35 +117,4 @@ control_families:
       IA-2: "Identification and Authentication (Org Users)"
       IA-5: "Authenticator Management"
       IA-8: "Identification and Authentication (Non-Org Users)"
-    implementation_notes: "Map to SSO, MFA, certificate-based auth, PIV/CAC"
-
-  IR:
-    name: "Incident Response"
-    key_controls:
-      IR-2: "Incident Response Training"
-      IR-4: "Incident Handling - implement incident handling capability"
-      IR-6: "Incident Reporting - report incidents to US-CERT"
-      IR-8: "Incident Response Plan"
-    implementation_notes: "US-CERT reporting within 1 hour for federal incidents"
-
-  MA:
-    name: "Maintenance"
-    key_controls:
-      MA-2: "Controlled Maintenance"
-      MA-4: "Nonlocal Maintenance - authorize nonlocal maintenance"
-    implementation_notes: "Patching procedures, remote maintenance controls"
-
-  MP:
-    name: "Media Protection"
-    key_controls:
-      MP-2: "Media Access - restrict access to media"
-      MP-6: "Media Sanitization - sanitize media prior to disposal"
-    implementation_notes: "Encryption at rest, secure disposal procedures"
-
-  PE:
-    name: "Physical and Environmental Protection"
-    key_controls:
-      PE-2: "Physical Access Authorizations"
-      PE-3: "Physical Access Control"
-      PE-6: "Monitoring Physical Access"
-    implementation_notes:
+    implementation_notes: "Map to SSO, MF

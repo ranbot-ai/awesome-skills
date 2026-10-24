@@ -83,11 +83,31 @@ asset_record_schema:
     dependencies: "Upstream and downstream services"
 ```
 
+## Scope and evidence limits
+
+Confirm account/subscription/organization and approved regions before queries.
+Use read-only discovery identities and restricted output directories: asset data
+contains internal addresses, account and owner information. These scripts enumerate
+selected services, not every resource. AWS tagging API omits never-tagged resources;
+Azure Resource Graph needs pagination beyond its default page; Config sees only
+recorded supported resources. Record per-provider permission errors and pagination,
+never label a failed query empty or an unseen asset retired. Repeat region-scoped
+queries for each authorized region and reconcile a stable account+region+resource
+ID before CMDB writes. Config setup below mutates paid account settings and needs
+an approved recorder role, delivery channel and change plan first. Tag policies
+constrain supported tag values but do not require tags on every resource; provider
+default_tags and Config evaluations are not universal preventative enforcement.
+The tag-policy YAML is an illustrative wrapper; actual Organizations policy is JSON
+with `tags` at its root, not `tag_policy`.
+
 ## AWS Resource Discovery Script
 
 ```bash
 #!/usr/bin/env bash
-# aws-asset-discovery.sh - Discover and inventory all AWS resources
+# aws-asset-discovery.sh - Selected AWS services in the configured region
+set -euo pipefail
+umask 077
+set -o noclobber
 
 OUTPUT_DIR="./asset-inventory/aws/$(date +%Y-%m-%d)"
 mkdir -p "$OUTPUT_DIR"
@@ -127,32 +147,4 @@ aws rds describe-db-instances \
     BackupRetention:BackupRetentionPeriod
   }' --output json > "$OUTPUT_DIR/rds-instances.json"
 
-# S3 Buckets
-echo "--- S3 Buckets ---"
-aws s3api list-buckets --query 'Buckets[*].{Name:Name,Created:CreationDate}' --output json | \
-  jq -c '.[]' | while read -r bucket; do
-    name=$(echo "$bucket" | jq -r '.Name')
-    region=$(aws s3api get-bucket-location --bucket "$name" --query 'LocationConstraint' --output text 2>/dev/null)
-    encryption=$(aws s3api get-bucket-encryption --bucket "$name" 2>/dev/null | jq -r '.ServerSideEncryptionConfiguration.Rules[0].ApplyServerSideEncryptionByDefault.SSEAlgorithm' 2>/dev/null)
-    versioning=$(aws s3api get-bucket-versioning --bucket "$name" --query 'Status' --output text 2>/dev/null)
-    echo "{\"Name\":\"$name\",\"Region\":\"${region:-us-east-1}\",\"Encryption\":\"${encryption:-none}\",\"Versioning\":\"${versioning:-Disabled}\"}"
-  done | jq -s '.' > "$OUTPUT_DIR/s3-buckets.json"
-
-# Lambda Functions
-echo "--- Lambda Functions ---"
-aws lambda list-functions \
-  --query 'Functions[*].{
-    Name:FunctionName,
-    Runtime:Runtime,
-    MemorySize:MemorySize,
-    Timeout:Timeout,
-    LastModified:LastModified,
-    CodeSize:CodeSize
-  }' --output json > "$OUTPUT_DIR/lambda-functions.json"
-
-# VPCs and Security Groups
-echo "--- VPCs ---"
-aws ec2 describe-vpcs \
-  --query 'Vpcs[*].{
-    VpcId:VpcId,
-    Cid
+# S3 bucket names only. Per-bucket location/encryption/versioning need s

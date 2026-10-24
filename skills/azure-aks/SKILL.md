@@ -20,6 +20,8 @@ Deploy and manage production-grade Kubernetes clusters on Azure with AKS. Covers
 - You are running microservices that require service mesh, ingress, or network policies.
 - You need GPU or spot node pools for specialized or cost-optimized workloads.
 
+Confirm subscription, cluster/context, budget, quotas, region/zone/SKU support and rollback before mutations. Examples are partial and version-sensitive: inspect current AKS and AzureRM provider schemas, supported Kubernetes upgrade paths and pod-disruption budgets. `get-credentials` changes local kubeconfig/current context. Do not manually scale an autoscaler-controlled pool without coordinating the autoscaler. Use existing secret references for Grafana credentials, not command-line values.
+
 ## Prerequisites
 
 ```bash
@@ -42,7 +44,7 @@ kubectl version --client
 
 ## Cluster Creation
 
-### Basic Production Cluster
+### Illustrative Cluster Configuration
 
 ```bash
 # Create resource group
@@ -154,7 +156,7 @@ az aks nodepool upgrade \
   --resource-group myapp-rg \
   --cluster-name myapp-aks \
   --name apppool \
-  --kubernetes-version 1.28.3
+  --kubernetes-version "<supported-upgrade-target>"
 
 # List node pools
 az aks nodepool list \
@@ -165,32 +167,4 @@ az aks nodepool list \
 
 ## Ingress Controller Setup
 
-```bash
-# Install NGINX ingress controller via Helm
-helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm repo update
-
-helm install ingress-nginx ingress-nginx/ingress-nginx \
-  --namespace ingress-nginx \
-  --create-namespace \
-  --set controller.replicaCount=2 \
-  --set controller.nodeSelector."kubernetes\.io/os"=linux \
-  --set controller.service.annotations."service\.beta\.kubernetes\.io/azure-load-balancer-health-probe-request-path"=/healthz \
-  --set controller.service.externalTrafficPolicy=Local
-
-# Verify the ingress controller and get external IP
-kubectl get svc -n ingress-nginx
-```
-
-### Ingress Resource Example
-
-```yaml
-# ingress.yaml
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: myapp-ingress
-  namespace: myapp
-  annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    ngi
+The community ingress-nginx project retired in March 2026. The legacy commands and nginx-specific annotations below are for recognizing/migrating existing installations, not a recommendation for a new deployment. Choose a maintained controller or Gateway API implementation and translate behavior explicitly. See http

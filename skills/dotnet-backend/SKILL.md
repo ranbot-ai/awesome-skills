@@ -3,7 +3,7 @@ name: dotnet-backend
 description: Build ASP.NET Core 8+ backend services with EF Core, auth, background jobs, and production API patterns. 
 category: Document Processing
 source: antigravity
-tags: [api, ai, agent, design, document, security, aws, gcp, azure, cro]
+tags: [api, ai, agent, design, document, security, aws, gcp, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dotnet-backend
 ---
 
@@ -106,7 +106,7 @@ app.MapPost("/api/users", async (CreateUserRequest request, AppDbContext db) =>
     db.Users.Add(user);
     await db.SaveChangesAsync();
 
-    return Results.Created($"/api/users/{user.Id}", new UserResponse(user));
+    return Results.Created($"/api/users/{user.Id}", new UserResponse(user.Id, user.Email, user.Name));
 })
 .WithName("CreateUser")
 .WithOpenApi();
@@ -156,7 +156,8 @@ public class UsersController : ControllerBase
         _db.Users.Add(user);
         await _db.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetUser), new { id = user.Id }, new UserDto(user));
+        return Created($"/api/users/{user.Id}", new UserDto(user.Id, user.Email, user.Name));
+        // Implement the corresponding authorized GET route in the application.
     }
 }
 ```
@@ -181,5 +182,4 @@ public class TokenService
 
         var claims = new[]
         {
-            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new Claim(ClaimTypes.Email, user.Email)
+           

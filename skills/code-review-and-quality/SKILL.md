@@ -3,7 +3,7 @@ name: code-review-and-quality
 description: Conducts multi-axis code review. Use before merging any change. Use when reviewing code written by yourself, another agent, or a human. Use when you need to assess code quality across multiple dimensi
 category: Security & Systems
 source: antigravity
-tags: [markdown, api, ai, agent, design, document, security, vulnerability, rag, cro]
+tags: [markdown, api, ai, agent, automation, template, design, document, security, vulnerability]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/code-review-and-quality
 ---
 
@@ -73,7 +73,7 @@ Does the change fit the system's design?
 - Is the abstraction level appropriate (not over-engineered, not too coupled)?
 - **Does this refactor reduce complexity or just relocate it?** Count the concepts a reader must hold to follow the change. If a "cleaner" version leaves that count unchanged, it isn't cleaner — prefer the restructuring that makes whole branches, modes, or layers disappear over one that re-centralizes the same logic. Prefer deleting an abstraction to polishing it.
 - **Is feature-specific logic leaking into a shared or general-purpose module?** Keep logic in its owning layer, reuse the existing canonical helper instead of a near-duplicate, and don't normalize architectural drift.
-- **Are type boundaries explicit?** Question gratuitous `any`/`unknown`/optional/casts and silent fallbacks that paper over an unclear invariant — making the boundary explicit often makes the surrounding control flow simpler.
+- **Are type boundaries explicit?** Question gratuitous `any`, unchecked casts or unjustified optionality; `unknown` is appropriate at untrusted boundaries when narrowed before use. Inspect and silent fallbacks that paper over an unclear invariant — making the boundary explicit often makes the surrounding control flow simpler.
 
 ### 4. Security
 
@@ -82,6 +82,4 @@ For detailed security guidance, see `security-and-hardening`. Does the change in
 - Is user input validated and sanitized?
 - Are secrets kept out of code, logs, and version control?
 - Is authentication/authorization checked where needed?
-- Are SQL queries parameterized (no string concatenation)?
-- Are outputs encoded to prevent XSS?
-- Are dependencies from trusted sou
+- Are SQL queries parameteriz

@@ -3,7 +3,7 @@ name: azure-search-documents-ts
 description: Build search applications with vector, hybrid, and semantic search capabilities. 
 category: Document Processing
 source: antigravity
-tags: [typescript, ai, workflow, document, security, azure]
+tags: [typescript, ai, workflow, document, security, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-search-documents-ts
 ---
 
@@ -42,6 +42,10 @@ const searchClient = new SearchClient(endpoint, indexName, credential);
 // For index management
 const indexClient = new SearchIndexClient(endpoint, credential);
 ```
+
+## Version, schema and authorization
+
+Snippets are independent fragments with placeholders, not a complete runnable program. Verify installed SDK types, actual index schema and embedding model/dimension before use. Set document security filters server-side from authenticated identity; never trust client-supplied filters as access control. Creating/updating indexes or uploading/deleting records needs exact target authorization and can change paid service state.
 
 ## Core Workflow
 
@@ -87,6 +91,8 @@ const documents = [
 ];
 
 const result = await searchClient.uploadDocuments(documents);
+const failures = result.results.filter((item) => !item.succeeded);
+if (failures.length) throw new Error(`Indexing failed for ${failures.length} documents`);
 console.log(`Indexed ${result.results.length} documents`);
 ```
 
@@ -184,33 +190,4 @@ const results = await searchClient.search("best tool for the job", {
 for await (const result of results.results) {
   console.log(`${result.document.title}`);
   console.log(`  Caption: ${result.captions?.[0]?.text}`);
-  console.log(`  Reranker Score: ${result.rerankerScore}`);
-}
-```
-
-## Filtering and Facets
-
-```typescript
-// Filter syntax
-const results = await searchClient.search("*", {
-  filter: "category eq 'Electronics' and price lt 100",
-  facets: ["category,count:10", "brand"],
-});
-
-// Access facets
-for (const [facetName, facetResults] of Object.entries(results.facets || {})) {
-  console.log(`${facetName}:`);
-  for (const facet of facetResults) {
-    console.log(`  ${facet.value}: ${facet.count}`);
-  }
-}
-```
-
-## Autocomplete and Suggestions
-
-```typescript
-// Create suggester in index
-const index: SearchIndex = {
-  name: "products",
-  fields: [...],
-  suggesters
+  console.log(`  Reranker Score: ${re

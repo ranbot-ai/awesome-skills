@@ -3,7 +3,7 @@ name: docs-as-marketing
 description: Transform documentation into a powerful marketing channel that attracts, converts, and retains developers. 
 category: Document Processing
 source: antigravity
-tags: [python, javascript, react, node, markdown, api, ai, document, security, rag]
+tags: [python, javascript, react, node, markdown, api, ai, design, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/docs-as-marketing
 ---
 
@@ -100,7 +100,7 @@ Your quickstart is your most important conversion page. Optimize ruthlessly.
 
 ### The 5-Minute Rule
 
-Developers should reach a meaningful success moment within 5 minutes. If your quickstart takes longer, you're losing developers.
+Treat five minutes as a design hypothesis, not a universal benchmark. Measure a meaningful success moment for the actual audience and disclose prerequisites, waiting time and cost.
 
 **Measure and optimize:**
 - Time from page load to first successful API call
@@ -145,8 +145,8 @@ Get your first [meaningful result] in under 5 minutes.
 Send an SMS in under 5 minutes.
 
 ## Prerequisites
-- Node.js 16 or higher
-- A Twilio account ([sign up free](https://github.com/jonathimer/devmarketing-skills/tree/main/skills/docs-as-marketing/link))
+- A supported Node.js version compatible with the pinned SDK
+- A Twilio account ([sign up free](https://www.twilio.com/try-twilio))
 
 ## Install the SDK
 ```bash
@@ -154,10 +154,11 @@ npm install twilio
 ```
 
 ## Send a Message
+This sends a real, potentially billed SMS. Use approved test credentials/recipients, and send only when explicitly requested. Never put live credentials in source or logs.
 Create `send-sms.js`:
 ```javascript
 const twilio = require('twilio');
-const client = twilio('YOUR_ACCOUNT_SID', 'YOUR_AUTH_TOKEN');
+const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 client.messages.create({
   body: 'Hello from my app!',
@@ -181,14 +182,4 @@ You authenticated with your API credentials and sent an SMS...
 ```markdown
 # Getting Started
 
-Welcome to our platform! Before we begin, let's discuss
-the architecture of our messaging system...
-
-[500 words of background]
-
-## Installation
-
-First, ensure you have the correct version of Node.js.
-You can check this by running...
-
-[200 words on versio
+Welcome to our platform!

@@ -68,8 +68,7 @@ this gate. Re-measure.**
 - **Header / nav / toolbar rows: `flex-wrap: wrap`, never `nowrap`.** A growing
   single-row flex is the #1 source of this bug. Wrapping is a no-op when it fits and
   saves you when it doesn't.
-- **`body { overflow-x: clip }`** as a backstop on every app (clip, not hidden — keeps
-  sticky/anchored layouts working). A backstop, NOT a substitute for measuring.
+- Use clipping only for intentional decorative overflow after checking focus rings, menus and offscreen content; do not apply it globally to conceal a layout defect.
 
 **The check — run before calling ANY page done:** `document.documentElement.scrollWidth - document.documentElement.clientWidth` must equal `0`, tested at your dev width AND resized narrow (≤1024px, and a phone width ~390px). If > 0, find the offender:
 ```js
@@ -77,4 +76,4 @@ document.querySelectorAll('*').forEach(el=>{const r=el.getBoundingClientRect();
   if(r.right>innerWidth+1||r.left<-1) console.log(Math.round(r.right), el);});
 ```
 
-**Safety net:** `overflow-x: clip` on `body` (prefer `clip` over `hidden` — it clips without creating a scroll container, so it won't break `position:sticky`/anchored lay
+**Safety net:** `overflow-x: clip` on `body` (prefer `clip` over `hidden` — it clips without creating a scroll container, so it won't break `position:sticky`/anchored layo

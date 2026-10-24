@@ -10,7 +10,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/file
 
 # Filesystem-Based Context Engineering
 
-The filesystem provides a single interface through which agents can flexibly store, retrieve, and update an effectively unlimited amount of context. This pattern addresses the fundamental constraint that context windows are limited while tasks often require more information than fits in a single window.
+The filesystem provides a single interface through which agents can flexibly store, retrieve, and update context beyond a single window, subject to disk, access and retention limits. This pattern addresses the fundamental constraint that context windows are limited while tasks often require more information than fits in a single window.
 
 The core insight is that files enable dynamic context discovery: agents pull relevant context on demand rather than carrying everything in the context window. This contrasts with static context, which is always included regardless of relevance.
 
@@ -55,7 +55,7 @@ Write large tool outputs to files instead of returning them directly to the cont
 **Implementation**
 ```python
 def handle_tool_output(output: str, threshold: int = 2000) -> str:
-    if len(output) < threshold:
+    if len(output) < threshold: # character threshold, not token count
         return output
     
     # Write to scratch pad
@@ -97,7 +97,4 @@ steps:
     status: in_progress
   - id: 3
     description: "Implement and test changes"
-    status: pending
-```
-
-The agent reads this file at the start of each turn or when it n
+    status: pend

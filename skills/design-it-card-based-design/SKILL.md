@@ -38,7 +38,7 @@ body {
 .card-grid {
   display: grid;
   /* Auto-responsive magic */
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
   gap: 24px;
 }
 
@@ -165,4 +165,4 @@ class ContentCard extends StatelessWidget {
 const ContentCard = () => {
   return (
     <View style={styles.card}>
-      <View style={s
+      <Vi

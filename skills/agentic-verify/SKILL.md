@@ -3,7 +3,7 @@ name: agentic-verify
 description: Check that a Python change is caught by tests: run every mutant of the changed lines and write tests until they catch them. Reports evidence instead of a diff to read. 
 category: AI & Agents
 source: antigravity
-tags: [python, api, claude, ai, agent, security]
+tags: [python, api, claude, ai, agent, security, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agentic-verify
 ---
 
@@ -30,7 +30,7 @@ Arguments: `$ARGUMENTS`. `--base` is the git revision to compare with: `HEAD` (d
 uncommitted work, a branch such as `main` checks a whole branch. Other options go to the runner.
 
 The goal is that the user can trust the change from evidence, without reading every line. A
-change is verified when the tests fail if any part of it is wrong. Passing tests alone do not
+runner verdict describes coverage and the supported mutants tested; it cannot establish that every possible defect would fail a test. Passing tests alone do not
 show that: our study found 71% of the calls that could be deleted unnoticed sat in functions
 that looked well tested.
 
@@ -89,5 +89,4 @@ with the verdict and report paths.
      mutant applies to the changed lines, for example a decorated function. Then the mutants
      give no evidence: rely on `base-check` and say so.
    - `no change`: nothing under the source packages changed since `--base`; check the base.
-4. **Close each gap**, then rerun verify (step 3). Stop after three rounds and report what is left.
-   - Surviving mutant: read its patch in `mutants/<id>.
+4. **Close each gap**, then rerun verify (step 3). Stop after three rounds and report wh

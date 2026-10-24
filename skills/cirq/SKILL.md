@@ -20,6 +20,15 @@ Cirq is Google Quantum AI's open-source framework for designing, simulating, and
 - You need Google Quantum AI-style primitives, parameterized circuits, or integrations like `cirq-google` and `cirq-ionq`.
 - You are prototyping or teaching quantum workflows in Python and want concrete circuit examples.
 
+## Execution boundaries
+
+Local examples are illustrative and were not runtime-tested. Pin Cirq/provider
+versions and check their official APIs before use. Hardware/cloud submissions
+need explicit account, target, data and budget authorization, including remote
+simulators. Processor names and access are account-specific. Support files retain
+MIT notices; the root's Apache metadata is inherited and not independent evidence
+of upstream relicensing.
+
 ## Installation
 
 ```bash
@@ -159,15 +168,3 @@ For information about modeling noise, noisy simulation, characterization, and er
 
 Common topics:
 - Noise channels (depolarizing, amplitude damping, phase damping)
-- Noise models (constant, gate-specific, qubit-specific, thermal)
-- Adding noise to circuits
-- Readout noise
-- Noise characterization (randomized benchmarking, XEB)
-- Noise visualization (heatmaps)
-- Error mitigation techniques
-
-### Quantum Experiments
-For information about designing experiments, parameter sweeps, data collection, and using the ReCirq framework, see:
-- **references/experiments.md** - Complete guide to quantum experiments
-
-Common 

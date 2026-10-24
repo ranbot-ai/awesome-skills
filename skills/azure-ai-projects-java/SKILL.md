@@ -12,6 +12,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azur
 
 High-level SDK for Azure AI Foundry project management with access to connections, datasets, indexes, and evaluations.
 
+## Version and data boundary
+
+This guide names a historical beta SDK. Inspect the selected artifact’s exact API before using client-builder/model signatures; pin compatible identity/core dependencies and compile a minimal test. Use synthetic data in an authorized test project. Dataset upload, index mutation, evaluation provider charges and schedules are separate effects; inspect destination, retention and cost before executing. Never log connection credentials.
+
 ## Installation
 
 ```xml
@@ -110,16 +114,9 @@ Index index = indexesClient.createOrUpdate(
 System.out.println("Created index: " + index.getName());
 ```
 
-### Access OpenAI Evaluations
+### Evaluation integration
 
-The SDK exposes OpenAI's official SDK for evaluations:
-
-```java
-import com.openai.services.EvalService;
-
-EvalService evalService = evaluationsClient.getOpenAIClient();
-// Use OpenAI evaluation APIs directly
-```
+Do not assume an EvaluationsClient is an OpenAI EvalService or exposes `getOpenAIClient()`. Check the exact installed beta SDK reference and construct the documented evaluation client for that API. These are distinct SDK surfaces and require compatible dependencies, endpoints and authorization.
 
 ## Best Practices
 
@@ -154,9 +151,4 @@ try {
 | Samples | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/ai/azure-ai-projects/src/samples |
 
 ## When to Use
-This skill is applicable to execute the workflow or actions described in the overview.
-
-## Limitations
-- Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
+This skill is a

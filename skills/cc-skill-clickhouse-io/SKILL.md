@@ -3,7 +3,7 @@ name: cc-skill-clickhouse-io
 description: ClickHouse database patterns, query optimization, analytics, and data engineering best practices for high-performance analytical workloads. 
 category: Business & Marketing
 source: antigravity
-tags: [typescript, ai, workflow, design, rag]
+tags: [javascript, typescript, api, ai, workflow, design, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cc-skill-clickhouse-io
 ---
 
@@ -22,6 +22,10 @@ ClickHouse is a column-oriented database management system (DBMS) for online ana
 - Parallel query execution
 - Distributed queries
 - Real-time analytics
+
+## Correctness and measurement boundaries
+
+The tables/queries are independent schema sketches, not one runnable application. Validate column/aggregate-state types and units together. ReplacingMergeTree deduplicates equal full sorting keys eventually within compatible partitions; including timestamp in ORDER BY does not deduplicate arbitrary repeated event IDs, and background merges are not a read-time correctness guarantee. Predicate textual order alone does not prove index efficiency; inspect plans/read_rows/read_bytes. The retention subquery below groups by activity day, so its per-day MIN is not a true signup cohort; use a verified signup source or windowed user minimum before retention reporting. A simple event-count funnel is not an ordered unique-user/session conversion funnel. Protect query logs and scope DDL/ingestion.
 
 ## Table Design Patterns
 
@@ -156,75 +160,25 @@ ORDER BY market_id, date;
 ### Bulk Insert (Recommended)
 
 ```typescript
-import { ClickHouse } from 'clickhouse'
+import { createClient } from '@clickhouse/client';
 
-const clickhouse = new ClickHouse({
+const clickhouse = createClient({
   url: process.env.CLICKHOUSE_URL,
-  port: 8123,
-  basicAuth: {
-    username: process.env.CLICKHOUSE_USER,
-    password: process.env.CLICKHOUSE_PASSWORD
-  }
-})
+  username: process.env.CLICKHOUSE_USER,
+  password: process.env.CLICKHOUSE_PASSWORD,
+});
 
-// ✅ Batch insert (efficient)
+// Trade is the project's validated schema matching the real table.
 async function bulkInsertTrades(trades: Trade[]) {
-  const values = trades.map(trade => `(
-    '${trade.id}',
-    '${trade.market_id}',
-    '${trade.user_id}',
-    ${trade.amount},
-    '${trade.timestamp.toISOString()}'
-  )`).join(',')
-
-  await clickhouse.query(`
-    INSERT INTO trades (id, market_id, user_id, amount, timestamp)
-    VALUES ${values}
-  `).toPromise()
-}
-
-// ❌ Individual inserts (slow)
-async function insertTrade(trade: Trade) {
-  // Don't do this in a loop!
-  await clickhouse.query(`
-    INSERT INTO trades VALUES ('${trade.id}', ...)
-  `).toPromise()
+  await clickhouse.insert({
+    table: 'trades',
+    values: trades,
+    format: 'JSONEachRow',
+  });
 }
 ```
 
-### Streaming Insert
-
-```typescript
-// For continuous data ingestion
-import { createWriteStream } from 'fs'
-import { pipeline } from 'stream/promises'
-
-async function streamInserts() {
-  const stream = clickhouse.insert('trades').stream()
-
-  for await (const batch of dataSource) {
-    stream.write(batch)
-  }
-
-  await stream.end()
-}
-```
-
-## Materialized Views
-
-### Real-time Aggregations
-
-```sql
--- Create materialized view for hourly stats
-CREATE MATERIALIZED VIEW market_stats_hourly_mv
-TO market_stats_hourly
-AS SELECT
-    toStartOfHour(timestamp) AS hour,
-    market_id,
-    sumState(amount) AS total_volume,
-    countState() AS total_trades,
-    uniqState(user_id) AS unique_users
-FROM trades
-GROUP BY hour, market_id;
-
--- Query 
+Use structured inserts rather than concatenating untrusted strings into SQL.
+See [official JavaScript client](https://clickhouse.com/docs/integrations/javascript).
+The older streaming/CDC fragments below are conceptual and require adaptation to
+the same pinned client API; they are not interchangeable

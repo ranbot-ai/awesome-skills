@@ -47,6 +47,8 @@ All pods run in namespace `crs`. Key services:
 | Analysis | patcher, seed-gen, program-model, pov-reproducer |
 | Interface | competition-api, ui |
 
+Confirm the cluster context and installed Buttercup version; crs, labels, queue names and health paths below are deployment assumptions. diagnosis.sh and deployment/collect-logs.sh are not bundled here; do not invent or run substitute helpers. Read-only diagnostics may still expose credentials/records or add load. Select the correct container and redact logs/CLIENT LIST/OTEL variables before sharing; avoid dumping all environment values. Namespace scoping does not constrain node-level commands. Use XPENDING for delivered-unacknowledged group messages and XINFO GROUPS for lag; XLEN counts retained entries. Do not restart or change Redis durability settings as part of diagnosis without a separate scoped recovery plan.
+
 ## Triage Workflow
 
 Always start with triage. Run these three commands first:
@@ -111,30 +113,4 @@ kubectl top pods -n crs
 # Node-level
 kubectl top nodes
 
-# Node conditions (disk pressure, memory pressure, PID pressure)
-kubectl describe node <node> | grep -A5 Conditions
-
-# Disk usage inside a pod
-kubectl exec -n crs <pod> -- df -h
-
-# What's eating disk
-kubectl exec -n crs <pod> -- sh -c 'du -sh /corpus/* 2>/dev/null'
-kubectl exec -n crs <pod> -- sh -c 'du -sh /scratch/* 2>/dev/null'
-```
-
-## Redis Debugging
-
-Redis is the backbone. When it goes down, everything cascades.
-
-```bash
-# Redis pod status
-kubectl get pods -n crs -l app.kubernetes.io/name=redis
-
-# Redis logs (AOF warnings, OOM, connection issues)
-kubectl logs -n crs -l app.kubernetes.io/name=redis --tail=200
-
-# Connect to Redis CLI
-kubectl exec -n crs <redis-pod> -- redis-cli
-
-# Inside redis-cli: key diagnostics
-INFO memory          #
+# Node conditions (dis

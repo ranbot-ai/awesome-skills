@@ -45,6 +45,8 @@ Read the post looking for one of these, and name which you found:
 
 The gap is the comment. If there is no gap, go back to step 1.
 
+Use only the user's actual experience or verified evidence. A requested counterexample/number is not permission to invent one or speak as if the user personally tested something. If evidence is absent, use a clearly hypothetical example or a real question.
+
 ## Step 3: pick the shape
 
 - **The counterexample.** Where it did not work, and what was different.
@@ -118,9 +120,4 @@ throwaway:
 - `get_voice_profile` gives your LinkedIn register specifically, which for most
   people is not the register they write posts in and is definitely not the one
   they tweet in.
-- `score_voice_match` catches a comment that is sharp in somebody else's style,
-  which is the usual failure when you have just read a strong post.
-- `get_post_ideas` turns a gap you found in someone else's post into your own
-  post, which is usually the better use of it.
-
-VoiceMoat is at voicemoat.com. The connecto
+- `score_voice_match` catches a comment that is sharp in so

@@ -3,7 +3,7 @@ name: ebpf-observability
 description: Use eBPF for deep kernel-level observability — trace syscalls, network flows, and application behavior without code changes using Cilium, Tetragon, and bpftrace. 
 category: AI & Agents
 source: antigravity
-tags: [api, ai, agent, template, security, kubernetes, rag, cro]
+tags: [node, api, ai, agent, template, security, kubernetes, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ebpf-observability
 ---
 
@@ -66,7 +66,7 @@ sudo bpftrace -e 'BEGIN { printf("eBPF is working\n"); exit(); }'
 
 ## 3. Cilium Setup
 
-Cilium replaces kube-proxy with eBPF-based networking, providing identity-aware security and deep network observability via Hubble.
+Cilium can optionally replace kube-proxy when configured for the cluster, providing identity-aware security and deep network observability via Hubble.
 
 ### Install Cilium on Kubernetes
 
@@ -94,17 +94,9 @@ cilium status --wait
 ### Install the Cilium CLI and Hubble CLI
 
 ```bash
-# Cilium CLI
-CILIUM_CLI_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/cilium-cli/main/stable.txt)
-curl -L --remote-name "https://github.com/cilium/cilium-cli/releases/download/${CILIUM_CLI_VERSION}/cilium-linux-amd64.tar.gz"
-sudo tar xzvf cilium-linux-amd64.tar.gz -C /usr/local/bin
-rm cilium-linux-amd64.tar.gz
-
-# Hubble CLI
-HUBBLE_VERSION=$(curl -s https://raw.githubusercontent.com/cilium/hubble/master/stable.txt)
-curl -L --remote-name "https://github.com/cilium/hubble/releases/download/${HUBBLE_VERSION}/hubble-linux-amd64.tar.gz"
-sudo tar xzvf hubble-linux-amd64.tar.gz -C /usr/local/bin
-rm hubble-linux-amd64.tar.gz
+# Install reviewed platform-specific Cilium/Hubble CLI releases through the current official process.
+# Verify checksums/signatures and archive members before extraction into a private staging directory.
+# Do not extract unverified latest archives directly into /usr/local/bin.
 ```
 
 ### Hubble Network Observability
@@ -158,10 +150,7 @@ helm install tetragon cilium/tetragon \
   --set tetragon.grpc.enabled=true \
   --set tetragon.exportFilename=/var/run/cilium/tetragon/tetragon.log
 
-# Install the tetra CLI
-curl -LO "https://github.com/cilium/tetragon/releases/latest/download/tetra-linux-amd64.tar.gz"
-sudo tar xzvf tetra-linux-amd64.tar.gz -C /usr/local/bin
-rm tetra-linux-amd64.tar.gz
+# Install a pinned reviewed tetra CLI using verified release artifacts and a private staging directory.
 ```
 
 ### Process Execution Monitoring
@@ -170,4 +159,20 @@ rm tetra-linux-amd64.tar.gz
 # process-monitor.yaml -- TracingPolicy to monitor all process executions
 apiVersion: cilium.io/v1alpha1
 kind: TracingPolicy
-metadat
+metadata:
+  name: process-execution-monitor
+spec:
+  kprobes: []
+  tracepoints: []
+  uprobes: []
+  enforcers: []
+  # process_exec and process_exit events are always emitted by default
+  # Use tetra CLI to observe them:
+```
+
+```bash
+# Watch all process executions cluster-wide
+kubectl exec -n kube-system ds/tetragon -c tetragon -- tetra getevents -o compact --process-exec
+
+# Filter to a specific namespace
+kubectl exec -n kube-system ds/tetragon -c

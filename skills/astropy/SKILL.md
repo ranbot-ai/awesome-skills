@@ -3,7 +3,7 @@ name: astropy
 description: Astropy is the core Python package for astronomy, providing essential functionality for astronomical research and data analysis. 
 category: Document Processing
 source: antigravity
-tags: [python, ai, workflow, document, presentation, image, cro]
+tags: [python, ai, workflow, document, presentation, image, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/astropy
 ---
 
@@ -45,7 +45,7 @@ coord = SkyCoord(ra=10.5*u.degree, dec=41.2*u.degree, frame='icrs')
 coord_galactic = coord.galactic
 
 # Time
-t = Time('2023-01-15 12:30:00')
+t = Time('2023-01-15 12:30:00', scale='utc')
 jd = t.jd  # Julian Date
 
 # FITS files
@@ -138,4 +138,4 @@ Work with tabular data with support for units, metadata, and various file format
 
 ### 6. Time Handling (`astropy.time`)
 
-Precise time representa
+Precise ti

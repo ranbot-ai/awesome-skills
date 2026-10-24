@@ -1,6 +1,6 @@
 ---
 name: analyze-project
-description: Forensic root cause analyzer for Antigravity sessions. Classifies scope deltas, rework patterns, root causes, hotspots, and auto-improves prompts/health. 
+description: Forensic root cause analyzer for Antigravity sessions. Classifies scope deltas, rework patterns, root causes, hotspots, and recommends prompt and workflow improvements. 
 category: AI & Agents
 source: antigravity
 tags: [ai, agent, workflow, design, rag, cro]
@@ -39,7 +39,7 @@ For each session, determine:
 - Separate **agent error** from **repo friction**
 - Every diagnosis must include **evidence** and **confidence**
 - Confidence levels:
-  - **High** = direct artifact/timestamp evidence
+  - **High** = direct corroborated content evidence; timestamps alone establish timing, not cause
   - **Medium** = multiple supporting signals
   - **Low** = plausible inference, not directly proven
 - Evidence precedence:
@@ -78,7 +78,7 @@ Do not judge exploratory or research sessions by the same standards as narrow de
    - `objective`
    - `created`
    - `last_modified`
-4. If the user supplied a keyword/path, filter to matching conversations; otherwise analyze all
+4. If the user supplied a keyword/path, filter to matching conversations; otherwise establish the project/date window before reading unrelated private sessions
 
 Output: indexed list of conversations to analyze.
 
@@ -188,6 +188,4 @@ Record:
 - evidence
 
 Keep one short example in mind for calibration:
-- Human-added: “also refactor nearby code while you’re here”
-- Necessary discovered: hidden dependency must be fixed for original task to work
-- Agent-in
+- Human-added: “also refactor nearby code

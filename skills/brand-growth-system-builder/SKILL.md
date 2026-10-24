@@ -56,7 +56,7 @@ Notion template.
 - "Plan our cloud spend and monitoring"
 
 Do not use it when the user has already named one specific asset and just wants it - go
-straight to that module skill.
+straight to that module skill when available.
 
 ## How It Works
 
@@ -109,4 +109,4 @@ open_questions: []
 ### Step 4 - Recommend two or three modules
 
 Pick the smallest set that gets to a live profile and a usable asset set. Rank them by
-what unblocks the rest. Then stop an
+what unblocks the res

@@ -19,6 +19,8 @@ Implement comprehensive, automated database backup strategies with tested recove
 - You want to ship backups to S3-compatible object storage with retention policies.
 - You are building or verifying disaster recovery runbooks.
 
+Confirm source/restore targets, RPO/RTO, retention and rollback. These scripts are partial: write dumps to private temporary files and promote only after successful exit and integrity checks; upload only completed manifests, not every old/partial file recursively. Verify remote checksums and a restore before deleting local copies. Lifecycle replacement affects the whole configured bucket and must preserve other policies/noncurrent versions. Restore-test row counts are application-specific smoke checks, not full recovery proof. Use protected client configuration/secret mechanisms rather than passwords in process arguments; Mongo URI credentials need proper encoding.
+
 ## Prerequisites
 
 - Database client tools installed (`pg_dump`, `mysqldump`, `mongodump`).
@@ -43,6 +45,7 @@ Implement comprehensive, automated database backup strategies with tested recove
 #!/bin/bash
 # pg_backup.sh — PostgreSQL logical backup
 set -euo pipefail
+umask 077
 
 DB_NAME="mydb"
 DB_USER="backup_user"
@@ -65,6 +68,7 @@ echo "[$(date)] PostgreSQL backup complete: $FILENAME ($(du -h "$FILENAME" | cut
 #!/bin/bash
 # pg_basebackup.sh — PostgreSQL physical backup for PITR
 set -euo pipefail
+umask 077
 
 BACKUP_DIR="/backups/postgres/base_$(date +%Y%m%d)"
 mkdir -p "$BACKUP_DIR"
@@ -102,17 +106,18 @@ psql -h localhost -U myapp -d mydb < /backups/postgres/mydb_20250115.sql
 #!/bin/bash
 # mysql_backup.sh — MySQL logical backup
 set -euo pipefail
+umask 077
 
 DB_NAME="mydb"
 DB_USER="backup_user"
-DB_PASS="${MYSQL_BACKUP_PASSWORD}"
+MYSQL_CNF="/etc/backup/mysql.cnf" # root/backup-owned mode 0600, credentials from approved secret storage
 BACKUP_DIR="/backups/mysql"
 DATE=$(date +%Y%m%d_%H%M%S)
 FILENAME="${BACKUP_DIR}/${DB_NAME}_${DATE}.sql.gz"
 
 mkdir -p "$BACKUP_DIR"
 
-mysqldump -u "$DB_USER" -p"$DB_PASS" \
+mysqldump --defaults-extra-file="$MYSQL_CNF" -u "$DB_USER" \
   --single-transaction \
   --routines \
   --triggers \
@@ -128,12 +133,13 @@ echo "[$(date)] MySQL backup complete: $FILENAME ($(du -h "$FILENAME" | cut -f1)
 #!/bin/bash
 # xtrabackup.sh — MySQL physical backup
 set -euo pipefail
+umask 077
 
 BACKUP_DIR="/backups/mysql/full_$(date +%Y%m%d)"
 
 xtrabackup --backup \
+  --defaults-extra-file=/etc/backup/mysql.cnf \
   --user=backup_user \
-  --password "$MYSQL_BACKUP_PASSWORD" # from your vault; never hardcode \
   --target-dir="$BACKUP_DIR"
 
 xtrabackup --prepare --target-dir="$BACKUP_DIR"
@@ -150,8 +156,9 @@ gunzip < /backups/mysql/mydb_20250115_020000.sql.gz | mysql -u root -p mydb
 # Restore from XtraBackup
 sudo systemctl stop mysql
 ls /var/lib/mysql/*  # verify this is the correct data dir first
-sudo find /var/lib/mysql -mindepth 1 -delete  # empty the data dir; snapshots must exist (see Limitations)
-xtrabackup --move-back --target-dir=/backups/mysql/full_20250115
+# Preserve/rename the old data directory under an approved recovery runbook;
+# do not recursively delete it to make a restore fit.
+xtrabackup --copy-back --target-dir=/backups/mysql/full_20250115
 sudo chown -R mysql:mysql /var/lib/mysql
 sudo systemctl start mysql
 ```
@@ -164,40 +171,8 @@ sudo systemctl start mysql
 #!/bin/bash
 # mongo_backup.sh — MongoDB backup
 set -euo pipefail
+umask 077
 
 MONGO_URI="mongodb://backup_user:${MONGO_BACKUP_PASSWORD}@localhost:27017"
 BACKUP_DIR="/backups/mongodb"
-DATE=$(date +%Y%m%d_%H%M%S)
-TARGET="${BACKUP_DIR}/${DATE}"
-
-mkdir -p "$BACKUP_DIR"
-
-# Full backup with compression
-mongodump --uri="$MONGO_URI" --gzip --out="$TARGET"
-
-echo "[$(date)] MongoDB backup complete: $TARGET"
-```
-
-### MongoDB Restore
-
-```bash
-# Restore all databases
-mongorestore --uri="mongodb://admin:secret@localhost:27017" \
-  --gzip --drop /backups/mongodb/20250115_020000/
-
-# Restore a single database
-mongorestore --uri="mongodb://admin:secret@localhost:27017" \
-  --gzip --drop --db mydb /backups/mongodb/20250115_020000/mydb/
-
-# Restore a single collection
-mongorestore --uri="mongodb://admin:secret@localhost:27017" \
-  --gzip --drop --db mydb --collection users \
-  /backups/mongodb/20250115_020000/mydb/users.bson.gz
-```
-
-## Upload to S3
-
-```bash
-#!/bin/bash
-# s3_upload.sh — Upload backups to S3
-set -euo pi
+DATE=$(date +

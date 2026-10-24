@@ -10,7 +10,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cont
 
 # Context Optimization Techniques
 
-Context optimization extends the effective capacity of limited context windows through strategic compression, masking, caching, and partitioning. The goal is not to magically increase context windows but to make better use of available capacity. Effective optimization can double or triple effective context capacity without requiring larger models or longer contexts.
+Context optimization extends the effective capacity of limited context windows through strategic compression, masking, caching, and partitioning. The goal is not to magically increase context windows but to make better use of available capacity. Effectiveness depends on task/workload and must be measured; compression can lose critical information.
 
 ## When to Use
 Activate this skill when:
@@ -46,7 +46,7 @@ Tool outputs: Preserve key findings, metrics, and conclusions. Remove verbose ra
 
 Conversational turns: Preserve key decisions, commitments, and context shifts. Remove filler and back-and-forth.
 
-Retrieved documents: Preserve key facts and claims. Remove supporting evidence and elaboration.
+Retrieved documents: Preserve key facts, uncertainty and source pointers so claims remain auditable; retain exact evidence needed for current decisions.
 
 ### Observation Masking
 
@@ -84,6 +84,4 @@ The most aggressive form of context optimization is partitioning work across sub
 This approach achieves separation of concerns—the detailed search context remains isolated within sub-agents while the coordinator focuses on synthesis and analysis.
 
 **Result Aggregation**
-Aggregate results from partitioned subtasks by validating all partitions completed, merging compatible results, and summarizing if still too large.
-
-### Budget Manag
+Aggregate results from partitioned subtasks by validating all partitions completed, merging compatible results, and summarizing

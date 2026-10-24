@@ -27,13 +27,16 @@ Use this skill when:
 - Agent installation access
 - Application code access for APM
 
+Confirm account/site, approved telemetry and cost/retention limits before enabling logs, process data or APM. Redact credentials, request bodies, user/order IDs and sensitive tags before egress; distribution metrics do not eliminate cardinality costs. Docker socket access is privileged even with a read-only bind. Use a pre-created scoped Secret with the chart's existing-secret setting rather than passing a real API key through --set/history/Helm release values. Pin chart/agent/tracer versions and validate their configuration schemas. Inline SDK fragments are partial: Python metrics needs time and the version-appropriate metric intake enum, Go needs a real request context/user ID, and tracer.configure parameters vary by ddtrace major. Verify metric names/units and no-data/zero-denominator behavior against actual instrumentation before activating monitors or external notifications.
+
 ## Agent Installation
 
 ### Linux
 
 ```bash
 # Install agent
-DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh)"
+curl -fL https://s3.amazonaws.com/dd-agent/scripts/install_script_agent7.sh -o /tmp/datadog-agent-install.sh
+# Review and pin the full installer before executing separately with protected credentials.
 
 # Or via package manager
 apt-get update && apt-get install datadog-agent
@@ -66,8 +69,8 @@ services:
       - /proc/:/host/proc/:ro
       - /sys/fs/cgroup/:/host/sys/fs/cgroup:ro
     ports:
-      - "8126:8126"  # APM
-      - "8125:8125/udp"  # DogStatsD
+      - "127.0.0.1:8126:8126"  # APM
+      - "127.0.0.1:8125:8125/udp"  # DogStatsD
 ```
 
 ### Kubernetes
@@ -218,60 +221,4 @@ metadata:
         "service": "myapp",
         "log_processing_rules": [{
           "type": "multi_line",
-          "name": "python_tracebacks",
-          "pattern": "^Traceback"
-        }]
-      }]
-```
-
-## APM Configuration
-
-### Python
-
-```python
-from ddtrace import patch_all, tracer
-
-# Automatic instrumentation
-patch_all()
-
-# Configure tracer
-tracer.configure(
-    hostname='localhost',
-    port=8126,
-    service='myapp',
-    env='production',
-    version='1.0.0'
-)
-
-# Manual instrumentation
-@tracer.wrap(service='myapp', resource='process_order')
-def process_order(order_id):
-    with tracer.trace('validate_order') as span:
-        span.set_tag('order_id', order_id)
-        # Validation logic
-    
-    with tracer.trace('save_order'):
-        # Save logic
-        pass
-```
-
-```bash
-# Install library
-pip install ddtrace
-
-# Run with auto-instrumentation
-ddtrace-run python app.py
-```
-
-### Node.js
-
-```javascript
-const tracer = require('dd-trace').init({
-  service: 'myapp',
-  env: 'production',
-  version: '1.0.0',
-  logInjection: true
-});
-
-// Manual instrumentation
-const span = tracer.startSpan('custom_
+          "name": "python_tra

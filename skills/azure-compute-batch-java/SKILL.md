@@ -89,6 +89,8 @@ BatchClient batchClient = new BatchClientBuilder()
 
 ## Pool Operations
 
+Confirm account/tenant, pool/job IDs, SKU/image availability, resource limits and cost before writes. Image examples are not proof the pool supports that image; select from current Batch supported images. Task command lines are not implicitly run in a shell; use the appropriate explicit shell only for reviewed fixed commands (Linux examples below differ from Windows `cmd /c`). Never interpolate untrusted task input into shell text. Set bounded allocation/task/poll deadlines, inspect per-task failures/exit codes and restrict identities. Delete/reboot/terminate only authorized resources after preserving output.
+
 ### Create Pool
 
 ```java
@@ -174,26 +176,4 @@ batchClient.createJob(
 ### Get Job
 
 ```java
-BatchJob job = batchClient.getJob("myJobId", null, null);
-System.out.println("Job state: " + job.getState());
-```
-
-### List Jobs
-
-```java
-PagedIterable<BatchJob> jobs = batchClient.listJobs(new BatchJobsListOptions());
-for (BatchJob job : jobs) {
-    System.out.println("Job: " + job.getId() + ", State: " + job.getState());
-}
-```
-
-### Get Task Counts
-
-```java
-BatchTaskCountsResult counts = batchClient.getJobTaskCounts("myJobId");
-System.out.println("Active: " + counts.getTaskCounts().getActive());
-System.out.println("Running: " + counts.getTaskCounts().getRunning());
-System.out.println("Completed: " + counts.getTaskCounts().getCompleted());
-```
-
-### Termin
+BatchJob job = batchClient.getJob("myJobId", 

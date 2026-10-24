@@ -3,7 +3,7 @@ name: constraint-driven-development
 description: Write the project quality bar as enforced CONSTRAINTS.md so agents stop quietly lowering it: coverage, performance, accessibility thresholds watched on every diff. 
 category: Security & Systems
 source: antigravity
-tags: [python, markdown, mcp, claude, ai, agent, automation, workflow, security, vulnerability]
+tags: [python, markdown, mcp, claude, ai, agent, automation, workflow, template, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/constraint-driven-development
 ---
 
@@ -12,13 +12,13 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cons
 
 ## Overview
 
-Other skills in this pack describe what good looks like. `code-review-and-quality` gives you five axes. `test-driven-development` gives you a cycle. `security-and-hardening` gives you a threat list. All of that lives in prose the agent reads and may or may not follow, and none of it survives the end of the session.
+Other skills in this pack describe what good looks like. `code-review-and-quality` gives you five axes. `test-driven-development` gives you a cycle. `security-and-hardening` gives you a threat list. All of that lives in prose the agent reads and may or may not follow, and persisted repository instructions can survive sessions, though prose alone does not enforce behavior.
 
 This skill produces something different: a written record of **this project's** bar, with numbers, that outlives the conversation and can be checked mechanically.
 
 The reason matters. When you wrote the code, reading it told you whether it was any good. An agent writes more in an afternoon than you will read that week, so the judgement moves out of your head and into checks that run around the loop. Those checks need to exist, they need numbers you actually chose, and they need to fire close enough to the work that the agent fixes its own output.
 
-Spec-driven development says what to build. Test-driven development proves it works. Constraint-driven development defines what "good enough to ship" means, before anyone argues about it in a pull request.
+Spec-driven development says what to build. Test-driven development supplies evidence for tested cases. Constraint-driven development defines what "good enough to ship" means, before anyone argues about it in a pull request.
 
 ## When to Use
 
@@ -107,5 +107,4 @@ Last reviewed: 2026-08-08 by @addy
 ## Floor (always enforced, no setup required)
 
 - No new suppression comments: `@ts-ignore`, `eslint-disable`, `# noqa`, `# type: ignore`
-- No unimplemented stubs: `throw new Error("Not implemented")`, empty `catch {}`
-- No skipped or
+- No unimplemented 

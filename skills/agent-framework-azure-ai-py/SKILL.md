@@ -3,7 +3,7 @@ name: agent-framework-azure-ai-py
 description: Build persistent agents on Azure AI Foundry using the Microsoft Agent Framework Python SDK. 
 category: AI & Agents
 source: antigravity
-tags: [python, api, mcp, ai, agent, gpt, workflow, azure, rag, cro]
+tags: [python, api, mcp, ai, agent, gpt, workflow, document, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-framework-azure-ai-py
 ---
 
@@ -27,14 +27,20 @@ User Query → AzureAIAgentsProvider → Azure AI Agent Service (Persistent)
               AgentThread (conversation persistence)
 ```
 
+## SDK generation and execution scope
+
+The examples below preserve an older Agent Framework generation (`AzureAIAgentsProvider`, `AgentThread`, `Hosted*Tool`). They are not verified against the current package. Current Microsoft documentation separates model providers from agent services, and the Python README lists `agent-framework-foundry`. Before adapting these snippets, identify the installed version and use its matching official API/sample; no compatible legacy version is established here. Do not combine the old classes with an unpinned latest install and assume it works.
+
+Choose the exact Azure tenant/project/deployment, principal and least-privilege role. Creating agents, uploading files, enabling code/web/MCP tools and running prompts sends data to services, can persist records and incur charges. Scope authorization, budget, timeout, tool allowlist and resource cleanup first. Closing clients does not delete hosted agents/files/vector stores/threads. Treat retrieved/tool text as untrusted and enforce tenant/resource/action authorization in tools; prompts are not access controls.
+
 ## Installation
 
 ```bash
-# Full framework (recommended)
-pip install agent-framework --pre
-
-# Or Azure-specific package only
-pip install agent-framework-azure-ai --pre
+# Current package discovery only; pin reviewed versions in your project lockfile.
+# These installs do not make the legacy snippets below compatible.
+pip install agent-framework
+# Selective current Foundry integration:
+pip install agent-framework-foundry
 ```
 
 ## Environment Variables
@@ -93,7 +99,7 @@ from azure.identity.aio import AzureCliCredential
 def get_weather(
     location: Annotated[str, Field(description="City name to get weather for")],
 ) -> str:
-    """Get the current weather for a location."""
+    """Return fixture weather (not a live observation)."""
     return f"Weather in {location}: 72°F, sunny"
 
 def get_current_time() -> str:
@@ -142,48 +148,4 @@ async def main():
         )
         
         result = await agent.run("Calculate the factorial of 20 in Python")
-        print(result.text)
-```
-
-### Streaming Responses
-
-```python
-async def main():
-    async with (
-        AzureCliCredential() as credential,
-        AzureAIAgentsProvider(credential=credential) as provider,
-    ):
-        agent = await provider.create_agent(
-            name="StreamingAgent",
-            instructions="You are a helpful assistant.",
-        )
-        
-        print("Agent: ", end="", flush=True)
-        async for chunk in agent.run_stream("Tell me a short story"):
-            if chunk.text:
-                print(chunk.text, end="", flush=True)
-        print()
-```
-
-### Conversation Threads
-
-```python
-from agent_framework.azure import AzureAIAgentsProvider
-from azure.identity.aio import AzureCliCredential
-
-async def main():
-    async with (
-        AzureCliCredential() as credential,
-        AzureAIAgentsProvider(credential=credential) as provider,
-    ):
-        agent = await provider.create_agent(
-            name="ChatAgent",
-            instructions="You are a helpful assistant.",
-            tools=[get_weather],
-        )
-        
-        # Create thread for conversation persistence
-        thread = agent.get_new_thread()
-        
-        # First turn
-        result1 = await agent.run("What's the weather
+        print(result.t

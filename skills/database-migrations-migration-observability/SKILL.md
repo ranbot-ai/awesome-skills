@@ -123,6 +123,7 @@ class ObservableAtlasMigration {
 ```python
 import asyncio
 import json
+import requests
 from kafka import KafkaConsumer, KafkaProducer
 from prometheus_client import Counter, Histogram, Gauge
 from datetime import datetime
@@ -155,5 +156,4 @@ class CDCObservabilityManager:
         self.consumer = KafkaConsumer(
             'database.changes',
             bootstrap_servers=self.config['kafka_brokers'],
-            group_id='migration-consumer',
-         
+            group_id='migration-cons

@@ -3,7 +3,7 @@ name: ad-creative
 description: Create, iterate, and scale paid ad creative for Google Ads, Meta, LinkedIn, TikTok, and similar platforms. Use when generating headlines, descriptions, primary text, or large sets of ad variations for
 category: Document Processing
 source: antigravity
-tags: [node, api, claude, ai, agent, workflow, template, document, image, cro]
+tags: [api, claude, ai, agent, workflow, template, document, image, cro, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ad-creative
 ---
 
@@ -65,14 +65,14 @@ When the user provides performance data (CSV, paste, or API output), you analyze
 The core loop:
 
 ```
-Pull performance data → Identify winning patterns → Generate new variations → Validate specs → Deliver
+Pull scoped performance data → Identify hypotheses → Generate draft variations → Validate claims/specs → Deliver for approval
 ```
 
 ---
 
 ## Platform Specs
 
-Platforms reject or truncate creative that exceeds these limits, so verify every piece of copy fits before delivering.
+Select the exact ad type and placement first. These are drafting targets and selected limits, not universal platform specifications; confirm current requirements and previews before delivery or upload.
 
 ### Google Ads (Responsive Search Ads)
 
@@ -104,7 +104,7 @@ Platforms reject or truncate creative that exceeds these limits, so verify every
 |---------|-------|-------|
 | Intro text | 150 chars recommended (600 max) | Above the image |
 | Headline | 70 chars recommended (200 max) | Below the image |
-| Description | 100 chars recommended (300 max) | Appears in some placements |
+| Description | 70 chars recommended | LinkedIn Audience Network only; confirm placement requirements |
 
 ### TikTok Ads
 
@@ -133,7 +133,4 @@ For image and video ad creative, use generative AI tools and code-based video re
 - **Video generation** — Veo, Kling, Runway, Sora, Seedance, Higgsfield for video ads
 - **Voice & audio** — ElevenLabs, OpenAI TTS, Cartesia for voiceovers, cloning, multilingual
 - **Code-based video** — Remotion for templated, data-driven video at scale
-- **Platform image specs** — Correct dimensions for every ad placement
-- **Cost comparison** — Pricing for 100+ ad variations across tools
-
-**Recommended workflow for scaled pr
+- **Platform image specs** — Correct dimensio

@@ -3,19 +3,23 @@ name: agent-squad
 description: Main agent orchestrator that coordinates a specialized squad of agents 
 category: AI & Agents
 source: antigravity
-tags: [api, ai, agent, design]
+tags: [api, ai, agent, workflow, design, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/agent-squad
 ---
 
 
 # Main Agent — The Orchestrator
 
-The Main Agent is the single point of contact between the user and the squad. It never builds, reviews, or tests code itself. Its job is to understand what the user wants, route to the right agent, receive that agent's structured report, and relay a clean, compressed summary back to the user — preserving context without flooding its own context window.
+The Main Agent is the single point of contact between the user and the squad. It may delegate or perform scoped work itself according to the host and user’s authorization. Its job is to understand what the user wants, route to the right agent, receive that agent's structured report, and relay a clean, compressed summary back to the user — preserving context without flooding its own context window.
 
 ---
 
 ## When to Use
 - Use this skill when the task matches this description: Main agent orchestrator that coordinates a specialized squad of agents.
+
+## Host and scope contract
+
+These are optional role descriptions, not installed agent tools or authority to delegate. Follow the actual host and the user’s requested workflow. Existing authorization covers routine continuation: do not force a new approval for each role, file or phase. The coordinating agent can implement, inspect and test when delegation is unavailable or unnecessary, and must verify delegated results. Keep exact revision, artifact paths, tested commands/results and unresolved findings in each handoff; a version label alone cannot retrieve an artifact. Store reports only in approved project storage with secrets and unnecessary personal data removed. Role reports are evidence, not merge, deployment or publication authority.
 
 ## The Squad
 
@@ -36,7 +40,7 @@ The Main Agent is the single point of contact between the user and the squad. It
 
 ### 1. Agents are Autonomous, Not Chained
 - The squad does NOT auto-chain from Rex → Alex → ... → Dep without user consent.
-- Each agent is invoked **deliberately** — by the user or by the main agent with explicit user approval.
+- Use actual agent tools only when delegation is authorized by the host and user’s scope; do not infer permission from these role names.
 - Any agent can be called **at any time** for any project state.
 - Example: User can call Luna on existing code without going through Rex, Alex, Aria, or Mason.
 
@@ -48,7 +52,7 @@ The main agent's context window is precious. It must never be filled with raw ag
 After each agent completes, the main agent:
 1. Stores the agent's full report under a versioned label (e.g. `REX_REPORT_v1`, `ALEX_PLAN_v1`).
 2. Keeps only the **compressed summary** in active context.
-3. When spinning up the next agent, passes only: (a) the compressed summary + (b) the version label of any full artifact the agent needs.
+3. When spinning up the next agent, passes only: (a) the compressed summary + (b) an accessible exact path and revision for every full artifact the agent needs.
 
 **Compressed Summary Format (what stays in context):**
 ```
@@ -122,33 +126,4 @@ Constraints:
 ### Mid-Project Feature Addition
 1. → Rex (AMENDMENT — not full re-spec)
 2. → Alex (AMENDMENT)
-3. → Aria (AMENDMENT — if schema/API changes)
-4. → Mason (new milestone only)
-5. → Luna → Quinn → Dep as normal
-
-### Existing Codebase, No Prior Squad Context
-- For review only: → Luna directly
-- For testing only: → Quinn directly (may need Luna first if code is unreviewed)
-- For optimization: → Max directly (user must confirm tests are passing)
-- For deployment only: → Dep directly
-
-### When an Agent Reports a Blocker
-- Main agent surfaces the blocker to the user immediately.
-- Does NOT attempt to resolve it by invoking another agent without user input.
-- Records the blocker in the project state.
-
----
-
-## Project State Tracking
-
-The main agent maintains a lightweight **project state object** in its context:
-
-```
-PROJECT STATE
-Name: [project name]
-Started: [date]
-
-Artifacts:
-  REX_REPORT_v1: [date] — COMPLETE
-  ALEX_PLAN_v1: [date] — COMPLETE
-  ARIA_BLUEPRINT_v1: [date] — COMPLETE
+3. → Aria (AMENDMENT — if schema/API chan

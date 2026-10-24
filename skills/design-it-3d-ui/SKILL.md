@@ -3,7 +3,7 @@ name: 3d-ui
 description: Web and App implementation guide for 3D UI. Trigger when user wants actual 3D objects, perspective effects, and spatial depth. 
 category: Creative & Media
 source: antigravity
-tags: [react, ai, agent, design, rag, seo]
+tags: [react, api, ai, agent, design, rag, seo]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-it/3d-ui
 ---
 

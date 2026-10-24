@@ -3,7 +3,7 @@ name: block-storage
 description: Manage block storage volumes and LVM. Configure cloud block storage and local disks. Use when managing disk storage. 
 category: AI & Agents
 source: antigravity
-tags: [ai, agent, gpt, template, security, stripe, aws, rag, cro]
+tags: [ai, agent, gpt, template, image, security, stripe, aws, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/block-storage
 ---
 
@@ -28,6 +28,10 @@ Manage block storage volumes including LVM, cloud-based EBS, filesystem creation
 - `mdadm` package installed for software RAID
 - AWS CLI configured for EBS operations
 - Understanding of the workload's I/O characteristics (IOPS, throughput)
+
+## Destructive operation contract
+
+Examples are alternatives, not one sequential script. Identify devices by stable serial/WWN and current filesystem/mounts, map cloud volume IDs to actual NVMe devices and confirm the exact target before mklabel/wipefs/mkfs/pvcreate/mdadm creation or shrink/remove. Verify an independent tested backup; RAID and snapshots alone are not backups. Quiesce databases/filesystems for application-consistent snapshots and monitor snapshot COW capacity. Read-only mount can still replay a journal; use filesystem-specific no-recovery options when forensic immutability matters. Start filesystem repair with assessment/image capture rather than unattended -y. Validate fstab without overwriting existing entries and test boot recovery. Extend the partition/container before its filesystem; ext4 shrink requires correct units/space and offline checks, XFS cannot shrink. Wait for EBS modification/snapshot completion and verify encryption/AZ/costs before attach/detach; never format restored data or force-detach mounted workloads.
 
 ## Disk Discovery and Partitioning
 
@@ -169,43 +173,4 @@ pvcreate /dev/sdd
 # Extend the volume group
 vgextend data_vg /dev/sdd
 
-# Now extend any logical volume using the new space
-lvextend -l +100%FREE --resizefs /dev/data_vg/app_lv
-```
-
-### LVM Snapshots
-
-```bash
-# Create a snapshot (requires free space in VG)
-lvcreate -L 10G -s -n app_snap /dev/data_vg/app_lv
-
-# Mount the snapshot read-only for backup
-mkdir -p /mnt/snapshot
-mount -o ro /dev/data_vg/app_snap /mnt/snapshot
-
-# Perform backup from the snapshot
-tar czf /backup/app-$(date +%Y%m%d).tar.gz -C /mnt/snapshot .
-
-# Unmount and remove the snapshot when done
-umount /mnt/snapshot
-lvremove -f /dev/data_vg/app_snap
-
-# Restore from snapshot (reverts LV to snapshot point -- destructive)
-lvconvert --merge /dev/data_vg/app_snap
-# Note: if the LV is mounted, merge happens at next activation (reboot)
-```
-
-### Reducing and Removing LVM Components
-
-```bash
-# Shrink a logical volume (ext4 only -- XFS cannot shrink)
-# MUST unmount first
-umount /data/app
-e2fsck -f /dev/data_vg/app_lv
-resize2fs /dev/data_vg/app_lv 80G
-lvreduce -L 80G /dev/data_vg/app_lv
-mount /data/app
-
-# Remove a logical volume
-umount /data/app
-lvremove /dev/data_vg/app_lv
+# Now extend a

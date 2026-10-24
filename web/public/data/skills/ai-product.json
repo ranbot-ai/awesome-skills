@@ -2,15 +2,16 @@
   "id": "antigravity-ai-product",
   "name": "ai-product",
   "slug": "ai-product",
-  "description": "Every product will be AI-powered. The question is whether you'll build it right or ship a demo that falls apart in production.",
+  "description": "Design and evaluate LLM product features, retrieval, validated outputs, latency, and cost controls.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-product",
-  "content": "\n# AI Product Development\n\nEvery product will be AI-powered. The question is whether you'll build it\nright or ship a demo that falls apart in production.\n\nThis skill covers LLM integration patterns, RAG architecture, prompt\nengineering that scales, AI UX that users trust, and cost optimization\nthat doesn't bankrupt you.\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use\nUse this skill when the request clearly matches the capabilities and patterns described above.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
+  "content": "\n# AI Product Development\n\nChoose AI only when it improves the target user task against an evaluated baseline.\n\nThis skill covers LLM integration patterns, RAG architecture, prompt\nengineering that scales, AI UX that users trust, and cost optimization\nthat doesn't bankrupt you.\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use\nUse this skill when the request clearly matches the capabilities and patterns described above.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
   "tags": [
     "ai",
     "llm",
+    "design",
     "rag"
   ],
   "useCases": [],

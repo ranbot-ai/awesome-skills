@@ -59,9 +59,13 @@ client = CosmosClient(url=endpoint, credential=credential)
 
 ## Core Workflow
 
+Confirm account/database/container, partition-key definition and authorized budget before provisioning or changing throughput. `create_*_if_not_exists` does not reconcile an existing container configuration. Examples use different key paths; do not combine them against one container. Tenant partitioning is not authorization isolation. Use ETag conditions for read-modify-write operations and explicit logical-operation deduplication for retries. Change feed is not a globally ordered, exactly-once ledger; checkpoint only after successful idempotent processing and verify the pinned SDK checkpoint API.
+
 ### Setup Database and Container
 
 ```python
+from azure.cosmos import PartitionKey
+
 # Get or create database
 database = client.create_database_if_not_exists(id="mydb")
 
@@ -198,30 +202,4 @@ items = container.query_items(
 from azure.cosmos import PartitionKey
 
 # Single partition key
-container = database.create_container_if_not_exists(
-    id="orders",
-    partition_key=PartitionKey(path="/customer_id")
-)
-
-# Hierarchical partition key (preview)
-container = database.create_container_if_not_exists(
-    id="events",
-    partition_key=PartitionKey(path=["/tenant_id", "/user_id"])
-)
-```
-
-## Throughput
-
-```python
-# Create container with provisioned throughput
-container = database.create_container_if_not_exists(
-    id="mycontainer",
-    partition_key=PartitionKey(path="/pk"),
-    offer_throughput=400  # RU/s
-)
-
-# Read current throughput
-offer = container.read_offer()
-print(f"Throughput: {offer.offer_throughput} RU/s")
-
-# Update throu
+container =

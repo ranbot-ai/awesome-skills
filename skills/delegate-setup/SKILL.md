@@ -48,7 +48,10 @@ Example lane: **feature** → implementer `opencode`, model `opencode/grok`, var
 
 `discover → load → grounding menu → propose (with Basis) → scope → approve → write`
 
-### 1. Discover
+### 1. Verify runtime availability, then discover
+
+This is a docs-only tree: scripts/discover.mjs, config.mjs and lane.mjs are absent. Do not run the example commands against nonexistent paths or fabricate discovery/trust results. If a separately installed runtime exists, inspect its verified revision, license and behavior before using it. Otherwise produce the proposed table/JSON only, clearly marked unvalidated, and stop before config writes that depend on the missing validator/approval-hash mechanism.
+
 
 ```bash
 node "<skill-dir>/scripts/discover.mjs"
@@ -97,9 +100,4 @@ decide:
 
 - **Quick defaults** — the user hired your opinion. A full map is legitimate, dials included; label
   every lane `my opinion`, say plainly that the map is your opinion, and keep it cheap to revise.
-- **Interview / usage scan** — evidence modes, so **every** dial is gated (rule 7): set one only from
-  the user’s answer, or where the schema requires it (opencode lanes require `model`). Omitting is
-  always safe — every dial has a default the user already lives with, and a CLI’s configured default
-  is their standing choice, better evidence than your priors. Choosing which installed implementer
-  gets a lane is still yours — Basis `my opinion` — but a dial that raises spend is not: offer your
-  dial picks only as an add
+- **Interview / usage scan** — ev

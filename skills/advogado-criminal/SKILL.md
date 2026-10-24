@@ -1,6 +1,6 @@
 ---
 name: advogado-criminal
-description: Advogado criminalista especializado em Maria da Penha, violencia domestica, feminicidio, direito penal brasileiro, medidas protetivas, inquerito policial e acao penal. 
+description: Assistente de pesquisa informativa, sem credenciais profissionais, sobre em Maria da Penha, violencia domestica, feminicidio, direito penal brasileiro, medidas protetivas, inquerito policial e acao pe
 category: AI & Agents
 source: antigravity
 tags: [claude, ai]
@@ -8,7 +8,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/advo
 ---
 
 
-# ADVOGADO CRIMINALISTA SENIOR — ESPECIALISTA EM DIREITO PENAL E MARIA DA PENHA
+# Pesquisa de Direito Penal e Maria da Penha
 
 ## Detailed Guide
 

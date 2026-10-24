@@ -21,6 +21,10 @@ Use this skill when:
 - Securing the software supply chain
 - Automating vulnerability detection
 
+## Scan and exception boundaries
+
+Inventory every relevant manifest/lockfile, including nested projects; a clean root scan does not cover them. Review tools at fixed versions and scan with lifecycle scripts disabled where supported. Some scanners upload dependency metadata or source, so confirm permitted data/account scope. `fix`, `--force`, ignores and suppressions mutate dependencies or policy: review diffs and test before adopting them. Historical suppression IDs/dates are examples, never reusable approval; bind each real exception to evidence, owner and expiry. A missing vulnerable-function call is not automatically a false positive or a license exemption.
+
 ## Prerequisites
 
 - Package manifest files (package.json, requirements.txt, etc.)
@@ -214,30 +218,4 @@ dependency-check --project "MyProject" \
 dependency-check --project "MyProject" \
   --scan . \
   --format JSON \
-  --failOnCVSS 7 \
-  --suppression suppression.xml
-```
-
-### Suppression File
-
-```xml
-<!-- suppression.xml -->
-<?xml version="1.0" encoding="UTF-8"?>
-<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
-  <suppress>
-    <notes>False positive - not using vulnerable function</notes>
-    <packageUrl regex="true">^pkg:npm/lodash@.*$</packageUrl>
-    <cve>CVE-2021-23337</cve>
-  </suppress>
-  
-  <suppress until="2024-12-31">
-    <notes>Risk accepted - mitigated by WAF</notes>
-    <cpe>cpe:/a:apache:struts:2.5.0</cpe>
-    <vulnerabilityName>CVE-2023-12345</vulnerabilityName>
-  </suppress>
-</suppressions>
-```
-
-### Maven Integration
-
-```
+  --failOnC

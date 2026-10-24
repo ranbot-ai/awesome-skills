@@ -37,8 +37,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/emer
 
 #### HTML格式（新增）
 生成独立的HTML文件，包含：
-- Tailwind CSS样式（通过CDN）
-- Lucide图标（通过CDN）
+- 内嵌静态CSS，无外部CDN请求
+- 内嵌静态图标或纯文字，无外部脚本
 - 响应式设计
 - 打印优化
 - 多种尺寸变体（A4、钱包卡、大字版）
@@ -151,7 +151,7 @@ try {
     });
   }
 } catch (e) {
-  // 文件不存在或读取失败，跳过
+  // 将缺失/读取失败记录为未确认，不解释为无疾病
 }
 
 // 糖尿病
@@ -159,15 +159,15 @@ try {
   const diabetesData = readFile('data/diabetes-tracker.json');
   if (diabetesData.diabetes_management?.diagnosis_date) {
     chronicConditions.push({
-      condition: diabetesData.diabetes_management.type === 'type_1' ? '1型糖尿病' : '2型糖尿病',
+      condition: ({type_1: '1型糖尿病', type_2: '2型糖尿病'})[diabetesData.diabetes_management.type] || '糖尿病类型未确认',
       diagnosis_date: diabetesData.diabetes_management.diagnosis_date,
       duration_years: diabetesData.diabetes_management.duration_years,
       hba1c: diabetesData.diabetes_management.hba1c?.history?.[0]?.value,
-      control_status: diabetesData.diabetes_management.hba1c?.achievement ? '控制良好' : '需改善'
+      control_status: '仅列已记录的临床评估，不由单项布尔值判定控制状态'
     });
   }
 } catch (e) {
-  // 文件不存在或读取失败，跳过
+  // 将缺失/读取失败记录为未确认，不解释为无疾病
 }
 
 // COPD
@@ -183,7 +183,7 @@ try {
     });
   }
 } catch (e) {
-  // 文件不存在或读取失败，跳过
+  // 将缺失/读取失败记录为未确认，不解释为无疾病
 }
 ```
 

@@ -71,7 +71,7 @@ body {
   border: 1px solid #ff0000;
   color: #ff0000;
   box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-  animation: pulse-red 2s infinite;
+  /* Static alert by default; offer optional motion with a reduced-motion fallback. */
 }
 
 @keyframes pulse-red {
@@ -156,6 +156,6 @@ class _CommandCenterScreenState extends State<CommandCenterScreen> with SingleTi
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF030A16
+  void dispose() {
+    _pulseController.dispose();
+   

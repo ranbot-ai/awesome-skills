@@ -40,7 +40,7 @@ body {
   background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
   background-size: 1800% 1800%;
   animation: rainbow 18s ease infinite;
-  
+
   color: #fff;
   font-weight: 900;
   text-transform: uppercase;
@@ -50,7 +50,7 @@ body {
   mix-blend-mode: screen; /* Makes it interact with background */
 }
 
-@keyframes rainbow { 
+@keyframes rainbow {
   0%{background-position:0% 82%}
   50%{background-position:100% 19%}
   100%{background-position:0% 82%}
@@ -87,11 +87,11 @@ body {
 ```swift
 struct CyberY2KView: View {
     @State private var rotation: Double = 0
-    
+
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
-            
+
             VStack(spacing: 40) {
                 // Glitch Text
                 ZStack {
@@ -99,17 +99,17 @@ struct CyberY2KView: View {
                         .font(.custom("Courier New", size: 40).bold())
                         .foregroundColor(.cyan)
                         .offset(x: -3, y: 2) // RGB split channel 1
-                    
+
                     Text("SYSTEM.ERROR")
                         .font(.custom("Courier New", size: 40).bold())
                         .foregroundColor(.pink)
                         .offset(x: 3, y: -2) // RGB split channel 2
-                    
+
                     Text("SYSTEM.ERROR")
                         .font(.custom("Courier New", size: 40).bold())
                         .foregroundColor(.white)
                 }
-                
+
                 // Holographic Button
                 Button(action: {}) {
                     Text("ENTER MATRIX")
@@ -153,4 +153,9 @@ class _CyberY2KScreenState extends State<CyberY2KScreen> with SingleTickerProvid
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(vsync: this, duration: const Duration(
+    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 5))..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller

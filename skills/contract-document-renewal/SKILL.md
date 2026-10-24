@@ -36,7 +36,8 @@ empty templates only - it never holds or processes real employee or customer dat
 
 ## How It Works
 
-Follow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.
+The upstream shared execution contract is not bundled; follow this file's
+intent, placeholder-only output and target-specific external-write rules. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.
 
 ### Step 1 - Identify intent
 
@@ -102,13 +103,15 @@ never goes red. Store the deadline in `Notice Deadline` and calculate it, never 
 Notice Deadline = End Date - Renewal Notice (Days)
 ```
 
-Treat the difference as calendar days, count the deadline day itself as day 1, and store the result as a plain
-date in ISO `YYYY-MM-DD`. A notice period is a count of days, not a date, so never accept a date typed into
-`Renewal Notice (Days)` and never accept a deadline typed into `Notice Deadline` - the two disagree silently and
-the register misses the reminder. If the contract auto-renews and no notice is served, `Notice Deadline` is the
-last day the user may still act; after it passes, `Auto-Renew` TRUE means the contract has renewed by operation of
-its own terms and `Status` must not still read `In Renewal`.
+This subtraction is a planning example only for an explicitly confirmed calendar-
+day clause. Do not count the deadline day again: subtraction already defines the
+date arithmetic (2027-03-31 minus 60 days = 2027-01-30). Actual deadlines may depend
+on business days, receipt/service rules, timezone, holidays, contract amendments
+and jurisdiction. Record a professionally verified deadline rather than overruling
+it with a generic formula; if the clause/basis is unknown, leave the deadline blank
+and flag review required. Do not infer that passing a date alone legally renewed
+or terminated a contract. `Auto-Renew` records a clause, not proof of its operation.
 
-**Status means one thing at a time.** `Expiring Soon` is the window between the notice deadline and the end date -
-action is still possible. `In Renewal` is only correct once a renewal has actually been agreed or served. A
-contract whose notice deadline has passed with no action recorded is `Expiring Soon` with the g
+**Status definitions must be agreed.** `Expiring Soon` is an owner-chosen review
+window, preferably before the verified notice deadline; after that deadline,
+permitte

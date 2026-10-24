@@ -3,9 +3,23 @@ name: dotnet-reverse
 description: .NET/C# binary reverse engineering: managed PE analysis, dnSpyEx debugging, de4dot deobfuscation (ConfuserEx/SmartAssembly/Babel), IL patching, NativeAOT targets, and analysis of red-team Sharp* tooli
 category: AI & Agents
 source: antigravity
-tags: [react, mcp, ai, workflow, cro]
+tags: [react, mcp, ai, workflow, security, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dotnet-reverse
 ---
+
+> **⚠️ AUTHORIZED USE ONLY**
+> This skill is for educational purposes or authorized security assessments only.
+> You must have explicit, written permission from the system owner before using this tool.
+> Misuse of this tool is illegal and strictly prohibited.
+
+> **Mandatory confirmation gate**
+> Before running any command that probes, exploits, changes, persists on, extracts data from, or attempts credential access against a target:
+> 1. Ask the user to state the exact target URL, IP, account, or resource.
+> 2. Ask the user to confirm written authorization and the permitted scope.
+> 3. Show the exact command(s) and explain their expected effect.
+> 4. Wait for explicit confirmation in the current conversation.
+>
+> Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
 # .NET / C# 逆向作业规范
 ## When to Use
@@ -26,6 +40,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dotn
 - 分析 IL2CPP 之前的 Mono/Unity 托管层（注意：IL2CPP 编译后是 native，走 `reverse-engineering/` + seed-014）
 
 如果目标是纯 native 二进制（C/C++/Go/Rust 编译、无 CLR），请改用 `reverse-engineering/`、`ida-reverse/` 或 `radare2/`。
+
+## 授权与隔离
+
+仅分析有授权的样本。未知程序集、依赖与脱混淆器可能执行代码；使用无真实凭据、无共享目录的可回滚隔离虚拟机，默认阻断外联。静态元数据优先；动态执行必须单独确认范围。提取的密钥/C2按敏感证据保存，不连接或复用。patch另存副本并验证栈、分支、异常处理及签名，不覆盖原样本。
+
+原版 de4dot 已归档且未列出 ConfuserEx 支持；下方旧版表格是候选线索，须核对所用 fork 的实际参数与支持范围。上游路由与 MCP 名称不表示本包已提供这些能力。
 
 ## 核心原则
 
@@ -99,7 +119,7 @@ diec target.exe                        # Detect It Easy CLI
 de4dot target.exe -o target-clean.exe
 
 # 指定类型（自动识别失败时）
-de4dot --type cfze target.exe          # ConfuserEx
+# ConfuserEx: 核实专用 fork 的支持和参数后再使用
 de4dot --type sa target.exe            # SmartAssembly
 
 # 多层混淆 / de4dot 报 unknown
@@ -131,42 +151,4 @@ dnSpyEx 调试器：附加进程 / 启动调试，在关键方法下断点，观
 
 > .NET 动态调试比 native 友好得多 —— 能直接看到对象值、字符串内容。优先动态而非死磕静态。
 
-### 6. Patch（按需修改）
-
-```text
-dnSpyEx → 右键方法 → Edit Method (C#) 或 Edit IL
-  - 改判断：ldc.i4.0 → ldc.i4.1（false→true）
-  - 改常量：直接编辑字符串/数字
-  - 删除校验：nop 掉整段
-File → Save Module → 替换原文件
-```
-
-**IL patch 可靠性 > C# patch**：C# 重编译可能失败（缺引用、语法不对），IL 编辑几乎不会失真。详见 `references/common-workflow.md`。
-
-## 触发场景路由
-
-用户说这些时进入本 skill：
-- ".NET / C# 二进制逆向" / "C# 程序反编译"
-- "dnSpy 分析" / "dnSpyEx patch"
-- "ConfuserEx / SmartAssembly / Babel 脱混淆 / 脱壳"
-- "Sharp* 工具分析"（Rubeus / SharpHound / SharpShell）
-- ".NET malware / loader / info-stealer 逆向"
-- "C# 程序 patch / keygen / 修改判断"
-
-## 何时切出
-
-- IL2CPP 编译的 Unity 游戏 → `reverse-engineering/` + `seed-014_unity-il2cpp-reverse.md`（IL2CPP 是 native，不走 dnSpy）
-- NativeAOT 产物 → `reverse-engineering/`（同上，native）
-- 纯 native PE（无 CLR）→ `reverse-engineering/` / `ida-reverse/`
-- 需要符号/函数批量迁移到别的版本 → `binary-diff/`
-- 需要画攻击路径 / 调用链图 → `diagram-generator/`
-
-## 路由上下文
-
-**上游入口**: `skills/SKILL.md`（总控）、`routing.md`
-**下游出口**:
-- IL2CPP / NativeAOT（native）→ `reverse-engineering/`
-- 深度 native .so/.dll 段分析 → `ida-reverse/` / `radare2/`
-- 需要 AI 直接操作 dnSpy → 注册并联动 dnSpy MCP（见 `references/sharp-tools.md`）
-
-**
+### 6. Patch（按需修改

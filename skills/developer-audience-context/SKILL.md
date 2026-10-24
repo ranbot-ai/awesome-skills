@@ -11,10 +11,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/deve
 # Developer Audience Context
 ## When to Use
 
-Use this skill when you need when the user wants to establish or update their developer audience context. Also use when starting any other developer marketing skill to ensure foundational context is loaded. Trigger phrases include "developer persona," "target developers," "who are our developers," "developer...
+Use this skill when the user wants to establish or update their developer audience context. Also use when starting any other developer marketing skill to ensure foundational context is loaded. Trigger phrases include "developer persona," "target developers," "who are our developers," "developer audience."
 
 
-This skill helps you create and maintain `.agents/developer-audience-context.md` — a foundational document that captures everything about your target developers. All other developer marketing skills reference this document first, so you only define your audience once.
+This skill helps you create and maintain `.agents/developer-audience-context.md` — a foundational document that captures everything about your target developers. Related developer marketing skills can consult this document when explicitly instructed, so you only define your audience once.
 
 ---
 
@@ -137,4 +137,3 @@ What makes you different — in developer terms:
 Capture exact phrases developers use — not polished marketing copy:
 
 | Category | Examples |
-|----------|---

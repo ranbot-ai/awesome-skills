@@ -3,7 +3,7 @@ name: azure-eventhub-ts
 description: High-throughput event streaming and real-time data ingestion. 
 category: AI & Agents
 source: antigravity
-tags: [typescript, ai, workflow, azure, rag]
+tags: [javascript, typescript, node, api, ai, workflow, design, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-eventhub-ts
 ---
 
@@ -63,8 +63,9 @@ const producer = new EventHubProducerClient(namespace, eventHubName, credential)
 
 // Create batch and add events
 const batch = await producer.createBatch();
-batch.tryAdd({ body: { temperature: 72.5, deviceId: "sensor-1" } });
-batch.tryAdd({ body: { temperature: 68.2, deviceId: "sensor-2" } });
+for (const body of [{ temperature: 72.5, deviceId: "sensor-1" }, { temperature: 68.2, deviceId: "sensor-2" }]) {
+  if (!batch.tryAdd({ body })) throw new Error("Event does not fit this batch; flush/rebatch or reject oversized event");
+}
 
 await producer.sendBatch(batch);
 await producer.close();
@@ -203,10 +204,4 @@ import {
   EventPosition,
 } from "@azure/event-hubs";
 
-import { BlobCheckpointStore } from "@azure/eventhubs-checkpointstore-blob";
-```
-
-## Event Properties
-
-```typescript
-// Send with properties
+import { BlobCheckpointStore } from "@azur

@@ -27,6 +27,10 @@ The loop needs only a shell command and file access, so any comparable orchestra
 - You want to write the code yourself, or you only need Cursor's opinion on code you wrote (a
   `--read-only` dispatch covers that — see below — but a plain review may not need delegation at all).
 
+## Runtime availability
+
+This docs-only bundle does not include `scripts/relay.mjs`. The commands below cannot run from this installed directory. Obtain and review an explicitly authorized upstream runtime separately, including its license and permission behavior; do not invent a replacement or automatically install it. In examples, `<skill-dir>` means that reviewed runtime directory.
+
 ## Prerequisites (check once)
 
 1. `cursor-agent --version` succeeds. If not, follow the installer for your platform at
@@ -57,9 +61,10 @@ brief. See [references/writing-the-brief.md](references/writing-the-brief.md).
 
 ### 2. Dispatch
 
-Use the bundled helper. It wraps `cursor-agent -p`, feeds the brief on stdin, captures the
-structured event stream, and writes `result.json`. (`<skill-dir>` is the installed folder containing
-this `SKILL.md`.)
+Confirm that the user authorized the selected approval mode, external provider/data sharing and writable scope. Default `--force` is broad automatic command approval; prefer `--no-force` unless that scope is authorized. Treat approval refusals as boundaries, not reasons to disable hooks or sandboxing. Logs and briefs may contain source code or secrets; restrict their permissions and retention.
+
+Use a separately obtained and reviewed upstream helper; no executable helper is bundled here. It wraps `cursor-agent -p`, feeds the brief on stdin, captures the
+structured event stream, and writes `result.json`. (`<skill-dir>` must be the reviewed upstream runtime folder, not this docs-only catalog directory.)
 
 ```bash
 node "<skill-dir>/scripts/relay.mjs" --brief brief.txt --cd /path/to/repo
@@ -85,20 +90,4 @@ or background it in the shell and poll for `result.json`. A pre-run usage error 
 result; a missing `cursor-agent` exits 127 and writes `status: "cursor_agent_unavailable"`.
 
 Trust process state and the working tree over a progress display. Completion means the process exited
-and `result.json` exists. Cursor's full report is the `finalMessage` field in `result.json` (also
-printed in full on stdout between the report markers).
-
-**Windows + hooks caveat:** if the user has Cursor hooks configured (`~/.cursor/hooks.json`, or
-Claude Code `PreToolUse` hooks, which cursor-agent imports), dispatching from a Git Bash (MSYS)
-console makes cursor-agent feed PowerShell-syntax hook wrappers to bash, so every command Cursor
-tries to run is blocked — edits still land, gates do not run. Dispatch from a PowerShell or cmd
-console instead. Details: [references/dispatch-and-poll.md](references/dispatch-and-poll.md).
-
-### 4. Review — do not trust the self-report
-
-Treat Cursor's final message and gate claims as claims:
-
-- Re-run the project's gates yourself.
-- Read the diff against the brief, starting with `touchedFiles`.
-- Run relevant guard skills if installed.
-- Round-trip migration
+and `result.json

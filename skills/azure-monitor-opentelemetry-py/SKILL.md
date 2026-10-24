@@ -1,9 +1,9 @@
 ---
 name: azure-monitor-opentelemetry-py
 description: Azure Monitor OpenTelemetry Distro for Python. Use for one-line Application Insights setup with auto-instrumentation. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [python, api, ai, workflow, azure]
+tags: [python, api, ai, workflow, document, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-monitor-opentelemetry-py
 ---
 
@@ -163,7 +163,7 @@ configure_azure_monitor(
 from azure.monitor.opentelemetry import configure_azure_monitor
 
 configure_azure_monitor(
-    instrumentations=["flask", "requests"]  # Only enable these
+    instrumentation_options={"flask": {"enabled": False}}  # Disable Flask; others keep defaults
 )
 ```
 
@@ -188,6 +188,8 @@ configure_azure_monitor(
 )
 ```
 
+Configure once per process. Pin and inspect the installed distro: supported libraries and defaults change, and Azure Monitor versus Microsoft OpenTelemetry distros use different APIs. Do not initialize both. [Azure SDK reference](https://github.com/Azure/azure-sdk-for-python/blob/main/sdk/monitor/azure-monitor-opentelemetry/README.md) documents `instrumentation_options`; confirm optional instrumentations/dependencies rather than assuming every library below is included. Telemetry leaves the process: authorize its destination/retention, redact secrets and personal data from logs/spans, limit cardinality and ingestion cost, and verify export using synthetic data. Trace sampling does not imply metrics or all logs are sampled.
+
 ## Auto-Instrumentations Included
 
 | Library | Telemetry Type |
@@ -210,24 +212,6 @@ configure_azure_monitor(
 |-----------|-------------|---------|
 | `connection_string` | Application Insights connection string | From env var |
 | `credential` | Azure credential for AAD auth | None |
-| `sampling_ratio` | Sampling rate (0.0 to 1.0) | 1.0 |
+| `sampling_ratio` | Explicit trace sampling fraction | Version-dependent; inspect sampler/environment |
 | `resource` | OpenTelemetry Resource | Auto-detected |
-| `instrumentations` | List of instrumentations to enable | All |
-| `enable_live_metrics` | Enable Live Metrics stream | False |
-
-## Best Practices
-
-1. **Call configure_azure_monitor() early** — Before importing instrumented libraries
-2. **Use environment variables** for connection string in production
-3. **Set cloud role name** for multi-service applications
-4. **Enable sampling** in high-traffic applications
-5. **Use structured logging** for better log analytics queries
-6. **Add custom attributes** to spans for better debugging
-7. **Use AAD authentication** for production workloads
-
-## When to Use
-This skill is applicable to execute the workflow or actions described in the overview.
-
-## Limitations
-- Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, 
+| `instrumentation_options` | Per-library enabled di

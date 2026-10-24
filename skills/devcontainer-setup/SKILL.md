@@ -3,7 +3,7 @@ name: devcontainer-setup
 description: Creates devcontainers with Claude Code, language-specific tooling (Python/Node/Rust/Go), and persistent volumes. Use when adding devcontainer support to a project, setting up isolated development envi
 category: Development & Code Tools
 source: antigravity
-tags: [python, typescript, node, claude, ai, workflow, template, docker]
+tags: [python, typescript, node, claude, ai, agent, automation, workflow, template, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/devcontainer-setup
 ---
 
@@ -25,6 +25,12 @@ Creates a pre-configured devcontainer with Claude Code and language-specific too
 - User already has a devcontainer configuration and just needs modifications
 - User is asking about general Docker or container questions
 - User wants to deploy production containers (this is for development only)
+
+## Missing template prerequisite
+
+This tracked bundle includes the two references and their CC-BY-SA-4.0 notice/license, but no resources directory, Dockerfile, devcontainer.json, post_install.py, .zshrc or install.sh. The workflow below describes an upstream design, not runnable bundled automation. Stop that template-copy/helper path when files are absent. Draft a minimal reviewed configuration from the project requirements or use a separately reviewed immutable upstream source; do not execute an invented helper or automatically install plugins. Preserve existing configuration and lockfiles.
+
+Devcontainers execute image/feature/lifecycle/build code and mount host files; they are not a strong boundary for hostile repositories by default. Avoid Docker socket, host credentials, privileged mode and NET_ADMIN. Agent-writable firewall rules are not an independent network boundary. Scope persistent volumes per project/user and consider retained credentials. Install/configuration/marketplace changes require authorization. Validate from a disposable trusted checkout before opening an untrusted project.
 
 ## Workflow
 
@@ -85,7 +91,7 @@ Extensions and settings from all detected languages should be merged into the co
 
 ## Phase 2: Generate Configuration
 
-Start with base templates from `resources/` directory. Substitute:
+Only if a separately reviewed template source is actually available, substitute:
 
 - `{{PROJECT_NAME}}` → Human-readable name (e.g., "My Project")
 - `{{PROJECT_SLUG}}` → Slug for volumes (e.g., "my-project")
@@ -96,11 +102,11 @@ Then apply language-specific modifications below.
 
 The base template includes:
 
-- **Claude Code** with marketplace plugins (anthropics/skills, trailofbits/skills, trailofbits/skills-curated)
+- **Historical upstream design:** Claude Code and optional marketplace plugins; none are bundled or approved for automatic activation
 - **Python 3.13** via uv (fast binary download)
 - **Node 22** via fnm (Fast Node Manager)
 - **ast-grep** for AST-based code search
-- **Network isolation tools** (iptables, ipset) with NET_ADMIN capability
+- **Historical upstream design:** network tools; do not grant NET_ADMIN by default or call this enforced isolation
 - **Modern CLI tools**: ripgrep, fd, fzf, tmux, git-delta
 
 ---
@@ -135,58 +141,4 @@ Add to `customizations.vscode.settings`:
 "[python]": {
   "editor.defaultFormatter": "charliermarsh.ruff",
   "editor.codeActionsOnSave": {
-    "source.organizeImports": "explicit"
-  }
-}
-```
-
-**postCreateCommand:**
-If `pyproject.toml` exists, chain commands:
-```
-rm -rf .venv && uv sync && uv run /opt/post_install.py
-```
-
----
-
-### Node/TypeScript Projects
-
-**Detection:** `package.json` or `tsconfig.json`
-
-**No Dockerfile additions needed:** The base template includes Node 22 via fnm (Fast Node Manager).
-
-**devcontainer.json extensions:**
-
-Add to `customizations.vscode.extensions`:
-```json
-"dbaeumer.vscode-eslint",
-"esbenp.prettier-vscode"
-```
-
-Add to `customizations.vscode.settings`:
-```json
-"editor.defaultFormatter": "esbenp.prettier-vscode",
-"editor.codeActionsOnSave": {
-  "source.fixAll.eslint": "explicit"
-}
-```
-
-**postCreateCommand:**
-Detect package manager from lockfile and chain with base command:
-- `pnpm-lock.yaml` → `uv run /opt/post_install.py && pnpm install --frozen-lockfile`
-- `yarn.lock` → `uv run /opt/post_install.py && yarn install --frozen-lockfile`
-- `package-lock.json` → `uv run /opt/post_install.py && npm ci`
-- No lockfile → `uv run /opt/post_install.py && npm install`
-
----
-
-### Rust Projects
-
-**Detection:** `Cargo.toml`
-
-**Features to add:**
-
-```json
-"ghcr.io/devcontainers/features/rust:1": {}
-```
-
-**devcontainer
+    "source.organizeIm

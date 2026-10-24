@@ -40,6 +40,8 @@ service_client = QueueServiceClient(account_url=account_url, credential=credenti
 queue_client = QueueClient(account_url=account_url, queue_name="myqueue", credential=credential)
 ```
 
+Examples are independent fragments, not a run-all script. Confirm account/queue and whether reads may change visibility; use peek for observational checks. Receiving/deleting/clearing impacts other consumers and needs explicit scope. Bound message count/time/bytes, handle poison messages, and make processing idempotent because delivery can repeat. Do not delete a message until durable processing succeeds; replace placeholder processing before execution. Preserve the latest pop receipt after updates and reconcile ambiguous outcomes before retrying. Close both async clients and credentials in failure paths.
+
 ## Queue Operations
 
 ```python
@@ -87,7 +89,7 @@ messages = queue_client.receive_messages(
 
 for message in messages:
     print(f"ID: {message.id}")
-    print(f"Content: {message.content}")
+    # Do not log message payloads.
     print(f"Dequeue count: {message.dequeue_count}")
     
     # Process message...
@@ -103,7 +105,7 @@ for message in messages:
 messages = queue_client.peek_messages(max_messages=5)
 
 for message in messages:
-    print(message.content)
+    # Inspect only authorized synthetic content; do not log payloads.
 ```
 
 ## Update Message
@@ -179,7 +181,7 @@ async def queue_operations():
         
         # Receive
         async for message in client.receive_messages():
-            print(message.content)
+            # Inspect only authorized synthetic content; do not log payloads.
             await client.delete_message(message)
 
 import asyncio
@@ -198,24 +200,3 @@ queue_client = QueueClient(
     credential=credential,
     message_encode_policy=BinaryBase64EncodePolicy(),
     message_decode_policy=BinaryBase64DecodePolicy()
-)
-
-# Send bytes
-queue_client.send_message(b"Binary content")
-```
-
-## Best Practices
-
-1. **Delete messages after processing** to prevent reprocessing
-2. **Set appropriate visibility timeout** based on processing time
-3. **Handle `dequeue_count`** for poison message detection
-4. **Use async client** for high-throughput scenarios
-5. **Use `peek_messages`** for monitoring without affecting queue
-6. **Set `time_to_live`** to prevent stale messages
-7. **Consider Service Bus** for advanced features (sessions, topics)
-
-## When to Use
-This skill is applicable to execute the workflow or actions described in the overview.
-
-## Limitations
-- Use this skill only when the task clearly matches the sc

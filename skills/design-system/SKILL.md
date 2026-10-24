@@ -3,7 +3,7 @@ name: design-system
 description: Mechanical implementation invariants for frontend design: token architecture, typography hierarchy, loading order, FOUT prevention, chrome stability, motion timing, color semantics. Use with design wh
 category: Document Processing
 source: antigravity
-tags: [react, ai, design, document, image, security, cro]
+tags: [javascript, react, ai, design, document, image, security, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-system
 ---
 
@@ -11,7 +11,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/desi
 # Design system
 ## When to Use
 
-Use this skill when you need mechanical implementation invariants for frontend design: token architecture, typography hierarchy, loading order, FOUT prevention, chrome stability, motion timing, color semantics. Use with design when building components, pages, or design systems. (Aesthetic direction lives in...
+Use this skill when you need mechanical implementation invariants for frontend design: token architecture, typography hierarchy, loading order, FOUT prevention, chrome stability, motion timing, color semantics. Use with design when building components, pages, or design systems. Aesthetic direction is separate from these implementation guidelines.
 
 
 Apply with **design** when implementing UI: components, pages, or design systems. Every color, type, and motion choice should trace back to these rules.
@@ -45,16 +45,14 @@ The first viewport must paint complete and correct, fast. Order every resource b
 - **Below the fold:** `loading="lazy" decoding="async"` on images; `preload="none"` (or `"metadata"`) on video; `defer` non-critical JS. Always reserve space (`aspect-ratio`, or `width`+`height`) so deferred media can't shift layout (CLS).
 - Keep the render-blocking head minimal: inline critical CSS, defer the rest.
 
-## Never let fonts pop in (no FOUT) — ever
+## Font loading — readable content and stable metrics
 
-`font-display: swap` **is** the pop — it paints a fallback face, then swaps to the webfont and reflows. Do not use it for any text the user watches load (titles, wordmarks, hero copy). The rule is absolute: title/display text must never flash a fallback or reflow.
+`font-display: swap` **is** the pop — it paints a fallback face, then swaps to the webfont and reflows. Do not use it for any text the user watches load (titles, wordmarks, hero copy). Balance visual stability with immediate readability; do not hide essential headings or controls while awaiting a font.
 
-- **Gate visibility on the real font.** Synchronously in `<head>`, add a `fonts-pending` class to `<html>` that holds the display-font text at `opacity: 0`. On `document.fonts.ready` — kick it with `document.fonts.load('<weight> 1em "Family"')` for each critical face — swap to `fonts-ready` and fade the text in (~0.5s). Always include a safety timeout (~2.5s) that reveals regardless, so a font failure can never leave text permanently hidden.
+- **For nonessential decorative display text only, optionally gate visibility on the real font.** Synchronously in `<head>`, add a `fonts-pending` class to `<html>` that holds the display-font text at `opacity: 0`. On `document.fonts.ready` — kick it with `document.fonts.load('<weight> 1em "Family"')` for each critical face — swap to `fonts-ready` and fade the text in (~0.5s). Always include a safety timeout (~2.5s) that reveals regardless, so a font failure can never leave text permanently hidden.
 - Pair this with preload + WOFF2 (above) so the hidden window is a few hundred ms, not seconds — the fade reads as intentional, not as a stall.
 - For body text where a sub-perceptual swap is tolerable, at minimum kill the reflow: define a fallback `@font-face` (or `font-family` fallback) tuned with `size-adjust` / `ascent-override` / `descent-override` so the fallback occupies the same metrics as the webfont and the swap shifts nothing.
 
 Worked example — an AR product-research page: a head script toggles `fonts-pending → fonts-ready` (titles fade in on `fonts.ready`, 2.5s fallback), preloads the four above-the-fold WOFF2 weights, and self-hosts the brand face so there's no Google round-trip.
 
-## Slow-loading content — never show the ugly intermediate state
-
-Anything that *could* take a noticeable moment to be ready — fonts (above), large images, video, `<canvas>` scen
+## Slow-loading content — never s

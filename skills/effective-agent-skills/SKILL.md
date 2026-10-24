@@ -31,7 +31,7 @@ my-skill/
 └── assets/           # Optional: templates, fonts, static files
 ```
 
-Skills are an open standard (agentskills.io), originally created by Anthropic and adopted by OpenAI Codex, Cursor, Gemini CLI, Microsoft Agent Framework, Google ADK, and 40+ other agent products. A skill written once works across all compatible agents.
+Skills are an open standard (agentskills.io), originally created by Anthropic and adopted by OpenAI Codex, Cursor, Gemini CLI, Microsoft Agent Framework, Google ADK, and 40+ other agent products. The format is portable, but discovery paths, tool names, invocation controls and permissions require testing in each target host.
 
 ---
 
@@ -67,10 +67,10 @@ Only `name` + `description` from frontmatter are injected into the system prompt
 **Level 2 — Activation (<5,000 tokens, loaded on match):**
 When the user's request matches a skill's description, the agent reads the full `SKILL.md` body into context.
 
-**Level 3 — Execution (unbounded, on demand):**
+**Level 3 — Execution (bounded by host resources, on demand):**
 The agent reads referenced files (`references/foo.md`) or runs scripts (`scripts/validate.py`) only as needed. Scripts can execute without their source being loaded into context at all.
 
-This is why bundled content has no practical limit. Files don't consume tokens until accessed.
+Bundled files avoid eager token loading, but size, trust, runtime and packaging limits still apply. Read/review scripts before granting execution; loading on demand is not a security guarantee.
 
 ---
 
@@ -98,12 +98,12 @@ description: What this skill does AND when to use it. Include trigger phrases th
 ```
 
 Frontmatter constraints:
-- `name` is lowercase, hyphens only, 1–64 chars, **exactly matches the parent folder name**
+- `name` uses lowercase letters, digits and hyphens, 1–64 chars, matches its parent directory, and has no leading/trailing or consecutive hyphens
 - Avoid `<` and `>` in frontmatter (they can inject into the system prompt)
 - Invalid YAML silently prevents loading
 
 Optional standard fields:
-- `disable-model-invocation: true` — stops the agent from auto-loading the skill based on the conversation; it can only be triggered manually (e.g. `/skill-name`). Now a standard Agent Skills spec field, so it works across spec-compliant clients (Claude Code, Copilot, etc.), not just Claude. Caveat: it prevents auto-invocation, but some clients (Claude Code, open bug) still inject the `description` into context, so it doesn't always save the discovery-level tokens. Use for manual-only utilities you don't want firing automatically.
+- Invocation controls such as `disable-model-invocation` are host-specific extensions, not guaranteed core-spec fields. Check the target host’s current documentation and actual discovery behavior before relying on manual-only activation.
 
 ---
 
@@ -123,4 +123,5 @@ The skill is a thin wrapper over a deterministic CLI or script. Logic lives in c
 The skill encodes a methodology the agent should follow. Pure prompt engineering — no scripts needed.
 
 - **Adds**: structured workflows (TDD, code review, design alignment, debugging loops)
-- **Reliability via**: exp
+- **Reliability via**: explicit procedure, checklists, validation loops
+- **Use whe

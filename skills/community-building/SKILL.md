@@ -186,7 +186,7 @@ Drop a message in #help or mention @moderators
 | Role | How to Get | Permissions |
 |------|------------|-------------|
 | **New Member** | Auto on join | Limited channels |
-| **Member** | Verify or time-based | Full access |
+| **Member** | Verify or time-based | Intended member channels only; no moderation/admin rights |
 | **Contributor** | PR merged, active helper | Badge, special channel |
 | **Moderator** | Invited | Moderation powers |
 | **Admin** | Core team | Full access |
@@ -202,5 +202,4 @@ Schedule regular engagement:
 | Day | Prompt Type | Example |
 |-----|-------------|---------|
 | Monday | This week's goals | "What are you working on this week?" |
-| Wednesday | Technical question | "Controversial: Tabs or spaces?" |
-| Friday | Show & Tell | "Share wh
+| Wednesday | Technical question | "Controversial: Tabs or

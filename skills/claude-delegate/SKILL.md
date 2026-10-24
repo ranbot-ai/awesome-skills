@@ -1,9 +1,9 @@
 ---
 name: claude-delegate
 description: Delegate coding tasks to a separate Claude Code CLI process or Claude session only when the user explicitly requests it, while the orchestrator retains review and landing responsibility. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [node, mcp, claude, ai, agent, template, rag, cro]
+tags: [node, mcp, claude, ai, agent, template, document, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/claude-delegate
 ---
 
@@ -32,11 +32,9 @@ explicitly asks for delegation to another Claude Code process or session.
 ## Prerequisites
 
 1. `claude --version` succeeds.
-2. `claude auth status` reports an authenticated session. On macOS the live credentials sit in the
-   login Keychain; when the orchestrator's own sandbox blocks Keychain access (Codex's sandbox
-   does), `claude` falls back to a possibly stale credentials file and reports `loggedIn: false`
-   even though the login is valid. Re-run the check — and the dispatch itself — with that sandbox
-   escalated or outside it before concluding the CLI is unauthenticated.
+2. `claude auth status` reports an authenticated session. If the orchestrator cannot access
+   the credential store, report that boundary and use an approved isolated environment;
+   do not automatically disable or escalate its sandbox to retrieve credentials.
 3. The target repository is the directory passed with `--cd`.
 4. On Linux/WSL2, Claude's sandbox dependencies are installed. The normal relay profile is
    configured to fail when the sandbox is unavailable instead of silently running shell commands
@@ -57,6 +55,10 @@ commands into the brief. Tell the implementer not to commit. Keep one task per b
 Template and details: [references/writing-the-brief.md](references/writing-the-brief.md).
 
 ### 2. Dispatch
+
+This distribution is documentation-only: `scripts/relay.mjs` is absent. The commands below
+require a separately obtained, pinned and reviewed upstream runtime. Do not claim these
+profiles are enforced by the installed documentation or run a missing local path.
 
 ```bash
 node "<skill-dir>/scripts/relay.mjs" --brief brief.txt --cd /path/to/repo
@@ -114,5 +116,4 @@ Review a resumed run exactly like the first run.
 
 The normal profile is deliberately explicit:
 
-- `acceptEdits` permission mode.
-- Built-in tools restricted t
+-

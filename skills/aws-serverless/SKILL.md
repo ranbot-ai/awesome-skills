@@ -1,9 +1,9 @@
 ---
 name: aws-serverless
 description: Specialized skill for building production-ready serverless applications on AWS. Covers Lambda functions, API Gateway, DynamoDB, SQS/SNS event-driven patterns, SAM/CDK deployment, and cold start optimi
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [javascript, api, ai, aws]
+tags: [javascript, api, ai, template, document, aws, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-serverless
 ---
 
@@ -17,6 +17,10 @@ SAM/CDK deployment, and cold start optimization.
 ## Detailed Guide
 
 Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.
+
+## Scope and validation
+
+Before deployment confirm account/region, IAM scope, resource changes, data retention and budget. Review the synthesized template/change set and verify in a scoped development environment. Bundled material is documentation only; helper handlers and deployment files shown in snippets are not present or runtime-tested here. Secrets need approved managed storage and least-privilege roles; do not paste credentials into logs.
 
 ## Monitor memory usage
 

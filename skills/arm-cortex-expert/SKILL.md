@@ -90,7 +90,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/arm-
 
 #### Implementation Pattern
 
-**C/C++:** Wrap register access with `__DMB()` (data memory barrier) before/after reads, `__DSB()` (data synchronization barrier) after writes. Create helper functions: `mmio_read()`, `mmio_write()`, `mmio_modify()`.
+**C/C++:** Use volatile device accesses and the barriers required by the chip reference manual and operation. Barriers do not replace cache maintenance; do not blanket-wrap every MMIO access. Create helper functions: `mmio_read()`, `mmio_write()`, `mmio_modify()`.
 
 **Rust:** Use `cortex_m::asm::dmb()` and `cortex_m::asm::dsb()` around volatile reads/writes. Create macros like `safe_read_reg!()`, `safe_write_reg!()`, `safe_modify_reg!()` that wrap HAL register access.
 
@@ -108,12 +108,11 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/arm-
 
 **Memory Placement Strategies (Best to Worst):**
 
-1. **DTCM/SRAM** (Non-cacheable, fastest CPU access)
-   - C++: `__attribute__((section(".dtcm.bss"))) __attribute__((aligned(32))) static uint8_t buffer[512];`
-   - Rust: `#[link_section = ".dtcm"] #[repr(C, align(32))] static mut BUFFER: [u8; 512] = [0; 512];`
+1. **DMA-accessible non-cacheable SRAM** (check the specific bus matrix; DTCM is often inaccessible to peripheral DMA)
+   - Use a linker section verified accessible to the selected DMA controller.
+   - Use an aligned buffer type with ownership/synchronization appropriate to the HAL.
 
 2. **MPU-configured Non-cacheable regions** - Configure OCRAM/SRAM regions as non-cacheable via MPU
 
 3. **Cache Maintenance** (Last resort - slowest)
-   - Before DMA reads from memory: `arm_dcache_flush_delete()` or `cortex_m::cache::clean_dcache_by_range()`
-   - After DMA 
+   - Before DMA reads from memory: `arm_dcache_flush_d

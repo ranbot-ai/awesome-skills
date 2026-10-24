@@ -22,15 +22,15 @@ Activate this skill when:
 
 ## Core Concepts
 
-Context compression trades token savings against information loss. Three production-ready approaches exist:
+Context compression trades token savings against information loss. Three approaches to evaluate for the current workload are:
 
-1. **Anchored Iterative Summarization**: Maintain structured, persistent summaries with explicit sections for session intent, file modifications, decisions, and next steps. When compression triggers, summarize only the newly-truncated span and merge with the existing summary. Structure forces preservation by dedicating sections to specific information types.
+1. **Anchored Iterative Summarization**: Maintain structured, persistent summaries with explicit sections for session intent, file modifications, decisions, and next steps. When compression triggers, summarize only the newly-truncated span and merge with the existing summary. Structure encourages preservation by dedicating sections to specific information types; omissions still require explicit checks.
 
-2. **Opaque Compression**: Produce compressed representations optimized for reconstruction fidelity. Achieves highest compression ratios (99%+) but sacrifices interpretability. Cannot verify what was preserved.
+2. **Opaque Compression**: Produce compressed representations optimized for reconstruction fidelity. May reduce text size substantially but sacrifices interpretability; no general reconstruction or compression ratio guarantee is established here.
 
 3. **Regenerative Full Summary**: Generate detailed structured summaries on each compression. Produces readable output but may lose details across repeated compression cycles due to full regeneration rather than incremental merging.
 
-The critical insight: structure forces preservation. Dedicated sections act as checklists that the summarizer must populate, preventing silent information drift.
+The critical insight: structure helps check preservation. Dedicated sections act as checklists that the summarizer must populate, helping detect information drift.
 
 ## Detailed Topics
 
@@ -42,7 +42,7 @@ The right metric is tokens-per-task: total tokens consumed from task start to co
 
 ### The Artifact Trail Problem
 
-Artifact trail integrity is the weakest dimension across all compression methods, scoring 2.2-2.5 out of 5.0 in evaluations. Even structured summarization with explicit file sections struggles to maintain complete file tracking across long sessions.
+Artifact tracking is a useful evaluation dimension; retain an explicit file inventory rather than assuming summaries preserve it. Even structured summarization with explicit file sections struggles to maintain complete file tracking across long sessions.
 
 Coding agents need to know:
 - Which files were created
@@ -79,7 +79,7 @@ Effective structured summaries include explicit sections:
 3. Update documentation
 ```
 
-This structure prevents silent loss of file paths or decisions because each section must be explicitly addressed.
+This structure helps detect loss of file paths or decisions; compare it with original evidence before consequential work.
 
 ### Compression Trigger Strategies
 
@@ -102,6 +102,4 @@ Probe-based evaluation directly measures functional quality by asking questions 
 
 | Probe Type | What It Tests | Example Question |
 |------------|---------------|------------------|
-| Recall | Factual retention | "What was the original error message?" |
-| Artifact | File tracking | "Which files have we modified?" |
-| Continuation | Task planning | 
+| Recall | Factual retention | "What was the original 

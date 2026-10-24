@@ -45,10 +45,10 @@ Do NOT use this skill when:
    - If an incoming price payload has $\text{version\_timestamp} \le \text{last\_applied\_version}$, the ESL middleware MUST discard the payload to eliminate race condition reversions.
 
 4. **RF Gateway Rate-Limiting & Battery Longevity Budget**:
-   - Each physical e-paper display refresh costs between $12\ \mu\text{Ah}$ and $25\ \mu\text{Ah}$.
+   - Illustrative assumptions only: each physical e-paper display refresh may cost between $12\ \mu\text{Ah}$ and $25\ \mu\text{Ah}$.
    - A dual-CR2450 battery pack provides $1,200\text{ mAh}$ nominal capacity ($960\text{ mAh}$ usable considering passivation and low-temperature shelf environments).
-   - **The 3-Update Daily Rule**: Limiting tag updates to $\le 3$ refreshes per day guarantees a $5.5\text{--}7\text{ year}$ operational lifespan.
-   - **Base Station Queue Throttling**: Gateways operate over shared Sub-GHz (868/915 MHz) or proprietary 2.4 GHz RF channels. Batch transmissions must not exceed 150 tag updates per gateway per minute to prevent RF collision retries from draining batteries.
+   - **Illustrative refresh budget**: A three-refresh daily budget is a planning assumption, not a lifespan guarantee; use measured vendor-specific standby, retry and refresh consumption, temperature and battery configuration.
+   - **Base Station Queue Throttling**: Gateways operate over shared Sub-GHz (868/915 MHz) or proprietary 2.4 GHz RF channels. Use the measured vendor gateway capacity; the examples assume a configurable 150 tag updates per gateway per minute to prevent RF collision retries from draining batteries.
 
 5. **Read-Only Audit Mode by Default**:
    - Diagnostic and reconciliation tasks MUST execute in read-only audit mode.
@@ -61,5 +61,4 @@ Do NOT use this skill when:
 | :--- | :--- | :--- |
 | **Scheduled Full Catalog Floods** | Blasting 60,000 tags every night at midnight. | Stream strict deltas using SHA256 content watermarks. |
 | **Ghost Price Blindness** | Assuming API `200 OK` means the customer sees the new price. | Track gateway ACK packet receipts (`status: ACK_CONFIRMED`). |
-| **Non-Idempotent Retries** | Retrying failed HTTP calls without idempotency keys. | Attach `UUIDv5(sku, store_id, price_timestamp)` to all mutations. |
-| **Timezone Ambiguity** | Pushing promo prices without UTC/local time
+| **Non-Idempotent Retries** | Retrying failed HTTP calls without ide

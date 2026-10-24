@@ -14,6 +14,8 @@ Expert patterns for Azure Functions development including isolated worker model,
 Durable Functions orchestration, cold start optimization, and production patterns.
 Covers .NET, Python, and Node.js programming models.
 
+Modified: output-binding and operational semantics review. Cloud provisioning/deployment and billable tests require the intended account, budget and authorization. Function keys are shared secrets, not per-user/tenant authorization; protect status/control URLs and do not log keys or payloads. Durable orchestrators must be deterministic, with I/O in activities.
+
 ## Detailed Guide
 
 Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.

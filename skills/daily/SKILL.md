@@ -15,7 +15,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dail
 
 ## Capabilities
 
-Pipecat enables agents to build production-ready voice and multimodal AI applications with real-time processing. Agents can orchestrate complex AI service pipelines that handle audio, video, and text simultaneously while maintaining ultra-low latency (500-800ms round-trip). The framework abstracts away the complexity of coordinating multiple AI services, network transports, and audio processing, allowing agents to focus on application logic.
+Pipecat enables agents to build production-ready voice and multimodal AI applications with real-time processing. Agents can orchestrate complex AI service pipelines that handle audio, video, and text simultaneously while maintaining streaming latency that must be measured for the actual STT/model/TTS/network pipeline. The framework abstracts away the complexity of coordinating multiple AI services, network transports, and audio processing, allowing agents to focus on application logic.
 
 Key capabilities include:
 
@@ -26,6 +26,8 @@ Key capabilities include:
 - Automatic conversation context management with optional summarization
 - Multiple transport options (WebRTC, WebSocket, Daily, Twilio, Telnyx, etc.)
 - Production deployment across cloud platforms with built-in scaling
+
+This is primarily a Pipecat architecture reference, not the Daily API specification. Snippets require the pinned Pipecat imports, provider clients, transport configuration and lifecycle code; they are fragments, not a runnable bot. Service/SDK counts and listed integrations are examples whose availability depends on version. Verify recording/transcription consent, data residency, secret handling and provider costs before sending live audio/video. Tool calls still require server-side schema validation, authenticated resource scope and authorization for effects; spoken or generated text alone cannot authorize arbitrary API actions.
 
 ## Skills
 
@@ -99,18 +101,4 @@ async def fetch_weather(params: FunctionCallParams):
 llm.register_function("get_current_weather", fetch_weather)
 ```
 
-Function results are automatically stored in conversation context, enabling multi-step interactions and real-time data access.
-
-### Context Management & Conversation History
-
-Agents can manage conversation context automatically or manually:
-
-- Automatic context aggregation from transcriptions and TTS output
-- Manual context manipulation via `LLMMessagesAppendFrame` and `LLMMessagesUpdateFrame`
-- Automatic context summarization for long conversations to reduce token usage
-- Tool definitions and function call results stored in context
-- Word-level precision for context accuracy during interruptions
-
-### Voice Activity Detection & Turn Management
-
-Agents can configure sophisticated turn-taking strategies
+Function results are autom

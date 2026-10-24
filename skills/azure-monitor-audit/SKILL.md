@@ -20,6 +20,8 @@ Audit Azure activity with Monitor, Activity Logs, and Log Analytics for complian
 - Setting up alerting on administrative and security events
 - Building compliance dashboards and automated evidence collection
 
+These are paid provisioning/configuration examples requiring authorized Azure access, not privilege-free checks. Confirm tenant/subscription, data residency, cost/retention and alert recipients before writes. Inspect supported categories for each resource and verify actual ingestion after setup; Entra SigninLogs/AuditLogs require their own connector/licensing, and SQL diagnostics do not enable SQL auditing by themselves. Never place real PagerDuty integration keys in committed command URLs.
+
 ## Create Log Analytics Workspace
 
 ```bash
@@ -42,12 +44,10 @@ WORKSPACE_ID=$(az monitor log-analytics workspace show \
   --workspace-name audit-workspace \
   --query id -o tsv)
 
-# Enable audit solutions
-az monitor log-analytics solution create \
-  --resource-group rg-audit \
-  --solution-type SecurityCenterFree \
-  --workspace audit-workspace
+# Verify required data connectors separately; workspace creation does not ingest logs.
 ```
+
+Diagnostic-setting retentionPolicy no longer enforces storage retention (retired September30,2025); use reviewed Azure Storage lifecycle policies and separately configure Log Analytics table/workspace retention. Retention is not immutability and diagnostic settings do not establish regulatory compliance.
 
 ## Configure Diagnostic Settings for Subscription Activity Log
 
@@ -83,8 +83,8 @@ az monitor diagnostic-settings subscription create \
   --location global \
   --storage-account /subscriptions/{sub}/resourceGroups/rg-audit/providers/Microsoft.Storage/storageAccounts/auditlogsarchive \
   --logs '[
-    {"category": "Administrative", "enabled": true, "retentionPolicy": {"enabled": true, "days": 2555}},
-    {"category": "Security", "enabled": true, "retentionPolicy": {"enabled": true, "days": 2555}}
+    {"category": "Administrative", "enabled": true},
+    {"category": "Security", "enabled": true}
   ]'
 ```
 
@@ -97,7 +97,7 @@ az monitor diagnostic-settings create \
   --resource /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.KeyVault/vaults/{vault} \
   --workspace "$WORKSPACE_ID" \
   --logs '[
-    {"category": "AuditEvent", "enabled": true, "retentionPolicy": {"enabled": true, "days": 365}},
+    {"category": "AuditEvent", "enabled": true},
     {"category": "AzurePolicyEvaluationDetails", "enabled": true}
   ]' \
   --metrics '[
@@ -127,30 +127,9 @@ az monitor diagnostic-settings create \
     {"category": "AppServicePlatformLogs", "enabled": true}
   ]'
 
-# Enable diagnostics for Network Security Groups
+# NSG diagnostic events below are not flow logs. New deployments should use
+# Network Watcher VNet flow logs; new NSG flow logs cannot be created.
+# Inspect supported diagnostic categories before enabling these event categories.
 az monitor diagnostic-settings create \
-  --name nsg-flow-logs \
-  --resource /subscriptions/{sub}/resourceGroups/{rg}/providers/Microsoft.Network/networkSecurityGroups/{nsg} \
-  --workspace "$WORKSPACE_ID" \
-  --logs '[
-    {"category": "NetworkSecurityGroupEvent", "enabled": true},
-    {"category": "NetworkSecurityGroupRuleCounter", "enabled": true}
-  ]'
-```
-
-## Azure Policy for Diagnostic Settings Enforcement
-
-```bash
-# Assign built-in policy to require diagnostic settings on Key Vaults
-az policy assignment create \
-  --name require-kv-diagnostics \
-  --policy "951af2fa-529b-416e-ab6e-066fd85ac459" \
-  --scope /subscriptions/{sub} \
-  --params '{
-    "logAnalytics": {"value": "'$WORKSPACE_ID'"},
-    "effect": {"value": "DeployIfNotExists"}
-  }'
-
-# Assign policy to require diagnostic settings on SQL databases
-az policy assignment create \
-  --name requ
+  --name nsg-diagnostic-events \
+  --resource /subscriptions/{sub}/resourceGr

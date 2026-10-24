@@ -55,13 +55,16 @@ spec:
   mtls:
     mode: STRICT
 ---
-# Namespace-level override if needed for gradual rollout
+# Workload-level override; portLevelMtls requires a workload selector.
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:
   name: ai-inference-mtls
   namespace: ai-inference
 spec:
+  selector:
+    matchLabels:
+      app: model-server
   mtls:
     mode: STRICT
   portLevelMtls:
@@ -194,8 +197,3 @@ spec:
 ```yaml
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
-metadata:
-  name: model-server
-  namespace: ai-inference
-spec:
-  h

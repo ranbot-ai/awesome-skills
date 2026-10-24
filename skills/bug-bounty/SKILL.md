@@ -3,7 +3,7 @@ name: bug-bounty
 description: Complete bug bounty workflow 
 category: Security & Systems
 source: antigravity
-tags: [python, javascript, node, api, claude, ai, llm, automation, workflow, template]
+tags: [claude, ai, workflow, document, security, vulnerability, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bug-bounty
 ---
 
@@ -21,70 +21,75 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bug-
 >
 > Without that confirmation, remain read-only and provide defensive guidance only. Prefer a sandbox, disposable VM, or controlled lab.
 
-# Bug Bounty Master Workflow
+# Bug bounty review workflow
 
-Full pipeline: Recon -> Learn -> Hunt -> Validate -> Report. One skill for everything.
+## When to Use
 
-## THE ONLY QUESTION THAT MATTERS
+Use for an explicitly authorized bug-bounty engagement, scoped source review or
+lab reproduction. This skill organizes evidence and reporting; it does not grant
+permission to test every asset owned by an organization or any discovered host.
+The mandatory confirmation gate above applies to each active command.
 
-> **"Can an attacker do this RIGHT NOW against a real user who has taken NO unusual actions -- and does it cause real harm (stolen money, leaked PII, account takeover, code execution)?"**
->
-> If the answer is NO -- **STOP. Do not write. Do not explore further. Move on.**
+## Scope and plan
 
-### Theoretical Bug = Wasted Time. Kill These Immediately:
+Record the program policy URL and retrieval time, exact allowed assets/accounts,
+allowed techniques, exclusions, rate/concurrency limits, test window, data-handling
+rules and stop conditions. Ownership is not authorization. Resolve ambiguous scope
+with the program before testing. Do not pivot into third-party services, metadata,
+CI runners or unrelated accounts because a vulnerability appears to permit it.
 
-| Pattern | Kill Reason |
-|---|---|
-| "Could theoretically allow..." | Not exploitable = not a bug |
-| "An attacker with X, Y, Z conditions could..." | Too many preconditions |
-| "Wrong implementation but no practical impact" | Wrong but harmless = not a bug |
-| Dead code with a bug in it | Not reachable = not a bug |
-| Source maps without secrets | No impact |
-| SSRF with DNS-only callback | Need data exfil or internal access |
-| Open redirect alone | Need ATO or OAuth chain |
-| "Could be used in a chain if..." | Build the chain first, THEN report |
+Begin with already authorized local source, architecture and documented public
+material. Check authentication, object/tenant authorization, input handling,
+workflow state, cache boundaries and dependency provenance. Treat scanner output,
+fingerprints, secret-pattern matches and CVE-version matches as leads.
 
-**You must demonstrate actual harm. "Could" is not a bug. Prove it works or drop it.**
+## Validate with minimum impact
 
----
+Use synthetic records and two accounts controlled by the engagement. Request
+approval for an exact bounded test with expected effect and rollback. Demonstrate
+the smallest effect sufficient to establish the security boundary failure; stop
+when evidence is adequate. Never require stolen money, real-user PII, production
+credential use, persistence or a destructive exploit as a prerequisite for reporting.
+A source-proven issue can be reported with its runtime uncertainty clearly stated.
 
-## CRITICAL RULES
+Conditions, authentication and user interaction do not invalidate a vulnerability.
+Separate confirmed behavior, inferred impact and untested hypotheses. Do not apply
+an “always rejected” list across programs; eligibility and payout are program
+policy, while risk and remediation may remain relevant even without a bounty.
+Timeboxes guide prioritization, not proof that a host is safe after five minutes.
 
-1. **READ FULL SCOPE FIRST** -- verify every asset/domain is owned by the target org
-2. **NO THEORETICAL BUGS** -- "Can an attacker steal funds, leak PII, takeover account, or execute code RIGHT NOW?" If no, STOP.
-3. **KILL WEAK FINDINGS FAST** -- run the 7-Question Gate BEFORE writing any report
-4. **Validate before writing** -- check CHANGELOG, design docs, deployment scripts FIRST
-5. **One bug class at a time** -- go deep, don't spray
-6. **Verify data isn't already public** -- check web UI in incognito before reporting API "leaks"
-7. **5-MINUTE RULE** -- if a target shows nothing after 5 min probing (all 401/403/404), MOVE ON
-8. **IMPACT-FIRST HUNTING** -- ask "what's the worst thing if auth was broken?" If nothing valuable, skip target
-9. **CREDENTIAL LEAKS need exploitation proof** -- finding keys isn't enough, must PROVE what they access
-10. **STOP SHALLOW RECON SPIRALS** -- don't probe 403s, don't grep for analytics keys, don't check staging domains that lead nowhere
-11. **BUSINESS IMPACT over vuln class** -- severity depends on CONTEXT, not just vuln type
-12. **UNDERSTAND THE TARGET DEEPLY** -- before hunting, learn the app like a real user
-13. **DON'T OVER-RELY ON AUTOMATION** -- automated scans hit WAFs, trigger rate limits, find the same bugs everyone else finds
-14. **HUNT LESS-SATURATED VULN CLASSES** -- XSS/SSRF/XXE have the most competition. Expand into: cache poisoning, Android/mobile vulns, business logic, race conditions, OAuth/OIDC chains, CI/CD pipeline attacks
-15. **ONE-HOUR RULE** -- stuck on one target for an hour with no progress? SWITCH CONTEXT
-16. **TWO-EYE APPROACH** -- combine systematic testing (checklist) with anomaly detection (watch for unexpected behavior)
-17. **T-SHAPED KNOWLEDGE** -- go DEEP in one area and BROAD across everything else
+## Example: static first step
 
-> **For the full hunting methodology** — 5-phase non-linear workflow, developer psychology framework, session discipline, tool routing by phase, and Wide/Deep route selection — see **`skills/bb-methodology/SKILL.md`**.
+```text
+Evidence record:
+- Scope: approved local checkout at full commit SHA
+- Observation: route reads object ID from user input
+- Expected boundary: caller must belong to the object's tenant
+- Current evidence: missing authorization in this code path
+- Untested: deployed reachability and compensating middleware
+- Proposed test: two controlled accounts and one synthetic object, pending approval
+```
 
----
+Store source/version, timestamps, redacted requests, role/tenant and expected vs
+actual result. Keep evidence private with restricted retention. Discovery of a
+credential requires immediate stop, redaction and owner notification through the
+approved channel, not testing the credential against production services.
 
-## A->B BUG SIGNAL METHOD (Cluster Hunting)
+## Report and handoff
 
-**When you find bug A, systematically hunt for B and C nearby.** This is one of the most powerful methodologies in bug bounty. Single bugs pay. Chains pay 3-10x more.
+Use [detailed evidence guidance](references/details.md). Include prerequisites,
+exact affected version/location, safe reproduction, evidence, bounded impact,
+remaining uncertainty and remediation. Calculate the full CVSS vector using the
+program's requested version; do not assign severity from vulnerability name alone.
+Return a draft unless submission/public disclosure is explicitly authorized.
 
-### Known A->B->C Chains
+## Limitations and provenance
 
-| Bug A (Signal) | Hunt for Bug B | Escalate to C |
-|----------------|---------------|---------------|
-| IDOR (read) | PUT/DELETE on same endpoint | Full account data manipulation |
-| SSRF (any) | Cloud metadata 169.254.169.254 | IAM credential exfil -> RCE |
-| XSS (stored) | Check if HttpOnly is set on session cookie | Session hijack -> ATO |
-| Open redirect | OAuth redirect_uri accepts your domain | Auth code theft -> ATO |
-| S3 bucket listing | Enumerate JS bundles | Grep for OAuth client_secret -> OAuth chain |
-| Rate limit bypass | OTP brute force | Account takeover |
-| GraphQL introspection | Missing field-level auth | Mass PII exfil |
-| Debug endpoint | Leaked environment variables | Cloud credential -> in
+This is a docs-only adaptation of
+[elementalsouls/Claude-BugHunter](https://github.com/elementalsouls/Claude-BugHunter),
+with declared upstream MIT attribution retained. No external tools, helper engine,
+slash command or engagement scaffold is bundled. Verify separately installed
+skills and prerequisites before routing to them. Do not fetch moving branches or
+install tools from historical snippets; a separately authorized installation must
+pin and inspect artifacts before activation. No historical payout, “top 1%”,
+zero-misfire or live-test certification is established by this local tree.

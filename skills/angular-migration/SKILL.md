@@ -3,7 +3,7 @@ name: angular-migration
 description: Master AngularJS to Angular migration, including hybrid apps, component conversion, dependency injection changes, and routing migration. 
 category: Document Processing
 source: antigravity
-tags: [javascript, typescript, react, api, ai, template, document]
+tags: [javascript, typescript, react, node, api, ai, template, document, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/angular-migration
 ---
 
@@ -74,6 +74,8 @@ Master AngularJS to Angular migration, including hybrid apps, component conversi
 - Gradually replace
 - **Best for:** Medium apps, distinct features
 
+These are partial migration examples, not a complete bootstrap: align AngularJS module names (`myAngularJSApp` versus `myApp`), register/declaratively import components and forms, configure HttpClient, and select compatible Angular/TypeScript/Node versions. The DI decorator fragments require a real NgModule class and imports. AngularJS `$http` resolves a response wrapper while HttpClient resolves its body; preserve this semantic difference. Test routing ownership and change detection before switching traffic.
+
 ## Hybrid App Setup
 
 ```typescript
@@ -121,8 +123,8 @@ angular.module('myApp').controller('UserController', function($scope, UserServic
   $scope.user = {};
 
   $scope.loadUser = function(id) {
-    UserService.getUser(id).then(function(user) {
-      $scope.user = user;
+    UserService.getUser(id).then(function(response) {
+      $scope.user = response.data;
     });
   };
 
@@ -146,33 +148,4 @@ import { UserService } from './user.service';
     </div>
   `
 })
-export class UserComponent implements OnInit {
-  user: any = {};
-
-  constructor(private userService: UserService) {}
-
-  ngOnInit() {
-    this.loadUser(1);
-  }
-
-  loadUser(id: number) {
-    this.userService.getUser(id).subscribe(user => {
-      this.user = user;
-    });
-  }
-
-  saveUser() {
-    this.userService.saveUser(this.user);
-  }
-}
-```
-
-### AngularJS Directive → Angular Component
-```javascript
-// Before: AngularJS directive
-angular.module('myApp').directive('userCard', function() {
-  return {
-    restrict: 'E',
-    scope: {
-      user: '=',
-      o
+export class UserComponent im

@@ -34,7 +34,7 @@ dotnet add package Azure.ResourceManager.ApiManagement
 dotnet add package Azure.Identity
 ```
 
-**Current Version**: v1.3.0
+**Version note**: examples are version-sensitive; resolve and pin a supported SDK package in the target project rather than treating v1.3.0 as current.
 
 ## Environment Variables
 
@@ -53,7 +53,7 @@ using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.ApiManagement;
 
-// Always use DefaultAzureCredential
+// Choose a deliberate credential chain; managed identity is preferable in hosted production
 var credential = new DefaultAzureCredential();
 var armClient = new ArmClient(credential);
 
@@ -152,7 +152,7 @@ var productData = new ApiManagementProductData
     IsSubscriptionRequired = true,
     IsApprovalRequired = false,
     SubscriptionsLimit = 1,
-    State = ApiManagementProductState.Published
+    State = ApiManagementProductState.NotPublished
 };
 
 var productCollection = service.GetApiManagementProducts();
@@ -172,8 +172,4 @@ await product.GetProductApis().CreateOrUpdateAsync(
 ### 4. Create a Subscription
 
 ```csharp
-var subscriptionData = new ApiManagementSubscriptionCreateOrUpdateContent
-{
-    DisplayName = "My Subscription",
-    Scope = $"/products/{product.Data.Name}",
-    State = ApiManagementSubs
+var s

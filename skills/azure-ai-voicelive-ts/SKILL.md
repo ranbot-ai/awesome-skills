@@ -20,7 +20,7 @@ npm install @azure/ai-voicelive @azure/identity
 npm install @types/node
 ```
 
-**Current Version**: 1.0.0-beta.3
+**Historical example baseline**: 1.0.0-beta.3. Pin and verify preview API compatibility before use.
 
 **Supported Environments**:
 - Node.js LTS versions (20+)
@@ -116,14 +116,14 @@ const subscription = session.subscribe({
     // Handle streaming text
     process.stdout.write(event.delta);
   },
-  onInputAudioTranscriptionCompleted: async (event, context) => {
+  onConversationItemInputAudioTranscriptionCompleted: async (event, context) => {
     console.log("User said:", event.transcript);
   },
 });
 
 // Send audio from microphone
 function sendAudioChunk(audioBuffer: ArrayBuffer) {
-  session.sendAudio(audioBuffer);
+  return session.sendAudio(audioBuffer);
 }
 ```
 
@@ -201,6 +201,4 @@ const subscription = session.subscribe({
   
   // Audio input events (VAD)
   onInputAudioBufferSpeechStarted: async (event, context) => {
-    console.log("Speech started at:", event.audioStartMs);
-  },
-  onInputAudioBufferSpeechSto
+    

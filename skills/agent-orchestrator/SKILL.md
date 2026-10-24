@@ -40,10 +40,14 @@ e orquestra multiplos skills para tarefas complexas.
 
 ---
 
-## Workflow Obrigatorio (Toda Solicitacao)
+## Workflow Para Descoberta Solicitada
 
 Execute estes passos apenas quando a tarefa pede esta ferramenta. Scores sao heuristicas locais, nao prova de seguranca, compatibilidade ou autorizacao. Um plano nao executa skills; delegacao, mensagens e publicacao exigem autorizacao do usuario.
 Os scripts localizam arquivos a partir da propria instalacao, mas os comandos abaixo pressupõem que o diretorio pai de `agent-orchestrator` seja o diretorio atual. De outro local, use o caminho absoluto do script.
+
+## Dependencia
+
+Use Python 3.10+ e instale `scripts/requirements.txt` em um ambiente virtual revisado; o parser requer PyYAML. Os comandos abaixo apenas inventariam metadados e produzem planos; nao executam skills.
 
 ## Passo 1: Auto-Discovery (Varredura)
 
@@ -106,7 +110,7 @@ ambiguo deve parar. O limite de profundidade do scanner torna o inventario parci
 O scanner procura SKILL.md em:
 1. `.claude/skills/*/` (skills registradas no Claude Code)
 2. `*/` (skills standalone no top-level)
-3. `*/*\` (skills em subpastas, ate profundidade 3)
+3. Subpastas ate a profundidade 3 (cobertura parcial)
 
 ## Metadata Por Skill
 
@@ -118,7 +122,4 @@ Cada entrada no registry contem:
 | description    | Descricao completa (triggers inclusos)             |
 | location       | Caminho absoluto do diretorio                      |
 | skill_md       | Caminho absoluto do SKILL.md                       |
-| registered     | Se esta em .claude/skills/ (true/false); nao prova carregamento pelo host            |
-| capabilities   | Tags de capacidade (auto-extraidas + explicitas)   |
-| triggers       | Keywords de ativacao extraidas da description      |
-| language       | Linguagem prin
+| registered     | Se esta em .claude/skills/ (true/false); nao prova

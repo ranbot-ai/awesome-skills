@@ -19,6 +19,10 @@ EAS Observe tracks startup, navigation, and custom-event performance from produc
 
 > **Source of truth:** https://docs.expo.dev/eas/observe/ — always consult the canonical docs when API details matter, especially get-started, configuration, integrations, and the metrics reference. EAS Observe is evolving; this skill's references are written to stay accurate but may lag the docs.
 
+## Authorization and privacy
+
+Confirm the existing EAS account/project, telemetry data policy and current plan before enabling collection, sending events or starting paid builds. Adding instrumentation can transmit routes, identifiers, error messages/stacks and request hosts. Do not collect secrets or unnecessary personal data; use synthetic test data, review route filtering before enabling integrations, and verify behavior on the installed SDK. Do not redirect telemetry to a custom endpoint without authorization. Preparing an integration does not authorize EAS project creation, dependency-wide repair, builds or feedback submission. Feedback commands download and execute a package and send data externally; use only when explicitly requested, with redacted content.
+
 ## Which reference to read
 
 The four reference files in `./references/` cover what people typically need this skill for:
@@ -44,7 +48,7 @@ The four reference files in `./references/` cover what people typically need thi
 
 ## Known gaps between the docs and the shipped code
 
-Verified against `eas-cli` 21.8.0 and `expo-observe` 57.0.9. Trust this skill's references over the docs on these points, but re-check with `--help` and the installed package before relying on them:
+Verified against `eas-cli` 21.8.0 and `expo-observe` 57.0.9. These are upstream snapshot observations, not a current verification; re-check with `--help` and the installed package before relying on them:
 
 - All six CLI commands are on the [Querying with EAS CLI](https://docs.expo.dev/eas/observe/eas-cli/) page. Older doc builds list only four and omit `observe:routes` and `observe:session`.
 - Navigation metric aliases are `nav_cold_ttr`, `nav_warm_ttr`, and `nav_tti`. There are no bare `cold_ttr` / `warm_ttr` aliases in the CLI.
@@ -52,22 +56,4 @@ Verified against `eas-cli` 21.8.0 and `expo-observe` 57.0.9. Trust this skill's 
 - `ObserveErrorBoundary`, `Observe.reportError`, and `configure({ errorHandlingEnabled })` are exported but undocumented. Observe still has no crash reporting; use Sentry or BugSnag for that.
 
 ## Submitting Feedback
-If you encounter errors, misleading or outdated information in this skill, report it so Expo can improve:
-```bash
-npx --yes submit-expo-feedback@latest --category skills --subject "eas-observe" "<actionable feedback>"
-```
-Only submit when you have something specific and actionable to report. Include as much relevant context as possible.
-If an AI agent repeatedly failed or the user had to take over an Expo task, load the expo-skill-feedback skill and follow its eval-candidate flow instead of reusing the command above.
-
-
-## Examples
-
-```text
-User: Apply this skill to my current task.
-Assistant: Follow the workflow in this skill, cite limitations, and ask before risky steps.
-```
-
-## Limitations
-
-- Imported upstream skill; verify credentials, permissions, and safety boundaries before execution.
-- Does not replace environment-specific validation, testing, or maintainer re
+If you encounter errors, misleading or outdated information in this skill, report it so Expo can i

@@ -70,7 +70,7 @@ body {
 .hud-warning {
   color: #ff3333;
   text-shadow: 0 0 10px rgba(255, 51, 51, 0.8);
-  animation: blink 1s step-end infinite;
+  /* Keep warning text visible; do not blink essential status. */
 }
 
 @keyframes blink { 50% { opacity: 0; } }
@@ -153,6 +153,6 @@ class _SciFiHUDScreenState extends State<SciFiHUDScreen> with SingleTickerProvid
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: co
+  void dispose() {
+    _ctrl.dispose();
+    super.dispose();

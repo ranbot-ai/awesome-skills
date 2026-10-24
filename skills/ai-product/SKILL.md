@@ -1,17 +1,16 @@
 ---
 name: ai-product
-description: Every product will be AI-powered. The question is whether you'll build it right or ship a demo that falls apart in production. 
+description: Design and evaluate LLM product features, retrieval, validated outputs, latency, and cost controls. 
 category: AI & Agents
 source: antigravity
-tags: [ai, llm, rag]
+tags: [ai, llm, design, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-product
 ---
 
 
 # AI Product Development
 
-Every product will be AI-powered. The question is whether you'll build it
-right or ship a demo that falls apart in production.
+Choose AI only when it improves the target user task against an evaluated baseline.
 
 This skill covers LLM integration patterns, RAG architecture, prompt
 engineering that scales, AI UX that users trust, and cost optimization

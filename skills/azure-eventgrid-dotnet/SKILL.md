@@ -7,13 +7,9 @@ tags: [api, ai, workflow, image, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-eventgrid-dotnet
 ---
 
-
 # Azure.Messaging.EventGrid (.NET)
-
 Client library for publishing events to Azure Event Grid topics, domains, and namespaces.
-
 ## Installation
-
 ```bash
 # For topics and domains (push delivery)
 dotnet add package Azure.Messaging.EventGrid
@@ -25,7 +21,7 @@ dotnet add package Azure.Messaging.EventGrid.Namespaces
 dotnet add package Microsoft.Azure.Messaging.EventGrid.CloudNativeCloudEvents
 ```
 
-**Current Version**: 4.28.0 (stable)
+**Historical example version**: 4.28.0; verify and pin compatible SDK/Functions packages.
 
 ## Environment Variables
 
@@ -189,6 +185,7 @@ await client.SendEventsAsync(events);
 
 ```csharp
 using System.Text.Json;
+using Azure.Core.Serialization;
 
 var serializerOptions = new JsonSerializerOptions
 {
@@ -212,7 +209,4 @@ await client.SendEventAsync(egEvent);
 
 ```csharp
 using Azure;
-using Azure.Messaging;
-using Azure.Messaging.EventGrid.Namespaces;
-
-var senderClient = new Event
+using Azure.Mes

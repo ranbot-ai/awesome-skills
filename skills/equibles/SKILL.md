@@ -26,6 +26,8 @@ The same data is available through a hosted MCP server and a JSON REST API. This
 
 ## Access and Authentication
 
+Confirm the current official API schema and plan before use; listed prices/limits and tool names are versioned guidance. Use an existing authorized connection; account setup is separate. Data is research evidence, not a trade recommendation. Cross-check material figures against the linked SEC filing, including amendments and units. Shell header expansion can expose credentials in process arguments: prefer the Python helper or a protected curl config, and never enable verbose tracing.
+
 ### MCP server (preferred when the client supports it)
 
 - Endpoint: `https://mcp.equibles.com/mcp` (Streamable HTTP), listed in the official MCP registry as `io.github.daniel3303/equibles`.
@@ -79,14 +81,4 @@ curl -s -H "Authorization: Bearer $EQUIBLES_API_KEY" \
 
 `statement` is `income`, `balance` or `cashflow`; `period` is `FY` or `Q1` to `Q4`. Fiscal years follow the company's own calendar (Microsoft's fiscal 2025 ended in June 2025), so state `periodEnd` with every figure.
 
-## Examples
-
-### Example 1: Open-market insider trades
-
-```bash
-curl -s -H "Authorization: Bearer $EQUIBLES_API_KEY" \
-  "https://api.equibles.com/v1/stocks/INTC/insider-transactions?startDate=2026-01-01&limit=100" \
-  | jq '[.data[] | select(.isOpenMarketTrade) | {transactionDate, insiderName, role, transactionType, shares, pricePerShare, value}]'
-```
-
-Filter on `isOpenMarketTrade`. `transactionType` also labels conversions, tax withholding and expirations as Buy or Sell, and those are n
+## 

@@ -127,7 +127,7 @@ struct TileView: View {
     }
 }
 ```
-- A `LazyHGrid` inside a horizontal `ScrollView` perfectly replicates the Windows Phone / Windows 8 start screen.
+- A `LazyHGrid` inside a horizontal `ScrollView` approximates the Windows Phone / Windows 8 start screen.
 - Absolutely NO corner radius.
 - The `isPressed` state triggering a `.scaleEffect(0.95)` replicates the physical "tilt" interaction of Metro tiles.
 
@@ -159,4 +159,4 @@ class TileDesignScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTile(String tit
+  Widget _buildTile(String title, Colo

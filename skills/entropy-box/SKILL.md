@@ -26,7 +26,7 @@ questions, deciding which questions need separate consultations, and synthesizin
 results. Do not send an underspecified ambition such as "build a general robot" as one
 query and treat the returned text as a complete solution.
 
-The current public surface reports more than 52,177 entity nodes, 7,913 task chains,
+The imported September 2026 snapshot reports more than 52,177 entity nodes, 7,913 task chains,
 66,714 dependency edges, 37,757 atomic capabilities or associated assets, and 2,511
 vertical topic libraries. These counts evolve; verify the live site before quoting
 them.
@@ -104,4 +104,4 @@ graph layers, or producing a capability landscape.
 | --- | --- |
 | Task-level "how": accomplish an embodied-AI task with given robots/sensors | **Consult** |
 | A concrete technical question or a deep study of a selected method | **Search** |
-| A known `CAP_...`, `AST_...`, topic ID, name, or alias | **Lookup*
+| A known `CAP_...`, `AST_...`, topic ID, name, or alias |

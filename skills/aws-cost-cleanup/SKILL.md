@@ -3,7 +3,7 @@ name: aws-cost-cleanup
 description: Automated cleanup of unused AWS resources to reduce costs 
 category: Document Processing
 source: antigravity
-tags: [python, api, ai, automation, workflow, document, aws, rag, cro]
+tags: [python, ai, automation, workflow, document, aws, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-cost-cleanup
 ---
 
@@ -88,7 +88,8 @@ done
 ### S3 Lifecycle Automation
 
 ```bash
-# Apply lifecycle policy to transition old objects to cheaper storage
+# Prepare a lifecycle proposal. This replaces bucket lifecycle configuration;
+# retrieve/merge existing rules and scope the prefix before any authorized apply.
 cat > lifecycle-policy.json <<EOF
 {
   "Rules": [
@@ -116,9 +117,7 @@ cat > lifecycle-policy.json <<EOF
 }
 EOF
 
-aws s3api put-bucket-lifecycle-configuration \
-  --bucket my-bucket \
-  --lifecycle-configuration file://lifecycle-policy.json
+# After explicit review only, apply the merged policy to the confirmed bucket.
 ```
 
 ## Cost Impact Calculator
@@ -138,7 +137,7 @@ volumes = ec2.describe_volumes(
 )
 
 total_size = sum(v['Size'] for v in volumes['Volumes'])
-monthly_cost = total_size * 0.10  # $0.10/GB-month for gp3
+monthly_cost = total_size * 0.10  # illustrative input, not a verified gp3 rate
 
 print(f"Unattached EBS Volumes: {len(volumes['Volumes'])}")
 print(f"Total Size: {total_size} GB")
@@ -165,7 +164,7 @@ from datetime import datetime, timedelta
 def lambda_handler(event, context):
     ec2 = boto3.client('ec2')
     
-    # Delete unattached volumes older than 7 days
+    # Discover candidates only; creation age is not detachment age.
     volumes = ec2.describe_volumes(
         Filters=[{'Name': 'status', 'Values': ['available']}]
     )
@@ -177,15 +176,13 @@ def lambda_handler(event, context):
         create_time = vol['CreateTime'].replace(tzinfo=None)
         if create_time < cutoff:
             try:
-                ec2.delete_volume(VolumeId=vol['VolumeId'])
-                deleted += 1
-                print(f"Deleted volume: {vol['VolumeId']}")
+                print(f"Candidate only (not deleted): {vol['VolumeId']}")
             except Exception as e:
                 print(f"Error deleting {vol['VolumeId']}: {e}")
     
     return {
         'statusCode': 200,
-        'body': f'Deleted {deleted} volumes'
+        'body': 'Dry run only; no volumes deleted'
     }
 ```
 
@@ -215,4 +212,4 @@ def lambda_handler(event, context):
 
 - [ ] Run in dry-run mode first
 - [ ] Verify resources have no dependencies
-- [ ] Check re
+- 

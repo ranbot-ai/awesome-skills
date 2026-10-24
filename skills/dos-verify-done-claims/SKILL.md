@@ -49,8 +49,7 @@ python -m pip install 'dos-kernel==<reviewed-version>'  # provides the `dos` CLI
 
 ### Step 2: Audit the latest commit's claim vs its diff
 
-A commit subject is forgeable (whoever wrote the message authored it); the files
-it touched are not (git did). `dos commit-audit` grades the subject against the
+Commit subjects, registry rows and file contents can all be authored by the same agent. Git binds bytes and ancestry; it does not certify their truth. `dos commit-audit` grades the subject against the
 actual diff:
 
 ```bash
@@ -84,8 +83,7 @@ Grade `shipped: true` by the `source`, because git fallback grades itself by
 **forgeability** — and forgeable evidence is exactly what this skill exists to
 distrust:
 
-- `registry` or `grep-artifact` — **non-forgeable** (a registry row, or an
-  artefact/diff rung). This closes the claim.
+- `registry` or `grep-artifact` — **artifact-backed, still authored** (a registry row or artifact/diff match). Inspect the artifact and its provenance; presence alone does not close a behavioral claim.
 - `grep-subject` (or bare `grep`) — **forgeable**: a commit *subject* or body
   carried the phase token, which an agent can write without doing the work (even
   on an empty commit). Treat this as *shipped-per-the-subject*, not confirmed —
@@ -114,13 +112,7 @@ dos commit-audit --workspace . HEAD --json | jq -r '.[0].verdict'
 
 ```bash
 dos verify --workspace . AUTH AUTH2 --json --no-ci
-# shipped: true, source: registry|grep-artifact -> non-forgeable; safe to close
+# shipped: true, source: registry|grep-artifact -> artifact-backed; inspect actual behavior and required tests
 # shipped: true, source: grep-subject|grep       -> forgeable subject/body match;
 #   shipped-per-the-subject only -> corroborate with commit-audit before closing
-# shipped: false, source: none -> no evidence; keep the ticket open
-```
-
-## Best Practices
-
-- ✅ Run `dos commit-audit HEAD` immediately after every agent commit.
-- ✅ Treat `source: none` / `CLAIM_
+# shipped: false, source: none -> no evidenc

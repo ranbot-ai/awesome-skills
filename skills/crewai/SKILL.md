@@ -1,17 +1,16 @@
 ---
 name: crewai
-description: Expert in CrewAI - the leading role-based multi-agent framework used by 60% of Fortune 500 companies. 
+description: Design role-based agents, tasks, crews, and flows with CrewAI. 
 category: AI & Agents
 source: antigravity
-tags: [python, api, ai, agent, llm, gpt, workflow, design, langgraph, crewai]
+tags: [python, api, ai, agent, llm, gpt, workflow, design, document, langgraph]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/crewai
 ---
 
 
 # CrewAI
 
-Expert in CrewAI - the leading role-based multi-agent framework used by 60% of Fortune 500
-companies. Covers agent design with roles and goals, task definition, crew orchestration,
+Design role-based agent workflows with CrewAI. Covers agent design with roles and goals, task definition, crew orchestration,
 process types (sequential, hierarchical, parallel), memory systems, and flows for complex
 workflows. Essential for building collaborative AI agent teams.
 
@@ -77,6 +76,8 @@ hierarchical processes.
 - Enterprise deployments
 
 ## Patterns
+
+These fragments are architecture sketches, not a complete executable project: several tasks, storage classes, model imports and helper methods must be defined. Pin the framework and use its matching API documentation before compiling. Delegate/run crews only within authorized scope and budget; tool/model calls and embedding memory may send data to external providers. Limit tool privileges and retries, keep secrets out of verbose logs, and treat agent/retrieval output as untrusted data. A local `published` status below is not proof of actual publication.
 
 ### Basic Crew with YAML Config
 
@@ -194,25 +195,4 @@ researcher = Agent(
 
 analyst = Agent(
     role="Data Analyst",
-    goal="Analyze and interpret data",
-    backstory="Expert analyst..."
-)
-
-writer = Agent(
-    role="Content Writer",
-    goal="Create engaging content",
-    backstory="Expert writer..."
-)
-
-# Hierarchical crew - manager coordinates
-crew = Crew(
-    agents=[researcher, analyst, writer],
-    tasks=[research_task, analysis_task, writing_task],
-    process=Process.hierarchical,
-    manager_llm=ChatOpenAI(model="gpt-4o"),  # Manager model
-    verbose=True
-)
-
-# Manager decides:
-# - Which agent handles which task
-# - 
+    goal="A

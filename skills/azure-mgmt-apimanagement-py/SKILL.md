@@ -38,6 +38,10 @@ client = ApiManagementClient(
 )
 ```
 
+## Write and policy boundary
+
+Examples create paid infrastructure, publish access products and replace API policies. Confirm subscription/resource/API and authorized effects before execution. Preserve existing policy XML and inherited base policies, review the exact diff, and validate authentication/routing afterward; a sample full-policy replacement can remove existing protections. Do not use placeholder secret values or expose subscription keys.
+
 ## Create APIM Service
 
 ```python
@@ -166,7 +170,7 @@ subscription = client.subscription.create_or_update(
     )
 )
 
-print(f"Subscription key: {subscription.primary_key}")
+print(f"Created subscription: {subscription.name}")  # Never log subscription keys.
 ```
 
 ## Set API Policy
@@ -205,24 +209,4 @@ client.api_policy.create_or_update(
 ## Create Named Value (Secret)
 
 ```python
-from azure.mgmt.apimanagement.models import NamedValueCreateContract
-
-named_value = client.named_value.begin_create_or_update(
-    resource_group_name="my-resource-group",
-    service_name="my-apim",
-    named_value_id="backend-api-key",
-    parameters=NamedValueCreateContract(
-        display_name="Backend API Key",
-        value="secret-key-value",
-        secret=True
-    )
-).result()
-```
-
-## Create Backend
-
-```python
-from azure.mgmt.apimanagement.models import BackendContract
-
-backend = client.backend.create_or_update(
-    resource_gr
+from azure.mgmt.apimanagement.models import NamedValueCreateC

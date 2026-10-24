@@ -24,9 +24,9 @@ Deploy and manage Amazon EC2 compute instances for production, staging, and deve
 ## Prerequisites
 
 - AWS CLI v2 installed and configured (`aws configure`)
-- IAM permissions: `ec2:*`, `autoscaling:*`, `elasticloadbalancing:*`, `iam:PassRole`
+- Least-privilege IAM actions for selected compute, scaling and load-balancer resources; restrict iam:PassRole to the intended instance role
 - An existing VPC with subnets (see aws-vpc (`aws-vpc`))
-- SSH key pair created (`aws ec2 create-key-pair --key-name my-key --query 'KeyMaterial' --output text > my-key.pem`)
+- SSH key pair created (`umask 077` before creating a key file in a private directory; prefer approved session access where appropriate)
 
 ## Instance Type Selection Guide
 
@@ -81,7 +81,7 @@ aws ec2 run-instances \
 ```bash
 #!/bin/bash
 # userdata.sh - Bootstrap a web server on Amazon Linux 2023
-set -euxo pipefail
+set -euo pipefail # avoid tracing secrets in user-data logs
 
 # System updates
 dnf update -y
@@ -101,8 +101,7 @@ dnf install -y amazon-cloudwatch-agent
 dnf install -y ruby wget
 cd /home/ec2-user
 wget https://aws-codedeploy-us-east-1.s3.us-east-1.amazonaws.com/latest/install
-chmod +x ./install
-./install auto
+# Verify a reviewed pinned installer and integrity before execution; do not run latest blindly.
 
 # Signal CloudFormation (if launched via CFN)
 # /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource ASG --region ${AWS::Region}
@@ -163,9 +162,4 @@ aws ec2 modify-launch-template \
 # Create ASG with mixed instances (on-demand + spot)
 aws autoscaling create-auto-scaling-group \
   --auto-scaling-group-name web-asg \
-  --mixed-instances-policy '{
-    "LaunchTemplate": {
-      "LaunchTemplateSpecification": {
-        "LaunchTemplateName": "web-server-template",
-        "Version": "$Default"
-      
+  --m

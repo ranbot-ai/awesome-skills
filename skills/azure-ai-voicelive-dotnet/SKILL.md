@@ -1,9 +1,9 @@
 ---
 name: azure-ai-voicelive-dotnet
 description: Azure AI Voice Live SDK for .NET. Build real-time voice AI applications with bidirectional WebSocket communication. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [api, ai, gpt, workflow, azure, rag, cro]
+tags: [api, ai, gpt, workflow, document, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-voicelive-dotnet
 ---
 
@@ -20,7 +20,7 @@ dotnet add package Azure.Identity
 dotnet add package NAudio                    # For audio capture/playback
 ```
 
-**Current Versions**: Stable v1.0.0, Preview v1.1.0-beta.1
+**Version scope**: Examples are SDK fragments; pin a compatible package and check its API/model availability in the linked Microsoft documentation rather than treating these examples as a current version list.
 
 ## Environment Variables
 
@@ -66,6 +66,10 @@ VoiceLiveClient
     ├── SendAudioAsync()
     └── StartResponseAsync()
 ```
+
+## Voice and tool boundaries
+
+Obtain applicable microphone/recording/transmission consent, select an approved Azure resource/region and bound session duration/costs. Model-provided tool arguments are untrusted: validate schema, allowlist operations, and require authorization for external effects. Do not place secrets in instructions/logs or treat a function definition as an executed integration. Reconfigure the session after adding tools; exact audio formats/rates depend on the pinned model and SDK.
 
 ## Core Workflow
 
@@ -161,24 +165,4 @@ var weatherFunction = new VoiceLiveFunctionDefinition("get_current_weather")
                     "description": "The city and state or country"
                 }
             },
-            "required": ["location"]
-        }
-        """)
-};
-
-// Add to session options
-sessionOptions.Tools.Add(weatherFunction);
-
-// Handle function call in event loop
-if (serverEvent is SessionUpdateResponseFunctionCallArgumentsDone functionCall)
-{
-    if (functionCall.Name == "get_current_weather")
-    {
-        var parameters = JsonSerializer.Deserialize<Dictionary<string, string>>(functionCall.Arguments);
-        string location = parameters?["location"] ?? "";
-        
-        // Call external service
-        string weatherInfo = $"The weather in {location} is sunny, 75°F.";
-        
-        // Send response
-        await session.AddItemAsync(new Functio
+            "r

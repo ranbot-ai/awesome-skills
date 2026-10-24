@@ -1,6 +1,6 @@
 ---
 name: crypto-bd-agent
-description: Production-tested patterns for building AI agents that autonomously discover, evaluate, and acquire token listings for cryptocurrency exchanges. 
+description: Reference patterns (upstream reports, not independently verified here) for building AI agents that autonomously discover, evaluate, and acquire token listings for cryptocurrency exchanges. 
 category: Security & Systems
 source: antigravity
 tags: [api, ai, agent, llm, workflow, design, security, vulnerability, rag, cro]
@@ -10,14 +10,14 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cryp
 
 # Crypto BD Agent — Autonomous Business Development for Exchanges
 
-> Production-tested patterns for building AI agents that autonomously discover,
+> Reference patterns (upstream reports, not independently verified here) for building AI agents that autonomously discover,
 > evaluate, and acquire token listings for cryptocurrency exchanges.
 
 ## Overview
 
 This skill teaches AI agents systematic crypto business development: discover
 promising tokens across chains, score them with a 100-point weighted system,
-verify safety through wallet forensics, and manage outreach pipelines with
+investigate risk signals through wallet analysis, and manage outreach pipelines with
 human-in-the-loop oversight.
 
 Built from production experience running Buzz BD Agent by SolCex Exchange —
@@ -129,7 +129,7 @@ Positive: Hackathon win +10, mainnet launch +10, major partnership +10,
 CEX listing +8, audit +8, multi-source match +5, whale signal +5,
 wallet verified +3-5, cross-chain deployer +3, net positive wallet +2.
 
-Negative: Rugpull association -15, exploit history -15, mixer funded AUTO REJECT,
+Negative: Rugpull association -15, exploit history -15, mixer association requires contextual review, not proof of wrongdoing,
 contract vulnerability -10, serial creator -5, already on major CEXs -5,
 team controversy -10, deployer dump >50% in 7 days -10 to -15.
 
@@ -151,6 +151,4 @@ simple scanners.
 
 ### 5-Step Deployer Analysis
 
-1. **Funded-By** — Where did deployer get funds? (exchange, mixer, other wallet)
-2. **Balances** — Current holdings across chains
-3. *
+1. **Funded-By** — Where did deploy

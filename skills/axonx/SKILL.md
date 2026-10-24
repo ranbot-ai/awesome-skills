@@ -31,25 +31,25 @@ This skill is labeled `critical` because it documents package installation, task
 
 ## Prepare the Environment and Service
 
-Use Python 3.12+ on macOS or Linux for local Task execution. In your chosen working directory, create and activate a virtual environment, then install the core:
+Use an already reviewed Python 3.12+ runtime on macOS or Linux for local Task execution. Confirm the selected environment and installed version before operations.
 
 The runtime must already be installed and reviewed. Report a missing runtime instead of installing it.
 
-For the prebuilt Studio UI, install `axonx[studio]` instead. Research plugins are installed separately. For source development, clone the project, enter its root, and install it in an activated virtual environment:
+Studio and research plugins are separate optional dependencies; this guide does not authorize their installation. Source development requires the user-selected reviewed checkout.
 
 The runtime must already be installed and reviewed. Report a missing runtime instead of installing it.
 
 Configure credentials through environment variables or a `.env` file discovered from the process working directory or its parents. Before starting a local service, replace the token placeholder with your own value:
 
 ```bash
-export AXONX_SERVICE_TOKEN='replace-with-your-local-service-token'
+# Supply a strong unique token through a private environment/secret mechanism.
+# Do not use this placeholder value as a real token.
+export AXONX_SERVICE_TOKEN='<strong-unique-token>'
 axonx start --service.host 127.0.0.1
 ```
 
-Keep that process running. In another terminal, activate the same environment and configure the same token, then run `axonx version` to verify the connection. The default port is `1024`; the default workspace is `.axonx` under the startup directory. If using an existing service, obtain its address and authentication configuration before making calls. Keep one execution target for plugin queries, submissions, status, logs, and artifact inspection.
+Keep that process running. In another terminal, activate the same environment and configure the same token, then run `axonx version` to verify the connection. The default port is `1024`; the default workspace is `.axonx` under the startup directory. If using an existing service, obtain its address and authentication configuration before making calls. Keep one execution target for plugin queries, submissions, status, logs, and artifact inspection. Remote bearer tokens and data require authenticated TLS or a trusted encrypted tunnel; plain HTTP is only appropriate on a controlled loopback/tunneled hop. Verify target allowlists and do not expose the shell-capable service publicly.
 
 For MCP clients, connect to `http://127.0.0.1:1024/mcp` using Streamable HTTP and the header `Authorization: Bearer <service-token>`; replace the address and token with those of your service. Discover tools from the connected service rather than assuming a fixed tool catalog. The CLI examples below describe the same operations; use the discovered MCP input schemas when calling tools.
 
-The built-in `demo` Task can verify submission and tracking without market-data or model credentials; the Alpha158 workflow requires its research plugin and prepared input data. Market-data downloads require `AXONX_TUSHARE_TOKEN`; model-backed Agents require separate model configuration. See [Quick start](https://flowllm-ai.github.io/AxonX/en/getting-started/quickstart), [Research workflow](https://flowllm-ai.github.io/AxonX/en/research/workflow), and [MCP integration](https://flowllm-ai.github.io/AxonX/en/agent/mcp-integration) for complete setup examples.
-
-When using this document as a skill, perform only the operations required by the user's request. Documentation examples do not authorize installation, task execution, deletion, or remote changes by themselves. For changes to the source checkout, follow its `AGENTS.md` and [contribution guide](https:/
+The built-in `demo` Task can verify submission and tracking without market-data or model credentials; the Alpha158 workflow requires its research plugin and prepared input data. Market-data downloads require `AXONX_TUSHARE_TOKEN`; model-backed Agents require separate model configuration. See [Quick start](https://flowllm-ai.github.io/AxonX/en/getting-started/quickstart), [Research workflow](https://flowllm-ai.github.io/AxonX/en/research/workflow), and [MCP integration](https://flowllm-ai.github.io/AxonX/en/agent/mcp-integration) for complete 

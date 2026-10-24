@@ -3,7 +3,7 @@ name: azure-vms
 description: Manage Azure Virtual Machines and scale sets. Configure availability sets and managed disks. Use when deploying compute resources on Azure. 
 category: AI & Agents
 source: antigravity
-tags: [ai, agent, template, image, security, docker, azure, rag, cro]
+tags: [ai, agent, template, design, image, security, docker, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-vms
 ---
 
@@ -13,6 +13,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azur
 Deploy and manage Azure VMs, availability sets, scale sets, custom images, and managed disks. Covers VM creation, sizing, disk management, auto-scaling, and Terraform configurations for production environments.
 
 ## Prerequisites
+
+Examples are independent fragments. Confirm subscription, cost/quota, region/image availability, approved NSG/subnet and private access before provisioning. Cloud-init must be a real file with #cloud-config, not the commented shell excerpt. The backup vault/policy, load balancer and probe are prerequisites, not created here; default public endpoints in other examples must be explicitly replaced with the approved private network design. Docker group membership grants host-level control.
 
 ```bash
 # Install Azure CLI
@@ -48,7 +50,7 @@ az vm create \
   --generate-ssh-keys \
   --vnet-name myapp-vnet \
   --subnet app-subnet \
-  --nsg "" \
+  --nsg myapp-nsg \
   --public-ip-address "" \
   --os-disk-size-gb 64 \
   --os-disk-caching ReadWrite \
@@ -58,10 +60,12 @@ az vm create \
   --tags environment=prod team=platform app=myapp
 
 # SSH into the VM (if public IP assigned)
-ssh azureuser@$(az vm show -g compute-rg -n myapp-vm -d --query publicIps -o tsv)
+# This example has no public IP; connect through approved Bastion/VPN/private SSH.
 ```
 
 ### Windows VM
+
+Run interactively: omit --admin-password and enter a unique generated password at the CLI’s hidden prompt, or use approved secret-backed infrastructure provisioning. Never put it in argv/history.
 
 ```bash
 az vm create \
@@ -70,7 +74,6 @@ az vm create \
   --image Win2022Datacenter \
   --size Standard_D4s_v5 \
   --admin-username azureadmin \
-  --admin-password 'S3cur3P@ssw0rd!' \
   --vnet-name myapp-vnet \
   --subnet app-subnet \
   --public-ip-address "" \
@@ -149,7 +152,8 @@ az disk create \
   --sku Premium_LRS \
   --zone 1
 
-# Resize a disk (VM must be deallocated)
+# Example offline resize; supported online expansion depends on disk/VM configuration.
+# Back up and schedule downtime; after Azure expansion grow the guest partition/filesystem safely.
 az vm deallocate --resource-group compute-rg --name myapp-vm
 az disk update \
   --resource-group compute-rg \
@@ -170,38 +174,4 @@ az disk create \
   --source myapp-disk-snapshot \
   --sku Premium_LRS
 
-# List disks attached to a VM
-az vm show \
-  --resource-group compute-rg \
-  --name myapp-vm \
-  --query "storageProfile.dataDisks" \
-  --output table
-```
-
-## Custom Images
-
-```bash
-# Generalize the VM (run inside the VM first)
-# sudo waagent -deprovision+user -force
-
-# Deallocate and generalize
-az vm deallocate --resource-group compute-rg --name myapp-vm
-az vm generalize --resource-group compute-rg --name myapp-vm
-
-# Create image from VM
-az image create \
-  --resource-group compute-rg \
-  --name myapp-golden-image \
-  --source myapp-vm \
-  --os-type Linux
-
-# Create VM from custom image
-az vm create \
-  --resource-group compute-rg \
-  --name myapp-from-image \
-  --image myapp-golden-image \
-  --size Standard_D4s_v5 \
-  --admin-username azureuser \
-  --generate-ssh-keys
-
-# Use Azure Compute Gallery fo
+# List d

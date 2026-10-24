@@ -23,6 +23,8 @@ Develop and maintain business continuity capabilities including Business Impact 
 
 ## BCP Framework
 
+The example downtime bands, response times and exercise cadence are illustrative, not universal compliance obligations. Have process owners approve maximum tolerable disruption, RTO (restoration target) and RPO (tolerable data-loss interval) based on actual impacts/dependencies; RTO must fit within tolerable disruption. Plan clean restore, reconciliation and failback evidence. Real failover, isolation, contact notifications and drills require explicit scope, change approval, rollback/abort criteria and communications marked as exercise. A document/tabletop alone does not prove recovery capability. Protect contact lists and accessible offline copies without exposing personal data.
+
 ```yaml
 bcp_phases:
   1_governance:
@@ -141,32 +143,4 @@ bia_template:
 
     impact_categories:
       financial:
-        revenue_loss_per_hour: ""
-        penalty_or_fine_risk: ""
-        recovery_cost_estimate: ""
-
-      operational:
-        affected_employees: ""
-        affected_customers: ""
-        workaround_available: "yes/no"
-        workaround_description: ""
-
-      reputational:
-        customer_visibility: "high/medium/low"
-        media_attention_risk: "high/medium/low"
-        regulatory_reporting_required: "yes/no"
-
-      legal_regulatory:
-        compliance_impact: ""
-        contractual_sla_breach: "yes/no"
-        sla_penalty_details: ""
-
-    dependencies:
-      technology:
-        - system: ""
-          rto: ""
-          rpo: ""
-          dr_strategy: ""
-      people:
-        - role: ""
-    
+        revenue_l

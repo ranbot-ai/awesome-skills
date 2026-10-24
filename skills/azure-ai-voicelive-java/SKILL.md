@@ -3,7 +3,7 @@ name: azure-ai-voicelive-java
 description: Azure AI VoiceLive SDK for Java. Real-time bidirectional voice conversations with AI assistants using WebSocket. 
 category: AI & Agents
 source: antigravity
-tags: [react, api, ai, gpt, workflow, azure]
+tags: [react, api, ai, gpt, workflow, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-voicelive-java
 ---
 

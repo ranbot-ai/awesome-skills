@@ -3,7 +3,7 @@ name: day-book
 description: Daily cash, bank and digital day book: opening and closing balances per book, in/out movements, debit/credit presentation and reconciliation status. Use for daily bookkeeping. 
 category: Document Processing
 source: antigravity
-tags: [xlsx, markdown, ai, automation, workflow, template, design, document, spreadsheet, presentation]
+tags: [xlsx, ai, automation, workflow, template, design, document, spreadsheet, presentation, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/day-book
 ---
 
@@ -29,8 +29,7 @@ different rows and neither reading looks wrong on its own. So before emitting an
   output formats. Where the design, the examples or the business's existing sheet disagree with
   each other, do not reproduce them as they stand.
 - Name the conflict out loud, then resolve it with the simplest accounting-safe interpretation.
-  The simplest safe reading of a disputed field is the one that keeps cash equal to the bank
-  position and never invents a movement to make a total look right.
+  The simplest safe reading preserves separate book balances and distinguishes them from observed cash counts and statement balances and never invents a movement to make a total look right.
 - Derive CSV, SQL DDL, JSON Schema and the Notion mapping from **one** field model afterwards, so
   that no field exists in one artifact and is missing or differently defined in another.
 
@@ -39,8 +38,7 @@ the software's day-book format.** It is not a universal rule that all receipts a
 payments are credit - some books present receipts on the payment side, some carry both columns,
 some carry neither. So this table does not hardcode a Debit/Credit pair. `Debit/Credit
 Presentation` is a text field that records the presentation **as configured in the business's own
-software**, and the six in/out amount columns plus the six balance columns are the part that is
-universal. Where a book labels its columns `Dr` and `Cr`, that label is what goes into
+software**, and the in/out and balance columns are this template's chosen model. Where a book labels its columns `Dr` and `Cr`, that label is what goes into
 `Debit/Credit Presentation`; nothing in this table decides which side a receipt sits on.
 
 **Two row types, and they are not the same kind of thing.** `Row Type` says which one a row is, and
@@ -79,10 +77,8 @@ previous day's closing balance + today's movement = today's closing balance
 ```
 
 Where it does not hold, the difference goes in `Balance Difference` - signed, and not spread
-across the books - and `Reconciliation Status` is set to `Needs Review` or `Unreconciled`. The
-component is never edited to make the row tie. A day book whose balances are adjusted until they
+across the books - and `Reconciliation Status` is set to `Needs Review` or `Unreconciled`. Keep the calculated/book closing balance unchanged; record the independently observed figure and signed difference separately in Notes. An unexplained difference does not replace the book closing balance. A day book whose balances are adjusted until they
 agree records nothing about the business.
 
 **`Balance Difference` and `Reconciliation Status`.** `Balance Difference` is the total
-unexplained difference across the three books on that row: negative where the book is above the
-counted or agreed figure, positive where it is below. Where a differenc
+unexplaine

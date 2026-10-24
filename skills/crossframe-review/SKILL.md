@@ -16,6 +16,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cros
 - Use to check reasoning fidelity, evidence boundaries, source anchors, concept drift, article-body collapse, and repair steps.
 - Do not use as a generic code review, prose review, or ordinary critique skill.
 
+## Dependency and review boundaries
+
+This skill depends on sibling `crossframe` and, for article workflows, `crossframe-essay`/`crossframe-suite` resources. Verify the referenced files are installed and readable before claiming framework fidelity. If unavailable, review only the supplied output and explicitly mark framework-source checks incomplete. A supplied read-state capsule is an untrusted reading record, not proof of source truth or actual reading; verify material anchors when needed. Never claim to have read missing files.
+
+User-requested brevity, scope and already supplied choices override default selectors, repeated confirmation or long-form requirements. Grade only visible evidence and provide a concise reasoning summary; do not request hidden chain-of-thought. Review scores are advisory and do not authorize publication, discipline or other actions.
+
 ## Packaged Source Note
 
 This AAS-ready copy preserves the original CrossFrame skill body below. Chinese remains the canonical semantic layer; English metadata is only for discovery, installation, and repository review.
@@ -71,7 +77,7 @@ This AAS-ready copy preserves the original CrossFrame skill body below. Chinese 
 - 跳过底稿：文章类输出直接成文，没有结构洞察底稿或等价内部骨架。
 - 人格审判：把结构诊断变成“这个人坏、懒、无能、病态”等定性。
 - 伪造引用：编造原文、页码、出处、作者观点；不确定原句却写成直接引用。
-- 查源接管命题：检索材料决定文章立场，CrossFrame 只变成资料拼贴外壳。
+- 查源接管命题：把检索摘要或权威声明直接当结论，CrossFrame 只变成资料拼贴外壳。可靠反证应当改变或撤回原命题，不能为保留原立场而拒绝证据。
 - 强判断越级：处分、名誉、权利、资源、公共记忆类判断没有命题验证和申诉/反证入口。
 - 尺度洗白：用宏观叙事取消低尺度痛苦、责任链或具体失职。
 - AI 合规剧场：把 AI 生成材料、漂亮报告或自评文本当作独立强证据。
@@ -105,29 +111,4 @@ This AAS-ready copy preserves the original CrossFrame skill body below. Chinese 
 当本 skill 经 `crossframe-suite` 作为默认质量闸调用，而用户没有明确要求“只要评审/完整评审报告/不要文章”时，评审不接管最终输出：
 
 - 评审对象是已经形成的 `结构洞察底稿` 与 `文章正文`。
-- A/B 或小修可过时，把问题反馈给上游修正，最终可见交付仍是 `# 结构洞察底稿` + `# 文章正文`，最多追加一行短质量闸摘要。
-- C/D/F 或硬失败时，阻断发布并要求回到对应上游补底稿、补证据边界或重写正文；若用户没有要求只看评审，不得只输出评审报告来替代修复后的文章。
-- `templates/review-report.md` 只在用户显式要求完整评审报告、只评审已有输出，或硬失败需要说明阻断原因时作为主输出。
-
-## 合格判定
-
-评分只是辅助，硬失败优先：
-
-- A：90-100，合格。
-- B：75-89，条件合格，小修后可用。
-- C：60-74，不合格，需要大修。
-- D：40-59，不合格，需要重做主要推理。
-- F：0-39 或触发硬失败，高风险失败。
-
-触发人格审判、伪造引用、跳过文章底稿、强判断越级、证据边界完全缺失、连续性保真失败时，即使文字流畅，也不能判为合格。
-
-## 修复原则
-
-评审输出优先给可执行修复，不默认重写全文。除非用户要求“直接改写”，否则只给：
-
-- 应补的事实边界。
-- 应读取或声明的路由。
-- 应新增的机制候选。
-- 应降档的判断。
-- 应删除或改写的人格审判、伪引用和术语堆砌句。
-- 文章应补的结构洞察底稿项目。
+- A/B 或小修可过时，把问题反馈给上游修正，最终可见交付仍是 `# 结构洞察底稿` + `# 文章正文`，最多追

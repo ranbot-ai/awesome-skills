@@ -1,7 +1,7 @@
 ---
 name: cloudflare-zero-trust
 description: Protect internal apps with Cloudflare Access, device posture, and Zero Trust policies. 
-category: AI & Agents
+category: Development & Code Tools
 source: antigravity
 tags: [api, ai, agent, llm, automation, template, image, security, docker, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cloudflare-zero-trust
@@ -80,20 +80,16 @@ ingress:
   # Internal wiki
   - hostname: wiki.example.com
     service: http://localhost:8080
-    originRequest:
-      noTLSVerify: true
 
   # SSH access via browser
   - hostname: ssh.example.com
     service: ssh://localhost:22
 
-  # Private network access (CIDR routing)
-  - hostname: internal.example.com
-    service: http://10.0.0.0/24
-
   # Catch-all — required as the last rule
   - service: http_status:404
 ```
+
+Private CIDRs are routes, not HTTP origin URLs. Configure a Tunnel CIDR route and authorized Cloudflare One Client/split-tunnel policy through the [private-network guide](https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/private-net/cloudflared/connect-cidr/).
 
 ### Run the Tunnel
 
@@ -146,6 +142,8 @@ networks:
 
 ## Access Policies
 
+A Tunnel does not itself add user authentication. Configure and test Access before exposing the hostname: unauthorized requests must fail, authorized identities must succeed, and direct origin access must be constrained. Protect generated service-token responses and pass secret headers through protected stdin/config rather than logged process arguments. Verify current plans, DNS endpoints, browser-SSH requirements and policy schemas; static examples may drift. See [Access policy evaluation](https://developers.cloudflare.com/cloudflare-one/access-controls/policies/).
+
 Access policies control who can reach applications behind Cloudflare.
 
 ### Create an Access Application
@@ -169,27 +167,4 @@ curl -X POST "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/a
 
 ```bash
 # Allow policy — members of the engineering group
-curl -X POST "https://api.cloudflare.com/client/v4/accounts/$ACCOUNT_ID/access/apps/<APP_ID>/policies" \
-  -H "Authorization: Bearer $CF_API_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "name": "Engineering Team",
-    "decision": "allow",
-    "include": [
-      { "group": { "id": "<GROUP_UUID>" } }
-    ],
-    "require": [
-      { "login_method": { "id": "<MFA_METHOD_UUID>" } }
-    ]
-  }'
-```
-
-### Common Policy Patterns
-
-| Pattern | Include Rule | Require Rule |
-|---------|-------------|--------------|
-| All employees | Email domain `@company.com` | - |
-| Engineering only | Access Group "Engineering" | MFA |
-| Contractors (time-limited) | Email list | Device posture |
-| CI/CD automation | Service token | - |
-| External partners | Specific emails | C
+curl -X POST "https://api.cloudflare.com/client/v4/acc

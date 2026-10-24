@@ -56,6 +56,8 @@ Effective competitor tracking helps you:
 
 ### Competitive Landscape Mapping
 
+Record primary-source URLs and retrieval dates for claims/pricing. Stars, downloads and sentiment are separate proxy metrics, not customers, revenue or representative market share. Archive only permitted public material; do not disclose private support/customer information. Monitoring subscriptions, outreach and publication require the user's authorization; suggested response playbooks are drafts until then.
+
 Create a competitive landscape document with:
 
 1. **Competitor profiles** - Company, product, target market, positioning
@@ -154,20 +156,4 @@ Use social listening tools to track developer sentiment toward competitors acros
 
 **Churn signals:**
 - "Migrating away from [competitor]"
-- "Looking for [competitor] alternative"
-- "Frustrated with [competitor]"
-- "Canceling [competitor]"
-
-**Praise signals (learn from them):**
-- "Love [competitor]'s [feature]"
-- "[Competitor] just works"
-- "Best part of [competitor] is..."
-
-**Feature gaps:**
-- "Wish [competitor] had..."
-- "[Competitor] doesn't support..."
-- "Waiting for [competitor] to add..."
-
-### Competitive Sentiment Analysis
-
-Use your monitoring tool's analytics for trend an
+- "Looking for [competitor] altern

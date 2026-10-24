@@ -3,7 +3,7 @@ name: code-review-sensei
 description: Expert code reviewer that catches bugs, security issues, performance problems, and design flaws with actionable fix suggestions. 
 category: Document Processing
 source: antigravity
-tags: [python, javascript, typescript, react, api, claude, ai, workflow, design, document]
+tags: [python, javascript, typescript, react, markdown, api, claude, ai, workflow, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/code-review-sensei
 ---
 
@@ -60,7 +60,7 @@ For every code review, evaluate across 5 dimensions:
 
 ## Review Output Format
 
-```
+````markdown
 ## Code Review: [File/Component Name]
 
 ### Summary
@@ -92,7 +92,7 @@ For every code review, evaluate across 5 dimensions:
 [Nice-to-have improvements]
 
 ### Positive Notes ✅
-[What's done well — always include at least one]
+[Only concrete evidenced strengths; omit rather than invent praise]
 
 ### Metrics
 | Dimension | Score (1-5) | Notes |
@@ -102,7 +102,7 @@ For every code review, evaluate across 5 dimensions:
 | Performance | | |
 | Design | | |
 | Readability | | |
-```
+````
 
 ## Language-Specific Checks
 

@@ -16,7 +16,7 @@ The core principle: **Bug-bounty evidence is meant to convince a triager. Anythi
 
 ---
 
-## 1. Two Categories of Sensitive Data
+## 1. Sensitive Data Categories of Sensitive Data
 
 Every PoC artifact (screenshot, HAR, raw HTTP request, terminal transcript) potentially contains data that needs different treatment.
 
@@ -24,8 +24,8 @@ Every PoC artifact (screenshot, HAR, raw HTTP request, terminal transcript) pote
 |---|---|---|
 | **Your-account secrets** | Session cookies, OAuth tokens, refresh tokens, API keys | Always redact. Even in private bug-bounty platform attachments. Your account, your session — protect it. |
 | **Other users' PII** | Real names, emails, phone numbers, addresses, profile photos, account IDs | Redact unless explicitly demonstrating cross-account impact. Even then, mask faces and minimize the data you display. |
-| **Triager-useful metadata** | Trace IDs (`x-datadog-trace-id`), request IDs, server timestamps, your test account UID/email, GraphQL operation names, response shapes | **Leave visible** — these help the triager correlate to logs and reproduce. |
-| **Test-account passwords (limited use)** | Throwaway passwords on a test account (e.g., `Testing@5678`) | Acceptable in screenshots if you rotate immediately after submission so the value shown is dead. Don't leave real-use passwords in evidence. |
+| **Triager-useful metadata** | Trace IDs (`x-datadog-trace-id`), request IDs, server timestamps, your test account UID/email, GraphQL operation names, response shapes | **Review and minimize** — selected nonsecret values help the triager correlate to logs and reproduce. |
+| **Test-account passwords (limited use)** | Throwaway passwords on a test account (e.g., `Testing@5678`) | Redact passwords before sharing, including throwaway accounts. Rotate/revoke any exposed value; do not rely on later rotation to justify disclosure. |
 
 ---
 
@@ -43,8 +43,8 @@ The session cookie value is the highest-value secret in any PoC. Mask:
 
 ### 2.2 What's safe to leave visible
 
-- Cloudflare cookies (`__cf_bm`, `_cfuvid`) — these are bot-management, not session-bearing
-- Analytics cookies (`ajs_anonymous_id`, `_ga`)
+- Cookie NAMES and attributes can remain; redact all cookie values by default, including bot-management and analytics identifiers
+- Analytics ID names, with values masked unless needed and approved
 - Trace correlation IDs (`x-datadog-trace-id`, `x-request-id`)
 - Server / framework headers (`Server: cloudflare`, `X-Frame-Options`)
 - Your test account email/UID (per Bugcrowdninja alias section in `bugcrowd-reporting`)
@@ -55,10 +55,11 @@ The session cookie value is the highest-value secret in any PoC. Mask:
 - For DevTools Console PoCs: use `credentials: 'include'` so the browser sends cookies automatically. Console output won't echo the cookie. Screenshot the Console output, never the Network tab Headers panel.
 - For Burp Repeater PoCs: drag the bottom request/response panel divider DOWN to hide the request body before screenshotting. Capture only the Results table for Intruder runs.
 
-**Method B — Black-bar in image editor** (when capture inevitably includes cookies)
+**Method B — Destructive redaction on a flattened copy** (when capture includes cookies)
+- An editable rectangle overlay may be removable. Export a new flattened raster, strip metadata, reopen it and verify pixels/OCR at full resolution; never attach the editable original.
 - macOS: Open screenshot in Preview → Tools → Annotate → Rectangle → set fill color to black → drag rectangle over the cookie value → save
 - Windows: Use Snip & Sketch's annotation tools or any image editor (Paint.NET, etc.)
-- Burp itself: in Burp's Proxy → Match and Replace, you can pre-emptively redact cookie values to placeholder strings before screenshotting
+- Redact a COPY of captured evidence offline; do not alter live Proxy Match and Replace rules merely to sanitize a screenshot, since they can change requests and invalidate reproduction.
 
 **Method C — Find/replace in raw text** (for HAR files, terminal transcripts)
 - See §4 for the jq commands
@@ -92,10 +93,4 @@ When a PoC necessarily exposes another user's data (e.g., demonstrating IDOR by 
 
 ### 3.1 What to mask (other-user data)
 
-- First name, last name (full or partial)
-- Email address (mask the local part; can leave domain if non-identifying)
-- Phone number (mask the last 7 digits, optionally leave country code)
-- Physical address (mask everything below city)
-- Date of birth (mask the year, optionally the month)
-- Government IDs (SSN, passport — mask everything)
-- Profile photos / face images 
+- First name, last name (full or

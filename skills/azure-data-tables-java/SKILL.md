@@ -81,6 +81,8 @@ TableServiceClient serviceClient = new TableServiceClientBuilder()
 
 ## Core Patterns
 
+Examples use placeholder credentials. Select a compatible released SDK version; the beta above is historical. Keep connection strings/SAS in a secret store. Confirm the account/table and deletion scope before writes. Merge/replace/upsert examples do not demonstrate ETag concurrency checks; use conditional updates where concurrent writers matter.
+
 ### Create Table
 
 ```java
@@ -177,7 +179,7 @@ for (TableEntity entity : tableClient.listEntities()) {
 // With filtering and selection
 ListEntitiesOptions options = new ListEntitiesOptions()
     .setFilter("PartitionKey eq 'sales'")
-    .setSelect("Name", "Price");
+    .setSelect(java.util.Arrays.asList("Name", "Price"));
 
 for (TableEntity entity : tableClient.listEntities(options, null, null)) {
     System.out.printf("%s: %.2f%n",
@@ -190,16 +192,4 @@ for (TableEntity entity : tableClient.listEntities(options, null, null)) {
 
 ```java
 // Filter by partition key
-ListEntitiesOptions options = new ListEntitiesOptions()
-    .setFilter("PartitionKey eq 'electronics'");
-
-// Filter with multiple conditions
-options.setFilter("PartitionKey eq 'electronics' and Price gt 100");
-
-// Filter with comparison operators
-options.setFilter("Quantity ge 10 and Quantity le 100");
-
-// Top N results
-options.setTop(10);
-
-for (TableEntity entity : tableClient.listEntities(options, null, null)) {
+ListEntitiesOptions options = new ListEntit

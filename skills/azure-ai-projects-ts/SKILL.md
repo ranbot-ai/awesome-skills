@@ -3,7 +3,7 @@ name: azure-ai-projects-ts
 description: High-level SDK for Azure AI Foundry projects with agents, connections, deployments, and evaluations. 
 category: Document Processing
 source: antigravity
-tags: [typescript, api, mcp, ai, agent, gpt, workflow, document, azure]
+tags: [typescript, api, mcp, ai, agent, gpt, workflow, document, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-projects-ts
 ---
 
@@ -41,6 +41,10 @@ const client = new AIProjectClient(
   new DefaultAzureCredential()
 );
 ```
+
+## SDK generation and effects
+
+These independent fragments span version-sensitive project/agent APIs. Pin the actual package/API generation and verify available operation groups before use. Confirm tenant/project and budget before agent runs, dataset uploads or tools; code interpreter/MCP can execute code or disclose private data. `getWithCredentials` returns secrets and is not a default discovery operation. Cleanup must target only resources created and owned by this task.
 
 ## Operation Groups
 
@@ -196,28 +200,3 @@ const connWithCreds = await client.connections.getWithCredentials("my-connection
 
 // Get default connection by type
 const defaultAzureOpenAI = await client.connections.getDefault("AzureOpenAI", true);
-```
-
-## Deployments
-
-```typescript
-// List all deployments
-for await (const deployment of client.deployments.list()) {
-  if (deployment.type === "ModelDeployment") {
-    console.log(deployment.name, deployment.modelName);
-  }
-}
-
-// Filter by publisher
-for await (const d of client.deployments.list({ modelPublisher: "OpenAI" })) {
-  console.log(d.name);
-}
-
-// Get specific deployment
-const deployment = await client.deployments.get("gpt-4o");
-```
-
-## Datasets
-
-```typescript
-// Up

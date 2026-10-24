@@ -2,7 +2,7 @@
   "id": "antigravity-ai-md",
   "name": "ai-md",
   "slug": "ai-md",
-  "description": "Convert human-written CLAUDE.md into AI-native structured-label format. Battle-tested across 4 models. Same rules, fewer tokens, higher compliance.",
+  "description": "Convert human-written CLAUDE.md into AI-native structured-label format. Propose and evaluate structured-label rewrites while preserving rule meaning; benefits require measured evidence.",
   "category": "Business & Marketing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -11,8 +11,7 @@
   "tags": [
     "claude",
     "ai",
-    "llm",
-    "cro"
+    "llm"
   ],
   "useCases": [
     "Use when your CLAUDE.md is long but AI still ignores your rules",

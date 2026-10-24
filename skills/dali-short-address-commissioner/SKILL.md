@@ -1,9 +1,9 @@
 ---
 name: dali-short-address-commissioner
 description: Commissions DALI and DALI-2 (IEC 62386) lighting buses: short-address assignment (0-63), 24-bit binary search collision resolution, groups, and DT8 color control. Trigger phrases: commission dali, dal
-category: Creative & Media
+category: Document Processing
 source: antigravity
-tags: [python, claude, ai, automation, workflow, design, cro]
+tags: [python, api, claude, ai, automation, workflow, design, document, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dali-short-address-commissioner
 ---
 
@@ -28,6 +28,8 @@ Do NOT use this skill when:
 - Commissioning DMX512/RDM stage lighting, 0–10V analog dimming, or proprietary wireless RF networks (Zigbee, Bluetooth Mesh, Casambi).
 - Diagnosing dead ballasts or physical wiring faults before basic DALI bus voltage (12V–20.5V DC) and current limits (<= 250mA) are confirmed.
 - Programming building-wide KNX logic (this skill covers the DALI protocol domain strictly).
+
+Protocol constants and command bytes below are illustrative and must not be emitted as frames without checking the exact IEC edition and gateway API. Repetition is command-specific; do not assume every addressing command uses identical send-twice semantics. A binary search cannot separate two devices with the same random address: detect duplicate responders, re-randomize the affected set using the verified commissioning procedure, then verify unique short-address responses. Timer refresh behavior also requires the exact gear contract.
 
 ## Core Mental Models & Non-Negotiable Rules
 
@@ -61,7 +63,4 @@ Do NOT use this skill when:
 | Anti-Pattern | Manifestation in Code/Workflow | Mandatory Production Counter-Rule |
 | :--- | :--- | :--- |
 | **Single-Shot Addressing Commands** | Sending cmd 258 or cmd 267 once without repetition. | Always repeat configuration commands within a strict 100ms window. |
-| **Exceeding 64 Short Addresses** | Attempting to assign address 64 or 65 on one loop. | Partition into Subnet A and Subnet B; enforce 0–63 maximum. |
-| **Timer Starvation** | Letting the 15-minute `INITIALISE` window expire mid-search. | Issue keep-alive refresh or optimize binary search loop to < 3 minutes. |
-| **Ghost Address Overwrite** | Assigning address 0 without scanning if address 0 is in use. | Run non-destructive `QUERY STATUS` (cmd 144) across 0–63 before reassigning. |
-| **Bus Overcurrent Overload** | Connecting 64 ballasts (2mA each) + sensors to a 100mA PSU. | Verify total quiescent load $\le$ PSU rating (250mA max per IEC 62386). 
+| **Exceeding 64 Short Addresses** | Attempting to assign address 64 or 65 on one loop. | Partition into Subnet A

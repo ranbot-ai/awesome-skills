@@ -3,7 +3,7 @@ name: efficient-web-research
 description: Protocol for token-efficient web research. Use when accessing URLs, GitHub repos, or running search queries. Prevents full-page fetching waste. 
 category: Document Processing
 source: antigravity
-tags: [python, javascript, react, pdf, markdown, api, ai, agent, document, aws]
+tags: [python, javascript, react, pdf, markdown, api, ai, agent, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/efficient-web-research
 ---
 
@@ -17,6 +17,10 @@ using the right tool at the right depth, and stopping as soon as the question is
 
 ## When to Use
 - Use this skill when the task matches this description: Protocol for token-efficient web research. Use when accessing URLs, GitHub repos, or running search queries. Prevents full-page fetching waste.
+
+## Scope and evidence precedence
+
+The numeric file/URL/token caps below are efficiency defaults, not hard limits. Full-file/bundle audits, legal or security analysis, user-supplied multi-source comparisons and exact quotations require enough original context to support the requested conclusion; do not claim a complete review from excerpts. Search snippets are discovery clues, not sufficient evidence for consequential or ambiguous claims. Read the primary page and cite its exact supporting content. Tool names are illustrative; use the host's actual tools and delegate only when authorized. A URL fragment does not guarantee server-side section extraction.
 
 ## Core Principle
 
@@ -131,27 +135,4 @@ Layer 3 — Full Fetch
   → Cap at 2000 tokens. Summarize before passing to answer.
 
 Layer 4 — Browser Subagent (last resort only)
-  → Use ONLY if read_url_content returns empty, garbled, or JS-placeholder content
-  → Instruct subagent: "Navigate to [URL], wait for content to load, extract [specific section]"
-  → Do NOT use browser_subagent for static pages — it's expensive
-```
-
-### What to Strip from Fetched Pages
-
-Always remove before using fetched content:
-- Navigation menus and breadcrumbs
-- Cookie banners and GDPR notices
-- "Related articles" / "You might also like" blocks
-- Footer content (copyright, links)
-- Social share buttons
-- Ads and sponsored content
-
-Extract and keep:
-- Main article / documentation body
-- Code blocks
-- Tables with data
-- Numbered steps or procedures
-
----
-
-## Search Pr
+  → Use ONLY if 

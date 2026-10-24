@@ -20,7 +20,7 @@ Automate Brevo (formerly Sendinblue) email marketing operations through Composio
 
 ## Setup
 
-**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
+**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. The MCP endpoint still requires the provider connection and authorization flow returned by the installed Rube service; adding a URL alone does not grant account access.
 
 
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
@@ -125,6 +125,4 @@ Automate Brevo (formerly Sendinblue) email marketing operations through Composio
 - `campaign_id`: Campaign to configure
 - `abTesting`: Set to `true` to enable A/B testing
 - `subjectA`: Subject line for variant A
-- `subjectB`: Subject line for variant B
-- `splitRule`: Percentage split for the test (1-99)
-- `winnerCriteria`: 'open' or 'click
+- `subjectB`: Sub

@@ -1,13 +1,19 @@
 ---
 name: commandcode-delegate
 description: Delegate coding tasks to the Command Code CLI (`cmd`) only when the user explicitly requests it, while the orchestrator retains review and landing responsibility. 
-category: Development & Code Tools
+category: Document Processing
 source: antigravity
-tags: [node, claude, ai, agent, template, design]
+tags: [node, claude, ai, agent, template, design, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/commandcode-delegate
 ---
 
 # Command Code Delegate
+
+## Runtime availability
+
+This catalog tree contains documentation only. `scripts/relay.mjs` is absent; the relay commands and result fields below describe an external upstream installation, not bundled functionality. Before dispatch, locate a user-approved upstream revision, inspect the exact relay source, license and CLI help, and verify compatibility. Do not execute the absent path, fabricate the helper or claim its tests/results. Brief drafting and independent diff review can proceed without it. Compatibility metadata requires Node 22+; the older Node 18 statement below is superseded.
+
+Delegation may send workspace content to the configured provider and incur charges. Use approved data and minimal credentials, private artifacts and finite time/turn budgets. A worktree does not isolate host files. Existing user authorization applies; ask only for genuinely unapproved host access or expanded scope.
 
 ## When to Use
 
@@ -49,8 +55,7 @@ with a sandbox. The brief is guidance, and a git worktree isolates a checkout wi
 process. If writes outside the target tree are unacceptable, use an OS-enforced sandbox such as
 `codex-delegate` or run this one inside a container.
 
-Before the first write-capable run, explain this unsandboxed full-trust mode and obtain explicit
-human acceptance. A request to delegate to Command Code is not by itself consent to host-wide access.
+Before a write-capable run, verify whether the user has authorized this unsandboxed mode. Explain the scope and request acceptance only if that authority is absent; do not repeat a previously satisfied confirmation.
 
 ## Prerequisites (check once)
 
@@ -75,18 +80,4 @@ Command Code sees **only** the text you send — no repo memory, no chat history
 the brief: the goal, the current state, what to change, what to leave untouched, the project's
 **actual** gate commands (discover them from the repo's AGENTS.md/CLAUDE.md/Makefile — do not assume),
 and a report contract. Tell it that it will **not** commit (you will). Keep one task per brief. Full
-guidance and a template: [references/writing-the-brief.md](references/writing-the-brief.md).
-
-### 2. Dispatch
-
-Send the brief to Command Code with the bundled helper. It wraps `cmd -p`, captures the run, and
-writes a structured `result.json` — so your only job is "run a command, read a file." (`<skill-dir>`
-below is this skill's installed directory — the folder containing this `SKILL.md`, i.e. the directory
-you loaded the skill from. Claude Code prints it as "Base directory for this skill" when the skill
-loads; on other orchestrators use that same directory — if unsure where it landed, run
-`find ~ -name relay.mjs -path '*commandcode-delegate*'` and substitute the directory above it.)
-
-```bash
-node "<skill-dir>/scripts/relay.mjs" --brief brief.txt --cd /path/to/repo
-# read-only (review/diagnosis, no edits):   add --read-only
-# continue the exact session:               add --session <sessionId>  (from result.json; send only th
+guidanc

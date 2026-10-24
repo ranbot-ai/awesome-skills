@@ -34,6 +34,7 @@ AZURE_WEBPUBSUB_HUB=my-hub
 ### Authentication
 
 ```python
+import os
 from azure.messaging.webpubsubservice import WebPubSubServiceClient
 
 # Connection string
@@ -57,12 +58,12 @@ client = WebPubSubServiceClient(
 ```python
 # Token for anonymous user
 token = client.get_client_access_token()
-print(f"URL: {token['url']}")
+# Treat token["url"] as a bearer secret; return it only to the authenticated intended client.
 
 # Token with user ID
 token = client.get_client_access_token(
     user_id="user123",
-    roles=["webpubsub.sendToGroup", "webpubsub.joinLeaveGroup"]
+    roles=["webpubsub.sendToGroup.my-group", "webpubsub.joinLeaveGroup.my-group"]
 )
 
 # Token with groups
@@ -181,26 +182,17 @@ has_permission = client.check_permission(
 
 ```python
 from azure.messaging.webpubsubclient import WebPubSubClient
+from azure.messaging.webpubsubclient.models import CallbackType, WebPubSubDataType
 
-client = WebPubSubClient(credential=token["url"])
-
-# Event handlers
-@client.on("connected")
-def on_connected(e):
-    print(f"Connected: {e.connection_id}")
-
-@client.on("server-message")
-def on_message(e):
-    print(f"Message: {e.data}")
-
-@client.on("group-message")
-def on_group_message(e):
-    print(f"Group {e.group}: {e.data}")
-
-# Connect and send
-client.open()
-client.send_to_group("my-group", "Hello from Python!")
+with WebPubSubClient(token["url"]) as ws_client:
+    ws_client.subscribe(CallbackType.CONNECTED, lambda e: print("Connected"))
+    ws_client.subscribe(CallbackType.GROUP_MESSAGE, lambda e: print("Group message received"))
+    ws_client.join_group("my-group")
+    ws_client.send_to_group("my-group", "Hello from Python!", WebPubSubDataType.TEXT)
 ```
+
+Authorize token issuance on the server; derive user IDs and allowed groups from the authenticated session, never untrusted request fields. Use a short explicit expiration supported by the pinned SDK, avoid logging access URLs or message bodies, and close service clients and credentials when done. These sends/group changes affect live clients; use a test hub for examples.
+
 
 ## Async Service Client
 
@@ -219,18 +211,4 @@ async def broadcast():
     await client.send_to_all("Hello async!", content_type="text/plain")
     
     await client.close()
-    await credential.close()
-```
-
-## Client Operations
-
-| Operation | Description |
-|-----------|-------------|
-| `get_client_access_token` | Generate WebSocket connection URL |
-| `send_to_all` | Broadcast to all connections |
-| `send_to_user` | Send to specific user |
-| `send_to_group` | Send to group members |
-| `send_to_connection` | Send to specific connection |
-| `add_user_to_group` | Add user to group |
-| `remove_user_from_group` | Remove user from group |
-| `close_connection` | Disc
+    await credenti

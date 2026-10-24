@@ -71,7 +71,7 @@ struct BentoGrid: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 16) {
-                // 2x1 Span (Full width)
+                // This item occupies one LazyVGrid column; it does not span both columns.
                 BentoCard(title: "Hero", color: .blue)
                     .frame(height: 180)
                 
@@ -143,7 +143,4 @@ class BentoScreen extends StatelessWidget {
             StaggeredGridTile.count(
               crossAxisCellCount: 2,
               mainAxisCellCount: 2,
-              child: BentoCard(title: 'Stats'),
-            ),
-            // 1x1
-        
+              child: BentoCard(title: 'S

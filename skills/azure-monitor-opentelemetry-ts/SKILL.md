@@ -1,9 +1,9 @@
 ---
 name: azure-monitor-opentelemetry-ts
 description: Auto-instrument Node.js applications with distributed tracing, metrics, and logs. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [typescript, node, api, ai, workflow, azure, rag]
+tags: [typescript, node, api, ai, workflow, document, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-monitor-opentelemetry-ts
 ---
 
@@ -11,6 +11,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azur
 # Azure Monitor OpenTelemetry SDK for TypeScript
 
 Auto-instrument Node.js applications with distributed tracing, metrics, and logs.
+
+## Version and data boundaries
+
+This document describes the existing `@azure/monitor-opentelemetry` distro. Current Microsoft guidance also offers `@microsoft/opentelemetry` for new adoption; do not initialize both. Match all OpenTelemetry package versions and use that version’s logger-provider constructor/processor API. Configure approved telemetry destinations, redact PII/secrets, and protect offline storage; automatic instrumentation may export sensitive request/log data. See [Microsoft enablement guidance](https://learn.microsoft.com/en-us/azure/azure-monitor/app/opentelemetry-enable).
 
 ## Installation
 
@@ -44,8 +48,8 @@ useAzureMonitor({
   }
 });
 
-// Now import your application
-import express from "express";
+// Static ESM imports are hoisted; load the app after initialization.
+const { default: express } = await import("express");
 const app = express();
 ```
 
@@ -186,25 +190,4 @@ const meterProvider = new MeterProvider({
 metrics.setGlobalMeterProvider(meterProvider);
 ```
 
-### Log Exporter
-
-```typescript
-import { AzureMonitorLogExporter } from "@azure/monitor-opentelemetry-exporter";
-import { BatchLogRecordProcessor, LoggerProvider } from "@opentelemetry/sdk-logs";
-import { logs } from "@opentelemetry/api-logs";
-
-const exporter = new AzureMonitorLogExporter({
-  connectionString: process.env.APPLICATIONINSIGHTS_CONNECTION_STRING
-});
-
-const loggerProvider = new LoggerProvider();
-loggerProvider.addLogRecordProcessor(new BatchLogRecordProcessor(exporter));
-
-logs.setGlobalLoggerProvider(loggerProvider);
-```
-
-## Custom Logs Ingestion
-
-```typescript
-import { DefaultAzureCredential } from "@azure/identity";
-import { LogsIngestionCli
+### 

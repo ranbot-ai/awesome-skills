@@ -36,6 +36,8 @@ Implement comprehensive backup and recovery strategies using rsync, Restic, and 
 - **2** different storage media or types (e.g., local disk + cloud)
 - **1** copy offsite (cloud storage, remote datacenter)
 
+Confirm source/destination paths, retention ownership and recovery targets. A mirror with --delete propagates deletions and is not an independent historical backup; dry-run before destructive sync/prune. Never copy a running PostgreSQL data directory as a consistent backup: use pg_dump or a supported physical backup/snapshot protocol. Run pipelines in Bash with pipefail so failed dumps cannot become apparently successful empty snapshots. Restore to an isolated new database/path first; --clean deletes target objects. Keep repository credentials and recovery keys in a separate approved location; logs and backup data are sensitive.
+
 ## rsync Backups
 
 ### Basic Operations
@@ -97,10 +99,9 @@ apt install -y restic
 # RHEL / CentOS
 dnf install -y restic
 
-# Or download the latest binary
-curl -L https://github.com/restic/restic/releases/latest/download/restic_0.17.3_linux_amd64.bz2 \
-  | bunzip2 > /usr/local/bin/restic
-chmod +x /usr/local/bin/restic
+# Alternatively obtain a pinned release for the actual OS/architecture from
+# https://github.com/restic/restic/releases and verify its published checksums
+# and signature before installing it. Do not mix latest/ URLs with old filenames.
 
 # Verify installation
 restic version
@@ -120,7 +121,7 @@ restic init --repo s3:s3.amazonaws.com/my-backup-bucket
 # S3-compatible (MinIO)
 export AWS_ACCESS_KEY_ID="minioadmin"
 export AWS_SECRET_ACCESS_KEY="miniosecret"
-restic init --repo s3:http://minio.example.com:9000/backup-bucket
+restic init --repo s3:https://minio.example.com:9000/backup-bucket
 
 # Backblaze B2 backend
 export B2_ACCOUNT_ID="accountid"
@@ -132,7 +133,10 @@ restic init --repo sftp:backup@remote:/backups/server01
 
 # Restic will prompt for a repository password -- store it securely
 # Use a password file for automation
-echo "my-secure-repo-password" > /etc/restic/password.txt
+umask 077
+read -r -s -p "Repository password: " RESTIC_NEW_PASSWORD
+printf '%s\n' "$RESTIC_NEW_PASSWORD" > /etc/restic/password.txt
+unset RESTIC_NEW_PASSWORD
 chmod 600 /etc/restic/password.txt
 ```
 
@@ -143,7 +147,7 @@ chmod 600 /etc/restic/password.txt
 restic backup /data --repo /backup/restic-repo --password-file /etc/restic/password.txt
 
 # Backup multiple directories
-restic backup /data /etc /var/lib/postgresql \
+restic backup /data /etc \
   --repo s3:s3.amazonaws.com/my-backup-bucket \
   --password-file /etc/restic/password.txt
 
@@ -151,29 +155,4 @@ restic backup /data /etc /var/lib/postgresql \
 restic backup /data \
   --exclude='*.tmp' \
   --exclude='*.log' \
-  --exclude-file=/etc/restic/excludes.txt \
-  --repo /backup/restic-repo \
-  --password-file /etc/restic/password.txt
-
-# Backup with tags (useful for filtering snapshots later)
-restic backup /data \
-  --tag server01 --tag production --tag daily \
-  --repo /backup/restic-repo \
-  --password-file /etc/restic/password.txt
-
-# Backup stdin (e.g., database dump)
-pg_dump -U postgres mydb | restic backup --stdin --stdin-filename mydb.sql \
-  --repo s3:s3.amazonaws.com/my-backup-bucket \
-  --password-file /etc/restic/password.txt
-
-# Verbose output showing files processed
-restic backup /data -v \
-  --repo /backup/restic-repo \
-  --password-file /etc/restic/password.txt
-```
-
-### Snapshot Management
-
-```bash
-# List all snapshots (add --tag <tag> to filter)
-restic snapsh
+  --exclu

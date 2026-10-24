@@ -114,7 +114,7 @@ Check the resulting status before reading a final response: `requires_action` ne
 ```java
 PagedIterable<ThreadMessage> messages = messageClient.listMessages(thread.getId());
 for (ThreadMessage message : messages) {
-    System.out.println(message.getRole() + ": " + message.getContent());
+    System.out.println("Message role: " + message.getRole()); // Do not log retained prompt/response payloads.
 }
 ```
 
@@ -157,5 +157,4 @@ try {
 Use when implementing or maintaining Java persistent-agent threads, messages, runs and administration with the preview SDK. The reviewed example uses beta.2 subclients, not direct CRUD methods on PersistentAgentsClient.
 
 ## Limitations
-- Operations create billable cloud resources, send prompts and retain thread data. Use an authorized project/model and explicit budgets; delete only resources created for the current run, preserve IDs on failure, and redact message/credential logs.
-- Snipp
+- Operations create billable cloud resources, send prompts and retain thread data. Use an authorized project/model and explicit budgets; delete only resources created for the current run, preserve IDs on failure, and r

@@ -3,7 +3,7 @@ name: bullmq-specialist
 description: BullMQ expert for Redis-backed job queues, background processing, and reliable async execution in Node.js/TypeScript applications. 
 category: AI & Agents
 source: antigravity
-tags: [typescript, node, nextjs, api, ai, llm, automation, workflow, kubernetes, cro]
+tags: [typescript, node, nextjs, api, ai, llm, automation, workflow, kubernetes, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bullmq-specialist
 ---
 
@@ -15,7 +15,7 @@ reliable async execution in Node.js/TypeScript applications.
 
 ## Principles
 
-- Jobs are fire-and-forget from the producer side - let the queue handle delivery
+- Await durable queue insertion and handle failures before acknowledging a request; worker completion can happen asynchronously
 - Always set explicit job options - defaults rarely match your use case
 - Idempotency is your responsibility - jobs may run more than once
 - Backoff strategies prevent thundering herds - exponential beats linear
@@ -146,6 +146,8 @@ await queue.removeRepeatable('daily-digest', {
   tz: 'America/New_York',
 });
 
+BullMQ sibling children are eligible to run in parallel; their array order does not sequence inventory, payment and notification. Model dependent stages as nested dependencies or a state machine, and make each external effect idempotent. The snippets are fragments, not production-ready code: supply sendEmail/app/queue definitions, protect Bull Board with authentication/authorization and redact job payload/errors. Share eligible Redis connections deliberately; workers need maxRetriesPerRequest null while HTTP producers should fail promptly. Close QueueEvents/FlowProducer and externally owned connections on shutdown. See [connections](https://docs.bullmq.io/guide/connections) and [flows](https://docs.bullmq.io/guide/flows).
+
 ### Job Flows and Dependencies
 
 Complex multi-step job processing with parent-child relationships
@@ -204,35 +206,4 @@ const shutdown = async () => {
 process.on('SIGTERM', shutdown);
 process.on('SIGINT', shutdown);
 
-### Bull Board Dashboard
-
-Visual monitoring for BullMQ queues
-
-**When to use**: Need visibility into queue status and job states
-
-import { createBullBoard } from '@bull-board/api';
-import { BullMQAdapter } from '@bull-board/api/bullMQAdapter';
-import { ExpressAdapter } from '@bull-board/express';
-
-const serverAdapter = new ExpressAdapter();
-serverAdapter.setBasePath('/admin/queues');
-
-createBullBoard({
-  queues: [
-    new BullMQAdapter(emailQueue),
-    new BullMQAdapter(orderQueue),
-  ],
-  serverAdapter,
-});
-
-app.use('/admin/queues', serverAdapter.getRouter());
-
-## Validation Checks
-
-### Redis connection missing maxRetriesPerRequest
-
-Severity: ERROR
-
-BullMQ requires maxRetriesPerRequest null for proper reconnection handling
-
-Message: BullMQ queue/worker created without 
+#

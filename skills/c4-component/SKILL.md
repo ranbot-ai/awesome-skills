@@ -90,7 +90,6 @@ C4Component
     Rel(component1, externalContainer, "Uses", "API")
     Rel(component2, externalSystem, "Uses", "API")
 ```
-````
 
 **Key Principles** (from [c4model.com](https://c4model.com/diagrams/component)):
 
@@ -100,11 +99,9 @@ C4Component
 - Show how components **interact** with each other
 - Include **external dependencies** (other containers, external systems)
 
-````
-
 ## Master Component Index Template
 
-```markdown
+````markdown
 # C4 Component Level: System Overview
 
 ## System Components

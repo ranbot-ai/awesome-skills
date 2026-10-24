@@ -3,16 +3,19 @@
   "name": "aws-serverless",
   "slug": "aws-serverless",
   "description": "Specialized skill for building production-ready serverless applications on AWS. Covers Lambda functions, API Gateway, DynamoDB, SQS/SNS event-driven patterns, SAM/CDK deployment, and cold start optimization.",
-  "category": "AI & Agents",
+  "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-serverless",
-  "content": "\n# AWS Serverless\n\nSpecialized skill for building production-ready serverless applications on AWS.\nCovers Lambda functions, API Gateway, DynamoDB, SQS/SNS event-driven patterns,\nSAM/CDK deployment, and cold start optimization.\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## Monitor memory usage\n\n```javascript\nexports.handler = async (event, context) => {\n  const used = process.memoryUsage();\n  console.log('Memory:', {\n    heapUsed: Math.round(used.heapUsed / 1024 / 1024) + 'MB',\n    heapTotal: Math.round(used.heapTotal / 1024 / 1024) + 'MB'\n  });\n  // ...\n};\n```\n\n## When to Use\nUse this skill when the request clearly matches the capabilities and patterns described above.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
+  "content": "\n# AWS Serverless\n\nSpecialized skill for building production-ready serverless applications on AWS.\nCovers Lambda functions, API Gateway, DynamoDB, SQS/SNS event-driven patterns,\nSAM/CDK deployment, and cold start optimization.\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## Scope and validation\n\nBefore deployment confirm account/region, IAM scope, resource changes, data retention and budget. Review the synthesized template/change set and verify in a scoped development environment. Bundled material is documentation only; helper handlers and deployment files shown in snippets are not present or runtime-tested here. Secrets need approved managed storage and least-privilege roles; do not paste credentials into logs.\n\n## Monitor memory usage\n\n```javascript\nexports.handler = async (event, context) => {\n  const used = process.memoryUsage();\n  console.log('Memory:', {\n    heapUsed: Math.round(used.heapUsed / 1024 / 1024) + 'MB',\n    heapTotal: Math.round(used.heapTotal / 1024 / 1024) + 'MB'\n  });\n  // ...\n};\n```\n\n## When to Use\nUse this skill when the request clearly matches the capabilities and patterns described above.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
   "tags": [
     "javascript",
     "api",
     "ai",
-    "aws"
+    "template",
+    "document",
+    "aws",
+    "rag"
   ],
   "useCases": [],
   "scrapedAt": "2026-01-26T13:16:54.552Z"

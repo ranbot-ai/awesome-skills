@@ -25,6 +25,8 @@ Optimize application performance end-to-end using specialized performance and op
 - There is no access to metrics, tracing, or profiling data
 - The request is unrelated to performance or scalability
 
+The named Task tools and agent types are orchestration examples; verify that they exist in the client, or perform the corresponding analysis directly. Do not claim delegated work or measurements without actual outputs.
+
 ## Instructions
 
 1. Confirm performance goals, constraints, and target metrics.
@@ -56,7 +58,7 @@ Optimize application performance end-to-end using specialized performance and op
 ### 3. User Experience Analysis
 
 - Use Task tool with subagent_type="performance-engineer"
-- Prompt: "Analyze user experience metrics for: $ARGUMENTS. Measure Core Web Vitals (LCP, FID, CLS), page load times, time to interactive, and perceived performance. Use Real User Monitoring (RUM) data if available. Identify user journeys with poor performance and their business impact."
+- Prompt: "Analyze user experience metrics for: $ARGUMENTS. Measure Core Web Vitals (LCP, INP, CLS), page load times, time to interactive, and perceived performance. Use Real User Monitoring (RUM) data if available. Identify user journeys with poor performance and their business impact."
 - Context: Performance baselines from step 1
 - Output: UX performance report, Core Web Vitals analysis, user impact assessment
 
@@ -74,9 +76,4 @@ Optimize application performance end-to-end using specialized performance and op
 - Use Task tool with subagent_type="backend-development::backend-architect"
 - Prompt: "Optimize backend services for: $ARGUMENTS targeting bottlenecks: {context_from_phase_1}. Implement efficient algorithms, add application-level caching, optimize N+1 queries, use async/await patterns effectively. Implement pagination, response compression, GraphQL query optimization, and batch API operations. Add circuit breakers and bulkheads for resilience."
 - Context: Database optimizations from step 4, profiling data from phase 1
-- Output: Optimized backend code, caching implementation, API improvements, resilience patterns
-
-### 6. Microservices & Distributed System Optimization
-
-- Use Task tool with subagent_type="performance-engineer"
-- Prompt: "
+- 

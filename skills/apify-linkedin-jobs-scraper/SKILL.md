@@ -10,7 +10,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apif
 
 # LinkedIn Jobs Scraper
 
-Turn a job-market question into one run of `harshmaur/linkedin-jobs-scraper` and return one row per job. A single Actor covers keyword search, pasted search URLs, company enrichment and searches past LinkedIn's limit of about 1,000 results. The work is to pick the right input fields and to keep the job count in budget.
+Turn a job-market question into one run of `harshmaur/linkedin-jobs-scraper` and return one row per job. The author describes an Actor that covers keyword search, pasted search URLs, company enrichment and searches past LinkedIn's limit of about 1,000 results. The work is to pick the right input fields and to keep the job count in budget.
 
 Disclosure: the Actor is paid per result and is built by the skill author. Links carry no affiliate parameters.
 
@@ -34,7 +34,7 @@ Out of scope (the boundary):
 
 ## Prerequisites
 
-- Apify account ([sign up](https://apify.com)). The free plan's monthly credit covers a few thousand jobs.
+- Apify account ([sign up](https://apify.com)). Check current credits, Actor prices and platform charges before choosing a budget.
 - Authentication via one of:
   - `apify login` (OAuth, if you use the Apify CLI)
   - `APIFY_TOKEN` environment variable
@@ -49,7 +49,7 @@ Out of scope (the boundary):
 |---|---|---|
 | A job title, skill or role | `keywords` | Short words work best: `"data engineer"`, not a sentence. |
 | A city, country or "remote" | `location` | Free text as LinkedIn takes it: `"Berlin"`, `"United States"`, `"Remote"`. |
-| "today", "this week", "this month" | `datePosted` | `"1"` (24 h), `"7"`, `"30"`. This is an exact filter. Use it for fresh jobs and alerts. |
+| "today", "this week", "this month" | `datePosted` | `"1"` (24 h), `"7"`, `"30"`. Provider-described filter; verify returned timestamps for freshness. |
 | remote, hybrid, on-site | `workplaceType` | `remote`, `hybrid`, `on-site`. Not exact (see Gotchas). |
 | full-time, contract, internship | `jobType` | `full-time`, `part-time`, `contract`, `temporary`, `internship`. Not exact. |
 | junior, senior, director | `experienceLevel` | `internship`, `entry`, `associate`, `mid-senior`, `director`, `executive`. Not exact. |
@@ -81,7 +81,7 @@ Do not pass `proxy`. Fetch the live schema when a field is in doubt:
 
 ```bash
 apify actors info "harshmaur/linkedin-jobs-scraper" --input --json \
-  --user-agent apify-awesome-skills/apify-linkedin-jobs-scraper 2>/dev/null
+  --user-agent apify-awesome-skills/apify-linkedin-jobs-scraper
 ```
 
 ### Step 3 — Estimate the cost, then run
@@ -95,9 +95,4 @@ The price is per job in the dataset. There is no start fee, and details, recruit
 | Scale | $0.43 |
 | Business and higher | $0.40 |
 
-`cost ≈ maxItems × price per job`. Use the Free price when you do not know the plan. 1,000 jobs cost at most $1.00. Under about 2,000 jobs, run it. Above that, or when `maxItems` is `0`, state the estimate and get a yes first.
-
-```bash
-apify actors call "harshmaur/linkedin-jobs-scraper" \
-  -i '{"keywords":"data engineer","location":"Berlin","datePosted":"7","maxItems":50}' \
-  --
+`cost ≈ maxItems × price per job`. Use the Free price when you do not know the plan. These are historical illustrative prices, not a spending ceiling. Verify the live Actor pricing and account plan, include platform charges, and stay within the user-authorized budget; when no budget is authorized, obtain one before a paid run. Never use un

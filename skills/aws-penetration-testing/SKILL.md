@@ -3,7 +3,7 @@ name: aws-penetration-testing
 description: Provide comprehensive techniques for penetration testing AWS cloud environments. Covers IAM enumeration, privilege escalation, SSRF to metadata endpoint, S3 bucket exploitation, Lambda code extraction
 category: Security & Systems
 source: antigravity
-tags: [python, api, ai, agent, workflow, document, security, pentest, vulnerability, aws]
+tags: [python, api, ai, agent, workflow, document, image, security, pentest, vulnerability]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-penetration-testing
 ---
 
@@ -98,7 +98,8 @@ aws iam list-user-policies --user-name TARGET_USER
 
 # Get policy details
 aws iam get-policy --policy-arn POLICY_ARN
-aws iam get-policy-version --policy-arn POLICY_ARN --version-id v1
+# Resolve DefaultVersionId from get-policy; v1 may not be the effective version.
+aws iam get-policy-version --policy-arn POLICY_ARN --version-id DEFAULT_VERSION_ID
 
 # List roles
 aws iam list-roles
@@ -157,7 +158,7 @@ http://169.254.170.2/v2/credentials/CREDENTIAL-PATH
 
 ### Shadow Admin Permissions
 
-These permissions are equivalent to administrator:
+These permissions can enable escalation only when their allowed resources, conditions and effective policies permit the chain. They are not inherently administrator-equivalent:
 
 | Permission | Exploitation |
 |------------|--------------|
@@ -167,16 +168,4 @@ These permissions are equivalent to administrator:
 | `iam:PutUserPolicy` | Add inline admin policy |
 | `iam:AddUserToGroup` | Add self to admin group |
 | `iam:PassRole` + `ec2:RunInstances` | Launch EC2 with admin role |
-| `lambda:UpdateFunctionCode` | Inject code into Lambda |
-
-### Create Access Key for Another User
-
-```bash
-aws iam create-access-key --user-name target_user
-```
-
-### Attach Admin Policy
-
-```bash
-aws iam attach-user-policy --user-name my_username \
-  --policy-arn ar
+| `lambda:UpdateFunctionCode` | Inject cod

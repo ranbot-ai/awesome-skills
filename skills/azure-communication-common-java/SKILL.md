@@ -1,9 +1,9 @@
 ---
 name: azure-communication-common-java
 description: Azure Communication Services common utilities for Java. Use when working with CommunicationTokenCredential, user identifiers, token refresh, or shared authentication across ACS services. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [ai, workflow, security, azure, cro]
+tags: [api, ai, workflow, document, security, azure, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-communication-common-java
 ---
 
@@ -71,7 +71,7 @@ CommunicationTokenRefreshOptions refreshOptions = new CommunicationTokenRefreshO
 CommunicationTokenCredential credential = new CommunicationTokenCredential(refreshOptions);
 ```
 
-### Async Token Refresh
+### Blocking bridge to an async token source
 
 ```java
 import java.util.concurrent.CompletableFuture;
@@ -164,13 +164,4 @@ import com.azure.communication.common.UnknownIdentifier;
 UnknownIdentifier unknown = new UnknownIdentifier("some-raw-id");
 ```
 
-## Identifier Parsing
-
-```java
-import com.azure.communication.common.CommunicationIdentifier;
-import com.azure.communication.common.CommunicationIdentifierModel;
-
-// Parse raw ID to appropriate type
-public CommunicationIdentifier parseIdentifier(String rawId) {
-    if (rawId.startsWith("8:acs:")) {
- 
+Raw-ID prefix parsing below is illustrative and incomplete for cloud/anonymous variants; prefer the pinned SDK's documented conversion APIs and validate identifier type before casts. Token refresh must use an authenticated, authorized backend with bounded request timeouts; `futur

@@ -29,6 +29,10 @@ This skill covers:
 
 It MUST NOT perform reconnaissance, exploitation, dynamic instrumentation, or target changes. Those actions belong to the routed analysis skill and require the case scope gate.
 
+## Imported scope
+
+This tree bundles SKILL.md only. `scripts/review_case.py`, `skills/scripts/append-evidence.ps1` and routed modules are not included. Obtain a reviewed matching upstream installation before any dependent command; otherwise perform the inline traceability checks manually and report script/hash/strict-mode verification as not run. Script behavior described below is an upstream claim, not a test result for this import.
+
 ## Tool dependencies
 
 | Tool | Required | Purpose | Auto-bootstrap |
@@ -135,14 +139,4 @@ The command is read-only with respect to the case unless shell redirection is ex
 
 This skill has no third-party dependency. If Python 3 is unavailable, the only allowed recovery action is the repository bootstrap path when a Python capability is registered for the current platform. If no such capability is registered, stop and report the missing runtime. Do not guess executable paths, download packages, or perform a manual install from inside this skill.
 
-## Routing context
-
-**Upstream entry**: any reverse, forensics, CTF, or authorized security skill that has produced a case package.
-
-**Downstream exit**: `docs-generator/` for a formal report, or the original PRIMARY skill when the graph is incomplete.
-
-**Related modules**: `ops/evidence-finding-path.md`, `ops/timeline-workitem.md`, `digital-forensics/`, `reverse-engineering/`, and `docs-generator/`.
-
-## References
-
-- [NIST SP 800-86: Guide to In
+## Routing 

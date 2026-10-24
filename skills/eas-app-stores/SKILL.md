@@ -17,6 +17,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/eas-
 
 This skill covers building and releasing iOS and Android apps with EAS: Expo and other React Native projects, plus existing native apps. EAS is a delivery service; native apps can use it without adding Expo or React Native to their runtime. The native setup walkthrough currently covers SwiftUI/UIKit on iOS.
 
+## Authorization and artifact boundaries
+
+Store uploads, metadata pushes, invitations, public releases, paid builds and OTA publications require the applicable user scope; drafting or inspection alone does not authorize them. Pin a reviewed CLI version and inspect upload archives/ignore rules for secrets before cloud builds. Never send project logs/feedback externally without explicit instruction; redact secrets and user data. Use exact build IDs, account/team and track; latest-selection shortcuts are unsuitable when multiple candidates exist. Current CLI/store schemas override historical examples and legacy statistics.
+
 ## Choose the project path
 
 - **SwiftUI/UIKit app with no React Native runtime:** read [references/native-ios.md] before changing its build configuration. Keep the Xcode project and Swift code as the app's source of truth. The Expo/React Native quick-start and development-client examples below do not apply to this path.
@@ -115,26 +119,4 @@ Example for an Expo / React Native project (native Swift profiles are in `refere
         "ascAppId": "1234567890"
       },
       "android": {
-        "serviceAccountKeyPath": "./google-service-account.json",
-        "track": "internal"
-      }
-    }
-  }
-}
-```
-
-## Platform-Specific Guides
-
-### iOS
-
-- For native Swift apps, use the explicit build/submit flow in `references/native-ios.md`
-- For Expo / React Native apps, `npx testflight` provides a quick TestFlight flow
-- Configure Apple credentials via `eas credentials`
-- See ./references/testflight.md for credential setup
-- See ./references/ios-app-store.md for App Store submission
-
-### Android
-
-- Set up Google Play Console service account
-- Configure tracks: internal → closed → open → production
-- See ./references/play-store.md for detaile
+        "serviceAccountKeyPa

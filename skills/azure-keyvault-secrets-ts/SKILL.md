@@ -16,7 +16,7 @@ Manage secrets with Azure Key Vault.
 
 ```bash
 # Secrets SDK
-npm install @azure/keyvault-secrets @azure/identity
+npm install @azure/keyvault-secrets @azure/keyvault-keys @azure/identity
 ```
 
 ## Environment Variables
@@ -32,6 +32,7 @@ AZURE_KEYVAULT_NAME=<vault-name>
 ```typescript
 import { DefaultAzureCredential } from "@azure/identity";
 import { SecretClient } from "@azure/keyvault-secrets";
+import { KeyClient } from "@azure/keyvault-keys";
 
 const credential = new DefaultAzureCredential();
 const vaultUrl = `https://${process.env.AZURE_KEYVAULT_NAME}.vault.azure.net`;
@@ -39,6 +40,10 @@ const vaultUrl = `https://${process.env.AZURE_KEYVAULT_NAME}.vault.azure.net`;
 const keyClient = new KeyClient(vaultUrl, credential);
 const secretClient = new SecretClient(vaultUrl, credential);
 ```
+
+## Execution boundaries
+
+Examples are independent fragments and reuse names; do not concatenate them into one script. Use approved test vaults and least-privilege identity. Purge is irreversible and can be blocked by purge protection; key deletion/rotation can break dependent workloads. Confirm exact vault/object/version and recovery plan before mutation. Example expiration dates are historical, not recommended live values.
 
 ## Secrets Operations
 
@@ -61,7 +66,7 @@ const secretWithAttrs = await secretClient.setSecret("MySecret", "value", {
 ```typescript
 // Get latest version
 const secret = await secretClient.getSecret("MySecret");
-console.log(secret.value);
+console.log(secret.name); // Never log secret values.
 
 // Get specific version
 const specificSecret = await secretClient.getSecret("MySecret", {
@@ -187,7 +192,7 @@ const decryptResult = await cryptoClient.decrypt({
   ciphertext: encryptResult.result
 });
 
-console.log(decryptResult.result.toString());
+// Use decrypted bytes only in the authorized application; do not log them.
 ```
 
 ### Sign/Verify
@@ -210,29 +215,4 @@ console.log("Valid:", verifyResult.result);
 
 ```typescript
 // Wrap a key (encrypt it for storage)
-const wrapResult = await cryptoClient.wrapKey("RSA-OAEP", Buffer.from("key-material"));
-
-// Unwrap
-const unwrapResult = await cryptoClient.unwrapKey("RSA-OAEP", wrapResult.result);
-```
-
-## Backup and Restore
-
-```typescript
-// Backup
-const keyBackup = await keyClient.backupKey("MyKey");
-const secretBackup = await secretClient.backupSecret("MySecret");
-
-// Restore (can restore to different vault)
-const restoredKey = await keyClient.restoreKeyBackup(keyBackup!);
-const restoredSecret = await secretClient.restoreSecretBackup(secretBackup!);
-```
-
-## Key Types
-
-```typescript
-import {
-  KeyClient,
-  KeyVaultKey,
-  KeyProperties,
-  Deleted
+const wrapResult = await cryptoClient.wrapKey("RSA-OAEP", Buffer.from("key-materi

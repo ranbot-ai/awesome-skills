@@ -90,7 +90,7 @@ If an artifact was requested, build it after resolving essential missing facts. 
 
 **Recommended approach:** Keep meetings, papers and decisions as separate records joined by the meeting, and track actions to a due date and an owner.
 
-**Why this one:** Governance records fail on lost actions rather than missing minutes. The action log is what the board actually needs.
+**Why this one:** Both approved minutes and tracked actions matter. Keep the action log linked to the authoritative decision record rather than treating it as a substitute for minutes.
 
 **Workflow:** Meeting scheduled → Papers circulated → Meeting held → Minutes recorded → Actions tracked
 
@@ -114,4 +114,4 @@ For an Excel-compatible CSV, use UTF-8 with a byte order mark so Excel opens the
 text correctly. A CSV is not an `.xlsx` workbook; create `.xlsx` only when the user
 requests a workbook.
 A CSV carries no types, so after it, name the columns
-that need a number, date or currency format applied.
+tha

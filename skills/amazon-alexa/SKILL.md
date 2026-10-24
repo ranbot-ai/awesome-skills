@@ -28,3 +28,9 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 - Use this skill only when the task clearly matches the scope described above.
 - Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
 - Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
+
+## Example
+
+Prototype a read-only `ChatIntent` for one authorized test account. Verify the
+interaction model and timeout in the ASK simulator before deploying; keep smart
+home control disabled until account linking and device ownership checks pass.

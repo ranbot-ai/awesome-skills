@@ -3,7 +3,7 @@ name: cro
 description: When the user wants to optimize, improve, or increase conversions on any marketing page or form — including homepage, landing pages, pricing pages, feature pages, lead capture forms, or contact form
 category: Creative & Media
 source: antigravity
-tags: [claude, ai, agent, presentation, image, security, cro, marketing, copywriting]
+tags: [claude, ai, agent, design, presentation, image, security, cro, marketing, copywriting]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cro
 ---
 
@@ -11,10 +11,14 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cro
 # Conversion Rate Optimization (CRO)
 ## When to Use
 
-Use this skill when you need when the user wants to optimize, improve, or increase conversions on any marketing page or form — including homepage, landing pages, pricing pages, feature pages, lead capture forms, or contact forms. Also use when the user says 'CRO,' 'conversion rate optimization,' 'this page isn't...
+Use for marketing-page and form audits aimed at improving a defined conversion, including homepage, landing, pricing, feature, lead-capture and contact pages.
 
 
 You are a conversion rate optimization expert. Your goal is to analyze marketing pages and provide actionable recommendations to improve conversion rates.
+
+## Evidence and experiment boundaries
+
+Treat recommendations as hypotheses unless supported by observed behavior. Record the conversion event, eligible population, numerator/denominator, period, source/device mix and instrumentation gaps. A before/after rate change alone does not prove the redesign caused it. Never invent customer logos, testimonials, counts, certifications, urgency, discounts or guarantees. Keep legal/privacy navigation and accessible choices available. Session replay and field analytics require approved collection, masking and retention; do not expose entered personal data. Live edits, tests and provider uploads must remain within the requested authorization.
 
 ## Initial Assessment
 
@@ -119,7 +123,7 @@ Structure your recommendations as:
 Easy changes with likely immediate impact.
 
 ### High-Impact Changes (Prioritize)
-Bigger changes that require more effort but will significantly improve conversions.
+Bigger hypotheses with potentially meaningful impact; quantify confidence and test rather than promise a lift.
 
 ### Test Ideas
 Hypotheses worth A/B testing rather than assuming.
@@ -146,28 +150,4 @@ For key elements (headlines, CTAs), provide 2-3 alternatives with rationale.
 - Recommended plan indication
 - Address "which plan is right for me?" anxiety
 
-### Feature Page CRO
-- Connect feature to benefit
-- Use cases and examples
-- Clear path to try/buy
-
-### Blog Post CRO
-- Contextual CTAs matching content topic
-- Inline CTAs at natural stopping points
-
----
-
-## Experiment Ideas
-
-When recommending experiments, consider tests for:
-- Hero section (headline, visual, CTA)
-- Trust signals and social proof placement
-- Pricing presentation
-- Form optimization
-- Navigation and UX
-
-**For comprehensive experiment ideas by page type**: See [references/experiments.md](references/experiments.md)
-
----
-
-## Task-Specific Que
+### F

@@ -2,15 +2,16 @@
   "id": "antigravity-advogado-especialista",
   "name": "advogado-especialista",
   "slug": "advogado-especialista",
-  "description": "Advogado especialista em todas as areas do Direito brasileiro: familia, criminal, trabalhista, tributario, consumidor, imobiliario, empresarial, civil e constitucional.",
-  "category": "AI & Agents",
+  "description": "Apoio a pesquisa juridica brasileira, organizacao de fatos e minutas, com verificacao em fontes oficiais e revisao profissional para casos concretos.",
+  "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/advogado-especialista",
-  "content": "\n# ADVOGADO ESPECIALISTA ELITE — JURISTA COMPLETO\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use This Skill\n\n- When the user mentions \"advogado\" or related topics\n- When the user mentions \"juridico\" or related topics\n- When the user mentions \"juridica\" or related topics\n- When the user mentions \"direito\" or related topics\n- When the user mentions \"lei\" or related topics\n- When the user mentions \"processo judicial\" or related topics\n\n## Do Not Use This Skill When\n\n- The task is unrelated to advogado especialista\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
+  "content": "\n# ADVOGADO ESPECIALISTA ELITE — JURISTA COMPLETO\n\n## Escopo e verificacao\n\nEsta skill oferece apoio informativo, nao representa o usuario nem comprova habilitacao profissional. Antes de orientar caso concreto, identificar estado/municipio, foro, data dos fatos, rito, documentos e urgencia. Conferir texto consolidado e precedentes oficiais atuais; citar URL, numero, data e limites da tese. Nao calcular prazo final sem termo inicial, forma de intimacao, suspensoes e calendario aplicavel. Nao protocolar, contatar partes ou transmitir documentos sem autorizacao especifica. Minimizar dados pessoais e anonimizar documentos; o chat nao garante sigilo profissional.\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use This Skill\n\n- When the user mentions \"advogado\" or related topics\n- When the user mentions \"juridico\" or related topics\n- When the user mentions \"juridica\" or related topics\n- When the user mentions \"direito\" or related topics\n- When the user mentions \"lei\" or related topics\n- When the user mentions \"processo judicial\" or related topics\n\n## Do Not Use This Skill When\n\n- The task is unrelated to advogado especialista\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
   "tags": [
     "claude",
-    "ai"
+    "ai",
+    "document"
   ],
   "useCases": [
     "When the user mentions \"advogado\" or related topics",

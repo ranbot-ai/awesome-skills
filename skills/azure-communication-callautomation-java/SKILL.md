@@ -12,6 +12,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azur
 
 Build server-side call automation workflows including IVR systems, call routing, recording, and AI-powered interactions.
 
+## Integration boundaries
+
+Examples are fragments targeting the stated SDK version, not a complete IVR. Verify constructors/types against that version before compiling. Outbound calls/transfers incur charges and require approved recipients; recording requires appropriate notice/consent and protected retention. Authenticate webhook delivery, validate event schema, deduplicate event/operation IDs, and avoid logging DTMF/account data. An accepted asynchronous request is not proof playback/recognition succeeded: handle failure and disconnect events.
+
 ## Installation
 
 ```xml
@@ -147,18 +151,4 @@ CallRecording callRecording = client.getCallRecording();
 
 // Start recording
 StartRecordingOptions recordingOptions = new StartRecordingOptions(
-    new ServerCallLocator("<server-call-id>"))
-    .setRecordingChannel(RecordingChannel.MIXED)
-    .setRecordingContent(RecordingContent.AUDIO_VIDEO)
-    .setRecordingFormat(RecordingFormat.MP4);
-
-RecordingStateResult recordingResult = callRecording.start(recordingOptions);
-String recordingId = recordingResult.getRecordingId();
-
-// Pause/resume/stop
-callRecording.pause(recordingId);
-callRecording.resume(recordingId);
-callRecording.stop(recordingId);
-
-// Download recording (after RecordingFileStatusUpdated event)
-callRecording.downloadTo(recordingUrl, Paths.get("recording.m
+    new ServerCallLocator("

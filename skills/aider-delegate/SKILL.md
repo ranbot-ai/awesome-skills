@@ -1,9 +1,9 @@
 ---
 name: aider-delegate
 description: Delegate coding tasks to Aider (`aider`) only when the user explicitly requests it, while the orchestrator retains review and landing responsibility. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [python, node, api, ai, agent, llm, design, security]
+tags: [python, node, api, ai, agent, llm, design, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aider-delegate
 ---
 
@@ -19,6 +19,12 @@ review what it produced and land it yourself. You write the brief and own the ju
 typing in its own run; you verify and commit.
 
 The loop needs only a shell command and file access, so any comparable orchestrator can drive it.
+
+## Runtime availability and authorization
+
+This tracked bundle has documentation only: scripts/relay.mjs is absent. Do not run the documented path or automatically install it/Aider. Use an already reviewed installed runtime, or stop that execution path and prepare a separately authorized pinned installation. CLI flags/defaults and result semantics below describe an upstream version, not locally verified behavior. Review actual runtime/config/hooks before dispatch.
+
+Delegation sends selected code, brief and repository context to the configured provider; confirm the intended endpoint/data policy and cost limit. Use a non-secret placeholder only for a trusted local endpoint that ignores credentials, never send a real provider key to an arbitrary api-base. Logs/history can retain private code and keys; protect paths and retention. Disable or review repository lint/test commands before execution. A dry run can still write history/cache and incur model costs. The orchestrator retains publication/commit authority from the actual task; this skill alone does not grant it.
 
 ## The one thing to know about Aider
 
@@ -81,27 +87,6 @@ before dispatching a long brief.
 
 ### Staying offline
 
-No account or provider registration is involved: Aider is a pip install, the endpoint is yours, and
-`OPENAI_API_KEY` only has to be non-empty. The relay pins the flags that would otherwise reach the
-network on their own - `--no-check-update`, `--no-analytics` (Aider's own default is `random`, which
-opts some sessions in by itself), and `--no-detect-urls`, without which Aider offers to scrape any URL
-in the brief and `--yes-always` accepts that offer silently.
+The listed flags reduce known automatic requests; they do not prove offline operation. Model requests, repository config/lint/hooks and dependencies may still use the network. Enforce egress outside the child when offline behavior is required.
 
-`--no-suggest-shell-commands` closes the remaining path by which a run could reach the network without
-being asked to. What stays outside the relay's control is the brief itself: instructions that tell
-Aider to install a package or call an API will still be carried out, and `--auto-lint` runs the
-repository's own tooling. Offline here means nothing in the dispatch path reaches out on its own - not
-that a sandbox is stopping it.
-
-## The loop
-
-Run these five steps per task. Steps 1, 4, and 5 require judgment; 2 and 3 are mechanical.
-
-### 1. Write the brief
-
-Aider sees only the text you send plus the files in its editing scope - no chat history or shared
-context. Include the goal, current state, what to change, what to leave untouched, the project's
-**actual** gates, and a report contract. Keep one task per brief. See
-[references/writing-the-brief.md](references/writing-the-brief.md).
-
-### 2. 
+No account or provider registration is inv

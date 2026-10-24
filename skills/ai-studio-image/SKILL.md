@@ -68,7 +68,7 @@ set GEMINI_API_KEY=sua-api-key-aqui
 export GEMINI_API_KEY=sua-api-key-aqui
 ```
 
-Ou crie um arquivo `.env` em `C:\Users\renat\skills\ai-studio-image\`:
+Ou crie um arquivo `.env` em `<skill-root>/`:
 ```
 GEMINI_API_KEY=sua-api-key-aqui
 ```
@@ -76,13 +76,13 @@ GEMINI_API_KEY=sua-api-key-aqui
 ## 2. Instalar Dependencias
 
 ```bash
-pip install -r C:\Users\renat\skills\ai-studio-image\scripts\requirements.txt
+pip install -r <skill-root>/scripts\requirements.txt
 ```
 
 ## 3. Gerar Sua Primeira Imagem
 
 ```bash
-python C:\Users\renat\skills\ai-studio-image\scripts\generate.py --prompt "mulher jovem tomando cafe em cafeteria" --mode influencer --format square
+python <skill-root>/scripts\generate.py --prompt "mulher jovem tomando cafe em cafeteria" --mode influencer --format square
 ```
 
 ## Workflow Principal
@@ -118,7 +118,7 @@ Se nao especificado, deduza pelo contexto (stories → 9:16, feed → 1:1, etc).
 Sempre passe pelo motor de humanizacao:
 
 ```bash
-python C:\Users\renat\skills\ai-studio-image\scripts\prompt_engine.py --prompt "prompt do usuario" --mode influencer
+python <skill-root>/scripts\prompt_engine.py --prompt "prompt do usuario" --mode influencer
 ```
 
 O motor de humanizacao adiciona camadas de realismo:
@@ -135,4 +135,5 @@ O motor de humanizacao adiciona camadas de realismo:
 - Sem iluminacao de estudio
 - Reflexos naturais em superficies
 
-**Camada 3 —
+**Camada 3 — Imperfeicoes Humanas:**
+- Enquadramento ligeiramente imperfeito (nao centralizado matematicamente)

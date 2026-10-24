@@ -47,13 +47,13 @@ Disk Access. Steps, in order:
    git clone https://github.com/connerkward/mcp-apple-notes
    cd mcp-apple-notes
    git checkout <reviewed-tag-or-commit>
-   bun install
+   bun install --ignore-scripts
    ```
 3. **Grant Full Disk Access to bun.** Run `which bun`, then open System Settings →
    Privacy & Security → Full Disk Access, click `+`, and add that exact `bun` binary
    path (commonly `/opt/homebrew/bin/bun` or `/usr/local/bin/bun`). Without this the
    server cannot read NoteStore.sqlite and every call fails with a permissions error.
-   (`bun install`'s postinstall tries to open this pane automatically.)
+   (Review all lifecycle scripts before any separate activation; do not run postinstall merely to open a settings pane.)
 4. **Register the MCP server** (pick the user's client):
    - Claude Code: `claude mcp add apple-notes -- bun /absolute/path/to/mcp-apple-notes/index.ts --stdio`
    - Claude Desktop: add to `claude_desktop_config.json`:
@@ -86,5 +86,4 @@ Disk Access. Steps, in order:
 | `check-changes` | Did notes change since last index? (does not trigger re-index) |
 | `index-health` | Sync status, last-indexed time, note count. Run this if results seem stale. |
 
-For "synthesize what I think about X" the synthesis lives in the **web app** endpoint
-(`GET /api/synthesize?
+For "synthesize what I think about X" the 

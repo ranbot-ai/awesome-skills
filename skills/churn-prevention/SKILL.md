@@ -1,9 +1,9 @@
 ---
 name: churn-prevention
 description: Reduce voluntary and involuntary churn with cancel flows, save offers, dunning, win-back tactics, and retention strategy. Use when users are cancelling, failed payments are rising, or subscription ret
-category: Business & Marketing
+category: Document Processing
 source: antigravity
-tags: [react, claude, ai, agent, design, presentation, stripe, rag, cro, marketing]
+tags: [react, claude, ai, agent, workflow, design, document, presentation, stripe, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/churn-prevention
 ---
 
@@ -58,7 +58,7 @@ Churn has two types requiring different strategies:
 | **Voluntary** | Customer chooses to cancel | Cancel flows, save offers, exit surveys |
 | **Involuntary** | Payment fails | Dunning emails, smart retries, card updaters |
 
-Voluntary churn is typically 50-70% of total churn. Involuntary churn is 30-50% but is often easier to fix.
+Measure voluntary and payment-related churn in your own subscriber cohorts; their shares vary by product and payment mix.
 
 This skill supports three modes:
 
@@ -72,7 +72,7 @@ This skill supports three modes:
 
 ### The Cancel Flow Structure
 
-Every cancel flow follows this sequence:
+An optional retention flow can follow this sequence, with a direct cancellation path available throughout:
 
 ```
 Trigger → Survey → Dynamic Offer → Confirmation → Post-Cancel
@@ -82,7 +82,7 @@ Trigger → Survey → Dynamic Offer → Confirmation → Post-Cancel
 Customer clicks "Cancel subscription" in account settings.
 
 **Step 2: Exit Survey**
-Ask why they're cancelling. This determines which save offer to show.
+Offer an optional, skippable reason question. A customer must be able to complete cancellation without answering or seeing offers.
 
 **Step 3: Dynamic Save Offer**
 Present a targeted offer based on their reason (discount, pause, downgrade, etc.)
@@ -127,6 +127,4 @@ The key insight: **match the offer to the reason.** A discount won't save someon
 | Not using it enough | Pause (1-3 months) | Free onboarding session |
 | Missing feature | Roadmap preview + timeline | Workaround guide |
 | Switching to competitor | Competitive comparison + discount | Feedback session |
-| Technical issues | Escalate to support immediately | Credit + priority fix |
-| Temporary / seasonal | Pause subscription | Downgrade temporarily |
-| Business closed | Ski
+| Technical issues | Escalate t

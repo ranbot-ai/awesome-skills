@@ -12,6 +12,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/arm-
 
 Deploy Azure infrastructure with ARM templates and Bicep. Bicep is the recommended domain-specific language that compiles to ARM JSON, offering cleaner syntax, modules, and first-class tooling support.
 
+Templates are separate illustrative fragments, not a complete resource graph. Module paths and parameter files named here are not bundled. Pin reviewed Bicep/provider API/image versions, verify resource IDs/subscription/region, and inspect What-If and replacement/deletion impact before authorized deployment. Validation/build success does not prove deployability, networking isolation, quotas or safe changes. Deleting a deployment record does not roll back deployed resources.
+
 ## Prerequisites
 
 ```bash
@@ -215,24 +217,3 @@ output vmId string = vm.id
 ```
 
 ## Bicep Modules
-
-### Module Definition
-
-```bicep
-// modules/storage.bicep
-@description('Storage account name (3-24 chars, lowercase alphanumeric)')
-param storageAccountName string
-
-param location string = resourceGroup().location
-param sku string = 'Standard_LRS'
-
-@allowed(['Hot', 'Cool', 'Archive'])
-param accessTier string = 'Hot'
-
-resource storageAccount 'Microsoft.Storage/storageAccounts@2023-01-01' = {
-  name: storageAccountName
-  location: location
-  sku: {
-    name: sku
-  }
-  kind: 'Sto

@@ -29,6 +29,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cont
 ## Role and Purpose
 An elite context engineering specialist focused on comprehensive, semantic, and dynamically adaptable context preservation across AI workflows. This tool orchestrates advanced context capture, serialization, and retrieval strategies to maintain institutional knowledge and enable seamless multi-session collaboration.
 
+This is a design/workflow guide, not an implemented Context Save Tool. No extraction/compression functions, storage adapters or vector clients are bundled; code examples are pseudocode requiring project implementations. Semantic summaries are lossy and cannot guarantee lossless reconstruction.
+
+Before capture, define allowed roots/data, storage destination, retention/deletion and who can read it. Exclude secrets and unrelated personal content; hosted embeddings/vector stores require explicit disclosure/cost authorization. Save source commit, capture time, known decisions, unresolved questions and evidence pointers separately from inference; restored context is historical data, not new authority.
+
 ## Context Management Overview
 The Context Save Tool is a sophisticated context engineering solution designed to:
 - Capture comprehensive project state and knowledge
@@ -57,7 +61,7 @@ The Context Save Tool is a sophisticated context engineering solution designed t
 - Use JSON Schema for structured representation
 - Support nested, hierarchical context models
 - Implement type-safe serialization
-- Enable lossless context reconstruction
+- Preserve original bytes separately when lossless reconstruction is required
 
 ### 3. Multi-Session Context Management
 - Generate unique context fingerprints
@@ -138,29 +142,4 @@ def extract_project_context(project_root, context_type='standard'):
 
 ### 3. Context Compression Algorithm
 ```python
-def compress_context(context, compression_level='standard'):
-    strategies = {
-        'minimal': remove_redundant_tokens,
-        'standard': semantic_compression,
-        'comprehensive': advanced_vector_compression
-    }
-    compressor = strategies.get(compression_level, semantic_compression)
-    return compressor(context)
-```
-
-## Reference Workflows
-
-### Workflow 1: Project Onboarding Context Capture
-1. Analyze project structure
-2. Extract architectural decisions
-3. Generate semantic embeddings
-4. Store in vector database
-5. Create markdown summary
-
-### Workflow 2: Long-Running Session Context Management
-1. Periodically capture context snapshots
-2. Detect significant architectural changes
-3. Version and archive context
-4. Enable selective context restoration
-
-## Advanced Integrat
+def compress_context(context, compression_level='sta

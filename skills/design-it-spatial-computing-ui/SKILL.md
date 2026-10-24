@@ -3,7 +3,7 @@ name: spatial-computing-ui
 description: Web and App implementation guide for Spatial Computing UI. Trigger when user wants floating elements, environmental awareness, and Apple Vision Pro style. 
 category: Creative & Media
 source: antigravity
-tags: [react, ai, llm, design, image, cro]
+tags: [react, api, ai, llm, design, image, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-it/spatial-computing-ui
 ---
 

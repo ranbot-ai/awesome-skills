@@ -1,9 +1,9 @@
 ---
 name: falsify
 description: The scientific thinking protocol for AI agents. Use when facing complex, ambiguous, or high-stakes questions where guessing is costly: hypothesis → attempt to break it → evidence → calibrated co
-category: Creative & Media
+category: Document Processing
 source: antigravity
-tags: [markdown, claude, ai, agent, llm, template, design, security, rag, cro]
+tags: [markdown, claude, ai, agent, llm, template, design, document, security, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/falsify
 ---
 
@@ -15,7 +15,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/fals
 
 ## Overview
 
-falsify is a single-Markdown skill that installs a 5-stage scientific thinking protocol on any AI agent (Codex, Claude Code, DeepSeek Harness, Cursor, Gemini CLI, and 20+ more). It stops the agent from giving confident answers it cannot falsify. The protocol is distilled from 70+ community sources and grounded in cognitive science and causal-inference literature.
+falsify is a Markdown reasoning framework with bundled references and a ledger template. It can help organize hypotheses and external evidence; it does not guarantee accuracy, calibration or compatibility with every agent. Named concepts are prompts for review, not a validated combined scientific protocol; the complete claimed 70-source derivation is not documented here.
 
 ## The Iron Law
 
@@ -26,7 +26,7 @@ NO VERDICT WITHOUT A FALSIFIABLE HYPOTHESIS.
 ```
 
 <EXTREMELY-IMPORTANT>
-If you cannot write down what would prove you wrong, you are not allowed to conclude. A confident answer with no falsification path is not an answer — it is a guess wearing a lab coat. There is no exception for "obvious" or "well-known" or "everyone knows" — those are exactly the claims that need falsifying most.
+For empirical claims, identify observations that could change the conclusion. Definitions, mathematics, value judgments and underdetermined evidence require a different validation method; do not force a falsification test onto every answer. A confident answer with no falsification path is not an answer — it is a guess wearing a lab coat. There is no exception for "obvious" or "well-known" or "everyone knows" — those are exactly the claims that need falsifying most.
 </EXTREMELY-IMPORTANT>
 
 ## MODE SELECTION — route BEFORE answering (mandatory)
@@ -35,10 +35,10 @@ First decide which mode this question is, then act accordingly. **Do not run the
 
 | If the ask is... | Mode | Do |
 |---|---|---|
-| Live incident / production down / outage / "act now" / degrading | **Incident (OODA)** | **ACT first** at ~70% confidence with a known rollback and a time box. Do NOT run the five stages. Stabilize, then falsify the effect. Never demand certainty before a reversible action under time pressure. |
+| Live incident / production down / outage / "act now" / degrading | **Incident (OODA)** | **Follow the authorized incident runbook** with the evidence needed for the risk with a known rollback and a time box. Do NOT run the five stages. Stabilize, then falsify the effect. Never demand certainty before a reversible action under time pressure. |
 | Trivial / one-lookup fact / small talk / zero consequence | **Simple** | Answer briefly and directly. No protocol, no follow-up questions, no stage labels. |
 | Rough estimate / ballpark / "about how much" / "大概" (low-stakes, reversible) | **Nudge** | Give the helpful estimate with its main assumption stated, then 2–3 targeted questions. No five-stage ledger. If being wrong costs time/money/trust, escalate to Depth. |
-| Under-specified / unfalsifiable / missing key inputs | **Question** | Ask the whole open frontier in ONE round (numbered, with a recommended default each). Do not conclude, do not fabricate a default justification. |
+| Under-specified / unfalsifiable / missing key inputs | **Question** | Ask only the few missing inputs that block a safe answer; provide a default only where justified. Do not conclude, do not fabricate a default justification. |
 | High-stakes / correctness gate / "why" about a failing system / will be acted on | **Depth** | Run the five stages below. |
 
 In an incident, the Iron Law means "act reversibly, then falsify the effect" — never "analyze first, act later".
@@ -75,6 +75,4 @@ Restate the actual question in one sentence. Name the stakes: who acts on this a
 - *Conclusion-preserving*: already leaning one way and explaining away the rest → ask "what would have to be true for the other side to win?"
 - *Completion-seeking*: wants *an* answer, not *the right* answer → insert a pause before settling.
 - *Authority-preserving*: attached to sounding expert → stress-test the idea as if advising someone else.
-- If you catch any of these, name it silently and compensate. Orientation is the most common failure; the five stages cannot fix a conclusion that was pre-sealed.
-
-**Frontier questioning** — if you need input from the user, ask the whole open frontier in **one rou
+- If you catch any of these, name it sile

@@ -57,7 +57,7 @@ Use this sub-style when the user's request matches the aesthetic described above
 /* Weather Widget Example */
 .widget.weather {
   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  color: white;
+  color: #12313a;
 }
 .weather-temp { font-size: 3rem; font-weight: 300; }
 .weather-icon { position: absolute; top: 16px; right: 16px; font-size: 2rem; }
@@ -73,16 +73,16 @@ struct WidgetDesignView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 16) {
-                // 2x1 Widget
+                // One column: LazyVGrid does not span WeatherWidget across two columns.
                 WeatherWidget()
                     .frame(height: 160) // Base unit height
                 
                 // 1x1 Widget
-                FitnessWidget()
+                Text("Fitness") // Replace with a defined widget component.
                     .frame(height: 160)
                 
                 // 1x1 Widget
-                MusicWidget()
+                Text("Music") // Replace with a defined widget component.
                     .frame(height: 160)
             }
             .padding(24)
@@ -97,7 +97,7 @@ struct WeatherWidget: View {
             LinearGradient(colors: [Color(hex: "4facfe"), Color(hex: "00f2fe")], startPoint: .topLeading, endPoint: .bottomTrailing)
             
             Image(systemName: "cloud.sun.fill")
-                .foregroundColor(.white)
+                .foregroundColor(Color(red: 0.07, green: 0.19, blue: 0.23))
                 .font(.system(size: 40))
                 .padding()
             
@@ -105,10 +105,10 @@ struct WeatherWidget: View {
                 Spacer()
                 Text("72°")
                     .font(.system(size: 48, weight: .thin))
-                    .foregroundColor(.white)
+                    .foregroundColor(Color(red: 0.07, green: 0.19, blue: 0.23))
                 Text("San Francisco")
                     .font(.subheadline)
-                    .foregroundColor(.white.opacity(0.8))
+                    .foregroundColor(Color(red: 0.07, green: 0.19, blue: 0.23))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
@@ -138,16 +138,11 @@ class WidgetDesignScreen extends StatelessWidget {
           // Note: Flutter GridView doesn't easily span rows/cols out of the box.
           // flutter_staggered_grid_view is highly recommended for real widget layouts.
           _buildWeatherWidget(),
-          _buildFitnessWidget(),
-          _buildMusicWidget(),
+          const Center(child: Text("Fitness")),
+          const Center(child: Text("Music")),
         ],
       ),
     );
   }
 
-  Widget _buildWeatherWidget() {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-        gradient: const LinearGradient(colors: [Color(0xFF4FACFE), Color(0xFF00F2FE)]),
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity
+  Widget _build

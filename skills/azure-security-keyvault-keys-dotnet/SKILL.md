@@ -12,6 +12,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azur
 
 Client library for managing cryptographic keys in Azure Key Vault and Managed HSM.
 
+Confirm vault/Managed HSM capability, tenant/RBAC, key name/version and lifecycle scope before changes. Symmetric Oct keys and hardware protection require a compatible service/tier; do not assume all examples work on an ordinary vault. Key operations must match the actual algorithm; narrow RSA Encrypt/Decrypt options cannot also sign/wrap without the corresponding allowed operations. Preserve version IDs with ciphertext/signatures and retain old keys until data no longer needs them. Backup files are sensitive and have service restore restrictions. RSA is for small payloads; use authenticated envelope encryption for bulk data.
+
 ## Installation
 
 ```bash
@@ -19,7 +21,7 @@ dotnet add package Azure.Security.KeyVault.Keys
 dotnet add package Azure.Identity
 ```
 
-**Current Version**: 4.7.0 (stable)
+**Example SDK version**: 4.7.0; verify the supported package version/API for the target project.
 
 ## Environment Variables
 
@@ -161,43 +163,13 @@ DeleteKeyOperation operation = await client.StartDeleteKeyAsync("my-rsa-key");
 await operation.WaitForCompletionAsync();
 Console.WriteLine($"Deleted key scheduled purge date: {operation.Value.ScheduledPurgeDate}");
 
-// Purge immediately (if soft-delete is enabled)
-await client.PurgeDeletedKeyAsync("my-rsa-key");
+// Purge is a separate irreversible operation, subject to purge protection.
+// await client.PurgeDeletedKeyAsync("my-rsa-key");
 
 // Or recover deleted key
-KeyVaultKey recoveredKey = await client.StartRecoverDeletedKeyAsync("my-rsa-key");
+RecoverDeletedKeyOperation recovery = await client.StartRecoverDeletedKeyAsync("my-rsa-key");
+await recovery.WaitForCompletionAsync();
+KeyVaultKey recoveredKey = recovery.Value;
 ```
 
-### Backup and Restore
-
-```csharp
-// Backup key
-byte[] backup = await client.BackupKeyAsync("my-rsa-key");
-await File.WriteAllBytesAsync("key-backup.bin", backup);
-
-// Restore key
-byte[] backupData = await File.ReadAllBytesAsync("key-backup.bin");
-KeyVaultKey restoredKey = await client.RestoreKeyBackupAsync(backupData);
-```
-
-## Cryptographic Operations
-
-### Get CryptographyClient
-
-```csharp
-// From KeyClient
-KeyVaultKey key = await client.GetKeyAsync("my-rsa-key");
-CryptographyClient cryptoClient = client.GetCryptographyClient(
-    key.Name, 
-    key.Properties.Version);
-
-// Or create directly with key ID
-CryptographyClient cryptoClient = new CryptographyClient(
-    new Uri("https://myvault.vault.azure.net/keys/my-rsa-key/version"),
-    new DefaultAzureCredential());
-```
-
-### Encrypt and Decrypt
-
-```csharp
-byte[] plaintext = Enc
+### Backup and Rest

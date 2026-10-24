@@ -21,6 +21,8 @@ A discipline for hard bugs. Skip phases only when explicitly justified.
 
 When exploring the codebase, read `CONTEXT.md` (if it exists) to get a clear mental model of the relevant modules, and check ADRs in the area you're touching.
 
+Use isolated fixtures and approved environments; captured HAR/log/core data and the HITL template can reveal tokens or personal records, so redact before printing or sharing. The bundled template expects an interactive terminal, not an unattended tool pipe. Do not increase stress, repeat writes or instrument production beyond the authorized scope. Static inspection may be needed to locate a safe repro seam; if runtime access is unavailable, report hypotheses as unverified rather than treating this workflow as permission to block all useful analysis.
+
 ## Phase 1 — Build a feedback loop
 
 **This is the skill.** Everything else is mechanical. If you have a **tight** pass/fail signal for the bug — one that goes red on _this_ bug — you will find the cause; bisection, hypothesis-testing, and instrumentation all just consume it. If you don't have one, no amount of staring at code will save you.
@@ -77,10 +79,4 @@ Run the loop. Watch it go red — the bug appears.
 
 Confirm:
 
-- [ ] The loop produces the failure mode the **user** described — not a different failure that happens to be nearby. Wrong bug = wrong fix.
-- [ ] The failure is reproducible across multiple runs (or, for non-deterministic bugs, reproducible at a high enough rate to debug against).
-- [ ] You have captured the exact symptom (error message, wrong output, slow timing) so later phases can verify the fix actually addresses it.
-
-### Minimise
-
-Once it's red, shrink the repro to the **smallest scenario that still goes red**. Cut inputs, callers, config, data, and steps **one at a time**, re-running the loop
+- [ ] The loop produces the failure mode the **u

@@ -27,6 +27,10 @@ Use this skill when:
 - Sufficient disk space for log storage
 - Network access from log sources
 
+## Lab and production boundaries
+
+The Compose file is a local disposable lab with Elasticsearch security disabled; loopback binding does not make it appropriate for shared networks. Production needs verified compatible patched versions, authentication/TLS between components, least-privilege ingestion and reviewed retention. A read-only docker.sock mount still exposes daemon API capabilities; omit it or use a restricted proxy. Redact secrets/PII before ingestion and restrict dashboards/exported logs. Watcher/webhook creation sends recurring external messages and requires the corresponding user instruction. ILM snippets are version-dependent and need a correctly bootstrapped rollover alias/data stream; date-named Logstash indices do not automatically satisfy that contract.
+
 ## Docker Deployment
 
 ```yaml
@@ -41,7 +45,7 @@ services:
       - xpack.security.enabled=false
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
     ports:
-      - "9200:9200"
+      - "127.0.0.1:9200:9200"
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
 
@@ -51,15 +55,15 @@ services:
       - ./logstash/pipeline:/usr/share/logstash/pipeline
       - ./logstash/config:/usr/share/logstash/config
     ports:
-      - "5044:5044"
-      - "5000:5000"
+      - "127.0.0.1:5044:5044"
+      - "127.0.0.1:5000:5000"
     depends_on:
       - elasticsearch
 
   kibana:
     image: docker.elastic.co/kibana/kibana:8.11.0
     ports:
-      - "5601:5601"
+      - "127.0.0.1:5601:5601"
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
     depends_on:
@@ -215,50 +219,4 @@ filter {
   # Extract trace ID from message
   if [log_message] =~ /trace_id=/ {
     grok {
-      match => { "log_message" => "trace_id=%{UUID:trace_id}" }
-    }
-  }
-  
-  # GeoIP lookup
-  if [client_ip] {
-    geoip {
-      source => "client_ip"
-      target => "geoip"
-    }
-  }
-  
-  # Drop debug logs in production
-  if [level] == "DEBUG" and [environment] == "production" {
-    drop {}
-  }
-  
-  # Enrich with lookup
-  translate {
-    field => "status"
-    destination => "status_description"
-    dictionary => {
-      "200" => "OK"
-      "404" => "Not Found"
-      "500" => "Internal Server Error"
-    }
-  }
-}
-```
-
-## Filebeat Configuration
-
-```yaml
-# filebeat/filebeat.yml
-filebeat.inputs:
-  - type: container
-    paths:
-      - '/var/lib/docker/containers/*/*.log'
-    processors:
-      - add_docker_metadata:
-          host: "unix:///var/run/docker.sock"
-
-  - type: log
-    enabled: true
-    paths:
-      - /var/log/nginx/*.log
-   
+      match => { "log

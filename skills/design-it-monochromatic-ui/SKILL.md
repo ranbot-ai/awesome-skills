@@ -55,7 +55,7 @@ body {
 }
 
 .mono-btn {
-  background-color: var(--mono-500);
+  background-color: var(--mono-700);
   color: #ffffff;
   border: none;
   border-radius: 4px;
@@ -68,7 +68,7 @@ body {
 }
 
 .mono-subtext {
-  color: var(--mono-500); /* Use mid-tones for secondary text */
+  color: var(--mono-700); /* Darker tone for readable secondary text */
   font-weight: 500;
 }
 ```
@@ -119,7 +119,7 @@ struct MonochromaticView: View {
     }
 }
 ```
-- Define your colors using `Color(hue: saturation: brightness:)`. This ensures math-perfect monochromatic harmony.
+- Define your colors using `Color(hue: saturation: brightness:)`. HSB/HSV and CSS HSL are distinct models; identical numerical lightness/brightness values do not produce identical platform palettes. Verify contrast after conversion.
 - *Always* tint your drop shadows with your `mono900` color. Pure black shadows look dirty in a strict monochromatic UI.
 
 ### Flutter
@@ -140,9 +140,4 @@ class MonochromaticScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Card
-              Container(
-                width: double.infinity,
-          
+            mainAxisAlignment: MainAxisAlignment.cent

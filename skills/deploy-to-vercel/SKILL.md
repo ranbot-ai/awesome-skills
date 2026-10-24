@@ -3,7 +3,7 @@ name: deploy-to-vercel
 description: Deploy applications and websites to Vercel. Use when the user requests deployment actions like "deploy my app", "deploy and give me the link", "push this live", or "create a preview deployment". 
 category: AI & Agents
 source: antigravity
-tags: [node, claude, ai, agent]
+tags: [claude, ai, agent]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/deploy-to-vercel
 ---
 
@@ -59,7 +59,7 @@ Either file means the project is linked. Check for both.
 
 ### Linked (`.vercel/` exists) + has git remote → Git Push
 
-This is the ideal state. The project is linked and has git integration.
+A local link plus a Git remote does not prove Vercel Git integration. Verify the linked project, target directory, connected repository and production branch in the dashboard. Use a preview branch or a direct preview deployment; never push a production branch for a preview request.
 
 1. **Ask the user before pushing.** Never push without explicit approval:
    ```
@@ -69,7 +69,7 @@ This is the ideal state. The project is linked and has git integration.
 
 2. **Commit and push:**
    ```bash
-   git add .
+   git add -- <reviewed-project-paths>
    git commit -m "deploy: <description of changes>"
    git push
    ```
@@ -80,7 +80,7 @@ This is the ideal state. The project is linked and has git integration.
    sleep 5
    vercel ls --format json
    ```
-   The JSON output has a `deployments` array. Find the latest entry — its `url` field is the preview URL.
+   The JSON output has a `deployments` array. Match the project, commit SHA, branch and deployment target; the latest entry could belong to another build. A queued URL is not a successful build.
 
    If the CLI is not authenticated, tell the user to check the Vercel dashboard or the commit status checks on their git provider for the preview URL.
 
@@ -116,11 +116,4 @@ The CLI is working but the project isn't linked yet. This is the opportunity to 
 2. **Once a team is selected, proceed directly to linking.** Tell the user what will happen but do not ask for separate confirmation:
    ```
    Linking this project to <team name> on Vercel. This will create a Vercel
-   project to deploy to and enable automatic deployments on future git pushes.
-   ```
-
-3. **If a git remote exists**, use repo-based linking with the selected team scope:
-   ```bash
-   vercel link --repo --scope <team-slug>
-   ```
-   This reads the git remote URL and matches it to existing Vercel projects that deploy from that repo. It creates `.vercel/repo.json`. This is much more 
+   project to deploy to and write local link metadata. Git 

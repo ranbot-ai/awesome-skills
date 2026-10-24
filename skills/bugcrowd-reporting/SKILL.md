@@ -22,7 +22,7 @@ Bugcrowd's submission form requires a single VRT (Vulnerability Rating Taxonomy)
 
 > Note: VRT default severities are not fixed constants. Bugcrowd revises the VRT schema across versions, and individual programs can remap defaults via their own priority configuration. The P-values shown in the examples below (e.g., "No Rate Limiting on Form → Login" defaulting to P4) are the typical baseline at time of writing — always read the severity the *current* form actually auto-suggests for *this* program rather than assuming the value here.
 
-### 1.1 Search hierarchy (try in order, pick the highest-severity match that still describes the bug)
+### 1.1 Search hierarchy (try in order, pick the most specific accurate match)
 
 For any finding, search the VRT dropdown with these terms in this order:
 
@@ -32,7 +32,7 @@ For any finding, search the VRT dropdown with these terms in this order:
 4. **The endpoint type** — e.g., `no rate limiting on form > login`, `no rate limiting on form > change password`
 5. **The generic parent node** — e.g., `Server Security Misconfiguration > Other`, `Broken Access Control > Other`
 
-### 1.2 Pick the highest-severity match that still accurately describes the bug
+### 1.2 Pick the most specific accurate match
 
 Never select a VRT that misrepresents the bug just to get a higher default severity. Triagers will reassign and may flag the misrepresentation. The discipline is: pick the most specific *accurate* VRT, then use §2 (Manual Severity Override) if the default is wrong.
 
@@ -74,3 +74,5 @@ Override the VRT default when:
 4. Add a **Severity Request** paragraph as the FIRST section of the description body (per §3)
 
 ### 2.3 Don't over-claim
+
+P1 inflation is the fastest way to lose triager trust. 

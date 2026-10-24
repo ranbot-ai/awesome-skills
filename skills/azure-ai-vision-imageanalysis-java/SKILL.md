@@ -138,7 +138,7 @@ ImageAnalysisResult result = client.analyzeFromUrl(
     Arrays.asList(VisualFeatures.OBJECTS),
     null);
 
-for (DetectedObject obj : result.getObjects()) {
+for (DetectedObject obj : result.getObjects().getValues()) {
     System.out.printf("Object: %s (confidence: %.4f)%n",
         obj.getTags().get(0).getName(),
         obj.getTags().get(0).getConfidence());
@@ -157,7 +157,7 @@ ImageAnalysisResult result = client.analyzeFromUrl(
     Arrays.asList(VisualFeatures.TAGS),
     null);
 
-for (DetectedTag tag : result.getTags()) {
+for (DetectedTag tag : result.getTags().getValues()) {
     System.out.printf("Tag: %s (confidence: %.4f)%n",
         tag.getName(),
         tag.getConfidence());
@@ -172,7 +172,7 @@ ImageAnalysisResult result = client.analyzeFromUrl(
     Arrays.asList(VisualFeatures.PEOPLE),
     null);
 
-for (DetectedPerson person : result.getPeople()) {
+for (DetectedPerson person : result.getPeople().getValues()) {
     ImageBoundingBox box = person.getBoundingBox();
     System.out.printf("Person at x=%d, y=%d (confidence: %.4f)%n",
         box.getX(), box.getY(), person.getConfidence());
@@ -187,9 +187,8 @@ ImageAnalysisResult result = client.analyzeFromUrl(
     Arrays.asList(VisualFeatures.SMART_CROPS),
     new ImageAnalysisOptions().setSmartCropsAspectRatios(Arrays.asList(1.0, 1.5)));
 
-for (CropRegion crop : result.getSmartCrops()) {
+for (CropRegion crop : result.getSmartCrops().getValues()) {
     System.out.printf("Crop region: aspect=%.2f, x=%d, y=%d, w=%d, h=%d%n",
         crop.getAspectRatio(),
         crop.getBoundingBox().getX(),
-        crop.getBoundingBox().getY(),
-        crop.getBound
+        cro

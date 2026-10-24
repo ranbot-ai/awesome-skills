@@ -38,7 +38,7 @@ The route most work travels. You have an idea and want it built.
 
 Keep steps 1–3 in **one unbroken context window** — don't compact or clear until after `/to-issues` — so the grilling, PRD, and issues all build on the same thinking. Each `/implement` then starts fresh, working from the issue.
 
-The limit on this is the **[smart zone](https://www.aihero.dev/ai-coding-dictionary/smart-zone)**: the window (~120k tokens on state-of-the-art models) within which the model still reasons sharply. If a session approaches it before `/to-issues`, don't push on degraded — `/handoff` and continue in a fresh thread.
+The limit depends on the actual model/client and task; there is no universal token threshold guaranteeing sharp reasoning. If a session approaches it before `/to-issues`, don't push on degraded — `/handoff` and continue in a fresh thread.
 
 ## On-ramps
 
@@ -67,6 +67,8 @@ Off the main flow entirely.
 - **`/teach`** — learn a concept over multiple sessions, using the current directory as a stateful workspace.
 - **`/writing-great-skills`** — reference for writing and editing skills well.
 
+Named slash commands are upstream workflow references, not commands bundled by this single-file catalog entry. Discover installed skills and client capabilities first; unavailable commands do not justify inventing execution or changing tracker configuration. Session creation and external issue writes remain within the user-authorized scope.
+
 ## Precondition
 
 **`/setup-matt-pocock-skills`** — run before your first engineering flow to configure the issue tracker, triage labels, and doc layout the other skills assume. Custom issue trackers also work.
@@ -80,5 +82,4 @@ Off the main flow entirely.
 ## Limitations
 
 - Requires the upstream tool, account, API key, or local setup when the workflow names one.
-- Does not authorize destructive, production, paid, or external-message actions without explicit user approval.
-- Validate generated artifacts or recommendations against the user's real sources before treating them as final.
+- Does not authorize destructive, production, paid, or external-message actions without explicit u

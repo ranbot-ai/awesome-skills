@@ -101,6 +101,8 @@ Select option:
 
 ## Commit Discovery
 
+Treat message matches as candidates, not proof. Validate track IDs as literal identifiers (no path traversal or shell interpolation), inspect full commit diffs and ancestry, and exclude unrelated/mixed commits. Merge commits need an explicitly chosen mainline; never guess `-m`. Deduplicate SHAs and detect existing reverts before executing. Honor user instructions that prohibit plan-file edits; do not automatically stash/commit/delete unrelated work.
+
 ### For Task Revert
 
 1. Search git log for task-specific commits:
@@ -185,26 +187,4 @@ This CANNOT be easily undone without manual intervention.
 
 ================================================================================
 
-Type 'YES' to proceed, or anything else to cancel:
-```
-
-**CRITICAL: Require explicit 'YES' confirmation. Do not proceed on 'y', 'yes', or enter.**
-
-## Revert Execution
-
-Execute reverts in reverse chronological order (newest first):
-
-```
-Executing revert plan...
-
-[1/4] Reverting abc1234...
-      git revert --no-edit abc1234
-      ✓ Success
-
-[2/4] Reverting def5678...
-      git revert --no-edit def5678
-      ✓ Success
-
-[3/4] Reverting ghi9012...
-      git revert --no-edit ghi9012
-      ✓ S
+Type 'YES' to proceed, or anything el

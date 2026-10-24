@@ -22,6 +22,8 @@ Deploy frontend projects with preview builds, edge functions, and global CDN del
 
 ## Prerequisites
 
+Pin a supported Wrangler/Node version; framework adapters and provider limits change. Full-stack Next.js requires the current supported Workers/OpenNext workflow rather than assuming the legacy next-on-pages adapter. Confirm account/project/environment before deploy/delete/domain changes; previews can expose private builds and need access control. `_headers` applies to static assets, not Functions responses: set security/CORS headers in Functions and implement OPTIONS as needed. Bindings/cache keys must be scoped to authorized users/tenants when data is private; the shared `key` sample is only for public data. The CI example needs trusted-branch secret boundaries and an explicit preview branch; do not deploy untrusted PR builds with production credentials.
+
 - Node.js 18+ and npm installed locally.
 - A Cloudflare account (free tier works for most projects).
 - Wrangler CLI installed: `npm install -g wrangler`.
@@ -55,7 +57,7 @@ npx wrangler pages deploy dist --project-name=my-site
 # Deploy with a custom branch name (triggers preview URL)
 npx wrangler pages deploy dist --project-name=my-site --branch=feature-auth
 
-# Deploy and get the deployment URL in JSON
+# Deploy and inspect the actual result (tailing text is not JSON parsing)
 npx wrangler pages deploy dist --project-name=my-site --branch=main 2>&1 | tail -1
 ```
 
@@ -87,7 +89,7 @@ Cloudflare auto-detects frameworks. Override if needed:
 |------------|----------------------|------------------|
 | React CRA  | `npm run build`      | `build`          |
 | Vite       | `npm run build`      | `dist`           |
-| Next.js    | `npx @cloudflare/next-on-pages` | `.vercel/output/static` |
+| Next.js static export | `npm run build` with export configuration | `out` |
 | Astro      | `npm run build`      | `dist`           |
 | Hugo       | `hugo`               | `public`         |
 | SvelteKit  | `npm run build`      | `.svelte-kit/cloudflare` |
@@ -141,32 +143,4 @@ export const onRequestGet: PagesFunction = async (context) => {
 ### Middleware
 
 ```typescript
-// functions/_middleware.ts — runs before all routes
-export const onRequest: PagesFunction = async (context) => {
-  const authHeader = context.request.headers.get("Authorization");
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return new Response("Unauthorized", { status: 401 });
-  }
-  return context.next();
-};
-```
-
-### Functions with Bindings
-
-```typescript
-// functions/api/data.ts — using KV and D1 bindings
-interface Env {
-  MY_KV: KVNamespace;
-  MY_DB: D1Database;
-  MY_BUCKET: R2Bucket;
-}
-
-export const onRequestGet: PagesFunction<Env> = async (context) => {
-  // Read from KV
-  const cached = await context.env.MY_KV.get("key");
-  if (cached) return new Response(cached);
-
-  // Query D1
-  const result = await context.env.MY_DB.prepare(
-    "SELECT * FROM items LIMIT 10"
-  ).al
+//

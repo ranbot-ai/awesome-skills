@@ -88,10 +88,11 @@ const result = items.reduce((acc, item) => ({
 }), {});
 
 // CLEAR: Named intermediate step
-const countById = new Map<string, number>();
-for (const item of items) {
-  countById.set(item.id, (countById.get(item.id) ?? 0) + 1);
-}
+const result = items.reduce((acc, item) => {
+  const count = (acc[item.id]?.count ?? 0) + 1;
+  return { ...acc, [item.id]: { ...acc[item.id], count } };
+}, {});
+// Preserve the object-of-records result; a Map<string, number> changes the API.
 ```
 
 ### 4. Maintain Balance
@@ -125,8 +126,4 @@ BEFORE SIMPLIFYING, ANSWER:
 
 If you can't answer these, you're not ready to simplify. Read more context first.
 
-### Step 2: Identify Simplification Opportunities
-
-Scan for these patterns — each one is a concrete signal, not a vague smell:
-
-**Structural complexity
+### Step 2: Identify Simplification Opportuni

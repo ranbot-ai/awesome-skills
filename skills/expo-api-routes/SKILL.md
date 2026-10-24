@@ -33,6 +33,8 @@ Avoid API routes when:
 
 ## File Structure
 
+Confirm the installed Expo/EAS version and configure web output for server routes. Fragments are incomplete demos: header presence and nonempty password fields do not authenticate anyone. Implement token verification, per-user authorization, body/schema/size limits and rate/cost limits before exposing database or paid AI proxy routes. Keep secrets out of EXPO_PUBLIC variables/client imports. Native callers need the configured server origin; do not assume a relative URL works identically on every platform. Validate webhook signatures over the required raw body and deduplicate events. Bound upstream requests, check response.ok and return only approved fields; the weather endpoint is illustrative, not a verified API contract.
+
 API routes live in the `app` directory with `+api.ts` suffix:
 
 ```
@@ -105,10 +107,10 @@ export function GET(request: Request) {
 ### Headers
 
 ```ts
-export function GET(request: Request) {
+export async function GET(request: Request) {
   const auth = request.headers.get("Authorization");
 
-  if (!auth) {
+  if (!auth || !(await verifyAccessToken(auth))) { // implement signature/issuer/audience/expiry checks
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -177,45 +179,4 @@ export function OPTIONS() {
 }
 
 export function GET() {
-  return Response.json({ data: "value" }, { headers: corsHeaders });
-}
-```
-
-## Error Handling
-
-```ts
-export async function POST(request: Request) {
-  try {
-    const body = await request.json();
-    // Process...
-    return Response.json({ success: true });
-  } catch (error) {
-    console.error("API error:", error);
-    return Response.json({ error: "Internal server error" }, { status: 500 });
-  }
-}
-```
-
-## Testing Locally
-
-Start the development server with API routes:
-
-```bash
-npx expo serve
-```
-
-This starts a local server at `http://localhost:8081` with full API route support.
-
-Test with curl:
-
-```bash
-curl http://localhost:8081/api/hello
-curl -X POST http://localhost:8081/api/users -H "Content-Type: application/json" -d '{"name":"Test"}'
-```
-
-## Deployment to EAS Hosting
-
-### Prerequisites
-
-```bash
-npm install -g ea
+ 

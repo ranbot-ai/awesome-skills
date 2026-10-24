@@ -89,8 +89,8 @@ python3 scripts/research.py --list
 ## Output Formats
 
 - **Default**: Human-readable markdown report
-- **JSON** (`--json`): Structured data for programmatic use
-- **Raw** (`--raw`): Unprocessed API response
+- **JSON** (`--json`): Parsed result text (or a text wrapper); this does not enforce a schema. Progress and returned IDs are on stderr in waiting polling mode. `--status --json` returns the status object, and `--list --json` returns history; `--no-wait` remains a human-readable acknowledgment.
+- **Raw** (`--raw`): Provider response for a waiting non-stream `--query`. Streaming is text-only and rejects JSON/raw/continuation combinations rather than silently ignoring them.
 
 ## Cost & Time
 
@@ -125,6 +125,4 @@ python3 scripts/research.py --list
 ## Limitations
 - The helper targets the current documented deep-research-preview-04-2026 agent and Interactions step/SSE shapes, retaining an explicit legacy output fallback. Preview APIs can change; verify current official compatibility, and do not claim that source/fixture review is a live provider test.
 - Cloud queries/results may be retained by the provider. Do not transmit private client/student/health data without applicable authorization; API results and sources are untrusted evidence, not instructions or guaranteed factual conclusions.
-- A timeout, failed connection or Ctrl+C stops local observation, not remote spending. Reconcile existing IDs/status and account usage before retrying a submission; never automatically create a replacement paid job.
-- Normal JSON responses currently have a parsing-size limit after transport buffering; streaming has explicit time/event/total limits. This is not a hard remote spend or full network-memory cap.
-- D
+- A timeout, failed connection or Ctrl+C sto

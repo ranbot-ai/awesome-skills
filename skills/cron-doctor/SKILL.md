@@ -34,6 +34,10 @@ needed) that parses, describes, deep-validates, and computes next fire times.
   `schedule` field.
 - Use when a user pastes a 5-field cron expression and asks for a sanity check.
 
+## Scheduler and calculation limits
+
+Identify the scheduler/dialect and timezone first. systemd OnCalendar is not a five-field cron expression; Quartz and library day semantics differ. This engine uses the Node process local timezone, not CRON_TZ/spec.timeZone, and scans at most 600,000 minutes (~416 days): fewer than requested results are partial, not proof a schedule never fires. It does not model platform delays, DST policy, missed-job recovery or overlap control. Confirm next runs in the actual scheduler. No scripts were runtime-tested during this content review.
+
 ## How It Works
 
 ### Step 1: Parse the expression
@@ -98,7 +102,7 @@ day-of-week are restricted (neither is `*`), cron uses OR logic, not AND.
 script:
 
 ```bash
-0 0 * * 1 [ "$(date +%d)" = "01" -o "$(date +%d)" = "15" ] && your-command
+0 0 * * 1 [ "$(date +\%d)" = "01" -o "$(date +\%d)" = "15" ] && your-command
 ```
 
 ### 3. Midnight spike — the "everything at once" bug
@@ -125,28 +129,9 @@ This causes load spikes, connection-pool exhaustion, and cascading timeouts.
 (a 4-minute gap). The intervals drift: 7,7,7,7,7,7,7,7,**4**.
 
 **Fix:** 60 is not divisible by 7. Use step values that divide 60 evenly: `*/5`,
-`*/10`, `*/15`, `*/20`, `*/30`. If you truly need every-7-minutes, use a loop with
-`sleep 420`.
+`*/10`, `*/15`, `*/20`, `*/30`. If you truly need every-7-minutes, use a supervised monotonic/interval scheduler; a sleep loop adds task duration and needs restart/overlap handling.
 
 ### 5. Leap-year February 29 — the "annual surprise"
 
 ```
 0 0 29 2 *
-```
-
-Fires only on leap years — February 29, 2024 / 2028 / 2032… If someone writes this
-expecting "end of February," they'll be confused for 3 out of every 4 years.
-
-**Fix:** use `0 0 28 2 *` and handle the 29th case in the script if needed.
-
-## Using the validation script
-
-This skill ships a zero-dependency engine at `scripts/cron-engine.js` (Node.js, no
-`npm install` needed). You can use it programmatically or from the CLI:
-
-```javascript
-// Programmatic — Node.js, zero dependencies
-const { describe, validate, nextRuns, formatNextRuns } = require('./scripts/cron-engine.js');
-
-// Parse + describe -> returns { text, error, parsed }
-const d = describe('0 0

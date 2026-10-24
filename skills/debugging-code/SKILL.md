@@ -27,7 +27,7 @@ evaluate arbitrary expressions against the live process — all without restarti
 This skill uses `dap`, a CLI tool that background daemon to interact with the debugger via the DAP Protocol, maintain
 the debugger state, so you can simply interact with it with multiple calls.
 
-If `dap` isn't installed (check: `command -v dap`), install it NOW.
+If `dap` isn't installed (check: `command -v dap`), check the project's approved installation method and version.
 Ask/notify the user before proceeding to install it.
 
 From Homebrew (macOS)
@@ -39,23 +39,32 @@ brew install AlmogBaku/tap/dap
 Installer script:
 
 ```bash
-bash scripts/install-dap.sh
+DAP_VERSION=REVIEWED_TAG DAP_SHA256=TRUSTED_PLATFORM_SHA256 bash /absolute/path/to/skill/scripts/install-dap.sh
 ```
 
 Install from sources:
 
 ```bash
-go install github.com/AlmogBaku/debug-skill/cmd/dap@latest
+go install github.com/AlmogBaku/debug-skill/cmd/dap@REVIEWED_TAG
 ```
 
-This tool is open-sourced and available on [GitHub](https://github.com/AlmogBaku/debug-skill), maintained and follows
-best practices.
+This tool is open-sourced and available on [GitHub](https://github.com/AlmogBaku/debug-skill), an external dependency requiring version/provenance review.
 
 Supports natively Python, Go, Node.js/TypeScript, Rust, C/C++, and any other language that supports DAP.
 
 If a debugger backend is missing or fails to start, see `references/installing-debuggers.md`
 
 For all commands and flags: `dap --help` or `dap <cmd> --help`.
+
+## Execution boundaries
+
+Launching/attaching runs or pauses real code. Confirm executable, process owner,
+arguments, environment and external side effects first; reproduce on isolated
+fixtures with no production credentials. Debugger ports allow code execution:
+bind locally, use authenticated tunnels if needed, and never expose adapters
+publicly. Variable inspection, properties and conditional breakpoints may invoke
+user-defined getters/functions; avoid printing tokens, personal data or full config.
+No debugger or language adapter is bundled; verify actual CLI help/version.
 
 ## Starting a Session
 
@@ -73,8 +82,9 @@ Choose your starting strategy based on what you know:
 - **Remote process** — `dap debug --attach host:port --backend <name>`
 - **Process already running (stuck server, live issue)** — attach without restarting:
   `dap debug --pid <PID> --backend <name>`
-  > **macOS + Go gotcha:** `dlv --pid` requires SIP disabled (`csrutil disable`).
-  > Prefer starting the program under the debugger instead or attaching to a remote debugger!
+  > Debugger attachment permissions vary by OS signing, process and backend.
+  > Do not disable SIP or other platform protections to make attachment work;
+  > use a signed development build launched under its approved debugger.
 
 **Session isolation:** `--session <name>` keeps concurrent agents from interfering.
 Tip: You might want to use your session id(${CLAUDE_SESSION_ID}) if available.
@@ -97,24 +107,4 @@ to filter noise. Fall back to full breakpoints + stepping only when you need int
 If you expected `compute()` to be called, but it never is, then the bug is in the caller — not `compute()`, but whatever
 was supposed to call it.
 
-**Set breakpoints instead of prints.** When you feel the urge to print something, set a breakpoint instead.
-
-## Know Your State
-
-Every `dap` execution command returns full context automatically: current location, source, locals, call stack, and
-output. At each stop, ask:
-
-- Do the local variables have the values I expected?
-- Is the call stack showing the code path I expected?
-- Does the output so far reveal anything unexpected?
-
-**Trace causation up the stack.** If a value is wrong at frame 0, check `dap eval "<expr>" --frame 1` to see what the
-caller passed. Keep going up (`--frame 2`, `--frame 3`) until you find the frame where the value first became wrong —
-that's the origin of the bug, not the symptom.
-
-Example output at a stop:
-
-```
-Stopped at compute() · script.py:41
-  39:   def compute(items):
-  40:       result = None
+**Set breakpoints instead of prints.** When you

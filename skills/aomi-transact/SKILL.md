@@ -16,7 +16,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aomi
 
 ## Overview
 
-`aomi-transact` is a procedure for driving the Aomi CLI ([`@aomi-labs/client`](https://www.npmjs.com/package/@aomi-labs/client)) from natural-language prompts. The user types something like *"swap 1 ETH for USDC on Uniswap"*; the agent picks the right protocol and contract, stages the approve+swap as a batch, simulates it on a forked chain, and returns a queued wallet request for the user to sign. The wallet only ever sees calldata that already passed simulation.
+`aomi-transact` is a procedure for driving the Aomi CLI ([`@aomi-labs/client`](https://www.npmjs.com/package/@aomi-labs/client)) from natural-language prompts. The user types something like *"swap 1 ETH for USDC on Uniswap"*; the agent picks the right protocol and contract, stages the approve+swap as a batch, simulates it on a forked chain, and returns a queued wallet request for the user to sign. Require an observed simulation for the exact queued bytes where supported; a provider claim or passed fork run is not proof of economic safety.
 
 The CLI is **account-abstraction-first**: by default it signs through a zero-config Alchemy proxy (no provider credentials needed), using EIP-7702 on Ethereum mainnet and ERC-4337 on L2s. Each `aomi <subcommand>` invocation starts, runs, and exits — there is no long-running process.
 
@@ -78,5 +78,4 @@ Stop after simulation and wait for the user to explicitly approve signing the na
 
 - **Requires `@aomi-labs/client` v0.1.30 or newer.** Older versions lack `--aa`, `--aa-provider`, `--aa-mode` and the simulation gate. Install with `npm install -g @aomi-labs/client` or run on demand via `npx @aomi-labs/client@0.1.30 ...`.
 - **Active backend connection.** The skill drives a CLI that talks to `api.aomi.dev`. Without network access, only local read commands (`aomi tx list`, `aomi session log`) work.
-- **AA sponsorship on L2s is not guaranteed.** The zero-config proxy path does not reliably sponsor on Base/Arbitrum/Optimism in v0.1.30. If the EOA has 0 native gas on the destination chain, `aomi tx sign` returns viem's `insufficient funds for transfer`. Either fund the EOA with a small amount of native gas, or configure a real BYOK Alchemy/Pimlico provider with a sponsorship policy. Do not retry with `--eoa` — that path also needs gas.
-- **Per-session secret ingestion.** 
+- **AA sponsorship on L2s is not guaranteed.** The zero-config proxy path does not reliably sponsor on Base/Arbitrum/Optimism in v0.1.30. If the EOA has 0 native gas on the destination chain, `aomi tx sign` returns viem's `insufficient funds for transfer`. Either fund the EOA with a small amount of native gas, or configure a real BYOK Alchemy/Pimlico provider with a sponsorship policy. Do not retry 

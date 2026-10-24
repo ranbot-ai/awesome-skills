@@ -3,7 +3,7 @@ name: azure-resource-manager-mysql-dotnet
 description: Azure MySQL Flexible Server SDK for .NET. Database management for MySQL Flexible Server deployments. 
 category: Document Processing
 source: antigravity
-tags: [api, ai, workflow, document, azure, rag, cro]
+tags: [api, ai, workflow, template, document, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-resource-manager-mysql-dotnet
 ---
 
@@ -19,10 +19,10 @@ dotnet add package Azure.ResourceManager.MySql
 dotnet add package Azure.Identity
 ```
 
-**Current Version**: v1.2.0 (GA)  
+**Historical example baseline**: v1.2.0; verify current compatible packages/types
 **API Version**: 2023-12-30
 
-> **Note**: This skill focuses on MySQL Flexible Server. Single Server is deprecated and scheduled for retirement.
+> **Note**: This skill focuses on MySQL Flexible Server. Single Server is retired; use current Flexible Server migration guidance.
 
 ## Environment Variables
 
@@ -66,10 +66,14 @@ using System;
 using Azure.ResourceManager.MySql.FlexibleServers;
 using Azure.ResourceManager.MySql.FlexibleServers.Models;
 
-ResourceGroupResource resourceGroup = await client
-    .GetDefaultSubscriptionAsync()
-    .Result
-    .GetResourceGroupAsync("my-resource-group");
+using Azure.ResourceManager.Resources;
+using Azure.Core;
+using Azure;
+
+var subscriptionId = Environment.GetEnvironmentVariable("AZURE_SUBSCRIPTION_ID")
+    ?? throw new InvalidOperationException("AZURE_SUBSCRIPTION_ID is required");
+var subscription = client.GetSubscriptionResource(new ResourceIdentifier($"/subscriptions/{subscriptionId}"));
+ResourceGroupResource resourceGroup = (await subscription.GetResourceGroupAsync("my-resource-group")).Value;
 
 MySqlFlexibleServerCollection servers = resourceGroup.GetMySqlFlexibleServers();
 
@@ -148,17 +152,4 @@ MySqlFlexibleServerFirewallRuleData azureServicesRule = new MySqlFlexibleServerF
     EndIPAddress = System.Net.IPAddress.Parse("0.0.0.0")
 };
 
-await firewallRules.CreateOrUpdateAsync(WaitUntil.Completed, "AllowAllAzureServicesAndResourcesWithinAzureIps", azureServicesRule);
-```
-
-### 4. Update Server Configuration
-
-```csharp
-MySqlFlexibleServerConfigurationCollection configurations = server.GetMySqlFlexibleServerConfigurations();
-
-// Get current configuration
-MySqlFlexibleServerConfigurationResource config = await configurations
-    .GetAsync("max_connections");
-
-// Update configuration
-MySqlFlexibleServerConfigurationData c
+await firewallRules.CreateOrUpdateAsync(WaitUntil.Completed, "AllowAllAzureServicesAndResourcesWithinAzureIps", azureSe

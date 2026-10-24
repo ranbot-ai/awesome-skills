@@ -34,6 +34,10 @@ pip install azure-keyvault-secrets azure-keyvault-keys azure-keyvault-certificat
 AZURE_KEYVAULT_URL=https://<vault-name>.vault.azure.net/
 ```
 
+## Mutation and recovery boundary
+
+Confirm exact vault/object/version and approved effects before writes, deletes or purge. Independent snippets reuse client names; recovery and purge are alternatives, not sequential cleanup steps. Purge can be irreversible and subject to purge protection; certificate secret export can disclose a private key. Use least privilege, protected outputs and a verified dependency/recovery plan.
+
 ## Secrets
 
 ### SecretClient Setup
@@ -57,7 +61,7 @@ print(f"Created: {secret.name}, version: {secret.properties.version}")
 
 # Get secret
 secret = client.get_secret("database-password")
-print(f"Value: {secret.value}")
+print(f"Retrieved secret: {secret.name}")  # Never print secret values.
 
 # Get specific version
 secret = client.get_secret("database-password", version="abc123")
@@ -183,21 +187,4 @@ print(f"Thumbprint: {certificate.properties.x509_thumbprint.hex()}")
 # Get certificate with private key (as secret)
 from azure.keyvault.secrets import SecretClient
 secret_client = SecretClient(vault_url=vault_url, credential=credential)
-cert_secret = secret_client.get_secret("my-cert")
-# cert_secret.value contains PEM or PKCS12
-
-# List certificates
-for cert in client.list_properties_of_certificates():
-    print(f"Certificate: {cert.name}")
-
-# Delete certificate
-poller = client.begin_delete_certificate("my-cert")
-deleted = poller.result()
-```
-
-## Client Types Table
-
-| Client | Package | Purpose |
-|--------|---------|---------|
-| `SecretClient` | `azure-keyvault-secrets` | Store/retrieve secrets |
-| `KeyClient` | `azure-keyva
+cert_secret = secret_client.ge

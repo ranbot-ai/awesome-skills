@@ -22,7 +22,7 @@ Use this skill when reviewing generated or changed code before it ships. Activat
 This is a portable instruction skill. It requires no MCP server, network access,
 API key, shell command, local executable, or bundled script. It can be used in
 any runtime that supports `SKILL.md` plus directly linked [references/](references/)
-files; `agents/openai.yaml` is lightweight display metadata.
+files. This bundle contains no runtime helper or host metadata file.
 
 This skill does not replace project linters, formatters, type checkers, or test
 runners. Use the project's own tools for mechanical verification; use this skill
@@ -49,7 +49,7 @@ The reference files are:
 - [references/comments-and-formatting.md](references/comments-and-formatting.md) — when to comment, when to delete, matching neighbor style.
 - [references/solid.md](references/solid.md) — SRP, OCP, LSP, ISP, DIP with the modern phrasings and detection smells.
 - [references/dry-kiss-yagni.md](references/dry-kiss-yagni.md) — knowledge vs code duplication, Sandi Metz's re-inline rule, McCabe complexity, Fowler's YAGNI cost categories.
-- [references/ai-failure-modes.md](references/ai-failure-modes.md) — the 14 systematic ways LLMs produce bad code. **Read this one first if you are an AI agent reading this skill.** It is the highest-leverage file in the skill.
+- [references/ai-failure-modes.md](references/ai-failure-modes.md) — the 15 systematic ways LLMs produce bad code. **Read this one first if you are an AI agent reading this skill.** It is the highest-leverage file in the skill.
 - [references/review-checklist.md](references/review-checklist.md) — structured walk-through for review mode.
 - [references/sources.md](references/sources.md) — central bibliography for source URLs. Read it only when you need to verify or cite an external source.
 
@@ -71,10 +71,10 @@ This skill is working when code-writing tasks avoid the listed failure modes,
 code-review tasks produce prioritized findings with concrete evidence, and
 refactors preserve behavior unless the user explicitly asks for a behavior
 change. It should stay silent for conceptual, CI, git workflow, prose, data
-analysis, and test-running tasks covered by the frontmatter exclusions.
+analysis, and test-running tasks covered by the scope exclusions below.
 
 ## Why this skill exists
 
 LLM-generated code has measurable, systematic failure modes that generic "follow clean code" instructions do not catch. Examples backed by published research:
 
-- **Code duplication grew 8x** in tr
+- GitClear reports increased

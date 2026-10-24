@@ -1,7 +1,7 @@
 ---
 name: cypress-skill
 description: Generates production-grade Cypress E2E and component tests in JavaScript or TypeScript. Supports local execution and TestMu AI cloud. Use when the user asks to write Cypress tests, set up Cypress, tes
-category: Creative & Media
+category: Document Processing
 source: antigravity
 tags: [javascript, typescript, react, node, pdf, api, ai, agent, automation, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cypress-skill
@@ -46,7 +46,7 @@ User says "test" / "automate"
 // ✅ Cypress chains — no await, no async
 cy.visit('/login');
 cy.get('#username').type('user@test.com');
-cy.get('#password').type('password123');
+cy.get('#password').type(Cypress.env('TEST_PASSWORD'), { log: false });
 cy.get('button[type="submit"]').click();
 cy.url().should('include', '/dashboard');
 
@@ -84,7 +84,7 @@ describe('Login', () => {
 
   it('should login with valid credentials', () => {
     cy.get('[data-cy="username"]').type('user@test.com');
-    cy.get('[data-cy="password"]').type('password123');
+    cy.get('[data-cy="password"]').type(Cypress.env('TEST_PASSWORD'), { log: false });
     cy.get('[data-cy="submit"]').click();
     cy.url().should('include', '/dashboard');
     cy.get('[data-cy="welcome"]').should('contain', 'Welcome');
@@ -124,10 +124,10 @@ cy.wait('@dashboardLoad');
 ```javascript
 // cypress/support/commands.js
 Cypress.Commands.add('login', (email, password) => {
-  cy.session([email, password], () => {
+  cy.session([email], () => {
     cy.visit('/login');
     cy.get('[data-cy="username"]').type(email);
-    cy.get('[data-cy="password"]').type(password);
+    cy.get('[data-cy="password"]').type(password, { log: false });
     cy.get('[data-cy="submit"]').click();
     cy.url().should('include', '/dashboard');
   });
@@ -186,6 +186,4 @@ npx lambdatest-cypress run
 |------|---------|
 | Open interactive | `npx cypress open` |
 | Run headless | `npx cypress run` |
-| Run specific spec | `npx cypress run --spec "cypress/e2e/login.cy.js"` |
-| Run in browser | `npx cypress run --browser chrome` |
-| Compo
+| Run specific spec | `npx cypress run --spec "cypress/e2e/login.cy.js

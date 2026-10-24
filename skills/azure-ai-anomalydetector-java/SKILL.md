@@ -1,9 +1,9 @@
 ---
 name: azure-ai-anomalydetector-java
 description: Build anomaly detection applications with Azure AI Anomaly Detector SDK for Java. Use when implementing univariate/multivariate anomaly detection, time-series analysis, or AI-powered monitoring. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [api, ai, workflow, azure, rag, cro]
+tags: [api, ai, workflow, document, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-anomalydetector-java
 ---
 
@@ -11,6 +11,12 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azur
 # Azure AI Anomaly Detector SDK for Java
 
 Build anomaly detection applications using the Azure AI Anomaly Detector SDK for Java.
+
+## Service status
+
+Microsoft’s [retirement guidance](https://learn.microsoft.com/en-us/azure/ai-services/anomaly-detector/how-to/create-resource) states that new resources were disabled in September 2023 and service retirement was scheduled for October 2026. Treat these SDK fragments as historical/migration reference, not a path for a new cloud deployment. Verify the actual resource lifecycle and evaluate the documented Fabric/open-source alternatives before implementation.
+
+The snippets omit surrounding application/imports and are not a tested complete program. For asynchronous training/inference, poll terminal status with a deadline and handle failure before accessing results. Use approved data, short-lived least-privilege storage access and private reports; never expose SAS tokens.
 
 ## Installation
 
@@ -82,7 +88,7 @@ import java.util.List;
 
 List<TimeSeriesPoint> series = List.of(
     new TimeSeriesPoint(OffsetDateTime.parse("2023-01-01T00:00:00Z"), 1.0),
-    new TimeSeriesPoint(OffsetDateTime.parse("2023-01-02T00:00:00Z"), 2.5),
+    new TimeSeriesPoint(OffsetDateTime.parse("2023-01-02T00:00:00Z"), 2.5)
     // ... more data points (minimum 12 points required)
 );
 
@@ -142,25 +148,4 @@ import com.azure.core.util.polling.SyncPoller;
 ModelInfo modelInfo = new ModelInfo()
     .setDataSource("https://storage.blob.core.windows.net/container/data.zip?sasToken")
     .setStartTime(OffsetDateTime.parse("2023-01-01T00:00:00Z"))
-    .setEndTime(OffsetDateTime.parse("2023-06-01T00:00:00Z"))
-    .setSlidingWindow(200)
-    .setDisplayName("MyMultivariateModel");
-
-// Train model (long-running operation)
-AnomalyDetectionModel trainedModel = multivariateClient.trainMultivariateModel(modelInfo);
-
-String modelId = trainedModel.getModelId();
-System.out.println("Model ID: " + modelId);
-
-// Check training status
-AnomalyDetectionModel model = multivariateClient.getMultivariateModel(modelId);
-System.out.println("Status: " + model.getModelInfo().getStatus());
-```
-
-### Multivariate Batch Inference
-
-```java
-MultivariateBatchDetectionOptions detectionOptions = new MultivariateBatchDetectionOptions()
-    .setDataSource("https://storage.blob.core.windows.net/container/inference-data.zip?sasToken")
-    .setStartTime(OffsetDateTime.parse("2023-07-01T00:00:00Z"))
-    .setE
+    .setEndTime(OffsetDateTime.parse("2023

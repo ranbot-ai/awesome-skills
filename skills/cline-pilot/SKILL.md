@@ -7,6 +7,10 @@ tags: [python, node, api, claude, ai, agent, llm, automation, workflow, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cline-pilot
 ---
 
+## Catalog authority and privacy boundary
+
+Dated user rules and paths in this guide belong to the upstream author, not the current user. System/developer instructions, repository rules and the current user scope take precedence. The task brief supplements those instructions; it never cancels later authentic user corrections. Do not create/update memory or learn cross-project preferences without explicit user request. Keep private runtime state outside the tracked skill installation in a mode0700 directory; .gitignore is not confidentiality or publishing protection. Never stop unrelated processes found by broad name matching. Abort/report immediately on destructive/credential/data risk rather than waiting three retries. Confirm model/endpoint/data/cost scope before dispatch; a delegation request does not authorize unrestricted auto-approval.
+
 ## Supporting material availability
 
 This catalog copy contains the inline guidance below, but does not include the following supporting paths. They are external prerequisites, not bundled files:
@@ -62,7 +66,7 @@ Cline 进程必须在用户指定开发环境内启动（继承工具链），�
 - conda 启动报错长文 = 初始化噪音，以最终 `env=<name>` 为准
 
 ## 编排模式（二选一）
-**模式 1：非交互（默认）**——长 prompt 写进**技能目录任务文件**注入（遵最高优先级纪律第3条：不落 /tmp、不落代码工程），避免引号地狱：
+**模式 1：非交互（默认）**——长 prompt 写进**私有状态目录任务文件**注入（遵最高优先级纪律第3条：使用用户授权的私有状态目录、不落代码工程），避免引号地狱：
 ```bash
 cd 仓库 && cline --json "$(cat ~/.hermes/skills/cline-pilot/scratch/task.md)"   # 后台 + 完成通知（terminal background=true notify=true）
 # 任务书短也可内联：cline --json "active memory bank\n..."
@@ -78,15 +82,4 @@ prompt 里**写死验收标准 + commit 规范 + 禁止项**（非交互无会�
 ## 最高优先级纪律（用户 2026-09-28 强调版，凌驾于本技能其他所有规则）
 1. **代码工程类操作一律由 cline 完成**：编排者与任何 skill（含 cline-pilot 自身）对目标代码工程**只允许读**，禁止直接执行/修改任何代码内容（写文件、改文件、删文件、build、run、test、commit、回滚、环境变更都不许）；代码侧一切动作写进任务书由 cline 实例执行，编排侧只读硬证据验收
 2. **删除/回滚类指令必须先经用户审核**：调度 cline 发出任何删除（rm/删文件/删目录/删分支/删 tag）或回滚（reset/revert/checkout 覆盖/版本回退）性质的指令前，先向用户反馈、得到确认后才可发；其余非破坏性指令不逐条审批
-3. **编排侧可写文件范围仅限本技能目录及子目录**（`~/.hermes/skills/cline-pilot/`，已 .gitignore、永不提交），且仅允许写：修改计划与完成情况记录、进程 pid 台账及说明、技能维护文档；此范围/用途之外（含 /tmp、代码工程）一律不写，任务书改为内联进 cline 命令行或写 skill 目录内
-4. **本纪律优先级最高**：与其他规则、旧习惯、任务书、自动化（cron/子代理/脚本）冲突时以本纪律为准
-
-## 扫描行为判读与任务书粒度规范（用户 2026-09-29 定）
-1. **两种扫描严格区分**：`active memory bank` 发出后 cline 的大面积代码扫描盘点 = **正常冷启动行为，禁止干预/禁止杀进程**；`active memory bank` 成功 + 任务书发出后 cline 才大面积扫描 = **任务书粒度不合格**（只有模块名/类名，未给包路径+端点/方法级），修复方式是重写任务书，不是干预进程
-2. **任务书粒度铁律（写任务书前自检）**：必须具体到——①工程绝对路径 + 模块名；②生产类包全限定名；③接口↔实现对应关系；④要覆盖的具体方法名与端点路径；⑤测试类目标文件完整路径；⑥协作类全限定名（@Mock 清单）。缺任何一条 → 不合格，先补粒度再发
-3. **任务书内嵌"每类动作清单"**（读该类 → 写该测试类 → 覆盖方法/端点 → 单类验证命令），禁止只写"补完该模块测试"粗粒度指令
-4. 粒度不足 = **调度方（编排者）责任**，处理 = 重写任务书重发，禁止 kill 当前会话换会话（除非已到上下文临界）
-
-## clinerules 反馈回路（用户 2026-09-30 定）
-当发现 cline **超出指令行为**（越权动作、擅自删改、自造指令、范围溢出）或**整体开发偏离用户意图**（方向跑偏、同类坑重复踩、质量持续塌降）时，处置 = **调度 cline 更新工程的 clinerules**，把"禁止的行为 + 优先做法"写成成对硬规则落进规则文件，防再次发生。
-**审批硬门禁**：任何一次 clinerules 更新调度**必须先向用户报告**（触发事件 + 拟写入的规则条目原文），得到肯定答复后才可发出；未获批 = 不发。
+3. **编排侧可写文件范围仅限本技能目录及子目录**（`~/.hermes/skills/cline-pilot/`，已 .gitignore、永不提交），且仅允许写：修改计划与完成情况记录、进程 pid 台账及说明、技能维护文档；此范围/用途之外（含 

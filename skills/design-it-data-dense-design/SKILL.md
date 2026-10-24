@@ -22,8 +22,8 @@ Use this sub-style when the user's request matches the aesthetic described above
 3. **High Utility**: Every pixel serves a functional purpose. Minimal purely decorative elements.
 
 ## Visual DNA
-- **Colors**: **Industrial Chic** (high contrast) or **Minimalist Slate**. Avoid bright backgrounds. Dark themes are heavily preferred to reduce eye strain over 8-hour sessions.
-- **Typography**: Small base sizes (`11px` - `13px`). Strict use of monospace fonts (`Fira Code`, `JetBrains Mono`) for data.
+- **Colors**: **Industrial Chic** (high contrast) or **Minimalist Slate**. Avoid bright backgrounds. Offer theme choice; dark colors do not establish lower eye strain for every user.
+- **Typography**: Use readable, scalable text. Compact examples below are visual studies, not minimum-accessibility recommendations; tabular numerals can align data without forcing monospace throughout.
 - **Borders**: Thin `1px` borders (`#333` or `#e0e0e0`) are used extensively to separate tiny cells of data.
 
 ## Web Implementation
@@ -163,6 +163,4 @@ class DataDenseScreen extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Theme(
             // Override theme specifically to make the table hyper-dense
-            data: Theme.of(context).copyWith(
-              dividerColor: Colors.grey[800],
-           
+            data: The

@@ -1,9 +1,9 @@
 ---
 name: binary-analysis-patterns
 description: Comprehensive patterns and techniques for analyzing compiled binaries, understanding assembly code, and reconstructing program logic. 
-category: Document Processing
+category: Security & Systems
 source: antigravity
-tags: [python, node, api, mcp, ai, workflow, document, cro]
+tags: [python, node, api, mcp, ai, workflow, document, vulnerability, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/binary-analysis-patterns
 ---
 
@@ -27,6 +27,10 @@ Comprehensive patterns and techniques for analyzing compiled binaries, understan
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
+
+## Analysis boundaries
+
+Analyze only authorized binaries as inert data first; execute/emulate unknown code only in an isolated disposable environment without host credentials or external network access. Record file hash, architecture, ABI and compiler assumptions. Assembly snippets are patterns, not directly assemblable programs: floating-point/aggregate arguments and ABI alignment rules need separate handling. Structure offsets below assume an LP64-style layout; Windows x64 `long` is 32-bit. Decompiler types/names and suspicious API references are hypotheses, not source truth or proof of a vulnerability.
 
 ## Disassembly Fundamentals
 
@@ -228,45 +232,4 @@ struct Example {
 mov rdi, [struct_ptr]
 mov eax, [rdi]         ; s->a (offset 0)
 movzx eax, byte [rdi+4] ; s->b (offset 4)
-mov rax, [rdi+8]       ; s->c (offset 8)
-movzx eax, word [rdi+16] ; s->d (offset 16)
-```
-
-### Linked List Traversal
-
-```asm
-; while (node != NULL)
-list_loop:
-test rdi, rdi          ; node == NULL?
-jz list_done
-; ... process node ...
-mov rdi, [rdi+8]       ; node = node->next (assuming next at offset 8)
-jmp list_loop
-list_done:
-```
-
-## Common Code Patterns
-
-### String Operations
-
-```asm
-; strlen pattern
-xor ecx, ecx
-strlen_loop:
-cmp byte [rdi + rcx], 0
-je strlen_done
-inc ecx
-jmp strlen_loop
-strlen_done:
-; ecx contains length
-
-; strcpy pattern
-strcpy_loop:
-mov al, [rsi]
-mov [rdi], al
-test al, al
-jz strcpy_done
-inc rsi
-inc rdi
-jmp strcpy_loop
-strc
+mov rax, [rdi+8]       ; s->c (offset 

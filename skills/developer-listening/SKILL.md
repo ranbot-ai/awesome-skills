@@ -11,10 +11,14 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/deve
 # Developer Listening
 ## When to Use
 
-Use this skill when you need monitor what developers say about your brand, competitors, and the problems they're solving. Track mentions and conversations across GitHub, Hacker News, Reddit, Stack Overflow, Twitter, and Discord. Trigger phrases: "developer listening", "monitor developer conversations", "track...
+Use when researching developer feedback, brand mentions or competitor conversations across the named platforms. Trigger phrases include "developer listening", "monitor developer conversations", and "track product mentions".
 
 
 Monitor developer conversations across platforms to understand sentiment, find engagement opportunities, and gather competitive intelligence.
+
+## Access and engagement boundaries
+
+Use public or explicitly authorized community sources and permitted platform access. Server membership alone does not authorize exporting private conversations. Minimize retained usernames and personal data, record source/date/coverage, and treat inferred sentiment or buying intent as uncertain. Monitoring does not authorize posting replies, direct messages, joining communities, or setting recurring jobs; prepare drafts and obtain the applicable user instruction before those actions.
 
 ## Overview
 
@@ -134,17 +138,4 @@ Most monitoring tools offer sentiment filtering. Key queries to set up:
 
 - Negative sentiment mentions from the last 30 days
 - High-relevance mentions that haven't been engaged with yet
-- Platform-specific filters (Hacker News, Reddit, Twitter)
-
-## Finding Engagement Opportunities
-
-### Types of Engagement Opportunities
-
-**Frustrated Users:**
-- Complaining about your product = urgent support opportunity
-- Complaining about competitors = potential conversion
-- Complaining about the problem space = thought leadership opportunity
-
-**Questions and Recommendations:**
-- Direct questions about your product
-- "What tool should I
+- Pl

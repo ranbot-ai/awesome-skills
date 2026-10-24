@@ -3,7 +3,7 @@ name: avalonia-viewmodels-zafiro
 description: Optimal ViewModel and Wizard creation patterns for Avalonia using Zafiro and ReactiveUI. 
 category: AI & Agents
 source: antigravity
-tags: [react, ai, workflow, rag]
+tags: [react, api, ai, workflow, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/avalonia-viewmodels-zafiro
 ---
 
@@ -26,6 +26,10 @@ This skill provides a set of best practices and patterns for creating ViewModels
 - [Wizards & Flows](wizards.md): Building multi-step wizards with `SlimWizard`.
 - [Navigation & Sections](navigation_sections.md): Managing navigation and section-based UIs.
 - [Composition & Mapping](composition.md): Best practices for View-ViewModel wiring and DI.
+
+## Integration boundaries
+
+Guide snippets omit imports, interfaces and application services; verify APIs/source-generator syntax against the installed Zafiro/ReactiveUI version. Do not mix field-based and partial-property generator styles without checking compatibility. Use one actual section registration method rather than assuming both are required. Keep the service provider alive for the app lifetime and dispose it and subscriptions on shutdown; handle wizard cancellation/failure before committing side effects. Angor files named below are external examples, not bundled prerequisites.
 
 ## Example Reference
 

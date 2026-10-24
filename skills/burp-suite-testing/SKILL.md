@@ -30,6 +30,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/burp
 
 Execute comprehensive web application security testing using Burp Suite's integrated toolset, including HTTP traffic interception and modification, request analysis and replay, automated vulnerability scanning, and manual testing workflows. This skill enables systematic discovery and exploitation of web application vulnerabilities through proxy-based testing methodology.
 
+Use a dedicated test browser/profile and trust Burp’s CA only there; remove that trust when finished. Scope filters reduce noise but are not a security boundary: explicitly constrain scan/replay destinations, redirects, external services, account actions and rate budgets. Credential testing requires named test accounts and attempt/lockout limits. Store captured sessions privately and redact tokens/passwords from reports. Examples below are hypothetical, not findings from an assessment.
+
 ## Inputs / Prerequisites
 
 ### Required Tools
@@ -133,25 +135,4 @@ productId=1&quantity=1&price=100
 productId=1&quantity=1&price=1
 ```
 
-Result: Item added to cart at modified price.
-
-### Phase 3: Setting Target Scope
-
-#### Define Scope
-Focus testing on specific target:
-
-1. Go to **Target > Site map**
-2. Right-click target host in left panel
-3. Select **Add to scope**
-4. When prompted, click **Yes** to exclude out-of-scope traffic
-
-#### Filter by Scope
-Remove noise from HTTP history:
-
-1. Click display filter above HTTP history
-2. Select **Show only in-scope items**
-3. History now shows only target site traffic
-
-#### Scope Benefits
-- Reduces clutter from third-party requests
-- Prevents accidental testing 
+Hypothetical vulnerable result: item added at the modified price. Record the observe

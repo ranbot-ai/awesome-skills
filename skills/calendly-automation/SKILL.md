@@ -21,7 +21,7 @@ Automate Calendly operations including event listing, invitee management, schedu
 
 ## Setup
 
-**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
+**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. Account linking/OAuth and permitted scopes are still required; adding an endpoint alone does not grant Calendly access. Add or change host configuration only with authorization.
 
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `calendly`
@@ -29,6 +29,8 @@ Automate Calendly operations including event listing, invitee management, schedu
 4. Confirm connection status shows ACTIVE before running any workflows
 
 ## Core Workflows
+
+Resolve the actual user/organization and timezone before writes. Listing does not authorize invitations, member removal, scheduling links or cancellation; bind each requested mutation to its target and notification effects. Read current schemas and returned pagination fields; this static tool-name list may drift. Do not retry uncertain writes without checking existing state.
 
 ### 1. List and View Scheduled Events
 
@@ -99,14 +101,4 @@ Automate Calendly operations including event listing, invitee management, schedu
 
 **Pitfalls**:
 - `CALENDLY_CREATE_SCHEDULING_LINK` can return 403 if token lacks rights or owner URI is invalid
-- `CALENDLY_LIST_EVENT_TYPE_AVAILABLE_TIMES` requires UTC timestamps and max 7-day range; split longer searches
-- Available times results are NOT paginated - all results returned in one response
-- Event type URIs must be full API URIs (e.g., `https://api.calendly.com/event_types/...`)
-
-### 4. Cancel Events
-
-**When to use**: User wants to cancel a scheduled Calendly event
-
-**Tool sequence**:
-1. `CALENDLY_LIST_EVENTS` - Find the event to cancel [Prerequisite]
-2. `CALENDLY_GET_EVENT` - Confirm event details bef
+- `CALENDLY_L

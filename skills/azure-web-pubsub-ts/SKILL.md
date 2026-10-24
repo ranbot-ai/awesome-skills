@@ -66,7 +66,7 @@ const client3 = new WebPubSubServiceClient(
 ```typescript
 // Basic token
 const token = await client.getClientAccessToken();
-console.log(token.url);  // wss://...?access_token=...
+// token.url contains a bearer credential: return only to the authorized client, never log it.
 
 // Token with user ID
 const userToken = await client.getClientAccessToken({
@@ -77,8 +77,7 @@ const userToken = await client.getClientAccessToken({
 const permToken = await client.getClientAccessToken({
   userId: "user123",
   roles: [
-    "webpubsub.joinLeaveGroup",
-    "webpubsub.sendToGroup",
+    "webpubsub.joinLeaveGroup.chat-room",
     "webpubsub.sendToGroup.chat-room",  // specific group
   ],
   groups: ["chat-room"],  // auto-join on connect
@@ -213,4 +212,4 @@ client.on("group-message", (e) => {
   console.log(`[${e.message.group}] ${e.message.fromUserId}: ${e.message.data}`);
 });
 
-client.on("server-message", (e
+client.on

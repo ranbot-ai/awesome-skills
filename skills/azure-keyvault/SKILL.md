@@ -3,7 +3,7 @@ name: azure-keyvault
 description: Manage secrets and certificates in Azure Key Vault. Configure access policies, integrate with Azure services, and implement secure secret management. Use when managing secrets in Azure environments. 
 category: AI & Agents
 source: antigravity
-tags: [python, api, ai, agent, template, image, security, kubernetes, azure, cro]
+tags: [python, node, api, ai, agent, template, image, security, kubernetes, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-keyvault
 ---
 
@@ -16,7 +16,7 @@ Securely store and manage secrets, keys, and certificates in Azure.
 
 - Azure subscription with appropriate permissions
 - Azure CLI installed (`az` command)
-- Contributor or Key Vault Administrator role for vault management
+- Control-plane vault-management permission and separate least-privilege data-plane roles; assigning roles additionally needs authorized role-assignment permission
 - Managed identity configured for application access
 - Understanding of Azure RBAC vs. Key Vault access policies
 
@@ -37,15 +37,18 @@ az keyvault create \
   --enable-purge-protection true \
   --sku premium  # Use premium for HSM-backed keys
 
+# Legacy policy mode must be explicitly selected; modern new vaults default to RBAC.
 # Create Key Vault with access policies (legacy)
 az keyvault create \
   --name myapp-vault-dev \
+  --enable-rbac-authorization false \
   --resource-group rg-secrets \
   --location eastus \
   --enable-soft-delete true \
   --retention-days 30
 
-# Enable private endpoint (no public access)
+# Disable public access only AFTER creating/approving a private endpoint and DNS path;
+# this update does not create an endpoint and otherwise locks out clients.
 az keyvault update \
   --name myapp-vault-prod \
   --resource-group rg-secrets \
@@ -61,12 +64,14 @@ az monitor diagnostic-settings create \
 
 ## Secret Management
 
+Create referenced secret files via protected local input with mode0600, never commit them or expose values in argv/logs. Secret set responses include values unless output is suppressed. Confirm subscription/vault/object IDs and recovery before mutation/purge; purge protection cannot be disabled after enabling. Read-only `show` also exposes secret values, so use only for a concrete authorized need. Expiry metadata does not rotate downstream application credentials. Public-access disablement is not private-endpoint provisioning.
+
 ```bash
 # Set a secret
 az keyvault secret set \
   --vault-name myapp-vault-prod \
   --name db-password \
-  --value "S3cur3P@ssw0rd!" \
+  --file db-password.txt --output none \
   --content-type "text/plain" \
   --tags Environment=production Team=platform
 
@@ -74,7 +79,7 @@ az keyvault secret set \
 az keyvault secret set \
   --vault-name myapp-vault-prod \
   --name db-credentials \
-  --value '{"username":"dbadmin","password":"S3cur3P@ss!","host":"db.postgres.database.azure.com","port":5432}'
+  --file db-credentials.json --output none
 
 # Get secret value
 az keyvault secret show \
@@ -164,39 +169,4 @@ az keyvault key encrypt \
   --vault-name myapp-vault-prod \
   --name data-encryption-key \
   --algorithm RSA-OAEP-256 \
-  --value "base64-encoded-plaintext"
-
-# Rotate a key
-az keyvault key rotate \
-  --vault-name myapp-vault-prod \
-  --name data-encryption-key
-
-# Set key rotation policy
-az keyvault key rotation-policy update \
-  --vault-name myapp-vault-prod \
-  --name data-encryption-key \
-  --value '{
-    "lifetimeActions": [
-      {
-        "trigger": {"timeBeforeExpiry": "P30D"},
-        "action": {"type": "Notify"}
-      },
-      {
-        "trigger": {"timeAfterCreate": "P90D"},
-        "action": {"type": "Rotate"}
-      }
-    ],
-    "attributes": {"expiryTime": "P180D"}
-  }'
-```
-
-## Certificate Management
-
-```bash
-# Create a self-signed certificate
-az keyvault certificate create \
-  --vault-name myapp-vault-prod \
-  --name app-tls-cert \
-  --policy '{
-    "issuerParameters": {"name": "Self"},
-    "keyProperties": {"exportable": true, "keyS
+  --value "base64-encoded-

@@ -1,9 +1,9 @@
 ---
 name: client-secret-exposure-audit
 description: Audit a deployed web app for secrets exposed to the browser: hardcoded API keys/tokens in JS, secrets in HTML meta/attributes/comments, publicly reachable source/config/deploy files, and header/CORS m
-category: AI & Agents
+category: Security & Systems
 source: antigravity
-tags: [javascript, markdown, api, claude, ai, workflow, security, stripe, docker, aws]
+tags: [javascript, markdown, api, claude, ai, workflow, design, security, vulnerability, stripe]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/client-secret-exposure-audit
 ---
 
@@ -44,20 +44,24 @@ publicly.
 
 ```bash
 BASE="https://TARGET.example"     # authorized target, no trailing path
-WORK="$(mktemp -d)"; cd "$WORK"
+umask 077
+WORK="$(mktemp -d)" || exit 1
+cd "$WORK" || exit 1
 ```
 
 ### Step 1: Fetch the page and inspect response headers
 
 ```bash
-curl -s -D headers.txt -o body.html "$BASE/"
-cat headers.txt
+curl --silent --show-error --connect-timeout 5 --max-time 20 \
+  --max-filesize 1048576 --proto '=https' -D headers.txt -o body.html "$BASE/"
+# Inspect locally; redact Set-Cookie and credential-bearing values before sharing.
 ```
 
 Flag on the headers:
 
-- `access-control-allow-origin: *` — permissive CORS (worse when paired with
-  credentials).
+- `access-control-allow-origin: *` can be appropriate for public assets. Browsers
+  reject wildcard origins for credentialed reads; assess actual sensitive endpoint
+  responses and credential mode before claiming a CORS vulnerability.
 - Missing `Content-Security-Policy`, `X-Frame-Options`/`frame-ancestors`,
   `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy`.
 - Missing/weak `Strict-Transport-Security`.
@@ -65,17 +69,11 @@ Flag on the headers:
 
 ### Step 2: Grep the HTML for secrets and sinks
 
-```bash
-grep -inE "secret|passwd|password|api[_-]?key|apikey|token|bearer|authorization|\
-akia|sk_live|sk_test|pk_live|whsec_|ghp_|aiza|private[_-]?key|mongodb(\+srv)?://|\
-data-[a-z-]*(secret|token|key|access)" body.html
-grep -inE "<!--" body.html            # read every HTML comment
-grep -ioE '<meta[^>]+>' body.html     # meta tags often carry keys/ids
-grep -ioE '<script[^>]+src="[^"]+"'   body.html   # enumerate JS bundles
-```
-
-Secrets hide in `data-*` attributes, `<meta>` tags, `hidden` `<div>`s, and
-`<!-- comments -->` at least as often as in scripts.
+Use a local parser/scanner to report only file paths, line numbers, candidate types
+and redacted fingerprints. Do not print matching lines or whole HTML comments/meta
+tags into terminal/model output: they may contain the very secrets being audited.
+Pattern matches are candidates, not proof of valid credentials; public/publishable
+keys and placeholders require contextual classification.
 
 ### Step 3: Validate discovered scripts before fetching
 
@@ -87,25 +85,14 @@ comments intact.
 ### Step 4: Probe for publicly reachable source / config / deploy files
 
 SPAs often have a catch-all rewrite that returns `index.html` for unknown paths,
-so **compare response sizes** — a path whose size differs from the SPA fallback
-is a real, distinct file.
+so compare status, content type and normalized content against multiple nonexistent
+paths. Different sizes alone do not prove a file: dynamic error/SPA pages vary.
 
 ```bash
-FALLBACK=$(curl -s "$BASE/____nope____$RANDOM" | wc -c)   # SPA fallback size
+FALLBACK=$(curl --silent --show-error --connect-timeout 5 --max-time 20 --max-filesize 1048576 "$BASE/____nope____$RANDOM" | wc -c)   # SPA fallback size
 for p in /.env /.env.local /.env.production /.git/config /.git/HEAD \
   /package.json /package-lock.json /vercel.json /.vercel/project.json \
   /Dockerfile /docker-compose.yml /wrangler.toml /.gitignore \
   /server/index.js /src/config/app.config.js /config.js \
   /src/services/payment.service.js /webpack.config.js /next.config.js; do
-    read -r code size < <(curl -s -o /dev/null -w "%{http_code} %{size_download}" "$BASE$p")
-    [ "$code" = "200" ] && [ "$size" != "$FALLBACK" ] && echo "REAL FILE  $code $size  $p"
-done
-```
-
-For any real file found, fetch it and re-run the Step 2/3 secret grep. Follow
-`require(...)`/`import` paths inside those files to discover more source files
-(routes, controllers, services, webhooks) and repeat.
-
-### Step 5: Triage and score
-
-Rate each finding by b
+    read -r code size < <(curl --silent --show-error --connect-timeout 5 --max-time 20 --max-filesize 1048576 -o /dev/null -w "%{http_code} %{size_download}" "$BAS

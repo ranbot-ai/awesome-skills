@@ -24,6 +24,10 @@ DevOps e deploy de aplicacoes — Docker, CI/CD com GitHub Actions, AWS Lambda, 
 - A simpler, more specific tool can handle the request
 - The user needs general-purpose assistance without domain expertise
 
+## Limites de execucao
+
+Os exemplos alteram infraestrutura paga e podem publicar ou apagar recursos. Confirmar conta, regiao, stack, custos e rollback antes de executar. Notificacoes Telegram exigem autorizacao explicita; retirar esse passo quando nao solicitado. Scripts e arquivos da aplicacao nao estao incluidos; fixar versoes e revisar o plano antes de qualquer deploy sem confirmacao.
+
 ## How It Works
 
 > "Move fast and don't break things." — Engenharia de elite nao e lenta.
@@ -46,7 +50,7 @@ COPY . .
 ENV PATH=/root/.local/bin:$PATH
 ENV PYTHONUNBUFFERED=1
 EXPOSE 8000
-HEALTHCHECK --interval=30s --timeout=3s CMD curl -f http://localhost:8000/health || exit 1
+HEALTHCHECK --interval=30s --timeout=3s CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=2)" || exit 1
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 
@@ -96,6 +100,11 @@ Globals:
       Variables:
         ANTHROPIC_API_KEY: !Ref AnthropicApiKey
         DYNAMODB_TABLE: !Ref AuriTable
+
+Parameters:
+  AnthropicApiKey:
+    Type: String
+    NoEcho: true
 
 Resources:
   AuriFunction:
@@ -151,6 +160,8 @@ sam delete
 
 ## .Github/Workflows/Deploy.Yml
 
+```yaml
+
 name: Deploy Auri
 
 on:
@@ -201,29 +212,4 @@ jobs:
 
 ---
 
-## Health Check Endpoint
-
-```python
-from fastapi import FastAPI
-import time, os
-
-app = FastAPI()
-START_TIME = time.time()
-
-@app.get("/health")
-async def health():
-    return {
-        "status": "healthy",
-        "uptime_seconds": time.time() - START_TIME,
-        "version": os.environ.get("APP_VERSION", "unknown"),
-        "environment": os.environ.get("ENV", "production")
-    }
-```
-
-## Alertas Cloudwatch
-
-```python
-import boto3
-
-def create_error_alarm(function_name: str, sns_topic_arn: str):
-    cw = boto3.client("cloudwatch"
+##

@@ -3,7 +3,7 @@ name: azure-ai-contentunderstanding-py
 description: Azure AI Content Understanding SDK for Python. Use for multimodal content extraction from documents, images, audio, and video. 
 category: Document Processing
 source: antigravity
-tags: [python, pdf, markdown, ai, workflow, document, presentation, image, azure, rag]
+tags: [python, pdf, markdown, api, ai, workflow, document, presentation, image, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-contentunderstanding-py
 ---
 
@@ -189,4 +189,4 @@ poller = client.begin_analyze(
 result = poller.result()
 
 # Access extracted fields
-print
+for c

@@ -3,7 +3,7 @@ name: ai-coding-agent-guardrails
 description: Secure AI coding agents (Claude Code, Cursor, Codex, Copilot) with permission boundaries, secret protection, code review gates, and safe sandbox configurations for team environments. 
 category: AI & Agents
 source: antigravity
-tags: [python, node, markdown, api, claude, ai, agent, workflow, template, security]
+tags: [python, node, markdown, api, claude, ai, agent, workflow, template, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-coding-agent-guardrails
 ---
 
@@ -18,7 +18,7 @@ Secure the use of AI coding agents across engineering teams. This skill covers p
 
 ### CLAUDE.md Configuration
 
-Create a `CLAUDE.md` at the repository root to restrict Claude Code behavior:
+A `CLAUDE.md` supplies behavioral guidance, not an OS sandbox. Merge compatible rules into existing instructions without overwriting them; tool permissions and isolation enforce boundaries independently.
 
 ```markdown
 # CLAUDE.md
@@ -53,7 +53,7 @@ Create a `CLAUDE.md` at the repository root to restrict Claude Code behavior:
 For agents that execute shell commands, define an explicit allowlist:
 
 ```yaml
-# .agent-permissions.yaml
+# .agent-permissions.yaml — conceptual schema, not consumed automatically by these clients
 agent_permissions:
   allowed_commands:
     - "npm test"
@@ -105,6 +105,8 @@ agent_permissions:
 ```
 
 ### File System Access Controls
+
+Linux-only administrator sketch for a disposable checkout; do not recursively change ownership/modes on a live developer repository. The script below grants named ACL entries but does not grant traversal on the repository/parent directories or default ACLs for new files. Design and verify both explicitly; prevent symlink escapes and keep credentials outside the sandbox. Recursive chmod 750 also marks source files executable.
 
 Use filesystem permissions to enforce boundaries at the OS level:
 
@@ -173,22 +175,4 @@ git secrets --add --allowed 'your-api-key-here'
 
 ### Agent Output Scanning
 
-Scan agent-generated output before it reaches version control:
-
-```python
-#!/usr/bin/env python3
-"""scan_agent_output.py - Scan AI agent output for leaked secrets."""
-
-import re
-import sys
-from pathlib import Path
-
-SECRET_PATTERNS = [
-    (r'AKIA[0-9A-Z]{16}', 'AWS Access Key'),
-    (r'(?i)aws_secret_access_key\s*[:=]\s*\S+', 'AWS Secret Key'),
-    (r'ghp_[a-zA-Z0-9]{36}', 'GitHub Personal Access Token'),
-    (r'gho_[a-zA-Z0-9]{36}', 'GitHub OAuth Token'),
-    (r'sk-[a-zA-Z0-9]{48,}', 'OpenAI/Anthropic API Key'),
-    (r'xox[baprs]-[0-9a-zA-Z\-]{10,}', 'Slack Token'),
-    (r'-----BEGIN (RSA |EC |DSA )?PRIVATE KEY-----', 'Private Key'),
-    (r'(?i)(password|pass
+Scan agent-generated output before it reaches v

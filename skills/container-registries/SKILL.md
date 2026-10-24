@@ -3,7 +3,7 @@ name: container-registries
 description: Manage container registries including ECR, ACR, GCR, and Docker Hub. 
 category: Security & Systems
 source: antigravity
-tags: [ai, agent, template, image, security, vulnerability, docker, aws, azure, rag]
+tags: [ai, agent, workflow, template, image, security, vulnerability, docker, aws, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/container-registries
 ---
 
@@ -22,6 +22,8 @@ Use this skill when:
 - Implementing image scanning and security
 
 ## Prerequisites
+
+Confirm account/region/repository and image digest before pushing, publishing, granting cross-account access or enabling deletion policies. Preview cleanup candidates and preserve deployment/rollback digests. ACR retention and geo-replication require a supported SKU (the Standard setup above does not enable every later feature). Google cleanup policy files require the current CLI schema; validate the illustrative object before use. The Harbor archive/flags and Docker Content Trust are historical examples, not universal current signing instructions. TLS alone does not authorize registry clients: configure authentication/access controls before network exposure, and do not run both same-name registry examples simultaneously.
 
 - Docker or Podman installed
 - Cloud CLI tools (AWS CLI, az, gcloud) for respective registries
@@ -175,9 +177,8 @@ az acr show --name myregistry --query loginServer -o tsv
 az acr login --name myregistry
 
 # Login with service principal
-docker login myregistry.azurecr.io \
-  -u $SP_APP_ID \
-  -p $SP_PASSWORD
+printf '%s' "$SP_PASSWORD" | docker login myregistry.azurecr.io \
+  -u "$SP_APP_ID" --password-stdin
 
 # Get access token
 az acr login --name myregistry --expose-token
@@ -232,40 +233,4 @@ gcloud artifacts repositories create myrepo \
   --description="Docker repository"
 ```
 
-### Authentication
-
-```bash
-# Configure Docker auth
-gcloud auth configure-docker us-central1-docker.pkg.dev
-
-# Or use credential helper
-gcloud auth print-access-token | \
-  docker login -u oauth2accesstoken --password-stdin \
-  https://us-central1-docker.pkg.dev
-```
-
-### Push/Pull
-
-```bash
-# Tag for Artifact Registry
-docker tag myapp:latest \
-  us-central1-docker.pkg.dev/PROJECT_ID/myrepo/myapp:latest
-
-# Push
-docker push us-central1-docker.pkg.dev/PROJECT_ID/myrepo/myapp:latest
-
-# Pull
-docker pull us-central1-docker.pkg.dev/PROJECT_ID/myrepo/myapp:latest
-```
-
-### Cleanup Policy
-
-```bash
-# Create cleanup policy
-gcloud artifacts repositories set-cleanup-policies myrepo \
-  --location=us-central1 \
-  --policy=policy.json
-
-# policy.json
-{
-  "name": "delete-old"
+### Au

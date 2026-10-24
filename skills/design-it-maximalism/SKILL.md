@@ -61,6 +61,7 @@ body {
   position: absolute;
   top: 4px; left: 4px; right: 4px; bottom: 4px;
   border: 1px dashed #D4AF37;
+  pointer-events: none; /* Decorative border must not cover controls. */
 }
 
 .max-title {
@@ -88,7 +89,7 @@ struct MaximalismView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: columns, spacing: 4) {
-                // Feature span
+                // Feature styling only: LazyVGrid does not span this item across columns.
                 MaxItem(title: "MUSEUM", isFeature: true)
                 // Dense data blocks
                 MaxItem(title: "1892")
@@ -168,7 +169,4 @@ class MaximalismScreen extends StatelessWidget {
       child: Stack(
         children: [
           if (isOrnate)
-            Positioned.fill(
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                // Requires path_drawing or cus
+            Positioned.fil

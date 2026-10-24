@@ -56,6 +56,10 @@ client = DocumentTranslationClient(
 )
 ```
 
+## Disclosure and cost boundary
+
+Translation sends documents to Azure and writes output to the selected containers. Confirm authorized document subset, destination, region, retention and budget. Keep SAS URLs out of logs, use short-lived least-privilege access and handle each document’s failure separately; overall job completion does not imply all documents succeeded. SDK/single-document methods and language/format support are version-dependent: inspect current package docs before running fragments.
+
 ## Basic Document Translation
 
 ```python
@@ -148,7 +152,7 @@ operation_id = poller.id
 document_statuses = client.list_document_statuses(operation_id)
 
 for doc in document_statuses:
-    print(f"Document: {doc.source_document_url}")
+    print(f"Document ID: {doc.id}")  # Avoid logging SAS-bearing source URLs.
     print(f"  Status: {doc.status}")
     print(f"  Translated to: {doc.translated_to}")
     if doc.error:
@@ -176,25 +180,4 @@ poller = client.begin_translation(
                     target_url=target_url,
                     language="es",
                     glossaries=[
-                        TranslationGlossary(
-                            glossary_url="https://<storage>.blob.core.windows.net/glossary/terms.csv?<sas>",
-                            file_format="csv"
-                        )
-                    ]
-                )
-            ]
-        )
-    ]
-)
-```
-
-## Supported Document Formats
-
-```python
-# Get supported formats
-formats = client.get_supported_document_formats()
-
-for fmt in formats:
-    print(f"Format: {fmt.format}")
-    print(f"  Extensions: {fmt.file_extensions}")
-    print(f"  Content types: {fmt.c
+                        T

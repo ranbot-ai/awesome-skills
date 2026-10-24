@@ -1,9 +1,9 @@
 ---
 name: brand-kit-print-collateral
-description: Print collateral spec: item, finished and trim size, bleed, colour mode, stock and GSM, finish, safe margin, print method, quantity and unit cost. Use for cards and letterhead. 
+description: Print collateral spec: item, finished/trim size and artwork size including bleed, bleed, colour mode, stock and GSM, finish, safe margin, print method, quantity and unit cost. Use for cards and letter
 category: Document Processing
 source: antigravity
-tags: [pdf, markdown, ai, workflow, template, design, document, presentation, image, security]
+tags: [pdf, markdown, ai, workflow, template, design, document, spreadsheet, presentation, image]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/brand-kit-print-collateral
 ---
 
@@ -21,9 +21,7 @@ request, from one field list so the four cannot drift apart.
 
 Layer: Layer 2: Brand & Design. Fits: Starter stage. Table code: n/a.
 
-**The rule this table exists to enforce:** the finished size and the trim size are
-different things, and a designer who forgets the difference pays for the reprint. The
-finished size is what gets cut; the trim size is finished size plus bleed on every edge.
+**The rule this table exists to enforce:** finished size and trim size normally mean the same cut dimensions. Artwork including bleed is larger: add the bleed on both edges of each dimension (A4 210x297 mm plus 3 mm each edge becomes 216x303 mm).
 The table keeps them in separate columns for exactly that reason, and the same logic
 separates colour mode, stock weight and finish - three decisions a printer asks about
 before a job starts, and three that cannot be changed after it starts.
@@ -106,7 +104,7 @@ open_questions: []
 Build an already requested artifact without asking again. For advice-only requests, give a short recommendation and offer the relevant artifact.
 
 **Recommended approach:** Four items that between them cover almost every business - A4
-letterhead, a 55x90mm visiting card, an 85.54mm employee card in the same family, and a
+letterhead, a 55x90mm visiting card, an employee card sized to the supplier's confirmed template in the same family, and a
 single-page email signature. Each specified with trim, bleed, colour mode, stock and
 finish stated once, plus a PDF proof and a print-ready export with crop marks. Build the
-envelope and folder only when someone asks for them
+envelope and folder only wh

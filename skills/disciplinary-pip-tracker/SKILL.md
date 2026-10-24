@@ -90,7 +90,7 @@ If an artifact was requested, build it after resolving essential missing facts. 
 
 **Recommended approach:** Run this as a documented case with a start, review dates and an outcome, whatever stage the process is at.
 
-**Why this one:** Disciplinary cases fail on missing dates and missing review points, not on the decision. Store the timeline, not opinions.
+**Why this one:** A dated timeline supports review, but fair evidence assessment and the decision process remain essential. Distinguish allegations, observed facts, employee response and authorized findings.
 
 **Workflow:** Case opened → Goals and review date → Review → Outcome → Closure and appeal
 
@@ -117,4 +117,4 @@ A CSV carries no types, so after it, name the columns
 that need a number, date or currency format applied.
 
 ```csv
-Case Title,Employee Name,Department,Manager,HR Owner,Case Type,Linked Per
+Case T

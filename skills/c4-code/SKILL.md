@@ -92,7 +92,6 @@ classDiagram
     Class1 ..|> Interface1 : implements
     Class1 --> Class2 : uses
 ```
-````
 
 ### Functional/Procedural Code (Modules, Functions)
 
@@ -194,4 +193,4 @@ flowchart TB
 | -------------------------------- | -------------------------------- | ------------------------------------------------------- |
 | OOP (classes, interfaces)        | `classDiagram`                   | Show inheritance, composition, interface implementation |
 | FP (pure functions, pipelines)   | `flowchart`                      | Show data transformations and function composition      |
-| FP (modules with exports)        | `classDiagram` with `<<module>>` | Show module structure and depen
+| FP (modules with exports)        | `classDiagram` with `<<module>>` | Show module structure and dependenci

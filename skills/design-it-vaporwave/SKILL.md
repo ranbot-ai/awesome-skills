@@ -43,7 +43,8 @@ body {
   border: 2px outset #fff;
   border-right-color: #808080;
   border-bottom-color: #808080;
-  width: 400px;
+  width: min(400px, 100%);
+  box-sizing: border-box;
   padding: 2px;
 }
 
@@ -149,6 +150,4 @@ class VaporwaveScreen extends StatelessWidget {
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Color(0xFFFF99CC), Color(0xFF99CCFF)]),
-        ),
-        child:
+          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [Color(0xFFFF99CC), Color(0xF

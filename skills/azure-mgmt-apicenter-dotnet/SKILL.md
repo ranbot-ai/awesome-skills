@@ -19,8 +19,7 @@ dotnet add package Azure.ResourceManager.ApiCenter
 dotnet add package Azure.Identity
 ```
 
-**Current Version**: v1.0.0 (GA)  
-**API Version**: 2024-03-01
+Examples target the historical 1.0 API family. Pin a reviewed package and verify exact generated types/API version against the official reference; this is not a latest-version claim.
 
 ## Environment Variables
 
@@ -55,6 +54,8 @@ Subscription
         └── MetadataSchema                  # Custom metadata definitions
 ```
 
+These are separate snippets requiring Azure/Azure.Core/Resources imports and a pinned SDK compilation. Confirm exact subscription/resource IDs, permissions and cost before provisioning. API Center records document deployments; creating a deployment record does not deploy a working API. Inspect specs for embedded credentials/internal data before uploading.
+
 ## Core Workflows
 
 ### 1. Create API Center Service
@@ -63,10 +64,11 @@ Subscription
 using Azure.ResourceManager.ApiCenter;
 using Azure.ResourceManager.ApiCenter.Models;
 
-ResourceGroupResource resourceGroup = await client
-    .GetDefaultSubscriptionAsync()
-    .Result
-    .GetResourceGroupAsync("my-resource-group");
+// Resolve the explicitly selected subscription, avoiding sync-over-async/default-account ambiguity.
+var subscription = client.GetSubscriptionResource(new ResourceIdentifier(
+    $"/subscriptions/{Environment.GetEnvironmentVariable("AZURE_SUBSCRIPTION_ID")}"));
+ResourceGroupResource resourceGroup = (await subscription
+    .GetResourceGroupAsync("my-resource-group")).Value;
 
 ApiCenterServiceCollection services = resourceGroup.GetApiCenterServices();
 
@@ -168,27 +170,4 @@ ApiCenterApiDefinitionCollection definitions = version.GetApiCenterApiDefinition
 
 ApiCenterApiDefinitionData definitionData = new ApiCenterApiDefinitionData
 {
-    Title = "OpenAPI Specification",
-    Description = "Orders API OpenAPI 3.0 definition"
-};
-
-ArmOperation<ApiCenterApiDefinitionResource> operation = await definitions
-    .CreateOrUpdateAsync(WaitUntil.Completed, "openapi", definitionData);
-
-ApiCenterApiDefinitionResource definition = operation.Value;
-
-// Import specification
-string openApiSpec = await File.ReadAllTextAsync("orders-api.yaml");
-
-ApiSpecImportContent importContent = new ApiSpecImportContent
-{
-    Format = ApiSpecImportSourceFormat.Inline,
-    Value = openApiSpec,
-    Specification = new ApiSpecImportSpecification
-    {
-        Name = "openapi",
-        Version = "3.0.1"
-    }
-};
-
-await definition.ImportSpecificationAsync(WaitUntil.Comp
+    

@@ -63,7 +63,7 @@ side. `Settlement` is what closed it - customer collections, supplier payments. 
 **The balance identity, and what happens when it fails.**
 
 ```
-Closing Balance = Opening Balance + Credit Movement - Settlement +/- Adjustments
+Closing Balance = Opening Balance + Credit Movement - Settlement + Signed Adjustments
 ```
 
 Check it on every row. If it does not hold, the difference is **recorded and marked**, never
@@ -97,4 +97,4 @@ Relevant Daily Credit Movement = Relevant annual credit movement / 365
 
 and it is only used when the selected annual movement is appropriate for the analysis. Where the
 monetary basis is missing, `Estimated Working-Capital Funding` is `Unknown` and the record says so.
-Never i
+Ne

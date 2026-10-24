@@ -14,6 +14,8 @@ Monitor AI agent behavior with logs, traces, metrics, and cost telemetry. This s
 
 ---
 
+Examples use custom llm.* attributes, not a claim of current OpenTelemetry semantic-convention compliance. Import shared metric definitions once and use bounded configured label values. Telemetry export is data disclosure: approve destination/retention and omit prompts, credentials, direct user IDs and raw exception bodies. TLS is required for non-loopback collectors.
+
 ## Core Metrics
 
 Define these metrics at the application layer. All examples use the Prometheus client library naming conventions.
@@ -150,7 +152,7 @@ def init_tracing(service_name: str, otlp_endpoint: str = "http://localhost:4317"
         "deployment.environment": "production",
     })
     provider = TracerProvider(resource=resource)
-    exporter = OTLPSpanExporter(endpoint=otlp_endpoint, insecure=True)
+    exporter = OTLPSpanExporter(endpoint=otlp_endpoint, insecure=otlp_endpoint.startswith("http://localhost:"))
     provider.add_span_processor(BatchSpanProcessor(exporter))
     trace.set_tracer_provider(provider)
     return trace.get_tracer(service_name)
@@ -168,12 +170,4 @@ tracer = trace.get_tracer("agent.llm")
 
 def traced_llm_call(client, messages, model="gpt-4o", **kwargs):
     """Wrap an LLM completion call with a full OpenTelemetry span."""
-    with tracer.start_as_current_span("llm.chat_completion") as span:
-        span.set_attribute("llm.model", model)
-        span.set_attribute("llm.provider", "openai")
-        span.set_attribute("llm.message_count", len(messages))
-        span.set_attribute("llm.temperature", kwargs.get("temperature", 1.0))
-        span.set_attribute("llm.max_tokens", kwargs.get("max_tokens", 0))
-
-        start = time.perf_counter()
-    
+    if kwargs

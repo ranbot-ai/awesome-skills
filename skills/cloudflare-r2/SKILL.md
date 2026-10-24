@@ -1,7 +1,7 @@
 ---
 name: cloudflare-r2
 description: Manage Cloudflare R2 buckets, lifecycle, and signed URLs. Use for low-egress object storage and media delivery. 
-category: AI & Agents
+category: Development & Code Tools
 source: antigravity
 tags: [python, typescript, pdf, api, ai, agent, template, image, security, aws]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cloudflare-r2
@@ -19,6 +19,10 @@ S3-compatible object storage with zero egress fees, built on Cloudflare's global
 - Serving files at the edge via Workers or public bucket access.
 - Building multi-cloud storage that avoids vendor lock-in (S3 API compatible).
 - Storing ML model artifacts, training data, or inference results.
+
+## Object and public-access scope
+
+Confirm account, bucket, exact keys/prefix and overwrite/delete authority before writes or lifecycle changes. R2 supports a subset of S3 behavior; verify CLI subcommands/location hints against the installed Wrangler version. Zero egress does not mean zero storage/request/infrequent-access costs. The GET fragment intentionally serves only already-approved public assets; never attach it to private uploads. Signed URLs are bearer capabilities: authorize the caller and object, encode key path segments, set explicit short expiry and method, return privately with no-store, and never print/share them in logs. CORS does not authenticate callers. See [presigned URL scope](https://developers.cloudflare.com/r2/api/s3/presigned-urls/).
 
 ## Prerequisites
 
@@ -177,28 +181,3 @@ interface Env {
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
-
-    // GET — serve file from R2
-    if (request.method === "GET") {
-      const key = url.pathname.slice(1); // strip leading /
-      const object = await env.ASSETS.get(key);
-
-      if (!object) {
-        return new Response("Not Found", { status: 404 });
-      }
-
-      const headers = new Headers();
-      object.writeHttpMetadata(headers);
-      headers.set("etag", object.httpEtag);
-      headers.set("cache-control", "public, max-age=86400");
-
-      return new Response(object.body, { headers });
-    }
-
-    // PUT — upload file to R2
-    if (request.method === "PUT") {
-      const key = url.pathname.slice(1);
-      const contentType = request.headers.get("content-type") || "application/octet-stream";
-
-      await env.UPLOADS.put(key, request.body, {
-        h

@@ -3,7 +3,7 @@ name: api-and-interface-design
 description: Guides stable API and interface design. Use when designing APIs, module boundaries, or any public interface. Use when creating REST or GraphQL endpoints, defining type contracts between modules, or es
 category: Document Processing
 source: antigravity
-tags: [typescript, api, ai, agent, design, document, security, cro]
+tags: [javascript, typescript, api, ai, agent, design, document, security, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/api-and-interface-design
 ---
 

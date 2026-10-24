@@ -3,7 +3,7 @@ name: brave-man
 description: Runs a structured clarifying interview for new project requests before building. Instead of writing code, it outputs a fully specified prompt.md for a fresh agent session to execute, preventing expens
 category: AI & Agents
 source: antigravity
-tags: [react, markdown, api, ai, agent, firebase, rag]
+tags: [react, markdown, api, ai, agent, workflow, firebase, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/brave-man
 ---
 

@@ -28,6 +28,10 @@ Automate BambooHR human resources operations through Composio's BambooHR toolkit
 3. If connection is not ACTIVE, follow the returned auth link to complete BambooHR authentication
 4. Confirm connection status shows ACTIVE before running any workflows
 
+## HR data boundaries
+
+Verify the exact company and employee IDs using more than an ambiguous name match. Request only fields needed for the task; do not export SSNs, dependent/benefits details or whole directories unnecessarily. Requesting leave does not authorize approving it: stop after creation unless approval/denial was explicitly requested by an authorized decision-maker. Preview field changes and reconcile existing request IDs before retrying uncertain writes. External sync requires an approved destination and retention boundary; advance its watermark only after all changes/deletions are durably reconciled.
+
 ## Core Workflows
 
 ### 1. List and Search Employees
@@ -113,18 +117,4 @@ Automate BambooHR human resources operations through Composio's BambooHR toolkit
 **Pitfalls**:
 - Only fields included in the request are updated; others remain unchanged
 - Some fields are read-only and cannot be updated via API
-- Field names must match BambooHR's expected field names exactly
-- Updates are audited; changes appear in the employee's change history
-- Verify current values with GET_EMPLOYEE before updating to avoid overwriting
-
-### 5. Manage Dependents and Benefits
-
-**When to use**: User wants to view employee dependents or benefit coverage
-
-**Tool sequence**:
-1. `BAMBOOHR_DEPENDENTS_GET_ALL` - List all dependents [Required]
-2. `BAMBOOHR_BENEFIT_GET_COVERAGES` - Get benefit coverage details [Optional]
-
-**Key parameters**:
-- For dependents: Optional `employeeId` filter
-- For benefits: Depends on schema; check RUBE_SEARCH_TOOLS for current parameter
+- Field names must m

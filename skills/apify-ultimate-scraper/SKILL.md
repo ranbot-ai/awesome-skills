@@ -1,16 +1,16 @@
 ---
 name: apify-ultimate-scraper
-description: AI-driven data extraction from 55+ Actors across all major platforms. This skill automatically selects the best Actor for your task. 
-category: Creative & Media
+description: Select a candidate Apify Actor for the requested extraction after checking its current schema, provenance, pricing and limits. The Actor table is a historical shortlist, not a verified availability or
+category: Document Processing
 source: antigravity
-tags: [react, node, api, mcp, claude, ai, workflow, cro]
+tags: [react, node, api, mcp, ai, workflow, spreadsheet, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apify-ultimate-scraper
 ---
 
 
 # Universal Web Scraper
 
-AI-driven data extraction from 55+ Actors across all major platforms. This skill automatically selects the best Actor for your task.
+Select a candidate Apify Actor for the requested extraction after checking its current schema, provenance, pricing and limits. The Actor table is a historical shortlist, not a verified availability or best-choice guarantee.
 
 ## When to Use
 - The user needs web data extraction but has not yet chosen a specific Apify Actor.
@@ -18,10 +18,10 @@ AI-driven data extraction from 55+ Actors across all major platforms. This skill
 - The task spans multiple platforms and benefits from one unified workflow for actor selection, execution, and summarization.
 
 ## Prerequisites
-(No need to check it upfront)
+Verify prerequisites before execution without printing credentials.
 
 - `.env` file with `APIFY_TOKEN`
-- Node.js 20.6+ (for native `--env-file` support)
+- A supported Node.js release with native fetch, --env-file and ES module syntax detection, or an explicitly configured module package scope
 - `mcpc` CLI tool: `npm install -g @apify/mcpc`
 
 ## Workflow
@@ -119,5 +119,4 @@ First, understand what the user wants to achieve. Then select the best Actor fro
 
 | Actor ID | Best For |
 |----------|----------|
-| [`xquik/x-tweet-scraper`](https://apify.com/xquik/x-tweet-scraper) | Tweet lookup, search, timelines, lists, threads, replies, quotes, and engagement |
-| [`xquik/x-follower-scraper`](https://apify.com/xquik/x-follower-scraper) | Followers, following, verified followers, lis
+| [`xquik/x-tweet-scraper`](https://apify.com/xquik/x-tw

@@ -3,7 +3,7 @@ name: change-management
 description: Implement change management processes. Configure CAB reviews, change windows, and rollback procedures. Use when managing production changes. 
 category: Security & Systems
 source: antigravity
-tags: [markdown, api, ai, agent, automation, workflow, template, document, security, vulnerability]
+tags: [markdown, ai, agent, automation, workflow, template, document, security, vulnerability]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/change-management
 ---
 
@@ -11,6 +11,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/chan
 # Change Management
 
 Implement structured change management processes covering change classification, CAB workflows, emergency change procedures, and automation for compliance with SOC 2, ITIL, and regulatory frameworks.
+
+Approval counts, timelines, meeting dates and retention values here are example organization policy, not universal ITIL/SOC2 requirements. Match actual authority, duties and emergency procedures; urgency does not authorize bypassing protection or acting without the necessary scope. A rollback may be unsafe for irreversible data changes: define forward recovery, restore verification and decision ownership.
 
 ## Change Classification
 
@@ -151,22 +153,4 @@ change_request:
     technical_reviewer: ""
     technical_approval_date: ""
     security_reviewer: ""
-    security_approval_date: ""
-    cab_approval_date: ""
-    cab_notes: ""
-
-  closure:
-    implementation_date: ""
-    implementation_result: ""  # success | partial | failed | rolled_back
-    post_implementation_review: ""
-    lessons_learned: ""
-    follow_up_actions: []
-```
-
-## CAB Workflow
-
-```yaml
-cab_workflow:
-  meeting_schedule:
-    regular_cab: "Weekly, Thursday 2:00 PM"
-    emergency_cab: "On-demand, minimum 2
+    security

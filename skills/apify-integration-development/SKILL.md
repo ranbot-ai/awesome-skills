@@ -13,9 +13,9 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apif
 
 # Apify Integration Development
 
-Design and build an **official Apify integration** for a company's product, with minimal help from Apify. This skill covers every integration shape Apify supports - workflow-automation apps, AI agent plugins (coding agents and harnesses), AI framework packages, and direct application clients - so a partner team can ship a first-class Apify integration end to end. The cross-cutting rules below apply to all of them, and one category-specific reference file carries the rest.
+Design and build an **Apify integration** for a company's product, with minimal help from Apify. This skill covers every integration shape Apify supports - workflow-automation apps, AI agent plugins (coding agents and harnesses), AI framework packages, and direct application clients - so a partner team can ship a first-class Apify integration end to end. The cross-cutting rules below apply to all of them, and one category-specific reference file carries the rest.
 
-> **Building an official integration?** Once you publish it, contact **integrations@apify.com** so the Apify team can review, test, and validate your integration before it reaches users. We'll check the capability surface, cost controls, error handling, and attribution headers, and help you close any gaps.
+> **Building an official integration?** Once you publish it, contact **integrations@apify.com** so the Apify team can review, test, and validate your integration for official validation. Publication alone does not establish endorsement. Apify can check the capability surface, cost controls, error handling, and attribution headers, and help you close any gaps.
 
 ## Step 0 - Learn the Apify model first (required)
 
@@ -30,7 +30,7 @@ Apify vocabulary (always written with a capital A on the platform):
 - **Actor Task** - a saved, parameterized configuration for running an Actor.
 - **Apify Store** - the marketplace of Actors at `https://apify.com/store.md`.
 - **Apify Console** - the web UI at `https://console.apify.com`.
-- **Compute Unit (CU)** - billing unit: memory (MB) x duration (hours).
+- **Compute Unit (CU)** - billing unit: memory (GB) x duration (hours).
 
 Further terms (build, standby, request queue, proxy, pricing models): `https://docs.apify.com/llms.txt`.
 
@@ -67,4 +67,4 @@ These invariants were extracted from every existing Apify integration. Apply the
 Model the integration's resources on Apify's domain (Actor / Run / Dataset / KV Store / Task). Users coming from Apify Console should find the same concepts under the same names.
 
 ### Asynchronous run flow with bounded polling
-Actors can run for seconds to hours. Use the asynchronous flow, never the 300-second synchronous endpoint for anything but sho
+Actors can run for seconds to hours. Use the asynchronous flow, never the 300-sec

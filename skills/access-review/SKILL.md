@@ -3,7 +3,7 @@ name: access-review
 description: Conduct periodic access reviews and certifications. Implement access governance and recertification workflows. Use when managing access compliance. 
 category: Document Processing
 source: antigravity
-tags: [python, markdown, api, ai, agent, automation, workflow, template, document, security]
+tags: [python, markdown, api, ai, agent, llm, automation, workflow, template, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/access-review
 ---
 
@@ -65,66 +65,81 @@ access_review_workflow:
       - Identify process improvements for next cycle
 ```
 
+## Review boundaries
+
+Confirm exact tenant/accounts, read-only credentials, review period and authorized
+reviewers. Store reports privately with defined retention; proposed cadence/SLA
+numbers are examples, not compliance certification. Identity joins need verified
+immutable IDs, not matching display names. Owner approval and a recovery/break-glass
+plan are required before modifying access; inactivity heuristics never authorize
+revoking production service accounts automatically.
+
 ## AWS IAM Access Review Scripts
+
+Obtain the IAM credential report through a read-only scoped client, poll boundedly
+until complete, and decode it once into a private file. Failure/unsupported values
+are unknown, never zero/inactive. Use named CSV columns, not positional awk fields:
+
+```python
+import csv
+
+def review_console_mfa(report_path):
+    candidates = []
+    with open(report_path, newline="", encoding="utf-8") as source:
+        for row in csv.DictReader(source):
+            if row.get("password_enabled") == "true" and row.get("mfa_active") == "false":
+                candidates.append({"user": row["user"], "finding": "review_console_mfa"})
+    return candidates  # Private review data, not automatic disable actions.
+```
+
+Compare timezone-aware last-use/creation times and both access-key slots with an
+agreed threshold; missing history may mean never-used, unsupported or unavailable.
+Password last-use alone is not overall account inactivity. Effective privilege
+requires user/group/role/inline policies, boundaries, SCPs and resource policies;
+policy-name matching is only a hint. Cross-account trust needs structured principal
+and condition analysis, not grep or an AWS-account substring. No key or access is
+revoked solely because a report marks it stale.
+
+## GitHub Access Review
 
 ```bash
 #!/usr/bin/env bash
-# aws-iam-review.sh - Comprehensive IAM access review report
+# github-access-review.sh - Partial organization inventory
+set -euo pipefail
+umask 077
 
-OUTPUT_DIR="./access-review/$(date +%Y-%m)"
+ORG="your-org"
+OUTPUT_DIR="./access-review/github/$(date +%Y-%m)"
 mkdir -p "$OUTPUT_DIR"
 
-echo "=== AWS IAM Access Review ==="
+echo "=== GitHub Organization Access Review ==="
 
-# Generate credential report
-aws iam generate-credential-report > /dev/null
-sleep 10
-aws iam get-credential-report --output text --query Content | \
-  base64 -d > "$OUTPUT_DIR/credential-report.csv"
+echo "--- Organization Members ---"
+gh api orgs/$ORG/members --paginate \
+  --jq '.[] | [.login, .site_admin] | @csv' \
+  > "$OUTPUT_DIR/org-members.csv"
 
-echo "--- Users Without MFA ---"
-aws iam get-credential-report --output text --query Content | base64 -d | \ <!-- security-allowlist: documented payload decoding technique reference, do not execute outside authorized scope -->
-  awk -F, 'NR>1 && $4=="true" && $8=="false" {print $1}' | \
-  tee "$OUTPUT_DIR/users-without-mfa.txt"
+echo "--- Organization Owners ---"
+gh api "orgs/$ORG/members?role=admin" --paginate \
+  --jq '.[] | .login' \
+  > "$OUTPUT_DIR/org-owners.txt"
 
-echo "--- Inactive Users (90+ days) ---"
-THRESHOLD=$(date -d '90 days ago' +%Y-%m-%dT%H:%M:%S 2>/dev/null || date -v-90d +%Y-%m-%dT%H:%M:%S)
-aws iam get-credential-report --output text --query Content | base64 -d | \ <!-- security-allowlist: documented payload decoding technique reference, do not execute outside authorized scope -->
-  awk -F, -v t="$THRESHOLD" 'NR>1 && $5!="N/A" && $5!="no_information" && $5<t {
-    print $1","$5
-  }' | tee "$OUTPUT_DIR/inactive-users.csv"
+echo "--- Outside Collaborators ---"
+gh api orgs/$ORG/outside_collaborators --paginate \
+  --jq '.[] | .login' \
+  > "$OUTPUT_DIR/outside-collaborators.txt"
 
-echo "--- Stale Access Keys (90+ days unused) ---"
-for user in $(aws iam list-users --query 'Users[*].UserName' --output text); do
-  for key_id in $(aws iam list-access-keys --user-name "$user" \
-    --query 'AccessKeyMetadata[?Status==`Active`].AccessKeyId' --output text); do
-    last_used=$(aws iam get-access-key-last-used --access-key-id "$key_id" \
-      --query 'AccessKeyLastUsed.LastUsedDate' --output text)
-    if [ "$last_used" = "None" ] || [ "$last_used" \< "$THRESHOLD" ]; then
-      echo "$user,$key_id,$last_used"
-    fi
-  done
-done | tee "$OUTPUT_DIR/stale-access-keys.csv"
+echo "--- Repository Access Per Repo ---"
+for repo in $(gh api "orgs/$ORG/repos" --paginate --jq '.[].name'); do
+  echo "Repo: $repo"
+  gh api "repos/$ORG/$repo/collaborators" --paginate \
+    --jq '.[] | [.login, .role_name] | @csv' \
+    > "$OUTPUT_DIR/repo-$repo-access.csv"
+done
 
-echo "--- Users With Admin Policies ---"
-for user in $(aws iam list-users --query 'Users[*].UserName' --output text); do
-  policies=$(aws iam list-attached-user-policies --user-name "$user" \
-    --query 'AttachedPolicies[*].PolicyName' --output text)
-  if echo "$policies" | grep -qi "admin\|fullaccess"; then
-    groups=$(aws iam list-groups-for-user --user-name "$user" \
-      --query 'Groups[*].GroupName' --output text)
-    echo "$user|policies:$policies|groups:$groups"
-  fi
-done | tee "$OUTPUT_DIR/admin-users.txt"
-
-echo "--- IAM Roles With Cross-Account Trust ---"
-for role in $(aws iam list-roles --query 'Roles[*].RoleName' --output text); do
-  trust=$(aws iam get-role --role-name "$role" \
-    --query 'Role.AssumeRolePolicyDocument' --output json 2>/dev/null)
-  if echo "$trust" | grep -q '"AWS"' && echo "$trust" | grep -qv "$(aws sts get-caller-identity --query Account --output text)"; then
-    echo "$role: $trust" | jq -c '.Statement[].Principal'
-  fi
-done | tee "$OUTPUT_DIR/cross-account-roles.txt"
-
-echo "--- Service Accounts (Programmatic Only) ---"
-aws iam get-credential-report --output text --query Content | base64 -d | \ <!-- security-allowlist: doc
+echo "--- Team Memberships ---"
+for team in $(gh api orgs/$ORG/teams --paginate --jq '.[].slug'); do
+  echo "Team: $team"
+  gh api "orgs/$ORG/teams/$team/members" --paginate \
+    --jq '.[] | .login' \
+    > "$OUTPUT_DIR/tea

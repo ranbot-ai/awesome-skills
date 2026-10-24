@@ -35,6 +35,8 @@ Guide to selecting and optimizing embedding models for vector search application
 
 ## Core Concepts
 
+Model table is a historical candidate list, not a current leaderboard. Verify exact model-card token limits, dimensions, license, revision and query/document prefixes before use; count tokens with that model’s tokenizer. Approve private-document transfer/provider cost. Preserve original text and source offsets; stripping symbols can destroy code, monetary signs, equations and identifiers.
+
 ### 1. Embedding Model Comparison
 
 | Model | Dimensions | Max Tokens | Best For |
@@ -172,12 +174,4 @@ def chunk_by_tokens(
     tokenizer=None
 ) -> List[str]:
     """Chunk text by token count."""
-    if not isinstance(chunk_size, int) or not isinstance(chunk_overlap, int):
-        raise ValueError("chunk size and overlap must be integers")
-    if chunk_size <= 0 or not 0 <= chunk_overlap < chunk_size:
-        raise ValueError("require chunk_size > 0 and 0 <= overlap < chunk_size")
-    if tokenizer is None:
-        import tiktoken
-        tokenizer = tiktoken.get_encoding("cl100k_base")
-
-    tokens =
+    if not isinst

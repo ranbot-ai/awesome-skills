@@ -1,9 +1,9 @@
 ---
 name: drizzle-orm-expert
 description: Expert in Drizzle ORM for TypeScript — schema design, relational queries, migrations, and serverless database integration. Use when building type-safe database layers with Drizzle. 
-category: Development & Code Tools
+category: Document Processing
 source: antigravity
-tags: [typescript, react, api, ai, workflow, design, prisma, supabase]
+tags: [typescript, react, api, ai, workflow, design, document, prisma, supabase]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/drizzle-orm-expert
 ---
 
@@ -26,10 +26,10 @@ You are a production-grade Drizzle ORM expert. You help developers build type-sa
 
 ### Why Drizzle
 
-Drizzle ORM is a TypeScript-first ORM that generates zero runtime overhead. Unlike Prisma (which uses a query engine binary), Drizzle compiles to raw SQL — making it ideal for edge runtimes and serverless. Key advantages:
+Drizzle ORM provides TypeScript query builders that generate SQL at runtime. Runtime/driver compatibility and overhead depend on the selected adapter and deployment. Key properties:
 
 - **SQL-like API**: If you know SQL, you know Drizzle
-- **Zero dependencies**: Tiny bundle, works in Cloudflare Workers, Vercel Edge, Deno
+- **Adapter-specific deployment**: Verify the driver and bundle for Cloudflare Workers, edge runtimes or Deno
 - **Full type inference**: Schema → types → queries are all connected at compile time
 - **Relational Query API**: Prisma-like nested includes without N+1 problems
 
@@ -94,6 +94,8 @@ export type Post = InferSelectModel<typeof posts>;
 export type NewPost = InferInsertModel<typeof posts>;
 ```
 
+The schema/relations examples use one relational-query API generation; verify it against the installed Drizzle version. db/relations.ts needs explicit imports and its exports must be included in the schema passed to drizzle. updatedAt defaultNow initializes only; it does not automatically change on updates. Driver support differs: neon-http does not support the interactive transaction callback shown below, and db.batch/prepared statements/returning are adapter-specific. Choose a supported transactional driver or a documented non-interactive batch when atomic dependent writes are required. Preview migration SQL against a backed-up target; generated SQL is not proof of safe data preservation.
+
 ## Query Patterns
 
 ### Select Queries (SQL-like API)
@@ -140,39 +142,4 @@ const usersWithPosts = await db.query.users.findMany({
   with: {
     posts: {
       where: eq(posts.published, true),
-      orderBy: [desc(posts.createdAt)],
-      limit: 5,
-    },
-  },
-});
-
-// Find one with nested data
-const user = await db.query.users.findFirst({
-  where: eq(users.id, userId),
-  with: { posts: true },
-});
-```
-
-### Insert, Update, Delete
-
-```typescript
-// Insert with returning
-const [newUser] = await db
-  .insert(users)
-  .values({ email: "dev@example.com", name: "Dev" })
-  .returning();
-
-// Batch insert
-await db.insert(posts).values([
-  { title: "Post 1", authorId: newUser.id },
-  { title: "Post 2", authorId: newUser.id },
-]);
-
-// Update
-await db.update(users).set({ name: "Updated" }).where(eq(users.id, userId));
-
-// Delete
-await db.delete(posts).where(eq(posts.authorId, userId));
-```
-
-### Tran
+      orderBy: [desc

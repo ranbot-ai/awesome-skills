@@ -20,12 +20,14 @@ Automate Basecamp operations including project management, to-do list creation, 
 
 ## Setup
 
-**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
+Use an existing approved Rube connection and supported host authentication flow; adding an endpoint alone does not establish account access.
 
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `basecamp`
 3. If connection is not ACTIVE, follow the returned auth link to complete Basecamp OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
+
+Historical slugs/types/defaults below need current schema verification. Verify account, project/dock IDs and approved audience before writes. Messages and notifications need explicit action scope; draft requests must stay drafts. Access grants, invitations and revocations require exact target scope. Reconcile an uncertain create before trying an alternative tool to avoid duplicate posts/tasks.
 
 ## Core Workflows
 
@@ -89,17 +91,8 @@ Automate Basecamp operations including project management, to-do list creation, 
 - `subscriptions`: Array of person IDs to notify; omit to notify all project members
 
 **Pitfalls**:
-- `status="draft"` can produce HTTP 400; use `status="active"` as the reliable option
+- If draft creation is unsupported, preserve a local draft and report the limitation; never switch to active publication to bypass an error
 - `bucket_id` and `message_board_id` must belong to the same project; mismatches fail or misroute
 - Message content supports HTML tags only; not Markdown
 - Updates via `PUT_BUCKETS_MESSAGES` replace the entire body -- include the full corrected content, not just a diff
-- Prefer `app_url` from the response for user-facing confirmation links
-- Both `CREATE_MESSAGE` and `POST_BUCKETS_MESSAGE_BOARDS_MESSAGES` do the same thing; use CREATE_MESSAGE first and fall back to POST if it fails
-
-### 3. Manage People and Access
-
-**When to use**: User wants to list people, manage project access, or add new users
-
-**Tool sequence**:
-1. `BASECAMP_GET_PEOPLE` - List all people visible to the current user [Required]
-2. `BASECAMP_GET_PROJECTS` - Find the targe
+- Prefer `app_url` from the response

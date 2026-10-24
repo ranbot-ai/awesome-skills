@@ -27,6 +27,10 @@ Use this skill when:
 - Project enabled in CircleCI dashboard
 - Basic YAML understanding
 
+## CI trust and example scope
+
+Fragments below are separate examples and often omit required executor/install/report setup; validate the combined configuration with the installed CircleCI schema and inspect expanded orbs. Pin reviewed orb/image versions compatible with current runners. Restrict secret contexts/deploy jobs to trusted branches and approved identities; an approval job must depend on the actual build artifact producer as well as tests. Do not allow untrusted PRs to poison privileged caches/workspaces. Protect/redact logs and artifacts and state tests not run when timing/report data is missing.
+
 ## Configuration File
 
 Create `.circleci/config.yml`:
@@ -250,6 +254,7 @@ workflows:
       - hold:
           type: approval
           requires:
+            - build
             - test
       - deploy-production:
           requires:
@@ -275,40 +280,4 @@ workflows:
 
 ### Branch Filtering
 
-```yaml
-workflows:
-  build-deploy:
-    jobs:
-      - build:
-          filters:
-            branches:
-              only:
-                - main
-                - /feature-.*/
-      - deploy:
-          filters:
-            branches:
-              only: main
-            tags:
-              only: /^v.*/
-```
-
-## Orbs
-
-### Using Orbs
-
-```yaml
-version: 2.1
-
-orbs:
-  aws-cli: circleci/aws-cli@4.1
-  kubernetes: circleci/kubernetes@1.3
-
-jobs:
-  deploy:
-    executor: aws-cli/default
-    steps:
-      - aws-cli/setup:
-          aws_access_key_id: AWS_ACCESS_KEY_ID
-          aws_secret_access_key: AWS_SECRET_ACCESS_KEY
-      - kubernetes/install-
+```ya

@@ -20,13 +20,17 @@ Automate Figma operations through Composio's Figma toolkit via Rube MCP.
 
 ## Setup
 
-**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
+**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. Verify actual MCP authentication and authorized Figma account/file access; endpoint configuration alone is insufficient.
 
 
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `figma`
 3. If connection is not ACTIVE, follow the returned auth link to complete Figma auth
 4. Confirm connection status shows ACTIVE before running any workflows
+
+## Comment and export boundary
+
+Reading design data does not authorize posting comments or notifying collaborators. Require exact file/thread/message user authorization for comments. Export only requested nodes to a new safe destination, preserve private design data and validate temporary URLs without forwarding credentials to unrelated hosts.
 
 ## Core Workflows
 
@@ -124,19 +128,4 @@ Automate Figma operations through Composio's Figma toolkit via Rube MCP.
 3. `FIGMA_GET_TEAM_STYLES` - List team published styles [Optional]
 
 **Key parameters**:
-- `team_id`: Team ID from URL (figma.com/files/team/TEAM_ID/...)
-- `project_id`: Project ID
-
-**Pitfalls**:
-- Team ID cannot be obtained programmatically; extract from Figma URL
-- Only published styles/components are returned by team endpoints
-
-## Common Patterns
-
-### URL Parsing
-
-Extract IDs from Figma URLs:
-```
-1. Call FIGMA_DISCOVER_FIGMA_RESOURCES with figma_url
-2. Extract file_key, node_id, team_id from response
-3. Convert dash-format node IDs (1-541) to colon form
+- `team_id`: Team ID from URL (figma.com/files/team/TEAM_ID/..

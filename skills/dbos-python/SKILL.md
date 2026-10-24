@@ -3,7 +3,7 @@ name: dbos-python
 description: Guide for building reliable, fault-tolerant Python applications with DBOS durable workflows. Use when adding DBOS to existing Python code, creating workflows and steps, or using queues for concurrency
 category: AI & Agents
 source: antigravity
-tags: [python, api, ai, workflow]
+tags: [python, api, ai, workflow, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dbos-python
 ---
 
@@ -21,6 +21,10 @@ Reference these guidelines when:
 - Configuring and launching DBOS applications
 - Using DBOSClient from external applications
 - Testing DBOS applications
+
+## Runtime boundaries
+
+Examples are version-sensitive fragments with omitted app setup/imports/handlers; verify installed DBOS APIs. Durable workflow identity does not make arbitrary external side effects exactly-once: steps may repeat after a crash before checkpointing. Use provider idempotency keys plus reconciliation for payments/messages. Authorize database targets and writes, protect serialized inputs/results, and never deserialize untrusted pickle data. API routes need authentication, tenant ownership, webhook signature/replay validation and bounded waits. Destructive test reset must use a dedicated disposable system database; a variable name alone is not target proof.
 
 ## Rule Categories by Priority
 

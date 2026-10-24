@@ -3,7 +3,7 @@ name: evaluation
 description: Build evaluation frameworks for agent systems. Use when testing agent performance systematically, validating context engineering choices, or measuring improvements over time. 
 category: AI & Agents
 source: antigravity
-tags: [python, api, claude, ai, agent, llm, gpt, automation, design, rag]
+tags: [python, api, ai, agent, llm, automation, design, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/evaluation
 ---
 
@@ -34,17 +34,16 @@ Agent evaluation requires outcome-focused approaches that account for non-determ
 The key insight is that agents may find alternative paths to goals—the evaluation should judge whether they achieve right outcomes while following reasonable processes.
 
 **Performance Drivers: The 95% Finding**
-Research on the BrowseComp evaluation (which tests browsing agents' ability to locate hard-to-find information) found that three factors explain 95% of performance variance:
+[Anthropic's June 2025 engineering report](https://www.anthropic.com/engineering/multi-agent-research-system) described an analysis of BrowseComp in which three factors explained 95% of variance. This is a reported association in that setting, not a causal guarantee or a universal evaluation rule:
 
 | Factor | Variance Explained | Implication |
 |--------|-------------------|-------------|
 | Token usage | 80% | More tokens = better performance |
-| Number of tool calls | ~10% | More exploration helps |
-| Model choice | ~5% | Better models multiply efficiency |
+| Tool calls and model choice | Joint factors in the reported analysis; separate percentages not supplied | Compare under matched budgets |
 
 This finding has significant implications for evaluation design:
 - **Token budgets matter**: Evaluate agents with realistic token budgets, not unlimited resources
-- **Model upgrades beat token increases**: Upgrading to Claude Sonnet 4.5 or GPT-5.2 provides larger gains than doubling token budgets on previous versions
+- **Model upgrades beat token increases**: The report compared Sonnet 4 with Sonnet 3.7; measure current models on your task rather than extrapolating that comparison
 - **Multi-agent validation**: The finding validates architectures that distribute work across agents with separate context windows
 
 ## Detailed Topics
@@ -92,6 +91,4 @@ LLM-based evaluation scales to large test sets and provides consistent judgments
 Provide clear task description, agent output, ground truth (if available), evaluation scale with level descriptions, and request structured judgment.
 
 **Human Evaluation**
-Human evaluation catches what automation misses. Humans notice hallucinated answers on unusual queries, system failures, and subtle biases that automated evaluation misses.
-
-Effective human evalua
+Human evaluation catches what automa

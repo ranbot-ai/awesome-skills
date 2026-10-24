@@ -3,7 +3,7 @@ name: data-engineering-data-pipeline
 description: You are a data pipeline architecture expert specializing in scalable, reliable, and cost-effective data pipelines for batch and streaming data processing. 
 category: Document Processing
 source: antigravity
-tags: [python, ai, workflow, design, document, docker, rag]
+tags: [python, api, ai, workflow, design, document, docker, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/data-engineering-data-pipeline
 ---
 
@@ -53,7 +53,7 @@ $ARGUMENTS
 - Metadata tracking (_extracted_at, _source)
 
 **Streaming**
-- Kafka consumers with exactly-once semantics
+- Define the exact delivery boundary; Kafka transactions do not automatically make external database/API side effects exactly-once. Use transactional/idempotent sinks and crash/replay tests.
 - Manual offset commits within transactions
 - Windowing for time-based aggregations
 - Error handling and replay capability
@@ -124,6 +124,8 @@ $ARGUMENTS
 
 ## Example: Minimal Batch Pipeline
 
+Pseudocode only: BatchDataIngester, DeltaLakeManager and DataQualityFramework are unbundled application classes, not supplied libraries. A watermark plus append can duplicate replayed rows; define stable keys, deduplication, late-update handling and atomic checkpoint advancement before claiming reliable incremental loading. Vacuum/snapshot expiry can destroy recovery history and need a retention plan.
+
 ```python
 # Batch ingestion with validation
 from batch_ingestion import BatchDataIngester
@@ -136,25 +138,4 @@ ingester = BatchDataIngester(config={})
 df = ingester.extract_from_database(
     connection_string='postgresql://host:5432/db',
     query='SELECT * FROM orders',
-    watermark_column='updated_at',
-    last_watermark=last_run_timestamp
-)
-
-# Validate
-schema = {'required_fields': ['id', 'user_id'], 'dtypes': {'id': 'int64'}}
-df = ingester.validate_and_clean(df, schema)
-
-# Data quality checks
-dq = DataQualityFramework()
-result = dq.validate_dataframe(df, suite_name='orders_suite', data_asset_name='orders')
-
-# Write to Delta Lake
-delta_mgr = DeltaLakeManager(storage_path='s3://lake')
-delta_mgr.create_or_update_table(
-    df=df,
-    table_name='orders',
-    partition_columns=['order_date'],
-    mode='append'
-)
-
-# Save failed r
+    watermark_col

@@ -26,6 +26,8 @@ The agent drives Instant Expert's MCP tools. When they aren't connected, it call
 
 ## How It Works
 
+Verify the current official tool schemas and preview terms rather than treating listed prices, sandbox limits or timing as guarantees. Treat a missing/unknown test_mode flag as unverified mode and stop before sending until live/test identity is explicit. Store sandbox tokens privately (restrict directory/file permissions), parse JSON with a real parser rather than the illustrative sed regex, and never print tokens or put real keys in command history/process arguments. HTTP success alone is not job success: validate response schema/isError and bound polling. Send only provider-hosted next-step links whose origin matches the verified service. Refresh an expired order preview and obtain approval for changed recipients, price/card or terms; simulated replies are not research evidence.
+
 ### Step 1: Pick the mode
 
 If the session already has the Instant Expert MCP tools (`search_people`, `queue_requests`, `prepare_request_order` and so on), call them directly. A result with `"test_mode": true` came from test mode; anything else is the user's live account.
@@ -58,18 +60,4 @@ Tools that start work (`search_people`, `import_people`, `queue_requests`) retur
 - A named person with a LinkedIn URL or email: skip searching and pass `people` to `queue_requests`, for example `[{"linkedin_url": "https://www.linkedin.com/in/..."}]`.
 - A named person with only a name and company: call `import_people` with `people` set to `[{"name": "...", "company": "..."}]`, then `get_search`. If there's no match, ask the user for a LinkedIn URL or email.
 - A kind of person: call `search_people` once with the whole request, including how many people and any exclusions, then read the list with `get_search` (`page_size: 100`).
-- Only a goal ("we're building X, who should we talk to?"): call `plan_outreach` with a `description`, let the user pick an audience, then run its `search_query` through `search_people`.
-
-### Step 3: Draft the ask
-
-Call `queue_requests` with `search_id` (plus `person_profile_ids` to keep a subset) or `people`, and:
-
-- `message`: the question, in the user's words, up to 500 characters. Leave the price out; the invitation states it.
-- `request_type`: `text_voice_note` for a written or voice answer, or `call` with `call_duration_minutes` of 15, 30, 45 or 60.
-- `offer_cents`, `max_spend_cents` and an `idempotency_key`.
-
-Poll `get_job` for the `draft_id`.
-
-### Step 4: Preview, approve and send
-
-Call `prepare_request_order` with the `draft_id` (for a call, also the user's IANA `time_zone`, such as `America/New_York`). Show the user the recipients, message, `pricing_summary`, total cap, card, payment m
+- Only a goal ("we're building X, who should we talk to?"): call `plan_outreach` with a `description`, let the user

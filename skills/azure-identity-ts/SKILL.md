@@ -60,7 +60,7 @@ const blobClient = new BlobServiceClient(
 );
 ```
 
-**Credential Chain Order:**
+**Historical credential-chain sketch (verify installed SDK version/plugins):**
 1. EnvironmentCredential
 2. WorkloadIdentityCredential
 3. ManagedIdentityCredential
@@ -247,8 +247,4 @@ import type {
   TokenCredential, 
   AccessToken, 
   GetTokenOptions 
-} from "@azure/core-auth";
-
-import {
-  DefaultAzureCredential,
- 
+} from "@azur

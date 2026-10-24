@@ -24,6 +24,8 @@ Big data streaming platform for high-throughput event ingestion.
 ```bash
 pip install azure-eventhub azure-identity
 # For checkpointing with blob storage
+pip install azure-eventhub-checkpointstoreblob
+# For the async examples instead:
 pip install azure-eventhub-checkpointstoreblob-aio
 ```
 
@@ -35,6 +37,8 @@ EVENT_HUB_NAME=my-eventhub
 STORAGE_ACCOUNT_URL=https://<account>.blob.core.windows.net
 CHECKPOINT_CONTAINER=checkpoints
 ```
+
+Use an approved tenant/subscription identity with least-privilege data-plane access and a separate test consumer group/checkpoint container. DefaultAzureCredential chooses from configured credentials; verify the actual principal before use. Starting positions apply when no stored checkpoint overrides them. Checkpoint only after durable application processing and use idempotent effects: replay and retention loss remain possible. Close credentials and clients; context-managing a client does not automatically close an externally supplied credential.
 
 ## Authentication
 
@@ -135,7 +139,7 @@ with consumer:
     )
 ```
 
-### With Blob Checkpoint Store (Production)
+### With Blob Checkpoint Store (Sketch)
 
 ```python
 from azure.eventhub import EventHubConsumerClient
@@ -159,27 +163,4 @@ consumer = EventHubConsumerClient(
 def on_event(partition_context, event):
     print(f"Received: {event.body_as_str()}")
     # Checkpoint after processing
-    partition_context.update_checkpoint(event)
-
-with consumer:
-    consumer.receive(on_event=on_event)
-```
-
-## Async Client
-
-```python
-from azure.eventhub.aio import EventHubProducerClient, EventHubConsumerClient
-from azure.identity.aio import DefaultAzureCredential
-import asyncio
-
-async def send_events():
-    credential = DefaultAzureCredential()
-    
-    async with EventHubProducerClient(
-        fully_qualified_namespace="<namespace>.servicebus.windows.net",
-        eventhub_name="my-eventhub",
-        credential=credential
-    ) as producer:
-        batch = await producer.create_batch()
-        batch.add(EventData("Async event"))
-        await 
+    partition_context.upd

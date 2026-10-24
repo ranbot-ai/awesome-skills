@@ -3,7 +3,7 @@ name: datadog-automation
 description: Automate Datadog tasks via Rube MCP (Composio): query metrics, search logs, manage monitors/dashboards, create events and downtimes. Always search tools first for current schemas. 
 category: Document Processing
 source: antigravity
-tags: [markdown, api, mcp, ai, automation, workflow, document]
+tags: [markdown, api, mcp, ai, automation, workflow, document, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/datadog-automation
 ---
 
@@ -20,7 +20,7 @@ Automate Datadog monitoring and observability operations through Composio's Data
 
 ## Setup
 
-**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
+**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. Adding the endpoint does not authenticate Datadog; use the host-supported authorized connection.
 
 
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
@@ -29,6 +29,8 @@ Automate Datadog monitoring and observability operations through Composio's Data
 4. Confirm connection status shows ACTIVE before running any workflows
 
 ## Core Workflows
+
+Confirm the Datadog site/org, environment, service and time window before reading or changing state. Logs/traces may include credentials and personal data; limit and redact output. Monitor/event messages can notify Slack/PagerDuty recipients, so sending/mentions require explicit scope authorization. Downtime/muting suppresses alerts: use the narrowest approved monitor/scope with a bounded end and verify restoration. Preserve dashboard definitions before replacement/deletion and reconcile ambiguous writes before retrying. Missing metrics/logs or sampled traces are not proof of health; report retention, sampling and query coverage. Current API versions can differ in downtime shapes and dashboard behavior; use discovered schemas.
 
 ### 1. Query and Explore Metrics
 
@@ -108,25 +110,4 @@ Automate Datadog monitoring and observability operations through Composio's Data
 1. `DATADOG_LIST_DASHBOARDS` - List all dashboards [Required]
 2. `DATADOG_GET_DASHBOARD` - Get full dashboard definition [Optional]
 3. `DATADOG_UPDATE_DASHBOARD` - Update dashboard layout or widgets [Optional]
-4. `DATADOG_DELETE_DASHBOARD` - Remove a dashboard (irreversible) [Optional]
-
-**Key parameters**:
-- `dashboard_id`: Dashboard identifier string
-- `title`: Dashboard title
-- `layout_type`: 'ordered' (grid) or 'free' (freeform positioning)
-- `widgets`: Array of widget definition objects
-- `description`: Dashboard description
-
-**Pitfalls**:
-- Dashboard IDs are alphanumeric strings (e.g., 'abc-def-ghi'), not numeric
-- `layout_type` cannot be changed after creation; must recreate the dashboard
-- Widget definitions are complex nested objects; get existing dashboard first to understand structure
-- DELETE is permanent; there is no undo
-
-### 5. Create Events and Manage Downtimes
-
-**When to use**: User wants to post events or schedule maintenance downtimes
-
-**Tool sequence**:
-1. `DATADOG_LIST_EVENTS` - List existing events [Optional]
-2. `DATA
+4. `DATADOG_DELETE_DASHBOARD` - Remove a dashboard (irreversible) 

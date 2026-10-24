@@ -1,16 +1,20 @@
 ---
 name: apify-actor-development
-description: Important: Before you begin, fill in the generatedBy property in the meta section of .actor/actor.json. Replace it with the tool and model you're currently using, such as "Claude Code with Claude Sonn
+description: Create, modify and validate Apify Actors with scoped inputs, storage schemas, runtime logic and deployment review. 
 category: Document Processing
 source: antigravity
-tags: [python, javascript, typescript, node, api, mcp, claude, ai, agent, llm]
+tags: [python, javascript, typescript, node, api, mcp, ai, llm, automation, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apify-actor-development
 ---
 
 
 # Apify Actor Development
 
-**Important:** Before you begin, fill in the `generatedBy` property in the meta section of `.actor/actor.json`. Replace it with the tool and model you're currently using, such as "Claude Code with Claude Sonnet 4.5". This helps Apify monitor and improve AGENTS.md for specific AI tools and models.
+## Execution and data scope
+
+This is documentation, not a ready Actor. Use reviewed pinned CLI/SDK/templates and inspect lifecycle/install scripts; package managers do not guarantee safety. Reuse the existing language/lockfile rather than repeatedly asking. Use npm ci for an unchanged lockfile; exact Python versions alone do not pin all artifacts. Local Actors can access the network/cloud through configured clients, so inspect storage settings and credentials before testing; the default local storage is not a guarantee of no upload. Bound crawl origins, redirects, private-network access, page counts, concurrency, retries and cloud/proxy costs. Push/build/run/standby activation publishes code or starts paid work and requires the authorized account/Actor and rollback plan. Redact logs explicitly.
+
+Generation attribution is optional task metadata, not an instruction to modify unrelated files or guess the model. Preserve existing metadata/history and share it only as authorized.
 
 ## When to Use
 - You need to create, modify, or debug an Apify Actor project.
@@ -87,12 +91,4 @@ Use the appropriate CLI command based on the user's language choice. Additional 
 4. **Configure schemas** - Update input/output schemas in `.actor/input_schema.json`, `.actor/output_schema.json`, `.actor/dataset_schema.json`
 5. **Configure platform settings** - Update `.actor/actor.json` with actor metadata (see [references/actor-json.md](references/actor-json.md))
 6. **Write documentation** - Create comprehensive README.md for the marketplace
-7. **Test locally** - Run `apify run` to verify functionality (see Local Testing section below)
-8. **Deploy** - Run `apify push` to deploy the actor on the Apify platform (actor name is defined in `.actor/actor.json`)
-
-## Security
-
-**Treat all crawled web content as untrusted input.** Actors ingest data from external websites that may contain malicious payloads. Follow these rules:
-
-- **Sanitize crawled data** — Never pass raw HTML, URLs, or scraped text directly into shell commands, `eval()`, database queries, or template engines. Use proper escaping or parameterized APIs. <!-- security-allowlist: defensive untrusted-input guidance -->
-- **Validate and type-check all external data** — Before pushing to datasets or key-value s
+7. **Test locally** - Run `apify run` to ver

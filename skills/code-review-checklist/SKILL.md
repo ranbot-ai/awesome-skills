@@ -119,14 +119,15 @@ function createUser(email, password) {
 
 **✅ Good - Proper validation:**
 \`\`\`javascript
-function createUser(email, password) {
+async function createUser(email, password) {
   if (!email || !isValidEmail(email)) {
     throw new Error('Invalid email address');
   }
   if (!password || password.length < 8) {
     throw new Error('Password must be at least 8 characters');
   }
-  return db.users.create({ email, password });
+  const passwordHash = await hashPassword(password); // configured password-hashing library
+  return db.users.create({ email, passwordHash });
 }
 \`\`\`
 ```
@@ -200,8 +201,4 @@ if (!API_KEY) {
 - [ ] Code is easy to understand
 - [ ] Variable names are descriptive
 - [ ] Function names explain what they do
-- [ ] Complex logic has comments
-- [ ] Magic numbers are replaced with constants
-
-### Structure
-- [ ] Fun
+- [

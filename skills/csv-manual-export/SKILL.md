@@ -92,7 +92,7 @@ source_module: null     # the module whose field list this renders
 target_system: null     # named only when the user names one
 delimiter: ","
 encoding: UTF-8
-bom: true               # false only when the target system rejects a byte order mark
+bom: false              # enable for a confirmed Excel workflow; do not force on other importers
 example_rows: false
 confirmed_facts: []     # only what the user actually said
 open_questions: []      # the unanswered ones, in the order worth asking
@@ -131,4 +131,4 @@ column silently, reorder columns without reason, invent a column, or drop a fiel
 #### Empty by default
 
 ```csv
-Field 1,Field 2,Fiel
+Field 1,F

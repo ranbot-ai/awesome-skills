@@ -3,7 +3,7 @@ name: cohesivity
 description: Provision headless backend services for AI agents through Cohesivity: hosting, databases, storage, LLMs, and third-party APIs over one HTTP API. Use when a trusted .cohesivity file exists or the user 
 category: AI & Agents
 source: antigravity
-tags: [python, node, pdf, api, claude, ai, agent, llm, image, security]
+tags: [python, node, pdf, api, claude, ai, agent, llm, document, image]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cohesivity
 ---
 
@@ -18,7 +18,7 @@ A fresh tenant is ephemeral: free, no signup, and it expires after 72 hours unle
 
 Before the user agrees, disclose that genesis sends Cohesivity the request IP, User-Agent, network ASN, country, and request telemetry for abuse prevention and forensics. Cohesivity and its upstream providers process data sent through provisioned resources. Review `https://cohesivity.ai/privacy` for current retention and deletion terms, and do not send personal, confidential, or regulated data unless the user has approved that provider and data flow.
 
-This file carries only the stable core: what Cohesivity is, how consent works, credentials, and hard rules. Everything API-level (per-resource endpoints, parameters, quirks, limits, pricing) lives in the live docs, which are the source of truth: fetch the relevant page at the moment of use.
+This file describes an upstream interface snapshot, not independently verified live enforcement or current prices. what Cohesivity is, how consent works, credentials, and hard rules. Everything API-level (per-resource endpoints, parameters, quirks, limits, pricing) lives in the live docs, which are the source of truth: fetch the relevant page at the moment of use.
 
 ## When to Use This Skill
 
@@ -60,7 +60,8 @@ if git rev-parse --is-inside-work-tree >/dev/null 2>&1 && ! git check-ignore -q 
 fi
 tmp="$(mktemp .cohesivity.tmp.XXXXXX)" || exit 1
 trap 'rm -f "$tmp"' EXIT HUP INT TERM
-curl --fail --silent --show-error --request POST \
+curl --fail --silent --show-error --connect-timeout 10 --max-time 60 \
+  --max-filesize 65536 --proto '=https' --request POST \
   --header 'User-Agent: agentic-awesome-skills:claude-code' \
   --output "$tmp" https://cohesivity.ai/api/genesis
 for field in tenant_id coh_management_key coh_application_key expires_at tenant_lifecycle runtime_profile; do
@@ -77,8 +78,4 @@ rm -f "$tmp"
 trap - EXIT HUP INT TERM
 ```
 
-Set the User-Agent to `agentic-awesome-skills:{HARNESS/LLM_NAME}`, where the second field is the agent or model you are running as (`claude-code`, `cursor`, `codex`, `gemini-cli`). A non-default User-Agent is required (see Security & Safety Notes); an identifying one lets Cohesivity attribute the request.
-
-Do not call `/api/genesis` if `.cohesivity` already exists. That mints a fresh tenant and is rate-limited.
-
-`.coh
+Set the User-Agent to `agentic-awesome-skills:{HARNESS/LLM_NAME}`, where the second field is the agent or model you are running as (`claude-code`, `cursor`, `codex`, `gemini-cli`). A non-default User-Agent is required (see Security & Safety Notes); an identifying one l

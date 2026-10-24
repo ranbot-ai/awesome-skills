@@ -21,14 +21,14 @@ dotnet add package Azure.AI.OpenAI
 dotnet add package OpenAI
 ```
 
-**Current Version**: 2.1.0 (stable)
+**Historical example baseline**: 2.1.0; verify and pin compatible Azure.AI.OpenAI/OpenAI versions. Newer v1 API examples below may require newer packages.
 
 ## Environment Variables
 
 ```bash
 AZURE_OPENAI_ENDPOINT=https://<resource-name>.openai.azure.com
 AZURE_OPENAI_API_KEY=<api-key>                    # For key-based auth
-AZURE_OPENAI_DEPLOYMENT_NAME=gpt-4o-mini          # Your deployment name
+AZURE_OPENAI_DEPLOYMENT_NAME=<deployment-name>    # Azure deployment, not necessarily the model ID
 ```
 
 ## Client Hierarchy
@@ -196,10 +196,4 @@ ChatCompletionOptions options = new()
                     "final_answer": { "type": "string" }
                 },
                 "required": ["steps", "final_answer"],
-                "additionalProperties": false
-            }
-            """u8.ToArray()),
-        jsonSchemaIsStrict: true)
-};
-
-ChatCompletion completion =
+          

@@ -3,7 +3,7 @@ name: cyberpunk-ui
 description: Web and App implementation guide for Cyberpunk UI. Trigger when user wants neon colors, dark backgrounds, high-tech dystopian aesthetics, and hacking interfaces. 
 category: Creative & Media
 source: antigravity
-tags: [react, ai, design, image, hacking, stripe, cro]
+tags: [react, ai, design, image, hacking, stripe]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-it/cyberpunk-ui
 ---
 

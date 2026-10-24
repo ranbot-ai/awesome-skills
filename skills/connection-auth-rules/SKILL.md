@@ -3,7 +3,7 @@ name: connection-auth-rules
 description: Build a Connection Auth Rules for a Monte Carlo connection type. Fetches live connector schemas and transform steps from the apollo-agent repo. 
 category: Document Processing
 source: antigravity
-tags: [python, api, claude, ai, agent, workflow, template, document, rag]
+tags: [python, api, ai, agent, workflow, template, document, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/connection-auth-rules
 ---
 
@@ -37,11 +37,12 @@ Do not activate when the user is:
 
 ## Step 1 — List available connection types
 
-Locate the companion script with Bash:
-
-```bash
-find -L ~/.claude . -name fetch_schema.py -path "*/connection-auth-rules/*" 2>/dev/null | head -1
-```
+Use the bundled `fetch_schema.py` beside this skill's `SKILL.md`, resolving its
+absolute path from the installed skill directory. Do not discover and execute a
+similarly named file from an unrelated project or follow symlinks across homes.
+Review it before running; it contacts GitHub with an optional read-only token.
+The helper reads the upstream default branch, not a pinned release: record the
+upstream revision separately and compare its schema with the deployed agent.
 
 Then run it:
 
@@ -128,6 +129,4 @@ If the connector needs steps (e.g. decoding a PEM certificate, constructing a de
 | Field | Required | Description |
 |-------|----------|-------------|
 | `type` | yes | Step type name (e.g. `"load_private_key"`) |
-| `input` | yes | Dict of template strings the step reads (e.g. `{"pem": "{{ raw.private_key_pem }}"}`) |
-| `output` | yes | Dict mapping the step's logical output names to derived key names (e.g. `{"private_key": "private_key_der"}`) |
-| `when` | no | Jinja2 boolean expression — step only runs if this evaluates to true (e.g. `"raw.ssl_ca_pem is 
+| `input` | yes | Dict 

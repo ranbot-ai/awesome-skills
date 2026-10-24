@@ -3,7 +3,7 @@ name: film-crew
 description: Turn a one-line AI video idea into a shot list and per-shot, model-ready prompts via a film crew (director, DP, gaffer, editor, script supervisor). Also fixes failing video prompts and diagnoses bad c
 category: Document Processing
 source: antigravity
-tags: [claude, ai, template, design, document, image]
+tags: [claude, ai, agent, template, design, document, image]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/film-crew
 ---
 

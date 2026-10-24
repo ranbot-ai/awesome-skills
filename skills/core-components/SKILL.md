@@ -3,7 +3,7 @@ name: core-components
 description: Core component library and design system patterns. Use when building UI, using design tokens, or working with the component library. 
 category: Document Processing
 source: antigravity
-tags: [react, node, ai, workflow, design, document, image]
+tags: [react, node, api, ai, workflow, design, document, image]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/core-components
 ---
 
@@ -12,7 +12,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/core
 
 ## Design System Overview
 
-Use components from your core library instead of raw platform components. This ensures consistent styling and behavior.
+Inspect the actual project component exports, token definitions and framework first. The names, $ tokens and props below illustrate an assumed local library; none is bundled here. Use its real documented API, preserve accessibility/native behavior and do not invent components/core imports or variantStyles. Reuse project primitives when appropriate rather than replacing valid native components solely to match this example.
 
 ## Design Tokens
 
@@ -269,9 +269,4 @@ const Card = ({ padding = '$4', variant = 'elevated', children }: CardProps) => 
 - **storybook**: Document component variants
 
 ## When to Use
-This skill is applicable to execute the workflow or actions described in the overview.
-
-## Limitations
-- Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required inputs, permissions, safety bounda
+This skill is applicable to execute the workflow or actions d

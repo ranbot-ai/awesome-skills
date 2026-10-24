@@ -79,7 +79,7 @@ Capture and analyze authentication requests:
 
 ```http
 POST /login HTTP/1.1
-Host: target.com
+Host: target.invalid
 Content-Type: application/x-www-form-urlencoded
 
 username=test&password=test123
@@ -96,7 +96,7 @@ Evaluate password requirements and enforcement:
 # Test username as password (admin/admin, test/test)
 ```
 
-Document policy gaps: Minimum length <8, no complexity, common passwords allowed, username as password.
+Assess the applicable policy and threat model. Lack of character-composition rules is not itself a defect; prioritize length, compromised-password blocklists and rate limits. See [NIST SP800-63B-4](https://pages.nist.gov/800-63-4/sp800-63b.html).
 
 ### Phase 3: Credential Enumeration
 
@@ -124,7 +124,7 @@ Test account lockout and rate limiting:
 ```bash
 # Using Hydra for form-based auth
 hydra -l admin -P /usr/share/wordlists/rockyou.txt \
-  target.com http-post-form \
+  target.invalid http-post-form \
   "/login:username=^USER^&password=^PASS^:Invalid credentials"
 
 # Using Burp Intruder
@@ -156,7 +156,7 @@ Check for protections:
 
 ### Phase 5: Credential Stuffing
 
-Test with known breached credentials:
+Use synthetic paired credentials for explicitly authorized test accounts, never unrelated breached accounts:
 
 ```bash
 # Credential stuffing differs from brute force
@@ -170,17 +170,4 @@ Test with known breached credentials:
 
 # Detection evasion
 - Slow request rate
-- Rotate source IPs
-- Randomize user agents
-- Add delays between attempts
-```
-
-### Phase 6: Session Management Testing
-
-Analyze session token security:
-
-```bash
-# Capture session cookie
-Cookie: SESSIONID=abc123def456
-
-# Test toke
+- Rotat

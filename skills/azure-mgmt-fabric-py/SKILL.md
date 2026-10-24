@@ -3,7 +3,7 @@ name: azure-mgmt-fabric-py
 description: Azure Fabric Management SDK for Python. Use for managing Microsoft Fabric capacities and resources. 
 category: AI & Agents
 source: antigravity
-tags: [python, ai, workflow, azure, cro]
+tags: [python, ai, workflow, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-mgmt-fabric-py
 ---
 
@@ -44,7 +44,7 @@ client = FabricMgmtClient(
 
 ```python
 from azure.mgmt.fabric import FabricMgmtClient
-from azure.mgmt.fabric.models import FabricCapacity, FabricCapacityProperties, CapacitySku
+from azure.mgmt.fabric.models import FabricCapacity, FabricCapacityProperties, FabricCapacityAdministration, CapacitySku
 from azure.identity import DefaultAzureCredential
 import os
 
@@ -133,7 +133,7 @@ print(f"Updated SKU: {updated.sku.name}")
 
 ## Suspend Capacity
 
-Pause capacity to stop billing:
+Suspend only an approved capacity after assessing active workloads; verify the actual billing and commitment terms rather than promising all charges stop:
 
 ```python
 client.fabric_capacities.begin_suspend(
@@ -222,10 +222,4 @@ for sku in skus:
 | `F1024` | 32X-Large | 1024 Capacity Units |
 | `F2048` | 64X-Large | 2048 Capacity Units |
 
-## Capacity States
-
-| State | Description |
-|-------|-------------|
-| `Active` | Capacity is running |
-| `Paused` | Capacity is suspended (no billing) |
-| `Provi
+## Capac

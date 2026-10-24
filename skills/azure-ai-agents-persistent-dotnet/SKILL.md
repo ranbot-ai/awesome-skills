@@ -3,7 +3,7 @@ name: azure-ai-agents-persistent-dotnet
 description: Azure AI Agents Persistent SDK for .NET. Low-level SDK for creating and managing AI agents with threads, messages, runs, and tools. 
 category: AI & Agents
 source: antigravity
-tags: [python, api, mcp, ai, agent, gpt, workflow, document, azure, cro]
+tags: [python, api, mcp, ai, agent, gpt, workflow, document, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-agents-persistent-dotnet
 ---
 
@@ -53,6 +53,8 @@ PersistentAgentsClient
 ```
 
 ## Core Workflow
+
+Pin compatible package versions and verify the linked SDK signatures; fragments use project-defined helper functions and are not a complete application. Confirm endpoint/deployment, authorized tool actions, upload scope and budget before runs. Use a finite cancellation deadline for polling/streaming and distinguish completed, failed, cancelled, expired and requires-action states before reading a final answer. Validate/allowlist each function name and typed argument set before execution; never execute raw model arguments as code or SQL. Delete only resources created by the current run in a finally block, preserving needed evidence.
 
 ### 1. Create Agent
 
@@ -172,19 +174,4 @@ do
     run = await client.Runs.GetRunAsync(thread.Id, run.Id);
 
     if (run.Status == RunStatus.RequiresAction 
-        && run.RequiredAction is SubmitToolOutputsAction submitAction)
-    {
-        List<ToolOutput> outputs = [];
-        foreach (RequiredToolCall toolCall in submitAction.ToolCalls)
-        {
-            if (toolCall is RequiredFunctionToolCall funcCall)
-            {
-                // Execute function and get result
-                string result = ExecuteFunction(funcCall.Name, funcCall.Arguments);
-                outputs.Add(new ToolOutput(toolCall, result));
-            }
-        }
-        run = await client.Runs.SubmitToolOutputsToRunAsync(run, outputs, toolApprovals: null);
-    }
-}
-while (run.Status == RunStatus.Queued || run.Status == RunStatus.InP
+        && run.RequiredActi

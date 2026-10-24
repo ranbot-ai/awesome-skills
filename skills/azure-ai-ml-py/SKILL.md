@@ -3,7 +3,7 @@ name: azure-ai-ml-py
 description: Azure Machine Learning SDK v2 for Python. Use for ML workspaces, jobs, models, datasets, compute, and pipelines. 
 category: AI & Agents
 source: antigravity
-tags: [python, ai, workflow, image, azure, cro]
+tags: [python, ai, workflow, image, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-ml-py
 ---
 
@@ -11,6 +11,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azur
 # Azure Machine Learning SDK v2 for Python
 
 Client library for managing Azure ML resources: workspaces, jobs, models, data, and compute.
+
+## Scope and execution
+
+Confirm subscription, tenant, workspace, region and budget before create/update or compute/job submission. Examples are fragments: training components, source files and environment definitions are not bundled. Select currently supported reviewed SDK/environment versions; historical image and `@latest` examples do not establish reproducibility. Use least-privilege identity and do not print private job data.
 
 ## Installation
 
@@ -29,6 +33,7 @@ AZURE_ML_WORKSPACE_NAME=<your-workspace-name>
 ## Authentication
 
 ```python
+import os
 from azure.ai.ml import MLClient
 from azure.identity import DefaultAzureCredential
 
@@ -43,6 +48,7 @@ ml_client = MLClient(
 ### From Config File
 
 ```python
+import os
 from azure.ai.ml import MLClient
 from azure.identity import DefaultAzureCredential
 
@@ -195,7 +201,6 @@ ml_client.jobs.stream(returned_job.name)
 
 ```python
 from azure.ai.ml import dsl, Input, Output
-from azure.ai.ml.entities import Pipeline
 
 @dsl.pipeline(
     compute="cpu-cluster",
@@ -239,21 +244,4 @@ ml_client.environments.create_or_update(env)
 
 ```python
 for ds in ml_client.datastores.list():
-    print(f"{ds.name}: {ds.type}")
-```
-
-### Get Default Datastore
-
-```python
-default_ds = ml_client.datastores.get_default()
-print(f"Default: {default_ds.name}")
-```
-
-## MLClient Operations
-
-| Property | Operations |
-|----------|------------|
-| `workspaces` | create, get, list, delete |
-| `jobs` | create_or_update, get, list, stream, cancel |
-| `models` | create_or_update, get, list, archive |
-| `data` | create_or_update, get, list |
+    print(f"{ds.name}: {d

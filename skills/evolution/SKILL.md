@@ -1,6 +1,6 @@
 ---
 name: evolution
-description: This skill enables makepad-skills to self-improve continuously during development. 
+description: This skill provides a reviewable workflow for maintaining makepad-skills during development. It does not install automatic evolution by itself. 
 category: Document Processing
 source: antigravity
 tags: [markdown, api, claude, ai, workflow, template, design, document]
@@ -10,7 +10,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/evol
 
 # Makepad Skills Evolution
 
-This skill enables makepad-skills to self-improve continuously during development.
+This skill provides a reviewable workflow for maintaining makepad-skills during development. It does not install automatic evolution by itself.
 
 ## When to Use
 - You are maintaining `makepad-skills` and want the skill library to improve itself during development.
@@ -31,9 +31,11 @@ This skill enables makepad-skills to self-improve continuously during developmen
 
 ---
 
+Only update the explicitly requested skill repository. A discovered lesson alone does not authorize persistent memory edits, installed-skill changes, hooks, commits or remote publication. Keep reusable evidence separate from project secrets and private source.
+
 ## Hooks-Based Auto-Triggering
 
-For reliable automatic triggering, use Claude Code hooks. Install with `--with-hooks`:
+Hook files are not bundled in this catalog copy. If hook setup is requested, obtain a reviewed immutable upstream revision, inspect the installer and every hook it fetches, and preserve existing host settings. The following historical installer URL is a source pointer, not permission to run mutable remote code. Install with `--with-hooks` only after that review:
 
 ```bash
 # Install makepad-skills with hooks enabled
@@ -41,7 +43,8 @@ tmpdir="$(mktemp -d)"
 trap 'rm -rf "$tmpdir"' EXIT
 curl -fsSLo "$tmpdir/makepad-skills-install.sh" https://raw.githubusercontent.com/ZhangHanDong/makepad-skills/main/install.sh
 cat "$tmpdir/makepad-skills-install.sh"  # review the full installer before executing
-bash "$tmpdir/makepad-skills-install.sh" --with-hooks
+# Execute only the reviewed revision after explicit hook-install authorization:
+# bash "$tmpdir/makepad-skills-install.sh" --with-hooks
 ```
 
 This will install hooks to `.claude/hooks/` and configure `.claude/settings.json`:
@@ -142,22 +145,4 @@ User: "我想从零开发一个 Makepad 应用"
 Trigger skill evolution when any of these occur during development:
 
 | Trigger | Target Skill | Priority |
-|---------|--------------|----------|
-| New widget pattern discovered | robius-widget-patterns/_base | High |
-| Shader technique learned | makepad-shaders | High |
-| Compilation error solved | makepad-reference/troubleshooting | High |
-| Layout solution found | makepad-reference/adaptive-layout | Medium |
-| Build/packaging issue resolved | makepad-deployment | Medium |
-| New project structure insight | makepad-basics | Low |
-| Core concept clarified | makepad-dsl/makepad-widgets | Low |
-
----
-
-## Evolution Process
-
-### Step 1: Identify Knowledge Worth Capturing
-
-Ask yourself:
-- Is this a reusable pattern? (not project-specific)
-- Did it take significant effort to figure out?
-- Would 
+|-------

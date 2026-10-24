@@ -1,9 +1,9 @@
 ---
 name: aws-s3
 description: Configure S3 buckets, policies, and lifecycle rules. Implement versioning, replication, and security. Use when managing object storage on AWS. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [pdf, api, ai, agent, template, image, security, aws, rag, cro]
+tags: [pdf, api, ai, agent, template, document, security, aws, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-s3
 ---
 
@@ -25,7 +25,7 @@ Manage Amazon S3 object storage with production-grade security, lifecycle polici
 ## Prerequisites
 
 - AWS CLI v2 installed and configured
-- IAM permissions: `s3:*`, `s3-object-lambda:*`, `kms:*` (for SSE-KMS)
+- Least-privilege IAM permissions for the selected bucket/object operations; grant only the required KMS actions for SSE-KMS. Do not grant wildcard service permissions as a default.
 - For replication: IAM role with replication permissions and destination bucket in target region
 - For logging: a separate logging bucket with appropriate ACL
 
@@ -189,8 +189,4 @@ aws s3api put-bucket-lifecycle-configuration \
         ]
       },
       {
-        "ID": "CleanupOldVersions",
-        "Status": "Enabled",
-        "Filter": {"Prefix": ""},
-        "NoncurrentVersionTransitions": [
-    
+        "ID": "CleanupOldVersions"

@@ -31,7 +31,7 @@ Don't use when the user needs per-user crash detail or device-level reporting; t
 
 ## Prerequisites
 
-- `eas-cli` installed (`npm install -g eas-cli`).
+- A project-approved, pinned eas-cli version exposing these commands. Check eas --version and each command’s --help before use; command availability can change.
 - Logged in: `eas login`.
 - For `channel:insights`: run from an Expo project directory (the command resolves the project ID from `app.json`). `update:insights` only needs a login.
 
@@ -52,10 +52,10 @@ Before querying insights for an update group, you need its `group` ID. Use `eas 
 
 ```bash
 # Latest group id across all branches
-eas update:list --all --json --non-interactive | jq -r '.currentPage[0].group'
+eas update:list --all --json --non-interactive | jq -er '.currentPage[0].group // error("No update group returned")'
 
 # Latest group id on a specific branch
-eas update:list --branch production --json --non-interactive | jq -r '.currentPage[0].group'
+eas update:list --branch production --json --non-interactive | jq -er '.currentPage[0].group // error("No update group returned")'
 ```
 
 The JSON response has a `currentPage` array with one entry per update group (both platforms of the same publish are collapsed into one entry):
@@ -107,5 +107,4 @@ For the complete schema and field reference, see [references/update-insights-sch
 
 Fields that matter for health assessment:
 
-- `platforms[].totals.crashRatePercent`, computed as `failedInstalls / (installs + failedInstalls) * 100`. Zero when there are no installs.
-- `platforms[].totals.installs` and `uniqueUsers` give the adoption sign
+- `platforms[].totals.cra

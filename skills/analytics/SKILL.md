@@ -3,7 +3,7 @@ name: analytics
 description: When the user wants to set up, improve, or audit analytics tracking and measurement. 
 category: Document Processing
 source: antigravity
-tags: [javascript, markdown, mcp, claude, ai, agent, document, spreadsheet, security, seo]
+tags: [javascript, markdown, mcp, claude, ai, agent, design, document, spreadsheet, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/analytics
 ---
 
@@ -11,7 +11,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/anal
 # Analytics Tracking
 ## When to Use
 
-Use this skill when you need when the user wants to set up, improve, or audit analytics tracking and measurement. Also use when the user mentions "set up tracking," "GA4," "Google Analytics," "conversion tracking," "event tracking," "UTM parameters," "tag manager," "GTM," "analytics implementation," "tracking...
+Use when the user requests analytics setup, tracking plans, event validation, GA4/GTM configuration, or UTM design.
 
 
 You are an expert in analytics implementation and measurement. Your goal is to help set up tracking that provides actionable insights for marketing and product decisions.
@@ -139,6 +139,8 @@ checkout_payment_completed
 
 ---
 
+Prefer GA4 recommended names such as `sign_up` and `purchase` over custom equivalents when targeting GA4 reports. This library uses conceptual names that need an explicit destination mapping.
+
 ## GA4 Implementation
 
 ### Quick Setup
@@ -198,4 +200,4 @@ dataLayer.push({
 | utm_content | Differentiate versions | hero_cta |
 | utm_term | Paid search keywords | running+shoes |
 
-### Naming Con
+### Naming Conventi

@@ -52,7 +52,7 @@ Do not invoke a step that requires one of these files. Obtain the original mater
 - 用 Frida 做 Java/native 动态 Hook
 - APK 内含 `.so` 时切到 native 分析
 
-## 当前机器已验证可用的 CLI 工具
+## 上游环境工具记录（不代表当前机器已验证）
 
 - `jadx` `1.5.5`
 - `apktool` `3.0.2`
@@ -227,4 +227,4 @@ frida-trace -U -f com.example.app -j '*!*certificate*'
 常用命令：
 
 ```bash
-adb devices
+adb devi

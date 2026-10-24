@@ -24,6 +24,8 @@ Use this workflow when:
 - Managing cloud costs
 - Implementing DevOps practices
 
+Select only the phases requested. Before provisioning, deployment, IAM/network changes, failover or deletion, confirm provider account/tenant, region, project/cluster/namespace, exact resource scope, cost cap, reviewed change preview and rollback/restore. Account billing, reserved commitments, security testing and external notifications each need corresponding authorization. Prefer isolated staging, short-lived scoped identity and secret-free state/logs; do not disable protection to clear a blocker. Checklist completion requires actual evidence, not the existence of a dashboard or template.
+
 ## Workflow Phases
 
 ### Phase 1: Cloud Infrastructure Setup
@@ -196,34 +198,4 @@ Use @cost-optimization to reduce cloud costs
 
 #### Copy-Paste Prompts
 ```
-Use @incident-runbook-templates to create runbooks
-```
-
-## Cloud Provider Workflows
-
-### AWS
-```
-Skills: aws-skills, aws-serverless, aws-penetration-testing
-Services: EC2, Lambda, S3, RDS, ECS, EKS
-```
-
-### Azure
-```
-Skills: azure-functions, azure-ai-projects-py, azure-monitor-opentelemetry-py
-Services: Functions, App Service, AKS, Cosmos DB
-```
-
-### GCP
-```
-Skills: gcp-cloud-run
-Services: Cloud Run, GKE, Cloud Functions, BigQuery
-```
-
-## Quality Gates
-
-- [ ] Infrastructure provisioned
-- [ ] CI/CD pipeline working
-- [ ] Monitoring configured
-- [ ] Security measures in place
-- [ ] Cost optimization applied
-- [ ] DR procedur
+Use @incident-runbook-templates

@@ -54,7 +54,7 @@ If the context file doesn't exist, run the `developer-audience-context` skill fi
 | **Bi-weekly** | Original content heavy | Can lose momentum |
 | **Monthly** | Product updates, digests | Easy to forget you exist |
 
-**Developer preference**: Weekly is the sweet spot. Developers are busy and inbox-protective.
+Test cadence against the actual audience and publishing capacity; weekly is a starting hypothesis.
 
 ---
 
@@ -139,7 +139,7 @@ Code rendering is tricky in email. Options:
 
 | Approach | Pros | Cons |
 |----------|------|------|
-| **Inline code** (`backticks`) | Works everywhere | No highlighting |
+| **Inline code** | Use rendered HTML code tags or plain text; Markdown backticks need an ESP renderer | Limited highlighting |
 | **Plain text block** | Reliable | Ugly |
 | **Image of code** | Beautiful | Can't copy, accessibility issues |
 | **"View in browser" link** | Full formatting | Friction |
@@ -159,6 +159,4 @@ const result = await fetch('/api/data');
 
 ### A/B Test Framework
 
-Test one variable at a time:
-
-| Variable | Version A | Version 
+T

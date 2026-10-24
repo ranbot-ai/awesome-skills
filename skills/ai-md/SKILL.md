@@ -1,9 +1,9 @@
 ---
 name: ai-md
-description: Convert human-written CLAUDE.md into AI-native structured-label format. Battle-tested across 4 models. Same rules, fewer tokens, higher compliance. 
+description: Convert human-written CLAUDE.md into AI-native structured-label format. Propose and evaluate structured-label rewrites while preserving rule meaning; benefits require measured evidence. 
 category: Business & Marketing
 source: antigravity
-tags: [claude, ai, llm, cro]
+tags: [claude, ai, llm]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-md
 ---
 

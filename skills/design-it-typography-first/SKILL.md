@@ -18,7 +18,7 @@ Use this sub-style when the user's request matches the aesthetic described above
 
 ## Core Principles
 1. **Hyper-Sized Typography**: The main headline is so large it becomes an abstract graphic element.
-2. **Minimal UI Chroming**: Buttons are just text. Navigation is just text. No boxes, no backgrounds.
+2. **Minimal UI Chroming**: Buttons and navigation may be visually text-only, but retain semantic controls, usable targets and visible focus.
 3. **Kinetic Typography**: Text that moves, scrolls, or reacts to the user's cursor.
 
 ## Visual DNA
@@ -51,7 +51,7 @@ body {
 }
 
 .hero-type:hover {
-  color: var(--cta-highlight);
+  color: var(--cta-highlight, #F5F5F0);
   -webkit-text-stroke: 0;
 }
 
@@ -154,4 +154,3 @@ class TypographyFirstScreen extends StatelessWidget {
   }
 }
 ```
-- `FittedBox` with `BoxFit.cover` is your best f

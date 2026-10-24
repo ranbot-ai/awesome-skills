@@ -1,9 +1,9 @@
 ---
 name: glassmorphism
 description: Web and App implementation guide for Glassmorphism. Trigger when user wants a frosted glass effect, blurred backgrounds, transparency, or a sleek MacOS-like feel. 
-category: Creative & Media
+category: Document Processing
 source: antigravity
-tags: [react, api, ai, llm, design, image, cro]
+tags: [react, api, ai, llm, design, document, image, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-it/glassmorphism
 ---
 
@@ -32,20 +32,20 @@ Use this sub-style when the user's request matches the aesthetic described above
 ```css
 body {
   /* Requires a complex background to see the glass effect */
-  background: url('abstract-mesh.jpg') cover; 
+  background: #203040 url('abstract-mesh.jpg') center / cover no-repeat;
 }
 
 .glass-panel {
   background: rgba(255, 255, 255, 0.15); /* Light glass */
   /* OR background: rgba(0, 0, 0, 0.25); for Dark glass */
-  
+
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  
+
   border: 1px solid rgba(255, 255, 255, 0.3); /* The glass edge */
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  
+
   padding: 32px;
 }
 ```
@@ -64,7 +64,7 @@ struct GlassCard: View {
                 endPoint: .bottomTrailing
             )
             .ignoresSafeArea()
-            
+
             // Glass panel
             VStack(alignment: .leading, spacing: 16) {
                 Text("Glass Panel")
@@ -73,7 +73,7 @@ struct GlassCard: View {
                 Text("Content floating on frosted glass.")
                     .font(.system(size: 15))
                     .foregroundColor(.white.opacity(0.8))
-                
+
                 Button(action: {}) {
                     Text("Continue")
                         .font(.system(size: 15, weight: .semibold))
@@ -141,4 +141,4 @@ class GlassCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                
+                child: C

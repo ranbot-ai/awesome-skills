@@ -51,6 +51,8 @@ Use this skill when:
 | Nuclei | OSS | Template-based scanning |
 | Arachni | OSS | Comprehensive scanning |
 
+Agree exact URLs/hosts, authenticated test accounts, exclusions, rates, duration and stop conditions before scanning; spiders can trigger state-changing links even during baseline scans. Use staged data/backups and deny off-scope redirects/crawl targets. Keep ZAP API private with a strong API key rather than the broad address allowlist as a remote exposure pattern. The [baseline script](https://www.zaproxy.org/docs/docker/baseline-scan/) uses a preconfigured context and -U user for authentication, not the original ad-hoc login flags. Full/API scans actively attack; do not schedule them without authorization. Pin images/actions, quote mount paths and poll readiness rather than sleep. Burp REST APIs vary by edition/version: verify endpoints/auth, add timeouts/raise_for_status, parse Location and bound polling with failed/cancelled states. Its sketch also lacks time import. Reports may contain secrets/PII; restrict artifacts and permissions. No findings or HTTP 200 alone establish security; validate behavior and coverage, and do not suppress CI warnings with -I without policy review.
+
 ## OWASP ZAP
 
 ### Docker Setup
@@ -58,7 +60,7 @@ Use this skill when:
 ```bash
 # Run ZAP in daemon mode
 docker run -d --name zap \
-  -p 8080:8080 \
+  -p 127.0.0.1:8080:8080 \
   -v $(pwd)/reports:/zap/reports \
   ghcr.io/zaproxy/zaproxy:stable \
   zap.sh -daemon -host 0.0.0.0 -port 8080 \
@@ -80,9 +82,8 @@ docker run --rm -v $(pwd):/zap/wrk \
   ghcr.io/zaproxy/zaproxy:stable \
   zap-baseline.py -t https://target.example.com \
   -r report.html \
-  --auth-login-url https://target.example.com/login \
-  --auth-username user \
-  --auth-password pass
+  -n /zap/wrk/auth.context \
+  -U testuser
 ```
 
 ### Full Scan
@@ -155,61 +156,4 @@ jobs:
     parameters:
       context: "Default Context"
       user: "testuser"
-      policy: "Default Policy"
-      
-  - type: report
-    parameters:
-      template: "traditional-html"
-      reportDir: "/zap/reports"
-      reportFile: "zap-report"
-```
-
-```bash
-# Run automation
-docker run --rm -v $(pwd):/zap/wrk \
-  ghcr.io/zaproxy/zaproxy:stable \
-  zap.sh -cmd -autorun /zap/wrk/zap-automation.yaml
-```
-
-## CI/CD Integration
-
-### GitHub Actions
-
-```yaml
-name: DAST Scan
-
-on:
-  workflow_dispatch:
-  schedule:
-    - cron: '0 2 * * *'
-
-jobs:
-  dast:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Start Application
-        run: |
-          docker-compose up -d
-          sleep 30  # Wait for app to be ready
-
-      - name: OWASP ZAP Scan
-        uses: zaproxy/action-full-scan@v0.8.0
-        with:
-          target: 'http://localhost:8080'
-          rules_file_name: '.zap/rules.tsv'
-          cmd_options: '-a'
-
-      - name: Upload Report
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: zap-report
-          path: report_html.html
-```
-
-### GitLab CI
-
-```yaml
-d
+      policy: "De

@@ -10,7 +10,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/busi
 
 # Business Website Setup
 
-**What it is:** the smallest site that ranks and converts - the page list, what each page is
+**What it is:** the smallest site plan for a confirmed business goal - the page list, what each page is
 for, which search intent it answers, and the technical and structured-data requirements
 that make it findable.
 
@@ -23,8 +23,7 @@ field list so the four cannot drift apart.
 
 Layer: Layer 5: Fulfil. Fits: Growth stage. Table code: n/a.
 
-**The rule this table exists to enforce:** a page with no declared search intent is a page
-that ranks for nothing and a page with no declared owner is a page that rots. `Primary
+**The rule this table exists to enforce:** a declared purpose helps planning but does not determine rankings and a page with no declared owner is a page that rots. `Primary
 Keyword`, `Search Intent` and `Owner` are therefore required, and the NAP block is a
 per-page field rather than a global assumption - a business with one location and one
 service area genuinely does repeat the NAP on every page, and a multi-location business
@@ -112,5 +111,4 @@ intent, its own NAP block and `LocalBusiness` or `Service` structured data. Mobi
 fast, one clear call to action per page, and a review widget on the pages that earn trust.
 No blog unless someone will actually write it.
 
-**Why this one:** One page per service is what ranks - a single homepage cannot rank for
-six different things at once, and a page covering three servi
+**Why this one:** Separate genuinely distinct service/location intents when there is useful unique content; one page may rank for several relate

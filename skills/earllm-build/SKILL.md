@@ -77,7 +77,7 @@ These are verified facts from official documentation and device testing. Treat t
 
 1. **Bluetooth SCO is limited to 8kHz mono input** on most devices. Some support 16kHz mSBC. BLE Audio (Android 12+, `TYPE_BLE_HEADSET = 26`) supports up to 32kHz stereo. Always prefer BLE Audio when available.
 
-2. **`startBluetoothSco()` is deprecated since Android 12 (API 31).** Use `AudioManager.setCommunicationDevice(AudioDeviceInfo)` and `clearCommunicationDevice()` instead. The project already implements both paths in `AudioRouteController.kt`.
+2. **`startBluetoothSco()` is deprecated in API 34; `setCommunicationDevice` was added in API 31.** Use `AudioManager.setCommunicationDevice(AudioDeviceInfo)` and `clearCommunicationDevice()` instead. The project already implements both paths in `AudioRouteController.kt`.
 
 3. **Samsung One UI 7/8 has a known HFP corruption bug** where A2DP playback corrupts the SCO link. The app handles this with silence detection and automatic fallback to the phone's built-in mic.
 
@@ -112,7 +112,3 @@ Headset button tap
 4. Update `MainViewModel.kt` if the feature needs UI integration
 5. Add unit tests in the module's `src/test/` directory
 6. Update docs if the feature changes behavior
-
-## Modifying Audio Capture
-
-- 

@@ -3,7 +3,7 @@ name: azure-communication-chat-java
 description: Build real-time chat applications with thread management, messaging, participants, and read receipts. 
 category: AI & Agents
 source: antigravity
-tags: [workflow, azure]
+tags: [api, ai, workflow, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-communication-chat-java
 ---
 
@@ -11,6 +11,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azur
 # Azure Communication Chat (Java)
 
 Build real-time chat applications with thread management, messaging, participants, and read receipts.
+
+## Privacy and write scope
+
+Examples are independent SDK fragments, not a complete tested application. Pin the package version and verify imports/API signatures against it before compiling. Use approved test participants and a least-privilege user token; sending messages, read receipts or typing events, changing history visibility and deleting threads require the corresponding user instruction. Minimize pagination and do not print production message bodies, tokens or participant identifiers into shared logs. Render received HTML only with an appropriate sanitizer; server acceptance does not make it safe UI markup.
 
 ## Installation
 
@@ -156,18 +160,4 @@ threadClient.deleteMessage(messageId);
 
 ```java
 // List participants
-PagedIterable<ChatParticipant> participants = threadClient.listParticipants();
-
-for (ChatParticipant participant : participants) {
-    CommunicationUserIdentifier user = 
-        (CommunicationUserIdentifier) participant.getCommunicationIdentifier();
-    System.out.println("User: " + user.getId());
-    System.out.println("Display Name: " + participant.getDisplayName());
-}
-
-// Add participants
-List<ChatParticipant> newParticipants = new ArrayList<>();
-newParticipants.add(new ChatParticipant()
-    .setCommunicationIdentifier(new CommunicationUserIdentifier("<new-user-id>"))
-    .setDisplayName("Charlie")
-    .setShareHistoryTime(OffsetDateTime
+PagedIterable<ChatParticip

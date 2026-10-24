@@ -3,7 +3,7 @@ name: aws-cost-operations
 description: AWS cost optimization, monitoring, and operational excellence expert. Use when analyzing AWS bills, estimating costs, setting up CloudWatch alarms, querying logs, auditing CloudTrail activity, or asse
 category: Document Processing
 source: antigravity
-tags: [node, api, mcp, ai, workflow, document, security, kubernetes, aws, rag]
+tags: [node, api, mcp, ai, agent, workflow, document, security, kubernetes, aws]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-cost-operations
 ---
 
@@ -14,11 +14,11 @@ This skill provides comprehensive guidance for AWS cost optimization, monitoring
 
 ## AWS Documentation Requirement
 
-Always verify AWS facts using MCP tools (`mcp__aws-mcp__*` or `mcp__*awsdocs*__*`) before answering. The `aws-mcp-setup` dependency is auto-loaded — if MCP tools are unavailable, guide the user through that skill's setup flow.
+Always verify AWS facts using MCP tools (`mcp__aws-mcp__*` or `mcp__*awsdocs*__*`) before answering. This catalog tree does not bundle MCP servers, setup dependencies or the references named below. Discover actual tools; if unavailable, use current official AWS documentation or report missing account data. Do not claim setup auto-loaded or install/connect a server without authorization.
 
 ## Integrated MCP Servers
 
-This plugin provides 3 MCP servers:
+The upstream plugin describes these 3 MCP servers; this skill alone does not provide them:
 
 ### Bundled Servers
 
@@ -64,6 +64,8 @@ Use this skill when:
 - Implementing operational excellence
 
 ## Cost Optimization Best Practices
+
+Confirm payer/member account, region, currency, billing period and cost basis (unblended/amortized/net) before comparing totals. Billing data can lag; budgets/alerts are not hard spend caps. Cost Explorer/Logs Insights queries may themselves incur charges. Missing CloudTrail events do not prove no action occurred: check retention, region and event coverage. EC2 guest memory requires agent/custom metrics. Deletion, commitments, alarm actions and rightsizing require a scoped approved change and recovery analysis; do not remove backups solely because they look unused.
 
 ### Pre-Deployment Cost Estimation
 
@@ -130,31 +132,4 @@ Use this skill when:
 
 ### Application Performance Monitoring
 
-**Monitor application health**:
-1. Use **CloudWatch Application Signals MCP** for APM
-2. Track service-level objectives (SLOs)
-3. Monitor application dependencies
-4. Identify performance bottlenecks
-5. Set up distributed tracing
-
-### Container and Kubernetes Monitoring
-
-**For containerized workloads**:
-1. Use **AWS Managed Prometheus MCP** for metrics
-2. Monitor container resource utilization
-3. Track pod and node health
-4. Create PromQL queries for custom metrics
-5. Set up alerts for container anomalies
-
-## Audit and Security Best Practices
-
-### CloudTrail Activity Analysis
-
-**Audit AWS activity**:
-1. Use **CloudTrail MCP** to analyze API activity
-2. Track who made changes to resources
-3. Investigate security incidents
-4. Monitor for suspicious activity patterns
-5. Audit compliance with policies
-
-**Co
+**Monitor application 

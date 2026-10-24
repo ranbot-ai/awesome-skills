@@ -23,6 +23,8 @@ Help developers set up complete development environments from scratch. This skil
 - Use when documenting setup instructions for a project
 - Use when creating development environment documentation
 
+Versions below are historical examples, not current supported-version recommendations. Use the project lockfiles, runtime constraints and official support matrix before installing; do not assume a newer major is compatible. Dependency installs may execute lifecycle scripts. Protect and gitignore secret environment files. Docker group membership grants root-equivalent host control; use rootless Docker where appropriate. The Compose stack is local development only: use unique credentials, bind published ports to loopback and add readiness checks rather than assuming `depends_on` means the database is ready.
+
 ## How It Works
 
 ### Step 1: Identify Requirements
@@ -184,40 +186,4 @@ source ~/.bashrc
 ### Step 1: Install Python
 
 **macOS:**
-\`\`\`bash
-brew install python@3.11
-\`\`\`
-
-**Linux:**
-\`\`\`bash
-sudo apt update
-sudo apt install python3.11 python3.11-venv python3-pip
-\`\`\`
-
-**Windows:**
-\`\`\`powershell
-choco install python --version=3.11
-\`\`\`
-
-### Step 2: Verify Installation
-
-\`\`\`bash
-python3 --version  # Should show Python 3.11.x
-pip3 --version     # Should show pip 23.x.x
-\`\`\`
-
-### Step 3: Create Virtual Environment
-
-\`\`\`bash
-# Navigate to project directory
-cd my-project
-
-# Create virtual environment
-python3 -m venv venv
-
-# Activate virtual environment
-# macOS/Linux:
-source venv/bin/activate
-
-# Windows:
-venv\Scripts\activat
+\

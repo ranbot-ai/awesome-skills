@@ -158,7 +158,6 @@ Add these fields to get AI-generated insights:
 > **Note:** The `sortReview: "Lowest rated"` option may not work consistently across all marketplaces. For quality analysis, collect a large sample and filter by rating in post-processing.
 
 ### Quality Analysis Tips
-- Set high `maxReviewResults` for statistical significance
+- Choose a bounded sampling plan; more reviews alone do not establish statistical significance or representative sentiment
 - Look for recurring keywords: "broke", "defect", "quality", "returned"
-- Filter results by rating if sorting doesn't work as expected
-- Cross-reference with competitor products for benchm
+- Filter results by rating if sorting doesn't work a

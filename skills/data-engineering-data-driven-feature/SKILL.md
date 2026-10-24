@@ -30,6 +30,8 @@ Build features guided by data insights, A/B testing, and continuous measurement 
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
 
+The Task/agent names and configuration below are illustrative orchestration interfaces, not guaranteed installed tools. Scope analytics to necessary consented events and approved retention; do not record all user input or sensitive session content. Pre-register primary metrics, randomization unit, power/MDE, duration and stopping/multiple-testing rules. Continuous dashboard peeking at ordinary fixed-horizon significance is not a valid stopping rule; use a designed sequential method or the planned horizon. Bayesian analysis is not automatically faster and must specify priors/decision loss. Numerical sample sizes, times, rollout percentages and error targets below are examples, not universal guarantees.
+
 ## Phase 1: Data Analysis and Hypothesis Formation
 
 ### 1. Exploratory Data Analysis
@@ -64,14 +66,4 @@ Build features guided by data insights, A/B testing, and continuous measurement 
 - Output: Event tracking plan, analytics schema, instrumentation guide
 
 ### 6. Data Pipeline Architecture
-- Use Task tool with subagent_type="data-engineering::data-engineer"
-- Context: Analytics requirements and existing data infrastructure
-- Prompt: "Design data pipelines for feature: $ARGUMENTS. Include real-time streaming for live metrics (Kafka, Kinesis), batch processing for detailed analysis, data warehouse integration (Snowflake, BigQuery), and feature store for ML if applicable. Ensure proper data governance and GDPR compliance."
-- Output: Pipeline architecture, ETL/ELT specifications, data flow diagrams
-
-## Phase 3: Implementation with Instrumentation
-
-### 7. Backend Implementation
-- Use Task tool with subagent_type="backend-development::backend-architect"
-- Context: Architecture design and feature requirements
-- Prompt: "Implement backend for
+- Use Task tool with subagent_type="data-engine

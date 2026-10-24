@@ -12,6 +12,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/ai-a
 
 Protect agentic AI systems from adversarial input, unsafe tool execution, data leakage, and privilege abuse with layered security controls.
 
+These are partial design sketches, not a working security boundary. Regexes/classifiers have false positives and false negatives; prompt text cannot grant permissions. Enforce tenant identity, resource scope and approved actions in the tool service using authenticated server-side context. Input signing authenticates origin, not the safety of signed content. Bind approvals to the exact operation/arguments and recheck immediately before execution. Test failure paths and concurrency before production use.
+
 ## Prerequisites
 
 - Python 3.10+ for guardrail code examples
@@ -106,26 +108,9 @@ def validate_agent_input(user_input: str, max_length: int = 4096) -> ValidationR
     if len(matched) >= 3:
         risk = RiskLevel.CRITICAL
 
-    is_safe = risk in (RiskLevel.LOW, RiskLevel.MEDIUM)
+    is_safe = not matched  # heuristic result only; never authorization
 
     return ValidationResult(
         is_safe=is_safe,
         risk_level=risk,
-        matched_rules=matched,
-        sanitized_input=sanitized[:max_length] if is_safe else "",
-    )
-```
-
-### Content Classification Middleware
-
-Use a lightweight classifier as middleware before the agent processes any input:
-
-```python
-from functools import wraps
-from typing import Callable
-
-def input_guard(validator: Callable = validate_agent_input):
-    """Decorator that guards agent entry points against unsafe input."""
-    def decorator(func):
-        @wraps(func)
-        async def wrapper(user_input: str, *args, **kwargs):
+        matc

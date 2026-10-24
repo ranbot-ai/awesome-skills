@@ -1,9 +1,9 @@
 ---
 name: aws-sst-development
 description: SST v4 (Ion) expert for managing AWS resources as code with the Pulumi-backed framework. 
-category: Development & Code Tools
+category: Document Processing
 source: antigravity
-tags: [python, typescript, node, api, mcp, claude, ai, template, security, aws]
+tags: [python, typescript, node, api, mcp, claude, ai, template, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-sst-development
 ---
 
@@ -22,9 +22,8 @@ resources in TypeScript and SST/Pulumi reconciles them into your account. It
 gives you high-level `sst.aws.*` components (Function, Bucket, Dynamo, Cron,
 Service, …) that expand into many underlying resources, plus an escape hatch to
 *any* raw Pulumi `aws.*` resource for the long tail. This skill encodes a
-production-proven way to author, link, test, deploy, and troubleshoot SST
-stacks on AWS — distilled from real multi-stack projects that have paid for
-each lesson with a prod incident.
+set of project-derived patterns to author, link, test, deploy, and troubleshoot SST
+stacks on AWS . The catalog review does not establish those incident or production-validation claims.
 
 **SST and Pulumi are third-party — verify current syntax with Context7**
 (`resolve-library-id` → `query-docs` for `sst` or `pulumi-aws`) when you're
@@ -67,8 +66,7 @@ map so your change matches the house style instead of fighting it:
    and the `sst`/`pulumi` versions actually installed.
 
 Run `npx sst version` to confirm you're on v4/Ion (the `$config` + `.sst/platform/`
-signature). v2/v3 ("SST Classic", CDK-based) is a different framework — these
-patterns don't apply there.
+signature). v2 (Classic) is CDK-based; v3 also introduced the Pulumi-backed Ion architecture. Verify v3-to-v4 breaking changes rather than classifying v3 as CDK-based.
 
 ## The conventions, and which are universal vs tunable
 
@@ -92,4 +90,4 @@ consistency, but recognize a project may differ).
   Use `$interpolate` (or `pulumi.interpolate`). A bare top-level
   `` `${bucket.arn}/*` `` stringifies the `Output` to a `[Output<T>]` placeholder
   and produces a broken ARN that only fails at deploy time (it type-checks and
-  `sst dev` runs fine). The fix is `$interpolate`​`` `${bucket.arn
+  

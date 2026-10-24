@@ -49,7 +49,7 @@ This skill is agent-neutral. In the methodology:
 - **`general` agent** means a delegated agent that can investigate broadly and spawn focused research agents.
 - **`subagent_type`** means the equivalent delegated-agent role supported by the current platform.
 
-Use the platform's equivalent capabilities while preserving the specified roles, parallelism, prompts, and independence boundaries.
+Use platform equivalents within the user-authorized delegation scope and available concurrency. If delegation is unavailable, perform the phases sequentially and disclose that independent verification was not performed; never impersonate an independent reviewer.
 
 ## Setup
 
@@ -69,7 +69,7 @@ Subagents (Phases 1, 2, 3, 6) do NOT write files — they return results to you 
 
 ### Coverage and prior runs
 
-Each audit run explores different code paths depending on which agents find what and where they dig. No single run finds everything. Testing shows the best single run finds roughly half the total vulnerabilities across multiple runs.
+Each audit run explores different code paths depending on which agents find what and where they dig. No single run finds everything. Coverage depends on the target, tooling, scope, and available evidence; no measured detection percentage is supplied with this bundle.
 
 **If prior runs exist** for the exact target ID, first require their `target.json` canonical path and normalized origin to match the current target byte-for-byte. Treat missing or mismatched manifests as unrelated and never read or summarize their findings. Do not search or reuse prior runs from a basename-only directory. After that identity check, read matching `findings.json` files before starting Phase 2. Use them to:
 1. **Skip known findings** — don't waste agents re-discovering the same status bypass. Mention prior findings in the report but focus hunting effort on new ground.
@@ -78,4 +78,4 @@ Each audit run explores different code paths depending on which agents find what
 
 Include a brief summary of prior runs in the architecture summary so Phase 2 agents know what's already been found.
 
-**If no prior runs exist**, note in the report that coverage improves with additional runs and recommend the user run the audit again to catch findings this run may have 
+**If 

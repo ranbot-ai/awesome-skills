@@ -12,7 +12,8 @@
     "ai",
     "workflow",
     "security",
-    "azure"
+    "azure",
+    "rag"
   ],
   "useCases": [
     "\"Key Vault keys Java\", \"cryptographic keys Java\"",

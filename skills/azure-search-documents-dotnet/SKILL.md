@@ -3,7 +3,7 @@ name: azure-search-documents-dotnet
 description: Azure AI Search SDK for .NET (Azure.Search.Documents). Use for building search applications with full-text, vector, semantic, and hybrid search. 
 category: Document Processing
 source: antigravity
-tags: [api, ai, workflow, document, azure]
+tags: [api, ai, workflow, document, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-search-documents-dotnet
 ---
 
@@ -22,7 +22,7 @@ dotnet add package Azure.Search.Documents
 dotnet add package Azure.Identity
 ```
 
-**Current Versions**: Stable v11.7.0, Preview v11.8.0-beta.1
+These fragments require a compatible pinned SDK version; check its API reference before use. They are not a complete compiled application.
 
 ## Environment Variables
 
@@ -138,7 +138,7 @@ var index = new SearchIndex("hotels")
 ```csharp
 var searchClient = new SearchClient(endpoint, indexName, credential);
 
-// Upload (add new)
+// Upload inserts or replaces the entire existing document with the same key.
 var hotels = new[] { new Hotel { HotelId = "1", HotelName = "Hotel A" } };
 await searchClient.UploadDocumentsAsync(hotels);
 
@@ -149,7 +149,7 @@ await searchClient.MergeDocumentsAsync(hotels);
 await searchClient.MergeOrUploadDocumentsAsync(hotels);
 
 // Delete
-await searchClient.DeleteDocumentsAsync("hotelId", new[] { "1", "2" });
+await searchClient.DeleteDocumentsAsync("HotelId", new[] { "1", "2" });
 
 // Batch operations
 var batch = IndexDocumentsBatch.Create(
@@ -166,9 +166,9 @@ await searchClient.IndexDocumentsAsync(batch);
 ```csharp
 var options = new SearchOptions
 {
-    Filter = "rating ge 4",
-    OrderBy = { "rating desc" },
-    Select = { "hotelId", "hotelName", "rating" },
+    Filter = "Rating ge 4",
+    OrderBy = { "Rating desc" },
+    Select = { "HotelId", "HotelName", "Rating" },
     Size = 10,
     Skip = 0,
     IncludeTotalCount = true
@@ -179,13 +179,4 @@ SearchResults<Hotel> results = await searchClient.SearchAsync<Hotel>("luxury", o
 Console.WriteLine($"Total: {results.TotalCount}");
 await foreach (SearchResult<Hotel> result in results.GetResultsAsync())
 {
-    Console.WriteLine($"{result.Document.HotelName} (Score: {result.Score})");
-}
-```
-
-### Faceted Search
-
-```csharp
-var options = new SearchOptions
-{
-    Facets = { "rating,count:
+    Console.WriteLine($"{result.Document.Ho

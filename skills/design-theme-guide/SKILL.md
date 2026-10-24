@@ -42,7 +42,7 @@ typeface's licence (`logo-image-design` covers rights), or a specific component'
 
 ## How It Works
 
-Follow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.
+Follow these local instructions; the shared execution runtime is not bundled. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.
 
 ### Step 1 - Identify intent
 
@@ -110,5 +110,4 @@ the deck, the letterhead and the social posts look like one business. Screens ca
 that, and a theme with no contrast measurement is a theme that fails the first time
 someone chooses a pastel.
 
-**Workflow:** Seed colour chosen → Neutral ramp derived → Semantic colour roles assigned →
-Every text pair cont
+**Workflow:** Seed colour chosen → Neutral ramp derived → Semantic colo

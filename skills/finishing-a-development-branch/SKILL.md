@@ -114,7 +114,7 @@ EOF
 )"
 ```
 
-Then: Cleanup worktree (Step 5)
+Keep the worktree for PR follow-up unless the user explicitly requests cleanup.
 
 #### Option 3: Keep As-Is
 
@@ -146,14 +146,14 @@ Then: Cleanup worktree (Step 5)
 
 ### Step 5: Cleanup Worktree
 
-**For Options 1, 2, 4:**
+**For Options 1 and 4 only:**
 
 Check if in worktree:
 ```bash
-git worktree list | grep $(git branch --show-current)
+git worktree list --porcelain
 ```
 
-If yes:
+Identify the exact worktree path and verify no needed dirty, untracked or ignored files remain. For an app-managed worktree, use the app archive tool rather than removing it directly. Otherwise, after preserving needed evidence:
 ```bash
 git worktree remove <worktree-path>
 ```
@@ -211,8 +211,4 @@ git worktree remove <worktree-path>
 - **using-git-worktrees** - Cleans up worktree created by that skill
 
 ## When to Use
-This skill is applicable to execute the workflow or actions described in the overview.
-
-## Limitations
-- Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, testing, or expert
+This skill is applicable to e

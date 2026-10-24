@@ -3,7 +3,7 @@ name: complexity-cuts
 description: Lower Big-O on existing code via a one-transformation-at-a-time playbook with verify-revert-stop. For new code use lemmaly; for math-level wins escalate to mathguard. 
 category: AI & Agents
 source: antigravity
-tags: [claude, ai, workflow, prisma]
+tags: [claude, ai, workflow, prisma, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/complexity-cuts
 ---
 
@@ -77,11 +77,10 @@ The vast majority of real-world Big-O wins come from a small set of moves. Try t
 | `for x in A: if x in B` where B is list/array | Convert B to `Set`/`Map` once | O(n·m) → O(n+m) |
 | Nested loop computing pairs/joins | Hash-join on the key; index by lookup field | O(n·m) → O(n+m) |
 | Repeated `.find` / `.indexOf` / `.includes` inside a loop | Precompute index `Map<key, item>` outside loop | O(n^2) → O(n) |
-| Repeated recomputation of same value | Memoize / cache by input key | O(n·f(n)) → O(n + f(n)) |
+| Repeated recomputation of same value | Memoize / cache by complete input key | O(n·f(n)) → O(n + f(n)) only when all n calls share one result; account for distinct keys and storage |
 | Sort inside a loop | Sort once outside | O(n^2 log n) → O(n log n) |
 | Linear scan for min/max/median repeatedly | Heap / sorted structure | O(n·k) → O(n log k) |
 | Recursive recomputation (naive Fibonacci shape) | Memoize, or convert to iterative DP | exponential → O(n) |
 | String concatenation in a loop (some langs) | Use builder / `join` / `array.push` then join | O(n^2) → O(n) |
 | Repeated regex compile in loop | Compile once outside | constant-factor, large |
-| Counting / grouping via nested loop | Single pass with `Counter` / `Map<k, count>` | O(n^2) → O(n) |
-| Sliding-window written as nested loop | Two-pointer 
+| Counting / grouping via nested loop | Single pass with `Counter` / `

@@ -30,7 +30,7 @@ Review the entire codebase file by file. Read the code carefully. Fix issues rig
 
 Start by looking for files that shouldn't be on GitHub:  
 
-**Delete these immediately:**  
+**Inspect these candidates; delete only confirmed disposable files within the authorized scope:**
 - OS files: `.DS_Store`, `Thumbs.db`, `desktop.ini`  
 - Logs: `*.log`, `npm-debug.log*`, `yarn-error.log*`  
 - Temp files: `*.tmp`, `*.temp`, `*.cache`, `*.swp`  
@@ -56,7 +56,7 @@ Check if the `.gitignore` file exists and is thorough. If it’s missing or not 
 
 Look through each code file and check:  
 
-**Dead Code (remove immediately):**  
+**Potential dead code (verify consumers/build/runtime conventions before removing):**
 - Commented-out code blocks  
 - Unused imports/requires  
 - Unused variables (declared but never used)  
@@ -68,7 +68,7 @@ Look through each code file and check:
 - Vague names: `data`, `info`, `temp`, `thing` → rename to be descriptive  
 - Magic numbers: `if (status === 3)` → extract to named constant  
 - Debug statements: remove `console.log`, `print()`, `debugger`  
-- TODO/FIXME comments: either resolve them or delete them  
+- TODO/FIXME comments: preserve unresolved requirements; resolve only with evidence and scope
 - TypeScript `any`: add proper types or explain why `any` is used  
 - Use `===` instead of `==` in JavaScript  
 - Functions longer than 50 lines: consider splitting  
@@ -131,9 +131,4 @@ Look through each code file and check:
 **Organization:**  
 - Clear folder structure  
 - Files are in logical locations  
-- No "misc" or "stuff" folders  
-
-**Separation of concerns:**  
-- UI layer: only responsible for rendering  
-- Business logic: pure functions  
-- Data layer: isolated
+- No "misc" or "st

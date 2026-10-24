@@ -120,7 +120,10 @@ struct VibrantMaximalismView: View {
                     .padding(40)
                     .background(Color.white.opacity(0.9))
                     .border(.black, width: 5)
-                    .cornerRadius(40, corners: [.topRight, .bottomLeft]) // Custom corner radius extension needed
+                    .clipShape(UnevenRoundedRectangle(
+                        topLeadingRadius: 0, bottomLeadingRadius: 40,
+                        bottomTrailingRadius: 0, topTrailingRadius: 40
+                    )) // iOS 17+; use a tested custom Shape on older targets
                     .shadow(color: Color(hex: "0000FF"), radius: 0, x: 10, y: 10)
                 }
             }
@@ -148,11 +151,4 @@ class VibrantMaximalismScreen extends StatelessWidget {
               width: 400, height: 400,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
-                gradient: RadialGradient(colors: [Color(0xFFFF00FF), Colors.transparent]),
-              ),
-            ),
-          ),
-          
-          Center(
-            child: Column(
-     
+                gradient: RadialGradi

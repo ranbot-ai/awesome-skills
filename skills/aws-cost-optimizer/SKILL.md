@@ -36,6 +36,10 @@ Use this skill when you need to analyze AWS spending, identify cost optimization
 - Identify resources in expensive regions
 - Calculate potential savings with specific actions
 
+## Analysis and change boundary
+
+Confirm AWS account/profile, regions and reporting dates. Examples use GNU date (`-d`), not macOS BSD date. Cost Explorer end dates are exclusive and usage data can lag. Low CPU or unattached state alone does not establish deletion safety; check owners, recovery retention, I/O/network/memory and business cycles. Deletion, termination, rightsizing and commitment purchases require explicit authorized scope and a recovery plan.
+
 ## AWS CLI Commands
 
 ### Get Cost and Usage
@@ -99,7 +103,7 @@ aws cloudwatch get-metric-statistics \
   --start-time $(date -u -d '30 days ago' +%Y-%m-%dT%H:%M:%S) \
   --end-time $(date -u +%Y-%m-%dT%H:%M:%S) \
   --period 86400 \
-  --statistics Average,Maximum
+  --statistics Average Maximum
 ```
 
 ## Optimization Workflow
@@ -109,7 +113,7 @@ aws cloudwatch get-metric-statistics \
    - Identify top 5 spending services
    - Calculate growth rate
 
-2. **Quick Wins**
+2. **Candidate savings requiring owner review**
    - Delete unattached EBS volumes
    - Release unused Elastic IPs
    - Stop/terminate idle EC2 instances
@@ -155,19 +159,4 @@ aws cloudwatch get-metric-statistics \
 
 **Implementation**
 - "Create a script to delete unattached volumes"
-- "Set up a budget alert for $1000/month"
-- "Generate a cost optimization report for leadership"
-
-## Best Practices
-
-- Always test in non-production first
-- Verify resources are truly unused before deletion
-- Document all cost optimization actions
-- Calculate ROI for optimization efforts
-- Automate recurring optimization tasks
-- Use AWS Trusted Advisor recommendations
-- Enable AWS Cost Anomaly Detection
-
-## Integration with Kiro CLI
-
-This skill works seamlessly with Kiro CLI's AWS integrat
+-

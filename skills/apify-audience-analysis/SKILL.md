@@ -3,7 +3,7 @@ name: apify-audience-analysis
 description: Understand audience demographics, preferences, behavior patterns, and engagement quality across Facebook, Instagram, YouTube, and TikTok. 
 category: Development & Code Tools
 source: antigravity
-tags: [node, api, mcp, claude, ai, workflow, cro]
+tags: [node, api, ai, agent, workflow, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apify-audience-analysis
 ---
 
@@ -18,11 +18,12 @@ Analyze and understand your audience using Apify Actors to extract follower demo
 - You need structured extraction plus a summarized interpretation of audience findings.
 
 ## Prerequisites
-(No need to check it upfront)
+Verify prerequisites before any paid run.
 
 - `.env` file with `APIFY_TOKEN`
 - Node.js 20.6+ (for native `--env-file` support)
-- `mcpc` CLI tool: `npm install -g @apify/mcpc`
+- An approved Apify connector or Console access to inspect the chosen Actor and its schema; the bundled runner uses REST directly.
+- Keep `.env` untracked and private; configure the token locally without pasting it into chat or command arguments.
 
 ## Workflow
 
@@ -30,8 +31,8 @@ Copy this checklist and track progress:
 
 ```
 Task Progress:
-- [ ] Step 1: Identify audience analysis type (select Actor)
-- [ ] Step 2: Fetch Actor schema via mcpc
+- [ ] Step 1: Identify market research type (select Actor)
+- [ ] Step 2: Fetch Actor schema via an approved connector or Console
 - [ ] Step 3: Ask user preferences (format, filename)
 - [ ] Step 4: Run the analysis script
 - [ ] Step 5: Summarize findings
@@ -64,13 +65,7 @@ Select the appropriate Actor based on analysis needs:
 
 ### Step 2: Fetch Actor Schema
 
-Fetch the Actor's input schema and details dynamically using mcpc:
-
-```bash
-export $(grep APIFY_TOKEN .env | xargs) && mcpc --json mcp.apify.com --header "Authorization: Bearer $APIFY_TOKEN" tools-call fetch-actor-details actor:="ACTOR_ID" | jq -r ".content"
-```
-
-Replace `ACTOR_ID` with the selected Actor (e.g., `apify/facebook-followers-following-scraper`).
+Inspect the current Actor details and input schema using the authenticated Apify connector available in the session, or its Console page. Discover actual tool names and parameters before calling them. Do not parse `.env` with shell substitution or pass a token as a CLI header argument. Treat the Actor table as discovery candidates, not verified availability or schemas.
 
 This returns:
 - Actor description and README
@@ -82,22 +77,22 @@ This returns:
 Before running, ask:
 1. **Output format**:
    - **Quick answer** - Display top few results in chat (no file saved)
-   - **CSV** - Full export with all fields
-   - **JSON** - Full export in JSON format
+   - **CSV** - Bounded export, union of returned fields
+   - **JSON** - Bounded export in JSON format
 2. **Number of results**: Based on character of use case
 
 ### Step 4: Run the Script
 
 **Quick answer (display in chat, no file):**
 ```bash
-node --env-file=.env ${CLAUDE_PLUGIN_ROOT}/reference/scripts/run_actor.js \
+node --env-file=.env "<resolved-skill-directory>/reference/scripts/run_actor.js" \
   --actor "ACTOR_ID" \
   --input 'JSON_INPUT'
 ```
 
 **CSV:**
 ```bash
-node --env-file=.env ${CLAUDE_PLUGIN_ROOT}/reference/scripts/run_actor.js \
+node --env-file=.env "<resolved-skill-directory>/reference/scripts/run_actor.js" \
   --actor "ACTOR_ID" \
   --input 'JSON_INPUT' \
   --output YYYY-MM-DD_OUTPUT_FILE.csv \
@@ -106,7 +101,7 @@ node --env-file=.env ${CLAUDE_PLUGIN_ROOT}/reference/scripts/run_actor.js \
 
 **JSON:**
 ```bash
-node --env-file=.env ${CLAUDE_PLUGIN_ROOT}/reference/scripts/run_actor.js \
+node --env-file=.env "<resolved-skill-directory>/reference/scripts/run_actor.js" \
   --actor "ACTOR_ID" \
   --input 'JSON_INPUT' \
   --output YYYY-MM-DD_OUTPUT_FILE.json \
@@ -116,20 +111,15 @@ node --env-file=.env ${CLAUDE_PLUGIN_ROOT}/reference/scripts/run_actor.js \
 ### Step 5: Summarize Findings
 
 After completion, report:
-- Number of audience members/profiles analyzed
+- Number of results found
 - File location and name
-- Key demographic insights
-- Suggested next steps (deeper analysis, segmentation)
+- Key market insights
+- Suggested next steps (deeper analysis, validation)
 
 ## Error Handling
 
 `APIFY_TOKEN not found` - Ask user to create `.env` with `APIFY_TOKEN=your_token`
-`mcpc not found` - Ask user to install `npm install -g @apify/mcpc`
+`Connector unavailable` - Inspect the schema through the Console; do not claim an unavailable tool was called.
 `Actor not found` - Check Actor ID spelling
 `Run FAILED` - Ask user to check Apify console link in error output
-`Timeout` - Reduce input size or increase `--timeout`
-
-## Limitations
-- Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required in
+`T

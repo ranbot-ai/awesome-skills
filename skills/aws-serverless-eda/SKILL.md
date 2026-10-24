@@ -3,7 +3,7 @@ name: aws-serverless-eda
 description: AWS serverless and event-driven architecture expert based on Well-Architected Framework. Use when building serverless APIs, Lambda functions, REST APIs, microservices, or async workflows. 
 category: Document Processing
 source: antigravity
-tags: [typescript, node, api, mcp, ai, workflow, design, document, presentation, security]
+tags: [typescript, node, markdown, api, mcp, ai, workflow, design, document, presentation]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-serverless-eda
 ---
 
@@ -14,7 +14,7 @@ This skill provides comprehensive guidance for building serverless applications 
 
 ## AWS Documentation Requirement
 
-Always verify AWS facts using MCP tools (`mcp__aws-mcp__*` or `mcp__*awsdocs*__*`) before answering. The `aws-mcp-setup` dependency is auto-loaded — if MCP tools are unavailable, guide the user through that skill's setup flow.
+Verify changeable AWS facts with available official documentation tools or primary AWS documentation. Dependencies are not automatically loaded by this Markdown skill; do not install MCP servers as a prerequisite for answering.
 
 ## Serverless MCP Servers
 
@@ -164,4 +164,4 @@ const stateMachine = new stepfunctions.StateMachine(this, 'OrderWorkflow', {
 - Built-in error handling and retries
 - Execution history and debugging
 - Parallel and sequential execution
-- Service integrat
+- Service integra

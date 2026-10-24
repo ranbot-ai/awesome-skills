@@ -20,6 +20,8 @@ Configure content delivery networks for fast, reliable global asset delivery wit
 - Implementing geo-based routing or content restrictions.
 - Accelerating API responses with edge caching.
 
+Examples use placeholders and create billable resources. Confirm the zone/distribution/account and rollback before provisioning, changing DNS/cache rules or purging. Cache only intentionally public responses; bypass authenticated, tenant-specific and sensitive routes even when paths resemble static assets. Do not strip query parameters that carry authorization or content identity.
+
 ## Prerequisites
 
 - Domain with DNS management access.
@@ -125,6 +127,8 @@ function handler(event) {
 
 ### CloudFront with Terraform
 
+This is a partial configuration: supply the referenced bucket, certificate and API origin, and a least-privilege S3 bucket policy granting this distribution access through OAC. OAC creation alone does not grant bucket reads. Review SPA fallbacks: private S3 origins may return 403 for missing objects; never turn genuine authorization failures into successful HTML responses.
+
 ```hcl
 # cloudfront.tf
 resource "aws_cloudfront_distribution" "site" {
@@ -159,33 +163,6 @@ resource "aws_cloudfront_distribution" "site" {
     response_page_path = "/index.html"
   }
 
-  # API pass-through (no caching)
-  ordered_cache_behavior {
-    path_pattern     = "/api/*"
-    allowed_methods  = ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
-    cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "api-origin"
-
-    cache_policy_id          = "4135ea2d-6df8-44a3-9df3-4b5a84be39ad" # CachingDisabled
-    origin_request_policy_id = "b689b0a8-53d0-40ab-baf2-68738e2966ac" # AllViewerExceptHostHeader
-
-    viewer_protocol_policy = "https-only"
-  }
-
-  viewer_certificate {
-    acm_certificate_arn      = aws_acm_certificate.cert.arn
-    ssl_support_method       = "sni-only"
-    minimum_protocol_version = "TLSv1.2_2021"
-  }
-
-  restrictions {
-    geo_restriction {
-      restriction_type = "none"
-    }
-  }
-}
-
-resource "aws_cloudfront_origin_access_control" "oac" {
-  name                              = "s3-oac"
-  origin_access_control_origin_type = "s3"
-  signing_behavior  
+  # API pass-through (no caching): add a real origin block with
+  # origin_id = "api-origin" and verified custom_origin_config first.
+  ordered_cache_b

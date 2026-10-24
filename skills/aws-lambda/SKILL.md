@@ -24,7 +24,7 @@ Build serverless applications with AWS Lambda, covering function creation, event
 ## Prerequisites
 
 - AWS CLI v2 installed and configured
-- IAM permissions: `lambda:*`, `iam:PassRole`, `logs:*`, `apigateway:*`, `s3:*`
+- Least-privilege IAM actions for the chosen resources; restrict `iam:PassRole` to the execution role. Wildcard service grants are not a prerequisite.
 - Python 3.11+, Node.js 20+, or another supported runtime installed locally
 - (Optional) AWS SAM CLI for local development and deployment
 
@@ -83,7 +83,7 @@ aws lambda update-alias \
 ## Function Code Examples
 
 ```python
-# app.py - API Gateway handler with structured logging
+# app.py - API Gateway REST proxy (v1) sketch; not the function URL/v2 event shape
 import json
 import logging
 import os
@@ -96,7 +96,7 @@ def handler(event, context):
     logger.info("Request: %s %s", event["httpMethod"], event["path"])
 
     try:
-        body = json.loads(event.get("body", "{}"))
+        body = json.loads(event.get("body") or "{}")
         result = process_request(body)
 
         return {
@@ -173,10 +173,4 @@ aws lambda update-function-configuration \
   --layers "arn:aws:lambda:us-east-1:123456789012:layer:common-deps:1"
 
 # List available layers
-aws lambda list-layers --compatible-runtime python3.12
-```
-
-## Event Source Mappings
-
-```bash
-# SQS trigger with batch pr
+aws lambda list-laye

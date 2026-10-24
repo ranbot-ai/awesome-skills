@@ -40,7 +40,7 @@ Provides a standardized, auditable framework and data model for **AI Agent Capab
 | 6 | Tool Hallucination Rate % | `number` | `NUMERIC(5,2)` | `number` | Number | `0.60` |
 | 7 | Average Tokens Per Task | `number` | `INTEGER` | `integer` | Number | `42500` |
 | 8 | Cost Per Solved Task USD | `currency` | `NUMERIC(8,4)` | `number` | Number | `0.3420` |
-| 9 | Regression Verdict | `select` | `VARCHAR(32)` | `string` | Select | `Superior` |
+| 9 | Regression Verdict | `select` | `VARCHAR(32)` | `string` | Select | `Improved with evidence` |
 | 10 | Evaluation Lead | `text` | `VARCHAR(64)` | `string` | Text | `Ranjeet2063` |
 | 11 | Benchmark Execution Date | `date` | `DATE` | `string, format: date` | Date | `2026-10-01` |
 
@@ -102,4 +102,4 @@ How do I configure and track AI Agent Capability Evaluation & Benchmarking for o
 ## Security & Safety Notes
 
 - Generating a register is distinct from running paid providers, transmitting private tasks, changing CI or deploying; those effects need actual authorization.
-- Use synthetic dummy keys and mock 
+- Use synthetic dummy 

@@ -42,6 +42,10 @@ Some questions allow multiple selections:
 
 When `multiSelect: true`, user can pick 2+ options. Results are joined with " + ".
 
+## Score and instruction-file boundaries
+
+A 100% score measures filled slots under the installed CLI rules, not complete or correct project knowledge. Keep unknowns explicit instead of inventing answers to improve the score. Use the question tools actually available in the host; the examples below are Claude-specific shapes. Before any `faf sync`, inspect its diff/output paths and preserve existing CLAUDE.md/AGENTS.md instructions and user edits; filling context does not authorize overwriting repository policy or syncing secrets into agent-readable files. Report sync only if it actually ran and its output was checked.
+
 ## Workflow
 
 ### Step 1: Check Current State
@@ -153,27 +157,4 @@ If score < 100: Continue with remaining questions
     {"label": "Vercel", "description": "Frontend/serverless"},
     {"label": "AWS", "description": "Amazon Web Services"},
     {"label": "Local only", "description": "Not deployed"},
-    {"label": "Other", "description": "Different platform"}
-  ]
-}
-```
-
-### Multi-Select Questions (pick multiple, joined with " + ")
-
-#### stack.testing
-```json
-{
-  "question": "What testing tools/methodologies do you use?",
-  "header": "Testing",
-  "multiSelect": true,
-  "options": [
-    {"label": "pytest", "description": "Python testing framework"},
-    {"label": "Jest", "description": "JavaScript testing"},
-    {"label": "Vitest", "description": "Vite-native testing"},
-    {"label": "WJTTC", "description": "Championship methodology (Layer 2)"}
-  ]
-}
-```
-**Result format:** `pytest + WJTTC` (industry first, WJTTC follows)
-
-**O
+    {"la

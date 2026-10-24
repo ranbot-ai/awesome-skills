@@ -115,7 +115,7 @@ class FlatCard extends StatelessWidget {
             onPressed: () {},
             style: ElevatedButton.styleFrom(
               elevation: 0,           // Critical: no shadow
-              backgroundColor: Colors.blue,
+              backgroundColor: const Color(0xFF125A94),
               foregroundColor: Colors.white,
               shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.zero, // Sharp corners
@@ -134,7 +134,7 @@ class FlatCard extends StatelessWidget {
 - Override `ThemeData` globally to kill all elevation:
   ```dart
   ThemeData(
-    cardTheme: const CardTheme(elevation: 0, shape: RoundedRectangleBorder()),
+    cardTheme: const CardThemeData(elevation: 0, shape: RoundedRectangleBorder()),
     appBarTheme: const AppBarTheme(elevation: 0),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(elevation: 0),
   )
@@ -153,6 +153,4 @@ const FlatCard = () => (
     // NO elevation or shadow properties
   }}>
     <Text style={{ fontSize: 18, fontWeight: '700', marginBottom: 16 }}>
-      Card Title
-    </Text>
-  
+      Card Titl

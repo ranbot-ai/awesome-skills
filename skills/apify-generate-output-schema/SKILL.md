@@ -18,7 +18,7 @@ You are generating output schema files for an Apify Actor. The output schema tel
 ## Core principles
 
 - **Analyze code first**: Read the Actor's source to understand what data it actually pushes to the dataset — never guess
-- **Every field is nullable**: APIs and websites are unpredictable — always set `"nullable": true`
+- **Derive nullability from evidence**: Missing, null and guaranteed fields differ; preserve actual type/runtime contracts and verify Apify validator support.
 - **Anonymize examples**: Never use real user IDs, usernames, or personal data in examples
 - **Verify against code**: If TypeScript types exist, cross-check the schema against both the type definition AND the code that produces the values
 - **Reuse existing patterns**: Before generating schemas, check if other Actors in the same repository already have output schemas — match their structure, naming conventions, description style, and formatting
@@ -60,7 +60,7 @@ Present findings to user: list all discovered dataset output fields, key-value s
 
 ### File structure
 
-```json
+```jsonc
 {
     "actorSpecification": 1,
     "fields": {
@@ -98,5 +98,4 @@ Present findings to user: list all discovered dataset output fields, key-value s
 If existing output schemas were found in the repository during Phase 1 (step 5), follow their conventions:
 - Match the **description writing style** (sentence case vs. lowercase, period vs. no period, etc.)
 - Match the **field naming convention** (camelCase vs. snake_case) — this must also match the actual keys produced by the Actor code
-- Match the **example value style** (e.g., date formats, URL patterns, placeholder names)
-- Match t
+- Match the **example value style** (e

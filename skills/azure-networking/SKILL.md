@@ -12,6 +12,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azur
 
 Design and implement Azure network infrastructure including VNets, subnets, NSGs, VNet peering, private endpoints, Azure Firewall, and Application Gateway. Covers both az CLI commands and Terraform configurations for production hub-spoke topologies.
 
+Examples provision billable infrastructure and alter network access. Confirm tenant/subscription/region, CIDR overlap, target resources, approved exposure and rollback before mutation; inventory existing routes/rules first. These fragments are not a complete production topology.
+
 ## Prerequisites
 
 ```bash
@@ -183,33 +185,10 @@ az network nsg rule create \
   --source-address-prefixes 10.1.2.0/24 \
   --destination-port-ranges 1433
 
-# Associate NSG with subnet
-az network vnet subnet update \
-  --resource-group networking-rg \
-  --vnet-name spoke-prod-vnet \
-  --name web-subnet \
-  --network-security-group web-nsg
-
-az network vnet subnet update \
-  --resource-group networking-rg \
-  --vnet-name spoke-prod-vnet \
-  --name app-subnet \
-  --network-security-group app-nsg
-
-az network vnet subnet update \
-  --resource-group networking-rg \
-  --vnet-name spoke-prod-vnet \
-  --name data-subnet \
-  --network-security-group data-nsg
-
-# View effective NSG rules
-az network nic list-effective-nsg \
-  --resource-group networking-rg \
-  --name myvm-nic \
-  --output table
-```
-
-## VNet Peering
-
-```bash
-# Peer hub to sp
+# Explicit deny is required for app/data isolation: default AllowVNetInBound
+# otherwise permits other VNet traffic despite the narrow allow rules above.
+for tier in app data; do
+  az network nsg rule create --resource-group networking-rg \
+    --nsg-name "${tier}-nsg" --name DenyOtherInbound --priority 4096 \
+    --direction Inbound --access Deny --protocol '*' \
+    --source-address-prefixes '*' 

@@ -51,7 +51,7 @@ Design the data layer right from the start to avoid costly rework. Focus on choo
 - **Document stores**: MongoDB, Firestore, RavenDB, DocumentDB
 - **Key-value stores**: Redis, DynamoDB, etcd, Memcached
 - **Wide-column stores**: Cassandra, HBase, ScyllaDB, Bigtable
-- **Multi-model databases**: ArangoDB, OrientDB, FaunaDB, CosmosDB
+- **Multi-model databases**: ArangoDB, OrientDB, version-supported alternatives, CosmosDB
 - **Decision frameworks**: Consistency vs availability trade-offs, CAP theorem implications
 - **Technology assessment**: Performance characteristics, operational complexity, cost implications
 - **Hybrid architectures**: Polyglot persistence, multi-database strategies, data synchronization
@@ -87,4 +87,4 @@ Design the data layer right from the start to avoid costly rework. Focus on choo
 - **JSON indexing**: JSONB GIN indexes, expression indexes, path-based indexes
 - **Unique constraints**: Primary keys, unique indexes, compound uniqueness
 - **Index planning**: Query pattern analysis, index selectivity, cardinality considerations
-- **Index maintenance**: Bloat management,
+- **Index maintenan

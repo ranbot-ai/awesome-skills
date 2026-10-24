@@ -3,7 +3,7 @@ name: context-agent
 description: Agente de contexto para continuidade entre sessoes. Salva resumos, decisoes, tarefas pendentes e carrega briefing automatico na sessao seguinte. 
 category: AI & Agents
 source: antigravity
-tags: [python, claude, ai, agent, cro]
+tags: [python, claude, ai, agent, document, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/context-agent
 ---
 
@@ -41,8 +41,8 @@ Agente de contexto para continuidade entre sessoes. Salva resumos, decisoes, tar
 
 ## Como Funciona
 
-Continuidade perfeita entre sessões do Claude Code. Captura, comprime e
-restaura contexto automaticamente — tópicos, decisões, tarefas, erros,
+Continuidade assistida entre sessões do Claude Code. Captura, comprime e
+restaura contexto por comandos manuais — tópicos, decisões, tarefas, erros,
 arquivos modificados e descobertas técnicas.
 
 ## Localização
@@ -154,4 +154,4 @@ reconstrói índice de busca.
 - **Arquivos modificados**: quais arquivos foram editados/criados
 - **Descobertas**: insights técnicos importantes
 - **Erros resolvidos**: problemas e suas soluções
-- **Questões em aberto**: perguntas sem respost
+- **Questões em aberto**: perguntas sem r

@@ -63,6 +63,10 @@ workspace/
 | **Rule** | Defines how to build a target |
 | **Aspect** | Cross-cutting build behavior |
 
+## Version and remote-execution boundaries
+
+Templates are historical fragments, not a runnable workspace: verify the pinned Bazel major, Bzlmod versus legacy WORKSPACE support, all rule repositories/toolchains and real archive checksums. The snippets omit rules_ts, rules_jest and pip setup; do not invent those dependencies or accept `sha256="..."`. Remote cache/execution and build-event backends can receive source, environment and artifacts; require approved endpoints, TLS, scoped credentials and separate write trust for untrusted PRs. A build itself executes repository rules/actions. Record cold/warm cache state and equivalent targets before claiming speedup; query output counts packages, not total action nodes.
+
 ## Templates
 
 ### Template 1: WORKSPACE Configuration
@@ -175,41 +179,4 @@ load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
 load("@aspect_rules_js//js:defs.bzl", "js_library")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 
-npm_link_all_packages(name = "node_modules")
-
-ts_project(
-    name = "utils_ts",
-    srcs = glob(["src/**/*.ts"]),
-    declaration = True,
-    source_map = True,
-    tsconfig = "//:tsconfig.json",
-    deps = [
-        ":node_modules/@types/node",
-    ],
-)
-
-js_library(
-    name = "utils",
-    srcs = [":utils_ts"],
-    visibility = ["//visibility:public"],
-)
-
-# Tests
-load("@aspect_rules_jest//jest:defs.bzl", "jest_test")
-
-jest_test(
-    name = "utils_test",
-    config = "//:jest.config.js",
-    data = [
-        ":utils",
-        "//:node_modules/jest",
-    ],
-    node_modules = "//:node_modules",
-)
-```
-
-### Template 4: Python Library BUILD
-
-```python
-# libs/ml/BUILD.bazel
-load("@rules_python//python:defs.bzl", "py_library", "py_test", "py_b
+npm_link_all_packages(na

@@ -3,7 +3,7 @@ name: cloud-penetration-testing
 description: Conduct comprehensive security assessments of cloud infrastructure across Microsoft Azure, Amazon Web Services (AWS), and Google Cloud Platform (GCP). 
 category: Security & Systems
 source: antigravity
-tags: [python, api, ai, automation, workflow, document, security, aws, gcp, azure]
+tags: [api, ai, automation, workflow, document, security, aws, gcp, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cloud-penetration-testing
 ---
 
@@ -31,6 +31,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/clou
 Read [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.
 
 ## Prerequisites
+
+The setup recipes are historical. Pin supported tools, verify installer integrity and use a review directory; do not activate fetched code or install privileged modules without setup authorization. MSOnline/AzureAD are retired: use current Microsoft Graph migration guidance rather than the legacy commands. Review every bundled reference as inert source before any operation. These examples require an approved account/resource allowlist and private, redacted evidence; discovery is not scope expansion.
 
 ### Required Tools
 ```bash
@@ -77,30 +79,20 @@ pip install scoutsuite pacu
 ### Technical Limitations
 - MFA may prevent credential-based attacks
 - Conditional Access policies may restrict access
-- CloudTrail/Activity Logs record all API calls
+- CloudTrail/Activity Log coverage depends on event configuration, service and retention
 - Some resources require specific regional access
 
 ### Detection Considerations
-- Cloud providers log all API activity
+- Cloud logging coverage must be verified; missing events do not prove no activity
 - Unusual access patterns trigger alerts
 - Use slow, deliberate enumeration
 - Consider GuardDuty, Security Center, Cloud Armor
 
 ## Examples
 
-### Example 1: Azure Password Spray
+### Example 1: Password-policy assessment
 
-**Scenario:** Test Azure AD password policy
-
-```powershell
-# Using MSOLSpray with FireProx for IP rotation
-# First create FireProx endpoint
-python fire.py --access_key <key> --secret_access_key <secret> --region us-east-1 --url https://login.microsoft.com --command create
-
-# Spray passwords
-Import-Module .\MSOLSpray.ps1
-Invoke-MSOLSpray -UserList .\users.txt -Password "Spring2024!" -URL https://<api-gateway>.execute-api.us-east-1.amazonaws.com/fireprox
-```
+Use an approved test-account list and lockout/rate budget. Inspect policy configuration first; any authentication test needs the exact-command confirmation gate above. Do not deploy rotating proxies, log attempted passwords or treat authentication errors as success.
 
 ### Example 2: AWS S3 Bucket Enumeration
 
@@ -117,7 +109,7 @@ while read bucket; do
 done < buckets.txt
 
 # Download interesting bucket
-aws s3 sync s3://misconfigured-bucket ./loot/
+# Do not bulk-download production data; use an approved harmless canary.
 ```
 
 ### Example 3: GCP Service Account Compromise

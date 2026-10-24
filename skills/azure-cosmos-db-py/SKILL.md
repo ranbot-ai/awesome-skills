@@ -17,6 +17,10 @@ The integration fixture in `assets/conftest_template.py` connects to the configu
 
 # Cosmos DB Service Implementation
 
+Review corrections (2026-10-23): these snippets are incomplete application starters. Initialize the synchronous client during startup outside the event loop, serialize initialization and close client/credential on shutdown. A cached failed initialization needs an explicit bounded recovery path. `azure.cosmos.aio` is also available; the SDK is not synchronous-only. Enforce tenant authorization independently of partition routing; the bundled client assumes `/workspaceId`. Never accept caller SQL fragments. Distinguish unavailable storage (503) from not-found (404) and empty data; the older graceful-default examples below illustrate a policy to avoid for authoritative reads. Use ETag conditional writes to prevent lost updates, enforce uniqueness atomically, and implement cross-partition moves with conflict-aware compensation; read-then-upsert/delete is not atomic. No live Cosmos behavior is verified by these templates.
+
+
+
 Build production-grade Azure Cosmos DB NoSQL services following clean code, security best practices, and TDD principles.
 
 ## Installation
@@ -98,9 +102,13 @@ from starlette.concurrency import run_in_threadpool
 _cosmos_container = None
 
 def _is_emulator_endpoint(endpoint: str) -> bool:
-    return "localhost" in endpoint or "127.0.0.1" in endpoint
+    from urllib.parse import urlsplit
+    parsed = urlsplit(endpoint)
+    return (parsed.scheme == "https" and parsed.username is None
+            and parsed.password is None
+            and parsed.hostname in {"localhost", "127.0.0.1", "::1"})
 
-async def get_container():
+def get_container():
     global _cosmos_container
     if _cosmos_container is None:
         if _is_emulator_endpoint(settings.cosmos_endpoint):
@@ -120,40 +128,3 @@ async def get_container():
 ```
 
 **Full implementation**: See references/client-setup.md
-
-### 2. Pydantic Model Hierarchy
-
-Use five-tier model pattern for clean separation:
-
-```python
-class ProjectBase(BaseModel):           # Shared fields
-    name: str = Field(..., min_length=1, max_length=200)
-
-class ProjectCreate(ProjectBase):       # Creation request
-    workspace_id: str = Field(..., alias="workspaceId")
-
-class ProjectUpdate(BaseModel):         # Partial updates (all optional)
-    name: Optional[str] = Field(None, min_length=1)
-
-class Project(ProjectBase):             # API response
-    id: str
-    created_at: datetime = Field(..., alias="createdAt")
-
-class ProjectInDB(Project):             # Internal with docType
-    doc_type: str = "project"
-```
-
-### 3. Service Layer Pattern
-
-```python
-class ProjectService:
-    def _use_cosmos(self) -> bool:
-        return get_container() is not None
-    
-    async def get_by_id(self, project_id: str, workspace_id: str) -> Project | None:
-        if not self._use_cosmos():
-            return None
-        doc = await get_document(project_id, partition_key=workspace_id)
-        if doc is None:
-            return None
-        return self._doc_t

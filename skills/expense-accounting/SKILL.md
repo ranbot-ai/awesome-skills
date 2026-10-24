@@ -32,10 +32,7 @@ payable, TDS and department are payment-stage facts. They do not appear in an ex
 setup. If the user asks for payment tracking, that is a deliberate scope change and the
 fields are added then, not by default.
 
-**The document must be the real document.** Where no formal invoice exists, an internal
-supporting document is defensible only where the transaction would not normally produce
-one - purchases from farmers and individual suppliers, wage sheets, rent agreements and
-rent records. The absence of an invoice does **not** automatically justify raising a
+**The document must be the real document.** Where no formal invoice exists, the adequacy of an internal supporting document depends on the jurisdiction, transaction and reviewer decision; farmer purchases, wages or rent are examples to investigate, not blanket exemptions. The absence of an invoice does **not** automatically justify raising a
 purchase "Kharche/Kharpai". `Document Type`, `Internal Support Justified` and
 `Justification` exist to hold that decision, and a reviewer holds it, not this skill. No
 label in the `Document Type` list makes any document legally sufficient.
@@ -103,4 +100,4 @@ Then, only as needed:
   rate and the amount recorded separately? If TDS/withholding is not used, TDS fields are
   absent from the schema rather than optional-but-present.
 - **Accounting** - Do you assign each expense to a ledger account? Who decides the account?
-- **Approval** - Do
+- **Approval** - Does so

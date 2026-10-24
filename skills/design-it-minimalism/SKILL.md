@@ -3,7 +3,7 @@ name: minimalism
 description: Web and App implementation guide for the Minimalism design style. Trigger when the user wants simple layouts, lots of whitespace, few colors, and clear hierarchy. 
 category: Creative & Media
 source: antigravity
-tags: [react, ai, llm, design, cro]
+tags: [react, api, ai, llm, design, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-it/minimalism
 ---
 
@@ -19,7 +19,7 @@ Use this sub-style when the user's request matches the aesthetic described above
 ## Core Principles
 1. **Extreme Whitespace**: Margins and padding should be double what you initially think is appropriate.
 2. **Strict Typography**: Rely on font weights and sizes to establish hierarchy, not colors or boxes.
-3. **Absence of Decor**: No borders, no drop shadows, no background textures.
+3. **Absence of Decor**: Minimize decorative borders, shadows and textures; preserve necessary focus, control boundaries and state cues.
 
 ## Visual DNA
 - **Colors**: Best paired with **Minimalist Slate** or **Modern Editorial** palettes. Backgrounds must be absolute (pure or off-white/black).
@@ -151,5 +151,4 @@ class MinimalScreen extends StatelessWidget {
   }
 }
 ```
-- Set `elevation: 0` on **all** Material widgets (`AppBar`, `Card`, `FloatingActionButton`).
-- Use `SizedBox(height: 48)` or lar
+- Set `elevation: 0` on **all** Material widgets (`AppBar`, `Card`, `

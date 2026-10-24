@@ -35,17 +35,17 @@ Scan the text, record which patterns hit *and where*, then compute the AI-smell 
 #### The AI-smell index (deterministic — the same formula must be used before and after)
 
 1. **Count hits per paragraph.** For each pattern, count one hit per paragraph — repeats inside the same paragraph do not inflate the score.
-2. **Weight by evidence strength.** 强模式 = **2 points**; patterns the catalog marks 弱证据 (破折号 / 限定词 / 被动与无主语 / "的"-字堆叠 / 引号不统一) = **1 point**.
+2. **Weight by evidence strength.** 强模式 = **2 points**; patterns in the rhythm group 8–14 plus pattern 28 (the catalog inconsistently repeated a narrower list; use these explicit IDs) = **1 point**.
 3. **Normalize by length.** `D = 加权总分 / max(1, 总字数 / 100)` — weighted hits per 100 characters.
 4. **Index.** `AI味指数 = min(100, round(D × 10))`.
-5. **Bands.** 0–20 基本像人写 · 21–45 轻度 AI 味 · 46–75 明显 AI 味 · 76–100 一眼假.
+5. **Bands.** 0–20 少量编辑线索 · 21–45 部分重复表达 · 46–75 较多模板表达 · 76–100 高密度编辑线索；不表示作者身份或造假.
 6. **Report three numbers, not one:** 命中处数 / 加权总分 / AI味指数. After rewriting, recompute with the same formula so the delta is comparable. If a hit cannot be attributed to a catalogued pattern, report only the observable hit count and say the index is not computed — never invent a number.
 
-Worked example (the sample below): 8 hits in 77 characters, 6 strong (6 × 2 = 12) + 2 weak (2 × 1 = 2) → 加权总分 14 → D = 14 / 0.77 ≈ 18.2 → 指数 = min(100, 182) = **100/100**.
+Worked example (the sample below): 8 hits in 77 characters, 6 strong (6 × 2 = 12) + 2 weak (2 × 1 = 2) → 加权总分 14 → D = 14 / max(1, 0.77) = 14 → 指数 = min(100, 140) = **100/100**.
 
 ```
 AI 味体检报告
-总字数 77 ｜ 命中 8 处 ｜ 加权 14 ｜ AI味指数 100/100（一眼假）
+总字数 77 ｜ 命中 8 处 ｜ 加权 14 ｜ 编辑线索指数 100/100（非作者身份判断）
 机械连接 ×3   官方黑话 ×2   空洞拔高 ×2   夸张词 ×1
 ```
 
@@ -60,15 +60,10 @@ Work through the hit list one pattern at a time. Correct each pattern by its own
 
 ### Step 3: Verify the rewrite
 
+Define paragraph splitting, character counting (including punctuation/whitespace policy) and a location ledger before computing. Manual pattern judgments are subjective: the formula is deterministic only given the same hit ledger and counting policy. Do not claim an engine ran or an authorship probability. Preserve logical negations, caveats, quotes and attribution even when they trigger a style pattern.
+
 Re-score the rewritten text with the same Step 1 formula. The index should drop and the semantic content must be preserved — report the before/after triple (命中处数 / 加权总分 / 指数), how many patterns were cleared, and confirm that no fact was added or lost. A rewrite that lowers the score by deleting facts is a failed edit; so is one that raises the count of facts in the text.
 
 ### Step 4: Optional — style clone, variants, tone, review
 
-- **Style clone**: supply a reference sample (an old article, a novel fragment, a writer you like) and match its sentence rhythm, vocabulary and colloquial ratio.
-- **Variants**: produce 2-6 clearly different versions (short and punchy / loose and spoken / vivid) for headline and ad-copy A/B tests.
-- **Tone**: re-target the same content to casual, formal, marketing, humor or direct register.
-- **Review**: score the finished text on Hook / Pacing / Emotion / AI-Smell / Clarity / Persuasion / Structure / Readability, plus three concrete improvements.
-
-## Examples
-
-### Example 1: Business copy with s
+- **Style clone**: supply a reference sample (an old article, a novel fragment, a writer you like) and match its

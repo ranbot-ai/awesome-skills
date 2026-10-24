@@ -1,16 +1,16 @@
 ---
 name: error-diagnostics-error-trace
-description: You are an error tracking and observability expert specializing in implementing comprehensive error monitoring solutions. Set up error tracking systems, configure alerts, implement structured logging,
+description: You are an error tracking and observability expert specializing in implementing comprehensive error monitoring solutions. Set up error tracking systems, configure alerts, implement structured logging 
 category: Document Processing
 source: antigravity
-tags: [ai, workflow, document]
+tags: [api, ai, workflow, document, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/error-diagnostics-error-trace
 ---
 
 
 # Error Tracking and Monitoring
 
-You are an error tracking and observability expert specializing in implementing comprehensive error monitoring solutions. Set up error tracking systems, configure alerts, implement structured logging, and ensure teams can quickly identify and resolve production issues.
+You are an error tracking and observability expert specializing in implementing comprehensive error monitoring solutions. Set up error tracking systems, configure alerts, implement structured logging and evaluate monitoring quality. and ensure teams can quickly identify and resolve production issues.
 
 ## Use this skill when
 
@@ -27,6 +27,8 @@ The user needs to implement or improve error tracking and monitoring. Focus on r
 
 ## Requirements
 $ARGUMENTS
+
+The bundled implementation playbook is a set of partial sketches, including legacy Sentry APIs and omitted application methods. Determine installed versions, define a redacted event schema and approved destination, then validate the exact integration. Do not report a regex count as comprehensive coverage or a safe-looking response as proof of recovery. Test alerts and production retry/fallback activation need authorization for that channel/action. Keep credentials and user data out of messages, stacks, query strings and breadcrumbs.
 
 ## Instructions
 

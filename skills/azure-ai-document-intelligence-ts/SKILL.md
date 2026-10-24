@@ -14,6 +14,8 @@ Extract text, tables, and structured data from documents using prebuilt and cust
 
 ## Installation
 
+Pin compatible REST SDK/API versions and confirm model availability in the target region. Document uploads and URL analysis disclose content to Azure and can incur charges: use only authorized documents, short-lived scoped SAS and approved retention settings. Never log extracted IDs, medical/bank data or SAS URLs. Confidence scores are not calibrated guarantees; validate material totals/dates against the original document and route uncertain results for review. Bound polling with a deadline/abort signal and inspect terminal operation status; casting a response type does not prove success.
+
 ```bash
 npm install @azure-rest/ai-document-intelligence @azure/identity
 ```
@@ -154,6 +156,7 @@ const initialResponse = await client
     body: { urlSource: receiptUrl }
   });
 
+if (isUnexpected(initialResponse)) throw initialResponse.body.error;
 const poller = getLongRunningPoller(client, initialResponse);
 const result = (await poller.pollUntilDone()).body as AnalyzeOperationOutput;
 
@@ -162,32 +165,4 @@ if (receipt) {
   console.log("Merchant:", receipt.fields?.MerchantName?.content);
   console.log("Total:", receipt.fields?.Total?.content);
   
-  for (const item of receipt.fields?.Items?.values || []) {
-    console.log("Item:", item.properties?.Description?.content);
-    console.log("Price:", item.properties?.TotalPrice?.content);
-  }
-}
-```
-
-## List Document Models
-
-```typescript
-import DocumentIntelligence, { isUnexpected, paginate } from "@azure-rest/ai-document-intelligence";
-
-const response = await client.path("/documentModels").get();
-
-if (isUnexpected(response)) {
-  throw response.body.error;
-}
-
-for await (const model of paginate(client, response)) {
-  console.log(model.modelId);
-}
-```
-
-## Build Custom Model
-
-```typescript
-const initialResponse = await client.path("/documentModels:build").post({
-  body: {
-    modelId: "my-custom-mo
+  for (const item of receipt.fields?.Ite

@@ -3,7 +3,7 @@ name: clean-code
 description: This skill embodies the principles of "Clean Code" by Robert C. Martin (Uncle Bob). Use it to transform "code that works" into "code that is clean." 
 category: Development & Code Tools
 source: antigravity
-tags: [python, ai, aws, rag]
+tags: [python, ai, design, security, aws, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/clean-code
 ---
 
@@ -21,6 +21,8 @@ Use this skill when:
 - **Reviewing Pull Requests**: To provide constructive, principle-based feedback.
 - **Refactoring legacy code**: To identify and remove code smells.
 - **Improving team standards**: To align on industry-standard best practices.
+
+These are design heuristics, not universal language rules or authority to change behavior. Follow the actual repository conventions; exceptions versus result types, nullability, argument counts and test cadence depend on the language and task. Preserve necessary rationale, security and license comments. Refactor only within scope and verify the relevant behavior.
 
 ## 1. Meaningful Names
 - **Use Intention-Revealing Names**: `elapsedTimeInDays` instead of `d`.

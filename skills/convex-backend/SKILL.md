@@ -74,6 +74,10 @@ export default defineSchema({
 });
 ```
 
+## Security completeness
+
+The snippets below omit the application membership/ownership model and are not deployable authorization examples. Implement a shared server-side access check before `listByChannel`, `send`, paid `generateResponse`, upload URL generation and file URL reads. Validate identity using a stable provider subject/token identifier, not an unchecked/non-unique email. Bound body/prompt/limit values, reject missing channels and cross-tenant IDs, check external HTTP status/content shape and avoid duplicate paid requests. An `isPrivate` field alone enforces nothing. Use an approved dev deployment; `convex dev` may synchronize to cloud. Verify current quotas/pricing rather than assuming the stated free allowance.
+
 ## Queries (Real-Time Reads)
 
 ```typescript
@@ -179,37 +183,4 @@ export const generateResponse = action({
 
 ## Scheduled Functions (Cron Jobs)
 
-```typescript
-// convex/crons.ts
-import { cronJobs } from "convex/server";
-import { internal } from "./_generated/api";
-
-const crons = cronJobs();
-
-// Run every hour
-crons.interval("cleanup old messages", { hours: 1 }, internal.maintenance.cleanupOldMessages);
-
-// Run daily at midnight UTC
-crons.cron("daily report", "0 0 * * *", internal.reports.generateDailyReport);
-
-export default crons;
 ```
-
-## Auth Integration
-
-```typescript
-// convex/auth.config.ts
-export default {
-  providers: [
-    {
-      domain: process.env.AUTH_DOMAIN,
-      applicationID: "convex",
-    },
-  ],
-};
-```
-
-```typescript
-// React client setup
-import { ConvexProviderWithClerk } from "convex/react-clerk";
-import { ClerkProvider, useAuth } from "@clerk/clerk-r

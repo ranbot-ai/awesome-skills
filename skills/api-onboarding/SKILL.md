@@ -18,7 +18,7 @@ The time between a developer discovering your API and successfully making their 
 
 ## Overview
 
-Time-to-First-API-Call (TTFAC) is the single most predictive metric for developer adoption. Developers who succeed quickly become active users. Developers who struggle leave—often silently.
+Time-to-First-API-Call (TTFAC) is a useful onboarding metric to compare with activation and retention. Developers who succeed quickly become active users. Developers who struggle leave—often silently.
 
 This skill covers:
 - Measuring and optimizing TTFAC
@@ -26,6 +26,8 @@ This skill covers:
 - Creating effective sandbox environments
 - Building interactive documentation
 - Identifying and fixing common failure points
+
+Examples are illustrative API/SDK sketches. Sandbox status must be enforced server-side with isolated keys/accounts; a caller-controlled sandbox boolean is not a security boundary. Test card numbers are provider-specific and only valid in the documented test environment. Confirm provider behavior instead of claiming universal success. Instrument consented, pseudonymous event IDs and stable start/success definitions; include abandoned attempts and exclude API keys, payloads, replay captures and personal data. Package-download counts do not establish an individual SDK installation.
 
 ## Before You Start
 
@@ -50,7 +52,7 @@ Time-to-First-API-Call measures the elapsed time from a developer's first intera
 5. **Execution time**: Running first request
 6. **Success time**: Receiving successful response
 
-### TTFAC Benchmarks
+### Illustrative TTFAC Targets
 
 | Rating | TTFAC | Developer Experience |
 |--------|-------|---------------------|
@@ -82,7 +84,7 @@ analytics.track('first_successful_call');
 
 ## Authentication Simplification
 
-Authentication is the #1 source of onboarding friction. Simplify ruthlessly.
+Measure authentication friction in your own funnel. Preserve the security and abuse controls required by the product.
 
 ### The Ideal Auth Flow
 
@@ -116,7 +118,7 @@ Make keys visible on dashboard home.
    - Token exchange
    - Token refresh handling
 ```
-For getting started, provide simple API keys.
+Choose auth for the threat model; delegated user access may require OAuth from the first call. Provide a mock/demo flow when production authentication cannot safely be simplified.
 
 **The Verification Gauntlet**
 ```
@@ -141,38 +143,4 @@ Minimize friction for first API call.
 
 **Pre-populate Examples**
 ```
-✅ # Your API key is pre-filled in these examples
-   curl -H "Authorization: Bearer sk_test_YOUR_KEY" ...
-```
-
-**Delay Production Requirements**
-```
-✅ Test mode: Instant access
-   Production mode: Add payment, verify identity (later)
-```
-
-## Sandbox Environments
-
-A sandbox removes the fear of "breaking something" and lets developers experiment freely.
-
-### Sandbox Requirements
-
-**Instant Access**: No approval, no payment, no complex setup
-
-**Realistic Behavior**: Same API, same responses, same errors
-
-**Clear Boundaries**: Obvious when in sandbox vs. production
-
-**Reset Capability**: Easy way to start fresh
-
-**Generous Limits**: Don't rate-limit experimentation
-
-### Sandbox Implementation Patterns
-
-**Separate Endpoints**
-```
-Production: api.example.com
-Sandbox:    sandbox-api.example.com
-```
-
-**Key Prefixe
+✅ # Secret supplied by the appro

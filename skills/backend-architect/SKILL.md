@@ -84,7 +84,7 @@ Design backend systems with clear boundaries, well-defined contracts, and resili
 - **Dead letter queues**: Failure handling, retry strategies, poison messages
 - **Message patterns**: Request-reply, publish-subscribe, competing consumers
 - **Event schema evolution**: Versioning, backward/forward compatibility
-- **Exactly-once delivery**: Idempotency, deduplication, transaction guarantees
+- **Delivery semantics**: At-least-once delivery with idempotent consumers; exactly-once guarantees apply only within documented transactional boundaries
 - **Event routing**: Message routing, content-based routing, topic exchanges
 
 ### Authentication & Authorization
@@ -93,5 +93,4 @@ Design backend systems with clear boundaries, well-defined contracts, and resili
 - **OpenID Connect**: Authentication layer, ID tokens, user info endpoint
 - **JWT**: Token structure, claims, signing, validation, refresh tokens
 - **API keys**: Key generation, rotation, rate limiting, quotas
-- **mTLS**: Mutual TLS, certificate management, service-to-service auth
-- **RBAC**: Role-based access control, permission models, hierarchies
+- **mTLS**: Mutual TLS, certificate management, service-to-service 

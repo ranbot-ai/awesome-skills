@@ -29,6 +29,7 @@ AZURE_CONTAINERREGISTRY_ENDPOINT=https://<registry-name>.azurecr.io
 ### Entra ID (Recommended)
 
 ```python
+import os
 from azure.containerregistry import ContainerRegistryClient
 from azure.identity import DefaultAzureCredential
 
@@ -216,22 +217,12 @@ async def list_repos():
 
 ## Clean Up Old Images
 
+Do not execute deletion directly from age or missing tags alone: untagged digests can still be deployed or referenced by multi-architecture manifests. Inventory dependencies and current workloads, present the exact candidate digests and obtain deletion authorization with a retention/recovery policy. Use a dry-run candidate report before the mutating loop below.
+
 ```python
 from datetime import datetime, timedelta, timezone
 
 cutoff = datetime.now(timezone.utc) - timedelta(days=30)
 
 for manifest in client.list_manifest_properties("my-image"):
-    if manifest.last_updated_on < cutoff and not manifest.tags:
-        print(f"Deleting {manifest.digest}")
-        client.delete_manifest("my-image", manifest.digest)
-```
-
-## Client Operations
-
-| Operation | Description |
-|-----------|-------------|
-| `list_repository_names` | List all repositories |
-| `get_repository_properties` | Get repository metadata |
-| `delete_repository` | Delete repository and all images |
-| `li
+    if manifest.last_updated_on < cutoff and not ma

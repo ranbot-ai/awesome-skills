@@ -20,12 +20,14 @@ Automate Box operations including file upload/download, content search, folder m
 
 ## Setup
 
-**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
+Use an existing approved Rube connection. Endpoint setup alone does not authenticate Box; use the supported host authentication flow within requested scope.
 
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `box`
 3. If connection is not ACTIVE, follow the returned auth link to complete Box OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
+
+Treat these slugs/defaults as historical examples; discovered schemas govern operations. Verify exact enterprise/account, file/folder/version, destination and sharing visibility before requested writes. Collaboration changes and sign requests can notify others or change obligations; require that action scope. Avoid public links by default, protect download URLs, and reconcile uncertain mutations before retrying.
 
 ## Core Workflows
 
@@ -93,12 +95,4 @@ Automate Box operations including file upload/download, content search, folder m
 1. `BOX_GET_FOLDER_INFORMATION` - Verify folder exists and check permissions [Prerequisite]
 2. `BOX_CREATE_FOLDER` - Create a new folder [Required for create]
 3. `BOX_UPDATE_FOLDER` - Rename, move, or update folder settings [Required for update]
-4. `BOX_COPY_FOLDER` - Copy a folder to a new location [Optional]
-5. `BOX_DELETE_FOLDER` - Move folder to trash [Required for delete]
-6. `BOX_PERMANENTLY_REMOVE_FOLDER` - Permanently delete a trashed folder [Optional]
-
-**Key parameters**:
-- `name`: Folder name (no `/`, `\`, trailing spaces, or `.`/`..`)
-- `parent__id`: Parent folder ID (use `"0"` for root)
-- `folder_id`: Target folder ID for operations
-- `parent.id`: Destination fold
+4. `BOX_COPY

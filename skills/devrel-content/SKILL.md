@@ -74,7 +74,7 @@ Use this outline template:
 
 ## Hook (2-3 sentences)
 - State the problem or opportunity
-- Establish credibility ("We migrated 10,000 repos...")
+- Establish credibility with verified experience; never invent migrations, client counts or results
 - Promise what the reader will learn
 
 ## Context (optional)
@@ -126,6 +126,8 @@ Every code example must:
 
 ### Code Example Structure
 
+The following is an editorial template: `your-library` and its Client API are placeholders, not a real installable SDK. Replace them with a pinned, verified package/API, use `.mjs` or configure ESM, and test in an isolated environment before calling the result copy-paste ready.
+
 ```markdown
 First, install the dependencies:
 
@@ -133,10 +135,10 @@ First, install the dependencies:
 npm install your-library axios
 \`\`\`
 
-Now create a file called `fetch-data.js`:
+Now create a file called `fetch-data.mjs`:
 
 \`\`\`javascript
-// fetch-data.js
+// fetch-data.mjs
 import { Client } from 'your-library';
 import axios from 'axios';
 
@@ -164,20 +166,6 @@ fetchUserData('user_123')
 Run it:
 
 \`\`\`bash
-YOUR_API_KEY=sk_test_xxx node fetch-data.js
-\`\`\`
-
-Expected output:
-
-\`\`\`
-Fetched user: Jane Developer
-{ id: 'user_123', name: 'Jane Developer', email: 'jane@example.dev' }
-\`\`\`
-```
-
-### Language-Specific Conventions
-
-| Language | Code Block | Package Install | Env Vars |
-|----------|-----------|-----------------|----------|
-| JavaScript/Node | `javascript` or `js` | `npm install` | `process.env.VAR` |
-| TypeScript
+# Inject YOUR_API_KEY through a secret manager or non-echoed input first.
+node fetch-data.mjs
+\`\

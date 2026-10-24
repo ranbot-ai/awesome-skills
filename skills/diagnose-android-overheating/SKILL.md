@@ -33,7 +33,7 @@ Before collecting data:
 1. Confirm the user owns or is authorized to inspect the device.
 2. Ask what “hot” means: location on the handset, activity, charging state, network type, onset, duration, and whether the heat also occurs while idle.
 3. Record the device model, Android version, recent OS/app changes, charger and cable, ambient conditions, and visible thermal warnings.
-4. Explain that an attached USB cable can charge and warm the device. Use wireless ADB or short capture windows when possible, and compare with the cable disconnected.
+4. Explain that an attached USB cable can charge and warm the device. Prefer short capture windows and compare with the cable disconnected. Use wireless ADB only if it is already configured on a trusted network or the user explicitly approves enabling it; disable it afterward when appropriate.
 5. Select a specific device serial when more than one ADB target is present. Never assume the first listed device is the intended phone.
 
 ## Workflow
@@ -83,8 +83,4 @@ Define one pass/fail comparison before changing anything. Examples:
 - screen on at fixed brightness versus screen off;
 - before versus after the recent OS or app update, when a real reference exists.
 
-Keep workload, duration, brightness, case, charger, ambient conditions, and starting battery level as constant as practical. Timestamp each observation. Avoid benchmarks or synthetic load unless the user explicitly asks and the device is not already thermally stressed.
-
-### 4. Correlate, Do Not Guess
-
-Require at 
+Keep workload, duration, brightness, case, charger, ambient conditions, and starting battery level as constant as practical. Timestamp each observation. Avoid benchmarks or synthetic load

@@ -3,7 +3,7 @@ name: dotnet-backend-patterns
 description: Master C#/.NET patterns for building production-grade APIs, MCP servers, and enterprise backends with modern best practices (2024/2025). 
 category: AI & Agents
 source: antigravity
-tags: [api, mcp, ai, design]
+tags: [api, mcp, ai, template, design]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dotnet-backend-patterns
 ---
 
@@ -28,6 +28,15 @@ Master C#/.NET patterns for building production-grade APIs, MCP servers, and ent
 - The project is not using .NET or C#
 - You only need frontend or client guidance
 - The task is unrelated to backend architecture
+
+## Template boundaries
+
+Examples target .NET 8-era APIs and SQL Server; package/provider versions must be
+pinned and compiled in the destination application. Assets are partial sketches,
+not a standalone project: supply interfaces, DTO namespaces, options and schema.
+Use one shared domain Product type when combining them. Authorization/tenant
+filters precede reads, writes and cache access; the single-tenant sample keys are
+not suitable for multi-tenant data. No migration or production write is implied.
 
 ## Instructions
 

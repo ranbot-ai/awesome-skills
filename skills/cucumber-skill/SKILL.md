@@ -14,6 +14,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cucu
 Use this skill when you need generates Cucumber BDD tests with Gherkin feature files and step definitions in Java, JavaScript, or Ruby. Use when user mentions "Cucumber", "Gherkin", "Feature/Scenario", "Given/When/Then", "BDD". Triggers on: "Cucumber", "Gherkin", "BDD", "Feature file", "Given/When/Then", "step...
 
 
+## Example prerequisites
+
+The feature and step files below are partial sketches, not an executable suite. Supply scenario-scoped browser/page objects, all missing matching steps (including password and error assertions), driver imports, base URL and guaranteed teardown. `reference/playbook.md` is not bundled. Cloud execution transmits test data/screens/video and consumes provider quota: obtain exact environment/disclosure approval first.
+
 ## Core Patterns
 
 ### Feature File (Gherkin)
@@ -181,15 +185,4 @@ Set environment variables: `LT_USERNAME`, `LT_ACCESS_KEY`
 // CucumberHooks.java
 ChromeOptions browserOptions = new ChromeOptions();
 HashMap<String, Object> ltOptions = new HashMap<>();
-ltOptions.put("user", System.getenv("LT_USERNAME"));
-ltOptions.put("accessKey", System.getenv("LT_ACCESS_KEY"));
-ltOptions.put("build", "Cucumber Build");
-ltOptions.put("name", scenario.getName());
-ltOptions.put("platformName", "Windows 11");
-ltOptions.put("video", true);
-browserOptions.setCapability("LT:Options", ltOptions);
-driver = new RemoteWebDriver(new URL("https://hub.lambdatest.com/wd/hub"), browserOptions);
-```
-
-**JavaScript:**
-```
+l

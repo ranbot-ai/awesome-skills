@@ -29,8 +29,7 @@ raised along the way has a visible answer.
 One rule that causes most of the trouble at year end: permanent documents and tax filings
 need current originals, not copies of copies. A registration certificate that lapsed, a
 licence that was never renewed, a return filed only as a screenshot of a portal - each one
-turns into an avoidable exception. Current originals, verified and dated, or the document
-is not there.
+turns into an avoidable exception. Record source, version/date and verification status. Acceptable originals, certified copies and digital filings depend on the auditor and applicable rules; do not mark a valid digital record absent merely because it is a copy.
 
 Layer: Layer 9: Audit. Fits: Growth stage. Table code: n/a.
 
@@ -104,6 +103,4 @@ open_questions: []      # the unanswered ones, in the order worth asking
 
 Build an already requested artifact without asking again. For advice-only requests, give a short recommendation and offer the relevant artifact.
 
-**Recommended approach:** One audit file record per document, tagged to the section of the file it belongs to, carrying the request date, the received date, days pending and any query or adjustment, so the file is assembled continuously instead of hunted for in the last week of the year.
-
-**Why this one:** The ten sections of the audit file are fixed from year to year, so a checklist is the whole job - th
+**Recommended approach:** One audit file record per document, tagged to the section of the file it belongs to, carrying the request date, the received date, days pending and any query or adjustment, so the file is assembled continuously instead of hu

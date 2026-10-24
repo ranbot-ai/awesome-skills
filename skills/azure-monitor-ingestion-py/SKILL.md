@@ -54,6 +54,8 @@ client = LogsIngestionClient(
 )
 ```
 
+Use an authorized endpoint/DCR/stream and schema, with scoped identity permissions; DCE versus DCR ingestion endpoints depend on setup. The 2024 timestamps below are historical sample data, not a current live-ingestion probe. Use approved synthetic current timestamps for validation, redact PII/secrets before upload and confirm retention/charges. Close both client and credential, including failure paths; no logs should be uploaded simply to validate this guide.
+
 ## Upload Custom Logs
 
 ```python
@@ -113,19 +115,9 @@ if failed_logs:
     client.upload(rule_id=rule_id, stream_name=stream_name, logs=failed_logs)
 ```
 
-## Ignore Errors
+## Incomplete uploads
 
-```python
-def ignore_errors(error):
-    pass  # Silently ignore upload failures
-
-client.upload(
-    rule_id=rule_id,
-    stream_name=stream_name,
-    logs=logs,
-    on_error=ignore_errors
-)
-```
+An on_error callback can suppress the default exception. Persist a bounded, protected failure summary and report the upload as partial/failed; never silently discard failed logs or label the whole batch successful. Retry only classified transient failures with bounded backoff, reconciling ambiguous outcomes and duplicate-ingestion impact.
 
 ## Async Client
 
@@ -170,7 +162,7 @@ The SDK automatically:
 - Compresses each chunk with gzip
 - Uploads chunks in parallel
 
-No manual batching needed for large log sets.
+SDK chunking does not bound the application's input memory or total ingestion cost. Limit input bytes/rows, confirm the installed version's batching/concurrency and handle partial success.
 
 ## Client Types
 
@@ -185,22 +177,4 @@ No manual batching needed for large log sets.
 |---------|-------------|
 | **DCE** | Data Collection Endpoint — ingestion URL |
 | **DCR** | Data Collection Rule — defines schema, transformations, destination |
-| **Stream** | Named data flow within a DCR |
-| **Custom Table** | Target table in Log Analytics (ends with `_CL`) |
-
-## DCR Stream Name Format
-
-Stream names follow patterns:
-- `Custom-<TableName>_CL` — For custom tables
-- `Microsoft-<TableName>` — For built-in tables
-
-## Best Practices
-
-1. **Use DefaultAzureCredential** for authentication
-2. **Handle errors gracefully** — use `on_error` callback for partial failures
-3. **Include TimeGenerated** — Required field for all logs
-4. **Match DCR schema** — Log fields must match DCR column definitions
-5. **Use async client** for high-throughput scenarios
-6. **Batch uploads** — SDK handles batching, but send reasonable chunks
-7. **Monitor ingestion** — Check Log Analytics for ingestion status
-8. **Use context ma
+| *

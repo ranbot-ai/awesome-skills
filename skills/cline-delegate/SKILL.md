@@ -1,13 +1,17 @@
 ---
 name: cline-delegate
 description: Delegate coding tasks to the Cline CLI (`cline`) only when the user explicitly requests it, while the orchestrator retains review and landing responsibility. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [node, api, ai, agent]
+tags: [node, api, ai, agent, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cline-delegate
 ---
 
 # Cline Delegate
+
+## Runtime availability gate
+
+This distribution is documentation only: scripts/relay.mjs is absent. Stop before dispatch unless a separately reviewed compatible relay and CLI are actually installed. Do not report result.json, touchedFiles, permission flags or runtime tests as observed merely from these examples. Check the installed version/help and provider/account/data-transfer/cost scope; no automatic installation is authorized by discovery.
 
 ## When to Use
 
@@ -26,7 +30,7 @@ The loop needs only a shell command and file access, so any comparable orchestra
 - The task is small enough to do inline; delegation overhead is not worth it.
 - The `cline` CLI is not installed or authenticated.
 - You require the relay to configure a sandbox. Cline exposes sandbox controls, but this relay
-  leaves them to the CLI environment; use `--plan` when the run must be read-only.
+  leaves them to the CLI environment; use a real read-only sandbox when writes must be prevented; --plan alone is not containment.
 
 ## Prerequisites (check once)
 
@@ -55,7 +59,7 @@ the relay's `--brief`. See [references/writing-the-brief.md](references/writing-
 
 ### 2. Dispatch
 
-Use the bundled relay. It runs `cline --json -v`, streams the brief on stdin behind a fixed
+When a separately reviewed relay is installed, the upstream example uses it. It runs `cline --json -v`, streams the brief on stdin behind a fixed
 positional instruction, captures the JSON event stream, and writes `result.json`.
 
 ```bash
@@ -99,13 +103,4 @@ incomplete, re-dispatch a corrected brief in a fresh run and review again.
 
 The relay explicitly passes Cline's `--auto-approve`, defaulting to `true` in act mode. Cline
 plan mode can request a switch to act mode, so `--plan` forces `--auto-approve false`; the relay
-rejects `--plan --auto-approve true`. That pair is the read-only gate. Cline also exposes sandbox
-through `--data-dir` / `CLINE_SANDBOX`, but the relay does not configure or override it. Plan-first
-for anything risky, then review the plan before a separate act-mode dispatch. Malformed or malicious
-briefs remain dangerous in act mode because commands run as the current user.
-
-## Authorization model
-
-Delegation is something the human opts into. Once briefed, cline works as a tool you approved use
-of. The boundary is: **do not accept conclusions from the self-report**; verify everything on
-disk. For anything touching credentials, production data, o
+rejects `--plan --auto-approve true`. That pair expresses planning intent; it is not an OS-enforced re

@@ -74,6 +74,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/emai
 ## Limitations
 
 - Live mailbox investigation touches personal data; minimize and anonymize.
-- Header analysis cannot detect compromise that leaves no mail trail.
+- Header analysis cannot detect compromise that leaves no mail trail. SPF/DKIM/DMARC results are not a verdict that content is safe. Trust Authentication-Results only from the receiving infrastructure’s verified boundary; attackers can prepend forged headers. Never submit private message URLs or attachments to public analysis services without authorization.
 
 > Adapted from [zhaoxuya520/reverse-skill](https://github.com/zhaoxuya520/reverse-skill) (MIT).

@@ -3,7 +3,7 @@ name: file-uploads
 description: Expert at handling file uploads and cloud storage. Covers S3, Cloudflare R2, presigned URLs, multipart uploads, and image optimization. Knows how to handle large files without blocking. 
 category: AI & Agents
 source: antigravity
-tags: [pdf, api, ai, image, security, rag]
+tags: [typescript, pdf, api, ai, image, security, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/file-uploads
 ---
 
@@ -26,6 +26,8 @@ Prefers presigned URLs over server proxying.
 - Use presigned URLs for direct uploads
 - Stream large files, never buffer
 - Validate on upload, optimize after
+
+Treat code as independent TypeScript fragments requiring actual SDK imports, storage clients and handlers. Magic-byte detection is not malware scanning or proof of a safe image: decode/re-encode approved formats with bounded dimensions/resources, quarantine until validation and serve with safe content headers from a separate origin where appropriate. Authenticate/authorize both presign creation and object access, bind tenant/key/expiry and avoid user-controlled storage paths. For a hard upload range use a provider-supported signed policy such as S3 POST content-length-range or equivalent enforcement; verify actual uploaded size server-side. ContentLength alone is not a cross-provider size limit.
 
 ## Sharp Edges
 
@@ -108,7 +110,7 @@ if (file.size > 10 * 1024 * 1024) {
 const command = new PutObjectCommand({
   Bucket: BUCKET,
   Key: key,
-  ContentLength: expectedSize, // Enforce size
+  ContentLength: expectedSize, // Declared size; not a universal upload-size policy
 });
 
 ### User-controlled filename allows path traversal
@@ -172,7 +174,7 @@ Symptoms:
 
 Why this breaks:
 Presigned URLs grant temporary access. If cached or shared,
-access extends beyond intended scope.
+the bearer URL may be usable by unintended parties during its validity; cached file bytes can persist after URL expiry.
 
 Recommended fix:
 
@@ -184,42 +186,4 @@ const url = await getSignedUrl(s3, command, {
 });
 
 // No-cache headers for presigned URL responses
-return Response.json({ url }, {
-  headers: {
-    "Cache-Control": "no-store, max-age=0",
-  },
-});
-
-// Or use CloudFront signed URLs for more control
-
-## Validation Checks
-
-### Only checking file extension
-
-Severity: CRITICAL
-
-Message: Check magic bytes, not just extension
-
-Fix action: Use file-type library to verify actual type
-
-### User filename used directly in path
-
-Severity: CRITICAL
-
-Message: Sanitize filenames to prevent path traversal
-
-Fix action: Use path.basename() and generate safe name
-
-## Collaboration
-
-### Delegation Triggers
-
-- image optimization CDN -> performance-optimization (Image delivery)
-- storing file metadata -> postgres-wizard (Database schema)
-
-## When to Use
-- User mentions or implies: file upload
-- User mentions or implies: S3
-- User mentions or implies: R2
-- User mentions or implies: presigned URL
-- User ment
+return Response.json({ 

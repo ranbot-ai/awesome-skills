@@ -87,6 +87,8 @@ EventHubConsumerAsyncClient asyncConsumer = new EventHubClientBuilder()
     .buildAsyncConsumerClient();
 ```
 
+Pin compatible SDKs including identity/storage and add java.util/time imports; client declarations are alternatives. Scope producer/consumer/checkpoint roles and redact bodies/connection strings. Checkpoint only after durable effects and handle failure; it does not provide exactly-once processing. Preserve subscription handles for cancellation and close clients/stop processors on every exit. ErrorContext can lack partition context: guard it before reading partition ID. Batch retries must preserve partition options, and uncertain sends can duplicate events; use event IDs/reconciliation.
+
 ## Core Patterns
 
 ### Send Single Event
@@ -114,7 +116,7 @@ for (int i = 0; i < 100; i++) {
         // Batch is full, send and create new batch
         producer.send(batch);
         batch = producer.createBatch();
-        batch.tryAdd(event);
+        if (!batch.tryAdd(event)) throw new IllegalArgumentException("Event exceeds empty batch capacity");
     }
 }
 
@@ -131,7 +133,7 @@ CreateBatchOptions options = new CreateBatchOptions()
     .setPartitionId("0");
 
 EventDataBatch batch = producer.createBatch(options);
-batch.tryAdd(new EventData("Partition 0 event"));
+if (!batch.tryAdd(new EventData("Partition 0 event"))) throw new IllegalArgumentException("Event too large");
 producer.send(batch);
 ```
 
@@ -142,7 +144,7 @@ CreateBatchOptions options = new CreateBatchOptions()
     .setPartitionKey("customer-123");
 
 EventDataBatch batch = producer.createBatch(options);
-batch.tryAdd(new EventData("Customer event"));
+if (!batch.tryAdd(new EventData("Customer event"))) throw new IllegalArgumentException("Event too large");
 producer.send(batch);
 ```
 
@@ -165,25 +167,4 @@ import com.azure.messaging.eventhubs.models.PartitionEvent;
 
 // Receive from specific partition
 Iterable<PartitionEvent> events = consumer.receiveFromPartition(
-    "0",                           // partitionId
-    10,                            // maxEvents
-    EventPosition.earliest(),      // startingPosition
-    Duration.ofSeconds(30)         // timeout
-);
-
-for (PartitionEvent partitionEvent : events) {
-    EventData event = partitionEvent.getData();
-    System.out.println("Body: " + event.getBodyAsString());
-    System.out.println("Sequence: " + event.getSequenceNumber());
-    System.out.println("Offset: " + event.getOffset());
-}
-```
-
-### EventProcessorClient (Production)
-
-```java
-import com.azure.messaging.eventhubs.EventProcessorClient;
-import com.azure.messaging.eventhubs.EventProcessorClientBuilder;
-import com.azure.messaging.eventhubs.checkpointstore.blob.BlobCheckpointStore;
-import com.azure.storage.blob.BlobContainerAsyncClient;
-import com.azure.storage.blob.BlobCon
+    "0",                           // 

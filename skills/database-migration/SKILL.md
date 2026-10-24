@@ -138,7 +138,7 @@ model User {
 
 ### Adding Columns with Defaults
 ```javascript
-// Safe migration: add column with default
+// Illustrative migration: lock/rewrite behavior depends on engine/version/table size
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.addColumn('users', 'status', {
@@ -154,7 +154,9 @@ module.exports = {
 };
 ```
 
-### Renaming Columns (Zero Downtime)
+### Renaming Columns (Expand/Contract Sketch)
+
+This sketch is not sufficient for concurrent writes. Deploy compatible dual writes before a bounded backfill, reconcile changes during backfill, switch reads only after validation, and drop the old column only after all readers/writers migrate. A one-time UPDATE alone can lose updates.
 ```javascript
 // Step 1: Add new column
 module.exports = {
@@ -165,18 +167,3 @@ module.exports = {
 
     // Copy data from old column
     await queryInterface.sequelize.query(
-      'UPDATE users SET full_name = name'
-    );
-  },
-
-  down: async (queryInterface) => {
-    await queryInterface.removeColumn('users', 'full_name');
-  }
-};
-
-// Step 2: Update application to use new column
-
-// Step 3: Remove old column
-module.exports = {
-  up: async (queryInterface) => {
-    await queryInterface.removeColumn('users', '

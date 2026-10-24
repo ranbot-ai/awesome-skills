@@ -3,12 +3,14 @@ name: apple-container
 description: Build, run, and manage OCI/Linux containers as lightweight per-container VMs on Apple-silicon macOS using Apple's open-source container CLI, no Docker daemon required. 
 category: Document Processing
 source: antigravity
-tags: [api, claude, ai, workflow, document, image, security, docker, cro]
+tags: [api, claude, ai, agent, workflow, document, image, security, docker, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apple-container
 ---
 
 
 # Apple `container`
+
+> Reference scope: this imported guide mixes release-era and later branch documentation; its `1.0.0+` annotations are not verified introduction versions. Match the installed `container --version` and subcommand `--help` to the same upstream release tag before using flags or defaults. Current branch documentation can describe unreleased behavior. No container runtime was executed for this static review.
 
 ## When to Use
 
@@ -18,8 +20,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/appl
 
 Apple's `container` is an open-source CLI for building, running, and managing OCI/Linux
 containers on Apple-silicon Macs. Each container runs inside its own lightweight virtual
-machine (backed by the Containerization framework and the Virtualization API), so there is no
-shared daemon like Docker — services run per-user via `launchd`. Images are standard OCI
+machine (backed by the Containerization framework and the Virtualization API). A shared per-user
+API server and helpers run via `launchd`, with a separate runtime helper per container. Images are standard OCI
 artifacts, so they interoperate with Docker registries and other OCI tooling. The CLI is
 deliberately Docker-like (`container run`, `container build`, and image ops under
 `container image push`/`pull`), but it is a distinct tool: do not assume Docker command paths,
@@ -29,10 +31,7 @@ top-level command — image verbs live under `container image`).
 ## Safety Gate
 
 Container installation, service startup, image pulls, builds, runs, registry login, pushes,
-and resource cleanup change local or remote state. Explain the exact command, image registry,
-mounts, ports, privileges, and data-persistence impact, then obtain explicit user approval
-before executing it. Do not provide registry credentials, mount sensitive paths, or expose
-ports without the user's explicit instruction.
+and resource cleanup change local or remote state. Keep the exact registry, mounts, ports, privileges and persistence impact within existing task authorization. Clarify missing destructive scope, sensitive mounts, credentials or external exposure before acting; do not ask again for actions already authorized.
 
 ## Requirements
 
@@ -42,7 +41,7 @@ ports without the user's explicit instruction.
   still runs on **macOS 15 (Sequoia)** but with reduced networking: only the single default
   subnet is available, and the `container network` group and `--network` flag error out.
   macOS-26-gated features are called out throughout the reference files.
-- **Version:** this skill documents the **1.0.0** release (the fullest feature set). The `machine`
+- **Version:** this skill documents the **1.0.0** release (the historical reference snapshot). The `machine`
   group, `container cp`, `container export`, `container prune`, `container image prune`,
   `container registry list`, and `container system version` were **added in 1.0.0** (not in 0.7.1)
   — features that postdate 0.7.1 are flagged *(1.0.0+)* in the reference files. Run `container --version` and
@@ -58,8 +57,7 @@ Install the signed package, then start the background services once:
 1. **Download** the latest signed installer `.pkg` from the
    [GitHub releases page](https://github.com/apple/container/releases).
 2. **Double-click** the downloaded package and follow the prompts, entering your admin
-   password so it can place files under `/usr/local`. (There is no documented CLI `installer`
-   invocation — installation is via the GUI package.)
+   password so it can place files under `/usr/local`. For automated package installation, verify macOS installer syntax and package signature rather than inventing a container subcommand.
 3. **Start the services** and confirm they are healthy:
 
 ```bash
@@ -73,7 +71,7 @@ container system status
 ```
 
 `container system start` must have run before any container/image/build command works — a
-connection/XPC error almost always means the services are stopped, so run it again. Stop and
+connection/XPC error can indicate stopped services, incompatible components, permissions or launch failures. Inspect `container system status`, installed versions and logs before deciding whether startup or repair is needed. Stop and
 deregister the `launchd` services with `container system stop` (which takes only `-p/--prefix`).
 The startup flags for `container system start` (`-a/--app-root`, `--install-root`, `--log-root`,
 `--enable-kernel-install`/`--disable-kernel-install`, `--timeout`) are in
@@ -81,17 +79,4 @@ The startup flags for `container system start` (`-a/--app-root`, `--install-root
 
 **Upgrade / downgrade / uninstall** use helper scripts in `/usr/local/bin` (stop first with
 `container system stop`): `update-container.sh` (add `-v <version>` to pin a version), and
-`uninstall-container.sh -d` to remove user data or `-k` to keep it. Full recipes in
-`references/workflows.md`.
-
-## Command groups at a glance
-
-Invoke everything as `container <group> <subcommand>`. Container-lifecycle verbs (`run`,
-`create`, `start`, `stop`, `exec`, `logs`, `inspect`, `list`/`ls`, `delete`/`rm`, `kill`,
-`stats`) and `build` are top-level; image operations like `push`, `pull`, and `tag` live
-under `container image`. Run `container <group> --help` for exact flags, or read
-`references/commands.md` for the exhaustive matrix.
-
-| Group | What it does | Example |
-|-------|--------------|---------|
-| container lifecycle | Create, start, run
+`uninstall-container.sh -d` to remove user da

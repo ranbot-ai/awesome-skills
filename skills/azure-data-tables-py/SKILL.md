@@ -51,6 +51,8 @@ table_client = TableClient(endpoint=endpoint, table_name="mytable", credential=c
 | `TableServiceClient` | Create/delete tables, list tables |
 | `TableClient` | Entity CRUD, queries |
 
+These are independent fragments. Confirm account/table/partition/row and exact write/delete scope; protect existing entities, use ETags/match conditions for concurrent changes and reconcile timeouts before retries. Storage Table and Cosmos Table authentication/feature/transaction limits differ; verify the selected endpoint rather than assuming one identity configuration fits both. Bound queries/pages/bytes and do not log entity contents. Close async credentials as well as clients on failure. Currency double examples are illustrative; choose exact asset units for money.
+
 ## Table Operations
 
 ```python
@@ -90,8 +92,9 @@ entity = {
 # Create (fails if exists)
 table_client.create_entity(entity=entity)
 
-# Upsert (create or replace)
-table_client.upsert_entity(entity=entity)
+# Upsert explicitly replaces; omitted mode defaults can merge instead.
+from azure.data.tables import UpdateMode
+table_client.upsert_entity(entity=entity, mode=UpdateMode.REPLACE)
 ```
 
 ### Get Entity
@@ -140,7 +143,7 @@ entities = table_client.query_entities(
     query_filter="PartitionKey eq 'sales'"
 )
 for entity in entities:
-    print(entity)
+    print(entity["RowKey"])  # Do not dump property payloads
 ```
 
 ### Query with Filters
@@ -172,7 +175,7 @@ entities = table_client.query_entities(
 ```python
 # List all (cross-partition - use sparingly)
 for entity in table_client.list_entities():
-    print(entity)
+    print(entity["RowKey"])  # Do not dump property payloads
 ```
 
 ## Batch Operations
@@ -204,37 +207,4 @@ async def table_operations():
     
     async with TableClient(
         endpoint="https://<account>.table.core.windows.net",
-        table_name="mytable",
-        credential=credential
-    ) as client:
-        # Create
-        await client.create_entity(entity={
-            "PartitionKey": "async",
-            "RowKey": "1",
-            "data": "test"
-        })
-        
-        # Query
-        async for entity in client.query_entities("PartitionKey eq 'async'"):
-            print(entity)
-
-import asyncio
-asyncio.run(table_operations())
-```
-
-## Data Types
-
-| Python Type | Table Storage Type |
-|-------------|-------------------|
-| `str` | String |
-| `int` | Int64 |
-| `float` | Double |
-| `bool` | Boolean |
-| `datetime` | DateTime |
-| `bytes` | Binary |
-| `UUID` | Guid |
-
-## Best Practices
-
-1. **Design partition keys** for query patterns and even distribution
-2. **Query within partitions** whenever possible (cross
+        table_name="mytable"

@@ -18,7 +18,7 @@
     "template",
     "document",
     "spreadsheet",
-    "security"
+    "presentation"
   ],
   "useCases": [
     "360 feedback",

@@ -25,7 +25,7 @@ Deploy and manage Amazon RDS relational databases with production-grade backups,
 ## Prerequisites
 
 - AWS CLI v2 installed and configured
-- IAM permissions: `rds:*`, `ec2:DescribeSecurityGroups`, `ec2:DescribeSubnets`, `kms:*`, `cloudwatch:*`
+- Least-privilege IAM actions for the selected RDS, subnet, monitoring and KMS resources; avoid service-wide wildcard grants
 - A VPC with at least two subnets in different AZs (for subnet group)
 - Security group allowing database port access from application subnets only
 
@@ -120,8 +120,8 @@ aws rds modify-db-parameter-group \
   --db-parameter-group-name production-pg16 \
   --parameters \
     "ParameterName=max_connections,ParameterValue=200,ApplyMethod=pending-reboot" \
-    "ParameterName=shared_buffers,ParameterValue={DBInstanceClassMemory/4},ApplyMethod=pending-reboot" \
-    "ParameterName=effective_cache_size,ParameterValue={DBInstanceClassMemory*3/4},ApplyMethod=pending-reboot" \
+    "ParameterName=shared_buffers,ParameterValue={DBInstanceClassMemory/32768},ApplyMethod=pending-reboot" \
+    "ParameterName=effective_cache_size,ParameterValue={DBInstanceClassMemory*3/32768},ApplyMethod=pending-reboot" \
     "ParameterName=work_mem,ParameterValue=65536,ApplyMethod=immediate" \
     "ParameterName=maintenance_work_mem,ParameterValue=524288,ApplyMethod=immediate" \
     "ParameterName=random_page_cost,ParameterValue=1.1,ApplyMethod=immediate" \
@@ -144,5 +144,4 @@ aws rds create-db-instance-read-replica \
   --db-instance-identifier production-api-db-read1 \
   --source-db-instance-identifier production-api-db \
   --db-instance-class db.r6g.large \
-  --availability-zone us-east-1b \
-  --enable-performan
+  --availability-zone us-ea

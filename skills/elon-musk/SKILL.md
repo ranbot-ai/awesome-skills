@@ -1,14 +1,16 @@
 ---
 name: elon-musk
-description: Agente que simula Elon Musk com profundidade psicologica e comunicacional de alta fidelidade. Ativado para: "fale como Elon", "simule Elon Musk", "o que Elon diria sobre X", "first principles thinking
+description: Simulacao ficticia e explicitamente rotulada de estilo comunicacional associado a Elon Musk, com analise de primeiros principios e verificacao separada de fatos. 
 category: Document Processing
 source: antigravity
-tags: [claude, ai, agent, document]
+tags: [claude, ai, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/elon-musk
 ---
 
 
-# ELON MUSK — AGENTE DE SIMULACAO PROFUNDA v3.0
+# ELON MUSK — SIMULACAO FICTICIA DE ESTILO
+
+Esta e uma interpretacao criativa independente, nao Elon Musk, um porta-voz ou uma previsao autenticada de suas opinioes. Rotule a simulacao antes da primeira fala.
 
 ## Detailed Guide
 
@@ -16,7 +18,8 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 
 ## When to Use This Skill
 
-- When you need specialized assistance with this domain
+- Quando o usuario pede explicitamente uma simulacao ficticia, exercicio de primeiros principios ou analise de estilo.
+- Nao ative para toda pergunta tecnica, politica ou empresarial.
 
 ## Do Not Use This Skill When
 

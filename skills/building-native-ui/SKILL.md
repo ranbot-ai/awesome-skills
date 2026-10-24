@@ -3,7 +3,7 @@ name: building-native-ui
 description: Complete guide for building beautiful apps with Expo Router. Covers fundamentals, styling, components, navigation, animations, patterns, and native tabs. 
 category: Document Processing
 source: antigravity
-tags: [react, api, ai, document, presentation, image, security, tailwind, rag, cro]
+tags: [typescript, react, api, ai, document, presentation, image, security, tailwind, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/building-native-ui
 ---
 
@@ -38,7 +38,7 @@ references/
 
 ## Running the App
 
-**CRITICAL: Always try Expo Go first before creating custom builds.**
+**Check required native modules before choosing Expo Go or a development build.**
 
 Most Expo apps work in Expo Go without any custom native code. Before running `npx expo run:ios` or `npx expo run:android`:
 
@@ -59,10 +59,10 @@ You need `npx expo run:ios/android` or `eas build` ONLY when using:
 
 Expo Go supports a huge range of features out of the box:
 
-- All `expo-*` packages (camera, location, notifications, etc.)
+- Many Expo packages; check each module’s Expo Go and SDK compatibility.
 - Expo Router navigation
 - Most UI libraries (reanimated, gesture handler, etc.)
-- Push notifications, deep links, and more
+- Supported navigation and development features; remote push and app-specific native configuration may require a development build.
 
 **If you're unsure, try Expo Go first.** Creating custom builds adds complexity, slower iteration, and requires Xcode/Android Studio setup.
 
@@ -89,7 +89,7 @@ See `./references/route-structure.md` for detailed route conventions.
 - Never use legacy expo-permissions
 - `expo-audio` not `expo-av`
 - `expo-video` not `expo-av`
-- `expo-image` with `source="sf:name"` for SF Symbols, not `expo-symbols` or `@expo/vector-icons`
+- `expo-image` with `source="sf:name"` for SF Symbols, or version-compatible `expo-symbols`; provide Android/web icon fallbacks
 - `react-native-safe-area-context` not react-native SafeAreaView
 - `process.env.EXPO_OS` not `Platform.OS`
 - `React.use` not `React.useContext`
@@ -100,14 +100,8 @@ See `./references/route-structure.md` for detailed route conventions.
 
 ## Responsiveness
 
-- Always wrap root component in a scroll view for responsiveness
+- Use ScrollView for bounded scrollable content and FlatList/SectionList for large collections; avoid nesting virtualized lists in same-direction ScrollViews.
 - Use `<ScrollView contentInsetAdjustmentBehavior="automatic" />` instead of `<SafeAreaView>` for smarter safe area insets
 - `contentInsetAdjustmentBehavior="automatic"` should be applied to FlatList and SectionList as well
 - Use flexbox instead of Dimensions API
-- ALWAYS prefer `useWindowDimensions` over `Dimensions.get()` to measure screen size
-
-## Behavior
-
-- Use expo-haptics conditionally on iOS to make more delightful experiences
-- Use views with built-in haptics like `<Switch />` from React Native and `@react-native-community/datetimepicker`
-- When a route belon
+- ALWAYS prefer `useWindowDimensions` over `Dimensions.get()` to measure scr

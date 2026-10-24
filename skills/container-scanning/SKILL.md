@@ -67,7 +67,7 @@ trivy image --format json -o results.json myapp:latest
 # Filter by severity
 trivy image --severity HIGH,CRITICAL myapp:latest
 
-# Ignore unfixed vulnerabilities
+# Optional filtered view; retain an unfiltered report of unfixed risk too.
 trivy image --ignore-unfixed myapp:latest
 
 # Exit code on vulnerability
@@ -251,10 +251,8 @@ az security pricing create \
   --name Containers \
   --tier Standard
 
-# View scan results in Azure Portal or:
-az acr repository show \
-  --name myregistry \
-  --image myapp:latest
+# Read Defender vulnerability findings through its supported findings API/portal.
+# az acr repository show returns image metadata, not a vulnerability report.
 ```
 
 ### Google Artifact Registry
@@ -263,7 +261,4 @@ az acr repository show \
 # Enable vulnerability scanning
 gcloud artifacts repositories update myrepo \
   --location=us-central1 \
-  --enable-vulnerability-scanning
-
-# View vulnerabilities
-gcloud artifacts docker images describe
+  --en

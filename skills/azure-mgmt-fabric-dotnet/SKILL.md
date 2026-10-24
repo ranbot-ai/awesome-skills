@@ -62,6 +62,8 @@ ArmClient
 
 ## Core Workflows
 
+Confirm the credential tenant and exact subscription ID before writes; `GetDefaultSubscriptionAsync` does not select the subscription merely because `AZURE_SUBSCRIPTION_ID` is listed above. Provisioning/scaling/resuming incur costs; suspension and deletion affect availability. Bind authorization to the actual resource, SKU and operation. The examples target the documented API, not a tested deployment; verify package signatures in [Microsoft API reference](https://learn.microsoft.com/en-us/dotnet/api/azure.resourcemanager.fabric.fabriccapacityresource). Capacity names use lowercase letters/digits, without hyphens.
+
 ### 1. Create Fabric Capacity
 
 ```csharp
@@ -93,7 +95,7 @@ var capacityData = new FabricCapacityData(
 var capacityCollection = resourceGroup.Value.GetFabricCapacities();
 var operation = await capacityCollection.CreateOrUpdateAsync(
     WaitUntil.Completed,
-    "my-fabric-capacity",
+    "myfabriccapacity",
     capacityData);
 
 FabricCapacityResource capacity = operation.Value;
@@ -106,7 +108,7 @@ Console.WriteLine($"State: {capacity.Data.Properties.State}");
 ```csharp
 // Get existing capacity
 var capacity = await resourceGroup.Value
-    .GetFabricCapacityAsync("my-fabric-capacity");
+    .GetFabricCapacityAsync("myfabriccapacity");
 
 Console.WriteLine($"Name: {capacity.Value.Data.Name}");
 Console.WriteLine($"Location: {capacity.Value.Data.Location}");
@@ -119,7 +121,7 @@ Console.WriteLine($"Provisioning State: {capacity.Value.Data.Properties.Provisio
 
 ```csharp
 var capacity = await resourceGroup.Value
-    .GetFabricCapacityAsync("my-fabric-capacity");
+    .GetFabricCapacityAsync("myfabriccapacity");
 
 var patch = new FabricCapacityPatch
 {
@@ -147,8 +149,9 @@ await capacity.Value.SuspendAsync(WaitUntil.Completed);
 Console.WriteLine("Capacity suspended");
 
 // Resume capacity
-var resumeOperation = await capacity.Value.ResumeAsync(WaitUntil.Completed);
-Console.WriteLine($"Capacity resumed. State: {resumeOperation.Value.Data.Properties.State}");
+await capacity.Value.ResumeAsync(WaitUntil.Completed);
+var resumedCapacity = await capacity.Value.GetAsync();
+Console.WriteLine($"Capacity resumed. State: {resumedCapacity.Value.Data.Properties.State}");
 ```
 
 ### 5. Delete Capacity
@@ -168,36 +171,4 @@ await foreach (var cap in resourceGroup.Value.GetFabricCapacities())
 }
 
 // In a subscription
-await foreach (var cap in subscription.GetFabricCapacitiesAsync())
-{
-    Console.WriteLine($"- {cap.Data.Name} in {cap.Data.Location}");
-}
-```
-
-### 7. Check Name Availability
-
-```csharp
-var checkContent = new FabricNameAvailabilityContent
-{
-    Name = "my-new-capacity",
-    ResourceType = "Microsoft.Fabric/capacities"
-};
-
-var result = await subscription.CheckFabricCapacityNameAvailabilityAsync(
-    AzureLocation.WestUS2,
-    checkContent);
-
-if (result.Value.IsNameAvailable == true)
-{
-    Console.WriteLine("Name is available!");
-}
-else
-{
-    Console.WriteLine($"Name unavailable: {result.Value.Reason} - {result.Value.Message}");
-}
-```
-
-### 8. List Available SKUs
-
-```csharp
-//
+await foreach (var cap in subscri

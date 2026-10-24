@@ -3,7 +3,7 @@ name: career-ops
 description: Multi-CLI job-search command center: evaluate offers, scan portals, tailor CVs, track applications, prep interviews. Invoke per mode. 
 category: AI & Agents
 source: antigravity
-tags: [node, pdf, markdown, ai, agent, cro]
+tags: [node, pdf, markdown, ai, agent, automation, workflow, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/career-ops
 ---
 

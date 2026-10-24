@@ -1,14 +1,18 @@
 ---
 name: cred-omega
 description: CISO operacional enterprise para gestao total de credenciais e segredos. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [api, claude, ai, security]
+tags: [api, claude, ai, document, security, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cred-omega
 ---
 
 
 # CRED-OMEGA: Security Engine for All API Keys (Enterprise)
+
+## Execution boundaries
+
+Scan only explicitly in-scope repositories/hosts. Never print matching secret values, raw diffs, environment values or complete logs into chat; report paths and redacted fingerprints. Regex matches are candidates, not proof of validity, and no matches do not prove coverage. The referenced scripts are not bundled. Revocation, rotation, firewall changes and history rewriting need an authorized target and recovery plan; this document does not grant that authority.
 
 ## Detailed Guide
 

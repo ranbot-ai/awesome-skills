@@ -62,6 +62,10 @@ Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](
 - **编码**：UTF-8
 - **语言**：跟随用户对话语言（中文对话出中文报告，英文对话出英文报告）
 
+### 可用性与授权
+
+本 skill 生成文档，不授权新的渗透测试、样本执行、外部发布或数据传输。先使用已有证据；未执行的步骤标记未执行，不为填模板而运行攻击或编造结果。`ops/`、`tool-index`、`RULES`、`diagram-generator` 和其他技能不是本包依赖；缺失时使用本包内联 E/F/P 字段和 Mermaid，说明局限。自动路由、日志回写和厂商风格不是宿主已实现的功能。报告输出使用私有批准目录，避免覆盖已有证据；公开版应脱敏并去除可执行恶意附件。
+
 ### 质量要求
 
 - 所有代码块必须可直接运行或有明确上下文
@@ -69,7 +73,7 @@ Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](
 - 关键发现必须有证据支撑
 - 复现步骤必须让第三方能独立重现
 - 敏感信息（真实 token、密码、内部 URL）用占位符替代
-- **MUST** 包含 Evidence → Finding → Path 链（见 `../ops/evidence-finding-path.md` 与模板 §0）
+- **MUST** 包含 Evidence → Finding → Path 链（见本包 `references/security-report-templates.md` §0；上游 ops 全文未随包提供）
 - **MUST** 读取 `references/vendor-report-rules.md`：选定 `malware` / `apt` 或 `flavor = null`（漏洞任务可叠加 thin `vuln`）；无 flavor 时只输出原任务模板和适用的 Base 元素，不强制 IOC/ATT&CK
 - **SHOULD** 引用 case `scope.md` / `timeline.md`（`scripts/case-init.ps1`）
 
@@ -131,7 +135,7 @@ Every concept needs a concrete example.
 
 ## Quality Checklist
 
-- [ ] Code examples tested and runnable
+- [ ] Code examples have verified context; clearly distinguish actually tested from illustrative/not run
 - [ ] No placeholder text or TODOs
 - [ ] Matches actual code behavior
 - [ ] Scannable without reading everything
@@ -151,22 +155,4 @@ For README, API endpoint, and file organization templates, see [references/templ
 
 ## Related Skills
 
-- `Skill(ce:writer)` - Writing style, tone, and voice (load The Engineer persona)
-- `Skill(ce:visualizing-with-mermaid)` - Architecture and flow diagrams
-
-
----
-
-## 按需自举（On-Demand Bootstrap）
-
-本 skill 不依赖外部工具，纯文本生成。无需 bootstrap。
-
-如果需要渲染图表嵌入报告，会调用 `diagram-generator/` skill。
-
----
-
-## 路由上下文
-
-**上游入口**: 所有安全/逆向 skill 在任务完成后自动调用本 skill
-**触发方式**:
-- 自动：任务完成后作为行为链第 9 步执
+- `Skill(ce:writer)` - Writing 

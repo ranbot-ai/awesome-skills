@@ -24,6 +24,10 @@ Use this workflow when:
 - Full-stack feature development
 - Cross-platform application development
 
+## Scope and completion
+
+Select only phases needed for the user’s request. Skill names are references, not installed tools or delegation authority; read selected current skills before use. This workflow does not authorize paid services, production deployment, external messaging or destructive changes. Tie completion to observed checks and preserve existing project version constraints rather than adopting historical stack examples.
+
 ## Workflow Phases
 
 ### Phase 1: Project Setup and Scaffolding
@@ -182,23 +186,4 @@ Use @playwright-skill to create E2E tests for critical user flows
 5. Address vulnerabilities
 
 #### Copy-Paste Prompts
-```
-Use @code-reviewer to review my pull request
-```
-
-```
-Use @lint-and-validate to check code quality
-```
-
-### Phase 7: Build and Deployment
-
-#### Skills to Invoke
-- `deployment-engineer` - Deployment orchestration
-- `docker-expert` - Containerization
-- `vercel-deployment` - Vercel deployment
-- `github-actions-templates` - CI/CD workflows
-- `cicd-automation-workflow-automate` - CI/CD automation
-
-#### Actions
-1. Create Dockerfiles
-2.
+`

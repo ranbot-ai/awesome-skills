@@ -78,6 +78,10 @@ WebPubSubServiceAsyncClient asyncClient = new WebPubSubServiceClientBuilder()
 - **Connection**: Individual WebSocket client connection
 - **User**: Entity that can have multiple connections
 
+## Authorization and delivery boundaries
+
+Issue client tokens only from an authenticated server; derive user/group/tenant identity from trusted account state, not request parameters. Prefer group-scoped roles and short expirations; unrestricted join/send roles allow access to any group in the hub. Do not log bearer URLs or connection secrets. Broadcasts/group changes/disconnects require approved target scope; service acceptance does not establish every client received/processed a message. The snippets target the stated SDK version and omit complete auth/retry application logic.
+
 ## Core Patterns
 
 ### Send to All Connections
@@ -179,23 +183,4 @@ boolean userOnline = client.userExists("userId456");
 client.closeUserConnections("userId456");
 
 // Close all connections in a group
-client.closeGroupConnections("inactive-group");
-```
-
-### Generate Client Access Token
-
-```java
-import com.azure.messaging.webpubsub.models.GetClientAccessTokenOptions;
-import com.azure.messaging.webpubsub.models.WebPubSubClientAccessToken;
-
-// Basic token
-WebPubSubClientAccessToken token = client.getClientAccessToken(
-    new GetClientAccessTokenOptions());
-System.out.println("URL: " + token.getUrl());
-
-// With user ID
-WebPubSubClientAccessToken userToken = client.getClientAccessToken(
-    new GetClientAccessTokenOptions().setUserId("user123"));
-
-// With roles (permissions)
-WebPubSubClientAccessToken roleToken = client.ge
+client.closeGroupConnections("inactive-grou

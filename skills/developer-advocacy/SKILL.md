@@ -27,7 +27,7 @@ This skill helps you with developer advocacy activities: conference talks, live 
 - Your product's positioning (what story to tell)
 - Voice & tone (how formal/technical to be)
 
-If the context file doesn't exist, run the `developer-audience-context` skill first.
+If the context file does not exist, use the available `developer-audience-context` skill if discovered; otherwise ask only for essential audience, product and voice details. Do not claim an absent dependency ran.
 
 ---
 
@@ -47,7 +47,7 @@ If the context file doesn't exist, run the `developer-audience-context` skill fi
 
 **The winning formula:**
 ```
-Specific Problem + Unique Angle + Clear Takeaways = Accepted Talk
+Specific Problem + Unique Angle + Clear Takeaways = Stronger Proposal (acceptance is not guaranteed)
 ```
 
 **CFP Template:**
@@ -122,6 +122,8 @@ Example: "Building Real-Time Features with Edge Functions and WebSockets"
 
 ## Live Coding & Demos
 
+Use a separate demo account and synthetic data. Hide secrets, production dashboards and personal notifications before screen-sharing; verify environment variables are present without displaying their values. Keep checkpoint changes in a disposable demo checkout, preserving unrelated work. CFPs, podcast pitches, messages, posts and scheduling are drafts until the user authorizes the action and target. Use only genuine credentials and listening history in pitch templates; obtain recording consent and rights for shared clips.
+
 ### The Demo Danger Zone
 
 | Risk | Mitigation |
@@ -142,28 +144,4 @@ Example: "Building Real-Time Features with Edge Functions and WebSockets"
 
 **Pre-demo checklist:**
 - [ ] Close unnecessary apps
-- [ ] Clear browser history/tabs
-- [ ] Notifications OFF (Slack, email, calendar)
-- [ ] Font size: 24pt+ for terminal, 20pt+ for editor
-- [ ] Git stash/branch for clean starting point
-- [ ] Environment variables ready
-- [ ] Test on the actual projector/screen if possible
-
-### Live Coding Tips
-
-| Tip | Why |
-|-----|-----|
-| **Type slowly** | Audience needs to follow |
-| **Narrate what you type** | "I'm creating a new handler..." |
-| **Explain errors** | "This error means X, let me fix it" |
-| **Use snippets** | For boilerplate, not core concepts |
-| **Show the result** | Always run the code, show output |
-| **Checkpoint commits** | `git checkout checkpoint-1` |
-
----
-
-## Podcast Guesting
-
-### Finding Podcasts
-
-|
+- [ ] Clear browser histor

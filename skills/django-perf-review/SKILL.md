@@ -40,7 +40,7 @@ Issues are organized by impact. Focus on CRITICAL and HIGH - these cause real pr
 
 ## Priority 1: N+1 Queries (CRITICAL)
 
-**Impact:** Each N+1 adds `O(n)` database round trips. 100 rows = 100 extra queries. 10,000 rows = timeout.
+**Impact:** N+1 adds database round trips proportional to evaluated rows; latency and severity require actual workload/query measurements, not a universal timeout threshold.
 
 ### Rule: Prefetch related data accessed in loops
 
@@ -162,5 +162,4 @@ users = User.objects.all()[:100]
 ### Rule: Index fields used in WHERE clauses on large tables
 
 ```python
-# PROBLEM: Filtering on unindexed field
-# User.objects.filter(email=email)  # full sc
+# PROBLEM: Filterin

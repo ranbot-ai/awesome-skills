@@ -36,7 +36,7 @@ empty templates only - it never holds or processes real employee or customer dat
 
 ## How It Works
 
-Follow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.
+No shared execution-contract file is bundled; use this file’s bounded template workflow and the current host’s authorization rules. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.
 
 ### Step 1 - Identify intent
 
@@ -90,7 +90,7 @@ If an artifact was requested, build it after resolving essential missing facts. 
 
 **Recommended approach:** Build an account register tied to people records, then provision and remove from that one list.
 
-**Why this one:** Account sprawl is a security problem, not an admin problem. One register per person, with join and leave dates, is the whole fix.
+**Why this one:** Account sprawl is a security problem, not an admin problem. A register supports reconciliation but does not itself discover or revoke access, sessions, keys, groups or delegated permissions.
 
 **Workflow:** Joiner → Create accounts → Assign tools → Leave → Remove access → Log
 
@@ -98,14 +98,9 @@ If an artifact was requested, build it after resolving essential missing facts. 
 account is live, and is set on the day access is actually removed. Never pre-fill it with a planned or
 probable leaver date, because a removal date that was only a forecast is indistinguishable from one that
 happened, and the register is read to answer "does this person still have access". A record that is `Active`
-with a removal date is a contradiction: fix the status or clear the date, never leave both. `Closed` and
-`Pending Offboarding` must carry the date, or the offboarding is not finished.
+with a removal date is a contradiction: fix the status or clear the date, never leave both. `Closed` must carry verified removal evidence/date. `Pending Offboarding` remains undated until removal is actually verified; do not mark it complete from a planned leave date.
 
 **Security columns are facts, not targets.** `Two Factor On`, `Recovery Email Set` and `Password Policy Met`
 record what is true now. They are not a to-do list and must never be pre-set to TRUE to close a ticket. When
 one is FALSE, `Status` may be `Active` - the account genuinely exists - and the fix is the review, not a
 reclassification. Never disable a control in order to make a record look compliant.
-
-**Recurring review needs a due date.** `Last Access Review` alone cannot go stale, because it always shows the
-most recent review and never says the next one is late. `Next Review Due` carries the deadline; a review is
-overdue when the du

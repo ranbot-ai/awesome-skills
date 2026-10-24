@@ -1,7 +1,7 @@
 ---
 name: context-window-management
 description: Strategies for managing LLM context windows including summarization, trimming, routing, and avoiding context rot 
-category: AI & Agents
+category: Development & Code Tools
 source: antigravity
 tags: [typescript, api, claude, ai, llm, workflow, design, langchain, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/context-window-management
@@ -41,6 +41,8 @@ Strategies for managing LLM context windows including summarization, trimming, r
 
 ## Patterns
 
+These are incomplete architectural sketches with application-defined helpers/types. Model IDs and context limits are historical; discover supported models and use their tokenizer/counting API (tiktoken is not a universal Claude tokenizer). Preserve system/developer boundaries and user constraints verbatim; never silently truncate them to a percentage budget. Keep retrieved text and summaries clearly marked as data. Preserve chronological/tool-call relationships, recount the final serialized request including tools and reserved output, and fail/reduce optional history if it still exceeds the limit. Importance ordering alone must not scramble dependent messages.
+
 ### Tiered Context Strategy
 
 Different strategies based on context size
@@ -61,7 +63,7 @@ const TIERS: ContextTier[] = [
     { maxTokens: Infinity, strategy: 'rag', model: 'claude-3-5-sonnet' }
 ];
 
-async function selectStrategy(messages: Message[]): ContextTier {
+async function selectStrategy(messages: Message[]): Promise<ContextTier> {
     const tokens = await countTokens(messages);
 
     for (const tier of TIERS) {
@@ -72,7 +74,7 @@ async function selectStrategy(messages: Message[]): ContextTier {
     return TIERS[TIERS.length - 1];
 }
 
-async function prepareContext(messages: Message[]): PreparedContext {
+async function prepareContext(messages: Message[]): Promise<PreparedContext> {
     const tier = await selectStrategy(messages);
 
     switch (tier.strategy) {
@@ -153,27 +155,6 @@ interface MessageWithMetadata extends Message {
 async function smartSummarize(
     messages: MessageWithMetadata[],
     targetTokens: number
-): Message[] {
+): Promise<Message[]> {
     // Sort by importance, preserve order for tied scores
-    const sorted = [...messages].sort((a, b) =>
-        (b.importance + (b.hasCriticalInfo ? 0.5 : 0) + (b.referenced ? 0.3 : 0)) -
-        (a.importance + (a.hasCriticalInfo ? 0.5 : 0) + (a.referenced ? 0.3 : 0))
-    );
-
-    const keep: Message[] = [];
-    const summarizePool: Message[] = [];
-    let currentTokens = 0;
-
-    for (const msg of sorted) {
-        const msgTokens = await countTokens([msg]);
-        if (currentTokens + msgTokens < targetTokens * 0.7) {
-            keep.push(msg);
-            currentTokens += msgTokens;
-        } else {
-            summarizePool.push(msg);
-        }
-    }
-
-    // Summarize the low-importance messages
-    if (summarizePool.length > 0) {
-        const summary = await llm
+    const sorted = [...me

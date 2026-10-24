@@ -22,7 +22,7 @@ Use this sub-style when the user's request matches the aesthetic described above
 3. **Muted Backgrounds**: A soft grey or off-white background so the white data cards stand out clearly.
 
 ## Visual DNA
-- **Colors**: **Minimalist Slate** or **Earth-Grounded Elegance**. Avoid too many colors. Use red/green strictly for positive/negative trends.
+- **Colors**: **Minimalist Slate** or **Earth-Grounded Elegance**. Avoid too many colors. Pair trend color with text, signs or icons. Define whether a rise or fall is favorable for each metric; lower churn may be favorable.
 - **Typography**: Clean, tabular sans-serifs (`Inter`, `Roboto Mono` for numbers).
 - **Styling**: Very subtle shadows or 1px borders to separate cards.
 
@@ -98,7 +98,7 @@ struct DashboardView: View {
                 LazyVGrid(columns: columns, spacing: 16) {
                     KPICard(title: "Revenue", value: "$45,231", trend: "+12.5%", isPositive: true)
                     KPICard(title: "Active Users", value: "2,405", trend: "+4.1%", isPositive: true)
-                    KPICard(title: "Churn Rate", value: "1.2%", trend: "-0.4%", isPositive: false)
+                    KPICard(title: "Churn Rate", value: "1.2%", trend: "-0.4%", isPositive: true)
                     KPICard(title: "Avg. Session", value: "4m 12s", trend: "+0.1%", isPositive: true)
                 }
                 .padding()
@@ -161,5 +161,4 @@ class DashboardScreen extends StatelessWidget {
           SliverPadding(
             padding: const EdgeInsets.all(16),
             sliver: SliverGrid.extent(
-              maxCrossAxisExtent: 200, // Adapts layout based on width
-              mainAxisSpacing: 16
+              maxCrossAx

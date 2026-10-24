@@ -23,7 +23,7 @@ Use this sub-style when the user's request matches the aesthetic described above
 
 ## Visual DNA
 - **Colors**: Works excellently with **Desert Mirage** or **Minimalist Slate**. Utilize primary, secondary, surface, and error semantic mapping.
-- **Typography**: `Roboto` or `Google Sans` (or equivalent clean geometric sans). Stick strictly to the Material Type Scale (H1-H6, Subtitle, Body, Caption, Overline).
+- **Typography**: `Roboto` or `Google Sans` (or equivalent clean geometric sans). Choose one Material generation: M2 uses H1–H6 and related roles; M3 uses display, headline, title, body and label roles. Do not mix the scales.
 - **Shapes**: Moderately rounded corners (4px to 16px).
 
 ## Web Implementation
@@ -138,6 +138,4 @@ class MaterialScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text('Digital paper and ink.',
                     style: Theme.of(context).textTheme.bodyMedium),
-                  const SizedBox(height: 16),
-                  Align(
-                
+                  const Sized

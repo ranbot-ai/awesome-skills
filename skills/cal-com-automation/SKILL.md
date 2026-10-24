@@ -20,7 +20,7 @@ Automate Cal.com scheduling operations through Composio's Cal toolkit via Rube M
 
 ## Setup
 
-**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
+**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. The endpoint must be connected and authenticated according to the host; each service connection still needs its own authorized account and scopes.
 
 
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
@@ -135,5 +135,4 @@ Automate Cal.com scheduling operations through Composio's Cal toolkit via Rube M
 **Key parameters**: (none required)
 
 **Pitfalls**:
-- Organization ID is needed for team creation and org-level operations
-- Not all Cal.com accounts have organizations; perso
+- Organization ID is needed for t

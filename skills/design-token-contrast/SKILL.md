@@ -3,7 +3,7 @@ name: design-token-contrast
 description: Checks WCAG 2.2 contrast between the color tokens of a project (light and dark theme) and suggests the closest passing color that keeps the hue. 
 category: Creative & Media
 source: antigravity
-tags: [javascript, node, claude, ai, design, image, security]
+tags: [javascript, node, claude, ai, design, image, security, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-token-contrast
 ---
 
@@ -120,3 +120,5 @@ it only after the user agrees, and run the script again to show it passes.
 ## Related Skills
 
 - `@wcag-audit-patterns` - For a full WCAG 2.2 audit beyond color contrast.
+
+## Parser and suggestion limit

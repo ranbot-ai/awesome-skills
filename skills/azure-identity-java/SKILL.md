@@ -3,7 +3,7 @@ name: azure-identity-java
 description: Authenticate Java applications with Azure services using Microsoft Entra ID (Azure AD). 
 category: Development & Code Tools
 source: antigravity
-tags: [ai, workflow, kubernetes, azure, rag, cro]
+tags: [api, ai, workflow, kubernetes, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-identity-java
 ---
 
@@ -36,6 +36,8 @@ Authenticate Java applications with Azure services using Microsoft Entra ID (Azu
 | `DeviceCodeCredential` | Headless device authentication |
 
 ## DefaultAzureCredential (Recommended)
+
+Pin SDK versions and verify the exact chain/features before use. For production, prefer the intended managed/workload identity explicitly or constrain the chain so ambient developer credentials cannot silently select another principal. Confirm tenant, resource endpoint and least-privilege role; secret values shown below are placeholders to load from approved storage, never literals to commit. Do not enable verbose/account logging by default.
 
 The `DefaultAzureCredential` tries multiple authentication methods in order:
 
@@ -154,24 +156,4 @@ EnvironmentCredential credential = new EnvironmentCredentialBuilder().build();
 
 ### Required Environment Variables
 
-**For service principal with secret:**
-```bash
-AZURE_TENANT_ID=<tenant-id>
-AZURE_CLIENT_ID=<client-id>
-AZURE_CLIENT_SECRET=<client-secret>
-```
-
-**For service principal with certificate:**
-```bash
-AZURE_TENANT_ID=<tenant-id>
-AZURE_CLIENT_ID=<client-id>
-AZURE_CLIENT_CERTIFICATE_PATH=/path/to/cert.pem
-AZURE_CLIENT_CERTIFICATE_PASSWORD=<optional-password>
-```
-
-**For username/password:**
-```bash
-AZURE_TENANT_ID=<tenant-id>
-AZURE_CLIENT_ID=<client-id>
-AZURE_USERNAME=<username>
-AZURE_
+**For service principal with secret

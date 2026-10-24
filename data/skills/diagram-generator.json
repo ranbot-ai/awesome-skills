@@ -18,7 +18,7 @@
     "workflow",
     "template",
     "image",
-    "pentest"
+    "security"
   ],
   "useCases": [
     "Turning textual analysis into Mermaid/Graphviz/PlantUML visuals.",

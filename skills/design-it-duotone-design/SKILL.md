@@ -3,7 +3,7 @@ name: duotone-design
 description: Web and App implementation guide for Duotone Design. Trigger when user wants two-color schemes, striking imagery, and Spotify-like playlist aesthetics. 
 category: Creative & Media
 source: antigravity
-tags: [react, ai, llm, design, image, cro]
+tags: [react, api, ai, llm, design, image, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-it/duotone-design
 ---
 
@@ -59,7 +59,7 @@ body {
 }
 
 .duotone-container::after {
-  /* Overlay the dark color using screen/lighten */
+  /* Approximate dark overlay; multiply/screen is not exact endpoint interpolation. */
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -109,52 +109,38 @@ struct DuotoneImage: View {
 }
 ```
 - Real-time image processing is easy in SwiftUI.
-- Convert to `.grayscale()`, boost `.contrast()`, then use `.colorMultiply()` and `.blendMode(.screen)` layers to map the two colors exactly like CSS `mix-blend-mode`.
+- Convert to `.grayscale()`, boost `.contrast()`, then use `.colorMultiply()` and `.blendMode(.screen)` layers to approximate a multiply/screen effect. This does not map exactly to arbitrary endpoint colors; use a luminance matrix when exact endpoints matter.
 
 ### Flutter
+A luminance-to-endpoints matrix avoids the incorrect assumption that a filter on a transparent sibling modifies the image beneath it. `ColorFiltered` filters only its child.
+
 ```dart
 class DuotoneImage extends StatelessWidget {
-  final Color duoDark = const Color(0xFF1E0045);
-  final Color duoLight = const Color(0xFFCCFF00);
+  const DuotoneImage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 400,
-      width: double.infinity,
-      color: duoLight,
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          // 1. Grayscale & Contrast (using ColorFilter matrix)
-          // 2. Light Color Multiply
-          ColorFiltered(
-            colorFilter: ColorFilter.mode(duoLight, BlendMode.multiply),
-            child: ColorFiltered(
-              // Simple grayscale matrix
-              colorFilter: const ColorFilter.matrix([
-                0.2126, 0.7152, 0.0722, 0, 0,
-                0.2126, 0.7152, 0.0722, 0, 0,
-                0.2126, 0.7152, 0.0722, 0, 0,
-                0,      0,      0,      1, 0,
-              ]),
-              child: Image.asset('assets/sample_photo.jpg', fit: BoxFit.cover),
-            ),
-          ),
-          // 3. Dark Color Screen Overlay
-          ColorFiltered(
-            colorFilter: ColorFilter.mode(duoDark, BlendMode.screen),
-            child: Container(color: Colors.transparent), // Applies filter to stack below
-          ),
-        ],
-      ),
+    // Output = dark + luminance * (light - dark), RGB values in 0..255.
+    const dark = [30.0, 0.0, 69.0];
+    const light = [204.0, 255.0, 0.0];
+    const luminance = [0.2126, 0.7152, 0.0722];
+    final matrix = <double>[];
+    for (var channel = 0; channel < 3; channel++) {
+      final delta = light[channel] - dark[channel];
+      matrix.addAll([
+        for (final weight in luminance) delta * weight / 255.0,
+        0.0, dark[channel],
+      ]);
+    }
+    matrix.addAll([0.0, 0.0, 0.0, 1.0, 0.0]);
+    return ColorFiltered(
+      colorFilter: ColorFilter.matrix(matrix),
+      child: Image.asset('assets/sample_photo.jpg', fit: BoxFit.cover),
     );
   }
 }
 ```
-- Flutter requires stacking `ColorFiltered` widgets.
-- Use a `ColorFilter.matrix` to convert the image to grayscale first.
-- Apply `BlendMode.multiply` with the light color, then overlay the dark color using `BlendMode.screen`.
+The image asset must exist. This is an RGB luminance approximation; verify color-space behavior and accessibility in the target renderer.
 
 ### React Native
 ```jsx
@@ -163,4 +149,13 @@ class DuotoneImage extends StatelessWidget {
 
 import { Canvas, Image, useImage, ColorMatrix } from "@shopify/react-native-skia";
 
-const DuotoneIma
+const DuotoneImage = () => {
+  const image = useImage(require('./sample_photo.jpg'));
+  
+  if (!image) return null;
+
+  // Skia allows custom SVG/CSS style color matrices.
+  // Building a true duotone matrix requires math mapping black to duoDark
+  // and white to duoLight.
+  
+ 

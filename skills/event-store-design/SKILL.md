@@ -128,10 +128,11 @@ CREATE TABLE subscription_checkpoints (
 
 ```python
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Optional, List
 from uuid import UUID, uuid4
 import json
+import asyncio
 import asyncpg
 
 @dataclass
@@ -143,7 +144,7 @@ class Event:
     event_id: UUID = field(default_factory=uuid4)
     version: Optional[int] = None
     global_position: Optional[int] = None
-    created_at: datetime = field(default_factory=datetime.utcnow)
+    created_at: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
 
 
 class EventStore:
@@ -158,5 +159,4 @@ class EventStore:
         expected_version: Optional[int] = None
     ) -> List[Event]:
         """Append events to a stream with optimistic concurrency."""
-        async with self.pool.acquire() as conn:
-            async with c
+        async with self.pool

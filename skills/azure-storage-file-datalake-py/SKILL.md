@@ -45,6 +45,8 @@ service_client = DataLakeServiceClient(account_url=account_url, credential=crede
 | `DataLakeDirectoryClient` | Directory operations |
 | `DataLakeFileClient` | File operations |
 
+These are independent fragments, not a run-all script. Confirm account/filesystem/path and protect existing data before writes, renames, recursive ACL changes or deletes. Never use production placeholders as cleanup targets. Bound recursive listings/download bytes and use non-overwriting local outputs. Recursive ACL updates can partially fail: inspect counters/failure details and resume only with exact scope. Close async credentials as well as clients in failure paths; upload success does not establish business correctness.
+
 ## File System Operations
 
 ```python
@@ -93,12 +95,13 @@ file_client = file_system_client.get_file_client("path/to/file.txt")
 
 # Upload from local file
 with open("local-file.txt", "rb") as data:
-    file_client.upload_data(data, overwrite=True)
+    file_client.upload_data(data, overwrite=False)
 
 # Upload bytes
-file_client.upload_data(b"Hello, Data Lake!", overwrite=True)
+file_client.upload_data(b"Hello, Data Lake!", overwrite=False)
 
-# Append data (for large files)
+# Separate append example: create an explicitly new empty file first.
+file_client = file_system_client.create_file("disposable-append-example.txt")
 file_client.append_data(data=b"chunk1", offset=0, length=6)
 file_client.append_data(data=b"chunk2", offset=6, length=6)
 file_client.flush_data(12)  # Commit the data
@@ -190,22 +193,4 @@ async def datalake_operations():
         account_url="https://<account>.dfs.core.windows.net",
         credential=credential
     ) as service_client:
-        file_system_client = service_client.get_file_system_client("myfilesystem")
-        file_client = file_system_client.get_file_client("test.txt")
-        
-        await file_client.upload_data(b"async content", overwrite=True)
-        
-        download = await file_client.download_file()
-        content = await download.readall()
-
-import asyncio
-asyncio.run(datalake_operations())
-```
-
-## Best Practices
-
-1. **Use hierarchical namespace** for file system semantics
-2. **Use `append_data` + `flush_data`** for large file uploads
-3. **Set ACLs at directory level** and inherit to children
-4. **Use async client** for high-throughput scenarios
-5. **Use `get_paths` with `recursive=True`** f
+        file_system_client = service_client.ge

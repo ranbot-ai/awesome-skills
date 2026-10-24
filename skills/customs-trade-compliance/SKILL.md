@@ -3,48 +3,87 @@ name: customs-trade-compliance
 description: Codified expertise for customs documentation, tariff classification, duty optimisation, restricted party screening, and regulatory compliance across multiple jurisdictions. 
 category: Document Processing
 source: antigravity
-tags: [ai, agent, template, design, document, security, rag, cro]
+tags: [ai, agent, workflow, template, document, cro, marketing]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/customs-trade-compliance
 ---
 
 
-## When to Use
-Use this skill when navigating international trade regulations, classifying goods under HS codes, determining appropriate Incoterms, managing import/export documentation, or optimizing customs duty payments through Free Trade Agreements.
-
 # Customs & Trade Compliance
 
-## Role and Context
+## When to Use
 
-You are a senior trade compliance specialist with 15+ years managing customs operations across US, EU, UK, and Asia-Pacific jurisdictions. You sit at the intersection of importers, exporters, customs brokers, freight forwarders, government agencies, and legal counsel. Your systems include ACE (Automated Commercial Environment), CHIEF/CDS (UK), ATLAS (DE), customs broker portals, denied party screening platforms, and ERP trade management modules. Your job is to ensure lawful, cost-optimised movement of goods across borders while protecting the organisation from penalties, seizures, and debarment.
+Use to prepare classification, origin, valuation, documentation, screening and
+post-entry review analyses for a specified shipment and jurisdiction. Draft
+broker instructions or questions; do not file entries, certify origin, release
+held goods, pay duties, block property or contact regulators without authority.
 
-## Core Knowledge
+## Establish the Applicable Facts
 
-### HS Tariff Classification
+Obtain the importing/exporting jurisdiction, entry date and procedure, actual
+product specifications and manufacturing history, parties/ownership, end use,
+route, invoices, costs and declared Incoterms version/named place. Record the
+applicable tariff/regulation version and source checked. Separate classification,
+non-preferential origin, preferential origin, export jurisdiction, export-control
+classification and sanctions: an HS code does not decide all six.
 
-The Harmonized System is a 6-digit international nomenclature maintained by the WCO. The first 2 digits identify the chapter, 4 digits the heading, 6 digits the subheading. National extensions add further digits: the US uses 10-digit HTS numbers (Schedule B for exports), the EU uses 10-digit TARIC codes, the UK uses 10-digit commodity codes via the UK Global Tariff.
+## Workflow
 
-Classification follows the General Rules of Interpretation (GRI) in strict order — you never invoke GRI 3 unless GRI 1 fails, never GRI 4 unless 1-3 fail:
+1. **Classification:** Read the current heading text and legal Section/Chapter
+   Notes under GRI 1. Apply further GRIs where applicable, including incomplete
+   goods/mixtures, specificity, essential character and numerical order. GRI 2(b)
+   does not itself select the essential-character material. Check special legal
+   machine/parts provisions before generic essential-character reasoning. GRI 6
+   compares subheadings at the same level. Resolve national import/export suffixes
+   separately; do not classify from a marketing name or an invented ruling.
+2. **Origin:** Document actual production and inputs. Shipping/repacking through
+   another country is not proof of changed origin. Apply the particular origin
+   rule, AD/CVD scope or FTA annex rather than a universal value-added percentage.
+   For preference verify production-period BOM, permitted calculation method,
+   cumulation, tolerance, transport and evidence/certification requirements.
+3. **Valuation:** Apply the jurisdiction's valuation hierarchy and documented
+   adjustments. Related parties do not automatically invalidate transaction
+   value, and a tax transfer-pricing study does not automatically validate it.
+   Assess actual assists, royalties, proceeds, discounts and costs. Incoterms
+   allocate contractual obligations; they do not prescribe the customs method.
+4. **Screening and export controls:** Check current applicable lists, ownership
+   and control rules, item jurisdiction/classification, destination, end user,
+   end use, licences and red flags. A no-hit name search is not permission to ship.
+   Put unresolved cases on an operational hold for the authorised compliance
+   owner. Distinguish that hold from legally blocking or rejecting a transaction.
+5. **Documentation:** Reconcile invoice, packing list, transport documents, origin
+   evidence, entry data and relevant product-agency requirements. Determine actual
+   filing/claim deadlines and required data for the entry type; do not presume all
+   invoice checklists, ISF timings or certifications apply identically.
+6. **Corrections:** Preserve entry/payment records and actual liquidation dates.
+   Have the broker/counsel identify the applicable correction, reconciliation,
+   protest, preference or disclosure route. A normal correction is not
+   automatically a legally valid prior disclosure.
 
-- **GRI 1:** Classification is determined by the terms of the headings and Section/Chapter notes. This resolves ~90% of classifications. Read the heading text literally and check every relevant Section and Chapter note before moving on.
-- **GRI 2(a):** Incomplete or unfinished articles are classified as the complete article if they have the essential character of the complete article. A car body without the engine is still classified as a motor vehicle.
-- **GRI 2(b):** Mixtures and combinations of materials. A steel-and-plastic composite is classified by reference to the material giving essential character.
-- **GRI 3(a):** When goods are prima facie classifiable under two or more headings, prefer the most specific heading. "Surgical gloves of rubber" is more specific than "articles of rubber."
-- **GRI 3(b):** Composite goods, sets — classify by the component giving essential character. A gift set with a $40 perfume and a $5 pouch classifies as perfume.
-- **GRI 3(c):** When 3(a) and 3(b) fail, use the heading that occurs last in numerical order.
-- **GRI 4:** Goods that cannot be classified by GRI 1-3 are classified under the heading for the most analogous goods.
-- **GRI 5:** Cases, containers, and packing materials follow specific rules for classification with or separately from their contents.
-- **GRI 6:** Classification at the subheading level follows the same principles, applied within the relevant heading. Subheading notes take precedence at this level.
+## Concrete Corrections to Common Shortcuts
 
-**Common misclassification pitfalls:** Multi-function devices (classify by primary function per GRI 3(b), not by the most expensive component). Food preparations vs ingredients (Chapter 21 vs Chapters 7-12 — check whether the product has been "prepared" beyond simple preservation). Textile composites (weight percentage of fibres determines classification, not surface area). Parts vs accessories (Section XVI Note 2 determines whether a part classifies with the machine or separately). Software on physical media (the medium, not the software, determines classification under most tariff schedules).
+- For US transaction value, international freight/insurance are generally
+  excluded subject to documented applicable rules; EU customs value generally
+  includes transport/insurance to the place of introduction. Do not reverse
+  these or automatically declare a CIF/DDP invoice total. Import VAT can have
+  a different base from customs duty.
+- USMCA RVC formulas are `100*(TV-VNM)/TV` and `100*(NC-VNM)/NC` with the
+  agreement's definitions and product-specific thresholds. A lower denominator
+  does not inherently raise RVC. Holding VNM=40 fixed, TV=100 gives 60%, whereas
+  NC=80 gives 50%. Choose only a method permitted for the actual good.
+- An omitted USMCA preference claim under 19 USC 1520(d) generally has a one-year
+  deadline from **importation**, not one year from liquidation. Do not promise
+  recovery of all historical entries using a generic protest window.
+- Do not plan around the historical US $800 duty-free parcel assumption. CBP
+  suspended the relevant de minimis treatment for all countries effective
+  August 29, 2025; verify the current procedure for the actual entry date.
+- Use the current UK Sanctions List; the old OFSI consolidated list stopped
+  updating on January 28, 2026. Verify list/ownership rules at transaction time.
+- Retention is regime-specific: do not apply a universal five-year limit to OFAC
+  records, whose general requirement was extended to ten years. Preserve legal
+  holds and longer contract/program obligations.
 
-### Documentation Requirements
+## Example Output
 
-**Commercial Invoice:** Must include seller/buyer names and addresses, description of goods sufficient for classification, quantity, unit price, total value, currency, Incoterms, country of origin, and payment terms. US CBP requires the invoice conform to 19 CFR § 141.86. Undervaluation triggers penalties per 19 USC § 1592.
-
-**Packing List:** Weight and dimensions per package, marks and numbers matching the BOL, piece count. Discrepancies between the packing list and physical count trigger examination.
-
-**Certificate of Origin:** Varies by FTA. USMCA uses a certification (no prescribed form) that must include nine data elements per Article 5.2. EUR.1 movement certificates for EU preferential trade. Form A for GSP claims. UK uses "origin declarations" on invoices for UK-EU TCA claims.
-
-**Bill of Lading / Air Waybill:** Ocean BOL serves as title to goods, contract of carriage, and receipt. Air waybill is non-negotiable. Both must match the commercial invoice details — carrier-added notations ("said to contain," "shipper's load and count") limit carrier liability and affect customs risk scoring.
-
-**ISF 10+2 (US):** Importer Security Filing must be submitted 24 hours before vessel loading at foreign port. Ten data elements from the importer (manufacturer, seller, buyer, ship-to, country of origin, HS-6, container stuffing location, consolidator, importer of record number, consign
+For a hypothetical CIF invoice, show goods price, separately evidenced freight
+and insurance, any assists/royalties, proposed US and EU adjustments and the
+supporting legal basis. Label the result **draft valuation for broker review**.

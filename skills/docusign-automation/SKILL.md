@@ -20,7 +20,7 @@ Automate DocuSign e-signature workflows through Composio's DocuSign toolkit via 
 
 ## Setup
 
-**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
+**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. The MCP endpoint still requires the provider connection and authorization flow returned by the installed Rube service; adding a URL alone does not grant account access.
 
 
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
@@ -127,6 +127,4 @@ Automate DocuSign e-signature workflows through Composio's DocuSign toolkit via 
 
 **Pitfalls**:
 - Only 'created' (draft) envelopes can be sent
-- Sent envelopes cannot be unsent; they can only be voided
-- Voiding an envelope notifies all recipients
-- All required recipients must have valid email address
+- Sent envelopes cannot be unsent; they can only

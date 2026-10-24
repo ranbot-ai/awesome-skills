@@ -36,6 +36,10 @@ Out of scope (the boundary):
 - "Post a reply in r/startups" — this Actor only reads Reddit. Use the Reddit API with the user's own account.
 - "Find Reddit threads *about* the pain of managing invoices" — Reddit search is literal keyword matching, not semantic. Expand the topic into 3–8 short literal keywords first (see Step 1), then run one search per keyword.
 
+## Run boundaries
+
+Verify current Actor schema, pricing and build before dispatch; the author's historical measurements below are not guarantees. Use an authorized spending cap and supported platform charge limit, including enrichment/retries. Collect only necessary public data; do not bypass access restrictions or infer sensitive personal traits. Connector delivery and schedules require explicit authorization for the destination/cadence. Never infer per-term provenance from row position or counts.
+
 ## Prerequisites
 
 - Apify account ([sign up](https://apify.com)); the free plan covers small runs.
@@ -73,14 +77,3 @@ Start from these defaults and change only what the request needs:
   "searchPosts": true,
   "searchComments": false,
   "searchCommunities": false,
-  "searchSort": "new",
-  "searchTime": "month",
-  "maxPostsCount": 50,
-  "crawlCommentsPerPost": false,
-  "maxCommentsPerPost": 50,
-  "includeNSFW": false
-}
-```
-
-- `searchSort`: `new` for monitoring, `relevance` for precise matching, `top` / `hot` for what performed, `comments` for the most discussed.
-- `searchTime`: `hour` | `day` | `week` | `month` | `year` | `all`. When the user names a period — a date or a relative one like "last month", "past week" — you have two options, and you must pick one 

@@ -1,9 +1,9 @@
 ---
 name: azure-ai-contentsafety-java
 description: Build content moderation applications using the Azure AI Content Safety SDK for Java. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [api, ai, workflow, image, azure]
+tags: [api, ai, workflow, document, image, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-contentsafety-java
 ---
 

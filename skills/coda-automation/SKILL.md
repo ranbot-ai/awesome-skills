@@ -20,7 +20,7 @@ Automate Coda document and data operations through Composio's Coda toolkit via R
 
 ## Setup
 
-**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
+**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. Adding the endpoint does not authenticate Coda; use the host-supported authorized connection.
 
 
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
@@ -29,6 +29,8 @@ Automate Coda document and data operations through Composio's Coda toolkit via R
 4. Confirm connection status shows ACTIVE before running any workflows
 
 ## Core Workflows
+
+Confirm the exact doc/table/row IDs and requested change before writes. Permission grants can notify recipients; publishing exposes content publicly. These require a specific user request including recipient/access or publication scope. A push-button call may trigger external actions, not just edit a cell: inspect its effect first. Row writes can be asynchronous; use the returned mutation/request status where supported, then read back. Reconcile timeouts before retrying an upsert, and do not overwrite formula/computed columns. Keep temporary export URLs and private doc content out of public reports. Bound polling and handle failed/expired jobs.
 
 ### 1. Search and Browse Documents
 
@@ -115,21 +117,4 @@ Automate Coda document and data operations through Composio's Coda toolkit via R
 - `requestId`: Export request ID for status polling
 
 **Pitfalls**:
-- Export is asynchronous; poll status until `status` is 'complete'
-- Large documents may take significant time to export
-- Export URL in the completed response is temporary; download promptly
-- Polling too frequently may hit rate limits; use 2-5 second intervals
-
-### 5. Manage Permissions and Sharing
-
-**When to use**: User wants to view or manage document access
-
-**Tool sequence**:
-1. `CODA_GET_SHARING_METADATA` - View current sharing settings [Required]
-2. `CODA_GET_ACL_SETTINGS` - Get access control list settings [Optional]
-3. `CODA_ADD_PERMISSION` - Grant access to a user or email [Optional]
-
-**Key parameters**:
-- `docId`: Document ID
-- `access`: Permission level ('readonly', 'write', 'comment')
-- `principal`: Object with email or u
+- Export is asynchronous; poll status until `status` i

@@ -118,8 +118,8 @@ while let Some(key) = pager.try_next().await? {
 ### Backup Key
 
 ```rust
-let backup = client.backup_key("key-name", None).await?;
-// Store backup.value safely
+let backup = client.backup_key("key-name", None).await?.into_model()?;
+// Store the returned encrypted backup securely; do not print it.
 ```
 
 ### Restore Key
@@ -178,4 +178,4 @@ Use when a Rust application retrieves public key metadata or performs authorized
 ## Limitations
 - Examples are fragments inside async application code, with compatible pinned Azure crates and the required Tokio/Serde/Futures dependencies; verify the selected version’s API before use. They were reviewed against official source/reference, not compiled or run against a cloud account here.
 - Use an authorized tenant, resource and identity with least privilege. Writes, overwrites, deletes, backup retrieval and account changes require the corresponding scope; cleanup may remove only explicitly identified disposable resources. Bound requests, retries and downloaded bytes, and do not log payloads, credentials or secret values.
-- Do not treat the output as a substitute for environment-specific validat
+- Do not treat the outp

@@ -1,7 +1,7 @@
 ---
 name: cyber-audit
 description: Run read-only exposure checks for security advisories and write a structured local audit report. 
-category: Document Processing
+category: Security & Systems
 source: antigravity
 tags: [python, node, markdown, claude, ai, agent, automation, workflow, template, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cyber-audit
@@ -29,6 +29,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cybe
 3. **Build the table** as you go. Each row = one check + concrete result (version number, path, "None", "N/A").
 4. **Write the report** to `~/Documents/security-audits/YYYY-MM-DD-<short-kebab-slug>.md`. Use today's date from the environment header.
 5. **Tell the user** the verdict in one line + path to the report.
+
+The advisory must be provided or already available locally under this no-network contract; mark currency unverified if a live authoritative lookup is unavailable. Search only user-authorized project/install roots, not the whole home directory by default. Use filename-safe NUL transport for find/xargs or rg file lists; do not substitute untrusted package names as shell syntax. Never dump environment/config lines or process arguments that can contain credentials; report sanitized paths/versions/booleans. Do not invoke an untrusted/suspected compromised binary just to ask its version.
 
 ## Check menu (pick what's relevant)
 
@@ -93,39 +95,24 @@ File: `~/Documents/security-audits/YYYY-MM-DD-<short-kebab-slug>.md`
 
 ## Verdict
 
-**<Not affected. | Affected. | Partially affected.>**
+**<Not observed in checked scope. | Affected. | Mitigated exposure. | Inconclusive.>**
 
 - <Rationale bullet 1>
 - <Rationale bullet 2>
 
 ## Action taken
 
-None — diagnostic only, no files modified, no <packages installed/removed | services started/stopped | firewall rules changed>.
+Diagnostic only; this report was written, no other files modified, no <packages installed/removed | services started/stopped | firewall rules changed>.
 
 ## Follow-ups
 
 - <Actionable item, or "None" if truly nothing>
 ```
 
-Match the tone of the two existing reports in `~/Documents/security-audits/` — terse, factual, bulleted, no hedging.
+Use terse, factual language while preserving uncertainty. Do not assume example reports exist or read unrelated private reports merely to imitate style.
 
 ## Verdict wording
 
-- **Not affected.** — package/binary absent, or installed but patched, or not running and not exposed.
+- **Not observed in checked scope.** — absent/patched within the explicitly searched paths; state coverage gaps. A stopped process alone does not prove absence of vulnerability.
 - **Affected.** — vulnerable version present *and* reachable by the attack vector.
-- **Partially affected.** — present but mitigated (e.g. binary installed but service not running, or listener bound to loopback only). Spell out the mitigation in the bullets.
-
-## When to break the read-only rule
-
-Never on your own. If the verdict is "Affected", list the remediation command in **Follow-ups** and stop. The user runs it.
-
-## Reference
-
-Two existing reports in `~/Documents/security-audits/` show the expected style:
-- `baseline-audit.md` (long-form baseline audit — different format, do not mimic)
-- `YYYY-MM-DD-example-advisory.md` and any newer `YYYY-MM-DD-*.md` files (this is the format to match)
-
-## Limitations
-
-- Adapted from `davidondrej/skills`; verify local paths, tools, credentials, and agent features before acting.
-- For commands, remote access, scheduling, bro
+- **Mitigated exposure.** — affect

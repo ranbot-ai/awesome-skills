@@ -46,6 +46,10 @@ Implement systematic cost optimization strategies to reduce cloud spending while
 - Optimize multi-cloud costs
 - Meet budget constraints
 
+## Evidence and irreversible commitments
+
+All discount percentages/terms and example instance sizes below are historical illustrations, not current quotes or workload recommendations. Verify provider/region/service eligibility and actual effective utilization before buying commitments; reservations/discount plans are financial commitments with changing exchange/cancellation rules. Use read-only billing/utilization first, compare equal workload/reliability windows and include egress, storage minimums, retrieval, taxes and idle costs. Deletion/lifecycle expiry, downsizing and alert subscriptions require exact-target authorization and tested recovery. Budget alerts are notifications, not a spending cap; serverless can retain baseline/storage/provisioned costs.
+
 ## Cost Optimization Framework
 
 ### 1. Visibility
@@ -198,37 +202,4 @@ resource "aws_instance" "example" {
 # AWS Budget
 resource "aws_budgets_budget" "monthly" {
   name              = "monthly-budget"
-  budget_type       = "COST"
-  limit_amount      = "1000"
-  limit_unit        = "USD"
-  time_period_start = "2024-01-01_00:00"
-  time_unit         = "MONTHLY"
-
-  notification {
-    comparison_operator        = "GREATER_THAN"
-    threshold                  = 80
-    threshold_type            = "PERCENTAGE"
-    notification_type         = "ACTUAL"
-    subscriber_email_addresses = ["team@example.com"]
-  }
-}
-```
-
-### Cost Anomaly Detection
-- AWS Cost Anomaly Detection
-- Azure Cost Management alerts
-- GCP Budget alerts
-
-## Architecture Patterns
-
-### Pattern 1: Serverless First
-- Use Lambda/Functions for event-driven
-- Pay only for execution time
-- Auto-scaling included
-- No idle costs
-
-### Pattern 2: Right-Sized Databases
-```
-Development: t3.small RDS
-Staging: t3.large RDS
-Product
+  budget_type   

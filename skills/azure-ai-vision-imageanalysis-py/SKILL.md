@@ -55,6 +55,10 @@ client = ImageAnalysisClient(
 )
 ```
 
+## Data and inference boundary
+
+Calls disclose supplied images or URLs to Azure. Confirm rights and privacy scope, region, service availability and current supported features. OCR/captions can be wrong; people detection does not identify people or establish age, identity, consent or sensitive traits. Review output before consequential use and avoid logging private OCR text.
+
 ## Analyze Image from URL
 
 ```python
@@ -205,19 +209,4 @@ if result.smart_crops:
 from azure.ai.vision.imageanalysis.aio import ImageAnalysisClient
 from azure.identity.aio import DefaultAzureCredential
 
-async def analyze_image():
-    async with ImageAnalysisClient(
-        endpoint=endpoint,
-        credential=DefaultAzureCredential()
-    ) as client:
-        result = await client.analyze_from_url(
-            image_url=image_url,
-            visual_features=[VisualFeatures.CAPTION]
-        )
-        print(result.caption.text)
-```
-
-## Visual Features
-
-| Feature | Description |
-|---------|---------
+async def analyze_image

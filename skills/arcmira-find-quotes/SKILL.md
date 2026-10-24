@@ -10,6 +10,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/arcm
 
 # Arcmira: YouTube Transcript Search
 
+[Arcmira](https://arcmira.com) · [API documentation](https://arcmira.com/docs) · [MCP setup](https://arcmira.com/docs/mcp-server)
+
 ## Overview
 
 Find spoken passages, read their surrounding transcript lines and cite the original video at the relevant timestamp. Adapted from Arcmira's Apache-2.0 plugin skill at v0.10.6; this version is self-contained and omits monitor creation and feedback writes.

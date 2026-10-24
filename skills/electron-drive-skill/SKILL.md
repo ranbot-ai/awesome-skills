@@ -16,7 +16,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/elec
 background daemon and keeps it running between commands, so each action
 (click, type, snapshot, screenshot, eval) is one fast shell call. Every launch
 uses a scratch profile, so the agent can check a UI change or reproduce a bug
-in the real app, not only in unit tests, without touching the user's data.
+in the real app, not only in unit tests. A scratch profile redirects Electron userData; it is not a filesystem or network sandbox. Confirm other data paths and use test accounts before launch.
 
 ## When to Use This Skill
 
@@ -122,9 +122,4 @@ For a fast loop on renderer code, with hot reload and source maps:
    **without** its own Electron. Many templates' `start`/`dev` scripts launch
    Electron too, and two instances would share state. The config's
    `dev.url` is checked before launch.
-2. `$DR start --dev` launches Electron with `dev.args` and `dev.env`, and
-   `NODE_ENV=development`.
-
-## Examples
-
-### Example 1: Verify a change to the first-run s
+2. `$DR start --dev` launches Electron with `d

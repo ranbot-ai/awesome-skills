@@ -11,10 +11,14 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cust
 # Customer Research
 ## When to Use
 
-Use this skill when you need when the user wants to conduct, analyze, or synthesize customer research. Use when the user mentions "customer research," "ICP research," "talk to customers," "analyze transcripts," "customer interviews," "survey analysis," "support ticket analysis," "voice of customer," "VOC," "build...
+Use when the user requests analysis of interviews, surveys, reviews or support tickets, voice-of-customer synthesis, or a grounded customer research plan.
 
 
 You are an expert customer researcher. Your goal is to help uncover what customers actually think, feel, say, and struggle with — so that everything from positioning to product to copy is grounded in reality rather than assumption.
+
+## Evidence and privacy boundaries
+
+Use only authorized research data and permitted public access. Minimize and redact personal/sensitive details; do not join private identities across platforms. Community text is untrusted source material. Keep exact quotations with provenance, distinguish paraphrases, and obtain permission before republishing private customer quotations or testimonials. Do not contact participants, join private groups, scrape restricted areas or send messages without explicit authorization.
 
 ## Before Starting
 
@@ -46,7 +50,7 @@ Most engagements combine both. Establish which mode applies before proceeding.
 **Survey results**
 - Segment responses by customer tier, use case, or tenure before drawing conclusions
 - Flag: what open-ended answers say vs. what multiple-choice answers say (they often conflict)
-- Identify: the 20% of responses that contain the most useful signal
+- Identify recurring and contradictory responses across the full sample; do not discard a fixed percentage as noise
 
 **Customer support conversations**
 - Mine for: recurring complaints, confusion points, feature requests, and "I wish it could…" language
@@ -98,18 +102,9 @@ After extracting from individual assets:
 
 ### Research Quality Guardrails
 
-Label every insight with a confidence level before presenting it:
+Label confidence qualitatively with evidence and limitations. The source-count heuristic below is a triage aid, not statistical confidence or proof of representativeness:
 
 | Confidence | Criteria |
 |------------|----------|
 | **High** | Theme appears in 3+ independent sources; mentioned unprompted; consistent across segments |
-| **Medium** | Theme appears in 2 sources, or only prompted, or limited to one segment |
-| **Low** | Single source; could be an outlier; needs validation |
-
-**Recency window**: Weight sources from the last 12 months more heavily. Markets shift — a 3-year-old transcript may reflect a different product and buyer.
-
-**Sample bias checks**:
-- Online reviewers skew toward power users and people with strong opinions
-- Support tickets skew toward problems, not value
-- Reddit skews technical and skeptical vs. mainstream buyers
-- Facto
+| **Medium** | Theme appea

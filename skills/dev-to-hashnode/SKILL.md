@@ -33,7 +33,7 @@ Developer blogging platforms offer built-in audiences of hundreds of thousands o
 
 | Feature | Dev.to | Hashnode |
 |---------|--------|----------|
-| Monthly visitors | ~10M+ | ~3M+ |
+| Monthly visitors | Unverified; check current analytics | Unverified; check current analytics |
 | Custom domain | No (subdomain only) | Yes (free) |
 | Canonical URL support | Yes | Yes |
 | SEO benefits | High domain authority | Your domain gets SEO |
@@ -69,7 +69,7 @@ Developer blogging platforms offer built-in audiences of hundreds of thousands o
 ### Best Practice: Your Blog + Cross-Post
 
 1. **Publish on your blog first** — This is canonical
-2. **Wait 1-2 days** — Let Google index your original
+2. **Verify the original URL** — Indexing timing varies; waiting does not guarantee canonical selection
 3. **Cross-post to Dev.to** — Set canonical URL to your blog
 4. **Cross-post to Hashnode** — Set canonical URL to your blog
 
@@ -96,7 +96,7 @@ canonical_url: https://yourblog.com/your-post
 ```yaml
 ---
 title: "Specific, Keyword-Rich Title (Not Clickbait)"
-published: true
+published: false
 description: "One compelling sentence that shows up in previews and SEO"
 tags: javascript, webdev, tutorial, beginners
 cover_image: https://your-cdn.com/image.png
@@ -122,7 +122,7 @@ series: "Building a CLI from Scratch"
 
 **Rules**:
 - Maximum 4 tags per post
-- First tag is primary (appears in URL)
+- First tag is primary in presentation; article URLs need not contain a tag
 - Check tag follower count before using
 
 ### What Performs on Dev.to
@@ -158,7 +158,4 @@ series: "Building a CLI from Scratch"
 | **Subtitle** | Use for SEO keywords |
 | **Cover image** | 1600x840 optimal size |
 | **SEO title** | Can differ from article title |
-| **SEO description** | 155 characters max |
-| **Canonical URL** | Your original if cross-posting |
-| **Enable table of contents** | Yes for long posts |
-| *
+| **SEO d

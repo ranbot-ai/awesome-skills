@@ -32,7 +32,7 @@ AZURE_CLIENT_ID=<managed-identity-client-id>
 
 ## DefaultAzureCredential
 
-The recommended credential for most scenarios. Tries multiple authentication methods in order:
+Useful for development and flexible environments. Production should select an explicit intended credential (such as workload/managed identity) rather than unexpectedly falling back to another account. The chain below is illustrative and version/configuration-dependent:
 
 ```python
 from azure.identity import DefaultAzureCredential
@@ -76,6 +76,8 @@ credential = DefaultAzureCredential(
 )
 ```
 
+Before token acquisition, verify tenant, client/principal, cloud and required audience/scope without printing tokens. Avoid secrets in dotenv examples committed to a repo or pasted into shell history; prefer managed/workload identity where supported. Close credentials/clients in failure paths. Review the [current credential-chain guidance](https://learn.microsoft.com/en-us/azure/developer/python/sdk/authentication/credential-chains) for the selected package, including optional broker/developer credentials.
+
 ## Specific Credential Types
 
 ### ManagedIdentityCredential
@@ -99,6 +101,7 @@ credential = ManagedIdentityCredential(
 For service principal with secret:
 
 ```python
+import os
 from azure.identity import ClientSecretCredential
 
 credential = ClientSecretCredential(
@@ -171,23 +174,4 @@ from azure.identity.aio import DefaultAzureCredential
 from azure.storage.blob.aio import BlobServiceClient
 
 async def main():
-    credential = DefaultAzureCredential()
-    
-    async with BlobServiceClient(
-        account_url="https://<account>.blob.core.windows.net",
-        credential=credential
-    ) as client:
-        # ... async operations
-        pass
-    
-    await credential.close()
-```
-
-## Best Practices
-
-1. **Use DefaultAzureCredential** for code that runs locally and in Azure
-2. **Never hardcode credentials** — use environment variables or managed identity
-3. **Prefer managed identity** in production Azure deployments
-4. **Use ChainedTokenCredential** when you need a custom credential order
-5. **Close async credentials** explicitly or use context managers
-6. **Set AZURE_CLIENT_ID** for user-assigned man
+  

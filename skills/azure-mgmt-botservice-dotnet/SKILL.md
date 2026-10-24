@@ -3,7 +3,7 @@ name: azure-mgmt-botservice-dotnet
 description: Azure Resource Manager SDK for Bot Service in .NET. Management plane operations for creating and managing Azure Bot resources, channels (Teams, DirectLine, Slack), and connection settings. 
 category: AI & Agents
 source: antigravity
-tags: [api, ai, workflow, design, azure, cro]
+tags: [api, ai, workflow, design, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-mgmt-botservice-dotnet
 ---
 
@@ -12,6 +12,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azur
 
 Management plane SDK for provisioning and managing Azure Bot Service resources via Azure Resource Manager.
 
+## Provisioning and lifecycle scope
+
+These are historical SDK fragments. Verify current package/service lifecycle, supported app identity types and the target tenant before creating resources; do not assume every channel or multi-tenant configuration is available for new bots. Select the exact subscription/resource group instead of relying on an unintended default. Pin packages, validate signatures/imports and use approved test resources. Creating channels exposes messaging surfaces; deleting bots and regenerating DirectLine keys can interrupt clients. Require corresponding user authority, stage rotation and protect returned keys from logs. Credential-chain choice must be deliberate in production.
+
 ## Installation
 
 ```bash
@@ -19,7 +23,7 @@ dotnet add package Azure.ResourceManager.BotService
 dotnet add package Azure.Identity
 ```
 
-**Current Versions**: Stable v1.1.1, Preview v1.1.0-beta.1
+**Historical example versions**: v1.1.1 / v1.1.0-beta.1; check supported versions and migration guidance before use.
 
 ## Environment Variables
 
@@ -178,36 +182,4 @@ var webChatChannelData = new BotChannelData(AzureLocation.WestUS2)
 await channels.CreateOrUpdateAsync(
     WaitUntil.Completed,
     BotChannelName.WebChatChannel,
-    webChatChannelData);
-```
-
-### 5. Get Bot and List Channels
-
-```csharp
-// Get bot
-BotResource bot = await botCollection.GetAsync("myBotName");
-Console.WriteLine($"Bot: {bot.Data.Properties.DisplayName}");
-Console.WriteLine($"Endpoint: {bot.Data.Properties.Endpoint}");
-
-// List channels
-await foreach (BotChannelResource channel in bot.GetBotChannels().GetAllAsync())
-{
-    Console.WriteLine($"Channel: {channel.Data.Name}");
-}
-```
-
-### 6. Regenerate DirectLine Keys
-
-```csharp
-var regenerateRequest = new BotChannelRegenerateKeysContent(BotChannelName.DirectLineChannel)
-{
-    SiteName = "Default Site"
-};
-
-BotChannelResource channelWithKeys = await bot.GetBotChannelWithRegenerateKeysAsync(regenerateRequest);
-```
-
-### 7. Update Bot
-
-```csharp
-BotResource bot = await bot
+    webCha

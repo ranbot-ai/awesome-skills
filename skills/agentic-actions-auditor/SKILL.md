@@ -36,7 +36,7 @@ Static security analysis guidance for GitHub Actions workflows that invoke AI co
 When auditing agentic actions, reject these common rationalizations. Each represents a reasoning shortcut that leads to missed findings.
 
 **1. "It only runs on PRs from maintainers"**
-Wrong because it ignores `pull_request_target`, `issue_comment`, and other trigger events that expose actions to external input. Attackers do not need write access to trigger these workflows. A `pull_request_target` event runs in the context of the base branch, not the PR branch, meaning any external contributor can trigger it by opening a PR.
+Wrong because it ignores `pull_request_target`, `issue_comment`, and other trigger events that expose actions to external input. Attackers do not need write access to trigger these workflows. A `pull_request_target` event uses the base context; triggering still depends on configured activity types, filters and repository policy. Inspect those conditions rather than assuming every external PR reaches the agent.
 
 **2. "We use allowed_tools to restrict what it can do"**
 Wrong because tool restrictions can still be weaponized. Even restricted tools like `echo` can be abused for data exfiltration via subshell expansion (`echo $(env)`). A tool allowlist reduces attack surface but does not eliminate it. Limited tools != safe tools.
@@ -77,6 +77,4 @@ Use a two-step approach with `gh api`:
    ```
    gh api repos/{owner}/{repo}/contents/.github/workflows --paginate --jq '.[].name'
    ```
-   Resolve the requested/default ref to a full SHA and use that SHA on every fetch; URL-encode path/ref components and pass endpoints as quoted structured arguments.
-
-2. **Filter for YAML files:*
+   Resolve the requested/default ref to a full SHA and use that SHA on every fetch; URL-encode path/ref components and pass end

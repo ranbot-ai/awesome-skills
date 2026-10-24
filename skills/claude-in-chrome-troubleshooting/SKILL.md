@@ -70,7 +70,7 @@ mv ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/com.anthrop
    ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/com.anthropic.claude_code_browser_extension.json.disabled
 ```
 
-**You cannot use both simultaneously.** Pick one and disable the other.
+These paths and coexistence failures are historical observations, not a universal current-version restriction. Confirm the active host, versions and profile first; use supported reconnect/repair before changing registrations.
 
 ### Toggle Script
 
@@ -103,23 +103,6 @@ chrome-mcp-toggle() {
 
 Usage: `chrome-mcp-toggle` then restart Chrome (and Claude Code if switching to CLI).
 
-## Quick Diagnosis
+Treat the toggle as an optional local workaround only after confirming the conflict. Back up registrations and refuse destination collisions before any move; the script below is illustrative and does not implement those checks. Closing Chrome can interrupt unrelated work: preserve tabs/forms and obtain authorization before restarting. Diagnostic process arguments/configuration may contain private paths or values; redact before sharing. Do not install the toggle in shell startup without an explicit request.
 
-```bash
-# 1. Which native host binary is running?
-ps aux | grep chrome-native-host | grep -v grep
-# Claude.app: /Applications/Claude.app/Contents/Helpers/chrome-native-host
-# Claude Code: ~/.local/share/claude/versions/X.X.X --chrome-native-host
-
-# 2. Where is the socket?
-# For Claude Code (single file in TMPDIR):
-ls -la "$(getconf DARWIN_USER_TEMP_DIR)/claude-mcp-browser-bridge-$USER" 2>&1
-
-# For Claude.app (directory with PID files):
-ls -la /tmp/claude-mcp-browser-bridge-$USER/ 2>&1
-
-# 3. What's the native host connected to?
-lsof -U 2>&1 | grep claude-mcp-browser-bridge
-
-# 4. Which configs are active?
-ls ~/Library/Application\ Support/Google/Ch
+## Quic

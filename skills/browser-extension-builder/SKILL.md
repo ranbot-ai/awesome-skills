@@ -89,7 +89,7 @@ extension/
     }
   },
   "content_scripts": [{
-    "matches": ["<all_urls>"],
+    "matches": ["https://specific-site.com/*"],
     "js": ["content/content.js"]
   }],
   "background": {
@@ -119,13 +119,18 @@ Code that runs on web pages
 // content.js - Runs on every matched page
 
 // Wait for page to load
-document.addEventListener('DOMContentLoaded', () => {
+function modifyPage() {
   // Modify the page
   const element = document.querySelector('.target');
   if (element) {
     element.style.backgroundColor = 'yellow';
   }
-});
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', modifyPage, { once: true });
+} else {
+  modifyPage();
+}
 
 // Listen for messages from popup/background
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -206,31 +211,19 @@ chrome.storage.onChanged.addListener((changes, area) => {
 ### Storage Limits
 | Type | Limit |
 |------|-------|
-| local | 5MB |
+| local | 10MB (5MB on Chrome 113 and earlier) |
 | sync | 100KB total, 8KB per item |
 
 ### Async/Await Pattern
 ```javascript
 // Modern async wrapper
 async function getStorage(keys) {
-  return new Promise((resolve) => {
-    chrome.storage.local.get(keys, resolve);
+  return new Promise((resolve, reject) => {
+    chrome.storage.local.get(keys, (value) => {
+      if (chrome.runtime.lastError) reject(new Error(chrome.runtime.lastError.message));
+      else resolve(value);
+    });
   });
 }
 
-async function setStorage(data) {
-  return new Promise((resolve) => {
-    chrome.storage.local.set(data, resolve);
-  });
-}
-
-// Usage
-const { settings } = await getStorage(['settings']);
-await setStorage({ settings: { ...settings, theme: 'dark' } });
-```
-
-### Extension Monetization
-
-Making money from extensions
-
-**W
+async function set

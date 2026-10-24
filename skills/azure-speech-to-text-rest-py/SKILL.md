@@ -63,14 +63,17 @@ def transcribe_audio(audio_file_path: str, language: str = "en-US") -> dict:
     }
     
     with open(audio_file_path, "rb") as audio_file:
-        response = requests.post(url, headers=headers, params=params, data=audio_file)
+        response = requests.post(url, headers=headers, params=params, data=audio_file, timeout=(10, 90))
     
     response.raise_for_status()
     return response.json()
 
 # Usage
 result = transcribe_audio("audio.wav", "en-US")
-print(result["DisplayText"])
+if result.get("RecognitionStatus") == "Success" and result.get("NBest"):
+    print(result["NBest"][0].get("Display", ""))
+else:
+    print("No successful detailed recognition result")
 ```
 
 ## Audio Requirements
@@ -169,7 +172,8 @@ def transcribe_chunked(audio_file_path: str, language: str = "en-US") -> dict:
         url, 
         headers=headers, 
         params=params, 
-        data=generate_chunks(audio_file_path)
+        data=generate_chunks(audio_file_path),
+        timeout=(10, 90)
     )
     
     response.raise_for_status()
@@ -197,10 +201,4 @@ def get_access_token() -> str:
     region = os.environ["AZURE_SPEECH_REGION"]
     api_key = os.environ["AZURE_SPEECH_KEY"]
     
-    token_url = f"https://{region}.api.cognitive.microsoft.com/sts/v1.0/issueToken"
-    
-    response = requests.post(
-        token_url,
-        headers={
-            "Ocp-Apim-Subscription-Key": api_key,
-        
+    token_url = 

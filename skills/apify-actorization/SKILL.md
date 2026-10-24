@@ -12,6 +12,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/apif
 
 Actorization converts existing software into reusable serverless applications compatible with the Apify platform. Actors are programs packaged as Docker images that accept well-defined JSON input, perform an action, and optionally produce structured JSON output.
 
+Before initialization/install/deploy, inspect existing files and preserve their state. Confirm target account/Actor, source license, uploaded files/secrets, network targets and spending/charging limits. Authorizing local conversion does not authorize cloud upload, Store publication or monetization. Pin reviewed SDK/CLI/base images and verify schemas against that version.
+
 ## Quick Start
 
 1. Run `apify init` in project root
@@ -132,7 +134,7 @@ Or use an input file:
 apify run --input-file ./test-input.json
 ```
 
-**Important:** Always use `apify run`, not `npm start` or `python main.py`. The CLI sets up the proper environment and storage.
+Use the documented local CLI flow for the selected language; inspect storage purge defaults and preserve unrelated local data. Direct SDK/test execution may also be appropriate. Local execution can still make network requests or use cloud storage when configured; use synthetic fixtures and a test account.
 
 ## Step 8: Deploy
 
@@ -150,15 +152,4 @@ After deploying, you can monetize your actor in the Apify Store. The recommended
 - Per page processed
 - Per API call made
 
-Configure PPE in the Apify Console under Actor > Monetization. Charge for events in your code with `await Actor.charge('result')`.
-
-Other options: **Rental** (monthly subscription) or **Free** (open source).
-
-## Pre-Deployment Checklist
-
-- [ ] `.actor/actor.json` exists with correct name and description
-- [ ] `.actor/actor.json` validates against `@apify/json_schemas` (`actor.schema.json`)
-- [ ] `.actor/input_schema.json` defines all required inputs
-- [ ] `.actor/input_schema.json` validates against `@apify/json_schemas` (`input.schema.json`)
-- [ ] `.actor/output_schema.json` defines output structure (if applicable)
-- [ ] `.actor/output_schema.json` validates ag
+Configure PPE in the Apify Console under Actor > Monetization. Charge for events in your code with `await Actor.char

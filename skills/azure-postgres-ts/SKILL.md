@@ -86,6 +86,8 @@ const client = new Client({
 await client.connect();
 ```
 
+Examples are separate sketches requiring imports/schema and an authorized non-production database. Parameter binding protects values, not identifiers or tenant authorization. TypeScript query generics are compile-time assertions, not runtime result validation. On rollback failure, destroy the client instead of returning it to the pool; preserve the original error.
+
 ## Core Workflows
 
 ### 1. Single Client Connection
@@ -183,23 +185,4 @@ try {
   await client.query("BEGIN");
   
   const userResult = await client.query(
-    "INSERT INTO users (email) VALUES ($1) RETURNING id",
-    ["user@example.com"]
-  );
-  const userId = userResult.rows[0].id;
-  
-  await client.query(
-    "INSERT INTO orders (user_id, total) VALUES ($1, $2)",
-    [userId, 99.99]
-  );
-  
-  await client.query("COMMIT");
-} catch (error) {
-  await client.query("ROLLBACK");
-  throw error;
-} finally {
-  client.release();
-}
-```
-
-### 5. Transaction 
+    "INSERT INTO users (email

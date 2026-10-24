@@ -3,7 +3,7 @@ name: skeuomorphism
 description: Web and App implementation guide for Skeuomorphism. Trigger when user wants UI to mimic real-world objects, realistic textures, or physical metaphors. 
 category: Creative & Media
 source: antigravity
-tags: [react, ai, design, image, rag, seo]
+tags: [react, api, ai, design, image, rag, seo]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-it/skeuomorphism
 ---
 
@@ -70,7 +70,7 @@ struct SkeuoButton: View {
         Button(action: {}) {
             Text("POWER")
                 .font(.system(size: 14, weight: .bold))
-                .foregroundColor(.white)
+                .foregroundColor(.black)
                 .textCase(.uppercase)
         }
         .frame(width: 80, height: 80)

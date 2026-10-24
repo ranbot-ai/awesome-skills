@@ -17,7 +17,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/brow
 
 Direct browser control via CDP. For task-specific edits, use `agent-workspace/agent_helpers.py`. For setup, install, or connection problems, read install.md.
 
-**Routing check first:** if the task needs no interaction (no clicks, logins, or forms) and you just want page content, use DeepAPI `POST /v1/scrape/website` instead of driving a browser — see the `deepapi` skill. Use browser-harness when the task needs a real browser: interaction, JS-heavy flows, logged-in sessions, or visual verification.
+**Routing check first:** if the task needs no interaction (no clicks, logins, or forms) and you just want page content, prefer an available read-only retrieval tool; DeepAPI is an optional external service requiring separate configuration and data-transfer approval — see the `deepapi` skill. Use browser-harness when the task needs a real browser: interaction, JS-heavy flows, logged-in sessions, or visual verification.
 
 Domain skills (community-contributed per-site playbooks under `agent-workspace/domain-skills/`) are off by default. Set `BH_DOMAIN_SKILLS=1` to enable them; see the bottom section.
 
@@ -33,7 +33,7 @@ print(page_info())
 '
 ```
 
-- Invoke as browser-harness — it's on $PATH. No cd, no uv run.
+- First verify the installed executable and reviewed version; this catalog does not bundle the runtime or prove it is on PATH.
 - First navigation is new_tab(url), not goto_url(url) — goto runs in the user's active tab and clobbers their work.
 
 ## Tool call shape
@@ -101,5 +101,4 @@ If you start struggling with a specific mechanic while navigating, look in inter
 - Bulk HTTP: http_get(url) + ThreadPoolExecutor. No browser for static pages (249 Netflix pages in 2.8s).
 - After goto: wait_for_load().
 - Wrong/stale tab: ensure_real_tab(). Use it when the current tab is stale or internal; the daemon also auto-recovers from stale sessions on the next call.
-- Verification: print(page_info()) is the simplest "is this alive?" check, but screenshots are the default way to verify whether a visible action actually worked.
-- DOM reads: use js(...) for inspection and extraction when the screenshot shows that coordinates are the wrong t
+- Verification: print(page_info()) is the simplest "is this alive?" check, but screenshots are the default way to verify whether a vi

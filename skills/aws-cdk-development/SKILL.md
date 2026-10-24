@@ -21,7 +21,7 @@ This skill provides comprehensive guidance for developing AWS infrastructure usi
 
 ## AWS Documentation Requirement
 
-Always verify AWS facts using MCP tools (`mcp__aws-mcp__*` or `mcp__*awsdocs*__*`) before answering. The `aws-mcp-setup` dependency is auto-loaded — if MCP tools are unavailable, guide the user through that skill's setup flow.
+Always verify AWS facts using MCP tools (`mcp__aws-mcp__*` or `mcp__*awsdocs*__*`) before answering. Check actual tool availability; no dependency is auto-loaded by this catalog. If MCP is unavailable, use current official AWS documentation, or report the missing capability without automatically installing a server.
 
 ## CDK-Specific MCP Guidance
 
@@ -79,7 +79,7 @@ new lambda.Function(this, 'MyFunction', {
 
 Use the appropriate Lambda construct based on runtime:
 
-**TypeScript/JavaScript**: Use `@aws-cdk/aws-lambda-nodejs`
+**TypeScript/JavaScript**: Use `aws-cdk-lib/aws-lambda-nodejs` (CDK v2)
 ```typescript
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 
@@ -90,7 +90,7 @@ new NodejsFunction(this, 'MyFunction', {
 });
 ```
 
-**Python**: Use `@aws-cdk/aws-lambda-python`
+**Python**: Use the version-matched `@aws-cdk/aws-lambda-python-alpha` package
 ```typescript
 import { PythonFunction } from '@aws-cdk/aws-lambda-python-alpha';
 
@@ -130,6 +130,4 @@ const app = new App();
 Aspects.of(app).add(new AwsSolutionsChecks());
 ```
 
-**Optional - VS Code users**: Install [CDK NAG Validator extension](https://marketplace.visualstudio.com/items?itemName=alphacrack.cdk-nag-validator) for faster feedback on file save.
-
-**For P
+**Optional - VS Code users**: Install [CDK NAG Validato

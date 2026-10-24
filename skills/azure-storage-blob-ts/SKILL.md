@@ -3,7 +3,7 @@ name: azure-storage-blob-ts
 description: Azure Blob Storage JavaScript/TypeScript SDK (@azure/storage-blob) for blob operations. Use for uploading, downloading, listing, and managing blobs and containers. 
 category: Document Processing
 source: antigravity
-tags: [javascript, typescript, node, pdf, ai, workflow, document, azure, rag]
+tags: [javascript, typescript, node, pdf, api, ai, workflow, document, azure, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-storage-blob-ts
 ---
 
@@ -18,8 +18,7 @@ SDK for Azure Blob Storage operations — upload, download, list, and manage blo
 npm install @azure/storage-blob @azure/identity
 ```
 
-**Current Version**: 12.x  
-**Node.js**: >= 18.0.0
+Examples use the 12.x API family. Pin compatible SDK versions and a currently supported Node runtime from the package engines; this is not a latest-version claim.
 
 ## Environment Variables
 
@@ -93,6 +92,8 @@ BlobServiceClient (account level)
         ├── AppendBlobClient (append-only blobs)
         └── PageBlobClient (page blobs - VHDs)
 ```
+
+Choose the least-privilege identity/SAS, short expiry and HTTPS-only access; prefer user-delegation SAS where supported. Never expose account keys or signed URLs in browser bundles/logs. Verify exact account/container/blob before deletes or overwrites. setMetadata/setHTTPHeaders replace fields: preserve required existing values and use conditional ETags where needed. These examples are separate actions, not a sequence to execute blindly.
 
 ## Container Operations
 
@@ -185,25 +186,5 @@ await blockBlobClient.uploadData(arrayBuffer);
 const blobClient = containerClient.getBlobClient("my-file.txt");
 const downloadResponse = await blobClient.download();
 
-// Read as string (browser & Node.js)
-const downloaded = await streamToText(downloadResponse.readableStreamBody!);
-
-async function streamToText(readable: NodeJS.ReadableStream): Promise<string> {
-  const chunks: Buffer[] = [];
-  for await (const chunk of readable) {
-    chunks.push(Buffer.from(chunk));
-  }
-  return Buffer.concat(chunks).toString("utf-8");
-}
-```
-
-### Download to File (Node.js only)
-
-```typescript
-const blockBlobClient = containerClient.getBlockBlobClient("my-file.txt");
-await blockBlobClient.downloadToFile("/path/to/local/destination.txt");
-```
-
-### Download to Buffer (Node.js only)
-
-```ty
+// Read as string (Node.js only; bounded small blobs)
+con

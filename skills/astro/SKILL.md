@@ -114,6 +114,8 @@ const { Content } = await post.render();
 <Content />
 ```
 
+The collection examples in Steps 3–4 and RSS use the legacy pre-Astro-5 content API (`src/content/config.ts`, `post.slug`, `post.render()`). Do not combine them with a new project unchanged: select the API for the installed major, migrate to content loaders and `render()` as required, and import `getCollection` in the dynamic page. Tailwind integration setup also depends on its major. See the [Astro 5 migration guide](https://docs.astro.build/en/guides/upgrade-to/v5/).
+
 ### Step 4: Content Collections
 
 Content collections give you type-safe access to Markdown and MDX files:
@@ -185,30 +187,3 @@ import VideoPlayer from '../components/VideoPlayer.svelte';
 
 ```astro
 ---
-// src/layouts/BaseLayout.astro
-interface Props {
-  title: string;
-  description?: string;
-}
-const { title, description = 'My Astro Site' } = Astro.props;
----
-
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-  </head>
-  <body>
-    <nav>...</nav>
-    <main>
-      <slot />  <!-- page content renders here -->
-    </main>
-    <footer>...</footer>
-  </body>
-</html>
-```
-
-```astro
----
-// src

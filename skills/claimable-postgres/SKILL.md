@@ -16,6 +16,8 @@ Use this skill when you need provision instant temporary Postgres databases via 
 
 Instant Postgres databases for local development, demos, prototyping, and test environments. No account required. Databases expire after 72 hours unless claimed to a Neon account.
 
+Treat connection and claim URLs as sensitive capabilities: keep them out of public/client environment variables, logs and commits. A name beginning PUBLIC_ does not make a claim link safe to publish. Verify service availability/expiry/quotas from current primary docs and the actual response; do not promise permanent free retention from claiming alone. Inspect seed SQL inertly and verify the new database target before executing.
+
 ## Quick Start
 
 ```bash
@@ -24,7 +26,7 @@ curl -s -X POST "https://neon.new/api/v1/database" \
   -d '{"ref": "agent-skills"}'
 ```
 
-Parse `connection_string` and `claim_url` from the JSON response. Write `connection_string` to the project's `.env` as `DATABASE_URL`.
+Parse `connection_string` and `claim_url` from the JSON response. Write connection_string only to an approved ignored private env file without overwriting existing values.
 
 For other methods (CLI, SDK, Vite plugin), see [Which Method?](#which-method) below.
 
@@ -92,7 +94,7 @@ Returns the same response shape. Status transitions: `UNCLAIMED` -> `CLAIMING` -
 npx neon-new@latest --yes
 ```
 
-Provisions a database and writes the connection string to `.env` in one step. Always use `@latest` and `--yes` (skips interactive prompts that would stall the agent).
+Provisions a database and writes the connection string to `.env` in one step. Use a reviewed version pinned for this task; --yes is appropriate only after all defaults and side effects match authorized scope. Do not silently execute an unreviewed latest package.
 
 ### Pre-run Check
 
@@ -109,8 +111,4 @@ Get confirmation before proceeding.
 ### Options
 
 | Option                  | Alias | Description                                                           | Default        |
-| ----------------------- | ----- | --------------------------------------------------------------------- | -------------- |
-| `--yes`                 | `-y`  | Skip prompts, use defaults                                            | `false`        |
-| `--env`                 | `-e`  | .env file path                                                        | `./.env`       |
-| `--key`                 | `-k`  | Connection string env var key                                         | `DATABASE_URL` |
-| `--prefix`              | `-p`  | Prefix for generated public env vars                                
+| ----------------------- | ----- | --

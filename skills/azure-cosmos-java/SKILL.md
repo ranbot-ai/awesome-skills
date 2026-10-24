@@ -18,7 +18,7 @@ Client library for Azure Cosmos DB NoSQL API with global distribution and reacti
 <dependency>
     <groupId>com.azure</groupId>
     <artifactId>azure-cosmos</artifactId>
-    <version>LATEST</version>
+    <version>{reviewed_exact_version}</version>
 </dependency>
 ```
 
@@ -109,8 +109,8 @@ CosmosClient client = new CosmosClientBuilder()
 
 ```java
 // Sync
-client.createDatabaseIfNotExists("myDatabase")
-    .map(response -> client.getDatabase(response.getProperties().getId()));
+var dbResponse = client.createDatabaseIfNotExists("myDatabase");
+var database = client.getDatabase(dbResponse.getProperties().getId());
 
 // Async with chaining
 asyncClient.createDatabaseIfNotExists("myDatabase")
@@ -178,7 +178,9 @@ import com.azure.cosmos.util.CosmosPagedIterable;
 
 CosmosContainer container = client.getDatabase("myDatabase").getContainer("myContainer");
 
-String query = "SELECT * FROM c WHERE c.status = @status";
+var query = new com.azure.cosmos.models.SqlQuerySpec(
+    "SELECT * FROM c WHERE c.status = @status",
+    java.util.List.of(new com.azure.cosmos.models.SqlParameter("@status", "active")));
 CosmosQueryRequestOptions options = new CosmosQueryRequestOptions();
 
 CosmosPagedIterable<User> results = container.queryItems(
@@ -194,11 +196,4 @@ results.forEach(user -> System.out.println("User: " + user.getName()));
 
 ### Partition Keys
 
-Choose a partition key with:
-- High cardinality (many distinct values)
-- Even distribution of data and requests
-- Frequently used in queries
-
-### Consistency Levels
-
-| Level 
+Choose a part

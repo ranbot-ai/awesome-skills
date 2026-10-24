@@ -46,7 +46,7 @@ body {
 
 .swiss-header {
   grid-column: 1 / 11; /* spans across multiple columns, leaving right side empty */
-  font-size: 6vw;
+  font-size: clamp(2rem, 6vw, 6rem);
   font-weight: 700;
   text-transform: lowercase; /* Optional, but common in brutalist/swiss */
   margin-bottom: 2rem;
@@ -139,4 +139,4 @@ class SwissDesignScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
-                  Text('the grid', style: TextStyle(fontFamily: 'Helvetica', fontSize: 60, fontWeight: FontWeight.w90
+                  Text('the grid', style: TextStyle(fontFamily: 'Helvetica', fontSize: 60, fontWei

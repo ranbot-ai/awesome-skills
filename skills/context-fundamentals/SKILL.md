@@ -51,13 +51,13 @@ Message history contains the conversation between the user and agent, including 
 Message history serves as scratchpad memory where agents track progress, maintain task state, and preserve reasoning across turns. Effective management of message history is critical for long-horizon task completion.
 
 **Tool Outputs**
-Tool outputs are the results of agent actions: file contents, search results, command execution output, API responses, and similar data. Tool outputs comprise the majority of tokens in typical agent trajectories, with research showing observations (tool outputs) can reach 83.9% of total context usage.
+Tool outputs are the results of agent actions: file contents, search results, command execution output, API responses, and similar data. Tool outputs comprise the majority of tokens in typical agent trajectories, with research showing observations (tool outputs) can dominate some workloads; this tree does not provide a dataset supporting a universal percentage.
 
 Tool outputs consume context whether they are relevant to current decisions or not. This creates pressure for strategies like observation masking, compaction, and selective tool result retention.
 
 ### Context Windows and Attention Mechanics
 
 **The Attention Budget Constraint**
-Language models process tokens through attention mechanisms that create pairwise relationships between all tokens in context. For n tokens, this creates n² relationships that must be computed and stored. As context length increases, the model's ability to capture these relationships gets stretched thin.
+Language models process tokens through attention mechanisms that create pairwise relationships between all tokens in context. Dense self-attention has quadratic prefill interaction count in sequence length; optimized kernels, sparse architectures and cached decoding have different memory/runtime characteristics. As context length increases, the model's ability to capture these relationships gets stretched thin.
 
-Models develop attention patterns from training data distributions where shorter sequences predominate. This means models have less experience with and fewer specialized parameters for context-wide dependencies. The res
+Models develop attention patterns from training 

@@ -3,7 +3,7 @@ name: editorial-design
 description: Web and App implementation guide for Editorial Design. Trigger when user wants a magazine-inspired layout, large headlines, and elegant typography pairing. 
 category: Creative & Media
 source: antigravity
-tags: [react, ai, llm, design, cro]
+tags: [react, ai, llm, design, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-it/editorial-design
 ---
 
@@ -51,7 +51,7 @@ body {
   font-family: 'Lato', sans-serif;
   font-size: 1.1rem;
   line-height: 1.8;
-  column-count: 2; /* Magazine columns */
+  column-width: 24rem; /* Collapse to one column when space is limited. */
   column-gap: 40px;
 }
 
@@ -62,7 +62,7 @@ body {
   float: left;
   line-height: 0.8;
   padding-right: 12px;
-  color: var(--cta-highlight);
+  color: var(--cta-highlight, #8b0000);
 }
 
 .pull-quote {
@@ -126,7 +126,7 @@ struct EditorialView: View {
     }
 }
 ```
-- Extensive use of `.font(.custom())` is mandatory. System fonts look too app-like.
+- Custom fonts are optional and require licensed, registered assets. System serif and sans-serif fonts are valid fallbacks. Preserve text scaling and expose a split drop-cap paragraph as one complete spoken sentence.
 - Use `Divider()` to create the hairlines that are so common in print design.
 - A fake "drop cap" can be achieved with an `HStack` aligning top.
 
@@ -145,7 +145,4 @@ class EditorialScreen extends StatelessWidget {
             const SizedBox(height: 40),
             const Text(
               'The Digital\nMagazine',
-              style: TextStyle(fontFamily: 'PlayfairDisplay', fontSize: 48, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic, height: 1.1),
-            ),
-            const SizedBox(height: 24),
-            const Divider(color: Colors.black, thickness: 1)
+              style: TextStyle(fontFamily: 'PlayfairDisplay', fontSize: 48, fontWeight: 

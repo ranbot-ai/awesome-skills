@@ -21,6 +21,10 @@ Use this skill when:
 - Setting up CI environments that match local dev
 - Creating ephemeral, disposable dev environments
 
+## Environment execution boundaries
+
+Devcontainer features, lifecycle hooks, Nix shell hooks, direnv and dependency installers execute code; inspect the complete configuration, locked inputs and source before activation. Do not run moving downloaded installers or accept a hash mismatch by deleting/recreating state; verify publisher/version and integrity first. Avoid privileged Docker-in-Docker and host sockets for untrusted repositories. Never pass production credentials into a development environment by default. Offline operation needs every dependency/artifact already available locally; a lockfile alone is insufficient. `nix build/run` need corresponding outputs, which the devShell-only example does not define.
+
 ## Dev Containers
 
 ### Basic Configuration
@@ -88,12 +92,12 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
 
   redis:
     image: redis:7-alpine
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"
 
 volumes:
   pgdata:
@@ -204,41 +208,4 @@ nix flake lock --update-input nixpkgs
 
 ## Devbox (Nix Made Simple)
 
-Devbox wraps Nix with a friendlier interface:
-
-```bash
-# Install Devbox
-curl -fsSL https://get.jetify.com/devbox -o /tmp/install-devbox.sh && sh /tmp/install-devbox.sh && rm /tmp/install-devbox.sh
-
-# Initialize project
-devbox init
-
-# Add packages
-devbox add nodejs@20 python@3.12 postgresql@16
-devbox add go@1.22 kubectl helm
-
-# Enter shell
-devbox shell
-
-# Run commands without entering shell
-devbox run node --version
-```
-
-### devbox.json Configuration
-
-```json
-{
-  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/main/.schema/devbox.schema.json",
-  "packages": [
-    "nodejs@20",
-    "python@3.12",
-    "go@1.22",
-    "kubectl@1.29",
-    "kubernetes-helm@3.14",
-    "opentofu@1.8",
-    "awscli2@2.15",
-    "jq@1.7",
-    "postgresql@16",
-    "redis@7"
-  ],
-  
+Devbox wraps Nix with a friendli

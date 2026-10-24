@@ -1,6 +1,6 @@
 ---
 name: cc-skill-security-review
-description: This skill ensures all code follows security best practices and identifies potential vulnerabilities. Use when implementing authentication or authorization, handling user input or file uploads, or cre
+description: This skill guides review of security practices and potential vulnerabilities; no checklist ensures all code is secure. Use when implementing authentication or authorization, handling user input or fil
 category: Security & Systems
 source: antigravity
 tags: [typescript, react, api, ai, image, security, vulnerability, supabase, rag]
@@ -10,7 +10,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cc-s
 
 # Security Review Skill
 
-This skill ensures all code follows security best practices and identifies potential vulnerabilities.
+This skill guides review of security practices and potential vulnerabilities; no checklist ensures all code is secure.
 
 ## Detailed Guide
 
@@ -163,7 +163,7 @@ export async function deleteUser(userId: string, requesterId: string) {
     where: { id: requesterId }
   })
 
-  if (requester.role !== 'admin') {
+  if (!requester || requester.role !== 'admin') {
     return NextResponse.json(
       { error: 'Unauthorized' },
       { status: 403 }
@@ -196,4 +196,3 @@ CREATE POLICY "Users update own data"
 - [ ] Authorization checks before sensitive operations
 - [ ] Row Level Security enabled in Supabase
 - [ ] Role-based access control implemented
-- [ ] Session management secur

@@ -1,9 +1,9 @@
 ---
 name: azure-monitor-query-py
 description: Azure Monitor Query SDK for Python. Use for querying Log Analytics workspaces and Azure Monitor metrics. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [python, api, ai, workflow, azure, rag]
+tags: [python, api, ai, workflow, document, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-monitor-query-py
 ---
 
@@ -15,7 +15,7 @@ Query logs and metrics from Azure Monitor and Log Analytics workspaces.
 ## Installation
 
 ```bash
-pip install azure-monitor-query
+pip install azure-monitor-query azure-identity
 ```
 
 ## Environment Variables
@@ -31,6 +31,7 @@ AZURE_METRICS_RESOURCE_URI=/subscriptions/<sub>/resourceGroups/<rg>/providers/<p
 ## Authentication
 
 ```python
+import os
 from azure.identity import DefaultAzureCredential
 
 credential = DefaultAzureCredential()
@@ -88,7 +89,7 @@ response = client.query_workspace(workspace_id, query, timespan=timedelta(hours=
 
 if response.tables:
     table = response.tables[0]
-    df = pd.DataFrame(data=table.rows, columns=[col.name for col in table.columns])
+    df = pd.DataFrame(data=table.rows, columns=table.columns)
     print(df.head())
 ```
 
@@ -122,7 +123,9 @@ elif response.status == LogsQueryStatus.FAILURE:
     print(f"Query failed: {response.partial_error}")
 ```
 
-## Metrics Query Client
+## Metrics Query Client (legacy azure-monitor-query 1.x only)
+
+Version 2.0 removed `MetricsQueryClient`; do not run the following legacy fragments with the unpinned current install above. For new work use `azure-monitor-querymetrics` or `azure-mgmt-monitor` with their documented schemas. See [official migration notice](https://learn.microsoft.com/python/api/overview/azure/monitor-query-readme).
 
 ### Query Resource Metrics
 
@@ -194,7 +197,7 @@ for ns in namespaces:
 ## Async Clients
 
 ```python
-from azure.monitor.query.aio import LogsQueryClient, MetricsQueryClient
+from azure.monitor.query.aio import LogsQueryClient
 from azure.identity.aio import DefaultAzureCredential
 
 async def query_logs():
@@ -212,23 +215,4 @@ async def query_logs():
     return response
 ```
 
-## Common Kusto Queries
-
-```kusto
-// Requests by status code
-AppRequests
-| summarize count() by ResultCode
-| order by count_ desc
-
-// Exceptions over time
-AppExceptions
-| summarize count() by bin(TimeGenerated, 1h)
-
-// Slow requests
-AppRequests
-| where DurationMs > 1000
-| project TimeGenerated, Name, DurationMs
-| order by DurationMs desc
-
-// Top errors
-AppExceptio
+## Common

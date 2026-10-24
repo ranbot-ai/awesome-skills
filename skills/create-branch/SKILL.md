@@ -17,6 +17,8 @@ Create a git branch with the correct type prefix and a descriptive name followin
 - You are starting a new piece of work from the default branch and need help classifying it as `feat`, `fix`, `docs`, or another branch type.
 - You want the branch name proposed from either the task description or the current local diff.
 
+Repository/user naming rules take precedence over these Sentry defaults. Preserve current dirty/staged/untracked work, resolve the intended base to a full commit and avoid auto-stashing unrelated changes. Validate the resulting name with git check-ref-format --branch and pass it as a quoted argument, never shell-interpolated user text. A stale remote-tracking ref is not proof the remote branch is absent; inspect the intended remote if needed.
+
 ## Step 1: Get the Username Prefix
 
 Run `gh api user --jq .login` to get the GitHub username.
@@ -99,14 +101,4 @@ If `git branch --show-current` is empty (detached HEAD), show the current commit
 
 Otherwise, if the current branch is not the default branch, warn the user and ask whether to branch from the current branch or switch to the default branch first.
 
-If the user wants to switch to the default branch, handle any uncommitted changes appropriately (offer to stash them if present), then run `git checkout <default-branch>`. On any failure, restore stashed changes if applicable and stop.
-
-Before creating the branch, check that the name doesn't already exist locally or on the remote (`git show-ref`). If it does, ask the user to choose a different name.
-
-Create the branch:
-
-```bash
-git checkout -b <branch-name>
-```
-
-Restore any stashed change
+If the user wants to switch to the default br

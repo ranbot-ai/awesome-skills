@@ -1,9 +1,9 @@
 ---
 name: design-it
 description: Routes frontend design tasks to 48 specific UI styles. Triggers for websites, app screens, or UI components requesting a specific aesthetic. 
-category: Creative & Media
+category: Document Processing
 source: antigravity
-tags: [react, claude, ai, design, rag]
+tags: [react, api, claude, ai, design, document, image, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-it
 ---
 
@@ -25,12 +25,12 @@ When a user asks you to build a frontend interface (web or app):
    - "Bauhaus" or "Clean" -> `swiss-design`
    - "Cyber" or "Matrix" -> `cyberpunk-ui`
    If they don't specify a style, choose one that best fits the project context.
-2. **Read the Style Reference**: Check the **Style Index** below to find the correct path for the chosen style. Use the `view_file` tool to read its specific `SKILL.md`.
-3. **Pick a Palette**: If the user explicitly defined a theme or colors, **use their requested colors**. If they did NOT specify colors, you MUST choose from one of the **10 Universal Palettes** below.
+2. **Read the Style Reference**: Check the **Style Index** below to find the correct path for the chosen style. Use an available file-reading tool to read its specific `SKILL.md`.
+3. **Pick a Palette**: If the user explicitly defined a theme or colors, **use their requested colors**. If they did NOT specify colors, use a suitable palette below as an optional starting point, then verify contrast for every actual foreground/background pair.
 4. **Execute**: Write the code following the specific principles of the chosen style. Do not blend styles unless requested.
 
 ## Universal Color Palettes
-If the user provides their own colors, use them. Otherwise, you MUST use one of these 10 award-winning, highly sophisticated palettes to avoid generic neon/purplish gradients. When picking a palette, stick to these exact hex codes and establish CSS variables for them.
+If the user provides their own colors, use them. Otherwise, these ten illustrative palettes are optional starting points. No award provenance is claimed. Adapt their colors for the selected style, brand and measured contrast, and define reusable color tokens.
 
 1. **Yacht Club** (Nautical / Classic Elegance)
    - Backgrounds: `#F9F6F0`
@@ -155,6 +155,3 @@ To use a style, you MUST read its file at `<style-folder>/SKILL.md` relative to 
 - `tile-design`
 - `data-dense-design`
 - `command-center-ui`
-
-## Web vs App Implementation
-- **Web (React/Vue/HTML)**: Use C

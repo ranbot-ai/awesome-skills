@@ -51,7 +51,7 @@ Search with the words the user actually used, plus the project or repository nam
 
 ### Step 2: Save After Deciding
 
-Write to memory when one of these has just happened:
+Within the user-authorized memory scope and host retention policy, write when one of these has just happened:
 
 - a **decision** was made and will still matter next week ("we use pnpm", "the billing module stays untouched")
 - the user **corrected** the agent, which is the strongest signal there is
@@ -91,4 +91,4 @@ If recall returns two entries that disagree, do not pick the closer match and pr
 - **Evidence** is what happened: one run, one failure, one observation. Cheap, plentiful, individually unreliable.
 - **Policy** is what should happen: a convention, a decision, a rule. Expensive, and should be hard to change by accident.
 
-An observation becomes policy when a human confirms it, when 
+An o

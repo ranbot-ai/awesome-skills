@@ -15,6 +15,8 @@ This skill defines distinct behavioral modes that optimize AI performance for sp
 
 ---
 
+Modes are communication/workflow preferences, not client capability switches or new permissions. Respect the user's requested scope and repository rules in every mode. Ship/orchestrate labels do not authorize publication, deployment or new agents, and terse implementation output must still report actual checks, failures and limitations. Named slash commands/roles work only if the host supports them.
+
 ## Available Modes
 
 ### 1. 🧠 BRAINSTORM Mode
@@ -221,22 +223,4 @@ Modern architectures optimized for agent-to-agent collaboration:
 
 ### 2. 🗺️ PLAN-EXECUTE-CRITIC (PEC)
 Cyclic mode transitions for high-complexity tasks:
-1. **Planner:** Decomposes the task into atomic steps (`task.md`).
-2. **Executor:** Performs the actual coding (`IMPLEMENT`).
-3. **Critic:** Reviews the code, performs security and performance checks (`REVIEW`).
-
-### 3. 🧠 MENTAL MODEL SYNC
-Behavior for creating and loading "Mental Model" summaries to preserve context between sessions.
-
----
-
-## Combining Modes
-
----
-
-## Manual Mode Switching
-
-Users can explicitly request a mode:
-
-```
-/bra
+1. **Planner:** Decomposes the task i

@@ -86,7 +86,7 @@ class APIClient:
         api_key: str,
         timeout: float = 30.0,
         max_retries: int = 3,
-        rate_limit_rps: float = 10.0,
+        max_concurrency: int = 10,
     ):
         self.base_url = base_url.rstrip("/")
         self.max_retries = max_retries
@@ -99,7 +99,9 @@ class APIClient:
             },
             timeout=httpx.Timeout(timeout, connect=5.0),
         )
-        self._rate_limiter = asyncio.Semaphore(int(rate_limit_rps))
+        if max_concurrency < 1 or max_retries < 1:
+            raise ValueError("concurrency and attempts must be positive")
+        self._rate_limiter = asyncio.Semaphore(max_concurrency)  # concurrency cap, not requests/sec
     
     async def _request(
         self,
@@ -114,7 +116,11 @@ class APIClient:
         import uuid
         cid = correlation_id or str(uuid.uuid4())[:8]
         
-        for attempt in range(self.max_retries):
+        # Restrict this example to same-origin relative API paths.
+        if not path.startswith("/") or path.startswith("//") or "://" in path:
+            raise ValueError("Expected same-origin API path")
+        attempts = self.max_retries if method.upper() in {"GET", "HEAD", "OPTIONS"} else 1
+        for attempt in range(attempts):
             async with self._rate_limiter:
                 try:
                     logger.info(
@@ -138,12 +144,4 @@ class APIClient:
                             "correlation_id": cid,
                             "status_code": response.status_code,
                         },
-                    )
-                    return response.json()
-                    
-                except httpx.HTTPStatusError as e:
-                    if e.response.status_code == 429:
-                        retry_after = float(e.response.headers.get("Retry-After", 2 ** attempt))
-                        logger.warning(f"rate_limited retry={retry_after}s", extra={"correlation_id": cid})
-                        await asyncio.sleep(retry_after)
-     
+            

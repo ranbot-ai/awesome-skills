@@ -99,8 +99,7 @@ open_questions: []      # the unanswered ones, in the order worth asking
 
 ### Step 4 - Recommend the smallest workflow
 
-Give a short recommendation from confirmed facts only, then ask whether to build it. Do not
-build unprompted. Ask: "Want me to build the CSV, SQL DDL, JSON Schema, Notion mapping, or an
+If artifacts were requested, build from confirmed facts after resolving essential gaps. For advice-only requests, give a short recommendation and offer: "Want me to build the CSV, SQL DDL, JSON Schema, Notion mapping, or an
 Excel workbook from these confirmed rules?"
 
 **Recommended approach:** Define a small set of proficiency levels and attach each competency
@@ -116,4 +115,4 @@ link only when that outcome was confirmed.
 ### Step 5 - Build only on request
 
 Once the user asks for it, emit the artifacts as data only. No preamble, no summary, no
-closing line. The Field Reference is the documented starting shape. If the user confir
+closing line. The Field Reference is the documen

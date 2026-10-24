@@ -22,7 +22,7 @@ Use this sub-style when the user's request matches the aesthetic described above
 3. **Adaptive Components**: Cards and blocks size themselves dynamically based on the generated content length.
 
 ## Visual DNA
-- **Colors**: **Minimalist Slate** combined with **Electric Indigo** or **Neon Pulse** gradients for the AI elements. The background is clean (white or dark grey), while the AI "presence" is represented by a shifting, iridescent gradient.
+- **Colors**: **Minimalist Slate** combined with a custom indigo or neon accent gradient (these are descriptions, not additional bundled palettes) for the AI elements. The background is clean (white or dark grey), while the AI "presence" is represented by a shifting, iridescent gradient.
 - **Typography**: Highly readable system fonts (`Inter`, `SF Pro`).
 - **Styling**: Subtle glowing borders to indicate AI generation in progress.
 
@@ -78,6 +78,7 @@ body {
 struct AINativeInput: View {
     @State private var isGenerating = true
     @State private var gradientOffset = 0.0
+    @State private var prompt = ""
     
     var body: some View {
         VStack {
@@ -101,7 +102,7 @@ struct AINativeInput: View {
             
             // AI Input Box
             HStack {
-                TextField("Ask anything...", text: .constant(""))
+                TextField("Ask anything...", text: $prompt)
                 Image(systemName: "sparkles")
                     .foregroundColor(.purple)
             }
@@ -150,8 +151,4 @@ class AINativeInput extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(24),
               boxShadow: [
-                BoxShadow(color: Colors.pink.withOpacity(0.15), blurRadius: 20),
-              ],
-            ),
-            child: Container(
-        
+                BoxShadow(color: Colors.pink.withOpacity(0.15), blurRadi

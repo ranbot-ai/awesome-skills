@@ -68,6 +68,8 @@ var armClient = new ArmClient(credential);
 
 ## Workflows
 
+Confirm tenant, target subscription/resource group, Marketplace offer/plan/terms and cost before provisioning. The sample private-plan identifiers are illustrative and may not be available to the account; "Free" in a display name is not a billing guarantee. Default subscription selection must be checked explicitly. Deletion and admin changes require scoped authorization and a dependency/recovery review. Pin the SDK version and verify signatures before compiling; no deployment is claimed.
+
 ### Get Organization Collection
 
 ```csharp
@@ -155,24 +157,4 @@ await org2.GetAsync(); // Fetch data
 await foreach (var org in organizations.GetAllAsync())
 {
     Console.WriteLine($"Org: {org.Data.Name}");
-    Console.WriteLine($"  Location: {org.Data.Location}");
-    Console.WriteLine($"  State: {org.Data.Properties?.ProvisioningState}");
-}
-
-// List across subscription
-await foreach (var org in subscription.GetMongoDBAtlasOrganizationsAsync())
-{
-    Console.WriteLine($"Org: {org.Data.Name} in {org.Data.Id}");
-}
-```
-
-### Update Tags
-
-```csharp
-// Add a single tag
-await organization.AddTagAsync("CostCenter", "12345");
-
-// Replace all tags
-await organization.SetTagsAsync(new Dictionary<string, string>
-{
-    ["
+    Console.Write

@@ -39,7 +39,7 @@ Inspect Docker context, build commands, secrets and runtime side effects before 
 
    # Project structure analysis
    find . -name "Dockerfile*" -type f | head -10
-   find . -name "*compose*.yml" -o -name "*compose*.yaml" -type f | head -5
+   find . -type f \( -name "*compose*.yml" -o -name "*compose*.yaml" \) | head -5
    find . -name ".dockerignore" -type f | head -3
 
    # Container status if running
@@ -59,19 +59,24 @@ Inspect Docker context, build commands, secrets and runtime side effects before 
 
 4. Validate thoroughly:
    ```bash
+   # Run only after reviewing Dockerfile/build context and authorizing build side effects; builds execute code and can access the network.
    # Build and security validation
    docker build --no-cache -t test-build .  && echo "Build successful"
    docker history test-build --no-trunc  | head -5
-   docker scout quickview test-build  || echo "No Docker Scout"
+   docker scout version # If unavailable, record skipped; a failed scan is not tool absence.
+   docker scout quickview test-build
 
-   # Runtime validation
+   # Runtime validation only when requested/authorized; use an isolated context, bounded resources and guaranteed cleanup.
+   # Fixed names below are illustrative; avoid collisions and stop only containers created by this task.
    docker run --rm -d --name validation-test test-build
    docker exec validation-test ps aux  | head -3
    docker stop validation-test
 
    # Compose validation
-   docker compose config  && echo "Compose config valid"
+   docker compose config --quiet && echo "Compose syntax valid" # Avoid printing interpolated secrets; syntax is not runtime evidence.
    ```
+
+Examples assume a server that emits dist/index.js and implements /health; they are not a Next.js standalone Dockerfile despite the sample user name. Define .dockerignore to exclude environment files, private secrets, VCS data and node_modules before COPY. Runtime capability drops/read-only filesystems are configured in docker run/Compose, not by a Dockerfile comment. Resource reservations and restart policies depend on the orchestrator; verify actual enforcement. Pin reviewed image digests/dependency versions for reproducibility and scan current images.
 
 ## Core Expertise Areas
 
@@ -96,7 +101,10 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN npm run build && npm prune --omit=dev
+RUN npm run build
+
+FROM build AS development
+CMD ["npm", "run", "dev"]
 
 FROM node:22-alpine AS runtime
 RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001 -G nodejs
@@ -105,36 +113,3 @@ COPY --from=deps --chown=nextjs:nodejs /app/node_modules ./node_modules
 COPY --from=build --chown=nextjs:nodejs /app/dist ./dist
 COPY --from=build --chown=nextjs:nodejs /app/package*.json ./
 USER nextjs
-EXPOSE 3000
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD ["node", "-e", "fetch('http://localhost:3000/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
-CMD ["node", "dist/index.js"]
-```
-
-### 2. Container Security Hardening
-
-**Security focus areas:**
-- **Non-root user configuration**: Proper user creation with specific UID/GID
-- **Secrets management**: Docker secrets, build-time secrets, avoiding env vars
-- **Base image security**: Regular updates, minimal attack surface
-- **Runtime security**: Capability restrictions, resource limits
-
-**Security patterns:**
-```dockerfile
-# Security-hardened container
-FROM node:22-alpine
-RUN addgroup -g 1001 -S appgroup && \
-    adduser -S appuser -u 1001 -G appgroup
-WORKDIR /app
-COPY --chown=appuser:appgroup package*.json ./
-RUN npm ci --omit=dev
-COPY --chown=appuser:appgroup . .
-USER 1001
-# Drop capabilities, set read-only root filesystem
-```
-
-### 3. Docker Compose Orchestration
-
-**Orchestration expertise:**
-- **Service dependency management**: Health checks, startup ordering
-- *

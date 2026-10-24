@@ -61,6 +61,8 @@ PATCH: Bug fixes, backward compatible
 2.3.1 = exact version
 ```
 
+Separate inspection from mutation: npm audit fix/dedupe, yarn dedupe and ncu -u change dependency state. Pin and review codemods/CLI packages before running; the changelog-parser/react-codeshift command shapes below are illustrative and must be checked against the actual official tool, not assumed runnable. Regex migration is not syntax-aware and can corrupt strings/comments/imports; use reviewed AST transforms and inspect every diff. SemVer promises do not prove compatibility and caret rules differ below 1.0. Select exact targets from release notes/peer requirements instead of latest. --force/--legacy-peer-deps bypass protections rather than resolve incompatibility. A matching React version or DOM snapshot is not full runtime/visual verification. Do not overwrite an existing UPGRADE_PLAN.md or enable automerge implicitly.
+
 ## Dependency Analysis
 
 ### Audit Dependencies
@@ -169,42 +171,4 @@ npm install react-router-dom@6
 // tests/compatibility.test.js
 describe('Dependency Compatibility', () => {
   it('should have compatible React versions', () => {
-    const reactVersion = require('react/package.json').version;
-    const reactDomVersion = require('react-dom/package.json').version;
-
-    expect(reactVersion).toBe(reactDomVersion);
-  });
-
-  it('should not have peer dependency warnings', () => {
-    // Run npm ls and check for warnings
-  });
-});
-```
-
-## Breaking Change Handling
-
-### Identifying Breaking Changes
-```bash
-# Use changelog parsers
-npx changelog-parser react 16.0.0 17.0.0
-
-# Or manually check
-curl https://raw.githubusercontent.com/facebook/react/main/CHANGELOG.md
-```
-
-### Codemod for Automated Fixes
-```bash
-# React upgrade codemods
-npx react-codeshift <transform> <path>
-
-# Example: Update lifecycle methods
-npx react-codeshift \
-  --parser tsx \
-  --transform react-codeshift/transforms/rename-unsafe-lifecycles.js \
-  src/
-```
-
-### Custom Migration Script
-```javascript
-// migration-script.js
-con
+    const reactVersion = require

@@ -3,7 +3,7 @@ name: brutalist-typography
 description: Web and App implementation guide for Brutalist Typography. Trigger when user wants huge fonts, raw presentation, and aggressive layout decisions. 
 category: Creative & Media
 source: antigravity
-tags: [react, ai, llm, design, presentation, aws, cro]
+tags: [react, api, ai, llm, design, presentation, aws, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-it/brutalist-typography
 ---
 
@@ -91,7 +91,7 @@ struct BrutalistTypeView: View {
                     .fontWeight(.black)
                     .foregroundColor(.clear)
                     .overlay(
-                        Text("THE").stroke(Color.red, lineWidth: 3)
+                        Text("THE").foregroundColor(.red) // Solid fallback: Text has no Shape.stroke API
                     )
                     .offset(x: 40)
                 
@@ -110,9 +110,9 @@ struct BrutalistTypeView: View {
     }
 }
 ```
-- `.ignoresSafeArea()` is mandatory. Text must be allowed to clip into the notch and status bar.
+- Keep readable text and controls within safe areas. Only decorative artwork may extend behind system cutouts.
 - Use negative `spacing` in `VStack` or explicit negative `.offset()` to force text elements to overlap each other aggressively.
-- Outline text is achieved by setting `.foregroundColor(.clear)` and overlaying a `.stroke()`.
+- SwiftUI Text does not implement Shape.stroke. Use solid text as shown, or a separately implemented and tested text-path renderer for true outlines.
 
 ### Flutter
 ```dart
@@ -166,11 +166,4 @@ class BrutalistTypeScreen extends StatelessWidget {
                     fontFamily: 'Courier',
                     fontSize: 120,
                     color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-   
+ 

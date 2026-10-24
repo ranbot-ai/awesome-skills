@@ -1,6 +1,6 @@
 ---
 name: employment-contract-templates
-description: Templates and patterns for creating legally sound employment documentation including contracts, offer letters, and HR policies. 
+description: Templates and patterns for creating draft employment documentation for jurisdiction-specific legal review including contracts, offer letters, and HR policies. 
 category: Document Processing
 source: antigravity
 tags: [ai, template, document]
@@ -10,7 +10,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/empl
 
 # Employment Contract Templates
 
-Templates and patterns for creating legally sound employment documentation including contracts, offer letters, and HR policies.
+Templates and patterns for creating draft employment documentation for jurisdiction-specific legal review including contracts, offer letters, and HR policies.
 
 ## Use this skill when
 

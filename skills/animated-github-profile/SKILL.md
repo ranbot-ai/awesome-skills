@@ -10,14 +10,14 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/anim
 
 # Animated GitHub Profile Skill
 
-A comprehensive guide and agent instruction set for designing, generating, and deploying animated GitHub profile READMEs that bypass GitHub's JavaScript restrictions using pure SVG and CSS/SMIL animations.
+A comprehensive guide and agent instruction set for designing, generating, and deploying animated GitHub profile READMEs that work within GitHub's JavaScript restrictions using pure SVG and CSS/SMIL animations.
 
 ---
 
 ## When to Use This Skill
 
 - Use when designing, revamping, or generating an animated GitHub profile README (`username/username`).
-- Use when bypassing GitHub's Markdown HTML sanitization to render interactive or motion elements using pure SVG, CSS `@keyframes`, and SMIL.
+- Use when working within GitHub's Markdown HTML sanitization to render interactive or motion elements using pure SVG, CSS `@keyframes`, and SMIL.
 - Use when creating theme-adaptive assets (dark/light mode) using `<picture>` elements.
 - Use when automating dynamic contribution graphs, snakes, or 3D cityscapes via GitHub Actions.
 
@@ -26,8 +26,8 @@ A comprehensive guide and agent instruction set for designing, generating, and d
 ## Why SVG Animations?
 
 1. **GitHub Security Model**: GitHub sanitizes all Markdown files and strips out all `<script>` tags, inline JavaScript, and iframes. Normal web motion libraries (Framer Motion, GSAP, Three.js) cannot execute in a GitHub README.
-2. **Native SVG Motion**: Pure SVG with `@keyframes` CSS and SMIL (`<animate>`, `<animateTransform>`) is **the only animated format natively supported** across all browsers without external dependencies.
-3. **Zero Third-Party Downtime**: Unlike external status generators (e.g., `github-readme-stats`, `shields.io`) that frequently fail when GitHub API rate-limits are reached, self-contained SVGs committed to the profile repository render with 100% reliability.
+2. **Native SVG Motion**: Pure SVG with `@keyframes` CSS and SMIL (`<animate>`, `<animateTransform>`) is one animation option; animated GIFs are another, and SVG animation support varies by browser and image context.
+3. **Zero Third-Party Downtime**: Unlike external status generators (e.g., `github-readme-stats`, `shields.io`) that frequently fail when GitHub API rate-limits are reached, self-contained SVGs committed to the profile repository avoid a live third-party generator dependency, though rendering and cache behavior still need testing.
 
 ---
 
@@ -95,5 +95,4 @@ Use the master prompts below with an AI coding assistant to create standalone SV
   * Syntax-highlighted code snippet typing out core domain logic (e.g. Python, Agentic AI, TypeScript).
   * Blinking rectangular cursor (`#22d3ee`).
 * **Motion FX**:
-  * Full-width laser scanner bar sweeping top-to-bottom on a 4.5s loop.
-  * Ambient blurred background orbs with subtle breathing animation
+  * Full-width laser scanner bar sweeping t

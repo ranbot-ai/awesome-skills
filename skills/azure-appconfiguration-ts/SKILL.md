@@ -3,7 +3,7 @@ name: azure-appconfiguration-ts
 description: Centralized configuration management with feature flags and dynamic refresh. 
 category: AI & Agents
 source: antigravity
-tags: [typescript, ai, workflow, azure, cro]
+tags: [typescript, ai, workflow, azure, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-appconfiguration-ts
 ---
 

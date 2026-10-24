@@ -14,6 +14,10 @@ Deploy and manage Azure SQL Database, Elastic Pools, and Cosmos DB. Covers serve
 
 ## Prerequisites
 
+These independent examples provision billable resources and can interrupt databases. Confirm subscription, unique names, region/SKU support, SQL_ADMIN_GROUP_ID, cost ceilings, retention/RPO/RTO and tested restore/failover procedures. Use Entra-only authentication below; never put passwords/keys in argv or tracked configuration. Public firewall/VNet rules do not enable a server with public access disabled: configure private endpoints, DNS and an authorized client network. A regional replica is asynchronous and failover can lose data. Cosmos indexing-policy.json and referenced network/secondary-server/storage resources are external prerequisites, not bundled. Choose database-shared or dedicated container throughput and review costs; converting manual throughput to autoscale may require the dedicated migrate operation.
+
+## Prerequisites
+
 ```bash
 # Install Azure CLI
 # Prerequisite: organization-approved Azure CLI installed from a verified signed package.
@@ -37,8 +41,10 @@ az sql server create \
   --resource-group database-rg \
   --name myapp-sqlserver \
   --location eastus \
-  --admin-user sqladmin \
-  --admin-password 'S3cur3P@ssw0rd!' \
+  --enable-ad-only-auth \
+  --external-admin-principal-type Group \
+  --external-admin-name "SQL Admins" \
+  --external-admin-sid "$SQL_ADMIN_GROUP_ID" \
   --enable-public-network false \
   --minimal-tls-version 1.2
 
@@ -132,13 +138,7 @@ az sql elastic-pool list-dbs \
 ## Firewall Rules and Network Security
 
 ```bash
-# Allow Azure services
-az sql server firewall-rule create \
-  --resource-group database-rg \
-  --server myapp-sqlserver \
-  --name AllowAzureServices \
-  --start-ip-address 0.0.0.0 \
-  --end-ip-address 0.0.0.0
+# Keep public access disabled. The 0.0.0.0 AllowAzureServices exception permits other Azure tenants too; do not enable it as a default.
 
 # Allow specific IP range (office network)
 az sql server firewall-rule create \
@@ -153,8 +153,8 @@ az sql server firewall-rule create \
   --resource-group database-rg \
   --server myapp-sqlserver \
   --name AllowMyIP \
-  --start-ip-address "$(curl -s ifconfig.me)" \
-  --end-ip-address "$(curl -s ifconfig.me)"
+  --start-ip-address "$APPROVED_CLIENT_IP" \
+  --end-ip-address "$APPROVED_CLIENT_IP"
 
 # Create VNet rule for subnet access
 az sql server vnet-rule create \
@@ -174,37 +174,4 @@ az sql server firewall-rule list \
 az sql server firewall-rule delete \
   --resource-group database-rg \
   --server myapp-sqlserver \
-  --name AllowMyIP
-```
-
-## Geo-Replication and Failover
-
-```bash
-# Create failover group with secondary server
-az sql server create \
-  --resource-group database-rg \
-  --name myapp-sqlserver-secondary \
-  --location westus \
-  --admin-user sqladmin \
-  --admin-password 'S3cur3P@ssw0rd!'
-
-az sql failover-group create \
-  --resource-group database-rg \
-  --server myapp-sqlserver \
-  --name myapp-failover-group \
-  --partner-server myapp-sqlserver-secondary \
-  --partner-resource-group database-rg \
-  --failover-policy Automatic \
-  --grace-period 1 \
-  --add-db myapp-prod-db
-
-# Check failover group status
-az sql failover-group show \
-  --resource-group database-rg \
-  --server myapp-sqlserver \
-  --name myapp-failover-group \
-  --output table
-
-# Manual failover (for testing or planned maintenance)
-az sql failover-group set-primary \
-  --resource-grou
+  --n

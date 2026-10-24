@@ -41,7 +41,7 @@ Use only the group or groups needed for the request. A narrower URL keeps discov
 https://app.famulor.io/mcp?toolsets=assistants,calls
 ```
 
-Read the linked reference only for the relevant group. Each reference contains every tool currently assigned to that group; the live `tools/list` schema remains authoritative.
+Read the linked reference only for the relevant group. Each reference records the tools assigned to that group in the 2026-08-23 snapshot; the live `tools/list` schema remains authoritative.
 
 | Toolset | Use for | Current tools | Reference |
 | --- | --- | ---: | --- |
@@ -59,7 +59,7 @@ Read the linked reference only for the relevant group. Each reference contains e
 | `migration` | Previewing and importing supported Famulor 1.0 resources | 2 | [migration](references/toolsets/migration.md) |
 | `tasks` | Durable exports, simulations, crawls, and campaign preparation | 4 | [tasks](references/toolsets/tasks.md) |
 
-The full snapshot contains 282 tools. `list_mcp_toolsets` can report the groups visible to the current credential. The public `assistant-history` directory profile is intentionally limited to 11 read-only tools; use it only when the user specifically wants that restricted connection.
+The dated snapshot contains 282 tool entries; this is not a live availability guarantee. `list_mcp_toolsets` can report the groups visible to the current credential. The public `assistant-history` directory profile is intentionally limited to 11 read-only tools; use it only when the user specifically wants that restricted connection.
 
 ## Operating workflow
 
@@ -68,4 +68,4 @@ The full snapshot contains 282 tools. `list_mcp_toolsets` can report the groups 
 3. Read current state before changing it. Resolve resource IDs with list/get tools and preserve fields the user did not ask to change.
 4. Choose the smallest tool call that achieves the request. Use a preview, test, or simulation when the domain offers one and it is useful.
 5. Before an external or difficult-to-reverse effect, ensure the user has explicitly authorized the exact target and action. If the current request already supplies that authorization, do not ask again.
-6. Verify the result with the corresponding read tool or returned status. For asynchronous work, follow the 
+6. Verify the result with the correspondin

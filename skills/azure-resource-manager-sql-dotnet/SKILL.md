@@ -26,7 +26,7 @@ dotnet add package Azure.ResourceManager.Sql
 dotnet add package Azure.Identity
 ```
 
-**Current Versions**: Stable v1.3.0, Preview v1.4.0-beta.3
+**Version boundary:** These are illustrative fragments, not a compiled project. Pin the intended SDK version and check its API reference and regional SKU availability before adapting; no current-version claim is established here.
 
 ## Environment Variables
 
@@ -74,6 +74,8 @@ ArmClient
 
 ## Core Workflow
 
+Confirm subscription, tenant, resource group, exact target, SKU budget and production-change scope before any write. Read current state and use update/patch semantics appropriate to the pinned SDK; a sparse CreateOrUpdate payload is not proof that omitted settings are preserved. Management authentication does not grant SQL data-plane access. Do not log passwords, connection strings or storage keys. Private networking requires endpoint, DNS and routing setup; disabling public access alone does not establish connectivity.
+
 ### 1. Create SQL Server
 
 ```csharp
@@ -92,7 +94,7 @@ var serverData = new SqlServerData(AzureLocation.EastUS)
     AdministratorLoginPassword = Environment.GetEnvironmentVariable("SQL_ADMIN_PASSWORD") ?? throw new InvalidOperationException("SQL_ADMIN_PASSWORD is required"),
     Version = "12.0",
     MinimalTlsVersion = SqlMinimalTlsVersion.Tls1_2,
-    PublicNetworkAccess = ServerNetworkAccessFlag.Enabled
+    PublicNetworkAccess = ServerNetworkAccessFlag.Disabled // configure approved private endpoint and DNS separately
 };
 
 // Create server (long-running operation)
@@ -163,40 +165,3 @@ await databaseCollection.CreateOrUpdateAsync(
     WaitUntil.Completed,
     "pooled-database",
     databaseData);
-```
-
-### 5. Configure Firewall Rules
-
-```csharp
-// Allow Azure services
-var azureServicesRule = new SqlFirewallRuleData
-{
-    StartIPAddress = "0.0.0.0",
-    EndIPAddress = "0.0.0.0"
-};
-
-var firewallCollection = server.GetSqlFirewallRules();
-await firewallCollection.CreateOrUpdateAsync(
-    WaitUntil.Completed,
-    "AllowAzureServices",
-    azureServicesRule);
-
-// Allow specific IP range
-var clientRule = new SqlFirewallRuleData
-{
-    StartIPAddress = "203.0.113.0",
-    EndIPAddress = "203.0.113.255"
-};
-
-await firewallCollection.CreateOrUpdateAsync(
-    WaitUntil.Completed,
-    "AllowClientIPs",
-    clientRule);
-```
-
-### 6. List Resources
-
-```csharp
-// List all servers in subscription
-await foreach (var srv in subscription.GetSqlServersAsync())
-{

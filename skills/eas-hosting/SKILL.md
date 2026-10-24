@@ -1,9 +1,9 @@
 ---
 name: eas-hosting
 description: Curated upstream guidance for Eas Hosting; use when the workflow matches the user goal. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [typescript, react, node, api, ai, agent, gpt, workflow, supabase, firebase]
+tags: [typescript, react, node, api, ai, agent, gpt, workflow, document, supabase]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/eas-hosting
 ---
 
@@ -12,6 +12,8 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/eas-
 > **EAS service - costs apply.** EAS Hosting is a paid Expo Application Services product with free-tier limits; production deploys use your plan's request and bandwidth allowance. See https://expo.dev/pricing. Authoring API routes and exporting the web bundle are free and open source, and you can self-host the exported server output instead of EAS Hosting.
 
 EAS Hosting deploys your Expo **web app and API routes** to Expo's managed edge (Cloudflare Workers). Export the web bundle with `npx expo export -p web` and ship it with `eas deploy` - the same command deploys any Expo Router API routes bundled alongside it. This skill covers deploying a website, authoring API routes, and the hosting runtime; see the Deployment section below for the deploy workflow.
+
+These are partial route examples, not production authentication or data-access implementations. Presence of an Authorization header is not verification: validate issuer, audience, signature and expiry with the chosen provider, derive tenant identity server-side and enforce object ownership. Return 401 until a real verifier is implemented. Bound request bodies, upstream timeouts and paid AI calls; rate-limit and redact upstream errors. Public CORS is only for intentionally public endpoints, not access control. Native clients need a configured absolute HTTPS API origin; browser-relative fetch examples are not universally valid in React Native. Verify Expo runtime limits against current EAS docs; Workers capabilities are not all exposed by EAS Hosting.
 
 ## When to Use API Routes
 
@@ -117,7 +119,7 @@ export function GET(request: Request) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  return Response.json({ authenticated: true });
+  return Response.json({ error: "Token verification not implemented" }, { status: 401 });
 }
 ```
 
@@ -148,38 +150,4 @@ export async function POST(request: Request) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-    },
-    body: JSON.stringify({
-      model: "gpt-4",
-      messages: [{ role: "user", content: prompt }],
-    }),
-  });
-
-  const data = await response.json();
-  return Response.json(data);
-}
-```
-
-Set environment variables:
-
-- **Local**: Create `.env` file (never commit)
-- **EAS Hosting**: Use `eas env:create` or Expo dashboard
-
-## CORS Headers
-
-Add CORS for web clients:
-
-```ts
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type, Authorization",
-};
-
-export function OPTIONS() {
-  return new Response(null, { headers: corsHeaders });
-}
-
-export function GET() {
-  return Response.json({ data: "value" }, { headers
+ 

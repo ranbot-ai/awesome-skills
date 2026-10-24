@@ -1,9 +1,9 @@
 ---
 name: brooks-debt
 description: Tech debt assessment that identifies, classifies, and prioritizes maintainability problems — helping teams build a refactoring roadmap — drawing on twelve classic engineering books. 
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [ai, template, security, rag]
+tags: [ai, template, document, security, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/brooks-debt
 ---
 
@@ -16,7 +16,7 @@ Use this skill when you need tech debt assessment that identifies, classifies, a
 
 ## Setup
 
-1. Read `../_shared/common.md` for the Iron Law, Project Config, Report Template, and Health Score rules
+1. If available in an explicitly supplied upstream installation, read `../_shared/common.md` for the Iron Law, Project Config, Report Template, and Health Score rules
 2. Read `../_shared/source-coverage.md` for book-level coverage, exceptions, and tradeoffs
 3. Read `../_shared/decay-risks.md` for symptom definitions and source attributions
 4. Read `debt-guide.md` in this directory for the debt classification framework
@@ -38,3 +38,7 @@ Scope Detection from `../_shared/common.md` to determine the assessment scope be
 - Use this skill only when the task clearly matches its upstream source and local project context.
 - Verify commands, generated code, dependencies, credentials, and external service behavior before applying changes.
 - Do not treat examples as a substitute for environment-specific tests, security review, or user approval for destructive or costly actions.
+
+### Standalone catalog fallback
+
+The `../_shared/*` files referenced above are not bundled in this catalog. Do not claim their score, report or source-coverage rules were followed. The bundled debt guide can be used independently: define the authorized scope, record each symptom with current file/line evidence, its observed consequence and proposed remedy, then label Pain × Spread as a local prioritization heuristic. Unknown team intent stays unknown; missing documentation does not prove a shortcut was accidental. Report reviewed and unreviewed areas explicitly.

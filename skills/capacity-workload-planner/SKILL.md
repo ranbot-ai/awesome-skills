@@ -88,9 +88,9 @@ open_questions: []      # the unanswered ones, in the order worth asking
 
 If an artifact was requested, build it after resolving essential missing facts. Otherwise give a short recommendation and offer the relevant artifact.
 
-**Recommended approach:** Plan by week, not by day, and flag over-allocation rather than trying to optimise it. Nobody acts on a daily capacity model.
+**Recommended approach:** Start with weekly planning when it fits the work, and flag over-allocation; use daily detail when shift or delivery constraints require it.
 
-**Why this one:** Weekly capacity is the smallest unit people actually plan in. If the model is daily it will be ignored within a fortnight.
+**Why this one:** Weekly planning can be a useful starting point; confirm the actual planning horizon and avoid unsupported claims about how every team works.
 
 **Workflow:** People → Available hours → Allocation by week → Over-allocation flag → Rebalance
 
@@ -98,24 +98,18 @@ If an artifact was requested, build it after resolving essential missing facts. 
 
 ```
 Utilisation %    = Allocated Hours / Available Hours x 100, rounded once to the nearest whole number
-Allocation Check = Over-allocated  when Utilisation % > 100
-                   Within capacity when Utilisation % is 100 or less
-                   Under-allocated when Utilisation % < 100
+Allocation Check = Over-allocated  when Allocated Hours > Available Hours
+                   Within capacity when Allocated Hours = Available Hours
+                   Under-allocated when Allocated Hours < Available Hours
 ```
 
 The percentage is stored as a whole number: `80` means 80%, never `0.8`. Round once, at this
-step, and use the rounded value everywhere so the stored number and the flag can never
-disagree. If `Available Hours` is `0` the ratio is undefined: leave `Utilisation %` and
+step for display only. Compare unrounded hours for the flag: 40.1/40 displays 100% but is still over-allocated. Do not let rounding hide excess demand. If `Available Hours` is `0` the ratio is undefined: leave `Utilisation %` and
 `Allocation Check` empty and flag the row for a human rather than dividing by zero or
 defaulting to 0. A person on full leave has no capacity, which is not the same as having
 spare capacity.
 
-**Approval gate:** a week may only be `Approved` when `Allocation Check` is `Within capacity`.
+**Approval gate:** a week may only be `Approved` when capacity is positive and allocated hours do not exceed available hours; both `Within capacity` and `Under-allocated` may qualify.
 An over-allocated week is a real finding, not a rounding error - raise it, do not approve it,
 and do not quietly trim `Allocated Hours` to make it fit. Reallocate with the people affected,
-or record why the over-allocation is accepted.
-
-### Step 5 - Build only on request
-
-Once the user asks for it, derive the fields from the confirmed context and emit the
-requested artifacts. For machine-readable text, keep
+or record w

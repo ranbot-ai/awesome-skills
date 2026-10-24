@@ -17,14 +17,14 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/desi
 Use this sub-style when the user's request matches the aesthetic described above. This is a child reference of the `design-it` skill and is not meant to be triggered directly.
 
 ## Core Principles
-1. **Zero Opacity Backgrounds**: Elements are never fully solid. Everything is semi-transparent, allowing the background to show through.
+1. **Translucent Decoration**: Use optional translucent surfaces; essential text and controls need stable contrast and may require opaque backgrounds.
 2. **Scanlines and Interference**: The illusion of a projection is sold by horizontal scanlines, slight chromatic aberration, or flickering.
 3. **Luminous Edges**: The borders of elements are brighter than the centers, mimicking how lasers or light projections focus at the edges.
 
 ## Visual DNA
 - **Colors**: Almost exclusively monochrome Cyan, Blue, or Green, with white core highlights.
 - **Typography**: Thin, technical sans-serifs. Must have a glowing `text-shadow`.
-- **Styling**: Intensive use of `rgba()`, `mix-blend-mode: screen` or `add`, and CSS filters.
+- **Styling**: Intensive use of `rgba()`, `mix-blend-mode: screen` (or a supported additive compositing operation)`, and CSS filters.
 
 ## Web Implementation
 - **CSS Example**:
@@ -64,7 +64,7 @@ body {
 
 /* Subtle flicker */
 .holo-flicker {
-  animation: hologramFlicker 4s infinite;
+  /* Static by default: essential content must not flicker or fade. */
 }
 
 @keyframes hologramFlicker {
@@ -125,17 +125,8 @@ struct HolographicUIView: View {
             // You would tile this in a real app using an Image or custom shape
             .blendMode(.screen)
         }
-        .onAppear {
-            // Simulate flicker
-            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-                if Int.random(in: 1...100) > 95 {
-                    isFlickering.toggle()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                        isFlickering = false
-                    }
-                }
-            }
-        }
+        // Keep diagnostics static; no repeating timer or random flicker.
+
     }
 }
 ```
@@ -160,4 +151,10 @@ class HolographicScreen extends StatelessWidget {
                 const Text(
                   'HOLOGRAM ACTIVE',
                   style: TextStyle(
-   
+                    fontFamily: 'Courier',
+                    fontSize: 24,
+                    color: Color(0xFF88FFFF),
+                    shadows: [Shadow(color: Color(0xFF88FFFF), blurRadius: 10)],
+                  ),
+                ),
+         

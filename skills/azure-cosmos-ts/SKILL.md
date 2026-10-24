@@ -77,6 +77,8 @@ CosmosClient
 
 ## Core Operations
 
+Confirm account/database/container, tenant-bound authorization and write/delete scope first. Partition keys are routing, not authorization. Bound query pages, RU cost, retries and runtime; fetchAll may be unbounded. Bulk operations are not an all-or-nothing transaction: inspect each response/error and retry only eligible failed items with idempotency/concurrency checks. Pin SDK versions and verify examples against [Microsoft SDK docs](https://learn.microsoft.com/en-us/javascript/api/overview/azure/cosmos-readme).
+
 ### Database & Container Setup
 
 ```typescript
@@ -218,25 +220,4 @@ while (queryIterator.hasMoreResults()) {
 
 ```typescript
 const { resources } = await container.items
-  .query<Product>(
-    "SELECT * FROM c WHERE c.price > 500",
-    { enableCrossPartitionQuery: true }
-  )
-  .fetchAll();
-```
-
-## Bulk Operations
-
-### Execute Bulk Operations
-
-```typescript
-import { BulkOperationType, OperationInput } from "@azure/cosmos";
-
-const operations: OperationInput[] = [
-  {
-    operationType: BulkOperationType.Create,
-    resourceBody: { id: "1", partitionKey: "cat-a", name: "Item 1" },
-  },
-  {
-    operationType: BulkOperationType.Upsert,
-    resourceBody: { id: "2", partitionKey: "cat-a", name: "Item
+  .query<Pro

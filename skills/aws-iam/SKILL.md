@@ -3,7 +3,7 @@ name: aws-iam
 description: Manage IAM users, roles, and policies. Implement least-privilege access and security best practices. Use when configuring AWS identity and access management. 
 category: Document Processing
 source: antigravity
-tags: [api, ai, agent, workflow, template, document, security, aws, cro]
+tags: [api, ai, agent, workflow, template, design, document, security, aws, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/aws-iam
 ---
 
@@ -25,7 +25,7 @@ Manage identity and access in AWS with least-privilege policies, roles, federati
 ## Prerequisites
 
 - AWS CLI v2 installed and configured
-- IAM permissions: `iam:*` (or scoped to specific actions for least privilege)
+- Least-privilege IAM actions for the chosen roles/policies; iam:* is not a prerequisite
 - For OIDC: ability to create identity providers (`iam:CreateOpenIDConnectProvider`)
 - AWS Organizations access for Service Control Policies (SCPs)
 
@@ -48,12 +48,7 @@ Every IAM policy follows the same JSON structure. Always specify the minimum act
       "Resource": [
         "arn:aws:s3:::my-app-bucket",
         "arn:aws:s3:::my-app-bucket/*"
-      ],
-      "Condition": {
-        "StringEquals": {
-          "s3:x-amz-server-side-encryption": "aws:kms"
-        }
-      }
+      ]
     },
     {
       "Sid": "DenyUnencryptedUploads",
@@ -182,4 +177,10 @@ aws iam create-role \
           "token.actions.githubusercontent.com:aud": "sts.amazonaws.com"
         },
         "StringLike": {
-          "token.actio
+          "token.actions.githubusercontent.com:sub": "repo:my-org/my-repo:ref:refs/heads/main"
+        }
+      }
+    }]
+  }'
+
+# Attac

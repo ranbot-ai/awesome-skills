@@ -32,7 +32,7 @@ Provides a standardized, auditable framework and data model for **DeFi Yield Str
 
 | # | Field Name | Type | SQL Type | JSON Schema Type | Notion Property Type | Example Value |
 |---|------------|------|----------|------------------|----------------------|---------------|
-| 1 | Strategy Allocation ID | `id` | `SERIAL PRIMARY KEY` | `integer` | Text | `YLD-001` |
+| 1 | Strategy Allocation ID | `id` | `VARCHAR(64) PRIMARY KEY` | `string` | Text | `YLD-001` |
 | 2 | Target Protocol Strategy | `text` | `VARCHAR(64)` | `string` | Text | `Soroban AMM Liquidity Staking` |
 | 3 | Allocated Capital Principal | `currency` | `NUMERIC(24,7)` | `number` | Number | `100000.0000000` |
 | 4 | Base APY Yield % | `number` | `NUMERIC(6,2)` | `number` | Number | `14.25` |
@@ -83,6 +83,8 @@ How do I configure and track DeFi Yield Strategy Allocation Register for our pro
 >
 > Workflow: Define criteria -> Run automated verification -> Record baseline -> Monitor invariants.
 
+All APY, thresholds and risk labels are synthetic examples, not current quotes or allocation recommendations. Record chain, protocol/vault/asset identity, observation time, fees and yield methodology; use exact decimal strings or integer asset base units across JSON/SQL. A drawdown cap in this register cannot enforce a maximum loss: liquidity, depegs, oracle failures and execution delays can prevent an unwind. Stablecoin-pair labels do not establish low total risk. No rebalancing, approvals or asset movement is authorized by creating this register.
+
 ## Best Practices
 
 - Enforce strict typing on numerical bounds and currency amounts; avoid unstructured free-text fields for critical states.
@@ -104,17 +106,4 @@ How do I configure and track DeFi Yield Strategy Allocation Register for our pro
 - **Problem:** Mismatched decimal precision between contract runtime and database register.
   **Solution:** Always verify decimals using the explicit field mapping in this reference.
 - **Problem:** Missing authorization checks prior to state update.
-  **Solution:** Cross-validate against the Security Audit register before deployment.
-
-## Related Skills
-
-- @soroban-liquidity-pool - covers AMM invariant and LP-share modelling.
-- @web3-rate-limiting-circuit-breaker - provides operational guardrails and threshold breakers.
-- @soroban-oracle-data-feed-audit - covers oracle heartbeat and stale-price handling.
-
-## Reusable Prompt
-
-```
-I want to establish a verified DeFi Yield Strategy Allocation Register register for our production protocol.
-Guide me through the required field parameters and output the corresponding SQL DDL and JSON Schema.
-```
+  **Solution:** Cross-validate against t

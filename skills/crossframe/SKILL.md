@@ -24,6 +24,7 @@ This AAS-ready copy preserves the original CrossFrame skill body below. Chinese 
 
 - The skill body is intentionally Chinese-canonical; English metadata is for discovery and does not replace the original Chinese terms.
 - Use only after explicit CrossFrame invocation or `crossframe-suite` routing; do not apply it as a generic default reasoning layer.
+- It is an author-defined analytical framework, not an empirically validated diagnostic instrument. Terms such as trauma, healing and diagnosis must not be presented as clinical assessments of a person.
 - It structures analysis, drafting, and review, but does not replace source verification, domain expertise, or legal, medical, or financial judgment.
 
 如果用户任务需要多个 CrossFrame 平行 skill 连续协作，先读取 `../crossframe-suite/SKILL.md` 做总调度；本 skill 负责其中的结构诊断、事实边界、尺度窗口、机制候选、七闸复核和判断档位。
@@ -69,5 +70,4 @@ CrossFrame 不是“把 v5.0 文本塞进上下文”的提示词包，而是一
 - AI 报告、合规材料、漂亮汇报、机构自评、模型诊断：读 `v5-ai-process-artifact-boundary-pack`；必须声明过程性产物不得充当现实证明。
 - 会因被观察、命名、公开或处置而改变行为、身份、证据或边界的对象：读 `protocols/high-reflexivity-protocol.md`、`worksheets/reflexivity-state-transfer.md`、`templates/high-reflexivity-output.md` 和 `v5-observation-reflexivity-release-pack`。
 - 亲密关系、家庭、朋友、照护、单方承接、解释劳动和爱被要求的场景：读 `protocols/intimate-relationship-protocol.md`、`worksheets/intimate-relationship-light-check.md`、`templates/intimate-relationship-output.md`，并先读 `v5-love-trapped-trauma-pack` 和 `v5-low-power-protection-pack`。
-- 系统停滞、创伤、修复、退出转移和重建场景：读 `protocols/healing-transfer-protocol.md`、`worksheets/healing-transfer-map.md`、`templates/healing-transfer-output.md` 和 `v5-action-healing-transfer-pack`。
-- 公共制度、平台治理、公共承诺和高权力密度公共议题：读 `protocols/public-institution-protocol.md`、`worksheets/p
+- 系统停滞、创伤、修复、退出转移和重建场景：读 `protocols/healing-transfer-protocol

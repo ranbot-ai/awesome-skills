@@ -3,7 +3,7 @@ name: spatial-design
 description: Web and App implementation guide for Spatial Design. Trigger when user wants environment-aware layouts, Apple Vision Pro inspiration, and mixed reality aesthetics. 
 category: Creative & Media
 source: antigravity
-tags: [react, ai, llm, design, image, cro]
+tags: [react, api, ai, llm, design, image, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-it/spatial-design
 ---
 
@@ -31,7 +31,7 @@ Use this sub-style when the user's request matches the aesthetic described above
 ```css
 body {
   /* Needs a complex background to look right */
-  background: url('room-environment.jpg') cover;
+  background: #203040 url('room-environment.jpg') center / cover no-repeat;
 }
 
 .spatial-panel {
@@ -146,5 +146,4 @@ class SpatialDesignScreen extends StatelessWidget {
                     border: Border.all(color: Colors.white.withOpacity(0.4), width: 1),
                   ),
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    child
+                    mainAxisSize: MainAxisSize.min

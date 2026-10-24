@@ -59,7 +59,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bash
 - Employ `IFS=$'\n\t'` to prevent unwanted word splitting on spaces
 - Validate inputs with `: "${VAR:?message}"` for required environment variables
 - End option parsing with `--` and use `rm -rf -- "$dir"` for safe operations
-- Support `--trace` mode with `set -x` opt-in for detailed debugging
+- Allow `set -x` only on redacted non-secret paths; tracing expands credentials and arguments
 - Use `xargs -0` with NUL boundaries for safe subprocess orchestration
 - Employ `readarray`/`mapfile` for safe array population from command output
 - Implement robust script directory detection: `SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"`
@@ -68,7 +68,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bash
 ## Compatibility & Portability
 
 - Use `#!/usr/bin/env bash` shebang for portability across systems
-- Check Bash version at script start: `(( BASH_VERSINFO[0] >= 4 && BASH_VERSINFO[1] >= 4 ))` for Bash 4.4+ features
+- Check Bash version at script start: `(( BASH_VERSINFO[0] > 4 || (BASH_VERSINFO[0] == 4 && BASH_VERSINFO[1] >= 4) ))` for Bash 4.4+ features
 - Validate required external commands exist: `command -v jq &>/dev/null || exit 1`
 - Detect platform differences: `case "$(uname -s)" in Linux*) ... ;; Darwin*) ... ;; esac`
 - Handle GNU vs BSD tool differences (e.g., `sed -i` vs `sed -i ''`)
@@ -97,8 +97,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bash
 
 - Declare constants with `readonly` to prevent accidental modification
 - Use `local` keyword for all function variables to avoid polluting global scope
-- Implement `timeout` for external commands: `timeout 30s curl ...` prevents hangs
+- Implement `timeout` for external commands: `curl --connect-timeout 5 --max-time 30 ...` bounds a network call; GNU timeout is not bundled on macOS
 - Validate file permissions before operations: `[[ -r "$file" ]] || exit 1`
-- Use process substitution `<(command)` instead of temporary files when possible
-- Sanitize user input before using in commands or file operations
-- Validate numeric input with pattern matching: `[[ $num =~ ^[0-9]+$ ]]`
+- Process substitution can hide producer failure from pipefail; explicitly wait/check it for critical 

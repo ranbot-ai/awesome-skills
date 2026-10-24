@@ -66,6 +66,8 @@ AIProjectClient
 
 ## Core Workflows
 
+The snippets span GA/preview surfaces; pin compatible package versions and verify signatures in the linked SDK samples before combining them. Confirm project endpoint, tenant, deployment, budget and permitted uploaded data. Agent runs/evaluations may bill or call external tools. Add cancellation/deadline to every poll, distinguish Completed from Failed/Cancelled/RequiresAction, and inspect output only after successful completion. Cleanup deletes only resources created by this run; use finally blocks after preserving needed evidence, never delete user-owned resources merely because a sample ends.
+
 ### 1. Get Persistent Agents Client
 
 ```csharp
@@ -153,34 +155,8 @@ foreach (AIProjectConnection connection in projectClient.Connections.GetConnecti
 // Get specific connection
 AIProjectConnection conn = projectClient.Connections.GetConnection(
     connectionName, 
-    includeCredentials: true);
+    includeCredentials: false);
 
 // Get default connection
 AIProjectConnection defaultConn = projectClient.Connections.GetDefaultConnection(
-    includeCredentials: false);
-```
-
-### 4. Deployments
-
-```csharp
-// List all deployments
-foreach (AIProjectDeployment deployment in projectClient.Deployments.GetDeployments())
-{
-    Console.WriteLine($"{deployment.Name}: {deployment.ModelName}");
-}
-
-// Filter by publisher
-foreach (var deployment in projectClient.Deployments.GetDeployments(modelPublisher: "Microsoft"))
-{
-    Console.WriteLine(deployment.Name);
-}
-
-// Get specific deployment
-ModelDeployment details = (ModelDeployment)projectClient.Deployments.GetDeployment("gpt-4o-mini");
-```
-
-### 5. Datasets
-
-```csharp
-// Upload single file
-FileDataset file
+    inclu

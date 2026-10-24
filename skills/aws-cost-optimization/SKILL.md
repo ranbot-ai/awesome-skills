@@ -31,6 +31,8 @@ Apply practical FinOps controls to reduce AWS spend without sacrificing reliabil
 
 ## Cost Review Workflow
 
+Start read-only with the confirmed account/profile/regions and least-privilege billing access; the permission list is illustrative, not a role to grant wholesale. Dates, dollar thresholds and identifiers below are examples. Review savings against availability, recovery objectives and retrieval/transition costs. No automatic purchases, resource shutdown, deletion or lifecycle expiry follows from identifying a recommendation. Export the current lifecycle configuration and review the full replacement before applying it; noncurrent-version expiration permanently removes recovery copies.
+
 1. Tag every resource by team, service, environment, and cost center.
 2. Enable Cost Explorer and activate Cost and Usage Reports (CUR) to S3.
 3. Identify top spend drivers by service, account, and tag.
@@ -139,25 +141,4 @@ aws ce create-anomaly-monitor \
 aws ce create-anomaly-subscription \
   --anomaly-subscription '{
     "SubscriptionName": "cost-alerts",
-    "MonitorArnList": ["arn:aws:ce::123456789012:anomalymonitor/monitor-id"],
-    "Subscribers": [{"Type": "EMAIL", "Address": "finops@example.com"}],
-    "Threshold": 50,
-    "Frequency": "DAILY"
-  }'
-```
-
-## CloudWatch Cost Alarm
-
-```bash
-# Create alarm for estimated charges exceeding $4000
-aws cloudwatch put-metric-alarm \
-  --alarm-name "billing-alarm-4000" \
-  --alarm-description "Alert when estimated charges exceed $4000" \
-  --metric-name EstimatedCharges \
-  --namespace AWS/Billing \
-  --statistic Maximum \
-  --period 21600 \
-  --threshold 4000 \
-  --comparison-operator GreaterThanThreshold \
-  --evaluation-periods 1 \
-  --dimen
+    "MonitorArnList": ["arn:aws:ce::123456789012:anom

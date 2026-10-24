@@ -3,7 +3,7 @@ name: diagram-generator
 description: Generate, refine, validate, and render diagrams from natural language, notes, code, schemas, or existing diagram sources: flowcharts, swimlanes, attack-path graphs, data-flow diagrams, architecture, a
 category: Creative & Media
 source: antigravity
-tags: [python, node, pdf, markdown, api, ai, workflow, template, image, pentest]
+tags: [python, node, pdf, markdown, api, ai, workflow, template, image, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/diagram-generator
 ---
 

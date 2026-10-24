@@ -44,6 +44,10 @@ The 6 Ws are "the underivable half" — but you almost never write all six from 
 
 > **"Sometimes 3 Ws is enough. Sometimes the goal alone is enough."** A great goal sentence + auto-detection can carry who/what/where/how on their own — leaving you two small answers. The better your goal, the less you type.
 
+## Execution and interpretation
+
+FAF’s score measures declared slot completeness, not truth, security or universal AI readiness. Verify detected facts against the project. The CLI is not bundled: inspect its installed version and network/file effects. Preview and preserve existing instructions before `faf sync`; never overwrite AGENTS.md or CLAUDE.md without reviewing the exact diff.
+
 ## The fastest path to 100% ✪
 
 ```bash
@@ -82,10 +86,3 @@ Each W is a **3–4 word label** (hard cap < 6) — a scannable spec card, not a
 A CLI has no frontend; an API has no UI library. Mark those **`slotignored`** and they drop out of the denominator — you're scored only on slots that *matter for your app type*. **100% means "everything that applies is filled,"** not "every box checked." (`faf auto` and `faf go` handle most of this for you.)
 
 ## The honesty rule (why this works)
-
-The AI **only seeds facts your goal/README literally state** — never invents, never uses templates. What it can't source, it leaves empty for you. **Empty beats wrong.** That's why the resulting context is trustworthy: every slot is either detected, stated by you, or honestly blank.
-
-## When you're done here
-
-- Want it done **for** you, one click? → **faf-wizard**
-- Want to **master** 

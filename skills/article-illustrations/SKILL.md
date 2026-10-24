@@ -43,7 +43,7 @@ For each illustration, define:
 
 ### Step 3: Generate Images
 
-Use the `generate_image` tool with the built-in prompt template. Each image follows strict style rules:
+Use an available authorized image-generation tool and the inline visual constraints below. The upstream full prompt template is not bundled; tool names and paid/network effects depend on the host. Each image follows strict style rules:
 - Pure white background, no textures
 - Black hand-drawn line art with slight wobble
 - Sparse red/orange/blue handwritten annotations
@@ -131,5 +131,4 @@ driving the structure.
 
 ## Limitations
 
-- Requires access to an image-generation tool that can follow composition, line-art, and annotation constraints.
-- The recurring Grav character style can drift between generations; verify every output against 
+- Requires access to an image-generation tool that can follow composition, li

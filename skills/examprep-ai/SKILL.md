@@ -45,7 +45,7 @@ Skip everything else. Do not load all sections for a focused request.
 
 | Level | Signal Words | Student Goal |
 |-------|-------------|--------------|
-| 🟩 Easy | define, state, list, name, identify, what is | Guaranteed marks — study first |
+| 🟩 Easy | define, state, list, name, identify, what is | Foundational recall — often useful first |
 | 🟨 Medium | explain, describe, compare, calculate, implement, trace | Mid-paper marks |
 | 🟥 Hard | derive, prove, optimize, analyze, evaluate, design, why | Score separators — study last |
 
@@ -54,7 +54,7 @@ Skip everything else. Do not load all sections for a focused request.
 ### Intake (ask once, then proceed)
 
 1. Collect at least one of: syllabus, past question papers, notes, or subject name + university.
-2. Confirm course code if OCR confidence < 80%: *"I detected [X] — is this correct?"*
+2. Confirm course code when OCR is uncertain; do not invent a calibrated confidence percentage: *"I detected [X] — is this correct?"*
 3. Ask time available. If no answer → default **Standard Mode (6–12 hrs)** and state the assumption.
 
 ### Study Modes
@@ -68,11 +68,11 @@ Skip everything else. Do not load all sections for a focused request.
 
 ### Syllabus Guardrail
 
-- Map every question to a syllabus unit (≥ 70% match → `[IN SYLLABUS]`).
+- Map every question to a specific syllabus unit using an actual topic match; label ambiguous mappings unconfirmed rather than inventing a 70% similarity threshold.
 - Never generate content for topics absent from the uploaded syllabus.
 - Out-of-syllabus items → flag, ask student before including.
 
-### Probability Score
+### Priority Score (not a probability)
 
 ```
 Score = (Frequency × 0.40) + (Recency × 0.30) + (Unit Weight × 0.20) + (Marks × 0.10)
@@ -86,7 +86,7 @@ Score = (Frequency × 0.40) + (Recency × 0.30) + (Unit Weight × 0.20) + (Marks
 
 - This skill supports study planning and revision, but it cannot guarantee
   exam questions, marks, grading outcomes, or instructor expectations.
-- Probability scores are heuristics based on supplied syllabi, notes, and past
+- Priority scores are heuristics based on supplied syllabi, notes, and past
   papers; sparse, outdated, or incomplete inputs reduce reliability.
 - The skill should not fabricate syllabus coverage. If source material is
   missing, ambiguous, or out of scope, ask the student to confirm before
@@ -120,8 +120,4 @@ Confirm: *"Extracted [N] questions from [M] papers for [Course]. Found: 📝[A] 
 ```
 | # | Question | Times | Marks | Difficulty | Unit | Priority |
 |---|----------|-------|-------|------------|------|----------|
-| 1 | [question text] | [N]× | [X] | 🟩/🟨/🟥 | Unit [X] | 🔥 Must / ✅ Do |
-```
-
-**Step 4 — Generate notes** using the matching type section below.
-Order: Easy across all 
+| 1 | [

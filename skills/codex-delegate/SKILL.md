@@ -1,9 +1,9 @@
 ---
 name: codex-delegate
 description: Delegate coding tasks to the OpenAI Codex CLI only when the user explicitly requests it, while the orchestrator retains review and landing responsibility. 
-category: Development & Code Tools
+category: Document Processing
 source: antigravity
-tags: [node, claude, ai, agent, template, design, cro]
+tags: [node, claude, ai, agent, template, design, document, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/codex-delegate
 ---
 
@@ -44,7 +44,7 @@ Run these five steps per task. Steps 1, 4, and 5 are your judgment; 2 and 3 are 
 
 ### 1. Write the brief
 
-Codex sees **only** the text you send — no repo memory, no chat history, no shared context. Everything the
+Codex receives no orchestrator chat history; normal local configuration, instructions, memories and connected tools may still load. Everything the
 task needs goes in the brief: the goal, the current state, what to change, what to leave untouched,
 the project's **actual** gate commands (discover them from the repo's CLAUDE.md/AGENTS.md/Makefile —
 do not assume), and a report contract. Tell Codex it will **not** commit (you will). Keep one task per
@@ -52,12 +52,10 @@ brief. Full guidance and a template: [references/writing-the-brief.md](reference
 
 ### 2. Dispatch
 
-Send the brief to Codex with the bundled helper. It wraps `codex exec`, captures the run, and writes a
-structured `result.json` — so your only job is "run a command, read a file." (`<skill-dir>` below is
-this skill's installed directory — the folder containing this `SKILL.md`, i.e. the directory you loaded
-the skill from. Claude Code prints it as "Base directory for this skill" when the skill loads; on other
-orchestrators use that same directory — if unsure where it landed, run
-`find ~ -name relay.mjs -path '*codex-delegate*'` and substitute the directory above it.)
+This distribution is documentation-only: `scripts/relay.mjs` is absent. Obtain,
+pin and review the upstream runtime separately before using these examples. Do not
+search the whole home directory and trust an arbitrary relay. The chosen CLI version,
+configuration, tool integrations and effective sandbox must be verified before dispatch.
 
 ```bash
 node "<skill-dir>/scripts/relay.mjs" --brief brief.txt --cd /path/to/repo
@@ -91,4 +89,8 @@ the `finalMessage` field in `result.json` (also printed in full on stdout betwee
 
 ### 4. Review — do not trust the self-report
 
-Codex's `result.json` includes its own sum
+Codex's `result.json` includes its own summary and gate claims. **Re-verify, don't accept:**
+
+- **Re-run the project's gates yourself** (the test/lint/build commands from step 1). Never take
+  "gates passed" on faith.
+- **Read the diff**

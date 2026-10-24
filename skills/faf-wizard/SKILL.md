@@ -3,7 +3,7 @@ name: faf-wizard
 description: Done-for-you .faf generator. One-click AI context for any project - new, legacy, or famous. Auto-detects stack, scores readiness, works everywhere. 
 category: Document Processing
 source: antigravity
-tags: [python, javascript, typescript, react, api, mcp, claude, ai, gpt, automation]
+tags: [python, javascript, typescript, react, api, mcp, claude, ai, agent, gpt]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/faf-wizard
 ---
 
@@ -16,7 +16,7 @@ Transform any project - new, legacy, famous OSS, or forgotten side projects - in
 
 ## The Problem It Solves
 
-**Even React.js scores 0% AI-readiness.** Famous repositories have no AI context.
+FAF scores completeness of its own context schema; it does not measure whether an AI can understand a repository or whether a project is production ready.
 
 | What Exists | What It Tells AI |
 |-------------|------------------|
@@ -37,7 +37,7 @@ Documentation tells humans how to use your code. AI context tells AI how to help
 | **Client handoffs** | Portable context for any AI tool |
 | **Team projects** | Shared context that everyone can use |
 
-## Real Success Stories
+## Illustrative before/after scenarios
 
 ### Before/After: Legacy E-commerce Platform
 ```
@@ -100,7 +100,7 @@ To reach Silver (95%):
   + Define deployment details (+3%)
 ```
 
-## Performance Data (Real Numbers)
+## Upstream performance claims (not independently verified here)
 
 **Analyzed 8,400+ Projects:**
 - ✅ **99.2% detection accuracy** across 153+ formats
@@ -121,7 +121,7 @@ Automatically detects and configures:
 ## Universal Compatibility
 
 ### Works With Every AI Tool
-- ✅ **Claude Code** - Reads .faf natively
+- **Claude Code** - Read or export the context through its supported project instructions; do not assume native `.faf` loading
 - ✅ **Cursor** - Auto-syncs to .cursorrules  
 - ✅ **Gemini CLI** - Converts to GEMINI.md
 - ✅ **Windsurf** - Syncs to .windsurfrules
@@ -179,10 +179,4 @@ Install from Chrome Web Store - works on any Git repository.
 ### Phase 3: Optimization
 - Generates focused 33-slot IANA format
 - Validates against format specification
-- Scores AI-readiness with improvement suggestions
-
-## Success Metrics by Project Type
-
-| Project Type | Avg Score | Time to Bronze | Detection Rate |
-|-------------|-----------|----------------|----------------|
-| **React/Vue** | 89% | Instant | 9
+- Scores AI-readiness with improvement sugges

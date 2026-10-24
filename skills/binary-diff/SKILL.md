@@ -3,7 +3,7 @@ name: binary-diff
 description: Cross-version binary symbol migration: diff updated binaries, recover function names without PDBs, and propagate annotations after software updates using BinDiff-style tooling. 
 category: AI & Agents
 source: antigravity
-tags: [python, api, claude, ai, agent, llm, gpt, cro]
+tags: [python, api, claude, ai, llm, gpt, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/binary-diff
 ---
 
@@ -31,16 +31,9 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bina
 | 有旧版结果，迁移到新版 | **本 skill** |
 | 两个完全不同的二进制对比 | BinDiff / Diaphora（传统工具） |
 
-### 核心优势
+### 成本与可靠性
 
-相比传统方案：
-
-| 方案 | 200 个函数成本 | 时间 | 准确率 |
-|------|--------------|------|--------|
-| 人工开两个 IDA 窗口对比 | 免费但耗命 | 数小时 | 高 |
-| BinDiff 自动匹配 | 免费 | 快 | 中（结构变化大时失效） |
-| 完全交给 Agent（CC/Codex） | 50-100 元 | 慢 | 高 |
-| **本 skill（LLM 批量比对）** | **~1 元** | **~10 秒/函数** | **高** |
+LLM 仅生成候选映射，不能保证准确率、耗时或成本。先用少量已知符号的函数评估所选模型，再设置预算和并发上限。不要把候选名称当作恢复出的权威符号。
 
 ## 核心原理
 
@@ -60,13 +53,13 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bina
 - prompt 是固定模板，程序化填充
 - 输入输出格式确定，程序化解析
 - LLM 只负责"看两段代码，找出对应关系"这一步
-- 时间成本和 token 成本极低
+- 成本取决于模型、函数长度和复核量；记录实际用量
 
 ## Prompt 模板
 
 ### 标准比对 Prompt
 
-```text
+````text
 I have disassembly outputs and procedure code of the same function.
 
 This is the function for reference:
@@ -137,8 +130,8 @@ found_struct_offset: # This is for reference to struct offset. NOTE THAT virtual
     member_name: m_pEntitySystem
 ```
 
-If nothing found, output an empty YAML. DO NOT output anything other than the desired YAML. DO NOT collect unrelated symbols.
-```
+If nothing found, output {}. DO NOT output anything other than the desired YAML. DO NOT collect unrelated symbols.
+````
 
 ### 变量说明
 
@@ -166,11 +159,11 @@ Step 2: 批量导出
 
 Step 3: LLM 比对
   - 用 prompt 模板填充数据
-  - 调用 LLM API（推荐：deepseek 量大便宜，超大函数切 gpt）
+  - 仅向获准的端点提交可共享代码；根据实测质量、上下文和预算选择模型
   - 解析返回的 YAML
 
 Step 4: 应用结果
-  - 将 YAML 中的符号映射批量应用到新版 IDB
+  - 先验证并预览 YAML 候选，在新版 IDB 副本中应用已确认的映射
   - 用 idapro_rename 或 IDAPython 脚本批量重命名
 
 Step 5: 迭代
@@ -194,4 +187,13 @@ Step 5: 迭代
 - 中等函数（<200 行）用 deepseek
 - 超大函数（>500 行）切 gpt-4o 或 claude
 - 并发调用提高速度（10-20 并发）
-- 结果
+- 结果缓存，避免重复调用
+
+## 输出格式
+
+### YAML 输出的 5 种符号类型
+
+| 类型 | 含义 | 关键字段 |
+|------|------|---------|
+| `found_vcall` | 虚函数调用（间接 call） | `vfunc_offset`, `func_name` |
+| `found_call` | 直接函数调用 | `ins

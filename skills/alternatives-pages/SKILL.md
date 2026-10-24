@@ -136,7 +136,7 @@ Look for patterns in:
 **1. Hero**
 - "[Your Product] vs [Competitor]: [Key Differentiator]"
 - Neutral, informative tone
-- Both logos (don't be weird about it)
+- Product names; use logos only after checking applicable brand-use permissions
 
 **2. Quick Comparison**
 - At-a-glance summary for scanners
@@ -161,6 +161,4 @@ Look for patterns in:
 **6. Verdict/Recommendation**
 - "Choose [Your Product] if..."
 - "Choose [Competitor] if..."
-- Be honest about competitor's strengths
-
-## Honest Compa
+- Be honest abou

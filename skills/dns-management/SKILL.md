@@ -41,6 +41,8 @@ Configure and manage DNS zones, records, and resolution for production infrastru
 | CAA   | Certificate Authority Authorization | `0 issue "letsencrypt.org"` |
 | PTR   | Reverse DNS lookup | `34.216.184.93.in-addr.arpa` |
 
+Confirm provider account, public/private zone ID and authoritative delegation before writes; same domain names can exist in multiple zones. Export current records and define rollback, especially MX/NS/DS changes. Cloudflare lookup must check success and exactly one expected zone, handle pagination/errors and include application/json on JSON writes. Use protected token inputs rather than exposing credentials in process/log output. Querying +dnssec requests DNSSEC data; use a validating resolver AD result or a validator such as delv for actual chain verification. Provider Terraform resource names vary by major. Email records are provider-specific examples: verify legitimate senders/alignment and reporting privacy before enforcement. Changing authoritative TTL does not shorten already cached TTLs or negative caches; DNS failover is not immediate.
+
 ## AWS Route 53
 
 ### Hosted Zone Management
@@ -155,27 +157,4 @@ ZONE_ID=$(curl -s "https://api.cloudflare.com/client/v4/zones?name=example.com" 
 
 # Create an A record (proxied through Cloudflare)
 curl -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records" \
-  -H "Authorization: Bearer $CF_API_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{"type":"A","name":"app","content":"93.184.216.34","proxied":true,"ttl":1}'
-
-# Create a CNAME record (DNS only, not proxied)
-curl -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records" \
-  -H "Authorization: Bearer $CF_API_TOKEN" \
-  -d '{"type":"CNAME","name":"docs","content":"docs.readthedocs.io","proxied":false,"ttl":3600}'
-
-# List all records
-curl -s "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records" \
-  -H "Authorization: Bearer $CF_API_TOKEN" | jq '.result[] | {name, type, content, proxied}'
-
-# Delete a record
-curl -X DELETE "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/dns_records/$RECORD_ID" \
-  -H "Authorization: Bearer $CF_API_TOKEN"
-```
-
-## Terraform DNS Management
-
-### Route 53 with Terraform
-
-```hcl
-# dns.tf
+  -H "

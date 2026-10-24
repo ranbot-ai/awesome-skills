@@ -3,7 +3,7 @@ name: azure-ai-contentsafety-py
 description: Azure AI Content Safety SDK for Python. Use for detecting harmful content in text and images with multi-severity classification. 
 category: AI & Agents
 source: antigravity
-tags: [python, api, ai, workflow, image, azure]
+tags: [python, api, ai, workflow, presentation, image, azure]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-contentsafety-py
 ---
 
@@ -52,6 +52,8 @@ client = ContentSafetyClient(
 )
 ```
 
+Use only an approved endpoint/account, content and cost/retention policy; uploads disclose text/images to a hosted classifier. Bound input bytes and use reviewed SDK models/imports (azure-identity is additionally needed for Entra ID). Classification can miss harm or flag benign context: severity zero is not a universal safety guarantee. Validate thresholds on representative languages/domains, define outage/ambiguous-result handling and human appeal/review. Blocklist mutations can affect real moderation and require explicit scope; redact content in logs and close clients/credentials.
+
 ## Analyze Text
 
 ```python
@@ -85,7 +87,7 @@ client = ContentSafetyClient(endpoint, AzureKeyCredential(key))
 
 # From file
 with open("image.jpg", "rb") as f:
-    image_data = base64.b64encode(f.read()).decode("utf-8")
+    image_data = f.read()  # SDK serializes bytes to the REST base64 representation
 
 request = AnalyzeImageOptions(
     image=ImageData(content=image_data)
@@ -186,26 +188,4 @@ request = AnalyzeTextOptions(
 |----------|-------------|
 | `Hate` | Attacks based on identity (race, religion, gender, etc.) |
 | `Sexual` | Sexual content, relationships, anatomy |
-| `Violence` | Physical harm, weapons, injury |
-| `SelfHarm` | Self-injury, suicide, eating disorders |
-
-## Severity Scale
-
-| Level | Text Range | Image Range | Meaning |
-|-------|------------|-------------|---------|
-| 0 | Safe | Safe | No harmful content |
-| 2 | Low | Low | Mild references |
-| 4 | Medium | Medium | Moderate content |
-| 6 | High | High | Severe content |
-
-## Client Types
-
-| Client | Purpose |
-|--------|---------|
-| `ContentSafetyClient` | Analyze text and images |
-| `BlocklistClient` | Manage custom blocklists |
-
-## Best Practices
-
-1. **Use blocklists** for domain-specific terms
-2. **Set severity thr
+| `Violenc

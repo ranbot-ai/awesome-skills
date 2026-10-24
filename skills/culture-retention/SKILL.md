@@ -94,6 +94,8 @@ If an artifact was requested, build it after resolving essential missing facts. 
 
 **Workflow:** Signal captured → Cadence review → Theme identified → Action → Follow-up check
 
+The default survey output omits employee identity and reports aggregate themes. The Anonymous checkbox is a declared collection mode, not proof of anonymity: agree minimum reporting group size, suppress small-group/intersection breakdowns and redact identifying free text. For an explicitly requested identifiable follow-up, use a separate restricted opt-in record with purpose, access and retention policy. Retention Risk is a documented human hypothesis, never an automatic prediction or employment decision. Define score scales and represent skipped/unknown scores as blank, not zero.
+
 ### Step 5 - Build only on request
 
 Once the user asks for it, derive the fields from the confirmed context and emit the
@@ -106,15 +108,4 @@ Notion step there.** When the user selects Notion, hand that step to
 mapping, the import steps and the verification checklist, and it renders the Field
 Reference below instead of defining a table of its own. Do not restate the mapping
 here and do not improvise the import steps. Manual CSV and mapping outputs need no
-connection. For requested workspace changes, follow the shared contract: verify actual
-tool access and the target before writing. A user saying "connected" is not tool evidence.
-Never ask for a Notion password or token.
-
-For an Excel-compatible CSV, use UTF-8 with a byte order mark so Excel opens the
-text correctly. A CSV is not an `.xlsx` workbook; create `.xlsx` only when the user
-requests a workbook.
-A CSV carries no types, so after it, name the columns
-that need a number, date or currency format applied.
-
-```csv
-Survey Title,Action Plan,Anonymous,Culture ID,Department,Employee Name,Engagement Score
+connection. For requ

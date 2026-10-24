@@ -22,6 +22,8 @@ This is an adversarial pass, not a confirmatory one. Do not skim and approve. Do
 
 Trigger on: "find bugs," "audit this code/codebase," "run bug hunter," "check for errors," "find flaws," "review this for bugs," "is this code solid," or any request for a deep correctness pass rather than a style/readability review.
 
+Scope completeness is bounded by files actually inspected and available requirements. Generated/runtime artifacts and dependencies may still matter to a failure; trace the relevant owning source or report that boundary instead of excluding evidence categorically. Treat speculative findings as candidates requiring validation, preserve existing bugs.md history and keep secrets/PII out of reports. A static pass cannot certify absence of bugs or executed behavior.
+
 ## Process — Run These Phases In Order
 
 Do not skip phases or collapse them into a single skim. Each phase catches things the others miss.
@@ -49,7 +51,4 @@ Language-agnostic. Check every category — these are patterns, not syntax, so t
 - **Cross-file consistency** — a function/type/field changed in one file but call sites elsewhere not updated (the single most common AI-IDE failure mode, since builder agents tend to edit one file at a time)
 - **API/contract mismatches** — caller and callee disagree on a field name, type, or required parameter
 - **State management** — mutation of state that should be immutable, derived state that goes stale, double-updates
-- **Dead/unreachable code** — leftovers from an earlier AI attempt that never got cleaned up, code paths that can never execute
-- **Performance** — N+1 queries, avoidable O(n²) where O(n) was available, unnecessary re-computation or re-renders
-- **Dependency issues** — deprecated or vulnerable package versions, conflicting version requirements, use of a deprecated API that still works today but is slated for removal
-- **Documentation/comment mismatches** — a comment or docstring that no longer matches 
+- **Dead/unreachable code** — leftovers f

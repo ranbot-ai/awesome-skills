@@ -3,7 +3,7 @@ name: axiom
 description: First-principles assumption auditor. Classifies each hidden assumption (fact / convention / belief / interest-driven), ranks by fragility × impact, and rebuilds conclusions from verified premises. Bi
 category: AI & Agents
 source: antigravity
-tags: [claude, ai, aws, rag, cro]
+tags: [ai, aws, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/axiom
 ---
 
@@ -43,7 +43,7 @@ This is not framework fill-in-the-blank — it is assumption prosecution.
 
 1. **Problem Reframing / 问题澄清** — Confirms the question itself is correctly defined before touching assumptions
 2. **Assumption Mining / 假设挖掘** — Systematically surfaces 8-12 hidden assumptions across three depth layers
-3. **Assumption Classification / 假设分类** — Force-labels every assumption into one of four types with different challenge strategies
+3. **Assumption Classification / 假设分类** — Tentatively classifies each material assumption into one of four types with different challenge strategies
 4. **Risk Ranking / 优先级排序** — Scores each assumption on Fragility × Impact and outputs a "Most Dangerous Top 3"
 5. **Reconstruction / 重建** — Rebuilds conclusions from verified premises only, explicitly comparing "before vs after" cognitive shift
 
@@ -85,7 +85,7 @@ Systematically mine hidden assumptions in three layers:
 | **Middle** | Industry conventions, common wisdom | "A degree is required for good jobs" |
 | **Deep** | Never questioned, feels like gravity | "Success means financial independence" |
 
-**Goal:** Find 8-12 assumptions. The more concrete, the better. Reject vague statements like "I think this is right" — force specificity.
+**Goal:** Surface the material assumptions; 8-12 is an optional working range, not a quota. Do not attribute assumptions to the user without evidence. The more concrete, the better. Reject vague statements like "I think this is right" — force specificity.
 
 **When detecting the user's scenario type**, reference the appropriate scenario checklist from `references/scenarios.md` to ensure thorough mining.
 
@@ -95,7 +95,7 @@ Systematically mine hidden assumptions in three layers:
 > - **深层假设**（你从未质疑过、觉得"天经地义"的信念）
 >
 > 深层假设才是最有价值的。
-> **目标：找到 8-12 个假设，越具体越好，不接受模糊的"我以为这样更好"。**
+> **目标：找出重要且具体的假设；8-12 只是可选范围，不要为凑数而替用户虚构信念。**
 
 ---
 
@@ -103,7 +103,7 @@ Systematically mine hidden assumptions in three layers:
 
 **阶段3：假设分类 — 这个信念的本质是什么？**
 
-Label every assumption with one of four types. Each type has a fundamentally different challenge strategy:
+Use the four labels as overlapping lenses. Mark empirical hypotheses, definitions, value judgments and unresolved claims explicitly when none fits; incentives do not establish falsity. Each type has a fundamentally different challenge strategy:
 
 | Type | Label | Definition | Challenge Strategy |
 |------|-------|------------|--------------------|
@@ -112,8 +112,4 @@ Label every assumption with one of four types. Each type has a fundamentally dif
 | 🔴 | **Subjective Belief / 主观信念** | Personal experience projected as universal truth. | Who told you this? Have you personally verified it? Seek counter-evidence. |
 | ⚫ | **Interest-Driven / 利益驱动** | Someone benefits from you believing this. | Trace the incentive chain. Who profits from this narrative? |
 
-**The classification itself is the insight.** Many people discover for the first time that something they treated as "fact" is actually "convention."
-
-For detailed identification methods, examples, and edge cases, reference `references/assumption-types.md`.
-
-> 对每个假设打标签。不同性质的假设有不同的质疑方式，处
+**The clas

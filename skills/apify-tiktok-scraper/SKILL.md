@@ -92,11 +92,11 @@ Paid add-ons. Set them only when the user asks:
 }
 ```
 
-Input from `clockworks/tiktok-scraper` runs as it is; the field names match. Fetch the live schema when a field is in doubt:
+The author describes compatibility with `clockworks/tiktok-scraper`; verify the actual input schema rather than assuming interchangeability. Fetch the live schema when a field is in doubt:
 
 ```bash
 apify actors info "harshmaur/tiktok-scraper" --input --json \
-  --user-agent apify-awesome-skills/apify-tiktok-scraper 2>/dev/null
+  --user-agent apify-awesome-skills/apify-tiktok-scraper
 ```
 
 ### Step 3 — Estimate the cost, then run
@@ -108,4 +108,4 @@ apify actors info "harshmaur/tiktok-scraper" --input --json \
 | Follower or following account | $0.25 per 1,000 |
 | Profile (one per profile in `profiles`, and each account from `"/user"` search) | $4.00 per 1,000 |
 | `aiAnalysis` | $1.50 per 1,000 videos |
-| AI summary, scene description or AI transcript | $25 pe
+| AI 

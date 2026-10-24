@@ -54,7 +54,7 @@ body {
 
 .pastel-pill {
   background-color: var(--pastel-pink);
-  color: #a05a6c; /* Darker version of the pink for contrast */
+  color: #703347; /* Darker version of the pink for contrast */
   border-radius: 50px;
   padding: 8px 24px;
   font-weight: 700;
@@ -124,7 +124,7 @@ struct SoftPastelView: View {
     }
 }
 ```
-- A custom font like Nunito or Quicksand is practically required. System fonts are often too rigid.
+- Nunito and Quicksand are optional choices; system rounded fonts and readable fallbacks also work.
 - The `shadow(color:)` must be tinted with one of your pastel palette colors, never black or gray.
 - Corner radii should be very large (20-32).
 

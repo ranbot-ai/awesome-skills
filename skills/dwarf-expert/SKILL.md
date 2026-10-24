@@ -1,9 +1,9 @@
 ---
 name: dwarf-expert
 description: Provides expertise for analyzing DWARF debug files and understanding the DWARF debug format/standard (v3-v5). Triggers when understanding DWARF information, interacting with DWARF files, answering DWA
-category: AI & Agents
+category: Document Processing
 source: antigravity
-tags: [node, ai, workflow, rag, cro]
+tags: [node, ai, workflow, document, rag, cro]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/dwarf-expert
 ---
 
@@ -67,6 +67,10 @@ The `--statistics` output helps compare debug info quality across compiler versi
 - **Debugging debuggers**: Identify malformed DWARF causing debugger issues
 - **DWARF tool development**: Validate parser output against known-good binaries
 
+# Supporting references
+
+The `reference/readelf.md`, `reference/dwarfdump.md` and `reference/coding.md` paths below are not bundled in this single-file catalog copy. Use an existing reviewed upstream installation or the official tool/specification documentation; do not claim these references were loaded. Verify installed tool flags against [LLVM documentation](https://llvm.org/docs/CommandGuide/llvm-dwarfdump.html). Treat binaries as untrusted parser input: use patched tools, bounded resources and an isolated directory; reading debug information does not require executing the binary.
+
 # Parsing DWARF Debug Information
 ## readelf
 ELF files can be parsed via the `readelf` command ({baseDir}/reference/readelf.md). Use this for general ELF information, but prefer `dwarfdump` for DWARF-specific parsing.
@@ -87,11 +91,4 @@ This skill supports writing, modifying, and reviewing code that interacts with D
 │   └─ Use `readelf` ({baseDir}/reference/readelf.md)
 ├─ Need to parse, search, and/or dump DWARF DIE nodes?
 │   └─ Use `dwarfdump` ({baseDir}/reference/dwarfdump.md)
-└─ Need to write, modify, or review code that interacts with DWARF data?
-    └─ Refer to the coding reference ({baseDir}/reference/coding.md)
-```
-
-## Limitations
-- Use this skill only when the task clearly matches the scope described above.
-- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.
-- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.
+└─ Need to write, modify, or review code that interac

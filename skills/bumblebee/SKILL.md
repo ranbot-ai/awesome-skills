@@ -60,7 +60,8 @@ After installation, the user must ensure `$GOBIN` (or `$HOME/go/bin`) is on `$PA
 Run `command -v bumblebee && bumblebee version`. If missing:
 
 ```bash
-go install github.com/perplexityai/bumblebee/cmd/bumblebee@latest
+# After inspecting an approved pinned revision and authorizing installation:
+go install github.com/perplexityai/bumblebee/cmd/bumblebee@APPROVED_VERSION
 ```
 
 Then re-check `bumblebee version`. If the binary still cannot be located, the user's `GOBIN`/`PATH` is likely misconfigured — surface the resolved `go env GOPATH` and `go env GOBIN` so they can fix it. Do not fall back to running the binary by absolute path silently; explain what is happening.
@@ -109,9 +110,4 @@ bumblebee scan --profile project \
   --root "$HOME/Developer" \
   --max-duration 10m \
   > "$OUT/bumblebee-project-$TS.ndjson" \
-  2> "$OUT/bumblebee-project-$TS.log"
-```
-
-### Deep
-
-Used for incident response — broad 
+ 

@@ -31,6 +31,10 @@ Code; treat other orchestrators as designed-for, not yet proven.
 - You want to write the code yourself, or you only need Antigravity's opinion on code you wrote (a
   `--read-only` dispatch covers review without edits, but a plain review may not need delegation at all).
 
+## Runtime availability
+
+This is a docs-only import: `scripts/relay.mjs` is absent. Do not run the dispatch commands from this directory or invent its output. Obtain a separately authorized upstream checkout and inspect runtime, dependencies and license first. The flags/result schema below describe the imported upstream contract, not tested functionality in this bundle.
+
 ## Prerequisites (check once)
 
 1. `agy help` succeeds. If not, install the Antigravity CLI and complete first-launch setup.
@@ -61,9 +65,9 @@ Antigravity it will **not** commit (you will). Keep one task per brief. Full gui
 
 ### 2. Dispatch
 
-Send the brief to Antigravity with the bundled helper. It wraps `agy --print`, captures the run, and
+Send the brief to Antigravity with a separately obtained, reviewed upstream helper. It wraps `agy --print`, captures the run, and
 writes a structured `result.json` - so your only job is "run a command, read a file." (`<skill-dir>`
-below is this skill's installed directory - the folder containing this `SKILL.md`.)
+below means the reviewed upstream runtime directory; this installed catalog directory has no executable helper.)
 
 ```bash
 node "<skill-dir>/scripts/relay.mjs" --brief brief.txt --cd /path/to/repo
@@ -95,12 +99,4 @@ the `finalMessage` field in `result.json` (also printed in full on stdout betwee
 ### 4. Review - do not trust the self-report
 
 Antigravity's `result.json` includes its own final message and any gate claims. **Re-verify, don't
-accept:**
-
-- **Re-run the project's gates yourself** (the test/lint/build commands from step 1).
-- **Read the diff** against the brief: did Antigravity do what was asked, nothing more and nothing less?
-  `touchedFiles` in the result is your starting point.
-- **Run the relevant guard skills** on the diff if you have them installed.
-- For schema/migration changes, round-trip them; for removals, grep for dangling references.
-
-Full ch
+ac

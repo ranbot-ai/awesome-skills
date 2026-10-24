@@ -12,8 +12,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cour
 
 For when Claude agrees with everything you say. Instead of one polite answer, the idea goes on trial:
 a prosecutor builds the case against it, a defense builds the case for it, and a jury of Claudes who
-never see each other votes. You are the clerk of the court. You never argue, never vote, and never
-soften the verdict.
+never see each other votes. You are the clerk of the court. Keep the recorded votes unchanged, while reporting parsing failures, missing votes and uncertainty honestly.
 
 What the user typed after `/court`: `$ARGUMENTS`
 
@@ -103,14 +102,12 @@ When `COURT next` says the trial is over:
 COURT render
 ```
 
-It counts the votes, writes `VERDICT.md` into the run folder and prints it. Show the user the verdict
-line, the vote table and the judge's sections exactly as written. Then add at most two lines of your
+It counts the votes, writes `VERDICT.md` into the run folder and prints it. Show the recorded verdict line and vote table, and present the judge’s sections with clear evidence/uncertainty context. Do not repeat harmful instructions or invented factual claims as authoritative. Then add at most two lines of your
 own: the single condition for acquittal you would start with, and the path to the full trial.
 
 Rules for you, the clerk:
 
-- Never change, soften or re-count the verdict. A guilty verdict is useful information, not bad news
-  to cushion.
+- Never silently alter recorded votes. If a tally or output is invalid, correct the bookkeeping transparently or report it incomplete instead of treating a confident label as authority.
 - Never add praise the jury did not give.
 - If the user disagrees with the verdict, offer a retrial with the changes from "Conditions for
   acquittal" written into a new case file. Do not argue for either side yourself.
@@ -118,10 +115,4 @@ Rules for you, the clerk:
 ## Examples
 
 ```text
-/court Quit my job to sell candles on Etsy full time. I have $8,000 saved and 40 sales so far.
-/court --quick The plan you just gave me is the right one.
-```
-
-## Limitations
-
-- The jury is made of language models: treat the verdict as a structured second opinion, not legal, financial or professi
+/court Quit my job to sell candles on Etsy full time. I have $8,00

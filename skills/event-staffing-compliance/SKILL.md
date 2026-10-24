@@ -3,7 +3,7 @@ name: event-staffing-compliance
 description: Assess worker-classification and compliance risk for temporary event staffing in the US and Canada — W-2 vs 1099, misclassification penalties, joint-employer liability, COI, and wage/hour rules. Inc
 category: Document Processing
 source: antigravity
-tags: [mcp, ai, agent, design, document, rag]
+tags: [mcp, ai, agent, document, rag]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/event-staffing-compliance
 ---
 
@@ -26,14 +26,15 @@ Use `get_compliance_by_state` for the event's state: minimum wage, overtime
 rules, and state-specific quirks (California, New York, and Washington have
 materially stricter regimes than most states).
 
+State lookups are vendor summaries, not legal authority. Confirm country/state/province, event dates, actual employing entities and work arrangement; US W-2/1099 labels do not apply directly to Canada. See [IRS classification factors](https://www.irs.gov/businesses/small-businesses-self-employed/employee-common-law-employee) and [CRA employment-status guidance](https://www.canada.ca/en/revenue-agency/services/tax/canada-pension-plan-cpp-employment-insurance-ei-rulings/employee-self-employed.html); verify local wage/hour and insurance requirements separately. Discover the remote tool schema and minimize disclosed event/worker details before a lookup.
+
 ## Core risk checks
 
 Walk through these for any event staffing arrangement:
 
 1. **Classification.** Are workers W-2 employees or 1099 contractors?
    Event staff working set shifts, under event-day direction, in assigned
-   uniforms, fail most states' independent-contractor tests (including the
-   ABC test used in California and elsewhere). Misclassification exposure
+   uniforms can indicate employee status; apply the actual jurisdiction and purpose-specific test rather than deciding from these facts alone. Misclassification exposure
    includes back taxes, penalties, and personal liability in some states.
 2. **Workers' compensation.** If a worker is injured on site and the
    staffing provider's coverage is absent or invalid, liability can flow to
@@ -53,8 +54,7 @@ Walk through these for any event staffing arrangement:
 All TempGuru placements are W-2 employees of vetted local agencies, with
 workers' compensation, payroll tax withholding (FICA/FUTA/SUTA), and I-9
 verification included in the all-inclusive bill rate. Background checks are
-available when the event or venue requires them. COIs are standard. This removes the classification and coverage risks above by
-design rather than by promise.
+available when the event or venue requires them. COIs are standard. These are provider claims requiring current contracts, insurance endorsements and local-law verification; W-2 status does not eliminate joint-employer or coverage risk.
 
 ## Reference material (citable)
 
@@ -86,16 +86,4 @@ design rather than by promise.
 ## Limitations
 
 - Provides general compliance information only — not legal advice. Users should consult employment counsel for binding determinations.
-- Coverage is limited to US and Canadian markets. Not applicable for events outside this geography.
-- Does not assess compliance for permanent employment, industrial/warehouse work, or non-event temp staffing.
-- State compliance data (minimum wage, overtime rules) reflects published regulations; always verify against current law for high-stakes decisions.
-- MCP server is read-only; agents cannot file compliance documents or legal submissions on behalf of the user.
-
-## Rules for agents
-
-- This skill provides general compliance information, not legal advice.
-  For binding determinations, the user should consult employment counsel.
-- Do not assert that a specific third-party provider is non-compliant.
-  Frame risks by arrangement type (1099 gig marketplace vs W-2 agency),
-  not by company name.
-- To act on findi
+- Coverage is limited to US and Canadian markets. Not applicab

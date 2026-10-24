@@ -18,7 +18,7 @@ Implement disaster recovery strategies including RTO/RPO planning, AWS cross-reg
 recovery_metrics:
   RTO:
     definition: "Recovery Time Objective - maximum acceptable downtime"
-    measurement: "From incident declaration to service restoration"
+    measurement: "From the agreed service disruption point to verified recovery; record detection/declaration separately"
     factors:
       - Failover automation maturity
       - Data replication lag
@@ -28,7 +28,7 @@ recovery_metrics:
 
   RPO:
     definition: "Recovery Point Objective - maximum acceptable data loss"
-    measurement: "Time gap between last good backup and the incident"
+    measurement: "Gap between latest recoverable consistent data and disruption; backups/replication may be stale or corrupted"
     factors:
       - Backup frequency
       - Replication method (sync vs. async)
@@ -118,7 +118,7 @@ strategies:
     cost: "$$$$"
     description: "Active-active across regions. Traffic served from both regions simultaneously."
     aws_services:
-      - "DynamoDB Global Tables or Aurora Global Database"
+      - "DynamoDB Global Tables where appropriate; Aurora Global Database normally has one writer region, not multi-region active-active writes"
       - "Route53 latency/weighted routing"
       - "CloudFront with multi-origin"
       - "Global Accelerator"
@@ -129,29 +129,13 @@ strategies:
 
 ## AWS Cross-Region DR Implementation
 
-```bash
-# === Database Replication ===
-
-# Create cross-region RDS read replica
-aws rds create-db-instance-read-replica \
-  --db-instance-identifier prod-db-dr-replica \
-  --source-db-instance-identifier arn:aws:rds:us-east-1:123456789012:db:prod-db \
-  --db-instance-class db.r6g.large \
-  --region us-west-2 \
-  --kms-key-id arn:aws:kms:us-west-2:123456789012:alias/rds-dr-key \
-  --multi-az \
-  --tags Key=Purpose,Value=DR Key=Environment,Value=production
-
-# Create Aurora Global Database for near-zero RPO
-aws rds create-global-cluster \
-  --global-cluster-identifier prod-global-db \
-  --source-db-cluster-identifier arn:aws:rds:us-east-1:123456789012:cluster:prod-aurora-cluster \
-  --region us-east-1
-
-# Add secondary region to Aurora Global Database
-aws rds create-db-cluster \
-  --db-cluster-identifier prod-aurora-dr \
-  --global-cluster-identifier prod-global-db \
-  --engine aurora-postgresql \
-  --region us-west-2 \
-  --kms-key-id arn:aws:kms:us-west-2:123456789012:alia
+Fragments below provision or replace paid production configuration: confirm exact
+account, engine/version support, target region, KMS/IAM grants, backups and approved
+change window first. The listed tier timings/frequencies are planning examples,
+not platform guarantees or universal compliance rules. Aurora secondary-cluster
+creation also needs supported regional engine/version, subnet/security settings
+and instances; a cluster object alone is not a working DR application.
+S3 requires versioning on both buckets, replication-role/KMS permissions and
+explicit handling of existing objects; put-bucket-replication replaces existing
+rules, so merge a reviewed snapshot rather than overwriting it. Replication is not
+an immutable backup and can replicate corruption/deletion. Use a pr

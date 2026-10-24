@@ -20,12 +20,14 @@ Automate Dropbox operations including file upload/download, search, folder manag
 
 ## Setup
 
-**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
+Use an existing approved Rube connection; an endpoint alone does not authenticate Dropbox. Use the supported setup/auth flow within requested scope.
 
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `dropbox`
 3. If connection is not ACTIVE, follow the returned auth link to complete Dropbox OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
+
+Historical slugs/limits/defaults below need current schema verification. Verify account/root namespace, exact file/version, destination and approved audience before mutations, overwrite, ownership transfer or sharing. Existing links may be broader than the requested audience: inspect permissions before reusing. Reconcile asynchronous/unknown writes using their original job IDs before retrying.
 
 ## Core Workflows
 
@@ -92,12 +94,4 @@ Automate Dropbox operations including file upload/download, search, folder manag
 
 **Key parameters**:
 - `path`: File or folder path for link creation
-- `settings.audience`: `"public"`, `"team"`, or `"no_one"`
-- `settings.access`: `"viewer"` or `"editor"`
-- `settings.expires`: ISO 8601 expiration date (e.g., `"2026-12-31T23:59:59Z"`)
-- `settings.require_password` / `settings.link_password`: Password protection
-- `settings.allow_download`: Boolean for download permission
-- `direct_only`: For `LIST_SHARED_LINKS`, set `true` to only return direct links (not parent folder links)
-
-**Pitfalls**:
-- `DR
+- `settings.audience`: `"public"`, `"team"`, or `"no_

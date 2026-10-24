@@ -15,7 +15,7 @@ Supporting files are included at skill-relative paths. See [UPSTREAM-NOTICE.md](
 
 ## Overview
 
-Biopython is a comprehensive set of freely available Python tools for biological computation. It provides functionality for sequence manipulation, file I/O, database access, structural bioinformatics, phylogenetics, and many other bioinformatics tasks. The current version is **Biopython 1.85** (released January 2025), which supports Python 3 and requires NumPy.
+Biopython is a comprehensive set of freely available Python tools for biological computation. It provides functionality for sequence manipulation, file I/O, database access, structural bioinformatics, phylogenetics, and many other bioinformatics tasks. Examples span several Biopython releases. Record and pin the version actually used; do not treat the old 1.85 snapshot as the current release. Verify the matching Python/NumPy requirements and API documentation before running analysis.
 
 ## When to Use This Skill
 
@@ -50,7 +50,7 @@ Biopython is organized into modular sub-packages, each addressing specific bioin
 
 Install Biopython using pip (requires Python 3 and NumPy):
 
-```python
+```bash
 uv pip install biopython
 ```
 
@@ -154,8 +154,4 @@ Use for:
 from Bio.Blast import NCBIWWW, NCBIXML
 
 # Run BLAST search
-result_handle = NCBIWWW.qblast("blastn", "nt", "ATCGATCGATCG")
-blast_record = NCBIXML.read(result_handle)
-
-# Display top hits
-for alignment in blas
+result_handle = NCBIWWW.

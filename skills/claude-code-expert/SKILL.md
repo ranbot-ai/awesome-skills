@@ -1,9 +1,9 @@
 ---
 name: claude-code-expert
 description: Especialista profundo em Claude Code - CLI da Anthropic. Maximiza produtividade com atalhos, hooks, MCPs, configuracoes avancadas, workflows, CLAUDE.md, memoria, sub-agentes, permissoes e integracao c
-category: Development & Code Tools
+category: Document Processing
 source: antigravity
-tags: [mcp, claude, ai, agent, workflow]
+tags: [mcp, claude, ai, agent, automation, workflow, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/claude-code-expert
 ---
 
@@ -16,7 +16,7 @@ Read [the detailed guide](references/detailed-guide.md) before executing this sk
 
 ## When to Use This Skill
 
-- When you need specialized assistance with this domain
+- Configure or troubleshoot Claude Code CLI, project instructions, hooks, MCP connections, permissions and supported automation using the installed version’s documentation.
 
 ## Do Not Use This Skill When
 

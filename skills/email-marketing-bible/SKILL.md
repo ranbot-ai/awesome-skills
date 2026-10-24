@@ -14,7 +14,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/emai
 
 The Email Marketing Bible turns an agent into an email marketing operator. It covers building automation flows, segmenting audiences, writing and de-slopping copy, directing email design, diagnosing deliverability, and operating an ESP through MCP or connectors behind hard pre-send gates. Part A is the operating manual for when the agent acts; Part B is the dense reference (metrics, flows, deliverability, compliance, platforms, benchmarks and 19 industry playbooks).
 
-Adapted from the official skill at [CosmoBlk/email-marketing-bible](https://github.com/CosmoBlk/email-marketing-bible) (v2.7, 8 Sep 2026, MIT) by George Hartley, co-founder of Nitrosend. It is distilled from a 19-chapter guide built on 908 sources ([nitrosend.com/email-marketing-bible](https://nitrosend.com/email-marketing-bible)) and from running SmartrMail (about 12,000 customers, 6 billion emails). Figures are mid-2026; verify anything volatile (inbox rules, ESP features, pricing, model names) before acting.
+Adapted from the official skill at [CosmoBlk/email-marketing-bible](https://github.com/CosmoBlk/email-marketing-bible) (v2.7, 8 Sep 2026, MIT) by George Hartley, co-founder of Nitrosend. It is distilled from a 19-chapter guide built on 908 sources ([nitrosend.com/email-marketing-bible](https://nitrosend.com/email-marketing-bible)) and from running SmartrMail (about 12,000 customers, 6 billion emails). Imported source/usage counts and personal field notes are author claims, not independently verified in this review. Figures are mid-2026; verify anything volatile (inbox rules, ESP features, pricing, model names) before acting.
 
 ## When to Use This Skill
 
@@ -41,6 +41,8 @@ Read account state first (lists, flows, recent campaigns, deliverability, suppre
 
 ### Step 4: Show the pre-send packet and wait
 
+Approval binds the exact content, audience/exclusions, account, sender and timing. Recheck counts/suppressions immediately before dispatch and reauthorize material changes; saving a draft or flow is not permission to activate it. One send cannot be rolled back after delivery; the kill switch only stops queued/future work.
+
 Run the pre-send checklist (section 3), show the packet (preview URL, audience size, suppressions, subject, preview text, send time, sender, unsubscribe, compliance risk) and wait for an explicit "send it".
 
 ## Part A: Operating Manual
@@ -65,11 +67,4 @@ Every segment, draft, campaign, flow or staged send on a real ESP is live. **Har
 | Diagnose deliverability | §11 | domain, ESP, bounce + complaint rate, recent changes |
 | Write or de-slop copy | §4 | audience, offer, voice, one real proof |
 | Design an email | §5 + §16 | brand tokens, archetype, goal |
-| Pick a platform | §15 | list size, use case, stack, budget, agent-driven? |
-| Pull a benchmark | Appendix | industry, email type |
-| Cold outbound | §14 | offer, ICP, domains, volume |
-| WhatsApp / SMS / RCS | §Messaging | channel, consent basis, region |
-
-### 2. AI EMAIL AUTOMATION (the operating model)
-
-The marketer moved from operator to director: brief the agent, govern it, own the send button. Most major ESPs now ship a human-gated prompt-to-campaign agent, an MCP server or a Claude
+| Pick a platform | §15 | list size, use case, stack,

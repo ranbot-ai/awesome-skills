@@ -3,7 +3,7 @@ name: discord-automation
 description: Automate Discord tasks via Rube MCP (Composio): messages, channels, roles, webhooks, reactions. Always search tools first for current schemas. 
 category: AI & Agents
 source: antigravity
-tags: [react, api, mcp, ai, automation, workflow]
+tags: [react, mcp, ai, automation, workflow]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/discord-automation
 ---
 
@@ -20,7 +20,7 @@ Automate Discord operations through Composio's Discord/Discordbot toolkits via R
 
 ## Setup
 
-**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
+**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. The endpoint must be connected and authenticated according to the host; each service connection still needs its own authorized account and scopes.
 
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `discordbot` (bot operations) or `discord` (user operations)
@@ -143,9 +143,4 @@ Discord uses snowflake IDs (64-bit integers as strings) for all entities:
 ### Permission Bitfields
 
 Permissions are combined using bitwise OR:
-- SEND_MESSAGES = 0x800
-- MANAGE_ROLES = 0x10000000
-- MANAGE_MESSAGES = 0x2000
-- ADMINISTRATOR = 0x8
-
-### Pa
+- SEND_MESSAGES = 

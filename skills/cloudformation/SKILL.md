@@ -25,7 +25,7 @@ Deploy AWS infrastructure with native CloudFormation templates, change sets, nes
 ## Prerequisites
 
 - AWS CLI v2 installed and configured
-- IAM permissions: `cloudformation:*`, plus permissions for all resources in the template
+- Least-privilege CloudFormation actions and a reviewed execution role/resource permissions scoped to the intended stacks
 - (Optional) `cfn-lint` installed for template validation (`pip install cfn-lint`)
 - S3 bucket for storing templates larger than 51,200 bytes
 
@@ -54,6 +54,10 @@ Parameters:
     Default: t3.micro
     AllowedValues: [t3.micro, t3.small, t3.medium, t3.large]
 
+  AmiId:
+    Type: AWS::EC2::Image::Id
+    Description: Verified region-specific image with the application/bootstrap prerequisites
+
   VpcId:
     Type: AWS::EC2::VPC::Id
     Description: VPC to deploy into
@@ -65,13 +69,6 @@ Parameters:
 Conditions:
   IsProd: !Equals [!Ref Environment, prod]
   CreateReadReplica: !Equals [!Ref Environment, prod]
-
-Mappings:
-  RegionAMI:
-    us-east-1:
-      AL2023: ami-0abcdef1234567890
-    us-west-2:
-      AL2023: ami-0fedcba9876543210
 
 Resources:
   SecurityGroup:
@@ -93,8 +90,8 @@ Resources:
     Properties:
       LaunchTemplateName: !Sub '${Environment}-web'
       LaunchTemplateData:
-        ImageId: !FindInMap [RegionAMI, !Ref 'AWS::Region', AL2023]
-        InstanceType: !If [IsProd, t3.large, !Ref InstanceType]
+        ImageId: !Ref AmiId
+        InstanceType: !Ref InstanceType
         MetadataOptions:
           HttpTokens: required
         SecurityGroupIds:
@@ -124,7 +121,7 @@ Resources:
         MinInstancesInService: !If [IsProd, 2, 0]
         MaxBatchSize: 1
         PauseTime: PT5M
-        WaitOnResourceSignals: true
+        WaitOnResourceSignals: false # scaffold has no cfn-signal sender
         SuspendProcesses:
           - HealthCheck
           - ReplaceUnhealthy
@@ -159,6 +156,8 @@ Outputs:
       Name: !Sub '${Environment}-WebASG'
 ```
 
+The template is an infrastructure scaffold, not a deployable production application: supply a verified region-specific AmiId and bootstrap/listener, an actual load balancer/listener and an ingress rule from its security group to target port8080. No cfn-signal sender is bundled, so resource-signal waiting is disabled; implement/test signals before enabling it. The nested child templates below are also external prerequisites.
+
 ## Stack Operations
 
 ```bash
@@ -171,15 +170,4 @@ cfn-lint template.yaml
 # Create a stack
 aws cloudformation create-stack \
   --stack-name production-web \
-  --template-body file://template.yaml \
-  --parameters \
-    ParameterKey=Environment,ParameterValue=prod \
-    ParameterKey=VpcId,ParameterValue=vpc-abc123 \
-    ParameterKey=SubnetIds,ParameterValue="subnet-aaa\\,subnet-bbb" \
-  --capabilities CAPABILITY_IAM CAPABILITY_NAMED_IAM \
-  --tags Key=Environment,Value=production Key=Team,Value=platform \
-  --enable-termination-protection \
-  --on-failure ROLLBACK
-
-# Wait for stack creation
-aws cloudformation wait stack-cr
+  --template-body file://templa

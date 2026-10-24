@@ -3,7 +3,7 @@ name: c4-architecture-c4-architecture
 description: Generate comprehensive C4 architecture documentation for an existing repository/codebase using a bottom-up analysis approach. 
 category: Document Processing
 source: antigravity
-tags: [python, node, api, ai, agent, workflow, design, document, docker, kubernetes]
+tags: [python, node, api, ai, agent, workflow, template, design, document, docker]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/c4-architecture-c4-architecture
 ---
 
@@ -12,7 +12,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/c4-a
 
 Generate comprehensive C4 architecture documentation for an existing repository/codebase using a bottom-up analysis approach.
 
-[Extended thinking: This workflow implements a complete C4 architecture documentation process following the C4 model (Context, Container, Component, Code). It uses a bottom-up approach, starting from the deepest code directories and working upward, ensuring every code element is documented before synthesizing into higher-level abstractions. The workflow coordinates four specialized C4 agents (Code, Component, Container, Context) to create a complete architectural documentation set that serves both technical and non-technical stakeholders.]
+Use a bottom-up source inventory to support C4 views, while selecting only levels useful to the audience. Specialized agents are optional execution helpers, not bundled tools or evidence that source was reviewed.
 
 ## Use this skill when
 
@@ -36,12 +36,14 @@ This workflow creates comprehensive C4 architecture documentation following the 
 
 1. **Code Level**: Analyzing every subdirectory bottom-up to create code-level documentation
 2. **Component Level**: Synthesizing code documentation into logical components within containers
-3. **Container Level**: Mapping components to deployment containers with API documentation (shows high-level technology choices)
+3. **Container Level**: Mapping components to C4 applications/data stores with API documentation (shows high-level technology choices)
 4. **Context Level**: Creating high-level system context with personas and user journeys (focuses on people and software systems, not technologies)
 
-**Note**: According to the [C4 model](https://c4model.com/diagrams), you don't need to use all 4 levels of diagram - the system context and container diagrams are sufficient for most software development teams. This workflow generates all levels for completeness, but teams can choose which levels to use.
+**Note**: According to the [C4 model](https://c4model.com/diagrams), you don't need to use all 4 levels of diagram - the system context and container diagrams are sufficient for most software development teams. Select useful levels first; code-level diagrams are optional and are not a function catalog for every directory. Preserve a source inventory even when detailed diagrams are omitted.
 
-All documentation is written to a new `C4-Documentation/` directory in the repository root.
+Use the user’s requested location, otherwise propose a new `C4-Documentation/` directory in the repository root.
+
+Before writing, record repository/head, audience, system boundary and files actually inspected. Protect secrets/internal infrastructure details and follow existing docs conventions. C4 containers are applications or data stores, not synonymous with Docker containers or one deployment replica. Components belong inside one container; code directories do not by themselves establish component boundaries.
 
 ## Phase 1: Code-Level Documentation (Bottom-Up Analysis)
 
@@ -56,7 +58,7 @@ All documentation is written to a new `C4-Documentation/` directory in the repos
 
 For each directory, starting from the deepest:
 
-- Use Task tool with subagent_type="c4-architecture::c4-code"
+- If an authorized compatible subagent exists, delegate this bounded analysis; otherwise perform it directly. c4-architecture::c4-code is an example role name, not a bundled tool.
 - Prompt: |
   Analyze the code in directory: [directory_path]
 
@@ -84,7 +86,7 @@ For each directory, starting from the deepest:
      - Optional Mermaid diagram if relationships are complex
 
   Save the output as: C4-Documentation/c4-code-[directory-name].md
-  Use a sanitized directory name (replace / with -, remove special chars) for the filename.
+  Use a stable collision-free path mapping: a/b and a-b must not overwrite each other. Prefer matching output subdirectories or append a short path hash, and record the map.
 
   Ensure the documentation includes:
   - Complete function signatures with all parameters and types
@@ -93,21 +95,6 @@ For each directory, starting from the deepest:
   - Clear, descriptive names and descriptions
 
 - Expected output: c4-code-<directory-name>.md file in C4-Documentation/
-- Context: All files in the directory and its subdirectories
+- Context: Only files directly owned by this inventory unit; link previously reviewed child inventories instead of repeatedly claiming the same files
 
-**Repeat for every subdirectory** until all directories have corresponding c4-code-\*.md files.
-
-## Phase 2: Component-Level Synthesis
-
-### 2.1 Analyze All Code-Level Documentation
-
-- Collect all c4-code-\*.md files created in Phase 1
-- Analyze code structure, dependencies, and relationships
-- Identify logical component boundaries based on:
-  - Domain boundaries (related business functionality)
-  - Technical boundaries (shared frameworks, libraries)
-  - Organizational boundaries (team ownership, if evident)
-
-### 2.2 Create Component Documentation
-
-For each i
+**Repeat for every subdirectory** until all directories have corresponding c4-code-\*.md 

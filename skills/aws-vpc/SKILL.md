@@ -25,11 +25,13 @@ Design and manage Virtual Private Cloud networking for production AWS environmen
 ## Prerequisites
 
 - AWS CLI v2 installed and configured
-- IAM permissions: `ec2:*` (or scoped to VPC-related actions)
+- IAM permissions scoped to the needed VPC actions/resources and approved account/region
 - CIDR range planning completed (avoid overlaps with on-premises or other VPCs)
 - For VPC peering: access to both VPCs (same or different accounts)
 
 ## Network Architecture
+
+Diagram address counts are total addresses; AWS reserves five per subnet, so a /24 normally has251 assignable addresses. Confirm account/region, AZ availability, nonoverlapping CIDRs, routing and approved cost before creation. CLI examples create twoAZs; the Terraform example creates three. Inspect existing resources and plan rollback rather than rerunning non-idempotent create commands. VPC/subnet tags do not enforce isolation: explicitly associate data subnets with local-only route tables and verify no inherited default route. New security groups allow all outbound by default; scope egress to actual dependencies.
 
 ```
 VPC (10.0.0.0/16) - 65,536 IPs
@@ -120,17 +122,4 @@ DATA_SUB_B=$(aws ec2 create-subnet \
 # Create and attach Internet Gateway
 IGW_ID=$(aws ec2 create-internet-gateway \
   --tag-specifications 'ResourceType=internet-gateway,Tags=[{Key=Name,Value=production-igw}]' \
-  --query 'InternetGateway.InternetGatewayId' --output text)
-aws ec2 attach-internet-gateway --vpc-id $VPC_ID --internet-gateway-id $IGW_ID
-
-# Create public route table
-PUB_RT=$(aws ec2 create-route-table \
-  --vpc-id $VPC_ID \
-  --tag-specifications 'ResourceType=route-table,Tags=[{Key=Name,Value=public-rt}]' \
-  --query 'RouteTable.RouteTableId' --output text)
-aws ec2 create-route --route-table-id $PUB_RT --destination-cidr-block 0.0.0.0/0 --gateway-id $IGW_ID
-aws ec2 associate-route-table --route-table-id $PUB_RT --subnet-id $PUB_SUB_A
-aws ec2 associate-route-table --route-table-id $PUB_RT --subnet-id $PUB_SUB_B
-
-# Allocate Elastic IPs for NAT Gateways (one per AZ for HA)
-EIP_A=$(aws ec2 allocate-a
+  --query 'InternetGateway.InternetGatewayId' --output text

@@ -12,6 +12,10 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azur
 
 Build document analysis applications using the Azure AI Document Intelligence SDK for Java.
 
+## Version and document boundaries
+
+These examples target the legacy azure-ai-formrecognizer API and a prerelease dependency; verify the selected artifact/service API and supported model IDs before use, rather than assuming parity with newer Document Intelligence SDKs. Obtain permission before uploading documents, especially identity and financial records; use short-lived narrowly scoped SAS URLs and never log their query strings or extracted content. Build/delete model operations change billable resources. OCR fields and confidence are uncertain: check null/type for each nested Items field before calling its typed getter, validate results against source documents, and handle terminal polling failures/timeouts as well as initiation errors. Client declarations are alternative independent snippets, not one compilable file.
+
 ## Installation
 
 ```xml
@@ -149,21 +153,4 @@ for (AnalyzedDocument doc : result.getDocuments()) {
     Map<String, DocumentField> fields = doc.getFields();
     
     DocumentField merchantName = fields.get("MerchantName");
-    if (merchantName != null && merchantName.getType() == DocumentFieldType.STRING) {
-        System.out.printf("Merchant: %s (confidence: %.2f)%n",
-            merchantName.getValueAsString(),
-            merchantName.getConfidence());
-    }
-    
-    DocumentField transactionDate = fields.get("TransactionDate");
-    if (transactionDate != null && transactionDate.getType() == DocumentFieldType.DATE) {
-        System.out.printf("Date: %s%n", transactionDate.getValueAsDate());
-    }
-    
-    DocumentField items = fields.get("Items");
-    if (items != null && items.getType() == DocumentFieldType.LIST) {
-        for (DocumentField item : items.getValueAsList()) {
-            Map<String, DocumentField> itemFields = item.getValueAsMap();
-            System.out.printf("Item: %s, Price: %.2f%n",
-                itemFields.get("Name").getValueAsString(),
-                itemFields.get("Price").getV
+    if (merchantName != null && merchantName.getType() == DocumentFi

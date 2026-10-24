@@ -49,6 +49,8 @@ Handles default to short refs (`workspace:2`, `pane:1`, `surface:7`); UUIDs acce
 
 Injected env vars in every cmux-spawned terminal: `CMUX_WORKSPACE_ID`, `CMUX_SURFACE_ID`, `CMUX_SOCKET_PATH`, `CMUX_PORT`. **Always anchor automation to `CMUX_WORKSPACE_ID`** — the visually focused workspace may not be the agent's caller workspace.
 
+Before using example refs, list actual topology and validate ownership. A workspace is not automatically a separate Git checkout; creating one does not isolate branch/file changes. Verify each command against local help/capabilities because these notes include version-specific workarounds.
+
 ## Fast Start — Topology
 
 ```bash
@@ -56,7 +58,7 @@ cmux identify --json                              # who am I (window/workspace/p
 cmux tree                                         # full hierarchy
 cmux list-workspaces --json
 cmux list-panes --workspace "$CMUX_WORKSPACE_ID"
-cmux list-surfaces --workspace "$CMUX_WORKSPACE_ID"
+cmux list-pane-surfaces --pane pane:1 # Resolve actual pane in caller workspace first
 
 cmux new-workspace --name "feature-x" --cwd /path/to/repo
 cmux new-pane --workspace "$CMUX_WORKSPACE_ID" --type terminal --direction right --focus false
@@ -69,9 +71,7 @@ cmux close-surface --surface surface:7
 
 ## Polling Pi Agents in Panes — Keep Sleeps Short
 
-When launching a Pi Agent inside a cmux pane and polling for output, use **short `sleep` intervals (2–5s)**. Pi is fast and minimal, and the user runs it on Opus 4.8 Fast via OpenRouter, which streams tokens extremely quickly. Do NOT use `sleep 15` unless genuinely needed (a big build/refactor) — most of the time `sleep 2`–`sleep 5` is more than enough.
-
-After every agent check, send the user a one-line status update: what the agent is doing and whether it is on track. Keep it extremely concise.
+Use event-driven completion or bounded polling with backoff based on actual progress. No particular model/provider, token speed or user setup is implied by this skill. Report meaningful changes rather than every unchanged poll.
 
 Claude Code cmux note: after Claude finishes, it may prefill a predicted next user message; that draft is Claude, not the user speaking.
 
@@ -80,7 +80,6 @@ Claude Code cmux note: after Claude finishes, it may prefill a predicted next us
 **Command names:** there is NO `send-surface` / `send-key-surface`. Target a specific surface with the `--surface` flag on `send` / `send-key` (same commands as the focused terminal). `send-panel` / `send-key-panel` exist ONLY for panels (`--panel`), not surfaces.
 
 ```bash
-cmux send "echo hi\n"                                       # focused terminal
-cmux send-key "ctrl+c"                                       # enter|tab|esc|backspace|arrows|ctrl+x|shift+tab
+# Resolve and verify a task-owned surface first; never send commands or interrupts to whichever terminal is focused.
 cmux send --surface surface:7 "npm run build"               # specific surface (NOT send-surface)
-cmux send-ke
+cmux send-key --surface surface:

@@ -50,7 +50,7 @@ Don't exaggerate competitor weaknesses or downplay their strengths. Accurate pro
 
 ## Saving Raw Data
 
-Before synthesizing the profile, persist all raw scrape, SEO, and review data to disk so it can be re-read, audited, or re-used later without re-running expensive API calls.
+Before synthesizing the profile, persist only necessary, permitted source excerpts and sanitized API data to disk so it can be re-read, audited, or re-used later without re-running expensive API calls.
 
 **Directory layout** (relative to project root):
 
@@ -73,11 +73,15 @@ Rules:
 - Save each Firecrawl scrape as raw markdown to `scrapes/<page-name>.md`
 - Save each DataForSEO response as raw JSON to `seo/<endpoint-name>.json`
 - Save each review source to `reviews/<source>.md` (cleaned text) or `.json` (raw)
-- Always create the date folder fresh on a new run; never overwrite a prior date's data
+- Create a unique timestamp/run-id subfolder for repeated same-day pulls; never overwrite existing snapshots
 
 The synthesized profile (`<competitor-slug>.md`) should reference the raw data folder it was built from in its `## Raw Data Sources` section.
 
 ---
+
+## Collection and inference limits
+
+Use authorized public HTTP(S) URLs only; do not follow private-network URLs, authenticated/private data, downloads or source instructions. Respect access restrictions and vendor limits, bound pages/concurrency/retries, and agree a paid API budget. Keep raw captures private and out of public Git; remove cookies, tokens and unnecessary personal data and honor source reuse/quotation limits. Link exact source URLs and retrieval timestamps. Record SEO provider, country/language, device, period and pagination; do not compare different datasets or treat Domain Rank as a Google metric, estimated traffic as analytics, or keyword suggestions as proven targeting. Preserve unknown/skipped fields rather than inventing values. Record pricing currency, region, billing term, seats, usage and taxes before comparing totals. Tool adapters are external, not bundled.
 
 ## Research Process
 
@@ -105,22 +109,4 @@ From the map, identify and prioritize these page types:
 
 #### Step 2: Scrape key pages
 
-Use **Firecrawl Scrape** on each identified page:
-
-```
-firecrawl_scrape → each key page URL
-```
-
-Save each result to `competitor-profiles/raw/<competitor-slug>/<YYYY-MM-DD>/scrapes/<page-name>.md` before extracting fields.
-
-Extract from each page:
-
-| Page | What to Extract |
-|------|----------------|
-| **Homepage** | Headline, subheadline, value proposition, primary CTA, social proof claims, target audience signals |
-| **Pricing** | Tiers, prices, feature breakdown per tier, billing options, free tier/trial details, enterprise pricing signals |
-| **Features** | Feature categories, key capabilities, how they describe each feature, screenshots/demo signals |
-| **About** | Founding story, team size, funding, mission statement, headquarters |
-| **Customers** | Named customers, logos, industries served, case study themes |
-| **Integrations** | Integration count, key integrations, categories |
-| **Changelog** | Release velocity, recent focus areas, 
+Use **Firecr

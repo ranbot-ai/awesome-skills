@@ -1,9 +1,9 @@
 ---
 name: api-sdk-generator
 description: Generates client SDK code, API wrapper libraries, request/response models, and language-specific usage patterns for any REST API. 
-category: Development & Code Tools
+category: Document Processing
 source: antigravity
-tags: [python, typescript, api, ai, agent, security]
+tags: [python, typescript, api, ai, agent, document, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/api-sdk-generator
 ---
 
@@ -14,7 +14,7 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/api-
 Use this skill when you need generates client SDK code, API wrapper libraries, request/response models, and language-specific usage patterns for any REST API. Use whenever the user asks to "generate an SDK", "write a client library", "create API wrappers", "generate TypeScript types from my API", "write a Python...
 
 
-Generate production-quality client libraries and SDK code for any API in any language.
+Generate API-specific client drafts; production readiness requires the actual contract, tests and target-language review.
 
 ---
 
@@ -58,18 +58,18 @@ class APIClient:
 
     def _request(self, method: str, path: str, **kwargs) -> dict:
         url = f"{self.base_url}{path}"
-        for attempt in range(3):
-            try:
-                resp = self._client.request(method, url, headers=self._headers, **kwargs)
-                if resp.status_code == 429:
-                    retry_after = int(resp.headers.get("Retry-After", 2 ** attempt))
-                    time.sleep(retry_after)
-                    continue
-                resp.raise_for_status()
-                return resp.json()
-            except httpx.HTTPStatusError as e:
-                raise APIError(e.response.status_code, e.response.json()) from e
-        raise RateLimitError("Max retries exceeded")
+        # No automatic replay of writes: add bounded retries only for operations
+        # documented as safe/idempotent, with API-supported idempotency keys.
+        resp = self._client.request(method, url, headers=self._headers, **kwargs)
+        if resp.is_error:
+            raise APIError(resp.status_code, "Request failed")  # redact bodies/secrets
+        if resp.status_code == 204 or not resp.content:
+            return None
+        return resp.json()  # validate against the endpoint response schema
+
+    def close(self):
+        self._client.close()
+
 ```
 
 ### TypeScript
@@ -90,13 +90,14 @@ class APIClient {
     const res = await fetch(`${this.baseUrl}${path}`, {
       method,
       headers: this.headers,
-      body: body ? JSON.stringify(body) : undefined,
+      body: body !== undefined ? JSON.stringify(body) : undefined,
+      signal: AbortSignal.timeout(30_000),
     });
     if (!res.ok) {
-      const err = await res.json();
-      throw new APIError(res.status, err.message);
+      throw new Error(`API request failed: HTTP ${res.status}`);
     }
-    return res.json() as T;
+    if (res.status === 204) return undefined as T;
+    return await res.json() as T; // A cast is not runtime schema validation.
   }
 }
 ```
@@ -165,25 +166,14 @@ class ServerError(APIError): pass           # 5xx
 ## Pagination Helper
 
 ```python
-def paginate(resource_method, **kwargs):
-    """Iterate through all pages of a paginated endpoint."""
-    page = 1
-    while True:
-        result = resource_method(page=page, **kwargs)
-        yield from result.data
-        if page >= result.pagination.total_pages:
-            break
-        page += 1
-
-# Usage:
-for user in paginate(client.users.list):
-    print(user.name)
+def paginate_pages(fetch_page, max_pages=100):
+    """fetch_page(page) must return {data: [...], total_pages: int}."""
+    for page in range(1, max_pages + 1):
+        result = fetch_page(page)
+        yield from result["data"]
+        if page >= result["total_pages"]:
+            return
+    raise RuntimeError("Pagination limit reached")
 ```
 
----
-
-## Rules
-
-- Always include retry logic with exponential backoff for 429 and 5xx.
-- Always include a `User-Agent` header identifying the SDK name and version.
-- All models must b
+This helper requires a page-envelope endpoint, not `UsersResource.list` above, w

@@ -2,21 +2,24 @@
   "id": "antigravity-auri-core",
   "name": "auri-core",
   "slug": "auri-core",
-  "description": "Auri: assistente de voz inteligente (Alexa + Claude claude-opus-4-20250805). Visao do produto, persona Vitoria Neural, stack AWS, modelo Free/Pro/Business/Enterprise, roadmap 4 fases, GTM, north star WAC e analise competitiva.",
+  "description": "Auri: assistente de voz inteligente (Alexa + modelo Claude configurado e verificado). Visao do produto, persona Vitoria Neural, stack AWS, modelo Free/Pro/Business/Enterprise, roadmap 4 fases, GTM, north star WAC e analise competitiva.",
   "category": "Document Processing",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/auri-core",
-  "content": "\n# Auri - Core Product Skill\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use This Skill\n\n- When you need specialized assistance with this domain\n\n## Do Not Use This Skill When\n\n- The task is unrelated to auri core\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## Example\n\n**User request:**\n\n> Review this product request with the Auri workflow and return the documented product deliverable.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
+  "content": "\n# Auri - Core Product Skill\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use This Skill\n\n- Ao revisar a visão de produto, hipóteses de GTM, métricas ou arquitetura proposta do Auri; não como prova de um serviço já implementado.\n\n## Do Not Use This Skill When\n\n- The task is unrelated to auri core\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## Example\n\n**User request:**\n\n> Review this product request with the Auri workflow and return the documented product deliverable.\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n\n## Limites do produto e implementação\n\nEste pacote é uma visão/planejamento de produto, não um backend implantado: não contém Lambda, modelos SAM, testes, chaves, alarmes nem implementações dos comandos `/Auri-*`. Não invente status OK, receita ou métricas. Preços, metas, margens, população Echo, comparações e cronogramas são cenários sem validação; inclua consumo de IA, voz, impostos, suporte, taxas e limites de uso antes de prometer “ilimitado”. Um skill Alexa não ganha automaticamente acesso a compras, calendário, música ou smart home; cada integração exige API/capacidade, permissão e política verificadas. Confirme modelo disponível, versões de SDK, voz/região/motor e subconjunto SSML suportado; os esboços não são código Python/XML executável. DynamoDB TTL é assíncrono, usa timestamp de expiração por item e não implementa sozinho retenção imediata de 90/365 dias. Não misture memórias de membros da família sem autorização e isolamento. Separe métricas e transcrições minimizadas, autentique pedidos de exclusão e trate conteúdo de voz como dado não confiável. Deploy SAM, IAM, publicação Alexa, cobrança e mensagens exigem autorização do usuário para conta, região, alvo e custos; preserve credenciais em Secret Manager e valide assinatura/replay de requisições Alexa no backend.\n",
   "tags": [
+    "python",
+    "api",
     "claude",
     "ai",
     "workflow",
     "document",
-    "aws"
+    "aws",
+    "cro"
   ],
   "useCases": [
-    "When you need specialized assistance with this domain"
+    "Ao revisar a visão de produto, hipóteses de GTM, métricas ou arquitetura proposta do Auri; não como prova de um serviço já implementado."
   ],
   "scrapedAt": "2026-03-08T06:53:45.186Z"
 }

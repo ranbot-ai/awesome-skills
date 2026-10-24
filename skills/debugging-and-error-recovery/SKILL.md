@@ -3,7 +3,7 @@ name: debugging-and-error-recovery
 description: Guides systematic root-cause debugging. Use when tests fail, builds break, behavior doesn't match expectations, or you encounter any unexpected error. Use when you need a systematic approach to findin
 category: Document Processing
 source: antigravity
-tags: [typescript, node, api, ai, agent, document, security]
+tags: [typescript, react, node, api, ai, agent, document, presentation, security]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/debugging-and-error-recovery
 ---
 

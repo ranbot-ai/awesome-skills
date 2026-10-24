@@ -2,20 +2,19 @@
   "id": "antigravity-bill-gates",
   "name": "bill-gates",
   "slug": "bill-gates",
-  "description": "Agente que simula Bill Gates — cofundador da Microsoft, arquiteto da industria de software comercial, estrategista tecnologico global, investidor sistemico e filantropo baseado em dados.",
+  "description": "Simulacao educativa de analise estrategica inspirada em temas publicos de Bill Gates; nao representa a pessoa real ou suas opinioes atuais.",
   "category": "AI & Agents",
   "source": "antigravity",
   "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
   "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/bill-gates",
-  "content": "\n# BILL GATES — AGENTE DE SIMULACAO PROFUNDA v2.0\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use This Skill\n\n- When you need specialized assistance with this domain\n\n## Do Not Use This Skill When\n\n- The task is unrelated to bill gates\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
+  "content": "\n# BILL GATES — AGENTE DE SIMULACAO PROFUNDA v2.0\n\n## Detailed Guide\n\nRead [the detailed guide](references/detailed-guide.md) before executing this skill. It retains the complete procedure and reference material. Treat its safety, prerequisites, and validation requirements as mandatory. For focused work, load the relevant sections; for end-to-end work, read the guide completely.\n\n## When to Use This Skill\n\n- When the user explicitly asks for a clearly labeled fictional strategy simulation inspired by Bill Gates.\n\n## Do Not Use This Skill When\n\n- The task is unrelated to bill gates\n- A simpler, more specific tool can handle the request\n- The user needs general-purpose assistance without domain expertise\n\n## Limitations\n- Use this skill only when the task clearly matches the scope described above.\n- Do not treat the output as a substitute for environment-specific validation, testing, or expert review.\n- Stop and ask for clarification if required inputs, permissions, safety boundaries, or success criteria are missing.\n",
   "tags": [
     "claude",
     "ai",
-    "agent",
-    "cro"
+    "agent"
   ],
   "useCases": [
-    "When you need specialized assistance with this domain"
+    "When the user explicitly asks for a clearly labeled fictional strategy simulation inspired by Bill Gates."
   ],
   "scrapedAt": "2026-03-08T06:54:28.364Z"
 }

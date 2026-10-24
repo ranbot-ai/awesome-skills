@@ -25,8 +25,10 @@ If the `android` tool is not in the path, download the platform installer to a p
 
 ```bash
 tmpdir="$(mktemp -d "${TMPDIR:-/tmp}/android-cli.XXXXXX")" || exit 1
-curl -fsSL https://dl.google.com/android/cli/latest/linux_x86_64/install.sh -o "$tmpdir/install.sh"
-sed -n '1,160p' "$tmpdir/install.sh"
+curl --fail --show-error --silent --location --max-time 30 https://dl.google.com/android/cli/latest/linux_x86_64/install.sh -o "$tmpdir/install.sh"
+# Read the ENTIRE downloaded file and any secondary fetches it performs.
+# Record its digest; first 160 lines alone are not a complete review.
+cat "$tmpdir/install.sh"
 # After review and explicit user confirmation:
 bash "$tmpdir/install.sh"
 ```
@@ -65,7 +67,7 @@ The `docs` command searches authoritative, high-quality Android developer docume
 By providing a few keywords, this tool will return high quality articles that contain examples or guidance on how to use Android APIs or libraries.
 Use this tool to obtain additional information on how to achieve Android-specific tasks or to know more about Android APIs, surfaces, libraries, or devices.
 
-Always use this tool to get the most up-to-date information about Android concepts. Typical good use cases are:
+Use installed-version help and dated official Android documentation; a returned search result is not guaranteed current or authoritative for the exact SDK. Typical good use cases are:
   - Finding migration guides for APIs.
   - Finding examples for APIs.
   - Finding up-to-date information about Android APIs.
@@ -101,22 +103,12 @@ Update the Android CLI using the `android update` command.
 - Device, emulator, SDK, and documentation commands can depend on local Android SDK state, network access, and attached hardware.
 - Treat generated commands as environment-sensitive: inspect paths, package names, device serials, and install/update targets before running them.
 
-## Android Help Output
+## Historical Android Help Output
 
-```text
-Usage: android [-hV] [--sdk=PARAM] [COMMAND]
-  -h, --help        Show this help message and exit.
-      --sdk=PARAM   Path to the Android SDK
-  -V, --version     Print version information and exit.
-Commands:
-  create    Create a new Android project
-  describe  Analyzes an Android project to generate descriptive metadata.
-  docs      Android documentation commands
-  emulator  Emulator commands
-  help      Shows the help of all commands
-  info      Print environment information (SDK Location, etc.)
-  init      Initializes the environment (eg. skills) for Android CLI.
-  layout    Returns the layout tree of an application
-  run       Deploy an Android Application
-  screen    Commands to view the device
-  sdk       Download and list SDK pack
+Snapshot only: compare `android --version` and relevant `--help` output before
+using flags; do not confuse this CLI with the deprecated SDK `android` tool.
+Official CLI source documentation: https://developer.android.com/tools/agents/android-cli
+and https://developer.android.com/tools/agents/android-cli/download .
+Installing/updating and `init`/`skills` can modify local tools or agent configuration;
+review destination, provenance, downloads and telemetry settings first. Do not
+automatica

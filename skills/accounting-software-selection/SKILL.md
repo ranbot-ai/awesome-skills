@@ -68,12 +68,11 @@ packages before one is chosen, or the same process happening in a spreadsheet, a
 or someone inboxes.
 
 Do not use it for: day-to-day bookkeeping once a package is live, tax filing, vendor
-contracting or legal advice. This skill produces empty templates only - it never holds or
-processes real employee, customer, supplier or vendor data.
+contracting or legal advice. This distribution produces templates and illustrative examples. It can review user-supplied evaluation summaries within the requested scope, but must not request unnecessary personal or confidential business records.
 
 ## How It Works
 
-Follow the shared execution contract. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.
+Use the authorization and evidence rules in this file; no separate shared contract is bundled. The module-specific rules below define only domain fields, decisions, calculations, and safety constraints.
 
 ### Step 1 - Identify intent
 
@@ -96,6 +95,4 @@ One message, one short question, no batching. Open with:
 
 Never open with that when the request has already named the packages, and never open
 with a question that does not change the output - "what is your biggest expense category
-this month" tells you nothing about which package fits. If there is no shortlist, do not
-force one: collect the business requirements first and build the candidate shortlist from
-them in S
+this month" tells you nothing about

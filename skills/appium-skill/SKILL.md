@@ -54,7 +54,7 @@ User says "test mobile app" / "automate app"
 | "Python", "pytest" | Python | `Appium-Python-Client` |
 | "JavaScript", "Node" | JavaScript | `webdriverio` with Appium |
 
-For non-Java languages → read `reference/<language>-patterns.md`
+For non-Java languages, obtain and inspect the upstream `reference/<language>-patterns.md`; the reference files listed below are not bundled in this catalog copy.
 
 ## Core Patterns — Java (Default)
 
@@ -113,7 +113,7 @@ driver.findElement(AppiumBy.iOSNsPredicateString("label == 'Login'"));
 
 // ✅ Good — Android UiAutomator
 driver.findElement(AppiumBy.androidUIAutomator(
-    "new UiSelector().text("Login")"
+    "new UiSelector().text(\"Login\")"
 ));
 
 // ❌ Avoid — slow, fragile
@@ -162,5 +162,3 @@ swipe.addAction(swipeFinger.createPointerMove(Duration.ZERO,
     PointerInput.Origin.viewport(), startX, startY));
 swipe.addAction(swipeFinger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
 swipe.addAction(swipeFinger.createPointerMove(Duration.ofMillis(500),
-    PointerInput.Origin.viewport(), startX, endY));
-swipe.addAction(swipeFinger.createPointerUp(Poin

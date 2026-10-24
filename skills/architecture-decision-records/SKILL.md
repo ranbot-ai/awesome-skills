@@ -102,12 +102,11 @@ compliance for financial transactions.
 
 ### Option 2: MySQL
 - **Pros**: Very familiar to team, simple replication, large community
-- **Cons**: Weaker JSON support, no built-in full-text search (need
-  Elasticsearch), no geospatial without extensions
+- **Cons**: Compare version-specific JSON, full-text and spatial capabilities against measured requirements; MySQL includes full-text indexes and spatial features.
 
 ### Option 3: MongoDB
 - **Pros**: Flexible schema, native JSON, horizontal scaling
-- **Cons**: No ACID for multi-document transactions (at decision time),
+- **Cons**: Multi-document transactions are supported on qualifying modern deployments; assess their overhead and topology constraints,
   team has limited experience, requires schema design discipline
 
 ## Decision
@@ -118,7 +117,7 @@ We will use **PostgreSQL 15** as our primary database.
 
 PostgreSQL provides the best balance of:
 1. **ACID compliance** essential for e-commerce transactions
-2. **Built-in capabilities** (full-text search, JSONB, PostGIS) reduce
+2. **Capabilities** (built-in full-text search/JSONB plus the PostGIS extension) reduce
    infrastructure complexity
 3. **Team familiarity** with SQL databases reduces learning curve
 4. **Mature ecosystem** with excellent tooling and community support
@@ -161,11 +160,3 @@ additional services (no separate Elasticsearch needed).
 - [PostgreSQL Full Text Search](https://www.postgresql.org/docs/current/textsearch.html)
 - Internal: Performance benchmarks in `/docs/benchmarks/database-comparison.md`
 ```
-
-### Template 2: Lightweight ADR
-
-```markdown
-# ADR-0012: Adopt TypeScript for Frontend Development
-
-**Status**: Accepted
-**Da

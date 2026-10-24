@@ -85,7 +85,6 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/c4-c
 
 - Container Documentation
 - Component Documentation
-```
 
 ## Context Diagram Template
 

@@ -90,9 +90,11 @@ If an artifact was requested, build it after resolving essential missing facts. 
 
 **Recommended approach:** Match buddies by department and timezone, then track a small number of check-ins. Do not build a scoring system for it.
 
-**Why this one:** Buddy programmes fail on load, not on matching. Three check-ins over 30 days is enough signal; more is admin nobody does.
+**Why this one:** Buddy programmes fail on load, not on matching. Three check-ins over 30 days is an illustrative starting cadence; adapt it to participant needs and measured programme feedback.
 
 **Workflow:** New joiner → Buddy match → Check-ins → Feedback → Buddy recognition
+
+Feedback Score is optional and must stay blank until voluntary feedback exists; define its scale and purpose before use. It is not a performance ranking. Check-in counts are nonnegative whole events; counts and snapshots do not replace the dated event log described below. Distinguish planned end from actual close, and validate date order.
 
 ### Step 5 - Build only on request
 
@@ -108,13 +110,4 @@ Reference below instead of defining a table of its own. Do not restate the mappi
 here and do not improvise the import steps. Manual CSV and mapping outputs need no
 connection. For requested workspace changes, follow the shared contract: verify actual
 tool access and the target before writing. A user saying "connected" is not tool evidence.
-Never ask for a Notion password or token.
-
-For an Excel-compatible CSV, use UTF-8 with a byte order mark so Excel opens the
-text correctly. A CSV is not an `.xlsx` workbook; create `.xlsx` only when the user
-requests a workbook.
-A CSV carries no types, so after it, name the columns
-that need a number, date or currency format applied.
-
-```csv
-Buddy Pair,New Hire,Buddy,Department,Start Date,End Date,Check-ins Planned,Check-ins Done,F
+Never ask for a Notion password or tok

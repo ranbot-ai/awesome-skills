@@ -29,6 +29,10 @@ AZURE_COGNITIVE_SERVICES_ENDPOINT=https://<region>.api.cognitive.microsoft.com
 AZURE_COGNITIVE_SERVICES_KEY=<api-key>
 ```
 
+## Runtime and privacy boundaries
+
+These snippets are version-sensitive sketches, not complete audio clients. Verify installed SDK/API version, resource endpoint, model availability and token audience together; reference defaults conflict with some explicit scopes below. Close async credentials explicitly, bound session duration/audio memory and cancel+await capture tasks in finally. Audio/transcripts leave the machine for Azure: obtain recording/upload authorization, minimize retention/logs and keep secrets in configured credentials. Validate tool names/JSON schemas and user authorization server-side; generated function calls are requests, not permission.
+
 ## Authentication
 
 **DefaultAzureCredential (preferred)**:
@@ -80,6 +84,10 @@ async def main():
             "voice": "alloy"
         })
         
+        # Supply a user turn, then explicitly request a response.
+        await conn.conversation.item.create(item={"type": "message", "role": "user",
+            "content": [{"type": "input_text", "text": "Hello"}]})
+        await conn.response.create()
         # Listen for events
         async for event in conn:
             print(f"Event: {event.type}")
@@ -149,38 +157,4 @@ import base64
 
 # Read audio chunk (16-bit PCM, 24kHz mono)
 audio_chunk = await read_audio_from_microphone()
-b64_audio = base64.b64encode(audio_chunk).decode()
-
-await conn.input_audio_buffer.append(audio=b64_audio)
-```
-
-### Receive Audio
-
-```python
-async for event in conn:
-    if event.type == "response.audio.delta":
-        audio_bytes = base64.b64decode(event.delta)
-        await play_audio(audio_bytes)
-    elif event.type == "response.audio.done":
-        print("Audio complete")
-```
-
-## Event Handling
-
-```python
-async for event in conn:
-    match event.type:
-        # Session events
-        case "session.created":
-            print(f"Session: {event.session}")
-        case "session.updated":
-            print("Session updated")
-        
-        # Audio input events
-        case "input_audio_buffer.speech_started":
-            print(f"Speech started at {event.audio_start_ms}ms")
-        case "input_audio_buffer.speech_stopped":
-            print(f"Speech stopped at {event.audio_end_ms}ms")
-        
-        # Transcription events
-        case "con
+b64_audio = base64.b64encode(audio

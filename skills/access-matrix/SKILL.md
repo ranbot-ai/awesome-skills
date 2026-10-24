@@ -96,6 +96,8 @@ If an artifact was requested, build it after resolving essential missing facts. 
 
 **Workflow:** Role list → System inventory → Access rows → Quarterly review → Removal
 
+Role columns contain permission scopes, not names. Use explicit no-access/unknown markers and deny by default; executive titles do not imply unrestricted access. In an actual review, compare intended grants with observed system grants and record reviewer, approval, evidence date and next review. Quarterly is a starting cadence; handle joiner/mover/leaver changes promptly.
+
 ### Step 5 - Build only on request
 
 Once the user asks for it, derive the fields from the confirmed context and emit the
@@ -108,9 +110,4 @@ Notion step there.** When the user selects Notion, hand that step to
 mapping, the import steps and the verification checklist, and it renders the Field
 Reference below instead of defining a table of its own. Do not restate the mapping
 here and do not improvise the import steps. Manual CSV and mapping outputs need no
-connection. For requested workspace changes, follow the shared contract: verify actual
-tool access and the target before writing. A user saying "connected" is not tool evidence.
-Never ask for a Notion password or token.
-
-For an Excel-compatible CSV, use UTF-8 with a byte order mark so Excel opens the
-text correctly. A CSV is not an `.xlsx` workbook; create `.xlsx` only when the use
+connecti
