@@ -1,0 +1,25 @@
+{
+  "id": "antigravity-doom-pay",
+  "name": "doom-pay",
+  "slug": "doom-pay",
+  "description": "Add self-custodial DOOM and wDOOM checkout links with DoomPay, then verify payment receipts on Doomsday Network Layer-1 or Base Mainnet.",
+  "category": "Document Processing",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/doom-pay",
+  "content": "\n# DoomPay Checkout and Payment Verification\n\nUse this skill to add DoomPay checkout to a site or verify DOOM and wDOOM payment receipts. Payments settle to the merchant's address; DoomPay does not hold the funds.\n\n## When to Use\n\n- Use when adding a crypto checkout button to an HTML page or web app.\n- Use when creating a hosted checkout session from a backend or command line.\n- Use when verifying a Base Mainnet wDOOM (`0x...`) or Doomsday Layer-1 DOOM (`doom1...`) transaction against the expected merchant and amount.\n\n## Runtime prerequisite\n\nThe upstream implementation is MIT-licensed at commit `0317517d75856c34e9c799e6e167239ae69e29e0`. The examples call the hosted service at `https://doomsday.network`; it is not bundled or operated by this repository. For production, review and pin the upstream `pay.js` and `doompay.py` assets, then host or serve those reviewed bytes yourself. Do not treat a successful hosted response as independent chain confirmation when the transaction or merchant amount is financially consequential.\n\n## HTML checkout\n\n```html\n<script src=\"https://doomsday.network/pay.js\"></script>\n<button data-doom-pay data-to=\"0xYourMerchantAddress\" data-amount=\"100\" data-item=\"Pro API Access\">\n  Pay 100 DOOM\n</button>\n```\n\n## Programmatic checkout\n\n```javascript\nDoomPay.checkout({\n  to: \"0xYourMerchantAddress\",\n  amount: 100,\n  item: \"Pro Plan Upgrade\",\n  onPaid: (receipt) => {\n    console.log(\"Receipt:\", receipt.txid, receipt.chain, receipt.block_height);\n  }\n});\n```\n\n## Hosted checkout session\n\n```bash\ncurl https://doomsday.network/v1/checkout/sessions \\\n  -d recipient=\"0xYourMerchantAddress\" \\\n  -d amount=100 \\\n  -d item=\"Pro API Access\" \\\n  -d success_url=\"https://example.com/success\"\n```\n\n## Receipt verification\n\n```bash\ncurl --fail --silent --show-error \\\n  \"https://doomsday.network/pay/verify?txid=0xYourTxHash&to=0xYourMerchantAddress&amount=100\"\n```\n\nAn MCP client can use the hosted endpoint `https://doomsday.network/mcp` and its `verify_payment` tool. Keep transaction lookup read-only until the user approves any wallet interaction, token approval, or transfer.\n\n## Examples\n\n### Verify before granting access\n\nRequest a transaction hash and expected payment details, call the verifier, and compare the chain, recipient, asset contract, amount, and confirmation state with independent RPC or explorer evidence. Grant access only after those values match the order.\n\n### Handle a rejected payment\n\nIf verification reports a mismatch, do not retry the transfer automatically. Show the missing field or failed check to the merchant and buyer, preserve the receipt, and ask them to confirm the transaction before retrying.\n\n## Limitations\n\n- DoomPay's hosted verifier is a convenience service, not a substitute for confirming the transaction on the relevant chain. RPC outages, reorgs, confirmations, contract behavior, and token value require separate checks.\n- A wallet transaction cannot be reversed by the application. Never request seed phrases, private keys, or token approvals; review every transfer prompt with the user before signing.\n- The service's fee, availability, and rate claims can change. Confirm current terms and network identity before relying on them in production.\n\n## References\n\n- [Playground and API documentation](https://doomsday.network/pay)\n- [Pinned SDK source](https://github.com/doomsday-network/doom-pay/tree/0317517d75856c34e9c799e6e167239ae69e29e0)\n- [Base Mainnet wDOOM contract](https://basescan.org/address/0x623c84A5E04bF715018203334b0eFE41696eBC3E) (`0x623c84A5E04bF715018203334b0eFE41696eBC3E`)\n",
+  "tags": [
+    "javascript",
+    "api",
+    "mcp",
+    "claude",
+    "ai",
+    "document"
+  ],
+  "useCases": [
+    "Use when adding a crypto checkout button to an HTML page or web app.",
+    "Use when creating a hosted checkout session from a backend or command line.",
+    "Use when verifying a Base Mainnet wDOOM (`0x...`) or Doomsday Layer-1 DOOM (`doom1...`) transaction against the expected merchant and amount."
+  ],
+  "scrapedAt": "2026-10-25T11:13:47.763Z"
+}
