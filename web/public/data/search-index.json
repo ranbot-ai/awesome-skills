@@ -4558,6 +4558,7 @@
     "contribution",
     "tasks.",
     "markdown",
+    "api",
     "mcp",
     "ai",
     "agent",
@@ -4565,6 +4566,7 @@
     "template",
     "document",
     "security",
+    "rag",
     "processing"
   ],
   "antigravity-antigravity-skill-orchestrator": [
