@@ -62,8 +62,18 @@ Key pages to review:
 - **MCP Best Practices**: [📋 View Best Practices](./reference/mcp_best_practices.md) - Core guidelines
 
 **For TypeScript (recommended):**
-- **TypeScript SDK**: Use WebFetch to load `https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/README.md`
-- [⚡ TypeScript Guide](./reference/node_mcp_server.md) - TypeScript patterns and examples
+
+The TypeScript SDK has two major versions. Pick one before writing code:
+- **v2** (`@modelcontextprotocol/server`): the current stable release. Use it for new servers.
+- **v1** (`@modelcontextprotocol/sdk`): receives bug and security fixes only. Use it only when the project's `package.json` already depends on `@modelcontextprotocol/sdk`, or migrate that project with `npx @modelcontextprotocol/codemod@latest v1-to-v2 .`
+
+If the project already uses v1, tell the user once, in a sentence or two, that v2 (`@modelcontextprotocol/server`) is the current stable release, that v1 receives only bug and security fixes, and that `npx @modelcontextprotocol/codemod@latest v1-to-v2 .` migrates the project. Then continue with v1 unless the user asks to migrate.
+
+Don't mix the two in one project: v1 code samples (imports from `@modelcontextprotocol/sdk/...`) don't apply to v2.
+
+- **TypeScript SDK (v2)**: Use WebFetch to load `https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/README.md`; the full docs index is `https://ts.sdk.modelcontextprotocol.io/v2/llms.txt`
+- [⚡ TypeScript Guide (v2)](./reference/node_mcp_server_v2.md) - TypeScript patterns and examples
+- For v1 projects only: `https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/v1.x/README.md` and the [TypeScript Guide (v1)](./reference/node_mcp_server.md)
 
 **For Python:**
 - **Python SDK**: Use WebFetch to load `https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/README.md`
@@ -84,61 +94,9 @@ Prioritize comprehensive API coverage. List endpoints to implement, starting wit
 #### 2.1 Set Up Project Structure
 
 See language-specific guides for project setup:
-- [⚡ TypeScript Guide](./reference/node_mcp_server.md) - Project structure, package.json, tsconfig.json
+- [⚡ TypeScript Guide (v2)](./reference/node_mcp_server_v2.md) - Project structure, package.json, tsconfig.json ([v1](./reference/node_mcp_server.md) for existing v1 projects)
 - [🐍 Python Guide](./reference/python_mcp_server.md) - Module organization, dependencies
 
 #### 2.2 Implement Core Infrastructure
 
-Create shared utilities:
-- API client with authentication
-- Error handling helpers
-- Response formatting (JSON/Markdown)
-- Pagination support
-
-#### 2.3 Implement Tools
-
-For each tool:
-
-**Input Schema:**
-- Use Zod (TypeScript) or Pydantic (Python)
-- Include constraints and clear descriptions
-- Add examples in field descriptions
-
-**Output Schema:**
-- Define `outputSchema` where possible for structured data
-- Use `structuredContent` in tool responses (TypeScript SDK feature)
-- Helps clients understand and process tool outputs
-
-**Tool Description:**
-- Concise summary of functionality
-- Parameter descriptions
-- Return type schema
-
-**Implementation:**
-- Async/await for I/O operations
-- Proper error handling with actionable messages
-- Support pagination where applicable
-- Return both text content and structured data when using modern SDKs
-
-**Annotations:**
-- `readOnlyHint`: true/false
-- `destructiveHint`: true/false
-- `idempotentHint`: true/false
-- `openWorldHint`: true/false
-
----
-
-### Phase 3: Review and Test
-
-#### 3.1 Code Quality
-
-Review for:
-- No duplicated code (DRY principle)
-- Consistent error handling
-- Full type coverage
-- Clear tool descriptions
-
-#### 3.2 Build and Test
-
-**TypeScript:**
-- Run `npm
+Create 
