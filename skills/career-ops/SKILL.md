@@ -1,6 +1,6 @@
 ---
 name: career-ops
-description: Multi-CLI job-search command center: evaluate offers, scan portals, tailor CVs, track applications, prep interviews. Invoke per mode. 
+description: Open-source AI job search agent for AI coding CLIs: evaluate offers, scan portals, tailor CVs, track applications, prep interviews. Invoke per mode. 
 category: AI & Agents
 source: antigravity
 tags: [node, pdf, markdown, ai, agent, automation, workflow, cro]
@@ -8,9 +8,9 @@ url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/care
 ---
 
 
-# career-ops -- Router
+# career-ops: open-source AI job search agent
 
-career-ops is a multi-CLI job-search command center. The routing below is shared across supported agent CLIs even when the invocation surface differs.
+career-ops is a multi-CLI AI job search agent. The routing below is shared across supported agent CLIs even when the invocation surface differs.
 
 ## Project Root Resolution
 
@@ -102,12 +102,12 @@ Concrete equivalents for Codex prompt-driven sessions:
 Show this menu:
 
 ```
-career-ops -- Command Center
+career-ops -- AI Job Search Agent
 
 Available commands:
   /career-ops {JD}      → AUTO-PIPELINE: evaluate + report + PDF + tracker (paste text or URL)
   /career-ops pipeline  → Process pending URLs from inbox (data/pipeline.md)
-  /career-ops oferta    → Evaluation only A-F (no auto PDF)
+  /career-ops oferta    → Evaluation only A-H (no auto PDF)
   /career-ops ofertas   → Compare and rank multiple offers
   /career-ops contacto  → LinkedIn power move: find contacts + draft message
   /career-ops deep      → Deep research prompt about company
@@ -118,5 +118,4 @@ Available commands:
   /career-ops interview/plan → Time-blocked prep plan for an upcoming interview
   /career-ops interview/practice → Practice interview, one question at a time with feedback
   /career-ops interview/debrief → Post-interview debrief: close gaps, predict next round
-  /career-ops pdf       → PDF only, ATS-optimized CV
-  /career-ops text
+  /career-ops pdf       → PDF only, ATS-optimized
