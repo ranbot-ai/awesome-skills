@@ -8402,6 +8402,28 @@
       "scrapedAt": "2026-02-12T07:15:35.309Z"
     },
     {
+      "id": "antigravity-azure-ai-vision-imageanalysis-py",
+      "name": "azure-ai-vision-imageanalysis-py",
+      "slug": "azure-ai-vision-imageanalysis-py",
+      "description": "Azure AI Vision Image Analysis SDK for captions, tags, objects, OCR, people detection, and smart cropping. Use for computer vision and image understanding tasks.",
+      "category": "Creative & Media",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/azure-ai-vision-imageanalysis-py",
+      "content": "\n# Azure AI Vision Image Analysis SDK for Python\n\nClient library for Azure AI Vision 4.0 image analysis including captions, tags, objects, OCR, and more.\n\n## Installation\n\n```bash\npip install azure-ai-vision-imageanalysis\n```\n\n## Environment Variables\n\n```bash\nVISION_ENDPOINT=https://<resource>.cognitiveservices.azure.com\nVISION_KEY=<your-api-key>  # If using API key\n```\n\n## Authentication\n\n### API Key\n\n```python\nimport os\nfrom azure.ai.vision.imageanalysis import ImageAnalysisClient\nfrom azure.core.credentials import AzureKeyCredential\n\nendpoint = os.environ[\"VISION_ENDPOINT\"]\nkey = os.environ[\"VISION_KEY\"]\n\nclient = ImageAnalysisClient(\n    endpoint=endpoint,\n    credential=AzureKeyCredential(key)\n)\n```\n\n### Entra ID (Recommended)\n\n```python\nfrom azure.ai.vision.imageanalysis import ImageAnalysisClient\nfrom azure.identity import DefaultAzureCredential\n\nclient = ImageAnalysisClient(\n    endpoint=os.environ[\"VISION_ENDPOINT\"],\n    credential=DefaultAzureCredential()\n)\n```\n\n## Data and inference boundary\n\nCalls disclose supplied images or URLs to Azure. Confirm rights and privacy scope, region, service availability and current supported features. OCR/captions can be wrong; people detection does not identify people or establish age, identity, consent or sensitive traits. Review output before consequential use and avoid logging private OCR text.\n\n## Analyze Image from URL\n\n```python\nfrom azure.ai.vision.imageanalysis.models import VisualFeatures\n\nimage_url = \"https://example.com/image.jpg\"\n\nresult = client.analyze_from_url(\n    image_url=image_url,\n    visual_features=[\n        VisualFeatures.CAPTION,\n        VisualFeatures.TAGS,\n        VisualFeatures.OBJECTS,\n        VisualFeatures.READ,\n        VisualFeatures.PEOPLE,\n        VisualFeatures.SMART_CROPS,\n        VisualFeatures.DENSE_CAPTIONS\n    ],\n    gender_neutral_caption=True,\n    language=\"en\"\n)\n```\n\n## Analyze Image from File\n\n```python\nwith open(\"image.jpg\", \"rb\") as f:\n    image_data = f.read()\n\nresult = client.analyze(\n    image_data=image_data,\n    visual_features=[VisualFeatures.CAPTION, VisualFeatures.TAGS]\n)\n```\n\n## Image Caption\n\n```python\nresult = client.analyze_from_url(\n    image_url=image_url,\n    visual_features=[VisualFeatures.CAPTION],\n    gender_neutral_caption=True\n)\n\nif result.caption:\n    print(f\"Caption: {result.caption.text}\")\n    print(f\"Confidence: {result.caption.confidence:.2f}\")\n```\n\n## Dense Captions (Multiple Regions)\n\n```python\nresult = client.analyze_from_url(\n    image_url=image_url,\n    visual_features=[VisualFeatures.DENSE_CAPTIONS]\n)\n\nif result.dense_captions:\n    for caption in result.dense_captions.list:\n        print(f\"Caption: {caption.text}\")\n        print(f\"  Confidence: {caption.confidence:.2f}\")\n        print(f\"  Bounding box: {caption.bounding_box}\")\n```\n\n## Tags\n\n```python\nresult = client.analyze_from_url(\n    image_url=image_url,\n    visual_features=[VisualFeatures.TAGS]\n)\n\nif result.tags:\n    for tag in result.tags.list:\n        print(f\"Tag: {tag.name} (confidence: {tag.confidence:.2f})\")\n```\n\n## Object Detection\n\n```python\nresult = client.analyze_from_url(\n    image_url=image_url,\n    visual_features=[VisualFeatures.OBJECTS]\n)\n\nif result.objects:\n    for obj in result.objects.list:\n        print(f\"Object: {obj.tags[0].name}\")\n        print(f\"  Confidence: {obj.tags[0].confidence:.2f}\")\n        box = obj.bounding_box\n        print(f\"  Bounding box: x={box.x}, y={box.y}, w={box.width}, h={box.height}\")\n```\n\n## OCR (Text Extraction)\n\n```python\nresult = client.analyze_from_url(\n    image_url=image_url,\n    visual_features=[VisualFeatures.READ]\n)\n\nif result.read:\n    for block in result.read.blocks:\n        for line in block.lines:\n            print(f\"Line: {line.text}\")\n            print(f\"  Bounding polygon: {line.bounding_polygon}\")\n            \n            # Word-level details\n            for word in line.words:\n                print(f\"  Word: {word.text} (confidence: {word.confidence:.2f})\")\n```\n\n## People Detection\n\n```python\nresult = client.analyze_from_url(\n    image_url=image_url,\n    visual_features=[VisualFeatures.PEOPLE]\n)\n\nif result.people:\n    for person in result.people.list:\n        print(f\"Person detected:\")\n        print(f\"  Confidence: {person.confidence:.2f}\")\n        box = person.bounding_box\n        print(f\"  Bounding box: x={box.x}, y={box.y}, w={box.width}, h={box.height}\")\n```\n\n## Smart Cropping\n\n```python\nresult = client.analyze_from_url(\n    image_url=image_url,\n    visual_features=[VisualFeatures.SMART_CROPS],\n    smart_crops_aspect_ratios=[0.9, 1.33, 1.78]  # Portrait, 4:3, 16:9\n)\n\nif result.smart_crops:\n    for crop in result.smart_crops.list:\n        print(f\"Aspect ratio: {crop.aspect_ratio}\")\n        box = crop.bounding_box\n        print(f\"  Crop region: x={box.x}, y={box.y}, w={box.width}, h={box.height}\")\n```\n\n## Async Client\n\n```python\nfrom azure.ai.vision.imageanalysis.aio import ImageAnalysisClient\nfrom azure.identity.aio import DefaultAzureCredential\n\nasync def analyze_image",
+      "tags": [
+        "python",
+        "api",
+        "ai",
+        "workflow",
+        "image",
+        "azure",
+        "cro"
+      ],
+      "useCases": [],
+      "scrapedAt": "2026-11-08T13:06:42.102Z"
+    },
+    {
       "id": "antigravity-azure-ai-voicelive-dotnet",
       "name": "azure-ai-voicelive-dotnet",
       "slug": "azure-ai-voicelive-dotnet",
@@ -28330,7 +28352,7 @@
       "name": "Creative & Media",
       "description": "Design, image editing, video processing, and creative content generation.",
       "icon": "palette",
-      "count": 113
+      "count": 114
     },
     {
       "id": "development-code-tools",
@@ -28388,42 +28410,42 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 15,
       "newSkillCount": 0,
-      "stars": 313856
+      "stars": 314379
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 188365
+      "stars": 189162
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 78973
+      "stars": 79034
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 92866
+      "stars": 92940
     },
     {
       "name": "Awesome LLM",
       "url": "https://github.com/Prat011/awesome-llm-skills",
       "skillCount": 26,
       "newSkillCount": 0,
-      "stars": 1845
+      "stars": 1847
     },
     {
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillCount": 1049,
-      "newSkillCount": 4,
-      "stars": 49306
+      "skillCount": 1050,
+      "newSkillCount": 5,
+      "stars": 49350
     },
     {
       "name": "Xquik",
@@ -28433,10 +28455,10 @@
       "stars": 227
     }
   ],
-  "lastUpdated": "2026-11-07T12:57:26.788Z",
+  "lastUpdated": "2026-11-08T13:14:32.529Z",
   "stats": {
-    "totalSkills": 1128,
-    "newSkills": 13,
-    "scrapedAt": "2026-11-07T12:57:26.788Z"
+    "totalSkills": 1129,
+    "newSkills": 14,
+    "scrapedAt": "2026-11-08T13:14:32.529Z"
   }
 }
