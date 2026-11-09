@@ -1,6 +1,6 @@
 ---
 name: accesslint-diff
-description: Diff a live page's accessibility violations against a baseline — by default compares uncommitted changes (stash-based), or pass --branch [<name>] to diff against a branch. Reports only new violation
+description: Diff a live page's accessibility violations against a baseline — by default compares uncommitted changes (stash-based), or pass --branch [name] to diff against a branch. Reports only new violations 
 category: AI & Agents
 source: antigravity
 tags: [ai, agent]
