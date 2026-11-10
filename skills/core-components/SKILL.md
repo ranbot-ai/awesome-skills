@@ -1,9 +1,9 @@
 ---
 name: core-components
-description: Core component library and design system patterns. Use when building UI, using design tokens, or working with the component library. 
+description: Adapt an existing project component library and design tokens to a UI change; inspect real exports, preserve native behavior, and verify accessibility. 
 category: Document Processing
 source: antigravity
-tags: [react, node, api, ai, workflow, design, document, image]
+tags: [react, node, api, ai, design, document, image]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/core-components
 ---
 
@@ -16,7 +16,7 @@ Inspect the actual project component exports, token definitions and framework fi
 
 ## Design Tokens
 
-**NEVER hard-code values. Always use design tokens.**
+Prefer the project's existing semantic tokens. If no token expresses the requirement, document the exception or propose a scoped token addition; do not invent token names or change the whole design system.
 
 ### Spacing Tokens
 
@@ -225,10 +225,10 @@ const MyScreen = () => (
 <Box padding="$4" backgroundColor="$backgroundPrimary">
 
 
-// WRONG - Raw platform components
+// Native components: valid when the project has no equivalent primitive
 import { View, Text } from 'react-native';
 
-// CORRECT - Core components
+// Project primitives: use only if these exports exist and preserve behavior
 import { Box, Text } from 'components/core';
 
 
@@ -262,11 +262,4 @@ const Card = ({ padding = '$4', variant = 'elevated', children }: CardProps) => 
 );
 ```
 
-## Integration with Other Skills
-
-- **react-ui-patterns**: Use core components for UI states
-- **testing-patterns**: Mock core components in tests
-- **storybook**: Document component variants
-
-## When to Use
-This skill is applicable to execute the workflow or actions d
+## Integration with Other Skill
