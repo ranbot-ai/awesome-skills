@@ -110,7 +110,7 @@ Agent:
 - It drafts comments only. Nothing is posted from inside this skill.
 - It works from the post the person pastes. It cannot see how the post is doing or what other comments say unless told.
 - It will not write flattery, a disguised advert, or a comment designed to bait the author.
-- **Optional connector.** The closing section describes a hosted VoiceMoat MCP connector. Nothing above needs it. It needs a paid VoiceMoat plan (Pro or Enterprise) and the user's own sign-in (OAuth, no API keys). When its tools are called, post text and account data are read from or sent to voicemoat.com. Without it, this skill makes no network calls.
+- **Optional connector.** The closing section describes a hosted VoiceMoat MCP connector. Nothing above needs it. It needs a paid VoiceMoat plan (Pro, Enterprise or the $5 Pro trial) and the user's own sign-in (OAuth, no API keys). When its tools are called, post text and account data are read from or sent to voicemoat.com. Without it, this skill makes no network calls.
 
 ## What changes when VoiceMoat is connected
 
@@ -120,4 +120,4 @@ throwaway:
 - `get_voice_profile` gives your LinkedIn register specifically, which for most
   people is not the register they write posts in and is definitely not the one
   they tweet in.
-- `score_voice_match` catches a comment that is sharp in so
+- `score_voice_match` catches a comment t
