@@ -12752,7 +12752,7 @@
       "id": "antigravity-boring-marketing-meta-ads",
       "name": "boring-marketing-meta-ads",
       "slug": "boring-marketing-meta-ads",
-      "description": "Prepare Meta ad campaigns and verify account permissions and conversion tracking.",
+      "description": "Run account preflight, create paused Meta campaigns, and verify pixel and Conversions API events. Use for Facebook Ads API launches, permission errors, and tracking audits.",
       "category": "Document Processing",
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -13002,7 +13002,7 @@
       "id": "antigravity-boring-marketing-site-audit",
       "name": "boring-marketing-site-audit",
       "slug": "boring-marketing-site-audit",
-      "description": "Inspect crawlability, indexability, metadata and page structure for a ranked SEO audit.",
+      "description": "Crawl a site and prioritize technical SEO fixes. Use to check robots.txt, sitemaps, noindex, duplicate pages, broken links, metadata, page speed, and AI crawler access.",
       "category": "Document Processing",
       "source": "antigravity",
       "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
@@ -25707,6 +25707,34 @@
       "scrapedAt": "2026-02-26T07:11:03.256Z"
     },
     {
+      "id": "antigravity-e2e",
+      "name": "e2e",
+      "slug": "e2e",
+      "description": "Write, run and debug e2e tests for web and iOS/Android apps that mix plain-language agent steps with exact assertions, replaying cached agent steps without model calls.",
+      "category": "Document Processing",
+      "source": "antigravity",
+      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/e2e",
+      "content": "\n# e2e: agentic end-to-end tests\n\nAAS import of [e2e-inc/e2e](https://github.com/e2e-inc/e2e/tree/e693cdcf0baee66dead26fa2e51a6693266b4b8f/skills/e2e) at `e693cdcf0baee66dead26fa2e51a6693266b4b8f`. Copyright 2026 TesterArmy, Inc.; Apache-2.0 license retained in LICENSE and the upstream `NOTICE` in [references/NOTICE.md](references/NOTICE.md), unchanged. Eight topic guides are retained from upstream. AAS adds frontmatter, applicability, and authorization boundaries.\n\ne2e runs UI tests that mix agent goals with exact steps. `agent.act` drives\none goal; `agent.assert`, `agent.waitFor`, and `agent.extract` judge the\nscreen; `screen`, `app`, `browser`, and `expect` act and check exactly. UI\ntargets use `@e2e-dev/web` for browsers or `@e2e-dev/mobile` for iOS\nsimulators, Android emulators, and connected phones.\n\n## Authorization and test data\n\nUse a project and test environment the user has authorized. Default to synthetic accounts and data. Obtain approval before installing dependencies, editing MCP or CI configuration, connecting a provider, or running against a shared or production environment.\n\nA remote decision model can receive prompts, screen context and screenshots. Confirm the provider and the data it may receive before using it. For offline test runs use exact assertions or replay existing local fixtures without fresh model calls. Treat traces, screenshots and reports as sensitive and keep them local unless the user approves sharing.\n\n## Start here: pick the reference for the job\n\nRead the one reference that matches the request before doing anything else.\nEach stands on its own; a reference names another topic only for a side\ntrip. `npx e2e guide <topic>` prints the installed package's version of a\nreference; prefer it when it differs from this copy.\nThe Rules and Feedback sections below still apply.\n\n| When you are | Topic | Read |\n| --- | --- | --- |\n| Adding e2e to a project, writing `e2e.config.ts`, starting the app from the config, signing in to a model, setting up mobile targets | `setup` | [references/setup.md](references/setup.md) |\n| Looking at the running app, checking a UI change, taking a screenshot or video, trying a locator, running a test line, or walking a flow while you write its test, over `e2e mcp` | `mcp` | [references/mcp.md](references/mcp.md) |\n| Writing or fixing a test: fixtures, locators, actions, matchers, sign-in sessions, the `browser` fixture, API-only tests | `writing-tests` | [references/writing-tests.md](references/writing-tests.md) |\n| Adding `agent.*` steps, picking a model, cutting cost, budgets, the replay cache | `agent` | [references/agent.md](references/agent.md) |\n| Running tests: CLI flags, CI, reporters, trace pages, `report.json` for scripts, exit codes | `running` | [references/running.md](references/running.md) |\n| Handling a failed run: error codes and their fixes, `--headed`, `--debug`, `--ai-trace` | `debugging` | [references/debugging.md](references/debugging.md) |\n| Exploring an app toward a goal without a test file: `e2e explore`, its budgets and verdict | `explore` | [references/explore.md](references/explore.md) |\n| Asked to bug bash, QA, or hunt for bugs across an app or a branch | `bug-bash` | [references/bug-bash.md](references/bug-bash.md) |\n\nFor anything the references do not cover, the full documentation ships in\nthe `docs/` directory of the installed `e2e` package\n(`node_modules/e2e/docs` in a single-package project); a link such as\n`/reference/cli` is `docs/reference/cli.mdx`. Complete projects for Vite,\nNext.js, Astro, Angular, Expo, SwiftUI, Jetpack Compose, Kotlin Multiplatform,\nFlutter, and .NET MAUI are in https://github.com/e2e-inc/e2e/tree/main/examples.\n\n## Quick start\n\nA config with one web target and a model, and a test that drives one goal\nand pins the outcome:\n\n```ts\n// e2e.config.ts\nimport type { E2EConfig } from 'e2e';\nimport { web } from '@e2e-dev/web';\nimport { gateway } from 'ai';\n\nexport default {\n  targets: [\n    {\n      engine: web(),\n      app: {\n        url: 'http://127.0.0.1:3000',\n        command: { executable: 'pnpm', args: ['dev'], log: '.e2e/logs/app.log' },\n      },\n    },\n  ],\n  // The model behind every agent.* step: an AI SDK instance; gateway() from 'ai' reads AI_GATEWAY_API_KEY or a Vercel OIDC token.\n  agents: {\n    default: {\n      model: gateway('openai/gpt-6-luna-fast'),\n      system: 'You are a thorough QA agent. Verify every outcome on screen.',\n    },\n  },\n} satisfies E2EConfig;\n```\n\n```ts\n// tests/billing.e2e.ts\nimport { describe, test } from '@e2e-dev/web';\nimport { expect } from 'e2e';\n\ndescribe('billing', () => {\n  test('a member upgrades to Pro', async ({ app, agent, screen, browser }) => {\n    await app.open('/settings/billing');\n\n    await agent.act('upgrade the workspace to the Pro plan');\n\n    await expect(screen.getByRole('status')).toContainText('Pro');\n    await expect(browser).toHaveURL('/settings/billing');\n  });\n});\n```\n\n## Workflow: writing a test\n\n1. Look at what exists: `e2e.config.ts`",
+      "tags": [
+        "node",
+        "api",
+        "mcp",
+        "ai",
+        "agent",
+        "gpt",
+        "workflow",
+        "document",
+        "cro"
+      ],
+      "useCases": [
+        "Use when a project depends on e2e or has an `e2e.config.ts`, or the user asks for end-to-end, browser, mobile, or agentic UI tests written with e2e.",
+        "Use to check a change in the running app over the e2e MCP server, to run a bug bash or QA pass with `e2e explore`, or when an e2e run fails.",
+        "Use for iOS simulators, Android emulators and connected phones as well as browsers. For Playwright-only suites without e2e, `e2e-testing` or `e2e-testing-patterns` is more appropriate."
+      ],
+      "scrapedAt": "2026-11-18T15:38:06.889Z"
+    },
+    {
       "id": "antigravity-e2e-testing",
       "name": "e2e-testing",
       "slug": "e2e-testing",
@@ -26301,37 +26329,6 @@
         "Do not use for casual rewrites, tone makeovers, or structural restyling that the user did not ask for."
       ],
       "scrapedAt": "2026-09-02T11:10:41.020Z"
-    },
-    {
-      "id": "antigravity-email-marketing-bible",
-      "name": "email-marketing-bible",
-      "slug": "email-marketing-bible",
-      "description": "Data-backed email marketing for AI agents: automation flows, deliverability triage, copy de-slopping, AI email design, ESP control via MCP with send gates and compliance.",
-      "category": "AI & Agents",
-      "source": "antigravity",
-      "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
-      "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/email-marketing-bible",
-      "content": "\n# Email Marketing Bible\n\n## Overview\n\nThe Email Marketing Bible turns an agent into an email marketing operator. It covers building automation flows, segmenting audiences, writing and de-slopping copy, directing email design, diagnosing deliverability, and operating an ESP through MCP or connectors behind hard pre-send gates. Part A is the operating manual for when the agent acts; Part B is the dense reference (metrics, flows, deliverability, compliance, platforms, benchmarks and 19 industry playbooks).\n\nAdapted from the official skill at [CosmoBlk/email-marketing-bible](https://github.com/CosmoBlk/email-marketing-bible) (v2.7, 8 Sep 2026, MIT) by George Hartley, co-founder of Nitrosend. It is distilled from a 19-chapter guide built on 908 sources ([nitrosend.com/email-marketing-bible](https://nitrosend.com/email-marketing-bible)) and from running SmartrMail (about 12,000 customers, 6 billion emails). Imported source/usage counts and personal field notes are author claims, not independently verified in this review. Figures are mid-2026; verify anything volatile (inbox rules, ESP features, pricing, model names) before acting.\n\n## When to Use This Skill\n\n- Use when building or editing email automation flows: welcome, abandoned cart, browse abandonment, post-purchase, win-back, sunset.\n- Use when an agent drives an ESP through MCP, a connector or an API (Klaviyo, Mailchimp, Resend, Nitrosend and similar) to create segments, flows or campaigns.\n- Use when diagnosing deliverability: spam or Promotions placement, bounce or complaint spikes, SPF, DKIM and DMARC problems, warm-up and ESP migrations.\n- Use when writing, reviewing or de-slopping email copy, subject lines and CTAs.\n- Use when directing AI email design or critiquing a rendered email.\n- Use when choosing an ESP, pulling benchmarks, checking compliance (CAN-SPAM, GDPR, CASL, Australian Spam Act), or planning cold email, WhatsApp, SMS or RCS.\n\n## How It Works\n\n### Step 1: Apply the hard gates\n\nRead section 0 before touching a real account. Every segment, draft, campaign, flow or staged send on a live ESP is real, and nothing goes to more than one recipient without explicit human approval in the conversation.\n\n### Step 2: Route the task\n\nUse the task router (section 1) to jump to the right section, and gather the listed inputs before acting.\n\n### Step 3: Read, reason, act, verify\n\nRead account state first (lists, flows, recent campaigns, deliverability, suppressions), change one thing at a time, and verify it against real counts.\n\n### Step 4: Show the pre-send packet and wait\n\nApproval binds the exact content, audience/exclusions, account, sender and timing. Recheck counts/suppressions immediately before dispatch and reauthorize material changes; saving a draft or flow is not permission to activate it. One send cannot be rolled back after delivery; the kill switch only stops queued/future work.\n\nRun the pre-send checklist (section 3), show the packet (preview URL, audience size, suppressions, subject, preview text, send time, sender, unsubscribe, compliance risk) and wait for an explicit \"send it\".\n\n## Part A: Operating Manual\n\n### 0. AGENT OPERATING RULES\n\nEvery segment, draft, campaign, flow or staged send on a real ESP is live. **Hard gates, never skip:**\n- **No send or schedule to more than one recipient without explicit human approval in this conversation** (\"send it\" or equivalent). Single-recipient test sends still need a yes.\n- **Preview before asking; show the packet before any send:** preview URL, audience size, exclusions/suppressions applied, subject, preview text, send time, from-name + reply-to, unsubscribe present, compliance risk.\n- **Block the send** if authentication is missing, unsubscribe or physical address is absent, complaint rate is at or above 0.1%, consent basis is unclear, or the audience includes suppressed, bounced or complained contacts.\n- **Never probe unknown mutating endpoints on a live audience.** `/send`, `/dispatch`, `/trigger`, `/fire`, `/publish` paths can dispatch immediately; if the approve-scheduled path is unclear, ask the human to click it. Test on sandboxes or cloned campaigns with seed lists.\n- **Separate the modes.** Transactional, marketing, lifecycle and cold outbound have different rules, domains and consent bases. Never mix them.\n- **Log every autonomous action** (segment changed, flow edited, campaign created, send staged) so the human can audit it.\n\n### 1. TASK ROUTER\n\n| Intent | Go to | Gather first |\n|---|---|---|\n| Audit a programme | §2, then the reference | read access, recent sends |\n| Build a flow | §7 + §2 | model, trigger, audience, offer, exclusions |\n| Send a campaign | §3 | segment, consent basis, copy, sender, timing |\n| Diagnose deliverability | §11 | domain, ESP, bounce + complaint rate, recent changes |\n| Write or de-slop copy | §4 | audience, offer, voice, one real proof |\n| Design an email | §5 + §16 | brand tokens, archetype, goal |\n| Pick a platform | §15 | list size, use case, stack,",
-      "tags": [
-        "react",
-        "api",
-        "mcp",
-        "claude",
-        "ai",
-        "agent",
-        "llm",
-        "gpt",
-        "automation",
-        "workflow"
-      ],
-      "useCases": [
-        "Use when building or editing email automation flows: welcome, abandoned cart, browse abandonment, post-purchase, win-back, sunset.",
-        "Use when an agent drives an ESP through MCP, a connector or an API (Klaviyo, Mailchimp, Resend, Nitrosend and similar) to create segments, flows or campaigns.",
-        "Use when diagnosing deliverability: spam or Promotions placement, bounce or complaint spikes, SPF, DKIM and DMARC problems, warm-up and ESP migrations.",
-        "Use when writing, reviewing or de-slopping email copy, subject lines and CTAs.",
-        "Use when directing AI email design or critiquing a rendered email."
-      ],
-      "scrapedAt": "2026-10-08T13:23:25.821Z"
     },
     {
       "id": "superpowers-executing-plans",
@@ -28408,14 +28405,14 @@
       "name": "Document Processing",
       "description": "Create, edit, and analyze documents including Word, PDF, PowerPoint, and Excel files.",
       "icon": "file-text",
-      "count": 469
+      "count": 470
     },
     {
       "id": "ai-agents",
       "name": "AI & Agents",
       "description": "AI agent development, memory systems, and autonomous workflows.",
       "icon": "bot",
-      "count": 321
+      "count": 320
     },
     {
       "id": "creative-media",
@@ -28480,28 +28477,28 @@
       "url": "https://github.com/obra/superpowers",
       "skillCount": 15,
       "newSkillCount": 0,
-      "stars": 319077
+      "stars": 319803
     },
     {
       "name": "Anthropic",
       "url": "https://github.com/anthropics/skills",
       "skillCount": 18,
       "newSkillCount": 1,
-      "stars": 196522
+      "stars": 197057
     },
     {
       "name": "ComposioHQ",
       "url": "https://github.com/ComposioHQ/awesome-claude-skills",
       "skillCount": 19,
       "newSkillCount": 8,
-      "stars": 79708
+      "stars": 79791
     },
     {
       "name": "OpenHands",
       "url": "https://github.com/OpenHands/OpenHands",
       "skillCount": 0,
       "newSkillCount": 0,
-      "stars": 93647
+      "stars": 93747
     },
     {
       "name": "Awesome LLM",
@@ -28514,8 +28511,8 @@
       "name": "Antigravity",
       "url": "https://github.com/sickn33/antigravity-awesome-skills",
       "skillCount": 1050,
-      "newSkillCount": 43,
-      "stars": 49876
+      "newSkillCount": 5,
+      "stars": 49938
     },
     {
       "name": "Xquik",
@@ -28525,10 +28522,10 @@
       "stars": 229
     }
   ],
-  "lastUpdated": "2026-11-17T15:59:37.985Z",
+  "lastUpdated": "2026-11-18T15:38:23.851Z",
   "stats": {
     "totalSkills": 1129,
-    "newSkills": 52,
-    "scrapedAt": "2026-11-17T15:59:37.985Z"
+    "newSkills": 14,
+    "scrapedAt": "2026-11-18T15:38:23.851Z"
   }
 }

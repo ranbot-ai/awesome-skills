@@ -1,6 +1,6 @@
 ---
 name: boring-marketing-site-audit
-description: Inspect crawlability, indexability, metadata and page structure for a ranked SEO audit. 
+description: Crawl a site and prioritize technical SEO fixes. Use to check robots.txt, sitemaps, noindex, duplicate pages, broken links, metadata, page speed, and AI crawler access. 
 category: Document Processing
 source: antigravity
 tags: [python, javascript, markdown, api, mcp, claude, ai, agent, llm, gpt]

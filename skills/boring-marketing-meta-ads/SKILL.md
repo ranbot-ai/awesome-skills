@@ -1,6 +1,6 @@
 ---
 name: boring-marketing-meta-ads
-description: Prepare Meta ad campaigns and verify account permissions and conversion tracking. 
+description: Run account preflight, create paused Meta campaigns, and verify pixel and Conversions API events. Use for Facebook Ads API launches, permission errors, and tracking audits. 
 category: Document Processing
 source: antigravity
 tags: [python, node, api, mcp, claude, ai, agent, llm, design, document]
