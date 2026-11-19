@@ -1,0 +1,19 @@
+{
+  "id": "antigravity-design-how-migrate-design-system",
+  "name": "design-how-migrate-design-system",
+  "slug": "design-how-migrate-design-system",
+  "description": "Audit or replace legacy UI with an existing design system in bounded waves while preserving route behavior and rendering.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-how-migrate-design-system",
+  "content": "\n# Migrate a Design System\n\n## When to Use\n\nUse for adoption audits and scoped migrations onto existing tokens and primitives. Use `design-how-build-design-system` when the required primitives or contracts are missing.\n\n## Workflow\n\n1. Inventory the routes, legacy imports, local lookalikes and public exports. Group each replacement by component family and flag gaps that need changes to the system. Default to a read-only audit when rollout scope is unclear.\n2. Define a before/after contract for each surface: exact routes, files, fixture states, visual exceptions and behaviors. Check props, slots, accessible names, formulas and formatting. Capture baselines at the narrowest and widest supported widths.\n3. Pick a pilot with a harder call site. Map a legacy primitive to a system primitive only if the required props, events and semantics are available. Leave unsupported paths on legacy and record the gap. Keep unrelated refactors and cleanup out of the wave.\n4. Compare interactions and screenshots with identical data and environment. Exercise submission, loading, keyboard, focus and errors on a disposable backend. Count open legacy imports and explicitly list any intentional state or visual difference.\n5. Re-read the diff and check shared call sites before scaling. Roll out in small route groups with rollback points. Remove a legacy export only after checking consumers including other packages, and only within the approved scope.\n\n## Example\n\n“Move settings from the old Select to our system Select.” First compare controlled values, disabled options, Escape, label and focus behavior, then migrate one settings route and compare the recorded states.\n\n## Limitations\n\nRequires an existing system. Count checks can miss dynamic consumers and screenshots can miss behavioral regressions. A failed parity check blocks that surface. Use isolated fixtures and follow the project's normal version control flow.\n\n## Bundled resources\n\n- Read [parity](references/parity.md), [migration lessons](references/lessons.md), [correction](references/correct.md), and [staging guidance](references/running-many-agents.md).\n- Use the installed `scripts/legacy.mjs` to inventory legacy imports and `scripts/parity.mjs` to compare outputs of trusted local modules. Use `scripts/bodies-check.mjs` with synthetic request fixtures. Use capture and pixel diff from the installed `design-how-build-design-system` sibling.\n- `scripts/land.mjs` is an optional helper for explicitly authorized local migration commits. Use a work branch, the exact reviewed paths, and the project checks. Its shell callback is for a locally written check, never text copied from project data or PR feedback. Leave hooks enabled and use the project's normal pull-request flow.\n\n## Source\n\nAdapted from [design.how](https://github.com/arla6ka/design.how/tree/1ce5304466db2ba47a7a7524603e86df77c702bd/skills/migrate-design-system) by Arlan Marat. See [MIT license](LICENSE).\n",
+  "tags": [
+    "ai",
+    "agent",
+    "workflow",
+    "design"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-11-19T15:43:21.513Z"
+}

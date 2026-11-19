@@ -1,0 +1,18 @@
+{
+  "id": "antigravity-design-how-token-mapping",
+  "name": "design-how-token-mapping",
+  "slug": "design-how-token-mapping",
+  "description": "Produce a read-only mapping from hardcoded styling to semantic design tokens with exact, near, ambiguous and missing matches.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/design-how-token-mapping",
+  "content": "\n# Map Styling to Tokens\n\n## When to Use\n\nUse for a page, file or diff that needs a design-token audit. For applying changes, use `design-how-build-design-system`.\n\n## Workflow\n\n1. Locate the token definitions actually used by the project and resolve aliases and theme overrides. Note property, state, context, units and frequency for each literal. Inspect computed styles when declarations alone cannot explain the rendered value.\n2. Match by semantic role first, then compare resolved values. Prefer exact matches that hold in all applicable themes. Treat equal colors with incompatible roles as ambiguous. For near matches, report the measured difference and units, using a consistent perceptual color metric where available.\n3. Classify each row as exact, near, ambiguous, no token, or intentional exception. Show source location, raw value, candidate token and trade-off. Flag text/surface combinations whose contrast could change. For no token, suggest a role name without modifying the registry.\n\n## Example\n\nOn a danger alert, `#ad2139` matches both `--badge-brand` and `--text-danger` in light mode. Check dark mode and prefer the danger role for alert text, recording the rejected candidate.\n\n## Limitations\n\nThis is a report. Do not edit files or create tokens. A missing theme or unresolved computed style lowers confidence and must appear in the result.\n\n## Bundled resources\n\nApply the bundled [mapping rules](references/mapping-rules.md). Use the glossary in the installed `design-how-build-design-system` sibling when available.\n\n## Source\n\nAdapted from [design.how](https://github.com/arla6ka/design.how/tree/1ce5304466db2ba47a7a7524603e86df77c702bd/skills/token-mapping) by Arlan Marat. See [MIT license](LICENSE).\n",
+  "tags": [
+    "ai",
+    "workflow",
+    "design"
+  ],
+  "useCases": [],
+  "scrapedAt": "2026-11-19T15:43:23.054Z"
+}
