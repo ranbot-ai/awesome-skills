@@ -106,6 +106,7 @@ messages = queue_client.peek_messages(max_messages=5)
 
 for message in messages:
     # Inspect only authorized synthetic content; do not log payloads.
+    print(f"ID: {message.id}")
 ```
 
 ## Update Message
@@ -199,4 +200,4 @@ queue_client = QueueClient(
     queue_name="myqueue",
     credential=credential,
     message_encode_policy=BinaryBase64EncodePolicy(),
-    message_decode_policy=BinaryBase64DecodePolicy()
+    message_decode_po

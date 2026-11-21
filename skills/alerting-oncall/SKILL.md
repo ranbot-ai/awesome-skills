@@ -25,27 +25,31 @@ Configure effective alerting and on-call management for production systems.
 ```yaml
 # Severity levels
 critical:
-  - Service completely down
-  - Data loss imminent
-  - Security breach
+  triggers:
+    - Service completely down
+    - Data loss imminent
+    - Security breach
   response: Immediate page, wake people up
 
 high:
-  - Service degraded significantly
-  - Error rate above SLO
-  - Capacity near limit
+  triggers:
+    - Service degraded significantly
+    - Error rate above SLO
+    - Capacity near limit
   response: Page during business hours, notify after hours
 
 medium:
-  - Performance degradation
-  - Non-critical component failure
-  - Warning thresholds exceeded
+  triggers:
+    - Performance degradation
+    - Non-critical component failure
+    - Warning thresholds exceeded
   response: Notify via Slack, review next business day
 
 low:
-  - Informational alerts
-  - Capacity planning triggers
-  - Routine maintenance needed
+  triggers:
+    - Informational alerts
+    - Capacity planning triggers
+    - Routine maintenance needed
   response: Email notification, weekly review
 ```
 
@@ -210,9 +214,7 @@ inhibit_rules:
 
 ### Service Configuration
 
-```yaml
+```hcl
 # Terraform example
 resource "pagerduty_service" "myapp" {
-  name                    = "MyApp Production"
-  description             = "Production application service"
-  escala
+  name                    = "MyApp Production
