@@ -1,0 +1,25 @@
+{
+  "id": "antigravity-blitz-seo",
+  "name": "blitz-seo",
+  "slug": "blitz-seo",
+  "description": "Plan a 30-day SEO sprint for one existing commercial page with search-intent checks, relevant internal links, first-hand evidence and change tracking.",
+  "category": "Creative & Media",
+  "source": "antigravity",
+  "repoUrl": "https://github.com/sickn33/antigravity-awesome-skills",
+  "skillUrl": "https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/blitz-seo",
+  "content": "\n# Blitz SEO: a 30-day sprint to rank one page\n\nPut 30 days of effort into ranking one page for one money keyword (3 at most). Most SEO work is spread across too many pages. Use the site’s own rankings and conversion data to choose the page and set a baseline.\n\n## Initial assessment\n\n**Check for project context first:** if `.cursor/project-context.md` or `.claude/project-context.md` exists, read it for product, audience, and current rankings. Otherwise identify:\n\n1. **Money keyword candidates**: high-intent, high-volume keywords tied to the core offering. Not blog keywords, not long-tails.\n2. **Current position**: a page stuck at position 5-20 is the ideal Blitz target (already indexed, needs pressure).\n3. **Revenue link**: would ranking top 3 for this keyword directly produce signups or sales?\n4. **Available resources**: backlink budget, existing blog posts for internal links, social accounts for signals.\n\n**The target test:** your Blitz keyword should be something that _hurts to lose_ to competitors.\n\n## The sprint\n\n### Step 1: Pick one keyword that matters\n\n- High intent, tied to the core offering, with real revenue behind it\n- Check the SERP: if competitors with weaker products outrank the user, that is the target\n- Limit to 1 keyword (3 absolute max). Saying no to everything else is the strategy.\n\n### Step 2: Choose one page to win with\n\nRewrite and optimize a single page to own that keyword:\n\n- Tight H1 with the keyword\n- Keyword in title tag, URL, and meta description\n- Relevant subtopics in subheadings\n- Fast load speed, mobile-optimized\n- Visual trust: screenshots, logos, charts, testimonials\n- Make it the hero of the domain: link to it from the homepage and main nav if possible\n\n### Step 3: The daily optimization ritual (30 days)\n\nEvery day:\n\n- [ ] Add internal links from older posts/pages to the target page\n- [ ] Review outreach opportunities that make sense for readers. Prepare drafts for approved prospects.\n- [ ] Queue an on-page change only when the baseline and search intent support it.\n- [ ] Check indexing after material changes. Avoid repeated submissions.\n- [ ] Record relevant distribution opportunities for the user to review.\n- [ ] Log every change and the daily rank position\n\nDo not overthink any single change. Iterate fast, observe, adjust.\n\n## Output\n\nWhen the user invokes this skill, produce a concrete sprint plan:\n\n1. Recommended target keyword (with reasoning) and target page\n2. On-page rewrite checklist specific to that page\n3. A 30-day calendar with the daily ritual filled in\n4. A simple tracking log format (date, change made, position, notes)\n5. Baseline and review checkpoints using the same market, query group, and measurement window\n\n## When to Use\n\nUse Blitz SEO when:\n\n- Stuck on page 2 for a keyword that brings revenue\n- Launching something new that needs one page to win fast\n- Weaker competitors outrank the user\n\nDo not use it for brand-new domains with zero authority, or for keywords with no revenue attached.\n\n## Example\n\nA pricing page averages position 14 for a high-intent query. In week 1, record the baseline and align the title and content with the query. In week 2, add relevant links from existing guides. In week 3, verify first-hand proof and draft partner outreach. In week 4, compare clicks, conversions and rank with the baseline and record which changes actually shipped.\n\n## Limitations\n\nA 30-day interval is a planning horizon. Rankings and revenue are uncertain and movement cannot be attributed to a single edit. Confirm scope before changing a live page, buying services, contacting prospects or posting publicly. Avoid paid links intended to manipulate rankings.\n\nAdapted from [Ilias Ism’s upstream skill](https://github.com/Illyism/seo-skills/tree/a158c36a1c2c84a44ee7a1ae69c009caf73e1a35/seo/blitz-seo).\n",
+  "tags": [
+    "claude",
+    "ai",
+    "rag",
+    "seo",
+    "cro",
+    "marketing"
+  ],
+  "useCases": [
+    "Stuck on page 2 for a keyword that brings revenue",
+    "Launching something new that needs one page to win fast",
+    "Weaker competitors outrank the user"
+  ],
+  "scrapedAt": "2026-11-22T14:26:58.665Z"
+}
