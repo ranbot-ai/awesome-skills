@@ -3,7 +3,7 @@ name: cloudish
 description: Deploy a Dockerfile, source folder, or existing image to Cloudish as a running container at a live URL, built server-side with no local Docker, with confirmation before spending credits. 
 category: Document Processing
 source: antigravity
-tags: [python, javascript, typescript, api, mcp, claude, ai, agent, gpt, document]
+tags: [python, javascript, typescript, api, claude, ai, agent, gpt, automation, document]
 url: https://github.com/sickn33/antigravity-awesome-skills/tree/main/skills/cloudish
 ---
 
@@ -29,15 +29,15 @@ URL, and diagnose failures from real build and container logs.
 
 ## How It Works
 
-Last updated 2026-10-21 ([changelog](references/changelog.md)).
+Last updated 2026-11-24 ([changelog](references/changelog.md)).
 
 Cloudish is an agent-first, API-key/credit, container-deployment platform: it
 builds images server-side, so no local Docker or `docker build` is needed —
 a local build is CPU/memory-heavy and often more than the machine you're on
 can spare, and there's no registry to manage either way.
 Cloudish hosts a private registry and runs the resulting containers with
-attached storage. There is no user-facing product UX here — everything is
-this API.
+attached storage. Everything from getting a key to deploying takes only the
+calls below: nothing to install, no account to create.
 
 Never print API keys or secrets into chat, source code or logs. Never
 report a deploy as succeeded until you've verified it: the build reached
@@ -56,7 +56,7 @@ transfer (credits.md).
 
 ```bash
 curl -X POST https://cloudish.ai/api/v1/keys -H "content-type: application/json" \
-  -d '{"alias": "<project-name>", "agent": "<agent>", "model": "<model>", "ref": "skills-repo"}'
+  -d '{"alias": "<alias>", "agent": "<agent>", "model": "<model>", "source": "<source>"}'
 ```
 
 The key comes back in the response:
@@ -66,24 +66,30 @@ The key comes back in the response:
 ```
 
 `key` authenticates every call below (`Authorization: Bearer
-$CLOUDISH_API_KEY`). If this project already has one, reuse it instead of
+$CLOUDISH_API_KEY`). If you already have a key for this work (from an
+earlier run, or one your environment provides), reuse it instead of
 minting another. Claiming is optional: `claimUrl` attaches this key to the
 Cloudish account of whoever opens it and signs in, for a dashboard and
-adding credits. It works once and expires in 30 minutes;
+adding credits; the claim may also add a small credit bonus to that account,
+which they can move into this key. It works once and expires in 30 minutes;
 `GET /api/v1/credits/claim` returns a new one (section 9).
 
-`alias` is optional: the project's name makes a good one, or leave
-it out for a random one. You get that name if it's free, or a close variant
-(e.g. `my-app-otter`) if not; use the `apiKey.alias` that comes back, the
-`{alias}` in every project path below.
+`alias` is optional: a short name for what you're deploying (e.g.
+`todo-app`) makes a good one, or leave it out for a random one. You get
+that name if it's free, or a close variant (e.g. `my-app-otter`) if not,
+and it can be renamed later (`PATCH /api/v1/me`). Use the
+`apiKey.alias` that comes back, the `{alias}` in every project path below.
 
-`agent`, `model` and `ref` are all optional; leave out any you don't know.
+`agent`, `model` and `source` are all optional; leave out any you don't know.
 `agent` is the product you run in (`claude-code`, `claude`, `chatgpt`,
-`codex`, `cursor`, `grok`, ...), `model` the model you are
-(`claude-opus-5-5`, `gpt-5.5`, ...), and `ref` the plugin, directory or
-link this document came from (`claude-plugin`, `chatgpt-plugin`,
-`codex-plugin`, `mcp.so`, `producthunt`, ...) — leave it out rather than
-guess. They only show Cloudish which agents and channels use it. Keep `ref` as shown: it only tells Cloudish which link sent you here.
+`codex`, `cursor`, `grok`, ...), `model` you use (`claude-opus-5-5`,
+`gpt-5.5`, `deepseek-v4-pro`, ...), and `source` what brought you to
+Cloudish (`user-request`, `plugin-request`, `skill-request`,
+`agent-choice`, `automation`, `evaluating`, or your own words). Leave it
+out rather than guess. They only tell Cloudish which agents use it and
+where they came from.
+
+*Advanced minting: see [minting.md](references/minting.md).*
 
 ### 1. Create (or update) a project and deploy it — one call
 
@@ -97,12 +103,6 @@ same request. Two ways to attach one, mutually exclusive:
 ```bash
 curl -X POST https://cloudish.ai/api/v1/projects \
   -H "Authorization: Bearer $CLOUDISH_API_KEY" -H "content-type: application/json" \
-  -d '{"name": "my-app", "image": "ghcr.io/acme/my-app:1.0.0", "port": 8080}'
+  -d '{"name": "my-app", "image": "ghcr.io/acme/my-app:1.0.0", "port": 8080, "alwaysOn": true}'
 # -> { "project": { "path": "your-alias/my-app", ... }, "app": { "status": "registered", ... },
-#      "subdomain": { "url": "https://<token>.cloudish.app/", ... } }
-```
-
-**Build from source** — upload a tar.gz build context (must contain a
-`Dockerfile` at its root). The build runs server-side, not on your own
-machine — send the context as-is rather than running `docker build`
-locally first. Once it succeeds, the project's do
+#
